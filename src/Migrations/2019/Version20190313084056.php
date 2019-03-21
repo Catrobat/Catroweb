@@ -61,7 +61,6 @@ final class Version20190313084056 extends AbstractMigration
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE acl_classes CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci');
         $this->addSql('ALTER TABLE CatroNotification CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE GameJam CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE Notification CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');

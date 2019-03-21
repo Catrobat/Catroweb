@@ -11,6 +11,7 @@ use App\Repository\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
@@ -18,7 +19,7 @@ use Twig\TwigFunction;
  * Class AppExtension
  * @package App\Catrobat\Twig
  */
-class AppExtension extends \Twig_Extension
+class AppExtension extends AbstractExtension
 {
 
   /**

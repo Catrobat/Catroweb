@@ -17,29 +17,49 @@
 
 
       <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-5" align="center">
+        <div class="col-sm-11 col-md-8 col-lg-6" align="center">
 
-          <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" method="post">
+          <form id="reset-form form_fos" class="form-horizontal"
+                action="{{ path('fos_user_resetting_reset', {'token': token}) }}" method="post">
             {{ form_start(form) }}
 
-            {% if form_errors(form) %}
-              <div id="reset-alert"
-                   class="alert alert-danger col-sm-12">{{ "passwordsNoMatch"|trans({}, "catroweb") }}</div>
-            {% endif %}
+            {% for errorItem in form.plainPassword.first.vars.errors %}
+              <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+            {% endfor %}
 
             <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]"
                    value="{{ form.children._token.vars.value }}">
-            <div class="input-field">
-              <input type="password" id="fos_user_resetting_form_new_first" name="fos_user_resetting_form[new][first]"
-                     placeholder="{{ "profile.newPass"|trans({}, "catroweb") }}"/>
+
+            <div class="group">
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <div class="group-with-icon-wrapper show-hide-password">
+                <div class="group-with-icon">
+                    <span>
+                      {{ form_widget(form.plainPassword.first) }}
+                      <label><span class="span-input">{{ 'profile.newPass'|trans({}, 'catroweb') }}</span></label>
+                    </span>
+                </div>
+                <a href=""><i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i></a>
+              </div>
             </div>
 
-            <div class="input-field">
-              <input type="password" id="fos_user_resetting_form_new_second" name="fos_user_resetting_form[new][second]"
-                     placeholder="{{ "profile.repeatPass"|trans({}, "catroweb") }}"/>
+            <div class="group">
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <div class="group-with-icon-wrapper show-hide-password">
+                <div class="group-with-icon">
+                    <span>
+                      {{ form_widget(form.plainPassword.second) }}
+                      <label><span class="span-input">{{ 'profile.repeatPass'|trans({}, 'catroweb') }}</span></label>
+                    </span>
+                </div>
+                <a href=""><i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i></a>
+              </div>
             </div>
 
             <input type="hidden" name="_target_path" value="{{ path('index') }}"/>
+
             <!-- Button -->
             <div style="margin-top:30px; margin-bottom:30px" class="form-group">
               <div class="col-sm-12 controls">
@@ -56,3 +76,7 @@
   {% endblock fos_user_content %}
 
 {% endblock body %}
+
+{% block js %}
+  <script src="{{ asset('compiled/js/PasswordVisibilityToggler.js') }}"></script>
+{% endblock js %}

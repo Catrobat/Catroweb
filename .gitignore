@@ -3,7 +3,8 @@
 composer.phar
 behat.yml
 phpspec.yml
-phpunit.xml.dist
+phpunit.xml
+.env
 
 ### backups ###
 backups/**

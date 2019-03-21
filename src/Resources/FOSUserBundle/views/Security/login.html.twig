@@ -19,8 +19,11 @@
 
       {% include 'UserManagement/login_logo.html.twig' %}
 
+      <!-- Policy -->
+      {% include 'PrivacyAndTerms/policy.html.twig' %}
+
       <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-5" align="center">
+        <div class="col-sm-11 col-md-8 col-lg-6" align="center">
           {% if error %}
             <div id="login-alert"
                  class="alert alert-danger col-sm-12">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
@@ -29,10 +32,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-5" align="center">
-
-          <!-- Policy -->
-          {% include 'PrivacyAndTerms/policy.html.twig' %}
+        <div class="col-sm-11 col-md-8 col-lg-6" align="center">
 
           <form id="loginform form_fos" class="form-horizontal" role="form"
                 action="{{ path("fos_user_security_check") }}" method="post">
@@ -107,7 +107,9 @@
                       <div style="padding-top:15px; font-size:85%">
                         Don't have an account!
                         <a id="create_account"
-                           href="{{ path('fos_user_registration_register') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                           href="{{ path('fos_user_registration_register') }}">
+                          {{ 'login.createAccount'|trans({}, 'catroweb') }}
+                        </a>
                       </div>
                     </div>
                   </div>

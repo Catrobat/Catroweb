@@ -912,7 +912,7 @@ services:
   catrowebadmin.block.users.user:
     class: App\Admin\UserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: User, icon: '<i class="fa fa-cogs"></i>' }
+      - { name: sonata.admin, manager_type: orm, label: 'User', icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
       - App\Entity\User
@@ -931,7 +931,6 @@ services:
 
   # ===== Tools
 
-  # TODO change 2nd parameter
   catrowebadmin.block.tools.maintain:
     class: App\Admin\MaintainAdmin
     tags:
@@ -943,7 +942,6 @@ services:
       - App\Catrobat\Controller\Admin\MaintainController
     public: true
 
-  # TODO change 2nd parameter
   catrowebadmin.block.tools.logs:
     class: App\Admin\LogsAdmin
     tags:
@@ -953,16 +951,6 @@ services:
       - ~
       - App\Entity\Group
       - App\Catrobat\Controller\Admin\LogsController
-    public: true
-
-  catrowebadmin.block.tools.notify:
-    class: App\Admin\NotificationAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Notifications" }
-    arguments:
-      - ~
-      - App\Entity\Notification
-      - ~
     public: true
 
   catrowebadmin.block.tools.rudewords:
@@ -975,7 +963,16 @@ services:
       - ~
     public: true
 
-  # TODO change 2nd parameter
+  catrowebadmin.block.tools.notify:
+    class: App\Admin\NotificationAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Notifications" }
+    arguments:
+      - ~
+      - App\Entity\Notification
+      - ~
+    public: true
+
   catrowebadmin.block.tools.gcm:
     class: App\Admin\GoogleCloudMessagingAdmin
     tags:
@@ -984,17 +981,6 @@ services:
       - ~
       - App\Entity\Group
       - App\Catrobat\Controller\Admin\GoogleCloudMessagingController
-    public: true
-
-  # TODO change 2nd parameter
-  catrowebadmin.block.tools.mail:
-    class: App\Admin\EmailUserMessageAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Send Mail" }
-    arguments:
-      - ~
-      - App\Entity\Group
-      - App\Catrobat\Controller\Admin\EmailUserMessageController
     public: true
 
   catrowebadmin.block.tools.broadcast:
@@ -1007,8 +993,17 @@ services:
       - App\Catrobat\Controller\Admin\BroadcastNotificationController
     public: true
 
-  # ===== Extensions
+  catrowebadmin.block.tools.mail:
+    class: App\Admin\EmailUserMessageAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Send Mail to User" }
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\EmailUserMessageController
+    public: true
 
+  # ===== Extensions
   catrowebadmin.block.extensions.all:
     class: App\Admin\AllExtensionsAdmin
     tags:
@@ -1019,7 +1014,6 @@ services:
       - ~
     public: true
 
-  # TODO change 2nd parameter
   catrowebadmin.block.extensions.create:
     class: App\Admin\CreateExtensionsAdmin
     tags:

@@ -23,24 +23,33 @@ Feature:
     Then I should see a "#termsModal" element
     Then I wait 100 milliseconds
     Then I click "#agreeButton"
-    Then I should be on "/pocketcode/profile"
-    And I should see "CatrobatNew"
-    When I am on "/pocketcode/logout"
-    Then I should be logged out
+    Then I should be on "/pocketcode/register/check-email"
 
   Scenario: Trying to register with different passwords should fail
-    Given I am on homepage
-    Then I should see an "#btn-login" element
-    When I click "#btn-login"
-    Then I should be on "/pocketcode/login"
-    When I follow "Create an account"
-    Then I should be on "/pocketcode/register/"
+    Given I am on "/pocketcode/register/"
     And I fill in "fos_user_registration_form_username" with "CatrobatNew"
     And I fill in "fos_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
+    And I fill in "fos_user_registration_form_plainPassword_second" with "123457"
+    Then I press "Create an account"
+    Then I should see a "#termsModal" element
+    Then I wait 100 milliseconds
+    Then I click "#agreeButton"
+    Then I should be on "/pocketcode/register/"
+    And I should see "The entered passwords don't match."
+
+  Scenario: Trying to register with a too short password should fail
+    Given I am on "/pocketcode/register/"
+    And I fill in "fos_user_registration_form_username" with "CatrobatNew"
+    And I fill in "fos_user_registration_form[email]" with "CatrobatNew@gmail.com"
+    And I fill in "fos_user_registration_form_plainPassword_first" with "12345"
     And I fill in "fos_user_registration_form_plainPassword_second" with "12345"
     Then I press "Create an account"
+    Then I should see a "#termsModal" element
+    Then I wait 100 milliseconds
+    Then I click "#agreeButton"
     Then I should be on "/pocketcode/register/"
+    And I should see "The password is too short"
 
   Scenario: Trying to register with an existing username should fail
     Given I am on homepage
@@ -100,7 +109,7 @@ Feature:
     Then I should see a "#termsModal" element
     And I wait 100 milliseconds
     Then I click "#agreeButton"
-    Then I should be on "/pocketcode/profile"
+    Then I should be on "/pocketcode/register/check-email"
     When I am on "/pocketcode/logout"
     And I wait 500 milliseconds
     Then I should be logged out

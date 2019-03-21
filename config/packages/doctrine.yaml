@@ -24,7 +24,7 @@ doctrine:
         # e.g. database_path: %kernel.root_dir%/data/data.db3
         # path:     %database_path%
         types:
-            json: Sonata\Doctrine\Types\JsonType
+            json: Doctrine\DBAL\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"

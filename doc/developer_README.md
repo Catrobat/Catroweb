@@ -123,6 +123,7 @@ That's it. You can start testing.
   cp config/packages/parameters.yml.dist config/packages/parameters.yml
   cp config/packages/test/parameters.yml.dist config/packages/test/parameters.yml
   cp config/packages/dev/parameters.yml.dist config/packages/dev/parameters.yml
+  cp .env.dist .env
   ```
   Update your local parameters.yml files (in config/packages, config/packages/dev/) with the one you can find [here.](https://confluence.catrob.at/display/CATWEB/Parameters)
   !! Use your database password !!! when updating the parameters.yml file
