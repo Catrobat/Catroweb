@@ -2,14 +2,25 @@
 
 namespace Deployer;
 
-require 'recipe/symfony3.php';
+use Symfony\Component\Dotenv\Dotenv;
 
+require 'recipe/symfony3.php';
+require 'recipe/slack.php';
+
+// Load .env file
+(new Dotenv())->load('.env');
 
 // Project name
-set('application', 'PocketCode Share');
-set('repository', 'https://github.com/Catrobat/Catroweb-Symfony.git');
+set('application', getenv('APP_NAME'));
+set('repository', getenv('DEPLOY_GIT'));
 set('git_tty', false);
 
+// Slack Data
+set('slack_webhook', getenv(('SLACK_WEBHOOK')));
+set('slack_text', 'Web-Team deploying `{{branch}}` to *{{target}}* with version number `'
+  . getenv('APP_VERSION') . '`');
+set('slack_success_text', 'Deploy to *{{target}}* successful');
+set('slack_success_color', '#4BB543');
 
 // Symfony build set
 set('symfony_env', 'prod');
@@ -41,7 +52,6 @@ set('writable_dirs',
   ]);
 
 
-
 // Symfony executable and variable directories
 set('bin_dir', 'bin');
 set('var_dir', 'var');
@@ -54,42 +64,11 @@ set('allow_anonymous_stats', false);
 host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'php7Iwillsaveyou')
+  ->set('branch', 'SHARE-5_slack_deployment')
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
   ->set('deploy_path', '/var/www/share/');
 
 // Tasks
-/**
- * Main task
- */
-task('deploy', [
-  'deploy:info',
-  'deploy:prepare',
-  'deploy:lock',
-  'deploy:release',
-  'deploy:update_code',
-  'deploy:clear_paths',
-  'deploy:create_cache_dir',
-  'deploy:shared',
-  'deploy:assets',
-  'deploy:vendors',
-  //'deploy:assets:install',
-  'deploy:assetic:dump',
-  'deploy:cache:clear',
-  'deploy:cache:warmup',
-  'deploy:writable',
-  'deploy:symlink',
-  'deploy:unlock',
-  'cleanup',
-])->desc('Deploy Catroweb!');
-
-// [Optional] if deploy fails automatically unlock.
-after('deploy:failed', 'deploy:unlock');
-
-// Migrate database before symlink new release.
-// should maybe not be done automatically. we can do that no problem but that is not that nice.
-
-//before('deploy:symlink', 'database:migrate');
 
 // Manually define this task because deployer uses the old symfony structure with web instead of
 // public. Change this when deployer gets updated.
@@ -113,9 +92,44 @@ task('deploy:grunt', function () {
   cd('{{release_path}}');
   run('grunt');
 });
-after('deploy:unlock', 'install:assets');
-after('install:assets', 'install:npm');
-after('install:npm', 'deploy:grunt');
-after('deploy:grunt', 'restart:nginx');
-after('restart:nginx', 'restart:php-fpm');
 
+/**
+ * Main task
+ */
+task('deploy', [
+  'deploy:info',
+  'deploy:prepare',
+  'deploy:lock',
+  'deploy:release',
+  'deploy:update_code',
+  'deploy:clear_paths',
+  'deploy:create_cache_dir',
+  'deploy:shared',
+  'deploy:assets',
+  'deploy:vendors',
+  'deploy:assetic:dump',
+  'install:assets',
+  'deploy:cache:clear',
+  'deploy:cache:warmup',
+  'deploy:writable',
+  'deploy:symlink',
+  'database:migrate',
+  'install:npm',
+  'deploy:grunt',
+  'restart:nginx',
+  'restart:php-fpm',
+  'deploy:unlock',
+  'slack:notify:success',
+  'cleanup',
+])->desc('Deploy Catroweb!');
+
+
+// [Optional] if deploy fails automatically unlock.
+after('deploy:failed', 'deploy:unlock');
+
+// Migrate database before symlink new release.
+// should maybe not be done automatically. we can do that no problem but that is not that nice.
+//before('deploy:symlink', 'database:migrate');
+
+before('deploy:prepare', 'slack:notify');
+after('deploy:failed', 'slack:notify:failure');

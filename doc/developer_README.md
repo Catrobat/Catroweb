@@ -72,7 +72,7 @@ That's it. You can start testing.
     username: catroweb
     password: cw
 
-- Mysql/PhpMyAdmin:
+- MariaDb/PhpMyAdmin:
 
     username: root
     password: root
@@ -83,14 +83,12 @@ That's it. You can start testing.
 
 2. You need to install following: 
   ```
-  sudo apt-get install php php7.2-ldap php7.2-cli php7.2-curl php7.2-sqlite3 php7.2-intl php-apcu mysql-server apache2 php-imagick php-mbstring php-gettext git curl npm ruby ruby-dev grunt php-xdebug phpmyadmin
+  sudo apt-get install php php7.2-ldap php7.2-cli php7.2-curl php7.2-sqlite3 php7.2-intl php-apcu mariadb-server apache2 php-imagick php-mbstring php-gettext git curl npm ruby ruby-dev grunt php-xdebug phpmyadmin
   sudo gem install sass
   ```
 
-3. Configure and set up Mysql and Phpmyadmin: 
-
-  Here is a [Tutorial for Ubunutu  18](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04), or if you only want a short summary:
-  
+3. Configure and set up MariaDb and Phpmyadmin: 
+ 
 - phpmyadmin settings:  
    -  choose apache2  (**check it with 'space / leerzeichen'** (if there is no * it is  **NOT** checked!,))  
    - choose dbconfig yes
@@ -99,7 +97,8 @@ That's it. You can start testing.
   sudo systemctl restart apache2
   sudo mysql
   SELECT user,authentication_string,plugin,host FROM mysql.user;
-  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+  update mysql.user set plugin='' where user='root';
+  update mysql.user set password=password('root') where user='root';
   FLUSH PRIVILEGES;
   ```
   Now you should be able to login to phpMyAdmin with **username**: root **passsword**: 'password'
