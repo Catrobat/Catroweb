@@ -1043,6 +1043,17 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Given /^the element "([^"]*)" should exist$/
+   * @param $element
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   */
+  public function theElementShouldExist($element)
+  {
+    $this->assertSession()->elementExists('css', $element);
+  }
+
+  /**
    * @Given /^the element "([^"]*)" should not be visible$/
    * @param $element
    */
@@ -3007,5 +3018,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $page = $this->getMink()->getSession()->getPage();
     $type = $page->find('css', $arg1)->getAttribute("type");
     Assert::assertNotEquals($arg2, $type);
+  }
+
+  /**
+   * @Given the app version is :appVersion
+   * @param $appVersion
+   */
+  public function theAppVersionIs($appVersion)
+  {
+    putenv("APP_VERSION=" . $appVersion);
   }
 }

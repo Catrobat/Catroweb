@@ -47,57 +47,59 @@
     </div>
   </div>
 
-{% block footer %}
-  {% include 'Default/footer.html.twig' %}
-{% endblock %}
+  {% block footer %}
+    {% include 'Default/footer.html.twig' %}
+  {% endblock %}
 
-<script>
-  let search_input = $('.input-search')
+  <div id="app-version" style="display:none">{{ getenv('APP_VERSION') }}</div>
 
-  search_input.tooltip({
-    trigger  : 'manual',
-    placement: 'bottom'
-  })
-
-  search_input
-  .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
-  .addClass('tooltip-danger')
-
-  search_input.on('shown.bs.tooltip', function () {
-    setTimeout(function () {
-      search_input.tooltip('hide')
-    }, 1000)
-  })
-
-  function scrollToHash() {
-    if (window.location.hash && $(window.location.hash).offset()) {
-      window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
-    }
-  }
-
-  scrollToHash()
-  window.addEventListener('load', scrollToHash)
-  $(window).on('hashchange', scrollToHash)
-
-  new Main('{{ path('search', {'q': 0 } ) }}')
-</script>
-
-{% block js %}{% endblock %}
-
-{% if app.user %}
-  <script src="{{ asset('compiled/js/FetchNotifications.js') }}"></script>
   <script>
-    let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
-    $(document).ready(function () {
-      fetchNotifications.run()
+    let search_input = $('.input-search')
+
+    search_input.tooltip({
+      trigger  : 'manual',
+      placement: 'bottom'
+    })
+
+    search_input
+    .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
+    .addClass('tooltip-danger')
+
+    search_input.on('shown.bs.tooltip', function () {
+      setTimeout(function () {
+        search_input.tooltip('hide')
+      }, 1000)
+    })
+
+    function scrollToHash() {
+      if (window.location.hash && $(window.location.hash).offset()) {
+        window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
+      }
+    }
+
+    scrollToHash()
+    window.addEventListener('load', scrollToHash)
+    $(window).on('hashchange', scrollToHash)
+
+    new Main('{{ path('search', {'q': 0 } ) }}')
+  </script>
+
+  {% block js %}{% endblock %}
+
+  {% if app.user %}
+    <script src="{{ asset('compiled/js/FetchNotifications.js') }}"></script>
+    <script>
+      let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
+      $(document).ready(function () {
+        fetchNotifications.run()
+      })
+    </script>
+  {% endif %}
+  <script>
+    $('#nav-search').submit(function (e) {
+      e.preventDefault()
     })
   </script>
-{% endif %}
-<script>
-  $('#nav-search').submit(function (e) {
-    e.preventDefault()
-  })
-</script>
 
 </body>
 </html>
