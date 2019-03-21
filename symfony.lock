@@ -48,6 +48,9 @@
     "deployer/phar-update": {
         "version": "v2.1.0"
     },
+    "deployer/recipes": {
+        "version": "6.2.1"
+    },
     "dmore/behat-chrome-extension": {
         "version": "1.2.0"
     },
