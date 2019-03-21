@@ -44,7 +44,7 @@ class PurgeCommand extends ContainerAwareCommand
 
     $output->writeln('Deleting all catrobat data');
 
-    $progress = new ProgressBar($output, 7);
+    $progress = new ProgressBar($output, 8);
     $progress->start();
 
     $suboutput = new NullOutput();
@@ -73,13 +73,19 @@ class PurgeCommand extends ContainerAwareCommand
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'));
     $progress->advance();
 
-    $progress->setMessage('Droping Database');
-    CommandHelper::executeSymfonyCommand('doctrine:schema:drop',
-      $this->getApplication(), ['--force' => true], $suboutput);
+    $progress->setMessage('Dropping Database');
+    CommandHelper::executeShellCommand('php bin/console doctrine:schema:drop --force', [],
+      'Dropping database', $output);
     $progress->advance();
 
-    $progress->setMessage('(Re-) Creating Database');
-    CommandHelper::executeSymfonyCommand('doctrine:schema:create', $this->getApplication(), [], $suboutput);
+    $progress->setMessage('Dropping Migrations');
+    CommandHelper::executeShellCommand('php bin/console catrobat:drop:migration', [],
+      'Dropping the migration_versions table', $output);
+    $progress->advance();
+
+    $progress->setMessage('(Re-) Creating Database; executing migrations');
+    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate', [],
+      'Execute the migration to the latest version', $output);
     $progress->advance();
 
     $progress->finish();

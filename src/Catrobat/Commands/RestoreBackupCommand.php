@@ -152,7 +152,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
   {
     $this->output->write($description . " ('" . $command . "') ... ");
     $process = new Process($command);
-    $process->setTimeout(3600);
+    $process->setTimeout(86400);
     $process->run();
     if ($process->isSuccessful())
     {
