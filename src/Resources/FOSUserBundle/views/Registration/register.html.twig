@@ -7,7 +7,6 @@
   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
   <script src="{{ asset('compiled/js/jquery-ui.js') }}"></script>
-  <script src="{{ asset( getJavascriptPath('loginscript.js') ) }}"></script>
 
 {% endblock %}
 
@@ -124,7 +123,7 @@
       </div>
     </div>
     <div id="spacer1" style="margin-bottom: 30px"></div>
-    {% include 'UserManagement/oauth_form.html.twig' %}
+    {% include 'UserManagement/oauth_registration.html.twig' %}
     <div id="spacer2" style="margin-bottom: 30px"></div>
 
 
@@ -133,6 +132,5 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('compiled/js/register.js') }}"></script>
   <script src="{{ asset('compiled/js/PasswordVisibilityToggler.js') }}"></script>
 {% endblock js %}

@@ -1,22 +1,7 @@
-$(document).ready(function () {
-  
-  // ToDo never called
-  $('#btn-logout').click(function () {
-    GoogleLogout()
-  })
-  
-  $(document).on('click', '#btn-login_google', function () {
-    if (!agree)
-    {
-      $('#btn-google-modal-trigger').click()
-    }
-    agree_button = 'google_login'
-  })
-})
 
 function onMySignIn (googleUser)
 {
-  
+  console.log('onMySignIn')
   // Useful data for your client-side scripts:
   let profile = googleUser.getBasicProfile()
   // The ID token you need to pass to your backend:
@@ -31,7 +16,7 @@ function onMySignIn (googleUser)
 
 function triggerGoogleLogin ()
 {
-  
+  console.log('triggerGoogleLogin')
   // This option is used to allow switching between multiple google accounts!
   let options = new gapi.auth2.SigninOptionsBuilder()
   options.setPrompt('select_account')
@@ -153,29 +138,6 @@ function GoogleLogin ($email, $username, $id, $locale)
           $url = data['url']
           $(location).attr('href', $url)
         })
-    })
-}
-
-// ToDo never called
-function GoogleLogout ()
-{
-  console.log('GoogleLogout')
-  let $appid = ''
-  let $ajaxGetGoogleAppId = Routing.generate(
-    'catrobat_oauth_login_get_google_appid', {flavor: 'pocketcode'}
-  )
-  $.get($ajaxGetGoogleAppId,
-    function (data) {
-      let sessionParams = {
-        'client_id'    : data['gplus_appid'],
-        'session_state': null
-      }
-      gapi.auth.checkSessionState(sessionParams, function (connected) {
-        if (connected)
-        {
-          gapi.auth.signOut()
-        }
-      })
     })
 }
 

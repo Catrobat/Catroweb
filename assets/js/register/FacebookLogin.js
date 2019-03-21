@@ -21,10 +21,6 @@ $(document).ready(function () {
     FacebookLogout()
   })
   $('#_submit_oauth').attr('disabled', true)
-  
-  $(document).on('click', '#btn-login_facebook', function () {
-    agree_button = 'facebook_login'
-  })
 })
 
 function triggerFacebookLogin ()

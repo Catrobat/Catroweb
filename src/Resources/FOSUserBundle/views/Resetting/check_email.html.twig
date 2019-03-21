@@ -4,7 +4,6 @@
 
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
   <script src="{{ asset('compiled/js/jquery-ui.js') }}"></script>
-  <script src="{{ asset( getJavascriptPath('loginscript.js') ) }}"></script>
 
 {% endblock %}
 
@@ -62,14 +61,10 @@
     </div>
 
     <div id="spacer1" style="margin-bottom: 30px"></div>
-    {% include 'UserManagement/oauth_form.html.twig' %}
+    {% include 'UserManagement/oauth_registration.html.twig' %}
     <div id="spacer2" style="margin-bottom: 30px"></div>
 
 
   {% endblock fos_user_content %}
 
 {% endblock body %}
-
-{% block js %}
-  <script src="{{ asset('compiled/js/social.js') }}"></script>
-{% endblock %}

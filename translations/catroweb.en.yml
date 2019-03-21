@@ -580,6 +580,7 @@ errors:
     exists: This username already exists.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
