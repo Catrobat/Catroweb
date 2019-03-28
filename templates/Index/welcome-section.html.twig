@@ -1,87 +1,78 @@
 <div id="welcome-section">
-
-  {% if theme() == 'luna' %}
-    {% set displayname = "Luna & Cat" %}
-  {% elseif theme() == 'phirocode' %}
-    {% set displayname = 'Phirocode' %}
-  {% elseif theme() == 'create@school' %}
-    {% set displayname = 'Create@School' %}
-  {% else %}
-    {% set displayname = 'Pocket Code' %}
-  {% endif %}
-
-  <div class="mb-4">
-    <h3>{{ "programs.welcome.title"|trans({'%theme%': displayname}, "catroweb") }}</h3>
-    <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
-  </div>
-
-
   {% if not isWebview() %}
+    {% if theme() == 'luna' %}
+      {% set displayname = "Luna & Cat" %}
+    {% elseif theme() == 'phirocode' %}
+      {% set displayname = 'Phirocode' %}
+    {% elseif theme() == 'create@school' %}
+      {% set displayname = 'Create@School' %}
+    {% else %}
+      {% set displayname = 'Pocket Code' %}
+    {% endif %}
 
-  <div id="welcome-section-container" class="mb-3">
-    <div class="flex-shrink help-video-container">
-      {% if theme() == 'luna' %}
-        <iframe id="youtube-help-video" src="https://www.youtube.com/embed/-6AEZrSbOMg"
-                frameborder="0" allowfullscreen width="100%">
-        </iframe>
-      {% else %}
-        <iframe id="youtube-help-video" src="https://www.youtube.com/embed/BHe2r2WU-T8"
-                frameborder="0" allowfullscreen width="100%">
-        </iframe>
-      {% endif %}
+    <div class="mb-4">
+      <h3>{{ "programs.welcome.title"|trans({'%theme%': displayname}, "catroweb") }}</h3>
+      <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
     </div>
 
-    <div class="flex-no-shrink help-download-container">
-
-      <div class="col-12">
-        <a {% if theme() == "pocketcode" %}
-            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
-          {% elseif theme() == "create@school" %}
-            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.createatschool">
-          {% elseif theme() == "phirocode" %}
-            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.phiro">
-          {% else %}
-            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
-          {% endif %}
-          <div class="catro-card help-card primary google-play">
-            <div class="catro-content">
-              <div class="row">
-                <div class="col-8 col-sm-8">
-                  <div class="catro-card-title">
-                    {{ "help-cards.headings.getinvolvedGoogle"|trans({}, "catroweb") }}
+    <div id="welcome-section-container" class="mb-3">
+      <div class="flex-shrink help-video-container">
+        {% if theme() == 'luna' %}
+          <iframe id="youtube-help-video" src="https://www.youtube.com/embed/-6AEZrSbOMg"
+                  frameborder="0" allowfullscreen width="100%">
+          </iframe>
+        {% else %}
+          <iframe id="youtube-help-video" src="https://www.youtube.com/embed/BHe2r2WU-T8"
+                  frameborder="0" allowfullscreen width="100%">
+          </iframe>
+        {% endif %}
+      </div>
+      <div class="flex-no-shrink help-download-container">
+        <div class="col-12">
+          <a {% if theme() == "pocketcode" %}
+              href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
+            {% elseif theme() == "create@school" %}
+              href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.createatschool">
+            {% elseif theme() == "phirocode" %}
+              href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.phiro">
+            {% else %}
+              href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
+            {% endif %}
+            <div class="catro-card help-card primary google-play">
+              <div class="catro-content">
+                <div class="row">
+                  <div class="col-8 col-sm-8">
+                    <div class="catro-card-title">
+                      {{ "help-cards.headings.getinvolvedGoogle"|trans({}, "catroweb") }}
+                    </div>
+                    {{ "help-cards.text.getinvolved"|trans({}, "catroweb") }}
                   </div>
-                  {{ "help-cards.text.getinvolved"|trans({}, "catroweb") }}
+                  <img alt="Play Store Logo" src="{{ asset('images/help/google_playstore.png') }}"/>
                 </div>
-                <img alt="Play Store Logo" src="{{ asset('images/help/google_playstore.png') }}"/>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
 
-      <div class="col-12">
-        <a href="https://itunes.apple.com/app/pocket-code/id1117935892">
-          <div class="catro-card help-card apple primary">
-            <div class="catro-content">
-              <div class="row">
-                <div class="col-8 col-sm-8">
-                  <div class="catro-card-title">
-                    {{ "help-cards.headings.getinvolvedApple"|trans({}, "catroweb") }}
+        <div class="col-12">
+          <a href="https://itunes.apple.com/app/pocket-code/id1117935892">
+            <div class="catro-card help-card apple primary">
+              <div class="catro-content">
+                <div class="row">
+                  <div class="col-8 col-sm-8">
+                    <div class="catro-card-title">
+                      {{ "help-cards.headings.getinvolvedApple"|trans({}, "catroweb") }}
+                    </div>
+                    {{ "help-cards.text.getinvolved"|trans({}, "catroweb") }}
                   </div>
-                  {{ "help-cards.text.getinvolved"|trans({}, "catroweb") }}
+                  <img alt="Apple Logo" src="{{ asset('images/help/apple_logo.png') }}"/>
                 </div>
-                <img alt="Apple Logo" src="{{ asset('images/help/apple_logo.png') }}"/>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
-
     </div>
-
-  </div>
-
   {% endif %}   {#{% if not isWebview() %}#}
-
 </div>
 

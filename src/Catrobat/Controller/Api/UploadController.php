@@ -6,6 +6,7 @@ use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\NewProgramNotification;
 use App\Entity\User;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\UserManager;
@@ -62,6 +63,11 @@ class UploadController
 
 
   /**
+   * @var LoggerInterface
+   */
+  private $logger;
+
+  /**
    * UploadController constructor.
    *
    * @param UserManager         $usermanager
@@ -70,10 +76,12 @@ class UploadController
    * @param GameJamRepository   $gamejamrepository
    * @param TokenGenerator      $tokengenerator
    * @param TranslatorInterface $translator
+   * @param LoggerInterface     $logger
    */
+
   public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager,
                               GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator,
-                              TranslatorInterface $translator)
+                              TranslatorInterface $translator, LoggerInterface $logger)
   {
     $this->usermanager = $usermanager;
     $this->tokenstorage = $tokenstorage;
@@ -81,6 +89,7 @@ class UploadController
     $this->gamejamrepository = $gamejamrepository;
     $this->tokengenerator = $tokengenerator;
     $this->translator = $translator;
+    $this->logger = $logger;
   }
 
 
@@ -135,16 +144,22 @@ class UploadController
 
     if ($request->files->count() !== 1)
     {
+      $this->logger->error("Missing POST data");
       throw new MissingPostDataException();
     }
     elseif (!$request->request->has('fileChecksum'))
     {
+      $this->logger->error("Missing Checksum");
       throw new MissingChecksumException();
     }
 
     $file = array_values($request->files->all())[0];
     if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum'))
     {
+      $this->logger->error("UploadError " . StatusCode::INVALID_CHECKSUM, [
+        "checksum_symfony" => md5($file->getPathname()),
+        "checksum_app" => $request->request->get('fileChecksum'),
+      ]);
       throw new InvalidChecksumException();
     }
 
@@ -180,7 +195,6 @@ class UploadController
       }
       $response = $this->createUploadResponse($request, $gamejam, $user, $program);
     }
-
     return JsonResponse::create($response);
   }
 
@@ -266,7 +280,7 @@ class UploadController
       $response['form'] = $this->assembleFormUrl($gamejam, $user, $program, $request);
     }
 
-    $request->attributes->set('post_to_facebook', true);
+    $request->attributes->set('post_to_facebook', false);
     $request->attributes->set('program_id', $program->getId());
     $response['preHeaderMessages'] = '';
 

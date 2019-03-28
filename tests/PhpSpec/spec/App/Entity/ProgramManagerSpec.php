@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use App\Entity\GameJam;
+use Psr\Log\LoggerInterface;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -45,9 +46,16 @@ class ProgramManagerSpec extends ObjectBehavior
    * @param TagRepository|\PhpSpec\Wrapper\Collaborator            $tag_repository
    * @param ProgramLikeRepository|\PhpSpec\Wrapper\Collaborator    $program_like_repository
    */
-  public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository, ScreenshotRepository $screenshot_repository, EntityManager $entity_manager, ProgramRepository $program_repository, EventDispatcherInterface $event_dispatcher, AddProgramRequest $request, File $file, User $user, ExtractedCatrobatFile $extracted_file, Program $inserted_program, TagRepository $tag_repository, ProgramLikeRepository $program_like_repository)
+  public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
+                      ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
+                      ProgramRepository $program_repository, EventDispatcherInterface $event_dispatcher,
+                      AddProgramRequest $request, File $file, User $user, ExtractedCatrobatFile $extracted_file,
+                      Program $inserted_program, TagRepository $tag_repository,
+                      ProgramLikeRepository $program_like_repository, LoggerInterface $logger)
   {
-    $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $tag_repository, $program_like_repository, $event_dispatcher);
+    $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository,
+      $entity_manager, $program_repository, $tag_repository, $program_like_repository,
+      $event_dispatcher, $logger);
     $request->getProgramfile()->willReturn($file);
     $request->getUser()->willReturn($user);
     $request->getIp()->willReturn('127.0.0.1');
