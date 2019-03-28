@@ -64,7 +64,7 @@ set('allow_anonymous_stats', false);
 host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'SHARE-5_slack_deployment')
+  ->set('branch', 'SHARE-33_upload_logging')
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
   ->set('deploy_path', '/var/www/share/');
 

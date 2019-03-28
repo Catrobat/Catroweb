@@ -342,6 +342,7 @@ services:
       - "@tagrepository"
       - "@programlikerepository"
       - "@event_dispatcher"
+      - "@logger"
       - "%catrobat.max_version%"
     public: true
   App\Entity\ProgramManager: "@programmanager"
@@ -367,6 +368,7 @@ services:
       - "@tagrepository"
       - "@programlikerepository"
       - "@event_dispatcher"
+      - "@logger"
       - "%catrobat.max_version%"
     public: true
   App\Catrobat\Commands\RemixManipulationProgramManager: "@programmanager.remix_manipulation"
@@ -532,6 +534,7 @@ services:
       - "@gamejamrepository"
       - "@tokengenerator"
       - "@translator"
+      - "@logger"
     public: true
     tags: ['controller.service_arguments']
 

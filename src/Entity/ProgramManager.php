@@ -14,6 +14,7 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use Doctrine\ORM\EntityManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Events\ProgramInsertEvent;
@@ -78,6 +79,10 @@ class ProgramManager
    */
   protected $max_version;
 
+  /**
+   * @var LoggerInterface
+   */
+  private $logger;
 
   /**
    * ProgramManager constructor.
@@ -90,13 +95,15 @@ class ProgramManager
    * @param TagRepository            $tag_repository
    * @param ProgramLikeRepository    $program_like_repository
    * @param EventDispatcherInterface $event_dispatcher
-   * @param                          $max_version
+   * @param LoggerInterface          $logger
+   * @param int                      $max_version
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
-                              EventDispatcherInterface $event_dispatcher, $max_version=0)
+                              EventDispatcherInterface $event_dispatcher,
+                              LoggerInterface $logger, $max_version = 0)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -106,6 +113,7 @@ class ProgramManager
     $this->program_repository = $program_repository;
     $this->tag_repository = $tag_repository;
     $this->program_like_repository = $program_like_repository;
+    $this->logger = $logger;
     $this->max_version = $max_version;
   }
 
@@ -126,12 +134,15 @@ class ProgramManager
       $event = $this->event_dispatcher->dispatch('catrobat.program.before', new ProgramBeforeInsertEvent($extracted_file));
     } catch (InvalidCatrobatFileException $e)
     {
+      $this->logger->error($e);
       $this->event_dispatcher->dispatch('catrobat.program.invalid.upload', new InvalidProgramUploadedEvent($file, $e));
       throw $e;
     }
 
     if ($event->isPropagationStopped())
     {
+      $this->logger->error("UploadError -> Propagation stopped");
+
       return null;
     }
 
@@ -201,6 +212,7 @@ class ProgramManager
       $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
     } catch (\Exception $e)
     {
+      $this->logger->error("UploadError -> saveProgramAssetsTemp failed!", ["exception" => $e]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();
@@ -209,7 +221,7 @@ class ProgramManager
         $this->screenshot_repository->deleteTempFilesForProgram($program_id);
       } catch (IOException $error)
       {
-
+        $this->logger->error("UploadError -> deleteTempFilesForProgram failed!", ["exception" => $error]);
         throw $error;
       }
 
@@ -229,6 +241,7 @@ class ProgramManager
       $this->file_repository->makeTempProgramPerm($program->getId());
     } catch (\Exception $e)
     {
+      $this->logger->error("UploadError -> makeTempProgramPerm failed!", ["exception" => $e]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();
@@ -238,9 +251,9 @@ class ProgramManager
         $this->file_repository->deleteProgramFile($program_id);
       } catch (IOException $error)
       {
+        $this->logger->error("UploadError -> deletePermProgramAssets or deleteProgramFile failed!", ["exception" => $e]);
         throw $error;
       }
-
       return null;
     }
 
@@ -325,7 +338,7 @@ class ProgramManager
   }
 
   /**
-   * @param $program Program
+   * @param $program        Program
    * @param $extracted_file ExtractedCatrobatFile
    * @param $language
    */
@@ -377,7 +390,9 @@ class ProgramManager
     }
 
     foreach ($tags as $tag)
+    {
       $program->removeTag($tag);
+    }
   }
 
   /**
