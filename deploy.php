@@ -8,6 +8,7 @@ require 'recipe/symfony3.php';
 require 'recipe/slack.php';
 
 // Load .env file
+(new Dotenv())->load('.env');
 (new Dotenv())->load('.env.local');
 
 
