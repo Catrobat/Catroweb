@@ -4,19 +4,13 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
-{% if theme() == 'luna' %}
-  {% set displayname = "Luna & Cat" %}
-{% elseif theme() == 'phirocode' %}
-  {% set displayname = 'Phirocode' %}
-{% elseif theme() == 'create@school' %}
-  {% set displayname = 'Create@School' %}
-{% else %}
-  {% set displayname = 'Pocket Code' %}
-{% endif %}
-
 {% block body %}
 
   <div id="help-container">
+
+    <div class="help-video-container" style="min-width: 100%">
+      {{ include('help/youteHelpVideo.html.twig') }}
+    </div>
 
     <div class="help-content">
       <a id="step-by-step" href="{{ path('catrobat_web_stepByStep') }}">
@@ -27,7 +21,7 @@
                 {{ "help-cards.headings.stepbystep"|trans({}, "catroweb") }}
               </div>
               <div class="col-8">
-                {{ "help-cards.text.stepbystep"|trans({}, "catroweb") }} <br><b>{{ displayname }}</b>!
+                {{ "help-cards.text.stepbystep"|trans({}, "catroweb") }} <br><b>{{ getThemeDisplayName() }}</b>!
               </div>
               <img alt="Step by Step Logo" src="{{ asset('images/help/step_by_step_cut.png') }}"/>
             </div>
@@ -45,7 +39,7 @@
                 {{ "help-cards.headings.tutorials"|trans({}, "catroweb") }}
               </div>
               <div class="col-7">
-                {{ "help-cards.text.tutorials"|trans({}, "catroweb") }} <br><b>{{ displayname }}</b>!
+                {{ "help-cards.text.tutorials"|trans({}, "catroweb") }} <br><b>{{ getThemeDisplayName() }}</b>!
               </div>
               <img alt="Tutorial Cards Logo" src="{{ asset('images/help/tutorials_cut.png') }}"/>
             </div>
@@ -82,7 +76,7 @@
                 {{ "help-cards.headings.starters"|trans({}, "catroweb") }}
               </div>
               <div class="col-7">
-                {{ "help-cards.text.starters"|trans({}, "catroweb") }} <br><b>{{ displayname }}</b>!
+                {{ "help-cards.text.starters"|trans({}, "catroweb") }} <br><b>{{ getThemeDisplayName() }}</b>!
               </div>
               <img alt="Starter Logo" src="{{ asset('images/help/starters_cut.png') }}"/>
             </div>

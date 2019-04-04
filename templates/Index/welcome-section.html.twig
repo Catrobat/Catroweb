@@ -1,31 +1,14 @@
-<div id="welcome-section">
-  {% if not isWebview() %}
-    {% if theme() == 'luna' %}
-      {% set displayname = "Luna & Cat" %}
-    {% elseif theme() == 'phirocode' %}
-      {% set displayname = 'Phirocode' %}
-    {% elseif theme() == 'create@school' %}
-      {% set displayname = 'Create@School' %}
-    {% else %}
-      {% set displayname = 'Pocket Code' %}
-    {% endif %}
+{% if not isWebview() %}
 
+  <div id="welcome-section">
     <div class="mb-4">
-      <h3>{{ "programs.welcome.title"|trans({'%theme%': displayname}, "catroweb") }}</h3>
+      <h3>{{ "programs.welcome.title"|trans({'%theme%': getThemeDisplayName()}, "catroweb") }}</h3>
       <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
     </div>
 
     <div id="welcome-section-container" class="mb-3">
       <div class="flex-shrink help-video-container">
-        {% if theme() == 'luna' %}
-          <iframe id="youtube-help-video" src="https://www.youtube.com/embed/-6AEZrSbOMg"
-                  frameborder="0" allowfullscreen width="100%">
-          </iframe>
-        {% else %}
-          <iframe id="youtube-help-video" src="https://www.youtube.com/embed/BHe2r2WU-T8"
-                  frameborder="0" allowfullscreen width="100%">
-          </iframe>
-        {% endif %}
+        {{ include('help/youteHelpVideo.html.twig') }}
       </div>
       <div class="flex-no-shrink help-download-container">
         <div class="col-12">
@@ -73,6 +56,6 @@
         </div>
       </div>
     </div>
-  {% endif %}   {#{% if not isWebview() %}#}
-</div>
+  </div>
+{% endif %}   {#{% if not isWebview() %}#}
 
