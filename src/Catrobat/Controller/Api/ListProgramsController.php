@@ -168,7 +168,7 @@ class ListProgramsController extends Controller
      */
 
     $program_manager = $this->get('programmanager');
-    $limit = intval($request->query->get('limit', 200));
+    $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));
     $user_id = intval($request->query->get('user_id', 0));
     $max_version = $request->query->get('max_version', 0);
