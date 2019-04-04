@@ -8,7 +8,8 @@ require 'recipe/symfony3.php';
 require 'recipe/slack.php';
 
 // Load .env file
-(new Dotenv())->load('.env');
+(new Dotenv())->load('.env.local');
+
 
 // Project name
 set('application', getenv('APP_NAME'));
