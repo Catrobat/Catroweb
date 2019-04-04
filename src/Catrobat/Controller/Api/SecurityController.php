@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\UserManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Catrobat\StatusCode;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Catrobat\Requests\LoginUserRequest;
@@ -32,7 +33,7 @@ class SecurityController extends Controller
   public function checkTokenAction()
   {
     return JsonResponse::create([
-      'statusCode'        => StatusCode::OK,
+      'statusCode'        => Response::HTTP_OK,
       'answer'            => $this->trans('success.token'),
       'preHeaderMessages' => "  \n",
     ]);
@@ -62,7 +63,7 @@ class SecurityController extends Controller
     $retArray = [];
 
     $this->signInLdapUser($request, $retArray);
-    if (array_key_exists('statusCode', $retArray) && ($retArray['statusCode'] === StatusCode::OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR))
+    if (array_key_exists('statusCode', $retArray) && ($retArray['statusCode'] === Response::HTTP_OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR))
     {
       return JsonResponse::create($retArray);
     }
@@ -253,7 +254,7 @@ class SecurityController extends Controller
       if (!$user)
       {
         $this->signInLdapUser($request, $retArray);
-        if (array_key_exists('statusCode', $retArray) && ($retArray['statusCode'] === StatusCode::OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR))
+        if (array_key_exists('statusCode', $retArray) && ($retArray['statusCode'] === Response::HTTP_OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR))
         {
           return JsonResponse::create($retArray);
         }
@@ -268,7 +269,7 @@ class SecurityController extends Controller
         $dd = null;
         if ($correct_pass)
         {
-          $retArray['statusCode'] = StatusCode::OK;
+          $retArray['statusCode'] = Response::HTTP_OK;
           $user->setUploadToken($tokenGenerator->generateToken());
           $retArray['token'] = $user->getUploadToken();
           $retArray['email'] = $user->getEmail();
@@ -277,7 +278,7 @@ class SecurityController extends Controller
         else
         {
           $this->signInLdapUser($request, $retArray);
-          if (array_key_exists('statusCode', $retArray) && ($retArray['statusCode'] === StatusCode::OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR))
+          if (array_key_exists('statusCode', $retArray) && ($retArray['statusCode'] === Response::HTTP_OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR))
           {
             return JsonResponse::create($retArray);
           }
@@ -311,7 +312,7 @@ class SecurityController extends Controller
     try
     {
       $token = $authenticator->authenticate($username, $request->request->get('registrationPassword'));
-      $retArray['statusCode'] = StatusCode::OK;
+      $retArray['statusCode'] = Response::HTTP_OK;
       $retArray['token'] = $token->getUser()->getUploadToken();
       $retArray['preHeaderMessages'] = '';
 

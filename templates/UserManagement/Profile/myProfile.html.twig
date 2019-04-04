@@ -51,7 +51,7 @@
         '{{ path('profile_delete_program') }}', '{{ path('profile_delete_account') }}',
         '{{ path('profile_toggle_program_visibility') }}',
         '{{ path('profile_upload_avatar') }}',
-        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_ALREADY_EXISTS') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_MISSING') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_INVALID') }},

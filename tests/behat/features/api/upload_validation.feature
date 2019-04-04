@@ -8,14 +8,14 @@ Feature: All uploaded programs have to be validated.
     When I upload a program with a missing code.xml
     Then I should get the json object:
       """
-      {"statusCode":507,"answer":"unknown error: project_xml_not_found!","preHeaderMessages":""}
+      {"statusCode":422,"answer":"unknown error: project_xml_not_found!","preHeaderMessages":""}
       """
 
   Scenario: program must have a valid code.xml
     When I upload a program with an invalid code.xml
     Then I should get the json object:
       """
-      {"statusCode":508,"answer":"invalid code xml","preHeaderMessages":""}
+      {"statusCode":422,"answer":"invalid code xml","preHeaderMessages":""}
       """
     And the response code should be "200"
 
@@ -40,7 +40,7 @@ Feature: All uploaded programs have to be validated.
     When I upload an invalid program file
     Then I should get the json object:
       """
-      {"statusCode":505,"answer":"invalid file","preHeaderMessages":""}
+      {"statusCode":422,"answer":"invalid file","preHeaderMessages":""}
       """
 
   Scenario Outline: user should not be able to upload a program with an old pocketcode version
@@ -48,7 +48,7 @@ Feature: All uploaded programs have to be validated.
     When I upload a program
     Then I should get the json object:
     """
-      {"statusCode":519,"answer":"Sorry, you are using an old version of Pocket Code. Please update to the lastest version.","preHeaderMessages":""}
+      {"statusCode":919,"answer":"Sorry, you are using an old version of Pocket Code. Please update to the lastest version.","preHeaderMessages":""}
     """
 
     Examples:
@@ -75,7 +75,7 @@ Feature: All uploaded programs have to be validated.
     When I upload a program
     Then I should get the json object:
     """
-      {"statusCode":518,"answer":"Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
+      {"statusCode":918,"answer":"Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
     """
 
 

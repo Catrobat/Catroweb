@@ -81,7 +81,7 @@ class OAuthService
     {
       $retArray['is_oauth_user'] = false;
     }
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -113,7 +113,7 @@ class OAuthService
     {
       $retArray['email_available'] = false;
     }
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -147,7 +147,7 @@ class OAuthService
     {
       $retArray['username_available'] = false;
     }
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -182,7 +182,7 @@ class OAuthService
     {
       $retArray['token_available'] = false;
     }
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -422,7 +422,7 @@ class OAuthService
       return $this->returnErrorCode($e);
     }
 
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -493,7 +493,7 @@ class OAuthService
       // should not happen, but who knows
       $retArray['token_invalid'] = true;
       $retArray['reason'] = 'No Facebook User with given ID in database';
-      $retArray['statusCode'] = StatusCode::OK;
+      $retArray['statusCode'] = Response::HTTP_OK;
 
       return JsonResponse::create($retArray);
     }
@@ -530,7 +530,7 @@ class OAuthService
       $retArray['token_invalid'] = true;
       $retArray['reason'] = 'There was an error during Facebook token check';
       $retArray['details'] = 'Error code: ' . $error->code . ', error subcode: ' . $error->subcode . ', error message: ' . $error->message;
-      $retArray['statusCode'] = StatusCode::OK;
+      $retArray['statusCode'] = Response::HTTP_OK;
 
       return JsonResponse::create($retArray);
     }
@@ -548,7 +548,7 @@ class OAuthService
     {
       $retArray['token_invalid'] = true;
       $retArray['reason'] = 'Token data does not match application data';
-      $retArray['statusCode'] = StatusCode::OK;
+      $retArray['statusCode'] = Response::HTTP_OK;
 
       return JsonResponse::create($retArray);
     }
@@ -557,7 +557,7 @@ class OAuthService
     {
       $retArray['token_invalid'] = true;
       $retArray['reason'] = 'Token has been invalidated';
-      $retArray['statusCode'] = StatusCode::OK;
+      $retArray['statusCode'] = Response::HTTP_OK;
 
       return JsonResponse::create($retArray);
     }
@@ -569,7 +569,7 @@ class OAuthService
     if ($time_to_expiry->m == 0 && $time_to_expiry->d < $limit)
     {
       $retArray['token_invalid'] = true;
-      $retArray['statusCode'] = StatusCode::OK;
+      $retArray['statusCode'] = Response::HTTP_OK;
       $retArray['reason'] = 'Token will expire soon or has been expired';
       $retArray['details'] = 'Token expires at: ' . $expires->format('Y-m-d H:i:s') .
         ', current timestamp: ' . $current_timestamp->format('Y-m-d H:i:s') .
@@ -580,7 +580,7 @@ class OAuthService
       return JsonResponse::create($retArray);
     }
     $retArray['token_invalid'] = false;
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -768,7 +768,7 @@ class OAuthService
     {
       $retArray['token_available'] = false;
     }
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -1338,7 +1338,7 @@ class OAuthService
    */
   private function setLoginOAuthUserStatusCode(&$retArray)
   {
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
   }
 
   /**
@@ -1438,7 +1438,7 @@ class OAuthService
     }
 
     $retArray['deleted'] = $deleted;
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }

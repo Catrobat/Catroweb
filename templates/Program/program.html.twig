@@ -357,7 +357,7 @@
       '{{ "programs.reportRadioButtonCopyright"     |trans({}, "catroweb") }}',
       '{{ "programs.reportRadioButtonSpam"          |trans({}, "catroweb") }}',
       '{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}',
-        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ logged_in }}
     )
   </script>
@@ -377,7 +377,7 @@
       "{{ 'programs.deleted_popup'                  |trans({}, 'catroweb') }}",
       "{{ 'programs.noAdminRights'                  |trans({}, 'catroweb') }}",
       "{{ 'somethingWentWrong'                      |trans({}, 'catroweb') }}",
-      "{{ constant('App\\Catrobat\\StatusCode::OK') }}",
+      "{{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }}",
       "{{ constant('App\\Catrobat\\StatusCode::NOT_LOGGED_IN') }}",
       "{{ constant('App\\Catrobat\\StatusCode::NO_ADMIN_RIGHTS') }}"
     )
@@ -387,7 +387,7 @@
     new ProgramDescription({{ program.id }},
       '{{ ("show-more")                             |trans({}, "catroweb") }}',
       '{{ ("show-less")                             |trans({}, "catroweb") }}',
-        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ constant('App\\Catrobat\\StatusCode::DESCRIPTION_TOO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
     )
@@ -609,7 +609,7 @@
           type   : 'get',
           data   : {type: type},
           success: function (data) {
-            if (data.statusCode !== {{ constant('App\\Catrobat\\StatusCode::OK') }})
+            if (data.statusCode !== {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }})
             {
               if (data.statusCode === {{ constant('App\\Catrobat\\StatusCode::LOGIN_ERROR') }})
               {

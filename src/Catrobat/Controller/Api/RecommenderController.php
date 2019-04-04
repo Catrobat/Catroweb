@@ -77,7 +77,12 @@ class RecommenderController extends Controller
     $program = $program_manager->find($id);
     if ($program == null)
     {
-      return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
+      return JsonResponse::create(
+        [
+          'statusCode' => StatusCode::INVALID_PROGRAM,
+          'answer' =>  $this->trans('errors.program.invalid'),
+        ]
+      );
     }
 
     $programs_count = $program_manager->getRecommendedProgramsCount($id, $flavor);
@@ -132,5 +137,16 @@ class RecommenderController extends Controller
     }
 
     return new ProgramListResponse($programs, $programs_count, true, $is_user_specific_recommendation);
+  }
+
+  /**
+   * @param       $message
+   * @param array $parameters
+   *
+   * @return string
+   */
+  private function trans($message, $parameters = [])
+  {
+    return $this->get('translator')->trans($message, $parameters, 'catroweb');
   }
 }

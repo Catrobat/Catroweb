@@ -46,7 +46,7 @@ Feature: Authenticate to the system
 
     Examples:
       | problem           | errorcode | answer                   |
-      | no password given | 602       | The password is missing. |
+      | no password given | 401       | The password is missing. |
 
   Scenario: Retrieve the upload token of a user
     Given the HTTP Request:
@@ -100,7 +100,7 @@ Feature: Authenticate to the system
 
     Examples:
       | problem       | errorcode | answer                    | httpcode |
-      | invalid token | 601       | Upload Token auth failed. | 401      |
+      | invalid token | 401       | Upload Token auth failed. | 401      |
 
   Scenario: Registration of a new user with a too long username
     Given the HTTP Request:
@@ -117,7 +117,7 @@ Feature: Authenticate to the system
     Then the returned json object will be:
           """
           {
-            "statusCode": 602,
+            "statusCode": 401,
             "answer": "This value is not valid.",
             "preHeaderMessages": ""
           }

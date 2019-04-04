@@ -30,7 +30,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":501,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
+      {"statusCode":422,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
       """
 
   Scenario: trying to upload with an invalid user should result in an error
@@ -39,7 +39,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"There is no user with name \"INVALID\".","preHeaderMessages":""}
+      {"statusCode":401,"answer":"There is no user with name \"INVALID\".","preHeaderMessages":""}
       """
 
   Scenario: trying to upload with an invalid token should result in an error
@@ -48,7 +48,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"Upload Token auth failed.","preHeaderMessages":""}
+      {"statusCode":401,"answer":"Upload Token auth failed.","preHeaderMessages":""}
       """
 
   Scenario: trying to upload with a missing token should result in an error
@@ -56,7 +56,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
+      {"statusCode":401,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
 
   Scenario: uploading the same program again should result in an update
@@ -72,7 +72,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":503,"answer":"Client did not send fileChecksum! Are you using an outdated version of Pocket Code?","preHeaderMessages":""}
+      {"statusCode":422,"answer":"Client did not send fileChecksum! Are you using an outdated version of Pocket Code?","preHeaderMessages":""}
       """
 
   Scenario: program with invalid file checksum are rejected
@@ -83,7 +83,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
+      {"statusCode":422,"answer":"invalid checksum","preHeaderMessages":""}
       """
 
   Scenario:

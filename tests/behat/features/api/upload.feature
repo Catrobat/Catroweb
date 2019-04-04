@@ -46,6 +46,6 @@ Feature: Upload a program to the website
 
     Examples:
       | problem              | errorcode | answer                                               |
-      | no authentication    | 601       | Authentication of device failed: invalid auth-token! |
-      | missing parameters   | 501       | POST-Data not correct or missing!                    |
-      | invalid program file | 505       | invalid file                                         |
+      | no authentication    | 401       | Authentication of device failed: invalid auth-token! |
+      | missing parameters   | 422       | POST-Data not correct or missing!                    |
+      | invalid program file | 422       | invalid file                                         |

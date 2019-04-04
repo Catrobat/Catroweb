@@ -8,6 +8,7 @@ use App\Catrobat\StatusCode;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -117,7 +118,7 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
     ]);
   }
 
@@ -176,7 +177,7 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode'     => StatusCode::OK,
+      'statusCode'     => Response::HTTP_OK,
       'saved_password' => "supertoll",
     ]);
   }
@@ -258,7 +259,7 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
     ]);
   }
 
@@ -295,7 +296,7 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode'   => StatusCode::OK,
+      'statusCode'   => Response::HTTP_OK,
       'image_base64' => $image_base64,
     ]);
   }
@@ -336,7 +337,7 @@ class ProfileController extends Controller
     $em->flush();
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'count'      => count($user_comments),
     ]);
   }

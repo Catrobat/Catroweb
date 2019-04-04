@@ -47,7 +47,7 @@ class CommentsController extends Controller
     $comment->setIsReported(true);
     $em->flush();
 
-    return new Response(StatusCode::OK);
+    return new Response(Response::HTTP_OK);
   }
 
 
@@ -93,7 +93,7 @@ class CommentsController extends Controller
     $em->remove($comment);
     $em->flush();
 
-    return new Response(StatusCode::OK);
+    return new Response(Response::HTTP_OK);
   }
 
 
@@ -148,6 +148,6 @@ class CommentsController extends Controller
       $notification_service->addNotification($notification);
     }
 
-    return new Response(StatusCode::OK);
+    return new Response(Response::HTTP_OK);
   }
 }

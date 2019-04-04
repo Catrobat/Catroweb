@@ -193,6 +193,7 @@ class ProgramController extends Controller
   {
     /**
      * @var ProgramManager           $program_manager
+     * @var Program                  $program
      * @var User                     $user
      * @var CatroNotification        $notification
      * @var CatroNotificationService $notification_service
@@ -205,8 +206,12 @@ class ProgramController extends Controller
     {
       if ($request->isXmlHttpRequest())
       {
-        return JsonResponse::create(['statusCode' => StatusCode::INVALID_PARAM,
-                                     'message'    => 'Invalid like type given!']);
+        return JsonResponse::create(
+          [
+            'statusCode' => StatusCode::INVALID_PARAM,
+            'message'    => 'Invalid like type given!'
+          ]
+        );
       }
       else
       {
@@ -219,8 +224,12 @@ class ProgramController extends Controller
     {
       if ($request->isXmlHttpRequest())
       {
-        return JsonResponse::create(['statusCode' => StatusCode::INVALID_PARAM,
-                                     'message'    => 'Program with given ID does not exist!']);
+        return JsonResponse::create(
+          [
+            'statusCode' => StatusCode::INVALID_PARAM,
+            'message'    => 'Program with given ID does not exist!'
+          ]
+        );
       }
       else
       {
@@ -292,12 +301,18 @@ class ProgramController extends Controller
       return $this->redirectToRoute('program', ['id' => $id]);
     }
 
-    return new JsonResponse(['statusCode' => StatusCode::OK, 'data' => [
-      'id'             => $id,
-      'likeType'       => $new_type,
-      'likeTypeCount'  => $like_type_count,
-      'totalLikeCount' => $total_like_count,
-    ]]);
+    return new JsonResponse(
+      [
+        'statusCode' => Response::HTTP_OK,
+        'data' =>
+          [
+          'id'             => $id,
+          'likeType'       => $new_type,
+          'likeTypeCount'  => $like_type_count,
+          'totalLikeCount' => $total_like_count,
+          ]
+      ]
+    );
   }
 
 
@@ -449,16 +464,22 @@ class ProgramController extends Controller
 
     if (strlen($newDescription) > $max_description_size)
     {
-      return JsonResponse::create(['statusCode' => StatusCode::DESCRIPTION_TOO_LONG,
-                                   'message'    => $translator
-                                     ->trans("programs.tooLongDescription", [], "catroweb")]);
+      return JsonResponse::create(
+        [
+          'statusCode' => StatusCode::DESCRIPTION_TOO_LONG,
+          'message'    => $translator->trans("programs.tooLongDescription", [], "catroweb")
+        ]
+      );
     }
 
     if ($rude_word_filter->containsRudeWord($newDescription))
     {
-      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_DESCRIPTION,
-                                   'message'    => $translator
-                                     ->trans("programs.rudeWordsInDescription", [], "catroweb")]);
+      return JsonResponse::create(
+        [
+          'statusCode' => StatusCode::RUDE_WORD_IN_DESCRIPTION,
+          'message'    => $translator->trans("programs.rudeWordsInDescription", [], "catroweb")
+        ]
+      );
     }
 
     $user = $this->getUser();
@@ -485,7 +506,7 @@ class ProgramController extends Controller
     $em->persist($program);
     $em->flush();
 
-    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+    return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }
 
 

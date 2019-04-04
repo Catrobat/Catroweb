@@ -29,7 +29,7 @@ Feature: Report a program
     When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
       """
-      {"statusCode":506,"answer":"Invalid program.","preHeaderMessages":""}
+      {"statusCode":422,"answer":"Invalid program.","preHeaderMessages":""}
       """
 
   Scenario: report program with missing parameter
@@ -39,5 +39,5 @@ Feature: Report a program
     When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
     """
-      {"statusCode":501,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
+      {"statusCode":422,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
     """

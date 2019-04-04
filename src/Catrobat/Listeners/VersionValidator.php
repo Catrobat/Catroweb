@@ -7,6 +7,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 use App\Catrobat\Exceptions\Upload\OldCatrobatLanguageVersionException;
 use App\Catrobat\Exceptions\Upload\OldApplicationVersionException;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class VersionValidator
@@ -62,7 +63,7 @@ class VersionValidator
         }
         break;
       default:
-        throw new InvalidCatrobatFileException('unsupported platform', StatusCode::INTERNAL_SERVER_ERROR);
+        throw new InvalidCatrobatFileException('unsupported platform', Response::HTTP_INTERNAL_SERVER_ERROR);
 
     }
   }

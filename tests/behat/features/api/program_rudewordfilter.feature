@@ -13,7 +13,7 @@ Feature: Checking for rude words
     When I upload this program
     Then I should get the json object:
     """
-    {"statusCode":511,"answer":"Programname must not contain rude wordes.","preHeaderMessages":""}
+    {"statusCode":422,"answer":"Programname must not contain rude wordes.","preHeaderMessages":""}
     """
 
   Scenario: upload a program with a rude word in description should be rejected
@@ -22,7 +22,7 @@ Feature: Checking for rude words
     When I upload this program
     Then I should get the json object:
       """
-      {"statusCode":512,"answer":"Description must not contain rude wordes.","preHeaderMessages":""}
+      {"statusCode":422,"answer":"Description must not contain rude wordes.","preHeaderMessages":""}
       """
 
   Scenario Outline: a program with a rude word in description should be rejected

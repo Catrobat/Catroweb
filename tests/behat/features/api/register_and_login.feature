@@ -84,5 +84,5 @@ Feature: Login with an existing account or register a new one
     When I POST these parameters to "/pocketcode/api/login/Login.json"
     Then I should get the json object:
       """
-      {"statusCode":601, "answer":"The password or username was incorrect.","preHeaderMessages":""}
+      {"statusCode":401, "answer":"The password or username was incorrect.","preHeaderMessages":""}
       """

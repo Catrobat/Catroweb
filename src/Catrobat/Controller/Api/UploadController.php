@@ -15,6 +15,7 @@ use App\Entity\ProgramManager;
 use App\Catrobat\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Catrobat\StatusCode;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Catrobat\Exceptions\Upload\MissingChecksumException;
 use App\Catrobat\Exceptions\Upload\InvalidChecksumException;
@@ -272,7 +273,7 @@ class UploadController
     $this->usermanager->updateUser($user);
 
     $response['projectId'] = $program->getId();
-    $response['statusCode'] = StatusCode::OK;
+    $response['statusCode'] = Response::HTTP_OK;
     $response['answer'] = $this->trans('success.upload');
     $response['token'] = $user->getUploadToken();
     if ($gamejam !== null && !$program->isAcceptedForGameJam())

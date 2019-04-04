@@ -4,6 +4,7 @@ namespace App\Catrobat\Services\TestEnv;
 
 use App\Catrobat\Services\FacebookPostService;
 use App\Catrobat\StatusCode;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class FakeFacebookPostService
@@ -44,7 +45,7 @@ class FakeFacebookPostService
       return $this->facebook_service->removeFbPost($post_id);
     }
 
-    return StatusCode::OK;
+    return Response::HTTP_OK;
   }
 
   /**

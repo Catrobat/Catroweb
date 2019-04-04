@@ -15,7 +15,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "statusCode": 523,
+      "statusCode": 923,
       "message": "Looks not found"
     }
     """
@@ -37,7 +37,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "statusCode": 523,
+      "statusCode": 923,
       "message": "Looks not found"
     }
     """
@@ -50,7 +50,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "statusCode": 522,
+      "statusCode": 922,
       "message": "category Space not found in package Looks because the package doesn't contain any categories"
     }
     """
@@ -66,7 +66,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "statusCode": 522,
+      "statusCode": 922,
       "message": "category Space not found in package Looks"
     }
     """
@@ -91,7 +91,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "statusCode": 522,
+      "statusCode": 922,
       "message": "category Animals not found"
     }
     """

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Catrobat\StatusCode;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\ProgramInappropriateReport;
@@ -84,7 +85,7 @@ class ReportController extends Controller
 
     $response = [];
     $response['answer'] = $this->trans('success.report');
-    $response['statusCode'] = StatusCode::OK;
+    $response['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($response);
   }
