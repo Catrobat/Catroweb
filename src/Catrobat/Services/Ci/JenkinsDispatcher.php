@@ -48,9 +48,9 @@ class JenkinsDispatcher
       'job'      => $this->config['job'],
       'token'    => $this->config['token'],
       'SUFFIX'   => 'generated' . $id,
-      'DOWNLOAD' => $this->router->generate('download', ['id' => $id], true),
-      'UPLOAD'   => $this->router->generate('ci_upload_apk', ['id' => $id, 'token' => $this->config['uploadtoken']], true),
-      'ONERROR'  => $this->router->generate('ci_failed_apk', ['id' => $id, 'token' => $this->config['uploadtoken']], true),
+      'DOWNLOAD' => $this->router->generate('download', ['id' => $id], $this->router::ABSOLUTE_URL),
+      'UPLOAD'   => $this->router->generate('ci_upload_apk', ['id' => $id, 'token' => $this->config['uploadtoken']], $this->router::ABSOLUTE_URL),
+      'ONERROR'  => $this->router->generate('ci_failed_apk', ['id' => $id, 'token' => $this->config['uploadtoken']], $this->router::ABSOLUTE_URL),
     ];
 
     return $this->dispatch($params);
