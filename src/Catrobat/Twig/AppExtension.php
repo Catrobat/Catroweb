@@ -62,7 +62,9 @@ class AppExtension extends AbstractExtension
    * @param                            $translationPath
    * @param Container                  $container
    */
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme, $translationPath, Container $container)
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository
+  $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme,
+                              $translationPath, Container $container)
   {
     $this->translationPath = $translationPath;
     $this->request_stack = $request_stack;
@@ -112,9 +114,10 @@ class AppExtension extends AbstractExtension
       new TwigFunction('getMediaPackageSoundUrl', [$this, 'getMediaPackageSoundUrl']),
       new TwigFunction('flavor', [$this, 'getFlavor']),
       new TwigFunction('theme', [$this, 'getTheme']),
+      new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
       new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
       new TwigFunction('getJavascriptPath', [$this, 'getJavascriptPath']),
-      new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
+      new TwigFunction('getCommunityStats', [$this, 'getCommunityStats'])
     ];
   }
 
@@ -285,6 +288,26 @@ class AppExtension extends AbstractExtension
   public function getTheme()
   {
     return $this->theme->getName();
+  }
+
+  /**
+   * @return string
+   */
+  public function getThemeDisplayName()
+  {
+    switch ($this->getTheme()) {
+      case 'luna':
+        return "Luna & Cat";
+
+      case 'phirocode':
+        return "Phirocode";
+
+      case 'create@school':
+        return "Create@School";
+
+      default:
+        return "Pocket Code";
+    }
   }
 
   /**
