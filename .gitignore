@@ -4,7 +4,7 @@ composer.phar
 behat.yml
 phpspec.yml
 phpunit.xml
-.env
+*.local
 
 ### backups ###
 backups/**
