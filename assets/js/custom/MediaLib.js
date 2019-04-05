@@ -123,7 +123,7 @@ function MediaLib(categories, flavor, assetsDir)
                   mediafileContainer += '<i class="fas fa-file-archive" title="' + file.name + '"></i>';
                   break;
                 default:
-                  mediafileContainer += '<img src="' + assetsDir + '/thumbs/' + file.id + '.jpeg" title="' + file.name + '" alt="' + file.name + '" onerror="medialib_onThumbError(event, \'' + file.extension + '\')"/>';
+                  mediafileContainer += '<img src="' + assetsDir + 'thumbs/' + file.id + '.jpeg" title="' + file.name + '" alt="' + file.name + '" onerror="medialib_onThumbError(event, \'' + file.extension + '\')"/>';
                   break;
               }
               mediafileContainer += '</a>';
@@ -316,5 +316,4 @@ function medialib_onThumbError(event, file_extension)
       container.html('<i class="fas fa-file" title="' + title + '"></i>');
       break;
   }
-  
 }

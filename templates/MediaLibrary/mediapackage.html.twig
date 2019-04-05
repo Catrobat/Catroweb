@@ -47,6 +47,6 @@
 {% block js %}
   <script src="{{ asset('compiled/js/MediaLib.js') }}"></script>
   <script>
-    new MediaLib({{ categories|json_encode|raw }}, "{{ flavor }}", "{{ asset('resources/mediapackage') }}");
+    new MediaLib({{ categories|json_encode|raw }}, "{{ flavor }}", "{{ mediaDir }}");
   </script>
 {% endblock %}
