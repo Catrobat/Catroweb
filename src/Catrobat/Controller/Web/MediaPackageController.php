@@ -139,10 +139,13 @@ class MediaPackageController extends Controller
       return ($a['priority'] > $b['priority']) ? -1 : 1;
     });
 
+    $mediaDir = $this->container->getParameter('catrobat.mediapackage.path');
+
     return $this->get('templating')->renderResponse('MediaLibrary/mediapackage.html.twig', [
       'flavor'     => $flavor,
       'categories' => $categories,
       'new_nav'    => true,
+      'mediaDir'   => '../../'. $mediaDir
     ]);
   }
 

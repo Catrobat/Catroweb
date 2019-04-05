@@ -41,6 +41,7 @@
         "symfony/dotenv": "3.4.*",
         "symfony/flex": "^1.2",
         "symfony/framework-bundle": "*",
+        "symfony/maker-bundle": "^1.11",
         "symfony/monolog-bundle": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/profiler-pack": "*",
@@ -63,7 +64,6 @@
         "phpcheckstyle/phpcheckstyle": "^0.14.8",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^7.3",
-        "symfony/maker-bundle": "^1.6",
         "symfony/phpunit-bridge": "*",
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
         "wapmorgan/php-code-fixer": "dev-master"
