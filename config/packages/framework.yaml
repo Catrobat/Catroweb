@@ -10,4 +10,5 @@ framework:
   default_locale:  "%locale%"
   session:         ~
   fragments:       ~
-
+  assets:
+    version: '%env(string:APP_VERSION)%'
