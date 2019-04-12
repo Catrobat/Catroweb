@@ -21,22 +21,22 @@ download: Muat turun sebagai program
 description: Huraian
 noDescription: Tiada huraian diberikan.
 country: Negara
-loginText: login
-privacyPolicy: Privacy Policy
+loginText: masukkan Text
+privacyPolicy: Polisi peribadi
 imprint: Mendalam
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
+somethingWentWrong: 'Ooooops ada masalah.'
+pleaseTryAgain: 'Sila cuba sekali lagi!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+more: 'lebih'
+less: 'kurang'
 show-more: 'Show more'
 show-less: 'Show less'
 ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Untuk muat turun program contoh, sila tekan %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
 wellDone: "Well done!"
-done: "Done!"
+done: "Habis!"
 notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
@@ -51,10 +51,10 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
-    download: Download the app
+    download: Muat turun applikasi ini
     statistics: More Statistics
   featured: Featured
-  newest: Newest programs
+  newest: Program-program yang terbaru
   recommended: Recommended programs
   noPrograms: There are currently no programs.
   deleteConfirmation: |+
@@ -78,8 +78,8 @@ programs:
     downloaded: Most downloaded
   random: Random Programs
   related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
+  downloads: 'Muat turn %downloads%'
+  sample: Program-program tercontoh
   views: '%views% views'
   likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
@@ -88,13 +88,13 @@ programs:
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  uploaded: Muat naik program-program
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report program
   languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: Please %login% to report this program.
   reportDialogHeader: Why do you want to report this program?
-  reportDialogReason: Enter a reason
+  reportDialogReason: Sila masukkan sebab
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
@@ -129,16 +129,38 @@ remixGraph:
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailableErrorTitle: 'Maaf...'
+  programNotAvailableErrorDescription: 'Program ini tidak boleh didapati lagi!'
   programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programUnknownUser: 'User Tidak Ketahui'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat Account Confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
     Dear %username%.
 
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+
     To reset your password and create a new one, please visit the following page: %confirmationUrl%
 
     You can use your username and your password at any time to access the %appplication_url% community.
@@ -147,6 +169,22 @@ passwordRecovery:
 
     Best regards,
     Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 profile:
   edit: Edit your profile
   saveChanges: save changes
@@ -155,7 +193,7 @@ profile:
   oldPass: old password
   firstEmail: My first email
   secondEmail: My second email
-  myPrograms: My programs
+  myPrograms: Program-program saya
   follows: Follows
   follower: Follower
   unfollowUser: Unfollow this user!
@@ -209,14 +247,13 @@ licenseToPlay:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
-
 termsOfUse:
   title: Terms of Use
   headline: Welcome to the Catrobat Community!
   text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
+  text4: 'Hadiah kami untuk anda:'
   text5: 'Our Terms of Use and Service:'
   list1:
     item1: from many different countries and cultures
@@ -268,7 +305,7 @@ help:
         text3: 'Enter an object name and tap "OK" to create the object.'
         special1: 'Draw a new look.'
         special2: 'Choose from gallery.'
-        special3: 'Take a picture.'
+        special3: 'Ambil gambar.'
     step3:
       title: "Start Moving"
       detail:
@@ -418,7 +455,7 @@ help:
       games: "Games"
       animations: "Animations"
       interactive: "Interactive Art and Stories"
-      music: "Music And Dance"
+      music: "Musik dan Menari"
   gameJam:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
@@ -473,7 +510,7 @@ oauth:
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 search:
-  dotdotdot: Search...
+  dotdotdot: Cari...
   search: Search
   results: Search Results
   resultcount: Your search returned %count% results
@@ -494,6 +531,7 @@ login:
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
@@ -516,6 +554,7 @@ errors:
     exists: This username already exists.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -541,8 +580,8 @@ errors:
   file:
     unexpected: unexpected file found
     invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+  image.missing: 'Project XML: Menyebut tentang sebuah fail yang tidak wujud dalam project-folder'
+  unknown: masalah yang tidak ketahui
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
@@ -555,7 +594,7 @@ errors:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
   text: Success
-  registration: Registration successful!
+  registration: Daftaran berjaya!
   token: ok
   upload: Your project was uploaded successfully!
   report: Your report was successfully sent!
@@ -621,7 +660,7 @@ gamejam:
   submit: Submit to %gamejamname%
   whats: What's the %gamejamname%?
   submitown:
-    header: be aware
+    header: berjaga-jaga
     subheader: You can only submit your own programs
     text: |
       But why not create your own!
@@ -671,7 +710,7 @@ footer:
   communityStats: Community Stats
   download: Get the App
 privacy-policy:
-  header: Privacy Policy
+  header: Polisi peribadi
   version: Version 2.1, 25 June 2018
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
@@ -719,7 +758,7 @@ help-cards:
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
-    stepbystep: Do 10 easy steps in
+    stepbystep: Lakukan sepuluh langkah-langkah dalam
     getinvolved: Download the app and get started
     game_design_1: Effective tricks for
     game_design_2: creating a game

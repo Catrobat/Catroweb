@@ -133,19 +133,58 @@ remixGraph:
   programNotAvailableErrorDescription: 'Programi nuk është në dispozicion!'
   programNotAvailable: 'Jo i disponueshëm'
   programUnknownUser: 'Perdorues i paidentifikuar'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat Account Confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 passwordRecovery:
   subject: Rigjenerimi Fjalëkalimit tuaj
   message: |
-    I dashur %username%.
+    Dear %username%.
 
-    Keni kërkuar të riktheni fjalëkalimin tuaj për %appplication_url% sepse e keni harruar fjalëkalimin. Nëse ju nuk e keni kërkuar këtë, ju lutem injoroje këtë mesazh. Kërkesa do të mbaroj dhe do të bëhet e pavlefshme pas 24 orëve. Për ta rikthyer fjalëkalimin tuaj dhe për të krijuar një tjetër, ju lutem vizitoni faqen në vazhdim:%confirmationUrl%
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
 
-    Mund ta përdorni emrin dhe fjalëkalimin tuaj për të pasur qasje në çdo kohë në %appplication_url% komunitet.
-    Për ta bërë këtë, vizitoni: %loginPage%
-    Për ti ndryshuar të dhënat tuaja, vizitoni: %profilePage%
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
 
-    Përshëndetje të sinqerta,
-    Ekipa Catrobat.
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 profile:
   edit: Edit your profile
   saveChanges: ruaj ndryshimet
@@ -492,6 +531,7 @@ login:
   recoverPass: Rikthe fjalekalimin
   recoverPassSend: Një E-mail është dërguar tek ti. Ju lutem, shikoni postën tuaj.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Emër përdoruesi ose E-email
   changePass: Ndrysho fjalëkalimin
   createAccount: Krijoni një llogari
@@ -514,6 +554,7 @@ errors:
     exists: This username already exists.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'

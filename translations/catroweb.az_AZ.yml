@@ -1,61 +1,61 @@
 ---
-localLanguage: English
+localLanguage: İngiliscə
 username: İstifadəçi adı
 password: Şifrə
 accountSettings: Account Settings
-email: E-Mail
+email: E-poçt
 aboutPocketCode: Pocket Code haqqında
 aboutCatrobat: Catrobat haqqında
 tutorials: Məşqlər
 googlePlay: Google Play
 iosAppStore: IOS App store
-passwordsNoMatch: The passwords didn't match.
+passwordsNoMatch: Şifrələr uyğunlaşmır.
 error: Səhv
 cancel: İmtina et
-report: Report
+report: Xəbər ver
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download as program
+download: Proqramı endir
 description: Description
-noDescription: No description available.
+noDescription: Açıqlama yoxdur.
 country: Ölkə
-loginText: login
-privacyPolicy: Privacy Policy
+loginText: giriş
+privacyPolicy: Gizlilik Siyasəti
 imprint: Imprint
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+somethingWentWrong: 'Ups, nəsə səhv getdi.'
+pleaseTryAgain: 'Zəhmət olmasa yenidən sına!'
+oldVersionError: 'Ən yeni Cib Kodu versiyasına yenilə!'
+more: 'daha çox'
+less: 'daha az'
 show-more: 'Show more'
 show-less: 'Show less'
 ok: Oldu
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+clickToDownloadProgram: 'Nümunə proqramını endirmək üçün %link_start% bura %link_end% klikləyin.'
+registrationError: 'İstifadəçi adı və ya e-poçt ünvanı artıq istifadədədir.'
+notifications: 'Bildirişlər'
+wellDone: "Təbriklər!"
+done: "Hazırdır!"
+notificationsReadMessage: "Bütün bildirişləri oxudunuz."
+notificationsClearedMessage: "Bütün bildirişlər oxunmuş kimi işarələndi."
+clearAllNotificationsButtonTitle: "Hamısını oxundu kimi işarələ"
+notificationsClearError: "Bildirişlər oxunmuş kimi işarələnə bilmədi!"
+pleaseWait: "Zəhmət olmasa gözləyin..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
+      title: 'Burada hansı proqramlar tövsiyyə olunur?'
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
-    subtitle: Create stories, games and more...
-    download: Download the app
-    statistics: More Statistics
-  featured: Featured
-  newest: Newest programs
-  recommended: Recommended programs
+    subtitle: Hekayələr, oyunlar və daha çoxunu yarat...
+    download: Tətbiqi endir
+    statistics: Daha Çox Statistika
+  featured: Təklif Edilən
+  newest: Ən yeni proqramlar
+  recommended: Tövsiyyə edilən proqramlar
   noPrograms: There are currently no programs.
   deleteConfirmation: |+
     Are you sure?
@@ -74,32 +74,32 @@ programs:
   tooLongDescription: The program description is too long!
   rudeWordsInDescription: You can't use rude words in your description!
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random Programs
-  related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
+    viewed: Ən çox baxılan
+    downloaded: Ən çox endirilən
+  random: Təsadüfi Proqramlar
+  related: Əlaqəli Proqramlar
+  downloads: '%downloads% endirmə'
+  sample: Nümunə Proqramlar
+  views: '%views% baxış'
   likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
   likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
   likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  submitted: Göndərilən Proqramlar
+  uploaded: Yüklənmiş Proqramlar
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report program
   languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: Please %login% to report this program.
   reportDialogHeader: Why do you want to report this program?
-  reportDialogReason: Enter a reason
+  reportDialogReason: Bir səbəb daxil et
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
   reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own program.
+  reportOwnProgram: Öz proqramınızı uyğunsuz kimi işarələyə bilməzsiniz.
   reportAlready: You've already flagged this program.
   reportDone: You reported this program!
   updateAppHeader: Update App
@@ -110,7 +110,7 @@ programs:
   comments: Comments
   send: Send
   delete: Sil
-  report: Report
+  report: Xəbər ver
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
@@ -133,12 +133,34 @@ remixGraph:
   programNotAvailableErrorDescription: 'The program is not available any more!'
   programNotAvailable: 'Not available'
   programUnknownUser: 'Unknown User'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat Account Confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
     Dear %username%.
 
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+
     To reset your password and create a new one, please visit the following page: %confirmationUrl%
 
     You can use your username and your password at any time to access the %appplication_url% community.
@@ -147,6 +169,22 @@ passwordRecovery:
 
     Best regards,
     Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 profile:
   edit: Edit your profile
   saveChanges: save changes
@@ -171,34 +209,34 @@ profile:
     emailExists: This email address already exists.
     submitSuccess: saved!
   reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
-  changePicture: Change picture
+  programsOf: Proqramlar
+  changePicture: Şəkli dəyişdir
   avatar:
     noImage: No Image!
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    pictureTooLarge: Seçdiyiniz şəkil çox böyükdür, zəhmət olmasa 5 MB-dan böyük şəkilləri istifadə etməyin.
+    uploadError: Təəssüf edirik, yüklənərkən problem yarandı.
+    noSupport: Bu təsvir növü dəstəklənmir, zəhmət olmasa başqasını sınayın.
 myprofile:
-  editProfile: Edit profile
+  editProfile: Profilə düzəliş et
   edit: Edit
   done: Done
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
-  deleteAccount: Delete Account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  email: E-poçt
+  editAvatar: Avatara düzəliş et
+  editUsername: İstifadəçi adına düzəliş et
+  editPassword: Şifrəyə düzəliş et
+  editCountry: Ölkəyə düzəliş et
+  editEmail: E-poçta düzəliş et
+  deleteAccount: Hesabı Sil
+  deleteAccountText: Hesabınızı silmək istədiyinizə əminsiniz? Bu yüklədiyiniz proqramları və rəyləri siləcək!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
   notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
+  link: 'Oynamaq üçün lisenziya'
+  title: 'Oynamaq üçün lisenziya - Kredit ver və paylaş'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
@@ -209,15 +247,14 @@ licenseToPlay:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
-
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat Community!
+  title: İstifadə Şərtləri
+  headline: Catrobat Cəmiyyətinə Xoş Gəldiniz!
   text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text4: 'Sizə hədiyyəmiz:'
+  text5: 'İstifadə və Xidmət Şərtlərimiz:'
   list1:
     item1: from many different countries and cultures
     item2: of all ages (from young children to teens and grandparents)
@@ -270,7 +307,7 @@ help:
         special2: 'Choose from gallery.'
         special3: 'Take a picture.'
     step3:
-      title: "Start Moving"
+      title: "Hərəkətə Başla"
       detail:
         text1: 'Tap:'
         text2: 'The first brick we use is out of the category "Motion".'
@@ -279,7 +316,7 @@ help:
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
         text6: 'Use the Android Back Button to get back from the stage.'
     step4:
-      title: "Change Look"
+      title: "Baxışı Dəyişdir"
       description: "You can change the look of your object."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
@@ -296,8 +333,8 @@ help:
         text2: 'Snap the brick underneath the "Switch to look" brick.'
         text3: 'Tap play to see the behaviour on the stage.'
     step6:
-      title: 'Again and again'
-      description: "This step shows you how to repeat behaviour of objects."
+      title: 'Təkrar təkrar'
+      description: "Bu addım, obyektlərin davranışlarının necə təkrar ediləcəyini göstərər."
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
         text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
@@ -325,18 +362,18 @@ help:
         text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
         text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
-      title: "Change the background"
+      title: "Arxaplanı dəyişdir"
       description: "This is the overview of your objects and your program's background."
       detail:
         text1: 'The background is like an object, but you just can have one background.'
         text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
-      title: "Main Menu"
+      title: "Əsas Menyu"
       description: "Use the Android Back Button to get to this screen."
       detail:
         text1: 'Continue with your currently opened program.'
-        text2: 'Add a new program.'
-        text3: 'See all your local programs.'
+        text2: 'Yeni bir proqram əlavə et.'
+        text3: 'Bütün yerli proqramlarınıza baxın.'
         text4: 'Go to the help site and discuss with other users.'
         text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
         text6: 'Upload the program that is currently opened.'
@@ -353,7 +390,7 @@ help:
       one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: "Change Look"
+      title: "Baxışı Dəyişdir"
       description: "Change the looks of an object."
       one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
@@ -494,6 +531,7 @@ login:
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
@@ -516,6 +554,7 @@ errors:
     exists: This username already exists.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -671,7 +710,7 @@ footer:
   communityStats: Community Stats
   download: Get the App
 privacy-policy:
-  header: Privacy Policy
+  header: Gizlilik Siyasəti
   version: Version 2.1, 25 June 2018
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.

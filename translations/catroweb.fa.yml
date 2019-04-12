@@ -133,21 +133,58 @@ remixGraph:
   programNotAvailableErrorDescription: 'این برنامه بهیچ وجه در دسترس نیست!'
   programNotAvailable: 'در دسترس نیست'
   programUnknownUser: 'کاربر ناشناس'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat Account Confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 passwordRecovery:
   subject: بازیابی رمز عبورت در کت ربات
   message: |
-    %username% عزیز.
+    Dear %username%.
 
-    تو می خواستی رمز عبورت را از %appplication_url% احیا کنی چون فراموشش کرده بودی. اگر این خواسته ی تو نبوده. پس بی خیالش شو. خودش تا 24 ساعت آینده از اعتبار ساقط میشه.
-    برای احیای رمز عبورت و ساختن یکی دیگه، لطفا به این آدرس مراجعه کن:
-    %confirmationUrl%
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
 
-    تو میتونی از نام کاربری و رمز عبورت در هر زمانی برای دسترسی به انجمن %appplication_url% استفاده کنی.
-    برای این کار فقط به این آدرس مراجعه کن: %loginPage%
-    برای اصلاح جزییات مشخصاتت، به این آدرس سر بزن: %profilePage%
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
 
-    با احترام،
-    تیم کت ربات.
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 profile:
   edit: Edit your profile
   saveChanges: ذخیره تغییرات
@@ -492,6 +529,7 @@ login:
   recoverPass: بازیابی رمز عبور
   recoverPassSend: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: نام کاربری یا ایمیل
   changePass: تغییر رمز عبور
   createAccount: ایجاد یک حساب کاربری
@@ -514,6 +552,7 @@ errors:
     exists: در حال حاضراین نام کاربری وجود دارد.
     not_exists: این نام کاربری وجود ندارد.
     not_email: نام کاربری نباید آدرس ایمیل باشه.
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: تو رمزعبوری وارد نکردی.
     short: 'رمز عبورت باید حداقل  {{ limit }} نویسه داشته باشه.'
