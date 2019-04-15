@@ -16,6 +16,10 @@ h1 {
   }
 }
 
+#newest, #recommended, #mostDownloaded, #mostViewed, #random {
+  display: none;
+}
+
 .visited-program {
   opacity: 0.6;
   a {

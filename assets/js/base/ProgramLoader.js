@@ -26,13 +26,6 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
     $.get(self.url, {limit: self.initial_download_limit, offset: self.amount_of_loaded_programs}, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
       {
-        let url = Routing.generate('translate_word', {
-          'word'  : 'programs.noPrograms',
-          'domain': 'catroweb'
-        })
-        $.get(url, function (data) {
-          $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>')
-        })
         return
       }
       self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
