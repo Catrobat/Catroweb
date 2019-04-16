@@ -36,6 +36,6 @@ Feature: Recommendations on homepage (a.k.a. index page)
 
     When I am on "/pocketcode/"
     And the selected language is "English"
-    And I should see "Recommended programs"
-    And the element "#recommended" should be visible
+    And I should not see "Recommended programs"
+    And the element "#recommended" should not be visible
     Then I should not see any recommended homepage programs
