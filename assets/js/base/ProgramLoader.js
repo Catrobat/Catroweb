@@ -20,7 +20,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
   self.total_amount_of_found_programs = 0
   self.default_amount_of_visible_programs = 3
   self.is_init = true
-  
+
   self.init = function () {
     self.restoreParamsWithSessionStorage()
     $.get(self.url, {limit: self.initial_download_limit, offset: self.amount_of_loaded_programs}, function (data) {
@@ -33,7 +33,6 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
         $.get(url, function (data) {
           $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>')
         })
-        return
       }
       self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
       self.setup(data)
