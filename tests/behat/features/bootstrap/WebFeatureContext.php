@@ -1533,6 +1533,16 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I should receive a file named "([^"]*)"$/
+   * @param $name
+   */
+  public function iShouldReceiveAFileNamed($name)
+  {
+    $content_disposition = $this->getClient()->getResponse()->headers->get('Content-Disposition');
+    Assert::assertEquals('attachment; filename="' . $name . '"', $content_disposition);
+  }
+
+  /**
    * @Given /^the response code should be "([^"]*)"$/
    * @param $code
    */

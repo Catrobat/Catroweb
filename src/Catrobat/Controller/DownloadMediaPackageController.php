@@ -19,7 +19,8 @@ class DownloadMediaPackageController extends Controller
 {
 
   /**
-   * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"},
+   *                                methods={"GET"})
    *
    * @param Request $request
    * @param         $id
@@ -51,9 +52,15 @@ class DownloadMediaPackageController extends Controller
       $em->flush();
 
       $response = new BinaryFileResponse($file);
+
+      // replace special characters in filename and replace them with -
+      $filename = preg_replace('/[^A-Za-z0-9-_. ()]/', '-', $media_file->getName());
+      // replace multiple following - with a single one
+      $filename = preg_replace('/-+/', '-', $filename);
+
       $d = $response->headers->makeDisposition(
         ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-        $media_file->getId() . '.' . $media_file->getExtension()
+        $filename . '.' . $media_file->getExtension()
       );
       $response->headers->set('Content-Disposition', $d);
 
