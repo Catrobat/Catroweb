@@ -133,57 +133,57 @@ remixGraph:
   programNotAvailableErrorDescription: 'Il programma non è più disponibile!'
   programNotAvailable: 'Non disponibile'
   programUnknownUser: 'Utente sconosciuto'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: Questo è un messaggio automatico - Per favore non rispondere a questa email.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Conferma creazione account Catrobat
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Gentile %username%.
+    per completare l'attivazione del tuo account vai a questa pagina %confirmationUrl%
+    Il link può essere usato una sola volta per la validazione dell'account.
+    Cordiali saluti,
+    il Team di Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Gentile %username%.
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
     <br>
-    This link can only be used once to validate your account.<br>
+    per completare l'attivazione del tuo account vai a <a href=%confirmationUrl%>questa pagina.</a><br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Il link può essere usato una sola volta per la validazione dell'account.
+    <br>
+    <br>
+    Cordiali saluti,<br>
+    il Team di Catrobat.
     </p>
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
-    Dear %username%.
+    Gentile %username%.
 
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    Hai richiesto di reimpostare la tua password su %appplication_url% perché dimenticata. Se non l'hai richiesto tu, ignora questo messaggio. La richiesta diventerà obsoleta in 24 ore.
+    Se invece la vuoi reimpostare, vai alla seguente pagina: %confirmationUrl%
 
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Puoi usare il tuo nome utente e la password per accedere alla comunità %appplication_url%.
+    Per farlo vai alla seguente pagina: %loginPage%
+    Per modificare il tuo profilo vai alla pagina: %profilePage%
 
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-
-    Best regards,
-    Your Catrobat Team.
+    Cordiali saluti,
+    Il Team di Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Gentile %username%.<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Hai chiesto un reset della tua password su <a href=%appplication_url%>Pocket Code</a> perché l'hai dimenticata.
+    Se non sei stato tu a richiederlo, ignora questo messaggio: diventerà obsoleto in 24 ore.<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    Per reimpostare la tua password a crearne una nuova, fai clic <a href=%confirmationUrl%>qui.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    Puoi sempre utilizzare il tuo nome utente e la tua password per accedere alla community di <a href=%appplication_url%>Pocket Code</a>.<br>
+    Puoi entrare nella tua <a href=%loginPage%>pagina di login</a><br>
+    Per modificare i dettagli del tuo profilo va a <a href=%profilePage%>questa pagina</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Cordiali saluti,<br>
+    Il Team di Catrobat.
     </p>
 profile:
   edit: Modifica il tuo profilo
@@ -529,7 +529,7 @@ login:
   recoverPass: Recupera password
   recoverPassSend: Una mail è stata inviata al tuo indirizzo email. Controlla la tua casella di posta.
   alreadyReset: La password per questo utente è già stata richiesta nelle ultime 24 ore.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  confirmationSend: Ti è stata inviata un'email per confermare la tua registrazione. Controlla la tua casella di posta e attiva il tuo account.
   userOrEmail: Nome utente o Email
   changePass: Cambia password
   createAccount: Crea un account
@@ -552,7 +552,7 @@ errors:
     exists: Il nome utente esiste già.
     not_exists: Il nome utente non esiste.
     not_email: Il nome utente non può essere un indirizzo email.
-    size: The username must have at least 3 character and not more than 180
+    size: Il nome utente deve avere almeno 3 caratteri e non più di 180
   password:
     blank: Manca la password.
     short: 'La tua password deve avere almeno {{ limit }} caratteri.'

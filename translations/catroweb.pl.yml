@@ -133,25 +133,25 @@ remixGraph:
   programNotAvailableErrorDescription: 'Program nie jest już dostępny!'
   programNotAvailable: 'Niedostępny'
   programUnknownUser: 'Nieznany użytkownik'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Potwierdzenie konta Catrobat
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Drogi %username%.
+    Aby zakończyć aktywację konta - odwiedź stronę %confirmationUrl%
+    Ten link może zostać użyty tylko raz do zweryfikowania konta.
+    Z poważaniem,
+    Twój zespół Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Drogi %username%.<br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    Aby dokończyć aktywację konta - kliknij <a href=%confirmationUrl%>tutaj.</a><br>
     <br>
-    This link can only be used once to validate your account.<br>
+    Ten link może zostać użyty tylko raz do zweryfikowania konta.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Pozdrawiamy<br>
+    Twój zespół Catrobat.
     </p>
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
@@ -171,19 +171,19 @@ passwordRecovery:
     Your Catrobat Team.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Drogi %username%.<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Żądasz zresetowania swojego hasła do <a href=%appplication_url%>Pocket Code</a> ponieważ je zapomniałeś.
+    Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna.<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    Aby zresetować hasło i stworzyć nowe, kliknij <a href=%confirmationUrl%>tutaj.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności <a href=%appplication_url%>Pocket Code</a>.<br>
+    Aby to zrobić, odwiedź następującą stronę: <a href=%loginPage%>Strona logowania</a><br>
+    Aby edytować swój profil, przejdź do tej <a href=%profilePage%>strony</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Pozdrawiamy,<br>
+    Twój zespół Catrobat.
     </p>
 profile:
   edit: Edytuj swój profil
@@ -527,7 +527,7 @@ login:
   recoverPass: Odzyskaj hasło
   recoverPassSend: E-mail został wysłany na Twój adres. Sprawdź swoją skrzynkę odbiorczą.
   alreadyReset: Hasło tego użytkownika zostało już wysłane w ciągu ostatnich 24 godzin.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  confirmationSend: Wiadomość z potwierdzeniem rejestracji została wysłana na Twój adres e-mail. Sprawdź swoją skrzynkę odbiorczą i aktywuj swoje konto.
   userOrEmail: Nazwa użytkownika lub e-mail
   changePass: Zmień hasło
   createAccount: Utwórz konto
@@ -550,7 +550,7 @@ errors:
     exists: Ta nazwa użytkownika już istnieje.
     not_exists: Ta nazwa użytkownika nie istnieje.
     not_email: Twoja nazwa użytkownika nie może być adresem e-mail.
-    size: The username must have at least 3 character and not more than 180
+    size: Nazwa użytkownika musi mieć co najmniej 3 znaki i nie więcej niż 180
   password:
     blank: Brakuje hasła.
     short: 'Hasło musi mieć co najmniej {{ limit }} znaków.'
@@ -774,5 +774,5 @@ flavor:
   pocketalice: Pocket Alice
   pocketgalaxy: Galaxy Jam
   phirocode: PhiroCode
-  luna: Luna & Cat
+  luna: Księżyc & Kot
   create@school: Create@School
