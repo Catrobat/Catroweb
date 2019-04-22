@@ -133,20 +133,58 @@ remixGraph:
   programNotAvailableErrorDescription: 'プログラムはもう利用できません!'
   programNotAvailable: '利用できません'
   programUnknownUser: '不明なユーザー'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat Account Confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
-    %username% 様。
+    Dear %username%.
 
-    あなたは、パスワードを忘れたため %appplication_url% にパスワードのリセットを要求しました。これを要求していない場合は、無視してください。これは 24 時間で有効期限が切れて、無効になります。
-    あなたのパスワードをリセットして、新しいく作成する場合は、次のページを参照してください: %confirmationUrl%
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
 
-    %appplication_url% コミュニティにアクセスして、いつでもあなたのユーザー名とパスワードを使用することができます。
-    これを行うには、次のページにアクセスしてください: %loginPage%
-    プロフィールの詳細を編集するには、このページを参照してください: %profilePage%
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
 
-    よろしくお願いします。
-    Catrobat チーム。
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 profile:
   edit: Edit your profile
   saveChanges: 変更を保存します。
@@ -492,6 +530,7 @@ login:
   recoverPass: パスワードの回復
   recoverPassSend: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。
   alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: ユーザー名またはメールアドレス
   changePass: パスワードを変更する
   createAccount: アカウントを作成
@@ -514,6 +553,7 @@ errors:
     exists: このユーザー名は既に存在します。
     not_exists: このユーザー名は存在しません。
     not_email: ユーザー名に、電子メール アドレスは使えません。
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: パスワードがありません。
     short: 'パスワードは、少なくとも {{ limit }} 文字必要です。'

@@ -49,7 +49,7 @@ indexPage:
       description: 'Più sono i Like (tra cui "Thumbs up", "Sorrisi", "Love" e "Woow!") ricevuti dal programma, più in alto appare nell''elenco.'
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: Benvenuto su Catrobat %theme%
     subtitle: Crea storie, giochi e molto altro...
     download: Scarica l'app
     statistics: Più statistiche
@@ -133,6 +133,28 @@ remixGraph:
   programNotAvailableErrorDescription: 'Il programma non è più disponibile!'
   programNotAvailable: 'Non disponibile'
   programUnknownUser: 'Utente sconosciuto'
+noReply: Questo è un messaggio automatico - Per favore non rispondere a questa email.
+accountConfirmation:
+  subject: Conferma creazione account Catrobat
+  message: |
+    Gentile %username%.
+    per completare l'attivazione del tuo account vai a questa pagina %confirmationUrl%
+    Il link può essere usato una sola volta per la validazione dell'account.
+    Cordiali saluti,
+    il Team di Catrobat.
+  messageHtml: |
+    <p>
+    Gentile %username%.
+    <br>
+    <br>
+    per completare l'attivazione del tuo account vai a <a href=%confirmationUrl%>questa pagina.</a><br>
+    <br>
+    Il link può essere usato una sola volta per la validazione dell'account.
+    <br>
+    <br>
+    Cordiali saluti,<br>
+    il Team di Catrobat.
+    </p>
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -141,12 +163,28 @@ passwordRecovery:
     Hai richiesto di reimpostare la tua password su %appplication_url% perché dimenticata. Se non l'hai richiesto tu, ignora questo messaggio. La richiesta diventerà obsoleta in 24 ore.
     Se invece la vuoi reimpostare, vai alla seguente pagina: %confirmationUrl%
 
-    Puoi usare il tuo nome utente e la password per accedere alla comunità %appplication_url% .
+    Puoi usare il tuo nome utente e la password per accedere alla comunità %appplication_url%.
     Per farlo vai alla seguente pagina: %loginPage%
     Per modificare il tuo profilo vai alla pagina: %profilePage%
 
     Cordiali saluti,
     Il Team di Catrobat.
+  messageHtml: |
+    <p>
+    Gentile %username%.<br>
+    <br>
+    Hai chiesto un reset della tua password su <a href=%appplication_url%>Pocket Code</a> perché l'hai dimenticata.
+    Se non sei stato tu a richiederlo, ignora questo messaggio: diventerà obsoleto in 24 ore.<br>
+    <br>
+    Per reimpostare la tua password a crearne una nuova, fai clic <a href=%confirmationUrl%>qui.</a><br>
+    <br>
+    Puoi sempre utilizzare il tuo nome utente e la tua password per accedere alla community di <a href=%appplication_url%>Pocket Code</a>.<br>
+    Puoi entrare nella tua <a href=%loginPage%>pagina di login</a><br>
+    Per modificare i dettagli del tuo profilo va a <a href=%profilePage%>questa pagina</a>.<br>
+    <br>
+    Cordiali saluti,<br>
+    Il Team di Catrobat.
+    </p>
 profile:
   edit: Modifica il tuo profilo
   saveChanges: salva le modifiche
@@ -491,6 +529,7 @@ login:
   recoverPass: Recupera password
   recoverPassSend: Una mail è stata inviata al tuo indirizzo email. Controlla la tua casella di posta.
   alreadyReset: La password per questo utente è già stata richiesta nelle ultime 24 ore.
+  confirmationSend: Ti è stata inviata un'email per confermare la tua registrazione. Controlla la tua casella di posta e attiva il tuo account.
   userOrEmail: Nome utente o Email
   changePass: Cambia password
   createAccount: Crea un account
@@ -513,6 +552,7 @@ errors:
     exists: Il nome utente esiste già.
     not_exists: Il nome utente non esiste.
     not_email: Il nome utente non può essere un indirizzo email.
+    size: Il nome utente deve avere almeno 3 caratteri e non più di 180
   password:
     blank: Manca la password.
     short: 'La tua password deve avere almeno {{ limit }} caratteri.'
@@ -541,7 +581,7 @@ errors:
   image.missing: Nel file XML del progetto si menziona un file che non c'è nella cartella del progetto
   unknown: errore sconosciuto
   token: 'Autenticazione del dispositivo non riuscita: auth-token non valido!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  uploadTokenAuthFailed: 'Upload token di Autenticazione fallito.'
   programname:
     rude: Il nome del programma non deve contenere parolacce.
   program:
@@ -665,7 +705,7 @@ footer:
   usefulLinks: Link utili
   legalities: Informazioni legali
   communityStats: Statistiche sulla community
-  download: Get the App
+  download: Scarica l'app
 privacy-policy:
   header: Informativa sulla privacy
   version: Versione 2.1, 25 giugno 2018
@@ -707,21 +747,21 @@ help-cards:
     starters: Iniziali
     tutorials: Tutorial
     stepbystep: Passo dopo passo
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
+    getinvolvedGoogle: Scaricalo da Google Play
+    getinvolvedApple: Scaricalo su IOS
     game_design: Game Design
-    education: Education platform
-    discuss: Discuss
+    education: Piattaforma di formazione
+    discuss: Discuti
   text:
     starters: Provalo e fai un remix
     tutorials: Trucchi efficaci per
     stepbystep: Fai 10 semplici passi in
-    getinvolved: Download the app and get started
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
+    getinvolved: Scarica l'app e inizia
+    game_design_1: Trucchi efficaci per
+    game_design_2: creare un gioco
+    education: Corso per principianti e risorse interessanti
+    discuss_1: Contatta altri
+    discuss_2: utenti
 media-packages:
   title: Risorse multimediali
   description: Nelle seguenti categorie puoi trovare altri oggetti da aggiungere ai tuoi programmi creati con PocketCode.

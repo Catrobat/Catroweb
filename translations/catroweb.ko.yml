@@ -133,17 +133,58 @@ remixGraph:
   programNotAvailableErrorDescription: '프로그램은 더 이상 사용할 수 없습니다!'
   programNotAvailable: '사용할수 없음'
   programUnknownUser: '알 수 없는 사용자'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat Account Confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
-    친애 하는 %username%.  당신은 비밀 번호를 잊어버려서 %appplication_url%에 비밀 번호 재설정을 요청 했습니다. 요청하지 않은 경우에는 무시하시기 바랍니다. 해지되어 24시간이내에 사용할 수 없게 될 것입니다. 비밀 번호를 재설정하고 새로운 비밀번호를 만들려면, 다음 페이지를 방문 하세오: %confirmationUrl%
+    Dear %username%.
 
-    당신은  %appplication_url% 커뮤니티에 언제라도 사용하기 위해서  사용자 이름과 비밀 번호를 사용할 수 있습니다.
-    그렇게 하려면 다음 페이지를 방문하십시오: %loginPage%
-    당신의 프로필 세부 정보를 편집하려면 이 페이지로 이동: %profilePage% 
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
 
-    안녕하세요, 
-    Catrobat 팀.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 profile:
   edit: Edit your profile
   saveChanges: 변경내용을 저장
@@ -485,6 +526,7 @@ login:
   recoverPass: 비밀번호 복구
   recoverPassSend: 이메일이 귀하의 이메일 주소로 보냈습니다. 받은 편지함을 확인하시기 바랍니다.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: 사용자명 또는 이메일
   changePass: 비밀번호 변경하기
   createAccount: 계정 만들기
@@ -507,6 +549,7 @@ errors:
     exists: 이름이 이미 존재합니다.
     not_exists: 사용자 이름이 존재하지 않습니다.
     not_email: 사용자 이름으로 메일 주소를 사용할 수 없습니다.
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: 암호가 없습니다.
     short: '새 암호는 적어도 %length% 문자 이상이어야 합니다.'
