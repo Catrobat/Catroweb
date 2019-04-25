@@ -483,9 +483,11 @@ input[type='number']
 
 @include media-breakpoint-down(md)
 {
-  #program-user
+  #program-top
   {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
   }
 
   #program-middle
