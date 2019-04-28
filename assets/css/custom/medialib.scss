@@ -71,6 +71,11 @@ $border-spacing: 8px;
       {
         font-size: $tile-size - 15px;
       }
+
+      &.flavored
+      {
+        order: -1;
+      }
     }
   }
 }

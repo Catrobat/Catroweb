@@ -2432,7 +2432,10 @@ class ApiFeatureContext extends BaseContext
       $old_files = $old_files == null ? [] : $old_files;
       array_push($old_files, $new_file);
       $category->setFiles($old_files);
-
+      if(!empty($file['flavor']))
+      {
+        $new_file->setFlavor($file['flavor']);
+      }
       $new_file->setAuthor($file['author']);
 
       $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' .

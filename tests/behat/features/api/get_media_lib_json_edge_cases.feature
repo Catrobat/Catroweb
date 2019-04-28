@@ -20,11 +20,33 @@ Feature: Getting data from the media lib api even though no data is present shou
     }
     """
 
+  Scenario: get all files from a media lib package byNameUrl when the package does not exist
+    When I GET from the api "/pocketcode/api/media/packageByNameUrl/looks/json"
+    Then I should get the json object:
+    """
+    {
+      "statusCode": 523,
+      "message": "looks not found"
+    }
+    """
+
   Scenario: get all files from a media lib package when the package does exist but there are no categories
     Given there are mediapackages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
     When I GET from the api "/pocketcode/api/media/package/Looks/json"
+    Then I should get the json object:
+    """
+    [
+
+    ]
+    """
+
+  Scenario: get all files from a media lib package by nameUrl when the package does exist but there are no categories
+    Given there are mediapackages:
+      | id | name  | name_url |
+      | 1  | Looks | looks    |
+    When I GET from the api "/pocketcode/api/media/packageByNameUrl/looks/json"
     Then I should get the json object:
     """
     [
@@ -87,7 +109,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib category when the category does not exist
-    When I GET from the api "/api/media/category/Animals/json"
+    When I GET from the api "/pocketcode/api/media/category/Animals/json"
     Then I should get the json object:
     """
     {
@@ -103,7 +125,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackage categories:
       | id | name  | package |
       | 1  | Space | Looks   |
-    When I GET from the api "/api/media/category/Space/json"
+    When I GET from the api "/pocketcode/api/media/category/Space/json"
     Then I should get the json object:
     """
     {
