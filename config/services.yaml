@@ -421,6 +421,7 @@ services:
       - "@usermanager"
       - "@userlikesimilarityrelationrepository"
       - "@userremixsimilarityrelationrepository"
+      - "@programrepository"
       - "@programlikerepository"
       - "@programremixrepository"
       - "@programremixbackwardrepository"

@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Entity\UserTestGroup;
 use App\Entity\ProgramManager;
 use App\Catrobat\StatusCode;
 use Symfony\Component\HttpFoundation\Request;
@@ -113,10 +114,61 @@ class RecommenderController extends Controller
 
     $user = ($test_user_id_for_like_recommendation == 0) ?
       $this->getUser() : $this->get('usermanager')->find($test_user_id_for_like_recommendation);
-    if ($user != null)
+
+    /*
+     * This part of the Recommender Controller is currently modified due to an online
+     * experiment that will take place as a part of a master's thesis. Basically users are
+     * assigned to one of three test groups and are presented with a modified version of
+     * the recommender system algorithm accordingly to their group.
+     *
+     * The following "if" is a workaround to pass the old behat tests from the file
+     * get_recommended_programs_homepage.feature by only using the algorithm that the
+     * tests have been designed for originally. I have tested all 3
+     * recommendedHomepageProgramsAlgorithms with behat individually, which didn't require
+     * much change to the current test file. To re-write the behat tests of this file to
+     * fit the online experiment where the 3 different algorithms are compared would add
+     * unnecessary clutter that will be removed after the online experiment anyway. The
+     * behat file will be updated after the online experiment accordingly.
+     */
+    if ($is_test_environment && $user != null)
     {
       $recommender_manager = $this->get('recommendermanager');
-      $all_programs = $recommender_manager->recommendProgramsOfLikeSimilarUsers($user, $flavor);
+      $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmOne($user, $flavor);
+      $programs_count = count($all_programs);
+      $programs = array_slice($all_programs, $offset, $limit);
+    }
+
+    // Users are assigned to a test group if they aren't already part of one.
+    else if ($user != null)
+    {
+      $user_id = $user->getId();
+      $em = $this->getDoctrine()->getManager();
+      $user_test_group = $em->find(UserTestGroup::class, $user_id);
+      if (!$user_test_group)
+      {
+        $user_test_group = new UserTestGroup($user_id, rand(1, 3));
+        $em->persist($user_test_group);
+        $em->flush();
+      }
+
+      $recommender_manager = $this->get('recommendermanager');
+
+      // Depending on the user's test group different algorithms are presented.
+      switch ($user_test_group->getGroupNumber())
+      {
+        case 1:
+          $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmOne($user, $flavor);
+          break;
+        case 2:
+          $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmTwo($user, $flavor);
+          break;
+        case 3:
+          $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmThree($user, $flavor);
+          break;
+        default:
+          $all_programs = [];
+      }
+
       $programs_count = count($all_programs);
       $programs = array_slice($all_programs, $offset, $limit);
     }
