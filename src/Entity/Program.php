@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -36,8 +37,8 @@ class Program
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(name="id", type="guid")
+   * @ORM\GeneratedValue(strategy="UUID")
    */
   protected $id;
 
@@ -63,7 +64,7 @@ class Program
   protected $user;
 
   /**
-   * @var \Doctrine\Common\Collections\Collection|Tag[]
+   * @var Collection|Tag[]
    *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Tag", inversedBy="programs")
    * @ORM\JoinTable(
@@ -79,7 +80,7 @@ class Program
   protected $tags;
 
   /**
-   * @var \Doctrine\Common\Collections\Collection|Extension[]
+   * @var Collection|Extension[]
    *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Extension", inversedBy="programs")
    * @ORM\JoinTable(
@@ -181,7 +182,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|ProgramRemixRelation[]
+   * @var Collection|ProgramRemixRelation[]
    */
   protected $catrobat_remix_ancestor_relations;
 
@@ -192,7 +193,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|ProgramRemixBackwardRelation[]
+   * @var Collection|ProgramRemixBackwardRelation[]
    */
   protected $catrobat_remix_backward_parent_relations;
 
@@ -203,7 +204,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|ProgramRemixRelation[]
+   * @var Collection|ProgramRemixRelation[]
    */
   protected $catrobat_remix_descendant_relations;
 
@@ -214,7 +215,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|ProgramRemixBackwardRelation[]
+   * @var Collection|ProgramRemixBackwardRelation[]
    */
   protected $catrobat_remix_backward_child_relations;
 
@@ -225,7 +226,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|ScratchProgramRemixRelation[]
+   * @var Collection|ScratchProgramRemixRelation[]
    */
   protected $scratch_remix_parent_relations;
 
@@ -236,7 +237,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|ProgramLike[]
+   * @var Collection|ProgramLike[]
    */
   protected $likes;
 
@@ -1069,7 +1070,7 @@ class Program
   }
 
   /**
-   * @return \Doctrine\Common\Collections\Collection
+   * @return Collection
    */
   public function getProgramDownloads()
   {
@@ -1079,7 +1080,7 @@ class Program
   /**
    * @param ProgramDownloads $program_download
    *
-   * @return ProgramDownloads[]|\Doctrine\Common\Collections\Collection
+   * @return ProgramDownloads[]|Collection
    */
   public function addProgramDownloads(ProgramDownloads $program_download)
   {
@@ -1155,14 +1156,10 @@ class Program
    * Set as remix root.
    *
    * @param bool $is_remix_root
-   *
-   * @return Program
    */
   public function setRemixRoot($is_remix_root)
   {
     $this->remix_root = $is_remix_root;
-
-    return $this;
   }
 
   /**
@@ -1176,7 +1173,7 @@ class Program
   }
 
   /**
-   * @return ProgramRemixRelation[]|\Doctrine\Common\Collections\Collection
+   * @return ProgramRemixRelation[]|Collection
    */
   public function getCatrobatRemixAncestorRelations()
   {
@@ -1186,7 +1183,7 @@ class Program
   }
 
   /**
-   * @return ProgramRemixBackwardRelation[]|\Doctrine\Common\Collections\Collection
+   * @return ProgramRemixBackwardRelation[]|Collection
    */
   public function getCatrobatRemixBackwardParentRelations()
   {
@@ -1196,7 +1193,7 @@ class Program
   }
 
   /**
-   * @return ProgramRemixRelation[]|\Doctrine\Common\Collections\Collection
+   * @return ProgramRemixRelation[]|Collection
    */
   public function getCatrobatRemixDescendantRelations()
   {
@@ -1222,7 +1219,7 @@ class Program
   }
 
   /**
-   * @return ScratchProgramRemixRelation[]|\Doctrine\Common\Collections\Collection
+   * @return ScratchProgramRemixRelation[]|Collection
    */
   public function getScratchRemixParentRelations()
   {
@@ -1232,7 +1229,7 @@ class Program
   }
 
   /**
-   * @return ProgramLike[]|\Doctrine\Common\Collections\Collection
+   * @return ProgramLike[]|Collection
    */
   public function getLikes()
   {
@@ -1240,7 +1237,7 @@ class Program
   }
 
   /**
-   * @param ProgramLike[]|\Doctrine\Common\Collections\Collection $likes
+   * @param ProgramLike[]|Collection $likes
    */
   public function setLikes($likes)
   {
@@ -1248,7 +1245,7 @@ class Program
   }
 
   /**
-   * @return Tag[]|\Doctrine\Common\Collections\Collection
+   * @return Tag[]|Collection
    */
   public function getTags()
   {
@@ -1256,7 +1253,7 @@ class Program
   }
 
   /**
-   * @return Extension[]|\Doctrine\Common\Collections\Collection
+   * @return Extension[]|Collection
    */
   public function getExtensions()
   {

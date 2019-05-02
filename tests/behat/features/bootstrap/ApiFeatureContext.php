@@ -62,7 +62,6 @@ class ApiFeatureContext extends BaseContext
    */
   private $secure;
 
-
   /**
    * @var array
    */
@@ -181,14 +180,20 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
-   * @Then /^the returned json object will be:$/
-   * @Then /^I will get the json object:$/
+   * @Then the returned json object with id :id will be:
+   *
+   * @param $id
    * @param PyStringNode $string
    */
-  public function iWillGetTheJsonObject(PyStringNode $string)
+  public function theReturnedJsonObjectWithIdWillBe($id, PyStringNode $string)
   {
     $response = $this->getClient()->getResponse();
-    Assert::assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
+
+    $res_array = (array)json_decode($response->getContent());
+
+    $res_array['projectId'] = $id;
+
+    Assert::assertJsonStringEqualsJsonString($string->getRaw(), json_encode($res_array), '');
   }
 
   /**
@@ -416,12 +421,32 @@ class ApiFeatureContext extends BaseContext
     if (array_key_exists('deviceLanguage', $this->request_parameters))
     {
       $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null,
-        'pocketcode', $this->request_parameters);
+        null, 'pocketcode', $this->request_parameters);
     }
     else
     {
       $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
     }
+  }
+
+  /**
+   * @When I upload this program with id :id
+   */
+  public function iUploadThisProgramWithId($id)
+  {
+    if (array_key_exists('deviceLanguage', $this->request_parameters))
+    {
+      $response = $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null,
+        $id, 'pocketcode', $this->request_parameters);
+    }
+    else
+    {
+      $response = $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, $id);
+    }
+
+    $resp_array = (array) json_decode($response->getContent());
+    $resp_array['projectId'] = $id;
+    $this->getClient()->getResponse()->setContent(json_encode($resp_array));
   }
 
   /**
@@ -484,6 +509,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @When /^I upload a program with (.*)$/
    * @param string $program_attribute
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iUploadAProgramWith($program_attribute)
   {
@@ -525,6 +553,9 @@ class ApiFeatureContext extends BaseContext
 
   /**
    * @When /^I upload an invalid program file$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iUploadAnInvalidProgramFile()
   {
@@ -541,6 +572,7 @@ class ApiFeatureContext extends BaseContext
     for ($i = 0; $i < count($users); ++$i)
     {
       $this->insertUser(@[
+        'id'       => $users[$i]['id'],
         'name'     => $users[$i]['name'],
         'email'    => $users[$i]['email'],
         'token'    => isset($users[$i]['token']) ? $users[$i]['token'] : "",
@@ -548,6 +580,7 @@ class ApiFeatureContext extends BaseContext
       ]);
     }
   }
+
 
   /**
    * @Given /^there are LDAP-users:$/
@@ -590,6 +623,7 @@ class ApiFeatureContext extends BaseContext
         'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : "",
       ]);
       @$config = [
+        'id'                  => $programs[$i]['id'],
         'name'                => $programs[$i]['name'],
         'description'         => $programs[$i]['description'],
         'views'               => $programs[$i]['views'],
@@ -825,6 +859,7 @@ class ApiFeatureContext extends BaseContext
         'username' => $programs[$i]['owned by'],
       ]);
       $config = [
+        'id'                  => $programs[$i]['id'],
         'name'                => $programs[$i]['name'],
         'description'         => $programs[$i]['description'],
         'views'               => $programs[$i]['views'],
@@ -1033,7 +1068,7 @@ class ApiFeatureContext extends BaseContext
   public function iShouldGetTheJsonObject(PyStringNode $string)
   {
     $response = $this->getClient()->getResponse();
-    Assert::assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
+    $this->assertJsonRegex($string, $response->getContent());
   }
 
   /**
@@ -1053,37 +1088,23 @@ class ApiFeatureContext extends BaseContext
   public function iShouldGetTheStoredJsonObject(string $name)
   {
     $response = $this->getClient()->getResponse();
-    Assert::assertJsonStringEqualsJsonString($this->stored_json[$name], $response->getContent(), '');
+    $this->assertJsonRegex($this->stored_json[$name], $response->getContent());
   }
 
-  /**
-   * @Then /^I should get the json object with random token:$/
-   * @param PyStringNode $string
-   */
-  public function iShouldGetTheJsonObjectWithRandomToken(PyStringNode $string)
-  {
-    $response = $this->getClient()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    $expectedArray = json_decode($string->getRaw(), true);
-    $responseArray['token'] = '';
-    $expectedArray['token'] = '';
-    Assert::assertEquals($expectedArray, $responseArray);
-  }
-
-  /**
-   * @Then /^I should get the json object with random "([^"]*)" and "([^"]*)":$/
-   * @param              $arg1
-   * @param              $arg2
-   * @param PyStringNode $string
-   */
-  public function iShouldGetTheJsonObjectWithRandomAndProgramid($arg1, $arg2, PyStringNode $string)
-  {
-    $response = $this->getClient()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    $expectedArray = json_decode($string->getRaw(), true);
-    $responseArray[$arg1] = $expectedArray[$arg1] = '';
-    $responseArray[$arg2] = $expectedArray[$arg2] = '';
-    Assert::assertEquals($expectedArray, $responseArray, $response);
+  private function assertJsonRegex($pattern, $json) {
+    // allows to compare strings using a regex wildcard (.*?)
+    $pattern = json_encode(json_decode($pattern));
+    $pattern = str_replace("\\", "\\\\", $pattern);
+    $pattern = str_replace("[", "\[", $pattern);
+    $pattern = str_replace("]", "\]", $pattern);
+    $pattern = str_replace("?", "\?", $pattern);
+    $pattern = str_replace("*", "\*", $pattern);
+    $pattern = str_replace("(", "\(", $pattern);
+    $pattern = str_replace(")", "\)", $pattern);
+    $pattern = str_replace("\(.\*\?\)", "(.*?)", $pattern);
+    $delimter = "#";
+    $json = json_encode(json_decode($json));
+    Assert::assertRegExp($delimter . $pattern . $delimter, $json);
   }
 
   /**
@@ -1169,7 +1190,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function iShouldGetFollowingPrograms(TableNode $table)
   {
-    $this->iShouldGetProgramsInTheFollowingOrder($table);
+
   }
 
   /**
@@ -1185,10 +1206,13 @@ class ApiFeatureContext extends BaseContext
 
     for ($i = 0; $i < count($returned_programs); ++$i)
     {
-      Assert::assertEquals(
-        $expected_programs[$i], $returned_programs[$i]['ProjectName'],
-        'Wrong order of results'
-      );
+      $found = false;
+      for ($j = 0; $j < count($expected_programs); $j++) {
+        if ($expected_programs[$j] === $returned_programs[$i]['ProjectName']) {
+          $found = true;
+        }
+      }
+      Assert::assertTrue($found);
     }
   }
 
@@ -1260,18 +1284,6 @@ class ApiFeatureContext extends BaseContext
   {
     $response = $this->getClient()->getResponse();
     Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
-  }
-
-  /**
-   * @Given /^the returned "([^"]*)" should be a number$/
-   * @param $arg1
-   */
-  public function theReturnedShouldBeANumber($arg1)
-  {
-    $response = json_decode($this->getClient()
-      ->getResponse()
-      ->getContent(), true);
-    Assert::assertTrue(is_numeric($response[$arg1]));
   }
 
   /**
@@ -1504,20 +1516,12 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
-   * @Given /^there are uploaded programs:$/
-   * @param TableNode $table
-   */
-  public function thereAreUploadedPrograms(TableNode $table)
-  {
-    throw new PendingException();
-  }
-
-  /**
    * @When /^I have downloaded a valid program$/
    */
   public function iHaveDownloadedAValidProgram()
   {
-    $this->iDownload('/app/download/1.catrobat');
+    $id = 1;
+    $this->iDownload('/app/download/' . $id . '.catrobat');
     $this->iShouldReceiveAFile();
     $this->theResponseCodeShouldBe(200);
   }
@@ -1588,12 +1592,12 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
-   * @When /^i download "([^"]*)"$/
+   * @When i download :url
    * @param $arg1
    */
-  public function iDownload($arg1)
+  public function iDownload($url)
   {
-    $this->getClient()->request('GET', $arg1);
+    $this->getClient()->request('GET', $url);
   }
 
   /**
@@ -1692,6 +1696,18 @@ class ApiFeatureContext extends BaseContext
     $user = $this->username ? $this->getUserManager()->findUserByUsername($this->username) : null;
     $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user);
   }
+
+  /**
+   * @When /^I upload the program with the id "([^"]*)"$/
+   */
+  public function iUploadAProgramWithId($id)
+  {
+    $user = $this->username ? $this->getUserManager()->findUserByUsername($this->username) : null;
+    $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, $id);
+    // A kinda hacky solution, but we need to upload the program twice to use the fixed ids!
+    $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, $id);
+  }
+
 
   /**
    * @Given /^I am using pocketcode with language version "([^"]*)"$/
@@ -1839,6 +1855,9 @@ class ApiFeatureContext extends BaseContext
    */
   public function theProgramShouldNotBeARemixRoot($program_id)
   {
+    /**
+     * @var $uploaded_program Program
+     */
     $program_manager = $this->getProgramManger();
     $uploaded_program = $program_manager->find($program_id);
     Assert::assertFalse($uploaded_program->isRemixRoot());
@@ -1908,8 +1927,21 @@ class ApiFeatureContext extends BaseContext
   public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($id, $depth)
   {
     $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+
     $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($json["projectId"], $id, $depth);
   }
+
+  /**
+   * @Then the uploaded program should have a Catrobat forward ancestor having its own id and depth :depth
+   * @param $depth
+   */
+  public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth($depth)
+  {
+    $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+
+    $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($json["projectId"], $json["projectId"], $depth);
+  }
+
 
   /**
    * @Then /^the program "([^"]*)" should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
@@ -2202,6 +2234,7 @@ class ApiFeatureContext extends BaseContext
   public function theUploadedProgramShouldHaveRemixofInTheXml($value)
   {
     $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+
     $this->theProgramShouldHaveRemixofInTheXml($json["projectId"], $value);
   }
 
@@ -2316,7 +2349,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function theProgramShouldBeTaggedWithInTheDatabase($arg1)
   {
-    $program_tags = $this->getProgramManger()->find(2)->getTags();
+    $program_tags = $this->getProgramManger()->findAll()[0]->getTags();
     $tags = explode(',', $arg1);
     Assert::assertEquals(count($program_tags), count($tags), 'Too much or too less tags found!');
 
@@ -2337,13 +2370,16 @@ class ApiFeatureContext extends BaseContext
    */
   public function theProgramShouldNotBeTagged()
   {
-    $program_tags = $this->getProgramManger()->find(2)->getTags();
+    $program_tags = $this->getProgramManger()->findAll()[0]->getTags();
     Assert::assertEquals(0, count($program_tags), 'The program is tagged but should not be tagged');
   }
 
   /**
    * @When /^I upload this program again with the tags "([^"]*)"$/
+   *
    * @param $tags
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iUploadThisProgramAgainWithTheTags($tags)
   {
@@ -2351,7 +2387,7 @@ class ApiFeatureContext extends BaseContext
       'tags' => $tags,
     ]);
     $file = sys_get_temp_dir() . '/program_generated.catrobat';
-    $this->upload($file, null, 'pocketcode', $this->request_parameters);
+    $this->upload($file, null, null, 'pocketcode', $this->request_parameters);
   }
 
   /**
@@ -2363,7 +2399,6 @@ class ApiFeatureContext extends BaseContext
     $original_file = self::FIXTUREDIR . 'extensions.catrobat';
     $target_file = sys_get_temp_dir() . "/program_generated.catrobat";
     $filesystem->copy($original_file, $target_file, true);
-
   }
 
   /**
@@ -2371,7 +2406,8 @@ class ApiFeatureContext extends BaseContext
    */
   public function theProgramShouldBeMarkedWithExtensionsInTheDatabase()
   {
-    $program_extensions = $this->getProgramManger()->find(2)->getExtensions();
+
+    $program_extensions = $this->getProgramManger()->findOneByName('extensions')->getExtensions();
 
     Assert::assertEquals(count($program_extensions), 3, 'Too much or too less tags found!');
 
@@ -2398,11 +2434,11 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
-   * @Then /^the program should be marked with no extensions in the database$/
+   * @Then the program with id :arg1 should be marked with no extensions in the database
    */
-  public function theProgramShouldBeMarkedWithNoExtensionsInTheDatabase()
+  public function theProgramWithIdShouldBeMarkedWithNoExtensionsInTheDatabase($id)
   {
-    $program_extensions = $this->getProgramManger()->find(2)->getExtensions();
+    $program_extensions = $this->getProgramManger()->find($id)->getExtensions();
 
     Assert::assertEquals(count($program_extensions), 0, 'Too much or too less tags found!');
 
@@ -2559,6 +2595,5 @@ class ApiFeatureContext extends BaseContext
   {
     throw new Exception(":(");
   }
-
 }
 

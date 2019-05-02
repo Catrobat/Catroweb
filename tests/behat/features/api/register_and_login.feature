@@ -18,7 +18,7 @@ Feature: Login with an existing account or register a new one
     When I POST these parameters to "/app/api/register/Register.json"
     Then I should get the json object:
       """
-      {"token":"rrrrrrrrrrr","statusCode":201,"answer":"Registration successful!","preHeaderMessages":""}
+      {"statusCode":201,"answer":"Registration successful!","token":"rrrrrrrrrrr","preHeaderMessages":""}
       """
 
 

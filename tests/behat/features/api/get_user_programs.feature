@@ -5,10 +5,10 @@ Feature: Get users programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
-      | NewUser  | 54321    | bbbbbbbbbb |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
+      | NewUser  | 54321    | bbbbbbbbbb |  3 |
     And there are programs:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -31,39 +31,39 @@ Feature: Get users programs
     """
       {
           "CatrobatProjects":[{
-                                "ProjectId": 2,
+                                "ProjectId": "(.*?)",
                                 "ProjectName":"Minions",
                                 "ProjectNameShort":"Minions",
                                 "Author":"Catrobat",
                                 "Description":"",
                                 "Version":"0.8.5",
-                                "Views":"9",
-                                "Downloads":"33",
+                                "Views":9,
+                                "Downloads":33,
                                 "Private":false,
-                                "Uploaded": 1359723600,
+                                "Uploaded": 1359720000,
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/program/2",
-                                "DownloadUrl":"app/download/2.catrobat",
+                                "ProjectUrl":"app/program/(.*?)",
+                                "DownloadUrl":"app/download/(.*?).catrobat",
                                 "FileSize":0
                             },
                             {
-                                "ProjectId": 6,
+                                "ProjectId": "(.*?)",
                                 "ProjectName":"Whack the Marko",
                                 "ProjectNameShort":"Whack the Marko",
                                 "Author":"Catrobat",
                                 "Description":"Universe",
                                 "Version":"0.8.5",
-                                "Views":"33",
-                                "Downloads":"2",
+                                "Views":33,
+                                "Downloads":2,
                                 "Private":false,
-                                "Uploaded": 1328101200,
+                                "Uploaded": 1328097600,
                                 "UploadedString":"more than one year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/program/6",
-                                "DownloadUrl":"app/download/6.catrobat",
+                                "ProjectUrl":"app/program/(.*?)",
+                                "DownloadUrl":"app/download/(.*?).catrobat",
                                 "FileSize":0
                             }],
           "completeTerm":"",

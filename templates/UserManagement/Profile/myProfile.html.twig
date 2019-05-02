@@ -74,17 +74,17 @@
         '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}'
       )
       profile.init()
-      programs.initProfile({{ app.user.id }})
     {% else %}
       programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
-      programs.initProfile({{ app.user.id }})
     {% endif %}
 
-    let follows = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follows' }) }}',
+    programs.initProfile('{{ app.user.id }}')
+
+    let follows = new ProfileLoader('{{ app.user.id }}' ,'{{ path('list_follow', { type: 'follows' }) }}',
     '{{ path('profile') }}', '#list-follows', '{{ asset('images/default/avatar_default.png') }}')
     follows.init()
 
-    let follower = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follower' }) }}',
+    let follower = new ProfileLoader('{{ app.user.id }}' ,'{{ path('list_follow', { type: 'follower' }) }}',
     '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')
     follower.init()
   </script>

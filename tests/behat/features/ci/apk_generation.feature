@@ -11,13 +11,13 @@ Feature:
     And the jenkins token is "SECRETTOKEN"
     When I start an apk generation of my program
     Then following parameters are sent to jenkins:
-      | parameter | value                                                          |
-      | job       | Build-Program                                                  |
-      | token     | SECRETTOKEN                                                    |
-      | SUFFIX    | generated1                                                     |
-      | DOWNLOAD  | http://pocketcode.org/app/download/1.catrobat           |
-      | UPLOAD    | http://pocketcode.org/app/ci/upload/1?token=UPLOADTOKEN |
-      | ONERROR   | http://pocketcode.org/app/ci/failed/1?token=UPLOADTOKEN |
+      | parameter | value                                                         |
+      | job       | /Build-Program/                                               |
+      | token     | /SECRETTOKEN/                                                 |
+      | SUFFIX    | /generated(.*?)/                                              |
+      | DOWNLOAD  | #http://pocketcode.org/app/download/(.*?).catrobat#           |
+      | UPLOAD    | #http://pocketcode.org/app/ci/upload/(.*?)?token=UPLOADTOKEN# |
+      | ONERROR   | #http://pocketcode.org/app/ci/failed/(.*?)?token=UPLOADTOKEN# |
     And the program apk status will be flagged "pending"
 
   Scenario: Accept the compiled apk from jenkins
@@ -46,10 +46,9 @@ Feature:
     Then the program apk status will still be flagged "ready"
 
   Scenario: reset apk status after an update
-    Given I have a program "My little program" with id "1"
+    Given I have a program "My little program2" with id "1"
     And the program apk status is flagged "ready"
     When I update this program
     Then the program apk status will still be flagged "none"
     And the apk file will be deleted
-        
-        
+

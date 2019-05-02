@@ -3,11 +3,9 @@ Feature: As a visitor I want to see a program page
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |
-      | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org |
-    # the id will not be used in the featureContext because of the autoincrement.
-    # only here for better readability
+      | name     | password | token      | email               | id |
+      | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
+      | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org | 2  |
     And there are programs:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
       | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |

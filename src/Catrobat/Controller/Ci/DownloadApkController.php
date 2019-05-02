@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Ci;
 
+use App\Catrobat\Services\ApkRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class DownloadApkController extends Controller
 {
 
   /**
-   * @Route("/ci/download/{id}", name="ci_download", requirements={"id": "\d+"}, methods={"GET"})
+   * @Route("/ci/download/{id}", name="ci_download", methods={"GET"})
    *
    * @param Request $request
    * @param Program $program
@@ -30,7 +31,7 @@ class DownloadApkController extends Controller
    */
   public function downloadApkAction(Request $request, Program $program)
   {
-    /* @var $apkrepository \App\Catrobat\Services\ApkRepository */
+    /* @var $apkrepository ApkRepository */
 
     if (!$program->isVisible())
     {

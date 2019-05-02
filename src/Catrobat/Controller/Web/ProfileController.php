@@ -5,9 +5,15 @@ namespace App\Catrobat\Controller\Web;
 use App\Entity\FollowNotification;
 use App\Entity\User;
 use App\Catrobat\StatusCode;
+use App\Entity\UserManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\DBAL\Types\GuidType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,23 +27,23 @@ class ProfileController extends Controller
   const MAX_AVATAR_SIZE = 300;
 
   /**
-   * @Route("/profile/{id}", name="profile", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
+   * @Route("/profile/{id}", name="profile", defaults={"id" = 0}, methods={"GET"})
    * @Route("/profile/")  // Overwrite for FosUser Profile Route (We don't use it!)
    *
    * @param Request $request
-   * @param integer $id
+   * @param GuidType $id
    *
    * @throws \Exception
    *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @return RedirectResponse
    */
-  public function profileAction(Request $request, $id = 0)
+  public function profileAction(Request $request, $id)
   {
     /**
      * @var $user User
      */
-    $id = (integer)$id;
-    $twig = 'UserManagement/Profile/profileHandler.html.twig';
+
+    $user = null;
     $my_profile = false;
 
     if ($id === 0 || ($this->getUser() && $this->getUser()->getId() === $id))
@@ -65,7 +71,7 @@ class ProfileController extends Controller
     $secondMail = $user->getAdditionalEmail();
     $followerCount = $user->getFollowers()->count();
 
-    return $this->get('templating')->renderResponse($twig, [
+    return $this->get('templating')->renderResponse('UserManagement/Profile/profileHandler.html.twig', [
       'profile'        => $user,
       'program_count'  => $program_count,
       'follower_count' => $followerCount,
@@ -78,6 +84,7 @@ class ProfileController extends Controller
       'username'       => $user->getUsername(),
       'myProfile'      => $my_profile,
     ]);
+
   }
 
 
@@ -86,7 +93,7 @@ class ProfileController extends Controller
    *
    * @param Request $request
    *
-   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+   * @return JsonResponse|RedirectResponse
    */
   public function countrySaveAction(Request $request)
   {
@@ -126,13 +133,13 @@ class ProfileController extends Controller
    *
    * @param Request $request
    *
-   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+   * @return JsonResponse|RedirectResponse
    */
   public function passwordSaveAction(Request $request)
   {
     /**
-     * @var \App\Entity\User        $user
-     * @var \App\Entity\UserManager $userManager
+     * @var User        $user
+     * @var UserManager $userManager
      */
     $user = $this->getUser();
     if (!$user)
@@ -187,12 +194,12 @@ class ProfileController extends Controller
    *
    * @param Request $request
    *
-   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+   * @return JsonResponse|RedirectResponse
    */
   public function emailSaveAction(Request $request)
   {
     /**
-     * @var \App\Entity\User
+     * @var User
      */
     $user = $this->getUser();
     if (!$user)
@@ -313,7 +320,7 @@ class ProfileController extends Controller
    *
    * @param Request $request
    *
-   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+   * @return JsonResponse|RedirectResponse
    */
   public function uploadAvatarAction(Request $request)
   {
@@ -349,15 +356,15 @@ class ProfileController extends Controller
   /**
    * @Route("/deleteAccount", name="profile_delete_account", methods={"POST"})
    *
-   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @return JsonResponse|RedirectResponse
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function deleteAccountAction()
   {
     /**
      * @var $user User
-     * @var $em   \Doctrine\ORM\EntityManager
+     * @var $em   EntityManager
      */
     $user = $this->getUser();
     if (!$user)
@@ -388,13 +395,13 @@ class ProfileController extends Controller
 
 
   /**
-   * @Route("/followUser/{id}", name="follow_user", methods = {"GET"}, requirements={"id":"\d+"}, defaults={"id" = 0})
+   * @Route("/followUser/{id}", name="follow_user", methods = {"GET"}, defaults={"id" = 0})
    *
-   * @param         $id
+   * @param GuidType $id
    *
    * @throws \Exception
    *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @return RedirectResponse
    */
   public function followUser($id)
   {
@@ -428,11 +435,11 @@ class ProfileController extends Controller
 
 
   /**
-   * @Route("/unfollowUser/{id}", name="unfollow_user", methods = {"GET"},requirements={"id":"\d+"}, defaults={"id" = 0})
+   * @Route("/unfollowUser/{id}", name="unfollow_user", methods = {"GET"}, defaults={"id" = 0})
    *
-   * @param $id
+   * @param GuidType $id
    *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @return RedirectResponse
    */
   public function unfollowUser($id)
   {

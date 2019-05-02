@@ -34,25 +34,25 @@ Feature: Search programs
       | limit  | 1      |
       | offset | 0      |
     When the Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
       """
       {
         "CatrobatProjects": [{
-          "ProjectId": 1,
+          "ProjectId": "(.*?)",
           "ProjectName": "Galaxy War",
           "ProjectNameShort": "Galaxy War",
           "Author": "User1",
           "Description": "p1",
           "Version": "0.8.5",
-          "Views": "12",
-          "Downloads": "3",
+          "Views": 12,
+          "Downloads": 3,
           "Private": false,
-          "Uploaded": 1357041600,
+          "Uploaded": 1357038000,
           "UploadedString": "more than one year ago",
           "ScreenshotBig": "images\/default\/screenshot.png",
           "ScreenshotSmall": "images\/default\/thumbnail.png",
-          "ProjectUrl": "app\/program\/1",
-          "DownloadUrl": "app\/download\/1.catrobat",
+          "ProjectUrl": "app\/program\/(.*?)",
+          "DownloadUrl": "app\/download\/(.*?).catrobat",
           "FileSize": 0
         }],
         "completeTerm": "",
@@ -68,16 +68,16 @@ Feature: Search programs
   Scenario: No programs are found
 
     When searching for "NOTHINGTOBEFIOUND"
-    Then the returned json object will be:
+    Then I should get the json object:
       """
       {
-       "completeTerm":"",
-       "CatrobatInformation": {
-         "BaseUrl":"https://pocketcode.org/",
-         "TotalProjects":0,
-         "ProjectsExtension":".catrobat"
-       },
-       "CatrobatProjects":[],
-       "preHeaderMessages":""
+        "CatrobatProjects":[],
+        "completeTerm":"",
+        "preHeaderMessages":"",
+        "CatrobatInformation": {
+          "BaseUrl":"https://pocketcode.org/",
+          "TotalProjects":0,
+          "ProjectsExtension":".catrobat"
+        }
       }
       """

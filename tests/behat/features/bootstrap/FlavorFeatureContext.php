@@ -45,7 +45,7 @@ class FlavorFeatureContext extends BaseContext
   {
     $user = $this->insertUser();
     $program = $this->getStandardProgramFile();
-    $response = $this->upload($program, $user, 'pocketphiro');
+    $response = $this->upload($program, $user, 1,'pocketphiro');
     Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
 
@@ -67,7 +67,7 @@ class FlavorFeatureContext extends BaseContext
   {
     $user = $this->insertUser();
     $program = $this->getStandardProgramFile();
-    $response = $this->upload($program, $user);
+    $response = $this->upload($program, $user, 1);
     Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
 
@@ -158,8 +158,14 @@ class FlavorFeatureContext extends BaseContext
    */
   public function iGetTheUserSProgramsWith($url)
   {
+    /**
+     * @var $user \App\Entity\User
+     * @var $pr \App\Repository\ProgramRepository
+     */
+    $user = $this->getUserManager()->findAll()[0];
+
     $this->getClient()->request('GET', $url, [
-      'user_id' => 1,
+      'user_id' => $user->getId(),
     ]);
   }
 }

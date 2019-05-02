@@ -5,10 +5,12 @@ namespace App\Catrobat\Controller\Web;
 use App\Entity\Program;
 use App\Entity\StarterCategory;
 use App\Catrobat\Services\ScreenshotRepository;
+use Doctrine\DBAL\Types\GuidType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Twig\Error\Error;
 
 
 /**
@@ -21,8 +23,8 @@ class TutorialController extends Controller
   /**
    * @Route("/help", name="catrobat_web_help", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function helpAction()
   {
@@ -36,8 +38,8 @@ class TutorialController extends Controller
    * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1},
    *                                requirements={"page":"\d+"}, methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function stepByStepAction()
   {
@@ -51,8 +53,8 @@ class TutorialController extends Controller
    *
    * @param $page
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function tutorialCardsAction($page)
   {
@@ -83,8 +85,8 @@ class TutorialController extends Controller
   /**
    * @Route("/starter-programs", name="catrobat_web_starter", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function starterProgramsAction()
   {
@@ -105,11 +107,10 @@ class TutorialController extends Controller
 
 
   /**
-   * @Route("/category-programs/{id}", name="catrobat_web_category_programs", requirements={"id":"\d+"},
-   *                                   methods={"GET"})
+   * @Route("/category-programs/{id}", name="catrobat_web_category_programs", methods={"GET"})
    *
    * @param Request $request
-   * @param         $id
+   * @param GuidType  $id
    *
    * @return JsonResponse
    */
@@ -139,8 +140,8 @@ class TutorialController extends Controller
   /**
    * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function gameJamAction()
   {

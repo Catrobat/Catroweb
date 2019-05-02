@@ -129,6 +129,21 @@ class GamejamFeatureContext extends BaseContext
   }
 
   /**
+   * @Given the program has the id :arg1
+   */
+  public function theProgramHasTheId($id)
+  {
+    /**
+     * @var \App\Entity\Program $program
+     */
+    $program = $this->getProgramManger()->findAll()[0];
+    $program->setId($id);
+    $this->getManager()->persist($program);
+    $this->getManager()->flush();
+  }
+
+
+  /**
    * @Given I already filled the google form
    */
   public function iAlreadyFilledTheGoogleForm()
@@ -222,7 +237,7 @@ class GamejamFeatureContext extends BaseContext
   public function iUploadMyGame()
   {
     $file = $this->getSymfonySupport()->getDefaultProgramFile();
-    $this->getSymfonySupport()->upload($file, null);
+    $this->getSymfonySupport()->upload($file, null, null);
   }
 
   /**
@@ -262,15 +277,17 @@ class GamejamFeatureContext extends BaseContext
   }
 
   /**
-   * @Then The returned url should be
+   * @Then The returned url with id :id should be
    * @param PyStringNode $string
    */
-  public function theReturnedUrlShouldBe(PyStringNode $string)
+  public function theReturnedUrlShouldBe($id, PyStringNode $string)
   {
-    $answer = json_decode($this->getClient()
-      ->getResponse()
-      ->getContent(), true);
-    Assert::assertEquals($string->getRaw(), $answer['form']);
+    $answer = (array) json_decode($this->getClient()->getResponse()->getContent());
+
+    $form_url = $answer['form'];
+    $form_url = preg_replace("/&id=.*?&mail=/", "&id=" . $id ."&mail=", $form_url, -1);
+
+    Assert::assertEquals($string->getRaw(), $form_url);
   }
 
   /**
@@ -419,8 +436,8 @@ class GamejamFeatureContext extends BaseContext
   public function iUpdateMyProgram()
   {
     $file = $this->getSymfonySupport()->getDefaultProgramFile();
-    $this->getSymfonySupport()->upload($file, $this->i);
-    $this->getSymfonySupport()->upload($file, $this->i);
+    $this->getSymfonySupport()->upload($file, $this->i, null);
+    $this->getSymfonySupport()->upload($file, $this->i, null);
   }
 
   /**

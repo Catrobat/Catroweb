@@ -73,7 +73,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
     {
       "statusCode": 522,
-      "message": "category Space not found in package Looks because the package doesn't contain any categories"
+      "message": "category Space not found in package Looks because the package doesn(.*?)t contain any categories"
     }
     """
 

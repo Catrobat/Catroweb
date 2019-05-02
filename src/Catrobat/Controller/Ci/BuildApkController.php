@@ -2,12 +2,15 @@
 
 namespace App\Catrobat\Controller\Ci;
 
+use App\Catrobat\Services\ApkRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Entity\ProgramManager;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -20,8 +23,7 @@ class BuildApkController extends Controller
 {
 
   /**
-   * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"},
-   *   requirements={"id": "\d+"}, methods={"GET"})
+   * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"}, methods={"GET"})
    *
    * @param Program $program
    *
@@ -56,20 +58,20 @@ class BuildApkController extends Controller
 
 
   /**
-   * @Route("/ci/upload/{id}", name="ci_upload_apk", defaults={"_format": "json"},
-   *   requirements={"id": "\d+"}, methods={"GET", "POST"})
+   * @Route("/ci/upload/{id}", name="ci_upload_apk", defaults={"_format": "json"}, methods={"GET", "POST"})
    *
    * @param Request $request
    * @param Program $program
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function uploadApkAction(Request $request, Program $program)
   {
     /**
-     * @var $apkrepository \App\Catrobat\Services\ApkRepository
+     * @var $apkrepository ApkRepository
+     * @var $file File
      */
 
     $config = $this->container->getParameter('jenkins');
@@ -95,14 +97,14 @@ class BuildApkController extends Controller
 
 
   /**
-   * @Route("/ci/failed/{id}", name="ci_failed_apk", defaults={"_format": "json"}, requirements={"id": "\d+"}, methods={"GET"})
+   * @Route("/ci/failed/{id}", name="ci_failed_apk", defaults={"_format": "json"}, methods={"GET"})
    *
    * @param Request $request
    * @param Program $program
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function failedApkAction(Request $request, Program $program)
   {

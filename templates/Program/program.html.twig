@@ -356,7 +356,7 @@
   <script src="{{ asset('compiled/js/Program.js') }}"></script>
   <script src="{{ asset('compiled/js/ProgramReport.js') }}"></script>
   <script>
-    new ProgramReport({{ program.id }}, '{{ path('catrobat_api_report_program') }}', '{{ url('login') }}',
+    new ProgramReport('{{ program.id }}', '{{ path('catrobat_api_report_program') }}', '{{ url('login') }}',
       "{{ 'success.report'                          |trans({}, 'catroweb') }}",
       '{{ "error"                                   |trans({}, "catroweb") }}',
       '{{ "programs.report"                         |trans({}, "catroweb") }}',
@@ -373,7 +373,7 @@
   </script>
   <script src="{{ asset('compiled/js/ProgramComments.js') }}"></script>
   <script>
-    new ProgramComments({{ program_details.id }}, 5, 5, 5, {{ (program_details.comments|length) }},
+    new ProgramComments('{{ program_details.id }}', 5, 5, 5, {{ (program_details.comments|length) }},
       "{{ 'cancel'                                  |trans({}, 'catroweb') }}",
       "{{ 'deleteIt'                                |trans({}, 'catroweb') }}",
       "{{ 'reportIt'                                |trans({}, 'catroweb') }}",
@@ -394,7 +394,7 @@
   </script>
   <script src="{{ asset('compiled/js/ProgramDescription.js') }}"></script>
   <script>
-    new ProgramDescription({{ program.id }},
+    new ProgramDescription('{{ program.id }}',
       '{{ ("show-more")                             |trans({}, "catroweb") }}',
       '{{ ("show-less")                             |trans({}, "catroweb") }}',
         {{ constant('App\\Catrobat\\StatusCode::OK') }},
@@ -476,7 +476,7 @@
     })
 
     var undefined
-    var programID = {{ program.id }};
+    var programID = '{{ program.id }}';
     var recs = new ProjectLoader('#recommendations', '{{ path('api_recsys_programs') }}', programID)
     recs.initRecsys()
 
@@ -485,7 +485,7 @@
     specificRecommender.init()
 
     let more_from_this_user = new ProjectLoader('#more-from-this-user-recommendations', '{{ path('api_user_programs') }}')
-    more_from_this_user.initMoreFromThisUser({{ program.user.id }}, programID)
+    more_from_this_user.initMoreFromThisUser('{{ program.user.id }}', programID)
 
     counter = 10
     var cachedRemixData = null
@@ -677,7 +677,7 @@
         $.ajaxSetup({async: false})
         $.post("{{ path('click_stats') }}", {
           type     : type,
-          recFromID: {{ program.id }},
+          recFromID: '{{ program.id }}',
           recID    : additions
         }, function (data) {
           if (data === 'error')

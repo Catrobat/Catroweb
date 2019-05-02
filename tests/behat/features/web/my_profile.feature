@@ -6,9 +6,9 @@ Feature:
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@app.org |
-      | User1    | 654321   | cccccccccc | dev2@app.org |
+      | name     | password | token      | email        | id |
+      | Catrobat | 123456   | cccccccccc | dev1@app.org |  1 |
+      | User1    | 654321   | cccccccccc | dev2@app.org |  2 |
     And there are programs:
       | id | name       | description | owned by | downloads | apk_downloads | views | upload time      | version | language version | private |
       | 1  | program 1  | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | 0       |

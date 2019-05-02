@@ -3,11 +3,11 @@ Feature: Project loader should hide project containers or show a message if ther
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@app.org |
-      | User2    | 654321   | cccccccccc | dev2@app.org |
-      | User3    | 654321   | cccccccccc | dev3@app.org |
-      | User4    | 654321   | cccccccccc | dev4@app.org |
+      | name     | password | token      | email        | id |
+      | Catrobat | 123456   | cccccccccc | dev1@app.org |  1 |
+      | User2    | 654321   | cccccccccc | dev2@app.org |  2 |
+      | User3    | 654321   | cccccccccc | dev3@app.org |  3 |
+      | User4    | 654321   | cccccccccc | dev4@app.org |  4 |
 
   #  index
   Scenario: When there are no programs there should not be containers on the homepage

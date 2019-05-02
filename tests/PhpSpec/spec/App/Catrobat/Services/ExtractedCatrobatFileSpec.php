@@ -42,13 +42,13 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
   {
     $this->getRemixUrlsString()->shouldReturn('やねうら部屋(びっくりハウス) remix お化け屋敷 '
       . '[https://scratch.mit.edu/projects/117697631/], '
-      . 'The Periodic Table [/app/program/3570]');
+      . 'The Periodic Table [/pocketcode/program/3570]');
   }
 
   public function it_gets_relative_and_absolute_remix_urls()
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
-    $second_expected_url = '/app/program/3570';
+    $second_expected_url = '/pocketcode/program/3570';
     $new_program_id = 3571;
 
     $urls = $this->getRemixesData($new_program_id, true);

@@ -3,9 +3,9 @@ Feature: Get the most recent programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -21,21 +21,21 @@ Feature: Get the most recent programs
       """
       {
           "CatrobatProjects":[{
-                                "ProjectId": 2,
+                                "ProjectId": "(.*?)",
                                 "ProjectName":"program 2",
                                 "ProjectNameShort":"program 2",
                                 "Author":"Catrobat",
                                 "Description":"",
                                 "Version":"0.8.5",
-                                "Views":"9",
-                                "Downloads":"33",
+                                "Views":9,
+                                "Downloads":33,
                                 "Private":false,
-                                "Uploaded": 1359723600,
+                                "Uploaded": 1359720000,
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/program/2",
-                                "DownloadUrl":"app/download/2.catrobat",
+                                "ProjectUrl":"app/program/(.*?)",
+                                "DownloadUrl":"app/download/(.*?).catrobat",
                                 "FileSize":0
                             }],
           "completeTerm":"",
@@ -56,7 +56,7 @@ Feature: Get the most recent programs
       """
       {
           "CatrobatProjects":[{
-                                "ProjectId": 2,
+                                "ProjectId": "(.*?)",
                                 "ProjectName":"program 2"
                             }],
           "completeTerm":"",

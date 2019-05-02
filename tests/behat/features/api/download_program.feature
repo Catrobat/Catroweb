@@ -3,8 +3,8 @@ Feature: Download programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc | 1  |
     And there are downloadable programs:
       | id | name      | description | owned by | downloads | views | upload time      | version | visible |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true    |

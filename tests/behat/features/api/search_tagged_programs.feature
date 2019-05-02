@@ -5,10 +5,10 @@ Feature: Search tagged programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
-      | Bob      | vewqw    | eeeeeeeeee |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
+      | Bob      | vewqw    | eeeeeeeeee |  3 |
     And there are tags:
       | id | en     | de         |
       | 1  | Games  | Spiele     |

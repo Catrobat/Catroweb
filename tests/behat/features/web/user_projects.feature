@@ -3,11 +3,11 @@ Feature: There should be all projects of a user presented on a profile page
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
-      | User2    | 654321   | cccccccccc | dev2@pocketcode.org |
-      | User3    | 654321   | cccccccccc | dev3@pocketcode.org |
-      | User4    | 654321   | cccccccccc | dev4@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | User2    | 654321   | cccccccccc | dev2@pocketcode.org |  2 |
+      | User3    | 654321   | cccccccccc | dev3@pocketcode.org |  3 |
+      | User4    | 654321   | cccccccccc | dev4@pocketcode.org |  4 |
     And there are programs:
       | id | name       | description | owned by | downloads | apk_downloads | views | upload time      | version |
       | 1  | oldestProg | p1          | Catrobat | 3         | 2             | 12    | 01.01.2009 12:00 | 0.8.5   |

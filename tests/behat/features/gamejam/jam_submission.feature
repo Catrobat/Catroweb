@@ -5,6 +5,7 @@ Feature: Submitting games to a game jam
 
     Given There is an ongoing game jam
     When I submit a game
+    And the program has the id "1"
     Then I should get the url to the google form
     But The game is not yet accepted
 
@@ -12,6 +13,7 @@ Feature: Submitting games to a game jam
   Scenario: Accepting a game
 
     Given I submitted a game
+    And the program has the id "1"
     When I fill out the google form
     Then My game should be accepted
 
@@ -21,6 +23,7 @@ Feature: Submitting games to a game jam
 
     Given There is an ongoing game jam
     And I already submitted my game
+    And the program has the id "1"
     And I already filled the google form
     When I resubmit my game
     Then It should be updated
@@ -33,6 +36,7 @@ Feature: Submitting games to a game jam
 
     Given There is an ongoing game jam
     And I already submitted my game
+    And the program has the id "1"
     But I did not fill out the google form
     When I resubmit my game
     Then It should be updated

@@ -57,7 +57,6 @@ class BaseContext implements KernelAwareContext
     return $this->symfony_support;
   }
 
-
   /**
    *
    * @return \Symfony\Bundle\FrameworkBundle\Client
@@ -415,16 +414,18 @@ class BaseContext implements KernelAwareContext
   }
 
   /**
-   * @param        $file
-   * @param        $user
+   * @param $file
+   * @param $user
+   * @param $desired_id
    * @param string $flavor
-   * @param null   $request_parameters
-   *
+   * @param null $request_parameters
    * @return \Symfony\Component\HttpFoundation\Response|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
-  public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
+  public function upload($file, $user, $desired_id=null, $flavor = 'pocketcode', $request_parameters = null)
   {
-    return $this->symfony_support->upload($file, $user, $flavor, $request_parameters);
+    return $this->symfony_support->upload($file, $user, $desired_id, $flavor, $request_parameters);
   }
 
   /**

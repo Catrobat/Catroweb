@@ -4,14 +4,14 @@ Feature: Upload a program to the website
   Background:
 
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
 
   Scenario: Upload program
     Given the HTTP Request:
-      | Method | POST                               |
-      | Url    | /app/api/upload/upload.json |
+      | Method | POST                         |
+      | Url    | /app/api/upload/upload.json  |
     And the POST parameters:
       | Name         | Value                  |
       | username     | Catrobat               |
@@ -21,10 +21,10 @@ Feature: Upload a program to the website
     And the POST parameter "fileChecksum" contains the MD5 sum of the attached file
     And we assume the next generated token will be "rrrrrrrrrrr"
     When the Request is invoked
-    Then the returned json object will be:
+    Then the returned json object with id "1" will be:
           """
           {
-            "projectId": 1,
+            "projectId": "1",
             "statusCode": 200,
             "answer": "Your project was uploaded successfully!",
             "token": "rrrrrrrrrrr",
@@ -35,7 +35,7 @@ Feature: Upload a program to the website
   Scenario Outline: Troubleshooting
     Given the upload problem "<problem>"
     When such a Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
           """
           {
             "statusCode": <errorcode>,
