@@ -1,5 +1,6 @@
 @import '../../../public/bootstrap_vendor/scss/functions';
 @import "../base/variables";
+@import "../base/mixins";
 @import "../base/elements";
 @import '../../../public/bootstrap_vendor/scss/variables';
 @import '../../../public/bootstrap_vendor/scss/mixins';
@@ -55,10 +56,12 @@ $border-spacing: 8px;
       transition: border 0.5s;
       border: 2px solid transparent;
       border-radius: 5px;
+      position: relative;
 
       &:hover
       {
         border-color: $primary;
+        text-decoration: none;
       }
 
       > img
@@ -67,14 +70,63 @@ $border-spacing: 8px;
         max-height: $tile-size - $border-spacing;
       }
 
-      .fas, .far
+      i.fas, i.far
       {
         font-size: $tile-size - 15px;
+        opacity: 0.13;
       }
 
       &.flavored
       {
         order: -1;
+      }
+
+      .name {
+        color: $primary;
+        font-size: 1.15rem;
+        text-align: center;
+        @include force-word-break();
+        padding: 1px 4px;
+        z-index: 1;
+        max-height: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+      }
+
+      &:not(.showName) .name
+      {
+        display: none;
+      }
+
+      &.showName
+      {
+        display: grid;
+        .name, i.fas, i.far
+        {
+          grid-column: 1;
+          grid-row: 1;
+          justify-self: center;
+        }
+      }
+
+      &[data-filetype="audio"] .name {
+        margin-bottom: 1.5rem;
+        max-height: calc(100% - 1.5rem);
+      }
+
+      .audio-control {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        transition: font-size 0.1s;
+        font-size: 1.5rem;
+        z-index: 2;
+
+        &:hover {
+          font-size: 1.65rem;
+        }
       }
     }
   }
@@ -93,7 +145,7 @@ $border-spacing: 8px;
       max-height: $tile-size-md-smup - $border-spacing;
     }
 
-    .fas, .far
+    i.fas, i.far
     {
       font-size: $tile-size-md-smup - 15px;
     }
@@ -113,7 +165,7 @@ $border-spacing: 8px;
       max-height: $tile-size-sm - $border-spacing;
     }
 
-    .fas, .far
+    i.fas, i.far
     {
       font-size: $tile-size-sm - 15px;
     }
@@ -133,7 +185,7 @@ $border-spacing: 8px;
       max-height: $tile-size-lg - $border-spacing;
     }
 
-    .fas, .far
+    i.fas, i.far
     {
       font-size: $tile-size-lg - 15px;
     }
