@@ -1365,6 +1365,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $new_file->setActive($file['active']);
       $category = $em->getRepository('\App\Entity\MediaPackageCategory')->findOneBy(['name' => $file['category']]);
       $new_file->setCategory($category);
+      if(!empty($file['flavor']))
+      {
+        $new_file->setFlavor($file['flavor']);
+      }
       $new_file->setAuthor($file['author']);
 
       $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' . $file['extension']), $file['id'], $file['extension']);
@@ -1582,7 +1586,33 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iShouldNotSeeMediaFileWithId($id)
   {
     $link = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
+    Assert::assertNull($link);
+  }
+
+  /**
+   * @Then /^I should see media file with id ([0-9]+) in category "([^"]*)"$/
+   * @param $id
+   * @param $category
+   */
+  public function iShouldSeeMediaFileWithIdInCategory($id, $category)
+  {
+    $link = $this->getSession()->getPage()
+      ->find("css", '[data-name="' . $category . '"]')
+      ->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($link);
+  }
+
+  /**
+   * @Then /^I should see ([0-9]+) media files? in category "([^"]*)"$/
+   * @param $count
+   * @param $category
+   */
+  public function iShouldSeeNumberOfMediaFilesInCategory($count, $category)
+  {
+    $elements = $this->getSession()->getPage()
+      ->find("css", '[data-name="' . $category . '"]')
+      ->findAll("css", ".mediafile");
+    Assert::assertEquals($count, count($elements));
   }
 
   /**

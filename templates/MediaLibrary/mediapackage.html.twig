@@ -36,7 +36,8 @@
     #}
 
     {% for category in categories %}
-      <div id="category-{{ category.displayID }}" style="display: none" class="category">
+      <div id="category-{{ category.displayID }}" data-name="{{ category.name | e('html_attr') }}"
+           style="display: none" class="category">
         <h1>{{ category.name }}</h1>
         <div class="files"></div>
       </div>
@@ -47,6 +48,6 @@
 {% block js %}
   <script src="{{ asset('compiled/js/MediaLib.js') }}"></script>
   <script>
-    new MediaLib({{ categories|json_encode|raw }}, "{{ flavor }}", "{{ mediaDir }}");
+    new MediaLib("{{ package }}", "{{ flavor }}", "{{ mediaDir }}");
   </script>
 {% endblock %}

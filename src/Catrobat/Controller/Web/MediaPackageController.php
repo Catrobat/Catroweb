@@ -22,8 +22,8 @@ class MediaPackageController extends Controller
 {
 
   /**
-   * @Route("/media-library", name="media_library_overview", methods={"GET"})
-   * @Route("/pocket-library", name="pocket_library_overview", methods={"GET"})
+   * @Route("/media-library/", name="media_library_overview", methods={"GET"})
+   * @Route("/pocket-library/", name="pocket_library_overview", methods={"GET"})
    *
    * @return \Symfony\Component\HttpFoundation\Response
    * @throws \Twig\Error\Error
@@ -62,7 +62,7 @@ class MediaPackageController extends Controller
    * @return \Symfony\Component\HttpFoundation\Response
    * @throws \Twig\Error\Error
    */
-  public function MediaPackageAction(Request $request, $package_name, $flavor = 'pocketcode')
+  public function mediaPackageAction(Request $request, $package_name, $flavor = 'pocketcode')
   {
     /**
      * @var $package  MediaPackage
@@ -123,29 +123,36 @@ class MediaPackageController extends Controller
 
     foreach ($package->getCategories() as $category)
     {
+      if (strpos($category->getName(), "ThemeSpecial") === 0)
+      {
+        continue;
+      }
+
       $categories[] = [
-        'displayID' => str_replace(' ', '', $category->getName()),
+        'displayID' => preg_replace("/[^A-Za-z0-9-_:.]/", '', $category->getName()),
         'name'      => $category->getName(),
         'priority'  => $category->getPriority(),
       ];
     }
 
-    usort($categories, function ($a, $b) {
-      if ($a['priority'] == $b['priority'])
+    usort($categories, function ($category_a, $category_b)
+    {
+      if ($category_a['priority'] === $category_b['priority'])
       {
         return 0;
       }
 
-      return ($a['priority'] > $b['priority']) ? -1 : 1;
+      return ($category_a['priority'] > $category_b['priority']) ? -1 : 1;
     });
 
     $mediaDir = $this->container->getParameter('catrobat.mediapackage.path');
 
     return $this->get('templating')->renderResponse('MediaLibrary/mediapackage.html.twig', [
       'flavor'     => $flavor,
+      'package'    => $package_name,
       'categories' => $categories,
       'new_nav'    => true,
-      'mediaDir'   => '../../'. $mediaDir
+      'mediaDir'   => '../../' . $mediaDir,
     ]);
   }
 
@@ -167,7 +174,7 @@ class MediaPackageController extends Controller
     {
       $flavors_arr = preg_replace("/ /", "", $file->getFlavor());
       $flavors_arr = explode(",", $flavors_arr);
-      if (!$file->getActive() || ($file->getFlavor() != null && !in_array($flavor, $flavors_arr)))
+      if (!$file->getActive() || ($file->getFlavor() !== null && !in_array($flavor, $flavors_arr)))
       {
         continue;
       }
