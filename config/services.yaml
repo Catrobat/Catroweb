@@ -630,6 +630,11 @@ services:
     tags:
       - { name: console.command }
 
+  catrowebadmin.command.clean.logs:
+    class: App\Catrobat\Commands\CleanLogsCommand
+    tags:
+      - { name: console.command }
+
   catrowebadmin.command.init:
     class: App\Catrobat\Commands\InitDirectoriesCommand
     arguments:
