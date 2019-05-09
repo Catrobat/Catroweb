@@ -1,5 +1,6 @@
 @import '../../../public/bootstrap_vendor/scss/functions';
-@import '../base/_variables';
+@import '../base/variables';
+@import '../base/mixins';
 @import '../../../public/bootstrap_vendor/scss/variables';
 @import '../../../public/bootstrap_vendor/scss/mixins';
 @import 'theme_settings';
@@ -77,7 +78,7 @@ h2
   {
     margin: 25px auto;
     line-height: 23px;
-    word-wrap: break-word;
+    @include force-word-break();
   }
 }
 
@@ -240,6 +241,11 @@ h2
         float: left;
 
       }
+
+      span {
+        max-width: 100%;
+        @include force-word-break();
+      }
     }
   }
 }
@@ -339,7 +345,7 @@ table td:nth-child(1)
   padding-top: 0.4em;
   display: block;
   clear: both;
-  word-break: break-word;
+  @include force-word-break();
 }
 
 .single-comment
