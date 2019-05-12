@@ -31,6 +31,13 @@ function MediaLib(package_name, flavor, assetsDir)
           mediafileContainer.addClass('flavored');
         }
         
+        let name = file.name                      // make word breaks easier:
+          .replace(/([a-z])([A-Z])/g, '$1​$2')     // insert zero-width space between CamelCase
+          .replace(/([A-Za-z])([0-9])/g, '$1​$2')  // insert zero-width space between letters and numbers
+          .replace(/_([A-Za-z0-9])/g, '_​$1');     // insert zero-width space between underline and letters
+        mediafileContainer.append($('<div class="name" />').text(name));
+        mediafileContainer.addClass("showName");
+        
         switch (file.extension)
         {
           case "adp":
@@ -65,7 +72,28 @@ function MediaLib(package_name, flavor, assetsDir)
           case "rmp":
           case "wav":
           case "xm":
-            mediafileContainer.append($('<i class="fas fa-file-audio"/>').attr('title', file.name));
+            mediafileContainer.attr('data-filetype', 'audio');
+            mediafileContainer.append($('<i class="fas fa-file-audio"/>'));
+            const audio = new Audio(file.download_url);
+            const $previewBtn = $('<div class="audio-control fas fa-play" />');
+            $previewBtn.click(function() {
+              if (audio.paused)
+              {
+                $previewBtn.removeClass("fa-play").addClass("fa-pause");
+                audio.play();
+              }
+              else
+              {
+                $previewBtn.removeClass("fa-pause").addClass("fa-play");
+                audio.pause();
+              }
+              return false;
+            });
+            audio.onended = function() {
+              $previewBtn.removeClass("fa-pause").addClass("fa-play");
+            };
+            
+            mediafileContainer.append($previewBtn);
             break;
           case "3gp":
           case "3g2":
@@ -106,18 +134,22 @@ function MediaLib(package_name, flavor, assetsDir)
           case "avi":
           case "movie":
           case "smv":
-            mediafileContainer.append($('<i class="fas fa-file-video"/>').attr('title', file.name));
+            mediafileContainer.attr('data-filetype', 'video');
+            mediafileContainer.append($('<i class="fas fa-file-video"/>'));
             break;
           case "pdf":
-            mediafileContainer.append($('<i class="fas fa-file-pdf"/>').attr('title', file.name));
+            mediafileContainer.attr('data-filetype', 'pdf');
+            mediafileContainer.append($('<i class="fas fa-file-pdf"/>'));
             break;
           case "txt":
           case "rtx":
-            mediafileContainer.append($('<i class="fas fa-file-alt"/>').attr('title', file.name));
+            mediafileContainer.attr('data-filetype', 'text');
+            mediafileContainer.append($('<i class="fas fa-file-alt"/>'));
             break;
           case "zip":
           case "7z":
-            mediafileContainer.append($('<i class="fas fa-file-archive"/>').attr('title', file.name));
+            mediafileContainer.attr('data-filetype', 'archive');
+            mediafileContainer.append($('<i class="fas fa-file-archive"/>'));
             break;
           default:
             const $image = $('<img src="' + assetsDir + 'thumbs/' + file.id + '.jpeg"/>');
@@ -131,15 +163,15 @@ function MediaLib(package_name, flavor, assetsDir)
               
               if (pictureExtensions.indexOf(file.extension) !== -1)
               {
-                mediafileContainer.prepend($('<i class="fas fa-file-image"/>').attr('title', file.name));
+                mediafileContainer.prepend($('<i class="fas fa-file-image"/>'));
               }
               else
               {
-                mediafileContainer.prepend($('<i class="fas fa-file"/>').attr('title', file.name));
+                mediafileContainer.prepend($('<i class="fas fa-file"/>'));
               }
             });
-            mediafileContainer.append($image);
             mediafileContainer.removeClass("showName");
+            mediafileContainer.append($image);
             break;
         }
         
