@@ -103,10 +103,12 @@ function Notification (notifications, unseenRemixesGroupedLength, markAsReadUrl,
   
   self.updateBadgeNumber = function () {
     let userNotificationBadge = $('.user-notification-badge')
-    let current_number = userNotificationBadge.data('badge')
+    let current_number = Number(userNotificationBadge.text())
     if (current_number > 1)
     {
-      userNotificationBadge.data('badge', current_number - 1)
+      userNotificationBadge.text(current_number - 1)
+    } else {
+      userNotificationBadge.hide();
     }
   }
   
@@ -133,7 +135,7 @@ function Notification (notifications, unseenRemixesGroupedLength, markAsReadUrl,
     $('#notifications-container').children().remove()
     $('#notifications-summary').hide()
     $('#mark-all-as-seen').hide()
-    $('.user-notification-badge').removeAttr('data-badge')
+    $('.user-notification-badge').hide()
     $('.no-notifications-placeholder').show()
   }
   
