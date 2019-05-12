@@ -357,3 +357,44 @@ var Main = function (search_url) {
   };
   
 };
+
+$(function() {
+  
+  ['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach(function(element) {
+    $(element + ':not(.no-textfill)').each(function() {
+      textfillDefault(this);
+    });
+  });
+  
+  function textfillDefault(container)
+  {
+    const maxFontPixels = parseFloat($(container).css('font-size'));
+    const minFontPixels = Math.round(maxFontPixels * 0.7);
+    
+    const html = $(container).html();
+    $(container).empty();
+    const $span = $("<span/>").html(html);
+    $(container).append($span);
+    
+    $(container).textfill({
+      maxFontPixels: maxFontPixels,
+      minFontPixels: minFontPixels,
+      widthOnly    : true,
+      innerTag     : 'span',
+      fail         : function() {
+        $(container).addClass('force-word-break');
+        $(container).html(html);
+      },
+      success      : function() {
+        $(container).removeClass('force-word-break');
+        const newFontSize = $span.css('font-size');
+        $(container).html(html);
+        if (parseFloat(newFontSize) < maxFontPixels)
+        {
+          $(container).css('font-size', newFontSize);
+        }
+      }
+    });
+  }
+  
+});

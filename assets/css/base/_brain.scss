@@ -1,5 +1,6 @@
 @import "elements";
 @import "variables";
+@import "mixins";
 @import "theme_settings";
 
 @font-face {
@@ -445,4 +446,8 @@ $program-tile-width: 85px;
   content: "";
   display: block;
   background: $primary;
+}
+
+.force-word-break {
+  @include force-word-break();
 }

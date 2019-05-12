@@ -32,12 +32,12 @@
 {% endblock %}
 
 {% block body %}
-  <div id="program-top" class="h1">
-    <div id="program-name">
+  <div id="program-top">
+    <div id="program-name" class="h1">
       {{ program.name }}
     </div>
 
-    <div id="program-user">
+    <div id="program-user" class="h1">
       <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
     </div>
     <div class="clear"></div>
@@ -203,14 +203,14 @@
         <div id="remix-graph-button" class="btn-container col-12 col-xl-6">
           <button class="btn btn-primary">
             <i class="program-big-button-icon mr-3 fa fa-sitemap"></i>
-            {{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}
+            <span>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</span>
           </button>
         </div>
 
         <div id="apk-generate" class="btn-container col-12 col-xl-6">
           <button class="btn btn-primary">
             <i class="program-big-button-icon mr-3 fab fa-android"></i>
-            {{ "apk.prepare"|trans({}, "catroweb") }}
+            <span>{{ "apk.prepare"|trans({}, "catroweb") }}</span>
           </button>
         </div>
 
@@ -218,14 +218,14 @@
           <button class="btn btn-primary">
             <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw"
                aria-hidden="true"></i>
-            {{ "apk.preparing"|trans({}, "catroweb") }}
+            <span>{{ "apk.preparing"|trans({}, "catroweb") }}</span>
           </button>
         </div>
 
         <div id="apk-download" class="btn-container col-12 col-xl-6 d-none">
           <button class="btn btn-primary">
             <i class="program-big-button-icon mr-3 fab fa-android"></i>
-            {{ "apk.download"|trans({}, "catroweb") }}
+            <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
           </button>
         </div>
       </div>

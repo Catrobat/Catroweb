@@ -1,5 +1,6 @@
 @import 'theme_settings';
 @import '../base/variables';
+@import '../base/mixins';
 
 /* profile */
 
@@ -20,6 +21,7 @@
 
 .visited-program {
   opacity: 0.6;
+
   a {
     color: $primary;
   }
@@ -33,7 +35,7 @@
   img {
     @media screen and (max-width: 576px) {
       width: 90%;
-      max-width: 15rem!important;
+      max-width: 15rem !important;
     }
   }
 }
@@ -43,11 +45,12 @@
 }
 
 .edit-title {
-  font-weight : bold;
+  font-weight: bold;
+  @include force-word-break();
 }
 
 .edit-subtitle {
-  font-weight : 600;
+  font-weight: 600;
 }
 
 .profile-data {
@@ -59,11 +62,11 @@
 }
 
 .edit-category-button {
-  float:right;
+  float: right;
   color: $primary;
 }
 
-#select-country select{
+#select-country select {
   width: 100%;
   height: 45px;
   margin-bottom: 0;
@@ -107,8 +110,9 @@
     font-weight: bold;
     padding: 4px 15px;
     border: 1px rgba($primary, 0.8);
-    -webkit-transition: width 250ms; /* Safari */
-    transition: width 250ms;
+    @include transition(width 250ms);
+    max-width: 100%;
+    @include force-word-break();
 
     &:hover {
       top: -2px;
@@ -169,7 +173,7 @@
 
   & i {
     background-color: $primary;
-    color: rgba($white, 0.9)!important;
+    color: rgba($white, 0.9) !important;
     font-size: 1em;
     border-radius: 50%;
     margin: 0;
@@ -177,7 +181,7 @@
 
     &:hover {
       background-color: darken($primary, 10);
-      color: $primary!important;
+      color: $primary !important;
     }
   }
 }

@@ -1,4 +1,5 @@
-@import '../base/_variables';
+@import '../base/variables';
+@import '../base/mixins';
 @import 'theme_settings';
 
 .notification-container {
@@ -23,8 +24,7 @@
 
 .notification-body {
   width: auto;
-  word-wrap: break-word;
-  word-break: break-all;
+  @include force-word-break();
 
   @media screen and (min-width: 1600px)
   {

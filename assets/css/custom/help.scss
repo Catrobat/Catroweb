@@ -1,5 +1,6 @@
 @import '../../../public/bootstrap_vendor/scss/functions';
-@import '../base/_variables';
+@import '../base/variables';
+@import '../base/mixins';
 @import '../../../public/bootstrap_vendor/scss/variables';
 @import '../../../public/bootstrap_vendor/scss/mixins';
 @import "../base/elements";
@@ -574,9 +575,7 @@
     span {
       padding: $tutorialcard-padding;
       text-align: center;
-      word-break: break-word;
-      word-wrap: break-word;
-      hyphens: auto;
+      @include force-word-break();
     }
   }
 }
