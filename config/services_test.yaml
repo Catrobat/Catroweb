@@ -15,6 +15,7 @@ parameters:
   catrobat.mediapackage.path:  "resources_test/mediapackage/"
   catrobat.backup.dir:         "%catrobat.pubdir%resources_test/backups/"
   catrobat.snapshot.dir:       "%catrobat.pubdir%resources_test/snapshots/"
+  catrobat.logs.dir:           "%kernel.project_dir%/tests/testdata/log/"
   jenkins:
     url: https://jenkins.catrob.at/buildByToken/buildWithParameters
     job: "Build-Program"

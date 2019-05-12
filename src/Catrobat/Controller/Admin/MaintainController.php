@@ -10,6 +10,7 @@ use App\Catrobat\Commands\CleanLogsCommand;
 use App\Catrobat\Commands\CreateBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -87,10 +88,17 @@ class MaintainController extends Controller
     $command = new CleanLogsCommand();
     $command->setContainer($this->container);
 
-    $return = $command->run(new ArrayInput([]), new NullOutput());
-    if ($return == 0)
+    $output = new BufferedOutput();
+    $return = $command->run(new ArrayInput([]), $output);
+    if ($return === 0)
     {
-      $this->addFlash('sonata_flash_success', 'Reset log files OK');
+      $this->addFlash('sonata_flash_success', 'Clean log files OK');
+    }
+    else
+    {
+      $message = "<strong>Failed cleaning log files:</strong><br />\n";
+      $message .= str_replace("\n", "<br />\n", $output->fetch());
+      $this->addFlash('sonata_flash_error', $message);
     }
 
     return new RedirectResponse($this->admin->generateUrl("list"));

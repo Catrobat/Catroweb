@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CleanLogsCommand extends ContainerAwareCommand
 {
   /**
-   * @var
+   * @var OutputInterface
    */
   private $output;
 
@@ -23,7 +23,7 @@ class CleanLogsCommand extends ContainerAwareCommand
    */
   protected function configure()
   {
-    $this->setName('catrobat:logs:clean')
+    $this->setName('catrobat:clean:logs')
       ->setDescription('Delete the log files');
   }
 
@@ -38,11 +38,44 @@ class CleanLogsCommand extends ContainerAwareCommand
     $this->output = $output;
     $this->output->writeln('Deleting log files');
     $log_dir = $this->getContainer()->getParameter('catrobat.logs.dir');
-    $log_files = glob($log_dir . "*.log");
-    foreach ($log_files as $log_file)
+    $errors = $this->deleteDirectory($log_dir, false);
+    if ($errors === 0)
     {
-      unlink($log_file);
+      $this->output->writeln('Successfully deleted log files');
+
+      return 0;
     }
-    $this->output->writeln('Successfully deleted log files');
+    else
+    {
+      $this->output->writeln('Could not delete all log files. Please check permissions.');
+
+      return 1;
+    }
+  }
+
+  private function deleteDirectory(string $dir_path, bool $deleteSelf)
+  {
+    $errors = 0;
+    $objs = array_diff(scandir($dir_path), ['.', '..']);
+    foreach ($objs as $obj)
+    {
+      $file_path = $dir_path . DIRECTORY_SEPARATOR . $obj;
+      if (is_dir($file_path))
+      {
+        $errors += $this->deleteDirectory($file_path, true);
+      }
+      elseif (unlink($file_path) !== true)
+      {
+        $errors++;
+        $this->output->writeln('Failed removing ' . $file_path);
+      }
+    }
+    if ($deleteSelf && rmdir($dir_path) !== true)
+    {
+      $errors++;
+      $this->output->writeln('Failed removing directory ' . $dir_path);
+    }
+
+    return $errors;
   }
 } 
