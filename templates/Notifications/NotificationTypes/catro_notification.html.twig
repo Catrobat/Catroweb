@@ -1,15 +1,9 @@
-<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
+{% extends 'Notifications/NotificationTypes/baseNotification.html.twig' %}
 
-  <h5 class="card-header notification-header">{{ notification.title }}</h5>
-  <div class="card-body">
+{% block notification_title%}
+  {{ notification.title }}
+{% endblock %}
 
-    <div class="message">
-      {{ notification.message }}
-    </div>
-
-    <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
-            onclick="notifications.markAsRead({{ notification.id }})">
-      {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
-    </button>
-  </div>
-</div>
+{% block notification_body%}
+  {{ notification.message | raw}}
+{% endblock %}

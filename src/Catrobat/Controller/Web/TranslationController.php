@@ -16,8 +16,7 @@ class TranslationController extends Controller
 {
 
   /**
-   * @Route("/translate/{word}/{array}/{domain}", name = "translate_word", defaults={"array" = "", "domain" =
-   *                                              "catroweb"})
+   * @Route("/translate/{word}/{array}/{domain}", name="translate_word", defaults={"array"="", "domain"="catroweb"})
    *
    * @param TranslatorInterface $translator
    * @param                     $word

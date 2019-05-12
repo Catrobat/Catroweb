@@ -1,0 +1,5 @@
+<div class="notification-avatar">
+  <img class="notification-round"
+       src="{% if avatars[notification.id] is defined %}{{ avatars[notification.id] }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
+       alt="Card image">
+</div>

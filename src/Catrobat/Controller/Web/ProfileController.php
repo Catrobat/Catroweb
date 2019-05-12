@@ -375,12 +375,7 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     $notification_service = $this->get("catro_notification_service");
-    $notification = new FollowNotification(
-      $userToFollow,
-      "Follow notification",
-      "follows you now",
-      $user
-    );
+    $notification = new FollowNotification($userToFollow, $user);
     $notification_service->addNotification($notification);
 
     return $this->redirectToRoute('profile', ['id' => $id]);

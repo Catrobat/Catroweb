@@ -590,7 +590,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
           break;
         case "comment":
           $comment = $em->getRepository(UserComment::class)->find($notification['commentID']);
-          $to_create = new CommentNotification($user, $notification['title'], $notification['message'], $comment);
+          $to_create = new CommentNotification($user, $comment);
           $em->persist($to_create);
           break;
         default:

@@ -255,7 +255,7 @@
               data-clipboard-text="{{ url('program', { id : program.id }) }}"
               style="text-shadow: none;">
         <span class="fa fa-link" aria-hidden="true"></span>
-        Link
+        {{ "programs.linkTitle"|trans({}, "catroweb") }}
       </button>
 
       {% if not my_program %}

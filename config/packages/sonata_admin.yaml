@@ -39,7 +39,7 @@ sonata_admin:
                 settings:
                     code: catrowebadmin.block.programs.all
                     icon: fa-cubes
-                    text: Programme gesamt
+                    text: All programs
                     color: bg-blue
 
             -  # Programs Approve
@@ -49,7 +49,7 @@ sonata_admin:
                 settings:
                     code: catrowebadmin.block.programs.approve
                     icon: fa-warning
-                    text: Programme unbestätigt
+                    text: Unapproved programs
                     color: bg-yellow
 
             -  # Reported Programs
@@ -59,7 +59,7 @@ sonata_admin:
                 settings:
                     code: catrowebadmin.block.programs.reported
                     icon: fa-bullhorn
-                    text: Programme gemeldet
+                    text: Reported programs
                     color: bg-red
                     filters:
                         state: { type: 3, value: 1 } # 3 => NumberType::TYPE_EQUAL

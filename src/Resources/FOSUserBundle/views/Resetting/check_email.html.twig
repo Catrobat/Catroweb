@@ -18,7 +18,7 @@
       {% include 'UserManagement/login_logo.html.twig' %}
 
       <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-6 text-center" align="center">
+        <div class="col-sm-11 col-md-8 col-lg-6 center">
 
           {% if already_reset is defined %}
           <div class="alert alert-danger" style="margin-top: 15px">
@@ -36,7 +36,9 @@
               <div class="col-md-12 control">
                 <div style="padding-top:15px; font-size:85%">
                   {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
-                  <a id="create_account" href="{{ path('login') }}" rel="noreferrer">Log in</a>
+                  <a id="create_account" href="{{ path('login') }}" rel="noreferrer">
+                    {{ 'login.login'|trans({}, 'catroweb') }}
+                  </a>
                 </div>
               </div>
             </div>

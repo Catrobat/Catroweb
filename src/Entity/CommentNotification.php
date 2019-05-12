@@ -16,8 +16,7 @@ class CommentNotification extends CatroNotification
   private $comment;
 
   /*
-   *  You have to set this parameter otherwise the wrong template will be
-   *       rendered.
+   *  You have to set this parameter otherwise the wrong template will be rendered.
    */
   private $twig_template = "Notifications/NotificationTypes/comment_notification.html.twig";
 
@@ -25,18 +24,13 @@ class CommentNotification extends CatroNotification
    * CommentNotification constructor.
    *
    * @param User $user
-   * @param      $title
-   * @param      $message
    * @param      $comment
    *
    */
-  public function __construct(User $user, $title, $message, $comment)
+  public function __construct(User $user, $comment)
   {
-    parent::__construct($user, $title, $message);
+    parent::__construct($user);
     $this->comment = $comment;
-    /* if you didn't forget to set the member variable to default above
-       you don't need the following line */
-    $this->twig_template = "Notifications/NotificationTypes/comment_notification.html.twig";
   }
 
   /**
@@ -64,6 +58,4 @@ class CommentNotification extends CatroNotification
   {
     return $this->twig_template;
   }
-
-
 }

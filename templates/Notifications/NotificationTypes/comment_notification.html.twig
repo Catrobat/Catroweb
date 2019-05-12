@@ -1,37 +1,22 @@
-<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
+{% extends 'Notifications/NotificationTypes/baseNotification.html.twig' %}
 
-  <h5 class="card-header notification-header">
-    {{ 'catro-notifications.comment.title'|trans({'%program_name%' : notification.comment.program.name}, 'catroweb') }}
-  </h5>
-  <div class="card-body">
+{% block notification_title%}
+  {{ 'catro-notifications.comment.title'|trans({'%program_name%' : notification.comment.program.name}, 'catroweb') }}
+{% endblock %}
 
-    <div class="row">
+{% block notification_leftAvatar %}
+  {{ include('Notifications/NotificationTypes/userAvatar.html.twig') }}
+{% endblock %}
 
-      <div class="notification-avatar">
-        <img class="notification-round"
-             src="{% if avatars[notification.id] is defined %}{{ avatars[notification.id] }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
-             alt="Card image">
-      </div>
-
-      <div class="notification-body">
-
-        <div class="row mb-4">
-          <p class="card-text">
-            {{ 'catro-notifications.comment.messagePart1'|trans({}, 'catroweb') }}
-            <a href="{{ path('profile', {'id': notification.comment.userid}) }}">{{ notification.comment.username }}</a>
-            {{ 'catro-notifications.comment.messagePart2'|trans({}, 'catroweb') }}
-            <a href="{{ path('program', {'id': notification.comment.program.id}) }}">{{ notification.comment.program.name }}</a>!
-          </p>
-        </div>
-
-        <div class="row">
-          <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
-                  onclick="notifications.markAsRead({{ notification.id }})">
-            {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
+{% block notification_body%}
+  {{ 'catro-notifications.comment.message' | trans
+    (
+      {
+        '%user_link%': '<a href="'~path('profile', {'id': notification.comment.userid})~'">'~notification.comment.username~'</a>',
+        '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
+      },
+      'catroweb'
+    )
+    |raw
+  }}
+{% endblock %}

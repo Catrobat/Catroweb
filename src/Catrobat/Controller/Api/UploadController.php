@@ -185,12 +185,7 @@ class UploadController
       foreach ($user->getFollowers() as $follower)
       {
         $notification_service = $request->get("catro_notification_service");
-        $notification = new NewProgramNotification(
-          $follower,
-          "New Program Follows notification",
-          "new program",
-          $program
-        );
+        $notification = new NewProgramNotification($follower, $program);
         $notification_service->addNotification($notification);
       }
       $response = $this->createUploadResponse($request, $gamejam, $user, $program);
