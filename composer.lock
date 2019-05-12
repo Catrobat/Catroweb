@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd699715c51ebbbea463d4fe9564991c",
+    "content-hash": "0f09740eac48055b82d402eeb0396677",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -6280,16 +6280,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v3.4.23",
+            "version": "v3.4.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "10050c2a057123eb859c9f39d07ba97271ec1f1a"
+                "reference": "dac48f56f5bd795a8ff6f3e259300f2877ddeb16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/10050c2a057123eb859c9f39d07ba97271ec1f1a",
-                "reference": "10050c2a057123eb859c9f39d07ba97271ec1f1a",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/dac48f56f5bd795a8ff6f3e259300f2877ddeb16",
+                "reference": "dac48f56f5bd795a8ff6f3e259300f2877ddeb16",
                 "shasum": ""
             },
             "require": {
@@ -6351,7 +6351,7 @@
                 "l10n",
                 "localization"
             ],
-            "time": "2019-02-23T15:06:07+00:00"
+            "time": "2019-04-18T09:57:10+00:00"
         },
         {
             "name": "symfony/maker-bundle",

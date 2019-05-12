@@ -3068,4 +3068,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     putenv("APP_VERSION=" . $appVersion);
   }
+
+  /**
+   * @Given the random program section is empty
+   */
+  public function theRandomProgramSectionIsEmpty()
+  {
+    $this->getSession()->evaluateScript(
+      'document.getElementById("random").style.display = "none";'
+    );
+  }
 }

@@ -8,7 +8,7 @@ Feature: Show more programs button behaviour
       | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
       | id | name       | description | owned by | downloads | apk_downloads | views | upload time      | version |
-      | 1  | program 01 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 1  | oldestProg | p1          | Catrobat | 3         | 2             | 12    | 01.01.2009 12:00 | 0.8.5   |
       | 2  | program 02 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
       | 3  | program 03 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 4  | program 04 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
@@ -30,6 +30,7 @@ Feature: Show more programs button behaviour
       | 20 | program 20 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 21 | program 21 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 22 | program 22 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 23 | program 23 |             | User1    | 1         |  1            | 1     | 01.01.2011 13:00 | 0.8.5   |
 
   Scenario Outline: Should see all buttons at homepage
     Given I am on homepage
@@ -74,7 +75,7 @@ Feature: Show more programs button behaviour
     When I click <button>
     And I wait for a second
     And I wait for a second
-    Then I should see 22 <programs>
+    Then I should see 23 <programs>
 
     Examples:
       | button                              | programs                   |
@@ -83,4 +84,12 @@ Feature: Show more programs button behaviour
       | "#mostViewed .button-show-more"     | "#mostViewed .program"     |
       | "#random .button-show-more"         | "#random .program"         |
 
-
+  Scenario: All programs should be visible after all of them have been loaded
+    Given I am on homepage
+    And the random program section is empty
+    Then I should not see "oldestProg"
+    When I click "#newest .button-show-more"
+    And I wait for a second
+    When I click "#newest .button-show-more"
+    And I wait for a second
+    Then I should see "oldestProg"
