@@ -38,7 +38,7 @@ Feature: As a visitor I want to see a program page
 
   Scenario: Viewing the uploader's profile page
     Given I am on "/pocketcode/program/1"
-    And I click "#program-user a"
+    And I click "#icon-author a"
     Then I should be on "/pocketcode/profile/1"
 
   Scenario: I should not see the report button for my own programs

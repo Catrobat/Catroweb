@@ -32,13 +32,10 @@
 {% endblock %}
 
 {% block body %}
+
   <div id="program-top" class="h1">
     <div id="program-name" class="headline">
       {{ program.name }}
-    </div>
-
-    <div id="program-user">
-      <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
     </div>
     <div class="clear"></div>
   </div>
@@ -278,40 +275,42 @@
   {% endif %}
 
   <div id="program-bottom">
-    <div id="icon-author">
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-user"></i></div>
-      <a href="{{ url('profile', { id : program.user.id }) }}"
-         class="icon-text">{{ program.user }}</a>
-    </div>
-    <div>
-      <div class="program-round-icon-container"><i class="program-round-icon far fa-clock"></i>
+    <div id="program-bottom-container">
+      <div id="icon-author">
+        <div class="program-round-icon-container"><i class="program-round-icon fas fa-user"></i></div>
+        <a href="{{ url('profile', { id : program.user.id }) }}"
+           class="icon-text">{{ program.user }}</a>
       </div>
-      <span class="icon-text">{{ program_details.age }}</span>
-    </div>
-    <div>
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-file-alt"></i>
+      <div>
+        <div class="program-round-icon-container"><i class="program-round-icon far fa-clock"></i>
+        </div>
+        <span class="icon-text">{{ program_details.age }}</span>
       </div>
-      <span class="icon-text">{{ program_details.filesize }} MB</span>
-    </div>
-    <div>
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-download"></i>
+      <div>
+        <div class="program-round-icon-container"><i class="program-round-icon fas fa-file-alt"></i>
+        </div>
+        <span class="icon-text">{{ program_details.filesize }} MB</span>
       </div>
-      <span
-          class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
-      </span>
-    </div>
-    <div>
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-eye"></i></div>
-      <span
-          class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
-    </div>
-    <div>
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i>
+      <div>
+        <div class="program-round-icon-container"><i class="program-round-icon fas fa-download"></i>
+        </div>
+        <span
+            class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
+        </span>
       </div>
-      <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text">
-        {{ "programs.remixes"|transchoice(program_details.remixesLength,
-          { '%remixes%' : program_details.remixesLength }, "catroweb") }}
-      </a>
+      <div>
+        <div class="program-round-icon-container"><i class="program-round-icon fas fa-eye"></i></div>
+        <span
+            class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
+      </div>
+      <div>
+        <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i>
+        </div>
+        <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text">
+          {{ "programs.remixes"|transchoice(program_details.remixesLength,
+            { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+        </a>
+      </div>
     </div>
   </div>
 
