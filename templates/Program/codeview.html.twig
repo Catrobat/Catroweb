@@ -6,7 +6,7 @@
 {% import _self as self %}
 
 {% macro dropbtn(object, path, scene_name) %}
-  {# ToDo show the correct image#}
+   ToDo show the correct image
   <div class="object-meta">
     <div class="object-meta-name">
       <p>Object:</p>
@@ -179,18 +179,18 @@
     <div class="flex-container">
       <div class="flex-left">
         {% if program_statistic.getSceneStatistic() > 0 %}
-          <p class="light">Total number of <span class="brick-stat-heading">scenes</span>:</p>
+          <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.scenes"|trans({}, "catroweb") }}</span>:</p>
         {% endif %}
-        <p class="light">Total number of <span class="brick-stat-heading">scripts</span>:</p>
-        <p class="light">Total number of <span class="brick-stat-heading">bricks</span>:</p>
-        <p class="light">Total number of <span class="brick-stat-heading">objects</span>:</p>
-        <p class="light">Total number of <span class="brick-stat-heading">looks</span>:</p>
-        <p class="light">Total number of <span class="brick-stat-heading">sounds</span>:</p>
+        <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.scripts"|trans({}, "catroweb") }}</span>:</p>
+        <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.bricks"|trans({}, "catroweb") }}</span>:</p>
+        <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.objects"|trans({}, "catroweb") }}</span>:</p>
+        <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.looks"|trans({}, "catroweb") }}</span>:</p>
+        <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.sounds"|trans({}, "catroweb") }}</span>:</p>
         {% if program_statistic.getGlobalVarStatistic() is not null %}
-          <p class="light">Total number of <span class="brick-stat-heading">globals</span>:</p>
+          <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.globals"|trans({}, "catroweb") }}</span>:</p>
         {% endif %}
         {% if program_statistic.getLocalVarStatistic() is not null %}
-          <p class="light">Total number of <span class="brick-stat-heading">locals</span>:</p>
+          <p class="light">{{ "codeview.totalNumberOf"|trans({}, "catroweb") }} <span class="brick-stat-heading">{{ "codeview.locals"|trans({}, "catroweb") }}</span>:</p>
         {% endif %}
       </div>
       <div class="flex-right">
@@ -213,31 +213,31 @@
   </div>
   <div class="brick-statistics">
     <div class="brick-statistic-block">
-      <p class="brick-stat-heading">Event Bricks:</p>
+      <p class="brick-stat-heading">{{ "codeview.eventBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().eventBricks) }}
     </div>
     <div class="brick-statistic-block">
-      <p class="brick-stat-heading">Control Bricks:</p>
+      <p class="brick-stat-heading">{{ "codeview.controlBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().controlBricks) }}
     </div>
     <div class="brick-statistic-block">
-      <p class="brick-stat-heading">Motion Bricks:</p>
+      <p class="brick-stat-heading">{{ "codeview.motionBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().motionBricks) }}
     </div>
     <div class="brick-statistic-block">
-      <p class="brick-stat-heading">Sound Bricks:</p>
+      <p class="brick-stat-heading">{{ "codeview.soundBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().soundBricks) }}
     </div>
     <div class="brick-statistic-block">
-      <p class="brick-stat-heading">Looks Bricks:</p>
+      <p class="brick-stat-heading">{{ "codeview.looksBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().looksBricks) }}
     </div>
     <div class="brick-statistic-block">
-      <p class="brick-stat-heading">Pen Bricks:</p>
+      <p class="brick-stat-heading">{{ "codeview.penBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().penBricks) }}
     </div>
     <div class="brick-statistic-block">
-      <p class="brick-stat-heading">Data Bricks:</p>
+      <p class="brick-stat-heading">{{ "codeview.dataBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().dataBricks) }}
     </div>
   </div>
@@ -246,28 +246,36 @@
 {% block body %}
 
   <div class="show-hide-code-statistic">
-    <div class="show-hide-code-statistic-text">SHOW CODE STATISTIC</div>
+    <div class="show-hide-code-statistic-text">
+      {{ "codeview.showStatistics"|trans({}, "catroweb") }}
+    </div>
     <div class="show-hide-code-statistic-arrow">
       <i class="catro-icon-button fas fa-caret-down"></i>
     </div>
   </div>
   <div id="codestatistic-wrapper">
     {% if parsed_program is null %}
-      <p class="exception">STATISTIC CAN'T BE DISPLAYED</p>
+      <p class="exception">
+        {{ "codeview.cantDisplayStatistics"|trans({}, "catroweb") }}
+      </p>
     {% else %}
       {{ self.statistic(parsed_program.getCodeStatistic()) }}
     {% endif %}
   </div>
 
   <div class="show-hide-code">
-    <div class="show-hide-code-text">SHOW CODE</div>
+    <div class="show-hide-code-text">
+      {{ "codeview.showCode"|trans({}, "catroweb") }}
+    </div>
     <div class="show-hide-code-arrow">
       <i class="catro-icon-button fas fa-caret-down"></i>
     </div>
   </div>
   <div id="codeview-wrapper">
     {% if parsed_program is null %}
-      <p class="exception">CODE CAN'T BE DISPLAYED</p>
+      <p class="exception">
+        {{ "codeview.cantDisplayCode"|trans({}, "catroweb") }}
+      </p>
     {% else %}
       {% if parsed_program.hasScenes() %}
         {% if parsed_program.scenes()|length > 1 %}
@@ -286,12 +294,21 @@
 {% endblock %}
 
 {% block js %}
+
   <script>
 
     let sound_map = {}
     let current_brick_stat_block = null
 
     $(document).ready(function () {
+
+      let translations = {
+        'showCode' : '{{ "codeview.showCode"|trans({}, "catroweb") }}',
+        'hideCode' : '{{ "codeview.hideCode"|trans({}, "catroweb") }}',
+        'showStats' : '{{ "codeview.showStatistics"|trans({}, "catroweb") }}',
+        'hideStats' : '{{ "codeview.hideStatistics"|trans({}, "catroweb") }}',
+      }
+
       $('.collapse-btn').on('click', function () {
         $(this).next().slideToggle(250, 'linear')
         $(this).find('.arrow').toggleClass('rotate')
@@ -299,34 +316,35 @@
 
       $(document).on('click', '.show-hide-code', function () {
         let text = $('.show-hide-code-text')
-        if (text.text() === 'SHOW CODE')
+
+        if (text.text() === translations['showCode'])
         {
           $('.show-hide-code-arrow').addClass('rotate showing-code')
-          text.text('HIDE CODE')
+          text.text(translations['hideCode'])
           $('#codeview-wrapper').slideDown()
         }
         else
         {
           $('#codeview-wrapper').slideUp(400, function () {
             $('.show-hide-code-arrow').removeClass('rotate showing-code')
-            text.text('SHOW CODE')
+            text.text(translations['showCode'])
           })
         }
       })
 
       $(document).on('click', '.show-hide-code-statistic', function () {
         let text = $('.show-hide-code-statistic-text')
-        if (text.text() === 'SHOW CODE STATISTIC')
+        if (text.text() === translations['showStats'])
         {
           $('.show-hide-code-statistic-arrow').addClass('rotate showing-code')
-          text.text('HIDE CODE STATISTIC')
+          text.text(translations['hideStats'])
           $('#codestatistic-wrapper').slideDown()
         }
         else
         {
           $('#codestatistic-wrapper').slideUp(400, function () {
             $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code')
-            text.text('SHOW CODE STATISTIC')
+            text.text(translations['showStats'])
           })
         }
       })

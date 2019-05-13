@@ -62,7 +62,9 @@
             <div class="row">
               <div class="col">
                 <div style="padding-top:15px; font-size:85%; float:right">
-                  <a id="pw-request" href="{{ path("fos_user_resetting_request") }}">Forgot Password?</a>
+                  <a id="pw-request" href="{{ path("fos_user_resetting_request") }}">
+                    {{ "login.forgotPass"|trans({}, "catroweb") }}
+                  </a>
                 </div>
               </div>
             </div>
@@ -104,7 +106,7 @@
                   <div class="form-group">
                     <div class="col-md-12 control">
                       <div style="padding-top:15px; font-size:85%">
-                        Don't have an account!
+                        {{ "login.noAccount"|trans({}, "catroweb") }}
                         <a id="create_account"
                            href="{{ path('fos_user_registration_register') }}">
                           {{ 'login.createAccount'|trans({}, 'catroweb') }}

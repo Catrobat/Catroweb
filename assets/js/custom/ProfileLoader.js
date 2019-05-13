@@ -91,7 +91,14 @@ let ProfileLoader = function (profile_id, url, profile_url, container, default_p
   }
   
   self.addNothingFoundMessage = function () {
-    $(self.container).append('<div class="no-programs text-center">There are currently no profiles.</div>')
+    let url = Routing.generate('translate_word', {
+      'word'  : 'profileLoader.noProfiles',
+      'domain': 'catroweb'
+    })
+    $.get(url, function (data) {
+      $(self.container).append('<div class="no-programs text-center">' + data + '</div>')
+    })
+
   }
   
 }

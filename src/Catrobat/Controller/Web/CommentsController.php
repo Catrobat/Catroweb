@@ -142,9 +142,7 @@ class CommentsController extends Controller
 
     if ($user !== $program->getUser())
     {
-      $notification = new CommentNotification($program->getUser(),
-        "Comment notification",
-        "You received a new comment on program %programname% from user %author%.", $temp_comment);
+      $notification = new CommentNotification($program->getUser(), $temp_comment);
       $notification_service->addNotification($notification);
     }
 

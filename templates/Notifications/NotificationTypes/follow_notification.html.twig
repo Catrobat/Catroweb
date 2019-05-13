@@ -1,32 +1,21 @@
-<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
-  <h5 class="card-header notification-header">
-    {{ 'catro-notifications.follow.title'|trans({}, 'catroweb') }}
-  </h5>
-  <div class="card-body">
+{% extends 'Notifications/NotificationTypes/baseNotification.html.twig' %}
 
-    <div class="row">
-      {#//$avatar = "asset('images/default/avatar_default.png')";#}
-      <div class="notification-avatar">
-        <img class="notification-round"
-             src="{% if avatars[notification.id] is defined %}{{ avatars[notification.id] }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
-             alt="Card image">
-      </div>
+{% block notification_title%}
+  {{ 'catro-notifications.follow.title'|trans({}, 'catroweb') }}
+{% endblock %}
 
-      <div class="notification-body">
-        <div class="row mb-4">
-          <p class="card-text">
-            <a href="{{ path('profile', {'id': notification.follower.id}) }}">{{ notification.follower.username }}</a>
-            {{ 'catro-notifications.follow.message'|trans({}, 'catroweb') }}
-          </p>
-        </div>
+{% block notification_leftAvatar %}
+  {{ include('Notifications/NotificationTypes/userAvatar.html.twig') }}
+{% endblock %}
 
-        <div class="row">
-          <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
-                  onclick="notifications.markAsRead({{ notification.id }})">
-            {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% block notification_body%}
+  {{ 'catro-notifications.follow.message' | trans
+    (
+      {
+        '%user_link%': '<a href="'~path('profile', {'id': notification.follower.id})~'">'~notification.follower.username~'</a>',
+      },
+      'catroweb'
+    )
+    |raw
+  }}
+{% endblock %}
