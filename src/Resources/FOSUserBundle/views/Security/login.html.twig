@@ -48,14 +48,19 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="col">
-                <div class="group">
-                  <input id="password" type="password" name="_password" required>
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-                  <label><span class="span-input">{{ "password"|trans({}, "catroweb") }}</span></label>
+            <div class="group">
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <div class="group-with-icon-wrapper show-hide-password">
+                <div class="group-with-icon">
+                  <span>
+                    <input id="password" type="password" name="_password" required>
+                    <label><span class="span-input">{{ "password"|trans({}, "catroweb") }}</span></label>
+                  </span>
                 </div>
+                <a id="password-visibility-toggler" href="">
+                  <i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i>
+                </a>
               </div>
             </div>
 
@@ -132,3 +137,7 @@
   {% endblock fos_user_content %}
 
 {% endblock body %}
+
+{% block js %}
+  <script src="{{ asset('compiled/js/PasswordVisibilityToggler.js') }}"></script>
+{% endblock js %}
