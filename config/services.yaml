@@ -536,6 +536,7 @@ services:
       - "@tokengenerator"
       - "@translator"
       - "@logger"
+      - "@catro_notification_service"
     public: true
     tags: ['controller.service_arguments']
 

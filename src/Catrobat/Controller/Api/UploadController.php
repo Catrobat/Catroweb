@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\NewProgramNotification;
@@ -61,6 +62,10 @@ class UploadController
    */
   private $translator;
 
+  /**
+   * @var CatroNotificationService
+   */
+  private $catroNotificationService;
 
   /**
    * @var LoggerInterface
@@ -77,11 +82,13 @@ class UploadController
    * @param TokenGenerator      $tokengenerator
    * @param TranslatorInterface $translator
    * @param LoggerInterface     $logger
+   * @param CatroNotificationService $catroNotificationService
    */
 
   public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager,
                               GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator,
-                              TranslatorInterface $translator, LoggerInterface $logger)
+                              TranslatorInterface $translator, LoggerInterface $logger,
+                              CatroNotificationService $catroNotificationService)
   {
     $this->usermanager = $usermanager;
     $this->tokenstorage = $tokenstorage;
@@ -90,6 +97,7 @@ class UploadController
     $this->tokengenerator = $tokengenerator;
     $this->translator = $translator;
     $this->logger = $logger;
+    $this->catroNotificationService = $catroNotificationService;
   }
 
 
@@ -184,9 +192,8 @@ class UploadController
     {
       foreach ($user->getFollowers() as $follower)
       {
-        $notification_service = $request->get("catro_notification_service");
         $notification = new NewProgramNotification($follower, $program);
-        $notification_service->addNotification($notification);
+        $this->catroNotificationService->addNotification($notification);
       }
       $response = $this->createUploadResponse($request, $gamejam, $user, $program);
     }
