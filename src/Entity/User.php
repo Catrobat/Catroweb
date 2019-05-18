@@ -137,11 +137,6 @@ class User extends BaseUser implements LdapUserInterface
   protected $facebook_access_token;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
-   */
-  protected $limited = false;
-
-  /**
    * User constructor.
    */
   public function __construct()
@@ -370,22 +365,6 @@ class User extends BaseUser implements LdapUserInterface
   public function getDn()
   {
     return $this->dn;
-  }
-
-  /**
-   * @return bool
-   */
-  public function isLimited()
-  {
-    return $this->limited;
-  }
-
-  /**
-   * @param $limited
-   */
-  public function setLimited($limited)
-  {
-    $this->limited = $limited;
   }
 
   /**

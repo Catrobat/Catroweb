@@ -7,7 +7,6 @@ use App\Catrobat\Services\MediaPackageFileRepository;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
-use App\Repository\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,11 +32,6 @@ class AppExtension extends AbstractExtension
   private $mediapackage_file_repository;
 
   /**
-   * @var GameJamRepository
-   */
-  private $gamejamrepository;
-
-  /**
    * @var ActiveTheme
    */
   private $theme;
@@ -57,19 +51,16 @@ class AppExtension extends AbstractExtension
    *
    * @param RequestStack               $request_stack
    * @param MediaPackageFileRepository $mediapackage_file_repo
-   * @param GameJamRepository          $gamejamrepository
    * @param ActiveTheme                $theme
    * @param                            $translationPath
    * @param Container                  $container
    */
   public function __construct(RequestStack $request_stack, MediaPackageFileRepository
-  $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme,
-                              $translationPath, Container $container)
+  $mediapackage_file_repo, ActiveTheme $theme, $translationPath, Container $container)
   {
     $this->translationPath = $translationPath;
     $this->request_stack = $request_stack;
     $this->mediapackage_file_repository = $mediapackage_file_repo;
-    $this->gamejamrepository = $gamejamrepository;
     $this->theme = $theme;
     $this->container = $container;
   }
@@ -115,7 +106,6 @@ class AppExtension extends AbstractExtension
       new TwigFunction('flavor', [$this, 'getFlavor']),
       new TwigFunction('theme', [$this, 'getTheme']),
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
-      new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
       new TwigFunction('getJavascriptPath', [$this, 'getJavascriptPath']),
       new TwigFunction('getCommunityStats', [$this, 'getCommunityStats'])
     ];
@@ -354,14 +344,6 @@ class AppExtension extends AbstractExtension
     }
   }
 
-  /**
-   * @return mixed
-   * @throws \Doctrine\ORM\NonUniqueResultException
-   */
-  public function getCurrentGameJam()
-  {
-    return $this->gamejamrepository->getCurrentGameJam();
-  }
 
   /**
    * @param $jsFile

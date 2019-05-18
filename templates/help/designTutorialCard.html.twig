@@ -13,8 +13,7 @@
       <div class="videoWrapper">
         <!-- Copy & Pasted from YouTube -->
         <iframe width="560" height="315"
-                src={{ "https://www.youtube.com/embed/"~blocks[1].video_link }} frameborder="0"
-                allowfullscreen></iframe>
+                src={{ "https://www.youtube.com/embed/"~blocks[1].video_link }}></iframe>
       </div>
     </div>
 
@@ -30,7 +29,9 @@
     <div class="section">
       <a id="url-download" href={{ blocks[2].download_url }}>
         <button id="download"
-                class="btn btn-primary download-button">{{ "help.aliceGameJamTutorialcards.download"|trans({}, "catroweb") }}</button>
+                class="btn btn-primary download-button">
+          {{ "help.aliceGameJamTutorialcards.download"|trans({}, "catroweb") }}
+        </button>
       </a>
     </div>
 

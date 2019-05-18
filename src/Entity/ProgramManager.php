@@ -129,6 +129,9 @@ class ProgramManager
    */
   public function addProgram(AddProgramRequest $request)
   {
+    /**
+     * @var $program Program
+     */
     $file = $request->getProgramfile();
 
     $extracted_file = $this->file_extractor->extract($file);
@@ -182,12 +185,6 @@ class ProgramManager
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
     $this->addTags($program, $extracted_file, $request->getLanguage());
-
-    if ($request->getGamejam() !== null)
-    {
-      $program->setGamejam($request->getGamejam());
-      $program->setGameJamSubmissionDate(new DateTime());
-    }
 
     $this->event_dispatcher->dispatch(
       'catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program)

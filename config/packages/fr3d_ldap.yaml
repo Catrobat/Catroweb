@@ -7,7 +7,6 @@ parameters:
     ROLE_FEATURED:      "Webserver-FeaturedProgramsMaintainers"
     ROLE_APPROVE:       "Webserver-AppApprovers"
     ROLE_SUPER_ADMIN:   "Webserver-Administrators"
-    ROLE_GAMEJAM_ADMIN: "Webserver-GameJam-Administrators"
 
 
 # # working testserver

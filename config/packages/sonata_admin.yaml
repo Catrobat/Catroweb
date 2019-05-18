@@ -123,7 +123,6 @@ sonata_admin:
                 items:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
-                    - catrowebadmin.block.users.limited
 
             sonata.admin.group.tools:
                 label:           Tools
@@ -137,14 +136,6 @@ sonata_admin:
                     - catrowebadmin.block.tools.gcm
                     - catrowebadmin.block.tools.broadcast
                     - catrowebadmin.block.tools.mail
-
-            sonata.admin.group.gamejams:
-                label:           GameJam
-                label_catalogue: Catrobat
-                icon:            '<i class="fa fa-cogs"></i>'
-                items:
-                    - catrowebadmin.block.gamejam
-                    - catrowebadmin.block.program.snapshots
 
             sonata.admin.group.extensions:
                 label:           Extensions

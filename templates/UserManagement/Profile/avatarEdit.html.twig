@@ -14,12 +14,10 @@
 <img alt="avatar" id="avatar-img"
      src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
 
-{% if not app.user.limited %}
-  <div id="avatar-upload">
-    <div>
-      <input type="file" name="file">
-      <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
-      <div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
-    </div>
+<div id="avatar-upload">
+  <div>
+    <input type="file" name="file">
+    <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
+    <div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
   </div>
-{% endif %}
+</div>

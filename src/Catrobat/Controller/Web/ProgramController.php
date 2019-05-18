@@ -9,7 +9,6 @@ use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\StatusCode;
 use App\Entity\CatroNotification;
-use App\Entity\GameJam;
 use App\Entity\LikeNotification;
 use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
@@ -98,7 +97,6 @@ class ProgramController extends Controller
    * @throws Error
    * @throws NonUniqueResultException
    * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function programAction(Request $request, $id)
   {
@@ -172,7 +170,6 @@ class ProgramController extends Controller
     $share_text = trim($program->getName() . ' on ' . $program_url . ' ' .
       $program->getDescription());
 
-    $jam = $this->extractGameJamConfig();
 
     $max_description_size = $this->container->get('kernel')->getContainer()
       ->getParameter("catrobat.max_description_upload_size");
@@ -192,7 +189,6 @@ class ProgramController extends Controller
       'already_reported'             => $isReportedByUser,
       'shareText'                    => $share_text,
       'program_url'                  => $program_url,
-      'jam'                          => $jam,
       'user_name'                    => $user_name,
       'max_description_size'         => $max_description_size,
       'logged_in'                    => $logged_in,
@@ -504,49 +500,11 @@ class ProgramController extends Controller
     return JsonResponse::create(['statusCode' => StatusCode::OK]);
   }
 
-
-  /**
-   * @return array
-   * @throws NonUniqueResultException
-   */
-  private function extractGameJamConfig()
-  {
-    $jam = null;
-    /** @var GameJam $gamejam */
-    $gamejam = $this->get('gamejamrepository')->getCurrentGameJam();
-
-    if ($gamejam)
-    {
-      $gamejam_flavor = $gamejam->getFlavor();
-      if ($gamejam_flavor !== null)
-      {
-        $config = $this->container->getParameter('gamejam');
-        $gamejam_config = $config[$gamejam_flavor];
-        if ($gamejam_config)
-        {
-          $logo_url = $gamejam_config['logo_url'];
-          $display_name = $gamejam_config['display_name'];
-          $gamejam_url = $gamejam_config['gamejam_url'];
-          $jam = [
-            'name'        => $display_name,
-            'logo_url'    => $logo_url,
-            'gamejam_url' => $gamejam_url,
-          ];
-        }
-      }
-    }
-
-    return $jam;
-  }
-
-
   /**
    * @param Request $request
    * @param Program $program
    * @param         $viewed
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   private function checkAndAddViewed(Request $request, $program, $viewed)
   {

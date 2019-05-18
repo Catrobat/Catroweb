@@ -23,10 +23,7 @@ class AddProgramRequest
    * @var string
    */
   private $ip;
-  /**
-   * @var null
-   */
-  private $gamejam;
+
   /**
    * @var null
    */
@@ -42,16 +39,14 @@ class AddProgramRequest
    * @param User   $user
    * @param File   $programfile
    * @param string $ip
-   * @param null   $gamejam
    * @param null   $language
    * @param string $flavor
    */
-  public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null, $language = null, $flavor = 'pocketcode')
+  public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $language = null, $flavor = 'pocketcode')
   {
     $this->user = $user;
     $this->programfile = $programfile;
     $this->ip = $ip;
-    $this->gamejam = $gamejam;
     $this->language = $language;
     $this->flavor = $flavor;
   }
@@ -94,14 +89,6 @@ class AddProgramRequest
   public function getIp()
   {
     return $this->ip;
-  }
-
-  /**
-   * @return null
-   */
-  public function getGamejam()
-  {
-    return $this->gamejam;
   }
 
   /**

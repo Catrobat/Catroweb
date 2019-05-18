@@ -85,29 +85,6 @@ default:
                 - WebFeatureContext:
                     - "tests/testreports/screens/"
 
-        gamejam:
-            filters:
-                tags: "~@web&&~@javascript"
-            paths:    [ "tests/behat/features/gamejam" ]
-            contexts:
-                - GamejamFeatureContext:
-                    - "tests/testreports/behat/"
-
-        gamejam_web:
-            filters:
-                tags: "@web~"
-            paths:    [ "tests/behat/features/gamejam" ]
-            contexts:
-                - GamejamWebContext:
-                    - "tests/testreports/behat/"
-
-        gamejam_javascript:
-            filters:
-                tags: "@javascript"
-            paths:    [ "tests/behat/features/gamejam" ]
-            contexts:
-                - GamejamJavascriptContext
-
 
 # --------------------------------------------------------------------------------------------------
 # Exclude specific tests based on their tags here:

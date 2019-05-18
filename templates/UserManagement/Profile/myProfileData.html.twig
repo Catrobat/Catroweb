@@ -19,20 +19,16 @@
           <div class="edit-category-title">
             <span class="edit-title"
             ><i class="fas fa-globe-africa"></i> {{ 'country'|trans({}, 'catroweb') }}</span>
-            {% if not app.user.limited %}
-              <a class="edit-category-button" data-toggle="tooltip" title="todo">
-                <i id="edit-country-button" class="far fa-edit catro-icon-button"></i>
-              </a>
-            {% endif %}
+            <a class="edit-category-button" data-toggle="tooltip" title="todo">
+              <i id="edit-country-button" class="far fa-edit catro-icon-button"></i>
+            </a>
           </div>
           <div id="country" class="profile-data">
             {{ country }}
           </div>
-          {% if not app.user.limited %}
-            <div id="country-edit-container" class="edit-container">
-              {% include 'UserManagement/Profile/countryEdit.html.twig' %}
-            </div>
-          {% endif %}
+          <div id="country-edit-container" class="edit-container">
+            {% include 'UserManagement/Profile/countryEdit.html.twig' %}
+          </div>
         </div>
 
         <hr>
@@ -41,20 +37,14 @@
           <div class="edit-category-title">
             <span class="edit-title"
             ><i class="fas fa-envelope"></i> {{ 'email'|trans({}, 'catroweb') }}</span>
-            {% if not app.user.limited %}
-              <a class="edit-category-button"
-                 data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}">
-                <i id="edit-email-button" class="far fa-edit catro-icon-button"></i>
-              </a>
-            {% endif %}
+            <a class="edit-category-button"
+               data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}">
+              <i id="edit-email-button" class="far fa-edit catro-icon-button"></i>
+            </a>
           </div>
-
-          {% if not app.user.limited %}
-            <div id="email-edit-container" class="edit-container">
-              {% include 'UserManagement/Profile/emailEdit.html.twig' %}
-            </div>
-          {% endif %}
-
+          <div id="email-edit-container" class="edit-container">
+            {% include 'UserManagement/Profile/emailEdit.html.twig' %}
+          </div>
           <div class="profile-data">
             <div id="first-mail">
               <span class="edit-subtitle">{{ 'profile.firstEmail'|trans({}, 'catroweb') }}:</span>
@@ -67,8 +57,6 @@
           </div>
 
         </div>
-
-        {% if (not app.user.limited) %}
 
           <hr>
 
@@ -86,9 +74,6 @@
             </div>
           </div>
 
-        {% endif %}
-
-        {% if not app.user.limited %}
           <hr>
 
           <div id="account-settings-wrapper">
@@ -104,8 +89,6 @@
               {% include 'UserManagement/Profile/accountSettings.html.twig' %}
             </div>
           </div>
-
-        {% endif %}
 
       </div>
     </div>

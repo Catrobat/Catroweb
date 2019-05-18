@@ -23,7 +23,6 @@ use Behat\Behat\Tester\Exception\PendingException;
 use App\Catrobat\Services\CatrobatFileCompressor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Behat\Behat\Hook\Scope\AfterStepScope;
-use App\Entity\GameJam;
 use Symfony\Component\Validator\Constraints\DateTime;
 use PHPUnit\Framework\Assert;
 
@@ -325,38 +324,6 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @return GameJam
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Exception
-   */
-  public function insertDefaultGamejam($config = [])
-  {
-    $gamejam = new GameJam();
-    @$gamejam->setName($config['name'] ?: "pocketalice");
-    @$gamejam->setHashtag($config['hashtag'] ?: null);
-    @$gamejam->setFlavor($config['flavor'] == null ? "pocketalice" :
-      $config['flavor'] != "no flavor" ?: null);
-
-    $start_date = new \DateTime();
-    $start_date->sub(new \DateInterval('P10D'));
-    $end_date = new \DateTime();
-    $end_date->add(new \DateInterval('P10D'));
-
-    @$gamejam->setStart($config['start'] ?: $start_date);
-    @$gamejam->setEnd($config['end'] ?: $end_date);
-
-    @$gamejam->setFormUrl($config['formurl'] ?: "https://catrob.at/url/to/form");
-
-    $this->getManager()->persist($gamejam);
-    $this->getManager()->flush();
-
-    return $gamejam;
-  }
-
-  /**
-   * @param array $config
-   *
    * @return \FOS\UserBundle\Model\UserInterface|mixed
    */
   public function insertUser($config = [])
@@ -370,7 +337,6 @@ class SymfonySupport
     @$user->setEnabled($config['enabled'] ?: true);
     @$user->setUploadToken($config['token'] ?: 'GeneratedToken');
     @$user->setCountry($config['country'] ?: 'at');
-    @$user->setLimited($config['limited'] ?: 'false');
     @$user->addRole($config['role'] ?: 'ROLE_USER');
     @$user_manager->updateUser($user, true);
 
@@ -631,8 +597,6 @@ class SymfonySupport
     $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
     $program->setApkStatus(isset($config['apk_status']) ? $config['apk_status'] : Program::APK_NONE);
     $program->setDirectoryHash(isset($config['directory_hash']) ? $config['directory_hash'] : null);
-    $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
-    $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
     $program->setRemixRoot(isset($config['remix_root']) ? $config['remix_root'] : true);
     $program->setDebugBuild(isset($config['debug']) ? $config['debug'] : false);
 
@@ -657,21 +621,8 @@ class SymfonySupport
     }
 
     $em->persist($program);
-
     $user->addProgram($program);
     $em->persist($user);
-
-    // FIXXME: why exactly do we have to do this?
-    if (isset($config['gamejam']))
-    {
-      /**
-       * @var $jam GameJam
-       */
-      $jam = $config['gamejam'];
-      $jam->addProgram($program);
-      $em->persist($jam);
-    }
-
     $em->flush();
 
     return $program;
@@ -814,35 +765,6 @@ class SymfonySupport
 
     $client = $this->getClient();
     $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, [$file]);
-    $response = $client->getResponse();
-
-    return $response;
-  }
-
-  /**
-   * @param $file
-   * @param $user
-   *
-   * @return \Symfony\Component\HttpFoundation\Response|null
-   */
-  public function submit($file, $user)
-  {
-    if ($user == null)
-    {
-      $user = $this->getDefaultUser();
-    }
-
-    if (is_string($file))
-    {
-      $file = new UploadedFile($file, 'uploadedFile');
-    }
-
-    $parameters = [];
-    $parameters['username'] = $user->getUsername();
-    $parameters['token'] = $user->getUploadToken();
-    $parameters['fileChecksum'] = md5_file($file->getPathname());
-    $client = $this->getClient();
-    $client->request('POST', '/pocketcode/api/gamejam/submit.json', $parameters, [$file]);
     $response = $client->getResponse();
 
     return $response;

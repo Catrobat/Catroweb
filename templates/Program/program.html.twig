@@ -227,26 +227,6 @@
         </div>
       </div>
 
-      {% if not program.gamejam or not program.acceptedforgamejam %}
-        {% if jam %}
-          <div id="gamejam-div">
-            <a href="{% if app.user %} {{ url('gamejam_web_submit', { "id": program.id }) }}{% else %}{{ url('login') }}{% endif %}"
-               title="{{ jam.name }}">
-              <button id="gamejam-submission" class="btn btn-jam download-button">
-                <table>
-                  <tr>
-                    <td><img src="{{ asset( jam.logo_url ) }}"></td>
-                    <td>{{ "gamejam.submit"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</td>
-                  </tr>
-                </table>
-              </button>
-            </a>
-          </div>
-          <div id="gamejam-whats">
-            <a href="{{ jam.gamejam_url }}">{{ "gamejam.whats"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</a>
-          </div>
-        {% endif %}
-      {% endif %}
       <div class="clear"></div>
       <button type="button" class="btn btn-lg btn-link btn-copy"
               data-clipboard-text="{{ url('program', { id : program.id }) }}"

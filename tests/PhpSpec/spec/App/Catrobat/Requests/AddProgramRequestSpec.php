@@ -38,11 +38,6 @@ class AddProgramRequestSpec extends ObjectBehavior
     $this->getIp()->shouldReturn("127.0.0.1");
   }
 
-  public function it_is_not_a_gamejam()
-  {
-    $this->getGamejam()->shouldReturn(null);
-  }
-
   public function it_has_a_language()
   {
     $this->getLanguage()->shouldReturn(null);

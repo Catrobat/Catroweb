@@ -25,7 +25,6 @@ parameters:
   catrobat.mediapackage.path:     "resources/mediapackage/"
   catrobat.apk.dir:               "%catrobat.pubdir%resources/apk/"
   catrobat.backup.dir:            "%kernel.project_dir%/backups/"
-  catrobat.snapshot.dir:          "%catrobat.pubdir%resources/Snapshots"
   catrobat.translations.dir:      "%kernel.project_dir%/translations"
   catrobat.logs.dir:              "%kernel.project_dir%/var/log/"
   catrobat.invalidupload.dir:     "%kernel.project_dir%/src/Catrobat/Commands/invisible_programs/"
@@ -36,7 +35,6 @@ parameters:
     ROLE_FEATURED:      "Webserver-FeaturedProgramsMaintainers"
     ROLE_APPROVE:       "Webserver-AppApprovers"
     ROLE_SUPER_ADMIN:   "Webserver-Administrators"
-    ROLE_GAMEJAM_ADMIN: "Webserver-GameJam-Administrators"
 
   #      This can drastically improve DX by reducing the time to load classes
   container.dumper.inline_class_loader: true
@@ -205,14 +203,6 @@ services:
       - App\Entity\RudeWord
     public: true
   App\Repository\RudeWordsRepository: "@rudewordrepository"
-
-  gamejamrepository:
-    class: App\Repository\GameJamRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments:
-      - App\Entity\GameJam
-    public: true
-  App\Repository\GameJamRepository: "@gamejamrepository"
 
   featuredrepository:
     class: App\Repository\FeaturedRepository
@@ -511,7 +501,6 @@ services:
     arguments:
       - "@request_stack"
       - "@mediapackagefilerepository"
-      - "@gamejamrepository"
       - "@liip_theme.active_theme"
       - "%catrobat.translations.dir%"
       - "@service_container"
@@ -537,7 +526,6 @@ services:
       - "@usermanager"
       - "@security.token_storage"
       - "@programmanager"
-      - "@gamejamrepository"
       - "@tokengenerator"
       - "@translator"
       - "@logger"
@@ -930,18 +918,7 @@ services:
     arguments:
       - ~
       - App\Entity\User
-      - ~
-
-  catrowebadmin.block.users.limited:
-    class: App\Admin\LimitedUsersAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Limited Users",
-          icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\Entity\User
-      - ~
-    public: true
+      -
 
   # ===== Tools
 
@@ -1071,41 +1048,6 @@ services:
       - ~
     public: true
 
-  # ===== GameJam
-
-  catrowebadmin.block.gamejam:
-    class: App\Admin\GameJamAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "GameJams" }
-    arguments:
-      - catrowebadmin.block.gamejam
-      - App\Entity\GameJam
-      - ~
-    calls:
-      - [addChild, ["@catrowebadmin.block.gamejam.submitted", 'NAME_OF_PARENT']]
-    public: true
-
-  catrowebadmin.block.gamejam.submitted:
-    class: App\Admin\GameJamSubmittedProgramsAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Submissions" }
-    arguments:
-      - ~
-      - App\Entity\Program
-      - App\Catrobat\Controller\Admin\GameJamSubmittedProgramsController
-    public: true
-
-  # TODO change 2nd parameter
-  catrowebadmin.block.program.snapshots:
-    class: App\Admin\SnapshotAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Snapshots",
-          icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\Entity\Group
-      - App\Catrobat\Controller\Admin\SnapshotController
-    public: true
 
   #====================== Listeners
   # ======== System Validation ========
@@ -1188,19 +1130,6 @@ services:
     arguments: ["@extensionrepository"]
     tags:
       - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
-
-  catroweb.gamejamtag.check:
-    class: App\Catrobat\Listeners\GameJamTagListener
-    tags:
-      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
-
-  # ======== Snapshots =======
-
-  catrobat.upload.snapshotlistener:
-    class:        App\Catrobat\Listeners\Upload\SaveProgramSnapshotListener
-    arguments:    ["@time","@filerepository", "%catrobat.snapshot.dir%"]
-    tags:
-      - { name: kernel.event_listener, event: catrobat.program.after.insert, method: handleEvent }
 
   # ======== Notifications =======
 

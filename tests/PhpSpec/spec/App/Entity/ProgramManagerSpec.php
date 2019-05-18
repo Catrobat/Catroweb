@@ -64,7 +64,6 @@ class ProgramManagerSpec extends ObjectBehavior
     $request->getProgramfile()->willReturn($file);
     $request->getUser()->willReturn($user);
     $request->getIp()->willReturn('127.0.0.1');
-    $request->getGamejam()->willReturn(null);
     $request->getLanguage()->willReturn('en');
     $request->getFlavor()->willReturn('pocketcode');
     $file_extractor->extract($file)->willReturn($extracted_file);

@@ -72,8 +72,6 @@ class StatusCode
   const USER_EMAIL_MISSING = 778;
   const USER_EMAIL_ALREADY_EXISTS = 779;
 
-  const NO_GAME_JAM = 900;
-
   const FB_POST_ERROR = 790;
   const FB_DELETE_ERROR = 791;
 }

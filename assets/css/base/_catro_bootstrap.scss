@@ -373,11 +373,6 @@ html, body {
   font-weight: $theme-logo-font-weight;
 }
 
-$galaxy-button-background-color: #9583b2;
-#gamejam-submission {
-  @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
-}
-
 .parting-line {
   border-top: 1px solid $primary;
 }

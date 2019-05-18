@@ -82,7 +82,6 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
       ->add('recommended_from_program_via_tag.name')
       ->add('recommended_from_program_via_tag.id')
       ->add('user.username')
-      ->add('program.gamejam_submission_accepted')
       ->add('downloaded_at')
       ->add('ip')
       ->add('country_name')
@@ -130,7 +129,7 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
   {
     return ['id', 'program.id', 'recommended_by_page_id', 'program.name', 'recommended_by_program.id',
       'recommended_by_program.name', 'recommended_from_program_via_tag.id', 'recommended_from_program_via_tag.name',
-      'program.gamejam_submission_accepted', 'program.downloads', 'program.apk_downloads', 'program.description',
+      'program.downloads', 'program.apk_downloads', 'program.description',
       'downloaded_at', 'ip', 'country_code', 'country_name', 'locale', 'user_agent', 'user.username', 'referrer'];
   }
 

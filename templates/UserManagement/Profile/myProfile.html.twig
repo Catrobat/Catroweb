@@ -10,11 +10,7 @@
    {%  include 'UserManagement/Profile/myProfileData.html.twig' %}
 
   <div class="clear mt-5"></div>
-    {% if not app.user.limited %}
-      <div id="myprofile-programs">
-    {% else %}
-      <div id="user-programs">
-    {% endif %}
+  <div id="myprofile-programs">
     <h1 class="header mb-0">
       {{ "profile.myPrograms"|trans({}, "catroweb") }}
     </h1>
@@ -42,9 +38,7 @@
 
   <script>
 
-    let programs
-    {% if not app.user.limited %}
-      programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
+    let programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
       // load programs need profile!
       let profile = new MyProfile('{{ path('profile') }}',
         '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',
@@ -72,10 +66,6 @@
       )
       profile.init()
       programs.initProfile({{ app.user.id }})
-    {% else %}
-      programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}')
-      programs.initProfile({{ app.user.id }})
-    {% endif %}
 
     let follows = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follows' }) }}',
     '{{ path('profile') }}', '#list-follows', '{{ asset('images/default/avatar_default.png') }}')

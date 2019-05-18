@@ -33,12 +33,6 @@ security:
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator
-        api_submit:
-            provider: chain_provider
-            pattern: ^.*/api/gamejam/submit.json
-            stateless: true
-            simple_preauth:
-                authenticator: apikey_authenticator
 
         debug:
             provider: chain_provider
@@ -46,7 +40,7 @@ security:
             security: false
 
         main:
-            pattern:     ^/
+            pattern: ^/
             provider: chain_provider
             fr3d_ldap:  ~
             form_login:
@@ -127,11 +121,6 @@ security:
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_FILE_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
-            - ROLE_ADMIN
-        ROLE_GAMEJAM_ADMIN:
-            - ROLE_CATROWEBADMIN_BLOCK_USERS_LIMITED_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_SUBMITTED_ADMIN
             - ROLE_ADMIN
 
 acl:

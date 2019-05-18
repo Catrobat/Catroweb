@@ -274,22 +274,6 @@ class Program
   protected $apk_downloads = 0;
 
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\GameJam", inversedBy="programs")
-   * @ORM\JoinColumn(nullable=true)
-   */
-  protected $gamejam;
-
-  /**
-   * @ORM\Column(type="boolean", options={"default":false})
-   */
-  protected $gamejam_submission_accepted = false;
-
-  /**
-   * @ORM\Column(type="datetime", nullable=true)
-   */
-  protected $gamejam_submission_date;
-
-  /**
    * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program", cascade={"remove"})
    */
   protected $program_downloads;
@@ -1005,94 +989,6 @@ class Program
   public function getApkDownloads()
   {
     return $this->apk_downloads;
-  }
-
-  /**
-   * Set gamejam
-   *
-   * @param GameJam $gamejam
-   *
-   * @return Program
-   */
-  public function setGamejam(GameJam $gamejam = null)
-  {
-    $this->gamejam = $gamejam;
-
-    return $this;
-  }
-
-  /**
-   * Get gamejam
-   *
-   * @return GameJam
-   */
-  public function getGamejam()
-  {
-    return $this->gamejam;
-  }
-
-  /**
-   * Set accepted
-   *
-   * @param boolean $accepted
-   *
-   * @return Program
-   */
-  public function setAcceptedForGameJam($accepted)
-  {
-    $this->gamejam_submission_accepted = $accepted;
-
-    return $this;
-  }
-
-  /**
-   * @param $accepted
-   */
-  public function setGamejamSubmissionAccepted($accepted)
-  {
-    $this->gamejam_submission_accepted = $accepted;
-  }
-
-  /**
-   * @return bool
-   */
-  public function getGamejamSubmissionAccepted()
-  {
-    return $this->gamejam_submission_accepted;
-  }
-
-  /**
-   * Get accepted
-   *
-   * @return boolean
-   */
-  public function isAcceptedForGameJam()
-  {
-    return $this->gamejam_submission_accepted;
-  }
-
-  /**
-   * @param $date
-   */
-  public function setGameJamSubmissionDate($date)
-  {
-    $this->gamejam_submission_date = $date;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getGameJamSubmissionDate()
-  {
-    return $this->gamejam_submission_date;
-  }
-
-  /**
-   * @return bool
-   */
-  public function getGamejam_submission_accepted()
-  {
-    return $this->gamejam_submission_accepted;
   }
 
   /**

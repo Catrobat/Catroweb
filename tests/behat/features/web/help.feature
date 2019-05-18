@@ -30,7 +30,7 @@ Feature: Pocketcode help page
     And I should see "Google Play"
     And I should see "IOS"
 
-  Scenario Outline: Clicking on the alice game jam image at help page
+  Scenario Outline: Clicking on the design image at help page
     When I click "#game-design"
     Then I should see "6" "desktop" tutorial banners
     When I click on the "<reference>" banner
@@ -86,17 +86,6 @@ Feature: Pocketcode help page
     And I should see an ".anchor" element
     When I click ".anchor"
     Then I am on "/pocketcode/starterPrograms"
-
-  Scenario: Game Jam page should be there
-    When I go to "/pocketcode/pocket-game-jam"
-    Then I should see "HOW TO UPLOAD A POCKET CODE GAME TO THE GAME JOLT SITE?"
-    And I should see "1. Registration"
-    And I should see "2. Upload"
-    And I should see "3. Search for your program"
-    And I should see "4. Create Android app"
-    And I should see "5. Download app"
-    And I should see "6. Register/Login at GameJolt.com"
-    And I should see "7. Upload your game on the Game Jolt Site"
 
   Scenario: /hourOfCode should redirect to help page
     When I go to "/pocketcode/hourOfCode"

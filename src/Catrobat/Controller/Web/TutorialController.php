@@ -58,13 +58,11 @@ class TutorialController extends Controller
   {
     $cards_num = 12;
 
-    if ($page > $cards_num)
-    {
+    if ($page > $cards_num) {
       throw $this->createNotFoundException('Unable to find tutorialcard.');
     }
 
-    if ($page == -1)
-    {
+    if ($page == -1) {
       return $this->get('templating')->renderResponse('help/tutorialcards.html.twig', ['count' => $cards_num]);
     }
 
@@ -73,8 +71,8 @@ class TutorialController extends Controller
     $example_link = $this->setExampleLink($page);
 
     return $this->get('templating')->renderResponse('help/tutorialcard.html.twig', [
-      'page'         => $page,
-      'blocks'       => $blocks,
+      'page' => $page,
+      'blocks' => $blocks,
       'example_link' => $example_link,
     ]);
   }
@@ -133,18 +131,6 @@ class TutorialController extends Controller
     ];
 
     return JsonResponse::create($retArray);
-  }
-
-
-  /**
-   * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
-   *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
-   */
-  public function gameJamAction()
-  {
-    return $this->get('templating')->renderResponse('help/gamejam.html.twig');
   }
 
 
@@ -294,4 +280,75 @@ class TutorialController extends Controller
 
     return $retArray;
   }
+
+
+
+  /**
+   * @Route("/gaming-tutorials/{page}", name="catrobat_web_designtutorialcards", defaults={"page" = -1},
+   *                                    requirements={"page":"\d+"}, methods={"GET"})
+   *
+   * @param $page
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
+   */
+  public function tutorialDesignCardsAction($page)
+  {
+    $cards_num = 6;
+
+    if ($page > $cards_num)
+    {
+      throw $this->createNotFoundException('Unable to find tutorialcard.');
+    }
+
+    if ($page == -1)
+    {
+      return $this->get('templating')->renderResponse('help/designTutorialCards.html.twig', ['count' => $cards_num]);
+    }
+
+    $blocks = [];
+    $blocks[0] = ['image_orientation' => "landscape", 'image_count' => 2];
+    $blocks[1] = ['video_link' => "6ytY_vfsnNU"];
+    $blocks[2] = ['program_id' => "0"];
+
+    switch ($page)
+    {
+      case 1:
+        $blocks[0] = ['image_orientation' => "landscape", 'image_count' => 2];
+        $blocks[1] = ['video_link' => "tGgMFWoJDBU"];
+        $blocks[2] = ['download_url' => $this->generateUrl('download', ['id' => 4799, 'fname' => "Welcome to Wonderland"])];
+        break;
+      case 2:
+        $blocks[0] = ['image_orientation' => "potrait", 'image_count' => 2];
+        $blocks[1] = ['video_link' => "mx2DLFIg1Rc"];
+        $blocks[2] = ['download_url' => $this->generateUrl('download', ['id' => 4801, 'fname' => "Save Alice"])];
+        break;
+      case 3:
+        $blocks[0] = ['image_orientation' => "landscape", 'image_count' => 2];
+        $blocks[1] = ['video_link' => "HxYr_2HdMsE"];
+        $blocks[2] = ['download_url' => $this->generateUrl('download', ['id' => 4683, 'fname' => "The Hatter - Hit and Run"])];
+        break;
+      case 4:
+        $blocks[0] = ['image_orientation' => "landscape", 'image_count' => 2];
+        $blocks[1] = ['video_link' => "yLqhLmX9Mp4"];
+        $blocks[2] = ['download_url' => $this->generateUrl('download', ['id' => 4683, 'fname' => "The Hatter - Hit and Run"])];
+        break;
+      case 5:
+        $blocks[0] = ['image_orientation' => "landscape", 'image_count' => 2];
+        $blocks[1] = ['video_link' => "G85_vgb1Ja4"];
+        $blocks[2] = ['download_url' => $this->generateUrl('download', ['id' => 4684, 'fname' => "Whack a Cheshire Cat"])];
+        break;
+      case 6:
+        $blocks[0] = ['image_orientation' => "potrait", 'image_count' => 2];
+        $blocks[1] = ['video_link' => "m97g4G49kOg"];
+        $blocks[2] = ['download_url' => $this->generateUrl('download', ['id' => 4682, 'fname' => "A Rabbits Race"])];
+        break;
+    }
+
+    return $this->get('templating')->renderResponse('help/designTutorialCard.html.twig', [
+      'page'   => $page,
+      'blocks' => $blocks,
+    ]);
+  }
+
 }
