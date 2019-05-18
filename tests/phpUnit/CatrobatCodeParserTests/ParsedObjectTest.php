@@ -11,7 +11,7 @@ class ParsedObjectTest extends \PHPUnit\Framework\TestCase
    */
   protected $object;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->object = new ParsedObject($xml_properties->xpath('//object')[0]);

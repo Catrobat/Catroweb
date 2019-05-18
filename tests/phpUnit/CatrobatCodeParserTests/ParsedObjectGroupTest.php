@@ -12,7 +12,7 @@ class ParsedObjectGroupTest extends \PHPUnit\Framework\TestCase
    */
   protected $group;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->group = new ParsedObjectGroup($xml_properties->xpath('//object[@type="GroupSprite"]')[0]);

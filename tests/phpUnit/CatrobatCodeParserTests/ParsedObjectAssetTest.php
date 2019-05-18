@@ -8,7 +8,7 @@ class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
 {
   protected $assets;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//look')[0]);

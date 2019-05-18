@@ -12,7 +12,7 @@ class AppExtentionTest extends \PHPUnit\Framework\TestCase
 
   private $translationPath;
 
-  protected function setup()
+  protected function setup(): void
   {
     parent::setUp();
     $this->prophet = new Prophet();

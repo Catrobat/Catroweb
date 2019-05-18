@@ -8,7 +8,7 @@ class ParsedSceneProgramTest extends \PHPUnit\Framework\TestCase
 {
   protected $program;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/SceneProgram/code.xml');
     $this->program = new ParsedSceneProgram($xml_properties);

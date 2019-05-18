@@ -9,7 +9,7 @@ class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
 {
   protected $parser;
 
-  protected function setUp()
+  protected function setUp(): void
   {
     $this->parser = new CatrobatCodeParser();
   }
