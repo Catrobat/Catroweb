@@ -80,7 +80,10 @@ class ExtractedCatrobatFile
    */
   public function isDebugBuild()
   {
-    return (string)$this->program_xml_properties->header->buildType === "debug";
+    if (!isset($this->program_xml_properties->header->applicationBuildType)) {
+      return false; // old program do not have this field, + they should be release programs
+    }
+    return (string)$this->program_xml_properties->header->applicationBuildType === "debug";
   }
 
   /**

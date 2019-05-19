@@ -230,7 +230,7 @@ Feature:
     And the element "#visibility-lock-open-1" should be visible
     And the element "#visibility-lock-1" should not be visible
 
-  Scenario: Programs with too high language version can't be set visible
+  Scenario: Programs with too high language version can also be set to visible
     Given I am on "/pocketcode/profile"
     And I wait 100 milliseconds
     And I should see "program 2"
@@ -238,10 +238,8 @@ Feature:
     And the element "#visibility-lock-open-2" should not be visible
     When I click "#visibility-lock-open-2"
     And I wait for the server response
-    Then I should see "Can not change visibility"
-    When I click ".swal2-confirm"
-    Then the element "#visibility-lock-2" should be visible
-    And the element "#visibility-lock-open-2" should not be visible
+    Then the element "#visibility-lock-2" should not be visible
+    And the element "#visibility-lock-open-2" should be visible
 
   Scenario: I should be able to delete my account
     Given I am on "/pocketcode/profile"

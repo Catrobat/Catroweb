@@ -3,6 +3,7 @@
 namespace App\Catrobat\Controller\Api;
 
 use App\Entity\ProgramManager;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +25,7 @@ class ListProgramsController extends Controller
    * @param         $flavor
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listProgramsAction(Request $request, $flavor)
   {
@@ -39,7 +40,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listProgramIdsAction(Request $request)
   {
@@ -54,7 +55,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listMostDownloadedProgramsAction(Request $request)
   {
@@ -69,7 +70,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listMostDownloadedProgramIdsAction(Request $request)
   {
@@ -84,7 +85,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listMostViewedProgramsAction(Request $request)
   {
@@ -99,7 +100,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listMostViewedProgramIdsAction(Request $request)
   {
@@ -114,7 +115,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listRandomProgramsAction(Request $request)
   {
@@ -129,7 +130,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listRandomProgramIdsAction(Request $request)
   {
@@ -144,7 +145,7 @@ class ListProgramsController extends Controller
    * @param Request $request
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function listUserProgramsAction(Request $request)
   {
@@ -159,7 +160,7 @@ class ListProgramsController extends Controller
    * @param string  $flavor
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   private function listSortedPrograms(Request $request, $sortBy, $details = true, $flavor = 'pocketcode')
   {
@@ -171,7 +172,6 @@ class ListProgramsController extends Controller
     $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));
     $user_id = intval($request->query->get('user_id', 0));
-    $max_version = $request->query->get('max_version', 0);
 
     // setting flavor to null to get all results
     if ($flavor == 'pocketcode')
@@ -181,54 +181,62 @@ class ListProgramsController extends Controller
 
     if ($sortBy == 'downloads')
     {
-      $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
+      $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
+        $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getMostDownloadedPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
+        $programs = array_merge($programs, $program_manager->getMostDownloadedPrograms(
+          'pocketcode', $limit - $count, $new_offset
+        ));
       }
     }
     elseif ($sortBy == 'views')
     {
-      $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
+      $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
+        $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getMostViewedPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
+        $programs = array_merge($programs, $program_manager->getMostViewedPrograms(
+          'pocketcode', $limit - $count, $new_offset
+        ));
       }
     }
     elseif ($sortBy == 'user')
     {
-      $programs = $program_manager->getUserPrograms($user_id, $max_version);
+      $programs = $program_manager->getUserPrograms($user_id);
     }
     elseif ($sortBy == 'random')
     {
-      $programs = $program_manager->getRandomPrograms($flavor, $limit, $offset, $max_version);
+      $programs = $program_manager->getRandomPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
+        $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getRandomPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
+        $programs = array_merge($programs, $program_manager->getRandomPrograms(
+          'pocketcode', $limit - $count, $new_offset
+        ));
       }
     }
     else
     {
-      $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset, $max_version);
+      $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
+        $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getRecentPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
+        $programs = array_merge($programs, $program_manager->getRecentPrograms(
+          'pocketcode', $limit - $count, $new_offset
+        ));
       }
     }
 
@@ -238,11 +246,11 @@ class ListProgramsController extends Controller
     }
     else
     {
-      $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor, $max_version);
+      $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor);
 
       if ($flavor)
       {
-        $numbOfTotalProjects += $program_manager->getTotalPrograms('pocketcode', $max_version);
+        $numbOfTotalProjects += $program_manager->getTotalPrograms('pocketcode');
       }
     }
 

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Program;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -31,11 +32,10 @@ class ProgramRepository extends EntityRepository
    * @param null $flavor
    * @param int  $limit
    * @param int  $offset
-   * @param int  $max_version
    *
    * @return mixed
    */
-  public function getMostDownloadedPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
+  public function getMostDownloadedPrograms($flavor = null, $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -53,14 +53,6 @@ class ProgramRepository extends EntityRepository
         ->setParameter('flavor', $flavor);
     }
 
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
-    }
-
     return $qb->getQuery()->getResult();
   }
 
@@ -68,11 +60,10 @@ class ProgramRepository extends EntityRepository
    * @param null $flavor
    * @param int  $limit
    * @param int  $offset
-   * @param int  $max_version
    *
    * @return mixed
    */
-  public function getMostViewedPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
+  public function getMostViewedPrograms($flavor = null, $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -89,14 +80,6 @@ class ProgramRepository extends EntityRepository
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
-    }
-
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
     }
 
     return $qb->getQuery()->getResult();
@@ -356,11 +339,10 @@ class ProgramRepository extends EntityRepository
    * @param null $flavor
    * @param int  $limit
    * @param int  $offset
-   * @param int  $max_version
    *
    * @return mixed
    */
-  public function getRecentPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
+  public function getRecentPrograms($flavor = null, $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -379,14 +361,6 @@ class ProgramRepository extends EntityRepository
         ->setParameter('flavor', $flavor);
     }
 
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
-    }
-
     return $qb->getQuery()->getResult();
   }
 
@@ -394,11 +368,10 @@ class ProgramRepository extends EntityRepository
    * @param null $flavor
    * @param int  $limit
    * @param int  $offset
-   * @param int  $max_version
    *
    * @return array
    */
-  public function getRandomPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
+  public function getRandomPrograms($flavor = null, $limit = 20, $offset = 0)
   {
     // Rand(), newid() and TABLESAMPLE() doesn't exist in the Native Query therefore we have to do a workaround
     // for random results
@@ -408,7 +381,7 @@ class ProgramRepository extends EntityRepository
     }
     else
     {
-      $array_program_ids = $this->getVisibleProgramIds($flavor, $max_version);
+      $array_program_ids = $this->getVisibleProgramIds($flavor);
       shuffle($array_program_ids);
       $_SESSION['randomProgramIds'] = $array_program_ids;
     }
@@ -428,11 +401,10 @@ class ProgramRepository extends EntityRepository
 
   /**
    * @param     $flavor
-   * @param int $max_version
    *
    * @return mixed
    */
-  public function getVisibleProgramIds($flavor, $max_version = 0)
+  public function getVisibleProgramIds($flavor)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -446,14 +418,6 @@ class ProgramRepository extends EntityRepository
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
-    }
-
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
     }
 
     return $qb->getQuery()->getResult();
@@ -532,11 +496,10 @@ class ProgramRepository extends EntityRepository
    * @param     $query
    * @param int $limit
    * @param int $offset
-   * @param int $max_version
    *
    * @return array
    */
-  public function search($query, $limit = 10, $offset = 0, $max_version = 0)
+  public function search($query, $limit = 10, $offset = 0)
   {
     $em = $this->getEntityManager();
     $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
@@ -611,11 +574,6 @@ class ProgramRepository extends EntityRepository
           e.visible = true AND
           e.private = false) " . $appendable_sql_string;
 
-    if ($max_version !== 0)
-    {
-      $dql .= " AND e.language_version <= " . $max_version;
-    }
-
     $dql .= " ORDER BY weight DESC, e.uploaded_at DESC";
 
     $qb_program = $this->createQueryBuilder('e');
@@ -646,11 +604,10 @@ class ProgramRepository extends EntityRepository
 
   /**
    * @param     $query
-   * @param int $max_version
    *
    * @return int
    */
-  public function searchCount($query, $max_version = 0)
+  public function searchCount($query)
   {
     $em = $this->getEntityManager();
     $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
@@ -687,10 +644,6 @@ class ProgramRepository extends EntityRepository
           e.visible = true AND 
           e.private = false) " . $appendable_sql_string;
 
-    if ($max_version !== 0)
-    {
-      $dql .= " AND e.language_version <= " . $max_version;
-    }
     $dql .= " GROUP BY e.id";
     $q2 = $qb_program->getEntityManager()->createQuery($dql);
     $q2->setParameter('searchterm', '%' . $query . '%');
@@ -730,7 +683,7 @@ class ProgramRepository extends EntityRepository
    * @param $previous_program_id
    *
    * @return mixed
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function findNext($previous_program_id)
   {
@@ -747,11 +700,10 @@ class ProgramRepository extends EntityRepository
 
   /**
    * @param     $user_id
-   * @param int $max_version
    *
    * @return mixed
    */
-  public function getUserPrograms($user_id, $max_version = 0)
+  public function getUserPrograms($user_id)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -762,25 +714,17 @@ class ProgramRepository extends EntityRepository
       ->andWhere($qb->expr()->eq('f.id', ':user_id'))
       ->setParameter('user_id', $user_id)
       ->orderBy('e.uploaded_at', 'DESC');
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
-    }
 
     return $qb->getQuery()->getResult();
   }
 
   /**
    * @param null $flavor
-   * @param int  $max_version
    *
    * @return mixed
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
-  public function getTotalPrograms($flavor = null, $max_version = 0)
+  public function getTotalPrograms($flavor = null)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -794,14 +738,6 @@ class ProgramRepository extends EntityRepository
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
-    }
-
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
     }
 
     return $qb->getQuery()->getSingleScalarResult();

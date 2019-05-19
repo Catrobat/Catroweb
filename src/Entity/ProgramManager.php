@@ -13,7 +13,11 @@ use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
@@ -73,11 +77,7 @@ class ProgramManager
    * @var ProgramLikeRepository
    */
   protected $program_like_repository;
-
-  /**
-   * @var int
-   */
-  protected $max_version;
+  
 
   /**
    * @var LoggerInterface
@@ -96,14 +96,13 @@ class ProgramManager
    * @param ProgramLikeRepository    $program_like_repository
    * @param EventDispatcherInterface $event_dispatcher
    * @param LoggerInterface          $logger
-   * @param int                      $max_version
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
                               EventDispatcherInterface $event_dispatcher,
-                              LoggerInterface $logger, $max_version = 0)
+                              LoggerInterface $logger)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -114,7 +113,6 @@ class ProgramManager
     $this->tag_repository = $tag_repository;
     $this->program_like_repository = $program_like_repository;
     $this->logger = $logger;
-    $this->max_version = $max_version;
   }
 
 
@@ -175,14 +173,6 @@ class ProgramManager
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
     $this->addTags($program, $extracted_file, $request->getLanguage());
-
-    $version = $program->getLanguageVersion();
-
-    $max_version = $this->max_version;
-    if (version_compare($version, $max_version, ">"))
-    {
-      $program->setPrivate(true);
-    }
 
     if ($request->getGamejam() != null)
     {
@@ -285,8 +275,8 @@ class ProgramManager
    * @param         $no_unlike
    *
    * @return int
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function toggleLike(Program $program, User $user, $type, $no_unlike)
   {
@@ -439,14 +429,13 @@ class ProgramManager
   }
 
   /**
-   * @param     $user_id
-   * @param int $max_version
+   * @param $user_id
    *
    * @return mixed
    */
-  public function getUserPrograms($user_id, $max_version = 0)
+  public function getUserPrograms($user_id)
   {
-    return $this->program_repository->getUserPrograms($user_id, $max_version);
+    return $this->program_repository->getUserPrograms($user_id);
   }
 
   /**
@@ -461,7 +450,7 @@ class ProgramManager
    * @param $previous_program_id
    *
    * @return mixed
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function findNext($previous_program_id)
   {
@@ -500,105 +489,88 @@ class ProgramManager
    * @param      $flavor
    * @param null $limit
    * @param null $offset
-   * @param int  $max_version
    *
    * @return mixed
    */
-  public function getRecentPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getRecentPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getRecentPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getRecentPrograms($flavor, $limit, $offset);
   }
 
   /**
    * @param      $flavor
    * @param null $limit
    * @param null $offset
-   * @param int  $max_version
    *
    * @return mixed
    */
-  public function getMostViewedPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getMostViewedPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getMostViewedPrograms($flavor, $limit, $offset);
   }
 
   /**
    * @param      $flavor
    * @param null $limit
    * @param null $offset
-   * @param int  $max_version
    *
    * @return mixed
    */
-  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getMostDownloadedPrograms($flavor, $limit, $offset);
   }
 
   /**
-   * @param      $flavor
+   * @param $flavor
    * @param null $limit
    * @param null $offset
-   * @param int  $max_version
    *
    * @return array
    */
-  public function getRandomPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getRandomPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getRandomPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getRandomPrograms($flavor, $limit, $offset);
   }
 
   /**
-   * @param     $query
+   * @param $query
    * @param int $limit
    * @param int $offset
-   * @param int $max_version
    *
    * @return array
    */
-  public function search($query, $limit = 10, $offset = 0, $max_version = 0)
+  public function search($query, $limit = 10, $offset = 0)
   {
-    return $this->program_repository->search($query, $limit, $offset, $max_version);
+    return $this->program_repository->search($query, $limit, $offset);
   }
 
   /**
-   * @param     $query
-   * @param int $max_version
+   * @param $query
    *
    * @return int
    */
-  public function searchCount($query, $max_version = 0)
+  public function searchCount($query)
   {
-    return $this->program_repository->searchCount($query, $max_version);
+    return $this->program_repository->searchCount($query);
   }
 
   /**
-   * @param $user_id
+   * @param $flavor
    *
    * @return mixed
+   * @throws NonUniqueResultException
    */
-  public function searchCountUserPrograms($user_id)
+  public function getTotalPrograms($flavor)
   {
-    return $this->program_repository->searchCountUserPrograms($user_id);
-  }
-
-  /**
-   * @param     $flavor
-   * @param int $max_version
-   *
-   * @return mixed
-   * @throws \Doctrine\ORM\NonUniqueResultException
-   */
-  public function getTotalPrograms($flavor, $max_version = 0)
-  {
-    return $this->program_repository->getTotalPrograms($flavor, $max_version);
+    return $this->program_repository->getTotalPrograms($flavor);
   }
 
   /**
    * @param Program $program
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function increaseViews(Program $program)
   {
@@ -609,8 +581,8 @@ class ProgramManager
   /**
    * @param Program $program
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function increaseDownloads(Program $program)
   {
@@ -621,8 +593,8 @@ class ProgramManager
   /**
    * @param Program $program
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function increaseApkDownloads(Program $program)
   {
@@ -633,8 +605,8 @@ class ProgramManager
   /**
    * @param Program $program
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function save(Program $program)
   {
@@ -716,7 +688,7 @@ class ProgramManager
    * @param $offset
    *
    * @return array
-   * @throws \Doctrine\DBAL\DBALException
+   * @throws DBALException
    */
   public function getMostRemixedPrograms($flavor, $limit, $offset)
   {
@@ -727,7 +699,7 @@ class ProgramManager
    * @param $flavor
    *
    * @return int
-   * @throws \Doctrine\DBAL\DBALException
+   * @throws DBALException
    */
   public function getTotalRemixedProgramsCount($flavor)
   {

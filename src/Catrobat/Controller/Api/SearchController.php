@@ -47,13 +47,12 @@ class SearchController extends Controller
 
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
-    $max_version = $request->query->get('max_version', 0);
 
-    $programs = $program_manager->search($query, $limit, $offset, $max_version);
+    $programs = $program_manager->search($query, $limit, $offset);
     // we can't count the results since we apply limit and offset.
     // so we indeed have to use a seperate query that ignores
     // limit and offset to get the number of results.
-    $numbOfTotalProjects = $program_manager->searchCount($query, $max_version);
+    $numbOfTotalProjects = $program_manager->searchCount($query);
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
@@ -102,28 +101,4 @@ class SearchController extends Controller
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
 
-
-  /**
-   * @param $programs array
-   * @param $i int
-   * @param $max_version
-   */
-  private function checkProgramVersion($programs, $i, $max_version)
-  {
-    /**
-     * @var $program Program
-     */
-
-    $program = $programs[$i];
-
-    if ($program === null) {
-      return;
-    }
-
-    $program_version = $program->getLanguageVersion();
-    if (version_compare($program_version, $max_version) > 0)
-    {
-      unset($programs[$i]);
-    }
-  }
 }
