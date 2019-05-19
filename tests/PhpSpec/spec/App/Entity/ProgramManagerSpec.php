@@ -143,6 +143,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $extracted_file->getApplicationVersion()->willReturn(null);
     $extracted_file->getLanguageVersion()->willReturn(null);
     $extracted_file->getTags()->willReturn(null);
+    $extracted_file->isDebugBuild()->willReturn(null);
 
     $entity_manager->persist(Argument::type('\App\Entity\Program'))->will(function ($args) {
       $args[0]->setId(1);

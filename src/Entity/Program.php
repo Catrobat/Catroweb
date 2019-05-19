@@ -295,6 +295,11 @@ class Program
   protected $program_downloads;
 
   /**
+   * @ORM\Column(type="boolean", options={"default":false})
+   */
+  protected $debug_build;
+
+  /**
    * Program constructor.
    */
   public function __construct()
@@ -1299,5 +1304,21 @@ class Program
   public function getExtensions()
   {
     return $this->extensions;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function isDebugBuild()
+  {
+    return $this->debug_build;
+  }
+
+  /**
+   * @param mixed $debug_build
+   */
+  public function setDebugBuild($debug_build): void
+  {
+    $this->debug_build = $debug_build;
   }
 }
