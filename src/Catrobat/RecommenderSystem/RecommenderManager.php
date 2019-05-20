@@ -223,6 +223,54 @@ class RecommenderManager
     }
   }
 
+
+  /**
+   * This function, which is used for non-personalized recommendations for guest users, recommends
+   * the most liked programs. However, programs which are featured high in the list of most downloaded
+   * programs are ranked further back, so that more different programs are shown on the homepage
+   * (otherwise it is likely that there are many duplicates in the lists of most downloaded / most
+   * viewed programs and recommended programs).
+   *
+   * @param $flavor
+   * @return array
+   */
+  public function recommendHomepageProgramsForGuests($flavor)
+  {
+    $most_liked_programs = $this->program_repository->getMostLikedPrograms($flavor);
+    $programs_total_likes = [];
+    foreach ($most_liked_programs as $most_liked_program)
+    {
+      $program_id = $most_liked_program->getId();
+      $programs_total_likes[$program_id] = $this->program_like_repository->totalLikeCount($program_id);
+    }
+
+    $most_downloaded_programs = $this->program_repository->getMostDownloadedPrograms($flavor, 75);
+    $ids_of_most_downloaded_programs = array_map(function ($program){
+      return $program->getId();
+    }, $most_downloaded_programs);
+
+
+    foreach ($programs_total_likes as $program_id => $number_of_likes)
+    {
+      $rank_in_top_downloads = array_search($program_id, $ids_of_most_downloaded_programs);
+      if ($rank_in_top_downloads !== false)
+      {
+        $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(75 - $rank_in_top_downloads));
+      }
+    }
+
+    arsort($programs_total_likes);
+
+    $recommendation_list = [];
+    foreach ($programs_total_likes as $program_id => $number_of_likes)
+    {
+      $program = $this->program_repository->find($program_id);
+      $recommendation_list[] =  $program;
+    }
+
+    return $recommendation_list;
+  }
+
   /*
    * Three different algorithms for recommending programs on the homepage based on likes
    * follow. They are going to be compared as part of a master's thesis. The general aim
