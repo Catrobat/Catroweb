@@ -190,4 +190,3 @@ class RecommenderController extends Controller
     return new ProgramListResponse($programs, $programs_count, true, $is_user_specific_recommendation);
   }
 }
-
