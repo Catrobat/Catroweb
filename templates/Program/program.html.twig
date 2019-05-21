@@ -32,12 +32,12 @@
 {% endblock %}
 
 {% block body %}
-  <div id="program-top">
-    <div id="program-name" class="h1">
+  <div id="program-top" class="h1">
+    <div id="program-name" class="headline">
       {{ program.name }}
     </div>
 
-    <div id="program-user" class="h1">
+    <div id="program-user">
       <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
     </div>
     <div class="clear"></div>
@@ -106,7 +106,7 @@
     </div>
 
     <div id="info">
-      <div class="h2">
+      <div class="h2 headline" id="description-headline">
         <span>
           {{ "description"|trans({}, "catroweb") }}
           {% if app.user and my_program %}
@@ -324,7 +324,7 @@
 
   {% if  program.tags|length > 0  or program.extensions|length > 0 %}
     <div id="recommendations">
-      <div id="recsys-headline">
+      <div id="recsys-headline" class="headline">
         <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
       </div>
       <div class="programs"></div>
@@ -332,7 +332,7 @@
   {% endif %}
 
   <div id="specific-programs-recommendations">
-    <div id="recsys-specific-programs-headline">
+    <div id="recsys-specific-programs-headline" class="headline">
       <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
     </div>
     <div class="programs"></div>
