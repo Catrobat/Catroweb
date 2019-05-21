@@ -173,6 +173,7 @@ class ProgramManager
     $program->setUploadedAt(new \DateTime());
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
+    $program->setDebugBuild($extracted_file->isDebugBuild());
     $this->addTags($program, $extracted_file, $request->getLanguage());
 
     $version = $program->getLanguageVersion();
