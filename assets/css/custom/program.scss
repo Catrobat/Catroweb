@@ -72,6 +72,10 @@ h2
     overflow: auto;
     padding: 0 25px 20px;
 
+    #edit-description-ui {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   #description
@@ -489,6 +493,14 @@ input[type='number']
 
 @include media-breakpoint-down(md)
 {
+  .headline {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@include media-breakpoint-down(md)
+{
   #program-top
   {
     display: flex;
@@ -569,6 +581,7 @@ input[type='number']
 #recsys-headline, #recsys-specific-programs-headline
 {
   margin-top: 10px;
+  text-align: center;
 }
 
 #gamejam-div

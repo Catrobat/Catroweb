@@ -2,6 +2,10 @@
 @import '../base/mixins';
 @import 'theme_settings';
 
+h1 {
+  text-align: center;
+}
+
 .notification-container {
   border-color: $primary;
 }
