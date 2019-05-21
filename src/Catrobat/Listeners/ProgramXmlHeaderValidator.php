@@ -39,8 +39,7 @@ class ProgramXmlHeaderValidator
         isset($program_xml_properties->header->programName) &&
         isset($program_xml_properties->header->remixOf) &&
         isset($program_xml_properties->header->url) &&
-        isset($program_xml_properties->header->userHandle) &&
-        isset($program_xml_properties->header->buildType)))
+        isset($program_xml_properties->header->userHandle)))
       {
         throw new InvalidXmlException('Program XML header information missing');
       }

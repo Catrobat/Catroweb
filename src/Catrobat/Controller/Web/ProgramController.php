@@ -382,8 +382,8 @@ class ProgramController extends Controller
   public function toggleProgramVisibilityAction($id)
   {
     /**
-     * @var $user          \App\Entity\User
-     * @var $program       \App\Entity\Program
+     * @var $user User
+     * @var $program Program
      * @var $user_programs ArrayCollection
      */
 
@@ -407,14 +407,6 @@ class ProgramController extends Controller
     if (!$program)
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
-    }
-
-    $version = $program->getLanguageVersion();
-    $max_version = $this->container->get('kernel')
-      ->getContainer()->getParameter("catrobat.max_version");
-    if (version_compare($version, $max_version, ">"))
-    {
-      return new Response("false");
     }
 
     $program->setPrivate(!$program->getPrivate());
