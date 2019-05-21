@@ -2,37 +2,40 @@
 
   <div class="container">
 
+    <div>
       <button id="btn-sidebar-toggle" class="navbar-toggler" type="button"
               aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-
-    <a class="nav-logo " href="{{ path('index') }}">
-      <img
-          id="logo" {% include 'Default/headerLogo.html.twig' %}/> {# header logo contains src and alt from theme #}
-    </a>
-
-    {% if theme() == 'pocketgalaxy' %}
-      <a id="event-link" class="navbar-brand mt-1" href="http://www.galaxygamejam.com/AT/main.html">Event</a>
-    {% endif %}
-    <div class="d-inline-flex ml-auto align-items-center my-auto">
-
-      {% if 'media-library' in app.request.pathinfo or 'pocket-library' in app.request.pathinfo %}
-        {# TODO ask wolfgang if there should be done something else#}
-      {% else %}
-        {# START: Searchfield #}
-        <input type="text" class="form-control input-search search-input-header d-none"
-               placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-        <button class="btn btn-default btn-search catro-search-button mr-3 d-none">
-          <i class="fas fa-search"></i>
-        </button>
-        <a class="navbar-nav search-icon-header nav-item mr-1" href="#">
-          <i class="fas fa-search search-icon nav-link"></i>
-        </a>
-        {# END: Searchfield #}
-      {% endif %}
+      <a class="nav-logo " href="{{ path('index') }}">
+        <img id="logo" {% include 'Default/headerLogo.html.twig' %}/> {# header logo contains src and alt from theme #}
+      </a>
     </div>
+
+    {% if 'media-library' in app.request.pathinfo or 'pocket-library' in app.request.pathinfo %}
+      {# TODO ask wolfgang if there should be done something else#}
+    {% else %}
+      {# START: Searchfield #}
+      <div class="input-group d-none" id="search-input-group-header">
+        <input type="text" class="form-control input-search search-input-header tooltip-danger"
+               placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}"
+               aria-label="{{ "search.dotdotdot"|trans({}, "catroweb") }}"
+               aria-describedby="btn-search-header"
+               data-original-title="{{ "search.fail"|trans({}, "catroweb") }}"
+        >
+        <div class="input-group-append">
+          <button class="btn btn-default btn-search" type="button" id="btn-search-header">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <a class="search-icon-header" href="#">
+        <i class="fas fa-search search-icon"></i>
+      </a>
+      {# END: Searchfield #}
+    {% endif %}
+
   </div>
 </nav>
 
@@ -40,14 +43,15 @@
   $(document).ready(function() {
     $('.search-icon-header').on('click', function() {
       $(this).hide()
+      const input_group = $("#search-input-group-header");
+      input_group.removeClass('d-none')
+
       let search_header = $('.search-input-header')
       let val = search_header.val()
       search_header
-      .removeClass('d-none')
       .focus()
       .val('')
       .val(val)
-      $('.catro-search-button').removeClass('d-none')
     })
   })
 
