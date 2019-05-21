@@ -760,7 +760,8 @@ class ProgramRepository extends EntityRepository
       ->leftJoin('e.user', 'f')
       ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
       ->andWhere($qb->expr()->eq('f.id', ':user_id'))
-      ->setParameter('user_id', $user_id);
+      ->setParameter('user_id', $user_id)
+      ->orderBy('e.uploaded_at', 'DESC');
     if ($max_version !== 0)
     {
       $qb

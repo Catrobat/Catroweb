@@ -10,10 +10,38 @@ Feature:
       | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
       | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | language version | private |
-      | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | 0       |
-      | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | 999              | 1       |
-      | 3  | program 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | id | name       | description | owned by | downloads | apk_downloads | views | upload time      | version | language version | private |
+      | 1  | program 1  | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | 0       |
+      | 2  | program 2  |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | 999              | 1       |
+      | 3  | program 3  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 4  | program 4  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 5  | oldestProg |             | User1    | 133       | 63            | 33    | 01.01.2009 13:00 | 0.8.5   | 0.6              | 0       |
+      | 6  | newest     |             | User1    | 133       | 63            | 33    | 01.01.2018 13:00 | 0.8.5   | 0.6              | 0       |
+      | 7  | program 7  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 8  | program 8  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 9  | program 9  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 10 | program 10 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 11 | program 11 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 12 | program 12 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 13 | program 13 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 14 | program 14 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 15 | program 15 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 16 | program 16 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 17 | program 17 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 18 | program 18 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 19 | program 19 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 20 | program 20 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 21 | program 21 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 22 | program 22 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 23 | program 23 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 24 | program 24 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 25 | program 25 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 26 | program 26 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 27 | program 27 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 28 | program 28 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 29 | program 29 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+
+    
     And I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/profile"
     And I should see "My Profile"
@@ -163,7 +191,7 @@ Feature:
     And I wait 100 milliseconds
     Then I should not see "program 2"
     And I should see "program 1"
-    And there should be "3" programs in the database
+    And there should be "29" programs in the database
     When I go to "/pocketcode/program/2"
     And I wait 100 milliseconds
     Then I should see "Ooooops something went wrong."
@@ -247,3 +275,41 @@ Feature:
     When I click ".swal2-confirm"
     And I wait for the server response
     Then I should be logged out
+
+  Scenario: at a profile page there should always all programs be visible
+    Given I log in as "User1" with the password "654321"
+    And I am on "/pocketcode/profile"
+    Then I should see "program 3"
+    And I should see "program 4"
+    And I should see "oldestProg"
+    And I should see "newest"
+    And I should see "program 7"
+    And I should see "program 8"
+    And I should see "program 9"
+    And I should see "program 10"
+    And I should see "program 11"
+    And I should see "program 12"
+    And I should see "program 13"
+    And I should see "program 14"
+    And I should see "program 15"
+    And I should see "program 16"
+    And I should see "program 17"
+    And I should see "program 18"
+    And I should see "program 19"
+    And I should see "program 20"
+    And I should see "program 21"
+    And I should see "program 22"
+    And I should see "program 23"
+    And I should see "program 24"
+    And I should see "program 25"
+    And I should see "program 26"
+    And I should see "program 27"
+    And I should see "program 28"
+    And I should see "program 29"
+
+  Scenario: programs should be ordered newest first
+    Given I log in as "User1" with the password "654321"
+    And I am on "/pocketcode/profile"
+    When I click ".program"
+    Then I am on "/pocketcode/program/6"
+
