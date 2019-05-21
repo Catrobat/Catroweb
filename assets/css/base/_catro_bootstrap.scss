@@ -60,6 +60,7 @@ header {
     &:focus {
       background-color: rgba(0, 0, 0, 0.1);
       border: 1px rgba(0, 0, 0, 0.2) solid;
+      color: white;
 
       & + .catro-search-button {
         background-color: rgba(0, 0, 0, 0.1);
