@@ -43,14 +43,6 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
     $this->shouldThrow('App\Catrobat\Exceptions\Upload\InvalidXmlException')->duringValidate($file);
   }
 
-  public function it_checks_if_program_applicationBuildType_is_set(ExtractedCatrobatFile $file)
-  {
-    $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__ . '/base/code.xml');
-    unset($xml->header->applicationBuildType);
-    $file->getProgramXmlProperties()->willReturn($xml);
-    $this->shouldThrow('App\Catrobat\Exceptions\Upload\InvalidXmlException')->duringValidate($file);
-  }
-
   public function it_checks_if_description_is_set(ExtractedCatrobatFile $file)
   {
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__ . '/base/code.xml');

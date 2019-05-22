@@ -42,7 +42,7 @@
     </div>
 
     <div class="col-2 col-sm-1 mt-3 mt-sm-1">
-      {% if app.user != null and app.user.id != profile.id %}
+      {% if app.user == null or app.user.id != profile.id %}
         <div id="follow-icon">
           {% if profile.hasFollower(app.user) %}
             <a id="follow-btn" class="pull-right"

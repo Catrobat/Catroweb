@@ -665,6 +665,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
       $program->setPrivate(isset($programs[$i]['private']) ? $programs[$i]['private'] : 0);
+      $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
@@ -1284,6 +1285,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setApproved(false);
       $program->setRemixRoot(true);
       $program->setRemixMigratedAt(new \DateTime());
+      $program->setDebugBuild(false);
       $em->persist($program);
 
       $starter->addProgram($program);
@@ -1470,6 +1472,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setApproved(false);
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
+      $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
@@ -2961,6 +2964,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $program->setApproved(false);
         $program->setFbPostUrl('');
         $program->setRemixRoot(true);
+        $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
         $em->persist($program);
       }
       $em->flush();
