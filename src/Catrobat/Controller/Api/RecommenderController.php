@@ -173,10 +173,14 @@ class RecommenderController extends Controller
       $programs = array_slice($all_programs, $offset, $limit);
     }
 
+    // Recommendations for guest user (or logged in users who receive zero recommendations)
     if (($user == null) || ($programs_count == 0))
     {
-      $programs_count = $program_manager->getTotalLikedProgramsCount($flavor);
-      $programs = $program_manager->getMostLikedPrograms($flavor, $limit, $offset);
+      $recommender_manager = $this->get('recommendermanager');
+      $all_programs = $recommender_manager->recommendHomepageProgramsForGuests($flavor);
+
+      $programs_count = count($all_programs);
+      $programs = array_slice($all_programs, $offset, $limit);
     }
     else
     {

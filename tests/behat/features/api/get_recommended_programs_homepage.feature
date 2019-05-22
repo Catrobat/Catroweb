@@ -24,8 +24,9 @@ Feature: Get recommended programs on homepage
       | 8  | Other5  | p7          | Catrobat3 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
       | 9  | Other6  | p7          | Catrobat2 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
 
-  Scenario: Test if most liked recommendations fallback is active when similar users only like same programs
-  (i.e. they don't like any differing programs)
+  Scenario: Test if recommendation fallback is active when similar users only like same programs
+  (i.e. they don't like any differing programs).
+
     Given there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.3        |
@@ -43,8 +44,8 @@ Feature: Get recommended programs on homepage
     Then I should get a total of "2" projects
     Then I should get following programs:
       | Name    |
-      | Game    |
       | Minions |
+      | Game    |
 
   Scenario: No recommendations because there are no liked programs
     Given I have a parameter "test_user_id_for_like_recommendation" with value "1"
