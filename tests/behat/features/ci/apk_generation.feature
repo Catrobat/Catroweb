@@ -11,13 +11,13 @@ Feature:
     And the jenkins token is "SECRETTOKEN"
     When I start an apk generation of my program
     Then following parameters are sent to jenkins:
-      | parameter | value                                     |
-      | job       | Build-Program                             |
-      | token     | SECRETTOKEN                               |
-      | SUFFIX    | generated1                                |
-      | DOWNLOAD  | /pocketcode/download/1.catrobat           |
-      | UPLOAD    | /pocketcode/ci/upload/1?token=UPLOADTOKEN |
-      | ONERROR   | /pocketcode/ci/failed/1?token=UPLOADTOKEN |
+      | parameter | value                                                          |
+      | job       | Build-Program                                                  |
+      | token     | SECRETTOKEN                                                    |
+      | SUFFIX    | generated1                                                     |
+      | DOWNLOAD  | http://pocketcode.org/pocketcode/download/1.catrobat           |
+      | UPLOAD    | http://pocketcode.org/pocketcode/ci/upload/1?token=UPLOADTOKEN |
+      | ONERROR   | http://pocketcode.org/pocketcode/ci/failed/1?token=UPLOADTOKEN |
     And the program apk status will be flagged "pending"
 
   Scenario: Accept the compiled apk from jenkins

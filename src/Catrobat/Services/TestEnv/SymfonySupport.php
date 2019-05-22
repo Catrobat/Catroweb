@@ -634,6 +634,7 @@ class SymfonySupport
     $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
     $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
     $program->setRemixRoot(isset($config['remix_root']) ? $config['remix_root'] : true);
+    $program->setDebugBuild(isset($config['debug']) ? $config['debug'] : false);
 
     if (isset($config['tags']) && $config['tags'] != null)
     {

@@ -972,6 +972,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
         'tags'                => isset($program['tags_id']) ? $program['tags_id'] : null,
         'extensions'          => isset($program['extensions']) ? $program['extensions'] : null,
         'remix_root'          => filter_var($program["remix_root"], FILTER_VALIDATE_BOOLEAN),
+        'debug'               => isset($program['debug']) ? $programs['debug'] : false
       ];
       $this->insertProgram($user, $config);
     }

@@ -55,8 +55,8 @@ Feature: A/B testing for recommendation system & remix graph
     And the element "#remix-graph-modal-link" should be visible
     When I switch the language to "Russisch"
     And I wait 250 milliseconds
-    And I should see "Show Remix Graph"
-    And I should see "1 remix"
+    And I should see "Показать перемешанный граф"
+    And I should see "1 ремикс"
     And the element "#remix-graph-button" should be visible
     And the element "#remix-graph-modal-link" should be visible
 

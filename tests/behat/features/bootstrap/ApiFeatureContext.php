@@ -589,6 +589,7 @@ class ApiFeatureContext extends BaseContext
         'tags'                => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
         'extensions'          => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
         'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,
+        'debug'          => isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false
       ];
 
       $this->insertProgram($user, $config);
