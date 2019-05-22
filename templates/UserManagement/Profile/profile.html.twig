@@ -18,7 +18,7 @@
            src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
     </div>
 
-    <div id="user-information" class="col-10 col-sm-6 col-md-7 col-lg-8 mt-4 mt-sm-2">
+    <div id="user-information" class="col-8 col-sm-5 col-md-6 col-lg-7 ml-3 ml-sm-0 mt-4 mt-sm-2">
       <p>
         <strong>
           {{ "profile.amountOfPrograms"|trans({}, "catroweb") }}:
@@ -41,7 +41,7 @@
       </p>
     </div>
 
-    <div class="col-2 col-sm-1 mt-3 mt-sm-1">
+    <div class="col-2 mt-4 mt-sm-1 center">
       {% if app.user == null or app.user.id != profile.id %}
         <div id="follow-icon">
           {% if profile.hasFollower(app.user) %}
