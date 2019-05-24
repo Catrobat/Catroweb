@@ -22,7 +22,7 @@ description: 描述
 noDescription: 没有可用的描述
 country: 国家
 loginText: 登录
-privacyPolicy: 隐私条款
+privacyPolicy: 隐私策略
 imprint: 版权信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
 pleaseTryAgain: '再试一次吧！'
@@ -123,6 +123,7 @@ programs:
   smile: Smile!
   love: Love!
   wow: Wooow!
+  linkTitle: Link
   link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: '显示调制关系图'
@@ -518,8 +519,7 @@ menu:
   logout: 登出
   admin: 管理人员
   home: Home
-programLoader:
-  noPrograms: There are currently no programs.
+  helpAndTutorials: Help & Tutorials
 login:
   login: 登录
   passOrUser: 您的密码或用户名不正确。
@@ -700,14 +700,35 @@ pmd:
   failed:
     text: Program upload failed.
 codeview:
-  showText: Show code
+  showCode: 'Show code'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'scenes'
+  scripts: 'scripts'
+  bricks: 'bricks'
+  objects: 'objects'
+  looks: 'looks'
+  sounds: 'sounds'
+  globals: 'globals'
+  locals: 'locals'
+  eventBricks: 'Event Bricks'
+  controlBricks: 'Control Bricks'
+  motionBricks: 'Motion Bricks'
+  soundBricks: 'Sound Bricks'
+  looksBricks: 'Looks Bricks'
+  penBricks: 'Pen Bricks'
+  dataBricks: 'Data Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
   download: Get the App
 privacy-policy:
-  header: 隐私条款
+  header: 隐私策略
   version: Version 2.1, 25 June 2018
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
@@ -723,20 +744,17 @@ catro-notifications:
   markAsRead: "Mark as read"
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
-    title: New comment for program %program_name%!
-    messagePart1: User
-    messagePart2: commented on your program
+    title: 'New comment for program %program_name%!'
+    message: 'User %user_link% commented on your program %program_link%.'
   like:
-    title: New like for program %program_name%!
-    messagePart1: User
-    messagePart2: liked your program
+    title: 'New like for program %program_name%!'
+    message: 'User %user_link% liked your program %program_link%.'
   follow:
-    title: New Follower!
-    message: follows you now.
-    program-follow:
-      title: New Program from someone you follow
-      messagePart1: created a new Program
-      messagePart2: ', check it out.'
+    title: 'New Follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New Program from someone you follow'
+    message: 'User %user_link% created a new Program %program_link%'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(
@@ -753,9 +771,9 @@ help-cards:
     education: Education platform
     discuss: Discuss
   text:
-    starters: Try out and remix with
-    tutorials: Effective tricks in
-    stepbystep: Do 10 easy steps in
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Download the app and get started
     game_design_1: Effective tricks for
     game_design_2: creating a game
@@ -778,3 +796,8 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: 同意
+disagree: 不同意
+profileLoader:
+  noProfiles: There are currently no profiles.

@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-Proposed new version tag is: `v2.1.0`
+
+## [2.1.0]
 ### Added
 - Program Owner now visible on small devices too.
 - User Badge in the sidebar will be updated immediately after marking a notification as read.
@@ -27,7 +28,7 @@ Proposed new version tag is: `v2.1.0`
 - Project documentation removed from repo and relocated to github wiki.
 ### Fixed
 - Tooltip is now displayed once not twice.
-- Media-Library files are named correctly on download. (Filename not ID)
+- Media-Library files are named correctly on download. (Filename not ID, works only in browser)
 - Notification badge in the sidebar will now be displayed correctly.
 - Clean logs command fixed.
 - Limiting text to display width.
@@ -35,4 +36,5 @@ Proposed new version tag is: `v2.1.0`
 - Follow Icon gets positioned correctly again.
 - Color of text in search field is adjusted for "Luna & Cat"
 
-[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/master...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v2.1.0
