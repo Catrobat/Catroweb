@@ -123,6 +123,7 @@ programs:
   smile: Smile!
   love: Love!
   wow: Wooow!
+  linkTitle: Link
   link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'रीमिक्स ग्राफ दिखाएं'
@@ -521,8 +522,7 @@ menu:
   logout: बाहर जाए
   admin: Admin
   home: Home
-programLoader:
-  noPrograms: वर्तमान में कोई प्रोग्राम नहीं हैं।
+  helpAndTutorials: Help & Tutorials
 login:
   login: प्रवेश करे
   passOrUser: आपका पासवर्ड या उपयोगकर्ता नाम गलत था।
@@ -703,7 +703,28 @@ pmd:
   failed:
     text: Program upload failed.
 codeview:
-  showText: कोड दिखाएं
+  showCode: 'कोड दिखाएं'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'scenes'
+  scripts: 'scripts'
+  bricks: 'bricks'
+  objects: 'objects'
+  looks: 'looks'
+  sounds: 'sounds'
+  globals: 'globals'
+  locals: 'locals'
+  eventBricks: 'Event Bricks'
+  controlBricks: 'Control Bricks'
+  motionBricks: 'Motion Bricks'
+  soundBricks: 'Sound Bricks'
+  looksBricks: 'Looks Bricks'
+  penBricks: 'Pen Bricks'
+  dataBricks: 'Data Bricks'
 footer:
   usefulLinks: उपयोगी कड़ियां
   legalities: कानूनी निर्देशों
@@ -726,20 +747,17 @@ catro-notifications:
   markAsRead: "Mark as read"
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
-    title: New comment for program %program_name%!
-    messagePart1: User
-    messagePart2: commented on your program
+    title: 'New comment for program %program_name%!'
+    message: 'User %user_link% commented on your program %program_link%.'
   like:
-    title: New like for program %program_name%!
-    messagePart1: User
-    messagePart2: liked your program
+    title: 'New like for program %program_name%!'
+    message: 'User %user_link% liked your program %program_link%.'
   follow:
-    title: New Follower!
-    message: follows you now.
-    program-follow:
-      title: New Program from someone you follow
-      messagePart1: created a new Program
-      messagePart2: ', check it out.'
+    title: 'New Follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New Program from someone you follow'
+    message: 'User %user_link% created a new Program %program_link%'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(
@@ -756,9 +774,9 @@ help-cards:
     education: Education platform
     discuss: Discuss
   text:
-    starters: बाहर की कोशिश करो और रीमिक्स के साथ
-    tutorials: में कारगर चाल
-    stepbystep: में 10 आसान चरणों
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Download the app and get started
     game_design_1: Effective tricks for
     game_design_2: creating a game
@@ -781,3 +799,8 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: सहमत
+disagree: असहमत
+profileLoader:
+  noProfiles: There are currently no profiles.

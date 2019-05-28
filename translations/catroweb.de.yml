@@ -13,24 +13,24 @@ passwordsNoMatch: Die Passwörter stimmen nicht überein.
 error: Fehler
 cancel: Abbrechen
 report: Melden
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: Ja, wirklich löschen!
+reportIt: Ja, melden!
+areYouSure: Bist du sicher?
+noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
 download: Als Programm herunterladen
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
 country: Land
 loginText: Anmelden
-privacyPolicy: Datenschutzrichtlinie
+privacyPolicy: Datenschutz-Vereinbarung
 imprint: Impressum
 somethingWentWrong: 'Ooooops etwas ging schief.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
 more: 'mehr'
 less: 'weniger'
-show-more: 'Show more'
-show-less: 'Show less'
+show-more: 'Mehr'
+show-less: 'Weniger'
 ok: OK
 clickToDownloadProgram: 'Um das Beispielprogramm herunterzuladen klicke %link_start% hier %link_end%.'
 registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
@@ -49,7 +49,7 @@ indexPage:
       description: 'Je mehr Likes (auch "Daumen nach oben", "Lachen", Liebe" und "Woow!") dein Programm erhält, desto höher erscheint es in der Liste.'
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: Willkommen bei Catrobat's %theme%
     subtitle: Erstelle Animationen, Spiele und mehr...
     download: Lade die App herunter
     statistics: Mehr Statistiken
@@ -123,6 +123,7 @@ programs:
   smile: Smile!
   love: Love!
   wow: Wooow!
+  linkTitle: Link
   link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Zeige den Remix Graphen'
@@ -513,11 +514,10 @@ search:
 menu:
   profile: Mein Profil
   login: Einloggen
-  logout: Ausloggen
+  logout: Abmelden
   admin: Administrator
   home: Home
-programLoader:
-  noPrograms: Es gibt im Moment keine Programme.
+  helpAndTutorials: Help & Tutorials
 login:
   login: Einloggen
   passOrUser: Das Passwort oder der Username ist falsch.
@@ -697,14 +697,35 @@ pmd:
   failed:
     text: Programm-Upload fehlgeschlagen.
 codeview:
-  showText: Code anzeigen
+  showCode: 'Code anzeigen'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'scenes'
+  scripts: 'scripts'
+  bricks: 'bricks'
+  objects: 'objects'
+  looks: 'looks'
+  sounds: 'sounds'
+  globals: 'globals'
+  locals: 'locals'
+  eventBricks: 'Event Bricks'
+  controlBricks: 'Control Bricks'
+  motionBricks: 'Motion Bricks'
+  soundBricks: 'Sound Bricks'
+  looksBricks: 'Looks Bricks'
+  penBricks: 'Pen Bricks'
+  dataBricks: 'Data Bricks'
 footer:
   usefulLinks: Nützliche Links
   legalities: Rechtliche Hinweise
   communityStats: Community Statistiken
   download: Hol dir die App
 privacy-policy:
-  header: Datenschutzrichtlinie
+  header: Datenschutz-Vereinbarung
   version: Version 2.1, 25. Juni 2018
   text1: Um dir alle Vorteile unserer Dienste und dem verknüpften Benutzerkonto bieten zu können, ist es notwendig gewisse Daten von dir zu sammeln.
   text2: Um unsere Dienste (App und Webseiten) zu betreiben und zu verbessern, sowie Forschung im Bereich der Informationstechnologien bzw. MINT-Bildung durchzuführen verwenden wir Google Analytics, Crashlytics und Firebase (alle betrieben von Google LLC, USA) um Metadaten (z.B. Absturzinformationen, Zeitstempel, aufgerufene Seiten, Nutzung der Dienste, Betriebssystem und Netzwerkinformationen) über die Nutzung unserer Dienste zu sammeln. Die damit durchgeführten Analysen und gesammelten Daten sind nicht mit Benutzerkonten gekoppelt und enthalten keine persönlichen Informationen (die letzten Bits der IP Adressen werden anonymisiert). Für die Verarbeitung werden die Daten jedoch an den Auftragsverarbeiter (Google LLC, USA) übermittelt. Diese Verarbeitung beruht auf einer Vereinbarung mit Google LLC die der Europäischen Datenschutz-Grundverordnung (DSGVO) und dem EU-USA "Privacy Shield" entspricht.
@@ -720,20 +741,17 @@ catro-notifications:
   markAsRead: "Mark as read"
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
-    title: Neuer Kommentar für Programm %program_name%!
-    messagePart1: Benutzer
-    messagePart2: kommentierte dein Programm
+    title: 'Neuer Kommentar für Programm %program_name%!'
+    message: 'User %user_link% commented on your program %program_link%.'
   like:
-    title: New like for program %program_name%!
-    messagePart1: Benutzer
-    messagePart2: liked your program
+    title: 'New like for program %program_name%!'
+    message: 'User %user_link% liked your program %program_link%.'
   follow:
-    title: New Follower!
-    message: follows you now.
-    program-follow:
-      title: New Program from someone you follow
-      messagePart1: created a new Program
-      messagePart2: ', check it out.'
+    title: 'New Follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New Program from someone you follow'
+    message: 'User %user_link% created a new Program %program_link%'
 clipboard:
   success: Link erfolgreich kopiert!
   fail: Fehler beim Kopieren! :(
@@ -750,9 +768,9 @@ help-cards:
     education: Bildungsplattform
     discuss: Kommentieren
   text:
-    starters: Erstelle deinen ersten Remix mit
-    tutorials: Spannende Funktionen in
-    stepbystep: Erstelle dein erstes Programm in
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Lade dir die App herunter und lege los!
     game_design_1: Effektive Tricks für
     game_design_2: ein Spiel erstellen
@@ -775,3 +793,8 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: Zustimmen
+disagree: Ablehnen
+profileLoader:
+  noProfiles: There are currently no profiles.

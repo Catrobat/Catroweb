@@ -8,7 +8,7 @@ aboutPocketCode: O Pocket Code
 aboutCatrobat: O Catrobat
 tutorials: Poradniki
 googlePlay: Google Play
-iosAppStore: IOS App store
+iosAppStore: Sklep iOS App
 passwordsNoMatch: Hasła nie pasują.
 error: Błąd
 cancel: Anuluj
@@ -49,7 +49,7 @@ indexPage:
       description: 'Im więcej polubień (w tym "Kciuk do góry", "Uśmiech", "Miłość" i "wow!") program otrzyma, tym wyżej znajdzie się na liście.'
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: Witamy w Catrobat %theme%
     subtitle: Twórz opowiadania, gry i nie tylko...
     download: Pobierz aplikację
     statistics: Więcej Statystyk
@@ -123,6 +123,7 @@ programs:
   smile: Uśmiech!
   love: Kocham!
   wow: Wow!
+  linkTitle: Link
   link: Skopiuj link do programu do schowka
 remixGraph:
   showRemixGraph: 'Pokaż wykres remiksów'
@@ -156,19 +157,15 @@ accountConfirmation:
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
   message: |
-    Dear %username%.
+    Drogi %username%. 
+    Żądasz zresetowania hasła do %appplication_url%, ponieważ zapomniałeś swojego hasła. Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna. 
+    Aby zresetować hasło i utworzyć nowe, proszę odwiedzić następującą stronę: %confirmationUrl%
 
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-
-    Best regards,
-    Your Catrobat Team.
+    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności %appplication_url%. 
+    Aby to zrobić, odwiedź następującą stronę: %loginPage%
+    Aby edytować swój profil, przejdź do tej strony: %profilePage% 
+    Pozdrawiamy! 
+    Twój zespół Catrobat.
   messageHtml: |
     <p>
     Drogi %username%.<br>
@@ -194,8 +191,8 @@ profile:
   firstEmail: Mój pierwszy e-mail
   secondEmail: Mój drugi e-mail
   myPrograms: Moje programy
-  follows: Follows
-  follower: Follower
+  follows: Obserwowani
+  follower: Obserwujący
   unfollowUser: Przestań obserwować tego użytkownika!
   followUser: Obserwuj tego użytkownika!
   amountOfPrograms: Liczba programów
@@ -516,9 +513,8 @@ menu:
   login: Logowanie
   logout: Wyloguj się
   admin: Administrator
-  home: Home
-programLoader:
-  noPrograms: Obecnie nie ma żadnych programów.
+  home: Strona główna
+  helpAndTutorials: Help & Tutorials
 login:
   login: Logowanie
   passOrUser: Twoje hasło lub nazwa użytkownika były nieprawidłowe.
@@ -532,7 +528,7 @@ login:
   changePass: Zmień hasło
   createAccount: Utwórz konto
   noAccount: Nie masz konta!
-  alreadyAccount: Already having an account?
+  alreadyAccount: Masz już konto?
   or: lub
   username: Nazwa użytkownika
   email: Adres e-mail
@@ -675,7 +671,7 @@ admin:
     diskMaintenance: Zarządzanie dyskiem
     ramMaintenance: RAM maintenance
     noRemovableObjects: Nie istnieją żadne usuwalne obiekty.
-    removableObjects: Removable objects
+    removableObjects: Usunięte obiekty
     manualBackups: Ręczna kopia zapasowa
     noRemovableBackupObjects: Brak usuwalnych kopii zapasowych na tym serwerze.
     btnCreateBackup: Stwórz kopię zapasową
@@ -698,12 +694,33 @@ pmd:
   failed:
     text: Przesyłanie programu nie powiodło się.
 codeview:
-  showText: Pokaż kod
+  showCode: 'Pokaż kod'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'scenes'
+  scripts: 'scripts'
+  bricks: 'bricks'
+  objects: 'objects'
+  looks: 'looks'
+  sounds: 'sounds'
+  globals: 'globals'
+  locals: 'locals'
+  eventBricks: 'Event Bricks'
+  controlBricks: 'Control Bricks'
+  motionBricks: 'Motion Bricks'
+  soundBricks: 'Sound Bricks'
+  looksBricks: 'Looks Bricks'
+  penBricks: 'Pen Bricks'
+  dataBricks: 'Data Bricks'
 footer:
   usefulLinks: Przydatne Linki
   legalities: Prawa
   communityStats: Statystyki
-  download: Get the App
+  download: Pobierz aplikację
 privacy-policy:
   header: Polityka prywatności
   version: Wersja 2.1, 25 czerwca 2018
@@ -721,20 +738,17 @@ catro-notifications:
   markAsRead: "Oznacz jako przeczytane"
   summary: "{0}Nie masz nowych powiadomień|{1}Masz %amount% nowe powiadomienie!|]1,Inf]Masz %amount% nowych powiadomień!"
   comment:
-    title: Nowy komentarz do programu %program_name%!
-    messagePart1: Użytkownik
-    messagePart2: skomentował(a) Twój program
+    title: 'Nowy komentarz do programu %program_name%!'
+    message: 'User %user_link% commented on your program %program_link%.'
   like:
-    title: Nowe polubienie programu %program_name%!
-    messagePart1: Użytkownik
-    messagePart2: polubiono twój post
+    title: 'Nowe polubienie programu %program_name%!'
+    message: 'User %user_link% liked your program %program_link%.'
   follow:
-    title: Nowy Obserwator!
-    message: obserwuje Cię teraz.
-    program-follow:
-      title: Nowy program użytkownika, którego obserwujesz
-      messagePart1: stworzył nowy Program
-      messagePart2: ', sprawdź to.'
+    title: 'Nowy Obserwator!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'Nowy program użytkownika, którego obserwujesz'
+    message: 'User %user_link% created a new Program %program_link%'
 clipboard:
   success: Link do programu skopiowany do schowka!
   fail: Nie udało się skopiować linku do schowka! :(
@@ -745,30 +759,30 @@ help-cards:
     starters: Początki
     tutorials: Poradniki
     stepbystep: Krok po Kroku
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
+    getinvolvedGoogle: Pobierz z Google Play
+    getinvolvedApple: Pobierz na IOS
     game_design: Game Design
-    education: Education platform
-    discuss: Discuss
+    education: Platforma edukacyjna
+    discuss: Dyskutuj
   text:
-    starters: Spróbuj i remiksuj z
-    tutorials: Skuteczne triki w
-    stepbystep: Zrób 10 prostych kroków w
-    getinvolved: Download the app and get started
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
+    getinvolved: Pobierz aplikację i rozpocznij
+    game_design_1: Skuteczne triki dla
+    game_design_2: tworzenie gry
+    education: Kurs dla początkujących i świetne zasoby
+    discuss_1: Skontaktuj się z innymi
+    discuss_2: użytkownicy
 media-packages:
-  title: Media-Packages
-  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  title: Pakiety multimedialne
+  description: W następujących kategoriach można znaleźć dodatkowe obiekty, które można dodać do programów Pocket Code.
   thumb-size:
-    description: Preview Size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
+    description: Pokaż rozmiar
+    sm: mały
+    md: średni
+    lg: duży
+  theme-special: "%flavor% Temat specjalny"
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -776,3 +790,8 @@ flavor:
   phirocode: PhiroCode
   luna: Księżyc & Kot
   create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: Zgadzam się
+disagree: Nie zgadzam się
+profileLoader:
+  noProfiles: There are currently no profiles.

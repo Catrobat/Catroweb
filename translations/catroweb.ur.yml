@@ -37,25 +37,25 @@ registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے �
 notifications: 'اطلاعات'
 wellDone: "بہت اچھا!"
 done: "ہوگیا"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+notificationsReadMessage: "آپ نے تمام اطلاعات کو پڑھا ہے."
+notificationsClearedMessage: "تمام اطلاعات کو بطور خواندہ نشان زد کیا گیا ہے ۔"
+clearAllNotificationsButtonTitle: "سب کو پڑھا ہوا شمار کریں"
+notificationsClearError: "اطلاعات کو پڑھنے کے طور پر نشان زد کرنے میں قاصر!"
+pleaseWait: "براہ مہربانی انتظار کریں..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'کون کون سے پروگرام یہاں تجویز کی جاتی ہے؟'
+      description: 'زیادہ پسند کرتا ہے (بشمول "تھمب اپ"، "ہنسی"، "محبت" اور "واو!") آپ کے پروگرام موصول ہوتا ہے، اس فہرست میں زیادہ تر ظاہر ہوتا ہے.'
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
-    subtitle: Create stories, games and more...
-    download: Download the app
-    statistics: More Statistics
+    subtitle: کہانیاں، کھیل اور مزید بنائیں ...
+    download: پروگرام ڈاؤن لوڈ کریں
+    statistics: مزید اعداد و شمار
   featured: نمایاں
   newest: تازہ ترین پروگرام
-  recommended: Recommended programs
+  recommended: سفارش کردہ پروگرام
   noPrograms: اس وقت کوئی پروگرام نہیں ہے۔
   deleteConfirmation: |+
     Are you sure?
@@ -123,16 +123,17 @@ programs:
   smile: Smile!
   love: Love!
   wow: Wooow!
+  linkTitle: Link
   link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'کی طرف سے'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'کھولیں'
+  showPaths: 'راستے دکھائیں'
+  programNotAvailableErrorTitle: 'معاف کریں ...'
+  programNotAvailableErrorDescription: 'پروگرام اب دستیاب نہیں ہے!'
+  programNotAvailable: 'دستیاب نہیں ہے'
+  programUnknownUser: 'نامعلوم صارف'
 noReply: This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
@@ -307,7 +308,7 @@ help:
         special2: 'گیلری سے انتخاب کریں.'
         special3: 'تصویر لیجیئے.'
     step3:
-      title: "Start Moving"
+      title: "منتقل کرنا شروع"
       detail:
         text1: 'ٹیپ کریں:'
         text2: 'The first brick we use is out of the category "Motion".'
@@ -368,11 +369,11 @@ help:
         text1: 'The background is like an object, but you just can have one background.'
         text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
-      title: "Main Menu"
+      title: "مین مینو\n"
       description: "Use the Android Back Button to get to this screen."
       detail:
         text1: 'Continue with your currently opened program.'
-        text2: 'Add a new program.'
+        text2: 'ایک نیا پروگرام بنائیں'
         text3: 'See all your local programs.'
         text4: 'ہیلپ سائٹ پر جائیں اور دوسرے صارفیں سے مشورہ کریں.'
         text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
@@ -521,8 +522,7 @@ menu:
   logout: لاگ آؤٹ
   admin: Admin
   home: Home
-programLoader:
-  noPrograms: اس وقت کوئی پروگرام نہیں ہے۔
+  helpAndTutorials: Help & Tutorials
 login:
   login: لاگ اِن
   passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
@@ -703,7 +703,28 @@ pmd:
   failed:
     text: Program upload failed.
 codeview:
-  showText: Show code
+  showCode: 'Show code'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'scenes'
+  scripts: 'scripts'
+  bricks: 'bricks'
+  objects: 'objects'
+  looks: 'looks'
+  sounds: 'sounds'
+  globals: 'globals'
+  locals: 'locals'
+  eventBricks: 'Event Bricks'
+  controlBricks: 'Control Bricks'
+  motionBricks: 'Motion Bricks'
+  soundBricks: 'Sound Bricks'
+  looksBricks: 'Looks Bricks'
+  penBricks: 'Pen Bricks'
+  dataBricks: 'Data Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities
@@ -726,20 +747,17 @@ catro-notifications:
   markAsRead: "Mark as read"
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
-    title: New comment for program %program_name%!
-    messagePart1: User
-    messagePart2: commented on your program
+    title: 'New comment for program %program_name%!'
+    message: 'User %user_link% commented on your program %program_link%.'
   like:
-    title: New like for program %program_name%!
-    messagePart1: User
-    messagePart2: liked your program
+    title: 'New like for program %program_name%!'
+    message: 'User %user_link% liked your program %program_link%.'
   follow:
-    title: New Follower!
-    message: follows you now.
-    program-follow:
-      title: New Program from someone you follow
-      messagePart1: created a new Program
-      messagePart2: ', check it out.'
+    title: 'New Follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New Program from someone you follow'
+    message: 'User %user_link% created a new Program %program_link%'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(
@@ -756,9 +774,9 @@ help-cards:
     education: Education platform
     discuss: Discuss
   text:
-    starters: Try out and remix with
-    tutorials: Effective tricks in
-    stepbystep: Do 10 easy steps in
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Download the app and get started
     game_design_1: Effective tricks for
     game_design_2: creating a game
@@ -781,3 +799,8 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: متفق
+disagree: غیر متفق
+profileLoader:
+  noProfiles: There are currently no profiles.

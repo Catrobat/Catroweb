@@ -123,6 +123,7 @@ programs:
   smile: Улыбка!
   love: Люблю!
   wow: Вааау!
+  linkTitle: Link
   link: Копировать ссылку на программу в буфер обмена
 remixGraph:
   showRemixGraph: 'Показать перемешанный граф'
@@ -445,7 +446,7 @@ help:
       one: "Добавь два объекта, один из которых должен двигаться с помощью датчиков твоего телефона, например, Алекс (смотри %tutorial_card_link_7% 7 туториал %link_end%)."
       two: "Сохрани текующие координаты x и y двигающегося объекта Алекс (смотри %tutorial_card_link_10% 10 туториал %link_end%) и вставь следующие скрипты. Последовательно проверяй если два объекта налезают друг на друга. Если они делают это, то фиксированный объект должен быть скрыт."
     card12:
-      title: "Распознавание лиц"
+      title: "Распознование лиц"
       description: "Управляй объектом через обнаружение лица."
       one: "Сначала проверьте, что блоки обнаружения лиц включены, для этого измените настройки."
       two: "Добавь новый объект и вставь следующие блоки для того, чтобы показать объект, если лицо обнаружено. Положи проверку на обнаружение лица в бесконечный цикл. Если камера воспримет лицо, то значение переменной будет «ИСТИНА», иначе - «ЛОЖЬ»."
@@ -522,8 +523,7 @@ menu:
   logout: Выйти
   admin: Админ
   home: Дом
-programLoader:
-  noPrograms: На данный момент программы отсутствуют.
+  helpAndTutorials: Help & Tutorials
 login:
   login: Войти
   passOrUser: Ваш пароль или имя пользователя были неверны.
@@ -703,7 +703,28 @@ pmd:
   failed:
     text: Не удалось загрузить программу.
 codeview:
-  showText: Показать код
+  showCode: 'Показать код'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'scenes'
+  scripts: 'scripts'
+  bricks: 'bricks'
+  objects: 'objects'
+  looks: 'looks'
+  sounds: 'sounds'
+  globals: 'globals'
+  locals: 'locals'
+  eventBricks: 'Event Bricks'
+  controlBricks: 'Control Bricks'
+  motionBricks: 'Motion Bricks'
+  soundBricks: 'Sound Bricks'
+  looksBricks: 'Looks Bricks'
+  penBricks: 'Pen Bricks'
+  dataBricks: 'Data Bricks'
 footer:
   usefulLinks: Полезные ссылки
   legalities: Юридическая правомерность
@@ -726,20 +747,17 @@ catro-notifications:
   markAsRead: "Пометить, как прочитанное"
   summary: "{0}У вас нет новых уведомлений|{1}У вас %amount% новое уведомление!|]1,Inf]У вас %amount% новых уведомлений!"
   comment:
-    title: Новый комментарий к программе %program_name%!
-    messagePart1: Пользователь
-    messagePart2: прокомментировал(-а) вашу программу
+    title: 'Новый комментарий к программе %program_name%!'
+    message: 'User %user_link% commented on your program %program_link%.'
   like:
-    title: Новый лайк программе %program_name%!
-    messagePart1: Пользователь
-    messagePart2: оценил(-а) вашу программу
+    title: 'Новый лайк программе %program_name%!'
+    message: 'User %user_link% liked your program %program_link%.'
   follow:
-    title: Новый подписчик!
-    message: подписался на вас.
-    program-follow:
-      title: Новая программа от кого-то, на кого вы подписаны вы подписаны
-      messagePart1: создал новую Программу
-      messagePart2: ', зацените.'
+    title: 'Новый подписчик!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'Новая программа от кого-то, на кого вы подписаны вы подписаны'
+    message: 'User %user_link% created a new Program %program_link%'
 clipboard:
   success: Ссылка на программу скопирована в буфер обмена!
   fail: Не удалось скопировать ссылку в буфер обмена! :(
@@ -756,9 +774,9 @@ help-cards:
     education: Образовательная платформа
     discuss: Обсуждение
   text:
-    starters: Попробуйте и смешайте с
-    tutorials: Эффективные трюки в
-    stepbystep: Сделать 10 простых шагов в
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Скачивайте приложение и начинайте пользоваться
     game_design_1: Эффективные трюки для
     game_design_2: создание игры
@@ -781,3 +799,8 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: Принять
+disagree: Отклонить
+profileLoader:
+  noProfiles: There are currently no profiles.
