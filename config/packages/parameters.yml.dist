@@ -5,6 +5,7 @@ parameters:
     database_name:     symfony
     database_user:     root
     database_password: ~
+    database_server_v: 10.1
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
