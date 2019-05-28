@@ -17,8 +17,7 @@ class NewProgramNotification extends CatroNotification
   private $program;
 
   /**
-   *  You have to set this parameter otherwise the wrong template will be
-   *       rendered.
+   *  You have to set this parameter otherwise the wrong template will be rendered.
    */
   private $twig_template = "Notifications/NotificationTypes/program_follow_notification.html.twig";
 
@@ -26,14 +25,12 @@ class NewProgramNotification extends CatroNotification
    * CommentNotification constructor.
    *
    * @param User $user
-   * @param      $title
-   * @param      $message
    * @param      $program
    *
    */
-  public function __construct(User $user, $title, $message, $program)
+  public function __construct(User $user, $program)
   {
-    parent::__construct($user, $title, $message);
+    parent::__construct($user);
     $this->program = $program;
   }
 
@@ -62,6 +59,4 @@ class NewProgramNotification extends CatroNotification
   {
     return $this->twig_template;
   }
-
-
 }

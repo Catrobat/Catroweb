@@ -123,6 +123,7 @@ programs:
   smile: Sorriso!
   love: Innamorato!
   wow: Wooow!
+  linkTitle: Link
   link: Copia negli Appunti il collegamento al programma
 remixGraph:
   showRemixGraph: 'Visualizza il grafo dei Remix'
@@ -442,7 +443,7 @@ help:
       one: "Aggiungi due oggetti in cui uno dovrebbe muoversi usando un sensore del dispositivo, per es. Alex (vedi %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
       two: "Salva la „posizione x e y“ attuale dell'oggetto Alex in movimento Alex (vedi %tutorial_card_link_10% Tutorial Card 10 %link_end%) e inserisci i seguenti script. Viene continuamente verificato se i due oggetti si sovrappongono. Se lo fanno, l'oggetto fisso, in questo caso, viene nascosto."
     card12:
-      title: "Rilevamento volti"
+      title: "Rilevamento del volto"
       description: "Comandare un oggetto usando il rilevamento volti."
       one: "Per prima cosa assicurati che il rilevamento volti sia abilitato. Per farlo vai alla configurazione."
       two: "Aggiungi un nuovo oggetto e inserisci i seguenti mattoncini per mostrare se è rilevato un volto. Verifica se il volto è rilevato e mettilo in un ciclo senza fine (\"per sempre\"). Se la telecamera percepisce un viso, il valore della variabile è \"VERO\", altrimenti è \"FALSO\"."
@@ -519,8 +520,7 @@ menu:
   logout: Logout
   admin: Admin
   home: Home
-programLoader:
-  noPrograms: Attualmente non c'è alcun programma.
+  helpAndTutorials: Help & Tutorials
 login:
   login: Login
   passOrUser: Password o nome utente errati.
@@ -700,7 +700,28 @@ pmd:
   failed:
     text: Caricamento fallito.
 codeview:
-  showText: Mostra codice
+  showCode: 'Mostra codice'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'scenes'
+  scripts: 'scripts'
+  bricks: 'bricks'
+  objects: 'objects'
+  looks: 'looks'
+  sounds: 'sounds'
+  globals: 'globals'
+  locals: 'locals'
+  eventBricks: 'Event Bricks'
+  controlBricks: 'Control Bricks'
+  motionBricks: 'Motion Bricks'
+  soundBricks: 'Sound Bricks'
+  looksBricks: 'Looks Bricks'
+  penBricks: 'Pen Bricks'
+  dataBricks: 'Data Bricks'
 footer:
   usefulLinks: Link utili
   legalities: Informazioni legali
@@ -723,20 +744,17 @@ catro-notifications:
   markAsRead: "Segna come letto"
   summary: "{0}Non hai nuove notifiche|{1}Hai %amount% nuova notifica!|]1,Inf]Hai %amount% nuove notifiche!"
   comment:
-    title: Nuovo commento per il programma %program_name%!
-    messagePart1: Utente
-    messagePart2: commenti al tuo programma
+    title: 'Nuovo commento per il programma %program_name%!'
+    message: 'User %user_link% commented on your program %program_link%.'
   like:
-    title: Nuovo Mi piace per il programma %program_name%!
-    messagePart1: Utente
-    messagePart2: Mi piace sul tuo programma
+    title: 'Nuovo Mi piace per il programma %program_name%!'
+    message: 'User %user_link% liked your program %program_link%.'
   follow:
-    title: Nuovo follower!
-    message: ti segue da ora.
-    program-follow:
-      title: Nuovo programma da un utente che stai seguendo
-      messagePart1: creato un nuovo programma
-      messagePart2: ', controllalo ora.'
+    title: 'Nuovo follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'Nuovo programma da un utente che stai seguendo'
+    message: 'User %user_link% created a new Program %program_link%'
 clipboard:
   success: Link al programma copiato negli appunti!
   fail: Impossibile copiare il link negli appunti! :(
@@ -753,9 +771,9 @@ help-cards:
     education: Piattaforma di formazione
     discuss: Discuti
   text:
-    starters: Provalo e fai un remix
-    tutorials: Trucchi efficaci per
-    stepbystep: Fai 10 semplici passi in
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Scarica l'app e inizia
     game_design_1: Trucchi efficaci per
     game_design_2: creare un gioco
@@ -778,3 +796,8 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: Acconsento
+disagree: Non sono d'accordo
+profileLoader:
+  noProfiles: There are currently no profiles.

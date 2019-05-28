@@ -7,7 +7,6 @@ function FetchNotifications (countNotificationsUrl, maxAmountToFetch, refreshRat
   
   self.run = function () {
     let userNotificationBadge = $('.user-notification-badge')
-    userNotificationBadge.hide()
     
     $.ajax({
       url    : self.countNotificationsUrl,
@@ -25,7 +24,6 @@ function FetchNotifications (countNotificationsUrl, maxAmountToFetch, refreshRat
         {
           userNotificationBadge.text('')
           userNotificationBadge.hide()
-          
         }
         setTimeout(self.run, refreshRate)
       },

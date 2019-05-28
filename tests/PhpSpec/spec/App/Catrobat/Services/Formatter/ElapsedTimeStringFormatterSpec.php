@@ -7,10 +7,21 @@ use Prophecy\Argument;
 use Symfony\Component\Translation\TranslatorInterface;
 use \App\Catrobat\Services\Time;
 
+/**
+ * Class ElapsedTimeStringFormatterSpec
+ * @package tests\PhpSpec\spec\App\Catrobat\Services\Formatter
+ */
 class ElapsedTimeStringFormatterSpec extends ObjectBehavior
 {
+  /**
+   * @var
+   */
   protected $testTime;
 
+  /**
+   * @param TranslatorInterface $translator
+   * @param Time $time
+   */
   public function let(TranslatorInterface $translator, Time $time)
   {
     $this->testTime = 9999999999999;
@@ -18,11 +29,17 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
     $this->beConstructedWith($translator, $time);
   }
 
+  /**
+   *
+   */
   public function it_is_initializable()
   {
     $this->shouldHaveType('App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter');
   }
 
+  /**
+   * @param $translator TranslatorInterface
+   */
   public function it_returns_the_elapsed_time_since_timestamps_in_minutes($translator)
   {
     $translator->transChoice(Argument::exact('time.minutes.ago'), Argument::exact(0), Argument::any(), Argument::any())->willReturn('< 1 minute ago');
@@ -37,6 +54,9 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
     $this->getElapsedTime($this->testTime - 60 * 59)->shouldReturn('59 minutes ago');
   }
 
+  /**
+   * @param $translator TranslatorInterface
+   */
   public function it_returns_the_elapsed_time_since_timestamps_in_hours($translator)
   {
     $translator->transChoice(Argument::exact('time.hours.ago'), Argument::exact(1), Argument::any(), Argument::any())->willReturn('1 hour ago');

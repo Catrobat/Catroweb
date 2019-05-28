@@ -23,10 +23,12 @@ Feature: User gets generic notifications additionally to the remix notifications
     And I am on "/pocketcode/user/notifications"
     Then I should see "Achievement - Uploads"
     And I should see "Achievement - View"
+    And the ".user-notification-badge" element should contain "2"
     When I click "#mark-as-read-1"
     And I wait for fadeEffect to finish
     Then I should not see "Achievement - Uploads"
     And I should see "Achievement - View"
+    And the ".user-notification-badge" element should contain "1"
     When I click "#mark-as-read-2"
     And I wait for fadeEffect to finish
     Then I should not see "Achievement - Uploads"
@@ -36,13 +38,14 @@ Feature: User gets generic notifications additionally to the remix notifications
   Scenario: User should see the amount of his notifications in the header
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
-    Then I wait 250 milliseconds
+    Then I wait 1000 milliseconds
     And the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
 
   Scenario: User should see the amount of his notifications in the header
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
+    Then I wait 1000 milliseconds
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
     And the ".user-notification-badge" element should contain "2"

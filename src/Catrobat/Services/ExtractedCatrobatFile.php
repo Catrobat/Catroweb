@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Services;
 
+use App\Catrobat\CatrobatCode\CodeObject;
 use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
@@ -72,6 +73,17 @@ class ExtractedCatrobatFile
   public function getName()
   {
     return (string)$this->program_xml_properties->header->programName;
+  }
+
+  /**
+   * @return string
+   */
+  public function isDebugBuild()
+  {
+    if (!isset($this->program_xml_properties->header->applicationBuildType)) {
+      return false; // old program do not have this field, + they should be release programs
+    }
+    return (string)$this->program_xml_properties->header->applicationBuildType === "debug";
   }
 
   /**
@@ -431,7 +443,7 @@ class ExtractedCatrobatFile
   /**
    * @param $objectTree
    *
-   * @return \App\Catrobat\CatrobatCode\CodeObject|null
+   * @return CodeObject
    */
   private function getObject($objectTree)
   {

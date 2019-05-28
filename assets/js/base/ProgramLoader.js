@@ -35,7 +35,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
         })
         return
       }
-      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
+      self.total_amount_of_found_programs = parseInt(data.CatrobatInformation.TotalProjects)
       self.setup(data)
       self.is_init = false
     })
@@ -55,7 +55,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
         $(self.container).hide()
         return
       }
-      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
+      self.total_amount_of_found_programs = parseInt(data.CatrobatInformation.TotalProjects)
       self.setup(data)
     })
   }
@@ -66,8 +66,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
   }
   
   self.initProfile = function (user_id) {
-    self.show_all_programs = false
-    self.restoreParamsWithSessionStorage()
+    self.show_all_programs = true
     $.get(self.url, {
       limit  : self.initial_download_limit,
       offset : self.amount_of_loaded_programs,
@@ -84,7 +83,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
         })
         return
       }
-      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
+      self.total_amount_of_found_programs = parseInt(data.CatrobatInformation.TotalProjects)
       self.setup(data)
     })
   }
@@ -121,7 +120,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
           return
         }
         search_results_text.find('span').text(data.CatrobatInformation.TotalProjects)
-        self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
+        self.total_amount_of_found_programs = parseInt(data.CatrobatInformation.TotalProjects)
         
         self.setup(data)
       })
@@ -359,24 +358,27 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
   }
   
   self.showMorePrograms = function () {
-    
-    if (self.total_amount_of_found_programs <= self.amount_of_visible_programs)
+
+    if (self.amount_of_visible_programs >= self.total_amount_of_found_programs)
     {
+      // No programs can be retrieved anymore and they are all already visible
       $(self.container).find('.button-show-more').hide()
-      return
     }
-    
-    if (self.amount_of_visible_programs + self.download_limit <= self.amount_of_loaded_programs)
+    else if (self.amount_of_loaded_programs >= self.amount_of_visible_programs + self.download_limit)
     {
+      // Enough programs are loaded. Just set the next program rows visible
       self.amount_of_visible_programs += self.download_limit
       self.updateProgramVisibility()
     }
     else if (self.total_amount_of_found_programs === self.amount_of_loaded_programs)
     {
+      // All programs are loaded so just set them all visible
       self.amount_of_visible_programs = self.total_amount_of_found_programs
+      self.updateProgramVisibility()
     }
     else
     {
+      // We need to load more programs
       $(self.container).find('.button-show-more').hide()
       $(self.container).find('.button-show-ajax').show()
       self.loadMorePrograms()
@@ -407,7 +409,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
     else
     {
       $.get(self.url, {limit: self.download_limit, offset: self.amount_of_loaded_programs}, function (data) {
-        if ((data.CatrobatProjects.length === 0 || data.CatrobatProjects === undefined))
+        if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
         {
           $(self.container).find('.button-show-ajax').hide()
           return

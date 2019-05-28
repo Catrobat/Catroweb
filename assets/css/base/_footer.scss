@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 @import 'theme_settings';
 
 $margin-adjustment: -5px;
@@ -89,8 +90,7 @@ $margin-adjustment: -5px;
   h4 {
     font-weight: 500;
     color: $footer-color;
-    hyphens: auto;
-    word-wrap: break-word;
+    @include force-word-break();
   }
 }
 

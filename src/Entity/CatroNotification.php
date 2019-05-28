@@ -63,7 +63,7 @@ class CatroNotification
    * @param      $title
    * @param      $message
    */
-  public function __construct(User $user, $title, $message)
+  public function __construct(User $user, $title="", $message="")
   {
     $this->user = $user;
     $this->title = $title;

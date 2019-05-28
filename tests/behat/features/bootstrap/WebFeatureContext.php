@@ -590,7 +590,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
           break;
         case "comment":
           $comment = $em->getRepository(UserComment::class)->find($notification['commentID']);
-          $to_create = new CommentNotification($user, $notification['title'], $notification['message'], $comment);
+          $to_create = new CommentNotification($user, $comment);
           $em->persist($to_create);
           break;
         default:
@@ -665,6 +665,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
       $program->setPrivate(isset($programs[$i]['private']) ? $programs[$i]['private'] : 0);
+      $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
@@ -1284,6 +1285,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setApproved(false);
       $program->setRemixRoot(true);
       $program->setRemixMigratedAt(new \DateTime());
+      $program->setDebugBuild(false);
       $em->persist($program);
 
       $starter->addProgram($program);
@@ -1365,6 +1367,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $new_file->setActive($file['active']);
       $category = $em->getRepository('\App\Entity\MediaPackageCategory')->findOneBy(['name' => $file['category']]);
       $new_file->setCategory($category);
+      if(!empty($file['flavor']))
+      {
+        $new_file->setFlavor($file['flavor']);
+      }
       $new_file->setAuthor($file['author']);
 
       $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' . $file['extension']), $file['id'], $file['extension']);
@@ -1466,6 +1472,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setApproved(false);
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
+      $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
@@ -1533,6 +1540,16 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I should receive a file named "([^"]*)"$/
+   * @param $name
+   */
+  public function iShouldReceiveAFileNamed($name)
+  {
+    $content_disposition = $this->getClient()->getResponse()->headers->get('Content-Disposition');
+    Assert::assertEquals('attachment; filename="' . $name . '"', $content_disposition);
+  }
+
+  /**
    * @Given /^the response code should be "([^"]*)"$/
    * @param $code
    */
@@ -1572,7 +1589,33 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iShouldNotSeeMediaFileWithId($id)
   {
     $link = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
+    Assert::assertNull($link);
+  }
+
+  /**
+   * @Then /^I should see media file with id ([0-9]+) in category "([^"]*)"$/
+   * @param $id
+   * @param $category
+   */
+  public function iShouldSeeMediaFileWithIdInCategory($id, $category)
+  {
+    $link = $this->getSession()->getPage()
+      ->find("css", '[data-name="' . $category . '"]')
+      ->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($link);
+  }
+
+  /**
+   * @Then /^I should see ([0-9]+) media files? in category "([^"]*)"$/
+   * @param $count
+   * @param $category
+   */
+  public function iShouldSeeNumberOfMediaFilesInCategory($count, $category)
+  {
+    $elements = $this->getSession()->getPage()
+      ->find("css", '[data-name="' . $category . '"]')
+      ->findAll("css", ".mediafile");
+    Assert::assertEquals($count, count($elements));
   }
 
   /**
@@ -2921,6 +2964,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $program->setApproved(false);
         $program->setFbPostUrl('');
         $program->setRemixRoot(true);
+        $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
         $em->persist($program);
       }
       $em->flush();
@@ -3027,5 +3071,15 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function theAppVersionIs($appVersion)
   {
     putenv("APP_VERSION=" . $appVersion);
+  }
+
+  /**
+   * @Given the random program section is empty
+   */
+  public function theRandomProgramSectionIsEmpty()
+  {
+    $this->getSession()->evaluateScript(
+      'document.getElementById("random").style.display = "none";'
+    );
   }
 }

@@ -1,0 +1,30 @@
+<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
+
+  <h5 class="card-header notification-header">
+    {% block notification_title %}{% endblock %}
+  </h5>
+
+  <div class="card-body">
+    <div class="row">
+
+      {% block notification_leftAvatar %}{% endblock %}
+
+      <div class="notification-body">
+        <div class="row mb-4">
+          <p class="card-text">
+            {% block notification_body %}{% endblock %}
+          </p>
+        </div>
+
+        <div class="row">
+          <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
+                  onclick="notifications.markAsRead({{ notification.id }})">
+            {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

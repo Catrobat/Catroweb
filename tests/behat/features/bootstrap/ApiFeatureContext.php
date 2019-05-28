@@ -589,6 +589,7 @@ class ApiFeatureContext extends BaseContext
         'tags'                => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
         'extensions'          => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
         'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,
+        'debug'          => isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false
       ];
 
       $this->insertProgram($user, $config);
@@ -2432,7 +2433,10 @@ class ApiFeatureContext extends BaseContext
       $old_files = $old_files == null ? [] : $old_files;
       array_push($old_files, $new_file);
       $category->setFiles($old_files);
-
+      if(!empty($file['flavor']))
+      {
+        $new_file->setFlavor($file['flavor']);
+      }
       $new_file->setAuthor($file['author']);
 
       $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' .

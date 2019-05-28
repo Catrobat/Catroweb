@@ -63,3 +63,17 @@ Feature:
     And I fill in "password" with "123456"
     When I press "Login"
     Then I should see "Newest"
+    
+  Scenario: It should be possible the visibility of the password
+    Given I am on "/pocketcode/login"
+    And I fill in "username" with "Catrobat"
+    And I fill in "password" with "123456"
+    Then the element ".show-hide-password input" should not have type "text"
+    Then the element ".show-hide-password input" should have type "password"
+    When I click "#password-visibility-toggler"
+    Then the element ".show-hide-password input" should not have type "password"
+    Then the element ".show-hide-password input" should have type "text"
+    When I click "#password-visibility-toggler"
+    Then the element ".show-hide-password input" should not have type "text"
+    Then the element ".show-hide-password input" should have type "password"
+    

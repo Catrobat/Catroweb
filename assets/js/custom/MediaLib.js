@@ -1,7 +1,7 @@
-function MediaLib(categories, flavor, assetsDir)
+function MediaLib(package_name, flavor, assetsDir)
 {
   $(function() {
-    getCategoryFiles(categories, flavor, assetsDir);
+    getPackageFiles(package_name, flavor, assetsDir);
     let $content = $("#content");
     $content.find('#thumbsize-control input[type=radio]').change(function() {
       $content.attr("size", this.value);
@@ -9,155 +9,199 @@ function MediaLib(categories, flavor, assetsDir)
     initTilePinchToZoom();
   });
   
-  function getCategoryFiles(categories, flavor, assetsDir)
+  function getPackageFiles(package_name, flavor, assetsDir)
   {
-    categories.forEach(function(category) {
-      
-      if (category.displayID === 'theme-special')
-      {
-        return;
-      }
-      
-      let url = Routing.generate('api_media_lib_category', {category: category.name}, false);
-      $.get(url, {}, function(data) {
-        
-        if (data.statusCode === 200)
+    let url = Routing.generate('api_media_lib_package_bynameurl', {flavor: flavor, package: package_name}, false);
+    $.get(url, {}, pkgFiles => {
+      pkgFiles.forEach(file => {
+        if (file.flavor !== 'pocketcode' && file.flavor !== flavor)
         {
-          let counter = 0;
-          let f_counter = 0;
-          const categoryFiles = data.data;
-          
-          categoryFiles.forEach(function(file) {
-            
-            if (file.flavor === 'pocketcode' || file.flavor === flavor)
-            {
-              let catID = (file.flavor === 'pocketcode') ? category.displayID : 'theme-special';
-              let mediafileContainer = '<a class="mediafile" id="mediafile-' + file.id + '" href="' + file.download_url + '" onclick="medialib_onDownload(this)">';
-              
-              switch (file.extension)
+          return; // don't display files of other flavors
+        }
+        
+        const mediafileContainer = $('<a class="mediafile" id="mediafile-' + file.id + '"/>');
+        mediafileContainer.attr("href", file.download_url);
+        mediafileContainer.attr('data-extension', file.extension);
+        mediafileContainer.click(function() {
+          medialib_onDownload(this);
+        });
+        
+        if (flavor !== "pocketcode" && file.flavor === flavor)
+        {
+          mediafileContainer.addClass('flavored');
+        }
+        
+        let name = file.name                      // make word breaks easier:
+          .replace(/([a-z])([A-Z])/g, '$1​$2')     // insert zero-width space between CamelCase
+          .replace(/([A-Za-z])([0-9])/g, '$1​$2')  // insert zero-width space between letters and numbers
+          .replace(/_([A-Za-z0-9])/g, '_​$1');     // insert zero-width space between underline and letters
+        mediafileContainer.append($('<div class="name" />').text(name));
+        mediafileContainer.addClass("showName");
+        
+        switch (file.extension)
+        {
+          case "adp":
+          case "au":
+          case "mid":
+          case "mp4a":
+          case "mpga":
+          case "oga":
+          case "s3m":
+          case "sil":
+          case "uva":
+          case "eol":
+          case "dra":
+          case "dts":
+          case "dtshd":
+          case "lvp":
+          case "pya":
+          case "ecelp4800":
+          case "ecelp7470":
+          case "ecelp9600":
+          case "rip":
+          case "weba":
+          case "aac":
+          case "aif":
+          case "caf":
+          case "flac":
+          case "mka":
+          case "m3u":
+          case "wax":
+          case "wma":
+          case "ram":
+          case "rmp":
+          case "wav":
+          case "xm":
+            mediafileContainer.attr('data-filetype', 'audio');
+            mediafileContainer.append($('<i class="fas fa-file-audio"/>'));
+            const audio = new Audio(file.download_url);
+            const $previewBtn = $('<div class="audio-control fas fa-play" />');
+            $previewBtn.click(function() {
+              if (audio.paused)
               {
-                case "adp":
-                case "au":
-                case "mid":
-                case "mp4a":
-                case "mpga":
-                case "oga":
-                case "s3m":
-                case "sil":
-                case "uva":
-                case "eol":
-                case "dra":
-                case "dts":
-                case "dtshd":
-                case "lvp":
-                case "pya":
-                case "ecelp4800":
-                case "ecelp7470":
-                case "ecelp9600":
-                case "rip":
-                case "weba":
-                case "aac":
-                case "aif":
-                case "caf":
-                case "flac":
-                case "mka":
-                case "m3u":
-                case "wax":
-                case "wma":
-                case "ram":
-                case "rmp":
-                case "wav":
-                case "xm":
-                  mediafileContainer += '<i class="fas fa-file-audio" title="' + file.name + '"></i>';
-                  break;
-                case "3gp":
-                case "3g2":
-                case "h261":
-                case "h263":
-                case "h264":
-                case "jpgv":
-                case "jpm":
-                case "mj2":
-                case "mp4":
-                case "mpeg":
-                case "ogv":
-                case "qt":
-                case "uvh":
-                case "uvm":
-                case "uvp":
-                case "uvs":
-                case "uvv":
-                case "dvb":
-                case "fvt":
-                case "mxu":
-                case "pyv":
-                case "uvu":
-                case "viv":
-                case "webm":
-                case "f4v":
-                case "fli":
-                case "flv":
-                case "m4v":
-                case "mkv":
-                case "mng":
-                case "asf":
-                case "vob":
-                case "wm":
-                case "wmv":
-                case "wmx":
-                case "wvx":
-                case "avi":
-                case "movie":
-                case "smv":
-                  mediafileContainer += '<i class="fas fa-file-video" title="' + file.name + '"></i>';
-                  break;
-                case "pdf":
-                  mediafileContainer += '<i class="fas fa-file-pdf" title="' + file.name + '"></i>';
-                  break;
-                case "txt":
-                case "rtx":
-                  mediafileContainer += '<i class="fas fa-file-alt" title="' + file.name + '"></i>';
-                  break;
-                case "zip":
-                case "7z":
-                  mediafileContainer += '<i class="fas fa-file-archive" title="' + file.name + '"></i>';
-                  break;
-                default:
-                  mediafileContainer += '<img src="' + assetsDir + 'thumbs/' + file.id + '.jpeg" title="' + file.name + '" alt="' + file.name + '" onerror="medialib_onThumbError(event, \'' + file.extension + '\')"/>';
-                  break;
-              }
-              mediafileContainer += '</a>';
-              
-              $('#category-' + catID + " .files").prepend(mediafileContainer);
-              
-              if (flavor !== 'pocketcode' && file.flavor === flavor)
-              {
-                f_counter++;
+                $previewBtn.removeClass("fa-play").addClass("fa-pause");
+                audio.play();
               }
               else
               {
-                counter++;
+                $previewBtn.removeClass("fa-pause").addClass("fa-play");
+                audio.pause();
               }
-            }
-          });
-          
-          if ($("#category-" + category.displayID + " .files > div").length + counter > 0)
+              return false;
+            });
+            audio.onended = function() {
+              $previewBtn.removeClass("fa-pause").addClass("fa-play");
+            };
+            
+            mediafileContainer.append($previewBtn);
+            break;
+          case "3gp":
+          case "3g2":
+          case "h261":
+          case "h263":
+          case "h264":
+          case "jpgv":
+          case "jpm":
+          case "mj2":
+          case "mp4":
+          case "mpeg":
+          case "ogv":
+          case "qt":
+          case "uvh":
+          case "uvm":
+          case "uvp":
+          case "uvs":
+          case "uvv":
+          case "dvb":
+          case "fvt":
+          case "mxu":
+          case "pyv":
+          case "uvu":
+          case "viv":
+          case "webm":
+          case "f4v":
+          case "fli":
+          case "flv":
+          case "m4v":
+          case "mkv":
+          case "mng":
+          case "asf":
+          case "vob":
+          case "wm":
+          case "wmv":
+          case "wmx":
+          case "wvx":
+          case "avi":
+          case "movie":
+          case "smv":
+            mediafileContainer.attr('data-filetype', 'video');
+            mediafileContainer.append($('<i class="fas fa-file-video"/>'));
+            break;
+          case "pdf":
+            mediafileContainer.attr('data-filetype', 'pdf');
+            mediafileContainer.append($('<i class="fas fa-file-pdf"/>'));
+            break;
+          case "txt":
+          case "rtx":
+            mediafileContainer.attr('data-filetype', 'text');
+            mediafileContainer.append($('<i class="fas fa-file-alt"/>'));
+            break;
+          case "zip":
+          case "7z":
+            mediafileContainer.attr('data-filetype', 'archive');
+            mediafileContainer.append($('<i class="fas fa-file-archive"/>'));
+            break;
+          default:
+            const $image = $('<img src="' + assetsDir + 'thumbs/' + file.id + '.jpeg"/>');
+            $image.attr('title', file.name);
+            $image.attr('alt', file.name);
+            $image.error(function() {
+              mediafileContainer.addClass("showName");
+              
+              const pictureExtensions = ["bmp", "cgm", "g3", "gif", "ief", "jpeg", "ktx", "png", "btif", "sgi", "svg", "tiff", "psd", "uvi", "sub", "djvu", "dwg", "dxf", "fbs", "fpx", "fst", "mmr", "rlc", "mdi", "wdp", "npx", "wbmp", "xif", "webp", "3ds", "ras", "cmx", "fh", "ico", "sid", "pcx", "pic", "pnm", "pbm", "pgm", "ppm", "rgb", "tga", "xbm", "xpm", "xwd"];
+              $image.remove();
+              
+              if (pictureExtensions.indexOf(file.extension) !== -1)
+              {
+                mediafileContainer.prepend($('<i class="fas fa-file-image"/>'));
+              }
+              else
+              {
+                mediafileContainer.prepend($('<i class="fas fa-file"/>'));
+              }
+            });
+            mediafileContainer.removeClass("showName");
+            mediafileContainer.append($image);
+            break;
+        }
+        
+        if (file.category.startsWith("ThemeSpecial"))
+        {
+          if (file.flavor === flavor)
           {
-            $('#category-' + category.displayID).show();
-            $('#sidebar #menu-mediacat-' + category.displayID).show();
-          }
-          
-          if ($("#category-theme-special .files > div").length + f_counter > 0)
-          {
-            $('#category-theme-special').show();
-            $('#sidebar #menu-mediacat-theme-special').show();
-          }
+            $('#content #category-theme-special .files').prepend(mediafileContainer);
+          } // else ignore
         }
         else
         {
-          console.error("Error loading category " + category.name);
+          const catEscaped = file.category.replace(/"/g, '\\"');
+          $('#content .category[data-name="' + catEscaped + '"] .files').prepend(mediafileContainer);
         }
-      })
+      });
+      
+      $("#content .category").each(function() {
+        if ($(this).find(".files").children().length === 0)
+        {
+          return;
+        }
+        
+        const catId = /^category-(.+)$/.exec(this.id)[1];
+        
+        $(this).show();
+        $('#sidebar #menu-mediacat-' + catId).show();
+      });
+    }).fail(function() {
+      console.error("Error loading media lib package " + package_name);
     });
   }
   
@@ -255,65 +299,4 @@ function medialib_onDownload(link)
     window.location = download_href;
   }
   return false;
-}
-
-function medialib_onThumbError(event, file_extension)
-{
-  let container = $(event.target);
-  let title = container.prop('title');
-  container = container.parent();
-  switch (file_extension)
-  {
-    case "bmp":
-    case "cgm":
-    case "g3":
-    case "gif":
-    case "ief":
-    case "jpeg":
-    case "ktx":
-    case "png":
-    case "btif":
-    case "sgi":
-    case "svg":
-    case "tiff":
-    case "psd":
-    case "uvi":
-    case "sub":
-    case "djvu":
-    case "dwg":
-    case "dxf":
-    case "fbs":
-    case "fpx":
-    case "fst":
-    case "mmr":
-    case "rlc":
-    case "mdi":
-    case "wdp":
-    case "npx":
-    case "wbmp":
-    case "xif":
-    case "webp":
-    case "3ds":
-    case "ras":
-    case "cmx":
-    case "fh":
-    case "ico":
-    case "sid":
-    case "pcx":
-    case "pic":
-    case "pnm":
-    case "pbm":
-    case "pgm":
-    case "ppm":
-    case "rgb":
-    case "tga":
-    case "xbm":
-    case "xpm":
-    case "xwd":
-      container.html('<i class="fas fa-file-image" title="' + title + '"></i>');
-      break;
-    default:
-      container.html('<i class="fas fa-file" title="' + title + '"></i>');
-      break;
-  }
 }

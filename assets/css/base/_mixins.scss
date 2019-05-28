@@ -1,14 +1,23 @@
-@mixin transition($transition){
+@mixin transition($transition) {
   -webkit-transition: $transition;
   -moz-transition: $transition;
   -o-transition: $transition;
   transition: $transition;
 }
 
-@mixin transform($string){
+@mixin transform($string) {
   -webkit-transform: $string;
   -moz-transform: $string;
   -ms-transform: $string;
   -o-transform: $string;
   transform: $string;
+}
+
+@mixin force-word-break() {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 }

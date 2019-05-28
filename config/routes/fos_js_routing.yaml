@@ -28,8 +28,8 @@ edit_program_description:
     options:
         expose: true
 
-api_media_lib_category:
-    path:  /api/media/category/{category}/json
-    controller: App\Catrobat\Controller\Api\MediaPackageController:getMediaFilesForCategory
+api_media_lib_package_bynameurl:
+    path: /{flavor}/api/media/packageByNameUrl/{package}/json
+    controller: App\Catrobat\Controller\Api\MediaPackageController:getMediaFilesForPackageByNameUrl
     options:
         expose: true

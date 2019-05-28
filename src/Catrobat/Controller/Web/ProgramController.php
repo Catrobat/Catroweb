@@ -194,6 +194,7 @@ class ProgramController extends Controller
     /**
      * @var ProgramManager           $program_manager
      * @var User                     $user
+     * @var Program                  $program
      * @var CatroNotification        $notification
      * @var CatroNotificationService $notification_service
      */
@@ -269,12 +270,15 @@ class ProgramController extends Controller
       }
 
       $notification_service = $this->get("catro_notification_service");
-      if ($new_type === ProgramLike::TYPE_THUMBS_UP)
+      if ($new_type === ProgramLike::TYPE_THUMBS_UP
+        || $new_type === ProgramLike::TYPE_SMILE
+        || $new_type === ProgramLike::TYPE_LOVE
+        || $new_type === ProgramLike::TYPE_WOW
+      )
       {
         if (!$program_notification_exists)
         {
-          $notification = new LikeNotification($program->getUser(), "Like gained",
-            "You received a new like", $user, $program);
+          $notification = new LikeNotification($program->getUser(), $user, $program);
           $notification_service->addNotification($notification);
         }
       }
@@ -378,8 +382,8 @@ class ProgramController extends Controller
   public function toggleProgramVisibilityAction($id)
   {
     /**
-     * @var $user          \App\Entity\User
-     * @var $program       \App\Entity\Program
+     * @var $user User
+     * @var $program Program
      * @var $user_programs ArrayCollection
      */
 
@@ -403,14 +407,6 @@ class ProgramController extends Controller
     if (!$program)
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
-    }
-
-    $version = $program->getLanguageVersion();
-    $max_version = $this->container->get('kernel')
-      ->getContainer()->getParameter("catrobat.max_version");
-    if (version_compare($version, $max_version, ">"))
-    {
-      return new Response("false");
     }
 
     $program->setPrivate(!$program->getPrivate());
@@ -626,8 +622,7 @@ class ProgramController extends Controller
       'downloads'       => $program->getDownloads() + $program->getApkDownloads(),
       'views'           => $program->getViews(),
       'filesize'        => sprintf('%.2f', $program->getFilesize() / 1048576),
-      'age'             => $elapsed_time
-        ->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+      'age'             => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
       'referrer'        => $referrer,
       'id'              => $program->getId(),
       'comments'        => $program_comments,

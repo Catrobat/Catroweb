@@ -1,5 +1,6 @@
 @import '../../../public/bootstrap_vendor/scss/functions';
-@import '../base/_variables';
+@import '../base/variables';
+@import '../base/mixins';
 @import '../../../public/bootstrap_vendor/scss/variables';
 @import '../../../public/bootstrap_vendor/scss/mixins';
 @import 'theme_settings';
@@ -33,24 +34,6 @@ a
     float: left;
   }
 
-  #program-user
-  {
-    float: right;
-    text-transform: none;
-
-    > .img-author
-    {
-      float: left;
-      margin-right: 5px;
-    }
-
-    a
-    {
-      font-size: $font-size-h1 - 5;
-      color: $content-default-link-color;
-      text-decoration: none;
-    }
-  }
 }
 
 h2
@@ -71,13 +54,17 @@ h2
     overflow: auto;
     padding: 0 25px 20px;
 
+    #edit-description-ui {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   #description
   {
     margin: 25px auto;
     line-height: 23px;
-    word-wrap: break-word;
+    @include force-word-break();
   }
 }
 
@@ -91,29 +78,32 @@ h2
   border-top: 1px solid $default-text-color;
   padding-top: 25px;
   padding-bottom: 25px;
-  width: 100%;
   display: table;
+  width: 100%;
 
-  > div
+  > #program-bottom-container
   {
-    display: table-cell;
-    width: 20%;
+    width: 90%;
+    margin-left: 9%;
 
-    > .icon
+    > div
     {
+      text-align: left;
       float: left;
-    }
+      width: 30%;
+      margin: 0.6em;
 
-    > .icon-text
-    {
-      line-height: 35px;
-      padding-left: 8px;
-    }
-  }
+      > .icon
+      {
+        float: left;
+      }
 
-  #icon-author
-  {
-    display: none;
+      > .icon-text
+      {
+        line-height: 35px;
+        padding-left: 8px;
+      }
+    }
   }
 }
 
@@ -240,6 +230,11 @@ h2
         float: left;
 
       }
+
+      span {
+        max-width: 100%;
+        @include force-word-break();
+      }
     }
   }
 }
@@ -339,7 +334,7 @@ table td:nth-child(1)
   padding-top: 0.4em;
   display: block;
   clear: both;
-  word-break: break-word;
+  @include force-word-break();
 }
 
 .single-comment
@@ -483,9 +478,11 @@ input[type='number']
 
 @include media-breakpoint-down(md)
 {
-  #program-user
+  #program-top
   {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
   }
 
   #program-middle
@@ -499,19 +496,57 @@ input[type='number']
 
   #program-bottom
   {
-    padding: 25px;
-    display: block;
+    border-top: 1px solid $default-text-color;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: table;
+    width: 100%;
 
-    #icon-author
+    > #program-bottom-container
     {
-      display: block;
+      > div
+      {
+        text-align: left;
+        float: left;
+        width: 47%;
+
+        > .icon
+        {
+          float: left;
+        }
+
+        > .icon-text
+        {
+          line-height: 35px;
+          padding-left: 8px;
+        }
+      }
     }
+  }
+}
 
-    > div
-    {
-      display: block;
-      width: 100%;
-      margin-bottom: 5px;
+@include media-breakpoint-down(sm) {
+  #program-bottom {
+    border-top: 1px solid $default-text-color;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: table;
+    width: 100%;
+
+    > #program-bottom-container {
+      > div {
+        text-align: left;
+        width: 100%;
+
+        > .icon {
+          float: left;
+        }
+
+        > .icon-text {
+          line-height: 35px;
+          padding-left: 8px;
+        }
+      }
     }
   }
 }
@@ -560,7 +595,8 @@ input[type='number']
 
 #recsys-headline, #recsys-specific-programs-headline
 {
-  margin-top: 10px;
+  margin: 0.85em;
+  text-align: center;
 }
 
 #gamejam-div

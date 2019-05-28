@@ -29,7 +29,6 @@ parameters:
   catrobat.translations.dir:      "%kernel.project_dir%/translations"
   catrobat.logs.dir:              "%kernel.project_dir%/var/log/"
   catrobat.invalidupload.dir:     "%kernel.project_dir%/src/Catrobat/Commands/invisible_programs/"
-  catrobat.max_version:           "0.9993"
   catrobat.max_description_upload_size: 4000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
 
   ldap_role_mappings:
@@ -343,7 +342,6 @@ services:
       - "@programlikerepository"
       - "@event_dispatcher"
       - "@logger"
-      - "%catrobat.max_version%"
     public: true
   App\Entity\ProgramManager: "@programmanager"
 
@@ -369,7 +367,6 @@ services:
       - "@programlikerepository"
       - "@event_dispatcher"
       - "@logger"
-      - "%catrobat.max_version%"
     public: true
   App\Catrobat\Commands\RemixManipulationProgramManager: "@programmanager.remix_manipulation"
 
@@ -421,6 +418,7 @@ services:
       - "@usermanager"
       - "@userlikesimilarityrelationrepository"
       - "@userremixsimilarityrelationrepository"
+      - "@programrepository"
       - "@programlikerepository"
       - "@programremixrepository"
       - "@programremixbackwardrepository"
@@ -535,6 +533,7 @@ services:
       - "@tokengenerator"
       - "@translator"
       - "@logger"
+      - "@catro_notification_service"
     public: true
     tags: ['controller.service_arguments']
 
@@ -626,6 +625,11 @@ services:
 
   catrowebadmin.command.clean.invalid.revert:
     class: App\Catrobat\Commands\InvalidFileUploadCleanupCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.clean.logs:
+    class: App\Catrobat\Commands\CleanLogsCommand
     tags:
       - { name: console.command }
 

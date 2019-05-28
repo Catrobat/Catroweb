@@ -67,8 +67,7 @@
               </tr>
               <tr>
                 <td style="font-family: Arial, sans-serif; font-size: 14px;" width="75%">
-                  Copyright &copy; {{ "now"|date("Y") }} <a href="http://www.catrobat.org">Catrobat</a>.
-                  All rights reserved.
+                  {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
                 </td>
               </tr>
             </table>

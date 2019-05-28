@@ -63,12 +63,30 @@ set('public_dir', 'public');
 set('allow_anonymous_stats', false);
 
 // Hosts
-host('unpriv@cat-share-exp.ist.tugraz.at')
-  ->stage('exp')
+host(getenv('DEPLOY_SHARE'))
+  ->stage('share')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'php7Iwillsaveyou')
+  ->set('branch', 'master')
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
   ->set('deploy_path', '/var/www/share/');
+
+
+host(getenv('DEPLOY_WEBTEST'))
+  ->stage('web-test')
+  ->set('symfony_env', 'dev')
+  ->set('branch', getenv('DEPLOY_WEBTEST_BRANCH'))
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader ')
+  ->set('deploy_path', '/var/www/share/');
+
+host(getenv('DEPLOY_POREVIEW'))
+  ->stage('po-review')
+  ->set('symfony_env', 'prod')
+  ->set('branch', getenv('DEPLOY_POREVIEW_BRANCH'))
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('deploy_path', '/var/www/share/');
+
+
+
 
 // Tasks
 

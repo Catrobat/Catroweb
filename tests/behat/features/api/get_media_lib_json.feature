@@ -159,8 +159,71 @@ Feature: Get data from the media library in json format
     ]
     """
 
+  Scenario: get all files from a media lib package by nameUrl
+    When I GET from the api "/pocketcode/api/media/packageByNameUrl/looks/json"
+    Then I should get the json object:
+    """
+    [
+      {
+        "id": 1,
+        "name": "Dog",
+        "flavor": "pocketcode",
+        "package": "Looks",
+        "category": "Animals",
+        "author": "Bob Schmidt",
+        "extension": "png",
+        "url": null,
+        "download_url": "\/pocketcode\/download-media\/1"
+      },
+      {
+        "id": 4,
+        "name": "Cat",
+        "flavor": "pocketcode",
+        "package": "Looks",
+        "category": "Animals",
+        "author": "",
+        "extension": "png",
+        "url": null,
+        "download_url": "\/pocketcode\/download-media\/4"
+      },
+      {
+        "id": 5,
+        "name": "Ape",
+        "flavor": "pocketcode",
+        "package": "Looks",
+        "category": "Animals",
+        "author": "",
+        "extension": "png",
+        "url": null,
+        "download_url": "\/pocketcode\/download-media\/5"
+      },
+      {
+        "id": 3,
+        "name": "Spaceship",
+        "flavor": "pocketcode",
+        "package": "Looks",
+        "category": "Space",
+        "author": "Micheal John",
+        "extension": "png",
+        "url": null,
+        "download_url": "\/pocketcode\/download-media\/3"
+      },
+      {
+        "id": 6,
+        "name": "Metroid",
+        "flavor": "pocketcode",
+        "package": "Looks",
+        "category": "Space",
+        "author": "Jennifer Shawn",
+        "extension": "png",
+        "url": null,
+        "download_url": "\/pocketcode\/download-media\/6"
+      }
+    ]
+    """
+
   Scenario: get all files from a media lib category
-    When I GET from the api "/api/media/category/Fantasy/json"
+    When I GET from the api "/pocketcode/api/media/category/Fantasy/json"
     Then I should get the json object:
     """
     {

@@ -16,8 +16,7 @@ class FollowNotification extends CatroNotification
   private $follower;
 
   /**
-   *  You have to set this parameter otherwise the wrong template will be
-   *       rendered.
+   *  You have to set this parameter otherwise the wrong template will be rendered.
    */
   private $twig_template = "/Notifications/NotificationTypes/follow_notification.html.twig";
 
@@ -25,14 +24,12 @@ class FollowNotification extends CatroNotification
    * CommentNotification constructor.
    *
    * @param User $user
-   * @param      $title
-   * @param      $message
    * @param      $profile
    *
    */
-  public function __construct(User $user, $title, $message, $profile)
+  public function __construct(User $user, $profile)
   {
-    parent::__construct($user, $title, $message);
+    parent::__construct($user);
     $this->follower = $profile;
   }
 
@@ -61,6 +58,4 @@ class FollowNotification extends CatroNotification
   {
     return $this->twig_template;
   }
-
-
 }
