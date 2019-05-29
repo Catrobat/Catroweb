@@ -514,7 +514,7 @@ menu:
   logout: Wyloguj się
   admin: Administrator
   home: Strona główna
-  helpAndTutorials: Help & Tutorials
+  helpAndTutorials: Pomoc i samouczki
 login:
   login: Logowanie
   passOrUser: Twoje hasło lub nazwa użytkownika były nieprawidłowe.
@@ -695,27 +695,27 @@ pmd:
     text: Przesyłanie programu nie powiodło się.
 codeview:
   showCode: 'Pokaż kod'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'scenes'
-  scripts: 'scripts'
-  bricks: 'bricks'
-  objects: 'objects'
-  looks: 'looks'
-  sounds: 'sounds'
-  globals: 'globals'
-  locals: 'locals'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
+  hideCode: 'Ukryj kod'
+  showStatistics: 'Pokaż statystyki kodu'
+  hideStatistics: 'Ukryj statystyki kodu'
+  cantDisplayCode: "Nie można wyświetlić kodu"
+  cantDisplayStatistics: "Nie można wyświetlić kodu"
+  totalNumberOf: 'Całkowita liczba'
+  scenes: 'scen'
+  scripts: 'skryptów'
+  bricks: 'bloków'
+  objects: 'obiektów'
+  looks: 'wyglądów'
+  sounds: 'dźwięków'
+  globals: 'zm. globalnych'
+  locals: 'zm. lokalnych'
+  eventBricks: 'Bloki wydarzeń'
+  controlBricks: 'Bloki kontroli'
+  motionBricks: 'Bloki ruchu'
+  soundBricks: 'Bloki dźwięku'
+  looksBricks: 'Bloki wyglądu'
+  penBricks: 'Bloki pisaka'
+  dataBricks: 'Bloki danych'
 footer:
   usefulLinks: Przydatne Linki
   legalities: Prawa
@@ -739,16 +739,16 @@ catro-notifications:
   summary: "{0}Nie masz nowych powiadomień|{1}Masz %amount% nowe powiadomienie!|]1,Inf]Masz %amount% nowych powiadomień!"
   comment:
     title: 'Nowy komentarz do programu %program_name%!'
-    message: 'User %user_link% commented on your program %program_link%.'
+    message: 'Użytkownik %user_link% skomentował Twój program %program_link%.'
   like:
     title: 'Nowe polubienie programu %program_name%!'
-    message: 'User %user_link% liked your program %program_link%.'
+    message: 'Użytkownik %user_link% polubił Twój program %program_link%.'
   follow:
     title: 'Nowy Obserwator!'
-    message: 'User %user_link% follows you now.'
+    message: 'Użytkownik %user_link% obserwuje Cię teraz.'
   program-upload:
     title: 'Nowy program użytkownika, którego obserwujesz'
-    message: 'User %user_link% created a new Program %program_link%'
+    message: 'Użytkownik %user_link% stworzył nowy program %program_link%'
 clipboard:
   success: Link do programu skopiowany do schowka!
   fail: Nie udało się skopiować linku do schowka! :(
@@ -761,13 +761,13 @@ help-cards:
     stepbystep: Krok po Kroku
     getinvolvedGoogle: Pobierz z Google Play
     getinvolvedApple: Pobierz na IOS
-    game_design: Game Design
+    game_design: Projektowanie gier
     education: Platforma edukacyjna
-    discuss: Dyskutuj
+    discuss: Forum dyskusyjne
   text:
-    starters: "Try out and remix with %theme%"
-    tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
+    starters: "Spróbuj i remiksuj z %theme%"
+    tutorials: "Przydatne triki w %theme%"
+    stepbystep: "Zrób 10 prostych kroków w %theme%"
     getinvolved: Pobierz aplikację i rozpocznij
     game_design_1: Skuteczne triki dla
     game_design_2: tworzenie gry
@@ -790,8 +790,8 @@ flavor:
   phirocode: PhiroCode
   luna: Księżyc & Kot
   create@school: Create@School
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. Wszelkie prawa zastrzeżone.'
 agree: Zgadzam się
 disagree: Nie zgadzam się
 profileLoader:
-  noProfiles: There are currently no profiles.
+  noProfiles: Obecnie nie ma profili.

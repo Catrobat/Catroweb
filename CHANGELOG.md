@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-Proposed new version number: `2.1.1`. Urgently to be merged into `master` as a hotfix.
+
+
+## [2.1.1]
 ### Fixed
 - Fixes a problem in db connection with `server_version` in `doctrine.yml`([Source])
 ## [2.1.0]
@@ -39,5 +41,6 @@ Proposed new version number: `2.1.1`. Urgently to be merged into `master` as a h
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v2.1.0
