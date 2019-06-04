@@ -236,7 +236,7 @@ class RecommenderManager
    */
   public function recommendHomepageProgramsForGuests($flavor)
   {
-    $most_liked_programs = $this->program_repository->getMostLikedPrograms($flavor);
+    $most_liked_programs = $this->program_repository->getMostLikedPrograms($flavor, 0, 0);
     $programs_total_likes = [];
     foreach ($most_liked_programs as $most_liked_program)
     {
@@ -244,7 +244,7 @@ class RecommenderManager
       $programs_total_likes[$program_id] = $this->program_like_repository->totalLikeCount($program_id);
     }
 
-    $most_downloaded_programs = $this->program_repository->getMostDownloadedPrograms($flavor, 75);
+    $most_downloaded_programs = $this->program_repository->getMostDownloadedPrograms($flavor, 45);
     $ids_of_most_downloaded_programs = array_map(function ($program){
       return $program->getId();
     }, $most_downloaded_programs);
@@ -255,7 +255,7 @@ class RecommenderManager
       $rank_in_top_downloads = array_search($program_id, $ids_of_most_downloaded_programs);
       if ($rank_in_top_downloads !== false)
       {
-        $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(75 - $rank_in_top_downloads));
+        $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(70 - $rank_in_top_downloads * 1.5))**2;
       }
     }
 
