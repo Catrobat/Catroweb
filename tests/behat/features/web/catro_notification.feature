@@ -35,31 +35,35 @@ Feature: User gets generic notifications additionally to the remix notifications
     And I should not see "Achievement - View"
     And I should see a ".swal2-modal" element
 
-  Scenario: User should see the amount of his notifications in the header
+  Scenario: User should see the amount of his notifications in the menu
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
+    And I open the menu
     Then I wait 1000 milliseconds
     And the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
 
-  Scenario: User should see the amount of his notifications in the header
+  Scenario: User should see the amount of his notifications in the menu
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
+    And I open the menu
     Then I wait 1000 milliseconds
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
     And the ".user-notification-badge" element should contain "2"
 
-  Scenario: User should see the amount of his notifications in the header only if he has notifcations
+  Scenario: User should see the amount of his notifications in the menu only if he has notifcations
     Given I log in as "OtherUser" with the password "123456"
     And I am on "/pocketcode/"
+    And I open the menu
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should not be visible
 
-  Scenario: User should see the amount of his notifications in the header
+  Scenario: User should see the amount of his notifications in the menu
     Given there are "105"+ notifications for "Catrobat"
     And I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
+    And I open the menu
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
     And the ".user-notification-badge" element should contain "99+"

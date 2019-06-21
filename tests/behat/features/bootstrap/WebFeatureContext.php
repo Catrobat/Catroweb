@@ -129,7 +129,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function setup()
   {
-    $this->getSession()->resizeWindow(1240, 1024);
+    // 15px = scroll bar width
+    $this->getSession()->resizeWindow(320 + 15, 1024);
   }
 
   /**
@@ -155,22 +156,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @BeforeScenario @Mobile
-   */
-  public function resizeWindowMobile()
-  {
-    $this->getSession()->resizeWindow(320, 1000);
-  }
-
-  /**
-   * @BeforeScenario @Tablet
-   */
-  public function resizeWindowTablet()
-  {
-    $this->getSession()->resizeWindow(768, 1000);
-  }
-
-  /**
    * @When /^I wait (\d+) milliseconds$/
    * @param $milliseconds
    */
@@ -180,14 +165,34 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^I should see (\d+) "([^"]*)"$/
-   * @param $arg1
-   * @param $arg2
+   * @When /^I open the menu$/
    */
-  public function iShouldSeeNumberOfElements($arg1, $arg2)
+  public function iOpenTheMenu()
   {
-    $programs = $this->getSession()->getPage()->findAll('css', $arg2);
-    Assert::assertEquals($arg1, count($programs));
+    $sidebar_open = $this->getSession()->getPage()->find('css', '#sidebar')->isVisible();
+    if (!$sidebar_open)
+    {
+      $this->getSession()->getPage()->find('css', '#btn-sidebar-toggle')->click();
+    }
+  }
+
+  /**
+   * @Then /^I should see (\d+) "([^"]*)"$/
+   * @param $element_count
+   * @param $css_selector
+   */
+  public function iShouldSeeNumberOfElements($element_count, $css_selector)
+  {
+    $elements = $this->getSession()->getPage()->findAll('css', $css_selector);
+    $count = 0;
+    foreach ($elements as $element)
+    {
+      if ($element->isVisible())
+      {
+        $count++;
+      }
+    }
+    Assert::assertEquals($element_count, $count);
   }
 
   /**
@@ -1737,14 +1742,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iClickOnTheProgramPopupButton()
   {
     $this->iClick("#btn-close-popup");
-  }
-
-  /**
-   * @Given /^I am browsing with my pocketcode app$/
-   */
-  public function iAmBrowsingWithMyPocketcodeApp()
-  {
-    $this->getMink()->setDefaultSessionName("mobile");
   }
 
   /**
