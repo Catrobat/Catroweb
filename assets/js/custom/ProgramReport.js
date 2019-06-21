@@ -98,7 +98,7 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
       program : programId,
       category: category,
       note    : reason
-    }).success(function (data) {
+    }, function (data) {
       if (data['statusCode'] === statusCode_OK)
       {
         swal({
