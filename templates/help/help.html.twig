@@ -124,15 +124,7 @@
     </div>
 
     <div class="help-content">
-      <a {% if theme() == "pocketcode" %}
-          href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
-        {% elseif theme() == "create@school" %}
-          href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.createatschool">
-        {% elseif theme() == "phirocode" %}
-          href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.phiro">
-        {% else %}
-          href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
-        {% endif %}
+      <a href="{{ google_play_url }}">
         <div class="catro-card help-card primary google-play">
           <div class="catro-content">
             <div class="row">
@@ -150,6 +142,23 @@
     </div>
 
     <div class="help-content">
+      {% if theme() == 'luna' %}
+      <a href="https://catrob.at/lcd">
+        <div class="catro-card help-card primary discord">
+          <div class="catro-content">
+            <div class="row">
+              <div class="col-8 col-sm-8">
+                <div class="catro-card-title">
+                  {{ "help-cards.headings.discord"|trans({}, "catroweb") }}
+                </div>
+                {{ "help-cards.text.discord"|trans({}, "catroweb") }}
+              </div>
+              <img alt="Discord Logo" src="{{ asset('images/help/Discord-Logo-White.svg') }}"/>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% else %}
       <a href="https://itunes.apple.com/app/pocket-code/id1117935892">
         <div class="catro-card help-card apple primary">
           <div class="catro-content">
@@ -165,7 +174,9 @@
           </div>
         </div>
       </a>
+      {% endif %}
     </div>
+
 
   </div> {# help-container #}
 {% endblock %}

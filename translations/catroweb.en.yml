@@ -813,6 +813,7 @@ help-cards:
     stepbystep: Step by Step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    discord: Join on Discord
     game_design: Game Design
     education: Education platform
     discuss: Discuss
@@ -821,6 +822,7 @@ help-cards:
     tutorials: "Effective tricks in %theme%"
     stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Download the app and get started
+    discord: Join the community on discord
     game_design_1: Effective tricks for
     game_design_2: creating a game
     education: Beginner's course & great resources
