@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f09740eac48055b82d402eeb0396677",
+    "content-hash": "eb1d36f9f6eae686a6cdee31d3d8bb06",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1955,181 +1955,6 @@
             "time": "2018-03-08T08:59:27+00:00"
         },
         {
-            "name": "geocoder-php/common-http",
-            "version": "4.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/geocoder-php/php-common-http.git",
-                "reference": "8e666f89d0b87121595ec2f5134a9f54bf4b0cd2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/php-common-http/zipball/8e666f89d0b87121595ec2f5134a9f54bf4b0cd2",
-                "reference": "8e666f89d0b87121595ec2f5134a9f54bf4b0cd2",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "php-http/client-implementation": "^1.0",
-                "php-http/discovery": "^1.4",
-                "php-http/httplug": "^1.0 || ^2.0",
-                "php-http/message-factory": "^1.0.2",
-                "psr/http-message": "^1.0",
-                "psr/http-message-implementation": "^1.0",
-                "willdurand/geocoder": "^4.0"
-            },
-            "require-dev": {
-                "nyholm/psr7": "^0.2.2",
-                "php-http/message": "^1.0",
-                "php-http/mock-client": "^1.0",
-                "phpunit/phpunit": "6.3.*",
-                "symfony/stopwatch": "~2.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Geocoder\\Http\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tobias Nyholm",
-                    "email": "tobias.nyholm@gmail.com"
-                }
-            ],
-            "description": "Common files for HTTP based Geocoders",
-            "homepage": "http://geocoder-php.org",
-            "keywords": [
-                "http geocoder"
-            ],
-            "time": "2018-11-15T22:27:27+00:00"
-        },
-        {
-            "name": "geocoder-php/ip-info-provider",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/geocoder-php/ip-info-provider.git",
-                "reference": "968336767ea8936ef35950753851a92cab2e9806"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/ip-info-provider/zipball/968336767ea8936ef35950753851a92cab2e9806",
-                "reference": "968336767ea8936ef35950753851a92cab2e9806",
-                "shasum": ""
-            },
-            "require": {
-                "geocoder-php/common-http": "^4.0",
-                "php": "^7.0",
-                "willdurand/geocoder": "^4.0"
-            },
-            "provide": {
-                "geocoder-php/provider-implementation": "1.0"
-            },
-            "require-dev": {
-                "geocoder-php/provider-integration-tests": "^1.0",
-                "nyholm/psr7": "^0.2.2",
-                "php-http/curl-client": "^1.7",
-                "php-http/message": "^1.0",
-                "phpunit/phpunit": "6.3.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Geocoder\\Provider\\IpInfo\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "William Durand",
-                    "email": "william.durand1@gmail.com"
-                }
-            ],
-            "description": "Geocoder IpInfo adapter",
-            "homepage": "http://geocoder-php.org/Geocoder/",
-            "time": "2017-12-14T10:46:36+00:00"
-        },
-        {
-            "name": "geocoder-php/plugin",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/geocoder-php/plugin.git",
-                "reference": "25152b7ad235c6a41589b819c198773ad0816d93"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/plugin/zipball/25152b7ad235c6a41589b819c198773ad0816d93",
-                "reference": "25152b7ad235c6a41589b819c198773ad0816d93",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "php-http/promise": "^1.0",
-                "psr/log": "^1.0",
-                "psr/simple-cache": "^1.0",
-                "willdurand/geocoder": "^4.0"
-            },
-            "require-dev": {
-                "cache/void-adapter": "^1.0",
-                "phpunit/phpunit": "6.3.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Geocoder\\Plugin\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tobias Nyholm",
-                    "email": "tobias.nyholm@gmail.com"
-                }
-            ],
-            "description": "Plugins to Geocoder providers",
-            "homepage": "http://geocoder-php.org",
-            "keywords": [
-                "geocoder plugin"
-            ],
-            "time": "2018-09-18T16:19:45+00:00"
-        },
-        {
             "name": "google/apiclient",
             "version": "v2.2.2",
             "source": {
@@ -3167,70 +2992,6 @@
                 "random"
             ],
             "time": "2019-01-03T20:59:08+00:00"
-        },
-        {
-            "name": "php-http/discovery",
-            "version": "1.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-http/discovery.git",
-                "reference": "684855f2c2e9d0a61868b8f8d6bd0295c8a4b651"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/684855f2c2e9d0a61868b8f8d6bd0295c8a4b651",
-                "reference": "684855f2c2e9d0a61868b8f8d6bd0295c8a4b651",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5 || ^7.0"
-            },
-            "conflict": {
-                "nyholm/psr7": "<1.0"
-            },
-            "require-dev": {
-                "php-http/httplug": "^1.0 || ^2.0",
-                "php-http/message-factory": "^1.0",
-                "phpspec/phpspec": "^2.4",
-                "puli/composer-plugin": "1.0.0-beta10"
-            },
-            "suggest": {
-                "php-http/message": "Allow to use Guzzle, Diactoros or Slim Framework factories",
-                "puli/composer-plugin": "Sets up Puli which is recommended for Discovery to work. Check http://docs.php-http.org/en/latest/discovery.html for more details."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Http\\Discovery\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
-                }
-            ],
-            "description": "Finds installed HTTPlug implementations and PSR-7 message factories",
-            "homepage": "http://php-http.org",
-            "keywords": [
-                "adapter",
-                "client",
-                "discovery",
-                "factory",
-                "http",
-                "message",
-                "psr7"
-            ],
-            "time": "2019-02-23T07:42:53+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
@@ -6551,16 +6312,16 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v3.4.23",
+            "version": "v3.4.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "926e3b797e6bb66c0e4d7da7eff3a174f7378bcf"
+                "reference": "ed3b397f9c07c8ca388b2a1ef744403b4d4ecc44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/926e3b797e6bb66c0e4d7da7eff3a174f7378bcf",
-                "reference": "926e3b797e6bb66c0e4d7da7eff3a174f7378bcf",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/ed3b397f9c07c8ca388b2a1ef744403b4d4ecc44",
+                "reference": "ed3b397f9c07c8ca388b2a1ef744403b4d4ecc44",
                 "shasum": ""
             },
             "require": {
@@ -6601,7 +6362,7 @@
                 "configuration",
                 "options"
             ],
-            "time": "2019-02-23T15:06:07+00:00"
+            "time": "2019-04-10T16:00:48+00:00"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -8508,154 +8269,6 @@
                 "templating"
             ],
             "time": "2019-03-12T18:48:26+00:00"
-        },
-        {
-            "name": "willdurand/geocoder",
-            "version": "4.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/geocoder-php/php-common.git",
-                "reference": "aaa17bddb8dc9e4553110db8beb38534b095b61a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/php-common/zipball/aaa17bddb8dc9e4553110db8beb38534b095b61a",
-                "reference": "aaa17bddb8dc9e4553110db8beb38534b095b61a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "nyholm/nsa": "^1.1",
-                "phpunit/phpunit": "6.3.*",
-                "symfony/stopwatch": "~2.5"
-            },
-            "suggest": {
-                "symfony/stopwatch": "If you want to use the TimedGeocoder"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Geocoder\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "William Durand",
-                    "email": "william.durand1@gmail.com"
-                }
-            ],
-            "description": "Common files for PHP Geocoder",
-            "homepage": "http://geocoder-php.org",
-            "keywords": [
-                "abstraction",
-                "geocoder",
-                "geocoding",
-                "geoip"
-            ],
-            "time": "2018-12-26T12:01:09+00:00"
-        },
-        {
-            "name": "willdurand/geocoder-bundle",
-            "version": "5.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/geocoder-php/BazingaGeocoderBundle.git",
-                "reference": "aa416e46cd95af905e14a3c8f670ba5baa0dfbd3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/BazingaGeocoderBundle/zipball/aa416e46cd95af905e14a3c8f670ba5baa0dfbd3",
-                "reference": "aa416e46cd95af905e14a3c8f670ba5baa0dfbd3",
-                "shasum": ""
-            },
-            "require": {
-                "geocoder-php/plugin": "^1.0",
-                "php": "^7.0",
-                "symfony/console": "^3.3 || ^4.0",
-                "symfony/framework-bundle": "^3.3 || ^4.0",
-                "symfony/options-resolver": "^3.3 || ^4.0",
-                "willdurand/geocoder": "^4.0"
-            },
-            "conflict": {
-                "geocoder-php/nominatim-provider": "<5.0",
-                "willdurand/geocoder": "3.2"
-            },
-            "require-dev": {
-                "doctrine/cache": "~1.3",
-                "doctrine/orm": "~2.3",
-                "geocoder-php/arcgis-online-provider": "^4.0",
-                "geocoder-php/bing-maps-provider": "^4.0",
-                "geocoder-php/cache-provider": "^4.0",
-                "geocoder-php/chain-provider": "^4.0",
-                "geocoder-php/free-geoip-provider": "^4.0",
-                "geocoder-php/geo-plugin-provider": "^4.0",
-                "geocoder-php/geoip2-provider": "^4.0",
-                "geocoder-php/geoips-provider": "^4.0",
-                "geocoder-php/geonames-provider": "^4.0",
-                "geocoder-php/google-maps-provider": "^4.0",
-                "geocoder-php/host-ip-provider": "^4.0",
-                "geocoder-php/ip-info-db-provider": "^4.0",
-                "geocoder-php/ip-info-provider": "^0.1",
-                "geocoder-php/ipstack-provider": "^0.1",
-                "geocoder-php/mapquest-provider": "^4.0",
-                "geocoder-php/mapzen-provider": "^4.0",
-                "geocoder-php/maxmind-binary-provider": "^4.0",
-                "geocoder-php/maxmind-provider": "^4.0",
-                "geocoder-php/nominatim-provider": "^5.0",
-                "geocoder-php/open-cage-provider": "^4.0",
-                "geocoder-php/pickpoint-provider": "^4.0",
-                "geocoder-php/tomtom-provider": "^4.0",
-                "geocoder-php/yandex-provider": "^4.0",
-                "geoip/geoip": "~1.17",
-                "nyholm/nsa": "^1.1",
-                "nyholm/psr7": "^0.2.2",
-                "nyholm/symfony-bundle-test": "^1.3",
-                "php-http/curl-client": "^1.7",
-                "php-http/message": "^1.5",
-                "symfony/phpunit-bridge": "^3.4 || ^4.0",
-                "symfony/yaml": "^3.3 || ^4.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bazinga\\GeocoderBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "William Durand",
-                    "email": "will+git@drnd.me"
-                }
-            ],
-            "description": "Integration of Geocoder into Symfony",
-            "keywords": [
-                "geocoder",
-                "geocoding"
-            ],
-            "time": "2018-09-18T16:23:58+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

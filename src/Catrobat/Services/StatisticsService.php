@@ -8,7 +8,6 @@ use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use Doctrine\ORM\EntityManager;
-use Geocoder\Geocoder;
 use Symfony\Bridge\Monolog\Logger;
 use App\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,10 +29,6 @@ class StatisticsService
    */
   private $entity_manager;
   /**
-   * @var Geocoder
-   */
-  private $geocoder;
-  /**
    * @var Logger
    */
   private $logger;
@@ -47,16 +42,14 @@ class StatisticsService
    *
    * @param ProgramManager $programmanager
    * @param                $entity_manager
-   * @param                $geocoder
    * @param Logger         $logger
    * @param                $security_token_storage
    */
-  public function __construct(ProgramManager $programmanager, $entity_manager, $geocoder,
+  public function __construct(ProgramManager $programmanager, $entity_manager,
                               Logger $logger, $security_token_storage)
   {
     $this->programmanager = $programmanager;
     $this->entity_manager = $entity_manager;
-    $this->geocoder = $geocoder;
     $this->logger = $logger;
     $this->security_token_storage = $security_token_storage;
   }
@@ -72,7 +65,6 @@ class StatisticsService
    * @param bool $is_user_specific_recommendation
    *
    * @return bool
-   * @throws \Geocoder\Exception\Exception
    * @throws \Exception
    */
   public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id,
@@ -102,21 +94,10 @@ class StatisticsService
       $this->logger->addDebug('user: anon.');
     }
 
-    $results = $this->geocoder->geocode($ip);
-
-    $result = $results->first();
-
-    $latitude = $result->getCoordinates()->getLatitude();
-    $longitude = $result->getCoordinates()->getLongitude();
-    $country_code = $result->getCountry()->getCode();
-    $country_name = $result->getCountry()->getName();
-    if ($country_name == '' && $country_code != '')
-    {
-      $country_name = $this->countryCodeToCountry($country_code);
-    }
-
-    $this->logger->addDebug('Received geocoded data - latitude: ' . $latitude . ', longitude: ' . $longitude .
-      ', country code: ' . $country_code . ', country name: ' . $country_name);
+    // geocoder disabled, license needed
+    // see SHARE-80
+    $country_name = null;
+    $country_code = null;
 
     $program = $this->programmanager->find($program_id);
 
@@ -208,22 +189,6 @@ class StatisticsService
   }
 
   /**
-   * @return mixed
-   */
-  public function getGeocoder()
-  {
-    return $this->geocoder;
-  }
-
-  /**
-   * @param mixed $geocoder
-   */
-  public function setGeocoder($geocoder): void
-  {
-    $this->geocoder = $geocoder;
-  }
-
-  /**
    * @return Logger
    */
   public function getLogger(): Logger
@@ -270,7 +235,6 @@ class StatisticsService
    * @return bool
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Geocoder\Exception\Exception
    * @throws \Exception
    */
   public function createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name,
@@ -301,18 +265,10 @@ class StatisticsService
       $this->logger->addDebug('user: anon.');
     }
 
-    $results = $this->geocoder->geocode($ip);
-
-    $result = $results->first();
-
-    $country_code = $result->getCountry()->getCode();
-    $country_name = $result->getCountry()->getName();
-    if ($country_name == '' && $country_code != '')
-    {
-      $country_name = $this->countryCodeToCountry($country_code);
-    }
-
-    $this->logger->addDebug('Received geocoded data - , country code: ' . $country_code . ', country name: ' . $country_name);
+    // geocoder disabled, license needed
+    // see SHARE-80
+    $country_code = null;
+    $country_name = null;
 
     if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph']))
     {
