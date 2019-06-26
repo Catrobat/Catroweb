@@ -6,6 +6,7 @@ use App\Entity\Program;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 
@@ -46,12 +47,7 @@ class ProgramRepository extends EntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    if ($flavor)
-    {
-      $qb
-        ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-        ->setParameter('flavor', $flavor);
-    }
+    $qb = $this->addFlavorCondition($qb, $flavor);
 
     return $qb->getQuery()->getResult();
   }
@@ -75,12 +71,7 @@ class ProgramRepository extends EntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    if ($flavor)
-    {
-      $qb
-        ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-        ->setParameter('flavor', $flavor);
-    }
+    $qb = $this->addFlavorCondition($qb, $flavor);
 
     return $qb->getQuery()->getResult();
   }
@@ -354,12 +345,7 @@ class ProgramRepository extends EntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    if ($flavor)
-    {
-      $qb
-        ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-        ->setParameter('flavor', $flavor);
-    }
+    $qb = $this->addFlavorCondition($qb, $flavor);
 
     return $qb->getQuery()->getResult();
   }
@@ -413,13 +399,7 @@ class ProgramRepository extends EntityRepository
       ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
       ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)));
 
-    if ($flavor)
-    {
-      $qb
-        ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-        ->setParameter('flavor', $flavor);
-    }
-
+    $qb = $this->addFlavorCondition($qb, $flavor);
     return $qb->getQuery()->getResult();
   }
 
@@ -721,7 +701,7 @@ class ProgramRepository extends EntityRepository
   /**
    * @param null $flavor
    *
-   * @return mixed
+   * @return int
    * @throws NonUniqueResultException
    */
   public function getTotalPrograms($flavor = null)
@@ -733,14 +713,8 @@ class ProgramRepository extends EntityRepository
       ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
       ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)));
 
-    if ($flavor)
-    {
-      $qb
-        ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-        ->setParameter('flavor', $flavor);
-    }
-
-    return $qb->getQuery()->getSingleScalarResult();
+    $qb = $this->addFlavorCondition($qb, $flavor);
+    return (int)$qb->getQuery()->getSingleScalarResult();
   }
 
   /**
@@ -1015,5 +989,26 @@ class ProgramRepository extends EntityRepository
 
     return $programs;
 
+  }
+
+  private function addFlavorCondition(QueryBuilder $qb, $flavor)
+  {
+    if ($flavor)
+    {
+      if ($flavor{0} === "!")
+      {
+        $qb
+          ->andWhere($qb->expr()->neq('e.flavor', ':flavor'))
+          ->setParameter('flavor', substr($flavor, 1));
+      }
+      else
+      {
+        $qb
+          ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+          ->setParameter('flavor', $flavor);
+      }
+    }
+
+    return $qb;
   }
 }
