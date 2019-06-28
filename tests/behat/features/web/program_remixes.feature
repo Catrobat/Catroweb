@@ -7,16 +7,16 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
       | Superman | 123456   | cccccccccc | dev1@pocketcode.org |
       | Gangster | 123456   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
-      | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | remix_root |
-      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true       |
-      | 2  | program 2 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      |
-      | 3  | program 3 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      |
-      | 4  | program 4 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      |
-      | 5  | program 5 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      |
-      | 6  | program 6 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      |
-      | 7  | program 7 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      |
-      | 8  | program 8 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true       |
-      | 9  | program 9 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      |
+      | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | remix_root | debug |
+      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true       | false |
+      | 2  | program 2 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
+      | 3  | program 3 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
+      | 4  | program 4 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
+      | 5  | program 5 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
+      | 6  | program 6 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
+      | 7  | program 7 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | true  |
+      | 8  | program 8 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true       | false |
+      | 9  | program 9 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
 
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph looks like according to the following forward remix relations (closure table):
@@ -93,7 +93,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Given I am on "/pocketcode/program/8?show_graph=1"
     Then I ensure pop ups work
     When I click "#remix-graph-modal-link"
-    When I wait 1200 milliseconds
+    When I wait 10 milliseconds
     And I should see a node with id "catrobat_8" having name "program 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "program 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
@@ -102,7 +102,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Given I am on "/pocketcode/program/9?show_graph=1"
     Then I ensure pop ups work
     When I click "#remix-graph-modal-link"
-    When I wait 1200 milliseconds
+    When I wait 10 milliseconds
     And I should see a node with id "catrobat_8" having name "program 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "program 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
@@ -118,3 +118,19 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Then I should see "program 2"
     And I should see "Gangster"
     And I should see "6 remixes"
+
+  Scenario: Viewing details of program 2 using debug app
+    Given I use a debug build of the Catroid app
+    And I am on "/pocketcode/program/2?show_graph=1"
+    When I click "#remix-graph-modal-link"
+    And I wait 10 milliseconds
+    Then I should see a node with id "catrobat_7" having name "program 7" and username "Superman"
+    And I should see an edge from "catrobat_5" to "catrobat_7"
+
+  Scenario: Viewing details of program 2 using release app
+    Given I use a release build of the Catroid app
+    And I am on "/pocketcode/program/2?show_graph=1"
+    When I click "#remix-graph-modal-link"
+    And I wait 10 milliseconds
+    Then I should see an unavailable node with id "catrobat_7"
+    And I should see an edge from "catrobat_5" to "catrobat_7"

@@ -150,7 +150,7 @@ Feature: Search programs
     Given I use the limit "<Limit>"
     Given I use the offset "<Offset>"
     When I search for "<Search>"
-    Then I should get a total of "<TotalProjects>" projects
+    Then I should get a total of <TotalProjects> projects
 
     Examples:
       | Search | Limit | Offset | TotalProjects |

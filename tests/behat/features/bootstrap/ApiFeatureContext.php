@@ -1,32 +1,34 @@
 <?php
 
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
-use Behat\Behat\Tester\Exception\PendingException;
+use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Catrobat\Services\TestEnv\FixedTime;
+use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
+use App\Catrobat\Services\TestEnv\LdapTestDriver;
 use App\Entity\Extension;
+use App\Entity\FeaturedProgram;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramRemixBackwardRelation;
 use App\Entity\ProgramRemixRelation;
 use App\Entity\RudeWord;
 use App\Entity\ScratchProgramRemixRelation;
 use App\Entity\Tag;
+use App\Entity\User;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserRemixSimilarityRelation;
-use App\Entity\User;
-use App\Entity\Program;
-use App\Catrobat\Services\MediaPackageFileRepository;
-use App\Catrobat\Services\TestEnv\LdapTestDriver;
-use App\Entity\FeaturedProgram;
+use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use App\Catrobat\Services\TestEnv\FixedTime;
-use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
 
 
 /**
@@ -85,7 +87,7 @@ class ApiFeatureContext extends BaseContext
    */
   private $checked_catrobat_remix_backward_relations;
 
-  const MEDIAPACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
+  private const MEDIAPACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
 
   /**
    * @var
@@ -116,6 +118,11 @@ class ApiFeatureContext extends BaseContext
    * @var array
    */
   private $files = [];
+
+  /**
+   * @var array
+   */
+  private $stored_json = [];
 
   /**
    * FeatureContext constructor.
@@ -201,6 +208,43 @@ class ApiFeatureContext extends BaseContext
   {
     $response = $this->getClient()->getResponse();
     Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+  }
+
+  /**
+   * @Given /^I use the user agent "([^"]*)"$/
+   * @param string $user_agent
+   */
+  public function iUseTheUserAgent($user_agent)
+  {
+    $this->getClient()->setServerParameter("HTTP_USER_AGENT", $user_agent);
+  }
+
+  // @formatter:off
+  /**
+   * @Given /^I use the Catroid app with language version ([0-9]+(\.[0-9]+)?), flavor "([^"]+)", app version "([^"]+)*" and (debug|release) build type$/
+   *
+   * @param $lang_version
+   * @param $flavor
+   * @param $app_version
+   * @param $build_type
+   */
+  // @formatter:on
+  public function iUseTheUserAgentParameterized($lang_version, $flavor, $app_version, $build_type)
+  {
+    // see org.catrobat.catroid.ui.WebViewActivity
+    $platform = "Android";
+    $user_agent = "Catrobat/" . $lang_version . " " . $flavor . "/" . $app_version . " Platform/" . $platform .
+      " BuildType/" . $build_type;
+    $this->getClient()->setServerParameter("HTTP_USER_AGENT", $user_agent);
+  }
+
+  /**
+   * @Given /^I use a (debug|release) build of the Catroid app$/
+   * @param $build_type
+   */
+  public function iUseASpecificBuildTypeOfCatroidApp($build_type)
+  {
+    $this->iUseTheUserAgentParameterized("0.998", "PocketCode", "0.9.60", $build_type);
   }
 
 
@@ -436,8 +480,8 @@ class ApiFeatureContext extends BaseContext
    * @Given /^I define the following rude words:$/
    * @param TableNode $table
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function iDefineTheFollowingRudeWords(TableNode $table)
   {
@@ -469,11 +513,11 @@ class ApiFeatureContext extends BaseContext
 
   /**
    * @When /^I upload a program with (.*)$/
-   * @param $programattribute
+   * @param string $program_attribute
    */
-  public function iUploadAProgramWith($programattribute)
+  public function iUploadAProgramWith($program_attribute)
   {
-    switch ($programattribute)
+    switch ($program_attribute)
     {
       case 'a rude word in the description':
         $filename = 'program_with_rudeword_in_description.catrobat';
@@ -504,7 +548,7 @@ class ApiFeatureContext extends BaseContext
         break;
 
       default:
-        throw new PendingException('No case defined for "' . $programattribute . '"');
+        throw new PendingException('No case defined for "' . $program_attribute . '"');
     }
     $this->upload(self::FIXTUREDIR . 'GeneratedFixtures/' . $filename, null);
   }
@@ -542,7 +586,6 @@ class ApiFeatureContext extends BaseContext
   public function thereAreLdapUsers(TableNode $table)
   {
     /**
-     *
      * @var $ldap_test_driver LdapTestDriver
      * @var $user             User
      */
@@ -555,15 +598,17 @@ class ApiFeatureContext extends BaseContext
       $username = $users[$i]['name'];
       $pwd = $users[$i]['password'];
       $groups = array_key_exists("groups", $users[$i]) ? explode(",", $users[$i]["groups"]) : [];
-      $ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ? $users[$i]['email'] : null);
+      $ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ?
+        $users[$i]['email'] : null);
     }
   }
 
   /**
    * @Given /^there are programs:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereArePrograms(TableNode $table)
   {
@@ -585,11 +630,12 @@ class ApiFeatureContext extends BaseContext
         'directory_hash'      => $programs[$i]['directory_hash'],
         'filesize'            => @$programs[$i]['FileSize'],
         'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
-        'approved'            => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
+        'approved'            => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '')
+          ? null : true,
         'tags'                => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
         'extensions'          => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
         'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,
-        'debug'          => isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false
+        'debug'               => isset($programs[$i]['debug']) ? $programs[$i]['debug'] == 'true' : false,
       ];
 
       $this->insertProgram($user, $config);
@@ -599,8 +645,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are like similar users:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreLikeSimilarUsers(TableNode $table)
   {
@@ -619,8 +666,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are remix similar users:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreRemixSimilarUsers(TableNode $table)
   {
@@ -639,8 +687,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are likes:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreLikes(TableNode $table)
   {
@@ -660,8 +709,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are tags:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreTags(TableNode $table)
   {
@@ -681,8 +731,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are extensions:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreExtensions(TableNode $table)
   {
@@ -701,8 +752,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are forward remix relations:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreForwardRemixRelations(TableNode $table)
   {
@@ -722,8 +774,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are backward remix relations:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreBackwardRemixRelations(TableNode $table)
   {
@@ -742,8 +795,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are Scratch remix relations:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreScratchRemixRelations(TableNode $table)
   {
@@ -762,8 +816,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^following programs are featured:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function followingProgramsAreFeatured(TableNode $table)
   {
@@ -786,8 +841,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are downloadable programs:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreDownloadablePrograms(TableNode $table)
   {
@@ -853,7 +909,8 @@ class ApiFeatureContext extends BaseContext
    */
   public function iGetWithTheseParameters($url)
   {
-    $this->getClient()->request('GET', 'http://' . $this->hostname . $url . '?' . http_build_query($this->request_parameters), [], $this->files, [
+    $uri = 'http://' . $this->hostname . $url . '?' . http_build_query($this->request_parameters);
+    $this->getClient()->request('GET', $uri, [], $this->files, [
       'HTTP_HOST' => $this->hostname,
       'HTTPS'     => $this->secure,
     ]);
@@ -924,14 +981,17 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
-   * @Then /^I should get a total of "([^"]*)" projects$/
+   * @Then /^I should get a total of (\d+) projects$/
    * @param $arg1
    */
   public function iShouldGetATotalOfProjects($arg1)
   {
     $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
-    Assert::assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects'], 'Wrong number of total projects');
+    Assert::assertEquals(
+      $arg1, $responseArray['CatrobatInformation']['TotalProjects'],
+      'Wrong number of total projects'
+    );
   }
 
   /**
@@ -941,8 +1001,14 @@ class ApiFeatureContext extends BaseContext
   {
     $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
-    Assert::assertTrue(isset($responseArray['isUserSpecificRecommendation']), 'No isUserSpecificRecommendation parameter found in response!');
-    Assert::assertTrue($responseArray['isUserSpecificRecommendation'], 'isUserSpecificRecommendation parameter has wrong value. Is false, but should be true!');
+    Assert::assertTrue(
+      isset($responseArray['isUserSpecificRecommendation']),
+      'No isUserSpecificRecommendation parameter found in response!'
+    );
+    Assert::assertTrue(
+      $responseArray['isUserSpecificRecommendation'],
+      'isUserSpecificRecommendation parameter has wrong value. Is false, but should be true!'
+    );
   }
 
   /**
@@ -952,7 +1018,10 @@ class ApiFeatureContext extends BaseContext
   {
     $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
-    Assert::assertFalse(isset($responseArray['isUserSpecificRecommendation']), 'Unexpected isUserSpecificRecommendation parameter found in response!');
+    Assert::assertFalse(
+      isset($responseArray['isUserSpecificRecommendation']),
+      'Unexpected isUserSpecificRecommendation parameter found in response!'
+    );
   }
 
   /**
@@ -998,6 +1067,26 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
+   * @Given /^I store the following json object as "([^"]*)":$/
+   * @param string       $name
+   * @param PyStringNode $json
+   */
+  public function iStoreTheFollowingJsonObjectAs(string $name, PyStringNode $json)
+  {
+    $this->stored_json[$name] = $json->getRaw();
+  }
+
+  /**
+   * @Then /^I should get the stored json object "([^"]*)"$/
+   * @param string $name
+   */
+  public function iShouldGetTheStoredJsonObject(string $name)
+  {
+    $response = $this->getClient()->getResponse();
+    Assert::assertJsonStringEqualsJsonString($this->stored_json[$name], $response->getContent(), '');
+  }
+
+  /**
    * @Then /^I should get the json object with random token:$/
    * @param PyStringNode $string
    */
@@ -1040,7 +1129,10 @@ class ApiFeatureContext extends BaseContext
 
     for ($i = 0; $i < count($returned_programs); ++$i)
     {
-      Assert::assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
+      Assert::assertEquals(
+        $expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'],
+        'Wrong order of results'
+      );
     }
   }
 
@@ -1054,15 +1146,45 @@ class ApiFeatureContext extends BaseContext
     $response = $this->getClient()->getResponse();
     $response_array = json_decode($response->getContent(), true);
     $random_programs = $response_array['CatrobatProjects'];
+    $random_programs_count = count($random_programs);
     $expected_programs = $table->getHash();
-    Assert::assertEquals($program_count, count($random_programs), 'Wrong number of random programs');
+    $expected_programs_count = count($expected_programs);
+    Assert::assertEquals($program_count, $random_programs_count, 'Wrong number of random programs');
 
-    for ($i = 0; $i < count($random_programs); ++$i)
+    for ($i = 0; $i < $random_programs_count; ++$i)
     {
       $program_found = false;
-      for ($j = 0; $j < count($expected_programs); ++$j)
+      for ($j = 0; $j < $expected_programs_count; ++$j)
       {
         if (strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]['Name']) === 0)
+        {
+          $program_found = true;
+        }
+      }
+      Assert::assertEquals($program_found, true, 'Program does not exist in the database');
+    }
+  }
+
+  /**
+   * @Then /^I should get the programs "([^"]*)" in random order$/
+   * @param string $program_list
+   */
+  public function iShouldGetTheProgramsInRandomOrder($program_list)
+  {
+    $response = $this->getClient()->getResponse();
+    $response_array = json_decode($response->getContent(), true);
+    $random_programs = $response_array['CatrobatProjects'];
+    $random_programs_count = count($random_programs);
+    $expected_programs = explode(",", $program_list);
+    $expected_programs_count = count($expected_programs);
+    Assert::assertEquals($expected_programs_count, $random_programs_count, 'Wrong number of random programs');
+
+    for ($i = 0; $i < $random_programs_count; ++$i)
+    {
+      $program_found = false;
+      for ($j = 0; $j < $expected_programs_count; ++$j)
+      {
+        if (strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]) === 0)
         {
           $program_found = true;
         }
@@ -1081,16 +1203,37 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
+   * @Then /^I should get the programs "([^"]*)"$/
+   * @param string $program_list
+   */
+  public function iShouldGetThePrograms($program_list)
+  {
+    $response = $this->getClient()->getResponse();
+    $responseArray = json_decode($response->getContent(), true);
+    $returned_programs = $responseArray['CatrobatProjects'];
+    $expected_programs = explode(",", $program_list);
+
+    for ($i = 0; $i < count($returned_programs); ++$i)
+    {
+      Assert::assertEquals(
+        $expected_programs[$i], $returned_programs[$i]['ProjectName'],
+        'Wrong order of results'
+      );
+    }
+  }
+
+  /**
    * @Then /^I should get following like similarities:$/
    * @param TableNode $table
    */
   public function iShouldGetFollowingLikePrograms(TableNode $table)
   {
     $all_like_similarities = $this->getAllLikeSimilaritiesBetweenUsers();
+    $all_like_similarities_count = count($all_like_similarities);
     $expected_like_similarities = $table->getHash();
-    Assert::assertEquals(count($expected_like_similarities), count($all_like_similarities),
+    Assert::assertEquals(count($expected_like_similarities), $all_like_similarities_count,
       'Wrong number of returned similarity entries');
-    for ($i = 0; $i < count($all_like_similarities); ++$i)
+    for ($i = 0; $i < $all_like_similarities_count; ++$i)
     {
       /**
        * @var $like_similarity UserLikeSimilarityRelation
@@ -1115,19 +1258,24 @@ class ApiFeatureContext extends BaseContext
   public function iShouldGetFollowingRemixPrograms(TableNode $table)
   {
     $all_remix_similarities = $this->getAllRemixSimilaritiesBetweenUsers();
+    $all_remix_similarities_count = count($all_remix_similarities);
     $expected_remix_similarities = $table->getHash();
-    Assert::assertEquals(count($expected_remix_similarities), count($all_remix_similarities),
+    Assert::assertEquals(count($expected_remix_similarities), $all_remix_similarities_count,
       'Wrong number of returned similarity entries');
-    for ($i = 0; $i < count($all_remix_similarities); ++$i)
+    for ($i = 0; $i < $all_remix_similarities_count; ++$i)
     {
       /**
        * @var $remix_similarity UserRemixSimilarityRelation
        */
       $remix_similarity = $all_remix_similarities[$i];
-      Assert::assertEquals($expected_remix_similarities[$i]['first_user_id'], $remix_similarity->getFirstUserId(),
-        'Wrong value for first_user_id or wrong order of results');
-      Assert::assertEquals($expected_remix_similarities[$i]['second_user_id'], $remix_similarity->getSecondUserId(),
-        'Wrong value for second_user_id');
+      Assert::assertEquals(
+        $expected_remix_similarities[$i]['first_user_id'], $remix_similarity->getFirstUserId(),
+        'Wrong value for first_user_id or wrong order of results'
+      );
+      Assert::assertEquals(
+        $expected_remix_similarities[$i]['second_user_id'], $remix_similarity->getSecondUserId(),
+        'Wrong value for second_user_id'
+      );
       Assert::assertEquals(round($expected_remix_similarities[$i]['similarity'], 3),
         round($remix_similarity->getSimilarity(), 3),
         'Wrong value for similarity');
@@ -1242,14 +1390,17 @@ class ApiFeatureContext extends BaseContext
     $this->iUploadAProgram();
   }
 
+  // @formatter:off
   /**
    * @When /^I upload another program with name set to "([^"]*)", url set to "([^"]*)" and catrobatLanguageVersion set to "([^"]*)"$/
    * @param $name
    * @param $url
    * @param $catrobat_language_version
    */
-  public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo($name, $url,
-                                                                                            $catrobat_language_version)
+  // @formatter:on
+  public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(
+    $name, $url, $catrobat_language_version
+  )
   {
     $this->iHaveAProgramWithAsMultipleHeaderFields('name', $name, 'url', $url,
       'catrobatLanguageVersion', $catrobat_language_version);
@@ -1322,11 +1473,12 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^the current time is "([^"]*)"$/
    * @param $time
-   * @throws \Exception
+   *
+   * @throws Exception
    */
   public function theCurrentTimeIs($time)
   {
-    $date = new \DateTime($time, new \DateTimeZone('UTC'));
+    $date = new DateTime($time, new DateTimeZone('UTC'));
     $time_service = $this->getSymfonyService('time');
     $time_service->setTime(new FixedTime($date->getTimestamp()));
   }
@@ -1400,11 +1552,14 @@ class ApiFeatureContext extends BaseContext
     $this->theResponseCodeShouldBe(200);
   }
 
+  // @formatter:off
   /**
    * @Then /^the program download statistic should have a download timestamp, an anonimous user and the following statistics:$/
    * @param TableNode $table
-   * @throws \Exception
+   *
+   * @throws Exception
    */
+  // @formatter:on
   public function theProgramShouldHaveADownloadTimestampAndTheFollowingStatistics(TableNode $table)
   {
     $statistics = $table->getHash();
@@ -1422,20 +1577,35 @@ class ApiFeatureContext extends BaseContext
       $program_download_statistics = $repository->find(1);
 
       Assert::assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
-      Assert::assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
-      Assert::assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
-      Assert::assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
+      Assert::assertEquals(
+        $country_code, $program_download_statistics->getCountryCode(),
+        "Wrong country code in download statistics"
+      );
+      Assert::assertEquals(
+        $country_name, strtoUpper($program_download_statistics->getCountryName()),
+        "Wrong country name in download statistics"
+      );
+      Assert::assertEquals(
+        $program_id, $program_download_statistics->getProgram()->getId(),
+        "Wrong program ID in download statistics"
+      );
       Assert::assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
-      Assert::assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
+      Assert::assertNotEmpty(
+        $program_download_statistics->getUserAgent(),
+        "No user agent was written to download statistics"
+      );
 
       $limit = 5.0;
 
       $download_time = $program_download_statistics->getDownloadedAt();
-      $current_time = new \DateTime();
+      $current_time = new DateTime();
 
       $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
 
-      Assert::assertTrue($time_delta < $limit, "Download time difference in download statistics too high");
+      Assert::assertTrue(
+        $time_delta < $limit,
+        "Download time difference in download statistics too high"
+      );
     }
   }
 
@@ -1516,6 +1686,7 @@ class ApiFeatureContext extends BaseContext
     ]);
   }
 
+  // @formatter:off
   /**
    * @Given /^I have a program with "([^"]*)" set to "([^"]*)", "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
    * @param $key1
@@ -1525,6 +1696,7 @@ class ApiFeatureContext extends BaseContext
    * @param $key3
    * @param $value3
    */
+  // @formatter:on
   public function iHaveAProgramWithAsMultipleHeaderFields($key1, $value1, $key2, $value2, $key3, $value3)
   {
     $this->generateProgramFileWith([
@@ -1584,8 +1756,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^program "([^"]*)" is not visible$/
    * @param $programname
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function programIsNotVisible($programname)
   {
@@ -1716,7 +1889,8 @@ class ApiFeatureContext extends BaseContext
     ]);
 
     Assert::assertNotNull($direct_edge_relation);
-    $this->checked_catrobat_remix_forward_ancestor_relations[$direct_edge_relation->getUniqueKey()] = $direct_edge_relation;
+    $this->checked_catrobat_remix_forward_ancestor_relations[$direct_edge_relation->getUniqueKey()] =
+      $direct_edge_relation;
   }
 
   /**
@@ -1739,11 +1913,10 @@ class ApiFeatureContext extends BaseContext
     ]);
 
     $further_scratch_parent_relations = array_filter($direct_edge_relations,
-      function ($r) {
-        /**
-         * @var $r ScratchProgramRemixRelation
-         */
-        return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations);
+      function (ScratchProgramRemixRelation $relation) {
+        return !array_key_exists(
+          $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations
+        );
       });
 
     Assert::assertCount(0, $further_scratch_parent_relations);
@@ -1775,11 +1948,13 @@ class ApiFeatureContext extends BaseContext
     ]);
 
     Assert::assertNotNull($forward_ancestor_relation);
-    $this->checked_catrobat_remix_forward_ancestor_relations[$forward_ancestor_relation->getUniqueKey()] = $forward_ancestor_relation;
+    $this->checked_catrobat_remix_forward_ancestor_relations[$forward_ancestor_relation->getUniqueKey()] =
+      $forward_ancestor_relation;
 
     if ($program_id == $ancestor_program_id && $depth == 0)
     {
-      $this->checked_catrobat_remix_forward_descendant_relations[$forward_ancestor_relation->getUniqueKey()] = $forward_ancestor_relation;
+      $this->checked_catrobat_remix_forward_descendant_relations[$forward_ancestor_relation->getUniqueKey()] =
+        $forward_ancestor_relation;
     }
   }
 
@@ -1806,7 +1981,8 @@ class ApiFeatureContext extends BaseContext
     ]);
 
     Assert::assertNotNull($backward_parent_relation);
-    $this->checked_catrobat_remix_backward_relations[$backward_parent_relation->getUniqueKey()] = $backward_parent_relation;
+    $this->checked_catrobat_remix_backward_relations[$backward_parent_relation->getUniqueKey()] =
+      $backward_parent_relation;
   }
 
   /**
@@ -1829,11 +2005,8 @@ class ApiFeatureContext extends BaseContext
       ->findBy(['descendant_id' => $program_id]);
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      function ($r) {
-        /**
-         * @var $r ProgramRemixRelation
-         */
-        return $r->getDepth() >= 1;
+      function (ProgramRemixRelation $relation) {
+        return $relation->getDepth() >= 1;
       }));
   }
 
@@ -1857,11 +2030,10 @@ class ApiFeatureContext extends BaseContext
       ->findBy(['descendant_id' => $program_id]);
 
     $further_forward_ancestor_relations = array_filter($forward_ancestors_including_self_referencing_relation,
-      function ($r) {
-        /**
-         * @var $r ProgramRemixRelation
-         */
-        return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations);
+      function (ProgramRemixRelation $relation) {
+        return !array_key_exists(
+          $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations
+        );
       });
 
     Assert::assertCount(0, $further_forward_ancestor_relations);
@@ -1904,11 +2076,10 @@ class ApiFeatureContext extends BaseContext
     $backward_parent_relations = $this->getProgramRemixBackwardRepository()->findBy(['child_id' => $program_id]);
 
     $further_backward_parent_relations = array_filter($backward_parent_relations,
-      function ($r) {
-        /**
-         * @var $r ProgramRemixBackwardRelation
-         */
-        return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_backward_relations);
+      function (ProgramRemixBackwardRelation $relation) {
+        return !array_key_exists(
+          $relation->getUniqueKey(), $this->checked_catrobat_remix_backward_relations
+        );
       });
 
     Assert::assertCount(0, $further_backward_parent_relations);
@@ -1971,6 +2142,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($program_id, $descendant_program_id, $depth)
   {
+    /** @var ProgramRemixRelation $forward_descendant_relation */
     $forward_descendant_relation = $this->getProgramRemixForwardRepository()->findOneBy([
       'ancestor_id'   => $program_id,
       'descendant_id' => $descendant_program_id,
@@ -1978,11 +2150,13 @@ class ApiFeatureContext extends BaseContext
     ]);
 
     Assert::assertNotNull($forward_descendant_relation);
-    $this->checked_catrobat_remix_forward_descendant_relations[$forward_descendant_relation->getUniqueKey()] = $forward_descendant_relation;
+    $this->checked_catrobat_remix_forward_descendant_relations[$forward_descendant_relation->getUniqueKey()] =
+      $forward_descendant_relation;
 
     if ($program_id == $descendant_program_id && $depth == 0)
     {
-      $this->checked_catrobat_remix_forward_ancestor_relations[$forward_descendant_relation->getUniqueKey()] = $forward_descendant_relation;
+      $this->checked_catrobat_remix_forward_ancestor_relations[$forward_descendant_relation->getUniqueKey()] =
+        $forward_descendant_relation;
     }
   }
 
@@ -2006,11 +2180,8 @@ class ApiFeatureContext extends BaseContext
       ->findBy(['ancestor_id' => $program_id]);
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      function ($r) {
-        /**
-         * @var $r ProgramRemixRelation
-         */
-        return $r->getDepth() >= 1;
+      function (ProgramRemixRelation $relation) {
+        return $relation->getDepth() >= 1;
       }));
   }
 
@@ -2034,11 +2205,10 @@ class ApiFeatureContext extends BaseContext
       ->findBy(['ancestor_id' => $program_id]);
 
     $further_forward_descendant_relations = array_filter($forward_descendants_including_self_referencing_relation,
-      function ($r) {
-        /**
-         * @var $r ProgramRemixRelation
-         */
-        return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_descendant_relations);
+      function (ProgramRemixRelation $relation) {
+        return !array_key_exists(
+          $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_descendant_relations
+        );
       });
 
     Assert::assertCount(0, $further_forward_descendant_relations);
@@ -2047,8 +2217,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Then /^the uploaded program should have RemixOf "([^"]*)" in the xml$/
    * @param $value
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function theUploadedProgramShouldHaveRemixofInTheXml($value)
   {
@@ -2060,8 +2231,9 @@ class ApiFeatureContext extends BaseContext
    * @Then /^the program "([^"]*)" should have RemixOf "([^"]*)" in the xml$/
    * @param $program_id
    * @param $value
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function theProgramShouldHaveRemixofInTheXml($program_id, $value)
   {
@@ -2119,10 +2291,12 @@ class ApiFeatureContext extends BaseContext
     $fb_post_id = $program->getFbPostId();
     $fb_post_url = $program->getFbPostUrl();
 
-    $profile_url = $this->getSymfonySupport()->getRouter()->generate('profile', ['id' => $user->getId()], true);
+    $profile_url = $this->getSymfonySupport()->getRouter()
+      ->generate('profile', ['id' => $user->getId()], true);
     Assert::assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
     Assert::assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
-    $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
+    $fb_response = $this->getSymfonyService('facebook_post_service')
+      ->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
 
     $fb_post_message = $fb_post_message . chr(10) . 'by ' . $profile_url;
 
@@ -2131,7 +2305,10 @@ class ApiFeatureContext extends BaseContext
 
     $this->fb_post_id = $fb_id;
     Assert::assertTrue($fb_id != '', "No Facebook Post ID was returned");
-    Assert::assertEquals($fb_id, $program_manager->find($project_id)->getFbPostId(), "Facebook Post ID's do not match");
+    Assert::assertEquals(
+      $fb_id, $program_manager->find($project_id)->getFbPostId(),
+      "Facebook Post ID's do not match"
+    );
     Assert::assertEquals($fb_post_message, $fb_message, "Facebook messages do not match");
   }
 
@@ -2158,11 +2335,18 @@ class ApiFeatureContext extends BaseContext
     $program_manager = $this->getProgramManger();
     $program = $program_manager->find($this->fb_post_program_id);
     Assert::assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
-    $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
+    $fb_response = $this->getSymfonyService('facebook_post_service')
+      ->checkFacebookPostAvailable($this->fb_post_id);
 
     $string = print_r($fb_response, true);
-    Assert::assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
-    Assert::assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
+    Assert::assertNotContains(
+      'id', $string,
+      'Facebook ID was returned, but should not exist anymore as the post was deleted'
+    );
+    Assert::assertNotContains(
+      'message', $string,
+      'Facebook message was returned, but should not exist anymore as the post was deleted'
+    );
   }
 
   /**
@@ -2185,7 +2369,8 @@ class ApiFeatureContext extends BaseContext
    */
   public function iGetTheTagListFromWithTheseParameters($url)
   {
-    $this->getClient()->request('GET', $url . '?' . http_build_query($this->request_parameters), [], $this->files, [
+    $uri = $url . '?' . http_build_query($this->request_parameters);
+    $this->getClient()->request('GET', $uri, [], $this->files, [
       'HTTP_HOST' => $this->hostname,
       'HTTPS'     => $this->secure,
     ]);
@@ -2253,7 +2438,8 @@ class ApiFeatureContext extends BaseContext
     $this->generateProgramFileWith([
       'tags' => $tags,
     ]);
-    $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, 'pocketcode', $this->request_parameters);
+    $file = sys_get_temp_dir() . '/program_generated.catrobat';
+    $this->upload($file, null, 'pocketcode', $this->request_parameters);
   }
 
   /**
@@ -2262,7 +2448,9 @@ class ApiFeatureContext extends BaseContext
   public function iHaveAProgramWithArduinoLegoAndPhiroExtensions()
   {
     $filesystem = new Filesystem();
-    $filesystem->copy(self::FIXTUREDIR . 'extensions.catrobat', sys_get_temp_dir() . "/program_generated.catrobat", true);
+    $original_file = self::FIXTUREDIR . 'extensions.catrobat';
+    $target_file = sys_get_temp_dir() . "/program_generated.catrobat";
+    $filesystem->copy($original_file, $target_file, true);
 
   }
 
@@ -2348,8 +2536,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are mediapackages:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreMediapackages(TableNode $table)
   {
@@ -2371,8 +2560,9 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are mediapackage categories:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreMediapackageCategories(TableNode $table)
   {
@@ -2403,9 +2593,10 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Given /^there are mediapackage files:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \ImagickException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws ImagickException
    */
   public function thereAreMediapackageFiles(TableNode $table)
   {
@@ -2433,7 +2624,7 @@ class ApiFeatureContext extends BaseContext
       $old_files = $old_files == null ? [] : $old_files;
       array_push($old_files, $new_file);
       $category->setFiles($old_files);
-      if(!empty($file['flavor']))
+      if (!empty($file['flavor']))
       {
         $new_file->setFlavor($file['flavor']);
       }
@@ -2450,11 +2641,11 @@ class ApiFeatureContext extends BaseContext
   /**
    * @Then /^We can\'t test anything here$/
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function weCantTestAnythingHere()
   {
-    throw new \Exception(":(");
+    throw new Exception(":(");
   }
 
 }

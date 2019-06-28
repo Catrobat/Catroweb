@@ -3,13 +3,14 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\ConsoleProgressIndicator;
+use App\Catrobat\Requests\AppRequest;
 use App\Entity\Program;
 use App\Repository\ProgramRepository;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 /**
  * Class ReflavorExtensionCommand
@@ -27,16 +28,23 @@ class ReflavorExtensionCommand extends ContainerAwareCommand
   private $program_repository;
 
   /**
+   * @var AppRequest
+   */
+  protected $app_request;
+
+  /**
    * ReflavorExtensionCommand constructor.
    *
    * @param EntityManager $em
    * @param               $program_repo
+   * @param AppRequest    $app_request
    */
-  public function __construct(EntityManager $em, $program_repo)
+  public function __construct(EntityManager $em, ProgramRepository $program_repo, AppRequest $app_request)
   {
     parent::__construct();
     $this->em = $em;
     $this->program_repository = $program_repo;
+    $this->app_request = $app_request;
   }
 
   /**
@@ -68,12 +76,14 @@ class ReflavorExtensionCommand extends ContainerAwareCommand
 
     $offset = 0;
     $limit = 20;
-    $programs = $this->program_repository->getProgramsByExtensionName($extension, $limit, $offset);
+    $programs = $this->program_repository->getProgramsByExtensionName(
+      $extension, $this->app_request->isDebugBuildRequest(), $limit, $offset
+    );
     $count = count($programs);
 
     $progress_indicator = new ConsoleProgressIndicator($output);
 
-    for ($index = 1; $count != 0; $index += 1)
+    for ($index = 1; $count !== 0; $index += 1)
     {
       foreach ($programs as $program)
       {
@@ -85,7 +95,9 @@ class ReflavorExtensionCommand extends ContainerAwareCommand
       $this->em->flush();
 
       $offset = $index * $limit;
-      $programs = $this->program_repository->getProgramsByExtensionName($extension, $limit, $offset);
+      $programs = $this->program_repository->getProgramsByExtensionName(
+        $extension, $this->app_request->isDebugBuildRequest(), $limit, $offset
+      );
       $count = count($programs);
     }
 

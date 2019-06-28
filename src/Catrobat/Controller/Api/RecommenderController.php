@@ -2,14 +2,16 @@
 
 namespace App\Catrobat\Controller\Api;
 
-use App\Entity\UserTestGroup;
-use App\Entity\ProgramManager;
-use App\Catrobat\StatusCode;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Responses\ProgramListResponse;
+use App\Catrobat\StatusCode;
+use App\Entity\Program;
+use App\Entity\ProgramManager;
+use App\Entity\UserTestGroup;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class RecommenderController
@@ -43,6 +45,7 @@ class RecommenderController extends Controller
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
     $program_id = intval($request->query->get('program_id'));
 
+    /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
     $flavor = $request->getSession()->get('flavor');
 
@@ -64,17 +67,15 @@ class RecommenderController extends Controller
    */
   public function listRecsysSpecificProgramsAction(Request $request, $id)
   {
-    /**
-     * @var $program_manager ProgramManager
-     */
-
     $is_test_environment = ($this->get('kernel')->getEnvironment() == 'test');
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
 
+    /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
     $flavor = $request->getSession()->get('flavor');
 
+    /** @var Program $program */
     $program = $program_manager->find($id);
     if ($program == null)
     {
@@ -105,7 +106,6 @@ class RecommenderController extends Controller
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
 
-    $program_manager = $this->get('programmanager');
     $flavor = $request->getSession()->get('flavor');
 
     $programs_count = 0;
@@ -114,6 +114,9 @@ class RecommenderController extends Controller
 
     $user = ($test_user_id_for_like_recommendation == 0) ?
       $this->getUser() : $this->get('usermanager')->find($test_user_id_for_like_recommendation);
+
+    /** @var RecommenderManager $recommender_manager */
+    $recommender_manager = $this->get('recommendermanager');
 
     /*
      * This part of the Recommender Controller is currently modified due to an online
@@ -132,7 +135,6 @@ class RecommenderController extends Controller
      */
     if ($is_test_environment && $user != null)
     {
-      $recommender_manager = $this->get('recommendermanager');
       $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmOne($user, $flavor);
       $programs_count = count($all_programs);
       $programs = array_slice($all_programs, $offset, $limit);
@@ -150,8 +152,6 @@ class RecommenderController extends Controller
         $em->persist($user_test_group);
         $em->flush();
       }
-
-      $recommender_manager = $this->get('recommendermanager');
 
       // Depending on the user's test group different algorithms are presented.
       switch ($user_test_group->getGroupNumber())
@@ -176,7 +176,6 @@ class RecommenderController extends Controller
     // Recommendations for guest user (or logged in users who receive zero recommendations)
     if (($user == null) || ($programs_count == 0))
     {
-      $recommender_manager = $this->get('recommendermanager');
       $all_programs = $recommender_manager->recommendHomepageProgramsForGuests($flavor);
 
       $programs_count = count($all_programs);

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\UserLikeSimilarityRelation;
 use Doctrine\ORM\EntityRepository;
 
 
@@ -28,7 +29,7 @@ class UserLikeSimilarityRelationRepository extends EntityRepository
   /**
    * @param User $user
    *
-   * @return mixed
+   * @return UserLikeSimilarityRelation[]
    */
   public function getRelationsOfSimilarUsers(User $user)
   {
