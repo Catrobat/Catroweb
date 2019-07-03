@@ -1291,7 +1291,7 @@ else
       // track the search input
       // the input button
       let searchButton = TrackingObjectFactory.createObj({
-        'BaseSelector': 'nav button.btn-search.catro-search-button',
+        'BaseSelector': 'nav button#btn-search-header',
         'Category'    : 'engagement',
         'Action'      : 'search',
         'Label'       : function (e) { return e.previousElementSibling.value },

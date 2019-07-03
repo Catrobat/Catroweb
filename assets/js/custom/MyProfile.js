@@ -374,12 +374,6 @@ let MyProfile = function (profile_url,
             
             case statusCode_OK:
               $('#avatar-img').attr('src', data.image_base64)
-              $('#custom-avatar').find('div').first().css('background-image', 'url(' + data.image_base64 + ')')
-              $('.img-avatar').css({
-                'background-image': 'url(' + data.image_base64 + ')',
-                'background-size' : 'cover',
-                'outline'         : '1px solid #FFF'
-              })
               break
             
             case statusCode_UPLOAD_EXCEEDING_FILESIZE:

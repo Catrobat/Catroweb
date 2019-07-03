@@ -991,29 +991,18 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       Assert::assertTrue(false, "Couldn't find avatar in #avatar-img");
     }
     $source = trim($source, '"');
-    $pre_style_header = $this->getSession()->getPage()->find('css', '#menu .img-avatar');
-    $styleHeader = 0;
-    if (!is_null($pre_style_header))
-    {
-      $styleHeader = $pre_style_header->getAttribute('style');
-    }
-
-    $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
-    trim($sourceHeader, '"');
 
     switch ($name)
     {
       case 'logo.png':
         $logoUrl = 'data:image/png;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'logo.png'));
-        //$isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
-        $isSame = ($source == $logoUrl);
+        $isSame = ($source === $logoUrl);
         $not == 'not' ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
         break;
 
       case 'fail.tif':
         $failUrl = 'data:image/tiff;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'fail.tif'));
-        //$isSame = (($source == $failUrl) && ($sourceHeader == $failUrl));
-        $isSame = ($source == $failUrl);
+        $isSame = ($source === $failUrl);
         $not == 'not' ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
         break;
 
@@ -1090,11 +1079,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $button = $page->find("css", "#btn-login");
         break;
       case "logout":
-        $url = $this->getSession()->getCurrentUrl();
-        if (strpos($url, 'profile') != false)
-        {
-          $page->find("css", ".show-nav-dropdown")->click();
-        }
         $button = $page->find("css", "#btn-logout");
         break;
       case "profile":
@@ -2124,10 +2108,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iLogout()
   {
-    $this->getSession()->getPage()->find("css", ".btn show-nav-dropdown")->click();
     $this->assertElementOnPage(".img-author-big");
     $this->getSession()->getPage()->find("css", ".img-author-big")->click();
-
   }
 
   /**
@@ -2409,7 +2391,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     $this->iClick('.search-icon-header');
     $this->fillField('search-input-header', $arg1);
-    $this->iClick('.catro-search-button');
+    $this->iClick('#btn-search-header');
   }
 
   /**

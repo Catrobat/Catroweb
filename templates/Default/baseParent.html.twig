@@ -54,23 +54,6 @@
   <div id="app-version" style="display:none">{{ getenv('APP_VERSION') }}</div>
 
   <script>
-    let search_input = $('.input-search')
-
-    search_input.tooltip({
-      trigger  : 'manual',
-      placement: 'bottom'
-    })
-
-    search_input
-    .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
-    .addClass('tooltip-danger')
-
-    search_input.on('shown.bs.tooltip', function () {
-      setTimeout(function () {
-        search_input.tooltip('hide')
-      }, 1000)
-    })
-
     function scrollToHash() {
       if (window.location.hash && $(window.location.hash).offset()) {
         window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
