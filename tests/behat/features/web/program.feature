@@ -142,12 +142,10 @@ Feature: As a visitor I want to see a program page
     Then the link of "download" should open "download"
 
   Scenario: I want to download a program from the app with the correct language version
-    Given I am browsing with my pocketcode app
     And I am on "/pocketcode/program/2"
     Then the link of "download" should open "download"
 
   Scenario: I want to download a program from the app with an an old language version
-    Given I am browsing with my pocketcode app
     And I download "/pocketcode/download/1.catrobat"
 
   Scenario: Increasing download counter after apk download
