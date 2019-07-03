@@ -51,7 +51,6 @@ class ProgramController extends Controller
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
-   * @throws \Geocoder\Exception\Exception
    */
   public function programRemixGraphAction(Request $request, $id)
   {

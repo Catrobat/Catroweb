@@ -570,7 +570,6 @@ services:
     arguments:
       - "@programmanager"
       - "@doctrine.orm.entity_manager"
-      - "@bazinga_geocoder.geocoder"
       - "@logger"
       - "@security.token_storage"
     tags:

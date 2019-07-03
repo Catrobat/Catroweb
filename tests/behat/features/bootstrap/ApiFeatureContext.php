@@ -1554,7 +1554,7 @@ class ApiFeatureContext extends BaseContext
 
   // @formatter:off
   /**
-   * @Then /^the program download statistic should have a download timestamp, an anonimous user and the following statistics:$/
+   * @Then /^the program download statistic should have a download timestamp, an anonymous user and the following statistics:$/
    * @param TableNode $table
    *
    * @throws Exception
@@ -1567,7 +1567,15 @@ class ApiFeatureContext extends BaseContext
     {
       $ip = $statistics[$i]['ip'];
       $country_code = $statistics[$i]['country_code'];
+      if ($country_code === "NULL")
+      {
+        $country_code = null;
+      }
       $country_name = $statistics[$i]['country_name'];
+      if ($country_name === "NULL")
+      {
+        $country_name = null;
+      }
       $program_id = $statistics[$i]['program_id'];
 
       /**
