@@ -2,23 +2,30 @@
 
 namespace App\Catrobat\Services;
 
-use App\Entity\User;
-use App\Entity\UserManager;
 use App\Catrobat\Requests\CreateOAuthUserRequest;
 use App\Catrobat\StatusCode;
+use App\Entity\ProgramManager;
+use App\Entity\User;
+use App\Entity\UserManager;
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Exception;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
+use Facebook\GraphNodes\GraphNode;
 use Google_Client;
+use Google_Service_Plus;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 /**
@@ -32,7 +39,7 @@ class OAuthService
    */
   private $container;
   /**
-   * @var
+   * @var Facebook
    */
   private $facebook;
 
@@ -50,7 +57,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function isOAuthUser(Request $request)
   {
@@ -90,7 +97,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function checkEMailAvailable(Request $request)
   {
@@ -122,7 +129,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function checkUserNameAvailable(Request $request)
   {
@@ -156,7 +163,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function checkFacebookServerTokenAvailable(Request $request)
   {
@@ -191,7 +198,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function exchangeFacebookTokenAction(Request $request)
   {
@@ -253,7 +260,7 @@ class OAuthService
     {
       return new Response(
         "Graph API returned an error during token exchange for 'GET', '/oauth/access_token'", 401);
-    } catch (\Exception $exception)
+    } catch (Exception $exception)
     {
       return new Response(
         "Error during token exchange for 'GET', '/oauth/access_token' with exception" . $exception, 401);
@@ -323,7 +330,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function loginWithFacebookAction(Request $request)
   {
@@ -372,7 +379,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function getFacebookUserProfileInfo(Request $request)
   {
@@ -472,7 +479,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function isFacebookServerAccessTokenValid(Request $request)
   {
@@ -588,7 +595,7 @@ class OAuthService
   /**
    * @param $token_to_check
    *
-   * @return \Facebook\GraphNodes\GraphNode
+   * @return GraphNode
    * @throws FacebookSDKException
    */
   private function checkFacebookServerAccessTokenValidity($token_to_check)
@@ -650,7 +657,7 @@ class OAuthService
    * @param $facebookUsername
    * @param $locale
    *
-   * @throws \Exception
+   * @throws Exception
    */
   private function connectFacebookUserToExistingUserAccount($userManager, $request, &$retArray, $user, $facebookId, $facebookUsername, $locale)
   {
@@ -689,7 +696,8 @@ class OAuthService
    * @param      $facebookEmail
    * @param      $locale
    * @param null $access_token
-   * @throws \Exception
+   *
+   * @throws Exception
    */
   private function registerFacebookUser($request, $userManager, &$retArray, $facebookId, $facebookUsername, $facebookEmail, $locale, $access_token = null)
   {
@@ -742,7 +750,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function checkGoogleServerTokenAvailable(Request $request)
   {
@@ -777,7 +785,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse|Response
-   * @throws \Exception
+   * @throws Exception
    */
   public function exchangeGoogleCodeAction(Request $request)
   {
@@ -961,7 +969,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function loginWithGoogleAction(Request $request)
   {
@@ -1010,7 +1018,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function getGoogleUserProfileInfo(Request $request)
   {
@@ -1031,7 +1039,7 @@ class OAuthService
       $this->refreshGoogleAccessToken($google_user);
 
       $client = $this->getAuthenticatedGoogleClientForGPlusUser($google_user);
-      $plus = new \Google_Service_Plus($client);
+      $plus = new Google_Service_Plus($client);
       $person = $plus->people->get($google_id);
 
       $retArray['ID'] = $person->getId();
@@ -1083,7 +1091,8 @@ class OAuthService
    * @param $googleId
    * @param $googleUsername
    * @param $locale
-   * @throws \Exception
+   *
+   * @throws Exception
    */
   private function connectGoogleUserToExistingUserAccount($userManager, $request, &$retArray, $user, $googleId, $googleUsername, $locale)
   {
@@ -1113,28 +1122,27 @@ class OAuthService
   }
 
   /**
-   * @param      $request
-   * @param      $userManager
-   * @param      $retArray
-   * @param      $googleId
-   * @param      $googleUsername
-   * @param      $googleEmail
-   * @param      $locale
-   * @param null $access_token
-   * @param null $refresh_token
-   * @param null $id_token
-   * @throws \Exception
+   * @param Request     $request
+   * @param UserManager $userManager
+   * @param array       $retArray
+   * @param string      $googleId
+   * @param string      $googleUsername
+   * @param string      $googleEmail
+   * @param string      $locale
+   * @param string|null $access_token
+   * @param string|null $refresh_token
+   * @param string|null $id_token
+   *
+   * @throws Exception
    */
-  private function registerGoogleUser($request, $userManager, &$retArray, $googleId, $googleUsername, $googleEmail, $locale, $access_token = null, $refresh_token = null, $id_token = null)
+  private function registerGoogleUser($request, $userManager, &$retArray, $googleId, $googleUsername, $googleEmail,
+                                      $locale, $access_token = null, $refresh_token = null, $id_token = null)
   {
-    /**
-     * @var $userManager UserManager
-     * @var $user        User
-     */
     $violations = $this->validateOAuthUser($request, $retArray);
     $retArray['violations'] = count($violations);
     if (count($violations) == 0)
     {
+      /** @var User $user */
       $user = $userManager->createUser();
       $user->setGplusUid($googleId);
       $user->setUsername($googleUsername);
@@ -1164,7 +1172,7 @@ class OAuthService
   /**
    * @param $user
    *
-   * @throws \Exception
+   * @throws Exception
    */
   private function refreshGoogleAccessToken($user)
   {
@@ -1262,7 +1270,7 @@ class OAuthService
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function loginWithTokenAndRedirectAction(Request $request)
   {
@@ -1346,12 +1354,12 @@ class OAuthService
    * @param $retArray
    *
    * @return mixed
-   * @throws \Exception
+   * @throws Exception
    */
   private function validateOAuthUser($request, &$retArray)
   {
     /**
-     * @var $validator Validator
+     * @var $validator ValidatorInterface
      */
     $validator = $this->container->get("validator");
     $create_request = new CreateOAuthUserRequest($request);
@@ -1368,7 +1376,7 @@ class OAuthService
 
   /**
    * @return JsonResponse
-   * @throws \Exception
+   * @throws Exception
    */
   public function deleteOAuthTestUserAccounts()
   {
@@ -1466,21 +1474,23 @@ class OAuthService
   /**
    * @param $user
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws Exception
    */
   private function deleteUser($user)
   {
     /**
-     * @var $userManager UserManager
-     * @var $user        User
-     * @var $em          EntityManager
+     * @var $user_manager    UserManager
+     * @var $user            User
+     * @var $program_manager ProgramManager
+     * @var $em              EntityManager
      */
-    $userManager = $this->container->get('usermanager');
+    $user_manager = $this->container->get('usermanager');
     $program_manager = $this->container->get('programmanager');
     $em = $this->container->get('doctrine.orm.entity_manager');
 
-    $user_programms = $program_manager->getUserPrograms($user->getId());
+    $user_programms = $program_manager->getUserPrograms($user->getId(), true);
 
     foreach ($user_programms as $user_program)
     {
@@ -1488,7 +1498,7 @@ class OAuthService
       $em->flush();
     }
 
-    $userManager->deleteUser($user);
+    $user_manager->deleteUser($user);
   }
 
   /**
@@ -1496,7 +1506,7 @@ class OAuthService
    * @param array $parameters
    *
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   private function trans($message, $parameters = [])
   {

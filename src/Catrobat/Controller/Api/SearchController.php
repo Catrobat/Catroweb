@@ -2,11 +2,11 @@
 
 namespace App\Catrobat\Controller\Api;
 
-use App\Entity\Program;
+use App\Catrobat\Responses\ProgramListResponse;
+use App\Entity\ProgramManager;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Catrobat\Responses\ProgramListResponse;
 
 
 /**
@@ -37,6 +37,7 @@ class SearchController extends Controller
    */
   public function searchProgramsAction(Request $request)
   {
+    /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
     $query = $request->query->get('q');
 
@@ -50,7 +51,7 @@ class SearchController extends Controller
 
     $programs = $program_manager->search($query, $limit, $offset);
     // we can't count the results since we apply limit and offset.
-    // so we indeed have to use a seperate query that ignores
+    // so we indeed have to use a separate query that ignores
     // limit and offset to get the number of results.
     $numbOfTotalProjects = $program_manager->searchCount($query);
 
@@ -68,6 +69,7 @@ class SearchController extends Controller
    */
   public function tagSearchProgramsAction(Request $request)
   {
+    /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
     $query = $request->query->get('q');
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
@@ -90,6 +92,7 @@ class SearchController extends Controller
    */
   public function extensionSearchProgramsAction(Request $request)
   {
+    /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
     $query = $request->query->get('q');
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
