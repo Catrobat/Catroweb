@@ -2,27 +2,30 @@
 
 namespace tests\PhpSpec\spec\App\Entity;
 
-use App\Entity\Program;
-use App\Repository\ProgramLikeRepository;
-use App\Repository\ProgramRepository;
-use App\Repository\TagRepository;
-use App\Entity\User;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
+use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Entity\GameJam;
+use App\Entity\Program;
+use App\Entity\User;
+use App\Repository\ProgramLikeRepository;
+use App\Repository\ProgramRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use ImagickException;
 use PhpSpec\ObjectBehavior;
+use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
-use App\Entity\GameJam;
 use Psr\Log\LoggerInterface;
-use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProgramManagerSpec
@@ -32,30 +35,32 @@ class ProgramManagerSpec extends ObjectBehavior
 {
 
   /**
-   * @param CatrobatFileExtractor|\PhpSpec\Wrapper\Collaborator    $file_extractor
-   * @param ProgramFileRepository|\PhpSpec\Wrapper\Collaborator    $file_repository
-   * @param ScreenshotRepository|\PhpSpec\Wrapper\Collaborator     $screenshot_repository
-   * @param EntityManager|\PhpSpec\Wrapper\Collaborator            $entity_manager
-   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator        $program_repository
-   * @param \PhpSpec\Wrapper\Collaborator|EventDispatcherInterface $event_dispatcher
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator        $request
-   * @param \PhpSpec\Wrapper\Collaborator|File                     $file
-   * @param User|\PhpSpec\Wrapper\Collaborator                     $user
-   * @param ExtractedCatrobatFile|\PhpSpec\Wrapper\Collaborator    $extracted_file
-   * @param Program|\PhpSpec\Wrapper\Collaborator                  $inserted_program
-   * @param TagRepository|\PhpSpec\Wrapper\Collaborator            $tag_repository
-   * @param ProgramLikeRepository|\PhpSpec\Wrapper\Collaborator    $program_like_repository
+   * @param CatrobatFileExtractor|Collaborator    $file_extractor
+   * @param ProgramFileRepository|Collaborator    $file_repository
+   * @param ScreenshotRepository|Collaborator     $screenshot_repository
+   * @param EntityManager|Collaborator            $entity_manager
+   * @param ProgramRepository|Collaborator        $program_repository
+   * @param Collaborator|EventDispatcherInterface $event_dispatcher
+   * @param AddProgramRequest|Collaborator        $request
+   * @param Collaborator|File                     $file
+   * @param User|Collaborator                     $user
+   * @param ExtractedCatrobatFile|Collaborator    $extracted_file
+   * @param Program|Collaborator                  $inserted_program
+   * @param TagRepository|Collaborator            $tag_repository
+   * @param ProgramLikeRepository|Collaborator    $program_like_repository
+   * @param AppRequest|Collaborator               $app_request
    */
   public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                       ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
                       ProgramRepository $program_repository, EventDispatcherInterface $event_dispatcher,
                       AddProgramRequest $request, File $file, User $user, ExtractedCatrobatFile $extracted_file,
                       Program $inserted_program, TagRepository $tag_repository,
-                      ProgramLikeRepository $program_like_repository, LoggerInterface $logger)
+                      ProgramLikeRepository $program_like_repository, LoggerInterface $logger,
+                      AppRequest $app_request)
   {
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository,
       $entity_manager, $program_repository, $tag_repository, $program_like_repository,
-      $event_dispatcher, $logger);
+      $event_dispatcher, $logger, $app_request);
     $request->getProgramfile()->willReturn($file);
     $request->getUser()->willReturn($user);
     $request->getIp()->willReturn('127.0.0.1');
@@ -76,14 +81,16 @@ class ProgramManagerSpec extends ObjectBehavior
   }
 
   /**
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator $request
-   * @param EntityManager|\PhpSpec\Wrapper\Collaborator     $entity_manager
-   * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator     $metadata
+   * @param AddProgramRequest|Collaborator $request
+   * @param EntityManager|Collaborator     $entity_manager
+   * @param ClassMetadata|Collaborator     $metadata
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function it_returns_the_program_after_successfully_adding_a_program(AddProgramRequest $request, EntityManager $entity_manager, ClassMetadata $metadata)
+  public function it_returns_the_program_after_successfully_adding_a_program(
+    AddProgramRequest $request, EntityManager $entity_manager, ClassMetadata $metadata
+  )
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -94,16 +101,19 @@ class ProgramManagerSpec extends ObjectBehavior
   }
 
   /**
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator     $request
-   * @param EntityManager|\PhpSpec\Wrapper\Collaborator         $entity_manager
-   * @param ExtractedCatrobatFile|\PhpSpec\Wrapper\Collaborator $extracted_file
-   * @param ProgramFileRepository|\PhpSpec\Wrapper\Collaborator $file_repository
-   * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator         $metadata
+   * @param AddProgramRequest|Collaborator     $request
+   * @param EntityManager|Collaborator         $entity_manager
+   * @param ExtractedCatrobatFile|Collaborator $extracted_file
+   * @param ProgramFileRepository|Collaborator $file_repository
+   * @param ClassMetadata|Collaborator         $metadata
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function it_saves_the_program_to_the_file_repository_if_the_upload_succeeded(AddProgramRequest $request, EntityManager $entity_manager, ExtractedCatrobatFile $extracted_file, ProgramFileRepository $file_repository, ClassMetadata $metadata)
+  public function it_saves_the_program_to_the_file_repository_if_the_upload_succeeded(
+    AddProgramRequest $request, EntityManager $entity_manager, ExtractedCatrobatFile $extracted_file,
+    ProgramFileRepository $file_repository, ClassMetadata $metadata
+  )
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -122,17 +132,20 @@ class ProgramManagerSpec extends ObjectBehavior
   }
 
   /**
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator     $request
-   * @param EntityManager|\PhpSpec\Wrapper\Collaborator         $entity_manager
-   * @param ExtractedCatrobatFile|\PhpSpec\Wrapper\Collaborator $extracted_file
-   * @param ScreenshotRepository|\PhpSpec\Wrapper\Collaborator  $screenshot_repository
-   * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator         $metadata
+   * @param AddProgramRequest|Collaborator     $request
+   * @param EntityManager|Collaborator         $entity_manager
+   * @param ExtractedCatrobatFile|Collaborator $extracted_file
+   * @param ScreenshotRepository|Collaborator  $screenshot_repository
+   * @param ClassMetadata|Collaborator         $metadata
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \ImagickException
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws ImagickException
    */
-  public function it_saves_the_screenshots_to_the_screenshot_repository(AddProgramRequest $request, EntityManager $entity_manager, ExtractedCatrobatFile $extracted_file, ScreenshotRepository $screenshot_repository, ClassMetadata $metadata)
+  public function it_saves_the_screenshots_to_the_screenshot_repository(
+    AddProgramRequest $request, EntityManager $entity_manager, ExtractedCatrobatFile $extracted_file,
+    ScreenshotRepository $screenshot_repository, ClassMetadata $metadata
+  )
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -159,15 +172,18 @@ class ProgramManagerSpec extends ObjectBehavior
   }
 
   /**
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator        $request
-   * @param \PhpSpec\Wrapper\Collaborator|EventDispatcherInterface $event_dispatcher
-   * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator            $metadata
-   * @param EntityManager|\PhpSpec\Wrapper\Collaborator            $entity_manager
+   * @param AddProgramRequest|Collaborator        $request
+   * @param Collaborator|EventDispatcherInterface $event_dispatcher
+   * @param ClassMetadata|Collaborator            $metadata
+   * @param EntityManager|Collaborator            $entity_manager
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function it_fires_an_event_before_inserting_a_program(AddProgramRequest $request, EventDispatcherInterface $event_dispatcher, ClassMetadata $metadata, EntityManager $entity_manager)
+  public function it_fires_an_event_before_inserting_a_program(
+    AddProgramRequest $request, EventDispatcherInterface $event_dispatcher,
+    ClassMetadata $metadata, EntityManager $entity_manager
+  )
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -181,17 +197,23 @@ class ProgramManagerSpec extends ObjectBehavior
     $entity_manager->refresh(Argument::type('\App\Entity\Program'))->shouldBecalled();
 
     $this->addProgram($request)->shouldHaveType('App\Entity\Program');
-    $event_dispatcher->dispatch('catrobat.program.before', Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent'))->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch(
+      'catrobat.program.before', Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent')
+    )->shouldHaveBeenCalled();
   }
 
   /**
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator        $request
-   * @param \PhpSpec\Wrapper\Collaborator|EventDispatcherInterface $event_dispatcher
+   * @param AddProgramRequest|Collaborator        $request
+   * @param Collaborator|EventDispatcherInterface $event_dispatcher
    */
-  public function it_fires_an_event_when_the_program_is_invalid(AddProgramRequest $request, EventDispatcherInterface $event_dispatcher)
+  public function it_fires_an_event_when_the_program_is_invalid(
+    AddProgramRequest $request, EventDispatcherInterface $event_dispatcher
+  )
   {
     $validation_exception = new InvalidCatrobatFileException('500', 500);
-    $event_dispatcher->dispatch('catrobat.program.before', Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent'))
+    $event_dispatcher->dispatch(
+      'catrobat.program.before', Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent')
+    )
       ->willThrow($validation_exception)
       ->shouldBeCalled();
 
@@ -199,17 +221,19 @@ class ProgramManagerSpec extends ObjectBehavior
       $request,
     ]);
 
-    $event_dispatcher->dispatch('catrobat.program.invalid.upload', Argument::type('App\Catrobat\Events\InvalidProgramUploadedEvent'))->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch(
+      'catrobat.program.invalid.upload', Argument::type('App\Catrobat\Events\InvalidProgramUploadedEvent')
+    )->shouldHaveBeenCalled();
   }
 
   /**
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator        $request
-   * @param \PhpSpec\Wrapper\Collaborator|EventDispatcherInterface $event_dispatcher
-   * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator            $metadata
-   * @param EntityManager|\PhpSpec\Wrapper\Collaborator            $entity_manager
+   * @param AddProgramRequest|Collaborator        $request
+   * @param Collaborator|EventDispatcherInterface $event_dispatcher
+   * @param ClassMetadata|Collaborator            $metadata
+   * @param EntityManager|Collaborator            $entity_manager
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function it_fires_an_event_when_the_program_is_stored(AddProgramRequest $request, EventDispatcherInterface $event_dispatcher, ClassMetadata $metadata, EntityManager $entity_manager)
   {
@@ -225,18 +249,22 @@ class ProgramManagerSpec extends ObjectBehavior
     $entity_manager->refresh(Argument::type('\App\Entity\Program'))->shouldBecalled();
 
     $this->addProgram($request)->shouldHaveType('App\Entity\Program');
-    $event_dispatcher->dispatch('catrobat.program.successful.upload', Argument::type('App\Catrobat\Events\ProgramInsertEvent'))->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch(
+      'catrobat.program.successful.upload', Argument::type('App\Catrobat\Events\ProgramInsertEvent')
+    )->shouldHaveBeenCalled();
   }
 
   /**
-   * @param AddProgramRequest|\PhpSpec\Wrapper\Collaborator $request
-   * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator     $metadata
-   * @param EntityManager|\PhpSpec\Wrapper\Collaborator     $entity_manager
+   * @param AddProgramRequest|Collaborator $request
+   * @param ClassMetadata|Collaborator     $metadata
+   * @param EntityManager|Collaborator     $entity_manager
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function it_marks_the_game_as_gamejam_submission_if_a_jam_is_provided(AddProgramRequest $request, ClassMetadata $metadata, EntityManager $entity_manager)
+  public function it_marks_the_game_as_gamejam_submission_if_a_jam_is_provided(
+    AddProgramRequest $request, ClassMetadata $metadata, EntityManager $entity_manager
+  )
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);

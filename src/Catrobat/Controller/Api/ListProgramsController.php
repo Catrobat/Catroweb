@@ -29,7 +29,12 @@ class ListProgramsController extends Controller
    */
   public function listProgramsAction(Request $request, $flavor)
   {
-    return $this->listSortedPrograms($request, 'recent', true, $flavor);
+    if ($flavor == 'pocketcode')
+    {
+      $flavor = null;
+    }
+
+    return $this->listSortedPrograms($request, 'recent', true, false, $flavor);
   }
 
 
@@ -157,27 +162,27 @@ class ListProgramsController extends Controller
    * @param Request $request
    * @param         $sortBy
    * @param bool    $details
+   * @param bool    $useRequestFlavor
    * @param string  $flavor
    *
    * @return ProgramListResponse
    * @throws NonUniqueResultException
    */
-  private function listSortedPrograms(Request $request, $sortBy, $details = true, $flavor = 'pocketcode')
+  private function listSortedPrograms(Request $request, $sortBy, $details = true, $useRequestFlavor = true, $flavor = null)
   {
+    if ($useRequestFlavor === true)
+    {
+      $flavor = $request->attributes->get('flavor');
+    }
+
     /**
      * @var ProgramManager $program_manager
      */
-
     $program_manager = $this->get('programmanager');
+
     $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));
     $user_id = intval($request->query->get('user_id', 0));
-
-    // setting flavor to null to get all results
-    if ($flavor == 'pocketcode')
-    {
-      $flavor = null;
-    }
 
     if ($sortBy == 'downloads')
     {
@@ -189,7 +194,7 @@ class ListProgramsController extends Controller
         $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getMostDownloadedPrograms(
-          'pocketcode', $limit - $count, $new_offset
+          '!' . $flavor, $limit - $count, $new_offset
         ));
       }
     }
@@ -203,7 +208,7 @@ class ListProgramsController extends Controller
         $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getMostViewedPrograms(
-          'pocketcode', $limit - $count, $new_offset
+          '!' . $flavor, $limit - $count, $new_offset
         ));
       }
     }
@@ -221,7 +226,7 @@ class ListProgramsController extends Controller
         $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getRandomPrograms(
-          'pocketcode', $limit - $count, $new_offset
+          '!' . $flavor, $limit - $count, $new_offset
         ));
       }
     }
@@ -235,7 +240,7 @@ class ListProgramsController extends Controller
         $flavor_count = $program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getRecentPrograms(
-          'pocketcode', $limit - $count, $new_offset
+          '!' . $flavor, $limit - $count, $new_offset
         ));
       }
     }
@@ -250,7 +255,7 @@ class ListProgramsController extends Controller
 
       if ($flavor)
       {
-        $numbOfTotalProjects += $program_manager->getTotalPrograms('pocketcode');
+        $numbOfTotalProjects += $program_manager->getTotalPrograms('!' . $flavor);
       }
     }
 

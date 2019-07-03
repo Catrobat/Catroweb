@@ -185,7 +185,6 @@ class DefaultController extends Controller
    * @return Response
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Geocoder\Exception\Exception
    */
   public function makeClickStatisticAction(Request $request)
   {

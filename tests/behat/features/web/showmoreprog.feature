@@ -55,10 +55,12 @@ Feature: Show more programs button behaviour
       | "#mostViewed .button-show-more"     |
       | "#random .button-show-more"         |
 
-  Scenario Outline: Buttons should disappear after clicking them in desktop format
+  Scenario Outline: Buttons should disappear after clicking them three times (on small phones)
     Given I am on homepage
     Then I wait 300 milliseconds
     When I click <button>
+    And I click <button>
+    And I click <button>
     Then the element <button> should not be visible
 
     Examples:
@@ -71,9 +73,13 @@ Feature: Show more programs button behaviour
   Scenario Outline: Buttons should load more programs
   The number, of how many programs the user should see, should equal the number of programs in the database
   and should be < 37. 36 is the current max number of programs visible after the user clicks the button once.
+  Because we test mobile, we press the button three times.
     Given I am on homepage
+    And I wait 100 milliseconds
+    Then I should see 6 <programs>
     When I click <button>
-    And I wait for a second
+    And I click <button>
+    And I click <button>
     And I wait for a second
     Then I should see 23 <programs>
 
@@ -89,7 +95,7 @@ Feature: Show more programs button behaviour
     And the random program section is empty
     Then I should not see "oldestProg"
     When I click "#newest .button-show-more"
-    And I wait for a second
+    When I click "#newest .button-show-more"
     When I click "#newest .button-show-more"
     And I wait for a second
     Then I should see "oldestProg"

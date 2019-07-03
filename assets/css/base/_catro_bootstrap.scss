@@ -10,151 +10,9 @@ html, body {
   height: 50%;
 }
 
-.right-inline {
-  display: inline-flex;
-  align-items: center;
-  margin-left: auto;
-  padding-left: 10px;
-}
-
-.navbar-small {
-  display: inherit;
-}
-
-.navbar-big {
-  display: none;
-}
-
-//################## Header ####################
-
-header {
-  padding: 0;
-
-  .dropdown-menu {
-    background-color: $nav-dropdown-color;
-  }
-
-  .catro-search-button {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.1);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-left: none;
-
-    &:focus, &:active, &:hover, &:active:focus {
-      background-color: rgba(0, 0, 0, 0.1) !important;
-      border: 1px rgba(0, 0, 0, 0.2) solid;
-      border-left: none;
-    }
-  }
-
-  .search-input-header {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.1);
-    color: white;
-
-    &::placeholder {
-      color: white !important;
-    }
-
-    &:focus {
-      background-color: rgba(0, 0, 0, 0.1);
-      border: 1px rgba(0, 0, 0, 0.2) solid;
-      color: white;
-
-      & + .catro-search-button {
-        background-color: rgba(0, 0, 0, 0.1);
-        border-color: rgba(0, 0, 0, 0.2);
-      }
-    }
-  }
-
-  #bs-navbar-collapse {
-    max-height: none;
-
-    .navbar-small {
-      padding-top: 15px;
-      padding-bottom: 15px;
-    }
-
-    .navbar-nav {
-      margin: 0;
-
-      .navbar-form {
-        margin: 0;
-      }
-
-      li {
-        display: flex;
-
-        a {
-          display: flex;
-          visibility: visible;
-          align-items: center;
-
-          h4 {
-            margin-left: auto;
-          }
-        }
-      }
-    }
-  }
-}
-
-.navbar-brand {
-  padding-top: 0;
-  padding-bottom: 0;
-  margin-right: 0;
-}
-
 // can/should be used for uniform width of page containers
 .content {
   height: 100%;
-}
-
-@media screen and (min-width: map-get($grid-breakpoints, sm)) {
-  .navbar-small {
-    display: none;
-  }
-
-  .navbar-big {
-    display: inherit;
-  }
-
-  #bs-navbar-collapse {
-    .navbar-nav {
-      align-items: center;
-      display: flex;
-      padding-top: 25px;
-
-      li {
-        padding: 5px;
-
-        a {
-          padding-top: 0;
-          padding-bottom: 0;
-        }
-
-        span {
-          margin-right: 10px;
-        }
-
-        ul {
-          padding: 5px;
-          min-width: 210px;
-
-          a {
-            padding-top: 0;
-            padding-bottom: 0;
-          }
-
-          span {
-            margin-right: 10px;
-          }
-        }
-      }
-    }
-  }
 }
 
 @mixin tooltip-border-styles($borderColor) {
@@ -500,12 +358,6 @@ header {
 .help-download-container {
   min-width: 300px;
   flex: 1;
-}
-
-.search-icon-header {
-  color: $navbar-dark-color !important;
-  text-decoration: none !important;
-  font-size: 2.0em;
 }
 
 .bg-catrobat {

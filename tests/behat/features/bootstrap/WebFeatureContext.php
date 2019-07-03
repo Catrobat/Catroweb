@@ -1,14 +1,12 @@
 <?php
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\DriverException;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
+use App\Catrobat\Services\ApkRepository;
+use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\AchievementNotification;
 use App\Entity\CatroNotification;
 use App\Entity\ClickStatistic;
 use App\Entity\CommentNotification;
 use App\Entity\Extension;
-use App\Repository\ExtensionRepository;
 use App\Entity\FeaturedProgram;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
@@ -16,22 +14,30 @@ use App\Entity\MediaPackageFile;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
+use App\Entity\ProgramManager;
 use App\Entity\ProgramRemixRelation;
 use App\Entity\StarterCategory;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\UserComment;
 use App\Entity\UserManager;
-use App\Catrobat\Services\ApkRepository;
-use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Repository\ExtensionRepository;
+use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\DriverException;
+use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
+use Behat\MinkExtension\Context\MinkContext;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use PHPUnit\Framework\Assert;
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Gherkin\Node\TableNode;
-use Behat\Behat\Hook\Scope\AfterStepScope;
-use PHPUnit\Framework\Assert;
 
 
 /**
@@ -48,7 +54,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   private $screenshot_directory;
   /**
-   * @var
+   * @var Client
    */
   private $client;
   /**
@@ -66,14 +72,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    *
    * @param array $screenshot_directory
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($screenshot_directory)
   {
     $this->screenshot_directory = preg_replace('/([^\/]+)$/', '$1/', $screenshot_directory);
     if (!is_dir($this->screenshot_directory))
     {
-      throw new \Exception('No screenshot directory specified!');
+      throw new Exception('No screenshot directory specified!');
     }
     $this->use_real_oauth_javascript_code = false;
     $this->setOauthServiceParameter('0');
@@ -129,7 +135,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function setup()
   {
-    $this->getSession()->resizeWindow(1240, 1024);
+    // 15px = scroll bar width
+    $this->getSession()->resizeWindow(320 + 15, 1024);
   }
 
   /**
@@ -155,20 +162,42 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @BeforeScenario @Mobile
+   * @Given /^I use the user agent "([^"]*)"$/
+   * @param string $user_agent
    */
-  public function resizeWindowMobile()
+  public function iUseTheUserAgent($user_agent)
   {
-    $this->getSession()->resizeWindow(320, 1000);
+    $this->getSession()->setRequestHeader("User-Agent", $user_agent);
+  }
+
+  // @formatter:off
+  /**
+   * @Given /^I use the Catroid app with language version ([0-9]+(\.[0-9]+)?), flavor "([^"]+)", app version "([^"]+)*" and (debug|release) build type$/
+   *
+   * @param $lang_version
+   * @param $flavor
+   * @param $app_version
+   * @param $build_type
+   */
+  // @formatter:on
+  public function iUseTheUserAgentParameterized($lang_version, $flavor, $app_version, $build_type)
+  {
+    // see org.catrobat.catroid.ui.WebViewActivity
+    $platform = "Android";
+    $user_agent = "Catrobat/" . $lang_version . " " . $flavor . "/" . $app_version . " Platform/" . $platform .
+      " BuildType/" . $build_type;
+    $this->getSession()->setRequestHeader("User-Agent", $user_agent);
   }
 
   /**
-   * @BeforeScenario @Tablet
+   * @Given /^I use a (debug|release) build of the Catroid app$/
+   * @param $build_type
    */
-  public function resizeWindowTablet()
+  public function iUseASpecificBuildTypeOfCatroidApp($build_type)
   {
-    $this->getSession()->resizeWindow(768, 1000);
+    $this->iUseTheUserAgentParameterized("0.998", "PocketCode", "0.9.60", $build_type);
   }
+
 
   /**
    * @When /^I wait (\d+) milliseconds$/
@@ -180,14 +209,34 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^I should see (\d+) "([^"]*)"$/
-   * @param $arg1
-   * @param $arg2
+   * @When /^I open the menu$/
    */
-  public function iShouldSeeNumberOfElements($arg1, $arg2)
+  public function iOpenTheMenu()
   {
-    $programs = $this->getSession()->getPage()->findAll('css', $arg2);
-    Assert::assertEquals($arg1, count($programs));
+    $sidebar_open = $this->getSession()->getPage()->find('css', '#sidebar')->isVisible();
+    if (!$sidebar_open)
+    {
+      $this->getSession()->getPage()->find('css', '#btn-sidebar-toggle')->click();
+    }
+  }
+
+  /**
+   * @Then /^I should see (\d+) "([^"]*)"$/
+   * @param $element_count
+   * @param $css_selector
+   */
+  public function iShouldSeeNumberOfElements($element_count, $css_selector)
+  {
+    $elements = $this->getSession()->getPage()->findAll('css', $css_selector);
+    $count = 0;
+    foreach ($elements as $element)
+    {
+      if ($element->isVisible())
+      {
+        $count++;
+      }
+    }
+    Assert::assertEquals($element_count, $count);
   }
 
   /**
@@ -209,15 +258,30 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I should see an unavailable node with id "([^"]*)"$/
+   * @param $node_id
+   */
+  public function iShouldSeeAnUnavailableNodeWithId($node_id)
+  {
+    $result = $this->getSession()->
+    evaluateScript('return RemixGraph.getInstance().getNodes().get("' . $node_id . '");');
+
+    Assert::assertTrue(isset($result['id']));
+    Assert::assertEquals($node_id, $result['id']);
+    Assert::assertFalse(isset($result['name']));
+    Assert::assertFalse(isset($result['username']));
+  }
+
+  /**
    * @Then /^I should see an edge from "([^"]*)" to "([^"]*)"$/
    * @param $from_id
    * @param $to_id
    */
   public function iShouldSeeAnEdgeFromTo($from_id, $to_id)
   {
-    $result = $this->getSession()->evaluateScript("
-            return RemixGraph.getInstance().getEdges().get().filter(function (edge) { return edge.from === '" . $from_id . "' && edge.to === '" . $to_id . "'; });
-      ");
+    $result = $this->getSession()->evaluateScript("return RemixGraph.getInstance().getEdges().get().filter(
+        function (edge) { return edge.from === '" . $from_id . "' && edge.to === '" . $to_id . "'; }
+      );");
     Assert::assertCount(1, $result);
     Assert::assertEquals($from_id, $result[0]['from']);
     Assert::assertEquals($to_id, $result[0]['to']);
@@ -226,7 +290,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I should see the featured slider$/
    *
-   * @throws \Behat\Mink\Exception\ExpectationException
+   * @throws ExpectationException
    */
   public function iShouldSeeTheFeaturedSlider()
   {
@@ -254,8 +318,9 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I should see ([^"]*) programs$/
    * @param $arg1
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
-   * @throws \Behat\Mink\Exception\ExpectationException
+   *
+   * @throws ElementNotFoundException
+   * @throws ExpectationException
    */
   public function iShouldSeePrograms($arg1)
   {
@@ -305,7 +370,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @Then /^the selected language should be "([^"]*)"$/
    * @Given /^the selected language is "([^"]*)"$/
    * @param $arg1
-   * @throws \Behat\Mink\Exception\ExpectationException
+   *
+   * @throws ExpectationException
    */
   public function theSelectedLanguageShouldBe($arg1)
   {
@@ -358,7 +424,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @Then /^I should see a( [^"]*)? help image "([^"]*)"$/
    * @param $arg1
    * @param $arg2
-   * @throws \Behat\Mink\Exception\ExpectationException
+   *
+   * @throws ExpectationException
    */
   public function iShouldSeeAHelpImage($arg1, $arg2)
   {
@@ -499,12 +566,16 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are users:$/
    * @param TableNode $table
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreUsers(TableNode $table)
   {
     /**
      * @var $user_manager UserManager
      * @var $user         User
+     * @var $em           EntityManager
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
@@ -561,8 +632,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    *
    * @param TableNode $table
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreCatroNotifications(TableNode $table)
   {
@@ -605,7 +676,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I click on the first "([^"]*)" button$/
    * @param $arg1
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheFirstButton($arg1)
   {
@@ -624,17 +696,18 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    *
    * @param TableNode $table
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function thereArePrograms(TableNode $table)
   {
     /**
-     * @var $program Program
-     * @var $user User
-     * @var $apkrepository ApkRepository
-     * @var $tag Tag
+     * @var $em             EntityManager
+     * @var $program        Program
+     * @var $user           User
+     * @var $apkrepository  ApkRepository
+     * @var $tag            Tag
      * @var $extension_repo ExtensionRepository
-     * @var $extension Extension
+     * @var $extension      Extension
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
@@ -647,16 +720,26 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program = new Program();
       $program->setUser($user);
       $program->setName($programs[$i]['name']);
-      $program->setDescription($programs[$i]['description']);
-      $program->setViews($programs[$i]['views']);
-      $program->setDownloads($programs[$i]['downloads']);
-      $program->setApkDownloads($programs[$i]['apk_downloads']);
-      $program->setApkStatus(isset($programs[$i]['apk_ready']) ? ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) : Program::APK_NONE);
-      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+      $program->setDescription(isset($programs[$i]['description']) ? $programs[$i]['description'] : '');
+      $program->setViews(isset($programs[$i]['views']) ? $programs[$i]['views'] : 0);
+      $program->setDownloads(isset($programs[$i]['downloads']) ? $programs[$i]['downloads'] : 0);
+      $program->setApkDownloads(isset($programs[$i]['apk_downloads']) ? $programs[$i]['apk_downloads'] : 0);
+      $program->setApkStatus(
+        isset($programs[$i]['apk_ready']) ?
+          ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) :
+          Program::APK_NONE
+      );
+      $program->setUploadedAt(
+        isset($programs[$i]['upload time']) ?
+          new DateTime($programs[$i]['upload time'], new DateTimeZone('UTC')) :
+          null
+      );
       $program->setRemixMigratedAt(null);
       $program->setCatrobatVersion(1);
-      $program->setCatrobatVersionName($programs[$i]['version']);
-      $program->setLanguageVersion(isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1);
+      $program->setCatrobatVersionName(isset($programs[$i]['version']) ? $programs[$i]['version'] : '');
+      $program->setLanguageVersion(
+        isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1
+      );
       $program->setUploadIp('127.0.0.1');
       $program->setFilesize(0);
       $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
@@ -665,7 +748,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
       $program->setPrivate(isset($programs[$i]['private']) ? $programs[$i]['private'] : 0);
-      $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
+      $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] == 'true' : false);
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
@@ -708,43 +791,47 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are comments:$/
    * @param TableNode $table
-   * @throws \Exception
+   *
+   * @throws Exception
    */
   public function thereAreComments(TableNode $table)
   {
-    /*
-    * @var $new_comment \App\Entity\UserComment
-    */
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $pm = $this->kernel->getContainer()->get('programmanager');
+    /**
+     * @var $new_comment             UserComment
+     * @var $entity_manager          EntityManager
+     */
+    $entity_manager = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $program_manager = $this->kernel->getContainer()->get('programmanager');
     $comments = $table->getHash();
 
     foreach ($comments as $comment)
     {
       $new_comment = new UserComment();
 
-      $new_comment->setUploadDate(new \DateTime($comment['upload_date'], new \DateTimeZone('UTC')));
-      $new_comment->setProgram($pm->find($comment['program_id']));
+      $new_comment->setUploadDate(new DateTime($comment['upload_date'], new DateTimeZone('UTC')));
+      $new_comment->setProgram($program_manager->find($comment['program_id']));
       $new_comment->setProgramId($comment['program_id']);
       $new_comment->setUserId($comment['user_id']);
       $new_comment->setUsername($comment['user_name']);
       $new_comment->setIsReported(false);
       $new_comment->setText($comment['text']);
-      $em->persist($new_comment);
+      $entity_manager->persist($new_comment);
     }
-    $em->flush();
+    $entity_manager->flush();
   }
 
   /**
    * @Given /^there are likes:$/
    * @param TableNode $table
-   * @throws \Exception
+   *
+   * @throws Exception
    */
   public function thereAreLikes(TableNode $table)
   {
     /**
-     * @var $user User
+     * @var $user    User
      * @var $program Program
+     * @var $em      EntityManager
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $likes = $table->getHash();
@@ -755,7 +842,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program = $this->kernel->getContainer()->get('programrepository')->find($like['program_id']);
 
       $program_like = new ProgramLike($program, $user, $like['type']);
-      $program_like->setCreatedAt(new \DateTime($like['created at'], new \DateTimeZone('UTC')));
+      $program_like->setCreatedAt(new DateTime($like['created at'], new DateTimeZone('UTC')));
 
       $em->persist($program_like);
     }
@@ -765,25 +852,30 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are forward remix relations:$/
    * @param TableNode $table
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreForwardRemixRelations(TableNode $table)
   {
-    /*
-    * @var $em \Doctrine\ORM\EntityManager
-    */
+    /**
+     * @var $em EntityManager
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $relations = $table->getHash();
 
     foreach ($relations as $relation)
     {
       /**
-       * @var $ancestor_program Program
+       * @var $ancestor_program   Program
        * @var $descendant_program Program
        */
       $ancestor_program = $em->getRepository(Program::class)->find($relation['ancestor_id']);
       $descendant_program = $em->getRepository(Program::class)->find($relation['descendant_id']);
 
-      $forward_relation = new ProgramRemixRelation($ancestor_program, $descendant_program, intval($relation['depth']));
+      $forward_relation = new ProgramRemixRelation(
+        $ancestor_program, $descendant_program, intval($relation['depth'])
+      );
       $em->persist($forward_relation);
     }
     $em->flush();
@@ -792,11 +884,15 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are featured programs:$/
    * @param TableNode $table
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreFeaturedPrograms(TableNode $table)
   {
     /**
      * @var $program Program
+     * @var $em      EntityManager
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $relations = $table->getHash();
@@ -831,10 +927,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are tags:$/
    * @param TableNode $table
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreTags(TableNode $table)
   {
     $tags = $table->getHash();
+    /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
     foreach ($tags as $tag)
@@ -853,10 +953,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are extensions:$/
    * @param TableNode $table
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreExtensions(TableNode $table)
   {
     $extensions = $table->getHash();
+    /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
     foreach ($extensions as $extension)
@@ -874,7 +978,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click "([^"]*)"$/
    * @param $arg1
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iClick($arg1)
   {
@@ -962,7 +1067,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @When /^(?:|I )attach the avatar "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/
    * @param $field
    * @param $path
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function attachFileToField($field, $path)
   {
@@ -991,29 +1097,18 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       Assert::assertTrue(false, "Couldn't find avatar in #avatar-img");
     }
     $source = trim($source, '"');
-    $pre_style_header = $this->getSession()->getPage()->find('css', '#menu .img-avatar');
-    $styleHeader = 0;
-    if (!is_null($pre_style_header))
-    {
-      $styleHeader = $pre_style_header->getAttribute('style');
-    }
-
-    $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
-    trim($sourceHeader, '"');
 
     switch ($name)
     {
       case 'logo.png':
         $logoUrl = 'data:image/png;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'logo.png'));
-        //$isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
-        $isSame = ($source == $logoUrl);
+        $isSame = ($source === $logoUrl);
         $not == 'not' ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
         break;
 
       case 'fail.tif':
         $failUrl = 'data:image/tiff;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'fail.tif'));
-        //$isSame = (($source == $failUrl) && ($sourceHeader == $failUrl));
-        $isSame = ($source == $failUrl);
+        $isSame = ($source === $failUrl);
         $not == 'not' ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
         break;
 
@@ -1036,7 +1131,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^the element "([^"]*)" should not exist$/
    * @param $element
-   * @throws \Behat\Mink\Exception\ExpectationException
+   *
+   * @throws ExpectationException
    */
   public function theElementShouldNotExist($element)
   {
@@ -1047,7 +1143,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @Given /^the element "([^"]*)" should exist$/
    * @param $element
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function theElementShouldExist($element)
   {
@@ -1071,7 +1167,9 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iPressEnterInTheSearchBar()
   {
     $this->getSession()->evaluateScript("$('#searchbar').trigger($.Event( 'keypress', { which: 13 } ))");
-    $this->getSession()->wait(5000, '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)');
+    $this->getSession()->wait(5000,
+      '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)'
+    );
   }
 
   /**
@@ -1090,11 +1188,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $button = $page->find("css", "#btn-login");
         break;
       case "logout":
-        $url = $this->getSession()->getCurrentUrl();
-        if (strpos($url, 'profile') != false)
-        {
-          $page->find("css", ".show-nav-dropdown")->click();
-        }
         $button = $page->find("css", "#btn-logout");
         break;
       case "profile":
@@ -1235,7 +1328,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function thereShouldBeProgramsInTheDatabase($arg1)
   {
     /**
-     * @var \App\Entity\ProgramManager
+     * @var ProgramManager
      */
     $program_manager = $this->kernel->getContainer()->get('programmanager');
     $programs = $program_manager->findAll();
@@ -1246,12 +1339,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are starter programs:$/
    * @param TableNode $table
-   * @throws \Exception
+   *
+   * @throws Exception
    */
   public function thereAreStarterPrograms(TableNode $table)
   {
     /**
      * @var $user User
+     * @var $em   EntityManager
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
@@ -1273,7 +1368,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setDescription($programs[$i]['description']);
       $program->setViews($programs[$i]['views']);
       $program->setDownloads($programs[$i]['downloads']);
-      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+      $program->setUploadedAt(new DateTime($programs[$i]['upload time'], new DateTimeZone('UTC')));
       $program->setRemixMigratedAt(null);
       $program->setCatrobatVersion(1);
       $program->setCatrobatVersionName($programs[$i]['version']);
@@ -1284,7 +1379,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setUploadLanguage('en');
       $program->setApproved(false);
       $program->setRemixRoot(true);
-      $program->setRemixMigratedAt(new \DateTime());
+      $program->setRemixMigratedAt(new DateTime());
       $program->setDebugBuild(false);
       $em->persist($program);
 
@@ -1298,8 +1393,9 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are mediapackages:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreMediapackages(TableNode $table)
   {
@@ -1321,8 +1417,9 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are mediapackage categories:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreMediapackageCategories(TableNode $table)
   {
@@ -1345,9 +1442,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are mediapackage files:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \ImagickException
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws ImagickException
    */
   public function thereAreMediapackageFiles(TableNode $table)
   {
@@ -1365,15 +1463,17 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $new_file->setDownloads(0);
       $new_file->setExtension($file['extension']);
       $new_file->setActive($file['active']);
-      $category = $em->getRepository('\App\Entity\MediaPackageCategory')->findOneBy(['name' => $file['category']]);
+      $category = $em->getRepository('\App\Entity\MediaPackageCategory')
+        ->findOneBy(['name' => $file['category']]);
       $new_file->setCategory($category);
-      if(!empty($file['flavor']))
+      if (!empty($file['flavor']))
       {
         $new_file->setFlavor($file['flavor']);
       }
       $new_file->setAuthor($file['author']);
 
-      $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' . $file['extension']), $file['id'], $file['extension']);
+      $file_path = self::MEDIAPACKAGE_DIR . $file['id'] . '.' . $file['extension'];
+      $file_repo->saveMediaPackageFile(new File($file_path), $file['id'], $file['extension']);
 
       $em->persist($new_file);
     }
@@ -1383,9 +1483,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are program download statistics:$/
    * @param TableNode $table
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Exception
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function thereAreProgramDownloadStatistics(TableNode $table)
   {
@@ -1397,6 +1498,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $count = count($program_stats);
     for ($i = 0; $i < $count; ++$i)
     {
+      /** @var Program $program */
       $program = $this->kernel->getContainer()->get('programmanager')->find($program_stats[$i]['program_id']);
       @$config = [
         'downloaded_at' => $program_stats[$i]['downloaded_at'],
@@ -1410,7 +1512,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       ];
       $program_statistics = new ProgramDownloads();
       $program_statistics->setProgram($program);
-      $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new \DateTime());
+      $program_statistics->setDownloadedAt(new DateTime($config['downloaded_at']) ?: new DateTime());
       $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
       $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
       $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
@@ -1436,13 +1538,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    *
    * @param TableNode $table
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function thereAreReportablePrograms(TableNode $table)
   {
     /**
      * @var $user User
-     * @var $tag Tag
+     * @var $tag  Tag
+     * @var $em   EntityManager
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
@@ -1459,12 +1562,18 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setViews(1337);
       $program->setDownloads(1337);
       $program->setApkDownloads(1337);
-      $program->setApkStatus(isset($programs[$i]['apk_ready']) ? ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) : Program::APK_NONE);
-      $program->setUploadedAt(new \DateTime("01.01.2013 12:00", new \DateTimeZone('UTC')));
+      $program->setApkStatus(
+        isset($programs[$i]['apk_ready']) ?
+          ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) :
+          Program::APK_NONE
+      );
+      $program->setUploadedAt(new DateTime("01.01.2013 12:00", new DateTimeZone('UTC')));
       $program->setRemixMigratedAt(null);
       $program->setCatrobatVersion(1);
       $program->setCatrobatVersionName("0.8.5");
-      $program->setLanguageVersion(isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1);
+      $program->setLanguageVersion(
+        isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1
+      );
       $program->setUploadIp('127.0.0.1');
       $program->setFilesize(0);
       $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
@@ -1489,7 +1598,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       {
         /**
          * @var $extension_repo ExtensionRepository
-         * @var $extension Extension
+         * @var $extension      Extension
          */
         $extension_repo = $em->getRepository(Extension::class);
         $extensions = explode(',', $programs[$i]['extensions']);
@@ -1503,7 +1612,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       if ($program->getApkStatus() == Program::APK_READY)
       {
         /**
-         * @var $apkrepository \App\Catrobat\Services\ApkRepository
+         * @var $apkrepository ApkRepository
          */
         $apkrepository = $this->kernel->getContainer()->get('apkrepository');
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
@@ -1701,7 +1810,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I click the program download button$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickTheProgramDownloadButton()
   {
@@ -1712,7 +1821,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I click the program image$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickTheProgramImage()
   {
@@ -1722,7 +1831,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I click on the program popup background$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheProgramPopupBackground()
   {
@@ -1732,7 +1841,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I click on the program popup button$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheProgramPopupButton()
   {
@@ -1740,25 +1849,22 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I am browsing with my pocketcode app$/
-   */
-  public function iAmBrowsingWithMyPocketcodeApp()
-  {
-    $this->getMink()->setDefaultSessionName("mobile");
-  }
-
-  /**
    * @When /^I want to download the apk file of "([^"]*)"$/
    * @param $arg1
-   * @throws \Exception
+   *
+   * @throws Exception
    */
   public function iWantToDownloadTheApkFileOf($arg1)
   {
-    $pm = $this->kernel->getContainer()->get('programmanager');
-    $program = $pm->findOneByName($arg1);
+    /**
+     * @var ProgramManager $program_manager
+     * @var Program        $program
+     */
+    $program_manager = $this->kernel->getContainer()->get('programmanager');
+    $program = $program_manager->findOneByName($arg1);
     if ($program === null)
     {
-      throw new \Exception('Program not found: ' . $arg1);
+      throw new Exception('Program not found: ' . $arg1);
     }
     $router = $this->kernel->getContainer()->get('router');
     $url = $router->generate('ci_download', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
@@ -1805,7 +1911,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 ////////////////////////////////////////////// Getter & Setter
 
   /**
-   * @return \Symfony\Bundle\FrameworkBundle\Client
+   * @return Client
    */
   public function getClient()
   {
@@ -1845,21 +1951,21 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    *
    * @throws DriverException
    * @throws UnsupportedDriverActionException
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iLogInToFacebookWithEmailAndPassword()
   {
     if ($this->use_real_oauth_javascript_code)
     {
       $mail = $this->getParameterValue('facebook_testuser_mail');
-      $pw = $this->getParameterValue('facebook_testuser_pw');
-      echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+      $password = $this->getParameterValue('facebook_testuser_pw');
+      echo 'Login with mail address ' . $mail . ' and pw ' . $password . "\n";
       $page = $this->getSession()->getPage();
       if ($page->find('css', '#facebook') && $page->find('css', '#login_form'))
       {
         echo 'facebook login form appeared' . "\n";
         $page->fillField('email', $mail);
-        $page->fillField('pass', $pw);
+        $page->fillField('pass', $password);
         $button = $page->findById('u_0_2');
         Assert::assertTrue($button != null);
         $button->press();
@@ -1869,7 +1975,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         if ($page->find('css', '#facebook') && $page->find('css', '#u_0_1'))
         {
           echo 'facebook reauthentication login form appeared' . "\n";
-          $page->fillField('pass', $pw);
+          $page->fillField('pass', $password);
           $button = $page->findById('u_0_0');
           Assert::assertTrue($button != null);
           $button->press();
@@ -1902,15 +2008,15 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I log in to Google with valid credentials$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iLogInToGoogleWithEmailAndPassword()
   {
     if ($this->use_real_oauth_javascript_code)
     {
       $mail = $this->getParameterValue('google_testuser_mail');
-      $pw = $this->getParameterValue('google_testuser_pw');
-      echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+      $password = $this->getParameterValue('google_testuser_pw');
+      echo 'Login with mail address ' . $mail . ' and pw ' . $password . "\n";
       $page = $this->getSession()->getPage();
       if ($page->find('css', '#approval_container') &&
         $page->find('css', '#submit_approve_access')
@@ -1924,7 +2030,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
           $page->find('css', '.signin-card clearfix')
         )
         {
-          $this->signInWithGoogleEMailAndPassword($mail, $pw);
+          $this->signInWithGoogleEMailAndPassword($mail, $password);
         }
         else
         {
@@ -1933,7 +2039,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
             $page->find('css', '#Passwd-hidden')
           )
           {
-            $this->signInWithGoogleEMail($mail, $pw);
+            $this->signInWithGoogleEMail($mail, $password);
           }
           else
           {
@@ -1965,17 +2071,17 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   /**
    * @param $mail
-   * @param $pw
+   * @param $password
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
-  private function signInWithGoogleEMailAndPassword($mail, $pw)
+  private function signInWithGoogleEMailAndPassword($mail, $password)
   {
     echo 'Google login form with E-Mail and Password appeared' . "\n";
     $page = $this->getSession()->getPage();
 
     $page->fillField('Email', $mail);
-    $page->fillField('Passwd', $pw);
+    $page->fillField('Passwd', $password);
     $button = $page->findById('signIn');
     Assert::assertTrue($button != null);
     $button->press();
@@ -1990,7 +2096,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     /**
      * @var $user_manager UserManager
-     * @var $user User
+     * @var $user         User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
@@ -2025,11 +2131,11 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   /**
    * @param $mail
-   * @param $pw
+   * @param $password
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
-  private function signInWithGoogleEMail($mail, $pw)
+  private function signInWithGoogleEMail($mail, $password)
   {
     echo 'Google Signin with E-Mail form appeared' . "\n";
     $page = $this->getSession()->getPage();
@@ -2043,21 +2149,21 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $page->find('css', '#Passwd')
     )
     {
-      $this->signInWithGooglePassword($pw);
+      $this->signInWithGooglePassword($password);
     }
   }
 
   /**
-   * @param $pw
+   * @param $password
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
-  private function signInWithGooglePassword($pw)
+  private function signInWithGooglePassword($password)
   {
     echo 'Google Signin with Password form appeared' . "\n";
     $page = $this->getSession()->getPage();
 
-    $page->fillField('Passwd', $pw);
+    $page->fillField('Passwd', $password);
     $button = $page->findById('signIn');
     Assert::assertTrue($button != null);
     $button->press();
@@ -2124,10 +2230,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iLogout()
   {
-    $this->getSession()->getPage()->find("css", ".btn show-nav-dropdown")->click();
     $this->assertElementOnPage(".img-author-big");
     $this->getSession()->getPage()->find("css", ".img-author-big")->click();
-
   }
 
   /**
@@ -2152,7 +2256,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I choose the username '([^']*)' and check button activations$/
    * @param $arg1
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iChooseTheUsernameTestingButtonEnabled($arg1)
   {
@@ -2180,7 +2285,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I choose the username '([^']*)'$/
    * @param $arg1
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iChooseTheUsername($arg1)
   {
@@ -2209,18 +2315,18 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   private function getParameterValue($name)
   {
-    $myfile = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
-    while (!feof($myfile))
+    $my_file = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
+    while (!feof($my_file))
     {
-      $line = fgets($myfile);
+      $line = fgets($my_file);
       if (strpos($line, $name) != false)
       {
-        fclose($myfile);
+        fclose($my_file);
 
         return substr(trim($line), strpos(trim($line), ':') + 2);
       }
     }
-    fclose($myfile);
+    fclose($my_file);
     Assert::assertTrue(false, 'No entry found in parameters.yml!');
 
     return false;
@@ -2276,7 +2382,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @When /^I click on the "([^"]*)" banner$/
    * @param $numb
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheBanner($numb)
   {
@@ -2309,9 +2415,13 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^following programs are featured:$/
    * @param TableNode $table
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function followingProgramsAreFeatured(TableNode $table)
   {
+    /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $featured = $table->getHash();
     for ($i = 0; $i < count($featured); ++$i)
@@ -2346,17 +2456,20 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     $slider_items = explode(',', $values);
     $owl_items = $this->getSession()->getPage()->findAll('css', 'div.carousel-item > a');
-    Assert::assertEquals(count($owl_items), count($slider_items));
+    $owl_items_count = count($owl_items);
+    Assert::assertEquals($owl_items_count, count($slider_items));
 
-    for ($index = 0; $index < count($owl_items); $index++)
+    for ($index = 0; $index < $owl_items_count; $index++)
     {
       $url = $slider_items[$index];
       if (strpos($url, "http://") !== 0)
       {
+        /** @var Program $program */
         $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($url);
         Assert::assertNotNull($program);
         Assert::assertNotNull($program->getId());
-        $url = $this->kernel->getContainer()->get('router')->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
+        $url = $this->kernel->getContainer()->get('router')
+          ->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -2368,7 +2481,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @When /^I press on the tag "([^"]*)"$/
    * @param $arg1 string  The name of the tag
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iPressOnTheTag($arg1)
   {
@@ -2386,7 +2499,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @When /^I press on the extension "([^"]*)"$/
    * @param $arg1 string  The name of the extension
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iPressOnTheExtension($arg1)
   {
@@ -2403,13 +2516,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^I search for "([^"]*)" with the searchbar$/
    * @param $arg1
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iSearchForWithTheSearchbar($arg1)
   {
     $this->iClick('.search-icon-header');
     $this->fillField('search-input-header', $arg1);
-    $this->iClick('.catro-search-button');
+    $this->iClick('#btn-search-header');
   }
 
   /**
@@ -2418,8 +2532,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iShouldSeeTheFacebookLikeButtonInTheHeader()
   {
     $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
-    Assert::assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
-    Assert::assertTrue($like_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+    Assert::assertTrue(
+      $like_button != null && $like_button->isVisible(),
+      "The Facebook Like Button is not visible!"
+    );
+    Assert::assertTrue(
+      $like_button->getParent()->getParent()->getParent()->getTagName() == 'nav',
+      "Parent is not header element"
+    );
   }
 
   /**
@@ -2428,8 +2548,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iShouldSeeTheGoogleButtonInTheHeader()
   {
     $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
-    Assert::assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
-    Assert::assertTrue($plus_one_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+    Assert::assertTrue(
+      $plus_one_button != null && $plus_one_button->isVisible(),
+      "The Google +1 Button is not visible!"
+    );
+    Assert::assertTrue(
+      $plus_one_button->getParent()->getParent()->getParent()->getTagName() == 'nav',
+      "Parent is not header element"
+    );
   }
 
   /**
@@ -2438,8 +2564,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iShouldSeeTheFacebookLikeButtonOnTheBottomOfTheProgramPage()
   {
     $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
-    Assert::assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
-    Assert::assertTrue($like_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
+    Assert::assertTrue(
+      $like_button != null && $like_button->isVisible(),
+      "The Facebook Like Button is not visible!"
+    );
+    Assert::assertTrue(
+      $like_button->getParent()->getParent()->getTagName() == 'div',
+      "Parent is not header element"
+    );
   }
 
   /**
@@ -2448,7 +2580,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iShouldSeeTheLogoutButton()
   {
     $logout_button = $this->getSession()->getPage()->findById('btn-logout');
-    Assert::assertTrue($logout_button != null && $logout_button->isVisible(), "The Logout button is not visible!");
+    Assert::assertTrue(
+      $logout_button != null && $logout_button->isVisible(),
+      "The Logout button is not visible!"
+    );
   }
 
   /**
@@ -2457,7 +2592,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iShouldSeeTheProfileButton()
   {
     $profile_button = $this->getSession()->getPage()->findById('btn-profile');
-    Assert::assertTrue($profile_button != null && $profile_button->isVisible(), "The profile button is not visible!");
+    Assert::assertTrue(
+      $profile_button != null && $profile_button->isVisible(),
+      "The profile button is not visible!"
+    );
   }
 
   /**
@@ -2499,6 +2637,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     /**
      * @var $click ClickStatistic
+     * @var $em    EntityManager
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $clicks = $em->getRepository('App\Entity\ClickStatistic')->findAll();
@@ -2532,6 +2671,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function thereShouldBeNoRecommendedClickStatisticDatabaseEntry()
   {
+    /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $clicks = $em->getRepository('App\Entity\ClickStatistic')->findAll();
     Assert::assertEquals(0, count($clicks), "Unexpected database entry found!");
@@ -2547,6 +2687,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     /**
      * @var $click ClickStatistic
+     * @var $em    EntityManager
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $clicks = $em->getRepository('App\Entity\HomepageClickStatistic')->findAll();
@@ -2561,6 +2702,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function thereShouldBeNoHomepageClickStatisticDatabaseEntry()
   {
+    /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $clicks = $em->getRepository('App\Entity\HomepageClickStatistic')->findAll();
     Assert::assertEquals(0, count($clicks), "Unexpected database entry found!");
@@ -2573,13 +2715,15 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForAjaxToFinish()
   {
-    $this->getSession()->wait(5000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
+    $this->getSession()->wait(5000,
+      '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
+    );
   }
 
   /**
    * @When /^I click on the first recommended program$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheFirstRecommendedProgram()
   {
@@ -2596,7 +2740,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click on the first recommended homepage program$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheFirstRecommendedHomepageProgram()
   {
@@ -2613,7 +2757,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click on the first featured homepage program$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickOnAFeaturedHomepageProgram()
   {
@@ -2630,7 +2774,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click on a newest homepage program having program id "([^"]*)"$/
    * @param $program_id
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iClickOnANewestHomepageProgram($program_id)
   {
@@ -2647,7 +2792,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click on a most downloaded homepage program having program id "([^"]*)"$/
    * @param $program_id
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iClickOnAMostDownloadedHomepageProgram($program_id)
   {
@@ -2665,7 +2811,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @When /^I click on a most viewed homepage program having program id "([^"]*)"$/
    *
    * @param $program_id
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iClickOnAMostViewedHomepageProgram($program_id)
   {
@@ -2683,7 +2830,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @When /^I click on a random homepage program having program id "([^"]*)"$/
    *
    * @param $program_id
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iClickOnARandomHomepageProgram($program_id)
   {
@@ -2700,7 +2848,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click on the first recommended specific program$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheFirstRecommendedSpecificProgram()
   {
@@ -2717,7 +2865,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^There should be recommended specific programs$/
    *
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws ElementNotFoundException
    */
   public function thereShouldBeRecommendedSpecificPrograms()
   {
@@ -2728,7 +2876,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^There should be no recommended specific programs$/
    *
-   * @throws \Behat\Mink\Exception\ExpectationException
+   * @throws ExpectationException
    */
   public function thereShouldBeNoRecommendedSpecificPrograms()
   {
@@ -2740,7 +2888,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @Then /^I should see a recommended homepage program having ID "([^"]*)" and name "([^"]*)"$/
    * @param $program_id
    * @param $program_name
-   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   *
+   * @throws ElementNotFoundException
    */
   public function iShouldSeeARecommendedHomepageProgramHavingIdAndName($program_id, $program_name)
   {
@@ -2757,7 +2906,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I should not see any recommended homepage programs$/
    *
-   * @throws \Behat\Mink\Exception\ExpectationException
+   * @throws ExpectationException
    */
   public function iShouldNotSeeAnyRecommendedHomepagePrograms()
   {
@@ -2776,7 +2925,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     {
       Assert::assertEquals($img->getTagName(), 'img');
       $src = $img->getAttribute('src');
-      Assert::assertTrue(strpos($src, $arg1) !== false, "<$src> does not contain $arg1");
+      Assert::assertTrue(strpos($src, $arg1) !== false, '<' . $src . '> does not contain ' . $arg1);
       Assert::assertTrue($img->isVisible(), "Image is not visible.");
     }
     else
@@ -2797,14 +2946,17 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
     if ($element != null)
     {
-      Assert::assertTrue($element->hasAttribute($arg2), "Element has no attribute $arg2");
+      Assert::assertTrue($element->hasAttribute($arg2), 'Element has no attribute ' . $arg2);
       $attr = $element->getAttribute($arg2);
-      Assert::assertTrue(strpos($attr, $arg3) !== false, "<$attr> does not contain $arg3");
+      Assert::assertTrue(
+        strpos($attr, $arg3) !== false,
+        '<' . $attr . '> does not contain ' . $arg3
+      );
       Assert::assertTrue($element->isVisible(), "Element is not visible.");
     }
     else
     {
-      Assert::assertTrue(false, "$arg1 not found!");
+      Assert::assertTrue(false, $arg1 . ' not found!');
     }
   }
 
@@ -2842,7 +2994,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         return;
       }
     }
-    Assert::assertTrue(false, "No $arg1 element currently visible.");
+    Assert::assertTrue(false, 'No ' . $arg1 . ' element currently visible.');
   }
 
   /**
@@ -2857,7 +3009,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       /** @var NodeElement $element */
       if ($element->isVisible())
       {
-        Assert::assertTrue(false, "Found visible $arg1 element.");
+        Assert::assertTrue(false, 'Found visible ' . $arg1 . ' element.');
       }
     }
   }
@@ -2911,10 +3063,16 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $this->getSession()->getDriver()->executeScript("window.confirm = function(){return true;}");
     } catch (UnsupportedDriverActionException $e)
     {
-      Assert::assertTrue(false, "Driver doesn't support JS injection. For Chrome this is needed since it cant deal with pop ups");
+      Assert::assertTrue(
+        false,
+        "Driver doesn't support JS injection. For Chrome this is needed since it cant deal with pop ups"
+      );
     } catch (DriverException $e)
     {
-      Assert::assertTrue(false, "Driver may not support JS injection. For Chrome this is needed since it cant deal with pop ups");
+      Assert::assertTrue(
+        false,
+        "Driver may not support JS injection. For Chrome this is needed since it cant deal with pop ups"
+      );
     }
   }
 
@@ -2925,8 +3083,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function thereAreProgramsWithALargeDescription(TableNode $table)
   {
     /**
-     * @var $em      \Doctrine\ORM\EntityManager
-     * @var $program \App\Entity\Program
+     * @var $em      EntityManager
+     * @var $program Program
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
@@ -2952,7 +3110,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $program->setDownloads(0);
         $program->setApkDownloads(0);
         $program->setApkStatus(Program::APK_NONE);
-        $program->setUploadedAt(new \DateTime("now", new \DateTimeZone('UTC')));
+        $program->setUploadedAt(new DateTime("now", new DateTimeZone('UTC')));
         $program->setRemixMigratedAt(null);
         $program->setCatrobatVersion(1);
         $program->setCatrobatVersionName(1);
@@ -2968,7 +3126,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $em->persist($program);
       }
       $em->flush();
-    } catch (\Exception $e)
+    } catch (Exception $e)
     {
       Assert::assertTrue(false, "Program with a large description couldn't be loaded");
     }
@@ -3011,7 +3169,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $em->persist($to_create);
       }
       $em->flush();
-    } catch (\Exception $e)
+    } catch (Exception $e)
     {
       Assert::assertTrue(false, "database error");
     }
@@ -3066,6 +3224,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   /**
    * @Given the app version is :appVersion
+   *
    * @param $appVersion
    */
   public function theAppVersionIs($appVersion)

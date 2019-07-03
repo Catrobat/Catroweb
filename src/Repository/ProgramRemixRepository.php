@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ProgramRemixRelation;
 use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
@@ -41,11 +42,8 @@ class ProgramRemixRepository extends EntityRepository
   {
     $parents_catrobat_ancestor_relations = $this->getAncestorRelations($descendant_program_ids);
 
-    return array_unique(array_map(function ($r) {
-      /**
-       * @var $r ProgramRemixRelation
-       */
-      return $r->getAncestorId();
+    return array_unique(array_map(function (ProgramRemixRelation $relation) {
+      return $relation->getAncestorId();
     }, $parents_catrobat_ancestor_relations));
   }
 
@@ -74,7 +72,9 @@ class ProgramRemixRepository extends EntityRepository
    *
    * @return ProgramRemixRelation[]
    */
-  public function getDirectAndIndirectDescendantRelations(array $ancestor_program_ids_to_exclude, array $descendant_program_ids)
+  public function getDirectAndIndirectDescendantRelations(
+    array $ancestor_program_ids_to_exclude, array $descendant_program_ids
+  )
   {
     $qb = $this->createQueryBuilder('r');
 
@@ -95,16 +95,15 @@ class ProgramRemixRepository extends EntityRepository
    *
    * @return int[]
    */
-  public function getDirectAndIndirectDescendantIds(array $ancestor_program_ids_to_exclude, array $descendant_program_ids)
+  public function getDirectAndIndirectDescendantIds(
+    array $ancestor_program_ids_to_exclude, array $descendant_program_ids
+  )
   {
     $direct_and_indirect_descendant_relations = $this
       ->getDirectAndIndirectDescendantRelations($ancestor_program_ids_to_exclude, $descendant_program_ids);
 
-    return array_unique(array_map(function ($r) {
-      /**
-       * @var $r ProgramRemixRelation
-       */
-      return $r->getAncestorId();
+    return array_unique(array_map(function (ProgramRemixRelation $relation) {
+      return $relation->getAncestorId();
     }, $direct_and_indirect_descendant_relations));
   }
 
@@ -159,11 +158,8 @@ class ProgramRemixRepository extends EntityRepository
   {
     $catrobat_root_descendant_relations = $this->getDescendantRelations($ancestor_program_ids);
 
-    return array_unique(array_map(function ($r) {
-      /**
-       * @var $r ProgramRemixRelation
-       */
-      return $r->getDescendantId();
+    return array_unique(array_map(function (ProgramRemixRelation $relation) {
+      return $relation->getDescendantId();
     }, $catrobat_root_descendant_relations));
   }
 
@@ -245,9 +241,9 @@ class ProgramRemixRepository extends EntityRepository
   }
 
   /**
-   * @param \DateTime $seen_at
+   * @param DateTime $seen_at
    */
-  public function markAllUnseenRelationsAsSeen(\DateTime $seen_at)
+  public function markAllUnseenRelationsAsSeen(DateTime $seen_at)
   {
     $qb = $this->createQueryBuilder('r');
 
@@ -306,7 +302,7 @@ class ProgramRemixRepository extends EntityRepository
    * @param $exclude_program_ids
    * @param $flavor
    *
-   * @return mixed
+   * @return ProgramRemixRelation[]
    */
   public function getDirectParentRelationsOfUsersRemixes($user_ids, $exclude_user_id, $exclude_program_ids, $flavor)
   {

@@ -36,8 +36,6 @@ class DownloadStatisticsListener
 
   /**
    * @param PostResponseEvent $event
-   *
-   * @throws \Geocoder\Exception\Exception
    */
   public function onTerminateEvent(PostResponseEvent $event)
   {
@@ -93,8 +91,6 @@ class DownloadStatisticsListener
    * @param $rec_by_program_id
    * @param $locale
    * @param $is_user_specific_recommendation
-   *
-   * @throws \Geocoder\Exception\Exception
    */
   public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id,
                                                   $rec_by_page_id, $rec_by_program_id, $locale,

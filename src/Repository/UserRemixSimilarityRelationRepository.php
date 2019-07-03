@@ -3,7 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\UserRemixSimilarityRelation;
+use DateTime;
+use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityRepository;
+use Exception;
 
 
 /**
@@ -28,7 +32,7 @@ class UserRemixSimilarityRelationRepository extends EntityRepository
   /**
    * @param User $user
    *
-   * @return mixed
+   * @return UserRemixSimilarityRelation[]
    */
   public function getRelationsOfSimilarUsers(User $user)
   {
@@ -50,8 +54,8 @@ class UserRemixSimilarityRelationRepository extends EntityRepository
    * @param $second_user_id
    * @param $similarity
    *
-   * @throws \Doctrine\DBAL\DBALException
-   * @throws \Exception
+   * @throws DBALException
+   * @throws Exception
    */
   public function insertRelation($first_user_id, $second_user_id, $similarity)
   {
@@ -60,7 +64,7 @@ class UserRemixSimilarityRelationRepository extends EntityRepository
       'first_user_id'  => $first_user_id,
       'second_user_id' => $second_user_id,
       'similarity'     => $similarity,
-      'created_at'     => date_format(new \DateTime(), "Y-m-d H:i:s"),
+      'created_at'     => date_format(new DateTime(), "Y-m-d H:i:s"),
     ]);
   }
 }

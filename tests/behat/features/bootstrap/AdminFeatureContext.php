@@ -128,22 +128,6 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @BeforeScenario @Mobile
-   */
-  public function resizeWindowMobile()
-  {
-    $this->getSession()->resizeWindow(320, 1000);
-  }
-
-  /**
-   * @BeforeScenario @Tablet
-   */
-  public function resizeWindowTablet()
-  {
-    $this->getSession()->resizeWindow(768, 1000);
-  }
-
-  /**
    * @BeforeScenario @RealOAuth
    */
   public function activateRealOAuthService()

@@ -2,15 +2,16 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\StatusCode;
 use App\Entity\CommentNotification;
 use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserComment;
-use App\Catrobat\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
@@ -109,6 +110,7 @@ class CommentsController extends Controller
      * @var $user             User
      * @var $program          Program
      * @var $reported_program ProgramInappropriateReport
+     * @var $program_manager  ProgramManager
      */
 
     $user = $this->getUser();
