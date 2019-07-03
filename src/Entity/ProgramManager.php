@@ -558,7 +558,7 @@ class ProgramManager
   /**
    * @param $flavor
    *
-   * @return mixed
+   * @return int
    * @throws NonUniqueResultException
    */
   public function getTotalPrograms($flavor)

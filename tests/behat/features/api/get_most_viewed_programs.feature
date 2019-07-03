@@ -42,7 +42,7 @@ Feature: Get the most downloaded programs
           "preHeaderMessages":"",
           "CatrobatInformation": {
                                    "BaseUrl":"http://localhost\/",
-                                   "TotalProjects":"3",
+                                   "TotalProjects":3,
                                    "ProjectsExtension":".catrobat"
                                   }
       }
@@ -63,7 +63,7 @@ Feature: Get the most downloaded programs
           "preHeaderMessages":"",
           "CatrobatInformation": {
                                    "BaseUrl":"http://localhost\/",
-                                   "TotalProjects":"3",
+                                   "TotalProjects":3,
                                    "ProjectsExtension":".catrobat"
                                   }
       }
