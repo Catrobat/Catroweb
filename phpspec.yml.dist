@@ -2,7 +2,7 @@ formatter.name: pretty
 
 extensions:
   PhpSpec\CatrobatExtension\Extension: ~
-  LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension: ~
+  # LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension: ~ # ToDo can be readded when phpspec 5.2 is supported
 
 code_coverage:
     whitelist:

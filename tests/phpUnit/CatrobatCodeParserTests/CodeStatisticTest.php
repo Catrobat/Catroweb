@@ -9,7 +9,7 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
 {
   protected $xml_properties;
 
-  public function setUp()
+  public function setUp(): void
   {
     $this->xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
   }

@@ -8,7 +8,7 @@ class ParsedSimpleProgramTest extends \PHPUnit\Framework\TestCase
 {
   protected $program;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/SimpleProgram/code.xml');
     $this->program = new ParsedSimpleProgram($xml_properties);

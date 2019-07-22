@@ -5,6 +5,7 @@ behat.yml
 phpspec.yml
 phpunit.xml
 *.local
+.phpunit.result.cache
 
 ### backups ###
 backups/**
