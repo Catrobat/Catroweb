@@ -291,7 +291,7 @@ class AppExtension extends AbstractExtension
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->attributes->get('flavor');
+    return $request->get('flavor');
   }
 
   /**

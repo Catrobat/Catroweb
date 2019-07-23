@@ -29,7 +29,7 @@ Feature: Cross validation for recommendation system
       | 5  | Nothing | p6          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
 
   Scenario: User with selected russian language cant see the recommender
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     And the selected language is "English"
     And I should see "Similar Programs"
     And the element "#recommendations" should be visible

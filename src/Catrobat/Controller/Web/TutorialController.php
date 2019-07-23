@@ -286,7 +286,7 @@ class TutorialController extends Controller
         'Downloads'       => $program->getDownloads(),
         'ScreenshotSmall' => $screenshot_repository->getThumbnailWebPath($program->getId()),
         'ProjectUrl'      => ltrim($this->generateUrl('program', [
-          'flavor' => $request->attributes->get('flavor'),
+          'flavor' => $request->get('flavor'),
           'id'     => $program->getId(),
         ]), '/'),
       ];

@@ -15,9 +15,9 @@ Feature:
       | job       | Build-Program                                                  |
       | token     | SECRETTOKEN                                                    |
       | SUFFIX    | generated1                                                     |
-      | DOWNLOAD  | http://pocketcode.org/pocketcode/download/1.catrobat           |
-      | UPLOAD    | http://pocketcode.org/pocketcode/ci/upload/1?token=UPLOADTOKEN |
-      | ONERROR   | http://pocketcode.org/pocketcode/ci/failed/1?token=UPLOADTOKEN |
+      | DOWNLOAD  | http://pocketcode.org/app/download/1.catrobat           |
+      | UPLOAD    | http://pocketcode.org/app/ci/upload/1?token=UPLOADTOKEN |
+      | ONERROR   | http://pocketcode.org/app/ci/failed/1?token=UPLOADTOKEN |
     And the program apk status will be flagged "pending"
 
   Scenario: Accept the compiled apk from jenkins

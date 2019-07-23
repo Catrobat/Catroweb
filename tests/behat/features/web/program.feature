@@ -26,7 +26,7 @@ Feature: As a visitor I want to see a program page
       | 1  | Dapiest |     | yes    | 1        |
 
   Scenario: Viewing program page
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then I should see "program 1"
     And I should see "Superman"
     And I should see "my superman description"
@@ -37,18 +37,18 @@ Feature: As a visitor I want to see a program page
     And I should see "13 views"
 
   Scenario: Viewing the uploader's profile page
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     And I click "#icon-author a"
-    Then I should be on "/pocketcode/profile/1"
+    Then I should be on "/app/profile/1"
 
   Scenario: I should not see the report button for my own programs
     Given I log in as "Superman" with the password "123456"
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     Then the element "#report-program-button" should not exist
 
   Scenario: The report pop up should have a session where reason and checked category is stored
     Given I log in as "Gregor" with the password "123456"
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     And I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     When I fill in "report-reason" with "Super secret message"
@@ -59,13 +59,13 @@ Feature: As a visitor I want to see a program page
     And the "report-copyright" checkbox should be checked
     When I fill in "report-reason" with "Magic"
     And I click ".swal2-cancel"
-    When I am on "/pocketcode/program/6"
+    When I am on "/app/program/6"
     And I wait for the server response
     When  I click "#report-program-button"
     Then the "report-reason" field should not contain "Super secret message"
     And the "report-reason" field should not contain "Magic"
     And the "report-copyright" checkbox should not be checked
-    When I am on "/pocketcode/program/1"
+    When I am on "/app/program/1"
     And I wait for the server response
     When I click "#report-program-button"
     Then the "report-reason" field should not contain "Super secret message"
@@ -74,16 +74,16 @@ Feature: As a visitor I want to see a program page
 
   Scenario: report program when not logged in should bring me to login page,
   but when logging in I should be returned to the program page and my report should be saved
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     And I click "#report-program-button"
-    Then I should be on "/pocketcode/login"
+    Then I should be on "/app/login"
     When I fill in "username" with "Gregor"
     And I fill in "password" with "123456"
     And I press "Login"
 
   Scenario: report as inappropriate
     Given I log in as "Gregor" with the password "123456"
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-inappropriate" RadioButton
@@ -92,11 +92,11 @@ Feature: As a visitor I want to see a program page
     And I wait for the server response
     Then I should see "Your report was successfully sent!"
     When I click ".swal2-confirm"
-    Then I should be on "/pocketcode/"
+    Then I should be on "/app/"
 
   Scenario: report as copyright infringement
     Given I log in as "Gregor" with the password "123456"
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-copyright" RadioButton
@@ -105,11 +105,11 @@ Feature: As a visitor I want to see a program page
     And I wait for the server response
     Then I should see "Your report was successfully sent!"
     When I click ".swal2-confirm"
-    Then I should be on "/pocketcode/"
+    Then I should be on "/app/"
 
   Scenario: report as spam
     Given I log in as "Gregor" with the password "123456"
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-spam" RadioButton
@@ -118,11 +118,11 @@ Feature: As a visitor I want to see a program page
     And I wait for the server response
     Then I should see "Your report was successfully sent!"
     When I click ".swal2-confirm"
-    Then I should be on "/pocketcode/"
+    Then I should be on "/app/"
 
   Scenario: report as dislike
     Given I log in as "Gregor" with the password "123456"
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-dislike" RadioButton
@@ -131,46 +131,46 @@ Feature: As a visitor I want to see a program page
     And I wait for the server response
     Then I should see "Your report was successfully sent!"
     When I click ".swal2-confirm"
-    Then I should be on "/pocketcode/"
+    Then I should be on "/app/"
 
   Scenario: I want a link to this program
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then the element ".btn-copy" should be visible
 
   Scenario: I want to download a program from the browser
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then the link of "download" should open "download"
 
   Scenario: I want to download a program from the app with the correct language version
-    And I am on "/pocketcode/program/2"
+    And I am on "/app/program/2"
     Then the link of "download" should open "download"
 
   Scenario: I want to download a program from the app with an an old language version
-    And I download "/pocketcode/download/1.catrobat"
+    And I download "/app/download/1.catrobat"
 
   Scenario: Increasing download counter after apk download
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then I should see "5 downloads"
     When I want to download the apk file of "program 1"
     Then I should receive the apk file
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     Then I should see "6 downloads"
 
   Scenario: Increasing download counter after download
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then I should see "5 downloads"
-    When I download "/pocketcode/download/1.catrobat"
+    When I download "/app/download/1.catrobat"
     Then I should receive an application file
-    When I am on "/pocketcode/program/1"
+    When I am on "/app/program/1"
     Then I should see "6 downloads"
 
   Scenario: Clicking the download button should deactivate the download button for 5 seconds
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     When I click "#url-download"
     Then the href with id "url-download" should be void
 
   Scenario: Clicking the download button again after 5 seconds should work
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     When I click "#url-download"
     And I wait 5000 milliseconds
     Then the href with id "url-download" should not be void
@@ -183,25 +183,25 @@ Feature: As a visitor I want to see a program page
     Then I should see "Dapiest"
 
   Scenario: Changing description is not possible if not logged in
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then the element "#edit-description-button" should not exist
     And the element "#edit-description-ui" should not exist
 
   Scenario: Changing description is not possible if it's not my program
-    Given I am on "/pocketcode/login"
+    Given I am on "/app/login"
     And I fill in "username" with "Gregor"
     And I fill in "password" with "123456"
     And I press "Login"
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     Then the element "#edit-description-button" should not exist
     And the element "#edit-description-ui" should not exist
 
   Scenario: Changing description is possible if it's my program
-    Given I am on "/pocketcode/login"
+    Given I am on "/app/login"
     And I fill in "username" with "Gregor"
     And I fill in "password" with "123456"
     And I press "Login"
-    And I am on "/pocketcode/program/2"
+    And I am on "/app/program/2"
     Then the element "#edit-description-button" should be visible
     When I click "#edit-description-button"
     Then the element "#description" should not be visible
@@ -215,7 +215,7 @@ Feature: As a visitor I want to see a program page
     And I should see "This is a new description"
 
   Scenario: Large Program Descriptions are only fully visible when show more was clicked
-    Given I am on "/pocketcode/program/6"
+    Given I am on "/app/program/6"
     Then I should see "long description program"
     And I should not see "the end of the description"
     And I should see "Show more"
@@ -224,19 +224,19 @@ Feature: As a visitor I want to see a program page
     And I should see "the end of the description"
 
   Scenario: Small Program Descriptions are fully visible
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then I should see "my superman description"
     And I should not see "Show more"
     
   Scenario: On the project page there should be all buttons visible to web and android
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     Then I should see "Download as program"
     And I should see "Show Remix Graph"
     And I should see "Download as app"
 
   Scenario: On the project page there should be no apk button be visible to ios users
     Given I use an ios app
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     Then I should see "Download as program"
     And I should see "Show Remix Graph"
     And I should not see "Download as app"

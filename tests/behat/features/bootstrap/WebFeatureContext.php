@@ -135,6 +135,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function setup()
   {
+    $this->getMink()->restartSessions();
     // 15px = scroll bar width
     $this->getSession()->resizeWindow(320 + 15, 1024);
   }
@@ -178,14 +179,15 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @param $flavor
    * @param $app_version
    * @param $build_type
+   * @param $theme String
    */
   // @formatter:on
-  public function iUseTheUserAgentParameterized($lang_version, $flavor, $app_version, $build_type)
+  public function iUseTheUserAgentParameterized($lang_version, $flavor, $app_version, $build_type, $theme="pocketcode")
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = "Android";
     $user_agent = "Catrobat/" . $lang_version . " " . $flavor . "/" . $app_version . " Platform/" . $platform .
-      " BuildType/" . $build_type;
+      " BuildType/" . $build_type . " Theme/" . $theme;
     $this->getSession()->setRequestHeader("User-Agent", $user_agent);
   }
 
@@ -209,6 +211,41 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $platform = "iPhone";
     $user_agent =  " Platform/" . $platform;
     $this->getSession()->setRequestHeader("User-Agent", $user_agent);
+  }
+
+  /**
+   * @Given /^I use a specific "([^"]*)" themed app$/
+   *
+   * @param $theme
+   */
+  public function iUseASpecificThemedApp($theme)
+  {
+    $this->iUseTheUserAgentParameterized("0.998", "PocketCode", "0.9.60",
+      "release", $theme);
+  }
+
+  /**
+   * @Then the logos src should be :logo_src
+   *
+   * @param $logo_src
+   */
+  public function theLogosSrcShouldBe($logo_src)
+  {
+    $image = $this->getSession()->getPage()->findAll('css','#logo');
+    $img_url = $image[0]->getAttribute('src');
+    Assert::assertNotFalse(strpos($img_url, $logo_src));
+  }
+
+  /**
+   * @Then the logos src should not be :logo_src
+   *
+   * @param $logo_src
+   */
+  public function theLogosSrcShouldNotBe($logo_src)
+  {
+    $image = $this->getSession()->getPage()->findAll('css','#logo');
+    $img_url = $image[0]->getAttribute('src');
+    Assert::assertFalse(strpos($img_url, $logo_src));
   }
 
 
@@ -1046,7 +1083,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
   {
-    $this->visitPath('/pocketcode/login');
+    $this->visitPath('/app/login');
     $this->fillField('_username', $arg2);
     $this->fillField('password', $arg3);
     $this->pressButton('Login');
@@ -1274,7 +1311,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     $this->assertElementOnPage('#btn-login');
     $this->iClickTheButton('login');
-    $this->assertPageAddress('/pocketcode/login');
+    $this->assertPageAddress('/app/login');
     $this->getSession()->wait(200);
     $this->assertElementOnPage('#btn-login_google');
     $this->getSession()->executeScript('document.getElementById("gplus_approval_prompt").type = "text";');
@@ -1735,7 +1772,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     switch ($url_type)
     {
       case "download":
-        $url_text = "pocketcode/download";
+        $url_text = "app/download";
         break;
 
       case "popup":

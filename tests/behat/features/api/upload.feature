@@ -11,7 +11,7 @@ Feature: Upload a program to the website
   Scenario: Upload program
     Given the HTTP Request:
       | Method | POST                               |
-      | Url    | /pocketcode/api/upload/upload.json |
+      | Url    | /app/api/upload/upload.json |
     And the POST parameters:
       | Name         | Value                  |
       | username     | Catrobat               |

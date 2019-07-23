@@ -279,7 +279,7 @@ class ApiFeatureContext extends BaseContext
     {
       case "no password given":
         $this->method = "POST";
-        $this->url = "/pocketcode/api/loginOrRegister/loginOrRegister.json";
+        $this->url = "/app/api/loginOrRegister/loginOrRegister.json";
         $this->post_parameters['registrationUsername'] = "Someone";
         $this->post_parameters['registrationEmail'] = "someone@pocketcode.org";
         break;
@@ -299,7 +299,7 @@ class ApiFeatureContext extends BaseContext
     {
       case "invalid token":
         $this->method = "POST";
-        $this->url = "/pocketcode/api/checkToken/check.json";
+        $this->url = "/app/api/checkToken/check.json";
         $this->post_parameters['username'] = "Catrobat";
         $this->post_parameters['token'] = "INVALID";
         break;
@@ -315,7 +315,7 @@ class ApiFeatureContext extends BaseContext
   public function searchingFor($arg1)
   {
     $this->method = 'GET';
-    $this->url = '/pocketcode/api/projects/search.json';
+    $this->url = '/app/api/projects/search.json';
     $this->get_parameters = ['q' => $arg1, 'offset' => 0, 'limit' => 10];
     $this->iInvokeTheRequest();
   }
@@ -331,17 +331,17 @@ class ApiFeatureContext extends BaseContext
     {
       case "no authentication":
         $this->method = "POST";
-        $this->url = "/pocketcode/api/upload/upload.json";
+        $this->url = "/app/api/upload/upload.json";
         break;
       case "missing parameters":
         $this->method = "POST";
-        $this->url = "/pocketcode/api/upload/upload.json";
+        $this->url = "/app/api/upload/upload.json";
         $this->post_parameters['username'] = "Catrobat";
         $this->post_parameters['token'] = "cccccccccc";
         break;
       case "invalid program file":
         $this->method = "POST";
-        $this->url = "/pocketcode/api/upload/upload.json";
+        $this->url = "/app/api/upload/upload.json";
         $this->post_parameters['username'] = "Catrobat";
         $this->post_parameters['token'] = "cccccccccc";
         $filepath = self::FIXTUREDIR . 'invalid_archive.catrobat';
@@ -947,7 +947,7 @@ class ApiFeatureContext extends BaseContext
     {
       $this->iHaveAParameterWithValue('offset', '0');
     }
-    $this->iGetWithTheseParameters('/pocketcode/api/projects/search.json');
+    $this->iGetWithTheseParameters('/app/api/projects/search.json');
   }
 
   /**
@@ -1333,7 +1333,7 @@ class ApiFeatureContext extends BaseContext
     $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
     $this->request_parameters['username'] = $this->username;
     $this->request_parameters['token'] = 'cccccccccc';
-    $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
+    $this->iPostTheseParametersTo('/app/api/upload/upload.json');
   }
 
   /**
@@ -1346,7 +1346,7 @@ class ApiFeatureContext extends BaseContext
     $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
     $this->request_parameters['username'] = $this->username;
     $this->request_parameters['token'] = $arg1;
-    $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
+    $this->iPostTheseParametersTo('/app/api/upload/upload.json');
   }
 
   /**
@@ -1403,7 +1403,7 @@ class ApiFeatureContext extends BaseContext
     $this->last_response = $this->getClient()
       ->getResponse()
       ->getContent();
-    $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
+    $this->iPostTheseParametersTo('/app/api/upload/upload.json');
   }
 
   /**
@@ -1484,7 +1484,7 @@ class ApiFeatureContext extends BaseContext
       default:
         throw new PendingException();
     }
-    $this->sendPostRequest('/pocketcode/api/loginOrRegister/loginOrRegister.json');
+    $this->sendPostRequest('/app/api/loginOrRegister/loginOrRegister.json');
   }
 
   /**
@@ -1500,7 +1500,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function iTryToRegister()
   {
-    $this->sendPostRequest('/pocketcode/api/loginOrRegister/loginOrRegister.json');
+    $this->sendPostRequest('/app/api/loginOrRegister/loginOrRegister.json');
   }
 
   /**
@@ -1517,7 +1517,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function iHaveDownloadedAValidProgram()
   {
-    $this->iDownload('/pocketcode/download/1.catrobat');
+    $this->iDownload('/app/download/1.catrobat');
     $this->iShouldReceiveAFile();
     $this->theResponseCodeShouldBe(200);
   }
@@ -1611,7 +1611,7 @@ class ApiFeatureContext extends BaseContext
   public function iRegisterANewUser()
   {
     $this->prepareValidRegistrationParameters();
-    $this->sendPostRequest('/pocketcode/api/loginOrRegister/loginOrRegister.json');
+    $this->sendPostRequest('/app/api/loginOrRegister/loginOrRegister.json');
   }
 
   /**
@@ -1621,7 +1621,7 @@ class ApiFeatureContext extends BaseContext
   {
     $this->prepareValidRegistrationParameters();
     $this->request_parameters['registrationUsername'] = 'AnotherUser';
-    $this->sendPostRequest('/pocketcode/api/loginOrRegister/loginOrRegister.json');
+    $this->sendPostRequest('/app/api/loginOrRegister/loginOrRegister.json');
   }
 
   /**
@@ -1756,7 +1756,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function iGetTheMostRecentPrograms()
   {
-    $this->getClient()->request('GET', '/pocketcode/api/projects/recent.json');
+    $this->getClient()->request('GET', '/app/api/projects/recent.json');
   }
 
   /**
@@ -1766,7 +1766,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function iGetTheMostRecentProgramsWithLimitAndOffset($limit, $offset)
   {
-    $this->getClient()->request('GET', '/pocketcode/api/projects/recent.json', [
+    $this->getClient()->request('GET', '/app/api/projects/recent.json', [
       'limit'  => $limit,
       'offset' => $offset,
     ]);
@@ -2235,7 +2235,7 @@ class ApiFeatureContext extends BaseContext
     $this->iHaveAParameterWithValue('token', 'cccccccccc');
     $this->iHaveAValidCatrobatFile();
     $this->iHaveAParameterWithTheMdchecksumOf('fileChecksum', 'test.catrobat');
-    $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
+    $this->iPostTheseParametersTo('/app/api/upload/upload.json');
     $this->iHaveAParameterWithTheReturnedProjectid('program');
   }
 
@@ -2245,7 +2245,7 @@ class ApiFeatureContext extends BaseContext
   public function iReportTheProgram()
   {
     $this->iHaveAParameterWithValue('note', 'Bad Project');
-    $this->iPostTheseParametersTo('/pocketcode/api/reportProgram/reportProgram.json');
+    $this->iPostTheseParametersTo('/app/api/reportProgram/reportProgram.json');
   }
 
 
@@ -2442,7 +2442,7 @@ class ApiFeatureContext extends BaseContext
     {
       $this->iHaveAParameterWithValue('offset', '0');
     }
-    $this->iGetWithTheseParameters('/pocketcode/api/projects/recsys.json');
+    $this->iGetWithTheseParameters('/app/api/projects/recsys.json');
   }
 
   /**

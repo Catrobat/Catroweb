@@ -47,7 +47,7 @@ class RecommenderController extends Controller
 
     /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
-    $flavor = $request->getSession()->get('flavor');
+    $flavor = $request->get('flavor');
 
     $programs_count = $program_manager->getRecommendedProgramsCount($program_id, $flavor);
     $programs = $program_manager->getRecommendedProgramsById($program_id, $flavor, $limit, $offset);
@@ -73,7 +73,7 @@ class RecommenderController extends Controller
 
     /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
-    $flavor = $request->getSession()->get('flavor');
+    $flavor = $request->get('flavor');
 
     /** @var Program $program */
     $program = $program_manager->find($id);
@@ -106,7 +106,7 @@ class RecommenderController extends Controller
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
 
-    $flavor = $request->getSession()->get('flavor');
+    $flavor = $request->get('flavor');
 
     $programs_count = 0;
     $programs = [];

@@ -43,32 +43,32 @@ Feature: As a visitor I want to see user profiles
 
   Scenario: Calling the profile route without an id should bring me to myProfile
     Given I log in as "Christian" with the password "123456"
-    And I am on "/pocketcode/profile"
+    And I am on "/app/profile"
     Then I should see "My Profile"
-    When I am on "/pocketcode/profile/"
+    When I am on "/app/profile/"
     Then I should see "My Profile"
 
   Scenario: Calling the profile route with the id 0 should bring me to myProfile
     Given I log in as "Christian" with the password "123456"
-    And I am on "/pocketcode/profile/0"
+    And I am on "/app/profile/0"
     Then I should see "My Profile"
 
   Scenario: Calling the profile route with my user id id should bring me to myProfile
     Given I log in as "Christian" with the password "123456"
-    And I am on "/pocketcode/profile/1"
+    And I am on "/app/profile/1"
     Then I should see "My Profile"
 
   Scenario: Calling the profile route with another id should bring me to the users profile
     Given I log in as "Christian" with the password "123456"
-    And I am on "/pocketcode/profile/2"
+    And I am on "/app/profile/2"
     Then I should see "Gregor"
 
   Scenario: Trying to get to myProfile when not logged in should bring me to log in page
-    Given I am on "/pocketcode/profile"
-    Then I should be on "/pocketcode/login"
+    Given I am on "/app/profile"
+    Then I should be on "/app/login"
 
   Scenario: Show Christian's profile
-    Given I am on "/pocketcode/profile/1"
+    Given I am on "/app/profile/1"
     Then I should see "Christian"
     And I should see "Amount of programs: 2"
     And I should see "Country: Austria"
@@ -79,7 +79,7 @@ Feature: As a visitor I want to see user profiles
     And I should not see "program 3"
 
   Scenario: Show Gregor's profile
-    Given I am on "/pocketcode/profile/2"
+    Given I am on "/app/profile/2"
     Then I should see "Gregor"
     And I should see "Amount of programs: 1"
     And I should see "Country: Austria"
@@ -90,7 +90,7 @@ Feature: As a visitor I want to see user profiles
     And I should not see "program 2"
 
   Scenario: at a profile page there should always all programs be visible
-    Given I am on "/pocketcode/profile/3"
+    Given I am on "/app/profile/3"
     Then I should see "program 4"
     And I should see "program 5"
     And I should see "program 6"

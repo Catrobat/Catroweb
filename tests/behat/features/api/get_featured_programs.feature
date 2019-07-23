@@ -29,7 +29,7 @@ Feature: Get featured programs
   Scenario: show featured programs with limit 1 and offset 1
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "1"
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -56,7 +56,7 @@ Feature: Get featured programs
   Scenario: show featured programs with limit 10 and no offset
     Given I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -94,7 +94,7 @@ Feature: Get featured programs
   Scenario: show featured programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -124,7 +124,7 @@ Feature: Get featured programs
       """
 
   Scenario: show featured programs without limit and offset
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -160,7 +160,7 @@ Feature: Get featured programs
       """
 
   Scenario: show featured programs without limit and offset
-    When I GET "/pocketcode/api/projects/ios-featured.json" with these parameters
+    When I GET "/app/api/projects/ios-featured.json" with these parameters
     Then I should get the json object:
       """
       {

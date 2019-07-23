@@ -42,6 +42,7 @@ let ProjectLoader = function(container, url, recommended_by_project_id, recommen
         $(self.container).hide()
         return
       }
+      $(self.container).show()
       self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
       setup(data)
     })
@@ -64,6 +65,7 @@ let ProjectLoader = function(container, url, recommended_by_project_id, recommen
         $(self.container).hide()
         return
       }
+      $(self.container).show()
       self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
       setup(data)
     })
@@ -86,6 +88,7 @@ let ProjectLoader = function(container, url, recommended_by_project_id, recommen
         $(self.container).hide()
         return
       }
+      $(self.container).show()
       self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
       self.project_id = project_id
       setup(data)

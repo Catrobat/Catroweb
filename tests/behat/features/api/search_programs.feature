@@ -29,7 +29,7 @@ Feature: Search programs
     Given I have a parameter "q" with value "Galaxy"
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/search.json" with these parameters
+    When I GET "/app/api/projects/search.json" with these parameters
     Then I should get following programs:
       | Name       |
       | Galaxy War |
@@ -55,8 +55,8 @@ Feature: Search programs
          "UploadedString":"more than one year ago",
          "ScreenshotBig":"images/default/screenshot.png",
          "ScreenshotSmall":"images/default/thumbnail.png",
-         "ProjectUrl":"pocketcode/program/1",
-         "DownloadUrl":"pocketcode/download/1.catrobat",
+         "ProjectUrl":"app/program/1",
+         "DownloadUrl":"app/download/1.catrobat",
          "FileSize":0
      }],
      "completeTerm":"",

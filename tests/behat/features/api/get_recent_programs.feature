@@ -16,7 +16,7 @@ Feature: Get the most recent programs
   Scenario: show recent programs
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recent.json" with these parameters
+    When I GET "/app/api/projects/recent.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -34,8 +34,8 @@ Feature: Get the most recent programs
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"pocketcode/program/2",
-                                "DownloadUrl":"pocketcode/download/2.catrobat",
+                                "ProjectUrl":"app/program/2",
+                                "DownloadUrl":"app/download/2.catrobat",
                                 "FileSize":0
                             }],
           "completeTerm":"",
@@ -51,7 +51,7 @@ Feature: Get the most recent programs
   Scenario: show recent program ids
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recentIDs.json" with these parameters
+    When I GET "/app/api/projects/recentIDs.json" with these parameters
     Then I should get the json object:
       """
       {

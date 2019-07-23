@@ -18,10 +18,10 @@ Feature: Searching for programs with extensions
       | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro |
       | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | Lego,Drone |
       | 3  | myprog 3  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | Drone      |
-    And I am on "/pocketcode"
+    And I am on "/app"
 
   Scenario: Searching other programs with the same extensions
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     And I should see "program 1"
     And I should see "Lego"
     And I should see "Phiro"
@@ -32,7 +32,7 @@ Feature: Searching for programs with extensions
     And I should not see "myprog 3"
 
   Scenario: search for programs should work
-    When I am on "/pocketcode/search/Lego"
+    When I am on "/app/search/Lego"
     Then I should see "Your search returned 2 results"
     And I should see "program 1"
     And I should see "program 2"

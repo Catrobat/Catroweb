@@ -20,7 +20,7 @@ Feature: Recommendations on homepage (a.k.a. index page)
       | Catrobat  | 2          | 2    | 01.01.2017 12:00 |
       | OtherUser | 1          | 4    | 01.01.2017 12:00 |
 
-    When I am on "/pocketcode/"
+    When I am on "/app/"
     And the selected language is "English"
     And I should see "Recommended programs"
     And the element "#recommended" should be visible
@@ -34,7 +34,7 @@ Feature: Recommendations on homepage (a.k.a. index page)
       | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
       | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
 
-    When I am on "/pocketcode/"
+    When I am on "/app/"
     And the selected language is "English"
     And I should not see "Recommended programs"
     And the element "#recommended" should not be visible

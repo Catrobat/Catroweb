@@ -13,15 +13,15 @@ Feature: At the bottom of every page there should be an to the user invisible ve
   Scenario: version number should be on every page and themes
     Given I am on homepage
     Then the element "#app-version" should exist
-    Given I am on "pocketcode/login/"
+    Given I am on "app/login/"
     Then the element "#app-version" should exist
-    Given I am on "pocketcode/register/"
+    Given I am on "app/register/"
     Then the element "#app-version" should exist
-    Given I am on "pocketcode/help/"
+    Given I am on "app/help/"
     Then the element "#app-version" should exist
-    Given I am on "pocketcode/program/1"
+    Given I am on "app/program/1"
     Then the element "#app-version" should exist
-    Given I am on "pocketcode/profile/1"
+    Given I am on "app/profile/1"
     Then the element "#app-version" should exist
     Given I am on "luna"
     Then the element "#app-version" should exist

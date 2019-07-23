@@ -27,7 +27,7 @@ Feature: Search extensions programs
     Given I have a parameter "q" with value "Phiro"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/search/extensionPrograms.json" with these parameters
+    When I GET "/app/api/projects/search/extensionPrograms.json" with these parameters
     Then I should get following programs:
       | Name    |
       | Minions |

@@ -56,7 +56,7 @@ Feature: Using a release app I should not see debug programs
   Scenario: Viewing profile with debug app
     Given I use a debug build of the Catroid app
     And I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/profile"
+    And I am on "/app/profile"
     Then I should see "program 1"
     And I should see "program 2"
     And I should see "debug program"
@@ -65,7 +65,7 @@ Feature: Using a release app I should not see debug programs
   Scenario: Viewing profile with release app
     Given I use a release build of the Catroid app
     And I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/profile"
+    And I am on "/app/profile"
     Then I should see "program 1"
     And I should see "program 2"
     And I should not see "debug program"
@@ -73,13 +73,13 @@ Feature: Using a release app I should not see debug programs
 
   Scenario: Viewing program marked as debug using debug app
     Given I use a debug build of the Catroid app
-    And I am on "/pocketcode/program/3"
+    And I am on "/app/program/3"
 #    Then the response status code should be 200
     And I should see "debug program"
 
   Scenario: Viewing program marked as debug using release app
     Given I use a release build of the Catroid app
-    And I am on "/pocketcode/program/3"
+    And I am on "/app/program/3"
 #    Then the response status code should be 404
     And I should not see "debug program"
     And I should see "Ooooops something went wrong"

@@ -48,7 +48,7 @@ class ProgramFlavorListener
     }
     else
     {
-      $program->setFlavor($request->attributes->get('flavor'));
+      $program->setFlavor($request->get('flavor'));
     }
   }
 }

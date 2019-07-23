@@ -29,10 +29,10 @@ Feature: Showing similar programs on details page of one program
       | 3  | Alone   | p3          | user2    | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     |
       | 4  | Trolol  | p5          | user2    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       |
       | 5  | Nothing | p6          | user3    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
-    And I am on "/pocketcode"
+    And I am on "/app"
 
   Scenario: Showing similar programs
-    When I go to "/pocketcode/program/1"
+    When I go to "/app/program/1"
     Then I should see "Minions"
     And I should see "Similar Programs"
     And I should see "Galaxy"
@@ -42,7 +42,7 @@ Feature: Showing similar programs on details page of one program
     And I should see 3 "#recommendations .program"
 
   Scenario: No similar programs are given
-    When I go to "/pocketcode/program/5"
+    When I go to "/app/program/5"
     Then I should see "Nothing"
     And I should not see "Art"
     And I should not see "Similar Programs"

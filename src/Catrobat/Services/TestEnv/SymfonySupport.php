@@ -835,7 +835,7 @@ class SymfonySupport
     $parameters['token'] = $user->getUploadToken();
     $parameters['fileChecksum'] = md5_file($file->getPathname());
     $client = $this->getClient();
-    $client->request('POST', '/pocketcode/api/gamejam/submit.json', $parameters, [$file]);
+    $client->request('POST', '/app/api/gamejam/submit.json', $parameters, [$file]);
     $response = $client->getResponse();
 
     return $response;

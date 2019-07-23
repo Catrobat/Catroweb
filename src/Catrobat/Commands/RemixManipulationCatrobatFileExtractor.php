@@ -60,7 +60,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
       $parent_program_data = $all_parent_program_ids[$parent_program_index];
       $parent_id = $parent_program_data[0];
       $current_parent_url = !$parent_program_data[1]
-        ? '/pocketcode/program/' . $parent_id
+        ? '/app/program/' . $parent_id
         : 'https://scratch.mit.edu/projects/' . $parent_id . '/';
       $previous_parent_string = $this->generateRemixUrlsStringForMergedProgram($previous_parent_string,
         $current_parent_url);

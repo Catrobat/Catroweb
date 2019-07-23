@@ -297,7 +297,7 @@ class RemixManagerSpec extends ObjectBehavior
     $remixes_data = [];
     foreach ($parent_data as $parent_id => $data)
     {
-      $remixes_data[] = new RemixData(!$data['isScratch'] ? '/pocketcode/program/' . $parent_id
+      $remixes_data[] = new RemixData(!$data['isScratch'] ? '/app/program/' . $parent_id
         : 'https://scratch.mit.edu/projects/' . $parent_id . '/');
     }
 
@@ -1552,7 +1552,7 @@ class RemixManagerSpec extends ObjectBehavior
               $ancestor_relations_property->setValue($program_entity, new ArrayCollection($ancestor_relations));
           });
 
-      $this->addRemixes($program_entity, array(new RemixData('/pocketcode/program/' . $second_parent_id)));
+      $this->addRemixes($program_entity, array(new RemixData('/app/program/' . $second_parent_id)));
 
       expect($program_entity)->isRemixRoot()->shouldReturn(false);
       $ancestor_relations = expect($program_entity)->getCatrobatRemixAncestorRelations()->getValues();
@@ -1631,8 +1631,8 @@ class RemixManagerSpec extends ObjectBehavior
           });
 
       $this->addRemixes($program_entity, array(
-          new RemixData('/pocketcode/program/' . $second_parent_id),
-          new RemixData('/pocketcode/program/' . $expected_parent_id_to_be_added)
+          new RemixData('/app/program/' . $second_parent_id),
+          new RemixData('/app/program/' . $expected_parent_id_to_be_added)
       ));
 
       expect($program_entity)->isRemixRoot()->shouldReturn(false);

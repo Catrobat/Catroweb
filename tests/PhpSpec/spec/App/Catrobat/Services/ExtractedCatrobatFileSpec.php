@@ -42,13 +42,13 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
   {
     $this->getRemixUrlsString()->shouldReturn('やねうら部屋(びっくりハウス) remix お化け屋敷 '
       . '[https://scratch.mit.edu/projects/117697631/], '
-      . 'The Periodic Table [/pocketcode/program/3570]');
+      . 'The Periodic Table [/app/program/3570]');
   }
 
   public function it_gets_relative_and_absolute_remix_urls()
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
-    $second_expected_url = '/pocketcode/program/3570';
+    $second_expected_url = '/app/program/3570';
     $new_program_id = 3571;
 
     $urls = $this->getRemixesData($new_program_id, true);
@@ -111,7 +111,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
   public function it_can_extract_simple_relative_catrobat_remix_url()
   {
-    $first_expected_url = '/pocketcode/flavors/3570/';
+    $first_expected_url = '/app/flavors/3570/';
     $this->getProgramXmlProperties()->header->url = $first_expected_url;
     $new_program_id = 6310;
 
@@ -303,7 +303,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/program/3570';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
-    $fourth_expected_url = 'https://share.catrob.at/pocketcode/program/16267';
+    $fourth_expected_url = 'https://share.catrob.at/app/program/16267';
     $new_program_id = 16268;
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url
@@ -345,7 +345,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/program/16267';
     $third_expected_url = $first_expected_url;
-    $fourth_expected_url = 'https://share.catrob.at/pocketcode/program/16267';
+    $fourth_expected_url = 'https://share.catrob.at/app/program/16267';
     $new_program_id = 16268;
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url
@@ -375,7 +375,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/program/16268';
     $third_expected_url = $first_expected_url;
-    $fourth_expected_url = 'https://share.catrob.at/pocketcode/program/16268';
+    $fourth_expected_url = 'https://share.catrob.at/app/program/16268';
     $new_program_id = 16267;
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url
@@ -399,7 +399,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/program/16267';
     $third_expected_url = $first_expected_url;
-    $fourth_expected_url = 'https://share.catrob.at/pocketcode/program/16268';
+    $fourth_expected_url = 'https://share.catrob.at/app/program/16268';
     $new_program_id = 16267;
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url

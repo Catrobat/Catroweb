@@ -2,7 +2,7 @@
 Feature: Getting data from the media lib api even though no data is present should not crash the server
 
   Scenario: get all files from media library with an empty library
-    When I GET from the api "/pocketcode/api/media/json"
+    When I GET from the api "/app/api/media/json"
     Then I should get the json object:
     """
     [
@@ -11,7 +11,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package when the package does not exist
-    When I GET from the api "/pocketcode/api/media/package/Looks/json"
+    When I GET from the api "/app/api/media/package/Looks/json"
     Then I should get the json object:
     """
     {
@@ -21,7 +21,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package byNameUrl when the package does not exist
-    When I GET from the api "/pocketcode/api/media/packageByNameUrl/looks/json"
+    When I GET from the api "/app/api/media/packageByNameUrl/looks/json"
     Then I should get the json object:
     """
     {
@@ -34,7 +34,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
-    When I GET from the api "/pocketcode/api/media/package/Looks/json"
+    When I GET from the api "/app/api/media/package/Looks/json"
     Then I should get the json object:
     """
     [
@@ -46,7 +46,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
-    When I GET from the api "/pocketcode/api/media/packageByNameUrl/looks/json"
+    When I GET from the api "/app/api/media/packageByNameUrl/looks/json"
     Then I should get the json object:
     """
     [
@@ -55,7 +55,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package and a certain category of that package but the package does not exist
-    When I GET from the api "/pocketcode/api/media/package/Looks/Space/json"
+    When I GET from the api "/app/api/media/package/Looks/Space/json"
     Then I should get the json object:
     """
     {
@@ -68,7 +68,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
-    When I GET from the api "/pocketcode/api/media/package/Looks/Space/json"
+    When I GET from the api "/app/api/media/package/Looks/Space/json"
     Then I should get the json object:
     """
     {
@@ -84,7 +84,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackage categories:
       | id | name    | package |
       | 1  | Animals | Looks   |
-    When I GET from the api "/pocketcode/api/media/package/Looks/Space/json"
+    When I GET from the api "/app/api/media/package/Looks/Space/json"
     Then I should get the json object:
     """
     {
@@ -100,7 +100,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackage categories:
       | id | name  | package |
       | 1  | Space | Looks   |
-    When I GET from the api "/pocketcode/api/media/package/Looks/Space/json"
+    When I GET from the api "/app/api/media/package/Looks/Space/json"
     Then I should get the json object:
     """
     [
@@ -109,7 +109,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib category when the category does not exist
-    When I GET from the api "/pocketcode/api/media/category/Animals/json"
+    When I GET from the api "/app/api/media/category/Animals/json"
     Then I should get the json object:
     """
     {
@@ -125,7 +125,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackage categories:
       | id | name  | package |
       | 1  | Space | Looks   |
-    When I GET from the api "/pocketcode/api/media/category/Space/json"
+    When I GET from the api "/app/api/media/category/Space/json"
     Then I should get the json object:
     """
     {
@@ -135,7 +135,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get a single media file by id which does not exist
-    When I GET from the api "/pocketcode/api/media/file/1/json"
+    When I GET from the api "/app/api/media/file/1/json"
     Then I should get the json object:
     """
     {

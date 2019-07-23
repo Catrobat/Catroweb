@@ -93,7 +93,7 @@ class ProgramListSerializer
           $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
           $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
           $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
-            'flavor' => $request->attributes->get('flavor'),
+            'flavor' => $event->getRequest()->getSession()->get('flavor'),
             'id'     => $program->getId(),
           ]), '/');
           $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [

@@ -13,7 +13,7 @@ Feature: Authenticate to the system
   Scenario: Registration of a new user
     Given the HTTP Request:
       | Method | POST                                                 |
-      | Url    | /pocketcode/api/loginOrRegister/loginOrRegister.json |
+      | Url    | /app/api/loginOrRegister/loginOrRegister.json |
     And the POST parameters:
       | Name                 | Value                |
       | registrationUsername | newuser              |
@@ -51,7 +51,7 @@ Feature: Authenticate to the system
   Scenario: Retrieve the upload token of a user
     Given the HTTP Request:
       | Method | POST                                                 |
-      | Url    | /pocketcode/api/loginOrRegister/loginOrRegister.json |
+      | Url    | /app/api/loginOrRegister/loginOrRegister.json |
     And the POST parameters:
       | name                 | value    |
       | registrationUsername | Catrobat |
@@ -69,7 +69,7 @@ Feature: Authenticate to the system
   Scenario: Checking a given token for its validity
     Given the HTTP Request:
       | Method | POST                                  |
-      | Url    | /pocketcode/api/checkToken/check.json |
+      | Url    | /app/api/checkToken/check.json |
     And the POST parameters:
       | Name     | Value      |
       | username | Catrobat   |
@@ -105,7 +105,7 @@ Feature: Authenticate to the system
   Scenario: Registration of a new user with a too long username
     Given the HTTP Request:
       | Method | POST                                                 |
-      | Url    | /pocketcode/api/register/Register.json |
+      | Url    | /app/api/register/Register.json |
     And the POST parameters:
       | Name                 | Value                |
       | registrationUsername | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa              |

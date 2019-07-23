@@ -172,7 +172,7 @@ class ListProgramsController extends Controller
   {
     if ($useRequestFlavor === true)
     {
-      $flavor = $request->attributes->get('flavor');
+      $flavor = $request->get('flavor');
     }
 
     /**

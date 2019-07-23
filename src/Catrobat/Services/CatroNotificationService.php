@@ -22,7 +22,7 @@
  * (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes,
  * mentioning the people and program that inspired you.
  *
- * Learn more about the terms of use of the Catrobat online community on https://share.catrob.at/pocketcode/termsOfUse.
+ * Learn more about the terms of use of the Catrobat online community on https://share.catrob.at/app/termsOfUse.
  *
  * Version 1.1, 2 April 2013
  */
