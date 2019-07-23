@@ -57,7 +57,7 @@ class ProfileController extends Controller
       return $this->redirectToRoute('fos_user_security_login');
     }
 
-    $oauth_user = $user->getFacebookUid() || $user->getGplusUid();
+    $oauth_user = $user->getGplusUid();
 
     \Locale::setDefault(substr($request->getLocale(), 0, 2));
     $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));

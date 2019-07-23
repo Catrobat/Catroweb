@@ -78,28 +78,16 @@ services:
     arguments:
     - "%ldap_base_dn%"
 
-  facebook_post_service:
-    class: App\Catrobat\Services\TestEnv\FakeFacebookPostService
-    arguments:
-    - "@real_facebook_post_service"
-
-  real_facebook_post_service:
-    class: App\Catrobat\Services\FacebookPostService
-    arguments:
-    - "@router"
-    - "@service_container"
-    - "@screenshotrepository"
-
   real_oauth_service:
     class: App\Catrobat\Services\OAuthService
     arguments:
-    - "@service_container"
+      - "@service_container"
 
   oauth_service:
     class: App\Catrobat\Services\TestEnv\FakeOAuthService
     arguments:
-    - "@real_oauth_service"
-    - "@service_container"
+      - "@real_oauth_service"
+      - "@service_container"
 
   statistics:
     class: App\Catrobat\Services\TestEnv\FakeStatisticsService

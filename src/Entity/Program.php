@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\EntityListeners({"App\Catrobat\Listeners\Entity\ProgramListener"})
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="program")
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
@@ -312,32 +311,6 @@ class Program
     $this->catrobat_remix_descendant_relations = new ArrayCollection();
     $this->remix_migrated_at = null;
     $this->likes = new ArrayCollection();
-  }
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected $fb_post_id = '';
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected $fb_post_url = '';
-
-  /**
-   * @return mixed
-   */
-  public function getFbPostId()
-  {
-    return $this->fb_post_id;
-  }
-
-  /**
-   * @param mixed $fb_post_id
-   */
-  public function setFbPostId($fb_post_id)
-  {
-    $this->fb_post_id = $fb_post_id;
   }
 
   /**
@@ -1113,22 +1086,6 @@ class Program
     $this->program_downloads[] = $program_download;
 
     return $this->program_downloads;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getFbPostUrl()
-  {
-    return $this->fb_post_url;
-  }
-
-  /**
-   * @param mixed $fb_post_url
-   */
-  public function setFbPostUrl($fb_post_url)
-  {
-    $this->fb_post_url = $fb_post_url;
   }
 
   /**

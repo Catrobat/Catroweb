@@ -132,11 +132,6 @@ class User extends BaseUser implements LdapUserInterface
   protected $gplus_refresh_token;
 
   /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
-  protected $facebook_access_token;
-
-  /**
    * @ORM\Column(type="boolean", options={"default":false})
    */
   protected $limited = false;
@@ -153,23 +148,7 @@ class User extends BaseUser implements LdapUserInterface
     $this->country = '';
   }
 
-  /**
-   *
-   * @param mixed $facebook_access_token
-   */
-  public function setFacebookAccessToken($facebook_access_token)
-  {
-    $this->facebook_access_token = $facebook_access_token;
-  }
 
-  /**
-   *
-   * @return mixed
-   */
-  public function getFacebookAccessToken()
-  {
-    return $this->facebook_access_token;
-  }
 
   /**
    *

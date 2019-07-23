@@ -1406,16 +1406,6 @@ else
             'Label'       : 'Google',
             'method'      : 'Google',
           },
-          {
-            /**
-             * Tracks the facebook logins
-             */
-            'BaseSelector': 'a#btn-login_facebook',
-            'Category'    : loginCategory,
-            'Action'      : 'sign_up',
-            'Label'       : 'Facebook',
-            'method'      : 'Facebook',
-          },
         ]
         
         let trackingObjectList = TrackingObjectFactory.createArray(elementList)

@@ -545,16 +545,7 @@ services:
     public: true
     tags: ['controller.service_arguments']
 
-  # =========================== Social ===========================
-
-  facebook_post_service:
-    class: App\Catrobat\Services\FacebookPostService
-    arguments:
-      - "@router"
-      - "@service_container"
-      - "@screenshotrepository"
-    public: true
-  App\Catrobat\Services\FacebookPostService: "@facebook_post_service"
+  # =========================== Controller ===========================
 
   oauth_service:
     class: App\Catrobat\Services\OAuthService
@@ -1216,15 +1207,6 @@ services:
     tags:
       - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
 
-
-  # ======== Facebook Posts =======
-
-  catrobat.fb_post.post:
-    class: App\Catrobat\Listeners\ProgramFbPostListener
-    arguments: ["@facebook_post_service"]
-    tags:
-      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
-
   # ======== Logging ========
 
   catrobat.core.services.invalidprogramuploadlogger:
@@ -1239,12 +1221,6 @@ services:
   catrobat.entity.featured.image_listener:
     class: App\Catrobat\Listeners\Entity\FeaturedProgramImageListener
     arguments: ["@featuredimagerepository"]
-    tags:
-      - { name: doctrine.orm.entity_listener }
-
-  catrobat.entity.program_listener:
-    class: App\Catrobat\Listeners\Entity\ProgramListener
-    arguments: ["@facebook_post_service", "@logger"]
     tags:
       - { name: doctrine.orm.entity_listener }
 

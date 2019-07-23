@@ -282,7 +282,6 @@ class UploadController
       $response['form'] = $this->assembleFormUrl($gamejam, $user, $program, $request);
     }
 
-    $request->attributes->set('post_to_facebook', false);
     $request->attributes->set('program_id', $program->getId());
     $response['preHeaderMessages'] = '';
 
@@ -311,7 +310,6 @@ class UploadController
     $response['answer'] = $this->trans('failure.upload');
     $response['token'] = $user->getUploadToken();
 
-    $request->attributes->set('post_to_facebook', false);
     $request->attributes->set('program_id', 0);
     $response['preHeaderMessages'] = '';
 

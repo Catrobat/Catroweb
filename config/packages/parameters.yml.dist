@@ -20,16 +20,10 @@ parameters:
     application_name: Pocket Code
     google_app_id: ~
     google_secret: ~
-    facebook_app_id: ~
-    facebook_secret: ~
     google_testuser_mail: ~
     google_testuser_pw: ~
     google_testuser_name: ~
     google_testuser_id: ~
-    facebook_testuser_mail: ~
-    facebook_testuser_pw: ~
-    facebook_testuser_name: ~
-    facebook_testuser_id: ~
 
     ldap_host: http://localhost
     ldap_port: 636
@@ -37,12 +31,6 @@ parameters:
     ldap_password: "secret"
     ldap_base_dn: ou=users, dc=organisation, dc=org
     ldap_group_filter: "(&(&(ObjectClass=groupOfUniqueNames))(uniqueMember=%s))" #%s is replaced by sprintf with user dn
-
-    facebook_share_app_id: ~
-    facebook_share_app_secret: ~
-    facebook_share_admin_fb_id: ~
-    facebook_share_access_token: ~
-    facebook_share_channel_id: ~
 
     backup_host_name: ~
     backup_host_user: ~

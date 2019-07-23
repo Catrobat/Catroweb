@@ -57,13 +57,6 @@ class BaseContext implements KernelAwareContext
     return $this->symfony_support;
   }
 
-  /**
-   * @return \App\Catrobat\Services\FacebookPostService
-   */
-  public function getRealFacebookPostServiceForTests()
-  {
-    return $this->symfony_support->getRealFacebookPostServiceForTests();
-  }
 
   /**
    *

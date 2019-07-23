@@ -114,5 +114,5 @@ default:
 #
     gherkin:
         filters:
-            tags: "@~disabled&&~wip&&~external&&~RealOAuth&&~RealFacebook"
+            tags: "@~disabled&&~wip&&~external&&~RealOAuth"
 

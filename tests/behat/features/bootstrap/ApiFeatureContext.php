@@ -62,15 +62,6 @@ class ApiFeatureContext extends BaseContext
    */
   private $secure;
 
-  /**
-   * @var
-   */
-  private $fb_post_program_id;
-
-  /**
-   * @var
-   */
-  private $fb_post_id;
 
   /**
    * @var array
@@ -366,27 +357,6 @@ class ApiFeatureContext extends BaseContext
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Support Functions
-
-  /**
-   * @BeforeScenario @RealFacebook
-   */
-  public function activateRealFacebookService()
-  {
-    $this->getClient()->disableReboot();
-    $this->getSymfonyService('facebook_post_service')->useRealService(true);
-    $this->theServerNameIs('share.catrob.at');
-    $this->iUseASecureConnection();
-  }
-
-  /**
-   * @AfterScenario @RealFacebook
-   */
-  public function deactivateRealFacebookService()
-  {
-    $this->getSymfonyService('facebook_post_service')->useRealService(false);
-    $this->theServerNameIs('localhost');
-    $this->getClient()->enableReboot();
-  }
 
   /**
    * @BeforeScenario @RealGeocoder
@@ -2278,47 +2248,6 @@ class ApiFeatureContext extends BaseContext
     $this->iPostTheseParametersTo('/pocketcode/api/reportProgram/reportProgram.json');
   }
 
-  /**
-   * @Then /^the project should be posted to Facebook with message "([^"]*)" and the correct project ID$/
-   * @param $fb_post_message
-   */
-  public function theProjectShouldBePostedToFacebookWithMessageAndTheCorrectProjectId($fb_post_message)
-  {
-    $response = json_decode($this->getClient()
-      ->getResponse()
-      ->getContent(), true);
-    $project_id = $response['projectId'];
-
-    /**
-     *
-     * @var $program Program
-     */
-    $program_manager = $this->getSymfonySupport()->getProgramManager();
-    $program = $program_manager->find($project_id);
-    $user = $program->getUser();
-    $fb_post_id = $program->getFbPostId();
-    $fb_post_url = $program->getFbPostUrl();
-
-    $profile_url = $this->getSymfonySupport()->getRouter()
-      ->generate('profile', ['id' => $user->getId()], true);
-    Assert::assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
-    Assert::assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
-    $fb_response = $this->getSymfonyService('facebook_post_service')
-      ->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
-
-    $fb_post_message = $fb_post_message . chr(10) . 'by ' . $profile_url;
-
-    $fb_id = $fb_response['id'];
-    $fb_message = $fb_response['message'];
-
-    $this->fb_post_id = $fb_id;
-    Assert::assertTrue($fb_id != '', "No Facebook Post ID was returned");
-    Assert::assertEquals(
-      $fb_id, $program_manager->find($project_id)->getFbPostId(),
-      "Facebook Post ID's do not match"
-    );
-    Assert::assertEquals($fb_post_message, $fb_message, "Facebook messages do not match");
-  }
 
   /**
    * @When /^I have a parameter "([^"]*)" with the returned projectId$/
@@ -2329,32 +2258,7 @@ class ApiFeatureContext extends BaseContext
     $response = json_decode($this->getClient()
       ->getResponse()
       ->getContent(), true);
-    $this->fb_post_program_id = $response['projectId'];
     $this->request_parameters[$name] = $response['projectId'];
-  }
-
-  /**
-   * @Then /^the Facebook Post should be deleted$/
-   */
-  public function theFacebookPostShouldBeDeleted()
-  {
-    //echo 'Delete post with Facebook ID ' . $this->fb_post_id;
-
-    $program_manager = $this->getProgramManger();
-    $program = $program_manager->find($this->fb_post_program_id);
-    Assert::assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
-    $fb_response = $this->getSymfonyService('facebook_post_service')
-      ->checkFacebookPostAvailable($this->fb_post_id);
-
-    $string = print_r($fb_response, true);
-    Assert::assertNotContains(
-      'id', $string,
-      'Facebook ID was returned, but should not exist anymore as the post was deleted'
-    );
-    Assert::assertNotContains(
-      'message', $string,
-      'Facebook message was returned, but should not exist anymore as the post was deleted'
-    );
   }
 
   /**
