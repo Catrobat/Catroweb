@@ -789,6 +789,30 @@ class ProgramRepository extends EntityRepository
   }
 
   /**
+   * @param      $user_id
+   * @param bool $debug_build If debug builds should be included
+   *
+   * @return Program[]
+   */
+  public function getPublicUserPrograms($user_id, bool $debug_build)
+  {
+    $qb = $this->createQueryBuilder('e');
+
+    $qb
+      ->select('e')
+      ->leftJoin('e.user', 'f')
+      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->setParameter('user_id', $user_id)
+      ->orderBy('e.uploaded_at', 'DESC');
+
+    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**
    * @param bool        $debug_build If debug builds should be included
    * @param string|null $flavor
    *

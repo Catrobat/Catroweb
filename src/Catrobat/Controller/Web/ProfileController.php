@@ -39,17 +39,17 @@ class ProfileController extends Controller
     $id = (integer)$id;
     $twig = 'UserManagement/Profile/profileHandler.html.twig';
     $my_profile = false;
-    $program_count = 0;
 
     if ($id === 0 || ($this->getUser() && $this->getUser()->getId() === $id))
     {
       $user = $this->getUser();
       $my_profile = true;
+      $program_count = count($this->get('programmanager')->getUserPrograms($id));
     }
     else
     {
       $user = $this->get('usermanager')->find($id);
-      $program_count = count($this->get('programmanager')->getUserPrograms($id));
+      $program_count = count($this->get('programmanager')->getPublicUserPrograms($id));
     }
 
     if (!$user)

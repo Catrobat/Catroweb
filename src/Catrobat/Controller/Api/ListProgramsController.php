@@ -214,7 +214,12 @@ class ListProgramsController extends Controller
     }
     elseif ($sortBy == 'user')
     {
-      $programs = $program_manager->getUserPrograms($user_id);
+      if ($this->getUser() !== null && $this->getUser()->getId() === $user_id) {
+        $programs = $program_manager->getUserPrograms($user_id);
+      }
+      else {
+        $programs = $program_manager->getPublicUserPrograms($user_id);
+      }
     }
     elseif ($sortBy == 'random')
     {
