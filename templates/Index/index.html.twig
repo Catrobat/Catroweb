@@ -96,7 +96,7 @@
     {% else %}
     let newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}')
     let recommendedByPageId = {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
-    let recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId)
+    let recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, recommendedByPageId)
     let mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
     let mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
     let random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')

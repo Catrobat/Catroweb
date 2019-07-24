@@ -1,4 +1,4 @@
-let ProgramLoader = function (container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
+let ProgramLoader = function (container, url, recommended_by_program_id, recommended_by_page_id) {
   let self = this
   self.container = container
   self.url = url
@@ -20,19 +20,14 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
   self.total_amount_of_found_programs = 0
   self.default_amount_of_visible_programs = 3
   self.is_init = true
+  self.program_id = undefined
   
   self.init = function () {
     self.restoreParamsWithSessionStorage()
     $.get(self.url, {limit: self.initial_download_limit, offset: self.amount_of_loaded_programs}, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
       {
-        let url = Routing.generate('translate_word', {
-          'word'  : 'programs.noPrograms',
-          'domain': 'catroweb'
-        })
-        $.get(url, function (data) {
-          $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>')
-        })
+        $(self.container).hide()
         return
       }
       self.total_amount_of_found_programs = parseInt(data.CatrobatInformation.TotalProjects)
@@ -60,8 +55,28 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
     })
   }
   
+  self.initMoreFromThisUser = function (user_id, program_id) {
+    $.get(self.url, {
+      limit  : self.initial_download_limit,
+      offset : self.amount_of_loaded_programs,
+      user_id: user_id
+    }, function (data) {
+      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
+      {
+        $(self.container).hide()
+        return
+      }
+      self.total_amount_of_found_programs = parseInt(data.CatrobatInformation.TotalProjects)
+      self.program_id = program_id
+      self.setup(data)
+      
+      if (self.total_amount_of_found_programs <= 1) {
+        $(self.container).hide()
+      }
+    })
+  }
+  
   self.initSpecificRecsys = function () {
-    $(self.container).hide()
     self.init()
   }
   
@@ -136,6 +151,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
         '<div class="button-show-less"><i class="fa fa-chevron-circle-up catro-icon-button"></i></div>' +
         '</div>')
     }
+    
     self.loadProgramsIntoContainer(data)
     
     self.showMoreListener()
@@ -155,6 +171,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
   
   self.updateParameterBasedOnScreenSize = function () {
     let columns = Math.floor(($('.programs').width()) / $('.program').outerWidth(true))
+    
     if (columns < self.columns_min)
     {
       columns = self.columns_min
@@ -165,6 +182,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
     }
     self.columns = columns
     self.download_limit = self.default_rows * self.columns
+    
     if (self.initial_download_limit > self.download_limit)
     {
       self.initial_download_limit = self.initial_download_limit - (self.initial_download_limit % self.download_limit)
@@ -204,6 +222,10 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
     let programs = data.CatrobatProjects
     for (let i = 0; i < programs.length; i++)
     {
+      if (programs[i].ProjectId === self.program_id) {
+        continue;
+      }
+      
       let div = null
       let additional_link_css_class = null
       
@@ -219,13 +241,14 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
         case '#user-programs':
           div = '<div><i class="fas fa-clock program-small-icon"></i>' + programs[i].UploadedString + '</div>'
           break
-        case '#mostDownamount_of_loaded_programs':
-          div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>'
+        case '#mostDownloaded':
+          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Downloads + '</div>'
           break
         case '#mostViewed':
           div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>'
           break
         case '#recommendations':
+        case '#more-from-this-user-recommendations':
           div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>'
           break
         case '#recommended':

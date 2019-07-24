@@ -76,6 +76,7 @@ h2
 #program-bottom
 {
   border-top: 1px solid $default-text-color;
+  border-bottom: 1px solid $default-text-color;
   padding-top: 25px;
   padding-bottom: 25px;
   display: table;
@@ -586,11 +587,6 @@ input[type='number']
       }
     }
   }
-}
-
-#recommendations, #specific-programs-recommendations
-{
-  border-top: 1px solid #17a5b8;
 }
 
 #recsys-headline, #recsys-specific-programs-headline
