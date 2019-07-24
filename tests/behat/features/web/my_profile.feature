@@ -41,7 +41,6 @@ Feature:
       | 28 | program 28 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
       | 29 | program 29 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
 
-    
     And I log in as "Catrobat" with the password "123456"
     And I am on "/app/user"
     And I should see "My Profile"
@@ -258,10 +257,16 @@ Feature:
     And the element "#visibility-lock-open-1" should be visible
     And the element "#visibility-lock-1" should not be visible
     When I click "#visibility-lock-open-1"
+    And I wait 200 milliseconds
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
     And I wait for the server response
     And the element "#visibility-lock-open-1" should not be visible
     And the element "#visibility-lock-1" should be visible
-    When I click "#visibility-lock-1"
+   When I click "#visibility-lock-1"
+    And I wait 200 milliseconds
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
     And I wait for the server response
     And the element "#visibility-lock-open-1" should be visible
     And the element "#visibility-lock-1" should not be visible
@@ -273,6 +278,9 @@ Feature:
     And the element "#visibility-lock-2" should be visible
     And the element "#visibility-lock-open-2" should not be visible
     When I click "#visibility-lock-open-2"
+    And I wait 100 milliseconds
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
     And I wait for the server response
     Then the element "#visibility-lock-2" should not be visible
     And the element "#visibility-lock-open-2" should be visible
@@ -313,6 +321,7 @@ Feature:
   Scenario: at a profile page there should always all programs be visible
     Given I log in as "User1" with the password "654321"
     And I am on "/app/user"
+    And I wait 100 milliseconds
     Then I should see "program 3"
     And I should see "program 4"
     And I should see "oldestProg"
@@ -344,6 +353,7 @@ Feature:
   Scenario: programs should be ordered newest first
     Given I log in as "User1" with the password "654321"
     And I am on "/app/user"
+    And I wait 100 milliseconds
     When I click ".program"
     Then I am on "/app/project/6"
 
