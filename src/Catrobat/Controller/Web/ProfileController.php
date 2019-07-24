@@ -262,6 +262,51 @@ class ProfileController extends Controller
     ]);
   }
 
+  /**
+   * @Route("/usernameSave", name="username_save", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+   */
+  public function usernameSaveAction(Request $request)
+  {
+    /**
+     * @var User
+     */
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $username = $request->request->get('username');
+
+    if ($username === '')
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::USERNAME_MISSING]);
+    }
+
+    try
+    {
+      $this->validateUsername($username);
+    } catch (\Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::USERNAME_INVALID]);
+    }
+
+    if ($this->checkUsernameExists($username))
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::USERNAME_ALREADY_EXISTS]);
+    }
+
+    $user->setUsername($username);
+    $this->get('usermanager')->updateUser($user);
+
+    return JsonResponse::create([
+      'statusCode' => StatusCode::OK,
+    ]);
+  }
 
   /**
    * @Route("/profileUploadAvatar", name="profile_upload_avatar", methods={"POST"})
@@ -515,6 +560,20 @@ class ProfileController extends Controller
     }
   }
 
+  /**
+   * @param $username
+   *
+   * @throws \Exception
+   */
+  private function validateUsername($username)
+  {
+    // also take a look at /config/validator/validation.xml when applying changes!
+    if ($username === null || strlen($username) < 3 || strlen($username) > 180)
+    {
+      throw new \Exception(StatusCode::USERNAME_INVALID);
+    }
+  }
+
 
   /**
    * @param $country
@@ -547,6 +606,28 @@ class ProfileController extends Controller
     $userWithSecondMail = $this->get('usermanager')->findOneBy(['additional_email' => $email]);
 
     if ($userWithFirstMail !== null && $userWithFirstMail !== $this->getUser() || $userWithSecondMail !== null && $userWithSecondMail !== $this->getUser())
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * @param $email
+   *
+   * @return bool
+   */
+  private function checkUsernameExists($username)
+  {
+    if ($username === '')
+    {
+      return false;
+    }
+
+    $user = $this->get('usermanager')->findOneBy(['username' => $username]);
+
+    if ($user !== null && $user !== $this->getUser())
     {
       return true;
     }

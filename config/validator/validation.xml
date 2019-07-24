@@ -13,6 +13,8 @@
                     - oauth registration (assets/js/register/register.js)
                     - API
                     - Sonata Admin
+                    - change username
+                    - html5 validation fields
             -->
             <constraint name="NotBlank">
                 <option name="message">fos_user.username.blank</option>
@@ -35,6 +37,7 @@
 
         <property name="plainPassword">
             <!-- Also has to be manually changed for:
+                        - change password
                         - Api
                         - Sonata Admin
              -->

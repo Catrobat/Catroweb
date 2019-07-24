@@ -1,8 +1,11 @@
-let MyProfile = function (profile_url,
+let MyProfile = function (profile_url, save_username,
                           save_email_url, save_country_url, save_password_url,
                           delete_url, delete_account_url,
                           toggle_visibility_url, upload_url,
                           statusCode_OK,
+                          statusCode_USERNAME_ALREADY_EXISTS,
+                          statusCode_USERNAME_MISSING,
+                          statusCode_USERNAME_INVALID,
                           statusCode_USER_EMAIL_ALREADY_EXISTS,
                           statusCode_USER_EMAIL_MISSING,
                           statusCode_USER_EMAIL_INVALID,
@@ -21,6 +24,7 @@ let MyProfile = function (profile_url,
   let self = this
   self.profile_url = profile_url
   self.profile_edit_url = profile_url
+  self.save_username = save_username
   self.save_email_url = save_email_url
   self.save_country_url = save_country_url
   self.save_password_url = save_password_url
@@ -37,6 +41,8 @@ let MyProfile = function (profile_url,
   }
   
   let passwordEditContainer = $('#password-edit-container')
+  let usernameEditContainer = $('#username-edit-container')
+  let usernameData = $('#username-wrapper > .profile-data')
   let emailEditContainer = $('#email-edit-container')
   let emailData = $('#email-wrapper > .profile-data')
   let countryEditContainer = $('#country-edit-container')
@@ -58,6 +64,10 @@ let MyProfile = function (profile_url,
   
   $('#edit-email-button').on('click', function () {
     toggleEditSection(emailEditContainer, emailData)
+  })
+  
+  $('#edit-username-button').on('click', function () {
+    toggleEditSection(usernameEditContainer, usernameData)
   })
   
   $('#edit-country-button').on('click', function () {
@@ -184,25 +194,7 @@ let MyProfile = function (profile_url,
       $('.swal2-container.swal2-shown').css('background-color', 'rgba(255, 0, 0, 0.75)')//changes the color of the overlay
     })
   })
-  
-  //$(document).on("click", "#save-name", function(){
-  //  let new_username = $('#username').val();
-  //  $.post(self.save_name_url, {
-  //    new_user_name: new_username
-  //  }, function(data){
-  //    switch (parseInt(data.statusCode)) {
-  //      case 776:
-  //        $('.text-username-invalid').show();
-  //        break;
-  //      case 777:
-  //        $('.text-username-in-use').show();
-  //        break;
-  //      default:
-  //        window.location.href = self.profile_edit_url;
-  //    }
-  //  });
-  //});
-  
+
   $(document).on('click', '#save-email', function () {
     $(this).hide()
     $('#email-ajax').show()
@@ -248,11 +240,11 @@ let MyProfile = function (profile_url,
         case statusCode_USER_EMAIL_INVALID:
           if (parseInt(data.email) === 1)
           {
-            $('.text-email1-notvalid').removeClass('d-none')
+            $('.text-email1-not-valid').removeClass('d-none')
           }
           if (parseInt(data.email) === 2)
           {
-            $('.text-email2-notvalid').removeClass('d-none')
+            $('.text-email2-not-valid').removeClass('d-none')
           }
           break
         
@@ -261,6 +253,41 @@ let MyProfile = function (profile_url,
       }
       $('#email-ajax').hide()
       $('#save-email').show()
+    })
+    self.data_changed = false
+  })
+  
+  $(document).on('click', '#save-username', function () {
+    $(this).hide()
+    $('#username-ajax').show()
+    
+    let username = $('#username')
+    $('.error-message').addClass('d-none')
+    
+    let new_username = username.val()
+
+    $.post(self.save_username, {
+      username: new_username
+    }, function (data) {
+      switch (parseInt(data.statusCode))
+      {
+        case statusCode_USERNAME_ALREADY_EXISTS:
+          $('.text-username-exists').removeClass('d-none')
+          break
+        
+        case statusCode_USERNAME_MISSING:
+          $('.text-username-missing').removeClass('d-none')
+          break
+        
+        case statusCode_USERNAME_INVALID:
+          $('.text-username-not-valid').removeClass('d-none')
+          break
+        
+        default:
+          window.location.href = self.profile_edit_url
+      }
+      $('#username-ajax').hide()
+      $('#save-username').show()
     })
     self.data_changed = false
   })

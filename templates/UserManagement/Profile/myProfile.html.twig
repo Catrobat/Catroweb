@@ -18,7 +18,7 @@
     <h1 class="header mb-0">
       {{ "profile.myPrograms"|trans({}, "catroweb") }}
     </h1>
-    <div class="programs"></div>
+    <div class="programs mt-4"></div>
   </div>
 
   <div class="clear mt-5"></div>
@@ -46,12 +46,15 @@
     {% if not app.user.limited %}
       programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
       // load programs need profile!
-      let profile = new MyProfile('{{ path('profile') }}',
+      let profile = new MyProfile('{{ path('profile') }}', '{{ path('username_save') }}',
         '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',
         '{{ path('profile_delete_program') }}', '{{ path('profile_delete_account') }}',
         '{{ path('profile_toggle_program_visibility') }}',
         '{{ path('profile_upload_avatar') }}',
         {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('App\\Catrobat\\StatusCode::USERNAME_ALREADY_EXISTS') }},
+        {{ constant('App\\Catrobat\\StatusCode::USERNAME_MISSING') }},
+        {{ constant('App\\Catrobat\\StatusCode::USERNAME_INVALID') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_ALREADY_EXISTS') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_MISSING') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_INVALID') }},
