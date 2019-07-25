@@ -63,6 +63,51 @@
       </li>
     {% endif %}
 
+    <hr>
+
+    {# Programs #}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('index') }}#featured" id="btn-featured">
+        <i class="fas fa-star mr-1"></i>
+        <span>{{ 'programs.featured'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('index') }}#newest" id="btn-newest">
+        <i class="fas fa-clock mr-1"></i>
+        <span>{{ 'programs.newest'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('index') }}#recommended" id="btn-recommended">
+        <i class="fas fa-thumbs-up mr-1"></i>
+        <span>{{ 'programs.recommended'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('index') }}#mostDownloaded" id="btn-most-downloaded">
+        <i class="fas fa-download mr-1"></i>
+        <span>{{ 'programs.most.downloaded'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('index') }}#mostViewed" id="btn-most-viewed">
+        <i class="fas fa-eye mr-1"></i>
+        <span>{{ 'programs.most.viewed'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('index') }}#random" id="btn-random">
+        <i class="fas fa-dice mr-1"></i>
+        <span>{{ 'programs.random'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
     {% if sidebar_ul is not empty %}
       {{ sidebar_ul|raw }}
     {% endif %}

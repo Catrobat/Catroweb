@@ -79,10 +79,10 @@ programs:
   most:
     viewed: Most viewed
     downloaded: Most downloaded
-  random: Random Programs
-  related: Related Programs
+  random: Random programs
+  related: Related programs
   downloads: '%downloads% downloads'
-  sample: Example Programs
+  sample: Example programs
   views: '%views% views'
   likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
