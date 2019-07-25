@@ -84,7 +84,7 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
     $this->tag_repository = $this->getContainer()->get('tagrepository');
     $metadata = $this->em->getClassMetadata('App\Entity\Tag')->getFieldNames();
 
-    for ($i = 1; $i <= 6; $i++)
+    for ($i = 1; $i <= 7; $i++)
     {
       $tag = $this->tag_repository->find($i);
 
