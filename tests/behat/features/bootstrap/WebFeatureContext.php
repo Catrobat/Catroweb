@@ -198,6 +198,19 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $this->iUseTheUserAgentParameterized("0.998", "PocketCode", "0.9.60", $build_type);
   }
 
+  // @formatter:off
+  /**
+   * @Given /^I use an ios app$/
+   */
+  // @formatter:on
+  public function iUseAnIOSApp()
+  {
+    // see org.catrobat.catroid.ui.WebViewActivity
+    $platform = "iPhone";
+    $user_agent =  " Platform/" . $platform;
+    $this->getSession()->setRequestHeader("User-Agent", $user_agent);
+  }
+
 
   /**
    * @When /^I wait (\d+) milliseconds$/
