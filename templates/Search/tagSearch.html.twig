@@ -18,7 +18,7 @@
 
 {% block js %}
   <script>
-    let search = new ProgramLoader('#search-results', '{{ path('api_search_tag') }}')
+    let search = new ProjectLoader('#search-results', '{{ path('api_search_tag') }}')
     search.initSearch('{{ q }}')
   </script>
 {% endblock %}

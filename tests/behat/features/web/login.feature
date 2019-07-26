@@ -7,6 +7,9 @@ Feature:
       | name     | password | token      | email               |
       | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
       | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
+    And there are programs:
+      | id | name       | description | owned by | downloads | apk_downloads | views | upload time      | version | language version | private |
+      | 1  | program 1  | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | 0       |
 
   Scenario: Login and logout
     Given I am on homepage

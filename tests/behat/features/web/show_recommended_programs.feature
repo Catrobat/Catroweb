@@ -5,6 +5,8 @@ Feature: Showing similar programs on details page of one program
     Given there are users:
       | name     | password | token      | email               |
       | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
+      | user2    | 123456   | cccccccccc | dev2@pocketcode.org |
+      | user3    | 123456   | cccccccccc | dev3@pocketcode.org |
     And there are extensions:
       | id | name         | prefix  |
       | 1  | Arduino      | ARDUINO |
@@ -23,10 +25,10 @@ Feature: Showing similar programs on details page of one program
     And there are programs:
       | id | name    | description | owned by | downloads | apk_downloads | views | upload time      | version | extensions | tags_id |
       | 1  | Minions | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | 1,2,3,4 |
-      | 2  | Galaxy  | p2          | Catrobat | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   |
-      | 3  | Alone   | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     |
-      | 4  | Trolol  | p5          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       |
-      | 5  | Nothing | p6          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
+      | 2  | Galaxy  | p2          | user2    | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   |
+      | 3  | Alone   | p3          | user2    | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     |
+      | 4  | Trolol  | p5          | user2    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       |
+      | 5  | Nothing | p6          | user3    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
     And I am on "/pocketcode"
 
   Scenario: Showing similar programs
@@ -37,6 +39,7 @@ Feature: Showing similar programs on details page of one program
     And I should see "Alone"
     And I should see "Trolol"
     But I should not see "Nothing"
+    And I should see 3 "#recommendations .program"
 
   Scenario: No similar programs are given
     When I go to "/pocketcode/program/5"
@@ -47,3 +50,4 @@ Feature: Showing similar programs on details page of one program
     And I should not see "Minions"
     And I should not see "Galaxy"
     And I should not see "Alone"
+    And I should see 0 "#recommendations .program"

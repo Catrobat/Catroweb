@@ -477,14 +477,14 @@
 
     var undefined
     var programID = {{ program.id }};
-    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}', programID)
+    var recs = new ProjectLoader('#recommendations', '{{ path('api_recsys_programs') }}', programID)
     recs.initRecsys()
 
     var recommendedByPageId = {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
-    var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', programID, recommendedByPageId)
-    specificRecommender.initSpecificRecsys()
+    var specificRecommender = new ProjectLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', programID, recommendedByPageId)
+    specificRecommender.init()
 
-    let more_from_this_user = new ProgramLoader('#more-from-this-user-recommendations', '{{ path('api_user_programs') }}')
+    let more_from_this_user = new ProjectLoader('#more-from-this-user-recommendations', '{{ path('api_user_programs') }}')
     more_from_this_user.initMoreFromThisUser({{ program.user.id }}, programID)
 
     counter = 10

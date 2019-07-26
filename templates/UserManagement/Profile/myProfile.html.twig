@@ -44,7 +44,7 @@
 
     let programs
     {% if not app.user.limited %}
-      programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
+      programs = new ProjectLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
       // load programs need profile!
       let profile = new MyProfile('{{ path('profile') }}', '{{ path('username_save') }}',
         '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',
@@ -76,7 +76,7 @@
       profile.init()
       programs.initProfile({{ app.user.id }})
     {% else %}
-      programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}')
+      programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
       programs.initProfile({{ app.user.id }})
     {% endif %}
 

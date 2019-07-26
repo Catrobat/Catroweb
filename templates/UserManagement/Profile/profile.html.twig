@@ -84,7 +84,7 @@
 
 {% block js %}
   <script>
-    let programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}')
+    let programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     programs.initProfile('{{ profile.id }}')
 
     $(document).on('click', '.program', function () {
