@@ -227,3 +227,16 @@ Feature: As a visitor I want to see a program page
     Given I am on "/pocketcode/program/1"
     Then I should see "my superman description"
     And I should not see "Show more"
+    
+  Scenario: On the project page there should be all buttons visible to web and android
+    Given I am on "/pocketcode/program/1"
+    Then I should see "Download as program"
+    And I should see "Show Remix Graph"
+    And I should see "Download as app"
+
+  Scenario: On the project page there should be no apk button be visible to ios users
+    Given I use an ios app
+    And I am on "/pocketcode/program/1"
+    Then I should see "Download as program"
+    And I should see "Show Remix Graph"
+    And I should not see "Download as app"

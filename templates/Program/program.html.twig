@@ -204,6 +204,7 @@
           </button>
         </div>
 
+        {% if not isIOSWebview() %}
         <div id="apk-generate" class="btn-container col-12 col-xl-6">
           <button class="btn btn-primary">
             <i class="program-big-button-icon mr-3 fab fa-android"></i>
@@ -226,6 +227,7 @@
           </button>
         </div>
       </div>
+      {% endif %}
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% if jam %}

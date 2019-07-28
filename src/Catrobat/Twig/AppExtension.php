@@ -108,6 +108,7 @@ class AppExtension extends AbstractExtension
       new TwigFunction('getenv', 'getenv'),
       new TwigFunction('countriesList', [$this, 'getCountriesList']),
       new TwigFunction('isWebview', [$this, 'isWebview']),
+      new TwigFunction('isIOSWebview', [$this, 'isIOSWebview']),
       new TwigFunction('checkCatrobatLanguage', [$this, 'checkCatrobatLanguage']),
       new TwigFunction('getLanguageOptions', [$this, 'getLanguageOptions']),
       new TwigFunction('getMediaPackageImageUrl', [$this, 'getMediaPackageImageUrl']),
@@ -237,8 +238,19 @@ class AppExtension extends AbstractExtension
     $user_agent = $request->headers->get('User-Agent');
 
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    return preg_match('/Catrobat/', $user_agent) || strpos($user_agent, 'Android') != false ||
-      strpos($user_agent, 'iPad') != false || strpos($user_agent, 'iPhone') != false;
+    return preg_match('/Catrobat/', $user_agent) || strpos($user_agent, 'Android') !== false ||
+      strpos($user_agent, 'iPad') !== false || strpos($user_agent, 'iPhone') !== false;
+  }
+
+  /**
+   * @return bool
+   */
+  public function isIOSWebview()
+  {
+    $request = $this->request_stack->getCurrentRequest();
+    $user_agent = $request->headers->get('User-Agent');
+
+    return strpos($user_agent, 'iPad') !== false || strpos($user_agent, 'iPhone') !== false;
   }
 
   /**
