@@ -4,11 +4,10 @@ let termsModalAgreed = false
 
 $(document).ready(function () {
   //
-  // 3 different cases to register an Pocketcode account:
+  // 2 different cases to register an account:
   //
   // - default fos user account registration
   // - Google Sign In
-  // - Facebook Sign In
   //
   $(document).on('click', '#agreeButton', function () {
     termsModalAgreed = true
@@ -21,10 +20,6 @@ $(document).ready(function () {
         triggerGoogleLogin()
         termsModalAgreeButton = ''
         break
-      case 'facebook_login':
-        triggerFacebookLogin()
-        termsModalAgreeButton = ''
-        break
     }
   })
   // Default registration
@@ -32,10 +27,7 @@ $(document).ready(function () {
     termsModalAgreeButton = 'registration_form'
     return termsModalAgreed // only submit after agreed terms of modal
   })
-  // Facebook Sign in
-  $(document).on('click', '#btn-login_facebook', function () {
-    termsModalAgreeButton = 'facebook_login'
-  })
+  
   // Google Sign in
   $(document).on('click', '#btn-login_google', function () {
     termsModalAgreeButton = 'google_login'
@@ -75,16 +67,9 @@ function openDialog(defaultText = chooseUserNameDialogText, defaultInputValue = 
           // The user has to choose a valid username
           return openDialog(usernameTaken, result)
         }
-        // Register the user either for facebook or google
+        // Register the user with google
         let fbOrGoogle = $('#fb_google').val()
-        if (fbOrGoogle === 'fb') {
-          sendTokenToServer(
-            $('#access_token_oauth').val(),
-            $('#id_oauth').val(),
-            result,
-            $('#email_oauth').val(),
-            $('#locale_oauth').val())
-        } else if (fbOrGoogle === 'g+') {
+        if (fbOrGoogle === 'g+') {
           sendCodeToServer(
             $('#access_token_oauth').val(),
             $('#id_oauth').val(),

@@ -2,6 +2,8 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Catrobat\Services\OAuthService;
+use App\Catrobat\Services\TestEnv\FakeOAuthService;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\UserManager;
@@ -378,83 +380,6 @@ class SecurityController extends Controller
 
 
   /**
-   * @Route("/api/FacebookServerTokenAvailable/FacebookServerTokenAvailable.json",
-   *         name="catrobat_oauth_login_facebook_servertoken_available", options={"expose"=true},
-   *         defaults={"_format": "json"}, methods={"POST"})
-   *
-   * @param Request $request
-   *
-   * @return OAuthService
-   * @throws \Exception
-   */
-  public function checkFacebookServerTokenAvailable(Request $request)
-  {
-    return $this->getOAuthService()->checkFacebookServerTokenAvailable($request);
-  }
-
-
-  /**
-   * @Route("/api/exchangeFacebookToken/exchangeFacebookToken.json", name="catrobat_oauth_login_facebook_token",
-   *         options={"expose"=true}, defaults={"_format":"json"}, methods={"POST"})
-   *
-   * @param Request $request
-   *
-   * @return FakeOAuthService|OAuthService
-   * @throws \Exception
-   */
-  public function exchangeFacebookTokenAction(Request $request)
-  {
-    return $this->getOAuthService()->exchangeFacebookTokenAction($request);
-  }
-
-
-  /**
-   * @Route("/api/loginWithFacebook/loginWithFacebook.json", name="catrobat_oauth_login_facebook",
-   *          options={"expose"=true}, defaults={"_format": "json"}, methods={"POST"})
-   *
-   * @param Request $request
-   *
-   * @return FakeOAuthService|OAuthService
-   * @throws \Exception
-   */
-  public function loginWithFacebookAction(Request $request)
-  {
-    return $this->getOAuthService()->loginWithFacebookAction($request);
-  }
-
-
-  /**
-   * @Route("/api/getFacebookUserInfo/getFacebookUserInfo.json", name="catrobat_facebook_userinfo",
-   *         options={"expose"=true}, defaults={"_format": "json"}, methods={"POST"})
-   *
-   * @param Request $request
-   *
-   * @return FakeOAuthService|OAuthService
-   * @throws \Exception
-   */
-  public function getFacebookUserProfileInfo(Request $request)
-  {
-    return $this->getOAuthService()->getFacebookUserProfileInfo($request);
-  }
-
-
-  /**
-   * @Route("/api/checkFacebookServerTokenValidity/checkFacebookServerTokenValidity.json",
-   *   name="catrobat_oauth_facebook_server_token_validity", options={"expose"=true},
-   *   defaults={"_format":"json"}, methods={"POST"})
-   *
-   * @param Request $request
-   *
-   * @return FakeOAuthService|OAuthService
-   * @throws \Exception
-   */
-  public function isFacebookServerAccessTokenValid(Request $request)
-  {
-    return $this->getOAuthService()->isFacebookServerAccessTokenValid($request);
-  }
-
-
-  /**
    * @Route("/api/GoogleServerTokenAvailable/GoogleServerTokenAvailable.json",
    *   name="catrobat_oauth_login_google_servertoken_available", options={"expose"=true},
    *   defaults={"_format": "json"}, methods={"POST"})
@@ -527,21 +452,6 @@ class SecurityController extends Controller
   public function loginWithTokenAndRedirectAction(Request $request)
   {
     return $this->getOAuthService()->loginWithTokenAndRedirectAction($request);
-  }
-
-
-  /**
-   * @Route("/api/getFacebookAppId/getFacebookAppId.json", name="catrobat_oauth_login_get_facebook_appid",
-   *   options={"expose"=true}, defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @return JsonResponse
-   */
-  public function getFacebookAppId()
-  {
-    $retArray = [];
-    $retArray['fb_appid'] = $this->container->getParameter('facebook_app_id');
-
-    return JsonResponse::create($retArray);
   }
 
 

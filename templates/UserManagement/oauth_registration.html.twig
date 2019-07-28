@@ -25,22 +25,13 @@
                alt="Google Login"></a>
       </div>
 
-      <!-- ToDo fb login not working -->
-      <div id="facebookLoginButton">
-        <a id="btn-login_facebook" href="#" data-toggle="modal" data-target="#termsModal">
-          <img class="img-socialLogin social-button-effects"
-               src="{{ asset('images/social/sign-in-with-facebook.png') }}"
-               alt="Facebook Login"></a>
-      </div>
-
-      <!-- Hidden fields that get filled by Google/facebook Sign in -->
+      <!-- Hidden fields that get filled by Google Sign in -->
       <input type="hidden" id="fb_google">
       <input type="hidden" id="id_oauth" name="_id"/>
       <input type="hidden" id="email_oauth" name="_email"/>
       <input type="hidden" id="locale_oauth" name="_locale"/>
       <input type="hidden" id="username_oauth" name="_username"/>
       <input type="hidden" id="access_token_oauth" name="_access_token"/>
-      <input type="hidden" id="facebook_auth_type" value=""/>
 
     </div>
   </div>
@@ -61,7 +52,6 @@
 
 
 {# Test hooks #}
-<button id="btn-facebook-testhook" class="hidden" onclick="handleFacebookUserInfoResponseTrigger();"></button>
 <button id="btn-gplus-testhook" class="hidden" onclick="checkGoogleCallbackDataWithServer();"></button>
 
 

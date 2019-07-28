@@ -9,9 +9,9 @@ Feature: As a visitor I want to see a program page
     # the id will not be used in the featureContext because of the autoincrement.
     # only here for better readability
     And there are programs:
-      | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready | fb_post_url                                                                          |
-      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      | https://www.facebook.com/permalink.php?story_fbid=424543024407491&id=403594093169051 |
-      | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |                                                                                      |
+      | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
+      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
+      | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
     And there are reportable programs:
       | id | name    | owned by | visible | reported |
       | 3  | Dap     | Gregor   | true    | false    |

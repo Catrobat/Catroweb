@@ -745,7 +745,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
       $program->setUploadLanguage('en');
       $program->setApproved(false);
-      $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
       $program->setPrivate(isset($programs[$i]['private']) ? $programs[$i]['private'] : 0);
       $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] == 'true' : false);
@@ -1237,20 +1236,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   }
 
-  /**
-   * @When /^I trigger Facebook login with auth_type '([^']*)'$/
-   * @param $arg1
-   */
-  public function iTriggerFacebookLogin($arg1)
-  {
-    $this->assertElementOnPage('#btn-login');
-    $this->iClickTheButton('login');
-    $this->assertPageAddress('/pocketcode/login');
-    $this->assertElementOnPage('#btn-login_facebook');
-    $this->getSession()->executeScript('document.getElementById("facebook_auth_type").type = "text";');
-    $this->getSession()->getPage()->findById('facebook_auth_type')->setValue($arg1);
-
-  }
 
   /**
    * @Then /^I should see marked "([^"]*)"$/
@@ -1266,22 +1251,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
   }
 
-
-  /**
-   * @When /^I click Facebook login link$/
-   */
-  public function iClickFacebookLoginLink()
-  {
-    if ($this->use_real_oauth_javascript_code)
-    {
-      $this->clickLink('btn-login_facebook');
-    }
-    else
-    {
-      $this->setFacebookFakeData();
-      $this->clickFacebookFakeButton();
-    }
-  }
 
   /**
    * @When /^I trigger Google login with approval prompt "([^"]*)"$/
@@ -1579,7 +1548,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
       $program->setUploadLanguage('en');
       $program->setApproved(false);
-      $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
       $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
 
@@ -1923,87 +1891,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     return $this->client;
   }
 
-  /**
-   * @When /^I switch to popup window$/
-   *
-   * @throws DriverException
-   * @throws UnsupportedDriverActionException
-   */
-  public function iSwitchToPopupWindow()
-  {
-    $page = $this->getSession()->getPage();
-    $window_names = $this->getSession()->getDriver()->getWindowNames();
-    foreach ($window_names as $name)
-    {
-      echo $name;
-      if ($page->find('css', '#facebook') || $page->find('css', '.google-header-bar centered')
-        || $page->find('css', '#approval_container') || $page->find('css', '#gaia_firstform')
-      )
-      {
-        break;
-      }
-      $this->getSession()->switchToWindow($name);
-    }
-  }
-
-  /**
-   * @Then /^I log in to Facebook with valid credentials$/
-   *
-   * @throws DriverException
-   * @throws UnsupportedDriverActionException
-   * @throws ElementNotFoundException
-   */
-  public function iLogInToFacebookWithEmailAndPassword()
-  {
-    if ($this->use_real_oauth_javascript_code)
-    {
-      $mail = $this->getParameterValue('facebook_testuser_mail');
-      $password = $this->getParameterValue('facebook_testuser_pw');
-      echo 'Login with mail address ' . $mail . ' and pw ' . $password . "\n";
-      $page = $this->getSession()->getPage();
-      if ($page->find('css', '#facebook') && $page->find('css', '#login_form'))
-      {
-        echo 'facebook login form appeared' . "\n";
-        $page->fillField('email', $mail);
-        $page->fillField('pass', $password);
-        $button = $page->findById('u_0_2');
-        Assert::assertTrue($button != null);
-        $button->press();
-      }
-      else
-      {
-        if ($page->find('css', '#facebook') && $page->find('css', '#u_0_1'))
-        {
-          echo 'facebook reauthentication login form appeared' . "\n";
-          $page->fillField('pass', $password);
-          $button = $page->findById('u_0_0');
-          Assert::assertTrue($button != null);
-          $button->press();
-        }
-        else
-        {
-          Assert::assertTrue(false, 'No Facebook form appeared!' . "\n");
-        }
-      }
-      $this->getSession()->switchToWindow(null);
-
-      $this->iSwitchToPopupWindow();
-      if ($page->find('css', '#facebook') && $page->find('css', '._1a_q'))
-      {
-        echo 'facebook authentication login form appeared' . "\n";
-        $button = $page->findButton('__CONFIRM__');
-        Assert::assertTrue($button != null);
-        $button->press();
-        $this->getSession()->switchToWindow(null);
-      }
-    }
-    else
-    {
-      //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
-      $this->setFacebookFakeData();
-      $this->clickFacebookFakeButton();
-    }
-  }
 
   /**
    * @Then /^I log in to Google with valid credentials$/
@@ -2112,12 +1999,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         'E-Mail wrong' . $users[$i]["email"] . 'expected, but ' . $user->getEmail() . ' found.');
       Assert::assertTrue($user->getCountry() == $users[$i]["country"],
         'Country wrong' . $users[$i]["country"] . 'expected, but ' . $user->getCountry() . ' found.');
-      if ($user->getFacebookUid() != '')
-      {
-        Assert::assertTrue($user->getFacebookAccessToken() != '', 'no Facebook access token present');
-        Assert::assertTrue($user->getFacebookUid() == $users[$i]["facebook_uid"], 'Facebook UID wrong');
-        Assert::assertTrue($user->getFacebookName() == $users[$i]["facebook_name"], 'Facebook name wrong');
-      }
+
       if ($user->getGplusUid() != '')
       {
         Assert::assertTrue($user->getGplusAccessToken() != '', 'no GPlus access token present');
@@ -2175,30 +2057,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
   }
 
-  /**
-   *
-   */
-  private function setFacebookFakeData()
-  {
-    //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
-    $session = $this->getSession();
-    $session->wait(2000, '(0 === jQuery.active)');
-    $session->evaluateScript("$('#btn-facebook-testhook').removeClass('hidden');");
-    $session->evaluateScript("$('#id_oauth').val(105678789764016);");
-    $session->evaluateScript("$('#email_oauth').val('pocket_zlxacqt_tester@tfbnw.net');");
-    $session->evaluateScript("$('#locale_oauth').val('en_US');");
-  }
-
-  /**
-   *
-   */
-  private function clickFacebookFakeButton()
-  {
-    $page = $this->getSession()->getPage();
-    $button = $page->findButton('btn-facebook-testhook');
-    Assert::assertNotNull($button, 'button not found');
-    $button->press();
-  }
 
   /**
    *
@@ -2526,21 +2384,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $this->iClick('#btn-search-header');
   }
 
-  /**
-   * @Then /^I should see the Facebook Like button in the header$/
-   */
-  public function iShouldSeeTheFacebookLikeButtonInTheHeader()
-  {
-    $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
-    Assert::assertTrue(
-      $like_button != null && $like_button->isVisible(),
-      "The Facebook Like Button is not visible!"
-    );
-    Assert::assertTrue(
-      $like_button->getParent()->getParent()->getParent()->getTagName() == 'nav',
-      "Parent is not header element"
-    );
-  }
 
   /**
    * @Then /^I should see the Google Plus 1 button in the header$/
@@ -2558,21 +2401,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     );
   }
 
-  /**
-   * @Then /^I should see the Facebook Like button on the bottom of the program page$/
-   */
-  public function iShouldSeeTheFacebookLikeButtonOnTheBottomOfTheProgramPage()
-  {
-    $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
-    Assert::assertTrue(
-      $like_button != null && $like_button->isVisible(),
-      "The Facebook Like Button is not visible!"
-    );
-    Assert::assertTrue(
-      $like_button->getParent()->getParent()->getTagName() == 'div',
-      "Parent is not header element"
-    );
-  }
 
   /**
    * @Then /^I should see the logout button$/
@@ -3120,7 +2948,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $program->setVisible(true);
         $program->setUploadLanguage('en');
         $program->setApproved(false);
-        $program->setFbPostUrl('');
         $program->setRemixRoot(true);
         $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
         $em->persist($program);

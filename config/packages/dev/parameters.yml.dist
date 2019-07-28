@@ -1,6 +1,2 @@
 parameters:
-    facebook_share_app_id: ~
-    facebook_share_app_secret: ~
-    facebook_share_access_token: ~
-    facebook_share_channel_id: ~
     jspath: compiled/js/

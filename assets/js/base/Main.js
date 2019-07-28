@@ -7,43 +7,7 @@ var Main = function (search_url) {
     self.setWindowResizeListener()
     self.initSidebarSwipe()
   })
-  $(document).ready(function() {
-    //var s = 'script';
-    //var id = 'facebook-jssdk';
-    //var js, fjs = document.getElementsByTagName(s)[0];
-    //if (document.getElementById(id)) return;
-    //js = document.createElement(s);
-    //js.id = id;
-    //js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.5";
-    //fjs.parentNode.insertBefore(js, fjs);
-    $.ajaxSetup({cache: true})
-    $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
-      var $appid = ''
-      var $ajaxGetFBAppId = Routing.generate(
-        'catrobat_oauth_login_get_facebook_appid', {flavor: 'pocketcode'}
-      )
-      $.get($ajaxGetFBAppId,
-        function (data) {
-          $appid = data['fb_appid']
-          FB.init({
-            appId  : $appid,
-            xfbml  : true,
-            status : true,
-            cookie : true,  //allow the server to access the session
-            version: 'v2.6'
-          })
-        })
-    })
-    
-    //Google+ JS API:
-    var po = document.createElement('script')
-    po.type = 'text/javascript'
-    po.async = true
-    po.src = 'https://apis.google.com/js/client:plusone.js'
-    var s = document.getElementsByTagName('script')[0]
-    s.parentNode.insertBefore(po, s)
-  })
-  
+
   var sidebar, sidebarToggleBtn;
   var fnCloseSidebar = function() {
     sidebar.removeClass('active');
