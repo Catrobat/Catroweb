@@ -2930,10 +2930,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $program = new Program();
         $program->setUser($user);
         $program->setName($programs[$i]['name']);
-        $program->setDescription("This a very very very very very very very very very very very very very " .
-          "very very very very very very very very very very very very very very very very very very very very very " .
-          "very very very very very very very very very very very very very long description.  -- " .
-          "the end of the description");
+        $description = str_repeat("10 chars !", 950);
+        $program->setDescription($description . "the end of the description");
         $program->setViews(0);
         $program->setDownloads(0);
         $program->setApkDownloads(0);

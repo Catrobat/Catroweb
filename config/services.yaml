@@ -29,7 +29,7 @@ parameters:
   catrobat.translations.dir:      "%kernel.project_dir%/translations"
   catrobat.logs.dir:              "%kernel.project_dir%/var/log/"
   catrobat.invalidupload.dir:     "%kernel.project_dir%/src/Catrobat/Commands/invisible_programs/"
-  catrobat.max_description_upload_size: 4000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
+  catrobat.max_description_upload_size: 10000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
 
   ldap_role_mappings:
     ROLE_MEDIAPACKAGE:  "Webserver-MediaPackageMaintainers"
