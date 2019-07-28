@@ -90,7 +90,7 @@ h2
     {
       text-align: left;
       float: left;
-      width: 30%;
+      min-width: 30%;
       margin: 0.6em;
 
       > .icon
@@ -102,6 +102,8 @@ h2
       {
         line-height: 35px;
         padding-left: 8px;
+        display:block;
+        margin-left: 3em;
       }
     }
   }
@@ -508,7 +510,7 @@ input[type='number']
       {
         text-align: left;
         float: left;
-        width: 47%;
+        min-width: 47%;
 
         > .icon
         {
@@ -519,6 +521,8 @@ input[type='number']
         {
           line-height: 35px;
           padding-left: 8px;
+          display: block;
+          margin-left: 3em;
         }
       }
     }
@@ -545,6 +549,8 @@ input[type='number']
         > .icon-text {
           line-height: 35px;
           padding-left: 8px;
+          display: block;
+          margin-left: 3em;
         }
       }
     }
