@@ -242,7 +242,7 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
           }
           else
           {
-            div = '<div><i class="fas fa-user program-small-icon"></i>' + programs[i].Author + '</div>'
+            div = '<div><i class="fas fa-user program-small-icon"></i>' + self.escapeJavaScript(programs[i].Author) + '</div>'
           }
       }
       
@@ -276,12 +276,12 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
         let program_id = programs[i].ProjectId.toString()
         visited = $.inArray(program_id, parsed_visits) >= 0
       }
-  
+      
       const program = $(
         '<div class="program ' + (visited ? 'visited-program ' : '') + '" id="program-' + programs[i].ProjectId + '">' +
         '<a href="' + program_link + '" class="' + link_css_classes + '">' +
         '<img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall + '" alt="" />' +
-        '<span class="program-name">' + programs[i].ProjectName + '</span>' +
+        '<span class="program-name">' + self.escapeJavaScript(programs[i].ProjectName) + '</span>' +
         div +
         '</a></div>'
       )
@@ -307,6 +307,11 @@ let ProgramLoader = function (container, url, column_max, recommended_by_program
       }
     }
     self.amount_of_loaded_programs += programs.length
+  }
+  
+  self.escapeJavaScript = function(html) {
+    // prevent JS code execution! (Encoding the < and > chars to their HTML equivalents)
+    return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
   
   self.updateProgramVisibility = function () {

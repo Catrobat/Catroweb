@@ -271,7 +271,7 @@ class RecommenderManager
       $rank_in_top_downloads = array_search($program_id, $ids_of_most_downloaded_programs);
       if ($rank_in_top_downloads !== false)
       {
-        $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(75 - $rank_in_top_downloads));
+        $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(70 - $rank_in_top_downloads * 1.5))**2;
       }
     }
 
