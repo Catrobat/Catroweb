@@ -732,6 +732,7 @@ admin:
 recommender:
   similarPrograms: Similar programs
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  moreFromThisUser: More from %username%
 
 pmd:
   submitBtn: Submit your project

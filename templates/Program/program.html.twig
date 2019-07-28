@@ -339,6 +339,15 @@
     <div class="programs"></div>
   </div>
 
+  {% if not(app.user and my_program) %}
+  <div id="more-from-this-user-recommendations">
+    <div id="recsys-headline" class="headline">
+      <h2>{{ 'recommender.moreFromThisUser'|trans({"%username%": program.user.username }, 'catroweb') }}</h2>
+    </div>
+    <div class="programs"></div>
+  </div>
+  {% endif %}
+
   {% include 'Program/programComments.html.twig' %}
 
 {% endblock %}
@@ -468,12 +477,15 @@
 
     var undefined
     var programID = {{ program.id }};
-    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}', undefined, programID)
+    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}', programID)
     recs.initRecsys()
 
     var recommendedByPageId = {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
-    var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', undefined, programID, recommendedByPageId)
+    var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', programID, recommendedByPageId)
     specificRecommender.initSpecificRecsys()
+
+    let more_from_this_user = new ProgramLoader('#more-from-this-user-recommendations', '{{ path('api_user_programs') }}')
+    more_from_this_user.initMoreFromThisUser({{ program.user.id }}, programID)
 
     counter = 10
     var cachedRemixData = null
