@@ -220,6 +220,9 @@ profile:
     emailNotValid: This email address is not valid.
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: This username already exists.
     submitSuccess: saved!
   reallyDeleteProgram: Do you really want to delete your program
   programsOf: Programs of

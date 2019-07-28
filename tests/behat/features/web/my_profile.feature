@@ -46,6 +46,41 @@ Feature:
     And I am on "/pocketcode/profile"
     And I should see "My Profile"
 
+  Scenario: changing my username must work
+    Given I click "#edit-username-button"
+    And I wait 250 milliseconds
+    And I fill in "username" with "Mr.Catro"
+    And I click "#save-username"
+    And I wait for the server response
+    And I should be on "/pocketcode/profile"
+    When I go to "/pocketcode/logout"
+    And I try to log in as "Catrobat" with the password "123456"
+    Then I should see "Your password or username was incorrect."
+    And I try to log in as "Mr.Catro" with the password "123456"
+    Then I should be logged in
+
+  Scenario: When changing the username the min length must be 3
+    Given I click "#edit-username-button"
+    And I wait 250 milliseconds
+    And I fill in "username" with "Mr"
+    And I click "#save-username"
+    And I wait for the server response
+    And I should be on "/pocketcode/profile"
+    Then I should see "This username is not valid."
+    When I go to "/pocketcode/logout"
+    And I try to log in as "Mr" with the password "123456"
+    Then I should see "Your password or username was incorrect."
+
+  Scenario: When changing the username the max length must be 180
+    Given I click "#edit-username-button"
+    And I wait 250 milliseconds
+    And I fill in "username" with "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!+++++"
+    When I click "#save-username"
+    And I wait for the server response
+    Then I should be on "/pocketcode/profile"
+    And I should see "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!"
+    And I should not see "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!+"
+
   Scenario: changing password must work
     Given I click "#edit-password-button"
     And I wait 250 milliseconds
