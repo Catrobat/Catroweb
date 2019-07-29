@@ -3079,4 +3079,13 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       'document.getElementById("random").style.display = "none";'
     );
   }
+
+  /**
+   * @Given I start a new session
+   */
+  public function iStartANewSession()
+  {
+    $this->getMink()->restartSessions();
+    $this->setup();
+  }
 }

@@ -33,7 +33,7 @@
   <script>
     {% for category in categories %}
     var {{ category.alias }} =
-    new ProgramLoader('#{{ category.alias }}', '{{ path('catrobat_web_category_programs', {'id': category.id}) }}')
+    new ProjectLoader('#{{ category.alias }}', '{{ path('catrobat_web_category_programs', {'id': category.id}) }}')
     {{ category.alias }}.init()
     {% endfor %}
   </script>
