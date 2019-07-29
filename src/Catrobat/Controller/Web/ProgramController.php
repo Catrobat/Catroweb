@@ -124,6 +124,12 @@ class ProgramController extends Controller
       }
     }
 
+//    Right now everyone should find even private programs via the correct link! SHARE-49
+//    if ($program->getPrivate() && $program->getUser()->getId() !== $this->getUser()->getId()) {
+//      // only program owners should be allowed to see their programs
+//      throw $this->createNotFoundException('Unable to find Project entity.');
+//    }
+
     if ($program->isDebugBuild())
     {
       /** @var AppRequest $app_request */

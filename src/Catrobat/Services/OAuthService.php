@@ -848,9 +848,9 @@ class OAuthService
     $program_manager = $this->container->get('programmanager');
     $em = $this->container->get('doctrine.orm.entity_manager');
 
-    $user_programms = $program_manager->getUserPrograms($user->getId(), true);
+    $user_programs = $program_manager->getUserPrograms($user->getId(), true);
 
-    foreach ($user_programms as $user_program)
+    foreach ($user_programs as $user_program)
     {
       $em->remove($user_program);
       $em->flush();

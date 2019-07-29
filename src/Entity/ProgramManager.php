@@ -473,6 +473,20 @@ class ProgramManager
   }
 
   /**
+   * @param      $user_id
+   * @param bool $include_debug_build_programs If programs marked as debug_build should be returned
+   *
+   * @return Program[]
+   */
+  public function getPublicUserPrograms($user_id, bool $include_debug_build_programs = false)
+  {
+    $debug_build = ($include_debug_build_programs === true) ?
+      true : $this->app_request->isDebugBuildRequest();
+
+    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build);
+  }
+
+  /**
    * @return array
    *
    * @internal
