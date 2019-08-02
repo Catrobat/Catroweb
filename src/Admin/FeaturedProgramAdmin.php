@@ -160,6 +160,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
     $object->old_image_type = $object->getImageType();
     $object->setImageType(null);
     $this->checkProgramID($object);
+    $this->checkFlavor();
   }
 
 
@@ -169,6 +170,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   public function prePersist($object)
   {
     $this->checkProgramID($object);
+    $this->checkFlavor();
   }
 
 
@@ -195,6 +197,21 @@ class FeaturedProgramAdmin extends AbstractAdmin
     else
     {
       throw new NotFoundHttpException(sprintf('Unable to find program with id : %s', $id));
+    }
+  }
+
+  /**
+   *
+   */
+  private function checkFlavor()
+  {
+    $flavor = $this->getForm()->get('flavor')->getData();
+    $flavor_options =  $this->getConfigurationPool()->getContainer()->getParameter('themes');
+
+    if (!in_array($flavor, $flavor_options)) {
+      throw new NotFoundHttpException(
+        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
+      );
     }
   }
 }
