@@ -31,7 +31,7 @@
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/message": "^1.7",
         "sensio/framework-extra-bundle": "^5.3",
-        "sonata-project/admin-bundle": "3.48.2",
+        "sonata-project/admin-bundle": "3.49.0",
         "sonata-project/doctrine-orm-admin-bundle": "3.9.0",
         "sonata-project/user-bundle": "4.3.0",
         "symfony/acl-bundle": "*",
