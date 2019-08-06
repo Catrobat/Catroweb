@@ -409,6 +409,14 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
+   * @Given I have an embroidery project
+   */
+  public function iHaveAnEmbroideryProject()
+  {
+    $this->generateProgramFileWith([], true);
+  }
+
+  /**
    * @When /^I upload this program$/
    */
   public function iUploadThisProgram()

@@ -367,6 +367,11 @@ class ProgramManager
 
     $tags = $extracted_file->getTags();
 
+    // Adding the embroidery tag if an embroidery block was used in the project
+    if (strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">') !== false) {
+      array_unshift($tags, "Embroidery");
+    }
+
     if (!empty($tags))
     {
       $i = 0;

@@ -1,6 +1,5 @@
 parameters:
-  catrobat.test.directory.source: "%kernel.project_dir%/tests/testdata/DataFixtures/test.catrobat"
-  catrobat.test.directory.source.extensions: "%kernel.project_dir%/tests/testdata/DataFixtures/extensions.catrobat"
+  catrobat.test.directory.source: "%kernel.project_dir%/tests/testdata/DataFixtures/"
   catrobat.test.directory.target: "%kernel.project_dir%/tests/testdata/DataFixtures/GeneratedFixtures/"
   catrobat.file.extract.dir:   "%catrobat.pubdir%resources_test/extract/"
   catrobat.file.storage.dir:   "%catrobat.pubdir%resources_test/projects/"
@@ -34,7 +33,6 @@ services:
     - "@catrobat.test.compressor"
     - "%catrobat.test.directory.source%"
     - "%catrobat.test.directory.target%"
-    - "%catrobat.test.directory.source.extensions%"
     tags:
     - { name: console.command }
 
