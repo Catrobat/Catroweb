@@ -12,6 +12,9 @@ Feature: Filtering programs with specific flavor
       | A new world  | pocketcode |
       | Soon to be   | luna       |
       | Just for fun | luna       |
+      | New adventure| create@school|
+      | Amazing race | create@school|
+      | Test game    | pocketcode |
 
 
   Scenario: Get most viewed programs of flavor pocketcode
@@ -24,6 +27,9 @@ Feature: Filtering programs with specific flavor
       | Simple click |
       | Soon to be   |
       | Just for fun |
+      | New adventure|
+      | Amazing race |
+      | Test game    |
 
   Scenario: Get most viewed programs of flavor luna
 
@@ -35,6 +41,9 @@ Feature: Filtering programs with specific flavor
       | Just for fun |
       | Invaders     |
       | A new world  |
+      | New adventure|
+      | Amazing race |
+      | Test game    |
 
   Scenario: Get most downloaded programs of pocketcode
 
@@ -46,6 +55,9 @@ Feature: Filtering programs with specific flavor
       | Simple click |
       | Soon to be   |
       | Just for fun |
+      | New adventure|
+      | Amazing race |
+      | Test game    |
 
   Scenario: Get most downloaded programs of flavor luna
 
@@ -57,6 +69,9 @@ Feature: Filtering programs with specific flavor
       | Just for fun |
       | Invaders     |
       | A new world  |
+      | New adventure|
+      | Amazing race |
+      | Test game    |
 
   Scenario: Get recent programs of flavor pocketcode
 
@@ -65,9 +80,7 @@ Feature: Filtering programs with specific flavor
       | name         |
       | Invaders     |
       | A new world  |
-      | Simple click |
-      | Soon to be   |
-      | Just for fun |
+      | Test game    |
 
   Scenario: Get recent programs of flavor luna
 
@@ -77,8 +90,14 @@ Feature: Filtering programs with specific flavor
       | Simple click |
       | Soon to be   |
       | Just for fun |
-      | Invaders     |
-      | A new world  |
+
+  Scenario: Get recent programs of flavor create@school
+
+    When I get the recent programs with "create@school/api/projects/recent.json"
+    Then I should get following programs:
+      | name         |
+      | New adventure|
+      | Amazing race |
 
   Scenario: Get all programs of a user no matter the flavor (pocketcode)
 
@@ -91,6 +110,9 @@ Feature: Filtering programs with specific flavor
       | A new world  |
       | Soon to be   |
       | Just for fun |
+      | New adventure|
+      | Amazing race |
+      | Test game    |
 
   Scenario: Get all programs of a user no matter the flavor (luna)
 
@@ -103,5 +125,8 @@ Feature: Filtering programs with specific flavor
       | A new world  |
       | Soon to be   |
       | Just for fun |
+      | New adventure|
+      | Amazing race |
+      | Test game    |
 
     

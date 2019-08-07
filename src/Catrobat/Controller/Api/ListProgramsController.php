@@ -45,7 +45,7 @@ class ListProgramsController extends AbstractController
       $flavor = null;
     }
 
-    return $this->listSortedPrograms($request, 'recent', true, false, $flavor);
+    return $this->listSortedPrograms($request, 'recent', true, true, $flavor);
   }
 
 
@@ -172,14 +172,15 @@ class ListProgramsController extends AbstractController
   /**
    * @param Request $request
    * @param         $sortBy
-   * @param bool    $details
-   * @param bool    $useRequestFlavor
-   * @param string  $flavor
+   * @param bool $details
+   * @param bool $useRequestFlavor
+   * @param string $flavor
    *
    * @return ProgramListResponse
    * @throws NonUniqueResultException
    */
-  private function listSortedPrograms(Request $request, $sortBy, $details = true, $useRequestFlavor = true, $flavor = null)
+  private function listSortedPrograms(Request $request, $sortBy, $details = true,
+  $useRequestFlavor = true, $flavor = null)
   {
     if ($useRequestFlavor === true)
     {
