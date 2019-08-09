@@ -342,6 +342,7 @@ services:
       - "@programlikerepository"
       - "@event_dispatcher"
       - "@logger"
+      - "@app_request"
     public: true
   App\Entity\ProgramManager: "@programmanager"
 
@@ -422,6 +423,7 @@ services:
       - "@programlikerepository"
       - "@programremixrepository"
       - "@programremixbackwardrepository"
+      - "@app_request"
     public: true
   App\Catrobat\RecommenderSystem\RecommenderManager: "@recommendermanager"
 
@@ -496,6 +498,12 @@ services:
     public: true
   App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser: "@catrobat_code_parser"
 
+  app_request:
+    class: App\Catrobat\Requests\AppRequest
+    arguments:
+      - "@request_stack"
+  App\Catrobat\Requests\AppRequest: "@app_request"
+
   # =========================== Twig ===========================
 
   app.twig_extension:
@@ -562,7 +570,6 @@ services:
     arguments:
       - "@programmanager"
       - "@doctrine.orm.entity_manager"
-      - "@bazinga_geocoder.geocoder"
       - "@logger"
       - "@security.token_storage"
     tags:

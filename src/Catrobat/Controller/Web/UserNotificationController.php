@@ -178,7 +178,6 @@ class UserNotificationController extends Controller
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Geocoder\Exception\Exception
    */
   public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id)
   {

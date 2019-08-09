@@ -34,11 +34,11 @@ Feature: Searching for programs
     Given I am on "/pocketcode"
     Then at least one ".search-icon-header" element should be visible
     Then no ".search-input-header" element should be visible
-    Then no ".catro-search-button" element should be visible
+    Then no "#btn-search-header" element should be visible
     And I click the currently visible search icon
     Then no ".search-icon-header" element should be visible
     Then at least one ".search-input-header" element should be visible
-    Then at least one ".catro-search-button" element should be visible
+    Then at least one "#btn-search-header" element should be visible
 
   Scenario: consecutive searches should lead to different results
     Given I am on "/pocketcode"
@@ -48,10 +48,10 @@ Feature: Searching for programs
     Then I should be on "/pocketcode/search/prog"
     And I should see "Your search returned 4 results"
     And at least one ".search-input-header" element should be visible
-    And at least one ".catro-search-button" element should be visible
+    And at least one "#btn-search-header" element should be visible
     Then I enter "yahoo myprog" into the currently visible search input
     And I click the currently visible search button
     Then I should be on "/pocketcode/search/yahoo%20myprog"
     Then I should see "Your search returned 2 results"
     And at least one ".search-input-header" element should be visible
-    And at least one ".catro-search-button" element should be visible
+    And at least one "#btn-search-header" element should be visible

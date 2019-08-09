@@ -2,14 +2,16 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Forms\FeaturedImageConstraint;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
+use App\Entity\ProgramManager;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use App\Catrobat\Forms\FeaturedImageConstraint;
 use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -37,7 +39,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   /**
    * @param string $context
    *
-   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+   * @return QueryBuilder|ProxyQueryInterface
    */
   public function createQuery($context = 'list')
   {
@@ -64,11 +66,12 @@ class FeaturedProgramAdmin extends AbstractAdmin
       'required'    => ($this->getSubject()->getId() === null),
       'constraints' => [
         new FeaturedImageConstraint(),
-      ],];
+      ],
+    ];
 
     $id_value = '';
 
-    if ($this->getSubject()->getId() != null)
+    if ($this->getSubject()->getId() !== null)
     {
       $file_options['help'] = '<img src="../' . $this->getFeaturedImageUrl($this->getSubject()) . '">';
       $id_value = $this->getSubject()->getProgram()->getId();
@@ -80,7 +83,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
       ->add('flavor')
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
-                              'help' => 'Toggle for iOS featured programs api call.'])
+                              'help'  => 'Toggle for iOS featured programs api call.'])
       ->add('active', null, ['required' => false]);
   }
 
@@ -126,46 +129,34 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
 
   /**
-   * @param $object
+   * @param $object FeaturedProgram
    *
    * @return string
    */
   public function getFeaturedImageUrl($object)
   {
-    /**
-     * @var $object FeaturedProgram
-     */
-
     return '../../' . $this->getConfigurationPool()->getContainer()->get('featuredimagerepository')
         ->getWebPath($object->getId(), $object->getImageType());
   }
 
 
   /**
-   * @param $object
+   * @param $object FeaturedProgram
    *
    * @return Metadata
    */
   public function getObjectMetadata($object)
   {
-    /**
-     * @var $object FeaturedProgram
-     */
-
     return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(),
       $this->getFeaturedImageUrl($object));
   }
 
 
   /**
-   * @param $object
+   * @param $object FeaturedProgram
    */
   public function preUpdate($object)
   {
-    /**
-      * @var $object FeaturedProgram
-      */
-
     $object->old_image_type = $object->getImageType();
     $object->setImageType(null);
     $this->checkProgramID($object);
@@ -182,13 +173,13 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
 
   /**
-    * @param $object
-    */
+   * @param $object FeaturedProgram
+   */
   private function checkProgramID($object)
   {
     /**
-     * @var $object FeaturedProgram
-     * @var $program Program
+     * @var $program         Program
+     * @var $program_manager ProgramManager
      */
 
     $id = $this->getForm()->get('program_id')->getData();

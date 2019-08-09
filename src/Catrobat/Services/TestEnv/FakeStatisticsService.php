@@ -39,7 +39,6 @@ class FakeStatisticsService
    * @param $locale
    *
    * @return bool
-   * @throws \Geocoder\Exception\Exception
    */
   public function createProgramDownloadStatistics($event, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale)
   {
@@ -63,7 +62,6 @@ class FakeStatisticsService
    * @return bool
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Geocoder\Exception\Exception
    */
   public function createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name, $referrer)
   {

@@ -2,11 +2,12 @@
 
 namespace App\Catrobat\Controller\Api;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Catrobat\Responses\ProgramListResponse;
+use App\Entity\ProgramManager;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
@@ -25,11 +26,12 @@ class ProgramController extends Controller
   public function showProgramAction(Request $request)
   {
     $id = intval($request->query->get('id'));
+    /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
 
     $programs = [];
     $program = $program_manager->find($id);
-    if ($program == null)
+    if ($program === null)
     {
       return JsonResponse::create(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
     }

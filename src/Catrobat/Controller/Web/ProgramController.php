@@ -2,27 +2,35 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use App\Entity\CatroNotification;
-use App\Entity\LikeNotification;
-use App\Entity\UserComment;
+use App\Catrobat\RecommenderSystem\RecommendedPageId;
+use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatroNotificationService;
+use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
+use App\Catrobat\Services\ScreenshotRepository;
+use App\Catrobat\StatusCode;
+use App\Entity\CatroNotification;
+use App\Entity\GameJam;
+use App\Entity\LikeNotification;
 use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
+use App\Entity\RemixManager;
 use App\Entity\User;
-use App\Catrobat\RecommenderSystem\RecommendedPageId;
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
-use App\Catrobat\Services\ScreenshotRepository;
-use App\Catrobat\StatusCode;
+use App\Entity\UserComment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Twig\Error\Error;
 
 
@@ -41,13 +49,15 @@ class ProgramController extends Controller
    * @param integer $id
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Geocoder\Exception\Exception
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function programRemixGraphAction(Request $request, $id)
   {
-    $remix_graph_data = $this->get('remixmanager')->getFullRemixGraph($id);
+    /** @var RemixManager $remix_manager */
+    $remix_manager = $this->get('remixmanager');
+    $remix_graph_data = $remix_manager->getFullRemixGraph($id);
+    /** @var ScreenshotRepository $screenshot_repository */
     $screenshot_repository = $this->get('screenshotrepository');
 
     $catrobat_program_thumbnails = [];
@@ -86,9 +96,9 @@ class ProgramController extends Controller
    *
    * @return JsonResponse
    * @throws Error
-   * @throws \Doctrine\ORM\NonUniqueResultException
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws NonUniqueResultException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function programAction(Request $request, $id)
   {
@@ -97,6 +107,7 @@ class ProgramController extends Controller
      * @var $program          Program
      * @var $reported_program ProgramInappropriateReport
      * @var $like             ProgramLike
+     * @var $program_manager  ProgramManager
      */
     $program_manager = $this->get('programmanager');
     $program = $program_manager->find($id);
@@ -108,6 +119,16 @@ class ProgramController extends Controller
     if (!$program || !$program->isVisible())
     {
       if (!$featured_repository->isFeatured($program))
+      {
+        throw $this->createNotFoundException('Unable to find Project entity.');
+      }
+    }
+
+    if ($program->isDebugBuild())
+    {
+      /** @var AppRequest $app_request */
+      $app_request = $this->get('app_request');
+      if (!$app_request->isDebugBuildRequest())
       {
         throw $this->createNotFoundException('Unable to find Project entity.');
       }
@@ -185,9 +206,8 @@ class ProgramController extends Controller
    * @param Request $request
    * @param integer $id
    *
-   * @throws \Exception
-   *
    * @return JsonResponse|RedirectResponse
+   * @throws Exception
    */
   public function programLikeAction(Request $request, $id)
   {
@@ -311,9 +331,9 @@ class ProgramController extends Controller
    *
    * @param string $q
    *
-   * @throws \Exception
-   *
    * @return JsonResponse|RedirectResponse
+   * @throws Exception
+   *
    */
   public function searchAction($q)
   {
@@ -327,15 +347,15 @@ class ProgramController extends Controller
    *
    * @param integer $id
    *
-   * @throws \Exception
-   *
    * @return JsonResponse|RedirectResponse
+   * @throws Exception
+   *
    */
   public function deleteProgramAction($id)
   {
     /**
-     * @var $user          \App\Entity\User
-     * @var $program       \App\Entity\Program
+     * @var $user          User
+     * @var $program       Program
      * @var $user_programs ArrayCollection
      */
     if ($id === 0)
@@ -375,15 +395,15 @@ class ProgramController extends Controller
    *
    * @param integer $id
    *
-   * @throws \Exception
-   *
    * @return Response
+   * @throws Exception
+   *
    */
   public function toggleProgramVisibilityAction($id)
   {
     /**
-     * @var $user User
-     * @var $program Program
+     * @var $user          User
+     * @var $program       Program
      * @var $user_programs ArrayCollection
      */
 
@@ -426,15 +446,15 @@ class ProgramController extends Controller
    * @param integer $id
    * @param string  $newDescription
    *
-   * @throws \Exception
-   *
    * @return Response
+   * @throws Exception
+   *
    */
   public function editProgramDescription($id, $newDescription)
   {
     /**
-     * @var                $user    \App\Entity\User
-     * @var                $program \App\Entity\Program
+     * @var User           $user
+     * @var Program        $program
      * @var ProgramManager $program_manager
      */
 
@@ -487,11 +507,12 @@ class ProgramController extends Controller
 
   /**
    * @return array
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   private function extractGameJamConfig()
   {
     $jam = null;
+    /** @var GameJam $gamejam */
     $gamejam = $this->get('gamejamrepository')->getCurrentGameJam();
 
     if ($gamejam)
@@ -524,8 +545,8 @@ class ProgramController extends Controller
    * @param Program $program
    * @param         $viewed
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   private function checkAndAddViewed(Request $request, $program, $viewed)
   {
@@ -598,7 +619,7 @@ class ProgramController extends Controller
     foreach ($program_comments as $comment)
     {
       /**
-       * @var   $em      \Doctrine\ORM\EntityManager
+       * @var   $em      EntityManager
        * @var   $comment UserComment
        */
       $em = $this->getDoctrine()->getManager();
@@ -615,6 +636,9 @@ class ProgramController extends Controller
       }
     }
 
+    /** @var RemixManager $remix_manager */
+    $remix_manager = $this->get('remixmanager');
+
     $program_details = [
       'screenshotBig'   => $screenshot_repository->getScreenshotWebPath($program->getId()),
       'downloadUrl'     => $url,
@@ -628,7 +652,7 @@ class ProgramController extends Controller
       'comments'        => $program_comments,
       'commentsLength'  => count($program_comments),
       'commentsAvatars' => $comments_avatars,
-      'remixesLength'   => $this->get('remixmanager')->remixCount($program->getId()),
+      'remixesLength'   => $remix_manager->remixCount($program->getId()),
       'likeType'        => $like_type,
       'likeTypeCount'   => $like_type_count,
       'totalLikeCount'  => $total_like_count,
@@ -642,7 +666,7 @@ class ProgramController extends Controller
   /**
    * @param $program Program
    *
-   * @return array|\App\Entity\UserComment[]
+   * @return array|UserComment[]
    */
   private function findCommentsById($program)
   {

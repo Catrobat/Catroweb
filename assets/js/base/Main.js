@@ -103,27 +103,6 @@ var Main = function (search_url) {
     sidebar.find('a.nav-link').on("click", fnCloseSidebar);
     $('#sidebar-overlay').on("click", fnCloseSidebar);
     
-    var nav = $('nav');
-    var navDropdown = $('#nav-dropdown');
-    
-    // toggle searchbar
-    $('#menu-mobile').find('.btn-search').click(function () {
-      nav.toggleClass('searchbar-visible')
-      nav.find('input').focus()
-    })
-    
-    // toggle navigation dropdown (when logged in)
-    $('.show-nav-dropdown').click(function () {
-      var newPosition = nav.position().left + nav.outerWidth() - navDropdown.width()
-      navDropdown.css('left', newPosition).toggle()
-    })
-    
-    $('#copy-link').click(function () {
-      $(this).find('tr').first().hide()
-      $(this).find('tr').last().show()
-      $('#url-link').focus().select()
-    })
-    
     self.setSearchBtnListener()
     self.setLanguageSwitchListener()
   }
@@ -137,10 +116,10 @@ var Main = function (search_url) {
   self.setSearchBtnListener = function () {
     
     // search enter pressed
-    $('.input-search').keypress(function (event) {
-      if (event.which == 13)
+    $('input.input-search').keypress(function (event) {
+      if (event.which === 13)
       {
-        var search_term = $(this).val()
+        const search_term = $(this).val()
         if (!search_term)
         {
           $(this).tooltip('show')
@@ -152,8 +131,8 @@ var Main = function (search_url) {
     
     // search button clicked (header)
     $('.btn-search').click(function () {
-      var search_field = $(this).parent().find('.input-search')
-      var search_term = search_field.val()
+      const search_field = $(this).parent().parent().find('input.input-search')
+      const search_term = search_field.val()
       if (!search_term)
       {
         search_field.tooltip('show')
@@ -162,11 +141,6 @@ var Main = function (search_url) {
       self.searchPrograms(search_term)
     })
     
-    // search button clicked (footer)
-    // TODO: when applying bootstrap to the footer this has to be changed to make it work
-    $('#footer-menu-desktop').find('.img-magnifying-glass').click(function () {
-      self.searchPrograms($(this).prev().find('input').val())
-    })
   }
   
   self.searchPrograms = function (string) {
@@ -360,6 +334,8 @@ var Main = function (search_url) {
 
 $(function() {
   
+  // -------------------------------------------------------------------------------------------------------------------
+  // Adjust heading font size or break word
   ['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach(function(element) {
     $(element + ':not(.no-textfill)').each(function() {
       textfillDefault(this);
@@ -396,5 +372,20 @@ $(function() {
       }
     });
   }
+  
+  // -------------------------------------------------------------------------------------------------------------------
+  // Search field
+  const search_input = $('.input-search');
+  
+  search_input.tooltip({
+    trigger  : 'manual',
+    placement: 'bottom'
+  });
+  
+  search_input.on('shown.bs.tooltip', function() {
+    setTimeout(function() {
+      search_input.tooltip('hide');
+    }, 1000)
+  })
   
 });

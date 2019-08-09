@@ -155,7 +155,7 @@ function MediaLib(package_name, flavor, assetsDir)
             const $image = $('<img src="' + assetsDir + 'thumbs/' + file.id + '.jpeg"/>');
             $image.attr('title', file.name);
             $image.attr('alt', file.name);
-            $image.error(function() {
+            $image.on('error', function() {
               mediafileContainer.addClass("showName");
               
               const pictureExtensions = ["bmp", "cgm", "g3", "gif", "ief", "jpeg", "ktx", "png", "btif", "sgi", "svg", "tiff", "psd", "uvi", "sub", "djvu", "dwg", "dxf", "fbs", "fpx", "fst", "mmr", "rlc", "mdi", "wdp", "npx", "wbmp", "xif", "webp", "3ds", "ras", "cmx", "fh", "ico", "sid", "pcx", "pic", "pnm", "pbm", "pgm", "ppm", "rgb", "tga", "xbm", "xpm", "xwd"];

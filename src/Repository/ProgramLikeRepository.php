@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\ProgramLike;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
@@ -61,7 +62,7 @@ class ProgramLikeRepository extends EntityRepository
    * @param $exclude_program_ids
    * @param $flavor
    *
-   * @return mixed
+   * @return ProgramLike[]
    */
   public function getLikesOfUsers($user_ids, $exclude_user_id, $exclude_program_ids, $flavor)
   {

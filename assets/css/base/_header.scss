@@ -1,4 +1,8 @@
-@import "variables";
+@import '../../../public/bootstrap_vendor/scss/functions';
+@import 'variables';
+@import 'mixins';
+@import '../../../public/bootstrap_vendor/scss/variables';
+@import '../../../public/bootstrap_vendor/scss/mixins';
 @import 'theme_settings';
 
 $nav-font-size: $default-font-size + 0.25;
@@ -12,11 +16,11 @@ $logo-width: 300px;
 }
 
 header {
+  padding: 0;
   z-index: 9001;
-  padding: 10px 0 25px 0 ;
 
   nav {
-    #header-left, #header-right{
+    #header-left, #header-right {
       display: table-cell;
       vertical-align: middle;
       width: 100%;
@@ -49,42 +53,65 @@ header {
       margin-right: .5rem;
     }
 
+    .search-icon-header {
+      color: $navbar-dark-color;
+      text-decoration: none;
+      font-size: 2.0em;
+      margin: auto 0.25rem auto auto;
+      align-items: center;
+
+      &:hover {
+        color: rgba($white, .9);
+      }
+
+      @include transition(color 0.5s ease);
+    }
+
     .img-undo-search {
       display: none;
     }
 
-    .btn-username {
-      font-size: $nav-font-size;
-      color: #fff;
-      padding: 0 !important;
-      white-space: nowrap;
-      max-width: 85px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .btn-search {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+      border-left: none;
+      color: $default-background-color !important;
+
+      &:focus, &:active, &:hover, &:active:focus {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+        border: 1px rgba(0, 0, 0, 0.2) solid;
+        border-left: none;
+      }
     }
 
-    #custom-avatar {
-      border: 2px solid #FFF;
-      border-radius: 2px;
-      padding: 0 !important;
+    .search-input-header {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: white;
 
-      > div {
-        background-size:cover !important;
-        background-position:center;
-        outline: 1px solid #FFF;
-        width: $avatar-img-size + 14;
-        height: $avatar-img-size + 14;
+      &::placeholder {
+        color: white !important;
+      }
 
-        > .img-dropdownArrow-mobile {
-          position: relative;
-          left: 31px;
-          top: 31px;
+      &:focus {
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px rgba(0, 0, 0, 0.2) solid;
+        color: white;
+
+        & + .btn-search {
+          background-color: rgba(0, 0, 0, 0.1);
+          border-color: rgba(0, 0, 0, 0.2);
         }
       }
     }
-  }
-}
 
-.btn-search {
-  color: $default-background-color!important
+    #search-input-group-header {
+      margin-top: 0.2rem;
+      @include media-breakpoint-up(md) {
+        margin-top: 0;
+        width: initial;
+      }
+    }
+
+  }
 }
