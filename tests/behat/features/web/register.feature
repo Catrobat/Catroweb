@@ -4,9 +4,9 @@ Feature:
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
-      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |  2 |
 
   Scenario: Register, login and logout
     Given I am on homepage

@@ -23,7 +23,7 @@ translate_choice:
         expose: true
 
 edit_program_description:
-    path:  /editProgramDescription/{id}/{newDescription}
+    path:  /editProjectDescription/{id}/{newDescription}
     controller: App\Catrobat\Controller\Web\ProgramController:editProgramDescription
     options:
         expose: true

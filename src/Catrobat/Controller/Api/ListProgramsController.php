@@ -115,7 +115,7 @@ class ListProgramsController extends Controller
 
 
   /**
-   * @Route("/api/projects/randomPrograms.json", name="api_random_programs",
+   * @Route("/api/projects/randomProjects.json", name="api_random_programs",
    *   defaults={"_format":"json"}, methods={"GET"})
    *
    * @param Request $request
@@ -130,7 +130,7 @@ class ListProgramsController extends Controller
 
 
   /**
-   * @Route("/api/projects/randomProgramIDs.json", name="api_random_programids",
+   * @Route("/api/projects/randomProjectIDs.json", name="api_random_programids",
    *   defaults={"_format": "json"}, methods={"GET"})
    *
    * @param Request $request
@@ -145,7 +145,7 @@ class ListProgramsController extends Controller
 
 
   /**
-   * @Route("/api/projects/userPrograms.json", name="api_user_programs",
+   * @Route("/api/projects/userProjects.json", name="api_user_programs",
    *   defaults={"_format":"json"}, methods={"GET"})
    *
    * @param Request $request

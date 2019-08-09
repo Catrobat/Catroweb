@@ -505,11 +505,12 @@ let ProjectLoader = function(container, url, recommended_by_project_id, recommen
       
       case '#recommended':
       case '#specific-programs-recommendations':
-        return data.CatrobatInformation.BaseUrl + project.ProjectUrl +
-        '?rec_by_page_id=' + self.recommended_by_page_id +
-        (self.recommended_by_project_id != null) ?
-          '&rec_by_program_id=' + self.recommended_by_project_id :
-          '' + '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) &&
+        let link =  data.CatrobatInformation.BaseUrl + project.ProjectUrl
+        link += '?rec_by_page_id=' + self.recommended_by_page_id
+        if (self.recommended_by_project_id !== null) {
+          link += '&rec_by_program_id=' + self.recommended_by_project_id
+        }
+        link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) &&
           data.isUserSpecificRecommendation ? 1 : 0)
     }
     return data.CatrobatInformation.BaseUrl + project.ProjectUrl

@@ -22,51 +22,51 @@ Feature: Follow feature on profiles
       | Catrobat16 | 123456   | rrrrrrrrrr | dev16@pocketcode.org | 16 |
 
   Scenario: Follow button and counter should show up on Profile site
-    Given I am on "/app/profile/1"
+    Given I am on "/app/user/1"
     And the element "#follow-btn" should be visible
     And I should see text matching "Follower:"
 
   Scenario: Follow when not logged in should redirect to login
-    Given I am on "/app/profile/1"
+    Given I am on "/app/user/1"
     And I click "#follow-btn"
     Then I should be on "/app/login"
 
   Scenario: Follow user should follow and increase counter
     Given I log in as "Catrobat2" with the password "123456"
-    And I am on "/app/profile/1"
+    And I am on "/app/user/1"
     And I click "#follow-btn"
-    Then I should be on "/app/profile/1"
+    Then I should be on "/app/user/1"
     And the element "#follow-btn" should be visible
     And I should see text matching "Follower: 1"
     And Element "#follow-btn" should have attribute "title" with value "Unfollow this user!"
 
   Scenario: Unfollow user should unfollow and decrease counter
     Given I log in as "Catrobat2" with the password "123456"
-    And I am on "/app/profile/1"
+    And I am on "/app/user/1"
     And I click "#follow-btn"
-    Then I should be on "/app/profile/1"
+    Then I should be on "/app/user/1"
     And I click "#follow-btn"
-    Then I should be on "/app/profile/1"
+    Then I should be on "/app/user/1"
     And the element "#follow-btn" should be visible
     And I should see text matching "Follower: 0"
     And Element "#follow-btn" should have attribute "title" with value "Follow this user!"
 
   Scenario: Follower and Following should show on my profile:
     Given I log in as "Catrobat2" with the password "123456"
-    And I am on "/app/profile/1"
+    And I am on "/app/user/1"
     And I click "#follow-btn"
-    Then I should be on "/app/profile/1"
+    Then I should be on "/app/user/1"
     Then I log in as "Catrobat" with the password "123456"
-    And I am on "/app/profile/2"
+    And I am on "/app/user/2"
     And I click "#follow-btn"
-    Then I should be on "/app/profile/2"
-    Then I am on "/app/profile"
+    Then I should be on "/app/user/2"
+    Then I am on "/app/user"
 
   Scenario: Following sends Notification:
     Given I log in as "Catrobat2" with the password "123456"
-    And I am on "/app/profile/1"
+    And I am on "/app/user/1"
     And I click "#follow-btn"
-    Then I should be on "/app/profile/1"
+    Then I should be on "/app/user/1"
     Then I log in as "Catrobat" with the password "123456"
-    And I am on "/app/user/notifications"
+    And I am on "/app/notifications"
     Then I should see text matching "Catrobat2 follows you now"

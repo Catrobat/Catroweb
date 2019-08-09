@@ -26,7 +26,7 @@ Feature: Get users programs
 
   Scenario: show user programs
     Given I have a parameter "user_id" with value "1"
-    When I GET "/app/api/projects/userPrograms.json" with these parameters
+    When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get the json object:
     """
       {
@@ -44,7 +44,7 @@ Feature: Get users programs
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/program/(.*?)",
+                                "ProjectUrl":"app/project/(.*?)",
                                 "DownloadUrl":"app/download/(.*?).catrobat",
                                 "FileSize":0
                             },
@@ -62,7 +62,7 @@ Feature: Get users programs
                                 "UploadedString":"more than one year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/program/(.*?)",
+                                "ProjectUrl":"app/project/(.*?)",
                                 "DownloadUrl":"app/download/(.*?).catrobat",
                                 "FileSize":0
                             }],
@@ -78,20 +78,20 @@ Feature: Get users programs
 
   Scenario: show one project from one user
     Given I have a parameter "user_id" with value "3"
-    When I GET "/app/api/projects/userPrograms.json" with these parameters
+    When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get programs in the following order:
       | Name         |
       | MarkoTheBest |
 
   Scenario: empty result set is returend if the user doesnt exist or has no programs
     Given I have a parameter "user_id" with value "5"
-    When I GET "/app/api/projects/userPrograms.json" with these parameters
+    When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get programs in the following order:
       | Name |
 
   Scenario: show only visible programs
     Given program "MarkoTheBest" is not visible
     And I have a parameter "user_id" with value "3"
-    When I GET "/app/api/projects/userPrograms.json" with these parameters
+    When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get programs in the following order:
       | Name |

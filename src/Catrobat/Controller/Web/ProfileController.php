@@ -27,8 +27,8 @@ class ProfileController extends Controller
   const MAX_AVATAR_SIZE = 300;
 
   /**
-   * @Route("/profile/{id}", name="profile", defaults={"id" = 0}, methods={"GET"})
-   * @Route("/profile/")  // Overwrite for FosUser Profile Route (We don't use it!)
+   * @Route("/user/{id}", name="profile", defaults={"id" = 0}, methods={"GET"})
+   * @Route("/user/")  // Overwrite for FosUser Profile Route (We don't use it!)
    *
    * @param Request $request
    * @param GuidType $id
@@ -37,7 +37,7 @@ class ProfileController extends Controller
    *
    * @return RedirectResponse
    */
-  public function profileAction(Request $request, $id)
+  public function profileAction(Request $request, $id = 0)
   {
     /**
      * @var $user User
@@ -316,7 +316,7 @@ class ProfileController extends Controller
   }
 
   /**
-   * @Route("/profileUploadAvatar", name="profile_upload_avatar", methods={"POST"})
+   * @Route("/userUploadAvatar", name="profile_upload_avatar", methods={"POST"})
    *
    * @param Request $request
    *

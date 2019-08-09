@@ -96,7 +96,7 @@
     {% else %}
     let newest = new ProjectLoader('#newest', '{{ path('api_recent_programs') }}')
     let recommendedByPageId = {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
-    let recommended = new ProjectLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, recommendedByPageId)
+    let recommended = new ProjectLoader('#recommended', '{{ path('api_recsys_general_projects') }}', undefined, recommendedByPageId)
     let mostDownloaded = new ProjectLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
     let mostViewed = new ProjectLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
     let random = new ProjectLoader('#random', '{{ path('api_random_programs') }}')
@@ -110,7 +110,7 @@
     {% endif %}
 
 
-    function performClickStatisticRequest (href, type, isRecommendedProgram, userSpecificRecommendation, programID)
+    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID)
     {
       let url = "{{ path('click_stats') }}"
       let params = {}
@@ -174,9 +174,9 @@
     $(document).one('click', '#feature-slider > div > div > a', function (event) {
       event.preventDefault()
       let href = $(this).attr('href')
-      let programID = ((href.indexOf('program') > 0) ? (href.split('program')[1].match(/[0-9]+/))[0] : 0)
+      let programID = ((href.indexOf('project') > 0) ? (href.split('project/')[1]).split('?')[0] : 0)
       let type = 'featured'
-      performClickStatisticRequest(href, type, false, 0, programID)
+       performClickStatisticRequest(href, type, false, 0, programID)
     })
 
     $(document).one('click', '.rec-programs', function (event) {
@@ -184,7 +184,7 @@
       let isRecommendedProgram = $(this).hasClass('homepage-recommended-programs')
       let type = (isRecommendedProgram ? 'rec_homepage' : $(this).parent('.program').parent('.programs').parent().attr('id'))
       let href = $(this).attr('href')
-      let recommendedProgramID = ((href.indexOf('program') > 0) ? (href.split('program')[1].match(/[0-9]+/))[0] : 0)
+      let recommendedProgramID = ((href.indexOf('project') > 0) ? (href.split('project/')[1]).split('?')[0] : 0)
       let userSpecificRecommendation = ((href.indexOf('rec_user_specific=') > 0) ? parseInt((href.split('rec_user_specific=')[1].match(/[0-9]+/))[0]) : 0)
       performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, recommendedProgramID)
     })

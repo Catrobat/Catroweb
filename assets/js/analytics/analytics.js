@@ -1193,8 +1193,8 @@ else
       'UrlMapping': [
         {
           // removes the parameters from the program url
-          // origin:  https://share.catrob.at/app/program/44132
-          // cleaned: https://share.catrob.at/app/program/
+          // origin:  https://share.catrob.at//app/project/44132
+          // cleaned: https://share.catrob.at//app/project/
           'RegEx'     : /(.*\/program\/)(\d+)/,
           'ValueIndex': 1,
         },
@@ -1686,7 +1686,7 @@ else
         
       }
       
-      if (/.*\/profile.*/.test(window.location.pathname))
+      if (/.*\/user.*/.test(window.location.pathname))
       {
         
         let profileCategory = 'profile page'

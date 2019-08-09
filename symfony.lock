@@ -208,6 +208,15 @@
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
     },
+    "geocoder-php/common-http": {
+        "version": "4.2.0"
+    },
+    "geocoder-php/ip-info-provider": {
+        "version": "0.1.0"
+    },
+    "geocoder-php/plugin": {
+        "version": "1.1.0"
+    },
     "google/apiclient": {
         "version": "2.0",
         "recipe": {
@@ -279,6 +288,9 @@
     },
     "phar-io/version": {
         "version": "2.0.1"
+    },
+    "php-http/discovery": {
+        "version": "1.6.1"
     },
     "php-http/guzzle6-adapter": {
         "version": "v1.1.1"
@@ -806,6 +818,18 @@
     },
     "webmozart/assert": {
         "version": "1.4.0"
+    },
+    "willdurand/geocoder": {
+        "version": "4.2.1"
+    },
+    "willdurand/geocoder-bundle": {
+        "version": "5.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "b272ad4fbfcd45a20e7cbfdc4ad1b0e27a62fd3b"
+        }
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"

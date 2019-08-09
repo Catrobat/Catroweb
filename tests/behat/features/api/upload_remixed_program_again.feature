@@ -72,7 +72,7 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 4" and "url" set to "program 1[/pocketalice/program/1]"
+    Given I have a program with "name" set to "program 4" and "url" set to "program 1[/pocketalice/project/1]"
     When I upload a program
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
@@ -84,7 +84,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1"
     And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2"
     And the uploaded program should have no further Catrobat forward descendants
-    And the uploaded program should have RemixOf "program 1[/pocketalice/program/1]" in the xml
+    And the uploaded program should have RemixOf "program 1[/pocketalice/project/1]" in the xml
 
     And the program "1" should be a remix root
     And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -163,7 +163,7 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6" and "url" set to "program 5[/pocketalice/program/5]"
+    Given I have a program with "name" set to "program 6" and "url" set to "program 5[/pocketalice/project/5]"
     When I upload a program
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
@@ -175,7 +175,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have no Scratch parents
     And the uploaded program should have a Catrobat forward descendant having id "7" and depth "1"
     And the uploaded program should have no further Catrobat forward descendants
-    And the uploaded program should have RemixOf "program 5[/pocketalice/program/5]" in the xml
+    And the uploaded program should have RemixOf "program 5[/pocketalice/project/5]" in the xml
 
     And the program "1" should be a remix root
     And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -250,7 +250,7 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: program 7 becomes a backward parent of program 6 as well!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6", "url" set to "program 6[/app/program/6], Merge 1[program 5[/pocketalice/program/5], program 7[/pocketalice/program/7]]" and "catrobatLanguageVersion" set to "0.993"
+    Given I have a program with "name" set to "program 6", "url" set to "program 6[/app/project/6], Merge 1[program 5[/pocketalice/project/5], program 7[/pocketalice/project/7]]" and "catrobatLanguageVersion" set to "0.993"
     When I upload a program
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
@@ -263,7 +263,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have no Scratch parents
     And the uploaded program should have a Catrobat forward descendant having id "7" and depth "1"
     And the uploaded program should have no further Catrobat forward descendants
-    And the uploaded program should have RemixOf "program 6[/app/program/6], Merge 1[program 5[/pocketalice/program/5], program 7[/pocketalice/program/7]]" in the xml
+    And the uploaded program should have RemixOf "program 6[/app/project/6], Merge 1[program 5[/pocketalice/project/5], program 7[/pocketalice/project/7]]" in the xml
 
     And the program "1" should be a remix root
     And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -342,7 +342,7 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: program 6 becomes a backward parent of program 1 as well!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 1", "url" set to "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/program/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" and "catrobatLanguageVersion" set to "0.993"
+    Given I have a program with "name" set to "program 1", "url" set to "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" and "catrobatLanguageVersion" set to "0.993"
     When I upload a program
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
@@ -357,7 +357,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2"
     And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3"
     And the uploaded program should have no further Catrobat forward descendants
-    And the uploaded program should have RemixOf "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/program/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" in the xml
+    And the uploaded program should have RemixOf "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" in the xml
 
     And the program "2" should be a remix root
     And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
@@ -448,7 +448,7 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: program 7 becomes a backward parent of program 1 as well!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 1", "url" set to "program 7[/app/program/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" and "catrobatLanguageVersion" set to "0.993"
+    Given I have a program with "name" set to "program 1", "url" set to "program 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" and "catrobatLanguageVersion" set to "0.993"
     When I upload a program
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
@@ -462,7 +462,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2"
     And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3"
     And the uploaded program should have no further Catrobat forward descendants
-    And the uploaded program should have RemixOf "program 7[/app/program/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml
+    And the uploaded program should have RemixOf "program 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml
 
     And the program "2" should be a remix root
     And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
@@ -552,7 +552,7 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 1" and "url" set to "program 5[/app/program/5]"
+    Given I have a program with "name" set to "program 1" and "url" set to "program 5[/app/project/5]"
     When I upload a program
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
@@ -566,7 +566,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2"
     And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3"
     And the uploaded program should have no further Catrobat forward descendants
-    And the uploaded program should have RemixOf "program 5[/app/program/5]" in the xml
+    And the uploaded program should have RemixOf "program 5[/app/project/5]" in the xml
 
     And the program "2" should be a remix root
     And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"

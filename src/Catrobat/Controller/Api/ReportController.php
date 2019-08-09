@@ -22,7 +22,7 @@ class ReportController extends Controller
 {
 
   /**
-   * @Route("/api/reportProgram/reportProgram.json", name="catrobat_api_report_program",
+   * @Route("/api/reportProject/reportProject.json", name="catrobat_api_report_program",
    *   defaults={"_format": "json"}, methods={"POST", "GET"})
    *
    * @param Request $request

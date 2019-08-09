@@ -30,7 +30,7 @@ class UserComment
   private $program;
 
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="guid")
    */
   protected $userId;
 

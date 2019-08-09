@@ -36,26 +36,26 @@ Feature: There should be all projects of a user presented on a profile page
 
   Scenario: at my profile page there should always all programs be visible
     Given I log in as "Catrobat" with the password "123456"
-    And I am on "/app/profile"
+    And I am on "/app/user"
     Then I should see 2 "#myprofile-programs .program"
     And the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 
   Scenario: at my profile page there should always all programs be visible
     Given I log in as "User2" with the password "654321"
-    And I am on "/app/profile"
+    And I am on "/app/user"
     Then I should see 20 "#myprofile-programs .program"
     And the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 
   Scenario: at a profile page there should always all programs be visible
-    Given I am on "/app/profile/2"
+    Given I am on "/app/user/2"
     Then I should see 20 "#user-programs .program"
     And the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 
   Scenario: at a profile page there should always all programs be visible
-    Given I am on "/app/profile/1"
+    Given I am on "/app/user/1"
     Then I should see 2 "#user-programs .program"
     And the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist

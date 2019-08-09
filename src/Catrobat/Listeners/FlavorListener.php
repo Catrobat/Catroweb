@@ -70,7 +70,7 @@ class FlavorListener
     $context = $this->router->getContext();
     if (!$context->hasParameter('flavor'))
     {
-      $context->setParameter('flavor', $attributes->get('flavor'));
+      $context->setParameter('flavor', "app");
     }
 
     if ($attributes->get('flavor') === 'app') {
@@ -82,13 +82,15 @@ class FlavorListener
         $event->getRequest()->attributes->set('flavor', $requested_theme);
         $this->theme->setName($requested_theme);
       }
-      else {
+      else
+      {
         // no specific theme was requested, use the default one
         $event->getRequest()->attributes->set('flavor', 'pocketcode');
         $this->theme->setName('pocketcode');
       }
     }
-    else {
+    else
+    {
       $this->theme->setName($attributes->get('flavor'));
     }
   }

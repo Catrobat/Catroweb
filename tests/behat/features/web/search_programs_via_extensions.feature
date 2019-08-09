@@ -3,9 +3,9 @@ Feature: Searching for programs with extensions
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
-      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |  2 |
     And there are extensions:
       | id | name         | prefix  |
       | 1  | Arduino      | ARDUINO |
@@ -21,7 +21,7 @@ Feature: Searching for programs with extensions
     And I am on "/app"
 
   Scenario: Searching other programs with the same extensions
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     And I should see "program 1"
     And I should see "Lego"
     And I should see "Phiro"

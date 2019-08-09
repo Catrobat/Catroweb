@@ -40,7 +40,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get no user-specific recommended projects
     Then I should get a total of <total> projects
     Then I should get the programs "<programs>"
@@ -55,7 +55,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get no user-specific recommended projects
     Then I should get a total of 0 projects
     Examples:
@@ -78,7 +78,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get user-specific recommended projects
     Then I should get a total of 1 projects
     Then I should get following programs:
@@ -100,7 +100,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get a total of 1 projects
     Then I should get following programs:
       | Name   |
@@ -124,7 +124,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get user-specific recommended projects
     Then I should get a total of <total> projects
     Then I should get the programs "<programs>"
@@ -155,7 +155,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get user-specific recommended projects
     And I should get a total of <total> projects
     And I should get the programs "<programs>"

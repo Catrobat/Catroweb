@@ -774,12 +774,12 @@ services:
 
   # =========================== Sonata Admin Blocks ================================================
 
-  # ===== Programs
+  # ===== Projects
 
   catrowebadmin.block.programs.all:
     class: App\Admin\AllProgramsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "All Programs" }
+      - { name: sonata.admin, manager_type: orm, label: "All Projects" }
     arguments:
       - ~
       - App\Entity\Program
@@ -789,7 +789,7 @@ services:
   catrowebadmin.block.programs.approve:
     class: App\Admin\ApproveProgramsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Approve Programs" }
+      - { name: sonata.admin, manager_type: orm, label: "Approve Projects" }
     arguments:
       - ~
       - App\Entity\Program
@@ -799,7 +799,7 @@ services:
   catrowebadmin.block.programs.reported:
     class: App\Admin\ReportedProgramsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Reported Programs" }
+      - { name: sonata.admin, manager_type: orm, label: "Reported Projects" }
     arguments:
       - ~
       - App\Entity\ProgramInappropriateReport
@@ -816,12 +816,12 @@ services:
       - App\Catrobat\Controller\Admin\ReportController
     public: true
 
-  # ===== Special Programs
+  # ===== Special Projects
 
   catrowebadmin.block.programs.categories:
     class: App\Admin\CategoriesAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Starter Programs" }
+      - { name: sonata.admin, manager_type: orm, label: "Starter Projects" }
     arguments:
       - ~
       - App\Entity\StarterCategory
@@ -831,7 +831,7 @@ services:
   catrowebadmin.block.featured.program:
     class: App\Admin\FeaturedProgramAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Featured Programs" }
+      - { name: sonata.admin, manager_type: orm, label: "Featured Projects" }
     arguments:
       - ~
       - App\Entity\FeaturedProgram
@@ -851,7 +851,7 @@ services:
   catrowebadmin.block.programs.templates:
     class: App\Admin\TemplateAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Template Programs" }
+      - { name: sonata.admin, manager_type: orm, label: "Template Projects" }
     arguments:
       - ~
       - App\Entity\Template
@@ -1045,7 +1045,7 @@ services:
   catrowebadmin.block.statistics.programs:
     class: App\Admin\ProgramDownloadStatisticsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Program Download Statistics" }
+      - { name: sonata.admin, manager_type: orm, label: "Project Download Statistics" }
     arguments:
       - ~
       - App\Entity\ProgramDownloads

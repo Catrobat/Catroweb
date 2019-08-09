@@ -3,9 +3,9 @@ Feature: A/B testing for recommendation system & remix graph
 
   Background:
     Given there are users:
-      | name      | password | token      | email               |
-      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |
-      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
+      | name      | password | token      | email               | id |
+      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
 
     And there are programs:
       | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version | remix_root |
@@ -23,7 +23,7 @@ Feature: A/B testing for recommendation system & remix graph
     Given I am on "/app/"
     And the selected language is "English"
     And I wait 250 milliseconds
-    And I should see "Recommended programs"
+    And I should see "Recommended projects"
     And the element "#recommended" should be visible
     And I wait for a second
     And I should see a recommended homepage program having ID "1" and name "Minions"
@@ -46,7 +46,7 @@ Feature: A/B testing for recommendation system & remix graph
       | 2           | 2             | 0     |
       | 3           | 3             | 0     |
 
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     And the selected language is "English"
     And I wait 250 milliseconds
     And I should see "Show Remix Graph"
@@ -67,7 +67,7 @@ Feature: A/B testing for recommendation system & remix graph
       | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
       | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
 
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     When the selected language is "English"
     And I wait 250 milliseconds
     Then There should be recommended specific programs

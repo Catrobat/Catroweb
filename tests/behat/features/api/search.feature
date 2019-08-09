@@ -3,10 +3,10 @@ Feature: Search programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
-      | NewUser  | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
+      | NewUser  | vwxyz    | aaaaaaaaaa |  3 |
     And there are programs:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -51,7 +51,7 @@ Feature: Search programs
           "UploadedString": "more than one year ago",
           "ScreenshotBig": "images\/default\/screenshot.png",
           "ScreenshotSmall": "images\/default\/thumbnail.png",
-          "ProjectUrl": "app\/program\/(.*?)",
+          "ProjectUrl": "app\/project\/(.*?)",
           "DownloadUrl": "app\/download\/(.*?).catrobat",
           "FileSize": 0
         }],

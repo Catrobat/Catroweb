@@ -127,7 +127,7 @@ class CatroNotification
   /**
    * Set user
    *
-   * @param \App\Entity\User $user
+   * @param User $user
    *
    * @return CatroNotification
    */
@@ -141,7 +141,7 @@ class CatroNotification
   /**
    * Get user
    *
-   * @return \App\Entity\User
+   * @return User
    */
   public function getUser()
   {

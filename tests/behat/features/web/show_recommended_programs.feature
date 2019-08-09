@@ -3,10 +3,10 @@ Feature: Showing similar programs on details page of one program
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
-      | user2    | 123456   | cccccccccc | dev2@pocketcode.org |
-      | user3    | 123456   | cccccccccc | dev3@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | user2    | 123456   | cccccccccc | dev2@pocketcode.org |  2 |
+      | user3    | 123456   | cccccccccc | dev3@pocketcode.org |  3 |
     And there are extensions:
       | id | name         | prefix  |
       | 1  | Arduino      | ARDUINO |
@@ -32,9 +32,9 @@ Feature: Showing similar programs on details page of one program
     And I am on "/app"
 
   Scenario: Showing similar programs
-    When I go to "/app/program/1"
+    When I go to "/app/project/1"
     Then I should see "Minions"
-    And I should see "Similar Programs"
+    And I should see "Similar Projects"
     And I should see "Galaxy"
     And I should see "Alone"
     And I should see "Trolol"
@@ -42,7 +42,7 @@ Feature: Showing similar programs on details page of one program
     And I should see 3 "#recommendations .program"
 
   Scenario: No similar programs are given
-    When I go to "/app/program/5"
+    When I go to "/app/project/5"
     Then I should see "Nothing"
     And I should not see "Art"
     And I should not see "Similar Programs"

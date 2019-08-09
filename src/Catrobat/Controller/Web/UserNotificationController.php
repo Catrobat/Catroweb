@@ -31,7 +31,7 @@ class UserNotificationController extends Controller
 {
 
   /**
-   * @Route("/user/notifications", name="user_notifications", methods={"GET"})
+   * @Route("/notifications", name="user_notifications", methods={"GET"})
    *
    * @return RedirectResponse|Response
    * @throws Error
@@ -102,7 +102,7 @@ class UserNotificationController extends Controller
 
 
   /**
-   * @Route("/user/notifications/count", name="user_notifications_count", methods={"GET"})
+   * @Route("/notifications/count", name="user_notifications_count", methods={"GET"})
    *
    * @return JsonResponse
    */
@@ -125,7 +125,7 @@ class UserNotificationController extends Controller
 
 
   /**
-   * @Route("/user/notifications/seen", name="user_notifications_seen", methods={"GET"})
+   * @Route("/notifications/seen", name="user_notifications_seen", methods={"GET"})
    *
    * @return JsonResponse
    * @throws ORMException
@@ -149,7 +149,7 @@ class UserNotificationController extends Controller
 
 
   /**
-   * @Route("/user/notification/ancestor/{ancestor_id}/descendant/{descendant_id}", name="see_user_notification",
+   * @Route("/notification/ancestor/{ancestor_id}/descendant/{descendant_id}", name="see_user_notification",
    *        methods={"GET"})
    *
    * @param Request $request
@@ -196,7 +196,7 @@ class UserNotificationController extends Controller
 
 
   /**
-   * @Route("/user/notifications/markasread/{notification_id}", name="catro_notification_mark_as_read",
+   * @Route("/notifications/markasread/{notification_id}", name="catro_notification_mark_as_read",
    *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
    *
    * @param $notification_id

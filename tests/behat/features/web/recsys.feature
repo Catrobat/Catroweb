@@ -3,9 +3,9 @@ Feature: Recommendations on homepage (a.k.a. index page)
 
   Background:
     Given there are users:
-      | name      | password | token      | email               |
-      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |
-      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
+      | name      | password | token      | email               | id |
+      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
 
   Scenario: Recommended programs on homepage (a.k.a. index page)
     Given there are programs:
@@ -22,7 +22,7 @@ Feature: Recommendations on homepage (a.k.a. index page)
 
     When I am on "/app/"
     And the selected language is "English"
-    And I should see "Recommended programs"
+    And I should see "Recommended projects"
     And the element "#recommended" should be visible
     And I wait for a second
     Then I should see a recommended homepage program having ID "1" and name "Minions"

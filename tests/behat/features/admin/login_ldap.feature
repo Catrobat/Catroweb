@@ -3,9 +3,9 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
 
   Background:
     Given there are users:
-      | name     | password | token      | email   |
-      | Catrobat | 123456   | cccccccccc | c@b.at  |
-      | User1    | 654321   | cccccccccf | c@d.com |
+      | name     | password | token      | email   | id |
+      | Catrobat | 123456   | cccccccccc | c@b.at  |  1 |
+      | User1    | 654321   | cccccccccf | c@d.com |  2 |
 
   Scenario: login with valid username and password on LDAP should succeed
     Given there are LDAP-users:

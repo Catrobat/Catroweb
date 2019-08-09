@@ -75,7 +75,7 @@ Feature: All uploaded programs have to be validated.
     When I upload a program
     Then I should get the json object:
     """
-      {"statusCode":518,"answer":"Sorry, your program contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
+      {"statusCode":518,"answer":"Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
     """
 
 

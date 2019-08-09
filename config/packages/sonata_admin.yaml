@@ -39,7 +39,7 @@ sonata_admin:
                 settings:
                     code: catrowebadmin.block.programs.all
                     icon: fa-cubes
-                    text: All programs
+                    text: All projects
                     color: bg-blue
 
             -  # Programs Approve
@@ -49,7 +49,7 @@ sonata_admin:
                 settings:
                     code: catrowebadmin.block.programs.approve
                     icon: fa-warning
-                    text: Unapproved programs
+                    text: Unapproved projects
                     color: bg-yellow
 
             -  # Reported Programs
@@ -59,7 +59,7 @@ sonata_admin:
                 settings:
                     code: catrowebadmin.block.programs.reported
                     icon: fa-bullhorn
-                    text: Reported programs
+                    text: Reported projects
                     color: bg-red
                     filters:
                         state: { type: 3, value: 1 } # 3 => NumberType::TYPE_EQUAL
@@ -80,7 +80,7 @@ sonata_admin:
         groups:
 
             sonata.admin.group.programs:
-                label:           Programs
+                label:           Projects
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-cubes"></i>'
                 items:
@@ -90,7 +90,7 @@ sonata_admin:
                     - catrowebadmin.block.programs.comments
 
             sonata.admin.group.featured:
-                label:           Special Programs
+                label:           Special Projects
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-bullhorn"></i>'
                 items:

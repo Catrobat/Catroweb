@@ -33,7 +33,7 @@ Feature: Get details for a specific program
                                 "UploadedString":"3 months ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/program/(.*?)",
+                                "ProjectUrl":"app/project/(.*?)",
                                 "DownloadUrl":"app/download/(.*?).catrobat",
                                 "FileSize":2.5
 

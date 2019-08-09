@@ -3,6 +3,7 @@
 namespace App\Catrobat\Controller\Api;
 
 use App\Entity\FeaturedProgram;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class FeaturedController extends Controller
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function getFeaturedProgramsAction(Request $request)
   {
@@ -40,7 +41,7 @@ class FeaturedController extends Controller
    * @param Request $request
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function getFeaturedIOSProgramsAction(Request $request)
   {
@@ -53,7 +54,7 @@ class FeaturedController extends Controller
    * @param         $ios_only
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   private function getFeaturedPrograms(Request $request, $ios_only)
   {

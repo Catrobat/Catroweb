@@ -9,10 +9,10 @@ Feature: Admin Report Notification
 
   Scenario: Email subscribed admins directly after report
     Given there are users:
-      | name     | email           |
-      | Catrobat | admin@catrob.at |
-      | User1    | dog@catrob.at   |
-      | User2    | dog2@catrob.at  |
+      | name     | email           | id |
+      | Catrobat | admin@catrob.at |  1 |
+      | User1    | dog@catrob.at   |  2 |
+      | User2    | dog2@catrob.at  |  3 |
     And there are programs:
       | id | name      |
       | 1  | program 1 |

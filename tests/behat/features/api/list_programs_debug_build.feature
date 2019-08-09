@@ -40,7 +40,7 @@ Feature: List programs with and without debug build type
             "UploadedString": "4 months ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/program/(.*?)",
+            "ProjectUrl": "app/project/(.*?)",
             "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
@@ -90,7 +90,7 @@ Feature: List programs with and without debug build type
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/program/(.*?)",
+            "ProjectUrl": "app/project/(.*?)",
             "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
@@ -140,7 +140,7 @@ Feature: List programs with and without debug build type
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/program/(.*?)",
+            "ProjectUrl": "app/project/(.*?)",
             "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
@@ -205,15 +205,15 @@ Feature: List programs with and without debug build type
 
     Examples:
       | end point        | build type | total | programs                                    |
-      | randomPrograms   | debug      | 4     | program 1,program 2,debug program,program 4 |
-      | randomPrograms   | release    | 3     | program 1,program 2,program 4               |
-      | randomProgramIDs | debug      | 4     | program 1,program 2,debug program,program 4 |
-      | randomProgramIDs | release    | 3     | program 1,program 2,program 4               |
+      | randomProjects   | debug      | 4     | program 1,program 2,debug program,program 4 |
+      | randomProjects   | release    | 3     | program 1,program 2,program 4               |
+      | randomProjectIDs | debug      | 4     | program 1,program 2,debug program,program 4 |
+      | randomProjectIDs | release    | 3     | program 1,program 2,program 4               |
 
   Scenario Outline: Show user projects with debug and release app
     Given I use a <build type> build of the Catroid app
     And I have a parameter "user_id" with value "1"
-    When I GET "/app/api/projects/userPrograms.json" with these parameters
+    When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
 
@@ -238,7 +238,7 @@ Feature: List programs with and without debug build type
     And I have a parameter "q" with the tag id "1"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/search/tagPrograms.json" with these parameters
+    When I GET "/app/api/projects/search/tagProjects.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
     Examples:
@@ -257,5 +257,5 @@ Feature: List programs with and without debug build type
 
     Examples:
       | end point         | build type | q    | programs                          | total |
-      | extensionPrograms | debug      | Lego | debug program,program 1,program 4 | 3     |
-      | extensionPrograms | release    | Lego | program 1,program 4               | 2     |
+      | extensionProjects | debug      | Lego | debug program,program 1,program 4 | 3     |
+      | extensionProjects | release    | Lego | program 1,program 4               | 2     |

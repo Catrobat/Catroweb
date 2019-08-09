@@ -3,9 +3,9 @@ Feature: User gets generic notifications additionally to the remix notifications
 
   Background:
     Given there are users:
-      | name      | password | token      | email               |
-      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |
-      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
+      | name      | password | token      | email               | id |
+      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
 
     And there are catro notifications:
       | user     | title                 | message                                         | type        |
@@ -14,13 +14,13 @@ Feature: User gets generic notifications additionally to the remix notifications
 
   Scenario: User views his notifications and sees all of them
     Given I log in as "Catrobat" with the password "123456"
-    And I am on "/app/user/notifications"
+    And I am on "/app/notifications"
     Then I should see "Achievement - Uploads"
     And I should see "Achievement - View"
 
   Scenario: User views his notifications marks one as seen and does not see it anymore
     Given I log in as "Catrobat" with the password "123456"
-    And I am on "/app/user/notifications"
+    And I am on "/app/notifications"
     Then I should see "Achievement - Uploads"
     And I should see "Achievement - View"
     And the ".user-notification-badge" element should contain "2"
