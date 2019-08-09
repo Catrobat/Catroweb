@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -93,6 +94,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       return;
     }
     $object->setExtension($file->guessExtension());
+    $this->checkFlavor();
   }
 
 
@@ -137,6 +139,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       return;
     }
     $object->setExtension($file->guessExtension());
+    $this->checkFlavor();
   }
 
 
@@ -173,5 +176,20 @@ class MediaPackageFileAdmin extends AbstractAdmin
   {
     $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')
       ->remove($object->removed_id, $object->getExtension());
+  }
+
+  /**
+   *
+   */
+  private function checkFlavor()
+  {
+    $flavor = $this->getForm()->get('flavor')->getData();
+    $flavor_options =  $this->getConfigurationPool()->getContainer()->getParameter('themes');
+
+    if (!in_array($flavor, $flavor_options)) {
+      throw new NotFoundHttpException(
+        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
+      );
+    }
   }
 }

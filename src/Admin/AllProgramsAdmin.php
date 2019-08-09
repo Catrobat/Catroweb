@@ -13,6 +13,7 @@ use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -101,6 +102,15 @@ class AllProgramsAdmin extends AbstractAdmin
       $program->setApprovedByUser(null);
       $this->getModelManager()->update($program);
     }
+    $this->checkFlavor();
+  }
+
+  /**
+   * @param $object
+   */
+  public function prePersist($object)
+  {
+    $this->checkFlavor();
   }
 
   /**
@@ -166,5 +176,20 @@ class AllProgramsAdmin extends AbstractAdmin
      * @var $object object
      */
     return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
+  }
+
+  /**
+   *
+   */
+  private function checkFlavor()
+  {
+    $flavor = $this->getForm()->get('flavor')->getData();
+    $flavor_options =  $this->getConfigurationPool()->getContainer()->getParameter('themes');
+
+    if (!in_array($flavor, $flavor_options)) {
+      throw new NotFoundHttpException(
+        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
+      );
+    }
   }
 }

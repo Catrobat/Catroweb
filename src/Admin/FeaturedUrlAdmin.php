@@ -14,6 +14,7 @@ use App\Catrobat\Forms\FeaturedImageConstraint;
 use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -154,5 +155,29 @@ class FeaturedUrlAdmin extends AbstractAdmin
   {
     $image->old_image_type = $image->getImageType();
     $image->setImageType(null);
+    $this->checkFlavor();
+  }
+
+  /**
+   * @param $object
+   */
+  public function prePersist($object)
+  {
+    $this->checkFlavor();
+  }
+
+  /**
+   *
+   */
+  private function checkFlavor()
+  {
+    $flavor = $this->getForm()->get('flavor')->getData();
+    $flavor_options =  $this->getConfigurationPool()->getContainer()->getParameter('themes');
+
+    if (!in_array($flavor, $flavor_options)) {
+      throw new NotFoundHttpException(
+        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
+      );
+    }
   }
 }
