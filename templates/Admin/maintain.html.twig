@@ -280,10 +280,10 @@
 
       let data_mem = google.visualization.arrayToDataTable([
         ['name', 'value'],
-        ['Free ({{ freeRam }})', 100 - {{ usedRamPercentage }}],
+        ['Free ({{ freeRam }})',          {{ freeRamPercentage }}],
         ['Used ({{ usedRam }})',          {{ usedRamPercentage }}],
-        ['Shared ({{ sharedRam }})',      {{ usedRamPercentage }}],
-        ['Buff/Cache ({{ cachedRam }})',  {{ usedRamPercentage }}]
+        ['Shared ({{ sharedRam }})',      {{ sharedRamPercentage }}],
+        ['Buff/Cache ({{ cachedRam }})',  {{ cachedRamPercentage }}]
       ])
       let chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'))
       chart_mem.draw(data_mem, options_mem)
