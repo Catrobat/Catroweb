@@ -17,7 +17,7 @@ let jsLocalPluginSrc = assetsDir + '/js/localPlugins'
 // -------------------------------------------------------------------------------------------------
 // Defining CSS paths for all themes + admin:
 //
-let themes = [ 'pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school' ]
+let themes = [ 'pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school', 'embroidery' ]
 let sassconfig = {}
 
 for (let index = 0; index < themes.length; index++) {

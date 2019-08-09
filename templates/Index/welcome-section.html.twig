@@ -32,20 +32,14 @@
         <div class="col-12">
           {% if theme() == "luna" %}
             <a href="https://catrob.at/lcd">
-              <div class="catro-card help-card primary discord">
-                <div class="catro-content">
-                  <div class="row">
-                    <div class="col-8 col-sm-8">
-                      <div class="catro-card-title">
-                        {{ "help-cards.headings.discord"|trans({}, "catroweb") }}
-                      </div>
-                      {{ "help-cards.text.discord"|trans({}, "catroweb") }}
-                    </div>
-                    <img alt="Discord Logo" src="{{ asset('images/help/Discord-Logo-White.svg') }}"/>
-                  </div>
-                </div>
+              <div class="catro-card help-card">
+
               </div>
             </a>
+          {% elseif theme() == 'embroidery' %}
+            <div class="catro-card help-card primary discord" style="visibility: hidden">
+                  {#   show nothing for now   #}
+            </div>
           {% else %}
           <a href="https://itunes.apple.com/app/pocket-code/id1117935892">
             <div class="catro-card help-card apple primary">
