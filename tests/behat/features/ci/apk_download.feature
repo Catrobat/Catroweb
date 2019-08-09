@@ -2,11 +2,11 @@ Feature:
 
   Background:
     Given there are programs:
-      | name              | apk status | visible |
-      | Galaxy War        | none       | true    |
-      | My little program | pending    | true    |
-      | Bunny             | ready      | true    |
-      | Whack a Marko     | ready      | false   |
+      | name              | apk status | visible | id |
+      | Galaxy War        | none       | true    | 1  |
+      | My little program | pending    | true    | 2  |
+      | Bunny             | ready      | true    | 3  |
+      | Whack a Marko     | ready      | false   | 4  |
 
   Scenario:
     When I want to download the apk file of "Bunny"

@@ -3,10 +3,10 @@ Feature: As a visitor I want to see user profiles
 
   Background:
     Given there are users:
-      | name      | password | token      | email               |
-      | Christian | 123456   | cccccccccc | dev1@pocketcode.org |
-      | Gregor    | 654321   | cccccccccc | dev2@pocketcode.org |
-      | User1     | 654321   | cccccccccc | dev3pocketcode.org |
+      | name      | password | token      | email               | id |
+      | Christian | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
+      | Gregor    | 654321   | cccccccccc | dev2@pocketcode.org | 2  |
+      | User1     | 654321   | cccccccccc | dev3@pocketcode.org | 3  |
 
     And there are programs:
       | id  | name       | description        | owned by  | downloads | apk_downloads | views | upload time      | version |

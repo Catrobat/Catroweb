@@ -2,7 +2,10 @@
 Feature: List programs with and without debug build type
 
   Background:
-    Given there are tags:
+    Given there are users:
+      | name              | password | token      | id |
+      | GeneratedUser1    | vwxyz    | aaaaaaaaaa |  1 |
+    And there are tags:
       | id | en     | de         |
       | 1  | Games  | Spiele     |
       | 2  | Story  | Geschichte |
@@ -13,42 +16,42 @@ Feature: List programs with and without debug build type
       | 2  | Lego  | LEGO   |
       | 3  | Phiro | PHIRO  |
     And there are programs:
-      | id | name          | description | downloads | views | upload time      | version | debug | tags_id | extensions |
-      | 1  | program 1     | p1          | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false | 1,2     | Lego,Drone |
-      | 2  | program 2     |             | 333       | 9     | 22.04.2014 13:00 | 0.9.10  | false | 3       |            |
-      | 3  | debug program | new one     | 450       | 80    | 01.04.2019 09:00 | 1.0.12  | true  | 1,2,3   | Lego,Phiro |
-      | 4  | program 4     |             | 133       | 33    | 01.01.2012 13:00 | 0.9.10  | false | 1       | Lego       |
+      | id | name          | description | downloads | views | upload time      | version | debug | tags_id | extensions | owned by        |
+      | 1  | program 1     | p1          | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false | 1,2     | Lego,Drone | GeneratedUser1  |
+      | 2  | program 2     |             | 333       | 9     | 22.04.2014 13:00 | 0.9.10  | false | 3       |            | GeneratedUser1  |
+      | 3  | debug program | new one     | 450       | 80    | 01.04.2019 09:00 | 1.0.12  | true  | 1,2,3   | Lego,Phiro | GeneratedUser1  |
+      | 4  | program 4     |             | 133       | 33    | 01.01.2012 13:00 | 0.9.10  | false | 1       | Lego       | GeneratedUser1  |
     And the current time is "01.08.2019 00:00"
     And I store the following json object as "debug_program":
       """
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 3,
+            "ProjectId": "(.*?)",
             "ProjectName": "debug program",
             "ProjectNameShort": "debug program",
             "Author": "GeneratedUser1",
             "Description": "new one",
             "Version": "1.0.12",
-            "Views": "80",
-            "Downloads": "450",
+            "Views": 80,
+            "Downloads": 450,
             "Private": false,
-            "Uploaded": 1554109200,
+            "Uploaded": 1554102000,
             "UploadedString": "4 months ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/program/3",
-            "DownloadUrl": "app/download/3.catrobat",
+            "ProjectUrl": "app/program/(.*?)",
+            "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
         ],
         "completeTerm": "",
+        "preHeaderMessages": "",
         "CatrobatInformation": {
           "BaseUrl": "http://localhost/",
           "TotalProjects": 4,
           "ProjectsExtension": ".catrobat"
-        },
-        "preHeaderMessages": ""
+        }
       }
       """
     And I store the following json object as "debug_program_id":
@@ -56,7 +59,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 3,
+            "ProjectId": "(.*?)",
             "ProjectName": "debug program"
           }
         ],
@@ -74,31 +77,31 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 2,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 2",
             "ProjectNameShort": "program 2",
             "Author": "GeneratedUser1",
             "Description": "",
             "Version": "0.9.10",
-            "Views": "9",
-            "Downloads": "333",
+            "Views": 9,
+            "Downloads": 333,
             "Private": false,
-            "Uploaded": 1398171600,
+            "Uploaded": 1398164400,
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/program/2",
-            "DownloadUrl": "app/download/2.catrobat",
+            "ProjectUrl": "app/program/(.*?)",
+            "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
         ],
         "completeTerm": "",
+        "preHeaderMessages": "",
         "CatrobatInformation": {
           "BaseUrl": "http://localhost/",
           "TotalProjects": 3,
           "ProjectsExtension": ".catrobat"
-        },
-        "preHeaderMessages": ""
+        }
       }
       """
     And I store the following json object as "program_2_id":
@@ -106,7 +109,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 2,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 2"
           }
         ],
@@ -124,31 +127,31 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 4,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 4",
             "ProjectNameShort": "program 4",
             "Author": "GeneratedUser1",
             "Description": "",
             "Version": "0.9.10",
-            "Views": "33",
-            "Downloads": "133",
+            "Views": 33,
+            "Downloads": 133,
             "Private": false,
-            "Uploaded": 1325422800,
+            "Uploaded": 1325419200,
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/program/4",
-            "DownloadUrl": "app/download/4.catrobat",
+            "ProjectUrl": "app/program/(.*?)",
+            "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
         ],
         "completeTerm": "",
+        "preHeaderMessages": "",
         "CatrobatInformation": {
           "BaseUrl": "http://localhost/",
           "TotalProjects": 3,
           "ProjectsExtension": ".catrobat"
-        },
-        "preHeaderMessages": ""
+        }
       }
       """
     And I store the following json object as "program_4_id":
@@ -156,7 +159,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 4,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 4"
           }
         ],

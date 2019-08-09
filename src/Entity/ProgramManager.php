@@ -14,6 +14,7 @@ use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use Doctrine\DBAL\Types\GuidType;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
@@ -462,7 +463,7 @@ class ProgramManager
   }
 
   /**
-   * @param      $user_id
+   * @param GuidType $user_id
    * @param bool $include_debug_build_programs If programs marked as debug_build should be returned
    *
    * @return Program[]

@@ -12,6 +12,8 @@ use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\StatusCode;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -126,8 +128,8 @@ class UserNotificationController extends Controller
    * @Route("/user/notifications/seen", name="user_notifications_seen", methods={"GET"})
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function userNotificationsSeenAction()
   {
@@ -148,15 +150,15 @@ class UserNotificationController extends Controller
 
   /**
    * @Route("/user/notification/ancestor/{ancestor_id}/descendant/{descendant_id}", name="see_user_notification",
-   *        requirements={"ancestor_id":"\d+", "descendant_id":"\d+"}, methods={"GET"})
+   *        methods={"GET"})
    *
    * @param Request $request
    * @param         $ancestor_id
    * @param         $descendant_id
    *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @return RedirectResponse
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id)
   {
@@ -200,8 +202,8 @@ class UserNotificationController extends Controller
    * @param $notification_id
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function markCatroNotificationAsRead($notification_id)
   {

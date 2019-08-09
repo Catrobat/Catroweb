@@ -11,6 +11,7 @@ use App\Repository\ProgramRepository;
 use App\Repository\ScratchProgramRemixRepository;
 use App\Repository\ScratchProgramRepository;
 use DateTime;
+use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -415,7 +416,7 @@ class RemixManager
   }
 
   /**
-   * @param int $program_id
+   * @param GuidType $program_id
    *
    * @return array
    */
@@ -664,7 +665,7 @@ class RemixManager
   }
 
   /**
-   * @param int $program_id
+   * @param GuidType $program_id
    *
    * @return int
    */

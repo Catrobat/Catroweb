@@ -5,12 +5,13 @@ namespace App\Catrobat\Controller\Api;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Catrobat\StatusCode;
+use Doctrine\DBAL\Types\GuidType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\UserTestGroup;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -43,7 +44,7 @@ class RecommenderController extends Controller
   {
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
-    $program_id = intval($request->query->get('program_id'));
+    $program_id = $request->query->get('program_id');
 
     /** @var ProgramManager $program_manager */
     $program_manager = $this->get('programmanager');
@@ -58,10 +59,10 @@ class RecommenderController extends Controller
 
   /**
    * @Route("/api/projects/recsys_specific_programs/{id}.json", name="api_recsys_specific_programs",
-   *   defaults={"_format": "json"}, requirements={"id":"\d+"}, methods={"GET"})
+   *   defaults={"_format": "json"},  methods={"GET"})
    *
    * @param Request $request
-   * @param         $id
+   * @param GuidType $id
    *
    * @return ProgramListResponse|JsonResponse
    */
@@ -102,7 +103,7 @@ class RecommenderController extends Controller
   {
     $is_test_environment = ($this->get('kernel')->getEnvironment() == 'test');
     $test_user_id_for_like_recommendation = $is_test_environment ?
-      intval($request->query->get('test_user_id_for_like_recommendation', 0)) : 0;
+      $request->query->get('test_user_id_for_like_recommendation', 0) : "";
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
 
@@ -112,7 +113,7 @@ class RecommenderController extends Controller
     $programs = [];
     $is_user_specific_recommendation = false;
 
-    $user = ($test_user_id_for_like_recommendation == 0) ?
+    $user = ($test_user_id_for_like_recommendation == "") ?
       $this->getUser() : $this->get('usermanager')->find($test_user_id_for_like_recommendation);
 
     /** @var RecommenderManager $recommender_manager */

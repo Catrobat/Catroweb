@@ -3,6 +3,7 @@
 namespace App\Catrobat\Controller\Api;
 
 use App\Entity\ProgramManager;
+use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -177,12 +178,12 @@ class ListProgramsController extends Controller
 
     /**
      * @var ProgramManager $program_manager
+     * @var GuidType $user_id
      */
     $program_manager = $this->get('programmanager');
-
-    $limit = intval($request->query->get('limit', 20));
-    $offset = intval($request->query->get('offset', 0));
-    $user_id = intval($request->query->get('user_id', 0));
+    $limit = intval($request->get('limit', 20));
+    $offset = intval($request->get('offset', 0));
+    $user_id = $request->get('user_id', 0);
 
     if ($sortBy == 'downloads')
     {

@@ -218,7 +218,7 @@ class RemixUpdaterSpec extends ObjectBehavior
                                                                                         AsyncHttpClient $async_http_client)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
-    $second_expected_url = '/app/program/3570';
+    $second_expected_url = '/pocketcode/program/3570';
     $expected_scratch_info = [[
       'id'          => 117697631,
       'creator'     => ['username' => 'Techno-CAT'],

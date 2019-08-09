@@ -3,8 +3,8 @@ Feature: Upload a remixed program with one parent
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
 
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version | remix_root |
@@ -37,10 +37,10 @@ Feature: Upload a remixed program with one parent
 
   Scenario: program upload with no parent-URL should not add any remix relations (except self referencing relation)
     Given I have a program with "url" set to ""
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have no Catrobat ancestors except self-relation
     And the uploaded program should have no Scratch parents
     And the uploaded program should have no Catrobat forward descendants except self-relation
@@ -48,10 +48,10 @@ Feature: Upload a remixed program with one parent
 
   Scenario: program upload with local program name parent-URL should not add any remix relations (except self referencing relation)
     Given I have a program with "url" set to "My first program"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have no Catrobat ancestors except self-relation
     And the uploaded program should have no Scratch parents
     And the uploaded program should have no Catrobat forward descendants except self-relation
@@ -59,10 +59,10 @@ Feature: Upload a remixed program with one parent
 
   Scenario: program upload with invalid parent-URL should not add any remix relations (except self referencing relation)
     Given I have a program with "url" set to "https://www.google.com"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have no Catrobat ancestors except self-relation
     And the uploaded program should have no Scratch parents
     And the uploaded program should have no Catrobat forward descendants except self-relation
@@ -71,10 +71,10 @@ Feature: Upload a remixed program with one parent
   Scenario: program upload with parent-URL referring to own Catrobat program should not add any remix relations
   (except self referencing relation)
     Given I have a program with "url" set to "/app/program/10"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have no Catrobat ancestors except self-relation
     And the uploaded program should have no Scratch parents
     And the uploaded program should have no Catrobat forward descendants except self-relation
@@ -83,10 +83,10 @@ Feature: Upload a remixed program with one parent
   Scenario: program upload with parent-URL referring to no existing Catrobat program should not add any remix relations
   (except self referencing relation)
     Given I have a program with "url" set to "/app/program/11"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have no Catrobat ancestors except self-relation
     And the uploaded program should have no Scratch parents
     And the uploaded program should have no Catrobat forward descendants except self-relation
@@ -103,10 +103,10 @@ Feature: Upload a remixed program with one parent
     #             (3)
     #-------------------------------------------------------------------------------------------------------------------
     Given I have a program with "url" set to "/app/program/1"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "1"
     And the uploaded program should have no further Catrobat forward ancestors
     And the uploaded program should have no Catrobat backward parents
@@ -125,10 +125,11 @@ Feature: Upload a remixed program with one parent
     #            (3) (10)      <-- to be added (uploaded program will get ID "10")
     #-------------------------------------------------------------------------------------------------------------------
     Given I have a program with "url" set to "/pocketalice/program/2"
-    When I upload a program
+    When I upload the program with the id "10"
+
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "1"
     And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "2"
     And the uploaded program should have no further Catrobat forward ancestors
@@ -149,10 +150,10 @@ Feature: Upload a remixed program with one parent
     #             (10)      <-- to be added (uploaded program will get ID "10")
     #-------------------------------------------------------------------------------------------------------------------
     Given I have a program with "url" set to "/pocketalice/program/3"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have a Catrobat forward ancestor having id "3" and depth "1"
     And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "2"
     And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "3"
@@ -172,10 +173,10 @@ Feature: Upload a remixed program with one parent
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I have a program with "url" set to "https://scratch.mit.edu/projects/70058680"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have no Catrobat ancestors except self-relation
     And the uploaded program should have a Scratch parent having id "70058680"
     And the uploaded program should have no further Scratch parents
@@ -229,10 +230,10 @@ Feature: Upload a remixed program with one parent
       | 70058680          | 9                 |
 
     Given I have a program with "url" set to "/pocketalice/program/9"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have a Catrobat forward ancestor having id "9" and depth "1"
     And the uploaded program should have a Catrobat forward ancestor having id "6" and depth "2"
     And the uploaded program should have a Catrobat forward ancestor having id "5" and depth "2"
@@ -290,10 +291,10 @@ Feature: Upload a remixed program with one parent
       | 70058680          | 8                 |
 
     Given I have a program with "url" set to "/pocketalice/program/5"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have a Catrobat forward ancestor having id "5" and depth "1"
     And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "2"
     And the uploaded program should have no further Catrobat forward ancestors
@@ -353,10 +354,10 @@ Feature: Upload a remixed program with one parent
       | 70058680          | 8                 |
 
     Given I have a program with "url" set to "/pocketalice/program/7"
-    When I upload a program
+    When I upload the program with the id "10"
     Then the uploaded program should not be a remix root
     And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having id "10" and depth "0"
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
     And the uploaded program should have a Catrobat forward ancestor having id "7" and depth "1"
     And the uploaded program should have no further Catrobat forward ancestors
     And the uploaded program should have no Catrobat backward parents

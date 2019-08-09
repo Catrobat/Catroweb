@@ -135,7 +135,7 @@ class ResetCommand extends ContainerAwareCommand
     foreach ($server_json['CatrobatProjects'] as $program)
     {
       $url = $base_url . $program['DownloadUrl'];
-      $name = $dir . intval($program['ProjectId']) . '.catrobat';
+      $name = $dir . $program['ProjectId'] . '.catrobat';
       $output->writeln('Saving <' . $url . '> to <' . $name . '>');
       try
       {
@@ -162,7 +162,7 @@ class ResetCommand extends ContainerAwareCommand
       foreach ($server_json['CatrobatProjects'] as $program)
       {
         $url = $base_url . $program['DownloadUrl'];
-        $name = $dir . intval($program['ProjectId']) . '.catrobat';
+        $name = $dir . $program['ProjectId'] . '.catrobat';
         $output->writeln('Saving <' . $url . '> to <' . $name . '>');
         try
         {

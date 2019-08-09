@@ -21,7 +21,7 @@ class UserLikeSimilarityRelation
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $first_user_id;
 
@@ -29,13 +29,13 @@ class UserLikeSimilarityRelation
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="relations_of_similar_users_based_on_likes",
    *                                                                fetch="LAZY")
    * @ORM\JoinColumn(name="first_user_id", referencedColumnName="id")
-   * @var \App\Entity\User
+   * @var User
    */
   protected $first_user;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $second_user_id;
 
@@ -43,7 +43,7 @@ class UserLikeSimilarityRelation
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="reverse_relations_of_similar_users_based_on_likes",
    *                                                                fetch="LAZY")
    * @ORM\JoinColumn(name="second_user_id", referencedColumnName="id")
-   * @var \App\Entity\User
+   * @var User
    */
   protected $second_user;
 

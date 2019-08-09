@@ -13,6 +13,8 @@ use App\Entity\UserLikeSimilarityRelation;
 use App\Repository\UserLikeSimilarityRelationRepository;
 use App\Entity\UserRemixSimilarityRelation;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -77,7 +79,6 @@ class SymfonySupport
   {
     $this->kernel = $kernel;
   }
-
 
   /**
    * @return \Symfony\Bundle\FrameworkBundle\Client
@@ -365,9 +366,20 @@ class SymfonySupport
     @$user->setCountry($config['country'] ?: 'at');
     @$user->setLimited($config['limited'] ?: 'false');
     @$user->addRole($config['role'] ?: 'ROLE_USER');
-    @$user_manager->updateUser($user, true);
+    $user_manager->updateUser($user, true);
 
-    return $user;
+    $em = $this->getManager();
+
+    if (array_key_exists('id', $config) && $config['id'] !== null) {
+      $user->setId($config['id']);
+    }
+    else {
+      $user->setId('' . $this->test_user_count);
+    }
+
+    $em->flush();
+
+    return $user_manager->find($user->getId());
   }
 
   /**
@@ -425,7 +437,7 @@ class SymfonySupport
   public function insertUserLikeSimilarity($config = [])
   {
     /**
-     * @var $first_user User
+     * @var $first_user  User
      * @var $second_user User
      */
     $em = $this->getManager();
@@ -445,7 +457,7 @@ class SymfonySupport
   public function insertUserRemixSimilarity($config = [])
   {
     /**
-     * @var $first_user User
+     * @var $first_user  User
      * @var $second_user User
      */
     $em = $this->getManager();
@@ -466,7 +478,7 @@ class SymfonySupport
   public function insertProgramLike($config = [])
   {
     /**
-     * @var $user User
+     * @var $user    User
      * @var $program Program
      */
     $em = $this->getManager();
@@ -529,7 +541,7 @@ class SymfonySupport
   public function insertForwardRemixRelation($config)
   {
     /**
-     * @var $ancestor Program
+     * @var $ancestor   Program
      * @var $descendant Program
      */
     $ancestor = $this->getProgramManager()->find($config['ancestor_id']);
@@ -551,7 +563,7 @@ class SymfonySupport
   {
     /**
      * @var $parent Program
-     * @var $child Program
+     * @var $child  Program
      */
     $parent = $this->getProgramManager()->find($config['parent_id']);
     $child = $this->getProgramManager()->find($config['child_id']);
@@ -589,14 +601,14 @@ class SymfonySupport
    * @param $config
    *
    * @return Program
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    * @throws \Exception
    */
   public function insertProgram($user, $config)
   {
     /**
-     * @var $tag Tag
+     * @var $tag       Tag
      * @var $extension Extension
      */
     if ($user == null)
@@ -628,6 +640,17 @@ class SymfonySupport
     $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
     $program->setRemixRoot(isset($config['remix_root']) ? $config['remix_root'] : true);
     $program->setDebugBuild(isset($config['debug']) ? $config['debug'] : false);
+
+    $em->persist($program);
+
+    // overwrite id if desired
+    if (array_key_exists('id', $config) && $config['id'] !== null) {
+      $program->setId($config['id']);
+      $em->persist($program);
+      $em->flush();
+      $program_repo = $em->getRepository('App\Entity\Program');
+      $program = $program_repo->find($config['id']);
+    }
 
     if (isset($config['tags']) && $config['tags'] != null)
     {
@@ -684,7 +707,7 @@ class SymfonySupport
     $em = $this->getManager();
     /**
      * @var $program_statistics ProgramDownloads
-     * @var $program Program;
+     * @var $program            Program;
      */
     $program_statistics = new ProgramDownloads();
     $program_statistics->setProgram($program);
@@ -770,14 +793,17 @@ class SymfonySupport
   }
 
   /**
-   * @param        $file
-   * @param        $user
+   * @param $file
+   * @param $user
+   * @param $desired_id
    * @param string $flavor
-   * @param null   $request_param
+   * @param null $request_param
    *
    * @return \Symfony\Component\HttpFoundation\Response|null
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function upload($file, $user, $flavor = "pocketcode", $request_param = null)
+  public function upload($file, $user, $desired_id, $flavor = "pocketcode", $request_param = null)
   {
     if ($user == null)
     {
@@ -808,6 +834,46 @@ class SymfonySupport
     $client = $this->getClient();
     $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, [$file]);
     $response = $client->getResponse();
+
+    if ($desired_id)
+    {
+      /**
+       * @var $new_program Program
+       */
+      $matches = [];
+      preg_match('/"projectId":".*?"/', $response->getContent(), $matches);
+      $old_id = substr($matches[0], strlen('"projectId":"'), -1);
+      $new_program = $this->getProgramManager()->find($old_id);
+
+      $new_program->setId($desired_id);
+      $this->getManager()->persist($new_program);
+      $this->getManager()->flush();
+
+      foreach ($this->getProgramRemixForwardRepository()->findAll() as $entry) {
+        /**
+         * @var $entry ProgramRemixRelation
+         */
+        if ($entry->getDescendantId() == $old_id) {
+          $entry->setDescendant($new_program);
+        }
+        if ($entry->getAncestorId() == $old_id) {
+          $entry->setAncestor($new_program);
+        }
+      }
+
+      $em = $this->getManager();
+      $em->persist($new_program);
+      $em->flush();
+
+      // rename project file
+      rename("./public/resources_test/projects/" . $old_id . ".catrobat",
+        "./public/resources_test/projects/" . $desired_id . ".catrobat");
+
+      $content = json_decode($response->getContent(), true);
+      $content['projectId'] = $desired_id;
+      $client->getResponse()->setContent(json_encode($content));
+      $response = $client->getResponse();
+    }
 
     return $response;
   }

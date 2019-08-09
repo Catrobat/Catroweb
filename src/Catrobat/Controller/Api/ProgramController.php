@@ -25,8 +25,8 @@ class ProgramController extends Controller
    */
   public function showProgramAction(Request $request)
   {
-    $id = intval($request->query->get('id'));
     /** @var ProgramManager $program_manager */
+    $id = $request->get('id', 0);
     $program_manager = $this->get('programmanager');
 
     $programs = [];

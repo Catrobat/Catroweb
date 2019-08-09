@@ -3,8 +3,8 @@ Feature: Upload a program with extensions
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -16,7 +16,6 @@ Feature: Upload a program with extensions
       | 4  | Phiro        | PHIRO   |
       | 5  | Raspberry Pi | RASPI   |
 
-
   Scenario: upload a program with extensions
     Given I have a program with Arduino, Lego and Phiro extensions
     When I upload this program
@@ -24,7 +23,7 @@ Feature: Upload a program with extensions
 
   Scenario: update a program with extensions
     Given I have a program with Arduino, Lego and Phiro extensions
-    And I upload this program
+    And I upload this program with id "2"
     When I upload the program again without extensions
-    Then the program should be marked with no extensions in the database
+    Then the program with id "2" should be marked with no extensions in the database
 

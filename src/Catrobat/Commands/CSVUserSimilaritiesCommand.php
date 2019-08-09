@@ -86,7 +86,7 @@ class CSVUserSimilaritiesCommand extends ContainerAwareCommand
     $statement = $this->entity_manager->getConnection()
       ->prepare("SELECT MAX(id) as id_of_last_user FROM fos_user");
     $statement->execute();
-    $id_of_last_user = intval($statement->fetch()['id_of_last_user']);
+    $id_of_last_user = $statement->fetch()['id_of_last_user'];
     echo PHP_EOL . 'Last ID: ' . $id_of_last_user . PHP_EOL;
 
     $output_string = '';

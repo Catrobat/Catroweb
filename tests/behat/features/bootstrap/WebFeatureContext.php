@@ -641,10 +641,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $user->setEnabled(true);
       $user->setUploadToken($users[$i]['token']);
       $user->setCountry('at');
-      $user_manager->updateUser($user, false);
+      $user_manager->updateUser($user, true);
+
+      if (array_key_exists('id', $users[$i])) {
+        $user->setId($users[$i]['id']);
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $em->flush();
+      }
     }
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $em->flush();
   }
 
   /**
@@ -799,6 +803,17 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setPrivate(isset($programs[$i]['private']) ? $programs[$i]['private'] : 0);
       $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] == 'true' : false);
 
+      $em->persist($program);
+
+      // overwrite id if desired
+      if (array_key_exists('id', $programs[$i])) {
+        $program->setId($programs[$i]['id']);
+        $em->persist($program);
+        $em->flush();
+        $program_repo = $em->getRepository('App\Entity\Program');
+        $program = $program_repo->find($programs[$i]['id']);
+      }
+
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
         $tag_repo = $em->getRepository('App\Entity\Tag');
@@ -831,8 +846,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $file_repo = $this->kernel->getContainer()->get('filerepository');
         $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
       }
-
-      $em->persist($program);
     }
     $em->flush();
   }
@@ -1600,6 +1613,17 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setApproved(false);
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
       $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
+
+      $em->persist($program);
+
+      // overwrite id if desired
+      if (array_key_exists('id', $programs[$i])) {
+        $program->setId($programs[$i]['id']);
+        $em->persist($program);
+        $em->flush();
+        $program_repo = $em->getRepository('App\Entity\Program');
+        $program = $program_repo->find($programs[$i]['id']);
+      }
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
@@ -2622,7 +2646,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iClickOnTheFirstRecommendedHomepageProgram()
   {
-    $arg1 = '#program-1 .homepage-recommended-programs';
+    $arg1 = '.homepage-recommended-programs';
     $this->assertSession()->elementExists('css', $arg1);
 
     $this
@@ -2999,6 +3023,13 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $program->setRemixRoot(true);
         $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
         $em->persist($program);
+
+        // overwrite id if desired
+        if (array_key_exists('id', $programs[$i])) {
+          $program->setId($programs[$i]['id']);
+          $em->persist($program);
+          $em->flush();
+        }
       }
       $em->flush();
     } catch (Exception $e)

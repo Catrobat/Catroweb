@@ -310,7 +310,6 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   *
    * @return User
    */
   public function getDefaultUser()
@@ -319,7 +318,6 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   *
    * @return \Symfony\Component\HttpKernel\Profiler\Profiler
    */
   public function getSymfonyProfile()
@@ -362,16 +360,17 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @param        $file
-   * @param        $user
+   * @param $file
+   * @param $user
    * @param string $flavor
-   * @param null   $request_parameters
-   *
-   * @return null|\Symfony\Component\HttpFoundation\Response
+   * @param null $request_parameters
+   * @return \Symfony\Component\HttpFoundation\Response|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
   {
-    return $this->symfony_support->upload($file, $user, $flavor, $request_parameters);
+    return $this->symfony_support->upload($file, $user, null, $flavor, $request_parameters);
   }
 
   // endregion GETTER & SETTER
@@ -482,6 +481,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     foreach ($program_stats as $program_stat)
     {
       $program = $this->getProgramManger()->find($program_stat['program_id']);
+
       $config = [
         'downloaded_at' => $program_stat['downloaded_at'],
         'ip'            => $program_stat['ip'],
@@ -941,6 +941,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
         'username' => isset($program['owned by']) ? $program['owned by'] : "",
       ]);
       @$config = [
+        'id'                  => $program['id'], // overwrite auto generation for testing purposes
         'name'                => $program['name'],
         'description'         => $program['description'],
         'views'               => $program['views'],

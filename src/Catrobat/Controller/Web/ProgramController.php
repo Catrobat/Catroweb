@@ -20,6 +20,7 @@ use App\Entity\User;
 use App\Entity\UserComment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -42,11 +43,10 @@ class ProgramController extends Controller
 {
 
   /**
-   * @Route("/program/remixgraph/{id}", name="program_remix_graph",
-   *   requirements={"id":"\d+"}, methods={"GET"})
+   * @Route("/program/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
    *
    * @param Request $request
-   * @param integer $id
+   * @param GuidType $id
    *
    * @return JsonResponse
    * @throws ORMException
@@ -87,12 +87,11 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/program/{id}", name="program", requirements={"id":"\d+"})
-   * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"},
-   *   methods={"GET"})
+   * @Route("/program/{id}", name="program")
+   * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
    *
    * @param Request $request
-   * @param integer $id
+   * @param GuidType $id
    *
    * @return JsonResponse
    * @throws Error
@@ -207,10 +206,10 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/program/like/{id}", name="program_like", requirements={"id":"\d+"}, methods={"GET"})
+   * @Route("/program/like/{id}", name="program_like", methods={"GET"})
    *
    * @param Request $request
-   * @param integer $id
+   * @param GuidType $id
    *
    * @return JsonResponse|RedirectResponse
    * @throws Exception
@@ -223,6 +222,7 @@ class ProgramController extends Controller
      * @var Program                  $program
      * @var CatroNotification        $notification
      * @var CatroNotificationService $notification_service
+     * @var Program                  $program
      */
 
     $type = intval($request->query->get('type', ProgramLike::TYPE_THUMBS_UP));
@@ -348,10 +348,9 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", requirements={"id":"\d+"},
-   *    defaults={"id" = 0}, methods={"GET"})
+   * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", defaults={"id" = 0}, methods={"GET"})
    *
-   * @param integer $id
+   * @param GuidType $id
    *
    * @return JsonResponse|RedirectResponse
    * @throws Exception
@@ -397,9 +396,9 @@ class ProgramController extends Controller
 
   /**
    * @Route("/profileToggleProgramVisibility/{id}", name="profile_toggle_program_visibility",
-   *   requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
+   *   defaults={"id" = 0}, methods={"GET"})
    *
-   * @param integer $id
+   * @param GuidType $id
    *
    * @return Response
    * @throws Exception
@@ -447,9 +446,9 @@ class ProgramController extends Controller
 
   /**
    * @Route("/editProgramDescription/{id}/{newDescription}", name="edit_program_description",
-   *   options={"expose"=true}, requirements={"id":"\d+"}, methods={"GET"})
+   *   options={"expose"=true}, methods={"GET"})
    *
-   * @param integer $id
+   * @param GuidType $id
    * @param string  $newDescription
    *
    * @return Response
@@ -582,11 +581,9 @@ class ProgramController extends Controller
                                              $like_type_count, $total_like_count, $elapsed_time,
                                              $referrer, $program_comments, $request)
   {
-    $rec_by_page_id = intval($request->query
-      ->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
+    $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
     $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
     $rec_user_specific = intval($request->query->get('rec_user_specific', 0));
-
     $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
 
     if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id))

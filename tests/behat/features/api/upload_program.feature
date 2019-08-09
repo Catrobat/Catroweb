@@ -3,9 +3,9 @@ Feature: Upload a program
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -18,11 +18,10 @@ Feature: Upload a program
     And I have a valid Catrobat file
     And I have a parameter "fileChecksum" with the md5checksum of "test.catrobat"
     When I POST these parameters to "/app/api/upload/upload.json"
-    Then I should get the json object with random "token" and "projectId":
+    Then I should get the json object:
       """
-      {"projectId":"","statusCode":200,"answer":"Your project was uploaded successfully!","token":"","preHeaderMessages":""}
+      {"projectId":"(.*?)","statusCode":200,"answer":"Your project was uploaded successfully!","token":"(.*?)","preHeaderMessages":""}
       """
-    And the returned "projectId" should be a number
 
   Scenario: missing all prameters will result in an error
     Given I have a parameter "username" with value "Catrobat"

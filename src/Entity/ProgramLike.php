@@ -46,27 +46,27 @@ class ProgramLike
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid", nullable=false)
    */
   protected $program_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="likes", fetch="LAZY")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
-   * @var \App\Entity\Program
+   * @var Program
    */
   protected $program;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid", nullable=false)
    */
   protected $user_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="likes", fetch="LAZY")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-   * @var \App\Entity\User
+   * @var User
    */
   protected $user;
 
@@ -82,8 +82,8 @@ class ProgramLike
   protected $created_at;
 
   /**
-   * @param \App\Entity\Program $program
-   * @param \App\Entity\User    $user
+   * @param Program $program
+   * @param User    $user
    * @param int                                $type
    */
   public function __construct(Program $program, User $user, $type)

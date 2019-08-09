@@ -6,6 +6,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | name      | password | token      | email               |
       | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |
       | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
+
     And there are extensions:
       | id | name         | prefix  |
       | 1  | Arduino      | ARDUINO |
@@ -13,6 +14,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 3  | Lego         | LEGO    |
       | 4  | Phiro        | PHIRO   |
       | 5  | Raspberry Pi | RASPI   |
+
     And there are tags:
       | id | en           | de           |
       | 1  | Game         | Spiel        |
@@ -72,7 +74,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on the first featured homepage program
-    And I wait 500 milliseconds
+    And I wait 100 milliseconds
     Then There should be one homepage click database entry with type is "featured" and program id is "2"
     And There should be no recommended click statistic database entry
     And I should see "Galaxy"
@@ -83,7 +85,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a newest homepage program having program id "2"
-    And I wait 500 milliseconds
+    And I wait 100 milliseconds
     Then There should be one homepage click database entry with type is "newest" and program id is "2"
     And There should be no recommended click statistic database entry
     And I should see "Galaxy"
@@ -94,7 +96,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a most downloaded homepage program having program id "3"
-    And I wait 500 milliseconds
+    And I wait 100 milliseconds
     Then There should be one homepage click database entry with type is "mostDownloaded" and program id is "3"
     And There should be no recommended click statistic database entry
     And I should see "Alone"
@@ -105,7 +107,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a most viewed homepage program having program id "4"
-    And I wait 500 milliseconds
+    And I wait 100 milliseconds
     Then There should be one homepage click database entry with type is "mostViewed" and program id is "4"
     And There should be no recommended click statistic database entry
     And I should see "Trolol"
@@ -116,7 +118,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a random homepage program having program id "2"
-    And I wait 500 milliseconds
+    And I wait 100 milliseconds
     Then There should be one homepage click database entry with type is "random" and program id is "2"
     And There should be no recommended click statistic database entry
     And I should see "Galaxy"
@@ -126,21 +128,21 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   Scenario: Create one statistic entry from recommended programs on homepage
     Given there are programs:
       | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version |
-      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
-      | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
+      | 21 | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 22 | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
+      | 23 | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
 
     And there are likes:
       | username  | program_id | type | created at       |
-      | Catrobat  | 1          | 1    | 01.01.2017 12:00 |
-      | Catrobat  | 2          | 2    | 01.01.2017 12:00 |
-      | OtherUser | 1          | 4    | 01.01.2017 12:00 |
+      | Catrobat  | 21         | 1    | 01.01.2017 12:00 |
+      | Catrobat  | 22         | 2    | 01.01.2017 12:00 |
+      | OtherUser | 21         | 4    | 01.01.2017 12:00 |
     Given I am on "/app"
-    Then I wait 500 milliseconds
-    Then I should see a recommended homepage program having ID "1" and name "Minions"
+    Then I wait 100 milliseconds
+    Then I should see a recommended homepage program having ID "21" and name "Minions"
     When I click on the first recommended homepage program
-    And I wait 500 milliseconds
-    Then There should be one database entry with type is "rec_homepage" and "program_id" is "1"
+    And I wait 100 milliseconds
+    Then There should be one database entry with type is "rec_homepage" and "program_id" is "21"
     Then There should be one database entry with type is "rec_homepage" and "user_specific_recommendation" is "false"
     And There should be no homepage click statistic database entry
     And I should see "Minions"
@@ -156,7 +158,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     And I am on "/app/program/1"
     Then There should be recommended specific programs
     When I click on the first recommended specific program
-    And I wait 500 milliseconds
+    And I wait 100 milliseconds
     Then There should be one database entry with type is "rec_specific_programs" and "program_id" is "3"
     And I should see "Alone"
     And I should see "p3"

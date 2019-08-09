@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,8 +17,8 @@ class User extends BaseUser implements LdapUserInterface
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(name="id", type="guid")
+   * @ORM\GeneratedValue(strategy="UUID")
    */
   protected $id;
 
@@ -68,7 +69,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|ProgramLike[]
+   * @var Collection|ProgramLike[]
    */
   protected $likes;
 
@@ -79,7 +80,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|UserLikeSimilarityRelation[]
+   * @var Collection|UserLikeSimilarityRelation[]
    */
   protected $relations_of_similar_users_based_on_likes;
 
@@ -90,7 +91,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|UserLikeSimilarityRelation[]
+   * @var Collection|UserLikeSimilarityRelation[]
    */
   protected $reverse_relations_of_similar_users_based_on_likes;
 
@@ -101,7 +102,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|UserRemixSimilarityRelation[]
+   * @var Collection|UserRemixSimilarityRelation[]
    */
   protected $relations_of_similar_users_based_on_remixes;
 
@@ -112,7 +113,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var \Doctrine\Common\Collections\Collection|UserRemixSimilarityRelation[]
+   * @var Collection|UserRemixSimilarityRelation[]
    */
   protected $reverse_relations_of_similar_users_based_on_remixes;
 
@@ -241,7 +242,7 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * Get programs.
    *
-   * @return \Doctrine\Common\Collections\Collection
+   * @return Collection
    */
   public function getPrograms()
   {
@@ -368,7 +369,7 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   * @return ProgramLike[]|\Doctrine\Common\Collections\Collection
+   * @return ProgramLike[]|Collection
    */
   public function getLikes()
   {
@@ -376,7 +377,7 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   * @param ProgramLike[]|\Doctrine\Common\Collections\Collection $likes
+   * @param ProgramLike[]|Collection $likes
    */
   public function setLikes($likes)
   {

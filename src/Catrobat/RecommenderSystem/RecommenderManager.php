@@ -638,7 +638,7 @@ class RecommenderManager
     $statement = $this->entity_manager->getConnection()
       ->prepare("SELECT MAX(id) as id_of_last_user FROM fos_user");
     $statement->execute();
-    $id_of_last_user = intval($statement->fetch()['id_of_last_user']);
+    $id_of_last_user = $statement->fetch()['id_of_last_user'];
     $user_remix_relations = [];
 
     for ($user_id = 1; $user_id <= $id_of_last_user; $user_id++)

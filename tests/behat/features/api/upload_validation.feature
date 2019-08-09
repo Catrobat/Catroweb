@@ -48,7 +48,7 @@ Feature: All uploaded programs have to be validated.
     When I upload a program
     Then I should get the json object:
     """
-      {"statusCode":519,"answer":"Sorry, you are using an old version of Pocket Code. Please update to the lastest version.","preHeaderMessages":""}
+      {"statusCode":519,"answer":"Sorry, you are using an old version of Pocket Code. Please update to the latest version.","preHeaderMessages":""}
     """
 
     Examples:
@@ -75,7 +75,7 @@ Feature: All uploaded programs have to be validated.
     When I upload a program
     Then I should get the json object:
     """
-      {"statusCode":518,"answer":"Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
+      {"statusCode":518,"answer":"Sorry, your program contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
     """
 
 

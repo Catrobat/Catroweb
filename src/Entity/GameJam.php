@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,8 +65,8 @@ class GameJam
 
   public function __construct()
   {
-    $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->sample_programs = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->programs = new ArrayCollection();
+    $this->sample_programs = new ArrayCollection();
   }
 
   /**
@@ -200,7 +202,7 @@ class GameJam
   /**
    * Get programs
    *
-   * @return \Doctrine\Common\Collections\Collection
+   * @return Collection
    */
   public function getPrograms()
   {
@@ -234,7 +236,7 @@ class GameJam
   /**
    * Get samplePrograms
    *
-   * @return \Doctrine\Common\Collections\Collection
+   * @return Collection
    */
   public function getSamplePrograms()
   {

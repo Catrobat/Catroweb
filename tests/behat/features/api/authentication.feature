@@ -5,14 +5,14 @@ Feature: Authenticate to the system
   Background:
 
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
 
 
   Scenario: Registration of a new user
     Given the HTTP Request:
-      | Method | POST                                                 |
+      | Method | POST                                          |
       | Url    | /app/api/loginOrRegister/loginOrRegister.json |
     And the POST parameters:
       | Name                 | Value                |
@@ -22,12 +22,12 @@ Feature: Authenticate to the system
       | registrationCountry  | at                   |
     And we assume the next generated token will be "rrrrrrrrrrr"
     When the Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
           """
           {
-            "token": "rrrrrrrrrrr",
             "statusCode": 201,
             "answer": "Registration successful!",
+            "token": "rrrrrrrrrrr",
             "preHeaderMessages": ""
           }
           """
@@ -35,7 +35,7 @@ Feature: Authenticate to the system
   Scenario Outline: Troubleshooting
     Given the registration problem "<problem>"
     When such a Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
           """
           {
             "statusCode": <errorcode>,
@@ -57,11 +57,11 @@ Feature: Authenticate to the system
       | registrationUsername | Catrobat |
       | registrationPassword | 12345    |
     When the Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
           """
           {
-            "token": "cccccccccc",
             "statusCode": 200,
+            "token": "cccccccccc",
             "preHeaderMessages": ""
           }
           """
@@ -75,7 +75,7 @@ Feature: Authenticate to the system
       | username | Catrobat   |
       | token    | cccccccccc |
     When the Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
           """
           {
             "statusCode": 200,
@@ -88,7 +88,7 @@ Feature: Authenticate to the system
   Scenario Outline: Troubleshooting
     Given the check token problem "<problem>"
     When such a Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
           """
           {
             "statusCode": <errorcode>,
@@ -114,7 +114,7 @@ Feature: Authenticate to the system
       | registrationCountry  | at                   |
     And we assume the next generated token will be "rrrrrrrrrrr"
     When the Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
           """
           {
             "statusCode": 602,
