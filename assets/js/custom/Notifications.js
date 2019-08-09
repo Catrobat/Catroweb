@@ -1,10 +1,9 @@
-function Notification (notifications, unseenRemixesGroupedLength, markAsReadUrl, markAllAsReadUrl,
+function Notification (notifications, markAsReadUrl, markAllAsReadUrl,
                        popUpClearedAllMessagesTitle, popUpClearedAllMessagesText,
                        somethingWentWrongError, notificationsClearError)
 {
   let self = this
   self.notifications = notifications
-  self.unseenRemixesGroupedLength = unseenRemixesGroupedLength
   self.markAsReadUrl = markAsReadUrl
   self.popUpClearedAllMessagesTitle = popUpClearedAllMessagesTitle
   self.popUpClearedAllMessagesText = popUpClearedAllMessagesText
@@ -14,8 +13,7 @@ function Notification (notifications, unseenRemixesGroupedLength, markAsReadUrl,
   self.init = function () {
     let markAllAsSeenButton = $('#mark-all-as-seen')
     
-    let totalAmountOfNotifcations = self.unseenRemixesGroupedLength + self.notifications
-    if (totalAmountOfNotifcations === 0)
+    if (self.notifications === 0)
     {
       markAllAsSeenButton.hide()
       $('.no-notifications-placeholder').show()

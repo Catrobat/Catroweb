@@ -51,7 +51,7 @@
   <script src="{{ asset('compiled/js/Notifications.js') }}"></script>
   <script>
     let notifications = new Notification({{ catroUserNotifications|length }},
-        {{ unseenRemixesGrouped|length }}, "{{ url('catro_notification_mark_as_read') }}",
+      "{{ url('catro_notification_mark_as_read') }}",
       "{{ url('user_notifications_seen') }}",
       "{{ "done"|trans({}, "catroweb") }}",
       "{{ "notificationsClearedMessage"|trans({}, "catroweb") }}",
