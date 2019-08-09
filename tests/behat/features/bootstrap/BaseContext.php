@@ -405,12 +405,13 @@ class BaseContext implements KernelAwareContext
 
   /**
    * @param $parameters
+   * @param $is_embroidery bool
    *
    * @return string
    */
-  public function generateProgramFileWith($parameters)
+  public function generateProgramFileWith($parameters, $is_embroidery = false)
   {
-    return $this->symfony_support->generateProgramFileWith($parameters);
+    return $this->symfony_support->generateProgramFileWith($parameters, $is_embroidery);
   }
 
   /**

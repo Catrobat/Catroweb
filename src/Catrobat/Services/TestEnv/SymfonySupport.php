@@ -744,12 +744,17 @@ class SymfonySupport
    *
    * @return string
    */
-  public function generateProgramFileWith($parameters)
+  public function generateProgramFileWith($parameters, $is_embroidery = false)
   {
     $filesystem = new Filesystem();
     $this->emptyDirectory(sys_get_temp_dir() . '/program_generated/');
     $new_program_dir = sys_get_temp_dir() . '/program_generated/';
-    $filesystem->mirror($this->fixture_dir . '/GeneratedFixtures/base', $new_program_dir);
+    if ($is_embroidery) {
+      $filesystem->mirror($this->fixture_dir . '/GeneratedFixtures/embroidery', $new_program_dir);
+    }
+    else {
+      $filesystem->mirror($this->fixture_dir . '/GeneratedFixtures/base', $new_program_dir);
+    }
     $properties = simplexml_load_file($new_program_dir . '/code.xml');
 
     foreach ($parameters as $name => $value)
