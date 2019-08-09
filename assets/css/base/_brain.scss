@@ -260,6 +260,7 @@ $program-tile-width: 85px;
       width: 100%;
 
       > img {
+        object-fit: cover;
         max-width: $program-tile-width !important;
         max-height: $program-tile-width;
       }

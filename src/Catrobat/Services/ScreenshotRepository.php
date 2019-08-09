@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use mysql_xdevapi\Exception;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -108,7 +109,7 @@ class ScreenshotRepository
   {
     $screen = $this->getImagick();
     $screen->readImage($filepath);
-    $screen->resizeImage(480, 480, \Imagick::FILTER_LANCZOS, 1);
+    $screen->cropThumbnailImage(480, 480);
     $screen->writeImage($this->screenshot_dir . $this->generateFileNameFromId($id));
     $screen->destroy();
   }
@@ -123,7 +124,7 @@ class ScreenshotRepository
   {
     $thumb = $this->getImagick();
     $thumb->readImage($filepath);
-    $thumb->resizeImage(80, 80, \Imagick::FILTER_LANCZOS, 1);
+    $thumb->cropThumbnailImage(80, 80);
     $thumb->writeImage($this->thumbnail_dir . $this->generateFileNameFromId($id));
     $thumb->destroy();
   }
@@ -276,7 +277,7 @@ class ScreenshotRepository
   {
     $screen = $this->getImagick();
     $screen->readImage($filepath);
-    $screen->resizeImage(480, 480, \Imagick::FILTER_LANCZOS, 1);
+    $screen->cropThumbnailImage(480, 480);
     $screen->writeImage($this->tmp_dir . $this->generateFileNameFromId($id));
     $screen->destroy();
   }
@@ -291,7 +292,7 @@ class ScreenshotRepository
   {
     $thumb = $this->getImagick();
     $thumb->readImage($filepath);
-    $thumb->resizeImage(80, 80, \Imagick::FILTER_LANCZOS, 1);
+    $thumb->cropThumbnailImage(80, 80);
     $thumb->writeImage($this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id));
     $thumb->destroy();
   }

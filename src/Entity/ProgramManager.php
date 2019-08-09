@@ -129,6 +129,9 @@ class ProgramManager
    */
   public function addProgram(AddProgramRequest $request)
   {
+    /**
+     * @var $program Program
+     */
     $file = $request->getProgramfile();
 
     $extracted_file = $this->file_extractor->extract($file);
