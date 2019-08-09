@@ -94,7 +94,7 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
   
   function reportProgram (reason, category)
   {
-    $.get(reportUrl, {
+    $.post(reportUrl, {
       program : programId,
       category: category,
       note    : reason
