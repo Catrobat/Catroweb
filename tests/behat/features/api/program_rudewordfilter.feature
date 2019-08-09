@@ -13,7 +13,7 @@ Feature: Checking for rude words
     When I upload this program
     Then I should get the json object:
     """
-    {"statusCode":511,"answer":"Program name must not contain rude wordes.","preHeaderMessages":""}
+    {"statusCode":511,"answer":"Project name must not contain rude wordes.","preHeaderMessages":""}
     """
 
   Scenario: upload a program with a rude word in description should be rejected

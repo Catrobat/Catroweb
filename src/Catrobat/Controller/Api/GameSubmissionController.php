@@ -57,7 +57,7 @@ class GameSubmissionController extends Controller
 
 
   /**
-   * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs", methods={"GET"})
+   * @Route("/api/gamejam/sampleProjects.json", name="api_gamejam_sample_programs", methods={"GET"})
    *
    * @param Request $request
    *

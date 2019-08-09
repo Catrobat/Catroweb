@@ -39,7 +39,7 @@ Feature:
 
   Scenario: The app needs the filename, so the media file link must provide the media file's name
     When I am on "/app/media-library/looks"
-    Then the media file "1" must have the download url "/pocketcode/download-media/1"
+    Then the media file "1" must have the download url "/app/download-media/1"
 
   Scenario: Viewing only media files for the pocketcode flavor
     Given I am on "/app/media-library/looks"

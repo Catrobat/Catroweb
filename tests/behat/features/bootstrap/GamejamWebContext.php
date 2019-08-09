@@ -90,7 +90,7 @@ class GamejamWebContext extends BaseContext
     }
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/app/program/1");
+      ->request("GET", "/app/project/1");
   }
 
   /**
@@ -163,7 +163,7 @@ class GamejamWebContext extends BaseContext
     $this->getClient()->followRedirects(false);
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/app/program/1");
+      ->request("GET", "/app/project/1");
     $link = $this->response->filter("#gamejam-submission")
       ->parents()
       ->link();
@@ -218,7 +218,7 @@ class GamejamWebContext extends BaseContext
     }
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/app/program/1");
+      ->request("GET", "/app/project/1");
     $link = $this->response->filter("#gamejam-submission")
       ->parents()
       ->link();
@@ -255,7 +255,7 @@ class GamejamWebContext extends BaseContext
     ]);
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/app/program/1");
+      ->request("GET", "/app/project/1");
   }
 
   /**
@@ -426,7 +426,7 @@ class GamejamWebContext extends BaseContext
    */
   public function iShouldBeRedirectedToTheDetailsPageOfMyProgram()
   {
-    Assert::assertEquals("/app/program/1", $this->getClient()->getRequest()->getPathInfo());
+    Assert::assertEquals("/app/project/1", $this->getClient()->getRequest()->getPathInfo());
   }
 
   /**

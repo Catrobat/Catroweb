@@ -15,13 +15,13 @@
         <platformVersion>23.0</platformVersion>
         <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
         <programName>ScenesWithoutNamesFaultyProgram</programName>
-        <remixOf>/app/program/9997</remixOf>
+        <remixOf>/app/project/9997</remixOf>
         <scenesEnabled>true</scenesEnabled>
         <screenHeight>1200</screenHeight>
         <screenMode>STRETCH</screenMode>
         <screenWidth>1824</screenWidth>
         <tags></tags>
-        <url>/app/program/9997</url>
+        <url>/app/project/9997</url>
         <userHandle>NOLB.Austria</userHandle>
     </header>
     <settings/>

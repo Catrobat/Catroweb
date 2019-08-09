@@ -24,7 +24,7 @@ fos_user_security_login:
 
 #redirect the user after a successfully registration
 fos_user_registration_confirmed:
-  path: /{flavor}/profile
+  path: /{flavor}/user
 
 # ===== Logout =====
 sonata_user_admin_security_logout:

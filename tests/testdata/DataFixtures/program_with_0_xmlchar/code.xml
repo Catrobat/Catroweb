@@ -19,12 +19,12 @@ Please add comments, share, and like via https://goo.gl/Qrih8T - thanks!! </desc
     <platformVersion>21.0</platformVersion>
     <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
     <programName>Tumbling cupcakes!</programName>
-    <remixOf>/app/program/9461</remixOf>
+    <remixOf>/app/project/9461</remixOf>
     <screenHeight>1920</screenHeight>
     <screenMode>STRETCH</screenMode>
     <screenWidth>1080</screenWidth>
     <tags></tags>
-    <url>/app/program/9461</url>
+    <url>/app/project/9461</url>
     <userHandle>hej-wickie-hej</userHandle>
   </header>
   <objectList>

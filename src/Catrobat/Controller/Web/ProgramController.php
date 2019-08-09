@@ -43,7 +43,7 @@ class ProgramController extends Controller
 {
 
   /**
-   * @Route("/program/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
+   * @Route("/project/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
    *
    * @param Request $request
    * @param GuidType $id
@@ -87,7 +87,7 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/program/{id}", name="program")
+   * @Route("/project/{id}", name="program")
    * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
    *
    * @param Request $request
@@ -206,7 +206,7 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/program/like/{id}", name="program_like", methods={"GET"})
+   * @Route("/project/like/{id}", name="program_like", methods={"GET"})
    *
    * @param Request $request
    * @param GuidType $id
@@ -348,7 +348,7 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", defaults={"id" = 0}, methods={"GET"})
+   * @Route("/userDeleteProject/{id}", name="profile_delete_program", defaults={"id" = 0}, methods={"GET"})
    *
    * @param GuidType $id
    *
@@ -395,7 +395,7 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/profileToggleProgramVisibility/{id}", name="profile_toggle_program_visibility",
+   * @Route("/userToggleProjectVisibility/{id}", name="profile_toggle_program_visibility",
    *   defaults={"id" = 0}, methods={"GET"})
    *
    * @param GuidType $id
@@ -445,7 +445,7 @@ class ProgramController extends Controller
 
 
   /**
-   * @Route("/editProgramDescription/{id}/{newDescription}", name="edit_program_description",
+   * @Route("/editProjectDescription/{id}/{newDescription}", name="edit_program_description",
    *   options={"expose"=true}, methods={"GET"})
    *
    * @param GuidType $id

@@ -3,9 +3,9 @@ Feature: Check if flavoring system works
 
   Background:
     Given there are users:
-      | name      | password | token      | email               |
-      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |
-      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
+      | name      | password | token      | email               | id |
+      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
 
   Scenario: User views phirocode flavor
     Given I am on "/create@school"

@@ -7,7 +7,7 @@ monolog:
       action_level: error
       handler: nested
       # ToDo: Starting with Symfony 4.1 we can filter specific http for specific paths
-      # excluded_http_codes: [{404: ['^/program', '^/profile']}]
+      # excluded_http_codes: [{404: ['^/program', '^/user']}]
     nested:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"

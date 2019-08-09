@@ -17,7 +17,7 @@ Feature: Get the random programs
   Scenario: show random programs
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 2 programs in random order:
       | Name      |
       | program 1 |
@@ -26,7 +26,7 @@ Feature: Get the random programs
   Scenario: show random program ids
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/randomProgramIDs.json" with these parameters
+    When I GET "/app/api/projects/randomProjectIDs.json" with these parameters
     Then I should get 2 programs in random order:
       | Name      |
       | program 1 |
@@ -35,19 +35,19 @@ Feature: Get the random programs
   Scenario: show random program with offset
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 1 programs in random order:
       | Name      |
       | program 1 |
       | program 4 |
     And I have a parameter "offset" with value "1"
-    When I GET "/app/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 1 programs in random order:
       | Name      |
       | program 1 |
       | program 4 |
     And I have a parameter "offset" with value "2"
-    When I GET "/app/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 0 programs in random order:
       | Name      |
       | program 1 |

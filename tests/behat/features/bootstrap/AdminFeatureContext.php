@@ -550,7 +550,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iReportProgramWithNote($program_id, $category, $note)
   {
-    $url = '/app/api/reportProgram/reportProgram.json';
+    $url = '/app/api/reportProject/reportProject.json';
     $parameters = [
       'program'  => $program_id,
       'category' => $category,

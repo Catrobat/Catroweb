@@ -2278,7 +2278,7 @@ class ApiFeatureContext extends BaseContext
   public function iReportTheProgram()
   {
     $this->iHaveAParameterWithValue('note', 'Bad Project');
-    $this->iPostTheseParametersTo('/app/api/reportProgram/reportProgram.json');
+    $this->iPostTheseParametersTo('/app/api/reportProject/reportProject.json');
   }
 
 

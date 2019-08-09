@@ -6,7 +6,7 @@
 {% import _self as self %}
 
 {% macro dropbtn(object, path, scene_name) %}
-   ToDo show the correct image
+{#   ToDo show the correct image#}
   <div class="object-meta">
     <div class="object-meta-name">
       <p>Object:</p>
@@ -101,7 +101,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <p class="note">NO OBJECTS</p>
+      <p class="note">NO ACTORS OR OBJECTS</p>
     {% endif %}
   </div>
 {% endmacro %}
@@ -116,7 +116,7 @@
   </div>
 
   <div id="object-list-wrapper">
-    <p class="heading">OBJECTS</p>
+    <p class="heading">ACTORS AND OBJECTS</p>
     {% if object_list is not empty %}
       {% for code_object in object_list %}
         <div class="object">
@@ -128,7 +128,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <p class="note">NO OBJECTS</p>
+      <p class="note">NO ACTORS OR OBJECTS</p>
     {% endif %}
   </div>
 {% endmacro %}

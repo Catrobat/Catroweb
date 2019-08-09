@@ -100,7 +100,7 @@ class GamejamJavascriptContext extends MinkContext implements KernelAwareContext
    */
   public function iVisitMyProfile()
   {
-    $this->visit("/app/profile");
+    $this->visit("/app/user");
   }
 
   /**

@@ -34,7 +34,7 @@ Feature: Get the most downloaded programs
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/program/(.*?)",
+                                "ProjectUrl":"app/project/(.*?)",
                                 "DownloadUrl":"app/download/(.*?).catrobat",
                                 "FileSize":0
                             }],

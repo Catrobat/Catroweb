@@ -60,7 +60,7 @@ class SearchController extends Controller
 
 
   /**
-   * @Route("/api/projects/search/tagPrograms.json", name="api_search_tag",
+   * @Route("/api/projects/search/tagProjects.json", name="api_search_tag",
    *   defaults={"_format":"json"}, methods={"GET"})
    *
    * @param Request $request
@@ -83,7 +83,7 @@ class SearchController extends Controller
 
 
   /**
-   * @Route("/api/projects/search/extensionPrograms.json", name="api_search_extension",
+   * @Route("/api/projects/search/extensionProjects.json", name="api_search_extension",
    *                                                       defaults={"_format": "json"},
    *                                                       methods={"GET"})
    * @param Request $request

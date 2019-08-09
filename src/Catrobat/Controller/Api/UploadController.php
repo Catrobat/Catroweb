@@ -111,6 +111,7 @@ class UploadController
    */
   public function uploadAction(Request $request)
   {
+    $this->logger->info("Uploading a project...");
     return $this->processUpload($request);
   }
 
@@ -197,6 +198,7 @@ class UploadController
       }
       $response = $this->createUploadResponse($request, $gamejam, $user, $program);
     }
+    $this->logger->info("Uploading a project done : " . json_encode($response));
     return JsonResponse::create($response);
   }
 

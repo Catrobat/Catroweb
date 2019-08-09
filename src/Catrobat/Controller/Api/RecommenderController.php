@@ -58,7 +58,7 @@ class RecommenderController extends Controller
 
 
   /**
-   * @Route("/api/projects/recsys_specific_programs/{id}.json", name="api_recsys_specific_programs",
+   * @Route("/api/projects/recsys_specific_projects/{id}.json", name="api_recsys_specific_projects",
    *   defaults={"_format": "json"},  methods={"GET"})
    *
    * @param Request $request
@@ -92,7 +92,7 @@ class RecommenderController extends Controller
 
 
   /**
-   * @Route("/api/projects/recsys_general_programs.json", name="api_recsys_general_programs",
+   * @Route("/api/projects/recsys_general_projects.json", name="api_recsys_general_projects",
    *   defaults={"_format":"json"}, methods={"GET"})
    *
    * @param Request $request

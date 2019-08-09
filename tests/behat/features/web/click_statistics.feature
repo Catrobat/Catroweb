@@ -3,9 +3,9 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   Background:
     Given there are users:
-      | name      | password | token      | email               |
-      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |
-      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
+      | name      | password | token      | email               | id |
+      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
 
     And there are extensions:
       | id | name         | prefix  |
@@ -47,7 +47,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from tags
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     When I press on the tag "Game"
     And I wait for AJAX to finish
     Then There should be one database entry with type is "tags" and "tag_id" is "1"
@@ -55,7 +55,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from extensions
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     When I press on the extension "Lego"
     And I wait for AJAX to finish
     Then There should be one database entry with type is "extensions" and "extension_id" is "3"
@@ -63,10 +63,10 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from programs
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     When I click on the first recommended program
     And I wait for AJAX to finish
-    Then There should be one database entry with type is "programs" and "program_id" is "2"
+    Then There should be one database entry with type is "project" and "program_id" is "2"
     And I should see "p2"
 
   @javascript
@@ -155,7 +155,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
       | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
 
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     Then There should be recommended specific programs
     When I click on the first recommended specific program
     And I wait 100 milliseconds
@@ -170,5 +170,5 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | Catrobat | Facebook |
       | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | Catrobat | Facebook |
 
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     Then There should be no recommended specific programs

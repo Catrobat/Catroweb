@@ -3,13 +3,13 @@ Feature: As a visitor I want to write, see and report comments.
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |
-      | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org |  2 |
 
     And there are admins:
-      | name  | password | token      | email                |
-      | Admin | 123456   | cccccccccc | admin@pocketcode.org |
+      | name  | password | token      | email                | id |
+      | Admin | 123456   | cccccccccc | admin@pocketcode.org |  3 |
 
     And there are programs:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
@@ -32,12 +32,12 @@ Feature: As a visitor I want to write, see and report comments.
 
 
   Scenario: There should be a commend section on every program page
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     Then I should see "Comments"
     And the element ".add-comment-button" should be visible
 
   Scenario: It should be possible to toggle the visibility of the post a comment container
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     Then I should see "Comments"
     And the element "#show-add-comment-button" should be visible
     And the element "#hide-add-comment-button" should not be visible
@@ -48,7 +48,7 @@ Feature: As a visitor I want to write, see and report comments.
     And the element "#user-comment-wrapper" should be visible
 
   Scenario: I should not be able to write a comment without being logged in
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     And I click "#show-add-comment-button"
     And I wait 250 milliseconds
     And I write "hello" in textbox
@@ -59,7 +59,7 @@ Feature: As a visitor I want to write, see and report comments.
 
   Scenario: I should be able to write a comment when I am logged in
     Given I log in as "Superman" with the password "123456"
-    And I am on "/app/program/3"
+    And I am on "/app/project/3"
     And the element ".single-comment" should not exist
     And I click "#show-add-comment-button"
     And I wait 250 milliseconds
@@ -71,20 +71,20 @@ Feature: As a visitor I want to write, see and report comments.
     And the element ".single-comment" should be visible
 
   Scenario: I should be able to see existing comments
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     Then I should see "c1"
 
   Scenario: I should not see any comments when there are none
-    Given I am on "/app/program/3"
+    Given I am on "/app/project/3"
     Then the element ".single-comment" should not exist
 
   Scenario: When there are less than 5 program i should not see the show more/less buttons
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     Then the element "#show-more-comments-button" should not be visible
     And the element "#show-more-comments-button" should not be visible
 
   Scenario: I should be able to see only the first 5 existing comments (order newest first)
-    Given I am on "/app/program/2"
+    Given I am on "/app/project/2"
     Then I should see "c8"
     And I should see "c7"
     And I should see "c6"
@@ -95,7 +95,7 @@ Feature: As a visitor I want to write, see and report comments.
     And the element "#show-less-comments-button" should not be visible
 
   Scenario: Pressing the show more button should result in more displayed comments
-    Given I am on "/app/program/2"
+    Given I am on "/app/project/2"
     And I should not see "c3"
     When I click "#show-more-comments-button"
     And I wait 200 milliseconds
@@ -104,7 +104,7 @@ Feature: As a visitor I want to write, see and report comments.
     And the element "#show-less-comments-button" should be visible
 
   Scenario: Pressing the show less button should result in less displayed comments
-    Given I am on "/app/program/2"
+    Given I am on "/app/project/2"
     And I click "#show-more-comments-button"
     And I wait 1000 milliseconds
     Then I should see "c3"
@@ -116,11 +116,11 @@ Feature: As a visitor I want to write, see and report comments.
 
   Scenario: I can't report my own comment
     Given I log in as "Superman" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     Then the element ".comment-report-button" should not exist
 
   Scenario: When I click the report button, I should be redirected to the login page
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     When I click ".comment-report-button"
     And I wait 200 milliseconds
     When I click ".swal2-confirm"
@@ -129,7 +129,7 @@ Feature: As a visitor I want to write, see and report comments.
 
   Scenario: There should be a confirmation pop up to report comments
     Given I log in as "Gregor" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     When I click ".comment-report-button"
     And I wait 200 milliseconds
     Then I should see "Are you sure?"
@@ -139,21 +139,21 @@ Feature: As a visitor I want to write, see and report comments.
 
   Scenario: When I am logged in as an admin, I should see a delete button
     Given I log in as "Admin" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     Then the element ".comment-delete-button" should be visible
 
   Scenario: I should see a delete button only for my own comments when I am no admin
     Given I log in as "Superman" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     Then the element ".comment-delete-button" should be visible
     When I log in as "Gregor" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     Then the element ".comment-delete-button" should not exist
 
   Scenario: When I am logged in as an admin and I delete a comment it should be gone, but there
   should be a confirmation pop up
     Given I log in as "Admin" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     Then I should see "c1"
     When I click ".comment-delete-button"
     And I wait for a second
@@ -167,7 +167,7 @@ Feature: As a visitor I want to write, see and report comments.
 
   Scenario: I should be able to write a comment when I am logged in and it should notify the owner
     Given I log in as "Gregor" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     And I click "#show-add-comment-button"
     And I wait 250 milliseconds
     And I write "hello" in textbox
@@ -176,13 +176,13 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for a second
     Then I should see "hello"
     When I log in as "Superman" with the password "123456"
-    And I am on "/app/user/notifications"
+    And I am on "/app/notifications"
     Then the element "#catro-notification-1" should be visible
     And I should see "Gregor"
 
   Scenario: I should be able to write a comment for my own program but I wont get a notification
     Given I log in as "Superman" with the password "123456"
-    And I am on "/app/program/1"
+    And I am on "/app/project/1"
     And I click "#show-add-comment-button"
     And I wait 250 milliseconds
     And I write "hello" in textbox
@@ -190,5 +190,5 @@ Feature: As a visitor I want to write, see and report comments.
     When I click "#comment-post-button"
     And I wait for a second
     Then I should see "hello"
-    When I am on "/app/user/notifications"
+    When I am on "/app/notifications"
     Then the element "#catro-notification-1" should not exist

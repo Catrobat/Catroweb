@@ -83,7 +83,7 @@ class TutorialController extends Controller
 
 
   /**
-   * @Route("/starter-programs", name="catrobat_web_starter", methods={"GET"})
+   * @Route("/starter-project/", name="catrobat_web_starter", methods={"GET"})
    *
    * @return Response
    * @throws Error
@@ -107,7 +107,7 @@ class TutorialController extends Controller
 
 
   /**
-   * @Route("/category-programs/{id}", name="catrobat_web_category_programs", methods={"GET"})
+   * @Route("/category-project//{id}", name="catrobat_web_category_programs", methods={"GET"})
    *
    * @param Request $request
    * @param GuidType  $id

@@ -3,10 +3,10 @@ Feature: Showing more programs from a user(program owner)
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
-      | user2    | 123456   | cccccccccc | dev2@pocketcode.org |
-      | user3    | 123456   | cccccccccc | dev3@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | user2    | 123456   | cccccccccc | dev2@pocketcode.org |  2 |
+      | user3    | 123456   | cccccccccc | dev3@pocketcode.org |  3 |
     And there are programs:
       | id | name     | description | owned by | downloads | apk_downloads | views | upload time      | version |
       | 1  | user1_p1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -17,7 +17,7 @@ Feature: Showing more programs from a user(program owner)
       | 6  | user3_p1 | p7          | user3    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |
 
   Scenario: There should be more programs from the program owner be recommended
-    When I go to "/app/program/1"
+    When I go to "//app/project/1"
     Then I should see "More from Catrobat"
     And I should see "user1_p1"
     And I should see "user1_p2"
@@ -28,7 +28,7 @@ Feature: Showing more programs from a user(program owner)
     Then I should see 2 "#more-from-this-user-recommendations .program"
 
   Scenario: When the program owner only has one program don't show the "more-from" category
-    When I go to "/app/program/6"
+    When I go to "//app/project/6"
     Then I should not see "More from"
     Then I should see 0 "#more-from-this-user-recommendations .program"
 
@@ -37,12 +37,12 @@ Feature: Showing more programs from a user(program owner)
     When I fill in "username" with "Catrobat"
     And I fill in "password" with "123456"
     And I press "Login"
-    When I go to "/app/program/1"
+    When I go to "//app/project/1"
     Then I should not see "More from"
     Then I should see 0 "#more-from-this-user-recommendations .program"
 
   Scenario: When the user is on a program page the program should not also be recommended in the show more category
-    When I go to "/app/program/4"
+    When I go to "//app/project/4"
     Then I should see "More from user2"
     But I should see "user2_p2"
     Then I should see 1 "#more-from-this-user-recommendations .program"

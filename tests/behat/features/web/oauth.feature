@@ -4,9 +4,9 @@ Feature: Open Authentication
 
   Background:
     Given there are users:
-      | name        | password | token      | email               |
-      | Catrobat    | 123456   | cccccccccc | dev1@pocketcode.org |
-      | AlreadyinDB | 642135   | cccccccccc | dev2@pocketcode.org |
+      | name        | password | token      | email               | id |
+      | Catrobat    | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | AlreadyinDB | 642135   | cccccccccc | dev2@pocketcode.org |  2 |
 
   @javascript
   Scenario: Try to login with a new user into Google+ where the username already exists
@@ -33,7 +33,7 @@ Feature: Open Authentication
     Then I fill in "email" with "pocket-code-tester@gmail.com"
     When I click the "save-edit" button
     And I wait for the server response
-    Then I should be on "/app/profile/edit"
+    Then I should be on "/app/user/edit"
     Then the "#email-text" element should contain "pocket-code-tester@gmail.com"
     When I go to "/logout"
     Then I should not be logged in
@@ -41,5 +41,5 @@ Feature: Open Authentication
     And I click Google login link "once"
     And I wait for the server response
     Then I should be logged in
-    And I am on "/app/profile"
+    And I am on "/app/user"
     Then the "#email" element should contain "pocket-code-tester@gmail.com"

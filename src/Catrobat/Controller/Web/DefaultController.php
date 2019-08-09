@@ -6,6 +6,8 @@ use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use App\Entity\User;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Catrobat\Services\FeaturedImageRepository;
@@ -183,8 +185,8 @@ class DefaultController extends Controller
    * @param Request $request
    *
    * @return Response
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function makeClickStatisticAction(Request $request)
   {
@@ -193,7 +195,7 @@ class DefaultController extends Controller
     $statistics = $this->get('statistics');
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs']))
+    if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs']))
     {
       $rec_from_id = $_POST['recFromID'];
       $rec_program_id = $_POST['recID'];

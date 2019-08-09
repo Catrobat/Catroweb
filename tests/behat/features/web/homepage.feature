@@ -6,9 +6,9 @@ Feature: Pocketcode homepage
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
-      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |  2 |
     And there are programs:
       | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |

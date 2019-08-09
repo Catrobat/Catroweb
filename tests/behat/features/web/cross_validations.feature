@@ -3,8 +3,8 @@ Feature: Cross validation for recommendation system
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
     And there are extensions:
       | id | name         | prefix  |
       | 1  | Arduino      | ARDUINO |
@@ -29,9 +29,9 @@ Feature: Cross validation for recommendation system
       | 5  | Nothing | p6          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
 
   Scenario: User with selected russian language cant see the recommender
-    Given I am on "/app/program/1"
+    Given I am on "/app/project/1"
     And the selected language is "English"
-    And I should see "Similar Programs"
+    And I should see "Similar Projects"
     And the element "#recommendations" should be visible
     When I switch the language to "Russisch"
     And I wait 250 milliseconds
