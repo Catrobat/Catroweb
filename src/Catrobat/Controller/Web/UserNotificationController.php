@@ -14,8 +14,11 @@ use App\Catrobat\StatusCode;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Twig\Error\Error;
 
 
 /**
@@ -28,8 +31,8 @@ class UserNotificationController extends Controller
   /**
    * @Route("/user/notifications", name="user_notifications", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return RedirectResponse|Response
+   * @throws Error
    */
   public function userNotificationsAction()
   {
@@ -46,32 +49,9 @@ class UserNotificationController extends Controller
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
-
-    $unseen_remixed_program_data = $this->get('remixmanager')->getUnseenRemixProgramsDataOfUser($this->getUser());
-    $screenshot_repository = $this->get('screenshotrepository');
-    $elapsed_time = $this->get('elapsedtime');
-
-    $unseen_remixes_grouped = [];
-    foreach ($unseen_remixed_program_data as $remix_data)
-    {
-      $remix_data['age'] = $elapsed_time->getElapsedTime($remix_data['createdAt']->getTimestamp());
-      $remix_data['thumbnail'] = '/' . $screenshot_repository->getThumbnailWebPath($remix_data['remixProgramId']);
-      $original_program_id = $remix_data['originalProgramId'];
-
-      if (!array_key_exists($original_program_id, $unseen_remixes_grouped))
-      {
-        $unseen_remixes_grouped[$original_program_id] = [
-          'originalProgramName' => $remix_data['originalProgramName'],
-          'remixes'             => [],
-        ];
-      }
-      $unseen_remixes_grouped[$original_program_id]['remixes'][] = $remix_data;
-    }
-
+    
     $nr = $this->get("catro_notification_repository");
     $catro_user_notifications = $nr->findByUser($user, ['id' => 'DESC']);
-
-
     $avatars = [];
 
     foreach ($catro_user_notifications as $notification)
@@ -108,7 +88,6 @@ class UserNotificationController extends Controller
     }
 
     $response = $this->get('templating')->renderResponse('Notifications/usernotifications.html.twig', [
-      'unseenRemixesGrouped'   => $unseen_remixes_grouped,
       'catroUserNotifications' => $catro_user_notifications,
       'avatars'                => $avatars,
     ]);

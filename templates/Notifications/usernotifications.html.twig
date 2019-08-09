@@ -10,39 +10,6 @@
       <h1 class="headline">{{ "notifications"|trans({}, "catroweb") }}</h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div id="notifications">
-        {% for originalProgramId, data in unseenRemixesGrouped %}
-          <div class="remixed-programs">
-            <div id="search-results-text">
-              <strong>
-                {{ "programs.newRemixesNotificationTitle"|transchoice(data.remixes|length, {
-                  '%programName%' : data.originalProgramName,
-                  '%remixes%' : data.remixes|length
-                }, "catroweb") }}
-              </strong>
-            </div>
-
-            <div class="programs">
-              {% for remixData in data.remixes %}
-                <div class="program" id="program-{{ remixData.remixProgramId }}" style="display:block;">
-                  <a href="{{ url('see_user_notification', {
-                    'ancestor_id' : remixData.originalProgramId,
-                    'descendant_id' : remixData.remixProgramId
-                  }) }}" class="notification-link">
-                    <div><img src="{{ remixData.thumbnail }}"></div>
-                    <div class="program-name"><b>{{ remixData.remixProgramName }}</b></div>
-                    <div><i class="fas fa-eye"></i>{{ remixData.age }}</div>
-                  </a>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
 
   {% if catroUserNotifications|length > 0 %}
     <div id="notifications-summary">
