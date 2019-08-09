@@ -532,7 +532,7 @@ class ProgramRepository extends EntityRepository
       }
 
 
-      $sql .= 'OR 
+      $sql .= 'AND 
           ((e.name LIKE ' . $parameter . ' OR
           f.username LIKE ' . $parameter . ' OR
           e.description LIKE ' . $parameter . ' OR
