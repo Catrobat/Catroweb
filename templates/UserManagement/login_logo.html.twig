@@ -4,7 +4,9 @@
     <div class="col-sm-12 mt-4 center" style="max-width: 11em">
       <img class="center-block img-responsive" id="logo"
         {% if theme() == 'luna' %}
-          src="{{ asset('images/logo/logo_luna.png') }}"
+          src="{{ asset('images/logo/logo_luna.svg') }}"
+        {% elseif theme() == 'embroidery' %}
+          src="{{ asset('images/logo/logo_embroidery.svg') }}"
         {% elseif theme() == 'phirocode' %}
           src="{{ asset('images/logo/logo_phirocode.png') }}"
         {% elseif theme() == 'create@school' %}
@@ -23,6 +25,8 @@
         <span class="theme-logo-title title-color-left">
         {% if theme() == 'luna' %}
           LUNA &
+        {% elseif theme() == 'embroidery' %}
+          EMBROIDERY
         {% elseif theme() == 'phirocode' %}
           PHIRO
         {% elseif theme() == 'create@school' %}
@@ -36,6 +40,8 @@
           SCHOOL
         {% elseif theme() == 'luna' %}
           CAT
+        {% elseif theme() == 'embroidery' %}
+          DESIGNER
         {% else %}
           CODE
         {% endif %}

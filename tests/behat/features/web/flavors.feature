@@ -17,7 +17,11 @@ Feature: Check if flavoring system works
 
   Scenario: User views luna flavor
     Given I am on "/luna"
-    Then I should see the image "logo_luna.png"
+    Then I should see the image "logo_luna.svg"
+
+  Scenario: User views embroidery flavor
+    Given I am on "/embroidery"
+    Then I should see the image "logo_embroidery.svg"
 
   Scenario: Viewing details of program 2 using release app
     Given I use a specific "theme/luna" themed app

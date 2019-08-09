@@ -317,6 +317,9 @@ class AppExtension extends AbstractExtension
       case 'create@school':
         return "Create@School";
 
+      case 'embroidery':
+        return "Embroidery Designer";
+
       default:
         return "Pocket Code";
     }
