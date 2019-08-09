@@ -130,7 +130,7 @@ class ResetCommand extends ContainerAwareCommand
   private function downloadPrograms($dir, OutputInterface $output)
   {
     $server_json = json_decode(file_get_contents(
-      'https://share.catrob.at/pocketcode/api/projects/recent.json'), true);
+      'https://share.catrob.at/pocketcode/api/projects/recent.json'), true); // ToDo change when app theme is deployed
     $base_url = $server_json['CatrobatInformation']['BaseUrl'];
     foreach ($server_json['CatrobatProjects'] as $program)
     {
@@ -157,7 +157,7 @@ class ResetCommand extends ContainerAwareCommand
     for ($i = 0; $i < 10; $i++)
     {
       $server_json = json_decode(file_get_contents(
-        'https://share.catrob.at/pocketcode/api/projects/randomPrograms.json'), true);
+        'https://share.catrob.at/app/api/projects/randomPrograms.json'), true);
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
       foreach ($server_json['CatrobatProjects'] as $program)
       {

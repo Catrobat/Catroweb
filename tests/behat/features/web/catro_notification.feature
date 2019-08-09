@@ -14,13 +14,13 @@ Feature: User gets generic notifications additionally to the remix notifications
 
   Scenario: User views his notifications and sees all of them
     Given I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/user/notifications"
+    And I am on "/app/user/notifications"
     Then I should see "Achievement - Uploads"
     And I should see "Achievement - View"
 
   Scenario: User views his notifications marks one as seen and does not see it anymore
     Given I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/user/notifications"
+    And I am on "/app/user/notifications"
     Then I should see "Achievement - Uploads"
     And I should see "Achievement - View"
     And the ".user-notification-badge" element should contain "2"
@@ -37,7 +37,7 @@ Feature: User gets generic notifications additionally to the remix notifications
 
   Scenario: User should see the amount of his notifications in the menu
     Given I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/"
+    And I am on "/app/"
     And I open the menu
     Then I wait 1000 milliseconds
     And the element "#btn-notifications" should be visible
@@ -45,7 +45,7 @@ Feature: User gets generic notifications additionally to the remix notifications
 
   Scenario: User should see the amount of his notifications in the menu
     Given I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/"
+    And I am on "/app/"
     And I open the menu
     Then I wait 1000 milliseconds
     Then the element "#btn-notifications" should be visible
@@ -54,7 +54,7 @@ Feature: User gets generic notifications additionally to the remix notifications
 
   Scenario: User should see the amount of his notifications in the menu only if he has notifcations
     Given I log in as "OtherUser" with the password "123456"
-    And I am on "/pocketcode/"
+    And I am on "/app/"
     And I open the menu
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should not be visible
@@ -62,7 +62,7 @@ Feature: User gets generic notifications additionally to the remix notifications
   Scenario: User should see the amount of his notifications in the menu
     Given there are "105"+ notifications for "Catrobat"
     And I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/"
+    And I am on "/app/"
     And I open the menu
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible

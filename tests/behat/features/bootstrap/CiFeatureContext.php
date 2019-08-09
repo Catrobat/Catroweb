@@ -162,7 +162,7 @@ class CiFeatureContext extends BaseContext
   public function iStartAnApkGenerationOfMyProgram()
   {
     $client = $this->getClient();
-    $client->request('GET', 'http://' . $this->hostname . '/pocketcode/ci/build/1', [], [], [
+    $client->request('GET', 'http://' . $this->hostname . '/app/ci/build/1', [], [], [
       'HTTP_HOST' => $this->hostname,
       'HTTPS'     => $this->secure,
     ]);
@@ -233,7 +233,7 @@ class CiFeatureContext extends BaseContext
     $files = [
       new UploadedFile($temppath, 'test.apk'),
     ];
-    $url = '/pocketcode/ci/upload/1?token=UPLOADTOKEN';
+    $url = '/app/ci/upload/1?token=UPLOADTOKEN';
     $parameters = [];
     $this->getClient()->request('POST', $url, $parameters, $files);
   }
@@ -383,7 +383,7 @@ class CiFeatureContext extends BaseContext
    */
   public function iReportABuildError()
   {
-    $url = '/pocketcode/ci/failed/1?token=UPLOADTOKEN';
+    $url = '/app/ci/failed/1?token=UPLOADTOKEN';
     $this->getClient()->request('GET', $url);
     Assert::assertEquals(200, $this->getClient()
       ->getResponse()

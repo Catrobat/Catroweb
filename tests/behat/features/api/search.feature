@@ -27,7 +27,7 @@ Feature: Search programs
 
     Given the HTTP Request:
       | Method | GET                                  |
-      | Url    | /pocketcode/api/projects/search.json |
+      | Url    | /app/api/projects/search.json |
     And the GET parameters:
       | Name   | Value  |
       | q      | Galaxy |
@@ -51,8 +51,8 @@ Feature: Search programs
           "UploadedString": "more than one year ago",
           "ScreenshotBig": "images\/default\/screenshot.png",
           "ScreenshotSmall": "images\/default\/thumbnail.png",
-          "ProjectUrl": "pocketcode\/program\/1",
-          "DownloadUrl": "pocketcode\/download\/1.catrobat",
+          "ProjectUrl": "app\/program\/1",
+          "DownloadUrl": "app\/download\/1.catrobat",
           "FileSize": 0
         }],
         "completeTerm": "",

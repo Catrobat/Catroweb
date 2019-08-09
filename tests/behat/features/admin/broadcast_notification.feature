@@ -19,11 +19,11 @@ Feature: Admin Broadcast Notification
     And I fill in "msg" with "Test Message"
     And I click ".btn"
     Then I should see "OK"
-    When I am on "/pocketcode/user/notifications"
+    When I am on "/app/user/notifications"
     Then I should see text matching "Test Title"
     And I should see text matching "Test Message"
     Then I logout
     When I log in as "Catrobat2" with the password "123456"
-    And I am on "/pocketcode/user/notifications"
+    And I am on "/app/user/notifications"
     Then I should see text matching "Test Title"
     And I should see text matching "Test Message"

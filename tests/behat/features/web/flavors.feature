@@ -18,3 +18,15 @@ Feature: Check if flavoring system works
   Scenario: User views luna flavor
     Given I am on "/luna"
     Then I should see the image "logo_luna.png"
+
+  Scenario: Viewing details of program 2 using release app
+    Given I use a specific "theme/luna" themed app
+    And I am on "/app"
+    Then the logos src should be "logo_luna"
+    And the logos src should not be "logo-catroweb"
+
+  Scenario: Viewing details of program 2 using release app
+    Given I use a specific "theme/pocketcode" themed app
+    And I am on "/app"
+    Then the logos src should not be "logo_luna"
+    And the logos src should be "logo-catroweb"

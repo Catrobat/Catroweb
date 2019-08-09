@@ -43,7 +43,7 @@ Feature: Pocketcode homepage
   Scenario: Cant see the Welcome Section
     Given I am on homepage
     When I click the "login" button
-    Then I should be on "/pocketcode/login"
+    Then I should be on "/app/login"
     And I fill in "username" with "Catrobat"
     And I fill in "password" with "123456"
     Then I press "Login"
@@ -53,7 +53,7 @@ Feature: Pocketcode homepage
     Given I am on homepage
     Then I should see an "#btn-login" element
     When I click the "login" button
-    Then I should be on "/pocketcode/login"
+    Then I should be on "/app/login"
     And I fill in "username" with "Catrobat"
     And I fill in "password" with "123456"
     Then I press "Login"

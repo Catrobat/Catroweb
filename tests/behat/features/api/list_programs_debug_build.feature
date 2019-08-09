@@ -37,8 +37,8 @@ Feature: List programs with and without debug build type
             "UploadedString": "4 months ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "pocketcode/program/3",
-            "DownloadUrl": "pocketcode/download/3.catrobat",
+            "ProjectUrl": "app/program/3",
+            "DownloadUrl": "app/download/3.catrobat",
             "FileSize": 0
           }
         ],
@@ -87,8 +87,8 @@ Feature: List programs with and without debug build type
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "pocketcode/program/2",
-            "DownloadUrl": "pocketcode/download/2.catrobat",
+            "ProjectUrl": "app/program/2",
+            "DownloadUrl": "app/download/2.catrobat",
             "FileSize": 0
           }
         ],
@@ -137,8 +137,8 @@ Feature: List programs with and without debug build type
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "pocketcode/program/4",
-            "DownloadUrl": "pocketcode/download/4.catrobat",
+            "ProjectUrl": "app/program/4",
+            "DownloadUrl": "app/download/4.catrobat",
             "FileSize": 0
           }
         ],
@@ -174,7 +174,7 @@ Feature: List programs with and without debug build type
     Given I use a <build type> build of the Catroid app
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/<end point>.json" with these parameters
+    When I GET "/app/api/projects/<end point>.json" with these parameters
     Then I should get the stored json object "<json name>"
 
     Examples:
@@ -196,7 +196,7 @@ Feature: List programs with and without debug build type
     Given I use a <build type> build of the Catroid app
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/<end point>.json" with these parameters
+    When I GET "/app/api/projects/<end point>.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>" in random order
 
@@ -210,7 +210,7 @@ Feature: List programs with and without debug build type
   Scenario Outline: Show user projects with debug and release app
     Given I use a <build type> build of the Catroid app
     And I have a parameter "user_id" with value "1"
-    When I GET "/pocketcode/api/projects/userPrograms.json" with these parameters
+    When I GET "/app/api/projects/userPrograms.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
 
@@ -235,7 +235,7 @@ Feature: List programs with and without debug build type
     And I have a parameter "q" with the tag id "1"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/search/tagPrograms.json" with these parameters
+    When I GET "/app/api/projects/search/tagPrograms.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
     Examples:
@@ -248,7 +248,7 @@ Feature: List programs with and without debug build type
     And I have a parameter "q" with value "<q>"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/search/<end point>.json" with these parameters
+    When I GET "/app/api/projects/search/<end point>.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
 

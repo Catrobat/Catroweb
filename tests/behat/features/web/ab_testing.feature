@@ -20,7 +20,7 @@ Feature: A/B testing for recommendation system & remix graph
       | OtherUser | 1          | 4    | 01.01.2017 12:00 |
 
   Scenario: User with selected russian language sees the recommendations on homepage (a.k.a. index page)
-    Given I am on "/pocketcode/"
+    Given I am on "/app/"
     And the selected language is "English"
     And I wait 250 milliseconds
     And I should see "Recommended programs"
@@ -46,7 +46,7 @@ Feature: A/B testing for recommendation system & remix graph
       | 2           | 2             | 0     |
       | 3           | 3             | 0     |
 
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     And the selected language is "English"
     And I wait 250 milliseconds
     And I should see "Show Remix Graph"
@@ -67,7 +67,7 @@ Feature: A/B testing for recommendation system & remix graph
       | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
       | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
 
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     When the selected language is "English"
     And I wait 250 milliseconds
     Then There should be recommended specific programs

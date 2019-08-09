@@ -15,7 +15,7 @@ Feature: Checking a user's token validity
   Scenario Outline: Checking the current token
     Given I have a parameter "username" with value "<username>"
     And I have a parameter "token" with value "<token>"
-    When I POST these parameters to "/pocketcode/api/checkToken/check.json"
+    When I POST these parameters to "/app/api/checkToken/check.json"
     Then I should get the json object:
       """
       {"statusCode":200,"answer":"ok","preHeaderMessages":"  \n"}
@@ -30,7 +30,7 @@ Feature: Checking a user's token validity
   Scenario: Checking an invalid token
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "invalid"
-    When I POST these parameters to "/pocketcode/api/checkToken/check.json"
+    When I POST these parameters to "/app/api/checkToken/check.json"
     Then I should get the json object:
       """
       {"statusCode":601,"answer":"Upload Token auth failed.", "preHeaderMessages":""}
@@ -40,7 +40,7 @@ Feature: Checking a user's token validity
   Scenario: Checking the token of a non-existing user should return an error
     Given I have a parameter "username" with value "doesnotexist"
     And I have a parameter "token" with value "doesnotmatter"
-    When I POST these parameters to "/pocketcode/api/checkToken/check.json"
+    When I POST these parameters to "/app/api/checkToken/check.json"
     Then I should get the json object:
       """
       {"statusCode":601,"answer":"There is no user with name \"doesnotexist\".", "preHeaderMessages":""}

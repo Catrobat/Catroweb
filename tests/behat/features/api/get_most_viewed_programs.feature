@@ -16,7 +16,7 @@ Feature: Get the most downloaded programs
   Scenario: show most viewed programs
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/mostViewed.json" with these parameters
+    When I GET "/app/api/projects/mostViewed.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -34,8 +34,8 @@ Feature: Get the most downloaded programs
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"pocketcode/program/2",
-                                "DownloadUrl":"pocketcode/download/2.catrobat",
+                                "ProjectUrl":"app/program/2",
+                                "DownloadUrl":"app/download/2.catrobat",
                                 "FileSize":0
                             }],
           "completeTerm":"",
@@ -51,7 +51,7 @@ Feature: Get the most downloaded programs
   Scenario: show most viewed program ids
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/mostViewedIDs.json" with these parameters
+    When I GET "/app/api/projects/mostViewedIDs.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -73,7 +73,7 @@ Feature: Get the most downloaded programs
   Scenario: show most downloaded programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/mostViewed.json" with these parameters
+    When I GET "/app/api/projects/mostViewed.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | program 2 |
@@ -82,7 +82,7 @@ Feature: Get the most downloaded programs
   Scenario: show most downloaded programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "1"
-    When I GET "/pocketcode/api/projects/mostViewed.json" with these parameters
+    When I GET "/app/api/projects/mostViewed.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | program 3 |
@@ -90,7 +90,7 @@ Feature: Get the most downloaded programs
 
   Scenario: show only visible programs
     Given program "program 3" is not visible
-    When I GET "/pocketcode/api/projects/mostViewed.json" with these parameters
+    When I GET "/app/api/projects/mostViewed.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | program 2 |

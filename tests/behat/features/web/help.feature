@@ -5,7 +5,7 @@ Feature: Pocketcode help page
   I want to be able to see the help page
 
   Background:
-    Given I am on "/pocketcode/help"
+    Given I am on "/app/help"
 
   Scenario: Viewing the help overview at help page
     Then I wait for a second
@@ -47,7 +47,7 @@ Feature: Pocketcode help page
 
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
-    Given I am on "/pocketcode/tutorialcards"
+    Given I am on "/app/tutorialcards"
     And I should see "<title>" in the "#card-<id>" element
     When I click "#card-<id>"
     Then I should see "<title>"
@@ -85,10 +85,10 @@ Feature: Pocketcode help page
     And I should see "program 3"
     And I should see an ".anchor" element
     When I click ".anchor"
-    Then I am on "/pocketcode/starterPrograms"
+    Then I am on "/app/starterPrograms"
 
   Scenario: Game Jam page should be there
-    When I go to "/pocketcode/pocket-game-jam"
+    When I go to "/app/pocket-game-jam"
     Then I should see "HOW TO UPLOAD A POCKET CODE GAME TO THE GAME JOLT SITE?"
     And I should see "1. Registration"
     And I should see "2. Upload"
@@ -99,5 +99,5 @@ Feature: Pocketcode help page
     And I should see "7. Upload your game on the Game Jolt Site"
 
   Scenario: /hourOfCode should redirect to help page
-    When I go to "/pocketcode/hourOfCode"
+    When I go to "/app/hourOfCode"
     Then I should see "TUTORIALS"

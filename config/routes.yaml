@@ -7,8 +7,7 @@ catrobat_web_index:
   defaults:
     _controller: FrameworkBundle:Redirect:redirect
     route: index
-    permanent: false
-    flavor: "pocketcode"
+    flavor: "app"
 
 catroweb_flavored:
   resource: "routing_flavored.yml"

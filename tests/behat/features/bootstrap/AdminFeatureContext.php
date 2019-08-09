@@ -388,7 +388,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
   {
-    $this->visitPath('/pocketcode/login');
+    $this->visitPath('/app/login');
     $this->fillField('username', $arg2);
     $this->fillField('password', $arg3);
     $this->pressButton('Login');
@@ -550,7 +550,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iReportProgramWithNote($program_id, $category, $note)
   {
-    $url = '/pocketcode/api/reportProgram/reportProgram.json';
+    $url = '/app/api/reportProgram/reportProgram.json';
     $parameters = [
       'program'  => $program_id,
       'category' => $category,

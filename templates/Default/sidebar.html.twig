@@ -66,42 +66,42 @@
     <hr>
 
     {# Programs #}
-    <li class="nav-item">
+    <li id="nav-featured" class="nav-item">
       <a class="nav-link" href="{{ path('index') }}#featured" id="btn-featured">
         <i class="fas fa-star mr-1"></i>
         <span>{{ 'programs.featured'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li id="nav-newest" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#newest" id="btn-newest">
         <i class="fas fa-clock mr-1"></i>
         <span>{{ 'programs.newest'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li id="nav-recommended" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#recommended" id="btn-recommended">
         <i class="fas fa-thumbs-up mr-1"></i>
         <span>{{ 'programs.recommended'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li id="nav-most-downloaded" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#mostDownloaded" id="btn-most-downloaded">
         <i class="fas fa-download mr-1"></i>
         <span>{{ 'programs.most.downloaded'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li id="nav-most-viewed" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#mostViewed" id="btn-most-viewed">
         <i class="fas fa-eye mr-1"></i>
         <span>{{ 'programs.most.viewed'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li id="nav-random" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#random" id="btn-random">
         <i class="fas fa-dice mr-1"></i>
         <span>{{ 'programs.random'|trans({}, "catroweb") }}</span>
@@ -114,3 +114,17 @@
   </ul>
 </nav>
 <div id="sidebar-overlay"></div>
+
+{% block js %}
+  <script>
+    enableNavButtonIfCategoryContainsProjects('#nav-newest', '{{ path('api_recent_programs') }}')
+    enableNavButtonIfRecommendedCategoryContainsProjects(
+      '#nav-recommended',
+      '{{ path('api_recsys_general_programs') }}',
+        {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}
+    )
+    enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
+  </script>
+{% endblock %}

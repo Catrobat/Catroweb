@@ -36,7 +36,7 @@ Feature: There should be a more from this user category on project pages
     And I start a new session
 
   Scenario: at a projects detail page I should get more projects from this user recommended
-  Given I am on "/pocketcode/program/3"
+  Given I am on "/app/program/3"
   Then I should see 6 "#more-from-this-user-recommendations .program"
   And I should see "More from user2"
   And the element "#more-from-this-user-recommendations .button-show-more" should be visible
@@ -59,7 +59,7 @@ Feature: There should be a more from this user category on project pages
   And the element "#more-from-this-user-recommendations .button-show-less" should be visible
 
   Scenario: Show more from a user should not show the same project
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     Then I should see 1 "#more-from-this-user-recommendations .program"
     And I should see "More from Catrobat"
     And the element "#more-from-this-user-recommendations .button-show-more" should not be visible
@@ -67,21 +67,21 @@ Feature: There should be a more from this user category on project pages
 
   Scenario: Show more from a user should not show the same project. If it's the only project of this user there is no
             show more from a user category
-    And I am on "/pocketcode/program/23"
+    And I am on "/app/program/23"
     Then I should see 0 "#more-from-this-user-recommendations .program"
     And I should see "program 23"
     And I should not see "More from"
 
   Scenario: When a user has loaded more projects the number of loaded projects should be stored in the session
-    Given I am on "/pocketcode/program/3"
+    Given I am on "/app/program/3"
     And I wait 100 milliseconds
     Then I should see 6 "#more-from-this-user-recommendations .program"
     When I click "#more-from-this-user-recommendations .button-show-more"
     And I wait 100 milliseconds
     Then I should see 12 "#more-from-this-user-recommendations .program"
-    When I am on "pocketcode/help"
+    When I am on "app/help"
     And I wait 100 milliseconds
-    And I am on "/pocketcode/program/3"
+    And I am on "/app/program/3"
     And I wait 100 milliseconds
     Then I should see 12 "#more-from-this-user-recommendations .program"
     And I wait 100 milliseconds

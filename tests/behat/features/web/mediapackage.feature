@@ -28,21 +28,21 @@ Feature:
       | 7  | MyLuna     | ThemeSpecial | png       | 1      | 7.png  | luna       |               |
 
   Scenario: Viewing defined categories in a specific package
-    Given I am on "/pocketcode/media-library/looks"
+    Given I am on "/app/media-library/looks"
     Then I should see "Animals"
 
   Scenario: Download a media file
-    When I download "/pocketcode/download-media/1"
+    When I download "/app/download-media/1"
     Then I should receive a "png" file
     And I should receive a file named "Dog (-).png"
     And the response code should be "200"
 
   Scenario: The app needs the filename, so the media file link must provide the media file's name
-    When I am on "/pocketcode/media-library/looks"
+    When I am on "/app/media-library/looks"
     Then the media file "1" must have the download url "/pocketcode/download-media/1"
 
   Scenario: Viewing only media files for the pocketcode flavor
-    Given I am on "/pocketcode/media-library/looks"
+    Given I am on "/app/media-library/looks"
     Then I should see media file with id "1"
     And I should see media file with id "5"
     And I should see media file with id "6"

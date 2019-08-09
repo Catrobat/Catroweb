@@ -104,7 +104,7 @@ class GamejamFeatureContext extends BaseContext
    */
   public function iFillOutTheGoogleForm()
   {
-    $this->getClient()->request("GET", "/pocketcode/api/gamejam/finalize/1");
+    $this->getClient()->request("GET", "/app/api/gamejam/finalize/1");
     Assert::assertEquals("200", $this->getClient()
       ->getResponse()
       ->getStatusCode());
@@ -133,7 +133,7 @@ class GamejamFeatureContext extends BaseContext
    */
   public function iAlreadyFilledTheGoogleForm()
   {
-    $this->getClient()->request("GET", "/pocketcode/api/gamejam/finalize/1");
+    $this->getClient()->request("GET", "/app/api/gamejam/finalize/1");
     Assert::assertEquals("200", $this->getClient()
       ->getResponse()
       ->getStatusCode());

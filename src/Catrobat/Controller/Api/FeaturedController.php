@@ -66,7 +66,7 @@ class FeaturedController extends Controller
     $image_repository = $this->get('featuredimagerepository');
     $repository = $this->get('featuredrepository');
 
-    $flavor = $request->getSession()->get('flavor');
+    $flavor = $request->get('flavor');
 
     $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));

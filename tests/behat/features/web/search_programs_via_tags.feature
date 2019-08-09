@@ -16,10 +16,10 @@ Feature: Searching for programs with tags
       | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 1,2     |
       | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | 2       |
       | 3  | myprog 3  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 3       |
-    And I am on "/pocketcode"
+    And I am on "/app"
 
   Scenario: Searching other programs with the same tag
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     And I should see "program 1"
     And I should see "Game"
     And I should see "Animation"
@@ -30,7 +30,7 @@ Feature: Searching for programs with tags
     And I should not see "myprog 3"
 
   Scenario: search for programs should work
-    When I am on "/pocketcode/search/Animation"
+    When I am on "/app/search/Animation"
     Then I should see "Your search returned 2 results"
     And I should see "program 1"
     And I should see "program 2"

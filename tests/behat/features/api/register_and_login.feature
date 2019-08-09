@@ -15,7 +15,7 @@ Feature: Login with an existing account or register a new one
       | registrationPassword | registrationpassword |
       | registrationCountry  | AT                   |
       | registrationEmail    | newuser@mail.at      |
-    When I POST these parameters to "/pocketcode/api/register/Register.json"
+    When I POST these parameters to "/app/api/register/Register.json"
     Then I should get the json object:
       """
       {"token":"rrrrrrrrrrr","statusCode":201,"answer":"Registration successful!","preHeaderMessages":""}
@@ -30,7 +30,7 @@ Feature: Login with an existing account or register a new one
       | registrationPassword | registrationpassword |
       | registrationCountry  | AT                   |
       | registrationEmail    | newuser@mail.at      |
-    When I POST these parameters to "/pocketcode/api/register/Register.json"
+    When I POST these parameters to "/app/api/register/Register.json"
     Then I should get the json object:
       """
       {"statusCode":777,"answer":"This username already exists.","preHeaderMessages":""}
@@ -45,7 +45,7 @@ Feature: Login with an existing account or register a new one
       | registrationPassword | registrationpassword    |
       | registrationCountry  | AT                      |
       | registrationEmail    | default1@pocketcode.org |
-    When I POST these parameters to "/pocketcode/api/register/Register.json"
+    When I POST these parameters to "/app/api/register/Register.json"
     Then I should get the json object:
       """
       {"statusCode":757,"answer":"This email address already exists.","preHeaderMessages":""}
@@ -57,7 +57,7 @@ Feature: Login with an existing account or register a new one
       | name                 | value    |
       | registrationUsername | Catrobat |
       | registrationPassword | 123456   |
-    When I POST these parameters to "/pocketcode/api/login/Login.json"
+    When I POST these parameters to "/app/api/login/Login.json"
     Then I should get the json object:
       """
       {"statusCode":200, "token": "rrrrrrrrrrr", "email":"default1@pocketcode.org","preHeaderMessages":""}
@@ -69,7 +69,7 @@ Feature: Login with an existing account or register a new one
       | name                 | value  |
       | registrationUsername | Random |
       | registrationPassword | 123456 |
-    When I POST these parameters to "/pocketcode/api/login/Login.json"
+    When I POST these parameters to "/app/api/login/Login.json"
     Then I should get the json object:
       """
       {"statusCode":764, "answer":"This username does not exist.","preHeaderMessages":""}
@@ -81,7 +81,7 @@ Feature: Login with an existing account or register a new one
       | name                 | value    |
       | registrationUsername | Catrobat |
       | registrationPassword | afdsafds |
-    When I POST these parameters to "/pocketcode/api/login/Login.json"
+    When I POST these parameters to "/app/api/login/Login.json"
     Then I should get the json object:
       """
       {"statusCode":601, "answer":"The password or username was incorrect.","preHeaderMessages":""}

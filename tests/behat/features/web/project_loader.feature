@@ -46,7 +46,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/app/search/a"  |
 
   @Mobile
   Scenario Outline: Per default a user should only see the show more buttons
@@ -60,7 +60,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/app/search/a"  |
 
   Scenario Outline: The show more Button should disappear when all program are loaded
     Given I am on <page>
@@ -75,7 +75,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/app/search/a"  |
 
   Scenario Outline: When clicking the show less button often enough the the show less button should disappear
     Given I am on <page>
@@ -93,7 +93,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/app/search/a"  |
 
   Scenario Outline: When there are more projects to load then both buttons should be visible after clicking show more
     Given I am on <page>
@@ -108,7 +108,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | "#search-results .button-show-less" | "/app/search/a"  |
 
   Scenario Outline: Show more Buttons should load more programs, Show less button should hide some programs. There
                     should also be enough projects displayed to make the rows full if possible
@@ -140,7 +140,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .program" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .program"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .program"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/app/search/a"  |
 
   Scenario: All programs should be visible after all of them have been loaded
     Given I am on homepage
@@ -201,7 +201,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .program" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .program"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .program"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/app/search/a"  |
 
 
   Scenario Outline: When a user has loaded more projects and left the page the number of loaded projects should
@@ -212,7 +212,7 @@ Feature: Project loader & show more/less programs button behaviour
     When I click <button>
     And I wait 100 milliseconds
     Then I should see 12 <programs>
-    When I am on "pocketcode/help"
+    When I am on "app/help"
     And I wait 100 milliseconds
     And I am on <page>
     And I wait 100 milliseconds
@@ -223,7 +223,7 @@ Feature: Project loader & show more/less programs button behaviour
     When I click <button>
     And I wait 100 milliseconds
     Then I should see 23 <programs>
-    When I am on "pocketcode/help"
+    When I am on "app/help"
     And I wait 100 milliseconds
     And I am on <page>
     And I wait 100 milliseconds
@@ -234,7 +234,7 @@ Feature: Project loader & show more/less programs button behaviour
     When I click <button2>
     And I wait 100 milliseconds
     Then I should see 12 <programs>
-    When I am on "pocketcode/help"
+    When I am on "app/help"
     And I wait 100 milliseconds
     And I am on <page>
     And I wait 100 milliseconds
@@ -249,7 +249,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .program" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .program"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .program"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/app/search/a"  |
 
 
   Scenario Outline: When a user has loaded more projects and reloads the page the number of loaded projects should
@@ -292,7 +292,7 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .program" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .program"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .program"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/app/search/a"  |
 
   Scenario Outline: When a user has loaded more projects and goes back and forward the number of loaded projects should
                     be the same when a user returns to the page.
@@ -337,6 +337,6 @@ Feature: Project loader & show more/less programs button behaviour
       | "#mostDownloaded .button-show-more" | "#mostDownloaded .program" | "#mostDownloaded .button-show-less" | "/"                     |
       | "#mostViewed .button-show-more"     | "#mostViewed .program"     | "#mostViewed .button-show-less"     | "/"                     |
       | "#random .button-show-more"         | "#random .program"         | "#random .button-show-less"         | "/"                     |
-      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/pocketcode/search/a"  |
+      | "#search-results .button-show-more" | ".program"                 | "#search-results .button-show-less" | "/app/search/a"  |
 
 

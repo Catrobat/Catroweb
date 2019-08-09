@@ -34,7 +34,7 @@ Feature: Get recommended programs
     And I have a parameter "program_id" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recsys.json" with these parameters
+    When I GET "/app/api/projects/recsys.json" with these parameters
     Then I should get the programs "<programs>"
 
     Examples:

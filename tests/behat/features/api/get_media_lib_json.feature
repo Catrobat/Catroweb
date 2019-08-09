@@ -23,7 +23,7 @@ Feature: Get data from the media library in json format
 
 
   Scenario: get all files from media library
-    When I GET from the api "/pocketcode/api/media/json"
+    When I GET from the api "/app/api/media/json"
     Then I should get the json object:
       """
       [
@@ -36,7 +36,7 @@ Feature: Get data from the media library in json format
           "author": "Bob Schmidt",
           "extension": "png",
           "url": null,
-          "download_url": "\/pocketcode\/download-media\/1"
+          "download_url": "\/app\/download-media\/1"
         },
         {
           "id": 2,
@@ -47,7 +47,7 @@ Feature: Get data from the media library in json format
           "author": "",
           "extension": "mpga",
           "url": null,
-          "download_url": "\/pocketcode\/download-media\/2"
+          "download_url": "\/app\/download-media\/2"
         },
         {
           "id": 3,
@@ -58,7 +58,7 @@ Feature: Get data from the media library in json format
           "author": "Micheal John",
           "extension": "png",
           "url": null,
-          "download_url": "\/pocketcode\/download-media\/3"
+          "download_url": "\/app\/download-media\/3"
         },
         {
           "id": 4,
@@ -69,7 +69,7 @@ Feature: Get data from the media library in json format
           "author": "",
           "extension": "png",
           "url": null,
-          "download_url": "\/pocketcode\/download-media\/4"
+          "download_url": "\/app\/download-media\/4"
         },
         {
           "id": 5,
@@ -80,7 +80,7 @@ Feature: Get data from the media library in json format
           "author": "",
           "extension": "png",
           "url": null,
-          "download_url": "\/pocketcode\/download-media\/5"
+          "download_url": "\/app\/download-media\/5"
         },
         {
           "id": 6,
@@ -91,13 +91,13 @@ Feature: Get data from the media library in json format
           "author": "Jennifer Shawn",
           "extension": "png",
           "url": null,
-          "download_url": "\/pocketcode\/download-media\/6"
+          "download_url": "\/app\/download-media\/6"
         }
       ]
       """
 
   Scenario: get all files from a media lib package
-    When I GET from the api "/pocketcode/api/media/package/Looks/json"
+    When I GET from the api "/app/api/media/package/Looks/json"
     Then I should get the json object:
     """
     [
@@ -110,7 +110,7 @@ Feature: Get data from the media library in json format
         "author": "Bob Schmidt",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/1"
+        "download_url": "\/app\/download-media\/1"
       },
       {
         "id": 4,
@@ -121,7 +121,7 @@ Feature: Get data from the media library in json format
         "author": "",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/4"
+        "download_url": "\/app\/download-media\/4"
       },
       {
         "id": 5,
@@ -132,7 +132,7 @@ Feature: Get data from the media library in json format
         "author": "",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/5"
+        "download_url": "\/app\/download-media\/5"
       },
       {
         "id": 3,
@@ -143,7 +143,7 @@ Feature: Get data from the media library in json format
         "author": "Micheal John",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/3"
+        "download_url": "\/app\/download-media\/3"
       },
       {
         "id": 6,
@@ -154,13 +154,13 @@ Feature: Get data from the media library in json format
         "author": "Jennifer Shawn",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/6"
+        "download_url": "\/app\/download-media\/6"
       }
     ]
     """
 
   Scenario: get all files from a media lib package by nameUrl
-    When I GET from the api "/pocketcode/api/media/packageByNameUrl/looks/json"
+    When I GET from the api "/app/api/media/packageByNameUrl/looks/json"
     Then I should get the json object:
     """
     [
@@ -173,7 +173,7 @@ Feature: Get data from the media library in json format
         "author": "Bob Schmidt",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/1"
+        "download_url": "\/app\/download-media\/1"
       },
       {
         "id": 4,
@@ -184,7 +184,7 @@ Feature: Get data from the media library in json format
         "author": "",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/4"
+        "download_url": "\/app\/download-media\/4"
       },
       {
         "id": 5,
@@ -195,7 +195,7 @@ Feature: Get data from the media library in json format
         "author": "",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/5"
+        "download_url": "\/app\/download-media\/5"
       },
       {
         "id": 3,
@@ -206,7 +206,7 @@ Feature: Get data from the media library in json format
         "author": "Micheal John",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/3"
+        "download_url": "\/app\/download-media\/3"
       },
       {
         "id": 6,
@@ -217,13 +217,13 @@ Feature: Get data from the media library in json format
         "author": "Jennifer Shawn",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/6"
+        "download_url": "\/app\/download-media\/6"
       }
     ]
     """
 
   Scenario: get all files from a media lib category
-    When I GET from the api "/pocketcode/api/media/category/Fantasy/json"
+    When I GET from the api "/app/api/media/category/Fantasy/json"
     Then I should get the json object:
     """
     {
@@ -238,14 +238,14 @@ Feature: Get data from the media library in json format
           "author": "",
           "extension": "mpga",
           "url": null,
-          "download_url": "\/pocketcode\/download-media\/2"
+          "download_url": "\/app\/download-media\/2"
         }
       ]
     }
     """
 
   Scenario: get all files from a media lib package and a certain category of that package
-    When I GET from the api "/pocketcode/api/media/package/Looks/Space/json"
+    When I GET from the api "/app/api/media/package/Looks/Space/json"
     Then I should get the json object:
     """
     [
@@ -258,7 +258,7 @@ Feature: Get data from the media library in json format
         "author": "Micheal John",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/3"
+        "download_url": "\/app\/download-media\/3"
       },
       {
         "id": 6,
@@ -269,13 +269,13 @@ Feature: Get data from the media library in json format
         "author": "Jennifer Shawn",
         "extension": "png",
         "url": null,
-        "download_url": "\/pocketcode\/download-media\/6"
+        "download_url": "\/app\/download-media\/6"
       }
     ]
     """
 
   Scenario: get a single media file by id
-    When I GET from the api "/pocketcode/api/media/file/1/json"
+    When I GET from the api "/app/api/media/file/1/json"
     Then I should get the json object:
     """
     {
@@ -287,6 +287,6 @@ Feature: Get data from the media library in json format
       "author": "Bob Schmidt",
       "extension": "png",
       "url": null,
-      "download_url": "\/pocketcode\/download-media\/1"
+      "download_url": "\/app\/download-media\/1"
     }
     """

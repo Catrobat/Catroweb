@@ -20,9 +20,9 @@ Feature: Pocketcode homepage visited programs
     Then I should see marked "#newest #program-1"
 
   Scenario: Visited programs should be marked on the entire page.
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     And I should see 1 "#newest #program-1"
     When I click "#newest #program-1"
     And I wait 100 milliseconds
-    And I am on "/pocketcode/profile/1"
+    And I am on "/app/profile/1"
     Then I should see marked "#program-1"

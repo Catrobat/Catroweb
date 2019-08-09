@@ -103,7 +103,7 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
     When I POST login with user "ldap-fired-user" and password "654321"
     And I GET "/admin/featured_program/list"
     Then the client response should contain "Featured Program List"
-    When I GET "/pocketcode/logout"
+    When I GET "/app/logout"
     Given there are LDAP-users:
       | name            | password |
       | ldap-fired-user | 654321   |

@@ -16,7 +16,7 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get most viewed programs of flavor pocketcode
 
-    When I get the most viewed programs with "pocketcode/api/projects/mostViewed.json"
+    When I get the most viewed programs with "app/api/projects/mostViewed.json"
     Then I should get following programs:
       | name         |
       | Invaders     |
@@ -38,7 +38,7 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get most downloaded programs of pocketcode
 
-    When I get the most downloaded programs with "pocketcode/api/projects/mostDownloaded.json"
+    When I get the most downloaded programs with "app/api/projects/mostDownloaded.json"
     Then I should get following programs:
       | name         |
       | Invaders     |
@@ -60,7 +60,7 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get recent programs of flavor pocketcode
 
-    When I get the recent programs with "pocketcode/api/projects/recent.json"
+    When I get the recent programs with "app/api/projects/recent.json"
     Then I should get following programs:
       | name         |
       | Invaders     |
@@ -83,7 +83,7 @@ Feature: Filtering programs with specific flavor
   Scenario: Get all programs of a user no matter the flavor (pocketcode)
 
     Given All programs are from the same user
-    When I get the user's programs with "pocketcode/api/projects/userPrograms.json"
+    When I get the user's programs with "app/api/projects/userPrograms.json"
     Then I should get following programs:
       | name         |
       | Invaders     |

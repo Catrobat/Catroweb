@@ -45,7 +45,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from tags
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     When I press on the tag "Game"
     And I wait for AJAX to finish
     Then There should be one database entry with type is "tags" and "tag_id" is "1"
@@ -53,7 +53,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from extensions
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     When I press on the extension "Lego"
     And I wait for AJAX to finish
     Then There should be one database entry with type is "extensions" and "extension_id" is "3"
@@ -61,7 +61,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from programs
-    Given I am on "/pocketcode/program/1"
+    Given I am on "/app/program/1"
     When I click on the first recommended program
     And I wait for AJAX to finish
     Then There should be one database entry with type is "programs" and "program_id" is "2"
@@ -69,7 +69,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from featured programs on homepage
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on the first featured homepage program
     And I wait 500 milliseconds
@@ -80,7 +80,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from newest programs on homepage
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a newest homepage program having program id "2"
     And I wait 500 milliseconds
@@ -91,7 +91,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from most downloaded programs on homepage
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a most downloaded homepage program having program id "3"
     And I wait 500 milliseconds
@@ -102,7 +102,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from most viewed programs on homepage
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a most viewed homepage program having program id "4"
     And I wait 500 milliseconds
@@ -113,7 +113,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from random programs on homepage
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     Then I wait for AJAX to finish
     When I click on a random homepage program having program id "2"
     And I wait 500 milliseconds
@@ -135,7 +135,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | Catrobat  | 1          | 1    | 01.01.2017 12:00 |
       | Catrobat  | 2          | 2    | 01.01.2017 12:00 |
       | OtherUser | 1          | 4    | 01.01.2017 12:00 |
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     Then I wait 500 milliseconds
     Then I should see a recommended homepage program having ID "1" and name "Minions"
     When I click on the first recommended homepage program
@@ -153,7 +153,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
       | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
 
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     Then There should be recommended specific programs
     When I click on the first recommended specific program
     And I wait 500 milliseconds
@@ -168,5 +168,5 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | Catrobat | Facebook |
       | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | Catrobat | Facebook |
 
-    And I am on "/pocketcode/program/1"
+    And I am on "/app/program/1"
     Then There should be no recommended specific programs

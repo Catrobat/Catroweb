@@ -62,7 +62,7 @@ class GamejamJavascriptContext extends MinkContext implements KernelAwareContext
   public function iAmLoggedIn()
   {
     $this->i = $this->getSymfonySupport()->insertUser(['name' => 'Generated', 'password' => 'generated']);
-    $this->visitPath("/pocketcode/login");
+    $this->visitPath("/app/login");
     $this->fillField("username", "Generated");
     $this->fillField("password", "generated");
     $button = $this->getSession()->getPage()->find("css", "#_submit");
@@ -100,7 +100,7 @@ class GamejamJavascriptContext extends MinkContext implements KernelAwareContext
    */
   public function iVisitMyProfile()
   {
-    $this->visit("/pocketcode/profile");
+    $this->visit("/app/profile");
   }
 
   /**
