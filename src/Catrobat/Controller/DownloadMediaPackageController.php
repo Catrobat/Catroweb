@@ -19,8 +19,7 @@ class DownloadMediaPackageController extends Controller
 {
 
   /**
-   * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"},
-   *                                methods={"GET"})
+   * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"}, methods={"GET"})
    *
    * @param Request $request
    * @param         $id

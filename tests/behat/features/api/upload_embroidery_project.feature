@@ -2,12 +2,6 @@
 Feature: Upload a program with tag
 
   Background:
-    Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-    And there are programs:
-      | id | name      | description | owned by | downloads | views | upload time      | version |
-      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
     Given there are tags:
       | id | en         | de             |
       | 1  | Games      | Spiele         |
