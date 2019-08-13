@@ -81,4 +81,4 @@ Feature: Admin Server Maintenance
     When I GET "/admin/maintain/list"
     Then the client response should contain "a_backup.tar.gz"
     When I GET "/app/download-backup/a_backup.tar.gz"
-    Then the response Header should contain the key "Content-Disposition" with the value 'attachment; filename="a_backup.tar.gz"'
+    Then the response Header should contain the key "Content-Disposition" with the value 'attachment; filename=a_backup.tar.gz'

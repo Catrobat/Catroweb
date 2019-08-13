@@ -1,5 +1,6 @@
 <?php
 
+use App\Catrobat\Services\ApkRepository;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -42,6 +43,24 @@ class CiFeatureContext extends BaseContext
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Hooks
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
   /**
    * @BeforeScenario
    */
@@ -186,7 +205,7 @@ class CiFeatureContext extends BaseContext
     {
       $expected_parameters[$parameter_defs[$i]['parameter']] = $parameter_defs[$i]['value'];
     }
-    $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
+    $dispatcher = $this->getSymfonyService('App\Catrobat\Services\Ci\JenkinsDispatcher');
     $parameters = $dispatcher->getLastParameters();
 
     for ($i = 0; $i < sizeof($expected_parameters); $i++) {
@@ -296,9 +315,9 @@ class CiFeatureContext extends BaseContext
 
       if ($programs[$i]['apk status'] == 'ready')
       {
-        /* @var $apkrepository \App\Catrobat\Services\ApkRepository */
-        $apkrepository = $this->getSymfonyService('apkrepository');
-        $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $i);
+        /* @var $apkrepository ApkRepository */
+        $apk_repository = $this->getSymfonyService(ApkRepository::class);
+        $apk_repository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $i);
       }
     }
   }
@@ -370,8 +389,8 @@ class CiFeatureContext extends BaseContext
         break;
       case 'ready':
         $program->setApkStatus(Program::APK_READY);
-        /* @var $apkrepository \App\Catrobat\Services\ApkRepository */
-        $apkrepository = $this->getSymfonyService('apkrepository');
+        /* @var $apkrepository ApkRepository */
+        $apkrepository = $this->getSymfonyService(ApkRepository::class);
         $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $program->getId());
         break;
       default:
@@ -385,7 +404,7 @@ class CiFeatureContext extends BaseContext
    */
   public function noBuildRequestWillBeSentToJenkins()
   {
-    $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
+    $dispatcher = $this->getSymfonyService('App\Catrobat\Services\Ci\JenkinsDispatcher');
     $parameters = $dispatcher->getLastParameters();
     Assert::assertNull($parameters);
   }

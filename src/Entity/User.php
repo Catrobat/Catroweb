@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\GuidType;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -208,7 +209,7 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * Get id.
    *
-   * @return int
+   * @return GuidType
    */
   public function getId()
   {
@@ -347,9 +348,9 @@ class User extends BaseUser implements LdapUserInterface
    *
    * @return string Distinguished Name
    */
-  public function getDn()
+  public function getDn(): string
   {
-    return $this->dn;
+    return $this->dn !== null ? $this->dn : '';
   }
 
   /**

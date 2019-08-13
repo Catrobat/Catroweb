@@ -2,15 +2,17 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Error\Error;
 
 
 /**
  * Class TagExtensionController
  * @package App\Catrobat\Controller\Web
  */
-class TagExtensionController extends Controller
+class TagExtensionController extends AbstractController
 {
 
   /**
@@ -18,8 +20,8 @@ class TagExtensionController extends Controller
    *
    * @param $q
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function tagSearchAction($q)
   {
@@ -30,8 +32,8 @@ class TagExtensionController extends Controller
   /**
    * @Route("/tag/search/", name="empty_tag_search", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function tagSearchNothingAction()
   {
@@ -44,8 +46,8 @@ class TagExtensionController extends Controller
    *
    * @param $q
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function extensionSearchAction($q)
   {
@@ -56,8 +58,8 @@ class TagExtensionController extends Controller
   /**
    * @Route("/extension/search/", name="empty_extension_search", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function extensionSearchNothingAction()
   {

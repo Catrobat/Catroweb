@@ -3,35 +3,38 @@
 namespace App\Catrobat\Controller\Security;
 
 use App\Entity\User;
+use App\Entity\UserManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
 /**
  * Class TokenLoginController
  * @package App\Catrobat\Controller\Security
  */
-class TokenLoginController extends Controller
+class TokenLoginController extends AbstractController
 {
 
   /**
    * @Route("/tokenlogin", name="token_login", methods={"GET"})
    *
    * @param Request $request
+   * @param UserManager $user_manager
    *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @return RedirectResponse
    */
-  public function tokenloginAction(Request $request)
+  public function tokenloginAction(Request $request, UserManager $user_manager)
   {
     /**
      * @var $user User
      */
     $username = $request->query->get('username');
     $token = $request->query->get('token');
-    $user = $this->get('usermanager')->findUserByUsername($username);
+    $user = $user_manager->findUserByUsername($username);
 
     if ($user == null)
     {
@@ -53,7 +56,7 @@ class TokenLoginController extends Controller
 
 
   /**
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @return RedirectResponse
    */
   private function logout()
   {

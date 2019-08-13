@@ -2,9 +2,11 @@
 
 namespace App\Catrobat\Twig;
 
+use App\Catrobat\Services\CommunityStatisticsService;
 use App\Entity\MediaPackageFile;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Repository\GameJamRepository;
@@ -48,30 +50,30 @@ class AppExtension extends AbstractExtension
   private $translationPath;
 
   /**
-   * @var Container
+   * @var ParameterBagInterface
    */
-  private $container;
+  private $parameter_bag;
 
   /**
    * AppExtension constructor.
    *
-   * @param RequestStack               $request_stack
+   * @param RequestStack $request_stack
    * @param MediaPackageFileRepository $mediapackage_file_repo
-   * @param GameJamRepository          $gamejamrepository
-   * @param ActiveTheme                $theme
-   * @param                            $translationPath
-   * @param Container                  $container
+   * @param GameJamRepository $gamejamrepository
+   * @param ActiveTheme $theme
+   * @param ParameterBagInterface $parameter_bag
+   * @param $catrobat_translation_dir
    */
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository
-  $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme,
-                              $translationPath, Container $container)
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo,
+                              GameJamRepository $gamejamrepository, ActiveTheme $theme,
+                              ParameterBagInterface $parameter_bag, $catrobat_translation_dir)
   {
-    $this->translationPath = $translationPath;
+    $this->translationPath = $catrobat_translation_dir;
+    $this->parameter_bag = $parameter_bag;
     $this->request_stack = $request_stack;
     $this->mediapackage_file_repository = $mediapackage_file_repo;
     $this->gamejamrepository = $gamejamrepository;
     $this->theme = $theme;
-    $this->container = $container;
   }
 
   /**
@@ -385,7 +387,7 @@ class AppExtension extends AbstractExtension
    */
   public function getJavascriptPath($jsFile)
   {
-    $jsPath = $this->container->getParameter('jspath');
+    $jsPath = $this->parameter_bag->get('jspath');
     $jsPath .= $jsFile;
     $jsPath = str_replace("//", "/", $jsPath);
 
@@ -396,15 +398,15 @@ class AppExtension extends AbstractExtension
    * Twig extension to provide a function to retrieve the community statistics in any view.
    * Needed to render the footer.
    *
-   * See the fetchStatistics implementation of Services\CommunityStatisticsService.php
-   *                                           for details.
+   * See the fetchStatistics implementation of Services\CommunityStatisticsService.php for details.
+   *
+   * @param CommunityStatisticsService $communityStatisticsService
    *
    * @return array|mixed
-   * @throws \Exception
    */
-  public function getCommunityStats()
+  public function getCommunityStats(CommunityStatisticsService $communityStatisticsService)
   {
-    $cms_s = $this->container->get("community_statistics_service");
+    $cms_s = $communityStatisticsService;
     $stats = $cms_s->fetchStatistics();
 
     /* Numberformatter could be used to apply the locale. However this requires the intl extension to be fully working.

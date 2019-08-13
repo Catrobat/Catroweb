@@ -2,14 +2,24 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\ScratchProgram;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * Class ScratchProgramRepository
  * @package App\Repository
  */
-class ScratchProgramRepository extends EntityRepository
+class ScratchProgramRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, ScratchProgram::class);
+  }
+
   /**
    * @param int[] $scratch_program_ids
    *

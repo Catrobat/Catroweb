@@ -7,6 +7,7 @@ use App\Catrobat\Requests\AppRequest;
 use App\Entity\Program;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ReflavorExtensionCommand extends ContainerAwareCommand
 {
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $em;
   /**
@@ -35,11 +36,11 @@ class ReflavorExtensionCommand extends ContainerAwareCommand
   /**
    * ReflavorExtensionCommand constructor.
    *
-   * @param EntityManager $em
+   * @param EntityManagerInterface $em
    * @param               $program_repo
    * @param AppRequest    $app_request
    */
-  public function __construct(EntityManager $em, ProgramRepository $program_repo, AppRequest $app_request)
+  public function __construct(EntityManagerInterface $em, ProgramRepository $program_repo, AppRequest $app_request)
   {
     parent::__construct();
     $this->em = $em;

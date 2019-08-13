@@ -1,7 +1,7 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
+        FOS\UserBundle\Model\UserInterface: auto
 
     providers:
         chain_provider:
@@ -18,27 +18,27 @@ security:
             pattern: ^.*/api/checkToken/check.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         api_check_notifications:
             provider: chain_provider
             pattern: ^.*/api/notifications/get.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         api_upload:
             provider: chain_provider
             pattern: ^.*/api/upload/upload.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
         api_submit:
             provider: chain_provider
             pattern: ^.*/api/gamejam/submit.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         debug:
             provider: chain_provider
@@ -63,7 +63,6 @@ security:
                 domain: ~ # Defaults to the current domain from $_SERVER
                 secure: false
                 httponly: false
-            logout_on_user_change: true # remove when symfony 4
             simple_preauth:
                 authenticator: webview_authenticator
 

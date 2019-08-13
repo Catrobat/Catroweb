@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * Class TranslationController
  * @package App\Catrobat\Controller\Web
  */
-class TranslationController extends Controller
+class TranslationController extends AbstractController
 {
 
   /**
@@ -39,8 +39,8 @@ class TranslationController extends Controller
 
 
   /**
-   * @Route("/transChoice/{word}/{count}/{array}/{domain}", name = "translate_choice", defaults={"array" = "", "domain" =
-   *                                              "catroweb"})
+   * @Route("/transChoice/{word}/{count}/{array}/{domain}", name = "translate_choice",
+   *   defaults={"array" = "", "domain" = "catroweb"})
    *
    * @param TranslatorInterface $translator
    * @param                     $word

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Catrobat\Commands;
+namespace App\Catrobat\Commands\Helpers;
 
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use Symfony\Component\Console\Output\OutputInterface;

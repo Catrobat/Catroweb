@@ -6,7 +6,11 @@ use App\Entity\Program;
 use App\Entity\User;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\StatusCode;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +19,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use App\Catrobat\Services\ProgramFileRepository;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 
@@ -23,25 +26,27 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  * Class DownloadProgramController
  * @package App\Catrobat\Controller
  */
-class DownloadProgramController extends Controller
+class DownloadProgramController extends AbstractController
 {
   /**
    * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"},
    *         methods={"GET"})
    *
    * @param Request $request
-   * @param         $id
+   * @param $id
+   * @param ProgramManager $program_manager
+   * @param ProgramFileRepository $file_repository
+   * @param LoggerInterface $logger
    *
-   * @return JsonResponse | BinaryFileResponse
+   * @return BinaryFileResponse|JsonResponse
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function downloadProgramAction(Request $request, $id)
+  public function downloadProgramAction(Request $request, $id, ProgramManager $program_manager,
+                                        ProgramFileRepository $file_repository, LoggerInterface $logger)
   {
-    /* @var $program_manager ProgramManager */
-    /* @var $file_repository ProgramFileRepository */
-    /* @var $logger Logger */
+    /* @var $program Program */
     $referrer = $request->getSession()->get('referer');
-    $program_manager = $this->get('programmanager');
-    $file_repository = $this->get('filerepository');
 
     $program = $program_manager->find($id);
     if (!$program)
@@ -62,7 +67,6 @@ class DownloadProgramController extends Controller
       $file = $file_repository->getProgramFile($id);
     } catch (FileNotFoundException $e)
     {
-      $logger = $this->get('logger');
       $logger->error('[FILE] failed to get program file with id: ' . $id);
 
       return JsonResponse::create('Invalid file upload', StatusCode::INVALID_FILE_UPLOAD);
@@ -73,7 +77,7 @@ class DownloadProgramController extends Controller
       $downloaded = $request->getSession()->get('downloaded', []);
       if (!in_array($program->getId(), $downloaded))
       {
-        $this->get('programmanager')->increaseDownloads($program);
+        $program_manager->increaseDownloads($program);
         $downloaded[] = $program->getId();
         $request->getSession()->set('downloaded', $downloaded);
         $request->attributes->set('download_statistics_program_id', $id);

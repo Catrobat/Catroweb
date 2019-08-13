@@ -3,7 +3,10 @@
 namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Requests\AppRequest;
+use Doctrine\ORM\Query\Parameter;
 use Liip\ThemeBundle\ActiveTheme;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
@@ -17,9 +20,9 @@ use Symfony\Component\DependencyInjection\Container;
 class FlavorListener
 {
   /**
-   * @var Container
+   * @var ParameterBag
    */
-  private $container;
+  private $parameter_bag;
 
   /**
    * @var RouterInterface
@@ -39,14 +42,15 @@ class FlavorListener
   /**
    * FlavorListener constructor.
    *
-   * @param Container $container
+   * @param ParameterBagInterface $parameter_bag
    * @param RouterInterface $router
-   * @param $theme
+   * @param ActiveTheme $theme
    * @param AppRequest $app_request
    */
-  public function __construct(Container $container, RouterInterface $router, $theme, AppRequest $app_request)
+  public function __construct(ParameterBagInterface $parameter_bag, RouterInterface $router, ActiveTheme $theme,
+                              AppRequest $app_request)
   {
-    $this->container = $container;
+    $this->parameter_bag = $parameter_bag;
     $this->router = $router;
     $this->theme = $theme;
     $this->app_request = $app_request;
@@ -124,7 +128,7 @@ class FlavorListener
 
   public function checkFlavor($flavor): bool
   {
-    $flavor_options = $this->container->getParameter('themes');
+    $flavor_options = $this->parameter_bag->get('themes');
 
     return in_array($flavor, $flavor_options);
   }

@@ -3,9 +3,11 @@
 namespace App\Admin;
 
 use App\Catrobat\Forms\FeaturedImageConstraint;
+use App\Catrobat\Services\FeaturedImageRepository;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -14,9 +16,11 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 
 
 /**
@@ -35,6 +39,39 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'featured_program';
 
+  /**
+   * @var
+   */
+  private $entity_manager;
+
+  /**
+   * @var ParameterBagInterface
+   */
+  private $parameter_bag;
+
+  /**
+   * @var
+   */
+  private $featured_image_repository;
+
+  /**
+   * FeaturedProgramAdmin constructor.
+   *
+   * @param $code
+   * @param $class
+   * @param $baseControllerName
+   * @param EntityManagerInterface $entity_manager
+   * @param ParameterBagInterface $parameter_bag
+   * @param FeaturedImageRepository $featured_image_repository
+   */
+  public function __construct($code, $class, $baseControllerName, EntityManagerInterface $entity_manager,
+                              ParameterBagInterface $parameter_bag, FeaturedImageRepository $featured_image_repository)
+  {
+    parent::__construct($code, $class, $baseControllerName);
+    $this->entity_manager = $entity_manager;
+    $this->parameter_bag = $parameter_bag;
+    $this->featured_image_repository = $featured_image_repository;
+  }
 
   /**
    * @param string $context
@@ -135,8 +172,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   public function getFeaturedImageUrl($object)
   {
-    return '../../' . $this->getConfigurationPool()->getContainer()->get('featuredimagerepository')
-        ->getWebPath($object->getId(), $object->getImageType());
+    return '../../' . $this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
   }
 
 
@@ -186,8 +222,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
     $id = $this->getForm()->get('program_id')->getData();
 
-    $program_manager = $this->getConfigurationPool()->getContainer()->get('doctrine')
-      ->getManager()->getRepository('\App\Entity\Program');
+    $program_manager = $this->entity_manager->getRepository('\App\Entity\Program');
     $program = $program_manager->find($id);
 
     if ($program)
@@ -206,7 +241,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   private function checkFlavor()
   {
     $flavor = $this->getForm()->get('flavor')->getData();
-    $flavor_options =  $this->getConfigurationPool()->getContainer()->getParameter('themes');
+    $flavor_options =  $this->parameter_bag->get('themes');
 
     if (!in_array($flavor, $flavor_options)) {
       throw new NotFoundHttpException(

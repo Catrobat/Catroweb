@@ -34,6 +34,25 @@ class GamejamFeatureContext extends BaseContext
     $this->setErrorDirectory($error_directory);
   }
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /**
    * @return string
    */
@@ -309,7 +328,7 @@ class GamejamFeatureContext extends BaseContext
       }
       else
       {
-        $gamejam = $this->getSymfonySupport()->getSymfonyService('gamejamrepository')->findOneByName($gamejam);
+        $gamejam = $this->getSymfonySupport()->getSymfonyService(App\Repository\GameJamRepository::class)->findOneByName($gamejam);
       }
 
       @$config = [

@@ -8,6 +8,9 @@ use App\Entity\ScratchProgramRemixRelation;
 use App\Repository\ProgramRemixRepository;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ScratchProgramRemixRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 
 /**
@@ -44,14 +47,17 @@ class RemixGraphManipulator
   /**
    * RemixManager constructor.
    *
-   * @param EntityManager                  $entity_manager
+   * @param EntityManagerInterface                  $entity_manager
    * @param RemixSubgraphManipulator       $remix_subgraph_manipulator
    * @param ProgramRemixRepository         $program_remix_repository
    * @param ProgramRemixBackwardRepository $program_remix_backward_repository
    * @param ScratchProgramRemixRepository  $scratch_program_remix_repository
    */
-  public function __construct($entity_manager, $remix_subgraph_manipulator, $program_remix_repository,
-                              $program_remix_backward_repository, $scratch_program_remix_repository)
+  public function __construct(EntityManagerInterface $entity_manager,
+                              RemixSubgraphManipulator $remix_subgraph_manipulator,
+                              ProgramRemixRepository $program_remix_repository,
+                              ProgramRemixBackwardRepository $program_remix_backward_repository,
+                              ScratchProgramRemixRepository $scratch_program_remix_repository)
   {
     $this->entity_manager = $entity_manager;
     $this->remix_subgraph_manipulator = $remix_subgraph_manipulator;
@@ -64,8 +70,8 @@ class RemixGraphManipulator
    * @param Program $program
    * @param array   $removed_forward_parent_ids
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function convertBackwardParentsHavingNoForwardAncestor(Program $program, array $removed_forward_parent_ids)
   {
@@ -172,8 +178,8 @@ class RemixGraphManipulator
    * @param Program $program
    * @param         $scratch_parent_ids_to_be_added
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function linkToScratchParents(Program $program, $scratch_parent_ids_to_be_added)
   {
@@ -191,8 +197,8 @@ class RemixGraphManipulator
    * @param int[]   $ids_of_new_parents
    * @param array   $preserved_creation_date_mapping
    * @param array   $preserved_seen_date_mapping
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,
                                                        array $preserved_creation_date_mapping,

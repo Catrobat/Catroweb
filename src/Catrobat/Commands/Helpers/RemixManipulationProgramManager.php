@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Catrobat\Commands;
+namespace App\Catrobat\Commands\Helpers;
 
 use App\Entity\ProgramManager;
 use App\Catrobat\Services\CatrobatFileExtractor;

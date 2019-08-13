@@ -4,7 +4,10 @@ namespace App\Catrobat\Listeners;
 
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\StatisticsService;
+use App\Catrobat\Services\TestEnv\FakeStatisticsService;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 
 /**
@@ -25,10 +28,10 @@ class DownloadStatisticsListener
   /**
    * DownloadStatisticsListener constructor.
    *
-   * @param $statistics_service
-   * @param $security_token_storage
+   * @param StatisticsService $statistics_service
+   * @param TokenStorageInterface $security_token_storage
    */
-  public function __construct($statistics_service, $security_token_storage)
+  public function __construct(StatisticsService $statistics_service, TokenStorageInterface$security_token_storage)
   {
     $this->statistics_service = $statistics_service;
     $this->security_token_storage = $security_token_storage;
@@ -36,6 +39,8 @@ class DownloadStatisticsListener
 
   /**
    * @param PostResponseEvent $event
+   *
+   * @throws \Exception
    */
   public function onTerminateEvent(PostResponseEvent $event)
   {
@@ -91,6 +96,8 @@ class DownloadStatisticsListener
    * @param $rec_by_program_id
    * @param $locale
    * @param $is_user_specific_recommendation
+   *
+   * @throws \Exception
    */
   public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id,
                                                   $rec_by_page_id, $rec_by_program_id, $locale,

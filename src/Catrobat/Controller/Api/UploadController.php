@@ -21,6 +21,7 @@ use App\Catrobat\Exceptions\Upload\MissingChecksumException;
 use App\Catrobat\Exceptions\Upload\InvalidChecksumException;
 use App\Catrobat\Exceptions\Upload\MissingPostDataException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use App\Repository\GameJamRepository;
 use App\Catrobat\Exceptions\Upload\NoGameJamException;
@@ -72,20 +73,20 @@ class UploadController
    */
   private $logger;
 
+
   /**
    * UploadController constructor.
    *
-   * @param UserManager         $usermanager
-   * @param TokenStorage        $tokenstorage
-   * @param ProgramManager      $programmanager
-   * @param GameJamRepository   $gamejamrepository
-   * @param TokenGenerator      $tokengenerator
-   * @param TranslatorInterface $translator
-   * @param LoggerInterface     $logger
+   * @param UserManager           $usermanager
+   * @param TokenStorageInterface $tokenstorage
+   * @param ProgramManager        $programmanager
+   * @param GameJamRepository     $gamejamrepository
+   * @param TokenGenerator        $tokengenerator
+   * @param TranslatorInterface   $translator
+   * @param LoggerInterface       $logger
    * @param CatroNotificationService $catroNotificationService
    */
-
-  public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager,
+  public function __construct(UserManager $usermanager, TokenStorageInterface $tokenstorage, ProgramManager $programmanager,
                               GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator,
                               TranslatorInterface $translator, LoggerInterface $logger,
                               CatroNotificationService $catroNotificationService)

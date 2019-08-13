@@ -5,10 +5,12 @@ namespace App\Catrobat\Commands;
 use App\Entity\ProgramLike;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRemixRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
@@ -42,19 +44,20 @@ class CSVUserSimilaritiesCommand extends ContainerAwareCommand
    * CSVUserSimilaritiesCommand constructor.
    *
    * @param ProgramRemixRepository $program_remix_repository
-   * @param ProgramLikeRepository  $program_like_repository
-   * @param EntityManager          $entity_manager
-   * @param                        $app_root_dir
+   * @param ProgramLikeRepository $program_like_repository
+   * @param EntityManagerInterface $entity_manager
+   * @param $kernel_root_dir
    */
   public function __construct(ProgramRemixRepository $program_remix_repository,
                               ProgramLikeRepository $program_like_repository,
-                                 EntityManager $entity_manager, $app_root_dir)
+                              EntityManagerInterface $entity_manager,
+                              $kernel_root_dir)
   {
     parent::__construct();
     $this->program_remix_repository = $program_remix_repository;
     $this->program_like_repository = $program_like_repository;
     $this->entity_manager = $entity_manager;
-    $this->app_root_dir = $app_root_dir;
+    $this->app_root_dir = $kernel_root_dir;
   }
 
   /**

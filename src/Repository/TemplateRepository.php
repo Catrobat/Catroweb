@@ -2,15 +2,23 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\Template;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * Class TemplateRepository
  * @package App\Repository
  */
-class TemplateRepository extends EntityRepository
+class TemplateRepository extends ServiceEntityRepository
 {
-
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, Template::class);
+  }
   /**
    * @param $active
    *

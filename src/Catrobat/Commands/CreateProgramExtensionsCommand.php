@@ -2,9 +2,12 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Extension;
+use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRepository;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
@@ -24,12 +27,12 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
   private $output;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $em;
 
   /**
-   * @var
+   * @var ProgramFileRepository
    */
   private $programfile_directory;
 
@@ -42,11 +45,12 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
   /**
    * CreateProgramExtensionsCommand constructor.
    *
-   * @param EntityManager     $em
-   * @param string            $programfile_directory
+   * @param EntityManagerInterface $em
+   * @param ProgramFileRepository $programfile_directory
    * @param ProgramRepository $program_repo
    */
-  public function __construct(EntityManager $em, $programfile_directory, $program_repo)
+  public function __construct(EntityManagerInterface $em, ProgramFileRepository $programfile_directory,
+                              ProgramRepository $program_repo)
   {
     parent::__construct();
     $this->em = $em;
@@ -84,7 +88,7 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
 
     $this->writeln("Deleting all linked extensions");
 
-    $extension_repository = $this->getContainer()->get('extensionrepository');
+    $extension_repository = $this->getContainer()->get(ExtensionRepository::class);
     $extensions = $extension_repository->findAll();
 
     foreach ($extensions as $extension)

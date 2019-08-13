@@ -29,6 +29,7 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 
 /**
@@ -117,6 +118,8 @@ class ApiFeatureContext extends BaseContext
    * @var array
    */
   private $stored_json = [];
+
+  private $old_metadata_hash = "";
 
   /**
    * FeatureContext constructor.
@@ -254,7 +257,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function weAssumeTheNextGeneratedTokenWillBe($token)
   {
-    $token_generator = $this->getSymfonyService('tokengenerator');
+    $token_generator = $this->getSymfonyService('App\Catrobat\Services\TokenGenerator');
     $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
@@ -368,11 +371,28 @@ class ApiFeatureContext extends BaseContext
   // //////////////////////////////////////////// Support Functions
 
   /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
+  /**
    * @BeforeScenario @RealGeocoder
    */
   public function activateRealGeocoderService()
   {
-    $this->getSymfonyService('statistics')->useRealService(true);
+    $this->getSymfonyService('App\Catrobat\Services\StatisticsService')->useRealService(true);
   }
 
   /**
@@ -380,7 +400,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function deactivateRealGeocoderService()
   {
-    $this->getSymfonyService('statistics')->useRealService(false);
+    $this->getSymfonyService('App\Catrobat\Services\StatisticsService')->useRealService(false);
   }
 
   /**
@@ -1509,7 +1529,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function theNextGeneratedTokenWillBe($token)
   {
-    $token_generator = $this->getSymfonyService('tokengenerator');
+    $token_generator = $this->getSymfonyService('App\Catrobat\Services\TokenGenerator');
     $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
@@ -1522,7 +1542,7 @@ class ApiFeatureContext extends BaseContext
   public function theCurrentTimeIs($time)
   {
     $date = new DateTime($time, new DateTimeZone('UTC'));
-    $time_service = $this->getSymfonyService('time');
+    $time_service = $this->getSymfonyService('App\Catrobat\Services\Time');
     $time_service->setTime(new FixedTime($date->getTimestamp()));
   }
 

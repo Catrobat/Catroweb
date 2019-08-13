@@ -2,7 +2,8 @@
 
 namespace App\Catrobat\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Catrobat\Services\BackupFileRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -10,22 +11,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 
-class DownloadBackupController extends Controller
+class DownloadBackupController extends AbstractController
 {
   /**
    * @Route("/download-backup/{backupFile}", name="backup_download", methods={"GET"})
    *
    * @param Request $request
-   * @param         $backupFile
+   * @param $backupFile
+   * @param BackupFileRepository $backupFileRepository
    *
    * @return BinaryFileResponse
    */
-  public function downloadBackupAction(Request $request, $backupFile)
+  public function downloadBackupAction(Request $request, $backupFile, BackupFileRepository $backupFileRepository)
   {
-    /**
-     * @var $backupFileRepository \App\Catrobat\Services\BackupFileRepository
-     */
-    $backupFileRepository = $this->get('backupfilerepository');
 
     $file = $backupFileRepository->getBackupFile($backupFile);
     if ($file->isFile())

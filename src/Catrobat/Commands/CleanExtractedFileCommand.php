@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Commands;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -42,8 +43,8 @@ class CleanExtractedFileCommand extends ContainerAwareCommand
     $this->output->writeln('Deleting Extracted Catrobat Files');
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'), 'Emptying extracted directory', $output);
 
-    /* @var $em \Doctrine\ORM\EntityManager */
-    $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+    /* @var $em EntityManager */
+    $em = $this->getContainer()->get('doctrine')->getManager();
     $query = $em->createQuery("UPDATE App\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
     $query->setParameter('hash', "null");
     $result = $query->getSingleScalarResult();

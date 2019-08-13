@@ -83,7 +83,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
       @unlink($local_resource_directory . 'database.sql');
 
       /* @var $em \Doctrine\ORM\EntityManager */
-      $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+      $em = $this->getContainer()->get('doctrine')->getManager();
       $query = $em->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
       $query->setParameter('status', Program::APK_NONE);
       $result = $query->getSingleScalarResult();

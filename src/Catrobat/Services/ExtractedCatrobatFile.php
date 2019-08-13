@@ -6,6 +6,7 @@ use App\Catrobat\CatrobatCode\CodeObject;
 use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
+use Doctrine\DBAL\Types\GuidType;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -325,7 +326,7 @@ class ExtractedCatrobatFile
   /**
    * based on: http://stackoverflow.com/a/27295688
    *
-   * @param int     $program_id
+   * @param GuidType     $program_id
    * @param boolean $is_initial_version
    * @param bool    $migration_mode
    *

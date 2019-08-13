@@ -2,10 +2,13 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Services\ProgramFileRepository;
+use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\RemixManager;
 use App\Catrobat\Listeners\RemixUpdater;
 use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\CatrobatFileExtractor;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\Output;
@@ -98,6 +101,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
    * @var
    */
   private $screenshot_repository;
+
   /**
    * @var
    */
@@ -110,10 +114,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
    * @param UserManager    $user_manager
    * @param ProgramManager $program_manager
    * @param RemixManager   $remix_manager
-   * @param EntityManager  $em
+   * @param EntityManagerInterface  $em
    */
   public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager,
-                                 RemixManager $remix_manager, EntityManager $em)
+                                 RemixManager $remix_manager, EntityManagerInterface $em)
   {
     parent::__construct();
     $this->fileystem = $filesystem;
@@ -146,8 +150,8 @@ class ImportLegacyCommand extends ContainerAwareCommand
     $this->output = $output;
     $this->filesystem = new Filesystem();
     $this->finder = new Finder();
-    $this->screenshot_repository = $this->getContainer()->get('screenshotrepository');
-    $this->catrobat_file_repository = $this->getContainer()->get('filerepository');
+    $this->screenshot_repository = $this->getContainer()->get(ScreenshotRepository::class);
+    $this->catrobat_file_repository = $this->getContainer()->get(ProgramFileRepository::class);
 
     CommandHelper::executeSymfonyCommand('catrobat:purge', $this->getApplication(), ['--force' => true], $output);
 
@@ -440,7 +444,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
       /**
        * @var $fileextractor CatrobatFileExtractor
        */
-      $fileextractor = $this->getContainer()->get('fileextractor');
+      $fileextractor = $this->getContainer()->get('App\Catrobat\Services\CatrobatFileExtractor');
       $router = $this->getContainer()->get('router');
       $extracted_catrobat_file = $fileextractor->extract(new File($filepath));
 
