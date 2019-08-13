@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
@@ -40,6 +41,39 @@ class ApproveProgramsAdmin extends AbstractAdmin
    */
   private $extractedProgram = null;
 
+  /**
+   * @var ScreenshotRepository
+   */
+  private $screenshot_repository;
+
+  /**
+   * @var ProgramManager
+   */
+  private $program_manager;
+
+  /**
+   * @var ExtractedFileRepository
+   */
+  private $extracted_file_repository;
+
+  /**
+   * ApproveProgramsAdmin constructor.
+   *
+   * @param $code
+   * @param $class
+   * @param $baseControllerName
+   * @param ScreenshotRepository $screenshot_repository
+   * @param ProgramManager $program_manager
+   * @param ExtractedFileRepository $extracted_file_repository
+   */
+  public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository,
+                              ProgramManager $program_manager, ExtractedFileRepository $extracted_file_repository)
+  {
+    parent::__construct($code, $class, $baseControllerName);
+    $this->screenshot_repository = $screenshot_repository;
+    $this->program_manager = $program_manager;
+    $this->extracted_file_repository = $extracted_file_repository;
+  }
 
   /**
    * @param string $context
@@ -173,8 +207,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
      * @var $object Program
      */
 
-    return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')
-        ->getThumbnailWebPath($object->getId());
+    return '/' . $this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
 
@@ -189,16 +222,15 @@ class ApproveProgramsAdmin extends AbstractAdmin
   {
     /**
      * @var $extractedFileRepository ExtractedFileRepository
-     * @var $progManager ProgramManager
+     * @var $program_manager ProgramManager
      * @var $object Program
      */
 
     if ($this->extractedProgram == null)
     {
-      $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
-      $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository
-        ->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
     }
 
     $image_paths = $this->extractedProgram->getContainingImagePaths();
@@ -239,10 +271,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
     if ($this->extractedProgram == null)
     {
-      $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
-      $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository
-        ->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
     }
 
     return $this->encodeFileNameOfPathsArray($this->extractedProgram->getContainingSoundPaths());
@@ -264,10 +295,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
     if ($this->extractedProgram == null)
     {
-      $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
-      $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository
-        ->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
     }
 
     return $this->extractedProgram->getContainingStrings();
@@ -288,10 +318,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
     if ($this->extractedProgram == null)
     {
-      $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
-      $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository
-        ->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
     }
 
     if ($this->extractedProgram->hasScenes())

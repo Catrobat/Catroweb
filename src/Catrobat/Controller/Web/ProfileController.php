@@ -3,7 +3,9 @@
 namespace App\Catrobat\Controller\Web;
 
 use App\Utils\ImageUtils;
+use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\FollowNotification;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Catrobat\StatusCode;
 use App\Entity\UserManager;
@@ -13,14 +15,17 @@ use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Twig\Error\Error;
 
-class ProfileController extends Controller
+class ProfileController extends AbstractController
 {
   const MIN_PASSWORD_LENGTH = 6;
   const MAX_PASSWORD_LENGTH = 32;
@@ -31,12 +36,13 @@ class ProfileController extends Controller
    *
    * @param Request $request
    * @param GuidType $id
+   * @param ProgramManager $program_manager
+   * @param UserManager $user_manager
    *
-   * @throws \Exception
-   *
-   * @return RedirectResponse
+   * @return RedirectResponse|Response
+   * @throws Error
    */
-  public function profileAction(Request $request, $id = 0)
+  public function profileAction(Request $request, ProgramManager $program_manager, UserManager $user_manager, $id=0)
   {
     /**
      * @var $user User
@@ -49,12 +55,12 @@ class ProfileController extends Controller
     {
       $user = $this->getUser();
       $my_profile = true;
-      $program_count = count($this->get('programmanager')->getUserPrograms($id));
+      $program_count = count($program_manager->getUserPrograms($id));
     }
     else
     {
-      $user = $this->get('usermanager')->find($id);
-      $program_count = count($this->get('programmanager')->getPublicUserPrograms($id));
+      $user = $user_manager->find($id);
+      $program_count = count($program_manager->getPublicUserPrograms($id));
     }
 
     if (!$user)
@@ -91,10 +97,11 @@ class ProfileController extends Controller
    * @Route("/countrySave", name="country_save", methods={"POST"})
    *
    * @param Request $request
+   * @param UserManager $user_manager
    *
    * @return JsonResponse|RedirectResponse
    */
-  public function countrySaveAction(Request $request)
+  public function countrySaveAction(Request $request, UserManager $user_manager)
   {
     /**
      * @var $user User
@@ -120,7 +127,7 @@ class ProfileController extends Controller
 
     $user->setCountry($country);
 
-    $this->get('usermanager')->updateUser($user);
+    $user_manager->updateUser($user);
 
     return JsonResponse::create([
       'statusCode' => StatusCode::OK,
@@ -131,14 +138,15 @@ class ProfileController extends Controller
    * @Route("/passwordSave", name="password_save", methods={"POST"})
    *
    * @param Request $request
+   * @param UserManager $user_manager
+   * @param EncoderFactoryInterface $factory
    *
    * @return JsonResponse|RedirectResponse
    */
-  public function passwordSaveAction(Request $request)
+  public function passwordSaveAction(Request $request, UserManager $user_manager, EncoderFactoryInterface $factory)
   {
     /**
      * @var User        $user
-     * @var UserManager $userManager
      */
     $user = $this->getUser();
     if (!$user)
@@ -148,7 +156,6 @@ class ProfileController extends Controller
 
     $old_password = $request->request->get('oldPassword');
 
-    $factory = $this->get('security.encoder_factory');
     $encoder = $factory->getEncoder($user);
 
     $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
@@ -179,7 +186,7 @@ class ProfileController extends Controller
       $user->setPlainPassword($newPassword);
     }
 
-    $this->get('usermanager')->updateUser($user);
+    $user_manager->updateUser($user);
 
     return JsonResponse::create([
       'statusCode'     => StatusCode::OK,
@@ -192,10 +199,11 @@ class ProfileController extends Controller
    * @Route("/emailSave", name="email_save", methods={"POST"})
    *
    * @param Request $request
+   * @param UserManager $user_manager
    *
    * @return JsonResponse|RedirectResponse
    */
-  public function emailSaveAction(Request $request)
+  public function emailSaveAction(Request $request, UserManager $user_manager)
   {
     /**
      * @var User
@@ -229,11 +237,11 @@ class ProfileController extends Controller
       return JsonResponse::create(['statusCode' => $e->getMessage(), 'email' => 2]);
     }
 
-    if ($this->checkEmailExists($firstMail))
+    if ($this->checkEmailExists($firstMail, $user_manager))
     {
       return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 1]);
     }
-    if ($this->checkEmailExists($secondMail))
+    if ($this->checkEmailExists($secondMail, $user_manager))
     {
       return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 2]);
     }
@@ -260,8 +268,7 @@ class ProfileController extends Controller
       $user->setEmail($secondMail);
       $user->setAdditionalEmail('');
     }
-
-    $this->get('usermanager')->updateUser($user);
+    $user_manager->updateUser($user);
 
     return JsonResponse::create([
       'statusCode' => StatusCode::OK,
@@ -272,10 +279,11 @@ class ProfileController extends Controller
    * @Route("/usernameSave", name="username_save", methods={"POST"})
    *
    * @param Request $request
+   * @param UserManager $user_manager
    *
-   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+   * @return JsonResponse|RedirectResponse
    */
-  public function usernameSaveAction(Request $request)
+  public function usernameSaveAction(Request $request, UserManager $user_manager)
   {
     /**
      * @var User
@@ -301,13 +309,13 @@ class ProfileController extends Controller
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_INVALID]);
     }
 
-    if ($this->checkUsernameExists($username))
+    if ($this->checkUsernameExists($username, $user_manager))
     {
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_ALREADY_EXISTS]);
     }
 
     $user->setUsername($username);
-    $this->get('usermanager')->updateUser($user);
+    $user_manager->updateUser($user);
 
     return JsonResponse::create([
       'statusCode' => StatusCode::OK,
@@ -318,10 +326,11 @@ class ProfileController extends Controller
    * @Route("/userUploadAvatar", name="profile_upload_avatar", methods={"POST"})
    *
    * @param Request $request
+   * @param UserManager $user_manager
    *
    * @return JsonResponse|RedirectResponse
    */
-  public function uploadAvatarAction(Request $request)
+  public function uploadAvatarAction(Request $request, UserManager $user_manager)
   {
     /**
      * @var $user User
@@ -343,7 +352,7 @@ class ProfileController extends Controller
     }
 
     $user->setAvatar($image_base64);
-    $this->get('usermanager')->updateUser($user);
+    $user_manager->updateUser($user);
 
     return JsonResponse::create([
       'statusCode'   => StatusCode::OK,
@@ -396,13 +405,15 @@ class ProfileController extends Controller
   /**
    * @Route("/followUser/{id}", name="follow_user", methods = {"GET"}, defaults={"id" = 0})
    *
-   * @param GuidType $id
-   *
-   * @throws \Exception
+   * @param $id
+   * @param UserManager $user_manager
+   * @param CatroNotificationService $notification_service
    *
    * @return RedirectResponse
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function followUser($id)
+  public function followUser($id, UserManager $user_manager, CatroNotificationService $notification_service)
   {
     /**
      * @var User $user
@@ -421,11 +432,10 @@ class ProfileController extends Controller
     /**
      * @var $userToFollow User
      */
-    $userToFollow = $this->get('usermanager')->find($id);
+    $userToFollow = $user_manager->find($id);
     $user->addFollowing($userToFollow);
-    $this->get('usermanager')->updateUser($user);
+    $user_manager->updateUser($user);
 
-    $notification_service = $this->get("catro_notification_service");
     $notification = new FollowNotification($userToFollow, $user);
     $notification_service->addNotification($notification);
 
@@ -437,10 +447,11 @@ class ProfileController extends Controller
    * @Route("/unfollowUser/{id}", name="unfollow_user", methods = {"GET"}, defaults={"id" = 0})
    *
    * @param GuidType $id
+   * @param UserManager $user_manager
    *
    * @return RedirectResponse
    */
-  public function unfollowUser($id)
+  public function unfollowUser($id, UserManager $user_manager)
   {
 
     $user = $this->getUser();
@@ -457,9 +468,9 @@ class ProfileController extends Controller
     /**
      * @var $userToUnfollow User
      */
-    $userToUnfollow = $this->get('usermanager')->find($id);
+    $userToUnfollow = $user_manager->find($id);
     $user->removeFollowing($userToUnfollow);
-    $this->get('usermanager')->updateUser($user);
+    $user_manager->updateUser($user);
 
     return $this->redirectToRoute('profile', ['id' => $id]);
   }
@@ -470,10 +481,11 @@ class ProfileController extends Controller
    *
    * @param Request $request
    * @param         $type
+   * @param UserManager $user_manager
    *
    * @return JsonResponse
    */
-  public function listFollow(Request $request, $type)
+  public function listFollow(Request $request, $type, UserManager $user_manager)
   {
     $criteria = Criteria::create()
       ->orderBy(["username" => Criteria::ASC])
@@ -485,7 +497,7 @@ class ProfileController extends Controller
      * @var ArrayCollection $followCollection
      * @var User[]          $users
      */
-    $user = $this->get('usermanager')->find($request->get("id"));
+    $user = $user_manager->find($request->get("id"));
     switch ($type)
     {
       case "follower":
@@ -598,18 +610,19 @@ class ProfileController extends Controller
 
   /**
    * @param $email
+   * @param UserManager $user_manager
    *
    * @return bool
    */
-  private function checkEmailExists($email)
+  private function checkEmailExists($email, UserManager $user_manager)
   {
     if ($email === '')
     {
       return false;
     }
 
-    $userWithFirstMail = $this->get('usermanager')->findOneBy(['email' => $email]);
-    $userWithSecondMail = $this->get('usermanager')->findOneBy(['additional_email' => $email]);
+    $userWithFirstMail = $user_manager->findOneBy(['email' => $email]);
+    $userWithSecondMail = $user_manager->findOneBy(['additional_email' => $email]);
 
     if ($userWithFirstMail !== null && $userWithFirstMail !== $this->getUser() || $userWithSecondMail !== null && $userWithSecondMail !== $this->getUser())
     {
@@ -620,18 +633,19 @@ class ProfileController extends Controller
   }
 
   /**
-   * @param $email
+   * @param $username
+   * @param UserManager $user_manager
    *
    * @return bool
    */
-  private function checkUsernameExists($username)
+  private function checkUsernameExists($username, UserManager $user_manager)
   {
     if ($username === '')
     {
       return false;
     }
 
-    $user = $this->get('usermanager')->findOneBy(['username' => $username]);
+    $user = $user_manager->findOneBy(['username' => $username]);
 
     if ($user !== null && $user !== $this->getUser())
     {

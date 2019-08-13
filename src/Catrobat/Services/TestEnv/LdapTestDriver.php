@@ -5,6 +5,7 @@ namespace App\Catrobat\Services\TestEnv;
 use FR3D\LdapBundle\Driver\LdapDriverException;
 use FR3D\LdapBundle\Driver\LdapDriverInterface;
 use FR3D\LdapBundle\Model\LdapUserInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
@@ -38,11 +39,11 @@ class LdapTestDriver implements LdapDriverInterface
   /**
    * LdapTestDriver constructor.
    *
-   * @param $baseDN
+   * @param ParameterBagInterface $parameter_bag
    */
-  public function __construct($baseDN)
+  public function __construct(ParameterBagInterface $parameter_bag)
   {
-    $this->baseDN = $baseDN;
+    $this->baseDN = $parameter_bag->get('ldap_base_dn');
     $this->throw_expection_on_search = false;
   }
 
@@ -56,7 +57,7 @@ class LdapTestDriver implements LdapDriverInterface
    *
    * @return bool true on success or false on failure
    */
-  public function bind(UserInterface $user, $password)
+  public function bind(UserInterface $user, $password): bool
   {
     $this->loadFixtures();
     if ($user instanceof LdapUserInterface)

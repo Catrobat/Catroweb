@@ -23,6 +23,7 @@ use App\Repository\TagRepository;
 use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -65,7 +66,7 @@ class ProgramManager
   protected $event_dispatcher;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   protected $entity_manager;
 
@@ -102,13 +103,13 @@ class ProgramManager
   /**
    * ProgramManager constructor.
    *
-   * @param CatrobatFileExtractor $file_extractor
-   * @param ProgramFileRepository $file_repository
-   * @param ScreenshotRepository $screenshot_repository
-   * @param EntityManager $entity_manager
-   * @param ProgramRepository $program_repository
-   * @param TagRepository $tag_repository
-   * @param ProgramLikeRepository $program_like_repository
+   * @param CatrobatFileExtractor    $file_extractor
+   * @param ProgramFileRepository    $file_repository
+   * @param ScreenshotRepository     $screenshot_repository
+   * @param EntityManagerInterface            $entity_manager
+   * @param ProgramRepository        $program_repository
+   * @param TagRepository            $tag_repository
+   * @param ProgramLikeRepository    $program_like_repository
    * @param EventDispatcherInterface $event_dispatcher
    * @param LoggerInterface $logger
    * @param AppRequest $app_request
@@ -116,7 +117,7 @@ class ProgramManager
    * @param CatrobatFileSanitizer $file_sanitizer
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
-                              ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
+                              ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
                               EventDispatcherInterface $event_dispatcher,
@@ -241,7 +242,7 @@ class ProgramManager
       $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
     } catch (Exception $e)
     {
-      $this->logger->error("UploadError -> saveProgramAssetsTemp failed!", ["exception" => $e]);
+      $this->logger->error("UploadError -> saveProgramAssetsTemp failed!", ["exception" => $e->getMessage()]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();

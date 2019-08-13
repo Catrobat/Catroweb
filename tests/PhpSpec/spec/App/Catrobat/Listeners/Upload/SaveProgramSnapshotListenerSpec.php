@@ -16,9 +16,10 @@ class SaveProgramSnapshotListenerSpec extends ObjectBehavior
 
   private $user;
   private $program;
+  private $file;
 
 
-  public function let(ProgramFileRepository $repo, Time $time, User $user, Program $program)
+  public function let(ProgramFileRepository $repo, Time $time, User $user, Program $program, MyFile $file)
   {
     $this->beConstructedWith($time, $repo, self::STORAGE_DIR);
     $time->getTime()->willReturn(strtotime("2015-10-26 13:33:37"));
@@ -30,42 +31,50 @@ class SaveProgramSnapshotListenerSpec extends ObjectBehavior
     $this->program->setUser($this->user);
     $this->program->setId(1);
 
+    $this->file = $file;
   }
 
-  public function it_backups_the_current_program_file_of_a_limited_account_on_update(File $file, ProgramFileRepository $repo, Time $time)
+  public function it_backups_the_current_program_file_of_a_limited_account_on_update(ProgramFileRepository $repo, Time $time)
   {
-    $repo->getProgramFile(1)->willReturn($file);
+    $repo->getProgramFile(1)->willReturn($this->file);
 
     $this->saveProgramSnapshot($this->program);
 
-    $file->move(self::STORAGE_DIR, "1_2015-10-26_13-33-37.catrobat")->shouldHaveBeenCalled();
+    $this->file->move(self::STORAGE_DIR, "1_2015-10-26_13-33-37.catrobat")->shouldHaveBeenCalled();
   }
 
-  public function it_does_not_backup_if_user_is_not_limited(File $file, ProgramFileRepository $repo, Time $time)
+  public function it_does_not_backup_if_user_is_not_limited(ProgramFileRepository $repo, Time $time)
   {
     $this->user->setLimited(false);
 
     $this->saveProgramSnapshot($this->program);
 
-    $file->move(Argument::any(), Argument::any())->shouldNotHaveBeenCalled();
+    $this->file->move(Argument::any(), Argument::any())->shouldNotHaveBeenCalled();
   }
 
-  public function it_does_not_backup_if_there_is_no_existing_file(File $file, ProgramFileRepository $repo, Time $time)
+  public function it_does_not_backup_if_there_is_no_existing_file(ProgramFileRepository $repo, Time $time)
   {
     $repo->getProgramFile(1)->willThrow('\Symfony\Component\Filesystem\Exception\FileNotFoundException');
 
     $this->saveProgramSnapshot($this->program);
 
-    $file->move(Argument::any(), Argument::any())->shouldNotHaveBeenCalled();
+    $this->file->move(Argument::any(), Argument::any())->shouldNotHaveBeenCalled();
   }
 
-  public function it_does_not_throw_an_exception_if_backup_fails(File $file, ProgramFileRepository $repo, Time $time)
+  public function it_does_not_throw_an_exception_if_backup_fails(ProgramFileRepository $repo, Time $time)
   {
-    $repo->getProgramFile(1)->willReturn($file);
+    $repo->getProgramFile(1)->willReturn($this->file);
 
-    $file->move(Argument::any(), Argument::any())->willThrow('Symfony\Component\HttpFoundation\File\Exception\FileException');
+    $this->file->move(Argument::any(), Argument::any())->willThrow('Symfony\Component\HttpFoundation\File\Exception\FileException');
 
     $this->saveProgramSnapshot($this->program);
   }
 
+}
+
+// Hack because HttpFoundation file constructor is broken for prophecies
+class MyFile extends \SplFileInfo {
+  public function move() {
+
+  }
 }

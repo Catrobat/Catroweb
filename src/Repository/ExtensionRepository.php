@@ -2,15 +2,25 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\Extension;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 
 /**
  * Class ExtensionRepository
  * @package App\Repository
  */
-class ExtensionRepository extends EntityRepository
+class ExtensionRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, Extension::class);
+  }
+
   /**
    * @return mixed
    */

@@ -13,7 +13,9 @@ use App\Entity\TemplateManager;
 class TemplateService
 {
 
-  /* @var $templateManager \App\Entity\TemplateManager */
+  /**
+   * @var $templateManager TemplateManager
+   */
   private $templateManager;
 
   /**

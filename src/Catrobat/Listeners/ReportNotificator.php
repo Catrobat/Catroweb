@@ -3,6 +3,8 @@
 namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Events\ReportInsertEvent;
+use App\Entity\Notification;
+use App\Repository\NotificationRepository;
 
 /**
  * Class ReportNotificator
@@ -15,7 +17,7 @@ class ReportNotificator
    */
   private $mailer;
   /**
-   * @var \App\Repository\NotificationRepository
+   * @var NotificationRepository
    */
   private $notification_repo;
 
@@ -23,9 +25,9 @@ class ReportNotificator
    * ReportNotificator constructor.
    *
    * @param \Swift_Mailer                                     $mailer
-   * @param \App\Repository\NotificationRepository $repository
+   * @param NotificationRepository $repository
    */
-  public function __construct(\Swift_Mailer $mailer, \App\Repository\NotificationRepository $repository)
+  public function __construct(\Swift_Mailer $mailer, NotificationRepository $repository)
   {
     $this->mailer = $mailer;
     $this->notification_repo = $repository;
@@ -36,7 +38,7 @@ class ReportNotificator
    */
   public function onReportInsertEvent(ReportInsertEvent $event)
   {
-    /* @var $notification_repo \App\Repository\NotificationRepository */
+    /* @var $notification_repo NotificationRepository */
 
     $notification_repo = $this->notification_repo;
     $all_users = $notification_repo->findAll();
@@ -45,7 +47,7 @@ class ReportNotificator
 
     foreach ($all_users as $user)
     {
-      /* @var $user \App\Entity\Notification */
+      /* @var $user Notification */
       if (!$user->getReport())
       {
         continue;

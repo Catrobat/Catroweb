@@ -8,7 +8,8 @@ use App\Catrobat\Events\ProgramAfterInsertEvent;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\RemixData;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 
 /**
@@ -29,21 +30,30 @@ class RemixUpdater
   private $async_http_client;
 
   /**
-   * @var Router The router.
+   * @var RouterInterface The router.
    */
   private $router;
 
   /**
-   * @param RemixManager    $remix_manager
-   * @param AsyncHttpClient $async_http_client
-   * @param Router          $router
-   * @param string          $app_root_dir
+   * @var string
    */
-  public function __construct(RemixManager $remix_manager, AsyncHttpClient $async_http_client, Router $router, $app_root_dir)
+  private $migration_lock_file_path;
+
+  /**
+   * RemixUpdater constructor.
+   *
+   * @param RemixManager $remix_manager
+   * @param AsyncHttpClient $async_http_client
+   * @param RouterInterface $router
+   * @param $kernel_root_dir
+   */
+  public function __construct(RemixManager $remix_manager, AsyncHttpClient $async_http_client, RouterInterface $router,
+                              $kernel_root_dir)
   {
     $this->remix_manager = $remix_manager;
     $this->async_http_client = $async_http_client;
     $this->router = $router;
+    $app_root_dir = $kernel_root_dir;
     $this->migration_lock_file_path = $app_root_dir . '/' . self::MIGRATION_LOCK_FILE_NAME;
   }
 

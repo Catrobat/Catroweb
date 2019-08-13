@@ -6,7 +6,7 @@ use App\Catrobat\Twig\AppExtension;
 use Prophecy\Prophet;
 
 
-class AppExtentionTest extends \PHPUnit\Framework\TestCase
+class AppExtensionTest extends \PHPUnit\Framework\TestCase
 {
   private $prophet;
 
@@ -84,9 +84,9 @@ class AppExtentionTest extends \PHPUnit\Framework\TestCase
     return $requestStack;
   }
 
-  private function mockContainer()
+  private function mockParameterBag()
   {
-    $container = $this->prophet->prophesize('Symfony\Component\DependencyInjection\Container');
+    $container = $this->prophet->prophesize('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
 
     return $container;
   }
@@ -97,9 +97,10 @@ class AppExtentionTest extends \PHPUnit\Framework\TestCase
     $requestStack = $this->mockRequestStack($locale);
     $gamejamRepository = $this->prophet->prophesize('App\Repository\GameJamRepository');
     $theme = $this->prophet->prophesize('Liip\ThemeBundle\ActiveTheme');
-    $container = $this->mockContainer();
+    $parameter_bag = $this->mockParameterBag();
 
-    return new AppExtension($requestStack->reveal(), $repo->reveal(), $gamejamRepository->reveal(), $theme->reveal(), $this->translationPath, $container->reveal());
+    return new AppExtension($requestStack->reveal(), $repo->reveal(), $gamejamRepository->reveal(),
+      $theme->reveal(), $parameter_bag->reveal(), $this->translationPath);
   }
 
   private function mockMediaPackageFileRepository()

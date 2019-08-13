@@ -2,14 +2,26 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\FeaturedProgram;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
+
 
 /**
  * Class FeaturedRepository
  * @package App\Entity
  */
-class FeaturedRepository extends EntityRepository
+class FeaturedRepository extends ServiceEntityRepository
 {
+
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, FeaturedProgram::class);
+  }
+
   /**
    * @param      $flavor
    * @param int  $limit

@@ -6,8 +6,9 @@ use App\Entity\Program;
 use App\Entity\StarterCategory;
 use App\Catrobat\Services\ScreenshotRepository;
 use Doctrine\DBAL\Types\GuidType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Twig\Error\Error;
@@ -17,7 +18,7 @@ use Twig\Error\Error;
  * Class TutorialController
  * @package App\Catrobat\Controller\Web
  */
-class TutorialController extends Controller
+class TutorialController extends AbstractController
 {
 
   /**
@@ -111,10 +112,11 @@ class TutorialController extends Controller
    *
    * @param Request $request
    * @param GuidType  $id
+   * @param ScreenshotRepository  $screenshot_repository
    *
    * @return JsonResponse
    */
-  public function categoryProgramsAction(Request $request, $id)
+  public function categoryProgramsAction(Request $request, $id, ScreenshotRepository $screenshot_repository)
   {
     /**
     * @var $program Program
@@ -122,8 +124,6 @@ class TutorialController extends Controller
 
     $em = $this->getDoctrine()->getManager();
     $programs = $em->getRepository('App\Entity\Program')->findBy(['category' => $id]);
-
-    $screenshot_repository = $this->get('screenshotrepository');
 
     $retArray = $this->receiveCategoryPrograms($request, $programs, $screenshot_repository);
 

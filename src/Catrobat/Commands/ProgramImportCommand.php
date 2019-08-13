@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\RemixGraph\RemixGraphLayout;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

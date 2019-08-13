@@ -4,19 +4,28 @@ namespace App\Repository;
 
 use App\Entity\Program;
 use Doctrine\DBAL\DBALException;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 
 /**
  * Class ProgramRepository
  * @package App\Repository
  */
-class ProgramRepository extends EntityRepository
+class ProgramRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, Program::class);
+  }
+
   /**
    * @var array
    */

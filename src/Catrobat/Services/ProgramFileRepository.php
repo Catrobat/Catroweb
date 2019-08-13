@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Services;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
@@ -16,7 +17,7 @@ class ProgramFileRepository
   /**
    * @var
    */
-  private $directory;
+  protected $directory;
   /**
    * @var Filesystem
    */
@@ -24,33 +25,43 @@ class ProgramFileRepository
   /**
    * @var
    */
-  private $webpath;
+  protected $webpath;
   /**
    * @var CatrobatFileCompressor
    */
   private $file_compressor;
 
   /**
+   * @var
+   */
+  private $tmp_dir;
+
+  /**
    * ProgramFileRepository constructor.
    *
-   * @param                        $directory
-   * @param                        $webpath
+   * @param $catrobat_file_storage_dir
+   * @param $catrobat_file_storage_path
    * @param CatrobatFileCompressor $file_compressor
-   * @param                        $tmp_dir
+   * @param $catrobat_upload_temp_dir
    */
-  public function __construct($directory, $webpath, CatrobatFileCompressor $file_compressor, $tmp_dir)
+  public function __construct($catrobat_file_storage_dir, $catrobat_file_storage_path,
+                              CatrobatFileCompressor $file_compressor, $catrobat_upload_temp_dir)
   {
+    $directory = $catrobat_file_storage_dir;
+    $tmp_dir = $catrobat_upload_temp_dir;
+
     if (!is_dir($directory))
     {
       throw new InvalidStorageDirectoryException($directory . ' is not a valid directory');
     }
+
     if ($tmp_dir && !is_dir($tmp_dir))
     {
       throw new InvalidStorageDirectoryException($tmp_dir . ' is not a valid directory');
     }
 
     $this->directory = $directory;
-    $this->webpath = $webpath;
+    $this->webpath = $catrobat_file_storage_path;
     $this->tmp_dir = $tmp_dir;
     $this->filesystem = new Filesystem();
     $this->file_compressor = $file_compressor;

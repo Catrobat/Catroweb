@@ -2,10 +2,13 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Catrobat\Listeners\GameJamTagListener;
 use App\Entity\GameJam;
 use App\Entity\User;
+use App\Repository\GameJamRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  * Class GameSubmissionController
  * @package App\Catrobat\Controller\Api
  */
-class GameSubmissionController extends Controller
+class GameSubmissionController extends AbstractController
 {
 
   /**
@@ -57,18 +60,20 @@ class GameSubmissionController extends Controller
 
 
   /**
+   *   /**
    * @Route("/api/gamejam/sampleProjects.json", name="api_gamejam_sample_programs", methods={"GET"})
    *
    * @param Request $request
+   * @param GameJamRepository $game_jam_repository
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
-  public function getSampleProgramsForLatestGamejam(Request $request)
+  public function getSampleProgramsForLatestGamejam(Request $request, GameJamRepository $game_jam_repository)
   {
     $flavor = $request->get('flavor');
 
-    $gamejam = $this->getGameJam($flavor);
+    $gamejam = $this->getGameJam($flavor, $game_jam_repository);
 
     $offset = intval($request->query->get('offset', 0));
     $limit = intval($request->query->get('limit', 20));
@@ -85,23 +90,23 @@ class GameSubmissionController extends Controller
     return new ProgramListResponse($returning_samples, $returning_samples !== null ? count($returning_samples) : 0);
   }
 
-
   /**
    * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions", methods={"GET"})
    *
    * @param Request $request
+   * @param GameJamRepository $game_jam_repository
    *
    * @return ProgramListResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
-  public function getSubmissionsForLatestGamejam(Request $request)
+  public function getSubmissionsForLatestGamejam(Request $request, GameJamRepository $game_jam_repository)
   {
     $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));
 
     $flavor = $request->get('flavor');
 
-    $gamejam = $this->getGameJam($flavor);
+    $gamejam = $this->getGameJam($flavor, $game_jam_repository);
 
     $criteria_count = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true));
     $criteria = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true))
@@ -122,13 +127,13 @@ class GameSubmissionController extends Controller
    * @return mixed
    * @throws \Doctrine\ORM\NonUniqueResultException
    */
-  private function getGameJam($flavor)
+  private function getGameJam($flavor, GameJamRepository $game_jam_repository)
   {
-    $gamejam = $this->get("gamejamrepository")->getLatestGameJamByFlavor($flavor);
+    $gamejam = $game_jam_repository->getLatestGameJamByFlavor($flavor);
 
     if ($gamejam == null)
     {
-      $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
+      $gamejam = $game_jam_repository->getLatestGameJam();
     }
 
     if ($gamejam == null)
@@ -144,17 +149,19 @@ class GameSubmissionController extends Controller
    *
    * @param Request $request
    * @param Program $program
+   * @param GameJamRepository $game_jam_repository
+   * @param GameJamTagListener $gameJamTagListener
    *
    * @return RedirectResponse
-   * @throws \Exception
+   * @throws \Doctrine\ORM\NonUniqueResultException
    */
-  public function webSubmitAction(Request $request, Program $program)
+  public function webSubmitAction(Request $request, Program $program, GameJamRepository $game_jam_repository, GameJamTagListener $gameJamTagListener)
   {
     if ($this->getUser() == null)
     {
       throw new AuthenticationException();
     }
-    $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
+    $gamejam = $game_jam_repository->getCurrentGameJam();
     if ($gamejam == null)
     {
       throw new \Exception("No Game Jam!");
@@ -180,7 +187,7 @@ class GameSubmissionController extends Controller
     $program->setGamejam($gamejam);
     $program->setGameJamSubmissionDate(new \DateTime());
 
-    $this->get('catroweb.gamejamtag.check')->checkDescriptionTag($program);
+    $gameJamTagListener->checkDescriptionTag($program);
 
     $this->persistAndFlush($program);
 

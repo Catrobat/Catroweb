@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -40,6 +41,26 @@ class AllProgramsAdmin extends AbstractAdmin
     '_sort_by'    => 'id',
     '_sort_order' => 'DESC',
   ];
+
+  /**
+   * @var ScreenshotRepository
+   */
+  private $screenshot_repository;
+
+  /**
+   * AllProgramsAdmin constructor.
+   *
+   * @param $code
+   * @param $class
+   * @param $baseControllerName
+   * @param ScreenshotRepository $screenshot_repository
+   */
+  public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository)
+  {
+    parent::__construct($code, $class, $baseControllerName);
+
+    $this->screenshot_repository = $screenshot_repository;
+  }
 
 
   /**
@@ -175,7 +196,7 @@ class AllProgramsAdmin extends AbstractAdmin
     /**
      * @var $object object
      */
-    return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
+    return '/' . $this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
   /**

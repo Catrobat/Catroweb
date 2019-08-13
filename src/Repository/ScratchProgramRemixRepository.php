@@ -2,14 +2,26 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\ScratchProgramRemixRelation;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Types\GuidType;
 
 /**
  * Class ScratchProgramRemixRepository
  * @package App\Repository
  */
-class ScratchProgramRemixRepository extends EntityRepository
+class ScratchProgramRemixRepository extends ServiceEntityRepository
 {
+
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, ScratchProgramRemixRelation::class);
+  }
+
   /**
    * @param int[] $program_ids
    *
@@ -29,7 +41,7 @@ class ScratchProgramRemixRepository extends EntityRepository
   }
 
   /**
-   * @param int   $program_id
+   * @param GuidType   $program_id
    * @param int[] $scratch_parent_program_ids
    */
   public function removeParentRelations($program_id, array $scratch_parent_program_ids)

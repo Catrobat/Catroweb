@@ -10,6 +10,7 @@ use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class ProgramListSerializer
@@ -37,12 +38,13 @@ class ProgramListSerializer
   /**
    * ProgramListSerializer constructor.
    *
-   * @param RequestStack               $request_stack
-   * @param Router                     $router
-   * @param ScreenshotRepository       $screenshot_repository
+   * @param ScreenshotRepository $screenshot_repository
+   * @param RequestStack $request_stack
+   * @param Router $router
    * @param ElapsedTimeStringFormatter $time_formatter
    */
-  public function __construct(RequestStack $request_stack, Router $router, ScreenshotRepository $screenshot_repository, ElapsedTimeStringFormatter $time_formatter)
+  public function __construct(ScreenshotRepository $screenshot_repository, RequestStack $request_stack,
+                              RouterInterface $router, ElapsedTimeStringFormatter $time_formatter)
   {
     $this->request_stack = $request_stack;
     $this->router = $router;

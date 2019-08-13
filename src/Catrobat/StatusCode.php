@@ -74,6 +74,7 @@ class StatusCode
   const USERNAME_MISSING = 800;
   const USERNAME_ALREADY_EXISTS = 801;
   const USERNAME_INVALID = 802;
+  const USERNAME_NOT_FOUND = 803;
 
   const NO_GAME_JAM = 900;
 }

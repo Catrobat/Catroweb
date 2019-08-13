@@ -2,7 +2,9 @@
 
 namespace App\Catrobat\Services\Ci;
 
-use Symfony\Component\Routing\Router;
+
+
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class JenkinsDispatcher
@@ -11,7 +13,7 @@ use Symfony\Component\Routing\Router;
 class JenkinsDispatcher
 {
   /**
-   * @var Router
+   * @var RouterInterface
    */
   protected $router;
   /**
@@ -27,7 +29,7 @@ class JenkinsDispatcher
    *
    * @throws \Exception
    */
-  public function __construct($router, $config)
+  public function __construct($config, RouterInterface $router)
   {
     if (!isset($config['url']))
     {

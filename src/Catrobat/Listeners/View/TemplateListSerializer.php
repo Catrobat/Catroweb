@@ -38,18 +38,17 @@ class TemplateListSerializer
   /**
    * TemplateListSerializer constructor.
    *
-   * @param RequestStack               $request_stack
-   * @param                            $template_path
-   * @param ScreenshotRepository       $screenshot_repository
+   * @param $template_screenshot_repository
+   * @param RequestStack $request_stack
+   * @param $catrobat_template_storage_path
    * @param ElapsedTimeStringFormatter $time_formatter
    */
-  public function __construct(RequestStack $request_stack, $template_path,
-                              ScreenshotRepository $screenshot_repository,
-                              ElapsedTimeStringFormatter $time_formatter)
+  public function __construct($template_screenshot_repository, RequestStack $request_stack,
+                              $catrobat_template_storage_path, ElapsedTimeStringFormatter $time_formatter)
   {
     $this->request_stack = $request_stack;
-    $this->template_path = $template_path;
-    $this->screenshot_repository = $screenshot_repository;
+    $this->template_path = $catrobat_template_storage_path;
+    $this->screenshot_repository = $template_screenshot_repository;
     $this->time_formatter = $time_formatter;
   }
 

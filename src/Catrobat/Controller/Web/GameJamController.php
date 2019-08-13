@@ -3,30 +3,36 @@
 namespace App\Catrobat\Controller\Web;
 
 use App\Entity\GameJam;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Repository\GameJamRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Error\Error;
 
 /**
  * Class GameJamController
  * @package App\Catrobat\Controller\Web
  */
-class GameJamController extends Controller
+class GameJamController extends AbstractController
 {
 
   /**
    * @Route("/gamejame/submit-your-own", name="gamejam_submit_own", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Doctrine\ORM\NonUniqueResultException
-   * @throws \Twig\Error\Error
+   * @param GameJamRepository $game_jam_repository
+   *
+   * @return Response
+   * @throws NonUniqueResultException
+   * @throws Error
    */
-  public function gamejamSubmitOwnAction()
+  public function gamejamSubmitOwnAction(GameJamRepository $game_jam_repository)
   {
     /**
      * @var $gamejam GameJam
      */
     $jam = null;
-    $gamejam = $this->get('gamejamrepository')->getCurrentGameJam();
+    $gamejam = $game_jam_repository->getCurrentGameJam();
 
     if ($gamejam)
     {
@@ -34,7 +40,7 @@ class GameJamController extends Controller
 
       if ($gamejam_flavor != null)
       {
-        $config = $this->container->getParameter('gamejam');
+        $config = $this->getParameter('gamejam');
         $gamejam_config = $config[$gamejam_flavor];
         $jam = $this->configureSubmitYourOwn($gamejam_config, $gamejam);
       }
@@ -52,8 +58,8 @@ class GameJamController extends Controller
    *
    * @param $page
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function tutorialcardsAction($page)
   {

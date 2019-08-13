@@ -4,6 +4,7 @@ namespace App\Catrobat\Services;
 
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class CommunityStatisticsService
@@ -20,9 +21,9 @@ class CommunityStatisticsService
   /**
    * CommunityStatisticsService constructor.
    *
-   * @param EntityManager $em
+   * @param EntityManagerInterface $em
    */
-  public function __construct(EntityManager $em)
+  public function __construct(EntityManagerInterface $em)
   {
     $this->em = $em;
   }

@@ -7,6 +7,7 @@ use App\Repository\TemplateRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\TemplateFileRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class TemplateManager
@@ -29,7 +30,7 @@ class TemplateManager
   protected $screenshot_repository;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   protected $entity_manager;
 
@@ -44,11 +45,11 @@ class TemplateManager
    *
    * @param TemplateFileRepository $file_repository
    * @param ScreenshotRepository  $screenshot_repository
-   * @param EntityManager         $entity_manager
+   * @param EntityManagerInterface         $entity_manager
    * @param TemplateRepository    $template_repository
    */
   public function __construct(TemplateFileRepository $file_repository, ScreenshotRepository $screenshot_repository,
-                              EntityManager $entity_manager, TemplateRepository $template_repository)
+                              EntityManagerInterface $entity_manager, TemplateRepository $template_repository)
   {
     $this->file_repository = $file_repository;
     $this->screenshot_repository = $screenshot_repository;

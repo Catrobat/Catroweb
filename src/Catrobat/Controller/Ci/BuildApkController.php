@@ -3,9 +3,11 @@
 namespace App\Catrobat\Controller\Ci;
 
 use App\Catrobat\Services\ApkRepository;
+use App\Catrobat\Services\Ci\JenkinsDispatcher;
+use App\Entity\ProgramManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,18 +21,21 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * Class BuildApkController
  * @package App\Catrobat\Controller\Ci
  */
-class BuildApkController extends Controller
+class BuildApkController extends AbstractController
 {
 
   /**
    * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"}, methods={"GET"})
    *
    * @param Program $program
+   * @param JenkinsDispatcher $dispatcher
+   * @param ProgramManager $program_manager
    *
    * @return JsonResponse
-   * @throws \Exception
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function createApkAction(Program $program)
+  public function createApkAction(Program $program, JenkinsDispatcher $dispatcher, ProgramManager $program_manager)
   {
     if (!$program->isVisible())
     {
@@ -46,35 +51,34 @@ class BuildApkController extends Controller
       return JsonResponse::create(['status' => 'pending']);
     }
 
-    $dispatcher = $this->get('ci.jenkins.dispatcher');
     $dispatcher->sendBuildRequest($program->getId());
 
     $program->setApkStatus(Program::APK_PENDING);
     $program->setApkRequestTime(new \DateTime());
-    $this->get('programmanager')->save($program);
+    $program_manager->save($program);
 
     return JsonResponse::create(['status' => 'pending']);
   }
-
 
   /**
    * @Route("/ci/upload/{id}", name="ci_upload_apk", defaults={"_format": "json"}, methods={"GET", "POST"})
    *
    * @param Request $request
    * @param Program $program
+   * @param ApkRepository $apk_repository
+   * @param ProgramManager $program_manager
    *
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function uploadApkAction(Request $request, Program $program)
+  public function uploadApkAction(Request $request, Program $program,
+                                  ApkRepository $apk_repository, ProgramManager $program_manager)
   {
     /**
-     * @var $apkrepository ApkRepository
      * @var $file File
      */
-
-    $config = $this->container->getParameter('jenkins');
+    $config = $this->getParameter('jenkins');
     if ($request->query->get('token') !== $config['uploadtoken'])
     {
       throw new AccessDeniedException();
@@ -86,10 +90,9 @@ class BuildApkController extends Controller
     else
     {
       $file = array_values($request->files->all())[0];
-      $apkrepository = $this->get('apkrepository');
-      $apkrepository->save($file, $program->getId());
+      $apk_repository->save($file, $program->getId());
       $program->setApkStatus(Program::APK_READY);
-      $this->get('programmanager')->save($program);
+      $program_manager->save($program);
     }
 
     return JsonResponse::create(['result' => 'success']);
@@ -106,9 +109,9 @@ class BuildApkController extends Controller
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function failedApkAction(Request $request, Program $program)
+  public function failedApkAction(Request $request, Program $program,  ProgramManager $program_manager)
   {
-    $config = $this->container->getParameter('jenkins');
+    $config = $this->getParameter('jenkins');
     if ($request->query->get('token') !== $config['uploadtoken'])
     {
       throw new AccessDeniedException();
@@ -116,7 +119,7 @@ class BuildApkController extends Controller
     if ($program->getApkStatus() === Program::APK_PENDING)
     {
       $program->setApkStatus(Program::APK_NONE);
-      $this->get('programmanager')->save($program);
+      $program_manager->save($program);
 
       return JsonResponse::create(['OK']);
     }

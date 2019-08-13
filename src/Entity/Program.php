@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -373,7 +374,7 @@ class Program
   /**
    * Get id.
    *
-   * @return int
+   * @return GuidType
    */
   public function getId()
   {

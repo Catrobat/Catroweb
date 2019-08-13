@@ -4,6 +4,7 @@
 namespace App\Catrobat\Controller\Admin;
 
 use App\Catrobat\Services\TemplateService;
+use App\Entity\Template;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,8 +18,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class TemplateController extends CRUDController
 {
 
+  private $template_service;
+
+  public function __construct(TemplateService $template_service)
+  {
+    $this->template_service = $template_service;
+  }
+
   /**
-   * @return \Symfony\Component\HttpFoundation\Response
+   * @return Response
+   * @throws \ImagickException
    */
   public function createAction()
   {
@@ -44,9 +53,10 @@ class TemplateController extends CRUDController
 
 
   /**
-   * @param int|null $id
+   * @param null $id
    *
    * @return RedirectResponse|Response
+   * @throws \ImagickException
    */
   public function editAction($id = null)
   {
@@ -58,13 +68,13 @@ class TemplateController extends CRUDController
 
 
   /**
-   *
+   * @throws \ImagickException
    */
   private function saveFiles()
   {
     /**
      * @var $templateService TemplateService
-     * @var $template \App\Entity\Template
+     * @var $template Template
      */
     $template = $this->getTemplate();
     if ($template->getId() != null)
@@ -80,7 +90,7 @@ class TemplateController extends CRUDController
    */
   private function getTemplateService()
   {
-    return $this->get("template_service");
+    return $this->template_service;
   }
 
 

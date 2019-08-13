@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\StatusCode;
 use App\Entity\CommentNotification;
 use App\Entity\Program;
@@ -9,7 +10,9 @@ use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserComment;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class CommentsController
  * @package App\Catrobat\Controller\Web
  */
-class CommentsController extends Controller
+class CommentsController extends AbstractController
 {
 
   /**
@@ -101,10 +104,14 @@ class CommentsController extends Controller
   /**
    * @Route("/comment", name="comment", methods={"POST"})
    *
-   * @throws \Exception
+   * @param CatroNotificationService $notification_service
+   * @param ProgramManager $program_manager
+   *
    * @return Response
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function postCommentAction()
+  public function postCommentAction(CatroNotificationService $notification_service, ProgramManager $program_manager)
   {
     /**
      * @var $user             User
@@ -119,12 +126,9 @@ class CommentsController extends Controller
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
-    $notification_service = $this->get("catro_notification_service");
-
     $user = $this->get("security.token_storage")->getToken()->getUser();
     $id = $user->getId();
 
-    $program_manager = $this->get("programmanager");
     $program = $program_manager->find($_POST['ProgramId']);
 
     $temp_comment = new UserComment();

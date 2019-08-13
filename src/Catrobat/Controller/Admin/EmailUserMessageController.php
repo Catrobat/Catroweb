@@ -27,19 +27,18 @@ class EmailUserMessageController extends CRUDController
   }
 
   /**
+   * @param Request $request
    * @param \Swift_Mailer $mailer
-   * @param Request       $request
+   * @param UserManager $user_manager
    *
    * @return Response
    */
-  public function sendAction(\Swift_Mailer $mailer, Request $request)
+  public function sendAction(Request $request, \Swift_Mailer $mailer, UserManager $user_manager)
   {
     /**
-     * @var $userManager UserManager
      * @var $user        User
      */
-    $userManager = $this->get('usermanager');
-    $user = $userManager->findUserByUsername($request->get('username'));
+    $user = $user_manager->findUserByUsername($request->get('username'));
     if (!$user)
     {
       return new Response("User does not exist");

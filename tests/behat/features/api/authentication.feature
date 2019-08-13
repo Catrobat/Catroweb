@@ -27,8 +27,8 @@ Feature: Authenticate to the system
           {
             "statusCode": 201,
             "answer": "Registration successful!",
-            "token": "rrrrrrrrrrr",
-            "preHeaderMessages": ""
+            "preHeaderMessages": "",
+            "token": "rrrrrrrrrrr"
           }
           """
 

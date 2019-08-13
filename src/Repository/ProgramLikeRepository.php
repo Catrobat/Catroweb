@@ -3,16 +3,26 @@
 namespace App\Repository;
 
 use App\Entity\ProgramLike;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 
 /**
  * Class ProgramLikeRepository
  * @package App\Repository
  */
-class ProgramLikeRepository extends EntityRepository
+class ProgramLikeRepository extends ServiceEntityRepository
 {
+
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, ProgramLike::class);
+  }
+
   /**
    * @param int $program_id
    * @param int $type

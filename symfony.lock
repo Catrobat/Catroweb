@@ -169,9 +169,6 @@
     "emuse/behat-html-formatter": {
         "version": "0.1.x-dev"
     },
-    "facebook/graph-sdk": {
-        "version": "5.7.0"
-    },
     "firebase/php-jwt": {
         "version": "v5.0.0"
     },
@@ -376,9 +373,6 @@
     "psr/log": {
         "version": "1.1.0"
     },
-    "psr/simple-cache": {
-        "version": "1.0.1"
-    },
     "ralouphie/getallheaders": {
         "version": "2.0.5"
     },
@@ -495,6 +489,9 @@
     "symfony/cache": {
         "version": "v3.4.22"
     },
+    "symfony/cache-contracts": {
+        "version": "v1.1.5"
+    },
     "symfony/class-loader": {
         "version": "v3.4.22"
     },
@@ -534,6 +531,9 @@
     },
     "symfony/event-dispatcher": {
         "version": "v3.4.22"
+    },
+    "symfony/event-dispatcher-contracts": {
+        "version": "v1.1.5"
     },
     "symfony/expression-language": {
         "version": "v3.4.22"
@@ -599,6 +599,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mime": {
+        "version": "v4.3.4"
+    },
     "symfony/monolog-bridge": {
         "version": "v3.4.22"
     },
@@ -635,9 +638,6 @@
             "tests/.gitignore"
         ]
     },
-    "symfony/polyfill-apcu": {
-        "version": "v1.10.0"
-    },
     "symfony/polyfill-ctype": {
         "version": "v1.10.0"
     },
@@ -653,17 +653,11 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
     },
-    "symfony/polyfill-php56": {
-        "version": "v1.10.0"
-    },
-    "symfony/polyfill-php70": {
-        "version": "v1.10.0"
-    },
     "symfony/polyfill-php72": {
         "version": "v1.10.0"
     },
-    "symfony/polyfill-util": {
-        "version": "v1.10.0"
+    "symfony/polyfill-php73": {
+        "version": "v1.12.0"
     },
     "symfony/process": {
         "version": "v3.4.22"
@@ -710,6 +704,9 @@
     "symfony/serializer": {
         "version": "v3.4.22"
     },
+    "symfony/service-contracts": {
+        "version": "v1.1.6"
+    },
     "symfony/stopwatch": {
         "version": "v3.4.22"
     },
@@ -743,6 +740,9 @@
             "translations/.gitignore"
         ]
     },
+    "symfony/translation-contracts": {
+        "version": "v1.1.6"
+    },
     "symfony/twig-bridge": {
         "version": "v3.4.22"
     },
@@ -765,6 +765,9 @@
     },
     "symfony/var-dumper": {
         "version": "v3.4.22"
+    },
+    "symfony/var-exporter": {
+        "version": "v4.3.4"
     },
     "symfony/web-profiler-bundle": {
         "version": "3.3",

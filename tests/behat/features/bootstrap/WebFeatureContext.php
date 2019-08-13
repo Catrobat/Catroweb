@@ -2,6 +2,7 @@
 
 use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\AchievementNotification;
 use App\Entity\CatroNotification;
 use App\Entity\ClickStatistic;
@@ -83,6 +84,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
     $this->use_real_oauth_javascript_code = false;
     $this->setOauthServiceParameter('0');
+    setlocale (LC_ALL, 'en');
   }
 
   /**
@@ -94,6 +96,26 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function setKernel(KernelInterface $kernel)
   {
     $this->kernel = $kernel;
+  }
+
+
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
   }
 
   /**
@@ -641,7 +663,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
      * @var $user         User
      * @var $em           EntityManager
      */
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
     $users = $table->getHash();
     $user = null;
     $count = count($users);
@@ -679,7 +701,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
      * @var $user_manager UserManager
      * @var $user         User
      */
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
     $users = $table->getHash();
     $user = null;
     $count = count($users);
@@ -857,12 +879,11 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
       if ($program->getApkStatus() == Program::APK_READY)
       {
-        $apkrepository = $this->kernel->getContainer()->get('apkrepository');
+        $apkrepository = $this->kernel->getContainer()->get(ApkRepository::class);
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
         copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
         $apkrepository->save(new File($temppath), $i);
-
-        $file_repo = $this->kernel->getContainer()->get('filerepository');
+        $file_repo = $this->kernel->getContainer()->get(ProgramFileRepository::class);
         $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
       }
     }
@@ -882,7 +903,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
      * @var $entity_manager          EntityManager
      */
     $entity_manager = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $program_manager = $this->kernel->getContainer()->get('programmanager');
+    $program_manager = $this->kernel->getContainer()->get(ProgramManager::class);
     $comments = $table->getHash();
 
     foreach ($comments as $comment)
@@ -919,8 +940,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
     foreach ($likes as $like)
     {
-      $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $like['username']]);
-      $program = $this->kernel->getContainer()->get('programrepository')->find($like['program_id']);
+      $user = $this->kernel->getContainer()->get(UserManager::class)->findOneBy(['username' => $like['username']]);
+      $program = $this->kernel->getContainer()->get(App\Repository\ProgramRepository::class)->find($like['program_id']);
 
       $program_like = new ProgramLike($program, $user, $like['type']);
       $program_like->setCreatedAt(new DateTime($like['created at'], new DateTimeZone('UTC')));
@@ -1130,7 +1151,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForTheServerResponse()
   {
-    $this->getSession()->wait(5000);
+    $this->getSession()->wait(200);
   }
 
   /**
@@ -1425,7 +1446,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     /**
      * @var ProgramManager
      */
-    $program_manager = $this->kernel->getContainer()->get('programmanager');
+    $program_manager = $this->kernel->getContainer()->get(ProgramManager::class);
     $programs = $program_manager->findAll();
 
     Assert::assertEquals($arg1, count($programs));
@@ -1546,10 +1567,9 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     /**
      * @var $em        EntityManager
-     * @var $file_repo MediaPackageFileRepository
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $file_repo = $this->kernel->getContainer()->get('mediapackagefilerepository');
+    $file_repo = $this->kernel->getContainer()->get(MediaPackageFileRepository::class);
     $files = $table->getHash();
     foreach ($files as $file)
     {
@@ -1594,7 +1614,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     for ($i = 0; $i < $count; ++$i)
     {
       /** @var Program $program */
-      $program = $this->kernel->getContainer()->get('programmanager')->find($program_stats[$i]['program_id']);
+      $program = $this->kernel->getContainer()->get(ProgramManager::class)->find($program_stats[$i]['program_id']);
       @$config = [
         'downloaded_at' => $program_stats[$i]['downloaded_at'],
         'ip'            => $program_stats[$i]['ip'],
@@ -1616,7 +1636,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
       if (isset($config['username']))
       {
-        $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $config['username']]);
+        $user = $this->kernel->getContainer()->get(UserManager::class)->findOneBy(['username' => $config['username']]);
         $program_statistics->setUser($user);
       }
 
@@ -1717,15 +1737,12 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
       if ($program->getApkStatus() == Program::APK_READY)
       {
-        /**
-         * @var $apkrepository ApkRepository
-         */
-        $apkrepository = $this->kernel->getContainer()->get('apkrepository');
+        $apkrepository = $this->kernel->getContainer()->get(ApkRepository::class);
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
         copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
         $apkrepository->save(new File($temppath), $i);
 
-        $file_repo = $this->kernel->getContainer()->get('filerepository');
+        $file_repo = $this->kernel->getContainer()->get(ProgramFileRepository::class);
         $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
       }
 
@@ -1966,7 +1983,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
      * @var ProgramManager $program_manager
      * @var Program        $program
      */
-    $program_manager = $this->kernel->getContainer()->get('programmanager');
+    $program_manager = $this->kernel->getContainer()->get(ProgramManager::class);
     $program = $program_manager->findOneByName($arg1);
     if ($program === null)
     {
@@ -2123,7 +2140,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
      * @var $user_manager UserManager
      * @var $user         User
      */
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
     $users = $table->getHash();
     $user = null;
     $count = count($users);
@@ -2426,7 +2443,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
       if ($featured[$i]['program'] != "")
       {
-        $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($featured[$i]['program']);
+        $program = $this->kernel->getContainer()->get(ProgramManager::class)->findOneByName($featured[$i]['program']);
         $featured_entry->setProgram($program);
       }
       else
@@ -2461,7 +2478,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       if (strpos($url, "http://") !== 0)
       {
         /** @var Program $program */
-        $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($url);
+        $program = $this->kernel->getContainer()->get(ProgramManager::class)->findOneByName($url);
         Assert::assertNotNull($program);
         Assert::assertNotNull($program->getId());
         $url = $this->kernel->getContainer()->get('router')
@@ -3153,7 +3170,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function userIsFollowed($user_id, $follow_ids)
   {
-    $usermanager = $this->kernel->getContainer()->get('usermanager');
+    $usermanager = $this->kernel->getContainer()->get(UserManager::class);
     /**
      * @var $usermanager UserManager
      * @var $user        User

@@ -72,7 +72,7 @@ Feature: Login with an existing account or register a new one
     When I POST these parameters to "/app/api/login/Login.json"
     Then I should get the json object:
       """
-      {"statusCode":764, "answer":"This username does not exist.","preHeaderMessages":""}
+      {"statusCode":803,"answer":"This username does not exist.","preHeaderMessages":""}
       """
 
   Scenario: Log in user wrong password
