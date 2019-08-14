@@ -57,9 +57,6 @@
     "dmore/chrome-mink-driver": {
         "version": "2.6.4"
     },
-    "docopt/docopt": {
-        "version": "1.0.2"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

@@ -1662,6 +1662,14 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
+   * @Given I have a program
+   */
+  public function iHaveAProgram()
+  {
+    $this->generateProgramFileWith([]);
+  }
+
+  /**
    * @Given /^I have a program with "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
    * @param $key1
    * @param $value1
@@ -2462,6 +2470,32 @@ class ApiFeatureContext extends BaseContext
       }
     }
   }
+
+  /**
+   * @Then the embroidery program should have the :extension extension
+   */
+  public function theEmbroideryProgramShouldHaveTheExtension($extension)
+  {
+    $program_extensions = $this->getProgramManger()->findOneByName('EmbroideryProject')->getExtensions();
+    foreach ($program_extensions as $program_extension)
+    {
+      /** @var $program_extension Extension */
+      Assert::assertContains($program_extension->getName(), $extension, 'The Extension was not found!');
+    }
+  }
+
+  /**
+   * @Then the project should have no extension
+   */
+  public function theProjectShouldHaveNoExtension()
+  {
+    /** @var Program $program */
+    $program = $this->getProgramManger()->findAll()[0];
+    Assert::assertEmpty($program->getExtensions());
+  }
+
+
+
 
   /**
    * @When /^I search similar programs for program id "([^"]*)"$/
