@@ -215,6 +215,7 @@ Feature:
   Scenario: max. 5MB for avatar image
     When I click "#avatar-upload"
     And I attach the avatar "galaxy_big.png" to "file"
+    And I wait 500 milliseconds
     Then I should see "Your chosen picture is too large, please do not use images larger than 5mb."
 
   Scenario: deleting a program should work

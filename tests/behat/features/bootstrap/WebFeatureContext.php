@@ -1179,6 +1179,50 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
   }
 
+
+  /**
+   * @Then /^the project img tag should( [^"]*)? have the "([^"]*)" data url$/
+   * @param $not
+   * @param $name
+   */
+  public function theProjectImgTagShouldHaveTheDataUrl($not, $name)
+  {
+    $name = trim($name);
+    $not = trim($not);
+
+    $pre_source = $this->getSession()->getPage()->find('css', '#project-thumbnail-big');
+    $source = 0;
+    if (!is_null($pre_source))
+    {
+      $source = $pre_source->getAttribute('src');
+    }
+    else
+    {
+      Assert::assertTrue(false, "Couldn't find avatar in project-thumbnail-big");
+    }
+    $source = trim($source, '"');
+
+    switch ($name)
+    {
+      case 'logo.png':
+        throw new Exception($source);
+        $logoUrl = 'data:image/png;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'logo.png'));
+        $isSame = ($source === $logoUrl);
+        $not == 'not' ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
+        break;
+
+      case 'fail.tif':
+        $failUrl = 'data:image/tiff;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'fail.tif'));
+        $isSame = ($source === $failUrl);
+        $not == 'not' ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
+        break;
+
+      default:
+        Assert::assertTrue(false);
+    }
+  }
+
+
   /**
    * @Given /^the element "([^"]*)" should be visible$/
    * @param $element

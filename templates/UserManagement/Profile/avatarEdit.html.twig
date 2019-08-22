@@ -1,25 +1,33 @@
-<div class="d-none error-message text-avatar-toolarge alert alert-danger">
+<div class="d-none error-message text-img-upload-too-large alert alert-danger">
   {{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}
 </div>
-<div class="d-none error-message text-avatar-uploadError alert alert-danger">
+<div class="d-none error-message text-img-upload-error alert alert-danger">
   {{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}
 </div>
-<div class="d-none error-message text-avatar-noImage alert alert-danger">
-  {{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}
-</div>
-<div class="d-none error-message text-avatar-noSupport alert alert-danger">
+<div class="d-none error-message text-mime-type-not-supported alert alert-danger">
   {{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}
+</div>
+<div class="d-none error-message text-img-upload-success alert alert-success">
+  {{ 'success.imgUpload'|trans({}, 'catroweb') }}
 </div>
 
 <img alt="avatar" id="avatar-img"
      src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
 
-{% if not app.user.limited %}
-  <div id="avatar-upload">
-    <div>
-      <input type="file" name="file">
-      <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
-      <div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
-    </div>
+<div id="avatar-upload" class="upload-image">
+  <div>
+    <input type="file" name="file">
+    <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
+    <div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
   </div>
-{% endif %}
+</div>
+
+<script src="{{ asset('compiled/js/ImageUpload.js') }}"></script>
+<script>
+  setImageUploadListener('{{ path('profile_upload_avatar') }}',
+    '#avatar-upload', '#avatar-img',
+      {{ constant('App\\Catrobat\\StatusCode::OK') }},
+      {{ constant('App\\Catrobat\\StatusCode::UPLOAD_EXCEEDING_FILESIZE') }},
+      {{ constant('App\\Catrobat\\StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE') }}
+  )
+</script>
