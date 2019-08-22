@@ -64,12 +64,12 @@ class ParsedObjectTest extends \PHPUnit\Framework\TestCase
    */
   public function getSoundsMustReturnArrayOfParsedObjectAsset()
   {
-//        $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset';
+    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset';
 
     $this->assertTrue($this->object->getSounds() === []);
 
-//        foreach($this->object->getSounds() as $actual)
-//            $this->assertInstanceOf($expected, $actual);
+    foreach($this->object->getSounds() as $actual)
+        $this->assertInstanceOf($expected, $actual);
   }
 
   /**

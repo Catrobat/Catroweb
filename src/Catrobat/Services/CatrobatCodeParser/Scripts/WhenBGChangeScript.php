@@ -25,14 +25,14 @@ class WhenBGChangeScript extends Script
 
     if (count($this->script_xml_properties->look) != 0)
     {
-      if ($this->script_xml_properties->look[Constants::REFERENCE_ATTRIBUTE] != null)
+      if ($this->script_xml_properties->look[Constants::REFERENCE_ATTRIBUTE] !== null)
       {
         $this->look_file_name = $this->script_xml_properties->look
-          ->xpath($this->script_xml_properties->look[Constants::REFERENCE_ATTRIBUTE])[0]->fileName;
+          ->xpath($this->script_xml_properties->look[Constants::REFERENCE_ATTRIBUTE])[0]['fileName'];
       }
       else
       {
-        $this->look_file_name = $this->script_xml_properties->look->fileName;
+        $this->look_file_name = $this->script_xml_properties->look['fileName'];
       }
     }
 
