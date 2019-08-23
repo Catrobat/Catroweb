@@ -16,6 +16,8 @@ use Symfony\Component\Filesystem\Filesystem;;
  */
 class ResetCommand extends ContainerAwareCommand
 {
+  const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 20;
+
   /**
    *
    */
@@ -24,7 +26,9 @@ class ResetCommand extends ContainerAwareCommand
     $this->setName('catrobat:reset')
       ->setDescription('Resets everything to base values')
       ->addOption('hard')
-      ->addOption('more')
+      ->addOption('more', null, InputOption::VALUE_REQUIRED,
+        'Downloads the given amount of projets',
+        self::DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT)
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
         ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT);
@@ -72,7 +76,7 @@ class ResetCommand extends ContainerAwareCommand
       'Delete templates', $output);
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.screenshot.dir'),
       'Delete templates-screenshots', $output);
-    
+
     CommandHelper::executeShellCommand('php bin/console sonata:admin:setup-acl', [],
       'Set up Sonata admin ACL', $output);
     CommandHelper::executeShellCommand('php bin/console sonata:admin:generate-object-acl', [],
@@ -97,18 +101,13 @@ class ResetCommand extends ContainerAwareCommand
     $filesystem = new Filesystem();
     $filesystem->remove($temp_dir);
     $filesystem->mkdir($temp_dir);
-    if ($input->getOption('more'))
-    {
-      $this->downloadMorePrograms($temp_dir, $output);
-    }
-    else
-    {
-      $this->downloadPrograms($temp_dir, $output);
-    }
+
+    $this->downloadPrograms($temp_dir,intval($input->getOption('more')), $output);
+
     $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
     CommandHelper::executeShellCommand(
       "php bin/console catrobat:import $temp_dir catroweb $remix_layout_option",
-      [], 'Importing Projects', $output);
+      ['timeout' => 900], 'Importing Projects', $output);
     CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), [
       'directory'      => $temp_dir,
       'user'           => 'catroweb',
@@ -125,48 +124,34 @@ class ResetCommand extends ContainerAwareCommand
 
   /**
    * @param                 $dir
+   * @param                 $amount int The amount of programs to be downloaded
    * @param OutputInterface $output
    */
-  private function downloadPrograms($dir, OutputInterface $output)
+  private function downloadPrograms($dir, $amount, OutputInterface $output)
   {
-    $server_json = json_decode(file_get_contents(
-      'https://share.catrob.at/pocketcode/api/projects/recent.json'), true); // ToDo change when 112, 51 is deployed to share 'https://share.catrob.at/app/api/projects/recent.json'
-    $base_url = $server_json['CatrobatInformation']['BaseUrl'];
-    foreach ($server_json['CatrobatProjects'] as $program)
-    {
-      $url = $base_url . $program['DownloadUrl'];
-      $name = $dir . $program['ProjectId'] . '.catrobat';
-      $output->writeln('Saving <' . $url . '> to <' . $name . '>');
-      try
-      {
-        file_put_contents($name, file_get_contents($url));
-      } catch (\Exception $e)
-      {
-        $output->writeln("File <" . $url . "> returned error 500, continuing...");
-        continue;
-      }
-    }
-  }
+    $already_downloaded = 0;
 
-  /**
-   * @param                 $dir
-   * @param OutputInterface $output
-   */
-  private function downloadMorePrograms($dir, OutputInterface $output)
-  {
-    for ($i = 0; $i < 10; $i++)
+    $output->writeln('Downloading ' . $amount . ' Projects...');
+
+    while ($already_downloaded < $amount)
     {
       $server_json = json_decode(file_get_contents(
         'https://share.catrob.at/pocketcode/api/projects/randomPrograms.json'), true); // ToDo change when 112, 51 is deployed to share 'https://share.catrob.at/app/api/projects/randomProjects.json'
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
       foreach ($server_json['CatrobatProjects'] as $program)
       {
+        if ($already_downloaded === $amount)
+        {
+          break;
+        }
+
         $url = $base_url . $program['DownloadUrl'];
         $name = $dir . $program['ProjectId'] . '.catrobat';
         $output->writeln('Saving <' . $url . '> to <' . $name . '>');
         try
         {
           file_put_contents($name, file_get_contents($url));
+          $already_downloaded ++;
         } catch (\Exception $e)
         {
           $output->writeln("File <" . $url . "> returned error 500, continuing...");
