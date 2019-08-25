@@ -54,7 +54,7 @@
     </li>
 
     {# logout #}
-    {% if app.user %}
+    {% if app.user and app.session and not app.session.get('webview-auth') %}
       <li class="nav-item">
         <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
           <i class="fas fa-sign-out-alt mr-1"></i>
