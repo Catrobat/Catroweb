@@ -91,3 +91,15 @@ Feature: Upload a program
     And I upload a catrobat program
     When I upload another program using token "aabbccddee"
     Then It should be uploaded
+
+  Scenario: Program Sanitizer should remove unnecessary files
+    Given I am "Catrobat"
+    And I try to upload a program with unnecessary files
+    Then It should be uploaded
+    And the resources should not contain the unnecessary files
+
+  Scenario: Program Sanitizer should remove unnecessary files even when scenes are used
+    Given I am "Catrobat"
+    And I try to upload a program with scenes and unnecessary files
+    Then It should be uploaded
+    And the resources should not contain the unnecessary files

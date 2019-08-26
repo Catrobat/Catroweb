@@ -201,9 +201,26 @@ class ApproveProgramsAdmin extends AbstractAdmin
         ->loadProgramExtractedFile($progManager->find($object->getId()));
     }
 
-    return $this->extractedProgram->getContainingImagePaths();
+    $image_paths = $this->extractedProgram->getContainingImagePaths();
+
+    return $this->encodeFileNameOfPathsArray($image_paths);
   }
 
+  /**
+   * @param $paths
+   *
+   * @return array
+   */
+  private function encodeFileNameOfPathsArray($paths) {
+    $encoded_paths = [];
+    foreach ($paths as $path) {
+      $pieces = explode("/",$path);
+      $filename = array_pop($pieces);
+      array_push($pieces, rawurlencode($filename));
+      array_push($encoded_paths, implode('/', $pieces));
+    }
+    return $encoded_paths;
+  }
 
   /**
    * @param $object
@@ -228,7 +245,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
         ->loadProgramExtractedFile($progManager->find($object->getId()));
     }
 
-    return $this->extractedProgram->getContainingSoundPaths();
+    return $this->encodeFileNameOfPathsArray($this->extractedProgram->getContainingSoundPaths());
   }
 
 

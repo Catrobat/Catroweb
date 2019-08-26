@@ -152,6 +152,19 @@ class ExtractedCatrobatFile
     return $file_paths;
   }
 
+
+  /**
+   * @param $filename
+   *
+   * @return bool
+   */
+  public function isFileMentionedInXml($filename)
+  {
+    $xml = file_get_contents($this->path . 'code.xml');
+    return strpos($xml, $filename) !== false;
+  }
+
+
   /**
    * @return array
    */
