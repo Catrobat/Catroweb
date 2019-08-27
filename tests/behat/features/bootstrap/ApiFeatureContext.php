@@ -2476,7 +2476,7 @@ class ApiFeatureContext extends BaseContext
    */
   public function theEmbroideryProgramShouldHaveTheExtension($extension)
   {
-    $program_extensions = $this->getProgramManger()->findOneByName('EmbroideryProject')->getExtensions();
+    $program_extensions = $this->getProgramManger()->findOneByName('ZigZag Stich')->getExtensions();
     foreach ($program_extensions as $program_extension)
     {
       /** @var $program_extension Extension */
