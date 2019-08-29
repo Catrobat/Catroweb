@@ -452,6 +452,11 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $this->assertSession()->elementExists('css', '.program');
         break;
 
+      case 'scratchRemixes':
+        $this->assertSession()->elementExists('css', '#scratchRemixes');
+        $this->assertSession()->elementExists('css', '.program');
+        break;
+
       case 'random':
         $this->assertSession()->elementExists('css', '#random');
         $this->assertSession()->elementExists('css', '.program');
@@ -924,6 +929,27 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $entity_manager->persist($new_comment);
     }
     $entity_manager->flush();
+  }
+
+  /**
+   * @Given /^there are Scratch remix relations:$/
+   * @param TableNode $table
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
+   */
+  public function thereAreScratchRemixRelations(TableNode $table)
+  {
+    $scratch_relations = $table->getHash();
+
+    foreach ($scratch_relations as $scratch_relation)
+    {
+      @$config = [
+        'scratch_parent_id' => $scratch_relation['scratch_parent_id'],
+        'catrobat_child_id' => $scratch_relation['catrobat_child_id'],
+      ];
+      $this->symfony_support->insertScratchRemixRelation($config);
+    }
   }
 
   /**

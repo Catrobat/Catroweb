@@ -684,6 +684,20 @@ class ProgramManager
    * @param string|null $flavor
    * @param int|null    $limit
    * @param int         $offset
+   *
+   * @return Program[]
+   */
+  public function getScratchRemixesPrograms($flavor, $limit = null, $offset = 0)
+  {
+    return $this->program_repository->getScratchRemixesPrograms(
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
+    );
+  }
+
+  /**
+   * @param string|null $flavor
+   * @param int|null    $limit
+   * @param int         $offset
    * @param string      $max_version
    *
    * @return mixed

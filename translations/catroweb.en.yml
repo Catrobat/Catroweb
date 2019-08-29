@@ -80,6 +80,7 @@ programs:
   featured: Featured
   newest: Newest projects
   recommended: Recommended projects
+  scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?

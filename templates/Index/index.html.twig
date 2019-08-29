@@ -74,6 +74,11 @@
       <div class="programs"></div>
     </div>
 
+    <div id="scratchRemixes" style="display:none">
+      <h1>{{ "programs.scratchremixes"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
+
     <div id="random" style="display:none">
       <h1>{{ "programs.random"|trans({}, "catroweb") }}</h1>
       <div class="programs"></div>
@@ -99,12 +104,14 @@
     let recommended = new ProjectLoader('#recommended', '{{ path('api_recsys_general_projects') }}', undefined, recommendedByPageId)
     let mostDownloaded = new ProjectLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
     let mostViewed = new ProjectLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
+    let scratchRemixes = new ProjectLoader('#scratchRemixes', '{{ path('api_scratch_remix') }}')
     let random = new ProjectLoader('#random', '{{ path('api_random_programs') }}')
 
     newest.init()
     recommended.init()
     mostDownloaded.init()
     mostViewed.init()
+    scratchRemixes.init()
     random.init()
 
     {% endif %}
@@ -118,7 +125,7 @@
       if (!isRecommendedProgram)
       {
         url = "{{ path('homepage_click_stats') }}"
-        if (['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random'].indexOf(type) === -1)
+        if (['featured', 'newest', 'mostDownloaded', 'mostViewed','scratchRemixes', 'random'].indexOf(type) === -1)
         {
           alert('You clicked at a program of an unknown section!')
           return

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Program;
+use App\Entity\ScratchProgramRemixRelation;
 use Doctrine\DBAL\DBALException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -67,6 +68,35 @@ class ProgramRepository extends ServiceEntityRepository
 
     return $query_builder->getQuery()->getResult();
   }
+
+  /**
+   * @param bool        $debug_build If debug builds should be included
+   * @param string|null $flavor
+   * @param int|null    $limit
+   * @param int         $offset
+   *
+   * @return Program[]
+   */
+  public function getScratchRemixesPrograms(bool $debug_build, $flavor = null, $limit = 20, $offset = 0)
+  {
+    $qb = $this->createQueryBuilder('e');
+
+    $qb
+      ->select('e')
+      ->where($qb->expr()->eq('e.visible',$qb->expr()->literal(true)))
+      ->andWhere($qb->expr()->eq('e.private',$qb->expr()->literal(false)))
+      ->innerJoin(ScratchProgramRemixRelation::class,'rp')
+      ->where($qb->expr()->eq('e.id','rp.catrobat_child'))
+      ->orderBy('e.views', 'DESC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit);
+
+    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $qb = $this->addFlavorCondition($qb, $flavor);
+
+    return $qb->getQuery()->getResult();
+  }
+
 
   /**
    * @param bool        $debug_build If debug builds should be included
