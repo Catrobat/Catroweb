@@ -522,17 +522,17 @@ let ProjectLoader = function(container, url, recommended_by_project_id, recommen
   
   async function addMyProfileProgramButtons(html_project, project) {
     $(html_project).prepend('<div id="delete-' + project.ProjectId + '" class="img-delete" ' +
-      'onclick="profile.deleteProgram(' + project.ProjectId + ')">' +
+      'onclick="profile.deleteProgram(\'' + project.ProjectId + '\')">' +
       '<i class="fas fa-times-circle catro-icon-button"></i></div>')
     
     $(html_project).prepend('<div id="visibility-lock-open-' + project.ProjectId + '" class="img-lock-open" ' +
       (project.Private ? 'style="display: none;"' : '') +
-      ' onclick="profile.toggleVisibility(' + project.ProjectId + ')">' +
+      ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
       '<i class="fas fa-lock-open catro-icon-button"></i></div>')
     
     $(html_project).prepend('<div id="visibility-lock-' + project.ProjectId + '" class="img-lock" ' +
       (project.Private ? '' : 'style="display: none;"') +
-      ' onclick="profile.toggleVisibility(' + project.ProjectId + ')">' +
+      ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
       '<i class="fas fa-lock catro-icon-button"></i></div>')
   }
   

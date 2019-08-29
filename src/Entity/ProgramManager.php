@@ -14,6 +14,7 @@ use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Repository\ExtensionRepository;
 use Doctrine\DBAL\Types\GuidType;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
@@ -77,7 +78,6 @@ class ProgramManager
    */
   protected $program_like_repository;
 
-
   /**
    * @var LoggerInterface
    */
@@ -89,25 +89,32 @@ class ProgramManager
   protected $app_request;
 
   /**
+   * @var ExtensionRepository
+   */
+  protected $extension_repository;
+
+  /**
    * ProgramManager constructor.
    *
-   * @param CatrobatFileExtractor    $file_extractor
-   * @param ProgramFileRepository    $file_repository
-   * @param ScreenshotRepository     $screenshot_repository
-   * @param EntityManager            $entity_manager
-   * @param ProgramRepository        $program_repository
-   * @param TagRepository            $tag_repository
-   * @param ProgramLikeRepository    $program_like_repository
+   * @param CatrobatFileExtractor $file_extractor
+   * @param ProgramFileRepository $file_repository
+   * @param ScreenshotRepository $screenshot_repository
+   * @param EntityManager $entity_manager
+   * @param ProgramRepository $program_repository
+   * @param TagRepository $tag_repository
+   * @param ProgramLikeRepository $program_like_repository
    * @param EventDispatcherInterface $event_dispatcher
-   * @param LoggerInterface          $logger
-   * @param AppRequest               $app_request
+   * @param LoggerInterface $logger
+   * @param AppRequest $app_request
+   * @param ExtensionRepository $extension_repository
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
                               EventDispatcherInterface $event_dispatcher,
-                              LoggerInterface $logger, AppRequest $app_request)
+                              LoggerInterface $logger, AppRequest $app_request,
+                              ExtensionRepository $extension_repository)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -119,6 +126,7 @@ class ProgramManager
     $this->program_like_repository = $program_like_repository;
     $this->logger = $logger;
     $this->app_request = $app_request;
+    $this->extension_repository = $extension_repository;
   }
 
 
@@ -200,6 +208,8 @@ class ProgramManager
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
+
+    $this->addExtensions($program, $extracted_file);
 
     $this->event_dispatcher->dispatch(
       'catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program)
@@ -371,12 +381,6 @@ class ProgramManager
 
     $tags = $extracted_file->getTags();
 
-    // Adding the embroidery tag if an embroidery block was used in the project
-    if ($extracted_file !== null && $extracted_file->getProgramXmlProperties() !== null &&
-      strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">') !== false) {
-      array_unshift($tags, "Embroidery");
-    }
-
     if (!empty($tags))
     {
       $i = 0;
@@ -396,6 +400,32 @@ class ProgramManager
         }
       }
     }
+  }
+
+
+  /**
+   * @param Program $program
+   * @param ExtractedCatrobatFile $extracted_file
+   *
+   * @throws ORMException
+   */
+  public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file)
+  {
+//     Adding the embroidery extension if an embroidery block was used in the project
+    $EMBROIDERY = "Embroidery";
+    if ($extracted_file !== null && $extracted_file->getProgramXmlProperties() !== null &&
+      strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">') !== false) {
+      /** @var Extension $embroidery_extension */
+      $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
+      if ($embroidery_extension === null) {
+        $embroidery_extension = new Extension();
+        $embroidery_extension->setName($EMBROIDERY);
+        $embroidery_extension->setPrefix(strtoupper($EMBROIDERY));
+        $this->entity_manager->persist($embroidery_extension);
+      }
+      $program->addExtension($embroidery_extension);
+    }
+
   }
 
   /**
