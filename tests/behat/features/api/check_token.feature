@@ -43,7 +43,7 @@ Feature: Checking a user's token validity
     When I POST these parameters to "/app/api/checkToken/check.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"There is no user with name \"doesnotexist\".", "preHeaderMessages":""}
+      {"statusCode":601,"answer":"This username does not exist.", "preHeaderMessages":""}
       """
     And the response code should be "401"
     

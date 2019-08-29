@@ -620,6 +620,11 @@ errors:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: Authentication failed
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
 
 success:
   text: Success

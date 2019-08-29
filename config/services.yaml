@@ -79,6 +79,11 @@ services:
     public: true
   App\Catrobat\Security\ApiKeyAuthenticator: "@apikey_authenticator"
 
+  webview_authenticator:
+    class: App\Catrobat\Security\WebviewAuthenticator
+    public: true
+  App\Catrobat\Security\WebviewAuthenticator: "@webview_authenticator"
+
   user_authenticator:
     class: App\Catrobat\Security\UserAuthenticator
     arguments:

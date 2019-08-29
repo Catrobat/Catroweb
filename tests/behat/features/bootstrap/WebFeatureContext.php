@@ -182,7 +182,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @param $theme String
    */
   // @formatter:on
-  public function iUseTheUserAgentParameterized($lang_version, $flavor, $app_version, $build_type, $theme="pocketcode")
+  public function iUseTheUserAgentParameterized($lang_version, $flavor, $app_version, $build_type, $theme = "pocketcode")
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = "Android";
@@ -209,7 +209,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = "iPhone";
-    $user_agent =  " Platform/" . $platform;
+    $user_agent = " Platform/" . $platform;
     $this->getSession()->setRequestHeader("User-Agent", $user_agent);
   }
 
@@ -231,7 +231,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function theLogosSrcShouldBe($logo_src)
   {
-    $image = $this->getSession()->getPage()->findAll('css','#logo');
+    $image = $this->getSession()->getPage()->findAll('css', '#logo');
     $img_url = $image[0]->getAttribute('src');
     Assert::assertNotFalse(strpos($img_url, $logo_src));
   }
@@ -243,7 +243,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function theLogosSrcShouldNotBe($logo_src)
   {
-    $image = $this->getSession()->getPage()->findAll('css','#logo');
+    $image = $this->getSession()->getPage()->findAll('css', '#logo');
     $img_url = $image[0]->getAttribute('src');
     Assert::assertFalse(strpos($img_url, $logo_src));
   }
@@ -256,6 +256,20 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iWaitMilliseconds($milliseconds)
   {
     $this->getSession()->wait($milliseconds);
+  }
+
+  /**
+   * @Given /^I set the cookie "([^"]+)" to "([^"]*)"$/
+   * @param string $cookie_name
+   * @param string $cookie_value
+   */
+  public function iSetTheCookie($cookie_name, $cookie_value)
+  {
+    if ($cookie_value === "NULL")
+    {
+      $cookie_value = null;
+    }
+    $this->getSession()->setCookie($cookie_name, $cookie_value);
   }
 
   /**
@@ -639,11 +653,15 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $user->setAdditionalEmail('');
       $user->setPlainPassword($users[$i]['password']);
       $user->setEnabled(true);
-      $user->setUploadToken($users[$i]['token']);
+      if ($users[$i]['token'])
+      {
+        $user->setUploadToken($users[$i]['token']);
+      }
       $user->setCountry('at');
       $user_manager->updateUser($user, true);
 
-      if (array_key_exists('id', $users[$i])) {
+      if (array_key_exists('id', $users[$i]))
+      {
         $user->setId($users[$i]['id']);
         $em = $this->kernel->getContainer()->get('doctrine')->getManager();
         $em->flush();
@@ -806,7 +824,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $em->persist($program);
 
       // overwrite id if desired
-      if (array_key_exists('id', $programs[$i])) {
+      if (array_key_exists('id', $programs[$i]))
+      {
         $program->setId($programs[$i]['id']);
         $em->persist($program);
         $em->flush();
@@ -1617,7 +1636,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $em->persist($program);
 
       // overwrite id if desired
-      if (array_key_exists('id', $programs[$i])) {
+      if (array_key_exists('id', $programs[$i]))
+      {
         $program->setId($programs[$i]['id']);
         $em->persist($program);
         $em->flush();
@@ -3025,7 +3045,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $em->persist($program);
 
         // overwrite id if desired
-        if (array_key_exists('id', $programs[$i])) {
+        if (array_key_exists('id', $programs[$i]))
+        {
           $program->setId($programs[$i]['id']);
           $em->persist($program);
           $em->flush();

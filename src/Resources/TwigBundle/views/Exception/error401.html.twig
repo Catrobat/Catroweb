@@ -1,0 +1,10 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block body %}
+  <div id="error">
+    <h1>{{ "errors.authentication.title" | trans({}, "catroweb") }}</h1>
+    <i class="fas fa-exclamation-triangle fa-7x"></i>
+    <p>{{ exception.message | nl2br }}</p>
+  </div>
+
+{% endblock %}

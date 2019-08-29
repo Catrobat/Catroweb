@@ -38,7 +38,7 @@ Feature: Upload a program
     When I POST these parameters to "/app/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"There is no user with name \"INVALID\".","preHeaderMessages":""}
+      {"statusCode":601,"answer":"This username does not exist.","preHeaderMessages":""}
       """
 
   Scenario: trying to upload with an invalid token should result in an error
