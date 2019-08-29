@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Utils\ImageUtils;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatroNotificationService;
@@ -26,6 +27,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
+use ImagickException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -681,7 +683,6 @@ class ProgramController extends Controller
     return $program_comments;
   }
 
-
   /**
    * @param $user    User
    * @param $program Program
@@ -724,5 +725,49 @@ class ProgramController extends Controller
     }
 
     return $isReportedByUser;
+  }
+
+  /**
+   * @Route("/project/{id}/uploadThumbnail", name="upload_project_thumbnail", methods={"POST"})
+   *
+   * @param Request $request
+   * @param ProgramManager $project_manager
+   * @param ScreenshotRepository $screenshot_repository
+   * @param $id
+   *
+   * @return JsonResponse|RedirectResponse
+   * @throws ImagickException
+   */
+  public function uploadAvatarAction(Request $request, ProgramManager $project_manager,
+                                     ScreenshotRepository $screenshot_repository, $id)
+  {
+    /**
+     * @var $user User
+     * @var $project Program
+     */
+    $user = $this->getUser();
+    $project = $project_manager->find($id);
+
+    if (!$user || $project->getUser() !== $user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $image = $request->request->get('image');
+
+    try
+    {
+      $image = ImageUtils::checkAndResizeBase64Image($image, null);
+    } catch (Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+    }
+
+    $screenshot_repository->updateProgramAssets($image, $id);
+
+    return JsonResponse::create([
+      'statusCode' => StatusCode::OK,
+      'image_base64' => null,
+    ]);
   }
 }

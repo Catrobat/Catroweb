@@ -15,9 +15,6 @@ let MyProfile = function (profile_url, save_username,
                           statusCode_USER_PASSWORD_TOO_LONG,
                           statusCode_USER_PASSWORD_NOT_EQUAL_PASSWORD2,
                           statusCode_PASSWORD_INVALID,
-                          statusCode_UPLOAD_EXCEEDING_FILESIZE,
-                          statusCode_UPLOAD_UNSUPPORTED_MIME_TYPE,
-                          MAX_UPLOAD_SIZE,
                           successText, checkMailText, passwordUpdatedText,
                           programCanNotChangeVisibilityTitle,
                           programCanNotChangeVisibilityText) {
@@ -35,10 +32,6 @@ let MyProfile = function (profile_url, save_username,
   self.regex_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   self.data_changed = false
   self.delete_account_url = delete_account_url
-  
-  self.init = function () {
-    self.setAvatarUploadListener()
-  }
   
   let passwordEditContainer = $('#password-edit-container')
   let usernameEditContainer = $('#username-edit-container')
@@ -371,56 +364,4 @@ let MyProfile = function (profile_url, save_username,
       $('#save-password').show()
     })
   })
-  
-  self.setAvatarUploadListener = function () {
-    $('#avatar-upload').find('input[type=file]').change(function (data) {
-      $('.error-message').addClass('d-none')
-      
-      let file = data.target.files[0]
-      if (file.size > MAX_UPLOAD_SIZE)
-      {
-        $('.text-avatar-toolarge').removeClass('d-none')
-        return
-      }
-      
-      let avatarUpload = $('#avatar-upload')
-      avatarUpload.find('span').hide()
-      avatarUpload.find('.button-show-ajax').show()
-      
-      let reader = new FileReader()
-      
-      reader.onerror = function () {
-        $('.text-avatar-uploadError').removeClass('d-none')
-      }
-      
-      reader.onload = function (evt) {
-        self.filename = evt.currentTarget.result
-        $.post(self.upload_url, {image: evt.currentTarget.result}, function (data) {
-          switch (parseInt(data.statusCode))
-          {
-            
-            case statusCode_OK:
-              $('#avatar-img').attr('src', data.image_base64)
-              break
-            
-            case statusCode_UPLOAD_EXCEEDING_FILESIZE:
-              $('.text-avatar-toolarge').removeClass('d-none')
-              break
-            
-            case statusCode_UPLOAD_UNSUPPORTED_MIME_TYPE:
-              $('.text-avatar-noSupport').removeClass('d-none')
-              break
-            
-            default:
-              $('.text-avatar-uploadError').removeClass('d-none')
-          }
-          
-          let avatarUpload = $('#avatar-upload')
-          avatarUpload.find('span').show()
-          avatarUpload.find('.button-show-ajax').hide()
-        })
-      }
-      reader.readAsDataURL(file)
-    })
-  }
 }

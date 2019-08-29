@@ -42,17 +42,8 @@
 
   <div id="program-middle">
     <div id="image" class="image-container">
-      {% if isWebview() %}
-        <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-          <img id="img-screenshot" width="300" height="300" id="screenshot"
-               src="{{ asset(program_details.screenshotBig) }}"/>
-        </a>
-      {% endif %}
 
-      {% if not isWebview() %}
-        <img id="img-screenshot" width="300" height="300" id="screenshot"
-             src="{{ asset(program_details.screenshotBig) }}"/>
-      {% endif %}
+      {% include 'Program/projectThumbnail.html.twig' %}
 
       <div id="program-like-container">
         <div>

@@ -631,6 +631,7 @@ success:
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
+  imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'

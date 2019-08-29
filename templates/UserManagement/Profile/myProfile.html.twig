@@ -64,16 +64,12 @@
         {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_TOO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2') }},
         {{ constant('App\\Catrobat\\StatusCode::PASSWORD_INVALID') }},
-        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_EXCEEDING_FILESIZE') }},
-        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE') }},
-        {{ constant('App\\Catrobat\\Controller\\Web\\ProfileController::MAX_UPLOAD_SIZE') }},
         '{{ "success.text"|trans({}, "catroweb") }}',
         '{{ "myprofile.checkMail"|trans({}, "catroweb") }}',
         '{{ "myprofile.passwordUpdated"|trans({}, "catroweb") }}',
         '{{ "myprofile.notChangeVisibility"|trans({}, "catroweb") }}',
         '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}'
       )
-      profile.init()
     {% else %}
       programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     {% endif %}

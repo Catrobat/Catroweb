@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Utils\ImageUtils;
 use App\Entity\FollowNotification;
 use App\Entity\User;
 use App\Catrobat\StatusCode;
@@ -23,8 +24,6 @@ class ProfileController extends Controller
 {
   const MIN_PASSWORD_LENGTH = 6;
   const MAX_PASSWORD_LENGTH = 32;
-  const MAX_UPLOAD_SIZE = 5242880; // 5*1024*1024
-  const MAX_AVATAR_SIZE = 300;
 
   /**
    * @Route("/user/{id}", name="profile", defaults={"id" = 0}, methods={"GET"})
@@ -337,7 +336,7 @@ class ProfileController extends Controller
 
     try
     {
-      $image_base64 = $this->checkAndResizeBase64Image($image_base64);
+      $image_base64 = ImageUtils::checkAndResizeBase64Image($image_base64);
     } catch (\Exception $e)
     {
       return JsonResponse::create(['statusCode' => $e->getMessage()]);
@@ -658,93 +657,5 @@ class ProfileController extends Controller
     }
 
     return '';
-  }
-
-
-  /**
-   * @param string $image_base64
-   *
-   * @throws \Exception
-   *
-   * @return string
-   */
-  private function checkAndResizeBase64Image($image_base64)
-  {
-    $image_data = explode(';base64,', $image_base64);
-    $data_regx = '/data:(.+)/';
-
-    if (!preg_match($data_regx, $image_data[0]))
-    {
-      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
-    }
-
-    $image_type = preg_replace('/data:(.+)/', '\\1', $image_data[0]);
-    $image = null;
-
-    switch ($image_type)
-    {
-      case 'image/jpg':
-      case 'image/jpeg':
-        $image = imagecreatefromjpeg($image_base64);
-        break;
-      case 'image/png':
-        $image = imagecreatefrompng($image_base64);
-        break;
-      case 'image/gif':
-        $image = imagecreatefromgif($image_base64);
-        break;
-      default:
-        throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE);
-    }
-
-    if (!$image)
-    {
-      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
-    }
-
-    $image_data = preg_replace($data_regx, '\\2', $image_base64);
-    $image_size = strlen(base64_decode($image_data));
-
-    if ($image_size > self::MAX_UPLOAD_SIZE)
-    {
-      throw new \Exception(StatusCode::UPLOAD_EXCEEDING_FILESIZE);
-    }
-
-    $width = imagesx($image);
-    $height = imagesy($image);
-
-    if ($width === 0 || $height === 0)
-    {
-      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
-    }
-
-    if (max($width, $height) > self::MAX_AVATAR_SIZE)
-    {
-      $new_image = imagecreatetruecolor(self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE);
-      if (!$new_image)
-      {
-        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
-      }
-
-      imagesavealpha($new_image, true);
-      imagefill($new_image, 0, 0, imagecolorallocatealpha($new_image, 0, 0, 0, 127));
-
-      if (!imagecopyresized($new_image, $image, 0, 0, 0, 0, self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE, $width, $height))
-      {
-        imagedestroy($new_image);
-        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
-      }
-
-      ob_start();
-      if (!imagepng($new_image))
-      {
-        imagedestroy($new_image);
-        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
-      }
-
-      $image_base64 = 'data:image/png;base64,' . base64_encode(ob_get_clean());
-    }
-
-    return $image_base64;
   }
 }

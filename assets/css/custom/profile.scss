@@ -85,57 +85,6 @@
   width: 100%;
 }
 
-#avatar-upload {
-  position: relative;
-  top: -45px;
-  text-align: center;
-  margin: 0 auto;
-  font-size: 1.2em;
-
-  span {
-    font-size: $default-font-size + 0.125;
-    cursor: pointer;
-  }
-
-  .button-show-ajax {
-    margin: 0 auto;
-  }
-
-  > div {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
-    font-weight: bold;
-    padding: 4px 15px;
-    border: 1px rgba($primary, 0.8);
-    @include transition(width 250ms);
-    max-width: 100%;
-    @include force-word-break();
-
-    &:hover {
-      top: -2px;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      border: 1px rgba($primary, 0.95);
-      background-color: rgba(255, 255, 255, 0.95);
-      margin-bottom: -4px;
-    }
-
-    input {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      opacity: 0.001;
-      cursor: pointer;
-    }
-  }
-}
-
-
 /* My Programs */
 
 .program {

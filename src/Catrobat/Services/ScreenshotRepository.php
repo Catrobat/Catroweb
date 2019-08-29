@@ -87,6 +87,7 @@ class ScreenshotRepository
     $this->tmp_path = $tmp_path;
   }
 
+
   /**
    * @param $screenshot_filepath
    * @param $id
@@ -97,6 +98,34 @@ class ScreenshotRepository
   {
     $this->saveScreenshot($screenshot_filepath, $id);
     $this->saveThumbnail($screenshot_filepath, $id);
+  }
+
+  /**
+   * @param $image
+   * @param $id
+   */
+  public function storeImageInTmp($image, $id)
+  {
+    $filesystem = new Filesystem();
+    $tmp_file_path = $this->tmp_dir . $this->generateFileNameFromId($id);
+    if ($filesystem->exists($tmp_file_path)) {
+      $filesystem->remove($tmp_file_path);
+    }
+    $filesystem->copy($image, $tmp_file_path);
+  }
+
+  /**
+   * @param $image
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
+  public function updateProgramAssets($image, $id)
+  {
+    $this->storeImageInTmp($image, $id);
+    $tmp_file_path = $this->tmp_dir . $this->generateFileNameFromId($id);
+    $this->saveScreenshot($tmp_file_path, $id);
+    $this->saveThumbnail($tmp_file_path, $id);
   }
 
   /**

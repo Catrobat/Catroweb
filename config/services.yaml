@@ -57,6 +57,19 @@ services:
     # fetching services directly from the container via $container->get() won't work.
     # The best practice is to be explicit about your dependencies anyway.
 
+    #
+    # setup special, global auto wiring rules:
+    #
+    #   Here one can bind variable names to specific parameters or services. This allows dependency injection
+    #   of specific strings or classes. E.g $kernel_root_dir used as parameter in an constructor signals the
+    #   dependency service that the "kernel.root_dir" parameter string must be injected.
+    #
+    #   It is also possible to inject the ParameterBagInterface with which one has easy access to all defined parameters
+    #
+    bind:
+      App\Catrobat\Services\ScreenshotRepository: '@screenshotrepository' # must be removed when merging with SHARE-120
+
+
   #  makes classes in src/Catrobat available to be used as services
   #  this creates a service per class whose id is the fully-qualified class name
   App\Catrobat\:

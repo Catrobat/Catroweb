@@ -41,12 +41,20 @@ h2
   margin: 0;
 }
 
+
+#project-thumbnail-big
+{
+  width: 300px;
+  height: 300px;
+}
+
 #program-middle
 {
   #image
   {
     float: left;
     position: relative;
+    max-width: 300px;
   }
 
   #info
@@ -494,6 +502,7 @@ input[type='number']
     {
       text-align: center;
       float: none;
+      max-width: none;
     }
   }
 
