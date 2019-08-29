@@ -11,6 +11,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
+use App\Catrobat\Services\CatrobatFileSanitizer;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -42,6 +43,11 @@ class ProgramManager
    * @var CatrobatFileExtractor
    */
   protected $file_extractor;
+
+  /**
+   * @var CatrobatFileSanitizer
+   */
+  protected $file_sanitizer;
 
   /**
    * @var ProgramFileRepository
@@ -107,6 +113,7 @@ class ProgramManager
    * @param LoggerInterface $logger
    * @param AppRequest $app_request
    * @param ExtensionRepository $extension_repository
+   * @param CatrobatFileSanitizer $file_sanitizer
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
@@ -114,7 +121,7 @@ class ProgramManager
                               ProgramLikeRepository $program_like_repository,
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
-                              ExtensionRepository $extension_repository)
+                              ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -126,9 +133,9 @@ class ProgramManager
     $this->program_like_repository = $program_like_repository;
     $this->logger = $logger;
     $this->app_request = $app_request;
+    $this->file_sanitizer = $file_sanitizer;
     $this->extension_repository = $extension_repository;
   }
-
 
   /**
    * @param AddProgramRequest $request
@@ -140,10 +147,14 @@ class ProgramManager
   {
     /**
      * @var $program Program
+     * @var $extracted_file ExtractedCatrobatFile
      */
     $file = $request->getProgramfile();
 
     $extracted_file = $this->file_extractor->extract($file);
+
+    $this->file_sanitizer->sanitize($extracted_file);
+
     try
     {
       $event = $this->event_dispatcher->dispatch(

@@ -462,6 +462,10 @@ services:
     public: true
   App\Entity\UserLDAPManager: "@usermanager.ldap"
 
+  App\Catrobat\Services\CatrobatFileSanitizer:
+    class: App\Catrobat\Services\CatrobatFileSanitizer
+    public: true
+
   fileextractor:
     class: App\Catrobat\Services\CatrobatFileExtractor
     arguments:

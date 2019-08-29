@@ -79,6 +79,10 @@ class ApiFeatureContext extends BaseContext
 
   private const MEDIAPACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
 
+  private const DATA_FIXTURES_DIR = './tests/testdata/DataFixtures/';
+
+  private const EXTRACT_RESOURCES_DIR = './public/resources_test/extract/';
+
   /**
    * @var
    */
@@ -436,6 +440,55 @@ class ApiFeatureContext extends BaseContext
       $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
     }
   }
+
+  /**
+   * @Given I try to upload a program with unnecessary files
+   */
+  public function iTryToUploadAProgramWithUnnecessaryFiles()
+  {
+    $this->sendUploadRequest(self::DATA_FIXTURES_DIR . 'unnecessaryFiles.catrobat');
+  }
+
+  /**
+   * @Given I try to upload a program with scenes and unnecessary files
+   */
+  public function iTryToUploadAProgramWithScenesAndUnnecessaryFiles()
+  {
+    $this->sendUploadRequest(self::DATA_FIXTURES_DIR . 'unnecessaryFilesInScenes.catrobat');
+  }
+
+  /**
+   * @param $filepath
+   */
+  private function sendUploadRequest($filepath) {
+    Assert::assertTrue(file_exists($filepath), 'File not found');
+
+    $this->files = [];
+    $this->files[] = new UploadedFile($filepath, 'unnecessaryFiles.catrobat');
+
+    $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
+    $this->request_parameters['username'] = $this->username;
+    $this->request_parameters['token'] = 'cccccccccc';
+    $this->iPostTheseParametersTo('/app/api/upload/upload.json');
+  }
+
+  /**
+   * @Then the resources should not contain the unnecessary files
+   */
+  public function theResourcesShouldNotContainTheUnnecessaryFiles()
+  {
+    $files = new RecursiveIteratorIterator(
+      new RecursiveDirectoryIterator(self::EXTRACT_RESOURCES_DIR, RecursiveDirectoryIterator::SKIP_DOTS),
+      RecursiveIteratorIterator::CHILD_FIRST
+    );
+
+    foreach ($files as $file)
+    {
+      $filename = $file->getFilename();
+      Assert::assertNotContains('remove_me', $filename);
+    }
+  }
+
 
   /**
    * @When I upload this program with id :id

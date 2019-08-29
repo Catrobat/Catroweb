@@ -6,6 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
+use App\Catrobat\Services\CatrobatFileSanitizer;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -52,6 +53,7 @@ class ProgramManagerSpec extends ObjectBehavior
    * @param LoggerInterface $logger
    * @param AppRequest $app_request
    * @param ExtensionRepository $extension_repository
+   * @param CatrobatFileSanitizer $catrobat_file_sanitizer
    */
   public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                       ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
@@ -59,11 +61,12 @@ class ProgramManagerSpec extends ObjectBehavior
                       AddProgramRequest $request, File $file, User $user, ExtractedCatrobatFile $extracted_file,
                       Program $inserted_program, TagRepository $tag_repository,
                       ProgramLikeRepository $program_like_repository, LoggerInterface $logger,
-                      AppRequest $app_request, ExtensionRepository $extension_repository)
+                      AppRequest $app_request,
+                      ExtensionRepository $extension_repository, CatrobatFileSanitizer $catrobat_file_sanitizer)
   {
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository,
       $entity_manager, $program_repository, $tag_repository, $program_like_repository,
-      $event_dispatcher, $logger, $app_request, $extension_repository);
+      $event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer);
     $request->getProgramfile()->willReturn($file);
     $request->getUser()->willReturn($user);
     $request->getIp()->willReturn('127.0.0.1');
