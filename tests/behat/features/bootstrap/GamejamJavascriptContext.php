@@ -36,6 +36,25 @@ class GamejamJavascriptContext extends MinkContext implements KernelAwareContext
     $this->symfony_support = new SymfonySupport(self::FIXTUREDIR);
   }
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->symfony_support->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /*
    * (non-PHPdoc)
    * @see \Behat\Symfony2Extension\Context\KernelAwareContext::setKernel()

@@ -12,7 +12,7 @@ use App\Repository\ScratchProgramRemixRepository;
 use App\Repository\ScratchProgramRepository;
 use DateTime;
 use Doctrine\DBAL\Types\GuidType;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
@@ -24,7 +24,7 @@ use Exception;
 class RemixManager
 {
   /**
-   * @var EntityManager The entity manager.
+   * @var EntityManagerInterface The entity manager.
    */
   private $entity_manager;
 
@@ -64,7 +64,7 @@ class RemixManager
   protected $app_request;
 
   /**
-   * @param EntityManager                  $entity_manager
+   * @param EntityManagerInterface                  $entity_manager
    * @param ProgramRepository              $program_repository
    * @param ScratchProgramRepository       $scratch_program_repository
    * @param ProgramRemixRepository         $program_remix_repository
@@ -73,7 +73,7 @@ class RemixManager
    * @param RemixGraphManipulator          $remix_graph_manipulator
    * @param AppRequest                     $app_request
    */
-  public function __construct(EntityManager $entity_manager, ProgramRepository $program_repository,
+  public function __construct(EntityManagerInterface $entity_manager, ProgramRepository $program_repository,
                               ScratchProgramRepository $scratch_program_repository,
                               ProgramRemixRepository $program_remix_repository,
                               ProgramRemixBackwardRepository $program_remix_backward_repository,

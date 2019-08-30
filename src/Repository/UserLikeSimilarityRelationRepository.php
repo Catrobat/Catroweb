@@ -4,15 +4,24 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\UserLikeSimilarityRelation;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 
 /**
  * Class UserLikeSimilarityRelationRepository
  * @package App\Repository
  */
-class UserLikeSimilarityRelationRepository extends EntityRepository
+class UserLikeSimilarityRelationRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, UserLikeSimilarityRelation::class);
+  }
+
   /**
    *
    */

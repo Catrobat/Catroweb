@@ -5,8 +5,8 @@ namespace App\Catrobat\Controller\Api;
 use App\Entity\ProgramManager;
 use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Catrobat\Responses\ProgramListResponse;
 
@@ -15,8 +15,18 @@ use App\Catrobat\Responses\ProgramListResponse;
  * Class ListProgramsController
  * @package App\Catrobat\Controller\Api
  */
-class ListProgramsController extends Controller
+class ListProgramsController extends AbstractController
 {
+
+  /**
+   * @var ProgramManager
+   */
+  private $program_manager;
+
+  public function __construct(ProgramManager $program_manager)
+  {
+    $this->program_manager = $program_manager;
+  }
 
   /**
    * @Route("/api/projects/recent.json", name="api_recent_programs",
@@ -177,38 +187,36 @@ class ListProgramsController extends Controller
     }
 
     /**
-     * @var ProgramManager $program_manager
      * @var GuidType $user_id
      */
-    $program_manager = $this->get('programmanager');
     $limit = intval($request->get('limit', 20));
     $offset = intval($request->get('offset', 0));
     $user_id = $request->get('user_id', 0);
 
     if ($sortBy == 'downloads')
     {
-      $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset);
+      $programs = $this->program_manager->getMostDownloadedPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor);
+        $flavor_count = $this->program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getMostDownloadedPrograms(
+        $programs = array_merge($programs, $this->program_manager->getMostDownloadedPrograms(
           '!' . $flavor, $limit - $count, $new_offset
         ));
       }
     }
     elseif ($sortBy == 'views')
     {
-      $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset);
+      $programs = $this->program_manager->getMostViewedPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor);
+        $flavor_count = $this->program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getMostViewedPrograms(
+        $programs = array_merge($programs, $this->program_manager->getMostViewedPrograms(
           '!' . $flavor, $limit - $count, $new_offset
         ));
       }
@@ -216,36 +224,36 @@ class ListProgramsController extends Controller
     elseif ($sortBy == 'user')
     {
       if ($this->getUser() !== null && $this->getUser()->getId() === $user_id) {
-        $programs = $program_manager->getUserPrograms($user_id);
+        $programs = $this->program_manager->getUserPrograms($user_id);
       }
       else {
-        $programs = $program_manager->getPublicUserPrograms($user_id);
+        $programs = $this->program_manager->getPublicUserPrograms($user_id);
       }
     }
     elseif ($sortBy == 'random')
     {
-      $programs = $program_manager->getRandomPrograms($flavor, $limit, $offset);
+      $programs = $this->program_manager->getRandomPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor);
+        $flavor_count = $this->program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getRandomPrograms(
+        $programs = array_merge($programs, $this->program_manager->getRandomPrograms(
           '!' . $flavor, $limit - $count, $new_offset
         ));
       }
     }
     else
     {
-      $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset);
+      $programs = $this->program_manager->getRecentPrograms($flavor, $limit, $offset);
 
       $count = count($programs);
       if ($count != $limit && $flavor)
       {
-        $flavor_count = $program_manager->getTotalPrograms($flavor);
+        $flavor_count = $this->program_manager->getTotalPrograms($flavor);
         $new_offset = max($offset - $flavor_count + $count, 0);
-        $programs = array_merge($programs, $program_manager->getRecentPrograms(
+        $programs = array_merge($programs, $this->program_manager->getRecentPrograms(
           '!' . $flavor, $limit - $count, $new_offset
         ));
       }
@@ -257,11 +265,11 @@ class ListProgramsController extends Controller
     }
     else
     {
-      $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor);
+      $numbOfTotalProjects = $this->program_manager->getTotalPrograms($flavor);
 
       if ($flavor)
       {
-        $numbOfTotalProjects += $program_manager->getTotalPrograms('!' . $flavor);
+        $numbOfTotalProjects += $this->program_manager->getTotalPrograms('!' . $flavor);
       }
     }
 

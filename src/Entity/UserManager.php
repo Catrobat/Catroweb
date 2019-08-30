@@ -18,13 +18,12 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
    * @param PasswordUpdaterInterface $passwordUpdater
    * @param CanonicalFieldsUpdater   $canonicalFieldsUpdater
    * @param ObjectManager            $om
-   * @param                          $class
    */
   public function __construct(PasswordUpdaterInterface $passwordUpdater,
                                  CanonicalFieldsUpdater $canonicalFieldsUpdater,
-                                 ObjectManager $om, $class)
+                                 ObjectManager $om)
   {
-    parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, $class);
+    parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
   }
 
   /**

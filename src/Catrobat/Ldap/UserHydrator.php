@@ -22,7 +22,7 @@ class UserHydrator implements HydratorInterface
    *
    * @return UserInterface
    */
-  public function hydrate(array $ldapEntry)
+  public function hydrate(array $ldapEntry): UserInterface
   {
     $user = new User();
     $user->setUsername($ldapEntry['cn'][0]);

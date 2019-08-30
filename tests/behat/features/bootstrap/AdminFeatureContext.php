@@ -127,6 +127,25 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     $this->getSession()->resizeWindow(1240, 1024);
   }
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /**
    * @BeforeScenario @RealOAuth
    */
@@ -310,7 +329,9 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @return User
+   * @return User|object|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function getDefaultUser()
   {
@@ -318,7 +339,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @return \Symfony\Component\HttpKernel\Profiler\Profiler
+   * @return false|\Symfony\Component\HttpKernel\Profiler\Profiler
    */
   public function getSymfonyProfile()
   {
@@ -339,7 +360,9 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @param array $config
    *
-   * @return \FOS\UserBundle\Model\UserInterface|mixed
+   * @return object|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function insertUser($config = [])
   {
@@ -417,7 +440,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
      * @var $user_manager UserManager
      * @var $user         User
      */
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
     $users = $table->getHash();
     $user = null;
     $count = count($users);
@@ -804,7 +827,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     $this->iHaveAParameterWithValue("_username", $uname);
     $this->iHaveAParameterWithValue("_password", $pwd);
     $this->iHaveAParameterWithValue("_csrf_token", $csrfToken);
-    $this->iPostTheseParametersTo("/login_check");
+    $this->iPostTheseParametersTo("/app/login_check");
   }
 
   /**

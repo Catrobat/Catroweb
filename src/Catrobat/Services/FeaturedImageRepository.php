@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 
@@ -24,11 +25,12 @@ class FeaturedImageRepository
   /**
    * FeaturedImageRepository constructor.
    *
-   * @param $dir
-   * @param $path
+   * @param ParameterBagInterface $parameter_bag
    */
-  public function __construct($dir, $path)
+  public function __construct(ParameterBagInterface $parameter_bag)
   {
+    $dir = $parameter_bag->get('catrobat.featuredimage.dir');
+    $path = $parameter_bag->get('catrobat.featuredimage.path');
     $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
     $path = preg_replace('/([^\/]+)$/', '$1/', $path);
 

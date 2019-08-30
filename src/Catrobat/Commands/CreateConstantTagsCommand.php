@@ -2,26 +2,13 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Services\CatrobatFileExtractor;
-use Symfony\Component\Console\Input\InputArgument;
+use App\Repository\TagRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use App\Entity\ProgramManager;
-use App\Entity\UserManager;
 use App\Entity\Tag;
-use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Process\Process;
-use App\Entity\Program;
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use App\Entity\FeaturedProgram;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Translation\TranslatorInterface;
-use App\Repository\TagRepository;
 
 /**
  * Class CreateConstantTagsCommand
@@ -44,17 +31,17 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
   private $tag_repository;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $em;
 
   /**
    * CreateConstantTagsCommand constructor.
    *
-   * @param EntityManager       $em
+   * @param EntityManagerInterface       $em
    * @param TranslatorInterface $translator
    */
-  public function __construct(EntityManager $em, TranslatorInterface $translator)
+  public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
   {
     parent::__construct();
     $this->em = $em;
@@ -81,7 +68,7 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
-    $this->tag_repository = $this->getContainer()->get('tagrepository');
+    $this->tag_repository = $this->getContainer()->get(TagRepository::class);
     $metadata = $this->em->getClassMetadata('App\Entity\Tag')->getFieldNames();
 
     $number_of_tags = 7; // uses the tag names defined in the translation files!

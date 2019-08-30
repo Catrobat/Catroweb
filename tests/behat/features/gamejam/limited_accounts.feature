@@ -27,4 +27,3 @@ Feature: Limited Accounts
     And I wait 100 milliseconds
     Then I see the program "Pink Pony"
     But I do not see a delete button
-     

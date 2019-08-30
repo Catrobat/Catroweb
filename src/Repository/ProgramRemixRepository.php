@@ -2,19 +2,29 @@
 
 namespace App\Repository;
 
+use App\Entity\Extension;
 use App\Entity\ProgramRemixRelation;
 use App\Entity\User;
 use DateTime;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 
 /**
  * Class ProgramRemixRepository
  * @package App\Repository
  */
-class ProgramRemixRepository extends EntityRepository
+class ProgramRemixRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, ProgramRemixRelation::class);
+  }
+
   /**
    * @param int[] $descendant_program_ids
    *

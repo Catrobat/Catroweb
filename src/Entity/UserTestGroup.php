@@ -51,7 +51,7 @@ class UserTestGroup
 {
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", unique=true, nullable=false)
+   * @ORM\Column(type="guid", unique=true, nullable=false)
    */
   protected $user_id;
 

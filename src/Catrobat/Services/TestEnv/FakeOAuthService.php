@@ -2,44 +2,76 @@
 
 namespace App\Catrobat\Services\TestEnv;
 
+use App\Catrobat\Services\TokenGenerator;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Catrobat\Services\OAuthService;
-use Symfony\Component\DependencyInjection\Container;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 /**
  * Class FakeOAuthService
  * @package App\Catrobat\Features\Helpers
  */
-class FakeOAuthService
+class FakeOAuthService extends OAuthService
 {
   /**
    * @var OAuthService
    */
   private $oauth_service;
+
   /**
    * @var mixed
    */
   private $use_real_oauth_service;
+
   /**
-   * @var Container
+   * @var UserManager
    */
-  private $container;
+  private $user_manager;
 
   /**
    * FakeOAuthService constructor.
    *
    * @param OAuthService $oauth_service
-   * @param Container    $container
+   * @param ParameterBagInterface $parameter_bag
+   * @param UserManager $user_manager
+   * @param ValidatorInterface $validator
+   * @param ProgramManager $program_manager
+   * @param EntityManagerInterface $em
+   * @param TranslatorInterface $translator
+   * @param TokenStorageInterface $token_storage
+   * @param EventDispatcherInterface $dispatcher
+   * @param RouterInterface $router
+   * @param TokenGenerator $token_generator
    */
-  public function __construct(OAuthService $oauth_service, Container $container)
+  public function __construct(OAuthService $oauth_service, ParameterBagInterface $parameter_bag,
+                              UserManager $user_manager, ValidatorInterface $validator, ProgramManager $program_manager,
+                              EntityManagerInterface $em, TranslatorInterface $translator,
+                              TokenStorageInterface $token_storage, EventDispatcherInterface $dispatcher,
+                              RouterInterface $router, TokenGenerator $token_generator)
   {
+    parent::__construct($user_manager, $parameter_bag, $validator, $program_manager, $em, $translator,
+                              $token_storage, $dispatcher, $router, $token_generator);
+
     $this->oauth_service = $oauth_service;
-    $this->container = $container;
-    $this->use_real_oauth_service = $container->getParameter('oauth_use_real_service');
+    try {
+      $this->use_real_oauth_service = $parameter_bag->get('oauth_use_real_service');
+    }
+    catch (\Exception $e) {
+      $this->use_real_oauth_service = false;
+    }
+
+    $this->user_manager = $user_manager;
   }
 
   /**
@@ -100,13 +132,11 @@ class FakeOAuthService
       return $this->oauth_service->exchangeGoogleCodeAction($request);
     }
     /**
-     * @var $userManager UserManager
      * @var $user        User
      * @var $request     Request
      */
     $retArray = [];
-    $userManager = $this->container->get("usermanager");
-    $user = $userManager->findUserByEmail($request->get('email'));
+    $user = $this->user_manager->findUserByEmail($request->get('email'));
     if ($user != null)
     {
       $retArray['statusCode'] = 200;
@@ -114,7 +144,7 @@ class FakeOAuthService
     }
     else
     {
-      $user = $userManager->createUser();
+      $user = $this->user_manager->createUser();
       $user->setUsername('PocketGoogler');
       $user->setEmail('pocketcodetester@gmail.com');
       $user->setPlainPassword('password');
@@ -127,7 +157,7 @@ class FakeOAuthService
     $user->setGplusIdToken('another fake');
     $user->setGplusRefreshToken('the worst fake');
     $user->setEnabled(true);
-    $userManager->updateUser($user);
+    $this->user_manager->updateUser($user);
 
     return JsonResponse::create($retArray);
   }

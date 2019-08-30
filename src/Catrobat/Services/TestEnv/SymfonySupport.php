@@ -2,19 +2,34 @@
 
 namespace App\Catrobat\Services\TestEnv;
 
+use App\Catrobat\Services\ExtractedFileRepository;
+use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Extension;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
+use App\Entity\ProgramManager;
 use App\Entity\ProgramRemixBackwardRelation;
 use App\Entity\ProgramRemixRelation;
 use App\Entity\ScratchProgramRemixRelation;
 use App\Entity\User;
 use App\Entity\UserLikeSimilarityRelation;
+use App\Entity\UserManager;
+use App\Repository\ExtensionRepository;
+use App\Repository\ProgramRemixBackwardRepository;
+use App\Repository\ProgramRemixRepository;
+use App\Repository\ScratchProgramRemixRepository;
+use App\Repository\ScratchProgramRepository;
+use App\Repository\TagRepository;
 use App\Repository\UserLikeSimilarityRelationRepository;
 use App\Entity\UserRemixSimilarityRelation;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
+use App\Repository\UserRemixSimilarityRelationRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -26,6 +41,8 @@ use App\Catrobat\Services\CatrobatFileCompressor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use App\Entity\GameJam;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Validator\Constraints\DateTime;
 use PHPUnit\Framework\Assert;
 
@@ -81,7 +98,7 @@ class SymfonySupport
   }
 
   /**
-   * @return \Symfony\Bundle\FrameworkBundle\Client
+   * @return Client
    */
   public function getClient()
   {
@@ -94,91 +111,91 @@ class SymfonySupport
   }
 
   /**
-   * @return \App\Entity\UserManager
+   * @return UserManager
    */
   public function getUserManager()
   {
-    return $this->kernel->getContainer()->get('usermanager');
+    return $this->kernel->getContainer()->get(UserManager::class);
   }
 
   /**
-   * @return \App\Entity\ProgramManager
+   * @return ProgramManager
    */
   public function getProgramManager()
   {
-    return $this->kernel->getContainer()->get('programmanager');
+    return $this->kernel->getContainer()->get(ProgramManager::class);
   }
 
   /**
-   * @return \App\Repository\TagRepository
+   * @return TagRepository
    */
   public function getTagRepository()
   {
-    return $this->kernel->getContainer()->get('tagrepository');
+    return $this->kernel->getContainer()->get(TagRepository::class);
   }
 
   /**
-   * @return \App\Repository\ExtensionRepository
+   * @return ExtensionRepository
    */
   public function getExtensionRepository()
   {
-    return $this->kernel->getContainer()->get('extensionrepository');
+    return $this->kernel->getContainer()->get(ExtensionRepository::class);
   }
 
   /**
-   * @return \App\Repository\ProgramRemixRepository
+   * @return ProgramRemixRepository
    */
   public function getProgramRemixForwardRepository()
   {
-    return $this->kernel->getContainer()->get('programremixrepository');
+    return $this->kernel->getContainer()->get(ProgramRemixRepository::class);
   }
 
   /**
-   * @return \App\Repository\ProgramRemixBackwardRepository
+   * @return ProgramRemixBackwardRepository
    */
   public function getProgramRemixBackwardRepository()
   {
-    return $this->kernel->getContainer()->get('programremixbackwardrepository');
+    return $this->kernel->getContainer()->get(ProgramRemixBackwardRepository::class);
   }
 
   /**
-   * @return \App\Repository\ScratchProgramRepository
+   * @return ScratchProgramRepository
    */
   public function getScratchProgramRepository()
   {
-    return $this->kernel->getContainer()->get('scratchprogramrepository');
+    return $this->kernel->getContainer()->get(ScratchProgramRepository::class);
   }
 
   /**
-   * @return \App\Repository\ScratchProgramRemixRepository
+   * @return ScratchProgramRemixRepository
    */
   public function getScratchProgramRemixRepository()
   {
-    return $this->kernel->getContainer()->get('scratchprogramremixrepository');
+    return $this->kernel->getContainer()->get(ScratchProgramRemixRepository::class);
   }
 
   /**
-   * @return \App\Catrobat\Services\ProgramFileRepository
+   * @return ProgramFileRepository
    */
   public function getFileRepository()
   {
-    return $this->kernel->getContainer()->get('filerepository');
+    return $this->kernel->getContainer()->get(ProgramFileRepository::class);
   }
 
   /**
-   * @return \App\Catrobat\Services\ExtractedFileRepository
+   * @return ExtractedFileRepository
    */
   public function getExtractedFileRepository()
   {
-    return $this->kernel->getContainer()->get('extractedfilerepository');
+    return $this->kernel->getContainer()->get(ExtractedFileRepository::class);
   }
 
   /**
-   * @return \App\Catrobat\Services\MediaPackageFileRepository
+   * @return MediaPackageFileRepository
    */
   public function getMediaPackageFileRepository()
   {
-    return $this->kernel->getContainer()->get('mediapackagefilerepository');
+    return $this->kernel->getContainer()->get(MediaPackageFileRepository::class);
   }
 
   /**
@@ -186,7 +203,7 @@ class SymfonySupport
    */
   public function getRecommenderManager()
   {
-    return $this->kernel->getContainer()->get('recommendermanager');
+    return $this->kernel->getContainer()->get(RecommenderManager::class);
   }
 
   /**
@@ -194,19 +211,19 @@ class SymfonySupport
    */
   public function getUserLikeSimilarityRelationRepository()
   {
-    return $this->kernel->getContainer()->get('userlikesimilarityrelationrepository');
+    return $this->kernel->getContainer()->get(UserLikeSimilarityRelationRepository::class);
   }
 
   /**
-   * @return \App\Repository\UserRemixSimilarityRelationRepository
+   * @return UserRemixSimilarityRelationRepository
    */
   public function getUserRemixSimilarityRelationRepository()
   {
-    return $this->kernel->getContainer()->get('userremixsimilarityrelationrepository');
+    return $this->kernel->getContainer()->get(UserRemixSimilarityRelationRepository::class);
   }
 
   /**
-   * @return \Doctrine\ORM\EntityManager
+   * @return EntityManager
    */
   public function getManager()
   {
@@ -214,7 +231,7 @@ class SymfonySupport
   }
 
   /**
-   * @return \Symfony\Component\Routing\Router
+   * @return Router
    */
   public function getRouter()
   {
@@ -243,7 +260,7 @@ class SymfonySupport
   }
 
   /**
-   * @return false|\Symfony\Component\HttpKernel\Profiler\Profiler
+   * @return false | Profiler
    */
   public function getSymfonyProfile()
   {
@@ -261,7 +278,9 @@ class SymfonySupport
   }
 
   /**
-   * @return \App\Entity\User
+   * @return User|object|null
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function getDefaultUser()
   {
@@ -320,8 +339,8 @@ class SymfonySupport
    * @param array $config
    *
    * @return GameJam
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    * @throws \Exception
    */
   public function insertDefaultGamejam($config = [])
@@ -351,7 +370,9 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @return \FOS\UserBundle\Model\UserInterface|mixed
+   * @return object|null
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertUser($config = [])
   {
@@ -383,7 +404,7 @@ class SymfonySupport
   }
 
   /**
-   *
+   * 
    */
   public function computeAllLikeSimilaritiesBetweenUsers()
   {
@@ -431,8 +452,8 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertUserLikeSimilarity($config = [])
   {
@@ -451,8 +472,8 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertUserRemixSimilarity($config = [])
   {
@@ -471,9 +492,8 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Exception
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertProgramLike($config = [])
   {
@@ -497,8 +517,8 @@ class SymfonySupport
   /**
    * @param $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertTag($config)
   {
@@ -516,8 +536,8 @@ class SymfonySupport
   /**
    * @param $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertExtension($config)
   {
@@ -535,8 +555,8 @@ class SymfonySupport
   /**
    * @param $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertForwardRemixRelation($config)
   {
@@ -556,8 +576,8 @@ class SymfonySupport
   /**
    * @param $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertBackwardRemixRelation($config)
   {
@@ -577,8 +597,8 @@ class SymfonySupport
   /**
    * @param $config
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertScratchRemixRelation($config)
   {
@@ -698,8 +718,8 @@ class SymfonySupport
    * @param $config
    *
    * @return ProgramDownloads
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    * @throws \Exception
    */
   public function insertProgramDownloadStatistics($program, $config)
@@ -720,12 +740,12 @@ class SymfonySupport
 
     if (isset($config['username']))
     {
-      $userManager = $this->getUserManager();
-      $user = $userManager->createUser();
+      $user_manager = $this->getUserManager();
+      $user = $user_manager->createUser();
       $user->setUsername($config['username']);
       $user->setEmail('dog@robat.at');
       $user->setPassword('test');
-      $userManager->updateUser($user);
+      $user_manager->updateUser($user);
       $program_statistics->setUser($user);
     }
 
@@ -804,7 +824,7 @@ class SymfonySupport
    * @param string $flavor
    * @param null $request_param
    *
-   * @return \Symfony\Component\HttpFoundation\Response|null
+   * @return Response | null
    * @throws ORMException
    * @throws OptimisticLockException
    */

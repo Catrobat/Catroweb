@@ -6,16 +6,25 @@ use App\Entity\User;
 use App\Entity\UserRemixSimilarityRelation;
 use DateTime;
 use Doctrine\DBAL\DBALException;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Exception;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 
 /**
  * Class UserRemixSimilarityRelationRepository
  * @package App\Repository
  */
-class UserRemixSimilarityRelationRepository extends EntityRepository
+class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, UserRemixSimilarityRelation::class);
+  }
+
   /**
    *
    */

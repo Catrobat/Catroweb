@@ -2,20 +2,14 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use App\Catrobat\Commands\CleanApkCommand;
-use App\Catrobat\Commands\CleanExtractedFileCommand;
-use App\Catrobat\Commands\CleanBackupsCommand;
-use App\Catrobat\Commands\CreateBackupCommand;
 use App\Catrobat\Commands\CreateProgramExtensionsCommand;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
@@ -28,7 +22,7 @@ class ExtensionController extends Controller
 
   /**
    * @return RedirectResponse
-   * @throws \Exception
+   * @throws \Symfony\Component\Console\Exception\ExceptionInterface
    */
   public function extensionsAction()
   {
@@ -44,7 +38,7 @@ class ExtensionController extends Controller
 
     $em = $this->getDoctrine()->getManager();
     $program_file_dir = $this->get('kernel')->getRootDir() . "/../public/resources/programs/";
-    $program_repo = $this->container->get('programrepository');
+    $program_repo = $this->container->get(ProgramRepository::class);
 
     $command = new CreateProgramExtensionsCommand($em, $program_file_dir, $program_repo);
     $command->setContainer($this->container);

@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class MigrationManager
@@ -13,7 +14,7 @@ use Doctrine\ORM\EntityManager;
 class MigrationManager
 {
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   protected $entity_manager;
   /**
@@ -24,9 +25,9 @@ class MigrationManager
   /**
    * MigrationManager constructor.
    *
-   * @param $entity_manager
+   * @param $entity_manager EntityManagerInterface
    */
-  public function __construct($entity_manager)
+  public function __construct(EntityManagerInterface $entity_manager)
   {
     $this->entity_manager = $entity_manager;
     $this->connection = $this->entity_manager->getConnection();

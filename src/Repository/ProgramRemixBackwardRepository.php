@@ -4,15 +4,25 @@ namespace App\Repository;
 
 use App\Entity\ProgramRemixBackwardRelation;
 use App\Entity\User;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Types\GuidType;
 
 
 /**
  * Class ProgramRemixBackwardRepository
  * @package App\Repository
  */
-class ProgramRemixBackwardRepository extends EntityRepository
+class ProgramRemixBackwardRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, ProgramRemixBackwardRelation::class);
+  }
+
   /**
    * @param int[] $program_ids
    *
@@ -53,7 +63,7 @@ class ProgramRemixBackwardRepository extends EntityRepository
   }
 
   /**
-   * @param int   $program_id
+   * @param GuidType  $program_id
    * @param int[] $parent_program_ids
    */
   public function removeParentRelations($program_id, array $parent_program_ids)

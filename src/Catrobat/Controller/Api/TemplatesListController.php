@@ -3,8 +3,9 @@
 namespace App\Catrobat\Controller\Api;
 
 use App\Catrobat\Responses\TemplateListResponse;
+use App\Entity\TemplateManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class TemplatesListController
  * @package App\Catrobat\Controller\Api
  */
-class TemplatesListController extends Controller
+class TemplatesListController extends AbstractController
 {
 
   /**
@@ -22,10 +23,8 @@ class TemplatesListController extends Controller
    *
    * @return TemplateListResponse
    */
-  public function listTemplatesAction(Request $request)
+  public function listTemplatesAction(Request $request, TemplateManager $template_manager)
   {
-    $template_manager = $this->get('templatemanager');
-
     $templates = $template_manager->findAllActive();
 
     return new TemplateListResponse($templates);

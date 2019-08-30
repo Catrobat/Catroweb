@@ -16,6 +16,7 @@ use App\Repository\UserLikeSimilarityRelationRepository;
 use App\Repository\UserRemixSimilarityRelationRepository;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -29,7 +30,7 @@ class RecommenderManager
 {
   const RECOMMENDER_LOCK_FILE_NAME = 'CatrobatRecommender.lock';
   /**
-   * @var EntityManager The entity manager.
+   * @var EntityManagerInterface The entity manager.
    */
   private $entity_manager;
 
@@ -77,7 +78,7 @@ class RecommenderManager
   /**
    * RecommenderManager constructor.
    *
-   * @param EntityManager                         $entity_manager
+   * @param EntityManagerInterface                         $entity_manager
    * @param UserManager                           $user_manager
    * @param UserLikeSimilarityRelationRepository  $user_like_similarity_relation_repository
    * @param UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository
@@ -87,7 +88,7 @@ class RecommenderManager
    * @param ProgramRemixBackwardRepository        $program_remix_backward_repository
    * @param AppRequest                            $app_request
    */
-  public function __construct(EntityManager $entity_manager, UserManager $user_manager,
+  public function __construct(EntityManagerInterface $entity_manager, UserManager $user_manager,
                               UserLikeSimilarityRelationRepository $user_like_similarity_relation_repository,
                               UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository,
                               ProgramRepository $program_repository,

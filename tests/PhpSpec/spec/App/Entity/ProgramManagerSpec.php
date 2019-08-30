@@ -18,6 +18,7 @@ use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -44,7 +45,6 @@ class ProgramManagerSpec extends ObjectBehavior
    * @param ProgramRepository $program_repository
    * @param EventDispatcherInterface $event_dispatcher
    * @param AddProgramRequest $request
-   * @param File $file
    * @param User $user
    * @param ExtractedCatrobatFile $extracted_file
    * @param Program $inserted_program
@@ -58,7 +58,7 @@ class ProgramManagerSpec extends ObjectBehavior
   public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                       ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
                       ProgramRepository $program_repository, EventDispatcherInterface $event_dispatcher,
-                      AddProgramRequest $request, File $file, User $user, ExtractedCatrobatFile $extracted_file,
+                      AddProgramRequest $request, User $user, ExtractedCatrobatFile $extracted_file,
                       Program $inserted_program, TagRepository $tag_repository,
                       ProgramLikeRepository $program_like_repository, LoggerInterface $logger,
                       AppRequest $app_request,
@@ -67,6 +67,10 @@ class ProgramManagerSpec extends ObjectBehavior
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository,
       $entity_manager, $program_repository, $tag_repository, $program_like_repository,
       $event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer);
+
+    fopen('/tmp/phpSpecTest', 'w');
+    $file = new File('/tmp/phpSpecTest');
+
     $request->getProgramfile()->willReturn($file);
     $request->getUser()->willReturn($user);
     $request->getIp()->willReturn('127.0.0.1');

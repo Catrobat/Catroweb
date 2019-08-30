@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Services\FeaturedImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\StringType;
@@ -12,6 +13,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use App\Catrobat\Forms\FeaturedImageConstraint;
 use Sonata\BlockBundle\Meta\Metadata;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -33,6 +35,23 @@ class FeaturedUrlAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'featured_url';
 
+  /**
+   * @var FeaturedImageRepository
+   */
+  private $featured_image_repository;
+
+  /**
+   * @var ParameterBagInterface
+   */
+  private $parameter_bag;
+
+  public function __construct($code, $class, $baseControllerName, FeaturedImageRepository $featured_image_repository,
+                              ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct($code, $class, $baseControllerName);
+    $this->featured_image_repository = $featured_image_repository;
+    $this->parameter_bag = $parameter_bag;
+  }
 
   /**
    * @param string $context
@@ -128,8 +147,7 @@ class FeaturedUrlAdmin extends AbstractAdmin
      * @var $object FeaturedProgram
      */
 
-    return '../../' . $this->getConfigurationPool()->getContainer()->get('featuredimagerepository')
-        ->getWebPath($object->getId(), $object->getImageType());
+    return '../../' . $this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
   }
 
 
@@ -172,7 +190,7 @@ class FeaturedUrlAdmin extends AbstractAdmin
   private function checkFlavor()
   {
     $flavor = $this->getForm()->get('flavor')->getData();
-    $flavor_options =  $this->getConfigurationPool()->getContainer()->getParameter('themes');
+    $flavor_options =  $this->parameter_bag->get('themes');
 
     if (!in_array($flavor, $flavor_options)) {
       throw new NotFoundHttpException(

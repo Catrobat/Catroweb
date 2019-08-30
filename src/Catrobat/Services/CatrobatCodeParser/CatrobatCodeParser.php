@@ -4,6 +4,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use App\Catrobat\Services\ExtractedCatrobatFile;
 
+
 /**
  * Class CatrobatCodeParser
  * @package App\Catrobat\Services\CatrobatCodeParser

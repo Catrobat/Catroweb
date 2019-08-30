@@ -12,13 +12,6 @@ use Symfony\Component\Finder\Finder;
 class CatrobatFileCompressor
 {
   /**
-   * CatrobatFileCompressor constructor.
-   */
-  public function __construct()
-  {
-  }
-
-  /**
    * @param $source
    * @param $destination
    * @param $archive_name

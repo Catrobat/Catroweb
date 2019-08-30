@@ -7,7 +7,9 @@ use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Entity\ProgramManager;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 
 /**
@@ -48,19 +50,21 @@ class ExtractedFileRepository
   /**
    * ExtractedFileRepository constructor.
    *
-   * @param                       $local_extracted_path
-   * @param                       $web_extracted_path
-   * @param                       $local_storage_path
+   * @param ParameterBagInterface $parameter_bag
    * @param CatrobatFileExtractor $file_extractor
-   * @param ProgramManager        $program_manager
+   * @param ProgramManager $program_manager
    * @param ProgramFileRepository $prog_file_rep
-   * @param LoggerInterface       $l
+   * @param LoggerInterface $l
    */
-  public function __construct($local_extracted_path, $web_extracted_path, $local_storage_path,
-                                 CatrobatFileExtractor $file_extractor,
-                                 ProgramManager $program_manager,
-                                 ProgramFileRepository $prog_file_rep, LoggerInterface $l)
+  public function __construct(ParameterBagInterface $parameter_bag, CatrobatFileExtractor $file_extractor,
+                              ProgramManager $program_manager, ProgramFileRepository $prog_file_rep,
+                              LoggerInterface $l)
   {
+
+    $local_extracted_path = $parameter_bag->get('catrobat.file.extract.dir');
+    $web_extracted_path = $parameter_bag->get('catrobat.file.extract.path');
+    $local_storage_path = $parameter_bag->get('catrobat.file.storage.dir');
+
     if (!is_dir($local_extracted_path))
     {
       throw new InvalidStorageDirectoryException($local_extracted_path . ' is not a valid directory');

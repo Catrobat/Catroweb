@@ -2,7 +2,10 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Commands\Helpers\CronjobProgressWriter;
+use App\Catrobat\Commands\Helpers\RecommenderFileLock;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,6 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use App\Entity\UserManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
@@ -29,7 +33,7 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
   private $recommender_manager;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $entity_manager;
 
@@ -51,19 +55,19 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
   /**
    * RecommenderUserSimilaritiesCommand constructor.
    *
-   * @param UserManager        $user_manager
+   * @param UserManager $user_manager
    * @param RecommenderManager $recommender_manager
-   * @param EntityManager      $entity_manager
-   * @param                    $app_root_dir
+   * @param EntityManagerInterface $entity_manager
+   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(UserManager $user_manager, RecommenderManager $recommender_manager,
-                              EntityManager $entity_manager, $app_root_dir)
+                              EntityManagerInterface $entity_manager, $kernel_root_dir)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
     $this->recommender_manager = $recommender_manager;
     $this->entity_manager = $entity_manager;
-    $this->app_root_dir = $app_root_dir;
+    $this->app_root_dir = $kernel_root_dir;
     $this->output = null;
     $this->migration_file_lock = null;
   }

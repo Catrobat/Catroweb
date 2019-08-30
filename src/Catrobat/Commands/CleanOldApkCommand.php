@@ -112,7 +112,7 @@ class CleanOldApkCommand extends ContainerAwareCommand
       $id_query_part = ' AND (' . $id_query_part . ')';
     }
 
-    $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+    $em = $this->getContainer()->get('doctrine')->getManager();
     $query = $em->createQuery("UPDATE App\Entity\Program p 
                       SET p.apk_status = :status WHERE p.apk_status != :status" . $id_query_part);
     $query->setParameter('status', Program::APK_NONE);

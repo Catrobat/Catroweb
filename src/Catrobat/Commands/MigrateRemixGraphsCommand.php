@@ -2,17 +2,20 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Commands\Helpers\MigrationFileLock;
 use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Catrobat\Services\AsyncHttpClient;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use App\Entity\ProgramManager;
@@ -55,7 +58,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
   private $remix_manager;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $entity_manager;
 
@@ -77,16 +80,16 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
   /**
    * MigrateRemixGraphsCommand constructor.
    *
-   * @param Filesystem     $filesystem
-   * @param UserManager    $user_manager
+   * @param Filesystem $filesystem
+   * @param UserManager $user_manager
    * @param ProgramManager $program_manager
-   * @param RemixManager   $remix_manager
-   * @param EntityManager  $entity_manager
-   * @param                $app_root_dir
+   * @param RemixManager $remix_manager
+   * @param EntityManagerInterface $entity_manager
+   * @param $kernel_root_dir
    */
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
                                  ProgramManager $program_manager, RemixManager $remix_manager,
-                                 EntityManager $entity_manager, $app_root_dir)
+                                 EntityManagerInterface $entity_manager, $kernel_root_dir)
   {
     parent::__construct();
     $this->file_system = $filesystem;
@@ -95,7 +98,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     $this->program_manager = $program_manager;
     $this->remix_manager = $remix_manager;
     $this->entity_manager = $entity_manager;
-    $this->app_root_dir = $app_root_dir;
+    $this->app_root_dir = $kernel_root_dir;
     $this->output = null;
     $this->migration_file_lock = null;
   }
@@ -353,7 +356,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
   private function extractRemixData($program_file_path, $program_id, $program_name, OutputInterface $output, ProgressBar $progress_bar)
   {
     /** @var CatrobatFileExtractor $file_extractor */
-    $file_extractor = $this->getContainer()->get('fileextractor');
+    $file_extractor = $this->getContainer()->get('App\Catrobat\Services\CatrobatFileExtractor');
     $extracted_file = null;
 
     $progress_bar->setMessage('Extracting XML of program #' . $program_id . ' "' . $program_name . '"');
@@ -502,7 +505,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
        * @var CatrobatFileExtractor $fileextractor
        * @var $user User
        */
-      $fileextractor = $this->getContainer()->get('fileextractor');
+      $fileextractor = $this->getContainer()->get('App\Catrobat\Services\CatrobatFileExtractor');
       $program_file = new File($program_file_path);
       $extracted_file = $fileextractor->extract($program_file);
 

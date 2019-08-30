@@ -3,8 +3,11 @@
 namespace App\Catrobat\Controller\Admin;
 
 
+use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\BroadcastNotification;
 use App\Entity\UserManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,22 +28,21 @@ class BroadcastNotificationController extends CRUDController
     return $this->renderWithExtraParams('Admin/broadcast_notification.html.twig');
   }
 
-
   /**
    * @param Request $request
+   * @param CatroNotificationService $notification_service
+   * @param UserManager $user_manager
    *
    * @return Response
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function sendAction(Request $request)
+  public function sendAction(Request $request, CatroNotificationService $notification_service, UserManager $user_manager)
   {
     $message = $request->get("Message");
     $title = $request->get("Title");
 
-    $notification_service = $this->get("catro_notification_service");
-
-    $notification_service->addNotifications($this->getNotifications($message, $title));
+    $notification_service->addNotifications($this->getNotifications($message, $title, $user_manager));
 
     return new Response("OK");
   }
@@ -49,16 +51,13 @@ class BroadcastNotificationController extends CRUDController
   /**
    * @param $message
    * @param $title
+   * @param UserManager $user_manager
    *
    * @return \Generator
    */
-  private function getNotifications($message, $title)
+  private function getNotifications($message, $title, UserManager $user_manager)
   {
-    /**
-     * @var UserManager $usermanager
-     */
-    $usermanager = $this->get('usermanager');
-    foreach ($usermanager->findAll() as $user)
+    foreach ($user_manager->findAll() as $user)
     {
       yield new BroadcastNotification($user, $title, $message);
     }

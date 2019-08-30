@@ -41,14 +41,14 @@ class UserLDAPManager extends LdapManager
    * UserLDAPManager constructor.
    *
    * @param LdapDriverInterface $driver
-   * @param UserHydrator        $userManager
+   * @param UserHydrator        $user_manager
    * @param array               $params
    * @param                     $role_mappings
    * @param                     $group_filter
    * @param                     $tokengenerator
    * @param Logger              $logger
    */
-  public function __construct(LdapDriverInterface $driver, UserHydrator $userManager,
+  public function __construct(LdapDriverInterface $driver, UserHydrator $user_manager,
                               array $params, $role_mappings, $group_filter, $tokengenerator, Logger $logger)
   {
     $this->role_mappings = $role_mappings;
@@ -56,7 +56,7 @@ class UserLDAPManager extends LdapManager
     $this->logger = $logger;
     $this->tokengenerator = $tokengenerator;
 
-    parent::__construct($driver, $userManager, $params);
+    parent::__construct($driver, $user_manager, $params);
   }
 
   /**
@@ -65,7 +65,7 @@ class UserLDAPManager extends LdapManager
    * @return bool|\FOS\UserBundle\Model\UserInterface|object|UserInterface|null
    * @throws \Exception
    */
-  public function findUserBy(array $criteria)
+  public function findUserBy(array $criteria): ?UserInterface
   {
     try
     {
@@ -78,14 +78,14 @@ class UserLDAPManager extends LdapManager
 
       if ($entries['count'] == 0)
       {
-        return false;
+        return null;
       }
 
       // same Email-Address already in system?
       /**
        * @var UserManager $usermanager
        */
-      $usermanager = $this->userManager;
+      $usermanager = $this->user_manager;
       $sameEmailUser = $usermanager->findOneBy([
         "email" => $entries[0]['mail'],
       ]);
@@ -100,7 +100,7 @@ class UserLDAPManager extends LdapManager
         return $sameEmailUser;
       }
 
-      $user = $this->userManager->createUser();
+      $user = $this->user_manager->createUser();
       $this->hydrate($user, $entries[0]);
 
       return $user;
@@ -108,7 +108,7 @@ class UserLDAPManager extends LdapManager
     {
       $this->logger->addError("LDAP-Server not reachable?: " . $e->getMessage());
 
-      return false;
+      return null;
     }
   }
 
@@ -118,7 +118,7 @@ class UserLDAPManager extends LdapManager
    *
    * @return bool
    */
-  public function bind(UserInterface $user, $password)
+  public function bind(UserInterface $user, $password): bool
   {
     try
     {

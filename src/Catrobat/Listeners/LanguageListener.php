@@ -21,6 +21,9 @@ class LanguageListener
     {
       $pref_language = $event->getRequest()->getPreferredLanguage();
     }
+    if ($pref_language === null) {
+      $pref_language = "en";
+    }
     $event->getRequest()->setLocale($pref_language);
   }
 }

@@ -5,20 +5,22 @@ namespace App\Catrobat\Controller\Api;
 use App\Entity\Program;
 use App\Entity\User;
 use App\Catrobat\Events\ReportInsertEvent;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Catrobat\StatusCode;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\ProgramInappropriateReport;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 /**
  * Class ReportController
  * @package App\Catrobat\Controller\Api
  */
-class ReportController extends Controller
+class ReportController extends AbstractController
 {
 
   /**
@@ -26,24 +28,26 @@ class ReportController extends Controller
    *   defaults={"_format": "json"}, methods={"POST", "GET"})
    *
    * @param Request $request
+   * @param ProgramManager $program_manager
+   * @param TranslatorInterface $translator
+   * @param EventDispatcherInterface $event_dispatcher
    *
    * @return JsonResponse
    */
-  public function reportProgramAction(Request $request)
+  public function reportProgramAction(Request $request, ProgramManager $program_manager,
+                                      TranslatorInterface $translator, EventDispatcherInterface $event_dispatcher)
   {
     /* @var $program_manager ProgramManager */
     /* @var $program Program */
     /* @var $user User */
 
-    $program_manager = $this->get('programmanager');
     $entity_manager = $this->getDoctrine()->getManager();
-    $event_dispatcher = $this->get('event_dispatcher');
 
     $response = [];
     if (!$request->get('program') || !$request->get('category') || !$request->get('note'))
     {
       $response['statusCode'] = StatusCode::MISSING_POST_DATA;
-      $response['answer'] = $this->trans('errors.post-data');
+      $response['answer'] = $translator->trans('errors.post-data', [], 'catroweb');
       $response['preHeaderMessages'] = '';
 
       return JsonResponse::create($response);
@@ -53,7 +57,7 @@ class ReportController extends Controller
     if ($program == null)
     {
       $response['statusCode'] = StatusCode::INVALID_PROGRAM;
-      $response['answer'] = $this->trans('errors.program.invalid');
+      $response['answer'] = $translator->trans('errors.program.invalid', [], 'catroweb');
       $response['preHeaderMessages'] = '';
 
       return JsonResponse::create($response);
@@ -83,20 +87,9 @@ class ReportController extends Controller
       new ReportInsertEvent($request->get('category'), $request->get('note'), $report));
 
     $response = [];
-    $response['answer'] = $this->trans('success.report');
+    $response['answer'] = $translator->trans('success.report', [], 'catroweb');
     $response['statusCode'] = StatusCode::OK;
 
     return JsonResponse::create($response);
-  }
-
-  /**
-   * @param       $message
-   * @param array $parameters
-   *
-   * @return string
-   */
-  private function trans($message, $parameters = [])
-  {
-    return $this->get('translator')->trans($message, $parameters, 'catroweb');
   }
 }

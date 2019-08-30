@@ -2,19 +2,25 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Services\CatroNotificationService;
+use App\Catrobat\Services\StatisticsService;
+use App\Catrobat\Services\TestEnv\FakeStatisticsService;
 use App\Entity\CatroNotification;
 use App\Entity\CommentNotification;
 use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\NewProgramNotification;
+use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\StatusCode;
+use App\Repository\CatroNotificationRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,16 +33,32 @@ use Twig\Error\Error;
  * Class UserNotificationController
  * @package App\Catrobat\Controller\Web
  */
-class UserNotificationController extends Controller
+class UserNotificationController extends AbstractController
 {
+  /**
+   * @var StatisticsService | FakeStatisticsService
+   */
+  private $statistics;
+
+  /**
+   * UserNotificationController constructor.
+   *
+   * @param ParameterBagInterface $parameter_bag
+   * @param StatisticsService $statistics_service
+   * @param FakeStatisticsService $fakeStatisticsService
+   */
+  public function __construct(ParameterBagInterface $parameter_bag, StatisticsService $statistics_service) {
+    $this->statistics = $statistics_service;
+  }
 
   /**
    * @Route("/notifications", name="user_notifications", methods={"GET"})
    *
+   * @param CatroNotificationRepository $nr
+   *
    * @return RedirectResponse|Response
-   * @throws Error
    */
-  public function userNotificationsAction()
+  public function userNotificationsAction(CatroNotificationRepository $nr)
   {
     /**
      * @var $notification CatroNotification
@@ -51,8 +73,7 @@ class UserNotificationController extends Controller
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
-    
-    $nr = $this->get("catro_notification_repository");
+
     $catro_user_notifications = $nr->findByUser($user, ['id' => 'DESC']);
     $avatars = [];
 
@@ -104,18 +125,21 @@ class UserNotificationController extends Controller
   /**
    * @Route("/notifications/count", name="user_notifications_count", methods={"GET"})
    *
+   * @param CatroNotificationRepository $nr
+   * @param RemixManager $remix_manager
+   *
    * @return JsonResponse
    */
-  public function userNotificationsCountAction()
+  public function userNotificationsCountAction(CatroNotificationRepository $nr, RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
-    $nr = $this->get("catro_notification_repository");
+
     $catro_user_notifications = $nr->findByUser($user);
-    $unseen_remixed_program_data = $this->get('remixmanager')->getUnseenRemixProgramsDataOfUser($user);
+    $unseen_remixed_program_data = $remix_manager->getUnseenRemixProgramsDataOfUser($user);
 
     return new JsonResponse([
       'count'      => count($unseen_remixed_program_data) + count($catro_user_notifications),
@@ -127,22 +151,25 @@ class UserNotificationController extends Controller
   /**
    * @Route("/notifications/seen", name="user_notifications_seen", methods={"GET"})
    *
+   * @param CatroNotificationRepository $nr
+   * @param CatroNotificationService $ns
+   * @param RemixManager $remix_manager
+   *
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function userNotificationsSeenAction()
+  public function userNotificationsSeenAction(CatroNotificationRepository $nr, CatroNotificationService $ns,
+                                              RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
-    $nr = $this->get("catro_notification_repository");
-    $ns = $this->get("catro_notification_service");
     $catro_user_notifications = $nr->findByUser($user);
     $ns->deleteNotifications($catro_user_notifications);
-    $this->get('remixmanager')->markAllUnseenRemixRelationsOfUserAsSeen($user);
+    $remix_manager->markAllUnseenRemixRelationsOfUserAsSeen($user);
 
     return new JsonResponse(['success' => true]);
   }
@@ -155,19 +182,20 @@ class UserNotificationController extends Controller
    * @param Request $request
    * @param         $ancestor_id
    * @param         $descendant_id
+   * @param RemixManager $remix_manager
    *
    * @return RedirectResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id)
+  public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id, RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
-    $remix_manager = $this->get('remixmanager');
+
     $remix_relation = $remix_manager->findCatrobatRelation($ancestor_id, $descendant_id);
     if ($remix_relation == null)
     {
@@ -179,10 +207,9 @@ class UserNotificationController extends Controller
         . 'because you do not own the parent program.');
     }
 
-    $statistics = $this->get('statistics');
     $referrer = $request->headers->get('referer');
     $locale = strtolower($request->getLocale());
-    $statistics->createClickStatistics($request, 'rec_remix_notification', $ancestor_id, $descendant_id, null, null,
+    $this->statistics->createClickStatistics($request, 'rec_remix_notification', $ancestor_id, $descendant_id, null, null,
       $referrer, $locale, false);
 
     $remix_manager->markRemixRelationAsSeen($remix_relation);
@@ -200,20 +227,20 @@ class UserNotificationController extends Controller
    *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
    *
    * @param $notification_id
+   * @param CatroNotificationService $ns
+   * @param CatroNotificationRepository $nr
    *
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function markCatroNotificationAsRead($notification_id)
+  public function markCatroNotificationAsRead($notification_id, CatroNotificationService $ns, CatroNotificationRepository $nr)
   {
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['success' => false, "message" => "User not logged in"]);
     }
-    $ns = $this->get("catro_notification_service");
-    $nr = $this->get("catro_notification_repository");
     $notification_to_delete = $nr->findOneBy(["id" => $notification_id, "user" => $user]);
     if ($notification_to_delete === null)
     {

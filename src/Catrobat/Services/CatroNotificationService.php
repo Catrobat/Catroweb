@@ -29,8 +29,8 @@
 
 namespace App\Catrobat\Services;
 
-use App\Entity\CatroNotification;
-use Doctrine\ORM\EntityManager;
+
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class CatroNotificationService
@@ -44,16 +44,16 @@ class CatroNotificationService
   const DEFAULT_NOTIFICATION = 0;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $em;
 
   /**
    * CatroNotificationService constructor.
    *
-   * @param EntityManager $em
+   * @param EntityManagerInterface $em
    */
-  public function __construct(EntityManager $em)
+  public function __construct(EntityManagerInterface $em)
   {
     $this->em = $em;
   }
@@ -68,9 +68,6 @@ class CatroNotificationService
 
   /**
    * @param $notification
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function addNotification($notification)
   {
@@ -79,10 +76,7 @@ class CatroNotificationService
   }
 
   /**
-   * @param \Generator $notifications
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @param $notifications
    */
   public function addNotifications($notifications)
   {
@@ -95,9 +89,6 @@ class CatroNotificationService
 
   /**
    * @param $notification
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function removeNotification($notification)
   {
@@ -106,12 +97,7 @@ class CatroNotificationService
   }
 
   /**
-   * @param array CatroNotification $notifications
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   *
-   * @desc Deletes all given notifications
+   * @param $notifications
    */
   public function deleteNotifications($notifications)
   {
