@@ -3,11 +3,11 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Filesystem\Filesystem;;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 /**
@@ -102,7 +102,7 @@ class ResetCommand extends ContainerAwareCommand
     $filesystem->remove($temp_dir);
     $filesystem->mkdir($temp_dir);
 
-    $this->downloadPrograms($temp_dir,intval($input->getOption('more')), $output);
+    $this->downloadPrograms($temp_dir, intval($input->getOption('more')), $output);
 
     $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
     CommandHelper::executeShellCommand(
@@ -116,7 +116,10 @@ class ResetCommand extends ContainerAwareCommand
     $filesystem->remove($temp_dir);
 
     CommandHelper::executeShellCommand('chmod o+w -R public/resources', [],
-      'Setting permissions', $output);
+      'Setting resources permissions', $output);
+
+    CommandHelper::executeShellCommand('chmod o+w -R public/resources_test', [],
+      'Setting test resources permissions', $output);
 
     CommandHelper::executeShellCommand('chmod o+w+x tests/behat/sqlite/ -R', [],
       'Setting permissions for behat sqlite test database', $output);
@@ -151,7 +154,7 @@ class ResetCommand extends ContainerAwareCommand
         try
         {
           file_put_contents($name, file_get_contents($url));
-          $already_downloaded ++;
+          $already_downloaded++;
         } catch (\Exception $e)
         {
           $output->writeln("File <" . $url . "> returned error 500, continuing...");
