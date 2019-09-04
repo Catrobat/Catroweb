@@ -1294,8 +1294,8 @@ else
         'BaseSelector': 'nav button#btn-search-header',
         'Category'    : 'engagement',
         'Action'      : 'search',
-        'Label'       : function (e) { return e.previousElementSibling.value },
-        'search_term' : function (e) { return e.previousElementSibling.value },
+        'Label'       : function (e) { return e.parentElement.previousElementSibling.value },
+        'search_term' : function (e) { return e.parentElement.previousElementSibling.value },
       })
       
       AnalyticsTracker.registerElementsForClickTracking(searchButton)
