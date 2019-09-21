@@ -23,6 +23,14 @@ Feature: Check if flavoring system works
     Given I am on "/embroidery"
     Then I should see the image "logo_embroidery.svg"
 
+  Scenario: User views arduino flavor
+    Given I am on "/arduino"
+    Then I should see the image "logo_arduino.png"
+
+  Scenario: User views embroidery flavor
+    Given I am on "/embroidery"
+    Then I should see the image "logo_embroidery.svg"
+
   Scenario: Viewing details of program 2 using release app
     Given I use a specific "theme/luna" themed app
     And I am on "/app"
@@ -34,3 +42,9 @@ Feature: Check if flavoring system works
     And I am on "/app"
     Then the logos src should not be "logo_luna"
     And the logos src should be "logo-catroweb"
+
+  Scenario: Viewing details of program 1 using release app
+    Given I use a specific "theme/arduino" themed app
+    And I am on "/app"
+    Then the logos src should not be "logo_embroidery"
+    And the logos src should be "logo_arduino"
