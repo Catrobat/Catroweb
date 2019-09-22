@@ -13,14 +13,56 @@
 
     {# logged in #}
     {% if app.user %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('user_notifications') }}" id="btn-notifications">
-          <i class="fas fa-bell mr-1"></i>
+
+
+    <li class="nav-item">
+
+      <a class="nav-link collapsible">
+
+        <i class="fas fa-bell mr-1"></i>
           {{ "notifications"|trans({}, "catroweb") }}
-          <span
-              class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
+        <span
+            class="badge-pill badge-danger user-notification-badge all-notifications-dropdown user-notification-badge-font"></span>
+
+        <i class="caret-icon fa fa-caret-left"></i>
+
+      </a>
+
+      <div class="notifications-dropdown-content">
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "allNotifications" })}}" id="btn-notifications">
+          <i class="fas fa-bell mr-1"></i>
+            {{ "allNotifications"|trans({}, "catroweb") }}
+            <span
+                class="badge-pill badge-danger user-notification-badge-dropdown all-notifications user-notification-badge-font"></span>
         </a>
+
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "followers" }) }}" id="btn-followers">
+
+          <i class="fas fa-user"></i>
+            {{ "FollowersNotifications"|trans({}, "catroweb") }}
+          <span
+                class="badge-pill badge-danger user-notification-badge-dropdown followers user-notification-badge-font"></span>
+        </a>
+
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "likes" }) }}" id="btn-likes">
+          <i class="fas fa-thumbs-up"></i>
+            {{ "LikeNotifications"|trans({}, "catroweb") }}
+            <span
+                class="badge-pill badge-danger user-notification-badge-dropdown likes user-notification-badge-font"></span>
+        </a>
+
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "comments" }) }}" id="btn-comments">
+          <i class="fas fa-comments"></i>
+
+            {{ "CommentNotifications"|trans({}, "catroweb") }}
+          <span
+                class="badge-pill badge-danger user-notification-badge-dropdown comments user-notification-badge-font"></span>
+        </a>
+
+      </div>
+
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
           <i class="fas fa-user-circle mr-1"></i>
@@ -126,5 +168,6 @@
     enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
     enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
     enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
+    manageNotificationsDropdown()
   </script>
 {% endblock %}

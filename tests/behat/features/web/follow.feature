@@ -68,5 +68,7 @@ Feature: Follow feature on profiles
     And I click "#follow-btn"
     Then I should be on "/app/user/1"
     Then I log in as "Catrobat" with the password "123456"
-    And I am on "/app/notifications"
+    And I am on "/app/notifications/allNotifications"
+    Then I should see text matching "Catrobat2 follows you now"
+    Given I am on "/app/notifications/followers"
     Then I should see text matching "Catrobat2 follows you now"
