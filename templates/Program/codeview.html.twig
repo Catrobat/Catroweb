@@ -6,7 +6,27 @@
 {% import _self as self %}
 
 {% macro dropbtn(object, path, scene_name) %}
-{#   ToDo show the correct image#}
+
+  {% if object.getLooks()|length > 0 %}
+
+    {% if scene_name is null and assetExists(path~'images/'~object.getLooks()[0].getFileName())  %}
+      <img src="{{ asset(path~'images/'~object.getLooks()[0].getFileName()) }}"
+           class="object-icon">
+    {% elseif assetExists(path~scene_name~'/images/'~object.getLooks()[0].getFileName()) %}
+      <img src="{{ asset(path~scene_name~'/images/'~object.getLooks()[0].getFileName()) }}"
+           class="object-icon">
+    {% else %}
+      <div class="object-icon">
+        <i class="no-image-found-icon fas fa-times"></i>
+      </div>
+    {% endif %}
+
+  {% else %}
+    <div class="object-icon">
+      <i class="no-image-found-icon fas fa-times"></i>
+    </div>
+  {% endif %}
+
   <div class="object-meta">
 
     <div class="object-meta-name">
@@ -22,6 +42,7 @@
       <p>{{ object.getScripts()|length }}</p>
     </div>
   </div>
+
   <div class="arrow">
     <i class="catro-icon-button fas fa-caret-down"></i>
   </div>
@@ -37,19 +58,35 @@
           <div class="script-text">
             <span class="script-type">{{ script.getCaption() }}</span>
           </div>
+          {% if script.getLookFileName() is defined %}
+            {% if scene_name is null and assetExists(path~'images/'~script.getLookFileName()) %}
+              <img src="{{ asset('./'~path~'images/'~script.getLookFileName()) }}" class="brick-look script-brick-look">
+            {% elseif assetExists(path~scene_name~'/images/'~script.getLookFileName()) %}
+              <img src="{{ asset('./'~path~scene_name~'/images/'~script.getLookFileName()) }}"
+                   class="brick-look script-brick-look">
+            {% endif %}
+          {% endif %}
         </div>
         <div class="script-bricks-wrapper">
           {% for brick in script.getBricks() %}
             <div class="brick" style="background-image: url({{ asset('images/bricks/'~brick.getImgFile()) }})">
               <div class="brick-text">{{ brick.getCaption() }}</div>
+              {% if brick.getLookFileName() is defined %}
+                {% if scene_name is null and assetExists(path~'images/'~brick.getLookFileName()) %}
+                  <img src="{{ asset('./'~path~'images/'~brick.getLookFileName()) }}" class="brick-look">
+                {% elseif assetExists(path~scene_name~'/images/'~brick.getLookFileName()) %}
+                  <img src="{{ asset('./'~path~scene_name~'/images/'~brick.getLookFileName()) }}"
+                       class="brick-look">
+                {% endif %}
+              {% endif %}
               {% if brick.getSoundFileName() is defined %}
-                {% if scene_name is null %}
+                {% if scene_name is null and assetExists(path~'sounds/'~brick.getSoundFileName()) %}
                   <i id="sound-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-volume-up"
-                     onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }});">
+                     onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }})">
                   </i>
-                {% else %}
+                {% elseif assetExists(path~scene_name~'/sounds/'~brick.getSoundFileName()) %}
                   <i id="sound-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-volume-up"
-                     onclick="initialSound('{{ asset('./'~path~scene_name~'/sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }});">
+                     onclick="initialSound('{{ asset('./'~path~scene_name~'/sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }})">
                   </i>
                 {% endif %}
                 <i id="soundStop-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-stop"
@@ -295,101 +332,13 @@
 {% endblock %}
 
 {% block js %}
-
+  <script src="{{ asset('compiled/js/CodeView.js') }}"></script>
   <script>
-
-    let sound_map = {}
-    let current_brick_stat_block = null
-
-    $(document).ready(function () {
-
-      let translations = {
-        'showCode' : '{{ "codeview.showCode"|trans({}, "catroweb") }}',
-        'hideCode' : '{{ "codeview.hideCode"|trans({}, "catroweb") }}',
-        'showStats' : '{{ "codeview.showStatistics"|trans({}, "catroweb") }}',
-        'hideStats' : '{{ "codeview.hideStatistics"|trans({}, "catroweb") }}',
-      }
-
-      $('.collapse-btn').on('click', function () {
-        $(this).next().slideToggle(250, 'linear')
-        $(this).find('.arrow').toggleClass('rotate')
-      })
-
-      $(document).on('click', '.show-hide-code', function () {
-        let text = $('.show-hide-code-text')
-
-        if (text.text() === translations['showCode'])
-        {
-          $('.show-hide-code-arrow').addClass('rotate showing-code')
-          text.text(translations['hideCode'])
-          $('#codeview-wrapper').slideDown()
-        }
-        else
-        {
-          $('#codeview-wrapper').slideUp(400, function () {
-            $('.show-hide-code-arrow').removeClass('rotate showing-code')
-            text.text(translations['showCode'])
-          })
-        }
-      })
-
-      $(document).on('click', '.show-hide-code-statistic', function () {
-        let text = $('.show-hide-code-statistic-text')
-        if (text.text() === translations['showStats'])
-        {
-          $('.show-hide-code-statistic-arrow').addClass('rotate showing-code')
-          text.text(translations['hideStats'])
-          $('#codestatistic-wrapper').slideDown()
-        }
-        else
-        {
-          $('#codestatistic-wrapper').slideUp(400, function () {
-            $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code')
-            text.text(translations['showStats'])
-          })
-        }
-      })
-
-      $(document).on('click', '.brick-statistic-block', function () {
-        if (current_brick_stat_block !== null)
-        {
-          current_brick_stat_block.find('.different-statistic-dropcontent').fadeToggle(150)
-          current_brick_stat_block.toggleClass('active')
-        }
-
-        if ($(this).is(current_brick_stat_block))
-        {
-          current_brick_stat_block = null
-        }
-        else
-        {
-          $(this).find('.different-statistic-dropcontent').fadeToggle(150)
-          $(this).toggleClass('active')
-          current_brick_stat_block = $(this)
-        }
-      })
-    })
-
-    function initialSound (file_name, id)
-    {
-      let audio = new Audio(file_name)
-      audio.play()
-      audio.addEventListener('ended', function () {
-        $('#soundStop-' + id).hide()
-        $('#sound-' + id).show()
-      })
-      sound_map[id] = audio
-      $('#sound-' + id).hide()
-      $('#soundStop-' + id).show()
-    }
-
-    function stopSound (id)
-    {
-      sound_map[id].pause()
-      sound_map[id].currentTime = 0
-      $('#soundStop-' + id).hide()
-      $('#sound-' + id).show()
-    }
-
+    initCodeView(
+      '{{ "codeview.showCode"|trans({}, "catroweb") }}',
+      '{{ "codeview.hideCode"|trans({}, "catroweb") }}',
+      '{{ "codeview.showStatistics"|trans({}, "catroweb") }}',
+      '{{ "codeview.hideStatistics"|trans({}, "catroweb") }}',
+    )
   </script>
 {% endblock %}

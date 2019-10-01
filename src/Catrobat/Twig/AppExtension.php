@@ -120,7 +120,8 @@ class AppExtension extends AbstractExtension
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
       new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
       new TwigFunction('getJavascriptPath', [$this, 'getJavascriptPath']),
-      new TwigFunction('getCommunityStats', [$this, 'getCommunityStats'])
+      new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
+      new TwigFunction('assetExists', [$this, 'assetExists'])
     ];
   }
 
@@ -420,4 +421,19 @@ class AppExtension extends AbstractExtension
 
     return $stats;
   }
+
+  /**
+   * @param $filename
+   *
+   * @return bool
+   */
+  public function assetExists($filename)
+  {
+    $public_dir = $this->container->getParameterBag()->get('catrobat.pubdir');
+    $filename = rawurldecode($filename);
+    $filename = $public_dir . $filename;
+
+    return file_exists($filename);
+  }
+
 }

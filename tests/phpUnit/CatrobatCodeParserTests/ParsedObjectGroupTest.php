@@ -52,13 +52,13 @@ class ParsedObjectGroupTest extends \PHPUnit\Framework\TestCase
    */
   public function getObjectsMustReturnArrayOfParsedObject()
   {
-//        $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObject';
+    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObject';
 
     $this->assertTrue($this->group->getObjects() === []);
 
-//        foreach($this->group->getObjects() as $actual) {
-//            $this->assertInstanceOf($expected, $actual);
-//        }
+    foreach($this->group->getObjects() as $actual) {
+        $this->assertInstanceOf($expected, $actual);
+    }
 
   }
 
