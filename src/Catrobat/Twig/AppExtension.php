@@ -429,7 +429,7 @@ class AppExtension extends AbstractExtension
    */
   public function assetExists($filename)
   {
-    $public_dir = $this->container->getParameterBag()->get('catrobat.pubdir');
+    $public_dir = $this->parameter_bag->get('catrobat.pubdir');
     $filename = rawurldecode($filename);
     $filename = $public_dir . $filename;
 
