@@ -54,6 +54,11 @@ class Program
   protected $description;
 
   /**
+   * @ORM\Column(type="text")
+   */
+  protected $credits;
+
+  /**
    * @ORM\Column(type="integer", options={"default" = 1})
    */
   protected $version = self::INITIAL_VERSION;
@@ -427,6 +432,30 @@ class Program
   public function getDescription()
   {
     return $this->description;
+  }
+
+  /**
+   * Set credits.
+   *
+   * @param string $credits
+   *
+   * @return Program
+   */
+  public function setCredits($credits)
+  {
+    $this->credits = $credits;
+
+    return $this;
+  }
+
+  /**
+   * Get credits.
+   *
+   * @return string
+   */
+  public function getCredits()
+  {
+    return $this->credits;
   }
 
   /**

@@ -149,6 +149,62 @@
 
       <hr>
 
+      <div class="h2 headline" id="credits-headline">
+        <span>
+          {{ "credits"|trans({}, "catroweb") }}
+          {% if app.user and my_program %}
+            <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
+              <i id="edit-credits-button"
+                 class="ml-3 far fa-edit catro-icon-button"></i>
+            </a>
+          {% endif %}
+        </span>
+      </div>
+
+      <div id="credits" style="max-height: 300px; overflow: auto;">
+        {% if program.credits %}
+          {% if program.credits|length <= 250 %}
+            {{ program.credits|nl2br }}
+          {% else %}
+            <p>
+              <span>{{ program.credits[:250]|nl2br }}</span><!--- NO white space hack
+                --><span id="creditsPoints">...</span><!--- NO white space hack
+                --><span id="creditsFulltext"
+                           class="fulltext">{{ program.credits[250:]|nl2br }}</span>
+            </p>
+            <a id="creditsShowMoreToggle" aria-expanded="false"
+               aria-controls="creditsFulltext" href="#"
+               class="toggle-content">
+              <span id="creditsShowMoreText" class="text text-capitalize">
+                {{ ("show-more")|trans({}, "catroweb") }}
+              </span>
+            </a>
+          {% endif %}
+        {% else %}
+          {{ "noCredits"|trans({}, "catroweb") }}
+        {% endif %}
+      </div>
+
+
+        {% if app.user and my_program %}
+          <div id="edit-credits-ui">
+            <div id="edit-credits-error" style="display:none;" class="alert alert-danger"></div>
+            <textarea id="edit-credits" name="edit-credits" class="mt-2 mb-2"
+                      title="_edit-credits"
+                      maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
+{% if program.credits %}{{ program.credits }}{% else %}{{ "noCredits"|trans({}, "catroweb") }}{% endif %}
+          </textarea>
+
+            <button id="edit-credits-submit-button" class="btn btn-primary p-3 mb-5">
+              <i class="fa fa-floppy-o mr-2"></i>
+              {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
+            </button>
+          </div>
+        {% endif %}
+        <hr>
+
+
+
       {% if  program.tags|length > 0  or program.extensions|length > 0 %}
         <div id="tag-extension-container">
 
@@ -391,6 +447,17 @@
         {{ constant('App\\Catrobat\\StatusCode::OK') }},
         {{ constant('App\\Catrobat\\StatusCode::DESCRIPTION_TOO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
+    )
+  </script>
+
+  <script src="{{ asset('compiled/js/ProgramCredits.js') }}"></script>
+  <script>
+    new ProgramCredits('{{ program.id }}',
+      '{{ ("show-more")                             |trans({}, "catroweb") }}',
+      '{{ ("show-less")                             |trans({}, "catroweb") }}',
+        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('App\\Catrobat\\StatusCode::CREDITS_TO_LONG') }},
+        {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_CREDITS') }}
     )
   </script>
 
