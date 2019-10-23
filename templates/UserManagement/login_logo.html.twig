@@ -7,6 +7,8 @@
           src="{{ asset('images/logo/logo_luna.svg') }}"
         {% elseif theme() == 'embroidery' %}
           src="{{ asset('images/logo/logo_embroidery.svg') }}"
+        {% elseif theme() == 'arduino' %}
+          src="{{ asset('images/logo/logo_arduino.png') }}"
         {% elseif theme() == 'phirocode' %}
           src="{{ asset('images/logo/logo_phirocode.png') }}"
         {% elseif theme() == 'create@school' %}
@@ -27,6 +29,8 @@
           LUNA &
         {% elseif theme() == 'embroidery' %}
           EMBROIDERY
+        {% elseif theme() == 'arduino' %}
+          ARDUINO
         {% elseif theme() == 'phirocode' %}
           PHIRO
         {% elseif theme() == 'create@school' %}
@@ -42,6 +46,8 @@
           CAT
         {% elseif theme() == 'embroidery' %}
           DESIGNER
+        {% elseif theme() == 'arduino' %}
+          CODE
         {% else %}
           CODE
         {% endif %}

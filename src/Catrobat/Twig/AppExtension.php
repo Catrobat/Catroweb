@@ -323,6 +323,9 @@ class AppExtension extends AbstractExtension
       case 'embroidery':
         return "Embroidery Designer";
 
+      case 'arduino':
+        return "Arduino Code";
+
       default:
         return "Pocket Code";
     }
