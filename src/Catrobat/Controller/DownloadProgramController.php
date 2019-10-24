@@ -101,11 +101,13 @@ class DownloadProgramController extends AbstractController
       }
 
       $response = new BinaryFileResponse($file);
-      $d = $response->headers->makeDisposition(
-        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-        $program->getId() . '.catrobat'
+
+      // can be changed back to $response->setContentDisposition
+      // after https://github.com/symfony/symfony/issues/34099 has been fixed
+      $response->headers->set(
+        'Content-Disposition',
+        'attachment; filename="' . $program->getId() . '.catrobat"'
       );
-      $response->headers->set('Content-Disposition', $d);
 
       return $response;
     }
