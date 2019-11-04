@@ -32,7 +32,8 @@ let MyProfile = function (profile_url, save_username,
   self.regex_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   self.data_changed = false
   self.delete_account_url = delete_account_url
-  
+  let blueColor = '#3085d6'
+  let redColor = '#d33'
   let passwordEditContainer = $('#password-edit-container')
   let usernameEditContainer = $('#username-edit-container')
   let usernameData = $('#username-wrapper > .profile-data')
@@ -71,6 +72,17 @@ let MyProfile = function (profile_url, save_username,
     toggleEditSection(accountSettingsContainer)
   })
   
+  function stringTranslate(programName,catalogEntry) {
+    let translations = [];
+    translations.push({key  : '%programName%', value: programName})
+    let translateString = Routing.generate('translate_word', {'word'  : catalogEntry,
+      'array' : JSON.stringify(translations),
+      'domain': 'catroweb'
+    }, false)
+    
+    return translateString
+  }
+  
   function toggleEditSection (container, data = null)
   {
     let fadeTime = 250
@@ -104,16 +116,8 @@ let MyProfile = function (profile_url, save_username,
   
   self.deleteProgram = function (id) {
     let programName = $('#program-' + id).find('.program-name').text()
-    let translations = []
-    translations.push({
-      key  : '%programName%',
-      value: programName
-    })
-    let url = Routing.generate('translate_word', {
-      'word'  : 'programs.deleteConfirmation',
-      'array' : JSON.stringify(translations),
-      'domain': 'catroweb'
-    }, false)
+    let catalogEntry = 'programs.deleteConfirmation'
+    let url =stringTranslate(programName,catalogEntry)
     $.get(url, function (data) {
       let split = data.split('\n')
       swal({
@@ -121,8 +125,8 @@ let MyProfile = function (profile_url, save_username,
         html              : split[1] + '<br><br>' + split[2],
         type              : 'warning',
         showCancelButton  : true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor : '#d33',
+        confirmButtonColor: blueColor,
+        cancelButtonColor : redColor,
         confirmButtonText : split[3],
         cancelButtonText  : split[4]
       }).then(() => {
@@ -135,18 +139,47 @@ let MyProfile = function (profile_url, save_username,
     $.get(self.toggle_visibility_url + '/' + id, {}, function (data) {
       let visibilityLockId = $('#visibility-lock-' + id)
       let visibilityLockOpenId = $('#visibility-lock-open-' + id)
+      let programName = $('#program-' + id).find('.program-name').text()
+      let catalogEntry = 'programs.changeVisibility'
+      let url = stringTranslate(programName,catalogEntry)
+      
       if (data === 'true')
       {
-        if (visibilityLockId.is(':visible'))
-        {
-          visibilityLockId.hide()
-          visibilityLockOpenId.show()
-        }
-        else
-        {
-          visibilityLockOpenId.hide()
-          visibilityLockId.show()
-        }
+        $.get(url, function(data) {
+          let split = data.split('\n')
+          if (visibilityLockId.is(':visible'))
+          {
+            swal({
+              title             : split[0],
+              html              : split[3],
+              type              : 'warning',
+              showCancelButton  : true,
+              confirmButtonColor: blueColor,
+              cancelButtonColor : redColor,
+              confirmButtonText : split[4],
+              cancelButtonText  : split[6],
+            }).then(() => {
+              visibilityLockId.hide()
+              visibilityLockOpenId.show()
+            }).catch(swal.noop)
+          }
+          else
+          {
+            swal({
+              title             : split[0],
+              html              : split[1] + '<br><br>' + split[2],
+              type              : 'warning',
+              showCancelButton  : true,
+              confirmButtonColor: blueColor,
+              cancelButtonColor : redColor,
+              confirmButtonText : split[5],
+              cancelButtonText  : split[6],
+            }).then(() => {
+              visibilityLockId.show()
+              visibilityLockOpenId.hide()
+            }).catch(swal.noop)
+          }
+        })
       }
       else if (data === 'false')
       {
@@ -171,8 +204,8 @@ let MyProfile = function (profile_url, save_username,
         html              : split[1] + '<br><br>' + split[2],
         type              : 'warning',
         showCancelButton  : true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor : '#d33',
+        confirmButtonColor: blueColor,
+        cancelButtonColor : redColor,
         confirmButtonText : split[3],
         cancelButtonText  : split[4],
       }).then(() => {
