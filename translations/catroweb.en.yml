@@ -21,6 +21,8 @@ noWayOfReturn: There is no way to restore your actions!
 download: Download the project
 description: Description
 noDescription: No description available.
+credits: Credits
+noCredits: No credits available.
 country: Country
 loginText: login
 privacyPolicy: Privacy Policy
@@ -85,6 +87,8 @@ programs:
     Cancel
   tooLongDescription: The project description is too long!
   rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -130,6 +134,8 @@ programs:
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project Description
   saveDescription: Save Description change
+  editCredits: Edit the project Credits
+  saveCredits: Save Credits change
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -292,7 +298,7 @@ termsOfUse:
     item3: with all levels of experience
   list2:
     item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's description. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
@@ -597,6 +603,8 @@ errors:
     short: 'Your password must have at least {{ limit }} characters.'
   description:
     rude: Description must not contain rude wordes.
+  credit:
+    rude: Credits must not contain rude words.
   country:
     blank: The country is missing.
     invalid: Invalid country

@@ -1025,6 +1025,17 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $textarea->setValue($arg1);
   }
 
+  /**
+   * @Given /^I write "([^"]*)" in textarea$/
+   * @param $arg1
+   */
+  public function iWriteInTextarea($arg1)
+  {
+    $textarea = $this->getSession()->getPage()->find('css', '#edit-credits');
+    Assert::assertNotNull($textarea, "Textarea not found");
+    $textarea->setValue($arg1);
+  }
+
 
   /**
    * @Given /^there are tags:$/

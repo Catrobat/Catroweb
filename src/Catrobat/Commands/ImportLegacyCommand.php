@@ -245,6 +245,8 @@ class ImportLegacyCommand extends ContainerAwareCommand
           $description = $data[2];
           $description = str_replace('<br />\\n', "\n", $description);
           $program->setDescription($description);
+          $credits = "No credits available.\n";
+          $program->setCredits($credits);
           $program->setUploadedAt(new \DateTime($data[4], new \DateTimeZone('UTC')));
           $program->setUploadIp($data[5]);
           $program->setRemixMigratedAt(null);

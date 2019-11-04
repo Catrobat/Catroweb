@@ -74,6 +74,18 @@ h2
     line-height: 23px;
     @include force-word-break();
   }
+
+  #edit-credits-ui {
+    display: flex;
+    flex-direction: column;
+  }
+  #credits
+  {
+    margin: 25px auto;
+    line-height: 23px;
+    @include force-word-break();
+  }
+
 }
 
 .show

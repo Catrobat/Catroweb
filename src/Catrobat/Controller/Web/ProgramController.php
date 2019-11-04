@@ -527,6 +527,70 @@ class ProgramController extends AbstractController
     return JsonResponse::create(['statusCode' => StatusCode::OK]);
   }
 
+  /**
+   * @Route("/editProjectCredits/{id}/{newCredits}", name="edit_program_credits",
+   *   options={"expose"=true}, methods={"GET"},)
+   *
+   * @param GuidType $id
+   * @param string  $newCredits
+   * @param RudeWordFilter  $rude_word_filter
+   * @param ProgramManager  $program_manager
+   * @param TranslatorInterface  $translator
+   *
+   * @return Response
+   * @throws Exception
+   *
+   */
+  public function editProgramCredits($id, $newCredits, RudeWordFilter $rude_word_filter,
+                                         ProgramManager $program_manager, TranslatorInterface $translator)
+  {
+    /**
+     * @var User           $user
+     * @var Program        $program
+     */
+
+    $max_credits_size = $this->getParameter("catrobat.max_credits_upload_size");
+
+    if (strlen($newCredits) > $max_credits_size)
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::CREDITS_TO_LONG,
+                                   'message'    => $translator
+                                     ->trans("programs.tooLongCredits", [], "catroweb")]);
+    }
+
+    if ($rude_word_filter->containsRudeWord($newCredits))
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_CREDITS,
+                                   'message'    => $translator
+                                     ->trans("programs.rudeWordsInCredits", [], "catroweb")]);
+    }
+
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $program = $program_manager->find($id);
+    if (!$program)
+    {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    if ($program->getUser() !== $user)
+    {
+      throw $this->createAccessDeniedException('Not your program!');
+    }
+
+    $program->setCredits($newCredits);
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($program);
+    $em->flush();
+
+    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+  }
+
 
   /**
    * @param GameJamRepository $game_jam_repository

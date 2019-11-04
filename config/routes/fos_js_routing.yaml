@@ -28,6 +28,12 @@ edit_program_description:
     options:
         expose: true
 
+edit_program_credits:
+    path: /editProjectCredits/{id}/{newCredits}
+    controller: App\Catrobat\Controller\Web\ProgramController:editProgramCredits
+    options:
+        expose: true
+
 api_media_lib_package_bynameurl:
     path: /{flavor}/api/media/packageByNameUrl/{package}/json
     controller: App\Catrobat\Controller\Api\MediaPackageController:getMediaFilesForPackageByNameUrl
