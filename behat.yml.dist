@@ -37,6 +37,9 @@ default:
                 default:
                     chrome:
                         api_url: "http://localhost:9222"
+                        download_behavior: allow
+                        download_path: /tmp/
+
 
         emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
               name: html

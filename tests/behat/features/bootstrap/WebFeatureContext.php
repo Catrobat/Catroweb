@@ -82,6 +82,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   const FIXTUREDIR = './tests/testdata/DataFixtures/';
   const ALREADY_IN_DB_USER = 'AlreadyinDB';
   const DEFAULT_PASSWORD = '123456';
+  const BROWSER_DOWNLOAD_DIR = '/tmp/'; // Must be identical to the Mink parameter "download_path".
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -1701,26 +1702,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^I should receive a "([^"]*)" file$/
-   * @param $extension
-   */
-  public function iShouldReceiveAFile($extension)
-  {
-    $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
-    Assert::assertEquals('image/' . $extension, $content_type);
-  }
-
-  /**
-   * @Then /^I should receive a file named "([^"]*)"$/
-   * @param $name
-   */
-  public function iShouldReceiveAFileNamed($name)
-  {
-    $content_disposition = $this->getClient()->getResponse()->headers->get('Content-Disposition');
-    Assert::assertEquals('attachment; filename="' . $name . '"', $content_disposition);
-  }
-
-  /**
    * @Given /^the response code should be "([^"]*)"$/
    * @param $code
    */
@@ -1729,19 +1710,33 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $response = $this->getClient()->getResponse();
     Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
-
+  
   /**
-   * @Then /^the media file "([^"]*)" must have the download url "([^"]*)"$/
-   * @param $id
-   * @param $file_url
+   * @Then /^I should receive a file named "([^"]*)"$/
+   * @param $name
    */
-  public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
+  public function iShouldReceiveAFileNamed($name)
   {
-    $mediafile = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
-    Assert::assertNotNull($mediafile, "Mediafile not found!");
-    $link = $mediafile->getAttribute("href");
-    Assert::assertTrue(is_int(strpos($link, $file_url)));
+    $received = false;
+    $file_path = self::BROWSER_DOWNLOAD_DIR . '/' . $name;
+
+    $end_time = time() + 5; // Waiting for files to be downloaded times out after 5 seconds
+
+    while (time() < $end_time)
+    {
+      if (file_exists($file_path))
+      {
+        $received = true;
+        break;
+      }
+      sleep(1);
+    }
+
+    unlink($file_path);
+
+    Assert::assertEquals(true, $received, "File $name hasn't been downloaded");
   }
+
 
   /**
    * @Then /^I should see media file with id "([^"]*)"$/

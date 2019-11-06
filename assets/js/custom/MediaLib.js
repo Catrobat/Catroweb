@@ -15,6 +15,17 @@ function MediaLib(package_name, flavor, assetsDir)
   
   function getPackageFiles(package_name, flavor, assetsDir)
   {
+    var download_list = [];
+  
+    document.getElementById("start-downloads").onclick = function()
+    {
+      for (i = 0; i < download_list.length; i++)
+      {
+        medialib_downloadSelectedFile(download_list[i]);
+      }
+    };
+    
+    
     let url = Routing.generate('api_media_lib_package_bynameurl', {flavor: flavor, package: package_name}, false);
     $.get(url, {}, pkgFiles => {
       pkgFiles.forEach(file => {
@@ -24,10 +35,29 @@ function MediaLib(package_name, flavor, assetsDir)
         }
         
         const mediafileContainer = $('<a class="mediafile" id="mediafile-' + file.id + '"/>');
-        mediafileContainer.attr("href", file.download_url);
-        mediafileContainer.attr('data-extension', file.extension);
-        mediafileContainer.click(function() {
-          medialib_onDownload(this);
+        mediafileContainer.click(function()
+        {
+          mediafileContainer.toggleClass("selected");
+          var index_in_download_list = download_list.indexOf(file);
+          
+  
+          if (index_in_download_list == -1)
+          {
+            download_list.push(file);
+          }
+          else
+          {
+            download_list.splice(index_in_download_list, 1)
+          }
+
+          if (download_list.length > 0)
+          {
+            document.getElementById("downloadbar").style.visibility = "visible";
+          }
+          else
+          {
+            document.getElementById("downloadbar").style.visibility = "hidden";
+          }
         });
         
         if (flavor !== "pocketcode" && file.flavor === flavor)
@@ -289,18 +319,13 @@ function MediaLib(package_name, flavor, assetsDir)
   }
 }
 
-function medialib_onDownload(link)
+function medialib_downloadSelectedFile(file)
 {
-  if (link.href !== 'javascript:void(0)')
-  {
-    var download_href = link.href;
-    link.href = 'javascript:void(0)';
-    
-    setTimeout(function() {
-      link.href = download_href;
-    }, 5000);
-    
-    window.location = download_href;
-  }
+  var link = document.createElement('a');
+  link.href = file.download_url;
+  link.download = file.name;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
   return false;
 }

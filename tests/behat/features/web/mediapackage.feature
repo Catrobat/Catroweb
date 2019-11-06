@@ -1,4 +1,4 @@
-@web @media
+@homepage
 Feature:
   In order to speed up the creation of a pocketcode program
   As UX/Design team
@@ -29,19 +29,7 @@ Feature:
 
   Scenario: Viewing defined categories in a specific package
     Given I am on "/app/media-library/looks"
-    And I wait for the page to be loaded
     Then I should see "Animals"
-
-  Scenario: Download a media file
-    When I download "/app/download-media/1"
-    Then I should receive a "png" file
-    And I should receive a file named "Dog (-).png"
-    And the response code should be "200"
-
-  Scenario: The app needs the filename, so the media file link must provide the media file's name
-    When I am on "/app/media-library/looks"
-    And I wait for the page to be loaded
-    Then the media file "1" must have the download url "/pocketcode/download-media/1"
 
   Scenario: Viewing only media files for the pocketcode flavor
     Given I am on "/app/media-library/looks"
@@ -60,6 +48,25 @@ Feature:
     And I should see media file with id 7 in category "Luna & Cat Theme Special"
     And I should see 1 media file in category "Luna & Cat Theme Special"
     And I should see 1 media file in category "Bla"
+
+  Scenario: Selecting and deselecting media files for downloading
+    Given I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
+    And I click "#mediafile-1"
+    And I click "#mediafile-5"
+    Then I should see "Download these files"
+    And I click "#mediafile-1"
+    And I click "#mediafile-5"
+    Then I should not see "Download these files"
+
+  Scenario: Downloading mutiple selected files
+    Given I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
+    And I click "#mediafile-1"
+    And I click "#mediafile-5"
+    And I click "#start-downloads"
+    Then I should receive a file named "Dog (-).png"
+    Then I should receive a file named "SexyNULL.png"
 
   Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
     Given I am on "/app/media-library/looks"

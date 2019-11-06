@@ -21,6 +21,9 @@
         <h1>{{ category.name }}</h1>
         <div class="files"></div>
       </div>
+      <div id="downloadbar">
+        <span class="fa-download fa">&nbsp;&nbsp;</span><a id="start-downloads" href="#">{{ "media-packages.download_these_files"|trans({}, "catroweb") }}</a>
+      </div>
     {% endfor %}
   </div>
 {% endblock %}
