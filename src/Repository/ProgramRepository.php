@@ -47,21 +47,22 @@ class ProgramRepository extends ServiceEntityRepository
    *
    * @return Program[]
    */
-  public function getMostDownloadedPrograms(bool $debug_build, $flavor = null, $limit = 20, $offset = 0)
+  public function getMostDownloadedPrograms(bool $debug_build, $flavor = null,
+  $limit = 20, $offset = 0)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb->select('e')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+    $query_builder->select('e')
+      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.private', $query_builder->expr()->literal(false)))
       ->orderBy('e.downloads', 'DESC')
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
-    $qb = $this->addFlavorCondition($qb, $flavor);
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
 
-    return $qb->getQuery()->getResult();
+    return $query_builder->getQuery()->getResult();
   }
 
   /**
@@ -72,22 +73,23 @@ class ProgramRepository extends ServiceEntityRepository
    *
    * @return Program[]
    */
-  public function getMostViewedPrograms(bool $debug_build, $flavor = null, $limit = 20, $offset = 0)
+  public function getMostViewedPrograms(bool $debug_build, $flavor = null,
+  $limit = 20, $offset = 0)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.private', $query_builder->expr()->literal(false)))
       ->orderBy('e.views', 'DESC')
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
-    $qb = $this->addFlavorCondition($qb, $flavor);
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
 
-    return $qb->getQuery()->getResult();
+    return $query_builder->getQuery()->getResult();
   }
 
   /**
@@ -97,16 +99,18 @@ class ProgramRepository extends ServiceEntityRepository
    *
    * @return string
    */
-  private function generateUnionSqlStatementForMostRemixedPrograms(bool $debug_build, $limit, int $offset = 0)
+  private function generateUnionSqlStatementForMostRemixedPrograms(bool $debug_build,
+  $limit, int $offset = 0)
   {
-    //--------------------------------------------------------------------------------------------------------------
-    // ATTENTION: since Doctrine does not support UNION queries, the following query is a native MySQL/SQLite query
-    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------
+    // ATTENTION: since Doctrine does not support UNION queries,
+    //            the following query is a native MySQL/SQLite query
+    //---------------------------------------------------------------------------------------------
     $limit_clause = intval($limit) > 0 ? 'LIMIT ' . intval($limit) : '';
     $offset_clause = intval($offset) > 0 ? 'OFFSET ' . intval($offset) : '';
     $debug_where = ($debug_build !== true) ? 'AND p.debug_build = false' : '';
 
-    return "
+    return '
             SELECT sum(remixes_count) AS total_remixes_count, id FROM (
                     SELECT p.id AS id, COUNT(p.id) AS remixes_count
                     FROM program p
@@ -114,8 +118,8 @@ class ProgramRepository extends ServiceEntityRepository
                     ON p.id = r.ancestor_id
                     INNER JOIN program rp
                     ON r.descendant_id = rp.id
-                    WHERE p.visible = 1
-                    $debug_where
+                    WHERE p.visible = 1 ' .
+                    $debug_where . ' 
                     AND p.flavor = :flavor
                     AND p.private = 0
                     AND r.depth = 1
@@ -128,18 +132,18 @@ class ProgramRepository extends ServiceEntityRepository
                     ON p.id = b.parent_id
                     INNER JOIN program rp
                     ON b.child_id = rp.id
-                    WHERE p.visible = 1
-                    $debug_where
+                    WHERE p.visible = 1 ' .
+                    $debug_where . ' 
                     AND p.flavor = :flavor
                     AND p.private = 0
                     AND p.user_id <> rp.user_id
                     GROUP BY p.id
             ) t
             GROUP BY id
-            ORDER BY remixes_count DESC
-            $limit_clause
-            $offset_clause
-        ";
+            ORDER BY remixes_count DESC ' .
+            $limit_clause . ' ' .
+            $offset_clause . '
+        ';
   }
 
 
@@ -152,7 +156,8 @@ class ProgramRepository extends ServiceEntityRepository
    * @return array
    * @throws DBALException
    */
-  public function getMostRemixedPrograms(bool $debug_build, $flavor = 'pocketcode', $limit = 20, $offset = 0)
+  public function getMostRemixedPrograms(bool $debug_build, $flavor = 'pocketcode',
+  $limit = 20, $offset = 0)
   {
     if (!isset($this->cached_most_remixed_programs_full_result[$flavor]))
     {
@@ -165,7 +170,8 @@ class ProgramRepository extends ServiceEntityRepository
     }
     else
     {
-      $results = array_slice($this->cached_most_remixed_programs_full_result[$flavor], $offset, $limit);
+      $results = array_slice($this->cached_most_remixed_programs_full_result[$flavor],
+      $offset, $limit);
     }
 
     $programs = [];
@@ -209,42 +215,48 @@ class ProgramRepository extends ServiceEntityRepository
    *
    * @return Program[]
    */
-  public function getMostLikedPrograms(bool $debug_build, $flavor = 'pocketcode', $limit = 20, $offset = 0)
+  public function getMostLikedPrograms(bool $debug_build, $flavor = 'pocketcode',
+  $limit = 20, $offset = 0)
   {
     if (isset($this->cached_most_liked_programs_full_result[$flavor]))
     {
       return array_slice($this->cached_most_liked_programs_full_result[$flavor], $offset, $limit);
     }
 
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select(['e as program', 'COUNT(e.id) as like_count'])
-      ->innerJoin('App\Entity\ProgramLike', 'l', Join::WITH, $qb->expr()->eq('e.id', 'l.program_id'))
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
-      ->having($qb->expr()->gt('like_count', $qb->expr()->literal(1)))
+      ->innerJoin('App\Entity\ProgramLike', 'l', Join::WITH,
+      $query_builder->expr()->eq('e.id', 'l.program_id'))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.flavor', ':flavor'))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)))
+      ->having($query_builder->expr()->gt('like_count',
+      $query_builder->expr()->literal(1)))
       ->groupBy('e.id')
       ->orderBy('like_count', 'DESC')
       ->setParameter('flavor', $flavor)
       ->distinct();
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
     if (intval($offset) > 0)
     {
-      $qb->setFirstResult($offset);
+      $query_builder->setFirstResult($offset);
     }
 
     if (intval($limit) > 0)
     {
-      $qb->setMaxResults($limit);
+      $query_builder->setMaxResults($limit);
     }
 
-    $results = $qb->getQuery()->getResult();
+    $results = $query_builder->getQuery()->getResult();
 
-    return array_map(function ($result) {
+    return array_map(function ($result)
+    {
       return $result['program'];
     }, $results);
   }
@@ -263,7 +275,7 @@ class ProgramRepository extends ServiceEntityRepository
     }
 
     $this->cached_most_liked_programs_full_result[$flavor] =
-      $this->getMostLikedPrograms($debug_build, $flavor, 0, 0);
+    $this->getMostLikedPrograms($debug_build, $flavor, 0, 0);
 
     return count($this->cached_most_liked_programs_full_result[$flavor]);
   }
@@ -279,45 +291,51 @@ class ProgramRepository extends ServiceEntityRepository
    * @return array
    */
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-    bool $debug_build, string $flavor, Program $program, $limit, int $offset, bool $is_test_environment
+  bool $debug_build, string $flavor, Program $program, $limit, int $offset,
+  bool $is_test_environment
   )
   {
     $cache_key = $flavor . '_' . $program->getId();
     if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key]))
     {
-      return array_slice($this->cached_most_downloaded_other_programs_full_result[$cache_key], $offset, $limit);
+      return array_slice($this->cached_most_downloaded_other_programs_full_result[$cache_key],
+      $offset, $limit);
     }
 
     $time_frame_length = 600; // in seconds
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select(['e as program', 'COUNT(e.id) as user_download_count'])
       ->innerJoin(
         'App\Entity\ProgramDownloads', 'd1',
-        Join::WITH, $qb->expr()->eq('e.id', 'd1.program')
+        Join::WITH, $query_builder->expr()->eq('e.id', 'd1.program')
       )
       ->innerJoin(
         'App\Entity\ProgramDownloads', 'd2',
-        Join::WITH, $qb->expr()->eq('d1.user', 'd2.user')
+        Join::WITH, $query_builder->expr()->eq('d1.user', 'd2.user')
       )
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
-      ->andWhere($qb->expr()->isNotNull('d1.user'))
-      ->andWhere($qb->expr()->neq('d1.user', ':user'))
-      ->andWhere($qb->expr()->neq('d1.program', 'd2.program'))
-      ->andWhere($qb->expr()->eq('d2.program', ':program'));
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.flavor', ':flavor'))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)))
+      ->andWhere($query_builder->expr()->isNotNull('d1.user'))
+      ->andWhere($query_builder->expr()->neq('d1.user', ':user'))
+      ->andWhere($query_builder->expr()->neq('d1.program', 'd2.program'))
+      ->andWhere($query_builder->expr()->eq('d2.program', ':program'));
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
     if (!$is_test_environment)
     {
-      $qb->andWhere($qb->expr()->between('TIME_DIFF(d1.downloaded_at, d2.downloaded_at, \'second\')',
-        $qb->expr()->literal($time_frame_length / 2 * (-1)), $qb->expr()->literal($time_frame_length / 2)));
+      $query_builder->andWhere($query_builder->expr()->between('TIME_DIFF(d1.downloaded_at, 
+      d2.downloaded_at, \'second\')',
+      $query_builder->expr()->literal($time_frame_length / 2 * (-1)),
+      $query_builder->expr()->literal($time_frame_length / 2)));
     }
 
-    $qb
+    $query_builder
       ->groupBy('e.id')
       ->orderBy('user_download_count', 'DESC')
       ->setParameter('flavor', $flavor)
@@ -327,17 +345,18 @@ class ProgramRepository extends ServiceEntityRepository
 
     if (intval($offset) > 0)
     {
-      $qb->setFirstResult($offset);
+      $query_builder->setFirstResult($offset);
     }
 
     if (intval($limit) > 0)
     {
-      $qb->setMaxResults($limit);
+      $query_builder->setMaxResults($limit);
     }
 
-    $results = $qb->getQuery()->getResult();
+    $results = $query_builder->getQuery()->getResult();
 
-    return array_map(function ($result) {
+    return array_map(function ($result)
+    {
       return $result['program'];
     }, $results);
   }
@@ -351,7 +370,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @return int
    */
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-    bool $debug_build, string $flavor, Program $program, bool $is_test_environment
+  bool $debug_build, string $flavor, Program $program, bool $is_test_environment
   )
   {
     $cache_key = $flavor . '_' . $program->getId();
@@ -378,20 +397,24 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getRecentPrograms(bool $debug_build, $flavor = null, $limit = 20, $offset = 0)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)))
+      ->andWhere($query_builder->expr()->eq('e.flavor', ':flavor'))
       ->orderBy('e.uploaded_at', 'DESC')
       ->setFirstResult($offset)
+      ->setParameter('flavor', $flavor)
       ->setMaxResults($limit);
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
-    $qb = $this->addFlavorCondition($qb, $flavor);
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
-    return $qb->getQuery()->getResult();
+
+    return $query_builder->getQuery()->getResult();
   }
 
   /**
@@ -419,7 +442,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $array_programs = [];
     $max_element = ($offset + $limit) > count($array_program_ids) ?
-      count($array_program_ids) : $offset + $limit;
+    count($array_program_ids) : $offset + $limit;
     $current_element = $offset;
 
     while ($current_element < $max_element)
@@ -439,17 +462,19 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getVisibleProgramIds($flavor, bool $debug_build)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e.id')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)));
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)));
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
-    $qb = $this->addFlavorCondition($qb, $flavor);
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
 
-    return $qb->getQuery()->getResult();
+    return $query_builder->getQuery()->getResult();
   }
 
   /**
@@ -492,9 +517,9 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function filterExistingProgramIds(array $program_ids)
   {
-    $qb = $this->createQueryBuilder('p');
+    $query_builder = $this->createQueryBuilder('p');
 
-    $result = $qb
+    $result = $query_builder
       ->select(['p.id'])
       ->where('p.id IN (:program_ids)')
       ->setParameter('program_ids', $program_ids)
@@ -502,7 +527,8 @@ class ProgramRepository extends ServiceEntityRepository
       ->getQuery()
       ->getResult();
 
-    return array_map(function ($data) {
+    return array_map(function ($data)
+    {
       return $data['id'];
     }, $result);
   }
@@ -549,7 +575,7 @@ class ProgramRepository extends ServiceEntityRepository
           ' . $tag_string . ' OR
           e.id = ' . $parameter . 'int' . ') AND
           e.visible = true AND ' .
-        $debug_where . '
+      $debug_where . '
           e.private = false) ';
     }
 
@@ -597,7 +623,8 @@ class ProgramRepository extends ServiceEntityRepository
     if (count($search_terms) > 1)
     {
 
-      $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms, $metadata, $debug_build);
+      $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms,
+      $metadata, $debug_build);
       $more_than_one_search_term = true;
     }
 
@@ -636,10 +663,10 @@ class ProgramRepository extends ServiceEntityRepository
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
           x.name LIKE :searchterm OR ' .
-      $query_addition_for_tags . ' OR
+    $query_addition_for_tags . ' OR
           e.id = :searchtermint) AND
           e.visible = true AND ' .
-      $debug_where . '
+    $debug_where . '
           e.private = false) ' . $appendable_sql_string;
 
     $dql .= " ORDER BY weight DESC, e.uploaded_at DESC";
@@ -665,7 +692,8 @@ class ProgramRepository extends ServiceEntityRepository
     $paginator = new Paginator($final_query);
     $result = $paginator->getIterator()->getArrayCopy();
 
-    return array_map(function ($element) {
+    return array_map(function ($element)
+    {
       return $element[0];
     }, $result);
   }
@@ -695,7 +723,8 @@ class ProgramRepository extends ServiceEntityRepository
     $more_than_one_search_term = false;
     if (count($search_terms) > 1)
     {
-      $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms, $metadata, $debug_build);
+      $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms,
+      $metadata, $debug_build);
       $more_than_one_search_term = true;
     }
 
@@ -710,10 +739,10 @@ class ProgramRepository extends ServiceEntityRepository
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
           x.name LIKE :searchterm OR ' .
-      $query_addition_for_tags . ' 
+    $query_addition_for_tags . ' 
           e.id = :searchtermint) AND
           e.visible = true AND ' .
-      $debug_where . '
+    $debug_where . '
           e.private = false) ' . $appendable_sql_string;
 
     $dql .= " GROUP BY e.id";
@@ -742,9 +771,9 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function markAllProgramsAsNotYetMigrated()
   {
-    $qb = $this->createQueryBuilder('p');
+    $query_builder = $this->createQueryBuilder('p');
 
-    $qb
+    $query_builder
       ->update()
       ->set('p.remix_migrated_at', ':remix_migrated_at')
       ->setParameter(':remix_migrated_at', null)
@@ -763,11 +792,11 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function findNext(int $previous_program_id)
   {
-    $qb = $this->createQueryBuilder('p');
+    $query_builder = $this->createQueryBuilder('p');
 
-    return $qb
+    return $query_builder
       ->select('min(p.id)')
-      ->where($qb->expr()->gt('p.id', ':previous_program_id'))
+      ->where($query_builder->expr()->gt('p.id', ':previous_program_id'))
       ->setParameter('previous_program_id', $previous_program_id)
       ->distinct()
       ->getQuery()
@@ -782,19 +811,20 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getUserPrograms($user_id, bool $debug_build)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
       ->leftJoin('e.user', 'f')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('f.id', ':user_id'))
       ->setParameter('user_id', $user_id)
       ->orderBy('e.uploaded_at', 'DESC');
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
-    return $qb->getQuery()->getResult();
+    return $query_builder->getQuery()->getResult();
   }
 
   /**
@@ -805,20 +835,22 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getPublicUserPrograms($user_id, bool $debug_build)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
       ->leftJoin('e.user', 'f')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
-      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)))
+      ->andWhere($query_builder->expr()->eq('f.id', ':user_id'))
       ->setParameter('user_id', $user_id)
       ->orderBy('e.uploaded_at', 'DESC');
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
-    return $qb->getQuery()->getResult();
+    return $query_builder->getQuery()->getResult();
   }
 
   /**
@@ -830,16 +862,18 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getTotalPrograms(bool $debug_build, $flavor = null)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('COUNT (e.id)')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)));
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)));
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
-    $qb = $this->addFlavorCondition($qb, $flavor);
-    return (int)$qb->getQuery()->getSingleScalarResult();
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    return (int)$query_builder->getQuery()->getSingleScalarResult();
   }
 
   /**
@@ -852,11 +886,11 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getProgramsWithApkStatus($apk_status)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    return $qb
+    return $query_builder
       ->select('e')
-      ->where($qb->expr()->eq('e.apk_status', ':apk_status'))
+      ->where($query_builder->expr()->eq('e.apk_status', ':apk_status'))
       ->setParameter('apk_status', $apk_status)
       ->getQuery()
       ->getResult();
@@ -870,11 +904,11 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getProgramsWithExtractedDirectoryHash()
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    return $qb
+    return $query_builder
       ->select('e')
-      ->where($qb->expr()->isNotNull('e.directory_hash'))
+      ->where($query_builder->expr()->isNotNull('e.directory_hash'))
       ->getQuery()
       ->getResult();
   }
@@ -889,21 +923,22 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getProgramsByTagId($id, bool $debug_build, $limit = 20, $offset = 0)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
       ->leftJoin('e.tags', 'f')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('f.id', ':id'))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('f.id', ':id'))
       ->orderBy('e.uploaded_at', 'DESC')
       ->setParameter('id', $id)
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
-    return $qb
+    return $query_builder
       ->getQuery()
       ->getResult();
   }
@@ -916,20 +951,22 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function getProgramDataByIds(Array $program_ids, bool $debug_build)
   {
-    $qb = $this->createQueryBuilder('p');
+    $query_builder = $this->createQueryBuilder('p');
 
-    $qb
+    $query_builder
       ->select(['p.id', 'p.name', 'p.uploaded_at', 'u.username'])
       ->innerJoin('p.user', 'u')
-      ->where($qb->expr()->eq('p.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('p.private', $qb->expr()->literal(false)))
+      ->where($query_builder->expr()->eq('p.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('p.private',
+      $query_builder->expr()->literal(false)))
       ->andWhere('p.id IN (:program_ids)')
       ->setParameter('program_ids', $program_ids)
       ->distinct();
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'p');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'p');
 
-    return $qb
+    return $query_builder
       ->getQuery()
       ->getResult();
   }
@@ -942,23 +979,25 @@ class ProgramRepository extends ServiceEntityRepository
    *
    * @return mixed
    */
-  public function getProgramsByExtensionName(string $name, bool $debug_build, $limit = 20, $offset = 0)
+  public function getProgramsByExtensionName(string $name, bool $debug_build,
+  $limit = 20, $offset = 0)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
       ->leftJoin('e.extensions', 'f')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('f.name', ':name'))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('f.name', ':name'))
       ->orderBy('e.uploaded_at', 'DESC')
       ->setParameter('name', $name)
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
-    return $qb
+    return $query_builder
       ->getQuery()
       ->getResult();
   }
@@ -973,19 +1012,21 @@ class ProgramRepository extends ServiceEntityRepository
   {
     $query = str_replace("yahoo", "", $query);
 
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
       ->leftJoin('e.tags', 't')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('t.id', ':id'))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('t.id', ':id'))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)))
       ->setParameter('id', $query);
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
-    $result = $qb
+    $result = $query_builder
       ->getQuery()
       ->getResult();
 
@@ -1000,19 +1041,21 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function searchExtensionCount(string $query, bool $debug_build)
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryBuilder('e');
 
-    $qb
+    $query_builder
       ->select('e')
       ->leftJoin('e.extensions', 't')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('t.name', ':name'))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+      ->where($query_builder->expr()->eq('e.visible',
+      $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('t.name', ':name'))
+      ->andWhere($query_builder->expr()->eq('e.private',
+      $query_builder->expr()->literal(false)))
       ->setParameter('name', $query);
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build, 'e');
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'e');
 
-    $result = $qb
+    $result = $query_builder
       ->getQuery()
       ->getResult();
 
@@ -1067,7 +1110,7 @@ class ProgramRepository extends ServiceEntityRepository
       AND e.flavor = :flavor
       AND e.id != :id
       AND e.visible = true ' .
-      $debug_where . '
+    $debug_where . '
       GROUP BY e.id
       ORDER BY cnt DESC';
 
@@ -1093,7 +1136,8 @@ class ProgramRepository extends ServiceEntityRepository
    *
    * @return array
    */
-  public function getRecommendedProgramsById($id, bool $debug_build, string $flavor, $limit, int $offset = 0)
+  public function getRecommendedProgramsById($id, bool $debug_build,
+  string $flavor, $limit, int $offset = 0)
   {
 
     $qb_tags = $this->createQueryBuilder('e');
@@ -1134,7 +1178,7 @@ class ProgramRepository extends ServiceEntityRepository
       AND e.flavor = :flavor
       AND e.id != :pid
       AND e.visible = TRUE ' .
-      $debug_where . '  
+    $debug_where . '  
       GROUP BY e.id
       ORDER BY cnt DESC';
 
@@ -1149,7 +1193,9 @@ class ProgramRepository extends ServiceEntityRepository
 
     $db_query->setFirstResult($offset);
     $db_query->setMaxResults($limit);
-    $id_list = array_map(function ($value) {
+    
+    $id_list = array_map(function ($value)
+    {
       return $value['id'];
     }, $db_query->getResult());
 
@@ -1164,47 +1210,49 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param QueryBuilder $qb
+   * @param QueryBuilder $query_builder
    * @param string|null  $flavor
    * @param string       $alias The QueryBuilder alias to use
    *
    * @return QueryBuilder
    */
-  private function addFlavorCondition(QueryBuilder $qb, $flavor, string $alias = 'e')
+  private function addFlavorCondition(QueryBuilder $query_builder, $flavor, string $alias = 'e')
   {
     if ($flavor)
     {
       if ($flavor{0} === "!")
       {
-        $qb
-          ->andWhere($qb->expr()->neq($alias . '.flavor', ':flavor'))
+        $query_builder
+          ->andWhere($query_builder->expr()->neq($alias . '.flavor', ':flavor'))
           ->setParameter('flavor', substr($flavor, 1));
       }
       else
       {
-        $qb
-          ->andWhere($qb->expr()->eq($alias . '.flavor', ':flavor'))
+        $query_builder
+          ->andWhere($query_builder->expr()->eq($alias . '.flavor', ':flavor'))
           ->setParameter('flavor', $flavor);
       }
     }
 
-    return $qb;
+    return $query_builder;
   }
 
   /**
-   * @param QueryBuilder $qb
+   * @param QueryBuilder $query_builder
    * @param bool         $debug_build If debug builds should be included
    * @param string       $alias
    *
    * @return QueryBuilder
    */
-  private function addDebugBuildCondition(QueryBuilder $qb, bool $debug_build, string $alias)
+  private function addDebugBuildCondition(QueryBuilder $query_builder,
+  bool $debug_build, string $alias)
   {
     if ($debug_build !== true)
     {
-      $qb->andWhere($qb->expr()->eq($alias . '.debug_build', $qb->expr()->literal(false)));
+      $query_builder->andWhere($query_builder->expr()->eq($alias . '.debug_build',
+      $query_builder->expr()->literal(false)));
     }
 
-    return $qb;
+    return $query_builder;
   }
 }

@@ -83,7 +83,8 @@ class DefaultController extends AbstractController
       {
         if ($flavor)
         {
-          $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId(), 'flavor' => $flavor]);
+          $info['url'] = $this->generateUrl('program',
+          ['id' => $item->getProgram()->getId(), 'flavor' => $flavor]);
         }
         else
         {
@@ -192,18 +193,28 @@ class DefaultController extends AbstractController
       ];
     }
 
-    usort($categories, function ($a, $b) {
-      if ($a['priority'] == $b['priority'])
-      {
-        return 0;
-      }
-
-      return ($a['priority'] > $b['priority']) ? -1 : 1;
-    });
+    usort($categories, "comparePriorities");
 
     return $this->get('templating')->renderResponse('MediaLibrary/mediapackage.html.twig', [
       'categories' => $categories,
     ]);
+  }
+
+  /**
+   * @param $current
+   * @param $next
+   *
+   * @return int
+   */
+
+  public function  comparePriorities($current, $next)
+  {
+    if ($current['priority'] == $next['priority'])
+    {
+      return 0;
+    }
+
+    return ($current['priority'] > $next['priority']) ? -1 : 1;
   }
 
   /**
@@ -221,14 +232,15 @@ class DefaultController extends AbstractController
     $referrer = $request->headers->get('referer');
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs']))
+    if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph',
+    'rec_remix_notification', 'rec_specific_programs']))
     {
       $rec_from_id = $_POST['recFromID'];
       $rec_program_id = $_POST['recID'];
-      $is_user_specific_recommendation = isset($_POST['recIsUserSpecific']) ? (bool)$_POST['recIsUserSpecific'] : false;
-      $is_recommended_program_a_scratch_program = (($type == 'rec_remix_graph') && isset($_POST['isScratchProgram']))
-        ? (bool)$_POST['isScratchProgram']
-        : false;
+      $is_user_specific_recommendation = isset($_POST['recIsUserSpecific'])
+      ? (bool)$_POST['recIsUserSpecific'] : false;
+      $is_recommended_program_a_scratch_program = (($type == 'rec_remix_graph')
+      && isset($_POST['isScratchProgram'])) ? (bool)$_POST['isScratchProgram'] : false;
 
       $this->statistics->createClickStatistics($request, $type, $rec_from_id, $rec_program_id, null, null,
         $referrer, $locale, $is_recommended_program_a_scratch_program, $is_user_specific_recommendation);
@@ -316,11 +328,13 @@ class DefaultController extends AbstractController
         'data'        => $file,
         'downloadUrl' => $this->generateUrl('download_media', [
             'id'    => $file->getId(),
-            'fname' => $file->getName()
+            'fname' => $file->getName(),
           ]
         ),
-      ];
+    ];
     }
+
     return $files;
   }
+
 }
