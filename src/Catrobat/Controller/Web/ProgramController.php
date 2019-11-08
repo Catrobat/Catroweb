@@ -108,6 +108,7 @@ class ProgramController extends AbstractController
 
   /**
    * @Route("/project/{id}", name="program")
+   * @Route("/program/{id}", name="program_depricated")
    * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
    *
    * @param Request $request
