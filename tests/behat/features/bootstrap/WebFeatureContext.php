@@ -9,6 +9,8 @@ use App\Entity\ClickStatistic;
 use App\Entity\CommentNotification;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
+use App\Entity\FollowNotification;
+use App\Entity\LikeNotification;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
@@ -3198,10 +3200,112 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Given /^there are "([^"]*)" "([^"]*)"  notifications for program "([^"]*)" from "([^"]*)"$/
+   * @param $amount
+   * @param $type
+   * @param $program_name
+   * @param $user
+   */
+  public function thereAreSpecificNotificationsFor($amount, $type, $program_name, $user)
+  {
+    /**
+     * @var EntityManager $em
+     * @var User          $user
+     */
+    try
+    {
+      $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+      $user = $em->getRepository(User::class)->findOneBy([
+        'username' => $user,
+      ]);
+
+      $program = $em->getRepository(Program::class)->findOneBy(['name'=> $program_name]);
+      if ($user == null)
+      {
+        Assert::assertTrue(false, "user is null");
+      }
+      for ($i = 0; $i < $amount; $i++)
+      {
+
+
+
+        switch($type)
+        {
+          case "comment":
+            $temp_comment = new UserComment();
+            $temp_comment->setUsername($user->getUsername());
+            $temp_comment->setUserId($user->getId());
+            $temp_comment->setText("This is a comment");
+            $temp_comment->setProgram($program);
+            $temp_comment->setProgramId($program->getID());
+            $temp_comment->setUploadDate(date_create());
+            $temp_comment->setIsReported(false);
+            $em->persist($temp_comment);
+            $to_create = new CommentNotification($program->getUser(), $temp_comment);
+            $em->persist($to_create);
+            break;
+
+
+          case "like":
+            $to_create = new LikeNotification($program->getUser(), $user, $program);
+            $em->persist($to_create);
+            break;
+          case "catro notifications":
+            $to_create = new CatroNotification($user, "Random Title", "Random Text");
+            $em->persist($to_create);
+            break;
+          case "default":
+            Assert::assertTrue(false);
+
+        }
+
+
+
+      }
+      $em->flush();
+    } catch (Exception $e)
+    {
+      Assert::assertTrue(false, "database error");
+    }
+  }
+
+  /**
+   * @Given /^"([^"]*)" have just followed "([^"]*)"$/
+   * @param $user
+   * @param $user_to_follow
+  */
+  public function thereAreFollowNotifications($user, $user_to_follow)
+  {
+    try
+    {
+      $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+      $user_to_follow = $em->getRepository(User::class)->findOneBy([
+        'username' => $user_to_follow,
+      ]);
+      $user = $em->getRepository(User::class)->findOneBy([
+        'username' => $user,
+      ]);
+
+      if ($user == null)
+      {
+        Assert::assertTrue(false, "user is null");
+      }
+      $notification = new FollowNotification($user_to_follow, $user);
+      $em->persist($notification);
+
+      $em->flush();
+    } catch (Exception $e)
+    {
+      Assert::assertTrue(false, "database error");
+    }
+
+  }
+  /**
    * @Then /^the element "([^"]*)" should have type "([^"]*)"$/
    * @param $arg1
    * @param $arg2
    */
+
   public function theElementShouldHaveType($arg1, $arg2)
   {
     $page = $this->getMink()->getSession()->getPage();

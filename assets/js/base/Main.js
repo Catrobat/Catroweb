@@ -64,7 +64,7 @@ var Main = function (search_url) {
       }
     });
     
-    sidebar.find('a.nav-link').on("click", fnCloseSidebar);
+   // sidebar.find('a.nav-link').on("click", fnCloseSidebar);
     $('#sidebar-overlay').on("click", fnCloseSidebar);
     
     self.setSearchBtnListener()

@@ -49,7 +49,7 @@ Feature: Like feature on program page
     And I click "#program-like-thumbs-up"
     And I wait for a second
     When I log in as "Catrobat" with the password "123456"
-    And I am on "/app/notifications"
+    And I am on "/app/notifications/allNotifications"
     Then the element "#catro-notification-1" should be visible
     And I should see "OtherUser"
     And the element "#notifications-summary" should be visible
@@ -63,7 +63,7 @@ Feature: Like feature on program page
     And I click "#program-like-thumbs-up"
     And I wait for a second
     When I log in as "Catrobat" with the password "123456"
-    And I am on "/app/notifications"
+    And I am on "/app/notifications/allNotifications"
     Then the element "#catro-notification-1" should be visible
     Then the element "#catro-notification-2" should be visible
     And I should see "OtherUser"
@@ -76,7 +76,7 @@ Feature: Like feature on program page
     And I click "#program-like-thumbs-up"
     And I am on "/app/project/2"
     And I click "#program-like-thumbs-up"
-    And I am on "/app/notifications"
+    And I am on "/app/notifications/allNotifications"
     Then the element "#catro-notification-1" should not exist
     And the element "notifications-summary" should not exist
     And I should not see "new Notification"
@@ -89,7 +89,7 @@ Feature: Like feature on program page
     And I click "#program-like-thumbs-up"
     And I wait for a second
     And I log in as "Catrobat" with the password "123456"
-    And I am on "/app/notifications"
+    And I am on "/app/notifications/allNotifications"
     And the element "#catro-notification-1" should be visible
     And the element "#catro-notification-2" should be visible
     And I should see "OtherUser"
@@ -98,10 +98,10 @@ Feature: Like feature on program page
     When I click "#mark-all-as-seen"
     And I wait for fadeEffect to finish
     Then I should see "Done!"
-    And the element "#notifications-summary" should not be visible
-    And I should not see "new Notification"
-    And the element "#catro-notification-1" should not exist
-    And the element "#catro-notification-2" should not exist
+    And I should see "You have no new Notifications"
+    And I should see "Old Notifications"
+    And the element "#mark-as-read-1" should not be visible
+    And the element "#mark-as-read-2" should not be visible
 
   Scenario: I should be able to mark all notifications as read at once
     Given I log in as "OtherUser" with the password "123456"
@@ -111,7 +111,7 @@ Feature: Like feature on program page
     And I click "#program-like-thumbs-up"
     And I wait for a second
     And I log in as "Catrobat" with the password "123456"
-    And I am on "/app/notifications"
+    And I am on "/app/notifications/allNotifications"
     And the element "#catro-notification-1" should be visible
     And the element "#catro-notification-2" should be visible
     And I should see "OtherUser"
@@ -122,4 +122,3 @@ Feature: Like feature on program page
     Then the element "#notifications-summary" should be visible
     And I should see "1 new Notification"
     And the element "#catro-notification-1" should be visible
-    And the element "#catro-notification-2" should not exist

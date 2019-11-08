@@ -51,3 +51,28 @@ function setNavContainerAndSession(container, data) {
     $(container).show()
   }
 }
+function manageNotificationsDropdown()
+{
+  let notifications_dropdown = document.getElementsByClassName("collapsible")
+  let i
+  
+  for (i = 0; i < notifications_dropdown.length; i++) {
+    notifications_dropdown[i].addEventListener("click", function() {
+      
+      let notification_type = this.nextElementSibling;
+      if (notification_type.style.maxHeight){
+        notification_type.style.maxHeight = null;
+      } else {
+        notification_type.style.maxHeight = notification_type.scrollHeight + "px";
+      }
+      if ($(this).find('.caret-icon').hasClass('fa-caret-down')) {
+        $(this).find('.caret-icon').removeClass('fa-caret-down').addClass('fa-caret-left');
+      } else
+      {
+        $(this).find('.caret-icon').removeClass('fa-caret-left').addClass('fa-caret-down');
+      }
+      
+    });
+  }
+  
+}

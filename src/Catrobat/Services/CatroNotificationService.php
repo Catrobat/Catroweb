@@ -99,6 +99,22 @@ class CatroNotificationService
   /**
    * @param $notifications
    */
+  public function markSeen($notifications)
+  {
+    foreach ($notifications as $notification)
+    {
+      $notification->setSeen(true);
+    }
+    $this->em->flush();
+
+  }
+
+
+
+
+  /**
+   * @param $notifications
+   */
   public function deleteNotifications($notifications)
   {
     foreach ($notifications as $notification)

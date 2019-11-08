@@ -2,17 +2,46 @@
 @import '../base/mixins';
 @import 'theme_settings';
 
+
+body .btn{
+  border-radius: 10%;
+
+}
 h1 {
   text-align: center;
 }
 
+
 .notification-container {
   border-color: $primary;
+
+
+
 }
+
+.notification-container-old {
+  border-color: $primary;
+}
+
 
 .notification-header {
   background-color: $primary;
   color: white;
+}
+.notification-header .btn.btn-primary
+{
+
+
+  border: none;
+  width: 40px;
+
+  position: absolute;
+
+  margin-right:2px;
+  right:5px;
+  top: 2px;
+
+
 }
 
 .notification-avatar {
@@ -73,16 +102,35 @@ h1 {
     text-align: center;
   }
 }
+.mark-all{
+  @media screen and (max-width: 992px)
+  {
 
+    float: right;
+    margin-top: 12px;
+    margin-right: 16px;
+    margin-left: 250px;
+  }
+
+
+}
 .notification-summary-right {
   float: right;
+  margin-right:16px;
 
   @media screen and (max-width: 576px)
   {
+
     display: block;
     margin: 1em auto auto auto;
     float: none;
   }
+}
+
+.notification-summary-right.btn.btn-danger
+{
+  width:125px;
+
 }
 
 .notification-round {

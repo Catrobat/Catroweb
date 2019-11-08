@@ -5,27 +5,37 @@ function FetchNotifications (countNotificationsUrl, maxAmountToFetch, refreshRat
   self.maxAmountToFetch = maxAmountToFetch
   self.refreshRate = refreshRate
   
-  self.run = function () {
-    let userNotificationBadge = $('.user-notification-badge')
+  self.run = function (fetch_type) {
+    
     
     $.ajax({
       url    : self.countNotificationsUrl,
       type   : 'get',
       success: function (data) {
-        let numOfNotifications = data.count
-        if (numOfNotifications > 0)
+        for (let notification_type in data.count)
         {
-          let text = (numOfNotifications <= self.maxAmountToFetch) ?
-            numOfNotifications.toString() : (self.maxAmountToFetch + '+')
-          userNotificationBadge.text(text)
-          userNotificationBadge.show()
+          let userNotificationBadge = $('.'+ notification_type)
+          let numOfNotifications = data.count[notification_type]
+          if (numOfNotifications > 0)
+          {
+            let text = (numOfNotifications <= self.maxAmountToFetch) ?
+              numOfNotifications.toString() : (self.maxAmountToFetch + '+')
+            userNotificationBadge.text(text)
+            userNotificationBadge.show()
+          }
+          else
+          {
+            userNotificationBadge.text('')
+            userNotificationBadge.hide()
+          }
+       
+          
+          
         }
-        else
+        if(fetch_type != "markAsRead")
         {
-          userNotificationBadge.text('')
-          userNotificationBadge.hide()
+          setTimeout(self.run, refreshRate)
         }
-        setTimeout(self.run, refreshRate)
       },
       error  : function () {
         console.error('Unable to fetch user notifications!')

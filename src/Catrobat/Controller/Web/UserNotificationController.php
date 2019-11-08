@@ -45,20 +45,22 @@ class UserNotificationController extends AbstractController
    *
    * @param ParameterBagInterface $parameter_bag
    * @param StatisticsService $statistics_service
-   * @param FakeStatisticsService $fakeStatisticsService
    */
-  public function __construct(ParameterBagInterface $parameter_bag, StatisticsService $statistics_service) {
+  public function __construct(ParameterBagInterface $parameter_bag,
+  StatisticsService $statistics_service)
+  {
     $this->statistics = $statistics_service;
   }
 
   /**
-   * @Route("/notifications", name="user_notifications", methods={"GET"})
-   *
-   * @param CatroNotificationRepository $nr
+   * @Route("/notifications/{notification_type}", name="user_notifications", methods={"GET"})
+   * @param $notification_type
+   * @param CatroNotificationRepository $notification_repo
    *
    * @return RedirectResponse|Response
    */
-  public function userNotificationsAction(CatroNotificationRepository $nr)
+  public function userNotificationsAction($notification_type,
+  CatroNotificationRepository $notification_repo)
   {
     /**
      * @var $notification CatroNotification
@@ -74,18 +76,32 @@ class UserNotificationController extends AbstractController
       return $this->redirectToRoute('fos_user_security_login');
     }
 
-    $catro_user_notifications = $nr->findByUser($user, ['id' => 'DESC']);
+    $catro_user_notifications = $notification_repo->findByUser($user, ['id' => 'DESC']);
     $avatars = [];
+    $new_notifications = [];
+    $old_notifications = [];
 
     foreach ($catro_user_notifications as $notification)
     {
+
+      $found_notification = false;
+
+
       $user = null;
-      if ($notification instanceof LikeNotification)
+      if ($notification_type === "allNotifications")
       {
+        $found_notification = true;
+      }
+      if ($notification instanceof LikeNotification && $notification_type === "likes")
+      {
+        $found_notification = true;
+
         $user = $notification->getLikeFrom();
       }
-      elseif ($notification instanceof CommentNotification)
+      elseif ($notification instanceof CommentNotification && $notification_type === "comments")
       {
+
+        $found_notification = true;
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy([
           'id' => $notification->getComment()->getUserId(),
@@ -96,8 +112,10 @@ class UserNotificationController extends AbstractController
       {
         $user = $notification->getProgram()->getUser();
       }
-      elseif ($notification instanceof FollowNotification)
+      elseif ($notification instanceof FollowNotification && $notification_type === "followers")
       {
+
+        $found_notification = true;
         $user = $notification->getFollower();
       }
       if ($user !== null)
@@ -108,12 +126,26 @@ class UserNotificationController extends AbstractController
           $avatars[$notification->getId()] = $avatar;
         }
       }
-    }
+      if ($notification->getSeen() && $found_notification === true)
+      {
+        $old_notifications[$notification->getId()] = $notification;
+      }
+      else
+      {
+        if (!$notification->getSeen() && $found_notification === true)
+        {
+          $new_notifications[$notification->getId()] = $notification;
 
-    $response = $this->get('templating')->renderResponse('Notifications/usernotifications.html.twig', [
-      'catroUserNotifications' => $catro_user_notifications,
-      'avatars'                => $avatars,
-    ]);
+        }
+      }
+    }
+    $response = $this->get('templating')->renderResponse('Notifications/usernotifications.html.twig'
+      , [
+        'oldNotifications' => $old_notifications,
+        'newNotifications' => $new_notifications,
+        'avatars'          => $avatars,
+        'notificationType' => $notification_type,
+      ]);
 
     $response->headers->set('Cache-Control', 'no-store, must-revalidate, max-age=0');
     $response->headers->set('Pragma', 'no-cache');
@@ -123,14 +155,15 @@ class UserNotificationController extends AbstractController
 
 
   /**
-   * @Route("/notifications/count", name="user_notifications_count", methods={"GET"})
+   * @Route("/notifications/notifications/count", name="user_notifications_count", methods={"GET"})
    *
-   * @param CatroNotificationRepository $nr
+   * @param CatroNotificationRepository $notification_repo
    * @param RemixManager $remix_manager
    *
    * @return JsonResponse
    */
-  public function userNotificationsCountAction(CatroNotificationRepository $nr, RemixManager $remix_manager)
+  public function userNotificationsCountAction(CatroNotificationRepository $notification_repo,
+  RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
@@ -138,37 +171,114 @@ class UserNotificationController extends AbstractController
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
 
-    $catro_user_notifications = $nr->findByUser($user);
+    $catro_user_notifications_all = $notification_repo->findByUser($user);
+    $likes = 0;
+    $followers = 0;
+    $comments = 0;
+    $all = 0;
+    foreach ($catro_user_notifications_all as $notification)
+    {
+
+      if ($notification instanceof LikeNotification && !$notification->getSeen())
+      {
+        $likes++;
+      }
+      else
+      {
+        if ($notification instanceof FollowNotification && !$notification->getSeen())
+        {
+          $followers++;
+        }
+        else
+        {
+          if ($notification instanceof CommentNotification && !$notification->getSeen())
+          {
+            $comments++;
+
+          }
+        }
+      }
+      if (!$notification->getSeen())
+      {
+
+        $all++;
+
+      }
+
+
+    }
+
+
     $unseen_remixed_program_data = $remix_manager->getUnseenRemixProgramsDataOfUser($user);
 
     return new JsonResponse([
-      'count'      => count($unseen_remixed_program_data) + count($catro_user_notifications),
+      'count'      => ['all-notifications'          => count($unseen_remixed_program_data) + $all,
+                       'all-notifications-dropdown' => count($unseen_remixed_program_data) + $all,
+                       "likes"                      => $likes,
+                       "followers"                  => $followers,
+                       "comments"                   => $comments],
       'statusCode' => 200,
     ]);
   }
 
 
   /**
-   * @Route("/notifications/seen", name="user_notifications_seen", methods={"GET"})
+   * @Route("/notifications/{notification_type}/seen", name="user_notifications_seen",
+   *                                                   methods={"GET"})
    *
-   * @param CatroNotificationRepository $nr
-   * @param CatroNotificationService $ns
+   * @param $notification_type
+   * @param CatroNotificationRepository $notification_repo
+   * @param CatroNotificationService $notification_service
    * @param RemixManager $remix_manager
    *
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function userNotificationsSeenAction(CatroNotificationRepository $nr, CatroNotificationService $ns,
-                                              RemixManager $remix_manager)
+  public function userNotificationsSeenAction($notification_type,
+  CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
+  RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
-    $catro_user_notifications = $nr->findByUser($user);
-    $ns->deleteNotifications($catro_user_notifications);
+    $catro_user_notifications = $notification_repo->findByUser($user);
+    $notifications_seen = [];
+    foreach ($catro_user_notifications as $notification)
+    {
+
+      if ($notification_type === "likes" && $notification instanceof LikeNotification)
+      {
+        $notifications_seen[$notification->getID()] = $notification;
+      }
+      else
+      {
+        if ($notification_type === "followers" && $notification instanceof FollowNotification)
+        {
+          $notifications_seen[$notification->getID()] = $notification;
+        }
+        else
+        {
+          if ($notification_type === "comments" && $notification instanceof CommentNotification)
+          {
+            $notifications_seen[$notification->getID()] = $notification;
+          }
+          else
+          {
+            if ($notification_type === "allNotifications")
+            {
+
+              $notifications_seen[$notification->getID()] = $notification;
+
+            }
+          }
+        }
+      }
+
+    }
+    $notification_service->markSeen($notifications_seen);
     $remix_manager->markAllUnseenRemixRelationsOfUserAsSeen($user);
 
     return new JsonResponse(['success' => true]);
@@ -176,8 +286,70 @@ class UserNotificationController extends AbstractController
 
 
   /**
-   * @Route("/notification/ancestor/{ancestor_id}/descendant/{descendant_id}", name="see_user_notification",
-   *        methods={"GET"})
+   * @Route("/notifications/{notification_type}/deleteAll", name="delete_all_notifications",
+   *                                                        methods={"GET"})
+   *
+   * @param $notification_type
+   * @param CatroNotificationRepository $notification_repo
+   * @param CatroNotificationService $notification_service
+   * @param RemixManager $remix_manager
+   *
+   * @return JsonResponse
+   * @throws ORMException
+   * @throws OptimisticLockException
+   */
+  public function userNotificationsDeleteAllAction($notification_type,
+  CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
+  RemixManager $remix_manager)
+  {
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
+    }
+    $catro_user_notifications = $notification_repo->findByUser($user);
+    $notifications_to_delete = [];
+    foreach ($catro_user_notifications as $notification)
+    {
+
+      if ($notification_type === "likes" && $notification instanceof LikeNotification)
+      {
+        $notifications_to_delete[$notification->getID()] = $notification;
+      }
+      else
+      {
+        if ($notification_type === "followers" && $notification instanceof FollowNotification)
+        {
+          $notifications_to_delete[$notification->getID()] = $notification;
+        }
+        else
+        {
+          if ($notification_type === "comments" && $notification instanceof CommentNotification)
+          {
+            $notifications_to_delete[$notification->getID()] = $notification;
+          }
+          else
+          {
+            if ($notification_type === "allNotifications")
+            {
+
+              $notifications_to_delete[$notification->getID()] = $notification;
+
+            }
+          }
+        }
+      }
+
+    }
+    $notification_service->deleteNotifications($notifications_to_delete);
+    $remix_manager->markAllUnseenRemixRelationsOfUserAsSeen($user);
+
+    return new JsonResponse(['success' => true]);
+  }
+
+  /**
+   * @Route("/notification/ancestor/{ancestor_id}/descendant/{descendant_id}",
+   *  name="see_user_notification", methods={"GET"})
    *
    * @param Request $request
    * @param         $ancestor_id
@@ -188,7 +360,8 @@ class UserNotificationController extends AbstractController
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id, RemixManager $remix_manager)
+  public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id,
+  RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
@@ -197,11 +370,11 @@ class UserNotificationController extends AbstractController
     }
 
     $remix_relation = $remix_manager->findCatrobatRelation($ancestor_id, $descendant_id);
-    if ($remix_relation == null)
+    if ($remix_relation === null)
     {
       throw $this->createNotFoundException('Unable to find Remix relation entity.');
     }
-    if ($user->getId() != $remix_relation->getAncestor()->getUser()->getId())
+    if ($user->getId() !== $remix_relation->getAncestor()->getUser()->getId())
     {
       throw $this->createNotFoundException('You are not allowed to update Remix relation entity '
         . 'because you do not own the parent program.');
@@ -209,7 +382,8 @@ class UserNotificationController extends AbstractController
 
     $referrer = $request->headers->get('referer');
     $locale = strtolower($request->getLocale());
-    $this->statistics->createClickStatistics($request, 'rec_remix_notification', $ancestor_id, $descendant_id, null, null,
+    $this->statistics->createClickStatistics($request, 'rec_remix_notification',
+      $ancestor_id, $descendant_id, null, null,
       $referrer, $locale, false);
 
     $remix_manager->markRemixRelationAsSeen($remix_relation);
@@ -227,27 +401,64 @@ class UserNotificationController extends AbstractController
    *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
    *
    * @param $notification_id
-   * @param CatroNotificationService $ns
-   * @param CatroNotificationRepository $nr
+   * @param CatroNotificationService $notification_service
+   * @param CatroNotificationRepository $notification_repo
    *
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function markCatroNotificationAsRead($notification_id, CatroNotificationService $ns, CatroNotificationRepository $nr)
+  public function markCatroNotificationAsRead($notification_id,
+  CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
   {
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['success' => false, "message" => "User not logged in"]);
     }
-    $notification_to_delete = $nr->findOneBy(["id" => $notification_id, "user" => $user]);
-    if ($notification_to_delete === null)
+    $notification_seen = $notification_repo->findOneBy(["id" => $notification_id, "user" => $user]);
+    if ($notification_seen === null)
     {
-      return new JsonResponse(["success" => false, "message" => "Notification not found or doesnt belong to user"]);
+      return new JsonResponse(["success" => false,
+      "message" => "Notification not found or doesnt belong to user"]);
     }
-    $ns->deleteNotifications([$notification_to_delete]);
+    $notification_service->markSeen([$notification_seen]);
 
     return new JsonResponse(['success' => true]);
   }
+
+  /**
+   * @Route("/notifications/deleteNotification/{notification_id}", name="delete_notification",
+   *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
+   *
+   * @param $notification_id
+   * @param CatroNotificationService $notification_service
+   * @param CatroNotificationRepository $notification_repo
+   *
+   * @return JsonResponse
+   * @throws ORMException
+   * @throws OptimisticLockException
+   */
+  public function userNotificationDeleteAction($notification_id,
+  CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
+  {
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
+    }
+    $delete_notification_ = $notification_repo->findOneBy(["id" => $notification_id,
+    "user" => $user]);
+    if ($delete_notification_ === null)
+    {
+      return new JsonResponse(["success" => false,
+      "message" => "Notification not found or doesnt belong to user"]);
+    }
+
+    $notification_service->deleteNotifications([$delete_notification_]);
+
+
+    return new JsonResponse(['success' => true]);
+  }
+
 }

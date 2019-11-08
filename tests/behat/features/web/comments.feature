@@ -176,7 +176,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for a second
     Then I should see "hello"
     When I log in as "Superman" with the password "123456"
-    And I am on "/app/notifications"
+    And I am on "/app/notifications/allNotifications"
     Then the element "#catro-notification-1" should be visible
     And I should see "Gregor"
 
@@ -190,5 +190,5 @@ Feature: As a visitor I want to write, see and report comments.
     When I click "#comment-post-button"
     And I wait for a second
     Then I should see "hello"
-    When I am on "/app/notifications"
+    When I am on "/app/notifications/allNotifications"
     Then the element "#catro-notification-1" should not exist

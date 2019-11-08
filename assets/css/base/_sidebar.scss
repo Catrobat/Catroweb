@@ -56,6 +56,10 @@ $sidebar-width: 250px;
       .user-notification-badge {
         display: none;
       }
+      .user-notification-badge-dropdown
+      {
+        display: none;
+      }
     }
   }
 
@@ -96,3 +100,34 @@ $sidebar-width: 250px;
   display: block;
   opacity: 1;
 }
+
+.collapsible
+{
+  cursor: pointer;
+}
+
+.caret-icon
+{
+ float:right;
+}
+
+#btn-notifications
+{
+  margin-left: 11px;
+}
+
+.user-notification-badge-dropdown
+{
+font-size: 15px;
+}
+
+.notifications-dropdown-content
+{
+
+  max-height: 0;
+  overflow: hidden;
+  background-color: white;
+  transition: max-height 0.4s ease-out;
+
+}
+

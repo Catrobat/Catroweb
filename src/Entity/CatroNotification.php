@@ -53,8 +53,13 @@ class CatroNotification
    * @ORM\Column(name="message", type="text")
    */
   private $message;
+  /**
+   * @ORM\Column(name="seen", type="boolean", options={"default":false})
+   */
+  private $seen =  false;
 
   private $twig_template = "Notifications/NotificationTypes/catro_notification.html.twig";
+
 
   /**
    * CatroNotification constructor.
@@ -63,13 +68,20 @@ class CatroNotification
    * @param      $title
    * @param      $message
    */
-  public function __construct(User $user, $title="", $message="")
+  public function __construct(User $user, $title = "", $message = "")
   {
     $this->user = $user;
     $this->title = $title;
     $this->message = $message;
   }
 
+
+  /**
+   * Get notification id
+   *
+   *
+   * @return integer
+   */
 
   public function getId()
   {
@@ -99,7 +111,29 @@ class CatroNotification
   {
     return $this->title;
   }
+  /**
+   * Set seen
+   *
+   * @param boolean $seen
+   *
+   * @return CatroNotification
+   */
+  public function setSeen($seen)
+  {
+    $this->seen = $seen;
 
+    return $this;
+  }
+
+  /**
+   * Get seen
+   *
+   * @return bool
+   */
+  public function getSeen()
+  {
+    return $this->seen;
+  }
   /**
    * Set message
    *
@@ -163,6 +197,11 @@ class CatroNotification
   {
     $this->twig_template = $twig_template;
   }
+
+
+
+
+
 }
 
 
