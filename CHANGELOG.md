@@ -5,8 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [2.3.0]
-Proposed new version number is `2.3.0` 
+
+Proposed new version number is `3.0.0` 
+
 ### Added
 - `tests/testdata/log` was missing -> added now
 - rename user account feature + translations 
@@ -15,6 +16,9 @@ Proposed new version number is `2.3.0`
 - human readable text insteaad of html quargel for search input 
 - admin falvor checks 
 - added embroidery flavor 
+- added popup setting programs private/public
+- added arduino flavor
+- added the possibility to write credits
 ### Changed
 - themes will now be accepted via user agent not in link 
 - increased max. description length to 10.000 chars
@@ -23,7 +27,9 @@ Proposed new version number is `2.3.0`
 - generate apk button hidden for iOS users
 - project loader refactored 
 - renaming `program` to `project`, `profile` to `user`.. 
-### Security 
+- Major framework upgrade `3.4` -> `4.3`
+- refactored notification system (beautify, seperated into categories, mark all as read)
+
 ### Fixed
 - private programs now really private 
 - program statistics design fix 
