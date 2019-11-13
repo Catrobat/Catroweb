@@ -60,7 +60,7 @@ final class Version20190723093025 extends AbstractMigration
     $this->addSql('ALTER TABLE user_remix_similarity_relation DROP FOREIGN KEY IF EXISTS FK_143F09C7B02C53F8');
     $this->addSql('ALTER TABLE user_user DROP FOREIGN KEY IF EXISTS FK_F7129A803AD8644E');
     $this->addSql('ALTER TABLE user_user DROP FOREIGN KEY IF EXISTS FK_F7129A80233D34C1');
-    $this->addSql('DROP TABLE user_user IF EXISTS');
+    $this->addSql('DROP TABLE IF EXISTS user_user');
 
     // changing all integer id's for user and program to char36 guid types.
     $this->addSql('ALTER TABLE CatroNotification CHANGE program_id program_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\'');
