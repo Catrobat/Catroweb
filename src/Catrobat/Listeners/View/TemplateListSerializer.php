@@ -79,7 +79,7 @@ class TemplateListSerializer
         }
       }
     }
-    $retArray['BaseUrl'] = ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/';
+    $retArray['BaseUrl'] = $request->getSchemeAndHttpHost() . '/';
     $retArray['ProjectsExtension'] = '.catrobat';
 
     $event->setResponse(JsonResponse::create($retArray));

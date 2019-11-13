@@ -128,7 +128,7 @@ class TutorialController extends AbstractController
     $retArray = $this->receiveCategoryPrograms($request, $programs, $screenshot_repository);
 
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
+      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
       'TotalProjects'     => count($programs),
       'ProjectsExtension' => '.catrobat',
     ];

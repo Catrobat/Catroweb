@@ -22,7 +22,7 @@ class LicenseUpdaterSpec extends ObjectBehavior
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
     $this->update($file);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
-    expect($xml->header->mediaLicense)->toBeLike('http://developer.catrobat.org/ccbysa_v4');
+    expect($xml->header->mediaLicense)->toBeLike('https://developer.catrobat.org/ccbysa_v4');
   }
 
   public function it_sets_program_license()
@@ -34,6 +34,6 @@ class LicenseUpdaterSpec extends ObjectBehavior
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
     $this->update($file);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
-    expect($xml->header->programLicense)->toBeLike('http://developer.catrobat.org/agpl_v3');
+    expect($xml->header->programLicense)->toBeLike('https://developer.catrobat.org/agpl_v3');
   }
 }

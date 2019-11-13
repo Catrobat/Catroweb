@@ -89,7 +89,7 @@ class FeaturedController extends AbstractController
     }
     $retArray['preHeaderMessages'] = '';
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
+      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
       'TotalProjects'     => $numbOfTotalProjects,
       'ProjectsExtension' => '.catrobat',
     ];

@@ -139,7 +139,7 @@ class ResetCommand extends ContainerAwareCommand
     while ($already_downloaded < $amount)
     {
       $server_json = json_decode(file_get_contents(
-        'https://share.catrob.at/pocketcode/api/projects/randomPrograms.json'), true); // ToDo change when 112, 51 is deployed to share 'https://share.catrob.at/app/api/projects/randomProjects.json'
+        'https://share.catrob.at/app/api/projects/randomProjects.json'), true);
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
       foreach ($server_json['CatrobatProjects'] as $program)
       {
