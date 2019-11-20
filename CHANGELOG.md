@@ -6,8 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Proposed new version number is `3.0.0` 
-
+## [3.0.0]
 ### Added
 - `tests/testdata/log` was missing -> added now
 - rename user account feature + translations 
@@ -95,7 +94,8 @@ Proposed new version number is `3.0.0`
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v3.0.0
 [2.3.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.0...v2.1.1
