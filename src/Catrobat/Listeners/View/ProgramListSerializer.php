@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProgramListSerializer
@@ -114,8 +115,10 @@ class ProgramListSerializer
       $retArray['isUserSpecificRecommendation'] = true;
     }
 
+    Request::setTrustedProxies(array($request->server->get('REMOTE_ADDR')),
+      Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
+      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
       'TotalProjects'     => $result->getTotalPrograms(),
       'ProjectsExtension' => '.catrobat',
     ];

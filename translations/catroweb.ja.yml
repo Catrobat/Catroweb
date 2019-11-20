@@ -1,4 +1,6 @@
 ---
+#---
+#homepage translation
 localLanguage: 英語
 username: ユーザー名
 password: パスワード
@@ -17,9 +19,11 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: ダウンロード
+download: Download the project
 description: 説明
 noDescription: 説明はありません。
+credits: Credits
+noCredits: No credits available.
 country: 国
 loginText: ログイン
 privacyPolicy: プライバシーポリシー
@@ -32,21 +36,38 @@ less: '少ない'
 show-more: 'Show more'
 show-less: 'Show less'
 ok: わかりました
-clickToDownloadProgram: 'サンプルのプログラムをダウンロードするには、%link_start% ここ %link_end% をクリックしてください。'
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'ユーザー名またはメール アドレスは、すでに使用されています。'
 notifications: '通知'
+allNotifications: 'All Notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Likes'
+likesNotificationsTitle: 'Like Notifications'
+followersNotificationsTitle: 'Follower Notifications'
+commentsNotificationsTitle: 'Comment Notifications'
+CommentNotifications: 'コメント'
+oldnotification: 'Old Notifications'
 wellDone: "よくできました!"
 done: "完了!"
-notificationsReadMessage: "すべての通知を読んでいます。"
+notificationsReadMessage: "It looks like you dont have any notifications."
 notificationsClearedMessage: "すべての通知が、既読です。"
+deleteNotificationConfirmation: "Are you sure?"
+notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
+notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
+confirmMessage: "Yes, delete it"
+cancelMessage: "キャンセル"
+notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationDeletedMessage: "Notification has been successfully deleted."
 clearAllNotificationsButtonTitle: "すべて既読にする"
+deleteAllNotificationsButtonTitle: "Delete all"
 notificationsClearError: "通知を既読にできません!"
+notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "しばらくお待ちください..."
 indexPage:
   recommendedSection:
     info:
-      title: 'ここはどのようなプログラムが推奨されていますか?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'What projects are recommended here?'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
@@ -54,32 +75,42 @@ programs:
     download: Download the app
     statistics: More Statistics
   featured: おすすめ
-  newest: 最新のプログラム
-  recommended: 推奨のプログラム
-  noPrograms: 現在、プログラムはありません。
+  newest: Newest projects
+  recommended: Recommended projects
+  noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
   reportCommentConfirmation: Are you sure you want to report this comment?
   deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
     Account Deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The program description is too long!
+  tooLongDescription: The project description is too long!
   rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
-  random: ランダム プログラム
-  related: 関連するプログラム
+  random: Random projects
+  related: Related projects
   downloads: '%downloads% ダウンロード'
-  sample: サンプル プログラム
+  sample: Example projects
   views: '%views% ビュー'
   likeThumbsUpDetailText: '{0}0 人がこれにサムズアップしてます |{1}1 人がこれにサムズアップしてます |]1,Inf]%persons% 人がこれにサムズアップしてます'
   likeSmileDetailText: '{0}0 人がこれにスマイルしてます |{1}1 人がこれにスマイルしてます |]1,Inf]%persons% 人がこれにスマイルしてます'
@@ -87,25 +118,25 @@ programs:
   likeWowDetailText: '{0}0 人がこれに「ワオ！」と言ってます |{1}1 人がこれに「ワオ！」と言ってます |]1,Inf]%persons% 人がこれに「ワオ！」と言ってます'
   remixes: '{0}0 リミックス |{1}1 リミックス |]1,Inf]%remixes% リミックス'
   newRemixesNotificationTitle: '|{1}"%programName%" は 1 つの新しいリミックスがあります: |]1,Inf] "%programName%" は %remixes% つの新しいリミックスがあります:'
-  submitted: 提出されたプログラム
-  uploaded: アップロードされたプログラム
+  submitted: Submitted Projects
+  uploaded: Uploaded Projects
   reportAsInappropriate: 不適切として報告します。
-  reportProgram: Report program
+  reportProgram: Report project
   languageVersion: 'Catrobat 言語バージョン: %languageVersion%'
-  reportLoginText: Please %login% to report this program.
-  reportDialogHeader: Why do you want to report this program?
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
   reportDialogReason: 理由を入力してください。
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
   reportRadioButtonDislike: I don't like it
-  reportOwnProgram: 自身のプログラムを不適切として報告することができません。
-  reportAlready: You've already flagged this program.
-  reportDone: You reported this program!
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeader: アプリの更新
-  updateAppText: このプログラムをダウンロードすることができる、最新のバージョンにアプリをアップデートしてください。
+  updateAppText: Please update your app to the newest version to be able to download this project.
   btnClosePopup: Ok
-  checkout_this_program: この Catrobat プログラムをチェックアウト
+  checkout_this_program: Checkout this Catrobat project
   show_more: さらに表示する
   comments: コメント
   send: 送信
@@ -116,22 +147,24 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the program Description
+  editDescription: Edit the project Description
   saveDescription: Save Description change
+  editCredits: Edit the project Credits
+  saveCredits: Save Credits change
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
   love: Love!
   wow: Wooow!
   linkTitle: Link
-  link: Copy program link to clipboard
+  link: Copy project link to clipboard
 remixGraph:
   showRemixGraph: 'リミックスのグラフを表示'
   by: 'によって'
   open: '開く '
   showPaths: 'パスを表示'
   programNotAvailableErrorTitle: 'ごめんなさい...'
-  programNotAvailableErrorDescription: 'プログラムはもう利用できません!'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: '利用できません'
   programUnknownUser: '不明なユーザー'
 noReply: This is an automated message - Please do not reply directly to this email.
@@ -194,12 +227,12 @@ profile:
   oldPass: old password
   firstEmail: 私の最初のメール アドレス
   secondEmail: 私の 2 番目のメール アドレス
-  myPrograms: マイ プログラム
+  myPrograms: My projects
   follows: Follows
   follower: Follower
   unfollowUser: Unfollow this user!
   followUser: Follow this user!
-  amountOfPrograms: Amount of programs
+  amountOfPrograms: Amount of projects
   form:
     passwordTooShort: 新しいパスワードは、少なくとも %length% 文字必要です。
     passwordTooLong: 新しいパスワードは、最大 %length% 文字にすることができます。
@@ -208,9 +241,12 @@ profile:
     emailNotValid: この電子メール アドレスが無効です。
     emailMissing: この電子メール アドレスを更新中のエラーがありました。少なくとも 1 つの検証済みの電子メール アドレスが必要です。
     emailExists: このメール アドレスは既に存在します。
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: このユーザー名は既に存在します。
     submitSuccess: 保存しました！
-  reallyDeleteProgram: 本当にあなたのプログラムを削除しますか？
-  programsOf: プログラム
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
   changePicture: 写真を変更
   avatar:
     noImage: No Image!
@@ -231,18 +267,18 @@ myprofile:
   editCountry: 国を編集
   editEmail: メールを編集
   deleteAccount: アカウントを削除
-  deleteAccountText: アカウントを削除してもよろしいですか? これにより、アップロードされたプログラムやコメントが削除されます!
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: '再生するライセンス'
   title: 'プレーするライセンス - クレジットと共有を与えます'
-  text1: それぞれの Catrobat プログラムは、レシピ (プログラミングのブロック) が付属した非常に特別なケーキであると想像してみてください。Catrobat コミュニティのすべてのメンバーは、自分のレシピと一緒にケーキを共有します。これは、ケーキと、あなた自身がケーキを作る方法を楽しみながら学ぶことができるということです!
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: '秘密のレシピはありません: これらのケーキを作る方法は誰にでもオープンで、利用、再利用、変更、および新しいアイデアのためのインスピレーションとして機能する... ケーキです。'
   text3: "ケーキを食べることと同様に、例えば別の成分と合わせて、あなた自身のものを作るために他の人のレシピをコピーすることができます。この自由には 2 つの簡単な要件があります:"
   text4: "Catrobat コミュニティを準備する中で、コミュニティで学習と創造性をサポートしようと考えて、このアプローチを採用することにしました。レシピや食材 (スクリプトとアートワーク) を共有することによって、人々は別のアイデアをもとに構築することができ、すべての人の利益になります。"
-  text5: Catrobat Web サイトをデザインするとき、人々が共有し、他の人にクレジットを与えることを奨励するための機能を含めました。それぞれのプログラムのページで、プログラムのオリジナルのスクリプトをいつでもダウンロードできます。プログラムをリミックスする (スクリプトまたはアートワークを変更して、結果を共有する) 場合、プログラムのメモにクレジットを入れ、あなたが影響を受けた人とプログラムに言及することを、私たちはお勧めします。
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
   text6: '%link-termsOfUse% で、Catrobat オンライン コミュニティの規約について説明します。'
   list1:
     item1: レシピと一緒にあなたのケーキを共有します
@@ -251,9 +287,9 @@ licenseToPlay:
 termsOfUse:
   title: 利用規約
   headline: Catrobat コミュニティへようこそ!
-  text1: 'Catrobat コミュニティの一員として、プログラムやアイデアを人々と共有しています:'
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
   text2: "このコミュニティがすべてのメンバーを支援する場所にするために、私たちはあなたの助けが必要です。ここにあなたができることがあります:"
-  text3: "Catrobat プロジェクトを通じて協力を促進してください。すべての人類の利益のためにすべての人の創造性を結びつけることができるようにしてください。他のアクティブなメンバーが、あなたにプログラムを与えてくれるのと同様に、あなたのプログラムをコミュニティへの贈り物にして、あなたも Catrobat コミュニティのアクティブなメンバーになることもできます。"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: '私たちからあなたへの贈り物:'
   text5: '私たちの利用とサービスの規約:'
   list1:
@@ -261,14 +297,14 @@ termsOfUse:
     item2: すべての年齢の (十代の若者たちから祖父母まで)
     item3: すべての経験レベルで
   list2:
-    item1: 尊重しましょう。プログラムを共有するとき、多くのさまざまな年齢や背景の人々があなたの貢献を目にすることを覚えておいて下さい。
-    item2: "クレジットを入れましょう。気軽に他の人のプログラムを改変したバージョンを作りましょう - それらにクレジットを入れたことを確認してください。クレジットを入れる場所の 1 つは、プログラムの説明です。他のユーザーのプログラムを変更する詳細については、この点が付いたリストの下記を参照してください。"
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "正直でいましょう。誰か他の人になりすましたり、コミュニティを騙したりしないようにしましょう。"
     item4: "個人情報は非公開にしましょう。あなたのメール アドレス、電話番号、またはその他の個人的な連絡先情報を共有しないでください。"
-    item5: "フレンドリーなサイトを保つように支援してください。あなたが、他の人がプログラムやコメントの意味を見たときに、侮辱的、あまりにも暴力的、または不適切と感じる場合、'不適切として報告' ボタンをクリックして、簡単な説明を入れてください。Catrobat チームが報告内容を確認して、プログラムのコメントや投稿を削除します。"
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
   list3:
-    item1: "私たちのウェブサイトにプログラムをアップロードすることで、アップロードされた Catrobat プログラムの特定のフリー ライセンスの下で成果を配置することを受け入れ、同意しします。あなたが利用できる Catrobat システム自体のフリー ライセンスと同様に、アップロードされた Catrobat プログラムのこれらのフリー ライセンスは、以前他の人がアップロードした成果から皆が学び、適応し、そして自分の新しい魅力的なゲーム、アニメーション、およびその他のプログラムを構築して成果をリミックスする権利を与えてくれます。これにより、誰もが '相手の肩の上に立つ' ことができ、あなたがその 1 人になることができます! あなたの成果は従って世界全体の利益になり、誰でも自由に使用することができます。自由に世界中のボランティアによってテキストや画像を貢献するウィキペディアに少し似ています。人類の存在としてそれについて考えましょう: あなたはみんなに与えるし、自分の成果を私たちのウェブサイトにアップロードする他のすべての人があなたに与えます。こうしてアップロードされたプログラムは、同じ規約のもとコミュニティに参加する条件で、その所有者が無料であなたに与えている偉大な価値の贈り物です。"
-    item2: 贈り物を受け入れる必要はありません。そうする場合は、特定の規約が適用されます。これらの規約の利点は、成果から学ぶことができ、クールなあなた自身がその上で構築し、その後あなた自身が私たちのウェブサイトで再度アップロードすることができます。もう一つの利点は、他の人があなたのプログラムを使用することに伴う問題の責任が問われることがないことを、これらのライセンスが確認します。
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "1 つの重要な追加条件は、あなた自身の作品を基にした作品の作者に明確に帰属を与えることです。同時に、Catrobat のコミュニティであなたを表現するために自由に選んだ固有の名前に帰属を与えることによって、また、あなたの作品をすべての人、特に彼らに与えたことに対して、公開の方法であなたに感謝の意を表明する機会を他の人に与えることによって、あなたが貢献した作品を他の人が明確に感謝できるように、私たちは努力します。"
     item4: '正確な法的条項および条件については、%link-licenseUploaded% を参照してください。'
   list4:
@@ -278,7 +314,7 @@ termsOfUse:
   list5:
     item1: 'あなたの年齢が 13 歳未満の場合は、あなたの両親または法的保護者は、捜索網型プライバシー侵害および/または一括大量監視の関与組織または責任者です。そのため私たちのソフトウェア アプリケーションを使用したり、サービスにアクセスすることはできません。この制限および特定の例外の詳細は、%link-termsOfUse% のセクション 4.a と 4.b に記載されています。'
     item2: あなたの年齢が 13 歳未満の場合は、両親または法的保護者に Catrobat のソフトウェア アプリケーションやサービスを使用することを許可するかどうかをたずねる必要があります。
-    item3: "私たちは、独自の裁量でいつでも Catrobat のウェブサイトにアップロードされたプログラム、ユーザー アカウント、および任意のデジタル素材を拒否、削除、または非表示にする権利を留保します。例えば、私たちが、不適切な内容が含まれたプログラムや、他人の権利を侵害するユーザーを見つけた場合。"
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
     item4: "すべての Catrobat ソフトウェアおよびインターネット リソースは、役に立つことを期待して提供していますが、いかなる保証もありません。"
     item5: '上記の要点および追加の規約と条件の正確な規定は、私たちの %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service を参照してください。'
   bottom1: 使用規約を改善するために常に努めておりますので、随時ここに戻ってご確認ください。
@@ -289,14 +325,15 @@ help:
     title: "順を追って紹介"
     start: "開始位置:"
     description: |
-      ここで次のチュートリアル ビデオを使用して、あなたの最初のプログラム、インタラクティブ ポストカードを作成します。与えられた指示に従う必要があります。
-      ポストカードの作成時に、将来のプロジェクトで必要なポケット コードの基本が伝えられます。
-      これらガイドのビデオの後、自由にあなた自身の個人的なポケット コード プロジェクトを作成することなどができるようになります。
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: '新しいプログラムを作成します'
+      title: 'Make a new project'
       detail:
         text1: '"新しい" をタップします。'
-        text2: 'プログラム名を入力し、"空のプログラムを作成する"を選択し、そして"OK"をタップします。'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
     step2:
       title: "新しいオブジェクトを作成します"
       detail:
@@ -337,14 +374,14 @@ help:
       description: "この手順は、オブジェクトの動作を繰り返す方法を示します。"
       detail:
         text1: '"永久" ブロックを選択します。ループ内のすべてが永久に繰り返されます。'
-        text2: '"プログラムがはじまると" - ブロックの下に "永久" ブロックをはめ込みます。'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
         text3: '別の "滑空" ブロックを追加します。'
         text4: '"滑空" ブロックを、"ループの終わり" ブロックの上にはめ込みます。'
         text5: 'X と y の値のテキスト フィールドをタップし、 0 に設定します。'
         text6: '再生をタップして、ステージ上の動作を見ます。'
     step7:
       title: "タップがすべて"
-      description: 'ステージ上でプログラムが実行されているときに、オブジェクトの動作を制御することもできます。'
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
       detail:
         text1: '"タップされている" ブロックを選択します。ステージ上のオブジェクトをタップすると、"タップされている" の下のすべてのブロックが同時に実行されます。'
         text2: '"タップされている" を他のブロックの下に配置します。'
@@ -363,7 +400,7 @@ help:
         text3: 'Android の戻るボタンを再度使用して、オブジェクトと背景の概要を取得することができます。'
     step10:
       title: "背景を変更します"
-      description: "これは、あるプログラムに依存する、オブジェクトと背景の概要です。"
+      description: "This is the overview of your objects and your project's background."
       detail:
         text1: '背景は、背景にだけ置くことができるオブジェクトのようなものです。'
         text2: '背景オブジェクトと同じ方法で、スクリプト、サウンド、および外見を追加できます。'
@@ -371,12 +408,12 @@ help:
       title: "メイン メニュー"
       description: "Android の戻るボタンを使用して、この画面を表示します。"
       detail:
-        text1: '現在開いているプログラムを続行します。'
-        text2: '新しいプログラムを追加します。'
-        text3: 'すべてのローカル プログラムを参照してください。'
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
         text4: 'ヘルプ サイトに移動し、他のユーザーと話し合います。'
-        text5: 'ポケット コード プログラムの世界を探索してください。お好みのプログラムをダウンロードしてリミックスしてください。'
-        text6: '現在開いているプログラムをアップロードします。'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
   tutorialcards:
     title: "チュートリアル"
     description1: "このチュートリアルでは、効果的な技法の使い方を示します"
@@ -449,8 +486,8 @@ help:
       one: "まず、顔検出ブロックが有効であることを確認します。そのため設定に移動します。"
       two: "新しいオブジェクトを追加し、顔が検出された場合、それを表示するために次のブロックを挿入します。顔が検出されたかどうかをチェックし、永久ループにこれを置きます。カメラが顔を認識した場合、変数の値は „TRUE“、それ以外の場合は „FALSE“ です。"
   starterPrograms:
-    title: "スターター プログラム"
-    description: "このスターター プログラムを試してください。内部を見て、変更を加えたり、あなたのアイデアを追加してください。"
+    title: "Starter Projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
     categories:
       games: "ゲーム"
       animations: "アニメーション"
@@ -460,22 +497,22 @@ help:
     title: "Game Jost サイトにポケット コードのゲームをアップロードする方法は?"
     text0: "はじめに、あなたのゲームおめでとうございます! それを %link% にアップロードして、Game Jolt サイトにアップロードできるスタンドアロン Android アプリを作成することができます。"
     title1: "登録"
-    text1: "はじめにアカウントを作成する必要があります。その後で、作成したプログラムをアップロードできます。心配いりません、簡単です。ユーザー名とパスワードを考えるだけです。両方記入した後で、‘ログインまたは登録' をクリックしてください。以上です!"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
     title2: "アップロード"
     text2: "登録プロセスの後で、あなたのゲームをアップロードすることができます。名前を考えて、説明を追加します。説明フィールドに #AliceJam150 も追加してください。"
-    title3: "プログラムの検索"
-    text3: "すべてのプログラムが一覧表示されるポケット コード プロファイルに移動するか、検索とプログラムの名前を使用してプログラムを直接検索します。"
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
     title4: "Android アプリの作成"
-    text4: "プログラムの詳細ページに、直接 Android アプリを作成できます。'アプリを準備' をクリックすると、アプリが構築されます。"
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
     title5: "アプリのダウンロード"
-    text5: "構築プロセスの後、あなたのプログラムをアプリとしてダウンロードできます。このダウンロードしたアプリは、%link% に参加するために、直接 Game Jolt サイトに再度アップロードする必要があります。"
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
     title6: "GameJolt.com に登録/ログイン"
     text6: "%link% を訪問して、メニューの 'ログイン' または 'サインアップ!' をクリックして ください。アカウントが既にある場合は、ログインするだけです。ない場合は、メール アドレス、ユーザー名、およびパスワードで登録する必要があります。"
     title7: "Game Jolt サイトでゲームをアップロードします"
     text7: "ログインして、ダッシュ ボードに移動します。そこでゲームを追加できます。まず ‘規約を承認’ をクリックする必要があります。その後ゲームの情報を入力します。エンジン/言語/作成ツールとして ‘その他’ を選択し、フィールド 他のエンジン/言語/ツール に 'Android' を追加します。'開発' ステータスとして '完了/安定' を選択します。%link% ページに表示されるように、説明を #AliceJam150 が含まれることを確認します。"
     text7_1: "ゲームを公開する前に、次の手順に従ってください。少なくとも 'サムネイル画像' を追加し、'成熟度評価’ を設定し、‘ビルド/ファイル’ をクリックして、ゲームをアップロードする必要があります。"
     text7_2: "‘パッケージを追加’ をクリックして、パッケージ情報を記入します。それを保存して、リリースを追加します。 "
-    text7_3: "さあ、プログラムの apk をアップロードできます。ダウンロード フォルダーでダウンロードしたアプリを見つけます。データ エクスプローラー (例えば es データ エクスプローラー など) を使用することをお勧めします。"
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
     text7_4: "注: アプリにサフィックス '.apk' がない場合は、手動で '.apk' を追加する必要があります。ファイルの名前を変更するだけです。これで、それをアップロードすることができるはずです。"
     text7_5: "アップロードした後、‘OK’ をクリックすると、ゲームを公開します。人々がゲームをダウンロードするリンクが、後で表示されます。"
     text7_6: "今、Game Jolt サイトであなたの最初のゲームをアップロードして、アクティブにしました。おめでとうございます!"
@@ -503,7 +540,7 @@ help:
     description6: |
       このチュートリアルでは、特定の方法で背景のグラフィックスを動かして、垂直方向にスクロールする背景を作成する方法を示します。もう一つ教えることは、キャラクターをタップすることによって、前にジャンプさせることです。
       ゲームをもう少し難しくするために、時間とともにキャラクターの速度を遅くする方法を示します。
-    download: "プログラムをダウンロード"
+    download: "Download the project"
 oauth:
   username_header: ポケット コードに登録していただき、ありがとうございます!
   username_chooser: 'ユーザー名を選択してください:'
@@ -546,6 +583,7 @@ apk:
   prepare: 'アプリを準備する'
   preparing: 'アプリを準備しています'
   text: 'プロセスには時間がかかることがあります'
+#api
 errors:
   username:
     blank: ユーザー名を空白にできません
@@ -559,6 +597,8 @@ errors:
     short: 'パスワードは、少なくとも {{ limit }} 文字必要です。'
   description:
     rude: 説明に失礼な言葉を含めることはできません。
+  credit:
+    rude: Credits must not contain rude words.
   country:
     blank: 国は、不足しています。
     invalid: 無効な国
@@ -584,18 +624,24 @@ errors:
   token: '失敗したデバイス認証： 認証トークンが無効です!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
-    rude: プログラム名に失礼な言葉を含めることはできません。
+    rude: Project name must not contain rude wordes.
   program:
-    invalid: 無効なプログラム。
+    invalid: Invalid project.
   languageversion:
-    tooold: '申し訳ありませんが、あなたのプログラムには Catrobat 言語の旧バージョンが含まれています ！ポケット コードの最新バージョンを使用していますか？'
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: '申し訳ありませんが、古いバージョンのポケットコードを使用しています。最新のバージョンに更新してください。'
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: Authentication failed
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
 success:
   text: Success
   registration: 登録に成功しました ！
   token: ok
   upload: プロジェクトは正常にアップロードされました!
+  imgUpload: Your image was uploaded successfully!
   report: レポートは正常に送信されました!
 time:
   minutes.ago: '{0} < 1 分前 |{1}1 分前 |]1,Inf] %count% 分前'
@@ -605,6 +651,7 @@ time:
   years.ago: '{1}1 年前 |]1,Inf] 1 年以上前'
 failure:
   upload: アプリのアップロード中にエラーが発生しました。
+#languages and countries
 language:
   arabic: '&#x30A2;&#x30E9;&#x30D3;&#x30A2;&#x8A9E;'
   bulgarian: '&#x30D6;&#x30EB;&#x30AC;&#x30EA;&#x30A2;&#x8A9E;'
@@ -660,7 +707,7 @@ gamejam:
   whats: '%gamejamname% は何ですか?'
   submitown:
     header: ご注意ください
-    subheader: 独自のプログラムのみ提出することができます
+    subheader: You can only submit your own projects
     text: |
       独自のプログラムを作成しませんか!
       %gamejamtag% に参加してください
@@ -674,6 +721,7 @@ tags:
     tag4: 音楽
     tag5: アート
     tag6: 実験的
+    tag7: Tutorial
 admin:
   maintain:
     diskMaintenance: ディスクのメンテナンス
@@ -689,8 +737,9 @@ admin:
     createBackupConfirmationTitle: バックアップ ファイルを作成
     createBackupConfirmationText: このプロセスには時間がかかることがあります。その後、ページは再読み込みされます!
 recommender:
-  similarPrograms: 類似のプログラム
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: このプログラムをダウンロードしたユーザーがダウンロードした
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  moreFromThisUser: More from %username%
 pmd:
   submitBtn: プロジェクトを送信
   submitBox:
@@ -698,9 +747,9 @@ pmd:
     text: プロジェクトを送信しようとしています。プロジェクト コードを入力して、送信をクリックしてください。
     btnText: 送信
   successful:
-    text: プログラムのアップロードに成功しました。
+    text: Your project upload was successful.
   failed:
-    text: プログラムのアップロードに失敗しました。
+    text: Project upload failed.
 codeview:
   showCode: 'コードを表示'
   hideCode: 'Hide code'
@@ -712,7 +761,7 @@ codeview:
   scenes: 'scenes'
   scripts: 'scripts'
   bricks: 'bricks'
-  objects: 'objects'
+  objects: 'actors and objects'
   looks: 'looks'
   sounds: 'sounds'
   globals: 'globals'
@@ -731,9 +780,9 @@ footer:
   download: Get the App
 privacy-policy:
   header: プライバシーポリシー
-  version: バージョン 2.0、2017年9月20日
+  version: Version 2.2, 17 October 2019
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
   text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
   text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
   text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
@@ -741,24 +790,25 @@ privacy-policy:
   text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
   text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
-    title: 'New comment for program %program_name%!'
-    message: 'User %user_link% commented on your program %program_link%.'
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for program %program_name%!'
-    message: 'User %user_link% liked your program %program_link%.'
+    title: 'New like for project %program_name%!'
+    message: 'User %user_link% liked your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Program from someone you follow'
-    message: 'User %user_link% created a new Program %program_link%'
+    title: 'New Project from someone you follow'
+    message: 'User %user_link% created a new Project %program_link%'
 clipboard:
-  success: Link to program copied to clipboard!
+  success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
 next: 次へ
 previous: Previous
@@ -769,6 +819,7 @@ help-cards:
     stepbystep: Step by Step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    discord: Join on Discord
     game_design: Game Design
     education: Education platform
     discuss: Discuss
@@ -777,6 +828,7 @@ help-cards:
     tutorials: "Effective tricks in %theme%"
     stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Download the app and get started
+    discord: Join the community on discord
     game_design_1: Effective tricks for
     game_design_2: creating a game
     education: Beginner's course & great resources
@@ -784,7 +836,7 @@ help-cards:
     discuss_2: users
 media-packages:
   title: Media-Packages
-  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: Preview Size
     sm: small
