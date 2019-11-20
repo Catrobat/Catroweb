@@ -55,7 +55,7 @@ class ResetCommand extends ContainerAwareCommand
 
     CommandHelper::executeShellCommand('php bin/console catrobat:drop:migration', [],
       'Dropping the migration_versions table', $output);
-    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate', [],
+    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate', ['timeout' => 320],
       'Execute the migration to the latest version', $output);
     CommandHelper::executeShellCommand('php bin/console catrobat:create:tags', [],
       'Creating constant tags', $output);
