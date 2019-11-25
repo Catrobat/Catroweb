@@ -107,7 +107,7 @@ class ApiFeatureContext extends BaseContext
   /**
    * @var array
    */
-  private $server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true];
+  private $server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => false];
 
   /**
    * @var array
@@ -182,8 +182,10 @@ class ApiFeatureContext extends BaseContext
    */
   public function iInvokeTheRequest()
   {
-    $this->getClient()->request($this->method, 'https://' . $this->server_parameters['HTTP_HOST'] . $this->url .
-      '?' . http_build_query($this->get_parameters), $this->post_parameters, $this->files, $this->server_parameters);
+    $uri = $this->server_parameters['HTTPS'] === true ? "https://" : "http://";
+    $uri .= $this->server_parameters['HTTP_HOST'] . $this->url . '?' . http_build_query($this->get_parameters);
+
+    $this->getClient()->request($this->method, $uri , $this->post_parameters, $this->files, $this->server_parameters);
   }
 
   /**
