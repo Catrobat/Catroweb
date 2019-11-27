@@ -257,6 +257,7 @@
             <i class="program-big-button-icon mr-3 fab fa-android"></i>
             <span>{{ "apk.prepare"|trans({}, "catroweb") }}</span>
           </button>
+
         </div>
 
         <div id="apk-pending" class="btn-container col-12 col-xl-6 d-none">
@@ -273,9 +274,18 @@
             <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
           </button>
         </div>
-      </div>
       {% endif %}
 
+      {% if not my_program %}
+        <div id="steal-button" class="btn-container col-12 col-xl-6">
+          <button class="btn btn-primary">
+            <img class="program-big-button-icon mr-3" src="{{ asset('images/symbols/steal.svg') }}" alt=""/>
+            <span>Steal this app</span>
+          </button>
+        </div>
+      {% endif %}
+
+      </div>
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% if jam %}
           <div id="gamejam-div">
@@ -749,6 +759,39 @@
           console.log(data)
         })
         window.location.href = href
+      })
+    })
+
+
+    $(document).ready(function () {
+      $(document).on('click', '#steal-button',  function(){
+        var type = $(this).attr('data-steal-type');
+        var url = "{{ path('program_steal', { 'id' : program.id }) }}?type=" + type;
+
+        $.ajax({
+          url    : url,
+          type   : 'get',
+          data   : {type: type},
+          success: function (data) {
+            if (data.statusCode !== {{ constant('App\\Catrobat\\StatusCode::OK') }})
+            {
+              if (data.statusCode === {{ constant('App\\Catrobat\\StatusCode::LOGIN_ERROR') }})
+              {
+                window.location.href = url;
+                return
+              }
+              alert('something went wrong');
+              $(this).addClass('not-selected');
+              return
+            }
+            location.reload()
+            alert(data.data.response)
+          },
+          error  : function () {
+            alert('something went terribly wrong')
+            $(this).addClass('not-selected')
+          }
+        })
       })
     })
 

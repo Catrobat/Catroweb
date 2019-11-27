@@ -238,3 +238,13 @@ Feature: As a visitor I want to see a project page
     Then I should see "Download the project"
     And I should see "Show Remix Graph"
     And I should not see "Download as app"
+
+  Scenario: On the project page there should be a steal button visible to all users
+    Given I log in as "Gregor" with the password "123456"
+    Then  I am on "/app/project/1"
+    Then I should see "Steal this app"
+    When I click "#steal-button"
+    Then I wait 2000 milliseconds
+    And I should not see "#steal-button"
+
+
