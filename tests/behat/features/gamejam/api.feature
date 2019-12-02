@@ -16,6 +16,7 @@ Feature:
   Scenario:
     Given There is an ongoing game jam
     And I already submitted my game
+    And the program has the id "1"
     And I already filled the google form
     When I GET "/pocketalice/api/gamejam/submissions.json"
     Then I should receive my program

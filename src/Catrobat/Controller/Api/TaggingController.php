@@ -2,7 +2,8 @@
 
 namespace App\Catrobat\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Repository\TagRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * Class TaggingController
  * @package App\Catrobat\Controller\Api
  */
-class TaggingController extends Controller
+class TaggingController extends AbstractController
 {
 
   /**
@@ -22,10 +23,8 @@ class TaggingController extends Controller
    *
    * @return JsonResponse
    */
-  public function taggingAction(Request $request)
+  public function taggingAction(Request $request, TagRepository $tags_repo)
   {
-    $tags_repo = $this->get('tagrepository');
-
     $em = $this->getDoctrine()->getManager();
     $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
 

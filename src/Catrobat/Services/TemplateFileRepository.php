@@ -14,14 +14,16 @@ class TemplateFileRepository extends ProgramFileRepository
   /**
    * TemplateFileRepository constructor.
    *
-   * @param                        $directory
-   * @param                        $webpath
+   * @param $catrobat_template_storage_dir
+   * @param $catrobat_template_storage_path
    * @param CatrobatFileCompressor $file_compressor
-   * @param                        $tmp_dir
+   * @param $catrobat_upload_temp_dir
    */
-  public function __construct($directory, $webpath, CatrobatFileCompressor $file_compressor, $tmp_dir)
+  public function __construct($catrobat_template_storage_dir, $catrobat_template_storage_path,
+                              CatrobatFileCompressor $file_compressor, $catrobat_upload_temp_dir)
   {
-    parent::__construct($directory, $webpath, $file_compressor, $tmp_dir);
+    parent::__construct($catrobat_template_storage_dir, $catrobat_template_storage_path, $file_compressor,
+      $catrobat_upload_temp_dir);
   }
 
   /**

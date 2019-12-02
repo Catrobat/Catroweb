@@ -57,11 +57,11 @@ class InvalidFileUploadCleanupRevertCommand extends ContainerAwareCommand
     $ids = explode(",\n", $content);
 
     /** @var ProgramRepository $pr */
-    $pr = $this->getContainer()->get('programrepository');
+    $pr = $this->getContainer()->get(ProgramRepository::class);
 
     $fs = new Filesystem();
     /** @var EntityManager $em */
-    $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+    $em = $this->getContainer()->get('doctrine')->getManager();
 
     foreach ($ids as $id)
     {

@@ -7,11 +7,11 @@ Feature: Get recommended programs on homepage
 
   Background:
     Given there are users:
-      | id | name      | password | token      |
-      | 1  | Catrobat1 | 12345    | cccccccccc |
-      | 2  | Catrobat2 | 12345    | cccccccccc |
-      | 3  | Catrobat3 | 12345    | cccccccccc |
-      | 4  | Catrobat4 | 12345    | cccccccccc |
+      | id | name      | password | token      | id |
+      | 1  | Catrobat1 | 12345    | cccccccccc |  1 |
+      | 2  | Catrobat2 | 12345    | cccccccccc |  2 |
+      | 3  | Catrobat3 | 12345    | cccccccccc |  3 |
+      | 4  | Catrobat4 | 12345    | cccccccccc |  4 |
     And there are programs:
       | id | name    | description | owned by  | downloads | views | upload time      | version | remix_root | debug |
       | 1  | Game    | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | true       | false |
@@ -40,7 +40,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get no user-specific recommended projects
     Then I should get a total of <total> projects
     Then I should get the programs "<programs>"
@@ -55,7 +55,7 @@ Feature: Get recommended programs on homepage
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get no user-specific recommended projects
     Then I should get a total of 0 projects
     Examples:
@@ -75,10 +75,10 @@ Feature: Get recommended programs on homepage
       | Catrobat2 | 1          | 1    | 01.01.2017 12:00 |
       | Catrobat2 | 2          | 3    | 01.01.2017 12:00 |
       | Catrobat2 | 3          | 2    | 01.01.2017 12:00 |
-    Given I have a parameter "test_user_id_for_like_recommendation" with value "1"
+    And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get user-specific recommended projects
     Then I should get a total of 1 projects
     Then I should get following programs:
@@ -97,10 +97,10 @@ Feature: Get recommended programs on homepage
       | Catrobat2 | 1          | 1    | 01.01.2017 12:00 |
       | Catrobat2 | 2          | 3    | 01.01.2017 12:00 |
       | Catrobat2 | 3          | 2    | 01.01.2017 12:00 |
-    Given I have a parameter "test_user_id_for_like_recommendation" with value "1"
+    And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get a total of 1 projects
     Then I should get following programs:
       | Name   |
@@ -121,10 +121,10 @@ Feature: Get recommended programs on homepage
       | Catrobat3 | 1          | 2    | 01.01.2017 12:00 |
       | Catrobat3 | 3          | 1    | 01.01.2017 12:00 |
       | Catrobat3 | 4          | 4    | 01.01.2017 12:00 |
-    Given I have a parameter "test_user_id_for_like_recommendation" with value "1"
+    And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get user-specific recommended projects
     Then I should get a total of <total> projects
     Then I should get the programs "<programs>"
@@ -152,10 +152,10 @@ Feature: Get recommended programs on homepage
       | Catrobat3 | 4          | 4    | 01.01.2017 12:00 |
       | Catrobat4 | 1          | 2    | 01.01.2017 12:00 |
       | Catrobat4 | 5          | 1    | 01.01.2017 12:00 |
-    Given I have a parameter "test_user_id_for_like_recommendation" with value "1"
+    And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/recsys_general_programs.json" with these parameters
+    When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get user-specific recommended projects
     And I should get a total of <total> projects
     And I should get the programs "<programs>"

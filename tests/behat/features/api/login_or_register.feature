@@ -18,7 +18,7 @@ Feature: Deprecated
 #        | registrationPassword | registrationpassword |
 #        | registrationEmail    | test@mail.com        |
 #        | registrationCountry  | at                   |
-#    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+#    When I POST these parameters to "/app/api/loginOrRegister/loginOrRegister.json"
 #    Then I should get the json object:
 #      """
 #      {"token":"rrrrrrrrrrr","statusCode":201,"answer":"Registration successful!","preHeaderMessages":""}
@@ -30,7 +30,7 @@ Feature: Deprecated
 #      | name                 | value                 |
 #      | registrationUsername | Catrobat              |
 #      | registrationPassword | 123456                |
-#    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+#    When I POST these parameters to "/app/api/loginOrRegister/loginOrRegister.json"
 #    Then I should get the json object:
 #      """
 #      {"token":"cccccccccc","statusCode":200,"preHeaderMessages":""}
@@ -46,7 +46,7 @@ Feature: Deprecated
 #      | name                    | password  |
 #      | LDAP-user               | 654321    |
 #    And the next generated token will be "cccccccccc"
-#    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+#    When I POST these parameters to "/app/api/loginOrRegister/loginOrRegister.json"
 #    Then I should get the json object:
 #      """
 #      {"token":"cccccccccc","statusCode":200,"preHeaderMessages":""}
@@ -63,7 +63,7 @@ Feature: Deprecated
 #    And there are users:
 #      | name                    | password    | email   | token     |
 #      | TheTroll                |             | c@d.com |cccccccccc |
-#    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+#    When I POST these parameters to "/app/api/loginOrRegister/loginOrRegister.json"
 #    Then I should get the json object:
 #      """
 #      {"token":"cccccccccc","statusCode":200,"preHeaderMessages":""}
@@ -75,7 +75,7 @@ Feature: Deprecated
 #        | name                 | value                 |
 #        | registrationUsername | Catrobat              |
 #        | registrationPassword | invalid               |
-#    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+#    When I POST these parameters to "/app/api/loginOrRegister/loginOrRegister.json"
 #    Then I should get the json object:
 #      """
 #      {"statusCode":601,"answer":"The password or username was incorrect.","preHeaderMessages":""}
@@ -136,7 +136,7 @@ Feature: Deprecated
 #    And there are LDAP-users:
 #      | name                    | password  | groups                                |
 #      | LDAP-user               | 654321    | Webserver-FeaturedProgramsMaintainers |
-#    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+#    When I POST these parameters to "/app/api/loginOrRegister/loginOrRegister.json"
 #    Then I should get the json object:
 #      """
 #      {"statusCode":601,"answer":"The password or username was incorrect.","preHeaderMessages":""}

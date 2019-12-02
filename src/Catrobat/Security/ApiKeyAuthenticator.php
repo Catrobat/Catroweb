@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -42,6 +43,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
    * @param         $providerKey
    *
    * @return PreAuthenticatedToken
+   * @throws BadCredentialsException
    */
   public function createToken(Request $request, $providerKey)
   {
@@ -70,14 +72,17 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
    * @param                       $providerKey
    *
    * @return PreAuthenticatedToken
+   * @throws AuthenticationException
    */
   public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
   {
     /**
      * @var $user User
      */
-    $user = $userProvider->loadUserByUsername($token->getUsername());
-    if (!$user)
+    try
+    {
+      $user = $userProvider->loadUserByUsername($token->getUsername());
+    } catch (UsernameNotFoundException $exception)
     {
       throw new AuthenticationException(
         $this->translator->trans("errors.username.not_exists", [], 'catroweb'));
@@ -85,7 +90,9 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
 
     if ($token->getCredentials() === $user->getUploadToken())
     {
-      $authenticated_token = new PreAuthenticatedToken($user, $token->getCredentials(), $providerKey, $user->getRoles());
+      $authenticated_token = new PreAuthenticatedToken(
+        $user, $token->getCredentials(), $providerKey, $user->getRoles()
+      );
       $authenticated_token->setAuthenticated(true);
 
       return $authenticated_token;
@@ -117,7 +124,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
     return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR,
-                                 'answer' => $exception->getMessage(), 'preHeaderMessages' => ""],
+                                 'answer'     => $exception->getMessage(), 'preHeaderMessages' => ""],
       Response::HTTP_UNAUTHORIZED);
   }
 }

@@ -2,7 +2,10 @@
 Feature: List programs with and without debug build type
 
   Background:
-    Given there are tags:
+    Given there are users:
+      | name              | password | token      | id |
+      | GeneratedUser1    | vwxyz    | aaaaaaaaaa |  1 |
+    And there are tags:
       | id | en     | de         |
       | 1  | Games  | Spiele     |
       | 2  | Story  | Geschichte |
@@ -13,42 +16,42 @@ Feature: List programs with and without debug build type
       | 2  | Lego  | LEGO   |
       | 3  | Phiro | PHIRO  |
     And there are programs:
-      | id | name          | description | downloads | views | upload time      | version | debug | tags_id | extensions |
-      | 1  | program 1     | p1          | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false | 1,2     | Lego,Drone |
-      | 2  | program 2     |             | 333       | 9     | 22.04.2014 13:00 | 0.9.10  | false | 3       |            |
-      | 3  | debug program | new one     | 450       | 80    | 01.04.2019 09:00 | 1.0.12  | true  | 1,2,3   | Lego,Phiro |
-      | 4  | program 4     |             | 133       | 33    | 01.01.2012 13:00 | 0.9.10  | false | 1       | Lego       |
+      | id | name          | description | downloads | views | upload time      | version | debug | tags_id | extensions | owned by        |
+      | 1  | program 1     | p1          | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false | 1,2     | Lego,Drone | GeneratedUser1  |
+      | 2  | program 2     |             | 333       | 9     | 22.04.2014 13:00 | 0.9.10  | false | 3       |            | GeneratedUser1  |
+      | 3  | debug program | new one     | 450       | 80    | 01.04.2019 09:00 | 1.0.12  | true  | 1,2,3   | Lego,Phiro | GeneratedUser1  |
+      | 4  | program 4     |             | 133       | 33    | 01.01.2012 13:00 | 0.9.10  | false | 1       | Lego       | GeneratedUser1  |
     And the current time is "01.08.2019 00:00"
     And I store the following json object as "debug_program":
       """
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 3,
+            "ProjectId": "(.*?)",
             "ProjectName": "debug program",
             "ProjectNameShort": "debug program",
             "Author": "GeneratedUser1",
             "Description": "new one",
             "Version": "1.0.12",
-            "Views": "80",
-            "Downloads": "450",
+            "Views": 80,
+            "Downloads": 450,
             "Private": false,
-            "Uploaded": 1554109200,
+            "Uploaded": 1554102000,
             "UploadedString": "4 months ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "pocketcode/program/3",
-            "DownloadUrl": "pocketcode/download/3.catrobat",
+            "ProjectUrl": "app/project/(.*?)",
+            "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
         ],
         "completeTerm": "",
+        "preHeaderMessages": "",
         "CatrobatInformation": {
           "BaseUrl": "http://localhost/",
           "TotalProjects": 4,
           "ProjectsExtension": ".catrobat"
-        },
-        "preHeaderMessages": ""
+        }
       }
       """
     And I store the following json object as "debug_program_id":
@@ -56,7 +59,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 3,
+            "ProjectId": "(.*?)",
             "ProjectName": "debug program"
           }
         ],
@@ -74,31 +77,31 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 2,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 2",
             "ProjectNameShort": "program 2",
             "Author": "GeneratedUser1",
             "Description": "",
             "Version": "0.9.10",
-            "Views": "9",
-            "Downloads": "333",
+            "Views": 9,
+            "Downloads": 333,
             "Private": false,
-            "Uploaded": 1398171600,
+            "Uploaded": 1398164400,
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "pocketcode/program/2",
-            "DownloadUrl": "pocketcode/download/2.catrobat",
+            "ProjectUrl": "app/project/(.*?)",
+            "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
         ],
         "completeTerm": "",
+        "preHeaderMessages": "",
         "CatrobatInformation": {
           "BaseUrl": "http://localhost/",
           "TotalProjects": 3,
           "ProjectsExtension": ".catrobat"
-        },
-        "preHeaderMessages": ""
+        }
       }
       """
     And I store the following json object as "program_2_id":
@@ -106,7 +109,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 2,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 2"
           }
         ],
@@ -124,31 +127,31 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 4,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 4",
             "ProjectNameShort": "program 4",
             "Author": "GeneratedUser1",
             "Description": "",
             "Version": "0.9.10",
-            "Views": "33",
-            "Downloads": "133",
+            "Views": 33,
+            "Downloads": 133,
             "Private": false,
-            "Uploaded": 1325422800,
+            "Uploaded": 1325419200,
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "pocketcode/program/4",
-            "DownloadUrl": "pocketcode/download/4.catrobat",
+            "ProjectUrl": "app/project/(.*?)",
+            "DownloadUrl": "app/download/(.*?).catrobat",
             "FileSize": 0
           }
         ],
         "completeTerm": "",
+        "preHeaderMessages": "",
         "CatrobatInformation": {
           "BaseUrl": "http://localhost/",
           "TotalProjects": 3,
           "ProjectsExtension": ".catrobat"
-        },
-        "preHeaderMessages": ""
+        }
       }
       """
     And I store the following json object as "program_4_id":
@@ -156,7 +159,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": 4,
+            "ProjectId": "(.*?)",
             "ProjectName": "program 4"
           }
         ],
@@ -174,7 +177,7 @@ Feature: List programs with and without debug build type
     Given I use a <build type> build of the Catroid app
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/<end point>.json" with these parameters
+    When I GET "/app/api/projects/<end point>.json" with these parameters
     Then I should get the stored json object "<json name>"
 
     Examples:
@@ -196,21 +199,21 @@ Feature: List programs with and without debug build type
     Given I use a <build type> build of the Catroid app
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/<end point>.json" with these parameters
+    When I GET "/app/api/projects/<end point>.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>" in random order
 
     Examples:
       | end point        | build type | total | programs                                    |
-      | randomPrograms   | debug      | 4     | program 1,program 2,debug program,program 4 |
-      | randomPrograms   | release    | 3     | program 1,program 2,program 4               |
-      | randomProgramIDs | debug      | 4     | program 1,program 2,debug program,program 4 |
-      | randomProgramIDs | release    | 3     | program 1,program 2,program 4               |
+      | randomProjects   | debug      | 4     | program 1,program 2,debug program,program 4 |
+      | randomProjects   | release    | 3     | program 1,program 2,program 4               |
+      | randomProjectIDs | debug      | 4     | program 1,program 2,debug program,program 4 |
+      | randomProjectIDs | release    | 3     | program 1,program 2,program 4               |
 
   Scenario Outline: Show user projects with debug and release app
     Given I use a <build type> build of the Catroid app
     And I have a parameter "user_id" with value "1"
-    When I GET "/pocketcode/api/projects/userPrograms.json" with these parameters
+    When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
 
@@ -235,7 +238,7 @@ Feature: List programs with and without debug build type
     And I have a parameter "q" with the tag id "1"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/search/tagPrograms.json" with these parameters
+    When I GET "/app/api/projects/search/tagProjects.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
     Examples:
@@ -248,11 +251,11 @@ Feature: List programs with and without debug build type
     And I have a parameter "q" with value "<q>"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/search/<end point>.json" with these parameters
+    When I GET "/app/api/projects/search/<end point>.json" with these parameters
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
 
     Examples:
       | end point         | build type | q    | programs                          | total |
-      | extensionPrograms | debug      | Lego | debug program,program 1,program 4 | 3     |
-      | extensionPrograms | release    | Lego | program 1,program 4               | 2     |
+      | extensionProjects | debug      | Lego | debug program,program 1,program 4 | 3     |
+      | extensionProjects | release    | Lego | program 1,program 4               | 2     |

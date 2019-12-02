@@ -2,9 +2,11 @@
 
 namespace App\Catrobat\Twig;
 
+use App\Catrobat\Services\CommunityStatisticsService;
 use App\Entity\MediaPackageFile;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Repository\GameJamRepository;
@@ -48,30 +50,30 @@ class AppExtension extends AbstractExtension
   private $translationPath;
 
   /**
-   * @var Container
+   * @var ParameterBagInterface
    */
-  private $container;
+  private $parameter_bag;
 
   /**
    * AppExtension constructor.
    *
-   * @param RequestStack               $request_stack
+   * @param RequestStack $request_stack
    * @param MediaPackageFileRepository $mediapackage_file_repo
-   * @param GameJamRepository          $gamejamrepository
-   * @param ActiveTheme                $theme
-   * @param                            $translationPath
-   * @param Container                  $container
+   * @param GameJamRepository $gamejamrepository
+   * @param ActiveTheme $theme
+   * @param ParameterBagInterface $parameter_bag
+   * @param $catrobat_translation_dir
    */
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository
-  $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme,
-                              $translationPath, Container $container)
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo,
+                              GameJamRepository $gamejamrepository, ActiveTheme $theme,
+                              ParameterBagInterface $parameter_bag, $catrobat_translation_dir)
   {
-    $this->translationPath = $translationPath;
+    $this->translationPath = $catrobat_translation_dir;
+    $this->parameter_bag = $parameter_bag;
     $this->request_stack = $request_stack;
     $this->mediapackage_file_repository = $mediapackage_file_repo;
     $this->gamejamrepository = $gamejamrepository;
     $this->theme = $theme;
-    $this->container = $container;
   }
 
   /**
@@ -108,6 +110,7 @@ class AppExtension extends AbstractExtension
       new TwigFunction('getenv', 'getenv'),
       new TwigFunction('countriesList', [$this, 'getCountriesList']),
       new TwigFunction('isWebview', [$this, 'isWebview']),
+      new TwigFunction('isIOSWebview', [$this, 'isIOSWebview']),
       new TwigFunction('checkCatrobatLanguage', [$this, 'checkCatrobatLanguage']),
       new TwigFunction('getLanguageOptions', [$this, 'getLanguageOptions']),
       new TwigFunction('getMediaPackageImageUrl', [$this, 'getMediaPackageImageUrl']),
@@ -117,7 +120,8 @@ class AppExtension extends AbstractExtension
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
       new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
       new TwigFunction('getJavascriptPath', [$this, 'getJavascriptPath']),
-      new TwigFunction('getCommunityStats', [$this, 'getCommunityStats'])
+      new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
+      new TwigFunction('assetExists', [$this, 'assetExists'])
     ];
   }
 
@@ -237,8 +241,19 @@ class AppExtension extends AbstractExtension
     $user_agent = $request->headers->get('User-Agent');
 
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    return preg_match('/Catrobat/', $user_agent) || strpos($user_agent, 'Android') != false ||
-      strpos($user_agent, 'iPad') != false || strpos($user_agent, 'iPhone') != false;
+    return preg_match('/Catrobat/', $user_agent) || strpos($user_agent, 'Android') !== false ||
+      strpos($user_agent, 'iPad') !== false || strpos($user_agent, 'iPhone') !== false;
+  }
+
+  /**
+   * @return bool
+   */
+  public function isIOSWebview()
+  {
+    $request = $this->request_stack->getCurrentRequest();
+    $user_agent = $request->headers->get('User-Agent');
+
+    return strpos($user_agent, 'iPad') !== false || strpos($user_agent, 'iPhone') !== false;
   }
 
   /**
@@ -279,7 +294,7 @@ class AppExtension extends AbstractExtension
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->attributes->get('flavor');
+    return $request->get('flavor');
   }
 
   /**
@@ -304,6 +319,12 @@ class AppExtension extends AbstractExtension
 
       case 'create@school':
         return "Create@School";
+
+      case 'embroidery':
+        return "Embroidery Designer";
+
+      case 'arduino':
+        return "Arduino Code";
 
       default:
         return "Pocket Code";
@@ -370,7 +391,7 @@ class AppExtension extends AbstractExtension
    */
   public function getJavascriptPath($jsFile)
   {
-    $jsPath = $this->container->getParameter('jspath');
+    $jsPath = $this->parameter_bag->get('jspath');
     $jsPath .= $jsFile;
     $jsPath = str_replace("//", "/", $jsPath);
 
@@ -381,15 +402,15 @@ class AppExtension extends AbstractExtension
    * Twig extension to provide a function to retrieve the community statistics in any view.
    * Needed to render the footer.
    *
-   * See the fetchStatistics implementation of Services\CommunityStatisticsService.php
-   *                                           for details.
+   * See the fetchStatistics implementation of Services\CommunityStatisticsService.php for details.
+   *
+   * @param CommunityStatisticsService $communityStatisticsService
    *
    * @return array|mixed
-   * @throws \Exception
    */
-  public function getCommunityStats()
+  public function getCommunityStats(CommunityStatisticsService $communityStatisticsService)
   {
-    $cms_s = $this->container->get("community_statistics_service");
+    $cms_s = $communityStatisticsService;
     $stats = $cms_s->fetchStatistics();
 
     /* Numberformatter could be used to apply the locale. However this requires the intl extension to be fully working.
@@ -403,4 +424,19 @@ class AppExtension extends AbstractExtension
 
     return $stats;
   }
+
+  /**
+   * @param $filename
+   *
+   * @return bool
+   */
+  public function assetExists($filename)
+  {
+    $public_dir = $this->parameter_bag->get('catrobat.pubdir');
+    $filename = rawurldecode($filename);
+    $filename = $public_dir . $filename;
+
+    return file_exists($filename);
+  }
+
 }

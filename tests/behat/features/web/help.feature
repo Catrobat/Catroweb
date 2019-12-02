@@ -5,7 +5,7 @@ Feature: Pocketcode help page
   I want to be able to see the help page
 
   Background:
-    Given I am on "/pocketcode/help"
+    Given I am on "/app/help"
 
   Scenario: Viewing the help overview at help page
     Then I wait for a second
@@ -18,7 +18,7 @@ Feature: Pocketcode help page
     And I should see "Google Play"
     And I should see "IOS"
 
-  Scenario: Viewing the help overview at help page for luna flavor
+  Scenario: Viewing the help overview at help page for luna flavor i should see discord instead of ios
     Given I am on "/luna/help"
     Then I wait for a second
     And I should see "Step by step"
@@ -28,7 +28,7 @@ Feature: Pocketcode help page
     And I should see "Tutorials"
     And I should see "Discuss"
     And I should see "Google Play"
-    And I should see "IOS"
+    And I should see "Discord"
 
   Scenario Outline: Clicking on the alice game jam image at help page
     When I click "#game-design"
@@ -47,7 +47,7 @@ Feature: Pocketcode help page
 
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
-    Given I am on "/pocketcode/tutorialcards"
+    Given I am on "/app/tutorialcards"
     And I should see "<title>" in the "#card-<id>" element
     When I click "#card-<id>"
     Then I should see "<title>"
@@ -69,35 +69,35 @@ Feature: Pocketcode help page
 
   Scenario: Clicking on starters image at help page and test navigation
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
     And there are starter programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
-      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
-      | 3  | program 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 1  | project 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | project 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
+      | 3  | project 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
     When I click "#starters"
-    Then I should see "STARTER PROGRAMS"
-    And I should see "Try out these starter programs. Look inside to make changes and add your ideas."
+    Then I should see "STARTER PROJECTS"
+    And I should see "Try out these starter projects. Look inside to make changes and add your ideas."
     And I should see "Games"
-    And I should see "program 1"
-    And I should see "program 2"
-    And I should see "program 3"
+    And I should see "project 1"
+    And I should see "project 2"
+    And I should see "project 3"
     And I should see an ".anchor" element
     When I click ".anchor"
-    Then I am on "/pocketcode/starterPrograms"
+    Then I am on "/app/starterProjects"
 
   Scenario: Game Jam page should be there
-    When I go to "/pocketcode/pocket-game-jam"
+    When I go to "/app/pocket-game-jam"
     Then I should see "HOW TO UPLOAD A POCKET CODE GAME TO THE GAME JOLT SITE?"
     And I should see "1. Registration"
     And I should see "2. Upload"
-    And I should see "3. Search for your program"
+    And I should see "3. Search for your project"
     And I should see "4. Create Android app"
     And I should see "5. Download app"
     And I should see "6. Register/Login at GameJolt.com"
     And I should see "7. Upload your game on the Game Jolt Site"
 
   Scenario: /hourOfCode should redirect to help page
-    When I go to "/pocketcode/hourOfCode"
+    When I go to "/app/hourOfCode"
     Then I should see "TUTORIALS"

@@ -34,7 +34,7 @@ class DescriptionValidator
   public function __construct(RudeWordFilter $rudeWordFilter)
   {
     $this->rudeWordFilter = $rudeWordFilter;
-    $this->max_description_size = 4000;
+    $this->max_description_size = 10000;
   }
 
   /**

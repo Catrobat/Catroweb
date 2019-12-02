@@ -4,8 +4,8 @@ Feature: Pocketcode homepage visited programs
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
     And there are programs:
       | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -20,9 +20,9 @@ Feature: Pocketcode homepage visited programs
     Then I should see marked "#newest #program-1"
 
   Scenario: Visited programs should be marked on the entire page.
-    Given I am on "/pocketcode"
+    Given I am on "/app"
     And I should see 1 "#newest #program-1"
     When I click "#newest #program-1"
     And I wait 100 milliseconds
-    And I am on "/pocketcode/profile/1"
+    And I am on "/app/user/1"
     Then I should see marked "#program-1"

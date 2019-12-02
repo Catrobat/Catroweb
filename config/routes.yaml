@@ -7,8 +7,7 @@ catrobat_web_index:
   defaults:
     _controller: FrameworkBundle:Redirect:redirect
     route: index
-    permanent: false
-    flavor: "pocketcode"
+    flavor: "app"
 
 catroweb_flavored:
   resource: "routing_flavored.yml"
@@ -25,7 +24,7 @@ fos_user_security_login:
 
 #redirect the user after a successfully registration
 fos_user_registration_confirmed:
-  path: /{flavor}/profile
+  path: /{flavor}/user
 
 # ===== Logout =====
 sonata_user_admin_security_logout:

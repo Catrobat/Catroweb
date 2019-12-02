@@ -84,7 +84,7 @@
 
 {% block js %}
   <script>
-    let programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}')
+    let programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     programs.initProfile('{{ profile.id }}')
 
     $(document).on('click', '.program', function () {
@@ -110,7 +110,7 @@
   </script>
   <script src="{{ asset('compiled/js/ProfileLoader.js') }}"></script>
   <script>
-    let follower = new ProfileLoader({{ profile.id }} , '{{ path('list_follow',  { type: 'follower' }) }}',
+    let follower = new ProfileLoader('{{ profile.id }}' , '{{ path('list_follow',  { type: 'follower' }) }}',
       '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')
     follower.init()
   </script>

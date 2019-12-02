@@ -22,7 +22,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $ancestor_id;
 
@@ -30,13 +30,13 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_descendant_relations",
    *                                                                   fetch="LAZY")
    * @ORM\JoinColumn(name="ancestor_id", referencedColumnName="id")
-   * @var \App\Entity\Program
+   * @var Program
    */
   protected $ancestor;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $descendant_id;
 
@@ -44,7 +44,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_ancestor_relations",
    *                                                                   fetch="LAZY")
    * @ORM\JoinColumn(name="descendant_id", referencedColumnName="id")
-   * @var \App\Entity\Program
+   * @var Program
    */
   protected $descendant;
 
@@ -66,8 +66,8 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected $seen_at;
 
   /**
-   * @param \App\Entity\Program $ancestor
-   * @param \App\Entity\Program $descendant
+   * @param Program $ancestor
+   * @param Program $descendant
    * @param int                                $depth
    */
   public function __construct(Program $ancestor, Program $descendant, $depth)
@@ -93,7 +93,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   }
 
   /**
-   * @param \App\Entity\Program $ancestor
+   * @param Program $ancestor
    *
    * @return ProgramRemixRelation
    */
@@ -122,7 +122,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   }
 
   /**
-   * @param \App\Entity\Program $descendant
+   * @param Program $descendant
    *
    * @return ProgramRemixRelation
    */

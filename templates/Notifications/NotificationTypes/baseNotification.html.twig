@@ -1,8 +1,18 @@
 <div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
 
   <h5 class="card-header notification-header">
+
     {% block notification_title %}{% endblock %}
+
+    <button id="delete-notification-{{ notification.id }}" class="btn btn-primary"
+            onclick="notifications.deleteNotification({{ notification.id }})">
+      <i class="fas fa-times fa-2x" aria-hidden="true"></i>
+
+    </button>
+
   </h5>
+
+
 
   <div class="card-body">
     <div class="row">
@@ -17,10 +27,14 @@
         </div>
 
         <div class="row">
-          <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
-                  onclick="notifications.markAsRead({{ notification.id }})">
-            {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
-          </button>
+          {% if notification.getSeen() is same as(false) %}
+            <div id="mark-as-read">
+            <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
+                    onclick="notifications.markAsRead({{ notification.id }})">
+              {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
+            </button>
+            </div>
+          {% endif %}
         </div>
       </div>
 

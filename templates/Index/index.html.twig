@@ -48,12 +48,12 @@
 
   {% else %}
 
-    <div id="newest">
+    <div id="newest" style="display:none">
       <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
       <div class="programs"></div>
     </div>
 
-    <div id="recommended">
+    <div id="recommended" style="display:none">
       <h1>{{ "programs.recommended"|trans({}, "catroweb") }}
         <i id="help-button" class="help-icon fa fa-question-circle ml-1 catro-icon-button"
            data-toggle="tooltip" title="Help"
@@ -64,17 +64,17 @@
       <div class="programs"></div>
     </div>
 
-    <div id="mostDownloaded">
+    <div id="mostDownloaded" style="display:none">
       <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
       <div class="programs"></div>
     </div>
 
-    <div id="mostViewed">
+    <div id="mostViewed" style="display:none">
       <h1>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h1>
       <div class="programs"></div>
     </div>
 
-    <div id="random">
+    <div id="random" style="display:none">
       <h1>{{ "programs.random"|trans({}, "catroweb") }}</h1>
       <div class="programs"></div>
     </div>
@@ -85,21 +85,21 @@
 {% block js %}
   <script>
     {% if theme() == 'pocketgalaxy' %}
-    let sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam')
-    let submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam')
-    let related = new ProgramLoader('#related', '{{ path('api_search_programs') }}?q=galaxy')
+    let sample = new ProjectLoader('#sample', '{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam')
+    let submissions = new ProjectLoader('#submissions', '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam')
+    let related = new ProjectLoader('#related', '{{ path('api_search_programs') }}?q=galaxy')
 
     sample.init()
     submissions.init()
     related.init()
 
     {% else %}
-    let newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}')
+    let newest = new ProjectLoader('#newest', '{{ path('api_recent_programs') }}')
     let recommendedByPageId = {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
-    let recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId)
-    let mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
-    let mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
-    let random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')
+    let recommended = new ProjectLoader('#recommended', '{{ path('api_recsys_general_projects') }}', undefined, recommendedByPageId)
+    let mostDownloaded = new ProjectLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
+    let mostViewed = new ProjectLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
+    let random = new ProjectLoader('#random', '{{ path('api_random_programs') }}')
 
     newest.init()
     recommended.init()
@@ -110,7 +110,7 @@
     {% endif %}
 
 
-    function performClickStatisticRequest (href, type, isRecommendedProgram, userSpecificRecommendation, programID)
+    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID)
     {
       let url = "{{ path('click_stats') }}"
       let params = {}
@@ -174,9 +174,9 @@
     $(document).one('click', '#feature-slider > div > div > a', function (event) {
       event.preventDefault()
       let href = $(this).attr('href')
-      let programID = ((href.indexOf('program') > 0) ? (href.split('program')[1].match(/[0-9]+/))[0] : 0)
+      let programID = ((href.indexOf('project') > 0) ? (href.split('project/')[1]).split('?')[0] : 0)
       let type = 'featured'
-      performClickStatisticRequest(href, type, false, 0, programID)
+       performClickStatisticRequest(href, type, false, 0, programID)
     })
 
     $(document).one('click', '.rec-programs', function (event) {
@@ -184,7 +184,7 @@
       let isRecommendedProgram = $(this).hasClass('homepage-recommended-programs')
       let type = (isRecommendedProgram ? 'rec_homepage' : $(this).parent('.program').parent('.programs').parent().attr('id'))
       let href = $(this).attr('href')
-      let recommendedProgramID = ((href.indexOf('program') > 0) ? (href.split('program')[1].match(/[0-9]+/))[0] : 0)
+      let recommendedProgramID = ((href.indexOf('project') > 0) ? (href.split('project/')[1]).split('?')[0] : 0)
       let userSpecificRecommendation = ((href.indexOf('rec_user_specific=') > 0) ? parseInt((href.split('rec_user_specific=')[1].match(/[0-9]+/))[0]) : 0)
       performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, recommendedProgramID)
     })

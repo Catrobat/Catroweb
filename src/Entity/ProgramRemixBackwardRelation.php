@@ -21,7 +21,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $parent_id;
 
@@ -29,13 +29,13 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_backward_child_relations",
    *                                                                   fetch="LAZY")
    * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-   * @var \App\Entity\Program
+   * @var Program
    */
   protected $parent;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $child_id;
 
@@ -43,7 +43,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_backward_parent_relations",
    *                                                                   fetch="LAZY")
    * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
-   * @var \App\Entity\Program
+   * @var Program
    */
   protected $child;
 
@@ -59,8 +59,8 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   protected $seen_at;
 
   /**
-   * @param \App\Entity\Program $parent
-   * @param \App\Entity\Program $child
+   * @param Program $parent
+   * @param Program $child
    */
   public function __construct(Program $parent, Program $child)
   {

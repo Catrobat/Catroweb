@@ -4,7 +4,7 @@ namespace App\Catrobat\Controller\Api;
 
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\ProgramManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class SearchController
  * @package App\Catrobat\Controller\Api
  */
-class SearchController extends Controller
+class SearchController extends AbstractController
 {
 
   /**
@@ -32,13 +32,12 @@ class SearchController extends Controller
    *    methods={"GET"})
    *
    * @param Request $request
+   * @param ProgramManager $program_manager
    *
    * @return ProgramListResponse
    */
-  public function searchProgramsAction(Request $request)
+  public function searchProgramsAction(Request $request, ProgramManager $program_manager)
   {
-    /** @var ProgramManager $program_manager */
-    $program_manager = $this->get('programmanager');
     $query = $request->query->get('q');
 
     $query = str_replace("yahoo", "", $query);
@@ -60,17 +59,16 @@ class SearchController extends Controller
 
 
   /**
-   * @Route("/api/projects/search/tagPrograms.json", name="api_search_tag",
+   * @Route("/api/projects/search/tagProjects.json", name="api_search_tag",
    *   defaults={"_format":"json"}, methods={"GET"})
    *
    * @param Request $request
+   * @param ProgramManager $program_manager
    *
    * @return ProgramListResponse
    */
-  public function tagSearchProgramsAction(Request $request)
+  public function tagSearchProgramsAction(Request $request, ProgramManager $program_manager)
   {
-    /** @var ProgramManager $program_manager */
-    $program_manager = $this->get('programmanager');
     $query = $request->query->get('q');
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
@@ -83,17 +81,15 @@ class SearchController extends Controller
 
 
   /**
-   * @Route("/api/projects/search/extensionPrograms.json", name="api_search_extension",
+   * @Route("/api/projects/search/extensionProjects.json", name="api_search_extension",
    *                                                       defaults={"_format": "json"},
    *                                                       methods={"GET"})
    * @param Request $request
-   *
+   * @param ProgramManager $program_manager
    * @return ProgramListResponse
    */
-  public function extensionSearchProgramsAction(Request $request)
+  public function extensionSearchProgramsAction(Request $request, ProgramManager $program_manager)
   {
-    /** @var ProgramManager $program_manager */
-    $program_manager = $this->get('programmanager');
     $query = $request->query->get('q');
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));

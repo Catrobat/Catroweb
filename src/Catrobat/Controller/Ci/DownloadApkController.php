@@ -2,7 +2,11 @@
 
 namespace App\Catrobat\Controller\Ci;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Catrobat\Services\ApkRepository;
+use App\Entity\ProgramManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Program;
@@ -15,23 +19,24 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  * Class DownloadApkController
  * @package App\Catrobat\Controller\Ci
  */
-class DownloadApkController extends Controller
+class DownloadApkController extends AbstractController
 {
 
   /**
-   * @Route("/ci/download/{id}", name="ci_download", requirements={"id": "\d+"}, methods={"GET"})
+   * @Route("/ci/download/{id}", name="ci_download", methods={"GET"})
    *
    * @param Request $request
    * @param Program $program
+   * @param ApkRepository $apk_repository
+   * @param ProgramManager $programManager
    *
    * @return BinaryFileResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  public function downloadApkAction(Request $request, Program $program)
+  public function downloadApkAction(Request $request, Program $program, ApkRepository $apk_repository,
+                                    ProgramManager $programManager)
   {
-    /* @var $apkrepository \App\Catrobat\Services\ApkRepository */
-
     if (!$program->isVisible())
     {
       throw new NotFoundHttpException();
@@ -41,11 +46,9 @@ class DownloadApkController extends Controller
       throw new NotFoundHttpException();
     }
 
-    $apkrepository = $this->get('apkrepository');
-
     try
     {
-      $file = $apkrepository->getProgramFile($program->getId());
+      $file = $apk_repository->getProgramFile($program->getId());
     } catch (\Exception $e)
     {
       throw new NotFoundHttpException();
@@ -56,7 +59,7 @@ class DownloadApkController extends Controller
       $downloaded = $request->getSession()->get('apk_downloaded', []);
       if (!in_array($program->getId(), $downloaded))
       {
-        $this->get('programmanager')->increaseApkDownloads($program);
+        $programManager->increaseApkDownloads($program);
         $downloaded[] = $program->getId();
         $request->getSession()->set('apk_downloaded', $downloaded);
       }

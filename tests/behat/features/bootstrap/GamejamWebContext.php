@@ -46,6 +46,25 @@ class GamejamWebContext extends BaseContext
     $this->setErrorDirectory($error_directory);
   }
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /**
    * @Given There is an ongoing game jam
    *
@@ -90,7 +109,7 @@ class GamejamWebContext extends BaseContext
     }
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/pocketcode/program/1");
+      ->request("GET", "/app/project/1");
   }
 
   /**
@@ -163,7 +182,7 @@ class GamejamWebContext extends BaseContext
     $this->getClient()->followRedirects(false);
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/pocketcode/program/1");
+      ->request("GET", "/app/project/1");
     $link = $this->response->filter("#gamejam-submission")
       ->parents()
       ->link();
@@ -218,7 +237,7 @@ class GamejamWebContext extends BaseContext
     }
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/pocketcode/program/1");
+      ->request("GET", "/app/project/1");
     $link = $this->response->filter("#gamejam-submission")
       ->parents()
       ->link();
@@ -255,7 +274,7 @@ class GamejamWebContext extends BaseContext
     ]);
     $this->response = $this->getSymfonySupport()
       ->getClient()
-      ->request("GET", "/pocketcode/program/1");
+      ->request("GET", "/app/project/1");
   }
 
   /**
@@ -426,7 +445,7 @@ class GamejamWebContext extends BaseContext
    */
   public function iShouldBeRedirectedToTheDetailsPageOfMyProgram()
   {
-    Assert::assertEquals("/pocketcode/program/1", $this->getClient()->getRequest()->getPathInfo());
+    Assert::assertEquals("/app/project/1", $this->getClient()->getRequest()->getPathInfo());
   }
 
   /**

@@ -13,14 +13,56 @@
 
     {# logged in #}
     {% if app.user %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('user_notifications') }}" id="btn-notifications">
-          <i class="fas fa-bell mr-1"></i>
+
+
+    <li class="nav-item">
+
+      <a class="nav-link collapsible">
+
+        <i class="fas fa-bell mr-1"></i>
           {{ "notifications"|trans({}, "catroweb") }}
-          <span
-              class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
+        <span
+            class="badge-pill badge-danger user-notification-badge all-notifications-dropdown user-notification-badge-font"></span>
+
+        <i class="caret-icon fa fa-caret-left"></i>
+
+      </a>
+
+      <div class="notifications-dropdown-content">
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "allNotifications" })}}" id="btn-notifications">
+          <i class="fas fa-bell mr-1"></i>
+            {{ "allNotifications"|trans({}, "catroweb") }}
+            <span
+                class="badge-pill badge-danger user-notification-badge-dropdown all-notifications user-notification-badge-font"></span>
         </a>
+
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "followers" }) }}" id="btn-followers">
+
+          <i class="fas fa-user"></i>
+            {{ "FollowersNotifications"|trans({}, "catroweb") }}
+          <span
+                class="badge-pill badge-danger user-notification-badge-dropdown followers user-notification-badge-font"></span>
+        </a>
+
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "likes" }) }}" id="btn-likes">
+          <i class="fas fa-thumbs-up"></i>
+            {{ "LikeNotifications"|trans({}, "catroweb") }}
+            <span
+                class="badge-pill badge-danger user-notification-badge-dropdown likes user-notification-badge-font"></span>
+        </a>
+
+        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "comments" }) }}" id="btn-comments">
+          <i class="fas fa-comments"></i>
+
+            {{ "CommentNotifications"|trans({}, "catroweb") }}
+          <span
+                class="badge-pill badge-danger user-notification-badge-dropdown comments user-notification-badge-font"></span>
+        </a>
+
+      </div>
+
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
           <i class="fas fa-user-circle mr-1"></i>
@@ -47,14 +89,14 @@
 
     {# Always visible #}
     <li class="nav-item">
-      <a class="nav-link" href="{{ path('catrobat_web_help') }}" id="btn-tutorials">
+      <a class="nav-link" href="{{ url('catrobat_web_help') }}" id="btn-tutorials">
         <i class="fas fa-hands-helping mr-1"></i>
         <span>{{ 'menu.helpAndTutorials'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     {# logout #}
-    {% if app.user %}
+    {% if app.user and app.session and not app.session.get('webview-auth') %}
       <li class="nav-item">
         <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
           <i class="fas fa-sign-out-alt mr-1"></i>
@@ -63,9 +105,69 @@
       </li>
     {% endif %}
 
+    <hr>
+
+    {# Programs #}
+    <li id="nav-featured" class="nav-item">
+      <a class="nav-link" href="{{ path('index') }}#featured" id="btn-featured">
+        <i class="fas fa-star mr-1"></i>
+        <span>{{ 'programs.featured'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li id="nav-newest" class="nav-item" style="display:none">
+      <a class="nav-link" href="{{ path('index') }}#newest" id="btn-newest">
+        <i class="fas fa-clock mr-1"></i>
+        <span>{{ 'programs.newest'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li id="nav-recommended" class="nav-item" style="display:none">
+      <a class="nav-link" href="{{ path('index') }}#recommended" id="btn-recommended">
+        <i class="fas fa-thumbs-up mr-1"></i>
+        <span>{{ 'programs.recommended'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li id="nav-most-downloaded" class="nav-item" style="display:none">
+      <a class="nav-link" href="{{ path('index') }}#mostDownloaded" id="btn-most-downloaded">
+        <i class="fas fa-download mr-1"></i>
+        <span>{{ 'programs.most.downloaded'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li id="nav-most-viewed" class="nav-item" style="display:none">
+      <a class="nav-link" href="{{ path('index') }}#mostViewed" id="btn-most-viewed">
+        <i class="fas fa-eye mr-1"></i>
+        <span>{{ 'programs.most.viewed'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
+    <li id="nav-random" class="nav-item" style="display:none">
+      <a class="nav-link" href="{{ path('index') }}#random" id="btn-random">
+        <i class="fas fa-dice mr-1"></i>
+        <span>{{ 'programs.random'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
     {% if sidebar_ul is not empty %}
       {{ sidebar_ul|raw }}
     {% endif %}
   </ul>
 </nav>
 <div id="sidebar-overlay"></div>
+
+{% block js %}
+  <script>
+    enableNavButtonIfCategoryContainsProjects('#nav-newest', '{{ path('api_recent_programs') }}')
+    enableNavButtonIfRecommendedCategoryContainsProjects(
+      '#nav-recommended',
+      '{{ path('api_recsys_general_projects') }}',
+        {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}
+    )
+    enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
+    manageNotificationsDropdown()
+  </script>
+{% endblock %}

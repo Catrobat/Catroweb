@@ -18,7 +18,7 @@
     <h1 class="header mb-0">
       {{ "profile.myPrograms"|trans({}, "catroweb") }}
     </h1>
-    <div class="programs"></div>
+    <div class="programs mt-4"></div>
   </div>
 
   <div class="clear mt-5"></div>
@@ -44,14 +44,17 @@
 
     let programs
     {% if not app.user.limited %}
-      programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
+      programs = new ProjectLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
       // load programs need profile!
-      let profile = new MyProfile('{{ path('profile') }}',
+      let profile = new MyProfile('{{ path('profile') }}', '{{ path('username_save') }}',
         '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',
         '{{ path('profile_delete_program') }}', '{{ path('profile_delete_account') }}',
         '{{ path('profile_toggle_program_visibility') }}',
         '{{ path('profile_upload_avatar') }}',
         {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('App\\Catrobat\\StatusCode::USERNAME_ALREADY_EXISTS') }},
+        {{ constant('App\\Catrobat\\StatusCode::USERNAME_MISSING') }},
+        {{ constant('App\\Catrobat\\StatusCode::USERNAME_INVALID') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_ALREADY_EXISTS') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_MISSING') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_INVALID') }},
@@ -61,27 +64,23 @@
         {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_TOO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2') }},
         {{ constant('App\\Catrobat\\StatusCode::PASSWORD_INVALID') }},
-        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_EXCEEDING_FILESIZE') }},
-        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE') }},
-        {{ constant('App\\Catrobat\\Controller\\Web\\ProfileController::MAX_UPLOAD_SIZE') }},
         '{{ "success.text"|trans({}, "catroweb") }}',
         '{{ "myprofile.checkMail"|trans({}, "catroweb") }}',
         '{{ "myprofile.passwordUpdated"|trans({}, "catroweb") }}',
         '{{ "myprofile.notChangeVisibility"|trans({}, "catroweb") }}',
         '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}'
       )
-      profile.init()
-      programs.initProfile({{ app.user.id }})
     {% else %}
-      programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}')
-      programs.initProfile({{ app.user.id }})
+      programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     {% endif %}
 
-    let follows = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follows' }) }}',
+    programs.initProfile('{{ app.user.id }}')
+
+    let follows = new ProfileLoader('{{ app.user.id }}' ,'{{ path('list_follow', { type: 'follows' }) }}',
     '{{ path('profile') }}', '#list-follows', '{{ asset('images/default/avatar_default.png') }}')
     follows.init()
 
-    let follower = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follower' }) }}',
+    let follower = new ProfileLoader('{{ app.user.id }}' ,'{{ path('list_follow', { type: 'follower' }) }}',
     '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')
     follower.init()
   </script>

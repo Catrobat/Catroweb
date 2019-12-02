@@ -9,6 +9,7 @@ use App\Entity\ProgramRemixBackwardRelation;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramRemixRepository;
 use App\Repository\ProgramRemixBackwardRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 /**
@@ -20,7 +21,7 @@ class RemixSubgraphManipulator
   const COMMON_TIMESTAMP = 'common_timestamp';
 
   /**
-   * @var EntityManager The entity manager.
+   * @var EntityManagerInterface The entity manager.
    */
   private $entity_manager;
 
@@ -42,13 +43,15 @@ class RemixSubgraphManipulator
   /**
    * RemixManager constructor.
    *
-   * @param EntityManager                  $entity_manager
+   * @param EntityManagerInterface         $entity_manager
    * @param ProgramRepository              $program_repository
    * @param ProgramRemixRepository         $program_remix_repository
    * @param ProgramRemixBackwardRepository $program_remix_backward_repository
    */
-  public function __construct($entity_manager, $program_repository, $program_remix_repository,
-                              $program_remix_backward_repository)
+  public function __construct(EntityManagerInterface $entity_manager,
+                              ProgramRepository $program_repository,
+                              ProgramRemixRepository $program_remix_repository,
+                              ProgramRemixBackwardRepository $program_remix_backward_repository)
   {
     $this->entity_manager = $entity_manager;
     $this->program_repository = $program_repository;

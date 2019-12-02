@@ -1,7 +1,7 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
+        FOS\UserBundle\Model\UserInterface: auto
 
     providers:
         chain_provider:
@@ -18,27 +18,27 @@ security:
             pattern: ^.*/api/checkToken/check.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         api_check_notifications:
             provider: chain_provider
             pattern: ^.*/api/notifications/get.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         api_upload:
             provider: chain_provider
             pattern: ^.*/api/upload/upload.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
         api_submit:
             provider: chain_provider
             pattern: ^.*/api/gamejam/submit.json
             stateless: true
             simple_preauth:
-                authenticator: apikey_authenticator
+                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         debug:
             provider: chain_provider
@@ -63,7 +63,8 @@ security:
                 domain: ~ # Defaults to the current domain from $_SERVER
                 secure: false
                 httponly: false
-            logout_on_user_change: true # remove when symfony 4
+            simple_preauth:
+                authenticator: webview_authenticator
 
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -73,7 +74,7 @@ security:
             security: false
             form_login:
                 always_use_default_target_path: true
-                default_target_path: /profile
+                default_target_path: /user
             logout:       true
             anonymous:    true
 
@@ -81,26 +82,26 @@ security:
     access_control:
 
         # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
-        - { path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # AsseticBundle paths used when using the controller for assets
-        - { path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # URL of FOSUserBundle which need to be available to anonymous users
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN], requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # Only specific admin rights
-        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN], requires_channel: '%env(SECURE_SCHEME)%' }
 
     # Sonata "special" roles; Super Admin has all rights
     role_hierarchy:

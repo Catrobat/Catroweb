@@ -13,7 +13,7 @@ class ScriptsTest extends \PHPUnit\Framework\TestCase
 
   protected $script_xml_properties_list;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->script_xml_properties_list = $xml_properties->xpath('//script');

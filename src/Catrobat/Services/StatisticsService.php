@@ -8,10 +8,15 @@ use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Monolog\Logger;
 use App\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 /**
@@ -29,7 +34,7 @@ class StatisticsService
    */
   private $entity_manager;
   /**
-   * @var Logger
+   * @var LoggerInterface
    */
   private $logger;
   /**
@@ -40,15 +45,15 @@ class StatisticsService
   /**
    * StatisticsService constructor.
    *
-   * @param ProgramManager $programmanager
-   * @param                $entity_manager
-   * @param Logger         $logger
-   * @param                $security_token_storage
+   * @param ProgramManager  $program_manager
+   * @param                 $entity_manager
+   * @param LoggerInterface $logger
+   * @param                 $security_token_storage
    */
-  public function __construct(ProgramManager $programmanager, $entity_manager,
-                              Logger $logger, $security_token_storage)
+  public function __construct(ProgramManager $program_manager, EntityManagerInterface $entity_manager,
+                              LoggerInterface $logger, TokenStorageInterface $security_token_storage)
   {
-    $this->programmanager = $programmanager;
+    $this->programmanager = $program_manager;
     $this->entity_manager = $entity_manager;
     $this->logger = $logger;
     $this->security_token_storage = $security_token_storage;
@@ -83,15 +88,15 @@ class StatisticsService
       $user = $session_user;
     }
 
-    $this->logger->addDebug('create download stats for program id: ' . $program_id . ', ip: ' . $ip .
+    $this->logger->debug('create download stats for program id: ' . $program_id . ', ip: ' . $ip .
       ', user agent: ' . $user_agent . ', referrer: ' . $referrer);
     if ($user !== null)
     {
-      $this->logger->addDebug('user: ' . $user->getUsername());
+      $this->logger->debug('user: ' . $user->getUsername());
     }
     else
     {
-      $this->logger->addDebug('user: anon.');
+      $this->logger->debug('user: anon.');
     }
 
     // geocoder disabled, license needed
@@ -148,7 +153,7 @@ class StatisticsService
       $this->entity_manager->flush();
     } catch (\Exception $e)
     {
-      $this->logger->addError($e->getMessage());
+      $this->logger->error($e->getMessage());
 
       return false;
     }
@@ -191,7 +196,7 @@ class StatisticsService
   /**
    * @return Logger
    */
-  public function getLogger(): Logger
+  public function getLogger(): LoggerInterface
   {
     return $this->logger;
   }
@@ -233,8 +238,8 @@ class StatisticsService
    * @param bool $is_user_specific_recommendation
    *
    * @return bool
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    * @throws \Exception
    */
   public function createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name,
@@ -254,15 +259,15 @@ class StatisticsService
       $user = $session_user;
     }
 
-    $this->logger->addDebug('create download stats for program id: ' . $rec_from_id . ', ip: ' . $ip .
+    $this->logger->debug('create download stats for project id: ' . $rec_from_id . ', ip: ' . $ip .
       ', user agent: ' . $user_agent . ', referrer: ' . $referrer);
     if ($user !== null)
     {
-      $this->logger->addDebug('user: ' . $user->getUsername());
+      $this->logger->debug('user: ' . $user->getUsername());
     }
     else
     {
-      $this->logger->addDebug('user: anon.');
+      $this->logger->debug('user: anon.');
     }
 
     // geocoder disabled, license needed
@@ -270,7 +275,7 @@ class StatisticsService
     $country_code = null;
     $country_name = null;
 
-    if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph']))
+    if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph']))
     {
       $click_statistics = new ClickStatistic();
       $click_statistics->setType($type);
@@ -393,15 +398,15 @@ class StatisticsService
       $user = $session_user;
     }
 
-    $this->logger->addDebug('create click stats for program id: ' . $program_id . ', ip: ' . $ip .
+    $this->logger->debug('create click stats for program id: ' . $program_id . ', ip: ' . $ip .
       ', user agent: ' . $user_agent . ', referrer: ' . $referrer);
     if ($user !== null)
     {
-      $this->logger->addDebug('user: ' . $user->getUsername());
+      $this->logger->debug('user: ' . $user->getUsername());
     }
     else
     {
-      $this->logger->addDebug('user: anon.');
+      $this->logger->debug('user: anon.');
     }
 
     $homepage_click_statistics = new HomepageClickStatistic();

@@ -5,10 +5,10 @@ Feature: Search tagged programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
-      | Bob      | vewqw    | eeeeeeeeee |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
+      | Bob      | vewqw    | eeeeeeeeee |  3 |
     And there are tags:
       | id | en     | de         |
       | 1  | Games  | Spiele     |
@@ -41,7 +41,7 @@ Feature: Search tagged programs
     Given I have a parameter "q" with the tag id "1"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/search/tagPrograms.json" with these parameters
+    When I GET "/app/api/projects/search/tagProjects.json" with these parameters
     Then I should get following programs:
       | Name    |
       | Minions |

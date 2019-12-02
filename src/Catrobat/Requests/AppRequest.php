@@ -78,4 +78,49 @@ class AppRequest
 
     return strpos(strtolower($user_agent), " buildtype/debug") !== false;
   }
+
+
+  /**
+   * Checks if "theme/*" is defined in the User-Agent string.
+   *
+   * @return String
+   */
+  public function getThemeDefinedInRequest(): String
+  {
+    $request = $this->request_stack->getCurrentRequest();
+    if ($request === null)
+    {
+      return "";
+    }
+
+    $user_agent = $request->headers->get('User-Agent');
+    if ($user_agent === null)
+    {
+      return "";
+    }
+    if (is_array($user_agent))
+    {
+      if (count($user_agent) > 0)
+      {
+        $user_agent = $user_agent[0];
+      }
+      else
+      {
+        return "";
+      }
+    }
+
+    $user_agent_attributes = explode(" ", strtolower($user_agent));
+
+    foreach ($user_agent_attributes as $attribute)
+    {
+      if (strpos($attribute, 'theme/') !== false)
+      {
+        return str_replace('theme/', '', $attribute);
+      }
+    }
+
+    return "";
+  }
+
 }

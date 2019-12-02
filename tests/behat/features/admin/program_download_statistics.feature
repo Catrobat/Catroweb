@@ -11,8 +11,8 @@ Feature: Program Download Statistics
       | 1  | program 1 | 2          | null           |
       | 2  | program 2 | 2          | null           |
     And there are users:
-      | name | email        | token | password   |
-      | cat  | cat@robat.at | ccccc | highsecure |
+      | name | email        | token | password   | id |
+      | cat  | cat@robat.at | ccccc | highsecure |  1 |
     And there are program download statistics:
       | id | program_id | downloaded_at       | ip             | country_code | country_name | user_agent | user_name | referrer |
       | 1  | 1          | 2015-11-21 13:39:00 | 88.116.169.222 | AT           | Austria      | okhttp     | cat       | Facebook |

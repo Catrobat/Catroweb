@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Ldap\Collection;
 
 /**
  * @ORM\Entity
@@ -32,7 +33,7 @@ class Extension
   protected $prefix;
 
   /**
-   * @var \Doctrine\Common\Collections\Collection|Program[]
+   * @var Collection|Program[]
    *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Program", mappedBy="extensions")
    */
@@ -73,7 +74,7 @@ class Extension
   }
 
   /**
-   * @return Program[]|\Doctrine\Common\Collections\Collection
+   * @return Program[]|Collection
    */
   public function getPrograms()
   {

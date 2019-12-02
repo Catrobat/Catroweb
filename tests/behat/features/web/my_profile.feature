@@ -6,9 +6,9 @@ Feature:
 
   Background:
     Given there are users:
-      | name     | password | token      | email               |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
-      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
+      | name     | password | token      | email        | id |
+      | Catrobat | 123456   | cccccccccc | dev1@app.org |  1 |
+      | User1    | 654321   | cccccccccc | dev2@app.org |  2 |
     And there are programs:
       | id | name       | description | owned by | downloads | apk_downloads | views | upload time      | version | language version | private |
       | 1  | program 1  | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | 0       |
@@ -41,10 +41,44 @@ Feature:
       | 28 | program 28 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
       | 29 | program 29 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
 
-    
     And I log in as "Catrobat" with the password "123456"
-    And I am on "/pocketcode/profile"
+    And I am on "/app/user"
     And I should see "My Profile"
+
+  Scenario: changing my username must work
+    Given I click "#edit-username-button"
+    And I wait 250 milliseconds
+    And I fill in "username" with "Mr.Catro"
+    And I click "#save-username"
+    And I wait for the server response
+    And I should be on "/app/user"
+    When I go to "/app/logout"
+    And I try to log in as "Catrobat" with the password "123456"
+    Then I should see "Your password or username was incorrect."
+    And I try to log in as "Mr.Catro" with the password "123456"
+    Then I should be logged in
+
+  Scenario: When changing the username the min length must be 3
+    Given I click "#edit-username-button"
+    And I wait 250 milliseconds
+    And I fill in "username" with "Mr"
+    And I click "#save-username"
+    And I wait for the server response
+    And I should be on "/app/user"
+    Then I should see "This username is not valid."
+    When I go to "/app/logout"
+    And I try to log in as "Mr" with the password "123456"
+    Then I should see "Your password or username was incorrect."
+
+  Scenario: When changing the username the max length must be 180
+    Given I click "#edit-username-button"
+    And I wait 250 milliseconds
+    And I fill in "username" with "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!+++++"
+    When I click "#save-username"
+    And I wait for the server response
+    Then I should be on "/app/user"
+    And I should see "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!"
+    And I should not see "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!+"
 
   Scenario: changing password must work
     Given I click "#edit-password-button"
@@ -54,8 +88,8 @@ Feature:
     And I fill in "repeat-password" with "abcdef"
     And I click "#save-password"
     And I wait for the server response
-    And I should be on "/pocketcode/profile"
-    When I go to "/pocketcode/logout"
+    And I should be on "/app/user"
+    When I go to "/app/logout"
     And I try to log in as "Catrobat" with the password "123456"
     Then I should see "Your password or username was incorrect."
     When I log in as "Catrobat" with the password "abcdef"
@@ -98,7 +132,7 @@ Feature:
     And I fill in "additional-email" with "second@email.com"
     And I click "#save-email"
     And I wait for the server response
-    Then I should be on "/pocketcode/profile"
+    Then I should be on "/app/user"
     And I should see "Success"
     And I should see "An email was sent to your email address"
     When I click ".swal2-confirm"
@@ -149,7 +183,7 @@ Feature:
     And I fill in "additional-email" with "second@email.com"
     When I click "#save-email"
     And I wait for the server response
-    Then I should be on "/pocketcode/profile"
+    Then I should be on "/app/user"
     And I should see "Success"
     When I click ".swal2-confirm"
     And I wait 100 milliseconds
@@ -161,7 +195,7 @@ Feature:
     When I select "Austria" from "country"
     And I click "#save-country"
     And I wait for the server response
-    Then I should be on "/pocketcode/profile"
+    Then I should be on "/app/user"
     And the "#country" element should contain "Austria"
 
   Scenario: uploading avatar should work
@@ -180,28 +214,29 @@ Feature:
   Scenario: max. 5MB for avatar image
     When I click "#avatar-upload"
     And I attach the avatar "galaxy_big.png" to "file"
+    And I wait 500 milliseconds
     Then I should see "Your chosen picture is too large, please do not use images larger than 5mb."
 
   Scenario: deleting a program should work
-    Given I am on "/pocketcode/profile"
+    Given I am on "/app/user"
     And I wait 100 milliseconds
     Then I should see "program 1"
     And I should see "program 2"
-    When I go to "/pocketcode/profileDeleteProgram/2"
+    When I go to "/app/userDeleteProject/2"
     And I wait 100 milliseconds
     Then I should not see "program 2"
     And I should see "program 1"
     And there should be "29" programs in the database
-    When I go to "/pocketcode/program/2"
+    When I go to "/app/project/2"
     And I wait 100 milliseconds
     Then I should see "Ooooops something went wrong."
 
   Scenario: deleting another user's program should not work
-    Given I go to "/pocketcode/profileDeleteProgram/3"
+    Given I go to "/app/userDeleteProject/3"
     Then I should see "Ooooops something went wrong."
 
   Scenario: check deletion PopUp
-    Given I am on "/pocketcode/profile"
+    Given I am on "/app/user"
     And I wait 100 milliseconds
     Then I should see "program 1"
     And I should see "program 2"
@@ -216,33 +251,42 @@ Feature:
     Then I should not see "program 1"
 
   Scenario: It should be possible toggle the program privacy on myprofile
-    Given I am on "/pocketcode/profile"
+    Given I am on "/app/user"
     And I wait 100 milliseconds
     Then I should see "program 1"
     And the element "#visibility-lock-open-1" should be visible
     And the element "#visibility-lock-1" should not be visible
     When I click "#visibility-lock-open-1"
+    And I wait 200 milliseconds
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
     And I wait for the server response
     And the element "#visibility-lock-open-1" should not be visible
     And the element "#visibility-lock-1" should be visible
-    When I click "#visibility-lock-1"
+   When I click "#visibility-lock-1"
+    And I wait 200 milliseconds
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
     And I wait for the server response
     And the element "#visibility-lock-open-1" should be visible
     And the element "#visibility-lock-1" should not be visible
 
   Scenario: Programs with too high language version can also be set to visible
-    Given I am on "/pocketcode/profile"
+    Given I am on "/app/user"
     And I wait 100 milliseconds
     And I should see "program 2"
     And the element "#visibility-lock-2" should be visible
     And the element "#visibility-lock-open-2" should not be visible
     When I click "#visibility-lock-open-2"
+    And I wait 100 milliseconds
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
     And I wait for the server response
     Then the element "#visibility-lock-2" should not be visible
     And the element "#visibility-lock-open-2" should be visible
 
   Scenario: I should be able to delete my account
-    Given I am on "/pocketcode/profile"
+    Given I am on "/app/user"
     Then the element "#delete-account-button" should not be visible
     When I click "#account-settings-button"
     And I wait 250 milliseconds
@@ -251,11 +295,11 @@ Feature:
     And I wait 100 milliseconds
     Then I should see "Account Deletion"
     When I click ".swal2-confirm"
-    And I wait for the server response
-    Then I should be on "/pocketcode/"
+    And I wait 100 milliseconds
+    Then I should be on "/app/"
 
   Scenario: I should be able to delete my account with comments
-    Given I am on "/pocketcode/profile"
+    Given I am on "/app/user"
     And there are comments:
       | program_id | user_id | upload_date      | text | user_name | reported |
       | 3          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
@@ -276,7 +320,8 @@ Feature:
 
   Scenario: at a profile page there should always all programs be visible
     Given I log in as "User1" with the password "654321"
-    And I am on "/pocketcode/profile"
+    And I am on "/app/user"
+    And I wait 100 milliseconds
     Then I should see "program 3"
     And I should see "program 4"
     And I should see "oldestProg"
@@ -307,7 +352,8 @@ Feature:
 
   Scenario: programs should be ordered newest first
     Given I log in as "User1" with the password "654321"
-    And I am on "/pocketcode/profile"
+    And I am on "/app/user"
+    And I wait 100 milliseconds
     When I click ".program"
-    Then I am on "/pocketcode/program/6"
+    Then I am on "/app/project/6"
 

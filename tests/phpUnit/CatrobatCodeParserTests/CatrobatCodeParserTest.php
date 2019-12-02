@@ -2,14 +2,14 @@
 
 namespace tests\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
 
 class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
 {
   protected $parser;
 
-  protected function setUp()
+  protected function setUp(): void
   {
     $this->parser = new CatrobatCodeParser();
   }

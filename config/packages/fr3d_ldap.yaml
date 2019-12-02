@@ -46,6 +46,6 @@ fr3d_ldap:
       - { ldap_attr: mail,  user_method: setEmail } # Default
 
   service:
-    user_hydrator: ldap.user_hydrator      # Overrides default user hydrator
-    ldap_manager: usermanager.ldap   # Overrides default ldap manager
+    user_hydrator: App\Catrobat\Ldap\UserHydrator      # Overrides default user hydrator
+    ldap_manager: App\Entity\UserLDAPManager   # Overrides default ldap manager
 #       ldap_driver: fr3d_ldap.ldap_driver.zend        # Overrides default ldap driver

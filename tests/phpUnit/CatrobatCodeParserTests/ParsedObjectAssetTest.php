@@ -8,7 +8,7 @@ class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
 {
   protected $assets;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//look')[0]);
@@ -40,7 +40,7 @@ class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
   public function getFileNameMustReturnCertainString()
   {
     $expected = [
-      'e3b880f6b5eb89981ddb0cf18c545e4d_Mars (Landscape).png',
+      'e3b880f6b5eb89981ddb0cf18c545e4d_Mars%20%28Landscape%29.png',
       '0377a7476136e5e8c780c64a4828922d_AlienCreak1.wav',
     ];
     $actual = [

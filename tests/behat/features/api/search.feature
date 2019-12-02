@@ -3,10 +3,10 @@ Feature: Search programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
-      | NewUser  | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
+      | NewUser  | vwxyz    | aaaaaaaaaa |  3 |
     And there are programs:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -27,32 +27,32 @@ Feature: Search programs
 
     Given the HTTP Request:
       | Method | GET                                  |
-      | Url    | /pocketcode/api/projects/search.json |
+      | Url    | /app/api/projects/search.json |
     And the GET parameters:
       | Name   | Value  |
       | q      | Galaxy |
       | limit  | 1      |
       | offset | 0      |
     When the Request is invoked
-    Then the returned json object will be:
+    Then I should get the json object:
       """
       {
         "CatrobatProjects": [{
-          "ProjectId": 1,
+          "ProjectId": "(.*?)",
           "ProjectName": "Galaxy War",
           "ProjectNameShort": "Galaxy War",
           "Author": "User1",
           "Description": "p1",
           "Version": "0.8.5",
-          "Views": "12",
-          "Downloads": "3",
+          "Views": 12,
+          "Downloads": 3,
           "Private": false,
-          "Uploaded": 1357041600,
+          "Uploaded": 1357038000,
           "UploadedString": "more than one year ago",
           "ScreenshotBig": "images\/default\/screenshot.png",
           "ScreenshotSmall": "images\/default\/thumbnail.png",
-          "ProjectUrl": "pocketcode\/program\/1",
-          "DownloadUrl": "pocketcode\/download\/1.catrobat",
+          "ProjectUrl": "app\/project\/(.*?)",
+          "DownloadUrl": "app\/download\/(.*?).catrobat",
           "FileSize": 0
         }],
         "completeTerm": "",
@@ -68,16 +68,16 @@ Feature: Search programs
   Scenario: No programs are found
 
     When searching for "NOTHINGTOBEFIOUND"
-    Then the returned json object will be:
+    Then I should get the json object:
       """
       {
-       "completeTerm":"",
-       "CatrobatInformation": {
-         "BaseUrl":"https://pocketcode.org/",
-         "TotalProjects":0,
-         "ProjectsExtension":".catrobat"
-       },
-       "CatrobatProjects":[],
-       "preHeaderMessages":""
+        "CatrobatProjects":[],
+        "completeTerm":"",
+        "preHeaderMessages":"",
+        "CatrobatInformation": {
+          "BaseUrl":"https://pocketcode.org/",
+          "TotalProjects":0,
+          "ProjectsExtension":".catrobat"
+        }
       }
       """

@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Services\ProgramFileRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -45,7 +46,7 @@ class InitDirectoriesCommand extends Command
    * @param Filesystem $filesystem
    * @param            $programfile_directory
    */
-  public function __construct(Filesystem $filesystem, $programfile_directory)
+  public function __construct(Filesystem $filesystem, ProgramFileRepository $programfile_directory)
   {
     parent::__construct();
     $this->fileystem = $filesystem;

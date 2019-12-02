@@ -116,7 +116,7 @@ class TemplateAdmin extends AbstractAdmin
    */
   public function getThumbnailImageUrl($object)
   {
-    return '/' . $this->getConfigurationPool()->getContainer()->get('templatescreenshotrepository')
+    return '/' . $this->getConfigurationPool()->getContainer()->get('template_screenshot_repository')
         ->getThumbnailWebPath($object->getId());
   }
 

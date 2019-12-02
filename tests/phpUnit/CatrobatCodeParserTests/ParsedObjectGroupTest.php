@@ -12,7 +12,7 @@ class ParsedObjectGroupTest extends \PHPUnit\Framework\TestCase
    */
   protected $group;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->group = new ParsedObjectGroup($xml_properties->xpath('//object[@type="GroupSprite"]')[0]);
@@ -52,13 +52,13 @@ class ParsedObjectGroupTest extends \PHPUnit\Framework\TestCase
    */
   public function getObjectsMustReturnArrayOfParsedObject()
   {
-//        $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObject';
+    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObject';
 
     $this->assertTrue($this->group->getObjects() === []);
 
-//        foreach($this->group->getObjects() as $actual) {
-//            $this->assertInstanceOf($expected, $actual);
-//        }
+    foreach($this->group->getObjects() as $actual) {
+        $this->assertInstanceOf($expected, $actual);
+    }
 
   }
 

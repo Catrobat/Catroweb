@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Entity\Program;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -43,8 +44,8 @@ class CleanApkCommand extends ContainerAwareCommand
     $this->output->writeln('Deleting APKs');
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'), 'Emptying apk directory', $output);
 
-    /* @var $em \Doctrine\ORM\EntityManager */
-    $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+    /* @var $em EntityManager */
+    $em = $this->getContainer()->get('doctrine')->getManager();
     $query = $em->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
     $query->setParameter('status', Program::APK_NONE);
     $result = $query->getSingleScalarResult();

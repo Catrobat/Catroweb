@@ -83,7 +83,7 @@ var NetworkBuilder = function (programID, remixGraphLayerId, remixGraphTranslati
       var found2 = false
       for (var key in descendantRelations)
       {
-        if (self.programID == descendantRelations[key])
+        if (self.programID === descendantRelations[key])
         {
           found = true
           break
@@ -92,7 +92,7 @@ var NetworkBuilder = function (programID, remixGraphLayerId, remixGraphTranslati
       
       for (var key in ancestorRelations)
       {
-        if (self.programID == ancestorRelations[key])
+        if (self.programID === ancestorRelations[key])
         {
           found2 = true
           break
@@ -109,7 +109,7 @@ var NetworkBuilder = function (programID, remixGraphLayerId, remixGraphTranslati
   self.stepBuildNodes = function () {
     for (var nodeIndex = 0; nodeIndex < self.remixGraphData.catrobatNodes.length; ++nodeIndex)
     {
-      var nodeId = parseInt(self.remixGraphData.catrobatNodes[nodeIndex])
+      var nodeId = self.remixGraphData.catrobatNodes[nodeIndex]
       /*
        var found = false;
        for (var key in groupNodes) {
@@ -127,8 +127,8 @@ var NetworkBuilder = function (programID, remixGraphLayerId, remixGraphTranslati
       var nodeData = {
         id         : CATROBAT_NODE_PREFIX + '_' + nodeId,
         //value: (nodeId == remixData.id) ? 3 : 2,
-        borderWidth: (nodeId == self.programID) ? 6 : 3,
-        size       : (nodeId == self.programID) ? 40 : 20,
+        borderWidth: (nodeId === self.programID) ? 6 : 3,
+        size       : (nodeId === self.programID) ? 40 : 20,
         shape      : 'circularImage',
         image      : self.catrobatProgramThumbnails[nodeId]
       }
@@ -152,7 +152,7 @@ var NetworkBuilder = function (programID, remixGraphLayerId, remixGraphTranslati
         name    : self.remixGraphTranslations.programNotAvailable,
         username: self.remixGraphTranslations.programUnknownUser
       }
-      var nodeId = parseInt(self.remixGraphData.scratchNodes[nodeIndex])
+      var nodeId = self.remixGraphData.scratchNodes[nodeIndex]
       var programData = unavailableProgramData
       var programImageUrl = IMAGE_NOT_AVAILABLE_URL
       

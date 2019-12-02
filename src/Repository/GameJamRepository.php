@@ -2,15 +2,26 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\GameJam;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\Common\Persistence\ManagerRegistry;
+
 
 /**
  * Class GameJamRepository
  * @package App\Repository
  */
-class GameJamRepository extends EntityRepository
+class GameJamRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, GameJam::class);
+  }
+
   /**
    * @return mixed
    * @throws \Doctrine\ORM\NonUniqueResultException

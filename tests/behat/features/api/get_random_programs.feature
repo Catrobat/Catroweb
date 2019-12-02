@@ -3,9 +3,9 @@ Feature: Get the random programs
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version | visible |
       | 1  | program 1 | p1          | Catrobat | 1         | 4     | 01.01.2013 12:00 | 0.8.5   | true    |
@@ -17,7 +17,7 @@ Feature: Get the random programs
   Scenario: show random programs
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 2 programs in random order:
       | Name      |
       | program 1 |
@@ -26,7 +26,7 @@ Feature: Get the random programs
   Scenario: show random program ids
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/randomProgramIDs.json" with these parameters
+    When I GET "/app/api/projects/randomProjectIDs.json" with these parameters
     Then I should get 2 programs in random order:
       | Name      |
       | program 1 |
@@ -35,19 +35,19 @@ Feature: Get the random programs
   Scenario: show random program with offset
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 1 programs in random order:
       | Name      |
       | program 1 |
       | program 4 |
     And I have a parameter "offset" with value "1"
-    When I GET "/pocketcode/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 1 programs in random order:
       | Name      |
       | program 1 |
       | program 4 |
     And I have a parameter "offset" with value "2"
-    When I GET "/pocketcode/api/projects/randomPrograms.json" with these parameters
+    When I GET "/app/api/projects/randomProjects.json" with these parameters
     Then I should get 0 programs in random order:
       | Name      |
       | program 1 |

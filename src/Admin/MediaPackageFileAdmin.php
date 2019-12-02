@@ -2,15 +2,18 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -30,6 +33,33 @@ class MediaPackageFileAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'media_package_file';
 
+  /**
+   * @var MediaPackageFileRepository
+   */
+  private $media_package_file_repository;
+
+  /**
+   * @var ParameterBagInterface
+   */
+  private $parameter_bag;
+
+  /**
+   * MediaPackageFileAdmin constructor.
+   *
+   * @param $code
+   * @param $class
+   * @param $baseControllerName
+   * @param MediaPackageFileRepository $media_package_file_repository
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct($code, $class, $baseControllerName,
+                              MediaPackageFileRepository $media_package_file_repository,
+                              ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct($code, $class, $baseControllerName);
+    $this->media_package_file_repository = $media_package_file_repository;
+    $this->parameter_bag = $parameter_bag;
+  }
 
   /**
    * @param FormMapper $formMapper
@@ -93,6 +123,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       return;
     }
     $object->setExtension($file->guessExtension());
+    $this->checkFlavor();
   }
 
 
@@ -112,8 +143,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     {
       return;
     }
-    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')
-      ->save($file, $object->getId(), $object->getExtension());
+    $this->media_package_file_repository->save($file, $object->getId(), $object->getExtension());
   }
 
 
@@ -137,6 +167,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       return;
     }
     $object->setExtension($file->guessExtension());
+    $this->checkFlavor();
   }
 
 
@@ -152,8 +183,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     {
       return;
     }
-    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')
-      ->save($file, $object->getId(), $object->getExtension());
+    $this->media_package_file_repository->save($file, $object->getId(), $object->getExtension());
   }
 
 
@@ -171,7 +201,21 @@ class MediaPackageFileAdmin extends AbstractAdmin
    */
   public function postRemove($object)
   {
-    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')
-      ->remove($object->removed_id, $object->getExtension());
+    $this->media_package_file_repository->remove($object->removed_id, $object->getExtension());
+  }
+
+  /**
+   *
+   */
+  private function checkFlavor()
+  {
+    $flavor = $this->getForm()->get('flavor')->getData();
+    $flavor_options =  $this->parameter_bag->get('themes');
+
+    if (!in_array($flavor, $flavor_options)) {
+      throw new NotFoundHttpException(
+        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
+      );
+    }
   }
 }

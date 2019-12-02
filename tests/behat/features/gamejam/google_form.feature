@@ -8,7 +8,7 @@ Feature: On upload a google form link should be created with some parameters set
           """
     And I am "Catrobat" with email "catrobat@catrob.at"
     When I submit a game which gets the id "1"
-    Then The returned url should be
+    Then The returned url with id "1" should be
           """
           https://someurl.google.com/myform?name=Catrobat&id=1&mail=catrobat@catrob.at
           """

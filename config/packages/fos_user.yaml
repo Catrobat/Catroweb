@@ -8,7 +8,7 @@ fos_user:
     group_manager: sonata.user.orm.group_manager
 
   service:
-    user_manager: usermanager
+    user_manager: App\Entity\UserManager
     mailer: fos_user.mailer.twig_swift # allows usage of twig templates
 
   # Sends user an email to confirm their registration

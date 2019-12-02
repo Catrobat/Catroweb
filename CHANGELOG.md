@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [3.0.0]
+### Added
+- `tests/testdata/log` was missing -> added now
+- rename user account feature + translations 
+- added more from <user> on details page 
+- added tutorial tag 
+- human readable text insteaad of html quargel for search input 
+- admin falvor checks 
+- added embroidery flavor 
+- added popup setting programs private/public
+- added arduino flavor
+- added the possibility to write credits
+### Changed
+- themes will now be accepted via user agent not in link 
+- increased max. description length to 10.000 chars
+- allow deep indexing by crawlers 
+- show categories (featured programs...) in sidebar 
+- generate apk button hidden for iOS users
+- project loader refactored 
+- renaming `program` to `project`, `profile` to `user`.. 
+- Major framework upgrade `3.4` -> `4.3`
+- refactored notification system (beautify, seperated into categories, mark all as read)
+
+### Fixed
+- private programs now really private 
+- program statistics design fix 
+- optimized images for web traffic 
+- keep aspect ration when cropping thumbnails  
+- search uses `AND` instead of `OR` 
+- fixing admin RAM cake (#343)
+- ficed a bug in `FlavorListener`  
+### Removed
+- removed the possibility to log into facebook 
+- removed the possibility to post programs to facebook 
+- removed legacy remix notification  
+- request uri too long 
+### API
+- only public programs are now returned from api 
+
 ## [2.2.0]
 
 ### Added
@@ -53,7 +94,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v3.0.0
+[2.3.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v2.1.0

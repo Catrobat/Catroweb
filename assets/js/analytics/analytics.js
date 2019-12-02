@@ -1193,28 +1193,28 @@ else
       'UrlMapping': [
         {
           // removes the parameters from the program url
-          // origin:  https://share.catrob.at/pocketcode/program/44132
-          // cleaned: https://share.catrob.at/pocketcode/program/
+          // origin:  https://share.catrob.at//app/project/44132
+          // cleaned: https://share.catrob.at//app/project/
           'RegEx'     : /(.*\/program\/)(\d+)/,
           'ValueIndex': 1,
         },
         {
           // removes the parameters from the search and tag search url
-          // origin:  http://127.0.0.1/pocketcode/search/test
-          // cleaned: http://127.0.0.1/pocketcode/search/
+          // origin:  http://127.0.0.1/app/search/test
+          // cleaned: http://127.0.0.1/app/search/
           // or
-          // https://share.catrob.at/pocketcode/search/test%20der%20test
-          // https://share.catrob.at/pocketcode/search/
+          // https://share.catrob.at/app/search/test%20der%20test
+          // https://share.catrob.at/app/search/
           // or
-          // https://share.catrob.at/pocketcode/tag/search/1
-          // https://share.catrob.at/pocketcode/tag/search/
+          // https://share.catrob.at/app/tag/search/1
+          // https://share.catrob.at/app/tag/search/
           'RegEx'     : /(.*\/search\/)(.*)/,
           'ValueIndex': 1,
         },
         {
           // removes the query parameters from every url
-          // origin:  /pocketcode/?username=sonicjack2007&token=b1889b23f0f77ece495f5b2f9b358289
-          // cleaned: /pocketcode/
+          // origin:  /app/?username=sonicjack2007&token=b1889b23f0f77ece495f5b2f9b358289
+          // cleaned: /app/
           'RegEx'     : /(.*\/?)(\?.*)/,
           'ValueIndex': 1,
         }
@@ -1294,8 +1294,8 @@ else
         'BaseSelector': 'nav button#btn-search-header',
         'Category'    : 'engagement',
         'Action'      : 'search',
-        'Label'       : function (e) { return e.previousElementSibling.value },
-        'search_term' : function (e) { return e.previousElementSibling.value },
+        'Label'       : function (e) { return e.parentElement.previousElementSibling.value },
+        'search_term' : function (e) { return e.parentElement.previousElementSibling.value },
       })
       
       AnalyticsTracker.registerElementsForClickTracking(searchButton)
@@ -1405,16 +1405,6 @@ else
             'Action'      : 'sign_up',
             'Label'       : 'Google',
             'method'      : 'Google',
-          },
-          {
-            /**
-             * Tracks the facebook logins
-             */
-            'BaseSelector': 'a#btn-login_facebook',
-            'Category'    : loginCategory,
-            'Action'      : 'sign_up',
-            'Label'       : 'Facebook',
-            'method'      : 'Facebook',
           },
         ]
         
@@ -1696,7 +1686,7 @@ else
         
       }
       
-      if (/.*\/profile.*/.test(window.location.pathname))
+      if (/.*\/user.*/.test(window.location.pathname))
       {
         
         let profileCategory = 'profile page'

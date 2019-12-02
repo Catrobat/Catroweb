@@ -2,19 +2,30 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\RudeWord;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * Class RudeWordsRepository
  * @package App\Repository
  */
-class RudeWordsRepository extends EntityRepository
+class RudeWordsRepository extends ServiceEntityRepository
 {
+  /**
+   * @param ManagerRegistry $managerRegistry
+   */
+  public function __construct(ManagerRegistry $managerRegistry)
+  {
+    parent::__construct($managerRegistry, RudeWord::class);
+  }
+
   /**
    * @param $array
    *
    * @return bool
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
   public function contains($array)
   {

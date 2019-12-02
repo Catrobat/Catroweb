@@ -12,7 +12,7 @@
   {{ 'catro-notifications.comment.message' | trans
     (
       {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.comment.userid})~'">'~notification.comment.username~'</a>',
+        '%user_link%': '<a href="'~path('profile', {'id': notification.comment.userId})~'">'~notification.comment.username~'</a>',
         '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
       },
       'catroweb'

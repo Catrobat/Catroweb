@@ -58,14 +58,6 @@ class BaseContext implements KernelAwareContext
   }
 
   /**
-   * @return \App\Catrobat\Services\FacebookPostService
-   */
-  public function getRealFacebookPostServiceForTests()
-  {
-    return $this->symfony_support->getRealFacebookPostServiceForTests();
-  }
-
-  /**
    *
    * @return \Symfony\Bundle\FrameworkBundle\Client
    */
@@ -265,7 +257,9 @@ class BaseContext implements KernelAwareContext
   /**
    * @param array $config
    *
-   * @return \FOS\UserBundle\Model\UserInterface|mixed
+   * @return object|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function insertUser($config = [])
   {
@@ -413,25 +407,28 @@ class BaseContext implements KernelAwareContext
 
   /**
    * @param $parameters
+   * @param $is_embroidery bool
    *
    * @return string
    */
-  public function generateProgramFileWith($parameters)
+  public function generateProgramFileWith($parameters, $is_embroidery = false)
   {
-    return $this->symfony_support->generateProgramFileWith($parameters);
+    return $this->symfony_support->generateProgramFileWith($parameters, $is_embroidery);
   }
 
   /**
-   * @param        $file
-   * @param        $user
+   * @param $file
+   * @param $user
+   * @param $desired_id
    * @param string $flavor
-   * @param null   $request_parameters
-   *
+   * @param null $request_parameters
    * @return \Symfony\Component\HttpFoundation\Response|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
-  public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
+  public function upload($file, $user, $desired_id=null, $flavor = 'pocketcode', $request_parameters = null)
   {
-    return $this->symfony_support->upload($file, $user, $flavor, $request_parameters);
+    return $this->symfony_support->upload($file, $user, $desired_id, $flavor, $request_parameters);
   }
 
   /**

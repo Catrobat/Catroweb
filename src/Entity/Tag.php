@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +31,7 @@ class Tag
   }
 
   /**
-   * @var \Doctrine\Common\Collections\Collection|Program[]
+   * @var Collection|Program[]
    *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Program", mappedBy="tags")
    */
@@ -91,7 +92,7 @@ class Tag
   protected $fr;
 
   /**
-   * @return Program[]|\Doctrine\Common\Collections\Collection
+   * @return Program[]|Collection
    */
   public function getPrograms()
   {

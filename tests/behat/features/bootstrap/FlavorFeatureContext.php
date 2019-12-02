@@ -11,6 +11,25 @@ use PHPUnit\Framework\Assert;
 class FlavorFeatureContext extends BaseContext
 {
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /**
    * FeatureContext constructor.
    *
@@ -45,7 +64,7 @@ class FlavorFeatureContext extends BaseContext
   {
     $user = $this->insertUser();
     $program = $this->getStandardProgramFile();
-    $response = $this->upload($program, $user, 'pocketphiro');
+    $response = $this->upload($program, $user, 1,'pocketphiro');
     Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
 
@@ -67,7 +86,7 @@ class FlavorFeatureContext extends BaseContext
   {
     $user = $this->insertUser();
     $program = $this->getStandardProgramFile();
-    $response = $this->upload($program, $user);
+    $response = $this->upload($program, $user, 1);
     Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
 
@@ -158,8 +177,14 @@ class FlavorFeatureContext extends BaseContext
    */
   public function iGetTheUserSProgramsWith($url)
   {
+    /**
+     * @var $user \App\Entity\User
+     * @var $pr \App\Repository\ProgramRepository
+     */
+    $user = $this->getUserManager()->findAll()[0];
+
     $this->getClient()->request('GET', $url, [
-      'user_id' => 1,
+      'user_id' => $user->getId(),
     ]);
   }
 }

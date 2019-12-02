@@ -58,12 +58,12 @@ class WebShareProgramImport extends ContainerAwareCommand
   private function downloadPrograms($dir, OutputInterface $output, $limit = 20)
   {
     $server_json = json_decode(file_get_contents(
-      'https://share.catrob.at/pocketcode/api/projects/recent.json?limit=' . $limit), true);
+      'https://share.catrob.at/app/api/projects/recent.json?limit=' . $limit), true);
     $base_url = $server_json['CatrobatInformation']['BaseUrl'];
     foreach ($server_json['CatrobatProjects'] as $program)
     {
       $url = $base_url . $program['DownloadUrl'];
-      $name = $dir . intval($program['ProjectId']) . '.catrobat';
+      $name = $dir . $program['ProjectId'] . '.catrobat';
       $output->writeln('Saving <' . $url . '> to <' . $name . '>');
       file_put_contents($name, file_get_contents($url));
     }

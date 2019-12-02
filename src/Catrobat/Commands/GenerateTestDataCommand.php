@@ -4,6 +4,7 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Services\CatrobatFileCompressor;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,10 +28,7 @@ class GenerateTestDataCommand extends Command
    * @var
    */
   protected $source;
-  /**
-   * @var
-   */
-  protected $source_extensions;
+
   /**
    * @var string
    */
@@ -58,13 +56,13 @@ class GenerateTestDataCommand extends Command
    * @param                        $target_directory
    * @param                        $source_extensions
    */
-  public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor, CatrobatFileCompressor $compressor, $source, $target_directory, $source_extensions)
+  public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor,
+                              CatrobatFileCompressor $compressor, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->filesystem = $filesystem;
-    $this->source = $source;
-    $this->source_extensions = $source_extensions;
-    $this->target_directory = realpath($target_directory) . '/';
+    $this->source = $parameter_bag->get('catrobat.test.directory.source');
+    $this->target_directory = realpath($parameter_bag->get('catrobat.test.directory.target')) . '/';
     $this->extractor = $extractor;
     $this->compressor = $compressor;
   }
@@ -102,6 +100,7 @@ class GenerateTestDataCommand extends Command
       }
 
       $output->writeln('<info>Generating new test data</info>');
+      $this->extractEmbroideryTestProgram('embroidery');
       $this->extractBaseTestProgram('base');
       $this->extractExtensionTestProgram('program_with_extensions');
       $this->generateProgramWithExtraImage('program_with_extra_image');
@@ -133,7 +132,18 @@ class GenerateTestDataCommand extends Command
    */
   protected function extractBaseTestProgram($directory)
   {
-    $extracted = $this->extractor->extract(new File($this->source));
+    $extracted = $this->extractor->extract(new File($this->source . "test.catrobat"));
+    $extracted_path = $extracted->getPath();
+    $this->extracted_source_program_directory = $this->target_directory . $directory;
+    $this->filesystem->rename($extracted_path, $this->extracted_source_program_directory, true);
+  }
+
+  /**
+   * @param $directory
+   */
+  protected function extractEmbroideryTestProgram($directory)
+  {
+    $extracted = $this->extractor->extract(new File($this->source . "embroidery.catrobat"));
     $extracted_path = $extracted->getPath();
     $this->extracted_source_program_directory = $this->target_directory . $directory;
     $this->filesystem->rename($extracted_path, $this->extracted_source_program_directory, true);
@@ -144,7 +154,7 @@ class GenerateTestDataCommand extends Command
    */
   protected function extractExtensionTestProgram($directory)
   {
-    $extracted = $this->extractor->extract(new File($this->source_extensions));
+    $extracted = $this->extractor->extract(new File($this->source . "extensions.catrobat"));
     $extracted_path = $extracted->getPath();
     $extracted_source_program_directory = $this->target_directory . $directory;
     $this->filesystem->rename($extracted_path, $extracted_source_program_directory, true);

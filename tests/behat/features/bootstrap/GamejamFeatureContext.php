@@ -34,6 +34,25 @@ class GamejamFeatureContext extends BaseContext
     $this->setErrorDirectory($error_directory);
   }
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /**
    * @return string
    */
@@ -104,7 +123,7 @@ class GamejamFeatureContext extends BaseContext
    */
   public function iFillOutTheGoogleForm()
   {
-    $this->getClient()->request("GET", "/pocketcode/api/gamejam/finalize/1");
+    $this->getClient()->request("GET", "/app/api/gamejam/finalize/1");
     Assert::assertEquals("200", $this->getClient()
       ->getResponse()
       ->getStatusCode());
@@ -129,11 +148,26 @@ class GamejamFeatureContext extends BaseContext
   }
 
   /**
+   * @Given the program has the id :arg1
+   */
+  public function theProgramHasTheId($id)
+  {
+    /**
+     * @var \App\Entity\Program $program
+     */
+    $program = $this->getProgramManger()->findAll()[0];
+    $program->setId($id);
+    $this->getManager()->persist($program);
+    $this->getManager()->flush();
+  }
+
+
+  /**
    * @Given I already filled the google form
    */
   public function iAlreadyFilledTheGoogleForm()
   {
-    $this->getClient()->request("GET", "/pocketcode/api/gamejam/finalize/1");
+    $this->getClient()->request("GET", "/app/api/gamejam/finalize/1");
     Assert::assertEquals("200", $this->getClient()
       ->getResponse()
       ->getStatusCode());
@@ -222,7 +256,7 @@ class GamejamFeatureContext extends BaseContext
   public function iUploadMyGame()
   {
     $file = $this->getSymfonySupport()->getDefaultProgramFile();
-    $this->getSymfonySupport()->upload($file, null);
+    $this->getSymfonySupport()->upload($file, null, null);
   }
 
   /**
@@ -262,15 +296,17 @@ class GamejamFeatureContext extends BaseContext
   }
 
   /**
-   * @Then The returned url should be
+   * @Then The returned url with id :id should be
    * @param PyStringNode $string
    */
-  public function theReturnedUrlShouldBe(PyStringNode $string)
+  public function theReturnedUrlShouldBe($id, PyStringNode $string)
   {
-    $answer = json_decode($this->getClient()
-      ->getResponse()
-      ->getContent(), true);
-    Assert::assertEquals($string->getRaw(), $answer['form']);
+    $answer = (array) json_decode($this->getClient()->getResponse()->getContent());
+
+    $form_url = $answer['form'];
+    $form_url = preg_replace("/&id=.*?&mail=/", "&id=" . $id ."&mail=", $form_url, -1);
+
+    Assert::assertEquals($string->getRaw(), $form_url);
   }
 
   /**
@@ -292,7 +328,7 @@ class GamejamFeatureContext extends BaseContext
       }
       else
       {
-        $gamejam = $this->getSymfonySupport()->getSymfonyService('gamejamrepository')->findOneByName($gamejam);
+        $gamejam = $this->getSymfonySupport()->getSymfonyService(App\Repository\GameJamRepository::class)->findOneByName($gamejam);
       }
 
       @$config = [
@@ -419,8 +455,8 @@ class GamejamFeatureContext extends BaseContext
   public function iUpdateMyProgram()
   {
     $file = $this->getSymfonySupport()->getDefaultProgramFile();
-    $this->getSymfonySupport()->upload($file, $this->i);
-    $this->getSymfonySupport()->upload($file, $this->i);
+    $this->getSymfonySupport()->upload($file, $this->i, null);
+    $this->getSymfonySupport()->upload($file, $this->i, null);
   }
 
   /**

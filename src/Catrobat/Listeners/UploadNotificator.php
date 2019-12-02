@@ -3,6 +3,7 @@
 namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Events\ProgramAfterInsertEvent;
+use App\Repository\NotificationRepository;
 
 /**
  * Class UploadNotificator
@@ -15,7 +16,7 @@ class UploadNotificator
    */
   private $mailer;
   /**
-   * @var \App\Repository\NotificationRepository
+   * @var NotificationRepository
    */
   private $notification_repo;
 
@@ -23,9 +24,9 @@ class UploadNotificator
    * UploadNotificator constructor.
    *
    * @param \Swift_Mailer                                     $mailer
-   * @param \App\Repository\NotificationRepository $repository
+   * @param NotificationRepository $repository
    */
-  public function __construct(\Swift_Mailer $mailer, \App\Repository\NotificationRepository $repository)
+  public function __construct(\Swift_Mailer $mailer, NotificationRepository $repository)
   {
     $this->mailer = $mailer;
     $this->notification_repo = $repository;

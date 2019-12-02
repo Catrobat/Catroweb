@@ -3,10 +3,11 @@
 namespace App\Catrobat\Controller\Api;
 
 use App\Entity\FeaturedProgram;
+use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Repository\FeaturedRepository;
 use App\Catrobat\Services\FeaturedImageRepository;
 
@@ -15,7 +16,7 @@ use App\Catrobat\Services\FeaturedImageRepository;
  * Class FeaturedController
  * @package App\Catrobat\Controller\Api
  */
-class FeaturedController extends Controller
+class FeaturedController extends AbstractController
 {
 
   /**
@@ -23,13 +24,16 @@ class FeaturedController extends Controller
    *   defaults={"_format": "json"}, methods={"GET"})
    *
    * @param Request $request
+   * @param FeaturedImageRepository $image_repository
+   * @param FeaturedRepository $repository
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
-  public function getFeaturedProgramsAction(Request $request)
+  public function getFeaturedProgramsAction(Request $request, FeaturedImageRepository $image_repository,
+                                            FeaturedRepository $repository)
   {
-    return $this->getFeaturedPrograms($request, false);
+    return $this->getFeaturedPrograms($request, false, $image_repository, $repository);
   }
 
 
@@ -38,24 +42,30 @@ class FeaturedController extends Controller
    *   defaults={"_format": "json"}, methods={"GET"})
    *
    * @param Request $request
+   * @param FeaturedImageRepository $image_repository
+   * @param FeaturedRepository $repository
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
-  public function getFeaturedIOSProgramsAction(Request $request)
+  public function getFeaturedIOSProgramsAction(Request $request, FeaturedImageRepository $image_repository,
+                                               FeaturedRepository $repository)
   {
-    return $this->getFeaturedPrograms($request, true);
+    return $this->getFeaturedPrograms($request, true, $image_repository, $repository);
   }
 
 
   /**
    * @param Request $request
-   * @param         $ios_only
+   * @param $ios_only
+   * @param FeaturedImageRepository $image_repository
+   * @param FeaturedRepository $repository
    *
    * @return JsonResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
    */
-  private function getFeaturedPrograms(Request $request, $ios_only)
+  private function getFeaturedPrograms(Request $request, $ios_only, FeaturedImageRepository $image_repository,
+                                       FeaturedRepository $repository)
   {
     /**
      * @var $image_repository FeaturedImageRepository
@@ -63,10 +73,7 @@ class FeaturedController extends Controller
      * @var $featured_program FeaturedProgram
      */
 
-    $image_repository = $this->get('featuredimagerepository');
-    $repository = $this->get('featuredrepository');
-
-    $flavor = $request->getSession()->get('flavor');
+    $flavor = $request->get('flavor');
 
     $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));
@@ -82,7 +89,7 @@ class FeaturedController extends Controller
     }
     $retArray['preHeaderMessages'] = '';
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
+      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
       'TotalProjects'     => $numbOfTotalProjects,
       'ProjectsExtension' => '.catrobat',
     ];

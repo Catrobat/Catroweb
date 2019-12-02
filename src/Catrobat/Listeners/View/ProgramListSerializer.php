@@ -10,6 +10,8 @@ use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProgramListSerializer
@@ -37,12 +39,13 @@ class ProgramListSerializer
   /**
    * ProgramListSerializer constructor.
    *
-   * @param RequestStack               $request_stack
-   * @param Router                     $router
-   * @param ScreenshotRepository       $screenshot_repository
+   * @param ScreenshotRepository $screenshot_repository
+   * @param RequestStack $request_stack
+   * @param Router $router
    * @param ElapsedTimeStringFormatter $time_formatter
    */
-  public function __construct(RequestStack $request_stack, Router $router, ScreenshotRepository $screenshot_repository, ElapsedTimeStringFormatter $time_formatter)
+  public function __construct(ScreenshotRepository $screenshot_repository, RequestStack $request_stack,
+                              RouterInterface $router, ElapsedTimeStringFormatter $time_formatter)
   {
     $this->request_stack = $request_stack;
     $this->router = $router;
@@ -93,7 +96,7 @@ class ProgramListSerializer
           $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
           $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
           $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
-            'flavor' => $request->attributes->get('flavor'),
+            'flavor' => $event->getRequest()->getSession()->get('flavor_context'),
             'id'     => $program->getId(),
           ]), '/');
           $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
@@ -112,8 +115,10 @@ class ProgramListSerializer
       $retArray['isUserSpecificRecommendation'] = true;
     }
 
+    Request::setTrustedProxies(array($request->server->get('REMOTE_ADDR')),
+      Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
+      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
       'TotalProjects'     => $result->getTotalPrograms(),
       'ProjectsExtension' => '.catrobat',
     ];

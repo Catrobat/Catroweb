@@ -4,6 +4,7 @@ namespace tests\PhpSpec\spec\App\Entity;
 
 use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;

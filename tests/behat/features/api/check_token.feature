@@ -3,9 +3,9 @@ Feature: Checking a user's token validity
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -15,7 +15,7 @@ Feature: Checking a user's token validity
   Scenario Outline: Checking the current token
     Given I have a parameter "username" with value "<username>"
     And I have a parameter "token" with value "<token>"
-    When I POST these parameters to "/pocketcode/api/checkToken/check.json"
+    When I POST these parameters to "/app/api/checkToken/check.json"
     Then I should get the json object:
       """
       {"statusCode":200,"answer":"ok","preHeaderMessages":"  \n"}
@@ -30,7 +30,7 @@ Feature: Checking a user's token validity
   Scenario: Checking an invalid token
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "invalid"
-    When I POST these parameters to "/pocketcode/api/checkToken/check.json"
+    When I POST these parameters to "/app/api/checkToken/check.json"
     Then I should get the json object:
       """
       {"statusCode":601,"answer":"Upload Token auth failed.", "preHeaderMessages":""}
@@ -40,10 +40,10 @@ Feature: Checking a user's token validity
   Scenario: Checking the token of a non-existing user should return an error
     Given I have a parameter "username" with value "doesnotexist"
     And I have a parameter "token" with value "doesnotmatter"
-    When I POST these parameters to "/pocketcode/api/checkToken/check.json"
+    When I POST these parameters to "/app/api/checkToken/check.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"There is no user with name \"doesnotexist\".", "preHeaderMessages":""}
+      {"statusCode":601,"answer":"This username does not exist.", "preHeaderMessages":""}
       """
     And the response code should be "401"
     

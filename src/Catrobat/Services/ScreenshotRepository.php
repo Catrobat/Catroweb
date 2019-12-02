@@ -86,6 +86,7 @@ class ScreenshotRepository
     $this->tmp_path = $tmp_path;
   }
 
+
   /**
    * @param $screenshot_filepath
    * @param $id
@@ -99,6 +100,34 @@ class ScreenshotRepository
   }
 
   /**
+   * @param $image
+   * @param $id
+   */
+  public function storeImageInTmp($image, $id)
+  {
+    $filesystem = new Filesystem();
+    $tmp_file_path = $this->tmp_dir . $this->generateFileNameFromId($id);
+    if ($filesystem->exists($tmp_file_path)) {
+      $filesystem->remove($tmp_file_path);
+    }
+    $filesystem->copy($image, $tmp_file_path);
+  }
+
+  /**
+   * @param $image
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
+  public function updateProgramAssets($image, $id)
+  {
+    $this->storeImageInTmp($image, $id);
+    $tmp_file_path = $this->tmp_dir . $this->generateFileNameFromId($id);
+    $this->saveScreenshot($tmp_file_path, $id);
+    $this->saveThumbnail($tmp_file_path, $id);
+  }
+
+  /**
    * @param $filepath
    * @param $id
    *
@@ -108,7 +137,7 @@ class ScreenshotRepository
   {
     $screen = $this->getImagick();
     $screen->readImage($filepath);
-    $screen->resizeImage(480, 480, \Imagick::FILTER_LANCZOS, 1);
+    $screen->cropThumbnailImage(480, 480);
     $screen->writeImage($this->screenshot_dir . $this->generateFileNameFromId($id));
     $screen->destroy();
   }
@@ -123,7 +152,7 @@ class ScreenshotRepository
   {
     $thumb = $this->getImagick();
     $thumb->readImage($filepath);
-    $thumb->resizeImage(80, 80, \Imagick::FILTER_LANCZOS, 1);
+    $thumb->cropThumbnailImage(80, 80);
     $thumb->writeImage($this->thumbnail_dir . $this->generateFileNameFromId($id));
     $thumb->destroy();
   }
@@ -276,7 +305,7 @@ class ScreenshotRepository
   {
     $screen = $this->getImagick();
     $screen->readImage($filepath);
-    $screen->resizeImage(480, 480, \Imagick::FILTER_LANCZOS, 1);
+    $screen->cropThumbnailImage(480, 480);
     $screen->writeImage($this->tmp_dir . $this->generateFileNameFromId($id));
     $screen->destroy();
   }
@@ -291,7 +320,7 @@ class ScreenshotRepository
   {
     $thumb = $this->getImagick();
     $thumb->readImage($filepath);
-    $thumb->resizeImage(80, 80, \Imagick::FILTER_LANCZOS, 1);
+    $thumb->cropThumbnailImage(80, 80);
     $thumb->writeImage($this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id));
     $thumb->destroy();
   }

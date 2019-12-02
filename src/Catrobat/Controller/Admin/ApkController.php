@@ -55,7 +55,7 @@ class ApkController extends CRUDController
       throw new NotFoundHttpException();
     }
 
-    $dispatcher = $this->container->get('ci.jenkins.dispatcher');
+    $dispatcher = $this->container->get('App\Catrobat\Services\Ci\JenkinsDispatcher');
     $dispatcher->sendBuildRequest($object->getId());
 
     $object->setApkRequestTime(new \DateTime());
@@ -112,7 +112,7 @@ class ApkController extends CRUDController
     $datagrid = $this->admin->getDatagrid();
 
     $objects = $datagrid->getResults();
-    $dispatcher = $this->container->get('ci.jenkins.dispatcher');
+    $dispatcher = $this->container->get('App\Catrobat\Services\Ci\JenkinsDispatcher');
 
     foreach ($objects as $program)
     {

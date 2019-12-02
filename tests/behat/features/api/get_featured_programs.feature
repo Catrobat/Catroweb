@@ -5,9 +5,9 @@ Feature: Get featured programs
     Given the server name is "pocketcode.org"
     And I use a secure connection
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-      | User1    | vwxyz    | aaaaaaaaaa |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
+      | User1    | vwxyz    | aaaaaaaaaa |  2 |
     And there are programs:
       | id | name         | description | owned by | downloads | views | upload time      | version |
       | 1  | Invaders     | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -25,18 +25,17 @@ Feature: Get featured programs
       | IOS test     | yes    | 0        | yes      |
       | Mega Game1   | no     | 1        | yes      |
 
-
   Scenario: show featured programs with limit 1 and offset 1
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "1"
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
         "CatrobatProjects":
           [
              {
-              "ProjectId": 4,
+              "ProjectId": "(.*?)",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
@@ -56,26 +55,26 @@ Feature: Get featured programs
   Scenario: show featured programs with limit 10 and no offset
     Given I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
         "CatrobatProjects":
           [
             {
-              "ProjectId": 3,
+              "ProjectId": "(.*?)",
               "ProjectName":"A new world",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_2.jpg"
             },
             {
-              "ProjectId": 4,
+              "ProjectId": "(.*?)",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
             },
             {
-              "ProjectId": 1,
+              "ProjectId": "(.*?)",
               "ProjectName": "Invaders",
               "Author": "Catrobat",
               "FeaturedImage": "resources_test/featured/featured_1.jpg"
@@ -94,20 +93,20 @@ Feature: Get featured programs
   Scenario: show featured programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
         "CatrobatProjects":
           [
             {
-              "ProjectId": 3,
+              "ProjectId": "(.*?)",
               "ProjectName":"A new world",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_2.jpg"
              },
              {
-              "ProjectId": 4,
+              "ProjectId": "(.*?)",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
@@ -124,26 +123,26 @@ Feature: Get featured programs
       """
 
   Scenario: show featured programs without limit and offset
-    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    When I GET "/app/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {
         "CatrobatProjects":
           [
             {
-              "ProjectId": 3,
+              "ProjectId": "(.*?)",
               "ProjectName":"A new world",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_2.jpg"
              },
              {
-              "ProjectId": 4,
+              "ProjectId": "(.*?)",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
              },
              {
-              "ProjectId": 1,
+              "ProjectId": "(.*?)",
               "ProjectName":"Invaders",
               "Author":"Catrobat",
               "FeaturedImage": "resources_test/featured/featured_1.jpg"
@@ -160,14 +159,14 @@ Feature: Get featured programs
       """
 
   Scenario: show featured programs without limit and offset
-    When I GET "/pocketcode/api/projects/ios-featured.json" with these parameters
+    When I GET "/app/api/projects/ios-featured.json" with these parameters
     Then I should get the json object:
       """
       {
         "CatrobatProjects":
           [
             {
-              "ProjectId": 5,
+              "ProjectId": "(.*?)",
               "ProjectName":"IOS test",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_5.jpg"

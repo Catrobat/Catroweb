@@ -127,6 +127,25 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     $this->getSession()->resizeWindow(1240, 1024);
   }
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /**
    * @BeforeScenario @RealOAuth
    */
@@ -310,8 +329,9 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   *
-   * @return User
+   * @return User|object|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function getDefaultUser()
   {
@@ -319,8 +339,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   *
-   * @return \Symfony\Component\HttpKernel\Profiler\Profiler
+   * @return false|\Symfony\Component\HttpKernel\Profiler\Profiler
    */
   public function getSymfonyProfile()
   {
@@ -341,7 +360,9 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @param array $config
    *
-   * @return \FOS\UserBundle\Model\UserInterface|mixed
+   * @return object|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function insertUser($config = [])
   {
@@ -362,16 +383,17 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @param        $file
-   * @param        $user
+   * @param $file
+   * @param $user
    * @param string $flavor
-   * @param null   $request_parameters
-   *
-   * @return null|\Symfony\Component\HttpFoundation\Response
+   * @param null $request_parameters
+   * @return \Symfony\Component\HttpFoundation\Response|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
   {
-    return $this->symfony_support->upload($file, $user, $flavor, $request_parameters);
+    return $this->symfony_support->upload($file, $user, null, $flavor, $request_parameters);
   }
 
   // endregion GETTER & SETTER
@@ -388,7 +410,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
   {
-    $this->visitPath('/pocketcode/login');
+    $this->visitPath('/app/login');
     $this->fillField('username', $arg2);
     $this->fillField('password', $arg3);
     $this->pressButton('Login');
@@ -418,7 +440,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
      * @var $user_manager UserManager
      * @var $user         User
      */
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
     $users = $table->getHash();
     $user = null;
     $count = count($users);
@@ -482,6 +504,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     foreach ($program_stats as $program_stat)
     {
       $program = $this->getProgramManger()->find($program_stat['program_id']);
+
       $config = [
         'downloaded_at' => $program_stat['downloaded_at'],
         'ip'            => $program_stat['ip'],
@@ -550,7 +573,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iReportProgramWithNote($program_id, $category, $note)
   {
-    $url = '/pocketcode/api/reportProgram/reportProgram.json';
+    $url = '/app/api/reportProject/reportProject.json';
     $parameters = [
       'program'  => $program_id,
       'category' => $category,
@@ -804,7 +827,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     $this->iHaveAParameterWithValue("_username", $uname);
     $this->iHaveAParameterWithValue("_password", $pwd);
     $this->iHaveAParameterWithValue("_csrf_token", $csrfToken);
-    $this->iPostTheseParametersTo("/login_check");
+    $this->iPostTheseParametersTo("/app/login_check");
   }
 
   /**
@@ -941,6 +964,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
         'username' => isset($program['owned by']) ? $program['owned by'] : "",
       ]);
       @$config = [
+        'id'                  => $program['id'], // overwrite auto generation for testing purposes
         'name'                => $program['name'],
         'description'         => $program['description'],
         'views'               => $program['views'],

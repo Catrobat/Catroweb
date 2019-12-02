@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
@@ -21,13 +22,16 @@ class MediaPackageFileRepository
   /**
    * MediaPackageFileRepository constructor.
    *
-   * @param string $dir  Directory where media package files are stored
-   * @param string $path Path where files in $dir can be accessed via web
-   *
-   * @throws InvalidStorageDirectoryException
+   * @param ParameterBagInterface $parameter_bag
    */
-  public function __construct($dir, $path)
+  public function __construct(ParameterBagInterface $parameter_bag)
   {
+    /**
+     * @var string $dir  Directory where media package files are stored
+     * @var string $path Path where files in $dir can be accessed via web
+     */
+    $dir = $parameter_bag->get('catrobat.mediapackage.dir');
+    $path = $parameter_bag->get('catrobat.mediapackage.path');
     $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
     $path = preg_replace('/([^\/]+)$/', '$1/', $path);
     $thumb_dir = $dir . 'thumbs/';

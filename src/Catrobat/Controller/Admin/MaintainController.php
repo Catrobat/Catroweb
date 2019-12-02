@@ -281,6 +281,18 @@ class MaintainController extends Controller
     $mediaPackageSize = $this->get_dir_size($this->container->getParameter('catrobat.mediapackage.dir'));
     $backupSize = $programsSize + $screenshotSize + $featuredImageSize + $mediaPackageSize;
 
+    $whole_ram = (float)shell_exec("free | grep Mem | awk '{print $2}'") * 1000;
+    $used_ram = (float)shell_exec("free | grep Mem | awk '{print $3}'") * 1000;
+    $free_ram = (float)shell_exec("free | grep Mem | awk '{print $4}'") * 1000;
+    $shared_ram = (float)shell_exec("free | grep Mem | awk '{print $5}'") * 1000;
+    $cached_ram = (float)shell_exec("free | grep Mem | awk '{print $6}'") * 1000;
+    $available_ram = (float)shell_exec("free | grep Mem | awk '{print $6}'") * 1000;
+
+    $free_ram_percentage = ($free_ram / $whole_ram) * 100;
+    $used_ram_percentage = ($used_ram / $whole_ram) * 100;
+    $shared_ram_percentage = ($shared_ram / $whole_ram) * 100;
+    $cached_ram_percentage = ($cached_ram / $whole_ram) * 100;
+
     return $this->renderWithExtraParams('Admin/maintain.html.twig', [
       'RemovableObjects'       => $RemovableObjects,
       'RemovableBackupObjects' => $this->getBackupFileObjects(),
@@ -291,12 +303,16 @@ class MaintainController extends Controller
       'freeSpace'              => $this->getSymbolByQuantity($freeSpace),
       'programsSpace_raw'      => $programsSize,
       'programsSpace'          => $this->getSymbolByQuantity($programsSize),
-      'usedRamPercentage'      => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
-      'wholeRam'               => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $2}'") * 1000),
-      'usedRam'                => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $3}'") * 1000),
-      'freeRam'                => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $4}'") * 1000),
-      'sharedRam'              => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $5}'") * 1000),
-      'cachedRam'              => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $6}'") * 1000),
+      'freeRamPercentage'      => $free_ram_percentage,
+      'usedRamPercentage'      => $used_ram_percentage,
+      'sharedRamPercentage'    => $shared_ram_percentage,
+      'cachedRamPercentage'    => $cached_ram_percentage,
+      'wholeRam'               => $this->getSymbolByQuantity($whole_ram),
+      'usedRam'                => $this->getSymbolByQuantity($used_ram),
+      'freeRam'                => $this->getSymbolByQuantity($free_ram),
+      'sharedRam'              => $this->getSymbolByQuantity($shared_ram),
+      'cachedRam'              => $this->getSymbolByQuantity($cached_ram),
+      'availableRam'           => $this->getSymbolByQuantity($available_ram),
       'backupCommand'          => $backupCommand,
       'backupSize'             => $this->getSymbolByQuantity($backupSize),
     ]);

@@ -23,14 +23,14 @@ class SetLookBrick extends Brick
     $this->type = Constants::SET_LOOK_BRICK;
     $this->caption = "Switch to look";
 
-    if ($this->brick_xml_properties->look[Constants::REFERENCE_ATTRIBUTE] != null)
+    if ($this->brick_xml_properties->look[Constants::REFERENCE_ATTRIBUTE] !== null)
     {
       $this->look_file_name = $this->brick_xml_properties->look
-        ->xpath($this->brick_xml_properties->look[Constants::REFERENCE_ATTRIBUTE])[0]->fileName;
+        ->xpath($this->brick_xml_properties->look[Constants::REFERENCE_ATTRIBUTE])[0]['fileName'];
     }
     else
     {
-      $this->look_file_name = $this->brick_xml_properties->look->fileName;
+      $this->look_file_name = $this->brick_xml_properties->look['fileName'];
     }
 
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);

@@ -20,13 +20,13 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $scratch_parent_id;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid")
    */
   protected $catrobat_child_id;
 
@@ -37,13 +37,14 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
    *     fetch="LAZY"
    * )
    * @ORM\JoinColumn(name="catrobat_child_id", referencedColumnName="id")
-   * @var \App\Entity\Program
+   * @var Program
    */
   protected $catrobat_child;
 
   /**
-   * @param int                                $scratch_parent_id
-   * @param \App\Entity\Program $catrobat_child
+   * ScratchProgramRemixRelation constructor.
+   * @param $scratch_parent_id
+   * @param Program $catrobat_child
    */
   public function __construct($scratch_parent_id, Program $catrobat_child)
   {

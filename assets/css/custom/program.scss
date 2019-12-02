@@ -41,12 +41,20 @@ h2
   margin: 0;
 }
 
+
+#project-thumbnail-big
+{
+  width: 300px;
+  height: 300px;
+}
+
 #program-middle
 {
   #image
   {
     float: left;
     position: relative;
+    max-width: 300px;
   }
 
   #info
@@ -66,6 +74,18 @@ h2
     line-height: 23px;
     @include force-word-break();
   }
+
+  #edit-credits-ui {
+    display: flex;
+    flex-direction: column;
+  }
+  #credits
+  {
+    margin: 25px auto;
+    line-height: 23px;
+    @include force-word-break();
+  }
+
 }
 
 .show
@@ -76,6 +96,7 @@ h2
 #program-bottom
 {
   border-top: 1px solid $default-text-color;
+  border-bottom: 1px solid $default-text-color;
   padding-top: 25px;
   padding-bottom: 25px;
   display: table;
@@ -90,7 +111,7 @@ h2
     {
       text-align: left;
       float: left;
-      width: 30%;
+      min-width: 30%;
       margin: 0.6em;
 
       > .icon
@@ -102,6 +123,8 @@ h2
       {
         line-height: 35px;
         padding-left: 8px;
+        display:block;
+        margin-left: 3em;
       }
     }
   }
@@ -491,6 +514,7 @@ input[type='number']
     {
       text-align: center;
       float: none;
+      max-width: none;
     }
   }
 
@@ -508,7 +532,7 @@ input[type='number']
       {
         text-align: left;
         float: left;
-        width: 47%;
+        min-width: 47%;
 
         > .icon
         {
@@ -519,6 +543,8 @@ input[type='number']
         {
           line-height: 35px;
           padding-left: 8px;
+          display: block;
+          margin-left: 3em;
         }
       }
     }
@@ -545,6 +571,8 @@ input[type='number']
         > .icon-text {
           line-height: 35px;
           padding-left: 8px;
+          display: block;
+          margin-left: 3em;
         }
       }
     }
@@ -586,11 +614,6 @@ input[type='number']
       }
     }
   }
-}
-
-#recommendations, #specific-programs-recommendations
-{
-  border-top: 1px solid #17a5b8;
 }
 
 #recsys-headline, #recsys-specific-programs-headline

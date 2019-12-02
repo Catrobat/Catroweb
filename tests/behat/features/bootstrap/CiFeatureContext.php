@@ -1,5 +1,6 @@
 <?php
 
+use App\Catrobat\Services\ApkRepository;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -42,6 +43,24 @@ class CiFeatureContext extends BaseContext
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Hooks
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
   /**
    * @BeforeScenario
    */
@@ -97,22 +116,24 @@ class CiFeatureContext extends BaseContext
 
   /**
    * @Given /^I have a program "([^"]*)" with id "([^"]*)"$/
-   * @param $arg1
-   * @param $arg2
+   * @param $name
+   * @param $id
    *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
    */
-  public function iHaveAProgramWithId($arg1, $arg2)
+  public function iHaveAProgramWithId($name, $id)
   {
     $config = [
-      'name' => $arg1,
+      'id' => $id,
+      'name' => $name,
     ];
-    $program = $this->insertProgram(null, $config);
+
+    $this->insertProgram(null, $config);
 
     $file_repo = $this->getFileRepository();
 
-    $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $program->getId());
+    $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $id);
   }
 
   /**
@@ -162,7 +183,8 @@ class CiFeatureContext extends BaseContext
   public function iStartAnApkGenerationOfMyProgram()
   {
     $client = $this->getClient();
-    $client->request('GET', 'http://' . $this->hostname . '/pocketcode/ci/build/1', [], [], [
+    $id = 1;
+    $client->request('GET', 'http://' . $this->hostname . '/app/ci/build/' . $id, [], [], [
       'HTTP_HOST' => $this->hostname,
       'HTTPS'     => $this->secure,
     ]);
@@ -183,9 +205,15 @@ class CiFeatureContext extends BaseContext
     {
       $expected_parameters[$parameter_defs[$i]['parameter']] = $parameter_defs[$i]['value'];
     }
-    $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
+    $dispatcher = $this->getSymfonyService('App\Catrobat\Services\Ci\JenkinsDispatcher');
     $parameters = $dispatcher->getLastParameters();
-    Assert::assertEquals($expected_parameters, $parameters);
+
+    for ($i = 0; $i < sizeof($expected_parameters); $i++) {
+      Assert::assertRegExp(
+        $expected_parameters[$parameter_defs[$i]['parameter']],
+        $parameters[$parameter_defs[$i]['parameter']]
+      );
+    }
   }
 
   /**
@@ -233,7 +261,8 @@ class CiFeatureContext extends BaseContext
     $files = [
       new UploadedFile($temppath, 'test.apk'),
     ];
-    $url = '/pocketcode/ci/upload/1?token=UPLOADTOKEN';
+    $id = 1;
+    $url = '/app/ci/upload/' . $id .'?token=UPLOADTOKEN';
     $parameters = [];
     $this->getClient()->request('POST', $url, $parameters, $files);
   }
@@ -277,6 +306,7 @@ class CiFeatureContext extends BaseContext
       }
 
       $config = [
+        'id'       => $programs[$i]['id'],
         'name'       => $programs[$i]['name'],
         'visible'    => ($programs[$i]['visible'] === 'true'),
         'apk_status' => $apk_status,
@@ -285,9 +315,9 @@ class CiFeatureContext extends BaseContext
 
       if ($programs[$i]['apk status'] == 'ready')
       {
-        /* @var $apkrepository \App\Catrobat\Services\ApkRepository */
-        $apkrepository = $this->getSymfonyService('apkrepository');
-        $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $i);
+        /* @var $apkrepository ApkRepository */
+        $apk_repository = $this->getSymfonyService(ApkRepository::class);
+        $apk_repository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $i);
       }
     }
   }
@@ -305,6 +335,7 @@ class CiFeatureContext extends BaseContext
     {
       throw new PendingException('Program not found: ' . $arg1);
     }
+
     $router = $this->getSymfonyService('router');
     $url = $router->generate('ci_download', [
       'id'     => $program->getId(),
@@ -358,8 +389,8 @@ class CiFeatureContext extends BaseContext
         break;
       case 'ready':
         $program->setApkStatus(Program::APK_READY);
-        /* @var $apkrepository \App\Catrobat\Services\ApkRepository */
-        $apkrepository = $this->getSymfonyService('apkrepository');
+        /* @var $apkrepository ApkRepository */
+        $apkrepository = $this->getSymfonyService(ApkRepository::class);
         $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $program->getId());
         break;
       default:
@@ -373,7 +404,7 @@ class CiFeatureContext extends BaseContext
    */
   public function noBuildRequestWillBeSentToJenkins()
   {
-    $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
+    $dispatcher = $this->getSymfonyService('App\Catrobat\Services\Ci\JenkinsDispatcher');
     $parameters = $dispatcher->getLastParameters();
     Assert::assertNull($parameters);
   }
@@ -383,7 +414,8 @@ class CiFeatureContext extends BaseContext
    */
   public function iReportABuildError()
   {
-    $url = '/pocketcode/ci/failed/1?token=UPLOADTOKEN';
+    $id = 1;
+    $url = '/app/ci/failed/' . $id . '?token=UPLOADTOKEN';
     $this->getClient()->request('GET', $url);
     Assert::assertEquals(200, $this->getClient()
       ->getResponse()
@@ -402,7 +434,7 @@ class CiFeatureContext extends BaseContext
       throw new PendingException('last program not found');
     }
     $file = $this->generateProgramFileWith([
-      'name' => $program->getName(),
+      'name' => $program->getName()
     ]);
     $this->upload($file, null);
   }
@@ -429,6 +461,18 @@ class CiFeatureContext extends BaseContext
   }
 
   /**
+   * @When /^I GET "([^"]*)" with program id "([^"]*)"$/
+   *
+   * @param $uri
+   */
+  public function iGetWithProgramID($uri, $id)
+  {
+    $uri = str_replace("@id@", $id, $uri);
+
+    $this->getClient()->request('GET', $uri);
+  }
+
+  /**
    * @Then /^will get the following JSON:$/
    *
    * @param PyStringNode $string
@@ -437,6 +481,10 @@ class CiFeatureContext extends BaseContext
   {
     $response = $this->getClient()->getResponse();
     Assert::assertEquals(200, $response->getStatusCode());
-    Assert::assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent());
+
+    $pattern = json_encode(json_decode($string));
+    $pattern = str_replace("\\", "\\\\", $pattern);
+    Assert::assertRegExp($pattern, $response->getContent());
   }
+
 }

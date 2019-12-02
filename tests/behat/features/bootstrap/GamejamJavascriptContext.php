@@ -36,6 +36,25 @@ class GamejamJavascriptContext extends MinkContext implements KernelAwareContext
     $this->symfony_support = new SymfonySupport(self::FIXTUREDIR);
   }
 
+  private $old_metadata_hash = "";
+
+  /**
+   * @BeforeScenario
+   */
+  public function clearData()
+  {
+    $em = $this->symfony_support->getManager();
+    $metaData = $em->getMetadataFactory()->getAllMetadata();
+    $new_metadata_hash = md5(json_encode($metaData));
+    if ($this->old_metadata_hash === $new_metadata_hash) {
+      return;
+    };
+    $this->old_metadata_hash = $new_metadata_hash;
+    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool->dropSchema($metaData);
+    $tool->createSchema($metaData);
+  }
+
   /*
    * (non-PHPdoc)
    * @see \Behat\Symfony2Extension\Context\KernelAwareContext::setKernel()
@@ -62,7 +81,7 @@ class GamejamJavascriptContext extends MinkContext implements KernelAwareContext
   public function iAmLoggedIn()
   {
     $this->i = $this->getSymfonySupport()->insertUser(['name' => 'Generated', 'password' => 'generated']);
-    $this->visitPath("/pocketcode/login");
+    $this->visitPath("/app/login");
     $this->fillField("username", "Generated");
     $this->fillField("password", "generated");
     $button = $this->getSession()->getPage()->find("css", "#_submit");
@@ -100,7 +119,7 @@ class GamejamJavascriptContext extends MinkContext implements KernelAwareContext
    */
   public function iVisitMyProfile()
   {
-    $this->visit("/pocketcode/profile");
+    $this->visit("/app/user");
   }
 
   /**

@@ -1,4 +1,6 @@
 ---
+#---
+#homepage translation
 localLanguage: अंग्रेजी
 username: 'उपयोगकर्ता नाम:'
 password: 'पारण शब्द:'
@@ -17,9 +19,11 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: डाउन्लोड
+download: Download the project
 description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
+credits: Credits
+noCredits: No credits available.
 country: देश
 loginText: प्रवेश करे
 privacyPolicy: गोपनीयता नीति
@@ -32,21 +36,38 @@ less: 'कम'
 show-more: 'Show more'
 show-less: 'Show less'
 ok: ठीक है।
-clickToDownloadProgram: 'उदाहरण को डाउनलोड करने के लिए% link_start% यहाँ% link_end% पर क्लिक करें'
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'यूज़रनेम या पासवर्ड पहले से प्रयोग में है'
 notifications: 'सूचनाएँ'
+allNotifications: 'All Notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Likes'
+likesNotificationsTitle: 'Like Notifications'
+followersNotificationsTitle: 'Follower Notifications'
+commentsNotificationsTitle: 'Comment Notifications'
+CommentNotifications: 'टिप्पणियाँ'
+oldnotification: 'Old Notifications'
 wellDone: "बहुत ख़ूब!"
 done: "समाप्त"
-notificationsReadMessage: "आप सभी सूचनाएं पढ़ चुके हैं ।"
+notificationsReadMessage: "It looks like you dont have any notifications."
 notificationsClearedMessage: "सभी सूचनाओं को पढ़ा गया चिह्नित किया गया है"
+deleteNotificationConfirmation: "Are you sure?"
+notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
+notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
+confirmMessage: "Yes, delete it"
+cancelMessage: "रद्द करें"
+notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationDeletedMessage: "Notification has been successfully deleted."
 clearAllNotificationsButtonTitle: "सभी को पढ़े हुए के समान चिन्हित करें"
+deleteAllNotificationsButtonTitle: "Delete all"
 notificationsClearError: "पढ़ें के रूप में सूचनाओं को चिह्नित करने में असमर्थ!"
+notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "कृपया प्रतीक्षा करें..."
 indexPage:
   recommendedSection:
     info:
-      title: 'क्या कार्यक्रम यहां की सिफारिश कर रहे हैं?'
-      description: 'अधिक लाइक ("थम्स अप", "लाफ़", "लव" और "वाउ!" सहित) आपके प्रोग्राम को प्राप्त होता है, इस सूची में उतना अधिक दिखाई देता है।'
+      title: 'What projects are recommended here?'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
@@ -54,32 +75,42 @@ programs:
     download: ऐप डाउनलोड करें
     statistics: अधिक सांख्यिकी
   featured: विशेषताएं
-  newest: सबसे नये प्रोग्राम
-  recommended: अनुशंसित प्रोग्राम
-  noPrograms: वर्तमान में कोई प्रोग्राम नहीं हैं।
+  newest: Newest projects
+  recommended: Recommended projects
+  noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
   reportCommentConfirmation: Are you sure you want to report this comment?
   deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
     Account Deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The program description is too long!
+  tooLongDescription: The project description is too long!
   rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: सबसे ज्यादा देखा गया
     downloaded: सबसे ज्यादा डाउनलोड किया हुआ
-  random: यादृच्छिक कार्यक्रम
-  related: संबंधित प्रोग्राम
+  random: Random projects
+  related: Related projects
   downloads: '%downloads% डाउनलोड'
-  sample: उदाहरण के कार्यक्रम
+  sample: Example projects
   views: '%views% बार देखे गए'
   likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
   likeSmileDetailText: '{0}0 लोग इसे देखकर मुस्करातें हैं|{1}1 कोई एक इसे देखकर मुस्कराता है|]1,Inf]%persons% लोग इसे देखकर मुस्करातें हैं|'
@@ -87,25 +118,25 @@ programs:
   likeWowDetailText: '{0}0 लोग इसे "वाह!" कहते है |{1}1 व्यक्ति इसे "वाह!" कहता है |] 1, Inf]%persons% लोग इसे "वाह!" कहता है'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: प्रस्तुत किए गए कार्यक्रम
-  uploaded: अपलोड किए गए प्रोग्राम
+  submitted: Submitted Projects
+  uploaded: Uploaded Projects
   reportAsInappropriate: अनुचित विवरण दे
-  reportProgram: Report program
+  reportProgram: Report project
   languageVersion: 'कैट्रोबैट भाषा संस्करण: %languageVersion%'
-  reportLoginText: Please %login% to report this program.
-  reportDialogHeader: Why do you want to report this program?
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
   reportDialogReason: एक कारण दर्ज करें
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
   reportRadioButtonDislike: I don't like it
-  reportOwnProgram: आप अपने खुद के प्रोग्राम को अनुपयुक्त नही बता सकते|
-  reportAlready: You've already flagged this program.
-  reportDone: You reported this program!
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeader: एप्लिकेशन को अपडेट करें
-  updateAppText: इस कार्यक्रम को अधोभारण करने में सक्षम होने के लिए कृपया अपने ऐप को नवीनतम संस्करण में आधुनिकतम बनाएं।
+  updateAppText: Please update your app to the newest version to be able to download this project.
   btnClosePopup: ठीक
-  checkout_this_program: इस Catrobat कार्यक्रम को जाँच करें
+  checkout_this_program: Checkout this Catrobat project
   show_more: और दिखाए
   comments: टिप्पणियाँ
   send: भेजे
@@ -116,22 +147,24 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the program Description
+  editDescription: Edit the project Description
   saveDescription: Save Description change
+  editCredits: Edit the project Credits
+  saveCredits: Save Credits change
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
   love: Love!
   wow: Wooow!
   linkTitle: Link
-  link: Copy program link to clipboard
+  link: Copy project link to clipboard
 remixGraph:
   showRemixGraph: 'रीमिक्स ग्राफ दिखाएं'
   by: 'by'
   open: 'Open'
   showPaths: 'पथ दिखाएं'
   programNotAvailableErrorTitle: 'क्षमा करें...'
-  programNotAvailableErrorDescription: 'यह प्रोग्राम अब उपलब्ध नहीं है!'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: 'अनुपलब्ध'
   programUnknownUser: 'अज्ञात उपयोगकर्ता'
 noReply: This is an automated message - Please do not reply directly to this email.
@@ -194,12 +227,12 @@ profile:
   oldPass: old password
   firstEmail: मेरा पहला ई-मेल
   secondEmail: मेरा दूसरा ईमेल
-  myPrograms: मेरे कार्यक्रम
+  myPrograms: My projects
   follows: Follows
   follower: Follower
   unfollowUser: Unfollow this user!
   followUser: Follow this user!
-  amountOfPrograms: Amount of programs
+  amountOfPrograms: Amount of projects
   form:
     passwordTooShort: नए पासवर्ड में कम से %length% अक्षर होने चाहिए ।
     passwordTooLong: नए पासवर्ड में अधिकतम %length% अक्षर होने चाहिए ।
@@ -208,9 +241,12 @@ profile:
     emailNotValid: यह ए-मेल सही नही है
     emailMissing: इस ई-मेल पते को अद्यतन करते समय त्रुटि । आपके पास ंयूनतम एक मांय ई-मेल पता होना चाहिए ।
     emailExists: यह ईमेल पहले से मौजूद है
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: This username already exists.
     submitSuccess: सहेज दिया गया !
-  reallyDeleteProgram: क्या आप वास्तव में आपके प्रोग्राम को हटाना चाहते हैं
-  programsOf: प्रोग्रामों की
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
   changePicture: चित्र बदले
   avatar:
     noImage: No Image!
@@ -231,18 +267,18 @@ myprofile:
   editCountry: अपना देश बदलें
   editEmail: अपना ई-मेल बदलें
   deleteAccount: खाता नष्ट करें
-  deleteAccountText: क्या आप अप्ना अकौन्त नष्ट करना चाहते है?
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'चलाने के लिए लाइसेंस'
   title: 'खेलने के लिए लाइसेंस - श्रेय दे और साझा करें'
-  text1: कल्पना कीजिए कि प्रत्येक कैट्रबैट प्रोग्राम एक केक है, यह एक खास केक है जो इसके नुस्खा (प्रोग्रामिंग ब्लॉक्स) के साथ आता है। कैट्रबैट समुदाय के सभी सदस्य अपने व्यंजनों के साथ अपने केक साझा करते हैं इसका मतलब यह है कि आप केक का आनंद ले सकते हैं और उन्हें स्वयं कैसे बना सकते हैं!
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'कोई गुप्त व्यंजन नहीं हैं: इन केक बनाने के निर्देश, किसी के लिए उपयोग करने, पुन: उपयोग, संशोधित करने और नए विचारों के लिए प्रेरणा के रूप में प्रदान करने के लिए खुले हैं... मेरा अर्थ है केक।'
   text3: "आप केक खा सकते हैं और साथ ही साथ अन्य सामग्रियों के साथ खुद को बनाने के लिए अन्य लोगों के व्यंजनों की प्रतिलिपि बना सकते हैं। यह स्वतंत्रता दो सरल आवश्यकताओं के साथ आता है:"
   text4: "कैट्रबैट समुदाय की स्थापना में, हमने इस दृष्टिकोण को अपनाने का निर्णय लिया क्योंकि हमारा मानना ​​है कि यह समुदाय के भीतर सीखने और रचनात्मकता का समर्थन करता है। व्यंजनों और सामग्री (स्क्रिप्ट और कलाकृति) साझा करके, लोग एक दूसरे के विचारों पर बना सकते हैं और हर कोई लाभ होगा।"
-  text5: केट्रोबेट वेबसाइट को डिजाइन करने में, हमने लोगों को साझा करने और दूसरों को श्रेय देने के लिए प्रोत्साहित करने के लिए सुविधाओं को शामिल किया। प्रत्येक कार्यक्रम पृष्ठ पर, आप प्रोग्राम के लिए हमेशा मूल स्क्रिप्ट डाउनलोड कर सकते हैं। यदि आप किसी प्रोग्राम को रीमिक्स करते हैं (स्क्रिप्ट या आर्टवर्क को संशोधित करते हैं, और परिणाम साझा करते हैं), तो हम आपको प्रोग्राम नोट्स में क्रेडिट देने के लिए प्रोत्साहित करते हैं, जो आपको प्रेरित करते हुए लोगों और कार्यक्रम का उल्लेख करते हैं।
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
   text6: '% लिंक-शर्तों पर Catrobat ऑनलाइन समुदाय के उपयोग की शर्तों के बारे में और जानें'
   list1:
     item1: नुस्खा के साथ अपने केक साझा करें
@@ -251,9 +287,9 @@ licenseToPlay:
 termsOfUse:
   title: उपयोग की शर्ते
   headline: कैट्रोबैट सम्प्रदाय में आप्का बहौत बहौत स्वागत है
-  text1: 'कैटरोबैट समुदाय में भाग लेके, आप अपने कोड और विचारों को लोगों के साथ बाँटते है:'
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
   text2: "हम आपकी मदद से इस समुदाय को सभी सदस्यों के लिए सहयोग देने वाली जगह बनाना चाहते है|"
-  text3: "कैटरोबैट परियोजना के माध्यम से हम सहयोग को बढ़ावा और सभी लोगों की रचनात्मकता से मानवता के हित में कार्य करना चाहते है। आप भी कैटरोबैट समुदाय के सक्रिय सदस्य बन सकते है और अपने प्रोग्राम्स को समुदाय को उपहार की तरह दे सकते है , जैसे अन्य सक्रिय सदस्य अपने प्रोग्राम्स बाँटते है।"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: 'हमारे तरफ़ से आप के लिए उपहार:'
   text5: 'हमारी उपयोग और सेवा की शर्तें:'
   list1:
@@ -261,14 +297,14 @@ termsOfUse:
     item2: सभी उम्र के (किशोर से लेके युवा बच्चों और वरिष्ट नागरिक)
     item3: अनुभव के सभी स्तरों के साथ
   list2:
-    item1: सम्मानजनक रहें। जब प्रोग्राम बाँटे, कृपया याद रखें की विह्न उम्र और पृष्ठभूमि के लोग आपका योगदान देखेंगे।
-    item2: "श्रेय दे।आप अन्य लोगों के प्रोग्राम्स का संशोधित कर सकते है - बस उन्हें श्रेय देना ना भूले। आप अपने प्रोग्राम के वर्णन में उन्हें श्रेय दे सकते है । कृपया अन्य उपयोगकर्ताओं के प्रोग्राम्स को संशोधित करने के लिए नीचे लिखे अनुच्छेद में दी हुई सूचि का प्रयोग करे ।"
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "ईमानदार रहें। आप जैसे है वैसे ही रहें और कोई दूसरा बन कर समुदाय को नुक्सान ना पहुंचाए।"
     item4: "व्यक्तिगत जानकारी को निजी रखें। आप अपनी ईमेल आईडी, फोन नंबर, या अन्य व्यक्तिगत संपर्क जानकारी लोगों से ना बाँटे।"
-    item5: "वेबसाइट अनुकूल रखने में मदद करे। यदि आपको लगता है कि दूसरों के प्रोग्राम  या टिप्पणी  मतलबी, अपमानजनक, हिंसक, या अन्यथा अनुचित है, तो 'अनुपयुक्त रिपोर्ट' बटन दबाये करें और एक संक्षिप्त विवरण छोड़ दें। कैटरोबैट समुदाय आपकी रिपोर्ट की समीक्षा करके और प्रोग्राम, टिप्पणी एवम् अन्य लेख को हटा सकता है।"
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
   list3:
-    item1: "कोई भी प्रोग्राम हमारी वेबसाइट पर अपलोड करके आप अपने काम को निः शुल्क कैटरोबैट लाइसेंस के तहेत रखने की सेहमती देते हैं और इसे स्वीकार करते हैं। नि: शुल्क लाइसेंस के तहत जैसे स्वयं कैटरोबैट प्रणाली आप के लिए उपलब्ध है, वैसे ही आपके अपलोड किये गए कैटरोबैट प्रोग्राम हर किसी के उपलब्ध है और उन्हें पिछले अपलोड किये गए प्रोग्रामों से सीखने एवम नए आकर्षक खेल, एनीमेशन और अन्य प्रोग्रामों को बनाने का अधिकार देता है। यह अनुमति देता है सभी को ' 'किसी भी साथियों के कंधों पर खड़े हो', उन सभ में आप भी एक हैं! आपका काम इस प्रकार पूरी दुनिया को लाभ देगा और मुफ्त का उपयोग करने के लिए हर किसी के लिए उपलब्ध रहेगा, जैसे विकिपीडिया में चित्र और लेख मुफ्त में उपलब्ध रहते हैं। मानवता के लिए इसे भेंट की तरह माने: आप हर किसी को दे, और अन्य सभी लोग जो हमारी वेबसाइटो पर प्रोग्राम अपलोड करते हैं वह आपको देंगे। इस प्रकार एक अपलोड किया गया प्रोग्राम, जो इसका मालिक आपको मुफ्त के लिए दे रहा है, उसकी शर्त है कि आप भी सामान शर्तो पर समुदाय में लेंगे।"
-    item2: आपका उपहार स्वीकार करना ज़रूरी नहीं है; यदि आप करते हैं तो कुछ नियम लागू होते हैं। इन नियमों का लाभ हैं कि आप काम से सीख सकते हैं और उसे और अच्छा बनाकर, उदाहरण के लिए, फिर से अपने नाम से हमारी वेबसाइटों पर अपलोड कर सकते हैं। एक अन्य लाभ यह है कि यह लाइसेंस ये सुनिश्चित करते हैं की आप दुसरे के द्वारा अपने प्रोग्राम के उपयोग के माध्यम से उत्पन्न होने वाली समस्याओं के लिए उत्तरदायी नहीं ठहराया जाएंगे।
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "एक महत्वपूर्ण अतिरिक्त शर्तों है कि आप स्पष्ट रूप से लेखकों को जिनके काम पर आपका अपना काम आधारित है उन्हें श्रेय दे। आपका काम स्पष्ट रूप से दुसरो के द्वारा प्रोत्साहित हो इसकी हम पूरी कोशिश करेंगे ,इतना ही नहीं, दुसरे आपका काम आपके एकमात्र नाम, जिस से आप कैटरोबैट समुदाय में जाने जाते है, के माध्यम से आपको श्रेय देंगे, और आपको अन्य सार्वनिक तरीको से धन्यवाद देंगे।"
     item4: 'सटीक कानूनी नियमों और शर्तों के लिए कृपया% लिंक-लाइसेंस अपलोड करें% से परामर्श लें।'
   list4:
@@ -278,7 +314,7 @@ termsOfUse:
   list5:
     item1: 'यदि आप, या, यदि आप उंर के 13 साल से नीचे हैं, अपने माता पिता या कानूनी संरक्षक, एक में शामिल संगठन या dragnet प्रकार गोपनीयता के उल्लंघन के लिए जिंमेदार के साथ जुड़े रहे है या थोक या सामूहिक निगरानी, तो आप हमारे सॉफ्टवेयर अनुप्रयोगों का उपयोग करने की अनुमति नहीं है और हमारी सेवाओं का उपयोग करने के लिए । इस प्रतिबंध का सटीक विवरण और इसे करने के लिए कुछ अपवाद अनुभागों में देलिएन्टेड है 4. a और 4. b हमारे %link-termsOfUse% पर ।'
     item2: यदि आप अगर तेरा साल से कम उम्र के है, तो आपको अपनी माता पिता या लीगल गार्डियन की क्या वो आपको अनुमति दे कि आप कैतरोबत सॉफ्टवेयर के ऍप्लिकेशन्स और सर्विसेज
-    item3: "प्रोग्राम एवम उपयोगकर्ता खाते को अस्वीकार करने का, हटाने का, छुपाने का हमे पूरा अधिकार है और कैसी भी डिजिटल सामग्री जो कैटरोबैट की वेबसाइटों पर उपलोड की गयी हैं, किसी भी समय पर, उस पर हमारा संपूर्ण विवेकाधिकार है, उदहारण के लिए, अगर किसी प्रोग्राम में अनुपयुक्त सामग्री प्राप्त होती है या कोई उपयोगकर्ता हमारे अधिकारों का उल्लंघन कर रहा हैं।"
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
     item4: "सभी कैटरोबैट के सॉफ्टवेयर और इंटरनेट संसाधनों की पेशकश इस उम्मीद से कि है की वे उपयोगी साबित होंगे, लेकिन किसी भी वारंटी के बिना।"
     item5: 'उपर्युक्त बिंदुओं और कुछ अतिरिक्त कानूनी नियमों और शर्तों के सटीक फॉर्मूलेशन के लिए कृपया हमारे% लिंक-शर्तों से% developer.catrobat.org/terms_of_use_and_service का परामर्श लें।'
   bottom1: समय-समय पर यहां वापस देखें, क्योंकि हम हमेशा हमारी उपयोग की शर्तों को बेहतर बनाने की कोशिश कर रहे हैं।
@@ -289,15 +325,15 @@ help:
     title: "कदम दर कदम परिचय"
     start: "शुरू करने की स्थिति:"
     description: |
-      यहां आप अपना पहला प्रोग्राम, निम्नलिखित पूर्वाभ्यास वीडियो का उपयोग कर एक इंटरैक्टिव पोस्टकार्ड बनाते हैं।
-      आपको दिए गए निर्देशों का पालन करना होगा।
-      पोस्टकार्ड के निर्माण के दौरान, पॉकेट कोड की मूल बातें जो आपको अपनी भविष्य की परियोजनाओं के लिए आवश्यक हैं मध्यस्थ हैं।
-      इन निर्देशित वीडियो के बाद, अन्य सभी गतिविधियां आपको अपनी व्यक्तिगत पॉकेट कोड परियोजनाओं को बनाने की अधिक स्वतंत्रता प्रदान करेंगी।
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: 'एक नया कार्यक्रम बनाएं'
+      title: 'Make a new project'
       detail:
         text1: '"नए" पर टैप करें।'
-        text2: 'एक प्रोग्राम नाम दर्ज करें, "खाली कार्यक्रम बनाएँ" का चयन करें और "ठीक" टैप करें।'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
     step2:
       title: "एक नया वस्तु बनाएँ"
       detail:
@@ -338,14 +374,14 @@ help:
       description: "यह चरण आप को दिखाता है की कैसे वस्तुओं के व्यवहार दोहरायें"
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: '"जब प्रोग्राम शुरू किया था" वाली ईंट के नीचे "हमेशा के लिए" वाली ईंट लगायें'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
         text3: 'एक और "सरकना" - ईंट जोड़ें।'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
         text5: 'X और y मान के पाठ क्षेत्र में टैप करें और 0 सेट करें|'
         text6: 'स्टेज पर व्यवहार को देखने के लिए "प्ले" टैप करें।'
     step7:
       title: "\"टैप\" करना ही सब कुछ है"
-      description: 'जब प्रोग्राम स्टेज पर चल रहा है तब भी आप ऑब्जेक्ट का व्यवहार नियंत्रित कर सकते हैं।'
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
       detail:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
@@ -364,7 +400,7 @@ help:
         text3: 'फिर से अपनी वस्तुओं और अपनी पृष्ठभूमि का अवलोकन करने के लिए प्राप्त करने के लिए Android के वापस बटन का उपयोग करें।'
     step10:
       title: "पृष्ठभूमि परिवर्तित करें"
-      description: "यह आपके ऑब्जेक्ट्स का अवलोकन है और पृष्ठभूमि एक प्रोग्राम पर निर्भर करता है।"
+      description: "This is the overview of your objects and your project's background."
       detail:
         text1: 'पृष्ठभूमि एक तरह का ऑब्जेक्ट है, लेकिन बस पृष्ठभूमि पर है |'
         text2: 'आप इसी तरह पृष्ठभूमि में लिपियां, ध्वनियाँ और नज़ारा जोड़ सकते हैं | '
@@ -372,12 +408,12 @@ help:
       title: "मुख्य मेनू"
       description: "इस स्क्रीन पर वापस आने के लिए Android के वापस बटन का उपयोग करें।"
       detail:
-        text1: 'आपके वर्तमान में खुले हुए प्रोग्राम के साथ जारी रखें।'
-        text2: 'एक नया प्रोग्राम जोड़ें।'
-        text3: 'अपने सभी स्थानीय कार्यक्रमों को देखने।'
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
         text4: 'सहायता साइट पर जायें और अन्य उपयोगकर्ताओं के साथ चर्चा करें|'
-        text5: 'पॉकेटकोड प्रोग्राम्स की दुनिया का अन्वेषण करें। डाउनलोड करें और जैसे चाहें प्रोग्राम रीमिक्स करें|'
-        text6: 'जो प्रोग्राम वर्तमान में खुला है उसे अपलोड करें।'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
   tutorialcards:
     title: "अनुशिक्षण कक्षा"
     description1: "ये ट्यूटोरियल आपको पॉकेट कोड में प्रभावी ट्रिक्स का उपयोग करने का तरीका दिखाते हैं।"
@@ -450,8 +486,8 @@ help:
       one: "पहले सुनिश्चित करें कि चेहरा पहचान ईंटें सक्षम हैं । इसलिए सेटिंग्स पर जाएं ।"
       two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: "प्रारंभक प्रोग्राम्स"
-    description: "इन प्रारंभक प्रोग्राम्स को बनाने की कोशिश करें। इसमें अन्दर जाके अपने विचार लगाए और इन प्रोग्राम्स को संशोधित करें।"
+    title: "Starter Projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
     categories:
       games: "क्रीडाये"
       animations: "जीव-संचारण"
@@ -461,22 +497,22 @@ help:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
     title1: "Registration"
-    text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
     title2: "उद्यतन करे"
     text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your program"
-    text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
     title4: "Create Android app"
-    text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
     title5: "Download app"
-    text5: "After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
     title6: "Register/Login at GameJolt.com"
     text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
     title7: "Upload your game on the Game Jolt Site"
     text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
     text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
     text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
-    text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
     text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
     text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
     text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
@@ -504,7 +540,7 @@ help:
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the program"
+    download: "Download the project"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: 'Please choose a username:'
@@ -547,6 +583,7 @@ apk:
   prepare: 'एप्लिकेशन तैयार करें'
   preparing: 'ऐप तैयार कर रहे हैं'
   text: 'The process may take a while'
+#api
 errors:
   username:
     blank: यूजरनेम रिक्त नहीं होना चाहिए.
@@ -560,6 +597,8 @@ errors:
     short: 'Your password must have at least {{ limit }} characters.'
   description:
     rude: Description must not contain rude wordes.
+  credit:
+    rude: Credits must not contain rude words.
   country:
     blank: The country is missing.
     invalid: Invalid country
@@ -585,18 +624,24 @@ errors:
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: Project name must not contain rude wordes.
   program:
-    invalid: Invalid program.
+    invalid: Invalid project.
   languageversion:
-    tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: प्रमाणिकरण ‌असफल
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
 success:
   text: Success
   registration: पंजीकरण सफल हो गया|
   token: ok
   upload: Your project was uploaded successfully!
+  imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
@@ -606,6 +651,7 @@ time:
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: There was an error during the upload of your app.
+#languages and countries
 language:
   arabic: अरबी
   bulgarian: बल्गारिया
@@ -661,7 +707,7 @@ gamejam:
   whats: What's the %gamejamname%?
   submitown:
     header: be aware
-    subheader: You can only submit your own programs
+    subheader: You can only submit your own projects
     text: |
       But why not create your own!
       Take part in the %gamejamtag%
@@ -675,6 +721,7 @@ tags:
     tag4: गाने
     tag5: कला
     tag6: प्रयोगात्मक
+    tag7: Tutorial
 admin:
   maintain:
     diskMaintenance: Disk maintenance
@@ -690,8 +737,9 @@ admin:
     createBackupConfirmationTitle: बैकअप बनाएँ
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
-  similarPrograms: इसी तरह के कार्यक्रम
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: यह प्रोग्राम डाउनलोड करने वाले उपयोगकर्ता भी डाउनलोड किए गए हैं
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  moreFromThisUser: More from %username%
 pmd:
   submitBtn: अपना प्रोजेक्ट सबमिट करें
   submitBox:
@@ -699,9 +747,9 @@ pmd:
     text: You are about to submit your project. Please enter the project code and click send.
     btnText: सबमिट करें
   successful:
-    text: Your program upload was successful.
+    text: Your project upload was successful.
   failed:
-    text: Program upload failed.
+    text: Project upload failed.
 codeview:
   showCode: 'कोड दिखाएं'
   hideCode: 'Hide code'
@@ -713,7 +761,7 @@ codeview:
   scenes: 'scenes'
   scripts: 'scripts'
   bricks: 'bricks'
-  objects: 'objects'
+  objects: 'actors and objects'
   looks: 'looks'
   sounds: 'sounds'
   globals: 'globals'
@@ -732,9 +780,9 @@ footer:
   download: Get the App
 privacy-policy:
   header: गोपनीयता नीति
-  version: संस्करण २. १, 25 जून २०१८
+  version: Version 2.2, 17 October 2019
   text1: आपको हमारी सेवाओं और संबंधित खाते के सभी लाभ प्रदान करने के लिए, आपके द्वारा कुछ डेटा एकत्र करना आवश्यक है।
-  text2: हमारी सेवाओं (apps और वेबसाइटों) को बनाए रखने और बेहतर बनाने के लिए और आईसीटी और स्टेम/स्टीम शिक्षा पर वैज्ञानिक अनुसंधान करने के लिए, हम गूगल विश्लेषिकी, Crashlytics, और Firebase, गूगल LLC (यूएसए) द्वारा सभी का उपयोग, हमारी सेवाओं के उपयोग के बारे में मेटाडाटा प्राप्त करने के लिए, जैसे, दुर्घटना जानकारी, टाइमस्टैंप, देखे गए पृष्ठ/स्क्रीन, हमारे एप्लिकेशन और सेवाओं के उपयोग, ऑपरेटिंग सिस्टम का उपयोग, और नेटवर्क प्रदाता के बारे में जानकारी । यह विश्लेषण और एकत्रित डेटा आपकी प्रोफ़ाइल से लिंक नहीं है और इसमें कोई भी व्यक्तिगत जानकारी नहीं होती (IP पते के अंतिम बिट्स को अनाम किया जाता है) । हालांकि, एकत्र डेटा सेवा प्रदाता (गूगल LLC, संयुक्त राज्य अमेरिका) को हस्तांतरित हो जाएगा । डेटा प्रोसेसिंग गूगल LLC के साथ एक समझौते पर आधारित है । सेवा प्रदाता के लिए यह संबंध यूरोपीय संघ के सामांय डेटा संरक्षण विनियमन (eu GDPR) और eu-संयुक्त राज्य अमरीका "गोपनीयता शील्ड" समझौते के अनुरूप है ।
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
   text3: हमारे सिस्टम में एक खाता बनाने और उपयोग करने के लिए, और आपको प्रति ई-मेल के बारे में आवश्यक परिवर्तनों के बारे में सूचित करने के लिए, उदाहरण के लिए, हमारी उपयोग की शर्तों और सेवा, हमारे समुदाय के नियमों या हमारी नीतियों के अपडेट या उल्लंघन, हम आपके स्टोर करेंगे उपयोगकर्ता नाम और, यदि आपके द्वारा प्रदान किया गया है, तो आपका ई-मेल पता। यदि आपने गूगल प्लस या फेसबुक के माध्यम से अपना खाता कनेक्ट किया है, तो हम इन सेवाओं पर आपके खाते से जुड़े एक पहचान कुंजी को अतिरिक्त रूप से स्टोर करते हैं। हम इस डेटा का उपयोग किसी अन्य (उदाहरण के लिए, मार्केटिंग) उद्देश्यों के लिए नहीं करेंगे, जब तक कि आपने हमें ऐसा करने की अनुमति नहीं दी।
   text4: एक स्वैच्छिक आधार पर, आप हमें साझा साइट पर अपने खाता पृष्ठ के माध्यम से अपने निवास का देश दे सकते हैं । यह आपके सार्वजनिक प्रोफ़ाइल पर प्रदर्शित हो जाएगा और केवल हमारे द्वारा सांख्यिकीय और अनुसंधान प्रयोजनों के लिए इस्तेमाल किया जाएगा । यह आपकी प्रोफ़ाइल सेटिंग में किसी भी समय निकाला जा सकता है ।
   text5: आप https://share.catrob.at/पर अपने प्रोफ़ाइल पृष्ठ के माध्यम से अपने खाते को हटा कर किसी भी समय अपने खाते से संबंधित व्यक्तिगत डेटा का उपयोग वापस ले सकते हैं । अपने खाते को हटाने के बाद आप अभी भी प्रदान की गई सेवाओं का उपयोग करने के लिए सक्षम हो जाएगा, लेकिन सहयोग करने के लिए नहीं, जैसे, अपलोड कार्यक्रमों के माध्यम से, टिप्पणी, या पसंद. साथ ही, आपके खाते से लिंक की गई सभी सामग्री, जैसे, अपलोड किए गए प्रोग्राम, टिप्पणियाँ आदि, को हटा दिया जाएगा.
@@ -742,24 +790,25 @@ privacy-policy:
   text7: आप स्वेच्छा से Catrobat ंयूज़लेटर के लिए सदस्यता ले सकते हैं, https://catrob.at/newsletter पर MailChimp सेवा के माध्यम से हमारे द्वारा प्रदान की (रॉकेट विज्ञान समूह LLC डी/ इसके बाद आपको Catrobat प्रोजेक्ट और उसकी सेवाओं पर आपके द्वारा प्रदत्त ई-मेल पता पर अद्यतन प्राप्त होंगे । आप हर ंयूजलेटर के पाद लेख में "सदस्यता समाप्त" लिंक का उपयोग करके किसी भी समय ंयूजलेटर वापस ले सकते हैं । इस ंयूजलेटर MailChimp द्वारा प्रदान की है जिनके साथ हम एक डेटा प्रसंस्करण समझौते है और जो यूरोपीय संघ के जनरल डाटा Prodection विनियमन और यूरोपीय संघ के लिए प्रतिबद्ध संयुक्त राज्य अमेरिका "गोपनीयता शील्ड" । MailChimp पर अधिक जानकारी के लिए कृपया यह भी MailChimp की गोपनीयता नीति और उपयोग की शर्तों को देखो ।
   text8: सभी सेवाएं अंतर्राष्ट्रीय Catrobat संघ की छतरी के नीचे मुक्त खुला स्रोत Catrobat परियोजना द्वारा प्रदान की जाती है – Verein zur Förderung freier सॉफ्टवेयर, एक गैर लाभ चरने, ऑस्ट्रिया (यूरोपीय संघ) में शामिल एनजीओ । हमारी नीतियां यूरोपीय संघ और ऑस्ट्रिया के डेटा संरक्षण कानून (GDPR) को संमान देते हैं । हमारे साथ संपर्क में पाने के लिए, कृपया एक ई मेल भेजने के लिए contact@catrobat.org या हमें catrobat, सी/ओ सॉफ्टवेयर प्रौद्योगिकी के संस्थान, चराई प्रौद्योगिकी विश्वविद्यालय, Inffeldgasse 16b, ए-८०१० चराई, ऑस्ट्रिया (यूरोपीय संघ) ।
   text9: यदि आपकी आयु 14 वर्ष से कम है, तो यह पॉलिसी कानूनी अभिभावक (आमतौर पर माता-पिता) द्वारा स्वीकार की जानी चाहिए।
+  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
   disagree-text: अनुमोदन के बिना, हम एक खाता नहीं बना सकते हैं लेकिन मूल विशेषताएं अभी भी उपलब्ध हैं।
 catro-notifications:
   markAsRead: "Mark as read"
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
-    title: 'New comment for program %program_name%!'
-    message: 'User %user_link% commented on your program %program_link%.'
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for program %program_name%!'
-    message: 'User %user_link% liked your program %program_link%.'
+    title: 'New like for project %program_name%!'
+    message: 'User %user_link% liked your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Program from someone you follow'
-    message: 'User %user_link% created a new Program %program_link%'
+    title: 'New Project from someone you follow'
+    message: 'User %user_link% created a new Project %program_link%'
 clipboard:
-  success: Link to program copied to clipboard!
+  success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
 next: अगला
 previous: Previous
@@ -770,6 +819,7 @@ help-cards:
     stepbystep: क्रमशः
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    discord: Join on Discord
     game_design: Game Design
     education: Education platform
     discuss: Discuss
@@ -778,6 +828,7 @@ help-cards:
     tutorials: "Effective tricks in %theme%"
     stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Download the app and get started
+    discord: Join the community on discord
     game_design_1: Effective tricks for
     game_design_2: creating a game
     education: Beginner's course & great resources
@@ -785,7 +836,7 @@ help-cards:
     discuss_2: users
 media-packages:
   title: Media-Packages
-  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: Preview Size
     sm: small

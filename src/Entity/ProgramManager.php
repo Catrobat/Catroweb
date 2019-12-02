@@ -11,15 +11,19 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
+use App\Catrobat\Services\CatrobatFileSanitizer;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Repository\ExtensionRepository;
+use Doctrine\DBAL\Types\GuidType;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -42,6 +46,11 @@ class ProgramManager
   protected $file_extractor;
 
   /**
+   * @var CatrobatFileSanitizer
+   */
+  protected $file_sanitizer;
+
+  /**
    * @var ProgramFileRepository
    */
   protected $file_repository;
@@ -57,7 +66,7 @@ class ProgramManager
   protected $event_dispatcher;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   protected $entity_manager;
 
@@ -76,7 +85,6 @@ class ProgramManager
    */
   protected $program_like_repository;
 
-
   /**
    * @var LoggerInterface
    */
@@ -88,25 +96,33 @@ class ProgramManager
   protected $app_request;
 
   /**
+   * @var ExtensionRepository
+   */
+  protected $extension_repository;
+
+  /**
    * ProgramManager constructor.
    *
    * @param CatrobatFileExtractor    $file_extractor
    * @param ProgramFileRepository    $file_repository
    * @param ScreenshotRepository     $screenshot_repository
-   * @param EntityManager            $entity_manager
+   * @param EntityManagerInterface            $entity_manager
    * @param ProgramRepository        $program_repository
    * @param TagRepository            $tag_repository
    * @param ProgramLikeRepository    $program_like_repository
    * @param EventDispatcherInterface $event_dispatcher
-   * @param LoggerInterface          $logger
-   * @param AppRequest               $app_request
+   * @param LoggerInterface $logger
+   * @param AppRequest $app_request
+   * @param ExtensionRepository $extension_repository
+   * @param CatrobatFileSanitizer $file_sanitizer
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
-                              ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
+                              ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
                               EventDispatcherInterface $event_dispatcher,
-                              LoggerInterface $logger, AppRequest $app_request)
+                              LoggerInterface $logger, AppRequest $app_request,
+                              ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -118,8 +134,9 @@ class ProgramManager
     $this->program_like_repository = $program_like_repository;
     $this->logger = $logger;
     $this->app_request = $app_request;
+    $this->file_sanitizer = $file_sanitizer;
+    $this->extension_repository = $extension_repository;
   }
-
 
   /**
    * @param AddProgramRequest $request
@@ -129,9 +146,16 @@ class ProgramManager
    */
   public function addProgram(AddProgramRequest $request)
   {
+    /**
+     * @var $program Program
+     * @var $extracted_file ExtractedCatrobatFile
+     */
     $file = $request->getProgramfile();
 
     $extracted_file = $this->file_extractor->extract($file);
+
+    $this->file_sanitizer->sanitize($extracted_file);
+
     try
     {
       $event = $this->event_dispatcher->dispatch(
@@ -197,6 +221,8 @@ class ProgramManager
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
 
+    $this->addExtensions($program, $extracted_file);
+
     $this->event_dispatcher->dispatch(
       'catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program)
     );
@@ -216,7 +242,7 @@ class ProgramManager
       $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
     } catch (Exception $e)
     {
-      $this->logger->error("UploadError -> saveProgramAssetsTemp failed!", ["exception" => $e]);
+      $this->logger->error("UploadError -> saveProgramAssetsTemp failed!", ["exception" => $e->getMessage()]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();
@@ -388,6 +414,32 @@ class ProgramManager
     }
   }
 
+
+  /**
+   * @param Program $program
+   * @param ExtractedCatrobatFile $extracted_file
+   *
+   * @throws ORMException
+   */
+  public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file)
+  {
+//     Adding the embroidery extension if an embroidery block was used in the project
+    $EMBROIDERY = "Embroidery";
+    if ($extracted_file !== null && $extracted_file->getProgramXmlProperties() !== null &&
+      strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">') !== false) {
+      /** @var Extension $embroidery_extension */
+      $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
+      if ($embroidery_extension === null) {
+        $embroidery_extension = new Extension();
+        $embroidery_extension->setName($EMBROIDERY);
+        $embroidery_extension->setPrefix(strtoupper($EMBROIDERY));
+        $this->entity_manager->persist($embroidery_extension);
+      }
+      $program->addExtension($embroidery_extension);
+    }
+
+  }
+
   /**
    * @param Program $program
    */
@@ -459,7 +511,7 @@ class ProgramManager
   }
 
   /**
-   * @param      $user_id
+   * @param GuidType $user_id
    * @param bool $include_debug_build_programs If programs marked as debug_build should be returned
    *
    * @return Program[]
@@ -470,6 +522,20 @@ class ProgramManager
       true : $this->app_request->isDebugBuildRequest();
 
     return $this->program_repository->getUserPrograms($user_id, $debug_build);
+  }
+
+  /**
+   * @param      $user_id
+   * @param bool $include_debug_build_programs If programs marked as debug_build should be returned
+   *
+   * @return Program[]
+   */
+  public function getPublicUserPrograms($user_id, bool $include_debug_build_programs = false)
+  {
+    $debug_build = ($include_debug_build_programs === true) ?
+      true : $this->app_request->isDebugBuildRequest();
+
+    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build);
   }
 
   /**

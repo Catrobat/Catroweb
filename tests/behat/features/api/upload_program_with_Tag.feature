@@ -3,11 +3,8 @@ Feature: Upload a program with tag
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 12345    | cccccccccc |
-    And there are programs:
-      | id | name      | description | owned by | downloads | views | upload time      | version |
-      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc |  1 |
     And there are tags:
       | id | en    | de         |
       | 1  | Games | Spiele     |
@@ -18,7 +15,7 @@ Feature: Upload a program with tag
   Scenario: get all tags for language english before upload
     Given I want to upload a program
     And I have a parameter "language" with value "de"
-    When I GET the tag list from "/pocketcode/api/tags/getTags.json" with these parameters
+    When I GET the tag list from "/app/api/tags/getTags.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -35,7 +32,7 @@ Feature: Upload a program with tag
   Scenario: get all tags in english and statuscode 404 when no language is passed
     Given I want to upload a program
     And I have no parameters
-    When I GET the tag list from "/pocketcode/api/tags/getTags.json" with these parameters
+    When I GET the tag list from "/app/api/tags/getTags.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -52,7 +49,7 @@ Feature: Upload a program with tag
   Scenario: get all tags in english and statuscode 404 when a none existing language is passed
     Given I want to upload a program
     And I have a parameter "language" with value "NotExisting"
-    When I GET the tag list from "/pocketcode/api/tags/getTags.json" with these parameters
+    When I GET the tag list from "/app/api/tags/getTags.json" with these parameters
     Then I should get the json object:
       """
       {

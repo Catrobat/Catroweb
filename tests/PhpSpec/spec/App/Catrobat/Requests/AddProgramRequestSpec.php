@@ -8,9 +8,13 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AddProgramRequestSpec extends ObjectBehavior
 {
-  public function let(User $user, File $file)
+  private $file;
+
+  public function let(User $user)
   {
-    $this->beConstructedWith($user, $file);
+    fopen('/tmp/phpSpecTest', 'w');
+    $this->file = new File('/tmp/phpSpecTest');
+    $this->beConstructedWith($user, $this->file);
   }
 
   public function it_is_initializable()
@@ -26,9 +30,11 @@ class AddProgramRequestSpec extends ObjectBehavior
     $this->getUser()->shouldReturn($new_user);
   }
 
-  public function it_holds_a_file(File $file, File $new_file)
+  public function it_holds_a_file()
   {
-    $this->getProgramfile()->shouldReturn($file);
+    $new_file = $this->file;
+
+    $this->getProgramfile()->shouldReturn($this->file);
     $this->setProgramfile($new_file);
     $this->getProgramfile()->shouldReturn($new_file);
   }

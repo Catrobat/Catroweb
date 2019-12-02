@@ -2,18 +2,19 @@
 
 namespace App\Catrobat\Controller\Security;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 /**
  * Class LogoutController
  * @package App\Catrobat\Controller\Security
  */
-class LogoutController extends Controller
+class LogoutController extends AbstractController
 {
 
   /**
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @return RedirectResponse
    */
   public function logoutAction()
   {

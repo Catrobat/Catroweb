@@ -5,24 +5,27 @@ namespace App\Catrobat\Controller\Web;
 use App\Entity\Program;
 use App\Entity\StarterCategory;
 use App\Catrobat\Services\ScreenshotRepository;
+use Doctrine\DBAL\Types\GuidType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Twig\Error\Error;
 
 
 /**
  * Class TutorialController
  * @package App\Catrobat\Controller\Web
  */
-class TutorialController extends Controller
+class TutorialController extends AbstractController
 {
 
   /**
    * @Route("/help", name="catrobat_web_help", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function helpAction()
   {
@@ -36,8 +39,8 @@ class TutorialController extends Controller
    * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1},
    *                                requirements={"page":"\d+"}, methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function stepByStepAction()
   {
@@ -51,8 +54,8 @@ class TutorialController extends Controller
    *
    * @param $page
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function tutorialCardsAction($page)
   {
@@ -81,10 +84,10 @@ class TutorialController extends Controller
 
 
   /**
-   * @Route("/starter-programs", name="catrobat_web_starter", methods={"GET"})
+   * @Route("/starter-project/", name="catrobat_web_starter", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function starterProgramsAction()
   {
@@ -105,15 +108,15 @@ class TutorialController extends Controller
 
 
   /**
-   * @Route("/category-programs/{id}", name="catrobat_web_category_programs", requirements={"id":"\d+"},
-   *                                   methods={"GET"})
+   * @Route("/category-project//{id}", name="catrobat_web_category_programs", methods={"GET"})
    *
    * @param Request $request
-   * @param         $id
+   * @param GuidType  $id
+   * @param ScreenshotRepository  $screenshot_repository
    *
    * @return JsonResponse
    */
-  public function categoryProgramsAction(Request $request, $id)
+  public function categoryProgramsAction(Request $request, $id, ScreenshotRepository $screenshot_repository)
   {
     /**
     * @var $program Program
@@ -122,12 +125,10 @@ class TutorialController extends Controller
     $em = $this->getDoctrine()->getManager();
     $programs = $em->getRepository('App\Entity\Program')->findBy(['category' => $id]);
 
-    $screenshot_repository = $this->get('screenshotrepository');
-
     $retArray = $this->receiveCategoryPrograms($request, $programs, $screenshot_repository);
 
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
+      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
       'TotalProjects'     => count($programs),
       'ProjectsExtension' => '.catrobat',
     ];
@@ -139,8 +140,8 @@ class TutorialController extends Controller
   /**
    * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
    *
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Twig\Error\Error
+   * @return Response
+   * @throws Error
    */
   public function gameJamAction()
   {
@@ -286,7 +287,7 @@ class TutorialController extends Controller
         'Downloads'       => $program->getDownloads(),
         'ScreenshotSmall' => $screenshot_repository->getThumbnailWebPath($program->getId()),
         'ProjectUrl'      => ltrim($this->generateUrl('program', [
-          'flavor' => $request->attributes->get('flavor'),
+          'flavor' => $request->get('flavor'),
           'id'     => $program->getId(),
         ]), '/'),
       ];

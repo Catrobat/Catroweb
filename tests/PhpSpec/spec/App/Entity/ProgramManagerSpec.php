@@ -6,16 +6,19 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
+use App\Catrobat\Services\CatrobatFileSanitizer;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\User;
+use App\Repository\ExtensionRepository;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -35,32 +38,39 @@ class ProgramManagerSpec extends ObjectBehavior
 {
 
   /**
-   * @param CatrobatFileExtractor|Collaborator    $file_extractor
-   * @param ProgramFileRepository|Collaborator    $file_repository
-   * @param ScreenshotRepository|Collaborator     $screenshot_repository
-   * @param EntityManager|Collaborator            $entity_manager
-   * @param ProgramRepository|Collaborator        $program_repository
-   * @param Collaborator|EventDispatcherInterface $event_dispatcher
-   * @param AddProgramRequest|Collaborator        $request
-   * @param Collaborator|File                     $file
-   * @param User|Collaborator                     $user
-   * @param ExtractedCatrobatFile|Collaborator    $extracted_file
-   * @param Program|Collaborator                  $inserted_program
-   * @param TagRepository|Collaborator            $tag_repository
-   * @param ProgramLikeRepository|Collaborator    $program_like_repository
-   * @param AppRequest|Collaborator               $app_request
+   * @param CatrobatFileExtractor $file_extractor
+   * @param ProgramFileRepository $file_repository
+   * @param ScreenshotRepository $screenshot_repository
+   * @param EntityManager $entity_manager
+   * @param ProgramRepository $program_repository
+   * @param EventDispatcherInterface $event_dispatcher
+   * @param AddProgramRequest $request
+   * @param User $user
+   * @param ExtractedCatrobatFile $extracted_file
+   * @param Program $inserted_program
+   * @param TagRepository $tag_repository
+   * @param ProgramLikeRepository $program_like_repository
+   * @param LoggerInterface $logger
+   * @param AppRequest $app_request
+   * @param ExtensionRepository $extension_repository
+   * @param CatrobatFileSanitizer $catrobat_file_sanitizer
    */
   public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                       ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
                       ProgramRepository $program_repository, EventDispatcherInterface $event_dispatcher,
-                      AddProgramRequest $request, File $file, User $user, ExtractedCatrobatFile $extracted_file,
+                      AddProgramRequest $request, User $user, ExtractedCatrobatFile $extracted_file,
                       Program $inserted_program, TagRepository $tag_repository,
                       ProgramLikeRepository $program_like_repository, LoggerInterface $logger,
-                      AppRequest $app_request)
+                      AppRequest $app_request,
+                      ExtensionRepository $extension_repository, CatrobatFileSanitizer $catrobat_file_sanitizer)
   {
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository,
       $entity_manager, $program_repository, $tag_repository, $program_like_repository,
-      $event_dispatcher, $logger, $app_request);
+      $event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer);
+
+    fopen('/tmp/phpSpecTest', 'w');
+    $file = new File('/tmp/phpSpecTest');
+
     $request->getProgramfile()->willReturn($file);
     $request->getUser()->willReturn($user);
     $request->getIp()->willReturn('127.0.0.1');
@@ -157,6 +167,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $extracted_file->getLanguageVersion()->willReturn(null);
     $extracted_file->getTags()->willReturn(null);
     $extracted_file->isDebugBuild()->willReturn(null);
+    $extracted_file->getProgramXmlProperties()->willReturn(null);
 
     $entity_manager->persist(Argument::type('\App\Entity\Program'))->will(function ($args) {
       $args[0]->setId(1);

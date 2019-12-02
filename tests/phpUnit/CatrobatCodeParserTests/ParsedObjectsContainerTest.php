@@ -9,7 +9,7 @@ class ParsedObjectsContainerTest extends \PHPUnit\Framework\TestCase
 {
   protected $container;
 
-  public function setUp()
+  public function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->container = new ParsedScene($xml_properties->xpath('//scene')[0]);

@@ -21,6 +21,7 @@ use App\Catrobat\Exceptions\Upload\MissingChecksumException;
 use App\Catrobat\Exceptions\Upload\InvalidChecksumException;
 use App\Catrobat\Exceptions\Upload\MissingPostDataException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use App\Repository\GameJamRepository;
 use App\Catrobat\Exceptions\Upload\NoGameJamException;
@@ -72,20 +73,20 @@ class UploadController
    */
   private $logger;
 
+
   /**
    * UploadController constructor.
    *
-   * @param UserManager         $usermanager
-   * @param TokenStorage        $tokenstorage
-   * @param ProgramManager      $programmanager
-   * @param GameJamRepository   $gamejamrepository
-   * @param TokenGenerator      $tokengenerator
-   * @param TranslatorInterface $translator
-   * @param LoggerInterface     $logger
+   * @param UserManager           $usermanager
+   * @param TokenStorageInterface $tokenstorage
+   * @param ProgramManager        $programmanager
+   * @param GameJamRepository     $gamejamrepository
+   * @param TokenGenerator        $tokengenerator
+   * @param TranslatorInterface   $translator
+   * @param LoggerInterface       $logger
    * @param CatroNotificationService $catroNotificationService
    */
-
-  public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager,
+  public function __construct(UserManager $usermanager, TokenStorageInterface $tokenstorage, ProgramManager $programmanager,
                               GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator,
                               TranslatorInterface $translator, LoggerInterface $logger,
                               CatroNotificationService $catroNotificationService)
@@ -111,6 +112,7 @@ class UploadController
    */
   public function uploadAction(Request $request)
   {
+    $this->logger->info("Uploading a project...");
     return $this->processUpload($request);
   }
 
@@ -197,6 +199,7 @@ class UploadController
       }
       $response = $this->createUploadResponse($request, $gamejam, $user, $program);
     }
+    $this->logger->info("Uploading a project done : " . json_encode($response));
     return JsonResponse::create($response);
   }
 
@@ -282,7 +285,6 @@ class UploadController
       $response['form'] = $this->assembleFormUrl($gamejam, $user, $program, $request);
     }
 
-    $request->attributes->set('post_to_facebook', false);
     $request->attributes->set('program_id', $program->getId());
     $response['preHeaderMessages'] = '';
 
@@ -311,7 +313,6 @@ class UploadController
     $response['answer'] = $this->trans('failure.upload');
     $response['token'] = $user->getUploadToken();
 
-    $request->attributes->set('post_to_facebook', false);
     $request->attributes->set('program_id', 0);
     $response['preHeaderMessages'] = '';
 
