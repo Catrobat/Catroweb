@@ -251,6 +251,12 @@
           </button>
         </div>
 
+         <div id="steal-button" class="btn-container col-12 col-xl-6">
+          <button class="btn btn-primary"> 
+            <i>Steal me</i>
+          </button>
+        </div>
+
         {% if not isIOSWebview() %}
         <div id="apk-generate" class="btn-container col-12 col-xl-6">
           <button class="btn btn-primary">
@@ -517,6 +523,21 @@
     {
       event.preventDefault()
     }
+
+      $(document).on('click', '#steal-button', function () {
+
+ $.ajax({
+              url    : "{{ path('program_steal', { 'project_id' : program.id }) }}",
+              type   : 'get',
+              success: function (remixData) {
+             alert('Stolen!')
+              },
+              error  : function () {
+                alert('Unable to steal!')
+              }
+            })
+            
+                  })
 
     $(document).on('click', '#url-download', function () {
       var url_link = document.getElementById('url-download')
