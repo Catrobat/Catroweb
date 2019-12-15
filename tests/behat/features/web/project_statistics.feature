@@ -6,15 +6,15 @@ Feature: As a visitor I want to see a project page
       | id | name     |
       | 1  | Catrobat |
     And there are projects:
-      | id | name      | downloads | owned by | views | apk_ready |
-      | 1  | project 1 | 5         | Catrobat | 42    | true      |
+      | id | name      | downloads | owned by | views | apk_ready | upload time      |
+      | 1  | project 1 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 |
 
   Scenario: Viewing project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "project 1"
     And I should see "Catrobat"
-    And I should see "1 minute ago"
+    And I should see "more than one year ago"
     And I should see "0.00 MB"
     And I should see "5 downloads"
     And I should see "43 views"

@@ -153,8 +153,8 @@ class CatrobatFileSanitizer
   }
 
   /**
-   * @param $filename
-   * @param $relative_filepath
+   * @param                       $filename
+   * @param                       $relative_filepath
    * @param ExtractedCatrobatFile $extracted_file
    *
    * @return bool
@@ -166,8 +166,8 @@ class CatrobatFileSanitizer
   }
 
   /**
-   * @param $filename
-   * @param $relative_filepath
+   * @param                       $filename
+   * @param                       $relative_filepath
    * @param ExtractedCatrobatFile $extracted_file
    *
    * @return bool
@@ -178,10 +178,10 @@ class CatrobatFileSanitizer
   }
 
   /**
-   * @param $dir_name
-   * @param $paths_array
-   * @param $filename
-   * @param $relative_filepath
+   * @param                       $dir_name
+   * @param                       $paths_array
+   * @param                       $filename
+   * @param                       $relative_filepath
    * @param ExtractedCatrobatFile $extracted_file
    *
    * @return bool
@@ -247,7 +247,9 @@ class CatrobatFileSanitizer
    */
   private function getRelativePath($filepath)
   {
-    $needle = @end(preg_split('@/@', $this->extracted_file_root_path, null, PREG_SPLIT_NO_EMPTY));
+    $limit = null;
+    $pattern = '@/@';
+    $needle = @end(preg_split($pattern, $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY));
     $relative_filepath = strstr($filepath, $needle);
 
     return str_replace($needle, '', $relative_filepath);

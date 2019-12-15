@@ -22,7 +22,8 @@ use Doctrine\ORM\Mapping as ORM;
  *   "like" = "LikeNotification",
  *   "follow" = "FollowNotification",
  *   "follow_program" = "NewProgramNotification",
- *   "broadcast_notification" = "BroadcastNotification"
+ *   "broadcast_notification" = "BroadcastNotification",
+ *   "remix_notification" = "RemixNotification"
  * })
  */
 class CatroNotification
@@ -56,7 +57,7 @@ class CatroNotification
   /**
    * @ORM\Column(name="seen", type="boolean", options={"default":false})
    */
-  private $seen =  false;
+  private $seen = false;
 
   private $twig_template = "Notifications/NotificationTypes/catro_notification.html.twig";
 
@@ -111,6 +112,7 @@ class CatroNotification
   {
     return $this->title;
   }
+
   /**
    * Set seen
    *
@@ -134,6 +136,7 @@ class CatroNotification
   {
     return $this->seen;
   }
+
   /**
    * Set message
    *
@@ -197,9 +200,6 @@ class CatroNotification
   {
     $this->twig_template = $twig_template;
   }
-
-
-
 
 
 }

@@ -2,6 +2,7 @@
 
 namespace tests\PhpSpec\spec\App\Catrobat\Services;
 
+use App\Repository\ProgramRepository;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -45,178 +46,178 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
       . 'The Periodic Table [/app/project/3570]');
   }
 
-  public function it_gets_relative_and_absolute_remix_urls()
+  public function it_gets_relative_and_absolute_remix_urls(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/app/project/3570';
-    $new_program_id = 3571;
+    $new_program_id = "3571";
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(2);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(117697631);
+    $urls[0]->getProgramId()->shouldReturn("117697631");
     $urls[0]->isScratchProgram()->shouldReturn(true);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[1]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[1]->getUrl()->shouldReturn($second_expected_url);
-    $urls[1]->getProgramId()->shouldReturn(3570);
+    $urls[1]->getProgramId()->shouldReturn("3570");
     $urls[1]->isScratchProgram()->shouldReturn(false);
     $urls[1]->isAbsoluteUrl()->shouldReturn(false);
   }
 
-  public function it_can_extract_simple_catrobat_absolute_remix_url()
+  public function it_can_extract_simple_catrobat_absolute_remix_url(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://pocketcode.org/details/1234/';
     $this->getProgramXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = 1300;
+    $new_program_id = "1300";
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(1234);
+    $urls[0]->getProgramId()->shouldReturn("1234");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_should_not_extract_number_from_normal_text()
+  public function it_should_not_extract_number_from_normal_text(ProgramRepository $program_repository)
   {
     $first_expected_url = 'SomeText 123';
     $this->getProgramXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = 124;
+    $new_program_id = "124";
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(0);
   }
 
-  public function it_can_extract_simple_scratch_absolute_remix_url()
+  public function it_can_extract_simple_scratch_absolute_remix_url(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $this->getProgramXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = 1;
+    $new_program_id = "1";
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(117697631);
+    $urls[0]->getProgramId()->shouldReturn("117697631");
     $urls[0]->isScratchProgram()->shouldReturn(true);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_can_extract_simple_relative_catrobat_remix_url()
+  public function it_can_extract_simple_relative_catrobat_remix_url(ProgramRepository $program_repository)
   {
     $first_expected_url = '/app/flavors/3570/';
     $this->getProgramXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = 6310;
+    $new_program_id = "6310";
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(3570);
+    $urls[0]->getProgramId()->shouldReturn("3570");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(false);
   }
 
-  public function it_can_extract_merged_program_remix_urls()
+  public function it_can_extract_merged_program_remix_urls(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
-    $new_program_id = 3571;
+    $new_program_id = "3571";
 
     $remixes_string = 'スーパー時計 12 [' . $first_expected_url . '], The Periodic Table 2 [' . $second_expected_url . ']]';
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(2);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(1234);
+    $urls[0]->getProgramId()->shouldReturn("1234");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[1]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[1]->getUrl()->shouldReturn($second_expected_url);
-    $urls[1]->getProgramId()->shouldReturn(3570);
+    $urls[1]->getProgramId()->shouldReturn("3570");
     $urls[1]->isScratchProgram()->shouldReturn(false);
     $urls[1]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_extract_unique_program_remix_urls()
+  public function it_extract_unique_program_remix_urls(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/1234/';
-    $new_program_id = 3571;
+    $new_program_id = "3571";
 
     $remixes_string = 'スーパー時計 12 [' . $first_expected_url . '], The Periodic Table 2 [' . $second_expected_url . ']]';
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(1234);
+    $urls[0]->getProgramId()->shouldReturn("1234");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_dont_extract_program_remix_urls_referencing_to_current_program()
+  public function it_dont_extract_program_remix_urls_referencing_to_current_program(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
-    $new_program_id = 1234;
+    $new_program_id = "1234";
 
     $remixes_string = 'スーパー時計 12 [' . $first_expected_url . '], The Periodic Table 2 [' . $second_expected_url . ']]';
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($second_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(790);
+    $urls[0]->getProgramId()->shouldReturn("790");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_extract_only_older_program_remix_urls()
+  public function it_extract_only_older_program_remix_urls(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
-    $new_program_id = 791;
+    $new_program_id = "791";
 
     $remixes_string = 'スーパー時計 12 [' . $first_expected_url . '], The Periodic Table 2 [' . $second_expected_url . ']]';
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($second_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(790);
+    $urls[0]->getProgramId()->shouldReturn("790");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_can_extract_double_merged_program_remix_urls()
+  public function it_can_extract_double_merged_program_remix_urls(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
-    $new_program_id = 3571;
+    $new_program_id = "3571";
 
     $remixes_string = 'スーパー時計 12 [' . $first_expected_url
       . '], いやいや棒 [ 01 やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $second_expected_url
@@ -224,34 +225,34 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(3);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(1234);
+    $urls[0]->getProgramId()->shouldReturn("1234");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[1]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[1]->getUrl()->shouldReturn($second_expected_url);
-    $urls[1]->getProgramId()->shouldReturn(3570);
+    $urls[1]->getProgramId()->shouldReturn("3570");
     $urls[1]->isScratchProgram()->shouldReturn(false);
     $urls[1]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[2]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[2]->getUrl()->shouldReturn($third_expected_url);
-    $urls[2]->getProgramId()->shouldReturn(121648946);
+    $urls[2]->getProgramId()->shouldReturn("121648946");
     $urls[2]->isScratchProgram()->shouldReturn(true);
     $urls[2]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_extract_unique_program_remix_urls_of_double_merged_program()
+  public function it_extract_unique_program_remix_urls_of_double_merged_program(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'https://scratch.mit.edu/projects/121648946/';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
-    $new_program_id = 3571;
+    $new_program_id = "3571";
 
     $remixes_string = 'スーパー時計 12 [' . $first_expected_url
       . '], いやいや棒 [ 01 やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $second_expected_url
@@ -259,28 +260,28 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(2);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(1234);
+    $urls[0]->getProgramId()->shouldReturn("1234");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[1]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[1]->getUrl()->shouldReturn($second_expected_url);
-    $urls[1]->getProgramId()->shouldReturn(121648946);
+    $urls[1]->getProgramId()->shouldReturn("121648946");
     $urls[1]->isScratchProgram()->shouldReturn(true);
     $urls[1]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_dont_extract_program_remix_urls_referencing_to_current_double_merged_program()
+  public function it_dont_extract_program_remix_urls_referencing_to_current_double_merged_program(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/7901';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
-    $new_program_id = 7901;
+    $new_program_id = "7901";
 
     $remixes_string = 'スーパー時計 12 [' . $first_expected_url
       . '], いやいや棒 [ 01 やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $second_expected_url
@@ -288,23 +289,23 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(1234);
+    $urls[0]->getProgramId()->shouldReturn("1234");
     $urls[0]->isScratchProgram()->shouldReturn(false);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_can_extract_multiple_merged_remix_urls()
+  public function it_can_extract_multiple_merged_remix_urls(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/3570';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
     $fourth_expected_url = 'https://share.catrob.at/app/project/16267';
-    $new_program_id = 16268;
+    $new_program_id = "16268";
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url
       . '], The 12 Periodic Table 234 [' . $second_expected_url . ']], スーパー時計 [' . $third_expected_url
@@ -312,41 +313,41 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(4);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(117697631);
+    $urls[0]->getProgramId()->shouldReturn("117697631");
     $urls[0]->isScratchProgram()->shouldReturn(true);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[1]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[1]->getUrl()->shouldReturn($second_expected_url);
-    $urls[1]->getProgramId()->shouldReturn(3570);
+    $urls[1]->getProgramId()->shouldReturn("3570");
     $urls[1]->isScratchProgram()->shouldReturn(false);
     $urls[1]->isAbsoluteUrl()->shouldReturn(false);
 
     $urls[2]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[2]->getUrl()->shouldReturn($third_expected_url);
-    $urls[2]->getProgramId()->shouldReturn(121648946);
+    $urls[2]->getProgramId()->shouldReturn("121648946");
     $urls[2]->isScratchProgram()->shouldReturn(true);
     $urls[2]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[3]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[3]->getUrl()->shouldReturn($fourth_expected_url);
-    $urls[3]->getProgramId()->shouldReturn(16267);
+    $urls[3]->getProgramId()->shouldReturn("16267");
     $urls[3]->isScratchProgram()->shouldReturn(false);
     $urls[3]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_extract_unique_program_remix_urls_of_multiple_merged_program()
+  public function it_extract_unique_program_remix_urls_of_multiple_merged_program(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;
     $fourth_expected_url = 'https://share.catrob.at/app/project/16267';
-    $new_program_id = 16268;
+    $new_program_id = "16268";
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url
       . '], The 12 Periodic Table 234 [' . $second_expected_url . ']], スーパー時計 [' . $third_expected_url
@@ -354,29 +355,29 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(2);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(117697631);
+    $urls[0]->getProgramId()->shouldReturn("117697631");
     $urls[0]->isScratchProgram()->shouldReturn(true);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[1]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[1]->getUrl()->shouldReturn($second_expected_url);
-    $urls[1]->getProgramId()->shouldReturn(16267);
+    $urls[1]->getProgramId()->shouldReturn("16267");
     $urls[1]->isScratchProgram()->shouldReturn(false);
     $urls[1]->isAbsoluteUrl()->shouldReturn(false);
   }
 
-  public function it_extract_only_older_program_remix_urls_of_multiple_merged_program_if_it_is_an_initial_version()
+  public function it_extract_only_older_program_remix_urls_of_multiple_merged_program_if_it_is_an_initial_version(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16268';
     $third_expected_url = $first_expected_url;
     $fourth_expected_url = 'https://share.catrob.at/app/project/16268';
-    $new_program_id = 16267;
+    $new_program_id = "16267";
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url
       . '], The 12 Periodic Table 234 [' . $second_expected_url . ']], スーパー時計 [' . $third_expected_url
@@ -384,23 +385,23 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, true);
+    $urls = $this->getRemixesData($new_program_id, true, $program_repository);
     $urls->shouldHaveCount(1);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(117697631);
+    $urls[0]->getProgramId()->shouldReturn("117697631");
     $urls[0]->isScratchProgram()->shouldReturn(true);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
   }
 
-  public function it_extract_older_program_remix_urls_of_multiple_merged_program_if_it_is_not_an_initial_version()
+  public function it_extract_older_program_remix_urls_of_multiple_merged_program_if_it_is_not_an_initial_version(ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;
     $fourth_expected_url = 'https://share.catrob.at/app/project/16268';
-    $new_program_id = 16267;
+    $new_program_id = "16267";
 
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 [' . $first_expected_url
       . '], The 12 Periodic Table 234 [' . $second_expected_url . ']], スーパー時計 [' . $third_expected_url
@@ -408,18 +409,18 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
     $this->getProgramXmlProperties()->header->url = $remixes_string;
 
-    $urls = $this->getRemixesData($new_program_id, false);
+    $urls = $this->getRemixesData($new_program_id, false, $program_repository);
     $urls->shouldHaveCount(2);
 
     $urls[0]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[0]->getUrl()->shouldReturn($first_expected_url);
-    $urls[0]->getProgramId()->shouldReturn(117697631);
+    $urls[0]->getProgramId()->shouldReturn("117697631");
     $urls[0]->isScratchProgram()->shouldReturn(true);
     $urls[0]->isAbsoluteUrl()->shouldReturn(true);
 
     $urls[1]->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
     $urls[1]->getUrl()->shouldReturn($fourth_expected_url);
-    $urls[1]->getProgramId()->shouldReturn(16268);
+    $urls[1]->getProgramId()->shouldReturn("16268");
     $urls[1]->isScratchProgram()->shouldReturn(false);
     $urls[1]->isAbsoluteUrl()->shouldReturn(true);
   }

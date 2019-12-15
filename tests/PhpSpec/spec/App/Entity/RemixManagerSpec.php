@@ -4,6 +4,7 @@ namespace tests\PhpSpec\spec\App\Entity;
 
 use App\Catrobat\RemixGraph\RemixGraphManipulator;
 use App\Catrobat\Requests\AppRequest;
+use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Entity\ProgramRemixRelation;
@@ -37,6 +38,8 @@ class RemixManagerSpec extends ObjectBehavior
    * @param ScratchProgramRemixRepository|Collaborator  $scratch_program_remix_repository
    * @param RemixGraphManipulator|Collaborator          $remix_graph_manipulator
    * @param AppRequest|Collaborator                     $app_request
+   * @param CatroNotificationService|Collaborator       $catro_notification_service
+
    */
   public function let(EntityManager $entity_manager, ProgramRepository $program_repository,
                       ScratchProgramRepository $scratch_program_repository,
@@ -44,11 +47,11 @@ class RemixManagerSpec extends ObjectBehavior
                       ProgramRemixBackwardRepository $program_remix_backward_repository,
                       ScratchProgramRemixRepository $scratch_program_remix_repository,
                       RemixGraphManipulator $remix_graph_manipulator,
-                      AppRequest $app_request)
+                      AppRequest $app_request,CatroNotificationService $catro_notification_service)
   {
     $this->beConstructedWith($entity_manager, $program_repository, $scratch_program_repository,
       $program_remix_repository, $program_remix_backward_repository, $scratch_program_remix_repository,
-      $remix_graph_manipulator, $app_request);
+      $remix_graph_manipulator, $app_request, $catro_notification_service);
   }
 
   /**
