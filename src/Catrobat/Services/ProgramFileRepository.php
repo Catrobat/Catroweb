@@ -119,7 +119,7 @@ class ProgramFileRepository
   /**
    * @param $id
    *
-   * @return File
+   * @return File|null
    */
   public function getProgramFile($id)
   {

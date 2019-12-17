@@ -87,9 +87,9 @@ host(getenv('DEPLOY_POREVIEW'))
 
 host(getenv('DEPLOY_CATBLOCKS'))
   ->stage('catblocks')
-  ->set('symfony_env', 'prod')
+  ->set('symfony_env', 'dev')
   ->set('branch', getenv('DEPLOY_CATBLOCKS_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
 host(getenv('DEPLOY_ANDROID'))

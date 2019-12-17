@@ -4,6 +4,7 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
+use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -67,9 +68,9 @@ class ProgramController extends AbstractController
   /**
    * @Route("/project/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
    *
-   * @param Request $request
-   * @param $id
-   * @param RemixManager $remix_manager
+   * @param Request              $request
+   * @param                      $id
+   * @param RemixManager         $remix_manager
    * @param ScreenshotRepository $screenshot_repository
    *
    * @return JsonResponse
@@ -118,15 +119,18 @@ class ProgramController extends AbstractController
    * @param ElapsedTimeStringFormatter $elapsed_time
    * @param RemixManager               $remix_manager
    * @param GameJamRepository          $game_jam_repository
+   * @param ExtractedFileRepository    $extractedFileRepository
    *
    * @return Response
+   * @throws NonUniqueResultException
    * @throws ORMException
    * @throws OptimisticLockException
    */
   public function projectAction(Request $request, $id, ProgramManager $program_manager,
                                 ScreenshotRepository $screenshot_repository,
                                 ElapsedTimeStringFormatter $elapsed_time,
-                                RemixManager $remix_manager, GameJamRepository $game_jam_repository)
+                                RemixManager $remix_manager, GameJamRepository $game_jam_repository,
+                                ExtractedFileRepository $extractedFileRepository)
   {
     /**
      * @var $user             User
@@ -191,6 +195,8 @@ class ProgramController extends AbstractController
       $my_program = true;
     }
 
+    $extractedFileRepository->loadProgramExtractedFile($project);
+
     return $this->render('Program/program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $project,
@@ -215,7 +221,6 @@ class ProgramController extends AbstractController
    * @param ProgramManager              $program_manager
    * @param CatroNotificationRepository $notification_repo
    * @param CatroNotificationService    $notification_service
-   * @param TranslatorInterface         $translator
    *
    * @return JsonResponse|RedirectResponse
    * @throws ORMException
@@ -355,7 +360,7 @@ class ProgramController extends AbstractController
     }, $program_manager->findProgramLikeTypes($project->getId()));
 
     return new JsonResponse([
-      'totalLikeCount' => [
+      'totalLikeCount'  => [
         'value'       => $total_like_count,
         'stringValue' => AppExtension::humanFriendlyNumber($total_like_count, $translator, $user_locale),
       ],
@@ -477,11 +482,11 @@ class ProgramController extends AbstractController
    * @Route("/editProjectDescription/{id}/{newDescription}", name="edit_program_description",
    *   options={"expose"=true}, methods={"GET"})
    *
-   * @param GuidType $id
-   * @param string  $newDescription
-   * @param RudeWordFilter  $rude_word_filter
-   * @param ProgramManager  $program_manager
-   * @param TranslatorInterface  $translator
+   * @param GuidType            $id
+   * @param string              $newDescription
+   * @param RudeWordFilter      $rude_word_filter
+   * @param ProgramManager      $program_manager
+   * @param TranslatorInterface $translator
    *
    * @return Response
    * @throws Exception
@@ -491,8 +496,8 @@ class ProgramController extends AbstractController
                                          ProgramManager $program_manager, TranslatorInterface $translator)
   {
     /**
-     * @var User           $user
-     * @var Program        $program
+     * @var User    $user
+     * @var Program $program
      */
 
     $max_description_size = $this->getParameter("catrobat.max_description_upload_size");
@@ -541,22 +546,22 @@ class ProgramController extends AbstractController
    * @Route("/editProjectCredits/{id}/{newCredits}", name="edit_program_credits",
    *   options={"expose"=true}, methods={"GET"},)
    *
-   * @param GuidType $id
-   * @param string  $newCredits
-   * @param RudeWordFilter  $rude_word_filter
-   * @param ProgramManager  $program_manager
-   * @param TranslatorInterface  $translator
+   * @param GuidType            $id
+   * @param string              $newCredits
+   * @param RudeWordFilter      $rude_word_filter
+   * @param ProgramManager      $program_manager
+   * @param TranslatorInterface $translator
    *
    * @return Response
    * @throws Exception
    *
    */
   public function editProgramCredits($id, $newCredits, RudeWordFilter $rude_word_filter,
-                                         ProgramManager $program_manager, TranslatorInterface $translator)
+                                     ProgramManager $program_manager, TranslatorInterface $translator)
   {
     /**
-     * @var User           $user
-     * @var Program        $program
+     * @var User    $user
+     * @var Program $program
      */
 
     $max_credits_size = $this->getParameter("catrobat.max_credits_upload_size");
@@ -640,9 +645,9 @@ class ProgramController extends AbstractController
 
 
   /**
-   * @param Request $request
-   * @param Program $program
-   * @param         $viewed
+   * @param Request        $request
+   * @param Program        $program
+   * @param                $viewed
    * @param ProgramManager $program_manager
    *
    * @throws ORMException
@@ -673,7 +678,7 @@ class ProgramController extends AbstractController
    *
    * @return array
    */
-  private function createProgramDetailsArray($screenshot_repository, $program, $active_like_types,
+  private function createProgramDetailsArray(ScreenshotRepository $screenshot_repository, $program, $active_like_types,
                                              $active_user_like_types, $total_like_count, $elapsed_time,
                                              $referrer, $program_comments, $request, $remix_manager)
   {
@@ -820,10 +825,10 @@ class ProgramController extends AbstractController
   /**
    * @Route("/project/{id}/uploadThumbnail", name="upload_project_thumbnail", methods={"POST"})
    *
-   * @param Request $request
-   * @param ProgramManager $project_manager
+   * @param Request              $request
+   * @param ProgramManager       $project_manager
    * @param ScreenshotRepository $screenshot_repository
-   * @param $id
+   * @param                      $id
    *
    * @return JsonResponse|RedirectResponse
    * @throws ImagickException
@@ -832,7 +837,7 @@ class ProgramController extends AbstractController
                                      ScreenshotRepository $screenshot_repository, $id)
   {
     /**
-     * @var $user User
+     * @var $user    User
      * @var $project Program
      */
     $user = $this->getUser();
@@ -856,7 +861,7 @@ class ProgramController extends AbstractController
     $screenshot_repository->updateProgramAssets($image, $id);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode'   => StatusCode::OK,
       'image_base64' => null,
     ]);
   }

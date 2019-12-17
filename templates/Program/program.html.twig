@@ -389,10 +389,15 @@
   </div>
 
   {#
-     # CODEVIEW
+     # CODEVIEW & CatBlocks
    #}
-  {% if program_details.languageVersion >= 0.97 %}
-    {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:viewCodeAction', {'id' : program.id})) }}
+  {% if app.environment == "dev" %}
+    <h1>Codeview</h1>
+    <div id='catblocks-code-container'></div>
+  {% else %}
+    {% if program_details.languageVersion >= 0.97 %}
+      {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:viewCodeAction', {'id' : program.id})) }}
+    {% endif %}
   {% endif %}
 
   <div id="program-bottom">
@@ -532,6 +537,52 @@
         {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_CREDITS') }}
     )
   </script>
+
+  <script src=" {{ asset('compiled/js/CatBlocks.js') }}"></script>
+    <script>
+      const progPath = '{{ app.request.getSchemeAndHttpHost() ~ '/resources/extract/' ~ program.getExtractedDirectoryHash() ~ '/'}}';
+      const progLang = 'en_GB';
+
+      /**
+       * initiate share
+       *
+       * define element:
+       *  - container to inject catblocks hidden workflow
+       *  - renderSize to use for blocks
+       *  - language to use for rendering texts
+       *  - media for catblocks
+       */
+      share.init({
+        'container': 'catblocks-code-container',
+        'renderSize': 0.75,
+        'language': progLang,
+        'media': '{{ app.request.getSchemeAndHttpHost() ~ '/catblocks/' }}',
+      });
+
+      /**
+       * start rendering program into div
+       *
+       */
+      window.onload = function() {
+        share.parser.parseFile(`${progPath}code.xml`)
+        .then(xmlDoc => {
+          // render pogram into div element
+          const div = document.getElementById('catblocks-code-container');
+          share.injectAllScenes(div, xmlDoc, {
+            object: {
+              programRoot: `${progPath}`
+            }
+          });
+        })
+        .catch(err => {
+          console.error(`Failed to parse catroid file.`);
+          console.error(err);
+        });
+
+      };
+    </script>
+
+
 
   <script>
 

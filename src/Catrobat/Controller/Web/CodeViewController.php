@@ -17,10 +17,10 @@ class CodeViewController extends AbstractController
 {
 
   /**
-   * @param $id
-   * @param ProgramManager $programManager
+   * @param                         $id
+   * @param ProgramManager          $programManager
    * @param ExtractedFileRepository $extractedFileRepository
-   * @param CatrobatCodeParser $catrobatCodeParser
+   * @param CatrobatCodeParser      $catrobatCodeParser
    *
    * @return mixed
    */
@@ -34,7 +34,10 @@ class CodeViewController extends AbstractController
     {
       $program = $programManager->find($id);
       $extracted_program = $extractedFileRepository->loadProgramExtractedFile($program);
-
+      if ($extracted_program === null)
+      {
+        throw new \Exception();
+      }
       $parsed_program = $catrobatCodeParser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
