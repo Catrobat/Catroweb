@@ -1,6 +1,10 @@
 function MediaLib(package_name, flavor, assetsDir)
 {
   $(function() {
+    // Removing the project navigation items and showing just the category menu items
+    var element = document.getElementById("project-navigation");
+    element.parentNode.removeChild(element);
+    
     getPackageFiles(package_name, flavor, assetsDir);
     let $content = $("#content");
     $content.find('#thumbsize-control input[type=radio]').change(function() {
