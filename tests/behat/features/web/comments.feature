@@ -73,6 +73,7 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should be able to see existing comments
     Given I am on "/app/project/1"
     Then I should see "c1"
+    Then I should not see "c2"
 
   Scenario: I should not see any comments when there are none
     Given I am on "/app/project/3"

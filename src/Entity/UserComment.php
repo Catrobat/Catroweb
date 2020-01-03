@@ -19,13 +19,8 @@ class UserComment
   protected $id;
 
   /**
-   * @ORM\Column(type="integer")
-   */
-  protected $programId;
-
-  /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="programs", referencedColumnName="id", nullable=true)
+   * @ORM\JoinColumn(name="programId", referencedColumnName="id", nullable=true)
    */
   private $program;
 
@@ -84,22 +79,6 @@ class UserComment
   public function setId($id)
   {
     $this->id = $id;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getProgramId()
-  {
-    return $this->programId;
-  }
-
-  /**
-   * @param mixed $programId
-   */
-  public function setProgramId($programId)
-  {
-    $this->programId = $programId;
   }
 
   /**
