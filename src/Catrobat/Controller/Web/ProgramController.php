@@ -792,7 +792,7 @@ class ProgramController extends AbstractController
     $program_comments = $this->getDoctrine()
       ->getRepository('App\Entity\UserComment')
       ->findBy(
-        ['programId' => $program->getId()], ['id' => 'DESC']);
+        ['program' => $program->getId()], ['id' => 'DESC']);
 
     return $program_comments;
   }

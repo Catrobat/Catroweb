@@ -136,7 +136,6 @@ class CommentsController extends AbstractController
     $temp_comment->setUserId($id);
     $temp_comment->setText($_POST['Message']);
     $temp_comment->setProgram($program);
-    $temp_comment->setProgramId($program->getId());
     $temp_comment->setUploadDate(date_create());
     $temp_comment->setIsReported(false);
 
