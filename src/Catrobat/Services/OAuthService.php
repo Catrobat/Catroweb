@@ -283,6 +283,7 @@ class OAuthService
 
     $client = new Google_Client(['client_id' => $client_id]);  // Specify the CLIENT_ID of the app that accesses the backend
     $payload = $client->verifyIdToken($id_token);
+    var_dump($payload);
     if ($payload)
     {
       $gPlusId = $payload['sub'];
