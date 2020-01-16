@@ -128,4 +128,9 @@ class Extension
       $this->removeProgram($program);
     }
   }
+
+  public function __toString()
+  {
+    return $this->name;
+  }
 }

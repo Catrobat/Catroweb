@@ -160,4 +160,12 @@ class UserComment
   {
     $this->isReported = $isReported;
   }
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->text;
+  }
 }

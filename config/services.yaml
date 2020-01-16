@@ -692,6 +692,17 @@ services:
       - ~
     public: true
 
+  catrowebadmin.block.users.storeduserdata:
+    class: App\Admin\StoredUserDataAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Stored User Data",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\User
+      - App\Catrobat\Controller\Admin\StoredUserDataController
+    public: true
+
   # ===== Tools
 
   catrowebadmin.block.tools.maintain:
