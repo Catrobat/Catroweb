@@ -914,7 +914,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
       $new_comment->setUploadDate(new DateTime($comment['upload_date'], new DateTimeZone('UTC')));
       $new_comment->setProgram($program_manager->find($comment['program_id']));
-      $new_comment->setProgramId($comment['program_id']);
       $new_comment->setUserId($comment['user_id']);
       $new_comment->setUsername($comment['user_name']);
       $new_comment->setIsReported(false);
@@ -3237,7 +3236,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
             $temp_comment->setUserId($user->getId());
             $temp_comment->setText("This is a comment");
             $temp_comment->setProgram($program);
-            $temp_comment->setProgramId($program->getID());
             $temp_comment->setUploadDate(date_create());
             $temp_comment->setIsReported(false);
             $em->persist($temp_comment);
