@@ -11,7 +11,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Repository\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -161,22 +161,26 @@ class AppExtension extends AbstractExtension
       ->in($path)
       ->sortByName();
 
-    $isSelectedLangugage = false;
+    $isSelectedLanguage = false;
+
+    $available_locales = Locales::getNames();
 
     foreach ($finder as $translationFileName)
     {
       $shortName = $this->getShortLanguageNameFromFileName($translationFileName->getRelativePathname());
 
-      $isSelectedLangugage = $current_language === $shortName;
+      $isSelectedLanguage = $current_language === $shortName;
 
       if (strcmp($current_language, $shortName))
       {
-        $isSelectedLangugage = true;
+        $isSelectedLanguage = true;
       }
 
-      $locale = Intl::getLocaleBundle()->getLocaleName($shortName, $shortName);
-      if ($locale != null)
+      // Is this locale available in Symfony?
+      if (array_key_exists($shortName, $available_locales))
       {
+        $locale = Locales::getName($shortName, $shortName);
+
         $list[] = [
           $shortName,
           $locale,
@@ -185,7 +189,7 @@ class AppExtension extends AbstractExtension
       }
     }
 
-    if (!$isSelectedLangugage)
+    if (!$isSelectedLanguage)
     {
       $list = $this->setSelectedLanguage($list, $current_language);
     }
