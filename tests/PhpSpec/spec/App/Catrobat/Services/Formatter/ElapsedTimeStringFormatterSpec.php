@@ -4,7 +4,7 @@ namespace tests\PhpSpec\spec\App\Catrobat\Services\Formatter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use \App\Catrobat\Services\Time;
 
 /**
