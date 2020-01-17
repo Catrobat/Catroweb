@@ -16,8 +16,6 @@ Feature: User gets notifications for new followers, likes, comments and other ty
       | 3  | program 3 | abcef                   | Drago   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
 
 
-
-
   Scenario: User should see notifications dropdown and if he clicks on it he should see subsections
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/app/"
@@ -34,6 +32,36 @@ Feature: User gets notifications for new followers, likes, comments and other ty
     And I should see "Followers"
     And I should see "Comments"
 
+  Scenario: User should not see all notification subsections on the homepage
+    Given I log in as "Catrobat" with the password "123456"
+    And I am on "/app/"
+    And I should not see "All Notifications"
+    And I should not see "Likes"
+    And I should not see "Followers"
+    And I should not see "Comments"
+
+  Scenario: User should see all notification subsections on notification pages
+    Given I log in as "Catrobat" with the password "123456"
+    And I am on "/app/notifications/allNotifications"
+    And I should see "All Notifications"
+    And I should see "Likes"
+    And I should see "Followers"
+    And I should see "Comments"
+    Given I am on "/app/notifications/followers"
+    And I should see "All Notifications"
+    And I should see "Likes"
+    And I should see "Followers"
+    And I should see "Comments"
+    Given I am on "/app/notifications/likes"
+    And I should see "All Notifications"
+    And I should see "Likes"
+    And I should see "Followers"
+    And I should see "Comments"
+    Given I am on "/app/notifications/comments"
+    And I should see "All Notifications"
+    And I should see "Likes"
+    And I should see "Followers"
+    And I should see "Comments"
 
 
   Scenario: New user should not have any notifications
@@ -53,7 +81,6 @@ Feature: User gets notifications for new followers, likes, comments and other ty
     Then I should be on "/app/notifications/followers"
     Then I should see "Follower Notifications"
     And I should see "It looks like you dont have any notifications."
-
 
 
   Scenario: User should see new Notifications and the badge should contain number of new notifications
