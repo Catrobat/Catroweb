@@ -55,7 +55,7 @@ class ProfileController extends AbstractController
     {
       $user = $this->getUser();
       $my_profile = true;
-      $program_count = count($program_manager->getUserPrograms($id));
+      $program_count = count($program_manager->getUserPrograms($user->getId()));
     }
     else
     {

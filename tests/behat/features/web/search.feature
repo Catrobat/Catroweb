@@ -16,18 +16,22 @@ Feature: Searching for programs
 
   Scenario: search for programs should work
     Given I am on "/app/search/prog"
+    And I wait 50 milliseconds
     Then I should see "Your search returned 4 results"
 
   Scenario: search for yahoo myprog should search for all
     Given I am on "/app/search/yahoo%20myprog"
+    And I wait 50 milliseconds
     Then I should see "Your search returned 2 results"
 
   Scenario: search for gmail should search for all
     Given I am on "/app/search/gmail"
+    And I wait 50 milliseconds
     Then I should see "Your search returned 4 results"
 
   Scenario: search for gmx should search for all
     Given I am on "/app/search/gmx.at"
+    And I wait 50 milliseconds
     Then I should see "Your search returned 0 results"
 
   Scenario: pressing the search icon should spawn the search bar
@@ -54,6 +58,6 @@ Feature: Searching for programs
     And I click "#btn-search-header"
     And I wait 100 milliseconds
     Then I should be on "/app/search/yahoo%20myprog"
-    Then I should see "Your search returned 2 results"
+    And I should see "Your search returned 2 results"
     And at least one ".search-input-header" element should be visible
     And at least one "#btn-search-header" element should be visible

@@ -11,6 +11,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Repository\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Extension\AbstractExtension;
