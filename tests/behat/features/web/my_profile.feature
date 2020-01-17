@@ -278,7 +278,7 @@ Feature:
     And the element "#visibility-lock-2" should be visible
     And the element "#visibility-lock-open-2" should not be visible
     When I click "#visibility-lock-open-2"
-    And I wait 100 milliseconds
+    And I wait 150 milliseconds
     And the element ".swal2-shown" should be visible
     And I click ".swal2-confirm"
     And I wait for the server response
