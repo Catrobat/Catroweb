@@ -93,7 +93,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Given I am on "/app/project/8?show_graph=1"
     Then I ensure pop ups work
     When I click "#remix-graph-modal-link"
-    When I wait 10 milliseconds
+    When I wait 100 milliseconds
     And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
@@ -102,7 +102,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Given I am on "/app/project/9?show_graph=1"
     Then I ensure pop ups work
     When I click "#remix-graph-modal-link"
-    When I wait 10 milliseconds
+    When I wait 100 milliseconds
     And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
@@ -123,7 +123,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Given I use a debug build of the Catroid app
     And I am on "/app/project/2?show_graph=1"
     When I click "#remix-graph-modal-link"
-    And I wait 10 milliseconds
+    And I wait 100 milliseconds
     Then I should see a node with id "catrobat_7" having name "project 7" and username "Superman"
     And I should see an edge from "catrobat_5" to "catrobat_7"
 
