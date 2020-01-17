@@ -10,6 +10,8 @@ function initCodeView(showCode, hideCode, showStats, hideStats)
     'showStats': showStats,
     'hideStats': hideStats
   }
+  collapseCodeStatistics();
+  collapseCodeView();
 }
 
 $(document).ready(function() {
@@ -20,37 +22,32 @@ $(document).ready(function() {
   })
   
   $(document).on('click', '.show-hide-code', function() {
-    let text = $('.show-hide-code-text')
     
-    if (text.text() === translations['showCode'])
+    if ($('.show-hide-code-arrow').hasClass('rotate showing-code'))
     {
-      $('.show-hide-code-arrow').addClass('rotate showing-code')
-      text.text(translations['hideCode'])
-      $('#codeview-wrapper').slideDown()
+      $('#codeview-wrapper').slideUp(400, function() {
+        collapseCodeView()
+      })
     }
     else
     {
-      $('#codeview-wrapper').slideUp(400, function() {
-        $('.show-hide-code-arrow').removeClass('rotate showing-code')
-        text.text(translations['showCode'])
-      })
+      expandCodeView()
+      $('#codeview-wrapper').slideDown()
     }
   })
   
   $(document).on('click', '.show-hide-code-statistic', function() {
-    let text = $('.show-hide-code-statistic-text')
-    if (text.text() === translations['showStats'])
+    
+    if ($('.show-hide-code-statistic-arrow').hasClass('rotate showing-code'))
     {
-      $('.show-hide-code-statistic-arrow').addClass('rotate showing-code')
-      text.text(translations['hideStats'])
-      $('#codestatistic-wrapper').slideDown()
+      $('#codestatistic-wrapper').slideUp(400, function() {
+        collapseCodeStatistics()
+      })
     }
     else
     {
-      $('#codestatistic-wrapper').slideUp(400, function() {
-        $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code')
-        text.text(translations['showStats'])
-      })
+      expandCodeStatistics()
+      $('#codestatistic-wrapper').slideDown()
     }
   })
   
@@ -93,5 +90,29 @@ function stopSound(id)
   sound_map[id].currentTime = 0
   $('#soundStop-' + id).hide()
   $('#sound-' + id).show()
+}
+
+function expandCodeStatistics()
+{
+  $('.show-hide-code-statistic-text').text(translations['hideStats'])
+  $('.show-hide-code-statistic-arrow').addClass('rotate showing-code')
+}
+
+function collapseCodeStatistics()
+{
+  $('.show-hide-code-statistic-text').text(translations['showStats'])
+  $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code')
+}
+
+function expandCodeView()
+{
+  $('.show-hide-code-text').text(translations['hideCode'])
+  $('.show-hide-code-arrow').addClass('rotate showing-code')
+}
+
+function collapseCodeView()
+{
+  $('.show-hide-code-text').text(translations['showCode'])
+  $('.show-hide-code-arrow').removeClass('rotate showing-code')
 }
 
