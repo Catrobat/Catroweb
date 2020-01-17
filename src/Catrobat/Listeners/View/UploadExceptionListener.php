@@ -5,7 +5,7 @@ namespace App\Catrobat\Listeners\View;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class UploadExceptionListener
