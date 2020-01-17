@@ -131,6 +131,6 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Given I use a release build of the Catroid app
     And I am on "/app/project/2?show_graph=1"
     When I click "#remix-graph-modal-link"
-    And I wait 10 milliseconds
+    And I wait 100 milliseconds
     Then I should see an unavailable node with id "catrobat_7"
     And I should see an edge from "catrobat_5" to "catrobat_7"

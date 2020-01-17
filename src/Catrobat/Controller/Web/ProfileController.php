@@ -53,19 +53,26 @@ class ProfileController extends AbstractController
 
     if ($id === 0 || ($this->getUser() && $this->getUser()->getId() === $id))
     {
-      $user = $this->getUser();
       $my_profile = true;
-      $program_count = count($program_manager->getUserPrograms($user->getId()));
+      $user = $this->getUser();
     }
     else
     {
       $user = $user_manager->find($id);
-      $program_count = count($program_manager->getPublicUserPrograms($id));
     }
 
     if (!$user)
     {
       return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    if ($my_profile)
+    {
+      $program_count = count($program_manager->getUserPrograms($user->getId()));
+    }
+    else
+    {
+      $program_count = count($program_manager->getPublicUserPrograms($id));
     }
 
     $oauth_user = $user->getGplusUid();
