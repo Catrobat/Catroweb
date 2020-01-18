@@ -2,24 +2,24 @@
 
 namespace App\Catrobat\Commands;
 
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Question\Question;
-
 use App\Catrobat\Commands\Helpers\CommandHelper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 
 /**
  * Class RefreshCommand
  * @package App\Catrobat\Commands
  */
-class RefreshCommand extends ContainerAwareCommand
+class RefreshCommand extends Command
 {
   /**
    * @var Input
@@ -43,10 +43,11 @@ class RefreshCommand extends ContainerAwareCommand
    *
    * @param Filesystem $filesystem
    */
-  public function __construct(Filesystem $filesystem)
+  public function __construct(Filesystem $filesystem, KernelInterface $kernel)
   {
     parent::__construct();
     $this->filesystem = $filesystem;
+    $this->kernel = $kernel;
   }
 
   /**
@@ -71,9 +72,7 @@ class RefreshCommand extends ContainerAwareCommand
     $this->input = $input;
     $this->output = $output;
 
-    $kernel = $this->getContainer()->get('kernel');
-    $env = $kernel->getEnvironment();
-    $this->kernel = $kernel;
+    $env = $this->kernel->getEnvironment();
 
     switch ($env)
     {
@@ -97,9 +96,9 @@ class RefreshCommand extends ContainerAwareCommand
   protected function clearCache()
   {
     $dialog = $this->getHelperSet()->get('question');
-    $question = new Question('<question>Clear Cache (Y/n)? </question>', true);
+    $question = new ConfirmationQuestion('<question>Clear Cache (Y/n)? </question>', true);
 
-    if ($dialog->doAsk($this->output, $question))
+    if ($dialog->ask($this->input, $this->output, $question))
     {
       CommandHelper::executeSymfonyCommand('cache:clear', $this->getApplication(), [], $this->output);
     }

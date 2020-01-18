@@ -3,9 +3,12 @@
 namespace App\Catrobat\Commands;
 
 use App\Entity\Program;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use ArrayObject;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
@@ -19,8 +22,31 @@ define("SECONDS", 60);
  * Class CleanOldApkCommand
  * @package App\Catrobat\Commands
  */
-class CleanOldApkCommand extends ContainerAwareCommand
+class CleanOldApkCommand extends Command
 {
+  /**
+   * @var EntityManagerInterface
+   */
+  private $entity_manager;
+
+  /**
+   * @var ParameterBagInterface
+   */
+  private $parameter_bag;
+
+  /**
+   * CleanOldApkCommand constructor.
+   *
+   * @param EntityManagerInterface $entity_manager
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+    $this->entity_manager = $entity_manager;
+  }
+
   /**
    *
    */
@@ -52,11 +78,11 @@ class CleanOldApkCommand extends ContainerAwareCommand
     $output->writeln('Deleting all APKs older than ' . $days . ' days.');
     $last_point_of_time_to_save = time() - ((int)$days * HOURS * MINUTES * SECONDS);
 
-    $directory = $this->getContainer()->getParameter('catrobat.apk.dir');
+    $directory = $this->parameter_bag->get('catrobat.apk.dir');
     $filesystem = new Filesystem();
     $finder = new Finder();
     $finder->in($directory)->depth(0);
-    $removed_apk_ids = new \ArrayObject();
+    $removed_apk_ids = new ArrayObject();
     $amount_of_files = sizeOf($finder);
 
     foreach ($finder as $file)
@@ -93,7 +119,7 @@ class CleanOldApkCommand extends ContainerAwareCommand
   private function createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids)
   {
     /**
-     * @var $em \Doctrine\ORM\EntityManager
+     * @var $em \Doctrine\ORM\EntityManagerInterface
      */
     $id_query_part = '';
     $i = 0;
@@ -112,8 +138,7 @@ class CleanOldApkCommand extends ContainerAwareCommand
       $id_query_part = ' AND (' . $id_query_part . ')';
     }
 
-    $em = $this->getContainer()->get('doctrine')->getManager();
-    $query = $em->createQuery("UPDATE App\Entity\Program p 
+    $query = $this->entity_manager->createQuery("UPDATE App\Entity\Program p 
                       SET p.apk_status = :status WHERE p.apk_status != :status" . $id_query_part);
     $query->setParameter('status', Program::APK_NONE);
 

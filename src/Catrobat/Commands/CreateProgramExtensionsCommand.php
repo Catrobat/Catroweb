@@ -8,18 +8,19 @@ use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRepository;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
-use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\HttpFoundation\File\File;
+use ZipArchive;
 
 
 /**
  * Class CreateProgramExtensionsCommand
  * @package App\Catrobat\Commands
  */
-class CreateProgramExtensionsCommand extends ContainerAwareCommand
+class CreateProgramExtensionsCommand extends Command
 {
   /**
    * @var OutputInterface
@@ -34,28 +35,35 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
   /**
    * @var ProgramFileRepository
    */
-  private $programfile_directory;
+  private $program_file_repository;
 
   /**
    * @var ProgramRepository
    */
   private $program_repository;
 
+  /**
+   * @var ExtensionRepository
+   */
+  private $extension_repository;
+
 
   /**
    * CreateProgramExtensionsCommand constructor.
    *
    * @param EntityManagerInterface $em
-   * @param ProgramFileRepository $programfile_directory
+   * @param ProgramFileRepository $program_file_repository
    * @param ProgramRepository $program_repo
+   * @param ExtensionRepository $extension_repository
    */
-  public function __construct(EntityManagerInterface $em, ProgramFileRepository $programfile_directory,
-                              ProgramRepository $program_repo)
+  public function __construct(EntityManagerInterface $em, ProgramFileRepository $program_file_repository,
+                              ProgramRepository $program_repo, ExtensionRepository $extension_repository)
   {
     parent::__construct();
     $this->em = $em;
-    $this->programfile_directory = $programfile_directory;
+    $this->program_file_repository = $program_file_repository;
     $this->program_repository = $program_repo;
+    $this->extension_repository = $extension_repository;
   }
 
 
@@ -70,12 +78,10 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
 
 
   /**
-   * @param InputInterface  $input
+   * @param InputInterface $input
    * @param OutputInterface $output
    *
    * @return int|void|null
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -88,8 +94,7 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
 
     $this->writeln("Deleting all linked extensions");
 
-    $extension_repository = $this->getContainer()->get(ExtensionRepository::class);
-    $extensions = $extension_repository->findAll();
+    $extensions = $this->extension_repository->findAll();
 
     foreach ($extensions as $extension)
     {
@@ -100,20 +105,20 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
     $this->em->flush();
 
     $finder = new Finder();
-    $finder->in($this->programfile_directory);
+    $finder->in($this->program_file_repository->directory);
 
     $this->writeln("Searching for extensions ...");
 
     foreach ($finder as $element)
     {
 
-      $zip = new \ZipArchive();
+      $zip = new ZipArchive();
 
-      $open = $zip->open($this->programfile_directory . $element->getFilename());
+      $open = $zip->open($this->program_file_repository->directory . $element->getFilename());
 
       if ($open !== true)
       {
-        $this->writeln("Cant open: " . $this->programfile_directory . $element->getFilename());
+        $this->writeln("Cant open: " . $this->program_file_repository->directory . $element->getFilename());
         $this->writeln("Skipping file ...");
         continue;
       }
@@ -186,7 +191,7 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
         if ($program_with_extensiones == true)
         {
           $this->em->persist($program);
-          $this->em->flush($program);
+          $this->em->flush();
           $program_with_extensiones = false;
         }
       }
@@ -197,7 +202,7 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
 
 
   /**
-   * @param $element
+   * @param File $element
    *
    * @return object|null
    */

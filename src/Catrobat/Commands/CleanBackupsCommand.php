@@ -2,18 +2,21 @@
 
 namespace App\Catrobat\Commands;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
  * Class CleanBackupsCommand
  * @package App\Catrobat\Commands
  */
-class CleanBackupsCommand extends ContainerAwareCommand
+class CleanBackupsCommand extends Command
 {
   /**
    * @var
@@ -21,12 +24,21 @@ class CleanBackupsCommand extends ContainerAwareCommand
   private $output;
 
   /**
-   * CleanBackupsCommand constructor.
+   * @var ParameterBagInterface
    */
-  public function __construct()
+  private $parameter_bag;
+
+  /**
+   * CleanBackupsCommand constructor.
+   *
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
+    $this->parameter_bag = $parameter_bag;
   }
+
 
   /**
    *
@@ -50,7 +62,7 @@ class CleanBackupsCommand extends ContainerAwareCommand
   {
     $this->output = $output;
 
-    $backupdir = realpath($this->getContainer()->getParameter('catrobat.backup.dir'));
+    $backupdir = realpath($this->parameter_bag->get('catrobat.backup.dir'));
     if ($input->getOption("all"))
     {
       $files = glob($backupdir . '/*'); // get all file names
@@ -73,7 +85,7 @@ class CleanBackupsCommand extends ContainerAwareCommand
         $files = scandir($backupdir);
         if (!in_array($backupfile, $files))
         {
-          throw new \Exception('Backupfile not found.');
+          throw new Exception('Backupfile not found.');
         }
         if (is_file($backupdir . "/" . $backupfile))
         {
@@ -84,7 +96,7 @@ class CleanBackupsCommand extends ContainerAwareCommand
       }
       else
       {
-        throw new \Exception('No Arguments');
+        throw new Exception('No Arguments');
       }
     }
 

@@ -3,13 +3,17 @@
 namespace App\Catrobat\Controller\Admin;
 
 use App\Catrobat\Commands\CreateProgramExtensionsCommand;
+use App\Catrobat\Services\ProgramFileRepository;
+use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
@@ -22,13 +26,13 @@ class ExtensionController extends Controller
 
   /**
    * @return RedirectResponse
-   * @throws \Symfony\Component\Console\Exception\ExceptionInterface
+   * @throws \Exception
    */
-  public function extensionsAction()
+  public function extensionsAction(KernelInterface $kernel)
   {
     /**
      * @var $em EntityManager
-     * @var $progrm_repo ProgramRepository
+     * @var $program_repositorysitory ProgramRepository
      */
 
     if (false === $this->admin->isGranted('EXTENSIONS'))
@@ -36,14 +40,14 @@ class ExtensionController extends Controller
       throw new AccessDeniedException();
     }
 
-    $em = $this->getDoctrine()->getManager();
-    $program_file_dir = $this->get('kernel')->getRootDir() . "/../public/resources/programs/";
-    $program_repo = $this->container->get(ProgramRepository::class);
+    $application = new Application($kernel);
+    $application->setAutoExit(false);
 
-    $command = new CreateProgramExtensionsCommand($em, $program_file_dir, $program_repo);
-    $command->setContainer($this->container);
+    $input = new ArrayInput([
+      'command' => 'catrobat:create:extensions',
+    ]);
 
-    $return = $command->run(new ArrayInput([]), new NullOutput());
+    $return = $application->run($input, new NullOutput());
     if ($return == 0)
     {
       $this->addFlash('sonata_flash_success', 'Creating extensions finished!');

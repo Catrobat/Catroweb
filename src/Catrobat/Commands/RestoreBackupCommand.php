@@ -2,10 +2,13 @@
 
 namespace App\Catrobat\Commands;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -16,12 +19,36 @@ use App\Entity\Program;
  * Class RestoreBackupCommand
  * @package App\Catrobat\Commands
  */
-class RestoreBackupCommand extends ContainerAwareCommand
+class RestoreBackupCommand extends Command
 {
   /**
    * @var Output
    */
   public $output;
+
+  /**
+   * @var EntityManagerInterface $entity_manager
+   */
+  private $entity_manager;
+
+
+  /**
+   * @var ParameterBagInterface $parameter_bag
+   */
+  private $parameter_bag;
+
+  /**
+   * RestoreBackupCommand constructor.
+   *
+   * @param EntityManagerInterface $entity_manager
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+    $this->entity_manager = $entity_manager;
+  }
 
   /**
    *
@@ -35,11 +62,12 @@ class RestoreBackupCommand extends ContainerAwareCommand
   }
 
   /**
-   * @param InputInterface  $input
+   * @param InputInterface $input
    * @param OutputInterface $output
    *
    * @return int|void|null
-   * @throws \Doctrine\ORM\NonUniqueResultException|\Exception
+   * @throws ExceptionInterface
+   * @throws \Doctrine\ORM\NonUniqueResultException | \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -57,17 +85,17 @@ class RestoreBackupCommand extends ContainerAwareCommand
     }
     $this->output->writeln('Backup File: ' . $backup_file);
 
-    if ($this->getContainer()->getParameter('database_driver') !== 'pdo_mysql')
+    if ($this->parameter_bag->get('database_driver') !== 'pdo_mysql')
     {
       throw new \Exception('This script only supports mysql databases');
     }
 
     if ($input->hasArgument('local') && $input->getArgument('local') === 'true')
     {
-      $local_resource_directory = $this->getContainer()->getParameter('catrobat.resources.dir');
-      $local_database_name = $this->getContainer()->getParameter('database_name');
-      $local_database_user = $this->getContainer()->getParameter('database_user');
-      $local_database_password = $this->getContainer()->getParameter('database_password');
+      $local_resource_directory = $this->parameter_bag->get('catrobat.resources.dir');
+      $local_database_name = $this->parameter_bag->get('database_name');
+      $local_database_user = $this->parameter_bag->get('database_user');
+      $local_database_password = $this->parameter_bag->get('database_password');
 
       $this->output->writeln('Restore backup on localhost');
 
@@ -82,14 +110,14 @@ class RestoreBackupCommand extends ContainerAwareCommand
 
       @unlink($local_resource_directory . 'database.sql');
 
-      /* @var $em \Doctrine\ORM\EntityManager */
-      $em = $this->getContainer()->get('doctrine')->getManager();
-      $query = $em->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
+      $query = $this->entity_manager
+        ->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
       $query->setParameter('status', Program::APK_NONE);
       $result = $query->getSingleScalarResult();
       $this->output->writeln('Reset the apk status of ' . $result . ' projects');
 
-      $query = $em->createQuery("UPDATE App\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
+      $query = $this->entity_manager
+        ->createQuery("UPDATE App\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
       $query->setParameter('hash', 'null');
       $result = $query->getSingleScalarResult();
       $this->output->writeln('Reset the directory hash of ' . $result . ' projects');
@@ -97,15 +125,15 @@ class RestoreBackupCommand extends ContainerAwareCommand
     }
     else
     {
-      $backup_host_name = $this->getContainer()->getParameter('backup_host_name');
-      $backup_host_user = $this->getContainer()->getParameter('backup_host_user');
-      $backup_host_password = $this->getContainer()->getParameter('backup_host_password');
-      $backup_host_directory = $this->getContainer()->getParameter('backup_host_directory');
-      $backup_host_resource_directory = $this->getContainer()->getParameter('backup_host_resource_directory');
+      $backup_host_name = $this->parameter_bag->get('backup_host_name');
+      $backup_host_user = $this->parameter_bag->get('backup_host_user');
+      $backup_host_password = $this->parameter_bag->get('backup_host_password');
+      $backup_host_directory = $this->parameter_bag->get('backup_host_directory');
+      $backup_host_resource_directory = $this->parameter_bag->get('backup_host_resource_directory');
 
-      $backup_database_name = $this->getContainer()->getParameter('backup_database_name');
-      $backup_database_user = $this->getContainer()->getParameter('backup_database_user');
-      $backup_database_password = $this->getContainer()->getParameter('backup_database_password');
+      $backup_database_name = $this->parameter_bag->get('backup_database_name');
+      $backup_database_user = $this->parameter_bag->get('backup_database_user');
+      $backup_database_password = $this->parameter_bag->get('backup_database_password');
 
       $this->output->writeln('Restore backup on server [' . $backup_host_name . ']');
 
@@ -169,7 +197,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
    * @param $args
    * @param $output
    *
-   * @throws \Exception
+   * @throws ExceptionInterface
    */
   private function executeSymfonyCommand($command, $args, $output)
   {

@@ -3,23 +3,48 @@
 namespace App\Catrobat\Commands;
 
 use App\Entity\Program;
-use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
  * Class CleanApkCommand
  * @package App\Catrobat\Commands
  */
-class CleanApkCommand extends ContainerAwareCommand
+class CleanApkCommand extends Command
 {
   /**
    * @var
    */
   private $output;
+
+  /**
+   * @var EntityManagerInterface
+   */
+  private $entity_manager;
+
+  /**
+   * @var ParameterBagInterface
+   */
+  private $parameter_bag;
+
+  /**
+   * CleanApkCommand constructor.
+   *
+   * @param EntityManagerInterface $entity_manager
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+    $this->entity_manager = $entity_manager;
+  }
+
 
   /**
    *
@@ -42,11 +67,11 @@ class CleanApkCommand extends ContainerAwareCommand
     $this->output = $output;
 
     $this->output->writeln('Deleting APKs');
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'), 'Emptying apk directory', $output);
+    $apk_dir = $this->parameter_bag->get('catrobat.apk.dir');
+    CommandHelper::emptyDirectory($apk_dir, 'Emptying apk directory', $output);
 
-    /* @var $em EntityManager */
-    $em = $this->getContainer()->get('doctrine')->getManager();
-    $query = $em->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
+    $query = $this->entity_manager
+      ->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
     $query->setParameter('status', Program::APK_NONE);
     $result = $query->getSingleScalarResult();
     $this->output->writeln('Reset the apk status of ' . $result . ' projects');

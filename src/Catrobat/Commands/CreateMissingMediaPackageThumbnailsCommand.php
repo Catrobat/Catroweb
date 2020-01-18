@@ -3,7 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -12,8 +12,24 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @package App\Catrobat\Commands
  */
-class CreateMissingMediaPackageThumbnailsCommand extends ContainerAwareCommand
+class CreateMissingMediaPackageThumbnailsCommand extends Command
 {
+
+  /**
+   * @var MediaPackageFileRepository
+   */
+  private  $media_package_file_repository;
+
+  /**
+   * CreateMissingMediaPackageThumbnailsCommand constructor.
+   *
+   * @param MediaPackageFileRepository $media_package_file_repository
+   */
+  public function __construct(MediaPackageFileRepository $media_package_file_repository)
+  {
+    parent::__construct();
+    $this->media_package_file_repository = $media_package_file_repository;
+  }
 
   /**
    * Configures the current command.
@@ -47,7 +63,7 @@ class CreateMissingMediaPackageThumbnailsCommand extends ContainerAwareCommand
         "(e.g. sudo -u www-data bin/console ...) or run with --force.");
     }
 
-    $this->getContainer()->get(MediaPackageFileRepository::class)->createMissingThumbnails();
+    $this->media_package_file_repository->createMissingThumbnails();
 
     return null;
   }
