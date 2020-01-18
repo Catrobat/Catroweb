@@ -6,18 +6,16 @@ use App\Entity\ProgramLike;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRemixRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
  * Class CSVUserSimilaritiesCommand
  * @package App\Catrobat\Commands
  */
-class CSVUserSimilaritiesCommand extends ContainerAwareCommand
+class CSVUserSimilaritiesCommand extends Command
 {
   /**
    * @var ProgramRemixRepository
@@ -30,7 +28,7 @@ class CSVUserSimilaritiesCommand extends ContainerAwareCommand
   private $program_like_repository;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $entity_manager;
 

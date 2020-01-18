@@ -2,21 +2,38 @@
 
 namespace App\Catrobat\Commands;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
  * Class CleanLogsCommand
  * @package App\Catrobat\Commands
  */
-class CleanLogsCommand extends ContainerAwareCommand
+class CleanLogsCommand extends Command
 {
   /**
    * @var OutputInterface
    */
   private $output;
+
+  /**
+   * @var ParameterBagInterface $parameter_bag
+   */
+  private $parameter_bag;
+
+  /**
+   * CleanApkCommand constructor.
+   *
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+  }
 
   /**
    *
@@ -37,7 +54,7 @@ class CleanLogsCommand extends ContainerAwareCommand
   {
     $this->output = $output;
     $this->output->writeln('Deleting log files');
-    $log_dir = $this->getContainer()->getParameter('catrobat.logs.dir');
+    $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
     $errors = $this->deleteDirectory($log_dir, false);
     if ($errors === 0)
     {

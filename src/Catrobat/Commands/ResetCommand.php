@@ -3,10 +3,11 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 
@@ -14,9 +15,25 @@ use Symfony\Component\Filesystem\Filesystem;
  * Class ResetCommand
  * @package App\Catrobat\Commands
  */
-class ResetCommand extends ContainerAwareCommand
+class ResetCommand extends Command
 {
   const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 20;
+
+  /**
+   * @var ParameterBagInterface $parameter_bag
+   */
+  private $parameter_bag;
+
+  /**
+   * ResetCommand constructor.
+   *
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+  }
 
   /**
    *
@@ -60,21 +77,21 @@ class ResetCommand extends ContainerAwareCommand
     CommandHelper::executeShellCommand('php bin/console catrobat:create:tags', [],
       'Creating constant tags', $output);
 
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.screenshot.dir'),
       'Delete screenshots', $output);
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.thumbnail.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.thumbnail.dir'),
       'Delete thumnails', $output);
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.storage.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.storage.dir'),
       'Delete programs', $output);
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.extract.dir'),
       'Delete extracted programs', $output);
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.featuredimage.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.featuredimage.dir'),
       'Delete featured images', $output);
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.mediapackage.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.mediapackage.dir'),
       'Delete mediapackages', $output);
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.template.dir'),
       'Delete templates', $output);
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.screenshot.dir'),
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.template.screenshot.dir'),
       'Delete templates-screenshots', $output);
 
     CommandHelper::executeShellCommand('php bin/console sonata:admin:setup-acl', [],

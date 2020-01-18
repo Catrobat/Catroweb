@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Services;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
@@ -17,7 +16,7 @@ class ProgramFileRepository
   /**
    * @var
    */
-  protected $directory;
+  public $directory;
   /**
    * @var Filesystem
    */
