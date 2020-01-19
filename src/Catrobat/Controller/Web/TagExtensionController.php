@@ -25,7 +25,7 @@ class TagExtensionController extends AbstractController
    */
   public function tagSearchAction($q)
   {
-    return $this->get('templating')->renderResponse('Search/tagSearch.html.twig', ['q' => $q]);
+    return $this->render('Search/tagSearch.html.twig', ['q' => $q]);
   }
 
 
@@ -37,7 +37,7 @@ class TagExtensionController extends AbstractController
    */
   public function tagSearchNothingAction()
   {
-    return $this->get('templating')->renderResponse('Search/search.html.twig', ['q' => null]);
+    return $this->render('Search/search.html.twig', ['q' => null]);
   }
 
 
@@ -51,7 +51,7 @@ class TagExtensionController extends AbstractController
    */
   public function extensionSearchAction($q)
   {
-    return $this->get('templating')->renderResponse('Search/extensionSearch.html.twig', ['q' => $q]);
+    return $this->render('Search/extensionSearch.html.twig', ['q' => $q]);
   }
 
 
@@ -63,6 +63,6 @@ class TagExtensionController extends AbstractController
    */
   public function extensionSearchNothingAction()
   {
-    return $this->get('templating')->renderResponse('Search/search.html.twig', ['q' => null]);
+    return $this->render('Search/search.html.twig', ['q' => null]);
   }
 }

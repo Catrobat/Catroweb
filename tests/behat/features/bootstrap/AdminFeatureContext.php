@@ -184,10 +184,12 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function initACL()
   {
-    $acl_command = new SetupAclCommand();
+    $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($this->kernel);
+    $application->setAutoExit(false);
 
-    $acl_command->setContainer($this->getClient()->getContainer());
-    $return = $acl_command->run(new ArrayInput([]), new NullOutput());
+    $input = new ArrayInput(['command' => 'sonata:admin:setup-acl']);
+
+    $return = $application->run($input, new NullOutput);
     assert($return !== 0, "Oh no!");
   }
 
