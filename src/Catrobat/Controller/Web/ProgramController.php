@@ -244,7 +244,7 @@ class ProgramController extends AbstractController
       $my_program = true;
     }
 
-    return $this->get('templating')->renderResponse('Program/program.html.twig', [
+    return $this->render('Program/program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $program,
       'program_details'              => $program_details,
@@ -396,7 +396,7 @@ class ProgramController extends AbstractController
    */
   public function searchAction($q)
   {
-    return $this->get('templating')->renderResponse('Search/search.html.twig', ['q' => $q]);
+    return $this->render('Search/search.html.twig', ['q' => $q]);
   }
 
 

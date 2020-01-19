@@ -5,13 +5,12 @@ namespace App\Catrobat\Twig;
 use App\Catrobat\Services\CommunityStatisticsService;
 use App\Entity\MediaPackageFile;
 use App\Catrobat\Services\MediaPackageFileRepository;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Repository\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Extension\AbstractExtension;
@@ -139,7 +138,7 @@ class AppExtension extends AbstractExtension
    */
   public function getCountriesList()
   {
-    return Intl::getRegionBundle()->getCountryNames();
+    return Countries::getNames();
   }
 
   /**

@@ -100,7 +100,7 @@ class DefaultController extends AbstractController
       $featured[] = $info;
     }
 
-    return $this->get('templating')->renderResponse('Index/index.html.twig', [
+    return $this->render('Index/index.html.twig', [
       'featured' => $featured,
     ]);
   }
@@ -114,7 +114,7 @@ class DefaultController extends AbstractController
    */
   public function termsOfUseAction()
   {
-    return $this->get('templating')->renderResponse('PrivacyAndTerms/termsOfUse.html.twig');
+    return $this->render('PrivacyAndTerms/termsOfUse.html.twig');
   }
 
 
@@ -126,7 +126,7 @@ class DefaultController extends AbstractController
    */
   public function licenseToPlayAction()
   {
-    return $this->get('templating')->renderResponse('PrivacyAndTerms/licenseToPlay.html.twig');
+    return $this->render('PrivacyAndTerms/licenseToPlay.html.twig');
   }
 
 
@@ -195,7 +195,7 @@ class DefaultController extends AbstractController
 
     usort($categories, "comparePriorities");
 
-    return $this->get('templating')->renderResponse('MediaLibrary/mediapackage.html.twig', [
+    return $this->render('MediaLibrary/mediapackage.html.twig', [
       'categories' => $categories,
     ]);
   }
