@@ -2,19 +2,15 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use App\Catrobat\Commands\ArchiveLogsCommand;
-use App\Catrobat\Commands\CleanApkCommand;
-use App\Catrobat\Commands\CleanExtractedFileCommand;
-use App\Catrobat\Commands\CleanBackupsCommand;
-use App\Catrobat\Commands\CleanLogsCommand;
-use App\Catrobat\Commands\CreateBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -27,20 +23,26 @@ class MaintainController extends Controller
 {
 
   /**
+   * @param KernelInterface $kernel
+   *
    * @return RedirectResponse
    * @throws \Exception
    */
-  public function extractedAction()
+  public function extractedAction(KernelInterface $kernel)
   {
     if ($this->admin->isGranted('EXTRACTED') === false)
     {
       throw new AccessDeniedException();
     }
 
-    $command = new CleanExtractedFileCommand();
-    $command->setContainer($this->container);
+    $application = new Application($kernel);
+    $application->setAutoExit(false);
 
-    $return = $command->run(new ArrayInput([]), new NullOutput());
+    $input = new ArrayInput([
+      'command' => 'catrobat:clean:extracted',
+    ]);
+
+    $return = $application->run($input, new NullOutput());
     if ($return == 0)
     {
       $this->addFlash('sonata_flash_success', 'Reset extracted files OK');
@@ -51,20 +53,26 @@ class MaintainController extends Controller
 
 
   /**
+   * @param KernelInterface $kernel
+   *
    * @return RedirectResponse
    * @throws \Exception
    */
-  public function archiveLogsAction()
+  public function archiveLogsAction(KernelInterface $kernel)
   {
     if ($this->admin->isGranted('EXTRACTED') === false)
     {
       throw new AccessDeniedException();
     }
 
-    $command = new ArchiveLogsCommand();
-    $command->setContainer($this->container);
+    $application = new Application($kernel);
+    $application->setAutoExit(false);
 
-    $return = $command->run(new ArrayInput([]), new NullOutput());
+    $input = new ArrayInput([
+      'command' => 'catrobat:logs:archive',
+    ]);
+
+    $return = $application->run($input, new NullOutput());
     if ($return == 0)
     {
       $this->addFlash('sonata_flash_success', 'Archive log files OK');
@@ -75,21 +83,29 @@ class MaintainController extends Controller
 
 
   /**
+   * @param KernelInterface $kernel
+   *
    * @return RedirectResponse
    * @throws \Exception
    */
-  public function deleteLogsAction()
+  public function deleteLogsAction(KernelInterface $kernel)
   {
     if ($this->admin->isGranted('EXTRACTED') === false)
     {
       throw new AccessDeniedException();
     }
 
-    $command = new CleanLogsCommand();
-    $command->setContainer($this->container);
+    $application = new Application($kernel);
+    $application->setAutoExit(false);
+
+    $input = new ArrayInput([
+      'command' => 'catrobat:clean:logs',
+    ]);
 
     $output = new BufferedOutput();
-    $return = $command->run(new ArrayInput([]), $output);
+
+    $return = $application->run($input, $output);
+
     if ($return === 0)
     {
       $this->addFlash('sonata_flash_success', 'Clean log files OK');
@@ -106,20 +122,29 @@ class MaintainController extends Controller
 
 
   /**
+   * @param KernelInterface $kernel
+   *
    * @return RedirectResponse
    * @throws \Exception
    */
-  public function apkAction()
+  public function apkAction(KernelInterface $kernel)
   {
     if ($this->admin->isGranted('APK') === false)
     {
       throw new AccessDeniedException();
     }
 
-    $command = new CleanApkCommand();
-    $command->setContainer($this->container);
+    $application = new Application($kernel);
+    $application->setAutoExit(false);
 
-    $return = $command->run(new ArrayInput([]), new NullOutput());
+    $input = new ArrayInput([
+      'command' => 'catrobat:clean:apk',
+    ]);
+
+    $output = new NullOutput();
+
+    $return = $application->run($input, $output);
+
     if ($return == 0)
     {
       $this->addFlash('sonata_flash_success', 'Reset APK Projects OK');
@@ -130,33 +155,40 @@ class MaintainController extends Controller
 
 
   /**
+   * @param KernelInterface $kernel
    * @param Request|null $request
    *
    * @return RedirectResponse
+   * @throws \Exception
    */
-  public function deleteBackupsAction(Request $request = null)
+  public function deleteBackupsAction(KernelInterface $kernel, Request $request = null)
   {
     if (false === $this->admin->isGranted('BACKUP'))
     {
       throw new AccessDeniedException();
     }
 
-    $command = new CleanBackupsCommand();
-    $command->setContainer($this->container);
+    $application = new Application($kernel);
+    $application->setAutoExit(false);
 
-    $input = [];
+    $input = new ArrayInput([
+      'command' => 'catrobat:clean:backup',
+      '--all'   => $request->get('--all'),
+    ]);
+
     if ($request->get("backupFile"))
     {
-      $input["backupfile"] = $request->get("backupFile");
+      $input = new ArrayInput([
+        'command'    => 'catrobat:clean:backup',
+        'backupfile' => $request->get("backupFile"),
+      ]);
     }
-    else
-    {
-      $input["--all"] = "--all";
-    }
+
+    $output = new NullOutput();
 
     try
     {
-      $return = $command->run(new ArrayInput($input), new NullOutput());
+      $return = $application->run($input, $output);
       if ($return == 0)
       {
         $this->addFlash('sonata_flash_success', 'Delete Backups OK');
@@ -171,32 +203,44 @@ class MaintainController extends Controller
 
 
   /**
+   * @param KernelInterface $kernel
    * @param Request|null $request
    *
    * @return RedirectResponse
+   * @throws \Exception
    */
-  public function createBackupAction(Request $request = null)
+  public function createBackupAction(KernelInterface $kernel, Request $request = null)
   {
     if (false === $this->admin->isGranted('BACKUP'))
     {
       throw new AccessDeniedException();
     }
 
-    $command = new CreateBackupCommand();
-    $command->setContainer($this->container);
+    $application = new Application($kernel);
+    $application->setAutoExit(false);
 
-    $input = [];
+    $input = new ArrayInput([
+      'command' => 'catrobat:backup:create',
+    ]);
+
+    $output = new NullOutput();
+
+    $is_name_defined = false;
     if ($request->get("backupName"))
     {
-      $input["backupName"] = $request->get("backupName");
+      $input = new ArrayInput([
+        'command' => 'catrobat:backup:create',
+        'backupName' => $request->get("backupName")
+      ]);
+      $is_name_defined = true;
     }
 
     try
     {
-      $return = $command->run(new ArrayInput($input), new NullOutput());
+      $return = $application->run($input, $output);
       if ($return == 0)
       {
-        if (count($input) > 0)
+        if ($is_name_defined)
         {
           $this->addFlash('sonata_flash_success', 'Create Backup: [' . $input["backupName"] . '] OK');
         }

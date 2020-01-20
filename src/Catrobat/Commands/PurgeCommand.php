@@ -2,20 +2,36 @@
 
 namespace App\Catrobat\Commands;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Helper\ProgressBar;
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
  * Class PurgeCommand
  * @package App\Catrobat\Commands
  */
-class PurgeCommand extends ContainerAwareCommand
+class PurgeCommand extends Command
 {
+  /**
+   * @var ParameterBagInterface $parameter_bag
+   */
+  private $parameter_bag;
+
+  /**
+   * PurgeCommand constructor.
+   *
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+  }
+
   /**
    *
    */
@@ -47,30 +63,28 @@ class PurgeCommand extends ContainerAwareCommand
     $progress = new ProgressBar($output, 8);
     $progress->start();
 
-    $suboutput = new NullOutput();
-
     $progress->setMessage('Deleting Screenshots');
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'));
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.screenshot.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Thumbnails');
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.thumbnail.dir'));
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.thumbnail.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Catrobat Files');
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.storage.dir'));
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.storage.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Extracted Catrobat Files');
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'));
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.extract.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Featured Images');
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.featuredimage.dir'));
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.featuredimage.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting APKs');
-    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'));
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.apk.dir'));
     $progress->advance();
 
     $progress->setMessage('Dropping Database');

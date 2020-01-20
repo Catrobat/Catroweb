@@ -2,9 +2,7 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Commands\Helpers\CommandHelper;
-use function Clue\StreamFilter\append;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
@@ -15,7 +13,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
  * Class CheckCodeStyleCommand
  * @package App\Catrobat\Commands
  */
-class CheckCodeStyleCommand extends ContainerAwareCommand
+class CheckCodeStyleCommand extends Command
 {
 
   /**

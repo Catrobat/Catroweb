@@ -2,22 +2,39 @@
 
 namespace App\Catrobat\Commands;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
  * Class ArchiveLogsCommand
  * @package App\Catrobat\Commands
  */
-class ArchiveLogsCommand extends ContainerAwareCommand
+class ArchiveLogsCommand extends Command
 {
   /**
    * @var
    */
   private $output;
+
+  /**
+   * @var ParameterBagInterface $parameter_bag
+   */
+  private $parameter_bag;
+
+  /**
+   * ArchiveLogsCommand constructor.
+   *
+   * @param ParameterBagInterface $parameter_bag
+   */
+  public function __construct(ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+  }
 
   /**
    *
@@ -39,7 +56,7 @@ class ArchiveLogsCommand extends ContainerAwareCommand
     $this->output = $output;
 
     $this->output->writeln('Archiving log files');
-    $log_dir = $this->getContainer()->getParameter('catrobat.logs.dir');
+    $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
     $old_log_dir = $log_dir . "old_logs";
     $compression_command = "tar -zcvf " . $old_log_dir . "/log_backup_" . date('Y-m-d_His') . '.tar.gz -C '
       . $log_dir;

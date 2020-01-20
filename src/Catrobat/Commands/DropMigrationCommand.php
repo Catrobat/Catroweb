@@ -3,7 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Entity\MigrationManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class DropMigrationCommand
  * @package App\Catrobat\Commands
  */
-class DropMigrationCommand extends ContainerAwareCommand
+class DropMigrationCommand extends Command
 {
   /**
    * @var

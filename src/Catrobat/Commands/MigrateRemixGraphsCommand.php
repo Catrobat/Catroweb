@@ -9,19 +9,18 @@ use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Catrobat\Services\AsyncHttpClient;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use App\Entity\ProgramManager;
 use App\Entity\UserManager;
 use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\Console\Helper\ProgressBar;
 
@@ -30,7 +29,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
  * Class MigrateRemixGraphsCommand
  * @package App\Catrobat\Commands
  */
-class MigrateRemixGraphsCommand extends ContainerAwareCommand
+class MigrateRemixGraphsCommand extends Command
 {
   /**
    * @var Filesystem
@@ -78,6 +77,11 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
   private $migration_file_lock;
 
   /**
+   * @var CatrobatFileExtractor $file_extractor
+   */
+  private $file_extractor;
+
+  /**
    * MigrateRemixGraphsCommand constructor.
    *
    * @param Filesystem $filesystem
@@ -85,11 +89,13 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
    * @param ProgramManager $program_manager
    * @param RemixManager $remix_manager
    * @param EntityManagerInterface $entity_manager
+   * @param CatrobatFileExtractor file_extractor
    * @param $kernel_root_dir
    */
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
-                                 ProgramManager $program_manager, RemixManager $remix_manager,
-                                 EntityManagerInterface $entity_manager, $kernel_root_dir)
+                              ProgramManager $program_manager, RemixManager $remix_manager,
+                              EntityManagerInterface $entity_manager, CatrobatFileExtractor $file_extractor,
+                              $kernel_root_dir)
   {
     parent::__construct();
     $this->file_system = $filesystem;
@@ -101,6 +107,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     $this->app_root_dir = $kernel_root_dir;
     $this->output = null;
     $this->migration_file_lock = null;
+    $this->file_extractor = $file_extractor;
   }
 
   /**
@@ -199,7 +206,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
      * @var $program Program
      * @var $unmigrated_program Program
      */
-    $migration_start_time = new \DateTime();
+    $migration_start_time = new DateTime();
     $progress_bar_format_simple = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
     $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | ' .
       'ETA: %estimated:-6s% | Status: %message%';
@@ -253,7 +260,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
       $previous_program_id = $program_id;
     }
 
-    $duration = (new \DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
+    $duration = (new DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -285,7 +292,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
       $progress_bar->display();
     }
 
-    $duration = (new \DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
+    $duration = (new DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -324,7 +331,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
       ++$intermediate_uploads;
     }
 
-    $duration = (new \DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
+    $duration = (new DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -339,7 +346,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     //==============================================================================================================
     // (7) finally mark all relations as seen, so the users will not get bothered with many remix user notifications
     //==============================================================================================================
-    $seen_at = new \DateTime();
+    $seen_at = new DateTime();
     $seen_at->setTimestamp(0); // 1970-01-01 in order to indicate that this was not seen by the user
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
   }
@@ -355,8 +362,6 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
    */
   private function extractRemixData($program_file_path, $program_id, $program_name, OutputInterface $output, ProgressBar $progress_bar)
   {
-    /** @var CatrobatFileExtractor $file_extractor */
-    $file_extractor = $this->getContainer()->get('App\Catrobat\Services\CatrobatFileExtractor');
     $extracted_file = null;
 
     $progress_bar->setMessage('Extracting XML of program #' . $program_id . ' "' . $program_name . '"');
@@ -365,7 +370,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     {
       $program_file = new File($program_file_path);
       //$extracted_file = new ExtractedCatrobatFile($program_file_path, $program_file_path, null);
-      $extracted_file = $file_extractor->extract($program_file);
+      $extracted_file = $this->file_extractor->extract($program_file);
     } catch (\Exception $ex)
     {
       $progress_bar->clear();
@@ -502,12 +507,10 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     foreach ($finder as $program_file_path)
     {
       /**
-       * @var CatrobatFileExtractor $fileextractor
        * @var $user User
        */
-      $fileextractor = $this->getContainer()->get('App\Catrobat\Services\CatrobatFileExtractor');
       $program_file = new File($program_file_path);
-      $extracted_file = $fileextractor->extract($program_file);
+      $extracted_file = $this->file_extractor->extract($program_file);
 
       $url_string = $extracted_file->getRemixUrlsString();
       $original_program_data = new RemixData($url_string);
@@ -544,7 +547,7 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
       $program->setVisible(true);
       $program->setUser($user);
       $program->setUploadLanguage('en');
-      $program->setUploadedAt(new \DateTime());
+      $program->setUploadedAt(new DateTime());
       $program->setRemixMigratedAt(null);
       $program->setFilesize($program_file->getSize());
       $program->setCatrobatVersion(1);

@@ -1,13 +1,15 @@
 <?php
 
-
 namespace phpUnit\Admin;
-
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
+/**
+ * Class CleanupTest
+ * @package phpUnit\Admin
+ */
 class CleanupTest extends KernelTestCase
 {
 
@@ -20,11 +22,6 @@ class CleanupTest extends KernelTestCase
     $kernel = static::createKernel();
     $application = new Application($kernel);
     $command = $application->find('catrobat:clean:logs');
-
-    /* alternative to $application->find() without using command name. */
-//    $kernel->boot();
-//    $command = new CleanLogsCommand();
-//    $command->setContainer($kernel->getContainer());
 
     $log_dir = $kernel->getContainer()->getParameter('catrobat.logs.dir');
 
@@ -49,8 +46,6 @@ class CleanupTest extends KernelTestCase
     // check if directory is empty
     $this->assertEmpty(array_diff(scandir($log_dir), ['.', '..', '.gitignore']),
       'Not all files in log directory got deleted.');
-
-
   }
 
 }
