@@ -46,7 +46,7 @@ class GameJamController extends AbstractController
       }
     }
 
-    return $this->get('templating')->renderResponse('gamejam_submit_own.html.twig', [
+    return $this->render('gamejam_submit_own.html.twig', [
       'jam' => $jam,
     ]);
   }
@@ -72,7 +72,7 @@ class GameJamController extends AbstractController
 
     if ($page == -1)
     {
-      return $this->get('templating')->renderResponse('help/gamejamtutorialcards.html.twig', ['count' => $cards_num]);
+      return $this->render('help/gamejamtutorialcards.html.twig', ['count' => $cards_num]);
     }
 
     $blocks = [];
@@ -114,7 +114,7 @@ class GameJamController extends AbstractController
         break;
     }
 
-    return $this->get('templating')->renderResponse('help/gamejamtutorialcard.html.twig', [
+    return $this->render('help/gamejamtutorialcard.html.twig', [
       'page'   => $page,
       'blocks' => $blocks,
     ]);

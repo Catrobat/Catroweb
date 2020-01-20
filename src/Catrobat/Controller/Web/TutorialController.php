@@ -29,7 +29,7 @@ class TutorialController extends AbstractController
    */
   public function helpAction()
   {
-    return $this->get('templating')->renderResponse('help/help.html.twig');
+    return $this->render('help/help.html.twig');
   }
 
 
@@ -44,7 +44,7 @@ class TutorialController extends AbstractController
    */
   public function stepByStepAction()
   {
-    return $this->get('templating')->renderResponse('help/stepByStep.html.twig', []);
+    return $this->render('help/stepByStep.html.twig', []);
   }
 
 
@@ -68,14 +68,14 @@ class TutorialController extends AbstractController
 
     if ($page == -1)
     {
-      return $this->get('templating')->renderResponse('help/tutorialcards.html.twig', ['count' => $cards_num]);
+      return $this->render('help/tutorialcards.html.twig', ['count' => $cards_num]);
     }
 
     $blocks = $this->generateBlocks($page);
 
     $example_link = $this->setExampleLink($page);
 
-    return $this->get('templating')->renderResponse('help/tutorialcard.html.twig', [
+    return $this->render('help/tutorialcard.html.twig', [
       'page'         => $page,
       'blocks'       => $blocks,
       'example_link' => $example_link,
@@ -101,7 +101,7 @@ class TutorialController extends AbstractController
 
     $categories_twig = $this->generateCategoryArray($categories);
 
-    return $this->get('templating')->renderResponse('help/starterPrograms.html.twig', [
+    return $this->render('help/starterPrograms.html.twig', [
       'categories' => $categories_twig,
     ]);
   }
@@ -145,7 +145,7 @@ class TutorialController extends AbstractController
    */
   public function gameJamAction()
   {
-    return $this->get('templating')->renderResponse('help/gamejam.html.twig');
+    return $this->render('help/gamejam.html.twig');
   }
 
 

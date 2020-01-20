@@ -5,8 +5,6 @@ framework:
   form:            ~
   csrf_protection: ~
   validation:      { enabled: true, enable_annotations: true }
-  templating:
-    engines: ['twig']
   default_locale:  "%locale%"
   session:         ~
   fragments:       ~

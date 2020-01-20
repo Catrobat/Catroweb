@@ -139,7 +139,7 @@ class UserNotificationController extends AbstractController
         }
       }
     }
-    $response = $this->get('templating')->renderResponse('Notifications/usernotifications.html.twig'
+    $response = $this->render('Notifications/usernotifications.html.twig'
       , [
         'oldNotifications' => $old_notifications,
         'newNotifications' => $new_notifications,
