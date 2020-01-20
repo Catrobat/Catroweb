@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
+use SimpleXMLElement;
 
 /**
  * Class Brick
@@ -11,7 +12,7 @@ use App\Catrobat\Services\CatrobatCodeParser\Constants;
 abstract class Brick
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $brick_xml_properties;
   /**
@@ -30,9 +31,9 @@ abstract class Brick
   /**
    * Brick constructor.
    *
-   * @param \SimpleXMLElement $brick_xml_properties
+   * @param SimpleXMLElement $brick_xml_properties
    */
-  public function __construct(\SimpleXMLElement $brick_xml_properties)
+  public function __construct(SimpleXMLElement $brick_xml_properties)
   {
     $this->brick_xml_properties = $brick_xml_properties;
     $this->create();

@@ -17,7 +17,6 @@ class StopAllSoundsBrick extends Brick
   {
     $this->type = Constants::STOP_ALL_SOUNDS_BRICK;
     $this->caption = "Stop all sounds";
-
     $this->setImgFile(Constants::SOUND_BRICK_IMG);
   }
 }

@@ -17,7 +17,6 @@ class EndIfBrick extends Brick
   {
     $this->type = Constants::ENDIF_BRICK;
     $this->caption = "End If";
-
     $this->setImgFile(Constants::CONTROL_BRICK_IMG);
   }
 }

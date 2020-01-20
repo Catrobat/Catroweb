@@ -7,8 +7,8 @@ When program started
 1h_when_brown.png
 ---
 CollisionScript
-When physical collision with "Collision-Object< - > ANYTHING"
-1h_when_brown.png
+Collision Script (deprecated)
+1h_when_grey.png
 ---
 StartScript
 When program started
@@ -35,12 +35,12 @@ When tapped
 1h_when_brown.png
 ---
 BroadcastScript
-When I receive "message 1"
+When I receive _
 1h_when_brown.png
 ---
 CollisionScript
-When physical collision with "Motion-Object ANYTHING;"
-1h_when_brown.png
+Collision Script (deprecated)
+1h_when_grey.png
 ---
 StartScript
 When program started
@@ -51,11 +51,11 @@ When tapped
 1h_when_brown.png
 ---
 CollisionScript
-When physical collision with "Control-Object< - > ANYTHING"
-1h_when_brown.png
+Collision Script (deprecated)
+1h_when_grey.png
 ---
 BroadcastScript
-When I receive "message 1"
+When I receive _
 1h_when_brown.png
 ---
 StartScript
@@ -71,19 +71,19 @@ When screen is touched
 1h_when_brown.png
 ---
 BroadcastScript
-When I receive "Motion-Object ANYTHING"
+When I receive _
 1h_when_brown.png
 ---
-WhenTouchDownScript
-When screen is touched
+WhenConditionScript
+When _ becomes true
 1h_when_brown.png
 ---
 CollisionScript
-When physical collision with "Event-Object ANYTHING"
-1h_when_brown.png
+Collision Script (deprecated)
+1h_when_grey.png
 ---
 WhenBackgroundChangesScript
-When background changes to
+When background changes to _
 1h_when_brown.png
 ---
 WhenClonedScript
@@ -107,7 +107,7 @@ When program started
 1h_when_brown.png
 ---
 WhenBackgroundChangesScript
-When background changes to
+When background changes to _
 1h_when_grey.png
 ---
 StartScript

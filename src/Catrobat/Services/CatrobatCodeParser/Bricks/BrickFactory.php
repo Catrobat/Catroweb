@@ -4,6 +4,8 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
+use SimpleXMLElement;
+
 /**
  * Class BrickFactory
  * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
@@ -11,11 +13,11 @@ use App\Catrobat\Services\CatrobatCodeParser\Constants;
 class BrickFactory
 {
   /**
-   * @param \SimpleXMLElement $brick_xml_properties
+   * @param SimpleXMLElement $brick_xml_properties
    *
-   * @return BroadcastBrick|BroadcastWaitBrick|ForeverBrick|NoteBrick|WaitBrick|WhenBrick|null
+   * @return BroadcastBrick|BroadcastReceiverBrick|BroadcastWaitBrick|WhenBGChangeBrick|WhenBounceOffBrick|WhenBrick|null
    */
-  public static function generate(\SimpleXMLElement $brick_xml_properties)
+  public static function generate(SimpleXMLElement $brick_xml_properties)
   {
     $generated_brick = null;
 
@@ -31,6 +33,30 @@ class BrickFactory
       case Constants::WHEN_BRICK:
         $generated_brick = new WhenBrick($brick_xml_properties);
         break;
+      case Constants::BROADCAST_RECEIVER_BRICK:
+        $generated_brick = new BroadcastReceiverBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_BOUNCE_OFF_BRICK:
+        $generated_brick = new WhenBounceOffBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_BG_CHANGE_BRICK:
+        $generated_brick = new WhenBGChangeBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_CLONED_BRICK:
+        $generated_brick = new WhenClonedBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_CONDITION_BRICK:
+        $generated_brick = new WhenConditionBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_TOUCH_BRICK:
+        $generated_brick = new WhenTouchBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_GAME_PAD_BUTTON_BRICK:
+        $generated_brick = new WhenGamepadButtonBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_STARTED_BRICK:
+        $generated_brick = new WhenStartedBrick($brick_xml_properties);
+        break;
 
       // CONTROL Bricks
       case Constants::WAIT_BRICK:
@@ -41,9 +67,6 @@ class BrickFactory
         break;
       case Constants::FOREVER_BRICK:
         $generated_brick = new ForeverBrick($brick_xml_properties);
-        break;
-      case Constants::LOOP_ENDLESS_BRICK:
-        $generated_brick = new LoopEndlessBrick($brick_xml_properties);
         break;
       case Constants::IF_THEN_BRICK:
       case Constants::IF_BRICK:
@@ -160,6 +183,9 @@ class BrickFactory
       case Constants::SET_ROTATION_STYLE_BRICK:
         $generated_brick = new SetRotationStyleBrick($brick_xml_properties);
         break;
+      case Constants::SET_TEXT_BRICK:
+        $generated_brick = new SetTextBrick($brick_xml_properties);
+        break;
 
       // SOUND Bricks
       case Constants::PLAY_SOUND_BRICK:
@@ -257,8 +283,14 @@ class BrickFactory
       case Constants::SET_BACKGROUND_BRICK:
         $generated_brick = new SetBackgroundBrick($brick_xml_properties);
         break;
+      case Constants::SET_BACKGROUND_BY_INDEX_BRICK:
+        $generated_brick = new SetBackgroundByIndexBrick($brick_xml_properties);
+        break;
       case Constants::SET_BACKGROUND_WAIT_BRICK:
         $generated_brick = new SetBackgroundWaitBrick($brick_xml_properties);
+        break;
+      case Constants::SET_BACKGROUND_BY_INDEX_AND_WAIT_BRICK:
+        $generated_brick = new SetBackgroundByIndexAndWaitBrick($brick_xml_properties);
         break;
       case Constants::SET_LOOK_BY_INDEX_BRICK:
         $generated_brick = new SetLookByIndexBrick($brick_xml_properties);
@@ -274,8 +306,17 @@ class BrickFactory
       case Constants::SHOW_TEXT_BRICK:
         $generated_brick = new ShowTextBrick($brick_xml_properties);
         break;
+      case Constants::SHOW_TEXT_COLOR_SIZE_ALIGNMENT_BRICK:
+        $generated_brick = new ShowTextColorSizeAlignmentBrick($brick_xml_properties);
+        break;
       case Constants::HIDE_TEXT_BRICK:
         $generated_brick = new HideTextBrick($brick_xml_properties);
+        break;
+      case Constants::WRITE_VARIABLE_ON_DEVICE_BRICK:
+        $generated_brick = new WriteVariableOnDeviceBrick($brick_xml_properties);
+        break;
+      case Constants::READ_VARIABLE_FROM_DEVICE_BRICK:
+        $generated_brick = new ReadVariableFromDeviceBrick($brick_xml_properties);
         break;
       case Constants::ADD_ITEM_LIST_BRICK:
         $generated_brick = new AddItemToUserListBrick($brick_xml_properties);
@@ -288,6 +329,18 @@ class BrickFactory
         break;
       case Constants::REPLACE_ITEM_LIST_BRICK:
         $generated_brick = new ReplaceItemInUserListBrick($brick_xml_properties);
+        break;
+      case Constants::WRITE_LIST_ON_DEVICE_BRICK:
+        $generated_brick = new WriteListOnDeviceBrick($brick_xml_properties);
+        break;
+      case Constants::READ_LIST_FROM_DEVICE_BRICK:
+        $generated_brick = new ReadListFromDeviceBrick($brick_xml_properties);
+        break;
+      case Constants::USER_VARIABLE_BRICK:
+        $generated_brick = new UserVariableBrick($brick_xml_properties);
+        break;
+      case Constants::USER_LIST_BRICK:
+        $generated_brick = new UserListBrick($brick_xml_properties);
         break;
 
       // PEN Bricks
@@ -308,6 +361,20 @@ class BrickFactory
         break;
       case Constants::CLEAR_BACKGROUND_BRICK:
         $generated_brick = new ClearBackgroundBrick($brick_xml_properties);
+        break;
+
+      // LEGO NXT Bricks
+      case Constants::LEGO_NXT_MOTOR_TURN_ANGLE_BRICK:
+        $generated_brick = new LegoNxtMotorTurnAngleBrick($brick_xml_properties);
+        break;
+      case Constants::LEGO_NXT_MOTOR_STOP_BRICK:
+        $generated_brick = new LegoNxtMotorStopBrick($brick_xml_properties);
+        break;
+      case Constants::LEGO_NXT_MOTOR_MOVE_BRICK:
+        $generated_brick = new LegoNxtMotorMoveBrick($brick_xml_properties);
+        break;
+      case Constants::LEGO_NXT_PLAY_TONE_BRICK:
+        $generated_brick = new LegoNxtPlayToneBrick($brick_xml_properties);
         break;
 
       // LEGO EV3 Bricks
@@ -331,90 +398,150 @@ class BrickFactory
       case Constants::AR_DRONE_EMERGENCY_BRICK:
         $generated_brick = new DroneEmergencyBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_MOVE_BACKWARD_BRICK:
         $generated_brick = new DroneMoveBackwardBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_MOVE_DOWN_BRICK:
         $generated_brick = new DroneMoveDownBrick($brick_xml_properties);
         break;
-
-      case Constants::AR_DRONE_MOVE_FOWARD_BRICK:
-        $generated_brick = new DroneMoveFowardBrick($brick_xml_properties);
+      case Constants::AR_DRONE_MOVE_FORWARD_BRICK:
+        $generated_brick = new DroneMoveForwardBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_MOVE_LEFT_BRICK:
         $generated_brick = new DroneMoveLeftBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_MOVE_RIGHT_BRICK:
         $generated_brick = new DroneMoveRightBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_MOVE_UP_BRICK:
         $generated_brick = new DroneMoveUpBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_SWITCH_CAMERA_BRICK:
         $generated_brick = new DroneSwitchCameraBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_TAKE_OFF_LAND_BRICK:
         $generated_brick = new DroneTakeOffLandBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_TURN_LEFT_BRICK:
         $generated_brick = new DroneTurnLeftBrick($brick_xml_properties);
         break;
-
       case Constants::AR_DRONE_TURN_RIGHT_BRICK:
         $generated_brick = new DroneTurnRightBrick($brick_xml_properties);
+        break;
+      case Constants::AR_DRONE_FLIP_BRICK:
+        $generated_brick = new DroneFlipBrick($brick_xml_properties);
+        break;
+      case Constants::AR_DRONE_PLAYED_ANIMATION_BRICK:
+        $generated_brick = new DronePlayedAnimationBrick($brick_xml_properties);
         break;
 
       // Jumping Sumo
       case Constants::JUMP_SUMO_ANIMATIONS_BRICK:
         $generated_brick = new JumpingSumoAnimationBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_JUMP_HIGH_BRICK:
         $generated_brick = new JumpingSumoJumpHighBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_JUMP_LONG_BRICK:
         $generated_brick = new JumpingSumoJumpLongBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_MOVE_BACKWARD_BRICK:
         $generated_brick = new JumpingSumoMoveBackwardBrick($brick_xml_properties);
         break;
-
-      case Constants::JUMP_SUMO_MOVE_FOWARD_BRICK:
-        $generated_brick = new JumpingSumoMoveFowardBrick($brick_xml_properties);
+      case Constants::JUMP_SUMO_MOVE_FORWARD_BRICK:
+        $generated_brick = new JumpingSumoMoveForwardBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_NO_SOUND_BRICK:
         $generated_brick = new JumpingSumoNoSoundBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_ROTATE_LEFT_BRICK:
         $generated_brick = new JumpingSumoRotateLeftBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_ROTATE_RIGHT_BRICK:
         $generated_brick = new JumpingSumoRotateRightBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_SOUND_BRICK:
         $generated_brick = new JumpingSumoSoundBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_TAKING_PICTURE_BRICK:
         $generated_brick = new JumpingSumoTakingPictureBrick($brick_xml_properties);
         break;
-
       case Constants::JUMP_SUMO_TURN_BRICK:
         $generated_brick = new JumpingSumoTurnBrick($brick_xml_properties);
+        break;
+
+      // Arduino
+      case Constants::ARDUINO_SEND_DIGITAL_VALUE_BRICK:
+        $generated_brick = new ArduinoSendDigitalValueBrick($brick_xml_properties);
+        break;
+      case Constants::ARDUINO_SEND_PMW_VALUE_BRICK:
+        $generated_brick = new ArduinoSendPMWValueBrick($brick_xml_properties);
+        break;
+
+      // Raspberry Pi
+      case Constants::RASPI_IF_LOGIC_BEGIN_BRICK:
+        $generated_brick = new RaspiIfLogicBeginBrick($brick_xml_properties);
+        break;
+      case Constants::RASPI_SEND_DIGITAL_VALUE_BRICK:
+        $generated_brick = new RaspiSendDigitalValueBrick($brick_xml_properties);
+        break;
+      case Constants::RASPI_PWM_BRICK:
+        $generated_brick = new RaspiPwmBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_RASPI_PIN_CHANGED_BRICK:
+        $generated_brick = new WhenRaspiPinChangedBrick($brick_xml_properties);
+        break;
+
+      // Embroidery
+      case Constants::STITCH_BRICK:
+        $generated_brick = new StitchBrick($brick_xml_properties);
+        break;
+
+      // Phiro
+      case Constants::PHIRO_MOTOR_MOVE_FORWARD_BRICK:
+        $generated_brick = new PhiroMotorMoveForwardBrick($brick_xml_properties);
+        break;
+      case Constants::PHIRO_MOTOR_MOVE_BACKWARD_BRICK:
+        $generated_brick = new PhiroMotorMoveBackwardBrick($brick_xml_properties);
+        break;
+      case Constants::PHIRO_MOTOR_STOP_BRICK:
+        $generated_brick = new PhiroMotorStopBrick($brick_xml_properties);
+        break;
+      case Constants::PHIRO_PLAY_TONE_BRICK:
+        $generated_brick = new PhiroPlayToneBrick($brick_xml_properties);
+        break;
+      case Constants::PHIRO_RGB_LIGHT_BRICK:
+        $generated_brick = new PhiroRgbLightBrick($brick_xml_properties);
+        break;
+      case Constants::PHIRO_IF_LOGIC_BEGIN_BRICK:
+        $generated_brick = new PhiroIfLogicBeginBrick($brick_xml_properties);
+        break;
+
+      // NFC
+      case Constants::SET_NFC_TAG_BRICK:
+        $generated_brick = new SetNfcTagBrick($brick_xml_properties);
+        break;
+      case Constants::WHEN_NFC_BRICK:
+        $generated_brick = new WhenNfcBrick($brick_xml_properties);
+        break;
+
+      // Testing bricks
+      case Constants::ASSERT_EQUALS_BRICK:
+        $generated_brick = new AssertEqualsBrick($brick_xml_properties);
+        break;
+      case Constants::WAIT_TILL_IDLE_BRICK:
+        $generated_brick = new WaitTillIdleBrick($brick_xml_properties);
+        break;
+      case Constants::TAP_AT_BRICK:
+        $generated_brick = new TapAtBrick($brick_xml_properties);
+        break;
+      case Constants::FINISH_STAGE_BRICK:
+        $generated_brick = new FinishStageBrick($brick_xml_properties);
+        break;
+
+      // deprecated old bricks
+      case Constants::LOOP_ENDLESS_BRICK:
+        $generated_brick = new LoopEndlessBrick($brick_xml_properties);
         break;
 
       // OTHER Bricks

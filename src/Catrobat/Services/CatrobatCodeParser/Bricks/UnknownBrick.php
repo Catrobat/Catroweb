@@ -17,7 +17,6 @@ class UnknownBrick extends Brick
   {
     $this->type = Constants::UNKNOWN_BRICK;
     $this->caption = "Unknown Brick";
-
     $this->setImgFile(Constants::UNKNOWN_BRICK_IMG);
   }
 }

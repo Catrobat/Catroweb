@@ -3,6 +3,8 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 
+use SimpleXMLElement;
+
 /**
  * Class ParsedSimpleProgram
  * @package App\Catrobat\Services\CatrobatCodeParser
@@ -17,9 +19,9 @@ class ParsedSimpleProgram extends ParsedObjectsContainer
   /**
    * ParsedSimpleProgram constructor.
    *
-   * @param \SimpleXMLElement $program_xml_properties
+   * @param SimpleXMLElement $program_xml_properties
    */
-  public function __construct(\SimpleXMLElement $program_xml_properties)
+  public function __construct(SimpleXMLElement $program_xml_properties)
   {
     parent::__construct($program_xml_properties);
 

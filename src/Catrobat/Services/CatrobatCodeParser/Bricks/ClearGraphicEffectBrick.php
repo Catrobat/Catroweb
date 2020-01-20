@@ -17,7 +17,6 @@ class ClearGraphicEffectBrick extends Brick
   {
     $this->type = Constants::CLEAR_GRAPHIC_EFFECT_BRICK;
     $this->caption = "Clear graphic effects";
-
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);
   }
 }

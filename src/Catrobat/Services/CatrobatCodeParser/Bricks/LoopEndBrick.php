@@ -17,7 +17,6 @@ class LoopEndBrick extends Brick
   {
     $this->type = Constants::LOOP_END_BRICK;
     $this->caption = "End of loop";
-
     $this->setImgFile(Constants::CONTROL_BRICK_IMG);
   }
 }

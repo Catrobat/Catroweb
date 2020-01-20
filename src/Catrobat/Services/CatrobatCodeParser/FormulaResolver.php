@@ -2,6 +2,8 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
+use SimpleXMLElement;
+
 /**
  * Class FormulaResolver
  * @package App\Catrobat\Services\CatrobatCodeParser
@@ -9,7 +11,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 class FormulaResolver
 {
   /**
-   * @param $formula_list
+   * @param SimpleXMLElement $formula_list
    *
    * @return array
    */

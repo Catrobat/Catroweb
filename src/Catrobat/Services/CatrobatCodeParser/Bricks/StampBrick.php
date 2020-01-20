@@ -17,7 +17,6 @@ class StampBrick extends Brick
   {
     $this->type = Constants::STAMP_BRICK;
     $this->caption = "Stamp";
-
     $this->setImgFile(Constants::PEN_BRICK_IMG);
   }
 }

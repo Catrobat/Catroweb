@@ -17,7 +17,6 @@ class DroneSwitchCameraBrick extends Brick
   {
     $this->type = Constants::AR_DRONE_SWITCH_CAMERA_BRICK;
     $this->caption = "Switch Camera";
-
-    $this->setImgFile(Constants::AR_DRONE_BRICK_IMG);
+    $this->setImgFile(Constants::AR_DRONE_LOOKS_BRICK_IMG);
   }
 }

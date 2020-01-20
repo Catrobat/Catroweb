@@ -3,6 +3,8 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 
+use SimpleXMLElement;
+
 /**
  * Class ParsedObjectGroup
  * @package App\Catrobat\Services\CatrobatCodeParser
@@ -10,11 +12,11 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 class ParsedObjectGroup
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $object_group_xml_properties;
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $name;
   /**
@@ -25,9 +27,9 @@ class ParsedObjectGroup
   /**
    * ParsedObjectGroup constructor.
    *
-   * @param \SimpleXMLElement $object_group_xml_properties
+   * @param SimpleXMLElement $object_group_xml_properties
    */
-  public function __construct(\SimpleXMLElement $object_group_xml_properties)
+  public function __construct(SimpleXMLElement $object_group_xml_properties)
   {
     $this->object_group_xml_properties = $object_group_xml_properties;
     $this->name = $this->resolveName();
@@ -35,7 +37,7 @@ class ParsedObjectGroup
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   private function resolveName()
   {
@@ -58,7 +60,7 @@ class ParsedObjectGroup
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   public function getName()
   {
