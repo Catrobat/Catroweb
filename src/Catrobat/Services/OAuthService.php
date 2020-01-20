@@ -247,7 +247,7 @@ class OAuthService
     $google_user = $this->user_manager->findOneBy([
       'gplusUid' => $google_id,
     ]);
-    if ($google_user && $google_user->getGplusAccessToken())
+    if ($google_user)
     {
       $retArray['token_available'] = true;
       $retArray['username'] = $google_user->getUsername();
@@ -281,31 +281,38 @@ class OAuthService
     $id_token = $request->request->get('id_token');
     $username = $request->request->get('username');
 
-    $client = new Google_Client(['client_id' => $client_id]);  // Specify the CLIENT_ID of the app that accesses the backend
-    $payload = $client->verifyIdToken($id_token);
-    if ($payload)
-    {
-      $gPlusId = $payload['sub'];
-      $gEmail = $payload['email'];
-      $gName = $payload['name'];
-      $gLocale = $payload['locale'];
+    $google_user = null;
+
+    try {
+      $client = new Google_Client(['client_id' => $client_id]);  // Specify the CLIENT_ID of the app that accesses the backend
+      $payload = $client->verifyIdToken($id_token);
+      if ($payload)
+      {
+        $gPlusId = $payload['sub'];
+        $gEmail = $payload['email'];
+        $gLocale = $payload['locale'];
+      }
+      else
+      {
+        return new Response('Token invalid', 777);
+      }
+
+      if ($gEmail)
+      {
+        $user = $this->user_manager->findUserByUsernameOrEmail($gEmail);
+      }
+      else
+      {
+        $user = null;
+      }
+      $google_user = $this->user_manager->findUserBy([
+        'gplusUid' => $gPlusId,
+      ]);
     }
-    else
+    catch (Exception $e)
     {
       return new Response('Token invalid', 777);
     }
-
-    if ($gEmail)
-    {
-      $user = $this->user_manager->findUserByUsernameOrEmail($gEmail);
-    }
-    else
-    {
-      $user = null;
-    }
-    $google_user = $this->user_manager->findUserBy([
-      'gplusUid' => $gPlusId,
-    ]);
 
     if ($google_user)
     {
@@ -456,14 +463,16 @@ class OAuthService
      * @var $user        User
      */
     $violations = $this->validateOAuthUser($request, $retArray);
-    if (count($violations) == 0)
+    if (count($violations) === 0)
     {
-      if ($user->getUsername() == '')
+      if ($user->getUsername() === '')
       {
+        $locale = substr($locale, 0, 180);
         $user->setUsername($googleUsername);
       }
-      if ($user->getCountry() == '')
+      if ($user->getCountry() === '' && $locale !== "NO_GOOGLE_LOCALE")
       {
+        $locale = substr($locale, 0, 5);
         $user->setCountry($locale);
       }
 
