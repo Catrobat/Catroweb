@@ -16,8 +16,7 @@ class ContinueSceneBrick extends Brick
   protected function create()
   {
     $this->type = Constants::CONTINUE_SCENE_BRICK;
-    $this->caption = "Continue scene " . $this->brick_xml_properties->sceneForTransition;
-
+    $this->caption = "Continue scene _";
     $this->setImgFile(Constants::CONTROL_BRICK_IMG);
   }
 }

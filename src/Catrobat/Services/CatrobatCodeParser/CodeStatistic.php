@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
+use SimpleXMLElement;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 
@@ -118,6 +119,13 @@ class CodeStatistic
           'listDifferent' => [],
         ],
       ],
+      'specialBricks'    => [
+        'numTotal'  => 0,
+        'different' => [
+          'numDifferent'  => 0,
+          'listDifferent' => [],
+        ],
+      ],
     ];
 
     $this->brick_type_register = [
@@ -128,6 +136,7 @@ class CodeStatistic
       'looksBricks'   => [],
       'penBricks'     => [],
       'dataBricks'    => [],
+      'specialBricks'    => [],
     ];
   }
 
@@ -220,19 +229,30 @@ class CodeStatistic
     switch ($brick->getImgFile())
     {
       // Normal Bricks
+      case Constants::EVENT_SCRIPT_IMG:
       case Constants::EVENT_BRICK_IMG:
+      case Constants::RASPI_EVENT_SCRIPT_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'eventBricks');
         break;
+      case Constants::CONTROL_SCRIPT_IMG:
       case Constants::CONTROL_BRICK_IMG:
+      case Constants::RASPI_CONTROL_BRICK_IMG:
+      case Constants::PHIRO_CONTROL_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'controlBricks');
         break;
+      case Constants::MOTION_SCRIPT_IMG:
       case Constants::MOTION_BRICK_IMG:
+      case Constants::JUMPING_SUMO_BRICK_IMG:
+      case Constants::AR_DRONE_MOTION_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'motionBricks');
         break;
       case Constants::SOUND_BRICK_IMG:
+      case Constants::PHIRO_SOUND_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'soundBricks');
         break;
       case Constants::LOOKS_BRICK_IMG:
+      case Constants::AR_DRONE_LOOKS_BRICK_IMG:
+      case Constants::PHIRO_LOOK_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'looksBricks');
         break;
       case Constants::PEN_BRICK_IMG:
@@ -241,13 +261,19 @@ class CodeStatistic
       case Constants::DATA_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'dataBricks');
         break;
-
-      // Script Bricks
-      case Constants::EVENT_SCRIPT_IMG:
-        $this->updateBrickTypeStatistic($brick->getType(), 'eventBricks');
-        break;
-      case Constants::CONTROL_SCRIPT_IMG:
-        $this->updateBrickTypeStatistic($brick->getType(), 'controlBricks');
+      case Constants::UNKNOWN_BRICK_IMG:
+      case Constants::DEPRECATED_BRICK_IMG:
+      case Constants::UNKNOWN_SCRIPT_IMG:
+      case Constants::DEPRECATED_SCRIPT_IMG:
+      case Constants::LEGO_EV3_BRICK_IMG:
+      case Constants::LEGO_NXT_BRICK_IMG:
+      case Constants::ARDUINO_BRICK_IMG:
+      case Constants::EMBROIDERY_BRICK_IMG:
+      case Constants::RASPI_BRICK_IMG:
+      case Constants::PHIRO_BRICK_IMG:
+      case Constants::TESTING_BRICK_IMG:
+      case Constants::YOUR_BRICK_IMG:
+        $this->updateBrickTypeStatistic($brick->getType(), 'specialBricks');
         break;
     }
   }
@@ -269,18 +295,18 @@ class CodeStatistic
 
 
   /**
-   * @param \SimpleXMLElement $program_xml_properties
+   * @param SimpleXMLElement $program_xml_properties
    */
-  public function computeVariableStatistic(\SimpleXMLElement $program_xml_properties)
+  public function computeVariableStatistic(SimpleXMLElement $program_xml_properties)
   {
     $this->countGlobalVariables($program_xml_properties);
     $this->countLocalVariables($program_xml_properties);
   }
 
   /**
-   * @param \SimpleXMLElement $program_xml_properties
+   * @param SimpleXMLElement $program_xml_properties
    */
-  protected function countGlobalVariables(\SimpleXMLElement $program_xml_properties)
+  protected function countGlobalVariables(SimpleXMLElement $program_xml_properties)
   {
     try
     {
@@ -294,15 +320,23 @@ class CodeStatistic
   }
 
   /**
-   * @param \SimpleXMLElement $program_xml_properties
+   * @param SimpleXMLElement $program_xml_properties
    */
-  protected function countLocalVariables(\SimpleXMLElement $program_xml_properties)
+  protected function countLocalVariables(SimpleXMLElement $program_xml_properties)
   {
     try
     {
       $this->total_num_local_vars =
-        count($program_xml_properties->xpath('//objectListOfList//userVariable')) +
-        count($program_xml_properties->xpath('//objectVariableList//userVariable'));
+        count($program_xml_properties->xpath('//userVariable//userVariable')) - $this->total_num_global_vars;
+
+      if ($this->total_num_local_vars <= 0)
+      {
+        // might be a old project using the old deprecated format to define local variables
+        $this->total_num_local_vars =
+          count($program_xml_properties->xpath('//objectListOfList//userVariable')) +
+          count($program_xml_properties->xpath('//objectVariableList//userVariable'));
+      }
+
     } catch (Exception $e)
     {
       $this->total_num_local_vars = null;

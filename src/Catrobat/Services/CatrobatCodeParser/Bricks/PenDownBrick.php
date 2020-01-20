@@ -17,7 +17,6 @@ class PenDownBrick extends Brick
   {
     $this->type = Constants::PEN_DOWN_BRICK;
     $this->caption = "Pen down";
-
     $this->setImgFile(Constants::PEN_BRICK_IMG);
   }
 }

@@ -7,6 +7,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 use App\Catrobat\Exceptions\Upload\OldCatrobatLanguageVersionException;
 use App\Catrobat\Exceptions\Upload\OldApplicationVersionException;
+use SimpleXMLElement;
 
 /**
  * Class VersionValidator
@@ -28,9 +29,9 @@ class VersionValidator
   }
 
   /**
-   * @param \SimpleXMLElement $xml
+   * @param SimpleXMLElement $xml
    */
-  public function validate(\SimpleXMLElement $xml)
+  public function validate(SimpleXMLElement $xml)
   {
     if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<'))
     {

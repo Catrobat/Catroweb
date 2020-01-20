@@ -16,8 +16,7 @@ class CollisionScript extends Script
   protected function create()
   {
     $this->type = Constants::COLLISION_SCRIPT;
-    $this->caption = "When physical collision with \"" . $this->script_xml_properties->receivedMessage . "\"";
-
-    $this->setImgFile(Constants::EVENT_SCRIPT_IMG);
+    $this->caption = "Collision Script (deprecated)";
+    $this->setImgFile(Constants::DEPRECATED_SCRIPT_IMG);
   }
 }

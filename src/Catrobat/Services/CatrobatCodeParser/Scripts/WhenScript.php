@@ -17,7 +17,6 @@ class WhenScript extends Script
   {
     $this->type = Constants::WHEN_SCRIPT;
     $this->caption = "When tapped";
-
     $this->setImgFile(Constants::EVENT_SCRIPT_IMG);
   }
 }

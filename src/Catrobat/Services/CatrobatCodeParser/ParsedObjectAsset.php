@@ -3,6 +3,8 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 
+use SimpleXMLElement;
+
 /**
  * Class ParsedObjectAsset
  * @package App\Catrobat\Services\CatrobatCodeParser
@@ -10,24 +12,24 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 class ParsedObjectAsset
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $asset_xml_properties;
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $name;
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $file_name;
 
   /**
    * ParsedObjectAsset constructor.
    *
-   * @param \SimpleXMLElement $asset_xml_properties
+   * @param SimpleXMLElement $asset_xml_properties
    */
-  public function __construct(\SimpleXMLElement $asset_xml_properties)
+  public function __construct(SimpleXMLElement $asset_xml_properties)
   {
     $this->asset_xml_properties = $asset_xml_properties;
     $this->name = $asset_xml_properties[Constants::NAME_ATTRIBUTE];
@@ -35,7 +37,7 @@ class ParsedObjectAsset
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   public function getName()
   {
@@ -43,7 +45,7 @@ class ParsedObjectAsset
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   public function getFileName()
   {

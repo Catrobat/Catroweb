@@ -7,6 +7,7 @@ use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
 use Doctrine\DBAL\Types\GuidType;
+use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -33,7 +34,7 @@ class ExtractedCatrobatFile
   protected $dir_hash;
 
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $program_xml_properties;
 
@@ -295,7 +296,7 @@ class ExtractedCatrobatFile
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   public function getProgramXmlProperties()
   {

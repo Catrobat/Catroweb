@@ -17,7 +17,6 @@ class DroneEmergencyBrick extends Brick
   {
     $this->type = Constants::AR_DRONE_EMERGENCY_BRICK;
     $this->caption = "Emergency";
-
-    $this->setImgFile(Constants::AR_DRONE_BRICK_IMG);
+    $this->setImgFile(Constants::AR_DRONE_MOTION_BRICK_IMG);
   }
 }
