@@ -8,9 +8,8 @@ require 'recipe/symfony3.php';
 require 'recipe/slack.php';
 
 // Load .env file
-(new Dotenv())->load('.env');
-(new Dotenv())->load('.env.local');
-
+(new Dotenv(true))->load('.env');
+(new Dotenv(true))->load('.env.local');
 
 // Project name
 set('application', getenv('APP_NAME'));
@@ -19,8 +18,7 @@ set('git_tty', false);
 
 // Slack Data
 set('slack_webhook', getenv(('SLACK_WEBHOOK')));
-set('slack_text', 'Web-Team deploying `{{branch}}` to *{{target}}* with version number `'
-  . getenv('APP_VERSION') . '`');
+set('slack_text', 'Web-Team deploying `{{branch}}` to *{{target}}*');
 set('slack_success_text', 'Deploy to *{{target}}* successful');
 set('slack_success_color', '#4BB543');
 
@@ -40,8 +38,9 @@ set('shared_dirs',
 add('shared_files',
   [
     '.env.prod.local',
+    '.env.dev.local',
     'config/packages/parameters.yml',
-    'config/packages/dev/parameters.yml', // only dev!
+    'config/packages/dev/parameters.yml',
   ]);
 
 // Symfony writable dirs
@@ -75,7 +74,7 @@ host(getenv('DEPLOY_WEBTEST'))
   ->stage('web-test')
   ->set('symfony_env', 'dev')
   ->set('branch', getenv('DEPLOY_WEBTEST_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader ')
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
 host(getenv('DEPLOY_POREVIEW'))
@@ -85,6 +84,19 @@ host(getenv('DEPLOY_POREVIEW'))
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
   ->set('deploy_path', '/var/www/share/');
 
+host(getenv('DEPLOY_CATBLOCKS'))
+  ->stage('catblocks')
+  ->set('symfony_env', 'prod')
+  ->set('branch', getenv('DEPLOY_CATBLOCKS_BRANCH'))
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('deploy_path', '/var/www/share/');
+
+host(getenv('DEPLOY_ANDROID'))
+  ->stage('android')
+  ->set('symfony_env', 'prod')
+  ->set('branch', getenv('DEPLOY_ANDROID_BRANCH'))
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('deploy_path', '/var/www/share/');
 
 
 
