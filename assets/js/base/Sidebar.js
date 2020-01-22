@@ -60,6 +60,11 @@ function manageNotificationsDropdown()
   let notificationDropdownToggler = document.getElementById("notifications-dropdown-toggler")
   let notificationDropdownContent = document.getElementById("notifications-dropdown-content")
   
+  if (notificationDropdownToggler === null || notificationDropdownContent === null)
+  {
+    return // nothing to do when user is not logged in -> not notification categories
+  }
+  
   notificationDropdownToggler.addEventListener("click", function() {
     notificationDropdownContent.style.maxHeight ? collapseNotificationDropdownMenu() : expandNotificationDropdownMenu()
   })
@@ -67,12 +72,19 @@ function manageNotificationsDropdown()
   // automatically expand the notification dropdown when the user is on a notification page
   let notificationSubcategories = notificationDropdownContent.getElementsByTagName('a')
   
+  let shouldBeExpanded = false;
   for (const entry of notificationSubcategories)
   {
     if (entry.href === window.location.href)
     {
       expandNotificationDropdownMenu()
+      shouldBeExpanded = true;
+      break;
     }
+  }
+  if (!shouldBeExpanded)
+  {
+    collapseNotificationDropdownMenu()
   }
 }
 
@@ -84,6 +96,12 @@ function expandNotificationDropdownMenu()
   notificationDropdownContent.style.maxHeight = notificationDropdownContent.scrollHeight + "px"
   notificationDropdownArrow.classList.remove('fa-caret-left')
   notificationDropdownArrow.classList.add('fa-caret-down')
+  
+  let notification_categories = notificationDropdownContent.getElementsByTagName('a')
+  Array.prototype.forEach.call(notification_categories, function(category) {
+    category.style.visibility = 'visible'
+  });
+  
 }
 
 function collapseNotificationDropdownMenu()
@@ -94,4 +112,10 @@ function collapseNotificationDropdownMenu()
   notificationDropdownContent.style.maxHeight = null
   notificationDropdownArrow.classList.remove('fa-caret-down')
   notificationDropdownArrow.classList.add('fa-caret-left')
+  
+  let notification_categories = notificationDropdownContent.getElementsByTagName('a')
+  Array.prototype.forEach.call(notification_categories, function(category) {
+    category.style.visibility = 'hidden'
+  });
+  
 }

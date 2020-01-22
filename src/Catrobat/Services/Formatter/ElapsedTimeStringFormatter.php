@@ -3,7 +3,7 @@
 namespace App\Catrobat\Services\Formatter;
 
 use App\Catrobat\Services\Time;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 /**

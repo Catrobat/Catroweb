@@ -22,7 +22,7 @@ use App\Catrobat\Exceptions\Upload\InvalidChecksumException;
 use App\Catrobat\Exceptions\Upload\MissingPostDataException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Repository\GameJamRepository;
 use App\Catrobat\Exceptions\Upload\NoGameJamException;
 

@@ -35,33 +35,43 @@ Feature: User gets notifications for new followers, likes, comments and other ty
   Scenario: User should not see all notification subsections on the homepage
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/app/"
-    And I should not see "All Notifications"
-    And I should not see "Likes"
-    And I should not see "Followers"
-    And I should not see "Comments"
+    And I open the menu
+    And the element "#notifications-dropdown-content a" should not be visible
+    And the element "#notifications-dropdown-content #btn-notifications" should not be visible
+    And the element "#notifications-dropdown-content #btn-followers" should not be visible
+    And the element "#notifications-dropdown-content #btn-likes" should not be visible
+    And the element "#notifications-dropdown-content #btn-comments" should not be visible
 
   Scenario: User should see all notification subsections on notification pages
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/app/notifications/allNotifications"
-    And I should see "All Notifications"
-    And I should see "Likes"
-    And I should see "Followers"
-    And I should see "Comments"
+    And I open the menu
+    And the element "#notifications-dropdown-content a" should be visible
+    And the element "#notifications-dropdown-content #btn-notifications" should be visible
+    And the element "#notifications-dropdown-content #btn-followers" should be visible
+    And the element "#notifications-dropdown-content #btn-likes" should be visible
+    And the element "#notifications-dropdown-content #btn-comments" should be visible
     Given I am on "/app/notifications/followers"
-    And I should see "All Notifications"
-    And I should see "Likes"
-    And I should see "Followers"
-    And I should see "Comments"
+    And I open the menu
+    And the element "#notifications-dropdown-content a" should be visible
+    And the element "#notifications-dropdown-content #btn-notifications" should be visible
+    And the element "#notifications-dropdown-content #btn-followers" should be visible
+    And the element "#notifications-dropdown-content #btn-likes" should be visible
+    And the element "#notifications-dropdown-content #btn-comments" should be visible
     Given I am on "/app/notifications/likes"
-    And I should see "All Notifications"
-    And I should see "Likes"
-    And I should see "Followers"
-    And I should see "Comments"
+    And I open the menu
+    And the element "#notifications-dropdown-content a" should be visible
+    And the element "#notifications-dropdown-content #btn-notifications" should be visible
+    And the element "#notifications-dropdown-content #btn-followers" should be visible
+    And the element "#notifications-dropdown-content #btn-likes" should be visible
+    And the element "#notifications-dropdown-content #btn-comments" should be visible
     Given I am on "/app/notifications/comments"
-    And I should see "All Notifications"
-    And I should see "Likes"
-    And I should see "Followers"
-    And I should see "Comments"
+    And I open the menu
+    And the element "#notifications-dropdown-content a" should be visible
+    And the element "#notifications-dropdown-content #btn-notifications" should be visible
+    And the element "#notifications-dropdown-content #btn-followers" should be visible
+    And the element "#notifications-dropdown-content #btn-likes" should be visible
+    And the element "#notifications-dropdown-content #btn-comments" should be visible
 
 
   Scenario: New user should not have any notifications
