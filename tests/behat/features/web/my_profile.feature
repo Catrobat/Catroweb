@@ -53,7 +53,7 @@ Feature:
     And I wait for the server response
     And I should be on "/app/user"
     When I go to "/app/logout"
-    And I try to log in as "Catrobat" with the password "123456"
+    And I log in as "Catrobat" with the password "123456"
     Then I should see "Your password or username was incorrect."
     And I try to log in as "Mr.Catro" with the password "123456"
     Then I should be logged in
@@ -67,7 +67,7 @@ Feature:
     And I should be on "/app/user"
     Then I should see "This username is not valid."
     When I go to "/app/logout"
-    And I try to log in as "Mr" with the password "123456"
+    And I log in as "Mr" with the password "123456"
     Then I should see "Your password or username was incorrect."
 
   Scenario: When changing the username the max length must be 180
@@ -90,7 +90,7 @@ Feature:
     And I wait for the server response
     And I should be on "/app/user"
     When I go to "/app/logout"
-    And I try to log in as "Catrobat" with the password "123456"
+    And I log in as "Catrobat" with the password "123456"
     Then I should see "Your password or username was incorrect."
     When I log in as "Catrobat" with the password "abcdef"
     Then I should be logged in

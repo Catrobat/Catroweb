@@ -75,6 +75,10 @@ $sidebar-width: 250px;
   body.new-nav .container {
     padding-left: 15px + $sidebar-width;
   }
+
+  body.new-nav.modal-open .modal {
+    border-left: $sidebar-width solid transparent;
+  }
 }
 
 #sidebar-overlay

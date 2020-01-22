@@ -40,8 +40,8 @@ registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
 CommentNotifications: 'Comments'
@@ -67,7 +67,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 
 programs:
   welcome:
@@ -114,10 +114,9 @@ programs:
   downloads: '%downloads% downloads'
   sample: Example projects
   views: '%views% views'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "All"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
@@ -561,7 +560,7 @@ help:
     download: "Download the project"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
-  username_chooser: Please choose a username:
+  username_chooser: "Please choose a username:"
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 
@@ -605,6 +604,9 @@ apk:
   prepare: 'Prepare app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
+
+format:
+  million_abbreviation: M
 
 #api
 errors:
@@ -838,8 +840,8 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'

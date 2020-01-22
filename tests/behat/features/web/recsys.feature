@@ -14,11 +14,11 @@ Feature: Recommendations on homepage (a.k.a. index page)
       | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
       | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
 
-    And there are likes:
-      | username  | program_id | type | created at       |
-      | Catrobat  | 1          | 1    | 01.01.2017 12:00 |
-      | Catrobat  | 2          | 2    | 01.01.2017 12:00 |
-      | OtherUser | 1          | 4    | 01.01.2017 12:00 |
+    And there are project reactions:
+      | user      | project | type | created at       |
+      | Catrobat  | 1       | 1    | 01.01.2017 12:00 |
+      | Catrobat  | 2       | 2    | 01.01.2017 12:00 |
+      | OtherUser | 1       | 4    | 01.01.2017 12:00 |
 
     When I am on "/app/"
     And the selected language is "English"

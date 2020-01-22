@@ -13,27 +13,29 @@
   </div>
 {% endif %}
 
-{% if isWebview() %}
-<a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-  {% endif %}
-
-  <img alt="project thumbnail" id="project-thumbnail-big"
-       src="{{ asset(program_details.screenshotBig) }}"/>
-
-  {% if my_program %}
-    <div id="change-project-thumbnail-button" class="upload-image">
-      <div>
-        <input type="file" name="file">
-        <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
-        <div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
-      </div>
-    </div>
-  {% endif %}
-
-
+<div class="project-thumbnail-wrapper">
   {% if isWebview() %}
-</a>
-{% endif %}
+  <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+    {% endif %}
+
+    <img alt="project thumbnail" id="project-thumbnail-big"
+         src="{{ asset(program_details.screenshotBig) }}"/>
+
+    {% if my_program %}
+      <div id="change-project-thumbnail-button" class="upload-image">
+        <div>
+          <input type="file" name="file">
+          <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
+          <div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
+        </div>
+      </div>
+    {% endif %}
+
+
+    {% if isWebview() %}
+  </a>
+  {% endif %}
+</div>
 <script src="{{ asset('compiled/js/ImageUpload.js') }}"></script>
 <script>
   setImageUploadListener('{{ path('upload_project_thumbnail', { 'id': program.id }) }}',

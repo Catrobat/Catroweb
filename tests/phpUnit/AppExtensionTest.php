@@ -98,9 +98,10 @@ class AppExtensionTest extends \PHPUnit\Framework\TestCase
     $gamejamRepository = $this->prophet->prophesize('App\Repository\GameJamRepository');
     $theme = $this->prophet->prophesize('Liip\ThemeBundle\ActiveTheme');
     $parameter_bag = $this->mockParameterBag();
+    $translator = $this->prophet->prophesize('Symfony\Contracts\Translation\TranslatorInterface');
 
     return new AppExtension($requestStack->reveal(), $repo->reveal(), $gamejamRepository->reveal(),
-      $theme->reveal(), $parameter_bag->reveal(), $this->translationPath);
+      $theme->reveal(), $parameter_bag->reveal(), $this->translationPath, $translator->reveal());
   }
 
   private function mockMediaPackageFileRepository()
