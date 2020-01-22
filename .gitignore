@@ -48,7 +48,6 @@ var/log/**
 vendor/
 
 ### root ###
-*.sh
 crowdin.yml
 ###> symfony/framework-bundle ###
 /.env.local
