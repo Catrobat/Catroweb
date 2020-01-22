@@ -66,6 +66,7 @@ Feature: As a visitor I want to see a program page
     And I fill in "password" with "123456"
     And I press "Login"
     When I am on "/app/user/1"
+    And I wait for AJAX to finish
     Then I should see "project 1"
     And I should see "project 2"
     And I should not see "project 3"

@@ -69,7 +69,7 @@ Feature: As a program owner, I should be able to give credits for my program.
     Then the element "#edit-credits" should be visible
     Then I write "This is a credit" in textarea
     Then I click "#edit-credits-submit-button"
-    And I wait for a second
+    And I am on "/app/project/1"
     Then I should see "This is a credit"
 
 

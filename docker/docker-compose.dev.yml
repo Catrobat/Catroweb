@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+
+  # APACHE WITH PHP
+  app.catroweb.dev:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: app.catroweb.dev
+    image: app.catroweb.dev
+    depends_on:
+      - db.catroweb.dev
+    ports:
+      - 80:80
+    volumes:
+      - ./../tests:/var/www/catroweb/tests:cached
+      - ./../templates:/var/www/catroweb/templates:cached
+      - ./../translations:/var/www/catroweb/translations:cached
+      - ./../src:/var/www/catroweb/src:cached
+      - /vendor
+      - /node_modules
+    command: ["sh", "/var/www/catroweb/docker/php/startup.sh"]
+
+  # DATABASE
+  db.catroweb.dev:
+    image: mariadb:10.3.11
+    container_name: db.catroweb.dev
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=symfony
+
+  # PHPMYADMIN
+  phpmyadmin.catroweb.dev:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin.catroweb.dev
+    environment:
+      - PMA_ARBITRARY=1
+    restart: always
+    ports:
+      - 8001:80
+    volumes:
+      - /sessions
+    external_links:
+      - db.catroweb.dev:db
+    depends_on:
+      - db.catroweb.dev

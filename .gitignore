@@ -73,3 +73,9 @@ behat.yml
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+*/.DS_Store
+.DS_Store
+docker/
+tests/behat/features/
+translations/
+composer.*

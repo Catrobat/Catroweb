@@ -642,7 +642,7 @@ success:
   imgUpload: Your image was uploaded successfully!
   report: Dein Bericht wurde erfolgreich verschickt!
 time:
-  minutes.ago: '{0} < vor 1 Minute |{1} vor 1 Minute |]1, Inf]  vor %count% Minuten'
+  minutes.ago: '{0} < vor 1 Minute |{1} vor 1 Minute |]1,Inf]  vor %count% Minuten'
   hours.ago: '{1} vor 1 Stunde |]1, Inf]  vor %count% Stunden'
   days.ago: '{1} vor 1 Tag |]1, Inf] vor %count% Tagen'
   months.ago: '{1} vor 1 Monat |]1, Inf] vor %count% Monaten'

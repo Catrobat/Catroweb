@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use App\Entity\MediaManager;
 
 
 /**
@@ -50,7 +51,7 @@ class ResetCommand extends ContainerAwareCommand
       return;
     }
 
-    CommandHelper::executeShellCommand('php bin/console doctrine:schema:drop --force', [],
+   CommandHelper::executeShellCommand('php bin/console doctrine:schema:drop --force', [],
       'Dropping database', $output);
 
     CommandHelper::executeShellCommand('php bin/console catrobat:drop:migration', [],
@@ -97,14 +98,23 @@ class ResetCommand extends ContainerAwareCommand
       'Create default user', $output);
 
     $temp_dir = sys_get_temp_dir() . '/catrobat.program.import/';
+    $temp_dir2 = sys_get_temp_dir() . '/catrobat.media.import/';
 
     $filesystem = new Filesystem();
     $filesystem->remove($temp_dir);
     $filesystem->mkdir($temp_dir);
+    $filesystem->remove($temp_dir2);
+    $filesystem->mkdir($temp_dir2);
 
     $this->downloadPrograms($temp_dir, intval($input->getOption('more')), $output);
+    $this->downloadMediaLibraries($temp_dir2, intval($input->getOption('more')), $output);
 
-    $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
+   CommandHelper::executeShellCommand(
+      "php bin/console catrobat:mediaimport $temp_dir2",
+      ['timeout' => 900], 'Importing Media', $output);
+    $filesystem->remove($temp_dir2);
+
+   $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
     CommandHelper::executeShellCommand(
       "php bin/console catrobat:import $temp_dir catroweb $remix_layout_option",
       ['timeout' => 900], 'Importing Projects', $output);
@@ -115,7 +125,7 @@ class ResetCommand extends ContainerAwareCommand
     ], $output);
     $filesystem->remove($temp_dir);
 
-    CommandHelper::executeShellCommand('chmod o+w -R public/resources', [],
+   CommandHelper::executeShellCommand('chmod o+w -R public/resources', [],
       'Setting resources permissions', $output);
 
     CommandHelper::executeShellCommand('chmod o+w -R public/resources_test', [],
@@ -163,5 +173,47 @@ class ResetCommand extends ContainerAwareCommand
       }
     }
 
+  }
+
+    /**
+   * @param                 $dir
+   * @param                 $amount int The amount of media libraries to be downloaded
+   * @param OutputInterface $output
+   */
+  private function downloadMediaLibraries($dir, $amount, OutputInterface $output)
+  {
+   $output->writeln('Downloading Media Files...');
+   
+   $server_json = json_decode(file_get_contents('https://share.catrob.at/app/api/media/package/Sounds/json'), true);
+   foreach ($server_json as $media)
+   {
+    $url = 'https://share.catrob.at' . $media['download_url'];
+    $name = $dir . $media['name'] . '.media';
+    $output->writeln('Downloading ' . $name );
+   try
+   {
+    file_put_contents($name, file_get_contents($url));
+   } catch (\Exception $e)
+   {
+    $output->writeln("File <" . $url . "> returned error 500, continuing...");
+    continue;
+   }
+   }
+
+   $server_json = json_decode(file_get_contents('https://share.catrob.at/app/api/media/package/Looks/json'), true); 
+   foreach ($server_json as $media)
+   {
+    $url = 'https://share.catrob.at' . $media['download_url'];
+    $name = $dir . $media['name'] . '.media';
+    $output->writeln('Downloading ' . $name );
+   try
+   {
+    file_put_contents($name, file_get_contents($url));
+   } catch (\Exception $e)
+   {
+    $output->writeln("File <" . $url . "> returned error 500, continuing...");
+    continue;
+   }
+   }
   }
 }

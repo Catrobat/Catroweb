@@ -57,6 +57,7 @@ Feature: Using a release app I should not see debug programs
     Given I use a debug build of the Catroid app
     And I log in as "Catrobat" with the password "123456"
     And I am on "/app/user"
+    And I wait for AJAX to finish
     Then I should see "program 1"
     And I should see "program 2"
     And I should see "debug program"

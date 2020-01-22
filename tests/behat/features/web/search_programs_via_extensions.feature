@@ -26,6 +26,7 @@ Feature: Searching for programs with extensions
     And I should see "Lego"
     And I should see "Phiro"
     When I press on the extension "Lego"
+    And I wait for AJAX to finish
     Then I should see "Your search returned 2 results"
     Then I should see "program 1"
     And I should see "program 2"
@@ -33,6 +34,7 @@ Feature: Searching for programs with extensions
 
   Scenario: search for programs should work
     When I am on "/app/search/Lego"
+    And I wait for AJAX to finish
     Then I should see "Your search returned 2 results"
     And I should see "program 1"
     And I should see "program 2"

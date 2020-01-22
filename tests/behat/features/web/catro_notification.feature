@@ -26,6 +26,7 @@ Feature: User gets generic notifications additionally to the remix notifications
     And the ".all-notifications-dropdown" element should contain "2"
     When I click "#mark-as-read-1"
     And I wait for fadeEffect to finish
+    And I wait for AJAX to finish
     Then the ".all-notifications-dropdown" element should contain "1"
     When I click "#mark-as-read-2"
     And I wait for fadeEffect to finish

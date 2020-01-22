@@ -11,6 +11,9 @@
     "behat/mink-extension": {
         "version": "2.3.1"
     },
+    "behat/mink-selenium2-driver": {
+        "version": "v1.3.1"
+    },
     "behat/symfony2-extension": {
         "version": "2.1",
         "recipe": {
@@ -169,6 +172,9 @@
     "emuse/behat-html-formatter": {
         "version": "0.1.x-dev"
     },
+    "facebook/graph-sdk": {
+        "version": "5.7.0"
+    },
     "firebase/php-jwt": {
         "version": "v5.0.0"
     },
@@ -240,6 +246,9 @@
     },
     "incenteev/composer-parameter-handler": {
         "version": "v2.1.3"
+    },
+    "instaclick/php-webdriver": {
+        "version": "1.4.5"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -653,10 +662,19 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
     },
+    "symfony/polyfill-php56": {
+        "version": "v1.12.0"
+    },
+    "symfony/polyfill-php70": {
+        "version": "v1.12.0"
+    },
     "symfony/polyfill-php72": {
         "version": "v1.10.0"
     },
     "symfony/polyfill-php73": {
+        "version": "v1.12.0"
+    },
+    "symfony/polyfill-util": {
         "version": "v1.12.0"
     },
     "symfony/process": {

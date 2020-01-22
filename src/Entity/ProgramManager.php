@@ -201,7 +201,7 @@ class ProgramManager
     $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage('en');
-    $program->setUploadedAt(new DateTime());
+    $program->setUploadedAt(new DateTime('now', new \DateTimeZone('UTC')));
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());

@@ -24,6 +24,7 @@ Feature: Searching for programs with tags
     And I should see "Game"
     And I should see "Animation"
     When I press on the tag "Animation"
+    And I wait for AJAX to finish
     Then I should see "Your search returned 2 results"
     And I should see "program 1"
     And I should see "program 2"
@@ -31,6 +32,7 @@ Feature: Searching for programs with tags
 
   Scenario: search for programs should work
     When I am on "/app/search/Animation"
+    And I wait for AJAX to finish
     Then I should see "Your search returned 2 results"
     And I should see "program 1"
     And I should see "program 2"

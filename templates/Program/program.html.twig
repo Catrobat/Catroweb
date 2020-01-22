@@ -244,16 +244,11 @@
           </a>
         </div>
 
+
         <div id="remix-graph-button" class="btn-container col-12 col-xl-6">
           <button class="btn btn-primary">
             <i class="program-big-button-icon mr-3 fa fa-sitemap"></i>
             <span>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</span>
-          </button>
-        </div>
-
-         <div id="steal-button" class="btn-container col-12 col-xl-6">
-          <button class="btn btn-primary"> 
-            <i>Steal me</i>
           </button>
         </div>
 
@@ -523,21 +518,6 @@
     {
       event.preventDefault()
     }
-
-      $(document).on('click', '#steal-button', function () {
-
- $.ajax({
-              url    : "{{ path('program_steal', { 'project_id' : program.id }) }}",
-              type   : 'get',
-              success: function (remixData) {
-             alert('Stolen!')
-              },
-              error  : function () {
-                alert('Unable to steal!')
-              }
-            })
-            
-                  })
 
     $(document).on('click', '#url-download', function () {
       var url_link = document.getElementById('url-download')

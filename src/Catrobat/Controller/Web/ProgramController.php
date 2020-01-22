@@ -105,40 +105,7 @@ class ProgramController extends AbstractController
     ]);
   }
 
-//NEW!!!!!
-  /**
-   * @Route("/project/steal/{project_id}", name="program_steal", methods={"GET"})
-   *
-   * @param Request $request
-   * @param ProgramManager $program_manager
-   * @param CatroNotificationRepository $notification_repo
-   * @param CatroNotificationService $notification_service
-   *
-   * @return JsonResponse|RedirectResponse
-   * @throws Exception
-   */
-  public function programStealAction(Request $request, $project_id, ProgramManager $program_manager,
-                                    CatroNotificationRepository $notification_repo,
-                                    CatroNotificationService  $notification_service )
-  {
-  
- 
-    $user2 = $this->getUser();
-    if (!$user2)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
-    }
-    $em = $this->getDoctrine()->getManager();
 
-    $program = $em->getRepository(Program::class)->find($project_id);
-    $program->setUser($user2);
-    $em->persist($program);
-    $em->flush();
-    return $this->redirectToRoute('profile');
-
-    
-  }
-  
   /**
    * @Route("/project/{id}", name="program")
    * @Route("/program/{id}", name="program_depricated")
@@ -258,7 +225,6 @@ class ProgramController extends AbstractController
       'logged_in'                    => $logged_in,
     ]);
   }
-
 
   /**
    * @Route("/project/like/{id}", name="program_like", methods={"GET"})

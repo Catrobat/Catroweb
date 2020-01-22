@@ -30,7 +30,7 @@ Feature: Get the most recent programs
                                 "Views":9,
                                 "Downloads":33,
                                 "Private":false,
-                                "Uploaded": 1359720000,
+                                "Uploaded": 1359723600,
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
