@@ -647,7 +647,7 @@ class SymfonySupport
     $program->setRemixMigratedAt(isset($config['remixmigratedtime']) ? new \DateTime($config['remixmigratedtime'], new \DateTimeZone('UTC')) : null);
     $program->setCatrobatVersion(isset($config['catrobatversion']) ? $config['catrobatversion'] : 1);
     $program->setCatrobatVersionName(isset($config['catrobatversionname']) ? $config['catrobatversionname'] : '0.9.1');
-    $program->setLanguageVersion(isset($config['languageversion']) ? $config['languageversion'] : 1);
+    $program->setLanguageVersion(isset($config['language_version']) ? $config['language_version'] : 1);
     $program->setUploadIp('127.0.0.1');
     $program->setFilesize(isset($config['filesize']) ? $config['filesize'] : 0);
     $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);

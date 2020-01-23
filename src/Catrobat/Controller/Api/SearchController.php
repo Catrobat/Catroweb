@@ -28,13 +28,15 @@ class SearchController extends AbstractController
 
 
   /**
+   *
    * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"},
    *    methods={"GET"})
    *
-   * @param Request $request
+   * @param Request        $request
    * @param ProgramManager $program_manager
    *
    * @return ProgramListResponse
+   * @throws \Exception
    */
   public function searchProgramsAction(Request $request, ProgramManager $program_manager)
   {
@@ -47,12 +49,13 @@ class SearchController extends AbstractController
 
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
+    $max_version = $request->query->get('max_version', "0");
 
-    $programs = $program_manager->search($query, $limit, $offset);
+    $programs = $program_manager->search($query, $limit, $offset, $max_version);
     // we can't count the results since we apply limit and offset.
     // so we indeed have to use a separate query that ignores
     // limit and offset to get the number of results.
-    $numbOfTotalProjects = $program_manager->searchCount($query);
+    $numbOfTotalProjects = $program_manager->searchCount($query, $max_version);
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
@@ -62,7 +65,7 @@ class SearchController extends AbstractController
    * @Route("/api/projects/search/tagProjects.json", name="api_search_tag",
    *   defaults={"_format":"json"}, methods={"GET"})
    *
-   * @param Request $request
+   * @param Request        $request
    * @param ProgramManager $program_manager
    *
    * @return ProgramListResponse
@@ -84,8 +87,9 @@ class SearchController extends AbstractController
    * @Route("/api/projects/search/extensionProjects.json", name="api_search_extension",
    *                                                       defaults={"_format": "json"},
    *                                                       methods={"GET"})
-   * @param Request $request
+   * @param Request        $request
    * @param ProgramManager $program_manager
+   *
    * @return ProgramListResponse
    */
   public function extensionSearchProgramsAction(Request $request, ProgramManager $program_manager)
