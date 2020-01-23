@@ -714,6 +714,7 @@ class ApiFeatureContext extends BaseContext
         'uploadtime'          => $programs[$i]['upload time'],
         'apk_status'          => $programs[$i]['apk_status'],
         'catrobatversionname' => $programs[$i]['version'],
+        'language_version'    => $programs[$i]['language version'],
         'directory_hash'      => $programs[$i]['directory_hash'],
         'filesize'            => @$programs[$i]['FileSize'],
         'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
@@ -1200,6 +1201,8 @@ class ApiFeatureContext extends BaseContext
     $responseArray = json_decode($response->getContent(), true);
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = $table->getHash();
+
+    Assert::assertEquals(count($returned_programs), count($expected_programs));
 
     for ($i = 0; $i < count($returned_programs); ++$i)
     {

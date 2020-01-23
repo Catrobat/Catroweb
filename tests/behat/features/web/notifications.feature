@@ -21,7 +21,6 @@ Feature: User gets notifications for new followers, likes, comments and other ty
     And I am on "/app/"
     And I open the menu
     Then I wait 100 milliseconds
-    Then I should see "All Notifications"
     And the element ".collapsible" should be visible
     And the element ".fa-caret-left" should be visible
     When I click ".collapsible"
