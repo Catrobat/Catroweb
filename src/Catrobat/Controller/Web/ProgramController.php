@@ -432,11 +432,6 @@ class ProgramController extends AbstractController
      * @var $user_programs ArrayCollection
      */
 
-    if ($id === 0)
-    {
-      return new Response("false");
-    }
-
     $user = $this->getUser();
     if (!$user)
     {
@@ -444,8 +439,9 @@ class ProgramController extends AbstractController
     }
 
     $user_programs = $user->getPrograms();
-    $programs = $user_programs->matching(Criteria::create()
-      ->where(Criteria::expr()->eq('id', $id)));
+    $programs = $user_programs->matching(
+      Criteria::create()->where(Criteria::expr()->eq('id', $id))
+    );
 
     $program = $programs[0];
 
