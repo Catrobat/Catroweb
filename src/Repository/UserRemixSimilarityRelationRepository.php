@@ -8,7 +8,7 @@ use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Exception;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 
 /**

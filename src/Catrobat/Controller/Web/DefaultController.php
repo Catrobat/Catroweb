@@ -169,7 +169,7 @@ class DefaultController extends AbstractController
         $this->get('security.token_storage')->setToken($token);
         // now dispatch the login event
         $event = new InteractiveLoginEvent($request, $token);
-        $event_dispatcher->dispatch("security.interactive_login", $event);
+        $event_dispatcher->dispatch($event);
       }
     }
     $em = $this->getDoctrine()->getManager();

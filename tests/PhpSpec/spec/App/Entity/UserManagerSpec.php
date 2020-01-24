@@ -3,8 +3,7 @@
 namespace tests\PhpSpec\spec\App\Entity;
 
 use App\Entity\User;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
@@ -23,13 +22,13 @@ class UserManagerSpec extends ObjectBehavior
   /**
    * @param PasswordUpdaterInterface|\PhpSpec\Wrapper\Collaborator $passwordUpdater
    * @param CanonicalFieldsUpdater|\PhpSpec\Wrapper\Collaborator   $canonicalFieldsUpdater
-   * @param ObjectManager|\PhpSpec\Wrapper\Collaborator            $object_manager
+   * @param EntityManagerInterface|\PhpSpec\Wrapper\Collaborator            $object_manager
    * @param User|\PhpSpec\Wrapper\Collaborator                     $user
    * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator            $meta
    * @param EntityRepository|\PhpSpec\Wrapper\Collaborator         $repository
    */
   public function let(PasswordUpdaterInterface $passwordUpdater, CanonicalFieldsUpdater $canonicalFieldsUpdater,
-                      ObjectManager $object_manager, User $user, ClassMetadata $meta, EntityRepository $repository)
+                      EntityManagerInterface $object_manager, User $user, ClassMetadata $meta, EntityRepository $repository)
   {
     $object_manager->getClassMetadata(Argument::any())->willReturn($meta);
     $object_manager->getRepository(Argument::any())->willReturn($repository);

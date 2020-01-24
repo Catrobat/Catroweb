@@ -752,7 +752,7 @@ class RemixManagerSpec extends ObjectBehavior
         'exists'            => true,
         'existingRelations' => [
           new ProgramRemixRelation($second_parent_entity, $second_parent_entity, 0),
-          new ScratchProgramRemixRelation($scratch_parent_id, $second_parent_entity, 1),
+          new ScratchProgramRemixRelation($scratch_parent_id, $second_parent_entity),
         ],
       ],
       $scratch_parent_id             => [

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
 use FOS\UserBundle\Util\PasswordUpdaterInterface;
 
@@ -17,11 +17,11 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
    *
    * @param PasswordUpdaterInterface $passwordUpdater
    * @param CanonicalFieldsUpdater   $canonicalFieldsUpdater
-   * @param ObjectManager            $om
+   * @param EntityManagerInterface   $om
    */
   public function __construct(PasswordUpdaterInterface $passwordUpdater,
-                                 CanonicalFieldsUpdater $canonicalFieldsUpdater,
-                                 ObjectManager $om)
+                              CanonicalFieldsUpdater $canonicalFieldsUpdater,
+                              EntityManagerInterface $om)
   {
     parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
   }

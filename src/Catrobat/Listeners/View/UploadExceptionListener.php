@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Listeners\View;
 
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -30,16 +30,16 @@ class UploadExceptionListener
   }
 
   /**
-   * @param GetResponseForExceptionEvent $event
+   * @param ExceptionEvent $event
    */
-  public function onKernelException(GetResponseForExceptionEvent $event)
+  public function onKernelException(ExceptionEvent $event)
   {
-    if ($event->getException() instanceof InvalidCatrobatFileException)
+    if ($event->getThrowable() instanceof InvalidCatrobatFileException)
     {
       $event->allowCustomResponseCode();
       $event->setResponse(JsonResponse::create([
-        "statusCode"        => $event->getException()->getCode(),
-        "answer"            => $this->translator->trans($event->getException()->getMessage(), [], "catroweb"),
+        "statusCode"        => $event->getThrowable()->getCode(),
+        "answer"            => $this->translator->trans($event->getThrowable()->getMessage(), [], "catroweb"),
         "preHeaderMessages" => "",
       ], 200, [
         'X-Status-Code' => 200,
