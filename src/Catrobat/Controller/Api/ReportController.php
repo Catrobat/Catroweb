@@ -83,8 +83,9 @@ class ReportController extends AbstractController
     $entity_manager->persist($report);
     $entity_manager->flush();
 
-    $event_dispatcher->dispatch('catrobat.report.insert',
-      new ReportInsertEvent($request->get('category'), $request->get('note'), $report));
+    $event_dispatcher->dispatch(
+      new ReportInsertEvent($request->get('category'), $request->get('note'), $report)
+    );
 
     $response = [];
     $response['answer'] = $translator->trans('success.report', [], 'catroweb');

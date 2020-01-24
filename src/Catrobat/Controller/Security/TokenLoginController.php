@@ -49,7 +49,7 @@ class TokenLoginController extends AbstractController
 
     // now dispatch the login event
     $event = new InteractiveLoginEvent($request, $token);
-    $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+    $this->get("event_dispatcher")->dispatch($event);
 
     return $this->redirect($this->generateUrl('index') . '?login');
   }

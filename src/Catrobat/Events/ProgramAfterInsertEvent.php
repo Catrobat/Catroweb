@@ -3,8 +3,8 @@
 namespace App\Catrobat\Events;
 
 use App\Entity\Program;
-use Symfony\Component\EventDispatcher\Event;
 use App\Catrobat\Services\ExtractedCatrobatFile;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class ProgramAfterInsertEvent

@@ -221,7 +221,7 @@ class RecommenderManager
           floatval($number_of_all_programs_liked_by_any_of_both);
         $similarity_relation = new UserLikeSimilarityRelation($first_user, $second_user, $jaccard_similarity);
         $this->entity_manager->persist($similarity_relation);
-        $this->entity_manager->flush($similarity_relation);
+        $this->entity_manager->flush();
       }
 
       if ($progress_bar !== null)

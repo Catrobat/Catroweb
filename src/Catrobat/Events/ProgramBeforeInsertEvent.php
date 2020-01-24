@@ -2,8 +2,8 @@
 
 namespace App\Catrobat\Events;
 
-use Symfony\Component\EventDispatcher\Event;
 use App\Catrobat\Services\ExtractedCatrobatFile;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class ProgramBeforeInsertEvent
