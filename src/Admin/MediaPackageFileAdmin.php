@@ -210,6 +210,12 @@ class MediaPackageFileAdmin extends AbstractAdmin
   private function checkFlavor()
   {
     $flavor = $this->getForm()->get('flavor')->getData();
+
+    if (!$flavor)
+    {
+      return; // There was no required flavor form field in this Action, so no check is needed!
+    }
+
     $flavor_options =  $this->parameter_bag->get('themes');
 
     if (!in_array($flavor, $flavor_options)) {
