@@ -17,7 +17,6 @@ class HideBrick extends Brick
   {
     $this->type = Constants::HIDE_BRICK;
     $this->caption = "Hide";
-
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);
   }
 }

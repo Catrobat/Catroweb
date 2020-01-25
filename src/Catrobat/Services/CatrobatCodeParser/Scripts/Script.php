@@ -4,6 +4,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Scripts;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use App\Catrobat\Services\CatrobatCodeParser\Bricks\BrickFactory;
+use SimpleXMLElement;
 
 /**
  * Class Script
@@ -12,7 +13,7 @@ use App\Catrobat\Services\CatrobatCodeParser\Bricks\BrickFactory;
 abstract class Script
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $script_xml_properties;
   /**
@@ -35,9 +36,9 @@ abstract class Script
   /**
    * Script constructor.
    *
-   * @param \SimpleXMLElement $script_xml_properties
+   * @param SimpleXMLElement $script_xml_properties
    */
-  public function __construct(\SimpleXMLElement $script_xml_properties)
+  public function __construct(SimpleXMLElement $script_xml_properties)
   {
     $this->script_xml_properties = $script_xml_properties;
     $this->bricks = [];
@@ -53,21 +54,105 @@ abstract class Script
   abstract protected function create();
 
   /**
-   *
+   * This function parses the simple_xml bricks and adds them to $this->bricks
+   * This has to be done recursive since some bricks contain children bricks (loops, ...)
    */
   private function parseBricks()
   {
-    foreach ($this->script_xml_properties->brickList->children() as $brick_xml_properties)
+    $bricks = $this->script_xml_properties->brickList->children();
+    $this->parseBricksRecursive($bricks);
+  }
+
+  /**
+   * @param SimpleXMLElement $brick_as_xml
+   */
+  private function parseBricksRecursive($brick_as_xml)
+  {
+    for ($i = 0; $i < count($brick_as_xml); $i++)
     {
-      if ($brick_xml_properties[Constants::REFERENCE_ATTRIBUTE] != null)
+      $this->addBrick($brick_as_xml[$i]);
+      $this->checkAndParseChildrenBlocks($brick_as_xml[$i]);
+    }
+  }
+
+  /**
+   * For Loops and branching statements we need to complete the bricks by their children and end/middle tags.
+   * The XML file only contains the beginning brick, end/middle bricks are redundant due the structure.
+   *
+   * @param SimpleXMLElement $brick_as_xml
+   */
+  private function checkAndParseChildrenBlocks($brick_as_xml)
+  {
+    if ($brick_as_xml->loopBricks)
+    {
+      // "loop" .. "end of loop" -> auto generate "end of loop" bricks
+      $this->parseChildBricks($brick_as_xml->loopBricks);
+      $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::LOOP_END_BRICK);
+    }
+
+    else
+    {
+      if ($brick_as_xml->ifBranchBricks && !$brick_as_xml->elseBranchBricks)
       {
-        $this->bricks[] = BrickFactory::generate($brick_xml_properties
-          ->xpath($brick_xml_properties[Constants::REFERENCE_ATTRIBUTE])[0]);
+        // "if" .. "end if" -> auto generate "end if" bricks
+        $this->parseChildBricks($brick_as_xml->ifBranchBricks);
+        $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::ENDIF_BRICK);
       }
+
       else
       {
-        $this->bricks[] = BrickFactory::generate($brick_xml_properties);
+        if ($brick_as_xml->ifBranchBricks && $brick_as_xml->elseBranchBricks)
+        {
+          // if .. else .. "end if"-> auto generate "else", "end if" bricks
+          $this->parseChildBricks($brick_as_xml->ifBranchBricks);
+          $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::ELSE_BRICK);
+          $this->parseChildBricks($brick_as_xml->elseBranchBricks);
+          $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::ENDIF_BRICK);
+        }
       }
+    }
+  }
+
+  /**
+   * @param String $type The brick type as defined in Constants.php
+   */
+  private function addBrickThatIsNotDirectlyMentionedInXml($type)
+  {
+    $brick_as_xml = new SimpleXMLElement("<brick></brick>");
+    $brick_as_xml[Constants::TYPE_ATTRIBUTE] = $type;
+    array_push($this->bricks, BrickFactory::generate($brick_as_xml));
+  }
+
+  /**
+   * @param SimpleXMLElement $brick_as_xml
+   */
+  private function parseChildBricks($brick_as_xml)
+  {
+    if ($brick_as_xml)
+    {
+      $bricks_children = $brick_as_xml->children();
+      if ($bricks_children)
+      {
+        $this->parseBricksRecursive($bricks_children);
+      }
+    }
+  }
+
+  /**
+   * @param SimpleXMLElement $brick_as_xml
+   */
+  private function addBrick($brick_as_xml)
+  {
+    if ($brick_as_xml[Constants::REFERENCE_ATTRIBUTE] != null)
+    {
+      array_push(
+        $this->bricks,
+        BrickFactory::generate($brick_as_xml->xpath($brick_as_xml[Constants::REFERENCE_ATTRIBUTE])[0])
+      );
+    }
+    else
+    {
+      array_push($this->bricks, BrickFactory::generate($brick_as_xml));
     }
   }
 

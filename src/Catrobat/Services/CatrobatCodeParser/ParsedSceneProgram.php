@@ -2,6 +2,8 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
+use SimpleXMLElement;
+
 /**
  * Class ParsedSceneProgram
  * @package App\Catrobat\Services\CatrobatCodeParser
@@ -9,7 +11,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 class ParsedSceneProgram
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $program_xml_properties;
 
@@ -26,9 +28,9 @@ class ParsedSceneProgram
   /**
    * ParsedSceneProgram constructor.
    *
-   * @param \SimpleXMLElement $program_xml_properties
+   * @param SimpleXMLElement $program_xml_properties
    */
-  public function __construct(\SimpleXMLElement $program_xml_properties)
+  public function __construct(SimpleXMLElement $program_xml_properties)
   {
     $this->program_xml_properties = $program_xml_properties;
     $this->scenes = [];
@@ -54,8 +56,9 @@ class ParsedSceneProgram
   protected function computeCodeStatistic()
   {
     foreach ($this->scenes as $scene)
+    {
       $this->code_statistic->update($scene);
-
+    }
     $this->code_statistic->computeVariableStatistic($this->program_xml_properties);
   }
 

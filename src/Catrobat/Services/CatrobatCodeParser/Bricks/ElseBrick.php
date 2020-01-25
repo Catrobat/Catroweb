@@ -17,7 +17,6 @@ class ElseBrick extends Brick
   {
     $this->type = Constants::ELSE_BRICK;
     $this->caption = "Else";
-
     $this->setImgFile(Constants::CONTROL_BRICK_IMG);
   }
 }

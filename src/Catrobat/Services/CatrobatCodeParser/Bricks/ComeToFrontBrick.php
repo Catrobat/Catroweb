@@ -17,7 +17,6 @@ class ComeToFrontBrick extends Brick
   {
     $this->type = Constants::COME_TO_FRONT_BRICK;
     $this->caption = "Go to front";
-
     $this->setImgFile(Constants::MOTION_BRICK_IMG);
   }
 }

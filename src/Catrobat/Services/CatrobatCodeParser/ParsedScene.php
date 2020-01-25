@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 
+use SimpleXMLElement;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
@@ -12,16 +13,16 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class ParsedScene extends ParsedObjectsContainer
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $name;
 
   /**
    * ParsedScene constructor.
    *
-   * @param \SimpleXMLElement $scene_xml_properties
+   * @param SimpleXMLElement $scene_xml_properties
    */
-  public function __construct(\SimpleXMLElement $scene_xml_properties)
+  public function __construct(SimpleXMLElement $scene_xml_properties)
   {
     parent::__construct($scene_xml_properties);
 
@@ -36,7 +37,7 @@ class ParsedScene extends ParsedObjectsContainer
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   public function getName()
   {

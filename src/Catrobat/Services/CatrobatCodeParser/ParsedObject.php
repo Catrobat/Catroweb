@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\ScriptFactory;
+use SimpleXMLElement;
 
 /**
  * Class ParsedObject
@@ -11,11 +12,11 @@ use App\Catrobat\Services\CatrobatCodeParser\Scripts\ScriptFactory;
 class ParsedObject
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $object_xml_properties;
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $name;
   /**
@@ -34,9 +35,9 @@ class ParsedObject
   /**
    * ParsedObject constructor.
    *
-   * @param \SimpleXMLElement $object_xml_properties
+   * @param SimpleXMLElement $object_xml_properties
    */
-  public function __construct(\SimpleXMLElement $object_xml_properties)
+  public function __construct(SimpleXMLElement $object_xml_properties)
   {
     $this->object_xml_properties = $object_xml_properties;
     $this->name = $this->resolveName();
@@ -50,7 +51,7 @@ class ParsedObject
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   private function resolveName()
   {
@@ -92,7 +93,7 @@ class ParsedObject
   }
 
   /**
-   * @param $xml_properties \SimpleXMLElement
+   * @param $xml_properties SimpleXMLElement
    *
    * @return mixed
    */
@@ -109,7 +110,7 @@ class ParsedObject
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   public function getName()
   {

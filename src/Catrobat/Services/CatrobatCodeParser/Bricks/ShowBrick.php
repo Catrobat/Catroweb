@@ -17,7 +17,6 @@ class ShowBrick extends Brick
   {
     $this->type = Constants::SHOW_BRICK;
     $this->caption = "Show";
-
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);
   }
 }

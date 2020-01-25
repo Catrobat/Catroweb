@@ -17,7 +17,6 @@ class ForeverBrick extends Brick
   {
     $this->type = Constants::FOREVER_BRICK;
     $this->caption = "Forever";
-
     $this->setImgFile(Constants::CONTROL_BRICK_IMG);
   }
 }

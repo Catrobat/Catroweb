@@ -58,42 +58,11 @@
           <div class="script-text">
             <span class="script-type">{{ script.getCaption() }}</span>
           </div>
-          {% if script.getLookFileName() is defined %}
-            {% if scene_name is null and assetExists(path~'images/'~script.getLookFileName()) %}
-              <img src="{{ asset('./'~path~'images/'~script.getLookFileName()) }}" class="brick-look script-brick-look">
-            {% elseif assetExists(path~scene_name~'/images/'~script.getLookFileName()) %}
-              <img src="{{ asset('./'~path~scene_name~'/images/'~script.getLookFileName()) }}"
-                   class="brick-look script-brick-look">
-            {% endif %}
-          {% endif %}
         </div>
         <div class="script-bricks-wrapper">
           {% for brick in script.getBricks() %}
             <div class="brick" style="background-image: url({{ asset('images/bricks/'~brick.getImgFile()) }})">
               <div class="brick-text">{{ brick.getCaption() }}</div>
-              {% if brick.getLookFileName() is defined %}
-                {% if scene_name is null and assetExists(path~'images/'~brick.getLookFileName()) %}
-                  <img src="{{ asset('./'~path~'images/'~brick.getLookFileName()) }}" class="brick-look">
-                {% elseif assetExists(path~scene_name~'/images/'~brick.getLookFileName()) %}
-                  <img src="{{ asset('./'~path~scene_name~'/images/'~brick.getLookFileName()) }}"
-                       class="brick-look">
-                {% endif %}
-              {% endif %}
-              {% if brick.getSoundFileName() is defined %}
-                {% if scene_name is null and assetExists(path~'sounds/'~brick.getSoundFileName()) %}
-                  <i id="sound-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-volume-up"
-                     onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }})">
-                  </i>
-                {% elseif assetExists(path~scene_name~'/sounds/'~brick.getSoundFileName()) %}
-                  <i id="sound-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-volume-up"
-                     onclick="initialSound('{{ asset('./'~path~scene_name~'/sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }})">
-                  </i>
-                {% endif %}
-                <i id="soundStop-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-stop"
-                   style="display:none;" onclick="stopSound({{ sound_counter }});">
-                </i>
-                {% set sound_counter = sound_counter + 1 %}
-              {% endif %}
             </div>
           {% endfor %}
         </div>
@@ -192,11 +161,12 @@
 
 {% macro brick_statistic(statistic) %}
   <div class="specific-brick-stats">
-    <span class="light">Total:</span><span class="heavy specific-stat-num">{{ statistic.numTotal }}</span>
+    <span class="light">Total:</span><span
+        class="heavy specific-stat-num total-brick-statistic">{{ statistic.numTotal }}</span>
   </div>
   <div class="specific-brick-stats">
     <span class="light">Different:</span><span
-        class="heavy specific-stat-num">{{ statistic.different.numDifferent }}</span>
+        class="heavy specific-stat-num different-brick-statistic">{{ statistic.different.numDifferent }}</span>
   </div>
   <div class="different-statistic-dropcontent">
     <div class="exit-btn"><i class="catro-icon-button fas fa-times"></i></div>
@@ -233,50 +203,54 @@
       </div>
       <div class="flex-right">
         {% if program_statistic.getSceneStatistic() > 0 %}
-          <p class="heavy">{{ program_statistic.getSceneStatistic() }}</p>
+          <p id="scene-statistics" class="heavy">{{ program_statistic.getSceneStatistic() }}</p>
         {% endif %}
-        <p class="heavy">{{ program_statistic.getScriptStatistic() }}</p>
-        <p class="heavy">{{ program_statistic.getBrickStatistic() }}</p>
-        <p class="heavy">{{ program_statistic.getObjectStatistic() }}</p>
-        <p class="heavy">{{ program_statistic.getLookStatistic() }}</p>
-        <p class="heavy">{{ program_statistic.getSoundStatistic() }}</p>
+        <p id="script-statistics" class="heavy">{{ program_statistic.getScriptStatistic() }}</p>
+        <p id="brick-statistics" class="heavy">{{ program_statistic.getBrickStatistic() }}</p>
+        <p id="object-statistics" class="heavy">{{ program_statistic.getObjectStatistic() }}</p>
+        <p id="look-statistics" class="heavy">{{ program_statistic.getLookStatistic() }}</p>
+        <p id="sound-statistics" class="heavy">{{ program_statistic.getSoundStatistic() }}</p>
         {% if program_statistic.getGlobalVarStatistic() is not null %}
-          <p class="heavy">{{ program_statistic.getGlobalVarStatistic() }}</p>
+          <p id="global-variable-statistics" class="heavy">{{ program_statistic.getGlobalVarStatistic() }}</p>
         {% endif %}
         {% if program_statistic.getLocalVarStatistic() is not null %}
-          <p class="heavy">{{ program_statistic.getLocalVarStatistic() }}</p>
+          <p id="local-variable-statistics" class="heavy">{{ program_statistic.getLocalVarStatistic() }}</p>
         {% endif %}
       </div>
     </div>
   </div>
   <div class="brick-statistics">
-    <div class="brick-statistic-block">
+    <div id="brick-statistic-block-event" class="brick-statistic-block">
       <p class="brick-stat-heading">{{ "codeview.eventBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().eventBricks) }}
     </div>
-    <div class="brick-statistic-block">
+    <div id="brick-statistic-block-control" class="brick-statistic-block">
       <p class="brick-stat-heading">{{ "codeview.controlBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().controlBricks) }}
     </div>
-    <div class="brick-statistic-block">
+    <div id="brick-statistic-block-motion" class="brick-statistic-block">
       <p class="brick-stat-heading">{{ "codeview.motionBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().motionBricks) }}
     </div>
-    <div class="brick-statistic-block">
+    <div id="brick-statistic-block-sound" class="brick-statistic-block">
       <p class="brick-stat-heading">{{ "codeview.soundBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().soundBricks) }}
     </div>
-    <div class="brick-statistic-block">
+    <div id="brick-statistic-block-looks" class="brick-statistic-block">
       <p class="brick-stat-heading">{{ "codeview.looksBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().looksBricks) }}
     </div>
-    <div class="brick-statistic-block">
+    <div id="brick-statistic-block-pen" class="brick-statistic-block">
       <p class="brick-stat-heading">{{ "codeview.penBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().penBricks) }}
     </div>
-    <div class="brick-statistic-block">
+    <div id="brick-statistic-block-data" class="brick-statistic-block">
       <p class="brick-stat-heading">{{ "codeview.dataBricks"|trans({}, "catroweb") }}:</p>
       {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().dataBricks) }}
+    </div>
+    <div id="brick-statistic-block-special" class="brick-statistic-block">
+      <p class="brick-stat-heading">{{ "codeview.specialBricks"|trans({}, "catroweb") }}:</p>
+      {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().specialBricks) }}
     </div>
   </div>
 {% endmacro %}

@@ -17,9 +17,7 @@ class SetFrictionBrick extends Brick
   protected function create()
   {
     $this->type = Constants::SET_FRICTION_BRICK;
-    $this->caption = "Set friction to "
-      . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::FRICTION_FORMULA] . "%";
-
+    $this->caption = "Set friction to _ %";
     $this->setImgFile(Constants::MOTION_BRICK_IMG);
   }
 }

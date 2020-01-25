@@ -17,7 +17,6 @@ class DeleteThisCloneBrick extends Brick
   {
     $this->type = Constants::DELETE_THIS_CLONE_BRICK;
     $this->caption = "Delete this";
-
     $this->setImgFile(Constants::CONTROL_BRICK_IMG);
   }
 }

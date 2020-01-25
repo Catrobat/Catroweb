@@ -17,7 +17,6 @@ class JumpingSumoTakingPictureBrick extends Brick
   {
     $this->type = Constants::JUMP_SUMO_TAKING_PICTURE_BRICK;
     $this->caption = "Take a picture";
-
     $this->setImgFile(Constants::JUMPING_SUMO_BRICK_IMG);
   }
 }

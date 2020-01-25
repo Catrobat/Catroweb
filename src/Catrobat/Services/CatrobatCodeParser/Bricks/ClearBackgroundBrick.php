@@ -17,7 +17,6 @@ class ClearBackgroundBrick extends Brick
   {
     $this->type = Constants::CLEAR_BACKGROUND_BRICK;
     $this->caption = "Clear";
-
     $this->setImgFile(Constants::PEN_BRICK_IMG);
   }
 }
