@@ -124,6 +124,7 @@ sonata_admin:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
                     - catrowebadmin.block.users.limited
+                    - catrowebadmin.block.users.storeduserdata
 
             sonata.admin.group.tools:
                 label:           Tools
