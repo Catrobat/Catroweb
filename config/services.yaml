@@ -360,73 +360,126 @@ services:
   catroweb.file.validator.name:
     class: App\Catrobat\Listeners\NameValidator
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforeInsertEvent,
+        method: onProgramBeforeInsert
+      }
 
   catroweb.file.validator.description:
     class: App\Catrobat\Listeners\DescriptionValidator
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        method: onProgramBeforeInsert
+      }
 
   catroweb.file.validator.languageversion:
     class: App\Catrobat\Listeners\VersionValidator
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        method: onProgramBeforeInsert
+      }
 
   catroweb.file.validator.xmlheadervalidator:
     class: App\Catrobat\Listeners\ProgramXmlHeaderValidator
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        method: onProgramBeforeInsert
+      }
 
   # ======== Upload Modification ========
 
   catroweb.file.license.updater:
     class: App\Catrobat\Listeners\LicenseUpdater
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: -1 }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforeInsertEvent,
+        method: onProgramBeforeInsert,
+        priority: -1
+      }
 
   catroweb.file.remix.updater:
     class: App\Catrobat\Listeners\RemixUpdater
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramAfterInsertEvent,
+        method: onProgramAfterInsert
+      }
 
   catroweb.flavor.check:
     class: App\Catrobat\Listeners\ProgramFlavorListener
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforePersistEvent,
+        method: onEvent
+      }
 
   catroweb.apk.cleanup:
     class: App\Catrobat\Listeners\ApkCleanupListener
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: handleEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforePersistEvent,
+        method: handleEvent
+      }
 
   catroweb.extension.check:
     class: App\Catrobat\Listeners\ProgramExtensionListener
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforePersistEvent,
+        method: onEvent
+      }
 
   catroweb.gamejamtag.check:
     class: App\Catrobat\Listeners\GameJamTagListener
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforePersistEvent,
+        method: onEvent
+      }
 
   # ======== Snapshots =======
 
   catrobat.upload.snapshotlistener:
     class: App\Catrobat\Listeners\Upload\SaveProgramSnapshotListener
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.after.insert, method: handleEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramAfterInsertEvent,
+        method: handleEvent
+      }
 
   # ======== Notifications =======
 
   catrobat.core.services.uploadnotificator:
     class: App\Catrobat\Listeners\UploadNotificator
     tags:
-      - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramInsertEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramAfterInsertEvent,
+        method: onProgramInsertEvent
+      }
 
   catrobat.core.services.reportnotificator:
     class: App\Catrobat\Listeners\ReportNotificator
     tags:
-      - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ReportInsertEvent,
+        method: onReportInsertEvent
+      }
 
   # ======== Logging ========
 
@@ -434,7 +487,11 @@ services:
     class:  App\Catrobat\Listeners\InvalidProgramUploadLogger
     tags:
       - { name: monolog.logger, channel: upload }
-      - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\InvalidProgramUploadedEvent,
+        method: onInvalidProgramUploadedEvent
+      }
 
   # ======== Entity ========
 

@@ -28,7 +28,7 @@ use App\Repository\UserRemixSimilarityRelationRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -98,7 +98,7 @@ class SymfonySupport
   }
 
   /**
-   * @return Client
+   * @return KernelBrowser
    */
   public function getClient()
   {
@@ -409,7 +409,7 @@ class SymfonySupport
   public function computeAllLikeSimilaritiesBetweenUsers()
   {
     //$this->getRecommenderManager()->computeUserLikeSimilarities(null);
-    $catroweb_dir = $this->kernel->getRootDir() . '/..';
+    $catroweb_dir = $this->kernel->getProjectDir() . '/..';
     $similarity_computation_service = $catroweb_dir . '/bin/recsys-similarity-computation-service.jar';
     $output_dir = $catroweb_dir;
     $sqlite_db_path = "$catroweb_dir/tests/behat/sqlite/behattest.sqlite";
@@ -432,7 +432,7 @@ class SymfonySupport
   public function computeAllRemixSimilaritiesBetweenUsers()
   {
     //$this->getRecommenderManager()->computeUserRemixSimilarities(null);
-    $catroweb_dir = $this->kernel->getRootDir() . '/..';
+    $catroweb_dir = $this->kernel->getProjectDir() . '/..';
     $similarity_computation_service = $catroweb_dir . '/bin/recsys-similarity-computation-service.jar';
     $output_dir = $catroweb_dir;
     $sqlite_db_path = "$catroweb_dir/tests/behat/sqlite/behattest.sqlite";

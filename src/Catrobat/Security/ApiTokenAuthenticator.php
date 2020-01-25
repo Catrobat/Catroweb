@@ -1,56 +1,69 @@
 <?php
 
-
 namespace App\Catrobat\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 /**
- * Class WebviewAuthenticator
+ * Class ApiTokenAuthenticator
  * @package App\Catrobat\Security
  */
-class WebviewAuthenticator extends AbstractGuardAuthenticator
+class ApiTokenAuthenticator extends AbstractGuardAuthenticator
 {
+
+  /**
+   * @required request parameter TOKEN
+   *
+   *  Must be sent in the request HEADER containing the user token
+   *  Must not be empty
+   *
+   */
+  const TOKEN = 'X-AUTH-TOKEN';
+
+  /**
+   * @required request parameter USERNAME
+   *
+   *  For GET  requests must be sent in the request BODY containing
+   *  For POST requests must be sent in the request as QUERY parameter
+   *  Must not be empty
+   *
+   */
+  const USERNAME = "username";
+
+
   /**
    * @var TranslatorInterface
    */
   protected $translator;
-
-  /** @var SessionInterface */
-  protected $session;
 
   /**
    * @var EntityManagerInterface
    */
   private $em;
 
+
   /**
-   * WebviewAuthenticator constructor.
+   * ApiTokenAuthenticator constructor.
    *
    * @param EntityManagerInterface $em
    * @param TranslatorInterface    $translator
-   * @param SessionInterface       $session
    */
-  public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, SessionInterface $session)
+  public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
   {
     $this->em = $em;
     $this->translator = $translator;
-    $this->session = $session;
   }
-
-  protected $cookie_name_user = "CATRO_LOGIN_USER";
-  protected $cookie_name_token = "CATRO_LOGIN_TOKEN";
 
   /**
    * Called on every request to decide if this authenticator should be
@@ -63,9 +76,10 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function supports(Request $request)
   {
-    $this->session->set('webview-auth', false);
-
-    return $this->hasValidTokenCookieSet($request) && $this->hasValidUserCookieSet($request);
+    return $this->requestHasValidAuthTokenInHeader($request) && (
+        $this->postRequestHasValidCredentialsInRequestBody($request) ||
+        $this->getRequestHasValidCredentialsInQueryParameters($request)
+      );
   }
 
   /**
@@ -78,9 +92,23 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function getCredentials(Request $request)
   {
+    $username = null;
+
+    if ($request->isMethod(Request::METHOD_GET))
+    {
+      $username = $request->query->get(self::USERNAME);
+    }
+    else
+    {
+      if ($request->isMethod(Request::METHOD_POST))
+      {
+        $username = $request->request->get(self::USERNAME);
+      }
+    }
+
     return [
-      'token'    => $request->cookies->get($this->cookie_name_token, null),
-      'username' => $request->cookies->get($this->cookie_name_user, null),
+      self::TOKEN    => $request->headers->get(self::TOKEN),
+      self::USERNAME => $username,
     ];
   }
 
@@ -92,33 +120,23 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function getUser($credentials, UserProviderInterface $userProvider)
   {
-    $apiToken = $credentials['token'];
+    $token = $credentials[self::TOKEN];
+    $username = $credentials[self::USERNAME];
 
-    if (null === $apiToken || "" === $apiToken)
+    if (null === $token || null === $username)
     {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.authentication.webview", [], "catroweb")
-      );
-    }
-
-    $user = $this->em->getRepository(User::class)
-      ->findOneBy(['upload_token' => $apiToken]);
-
-    if (!$user)
-    {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.authentication.webview", [], "catroweb")
-      );
+      return null;
     }
 
     // if a User object, checkCredentials() is called
-    return $user;
+    return $this->em->getRepository(User::class)
+      ->findOneBy(['upload_token' => $token]);
   }
 
   /**
    *  Called to make sure the credentials are valid
    *    - E.g mail, username, or password
-   *    - no additional checks are also valid
+   *    - no additional checks would also be valid
    *
    * @param mixed         $credentials
    * @param UserInterface $user
@@ -127,11 +145,9 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function checkCredentials($credentials, UserInterface $user)
   {
-    if (null === $user || $user->getUsername() !== $credentials['username'])
+    if ($user->getUsername() !== $credentials[self::USERNAME])
     {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.authentication.webview", [], "catroweb")
-      );
+      return false;
     }
 
     // return true to cause authentication success
@@ -147,8 +163,6 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
   {
-    $this->session->set('webview-auth', true);
-
     // on success, let the request continue
     return null;
   }
@@ -157,25 +171,32 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    * @param Request                 $request
    * @param AuthenticationException $exception
    *
-   * @throws HttpException
+   * @return JsonResponse|Response|null
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
-    throw new HttpException(Response::HTTP_UNAUTHORIZED, $exception->getMessage(), null, [], 0);
+    $data = [
+      $this->translator->trans($exception->getMessageKey(), $exception->getMessageData()),
+    ];
+
+    return new JsonResponse($data, Response::HTTP_FORBIDDEN);
   }
 
-
   /**
+   * Called when authentication is needed, but it's not sent
+   *
    * @param Request                      $request
    * @param AuthenticationException|null $authException
    *
-   * @return Response|void
+   * @return JsonResponse|Response
    */
   public function start(Request $request, AuthenticationException $authException = null)
   {
-    throw new AuthenticationException(
-      $this->translator->trans("errors.authentication.webview", [], "catroweb")
-    );
+    $data = [
+      'Authentication Required',
+    ];
+
+    return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
   }
 
   /**
@@ -186,14 +207,15 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
     return false;
   }
 
+
   /**
    * @param Request $request
    *
    * @return bool
    */
-  private function hasValidTokenCookieSet(Request $request)
+  private function requestHasValidAuthTokenInHeader(Request $request)
   {
-    return $request->cookies->has($this->cookie_name_token) && "" !== $request->cookies->get($this->cookie_name_token);
+    return $request->headers->has(self::TOKEN) && "" !== $request->headers->get(self::TOKEN);
   }
 
   /**
@@ -201,8 +223,20 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    *
    * @return bool
    */
-  private function hasValidUserCookieSet(Request $request)
+  private function postRequestHasValidCredentialsInRequestBody(Request $request)
   {
-    return $request->cookies->has($this->cookie_name_user) && "" !== $request->cookies->get($this->cookie_name_user);
+    return $request->isMethod(Request::METHOD_POST) &&
+      $request->request->has(self::USERNAME) && "" !== $request->request->get(self::USERNAME);
+  }
+
+  /**
+   * @param Request $request
+   *
+   * @return bool
+   */
+  private function getRequestHasValidCredentialsInQueryParameters(Request $request)
+  {
+    return $request->isMethod(Request::METHOD_GET) &&
+      $request->query->has(self::USERNAME) && "" !== $request->query->get(self::USERNAME);
   }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Catrobat\Controller\Admin;
 
+use App\Entity\Program;
+use App\Entity\ProgramInappropriateReport;
 use App\Entity\UserComment;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,8 +26,8 @@ class ReportController extends Controller
   public function unreportProgramAction(Request $request = null)
   {
     /**
-      * @var $object \App\Entity\ProgramInappropriateReport
-      * @var $program \App\Entity\Program
+      * @var $object ProgramInappropriateReport
+      * @var $program Program
       */
 
     $object = $this->admin->getSubject();

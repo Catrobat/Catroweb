@@ -2,7 +2,8 @@
 
 namespace App\Catrobat\Events;
 
-use Symfony\Component\EventDispatcher\Event;
+
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class ProgramInsertEvent

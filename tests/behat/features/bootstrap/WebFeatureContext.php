@@ -37,8 +37,9 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Tools\SchemaTool;
 use PHPUnit\Framework\Assert;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -59,7 +60,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   private $screenshot_directory;
   /**
-   * @var Client
+   * @var KernelBrowser
    */
   private $client;
   /**
@@ -111,9 +112,12 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   /**
    * @BeforeScenario
+   *
+   * @throws \Doctrine\ORM\Tools\ToolsException
    */
   public function clearData()
   {
+    /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $metaData = $em->getMetadataFactory()->getAllMetadata();
     $new_metadata_hash = md5(json_encode($metaData));
@@ -121,7 +125,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       return;
     };
     $this->old_metadata_hash = $new_metadata_hash;
-    $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+    $tool = new SchemaTool($em);
     $tool->dropSchema($metaData);
     $tool->createSchema($metaData);
   }
@@ -2052,7 +2056,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 ////////////////////////////////////////////// Getter & Setter
 
   /**
-   * @return Client
+   * @return KernelBrowser
    */
   public function getClient()
   {

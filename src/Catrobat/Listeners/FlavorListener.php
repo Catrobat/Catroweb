@@ -3,14 +3,11 @@
 namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Requests\AppRequest;
-use Doctrine\ORM\Query\Parameter;
 use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\DependencyInjection\Container;
 
 
 /**
@@ -57,9 +54,9 @@ class FlavorListener
   }
 
   /**
-   * @param GetResponseEvent $event
+   * @param RequestEvent $event
    */
-  public function onKernelRequest(GetResponseEvent $event)
+  public function onKernelRequest(RequestEvent $event)
   {
     // check the url for an requested flavor (needed to keep old flavoring alive)
     $current_url = $event->getRequest()->getUri();

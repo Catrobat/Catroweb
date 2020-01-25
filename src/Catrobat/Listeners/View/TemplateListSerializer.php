@@ -5,11 +5,11 @@ namespace App\Catrobat\Listeners\View;
 use App\Entity\Template;
 use App\Entity\TemplateManager;
 use App\Catrobat\Responses\TemplateListResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 
 /**
@@ -53,9 +53,9 @@ class TemplateListSerializer
   }
 
   /**
-   * @param GetResponseForControllerResultEvent $event
+   * @param ViewEvent $event
    */
-  public function onKernelView(GetResponseForControllerResultEvent $event)
+  public function onKernelView(ViewEvent $event)
   {
     $result = $event->getControllerResult();
     if (!($result instanceof TemplateListResponse))

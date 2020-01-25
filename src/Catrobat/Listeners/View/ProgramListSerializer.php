@@ -3,12 +3,12 @@
 namespace App\Catrobat\Listeners\View;
 
 use App\Entity\Program;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,9 +54,9 @@ class ProgramListSerializer
   }
 
   /**
-   * @param GetResponseForControllerResultEvent $event
+   * @param ViewEvent $event
    */
-  public function onKernelView(GetResponseForControllerResultEvent $event)
+  public function onKernelView(ViewEvent $event)
   {
     /**
      * @var $program Program

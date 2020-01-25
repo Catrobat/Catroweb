@@ -11,6 +11,7 @@ use App\Entity\Program;
 use App\Catrobat\Services\AsyncHttpClient;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -198,7 +199,7 @@ class MigrateRemixGraphsCommand extends Command
    * @throws \Doctrine\Common\Persistence\Mapping\MappingException
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Exception
+   * @throws Exception
    */
   private function migrateRemixDataOfExistingPrograms(OutputInterface $output, $directory)
   {
@@ -371,7 +372,7 @@ class MigrateRemixGraphsCommand extends Command
       $program_file = new File($program_file_path);
       //$extracted_file = new ExtractedCatrobatFile($program_file_path, $program_file_path, null);
       $extracted_file = $this->file_extractor->extract($program_file);
-    } catch (\Exception $ex)
+    } catch (Exception $ex)
     {
       $progress_bar->clear();
       $output->writeln('<error>Cannot find Catrobat file of Program #' . $program_id .
@@ -470,7 +471,7 @@ class MigrateRemixGraphsCommand extends Command
    *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Exception
+   * @throws Exception
    */
   private function debugImportMissingPrograms(OutputInterface $output, $directory, $username)
   {

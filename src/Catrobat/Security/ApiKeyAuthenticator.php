@@ -18,7 +18,11 @@ use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterfa
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class ApiKeyAuthenticator
+ * @deprecated Class ApiKeyAuthenticator
+ *
+ *             use only in API version 1!!!
+ *
+ *
  * @package App\Catrobat\Security
  */
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface

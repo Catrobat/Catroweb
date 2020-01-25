@@ -578,7 +578,7 @@ class OAuthService
       if (isset($results['error_description']) && $results['error_description'] == 'Invalid Value')
       {
         // token is expired --> refresh
-        $newtoken_array = json_decode($client->getAccessToken());
+        $newtoken_array = $client->getAccessToken();
         $newtoken = $newtoken_array->access_token;
         $user->setGplusAccessToken($newtoken);
         $this->user_manager->updateUser($user);
@@ -656,7 +656,7 @@ class OAuthService
 
       // now dispatch the login event
       $event = new InteractiveLoginEvent($request, $token);
-      $this->dispatcher->dispatch("security.interactive_login", $event);
+      $this->dispatcher->dispatch($event);
 
       $retArray['url'] = $this->router->generate('index');
 

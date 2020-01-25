@@ -22,7 +22,6 @@ use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use DateTime;
 use Doctrine\DBAL\DBALException;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -158,15 +157,11 @@ class ProgramManager
 
     try
     {
-      $event = $this->event_dispatcher->dispatch(
-        'catrobat.program.before', new ProgramBeforeInsertEvent($extracted_file)
-      );
+      $event = $this->event_dispatcher->dispatch(new ProgramBeforeInsertEvent($extracted_file));
     } catch (InvalidCatrobatFileException $e)
     {
       $this->logger->error($e);
-      $this->event_dispatcher->dispatch(
-        'catrobat.program.invalid.upload', new InvalidProgramUploadedEvent($file, $e)
-      );
+      $this->event_dispatcher->dispatch(new InvalidProgramUploadedEvent($file, $e));
       throw $e;
     }
 
@@ -213,9 +208,7 @@ class ProgramManager
       $program->setGameJamSubmissionDate(new DateTime());
     }
 
-    $this->event_dispatcher->dispatch(
-      'catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program)
-    );
+    $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
 
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
@@ -223,9 +216,7 @@ class ProgramManager
 
     $this->addExtensions($program, $extracted_file);
 
-    $this->event_dispatcher->dispatch(
-      'catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program)
-    );
+    $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
 
 
     try
@@ -294,7 +285,7 @@ class ProgramManager
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
 
-    $this->event_dispatcher->dispatch('catrobat.program.successful.upload', new ProgramInsertEvent());
+    $this->event_dispatcher->dispatch(new ProgramInsertEvent());
 
     return $program;
   }
