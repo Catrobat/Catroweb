@@ -156,7 +156,7 @@ programs:
   smile: Smile!
   love: Love!
   wow: Wooow!
-  linkTitle: Link
+  linkTitle: 链接
   link: Copy project link to clipboard
 remixGraph:
   showRemixGraph: '显示调制关系图'
@@ -773,6 +773,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities

@@ -4,7 +4,7 @@
 localLanguage: Englisch
 username: Username
 password: Passwort
-accountSettings: Account Settings
+accountSettings: Kontoeinstellungen
 email: E-Mail
 aboutPocketCode: Über Pocket Code
 aboutCatrobat: Über Catrobat
@@ -79,11 +79,11 @@ programs:
   recommended: Recommended projects
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Bist du dir sicher?
+    Bist du dir sicher, dass du %programName% löschen möchtest?
+    Es gibt keine Möglichkeit das Projekt wiederherzustellen!
+    Ja, löschen!
+    Abbrechen
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -92,8 +92,8 @@ programs:
     Yes, set to public
     Yes, set to private
     No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  reportCommentConfirmation: Bist du sicher, dass du diesen Kommentar melden möchtest?
+  deleteCommentConfirmation: Bist du sicher, dass du diesen Kommentar löschen möchtest?
   deleteAccountConfirmation: |+
     Account Deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
@@ -101,7 +101,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
+  rudeWordsInDescription: Du kannst in deiner Beschreibung keine unhöflichen Wörter verwenden!
   tooLongCredits: The project credits are too long!
   rudeWordsInCredits: You can't use rude words in your credits!
   most:
@@ -126,10 +126,10 @@ programs:
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Gib einen Grund an
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
+  reportRadioButtonInappropriate: Es ist unangemessen
+  reportRadioButtonCopyright: Urheberrechtsverletzung
+  reportRadioButtonSpam: Es ist Spam
+  reportRadioButtonDislike: Es gefällt mir nicht
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
@@ -144,15 +144,15 @@ programs:
   report: Melden
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  deleted_popup: Der Kommentar wurde erfolgreich gelöscht.
+  deleted_popup_header: Gelöscht
+  noAdminRights: Du hast keine Administratorenrechte. Bitte melde dich als Administrator an.
   editDescription: Edit the project Description
-  saveDescription: Save Description change
+  saveDescription: Beschreibungsänderung speichern
   editCredits: Edit the project Credits
   saveCredits: Save Credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
+  addComment: Kommentar schreiben
+  thumbsUp: Daumen hoch!
   smile: Smile!
   love: Love!
   wow: Wooow!
@@ -167,71 +167,71 @@ remixGraph:
   programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: 'Nicht verfügbar'
   programUnknownUser: 'Unbekannter Benutzer'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: Dies ist eine automatische Meldung, bitte antworte nicht auf diese E-Mail
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Deine Catrobat Account Bestätigung
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Lieber oder Liebe %username%.
+    Um die Aktivierung deines Kontos abzuschließen besuche bitte %confirmationUrl%
+    Dieser Link kann nur einmal verwendet werden, um dein Konto zu validieren.
+    Mit freundlichen Grüßen,
+    Dein Catrobat Team.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Lieber oder Liebe  %username%.<br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    Um die Aktivierung deines Kontos abzuschließen klicke bitte hier <a href=%confirmationUrl%>.</a><br>
     <br>
-    This link can only be used once to validate your account.<br>
+    Dieser Link kann nur einmal verwendet werden um dein Konto zu bestätigen.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Grüße,<br>
+    Dein Catrobat Team.
     </p>
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
-    Dear %username%.
+    Lieber oder Liebe %username%.
 
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    Du hast ein neues Passwort auf %appplication_url% angefordert, da du dein Passwort vergessen hast.
+    Wenn du kein neues Passwort angefordert hast, ignoriere bitte diese Mail. Dein Passwort läuft ab und wird in 24 Stunden unbrauchbar.
 
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Um dein Passwort zurückzusetzen und ein neues zu erstellen besuche bitte die folgende Seite: %confirmationUrl%
 
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Du kannst jederzeit mit deinem Benutzernamen und deinem Passwort auf die %appplication_url% Community zugreifen.
+    Um dies zu tun, besuche einfach die folgende Seite: %loginPage%
+    Um deine Profildaten zu bearbeiten, gehen auf diese Seite: %profilePage%
 
-    Best regards,
-    Your Catrobat Team.
+    Alles Gute,
+    Dein Catrobat Team.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Lieber oder Liebe %username%.<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Du hast ein neues Passwort auf <a href=%appplication_url%>Pocket Code</a> angefordert, da du dein Passwort vergessen hast.
+    Wenn du kein neues Passwort angefordert hast, ignoriere bitte diese Mail. Dein Passwort läuft ab und wird in 24 Stunden unbrauchbar.<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    Um dein Passwort zurückzusetzen und ein neues zu erstellen besuche bitte die folgende Seite: <a href=%confirmationUrl%>.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    Du kannst jederzeit mit deinem Benutzernamen und deinem Passwort auf die <a href=%appplication_url%>Pocket Code</a> Community zuzugreifen.<br>
+    Besuche dafür einfach die folgende Seite:  <a href=%loginPage%>Anmeldeseite</a><br>
+    Um deine Profildaten zu bearbeiten, gehen auf diese Seite <a href=%profilePage%>Seite</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Beste Grüße,<br>
+    Dein Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
+  edit: Profil bearbeiten
   saveChanges: Änderungen speichern
   newPass: Neues Passwort
   repeatPass: Passwort wiederholen
-  oldPass: old password
+  oldPass: altes Passwort
   firstEmail: Meine erste E-Mail
   secondEmail: Meine zweite E-Mail
   myPrograms: My projects
-  follows: Follows
+  follows: Folgt
   follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
+  unfollowUser: Entfolgen!
+  followUser: Folgen
   amountOfPrograms: Amount of projects
   form:
     passwordTooShort: Das neue Passwort muss mindestens %length% Zeichen lang sein.
@@ -249,7 +249,7 @@ profile:
   programsOf: Projects of
   changePicture: Bild ändern
   avatar:
-    noImage: No Image!
+    noImage: Kein Bild vorhanden!
     pictureTooLarge: Dein gewähltes Bild ist zu groß, verwende bitte keine Bilder, die größer als 5MB sind.
     uploadError: Tut mir leid, es gab ein Problem beim Hochladen!
     noSupport: Dieser Bild-Typ wird nicht unterstützt, versuche ein anderes Bild.
@@ -258,7 +258,7 @@ myprofile:
   edit: Bearbeiten
   done: Fertig
   checkMail: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
-  passwordUpdated: Your password was successfully updated.
+  passwordUpdated: Dein Passwort wurde erfolgreich aktualisiert.
   avatar: Avatar
   email: E-Mail
   editAvatar: Avatar bearbeiten
@@ -268,8 +268,8 @@ myprofile:
   editEmail: E-Mail bearbeiten
   deleteAccount: Account löschen
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
+  editAccountSettings: Kontoeinstellungen bearbeiten
+  notChangeVisibility: Sichtbarkeit kann nicht geändert werden.
   notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Lizenzbedingungen'
@@ -555,7 +555,7 @@ menu:
   login: Einloggen
   logout: Abmelden
   admin: Administrator
-  home: Home
+  home: Start
   helpAndTutorials: Help & Tutorials
 login:
   login: Einloggen
@@ -564,18 +564,18 @@ login:
   forgotPass: Passwort oder Usernamen vergessen?
   recoverPass: Passwort wiederherstellen
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  alreadyReset: Ein Passwort für diesen Account wurde bereits innerhalb der letzten 24 Stunden angefordert.
+  confirmationSend: Eine E-Mail zur Bestätigung der Registrierung wurde an deine E-Mail-Adresse gesendet. Bitte überprüfe deinen Posteingang und aktivieren deinen Account.
   userOrEmail: Username oder Email
   changePass: Passwort ändern
   createAccount: Erstelle ein Konto
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  noAccount: Ich habe keinen Account!
+  alreadyAccount: Hast du bereits einen Account?
   or: ODER
   username: Username
   email: Email
   passwordFirst: Passwort
-  passwordSecond: Password Confirm
+  passwordSecond: Passwort bestätigen
 apk:
   download: Als app herunterladen
   prepare: 'App erstellen'
@@ -589,7 +589,7 @@ errors:
     exists: Dieser Benutzername existiert bereits.
     not_exists: Dieser Benutzername existiert nicht.
     not_email: Ihr Username darf keine E-Mail-Adresse sein.
-    size: The username must have at least 3 character and not more than 180
+    size: Der Benutzername muss mindestens 3 Zeichen lang sein und darf nicht mehr als 180 Zeichen enthalten
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
@@ -635,7 +635,7 @@ errors:
       Your user credentials are wrong.
       Please try to log in again in the app.
 success:
-  text: Success
+  text: Abgeschlossen
   registration: Registrierung erfolgreich!
   token: Ok
   upload: Das Projekt wurde erfolgreich hochgeladen!
@@ -722,7 +722,7 @@ tags:
 admin:
   maintain:
     diskMaintenance: Festplattenwartung
-    ramMaintenance: RAM maintenance
+    ramMaintenance: Wartungsarbeiten
     noRemovableObjects: Keine entfernbaren Objekte verfügbar.
     removableObjects: Removable objects
     manualBackups: Manuelle Sicherungen
@@ -770,6 +770,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Nützliche Links
   legalities: Rechtliche Hinweise
@@ -790,8 +791,8 @@ privacy-policy:
   text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
   disagree-text: Ohne Zustimmung kann kein Benutzerkonto erstellt werden, die Basisfunktionalität kann aber weiterhin genutzt werden.
 catro-notifications:
-  markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  markAsRead: "Als gelesen markieren"
+  summary: "{0}Du hast keine neuen Benachrichtigungen|{1}Du hast %amount% neue Benachrichtigung!|]1,Inf]Du hast %amount% neue Benachrichtigungen!"
   comment:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
@@ -799,7 +800,7 @@ catro-notifications:
     title: 'New like for project %program_name%!'
     message: 'User %user_link% liked your project %program_link%.'
   follow:
-    title: 'New Follower!'
+    title: 'Neue Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
     title: 'New Project from someone you follow'
@@ -832,13 +833,13 @@ help-cards:
     discuss_1: Nehmen Sie Kontakt mit anderen
     discuss_2: Benutzer
 media-packages:
-  title: Media-Packages
+  title: Medien-Pakete
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview Size
-    sm: small
-    md: medium
-    lg: large
+    description: Vorschaugröße
+    sm: klein
+    md: mittel
+    lg: groß
   theme-special: "%flavor% Theme Special"
 flavor:
   pocketcode: Pocket Code
