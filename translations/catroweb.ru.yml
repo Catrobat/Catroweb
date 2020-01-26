@@ -19,10 +19,10 @@ deleteIt: Да, удалить!
 reportIt: Да, сообщить об этом!
 areYouSure: Вы уверены?
 noWayOfReturn: Это безвозвратное действие!
-download: Download the project
+download: Скачать проект
 description: Описание
 noDescription: Без описания.
-credits: Credits
+credits: Титры
 noCredits: No credits available.
 country: Страна
 loginText: Войти
@@ -36,27 +36,27 @@ less: 'меньше'
 show-more: 'Развернуть'
 show-less: 'Спрятать'
 ok: ОК
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Чтобы скачать пример проекта, нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
 notifications: 'Уведомления'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
+allNotifications: 'Все уведомления'
+FollowersNotifications: 'Подписчики'
+LikeNotifications: 'Лайки'
 likesNotificationsTitle: 'Like Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
 CommentNotifications: 'Комментарии'
-oldnotification: 'Old Notifications'
+oldnotification: 'Прочитанные уведомления'
 wellDone: "Великолепно!"
 done: "Готово!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "Похоже, что у вас нет уведомлений."
 notificationsClearedMessage: "Все уведомления были отмечены как прочитанные."
 deleteNotificationConfirmation: "Вы уверены?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+notificationDeleteMessage: "Вы уверены, что хотите удалить это уведомление?"
+notificationDeleteAllMessage: "Вы Уверены, что хотите удалить все сообщения?"
+confirmMessage: "Да, удалить это"
 cancelMessage: "Отменить"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationsAllMessagesDeleted: "Все уведомления были удалены."
 notificationDeletedMessage: "Notification has been successfully deleted."
 clearAllNotificationsButtonTitle: "Отметить все как прочитанные"
 deleteAllNotificationsButtonTitle: "Delete all"
@@ -123,7 +123,7 @@ programs:
   reportAsInappropriate: Пожаловаться
   reportProgram: Report project
   languageVersion: 'Версия языка Catrobat: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
+  reportLoginText: Пожалуйста, %login% чтобы пожаловаться на этот проект.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Введите причину
   reportRadioButtonInappropriate: Это неуместно
@@ -542,7 +542,7 @@ help:
     description6: |
       Это руководство рассказывает, как создать вертикально прокручивающийся фон с помощью скользящей графики фона. Кроме того, здесь вы можете узнать, как заставить персонажа прыгать, когда вы нажимаете на него.
       Чтобы сделать игру немного сложнее, вы можете снизить скорость вашего персонажа.
-    download: "Download the project"
+    download: "Скачать проект"
 oauth:
   username_header: Спасибо за регистрацию в Pocket Code!
   username_chooser: 'Пожалуйста, выберите имя пользователя:'
@@ -774,6 +774,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Полезные ссылки
   legalities: Юридическая правомерность

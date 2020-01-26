@@ -773,6 +773,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Links Úteis
   legalities: Aspectos legais
