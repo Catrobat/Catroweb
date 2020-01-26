@@ -20,7 +20,7 @@ class UserComment
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="programId", referencedColumnName="id", nullable=true)
+   * @ORM\JoinColumn(name="program", referencedColumnName="id", nullable=true)
    */
   private $program;
 
