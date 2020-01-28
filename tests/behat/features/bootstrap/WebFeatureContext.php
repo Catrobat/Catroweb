@@ -3334,16 +3334,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given the app version is :appVersion
-   *
-   * @param $appVersion
-   */
-  public function theAppVersionIs($appVersion)
-  {
-    putenv("APP_VERSION=" . $appVersion);
-  }
-
-  /**
    * @Given the random program section is empty
    */
   public function theRandomProgramSectionIsEmpty()
