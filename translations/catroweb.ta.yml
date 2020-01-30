@@ -4,26 +4,26 @@
 localLanguage: ஆங்கிலம்
 username: பயனர் பெயர்
 password: கடவுச்சொல்
-accountSettings: Account Settings
+accountSettings: கணக்கு அமைப்புகள்
 email: மின்னஞ்சல்
 aboutPocketCode: பற்றி பாக்கெட் குறியீடு
-aboutCatrobat: About Catrobat
+aboutCatrobat: கேட்ரோபாட் பற்றி
 tutorials: பயிற்சிகள்
 googlePlay: கூகுள் ப்ளே
-iosAppStore: IOS App store
+iosAppStore: IOS செயலி அங்காடி
 passwordsNoMatch: கடவுச்சொற்கள் பொருந்தவில்லை.
 error: தவறு
 cancel: தவிர்
 report: அறிக்கையிடு
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+deleteIt: ஆம், நீக்கு!
+reportIt: ஆம், அதைப் புகாரளிக்கவும்!
+areYouSure: உறுதியாகவா?
+noWayOfReturn: உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
+download: திட்டத்தை பதிவிறக்கவும்
 description: விளக்கம்
 noDescription: விவரம் இல்லை கிடைக்கும்.
-credits: Credits
-noCredits: No credits available.
+credits: பங்களித்தவர்கள்
+noCredits: வரவுகள் எதுவும் கிடைக்கவில்லை.
 country: நாடு
 loginText: உள்நுழைவு
 privacyPolicy: தனிமனித உரிமை கொள்கை
@@ -33,35 +33,35 @@ pleaseTryAgain: 'தயவுசெய்து மீண்டும் மு�
 oldVersionError: 'தயவு செய்து புதிய பாக்கெட் கோட் பதிப்புக்கு மாறவும்!'
 more: 'அதிகம்'
 less: 'குறைந்து'
-show-more: 'Show more'
-show-less: 'Show less'
+show-more: 'மேலும் காண்பி'
+show-less: 'குறைவாக காண்பி'
 ok: சரி
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'எடுத்துக்காட்டு திட்டத்தைப் பதிவிறக்க %link_start% இங்கே %link_end% என்பதைக் கிளிக் செய்க.'
 registrationError: 'பயனர் பெயரோ மின்னஞ்சல் முகவரியோ ஏற்கனவே உபயோகத்தில் உள்ளது.'
 notifications: 'அறிவிப்புகள்'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
+allNotifications: 'அனைத்து அறிவிப்புகள்'
+FollowersNotifications: 'பின்பற்றுபவர்கள்'
+LikeNotifications: 'விருப்பம்'
+likesNotificationsTitle: 'அறிவிப்புகள்'
+followersNotificationsTitle: 'பின்பற்றுபவர்கள் அறிவிப்புகள்'
+commentsNotificationsTitle: 'கருத்து அறிவப்புகள்'
 CommentNotifications: 'கருத்துகள்'
-oldnotification: 'Old Notifications'
+oldnotification: 'பழைய அறிவிப்புகள்'
 wellDone: "நன்று!"
 done: "முடிந்தது!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "உங்களிடம் எந்த அறிவிப்புகளும் இல்லை என்று தெரிகிறது."
 notificationsClearedMessage: "அனைத்து அறிவிப்புகஒளையும் படித்ததாகக் குறிபிடபட்டுள்ளது."
-deleteNotificationConfirmation: "Are you sure?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+deleteNotificationConfirmation: "உறுதியாகவா?"
+notificationDeleteMessage: "உறுதியாக இந்த அறிவிப்புகளை அழிக்க வேண்டுமா?"
+notificationDeleteAllMessage: "Are You Sure You Want to Delete All Notifications?"
+confirmMessage: "ஆம், நீக்கு"
 cancelMessage: "தவிர்"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
+notificationsAllMessagesDeleted: "அனைத்து அறிவிப்புகளும் நீக்கப்பட்டன."
+notificationDeletedMessage: "அறிவிப்பு வெற்றிகரமாக நீக்கப்பட்டது."
 clearAllNotificationsButtonTitle: "அனைத்தையும் படித்ததாக குறி"
-deleteAllNotificationsButtonTitle: "Delete all"
+deleteAllNotificationsButtonTitle: "அனைத்தையும் நீக்கு"
 notificationsClearError: "அறிவிப்புகளை படித்ததாக குறியிட இயலவில்லை!"
-notificationsDeleteError: "Unable to delete notifications!"
+notificationsDeleteError: "அறிவிப்புகளை நீக்க முடியவில்லை!"
 pleaseWait: "தயவு செய்து காத்திருக்கவும்..."
 indexPage:
   recommendedSection:
@@ -71,9 +71,9 @@ indexPage:
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
-    subtitle: Create stories, games and more...
-    download: Download the app
-    statistics: More Statistics
+    subtitle: கதைகள், விளையாட்டுகள், மற்றும் பலவற்றை உருவாக்குங்கள்...
+    download: செயலியை பதிவிறக்கவும்
+    statistics: மேற்கொண்ட புள்ளிவிவரங்கள்
   featured: சிறப்பு
   newest: Newest projects
   recommended: Recommended projects
@@ -126,10 +126,10 @@ programs:
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: காரணத்தை பதிவிடவும்
-  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonInappropriate: அது பொருத்தமற்றது
   reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
+  reportRadioButtonSpam: அது தேவையற்றது
+  reportRadioButtonDislike: எனக்கு அது பிடிக்கவில்லை
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
@@ -143,25 +143,25 @@ programs:
   delete: அழித்துவிடு
   report: அறிக்கையிடு
   report_popup: உங்கள் கருத்து வெற்றிகரமாக அளிக்கபட்டது.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
+  report_popup_header: புகாரளிக்கப்பட்டது
+  deleted_popup: உங்கள் கருத்து வெற்றிகரமாக நீக்கப்பட்டது.
+  deleted_popup_header: நீக்கப்பட்டது
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project Description
   saveDescription: Save Description change
   editCredits: Edit the project Credits
   saveCredits: Save Credits change
-  addComment: Write a comment
+  addComment: தங்கள் கருத்தை பகிரவும்
   thumbsUp: Thumbs up!
-  smile: Smile!
+  smile: புன்னகைக்கவும்!
   love: Love!
-  wow: Wooow!
-  linkTitle: Link
+  wow: அடடே!
+  linkTitle: இணைப்பு
   link: Copy project link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
-  by: 'by'
-  open: 'Open'
+  by: 'மூலம்'
+  open: 'திறந்த'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'மன்னிக்கவும்...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
@@ -188,7 +188,7 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: உங்கள் கேட்ரோபாட் கடவுச்சொல் மீட்பு
   message: |
     Dear %username%.
 
@@ -220,82 +220,82 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
+  edit: உங்கள் சுயவிவ திருத்தம்
   saveChanges: திருத்தங்களை சேமியுங்கள்
   newPass: புதிய கடவுச்சொல்
   repeatPass: மீண்டும் கடவுச்சொல்
-  oldPass: old password
+  oldPass: பழைய கடவுச்சொல்
   firstEmail: எனது முதல் மின்னஞ்சல்
   secondEmail: எனது இரண்டாம் மின்னஞ்சல்
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: எனது செயற்திட்டங்கள்
+  follows: பின்தொடர்கள்
+  follower: பின்பற்றுபவர்
+  unfollowUser: இந்த பயனரைப் பின்தொடர்வதை நிறுத்தவும்!
+  followUser: இந்த பயனரைப் பின்தொடரவும்!
+  amountOfPrograms: திட்டங்களின் தொகை
   form:
     passwordTooShort: புதிய கடவுச்சொல்லில் %length% எழுத்துக்களாவது இருக்க வேண்டும்.
     passwordTooLong: புதிய கடவுச்சொல்லில் %length% எழுத்துகள் மட்டுமெ இடம்பெர முடியும்.
     passwordIsUsername: கடவுச்சொல்லும் பயனப்பெயரும் வெவ்வேறாக இருக்க வேண்டும். 
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    passwordWrong: தவறான கடவுச்சொல்
+    emailNotValid: இந்த மின்னஞ்சல் முகவரி செல்லுபடியாகாது.
+    emailMissing: இந்த மின்னஞ்சல் முகவரியைப் புதுப்பிக்கும்போது பிழை. உங்களிடம் குறைந்தபட்சம் ஒரு சரிபார்க்கப்பட்ட மின்னஞ்சல் முகவரி இருக்க வேண்டும்.
+    emailExists: இந்த மின்னஞ்சல் முகவரி ஏற்கனவே உள்ளது.
+    usernameNotValid: இந்த பயனர்பெயர் செல்லுபடியாகாது.
+    usernameMissing: உங்களிடம் பயனர்பெயர் இருக்க வேண்டும்.
     usernameExists: This username already exists.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  changePicture: Change picture
+    submitSuccess: சேமிக்கப்பட்டது!
+  reallyDeleteProgram: உங்கள் திட்டத்தை நீக்க விரும்புகிறீர்களா
+  programsOf: திட்டங்கள்
+  changePicture: படத்தை மாற்றுக
   avatar:
-    noImage: No Image!
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    noImage: எந்த படமும் இல்லை!
+    pictureTooLarge: நீங்கள் தேர்ந்தெடுத்த படம் மிகப் பெரியது, தயவுசெய்து 5mb ஐ விட பெரிய படங்களை பயன்படுத்த வேண்டாம்.
+    uploadError: மன்னிக்கவும், பதிவேற்றத்தின் போது சிக்கல் ஏற்பட்டது!
+    noSupport: இந்த பட வகை ஆதரிக்கப்படவில்லை, தயவுசெய்து மற்றொரு படத்தை முயற்சிக்கவும்.
 myprofile:
-  editProfile: Edit profile
+  editProfile: சுயவிவர திருத்தம்
   edit: திருத்து
   done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
+  checkMail: உங்கள் மின்னஞ்சல் முகவரிக்கு ஒரு மின்னஞ்சல் அனுப்பப்பட்டது. உங்கள் இன்பாக்ஸை சரிபார்க்கவும்.
+  passwordUpdated: உங்கள் கடவுச்சொல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.
   avatar: அவத்தார்
   email: மின்னஞ்சல்
-  editAvatar: Edit avatar
+  editAvatar: சின்னத்தை தொகுத்தமை
   editUsername: பயனப்பெயர் திருத்தம்
   editPassword: கடவிச்சொல் திருத்தம்
   editCountry: நட்டைத் திருத்து
   editEmail: மின்னஞ்சல் திருத்து
   deleteAccount: கணக்கை நீக்கு
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  deleteAccountText: உங்கள் குற்றச்சாட்டை நீக்க விரும்புகிறீர்களா? இது உங்கள் பதிவேற்றிய திட்டங்கள் மற்றும் கருத்துகளை நீக்கும்!
+  editAccountSettings: கணக்கு அமைப்புகளைத் திருத்தவும்
+  notChangeVisibility: தெரிவுநிலையை மாற்ற முடியாது
+  notChangeVisibilityReason: உங்கள் திட்டத்தின் மொழி பதிப்பு மிக அதிகமாக உள்ளது, எனவே இது புலப்படும் வகையில் அமைக்க முடியாது.
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: 'விளையாட உரிமம்'
+  title: 'விளையாட உரிமம் - கடன் மற்றும் பங்கு கொடுங்கள்'
+  text1: ஒவ்வொரு கேட்ரோபாட் திட்டமும் ஒரு கேக் என்று கற்பனை செய்து பாருங்கள், அதன் செய்முறையுடன் (நிரலாக்க தொகுதிகள்) வரும் ஒரு சிறப்பு கேக். கேட்ரோபாட் சமூகத்தின் அனைத்து உறுப்பினர்களும் தங்கள் சமையல் குறிப்புகளுடன் தங்கள் கேக்குகளைப் பகிர்ந்து கொள்கிறார்கள். இதன் பொருள் நீங்கள் கேக்குகளை ரசிக்கலாம் மற்றும் அவற்றை நீங்களே உருவாக்குவது எப்படி என்பதை அறியலாம்!
+  text2: 'இரகசிய சமையல் வகைகள் எதுவும் இல்லை: இந்த கேக்குகளை எவ்வாறு தயாரிப்பது என்பதற்கான வழிமுறைகள் யாருக்கும் பயன்படுத்த, மறுபயன்பாடு செய்ய, மாற்றியமைக்க மற்றும் புதிய யோசனைகளுக்கு உத்வேகமாக செயல்படுகின்றன... அதாவது கேக்குகள்.'
+  text3: "நீங்கள் கேக்குகளை சாப்பிடலாம், மற்றவர்களின் சமையல் குறிப்புகளை உங்கள் சொந்தமாக நகலெடுக்கலாம், ஒருவேளை வெவ்வேறு பொருட்களுடன். இந்த சுதந்திரம் இரண்டு எளிய தேவைகளுடன் வருகிறது:"
+  text4: "கேட்ரோபாட் சமூகத்தை அமைப்பதில், இந்த அணுகுமுறையை சமூகத்தில் கற்றல் மற்றும் படைப்பாற்றலை ஆதரிக்கிறது என்று நாங்கள் நம்புகிறோம். சமையல் மற்றும் பொருட்கள் (ஸ்கிரிப்டுகள் மற்றும் கலைப்படைப்புகள்) பகிர்வதன் மூலம், மக்கள் ஒருவருக்கொருவர் யோசனைகளை உருவாக்க முடியும், மேலும் அனைவருக்கும் பயனளிக்கும்."
+  text5: கேட்ரோபேட் வலைத்தளத்தை வடிவமைப்பதில், மக்களைப் பகிர ஊக்குவிப்பதற்கும் மற்றவர்களுக்கு கடன் வழங்குவதற்கும் அம்சங்களை நாங்கள் சேர்த்துள்ளோம். ஒவ்வொரு திட்டப்பக்கத்திலும், திட்டத்திற்கான அசல் ஸ்கிரிப்ட்களை நீங்கள் எப்போதும் பதிவிறக்கலாம். நீங்கள் ஒரு திட்டத்தை ரீமிக்ஸ் செய்தால் (ஸ்கிரிப்டுகள் அல்லது கலைப்படைப்புகளை மாற்றியமைத்தல் மற்றும் முடிவைப் பகிர்வது), திட்டக் குறிப்புகளில் கடன் வழங்க நாங்கள் உங்களை ஊக்குவிக்கிறோம், உங்களை ஊக்குவித்த நபர்களையும் திட்டத்தையும் குறிப்பிடுகிறோம்.
+  text6: 'கேட்ரோபாட் ஆன்லைன் சமூகத்தின் பயன்பாட்டு விதிமுறைகளைப் பற்றி %link-termsOfUse% இல் மேலும் அறிக.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: செய்முறையுடன் உங்கள் கேக்குகளைப் பகிர்ந்து கொள்ளுங்கள்
+    item2: உங்களை ஊக்கப்படுத்தியவர்களுக்கு கடன் கொடுங்கள்
+  version: பதிப்பு 1.1, 2 ஏப்ரல் 2013
 termsOfUse:
   title: பயன்பாட்டு விதிமுறைகள்
   headline: Catrobat சமூகத்திற்கு வரவேற்கிறோம்!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'கேட்ரோபாட் சமூகத்தின் ஒரு பகுதியாக, நீங்கள் திட்டங்களையும் யோசனைகளையும் மக்களுடன் பகிர்ந்து கொள்கிறீர்கள்:'
   text2: "ஒவ்வொரு சமுதாயத்திற்கும் இந்த சமூகத்தை ஒரு ஆதாரமான இடமாக மாற்றுவதற்கு எங்களுக்கு உங்கள் உதவி தேவை. நீங்கள் எப்படி உதவ முடியும்?"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: "கேட்ரோபாட் திட்டத்தின் மூலம் நாங்கள் ஒத்துழைப்பை வளர்க்க விரும்புகிறோம், மேலும் அனைவரின் படைப்பாற்றலையும் மனிதகுலத்தின் நன்மைக்காக ஒன்றிணைக்க அனுமதிக்கிறோம். மற்ற செயலில் உள்ள உறுப்பினர்கள் தங்கள் திட்டங்களை உங்களுக்கு வழங்குவதைப் போலவே, உங்கள் திட்டங்களை சமூகத்திற்கு ஒரு பரிசாக வழங்குவதன் மூலம் நீங்கள் கேட்ரோபாட் சமூகத்தின் செயலில் உறுப்பினராக முடியும்:"
   text4: 'உங்களுக்கக எங்களின் பரிசு:'
   text5: 'எங்கள் பயன்பாட்டு விதிமுறைகள் மட்ற்றும் சேவை:'
   list1:
     item1: வெவேறு நாடுகள் மட்ற்றும் கலாச்சாரங்களில் இருந்து
     item2: அனைத்து வயதினருக்கும் (குழந்தைகளில் இருந்து இளம் வயதினர் மட்ற்றும் முதியோர்கள் வரை)
-    item3: with all levels of experience
+    item3: அனைத்து மட்ட அனுபவங்களுடனும்
   list2:
     item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
@@ -439,7 +439,7 @@ help:
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: "Glide"
+      title: "சறுக்கு"
       description: "Let your object glide over the screen."
       one: "Add the object you want to be gliding. e.g. plane."
       two: "Insert the following bricks and define the area in which the movement should happen."
@@ -540,7 +540,7 @@ help:
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the project"
+    download: "திட்டத்தை பதிவிறக்கவும்"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: 'Please choose a username:'
@@ -548,7 +548,7 @@ oauth:
   usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Search...
-  search: Search
+  search: தேடல்
   results: Search Results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
@@ -565,7 +565,7 @@ login:
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
   recoverPass: Recover password
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  recoverPassSend: உங்கள் மின்னஞ்சல் முகவரிக்கு ஒரு மின்னஞ்சல் அனுப்பப்பட்டது. உங்கள் இன்பாக்ஸை சரிபார்க்கவும்.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
@@ -575,7 +575,7 @@ login:
   alreadyAccount: Already having an account?
   or: OR
   username: பயனர் பெயர்
-  email: Email
+  email: மின்னஞ்சல்
   passwordFirst: கடவுச்சொல்
   passwordSecond: Password Confirm
 apk:
@@ -586,7 +586,7 @@ apk:
 #api
 errors:
   username:
-    blank: Username must not be blank
+    blank: பயனர்பெயர் காலியாக இருக்கக்கூடாது
     invalid: Your username is invalid
     exists: This username already exists.
     not_exists: This username does not exist.
@@ -604,8 +604,8 @@ errors:
     invalid: Invalid country
   email:
     blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    invalid: உங்கள் மின்னஞ்சல் தவறானது என்று தெரிகிறது
+    exists: இந்த மின்னஞ்சல் முகவரி ஏற்கனவே உள்ளது.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
@@ -632,7 +632,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: அங்கீகரிப்பு தோல்வியுற்றது
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
@@ -773,6 +773,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities
@@ -844,7 +845,7 @@ media-packages:
     lg: large
   theme-special: "%flavor% Theme Special"
 flavor:
-  pocketcode: Pocket Code
+  pocketcode: பாக்கெட் கோட்
   pocketalice: Pocket Alice
   pocketgalaxy: Galaxy Jam
   phirocode: PhiroCode

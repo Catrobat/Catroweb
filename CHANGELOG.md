@@ -6,6 +6,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0]
+### Added
+- User history admin view
+
+### Changed
+- Notification menu extended
+- updated deploy script and create wiki entry
+### Fixed
+
+- removed project navigation from Media Library Sidebar
+- removed LocaleBundle deprication
+- Bug with comments on remixed projects 
+- Bangala translation fixed
+- Changed buttons
+- removed ContainerAwareCommand deprication
+- removed template deprication
+- CodeStatistics Logic updated and added missing bricks
+- Upload bug with google account
+- Hotfix forces `SECURE_SCHEMA` to `https`
+- Admin interface problems because of unnecessary flavor check
+- validation bug with legacy projects
+
+### API
+- `max_version` parameter is back
+
 ## [3.0.0]
 ### Added
 - `tests/testdata/log` was missing -> added now
@@ -94,7 +119,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v3.0.0
 [2.3.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.1...v2.2.0

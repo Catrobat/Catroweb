@@ -22,8 +22,8 @@ noWayOfReturn: 다시 되돌릴 수 없습니다!
 download: 프로그램 다운로드
 description: 설명
 noDescription: 설명 없음
-credits: Credits
-noCredits: No credits available.
+credits: 만든이
+noCredits: 만든이 없음
 country: 국가
 loginText: 로그인
 privacyPolicy: 개인 정보 보호 정책
@@ -39,34 +39,34 @@ ok: OK
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
 registrationError: '이미 사용 중인 사용자 이름 또는 이메일 주소입니다.'
 notifications: '알림'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
+allNotifications: '모든 알림'
+FollowersNotifications: '팔로워'
+LikeNotifications: '좋아요'
+likesNotificationsTitle: '좋아요 알림'
+followersNotificationsTitle: '팔로워 알림'
+commentsNotificationsTitle: '코멘트 알림'
 CommentNotifications: '코멘트'
-oldnotification: 'Old Notifications'
+oldnotification: '오래된 알림'
 wellDone: "완료!"
 done: "끝!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "알림이 없습니다."
 notificationsClearedMessage: "모든 알림이 읽은 상태로 표시되었습니다."
 deleteNotificationConfirmation: "계속하시겠습니까?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+notificationDeleteMessage: "이 알림을 삭제하시겠습니까?"
+notificationDeleteAllMessage: "모든 알림을 삭제하시겠습니까?"
+confirmMessage: "예, 삭제합니다."
 cancelMessage: "취소"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
+notificationsAllMessagesDeleted: "알림이 모두 삭제되었습니다."
+notificationDeletedMessage: "잘 삭제되었습니다."
 clearAllNotificationsButtonTitle: "모두 읽음으로 표시"
-deleteAllNotificationsButtonTitle: "Delete all"
+deleteAllNotificationsButtonTitle: "모두 삭제"
 notificationsClearError: "알림을 읽음으로 표시할 수 없습니다!"
-notificationsDeleteError: "Unable to delete notifications!"
+notificationsDeleteError: "알림 삭제 불가!"
 pleaseWait: "잠시 기다려 주십시오..."
 indexPage:
   recommendedSection:
     info:
-      title: '어떤 프로그램 권장하세요?'
+      title: '어떤 프로그램 추천하세요?'
       description: '더 많은 ''엄지척''("최고야", "웃음", "사랑"과 "와우!"를 포함하여) 을 받으면, 리스트의 위쪽에 표시됩니다.'
 programs:
   welcome:
@@ -95,22 +95,22 @@ programs:
   reportCommentConfirmation: 이 댓글을 리포트하시겠습니까?
   deleteCommentConfirmation: 이 댓글을 정말 삭제하시겠습니까?
   deleteAccountConfirmation: |+
-    계정 삭제?
-    게정 삭제를 원하세요? 업로드한 프로그램과 코멘트도 삭제됩니다!
-    이렇게 하면 되돌릴 수 없습니다!
-    예, 삭제합니다!
-    취소
-  tooLongDescription: 설명이 너무 깁니다!
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
   rudeWordsInDescription: 설명에 나쁜 표현은 사용할 수 없습니다.
   tooLongCredits: The project credits are too long!
   rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
-  random: 아무거나 프로젝트
-  related: 관련된 프로젝트
+  random: Random projects
+  related: Related projects
   downloads: '%downloads% 다운로드'
-  sample: 예제 프로젝트
+  sample: Example projects
   views: '%views% 조회'
   likeThumbsUpDetailText: '엄지척 0{0} | 엄지척1{1} |] 1, Inf]%persons% 사람들이 엄지척'
   likeSmileDetailText: '스마일 0{0}|스마일 1{1} |]1, Inf]%persons% 사람들이 스마일'
@@ -118,25 +118,25 @@ programs:
   likeWowDetailText: '최고! {0}0 | 최고! {1}1 |] 1, Inf]%persons% 사람들이 최고!'
   remixes: '리믹스 {0}0|리믹스 {1}1|] 1, Inf]%remixes% 리믹스'
   newRemixesNotificationTitle: '|{1} "%programName%" 1 새로운 리믹스: |] 1, Inf] "%programName%" 새로운 리믹스 %remixes%  :'
-  submitted: 제출된 프로그램
-  uploaded: 업로드된 프로그램
+  submitted: Submitted Projects
+  uploaded: Uploaded Projects
   reportAsInappropriate: 부적합한 프로그램으로 보고
-  reportProgram: 프로젝트를 보고하다
+  reportProgram: Report project
   languageVersion: 'Catrobat 언어 버전: %languageVersion%'
-  reportLoginText: 리포트 하려면 %login% 해 주세요.
-  reportDialogHeader: 이 프로그램을 리포트하는 이유는 무엇인가요?
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
   reportDialogReason: 이유를 입력하세요
   reportRadioButtonInappropriate: 부적절함
   reportRadioButtonCopyright: 복사권 침해
   reportRadioButtonSpam: 스팸입니다
   reportRadioButtonDislike: 싫어요.
-  reportOwnProgram: 자신의 프로그램을 추천할 수 없습니다
-  reportAlready: 이미 이 프로그램을 추천습니다.
-  reportDone: 이 프로그래을 리포트했습니다.
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeader: 응용 프로그램 업데이트
-  updateAppText: 이 프로그램을 다운로드하려면 최신 버전으로 당신의 앱을 업데이트 하세요.
+  updateAppText: Please update your app to the newest version to be able to download this project.
   btnClosePopup: 예
-  checkout_this_program: 이 Catrobat 프로그램을 점검하세요
+  checkout_this_program: Checkout this Catrobat project
   show_more: 더 보기
   comments: 코멘트
   send: 보내기
@@ -147,7 +147,7 @@ programs:
   deleted_popup: 코멘트가 삭제되었습니다.
   deleted_popup_header: 삭제됨
   noAdminRights: 권한이 없습니다. 로그인 해 주세요.
-  editDescription: 프로그램 설명 편집
+  editDescription: Edit the project Description
   saveDescription: 설명 변경 저장
   editCredits: Edit the project Credits
   saveCredits: Save Credits change
@@ -157,14 +157,14 @@ programs:
   love: 좋아요!
   wow: 와우!
   linkTitle: 링크
-  link: 클립보드에 링크 복사하기
+  link: Copy project link to clipboard
 remixGraph:
   showRemixGraph: '리믹스 그래프 표시'
   by: '만큼'
   open: '열기'
   showPaths: '경로 표시'
   programNotAvailableErrorTitle: '죄송합니다..'
-  programNotAvailableErrorDescription: '프로그램을 더 이상 사용할 수 없습니다!'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: '사용할수 없음'
   programUnknownUser: '알 수 없는 사용자'
 noReply: 자동 메시지입니다 - 이 메일에 회신하지 마세요.
@@ -219,12 +219,12 @@ profile:
   oldPass: 이전 비밀번호
   firstEmail: 처음 메일
   secondEmail: 두번째 메일
-  myPrograms: 내 프로젝트
+  myPrograms: My projects
   follows: 팔로우
   follower: 팔로워
   unfollowUser: 이 사용자 팔로잉 취소
   followUser: 이 사용자 팔로잉
-  amountOfPrograms: 많은 프로그램들
+  amountOfPrograms: Amount of projects
   form:
     passwordTooShort: 새 암호는 적어도 %length% 문자 이상이어야 합니다.
     passwordTooLong: 새 암호는 최대 %length% 문자 사용할 수 있습니다.
@@ -233,12 +233,12 @@ profile:
     emailNotValid: 이 이메일 주소는 유효하지 않습니다.
     emailMissing: 이 전자 메일 주소를 업데이트 하는 동안 오류가 발생 했습니다. 유효한 전자 메일 주소가 하나 이상 있어야 합니다.
     emailExists: 이 이메일 주소는 이미 존재합니다.
-    usernameNotValid: 사용자 이름을 사용할 수 없습니다.
-    usernameMissing: 사용자이름이 있어야 합니다.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
     usernameExists: 이름이 이미 존재합니다.
     submitSuccess: 저장 완료
-  reallyDeleteProgram: 프로그램을 삭제 하시겠습니까?
-  programsOf: 프로젝트
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
   changePicture: 사진 변경
   avatar:
     noImage: 이미지 없음
@@ -259,18 +259,18 @@ myprofile:
   editCountry: 국가 수정
   editEmail: 전자 메일 편집
   deleteAccount: 계정 삭제
-  deleteAccountText: 당신의 계정을 삭제하는 것에 동의하시나요? 당신이 올린 프로그램과 댓글이 삭제될 것입니다.
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
   editAccountSettings: 계정 설정 수정
   notChangeVisibility: 가시성을 바꿀 수 없음
-  notChangeVisibilityReason: 프로그램 버전이 너무 높아 볼 수 없습니다.
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: '게임 라이센스'
   title: '신용 및 공유 라이센스'
-  text1: 각 Catrobat 프로그램을 제조법(프로그래밍 블록) 과 함께 제공되는 아주 특별한 케이크라고 상상해 보세요. Catrobat 공동체의 모든 구성원이 그들의 조리법과 함께 케이크를 공유합니다. 즉, 당신이 케이크를 즐길 수 있고 그들 스스로 만드는 방법을 배울 수 있다는 것을 의미합니다.
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: '특별한 비밀 요리법은 없습니다:이 케이크를 만드는 방법에 대 한 지침 사용, 재사용, 수정, 및 새로운 아이디어에 대한 영감으로 봉사하는 것 등이 누구에게나 열려 있습니다... 나는 케이크를 의미 한다.'
   text3: "여러분들은 다른 재료를 사용해 다른 사람들의 요리법을 복사할 뿐만 아니라 스스로 만들어 먹을 수도 있다. 이렇게 자유롭게 하려면 두가지가 필요하다:"
   text4: "Catrobat 커뮤니티를 만들면서 우리는 이 방법이 커뮤니티안에서 학습과 창조성을 돕는다고 믿어 사용하기로 결정하였다. 조리법과 재료(스크립트와 작품들)을 공유함으로서, 다른 사람의 아이디어위에 새롭게 만들어 서로에게 이익이 된다."
-  text5: Catrobat 웹사이트를 디자인하면서, 우리는 사람들이 공유하고 서로에게 도움이 될 수 있도록 모양을 만들었다. 각각의 프로그램 페이지에서는, 여러분들은 프로그램의 원본 스크립트를 항상 다운로드할 수 있다. 여러분들이 프로그램을 재구성했다면(스크립트나 모양을 바꾸고, 결과를 공유하며), 우리는 여러분들이 프로그램의 설명에 제작과정을 밝히기를 권장하며, 여러분에게 영감을 준 사람과 프로그램에 대해 밝혀주기를 바랍니다.
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
   text6: '온라인 커뮤니티 %link-termsOfUse%에 있는 Catrobat의 이용 약관에 대해 자세히 알아보세요.'
   list1:
     item1: 당신의 요리법과 함께 케이크를 공유하세요
@@ -279,9 +279,9 @@ licenseToPlay:
 termsOfUse:
   title: 이용 약관
   headline: 오신 것을 환영 합니다 Catrobat 커뮤니티!
-  text1: 'Catrobat 커뮤니티의 일환으로, 사람들과 프로그램과 아이디어를 공유할 수 있습니다:'
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
   text2: "이 커뮤니티가 모두에게 도움이 되기위해서는 여러분들의 도움이 필요하다. 여기 당신이 도울 방법이 있다:"
-  text3: "Catrobat 프로그램를 통해 협력을 촉진하고 모든 인류의 이익을 위해 결합하여 모든 사람의 창의력을 허용합니다. 다른 활동하는 구성원이 그들의 프로그램을 당신에게 주었던 것처럼, 여러분들 또한 선물처럼 커뮤니티에 당신의 프로그램을 공유하여 캣로밧 커뮤니티의 활동하는 구성원이 될 수 있습니다:"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: '당신에게 선물로 주고 싶다.'
   text5: '사용과 서비스 약관:'
   list1:
@@ -289,14 +289,14 @@ termsOfUse:
     item2: (어린이부터 청소년 및 조부모까지) 모든 연령대의
     item3: 경험의 모든 수준을 가지고
   list2:
-    item1: 존경받도록 하세요. 프로그램을 공유할 때, 여러 나이의 다른 배경의 많은 사람들이 당신의 기여를 볼 것이라는 것을 기억하세요.
-    item2: "제작참여 과정을 보여주세요. 다른 사람의 프로그램을 변형하는 버전을 만드는 것을 자유롭게 느끼도록 제작참여 과정을 꼭 만들어 보여 주세요. 프로그램 설명이 제작참여 과정을 위한 공간입니다. 다른 제작자의 프로그램의 변형에 대한 점선 리스트 아래 문구를 보아 주세요."
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "정직 하게 하세요. 다른 사람인 것처럼 하거나 커뮤니티를 속이려 하지 마세요."
     item4: "개인 개인 정보를 유지하세요. 여러분의 이메일 주소, 전화 번호 또는 기타 개인 연락처 정보를 공유하지 마십시오."
-    item5: "사이트를 친절하도록 유지해 주세요. 만약 프로그램이나 설명이 거칠거나, 너무 폭력적이거나, 부적절하다고 느껴지시면, '부적절 신고'를 클릭하고 간단한 설명을 남겨 주세요. Catroba 팀에서 여러분의 신고를 검토하고 프로그램과, 설명 등 관련된 것을 삭제할 수 있습니다."
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
   list3:
-    item1: "우리의 웹사이트에 프로그램을 업로드 하 여 당신은 수락 하 고 업로드 된 Catrobat 프로그램의 특정 무료 라이선스에서이 작업을 저장 하는 데 동의. 무료 라이센스는 Catrobat 시스템 자체는 당신에 게 사용할 수와 마찬가지로, 이 무료 라이센스 프로그램 모두에 게 직장에서 배울 수 있는 권리를 주고 업로드 된 Catrobat의 이전 업로드 다른 사람에 의해 그들의 자신의 새로운 매혹적인 게임, 애니메이션, 그리고 다른 프로그램을 구축 하는 작업을 리믹스 하 고 적응 하. 이로써 ' 한의 동료의 어깨에 서 서 ' 모두, 당신은 그들 중 하나! 작업 따라서 세상을 유익 하 고 모두 사용 하 여 무료, 자유롭게 세계 각 지에서 자원 봉사자에 의해 위키백과에 기여 하는 사진과 텍스트를 약간 비슷한 유지. 인류에 게 당신의 현재로 그것의 생각: 당신은 모든 사람에 게 주고 당신에 게 우리의 웹사이트에 그들의 작품을 업로드 하는 모든 다른 사람. 따라서 업로드 프로그램의 가치 그것의 소유자는 동일한 조건에 있는 지역 사회에 참여 하는 조건으로 무료, 당신에 게 주시는 선물 이다."
-    item2: 선물을 받지 않아도 됩니다. 그렇다면 특정 규칙이 적용됩니다. 이 규칙의 이점은 작업에서 배우고 직접 작성하여 더 멋진 작품을 만들 수 있으며, 이를 다시 자신의 웹 사이트에 업로드 할 수 있다는 것입니다. 또 다른 좋은 점은 이러한 라이센스가 귀하의 프로그램 사용을 통해 발생하는 문제에 대해 책임을지지 않는다는 것입니다.
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "한 중요 한 추가 상태는 당신이 명확 하 게 누구의 작품에 당신이 자신의 작품을 기반으로 하는 저자에 게 속성을 부여입니다. 같은 시간에 우리는 열심히 작업 평가 될 것 이다 명확 하 게 다른 사람에 의해 당신에 의해, Catrobat의 지역 사회에서 당신을 대표 하는 것을 자유롭게 선택한 고유 이름 속성을 제공 하 여 그리고 다른 작업 모두에 게 부여 하는 데 대 한 공개 방법에 당신에 게 그들의 감사를 표현 하는 기회를 제공 함으로써 기여 된 데에 및 특히 그들에 게."
     item4: '정확한 법률 용어 및 조건에 대 한 %link-licenseUploaded%를 참조 하십시오.'
   list4:
@@ -306,7 +306,7 @@ termsOfUse:
   list5:
     item1: '만약 당신이, 이나, 나이, 귀하의 부모 또는 법적 보호자의 13 세 미만 있다면, 연결 조직에 참여 또는 담당 기자 회견 형식 개인 정보 보호 위반 또는 대량 대량 감시, 그럼 우리의 소프트웨어 응용 프로그램을 사용 하 고 우리의 서비스에 액세스할 수 없습니다. 이 제한 및 그것에 특정 예외의 정확한 세부 사항 섹션에서 delineated는 4.a 및 4.b 우리의 %link-termsOfUse%에.'
     item2: 13 세 미만 인 경우 다음 Catrobat의 소프트웨어 응용 프로그램 및 서비스를 사용할 수 있는지 여부 귀하의 부모 또는 법적 보호자에 게 있다.
-    item3: "우리 권리를 거부, 삭제 또는 숨기기 프로그램, 사용자 계정, 예약 인스턴스 우리가 그 프로그램을 찾을 경우 부적절 한 자료를 포함 하거나 사용자의 다른 사람의 권리 침해 하는 모든 디지털 자료 언제 든 지 우리의 단독 재량에, Catrobat의 웹 사이트에 업로드 하 고 있습니다."
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
     item4: "Catrobat의 소프트웨어 및 인터넷 자원의 모든 희망을 그들은 도움이, 될 것입니다 하지만 어떠한 보증도 없이 제공 됩니다."
     item5: '포인트 및 일부 추가 약관 및 조건 위에서 정확한 정립을 위한 우리의 %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service를 참조 하십시오.'
   bottom1: 우리는 항상 우리의 이용 약관 개선 하려고 하기 때문에 시간에서 여기 다시 확인 합니다.
@@ -317,12 +317,15 @@ help:
     title: "단계별 소개"
     start: "시작 위치:"
     description: |
-      여기 귀하의 첫 번째 프로그램 다음 연습 동영상을 사용하여 대화형 엽서를 만들 수 있습니다. 당신은 당신에게 주어진 지시를 따르세요. 엽서를 생성하는 동안 귀하의 미래의 프로그램에 필요한 포켓 코드의 기초는 중재된다. 이 가이드 동영상은 포켓코드 프로그램를 만드는 더 많은 자유를 줄 것 이다.
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: '새 프로젝트 시작하기'
+      title: 'Make a new project'
       detail:
         text1: '"새로운"을 터치'
-        text2: '프로그램 이름을 입력하고, "빈 프로그램 만들기" 선택하고 "확인"을 터치하세요.'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
     step2:
       title: "새로운 프로그램 만들기"
       detail:
@@ -363,14 +366,14 @@ help:
       description: "이 단계에서는 오브젝트의 행동을 반복하는 방법을 보여 줍니다."
       detail:
         text1: '"계속 반복" 블록을 선택합니다. 블록안의 프로그램이 계속 반복됩니다.'
-        text2: '"프로그램을 시작할 때" 블록 아래에 "무한 반복" 블록을 끼워 넣으세요.'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
         text3: '"움직이기" 블록을 추가하세요.'
         text4: '"움직이기" 블록을 "계속 반복의 끝" 블록 사이에 붙이세요.'
         text5: 'X 와 Y의 값을 0으로 하기위해 텍스트 필드를 누릅니다.'
         text6: '화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.'
     step7:
       title: "터치하면 다 끝납니다."
-      description: '또한 프로그램 무대에서 실행중일 때도 오브젝트의 행동을 제어할 수 있습니다.'
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
       detail:
         text1: '"터치할 때" 블록을 선택하세요. "터치할 때" 아래의 블록들은 스테이지의 오브젝트를 터치할 때 한 번 실행됩니다.'
         text2: '다른 블록아래에 "터치할 때" 블록을 놓습니다.'
@@ -389,7 +392,7 @@ help:
         text3: '오브젝트나 배경을 미리보려면 스마트폰의 취소버튼을 이용하세요.'
     step10:
       title: "배경을 바꾸라"
-      description: "하나의 프로그램의 오브젝트와 배경을 미리 보여준다."
+      description: "This is the overview of your objects and your project's background."
       detail:
         text1: '배경은 오브젝트와 비슷하다, 그러나 배경위에 나타낼 수 있다.'
         text2: '스크립트, 소리와 모양을 배경과 같은 방식으로 볼 수 있습니다.'
@@ -397,12 +400,12 @@ help:
       title: "메인 메뉴"
       description: "이 화면으로 돌아가기 위해서는 스마트폰의 취소 버튼를 이용하세요."
       detail:
-        text1: '현재 열린 프로그램에 계속합니다.'
-        text2: '새 프로젝트 추가'
-        text3: '모든 로컬 프로그램을 참조하십시오.'
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
         text4: '도움말 사이트에 가서 다른 사용자들과 토론해 보세요.'
-        text5: 'Pocket Code 프로그램의 세계를 탐험해 보세요. 다운로드하고 하고 싶은대로 리믹스해 보세요.'
-        text6: '현재 열려있는 프로그램을 업로드하세요.'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
   tutorialcards:
     title: "튜토리얼"
     description1: "이 튜터리얼에서는 포켓 코드에서 효과적인 트릭을 사용하는 방법을 보여줍니다."
@@ -475,8 +478,8 @@ help:
       one: "먼저 얼굴 인식 블록이 활성화 되어있는지 확인합니다. 설정으로 이동합니다."
       two: "새 오브젝트를 추가하고 얼굴이 감지 되면 보이게 하려면 다음 블록을 추가하세요. 얼굴 인식이 되고 무한 반복 사이에 넣어 확인하세요. 카메라는 얼굴 인식하는 경우 변수의 값은 \"참\", 그렇지 않으면 \"거짓\"입니다."
   starterPrograms:
-    title: "초보자 프로젝트"
-    description: "이러한 시작 프로그램을 실행해 보세요. 변경하려면 자세히 보고 아이디어를 추가해 보세요."
+    title: "Starter Projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
     categories:
       games: "게임"
       animations: "애니메이션"
@@ -486,22 +489,22 @@ help:
     title: "게임 사이트에 포켓 코드 게임을 업로드 하는 방법?"
     text0: "당신의 게임에 처음으로 축하합니다! 독립적으로 실행되는 안드로이드 app을 %link%에 업로드할 수 있습니다. 그다음 게임 사이트에 업로드할 수 있다."
     title1: "등록"
-    text1: "먼저 계정을 생성해야 합니다. 그 후 만든 프로그램을 업로드할 수 있습니다. 그것은 쉽게 걱정할 필요가 없습니다. 사용자 이름 및 암호의 생각해 두고. 둘 다 작성 후 '로그인 또는 등록' 클릭 합니다!"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
     title2: "업로드하기"
     text2: "등록 절차 후 게임을 업로드할 수 있습니다. 그냥 이름에 대해 생각하고 설명을 추가합니다. 또한 설명 필드에 #AliceJam150을 추가 합니다."
-    title3: "여러분의 프로젝트 검색"
-    text3: "검색 및 프로그램 이름을 사용하여 프로그램을 직접 찾거나 모든 프로그램이 나열된 포켓 코드 프로필로 이동합니다."
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
     title4: "안드로이드 응용 프로그램을 창조하라"
-    text4: "프로그램 세부 정보 페이지에서 직접 안드로이드 애플리케이션을 만들 수 있습니다. '앱 준비'를 클릭하여 응용 프로그램을 만듭니다."
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
     title5: "앱 다운로드하기"
-    text5: "응용프로그램으로 만든 후 프로그램을 다운로드할 수 있습니다. %link%에 참가할 게임으로 다시 다운로드된 프로그램을 다시 업로드 할 수 있다."
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
     title6: "GameJolt.com에 등록/로그인"
     text6: "%link%를 방문 하 고 ' 로그 ' 또는 ' 가입!' 메뉴에서 클릭 합니다. 만약 당신이 이미 있으면 바로 로그인 하고, 계정이 없다면, 당신은 이메일 주소, 사용자 이름 및 암호와 함께 등록을 해야 합니다."
     title7: "Game Jolt Site에 게임을 업로드"
     text7: "로그인 후, 대시보드로 이동합니다. 거기서 당신의 게임을 추가할 수 있습니다. 먼저 '규칙 적용'을 클릭 해야 합니다. 다음 게임 정보를 기입 합니다. 엔진/언어/제작 도구로서 '기타'를 선택하고 다른 엔진/언어/도구 '안드로이드' 필드에 추 합니다. '개발' 상태로 ' 완료/안정 '을 선택 합니다. #AliceJam150 %link% 페이지에 나타나는 설명에 포함되었는지 확인합니다."
     text7_1: "당신의 게임을 게시할 수 있습니다, 다음 단계를 따르십시오.  적어도 '썸네일 이미지' 를 추가해야 하며 '평가'를 설정하고,  ' 빌드/파일 '을 클릭하여 게임을 업로드합니다."
     text7_2: "' 추가 패키지 '에 클릭하고 패키지 정보를 작성합니다. 저장하고 추가사항을 추가하세요. "
-    text7_3: "이제 프로그램의 apk를 업로드할 수 있습니다. 당신은 다운로드 폴더에 다운로드한 애플리케이션을 찾으세요. 그것은 제일 좋은 자료 찾는 방법입니다. (예: es 데이터 탐색기)"
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
     text7_4: "참고: 응용 프로그램은 없는 경우는 접미사 '. a p k', '. a p k'를 수동으로 추가해야 합니다. 그냥 파일 이름을 바꿉니다. 이제 당신이 그것을 업로드할 수 있습니다."
     text7_5: "업로드 후 게시하려면 '확인'을 클릭하세요. 사람들이 당신의 게임의 다운로드에 대한 링크가 표시됩니다."
     text7_6: "사이트에 첫 번째 게임을 업로드하고 활성화 되었습니다. 축하합니다!"
@@ -611,24 +614,24 @@ errors:
   token: '인증 장치 실패: 잘못 된 인증 토큰!'
   uploadTokenAuthFailed: '계정 확인용 토큰 업로드 실패.'
   programname:
-    rude: 설명에 무례한 단어를 포함할 수 없습니다.
+    rude: Project name must not contain rude wordes.
   program:
-    invalid: 잘못 된 프로그램입니다.
+    invalid: Invalid project.
   languageversion:
-    tooold: '죄송 합니다, 당신의 프로그램에 Catrobat 언어의 오래 된 버전을 포함하고 있습니다! 당신은 포켓 코드의 최신 버전을 사용하세요?'
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: '죄송합니다, 오래된 포켓 코드 버전입니다. 최신 버전으로 업데이트 하세요.'
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 인증 실패
     webview: |
-      사용자명이 틀립니다.
-      다시 로그인 바랍니다.
+      Your user credentials are wrong.
+      Please try to log in again in the app.
 success:
   text: 성공
   registration: 등록 성공!
   token: OK
   upload: 프로그램가 성공적으로 업로드되었습니다!
-  imgUpload: 이미지가 잘 업로드 되었습니다!
+  imgUpload: Your image was uploaded successfully!
   report: 버그 신고가 성공적으로 전송되었습니다!
 time:
   minutes.ago: '{0} < 1 분 전에 |{1}1 분 전 |] 1, Inf] %count% 분 전'
@@ -694,7 +697,7 @@ gamejam:
   whats: '%gamejamname% 이란 무엇입니까?'
   submitown:
     header: 알고 있어야합니다
-    subheader: 자신의 프로그램만 제출할 수 있습니다
+    subheader: You can only submit your own projects
     text: |
       스스로 만드세요! %gamejamtag%에 참여하세요
 tag-text: 태그
@@ -707,7 +710,7 @@ tags:
     tag4: 음악
     tag5: 예술
     tag6: 실험적인 기능 
-    tag7: 튜토리얼
+    tag7: Tutorial
 admin:
   maintain:
     diskMaintenance: 유지 보수 필요
@@ -723,9 +726,9 @@ admin:
     createBackupConfirmationTitle: 백업 파일 만들기
     createBackupConfirmationText: 이 프로세스는 시간이 걸릴 수 있습니다. 페이지는 나중에 다시 로드됩니다!
 recommender:
-  similarPrograms: 유사한 프로그램
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 이 프로그램을 다운로드하면 같이 다운로드됩니다
-  moreFromThisUser: 이용자 자료 더 보기
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  moreFromThisUser: More from %username%
 pmd:
   submitBtn: 프로그램을 제출하세요
   submitBox:
@@ -733,9 +736,9 @@ pmd:
     text: 프로그램을제출하려고 합니다. 프로그램 코드를 입력하고 보내기를 클릭 하십시오.
     btnText: 제출하기
   successful:
-    text: 프로그램 업로드에 성공했습니다.
+    text: Your project upload was successful.
   failed:
-    text: 프로그램 업로드하지 못했습니다.
+    text: Project upload failed.
 codeview:
   showCode: '코드 표시'
   hideCode: '코드 숨기기'
@@ -747,7 +750,7 @@ codeview:
   scenes: '장면'
   scripts: '스크립트'
   bricks: '블록'
-  objects: '배우와 오브젝트'
+  objects: 'actors and objects'
   looks: '모양'
   sounds: '소리'
   globals: '전체'
@@ -759,6 +762,7 @@ codeview:
   looksBricks: '모양 블록'
   penBricks: '펜 블록'
   dataBricks: '변수 블록'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: 유용한 링크
   legalities: 합법적임
@@ -782,19 +786,19 @@ catro-notifications:
   markAsRead: "읽음으로 표시"
   summary: "{0}새 알림 없음|{1}지금 %amount% 새 알림!|]1,Inf]현재 %amount%새 알림!"
   comment:
-    title: '%program_name%프로그램에 새 코멘트!'
-    message: '%program_link%프로그램에 사용자 %user_link%가 코멘트를 남겼습니다. '
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: '%program_name% 프로그램에 새로운 좋아요!'
-    message: '%program_link% 프로그램에 사용자 %user_link%가 좋아합니다.'
+    title: 'New like for project %program_name%!'
+    message: 'User %user_link% liked your project %program_link%.'
   follow:
     title: '새로운 팔로워'
     message: '%user_link% 사용자가 당신을 팔로우합니다.'
   program-upload:
-    title: '팔로우하는 사용자의 새 프로그램'
-    message: '사용자 %user_link%가 %program_link% 프로그램을 만들었습니다.'
+    title: 'New Project from someone you follow'
+    message: 'User %user_link% created a new Project %program_link%'
 clipboard:
-  success: 프로그램 링크가 복사되었습니다.
+  success: Link to project copied to clipboard!
   fail: 링크 복사가 안됩니다! :(
 next: 다음
 previous: 이전
@@ -805,7 +809,7 @@ help-cards:
     stepbystep: 단계적으로
     getinvolvedGoogle: Google Play에서 받기
     getinvolvedApple: IOS에서 받기
-    discord: Discord 참여하기
+    discord: Join on Discord
     game_design: 게임 디자인
     education: 교육용
     discuss: 토론
@@ -814,7 +818,7 @@ help-cards:
     tutorials: "%theme%에 효과적인 트릭"
     stepbystep: "%theme%에 있는 10단계를 따라하세요"
     getinvolved: 다운로드 후 시작
-    discord: 커뮤니티 가입하기
+    discord: Join the community on discord
     game_design_1: 효과적인 트릭
     game_design_2: 게임 만들기
     education: 초보자 과정 & 많은 재료들
@@ -822,11 +826,11 @@ help-cards:
     discuss_2: 사용자
 media-packages:
   title: 미디어 묶음
-  description: 포켓코드 프로그램으로 오브젝트 추가 가능
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: 미리보기 크기
     sm: 작게
-    md: 보통으로
+    md: 보통
     lg: 크게
   theme-special: "%flavor% 특별한 테마"
 flavor:

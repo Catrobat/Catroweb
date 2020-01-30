@@ -37,6 +37,7 @@ set('shared_dirs',
 // Shared files between deploys
 add('shared_files',
   [
+    '.env.local',
     '.env.prod.local',
     '.env.dev.local',
     'config/packages/parameters.yml',

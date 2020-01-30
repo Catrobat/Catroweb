@@ -4,20 +4,20 @@
 localLanguage: Engleski
 username: Korisničko Ime
 password: Lozinka
-accountSettings: Account Settings
-email: E-Mail
+accountSettings: Postavke računa
+email: E-mail
 aboutPocketCode: O Pocket Code-u
 aboutCatrobat: O Catrobat-u
 tutorials: Tutoriali
 googlePlay: Google Play
-iosAppStore: IOS App store
+iosAppStore: IOS trgovina aplikacija
 passwordsNoMatch: Lozinke se ne podudaraju.
 error: Greška
 cancel: Odustani
 report: Prijavi
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
+deleteIt: Da, izbriši!
+reportIt: Da, prijavi!
+areYouSure: Jeste li sigurni?
 noWayOfReturn: There is no way to restore your actions!
 download: Download the project
 description: Opis
@@ -33,12 +33,12 @@ pleaseTryAgain: 'Pokušajte ponovo!'
 oldVersionError: 'Ažurirajte na najnoviju verziju Pocket Code-a!'
 more: 'više'
 less: 'manje'
-show-more: 'Show more'
-show-less: 'Show less'
+show-more: 'Prikaži više'
+show-less: 'Prikaži manje'
 ok: OK
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+notifications: 'Notifikacije'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Likes'
@@ -47,22 +47,22 @@ followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
 CommentNotifications: 'Comments'
 oldnotification: 'Old Notifications'
-wellDone: "Well done!"
-done: "Done!"
+wellDone: "Bravo!"
+done: "Završeno!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-deleteNotificationConfirmation: "Are you sure?"
+notificationsClearedMessage: "Sve notifikacije su označene kao pročitane."
+deleteNotificationConfirmation: "Jeste li sigurni?"
 notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
 notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
 confirmMessage: "Yes, delete it"
 cancelMessage: "Odustani"
 notificationsAllMessagesDeleted: "All notifications have been deleted."
 notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "Mark all as read"
+clearAllNotificationsButtonTitle: "Označi sve kao pročitano"
 deleteAllNotificationsButtonTitle: "Delete all"
-notificationsClearError: "Unable to mark notifications as read!"
+notificationsClearError: "Nemoguće označiti notifikacije kao pročitane!"
 notificationsDeleteError: "Unable to delete notifications!"
-pleaseWait: "Please wait..."
+pleaseWait: "Molimo sačekajte..."
 indexPage:
   recommendedSection:
     info:
@@ -129,7 +129,7 @@ programs:
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
+  reportRadioButtonDislike: Ne sviđa mi se
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
@@ -156,11 +156,11 @@ programs:
   smile: Smile!
   love: Love!
   wow: Wooow!
-  linkTitle: Link
+  linkTitle: Veza
   link: Copy project link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
-  by: 'by'
+  by: 'od'
   open: 'Otvori '
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
@@ -256,11 +256,11 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Uredi
-  done: Done
+  done: Gotovo
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: E-Mail
+  email: E-mail
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
@@ -273,7 +273,7 @@ myprofile:
   notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'License to play'
-  title: 'License to play - Give credit and share'
+  title: 'Licenca za igranje - Preporučite i podijelite'
   text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
@@ -282,7 +282,7 @@ licenseToPlay:
   text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
     item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
+    item2: preporučite one koji su Vas inspirisali
   version: Version 1.1, 2 April 2013
 termsOfUse:
   title: Terms of Use
@@ -332,12 +332,12 @@ help:
     step1:
       title: 'Make a new project'
       detail:
-        text1: 'Pritisni na "Novi".'
+        text1: 'Pritisnite na "Novi".'
         text2: 'Enter a project name, select "Create empty project" and tap "OK".'
     step2:
       title: "Create a new object"
       detail:
-        text1: 'Pritisni:'
+        text1: 'Pritisnite:'
         text2: 'Choose the source of the first look of your new object.'
         text3: 'Enter an object name and tap "OK" to create the object.'
         special1: 'Nacrtaj novi izgled.'
@@ -346,7 +346,7 @@ help:
     step3:
       title: "Start Moving"
       detail:
-        text1: 'Pritisni:'
+        text1: 'Pritisnite:'
         text2: 'Prvi blok koji koristimo je iz kategorije "Kretanje".'
         text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
         text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
@@ -363,7 +363,7 @@ help:
         text5: 'Sada moraš odabrati novu sliku.'
         text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Speak"
+      title: "Pričajte"
       description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -449,7 +449,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Speak"
+      title: "Pričajte"
       description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
@@ -464,13 +464,13 @@ help:
       one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: "Broadcast"
+      title: "Emitovanje"
       description: "Send messages from one object to another."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
       three: "In this case the background changes when the object in the front layer is tapped."
     card10:
-      title: "Show variable"
+      title: "Prikažite varijablu"
       description: "Show the value of a variable."
       one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
       two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
@@ -481,16 +481,16 @@ help:
       one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
       two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: "Face detection"
-      description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      title: "Prepoznavanje lica"
+      description: "Kontrolišite objekat koristeći prepoznavanje lica."
+      one: "Prvo se uvjerite da su blokovi za prepoznavanje lica uključeni. Za to posjetite postavke."
       two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
     title: "Starter Projects"
     description: "Try out these starter projects. Look inside to make changes and add your ideas."
     categories:
       games: "Games"
-      animations: "Animations"
+      animations: "Animacije"
       interactive: "Interactive Art and Stories"
       music: "Music And Dance"
   gameJam:
@@ -558,7 +558,7 @@ menu:
   logout: Odjava
   admin: Admin
   home: Home
-  helpAndTutorials: Help & Tutorials
+  helpAndTutorials: Pomoć i tutorijali
 login:
   login: Prijava
   passOrUser: Lozinka ili korisničko ime je netačno.
@@ -632,7 +632,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: Autentikacija neuspješna
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
@@ -703,10 +703,10 @@ ci:
   download: Download Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  submit: Predajte na %gamejamname%
   whats: What's the %gamejamname%?
   submitown:
-    header: be aware
+    header: budite svjesni
     subheader: You can only submit your own projects
     text: |
       But why not create your own!
@@ -741,38 +741,39 @@ recommender:
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
   moreFromThisUser: More from %username%
 pmd:
-  submitBtn: Submit your project
+  submitBtn: Predajte Vaš projekat
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: Predaja
+    text: Predajete Vaš projekat. Molimo unesite kod projekta i pritisnite pošalji.
+    btnText: Predati
   successful:
     text: Your project upload was successful.
   failed:
     text: Project upload failed.
 codeview:
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'scenes'
-  scripts: 'scripts'
-  bricks: 'bricks'
+  showCode: 'Prikaži kod'
+  hideCode: 'Sakrij kod'
+  showStatistics: 'Prikaži statistiku koda'
+  hideStatistics: 'Sakrij statistiku koda'
+  cantDisplayCode: "Kod ne može biti prikazan"
+  cantDisplayStatistics: "Kod ne može biti prikazan"
+  totalNumberOf: 'Ukupan broj'
+  scenes: 'scene'
+  scripts: 'skripte'
+  bricks: 'blokovi'
   objects: 'actors and objects'
-  looks: 'looks'
-  sounds: 'sounds'
-  globals: 'globals'
-  locals: 'locals'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
+  looks: 'izgledi'
+  sounds: 'zvukovi'
+  globals: 'globalni'
+  locals: 'lokalni'
+  eventBricks: 'Blokovi događaja'
+  controlBricks: 'Kontrolni blokovi'
+  motionBricks: 'Blokovi pokreta'
+  soundBricks: 'Blokovi zvukova'
+  looksBricks: 'Blokovi izgleda'
   penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
+  dataBricks: 'Blokovi podataka'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities
@@ -803,7 +804,7 @@ catro-notifications:
     message: 'User %user_link% liked your project %program_link%.'
   follow:
     title: 'New Follower!'
-    message: 'User %user_link% follows you now.'
+    message: 'Korisnik %user_link% Vas počinje pratiti.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
@@ -824,7 +825,7 @@ help-cards:
     education: Education platform
     discuss: Discuss
   text:
-    starters: "Try out and remix with %theme%"
+    starters: "Pokušaj i napravi remiks sa %theme%"
     tutorials: "Effective tricks in %theme%"
     stepbystep: "Do 10 easy steps in %theme%"
     getinvolved: Download the app and get started
@@ -854,4 +855,4 @@ copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a
 agree: Slažem se
 disagree: Ne slažem se
 profileLoader:
-  noProfiles: There are currently no profiles.
+  noProfiles: Trenutno nema profila.
