@@ -15,10 +15,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
 use Symfony\Component\HttpFoundation\Response;
 use App\Catrobat\StatusCode;
 use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class ApiKeyAuthenticator
+ * @deprecated Class ApiKeyAuthenticator
+ *
+ *             use only in API version 1!!!
+ *
+ *
  * @package App\Catrobat\Security
  */
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
@@ -47,23 +51,20 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
    */
   public function createToken(Request $request, $providerKey)
   {
-    $upload_token = $request->request->get('token');
+    $credentials = $request->request->get('token');
     $username = $request->request->get('username');
 
-
-    if (!$upload_token)
+    if (!$credentials)
     {
-      throw new BadCredentialsException(
-        $this->translator->trans("errors.token", [], 'catroweb'));
+      $credentials = null;
     }
 
     if (!$username)
     {
-      throw new BadCredentialsException(
-        $this->translator->trans("errors.username.blank", [], 'catroweb'));
+      $username = "";
     }
 
-    return new PreAuthenticatedToken($username, $upload_token, $providerKey);
+    return new PreAuthenticatedToken($username, $credentials, $providerKey);
   }
 
   /**
@@ -79,6 +80,19 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     /**
      * @var $user User
      */
+
+    if (!$token->getCredentials())
+    {
+      throw new AuthenticationException(
+        $this->translator->trans("errors.token", [], 'catroweb'));
+    }
+
+    if (!$token->getUsername())
+    {
+      throw new AuthenticationException(
+        $this->translator->trans("errors.username.blank", [], 'catroweb'));
+    }
+
     try
     {
       $user = $userProvider->loadUserByUsername($token->getUsername());

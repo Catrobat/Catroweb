@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use App\Catrobat\Services\ExtractedCatrobatFile;
+use Exception;
 
 
 /**
@@ -21,7 +22,7 @@ class CatrobatCodeParser
     try
     {
       $parsed_program = $this->parseProgram($extracted_catrobat_program);
-    } catch (\Exception $e)
+    } catch (Exception $e)
     {
       $parsed_program = null;
     }

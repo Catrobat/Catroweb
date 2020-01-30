@@ -555,7 +555,7 @@ search:
 menu:
   profile: My Profile
   login: Login
-  logout: Logout
+  logout: Tancar sessió
   admin: Admin
   home: Home
   helpAndTutorials: Help & Tutorials
@@ -773,6 +773,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities

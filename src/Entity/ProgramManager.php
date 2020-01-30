@@ -22,7 +22,6 @@ use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use DateTime;
 use Doctrine\DBAL\DBALException;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -106,15 +105,15 @@ class ProgramManager
    * @param CatrobatFileExtractor    $file_extractor
    * @param ProgramFileRepository    $file_repository
    * @param ScreenshotRepository     $screenshot_repository
-   * @param EntityManagerInterface            $entity_manager
+   * @param EntityManagerInterface   $entity_manager
    * @param ProgramRepository        $program_repository
    * @param TagRepository            $tag_repository
    * @param ProgramLikeRepository    $program_like_repository
    * @param EventDispatcherInterface $event_dispatcher
-   * @param LoggerInterface $logger
-   * @param AppRequest $app_request
-   * @param ExtensionRepository $extension_repository
-   * @param CatrobatFileSanitizer $file_sanitizer
+   * @param LoggerInterface          $logger
+   * @param AppRequest               $app_request
+   * @param ExtensionRepository      $extension_repository
+   * @param CatrobatFileSanitizer    $file_sanitizer
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
@@ -147,7 +146,7 @@ class ProgramManager
   public function addProgram(AddProgramRequest $request)
   {
     /**
-     * @var $program Program
+     * @var $program        Program
      * @var $extracted_file ExtractedCatrobatFile
      */
     $file = $request->getProgramfile();
@@ -158,15 +157,11 @@ class ProgramManager
 
     try
     {
-      $event = $this->event_dispatcher->dispatch(
-        'catrobat.program.before', new ProgramBeforeInsertEvent($extracted_file)
-      );
+      $event = $this->event_dispatcher->dispatch(new ProgramBeforeInsertEvent($extracted_file));
     } catch (InvalidCatrobatFileException $e)
     {
       $this->logger->error($e);
-      $this->event_dispatcher->dispatch(
-        'catrobat.program.invalid.upload', new InvalidProgramUploadedEvent($file, $e)
-      );
+      $this->event_dispatcher->dispatch(new InvalidProgramUploadedEvent($file, $e));
       throw $e;
     }
 
@@ -213,9 +208,7 @@ class ProgramManager
       $program->setGameJamSubmissionDate(new DateTime());
     }
 
-    $this->event_dispatcher->dispatch(
-      'catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program)
-    );
+    $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
 
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
@@ -223,9 +216,7 @@ class ProgramManager
 
     $this->addExtensions($program, $extracted_file);
 
-    $this->event_dispatcher->dispatch(
-      'catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program)
-    );
+    $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
 
 
     try
@@ -294,7 +285,7 @@ class ProgramManager
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
 
-    $this->event_dispatcher->dispatch('catrobat.program.successful.upload', new ProgramInsertEvent());
+    $this->event_dispatcher->dispatch(new ProgramInsertEvent());
 
     return $program;
   }
@@ -317,8 +308,6 @@ class ProgramManager
    * @param         $no_unlike
    *
    * @return int
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function toggleLike(Program $program, User $user, $type, $no_unlike)
   {
@@ -416,20 +405,20 @@ class ProgramManager
 
 
   /**
-   * @param Program $program
+   * @param Program               $program
    * @param ExtractedCatrobatFile $extracted_file
-   *
-   * @throws ORMException
    */
   public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file)
   {
 //     Adding the embroidery extension if an embroidery block was used in the project
     $EMBROIDERY = "Embroidery";
     if ($extracted_file !== null && $extracted_file->getProgramXmlProperties() !== null &&
-      strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">') !== false) {
+      strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">') !== false)
+    {
       /** @var Extension $embroidery_extension */
       $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
-      if ($embroidery_extension === null) {
+      if ($embroidery_extension === null)
+      {
         $embroidery_extension = new Extension();
         $embroidery_extension->setName($EMBROIDERY);
         $embroidery_extension->setPrefix(strtoupper($EMBROIDERY));
@@ -512,30 +501,31 @@ class ProgramManager
 
   /**
    * @param GuidType $user_id
-   * @param bool $include_debug_build_programs If programs marked as debug_build should be returned
+   * @param bool     $include_debug_build_programs If programs marked as debug_build should be returned
+   * @param string   $max_version
    *
    * @return Program[]
    */
-  public function getUserPrograms($user_id, bool $include_debug_build_programs = false)
+  public function getUserPrograms($user_id, bool $include_debug_build_programs = false, string $max_version = "0")
   {
-    $debug_build = ($include_debug_build_programs === true) ?
-      true : $this->app_request->isDebugBuildRequest();
+    $debug_build = ($include_debug_build_programs === true) ? true : $this->app_request->isDebugBuildRequest();
 
-    return $this->program_repository->getUserPrograms($user_id, $debug_build);
+    return $this->program_repository->getUserPrograms($user_id, $debug_build, $max_version);
   }
 
   /**
-   * @param      $user_id
-   * @param bool $include_debug_build_programs If programs marked as debug_build should be returned
+   * @param        $user_id
+   * @param bool   $include_debug_build_programs If programs marked as debug_build should be returned
+   * @param string $max_version
    *
    * @return Program[]
    */
-  public function getPublicUserPrograms($user_id, bool $include_debug_build_programs = false)
+  public function getPublicUserPrograms($user_id, bool $include_debug_build_programs = false, string $max_version = "0")
   {
     $debug_build = ($include_debug_build_programs === true) ?
       true : $this->app_request->isDebugBuildRequest();
 
-    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build);
+    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build, $max_version);
   }
 
   /**
@@ -604,13 +594,14 @@ class ProgramManager
    * @param string|null $flavor
    * @param int|null    $limit
    * @param int         $offset
+   * @param string      $max_version
    *
    * @return Program[]
    */
-  public function getRecentPrograms($flavor, $limit = null, $offset = 0)
+  public function getRecentPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
   {
     return $this->program_repository->getRecentPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
@@ -618,13 +609,14 @@ class ProgramManager
    * @param string|null $flavor
    * @param int|null    $limit
    * @param int         $offset
+   * @param string      $max_version
    *
    * @return Program[]
    */
-  public function getMostViewedPrograms($flavor, $limit = null, $offset = 0)
+  public function getMostViewedPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
   {
     return $this->program_repository->getMostViewedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
@@ -632,13 +624,14 @@ class ProgramManager
    * @param string|null $flavor
    * @param int|null    $limit
    * @param int         $offset
+   * @param string      $max_version
    *
    * @return mixed
    */
-  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = 0)
+  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
   {
     return $this->program_repository->getMostDownloadedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
@@ -646,47 +639,57 @@ class ProgramManager
    * @param string|null $flavor
    * @param int|null    $limit
    * @param int         $offset
+   * @param string      $max_version
    *
    * @return array
    */
-  public function getRandomPrograms($flavor, $limit = null, $offset = 0)
+  public function getRandomPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
   {
     return $this->program_repository->getRandomPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+    );
+  }
+
+  /**
+   * @param string $query
+   * @param int    $limit
+   * @param int    $offset
+   * @param string $max_version
+   *
+   * @return array
+   * @throws Exception
+   */
+  public function search(string $query, $limit = 10, $offset = 0, string $max_version = "0")
+  {
+    return $this->program_repository->search(
+      $query, $this->app_request->isDebugBuildRequest(), $limit, $offset, $max_version
     );
   }
 
   /**
    * @param string $query The query to search for (search terms)
-   * @param int    $limit
-   * @param int    $offset
-   *
-   * @return array
-   */
-  public function search(string $query, $limit = 10, $offset = 0)
-  {
-    return $this->program_repository->search($query, $this->app_request->isDebugBuildRequest(), $limit, $offset);
-  }
-
-  /**
-   * @param string $query The query to search for (search terms)
+   * @param string $max_version
    *
    * @return int
    */
-  public function searchCount(string $query)
+  public function searchCount(string $query, string $max_version = "0")
   {
-    return $this->program_repository->searchCount($query, $this->app_request->isDebugBuildRequest());
+    return $this->program_repository->searchCount($query, $this->app_request->isDebugBuildRequest(), $max_version);
   }
 
   /**
-   * @param string|null $flavor
+   * @param        $flavor
+   * @param string $max_version
    *
    * @return int
    * @throws NonUniqueResultException
+   * @throws \Doctrine\ORM\NoResultException
    */
-  public function getTotalPrograms($flavor)
+  public function getTotalPrograms($flavor, string $max_version = "0")
   {
-    return $this->program_repository->getTotalPrograms($this->app_request->isDebugBuildRequest(), $flavor);
+    return $this->program_repository->getTotalPrograms(
+      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
+    );
   }
 
   /**

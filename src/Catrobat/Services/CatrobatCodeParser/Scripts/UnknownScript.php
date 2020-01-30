@@ -17,7 +17,6 @@ class UnknownScript extends Script
   {
     $this->type = Constants::UNKNOWN_SCRIPT;
     $this->caption = "Unknown Script";
-
     $this->setImgFile(Constants::UNKNOWN_SCRIPT_IMG);
   }
 }

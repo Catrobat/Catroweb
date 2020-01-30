@@ -17,7 +17,6 @@ class WhenBrick extends Brick
   {
     $this->type = Constants::WHEN_BRICK;
     $this->caption = "When tapped";
-
     $this->setImgFile(Constants::EVENT_BRICK_IMG);
   }
 }

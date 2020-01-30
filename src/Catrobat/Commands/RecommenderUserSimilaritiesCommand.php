@@ -5,22 +5,21 @@ namespace App\Catrobat\Commands;
 use App\Catrobat\Commands\Helpers\CronjobProgressWriter;
 use App\Catrobat\Commands\Helpers\RecommenderFileLock;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use App\Entity\UserManager;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 /**
  * Class RecommenderUserSimilaritiesCommand
  * @package App\Catrobat\Commands
  */
-class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
+class RecommenderUserSimilaritiesCommand extends Command
 {
   /**
    * @var UserManager
@@ -58,7 +57,7 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
    * @param UserManager $user_manager
    * @param RecommenderManager $recommender_manager
    * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface $parameter_bag
+   * @param $kernel_root_dir
    */
   public function __construct(UserManager $user_manager, RecommenderManager $recommender_manager,
                               EntityManagerInterface $entity_manager, $kernel_root_dir)
@@ -147,7 +146,7 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
    */
   private function computeUserSimilarities(OutputInterface $output, $type, $is_cronjob)
   {
-    $computation_start_time = new \DateTime();
+    $computation_start_time = new DateTime();
     $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
 
     $progress_bar = $is_cronjob ? new CronjobProgressWriter($output) : new ProgressBar($output);
@@ -174,7 +173,7 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
 
     $this->migration_file_lock->unlock();
 
-    $duration = (new \DateTime())->getTimestamp() - $computation_start_time->getTimestamp();
+    $duration = (new DateTime())->getTimestamp() - $computation_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');

@@ -15,27 +15,27 @@ Set background
 1h_brick_green.png
 ---
 SetMassBrick
-Set mass to 1.0 kilogram
+Set mass to _ kilogram
 1h_brick_blue.png
 ---
 SetVelocityBrick
-Set velocity to X: 0.0 Y: 0.0 steps/second
+Set velocity to X: _ Y: _ steps/second
 1h_brick_blue.png
 ---
 SetBounceBrick
-Set bounce factor to 80.0%
+Set bounce factor to _ %
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to DYNAMIC
+Set motion type to _
 1h_brick_blue.png
 ---
 SetMassBrick
-Set mass to 1.0 kilogram
+Set mass to _ kilogram
 1h_brick_blue.png
 ---
 SetFrictionBrick
-Set friction to 20.0%
+Set friction to _ %
 1h_brick_blue.png
 ---
 PlaySoundBrick
@@ -43,35 +43,35 @@ Start sound
 1h_brick_violet.png
 ---
 SetVariableBrick
-Set variable var1 to 1.0
+Set variable _ to _
 1h_brick_red.png
 ---
 ChangeVariableBrick
-Change variable var1 by 1.0
+Change variable _ by _
 1h_brick_red.png
 ---
 ShowTextBrick
-Show variable var1 at X: 100 Y: 200
+Show variable _ at X: _ Y: _
 1h_brick_red.png
 ---
 HideTextBrick
-Hide variable var1
+Hide variable _
 1h_brick_red.png
 ---
 AddItemToUserListBrick
-Add 1.0 to list list1
+Add Item to User List
 1h_brick_red.png
 ---
 DeleteItemOfUserListBrick
-Delete item from list list1 at position 1
+Delete item from list _ at position _
 1h_brick_red.png
 ---
 InsertItemIntoUserListBrick
-Insert 1.0 into list list1 at position 1
+Insert _ into list _ at position _
 1h_brick_red.png
 ---
 ReplaceItemInUserListBrick
-Replace item in list list1 at position 1 with 1.0
+Replace item in list _ at position _ with _
 1h_brick_red.png
 ---
 SetLookBrick
@@ -83,27 +83,27 @@ Next look
 1h_brick_green.png
 ---
 CameraBrick
-Turn camera on
+Turn camera _
 1h_brick_green.png
 ---
 CameraBrick
-Turn camera off
+Turn camera _
 1h_brick_green.png
 ---
 ChooseCameraBrick
-Use camera front
+Use camera _
 1h_brick_green.png
 ---
 ChooseCameraBrick
-Use camera back
+Use camera _
 1h_brick_green.png
 ---
 SetSizeToBrick
-Set size to 60.0%
+Set size to _ %
 1h_brick_green.png
 ---
 ChangeSizeByNBrick
-Change size by 10.0
+Change size by _
 1h_brick_green.png
 ---
 HideBrick
@@ -115,27 +115,27 @@ Show
 1h_brick_green.png
 ---
 SetTransparencyBrick
-Set transparency to 50.0%
+Set transparency to _ %
 1h_brick_green.png
 ---
 ChangeTransparencyByNBrick
-Change transparency by 25.0
+Change transparency by _
 1h_brick_green.png
 ---
 SetBrightnessBrick
-Set brightness to 50.0%
+Set brightness to _ %
 1h_brick_green.png
 ---
 ChangeBrightnessByNBrick
-Change brightness by 25.0
+Change brightness by _
 1h_brick_green.png
 ---
 SetColorBrick
-Set color to 0.0%
+Set color to _ %
 1h_brick_green.png
 ---
 ChangeColorByNBrick
-Change color by 25.0
+Change color by _
 1h_brick_green.png
 ---
 ClearGraphicEffectBrick
@@ -143,11 +143,11 @@ Clear graphic effects
 1h_brick_green.png
 ---
 FlashBrick
-Turn flashlight on
+Turn flashlight _
 1h_brick_green.png
 ---
 FlashBrick
-Turn flashlight off
+Turn flashlight _
 1h_brick_green.png
 ---
 PlaySoundBrick
@@ -159,39 +159,39 @@ Stop all sounds
 1h_brick_violet.png
 ---
 ChangeVariableBrick
-Change variable var1 by 1.0
+Change variable _ by _
 1h_brick_red.png
 ---
 SetVolumeToBrick
-Set volume to 60.0%
+Set volume to _ %
 1h_brick_violet.png
 ---
 ChangeVolumeByNBrick
-Change volume by  - 10.0
+Change volume by _
 1h_brick_violet.png
 ---
 SpeakBrick
-Speak "Hello!"
+Speak _
 1h_brick_violet.png
 ---
 PlaceAtBrick
-Place at X: 100 Y: 200
+Place at X: _ Y: _
 1h_brick_blue.png
 ---
 SetXBrick
-Set X to 100
+Set X to _
 1h_brick_blue.png
 ---
 SetYBrick
-Set Y to 200
+Set Y to _
 1h_brick_blue.png
 ---
 ChangeXByNBrick
-Change X by 10
+Change X by _
 1h_brick_blue.png
 ---
 ChangeYByNBrick
-Change Y by 10
+Change Y by _
 1h_brick_blue.png
 ---
 IfOnEdgeBounceBrick
@@ -199,27 +199,27 @@ If on edge bounce
 1h_brick_blue.png
 ---
 MoveNStepsBrick
-Move 10.0 steps
+Move _ steps
 1h_brick_blue.png
 ---
 TurnLeftBrick
-Turn left 15.0 degrees
+Turn left _ degrees
 1h_brick_blue.png
 ---
 TurnRightBrick
-Turn right 15.0 degrees
+Turn right _ degrees
 1h_brick_blue.png
 ---
 PointInDirectionBrick
-Point in direction 90.0 degrees
+Point in direction _ degrees
 1h_brick_blue.png
 ---
 GlideToBrick
-Glide 1.0 second(s) to X: 100 Y: 200
+Glide _ second(s) to X: _ Y: _
 1h_brick_blue.png
 ---
 GoNStepsBackBrick
-Go back 1 layer
+Go back _ layer
 1h_brick_blue.png
 ---
 ComeToFrontBrick
@@ -227,63 +227,63 @@ Go to front
 1h_brick_blue.png
 ---
 VibrationBrick
-Vibrate for 1.0 second(s)
+Vibrate for _ second(s)
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to DYNAMIC
+Set motion type to _
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to FIXED
+Set motion type to _
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to NONE
+Set motion type to _
 1h_brick_blue.png
 ---
 SetVelocityBrick
-Set velocity to X: 0.0 Y: 0.0 steps/second
+Set velocity to X: _ Y: _ steps/second
 1h_brick_blue.png
 ---
 TurnLeftSpeedBrick
-Rotate left 15.0 degrees/second
+Rotate left _ degrees/second
 1h_brick_blue.png
 ---
 TurnRightSpeedBrick
-Rotate right 15.0 degrees/second
+Rotate right _ degrees/second
 1h_brick_blue.png
 ---
 SetGravityBrick
-Set gravity for all objects to X: 0.0 Y:  - 10.0 steps/second²
+Set gravity for all objects to X: _ Y: _ steps/second²
 1h_brick_blue.png
 ---
 SetMassBrick
-Set mass to 1.0 kilogram
+Set mass to _ kilogram
 1h_brick_blue.png
 ---
 SetBounceBrick
-Set bounce factor to 80.0%
+Set bounce factor to _ %
 1h_brick_blue.png
 ---
 SetFrictionBrick
-Set friction to 20.0%
+Set friction to _ %
 1h_brick_blue.png
 ---
 PointToBrick
-Point towards 
+Point towards _
 1h_brick_blue.png
 ---
 PointToBrick
-Point towards Control-Object
+Point towards _
 1h_brick_blue.png
 ---
 WaitBrick
-Wait 1.0 second(s)
+Wait _ second(s)
 1h_brick_orange.png
 ---
 NoteBrick
-Note add comment here…
+Note _
 1h_brick_orange.png
 ---
 ForeverBrick
@@ -291,7 +291,7 @@ Forever
 1h_brick_orange.png
 ---
 IfLogicBeginBrick
-If 1 < 2 is true then
+If _ is true then
 1h_brick_orange.png
 ---
 IfLogicElseBrick
@@ -299,7 +299,7 @@ Else
 1h_brick_orange.png
 ---
 RepeatBrick
-Repeat 10 times
+Repeat _ times
 1h_brick_orange.png
 ---
 LoopEndBrick
@@ -311,27 +311,27 @@ End If
 1h_brick_orange.png
 ---
 LoopEndlessBrick
-End of loop
-1h_brick_orange.png
+LoopEndlessBrick (deprecated)
+1h_brick_grey.png
 ---
 BroadcastBrick
-Broadcast "message 1"
+Broadcast
 1h_brick_brown.png
 ---
 BroadcastWaitBrick
-Broadcast and wait "message 1"
+Broadcast and wait
 1h_brick_brown.png
 ---
 BroadcastBrick
-Broadcast "Motion-Object ANYTHING"
+Broadcast
 1h_brick_brown.png
 ---
 BroadcastWaitBrick
-Broadcast and wait "Motion-Object ANYTHING"
+Broadcast and wait
 1h_brick_brown.png
 ---
 IfLogicBeginBrick
-If 1 < 2 is true then
+If _ is true then
 1h_brick_orange.png
 ---
 IfLogicElseBrick
@@ -343,7 +343,7 @@ End If
 1h_brick_orange.png
 ---
 IfLogicBeginBrick
-If 0255466155.564 is true then
+If _ is true then
 1h_brick_orange.png
 ---
 IfLogicEndBrick
@@ -351,11 +351,11 @@ End If
 1h_brick_orange.png
 ---
 WaitUntilBrick
-Wait until 1 < 2 is true
+Wait until _ is true
 1h_brick_orange.png
 ---
 RepeatUntilBrick
-Repeat until 1 < 2 is true
+Repeat until _ is true
 1h_brick_orange.png
 ---
 LoopEndBrick
@@ -363,27 +363,27 @@ End of loop
 1h_brick_orange.png
 ---
 StopScriptBrick
-Stop this script
+Stop Script
 1h_brick_orange.png
 ---
 StopScriptBrick
-Stop all scripts
+Stop Script
 1h_brick_orange.png
 ---
 StopScriptBrick
-Stop other scripts of this object
+Stop Script
 1h_brick_orange.png
 ---
 SceneStartBrick
-Start scene Scene-tobe-continued
+Start scene _
 1h_brick_orange.png
 ---
 SceneStartBrick
-Start scene Scene-tobe-continued
+Start scene _
 1h_brick_orange.png
 ---
 CloneBrick
-Create clone of Bricks Juli2016
+Create clone of _
 1h_brick_orange.png
 ---
 DeleteThisCloneBrick
@@ -391,39 +391,39 @@ Delete this
 1h_brick_orange.png
 ---
 CloneBrick
-Create clone of myself
+Create clone of _
 1h_brick_orange.png
 ---
 SceneTransitionBrick
-Continue scene Scene-tobe-continued
+Continue scene _
 1h_brick_orange.png
 ---
 WaitBrick
-Wait 1.0 second(s)
+Wait _ second(s)
 1h_brick_grey.png
 ---
 GoToBrick
-Go to Touch position
+Go to _
 1h_brick_blue.png
 ---
 GoToBrick
-Go to Random position
+Go to _
 1h_brick_blue.png
 ---
 GoToBrick
-Go to Control-Object
+Go to _
 1h_brick_blue.png
 ---
 SetRotationStyleBrick
-Set rotation style left-right only
+Set rotation style
 1h_brick_blue.png
 ---
 SetRotationStyleBrick
-Set rotation style all-around
+Set rotation style
 1h_brick_blue.png
 ---
 SetRotationStyleBrick
-Set rotation style don't rotate
+Set rotation style
 1h_brick_blue.png
 ---
 PlaySoundAndWaitBrick
@@ -431,7 +431,7 @@ Start sound and wait
 1h_brick_violet.png
 ---
 SpeakAndWaitBrick
-Speak "Hello!" and wait
+Speak _ and wait
 1h_brick_violet.png
 ---
 PreviousLookBrick
@@ -439,27 +439,27 @@ Previous look
 1h_brick_green.png
 ---
 AskBrick
-Ask "'What's your name?'" and store written answer in var1
+Ask _ and store written answer in _
 1h_brick_green.png
 ---
 AskBrick
-Ask "'What's your name?'" and store written answer in blubbli
+Ask _ and store written answer in _
 1h_brick_green.png
 ---
 SayBubbleBrick
-Say "Hello!"
+Say _
 1h_brick_green.png
 ---
 SayForBubbleBrick
-Say "Hello!" for 1.0 second/s
+Say _ for _ seconds
 1h_brick_green.png
 ---
 ThinkBubbleBrick
-Think "Hmmmm!"
+Think _
 1h_brick_green.png
 ---
 ThinkForBubbleBrick
-Think "Hmmmm!" for 1.0 second/s
+Think _ for _ seconds
 1h_brick_green.png
 ---
 SetBackgroundBrick
@@ -479,11 +479,11 @@ Pen up
 1h_brick_darkgreen.png
 ---
 SetPenSizeBrick
-Set pen size to 4
+Set pen size to _
 1h_brick_darkgreen.png
 ---
 SetPenColorBrick
-Set pen color to Red: 0 Green: 0 Blue: 255
+Set pen color to Red: _ Green: _ Blue: _
 1h_brick_darkgreen.png
 ---
 StampBrick
@@ -511,27 +511,27 @@ Set background
 1h_brick_green.png
 ---
 SetMassBrick
-Set mass to 1.0 kilogram
+Set mass to _ kilogram
 1h_brick_blue.png
 ---
 SetVelocityBrick
-Set velocity to X: 0.0 Y: 0.0 steps/second
+Set velocity to X: _ Y: _ steps/second
 1h_brick_blue.png
 ---
 SetBounceBrick
-Set bounce factor to 80.0%
+Set bounce factor to _ %
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to DYNAMIC
+Set motion type to _
 1h_brick_blue.png
 ---
 SetMassBrick
-Set mass to 1.0 kilogram
+Set mass to _ kilogram
 1h_brick_blue.png
 ---
 SetFrictionBrick
-Set friction to 20.0%
+Set friction to _ %
 1h_brick_blue.png
 ---
 PlaySoundBrick
@@ -539,41 +539,35 @@ Start sound
 1h_brick_violet.png
 ---
 SetVariableBrick
-Set variable var1 to 1.0
+Set variable _ to _
 1h_brick_red.png
 ---
 ChangeVariableBrick
-Change variable var1 by 1.0
+Change variable _ by _
 1h_brick_red.png
 ---
 ShowTextBrick
-Show variable var1 at X: 100 Y: 200
+Show variable _ at X: _ Y: _
 1h_brick_red.png
 ---
 HideTextBrick
-Hide variable var1
+Hide variable _
 1h_brick_red.png
 ---
 AddItemToUserListBrick
-Add 1.0 to list list1
+Add Item to User List
 1h_brick_red.png
 ---
 DeleteItemOfUserListBrick
-Delete item from list 
-                    
-                   at position 1
+Delete item from list at position _
 1h_brick_red.png
 ---
 InsertItemIntoUserListBrick
-Insert 1.0 into list 
-                    
-                   at position 1
+Insert _ into list at position _
 1h_brick_red.png
 ---
 ReplaceItemInUserListBrick
-Replace item in list 
-                    
-                   at position 1 with 1.0
+Replace item in list at position _ with _
 1h_brick_red.png
 ---
 SetLookBrick
@@ -585,27 +579,27 @@ Next look
 1h_brick_green.png
 ---
 CameraBrick
-Turn camera on
+Turn camera _
 1h_brick_green.png
 ---
 CameraBrick
-Turn camera off
+Turn camera _
 1h_brick_green.png
 ---
 ChooseCameraBrick
-Use camera front
+Use camera _
 1h_brick_green.png
 ---
 ChooseCameraBrick
-Use camera back
+Use camera _
 1h_brick_green.png
 ---
 SetSizeToBrick
-Set size to 60.0%
+Set size to _
 1h_brick_green.png
 ---
 ChangeSizeByNBrick
-Change size by 10.0
+Change size by _
 1h_brick_green.png
 ---
 HideBrick
@@ -617,27 +611,27 @@ Show
 1h_brick_green.png
 ---
 SetTransparencyBrick
-Set transparency to 50.0%
+Set transparency to _ %
 1h_brick_green.png
 ---
 ChangeTransparencyByNBrick
-Change transparency by 25.0
+Change transparency by _
 1h_brick_green.png
 ---
 SetBrightnessBrick
-Set brightness to 50.0%
+Set brightness to _ %
 1h_brick_green.png
 ---
 ChangeBrightnessByNBrick
-Change brightness by 25.0
+Change brightness by _
 1h_brick_green.png
 ---
 SetColorBrick
-Set color to 0.0%
+Set color to _ %
 1h_brick_green.png
 ---
 ChangeColorByNBrick
-Change color by 25.0
+Change color by _
 1h_brick_green.png
 ---
 ClearGraphicEffectBrick
@@ -645,11 +639,11 @@ Clear graphic effects
 1h_brick_green.png
 ---
 FlashBrick
-Turn flashlight on
+Turn flashlight _
 1h_brick_green.png
 ---
 FlashBrick
-Turn flashlight off
+Turn flashlight _
 1h_brick_green.png
 ---
 PlaySoundBrick
@@ -661,39 +655,39 @@ Stop all sounds
 1h_brick_violet.png
 ---
 ChangeVariableBrick
-Change variable var1 by 1.0
+Change variable _ by _
 1h_brick_red.png
 ---
 SetVolumeToBrick
-Set volume to 60.0%
+Set volume to _ %
 1h_brick_violet.png
 ---
 ChangeVolumeByNBrick
-Change volume by  - 10.0
+Change volume by _
 1h_brick_violet.png
 ---
 SpeakBrick
-Speak "Hello!"
+Speak _
 1h_brick_violet.png
 ---
 PlaceAtBrick
-Place at X: 100 Y: 200
+Place at X: _ Y: _
 1h_brick_blue.png
 ---
 SetXBrick
-Set X to 100
+Set X to _
 1h_brick_blue.png
 ---
 SetYBrick
-Set Y to 200
+Set Y to _
 1h_brick_blue.png
 ---
 ChangeXByNBrick
-Change X by 10
+Change X by _
 1h_brick_blue.png
 ---
 ChangeYByNBrick
-Change Y by 10
+Change Y by _
 1h_brick_blue.png
 ---
 IfOnEdgeBounceBrick
@@ -701,91 +695,91 @@ If on edge bounce
 1h_brick_blue.png
 ---
 MoveNStepsBrick
-Move 10.0 steps
+Move _ steps
 1h_brick_blue.png
 ---
 TurnLeftBrick
-Turn left 15.0 degrees
+Turn left _ degrees
 1h_brick_blue.png
 ---
 TurnRightBrick
-Turn right 15.0 degrees
+Turn right _ degrees
 1h_brick_blue.png
 ---
 PointInDirectionBrick
-Point in direction 90.0 degrees
+Point in direction _ degrees
 1h_brick_blue.png
 ---
 GlideToBrick
-Glide 1.0 second(s) to X: 100 Y: 200
+Glide _ second(s) to X: _ Y: _
 1h_brick_blue.png
 ---
 GoNStepsBackBrick
-Go back 1 layer
+Go back _ layer
 1h_brick_blue.png
 ---
 ComeToFrontBrick
-Go to front
+Go to _
 1h_brick_blue.png
 ---
 VibrationBrick
-Vibrate for 1.0 second(s)
+Vibrate for _ second(s)
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to DYNAMIC
+Set motion type to _
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to FIXED
+Set motion type to _
 1h_brick_blue.png
 ---
 SetPhysicsObjectTypeBrick
-Set motion type to NONE
+Set motion type to _
 1h_brick_blue.png
 ---
 SetVelocityBrick
-Set velocity to X: 0.0 Y: 0.0 steps/second
+Set velocity to X: _ Y: _ steps/second
 1h_brick_blue.png
 ---
 TurnLeftSpeedBrick
-Rotate left 15.0 degrees/second
+Rotate left _ degrees/second
 1h_brick_blue.png
 ---
 TurnRightSpeedBrick
-Rotate right 15.0 degrees/second
+Rotate right _ degrees/second
 1h_brick_blue.png
 ---
 SetGravityBrick
-Set gravity for all objects to X: 0.0 Y:  - 10.0 steps/second²
+Set gravity for all objects to X: _ Y: _ steps/second²
 1h_brick_blue.png
 ---
 SetMassBrick
-Set mass to 1.0 kilogram
+Set mass to _ kilogram
 1h_brick_blue.png
 ---
 SetBounceBrick
-Set bounce factor to 80.0%
+Set bounce factor to _ %
 1h_brick_blue.png
 ---
 SetFrictionBrick
-Set friction to 20.0%
+Set friction to _ %
 1h_brick_blue.png
 ---
 PointToBrick
-Point towards 
+Point towards _
 1h_brick_blue.png
 ---
 PointToBrick
-Point towards Control-Object
+Point towards _
 1h_brick_blue.png
 ---
 WaitBrick
-Wait 1.0 second(s)
+Wait _ second(s)
 1h_brick_orange.png
 ---
 NoteBrick
-Note add comment here…
+Note _
 1h_brick_orange.png
 ---
 ForeverBrick
@@ -793,7 +787,7 @@ Forever
 1h_brick_orange.png
 ---
 IfLogicBeginBrick
-If 1 < 2 is true then
+If _ is true then
 1h_brick_orange.png
 ---
 IfLogicElseBrick
@@ -801,7 +795,7 @@ Else
 1h_brick_orange.png
 ---
 RepeatBrick
-Repeat 10 times
+Repeat _ times
 1h_brick_orange.png
 ---
 LoopEndBrick
@@ -813,27 +807,27 @@ End If
 1h_brick_orange.png
 ---
 LoopEndlessBrick
-End of loop
-1h_brick_orange.png
+LoopEndlessBrick (deprecated)
+1h_brick_grey.png
 ---
 BroadcastBrick
-Broadcast "message 1"
+Broadcast
 1h_brick_brown.png
 ---
 BroadcastWaitBrick
-Broadcast and wait "message 1"
+Broadcast and wait _
 1h_brick_brown.png
 ---
 BroadcastBrick
-Broadcast "Motion-Object ANYTHING"
+Broadcast
 1h_brick_brown.png
 ---
 BroadcastWaitBrick
-Broadcast and wait "Motion-Object ANYTHING"
+Broadcast and wait _
 1h_brick_brown.png
 ---
 IfLogicBeginBrick
-If 1 < 2 is true then
+If _ is true then
 1h_brick_orange.png
 ---
 IfLogicElseBrick
@@ -845,7 +839,7 @@ End If
 1h_brick_orange.png
 ---
 IfLogicBeginBrick
-If 0255466155.564 is true then
+If _ is true then
 1h_brick_orange.png
 ---
 IfLogicEndBrick
@@ -853,11 +847,11 @@ End If
 1h_brick_orange.png
 ---
 WaitUntilBrick
-Wait until 1 < 2 is true
+Wait until _ is true
 1h_brick_orange.png
 ---
 RepeatUntilBrick
-Repeat until 1 < 2 is true
+Repeat until _ is true
 1h_brick_orange.png
 ---
 LoopEndBrick
@@ -877,15 +871,15 @@ Stop other scripts of this object
 1h_brick_orange.png
 ---
 SceneStartBrick
-Start scene Scene-tobe-continued
+Start scene _
 1h_brick_orange.png
 ---
 SceneStartBrick
-Start scene Scene-tobe-continued
+Start scene _
 1h_brick_orange.png
 ---
 CloneBrick
-Create clone of Bricks Juli2016
+Create clone of _
 1h_brick_orange.png
 ---
 DeleteThisCloneBrick
@@ -893,23 +887,23 @@ Delete this
 1h_brick_orange.png
 ---
 CloneBrick
-Create clone of myself
+Create clone of _
 1h_brick_orange.png
 ---
 SceneTransitionBrick
-Continue scene Scene-tobe-continued
+Continue scene _
 1h_brick_orange.png
 ---
 WaitBrick
-Wait 1.0 second(s)
+Wait _ second(s)
 1h_brick_grey.png
 ---
 GoToBrick
-Go to Touch position
+Go to _
 1h_brick_blue.png
 ---
 GoToBrick
-Go to Random position
+Go to _
 1h_brick_blue.png
 ---
 GoToBrick
@@ -917,15 +911,15 @@ Go to Control-Object
 1h_brick_blue.png
 ---
 SetRotationStyleBrick
-Set rotation style left-right only
+Set rotation style
 1h_brick_blue.png
 ---
 SetRotationStyleBrick
-Set rotation style all-around
+Set rotation style
 1h_brick_blue.png
 ---
 SetRotationStyleBrick
-Set rotation style don't rotate
+Set rotation style
 1h_brick_blue.png
 ---
 PlaySoundAndWaitBrick
@@ -933,7 +927,7 @@ Start sound and wait
 1h_brick_violet.png
 ---
 SpeakAndWaitBrick
-Speak "Hello!" and wait
+Speak _ and wait
 1h_brick_violet.png
 ---
 PreviousLookBrick
@@ -941,27 +935,27 @@ Previous look
 1h_brick_green.png
 ---
 AskBrick
-Ask "'What's your name?'" and store written answer in var1
+Ask _ and store written answer in _
 1h_brick_green.png
 ---
 AskBrick
-Ask "'What's your name?'" and store written answer in blubbli
+Ask _ and store written answer in _
 1h_brick_green.png
 ---
 SayBubbleBrick
-Say "Hello!"
+Say _
 1h_brick_green.png
 ---
 SayForBubbleBrick
-Say "Hello!" for 1.0 second/s
+Say _ for _ seconds
 1h_brick_green.png
 ---
 ThinkBubbleBrick
-Think "Hmmmm!"
+Think _"
 1h_brick_green.png
 ---
 ThinkForBubbleBrick
-Think "Hmmmm!" for 1.0 second/s
+Think _ for _ seconds
 1h_brick_green.png
 ---
 SetBackgroundBrick
@@ -981,11 +975,11 @@ Pen up
 1h_brick_darkgreen.png
 ---
 SetPenSizeBrick
-Set pen size to 4
+Set pen size to _
 1h_brick_darkgreen.png
 ---
 SetPenColorBrick
-Set pen color to Red: 0 Green: 0 Blue: 255
+Set pen color to Red: _ Green: _ Blue: _
 1h_brick_darkgreen.png
 ---
 StampBrick

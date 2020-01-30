@@ -56,3 +56,7 @@ Feature:
     And I should see media file with id 7 in category "Luna & Cat Theme Special"
     And I should see 1 media file in category "Luna & Cat Theme Special"
     And I should see 1 media file in category "Bla"
+
+  Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
+    Given I am on "/app/media-library/looks"
+    And I should not see a "#project-navigation" element

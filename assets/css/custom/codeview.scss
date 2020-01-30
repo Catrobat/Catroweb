@@ -87,7 +87,7 @@ span.brick-stat-heading {
 
 #codestatistic-wrapper {
   width: 100%;
-  padding: 0 15% 0 15%;
+  padding: 0 5% 0 5%;
   display: none;
 
   .dropbtn > p {
@@ -97,11 +97,9 @@ span.brick-stat-heading {
   }
 
   .total-statistic {
-    max-width: 40%;
     margin: 0 auto;
 
     .flex-container {
-      justify-content: space-between;
 
       .flex-right {
         text-align: right;
@@ -128,7 +126,6 @@ span.brick-stat-heading {
   }
 
   .brick-statistics {
-    padding: 0 40px;
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -554,7 +551,7 @@ span.brick-stat-heading {
 
   #codestatistic-wrapper,
   #codeview-wrapper {
-    padding: 0 12% 0 12%;
+    padding: 0 3% 0 3%;
 
     .scenes-wrapper {
       margin: 0 -10%;
@@ -600,7 +597,7 @@ span.brick-stat-heading {
   }
 
   #codestatistic-wrapper {
-    padding: 0 5% 0 5%;
+    padding: 0 1% 0 1%;
 
     .total-statistic {
       max-width: 50%;

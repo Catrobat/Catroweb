@@ -2,6 +2,7 @@
 
 namespace tests\PhpSpec\spec\App\Entity;
 
+use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
@@ -18,7 +19,6 @@ use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -38,22 +38,22 @@ class ProgramManagerSpec extends ObjectBehavior
 {
 
   /**
-   * @param CatrobatFileExtractor $file_extractor
-   * @param ProgramFileRepository $file_repository
-   * @param ScreenshotRepository $screenshot_repository
-   * @param EntityManager $entity_manager
-   * @param ProgramRepository $program_repository
+   * @param CatrobatFileExtractor    $file_extractor
+   * @param ProgramFileRepository    $file_repository
+   * @param ScreenshotRepository     $screenshot_repository
+   * @param EntityManager            $entity_manager
+   * @param ProgramRepository        $program_repository
    * @param EventDispatcherInterface $event_dispatcher
-   * @param AddProgramRequest $request
-   * @param User $user
-   * @param ExtractedCatrobatFile $extracted_file
-   * @param Program $inserted_program
-   * @param TagRepository $tag_repository
-   * @param ProgramLikeRepository $program_like_repository
-   * @param LoggerInterface $logger
-   * @param AppRequest $app_request
-   * @param ExtensionRepository $extension_repository
-   * @param CatrobatFileSanitizer $catrobat_file_sanitizer
+   * @param AddProgramRequest        $request
+   * @param User                     $user
+   * @param ExtractedCatrobatFile    $extracted_file
+   * @param Program                  $inserted_program
+   * @param TagRepository            $tag_repository
+   * @param ProgramLikeRepository    $program_like_repository
+   * @param LoggerInterface          $logger
+   * @param AppRequest               $app_request
+   * @param ExtensionRepository      $extension_repository
+   * @param CatrobatFileSanitizer    $catrobat_file_sanitizer
    */
   public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                       ScreenshotRepository $screenshot_repository, EntityManager $entity_manager,
@@ -61,7 +61,7 @@ class ProgramManagerSpec extends ObjectBehavior
                       AddProgramRequest $request, User $user, ExtractedCatrobatFile $extracted_file,
                       Program $inserted_program, TagRepository $tag_repository,
                       ProgramLikeRepository $program_like_repository, LoggerInterface $logger,
-                      AppRequest $app_request,
+                      AppRequest $app_request, ProgramBeforeInsertEvent $event,
                       ExtensionRepository $extension_repository, CatrobatFileSanitizer $catrobat_file_sanitizer)
   {
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository,
@@ -79,7 +79,8 @@ class ProgramManagerSpec extends ObjectBehavior
     $request->getFlavor()->willReturn('pocketcode');
     $file_extractor->extract($file)->willReturn($extracted_file);
     $inserted_program->getId()->willReturn(1);
-    $event_dispatcher->dispatch(Argument::any(), Argument::any())->willReturnArgument(1);
+    $event->isPropagationStopped()->willReturn(0);
+    $event_dispatcher->dispatch(Argument::any())->willReturn($event);
   }
 
   /**
@@ -208,9 +209,8 @@ class ProgramManagerSpec extends ObjectBehavior
     $entity_manager->refresh(Argument::type('\App\Entity\Program'))->shouldBecalled();
 
     $this->addProgram($request)->shouldHaveType('App\Entity\Program');
-    $event_dispatcher->dispatch(
-      'catrobat.program.before', Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent')
-    )->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch(Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent'))
+      ->shouldHaveBeenCalled();
   }
 
   /**
@@ -222,9 +222,7 @@ class ProgramManagerSpec extends ObjectBehavior
   )
   {
     $validation_exception = new InvalidCatrobatFileException('500', 500);
-    $event_dispatcher->dispatch(
-      'catrobat.program.before', Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent')
-    )
+    $event_dispatcher->dispatch(Argument::type('App\Catrobat\Events\ProgramBeforeInsertEvent'))
       ->willThrow($validation_exception)
       ->shouldBeCalled();
 
@@ -232,9 +230,8 @@ class ProgramManagerSpec extends ObjectBehavior
       $request,
     ]);
 
-    $event_dispatcher->dispatch(
-      'catrobat.program.invalid.upload', Argument::type('App\Catrobat\Events\InvalidProgramUploadedEvent')
-    )->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch(Argument::type('App\Catrobat\Events\InvalidProgramUploadedEvent'))
+      ->shouldHaveBeenCalled();
   }
 
   /**
@@ -260,9 +257,8 @@ class ProgramManagerSpec extends ObjectBehavior
     $entity_manager->refresh(Argument::type('\App\Entity\Program'))->shouldBecalled();
 
     $this->addProgram($request)->shouldHaveType('App\Entity\Program');
-    $event_dispatcher->dispatch(
-      'catrobat.program.successful.upload', Argument::type('App\Catrobat\Events\ProgramInsertEvent')
-    )->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch(Argument::type('App\Catrobat\Events\ProgramInsertEvent'))
+      ->shouldHaveBeenCalled();
   }
 
   /**

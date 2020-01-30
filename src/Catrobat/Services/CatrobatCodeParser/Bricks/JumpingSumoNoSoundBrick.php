@@ -17,7 +17,6 @@ class JumpingSumoNoSoundBrick extends Brick
   {
     $this->type = Constants::JUMP_SUMO_NO_SOUND_BRICK;
     $this->caption = "No sound";
-
     $this->setImgFile(Constants::JUMPING_SUMO_BRICK_IMG);
   }
 }

@@ -106,7 +106,7 @@ class UserLDAPManager extends LdapManager
       return $user;
     } catch (LdapDriverException $e)
     {
-      $this->logger->addError("LDAP-Server not reachable?: " . $e->getMessage());
+      $this->logger->error("LDAP-Server not reachable?: " . $e->getMessage());
 
       return null;
     }
@@ -129,7 +129,7 @@ class UserLDAPManager extends LdapManager
       $binding = $this->driver->bind($user, $password);
     } catch (LdapDriverException $e)
     {
-      $this->logger->addError("LDAP-Server not reachable?: " . $e->getMessage());
+      $this->logger->error("LDAP-Server not reachable?: " . $e->getMessage());
 
       return false;
     }

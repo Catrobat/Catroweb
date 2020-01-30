@@ -4,48 +4,53 @@ namespace App\Catrobat\Commands;
 
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use App\Entity\Tag;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class CreateConstantTagsCommand
  * @package App\Catrobat\Commands
  */
-class CreateConstantTagsCommand extends ContainerAwareCommand
+class CreateConstantTagsCommand extends Command
 {
 
   /**
    * @var
    */
   private $output;
+
   /**
    * @var TranslatorInterface
    */
   private $translator;
+
   /**
-   * @var
+   * @var TagRepository $tag_repository
    */
   private $tag_repository;
 
   /**
    * @var EntityManagerInterface
    */
-  private $em;
+  private $entity_manager;
 
   /**
    * CreateConstantTagsCommand constructor.
    *
-   * @param EntityManagerInterface       $em
+   * @param EntityManagerInterface $entity_manager
    * @param TranslatorInterface $translator
+   * @param TagRepository $tag_repository
    */
-  public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+  public function __construct(EntityManagerInterface $entity_manager,TranslatorInterface $translator,
+                              TagRepository $tag_repository)
   {
     parent::__construct();
-    $this->em = $em;
+    $this->entity_manager = $entity_manager;
     $this->translator = $translator;
+    $this->tag_repository = $tag_repository;
   }
 
   /**
@@ -68,8 +73,7 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
-    $this->tag_repository = $this->getContainer()->get(TagRepository::class);
-    $metadata = $this->em->getClassMetadata('App\Entity\Tag')->getFieldNames();
+    $metadata = $this->entity_manager->getClassMetadata('App\Entity\Tag')->getFieldNames();
 
     $number_of_tags = 7; // uses the tag names defined in the translation files!
 
@@ -86,8 +90,8 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
 
           $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
 
-          $this->em->persist($tag);;
-          $this->em->flush();
+          $this->entity_manager->persist($tag);;
+          $this->entity_manager->flush();
         }
 
       }
@@ -101,8 +105,8 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
           $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
         }
 
-        $this->em->persist($tag);;
-        $this->em->flush();
+        $this->entity_manager->persist($tag);;
+        $this->entity_manager->flush();
       }
     }
   }

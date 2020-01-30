@@ -632,16 +632,16 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: සත්‍යාපනය අසාර්ථක විය
+    title: Authentication failed
     webview: |
-      ඔබගේ පරිශීලක අක්තපත්‍ර වැරදිය.
-      කරුණාකර නැවත යෙදුමට පිවිසීමට උත්සාහ කරන්න.
+      Your user credentials are wrong.
+      Please try to log in again in the app.
 success:
   text: Success
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
-  imgUpload: ඔබගේ රූපය සාර්ථකව උඩුගත කරන ලදි!
+  imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
@@ -773,6 +773,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities

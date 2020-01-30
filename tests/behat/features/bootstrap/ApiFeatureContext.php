@@ -107,7 +107,7 @@ class ApiFeatureContext extends BaseContext
   /**
    * @var array
    */
-  private $server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true];
+  private $server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => false];
 
   /**
    * @var array
@@ -182,8 +182,10 @@ class ApiFeatureContext extends BaseContext
    */
   public function iInvokeTheRequest()
   {
-    $this->getClient()->request($this->method, 'https://' . $this->server_parameters['HTTP_HOST'] . $this->url .
-      '?' . http_build_query($this->get_parameters), $this->post_parameters, $this->files, $this->server_parameters);
+    $uri = $this->server_parameters['HTTPS'] === true ? "https://" : "http://";
+    $uri .= $this->server_parameters['HTTP_HOST'] . $this->url . '?' . http_build_query($this->get_parameters);
+
+    $this->getClient()->request($this->method, $uri , $this->post_parameters, $this->files, $this->server_parameters);
   }
 
   /**
@@ -712,6 +714,7 @@ class ApiFeatureContext extends BaseContext
         'uploadtime'          => $programs[$i]['upload time'],
         'apk_status'          => $programs[$i]['apk_status'],
         'catrobatversionname' => $programs[$i]['version'],
+        'language_version'    => $programs[$i]['language version'],
         'directory_hash'      => $programs[$i]['directory_hash'],
         'filesize'            => @$programs[$i]['FileSize'],
         'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
@@ -1198,6 +1201,8 @@ class ApiFeatureContext extends BaseContext
     $responseArray = json_decode($response->getContent(), true);
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = $table->getHash();
+
+    Assert::assertEquals(count($returned_programs), count($expected_programs));
 
     for ($i = 0; $i < count($returned_programs); ++$i)
     {

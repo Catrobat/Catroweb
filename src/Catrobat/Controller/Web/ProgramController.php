@@ -211,7 +211,7 @@ class ProgramController extends AbstractController
       $my_program = true;
     }
 
-    return $this->get('templating')->renderResponse('Program/program.html.twig', [
+    return $this->render('Program/program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $program,
       'program_details'              => $program_details,
@@ -363,7 +363,7 @@ class ProgramController extends AbstractController
    */
   public function searchAction($q)
   {
-    return $this->get('templating')->renderResponse('Search/search.html.twig', ['q' => $q]);
+    return $this->render('Search/search.html.twig', ['q' => $q]);
   }
 
 
@@ -432,11 +432,6 @@ class ProgramController extends AbstractController
      * @var $user_programs ArrayCollection
      */
 
-    if ($id === 0)
-    {
-      return new Response("false");
-    }
-
     $user = $this->getUser();
     if (!$user)
     {
@@ -444,8 +439,9 @@ class ProgramController extends AbstractController
     }
 
     $user_programs = $user->getPrograms();
-    $programs = $user_programs->matching(Criteria::create()
-      ->where(Criteria::expr()->eq('id', $id)));
+    $programs = $user_programs->matching(
+      Criteria::create()->where(Criteria::expr()->eq('id', $id))
+    );
 
     $program = $programs[0];
 
@@ -759,7 +755,7 @@ class ProgramController extends AbstractController
     $program_comments = $this->getDoctrine()
       ->getRepository('App\Entity\UserComment')
       ->findBy(
-        ['programId' => $program->getId()], ['id' => 'DESC']);
+        ['program' => $program->getId()], ['id' => 'DESC']);
 
     return $program_comments;
   }

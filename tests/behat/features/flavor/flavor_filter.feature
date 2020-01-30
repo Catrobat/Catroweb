@@ -78,10 +78,14 @@ Feature: Filtering programs with specific flavor
     When I get the recent programs with "app/api/projects/recent.json"
     Then I should get following programs:
       | name         |
+      | Simple click |
+      | Soon to be   |
+      | Just for fun |
       | Invaders     |
       | A new world  |
+      | New adventure|
+      | Amazing race |
       | Test game    |
-
   Scenario: Get recent programs of flavor luna
 
     When I get the recent programs with "luna/api/projects/recent.json"

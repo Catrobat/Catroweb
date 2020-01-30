@@ -49,6 +49,6 @@ class CodeViewController extends AbstractController
       'path'           => $web_path,
     ];
 
-    return $this->get('templating')->renderResponse('Program/codeview.html.twig', $code_view_twig_params);
+    return $this->render('Program/codeview.html.twig', $code_view_twig_params);
   }
 }

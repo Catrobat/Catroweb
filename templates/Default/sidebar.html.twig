@@ -2,7 +2,7 @@
   <a class="logo" href="{{ path('index') }}"
      style="background-image:url('{{ asset('images/logo/catrobat_text.svg') }}')"><span
         class="sr-only">{{ "menu.home"|trans({}, "catroweb") }}</span></a>
-  <ul class="list-unstyled">
+  <ul class="list-unstyled" id="project-navigation">
     {% if theme() == 'pocketgalaxy' %}{# TODO maybe integrate in dynamic theming? #}
       <li class="nav-item">
         <a id="event-link" class="nav-link" href="http://www.galaxygamejam.com/AT/main.html">
@@ -17,47 +17,48 @@
 
     <li class="nav-item">
 
-      <a class="nav-link collapsible">
-
-        <i class="fas fa-bell mr-1"></i>
-          {{ "notifications"|trans({}, "catroweb") }}
-        <span
-            class="badge-pill badge-danger user-notification-badge all-notifications-dropdown user-notification-badge-font"></span>
-
-        <i class="caret-icon fa fa-caret-left"></i>
-
-      </a>
-
-      <div class="notifications-dropdown-content">
-        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "allNotifications" })}}" id="btn-notifications">
+      <div>
+        <a id="notifications-dropdown-toggler" class="nav-link collapsible">
           <i class="fas fa-bell mr-1"></i>
+          {{ "notifications"|trans({}, "catroweb") }}
+          <span
+              class="badge-pill badge-danger user-notification-badge all-notifications-dropdown user-notification-badge-font"></span>
+          <i id="notifications-dropdown-arrow" class="caret-icon fa fa-caret-left"></i>
+        </a>
+
+        <div id="notifications-dropdown-content" class="notifications-dropdown-content">
+
+          <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "allNotifications" })}}" id="btn-notifications">
+            <i class="fas fa-bell mr-1"></i>
             {{ "allNotifications"|trans({}, "catroweb") }}
             <span
                 class="badge-pill badge-danger user-notification-badge-dropdown all-notifications user-notification-badge-font"></span>
-        </a>
+          </a>
 
-        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "followers" }) }}" id="btn-followers">
+          <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "followers" }) }}" id="btn-followers">
 
-          <i class="fas fa-user"></i>
+            <i class="fas fa-user"></i>
             {{ "FollowersNotifications"|trans({}, "catroweb") }}
-          <span
+            <span
                 class="badge-pill badge-danger user-notification-badge-dropdown followers user-notification-badge-font"></span>
-        </a>
+          </a>
 
-        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "likes" }) }}" id="btn-likes">
-          <i class="fas fa-thumbs-up"></i>
+          <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "likes" }) }}" id="btn-likes">
+            <i class="fas fa-thumbs-up"></i>
             {{ "LikeNotifications"|trans({}, "catroweb") }}
             <span
                 class="badge-pill badge-danger user-notification-badge-dropdown likes user-notification-badge-font"></span>
-        </a>
+          </a>
 
-        <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "comments" }) }}" id="btn-comments">
-          <i class="fas fa-comments"></i>
+          <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "comments" }) }}" id="btn-comments">
+            <i class="fas fa-comments"></i>
 
             {{ "CommentNotifications"|trans({}, "catroweb") }}
-          <span
+            <span
                 class="badge-pill badge-danger user-notification-badge-dropdown comments user-notification-badge-font"></span>
-        </a>
+          </a>
+
+        </div>
 
       </div>
 
@@ -149,11 +150,13 @@
         <span>{{ 'programs.random'|trans({}, "catroweb") }}</span>
       </a>
     </li>
-
+  </ul>
+  <ul class="list-unstyled">
     {% if sidebar_ul is not empty %}
       {{ sidebar_ul|raw }}
     {% endif %}
   </ul>
+
 </nav>
 <div id="sidebar-overlay"></div>
 

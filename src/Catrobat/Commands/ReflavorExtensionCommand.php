@@ -6,9 +6,8 @@ use App\Catrobat\Commands\Helpers\ConsoleProgressIndicator;
 use App\Catrobat\Requests\AppRequest;
 use App\Entity\Program;
 use App\Repository\ProgramRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class ReflavorExtensionCommand
  * @package App\Catrobat\Commands
  */
-class ReflavorExtensionCommand extends ContainerAwareCommand
+class ReflavorExtensionCommand extends Command
 {
   /**
    * @var EntityManagerInterface

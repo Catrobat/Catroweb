@@ -2,9 +2,9 @@
 
 namespace App\Catrobat\Events;
 
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class InvalidProgramUploadedEvent

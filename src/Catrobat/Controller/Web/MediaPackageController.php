@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Error\Error;
 
 
@@ -40,7 +40,7 @@ class MediaPackageController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $packages = $em->getRepository(MediaPackage::class)->findAll();
 
-    return $this->get('templating')->renderResponse('MediaLibrary/mediapackageindex.html.twig',
+    return $this->render('MediaLibrary/mediapackageindex.html.twig',
       [
         'packages' => $packages,
         'new_nav'  => true,
@@ -129,7 +129,7 @@ class MediaPackageController extends AbstractController
 
     $mediaDir = $this->getParameter('catrobat.mediapackage.path');
 
-    return $this->get('templating')->renderResponse('MediaLibrary/mediapackage.html.twig', [
+    return $this->render('MediaLibrary/mediapackage.html.twig', [
       'flavor'     => $flavor,
       'package'    => $package_name,
       'categories' => $categories,

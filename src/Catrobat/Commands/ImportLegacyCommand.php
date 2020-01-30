@@ -9,6 +9,7 @@ use App\Catrobat\Listeners\RemixUpdater;
 use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\Output;
@@ -18,20 +19,19 @@ use Symfony\Component\Finder\Finder;
 use App\Entity\ProgramManager;
 use App\Entity\UserManager;
 use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\ORM\EntityManager;
 use App\Entity\Program;
 use App\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use App\Entity\FeaturedProgram;
 use Symfony\Component\Console\Helper\ProgressBar;
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Symfony\Component\Routing\RouterInterface;
 
 
 /**
  * Class ImportLegacyCommand
  * @package App\Catrobat\Commands
  */
-class ImportLegacyCommand extends ContainerAwareCommand
+class ImportLegacyCommand extends Command
 {
   /**
    *
@@ -80,7 +80,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
   private $output;
 
   /**
-   * @var EntityManager
+   * @var EntityManagerInterface
    */
   private $em;
 
@@ -103,21 +103,37 @@ class ImportLegacyCommand extends ContainerAwareCommand
   private $screenshot_repository;
 
   /**
-   * @var
+   * @var ProgramFileRepository
    */
   private $catrobat_file_repository;
 
   /**
+   * @var RouterInterface $router
+   */
+  private $router;
+
+  /**
+   * @var CatrobatFileExtractor $file_extractor
+   */
+  private $file_extractor;
+
+  /**
    * ImportLegacyCommand constructor.
    *
-   * @param Filesystem     $filesystem
-   * @param UserManager    $user_manager
+   * @param Filesystem $filesystem
+   * @param UserManager $user_manager
    * @param ProgramManager $program_manager
-   * @param RemixManager   $remix_manager
-   * @param EntityManagerInterface  $em
+   * @param RemixManager $remix_manager
+   * @param EntityManagerInterface $em
+   * @param ScreenshotRepository $screenshot_repository
+   * @param ProgramFileRepository $file_repository
+   * @param CatrobatFileExtractor $catrobat_file_extractor
+   * @param RouterInterface $router
    */
   public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager,
-                                 RemixManager $remix_manager, EntityManagerInterface $em)
+                              RemixManager $remix_manager, EntityManagerInterface $em,
+                              ScreenshotRepository $screenshot_repository, ProgramFileRepository $file_repository,
+                              CatrobatFileExtractor $catrobat_file_extractor, RouterInterface $router)
   {
     parent::__construct();
     $this->fileystem = $filesystem;
@@ -125,6 +141,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
     $this->program_manager = $program_manager;
     $this->remix_manager = $remix_manager;
     $this->em = $em;
+    $this->screenshot_repository = $screenshot_repository;
+    $this->catrobat_file_repository = $file_repository;
+    $this->router = $router;
+    $this->file_extractor = $catrobat_file_extractor;
   }
 
   /**
@@ -138,20 +158,19 @@ class ImportLegacyCommand extends ContainerAwareCommand
   }
 
   /**
-   * @param InputInterface  $input
+   * @param InputInterface $input
    * @param OutputInterface $output
    *
    * @return int|void|null
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
     $this->filesystem = new Filesystem();
-    $this->finder = new Finder();
-    $this->screenshot_repository = $this->getContainer()->get(ScreenshotRepository::class);
-    $this->catrobat_file_repository = $this->getContainer()->get(ProgramFileRepository::class);
+    $this->finder = new Finder();;
 
     CommandHelper::executeSymfonyCommand('catrobat:purge', $this->getApplication(), ['--force' => true], $output);
 
@@ -202,8 +221,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
   /**
    * @param $program_file
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
    */
   protected function importPrograms($program_file)
   {
@@ -443,15 +461,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
 
     if (file_exists($filepath))
     {
-      /**
-       * @var $fileextractor CatrobatFileExtractor
-       */
-      $fileextractor = $this->getContainer()->get('App\Catrobat\Services\CatrobatFileExtractor');
-      $router = $this->getContainer()->get('router');
-      $extracted_catrobat_file = $fileextractor->extract(new File($filepath));
+      $extracted_catrobat_file = $this->file_extractor->extract(new File($filepath));
 
       $program = $this->program_manager->find($id);
-      $remix_updater = new RemixUpdater($this->remix_manager, $async_http_client, $router);
+      $remix_updater = new RemixUpdater($this->remix_manager, $async_http_client, $this->router);
       $remix_updater->update($extracted_catrobat_file, $program);
 
       $this->catrobat_file_repository->saveProgram($extracted_catrobat_file, $id);

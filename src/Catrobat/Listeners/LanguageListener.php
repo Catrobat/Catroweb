@@ -2,8 +2,7 @@
 
 namespace App\Catrobat\Listeners;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * Class LanguageListener
@@ -12,9 +11,9 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 class LanguageListener
 {
   /**
-   * @param GetResponseEvent $event
+   * @param RequestEvent $event
    */
-  public function onKernelRequest(GetResponseEvent $event)
+  public function onKernelRequest(RequestEvent $event)
   {
     $pref_language = $event->getRequest()->cookies->get('hl');
     if ($pref_language === null)

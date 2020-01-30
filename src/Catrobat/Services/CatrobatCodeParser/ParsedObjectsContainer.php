@@ -2,6 +2,8 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
+use SimpleXMLElement;
+
 /**
  * Class ParsedObjectsContainer
  * @package App\Catrobat\Services\CatrobatCodeParser
@@ -9,7 +11,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 abstract class ParsedObjectsContainer
 {
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $xml_properties;
 
@@ -26,9 +28,9 @@ abstract class ParsedObjectsContainer
   /**
    * ParsedObjectsContainer constructor.
    *
-   * @param \SimpleXMLElement $xml_properties
+   * @param SimpleXMLElement $xml_properties
    */
-  public function __construct(\SimpleXMLElement $xml_properties)
+  public function __construct(SimpleXMLElement $xml_properties)
   {
     $this->xml_properties = $xml_properties;
     $this->background = null;
@@ -107,7 +109,7 @@ abstract class ParsedObjectsContainer
   }
 
   /**
-   * @param $object_xml \SimpleXMLElement
+   * @param $object_xml SimpleXMLElement
    *
    * @return array
    */
@@ -128,7 +130,7 @@ abstract class ParsedObjectsContainer
   }
 
   /**
-   * @param $object_xml_properties \SimpleXMLElement
+   * @param $object_xml_properties SimpleXMLElement
    *
    * @return mixed
    */

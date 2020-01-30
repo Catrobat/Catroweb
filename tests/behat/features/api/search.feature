@@ -58,7 +58,7 @@ Feature: Search programs
         "completeTerm": "",
         "preHeaderMessages": "",
         "CatrobatInformation": {
-          "BaseUrl": "https:\/\/pocketcode.org\/",
+          "BaseUrl": "http:\/\/pocketcode.org\/",
           "TotalProjects": 1,
           "ProjectsExtension": ".catrobat"
         }
@@ -75,7 +75,7 @@ Feature: Search programs
         "completeTerm":"",
         "preHeaderMessages":"",
         "CatrobatInformation": {
-          "BaseUrl":"https://pocketcode.org/",
+          "BaseUrl":"http://pocketcode.org/",
           "TotalProjects":0,
           "ProjectsExtension":".catrobat"
         }

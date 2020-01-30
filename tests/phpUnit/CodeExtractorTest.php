@@ -4,13 +4,10 @@ namespace tests;
 
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 use App\Catrobat\Services\ExtractedCatrobatFile;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\MessageSelector;
-use Symfony\Component\Translation\Loader\YamlFileLoader;
-use Symfony\Component\Finder\Finder;
+use PHPUnit\Framework\TestCase;
 
-class CodeExtractor extends \PHPUnit\Framework\TestCase
+
+class CodeExtractor extends TestCase
 {
 
   /**

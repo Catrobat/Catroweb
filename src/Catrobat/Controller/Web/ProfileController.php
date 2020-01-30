@@ -18,10 +18,11 @@ use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Twig\Error\Error;
 
@@ -53,14 +54,12 @@ class ProfileController extends AbstractController
 
     if ($id === 0 || ($this->getUser() && $this->getUser()->getId() === $id))
     {
-      $user = $this->getUser();
       $my_profile = true;
-      $program_count = count($program_manager->getUserPrograms($id));
+      $user = $this->getUser();
     }
     else
     {
       $user = $user_manager->find($id);
-      $program_count = count($program_manager->getPublicUserPrograms($id));
     }
 
     if (!$user)
@@ -68,15 +67,31 @@ class ProfileController extends AbstractController
       return $this->redirectToRoute('fos_user_security_login');
     }
 
+    if ($my_profile)
+    {
+      $program_count = count($program_manager->getUserPrograms($user->getId()));
+    }
+    else
+    {
+      $program_count = count($program_manager->getPublicUserPrograms($id));
+    }
+
     $oauth_user = $user->getGplusUid();
 
     \Locale::setDefault(substr($request->getLocale(), 0, 2));
-    $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
+    try {
+      $country = Countries::getName(strtoupper($user->getCountry()));
+    }
+    catch (MissingResourceException $e)
+    {
+      $country = "";
+    }
+
     $firstMail = $user->getEmail();
     $secondMail = $user->getAdditionalEmail();
     $followerCount = $user->getFollowers()->count();
 
-    return $this->get('templating')->renderResponse('UserManagement/Profile/profileHandler.html.twig', [
+    return $this->render('UserManagement/Profile/profileHandler.html.twig', [
       'profile'        => $user,
       'program_count'  => $program_count,
       'follower_count' => $followerCount,
@@ -664,7 +679,7 @@ class ProfileController extends AbstractController
    */
   public function country($code, $locale = null)
   {
-    $countries = Intl::getRegionBundle()->getCountryNames($locale ?: $this->localeDetector->getLocale());
+    $countries = Countries::getNames($locale ?: $this->localeDetector->getLocale());
     if (array_key_exists($code, $countries))
     {
       return $this->fixCharset($countries[$code]);

@@ -163,5 +163,9 @@ class Tag
     $this->fr = $fr;
   }
 
+  public function __toString()
+  {
+    return $this->id . '';
+  }
 
 }

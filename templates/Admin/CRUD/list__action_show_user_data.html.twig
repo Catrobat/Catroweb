@@ -1,0 +1,300 @@
+{% extends base_template %}
+
+{% block list_table %}
+
+  <style>
+    h3
+    {
+      margin-left: 20px;
+    }
+
+    .mtable
+    {
+      display: table;
+      margin-left: 20px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      width: 95%;
+    }
+
+    .table-name
+    {
+      font-weight: bold;
+      font-size: 130%;
+      border-bottom: 1px solid gray;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .lrow
+    {
+      width: 200px;
+      display: table-row;
+      float: left;
+      clear: both;
+    }
+
+    .rrow
+    {
+      display: table-row;
+      float: left;
+      width: 500px;
+    }
+
+    .separator
+    {
+      border-bottom: 1px solid gray;
+    }
+
+    .user-avatar
+    {
+      max-width: 100px;
+    }
+
+  </style>
+
+  <div class="col-xs-12 col-md-12">
+    <div class="box box-primary">
+      <div class="box-body table-responsive no-padding">
+
+        <h3>Show stored data for user '{{ user }}'</h3>
+
+        <div class="mtable">
+          <div class="table-name">User</div>
+
+          <div class="lrow">ID</div><div class="rrow">{{ user.id }}</div>
+          <div class="lrow">Name</div><div class="rrow">{{ user.userName }}</div>
+          <div class="lrow">Additional Email</div><div class="rrow">{{ user.additionalEmail }}</div>
+          <div class="lrow">Avatar</div><div class="rrow">{% if user.avatar is not empty %}<img alt="avatar" class="user-avatar" src="{{ user.avatar }}"/>{% else %} Not uploaded {% endif %}</div>
+          <div class="lrow">Biography</div><div class="rrow">{{ user.biography }}</div>
+          <div class="lrow">Country</div><div class="rrow">{{ user.country }}</div>
+          <div class="lrow">Created at</div><div class="rrow">{{ user.createdAt|date('Y-m-d h:m:s') }}</div>
+          <div class="lrow">Date of birth</div><div class="rrow">{{ user.dateOfBirth|date('Y-m-d') }}</div>
+          <div class="lrow">Email</div><div class="rrow">{{ user.email }}</div>
+          <div class="lrow">Facebook data</div><div class="rrow">{{ user.facebookData }}</div>
+          <div class="lrow">Facebook name</div><div class="rrow">{{ user.facebookName }}</div>
+          <div class="lrow">Facebook uid</div><div class="rrow">{{ user.facebookUid }}</div>
+          <div class="lrow">Firstname</div><div class="rrow">{{ user.firstName }}</div>
+          <div class="lrow">Followers</div><div class="rrow">
+            {% for follower in user.followers %} {{ follower }}; {%  endfor %}
+          </div>
+          <div class="lrow">Following</div><div class="rrow">
+            {% for following in user.following %} {{ following }}; {%  endfor %}
+          </div>
+          <div class="lrow">Gender</div><div class="rrow">{{ user.gender}}</div>
+          <div class="lrow">Gplus data</div><div class="rrow">{{ user.gplusData }}</div>
+          <div class="lrow">Gplus ID token</div><div class="rrow">{{ user.gplusIdToken }}</div>
+          <div class="lrow">Gplus name</div><div class="rrow">{{ user.gplusName }}</div>
+          <div class="lrow">Gplus uid</div><div class="rrow">{{ user.gplusUid }}</div>
+          <div class="lrow">Group names</div>
+          <div class="rrow">
+            {% for groupname in user.groupnames %} {{ groupname }}; {%  endfor %}
+          </div>
+          <div class="lrow">Last login</div><div class="rrow">{{ user.lastLogin|date('Y-m-d h:m:s') }}</div>
+          <div class="lrow">Last name</div><div class="rrow">{{ user.lastName }}</div>
+          <div class="lrow">Given likes</div>
+          <div class="rrow">
+            {% for like in user.likes %} {{ like }}; {%  endfor %}
+          </div>
+          <div class="lrow">Locale</div><div class="rrow">{{ user.locale }}</div>
+          <div class="lrow">Password</div><div class="rrow">*****</div>
+          <div class="lrow">Passwort requested at</div><div class="rrow">{{ user.passwordRequestedAt|date('Y-m-d h:m:s') }}</div>
+          <div class="lrow">Phone</div><div class="rrow">{{ user.phone }}</div>
+          <div class="lrow">Real roles</div>
+          <div class="rrow">
+            {% for realrole in user.realroles %} {{ realrole }}; {%  endfor %}
+          </div>
+          <div class="lrow">Roles</div>
+          <div class="rrow">
+            {% for role in user.roles %} {{ role }}; {%  endfor %}
+          </div>
+          <div class="lrow">Salt</div><div class="rrow">*****</div>
+          <div class="lrow">Timezone</div><div class="rrow">{{ user.timezone }}</div>
+          <div class="lrow">Token</div><div class="rrow">*****</div>
+          <div class="lrow">Twitter data</div><div class="rrow">{{ user.twitterData }}</div>
+          <div class="lrow">Twitter name</div><div class="rrow">{{ user.twitterName }}</div>
+          <div class="lrow">Twitter uid</div><div class="rrow">{{ user.twitterUid }}</div>
+          <div class="lrow">Two step verification code</div><div class="rrow">*****</div>
+          <div class="lrow">Updated at</div><div class="rrow">{{ user.updatedAt|date('Y-m-d h:m:s') }}</div>
+          <div class="lrow">Upload token</div><div class="rrow">{{ user.uploadToken }}</div>
+          <div class="lrow">Website</div><div class="rrow">{{ user.website }}</div>
+          <div class="lrow separator"></div><div class="rrow separator"></div>
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">Click Statistics</div>
+
+          {% if click_statistics is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for click_statistic in click_statistics %}
+            <div class="lrow">ID</div><div class="rrow">{{ click_statistic.id }}</div>
+            <div class="lrow">Clicked at</div><div class="rrow">{{ click_statistic.clickedAt|date('Y-m-d h:m:s') }}</div>
+            <div class="lrow">Country code</div><div class="rrow">{{ click_statistic.countryCode }}</div>
+            <div class="lrow">Country name</div><div class="rrow">{{ click_statistic.countryName }}</div>
+            <div class="lrow">Extension</div><div class="rrow">{{ click_statistic.extension }}</div>
+            <div class="lrow">IP</div><div class="rrow">{{ click_statistic.ip }}</div>
+            <div class="lrow">Locale</div><div class="rrow">{{ click_statistic.locale }}</div>
+            <div class="lrow">Program</div><div class="rrow">{{ click_statistic.program }}</div>
+            <div class="lrow">Recommended from program</div><div class="rrow">{{ click_statistic.recommendedFromProgram }}</div>
+            <div class="lrow">Referrer</div><div class="rrow">{{ click_statistic.referrer }}</div>
+            <div class="lrow">Scratch program id</div><div class="rrow">{{ click_statistic.scratchProgramId }}</div>
+            <div class="lrow">Tag</div><div class="rrow">{{ click_statistic.tag }}</div>
+            <div class="lrow">Type</div><div class="rrow">{{ click_statistic.type }}</div>
+            <div class="lrow">User</div><div class="rrow">{{ click_statistic.user }}</div>
+            <div class="lrow">User agent</div><div class="rrow">{{ click_statistic.useragent }}</div>
+            <div class="lrow">User specific recommendation</div><div class="rrow">{{ click_statistic.userSpecificRecommendation }}</div>
+            <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">Homepage Click Statistics</div>
+
+          {% if homepage_click_statistics is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for homepage_click_statistic in homepage_click_statistics %}
+            <div class="lrow">ID</div><div class="rrow">{{ homepage_click_statistic.id }}</div>
+            <div class="lrow">Clicked at</div><div class="rrow">{{ homepage_click_statistic.clickedAt|date('Y-m-d h:m:s') }}</div>
+            <div class="lrow">IP</div><div class="rrow">{{ homepage_click_statistic.ip }}</div>
+            <div class="lrow">Locale</div><div class="rrow">{{ homepage_click_statistic.locale }}</div>
+            <div class="lrow">Program</div><div class="rrow">{{ homepage_click_statistic.program }}</div>
+            <div class="lrow">Referrer</div><div class="rrow">{{ homepage_click_statistic.referrer }}</div>
+            <div class="lrow">Type</div><div class="rrow">{{ homepage_click_statistic.type }}</div>
+            <div class="lrow">User</div><div class="rrow">{{ homepage_click_statistic.user }}</div>
+            <div class="lrow">User agent</div><div class="rrow">{{ homepage_click_statistic.userAgent }}</div>
+            <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">Programs (uploaded by this user)</div>
+
+          {% if user_programs is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for up in user_programs %}
+            <div class="lrow">ID</div><div class="rrow">{{ up.id }}</div>
+            <div class="lrow">Name</div><div class="rrow">{{ up.name }}</div>
+
+            <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">Program Downloads (downloaded by this user)</div>
+
+          {% if program_downloads is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for pd in program_downloads %}
+            <div class="lrow">ID</div><div class="rrow">{{ pd.id }}</div>
+            <div class="lrow">Program</div><div class="rrow">{{ pd.program }}</div>
+            <div class="lrow">Recommended from program via tag</div><div class="rrow">{{ pd.recommendedFromProgramViaTag }}</div>
+            <div class="lrow">Downloaded at</div><div class="rrow">{{ pd.downloadedAt|date('Y-m-d h:m:s') }}</div>
+            <div class="lrow">IP</div><div class="rrow">{{ pd.ip }}</div>
+            <div class="lrow">Country code</div><div class="rrow">{{ pd.countryCode }}</div>
+            <div class="lrow">Country name</div><div class="rrow">{{ pd.countryName }}</div>
+            <div class="lrow">Locale</div><div class="rrow">{{ pd.locale }}</div>
+            <div class="lrow">User agent</div><div class="rrow">{{ pd.userAgent }}</div>
+            <div class="lrow">User</div><div class="rrow">{{ pd.user }}</div>
+            <div class="lrow">Referrer</div><div class="rrow">{{ pd.referrer }}</div>
+            <div class="lrow">Recommended by page ID</div><div class="rrow">{{ pd.recommendedByPageId }}</div>
+            <div class="lrow">Recommended by program</div><div class="rrow">{{ pd.recommendedByProgram}}</div>
+            <div class="lrow">User specific recommendation</div><div class="rrow">{{ pd.userSpecificRecommendation }}</div>
+            <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">Program Inappropriate Reports (filed by this user)</div>
+
+          {% if program_inappropriate_reports is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for pir in program_inappropriate_reports %}
+            <div class="lrow">ID</div><div class="rrow">{{ pir.id }}</div>
+            <div class="lrow">Reporting user</div><div class="rrow">{{ pir.reportingUser }}</div>
+            <div class="lrow">Category</div><div class="rrow">{{ pir.category }}</div>
+            <div class="lrow">Note</div><div class="rrow">{{ pir.note }}</div>
+            <div class="lrow">Time</div><div class="rrow">{{ pir.time|date('Y-m-d h:m:s') }}</div>
+            <div class="lrow">State</div><div class="rrow">{{ pir.state }}</div>
+            <div class="lrow">Program</div><div class="rrow">{{ pir.program }}</div>
+            <div class="lrow">Program Version</div><div class="rrow">{{ pir.projectVersion }}</div>
+            <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">User Comments (created by this user)</div>
+
+          {% if user_comments is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for uc in user_comments %}
+            <div class="lrow">ID</div><div class="rrow">{{ uc.id }}</div>
+            <div class="lrow">Program</div><div class="rrow">{{ uc.program }}</div>
+            <div class="lrow">User ID</div><div class="rrow">{{ uc.userID }}</div>
+            <div class="lrow">User name</div><div class="rrow">{{ uc.userName }}</div>
+            <div class="lrow">Uploaded at</div><div class="rrow">{{ uc.uploadDate|date('Y-m-d h:m:s') }}</div>
+            <div class="lrow">Text</div><div class="rrow">{{ uc.text }}</div>
+            <div class="lrow">Is Reported</div><div class="rrow">{{ uc.isReported }}</div>
+            <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">CatroNotifications (for this user)</div>
+
+          {% if catro_user_notifications is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for catro_user_notification in catro_user_notifications %}
+            <div class="lrow">ID</div><div class="rrow">{{ catro_user_notification.id }}</div>
+            <div class="lrow">User</div><div class="rrow">{{ catro_user_notification.user }}</div>
+            <div class="lrow">Title</div><div class="rrow">{{ catro_user_notification.title}}</div>
+            <div class="lrow">Message</div><div class="rrow">{{ catro_user_notification.message }}</div>
+            <div class="lrow">Seen</div><div class="rrow">{{ catro_user_notification.seen }}</div>
+            {% if catro_user_notification.price is defined %}
+              <div class="lrow">Price</div><div class="rrow">{{ catro_user_notification.price }}</div>
+            {%  endif %}
+            {% if catro_user_notification.imagePath is defined %}
+              <div class="lrow">Image Path</div><div class="rrow">{{ catro_user_notification.imagePath }}</div>
+            {% endif %}
+            {% if catro_user_notification.comment is defined %}
+              <div class="lrow">Comment</div><div class="rrow">{{ catro_user_notification.comment }}</div>
+            {% endif %}
+            {% if catro_user_notification.likeFrom is defined %}
+              <div class="lrow">Like from</div><div class="rrow">{{ catro_user_notification.likeFrom }}</div>
+            {% endif %}
+            {% if catro_user_notification.follower is defined %}
+              <div class="lrow">Follower</div><div class="rrow">{{ catro_user_notification.follower }}</div>
+            {% endif %}
+            {% if catro_user_notification.program is defined %}
+              <div class="lrow">Program</div><div class="rrow">{{ catro_user_notification.program }}</div>
+            {% endif %}
+                <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+
+          </div>
+
+        </div>
+
+        <div class="mtable">
+          <div class="table-name">Notifications (for this user)</div>
+
+          {% if notifications is empty %} <div>No entries for this user</div> {%  endif %}
+
+          {% for notification in notifications %}
+            <div class="lrow">ID</div><div class="rrow">{{ notification.id }}</div>
+            <div class="lrow">User</div><div class="rrow">{{ notification.user }}</div>
+            <div class="lrow">Upload</div><div class="rrow">{{ notification.upload }}</div>
+            <div class="lrow">Report</div><div class="rrow">{{ notification.report }}</div>
+            <div class="lrow">Summary</div><div class="rrow">{{ notification.summary }}</div>
+            <div class="lrow separator"></div><div class="rrow separator"></div>
+          {%  endfor %}
+
+        </div>
+    </div>
+  </div>
+
+{% endblock %}

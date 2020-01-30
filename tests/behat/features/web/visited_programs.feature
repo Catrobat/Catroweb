@@ -25,4 +25,5 @@ Feature: Pocketcode homepage visited programs
     When I click "#newest #program-1"
     And I wait 100 milliseconds
     And I am on "/app/user/1"
+    And I wait 50 milliseconds
     Then I should see marked "#program-1"

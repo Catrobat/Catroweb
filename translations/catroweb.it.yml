@@ -19,7 +19,7 @@ deleteIt: Sì, cancellalo!
 reportIt: Sì, segnalalo!
 areYouSure: Sei sicuro?
 noWayOfReturn: Non è possibile ripristinare queste azioni!
-download: Download del progetto
+download: Download the project
 description: Descrizione
 noDescription: Nessuna descrizione disponibile.
 credits: Credits
@@ -36,7 +36,7 @@ less: 'meno'
 show-more: 'Mostra di più'
 show-less: 'Mostra meno'
 ok: Va bene
-clickToDownloadProgram: 'Per scaricare il progetto di esempio, fare click su %link_start% questo %link_end% link.'
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Nome utente o indirizzo email già in uso.'
 notifications: 'Notifiche'
 allNotifications: 'All Notifications'
@@ -66,8 +66,8 @@ pleaseWait: "Attendere prego..."
 indexPage:
   recommendedSection:
     info:
-      title: 'Quali progetti vengono raccomandati qui?'
-      description: 'Più sono i Like (tra cui "Thumbs up", "Ridere", "Love" e "Woow!") ricevuti dal programma, più in alto appare in questo elenco.'
+      title: 'What projects are recommended here?'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
 programs:
   welcome:
     title: Benvenuto su Catrobat %theme%
@@ -75,9 +75,9 @@ programs:
     download: Scarica l'app
     statistics: Più statistiche
   featured: In evidenza
-  newest: Progetti più recenti
-  recommended: Progetti consigliati
-  noPrograms: Al momento non ci sono progetti.
+  newest: Newest projects
+  recommended: Recommended projects
+  noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Sei sicuro?
     Sei sicuro di che voler eliminare "%programName%"?
@@ -540,7 +540,7 @@ help:
     description6: |
       Questo tutorial mostra come creare uno sfondo che si sposta verticalmente, muovendo l'oggetto sfondo in un certo modo. Inoltre viene insegnato come far saltare in alto un personaggio quando questo viene toccato.
       Per rendere il gioco un po' più difficile, viene mostrato come rallentare, man mano che passa il tempo, la velocità del personaggio.
-    download: "Download del progetto"
+    download: "Download the project"
 oauth:
   username_header: Grazie per esserti registrato a Pocket Code!
   username_chooser: 'Scegli un nome utente:'
@@ -772,6 +772,7 @@ codeview:
   looksBricks: 'Mattoncini per l''aspetto'
   penBricks: 'Mattoncini Penna'
   dataBricks: 'Mattoncini dati'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Link utili
   legalities: Informazioni legali

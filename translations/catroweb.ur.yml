@@ -751,7 +751,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
-  showCode: 'Show code'
+  showCode: 'کوڈ دکھائیں'
   hideCode: 'کوڈ چھپائیں'
   showStatistics: 'کوڈ کے اعداد و شمار دکھائیں'
   hideStatistics: 'کوڈ کے اعداد و شمار چھپائیں'
@@ -773,6 +773,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities

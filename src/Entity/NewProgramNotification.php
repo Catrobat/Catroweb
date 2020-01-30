@@ -19,7 +19,7 @@ class NewProgramNotification extends CatroNotification
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private $twig_template = "Notifications/NotificationTypes/program_follow_notification.html.twig";
+  private $twig_template = "Notifications/NotificationTypes/new_program_notification.html.twig";
 
   /**
    * CommentNotification constructor.

@@ -7,6 +7,7 @@ use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
 use Doctrine\DBAL\Types\GuidType;
+use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -33,7 +34,7 @@ class ExtractedCatrobatFile
   protected $dir_hash;
 
   /**
-   * @var \SimpleXMLElement
+   * @var SimpleXMLElement
    */
   protected $program_xml_properties;
 
@@ -134,7 +135,9 @@ class ExtractedCatrobatFile
 
     if ($this->hasScenes())
     {
-      $finder->files()->in($this->path . '/*/images/');
+      $directory = $this->path . '/*/images/';
+      $this->createDirectoryIfNotExist($directory);
+      $finder->files()->in($directory);
       foreach ($finder as $file)
       {
         $parts = explode($this->dir_hash . '/', $file->getRealPath());
@@ -143,7 +146,9 @@ class ExtractedCatrobatFile
     }
     else
     {
-      $finder->files()->in($this->path . 'images/');
+      $directory = $this->path . 'images/';
+      $this->createDirectoryIfNotExist($directory);
+      $finder->files()->in($directory);
       foreach ($finder as $file)
       {
         $file_paths[] = '/' . $this->web_path . 'images/' . $file->getFilename();
@@ -152,7 +157,6 @@ class ExtractedCatrobatFile
 
     return $file_paths;
   }
-
 
   /**
    * @param $filename
@@ -176,7 +180,9 @@ class ExtractedCatrobatFile
 
     if ($this->hasScenes())
     {
-      $finder->files()->in($this->path . '/*/sounds/');
+      $directory = $this->path . '/*/sounds/';
+      $this->createDirectoryIfNotExist($directory);
+      $finder->files()->in($directory);
       foreach ($finder as $file)
       {
         $parts = explode($this->dir_hash . '/', $file->getRealPath());
@@ -185,7 +191,9 @@ class ExtractedCatrobatFile
     }
     else
     {
-      $finder->files()->in($this->path . 'sounds/');
+      $directory = $this->path . 'sounds/';
+      $this->createDirectoryIfNotExist($directory);
+      $finder->files()->in($directory);
       foreach ($finder as $file)
       {
         $file_paths[] = '/' . $this->web_path . 'sounds/' . $file->getFilename();
@@ -295,7 +303,7 @@ class ExtractedCatrobatFile
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return SimpleXMLElement
    */
   public function getProgramXmlProperties()
   {
@@ -489,5 +497,15 @@ class ExtractedCatrobatFile
   public function hasScenes()
   {
     return count($this->program_xml_properties->xpath('//scenes')) != 0;
+  }
+
+  /**
+   * @param $directory
+   */
+  private function createDirectoryIfNotExist($directory)
+  {
+    if (!file_exists($directory)) {
+      mkdir($directory, 0777, true);
+    }
   }
 }

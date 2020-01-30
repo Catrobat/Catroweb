@@ -214,7 +214,7 @@ Feature:
   Scenario: max. 5MB for avatar image
     When I click "#avatar-upload"
     And I attach the avatar "galaxy_big.png" to "file"
-    And I wait 500 milliseconds
+    And I wait 1000 milliseconds
     Then I should see "Your chosen picture is too large, please do not use images larger than 5mb."
 
   Scenario: deleting a program should work
@@ -278,7 +278,7 @@ Feature:
     And the element "#visibility-lock-2" should be visible
     And the element "#visibility-lock-open-2" should not be visible
     When I click "#visibility-lock-open-2"
-    And I wait 100 milliseconds
+    And I wait 150 milliseconds
     And the element ".swal2-shown" should be visible
     And I click ".swal2-confirm"
     And I wait for the server response

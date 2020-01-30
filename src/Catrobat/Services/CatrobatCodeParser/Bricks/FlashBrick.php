@@ -16,9 +16,7 @@ class FlashBrick extends Brick
   protected function create()
   {
     $this->type = Constants::FLASH_BRICK;
-    $this->caption = "Turn flashlight "
-      . $this->brick_xml_properties->xpath('spinnerValues/string')[(int)$this->brick_xml_properties->spinnerSelectionID];
-
+    $this->caption = "Turn flashlight _";
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);
   }
 }

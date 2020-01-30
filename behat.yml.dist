@@ -25,7 +25,7 @@ default:
 
         Behat\Symfony2Extension:
             kernel:
-                bootstrap: config/bootstrap.php
+                bootstrap: config/bootstrap_test.php
                 class: App\Kernel
 
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~

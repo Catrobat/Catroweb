@@ -17,7 +17,6 @@ class WhenClonedScript extends Script
   {
     $this->type = Constants::WHEN_CLONED_SCRIPT;
     $this->caption = "When I start as a clone";
-
     $this->setImgFile(Constants::CONTROL_SCRIPT_IMG);
   }
 }

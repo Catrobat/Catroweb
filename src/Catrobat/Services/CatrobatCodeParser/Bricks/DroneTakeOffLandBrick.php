@@ -17,7 +17,6 @@ class DroneTakeOffLandBrick extends Brick
   {
     $this->type = Constants::AR_DRONE_TAKE_OFF_LAND_BRICK;
     $this->caption = "Take off or land drone";
-
-    $this->setImgFile(Constants::AR_DRONE_BRICK_IMG);
+    $this->setImgFile(Constants::AR_DRONE_MOTION_BRICK_IMG);
   }
 }

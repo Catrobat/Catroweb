@@ -15,15 +15,15 @@ passwordsNoMatch: รหัสผ่านไม่ตรงกัน
 error: ผิดพลาด
 cancel: ยกเลิก
 report: รายงาน
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
+deleteIt: ใช่ ลบทิ้ง!
+reportIt: ใช่ รายงานเลย!
 areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+noWayOfReturn: ไม่มีทางที่จะกู้คืนการกระทำของคุณ!
+download: ดาวน์โหลดโครงการ
 description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย
-credits: Credits
-noCredits: No credits available.
+credits: เครดิต
+noCredits: ไม่มีเครดิต
 country: ประเทศ
 loginText: login
 privacyPolicy: นโยบายความเป็นส่วนตัว
@@ -36,12 +36,12 @@ less: 'ย่อ'
 show-more: 'Show more'
 show-less: 'Show less'
 ok: ตกลง
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'ในการดาวน์โหลดตัวอย่างโครงการคลิก %link_start% ที่นี่ %link_end%'
 registrationError: 'ชื่อผู้ใช้หรืออีเมลถูกใช้ไปแล้ว'
 notifications: 'การแจ้งเตือน'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
+allNotifications: 'การแจ้งเตือนทั้งหมด'
+FollowersNotifications: 'ผู้ติดตาม'
+LikeNotifications: 'ถูกใจ'
 likesNotificationsTitle: 'Like Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
@@ -70,7 +70,7 @@ indexPage:
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: ยินดีต้อนรับสู่ %theme% ของ Catrobat
     subtitle: สร้างเรื่องราว เกม และอื่น ๆ...
     download: ดาวน์โหลดแอป
     statistics: สถิติเพิ่มเติม
@@ -481,7 +481,7 @@ help:
       one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
       two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: "Face detection"
+      title: "ตรวจจับใบหน้า"
       description: "Control an object by using face detection."
       one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
       two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
@@ -540,7 +540,7 @@ help:
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the project"
+    download: "ดาวน์โหลดโครงการ"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: 'Please choose a username:'
@@ -773,6 +773,7 @@ codeview:
   looksBricks: 'Looks Bricks'
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
+  specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Useful Links
   legalities: Legalities
