@@ -29,7 +29,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    *  Must not be empty
    *
    */
-  const TOKEN = 'X-AUTH-TOKEN';
+  const TOKEN = 'token';
 
   /**
    * @required request parameter USERNAME

@@ -866,3 +866,26 @@ services:
       - App\Entity\Group
       - App\Catrobat\Controller\Admin\SnapshotController
     public: true
+
+
+# ====================================================================================================================
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ====================================================================================================================
+
+# ====================================================================================================================
+#  CAPI
+#
+  api.mediaLibrary:
+    class: App\Api\MediaLibraryApi
+    tags:
+      - { name: "open_api_server.api", api: "mediaLibrary" }
+
+  api.projects:
+    class: App\Api\ProjectsApi
+    tags:
+        - { name: "open_api_server.api", api: "projects" }
+
+  api.security:
+    class: App\Api\SecurityApi
+    tags:
+      - { name: "open_api_server.api", api: "security" }

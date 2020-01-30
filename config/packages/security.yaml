@@ -14,26 +14,41 @@ security:
 
     firewalls:
 
-#
-#        # API V2
-#
-#        api_checktoken_v2:
-#            provider: chain_provider
-#            pattern: ^.*/api/v2/checkToken/check
-#            stateless: true
-#            guard:
-#                authenticators:
-#                    - App\Catrobat\Security\ApiTokenAuthenticator
-#
-#        api_upload_v2:
-#            provider: chain_provider
-#            pattern: ^.*/api/v2/upload/upload
-#            stateless: true
-#            simple_preauth:
-#                authenticator: App\Catrobat\Security\ApiTokenAuthenticator
-#
-#       ...
-#
+
+        # API V2
+
+        api_checktoken_v2:
+            provider: chain_provider
+            pattern: ^.*/api/checkToken
+            stateless: true
+            guard:
+                authenticators:
+                    - App\Catrobat\Security\ApiTokenAuthenticator
+
+        api_upload_v2:
+            provider: chain_provider
+            pattern: ^.*/api/projects/upload
+            stateless: true
+            guard:
+                authenticators:
+                    - App\Catrobat\Security\ApiTokenAuthenticator
+
+        api_logout_v2:
+            provider: chain_provider
+            pattern: ^.*/api/logout
+            stateless: true
+            guard:
+                authenticators:
+                    - App\Catrobat\Security\ApiTokenAuthenticator
+
+        api_private_user_projects_v2:
+            provider: chain_provider
+            pattern: ^.*/api/projects/user/*
+            stateless: true
+            guard:
+                authenticators:
+                    - App\Catrobat\Security\ApiTokenAuthenticator
+
 
         # API V1
         api_checktoken:
