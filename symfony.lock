@@ -33,6 +33,9 @@
     "bossa/phpspec2-expect": {
         "version": "3.0.0"
     },
+    "catrobat/capi": {
+        "version": "v1.0.0"
+    },
     "clue/stream-filter": {
         "version": "v1.4.0"
     },
@@ -244,6 +247,29 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "jms/metadata": {
+        "version": "1.7.0"
+    },
+    "jms/parser-lib": {
+        "version": "1.0.0"
+    },
+    "jms/serializer": {
+        "version": "1.14.0"
+    },
+    "jms/serializer-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
+        },
+        "files": [
+            "config/packages/dev/jms_serializer.yaml",
+            "config/packages/jms_serializer.yaml",
+            "config/packages/prod/jms_serializer.yaml"
+        ]
+    },
     "knplabs/knp-components": {
         "version": "v1.3.10"
     },
@@ -307,6 +333,9 @@
     "phpcheckstyle/phpcheckstyle": {
         "version": "v0.14.8"
     },
+    "phpcollection/phpcollection": {
+        "version": "0.5.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -315,6 +344,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
+    },
+    "phpoption/phpoption": {
+        "version": "1.7.2"
     },
     "phpseclib/phpseclib": {
         "version": "2.0.14"

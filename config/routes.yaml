@@ -31,3 +31,6 @@ sonata_user_admin_security_logout:
   path: /{flavor}/logout
   defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }
 
+open_api_server:
+  prefix: /api
+  resource: "@OpenAPIServerBundle/Resources/config/routing.yml"
