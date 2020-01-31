@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9495fcaf8ab3d2935aa9fd2a2ae73c58",
+    "content-hash": "1f551fa954643357cecb9f92830a8304",
     "packages": [
         {
             "name": "catrobat/capi",
