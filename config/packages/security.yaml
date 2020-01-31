@@ -19,7 +19,7 @@ security:
 
         api_checktoken_v2:
             provider: chain_provider
-            pattern: ^.*/api/checkToken
+            pattern: ^/api/checkToken
             stateless: true
             guard:
                 authenticators:
@@ -27,7 +27,7 @@ security:
 
         api_upload_v2:
             provider: chain_provider
-            pattern: ^.*/api/projects/upload
+            pattern: ^/api/projects/upload
             stateless: true
             guard:
                 authenticators:
@@ -35,7 +35,7 @@ security:
 
         api_logout_v2:
             provider: chain_provider
-            pattern: ^.*/api/logout
+            pattern: ^/api/logout
             stateless: true
             guard:
                 authenticators:
@@ -43,7 +43,7 @@ security:
 
         api_private_user_projects_v2:
             provider: chain_provider
-            pattern: ^.*/api/projects/user/*
+            pattern: ^/api/projects/user/*
             stateless: true
             guard:
                 authenticators:
@@ -53,21 +53,21 @@ security:
         # API V1
         api_checktoken:
             provider: chain_provider
-            pattern: ^.*/api/checkToken/check.json
+            pattern: ^.*?/api/checkToken/check.json
             stateless: true
             simple_preauth:
                 authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         api_upload:
             provider: chain_provider
-            pattern: ^.*/api/upload/upload.json
+            pattern: ^.*?/api/upload/upload.json
             stateless: true
             simple_preauth:
                 authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
         api_submit:
             provider: chain_provider
-            pattern: ^.*/api/gamejam/submit.json
+            pattern: ^.*?/api/gamejam/submit.json
             stateless: true
             simple_preauth:
                 authenticator: App\Catrobat\Security\ApiKeyAuthenticator
