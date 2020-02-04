@@ -150,7 +150,7 @@ class ExtractedCatrobatFile
     else
     {
       $directory = $this->path . 'images/';
-      $this->createDirectoryIfNotExist("/images");
+      $this->createDirectoryIfNotExist($directory);
       $finder->files()->in($directory);
       foreach ($finder as $file)
       {
@@ -196,7 +196,7 @@ class ExtractedCatrobatFile
     else
     {
       $directory = $this->path . 'sounds/';
-      $this->createDirectoryIfNotExist("/sounds");
+      $this->createDirectoryIfNotExist($directory);
       $finder->files()->in($directory);
       foreach ($finder as $file)
       {
