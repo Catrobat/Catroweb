@@ -82,9 +82,11 @@ class ExtractedCatrobatFile
    */
   public function isDebugBuild()
   {
-    if (!isset($this->program_xml_properties->header->applicationBuildType)) {
+    if (!isset($this->program_xml_properties->header->applicationBuildType))
+    {
       return false; // old program do not have this field, + they should be release programs
     }
+
     return (string)$this->program_xml_properties->header->applicationBuildType === "debug";
   }
 
@@ -122,6 +124,7 @@ class ExtractedCatrobatFile
     {
       return explode(',', (string)$this->program_xml_properties->header->tags);
     }
+
     return [];
   }
 
@@ -135,9 +138,9 @@ class ExtractedCatrobatFile
 
     if ($this->hasScenes())
     {
-      $directory = $this->path . '/*/images/';
-      $this->createDirectoryIfNotExist($directory);
-      $finder->files()->in($directory);
+      $dir_regex = $this->path . '/*/images/';
+      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, "/images");
+      $finder->files()->in($dir_regex);
       foreach ($finder as $file)
       {
         $parts = explode($this->dir_hash . '/', $file->getRealPath());
@@ -147,7 +150,7 @@ class ExtractedCatrobatFile
     else
     {
       $directory = $this->path . 'images/';
-      $this->createDirectoryIfNotExist($directory);
+      $this->createDirectoryIfNotExist("/images");
       $finder->files()->in($directory);
       foreach ($finder as $file)
       {
@@ -166,6 +169,7 @@ class ExtractedCatrobatFile
   public function isFileMentionedInXml($filename)
   {
     $xml = file_get_contents($this->path . 'code.xml');
+
     return strpos($xml, $filename) !== false;
   }
 
@@ -180,9 +184,9 @@ class ExtractedCatrobatFile
 
     if ($this->hasScenes())
     {
-      $directory = $this->path . '/*/sounds/';
-      $this->createDirectoryIfNotExist($directory);
-      $finder->files()->in($directory);
+      $dir_regex = $this->path . '/*/sounds/';
+      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, "/sounds");
+      $finder->files()->in($dir_regex);
       foreach ($finder as $file)
       {
         $parts = explode($this->dir_hash . '/', $file->getRealPath());
@@ -192,7 +196,7 @@ class ExtractedCatrobatFile
     else
     {
       $directory = $this->path . 'sounds/';
-      $this->createDirectoryIfNotExist($directory);
+      $this->createDirectoryIfNotExist("/sounds");
       $finder->files()->in($directory);
       foreach ($finder as $file)
       {
@@ -334,9 +338,9 @@ class ExtractedCatrobatFile
   /**
    * based on: http://stackoverflow.com/a/27295688
    *
-   * @param GuidType     $program_id
-   * @param boolean $is_initial_version
-   * @param bool    $migration_mode
+   * @param GuidType $program_id
+   * @param boolean  $is_initial_version
+   * @param bool     $migration_mode
    *
    * @return RemixData[]
    */
@@ -500,12 +504,33 @@ class ExtractedCatrobatFile
   }
 
   /**
+   * @param $base_path
+   * @param $dir_regex
+   * @param $dir_name
+   */
+  private function createDirectoryInSceneIfNotExist($base_path, $dir_regex, $dir_name)
+  {
+    preg_match("@" . $dir_regex . "@", $dir_regex, $scene_names);
+
+    foreach ($scene_names as $scene_name)
+    {
+      $directory = $base_path + $scene_name + $dir_name;
+      if (!file_exists($directory))
+      {
+        mkdir($directory, 0777, true);
+      }
+    }
+  }
+
+  /**
    * @param $directory
    */
   private function createDirectoryIfNotExist($directory)
   {
-    if (!file_exists($directory)) {
+    if (!file_exists($directory))
+    {
       mkdir($directory, 0777, true);
     }
   }
+
 }

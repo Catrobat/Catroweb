@@ -32,7 +32,11 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false
 }
 
 (new Dotenv(true))->load('../.env.test');
-(new Dotenv(true))->load('../.env.test.local');
+if (file_exists('../.env.test.local'))
+{
+  (new Dotenv(true))->load('../.env.test.local');
+}
+
 $kernel = new Kernel($_SERVER['APP_ENV'], false);
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
