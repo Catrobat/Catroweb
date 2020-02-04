@@ -4,6 +4,7 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\RemixGraph\RemixGraphLayout;
+use App\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,7 +49,7 @@ class ProgramImportCommand extends Command
    * @param RemixManipulationProgramManager $program_manager
    */
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
-                                 RemixManipulationProgramManager $program_manager)
+                              RemixManipulationProgramManager $program_manager)
   {
     parent::__construct();
     $this->file_system = $filesystem;
@@ -111,6 +112,7 @@ class ProgramImportCommand extends Command
       try
       {
         $output->writeln('Importing file ' . $file);
+        /** @var User $user */
         $add_program_request = new AddProgramRequest($user, new File($file));
         $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
         $output->writeln('Added Program <' . $program->getName() . '>');
