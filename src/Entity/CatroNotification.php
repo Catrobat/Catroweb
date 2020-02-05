@@ -38,10 +38,15 @@ class CatroNotification
   private $id;
 
   /**
-   * @var User
+   * @var User The user to which this CatroNotification will be shown. If the user gets deleted, this CatroNotification
+   *      gets deleted as well.
    *
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User")
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="notifications")
+   * @ORM\JoinColumn(
+   *   name="user",
+   *   referencedColumnName="id",
+   *   nullable=false
+   * )
    */
   private $user;
 
@@ -87,6 +92,18 @@ class CatroNotification
   public function getId()
   {
     return $this->id;
+  }
+
+  /**
+   * Set id
+   *
+   *
+   * @param integer $id
+   */
+
+  public function setId($id)
+  {
+    $this->id = $id;
   }
 
   /**
@@ -162,9 +179,9 @@ class CatroNotification
   }
 
   /**
-   * Set user
+   * Sets he user to which this CatroNotification will be shown.
    *
-   * @param User $user
+   * @param User $user The user to which this CatroNotification will be shown.
    *
    * @return CatroNotification
    */
@@ -176,7 +193,7 @@ class CatroNotification
   }
 
   /**
-   * Get user
+   * Returns the user to which this CatroNotification will be shown.
    *
    * @return User
    */

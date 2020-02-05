@@ -11,8 +11,18 @@ class NewProgramNotification extends CatroNotification
 {
 
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+   * @var Program The new Program which triggered this NewProgramNotification. If this Program gets deleted,
+   *              this NewProgramNotification gets deleted as well.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\Program",
+   *   inversedBy="new_program_notification_mentions"
+   * )
+   * @ORM\JoinColumn(
+   *   name="program_id",
+   *   referencedColumnName="id",
+   *   nullable=true
+   *  )
    */
   private $program;
 
@@ -22,7 +32,7 @@ class NewProgramNotification extends CatroNotification
   private $twig_template = "Notifications/NotificationTypes/new_program_notification.html.twig";
 
   /**
-   * CommentNotification constructor.
+   * NewProgramNotification constructor.
    *
    * @param User $user
    * @param      $program
@@ -35,7 +45,9 @@ class NewProgramNotification extends CatroNotification
   }
 
   /**
-   * @return Program
+   * Returns the new Program which triggered this NewProgramNotification.
+   *
+   * @return Program The new Program which triggered this NewProgramNotification.
    */
   public function getProgram()
   {
@@ -43,7 +55,9 @@ class NewProgramNotification extends CatroNotification
   }
 
   /**
-   * @param $program
+   * Sets the new Program which triggered this NewProgramNotification.
+   *
+   * @param Program $program The new Program which triggered this NewProgramNotification.
    */
   public function setProgram($program)
   {

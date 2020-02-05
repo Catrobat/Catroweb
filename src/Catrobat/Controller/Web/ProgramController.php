@@ -727,7 +727,7 @@ class ProgramController extends AbstractController
        */
       $em = $this->getDoctrine()->getManager();
       $user = $em->getRepository(User::class)->findOneBy([
-        'id' => $comment->getUser(),
+        'id' => $comment->getUser()->getId()
       ]);
       if ($user !== null)
       {

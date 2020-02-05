@@ -10,23 +10,47 @@ use Doctrine\ORM\Mapping as ORM;
 class RemixNotification extends CatroNotification
 {
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User")
-   * @ORM\JoinColumn(name="remix_from", referencedColumnName="id", nullable=true)
+   * @var User The owner of the parent Program.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\User"
+   * )
+   * @ORM\JoinColumn(
+   *   name="remix_root",
+   *   referencedColumnName="id",
+   *   nullable=true
+   *  )
    */
   private $remix_from;
 
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
-   * @var Program
+   * @var Program The parent Program.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\Program",
+   *   inversedBy="remix_notification_mentions_as_parent"
+   * )
+   * @ORM\JoinColumn(
+   *   name="program_id",
+   *   referencedColumnName="id",
+   *   nullable=true
+   * )
    */
   private $program;
 
 
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="remix_program_id", referencedColumnName="id")
-   * @var Program
+   * @var Program The newly remixed child Program.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\Program",
+   *   inversedBy="remix_notification_mentions_as_child"
+   * )
+   * @ORM\JoinColumn(
+   *   name="remix_program_id",
+   *   referencedColumnName="id",
+   *   nullable=true
+   * )
    */
   private $remix_program;
 
@@ -38,10 +62,10 @@ class RemixNotification extends CatroNotification
   /**
    * RemixNotification constructor.
    *
-   * @param User $user
-   * @param      $remix_from
-   * @param      $program
-   * @param      $remix_program
+   * @param User $user The User to which this RemixNotification will be shown.
+   * @param      $remix_from The owner of the parent Program.
+   * @param      $program The parent Program.
+   * @param      $remix_program The newly remixed child Program.
    */
   public function __construct(User $user, $remix_from, $program, $remix_program)
   {
@@ -52,7 +76,9 @@ class RemixNotification extends CatroNotification
   }
 
   /**
-   * @return mixed
+   * Returns the owner of the parent Program.
+   *
+   * @return User The owner of the parent Program.
    */
   public function getRemixFrom()
   {
@@ -60,7 +86,9 @@ class RemixNotification extends CatroNotification
   }
 
   /**
-   * @param $remix_from
+   * Sets the owner of the parent Program.
+   *
+   * @param $remix_from The owner of the parent Program.
    */
   public function setRemixFrom($remix_from)
   {
@@ -78,6 +106,8 @@ class RemixNotification extends CatroNotification
   }
 
   /**
+   * Returns the parent Program.
+   *
    * @return Program
    */
   public function getProgram()
@@ -86,13 +116,17 @@ class RemixNotification extends CatroNotification
   }
 
   /**
-   * @param Program $program
+   * Sets the parent Program.
+   *
+   * @param Program $program The parent Program.
    */
   public function setProgram($program)
   {
     $this->program = $program;
   }
   /**
+   * Returns the child Program.
+   *
    * @return Program
    */
   public function getRemixProgram()
@@ -101,7 +135,9 @@ class RemixNotification extends CatroNotification
   }
 
   /**
-   * @param Program $remix_program
+   * Sets the child Program.
+   *
+   * @param Program $remix_program The child Program.
    */
   public function setRemixProgram($remix_program)
   {

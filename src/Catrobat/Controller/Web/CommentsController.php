@@ -76,16 +76,9 @@ class CommentsController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if ($user->getId() !== $comment->getUser() && !$this->isGranted("ROLE_ADMIN"))
+    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted("ROLE_ADMIN"))
     {
       return new Response(StatusCode::NO_ADMIN_RIGHTS);
-    }
-
-    // first remove notification if there is one!
-    $notification = $em->getRepository(CommentNotification::class)->find($_GET['CommentId']);
-    if ($notification)
-    {
-      $em->remove($notification);
     }
 
     if (!$comment)
@@ -148,6 +141,12 @@ class CommentsController extends AbstractController
     {
       $notification = new CommentNotification($program->getUser(), $temp_comment);
       $notification_service->addNotification($notification);
+
+      // Telling the new comment the CommentNotification it triggered. This is necessary to ensure the
+      // correct remove-cascade
+      $temp_comment->setNotification($notification);
+      $em->persist($temp_comment);
+      $em->flush();
     }
 
     return new Response(StatusCode::OK);
