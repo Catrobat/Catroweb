@@ -57,6 +57,29 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait 200 milliseconds
     Then I should be on "/app/login"
 
+
+  Scenario: If a logged out user enters a comment into the textbox, it should be remembered throughout the login process and page reloads
+    Given I am on "/app/project/1"
+    And I click "#show-add-comment-button"
+    And I wait 250 milliseconds
+    And I write "comment to remember" in textbox
+    And I wait 250 milliseconds
+    When I click "#comment-post-button"
+    And I wait 200 milliseconds
+    Then I should be on "/app/login"
+    And I fill in "username" with "Superman"
+    And I fill in "password" with "123456"
+    Then I press "Login"
+    Then I should be on "/app/project/1#login"
+    And I am on "/app/project/1"
+    And the element "#show-add-comment-button" should not be visible
+    And the element "#hide-add-comment-button" should be visible
+    And the element "#user-comment-wrapper" should be visible
+    And I click "#comment-post-button"
+    And I wait for a second
+    Then I should see "comment to remember"
+    And the element ".single-comment" should be visible
+
   Scenario: I should be able to write a comment when I am logged in
     Given I log in as "Superman" with the password "123456"
     And I am on "/app/project/3"
