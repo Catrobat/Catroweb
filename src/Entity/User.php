@@ -54,6 +54,17 @@ class User extends BaseUser implements LdapUserInterface
   protected $programs;
 
   /**
+   * @ORM\OneToMany(
+   *     targetEntity="CatroNotification",
+   *     mappedBy="user",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   * @var Collection|CatroNotification[]
+   */
+  protected $notifications;
+
+  /**
    * @ORM\ManyToMany(targetEntity="\App\Entity\User", mappedBy="following")
    */
   protected $followers;
@@ -383,6 +394,22 @@ class User extends BaseUser implements LdapUserInterface
   public function setLikes($likes)
   {
     $this->likes = $likes;
+  }
+
+  /**
+   * @return CatroNotification[]|Collection
+   */
+  public function getNotifications()
+  {
+    return ($this->notifications != null) ? $this->notifications : new ArrayCollection();
+  }
+
+  /**
+   * @param CatroNotification[]|Collection $notifications
+   */
+  public function setNotifications($notifications)
+  {
+    $this->notifications = $notifications;
   }
 
   /**

@@ -39,7 +39,7 @@ class CatroNotification
   /**
    * @var User
    *
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User")
+   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="notifications")
    * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
    */
   private $user;
