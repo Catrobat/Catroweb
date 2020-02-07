@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -18,6 +19,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class ResetCommand extends Command
 {
   const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 20;
+  const DOWNLOAD_MEDIA_DEFAULT_AMOUNT = 20;
 
   /**
    * @var ParameterBagInterface $parameter_bag
@@ -48,7 +50,10 @@ class ResetCommand extends Command
         self::DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT)
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
-        ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT);
+        ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT)
+      ->addOption('more-media', null, InputOption::VALUE_REQUIRED,
+        'Downloads the given amount of media files',
+        self::DOWNLOAD_MEDIA_DEFAULT_AMOUNT);
   }
 
   /**
@@ -56,7 +61,7 @@ class ResetCommand extends Command
    * @param OutputInterface $output
    *
    * @return int|void|null
-   * @throws \Exception
+   * @throws Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -113,24 +118,33 @@ class ResetCommand extends Command
     CommandHelper::executeShellCommand('php bin/console fos:user:create user user@localhost.at catroweb', [],
       'Create default user', $output);
 
-    $temp_dir = sys_get_temp_dir() . '/catrobat.program.import/';
+    $temp_project_import_dir = sys_get_temp_dir() . '/catrobat.program.import/';
+    $temp_media_import_dir = sys_get_temp_dir() . '/catrobat.media.import/';
 
     $filesystem = new Filesystem();
-    $filesystem->remove($temp_dir);
-    $filesystem->mkdir($temp_dir);
+    $filesystem->remove($temp_project_import_dir);
+    $filesystem->mkdir($temp_project_import_dir);
+    $filesystem->remove($temp_media_import_dir);
+    $filesystem->mkdir($temp_media_import_dir);
 
-    $this->downloadPrograms($temp_dir, intval($input->getOption('more')), $output);
+    $this->downloadPrograms($temp_project_import_dir, intval($input->getOption('more')), $output);
+    $this->downloadMediaLibraries($temp_media_import_dir, intval($input->getOption('more-media')), $output);
+
+    CommandHelper::executeShellCommand(
+      "php bin/console catrobat:media:import $temp_media_import_dir",
+      ['timeout' => 900], 'Importing Media', $output);
+    $filesystem->remove($temp_media_import_dir);
 
     $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
     CommandHelper::executeShellCommand(
-      "php bin/console catrobat:import $temp_dir catroweb $remix_layout_option",
+      "php bin/console catrobat:import $temp_project_import_dir catroweb $remix_layout_option",
       ['timeout' => 900], 'Importing Projects', $output);
     CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), [
-      'directory'      => $temp_dir,
+      'directory'      => $temp_project_import_dir,
       'user'           => 'catroweb',
       '--remix-layout' => intval($input->getOption('remix-layout')),
     ], $output);
-    $filesystem->remove($temp_dir);
+    $filesystem->remove($temp_project_import_dir);
 
     CommandHelper::executeShellCommand('chmod o+w -R public/resources', [],
       'Setting resources permissions', $output);
@@ -172,13 +186,57 @@ class ResetCommand extends Command
         {
           file_put_contents($name, file_get_contents($url));
           $already_downloaded++;
-        } catch (\Exception $e)
+        } catch (Exception $e)
         {
           $output->writeln("File <" . $url . "> returned error 500, continuing...");
           continue;
         }
       }
     }
+  }
 
+  /**
+   * @param                 $dir
+   * @param OutputInterface $output
+   */
+  private function downloadMediaLibraries($dir, $max_number, OutputInterface $output)
+  {
+    $output->writeln('Downloading Media Files...');
+
+    $this->downloadMediaFiles('https://share.catrob.at/app/api/media/package/Sounds/json',
+      $dir, $max_number / 2, $output);
+
+    $this->downloadMediaFiles('https://share.catrob.at/app/api/media/package/Looks/json',
+      $dir, $max_number / 2, $output);
+  }
+
+
+  private function downloadMediaFiles($path, $dir, $max_number, OutputInterface $output)
+  {
+    $server_json = json_decode(file_get_contents($path), true);
+    $number = 0;
+    foreach ($server_json as $media)
+    {
+      if ($number >= $max_number)
+      {
+        break;
+      }
+      $this->downloadMedia($dir, $media, $output);
+      $number++;
+    }
+  }
+
+  private function downloadMedia($dir, $media, OutputInterface $output)
+  {
+    $url = 'https://share.catrob.at' . $media['download_url'];
+    $name = $dir . $media['name'] . '.media';
+    $output->writeln('Downloading ' . $name);
+    try
+    {
+      file_put_contents($name, file_get_contents($url));
+    } catch (Exception $e)
+    {
+      $output->writeln("File <" . $url . "> returned error 500, continuing...");
+    }
   }
 }
