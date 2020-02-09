@@ -106,6 +106,7 @@ programs:
   rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
   rudeWordsInCredits: You can't use rude words in your credits!
+  alreadyStole: You can't steal your own program!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -603,6 +604,7 @@ login:
 apk:
   download: Download as app
   prepare: 'Prepare app'
+  steal: 'Steal app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 

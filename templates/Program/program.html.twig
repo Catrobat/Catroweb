@@ -259,6 +259,13 @@
           </button>
         </div>
 
+        <div id="apk-steal" class="btn-container col-12 col-xl-6">
+          <button class="btn btn-primary">
+            <i class="program-big-button-icon mr-3 fab fa-android"></i>
+            <span>{{ "apk.steal"|trans({}, "catroweb") }}</span>
+          </button>
+        </div>
+
         <div id="apk-pending" class="btn-container col-12 col-xl-6 d-none">
           <button class="btn btn-primary">
             <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw"
@@ -658,6 +665,42 @@
 
       $(document).on('click', '#remix-graph-button', function () {
         $('#remix-graph-modal-link').click()
+      })
+
+      $(document).on('click', '#apk-steal', function (event) {
+        var username = "{{ user_name }}"
+        var url = "{{ path('steal_program', { 'id' : program.id }) }}"
+        if(username === '')
+        {
+          window.location.href =  "{{ path("login") }}"
+          return false
+        }
+        $.ajax({
+          url    : url,
+          type   : 'put',
+          success: function (data) {
+            console.log(data)
+            if (data.statusCode !== {{ constant('App\\Catrobat\\StatusCode::OK') }})
+            {
+              if(data.statusCode === {{ constant('App\\Catrobat\\StatusCode::ALREADY_STOLE') }})
+              {
+                alert(data.message)
+              }
+              else
+              {
+                alert('something went wrong')
+                return
+              }
+            }
+            else {
+              location.reload()
+            }
+          },
+          error  : function () {
+            alert('something went terribly wrong')
+          }
+        })
+
       })
 
       $(document).on('click', 'a.program-like-button', function (event) {

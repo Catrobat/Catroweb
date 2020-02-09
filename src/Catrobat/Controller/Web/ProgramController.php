@@ -847,4 +847,51 @@ class ProgramController extends AbstractController
       'image_base64' => null,
     ]);
   }
+
+  /**
+   * @Route("/project/steal/{id}", name="steal_program", methods={"PUT"})
+   *
+   * @param ProgramManager $program_manager
+   * @param $id
+   * @param TranslatorInterface $translator
+   *
+   * @return JsonResponse|RedirectResponse
+   * @return Response
+   * @throws Exception
+   *
+   */
+  public function stealProgram(ProgramManager $program_manager, $id, TranslatorInterface $translator)
+  {
+    /**
+     * @var $user User
+     * @var $program Program
+     */
+    $user = $this->getUser();
+    if(!$user)
+    {
+        return $this->redirectToRoute('login');
+    }
+
+    $program = $program_manager->find($id);
+    if (!$program)
+    {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+    if($program->getUser() == $user)
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::ALREADY_STOLE,
+                                   'message'    => $translator
+                                     ->trans("programs.alreadyStole", [], "catroweb")]);
+    }
+
+    $program->setUser($user);
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($program);
+    $em->flush();
+
+
+    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+
+  }
 }
