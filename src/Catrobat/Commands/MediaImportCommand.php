@@ -62,8 +62,10 @@ class MediaImportCommand extends Command
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-    $server_json = json_decode(file_get_contents('https://share.catrob.at/app/api/media/category/json'), true);
+    $directory = $input->getArgument('directory');
+    $this->downloadMediaLibraries($directory, intval($input->getOption('more-media')), $output);
 
+    $server_json = json_decode(file_get_contents('https://share.catrob.at/app/api/media/category/json'), true);
     foreach ($server_json['data'] as $category)
     {
       try
@@ -79,30 +81,29 @@ class MediaImportCommand extends Command
     }
     $add_media_package = new AddMediaPackageRequest('1', 'Looks', 'looks');
     $this->media_manager->addMediaPackage($add_media_package);
-
-    $server_json = json_decode(file_get_contents('https://share.catrob.at/app/api/media/package/Looks/json'), true);
-
-    foreach ($server_json as $media)
-    {
-      try
-      {
-        $category = $this->media_manager->findCategory($media);
-        $output->writeln($category->getName());
-        $add_media_request = new AddMediaFileRequest($media['name'], $media['author'], $media['id'], $category, $media['extension'], $media['download_url'], $media['flavor']);
-        $media = $this->media_manager->addMedia($add_media_request);
-        $output->writeln('Added media file <' . $media->getName() . '>');
-      } catch (InvalidCatrobatFileException $e)
-      {
-        $output->writeln('FAILED to add media!');
-        $output->writeln($e->getMessage() . ' (' . $e->getCode() . ')');
-      }
-    }
-
     $add_media_request = new AddMediaPackageRequest('1', 'Sounds', 'sounds');
-    $this->media_manager->addMediaPackage($add_media_request);
+    $this->media_manager->addMediaPackage($add_media_request);   
+  }
+/**
+   * @param                 $dir
+   * @param OutputInterface $output
+   */
+  private function downloadMediaLibraries($dir, $max_number, OutputInterface $output)
+  {
+    $output->writeln('Downloading Media Files...');
 
-    $server_json = json_decode(file_get_contents('https://share.catrob.at/app/api/media/package/Sounds/json'), true);
+    $this->downloadMediaFiles('https://share.catrob.at/app/api/media/package/Sounds/json',
+      $dir, $max_number / 2, $output);
 
+    $this->downloadMediaFiles('https://share.catrob.at/app/api/media/package/Looks/json',
+      $dir, $max_number / 2, $output);
+  }
+
+
+  private function downloadMediaFiles($path, $dir, $max_number, OutputInterface $output)
+  {
+    $server_json = json_decode(file_get_contents($path), true);
+    $number = 0;
     foreach ($server_json as $media)
     {
       try
@@ -117,6 +118,26 @@ class MediaImportCommand extends Command
         $output->writeln('FAILED to add media!');
         $output->writeln($e->getMessage() . ' (' . $e->getCode() . ')');
       }
+      if ($number >= $max_number)
+      {
+        break;
+      }
+      $this->downloadMedia($dir, $media, $output);
+      $number++;
+    }
+  }
+
+  private function downloadMedia($dir, $media, OutputInterface $output)
+  {
+    $url = 'https://share.catrob.at' . $media['download_url'];
+    $name = $dir . $media['name'] . '.media';
+    $output->writeln('Downloading ' . $name);
+    try
+    {
+      file_put_contents($name, file_get_contents($url));
+    } catch (Exception $e)
+    {
+      $output->writeln("File <" . $url . "> returned error 500, continuing...");
     }
   }
 }

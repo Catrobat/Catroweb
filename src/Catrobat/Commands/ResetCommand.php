@@ -128,13 +128,11 @@ class ResetCommand extends Command
     $filesystem->mkdir($temp_media_import_dir);
 
     $this->downloadPrograms($temp_project_import_dir, intval($input->getOption('more')), $output);
-    $this->downloadMediaLibraries($temp_media_import_dir, intval($input->getOption('more-media')), $output);
 
     CommandHelper::executeShellCommand(
       "php bin/console catrobat:media:import $temp_media_import_dir",
       ['timeout' => 900], 'Importing Media', $output);
     $filesystem->remove($temp_media_import_dir);
-
     $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
     CommandHelper::executeShellCommand(
       "php bin/console catrobat:import $temp_project_import_dir catroweb $remix_layout_option",
@@ -192,51 +190,6 @@ class ResetCommand extends Command
           continue;
         }
       }
-    }
-  }
-
-  /**
-   * @param                 $dir
-   * @param OutputInterface $output
-   */
-  private function downloadMediaLibraries($dir, $max_number, OutputInterface $output)
-  {
-    $output->writeln('Downloading Media Files...');
-
-    $this->downloadMediaFiles('https://share.catrob.at/app/api/media/package/Sounds/json',
-      $dir, $max_number / 2, $output);
-
-    $this->downloadMediaFiles('https://share.catrob.at/app/api/media/package/Looks/json',
-      $dir, $max_number / 2, $output);
-  }
-
-
-  private function downloadMediaFiles($path, $dir, $max_number, OutputInterface $output)
-  {
-    $server_json = json_decode(file_get_contents($path), true);
-    $number = 0;
-    foreach ($server_json as $media)
-    {
-      if ($number >= $max_number)
-      {
-        break;
-      }
-      $this->downloadMedia($dir, $media, $output);
-      $number++;
-    }
-  }
-
-  private function downloadMedia($dir, $media, OutputInterface $output)
-  {
-    $url = 'https://share.catrob.at' . $media['download_url'];
-    $name = $dir . $media['name'] . '.media';
-    $output->writeln('Downloading ' . $name);
-    try
-    {
-      file_put_contents($name, file_get_contents($url));
-    } catch (Exception $e)
-    {
-      $output->writeln("File <" . $url . "> returned error 500, continuing...");
     }
   }
 }
