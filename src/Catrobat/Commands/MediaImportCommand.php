@@ -51,7 +51,8 @@ class MediaImportCommand extends Command
   {
     $this->setName('catrobat:media:import')
       ->setDescription('Import media files from a given directory to the application')
-      ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat media files for import');
+      ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat media files for import')
+      ->addArgument('more-media', InputArgument::OPTIONAL, 'Option of adding more media files');
   }
 
   /**
@@ -63,7 +64,7 @@ class MediaImportCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $directory = $input->getArgument('directory');
-    $this->downloadMediaLibraries($directory, intval($input->getOption('more-media')), $output);
+    $this->downloadMediaLibraries($directory, 20, $output);
 
     $server_json = json_decode(file_get_contents('https://share.catrob.at/app/api/media/category/json'), true);
     foreach ($server_json['data'] as $category)
