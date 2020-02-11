@@ -29,6 +29,10 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
     askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
   })
   
+  $(document).on('change', '#comment-message', function () {
+    sessionStorage.setItem('temp_program_comment', $('#comment-message').val())
+  })
+  
   $(document).on('click', '.add-comment-button', function () {
     let commentWrapper = $('#user-comment-wrapper')
     let showCommentWrapperButton = $('#show-add-comment-button')
@@ -55,6 +59,17 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
     showLess(showStep)
   })
   
+  if ((sessionStorage.getItem('temp_program_comment') != null) && (sessionStorage.getItem('temp_program_comment') != ''))
+  {
+    document.getElementById("comment-message").value = sessionStorage.getItem('temp_program_comment');
+    let commentWrapper = $('#user-comment-wrapper')
+    let showCommentWrapperButton = $('#show-add-comment-button')
+    let hideCommentWrapperButton = $('#hide-add-comment-button')
+    commentWrapper.slideDown()
+    showCommentWrapperButton.hide()
+    hideCommentWrapperButton.show()
+  }
+  
   function postComment ()
   {
     let msg = $('#comment-message').val()
@@ -75,6 +90,7 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         {
           $('#comments-wrapper').load(' #comments-wrapper')
           $('#comment-message').val('')
+          sessionStorage.setItem('temp_program_comment', "");
           location.reload()
         }
       },
