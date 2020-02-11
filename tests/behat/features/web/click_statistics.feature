@@ -132,11 +132,11 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 22 | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
       | 23 | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
 
-    And there are likes:
-      | username  | program_id | type | created at       |
-      | Catrobat  | 21         | 1    | 01.01.2017 12:00 |
-      | Catrobat  | 22         | 2    | 01.01.2017 12:00 |
-      | OtherUser | 21         | 4    | 01.01.2017 12:00 |
+    And there are project reactions:
+      | user      | project | type | created at       |
+      | Catrobat  | 21      | 1    | 01.01.2017 12:00 |
+      | Catrobat  | 22      | 2    | 01.01.2017 12:00 |
+      | OtherUser | 21      | 4    | 01.01.2017 12:00 |
     Given I am on "/app"
     Then I wait 100 milliseconds
     Then I should see a recommended homepage program having ID "21" and name "Minions"

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\FeaturedProgram;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 
 /**
@@ -119,20 +120,22 @@ class FeaturedRepository extends ServiceEntityRepository
    * @param $program
    *
    * @return bool
-   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function isFeatured($program)
   {
     $qb = $this->createQueryBuilder('e');
     $qb
+      ->select('count(e.id)')
       ->where($qb->expr()->eq('e.program', ':program'))
-      ->setParameter('program', $program);;
-    $result = $qb->getQuery()->getOneOrNullResult();
-    if ($result == null)
+      ->setParameter('program', $program);
+    try
+    {
+      $count = $qb->getQuery()->getSingleScalarResult();
+
+      return $count > 0;
+    } catch (NonUniqueResultException $exception)
     {
       return false;
     }
-
-    return true;
   }
 }

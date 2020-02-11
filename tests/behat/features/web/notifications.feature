@@ -1,5 +1,5 @@
 @homepage
-Feature: User gets notifications for new followers, likes, comments and other types like anniversary
+Feature: User gets notifications for new followers, reactions, comments and other types like anniversary
 
   Background:
     Given there are users:
@@ -26,10 +26,10 @@ Feature: User gets notifications for new followers, likes, comments and other ty
     When I click ".collapsible"
     And I wait 50 milliseconds
     Then the element ".fa-caret-down" should be visible
-    And I should see "All Notifications"
-    And I should see "Likes"
-    And I should see "Followers"
-    And I should see "Comments"
+    And the element "#notifications-dropdown-content #btn-notifications" should be visible
+    And the element "#notifications-dropdown-content #btn-followers" should be visible
+    And the element "#notifications-dropdown-content #btn-likes" should be visible
+    And the element "#notifications-dropdown-content #btn-comments" should be visible
 
   Scenario: User should not see all notification subsections on the homepage
     Given I log in as "Catrobat" with the password "123456"
@@ -174,7 +174,7 @@ Feature: User gets notifications for new followers, likes, comments and other ty
       And I log in as "User" with the password "123456"
       And I am on "/app/notifications/likes"
       Then I should see "You have 10 new Notifications!"
-      And I should see "New like"
+      And I should see "New reaction"
       Given I am on "/app/notifications/comments"
       Then I should see "You have 20 new Notifications!"
       And I should see "New comment"

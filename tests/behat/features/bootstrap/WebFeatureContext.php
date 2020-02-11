@@ -37,6 +37,7 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\TransactionRequiredException;
 use Doctrine\ORM\Tools\SchemaTool;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -74,6 +75,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   const MEDIAPACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
   const FIXTUREDIR = './tests/testdata/DataFixtures/';
   const ALREADY_IN_DB_USER = 'AlreadyinDB';
+  const DEFAULT_PASSWORD = '123456';
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -91,7 +93,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
     $this->use_real_oauth_javascript_code = false;
     $this->setOauthServiceParameter('0');
-    setlocale (LC_ALL, 'en');
+    setlocale(LC_ALL, 'en');
     $this->symfony_support = new SymfonySupport(self::FIXTUREDIR);
   }
 
@@ -121,7 +123,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $metaData = $em->getMetadataFactory()->getAllMetadata();
     $new_metadata_hash = md5(json_encode($metaData));
-    if ($this->old_metadata_hash === $new_metadata_hash) {
+    if ($this->old_metadata_hash === $new_metadata_hash)
+    {
       return;
     };
     $this->old_metadata_hash = $new_metadata_hash;
@@ -662,45 +665,84 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^there are users:$/
+   * @Given /^there are (\d+) additional users$/
+   * @Given /^there are (\d+) users$/
+   * @param string $user_count
+   *
+   * @throws ORMException
+   * @throws OptimisticLockException
+   */
+  public function thereAreManyUsers($user_count)
+  {
+    $list = ['name'];
+    $base = pow(10, strlen(strval(intval($user_count) - 1)));
+    for ($i = 0; $i < $user_count; $i++)
+    {
+      $list[] = 'User' . ($base + $i);
+    }
+    $table = TableNode::fromList($list);
+    $this->thereAreUsers($table);
+  }
+
+  /**
+   * @Given /^there are users(?: with password "([^"]+)")?:$/
+   * @param string    $default_password
    * @param TableNode $table
    *
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function thereAreUsers(TableNode $table)
+  public function thereAreUsers(TableNode $table, $default_password = null)
   {
-    /**
-     * @var $user_manager UserManager
-     * @var $user         User
-     * @var $em           EntityManager
-     */
-    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
-    $users = $table->getHash();
-    $user = null;
-    $count = count($users);
-    for ($i = 0; $i < $count; ++$i)
+    if ($default_password == null || empty($default_password))
     {
-      $user = $user_manager->createUser();
-      $user->setUsername($users[$i]['name']);
-      $user->setEmail($users[$i]['email']);
-      $user->setAdditionalEmail('');
-      $user->setPlainPassword($users[$i]['password']);
-      $user->setEnabled(true);
-      if ($users[$i]['token'])
-      {
-        $user->setUploadToken($users[$i]['token']);
-      }
-      $user->setCountry('at');
-      $user_manager->updateUser($user, true);
+      $default_password = self::DEFAULT_PASSWORD;
+    }
 
-      if (array_key_exists('id', $users[$i]))
+    /** @var UserManager $user_manager */
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
+    foreach ($table->getHash() as $data)
+    {
+      /** @var User $user */
+      $user = $user_manager->createUser();
+      $user->setUsername($data['name']);
+      $user->setAdditionalEmail('');
+      $user->setEnabled(true);
+      $user->setCountry('at');
+
+      if (array_key_exists('email', $data) && !empty($data['email']))
       {
-        $user->setId($users[$i]['id']);
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $em->flush();
+        $user->setEmail($data['email']);
+      }
+      else
+      {
+        $user->setEmail($data['name'] . '@tests.catrob.at');
+      }
+
+      if (array_key_exists('password', $data) && !empty($data['password']))
+      {
+        $user->setPlainPassword($data['password']);
+      }
+      else
+      {
+        $user->setPlainPassword($default_password);
+      }
+
+      if (array_key_exists('token', $data) && !empty($data['token']))
+      {
+        $user->setUploadToken($data['token']);
+      }
+
+      $user_manager->updateUser($user, false);
+      if (array_key_exists('id', $data))
+      {
+        $user->setId($data['id']);
       }
     }
+
+    /** @var EntityManager $em */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $em->flush();
   }
 
   /**
@@ -799,12 +841,13 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   /**
    * @Given /^there are programs:$/
+   * @Given /^there are projects:$/
    *
    * @param TableNode $table
    *
    * @throws Exception
    */
-  public function thereArePrograms(TableNode $table)
+  public function thereAreProjects(TableNode $table)
   {
     /**
      * @var $em             EntityManager
@@ -934,30 +977,63 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^there are likes:$/
+   * @Given /^there are project reactions:$/
    * @param TableNode $table
    *
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws TransactionRequiredException
    * @throws Exception
    */
-  public function thereAreLikes(TableNode $table)
+  public function thereAreProjectReactions(TableNode $table)
   {
-    /**
-     * @var $user    User
-     * @var $program Program
-     * @var $em      EntityManager
-     */
+    /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $likes = $table->getHash();
 
-    foreach ($likes as $like)
+    foreach ($table->getHash() as $data)
     {
-      $user = $this->kernel->getContainer()->get(UserManager::class)->findOneBy(['username' => $like['username']]);
-      $program = $this->kernel->getContainer()->get(App\Repository\ProgramRepository::class)->find($like['program_id']);
+      /** @var Program $project */
+      $project = $em->find('\App\Entity\Program', $data['project']);
+      if ($project === null)
+      {
+        throw new Exception('Project with id ' . $data['project'] . ' does not exist.');
+      }
 
-      $program_like = new ProgramLike($program, $user, $like['type']);
-      $program_like->setCreatedAt(new DateTime($like['created at'], new DateTimeZone('UTC')));
+      /** @var User $user */
+      $user = $em->getRepository('\App\Entity\User')->findOneBy([
+        'username' => $data['user'],
+      ]);
+      if ($user === null)
+      {
+        throw new Exception('User with username ' . $data['user'] . ' does not exist.');
+      }
 
-      $em->persist($program_like);
+      $type = $data['type'];
+      if (ctype_digit($type))
+      {
+        $type = intval($type);
+      }
+      else
+      {
+        $type = array_search($type, ProgramLike::$TYPE_NAMES);
+        if ($type === false)
+        {
+          throw new Exception('Unknown type "' . $data['type'] . '" given.');
+        }
+      }
+      if (!ProgramLike::isValidType($type))
+      {
+        throw new Exception('Unknown type "' . $data['type'] . '" given.');
+      }
+
+      $like = new ProgramLike($project, $user, $type);
+
+      if (array_key_exists('created at', $data) && !empty(trim($data['created at'])))
+      {
+        $like->setCreatedAt(new DateTime($data['created at'], new DateTimeZone('UTC')));
+      }
+
+      $em->persist($like);
     }
     $em->flush();
   }
@@ -1130,7 +1206,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^I should be logged ([^"]*)?$/
+   * @Then /^I should be logged (in|out)$/
    * @param $arg1
    */
   public function iShouldBeLoggedIn($arg1)
@@ -1151,7 +1227,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I( [^"]*)? log in as "([^"]*)" with the password "([^"]*)"$/
+   * @Given /^I( try to)? log in as "([^"]*)" with the password "([^"]*)"$/
    * @param $arg1
    * @param $arg2
    * @param $arg3
@@ -1162,7 +1238,24 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $this->fillField('_username', $arg2);
     $this->fillField('password', $arg3);
     $this->pressButton('Login');
-    if ($arg1 == 'try to')
+    if ($arg1 === ' try to')
+    {
+      $this->assertPageNotContainsText('Your password or username was incorrect.');
+    }
+  }
+
+  /**
+   * @Given /^I( try to)? log in as "([^"]*)"$/
+   * @param string $arg1
+   * @param string $username
+   */
+  public function iLogInAsUser($arg1, $username)
+  {
+    $this->visitPath('/app/login');
+    $this->fillField('username', $username);
+    $this->fillField('password', self::DEFAULT_PASSWORD);
+    $this->pressButton('Login');
+    if ($arg1 === ' try to')
     {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
     }
@@ -3228,17 +3321,14 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         'username' => $user,
       ]);
 
-      $program = $em->getRepository(Program::class)->findOneBy(['name'=> $program_name]);
+      $program = $em->getRepository(Program::class)->findOneBy(['name' => $program_name]);
       if ($user == null)
       {
         Assert::assertTrue(false, "user is null");
       }
       for ($i = 0; $i < $amount; $i++)
       {
-
-
-
-        switch($type)
+        switch ($type)
         {
           case "comment":
             $temp_comment = new UserComment();
@@ -3266,9 +3356,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
             Assert::assertTrue(false);
 
         }
-
-
-
       }
       $em->flush();
     } catch (Exception $e)
@@ -3281,7 +3368,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    * @Given /^"([^"]*)" have just followed "([^"]*)"$/
    * @param $user
    * @param $user_to_follow
-  */
+   */
   public function thereAreFollowNotifications($user, $user_to_follow)
   {
     try
@@ -3308,6 +3395,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
 
   }
+
   /**
    * @Then /^the element "([^"]*)" should have type "([^"]*)"$/
    * @param $arg1
