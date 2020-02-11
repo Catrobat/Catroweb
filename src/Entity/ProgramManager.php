@@ -978,4 +978,24 @@ class ProgramManager
   {
     return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
+
+  /**
+   * @param $id
+   *
+   * @return string
+   */
+  public function getScreenshotLarge($id)
+  {
+    return $this->screenshot_repository->getScreenshotWebPath($id);
+  }
+
+  /**
+   * @param $id
+   *
+   * @return string
+   */
+  public function getScreenshotSmall($id)
+  {
+    return $this->screenshot_repository->getThumbnailWebPath($id);
+  }
 }
