@@ -17,6 +17,7 @@ use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;
+use DateTimeZone;
 use Doctrine\DBAL\Types\GuidType;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
@@ -243,7 +244,7 @@ class ProgramManager
     $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage('en');
-    $program->setUploadedAt(new DateTime());
+    $program->setUploadedAt(new DateTime("now", new DateTimeZone("UTC")));
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
