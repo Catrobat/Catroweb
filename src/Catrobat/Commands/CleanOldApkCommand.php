@@ -5,6 +5,9 @@ namespace App\Catrobat\Commands;
 use App\Entity\Program;
 use ArrayObject;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -38,7 +41,7 @@ class CleanOldApkCommand extends Command
    * CleanOldApkCommand constructor.
    *
    * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface $parameter_bag
+   * @param ParameterBagInterface  $parameter_bag
    */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
   {
@@ -61,8 +64,9 @@ class CleanOldApkCommand extends Command
    * @param InputInterface  $input
    * @param OutputInterface $output
    *
-   * @return int|null
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @return int|void
+   * @throws NoResultException
+   * @throws NonUniqueResultException
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -70,7 +74,7 @@ class CleanOldApkCommand extends Command
 
     if (!is_numeric($days))
     {
-      $output->writeln('You have to enter a numeric value as parameter!');
+      $output->writeln('To delete all APKs older than X days you have to enter a numeric value as parameter!');
 
       return -1;
     }
@@ -114,32 +118,30 @@ class CleanOldApkCommand extends Command
   /**
    * @param $removed_apk_ids
    *
-   * @return \Doctrine\ORM\Query
+   * @return Query
    */
   private function createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids)
   {
-    /**
-     * @var $em \Doctrine\ORM\EntityManagerInterface
-     */
     $id_query_part = '';
     $i = 0;
     foreach ($removed_apk_ids as $apk_id)
     {
-      if ($i != 0)
+      if ($i !== 0)
       {
         $id_query_part .= 'OR ';
       }
-      $id_query_part .= 'p.id = ' . $apk_id . ' ';
+      $id_query_part .= 'p.id = "' . $apk_id . '" ';
       $i++;
     }
 
-    if ($id_query_part != '')
+    if ($id_query_part !== '')
     {
       $id_query_part = ' AND (' . $id_query_part . ')';
     }
 
-    $query = $this->entity_manager->createQuery("UPDATE App\Entity\Program p 
-                      SET p.apk_status = :status WHERE p.apk_status != :status" . $id_query_part);
+    $query = $this->entity_manager->createQuery(
+      "UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status" . $id_query_part
+    );
     $query->setParameter('status', Program::APK_NONE);
 
     return $query;

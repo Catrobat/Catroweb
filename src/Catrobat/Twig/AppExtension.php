@@ -107,7 +107,6 @@ class AppExtension extends AbstractExtension
   public function getFunctions()
   {
     return [
-      new TwigFunction('getenv', 'getenv'),
       new TwigFunction('countriesList', [$this, 'getCountriesList']),
       new TwigFunction('isWebview', [$this, 'isWebview']),
       new TwigFunction('isIOSWebview', [$this, 'isIOSWebview']),

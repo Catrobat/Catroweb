@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+## [3.1.1]
+### Fixed
+- bug when uploading a project would not extract all assets
 ## [3.1.0]
 ### Added
 - User history admin view
@@ -119,7 +121,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.1.1...HEAD
+[3.1.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v3.0.0
 [2.3.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v2.3.0
