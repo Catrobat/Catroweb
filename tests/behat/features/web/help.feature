@@ -1,4 +1,4 @@
-@help
+@web @help
 Feature: Pocketcode help page
   In order to access and browse the help page
   As a visitor
@@ -6,9 +6,9 @@ Feature: Pocketcode help page
 
   Background:
     Given I am on "/app/help"
+    And I wait for the page to be loaded
 
   Scenario: Viewing the help overview at help page
-    Then I wait for a second
     And I should see "Step by step"
     And I should see "Starters"
     And I should see "Education platform"
@@ -20,7 +20,7 @@ Feature: Pocketcode help page
 
   Scenario: Viewing the help overview at help page for luna flavor i should see discord instead of ios
     Given I am on "/luna/help"
-    Then I wait for a second
+    And I wait for the page to be loaded
     And I should see "Step by step"
     And I should see "Starters"
     And I should see "Education platform"
@@ -32,8 +32,10 @@ Feature: Pocketcode help page
 
   Scenario Outline: Clicking on the alice game jam image at help page
     When I click "#game-design"
+    And I wait for AJAX to finish
     Then I should see "6" "desktop" tutorial banners
     When I click on the "<reference>" banner
+    And I wait for AJAX to finish
     Then I should see "<title>"
 
     Examples:
@@ -48,8 +50,10 @@ Feature: Pocketcode help page
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
     Given I am on "/app/tutorialcards"
+    And I wait for the page to be loaded
     And I should see "<title>" in the "#card-<id>" element
     When I click "#card-<id>"
+    And I wait for AJAX to finish
     Then I should see "<title>"
 
     Examples:
@@ -70,13 +74,14 @@ Feature: Pocketcode help page
   Scenario: Clicking on starters image at help page and test navigation
     Given there are users:
       | name     | password | token      | email               | id |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
     And there are starter programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | project 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | project 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
       | 3  | project 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
     When I click "#starters"
+    And I wait for AJAX to finish
     Then I should see "STARTER PROJECTS"
     And I should see "Try out these starter projects. Look inside to make changes and add your ideas."
     And I should see "Games"
@@ -85,10 +90,12 @@ Feature: Pocketcode help page
     And I should see "project 3"
     And I should see an ".anchor" element
     When I click ".anchor"
+    And I wait for AJAX to finish
     Then I am on "/app/starterProjects"
 
   Scenario: Game Jam page should be there
     When I go to "/app/pocket-game-jam"
+    And I wait for the page to be loaded
     Then I should see "HOW TO UPLOAD A POCKET CODE GAME TO THE GAME JOLT SITE?"
     And I should see "1. Registration"
     And I should see "2. Upload"
@@ -100,4 +107,5 @@ Feature: Pocketcode help page
 
   Scenario: /hourOfCode should redirect to help page
     When I go to "/app/hourOfCode"
+    And I wait for the page to be loaded
     Then I should see "TUTORIALS"

@@ -1,4 +1,4 @@
-@homepage
+@web @project_page
 Feature: Reactions to projects "likes"
 
   Background:
@@ -24,21 +24,24 @@ Feature: Reactions to projects "likes"
 
   Scenario: Thumbs up button with on-click bubble should appear for projects without reactions
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then the element "#project-like-buttons" should be visible
     And I should see 1 "#project-like-buttons > *"
     And the element "#project-like-buttons .fa-thumbs-up" should be visible
     And the element "#project-like-counter" should not be visible
     And the element "#project-like-detail" should not be visible
     When I click "#project-like-buttons .fa-thumbs-up"
+    And I wait for AJAX to finish
     Then the element "#project-like-detail" should be visible
     And I should see 4 "#project-like-detail > .btn"
     # bubble should disappear if I click anywhere
     And I click "body"
-    And I wait 600 milliseconds
+    And I wait for AJAX to finish
     Then the element "#project-like-detail" should not be visible
 
   Scenario: Thumbs up and smile button with on-click bubble and counter should appear for project 2
     Given I am on "/app/project/2"
+    And I wait for the page to be loaded
     Then the element "#project-like-buttons" should be visible
     And I should see 2 "#project-like-buttons > *"
     And the element "#project-like-buttons .fa-thumbs-up" should be visible
@@ -47,14 +50,16 @@ Feature: Reactions to projects "likes"
     And the "#project-like-counter" element should contain "2"
     And the element "#project-like-detail" should not be visible
     When I click "#project-like-buttons"
+    And I wait for AJAX to finish
     Then the element "#project-like-detail" should be visible
     And I should see 4 "#project-like-detail > .btn"
 
   Scenario: Detail dialog for project 2 should open and show reactions
     Given I am on "/app/project/2"
+    And I wait for the page to be loaded
     Then the element "#project-like-modal" should not be visible
     And I click "#project-like-counter"
-    And I wait 1 milliseconds
+    And I wait for AJAX to finish
     Then the element "#project-like-modal" should be visible
     And I should see 3 "#project-like-modal .modal-body .nav-tabs .nav-item"
     And the "#all-tab > span" element should contain "1"
@@ -73,6 +78,7 @@ Feature: Reactions to projects "likes"
     And the element "#all-tab-content .reaction:first-child .types .fa-grin-squint" should be visible
     And the element "#all-tab-content .reaction:first-child .types .fa-thumbs-up" should be visible
     When I click "#smile-tab"
+    And I wait for AJAX to finish
     Then the element "#smile-tab-content" should be visible
     And the element "#all-tab-content" should not be visible
     And I should see 1 "#smile-tab-content .reaction"
@@ -81,15 +87,16 @@ Feature: Reactions to projects "likes"
     And the element "#smile-tab-content .reaction:first-child .types .fa-grin-squint" should be visible
     And the element "#smile-tab-content .reaction:first-child .types .fa-thumbs-up" should be visible
     And I click "#project-like-modal button.close"
-    And I wait 1 milliseconds
+    And I wait for AJAX to finish
     Then the element "#project-like-modal" should not be visible
 
   Scenario: Detail dialog for project 3 should open and show reactions
     Given I am on "/app/project/3"
+    And I wait for the page to be loaded
     Then the element "#project-like-modal" should not be visible
     And the "#project-like-counter" element should contain "3"
     And I click "#project-like-counter"
-    And I wait 1 milliseconds
+    And I wait for AJAX to finish
     Then the element "#project-like-modal" should be visible
     And I should see 3 "#project-like-modal .modal-body .nav-tabs .nav-item"
     And the "#all-tab > span" element should contain "3"
@@ -110,6 +117,7 @@ Feature: Reactions to projects "likes"
     And I should see 1 "#all-tab-content .reaction:nth-child(3) .types > i"
     And the element "#all-tab-content .reaction:nth-child(3) .types .fa-heart" should be visible
     When I click "#love-tab"
+    And I wait for AJAX to finish
     Then the element "#love-tab-content" should be visible
     And the element "#all-tab-content" should not be visible
     And I should see 2 "#love-tab-content .reaction"
@@ -121,7 +129,9 @@ Feature: Reactions to projects "likes"
   Scenario: A users reactions to a project should be marked
     Given I log in as "OtherUser"
     And I am on "/app/project/2"
+    And I wait for the page to be loaded
     And I click "#project-like-buttons"
+    And I wait for AJAX to finish
     Then the element "#project-like-detail" should be visible
     And I should see 4 "#project-like-detail > .btn"
     And I should see 2 "#project-like-detail > .btn.active"
@@ -134,17 +144,21 @@ Feature: Reactions to projects "likes"
   Scenario: A logged-in user should be able to give several reactions to a single project and counter + icons should be refreshed
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then the "#project-like-counter" element should contain "0"
     And I click "#project-like-buttons"
+    And I wait for AJAX to finish
     Then the element "#project-like-detail" should be visible
     When I click "#project-like-detail .btn[data-like-type=4]"
-    And I wait 600 milliseconds
+    And I wait for AJAX to finish
     Then the element "#project-like-detail" should not be visible
     And the "#project-like-counter" element should contain "1"
     And I should see 1 "#project-like-buttons > *"
     And the element "#project-like-buttons .fa-surprise" should be visible
     When I click "#project-like-buttons"
+    And I wait for AJAX to finish
     And I click "#project-like-detail .btn[data-like-type=2]"
+    And I wait for AJAX to finish
     Then the "#project-like-counter" element should contain "2"
     And I should see 2 "#project-like-buttons > *"
     And the element "#project-like-buttons .fa-grin-squint" should be visible
@@ -155,7 +169,9 @@ Feature: Reactions to projects "likes"
     And the element "#project-like-buttons .fa-grin-squint" should be visible
     And the element "#project-like-buttons .fa-surprise" should be visible
     When I click "#project-like-buttons"
+    And I wait for AJAX to finish
     And I click "#project-like-detail .btn[data-like-type=1]"
+    And I wait for AJAX to finish
     Then the "#project-like-counter" element should contain "3"
     And I should see 3 "#project-like-buttons > *"
     And the element "#project-like-buttons .fa-thumbs-up" should be visible
@@ -164,14 +180,18 @@ Feature: Reactions to projects "likes"
 
   Scenario: Guests should be redirected to login page if they react to a project and the reaction should count after login
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     And the "#project-like-counter" element should contain "0"
     And I click "#project-like-buttons"
+    And I wait for AJAX to finish
     # click on Smile button
     And I click "#project-like-detail .btn:nth-child(2)"
+    And I wait for AJAX to finish
     Then I should be on "/app/login"
     Then I fill in "OtherUser" for "_username"
     And I fill in "123456" for "_password"
     And I click "#_submit.login"
+    And I wait for AJAX to finish
     Then I should be logged in
     And the "#project-like-counter" element should contain "1"
     And the element "#project-like-buttons .fa-grin-squint" should be visible
@@ -281,9 +301,10 @@ Feature: Reactions to projects "likes"
       | 1       | User198 | thumbs_up |
       | 1       | User199 | thumbs_up |
     When I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then the "#project-like-counter" element should contain "100"
     When I click "#project-like-counter"
-    And I wait 100 milliseconds
+    And I wait for AJAX to finish
     Then I should see 2 "#project-like-modal .modal-body .nav-tabs .nav-item"
     And the "#all-tab > span" element should contain "100"
     And the "#thumbs-up-tab > span" element should contain "100"
@@ -296,15 +317,19 @@ Feature: Reactions to projects "likes"
     And I should see 1 "#all-tab-content .reaction:first-child .types > i"
     And the element "#all-tab-content .reaction:first-child .types .fa-thumbs-up" should be visible
     When I click "#thumbs-up-tab"
+    And I wait for AJAX to finish
     Then I should see 100 "#thumbs-up-tab-content .reaction"
 
   Scenario: I should be able to give multiple reactions to a single project and the owner should be notified once
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     And I click "#project-like-buttons"
+    And I wait for AJAX to finish
     And I click "#project-like-detail .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I click "#project-like-buttons"
+    And I wait for AJAX to finish
     And I click "#project-like-detail .btn[data-like-type=2]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
@@ -312,6 +337,7 @@ Feature: Reactions to projects "likes"
     Then the element "#project-navigation .user-notification-badge" should be visible
     And the "#project-navigation .user-notification-badge" element should contain "1"
     When I am on "/app/notifications/likes"
+    And I wait for the page to be loaded
     Then I should see 1 "#new-notifications-container .notification-container"
     And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(1)" element should contain "OtherUser"
     And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(2)" element should contain "Minions"
@@ -321,9 +347,11 @@ Feature: Reactions to projects "likes"
   Scenario: I should be able to like multiple projects when I am logged in and it should notify the owner multiple times
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/project/2"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=4]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
@@ -331,6 +359,7 @@ Feature: Reactions to projects "likes"
     Then the element "#project-navigation .user-notification-badge" should be visible
     And the "#project-navigation .user-notification-badge" element should contain "2"
     When I am on "/app/notifications/likes"
+    And I wait for the page to be loaded
     Then I should see 2 "#new-notifications-container .notification-container"
     And the "#new-notifications-container > *:nth-child(1) .notification-body .card-text a:nth-child(1)" element should contain "OtherUser"
     And the "#new-notifications-container > *:nth-child(1) .notification-body .card-text a:nth-child(2)" element should contain "Minimies"
@@ -342,10 +371,12 @@ Feature: Reactions to projects "likes"
   Scenario: The notification should disappear if I remove my reaction again
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=1]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I am on "/app/notifications/likes"
+    And I wait for the page to be loaded
     Then I should see 1 "#new-notifications-container .notification-container"
     And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(1)" element should contain "OtherUser"
     And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(2)" element should contain "Minions"
@@ -353,7 +384,9 @@ Feature: Reactions to projects "likes"
     And I should see "1 new Notification"
     When I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     And I click "#project-like-buttons"
+    And I wait for AJAX to finish
     Then the element "#project-like-detail > .btn.active[data-like-type=1]" should exist
     When I click "#project-like-detail .btn[data-like-type=1]"
     And I wait for AJAX to finish
@@ -362,6 +395,7 @@ Feature: Reactions to projects "likes"
     And the "#project-like-counter" element should contain "0"
     When I log in as "Catrobat"
     And I am on "/app/notifications/likes"
+    And I wait for the page to be loaded
     Then I should see 0 "#new-notifications-container .notification-container"
     And I should see 1 "#error.no-notifications-placeholder"
     And the element "notifications-summary" should not exist
@@ -370,10 +404,15 @@ Feature: Reactions to projects "likes"
   Scenario: I can't notify myself
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=1]"
+    And I wait for AJAX to finish
     And I am on "/app/project/3"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=1]"
+    And I wait for AJAX to finish
     And I am on "/app/notifications/allNotifications"
+    And I wait for the page to be loaded
     Then the element "#catro-notification-1" should not exist
     And the element "notifications-summary" should not exist
     And I should not see "new Notification"
@@ -381,43 +420,49 @@ Feature: Reactions to projects "likes"
   Scenario: I should be able to mark all notifications as read at once
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/project/2"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=3]"
     And I wait for AJAX to finish
     And I log in as "Catrobat"
     And I am on "/app/notifications/allNotifications"
+    And I wait for the page to be loaded
     And the element "#catro-notification-1" should be visible
     And the element "#catro-notification-2" should be visible
     And I should see "OtherUser"
     And the element "#notifications-summary" should be visible
     And I should see "2 new Notifications"
     When I click "#mark-all-as-seen"
-    And I wait for fadeEffect to finish
+    And I wait for AJAX to finish
     Then I should see "Done!"
     And I should see "You have no new Notifications"
     And I should see "Old Notifications"
-    And the element "#mark-as-read-1" should not be visible
+    But the element "#mark-as-read-1" should not be visible
     And the element "#mark-as-read-2" should not be visible
 
   Scenario: I should be able to mark a notifications as read
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/project/2"
+    And I wait for the page to be loaded
     And I click "#project-like-detail .btn[data-like-type=3]"
     And I wait for AJAX to finish
     And I log in as "Catrobat"
     And I am on "/app/notifications/allNotifications"
+    And I wait for the page to be loaded
     And the element "#catro-notification-1" should be visible
     And the element "#catro-notification-2" should be visible
     And I should see "OtherUser"
     And the element "#notifications-summary" should be visible
     And I should see "2 new Notifications"
     When I click "#mark-as-read-2"
-    And I wait for fadeEffect to finish
+    And I wait for AJAX to finish
     Then the element "#notifications-summary" should be visible
     And I should see "1 new Notification"
     And the element "#catro-notification-1" should be visible

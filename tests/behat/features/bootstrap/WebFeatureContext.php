@@ -31,12 +31,14 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Exception\ResponseTextException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Tools\ToolsException;
 use Doctrine\ORM\TransactionRequiredException;
 use Doctrine\ORM\Tools\SchemaTool;
 use PHPUnit\Framework\Assert;
@@ -69,6 +71,9 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   private $use_real_oauth_javascript_code;
 
+  /**
+   * @var SymfonySupport
+   */
   private $symfony_support;
 
   const AVATAR_DIR = './tests/testdata/DataFixtures/AvatarImages/';
@@ -115,7 +120,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @BeforeScenario
    *
-   * @throws \Doctrine\ORM\Tools\ToolsException
+   * @throws ToolsException
    */
   public function clearData()
   {
@@ -210,7 +215,8 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   // @formatter:off
   /**
-   * @Given /^I use the Catroid app with language version ([0-9]+(\.[0-9]+)?), flavor "([^"]+)", app version "([^"]+)*" and (debug|release) build type$/
+   * @Given /^I use the Catroid app with language version ([0-9]+(\.[0-9]+)?), flavor "([^"]+)", app version "([^"]+)*"
+   *        and (debug|release) build type$/
    *
    * @param $lang_version
    * @param $flavor
@@ -285,16 +291,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     Assert::assertFalse(strpos($img_url, $logo_src));
   }
 
-
-  /**
-   * @When /^I wait (\d+) milliseconds$/
-   * @param $milliseconds
-   */
-  public function iWaitMilliseconds($milliseconds)
-  {
-    $this->getSession()->wait($milliseconds);
-  }
-
   /**
    * @Given /^I set the cookie "([^"]+)" to "([^"]*)"$/
    * @param string $cookie_name
@@ -319,6 +315,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     {
       $this->getSession()->getPage()->find('css', '#btn-sidebar-toggle')->click();
     }
+    $this->iWaitForAjaxToFinish();
   }
 
   /**
@@ -685,94 +682,42 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^there are users(?: with password "([^"]+)")?:$/
-   * @param string    $default_password
+   * @Given /^there are users:$/
    * @param TableNode $table
    *
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function thereAreUsers(TableNode $table, $default_password = null)
-  {
-    if ($default_password == null || empty($default_password))
-    {
-      $default_password = self::DEFAULT_PASSWORD;
-    }
-
-    /** @var UserManager $user_manager */
-    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
-    foreach ($table->getHash() as $data)
-    {
-      /** @var User $user */
-      $user = $user_manager->createUser();
-      $user->setUsername($data['name']);
-      $user->setAdditionalEmail('');
-      $user->setEnabled(true);
-      $user->setCountry('at');
-
-      if (array_key_exists('email', $data) && !empty($data['email']))
-      {
-        $user->setEmail($data['email']);
-      }
-      else
-      {
-        $user->setEmail($data['name'] . '@tests.catrob.at');
-      }
-
-      if (array_key_exists('password', $data) && !empty($data['password']))
-      {
-        $user->setPlainPassword($data['password']);
-      }
-      else
-      {
-        $user->setPlainPassword($default_password);
-      }
-
-      if (array_key_exists('token', $data) && !empty($data['token']))
-      {
-        $user->setUploadToken($data['token']);
-      }
-
-      $user_manager->updateUser($user, false);
-      if (array_key_exists('id', $data))
-      {
-        $user->setId($data['id']);
-      }
-    }
-
-    /** @var EntityManager $em */
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $em->flush();
-  }
-
-  /**
-   * @Given /^there are admins:$/
-   * @param TableNode $table
-   */
-  public function thereAreAdmins(TableNode $table)
+  public function thereAreUsers(TableNode $table)
   {
     /**
      * @var $user_manager UserManager
      * @var $user         User
+     * @var $em           EntityManager
      */
     $user_manager = $this->kernel->getContainer()->get(UserManager::class);
     $users = $table->getHash();
-    $user = null;
-    $count = count($users);
-    for ($i = 0; $i < $count; ++$i)
+    $number_of_users = count($users);
+    for ($i = 0; $i < $number_of_users; $i++)
     {
       $user = $user_manager->createUser();
       $user->setUsername($users[$i]['name']);
-      $user->setEmail($users[$i]['email']);
+      $user->setEmail(isset($users[$i]['email']) ? $users[$i]['email'] : $users[$i]['name'] . "@catrobat.at");
+      $user->setPlainPassword(isset($users[$i]['password']) ? $users[$i]['password'] : self::DEFAULT_PASSWORD);
+      $user->setUploadToken(isset($users[$i]['token']) ? $users[$i]['token'] : "default_token");
+      $user->setSuperAdmin(isset($users[$i]['admin']) ? $users[$i]['admin'] === 'true' : false);
       $user->setAdditionalEmail('');
-      $user->setPlainPassword($users[$i]['password']);
       $user->setEnabled(true);
-      $user->setUploadToken($users[$i]['token']);
       $user->setCountry('at');
-      $user->setSuperAdmin(true);
-      $user_manager->updateUser($user, false);
+      $user_manager->updateUser($user, true);
+
+      if (array_key_exists('id', $users[$i]))
+      {
+        $user->setId($users[$i]['id']);
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $em->flush();
+      }
     }
-    $user_manager->updateUser($user, true);
   }
 
   /**
@@ -839,6 +784,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $this->getSession()->wait(500);
   }
 
+
   /**
    * @Given /^there are programs:$/
    * @Given /^there are projects:$/
@@ -847,7 +793,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    *
    * @throws Exception
    */
-  public function thereAreProjects(TableNode $table)
+  public function thereArePrograms(TableNode $table)
   {
     /**
      * @var $em             EntityManager
@@ -861,7 +807,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     $count = count($programs);
-    for ($i = 0; $i < $count; ++$i)
+    for ($i = 0; $i < $count; $i++)
     {
       $user = $em->getRepository('App\Entity\User')->findOneBy([
         'username' => $programs[$i]['owned by'],
@@ -937,9 +883,9 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
         $apkrepository = $this->kernel->getContainer()->get(ApkRepository::class);
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
         copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
-        $apkrepository->save(new File($temppath), $i);
+        $apkrepository->save(new File($temppath), $program->getId());
         $file_repo = $this->kernel->getContainer()->get(ProgramFileRepository::class);
-        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
+        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $program->getId());
       }
     }
     $em->flush();
@@ -1227,46 +1173,24 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I( try to)? log in as "([^"]*)" with the password "([^"]*)"$/
+   * @Given /^I( [^"]*)? log in as "([^"]*)" with the password "([^"]*)"$/
+   * @Given /^I( [^"]*)? log in as "([^"]*)"$/
+   *
    * @param $arg1
-   * @param $arg2
-   * @param $arg3
+   * @param $username
+   * @param $password
    */
-  public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
+  public function iAmLoggedInAsWithThePassword($arg1, $username, $password = self::DEFAULT_PASSWORD)
   {
     $this->visitPath('/app/login');
-    $this->fillField('_username', $arg2);
-    $this->fillField('password', $arg3);
+    $this->fillField('_username', $username);
+    $this->fillField('password', $password);
     $this->pressButton('Login');
-    if ($arg1 === ' try to')
+    $this->iWaitForThePageToBeLoaded();
+    if ($arg1 == 'try to')
     {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
     }
-  }
-
-  /**
-   * @Given /^I( try to)? log in as "([^"]*)"$/
-   * @param string $arg1
-   * @param string $username
-   */
-  public function iLogInAsUser($arg1, $username)
-  {
-    $this->visitPath('/app/login');
-    $this->fillField('username', $username);
-    $this->fillField('password', self::DEFAULT_PASSWORD);
-    $this->pressButton('Login');
-    if ($arg1 === ' try to')
-    {
-      $this->assertPageNotContainsText('Your password or username was incorrect.');
-    }
-  }
-
-  /**
-   * @Given /^I wait for the server response$/
-   */
-  public function iWaitForTheServerResponse()
-  {
-    $this->getSession()->wait(200);
   }
 
   /**
@@ -1334,11 +1258,13 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
   }
 
-
   /**
    * @Then /^the project img tag should( [^"]*)? have the "([^"]*)" data url$/
+   *
    * @param $not
    * @param $name
+   *
+   * @throws Exception
    */
   public function theProjectImgTagShouldHaveTheDataUrl($not, $name)
   {
@@ -1360,7 +1286,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     switch ($name)
     {
       case 'logo.png':
-        throw new Exception($source);
         $logoUrl = 'data:image/png;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'logo.png'));
         $isSame = ($source === $logoUrl);
         $not == 'not' ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
@@ -1762,110 +1687,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
     $em->flush();
   }
-
-  /**
-   * @Given /^there are reportable programs:$/
-   *
-   * @param TableNode $table
-   *
-   * @throws Exception
-   */
-  public function thereAreReportablePrograms(TableNode $table)
-  {
-    /**
-     * @var $user User
-     * @var $tag  Tag
-     * @var $em   EntityManager
-     */
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $programs = $table->getHash();
-    $count = count($programs);
-    for ($i = 0; $i < $count; ++$i)
-    {
-      $user = $em->getRepository('App\Entity\User')->findOneBy([
-        'username' => $programs[$i]['owned by'],
-      ]);
-      $program = new Program();
-      $program->setUser($user);
-      $program->setName($programs[$i]['name']);
-      $program->setDescription("Default Description");
-      $program->setViews(1337);
-      $program->setDownloads(1337);
-      $program->setApkDownloads(1337);
-      $program->setApkStatus(
-        isset($programs[$i]['apk_ready']) ?
-          ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) :
-          Program::APK_NONE
-      );
-      $program->setUploadedAt(new DateTime("01.01.2013 12:00", new DateTimeZone('UTC')));
-      $program->setRemixMigratedAt(null);
-      $program->setCatrobatVersion(1);
-      $program->setCatrobatVersionName("0.8.5");
-      $program->setLanguageVersion(
-        isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1
-      );
-      $program->setUploadIp('127.0.0.1');
-      $program->setFilesize(0);
-      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
-      $program->setUploadLanguage('en');
-      $program->setApproved(false);
-      $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
-      $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] : false);
-
-      $em->persist($program);
-
-      // overwrite id if desired
-      if (array_key_exists('id', $programs[$i]))
-      {
-        $program->setId($programs[$i]['id']);
-        $em->persist($program);
-        $em->flush();
-        $program_repo = $em->getRepository('App\Entity\Program');
-        $program = $program_repo->find($programs[$i]['id']);
-      }
-
-      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
-      {
-        $tag_repo = $em->getRepository(Tag::class);
-        $tags = explode(',', $programs[$i]['tags_id']);
-        foreach ($tags as $tag_id)
-        {
-          $tag = $tag_repo->find($tag_id);
-          $program->addTag($tag);
-        }
-      }
-
-      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null)
-      {
-        /**
-         * @var $extension_repo ExtensionRepository
-         * @var $extension      Extension
-         */
-        $extension_repo = $em->getRepository(Extension::class);
-        $extensions = explode(',', $programs[$i]['extensions']);
-        foreach ($extensions as $extension_name)
-        {
-          $extension = $extension_repo->findOneBy(["name" => $extension_name]);
-          $program->addExtension($extension);
-        }
-      }
-
-      if ($program->getApkStatus() == Program::APK_READY)
-      {
-        $apkrepository = $this->kernel->getContainer()->get(ApkRepository::class);
-        $temppath = tempnam(sys_get_temp_dir(), 'apktest');
-        copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
-        $apkrepository->save(new File($temppath), $i);
-
-        $file_repo = $this->kernel->getContainer()->get(ProgramFileRepository::class);
-        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
-      }
-
-      $em->persist($program);
-    }
-    $em->flush();
-  }
-
 
   /**
    * @When /^I download "([^"]*)"$/
@@ -2374,14 +2195,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @When /^I wait for a second$/
-   */
-  public function iWaitForASecond()
-  {
-    $this->getSession()->wait(1000);
-  }
-
-  /**
    * @Then /^I choose the username '([^']*)' and check button activations$/
    * @param $arg1
    *
@@ -2542,6 +2355,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
   /**
    * @Given /^following programs are featured:$/
+   * @Given /^following projects are featured:$/
    * @param TableNode $table
    *
    * @throws ORMException
@@ -2552,14 +2366,15 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     /** @var EntityManager $em */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $featured = $table->getHash();
-    for ($i = 0; $i < count($featured); ++$i)
+    $number_of_featured_projects = count($featured);
+    for ($i = 0; $i < $number_of_featured_projects; $i++)
     {
       $featured_entry = new FeaturedProgram();
 
-      if ($featured[$i]['program'] != "")
+      if ($featured[$i]['project'] !== "")
       {
-        $program = $this->kernel->getContainer()->get(ProgramManager::class)->findOneByName($featured[$i]['program']);
-        $featured_entry->setProgram($program);
+        $project = $this->kernel->getContainer()->get(ProgramManager::class)->findOneByName($featured[$i]['project']);
+        $featured_entry->setProgram($project);
       }
       else
       {
@@ -2804,18 +2619,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $clicks = $em->getRepository('App\Entity\HomepageClickStatistic')->findAll();
     Assert::assertEquals(0, count($clicks), "Unexpected database entry found!");
-  }
-
-  /**
-   * Wait for AJAX to finish.
-   *
-   * @Given /^I wait for AJAX to finish$/
-   */
-  public function iWaitForAjaxToFinish()
-  {
-    $this->getSession()->wait(5000,
-      '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
-    );
   }
 
   /**
@@ -3235,14 +3038,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     }
   }
 
-  /**
-   * @When /^I wait for fadeEffect to finish$/
-   */
-  public function iWaitForFadeEffectToFinish()
-  {
-    $this->iWaitMilliseconds(1000);
-  }
-
 
   /**
    * @Given /^there are "([^"]*)"\+ notifications for "([^"]*)"$/
@@ -3302,7 +3097,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^there are "([^"]*)" "([^"]*)"  notifications for program "([^"]*)" from "([^"]*)"$/
+   * @Given /^there are "([^"]*)" "([^"]*)" notifications for program "([^"]*)" from "([^"]*)"$/
    * @param $amount
    * @param $type
    * @param $program_name
@@ -3471,14 +3266,16 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     $url1 = "https://raw.githubusercontent.com/Catrobat/Catroid/develop/catroid/src/main/java/org/catrobat/catroid/io/XstreamSerializer.java";
     $url2 = "https://raw.githubusercontent.com/Catrobat/Catroid/develop/catroid/src/main/java/org/catrobat/catroid/ui/fragment/CategoryBricksFactory.java";
-    $catroid_data_set_1 =  file_get_contents($url1);
-    $catroid_data_set_2=  file_get_contents($url2);
+    $catroid_data_set_1 = file_get_contents($url1);
+    $catroid_data_set_2 = file_get_contents($url2);
 
-    if (!$catroid_data_set_1) {
+    if (!$catroid_data_set_1)
+    {
       throw new Exception("XstreamSerializer.java could not be downloaded");
     }
 
-    if (!$catroid_data_set_2) {
+    if (!$catroid_data_set_2)
+    {
       throw new Exception("CategoryBricksFactory.java could not be downloaded");
     }
 
@@ -3500,9 +3297,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     asort($all_catroid_bricks_and_scripts);
 
     $path = "./src/Catrobat/Services/CatrobatCodeParser/Constants.php";
-    $catroweb_data_set =  file_get_contents($path);
+    $catroweb_data_set = file_get_contents($path);
 
-    if (!$catroweb_data_set) {
+    if (!$catroweb_data_set)
+    {
       throw new Exception("Constants.php could'nt be read");
     }
 
@@ -3563,6 +3361,73 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
       throw new Exception($message);
     }
+  }
+
+
+  //--------------------------------------------------------------------------------------------------------------------
+  //                     WAIT - Sometimes it is necessary to wait to prevent timing issues
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Try to use this function only if it is not possible to define a waiting condition
+   *
+   * @When /^I wait (\d+) milliseconds$/
+   * @param $milliseconds
+   */
+  public function iWaitMilliseconds($milliseconds)
+  {
+    $this->getSession()->wait($milliseconds);
+  }
+
+  /**
+   * Waits until a page is fully loaded
+   *
+   * @Given I wait for the page to be loaded
+   */
+  public function iWaitForThePageToBeLoaded()
+  {
+    $this->getSession()->wait(5000, "document.readyState === 'complete'");
+    $this->iWaitForAjaxToFinish();
+  }
+
+  /**
+   * Wait for AJAX to finish.
+   *
+   * @Given /^I wait for AJAX to finish$/
+   */
+  public function iWaitForAjaxToFinish()
+  {
+    $this->getSession()->wait(5000,
+      '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
+    );
+  }
+
+  /**
+   * @Then I wait for the element :selector to contain :text
+   *
+   * @param $selector
+   * @param $text
+   *
+   * @throws ResponseTextException
+   */
+  public function iWaitForTheElementToContain($selector, $text)
+  {
+    /** @var NodeElement $element * */
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    $timer = 0;
+    $seconds = 10;
+    while ($timer < $seconds)
+    {
+      if ($element->getText() === $text)
+      {
+        return;
+      }
+      $timer++;
+      sleep(1);
+    }
+
+    $message = "The text '$text' was not found after a $seconds seconds timeout";
+    throw new ResponseTextException($message, $this->getSession());
   }
 
 }
