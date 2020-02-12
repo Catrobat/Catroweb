@@ -24,6 +24,6 @@ Feature: Limited Accounts
     And I have a limited account
     And I have a program named "Pink Pony"
     When I visit my profile
-    And I wait 100 milliseconds
+    And I wait for the page to be loaded
     Then I see the program "Pink Pony"
     But I do not see a delete button

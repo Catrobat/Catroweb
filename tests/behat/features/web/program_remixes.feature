@@ -3,10 +3,10 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
 
   Background:
     Given there are users:
-      | name     | password | token      | email               | id |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-      | Gangster | 123456   | cccccccccc | dev2@pocketcode.org |  2 |
-    And there are programs:
+      | id | name     |
+      | 1  | Superman |
+      | 2  | Gangster |
+    And there are projects:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | remix_root | debug |
       | 1  | project 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true       | false |
       | 2  | project 2 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
@@ -67,6 +67,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
 
   Scenario: Viewing details of project 8 and number of remixes
     Given I am on "/app/project/8?show_graph=1"
+    And I wait for the page to be loaded
     Then I should see "project 8"
     And I should see "Gangster"
     And I should see "abcef"
@@ -79,6 +80,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
 
   Scenario: Viewing details of project 9 and number of remixes
     Given I am on "/app/project/9?show_graph=1"
+    And I wait for the page to be loaded
     Then I should see "project 9"
     And I should see "Superman"
     And I should see "abcef"
@@ -91,30 +93,34 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
 
   Scenario: Viewing remix graph of project 8
     Given I am on "/app/project/8?show_graph=1"
+    And I wait for the page to be loaded
     Then I ensure pop ups work
     When I click "#remix-graph-modal-link"
-    When I wait 100 milliseconds
+    And I wait for AJAX to finish
     And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
 
   Scenario: Viewing remix graph of project 9
     Given I am on "/app/project/9?show_graph=1"
+    And I wait for the page to be loaded
     Then I ensure pop ups work
     When I click "#remix-graph-modal-link"
-    When I wait 100 milliseconds
+    And I wait for AJAX to finish
     And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
 
   Scenario: Viewing details of project 1 and number of remixes
     Given I am on "/app/project/1?show_graph=1"
+    And I wait for the page to be loaded
     Then I should see "project 1"
     And I should see "Superman"
     And I should see "6 remixes"
 
   Scenario: Viewing details of project 2 and number of remixes
     Given I am on "/app/project/2?show_graph=1"
+    And I wait for the page to be loaded
     Then I should see "project 2"
     And I should see "Gangster"
     And I should see "6 remixes"
@@ -122,15 +128,17 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
   Scenario: Viewing details of project 2 using debug app
     Given I use a debug build of the Catroid app
     And I am on "/app/project/2?show_graph=1"
+    And I wait for the page to be loaded
     When I click "#remix-graph-modal-link"
-    And I wait 100 milliseconds
+    And I wait for AJAX to finish
     Then I should see a node with id "catrobat_7" having name "project 7" and username "Superman"
     And I should see an edge from "catrobat_5" to "catrobat_7"
 
   Scenario: Viewing details of project 2 using release app
     Given I use a release build of the Catroid app
     And I am on "/app/project/2?show_graph=1"
+    And I wait for the page to be loaded
     When I click "#remix-graph-modal-link"
-    And I wait 100 milliseconds
+    And I wait for AJAX to finish
     Then I should see an unavailable node with id "catrobat_7"
     And I should see an edge from "catrobat_5" to "catrobat_7"

@@ -1,4 +1,4 @@
-@homepage
+@web @security
 Feature: Users should be logged in automatically when they are logged in in the app
 
   Background:
@@ -13,6 +13,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "CATRO_LOGIN_USER" to "Catrobat"
     And I set the cookie "CATRO_LOGIN_TOKEN" to "cafe000000deadbeef1111affe227357"
     And I am on "/app/user"
+    And I wait for the page to be loaded
     Then I should see "My Profile"
     Then I should see "dev1@catrob.at"
 
@@ -20,6 +21,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "CATRO_LOGIN_USER" to "Catrobat"
     And I set the cookie "CATRO_LOGIN_TOKEN" to "deadbeef"
     And I am on "/app/user"
+    And I wait for the page to be loaded
     Then I should not see "dev1@catrob.at"
     And I should see "Your user credentials are wrong"
 
@@ -27,6 +29,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "CATRO_LOGIN_USER" to "Badguy"
     And I set the cookie "CATRO_LOGIN_TOKEN" to "deadbeef"
     And I am on "/app/user"
+    And I wait for the page to be loaded
     Then I should not see "My Profile"
     And I should see "Your user credentials are wrong"
 
@@ -34,6 +37,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "CATRO_LOGIN_USER" to "User3"
     And I set the cookie "CATRO_LOGIN_TOKEN" to ""
     And I am on "/app/user"
+    And I wait for the page to be loaded
     Then I should not see "My Profile"
     And I should be on "/app/login"
     And I should see 1 "input#password"
@@ -41,6 +45,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
   Scenario: Log in without user cookie should be ignored
     And I set the cookie "CATRO_LOGIN_TOKEN" to "99990bad099990bad099990bad099999"
     And I am on "/app/user"
+    And I wait for the page to be loaded
     Then I should not see "My Profile"
     And I should be on "/app/login"
     And I should see 1 "input#password"
@@ -49,6 +54,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "CATRO_LOGIN_USER" to "User2"
     And I set the cookie "CATRO_LOGIN_TOKEN" to "112233445566778899aabbccddeeff00"
     And I am on the homepage
+    And I wait for the page to be loaded
     And I open the menu
     Then I should see 0 "#btn-logout"
     Then I should see 0 "#btn-login"
@@ -58,9 +64,12 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "CATRO_LOGIN_USER" to "User2"
     And I set the cookie "CATRO_LOGIN_TOKEN" to "112233445566778899aabbccddeeff00"
     And I am on the homepage
+    And I wait for the page to be loaded
     And I go to "/app/logout"
+    And I wait for the page to be loaded
     And I open the menu
     Then I should see 1 "#btn-profile"
     And I go to "/app/user"
+    And I wait for the page to be loaded
     Then I should see "My Profile"
     Then I should see "dev2@catrob.at"

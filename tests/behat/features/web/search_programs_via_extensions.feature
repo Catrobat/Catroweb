@@ -1,11 +1,11 @@
-@homepage
+@web @search
 Feature: Searching for programs with extensions
 
   Background:
     Given there are users:
-      | name     | password | token      | email               | id |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |  2 |
+      | id | name     |
+      | 1  | Catrobat |
+      | 2  | User1    |
     And there are extensions:
       | id | name         | prefix  |
       | 1  | Arduino      | ARDUINO |
@@ -13,27 +13,29 @@ Feature: Searching for programs with extensions
       | 3  | Lego         | LEGO    |
       | 4  | Phiro        | PHIRO   |
       | 5  | Raspberry Pi | RASPI   |
-    And there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | extensions |
-      | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro |
-      | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | Lego,Drone |
-      | 3  | myprog 3  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | Drone      |
-    And I am on "/app"
+    And there are projects:
+      | id | name      | owned by | extensions |
+      | 1  | project 1 | Catrobat | Lego,Phiro |
+      | 2  | project 2 | Catrobat | Lego,Drone |
+      | 3  | project 3 | User1    | Drone      |
 
   Scenario: Searching other programs with the same extensions
     Given I am on "/app/project/1"
-    And I should see "program 1"
+    And I wait for the page to be loaded
+    And I should see "project 1"
     And I should see "Lego"
     And I should see "Phiro"
     When I press on the extension "Lego"
+    And I wait for AJAX to finish
     Then I should see "Your search returned 2 results"
-    Then I should see "program 1"
-    And I should see "program 2"
-    And I should not see "myprog 3"
+    Then I should see "project 1"
+    And I should see "project 2"
+    And I should not see "project 3"
 
   Scenario: search for programs should work
     When I am on "/app/search/Lego"
+    And I wait for the page to be loaded
     Then I should see "Your search returned 2 results"
-    And I should see "program 1"
-    And I should see "program 2"
-    And I should not see "myprog 3"
+    And I should see "project 1"
+    And I should see "project 2"
+    And I should not see "project 3"
