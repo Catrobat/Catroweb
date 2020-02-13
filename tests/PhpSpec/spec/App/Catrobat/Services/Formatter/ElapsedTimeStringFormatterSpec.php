@@ -42,10 +42,10 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
    */
   public function it_returns_the_elapsed_time_since_timestamps_in_minutes($translator)
   {
-    $translator->transChoice(Argument::exact('time.minutes.ago'), Argument::exact(0), Argument::any(), Argument::any())->willReturn('< 1 minute ago');
-    $translator->transChoice(Argument::exact('time.minutes.ago'), Argument::exact(1), Argument::any(), Argument::any())->willReturn('1 minute ago');
-    $translator->transChoice(Argument::exact('time.minutes.ago'), Argument::exact(5), Argument::any(), Argument::any())->willReturn('5 minutes ago');
-    $translator->transChoice(Argument::exact('time.minutes.ago'), Argument::exact(59), Argument::any(), Argument::any())->willReturn('59 minutes ago');
+    $translator->trans(Argument::exact('time.minutes.ago'), ['%count%' => 0], Argument::any(), Argument::any())->willReturn('< 1 minute ago');
+    $translator->trans(Argument::exact('time.minutes.ago'), ['%count%' => 1], Argument::any(), Argument::any())->willReturn('1 minute ago');
+    $translator->trans(Argument::exact('time.minutes.ago'), ['%count%' => 5], Argument::any(), Argument::any())->willReturn('5 minutes ago');
+    $translator->trans(Argument::exact('time.minutes.ago'), ['%count%' => 59], Argument::any(), Argument::any())->willReturn('59 minutes ago');
 
     $this->getElapsedTime($this->testTime - 10)->shouldReturn('< 1 minute ago');
     $this->getElapsedTime($this->testTime - 80)->shouldReturn('1 minute ago');
@@ -59,9 +59,9 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
    */
   public function it_returns_the_elapsed_time_since_timestamps_in_hours($translator)
   {
-    $translator->transChoice(Argument::exact('time.hours.ago'), Argument::exact(1), Argument::any(), Argument::any())->willReturn('1 hour ago');
-    $translator->transChoice(Argument::exact('time.hours.ago'), Argument::exact(5), Argument::any(), Argument::any())->willReturn('5 hours ago');
-    $translator->transChoice(Argument::exact('time.hours.ago'), Argument::exact(23), Argument::any(), Argument::any())->willReturn('23 hours ago');
+    $translator->trans(Argument::exact('time.hours.ago'), ['%count%' => 1], Argument::any(), Argument::any())->willReturn('1 hour ago');
+    $translator->trans(Argument::exact('time.hours.ago'), ['%count%' => 5], Argument::any(), Argument::any())->willReturn('5 hours ago');
+    $translator->trans(Argument::exact('time.hours.ago'), ['%count%' => 23], Argument::any(), Argument::any())->willReturn('23 hours ago');
 
     $this->getElapsedTime($this->testTime - 3600)->shouldReturn('1 hour ago');
     $this->getElapsedTime($this->testTime - 3600 * 5)->shouldReturn('5 hours ago');
@@ -71,9 +71,9 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
 
   public function it_returns_the_elapsed_time_since_timestamps_in_days($translator)
   {
-    $translator->transChoice(Argument::exact('time.days.ago'), Argument::exact(1), Argument::any(), Argument::any())->willReturn('1 day ago');
-    $translator->transChoice(Argument::exact('time.days.ago'), Argument::exact(5), Argument::any(), Argument::any())->willReturn('5 days ago');
-    $translator->transChoice(Argument::exact('time.days.ago'), Argument::exact(6), Argument::any(), Argument::any())->willReturn('6 days ago');
+    $translator->trans(Argument::exact('time.days.ago'), ['%count%' => 1], Argument::any(), Argument::any())->willReturn('1 day ago');
+    $translator->trans(Argument::exact('time.days.ago'), ['%count%' => 5], Argument::any(), Argument::any())->willReturn('5 days ago');
+    $translator->trans(Argument::exact('time.days.ago'), ['%count%' => 6], Argument::any(), Argument::any())->willReturn('6 days ago');
 
     $this->getElapsedTime($this->testTime - 86400)->shouldReturn('1 day ago');
     $this->getElapsedTime($this->testTime - 86400 * 5)->shouldReturn('5 days ago');
@@ -83,9 +83,9 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
 
   public function it_returns_the_elapsed_time_since_timestamps_in_months($translator)
   {
-    $translator->transChoice(Argument::exact('time.months.ago'), Argument::exact(1), Argument::any(), Argument::any())->willReturn('1 month ago');
-    $translator->transChoice(Argument::exact('time.months.ago'), Argument::exact(6), Argument::any(), Argument::any())->willReturn('6 months ago');
-    $translator->transChoice(Argument::exact('time.months.ago'), Argument::exact(11), Argument::any(), Argument::any())->willReturn('11 months ago');
+    $translator->trans(Argument::exact('time.months.ago'), ['%count%' => 1], Argument::any(), Argument::any())->willReturn('1 month ago');
+    $translator->trans(Argument::exact('time.months.ago'), ['%count%' => 6], Argument::any(), Argument::any())->willReturn('6 months ago');
+    $translator->trans(Argument::exact('time.months.ago'), ['%count%' => 11], Argument::any(), Argument::any())->willReturn('11 months ago');
 
     $this->getElapsedTime($this->testTime - 2629800)->shouldReturn('1 month ago');
     $this->getElapsedTime($this->testTime - 2629800 * 6)->shouldReturn('6 months ago');
@@ -95,9 +95,9 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
 
   public function it_returns_the_elapsed_time_since_timestamps_in_years($translator)
   {
-    $translator->transChoice(Argument::exact('time.years.ago'), Argument::exact(1), Argument::any(), Argument::any())->willReturn('1 year ago');
-    $translator->transChoice(Argument::exact('time.years.ago'), Argument::exact(3), Argument::any(), Argument::any())->willReturn('3 years ago');
-    $translator->transChoice(Argument::exact('time.years.ago'), Argument::exact(100), Argument::any(), Argument::any())->willReturn('100 years ago');
+    $translator->trans(Argument::exact('time.years.ago'), ['%count%' => 1], Argument::any(), Argument::any())->willReturn('1 year ago');
+    $translator->trans(Argument::exact('time.years.ago'), ['%count%' => 3], Argument::any(), Argument::any())->willReturn('3 years ago');
+    $translator->trans(Argument::exact('time.years.ago'), ['%count%' => 100], Argument::any(), Argument::any())->willReturn('100 years ago');
 
     $this->getElapsedTime($this->testTime - 31557600)->shouldReturn('1 year ago');
     $this->getElapsedTime($this->testTime - 31557600 * 3)->shouldReturn('3 years ago');
