@@ -25,9 +25,10 @@ class UserComment
   private $program;
 
   /**
-   * @ORM\Column(type="guid")
+   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="comments", fetch="EXTRA_LAZY")
+   * @ORM\JoinColumn(name="userId", referencedColumnName="id", nullable=true)
    */
-  protected $userId;
+  protected $user;
 
   /**
    * @ORM\Column(type="date")
@@ -82,19 +83,19 @@ class UserComment
   }
 
   /**
-   * @return mixed
+   * @return User
    */
-  public function getUserId()
+  public function getUser()
   {
-    return $this->userId;
+    return $this->user;
   }
 
   /**
-   * @param mixed $userId
+   * @param User|mixed $user
    */
-  public function setUserId($userId)
+  public function setUser($user)
   {
-    $this->userId = $userId;
+    $this->user = $user;
   }
 
   /**

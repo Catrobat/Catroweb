@@ -38,7 +38,7 @@ class StoredUserDataController extends CRUDController
     $program_inappropriate_reports = $query->getResult();
     $query = $entity_manager->createQuery("SELECT pd FROM App\Entity\ProgramDownloads pd WHERE pd.user='$id'");
     $program_downloads = $query->getResult();
-    $query = $entity_manager->createQuery("SELECT uc FROM App\Entity\UserComment uc WHERE uc.userId='$id'");
+    $query = $entity_manager->createQuery("SELECT uc FROM App\Entity\UserComment uc WHERE uc.user='$id'");
     $user_comments = $query->getResult();
     $query = $entity_manager->createQuery("SELECT up FROM App\Entity\Program up WHERE up.user='$id'");
     $user_programs = $query->getResult();

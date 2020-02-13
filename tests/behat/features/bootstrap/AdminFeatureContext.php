@@ -1,14 +1,20 @@
 <?php
 
+use App\Entity\ProgramInappropriateReport;
+use App\Entity\ProgramManager;
+use App\Entity\UserComment;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Mink\Exception\ResponseTextException;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use App\Entity\Notification;
 use App\Entity\UserManager;
 use App\Catrobat\Services\TestEnv\SymfonySupport;
 use App\Catrobat\Services\TestEnv\LdapTestDriver;
-use Sonata\AdminBundle\Command\SetupAclCommand;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector;
 use Behat\Gherkin\Node\TableNode;
 use App\Entity\User;
@@ -190,7 +196,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     $input = new ArrayInput(['command' => 'sonata:admin:setup-acl']);
 
     $return = $application->run($input, new NullOutput);
-    assert($return !== 0, "Oh no!");
+    Assert::assertNotNull($return, "Oh no!");
   }
 
   // endregion BEFORE SCENARIO
@@ -322,8 +328,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    * @param $config
    *
    * @return \App\Entity\ProgramDownloads
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertProgramDownloadStatistics($program, $config)
   {
@@ -332,8 +338,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
 
   /**
    * @return User|object|null
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function getDefaultUser()
   {
@@ -363,8 +369,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    * @param array $config
    *
    * @return object|null
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertUser($config = [])
   {
@@ -376,8 +382,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    * @param $config
    *
    * @return Program
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function insertProgram($user, $config)
   {
@@ -390,8 +396,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    * @param string $flavor
    * @param null $request_parameters
    * @return \Symfony\Component\HttpFoundation\Response|null
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
   {
@@ -413,9 +419,11 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
   {
     $this->visitPath('/app/login');
+    $this->iWaitForThePageToBeLoaded();
     $this->fillField('username', $arg2);
     $this->fillField('password', $arg3);
     $this->pressButton('Login');
+    $this->iWaitForThePageToBeLoaded();
     if ($arg1 === 'try to')
     {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
@@ -466,8 +474,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    * @Given /^there are notifications:$/
    * @param TableNode $table
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreNotifications(TableNode $table)
   {
@@ -497,8 +505,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    * @Given /^there are program download statistics:$/
    * @param TableNode $table
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreProgramDownloadStatistics(TableNode $table)
   {
@@ -564,7 +572,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
         return;
       }
     }
-    assert(false, "Didn't find " . $recipient . ' in recipients.');
+    Assert::assertTrue(false, "Didn't find " . $recipient . ' in recipients.');
   }
 
   /**
@@ -626,7 +634,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
         ->getContent(), $needle) === false
     )
     {
-      assert(false, $needle . " not found in the response ");
+      Assert::assertTrue(false, $needle . " not found in the response ");
     }
   }
 
@@ -647,6 +655,23 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
       $this->theResponseShouldContain($program_stat['user_agent']);
       $this->theResponseShouldContain($program_stat['user']);
       $this->theResponseShouldContain($program_stat['referrer']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the reported table:$/
+   * @param TableNode $table
+   * @throws ResponseTextException
+   */
+  public function shouldSeeReportedTable(TableNode $table)
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['#Reported Comments']);
+      $this->assertSession()->pageTextContains($user_stat['#Reported Programs']);
+      $this->assertSession()->pageTextContains($user_stat['Username']);
+      $this->assertSession()->pageTextContains($user_stat['Email']);
     }
   }
 
@@ -782,7 +807,6 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   {
     $this->getClient()->request('GET', $arg1);
   }
-
   /**
    * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
    * @param $name
@@ -856,7 +880,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
 
     if (!strcmp($link->getUri(), $arg2))
     {
-      assert(false, "expected: " . $arg2 . "  get: " . $link->getURI());
+      Assert::assertTrue(false, "expected: " . $arg2 . "  get: " . $link->getURI());
     }
   }
 
@@ -899,6 +923,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^there are users:$/
    * @param TableNode $table
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereAreUsers(TableNode $table)
   {
@@ -954,8 +980,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
    *
    * @param TableNode $table
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function thereArePrograms(TableNode $table)
   {
@@ -988,11 +1014,73 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
     }
   }
 
+
+  /**
+   * @Given /^there are comments:$/
+   * @param TableNode $table
+   *
+   * @throws Exception
+   */
+  public function thereAreComments(TableNode $table)
+  {
+    /**
+     * @var $new_comment             UserComment
+     * @var $entity_manager          EntityManager
+     */
+    $entity_manager = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $program_manager = $this->kernel->getContainer()->get(ProgramManager::class);
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
+    $comments = $table->getHash();
+
+    foreach ($comments as $comment)
+    {
+      $new_comment = new UserComment();
+
+      $new_comment->setUploadDate(new DateTime($comment['upload_date'], new DateTimeZone('UTC')));
+      $new_comment->setProgram($program_manager->find($comment['program_id']));
+      $new_comment->setUser($user_manager->find($comment['user_id']));
+      $new_comment->setUsername($comment['user_name']);
+      $new_comment->setIsReported($comment['reported']);
+      $new_comment->setText($comment['text']);
+      $entity_manager->persist($new_comment);
+    }
+    $entity_manager->flush();
+  }
+  /**
+   * @Given /^there are inappropriate reports:$/
+   * @param TableNode $table
+   *
+   * @throws Exception
+   */
+  public function thereAreInappropriateReports(TableNode $table)
+  {
+    /**
+     * @var $new_report          ProgramInappropriateReport
+     * @var $entity_manager          EntityManager
+     */
+    $entity_manager = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $program_manager = $this->kernel->getContainer()->get(ProgramManager::class);
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
+    $reports = $table->getHash();
+
+    foreach ($reports as $report)
+    {
+      $new_report = new ProgramInappropriateReport();
+      $new_report->setCategory($report['category']);
+      $new_report->setProgram($program_manager->find($report['program_id']));
+      $new_report->setReportingUser($user_manager->find($report['user_id']));
+      $new_report->setTime(new DateTime($report['time'], new DateTimeZone('UTC')));
+      $new_report->setNote($report['note']);
+      $entity_manager->persist($new_report);
+    }
+    $entity_manager->flush();
+  }
+
   /**
    * @When /^I upload a program with (.*)$/
    * @param $program_attribute
-   *
-   * @throws PendingException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function iUploadAProgramWith($program_attribute)
   {
@@ -1048,6 +1136,29 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
       ->getPage()
       ->find('css', $arg1)
       ->click();
+  }
+
+  /**
+   * Waits until a page is fully loaded
+   *
+   * @Given I wait for the page to be loaded
+   */
+  public function iWaitForThePageToBeLoaded()
+  {
+    $this->getSession()->wait(5000, "document.readyState === 'complete'");
+    $this->iWaitForAjaxToFinish();
+  }
+
+  /**
+   * Wait for AJAX to finish.
+   *
+   * @Given /^I wait for AJAX to finish$/
+   */
+  public function iWaitForAjaxToFinish()
+  {
+    $this->getSession()->wait(5000,
+      '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
+    );
   }
 
   // endregion STEPS

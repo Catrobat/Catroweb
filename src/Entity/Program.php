@@ -306,6 +306,12 @@ class Program
   protected $debug_build;
 
   /**
+   * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="program", fetch="EXTRA_LAZY")
+   */
+
+  protected $reports;
+
+  /**
    * Program constructor.
    */
   public function __construct()
@@ -1304,5 +1310,14 @@ class Program
   public function setDebugBuild($debug_build): void
   {
     $this->debug_build = $debug_build;
+  }
+
+  public function getReports()
+  {
+    return $this->reports;
+  }
+  public function getReportsCount()
+  {
+    return $this->getReports()->count();
   }
 }

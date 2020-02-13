@@ -397,10 +397,9 @@ class ProfileController extends AbstractController
 
     $em = $this->getDoctrine()->getManager();
 
-    $user_id = $user->getId();
     $user_comments = $this->getDoctrine()
       ->getRepository('App\Entity\UserComment')
-      ->findBy(['userId' => $user_id], ['id' => 'DESC']);
+      ->findBy(['user' => $user], ['id' => 'DESC']);
 
     foreach ($user_comments as $comment)
     {

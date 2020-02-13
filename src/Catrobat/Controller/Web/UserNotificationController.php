@@ -104,7 +104,7 @@ class UserNotificationController extends AbstractController
         $found_notification = true;
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy([
-          'id' => $notification->getComment()->getUserId(),
+          'id' => $notification->getComment()->getUser(),
         ]);
 
       }
