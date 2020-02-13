@@ -116,7 +116,16 @@ class DefaultController extends AbstractController
   {
     return $this->render('PrivacyAndTerms/termsOfUse.html.twig');
   }
-
+  /**
+   * @Route("/privacypolicy", name="privacypolicy", methods={"GET"})
+   *
+   * @return Response
+   * @throws \Twig\Error\Error
+   */
+  public function privacypolicyAction()
+  {
+    return $this->render('PrivacyAndTerms/policy.html.twig');
+  }
 
   /**
    * @Route("/licenseToPlay", name="licenseToPlay", methods={"GET"})
