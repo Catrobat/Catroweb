@@ -20,6 +20,7 @@ use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
 use App\Entity\ProgramRemixRelation;
+use App\Entity\RemixNotification;
 use App\Entity\StarterCategory;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -3145,6 +3146,10 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
           case "like":
             $to_create = new LikeNotification($program->getUser(), $user, $program);
+            $em->persist($to_create);
+            break;
+          case "remix":
+            $to_create = new RemixNotification($program->getUser(), $program->getUser(), $program, $program);
             $em->persist($to_create);
             break;
           case "catro notifications":

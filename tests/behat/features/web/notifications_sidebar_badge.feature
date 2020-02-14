@@ -66,45 +66,56 @@ Feature: Sidebar should show amount of new notifications in form of a badge
   Scenario: Each Notification subsection should have badge showing number of new Notifications of that type
     Given there are "10" "like" notifications for program "program 1" from "User"
     And there are "20" "comment" notifications for program "program 1" from "Drago"
+    And there are "18" "remix" notifications for program "program 1" from "Drago"
     And there are "5"+ notifications for "Catrobat"
     And "John" have just followed "Catrobat"
     And I log in as "Catrobat"
     And I open the menu
     When I click ".collapsible"
     And I wait for AJAX to finish
-    Then the ".all-notifications" element should contain "36"
+    Then the ".all-notifications" element should contain "54"
     And the ".followers" element should contain "1"
     And the ".likes" element should contain "10"
     And the ".comments" element should contain "20"
+    And the ".remixes" element should contain "18"
 
   Scenario: New Notification badges should be correctly decremented when one notification has been marked as read
     Given there are "10" "like" notifications for program "program 1" from "User"
     And there are "20" "comment" notifications for program "program 1" from "Drago"
+    And there are "42" "remix" notifications for program "program 1" from "Drago"
     And there are "5"+ notifications for "Catrobat"
     And "John" have just followed "Catrobat"
     And I log in as "Catrobat"
     And I open the menu
     When I click ".collapsible"
     And I wait for AJAX to finish
-    Then the ".all-notifications" element should contain "36"
+    Then the ".all-notifications" element should contain "78"
     And the ".followers" element should contain "1"
     And the ".likes" element should contain "10"
     And the ".comments" element should contain "20"
+    And the ".remixes" element should contain "42"
     Given I am on "/app/notifications/likes"
+    And I wait for the page to be loaded
     And I click "#mark-as-read-4"
     And I wait for AJAX to finish
     Then the ".likes" element should contain "9"
-    And the ".all-notifications" element should contain "35"
+    And the ".all-notifications" element should contain "77"
     And the ".comments" element should contain "20"
+    And the ".remixes" element should contain "42"
     Given I am on "/app/notifications/comments/"
+    And I wait for the page to be loaded
     And I click "#mark-all-as-seen"
     And I wait for AJAX to finish
     Then I should see "All notifications have been marked as read."
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
+    Given I am on "/app/"
+    And I wait for the page to be loaded
     Then the element ".comments" should not be visible
-    And the ".all-notifications" element should contain "15"
+    And the ".all-notifications" element should contain "57"
     And the ".followers" element should contain "1"
+    And the ".likes" element should contain "9"
+    And the ".remixes" element should contain "42"
 
     Scenario: If the user who I am following uploads the program then the followers notification badge should be incremented
       Given I log in as "Catrobat"
