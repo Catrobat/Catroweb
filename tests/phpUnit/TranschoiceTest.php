@@ -23,9 +23,9 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
   {
     foreach ($message_ids as $message_id)
     {
-      $translator->transChoice($message_id, 1, [], 'catroweb', $language_code);
-      $translator->transChoice($message_id, 2, [], 'catroweb', $language_code);
-      $translator->transChoice($message_id, 10, [], 'catroweb', $language_code);
+      $translator->trans($message_id, ['%count%' => 1], 'catroweb', $language_code);
+      $translator->trans($message_id, ['%count%' => 2], 'catroweb', $language_code);
+      $translator->trans($message_id, ['%count%' => 10], 'catroweb', $language_code);
     }
     $this->assertTrue(true);
   }
