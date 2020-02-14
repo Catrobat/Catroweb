@@ -76,7 +76,7 @@ class CommentsController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if ($user->getId() !== $comment->getUserId() && !$this->isGranted("ROLE_ADMIN"))
+    if ($user->getId() !== $comment->getUser() && !$this->isGranted("ROLE_ADMIN"))
     {
       return new Response(StatusCode::NO_ADMIN_RIGHTS);
     }
@@ -127,13 +127,12 @@ class CommentsController extends AbstractController
     }
 
     $user = $this->get("security.token_storage")->getToken()->getUser();
-    $id = $user->getId();
 
     $program = $program_manager->find($_POST['ProgramId']);
 
     $temp_comment = new UserComment();
     $temp_comment->setUsername($user->getUsername());
-    $temp_comment->setUserId($id);
+    $temp_comment->setUser($user);
     $temp_comment->setText($_POST['Message']);
     $temp_comment->setProgram($program);
     $temp_comment->setUploadDate(date_create());

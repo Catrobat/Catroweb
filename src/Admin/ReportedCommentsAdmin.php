@@ -66,7 +66,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
     $listMapper
       ->add('id')
       ->add('programId')
-      ->add('userId')
+      ->add('user')
       ->add('uploadDate')
       ->add('text')
       ->add('username')

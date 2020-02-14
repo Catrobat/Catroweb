@@ -905,6 +905,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
      */
     $entity_manager = $this->kernel->getContainer()->get('doctrine')->getManager();
     $program_manager = $this->kernel->getContainer()->get(ProgramManager::class);
+    $user_manager = $this->kernel->getContainer()->get(UserManager::class);
     $comments = $table->getHash();
 
     foreach ($comments as $comment)
@@ -913,7 +914,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
 
       $new_comment->setUploadDate(new DateTime($comment['upload_date'], new DateTimeZone('UTC')));
       $new_comment->setProgram($program_manager->find($comment['program_id']));
-      $new_comment->setUserId($comment['user_id']);
+      $new_comment->setUser($user_manager->find($comment['user_id']));
       $new_comment->setUsername($comment['user_name']);
       $new_comment->setIsReported(false);
       $new_comment->setText($comment['text']);
@@ -1183,6 +1184,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   public function iAmLoggedInAsWithThePassword($arg1, $username, $password = self::DEFAULT_PASSWORD)
   {
     $this->visitPath('/app/login');
+    $this->iWaitForThePageToBeLoaded();
     $this->fillField('_username', $username);
     $this->fillField('password', $password);
     $this->pressButton('Login');
@@ -3128,7 +3130,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
           case "comment":
             $temp_comment = new UserComment();
             $temp_comment->setUsername($user->getUsername());
-            $temp_comment->setUserId($user->getId());
+            $temp_comment->setUser($user);
             $temp_comment->setText("This is a comment");
             $temp_comment->setProgram($program);
             $temp_comment->setUploadDate(date_create());
@@ -3412,22 +3414,44 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForTheElementToContain($selector, $text)
   {
-    /** @var NodeElement $element * */
+    /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $selector);
-    $timer = 0;
-    $seconds = 10;
-    while ($timer < $seconds)
+    $timeout_in_seconds = 10.0;
+    for ($timer = 0; $timer < $timeout_in_seconds; $timer++)
     {
       if ($element->getText() === $text)
       {
         return;
       }
-      $timer++;
       sleep(1);
     }
 
-    $message = "The text '$text' was not found after a $seconds seconds timeout";
+    $message = "The text '$text' was not found after a $timeout_in_seconds seconds timeout";
     throw new ResponseTextException($message, $this->getSession());
   }
 
+  /**
+   * @Then I wait for the element :selector to be visible
+   *
+   * @param $selector
+   *
+   * @throws ResponseTextException
+   */
+  public function iWaitForTheElementToBeVisible($selector)
+  {
+    /** @var NodeElement $element */
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    $timeout_in_seconds = 10.0;
+    for ($timer = 0; $timer < $timeout_in_seconds; $timer++)
+    {
+      if ($element->isVisible())
+      {
+        return;
+      }
+      sleep(1);
+    }
+
+    $message = "The element '$selector' was not visible after a $timeout_in_seconds seconds timeout";
+    throw new ResponseTextException($message, $this->getSession());
+  }
 }

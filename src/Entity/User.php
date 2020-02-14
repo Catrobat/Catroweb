@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\GuidType;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -139,6 +140,17 @@ class User extends BaseUser implements LdapUserInterface
   protected $limited = false;
 
   /**
+   * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="reportingUser", fetch="EXTRA_LAZY")
+   */
+  protected $program_inappropriate_reports;
+
+
+  /**
+   * @ORM\OneToMany(targetEntity="App\Entity\UserComment", mappedBy="user", fetch="EXTRA_LAZY")
+   */
+  protected $comments;
+
+  /**
    * User constructor.
    */
   public function __construct()
@@ -149,8 +161,6 @@ class User extends BaseUser implements LdapUserInterface
     $this->following = new ArrayCollection();
     $this->country = '';
   }
-
-
 
   /**
    *
@@ -452,4 +462,46 @@ class User extends BaseUser implements LdapUserInterface
   {
     return $this->following->contains($user);
   }
+
+  /**
+   * @return mixed
+   */
+  public function getProgramInappropriateReports()
+  {
+    return $this->program_inappropriate_reports;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getProgramInappropriateReportsCount()
+  {
+    $programs_collection = $this->getPrograms();
+    $programs = $programs_collection->getValues();
+    $count = 0;
+    foreach ($programs as $program)
+    {
+      $count +=$program->getReportsCount();
+    }
+    return $count;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getComments()
+  {
+    return $this->comments;
+  }
+
+  /**
+   * @return mixed
+   */
+    public function getReportedCommentsCount()
+    {
+      $comments_collection = $this->getComments();
+      $criteria = Criteria::create()->andWhere(Criteria::expr()->eq('isReported', 1));
+
+      return $comments_collection->matching($criteria)->count();
+    }
 }

@@ -41,10 +41,10 @@ Feature:
     When I click "#change-project-thumbnail-button"
     And I wait for AJAX to finish
     When I attach the avatar "logo.png" to "file"
-    And I wait for AJAX to finish
+    And I wait for the element ".text-img-upload-success" to be visible
     Then I wait for the element ".text-img-upload-success" to contain "Your image was uploaded successfully!"
     When I click "#change-project-thumbnail-button"
     And I wait for AJAX to finish
     When I attach the avatar "galaxy.jpg" to "file"
-    And I wait for AJAX to finish
+    And I wait for the element ".text-img-upload-success" to be visible
     Then I wait for the element ".text-img-upload-success" to contain "Your image was uploaded successfully!"

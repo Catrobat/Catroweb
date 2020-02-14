@@ -80,9 +80,9 @@ host(getenv('DEPLOY_WEBTEST'))
 
 host(getenv('DEPLOY_POREVIEW'))
   ->stage('po-review')
-  ->set('symfony_env', 'prod')
+  ->set('symfony_env', 'dev')
   ->set('branch', getenv('DEPLOY_POREVIEW_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
 host(getenv('DEPLOY_CATBLOCKS'))
