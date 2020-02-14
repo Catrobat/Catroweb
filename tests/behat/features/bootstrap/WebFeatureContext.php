@@ -76,6 +76,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   private $symfony_support;
 
+
   const AVATAR_DIR = './tests/testdata/DataFixtures/AvatarImages/';
   const MEDIAPACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
   const FIXTUREDIR = './tests/testdata/DataFixtures/';
@@ -827,7 +828,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setUploadedAt(
         isset($programs[$i]['upload time']) ?
           new DateTime($programs[$i]['upload time'], new DateTimeZone('UTC')) :
-          null
+          new DateTime("01.01.2013 12:00", new DateTimeZone('UTC'))
       );
       $program->setRemixMigratedAt(null);
       $program->setCatrobatVersion(1);
@@ -3364,6 +3365,63 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       throw new Exception($message);
     }
   }
+  /**
+   * @Given /^I have a program with "([^"]*)" set to "([^"]*)"$/
+   * @param $key
+   * @param $value
+   */
+  public function iHaveAProgramWithAs($key, $value)
+  {
+    $this->symfony_support->generateProgramFileWith([
+      $key => $value,
+    ]);
+  }
+
+  /**
+   * @When /^User "([^"]*)" uploads the program$/
+   */
+
+  public function iUploadAProgram($user)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $user = $em->getRepository(User::class)->findOneBy([
+      'username' => $user,
+    ]);
+    $this->symfony_support->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, null);
+    // A kinda hacky solution, but we need to upload the program twice to use the fixed ids!
+    $this->symfony_support->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, null);
+
+  }
+
+
+
+  /**
+   * @Given /^I have a project with "([^"]*)" set to "([^"]*)"$/
+   * @param $key
+   * @param $value
+   */
+  public function iHaveAProjectWithAs($key, $value)
+  {
+    $this->symfony_support->generateProgramFileWith([
+      $key => $value,
+    ]);
+  }
+
+  /**
+   * @When /^User "([^"]*)" uploads the project$/
+   */
+  public function iUploadAProject($user)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $user = $em->getRepository(User::class)->findOneBy([
+      'username' => $user,
+    ]);
+    $this->symfony_support->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, null);
+    // A kinda hacky solution, but we need to upload the program twice to use the fixed ids!
+    $this->symfony_support->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, null);
+  }
+
+
 
 
   //--------------------------------------------------------------------------------------------------------------------

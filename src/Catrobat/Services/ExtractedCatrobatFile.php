@@ -6,6 +6,7 @@ use App\Catrobat\CatrobatCode\CodeObject;
 use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
+use App\Repository\ProgramRepository;
 use Doctrine\DBAL\Types\GuidType;
 use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
@@ -338,13 +339,14 @@ class ExtractedCatrobatFile
   /**
    * based on: http://stackoverflow.com/a/27295688
    *
-   * @param GuidType $program_id
-   * @param boolean  $is_initial_version
-   * @param bool     $migration_mode
+   * @param GuidType          $program_id
+   * @param boolean           $is_initial_version
+   * @param ProgramRepository $program_repository
+   * @param bool              $migration_mode
    *
    * @return RemixData[]
    */
-  public function getRemixesData($program_id, $is_initial_version, $migration_mode = false)
+  public function getRemixesData($program_id, $is_initial_version, $program_repository, $migration_mode = false)
   {
     $remixes_string = $migration_mode ? $this->getRemixMigrationUrlsString() : $this->getRemixUrlsString();
     $state = RemixUrlParsingState::STARTING;
@@ -402,21 +404,42 @@ class ExtractedCatrobatFile
     $unique_remixes = [];
     foreach ($extracted_remixes as $remix_data)
     {
-      if ($remix_data->getProgramId() <= 0)
+      /** @var RemixData $remix_data */
+      if ($remix_data->getProgramId() === "")
       {
         continue;
       }
 
       if (!$remix_data->isScratchProgram())
       {
-        // case initial version: ignore parents having same or lower ID as the child-program itself!
-        if ($is_initial_version && $remix_data->getProgramId() >= $program_id)
+        // projects can't be a remix of them self
+        if ($remix_data->getProgramId() === $program_id)
         {
           continue;
         }
 
-        // case higher version: ignore parents having same ID as the child-program itself!
-        if (!$is_initial_version && $remix_data->getProgramId() == $program_id)
+        // This id/date back and forth is for the legacy spec tests.
+        // Real world scenarios should always be in the date scenario
+        $parent_upload_time = $remix_data->getProgramId();
+        $child_upload_time = $program_id;
+
+        $parent = null;
+        $child = null;
+
+        if ($program_repository !== null)
+        {
+          $parent = $program_repository->find($remix_data->getProgramId());
+          $child = $program_repository->find($program_id);
+        }
+
+        if ($parent !== null && $child !== null)
+        {
+          $parent_upload_time = $parent->getUploadedAt();
+          $child_upload_time = $child->getUploadedAt();
+        }
+
+        // case initial version: child must be newer than parent
+        if ($is_initial_version && $child_upload_time < $parent_upload_time)
         {
           continue;
         }

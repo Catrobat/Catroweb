@@ -848,6 +848,10 @@ catro-notifications:
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%.
+              You can see the remix on the following link %remix_program_link%.'
 
 clipboard:
   success: Link to project copied to clipboard!

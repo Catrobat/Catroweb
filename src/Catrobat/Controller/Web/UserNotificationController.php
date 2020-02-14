@@ -11,6 +11,7 @@ use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\NewProgramNotification;
 use App\Entity\RemixManager;
+use App\Entity\RemixNotification;
 use App\Entity\User;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
@@ -26,7 +27,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Twig\Error\Error;
 
 
 /**
@@ -44,23 +44,23 @@ class UserNotificationController extends AbstractController
    * UserNotificationController constructor.
    *
    * @param ParameterBagInterface $parameter_bag
-   * @param StatisticsService $statistics_service
+   * @param StatisticsService     $statistics_service
    */
   public function __construct(ParameterBagInterface $parameter_bag,
-  StatisticsService $statistics_service)
+                              StatisticsService $statistics_service)
   {
     $this->statistics = $statistics_service;
   }
 
   /**
    * @Route("/notifications/{notification_type}", name="user_notifications", methods={"GET"})
-   * @param $notification_type
+   * @param                             $notification_type
    * @param CatroNotificationRepository $notification_repo
    *
    * @return RedirectResponse|Response
    */
   public function userNotificationsAction($notification_type,
-  CatroNotificationRepository $notification_repo)
+                                          CatroNotificationRepository $notification_repo)
   {
     /**
      * @var $notification CatroNotification
@@ -118,6 +118,13 @@ class UserNotificationController extends AbstractController
         $found_notification = true;
         $user = $notification->getFollower();
       }
+      else
+      {
+        if ($notification instanceof RemixNotification)
+        {
+          $user = $notification->getRemixFrom();
+        }
+      }
       if ($user !== null)
       {
         $avatar = $user->getAvatar();
@@ -158,12 +165,12 @@ class UserNotificationController extends AbstractController
    * @Route("/notifications/notifications/count", name="user_notifications_count", methods={"GET"})
    *
    * @param CatroNotificationRepository $notification_repo
-   * @param RemixManager $remix_manager
+   * @param RemixManager                $remix_manager
    *
    * @return JsonResponse
    */
   public function userNotificationsCountAction(CatroNotificationRepository $notification_repo,
-  RemixManager $remix_manager)
+                                               RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
@@ -194,26 +201,21 @@ class UserNotificationController extends AbstractController
           if ($notification instanceof CommentNotification && !$notification->getSeen())
           {
             $comments++;
-
           }
         }
       }
       if (!$notification->getSeen())
       {
-
         $all++;
-
       }
-
-
     }
 
 
     $unseen_remixed_program_data = $remix_manager->getUnseenRemixProgramsDataOfUser($user);
 
     return new JsonResponse([
-      'count'      => ['all-notifications'          => count($unseen_remixed_program_data) + $all,
-                       'all-notifications-dropdown' => count($unseen_remixed_program_data) + $all,
+      'count'      => ['all-notifications'          => $all,
+                       'all-notifications-dropdown' => $all,
                        "likes"                      => $likes,
                        "followers"                  => $followers,
                        "comments"                   => $comments],
@@ -226,18 +228,18 @@ class UserNotificationController extends AbstractController
    * @Route("/notifications/{notification_type}/seen", name="user_notifications_seen",
    *                                                   methods={"GET"})
    *
-   * @param $notification_type
+   * @param                             $notification_type
    * @param CatroNotificationRepository $notification_repo
-   * @param CatroNotificationService $notification_service
-   * @param RemixManager $remix_manager
+   * @param CatroNotificationService    $notification_service
+   * @param RemixManager                $remix_manager
    *
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
   public function userNotificationsSeenAction($notification_type,
-  CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
-  RemixManager $remix_manager)
+                                              CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
+                                              RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
@@ -289,18 +291,18 @@ class UserNotificationController extends AbstractController
    * @Route("/notifications/{notification_type}/deleteAll", name="delete_all_notifications",
    *                                                        methods={"GET"})
    *
-   * @param $notification_type
+   * @param                             $notification_type
    * @param CatroNotificationRepository $notification_repo
-   * @param CatroNotificationService $notification_service
-   * @param RemixManager $remix_manager
+   * @param CatroNotificationService    $notification_service
+   * @param RemixManager                $remix_manager
    *
    * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
   public function userNotificationsDeleteAllAction($notification_type,
-  CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
-  RemixManager $remix_manager)
+                                                   CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
+                                                   RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
@@ -351,9 +353,9 @@ class UserNotificationController extends AbstractController
    * @Route("/notification/ancestor/{ancestor_id}/descendant/{descendant_id}",
    *  name="see_user_notification", methods={"GET"})
    *
-   * @param Request $request
-   * @param         $ancestor_id
-   * @param         $descendant_id
+   * @param Request      $request
+   * @param              $ancestor_id
+   * @param              $descendant_id
    * @param RemixManager $remix_manager
    *
    * @return RedirectResponse
@@ -361,7 +363,7 @@ class UserNotificationController extends AbstractController
    * @throws OptimisticLockException
    */
   public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id,
-  RemixManager $remix_manager)
+                                            RemixManager $remix_manager)
   {
     $user = $this->getUser();
     if (!$user)
@@ -400,8 +402,8 @@ class UserNotificationController extends AbstractController
    * @Route("/notifications/markasread/{notification_id}", name="catro_notification_mark_as_read",
    *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
    *
-   * @param $notification_id
-   * @param CatroNotificationService $notification_service
+   * @param                             $notification_id
+   * @param CatroNotificationService    $notification_service
    * @param CatroNotificationRepository $notification_repo
    *
    * @return JsonResponse
@@ -409,7 +411,7 @@ class UserNotificationController extends AbstractController
    * @throws OptimisticLockException
    */
   public function markCatroNotificationAsRead($notification_id,
-  CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
+                                              CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
   {
     $user = $this->getUser();
     if (!$user)
@@ -420,7 +422,7 @@ class UserNotificationController extends AbstractController
     if ($notification_seen === null)
     {
       return new JsonResponse(["success" => false,
-      "message" => "Notification not found or doesnt belong to user"]);
+                               "message" => "Notification not found or doesnt belong to user"]);
     }
     $notification_service->markSeen([$notification_seen]);
 
@@ -431,8 +433,8 @@ class UserNotificationController extends AbstractController
    * @Route("/notifications/deleteNotification/{notification_id}", name="delete_notification",
    *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
    *
-   * @param $notification_id
-   * @param CatroNotificationService $notification_service
+   * @param                             $notification_id
+   * @param CatroNotificationService    $notification_service
    * @param CatroNotificationRepository $notification_repo
    *
    * @return JsonResponse
@@ -440,19 +442,19 @@ class UserNotificationController extends AbstractController
    * @throws OptimisticLockException
    */
   public function userNotificationDeleteAction($notification_id,
-  CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
+                                               CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
   {
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
-    $delete_notification_ = $notification_repo->findOneBy(["id" => $notification_id,
-    "user" => $user]);
+    $delete_notification_ = $notification_repo->findOneBy(["id"   => $notification_id,
+                                                           "user" => $user]);
     if ($delete_notification_ === null)
     {
       return new JsonResponse(["success" => false,
-      "message" => "Notification not found or doesnt belong to user"]);
+                               "message" => "Notification not found or doesnt belong to user"]);
     }
 
     $notification_service->deleteNotifications([$delete_notification_]);

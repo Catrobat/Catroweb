@@ -41,7 +41,7 @@ class RemixData
   }
 
   /**
-   * @return int
+   * @return string
    */
   public function getProgramId()
   {
@@ -51,9 +51,23 @@ class RemixData
     }
 
     $remix_url_path = $this->remix_url_data['path'];
-    preg_match("/(\\/[0-9]+(\\/)?)$/", $remix_url_path, $id_matches);
 
-    return (count($id_matches) > 0) ? intval(str_replace('/', '', $id_matches[0])) : 0;
+    $uuid_pattern = "@[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}@";
+    preg_match($uuid_pattern, $remix_url_path, $id_matches);
+
+    if (count($id_matches) > 0)
+    {
+      return $id_matches[0];
+    }
+
+    // legacy id filtering for old projects where ids where numbers
+    preg_match("/(\\/[0-9]+(\\/)?)$/", $remix_url_path, $id_matches);
+    if (count($id_matches) > 0)
+    {
+      return str_replace('/', '', $id_matches[0]);
+    }
+
+    return "";
   }
 
   /**
