@@ -14,6 +14,7 @@ use App\Entity\LikeNotification;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use App\Entity\NewProgramNotification;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
@@ -3417,8 +3418,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       'username' => $user,
     ]);
     $this->symfony_support->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, null);
-    // A kinda hacky solution, but we need to upload the program twice to use the fixed ids!
-    $this->symfony_support->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, null);
+
   }
 
 
@@ -3512,4 +3512,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $message = "The element '$selector' was not visible after a $timeout_in_seconds seconds timeout";
     throw new ResponseTextException($message, $this->getSession());
   }
+
+
 }

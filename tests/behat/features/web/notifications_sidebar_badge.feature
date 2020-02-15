@@ -105,3 +105,26 @@ Feature: Sidebar should show amount of new notifications in form of a badge
     Then the element ".comments" should not be visible
     And the ".all-notifications" element should contain "15"
     And the ".followers" element should contain "1"
+
+    Scenario: If the user who I am following uploads the program then the followers notification badge should be incremented
+      Given I log in as "Catrobat"
+      And I am on "/app/user/2"
+      And I wait for the page to be loaded
+      And I click "#follow-btn"
+      And I wait for the page to be loaded
+      And I am on "/app/user/3"
+      And I wait for the page to be loaded
+      And I click "#follow-btn"
+      And I wait for the page to be loaded
+      Given I have a project with "url" set to "/app/project/1"
+      And User "User" uploads the project
+      And User "Drago" uploads the project
+      Given I log in as "Catrobat"
+      And I am on "/app/"
+      And I open the menu
+      When I click ".collapsible"
+      And I wait for AJAX to finish
+      Then the ".all-notifications" element should contain "4"
+      Then the element ".comments" should not be visible
+      And the ".followers" element should contain "2"
+      Then the element ".likes" should not be visible

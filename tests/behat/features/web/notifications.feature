@@ -138,3 +138,34 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     Given I am on "/app/notifications/allNotifications"
     And I wait for the page to be loaded
     Then I should see "You have 37 new Notifications"
+
+
+
+   Scenario: User should get new program notifications under follower category
+     Given I log in as "Catrobat"
+     And I am on "/app/user/2"
+     And I wait for the page to be loaded
+     And I click "#follow-btn"
+     And I wait for the page to be loaded
+     And I am on "/app/user/3"
+     And I wait for the page to be loaded
+     And I click "#follow-btn"
+     And I wait for the page to be loaded
+     Given I have a project with "url" set to "/app/project/1"
+     And User "User" uploads the project
+     And User "Drago" uploads the project
+     And I am on "/app/notifications/followers"
+     Then I should see "You have 2 new Notifications"
+     And I should see "User User created a new Project test"
+     And I should see "User Drago created a new Project test"
+
+
+
+
+
+
+
+
+
+
+

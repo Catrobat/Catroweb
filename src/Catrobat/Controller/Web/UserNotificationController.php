@@ -83,9 +83,7 @@ class UserNotificationController extends AbstractController
 
     foreach ($catro_user_notifications as $notification)
     {
-
       $found_notification = false;
-
 
       $user = null;
       if ($notification_type === "allNotifications")
@@ -108,13 +106,13 @@ class UserNotificationController extends AbstractController
         ]);
 
       }
-      elseif ($notification instanceof NewProgramNotification)
+      elseif ($notification instanceof NewProgramNotification && $notification_type === "followers")
       {
+        $found_notification = true;
         $user = $notification->getProgram()->getUser();
       }
       elseif ($notification instanceof FollowNotification && $notification_type === "followers")
       {
-
         $found_notification = true;
         $user = $notification->getFollower();
       }
@@ -192,7 +190,8 @@ class UserNotificationController extends AbstractController
       }
       else
       {
-        if ($notification instanceof FollowNotification && !$notification->getSeen())
+        if (($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
+            && !$notification->getSeen())
         {
           $followers++;
         }
@@ -257,7 +256,8 @@ class UserNotificationController extends AbstractController
       }
       else
       {
-        if ($notification_type === "followers" && $notification instanceof FollowNotification)
+        if ($notification_type === "followers" &&($notification instanceof FollowNotification
+            || $notification instanceof NewProgramNotification))
         {
           $notifications_seen[$notification->getID()] = $notification;
         }
@@ -320,7 +320,8 @@ class UserNotificationController extends AbstractController
       }
       else
       {
-        if ($notification_type === "followers" && $notification instanceof FollowNotification)
+        if ($notification_type === "followers" && ($notification instanceof FollowNotification
+            || $notification instanceof NewProgramNotification))
         {
           $notifications_to_delete[$notification->getID()] = $notification;
         }
