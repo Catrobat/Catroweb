@@ -19,6 +19,16 @@
   }
 }
 
+.user-info {
+  @include force-word-break();
+  @media screen and (max-width: 280px) {
+    width: 70%;
+    max-width: 70%;
+    margin-left: 25%;
+  }
+
+}
+
 .visited-program {
   opacity: 0.6;
 
@@ -110,6 +120,379 @@
   }
 }
 
+#profile-programs {
+  margin-top: 30px;
+}
+
+#profile-follow {
+  @media screen and (max-width: 300px) {
+    margin-bottom: 150px;
+  }
+  @media screen and (max-width: 258px) {
+    margin-bottom: 170px;
+  }
+  @media screen and (max-width: 200px) {
+    margin-bottom: 190px;
+  }
+  @media screen and (max-width: 177px) {
+    margin-bottom: 240px;
+  }
+  @media screen and (max-width: 146px) {
+    margin-bottom: 300px;
+  }
+  @media screen and (max-width: 133px) {
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+}
+
+#follows-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#followers-header {
+  margin-bottom: 30px;
+}
+
+#follower-section {
+  margin-top: 50px;
+}
+
+.follow-avatar {
+  margin-left: 2%;
+  width: 6rem;
+  margin-right: 5%;
+  text-align: center;
+
+  img {
+    @media screen and (max-width: 280px) {
+      margin-left: 50%;
+      margin-bottom: 3%;
+    }
+    @media screen and (max-width: 230px) {
+      margin-left: 30%;
+    }
+    @media screen and (max-width: 204px) {
+      margin-left: 2%;
+    }
+  }
+}
+
+.follower-body {
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  white-space: initial;
+  vertical-align: middle;
+  @include force-word-break();
+
+  @media screen and (min-width: 1600px) {
+    max-width: 90%;
+  }
+  @media screen and (min-width: 1400px) {
+    max-width: 85%;
+  }
+  @media screen and (min-width: 1200px) {
+    max-width: 81%;
+  }
+  @media screen and (max-width: 1200px) {
+    max-width: 77%;
+  }
+  @media screen and (max-width: 990px) {
+    max-width: 40%;
+  }
+  @media screen and (max-width: 500px) {
+    max-width: 60%;
+  }
+  @media screen and (max-width: 400px) {
+    max-width: 50%;
+  }
+  @media screen and (max-width: 280px) {
+    width: 70%;
+    max-width: 70%;
+    margin-left: 25%;
+  }
+  @media screen and (max-width: 204px) {
+    margin-left: 2%;
+  }
+}
+
+
+.following-btn {
+  float: right;
+  position: relative;
+  right: inherit;
+  bottom: 40px;
+  @media screen and (max-width: 990px) {
+    bottom: 25px;
+  }
+  @media screen and (max-width: 294px) {
+    bottom: 10px;
+  }
+  @media screen and (max-width: 280px) {
+    bottom: auto;
+    padding-right: 40px;
+  }
+  @media screen and (max-width: 260px) {
+    padding-right: 20px;
+  }
+  @media screen and (max-width: 225px) {
+    padding-right: 0px;
+  }
+}
+
+.follow-btn {
+  float: right;
+  position: relative;
+  right: inherit;
+  bottom: 40px;
+
+  @media screen and (max-width: 990px) {
+    bottom: 25px;
+  }
+  @media screen and (max-width: 280px) {
+    bottom: auto;
+    padding-right: 40px;
+  }
+  @media screen and (max-width: 260px) {
+    padding-right: 20px;
+  }
+  @media screen and (max-width: 225px) {
+    padding-right: 0px;
+  }
+}
+
+.follows {
+  vertical-align: middle;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 60px;
+  width: 150px;
+  align-items: center;
+  justify-content: center;
+  white-space: initial;
+
+  img {
+    height: 50px;
+    float: left;
+
+  }
+
+  span {
+    max-width: 100%;
+    @include force-word-break();
+  }
+
+  @media screen and (max-width: 990px) {
+    width: 100px;
+    height: auto;
+  }
+  @media screen and (max-width: 200px) {
+    width: inherit;
+  }
+
+}
+
+.follow {
+  border: 2px solid $primary;
+  align-items: center;
+  justify-content: center;
+  white-space: initial;
+  vertical-align: middle;
+  color: $primary;
+  width: 150px;
+  height: 60px;
+  @media screen and (max-width: 990px) {
+    width: 100px;
+    height: auto;
+  }
+  @media screen and (max-width: 200px) {
+    width: inherit;
+  }
+
+}
+
+#no-followers {
+  text-align: center;
+  position: relative;
+}
+
+.profile-follows {
+  vertical-align: middle;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 120px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  white-space: initial;
+
+  img {
+    height: 50px;
+    float: left;
+
+  }
+
+  span {
+    max-width: 100%;
+    @include force-word-break();
+  }
+
+  @media screen and (max-width: 1198px) {
+    position: relative;
+    right: 30px;
+  }
+  @media screen and (max-width: 990px) {
+    top: 110px;
+    right: 240px;
+    width: 100px;
+    height: 35px;
+  }
+  @media screen and (max-width: 766px) {
+    right: 230px;
+  }
+  @media screen and (max-width: 575px) {
+    top: 0px;
+    right: 0px;
+  }
+  @media screen and (max-width: 400px) {
+    right: 20px;
+    top: 20px;
+  }
+  @media screen and (max-width: 350px) {
+    right: 40px;
+  }
+  @media screen and (max-width: 290px) {
+    top: 170px;
+    right: 140px;
+  }
+  @media screen and (max-width: 200px) {
+    top: 220px;
+    right: 100px;
+  }
+  @media screen and (max-width: 178px) {
+    top: 240px;
+  }
+  @media screen and (max-width: 146px) {
+    top: 335px;
+  }
+  @media screen and (max-width: 133px) {
+    top: 0px;
+    right: 0px;
+  }
+
+}
+
+.profile-follow {
+  border: 2px solid $primary;
+  align-items: center;
+  justify-content: center;
+  white-space: initial;
+  vertical-align: middle;
+  color: $primary;
+  width: 120px;
+  height: 60px;
+  @media screen and (max-width: 1198px) {
+    position: relative;
+    right: 30px;
+  }
+  @media screen and (max-width: 990px) {
+    top: 110px;
+    right: 240px;
+    width: 100px;
+    height: 35px;
+  }
+  @media screen and (max-width: 766px) {
+    right: 230px;
+  }
+  @media screen and (max-width: 575px) {
+    top: 0px;
+    right: 0px;
+  }
+  @media screen and (max-width: 400px) {
+    right: 20px;
+    top: 20px;
+  }
+  @media screen and (max-width: 350px) {
+    right: 40px;
+  }
+  @media screen and (max-width: 290px) {
+    top: 170px;
+    right: 140px;
+  }
+  @media screen and (max-width: 200px) {
+    top: 220px;
+    right: 100px;
+  }
+  @media screen and (max-width: 178px) {
+    top: 240px;
+  }
+  @media screen and (max-width: 146px) {
+    top: 335px;
+  }
+  @media screen and (max-width: 133px) {
+    top: 0px;
+    right: 0px;
+  }
+
+
+}
+
+.followers-none {
+  text-align: center;
+}
+
+.single-following {
+  min-height: 80px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.single-follower {
+  min-height: 80px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.show {
+  display: inline;
+}
+
+.follow-info {
+  font-size: 150px;
+}
+
+.btn.btn-default {
+
+  border: 2px solid $primary;
+
+
+}
+
+.follows:hover {
+  background-color: darken($primary, 7.5%);
+}
+
+.btn.btn-default:hover {
+  background-color: $primary;
+  color: white !important;
+}
+
+.notification-follows:hover {
+  background-color: darken($primary, 7.5%);
+}
+
 .img-lock,
 .img-lock-open {
   text-align: center;
@@ -134,4 +517,3 @@
     }
   }
 }
-

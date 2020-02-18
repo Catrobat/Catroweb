@@ -1,6 +1,6 @@
 {% extends 'Notifications/NotificationTypes/baseNotification.html.twig' %}
 
-{% block notification_title%}
+{% block notification_title %}
   {{ 'catro-notifications.comment.title'|trans({'%program_name%' : notification.comment.program.name}, 'catroweb') }}
 {% endblock %}
 
@@ -8,15 +8,14 @@
   {{ include('Notifications/NotificationTypes/userAvatar.html.twig') }}
 {% endblock %}
 
-{% block notification_body%}
+{% block notification_body %}
   {{ 'catro-notifications.comment.message' | trans
     (
-      {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.comment.user.id})~'">'~notification.comment.username~'</a>',
-        '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
-      },
-      'catroweb'
-    )
-    |raw
-  }}
+    {
+      '%user_link%': '<a href="'~path('profile', {'id': notification.comment.user.id})~'">'~notification.comment.username~'</a>',
+      '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
+    },
+    'catroweb'
+  )
+  |raw }}
 {% endblock %}

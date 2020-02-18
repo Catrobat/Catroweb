@@ -1,0 +1,224 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/profile.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/notifications.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+
+
+  <div id="following-section">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1 id="follows-header" class="header">
+          {{ 'follower.follows'|trans({}, 'catroweb') }}
+        </h1>
+      </div>
+    </div>
+
+    <div id="no-following">
+      {% if following_list is empty %}
+        <div class="col-md-12">
+          <h3 align="center">
+            {{ "follower.noFollowing"|trans({}, "catroweb") }}
+          </h3>
+        </div>
+        <br>
+        <br>
+      {% endif %}
+    </div>
+
+    <div id="following-cards">
+      {% for user in following_list %}
+        <div id="following-{{ user['id'] }}" class="single-following"
+            {% if loop.index > 5 %} style="display: none" {% endif %}>
+
+          <div class="col-md-12">
+            <div class="card mb-3 notification-container">
+              <div class="card-body">
+                <div class="row">
+                  <div class="follow-avatar">
+                    <img class="notification-round"
+                         src="{% if user['avatar'] is not empty %}{{ user['avatar'] }}
+                  {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
+                         alt="Card image">
+                  </div>
+                  <div class="follower-body">
+                    <h6>
+                      <i class="fas fa-user"></i>
+                      {{ '%user_link%' | trans
+                        (
+                        {
+                          '%user_link%': '<a href="'~path('profile', {'id':  user['id'] })~'">'~
+                          user['username']~'</a>',
+                        },
+                        'catroweb'
+                      )
+                      |raw }}
+                    </h6>
+                    <h6>
+                      <strong>
+                        {{ "follower.followsMe"|trans({}, "catroweb") }}:
+                      </strong>
+                      {% if app.user.hasFollower(user['profile']) %}
+                        <i class="fas fa-check"></i>
+                      {% else %}
+                        <i class="fas fa-times"></i>
+                      {% endif %}
+                    </h6>
+                    <h6>
+                      <strong>
+                        {{ "follower.amountOfPrograms"|trans({}, "catroweb") }}:
+                      </strong>
+                      {{ user['projects'] }}
+
+                    </h6>
+                  </div>
+                </div>
+                {% if app.user == null or app.user.id != profile.id %}
+                  <div id="follow-icon" class="following-btn">
+                    {% if user['profile'].hasFollower(app.user) %}
+                      <a id="follow-btn">
+                        <button id="mark-as-read-" class="btn btn-primary follows"
+                                onclick="followers.unfollow('{{ user['id'] }}','{{ user['username'] }}')">
+                          {{ 'follower.follows'|trans({}, 'catroweb') }}
+                        </button>
+                      </a>
+                    {% else %}
+                      <a id="follow-btn" class="float-right">
+                        <button id="mark-as-read-" class="btn btn-primary text-center follows">
+                          {{ 'follower.follow'|trans({}, 'catroweb') }}
+                        </button>
+                      </a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+    </div>
+    <div class="center col-12">
+      <div id="show-more-following-button" class="button-show-more" style="display:inline-flex">
+        <a data-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
+          <i class="fas fa-chevron-circle-down catro-icon-button"></i>
+        </a>
+      </div>
+      <div id="show-less-following-button" class="button-show-less" style="display:inline-flex">
+        <a data-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
+          <i class="fas fa-chevron-circle-up catro-icon-button"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="follower-section">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 id="followers-header" class="header">
+          {{ 'follower.followers'|trans({}, 'catroweb') }}
+        </h1>
+      </div>
+    </div>
+    {% if followers_list is empty %}
+      <div id="no-followers" class="col-md-12">
+        <h3 align="center">
+          {{ "follower.noFollowers"|trans({}, "catroweb") }}
+        </h3>
+      </div>
+      <br>
+      <br>
+    {% endif %}
+
+    <div id="follower-cards">
+      {% for user2 in followers_list %}
+        <div id="followers-{{ user2['id'] }}" class="single-follower"
+            {% if loop.index > 5 %} style="display: none" {% endif %}>
+          <div class="col-md-12">
+            <div class="card mb-3 notification-container">
+              <div class="card-body">
+                <div class="row">
+                  <div class="follow-avatar">
+                    <img class="notification-round"
+                         src="{% if user2['avatar'] is not empty %}{{ user2['avatar'] }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
+                         alt="Card image">
+                  </div>
+                  <div class="follower-body">
+                    <h6>
+                      <i class="fas fa-user"></i>
+                      {{ '%user_link%' | trans
+                        (
+                        {
+                          '%user_link%': '<a href="'~path('profile', {'id':  user2['id'] })~'">'~ user2['username']~'</a>',
+                        },
+                        'catroweb'
+                      )
+                      |raw }}
+
+                    </h6>
+                    <h6>
+                      <strong>
+                        {{ "follower.amountOfPrograms"|trans({}, "catroweb") }}:
+                      </strong>
+                      {{ user2['projects'] }}
+
+                    </h6>
+                  </div>
+
+                </div>
+                {% if app.user == null or app.user.id != profile.id %}
+                  <div id="follow-icon" class="follow-btn">
+                    {% if user2['profile'].hasFollower(app.user) %}
+                      <a id="follow-btn">
+                        <button id="mark-as-read" class="btn btn-primary follows"
+                                onclick="followers.unfollow('{{ user2['id'] }}','{{ user2['username'] }}')">
+                          {{ 'follower.follows'|trans({}, 'catroweb') }}
+                        </button>
+                      </a>
+                    {% else %}
+                      <a id="follow-btn">
+                        <button id="mark-as-read-" class="btn btn-default follow"
+                                onclick="followers.follow('{{ user2['id'] }}')">
+                          {{ 'follower.follow'|trans({}, 'catroweb') }}
+                        </button>
+                      </a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+    </div>
+    <div class="center col-12">
+      <div id="show-more-followers-button" class="button-show-more" style="display:inline-flex">
+        <a data-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
+          <i class="fas fa-chevron-circle-down catro-icon-button"></i>
+        </a>
+      </div>
+      <div id="show-less-followers-button" class="button-show-less" style="display:inline-flex">
+        <a data-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
+          <i class="fas fa-chevron-circle-up catro-icon-button"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('js/Follower.min.js') }}"></script>
+  <script>
+    let followers = new Follower("{{ url('unfollow') }}", "{{ url('follow') }}",
+      "{{ "somethingWentWrong"|trans({}, "catroweb") }}", "{{ "followError"|trans({}, "catroweb") }}",
+      "{{ "unfollowError"|trans({}, "catroweb") }}", 5, 5, 5, 5, {{ following_count }}, {{ follower_count }})
+  </script>
+{% endblock %}

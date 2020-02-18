@@ -13,7 +13,6 @@ use App\Entity\CommentNotification;
 use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\NewProgramNotification;
-use App\Entity\Notification;
 use App\Entity\RemixManager;
 use App\Entity\RemixNotification;
 use App\Entity\User;
@@ -75,6 +74,7 @@ class UserNotificationController extends AbstractController
     $avatars = [];
     $new_notifications = [];
     $old_notifications = [];
+    $notification_instance = [];
 
     foreach ($catro_user_notifications as $notification)
     {
@@ -84,6 +84,26 @@ class UserNotificationController extends AbstractController
       if ('allNotifications' === $notification_type)
       {
         $found_notification = true;
+        if ($notification instanceof LikeNotification)
+        {
+          $notification_instance[$notification->getId()] = 'like';
+        }
+        if ($notification instanceof CommentNotification)
+        {
+          $notification_instance[$notification->getId()] = 'comment';
+        }
+        if ($notification instanceof FollowNotification)
+        {
+          $notification_instance[$notification->getId()] = 'follow';
+        }
+        if ($notification instanceof NewProgramNotification)
+        {
+          $notification_instance[$notification->getId()] = 'program';
+        }
+        if ($notification instanceof RemixNotification)
+        {
+          $notification_instance[$notification->getId()] = 'remix';
+        }
       }
       if ($notification instanceof LikeNotification && 'likes' === $notification_type)
       {
@@ -96,11 +116,12 @@ class UserNotificationController extends AbstractController
         $found_notification = true;
         $em = $this->getDoctrine()->getManager();
       /*$user = $em->getRepository(User::class)->findOneBy([
-        'id' => $notification->getComment()->getUser()->getId(),
+        'id' => $notification->getComment()->getUser(),
       ]);*/
       }
       elseif ($notification instanceof NewProgramNotification && 'followers' === $notification_type)
       {
+        $notification_instance[$notification->getId()] = 'program';
         $found_notification = true;
         $user = $notification->getProgram()->getUser();
       }
@@ -118,6 +139,7 @@ class UserNotificationController extends AbstractController
             $found_notification = true;
           }
           $user = $notification->getRemixFrom();
+          $notification_instance[$notification->getId()] = 'remix';
         }
       }
       if (null !== $user)
@@ -142,6 +164,7 @@ class UserNotificationController extends AbstractController
       'newNotifications' => $new_notifications,
       'avatars' => $avatars,
       'notificationType' => $notification_type,
+      'instance' => $notification_instance,
     ]);
 
     $response->headers->set('Cache-Control', 'no-store, must-revalidate, max-age=0');
@@ -158,7 +181,6 @@ class UserNotificationController extends AbstractController
   public function userNotificationsCountAction(CatroNotificationRepository $notification_repo,
                                                RemixManager $remix_manager)
   {
-    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -173,7 +195,6 @@ class UserNotificationController extends AbstractController
     $all = 0;
     foreach ($catro_user_notifications_all as $notification)
     {
-      /** @var CatroNotification $notification */
       if ($notification->getSeen())
       {
         continue;
