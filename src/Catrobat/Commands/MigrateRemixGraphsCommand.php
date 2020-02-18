@@ -10,6 +10,7 @@ use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Catrobat\Services\AsyncHttpClient;
 use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;
@@ -548,7 +549,7 @@ class MigrateRemixGraphsCommand extends Command
       $program->setVisible(true);
       $program->setUser($user);
       $program->setUploadLanguage('en');
-      $program->setUploadedAt(new DateTime());
+      $program->setUploadedAt(new DateTime("now", new DateTimeZone('UTC')));
       $program->setRemixMigratedAt(null);
       $program->setFilesize($program_file->getSize());
       $program->setCatrobatVersion(1);

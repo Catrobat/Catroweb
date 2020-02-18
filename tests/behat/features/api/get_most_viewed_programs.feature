@@ -21,7 +21,7 @@ Feature: Get the most downloaded programs
       """
       {
           "CatrobatProjects":[{
-                                "ProjectId": "(.*?)",
+                                "ProjectId": "REGEX_STRING_WILDCARD",
                                 "ProjectName":"program 2",
                                 "ProjectNameShort":"program 2",
                                 "Author":"Catrobat",
@@ -30,12 +30,12 @@ Feature: Get the most downloaded programs
                                 "Views": 90,
                                 "Downloads": 333,
                                 "Private":false,
-                                "Uploaded": 1359720000,
+                                "Uploaded": "REGEX_INT_WILDCARD",
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/project/(.*?)",
-                                "DownloadUrl":"app/download/(.*?).catrobat",
+                                "ProjectUrl":"app/project/REGEX_STRING_WILDCARD",
+                                "DownloadUrl":"app/download/REGEX_STRING_WILDCARD.catrobat",
                                 "FileSize":0
                             }],
           "completeTerm":"",
@@ -56,7 +56,7 @@ Feature: Get the most downloaded programs
       """
       {
           "CatrobatProjects":[{
-                                "ProjectId": "(.*?)",
+                                "ProjectId": "REGEX_STRING_WILDCARD",
                                 "ProjectName":"program 2"
                             }],
           "completeTerm":"",

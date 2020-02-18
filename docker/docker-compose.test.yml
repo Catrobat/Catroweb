@@ -11,11 +11,11 @@ services:
       dockerfile: docker/Dockerfile
     container_name: app.catroweb.test
     image: app.catroweb.test
-    command: ["sh", "/var/www/catroweb/docker/app/execute-tests.sh"]
+    command: ["sh", "/var/www/catroweb/docker/app/startup-test.sh"]
     depends_on:
       - chrome.catroweb.test
     ports:
-      - 80
+      - 8080:80
 
   chrome.catroweb.test:
     image: zenika/alpine-chrome

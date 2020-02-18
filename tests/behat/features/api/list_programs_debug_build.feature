@@ -27,7 +27,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": "(.*?)",
+            "ProjectId": "REGEX_STRING_WILDCARD",
             "ProjectName": "debug program",
             "ProjectNameShort": "debug program",
             "Author": "GeneratedUser1",
@@ -36,12 +36,12 @@ Feature: List programs with and without debug build type
             "Views": 80,
             "Downloads": 450,
             "Private": false,
-            "Uploaded": 1554102000,
+            "Uploaded": "REGEX_INT_WILDCARD",
             "UploadedString": "4 months ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/project/(.*?)",
-            "DownloadUrl": "app/download/(.*?).catrobat",
+            "ProjectUrl": "app/project/REGEX_STRING_WILDCARD",
+            "DownloadUrl": "app/download/REGEX_STRING_WILDCARD.catrobat",
             "FileSize": 0
           }
         ],
@@ -59,7 +59,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": "(.*?)",
+            "ProjectId": "REGEX_STRING_WILDCARD",
             "ProjectName": "debug program"
           }
         ],
@@ -77,7 +77,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": "(.*?)",
+            "ProjectId": "REGEX_STRING_WILDCARD",
             "ProjectName": "program 2",
             "ProjectNameShort": "program 2",
             "Author": "GeneratedUser1",
@@ -86,12 +86,12 @@ Feature: List programs with and without debug build type
             "Views": 9,
             "Downloads": 333,
             "Private": false,
-            "Uploaded": 1398164400,
+            "Uploaded": "REGEX_INT_WILDCARD",
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/project/(.*?)",
-            "DownloadUrl": "app/download/(.*?).catrobat",
+            "ProjectUrl": "app/project/REGEX_STRING_WILDCARD",
+            "DownloadUrl": "app/download/REGEX_STRING_WILDCARD.catrobat",
             "FileSize": 0
           }
         ],
@@ -109,7 +109,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": "(.*?)",
+            "ProjectId": "REGEX_STRING_WILDCARD",
             "ProjectName": "program 2"
           }
         ],
@@ -127,7 +127,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": "(.*?)",
+            "ProjectId": "REGEX_STRING_WILDCARD",
             "ProjectName": "program 4",
             "ProjectNameShort": "program 4",
             "Author": "GeneratedUser1",
@@ -136,12 +136,12 @@ Feature: List programs with and without debug build type
             "Views": 33,
             "Downloads": 133,
             "Private": false,
-            "Uploaded": 1325419200,
+            "Uploaded": "REGEX_INT_WILDCARD",
             "UploadedString": "more than one year ago",
             "ScreenshotBig": "images/default/screenshot.png",
             "ScreenshotSmall": "images/default/thumbnail.png",
-            "ProjectUrl": "app/project/(.*?)",
-            "DownloadUrl": "app/download/(.*?).catrobat",
+            "ProjectUrl": "app/project/REGEX_STRING_WILDCARD",
+            "DownloadUrl": "app/download/REGEX_STRING_WILDCARD.catrobat",
             "FileSize": 0
           }
         ],
@@ -159,7 +159,7 @@ Feature: List programs with and without debug build type
       {
         "CatrobatProjects": [
           {
-            "ProjectId": "(.*?)",
+            "ProjectId": "REGEX_STRING_WILDCARD",
             "ProjectName": "program 4"
           }
         ],

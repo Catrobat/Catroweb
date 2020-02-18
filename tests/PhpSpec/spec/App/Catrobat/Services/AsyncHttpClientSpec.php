@@ -43,8 +43,8 @@ class AsyncHttpClientSpec extends ObjectBehavior
     $first_program_data->shouldHaveKeyWithValue('id', $expected_id_of_first_program);
     $first_program_data->shouldHaveKey('title');
     $first_program_data->shouldHaveKey('description');
-    $first_program_data->shouldHaveKey('creator');
-    $first_program_data['creator']->shouldHaveKeyWithValue('username', 'nposss');
+    $first_program_data->shouldHaveKey('author');
+    $first_program_data['author']->shouldHaveKeyWithValue('username', 'nposss');
   }
 
   public function it_handles_error_when_http_timeout_is_exceeded_correctly()
@@ -73,15 +73,15 @@ class AsyncHttpClientSpec extends ObjectBehavior
     $first_program_data->shouldHaveKeyWithValue('id', $expected_id_of_first_program);
     $first_program_data->shouldHaveKey('title');
     $first_program_data->shouldHaveKey('description');
-    $first_program_data->shouldHaveKey('creator');
-    $first_program_data['creator']->shouldHaveKeyWithValue('username', 'nposss');
+    $first_program_data->shouldHaveKey('author');
+    $first_program_data['author']->shouldHaveKeyWithValue('username', 'nposss');
 
     $second_program_data = $scratch_info_data[$expected_id_of_second_program];
     $second_program_data->shouldHaveKeyWithValue('id', $expected_id_of_second_program);
     $second_program_data->shouldHaveKey('title');
     $second_program_data->shouldHaveKey('description');
-    $second_program_data->shouldHaveKey('creator');
-    $second_program_data['creator']->shouldHaveKeyWithValue('username', 'Techno-CAT');
+    $second_program_data->shouldHaveKey('author');
+    $second_program_data['author']->shouldHaveKeyWithValue('username', 'Techno-CAT');
   }
 
   public function it_fetches_scratch_program_details_of_more_than_two_programs_at_once_should_only_fetch_details_of_first_two_programs_because_maximum_limit_is_exceeded()
@@ -103,15 +103,15 @@ class AsyncHttpClientSpec extends ObjectBehavior
     $first_program_data->shouldHaveKeyWithValue('id', $expected_id_of_first_program);
     $first_program_data->shouldHaveKey('title');
     $first_program_data->shouldHaveKey('description');
-    $first_program_data->shouldHaveKey('creator');
-    $first_program_data['creator']->shouldHaveKeyWithValue('username', 'nposss');
+    $first_program_data->shouldHaveKey('author');
+    $first_program_data['author']->shouldHaveKeyWithValue('username', 'nposss');
 
     $second_program_data = $scratch_info_data[$expected_id_of_second_program];
     $second_program_data->shouldHaveKeyWithValue('id', $expected_id_of_second_program);
     $second_program_data->shouldHaveKey('title');
     $second_program_data->shouldHaveKey('description');
-    $second_program_data->shouldHaveKey('creator');
-    $second_program_data['creator']->shouldHaveKeyWithValue('username', 'Techno-CAT');
+    $second_program_data->shouldHaveKey('author');
+    $second_program_data['author']->shouldHaveKeyWithValue('username', 'Techno-CAT');
   }
 
 }

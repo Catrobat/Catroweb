@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-./bin/console cache:clear -e test
-sh docker/app/test-permissions.sh
 /usr/sbin/apache2ctl start
 
 printf "\n START TESTS: \n"

@@ -49,7 +49,6 @@ var/log/**
 vendor/
 
 ### root ###
-*.sh
 crowdin.yml
 ###> symfony/framework-bundle ###
 /.env.local
@@ -74,9 +73,3 @@ behat.yml
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
-### docker ###
-!/docker/app/startup.sh
-!/docker/app/wait-for-it.sh
-!/docker/app/test-permissions.sh
-!/docker/app/execute-tests.sh

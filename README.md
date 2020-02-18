@@ -1,3 +1,7 @@
+![Behat Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/Behat%20Tests/badge.svg)
+![PhpSpec Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/PhpSpec%20Tests/badge.svg)
+![PhpUnit Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/PhpUnit%20Tests/badge.svg)
+
 Catroweb
 =========
 

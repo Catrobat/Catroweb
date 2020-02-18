@@ -42,7 +42,7 @@ Feature: Search programs
     """
     {
      "CatrobatProjects":[{
-         "ProjectId": "(.*?)",
+         "ProjectId": "REGEX_STRING_WILDCARD",
          "ProjectName":"Galaxy War",
          "ProjectNameShort":"Galaxy War",
          "Author":"User1",
@@ -51,12 +51,12 @@ Feature: Search programs
          "Views":12,
          "Downloads":3,
          "Private":false,
-         "Uploaded":1357038000,
+         "Uploaded":"REGEX_INT_WILDCARD",
          "UploadedString":"more than one year ago",
          "ScreenshotBig":"images/default/screenshot.png",
          "ScreenshotSmall":"images/default/thumbnail.png",
-         "ProjectUrl":"app/project/(.*?)",
-         "DownloadUrl":"app/download/(.*?).catrobat",
+         "ProjectUrl":"app/project/REGEX_STRING_WILDCARD",
+         "DownloadUrl":"app/download/REGEX_STRING_WILDCARD.catrobat",
          "FileSize":0
      }],
      "completeTerm":"",

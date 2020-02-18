@@ -20,7 +20,7 @@ Feature: Upload a program
     When I POST these parameters to "/app/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"projectId":"(.*?)","statusCode":200,"answer":"Your project was uploaded successfully!","token":"(.*?)","preHeaderMessages":""}
+      {"projectId":"REGEX_STRING_WILDCARD","statusCode":200,"answer":"Your project was uploaded successfully!","token":"REGEX_STRING_WILDCARD","preHeaderMessages":""}
       """
 
   Scenario: missing all prameters will result in an error

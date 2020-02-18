@@ -1177,7 +1177,9 @@ class ApiFeatureContext extends BaseContext
 
   private function assertJsonRegex($pattern, $json) {
     // allows to compare strings using a regex wildcard (.*?)
-    $pattern = json_encode(json_decode($pattern));
+    $pattern = json_encode(json_decode($pattern)); // reformat string
+
+    // escape chars that should not be used as regex
     $pattern = str_replace("\\", "\\\\", $pattern);
     $pattern = str_replace("[", "\[", $pattern);
     $pattern = str_replace("]", "\]", $pattern);
@@ -1185,7 +1187,12 @@ class ApiFeatureContext extends BaseContext
     $pattern = str_replace("*", "\*", $pattern);
     $pattern = str_replace("(", "\(", $pattern);
     $pattern = str_replace(")", "\)", $pattern);
-    $pattern = str_replace("\(.\*\?\)", "(.*?)", $pattern);
+    $pattern = str_replace("+", "\+", $pattern);
+
+    // define regex wildcards
+    $pattern = str_replace('REGEX_STRING_WILDCARD', '(.+?)', $pattern);
+    $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
+
     $delimter = "#";
     $json = json_encode(json_decode($json));
     Assert::assertRegExp($delimter . $pattern . $delimter, $json);
