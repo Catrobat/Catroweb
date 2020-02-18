@@ -96,7 +96,7 @@ class ProgramImportCommand extends Command
     {
       $output->writeln('No catrobat files found');
 
-      return;
+      return 1;
     }
 
     $user = $this->user_manager->findUserByUsername($username);
@@ -104,7 +104,7 @@ class ProgramImportCommand extends Command
     {
       $output->writeln('User ' . $username . ' was not found!');
 
-      return;
+      return 1;
     }
 
     foreach ($finder as $file)
