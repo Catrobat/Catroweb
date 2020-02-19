@@ -15,12 +15,10 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class InvalidFileUploadCleanupRevertCommand
- * @package App\Catrobat\Commands
+ * Class InvalidFileUploadCleanupRevertCommand.
  */
 class InvalidFileUploadCleanupRevertCommand extends Command
 {
-
   /**
    * @var EntityManagerInterface
    */
@@ -38,10 +36,6 @@ class InvalidFileUploadCleanupRevertCommand extends Command
 
   /**
    * InvalidFileUploadCleanupRevertCommand constructor.
-   *
-   * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface $parameter_bag
-   * @param ProgramRepository $program_repository
    */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag,
                               ProgramRepository $program_repository)
@@ -52,29 +46,25 @@ class InvalidFileUploadCleanupRevertCommand extends Command
     $this->program_repository = $program_repository;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:clean:invalid-upload:revert')
       ->setDescription('Sets all files given in command file to visible.
       File is just given by name (not path) and has to be located in Commands/invisible_programs')
-      ->addArgument('file', InputArgument::REQUIRED, 'File with the programs that should be visible again');
+      ->addArgument('file', InputArgument::REQUIRED, 'File with the programs that should be visible again')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
-   *
-   * @return int|void|null
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     /**
-     * @var $file File
+     * @var File
      */
     $finder = new Finder();
     $file_name = $input->getArgument('file');
@@ -96,15 +86,15 @@ class InvalidFileUploadCleanupRevertCommand extends Command
       $program = $this->program_repository->find($id);
       if (!$program)
       {
-        $output->writeln("[Error] Program with id <" . $id . "> doesnt exist! Skipping...");
+        $output->writeln('[Error] Program with id <'.$id.'> doesnt exist! Skipping...');
         continue;
       }
       $program->setVisible(true);
-      $output->writeln($program->getName() . ' set to visible');
+      $output->writeln($program->getName().' set to visible');
       $this->entity_manager->persist($program);
     }
     $this->entity_manager->flush();
-    $fs->copy($folder . $file_name, $folder . "/executed/" . date('Y-m-d_H:i:s') . '_revert');
-    $fs->remove($folder . $file_name);
+    $fs->copy($folder.$file_name, $folder.'/executed/'.date('Y-m-d_H:i:s').'_revert');
+    $fs->remove($folder.$file_name);
   }
-} 
+}

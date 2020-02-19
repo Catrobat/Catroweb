@@ -7,14 +7,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class TagRepository
- * @package App\Repository
+ * Class TagRepository.
  */
 class TagRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, Tag::class);
@@ -30,9 +26,10 @@ class TagRepository extends ServiceEntityRepository
     $qb = $this->createQueryBuilder('e');
 
     return $qb
-      ->select('e.' . $language)
+      ->select('e.'.$language)
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -46,11 +43,12 @@ class TagRepository extends ServiceEntityRepository
     $qb = $this->createQueryBuilder('e');
 
     return $qb
-      ->select('e.' . $language)
+      ->select('e.'.$language)
       ->leftJoin('e.programs', 'p')
       ->andWhere($qb->expr()->eq('p.id', ':id'))
       ->setParameter('id', $program_id)
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 }

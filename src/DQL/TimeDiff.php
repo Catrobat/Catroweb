@@ -2,13 +2,13 @@
 
 namespace App\DQL;
 
+use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
-use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * Custom DQL function returning the difference between two DateTime values in the time unit choose
+ * Custom DQL function returning the difference between two DateTime values in the time unit choose.
  *
  * usage TIME_DIFF(dateTime1, dateTime2, unit)
  *
@@ -32,8 +32,6 @@ class TimeDiff extends FunctionNode
   public $type;
 
   /**
-   * @param Parser $parser
-   *
    * @throws \Doctrine\ORM\Query\QueryException
    */
   public function parse(Parser $parser)
@@ -49,36 +47,34 @@ class TimeDiff extends FunctionNode
   }
 
   /**
-   * @param SqlWalker $sqlWalker
-   *
    * @return string
    */
   public function getSql(SqlWalker $sqlWalker)
   {
     switch ($this->type)
     {
-      case "minute":
+      case 'minute':
         $time = 60;
         break;
-      case "hour":
+      case 'hour':
         $time = 3600;
         break;
-      case "day":
+      case 'day':
         $time = 86400;
         break;
-      case "month":
+      case 'month':
         $time = 2622585.6;
         break;
-      case "year":
+      case 'year':
         $time = 31471200;
         break;
       default:
         $time = 1;
     }
 
-    return 'ROUND(TIME_TO_SEC(TIMEDIFF(' .
-      $this->dateTime1->dispatch($sqlWalker) . ', ' .
-      $this->dateTime2->dispatch($sqlWalker) .
-      '))/' . $time . ', 0)';
+    return 'ROUND(TIME_TO_SEC(TIMEDIFF('.
+      $this->dateTime1->dispatch($sqlWalker).', '.
+      $this->dateTime2->dispatch($sqlWalker).
+      '))/'.$time.', 0)';
   }
 }

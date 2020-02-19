@@ -2,29 +2,25 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Commands\Helpers\CommandHelper;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use App\Catrobat\Commands\Helpers\CommandHelper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-
 /**
- * Class PurgeCommand
- * @package App\Catrobat\Commands
+ * Class PurgeCommand.
  */
 class PurgeCommand extends Command
 {
   /**
-   * @var ParameterBagInterface $parameter_bag
+   * @var ParameterBagInterface
    */
   private $parameter_bag;
 
   /**
    * PurgeCommand constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -32,22 +28,18 @@ class PurgeCommand extends Command
     $this->parameter_bag = $parameter_bag;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:purge')
       ->setDescription('Purge all database and file data')
-      ->addOption('force');
+      ->addOption('force')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -106,5 +98,4 @@ class PurgeCommand extends Command
 
     $output->writeln('');
   }
-
 }

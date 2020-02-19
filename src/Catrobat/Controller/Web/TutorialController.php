@@ -2,60 +2,58 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use App\Entity\StarterCategory;
-use App\Catrobat\Services\ScreenshotRepository;
 use Doctrine\DBAL\Types\GuidType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Twig\Error\Error;
 
-
 /**
- * Class TutorialController
- * @package App\Catrobat\Controller\Web
+ * Class TutorialController.
  */
 class TutorialController extends AbstractController
 {
-
   /**
    * @Route("/help", name="catrobat_web_help", methods={"GET"})
    *
-   * @return Response
    * @throws Error
+   *
+   * @return Response
    */
   public function helpAction()
   {
     return $this->render('help/help.html.twig');
   }
 
-
   /**
-   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page" = 1},
-   *                                requirements={"page":"\d+"}, methods={"GET"})
-   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1},
-   *                                requirements={"page":"\d+"}, methods={"GET"})
+   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page": 1},
+   * requirements={"page": "\d+"}, methods={"GET"})
+   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page": 1},
+   * requirements={"page": "\d+"}, methods={"GET"})
+   *
+   * @throws Error
    *
    * @return Response
-   * @throws Error
    */
   public function stepByStepAction()
   {
     return $this->render('help/stepByStep.html.twig', []);
   }
 
-
   /**
-   * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page" = -1},
-   *                                 requirements={"page":"\d+"}, methods={"GET"})
+   * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page": -1},
+   * requirements={"page": "\d+"}, methods={"GET"})
    *
    * @param $page
    *
-   * @return Response
    * @throws Error
+   *
+   * @return Response
    */
   public function tutorialCardsAction($page)
   {
@@ -66,7 +64,7 @@ class TutorialController extends AbstractController
       throw $this->createNotFoundException('Unable to find tutorialcard.');
     }
 
-    if ($page == -1)
+    if (-1 == $page)
     {
       return $this->render('help/tutorialcards.html.twig', ['count' => $cards_num]);
     }
@@ -76,25 +74,24 @@ class TutorialController extends AbstractController
     $example_link = $this->setExampleLink($page);
 
     return $this->render('help/tutorialcard.html.twig', [
-      'page'         => $page,
-      'blocks'       => $blocks,
+      'page' => $page,
+      'blocks' => $blocks,
       'example_link' => $example_link,
     ]);
   }
 
-
   /**
    * @Route("/starter-project/", name="catrobat_web_starter", methods={"GET"})
    *
-   * @return Response
    * @throws Error
+   *
+   * @return Response
    */
   public function starterProgramsAction()
   {
     /**
-    * @var $categories StarterCategory
-    */
-
+     * @var StarterCategory
+     */
     $em = $this->getDoctrine()->getManager();
 
     $categories = $em->getRepository('App\Entity\StarterCategory')->findBy([], ['order' => 'asc']);
@@ -106,48 +103,43 @@ class TutorialController extends AbstractController
     ]);
   }
 
-
   /**
    * @Route("/category-project//{id}", name="catrobat_web_category_programs", methods={"GET"})
    *
-   * @param Request $request
-   * @param GuidType  $id
-   * @param ScreenshotRepository  $screenshot_repository
+   * @param GuidType $id
    *
    * @return JsonResponse
    */
   public function categoryProgramsAction(Request $request, $id, ScreenshotRepository $screenshot_repository)
   {
     /**
-    * @var $program Program
-    */
-
+     * @var Program
+     */
     $em = $this->getDoctrine()->getManager();
     $programs = $em->getRepository('App\Entity\Program')->findBy(['category' => $id]);
 
     $retArray = $this->receiveCategoryPrograms($request, $programs, $screenshot_repository);
 
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
-      'TotalProjects'     => count($programs),
+      'BaseUrl' => $request->getSchemeAndHttpHost().'/',
+      'TotalProjects' => count($programs),
       'ProjectsExtension' => '.catrobat',
     ];
 
     return JsonResponse::create($retArray);
   }
 
-
   /**
    * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
    *
-   * @return Response
    * @throws Error
+   *
+   * @return Response
    */
   public function gameJamAction()
   {
     return $this->render('help/gamejam.html.twig');
   }
-
 
   /**
    * @param $page
@@ -185,11 +177,10 @@ class TutorialController extends AbstractController
     return $blocks;
   }
 
-
   /**
    * @param $page
    *
-   * @return null|string
+   * @return string|null
    */
   private function setExampleLink($page)
   {
@@ -237,7 +228,6 @@ class TutorialController extends AbstractController
     return $example_link;
   }
 
-
   /**
    * @param $categories
    *
@@ -246,15 +236,14 @@ class TutorialController extends AbstractController
   private function generateCategoryArray($categories)
   {
     /**
-     * @var $category StarterCategory
+     * @var StarterCategory
      */
-
     $categories_twig = [];
 
     foreach ($categories as $category)
     {
       $categories_twig[] = [
-        'id'    => $category->getId(),
+        'id' => $category->getId(),
         'alias' => $category->getAlias(),
       ];
     }
@@ -263,18 +252,16 @@ class TutorialController extends AbstractController
   }
 
   /**
-   * @param Request                 $request
-   * @param array                   $programs
-   * @param ScreenshotRepository    $screenshot_repository
+   * @param array                $programs
+   * @param ScreenshotRepository $screenshot_repository
    *
    * @return array
    */
   private function receiveCategoryPrograms(Request $request, $programs, $screenshot_repository)
   {
     /**
-     * @var $program Program
+     * @var Program
      */
-
     $retArray = [
       'CatrobatProjects' => [],
     ];
@@ -282,13 +269,13 @@ class TutorialController extends AbstractController
     foreach ($programs as $program)
     {
       $retArray['CatrobatProjects'][] = [
-        'ProjectId'       => $program->getId(),
-        'ProjectName'     => $program->getName(),
-        'Downloads'       => $program->getDownloads(),
+        'ProjectId' => $program->getId(),
+        'ProjectName' => $program->getName(),
+        'Downloads' => $program->getDownloads(),
         'ScreenshotSmall' => $screenshot_repository->getThumbnailWebPath($program->getId()),
-        'ProjectUrl'      => ltrim($this->generateUrl('program', [
+        'ProjectUrl' => ltrim($this->generateUrl('program', [
           'flavor' => $request->get('flavor'),
-          'id'     => $program->getId(),
+          'id' => $program->getId(),
         ]), '/'),
       ];
     }

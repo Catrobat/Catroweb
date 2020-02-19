@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class UserComment
 {
   /**
-   *
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")
    * @ORM\Column(type="integer")
@@ -19,32 +18,16 @@ class UserComment
   protected $id;
 
   /**
-   * @var Program The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted
-   *              as well.
-   *
-   * @ORM\ManyToOne(
-   *   targetEntity="\App\Entity\Program",
-   *   inversedBy="comments"
-   * )
-   * @ORM\JoinColumn(
-   *   name="programId",
-   *   referencedColumnName="id",
-   *   nullable=true
-   *  )
-   */
-  private $program;
-
-  /**
    * @var User The User who wrote this UserComment. If this User gets deleted, this UserComment gets deleted as well.
    *
    * @ORM\ManyToOne(
-   *   targetEntity="\App\Entity\User",
-   *   inversedBy="comments"
+   *     targetEntity="\App\Entity\User",
+   *     inversedBy="comments"
    * )
    * @ORM\JoinColumn(
-   *   name="user_id",
-   *   referencedColumnName="id",
-   *   nullable=true
+   *     name="user_id",
+   *     referencedColumnName="id",
+   *     nullable=true
    * )
    */
   protected $user;
@@ -54,16 +37,16 @@ class UserComment
    *                          gets deleted, this CommentNotification gets deleted as well.
    *
    * @ORM\OneToOne(
-   *   targetEntity="\App\Entity\CommentNotification",
-   *   mappedBy="comment",
-   *   cascade={"remove"}
+   *     targetEntity="\App\Entity\CommentNotification",
+   *     mappedBy="comment",
+   *     cascade={"remove"}
    * )
    * @ORM\JoinColumn(
-   *   name="notification_id",
-   *   referencedColumnName="id",
-   *   onDelete="SET NULL",
-   *   nullable=true
-   *  )
+   *     name="notification_id",
+   *     referencedColumnName="id",
+   *     onDelete="SET NULL",
+   *     nullable=true
+   * )
    */
   protected $notification;
 
@@ -88,9 +71,33 @@ class UserComment
   protected $isReported;
 
   /**
+   * @var Program The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted
+   *              as well.
+   *
+   * @ORM\ManyToOne(
+   *     targetEntity="\App\Entity\Program",
+   *     inversedBy="comments"
+   * )
+   * @ORM\JoinColumn(
+   *     name="programId",
+   *     referencedColumnName="id",
+   *     nullable=true
+   * )
+   */
+  private $program;
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->text;
+  }
+
+  /**
    * Returns the Program which this UserComment comments.
    *
-   * @return Program The Program which this UserComment comments.
+   * @return Program the Program which this UserComment comments
    */
   public function getProgram()
   {
@@ -100,7 +107,7 @@ class UserComment
   /**
    * Sets the Program which this UserComment comments.
    *
-   * @param Program $program The Program which this UserComment comments.
+   * @param Program $program the Program which this UserComment comments
    */
   public function setProgram($program)
   {
@@ -136,7 +143,7 @@ class UserComment
   /**
    * Sets the User who wrote this UserComment.
    *
-   * @param User $user The User who wrote this UserComment.
+   * @param User $user the User who wrote this UserComment
    */
   public function setUser($user)
   {
@@ -210,7 +217,7 @@ class UserComment
   /**
    * Returns the CommentNotification triggered by creating this UserComment.
    *
-   * @return CommentNotification The CommentNotification triggered by creating this UserComment.
+   * @return CommentNotification the CommentNotification triggered by creating this UserComment
    */
   public function getNotification()
   {
@@ -220,18 +227,10 @@ class UserComment
   /**
    * Sets the CommentNotification triggered by creating this UserComment.
    *
-   * @param CommentNotification $notification The CommentNotification triggered by creating this UserComment.
+   * @param CommentNotification $notification the CommentNotification triggered by creating this UserComment
    */
   public function setNotification($notification)
   {
     $this->notification = $notification;
-  }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->text;
   }
 }

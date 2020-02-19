@@ -3,12 +3,10 @@
 namespace App\Catrobat\Responses;
 
 /**
- * Class ProgramListResponse
- * @package App\Catrobat\Responses
+ * Class ProgramListResponse.
  */
 class ProgramListResponse
 {
-
   /**
    * @var
    */

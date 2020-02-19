@@ -2,45 +2,37 @@
 
 namespace App\Catrobat\Controller;
 
-use App\Entity\Program;
-use App\Entity\User;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
+use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\StatusCode;
+use App\Entity\Program;
+use App\Entity\ProgramManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use App\Catrobat\Services\ProgramFileRepository;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-
 
 /**
- * Class DownloadProgramController
- * @package App\Catrobat\Controller
+ * Class DownloadProgramController.
  */
 class DownloadProgramController extends AbstractController
 {
   /**
-   * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"},
-   *         methods={"GET"})
+   * @Route("/download/{id}.catrobat", name="download", options={"expose": true}, defaults={"_format": "json"},
+   * methods={"GET"})
    *
-   * @param Request $request
    * @param $id
-   * @param ProgramManager $program_manager
-   * @param ProgramFileRepository $file_repository
-   * @param LoggerInterface $logger
    *
-   * @return BinaryFileResponse|JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return BinaryFileResponse|JsonResponse
    */
   public function downloadProgramAction(Request $request, $id, ProgramManager $program_manager,
                                         ProgramFileRepository $file_repository, LoggerInterface $logger)
@@ -60,14 +52,15 @@ class DownloadProgramController extends AbstractController
 
     $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
     $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
-    $rec_user_specific = intval($request->query->get('rec_user_specific', 0)) == 1 ? true : false;
+    $rec_user_specific = 1 == intval($request->query->get('rec_user_specific', 0)) ? true : false;
     $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
     try
     {
       $file = $file_repository->getProgramFile($id);
-    } catch (FileNotFoundException $e)
+    }
+    catch (FileNotFoundException $e)
     {
-      $logger->error('[FILE] failed to get program file with id: ' . $id);
+      $logger->error('[FILE] failed to get program file with id: '.$id);
 
       return JsonResponse::create('Invalid file upload', StatusCode::INVALID_FILE_UPLOAD);
     }
@@ -75,7 +68,7 @@ class DownloadProgramController extends AbstractController
     if ($file->isFile())
     {
       $downloaded = $request->getSession()->get('downloaded', []);
-      if (!in_array($program->getId(), $downloaded))
+      if (!in_array($program->getId(), $downloaded, true))
       {
         $program_manager->increaseDownloads($program);
         $downloaded[] = $program->getId();
@@ -106,7 +99,7 @@ class DownloadProgramController extends AbstractController
       // after https://github.com/symfony/symfony/issues/34099 has been fixed
       $response->headers->set(
         'Content-Disposition',
-        'attachment; filename="' . $program->getId() . '.catrobat"'
+        'attachment; filename="'.$program->getId().'.catrobat"'
       );
 
       return $response;

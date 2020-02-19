@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ShowStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ShowStatement.
  */
 class ShowStatement extends Statement
 {
-  const BEGIN_STRING = "show";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'show';
+  const END_STRING = '<br/>';
 
   /**
    * ShowStatement constructor.
@@ -30,7 +29,7 @@ class ShowStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Show";
+    return 'Show';
   }
 
   /**
@@ -38,7 +37,6 @@ class ShowStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
-
 }

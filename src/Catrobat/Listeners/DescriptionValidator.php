@@ -2,18 +2,14 @@
 
 namespace App\Catrobat\Listeners;
 
-use App\Catrobat\Services\ExtractedCatrobatFile;
-use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
-use App\Catrobat\Services\RudeWordFilter;
-use App\Catrobat\StatusCode;
 use App\Catrobat\Exceptions\Upload\DescriptionTooLongException;
 use App\Catrobat\Exceptions\Upload\RudewordInDescriptionException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Catrobat\Services\RudeWordFilter;
 
 /**
- * Class DescriptionValidator
- * @package App\Catrobat\Listeners
+ * Class DescriptionValidator.
  */
 class DescriptionValidator
 {
@@ -28,8 +24,6 @@ class DescriptionValidator
 
   /**
    * DescriptionValidator constructor.
-   *
-   * @param RudeWordFilter $rudeWordFilter
    */
   public function __construct(RudeWordFilter $rudeWordFilter)
   {
@@ -38,8 +32,6 @@ class DescriptionValidator
   }
 
   /**
-   * @param ProgramBeforeInsertEvent $event
-   *
    * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
@@ -48,8 +40,6 @@ class DescriptionValidator
   }
 
   /**
-   * @param ExtractedCatrobatFile $file
-   *
    * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function validate(ExtractedCatrobatFile $file)

@@ -14,7 +14,8 @@ class UserRemixSimilarityRelation
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -27,8 +28,9 @@ class UserRemixSimilarityRelation
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="relations_of_similar_users_based_on_remixes",
-   *                                                                fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="first_user_id", referencedColumnName="id")
+   *
    * @var User
    */
   protected $first_user;
@@ -41,14 +43,15 @@ class UserRemixSimilarityRelation
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="reverse_relations_of_similar_users_based_on_remixes",
-   *                                                                fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="second_user_id", referencedColumnName="id")
+   *
    * @var User
    */
   protected $second_user;
 
   /**
-   * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default" = 0.0})
+   * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default": 0.0})
    */
   protected $similarity;
 
@@ -58,9 +61,7 @@ class UserRemixSimilarityRelation
   protected $created_at;
 
   /**
-   * @param User $first_user
-   * @param User $second_user
-   * @param      $similarity
+   * @param $similarity
    */
   public function __construct(User $first_user, User $second_user, $similarity)
   {
@@ -76,15 +77,13 @@ class UserRemixSimilarityRelation
    */
   public function updateTimestamps()
   {
-    if ($this->getCreatedAt() == null)
+    if (null == $this->getCreatedAt())
     {
       $this->setCreatedAt(new \DateTime());
     }
   }
 
   /**
-   * @param User $first_user
-   *
    * @return $this
    */
   public function setFirstUser(User $first_user)
@@ -96,8 +95,6 @@ class UserRemixSimilarityRelation
   }
 
   /**
-   * @param User $second_user
-   *
    * @return $this
    */
   public function setSecondUser(User $second_user)
@@ -147,7 +144,7 @@ class UserRemixSimilarityRelation
    */
   public function setSimilarity($similarity)
   {
-    $this->similarity = (float)$similarity;
+    $this->similarity = (float) $similarity;
 
     return $this;
   }
@@ -169,8 +166,6 @@ class UserRemixSimilarityRelation
   }
 
   /**
-   * @param \DateTime $created_at
-   *
    * @return $this
    */
   public function setCreatedAt(\DateTime $created_at)

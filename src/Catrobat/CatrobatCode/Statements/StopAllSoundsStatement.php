@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class StopAllSoundsStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class StopAllSoundsStatement.
  */
 class StopAllSoundsStatement extends Statement
 {
-  const BEGIN_STRING = "stop all sounds";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'stop all sounds';
+  const END_STRING = '<br/>';
 
   /**
    * StopAllSoundsStatement constructor.
@@ -30,7 +29,7 @@ class StopAllSoundsStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Sop all sounds";
+    return 'Sop all sounds';
   }
 
   /**
@@ -38,7 +37,6 @@ class StopAllSoundsStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_violet.png";
+    return '1h_brick_violet.png';
   }
-
 }

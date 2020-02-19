@@ -5,14 +5,11 @@ namespace App\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-
 /**
- * Class SnapshotAdmin
- * @package App\Admin
+ * Class SnapshotAdmin.
  */
 class SnapshotAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -23,10 +20,6 @@ class SnapshotAdmin extends AbstractAdmin
    */
   protected $baseRouteName = 'snapshots';
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept([

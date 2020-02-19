@@ -2,24 +2,21 @@
 
 namespace App\Admin;
 
+use App\Entity\Program;
 use App\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use App\Entity\Program;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-
 /**
- * Class ReportedProgramsAdmin
- * @package App\Admin
+ * Class ReportedProgramsAdmin.
  */
 class ReportedProgramsAdmin extends AbstractAdmin
 {
-
   /**
    * @param string $context
    *
@@ -27,9 +24,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
    */
   public function createQuery($context = 'list')
   {
-    $query = parent::createQuery();
-
-    return $query;
+    return parent::createQuery();
   }
 
 //  TODO: Log who accepted/rejected
@@ -48,7 +43,6 @@ class ReportedProgramsAdmin extends AbstractAdmin
 //    }
 //  }
 
-
   /**
    * @param DatagridMapper $datagridMapper
    *
@@ -60,9 +54,9 @@ class ReportedProgramsAdmin extends AbstractAdmin
       ->add('reportingUser.username')
       ->add('time')
       ->add('state')
-      ->add('program.visible');
+      ->add('program.visible')
+    ;
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -80,18 +74,18 @@ class ReportedProgramsAdmin extends AbstractAdmin
       ->add('reportingUser', EntityType::class, ['class' => User::class])
       ->add('program', EntityType::class,
         [
-          'class'      => Program::class,
+          'class' => Program::class,
           'admin_code' => 'catrowebadmin.block.programs.all',
-          'editable'   => false,
+          'editable' => false,
         ])
       ->add('program.visible', 'boolean', ['editable' => true])
       ->add('_action', 'actions', ['actions' => [
-        'show'            => ['template' => 'Admin/CRUD/list__action_show_reported_program_details.html.twig'],
-        'edit'            => [],
+        'show' => ['template' => 'Admin/CRUD/list__action_show_reported_program_details.html.twig'],
+        'edit' => [],
         'unreportProgram' => ['template' => 'Admin/CRUD/list__action_unreportProgram.html.twig'],
-      ]]);
+      ]])
+    ;
   }
-
 
   /**
    * @param FormMapper $formMapper
@@ -105,17 +99,14 @@ class ReportedProgramsAdmin extends AbstractAdmin
         ChoiceType::class,
         ['choices' => [1 => 'NEW', 2 => 'ACCEPTED', 3 => 'REJECTED']])
       ->add('program.visible', ChoiceType::class, [
-        'choices'  => [
+        'choices' => [
           '0' => 'No',
           '1' => 'Yes',
         ],
-        'required' => true,]);
+        'required' => true, ])
+    ;
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->add('unreportProgram');

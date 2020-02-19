@@ -3,12 +3,10 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class UserListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class UserListStatement.
  */
 class UserListStatement extends Statement
 {
-
   /**
    * UserListStatement constructor.
    *
@@ -21,7 +19,6 @@ class UserListStatement extends Statement
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
-
 }

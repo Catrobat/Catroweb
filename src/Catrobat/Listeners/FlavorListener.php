@@ -9,10 +9,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 
-
 /**
- * Class FlavorListener
- * @package App\Catrobat\Listeners
+ * Class FlavorListener.
  */
 class FlavorListener
 {
@@ -38,11 +36,6 @@ class FlavorListener
 
   /**
    * FlavorListener constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
-   * @param RouterInterface $router
-   * @param ActiveTheme $theme
-   * @param AppRequest $app_request
    */
   public function __construct(ParameterBagInterface $parameter_bag, RouterInterface $router, ActiveTheme $theme,
                               AppRequest $app_request)
@@ -53,18 +46,15 @@ class FlavorListener
     $this->app_request = $app_request;
   }
 
-  /**
-   * @param RequestEvent $event
-   */
   public function onKernelRequest(RequestEvent $event)
   {
     // check the url for an requested flavor (needed to keep old flavoring alive)
     $current_url = $event->getRequest()->getUri();
     preg_match('>http(s)?://(.*?)/(.*)>', $current_url, $parsed_url);
-    $parsed_url = explode("/", $parsed_url[3]);
+    $parsed_url = explode('/', $parsed_url[3]);
     $url_requested_flavor = $parsed_url[0];
 
-    if ((strpos($url_requested_flavor, '.php') !== false))
+    if ((false !== strpos($url_requested_flavor, '.php')))
     {
       // skip index(.*?).php in url
       $url_requested_flavor = $parsed_url[1];
@@ -82,13 +72,12 @@ class FlavorListener
       $session->set('flavor', $url_requested_flavor);
       $session->set('flavor_context', $url_requested_flavor);
     }
-
     else
     {
-      if ($url_requested_flavor == 'app')
+      if ('app' == $url_requested_flavor)
       {
         $requested_theme = $this->app_request->getThemeDefinedInRequest();
-        if ($requested_theme !== "" && $this->checkFlavor($requested_theme))
+        if ('' !== $requested_theme && $this->checkFlavor($requested_theme))
         {
           $attributes->set('flavor', $requested_theme);
           $this->theme->setName($requested_theme);
@@ -104,7 +93,6 @@ class FlavorListener
         $context->setParameter('flavor', 'app');
         $session->set('flavor_context', 'app');
       }
-
       else
       {
         if ($session->has('flavor'))
@@ -127,7 +115,6 @@ class FlavorListener
   {
     $flavor_options = $this->parameter_bag->get('themes');
 
-    return in_array($flavor, $flavor_options);
+    return in_array($flavor, $flavor_options, true);
   }
-
 }

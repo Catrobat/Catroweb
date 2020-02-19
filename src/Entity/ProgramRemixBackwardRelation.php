@@ -14,7 +14,8 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -27,8 +28,9 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_backward_child_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+   *
    * @var Program
    */
   protected $parent;
@@ -41,8 +43,9 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_backward_parent_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
+   *
    * @var Program
    */
   protected $child;
@@ -58,10 +61,6 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
    */
   protected $seen_at;
 
-  /**
-   * @param Program $parent
-   * @param Program $child
-   */
   public function __construct(Program $parent, Program $child)
   {
     $this->setParent($parent);
@@ -71,21 +70,27 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   }
 
   /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return '(#'.$this->parent_id.', #'.$this->child_id.')';
+  }
+
+  /**
    * @ORM\PrePersist
    *
    * @throws \Exception
    */
   public function updateTimestamps()
   {
-    if ($this->getCreatedAt() == null)
+    if (null == $this->getCreatedAt())
     {
       $this->setCreatedAt(new \DateTime());
     }
   }
 
   /**
-   * @param Program $parent
-   *
    * @return $this
    */
   public function setParent(Program $parent)
@@ -113,8 +118,6 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   }
 
   /**
-   * @param Program $child
-   *
    * @return $this
    */
   public function setChild(Program $child)
@@ -158,8 +161,6 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   }
 
   /**
-   * @param \DateTime $created_at
-   *
    * @return $this
    */
   public function setCreatedAt(\DateTime $created_at)
@@ -194,15 +195,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
    */
   public function getUniqueKey()
   {
-    return sprintf("ProgramRemixBackwardRelation(%d,%d)", $this->parent_id, $this->child_id);
-  }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return "(#" . $this->parent_id . ", #" . $this->child_id . ")";
+    return sprintf('ProgramRemixBackwardRelation(%d,%d)', $this->parent_id, $this->child_id);
   }
 
   /**

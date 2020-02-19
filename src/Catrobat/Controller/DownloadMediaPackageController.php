@@ -5,35 +5,29 @@ namespace App\Catrobat\Controller;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class DownloadMediaPackageController
- * @package App\Catrobat\Controller
+ * Class DownloadMediaPackageController.
  */
 class DownloadMediaPackageController extends AbstractController
 {
-
   /**
    * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
    * @param $id
-   * @param MediaPackageFileRepository $file_repository
    *
    * @return BinaryFileResponse
    */
   public function downloadMediaPackageAction(Request $request, $id, MediaPackageFileRepository $file_repository)
   {
     /**
-     * @var $media_file  MediaPackageFile
+     * @var MediaPackageFile
      */
-
     $em = $this->getDoctrine()->getManager();
     $media_file = $em->getRepository(MediaPackageFile::class)->findOneBy(['id' => $id]);
 
@@ -58,7 +52,7 @@ class DownloadMediaPackageController extends AbstractController
 
       $d = $response->headers->makeDisposition(
         ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-        $filename . '.' . $media_file->getExtension()
+        $filename.'.'.$media_file->getExtension()
       );
       $response->headers->set('Content-Disposition', $d);
 

@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ChangeSizeByNStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ChangeSizeByNStatement.
  */
 class ChangeSizeByNStatement extends BaseChangeByNStatement
 {
-  const BEGIN_STRING = "size";
-  const END_STRING = ")%<br/>";
+  const BEGIN_STRING = 'size';
+  const END_STRING = ')%<br/>';
 
   /**
    * ChangeSizeByNStatement constructor.
@@ -31,9 +30,9 @@ class ChangeSizeByNStatement extends BaseChangeByNStatement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Change size by " . $formula_string_without_markup;
+    return 'Change size by '.$formula_string_without_markup;
   }
 
   /**
@@ -41,6 +40,6 @@ class ChangeSizeByNStatement extends BaseChangeByNStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
 }

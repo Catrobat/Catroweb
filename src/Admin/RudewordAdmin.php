@@ -3,18 +3,15 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-
 /**
- * Class RudewordAdmin
- * @package App\Admin
+ * Class RudewordAdmin.
  */
 class RudewordAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -25,7 +22,6 @@ class RudewordAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'rudeword';
 
-
   /**
    * @param FormMapper $formMapper
    *
@@ -34,10 +30,9 @@ class RudewordAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('word');
+      ->add('word')
+    ;
   }
-
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -47,9 +42,9 @@ class RudewordAdmin extends AbstractAdmin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
-      ->add('word');
+      ->add('word')
+    ;
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -63,6 +58,7 @@ class RudewordAdmin extends AbstractAdmin
       ->add('word')
       ->add('_action', 'actions', ['actions' => [
         'edit' => [],
-      ]]);
+      ]])
+    ;
   }
 }

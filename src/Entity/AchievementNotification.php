@@ -18,16 +18,14 @@ class AchievementNotification extends CatroNotification
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = "Notifications/NotificationTypes/achievement_notification.html.twig";
+  private $twig_template = 'Notifications/NotificationTypes/achievement_notification.html.twig';
 
   /**
    * AchievementNotification constructor.
    *
-   * @param User $user
-   * @param      $title
-   * @param      $message
-   * @param      $image_path
-   *
+   * @param $title
+   * @param $message
+   * @param $image_path
    */
   public function __construct(User $user, $title, $message, $image_path)
   {
@@ -35,7 +33,7 @@ class AchievementNotification extends CatroNotification
     $this->image_path = $image_path;
     /* if you didn't forget to set the member variable to default above
        you don't need the following line */
-    $this->twig_template = "Notifications/NotificationTypes/achievement_notification.html.twig";
+    $this->twig_template = 'Notifications/NotificationTypes/achievement_notification.html.twig';
   }
 
   /**
@@ -56,13 +54,12 @@ class AchievementNotification extends CatroNotification
 
   /**
    * its important to overwrite the get method, otherwise it won't work
-   * and the wrong template will be rendered
+   * and the wrong template will be rendered.
+   *
    * @return mixed
    */
   public function getTwigTemplate()
   {
     return $this->twig_template;
   }
-
-
 }

@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GameJam
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -45,18 +44,18 @@ class GameJam
   protected $programs;
 
   /**
-   * @ORM\ManyToMany(targetEntity="Program")
-   * @ORM\JoinTable(name="gamejams_sampleprograms",
-   *      joinColumns={@ORM\JoinColumn(name="gamejam_id", referencedColumnName="id")},
-   *      inverseJoinColumns={@ORM\JoinColumn(name="program_id", referencedColumnName="id")}
-   *      )
-   **/
-  private $sample_programs;
-
-  /**
    * @ORM\Column(type="string", length=100, nullable=true)
    */
   protected $hashtag;
+
+  /**
+   * @ORM\ManyToMany(targetEntity="Program")
+   * @ORM\JoinTable(name="gamejams_sampleprograms",
+   *     joinColumns={@ORM\JoinColumn(name="gamejam_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="program_id", referencedColumnName="id")}
+   * )
+   */
+  private $sample_programs;
 
   /**
    * @ORM\Column(type="string", length=100, nullable=true)
@@ -69,10 +68,15 @@ class GameJam
     $this->sample_programs = new ArrayCollection();
   }
 
+  public function __toString()
+  {
+    return (string) $this->getName();
+  }
+
   /**
-   * Get id
+   * Get id.
    *
-   * @return integer
+   * @return int
    */
   public function getId()
   {
@@ -80,7 +84,7 @@ class GameJam
   }
 
   /**
-   * Set name
+   * Set name.
    *
    * @param string $name
    *
@@ -94,7 +98,7 @@ class GameJam
   }
 
   /**
-   * Get name
+   * Get name.
    *
    * @return string
    */
@@ -104,7 +108,7 @@ class GameJam
   }
 
   /**
-   * Set formUrl
+   * Set formUrl.
    *
    * @param string $formUrl
    *
@@ -118,7 +122,7 @@ class GameJam
   }
 
   /**
-   * Get formUrl
+   * Get formUrl.
    *
    * @return string
    */
@@ -128,9 +132,7 @@ class GameJam
   }
 
   /**
-   * Set start
-   *
-   * @param \DateTime $start
+   * Set start.
    *
    * @return GameJam
    */
@@ -142,7 +144,7 @@ class GameJam
   }
 
   /**
-   * Get start
+   * Get start.
    *
    * @return \DateTime
    */
@@ -152,9 +154,7 @@ class GameJam
   }
 
   /**
-   * Set end
-   *
-   * @param \DateTime $end
+   * Set end.
    *
    * @return GameJam
    */
@@ -166,7 +166,7 @@ class GameJam
   }
 
   /**
-   * Get end
+   * Get end.
    *
    * @return \DateTime
    */
@@ -176,9 +176,7 @@ class GameJam
   }
 
   /**
-   * Add program
-   *
-   * @param Program $program
+   * Add program.
    *
    * @return GameJam
    */
@@ -190,9 +188,7 @@ class GameJam
   }
 
   /**
-   * Remove program
-   *
-   * @param Program $program
+   * Remove program.
    */
   public function removeProgram(Program $program)
   {
@@ -200,7 +196,7 @@ class GameJam
   }
 
   /**
-   * Get programs
+   * Get programs.
    *
    * @return Collection
    */
@@ -210,9 +206,7 @@ class GameJam
   }
 
   /**
-   * Add sampleProgram
-   *
-   * @param Program $sampleProgram
+   * Add sampleProgram.
    *
    * @return GameJam
    */
@@ -224,9 +218,7 @@ class GameJam
   }
 
   /**
-   * Remove sampleProgram
-   *
-   * @param Program $sampleProgram
+   * Remove sampleProgram.
    */
   public function removeSampleProgram(Program $sampleProgram)
   {
@@ -234,18 +226,13 @@ class GameJam
   }
 
   /**
-   * Get samplePrograms
+   * Get samplePrograms.
    *
    * @return Collection
    */
   public function getSamplePrograms()
   {
     return $this->sample_programs;
-  }
-
-  public function __toString()
-  {
-    return (string)$this->getName();
   }
 
   /**
@@ -284,6 +271,4 @@ class GameJam
   {
     return null === $this;
   }
-
-
 }

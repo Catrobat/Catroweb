@@ -13,7 +13,8 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -37,19 +38,28 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
    *     fetch="LAZY"
    * )
    * @ORM\JoinColumn(name="catrobat_child_id", referencedColumnName="id")
+   *
    * @var Program
    */
   protected $catrobat_child;
 
   /**
    * ScratchProgramRemixRelation constructor.
+   *
    * @param $scratch_parent_id
-   * @param Program $catrobat_child
    */
   public function __construct($scratch_parent_id, Program $catrobat_child)
   {
     $this->setScratchParentId($scratch_parent_id);
     $this->setCatrobatChild($catrobat_child);
+  }
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return '(Scratch: #'.$this->scratch_parent_id.', Catrobat: #'.$this->catrobat_child_id.')';
   }
 
   /**
@@ -73,8 +83,6 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
   }
 
   /**
-   * @param Program $catrobat_child
-   *
    * @return ScratchProgramRemixRelation
    */
   public function setCatrobatChild(Program $catrobat_child)
@@ -114,14 +122,6 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
    */
   public function getUniqueKey()
   {
-    return sprintf("ScratchProgramRemixRelation(%d, %d)", $this->scratch_parent_id, $this->catrobat_child_id);
-  }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return "(Scratch: #" . $this->scratch_parent_id . ", Catrobat: #" . $this->catrobat_child_id . ")";
+    return sprintf('ScratchProgramRemixRelation(%d, %d)', $this->scratch_parent_id, $this->catrobat_child_id);
   }
 }

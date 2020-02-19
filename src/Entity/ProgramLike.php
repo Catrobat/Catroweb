@@ -17,6 +17,9 @@ class ProgramLike
   const TYPE_SMILE = 2;
   const TYPE_LOVE = 3;
   const TYPE_WOW = 4;
+
+  const ACTION_ADD = 'add';
+  const ACTION_REMOVE = 'remove';
   // -> new types go here...
 
   public static $VALID_TYPES = [
@@ -29,28 +32,16 @@ class ProgramLike
 
   public static $TYPE_NAMES = [
     self::TYPE_THUMBS_UP => 'thumbs_up',
-    self::TYPE_SMILE     => 'smile',
-    self::TYPE_LOVE      => 'love',
-    self::TYPE_WOW       => 'wow',
+    self::TYPE_SMILE => 'smile',
+    self::TYPE_LOVE => 'love',
+    self::TYPE_WOW => 'wow',
     // -> ... and here
   ];
 
-  const ACTION_ADD = 'add';
-  const ACTION_REMOVE = 'remove';
-
-  /**
-   * @param $type
-   *
-   * @return bool
-   */
-  static public function isValidType($type)
-  {
-    return in_array($type, self::$VALID_TYPES);
-  }
-
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -64,6 +55,7 @@ class ProgramLike
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="likes", fetch="LAZY")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
+   *
    * @var Program
    */
   protected $program;
@@ -77,13 +69,14 @@ class ProgramLike
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="likes", fetch="LAZY")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+   *
    * @var User
    */
   protected $user;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false, options={"default" = 0})
+   * @ORM\Column(type="integer", nullable=false, options={"default": 0})
    */
   protected $type = self::TYPE_THUMBS_UP;
 
@@ -93,9 +86,7 @@ class ProgramLike
   protected $created_at;
 
   /**
-   * @param Program $program
-   * @param User    $user
-   * @param int     $type
+   * @param int $type
    */
   public function __construct(Program $program, User $user, $type)
   {
@@ -106,13 +97,31 @@ class ProgramLike
   }
 
   /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->program.'';
+  }
+
+  /**
+   * @param $type
+   *
+   * @return bool
+   */
+  public static function isValidType($type)
+  {
+    return in_array($type, self::$VALID_TYPES, true);
+  }
+
+  /**
    * @ORM\PrePersist
    *
    * @throws \Exception
    */
   public function updateTimestamps()
   {
-    if ($this->getCreatedAt() == null)
+    if (null == $this->getCreatedAt())
     {
       $this->setCreatedAt(new \DateTime());
     }
@@ -183,7 +192,7 @@ class ProgramLike
    */
   public function setType($type)
   {
-    $this->type = (int)$type;
+    $this->type = (int) $type;
 
     return $this;
   }
@@ -204,7 +213,8 @@ class ProgramLike
     try
     {
       return self::$TYPE_NAMES[$this->type];
-    } catch (\ErrorException $exception)
+    }
+    catch (\ErrorException $exception)
     {
       return null;
     }
@@ -219,8 +229,6 @@ class ProgramLike
   }
 
   /**
-   * @param \DateTime $created_at
-   *
    * @return $this
    */
   public function setCreatedAt(\DateTime $created_at)
@@ -229,13 +237,4 @@ class ProgramLike
 
     return $this;
   }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->program . '';
-  }
-
 }

@@ -2,13 +2,12 @@
 
 namespace App\Catrobat\Events;
 
-use App\Entity\Program;
 use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Entity\Program;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class ProgramBeforePersistEvent
- * @package App\Catrobat\Events
+ * Class ProgramBeforePersistEvent.
  */
 class ProgramBeforePersistEvent extends Event
 {
@@ -23,9 +22,6 @@ class ProgramBeforePersistEvent extends Event
 
   /**
    * ProgramBeforePersistEvent constructor.
-   *
-   * @param ExtractedCatrobatFile $extracted_file
-   * @param Program               $program
    */
   public function __construct(ExtractedCatrobatFile $extracted_file, Program $program)
   {

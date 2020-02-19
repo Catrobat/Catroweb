@@ -6,14 +6,11 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-
 /**
- * Class GameJamSubmittedProgramsAdmin
- * @package App\Admin
+ * Class GameJamSubmittedProgramsAdmin.
  */
 class GameJamSubmittedProgramsAdmin extends AbstractAdmin
 {
-
   /**
    * @param ListMapper $listMapper
    *
@@ -30,21 +27,18 @@ class GameJamSubmittedProgramsAdmin extends AbstractAdmin
       ->add('gamejam_submission_accepted', 'boolean', ['editable' => true])
       ->add('_action', 'actions', [
         'actions' => [
-          'show'              => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
+          'show' => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
           'removeFromGameJam' => [
             'template' => 'Admin/CRUD/list__action_remove_from_gamejam.html.twig',
           ],
         ],
-      ]);
+      ])
+    ;
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(['list', 'edit']);
-    $collection->add('removeFromGameJam', $this->getRouterIdParameter() . '/removeFromGameJam');
+    $collection->add('removeFromGameJam', $this->getRouterIdParameter().'/removeFromGameJam');
   }
 }

@@ -132,8 +132,6 @@ class ScratchProgram
   /**
    * Set last_modified_at.
    *
-   * @param \DateTime $last_modified_at
-   *
    * @return ScratchProgram
    */
   public function setLastModifiedAt(\DateTime $last_modified_at)
@@ -150,5 +148,4 @@ class ScratchProgram
   {
     return $this->last_modified_at;
   }
-
 }

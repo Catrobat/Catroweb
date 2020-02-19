@@ -1,16 +1,15 @@
 <?php
 
-
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\Commands\Helpers\ResetController;
 use App\Entity\User;
+use App\Entity\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\UserManager;
 
 class CreateFollowersCommand extends Command
 {
@@ -24,7 +23,6 @@ class CreateFollowersCommand extends Command
    */
   private $remix_manipulation_program_manager;
 
-
   /**
    * @var ResetController
    */
@@ -32,10 +30,6 @@ class CreateFollowersCommand extends Command
 
   /**
    * CreateFollowersCommand constructor.
-   *
-   * @param UserManager                     $user_manager
-   * @param RemixManipulationProgramManager $program_manager
-   * @param ResetController                 $reset_controller
    */
   public function __construct(UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager,
@@ -47,23 +41,19 @@ class CreateFollowersCommand extends Command
     $this->reset_controller = $reset_controller;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:follow')
       ->setDescription('follow an user')
       ->addArgument('user_name', InputArgument::REQUIRED, 'Name of user who gets followed')
-      ->addArgument('follower', InputArgument::REQUIRED, 'User who follows');
+      ->addArgument('follower', InputArgument::REQUIRED, 'User who follows')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -76,13 +66,13 @@ class CreateFollowersCommand extends Command
     }
 
     /**
-     * @var $user     User
-     * @var $follower User
+     * @var User
+     * @var User $follower
      */
     $user = $this->user_manager->findUserByUsername($user_name);
     $follower = $this->user_manager->findUserByUsername($follower_name);
 
-    if ($user == null || $follower == null || $this->reset_controller == null)
+    if (null == $user || null == $follower || null == $this->reset_controller)
     {
       return;
     }
@@ -90,10 +80,11 @@ class CreateFollowersCommand extends Command
     try
     {
       $this->reset_controller->followUser($user, $follower);
-    } catch (\Exception $e)
+    }
+    catch (\Exception $e)
     {
       return;
     }
-    $output->writeln($follower_name . ' follows ' . $user_name);
+    $output->writeln($follower_name.' follows '.$user_name);
   }
 }

@@ -3,8 +3,7 @@
 namespace App\Catrobat\Services;
 
 /**
- * Class Time
- * @package App\Catrobat\Services
+ * Class Time.
  */
 class Time
 {

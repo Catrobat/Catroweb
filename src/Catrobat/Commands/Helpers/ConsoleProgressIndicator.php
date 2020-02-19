@@ -5,8 +5,7 @@ namespace App\Catrobat\Commands\Helpers;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class ConsoleProgressIndicator
- * @package App\Catrobat\Commands\Helpers
+ * Class ConsoleProgressIndicator.
  */
 class ConsoleProgressIndicator
 {
@@ -50,8 +49,7 @@ class ConsoleProgressIndicator
   /**
    * ConsoleProgressIndicator constructor.
    *
-   * @param OutputInterface $console
-   * @param bool            $enable_error_file
+   * @param bool $enable_error_file
    */
   public function __construct(OutputInterface $console, $enable_error_file = false)
   {
@@ -64,12 +62,12 @@ class ConsoleProgressIndicator
    */
   public function isSuccess($msg = '')
   {
-    if ($msg == '')
+    if ('' == $msg)
     {
       $msg = $this->on_success_msg;
     }
     $this->console->write($msg);
-    $this->inline_count += 1;
+    ++$this->inline_count;
     $this->checkProgress();
   }
 
@@ -78,12 +76,12 @@ class ConsoleProgressIndicator
    */
   public function isFailure($msg = '')
   {
-    if ($msg == '')
+    if ('' == $msg)
     {
       $msg = $this->on_failure_msg;
     }
     $this->console->write($msg);
-    $this->inline_count += 1;
+    ++$this->inline_count;
     $this->checkProgress();
   }
 
@@ -105,24 +103,21 @@ class ConsoleProgressIndicator
     array_push($this->error_array, $error);
   }
 
-  /**
-   *
-   */
   public function printErrors()
   {
     $this->console->writeln('');
     $error_count = count($this->error_array);
 
-    if ($error_count == 0)
+    if (0 == $error_count)
     {
       $this->console->writeln('Successfully executed command. There were no errors.');
     }
     else
     {
-      $this->console->writeln('Command executed. There were ' . $error_count . ' errors.');
+      $this->console->writeln('Command executed. There were '.$error_count.' errors.');
       $this->console->writeln('Errors happened with the following inputs:');
 
-      for ($iter = 0; $iter < $error_count; $iter++)
+      for ($iter = 0; $iter < $error_count; ++$iter)
       {
         if ($iter >= $this->error_print_limit)
         {
@@ -145,16 +140,13 @@ class ConsoleProgressIndicator
     }
   }
 
-  /**
-   *
-   */
   public function createErrorFile()
   {
     if ($this->enable_error_file)
     {
       $error_count = count($this->error_array);
 
-      if ($error_count == 0)
+      if (0 == $error_count)
       {
         $this->console->writeln('Don\'t want to create an empty file (error_array is empty)');
 
@@ -163,40 +155,26 @@ class ConsoleProgressIndicator
 
       $date = getdate();
 
-      $filename = 'ErrorFile' . $date['hours'] . $date['minutes'] . $date['seconds'];
-      $file = fopen($filename . '.txt', 'w');
+      $filename = 'ErrorFile'.$date['hours'].$date['minutes'].$date['seconds'];
+      $file = fopen($filename.'.txt', 'w');
 
       fwrite($file, "ErrorFile\n");
-      fwrite($file, 'Date: ' . $date['mday'] . '.' . $date['mon'] . '.' . $date['year'] . ' ' . $date['hours'] . ':' .
-        $date['minutes'] . "\n\n");
+      fwrite($file, 'Date: '.$date['mday'].'.'.$date['mon'].'.'.$date['year'].' '.$date['hours'].':'.
+        $date['minutes']."\n\n");
       fwrite($file, "The following inputs resulted in errors:\n");
 
-      for ($iter = 0; $iter < $error_count; $iter++)
+      for ($iter = 0; $iter < $error_count; ++$iter)
       {
-        fwrite($file, $this->error_array[$iter] . "\n");
+        fwrite($file, $this->error_array[$iter]."\n");
       }
 
       fclose($file);
 
-      $this->console->writeln('Error file ' . $filename . ' successfully created.');
+      $this->console->writeln('Error file '.$filename.' successfully created.');
     }
     else
     {
       $this->console->writeln('If you want to create an error file, you should enable the error file flag ;)');
-    }
-  }
-
-  /**
-   *
-   */
-  private function checkProgress()
-  {
-    if ($this->inline_count >= $this->inline_limit)
-    {
-      $number = $this->line_count * $this->inline_limit;
-      $this->console->writeln(' ' . $number);
-      $this->inline_count = 0;
-      $this->line_count += 1;
     }
   }
 
@@ -257,7 +235,7 @@ class ConsoleProgressIndicator
   }
 
   /**
-   * @return boolean
+   * @return bool
    */
   public function isEnableErrorFile()
   {
@@ -265,7 +243,7 @@ class ConsoleProgressIndicator
   }
 
   /**
-   * @param boolean $enable_error_file
+   * @param bool $enable_error_file
    */
   public function setEnableErrorFile($enable_error_file)
   {
@@ -318,5 +296,16 @@ class ConsoleProgressIndicator
   public function setErrorPrintLimit($error_print_limit)
   {
     $this->error_print_limit = $error_print_limit;
+  }
+
+  private function checkProgress()
+  {
+    if ($this->inline_count >= $this->inline_limit)
+    {
+      $number = $this->line_count * $this->inline_limit;
+      $this->console->writeln(' '.$number);
+      $this->inline_count = 0;
+      ++$this->line_count;
+    }
   }
 }

@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class SetVariableStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class SetVariableStatement.
  */
 class SetVariableStatement extends Statement
 {
-  const BEGIN_STRING = "set ";
-  const END_STRING = ")<br/>";
+  const BEGIN_STRING = 'set ';
+  const END_STRING = ')<br/>';
 
   /**
    * SetVariableStatement constructor.
@@ -33,9 +32,9 @@ class SetVariableStatement extends Statement
     $variable_name = $this->xmlTree->userVariable;
 
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Set variable " . $variable_name . " to " . $formula_string_without_markup;
+    return 'Set variable '.$variable_name.' to '.$formula_string_without_markup;
   }
 
   /**
@@ -43,7 +42,6 @@ class SetVariableStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_red.png";
+    return '1h_brick_red.png';
   }
-
 }

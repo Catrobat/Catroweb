@@ -2,11 +2,11 @@
 
 namespace App\Catrobat\Services\TestEnv;
 
+use App\Catrobat\Services\OAuthService;
 use App\Catrobat\Services\TokenGenerator;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
-use App\Catrobat\Services\OAuthService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -14,13 +14,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class FakeOAuthService
- * @package App\Catrobat\Features\Helpers
+ * Class FakeOAuthService.
  */
 class FakeOAuthService extends OAuthService
 {
@@ -41,18 +39,6 @@ class FakeOAuthService extends OAuthService
 
   /**
    * FakeOAuthService constructor.
-   *
-   * @param OAuthService $oauth_service
-   * @param ParameterBagInterface $parameter_bag
-   * @param UserManager $user_manager
-   * @param ValidatorInterface $validator
-   * @param ProgramManager $program_manager
-   * @param EntityManagerInterface $em
-   * @param TranslatorInterface $translator
-   * @param TokenStorageInterface $token_storage
-   * @param EventDispatcherInterface $dispatcher
-   * @param RouterInterface $router
-   * @param TokenGenerator $token_generator
    */
   public function __construct(OAuthService $oauth_service, ParameterBagInterface $parameter_bag,
                               UserManager $user_manager, ValidatorInterface $validator, ProgramManager $program_manager,
@@ -64,10 +50,12 @@ class FakeOAuthService extends OAuthService
                               $token_storage, $dispatcher, $router, $token_generator);
 
     $this->oauth_service = $oauth_service;
-    try {
+    try
+    {
       $this->use_real_oauth_service = $parameter_bag->get('oauth_use_real_service');
     }
-    catch (\Exception $e) {
+    catch (\Exception $e)
+    {
       $this->use_real_oauth_service = false;
     }
 
@@ -75,10 +63,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function isOAuthUser(Request $request)
   {
@@ -86,10 +73,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function checkEMailAvailable(Request $request)
   {
@@ -97,22 +83,19 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function checkUserNameAvailable(Request $request)
   {
     return $this->oauth_service->checkUserNameAvailable($request);
   }
 
-
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function checkGoogleServerTokenAvailable(Request $request)
   {
@@ -120,10 +103,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return OAuthService|JsonResponse
-   * @throws \Exception
    */
   public function exchangeGoogleCodeAction(Request $request)
   {
@@ -132,12 +114,12 @@ class FakeOAuthService extends OAuthService
       return $this->oauth_service->exchangeGoogleCodeAction($request);
     }
     /**
-     * @var $user        User
-     * @var $request     Request
+     * @var User
+     * @var Request $request
      */
     $retArray = [];
     $user = $this->user_manager->findUserByEmail($request->get('email'));
-    if ($user != null)
+    if (null != $user)
     {
       $retArray['statusCode'] = 200;
       $retArray['answer'] = 'Login successful!';
@@ -163,10 +145,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return OAuthService|JsonResponse
-   * @throws \Exception
    */
   public function loginWithGoogleAction(Request $request)
   {
@@ -182,10 +163,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function getGoogleUserProfileInfo(Request $request)
   {
@@ -197,10 +177,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function loginWithTokenAndRedirectAction(Request $request)
   {
@@ -208,8 +187,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @return JsonResponse
    * @throws \Exception
+   *
+   * @return JsonResponse
    */
   public function deleteOAuthTestUserAccounts()
   {

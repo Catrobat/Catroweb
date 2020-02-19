@@ -3,14 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class PointInDirectionStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class PointInDirectionStatement.
  */
 class PointInDirectionStatement extends Statement
 {
-
-  const BEGIN_STRING = "point in direction (";
-  const END_STRING = ") degrees<br/>";
+  const BEGIN_STRING = 'point in direction (';
+  const END_STRING = ') degrees<br/>';
 
   /**
    * PointInDirectionStatement constructor.
@@ -32,9 +30,9 @@ class PointInDirectionStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Point in direction " . $formula_string_without_markup . " degrees";
+    return 'Point in direction '.$formula_string_without_markup.' degrees';
   }
 
   /**
@@ -42,7 +40,6 @@ class PointInDirectionStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
-
 }

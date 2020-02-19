@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class TurnLeftStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class TurnLeftStatement.
  */
 class TurnLeftStatement extends Statement
 {
-  const BEGIN_STRING = "turn left (";
-  const END_STRING = ") degrees<br/>";
+  const BEGIN_STRING = 'turn left (';
+  const END_STRING = ') degrees<br/>';
 
   /**
    * TurnLeftStatement constructor.
@@ -31,9 +30,9 @@ class TurnLeftStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Turn left " . $formula_string_without_markup . " degrees";
+    return 'Turn left '.$formula_string_without_markup.' degrees';
   }
 
   /**
@@ -41,7 +40,6 @@ class TurnLeftStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
-
 }

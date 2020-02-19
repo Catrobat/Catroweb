@@ -2,22 +2,20 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Commands\Helpers\CommandHelper;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Catrobat\Commands\Helpers\CommandHelper;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-
 /**
- * Class RefreshCommand
- * @package App\Catrobat\Commands
+ * Class RefreshCommand.
  */
 class RefreshCommand extends Command
 {
@@ -40,8 +38,6 @@ class RefreshCommand extends Command
 
   /**
    * RefreshCommand constructor.
-   *
-   * @param Filesystem $filesystem
    */
   public function __construct(Filesystem $filesystem, KernelInterface $kernel)
   {
@@ -50,9 +46,6 @@ class RefreshCommand extends Command
     $this->kernel = $kernel;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:refresh')
@@ -61,11 +54,9 @@ class RefreshCommand extends Command
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -85,8 +76,8 @@ class RefreshCommand extends Command
 
     $output->writeln('<info>');
     $output->writeln('Make sure to run this command in all environments!');
-    $output->writeln($this->getName() . ' --env=test');
-    $output->writeln($this->getName() . ' --env=prod');
+    $output->writeln($this->getName().' --env=test');
+    $output->writeln($this->getName().' --env=prod');
     $output->writeln('</info>');
   }
 
@@ -112,20 +103,18 @@ class RefreshCommand extends Command
     CommandHelper::executeSymfonyCommand('catrobat:test:generate', $this->getApplication(), [], $this->output);
   }
 
-  /**
-   *
-   */
   protected function deleteSqLiteDatabase()
   {
-    $database_path = $this->kernel->getRootDir() . '/../tests/behat/sqlite/behattest.sqlite';
-    $this->output->write('Deleting SQLite database (' . $database_path . ')... ');
+    $database_path = $this->kernel->getRootDir().'/../tests/behat/sqlite/behattest.sqlite';
+    $this->output->write('Deleting SQLite database ('.$database_path.')... ');
     try
     {
       $this->filesystem->remove($database_path);
       $this->output->writeln(' done!');
-    } catch (IOException $e)
+    }
+    catch (IOException $e)
     {
-      $this->output->writeln('Could not delete ' . $e->getPath());
+      $this->output->writeln('Could not delete '.$e->getPath());
     }
   }
 }

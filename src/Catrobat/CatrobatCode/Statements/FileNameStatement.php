@@ -5,8 +5,7 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class FileNameStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class FileNameStatement.
  */
 class FileNameStatement extends Statement
 {
@@ -28,7 +27,7 @@ class FileNameStatement extends Statement
     $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
 
   /**
@@ -36,9 +35,7 @@ class FileNameStatement extends Statement
    */
   public function execute()
   {
-    $code = SyntaxHighlightingConstants::VALUE . $this->value . $this->executeChildren() . SyntaxHighlightingConstants::END;
-
-    return $code;
+    return SyntaxHighlightingConstants::VALUE.$this->value.$this->executeChildren().SyntaxHighlightingConstants::END;
   }
 
   /**

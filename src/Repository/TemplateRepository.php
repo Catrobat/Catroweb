@@ -7,18 +7,15 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class TemplateRepository
- * @package App\Repository
+ * Class TemplateRepository.
  */
 class TemplateRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, Template::class);
   }
+
   /**
    * @param $active
    *
@@ -28,12 +25,11 @@ class TemplateRepository extends ServiceEntityRepository
   {
     $qb = $this->createQueryBuilder('e');
 
-    $result = $qb
+    return $qb
       ->select('e')
       ->where($qb->expr()->eq('e.active', $qb->expr()->literal($active)))
       ->getQuery()
-      ->getResult();
-
-    return $result;
+      ->getResult()
+    ;
   }
 }

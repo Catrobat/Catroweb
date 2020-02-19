@@ -16,18 +16,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
- * Class CommentsController
- * @package App\Catrobat\Controller\Web
+ * Class CommentsController.
  */
 class CommentsController extends AbstractController
 {
-
   /**
    * @Route("/reportComment", name="report", methods={"GET"})
    *
    * @throws \Exception
+   *
    * @return Response
    */
   public function reportCommentAction()
@@ -43,9 +41,7 @@ class CommentsController extends AbstractController
 
     if (!$comment)
     {
-      throw $this->createNotFoundException(
-        'No comment found for this id ' . $_GET['CommentId']
-      );
+      throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
 
     $comment->setIsReported(true);
@@ -54,18 +50,18 @@ class CommentsController extends AbstractController
     return new Response(StatusCode::OK);
   }
 
-
   /**
    * @Route("/deleteComment", name="delete", methods={"GET"})
    *
    * @throws \Exception
+   *
    * @return Response
    */
   public function deleteCommentAction()
   {
     /**
-     * @var $comment UserComment
-     * @var $user    User
+     * @var UserComment
+     * @var User        $user
      */
     $user = $this->getUser();
     if (!$user)
@@ -76,16 +72,14 @@ class CommentsController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted("ROLE_ADMIN"))
+    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted('ROLE_ADMIN'))
     {
       return new Response(StatusCode::NO_ADMIN_RIGHTS);
     }
 
     if (!$comment)
     {
-      throw $this->createNotFoundException(
-        'No comment found for this id ' . $_GET['CommentId']
-      );
+      throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
     $em->remove($comment);
     $em->flush();
@@ -93,33 +87,29 @@ class CommentsController extends AbstractController
     return new Response(StatusCode::OK);
   }
 
-
   /**
    * @Route("/comment", name="comment", methods={"POST"})
    *
-   * @param CatroNotificationService $notification_service
-   * @param ProgramManager $program_manager
-   *
-   * @return Response
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return Response
    */
   public function postCommentAction(CatroNotificationService $notification_service, ProgramManager $program_manager)
   {
     /**
-     * @var $user             User
-     * @var $program          Program
-     * @var $reported_program ProgramInappropriateReport
-     * @var $program_manager  ProgramManager
+     * @var User
+     * @var Program                    $program
+     * @var ProgramInappropriateReport $reported_program
+     * @var ProgramManager             $program_manager
      */
-
     $user = $this->getUser();
     if (!$user)
     {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
-    $user = $this->get("security.token_storage")->getToken()->getUser();
+    $user = $this->get('security.token_storage')->getToken()->getUser();
 
     $program = $program_manager->find($_POST['ProgramId']);
 

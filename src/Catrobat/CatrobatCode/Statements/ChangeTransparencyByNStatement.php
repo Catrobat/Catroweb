@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ChangeTransparencyByNStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ChangeTransparencyByNStatement.
  */
 class ChangeTransparencyByNStatement extends BaseChangeByNStatement
 {
-  const BEGIN_STRING = "transparency";
-  const END_STRING = ")%<br/>";
+  const BEGIN_STRING = 'transparency';
+  const END_STRING = ')%<br/>';
 
   /**
    * ChangeTransparencyByNStatement constructor.
@@ -31,9 +30,9 @@ class ChangeTransparencyByNStatement extends BaseChangeByNStatement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Change transparency by " . $formula_string_without_markup;
+    return 'Change transparency by '.$formula_string_without_markup;
   }
 
   /**
@@ -41,6 +40,6 @@ class ChangeTransparencyByNStatement extends BaseChangeByNStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
 }

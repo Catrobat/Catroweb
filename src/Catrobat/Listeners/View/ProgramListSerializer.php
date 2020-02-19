@@ -2,20 +2,19 @@
 
 namespace App\Catrobat\Listeners\View;
 
-use App\Entity\Program;
 use App\Catrobat\Responses\ProgramListResponse;
-use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
-use Symfony\Component\HttpFoundation\RequestStack;
+use App\Catrobat\Services\ScreenshotRepository;
+use App\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ProgramListSerializer
- * @package App\Catrobat\Listeners\View
+ * Class ProgramListSerializer.
  */
 class ProgramListSerializer
 {
@@ -39,10 +38,7 @@ class ProgramListSerializer
   /**
    * ProgramListSerializer constructor.
    *
-   * @param ScreenshotRepository $screenshot_repository
-   * @param RequestStack $request_stack
    * @param Router $router
-   * @param ElapsedTimeStringFormatter $time_formatter
    */
   public function __construct(ScreenshotRepository $screenshot_repository, RequestStack $request_stack,
                               RouterInterface $router, ElapsedTimeStringFormatter $time_formatter)
@@ -53,15 +49,11 @@ class ProgramListSerializer
     $this->time_formatter = $time_formatter;
   }
 
-  /**
-   * @param ViewEvent $event
-   */
   public function onKernelView(ViewEvent $event)
   {
     /**
-     * @var $program Program
+     * @var Program
      */
-
     $result = $event->getControllerResult();
     if (!($result instanceof ProgramListResponse))
     {
@@ -74,14 +66,14 @@ class ProgramListSerializer
 
     $retArray = [];
     $retArray['CatrobatProjects'] = [];
-    if ($programs != null)
+    if (null != $programs)
     {
       foreach ($programs as $program)
       {
         $new_program = [];
         $new_program['ProjectId'] = $program->getId();
         $new_program['ProjectName'] = $program->getName();
-        if ($details === true)
+        if (true === $details)
         {
           $new_program['ProjectNameShort'] = $program->getName();
           $new_program['Author'] = $program->getUser()->getUserName();
@@ -97,7 +89,7 @@ class ProgramListSerializer
           $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
           $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
             'flavor' => $event->getRequest()->getSession()->get('flavor_context'),
-            'id'     => $program->getId(),
+            'id' => $program->getId(),
           ]), '/');
           $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
             'id' => $program->getId(),
@@ -115,11 +107,11 @@ class ProgramListSerializer
       $retArray['isUserSpecificRecommendation'] = true;
     }
 
-    Request::setTrustedProxies(array($request->server->get('REMOTE_ADDR')),
+    Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')],
       Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
     $retArray['CatrobatInformation'] = [
-      'BaseUrl'           => $request->getSchemeAndHttpHost() . '/',
-      'TotalProjects'     => $result->getTotalPrograms(),
+      'BaseUrl' => $request->getSchemeAndHttpHost().'/',
+      'TotalProjects' => $result->getTotalPrograms(),
       'ProjectsExtension' => '.catrobat',
     ];
 

@@ -2,19 +2,25 @@
 
 namespace App\Catrobat\Services\TestEnv;
 
+use App\Catrobat\RecommenderSystem\RecommenderManager;
+use App\Catrobat\Services\CatrobatFileCompressor;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Extension;
+use App\Entity\GameJam;
+use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
 use App\Entity\ProgramRemixBackwardRelation;
 use App\Entity\ProgramRemixRelation;
 use App\Entity\ScratchProgramRemixRelation;
+use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
+use App\Entity\UserRemixSimilarityRelation;
 use App\Repository\CatroNotificationRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRemixBackwardRepository;
@@ -23,34 +29,26 @@ use App\Repository\ScratchProgramRemixRepository;
 use App\Repository\ScratchProgramRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserLikeSimilarityRelationRepository;
-use App\Entity\UserRemixSimilarityRelation;
-use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Repository\UserRemixSimilarityRelationRepository;
+use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Behat\Tester\Exception\PendingException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use App\Entity\Program;
-use App\Entity\Tag;
-use Behat\Behat\Tester\Exception\PendingException;
-use App\Catrobat\Services\CatrobatFileCompressor;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Behat\Behat\Hook\Scope\AfterStepScope;
-use App\Entity\GameJam;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Validator\Constraints\DateTime;
-use PHPUnit\Framework\Assert;
-
 
 /**
- * Class SymfonySupport
- * @package App\Catrobat\Features\Helpers
+ * Class SymfonySupport.
  */
 class SymfonySupport
 {
@@ -90,9 +88,6 @@ class SymfonySupport
     $this->fixture_dir = $fixture_dir;
   }
 
-  /**
-   * @param KernelInterface $kernel
-   */
   public function setKernel(KernelInterface $kernel)
   {
     $this->kernel = $kernel;
@@ -103,7 +98,7 @@ class SymfonySupport
    */
   public function getClient()
   {
-    if ($this->client == null)
+    if (null == $this->client)
     {
       $this->client = $this->kernel->getContainer()->get('test.client');
     }
@@ -247,7 +242,6 @@ class SymfonySupport
     return $this->kernel->getContainer()->get('router');
   }
 
-
   /**
    * @param $param
    *
@@ -276,24 +270,21 @@ class SymfonySupport
     $profile = $this->getClient()->getProfile();
     if (!$profile)
     {
-      throw new \RuntimeException(
-        'The profiler is disabled. Activate it by setting ' .
-        'framework.profiler.only_exceptions to false in ' .
-        'your config'
-      );
+      throw new \RuntimeException('The profiler is disabled. Activate it by setting '.'framework.profiler.only_exceptions to false in '.'your config');
     }
 
     return $profile;
   }
 
   /**
-   * @return User|object|null
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return User|object|null
    */
   public function getDefaultUser()
   {
-    if ($this->default_user == null)
+    if (null == $this->default_user)
     {
       $this->default_user = $this->insertUser();
     }
@@ -305,13 +296,12 @@ class SymfonySupport
     return $this->default_user;
   }
 
-
   /**
    * @return string
    */
   public function getDefaultProgramFile()
   {
-    $file = $this->fixture_dir . "/test.catrobat";
+    $file = $this->fixture_dir.'/test.catrobat';
     Assert::assertTrue(is_file($file));
 
     return $file;
@@ -347,18 +337,19 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @return GameJam
    * @throws ORMException
    * @throws OptimisticLockException
    * @throws \Exception
+   *
+   * @return GameJam
    */
   public function insertDefaultGamejam($config = [])
   {
     $gamejam = new GameJam();
-    @$gamejam->setName($config['name'] ?: "pocketalice");
+    @$gamejam->setName($config['name'] ?: 'pocketalice');
     @$gamejam->setHashtag($config['hashtag'] ?: null);
-    @$gamejam->setFlavor($config['flavor'] == null ? "pocketalice" :
-      $config['flavor'] != "no flavor" ?: null);
+    @$gamejam->setFlavor(null == $config['flavor'] ? 'pocketalice' :
+      'no flavor' != $config['flavor'] ?: null);
 
     $start_date = new \DateTime();
     $start_date->sub(new \DateInterval('P10D'));
@@ -368,7 +359,7 @@ class SymfonySupport
     @$gamejam->setStart($config['start'] ?: $start_date);
     @$gamejam->setEnd($config['end'] ?: $end_date);
 
-    @$gamejam->setFormUrl($config['formurl'] ?: "https://catrob.at/url/to/form");
+    @$gamejam->setFormUrl($config['formurl'] ?: 'https://catrob.at/url/to/form');
 
     $this->getManager()->persist($gamejam);
     $this->getManager()->flush();
@@ -379,17 +370,18 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @return object|null
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return object|null
    */
   public function insertUser($config = [])
   {
     ++$this->test_user_count;
     $user_manager = $this->getUserManager();
     $user = $user_manager->createUser();
-    @$user->setUsername($config['name'] ?: 'GeneratedUser' . $this->test_user_count);
-    @$user->setEmail($config['email'] ?: 'default' . $this->test_user_count . '@pocketcode.org');
+    @$user->setUsername($config['name'] ?: 'GeneratedUser'.$this->test_user_count);
+    @$user->setEmail($config['email'] ?: 'default'.$this->test_user_count.'@pocketcode.org');
     @$user->setPlainPassword($config['password'] ?: 'GeneratedPassword');
     @$user->setEnabled($config['enabled'] ?: true);
     @$user->setUploadToken($config['token'] ?: 'GeneratedToken');
@@ -400,13 +392,13 @@ class SymfonySupport
 
     $em = $this->getManager();
 
-    if (array_key_exists('id', $config) && $config['id'] !== null)
+    if (array_key_exists('id', $config) && null !== $config['id'])
     {
       $user->setId($config['id']);
     }
     else
     {
-      $user->setId('' . $this->test_user_count);
+      $user->setId(''.$this->test_user_count);
     }
 
     $em->flush();
@@ -414,50 +406,44 @@ class SymfonySupport
     return $user_manager->find($user->getId());
   }
 
-  /**
-   *
-   */
   public function computeAllLikeSimilaritiesBetweenUsers()
   {
     //$this->getRecommenderManager()->computeUserLikeSimilarities(null);
-    $catroweb_dir = $this->kernel->getProjectDir() . '/..';
-    $similarity_computation_service = $catroweb_dir . '/bin/recsys-similarity-computation-service.jar';
+    $catroweb_dir = $this->kernel->getProjectDir().'/..';
+    $similarity_computation_service = $catroweb_dir.'/bin/recsys-similarity-computation-service.jar';
     $output_dir = $catroweb_dir;
-    $sqlite_db_path = "$catroweb_dir/tests/behat/sqlite/behattest.sqlite";
+    $sqlite_db_path = "{$catroweb_dir}/tests/behat/sqlite/behattest.sqlite";
 
-    shell_exec("$catroweb_dir/bin/console catrobat:recommender:export --env=test");
-    shell_exec("/usr/bin/env java -jar $similarity_computation_service catroweb user_like_similarity_relation $catroweb_dir $output_dir");
-    shell_exec("/usr/bin/env printf \"with open('$catroweb_dir/import_likes.sql') as file:\\n  for line in file:" .
-      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .
-      "/usr/bin/env python2 > $catroweb_dir/import_likes_output.sql");
-    shell_exec("/usr/bin/env cat $catroweb_dir/import_likes_output.sql | /usr/bin/env sqlite3 $sqlite_db_path");
-    @unlink("$catroweb_dir/data_likes");
-    @unlink("$catroweb_dir/data_remixes");
-    @unlink("$catroweb_dir/import_likes.sql");
-    @unlink("$catroweb_dir/import_likes_output.sql");
+    shell_exec("{$catroweb_dir}/bin/console catrobat:recommender:export --env=test");
+    shell_exec("/usr/bin/env java -jar {$similarity_computation_service} catroweb user_like_similarity_relation {$catroweb_dir} {$output_dir}");
+    shell_exec("/usr/bin/env printf \"with open('{$catroweb_dir}/import_likes.sql') as file:\\n  for line in file:".
+      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | ".
+      "/usr/bin/env python2 > {$catroweb_dir}/import_likes_output.sql");
+    shell_exec("/usr/bin/env cat {$catroweb_dir}/import_likes_output.sql | /usr/bin/env sqlite3 {$sqlite_db_path}");
+    @unlink("{$catroweb_dir}/data_likes");
+    @unlink("{$catroweb_dir}/data_remixes");
+    @unlink("{$catroweb_dir}/import_likes.sql");
+    @unlink("{$catroweb_dir}/import_likes_output.sql");
   }
 
-  /**
-   *
-   */
   public function computeAllRemixSimilaritiesBetweenUsers()
   {
     //$this->getRecommenderManager()->computeUserRemixSimilarities(null);
-    $catroweb_dir = $this->kernel->getProjectDir() . '/..';
-    $similarity_computation_service = $catroweb_dir . '/bin/recsys-similarity-computation-service.jar';
+    $catroweb_dir = $this->kernel->getProjectDir().'/..';
+    $similarity_computation_service = $catroweb_dir.'/bin/recsys-similarity-computation-service.jar';
     $output_dir = $catroweb_dir;
-    $sqlite_db_path = "$catroweb_dir/tests/behat/sqlite/behattest.sqlite";
+    $sqlite_db_path = "{$catroweb_dir}/tests/behat/sqlite/behattest.sqlite";
 
-    shell_exec("$catroweb_dir/bin/console catrobat:recommender:export --env=test");
-    shell_exec("/usr/bin/env java -jar $similarity_computation_service catroweb user_remix_similarity_relation $catroweb_dir $output_dir");
-    shell_exec("/usr/bin/env printf \"with open('$catroweb_dir/import_remixes.sql') as file:\\n  for line in file:" .
-      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .
-      "/usr/bin/env python2 > $catroweb_dir/import_remixes_output.sql");
-    shell_exec("/usr/bin/env cat $catroweb_dir/import_remixes_output.sql | /usr/bin/env sqlite3 $sqlite_db_path");
-    @unlink("$catroweb_dir/data_likes");
-    @unlink("$catroweb_dir/data_remixes");
-    @unlink("$catroweb_dir/import_remixes.sql");
-    @unlink("$catroweb_dir/import_remixes_output.sql");
+    shell_exec("{$catroweb_dir}/bin/console catrobat:recommender:export --env=test");
+    shell_exec("/usr/bin/env java -jar {$similarity_computation_service} catroweb user_remix_similarity_relation {$catroweb_dir} {$output_dir}");
+    shell_exec("/usr/bin/env printf \"with open('{$catroweb_dir}/import_remixes.sql') as file:\\n  for line in file:".
+      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | ".
+      "/usr/bin/env python2 > {$catroweb_dir}/import_remixes_output.sql");
+    shell_exec("/usr/bin/env cat {$catroweb_dir}/import_remixes_output.sql | /usr/bin/env sqlite3 {$sqlite_db_path}");
+    @unlink("{$catroweb_dir}/data_likes");
+    @unlink("{$catroweb_dir}/data_remixes");
+    @unlink("{$catroweb_dir}/import_remixes.sql");
+    @unlink("{$catroweb_dir}/import_remixes_output.sql");
   }
 
   /**
@@ -469,8 +455,8 @@ class SymfonySupport
   public function insertUserLikeSimilarity($config = [])
   {
     /**
-     * @var $first_user  User
-     * @var $second_user User
+     * @var User
+     * @var User $second_user
      */
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
@@ -489,8 +475,8 @@ class SymfonySupport
   public function insertUserRemixSimilarity($config = [])
   {
     /**
-     * @var $first_user  User
-     * @var $second_user User
+     * @var User
+     * @var User $second_user
      */
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
@@ -509,8 +495,8 @@ class SymfonySupport
   public function insertProgramLike($config = [])
   {
     /**
-     * @var $user    User
-     * @var $program Program
+     * @var User
+     * @var Program $program
      */
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
@@ -541,7 +527,6 @@ class SymfonySupport
 
     $em->persist($tag);
     $em->flush();
-
   }
 
   /**
@@ -560,7 +545,6 @@ class SymfonySupport
 
     $em->persist($extension);
     $em->flush();
-
   }
 
   /**
@@ -572,12 +556,12 @@ class SymfonySupport
   public function insertForwardRemixRelation($config)
   {
     /**
-     * @var $ancestor   Program
-     * @var $descendant Program
+     * @var Program
+     * @var Program $descendant
      */
     $ancestor = $this->getProgramManager()->find($config['ancestor_id']);
     $descendant = $this->getProgramManager()->find($config['descendant_id']);
-    $forward_relation = new ProgramRemixRelation($ancestor, $descendant, (int)$config['depth']);
+    $forward_relation = new ProgramRemixRelation($ancestor, $descendant, (int) $config['depth']);
 
     $em = $this->getManager();
     $em->persist($forward_relation);
@@ -593,8 +577,8 @@ class SymfonySupport
   public function insertBackwardRemixRelation($config)
   {
     /**
-     * @var $parent Program
-     * @var $child  Program
+     * @var Program
+     * @var Program $child
      */
     $parent = $this->getProgramManager()->find($config['parent_id']);
     $child = $this->getProgramManager()->find($config['child_id']);
@@ -614,7 +598,7 @@ class SymfonySupport
   public function insertScratchRemixRelation($config)
   {
     /**
-     * @var $catrobat_child Program
+     * @var Program
      */
     $catrobat_child = $this->getProgramManager()->find($config['catrobat_child_id']);
     $scratch_relation = new ScratchProgramRemixRelation(
@@ -631,18 +615,19 @@ class SymfonySupport
    * @param $user
    * @param $config
    *
-   * @return Program
    * @throws ORMException
    * @throws OptimisticLockException
    * @throws \Exception
+   *
+   * @return Program
    */
   public function insertProgram($user, $config)
   {
-    /**
+    /*
      * @var $tag       Tag
      * @var $extension Extension
      */
-    if ($user == null)
+    if (null == $user)
     {
       $user = $this->getDefaultUser();
     }
@@ -675,7 +660,7 @@ class SymfonySupport
     $em->persist($program);
 
     // overwrite id if desired
-    if (array_key_exists('id', $config) && $config['id'] !== null)
+    if (array_key_exists('id', $config) && null !== $config['id'])
     {
       $program->setId($config['id']);
       $em->persist($program);
@@ -684,7 +669,7 @@ class SymfonySupport
       $program = $program_repo->find($config['id']);
     }
 
-    if (isset($config['tags']) && $config['tags'] != null)
+    if (isset($config['tags']) && null != $config['tags'])
     {
       $tags = explode(',', $config['tags']);
       foreach ($tags as $tag_id)
@@ -694,12 +679,12 @@ class SymfonySupport
       }
     }
 
-    if (isset($config['extensions']) && $config['extensions'] != null)
+    if (isset($config['extensions']) && null != $config['extensions'])
     {
       $extensions = explode(',', $config['extensions']);
       foreach ($extensions as $extension_name)
       {
-        $extension = $this->getExtensionRepository()->findOneBy(["name" => $extension_name]);
+        $extension = $this->getExtensionRepository()->findOneBy(['name' => $extension_name]);
         $program->addExtension($extension);
       }
     }
@@ -713,7 +698,7 @@ class SymfonySupport
     if (isset($config['gamejam']))
     {
       /**
-       * @var $jam GameJam
+       * @var GameJam
        */
       $jam = $config['gamejam'];
       $jam->addProgram($program);
@@ -729,17 +714,18 @@ class SymfonySupport
    * @param $program Program
    * @param $config
    *
-   * @return ProgramDownloads
    * @throws ORMException
    * @throws OptimisticLockException
    * @throws \Exception
+   *
+   * @return ProgramDownloads
    */
   public function insertProgramDownloadStatistics($program, $config)
   {
     $em = $this->getManager();
     /**
-     * @var $program_statistics ProgramDownloads
-     * @var $program            Program;
+     * @var ProgramDownloads
+     * @var Program;         $program
      */
     $program_statistics = new ProgramDownloads();
     $program_statistics->setProgram($program);
@@ -773,23 +759,24 @@ class SymfonySupport
 
   /**
    * @param $parameters
+   * @param mixed $is_embroidery
    *
    * @return string
    */
   public function generateProgramFileWith($parameters, $is_embroidery = false)
   {
     $filesystem = new Filesystem();
-    $this->emptyDirectory(sys_get_temp_dir() . '/program_generated/');
-    $new_program_dir = sys_get_temp_dir() . '/program_generated/';
+    $this->emptyDirectory(sys_get_temp_dir().'/program_generated/');
+    $new_program_dir = sys_get_temp_dir().'/program_generated/';
     if ($is_embroidery)
     {
-      $filesystem->mirror($this->fixture_dir . '/GeneratedFixtures/embroidery', $new_program_dir);
+      $filesystem->mirror($this->fixture_dir.'/GeneratedFixtures/embroidery', $new_program_dir);
     }
     else
     {
-      $filesystem->mirror($this->fixture_dir . '/GeneratedFixtures/base', $new_program_dir);
+      $filesystem->mirror($this->fixture_dir.'/GeneratedFixtures/base', $new_program_dir);
     }
-    $properties = simplexml_load_file($new_program_dir . '/code.xml');
+    $properties = simplexml_load_file($new_program_dir.'/code.xml');
 
     foreach ($parameters as $name => $value)
     {
@@ -821,14 +808,14 @@ class SymfonySupport
           break;
 
         default:
-          throw new PendingException('unknown xml field ' . $name);
+          throw new PendingException('unknown xml field '.$name);
       }
     }
 
-    $properties->asXML($new_program_dir . '/code.xml');
+    $properties->asXML($new_program_dir.'/code.xml');
     $compressor = new CatrobatFileCompressor();
 
-    return $compressor->compress($new_program_dir, sys_get_temp_dir() . '/', 'program_generated');
+    return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
   }
 
   /**
@@ -838,13 +825,14 @@ class SymfonySupport
    * @param string $flavor
    * @param null   $request_param
    *
-   * @return Response | null
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return Response | null
    */
-  public function upload($file, $user, $desired_id, $flavor = "pocketcode", $request_param = null)
+  public function upload($file, $user, $desired_id, $flavor = 'pocketcode', $request_param = null)
   {
-    if ($user == null)
+    if (null == $user)
     {
       $user = $this->getDefaultUser();
     }
@@ -854,9 +842,10 @@ class SymfonySupport
       try
       {
         $file = new UploadedFile($file, 'uploadedFile');
-      } catch (\Exception $e)
+      }
+      catch (\Exception $e)
       {
-        throw new PendingException('No case defined for ' . $e);
+        throw new PendingException('No case defined for '.$e);
       }
     }
 
@@ -865,21 +854,20 @@ class SymfonySupport
     $parameters['token'] = $user->getUploadToken();
     $parameters['fileChecksum'] = md5_file($file->getPathname());
 
-    if ($request_param['deviceLanguage'] != null)
+    if (null != $request_param['deviceLanguage'])
     {
       $parameters['deviceLanguage'] = $request_param['deviceLanguage'];
     }
 
     $client = $this->getClient();
-    $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, [$file]);
+    $client->request('POST', '/'.$flavor.'/api/upload/upload.json', $parameters, [$file]);
     $response = $client->getResponse();
     $em = $this->getManager();
     if ($desired_id)
     {
       /**
-       * @var $new_program Program
+       * @var Program
        */
-
       $matches = [];
       preg_match('/"projectId":".*?"/', $response->getContent(), $matches);
       $old_id = substr($matches[0], strlen('"projectId":"'), -1);
@@ -891,8 +879,8 @@ class SymfonySupport
 
       foreach ($this->getProgramRemixForwardRepository()->findAll() as $entry)
       {
-        /**
-         * @var $entry ProgramRemixRelation
+        /*
+         * @var ProgramRemixRelation
          */
         if ($entry->getDescendantId() == $old_id)
         {
@@ -908,8 +896,8 @@ class SymfonySupport
       $em->flush();
 
       // rename project file
-      rename("./public/resources_test/projects/" . $old_id . ".catrobat",
-        "./public/resources_test/projects/" . $desired_id . ".catrobat");
+      rename('./public/resources_test/projects/'.$old_id.'.catrobat',
+        './public/resources_test/projects/'.$desired_id.'.catrobat');
 
       $content = json_decode($response->getContent(), true);
       $content['projectId'] = $desired_id;
@@ -924,13 +912,14 @@ class SymfonySupport
    * @param $file
    * @param $user
    *
-   * @return Response
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return Response
    */
   public function submit($file, $user)
   {
-    if ($user == null)
+    if (null == $user)
     {
       $user = $this->getDefaultUser();
     }
@@ -946,29 +935,30 @@ class SymfonySupport
     $parameters['fileChecksum'] = md5_file($file->getPathname());
     $client = $this->getClient();
     $client->request('POST', '/app/api/gamejam/submit.json', $parameters, [$file]);
-    $response = $client->getResponse();
 
-    return $response;
+    return $client->getResponse();
   }
 
-  /**
-   * @param AfterStepScope $scope
-   */
   public function logOnError(AfterStepScope $scope)
   {
-    if ($this->error_directory == null)
+    if (null == $this->error_directory)
     {
       return;
     }
 
-    if (!$scope->getTestResult()->isPassed() && $this->getClient() != null)
+    if (!$scope->getTestResult()->isPassed() && null != $this->getClient())
     {
       $response = $this->getClient()->getResponse();
-      if ($response != null && $response->getContent() != '')
+      if (null != $response && '' != $response->getContent())
       {
-        file_put_contents($this->error_directory . 'errors.json', $response->getContent());
+        file_put_contents($this->error_directory.'errors.json', $response->getContent());
       }
     }
+  }
+
+  public function clearDefaultUser()
+  {
+    $this->default_user = null;
   }
 
   /**
@@ -982,13 +972,5 @@ class SymfonySupport
     copy($path, $temppath);
 
     return $temppath;
-  }
-
-  /**
-   *
-   */
-  public function clearDefaultUser()
-  {
-    $this->default_user = null;
   }
 }

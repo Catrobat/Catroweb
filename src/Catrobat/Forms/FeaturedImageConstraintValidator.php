@@ -2,22 +2,20 @@
 
 namespace App\Catrobat\Forms;
 
-use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Class FeaturedImageConstraintValidator
- * @package App\Catrobat\Forms
+ * Class FeaturedImageConstraintValidator.
  */
 class FeaturedImageConstraintValidator extends ConstraintValidator
 {
   /**
-   * @param mixed      $value
-   * @param Constraint $constraint
+   * @param mixed $value
    */
   public function validate($value, Constraint $constraint)
   {
-    if ($value != null)
+    if (null != $value)
     {
       $imageinfo = getimagesize($value);
       if ($imageinfo[0] != $constraint->required_width || $imageinfo[1] != $constraint->required_height)
@@ -25,7 +23,8 @@ class FeaturedImageConstraintValidator extends ConstraintValidator
         $this->context->buildViolation($constraint->message)
           ->setParameter('%width%', $constraint->required_width)
           ->setParameter('%height%', $constraint->required_height)
-          ->addViolation();
+          ->addViolation()
+        ;
       }
     }
   }

@@ -4,12 +4,11 @@ namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class ScreenshotRepository
- * @package App\Catrobat\Services
+ * Class ScreenshotRepository.
  */
 class ScreenshotRepository
 {
@@ -65,16 +64,16 @@ class ScreenshotRepository
 
     if (!is_dir($screenshot_dir))
     {
-      throw new InvalidStorageDirectoryException($screenshot_dir . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($screenshot_dir.' is not a valid directory');
     }
     if (!is_dir($thumbnail_dir))
     {
-      throw new InvalidStorageDirectoryException($thumbnail_dir . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($thumbnail_dir.' is not a valid directory');
     }
 
     if (!is_dir($tmp_dir))
     {
-      throw new InvalidStorageDirectoryException($tmp_dir . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($tmp_dir.' is not a valid directory');
     }
 
     $this->screenshot_dir = $screenshot_dir;
@@ -85,7 +84,6 @@ class ScreenshotRepository
     $this->thumbnail_path = $thumbnail_path;
     $this->tmp_path = $tmp_path;
   }
-
 
   /**
    * @param $screenshot_filepath
@@ -106,8 +104,9 @@ class ScreenshotRepository
   public function storeImageInTmp($image, $id)
   {
     $filesystem = new Filesystem();
-    $tmp_file_path = $this->tmp_dir . $this->generateFileNameFromId($id);
-    if ($filesystem->exists($tmp_file_path)) {
+    $tmp_file_path = $this->tmp_dir.$this->generateFileNameFromId($id);
+    if ($filesystem->exists($tmp_file_path))
+    {
       $filesystem->remove($tmp_file_path);
     }
     $filesystem->copy($image, $tmp_file_path);
@@ -122,7 +121,7 @@ class ScreenshotRepository
   public function updateProgramAssets($image, $id)
   {
     $this->storeImageInTmp($image, $id);
-    $tmp_file_path = $this->tmp_dir . $this->generateFileNameFromId($id);
+    $tmp_file_path = $this->tmp_dir.$this->generateFileNameFromId($id);
     $this->saveScreenshot($tmp_file_path, $id);
     $this->saveThumbnail($tmp_file_path, $id);
   }
@@ -138,33 +137,8 @@ class ScreenshotRepository
     $screen = $this->getImagick();
     $screen->readImage($filepath);
     $screen->cropThumbnailImage(480, 480);
-    $screen->writeImage($this->screenshot_dir . $this->generateFileNameFromId($id));
+    $screen->writeImage($this->screenshot_dir.$this->generateFileNameFromId($id));
     $screen->destroy();
-  }
-
-  /**
-   * @param $filepath
-   * @param $id
-   *
-   * @throws \ImagickException
-   */
-  private function saveThumbnail($filepath, $id)
-  {
-    $thumb = $this->getImagick();
-    $thumb->readImage($filepath);
-    $thumb->cropThumbnailImage(80, 80);
-    $thumb->writeImage($this->thumbnail_dir . $this->generateFileNameFromId($id));
-    $thumb->destroy();
-  }
-
-  /**
-   * @param $id
-   *
-   * @return string
-   */
-  private function generateFileNameFromId($id)
-  {
-    return 'screen_' . $id . '.png';
   }
 
   /**
@@ -174,9 +148,9 @@ class ScreenshotRepository
    */
   public function getScreenshotWebPath($id)
   {
-    if (file_exists($this->screenshot_dir . $this->generateFileNameFromId($id)))
+    if (file_exists($this->screenshot_dir.$this->generateFileNameFromId($id)))
     {
-      return $this->screenshot_path . $this->generateFileNameFromId($id);
+      return $this->screenshot_path.$this->generateFileNameFromId($id);
     }
 
     return self::DEFAULT_SCREENSHOT;
@@ -189,9 +163,9 @@ class ScreenshotRepository
    */
   public function getThumbnailWebPath($id)
   {
-    if (file_exists($this->thumbnail_dir . $this->generateFileNameFromId($id)))
+    if (file_exists($this->thumbnail_dir.$this->generateFileNameFromId($id)))
     {
-      return $this->thumbnail_path . $this->generateFileNameFromId($id);
+      return $this->thumbnail_path.$this->generateFileNameFromId($id);
     }
 
     return self::DEFAULT_THUMBNAIL;
@@ -205,17 +179,18 @@ class ScreenshotRepository
   public function importProgramAssets($screenshot_filepath, $thumbnail_filepath, $id)
   {
     $filesystem = new Filesystem();
-    $filesystem->copy($screenshot_filepath, $this->screenshot_dir . $this->generateFileNameFromId($id));
-    $filesystem->copy($thumbnail_filepath, $this->thumbnail_dir . $this->generateFileNameFromId($id));
+    $filesystem->copy($screenshot_filepath, $this->screenshot_dir.$this->generateFileNameFromId($id));
+    $filesystem->copy($thumbnail_filepath, $this->thumbnail_dir.$this->generateFileNameFromId($id));
   }
 
   /**
-   * @return \Imagick
    * @throws \ImagickException
+   *
+   * @return \Imagick
    */
   public function getImagick()
   {
-    if ($this->imagick == null)
+    if (null == $this->imagick)
     {
       $this->imagick = new \Imagick();
     }
@@ -237,21 +212,6 @@ class ScreenshotRepository
   public function deleteScreenshot($id)
   {
     $this->deleteFiles($this->screenshot_dir, $id);
-  }
-
-  /**
-   * @param $directory
-   * @param $id
-   */
-  private function deleteFiles($directory, $id)
-  {
-    try
-    {
-      $file = new File($directory . $this->generateFileNameFromId($id));
-      unlink($file->getPathname());
-    } catch (FileNotFoundException $e)
-    {
-    }
   }
 
   /**
@@ -281,8 +241,8 @@ class ScreenshotRepository
   public function makeScreenshotPerm($id)
   {
     $filesystem = new Filesystem();
-    $filesystem->copy($this->tmp_dir . $this->generateFileNameFromId($id), $this->screenshot_dir . $this->generateFileNameFromId($id));
-    $filesystem->remove($this->tmp_dir . $this->generateFileNameFromId($id));
+    $filesystem->copy($this->tmp_dir.$this->generateFileNameFromId($id), $this->screenshot_dir.$this->generateFileNameFromId($id));
+    $filesystem->remove($this->tmp_dir.$this->generateFileNameFromId($id));
   }
 
   /**
@@ -291,8 +251,8 @@ class ScreenshotRepository
   public function makeThumbnailPerm($id)
   {
     $filesystem = new Filesystem();
-    $filesystem->copy($this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id), $this->thumbnail_dir . $this->generateFileNameFromId($id));
-    $filesystem->remove($this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id));
+    $filesystem->copy($this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id), $this->thumbnail_dir.$this->generateFileNameFromId($id));
+    $filesystem->remove($this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id));
   }
 
   /**
@@ -306,23 +266,8 @@ class ScreenshotRepository
     $screen = $this->getImagick();
     $screen->readImage($filepath);
     $screen->cropThumbnailImage(480, 480);
-    $screen->writeImage($this->tmp_dir . $this->generateFileNameFromId($id));
+    $screen->writeImage($this->tmp_dir.$this->generateFileNameFromId($id));
     $screen->destroy();
-  }
-
-  /**
-   * @param $filepath
-   * @param $id
-   *
-   * @throws \ImagickException
-   */
-  private function saveThumbnailTemp($filepath, $id)
-  {
-    $thumb = $this->getImagick();
-    $thumb->readImage($filepath);
-    $thumb->cropThumbnailImage(80, 80);
-    $thumb->writeImage($this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id));
-    $thumb->destroy();
   }
 
   /**
@@ -335,9 +280,9 @@ class ScreenshotRepository
     $fs = new Filesystem();
     $fs->remove(
       [
-        $this->tmp_dir . $this->generateFileNameFromId($id),
-        $this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id),
-        $this->tmp_dir . $id . ".catrobat",
+        $this->tmp_dir.$this->generateFileNameFromId($id),
+        $this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id),
+        $this->tmp_dir.$id.'.catrobat',
       ]);
   }
 
@@ -356,11 +301,66 @@ class ScreenshotRepository
    *       When this function is used while a user is
    *       uploading a program you will kill the process.
    *       So don't use it. It's for testing purposes.
-   *
    */
   public function deleteTempFiles()
   {
     $this->removeDirectory($this->tmp_dir);
+  }
+
+  /**
+   * @param $filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
+  private function saveThumbnail($filepath, $id)
+  {
+    $thumb = $this->getImagick();
+    $thumb->readImage($filepath);
+    $thumb->cropThumbnailImage(80, 80);
+    $thumb->writeImage($this->thumbnail_dir.$this->generateFileNameFromId($id));
+    $thumb->destroy();
+  }
+
+  /**
+   * @param $id
+   *
+   * @return string
+   */
+  private function generateFileNameFromId($id)
+  {
+    return 'screen_'.$id.'.png';
+  }
+
+  /**
+   * @param $directory
+   * @param $id
+   */
+  private function deleteFiles($directory, $id)
+  {
+    try
+    {
+      $file = new File($directory.$this->generateFileNameFromId($id));
+      unlink($file->getPathname());
+    }
+    catch (FileNotFoundException $e)
+    {
+    }
+  }
+
+  /**
+   * @param $filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
+  private function saveThumbnailTemp($filepath, $id)
+  {
+    $thumb = $this->getImagick();
+    $thumb->readImage($filepath);
+    $thumb->cropThumbnailImage(80, 80);
+    $thumb->writeImage($this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id));
+    $thumb->destroy();
   }
 
   /**
@@ -399,5 +399,4 @@ class ScreenshotRepository
     }
     rmdir($directory);
   }
-
 }

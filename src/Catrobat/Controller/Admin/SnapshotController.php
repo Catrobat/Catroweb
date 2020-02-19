@@ -3,20 +3,15 @@
 namespace App\Catrobat\Controller\Admin;
 
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
-
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class SnapshotController
- * @package App\Catrobat\Controller\Admin
+ * Class SnapshotController.
  */
 class SnapshotController extends CRUDController
 {
-
   /**
-   * @param Request|null $request
-   *
    * @return \Symfony\Component\HttpFoundation\Response
    */
   public function listAction(Request $request = null)

@@ -6,8 +6,7 @@ use App\Entity\Program;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class ProgramDownloadedEvent
- * @package App\Catrobat\Events
+ * Class ProgramDownloadedEvent.
  */
 class ProgramDownloadedEvent extends Event
 {
@@ -23,8 +22,7 @@ class ProgramDownloadedEvent extends Event
   /**
    * ProgramDownloadedEvent constructor.
    *
-   * @param Program $program
-   * @param         $ip
+   * @param $ip
    */
   public function __construct(Program $program, $ip)
   {

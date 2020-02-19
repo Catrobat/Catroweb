@@ -3,17 +3,15 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-
 /**
- * Class CategoriesAdmin
- * @package App\Admin
+ * Class CategoriesAdmin.
  */
 class CategoriesAdmin extends AbstractAdmin
 {
@@ -27,7 +25,6 @@ class CategoriesAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'categories';
 
-
   /**
    * @param FormMapper $formMapper
    *
@@ -39,15 +36,16 @@ class CategoriesAdmin extends AbstractAdmin
       ->add('name', TextType::class, ['label' => 'Name'])
       ->add('alias', TextType::class, ['label' => 'Alias'])
       ->add('programs', null, [
-        'required'     => false,
+        'required' => false,
         'by_reference' => false,
       ], [
-        'edit'       => 'inline',
-        'inline'     => 'table',
-        'sortable'   => 'id',
+        'edit' => 'inline',
+        'inline' => 'table',
+        'sortable' => 'id',
         'admin_code' => 'catrowebadmin.block.programs.all',
       ])
-      ->add('order', IntegerType::class, ['label' => 'Order']);
+      ->add('order', IntegerType::class, ['label' => 'Order'])
+    ;
   }
 
   /**
@@ -58,7 +56,6 @@ class CategoriesAdmin extends AbstractAdmin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -71,6 +68,7 @@ class CategoriesAdmin extends AbstractAdmin
       ->addIdentifier('name')
       ->add('alias')
       ->add('programs', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
-      ->add('order');
+      ->add('order')
+    ;
   }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Extension;
 use App\Entity\ProgramRemixRelation;
 use App\Entity\User;
 use DateTime;
@@ -10,16 +9,11 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
- * Class ProgramRemixRepository
- * @package App\Repository
+ * Class ProgramRemixRepository.
  */
 class ProgramRemixRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, ProgramRemixRelation::class);
@@ -40,7 +34,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('descendant_ids', $descendant_program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -52,7 +47,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
   {
     $parents_catrobat_ancestor_relations = $this->getAncestorRelations($descendant_program_ids);
 
-    return array_unique(array_map(function (ProgramRemixRelation $relation) {
+    return array_unique(array_map(function (ProgramRemixRelation $relation)
+    {
       return $relation->getAncestorId();
     }, $parents_catrobat_ancestor_relations));
   }
@@ -73,7 +69,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('descendant_ids', $descendant_program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -84,8 +81,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
    */
   public function getDirectAndIndirectDescendantRelations(
     array $ancestor_program_ids_to_exclude, array $descendant_program_ids
-  )
-  {
+  ) {
     $qb = $this->createQueryBuilder('r');
 
     return $qb
@@ -96,7 +92,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('descendant_program_ids', $descendant_program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -107,12 +104,13 @@ class ProgramRemixRepository extends ServiceEntityRepository
    */
   public function getDirectAndIndirectDescendantIds(
     array $ancestor_program_ids_to_exclude, array $descendant_program_ids
-  )
-  {
+  ) {
     $direct_and_indirect_descendant_relations = $this
-      ->getDirectAndIndirectDescendantRelations($ancestor_program_ids_to_exclude, $descendant_program_ids);
+      ->getDirectAndIndirectDescendantRelations($ancestor_program_ids_to_exclude, $descendant_program_ids)
+    ;
 
-    return array_unique(array_map(function (ProgramRemixRelation $relation) {
+    return array_unique(array_map(function (ProgramRemixRelation $relation)
+    {
       return $relation->getAncestorId();
     }, $direct_and_indirect_descendant_relations));
   }
@@ -134,9 +132,11 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('program_ids', $program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
 
-    return array_unique(array_map(function ($row) {
+    return array_unique(array_map(function ($row)
+    {
       return $row['ancestor_id'];
     }, $result_data));
   }
@@ -156,7 +156,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('ancestor_program_ids', $ancestor_program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -168,15 +169,13 @@ class ProgramRemixRepository extends ServiceEntityRepository
   {
     $catrobat_root_descendant_relations = $this->getDescendantRelations($ancestor_program_ids);
 
-    return array_unique(array_map(function (ProgramRemixRelation $relation) {
+    return array_unique(array_map(function (ProgramRemixRelation $relation)
+    {
       return $relation->getDescendantId();
     }, $catrobat_root_descendant_relations));
   }
 
   /**
-   * @param array $edge_start_program_ids
-   * @param array $edge_end_program_ids
-   *
    * @return ProgramRemixRelation[]
    */
   public function getDirectEdgeRelationsBetweenProgramIds(array $edge_start_program_ids, array $edge_end_program_ids)
@@ -192,13 +191,10 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('edge_end_program_ids', $edge_end_program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
-  /**
-   * @param array $ancestor_program_ids
-   * @param array $descendant_program_ids
-   */
   public function removeRelationsBetweenProgramIds(array $ancestor_program_ids, array $descendant_program_ids)
   {
     $qb = $this->createQueryBuilder('r');
@@ -210,12 +206,10 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('ancestor_program_ids', $ancestor_program_ids)
       ->setParameter('descendant_program_ids', $descendant_program_ids)
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
-  /**
-   *
-   */
   public function removeAllRelations()
   {
     $qb = $this->createQueryBuilder('r');
@@ -223,12 +217,11 @@ class ProgramRemixRepository extends ServiceEntityRepository
     $qb
       ->delete()
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
   /**
-   * @param User $user
-   *
    * @return ProgramRemixRelation[]
    */
   public function getUnseenDirectDescendantRelationsOfUser(User $user)
@@ -247,12 +240,10 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('user', $user)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
-  /**
-   * @param DateTime $seen_at
-   */
   public function markAllUnseenRelationsAsSeen(DateTime $seen_at)
   {
     $qb = $this->createQueryBuilder('r');
@@ -262,7 +253,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->set('r.seen_at', ':seen_at')
       ->setParameter(':seen_at', $seen_at)
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
   /**
@@ -281,7 +273,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('program_id', $program_id)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
 
     return count($result);
   }
@@ -303,7 +296,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('user_id', $user_id)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -335,6 +329,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('flavor', $flavor)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 }

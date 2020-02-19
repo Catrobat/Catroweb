@@ -6,25 +6,18 @@ use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 
 /**
- * Class LicenseUpdater
- * @package App\Catrobat\Listeners
+ * Class LicenseUpdater.
  */
 class LicenseUpdater
 {
   const MEDIALICENSE = 'https://developer.catrobat.org/ccbysa_v4';
   const PROGRAMLICENSE = 'https://developer.catrobat.org/agpl_v3';
 
-  /**
-   * @param ProgramBeforeInsertEvent $event
-   */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->update($event->getExtractedFile());
   }
 
-  /**
-   * @param ExtractedCatrobatFile $file
-   */
   public function update(ExtractedCatrobatFile $file)
   {
     $program_xml_properties = $file->getProgramXmlProperties();

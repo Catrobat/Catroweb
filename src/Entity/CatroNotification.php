@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Generic Notification.
+ *
  * @ORM\Table
  */
 
@@ -15,15 +16,15 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="notification_type", type="string")
  * @ORM\DiscriminatorMap({
- *   "default" = "CatroNotification",
- *   "anniversary" = "AnniversaryNotification",
- *   "achievement" = "AchievementNotification",
- *   "comment" = "CommentNotification",
- *   "like" = "LikeNotification",
- *   "follow" = "FollowNotification",
- *   "follow_program" = "NewProgramNotification",
- *   "broadcast_notification" = "BroadcastNotification",
- *   "remix_notification" = "RemixNotification"
+ *     "default": "CatroNotification",
+ *     "anniversary": "AnniversaryNotification",
+ *     "achievement": "AchievementNotification",
+ *     "comment": "CommentNotification",
+ *     "like": "LikeNotification",
+ *     "follow": "FollowNotification",
+ *     "follow_program": "NewProgramNotification",
+ *     "broadcast_notification": "BroadcastNotification",
+ *     "remix_notification": "RemixNotification"
  * })
  */
 class CatroNotification
@@ -39,13 +40,13 @@ class CatroNotification
 
   /**
    * @var User The user to which this CatroNotification will be shown. If the user gets deleted, this CatroNotification
-   *      gets deleted as well.
+   *           gets deleted as well.
    *
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="notifications")
    * @ORM\JoinColumn(
-   *   name="user",
-   *   referencedColumnName="id",
-   *   nullable=false
+   *     name="user",
+   *     referencedColumnName="id",
+   *     nullable=false
    * )
    */
   private $user;
@@ -60,54 +61,47 @@ class CatroNotification
    */
   private $message;
   /**
-   * @ORM\Column(name="seen", type="boolean", options={"default":false})
+   * @ORM\Column(name="seen", type="boolean", options={"default": false})
    */
   private $seen = false;
 
-  private $twig_template = "Notifications/NotificationTypes/catro_notification.html.twig";
-
+  private $twig_template = 'Notifications/NotificationTypes/catro_notification.html.twig';
 
   /**
    * CatroNotification constructor.
    *
-   * @param User $user
-   * @param      $title
-   * @param      $message
+   * @param $title
+   * @param $message
    */
-  public function __construct(User $user, $title = "", $message = "")
+  public function __construct(User $user, $title = '', $message = '')
   {
     $this->user = $user;
     $this->title = $title;
     $this->message = $message;
   }
 
-
   /**
-   * Get notification id
+   * Get notification id.
    *
-   *
-   * @return integer
+   * @return int
    */
-
   public function getId()
   {
     return $this->id;
   }
 
   /**
-   * Set id
+   * Set id.
    *
-   *
-   * @param integer $id
+   * @param int $id
    */
-
   public function setId($id)
   {
     $this->id = $id;
   }
 
   /**
-   * Set title
+   * Set title.
    *
    * @param string $title
    *
@@ -121,7 +115,7 @@ class CatroNotification
   }
 
   /**
-   * Get title
+   * Get title.
    *
    * @return string
    */
@@ -131,9 +125,9 @@ class CatroNotification
   }
 
   /**
-   * Set seen
+   * Set seen.
    *
-   * @param boolean $seen
+   * @param bool $seen
    *
    * @return CatroNotification
    */
@@ -145,7 +139,7 @@ class CatroNotification
   }
 
   /**
-   * Get seen
+   * Get seen.
    *
    * @return bool
    */
@@ -155,7 +149,7 @@ class CatroNotification
   }
 
   /**
-   * Set message
+   * Set message.
    *
    * @param string $message
    *
@@ -169,7 +163,7 @@ class CatroNotification
   }
 
   /**
-   * Get message
+   * Get message.
    *
    * @return string
    */
@@ -181,7 +175,7 @@ class CatroNotification
   /**
    * Sets he user to which this CatroNotification will be shown.
    *
-   * @param User $user The user to which this CatroNotification will be shown.
+   * @param User $user the user to which this CatroNotification will be shown
    *
    * @return CatroNotification
    */
@@ -217,8 +211,4 @@ class CatroNotification
   {
     $this->twig_template = $twig_template;
   }
-
-
 }
-
-

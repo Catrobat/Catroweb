@@ -5,16 +5,14 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class UserVariableStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class UserVariableStatement.
  */
 class UserVariableStatement extends Statement
 {
+  const BEGIN_STRING = '';
 
-  const BEGIN_STRING = "";
-
-  const AT_END_STRING = " at (";
-  const TO_END_STRING = " to (";
+  const AT_END_STRING = ' at (';
+  const TO_END_STRING = ' to (';
 
   /**
    * UserVariableStatement constructor.
@@ -33,10 +31,9 @@ class UserVariableStatement extends Statement
       $end = self::AT_END_STRING;
     }
 
-    $value = SyntaxHighlightingConstants::VARIABLES . $value . SyntaxHighlightingConstants::END;
+    $value = SyntaxHighlightingConstants::VARIABLES.$value.SyntaxHighlightingConstants::END;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
       $end);
   }
-
 }

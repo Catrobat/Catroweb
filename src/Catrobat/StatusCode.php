@@ -3,8 +3,7 @@
 namespace App\Catrobat;
 
 /**
- * Class StatusCode
- * @package Catrobat
+ * Class StatusCode.
  */
 class StatusCode
 {

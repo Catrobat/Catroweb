@@ -5,10 +5,8 @@ namespace App\Catrobat\Commands\Helpers;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 /**
- * Class RecommenderFileLock
- * @package App\Catrobat\Commands
+ * Class RecommenderFileLock.
  */
 class RecommenderFileLock
 {
@@ -28,24 +26,20 @@ class RecommenderFileLock
   /**
    * RecommenderFileLock constructor.
    *
-   * @param                 $app_root_dir
-   * @param OutputInterface $output
+   * @param $app_root_dir
    */
   public function __construct($app_root_dir, OutputInterface $output)
   {
-    $this->lock_file_path = $app_root_dir . '/' . RecommenderManager::RECOMMENDER_LOCK_FILE_NAME;
+    $this->lock_file_path = $app_root_dir.'/'.RecommenderManager::RECOMMENDER_LOCK_FILE_NAME;
     $this->lock_file = null;
     $this->output = $output;
   }
 
-  /**
-   *
-   */
   public function lock()
   {
     $this->lock_file = fopen($this->lock_file_path, 'w+');
     $this->output->writeln('[RecommenderFileLock] Trying to acquire lock...');
-    while (flock($this->lock_file, LOCK_EX) == false)
+    while (false == flock($this->lock_file, LOCK_EX))
     {
       $this->output->writeln('[RecommenderFileLock] Waiting for file lock to be released...');
       sleep(1);
@@ -55,12 +49,9 @@ class RecommenderFileLock
     fwrite($this->lock_file, 'User similarity computation in progress...');
   }
 
-  /**
-   *
-   */
   public function unlock()
   {
-    if ($this->lock_file == null)
+    if (null == $this->lock_file)
     {
       return;
     }

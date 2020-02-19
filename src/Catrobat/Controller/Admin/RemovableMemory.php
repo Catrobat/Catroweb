@@ -2,20 +2,18 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-
 /**
- * Class RemovableMemory
- * @package App\Catrobat\Controller\Admin
+ * Class RemovableMemory.
  */
 class RemovableMemory
 {
   /**
-   * @var String
+   * @var string
    */
   public $name;
 
   /**
-   * @var String
+   * @var string
    */
   public $description;
 
@@ -59,14 +57,10 @@ class RemovableMemory
    */
   public $archive_command_name;
 
-
   /**
    * RemovableMemory constructor.
-   *
-   * @param String $name
-   * @param String $description
    */
-  public function __construct(String $name = "", String $description = "")
+  public function __construct(string $name = '', string $description = '')
   {
     $this->name = $name;
     $this->description = $description;

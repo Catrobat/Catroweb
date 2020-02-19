@@ -5,8 +5,7 @@ namespace App\Catrobat\Forms;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Class FeaturedImageConstraint
- * @package App\Catrobat\Forms
+ * Class FeaturedImageConstraint.
  */
 class FeaturedImageConstraint extends Constraint
 {

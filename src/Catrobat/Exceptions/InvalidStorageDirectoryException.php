@@ -3,12 +3,10 @@
 namespace App\Catrobat\Exceptions;
 
 /**
- * Class InvalidStorageDirectoryException
- * @package App\Catrobat\Exceptions
+ * Class InvalidStorageDirectoryException.
  */
 class InvalidStorageDirectoryException extends \RuntimeException
 {
-
   /**
    * InvalidStorageDirectoryException constructor.
    *

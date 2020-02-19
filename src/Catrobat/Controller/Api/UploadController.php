@@ -2,37 +2,35 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Catrobat\Exceptions\Upload\InvalidChecksumException;
+use App\Catrobat\Exceptions\Upload\MissingChecksumException;
+use App\Catrobat\Exceptions\Upload\MissingPostDataException;
+use App\Catrobat\Exceptions\Upload\NoGameJamException;
+use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Services\CatroNotificationService;
+use App\Catrobat\Services\TokenGenerator;
+use App\Catrobat\StatusCode;
 use App\Entity\GameJam;
-use App\Entity\Program;
 use App\Entity\NewProgramNotification;
+use App\Entity\Program;
+use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Entity\UserManager;
+use App\Repository\GameJamRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\Request;
-use App\Entity\UserManager;
-use App\Catrobat\Requests\AddProgramRequest;
-use App\Entity\ProgramManager;
-use App\Catrobat\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Catrobat\StatusCode;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Catrobat\Exceptions\Upload\MissingChecksumException;
-use App\Catrobat\Exceptions\Upload\InvalidChecksumException;
-use App\Catrobat\Exceptions\Upload\MissingPostDataException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use App\Repository\GameJamRepository;
-use App\Catrobat\Exceptions\Upload\NoGameJamException;
 
 /**
- * Class UploadController
- * @package App\Catrobat\Controller\Api
+ * Class UploadController.
  */
 class UploadController
 {
-
   /**
    * @var UserManager
    */
@@ -73,18 +71,8 @@ class UploadController
    */
   private $logger;
 
-
   /**
    * UploadController constructor.
-   *
-   * @param UserManager           $usermanager
-   * @param TokenStorageInterface $tokenstorage
-   * @param ProgramManager        $programmanager
-   * @param GameJamRepository     $gamejamrepository
-   * @param TokenGenerator        $tokengenerator
-   * @param TranslatorInterface   $translator
-   * @param LoggerInterface       $logger
-   * @param CatroNotificationService $catroNotificationService
    */
   public function __construct(UserManager $usermanager, TokenStorageInterface $tokenstorage, ProgramManager $programmanager,
                               GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator,
@@ -101,36 +89,33 @@ class UploadController
     $this->catroNotificationService = $catroNotificationService;
   }
 
-
   /**
    * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"}, methods={"POST"})
    *
-   * @param Request $request
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function uploadAction(Request $request)
   {
-    $this->logger->info("Uploading a project...");
+    $this->logger->info('Uploading a project...');
+
     return $this->processUpload($request);
   }
 
-
   /**
    * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"},
-   *   methods={"POST"})
+   * methods={"POST"})
    *
-   * @param Request $request
-   *
-   * @return JsonResponse
    * @throws \Doctrine\ORM\NonUniqueResultException
    * @throws \Exception
+   *
+   * @return JsonResponse
    */
   public function submitAction(Request $request)
   {
     $jam = $this->gamejamrepository->getCurrentGameJam();
-    if ($jam === null)
+    if (null === $jam)
     {
       throw new NoGameJamException();
     }
@@ -139,36 +124,36 @@ class UploadController
   }
 
   /**
-   * @param Request $request
-   * @param null    $gamejam
+   * @param null $gamejam
+   *
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   private function processUpload(Request $request, $gamejam = null)
   {
-    /**
+    /*
      * @var $file File
      * @var $user User
      */
 
-    if ($request->files->count() !== 1)
+    if (1 !== $request->files->count())
     {
-      $this->logger->error("Missing POST data");
+      $this->logger->error('Missing POST data');
       throw new MissingPostDataException();
     }
-    elseif (!$request->request->has('fileChecksum'))
+    if (!$request->request->has('fileChecksum'))
     {
-      $this->logger->error("Missing Checksum");
+      $this->logger->error('Missing Checksum');
       throw new MissingChecksumException();
     }
 
     $file = array_values($request->files->all())[0];
     if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum'))
     {
-      $this->logger->error("UploadError " . StatusCode::INVALID_CHECKSUM, [
-        "checksum_symfony" => md5($file->getPathname()),
-        "checksum_app" => $request->request->get('fileChecksum'),
+      $this->logger->error('UploadError '.StatusCode::INVALID_CHECKSUM, [
+        'checksum_symfony' => md5($file->getPathname()),
+        'checksum_app' => $request->request->get('fileChecksum'),
       ]);
       throw new InvalidChecksumException();
     }
@@ -186,7 +171,7 @@ class UploadController
       $gamejam, $request->request->get('deviceLanguage'), $flavor);
 
     $program = $this->programmanager->addProgram($add_program_request);
-    if ($program === null)
+    if (null === $program)
     {
       $response = $this->createUploadFailedResponse($request, $gamejam, $user);
     }
@@ -199,10 +184,10 @@ class UploadController
       }
       $response = $this->createUploadResponse($request, $gamejam, $user, $program);
     }
-    $this->logger->info("Uploading a project done : " . json_encode($response));
+    $this->logger->info('Uploading a project done : '.json_encode($response));
+
     return JsonResponse::create($response);
   }
-
 
   /**
    * @param $gamejam GameJam
@@ -215,19 +200,17 @@ class UploadController
   private function assembleFormUrl($gamejam, $user, $program, $request)
   {
     /**
-     * @var $gamejam GameJam
+     * @var GameJam
      */
     $languageCode = $this->getLanguageCode($request);
 
     $url = $gamejam->getFormUrl();
-    $url = str_replace("%CAT_ID%", $program->getId(), $url);
-    $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
-    $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
-    $url = str_replace("%CAT_LANGUAGE%", $languageCode, $url);
+    $url = str_replace('%CAT_ID%', $program->getId(), $url);
+    $url = str_replace('%CAT_MAIL%', $user->getEmail(), $url);
+    $url = str_replace('%CAT_NAME%', $user->getUsername(), $url);
 
-    return $url;
+    return str_replace('%CAT_LANGUAGE%', $languageCode, $url);
   }
-
 
   /**
    * @param       $message
@@ -240,7 +223,6 @@ class UploadController
     return $this->translator->trans($message, $parameters, 'catroweb');
   }
 
-
   /**
    * @param $request Request
    *
@@ -249,14 +231,13 @@ class UploadController
   private function getLanguageCode(Request $request)
   {
     $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
-    if ($languageCode !== "DE")
+    if ('DE' !== $languageCode)
     {
-      $languageCode = "EN";
+      $languageCode = 'EN';
     }
 
     return $languageCode;
   }
-
 
   /**
    * @param $request  Request
@@ -269,8 +250,8 @@ class UploadController
   private function createUploadResponse(Request $request, $gamejam, $user, $program)
   {
     /**
-     * @var $user    User
-     * @var $program Program
+     * @var User
+     * @var Program $program
      */
     $response = [];
     $this->usermanager->updateUser($user);
@@ -279,7 +260,7 @@ class UploadController
     $response['statusCode'] = StatusCode::OK;
     $response['answer'] = $this->trans('success.upload');
     $response['token'] = $user->getUploadToken();
-    if ($gamejam !== null && !$program->isAcceptedForGameJam())
+    if (null !== $gamejam && !$program->isAcceptedForGameJam())
     {
       $response['form'] = $this->assembleFormUrl($gamejam, $user, $program, $request);
     }
@@ -289,7 +270,6 @@ class UploadController
 
     return $response;
   }
-
 
   /**
    * @param  $request Request
@@ -301,7 +281,7 @@ class UploadController
   private function createUploadFailedResponse($request, $gamejam, $user)
   {
     /**
-     * @var $user User
+     * @var User
      */
     $response = [];
     $this->usermanager->updateUser($user);

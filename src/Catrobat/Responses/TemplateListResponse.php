@@ -1,16 +1,12 @@
 <?php
 
-
 namespace App\Catrobat\Responses;
 
-
 /**
- * Class TemplateListResponse
- * @package App\Catrobat\Responses
+ * Class TemplateListResponse.
  */
 class TemplateListResponse
 {
-
   /**
    * @var
    */
@@ -33,5 +29,4 @@ class TemplateListResponse
   {
     return $this->templates;
   }
-
 }

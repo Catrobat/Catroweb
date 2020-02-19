@@ -14,7 +14,6 @@ use Zend\Ldap\Collection;
  */
 class Extension
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -40,16 +39,18 @@ class Extension
   protected $programs;
 
   /**
-   * Default constructor, initializes collections
+   * Default constructor, initializes collections.
    */
   public function __construct()
   {
     $this->programs = new ArrayCollection();
   }
 
-  /**
-   * @param Program $program
-   */
+  public function __toString()
+  {
+    return $this->name;
+  }
+
   public function addProgram(Program $program)
   {
     if ($this->programs->contains($program))
@@ -60,9 +61,6 @@ class Extension
     $program->addExtension($this);
   }
 
-  /**
-   * @param Program $program
-   */
   public function removeProgram(Program $program)
   {
     if (!$this->programs->contains($program))
@@ -127,10 +125,5 @@ class Extension
     {
       $this->removeProgram($program);
     }
-  }
-
-  public function __toString()
-  {
-    return $this->name;
   }
 }

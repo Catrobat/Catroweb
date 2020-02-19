@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class GoNStepsBackStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class GoNStepsBackStatement.
  */
 class GoNStepsBackStatement extends Statement
 {
-  const BEGIN_STRING = "go back (";
-  const END_STRING = ") layers<br/>";
+  const BEGIN_STRING = 'go back (';
+  const END_STRING = ') layers<br/>';
 
   /**
    * GoNStepsBackStatement constructor.
@@ -31,9 +30,9 @@ class GoNStepsBackStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Go back " . $formula_string_without_markup . " layer(s)";
+    return 'Go back '.$formula_string_without_markup.' layer(s)';
   }
 
   /**
@@ -41,6 +40,6 @@ class GoNStepsBackStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

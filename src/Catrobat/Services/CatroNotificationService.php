@@ -29,18 +29,13 @@
 
 namespace App\Catrobat\Services;
 
-
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class CatroNotificationService
- * @package App\Catrobat\Services
+ * Class CatroNotificationService.
  */
 class CatroNotificationService
 {
-  /**
-   *
-   */
   const DEFAULT_NOTIFICATION = 0;
 
   /**
@@ -50,8 +45,6 @@ class CatroNotificationService
 
   /**
    * CatroNotificationService constructor.
-   *
-   * @param EntityManagerInterface $em
    */
   public function __construct(EntityManagerInterface $em)
   {
@@ -63,7 +56,7 @@ class CatroNotificationService
    */
   public function drawHeartbeat()
   {
-    return "heartbeat";
+    return 'heartbeat';
   }
 
   /**
@@ -106,11 +99,7 @@ class CatroNotificationService
       $notification->setSeen(true);
     }
     $this->em->flush();
-
   }
-
-
-
 
   /**
    * @param $notifications

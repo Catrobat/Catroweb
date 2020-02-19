@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ProgramInappropriateReport.
  *
- * @ORM\HasLifecycleCallbacks()
- * @ORM\Table()
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table
  * @ORM\Entity(repositoryClass="App\Repository\ProgramInappropriateReportRepository")
  */
 class ProgramInappropriateReport
@@ -84,7 +84,7 @@ class ProgramInappropriateReport
    */
   public function updateTimestamps()
   {
-    if ($this->getTime() == null)
+    if (null == $this->getTime())
     {
       $this->setTime(new \DateTime());
     }
@@ -95,7 +95,7 @@ class ProgramInappropriateReport
    */
   public function updateState()
   {
-    if ($this->getState() == null)
+    if (null == $this->getState())
     {
       $this->setState(self::STATUS_NEW);
     }
@@ -220,13 +220,13 @@ class ProgramInappropriateReport
    *
    * @param int $state
    *
-   * @return ProgramInappropriateReport
-   *
    * @throws \InvalidArgumentException
+   *
+   * @return ProgramInappropriateReport
    */
   public function setState($state)
   {
-    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED]))
+    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true))
     {
       throw new \InvalidArgumentException('Invalid state');
     }

@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class VibrationStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class VibrationStatement.
  */
 class VibrationStatement extends Statement
 {
-  const BEGIN_STRING = "vibrating for ";
-  const END_STRING = " seconds<br/>";
+  const BEGIN_STRING = 'vibrating for ';
+  const END_STRING = ' seconds<br/>';
 
   /**
    * VibrationStatement constructor.
@@ -31,9 +30,9 @@ class VibrationStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Vibrate for " . $formula_string_without_markup . " second(s)";
+    return 'Vibrate for '.$formula_string_without_markup.' second(s)';
   }
 
   /**
@@ -41,7 +40,6 @@ class VibrationStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
-
 }

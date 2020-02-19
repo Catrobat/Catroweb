@@ -2,14 +2,12 @@
 
 namespace App\Catrobat\Services;
 
-use Symfony\Component\HttpFoundation\File\File;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Catrobat\Exceptions\Upload\InvalidArchiveException;
-
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class CatrobatFileExtractor
- * @package App\Catrobat\Services
+ * Class CatrobatFileExtractor.
  */
 class CatrobatFileExtractor
 {
@@ -32,27 +30,25 @@ class CatrobatFileExtractor
   {
     if (!is_dir($extract_dir))
     {
-      throw new InvalidStorageDirectoryException($extract_dir . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($extract_dir.' is not a valid directory');
     }
     $this->extract_dir = $extract_dir;
     $this->extract_path = $extract_path;
   }
 
   /**
-   * @param File $file
-   *
    * @return ExtractedCatrobatFile
    */
   public function extract(File $file)
   {
-    $temp_path = hash('md5', time() . mt_rand());
-    $full_extract_dir = $this->extract_dir . $temp_path . '/';
-    $full_extract_path = $this->extract_path . $temp_path . '/';
+    $temp_path = hash('md5', time().mt_rand());
+    $full_extract_dir = $this->extract_dir.$temp_path.'/';
+    $full_extract_path = $this->extract_path.$temp_path.'/';
 
     $zip = new \ZipArchive();
     $res = $zip->open($file->getPathname());
 
-    if ($res === true)
+    if (true === $res)
     {
       $zip->extractTo($full_extract_dir);
       $zip->close();

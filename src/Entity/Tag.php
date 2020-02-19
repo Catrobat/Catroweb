@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tag
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -23,53 +22,11 @@ class Tag
   protected $id;
 
   /**
-   * @return mixed
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  /**
    * @var Collection|Program[]
    *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Program", mappedBy="tags")
    */
   protected $programs;
-
-  /**
-   * Default constructor, initializes collections
-   */
-  public function __construct()
-  {
-    $this->programs = new ArrayCollection();
-  }
-
-  /**
-   * @param Program $program
-   */
-  public function addProgram(Program $program)
-  {
-    if ($this->programs->contains($program))
-    {
-      return;
-    }
-    $this->programs->add($program);
-    $program->addTag($this);
-  }
-
-  /**
-   * @param Program $program
-   */
-  public function removeProgram(Program $program)
-  {
-    if (!$this->programs->contains($program))
-    {
-      return;
-    }
-    $this->programs->removeElement($program);
-    $program->removeTag($this);
-  }
 
   /**
    * @ORM\Column(type="string", nullable=true)
@@ -90,6 +47,47 @@ class Tag
    * @ORM\Column(type="string", nullable=true)
    */
   protected $fr;
+
+  /**
+   * Default constructor, initializes collections.
+   */
+  public function __construct()
+  {
+    $this->programs = new ArrayCollection();
+  }
+
+  public function __toString()
+  {
+    return $this->id.'';
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
+
+  public function addProgram(Program $program)
+  {
+    if ($this->programs->contains($program))
+    {
+      return;
+    }
+    $this->programs->add($program);
+    $program->addTag($this);
+  }
+
+  public function removeProgram(Program $program)
+  {
+    if (!$this->programs->contains($program))
+    {
+      return;
+    }
+    $this->programs->removeElement($program);
+    $program->removeTag($this);
+  }
 
   /**
    * @return Program[]|Collection
@@ -162,10 +160,4 @@ class Tag
   {
     $this->fr = $fr;
   }
-
-  public function __toString()
-  {
-    return $this->id . '';
-  }
-
 }

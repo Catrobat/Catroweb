@@ -2,18 +2,16 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Commands\Helpers\CommandHelper;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use App\Catrobat\Commands\Helpers\CommandHelper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-
 /**
- * Class CreateBackupCommand
- * @package App\Catrobat\Commands
+ * Class CreateBackupCommand.
  */
 class CreateBackupCommand extends Command
 {
@@ -29,8 +27,6 @@ class CreateBackupCommand extends Command
 
   /**
    * CreateBackupCommand constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -38,22 +34,18 @@ class CreateBackupCommand extends Command
     $this->parameter_bag = $parameter_bag;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:backup:create')
       ->setDescription('Generates a backup')
-      ->addArgument('backupName', InputArgument::OPTIONAL, 'Backupname without extension');
+      ->addArgument('backupName', InputArgument::OPTIONAL, 'Backupname without extension')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -67,9 +59,9 @@ class CreateBackupCommand extends Command
 
     $backup_dir = realpath($this->parameter_bag->get('catrobat.backup.dir'));
 
-    $progress->setMessage('Using backup directory ' . $backup_dir);
+    $progress->setMessage('Using backup directory '.$backup_dir);
 
-    if ($this->parameter_bag->get('database_driver') != 'pdo_mysql')
+    if ('pdo_mysql' != $this->parameter_bag->get('database_driver'))
     {
       $progress->setMessage('Error: This script only supports mysql databases');
       $progress->finish();
@@ -78,16 +70,16 @@ class CreateBackupCommand extends Command
     }
     $progress->advance();
 
-    if ($input->hasArgument('backupName') && $input->getArgument('backupName') != "")
+    if ($input->hasArgument('backupName') && '' != $input->getArgument('backupName'))
     {
-      $zip_path = $backup_dir . '/' . $input->getArgument('backupName') . '.tar.gz';
+      $zip_path = $backup_dir.'/'.$input->getArgument('backupName').'.tar.gz';
     }
     else
     {
-      $zip_path = $backup_dir . '/' . date('Y-m-d_His') . '.tar.gz';
+      $zip_path = $backup_dir.'/'.date('Y-m-d_His').'.tar.gz';
     }
     $progress->advance();
-    $progress->setMessage('Database driver set, Outputpath specified as ' . $zip_path);
+    $progress->setMessage('Database driver set, Outputpath specified as '.$zip_path);
 
     $sql_path = @tempnam($backup_dir, 'Sql');
     $database_name = $this->parameter_bag->get('database_name');
@@ -95,11 +87,11 @@ class CreateBackupCommand extends Command
     $database_password = $this->parameter_bag->get('database_password');
     $progress->setMessage('Saving SQL file');
 
-    CommandHelper::executeShellCommand("mysqldump -u $database_user -p$database_password $database_name > $sql_path",
+    CommandHelper::executeShellCommand("mysqldump -u {$database_user} -p{$database_password} {$database_name} > {$sql_path}",
       ['timeout' => 14400]);
 
     $progress->advance();
-    $progress->setMessage('Database dump completed.' . " Creating archive at " . $zip_path);
+    $progress->setMessage('Database dump completed.'.' Creating archive at '.$zip_path);
 
     $thumbnail_dir = $this->parameter_bag->get('catrobat.thumbnail.dir');
     $screenshot_dir = $this->parameter_bag->get('catrobat.screenshot.dir');
@@ -111,18 +103,18 @@ class CreateBackupCommand extends Command
     $progress->advance();
     $progress->setMessage('Compression started');
 
-    CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|public/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -cv 
-      $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir | pigz > $zip_path",
+    CommandHelper::executeShellCommand('tar --exclude=.gitignore --mode=0777 --transform "s|public/resources||" --transform "s|'.substr($sql_path, 1)."|database.sql|\" -cv 
+      {$sql_path} {$thumbnail_dir} {$screenshot_dir} {$featuredimage_dir} {$programs_dir} {$mediapackage_dir} {$template_dir} | pigz > {$zip_path}",
       ['timeout' => 14400]);
     $progress->advance();
     $progress->setMessage('Compression finished. Setting permissions.');
 
-    CommandHelper::executeShellCommand("chmod 777 " . $zip_path, []);
+    CommandHelper::executeShellCommand('chmod 777 '.$zip_path, []);
     $progress->advance();
     $progress->setMessage('Permissions set.');
 
     unlink($sql_path);
-    $progress->setMessage("Temp sql file deleted. Finished!\n Backupfile created at " . $zip_path . "\n");
+    $progress->setMessage("Temp sql file deleted. Finished!\n Backupfile created at ".$zip_path."\n");
     $progress->finish();
   }
 }

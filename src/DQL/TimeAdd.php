@@ -2,14 +2,14 @@
 
 namespace App\DQL;
 
+use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
-use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
  * Custom DQL function adding an interval in the unit choose to the dateTime given
- * returning a DateTime
+ * returning a DateTime.
  *
  * usage TIME_ADD(dateTime, interval, unit)
  */
@@ -31,8 +31,6 @@ class TimeAdd extends FunctionNode
   public $unit;
 
   /**
-   * @param Parser $parser
-   *
    * @throws \Doctrine\ORM\Query\QueryException
    */
   public function parse(Parser $parser)
@@ -48,15 +46,13 @@ class TimeAdd extends FunctionNode
   }
 
   /**
-   * @param SqlWalker $sqlWalker
-   *
    * @return string
    */
   public function getSql(SqlWalker $sqlWalker)
   {
-    return 'DATE_ADD(' .
-      $this->dateTime->dispatch($sqlWalker) . ', INTERVAL ' .
-      $this->interval . ' ' .
-      strtoupper($this->unit) . ')';
+    return 'DATE_ADD('.
+      $this->dateTime->dispatch($sqlWalker).', INTERVAL '.
+      $this->interval.' '.
+      strtoupper($this->unit).')';
   }
 }

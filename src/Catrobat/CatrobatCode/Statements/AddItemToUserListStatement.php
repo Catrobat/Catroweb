@@ -2,20 +2,16 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-
 /**
- * Class AddItemToUserListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class AddItemToUserListStatement.
  */
 class AddItemToUserListStatement extends BaseUserListStatement
 {
+  const BEGIN_STRING = 'add item to userlist ';
 
-  const BEGIN_STRING = "add item to userlist ";
+  const MIDDLE_STRING = '(';
 
-  const MIDDLE_STRING = "(";
-
-  const END_STRING = ")<br/>";
-
+  const END_STRING = ')<br/>';
 
   /**
    * AddItemToUserListStatement constructor.
@@ -32,7 +28,6 @@ class AddItemToUserListStatement extends BaseUserListStatement
       self::END_STRING);
   }
 
-
   /**
    * @return string
    */
@@ -41,17 +36,16 @@ class AddItemToUserListStatement extends BaseUserListStatement
     $list_variable_name = $this->xmlTree->userList->name;
 
     $formula_string = $this->getLastChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Add " . $formula_string_without_markup . " to list " . $list_variable_name;
+    return 'Add '.$formula_string_without_markup.' to list '.$list_variable_name;
   }
-
 
   /**
    * @return string
    */
   public function getBrickColor()
   {
-    return "1h_brick_red.png";
+    return '1h_brick_red.png';
   }
 }

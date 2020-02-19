@@ -2,35 +2,27 @@
 
 namespace App\Catrobat\Controller\Api;
 
-use App\Entity\Program;
-use App\Entity\User;
 use App\Catrobat\Events\ReportInsertEvent;
+use App\Catrobat\StatusCode;
+use App\Entity\Program;
+use App\Entity\ProgramInappropriateReport;
+use App\Entity\ProgramManager;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
-use App\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Catrobat\StatusCode;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\ProgramInappropriateReport;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 /**
- * Class ReportController
- * @package App\Catrobat\Controller\Api
+ * Class ReportController.
  */
 class ReportController extends AbstractController
 {
-
   /**
    * @Route("/api/reportProject/reportProject.json", name="catrobat_api_report_program",
-   *   defaults={"_format": "json"}, methods={"POST", "GET"})
-   *
-   * @param Request $request
-   * @param ProgramManager $program_manager
-   * @param TranslatorInterface $translator
-   * @param EventDispatcherInterface $event_dispatcher
+   * defaults={"_format": "json"}, methods={"POST", "GET"})
    *
    * @return JsonResponse
    */
@@ -54,7 +46,7 @@ class ReportController extends AbstractController
     }
 
     $program = $program_manager->find($request->get('program'));
-    if ($program == null)
+    if (null == $program)
     {
       $response['statusCode'] = StatusCode::INVALID_PROGRAM;
       $response['answer'] = $translator->trans('errors.program.invalid', [], 'catroweb');

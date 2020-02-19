@@ -2,13 +2,13 @@
 
 namespace App\DQL;
 
+use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
-use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * Custom DQL function returning the DateTime value minus the interval choose
+ * Custom DQL function returning the DateTime value minus the interval choose.
  *
  * usage TIME_SUB(dateTime, interval, unit)
  *
@@ -32,8 +32,6 @@ class TimeSub extends FunctionNode
   public $unit;
 
   /**
-   * @param Parser $parser
-   *
    * @throws \Doctrine\ORM\Query\QueryException
    */
   public function parse(Parser $parser)
@@ -49,15 +47,13 @@ class TimeSub extends FunctionNode
   }
 
   /**
-   * @param SqlWalker $sqlWalker
-   *
    * @return string
    */
   public function getSql(SqlWalker $sqlWalker)
   {
-    return 'DATE_SUB(' .
-      $this->dateTime->dispatch($sqlWalker) . ', INTERVAL ' .
-      $this->interval . ' ' .
-      strtoupper($this->unit) . ')';
+    return 'DATE_SUB('.
+      $this->dateTime->dispatch($sqlWalker).', INTERVAL '.
+      $this->interval.' '.
+      strtoupper($this->unit).')';
   }
 }

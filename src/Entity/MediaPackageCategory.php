@@ -24,7 +24,7 @@ class MediaPackageCategory
 
   /**
    * @ORM\ManyToMany(targetEntity="MediaPackage", inversedBy="categories")
-   **/
+   */
   protected $package;
 
   /**
@@ -36,6 +36,38 @@ class MediaPackageCategory
    * @ORM\Column(type="integer")
    */
   protected $priority = 0;
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    if (null !== $this->package)
+    {
+      if (count($this->package))
+      {
+        $string = $this->name.' (';
+        $count = count($this->package);
+
+        for ($it = 0; $it < $count; ++$it)
+        {
+          $string .= $this->package[$it];
+
+          if ($it < ($count - 1))
+          {
+            $string .= ', ';
+          }
+        }
+        $string .= ')';
+
+        return (string) $string;
+      }
+
+      return (string) $this->name;
+    }
+
+    return (string) $this->name;
+  }
 
   /**
    * @return mixed
@@ -102,42 +134,6 @@ class MediaPackageCategory
   }
 
   /**
-   * @return string
-   */
-  public function __toString()
-  {
-    if ($this->package !== null)
-    {
-      if (count($this->package))
-      {
-        $string = $this->name . " (";
-        $count = count($this->package);
-
-        for ($it = 0; $it < $count; $it++)
-        {
-          $string .= $this->package[$it];
-
-          if ($it < ($count - 1))
-          {
-            $string .= ", ";
-          }
-        }
-        $string .= ")";
-
-        return (string)$string;
-      }
-      else
-      {
-        return (string)$this->name;
-      }
-    }
-    else
-    {
-      return (string)$this->name;
-    }
-  }
-
-  /**
    * @return mixed
    */
   public function getPriority()
@@ -152,5 +148,4 @@ class MediaPackageCategory
   {
     $this->priority = $priority;
   }
-
 }

@@ -4,20 +4,14 @@ namespace App\Repository;
 
 use App\Entity\FeaturedProgram;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
-
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class FeaturedRepository
- * @package App\Entity
+ * Class FeaturedRepository.
  */
 class FeaturedRepository extends ServiceEntityRepository
 {
-
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, FeaturedProgram::class);
@@ -44,7 +38,8 @@ class FeaturedRepository extends ServiceEntityRepository
       ->setParameter('flavor', $flavor)
       ->setParameter('for_ios', $for_ios)
       ->setFirstResult($offset)
-      ->setMaxResults($limit);
+      ->setMaxResults($limit)
+    ;
 
     $qb->orderBy('e.priority', 'DESC');
 
@@ -55,8 +50,9 @@ class FeaturedRepository extends ServiceEntityRepository
    * @param      $flavor
    * @param bool $for_ios
    *
-   * @return mixed
    * @throws \Doctrine\ORM\NonUniqueResultException
+   *
+   * @return mixed
    */
   public function getFeaturedProgramCount($flavor, $for_ios = false)
   {
@@ -69,7 +65,8 @@ class FeaturedRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->isNotNull('e.program'))
       ->andWhere($qb->expr()->eq('e.for_ios', ':for_ios'))
       ->setParameter('flavor', $flavor)
-      ->setParameter('for_ios', $for_ios);
+      ->setParameter('for_ios', $for_ios)
+    ;
 
     return $qb->getQuery()->getSingleScalarResult();
   }
@@ -100,8 +97,9 @@ class FeaturedRepository extends ServiceEntityRepository
   /**
    * @param $flavor
    *
-   * @return mixed
    * @throws \Doctrine\ORM\NonUniqueResultException
+   *
+   * @return mixed
    */
   public function getFeaturedItemCount($flavor)
   {
@@ -127,13 +125,15 @@ class FeaturedRepository extends ServiceEntityRepository
     $qb
       ->select('count(e.id)')
       ->where($qb->expr()->eq('e.program', ':program'))
-      ->setParameter('program', $program);
+      ->setParameter('program', $program)
+    ;
     try
     {
       $count = $qb->getQuery()->getSingleScalarResult();
 
       return $count > 0;
-    } catch (NonUniqueResultException $exception)
+    }
+    catch (NonUniqueResultException $exception)
     {
       return false;
     }

@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ChangeVolumeByNStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ChangeVolumeByNStatement.
  */
 class ChangeVolumeByNStatement extends BaseChangeByNStatement
 {
-  const BEGIN_STRING = "volume";
-  const END_STRING = ")%<br/>";
+  const BEGIN_STRING = 'volume';
+  const END_STRING = ')%<br/>';
 
   /**
    * ChangeVolumeByNStatement constructor.
@@ -31,9 +30,9 @@ class ChangeVolumeByNStatement extends BaseChangeByNStatement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Change volume by " . $formula_string_without_markup . "%";
+    return 'Change volume by '.$formula_string_without_markup.'%';
   }
 
   /**
@@ -41,6 +40,6 @@ class ChangeVolumeByNStatement extends BaseChangeByNStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_violet.png";
+    return '1h_brick_violet.png';
   }
 }

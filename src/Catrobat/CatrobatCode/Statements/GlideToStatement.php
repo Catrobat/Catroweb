@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class GlideToStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class GlideToStatement.
  */
 class GlideToStatement extends Statement
 {
-  const BEGIN_STRING = "glide (";
-  const END_STRING = ")<br/>";
+  const BEGIN_STRING = 'glide (';
+  const END_STRING = ')<br/>';
 
   /**
    * GlideToStatement constructor.
@@ -49,11 +48,11 @@ class GlideToStatement extends Statement
       }
     }
 
-    $formula_x_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_x_dest);
-    $formula_y_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_y_dest);
-    $formula_duration_no_markup = preg_replace("#<[^>]*>#", '', $formula_duration);
+    $formula_x_dest_no_markup = preg_replace('#<[^>]*>#', '', $formula_x_dest);
+    $formula_y_dest_no_markup = preg_replace('#<[^>]*>#', '', $formula_y_dest);
+    $formula_duration_no_markup = preg_replace('#<[^>]*>#', '', $formula_duration);
 
-    return "Glide " . $formula_duration_no_markup . " second(s) to X: " . $formula_x_dest_no_markup . " Y: " . $formula_y_dest_no_markup;
+    return 'Glide '.$formula_duration_no_markup.' second(s) to X: '.$formula_x_dest_no_markup.' Y: '.$formula_y_dest_no_markup;
   }
 
   /**
@@ -61,6 +60,6 @@ class GlideToStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

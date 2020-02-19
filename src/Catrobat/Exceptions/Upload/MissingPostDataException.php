@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class MissingPostDataException
- * @package App\Catrobat\Exceptions\Upload
+ * Class MissingPostDataException.
  */
 class MissingPostDataException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class MissingPostDataException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("errors.post-data", StatusCode::MISSING_POST_DATA);
+    parent::__construct('errors.post-data', StatusCode::MISSING_POST_DATA);
   }
 }

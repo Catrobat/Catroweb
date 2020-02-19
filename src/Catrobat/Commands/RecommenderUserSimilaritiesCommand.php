@@ -5,19 +5,17 @@ namespace App\Catrobat\Commands;
 use App\Catrobat\Commands\Helpers\CronjobProgressWriter;
 use App\Catrobat\Commands\Helpers\RecommenderFileLock;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
+use App\Entity\UserManager;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\UserManager;
-use Symfony\Component\Console\Helper\ProgressBar;
-
 
 /**
- * Class RecommenderUserSimilaritiesCommand
- * @package App\Catrobat\Commands
+ * Class RecommenderUserSimilaritiesCommand.
  */
 class RecommenderUserSimilaritiesCommand extends Command
 {
@@ -54,9 +52,6 @@ class RecommenderUserSimilaritiesCommand extends Command
   /**
    * RecommenderUserSimilaritiesCommand constructor.
    *
-   * @param UserManager $user_manager
-   * @param RecommenderManager $recommender_manager
-   * @param EntityManagerInterface $entity_manager
    * @param $kernel_root_dir
    */
   public function __construct(UserManager $user_manager, RecommenderManager $recommender_manager,
@@ -69,17 +64,6 @@ class RecommenderUserSimilaritiesCommand extends Command
     $this->app_root_dir = $kernel_root_dir;
     $this->output = null;
     $this->migration_file_lock = null;
-  }
-
-  /**
-   *
-   */
-  protected function configure()
-  {
-    $this->setName('catrobat:recommender:compute')
-      ->setDescription('Computes and updates user similarities in database needed for user-based (Collaborative Filtering) recommendations')
-      ->addArgument('type', InputArgument::REQUIRED, 'States the type of similarity to compute, value can be either "like", "remix" or "all"')
-      ->addOption('cronjob');
   }
 
   /**
@@ -103,22 +87,29 @@ class RecommenderUserSimilaritiesCommand extends Command
         $this->output->writeln('[SignalHandler] SigUsr1 detected');
         break;
       default:
-        $this->output->writeln('[SignalHandler] Signal ' . $signal_number . ' detected');
+        $this->output->writeln('[SignalHandler] Signal '.$signal_number.' detected');
     }
 
     $this->migration_file_lock->unlock();
     exit(-1);
   }
 
+  protected function configure()
+  {
+    $this->setName('catrobat:recommender:compute')
+      ->setDescription('Computes and updates user similarities in database needed for user-based (Collaborative Filtering) recommendations')
+      ->addArgument('type', InputArgument::REQUIRED, 'States the type of similarity to compute, value can be either "like", "remix" or "all"')
+      ->addOption('cronjob')
+    ;
+  }
+
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
-   *
-   * @return int|void|null
    * @throws \Doctrine\Common\Persistence\Mapping\MappingException
    * @throws \Doctrine\DBAL\DBALException
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -134,9 +125,8 @@ class RecommenderUserSimilaritiesCommand extends Command
   }
 
   /**
-   * @param OutputInterface $output
-   * @param                 $type
-   * @param                 $is_cronjob
+   * @param $type
+   * @param $is_cronjob
    *
    * @throws \Doctrine\Common\Persistence\Mapping\MappingException
    * @throws \Doctrine\DBAL\DBALException
@@ -157,14 +147,14 @@ class RecommenderUserSimilaritiesCommand extends Command
     $progress_bar->start();
     $progress_bar->display();
 
-    if (in_array($type, ['like', 'all']))
+    if (in_array($type, ['like', 'all'], true))
     {
       $this->recommender_manager->removeAllUserLikeSimilarityRelations();
       $this->entity_manager->clear();
       $this->recommender_manager->computeUserLikeSimilarities($progress_bar);
     }
 
-    if (in_array($type, ['remix', 'all']))
+    if (in_array($type, ['remix', 'all'], true))
     {
       $this->recommender_manager->removeAllUserRemixSimilarityRelations();
       $this->entity_manager->clear();
@@ -177,6 +167,6 @@ class RecommenderUserSimilaritiesCommand extends Command
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
-    $output->writeln('<info>Finished similarity computation (Duration: ' . $duration . 's)</info>');
+    $output->writeln('<info>Finished similarity computation (Duration: '.$duration.'s)</info>');
   }
 }

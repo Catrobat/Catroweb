@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Notification.
  *
- * @ORM\Table()
+ * @ORM\Table
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
  */
 class Notification
@@ -57,7 +57,7 @@ class Notification
   {
     if (is_object($this->user))
     {
-      return $this->user->__toString() . ' notification';
+      return $this->user->__toString().' notification';
     }
 
     return 'notification';

@@ -42,23 +42,18 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 /**
- * Class ProgramController
- * @package App\Catrobat\Controller\Web
+ * Class ProgramController.
  */
 class ProgramController extends AbstractController
 {
-
   /**
-   * @var StatisticsService|FakeStatisticsService $statistics
+   * @var StatisticsService|FakeStatisticsService
    */
   private $statistics;
 
   /**
    * ProgramController constructor.
-   *
-   * @param StatisticsService $statistics_service
    */
   public function __construct(StatisticsService $statistics_service)
   {
@@ -68,14 +63,12 @@ class ProgramController extends AbstractController
   /**
    * @Route("/project/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
    *
-   * @param Request              $request
-   * @param                      $id
-   * @param RemixManager         $remix_manager
-   * @param ScreenshotRepository $screenshot_repository
+   * @param $id
    *
-   * @return JsonResponse
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return JsonResponse
    */
   public function programRemixGraphAction(Request $request, $id, RemixManager $remix_manager,
                                           ScreenshotRepository $screenshot_repository)
@@ -90,8 +83,9 @@ class ProgramController extends AbstractController
         $catrobat_program_thumbnails[$node_id] = '/images/default/not_available.png';
         continue;
       }
-      $catrobat_program_thumbnails[$node_id] = '/' . $screenshot_repository
-          ->getThumbnailWebPath($node_id);
+      $catrobat_program_thumbnails[$node_id] = '/'.$screenshot_repository
+        ->getThumbnailWebPath($node_id)
+      ;
     }
 
     $locale = strtolower($request->getLocale());
@@ -100,31 +94,24 @@ class ProgramController extends AbstractController
       null, $referrer, $locale, false, false);
 
     return new JsonResponse([
-      'id'                        => $id,
-      'remixGraph'                => $remix_graph_data,
+      'id' => $id,
+      'remixGraph' => $remix_graph_data,
       'catrobatProgramThumbnails' => $catrobat_program_thumbnails,
     ]);
   }
-
 
   /**
    * @Route("/project/{id}", name="program")
    * @Route("/program/{id}", name="program_depricated")
    * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
    *
-   * @param Request                    $request
-   * @param                            $id
-   * @param ProgramManager             $program_manager
-   * @param ScreenshotRepository       $screenshot_repository
-   * @param ElapsedTimeStringFormatter $elapsed_time
-   * @param RemixManager               $remix_manager
-   * @param GameJamRepository          $game_jam_repository
-   * @param ExtractedFileRepository    $extractedFileRepository
+   * @param $id
    *
-   * @return Response
    * @throws NonUniqueResultException
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return Response
    */
   public function projectAction(Request $request, $id, ProgramManager $program_manager,
                                 ScreenshotRepository $screenshot_repository,
@@ -133,10 +120,10 @@ class ProgramController extends AbstractController
                                 ExtractedFileRepository $extractedFileRepository)
   {
     /**
-     * @var $user             User
-     * @var $project          Program
-     * @var $reported_program ProgramInappropriateReport
-     * @var $like             ProgramLike
+     * @var User
+     * @var Program                    $project
+     * @var ProgramInappropriateReport $reported_program
+     * @var ProgramLike                $like
      */
     $project = $program_manager->find($id);
     $router = $this->get('router');
@@ -157,7 +144,7 @@ class ProgramController extends AbstractController
     $active_user_like_types = [];
     $user_name = null;
 
-    if ($user !== null)
+    if (null !== $user)
     {
       $logged_in = true;
       $user_name = $user->getUsername();
@@ -182,12 +169,12 @@ class ProgramController extends AbstractController
 
     $program_url = $this->generateUrl('program',
       ['id' => $project->getId()], true);
-    $share_text = trim($project->getName() . ' on ' . $program_url . ' ' .
+    $share_text = trim($project->getName().' on '.$program_url.' '.
       $project->getDescription());
 
     $jam = $this->extractGameJamConfig($game_jam_repository);
 
-    $max_description_size = $this->getParameter("catrobat.max_description_upload_size");
+    $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
 
     $my_program = false;
     if ($user_programs && count($user_programs) > 0)
@@ -199,31 +186,27 @@ class ProgramController extends AbstractController
 
     return $this->render('Program/program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
-      'program'                      => $project,
-      'program_details'              => $program_details,
-      'my_program'                   => $my_program,
-      'already_reported'             => $isReportedByUser,
-      'shareText'                    => $share_text,
-      'program_url'                  => $program_url,
-      'jam'                          => $jam,
-      'user_name'                    => $user_name,
-      'max_description_size'         => $max_description_size,
-      'logged_in'                    => $logged_in,
+      'program' => $project,
+      'program_details' => $program_details,
+      'my_program' => $my_program,
+      'already_reported' => $isReportedByUser,
+      'shareText' => $share_text,
+      'program_url' => $program_url,
+      'jam' => $jam,
+      'user_name' => $user_name,
+      'max_description_size' => $max_description_size,
+      'logged_in' => $logged_in,
     ]);
   }
-
 
   /**
    * @Route("/project/like/{id}", name="project_like", methods={"GET"})
    *
-   * @param Request                     $request
-   * @param GuidType                    $id
-   * @param ProgramManager              $program_manager
-   * @param CatroNotificationRepository $notification_repo
-   * @param CatroNotificationService    $notification_service
+   * @param GuidType $id
+   *
+   * @throws ORMException
    *
    * @return JsonResponse|RedirectResponse
-   * @throws ORMException
    */
   public function projectLikeAction(Request $request, $id, ProgramManager $program_manager,
                                     CatroNotificationRepository $notification_repo,
@@ -237,13 +220,11 @@ class ProgramController extends AbstractController
       {
         return JsonResponse::create([
           'statusCode' => StatusCode::CSRF_FAILURE,
-          'message'    => 'Invalid CSRF token.',
+          'message' => 'Invalid CSRF token.',
         ], Response::HTTP_BAD_REQUEST);
       }
-      else
-      {
-        throw new InvalidCsrfTokenException();
-      }
+
+      throw new InvalidCsrfTokenException();
     }
 
     $type = intval($request->query->get('type'));
@@ -255,30 +236,26 @@ class ProgramController extends AbstractController
       {
         return JsonResponse::create([
           'statusCode' => StatusCode::INVALID_PARAM,
-          'message'    => 'Invalid like type given!',
+          'message' => 'Invalid like type given!',
         ], Response::HTTP_BAD_REQUEST);
       }
-      else
-      {
-        throw $this->createAccessDeniedException('Invalid like-type for project given!');
-      }
+
+      throw $this->createAccessDeniedException('Invalid like-type for project given!');
     }
 
     /** @var Program $project */
     $project = $program_manager->find($id);
-    if ($project === null)
+    if (null === $project)
     {
       if ($request->isXmlHttpRequest())
       {
         return JsonResponse::create([
           'statusCode' => StatusCode::INVALID_PARAM,
-          'message'    => 'Project with given ID does not exist!',
+          'message' => 'Project with given ID does not exist!',
         ], Response::HTTP_NOT_FOUND);
       }
-      else
-      {
-        throw $this->createNotFoundException('Project with given ID does not exist!');
-      }
+
+      throw $this->createNotFoundException('Project with given ID does not exist!');
     }
 
     /** @var User $user */
@@ -289,36 +266,32 @@ class ProgramController extends AbstractController
       {
         return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR], Response::HTTP_UNAUTHORIZED);
       }
-      else
-      {
-        $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
+
+      $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
           'project_like',
           ['id' => $id, 'type' => $type, 'action' => $action, 'token' => $csrf_token],
           UrlGeneratorInterface::ABSOLUTE_URL
         ));
 
-        return $this->redirectToRoute('login');
-      }
+      return $this->redirectToRoute('login');
     }
 
     try
     {
       $program_manager->changeLike($project, $user, $type, $action);
-    } catch (\InvalidArgumentException $exception)
+    }
+    catch (\InvalidArgumentException $exception)
     {
       if ($request->isXmlHttpRequest())
       {
         return JsonResponse::create([
           'statusCode' => StatusCode::INVALID_PARAM,
-          'message'    => 'Invalid action given!',
+          'message' => 'Invalid action given!',
         ], Response::HTTP_BAD_REQUEST);
       }
-      else
-      {
-        throw $this->createAccessDeniedException('Invalid action given!');
-      }
-    }
 
+      throw $this->createAccessDeniedException('Invalid action given!');
+    }
 
     if ($project->getUser() !== $user)
     {
@@ -326,16 +299,15 @@ class ProgramController extends AbstractController
         $project, $project->getUser(), $user
       );
 
-      if ($action === ProgramLike::ACTION_ADD)
+      if (ProgramLike::ACTION_ADD === $action)
       {
-
-        if (count($existing_notifications) === 0)
+        if (0 === count($existing_notifications))
         {
           $notification = new LikeNotification($project->getUser(), $user, $project);
           $notification_service->addNotification($notification);
         }
       }
-      elseif ($action === ProgramLike::ACTION_REMOVE)
+      elseif (ProgramLike::ACTION_REMOVE === $action)
       {
         // check if there is no other reaction
         if (!$program_manager->areThereOtherLikeTypes($project, $user, $type))
@@ -355,53 +327,52 @@ class ProgramController extends AbstractController
 
     $user_locale = $request->getLocale();
     $total_like_count = $program_manager->totalLikeCount($project->getId());
-    $active_like_types = array_map(function ($type_id) {
+    $active_like_types = array_map(function ($type_id)
+    {
       return ProgramLike::$TYPE_NAMES[$type_id];
     }, $program_manager->findProgramLikeTypes($project->getId()));
 
     return new JsonResponse([
-      'totalLikeCount'  => [
-        'value'       => $total_like_count,
+      'totalLikeCount' => [
+        'value' => $total_like_count,
         'stringValue' => AppExtension::humanFriendlyNumber($total_like_count, $translator, $user_locale),
       ],
       'activeLikeTypes' => $active_like_types,
     ]);
   }
 
-
   /**
-   * @Route("/search/{q}", name="search", requirements={"q":".+"}, methods={"GET"})
-   * @Route("/search/", name="empty_search", defaults={"q":null}, methods={"GET"})
+   * @Route("/search/{q}", name="search", requirements={"q": ".+"}, methods={"GET"})
+   * @Route("/search/", name="empty_search", defaults={"q": null}, methods={"GET"})
    *
    * @param string $q
    *
-   * @return JsonResponse|RedirectResponse
    * @throws Exception
    *
+   * @return JsonResponse|RedirectResponse
    */
   public function searchAction($q)
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
 
-
   /**
-   * @Route("/userDeleteProject/{id}", name="profile_delete_program", defaults={"id" = 0}, methods={"GET"})
+   * @Route("/userDeleteProject/{id}", name="profile_delete_program", defaults={"id": 0}, methods={"GET"})
    *
    * @param GuidType $id
    *
-   * @return JsonResponse|RedirectResponse
    * @throws Exception
    *
+   * @return JsonResponse|RedirectResponse
    */
   public function deleteProgramAction($id)
   {
-    /**
+    /*
      * @var $user          User
      * @var $program       Program
      * @var $user_programs ArrayCollection
      */
-    if ($id === 0)
+    if (0 === $id)
     {
       return $this->redirectToRoute('profile');
     }
@@ -431,25 +402,23 @@ class ProgramController extends AbstractController
     return $this->redirectToRoute('profile');
   }
 
-
   /**
    * @Route("/userToggleProjectVisibility/{id}", name="profile_toggle_program_visibility",
-   *   defaults={"id" = 0}, methods={"GET"})
+   * defaults={"id": 0}, methods={"GET"})
    *
    * @param GuidType $id
    *
-   * @return Response
    * @throws Exception
    *
+   * @return Response
    */
   public function toggleProgramVisibilityAction($id)
   {
     /**
-     * @var $user          User
-     * @var $program       Program
-     * @var $user_programs ArrayCollection
+     * @var User
+     * @var Program         $program
+     * @var ArrayCollection $user_programs
      */
-
     $user = $this->getUser();
     if (!$user)
     {
@@ -474,46 +443,41 @@ class ProgramController extends AbstractController
     $em->persist($program);
     $em->flush();
 
-    return new Response("true");
+    return new Response('true');
   }
-
 
   /**
    * @Route("/editProjectDescription/{id}/{newDescription}", name="edit_program_description",
-   *   options={"expose"=true}, methods={"GET"})
+   * options={"expose": true}, methods={"GET"})
    *
-   * @param GuidType            $id
-   * @param string              $newDescription
-   * @param RudeWordFilter      $rude_word_filter
-   * @param ProgramManager      $program_manager
-   * @param TranslatorInterface $translator
+   * @param GuidType $id
+   * @param string   $newDescription
    *
-   * @return Response
    * @throws Exception
    *
+   * @return Response
    */
   public function editProgramDescription($id, $newDescription, RudeWordFilter $rude_word_filter,
                                          ProgramManager $program_manager, TranslatorInterface $translator)
   {
     /**
-     * @var User    $user
+     * @var User
      * @var Program $program
      */
-
-    $max_description_size = $this->getParameter("catrobat.max_description_upload_size");
+    $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
 
     if (strlen($newDescription) > $max_description_size)
     {
       return JsonResponse::create(['statusCode' => StatusCode::DESCRIPTION_TOO_LONG,
-                                   'message'    => $translator
-                                     ->trans("programs.tooLongDescription", [], "catroweb")]);
+        'message' => $translator
+          ->trans('programs.tooLongDescription', [], 'catroweb'), ]);
     }
 
     if ($rude_word_filter->containsRudeWord($newDescription))
     {
       return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_DESCRIPTION,
-                                   'message'    => $translator
-                                     ->trans("programs.rudeWordsInDescription", [], "catroweb")]);
+        'message' => $translator
+          ->trans('programs.rudeWordsInDescription', [], 'catroweb'), ]);
     }
 
     $user = $this->getUser();
@@ -544,40 +508,36 @@ class ProgramController extends AbstractController
 
   /**
    * @Route("/editProjectCredits/{id}/{newCredits}", name="edit_program_credits",
-   *   options={"expose"=true}, methods={"GET"},)
+   * options={"expose": true}, methods={"GET"}, )
    *
-   * @param GuidType            $id
-   * @param string              $newCredits
-   * @param RudeWordFilter      $rude_word_filter
-   * @param ProgramManager      $program_manager
-   * @param TranslatorInterface $translator
+   * @param GuidType $id
+   * @param string   $newCredits
    *
-   * @return Response
    * @throws Exception
    *
+   * @return Response
    */
   public function editProgramCredits($id, $newCredits, RudeWordFilter $rude_word_filter,
                                      ProgramManager $program_manager, TranslatorInterface $translator)
   {
     /**
-     * @var User    $user
+     * @var User
      * @var Program $program
      */
-
-    $max_credits_size = $this->getParameter("catrobat.max_credits_upload_size");
+    $max_credits_size = $this->getParameter('catrobat.max_credits_upload_size');
 
     if (strlen($newCredits) > $max_credits_size)
     {
       return JsonResponse::create(['statusCode' => StatusCode::CREDITS_TO_LONG,
-                                   'message'    => $translator
-                                     ->trans("programs.tooLongCredits", [], "catroweb")]);
+        'message' => $translator
+          ->trans('programs.tooLongCredits', [], 'catroweb'), ]);
     }
 
     if ($rude_word_filter->containsRudeWord($newCredits))
     {
       return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_CREDITS,
-                                   'message'    => $translator
-                                     ->trans("programs.rudeWordsInCredits", [], "catroweb")]);
+        'message' => $translator
+          ->trans('programs.rudeWordsInCredits', [], 'catroweb'), ]);
     }
 
     $user = $this->getUser();
@@ -606,12 +566,53 @@ class ProgramController extends AbstractController
     return JsonResponse::create(['statusCode' => StatusCode::OK]);
   }
 
+  /**
+   * @Route("/project/{id}/uploadThumbnail", name="upload_project_thumbnail", methods={"POST"})
+   *
+   * @param $id
+   *
+   * @throws ImagickException
+   *
+   * @return JsonResponse|RedirectResponse
+   */
+  public function uploadAvatarAction(Request $request, ProgramManager $project_manager,
+                                     ScreenshotRepository $screenshot_repository, $id)
+  {
+    /**
+     * @var User
+     * @var Program $project
+     */
+    $user = $this->getUser();
+    $project = $project_manager->find($id);
+
+    if (!$user || $project->getUser() !== $user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $image = $request->request->get('image');
+
+    try
+    {
+      $image = ImageUtils::checkAndResizeBase64Image($image, null);
+    }
+    catch (Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+    }
+
+    $screenshot_repository->updateProgramAssets($image, $id);
+
+    return JsonResponse::create([
+      'statusCode' => StatusCode::OK,
+      'image_base64' => null,
+    ]);
+  }
 
   /**
-   * @param GameJamRepository $game_jam_repository
+   * @throws NonUniqueResultException
    *
    * @return array|null
-   * @throws NonUniqueResultException
    */
   private function extractGameJamConfig(GameJamRepository $game_jam_repository)
   {
@@ -622,7 +623,7 @@ class ProgramController extends AbstractController
     if ($gamejam)
     {
       $gamejam_flavor = $gamejam->getFlavor();
-      if ($gamejam_flavor !== null)
+      if (null !== $gamejam_flavor)
       {
         $config = $this->getParameter('gamejam');
         $gamejam_config = $config[$gamejam_flavor];
@@ -632,8 +633,8 @@ class ProgramController extends AbstractController
           $display_name = $gamejam_config['display_name'];
           $gamejam_url = $gamejam_config['gamejam_url'];
           $jam = [
-            'name'        => $display_name,
-            'logo_url'    => $logo_url,
+            'name' => $display_name,
+            'logo_url' => $logo_url,
             'gamejam_url' => $gamejam_url,
           ];
         }
@@ -643,26 +644,22 @@ class ProgramController extends AbstractController
     return $jam;
   }
 
-
   /**
-   * @param Request        $request
-   * @param Program        $program
-   * @param                $viewed
-   * @param ProgramManager $program_manager
+   * @param Program $program
+   * @param         $viewed
    *
    * @throws ORMException
    * @throws OptimisticLockException
    */
   private function checkAndAddViewed(Request $request, $program, $viewed, ProgramManager $program_manager)
   {
-    if (!in_array($program->getId(), $viewed))
+    if (!in_array($program->getId(), $viewed, true))
     {
       $program_manager->increaseViews($program);
       $viewed[] = $program->getId();
       $request->getSession()->set('viewed', $viewed);
     }
   }
-
 
   /**
    * @param $screenshot_repository      ScreenshotRepository
@@ -693,11 +690,11 @@ class ProgramController extends AbstractController
       // (except tag-recommendations -> see below)
       // At the moment only recommendations based on remixes are supported!
       $url = $this->generateUrl('download', [
-        'id'                => $program->getId(),
-        'rec_by_page_id'    => $rec_by_page_id,
+        'id' => $program->getId(),
+        'rec_by_page_id' => $rec_by_page_id,
         'rec_by_program_id' => $rec_by_program_id,
         'rec_user_specific' => $rec_user_specific,
-        'fname'             => $program->getName(),
+        'fname' => $program->getName(),
       ]);
     }
     else
@@ -706,9 +703,9 @@ class ProgramController extends AbstractController
       {
         // tag-recommendations should generate this download link!
         $url = $this->generateUrl('download', [
-          'id'       => $program->getId(),
+          'id' => $program->getId(),
           'rec_from' => $rec_tag_by_program_id,
-          'fname'    => $program->getName(),
+          'fname' => $program->getName(),
         ]);
       }
       else
@@ -722,14 +719,14 @@ class ProgramController extends AbstractController
     foreach ($program_comments as $comment)
     {
       /**
-       * @var   $em      EntityManager
-       * @var   $comment UserComment
+       * @var EntityManager
+       * @var UserComment   $comment
        */
       $em = $this->getDoctrine()->getManager();
       $user = $em->getRepository(User::class)->findOneBy([
-        'id' => $comment->getUser()->getId()
+        'id' => $comment->getUser()->getId(),
       ]);
-      if ($user !== null)
+      if (null !== $user)
       {
         $avatar = $user->getAvatar();
         if ($avatar)
@@ -739,29 +736,26 @@ class ProgramController extends AbstractController
       }
     }
 
-    $program_details = [
-      'screenshotBig'       => $screenshot_repository->getScreenshotWebPath($program->getId()),
-      'downloadUrl'         => $url,
-      'languageVersion'     => $program->getLanguageVersion(),
-      'downloads'           => $program->getDownloads() + $program->getApkDownloads(),
-      'views'               => $program->getViews(),
-      'filesize'            => sprintf('%.2f', $program->getFilesize() / 1048576),
-      'age'                 => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
-      'referrer'            => $referrer,
-      'id'                  => $program->getId(),
-      'comments'            => $program_comments,
-      'commentsLength'      => count($program_comments),
-      'commentsAvatars'     => $comments_avatars,
-      'remixesLength'       => $remix_manager->remixCount($program->getId()),
-      'activeLikeTypes'     => $active_like_types,
+    return [
+      'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
+      'downloadUrl' => $url,
+      'languageVersion' => $program->getLanguageVersion(),
+      'downloads' => $program->getDownloads() + $program->getApkDownloads(),
+      'views' => $program->getViews(),
+      'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
+      'age' => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+      'referrer' => $referrer,
+      'id' => $program->getId(),
+      'comments' => $program_comments,
+      'commentsLength' => count($program_comments),
+      'commentsAvatars' => $comments_avatars,
+      'remixesLength' => $remix_manager->remixCount($program->getId()),
+      'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
-      'totalLikeCount'      => $total_like_count,
-      'isAdmin'             => $this->isGranted("ROLE_ADMIN"),
+      'totalLikeCount' => $total_like_count,
+      'isAdmin' => $this->isGranted('ROLE_ADMIN'),
     ];
-
-    return $program_details;
   }
-
 
   /**
    * @param $program Program
@@ -770,24 +764,21 @@ class ProgramController extends AbstractController
    */
   private function findCommentsById($program)
   {
-    $program_comments = $this->getDoctrine()
+    return $this->getDoctrine()
       ->getRepository('App\Entity\UserComment')
       ->findBy(
-        ['program' => $program->getId()], ['id' => 'DESC']);
-
-    return $program_comments;
+        ['program' => $program->getId()], ['id' => 'DESC'])
+    ;
   }
 
   /**
    * @param $user    User
    * @param $program Program
-   *
-   * @return null
    */
   private function findUserPrograms($user, $program)
   {
     /**
-     * @var $programs ArrayCollection
+     * @var ArrayCollection
      */
     $user_programs = null;
     if ($user)
@@ -800,7 +791,6 @@ class ProgramController extends AbstractController
     return $user_programs;
   }
 
-
   /**
    * @param $program Program
    * @param $user    User
@@ -811,8 +801,9 @@ class ProgramController extends AbstractController
   {
     $isReportedByUser = false;
     $em = $this->getDoctrine()->getManager();
-    $reported_program = $em->getRepository("\App\Entity\ProgramInappropriateReport")
-      ->findOneBy(['program' => $program->getId()]);
+    $reported_program = $em->getRepository('\\App\\Entity\\ProgramInappropriateReport')
+      ->findOneBy(['program' => $program->getId()])
+    ;
 
     if ($reported_program)
     {
@@ -820,49 +811,5 @@ class ProgramController extends AbstractController
     }
 
     return $isReportedByUser;
-  }
-
-  /**
-   * @Route("/project/{id}/uploadThumbnail", name="upload_project_thumbnail", methods={"POST"})
-   *
-   * @param Request              $request
-   * @param ProgramManager       $project_manager
-   * @param ScreenshotRepository $screenshot_repository
-   * @param                      $id
-   *
-   * @return JsonResponse|RedirectResponse
-   * @throws ImagickException
-   */
-  public function uploadAvatarAction(Request $request, ProgramManager $project_manager,
-                                     ScreenshotRepository $screenshot_repository, $id)
-  {
-    /**
-     * @var $user    User
-     * @var $project Program
-     */
-    $user = $this->getUser();
-    $project = $project_manager->find($id);
-
-    if (!$user || $project->getUser() !== $user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
-    }
-
-    $image = $request->request->get('image');
-
-    try
-    {
-      $image = ImageUtils::checkAndResizeBase64Image($image, null);
-    } catch (Exception $e)
-    {
-      return JsonResponse::create(['statusCode' => $e->getMessage()]);
-    }
-
-    $screenshot_repository->updateProgramAssets($image, $id);
-
-    return JsonResponse::create([
-      'statusCode'   => StatusCode::OK,
-      'image_base64' => null,
-    ]);
   }
 }

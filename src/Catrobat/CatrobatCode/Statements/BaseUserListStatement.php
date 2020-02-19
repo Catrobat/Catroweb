@@ -3,12 +3,10 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class BaseUserListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class BaseUserListStatement.
  */
 class BaseUserListStatement extends Statement
 {
-
   /**
    * @var
    */
@@ -28,7 +26,6 @@ class BaseUserListStatement extends Statement
    * @var
    */
   private $listName;
-
 
   /**
    * BaseUserListStatement constructor.
@@ -50,18 +47,15 @@ class BaseUserListStatement extends Statement
       $end);
   }
 
-
   /**
    * @return string
    */
   public function execute()
   {
     $children = $this->executeChildren();
-    $code = parent::addSpaces() . $this->start . $this->listName . $this->middle . $children . $this->end;
 
-    return $code;
+    return parent::addSpaces().$this->start.$this->listName.$this->middle.$children.$this->end;
   }
-
 
   /**
    * @return string

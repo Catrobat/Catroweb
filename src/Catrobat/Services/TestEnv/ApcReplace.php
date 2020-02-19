@@ -3,37 +3,42 @@
 namespace App\Catrobat\Services\TestEnv;
 
 /**
- * Class ApcReplace
- * @package App\Catrobat\Services\TestEnv
+ * Class ApcReplace.
  */
 final class ApcReplace
 {
   /**
    * @var array
    */
-  protected $store = [];
+  private $store = [];
 
   /**
    * @var string
    */
-  private static $APC_OBJECTS = "LdapTestDriverFixture";
+  private static $APC_OBJECTS = 'LdapTestDriverFixture';
 
   /**
-   * Call this method to get singleton
+   * Private ctor so nobody else can instantiate it.
+   */
+  private function __construct()
+  {
+  }
+
+  /**
+   * Call this method to get singleton.
    *
    * @return ApcReplace()
    */
   public static function Instance()
   {
     static $inst = null;
-    if ($inst === null)
+    if (null === $inst)
     {
       $inst = new ApcReplace();
     }
 
     return $inst;
   }
-
 
   /**
    * @param $key
@@ -73,14 +78,5 @@ final class ApcReplace
     unset($this->store[$key]);
 
     return true;
-  }
-
-  /**
-   * Private ctor so nobody else can instantiate it
-   *
-   */
-  private function __construct()
-  {
-
   }
 }

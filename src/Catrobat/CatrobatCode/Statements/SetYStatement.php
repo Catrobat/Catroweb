@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class SetYStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class SetYStatement.
  */
 class SetYStatement extends BaseSetToStatement
 {
-  const BEGIN_STRING = "Y";
-  const END_STRING = ")<br/>";
+  const BEGIN_STRING = 'Y';
+  const END_STRING = ')<br/>';
 
   /**
    * SetYStatement constructor.
@@ -31,9 +30,9 @@ class SetYStatement extends BaseSetToStatement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Set Y to " . $formula_string_without_markup;
+    return 'Set Y to '.$formula_string_without_markup;
   }
 
   /**
@@ -41,7 +40,6 @@ class SetYStatement extends BaseSetToStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
-
 }

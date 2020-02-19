@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\BroadcastNotification;
 use App\Entity\UserManager;
@@ -12,14 +11,11 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
- * Class BroadcastNotificationController
- * @package App\Catrobat\Controller\Admin
+ * Class BroadcastNotificationController.
  */
 class BroadcastNotificationController extends CRUDController
 {
-
   /**
    * @return Response
    */
@@ -29,29 +25,24 @@ class BroadcastNotificationController extends CRUDController
   }
 
   /**
-   * @param Request $request
-   * @param CatroNotificationService $notification_service
-   * @param UserManager $user_manager
-   *
-   * @return Response
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return Response
    */
   public function sendAction(Request $request, CatroNotificationService $notification_service, UserManager $user_manager)
   {
-    $message = $request->get("Message");
-    $title = $request->get("Title");
+    $message = $request->get('Message');
+    $title = $request->get('Title');
 
     $notification_service->addNotifications($this->getNotifications($message, $title, $user_manager));
 
-    return new Response("OK");
+    return new Response('OK');
   }
-
 
   /**
    * @param $message
    * @param $title
-   * @param UserManager $user_manager
    *
    * @return \Generator
    */
@@ -62,5 +53,4 @@ class BroadcastNotificationController extends CRUDController
       yield new BroadcastNotification($user, $title, $message);
     }
   }
-
 }

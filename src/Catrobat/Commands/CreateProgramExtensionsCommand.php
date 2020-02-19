@@ -2,11 +2,11 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Extension;
 use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRepository;
-use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,10 +15,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 use ZipArchive;
 
-
 /**
- * Class CreateProgramExtensionsCommand
- * @package App\Catrobat\Commands
+ * Class CreateProgramExtensionsCommand.
  */
 class CreateProgramExtensionsCommand extends Command
 {
@@ -47,14 +45,8 @@ class CreateProgramExtensionsCommand extends Command
    */
   private $extension_repository;
 
-
   /**
    * CreateProgramExtensionsCommand constructor.
-   *
-   * @param EntityManagerInterface $em
-   * @param ProgramFileRepository $program_file_repository
-   * @param ProgramRepository $program_repo
-   * @param ExtensionRepository $extension_repository
    */
   public function __construct(EntityManagerInterface $em, ProgramFileRepository $program_file_repository,
                               ProgramRepository $program_repo, ExtensionRepository $extension_repository)
@@ -66,33 +58,26 @@ class CreateProgramExtensionsCommand extends Command
     $this->extension_repository = $extension_repository;
   }
 
-
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:create:extensions')
-      ->setDescription('Creating extensions from uploaded programs');
+      ->setDescription('Creating extensions from uploaded programs')
+    ;
   }
 
-
   /**
-   * @param InputInterface $input
-   * @param OutputInterface $output
-   *
    * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-    /**
+    /*
      * @var $extension Extension
      */
     $this->output = $output;
     $xpath = '//@category';
     $program_with_extensiones = false;
 
-    $this->writeln("Deleting all linked extensions");
+    $this->writeln('Deleting all linked extensions');
 
     $extensions = $this->extension_repository->findAll();
 
@@ -107,34 +92,33 @@ class CreateProgramExtensionsCommand extends Command
     $finder = new Finder();
     $finder->in($this->program_file_repository->directory);
 
-    $this->writeln("Searching for extensions ...");
+    $this->writeln('Searching for extensions ...');
 
     foreach ($finder as $element)
     {
-
       $zip = new ZipArchive();
 
-      $open = $zip->open($this->program_file_repository->directory . $element->getFilename());
+      $open = $zip->open($this->program_file_repository->directory.$element->getFilename());
 
-      if ($open !== true)
+      if (true !== $open)
       {
-        $this->writeln("Cant open: " . $this->program_file_repository->directory . $element->getFilename());
-        $this->writeln("Skipping file ...");
+        $this->writeln('Cant open: '.$this->program_file_repository->directory.$element->getFilename());
+        $this->writeln('Skipping file ...');
         continue;
       }
 
       $program = $this->getProgram($element);
 
-      if ($program == null)
+      if (null == $program)
       {
-        $this->writeln("Cant find database entry for file: " . $element->getFilename());
-        $this->writeln("Skipping file ...");
+        $this->writeln('Cant find database entry for file: '.$element->getFilename());
+        $this->writeln('Skipping file ...');
         continue;
       }
 
-      $content = $zip->getFromName("code.xml");
+      $content = $zip->getFromName('code.xml');
 
-      if ($content === false)
+      if (false === $content)
       {
         throw new InvalidXmlException();
       }
@@ -142,9 +126,9 @@ class CreateProgramExtensionsCommand extends Command
 
       $xml = simplexml_load_string($content);
 
-      if ($xml === false)
+      if (false === $xml)
       {
-        $this->writeln("Cant load code.xml from: " . $element->getFilename());
+        $this->writeln('Cant load code.xml from: '.$element->getFilename());
       }
       else
       {
@@ -153,33 +137,33 @@ class CreateProgramExtensionsCommand extends Command
 
       if (!empty($nodes))
       {
-
-        $prefixes = array_map(function ($elem) {
-          return explode("_", $elem['category'], 2)[0];
+        $prefixes = array_map(function ($elem)
+        {
+          return explode('_', $elem['category'], 2)[0];
         }, $nodes);
         $prefixes = array_unique($prefixes);
 
         foreach ($extensions as $extension)
         {
-          if (in_array($extension->getPrefix(), $prefixes))
+          if (in_array($extension->getPrefix(), $prefixes, true))
           {
             $program->addExtension($extension);
             $program_with_extensiones = true;
 
-            if ($extension->getPrefix() == 'PHIRO')
+            if ('PHIRO' == $extension->getPrefix())
             {
               $program->setFlavor('phirocode');
             }
           }
 
-          if (strcmp($extension->getPrefix(), 'CHROMECAST') == 0)
+          if (0 == strcmp($extension->getPrefix(), 'CHROMECAST'))
           {
             $is_cast = $xml->xpath('header/isCastProject');
 
             if (!empty($is_cast))
             {
-              $cast_value = ((array)$is_cast[0]);
-              if (strcmp($cast_value[0], 'true') == 0)
+              $cast_value = ((array) $is_cast[0]);
+              if (0 == strcmp($cast_value[0], 'true'))
               {
                 $program->addExtension($extension);
                 $program_with_extensiones = true;
@@ -188,7 +172,7 @@ class CreateProgramExtensionsCommand extends Command
           }
         }
 
-        if ($program_with_extensiones == true)
+        if (true == $program_with_extensiones)
         {
           $this->em->persist($program);
           $this->em->flush();
@@ -197,9 +181,8 @@ class CreateProgramExtensionsCommand extends Command
       }
     }
 
-    $this->writeln("Done!");
+    $this->writeln('Done!');
   }
-
 
   /**
    * @param File $element
@@ -208,18 +191,17 @@ class CreateProgramExtensionsCommand extends Command
    */
   private function getProgram($element)
   {
-    $id = explode(".", $element->getFilename());
+    $id = explode('.', $element->getFilename());
 
     return $this->program_repository->find($id[0]);
   }
-
 
   /**
    * @param $string
    */
   private function writeln($string)
   {
-    if ($this->output != null)
+    if (null != $this->output)
     {
       $this->output->writeln($string);
     }

@@ -7,8 +7,7 @@ use App\Entity\Notification;
 use App\Repository\NotificationRepository;
 
 /**
- * Class ReportNotificator
- * @package App\Catrobat\Listeners
+ * Class ReportNotificator.
  */
 class ReportNotificator
 {
@@ -23,9 +22,6 @@ class ReportNotificator
 
   /**
    * ReportNotificator constructor.
-   *
-   * @param \Swift_Mailer                                     $mailer
-   * @param NotificationRepository $repository
    */
   public function __construct(\Swift_Mailer $mailer, NotificationRepository $repository)
   {
@@ -33,9 +29,6 @@ class ReportNotificator
     $this->notification_repo = $repository;
   }
 
-  /**
-   * @param ReportInsertEvent $event
-   */
   public function onReportInsertEvent(ReportInsertEvent $event)
   {
     /* @var $notification_repo NotificationRepository */
@@ -60,11 +53,12 @@ class ReportNotificator
         ->setContentType('text/html')
         ->setBody('A Project got reported!
 
-Note: ' . $event->getNote() . '
-Project Name:' . $program->getName() . '
-Project Description: ' . $program->getDescription() . '
+Note: '.$event->getNote().'
+Project Name:'.$program->getName().'
+Project Description: '.$program->getDescription().'
 
-');
+')
+      ;
 
       $this->mailer->send($message);
     }

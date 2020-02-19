@@ -2,19 +2,17 @@
 
 namespace App\Catrobat\Listeners\View;
 
+use App\Catrobat\Responses\TemplateListResponse;
+use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
+use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Template;
 use App\Entity\TemplateManager;
-use App\Catrobat\Responses\TemplateListResponse;
-use App\Catrobat\Services\ScreenshotRepository;
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 
-
 /**
- * Class TemplateListSerializer
- * @package App\Catrobat\Listeners\View
+ * Class TemplateListSerializer.
  */
 class TemplateListSerializer
 {
@@ -39,9 +37,7 @@ class TemplateListSerializer
    * TemplateListSerializer constructor.
    *
    * @param $template_screenshot_repository
-   * @param RequestStack $request_stack
    * @param $catrobat_template_storage_path
-   * @param ElapsedTimeStringFormatter $time_formatter
    */
   public function __construct($template_screenshot_repository, RequestStack $request_stack,
                               $catrobat_template_storage_path, ElapsedTimeStringFormatter $time_formatter)
@@ -52,9 +48,6 @@ class TemplateListSerializer
     $this->time_formatter = $time_formatter;
   }
 
-  /**
-   * @param ViewEvent $event
-   */
   public function onKernelView(ViewEvent $event)
   {
     $result = $event->getControllerResult();
@@ -68,18 +61,18 @@ class TemplateListSerializer
 
     $retArray = [];
     $retArray['CatrobatTemplates'] = [];
-    if ($templates != null)
+    if (null != $templates)
     {
       foreach ($templates as $template)
       {
         $new_template = $this->generateTemplateArray($template);
-        if ($new_template != null)
+        if (null != $new_template)
         {
           $retArray['CatrobatTemplates'][] = $new_template;
         }
       }
     }
-    $retArray['BaseUrl'] = $request->getSchemeAndHttpHost() . '/';
+    $retArray['BaseUrl'] = $request->getSchemeAndHttpHost().'/';
     $retArray['ProjectsExtension'] = '.catrobat';
 
     $event->setResponse(JsonResponse::create($retArray));
@@ -99,7 +92,7 @@ class TemplateListSerializer
       $prefix = TemplateManager::LANDSCAPE_PREFIX;
     }
 
-    return ltrim($this->template_path . $prefix . $id . '.catrobat', '/');
+    return ltrim($this->template_path.$prefix.$id.'.catrobat', '/');
   }
 
   /**

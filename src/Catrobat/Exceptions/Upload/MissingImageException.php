@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class MissingImageException
- * @package App\Catrobat\Exceptions\Upload
+ * Class MissingImageException.
  */
 class MissingImageException extends InvalidCatrobatFileException
 {
@@ -18,6 +17,6 @@ class MissingImageException extends InvalidCatrobatFileException
    */
   public function __construct($debug_message)
   {
-    parent::__construct("errors.image.missing", StatusCode::IMAGE_MISSING, $debug_message);
+    parent::__construct('errors.image.missing', StatusCode::IMAGE_MISSING, $debug_message);
   }
 }

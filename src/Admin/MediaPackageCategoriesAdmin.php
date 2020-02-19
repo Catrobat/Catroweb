@@ -4,20 +4,17 @@ namespace App\Admin;
 
 use App\Entity\MediaPackage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-
 /**
- * Class MediaPackageCategoriesAdmin
- * @package App\Admin
+ * Class MediaPackageCategoriesAdmin.
  */
 class MediaPackageCategoriesAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -27,7 +24,6 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
    * @var string
    */
   protected $baseRoutePattern = 'media_package_category';
-
 
   /**
    * @param FormMapper $formMapper
@@ -39,12 +35,12 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
     $formMapper
       ->add('name', TextType::class, ['label' => 'Name'])
       ->add('package', EntityType::class, [
-        'class'    => MediaPackage::class,
+        'class' => MediaPackage::class,
         'required' => true,
-        'multiple' => true])
-      ->add('priority');
+        'multiple' => true, ])
+      ->add('priority')
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -54,7 +50,6 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -68,9 +63,10 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
       ->add('package', EntityType::class, ['class' => MediaPackage::class])
       ->add('_action', 'actions', [
         'actions' => [
-          'edit'   => [],
+          'edit' => [],
           'delete' => [],
         ],
-      ]);
+      ])
+    ;
   }
 }

@@ -6,8 +6,7 @@ use App\Entity\ProgramInappropriateReport;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class ReportInsertEvent
- * @package App\Catrobat\Events
+ * Class ReportInsertEvent.
  */
 class ReportInsertEvent extends Event
 {
@@ -27,9 +26,8 @@ class ReportInsertEvent extends Event
   /**
    * ReportInsertEvent constructor.
    *
-   * @param                            $category
-   * @param                            $description
-   * @param ProgramInappropriateReport $program
+   * @param $category
+   * @param $description
    */
   public function __construct($category, $description, ProgramInappropriateReport $program)
   {
@@ -39,7 +37,7 @@ class ReportInsertEvent extends Event
   }
 
   /**
-   * @return String
+   * @return string
    */
   public function getCategory()
   {
@@ -47,7 +45,7 @@ class ReportInsertEvent extends Event
   }
 
   /**
-   * @return String
+   * @return string
    */
   public function getNote()
   {

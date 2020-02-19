@@ -5,8 +5,7 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class ValueStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ValueStatement.
  */
 class ValueStatement extends Statement
 {
@@ -34,7 +33,7 @@ class ValueStatement extends Statement
     $this->type = $type;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
 
   /**
@@ -59,8 +58,6 @@ class ValueStatement extends Statement
         break;
     }
 
-    $code = $color . $this->value . SyntaxHighlightingConstants::END . $this->executeChildren();
-
-    return $code;
+    return $color.$this->value.SyntaxHighlightingConstants::END.$this->executeChildren();
   }
 }

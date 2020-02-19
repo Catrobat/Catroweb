@@ -2,20 +2,17 @@
 
 namespace App\Catrobat\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use FOS\UserBundle\Event\GetResponseNullableUserEvent;
-use \Symfony\Component\Routing\RouterInterface;
-use \Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class ResettingSendEmailInitializeSubscriber
- * @package App\Catrobat\EventListener
+ * Class ResettingSendEmailInitializeSubscriber.
  */
 class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
 {
-
   /**
    * @var RouterInterface
    */
@@ -27,9 +24,6 @@ class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
 
   /**
    * ResettingSendEmailInitializeSubscriber constructor.
-   *
-   * @param RouterInterface    $router
-   * @param ContainerInterface $container
    */
   public function __construct(RouterInterface $router, ContainerInterface $container)
   {
@@ -38,8 +32,6 @@ class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
   }
 
   /**
-   * @param GetResponseNullableUserEvent $event
-   *
    * @return GetResponseNullableUserEvent
    */
   public function onResettingSendEmailInitialize(GetResponseNullableUserEvent $event)
@@ -62,7 +54,6 @@ class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
 
     return $event;
   }
-
 
   /**
    * @return array

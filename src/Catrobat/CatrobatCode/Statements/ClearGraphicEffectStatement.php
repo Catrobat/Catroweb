@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ClearGraphicEffectStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ClearGraphicEffectStatement.
  */
 class ClearGraphicEffectStatement extends Statement
 {
-  const BEGIN_STRING = "clear graphic effects";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'clear graphic effects';
+  const END_STRING = '<br/>';
 
   /**
    * ClearGraphicEffectStatement constructor.
@@ -30,7 +29,7 @@ class ClearGraphicEffectStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Clear graphic effects";
+    return 'Clear graphic effects';
   }
 
   /**
@@ -38,6 +37,6 @@ class ClearGraphicEffectStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
 }

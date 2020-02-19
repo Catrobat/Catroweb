@@ -15,15 +15,12 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-
-define("HOURS", 24);
-define("MINUTES", 60);
-define("SECONDS", 60);
-
+define('HOURS', 24);
+define('MINUTES', 60);
+define('SECONDS', 60);
 
 /**
- * Class CleanOldApkCommand
- * @package App\Catrobat\Commands
+ * Class CleanOldApkCommand.
  */
 class CleanOldApkCommand extends Command
 {
@@ -39,9 +36,6 @@ class CleanOldApkCommand extends Command
 
   /**
    * CleanOldApkCommand constructor.
-   *
-   * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface  $parameter_bag
    */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
   {
@@ -50,23 +44,19 @@ class CleanOldApkCommand extends Command
     $this->entity_manager = $entity_manager;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:clean:old-apk')
       ->setDescription('Delete all APKs older than X days and resets the status to NONE')
-      ->addArgument('days');
+      ->addArgument('days')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
-   *
-   * @return int|void
    * @throws NoResultException
    * @throws NonUniqueResultException
+   *
+   * @return int|void
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -79,15 +69,15 @@ class CleanOldApkCommand extends Command
       return -1;
     }
 
-    $output->writeln('Deleting all APKs older than ' . $days . ' days.');
-    $last_point_of_time_to_save = time() - ((int)$days * HOURS * MINUTES * SECONDS);
+    $output->writeln('Deleting all APKs older than '.$days.' days.');
+    $last_point_of_time_to_save = time() - ((int) $days * HOURS * MINUTES * SECONDS);
 
     $directory = $this->parameter_bag->get('catrobat.apk.dir');
     $filesystem = new Filesystem();
     $finder = new Finder();
     $finder->in($directory)->depth(0);
     $removed_apk_ids = new ArrayObject();
-    $amount_of_files = sizeOf($finder);
+    $amount_of_files = sizeof($finder);
 
     foreach ($finder as $file)
     {
@@ -99,9 +89,9 @@ class CleanOldApkCommand extends Command
       }
     }
 
-    $output->writeln('Files removed (' . sizeOf($removed_apk_ids) . '/' . $amount_of_files . ')');
+    $output->writeln('Files removed ('.sizeof($removed_apk_ids).'/'.$amount_of_files.')');
 
-    if (!sizeOf($removed_apk_ids))
+    if (!sizeof($removed_apk_ids))
     {
       $output->writeln('No projects have been reset.');
 
@@ -109,11 +99,10 @@ class CleanOldApkCommand extends Command
     }
     $query = $this->createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids);
     $result = $query->getSingleScalarResult();
-    $output->writeln('Reset the apk status of ' . $result . ' projects');
+    $output->writeln('Reset the apk status of '.$result.' projects');
 
     return 0;
   }
-
 
   /**
    * @param $removed_apk_ids
@@ -126,21 +115,21 @@ class CleanOldApkCommand extends Command
     $i = 0;
     foreach ($removed_apk_ids as $apk_id)
     {
-      if ($i !== 0)
+      if (0 !== $i)
       {
         $id_query_part .= 'OR ';
       }
-      $id_query_part .= 'p.id = "' . $apk_id . '" ';
-      $i++;
+      $id_query_part .= 'p.id = "'.$apk_id.'" ';
+      ++$i;
     }
 
-    if ($id_query_part !== '')
+    if ('' !== $id_query_part)
     {
-      $id_query_part = ' AND (' . $id_query_part . ')';
+      $id_query_part = ' AND ('.$id_query_part.')';
     }
 
     $query = $this->entity_manager->createQuery(
-      "UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status" . $id_query_part
+      'UPDATE App\\Entity\\Program p SET p.apk_status = :status WHERE p.apk_status != :status'.$id_query_part
     );
     $query->setParameter('status', Program::APK_NONE);
 

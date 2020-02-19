@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Commands\Helpers;
 
-use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
@@ -14,14 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class ResetController
- * @package App\Catrobat\Commands\Helpers
+ * Class ResetController.
  */
 class ResetController extends AbstractController
 {
-  /**
-   * @param Program $program
-   */
   public function featureProgram(Program $program)
   {
     $entity_manager = $this->getDoctrine()->getManager();
@@ -32,8 +27,8 @@ class ResetController extends AbstractController
     $feature->setImageType('jpeg'); //todo picture?
     $feature->setUrl(null);
 
-    $source_img = "public/resources/screenshots/screen_" . $program->getId() . ".png";
-    $dest_img = "public/resources/featured/screen_" . $program->getId() . ".png";
+    $source_img = 'public/resources/screenshots/screen_'.$program->getId().'.png';
+    $dest_img = 'public/resources/featured/screen_'.$program->getId().'.png';
     copy($source_img, $dest_img);
     $file = new File($dest_img);
     $feature->setNewFeaturedImage($file);
@@ -42,10 +37,6 @@ class ResetController extends AbstractController
     $entity_manager->flush();
   }
 
-  /**
-   * @param Program $program
-   * @param User    $user
-   */
   public function likeProgram(Program $program, User $user)
   {
     $entity_manager = $this->getDoctrine()->getManager();
@@ -56,12 +47,6 @@ class ResetController extends AbstractController
     $entity_manager->flush();
   }
 
-  /**
-   * @param User    $user
-   * @param Program $program
-   * @param string  $message
-   * @param bool    $reported
-   */
   public function postComment(User $user, Program $program, string $message, bool $reported)
   {
     $temp_comment = new UserComment();
@@ -78,11 +63,6 @@ class ResetController extends AbstractController
     $em->refresh($temp_comment);
   }
 
-  /**
-   * @param Program $program
-   * @param User    $user
-   * @param string  $note
-   */
   public function reportProgram(Program $program, User $user, string $note)
   {
     $entity_manager = $this->getDoctrine()->getManager();
@@ -97,10 +77,6 @@ class ResetController extends AbstractController
     $entity_manager->flush();
   }
 
-  /**
-   * @param Program $program
-   * @param User    $user
-   */
   public function downloadProgram(Program $program, User $user)
   {
     $entity_manager = $this->getDoctrine()->getManager();
@@ -118,10 +94,6 @@ class ResetController extends AbstractController
     $entity_manager->flush();
   }
 
-  /**
-   * @param User $user
-   * @param User $follower
-   */
   public function followUser(User $user, User $follower)
   {
     $entity_manager = $this->getDoctrine()->getManager();

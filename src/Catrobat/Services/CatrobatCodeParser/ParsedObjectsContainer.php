@@ -5,8 +5,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 use SimpleXMLElement;
 
 /**
- * Class ParsedObjectsContainer
- * @package App\Catrobat\Services\CatrobatCodeParser
+ * Class ParsedObjectsContainer.
  */
 abstract class ParsedObjectsContainer
 {
@@ -27,8 +26,6 @@ abstract class ParsedObjectsContainer
 
   /**
    * ParsedObjectsContainer constructor.
-   *
-   * @param SimpleXMLElement $xml_properties
    */
   public function __construct(SimpleXMLElement $xml_properties)
   {
@@ -39,22 +36,33 @@ abstract class ParsedObjectsContainer
     $this->parseObjects();
   }
 
+  public function getBackground()
+  {
+    return $this->background;
+  }
+
   /**
-   *
+   * @return array
    */
+  public function getObjects()
+  {
+    return $this->objects;
+  }
+
   private function parseObjects()
   {
     /**
-     * @var $current_group null|ParsedObjectGroup
+     * @var ParsedObjectGroup|null
      */
     $current_group = null;
     foreach ($this->getAllObjectXMLProperties() as $object_xml_properties)
     {
-      if ($this->background === null)
+      if (null === $this->background)
       {
         $this->background = new ParsedObject($object_xml_properties);
       }
       else
+      {
         switch ($object_xml_properties[Constants::TYPE_ATTRIBUTE])
         {
           case Constants::GROUP_SPRITE_TYPE:
@@ -72,6 +80,7 @@ abstract class ParsedObjectsContainer
             $this->objects[] = new ParsedObject($object_xml_properties);
             break;
         }
+      }
     }
     $this->addCurrentGroup($current_group);
   }
@@ -116,7 +125,7 @@ abstract class ParsedObjectsContainer
   private function getPointedObjectXMLProperties($object_xml)
   {
     $all_pointed_object_xmls = [];
-    foreach ($object_xml->xpath('scriptList//' . Constants::POINTED_OBJECT_TAG) as $pointed_object_xml_properties)
+    foreach ($object_xml->xpath('scriptList//'.Constants::POINTED_OBJECT_TAG) as $pointed_object_xml_properties)
     {
       $pointed_object_xml = $this->dereference($pointed_object_xml_properties);
 
@@ -136,15 +145,13 @@ abstract class ParsedObjectsContainer
    */
   private function dereference($object_xml_properties)
   {
-    if ($object_xml_properties[Constants::REFERENCE_ATTRIBUTE] != null)
+    if (null != $object_xml_properties[Constants::REFERENCE_ATTRIBUTE])
     {
       return $this->dereference($object_xml_properties
         ->xpath($object_xml_properties[Constants::REFERENCE_ATTRIBUTE])[0]);
     }
-    else
-    {
-      return $object_xml_properties;
-    }
+
+    return $object_xml_properties;
   }
 
   /**
@@ -154,22 +161,6 @@ abstract class ParsedObjectsContainer
    */
   private function hasName($object_xml_properties)
   {
-    return ($object_xml_properties[Constants::NAME_ATTRIBUTE] != null) or (count($object_xml_properties->name) != 0);
-  }
-
-  /**
-   * @return null
-   */
-  public function getBackground()
-  {
-    return $this->background;
-  }
-
-  /**
-   * @return array
-   */
-  public function getObjects()
-  {
-    return $this->objects;
+    return (null != $object_xml_properties[Constants::NAME_ATTRIBUTE]) or (0 != count($object_xml_properties->name));
   }
 }

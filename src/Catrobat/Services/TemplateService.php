@@ -5,23 +5,18 @@ namespace App\Catrobat\Services;
 use App\Entity\Template;
 use App\Entity\TemplateManager;
 
-
 /**
- * Class TemplateService
- * @package App\Catrobat\Services
+ * Class TemplateService.
  */
 class TemplateService
 {
-
   /**
-   * @var $templateManager TemplateManager
+   * @var TemplateManager
    */
   private $templateManager;
 
   /**
    * TemplateService constructor.
-   *
-   * @param TemplateManager $templateManager
    */
   public function __construct(TemplateManager $templateManager)
   {
@@ -29,8 +24,6 @@ class TemplateService
   }
 
   /**
-   * @param Template $template
-   *
    * @throws \ImagickException
    */
   public function saveFiles(Template $template)

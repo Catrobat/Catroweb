@@ -4,19 +4,14 @@ namespace App\Repository;
 
 use App\Entity\ScratchProgramRemixRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Types\GuidType;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class ScratchProgramRemixRepository
- * @package App\Repository
+ * Class ScratchProgramRemixRepository.
  */
 class ScratchProgramRemixRepository extends ServiceEntityRepository
 {
-
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, ScratchProgramRemixRelation::class);
@@ -37,12 +32,13 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('program_ids', $program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
-   * @param GuidType   $program_id
-   * @param int[] $scratch_parent_program_ids
+   * @param GuidType $program_id
+   * @param int[]    $scratch_parent_program_ids
    */
   public function removeParentRelations($program_id, array $scratch_parent_program_ids)
   {
@@ -55,12 +51,10 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('scratch_parent_program_ids', $scratch_parent_program_ids)
       ->setParameter('program_id', $program_id)
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
-  /**
-   *
-   */
   public function removeAllRelations()
   {
     $qb = $this->createQueryBuilder('s');
@@ -68,6 +62,7 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
     $qb
       ->delete()
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 }

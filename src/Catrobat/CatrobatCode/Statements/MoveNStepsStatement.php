@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class MoveNStepsStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class MoveNStepsStatement.
  */
 class MoveNStepsStatement extends Statement
 {
-  const BEGIN_STRING = "move (";
-  const END_STRING = ") steps<br/>";
+  const BEGIN_STRING = 'move (';
+  const END_STRING = ') steps<br/>';
 
   /**
    * MoveNStepsStatement constructor.
@@ -31,9 +30,9 @@ class MoveNStepsStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Move " . $formula_string_without_markup . " steps";
+    return 'Move '.$formula_string_without_markup.' steps';
   }
 
   /**
@@ -41,6 +40,6 @@ class MoveNStepsStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

@@ -1,17 +1,16 @@
 <?php
 
-
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\Commands\Helpers\ResetController;
 use App\Entity\Program;
 use App\Entity\User;
+use App\Entity\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\UserManager;
 
 class CreateProgramInappropriateReportCommand extends Command
 {
@@ -25,7 +24,6 @@ class CreateProgramInappropriateReportCommand extends Command
    */
   private $remix_manipulation_program_manager;
 
-
   /**
    * @var ResetController
    */
@@ -33,10 +31,6 @@ class CreateProgramInappropriateReportCommand extends Command
 
   /**
    * CreateProgramInappropriateReportCommand constructor.
-   *
-   * @param UserManager                     $user_manager
-   * @param RemixManipulationProgramManager $program_manager
-   * @param ResetController                 $reset_controller
    */
   public function __construct(UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager,
@@ -48,32 +42,27 @@ class CreateProgramInappropriateReportCommand extends Command
     $this->reset_controller = $reset_controller;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:report')
       ->setDescription('Report a project')
       ->addArgument('user', InputArgument::REQUIRED, 'User who reports on program')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets reported')
-      ->addArgument('note', InputArgument::REQUIRED, 'Report message');
+      ->addArgument('note', InputArgument::REQUIRED, 'Report message')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     /**
-     * @var $user    User
-     * @var $program Program
+     * @var User
+     * @var Program $program
      */
-
     $username = $input->getArgument('user');
     $program_name = $input->getArgument('program_name');
     $note = $input->getArgument('note');
@@ -81,7 +70,7 @@ class CreateProgramInappropriateReportCommand extends Command
     $user = $this->user_manager->findUserByUsername($username);
     $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
 
-    if ($user == null || $program == null || $this->reset_controller == null)
+    if (null == $user || null == $program || null == $this->reset_controller)
     {
       return;
     }
@@ -94,10 +83,11 @@ class CreateProgramInappropriateReportCommand extends Command
     try
     {
       $this->reset_controller->reportProgram($program, $user, $note);
-    } catch (\Exception $e)
+    }
+    catch (\Exception $e)
     {
       return;
     }
-    $output->writeln('Reporting ' . $program->getName());
+    $output->writeln('Reporting '.$program->getName());
   }
 }

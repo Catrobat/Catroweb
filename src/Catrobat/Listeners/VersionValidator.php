@@ -4,14 +4,13 @@ namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
-use App\Catrobat\StatusCode;
-use App\Catrobat\Exceptions\Upload\OldCatrobatLanguageVersionException;
 use App\Catrobat\Exceptions\Upload\OldApplicationVersionException;
+use App\Catrobat\Exceptions\Upload\OldCatrobatLanguageVersionException;
+use App\Catrobat\StatusCode;
 use SimpleXMLElement;
 
 /**
- * Class VersionValidator
- * @package App\Catrobat\Listeners
+ * Class VersionValidator.
  */
 class VersionValidator
 {
@@ -20,17 +19,11 @@ class VersionValidator
   const MIN_IOS_PROGRAM_VERSION = '0.1';
   const MIN_WINDOWS_PROGRAM_VERSION = '0.1';
 
-  /**
-   * @param ProgramBeforeInsertEvent $event
-   */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->validate($event->getExtractedFile()->getProgramXmlProperties());
   }
 
-  /**
-   * @param SimpleXMLElement $xml
-   */
   public function validate(SimpleXMLElement $xml)
   {
     if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<'))
@@ -38,7 +31,7 @@ class VersionValidator
       throw new OldCatrobatLanguageVersionException();
     }
 
-    $version = ltrim((string)$xml->header->applicationVersion, 'v');
+    $version = ltrim((string) $xml->header->applicationVersion, 'v');
 
     switch ($xml->header->platform)
     {
@@ -64,7 +57,6 @@ class VersionValidator
         break;
       default:
         throw new InvalidCatrobatFileException('unsupported platform', StatusCode::INTERNAL_SERVER_ERROR);
-
     }
   }
 }

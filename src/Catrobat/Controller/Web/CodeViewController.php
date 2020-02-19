@@ -2,46 +2,41 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
-use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
 /**
- * Class CodeViewController
- * @package App\Catrobat\Controller\Web
+ * Class CodeViewController.
  */
 class CodeViewController extends AbstractController
 {
-
   /**
-   * @param                         $id
-   * @param ProgramManager          $programManager
-   * @param ExtractedFileRepository $extractedFileRepository
-   * @param CatrobatCodeParser      $catrobatCodeParser
+   * @param $id
    *
    * @return mixed
    */
   public function viewCodeAction($id, ProgramManager $programManager, ExtractedFileRepository $extractedFileRepository,
                                  CatrobatCodeParser $catrobatCodeParser)
   {
-    /**
+    /*
      * @var $program Program
      */
     try
     {
       $program = $programManager->find($id);
       $extracted_program = $extractedFileRepository->loadProgramExtractedFile($program);
-      if ($extracted_program === null)
+      if (null === $extracted_program)
       {
         throw new \Exception();
       }
       $parsed_program = $catrobatCodeParser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
-    } catch (\Exception $e)
+    }
+    catch (\Exception $e)
     {
       $parsed_program = null;
       $web_path = null;
@@ -49,7 +44,7 @@ class CodeViewController extends AbstractController
 
     $code_view_twig_params = [
       'parsed_program' => $parsed_program,
-      'path'           => $web_path,
+      'path' => $web_path,
     ];
 
     return $this->render('Program/codeview.html.twig', $code_view_twig_params);

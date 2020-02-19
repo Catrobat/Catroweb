@@ -3,14 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class HideTextStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class HideTextStatement.
  */
 class HideTextStatement extends Statement
 {
-  const BEGIN_STRING = "hide variable ";
-  const END_STRING = ")<br/>";
-
+  const BEGIN_STRING = 'hide variable ';
+  const END_STRING = ')<br/>';
 
   /**
    * HideTextStatement constructor.
@@ -33,7 +31,7 @@ class HideTextStatement extends Statement
   {
     $variable_name = $this->xmlTree->userVariableName;
 
-    return "Hide variable " . $variable_name;
+    return 'Hide variable '.$variable_name;
   }
 
   /**
@@ -41,6 +39,6 @@ class HideTextStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_red.png";
+    return '1h_brick_red.png';
   }
 }

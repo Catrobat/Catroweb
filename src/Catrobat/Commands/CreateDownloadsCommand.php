@@ -1,16 +1,15 @@
 <?php
 
-
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\Commands\Helpers\ResetController;
 use App\Entity\User;
+use App\Entity\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\UserManager;
 
 class CreateDownloadsCommand extends Command
 {
@@ -24,7 +23,6 @@ class CreateDownloadsCommand extends Command
    */
   private $remix_manipulation_program_manager;
 
-
   /**
    * @var ResetController
    */
@@ -32,10 +30,6 @@ class CreateDownloadsCommand extends Command
 
   /**
    * CreateDownloadsCommand constructor.
-   *
-   * @param UserManager                     $user_manager
-   * @param RemixManipulationProgramManager $program_manager
-   * @param ResetController                 $reset_controller
    */
   public function __construct(UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager,
@@ -47,23 +41,19 @@ class CreateDownloadsCommand extends Command
     $this->reset_controller = $reset_controller;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:download')
       ->setDescription('download a project')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program which gets downloaded')
-      ->addArgument('user_name', InputArgument::REQUIRED, 'User who download program');
+      ->addArgument('user_name', InputArgument::REQUIRED, 'User who download program')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -73,11 +63,11 @@ class CreateDownloadsCommand extends Command
     $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
 
     /**
-     * @var $user User
+     * @var User
      */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if ($program == null || $user == null || $this->reset_controller == null)
+    if (null == $program || null == $user || null == $this->reset_controller)
     {
       return;
     }
@@ -85,10 +75,11 @@ class CreateDownloadsCommand extends Command
     try
     {
       $this->reset_controller->downloadProgram($program, $user);
-    } catch (\Exception $e)
+    }
+    catch (\Exception $e)
     {
       return;
     }
-    $output->writeln('Downloading ' . $program->getName() . ' with user ' . $user->getUsername());
+    $output->writeln('Downloading '.$program->getName().' with user '.$user->getUsername());
   }
 }

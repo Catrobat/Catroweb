@@ -2,22 +2,19 @@
 
 namespace App\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use App\Entity\User;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
 /**
- * Class NotificationAdmin
- * @package App\Admin
+ * Class NotificationAdmin.
  */
 class NotificationAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -27,7 +24,6 @@ class NotificationAdmin extends AbstractAdmin
    * @var string
    */
   protected $baseRoutePattern = 'upload_notification';
-
 
   /**
    * @param FormMapper $formMapper
@@ -41,20 +37,18 @@ class NotificationAdmin extends AbstractAdmin
       ->add('upload', null, ['label' => 'Email bei Upload', 'required' => false])
       ->add('report', null,
         ['label' => 'Email bei Inappropriate Report', 'required' => false])
-      ->add('summary', null, ['label' => 'Emails täglich sammeln', 'required' => false]);
+      ->add('summary', null, ['label' => 'Emails täglich sammeln', 'required' => false])
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
    *
    * Fields to be shown on filter forms
    */
-  //
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -71,16 +65,13 @@ class NotificationAdmin extends AbstractAdmin
       ->add('summary', null, ['editable' => true])
       ->add('_action', 'actions', [
         'actions' => [
-          'edit'   => [],
+          'edit' => [],
           'delete' => [],
         ],
-      ]);
+      ])
+    ;
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
   }

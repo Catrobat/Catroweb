@@ -3,19 +3,16 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-
 /**
- * Class EmailUserMessageAdmin
- * @package App\Admin
+ * Class EmailUserMessageAdmin.
  */
 class EmailUserMessageAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -26,14 +23,9 @@ class EmailUserMessageAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'mail';
 
-
-  /**
-   * @param FormMapper $formMapper
-   */
   protected function configureFormFields(FormMapper $formMapper)
   {
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -44,7 +36,6 @@ class EmailUserMessageAdmin extends AbstractAdmin
   {
   }
 
-
   /**
    * @param ListMapper $listMapper
    *
@@ -54,10 +45,6 @@ class EmailUserMessageAdmin extends AbstractAdmin
   {
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(['list']);

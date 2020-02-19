@@ -2,21 +2,19 @@
 
 namespace App\Catrobat\Listeners;
 
-use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
-use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\Exceptions\Upload\MissingProgramNameException;
 use App\Catrobat\Exceptions\Upload\NameTooLongException;
 use App\Catrobat\Exceptions\Upload\RudewordInNameException;
+use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\StatusCode;
 
 /**
- * Class NameValidator
- * @package App\Catrobat\Listeners
+ * Class NameValidator.
  */
 class NameValidator
 {
-
   /**
    * @var RudeWordFilter
    */
@@ -24,8 +22,6 @@ class NameValidator
 
   /**
    * NameValidator constructor.
-   *
-   * @param RudeWordFilter $rudeWordFilter
    */
   public function __construct(RudeWordFilter $rudeWordFilter)
   {
@@ -33,8 +29,6 @@ class NameValidator
   }
 
   /**
-   * @param ProgramBeforeInsertEvent $event
-   *
    * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
@@ -43,17 +37,15 @@ class NameValidator
   }
 
   /**
-   * @param ExtractedCatrobatFile $file
-   *
    * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function validate(ExtractedCatrobatFile $file)
   {
-    if ($file->getName() == null || $file->getName() == '')
+    if (null == $file->getName() || '' == $file->getName())
     {
       throw new MissingProgramNameException();
     }
-    elseif (strlen($file->getName()) > StatusCode::OK)
+    if (strlen($file->getName()) > StatusCode::OK)
     {
       throw new NameTooLongException();
     }

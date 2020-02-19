@@ -2,23 +2,20 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-
 /**
- * Class LogLine
- * @package App\Catrobat\Controller\Admin
+ * Class LogLine.
  */
 class LogLine
 {
+  /**
+   * @var string
+   */
+  public $date = '';
 
   /**
    * @var string
    */
-  public $date = "";
-
-  /**
-   * @var string
-   */
-  public $debug_code = "";
+  public $debug_code = '';
 
   /**
    * @var int
@@ -28,8 +25,7 @@ class LogLine
   /**
    * @var string
    */
-  public $msg = "";
-
+  public $msg = '';
 
   /**
    * LogLine constructor.
@@ -38,23 +34,22 @@ class LogLine
    */
   public function __construct($line = null)
   {
-    if ($line === null)
+    if (null === $line)
     {
-      $this->msg = "No Logs with Loglevel";
-      $this->debug_code = "No search results";
+      $this->msg = 'No Logs with Loglevel';
+      $this->debug_code = 'No search results';
     }
     else
     {
-      $this->date = $this->getSubstring($line, "]", true);
+      $this->date = $this->getSubstring($line, ']', true);
       $line = substr($line, strlen($this->date) + 1);
-      $this->debug_code = $this->getSubstring($line, ":");
+      $this->debug_code = $this->getSubstring($line, ':');
       $line = substr($line, strlen($this->debug_code) + 2);
       $this->msg = $line;
 
       $this->debug_level = $this->getDebugLevel($this->debug_code);
     }
   }
-
 
   /**
    * @param      $string
@@ -67,9 +62,9 @@ class LogLine
   {
     $pos = strpos($string, $needle);
 
-    if ($pos === false)
+    if (false === $pos)
     {
-      return "";
+      return '';
     }
     if ($last_char)
     {
@@ -79,7 +74,6 @@ class LogLine
     return substr($string, 0, $pos);
   }
 
-
   /**
    * @param $string
    *
@@ -87,7 +81,7 @@ class LogLine
    */
   private function getDebugLevel($string)
   {
-    $pos = strpos($string, ".");
+    $pos = strpos($string, '.');
     $extracted_string = substr($string, $pos + 1);
 
     switch ($extracted_string)

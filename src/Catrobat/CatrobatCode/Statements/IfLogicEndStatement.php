@@ -5,19 +5,13 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class IfLogicEndStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class IfLogicEndStatement.
  */
 class IfLogicEndStatement extends Statement
 {
-  /**
-   *
-   */
-  const BEGIN_STRING = "end if";
-  /**
-   *
-   */
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'end if';
+
+  const END_STRING = '<br/>';
 
   /**
    * IfLogicEndStatement constructor.
@@ -28,7 +22,7 @@ class IfLogicEndStatement extends Statement
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
-    $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END;
+    $stmt = SyntaxHighlightingConstants::LOOP.self::BEGIN_STRING.SyntaxHighlightingConstants::END;
 
     parent::__construct($statementFactory, $xmlTree, $spaces - 1,
       $stmt,
@@ -40,7 +34,7 @@ class IfLogicEndStatement extends Statement
    */
   public function getBrickText()
   {
-    return "End If";
+    return 'End If';
   }
 
   /**
@@ -48,6 +42,6 @@ class IfLogicEndStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
 }

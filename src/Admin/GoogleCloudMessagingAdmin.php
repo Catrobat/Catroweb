@@ -3,19 +3,16 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-
 /**
- * Class GoogleCloudMessagingAdmin
- * @package App\Admin
+ * Class GoogleCloudMessagingAdmin.
  */
 class GoogleCloudMessagingAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -26,7 +23,6 @@ class GoogleCloudMessagingAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'gcm';
 
-
   /**
    * @param FormMapper $formMapper
    *
@@ -35,7 +31,6 @@ class GoogleCloudMessagingAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -46,7 +41,6 @@ class GoogleCloudMessagingAdmin extends AbstractAdmin
   {
   }
 
-
   /**
    * @param ListMapper $listMapper
    *
@@ -56,10 +50,6 @@ class GoogleCloudMessagingAdmin extends AbstractAdmin
   {
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(['list']);

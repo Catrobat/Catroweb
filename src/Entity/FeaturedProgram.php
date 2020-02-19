@@ -38,11 +38,6 @@ class FeaturedProgram
   protected $imagetype;
 
   /**
-   * @ORM\ManyToOne(targetEntity="Program", fetch="EAGER")
-   **/
-  private $program;
-
-  /**
    * @ORM\Column(type="string", nullable=true)
    */
   protected $url;
@@ -66,6 +61,11 @@ class FeaturedProgram
    * @ORM\Column(type="boolean", options={"default": false})
    */
   protected $for_ios = false;
+
+  /**
+   * @ORM\ManyToOne(targetEntity="Program", fetch="EAGER")
+   */
+  private $program;
 
   /**
    * @return mixed
@@ -181,9 +181,6 @@ class FeaturedProgram
     return $this;
   }
 
-  /**
-   * @param File $file
-   */
   public function setNewFeaturedImage(File $file)
   {
     $this->file = $file;

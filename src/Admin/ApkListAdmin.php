@@ -3,18 +3,16 @@
 namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Entity\Program;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use App\Entity\Program;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-
 /**
- * Class ApkListAdmin
- * @package App\Admin
+ * Class ApkListAdmin.
  */
 class ApkListAdmin extends AbstractAdmin
 {
@@ -46,14 +44,12 @@ class ApkListAdmin extends AbstractAdmin
    * @param $code
    * @param $class
    * @param $baseControllerName
-   * @param ScreenshotRepository $screenshot_repository
    */
   public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository)
   {
     parent::__construct($code, $class, $baseControllerName);
     $this->screenshot_repository = $screenshot_repository;
   }
-
 
   /**
    * @param string $context
@@ -63,17 +59,29 @@ class ApkListAdmin extends AbstractAdmin
   public function createQuery($context = 'list')
   {
     /**
-     * @var $query QueryBuilder
+     * @var QueryBuilder
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0] . '.apk_status', ':apk_status')
+      $query->expr()->eq($query->getRootAliases()[0].'.apk_status', ':apk_status')
     );
     $query->setParameter('apk_status', Program::APK_READY);
 
     return $query;
   }
 
+  /**
+   * @param $object
+   *
+   * @return string
+   */
+  public function getThumbnailImageUrl($object)
+  {
+    /*
+     * @var $object Program
+     */
+    return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
+  }
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -86,9 +94,9 @@ class ApkListAdmin extends AbstractAdmin
       ->add('id')
       ->add('name')
       ->add('user.username')
-      ->add('apk_request_time');
+      ->add('apk_request_time')
+    ;
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -109,44 +117,27 @@ class ApkListAdmin extends AbstractAdmin
       ->add('thumbnail', 'string', ['template' => 'Admin/program_thumbnail_image_list.html.twig'])
       ->add('apk_status', ChoiceType::class, [
         'choices' => [
-          Program::APK_NONE    => 'none',
+          Program::APK_NONE => 'none',
           Program::APK_PENDING => 'pending',
-          Program::APK_READY   => 'ready',
-        ],])
+          Program::APK_READY => 'ready',
+        ], ])
       ->add('_action', 'actions', [
         'actions' => [
-          'Rebuild'    => [
+          'Rebuild' => [
             'template' => 'Admin/CRUD/list__action_rebuild_apk.html.twig',
           ],
           'Delete Apk' => [
             'template' => 'Admin/CRUD/list__action_delete_apk.html.twig',
           ],
         ],
-      ]);
+      ])
+    ;
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(['list']);
-    $collection->add('rebuildApk', $this->getRouterIdParameter() . '/rebuildApk');
-    $collection->add('deleteApk', $this->getRouterIdParameter() . '/deleteApk');
-  }
-
-
-  /**
-   * @param $object
-   *
-   * @return string
-   */
-  public function getThumbnailImageUrl($object)
-  {
-    /**
-     * @var $object Program
-     */
-    return '/' . $this->screenshot_repository->getThumbnailWebPath($object->getId());
+    $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
+    $collection->add('deleteApk', $this->getRouterIdParameter().'/deleteApk');
   }
 }

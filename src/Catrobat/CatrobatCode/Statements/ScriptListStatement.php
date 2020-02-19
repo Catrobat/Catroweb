@@ -3,12 +3,10 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ScriptListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ScriptListStatement.
  */
 class ScriptListStatement extends Statement
 {
-
   /**
    * ScriptListStatement constructor.
    *
@@ -19,7 +17,7 @@ class ScriptListStatement extends Statement
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces - 1,
-      "", "");
+      '', '');
   }
 
   /**
@@ -29,6 +27,6 @@ class ScriptListStatement extends Statement
    */
   protected function addSpaces($offset = 0)
   {
-    return "";
+    return '';
   }
 }

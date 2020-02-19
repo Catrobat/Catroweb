@@ -3,12 +3,10 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class BaseListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class BaseListStatement.
  */
 class BaseListStatement extends Statement
 {
-
   /**
    * BaseListStatement constructor.
    *
@@ -34,9 +32,8 @@ class BaseListStatement extends Statement
     {
       return '';
     }
-    $code = $this->addSpaces() . parent::getBeginString() . $this->executeChildren() . parent::getEndString();
 
-    return $code;
+    return $this->addSpaces().parent::getBeginString().$this->executeChildren().parent::getEndString();
   }
 
   /**
@@ -48,7 +45,7 @@ class BaseListStatement extends Statement
     $spacesString = parent::addSpaces(1);
     foreach ($this->statements as $value)
     {
-      $code .= $spacesString . $value->execute() . "<br/>";
+      $code .= $spacesString.$value->execute().'<br/>';
     }
 
     return $code;

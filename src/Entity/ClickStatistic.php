@@ -18,7 +18,7 @@ class ClickStatistic
   protected $id;
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=false)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=false)
    */
   protected $type;
 
@@ -37,6 +37,7 @@ class ClickStatistic
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+   *
    * @var Program
    */
   protected $program;
@@ -53,7 +54,7 @@ class ClickStatistic
   protected $recommended_from_program;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+   * @ORM\Column(type="boolean", options={"default": false}, nullable=true)
    */
   protected $user_specific_recommendation = false;
 
@@ -63,17 +64,17 @@ class ClickStatistic
   protected $clicked_at;
 
   /**
-   * @ORM\Column(type="text", options={"default":""})
+   * @ORM\Column(type="text", options={"default": ""})
    */
   protected $ip;
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=true)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
   protected $country_code;
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=true)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
   protected $country_name;
 
@@ -83,7 +84,7 @@ class ClickStatistic
   protected $locale;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
   protected $user_agent;
 
@@ -94,7 +95,7 @@ class ClickStatistic
   protected $user;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
   protected $referrer;
 

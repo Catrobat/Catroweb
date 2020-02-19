@@ -3,13 +3,12 @@
 namespace App\Catrobat\Security;
 
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * Class UserAuthenticator
- * @package App\Catrobat\Security
+ * Class UserAuthenticator.
  */
 class UserAuthenticator
 {
@@ -24,9 +23,6 @@ class UserAuthenticator
 
   /**
    * UserAuthenticator constructor.
-   *
-   * @param UserProviderInterface          $user_provider
-   * @param AuthenticationManagerInterface $authentication_manager
    */
   public function __construct(UserProviderInterface $user_provider, AuthenticationManagerInterface $authentication_manager)
   {

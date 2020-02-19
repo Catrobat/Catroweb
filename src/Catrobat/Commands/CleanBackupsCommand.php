@@ -2,19 +2,16 @@
 
 namespace App\Catrobat\Commands;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-
 /**
- * Class CleanBackupsCommand
- * @package App\Catrobat\Commands
+ * Class CleanBackupsCommand.
  */
 class CleanBackupsCommand extends Command
 {
@@ -30,8 +27,6 @@ class CleanBackupsCommand extends Command
 
   /**
    * CleanBackupsCommand constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -39,37 +34,32 @@ class CleanBackupsCommand extends Command
     $this->parameter_bag = $parameter_bag;
   }
 
-
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:clean:backup')
       ->setDescription('Delete all Backups')
       ->addArgument('backupfile', InputArgument::OPTIONAL, 'backup file (tar.gz)')
-      ->addOption('all', null, InputOption::VALUE_NONE, 'all backups are deleted');
+      ->addOption('all', null, InputOption::VALUE_NONE, 'all backups are deleted')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
 
     $backupdir = realpath($this->parameter_bag->get('catrobat.backup.dir'));
-    if ($input->getOption("all"))
+    if ($input->getOption('all'))
     {
-      $files = glob($backupdir . '/*'); // get all file names
+      $files = glob($backupdir.'/*'); // get all file names
       foreach ($files as $file)
       { // iterate files
         $ext = pathinfo($file, PATHINFO_EXTENSION);
-        if ($ext == "gz" && is_file($file))
+        if ('gz' == $ext && is_file($file))
         {
           unlink($file);
         } // delete file
@@ -78,18 +68,17 @@ class CleanBackupsCommand extends Command
     }
     else
     {
-      if ($input->getArgument("backupfile"))
+      if ($input->getArgument('backupfile'))
       {
-
-        $backupfile = $input->getArgument("backupfile");
+        $backupfile = $input->getArgument('backupfile');
         $files = scandir($backupdir);
-        if (!in_array($backupfile, $files))
+        if (!in_array($backupfile, $files, true))
         {
           throw new Exception('Backupfile not found.');
         }
-        if (is_file($backupdir . "/" . $backupfile))
+        if (is_file($backupdir.'/'.$backupfile))
         {
-          unlink($backupdir . "/" . $backupfile);
+          unlink($backupdir.'/'.$backupfile);
         }
 
         $this->output->writeln('Backup deleted!');
@@ -102,4 +91,4 @@ class CleanBackupsCommand extends Command
 
     return 0;
   }
-} 
+}

@@ -5,12 +5,10 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class LookStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class LookStatement.
  */
 class LookStatement extends Statement
 {
-
   /**
    * @var
    */
@@ -33,7 +31,7 @@ class LookStatement extends Statement
     $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
 
   /**
@@ -45,35 +43,16 @@ class LookStatement extends Statement
 
     $code = '';
 
-    if ($this->value != null)
+    if (null != $this->value)
     {
-      $code = SyntaxHighlightingConstants::VARIABLES . $this->value . SyntaxHighlightingConstants::END;
+      $code = SyntaxHighlightingConstants::VARIABLES.$this->value.SyntaxHighlightingConstants::END;
     }
-    if ($this->fileName != null)
+    if (null != $this->fileName)
     {
-      $code .= ' (filename: ' . $this->fileName->execute() . ')';
+      $code .= ' (filename: '.$this->fileName->execute().')';
     }
 
     return $code;
-  }
-
-
-  /**
-   *
-   */
-  private function findNames()
-  {
-    $tmpStatements = parent::getStatements();
-    foreach ($tmpStatements as $statement)
-    {
-      if ($statement != null)
-      {
-        if ($statement instanceof FileNameStatement)
-        {
-          $this->fileName = $statement;
-        }
-      }
-    }
   }
 
   /**
@@ -90,5 +69,20 @@ class LookStatement extends Statement
   public function getFileName()
   {
     return $this->fileName;
+  }
+
+  private function findNames()
+  {
+    $tmpStatements = parent::getStatements();
+    foreach ($tmpStatements as $statement)
+    {
+      if (null != $statement)
+      {
+        if ($statement instanceof FileNameStatement)
+        {
+          $this->fileName = $statement;
+        }
+      }
+    }
   }
 }

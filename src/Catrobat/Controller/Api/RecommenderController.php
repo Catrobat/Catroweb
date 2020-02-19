@@ -5,21 +5,17 @@ namespace App\Catrobat\Controller\Api;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Catrobat\StatusCode;
-use App\Entity\UserManager;
-use Doctrine\DBAL\Types\GuidType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Entity\UserManager;
 use App\Entity\UserTestGroup;
-use Symfony\Component\HttpKernel\HttpKernel;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RecommenderController
- * @package App\Catrobat\Controller\Api
+ * Class RecommenderController.
  */
 class RecommenderController extends AbstractController
 {
@@ -34,10 +30,7 @@ class RecommenderController extends AbstractController
   private $DEFAULT_OFFSET = 0;
 
   /**
-   *  @Route("/api/projects/recsys.json", name="api_recsys_programs", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @param Request $request
-   * @param ProgramManager $program_manager
+   * @Route("/api/projects/recsys.json", name="api_recsys_programs", defaults={"_format": "json"}, methods={"GET"})
    *
    * @return ProgramListResponse
    */
@@ -55,20 +48,17 @@ class RecommenderController extends AbstractController
     return new ProgramListResponse($programs, $programs_count);
   }
 
-
   /**
-   *  @Route("/api/projects/recsys_specific_projects/{id}.json", name="api_recsys_specific_projects",
-   *   defaults={"_format": "json"},  methods={"GET"})
+   * @Route("/api/projects/recsys_specific_projects/{id}.json", name="api_recsys_specific_projects",
+   * defaults={"_format": "json"},  methods={"GET"})
    *
-   * @param Request $request
    * @param $id
-   * @param ProgramManager $program_manager
    *
    * @return ProgramListResponse|JsonResponse
    */
   public function listRecsysSpecificProgramsAction(Request $request, $id, ProgramManager $program_manager)
   {
-    $is_test_environment = ($this->getParameter('kernel.environment') == 'test');
+    $is_test_environment = ('test' == $this->getParameter('kernel.environment'));
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
 
@@ -76,7 +66,7 @@ class RecommenderController extends AbstractController
 
     /** @var Program $program */
     $program = $program_manager->find($id);
-    if ($program == null)
+    if (null == $program)
     {
       return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
     }
@@ -88,22 +78,17 @@ class RecommenderController extends AbstractController
     return new ProgramListResponse($programs, $programs_count);
   }
 
-
   /**
    * @Route("/api/projects/recsys_general_projects.json", name="api_recsys_general_projects",
-   *   defaults={"_format":"json"}, methods={"GET"})
-   *
-   * @param Request $request
-   * @param UserManager $user_manager
-   * @param RecommenderManager $recommender_manager
+   * defaults={"_format": "json"}, methods={"GET"})
    *
    * @return ProgramListResponse
    */
   public function listRecsysGeneralProgramsAction(Request $request, UserManager $user_manager, RecommenderManager $recommender_manager)
   {
-    $is_test_environment = ( $this->getParameter('kernel.environment') == 'test');
+    $is_test_environment = ('test' == $this->getParameter('kernel.environment'));
     $test_user_id_for_like_recommendation = $is_test_environment ?
-      $request->query->get('test_user_id_for_like_recommendation', 0) : "";
+      $request->query->get('test_user_id_for_like_recommendation', 0) : '';
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
 
@@ -113,9 +98,8 @@ class RecommenderController extends AbstractController
     $programs = [];
     $is_user_specific_recommendation = false;
 
-    $user = ($test_user_id_for_like_recommendation == "") ?
+    $user = ('' == $test_user_id_for_like_recommendation) ?
       $this->getUser() : $user_manager->find($test_user_id_for_like_recommendation);
-
 
     /*
      * This part of the Recommender Controller is currently modified due to an online
@@ -132,7 +116,7 @@ class RecommenderController extends AbstractController
      * unnecessary clutter that will be removed after the online experiment anyway. The
      * behat file will be updated after the online experiment accordingly.
      */
-    if ($is_test_environment && $user != null)
+    if ($is_test_environment && null != $user)
     {
       $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmOne($user, $flavor);
       $programs_count = count($all_programs);
@@ -140,7 +124,7 @@ class RecommenderController extends AbstractController
     }
 
     // Users are assigned to a test group if they aren't already part of one.
-    else if ($user != null)
+    elseif (null != $user)
     {
       $user_id = $user->getId();
       $em = $this->getDoctrine()->getManager();
@@ -173,7 +157,7 @@ class RecommenderController extends AbstractController
     }
 
     // Recommendations for guest user (or logged in users who receive zero recommendations)
-    if (($user == null) || ($programs_count == 0))
+    if ((null == $user) || (0 == $programs_count))
     {
       $all_programs = $recommender_manager->recommendHomepageProgramsForGuests($flavor);
 

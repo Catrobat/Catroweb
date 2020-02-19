@@ -4,14 +4,11 @@ namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
-
 /**
- * Class BaseSetToStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class BaseSetToStatement.
  */
 class BaseSetToStatement extends Statement
 {
-
   /**
    * BaseSetToStatement constructor.
    *
@@ -23,7 +20,7 @@ class BaseSetToStatement extends Statement
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $beginString, $endString)
   {
-    $beginString = "set " . SyntaxHighlightingConstants::VARIABLES . $beginString . SyntaxHighlightingConstants::END . " to (";
+    $beginString = 'set '.SyntaxHighlightingConstants::VARIABLES.$beginString.SyntaxHighlightingConstants::END.' to (';
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $beginString,
       $endString);

@@ -3,12 +3,11 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class TappedScriptStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class TappedScriptStatement.
  */
 class TappedScriptStatement extends Statement
 {
-  private $BEGIN_STRING = "when tapped<br/>";
+  private $BEGIN_STRING = 'when tapped<br/>';
 
   /**
    * TappedScriptStatement constructor.
@@ -21,6 +20,6 @@ class TappedScriptStatement extends Statement
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $this->BEGIN_STRING,
-      "");
+      '');
   }
 }

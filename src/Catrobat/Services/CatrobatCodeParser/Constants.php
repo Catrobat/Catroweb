@@ -3,8 +3,7 @@
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
 /**
- * Class Constants
- * @package App\Catrobat\Services\CatrobatCodeParser
+ * Class Constants.
  */
 class Constants
 {
@@ -20,7 +19,7 @@ class Constants
   const GROUP_ITEM_SPRITE_TYPE = 'GroupItemSprite';
 
   // Bricks & Scripts
-  const UNKNOWN_SCRIPT = "UnknownScript";
+  const UNKNOWN_SCRIPT = 'UnknownScript';
   const UNKNOWN_BRICK = 'UnknownBrick';
 
   // Motion
@@ -68,8 +67,8 @@ class Constants
   const BROADCAST_WAIT_BRICK = 'BroadcastWaitBrick';
   const BROADCAST_RECEIVER_BRICK = 'BroadcastReceiverBrick';
   const WHEN_BRICK = 'WhenBrick';
-  const WHEN_BOUNCE_OFF_SCRIPT = "WhenBounceOffScript";
-  const WHEN_BOUNCE_OFF_BRICK = "WhenBounceOffBrick";
+  const WHEN_BOUNCE_OFF_SCRIPT = 'WhenBounceOffScript';
+  const WHEN_BOUNCE_OFF_BRICK = 'WhenBounceOffBrick';
 
   // --- Looks ---
   const SET_LOOK_BRICK = 'SetLookBrick';
@@ -165,10 +164,10 @@ class Constants
   const ZIG_ZAG_STITCH_BRICK = 'ZigZagStitchBrick';
 
   // --- Lego NXT ---
-  const LEGO_NXT_MOTOR_TURN_ANGLE_BRICK = "LegoNxtMotorTurnAngleBrick";
-  const LEGO_NXT_MOTOR_STOP_BRICK = "LegoNxtMotorStopBrick";
-  const LEGO_NXT_MOTOR_MOVE_BRICK = "LegoNxtMotorMoveBrick";
-  const LEGO_NXT_PLAY_TONE_BRICK = "LegoNxtPlayToneBrick";
+  const LEGO_NXT_MOTOR_TURN_ANGLE_BRICK = 'LegoNxtMotorTurnAngleBrick';
+  const LEGO_NXT_MOTOR_STOP_BRICK = 'LegoNxtMotorStopBrick';
+  const LEGO_NXT_MOTOR_MOVE_BRICK = 'LegoNxtMotorMoveBrick';
+  const LEGO_NXT_PLAY_TONE_BRICK = 'LegoNxtPlayToneBrick';
 
   // --- Lego EV3 ---
   const LEGO_EV3_MOTOR_TURN_ANGLE_BRICK = 'LegoEv3MotorTurnAngleBrick';
@@ -206,43 +205,43 @@ class Constants
   const JUMP_SUMO_TAKING_PICTURE_BRICK = 'JumpingSumoTakingPictureBrick';
 
   // --- Phiro ---
-  const PHIRO_MOTOR_MOVE_FORWARD_BRICK = "PhiroMotorMoveForwardBrick";
-  const PHIRO_MOTOR_MOVE_BACKWARD_BRICK = "PhiroMotorMoveBackwardBrick";
-  const PHIRO_MOTOR_STOP_BRICK = "PhiroMotorStopBrick";
-  const PHIRO_PLAY_TONE_BRICK = "PhiroPlayToneBrick";
-  const PHIRO_RGB_LIGHT_BRICK = "PhiroRGBLightBrick";
-  const PHIRO_IF_LOGIC_BEGIN_BRICK = "PhiroIfLogicBeginBrick";
+  const PHIRO_MOTOR_MOVE_FORWARD_BRICK = 'PhiroMotorMoveForwardBrick';
+  const PHIRO_MOTOR_MOVE_BACKWARD_BRICK = 'PhiroMotorMoveBackwardBrick';
+  const PHIRO_MOTOR_STOP_BRICK = 'PhiroMotorStopBrick';
+  const PHIRO_PLAY_TONE_BRICK = 'PhiroPlayToneBrick';
+  const PHIRO_RGB_LIGHT_BRICK = 'PhiroRGBLightBrick';
+  const PHIRO_IF_LOGIC_BEGIN_BRICK = 'PhiroIfLogicBeginBrick';
 
   // --- Arduino ---
-  const ARDUINO_SEND_DIGITAL_VALUE_BRICK = "ArduinoSendDigitalValueBrick";
-  const ARDUINO_SEND_PMW_VALUE_BRICK = "ArduinoSendPWMValueBrick";
+  const ARDUINO_SEND_DIGITAL_VALUE_BRICK = 'ArduinoSendDigitalValueBrick';
+  const ARDUINO_SEND_PMW_VALUE_BRICK = 'ArduinoSendPWMValueBrick';
 
   // --- Chromecast ---
   const WHEN_GAME_PAD_BUTTON_SCRIPT = 'WhenGamepadButtonScript';
   const WHEN_GAME_PAD_BUTTON_BRICK = 'WhenGamepadButtonBrick';
 
   // --- Raspberry Pi ---
-  const WHEN_RASPI_PIN_CHANGED_BRICK = "WhenRaspiPinChangedBrick";
-  const WHEN_RASPI_PIN_CHANGED_SCRIPT = "RaspiInterruptScript";
-  const RASPI_IF_LOGIC_BEGIN_BRICK = "RaspiIfLogicBeginBrick";
-  const RASPI_SEND_DIGITAL_VALUE_BRICK = "RaspiSendDigitalValueBrick";
-  const RASPI_PWM_BRICK = "RaspiPwmBrick";
+  const WHEN_RASPI_PIN_CHANGED_BRICK = 'WhenRaspiPinChangedBrick';
+  const WHEN_RASPI_PIN_CHANGED_SCRIPT = 'RaspiInterruptScript';
+  const RASPI_IF_LOGIC_BEGIN_BRICK = 'RaspiIfLogicBeginBrick';
+  const RASPI_SEND_DIGITAL_VALUE_BRICK = 'RaspiSendDigitalValueBrick';
+  const RASPI_PWM_BRICK = 'RaspiPwmBrick';
 
   // --- NFC ---
-  const WHEN_NFC_SCRIPT = "WhenNfcScript";
-  const WHEN_NFC_BRICK = "WhenNfcBrick";
-  const SET_NFC_TAG_BRICK = "SetNfcTagBrick";
+  const WHEN_NFC_SCRIPT = 'WhenNfcScript';
+  const WHEN_NFC_BRICK = 'WhenNfcBrick';
+  const SET_NFC_TAG_BRICK = 'SetNfcTagBrick';
 
   // --- Testing
-  const ASSERT_EQUALS_BRICK = "AssertEqualsBrick";
-  const WAIT_TILL_IDLE_BRICK = "WaitTillIdleBrick";
-  const TAP_AT_BRICK = "TapAtBrick";
-  const FINISH_STAGE_BRICK = "FinishStageBrick";
+  const ASSERT_EQUALS_BRICK = 'AssertEqualsBrick';
+  const WAIT_TILL_IDLE_BRICK = 'WaitTillIdleBrick';
+  const TAP_AT_BRICK = 'TapAtBrick';
+  const FINISH_STAGE_BRICK = 'FinishStageBrick';
 
   // --- Deprecated old bricks - to still provide old projects with correct statistics
   //                             even when the app is not using those bricks anymore
   const COLLISION_SCRIPT = 'CollisionScript';
-  const LOOP_ENDLESS_BRICK = "LoopEndlessBrick";
+  const LOOP_ENDLESS_BRICK = 'LoopEndlessBrick';
 
   // -------------------------------------------------------------------------------------------------------------------
   // Brick/Script Images -> needed for code view + to decide which brick belongs to which group
@@ -381,5 +380,5 @@ class Constants
   const OR_OPERATOR = 'LOGICAL_OR';
 
   const POINTED_OBJECT_TAG = 'pointedObject';
-  const LOOK_INDEX = "LOOK_INDEX";
+  const LOOK_INDEX = 'LOOK_INDEX';
 }

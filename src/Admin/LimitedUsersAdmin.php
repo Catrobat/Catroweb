@@ -3,18 +3,15 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-
 
 /**
- * Class LimitedUsersAdmin
- * @package App\Admin
+ * Class LimitedUsersAdmin.
  */
 class LimitedUsersAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -24,7 +21,6 @@ class LimitedUsersAdmin extends AbstractAdmin
    * @var string
    */
   protected $baseRoutePattern = 'limited_users';
-
 
   /**
    * @param ListMapper $listMapper
@@ -38,9 +34,9 @@ class LimitedUsersAdmin extends AbstractAdmin
       ->add('email')
       ->add('limited', 'boolean', [
         'editable' => true,
-      ]);
+      ])
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -53,13 +49,10 @@ class LimitedUsersAdmin extends AbstractAdmin
       'show_filter' => true,
     ])
       ->add('email')
-      ->add('limited');
+      ->add('limited')
+    ;
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept([

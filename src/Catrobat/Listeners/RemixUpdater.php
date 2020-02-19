@@ -2,25 +2,22 @@
 
 namespace App\Catrobat\Listeners;
 
+use App\Catrobat\Events\ProgramAfterInsertEvent;
+use App\Catrobat\Services\AsyncHttpClient;
+use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Entity\RemixManager;
-use App\Catrobat\Events\ProgramAfterInsertEvent;
-use App\Catrobat\Services\ExtractedCatrobatFile;
-use App\Catrobat\Services\AsyncHttpClient;
-use App\Catrobat\Services\RemixData;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-
 /**
- * Class RemixUpdater
- * @package App\Catrobat\Listeners
+ * Class RemixUpdater.
  */
 class RemixUpdater
 {
   const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
   /**
-   * @var RemixManager The remix manager.
+   * @var RemixManager the remix manager
    */
   private $remix_manager;
 
@@ -30,7 +27,7 @@ class RemixUpdater
   private $async_http_client;
 
   /**
-   * @var RouterInterface The router.
+   * @var RouterInterface the router
    */
   private $router;
 
@@ -42,10 +39,7 @@ class RemixUpdater
   /**
    * RemixUpdater constructor.
    *
-   * @param RemixManager    $remix_manager
-   * @param AsyncHttpClient $async_http_client
-   * @param RouterInterface $router
-   * @param                 $kernel_root_dir
+   * @param $kernel_root_dir
    */
   public function __construct(RemixManager $remix_manager, AsyncHttpClient $async_http_client, RouterInterface $router,
                               $kernel_root_dir)
@@ -54,12 +48,10 @@ class RemixUpdater
     $this->async_http_client = $async_http_client;
     $this->router = $router;
     $app_root_dir = $kernel_root_dir;
-    $this->migration_lock_file_path = $app_root_dir . '/' . self::MIGRATION_LOCK_FILE_NAME;
+    $this->migration_lock_file_path = $app_root_dir.'/'.self::MIGRATION_LOCK_FILE_NAME;
   }
 
   /**
-   * @param ProgramAfterInsertEvent $event
-   *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
    */
@@ -69,9 +61,6 @@ class RemixUpdater
   }
 
   /**
-   * @param ExtractedCatrobatFile $file
-   * @param Program               $program
-   *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
    */
@@ -82,8 +71,9 @@ class RemixUpdater
       $program->isInitialVersion(),
       $this->remix_manager->getProgramRepository()
     );
-    $scratch_remixes_data = array_filter($remixes_data, function ($remix_data) {
-      /**
+    $scratch_remixes_data = array_filter($remixes_data, function ($remix_data)
+    {
+      /*
        * @var $remix_data RemixData
        */
       return $remix_data->isScratchProgram();
@@ -102,8 +92,9 @@ class RemixUpdater
 
     if (count($scratch_remixes_data) > 0)
     {
-      $scratch_ids = array_map(function ($data) {
-        /**
+      $scratch_ids = array_map(function ($data)
+      {
+        /*
          * @var $data RemixData
          */
         return $data->getProgramId();

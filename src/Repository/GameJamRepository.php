@@ -11,25 +11,21 @@ use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 
-
 /**
- * Class GameJamRepository
- * @package App\Repository
+ * Class GameJamRepository.
  */
 class GameJamRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, GameJam::class);
   }
 
   /**
-   * @return mixed
    * @throws NonUniqueResultException
    * @throws Exception
+   *
+   * @return mixed
    */
   public function getCurrentGameJam()
   {
@@ -44,8 +40,9 @@ class GameJamRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return mixed
    * @throws NonUniqueResultException
+   *
+   * @return mixed
    */
   public function getLatestGameJam()
   {
@@ -61,8 +58,9 @@ class GameJamRepository extends ServiceEntityRepository
   /**
    * @param $flavor
    *
-   * @return mixed
    * @throws NonUniqueResultException
+   *
+   * @return mixed
    */
   public function getLatestGameJamByFlavor($flavor)
   {

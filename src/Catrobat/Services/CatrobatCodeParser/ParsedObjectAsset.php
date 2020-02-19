@@ -2,12 +2,10 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
-
 use SimpleXMLElement;
 
 /**
- * Class ParsedObjectAsset
- * @package App\Catrobat\Services\CatrobatCodeParser
+ * Class ParsedObjectAsset.
  */
 class ParsedObjectAsset
 {
@@ -26,8 +24,6 @@ class ParsedObjectAsset
 
   /**
    * ParsedObjectAsset constructor.
-   *
-   * @param SimpleXMLElement $asset_xml_properties
    */
   public function __construct(SimpleXMLElement $asset_xml_properties)
   {

@@ -3,8 +3,7 @@
 namespace App\Catrobat\Services;
 
 /**
- * Class TokenGenerator
- * @package App\Catrobat\Services
+ * Class TokenGenerator.
  */
 class TokenGenerator
 {

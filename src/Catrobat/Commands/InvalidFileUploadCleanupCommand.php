@@ -14,8 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Class InvalidFileUploadCleanupCommand
- * @package App\Catrobat\Commands
+ * Class InvalidFileUploadCleanupCommand.
  */
 class InvalidFileUploadCleanupCommand extends Command
 {
@@ -36,10 +35,6 @@ class InvalidFileUploadCleanupCommand extends Command
 
   /**
    * InvalidFileUploadCleanupCommand constructor.
-   *
-   * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface $parameter_bag
-   * @param ProgramRepository $program_repository
    */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag,
                               ProgramRepository $program_repository)
@@ -50,24 +45,20 @@ class InvalidFileUploadCleanupCommand extends Command
     $this->program_repository = $program_repository;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:clean:invalid-upload')
       ->setDescription('Sets all files given in command file to invisible.
       File is just given by name (not path) and has to be located in Commands/invisible_programs')
-      ->addArgument('file', InputArgument::REQUIRED, 'File with the programs that terminate with 528 error');
+      ->addArgument('file', InputArgument::REQUIRED, 'File with the programs that terminate with 528 error')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
-   *
-   * @return int|void|null
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -91,15 +82,15 @@ class InvalidFileUploadCleanupCommand extends Command
       $program = $this->program_repository->find($id);
       if (!$program)
       {
-        $output->writeln("[Error] Program with id <" . $id . "> doesnt exist! Skipping...");
+        $output->writeln('[Error] Program with id <'.$id.'> doesnt exist! Skipping...');
         continue;
       }
       $program->setVisible(false);
-      $output->writeln($program->getName() . ' set to invisible');
+      $output->writeln($program->getName().' set to invisible');
       $this->entity_manager->persist($program);
     }
     $this->entity_manager->flush();
-    $fs->copy($folder . $file_name, $folder . "/executed/" . date('Y-m-d_H:i:s') . '_done');
-    $fs->remove($folder . $file_name);
+    $fs->copy($folder.$file_name, $folder.'/executed/'.date('Y-m-d_H:i:s').'_done');
+    $fs->remove($folder.$file_name);
   }
-} 
+}

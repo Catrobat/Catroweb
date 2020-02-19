@@ -3,12 +3,11 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class SoundListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class SoundListStatement.
  */
 class SoundListStatement extends BaseListStatement
 {
-  const BEGIN_STRING = "used sounds: <br/>";
+  const BEGIN_STRING = 'used sounds: <br/>';
 
   /**
    * SoundListStatement constructor.
@@ -21,7 +20,6 @@ class SoundListStatement extends BaseListStatement
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
-      "");
+      '');
   }
-
 }

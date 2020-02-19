@@ -6,22 +6,16 @@ use App\Entity\Program;
 use App\Entity\ProgramLike;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\Expr\Join;
-
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class ProgramLikeRepository
- * @package App\Repository
+ * Class ProgramLikeRepository.
  */
 class ProgramLikeRepository extends ServiceEntityRepository
 {
-
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, ProgramLike::class);
@@ -45,7 +39,8 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->setParameter(':type', $type)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
 
     return count($result);
   }
@@ -62,9 +57,11 @@ class ProgramLikeRepository extends ServiceEntityRepository
     $qb
       ->select('l.type')->distinct()
       ->where($qb->expr()->eq('l.program_id', ':program_id'))
-      ->setParameter(':program_id', $project_id);
+      ->setParameter(':program_id', $project_id)
+    ;
 
-    return array_map(function ($x) {
+    return array_map(function ($x)
+    {
       return $x['type'];
     }, $qb->getQuery()->getResult());
   }
@@ -84,7 +81,8 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->setParameter(':program_id', $program_id)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
 
     return count($result);
   }
@@ -116,13 +114,12 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->setParameter('flavor', $flavor)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
-   * @param Program $project
-   * @param User    $user
-   * @param         $type
+   * @param $type
    *
    * @throws ORMException
    */
@@ -140,9 +137,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param Program $project
-   * @param User    $user
-   * @param         $type
+   * @param $type
    */
   public function removeLike(Program $project, User $user, $type)
   {
@@ -153,15 +148,14 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->eq('l.type', ':type'))
       ->setParameter(':program_id', $project->getId())
       ->setParameter(':user_id', $user->getId())
-      ->setParameter(':type', $type);
+      ->setParameter(':type', $type)
+    ;
 
     $qb->getQuery()->execute();
   }
 
   /**
-   * @param Program $project
-   * @param User    $user
-   * @param         $type
+   * @param $type
    *
    * @return bool
    */
@@ -174,12 +168,14 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->eq('l.type', ':type'))
       ->setParameter(':program_id', $project->getId())
       ->setParameter(':user_id', $user->getId())
-      ->setParameter(':type', $type);
+      ->setParameter(':type', $type)
+    ;
 
     try
     {
       $count = $qb->getQuery()->getSingleScalarResult();
-    } catch (NonUniqueResultException $exception)
+    }
+    catch (NonUniqueResultException $exception)
     {
       return false;
     }
@@ -188,12 +184,11 @@ class ProgramLikeRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param Program $project
-   * @param User    $user
-   * @param         $type
+   * @param $type
+   *
+   * @throws NonUniqueResultException
    *
    * @return bool
-   * @throws NonUniqueResultException
    */
   public function areThereOtherLikeTypes(Program $project, User $user, $type)
   {
@@ -204,11 +199,11 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->neq('l.type', ':type'))
       ->setParameter(':program_id', $project->getId())
       ->setParameter(':user_id', $user->getId())
-      ->setParameter(':type', $type);
+      ->setParameter(':type', $type)
+    ;
 
     $count = $qb->getQuery()->getSingleScalarResult();
 
     return ctype_digit($count) && $count > 0;
   }
-
 }

@@ -4,14 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="media_package_file")
  */
 class MediaPackageFile
 {
-
   /**
    * @var
    */
@@ -65,7 +63,7 @@ class MediaPackageFile
   protected $downloads = 0;
 
   /**
-   * @ORM\Column(type="string", options={"default":"pocketcode"}, nullable=true)
+   * @ORM\Column(type="string", options={"default": "pocketcode"}, nullable=true)
    */
   protected $flavor = 'pocketcode';
 
@@ -75,7 +73,7 @@ class MediaPackageFile
   protected $author;
 
   /**
-   * @return boolean
+   * @return bool
    */
   public function getActive()
   {
@@ -277,6 +275,4 @@ class MediaPackageFile
   {
     $this->author = $author;
   }
-
-
 }

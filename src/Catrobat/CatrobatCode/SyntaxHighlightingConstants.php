@@ -2,10 +2,8 @@
 
 namespace App\Catrobat\CatrobatCode;
 
-
 /**
- * Class SyntaxHighlightingConstants
- * @package App\Catrobat\CatrobatCode
+ * Class SyntaxHighlightingConstants.
  */
 class SyntaxHighlightingConstants
 {

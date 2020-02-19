@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class MissingXmlException
- * @package App\Catrobat\Exceptions\Upload
+ * Class MissingXmlException.
  */
 class MissingXmlException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class MissingXmlException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("errors.xml.missing", StatusCode::PROJECT_XML_MISSING);
+    parent::__construct('errors.xml.missing', StatusCode::PROJECT_XML_MISSING);
   }
 }

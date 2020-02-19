@@ -8,14 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
- * Class SearchController
- * @package App\Catrobat\Controller\Api
+ * Class SearchController.
  */
 class SearchController extends AbstractController
 {
-
   /**
    * @var int
    */
@@ -26,30 +23,26 @@ class SearchController extends AbstractController
    */
   private $DEFAULT_OFFSET = 0;
 
-
   /**
-   *
    * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"},
-   *    methods={"GET"})
+   * methods={"GET"})
    *
-   * @param Request        $request
-   * @param ProgramManager $program_manager
+   * @throws \Exception
    *
    * @return ProgramListResponse
-   * @throws \Exception
    */
   public function searchProgramsAction(Request $request, ProgramManager $program_manager)
   {
     $query = $request->query->get('q');
 
-    $query = str_replace("yahoo", "", $query);
-    $query = str_replace("gmail", "", $query);
-    $query = str_replace("gmx", "", $query);
+    $query = str_replace('yahoo', '', $query);
+    $query = str_replace('gmail', '', $query);
+    $query = str_replace('gmx', '', $query);
     $query = trim($query);
 
     $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
     $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
-    $max_version = $request->query->get('max_version', "0");
+    $max_version = $request->query->get('max_version', '0');
 
     $programs = $program_manager->search($query, $limit, $offset, $max_version);
     // we can't count the results since we apply limit and offset.
@@ -60,13 +53,9 @@ class SearchController extends AbstractController
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
 
-
   /**
    * @Route("/api/projects/search/tagProjects.json", name="api_search_tag",
-   *   defaults={"_format":"json"}, methods={"GET"})
-   *
-   * @param Request        $request
-   * @param ProgramManager $program_manager
+   * defaults={"_format": "json"}, methods={"GET"})
    *
    * @return ProgramListResponse
    */
@@ -82,13 +71,10 @@ class SearchController extends AbstractController
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
 
-
   /**
    * @Route("/api/projects/search/extensionProjects.json", name="api_search_extension",
-   *                                                       defaults={"_format": "json"},
-   *                                                       methods={"GET"})
-   * @param Request        $request
-   * @param ProgramManager $program_manager
+   *     defaults={"_format": "json"},
+   * methods={"GET"})
    *
    * @return ProgramListResponse
    */
@@ -103,5 +89,4 @@ class SearchController extends AbstractController
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
-
 }

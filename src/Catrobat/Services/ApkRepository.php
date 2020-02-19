@@ -7,8 +7,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class ApkRepository
- * @package App\Catrobat\Services
+ * Class ApkRepository.
  */
 class ApkRepository
 {
@@ -19,8 +18,6 @@ class ApkRepository
 
   /**
    * ApkRepository constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -29,7 +26,7 @@ class ApkRepository
 
     if (!is_dir($dir))
     {
-      throw new InvalidStorageDirectoryException($dir . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($dir.' is not a valid directory');
     }
 
     $this->dir = $dir;
@@ -49,7 +46,7 @@ class ApkRepository
    */
   public function remove($id)
   {
-    $path = $this->dir . $this->generateFileNameFromId($id);
+    $path = $this->dir.$this->generateFileNameFromId($id);
     if (is_file($path))
     {
       unlink($path);
@@ -59,20 +56,20 @@ class ApkRepository
   /**
    * @param $id
    *
-   * @return string
+   * @return File
    */
-  private function generateFileNameFromId($id)
+  public function getProgramFile($id)
   {
-    return $id . '.apk';
+    return new File($this->dir.$this->generateFileNameFromId($id));
   }
 
   /**
    * @param $id
    *
-   * @return File
+   * @return string
    */
-  public function getProgramFile($id)
+  private function generateFileNameFromId($id)
   {
-    return new File($this->dir . $this->generateFileNameFromId($id));
+    return $id.'.apk';
   }
 }

@@ -3,33 +3,31 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\MigrationFileLock;
-use App\Entity\RemixManager;
-use App\Entity\User;
+use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
-use App\Catrobat\Services\AsyncHttpClient;
+use App\Entity\ProgramManager;
+use App\Entity\RemixManager;
+use App\Entity\User;
+use App\Entity\UserManager;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Exception;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use App\Entity\ProgramManager;
-use App\Entity\UserManager;
 use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Symfony\Component\Console\Helper\ProgressBar;
-
 
 /**
- * Class MigrateRemixGraphsCommand
- * @package App\Catrobat\Commands
+ * Class MigrateRemixGraphsCommand.
  */
 class MigrateRemixGraphsCommand extends Command
 {
@@ -79,18 +77,13 @@ class MigrateRemixGraphsCommand extends Command
   private $migration_file_lock;
 
   /**
-   * @var CatrobatFileExtractor $file_extractor
+   * @var CatrobatFileExtractor
    */
   private $file_extractor;
 
   /**
    * MigrateRemixGraphsCommand constructor.
    *
-   * @param Filesystem $filesystem
-   * @param UserManager $user_manager
-   * @param ProgramManager $program_manager
-   * @param RemixManager $remix_manager
-   * @param EntityManagerInterface $entity_manager
    * @param CatrobatFileExtractor file_extractor
    * @param $kernel_root_dir
    */
@@ -110,19 +103,6 @@ class MigrateRemixGraphsCommand extends Command
     $this->output = null;
     $this->migration_file_lock = null;
     $this->file_extractor = $file_extractor;
-  }
-
-  /**
-   *
-   */
-  protected function configure()
-  {
-    $this->setName('catrobat:remixgraph:migrate')
-      ->setDescription('Imports remix graphs from all XML files of uploaded programs to database')
-      ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
-      ->addArgument('user', InputArgument::OPTIONAL, 'User who will be the owner of these programs ' .
-        '(only required if --debug-import-missing-programs is set)')
-      ->addOption('debug-import-missing-programs', InputOption::VALUE_OPTIONAL);
   }
 
   /**
@@ -146,21 +126,30 @@ class MigrateRemixGraphsCommand extends Command
         $this->output->writeln('[SignalHandler] SigUsr1 detected');
         break;
       default:
-        $this->output->writeln('[SignalHandler] Signal ' . $signal_number . ' detected');
+        $this->output->writeln('[SignalHandler] Signal '.$signal_number.' detected');
     }
 
     $this->migration_file_lock->unlock();
     exit(-1);
   }
 
+  protected function configure()
+  {
+    $this->setName('catrobat:remixgraph:migrate')
+      ->setDescription('Imports remix graphs from all XML files of uploaded programs to database')
+      ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
+      ->addArgument('user', InputArgument::OPTIONAL, 'User who will be the owner of these programs '.
+        '(only required if --debug-import-missing-programs is set)')
+      ->addOption('debug-import-missing-programs', InputOption::VALUE_OPTIONAL)
+    ;
+  }
+
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
-   *
-   * @return int|void|null
    * @throws \Doctrine\Common\Persistence\Mapping\MappingException
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -177,12 +166,12 @@ class MigrateRemixGraphsCommand extends Command
 
     if (!is_dir($directory))
     {
-      $output->writeln("Given directory does not exist!");
+      $output->writeln('Given directory does not exist!');
 
       return;
     }
 
-    $directory = (substr($directory, -1) != '/') ? $directory . '/' : $directory;
+    $directory = ('/' != substr($directory, -1)) ? $directory.'/' : $directory;
 
     if ($is_debug_import_missing_programs)
     {
@@ -194,8 +183,7 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param OutputInterface $output
-   * @param                 $directory
+   * @param $directory
    *
    * @throws \Doctrine\Common\Persistence\Mapping\MappingException
    * @throws \Doctrine\ORM\ORMException
@@ -205,12 +193,12 @@ class MigrateRemixGraphsCommand extends Command
   private function migrateRemixDataOfExistingPrograms(OutputInterface $output, $directory)
   {
     /**
-     * @var $program Program
-     * @var $unmigrated_program Program
+     * @var Program
+     * @var Program $unmigrated_program
      */
     $migration_start_time = new DateTime();
     $progress_bar_format_simple = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
-    $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | ' .
+    $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | '.
       'ETA: %estimated:-6s% | Status: %message%';
 
     //==============================================================================================================
@@ -238,25 +226,25 @@ class MigrateRemixGraphsCommand extends Command
     $previous_program_id = 0;
     $remix_data_map = [];
 
-    while (($program_id = $this->program_manager->findNext($previous_program_id)) != null)
+    while (null != ($program_id = $this->program_manager->findNext($previous_program_id)))
     {
-      $program_file_path = $directory . $program_id . '.catrobat';
+      $program_file_path = $directory.$program_id.'.catrobat';
       $program = $this->program_manager->find($program_id);
-      assert($program != null);
-      $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, "...");
+      assert(null != $program);
+      $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($program_file_path, $program_id, $truncated_program_name, $output, $progress_bar);
-      if ($result['languageVersion'] == '0.0')
+      if ('0.0' == $result['languageVersion'])
       {
         ++$skipped;
       }
 
-      $progress_bar->setMessage('Migrating forward remixes of "' . $truncated_program_name . '" (#' . $program_id . ')');
+      $progress_bar->setMessage('Migrating forward remixes of "'.$truncated_program_name.'" (#'.$program_id.')');
       $remix_data_map[$program_id] = $result['fullRemixData'];
       $this->addRemixData($program, $result['remixDataOnlyForwardParents'], false);
 
       $progress_bar->clear();
-      $output->writeln('Migrated forward remix data of "' . $truncated_program_name . '" (#' . $program_id . ')');
+      $output->writeln('Migrated forward remix data of "'.$truncated_program_name.'" (#'.$program_id.')');
       $progress_bar->advance();
       $progress_bar->display();
       $previous_program_id = $program_id;
@@ -266,8 +254,8 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
-    $output->writeln('<info>Migrated only forward remixes of ' . count($remix_data_map) .
-      ' programs (Skipped ' . $skipped . ') Duration: ' . $duration . '</info>');
+    $output->writeln('<info>Migrated only forward remixes of '.count($remix_data_map).
+      ' programs (Skipped '.$skipped.') Duration: '.$duration.'</info>');
 
     //==============================================================================================================
     // (4) now, all programs have been visited by the foreach-loop above:
@@ -283,13 +271,13 @@ class MigrateRemixGraphsCommand extends Command
     foreach ($all_program_ids as $program_id)
     {
       $program = $this->program_manager->find($program_id);
-      $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, "...");
+      $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, '...');
 
-      $progress_bar->setMessage('Migrating remaining remixes of "' . $truncated_program_name . '" (#' . $program_id . ')');
+      $progress_bar->setMessage('Migrating remaining remixes of "'.$truncated_program_name.'" (#'.$program_id.')');
       $this->addRemixData($program, $remix_data_map[$program_id], true);
 
       $progress_bar->clear();
-      $output->writeln('Migrated remaining remixes of "' . $truncated_program_name . '" (#' . $program_id . ')');
+      $output->writeln('Migrated remaining remixes of "'.$truncated_program_name.'" (#'.$program_id.')');
       $progress_bar->advance();
       $progress_bar->display();
     }
@@ -298,8 +286,8 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
-    $output->writeln('<info>Migrated remaining remixes of ' . count($remix_data_map) .
-      ' programs (Skipped ' . $skipped . ') Duration: ' . $duration . '</info>');
+    $output->writeln('<info>Migrated remaining remixes of '.count($remix_data_map).
+      ' programs (Skipped '.$skipped.') Duration: '.$duration.'</info>');
 
     //==============================================================================================================
     // (5) migrate remix data of all programs that have been uploaded by users during migration!
@@ -310,24 +298,24 @@ class MigrateRemixGraphsCommand extends Command
     $intermediate_uploads = 0;
     $skipped = 0;
 
-    while (($unmigrated_program = $this->program_manager->findOneByRemixMigratedAt(null)) != null)
+    while (null != ($unmigrated_program = $this->program_manager->findOneByRemixMigratedAt(null)))
     {
-      $program_file_path = $directory . $program_id . '/';
+      $program_file_path = $directory.$program_id.'/';
       $program_id = $unmigrated_program->getId();
-      $truncated_program_name = mb_strimwidth($unmigrated_program->getName(), 0, 12, "...");
+      $truncated_program_name = mb_strimwidth($unmigrated_program->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($program_file_path, $program_id, $unmigrated_program->getName(), $output, $progress_bar);
-      if ($result['languageVersion'] == '0.0')
+      if ('0.0' == $result['languageVersion'])
       {
         ++$skipped;
       }
 
-      $progress_bar->setMessage('Migrating all remixes of "' . $truncated_program_name . '" (#' . $program_id .
+      $progress_bar->setMessage('Migrating all remixes of "'.$truncated_program_name.'" (#'.$program_id.
         ') that has been uploaded in the meantime');
       $this->addRemixData($unmigrated_program, $result['fullRemixData'], true);
 
       $progress_bar->clear();
-      $output->writeln('Migrated all remixes of "' . $truncated_program_name . '" (#' . $program_id . ')');
+      $output->writeln('Migrated all remixes of "'.$truncated_program_name.'" (#'.$program_id.')');
       $progress_bar->advance();
       $progress_bar->display();
       ++$intermediate_uploads;
@@ -337,8 +325,8 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
-    $output->writeln('<info>Migrated remixes of ' . $intermediate_uploads . ' programs uploaded ' .
-      'during migration (Skipped ' . $skipped . ') Duration: ' . $duration . '</info>');
+    $output->writeln('<info>Migrated remixes of '.$intermediate_uploads.' programs uploaded '.
+      'during migration (Skipped '.$skipped.') Duration: '.$duration.'</info>');
 
     //==============================================================================================================
     // (6) unlock
@@ -354,11 +342,9 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param                 $program_file_path
-   * @param                 $program_id
-   * @param                 $program_name
-   * @param OutputInterface $output
-   * @param ProgressBar     $progress_bar
+   * @param $program_file_path
+   * @param $program_id
+   * @param $program_name
    *
    * @return array
    */
@@ -366,32 +352,33 @@ class MigrateRemixGraphsCommand extends Command
   {
     $extracted_file = null;
 
-    $progress_bar->setMessage('Extracting XML of program #' . $program_id . ' "' . $program_name . '"');
+    $progress_bar->setMessage('Extracting XML of program #'.$program_id.' "'.$program_name.'"');
 
     try
     {
       $program_file = new File($program_file_path);
       //$extracted_file = new ExtractedCatrobatFile($program_file_path, $program_file_path, null);
       $extracted_file = $this->file_extractor->extract($program_file);
-    } catch (Exception $ex)
+    }
+    catch (Exception $ex)
     {
       $progress_bar->clear();
-      $output->writeln('<error>Cannot find Catrobat file of Program #' . $program_id .
-        ', path of Catrobat file: ' . $program_file_path . '</error>');
+      $output->writeln('<error>Cannot find Catrobat file of Program #'.$program_id.
+        ', path of Catrobat file: '.$program_file_path.'</error>');
       $progress_bar->display();
     }
 
     $empty_result = ['remixDataOnlyForwardParents' => [], 'fullRemixData' => [], 'languageVersion' => '0.0'];
     $result = $empty_result;
 
-    if ($extracted_file != null)
+    if (null != $extracted_file)
     {
       //----------------------------------------------------------------------------------------------------------
       // NOTE: this is a workaround only needed for migration purposes in order to stay backward compatible
       //       with older XML files -> do not change order here
       //----------------------------------------------------------------------------------------------------------
       $url_data = $extracted_file->getRemixesData(PHP_INT_MAX, true, false);
-      assert(count($url_data) == 1, 'WTH! This program has multiple urls with different program IDs?!!');
+      assert(1 == count($url_data), 'WTH! This program has multiple urls with different program IDs?!!');
       assert($url_data[0]->getProgramId() == $program_id);
 
       //$remix_of_string = $extracted_file->getRemixMigrationUrlsString();
@@ -401,8 +388,8 @@ class MigrateRemixGraphsCommand extends Command
 
       $result = [
         'remixDataOnlyForwardParents' => $remix_data_only_forward_parents,
-        'fullRemixData'               => $full_remix_data,
-        'languageVersion'             => $language_version,
+        'fullRemixData' => $full_remix_data,
+        'languageVersion' => $language_version,
       ];
     }
 
@@ -411,8 +398,8 @@ class MigrateRemixGraphsCommand extends Command
     if (version_compare($result['languageVersion'], '0.992', '<=') && (count($result['fullRemixData']) >= 2))
     {
       $progress_bar->clear();
-      $output->writeln('<error>Could not migrate remixes of MERGED program ' . $program_id .
-        ' - version too old: ' . $result['languageVersion'] . '</error>');
+      $output->writeln('<error>Could not migrate remixes of MERGED program '.$program_id.
+        ' - version too old: '.$result['languageVersion'].'</error>');
       $progress_bar->display();
       $result = $empty_result;
     }
@@ -421,9 +408,7 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param Program $program
-   * @param array   $remixes_data
-   * @param bool    $is_update
+   * @param bool $is_update
    *
    * @throws \Doctrine\Common\Persistence\Mapping\MappingException
    * @throws \Doctrine\ORM\ORMException
@@ -431,9 +416,10 @@ class MigrateRemixGraphsCommand extends Command
    */
   private function addRemixData(Program $program, array $remixes_data, $is_update = false)
   {
-    assert($program != null);
-    $scratch_remixes_data = array_filter($remixes_data, function ($remix_data) {
-      /**
+    assert(null != $program);
+    $scratch_remixes_data = array_filter($remixes_data, function ($remix_data)
+    {
+      /*
        * @var RemixData $remix_data
        */
       return $remix_data->isScratchProgram();
@@ -442,8 +428,9 @@ class MigrateRemixGraphsCommand extends Command
 
     if (count($scratch_remixes_data) > 0)
     {
-      $scratch_ids = array_map(function ($data) {
-        /**
+      $scratch_ids = array_map(function ($data)
+      {
+        /*
          * @var $data RemixData
          */
         return $data->getProgramId();
@@ -466,9 +453,8 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param OutputInterface $output
-   * @param                 $directory
-   * @param                 $username
+   * @param $directory
+   * @param $username
    *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
@@ -479,7 +465,7 @@ class MigrateRemixGraphsCommand extends Command
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
 
-    if ($finder->count() == 0)
+    if (0 == $finder->count())
     {
       $output->writeln('No catrobat files found');
 
@@ -487,9 +473,9 @@ class MigrateRemixGraphsCommand extends Command
     }
 
     $user = $this->user_manager->findUserByUsername($username);
-    if ($user == null)
+    if (null == $user)
     {
-      $output->writeln('User "' . $username . '" was not found! You must pass a valid username ' .
+      $output->writeln('User "'.$username.'" was not found! You must pass a valid username '.
         'as the user argument in order to use --debug-import-missing-programs!');
 
       return;
@@ -501,7 +487,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->start();
     $number_imported_programs = 0;
 
-    $metadata = $this->entity_manager->getClassMetaData("App\Entity\Program");
+    $metadata = $this->entity_manager->getClassMetaData('App\\Entity\\Program');
     $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     $batch_size = 300;
@@ -509,7 +495,7 @@ class MigrateRemixGraphsCommand extends Command
     foreach ($finder as $program_file_path)
     {
       /**
-       * @var $user User
+       * @var User
        */
       $program_file = new File($program_file_path);
       $extracted_file = $this->file_extractor->extract($program_file);
@@ -518,10 +504,10 @@ class MigrateRemixGraphsCommand extends Command
       $original_program_data = new RemixData($url_string);
       $program_id = $original_program_data->getProgramId();
 
-      $progress_bar->setMessage('Importing program ' . $extracted_file->getName() . ' (#' . $program_id . ')');
+      $progress_bar->setMessage('Importing program '.$extracted_file->getName().' (#'.$program_id.')');
       $progress_bar->advance();
 
-      if ($this->program_manager->find($program_id) != null)
+      if (null != $this->program_manager->find($program_id))
       {
         ++$skipped;
         continue;
@@ -530,10 +516,10 @@ class MigrateRemixGraphsCommand extends Command
       $language_version = $extracted_file->getLanguageVersion();
 
       // ignore old programs except for manually changed ones - because FU
-      if (version_compare($language_version, '0.8', '<') && $program_id != 821)
+      if (version_compare($language_version, '0.8', '<') && 821 != $program_id)
       {
         $progress_bar->clear();
-        $output->writeln('<error>Could not import program ' . $program_id . ' - version too old: ' . $language_version . '</error>');
+        $output->writeln('<error>Could not import program '.$program_id.' - version too old: '.$language_version.'</error>');
         $progress_bar->display();
         ++$skipped;
         continue;
@@ -549,13 +535,13 @@ class MigrateRemixGraphsCommand extends Command
       $program->setVisible(true);
       $program->setUser($user);
       $program->setUploadLanguage('en');
-      $program->setUploadedAt(new DateTime("now", new DateTimeZone('UTC')));
+      $program->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
       $program->setRemixMigratedAt(null);
       $program->setFilesize($program_file->getSize());
       $program->setCatrobatVersion(1);
       $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
 
-      if ($program_id == 821)
+      if (821 == $program_id)
       {
         $program->setLanguageVersion('0.8');
       }
@@ -570,13 +556,13 @@ class MigrateRemixGraphsCommand extends Command
       $program->setRemixRoot(true);
 
       $this->entity_manager->persist($program);
-      if (($number_imported_programs % $batch_size) === 0)
+      if (0 === ($number_imported_programs % $batch_size))
       {
         $this->entity_manager->flush();
         $this->entity_manager->detach($program);
       }
 
-      $progress_bar->setMessage('Added program "' . $program->getName() . '" (#' . $program_id . ')');
+      $progress_bar->setMessage('Added program "'.$program->getName().'" (#'.$program_id.')');
       ++$number_imported_programs;
     }
 
@@ -585,6 +571,6 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
-    $output->writeln('<info>Imported ' . $number_imported_programs . ' programs (Skipped ' . $skipped . ')</info>');
+    $output->writeln('<info>Imported '.$number_imported_programs.' programs (Skipped '.$skipped.')</info>');
   }
 }
