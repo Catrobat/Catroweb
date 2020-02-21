@@ -10,6 +10,7 @@ use App\Entity\CommentNotification;
 use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\NewProgramNotification;
+use App\Entity\Notification;
 use App\Entity\RemixManager;
 use App\Entity\RemixNotification;
 use App\Entity\User;
@@ -98,13 +99,11 @@ class UserNotificationController extends AbstractController
       }
       elseif ($notification instanceof CommentNotification && $notification_type === "comments")
       {
-
         $found_notification = true;
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy([
           'id' => $notification->getComment()->getUser(),
         ]);
-
       }
       elseif ($notification instanceof NewProgramNotification && $notification_type === "followers")
       {
@@ -120,6 +119,10 @@ class UserNotificationController extends AbstractController
       {
         if ($notification instanceof RemixNotification)
         {
+          if ($notification_type === "remix")
+          {
+            $found_notification = true;
+          }
           $user = $notification->getRemixFrom();
         }
       }
@@ -135,13 +138,9 @@ class UserNotificationController extends AbstractController
       {
         $old_notifications[$notification->getId()] = $notification;
       }
-      else
+      elseif (!$notification->getSeen() && $found_notification === true)
       {
-        if (!$notification->getSeen() && $found_notification === true)
-        {
-          $new_notifications[$notification->getId()] = $notification;
-
-        }
+        $new_notifications[$notification->getId()] = $notification;
       }
     }
     $response = $this->render('Notifications/usernotifications.html.twig'
@@ -170,6 +169,7 @@ class UserNotificationController extends AbstractController
   public function userNotificationsCountAction(CatroNotificationRepository $notification_repo,
                                                RemixManager $remix_manager)
   {
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -180,44 +180,47 @@ class UserNotificationController extends AbstractController
     $likes = 0;
     $followers = 0;
     $comments = 0;
+    $remixes = 0;
     $all = 0;
     foreach ($catro_user_notifications_all as $notification)
     {
+      /** @var CatroNotification $notification */
+      if ($notification->getSeen())
+      {
+        continue;
+      }
 
-      if ($notification instanceof LikeNotification && !$notification->getSeen())
+      if ($notification instanceof LikeNotification)
       {
         $likes++;
       }
-      else
+      elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
       {
-        if (($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
-            && !$notification->getSeen())
-        {
-          $followers++;
-        }
-        else
-        {
-          if ($notification instanceof CommentNotification && !$notification->getSeen())
-          {
-            $comments++;
-          }
-        }
+        $followers++;
       }
-      if (!$notification->getSeen())
+      elseif ($notification instanceof CommentNotification)
       {
-        $all++;
+        $comments++;
       }
+      elseif ($notification instanceof RemixNotification)
+      {
+        $remixes++;
+      }
+
+      $all++;
     }
 
 
     $unseen_remixed_program_data = $remix_manager->getUnseenRemixProgramsDataOfUser($user);
+
 
     return new JsonResponse([
       'count'      => ['all-notifications'          => $all,
                        'all-notifications-dropdown' => $all,
                        "likes"                      => $likes,
                        "followers"                  => $followers,
-                       "comments"                   => $comments],
+                       "comments"                   => $comments,
+                       "remixes"                    => $remixes],
       'statusCode' => 200,
     ]);
   }
@@ -240,6 +243,7 @@ class UserNotificationController extends AbstractController
                                               CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
                                               RemixManager $remix_manager)
   {
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -249,36 +253,16 @@ class UserNotificationController extends AbstractController
     $notifications_seen = [];
     foreach ($catro_user_notifications as $notification)
     {
-
-      if ($notification_type === "likes" && $notification instanceof LikeNotification)
+      /** @var CatroNotification $notification */
+      if ($notification_type === "likes" && $notification instanceof LikeNotification
+        || $notification_type === "followers" && $notification instanceof FollowNotification
+        || $notification_type === "followers" && $notification instanceof NewProgramNotification
+        || $notification_type === "comments" && $notification instanceof CommentNotification
+        || $notification_type === "remixes" && $notification instanceof RemixNotification
+        || $notification_type === "allNotifications")
       {
         $notifications_seen[$notification->getID()] = $notification;
       }
-      else
-      {
-        if ($notification_type === "followers" &&($notification instanceof FollowNotification
-            || $notification instanceof NewProgramNotification))
-        {
-          $notifications_seen[$notification->getID()] = $notification;
-        }
-        else
-        {
-          if ($notification_type === "comments" && $notification instanceof CommentNotification)
-          {
-            $notifications_seen[$notification->getID()] = $notification;
-          }
-          else
-          {
-            if ($notification_type === "allNotifications")
-            {
-
-              $notifications_seen[$notification->getID()] = $notification;
-
-            }
-          }
-        }
-      }
-
     }
     $notification_service->markSeen($notifications_seen);
     $remix_manager->markAllUnseenRemixRelationsOfUserAsSeen($user);
@@ -304,6 +288,7 @@ class UserNotificationController extends AbstractController
                                                    CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
                                                    RemixManager $remix_manager)
   {
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -313,34 +298,15 @@ class UserNotificationController extends AbstractController
     $notifications_to_delete = [];
     foreach ($catro_user_notifications as $notification)
     {
-
-      if ($notification_type === "likes" && $notification instanceof LikeNotification)
+      /** @var CatroNotification $notification */
+      if ($notification_type === "likes" && $notification instanceof LikeNotification
+        || $notification_type === "followers" && $notification instanceof FollowNotification
+        || $notification_type === "followers" && $notification instanceof NewProgramNotification
+        || $notification_type === "comments" && $notification instanceof CommentNotification
+        || $notification_type === "remixes" && $notification instanceof RemixNotification
+        || $notification_type === "allNotifications")
       {
         $notifications_to_delete[$notification->getID()] = $notification;
-      }
-      else
-      {
-        if ($notification_type === "followers" && ($notification instanceof FollowNotification
-            || $notification instanceof NewProgramNotification))
-        {
-          $notifications_to_delete[$notification->getID()] = $notification;
-        }
-        else
-        {
-          if ($notification_type === "comments" && $notification instanceof CommentNotification)
-          {
-            $notifications_to_delete[$notification->getID()] = $notification;
-          }
-          else
-          {
-            if ($notification_type === "allNotifications")
-            {
-
-              $notifications_to_delete[$notification->getID()] = $notification;
-
-            }
-          }
-        }
       }
 
     }

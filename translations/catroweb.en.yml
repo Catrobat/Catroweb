@@ -44,7 +44,9 @@ LikeNotifications: 'Reactions'
 likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'Comments'
+RemixNotifications: 'Remixes'
 oldnotification: 'Old Notifications'
 wellDone: "Well done!"
 done: "Done!"

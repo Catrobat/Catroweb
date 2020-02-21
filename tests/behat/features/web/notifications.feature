@@ -119,6 +119,7 @@ Feature: User gets notifications for new followers, reactions, comments and othe
   just notifications of that type
     Given there are "10" "like" notifications for program "program 2" from "Catrobat"
     And there are "20" "comment" notifications for program "program 2" from "Drago"
+    And there are "12" "remix" notifications for program "program 2" from "Drago"
     And there are "5"+ notifications for "User"
     And "Catrobat" have just followed "User"
     And "Drago" have just followed "User"
@@ -135,9 +136,13 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     And I wait for the page to be loaded
     Then I should see "You have 2 new Notifications"
     And I should see "New follower"
+    Given I am on "/app/notifications/remix"
+    And I wait for the page to be loaded
+    Then I should see "You have 12 new Notifications"
+    And I should see "New Remix for Project program 2"
     Given I am on "/app/notifications/allNotifications"
     And I wait for the page to be loaded
-    Then I should see "You have 37 new Notifications"
+    Then I should see "You have 49 new Notifications"
 
 
 
