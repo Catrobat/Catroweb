@@ -1,0 +1,25 @@
+
+# Runs all PhpSpec tests via docker in the latest ubuntu build
+
+name: PhpSpec Tests
+
+on: [push, pull_request] # ToDo for next version: trigger manually
+
+
+jobs:
+
+  tests_phpspec:
+    name: PhpSpec Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+
+      - name: PhpSpec tests
+        run:
+          docker exec app.catroweb.test bin/phpspec run

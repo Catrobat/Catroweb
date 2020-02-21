@@ -138,6 +138,9 @@ class ResetCommand extends Command
     CommandHelper::executeShellCommand('chmod o+w -R public/resources_test', [],
       'Setting test resources permissions', $output);
 
+     CommandHelper::executeShellCommand('chmod o+w tests -R', [],
+      'Setting test resources permissions', $output);
+
     CommandHelper::executeShellCommand('chmod o+w+x tests/behat/sqlite/ -R', [],
       'Setting permissions for behat sqlite test database', $output);
   }

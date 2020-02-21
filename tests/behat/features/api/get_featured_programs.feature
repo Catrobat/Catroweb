@@ -35,7 +35,7 @@ Feature: Get featured programs
         "CatrobatProjects":
           [
              {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
@@ -62,19 +62,19 @@ Feature: Get featured programs
         "CatrobatProjects":
           [
             {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"A new world",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_2.jpg"
             },
             {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
             },
             {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName": "Invaders",
               "Author": "Catrobat",
               "FeaturedImage": "resources_test/featured/featured_1.jpg"
@@ -100,13 +100,13 @@ Feature: Get featured programs
         "CatrobatProjects":
           [
             {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"A new world",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_2.jpg"
              },
              {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
@@ -130,19 +130,19 @@ Feature: Get featured programs
         "CatrobatProjects":
           [
             {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"A new world",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_2.jpg"
              },
              {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"Soon to be",
               "Author":"User1",
               "FeaturedImage": "resources_test/featured/featured_3.jpg"
              },
              {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"Invaders",
               "Author":"Catrobat",
               "FeaturedImage": "resources_test/featured/featured_1.jpg"
@@ -166,7 +166,7 @@ Feature: Get featured programs
         "CatrobatProjects":
           [
             {
-              "ProjectId": "(.*?)",
+              "ProjectId": "REGEX_STRING_WILDCARD",
               "ProjectName":"IOS test",
               "Author":"User1",
               "FeaturedImage":"resources_test/featured/featured_5.jpg"

@@ -47,7 +47,7 @@ class AsyncHttpClient
    */
   public function fetchScratchProgramDetails(array $scratch_program_ids)
   {
-    if (count($scratch_program_ids) == 0)
+    if (count($scratch_program_ids) === 0)
     {
       return [];
     }
@@ -63,7 +63,7 @@ class AsyncHttpClient
       /** @var \GuzzleHttp\Client $http_client */
       foreach ($scratch_program_ids as $scratch_program_id)
       {
-        $scratch_api_url = 'https://scratch.mit.edu/api/v1/project/' . $scratch_program_id . '/?format=json';
+        $scratch_api_url = 'https://api.scratch.mit.edu/projects/' . $scratch_program_id . '/?format=json';
         yield $this->async_http_client->requestAsync('GET', $scratch_api_url);
       }
     });

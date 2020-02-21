@@ -74,7 +74,8 @@ class GenerateTestDataCommand extends Command
   {
     $this
       ->setName('catrobat:test:generate')
-      ->setDescription('Generates test data');
+      ->setDescription('Generates test data')
+      ->addOption('force');
   }
 
   /**
@@ -88,7 +89,7 @@ class GenerateTestDataCommand extends Command
     $dialog = $this->getHelper('question');
     $question = new ConfirmationQuestion('<question>Generate test data in ' . $this->target_directory . ' (Y/n)?</question>', true);
 
-    if ($dialog->ask($input, $output, $question))
+    if ($input->getOption('force') || $dialog->ask($input, $output, $question))
     {
       $output->writeln('<info>Deleting old test data in ' . $this->target_directory . '</info>');
 

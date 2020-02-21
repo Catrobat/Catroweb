@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\GuidType;
@@ -362,7 +363,7 @@ class Program
     $this->updateLastModifiedTimestamp();
     if ($this->getUploadedAt() == null)
     {
-      $this->setUploadedAt(new \DateTime());
+      $this->setUploadedAt(new \DateTime("now", new DateTimeZone('UTC')));
     }
   }
 

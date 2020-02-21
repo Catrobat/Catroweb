@@ -31,7 +31,7 @@ Feature: Get users programs
     """
       {
           "CatrobatProjects":[{
-                                "ProjectId": "(.*?)",
+                                "ProjectId": "REGEX_STRING_WILDCARD",
                                 "ProjectName":"Minions",
                                 "ProjectNameShort":"Minions",
                                 "Author":"Catrobat",
@@ -40,16 +40,16 @@ Feature: Get users programs
                                 "Views":9,
                                 "Downloads":33,
                                 "Private":false,
-                                "Uploaded": 1359720000,
+                                "Uploaded": "REGEX_INT_WILDCARD",
                                 "UploadedString":"1 year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/project/(.*?)",
-                                "DownloadUrl":"app/download/(.*?).catrobat",
+                                "ProjectUrl":"app/project/REGEX_STRING_WILDCARD",
+                                "DownloadUrl":"app/download/REGEX_STRING_WILDCARD.catrobat",
                                 "FileSize":0
                             },
                             {
-                                "ProjectId": "(.*?)",
+                                "ProjectId": "REGEX_STRING_WILDCARD",
                                 "ProjectName":"Whack the Marko",
                                 "ProjectNameShort":"Whack the Marko",
                                 "Author":"Catrobat",
@@ -58,12 +58,12 @@ Feature: Get users programs
                                 "Views":33,
                                 "Downloads":2,
                                 "Private":false,
-                                "Uploaded": 1328097600,
+                                "Uploaded": "REGEX_INT_WILDCARD",
                                 "UploadedString":"more than one year ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/project/(.*?)",
-                                "DownloadUrl":"app/download/(.*?).catrobat",
+                                "ProjectUrl":"app/project/REGEX_STRING_WILDCARD",
+                                "DownloadUrl":"app/download/REGEX_STRING_WILDCARD.catrobat",
                                 "FileSize":0
                             }],
           "completeTerm":"",

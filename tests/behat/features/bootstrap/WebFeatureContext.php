@@ -1992,8 +1992,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $page = $this->getSession()->getPage();
     $video = $page->find('css', '#youtube-help-video');
     Assert::assertNotNull($video, "Video not found on tutorial page!");
-    Assert::assertTrue(strpos($video->getAttribute('src'), $url) !== false &&
-      strpos($video->getAttribute('src'), "&origin=http://localhost") !== false);
+    Assert::assertTrue(strpos($video->getAttribute('src'), $url) !== false);
   }
 
 
@@ -3477,7 +3476,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForThePageToBeLoaded()
   {
-    $this->getSession()->wait(5000, "document.readyState === 'complete'");
+    $this->getSession()->wait(10000, "document.readyState === 'complete'");
     $this->iWaitForAjaxToFinish();
   }
 
@@ -3488,7 +3487,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForAjaxToFinish()
   {
-    $this->getSession()->wait(5000,
+    $this->getSession()->wait(10000,
       '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
     );
   }
@@ -3505,7 +3504,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $selector);
-    $timeout_in_seconds = 10.0;
+    $timeout_in_seconds = 15;
     for ($timer = 0; $timer < $timeout_in_seconds; $timer++)
     {
       if ($element->getText() === $text)
@@ -3530,7 +3529,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   {
     /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $selector);
-    $timeout_in_seconds = 10.0;
+    $timeout_in_seconds = 15;
     for ($timer = 0; $timer < $timeout_in_seconds; $timer++)
     {
       if ($element->isVisible())
@@ -3543,6 +3542,4 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
     $message = "The element '$selector' was not visible after a $timeout_in_seconds seconds timeout";
     throw new ResponseTextException($message, $this->getSession());
   }
-
-
 }
