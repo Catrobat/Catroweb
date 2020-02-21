@@ -159,6 +159,10 @@ class Constants
 
   // Embroidery
   const STITCH_BRICK = 'StitchBrick';
+  const RUNNING_STITCH_BRICK = 'RunningStitchBrick';
+  const STOP_RUNNING_STITCH_BRICK = 'StopRunningStitchBrick';
+  const TRIPLE_STITCH_BRICK = 'TripleStitchBrick';
+  const ZIG_ZAG_STITCH_BRICK = 'ZigZagStitchBrick';
 
   // --- Lego NXT ---
   const LEGO_NXT_MOTOR_TURN_ANGLE_BRICK = "LegoNxtMotorTurnAngleBrick";
