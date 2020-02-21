@@ -137,6 +137,13 @@
       </a>
     </li>
 
+    <li id="nav-scratch-remixes" class="nav-item" style="display:none">
+      <a class="nav-link" href="{{ path('index') }}#scratchRemixes" id="btn-recommended">
+        <i class="fab fa-r-project"></i>
+        <span>{{ 'programs.scratchremixes'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
     <li id="nav-most-downloaded" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#mostDownloaded" id="btn-most-downloaded">
         <i class="fas fa-download mr-1"></i>
@@ -177,6 +184,7 @@
     )
     enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
     enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-scratch-remixes', '{{ path('api_scratch_remix') }}')
     enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
     manageNotificationsDropdown()
   </script>

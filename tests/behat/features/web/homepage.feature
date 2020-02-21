@@ -9,6 +9,8 @@ Feature: Pocketcode homepage
       | id | name     |
       | 1  | Catrobat |
       | 2  | User1    |
+      | 3  | Catrobat2|
+
     And there are projects:
       | id | name      | owned by |
       | 1  | project 1 | Catrobat |
@@ -16,6 +18,9 @@ Feature: Pocketcode homepage
       | 3  | project 3 | User1    |
       | 4  | project 4 | User1    |
       | 5  | project 5 | User1    |
+      | 6  | project 6 | Catrobat2|
+      | 7  | project 7 | Catrobat2|
+
     And following projects are featured:
       | id | project   | url                   | active | priority |
       | 1  | project 1 |                       | no     | 1        |
@@ -24,15 +29,30 @@ Feature: Pocketcode homepage
       | 4  |           | http://www.google.at/ | yes    | 5        |
       | 5  |           | http://www.orf.at/    | no     | 4        |
 
+    Given there are Scratch remix relations:
+      | scratch_parent_id | catrobat_child_id |
+      | 70058680          | 6                 |
+      | 70058680          | 7                 |
+
+  Scenario: Scratch remixes project should be visible:
+    Given I am on homepage
+    And I wait for the page to be loaded
+    Then I should see the featured slider
+    Then the element "#scratchRemixes" should exist
+    And the "#scratchRemixes" element should contain "project 6"
+    And the "#scratchRemixes" element should contain "project 7"
+    And the "#scratchRemixes" element should not contain "project 1"
+
   Scenario: Viewing the homepage at website root
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
-    And I should see newest programs
-    And I should see recommended programs
-    And I should see most downloaded programs
-    And I should see most viewed programs
-    And I should see random programs
+    Then the element "#newest" should exist
+    Then the element "#recommended" should exist
+    Then the element "#mostDownloaded" should exist
+    Then the element "#random" should exist
+    Then the element "#scratchRemixes" should exist
+    Then the element "#mostViewed" should exist
 
   Scenario: Welcome Section
     Given I am on homepage

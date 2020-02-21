@@ -130,6 +130,22 @@ class ListProgramsController extends AbstractController
 
 
   /**
+   * @Route("/api/projects/scratchRemixes.json", name="api_scratch_remix",
+   *   defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return ProgramListResponse
+   * @throws NonUniqueResultException
+   * @throws \Doctrine\ORM\NoResultException
+   */
+  public function listScratchRemixProjectsAction(Request $request)
+  {
+    return $this->listSortedPrograms($request, 'scratchRemix');
+  }
+
+
+  /**
    * @Route("/api/projects/randomProjects.json", name="api_random_programs",
    *   defaults={"_format":"json"}, methods={"GET"})
    *
@@ -218,6 +234,15 @@ class ListProgramsController extends AbstractController
       $programs = $this->program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
         $programs, [$this->program_manager, 'getMostViewedPrograms'],
+        $flavor, $limit, $offset, $max_version
+      );
+    }
+    elseif ($sortBy == 'scratchRemix')
+    {
+      $programs = $this->program_manager->getScratchRemixesPrograms($flavor, $limit, $offset);
+
+      $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
+        $programs, [$this->program_manager, 'getScratchRemixesPrograms'],
         $flavor, $limit, $offset, $max_version
       );
     }

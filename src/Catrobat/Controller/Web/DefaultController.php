@@ -298,7 +298,7 @@ class DefaultController extends AbstractController
 
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random']))
+    if (in_array($type, ['featured', 'newest', 'mostDownloaded','scratchRemixes', 'mostViewed', 'random']))
     {
       $program_id = $_POST['programID'];
       $this->statistics->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);

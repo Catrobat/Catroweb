@@ -1192,6 +1192,36 @@ class ApiFeatureContext extends BaseContext
   }
 
   /**
+   * @Then /^I should get (\d+) programs in the following order:$/
+   * @param  $program_count
+
+   * @param TableNode $table
+   */
+  public function iShouldGetScratchProgramsInTheFollowingOrder($program_count, TableNode $table)
+  {
+    $response = $this->getClient()->getResponse();
+
+    $responseArray = json_decode($response->getContent(), true);
+    $programs = $table->getHash();
+
+    $returned_programs = $responseArray['CatrobatProjects'];
+    $scratch_programs_count = count($programs);
+    Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
+
+    $expected_programs = $table->getHash();
+    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($returned_programs));
+
+    for ($i = 0; $i < count($returned_programs); ++$i)
+    {
+      Assert::assertEquals(
+        $expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'],
+        'Wrong order of results'
+      );
+    }
+  }
+
+
+  /**
    * @Then /^I should get programs in the following order:$/
    * @param TableNode $table
    */
@@ -1802,6 +1832,22 @@ class ApiFeatureContext extends BaseContext
     $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, $id);
   }
 
+  /**
+   * @When /^I upload the program with the id "([^"]*)" and name "([^"]*)"$/
+   *
+   *
+   */
+  public function iUploadAProgramWithIdAndName($id, $name )
+  {
+    $user = $this->username ? $this->getUserManager()->findUserByUsername($this->username) : null;
+    $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, $id);
+    // A kinda hacky solution, but we need to upload the program twice to use the fixed ids!
+    $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, $id);
+    $em = $this->getManager();
+
+    $package = $em->getRepository('App:Program')->findOneBy(['id' => $id]);
+    $package->setName("$name");
+  }
 
   /**
    * @Given /^I am using pocketcode with language version "([^"]*)"$/
