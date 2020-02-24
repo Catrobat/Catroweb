@@ -66,7 +66,7 @@ class ResetController extends AbstractController
   {
     $temp_comment = new UserComment();
     $temp_comment->setUsername($user->getUsername());
-    $temp_comment->setUserId($user->getId());
+    $temp_comment->setUser($user);
     $temp_comment->setText($message);
     $temp_comment->setProgram($program);
     $temp_comment->setUploadDate(date_create());
