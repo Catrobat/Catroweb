@@ -19,7 +19,6 @@ Feature: Upload a program to the website
       | fileChecksum | <md5 checksum of file> |
     And a catrobat file is attached to the request
     And the POST parameter "fileChecksum" contains the MD5 sum of the attached file
-    And we assume the next generated token will be "rrrrrrrrrrr"
     When the Request is invoked
     Then the returned json object with id "1" will be:
           """
@@ -27,7 +26,7 @@ Feature: Upload a program to the website
             "projectId": "1",
             "statusCode": 200,
             "answer": "Your project was uploaded successfully!",
-            "token": "rrrrrrrrrrr",
+            "token": "cccccccccc",
             "preHeaderMessages": ""
           }
           """
