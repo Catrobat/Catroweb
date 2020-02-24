@@ -26,12 +26,12 @@ Feature: A/B testing for recommendation system & remix graph
     And I should see a recommended homepage program having ID "1" and name "Minions"
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
-    Then I should see "РЕКОМЕНДУЕМЫЕ"
+    Then I should see "ДОБРО ПОЖАЛОВАТЬ"
     And the element "#recommended" should be visible
     And I should see a recommended homepage program having ID "1" and name "Minions"
     When I switch the language to "French"
     And I wait for the page to be loaded
-    Then I should see "Programmes recommandés"
+    Then I should see "LES PLUS TÉLÉCHARGÉS"
     And the element "#recommended" should be visible
     And I should see a recommended homepage program having ID "1" and name "Minions"
 
