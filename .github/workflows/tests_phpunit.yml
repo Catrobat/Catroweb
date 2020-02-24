@@ -3,7 +3,7 @@
 
 name: PhpUnit Tests
 
-on: [push, pull_request] # ToDo for next version: trigger manually
+on: [push, pull_request]
 
 
 jobs:
