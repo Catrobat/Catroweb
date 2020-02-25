@@ -496,6 +496,18 @@ class BrickFactory
       case Constants::STITCH_BRICK:
         $generated_brick = new StitchBrick($brick_xml_properties);
         break;
+      case Constants::RUNNING_STITCH_BRICK:
+        $generated_brick = new RunningStitchBrick($brick_xml_properties);
+        break;
+      case Constants::STOP_RUNNING_STITCH_BRICK:
+        $generated_brick = new StopRunningStitchBrick($brick_xml_properties);
+        break;
+      case Constants::TRIPLE_STITCH_BRICK:
+        $generated_brick = new TripleStitchBrick($brick_xml_properties);
+        break;
+      case Constants::ZIG_ZAG_STITCH_BRICK:
+        $generated_brick = new ZigZagStitchBrick($brick_xml_properties);
+        break;
 
       // Phiro
       case Constants::PHIRO_MOTOR_MOVE_FORWARD_BRICK:
