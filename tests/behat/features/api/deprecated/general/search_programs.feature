@@ -10,18 +10,18 @@ Feature: Search programs
       | User1    | vwxyz    | aaaaaaaaaa |  2 |
       | NewUser  | 54321    | bbbbbbbbbb |  3 |
     And there are programs:
-      | id | name            | description | owned by | downloads | views | upload time      | version |
-      | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | Minions         |             | Catrobat | 33        | 9     | 02.02.2013 13:00 | 0.8.5   |
-      | 3  | Fisch           |             | User1    | 133       | 33    | 10.01.2012 13:00 | 0.8.5   |
-      | 4  | Ponny           | p2          | User1    | 245       | 33    | 09.01.2012 13:00 | 0.8.5   |
-      | 5  | MarkoTheBest    |             | NewUser  | 335       | 33    | 08.01.2012 13:00 | 0.8.5   |
-      | 6  | Whack the Marko | Universe    | Catrobat | 2         | 33    | 07.02.2012 13:00 | 0.8.5   |
-      | 7  | Superponny      | p1 p2 p3    | User1    | 4         | 33    | 06.01.2012 12:00 | 0.8.5   |
-      | 8  | Universe        |             | User1    | 23        | 33    | 05.01.2012 13:00 | 0.8.5   |
-      | 9  | Webteam         |             | User1    | 100       | 33    | 04.01.2012 13:00 | 0.8.5   |
-      | 10 | Fritz the Cat   |             | User1    | 112       | 33    | 03.01.2012 13:00 | 0.8.5   |
-    And the current time is "01.08.2014 13:00"
+      | id      | name            | description                  | owned by | upload time      | version |
+      | qysm-rhwt  | Galaxy War      | description1              | User1    | 01.01.2014 12:00 | 0.8.5   |
+      | phci-etqx  | Minions         |                           | Catrobat | 02.02.2014 14:00 | 0.8.5   |
+      | bbns-hixd  | Fisch           |                           | User1    | 10.01.2012 14:00 | 0.8.5   |
+      | rppk-kkri  | Ponny           | description2              | User1    | 09.01.2012 14:00 | 0.8.5   |
+      | nhre-xzvg  | MarkoTheBest    |                           | NewUser  | 08.01.2012 14:00 | 0.8.5   |
+      | ydmf-tbms  | Whack the Marko | Universe                  | Catrobat | 07.02.2012 14:00 | 0.8.5   |
+      | anxu-nsss  | Superponny      | description1 description2 | User1    | 06.01.2012 14:00 | 0.8.5   |
+      | kbrw-khwf  | Universe        |                           | NewUser  | 05.01.2012 14:00 | 0.8.5   |
+      | isxs-adkt  | Webteam         |                           | NewUser  | 04.01.2012 14:00 | 0.8.5   |
+      | tvut-irkw  | Fritz the Cat   |                           | NewUser  | 03.01.2012 14:00 | 0.8.5   |
+    And the current time is "01.08.2014 14:00"
 
 
   Scenario: A request must have specific parameters to succeed
@@ -46,13 +46,13 @@ Feature: Search programs
          "ProjectName":"Galaxy War",
          "ProjectNameShort":"Galaxy War",
          "Author":"User1",
-         "Description":"p1",
+         "Description":"description1",
          "Version":"0.8.5",
-         "Views":12,
-         "Downloads":3,
+         "Views":0,
+         "Downloads":0,
          "Private":false,
          "Uploaded":"REGEX_INT_WILDCARD",
-         "UploadedString":"more than one year ago",
+         "UploadedString":"REGEX_STRING_WILDCARD",
          "ScreenshotBig":"images/default/screenshot.png",
          "ScreenshotSmall":"images/default/thumbnail.png",
          "ProjectUrl":"app/project/REGEX_STRING_WILDCARD",
@@ -95,6 +95,9 @@ Feature: Search programs
     Then I should get following programs:
       | name         |
       | MarkoTheBest |
+      | Universe     |
+      | Webteam      |
+      | Fritz the Cat|
 
 
   Scenario: If nothing is found the following JSON is returned
@@ -118,7 +121,7 @@ Feature: Search programs
   Scenario: search program by description
 
     Given I use the limit "10"
-    When I search for "p1"
+    When I search for "description1"
     Then I should get following programs:
       | name       |
       | Galaxy War |
@@ -128,7 +131,7 @@ Feature: Search programs
   Scenario: search program by description
 
     Given I use the limit "10"
-    When I search for "p2"
+    When I search for "description2"
     Then I should get following programs:
       | name       |
       | Ponny      |
@@ -154,44 +157,36 @@ Feature: Search programs
 
     Examples:
       | Search | Limit | Offset | TotalProjects |
-      | User1  | 1     | 1      | 7             |
-      | User1  | 9     | 2      | 7             |
+      | User1  | 1     | 1      | 4             |
+      | User1  | 9     | 2      | 4             |
       | Marko  | 5     | 0      | 2             |
 
-
-  Scenario: to browse programs in smaller chunks you can request a subset of found projects
+  Scenario: get total number of found projects with a specific word
 
     Given I use the limit "2"
     And I use the offset "0"
     When I search for "User1"
-    Then I should get following programs:
-      | name       |
-      | Galaxy War |
-      | Fisch      |
+    Then I should get a total of 4 projects
 
-  Scenario: to browse programs in smaller chunks you can request a subset of found projects
+  Scenario: limit the number of returned projects
 
-    Given I use the limit "1"
+    Given I use the limit "2"
     And I use the offset "0"
     When I search for "User1"
-    Then I should get following programs:
-      | name       |
-      | Galaxy War |
+    Then I should get 2 projects
 
-  Scenario: to browse programs in smaller chunks you can request a subset of found projects
+  Scenario: get the programs with offset = 1
 
-    Given I use the limit "1"
+    Given I use the limit "10"
     And I use the offset "1"
     When I search for "User1"
-    Then I should get following programs:
-      | name  |
-      | Fisch |
-
+    Then I should get 3 projects
+    
   Scenario: find a program with its id
 
     Given I use the limit "10"
     And I use the offset "0"
-    When I search for "8"
+    When I search for "kbrw"
     Then I should get following programs:
       | name     |
       | Universe |
@@ -200,18 +195,19 @@ Feature: Search programs
 
     Given I use the limit "10"
     And I use the offset "0"
-    When I search for "2"
+    When I search for "phci"
     Then I should get following programs:
       | name       |
       | Minions    |
-      | Ponny      |
-      | Superponny |
-
 
   Scenario: only show visible programs
     Given program "Ponny" is not visible
     And I use the limit "10"
-    When I search for "p2"
+    When I search for "description2"
     Then I should get following programs:
       | name       |
       | Superponny |
+
+  Scenario: Any “word” that is present in the stopword list or is just too short (3 characters or less) is ignored.
+    When I search for "the"
+    Then I should get no programs

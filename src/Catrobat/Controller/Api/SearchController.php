@@ -36,10 +36,16 @@ class SearchController extends AbstractController
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
     $max_version = $request->query->get('max_version', '0');
 
+    if ('' === $query || ctype_space($query))
+    {
+      return new ProgramListResponse([], 0);
+    }
+
     $programs = $program_manager->search($query, $limit, $offset, $max_version);
     // we can't count the results since we apply limit and offset.
     // so we indeed have to use a separate query that ignores
     // limit and offset to get the number of results.
+
     $numbOfTotalProjects = $program_manager->searchCount($query, $max_version);
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);

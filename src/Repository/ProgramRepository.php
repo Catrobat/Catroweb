@@ -6,8 +6,6 @@ use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ScratchProgramRemixRelation;
-use App\Entity\Tag;
-use ArrayIterator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\DBALException;
@@ -16,7 +14,6 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 
@@ -474,178 +471,55 @@ class ProgramRepository extends ServiceEntityRepository
    */
   public function search(string $query, bool $debug_build, ?int $limit = 10, int $offset = 0, string $max_version = '0'): array
   {
-    $em = $this->getEntityManager();
-    $metadata = $em->getClassMetadata(Tag::class)->getFieldNames();
-    array_shift($metadata);
+    $parse_languages = $this->getLanguageQuery();
 
-    $debug_where = (!$debug_build) ? 'e.debug_build = false AND' : '';
+    $search_terms = $this->getWordsQuery($query);
 
-    $query_addition_for_tags = '';
-    $metadata_index = 0;
-    $metadata_count = count($metadata);
+    $final_query = $this->getSearchQuery($parse_languages, $search_terms)
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+    ;
 
-    foreach ($metadata as $language)
-    {
-      if ($metadata_index === $metadata_count - 1)
-      {
-        $query_addition_for_tags .= '(t.'.$language.' LIKE :searchterm)';
-      }
-      else
-      {
-        $query_addition_for_tags .= '(t.'.$language.' LIKE :searchterm) OR ';
-      }
-      ++$metadata_index;
-    }
-
-    $search_terms = explode(' ', $query);
-
-    $appendable_sql_string = '';
-    $more_than_one_search_term = false;
-
-    if (count($search_terms) > 1)
-    {
-      $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms,
-        $metadata, $debug_build);
-      $more_than_one_search_term = true;
-    }
-
-    $dql = 'SELECT e,
-          (CASE
-            WHEN (e.name LIKE :searchterm) THEN 10
-            ELSE 0
-          END) +
-          (CASE
-            WHEN (f.username LIKE :searchterm) THEN 1
-            ELSE 0
-          END) +
-          (CASE
-            WHEN (x.name LIKE :searchterm) THEN 7
-            ELSE 0
-          END) +
-          (CASE
-            WHEN (e.description LIKE :searchterm) THEN 3
-            ELSE 0
-          END) +
-          (CASE
-            WHEN (e.id = :searchtermint) THEN 11
-            ELSE 0
-          END) +
-          (CASE
-            WHEN ('.$query_addition_for_tags.') THEN 7
-            ELSE 0
-          END)
-          AS weight
-        FROM App\Entity\Program e
-        LEFT JOIN e.user f
-        LEFT JOIN e.tags t
-        LEFT JOIN e.extensions x
-        WHERE
-          ((e.name LIKE :searchterm OR
-          f.username LIKE :searchterm OR
-          e.description LIKE :searchterm OR
-          x.name LIKE :searchterm OR '.
-      $query_addition_for_tags.' OR
-          e.id = :searchtermint) AND
-          e.visible = true AND '.
-      $debug_where.'
-          e.private = false) '.$appendable_sql_string;
+    $this->setScore($final_query, $query);
 
     if ('0' !== $max_version)
     {
-      $dql .= ' AND e.language_version <= '.$max_version;
+      $final_query->andWhere('e.language_version <= '.$max_version);
     }
-
-    $dql .= ' ORDER BY weight DESC, e.uploaded_at DESC';
-
-    $qb_program = $this->createQueryBuilder('e');
-    $final_query = $qb_program->getEntityManager()->createQuery($dql);
-    $final_query->setFirstResult($offset);
-    $final_query->setMaxResults($limit);
-    $final_query->setParameter('searchterm', '%'.$query.'%');
-    $final_query->setParameter('searchtermint', (int) $query);
-    if ($more_than_one_search_term)
+    if (!$debug_build)
     {
-      $parameter_index = 0;
-      foreach ($search_terms as $search_term)
-      {
-        $parameter = ':st'.$parameter_index;
-        ++$parameter_index;
-        $final_query->setParameter($parameter, '%'.$search_term.'%');
-        $final_query->setParameter($parameter.'int', (int) $search_term);
-      }
+      $final_query->andWhere('e.debug_build = false');
     }
 
-    $paginator = new Paginator($final_query);
-    /** @var ArrayIterator $iterator */
-    $iterator = $paginator->getIterator();
-    $result = $iterator->getArrayCopy();
+    $result = $final_query->getQuery()->getResult();
 
-    return array_map(fn ($element) => $element[0], $result);
+    return array_map(function ($element)
+    {
+      return $element[0];
+    }, $result);
   }
 
   public function searchCount(string $query, bool $debug_build, string $max_version = '0'): int
   {
-    $em = $this->getEntityManager();
-    $metadata = $em->getClassMetadata(Tag::class)->getFieldNames();
-    array_shift($metadata);
+    $parse_languages = $this->getLanguageQuery();
 
-    $debug_where = (!$debug_build) ? 'e.debug_build = false AND' : '';
+    $search_terms = $this->getWordsQuery($query);
 
-    $query_addition_for_tags = '';
-    foreach ($metadata as $language)
-    {
-      $query_addition_for_tags .= 't.'.$language.' LIKE :searchterm OR ';
-    }
+    $final_query = $this->getSearchQuery($parse_languages, $search_terms);
 
-    $search_terms = explode(' ', $query);
-    $appendable_sql_string = '';
-    $more_than_one_search_term = false;
-    if (count($search_terms) > 1)
-    {
-      $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms,
-        $metadata, $debug_build);
-      $more_than_one_search_term = true;
-    }
-
-    $qb_program = $this->createQueryBuilder('e');
-    $dql = 'SELECT e.id
-        FROM App\Entity\Program e
-        LEFT JOIN e.user f
-        LEFT JOIN e.tags t
-        LEFT JOIN e.extensions x
-        WHERE
-          ((e.name LIKE :searchterm OR
-          f.username LIKE :searchterm OR
-          e.description LIKE :searchterm OR
-          x.name LIKE :searchterm OR '.
-      $query_addition_for_tags.' 
-          e.id = :searchtermint) AND
-          e.visible = true AND '.
-      $debug_where.'
-          e.private = false) '.$appendable_sql_string;
+    $this->setScore($final_query, $query);
 
     if ('0' !== $max_version)
     {
-      $dql .= ' AND e.language_version <= '.$max_version;
+      $final_query->andWhere('e.language_version <= '.$max_version);
     }
-    $dql .= ' GROUP BY e.id';
-    $db_query = $qb_program->getEntityManager()->createQuery($dql);
-    $db_query->setParameter('searchterm', '%'.$query.'%');
-    $db_query->setParameter('searchtermint', (int) $query);
-    if ($more_than_one_search_term)
+    if (!$debug_build)
     {
-      $parameter_index = 0;
-      foreach ($search_terms as $search_term)
-      {
-        $parameter = ':st'.$parameter_index;
-        ++$parameter_index;
-        $db_query->setParameter($parameter, '%'.$search_term.'%');
-        $db_query->setParameter($parameter.'int', (int) $search_term);
-      }
+      $final_query->andWhere('e.debug_build = false');
     }
-    $result = $db_query->getResult();
+    $result = $final_query->getQuery()->getResult();
 
-    return is_countable($result) ? count($result) : 0;
+    return count($result);
   }
 
   /**
@@ -1053,6 +927,76 @@ class ProgramRepository extends ServiceEntityRepository
     }
 
     return $programs;
+  }
+
+  /**
+   * @return string
+   */
+  private function getLanguageQuery()
+  {
+    $em = $this->getEntityManager();
+    $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
+    array_shift($metadata);
+
+    $parse_languages = '';
+    foreach ($metadata as $language)
+    {
+      $parse_languages .= 't.'.$language.', ';
+    }
+
+    return rtrim($parse_languages, ', ');
+  }
+
+  private function getWordsQuery(string $query): string
+  {
+    $words = explode(' ', $query);
+    foreach ($words as &$word)
+    {
+      $word = '+'.$word.'*';
+    }
+    unset($word);
+    $search_terms = implode(' ', $words);
+
+    return $search_terms;
+  }
+
+  private function getSearchQuery(string $parse_languages, string $search_terms): QueryBuilder
+  {
+    return $this->createQueryBuilder('e')
+      ->addSelect('MATCH(e.name, e.description, e.credits, e.id) AGAINST(:searchterm boolean) AS name_score')
+      ->addSelect('MATCH(u.username) AGAINST(:searchterm boolean) AS username_score')
+      ->addSelect('MATCH(x.name) AGAINST(:searchterm boolean) AS extension_score')
+      ->addSelect('MATCH('.$parse_languages.') AGAINST(:searchterm boolean) as language_score')
+      ->orWhere('MATCH(e.name, e.description, e.credits, e.id) AGAINST(:searchterm boolean)>:score')
+      ->orWhere('MATCH(u.username) AGAINST(:searchterm boolean)>:score')
+      ->orWhere('MATCH(x.name) AGAINST(:searchterm boolean)>:score')
+      ->orWhere('MATCH('.$parse_languages.') AGAINST(:searchterm boolean)>:score')
+      ->leftJoin('e.tags', 't')
+      ->leftJoin('e.extensions', 'x')
+      ->leftJoin('e.user', 'u')
+      ->andWhere('e.visible = true AND e.private = false')
+      ->orderBy('name_score', 'DESC')
+      ->setParameter('searchterm', $search_terms)
+    ;
+  }
+
+  private function setScore(QueryBuilder &$final_query, string $query): void
+  {
+    $words = explode(' ', $query);
+    $number_of_words = count($words);
+    $wanted_score = 0;
+    switch ($number_of_words)
+    {
+      case 1:
+        $wanted_score = 0;
+        break;
+      case 2:
+        $wanted_score = 0.4;
+        break;
+      default:
+        $wanted_score = 0.8;
+    }
+    $final_query->setParameter('score', $wanted_score);
   }
 
   private function generateUnionSqlStatementForMostRemixedPrograms(bool $debug_build,

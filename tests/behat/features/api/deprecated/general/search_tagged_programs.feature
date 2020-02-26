@@ -24,9 +24,9 @@ Feature: Search tagged programs
       | 5  | Racing | Rennen     |
     And there are programs:
       | id | name            | description | owned by | downloads | views | upload time      | version | tags_id |
-      | 1  | Minions         | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 1,2     |
-      | 2  | Galaxy          | p2          | User1    | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | 2       |
-      | 3  | Alone           | p3          | User1    | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | 3       |
+      | 1  | Minions         | p1          | Catrobat | 3         | 12    | 01.01.2014 12:00 | 0.8.5   | 1,2     |
+      | 2  | Galaxy          | p2          | User1    | 10        | 13    | 01.02.2014 12:00 | 0.8.5   | 2       |
+      | 3  | Alone           | p3          | User1    | 5         | 1     | 01.03.2014 12:00 | 0.8.5   | 3       |
       | 4  | Ponny           | p2          | User1    | 245       | 33    | 01.01.2012 13:00 | 0.8.5   | 5       |
       | 5  | MarkoTheBest    |             | NewUser  | 335       | 33    | 01.01.2012 13:00 | 0.8.5   | 5       |
       | 6  | Whack the Marko | Universe    | Catrobat | 2         | 33    | 01.02.2012 13:00 | 0.8.5   | 5       |
@@ -72,7 +72,7 @@ Feature: Search tagged programs
   Scenario: Search is using And operation. More keywords reduce the result set.
     Given I use the limit "10"
     And I use the offset "0"
-    When I search for "Bob Game"
+    When I search for "Bot Game"
     Then I should get no programs
 
   Scenario: Search is using And operation. More keywords reduce the result set.
