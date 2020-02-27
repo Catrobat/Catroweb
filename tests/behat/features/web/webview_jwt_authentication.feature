@@ -1,23 +1,21 @@
-@web @security @deprecated
+@web @security
 Feature: Users should be logged in automatically when they are logged in in the app
 
   Background:
     Given there are users:
-      | name     | password | token                            | email          | id |
-      | Catrobat | 123456   | cafe000000deadbeef1111affe227357 | dev1@catrob.at | 1  |
-      | User2    | 654321   | 112233445566778899aabbccddeeff00 | dev2@catrob.at | 2  |
-      | User3    | 654321   |                                  | dev3@catrob.at | 3  |
-      | User4    | 654321   | 99990bad099990bad099990bad099999 | dev4@catrob.at | 4  |
+      | id | name        | email          |
+      | 1  | WebViewUser | dev1@catrob.at |
+    And I start a new session
 
   Scenario: Log in using Catrobat user and show profile
-    Given I set the cookie "CATRO_LOGIN_TOKEN" to "cafe000000deadbeef1111affe227357"
+    Given I use a valid JWT token for "WebViewUser"
     And I am on "/app/user"
     And I wait for the page to be loaded
     Then I should see "My Profile"
     Then I should see "dev1@catrob.at"
 
   Scenario: Log in using Catrobat user with wrong token
-    Given I set the cookie "CATRO_LOGIN_TOKEN" to "deadbeef"
+    Given I use an invalid JWT token for "WebViewUser"
     And I am on "/app/user"
     And I wait for the page to be loaded
     Then I should not see "dev1@catrob.at"
@@ -25,14 +23,14 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I should see "Your user credentials are wrong"
 
   Scenario: Log in using empty token should be ignored
-    Given I set the cookie "CATRO_LOGIN_TOKEN" to ""
+    Given I use an empty JWT token for "WebViewUser"
     And I am on "/app/user"
     And I wait for the page to be loaded
     Then I should not see "My Profile"
     And I should be on "/app/login"
     And I should see 1 "input#password"
 
-  Scenario: Log in without user cookie should be ignored
+  Scenario: Log in without user auth header should be ignored
     Given I am on "/app/user"
     And I wait for the page to be loaded
     Then I should not see "My Profile"
@@ -40,7 +38,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I should see 1 "input#password"
 
   Scenario: Logout button should be hidden
-    Given I set the cookie "CATRO_LOGIN_TOKEN" to "112233445566778899aabbccddeeff00"
+    Given I use a valid JWT token for "WebViewUser"
     And I am on the homepage
     And I wait for the page to be loaded
     And I open the menu
@@ -49,7 +47,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Then I should see 1 "#btn-profile"
 
   Scenario: Logout should not be possible
-    Given I set the cookie "CATRO_LOGIN_TOKEN" to "112233445566778899aabbccddeeff00"
+    Given I use a valid JWT token for "WebViewUser"
     And I am on the homepage
     And I wait for the page to be loaded
     And I go to "/app/logout"
@@ -59,4 +57,4 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I go to "/app/user"
     And I wait for the page to be loaded
     Then I should see "My Profile"
-    Then I should see "dev2@catrob.at"
+    Then I should see "dev1@catrob.at"

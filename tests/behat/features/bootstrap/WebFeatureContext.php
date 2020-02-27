@@ -45,6 +45,7 @@ use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\ToolsException;
 use Doctrine\ORM\TransactionRequiredException;
 use Doctrine\ORM\Tools\SchemaTool;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\File\File;
@@ -3583,11 +3584,44 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       'username' => $user,
     ]);
     $this->symfony_support->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user, null);
-
   }
 
+  /**
+   * @Given I use a valid JWT token for :username
+   *
+   * @param $username
+   */
+  public function iUseAValidJwtTokenFor($username)
+  {
+    /**
+     * @var JWTManager $jwt_manager
+     * @var UserManager $user_manager
+     */
+    $jwt_manager = $this->symfony_support->getService('lexik_jwt_authentication.jwt_manager');
+    $user_manager = $this->symfony_support->getUserManager();
+    $user = $user_manager->findUserByUsername($username);
+    $token = $jwt_manager->create($user);
+    $this->getSession()->setRequestHeader('Authorization', 'Bearer '.$token);
+  }
 
+  /**
+   * @Given I use an invalid JWT token for :username
+   *
+   */
+  public function iUseAnInvalidJwtTokenFor()
+  {
+    $token = 'invalidToken';
+    $this->getSession()->setRequestHeader('Authorization', 'Bearer '.$token);
+  }
 
+  /**
+   * @Given I use an empty JWT token for :username
+   *
+   */
+  public function iUseAnEmptyJwtTokenFor()
+  {
+    $this->getSession()->setRequestHeader('Authorization', '');
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   //                     WAIT - Sometimes it is necessary to wait to prevent timing issues

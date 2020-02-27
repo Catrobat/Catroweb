@@ -14,43 +14,53 @@ security:
 
     firewalls:
 
-
+        #
         # API V2
-
-        api_checktoken_v2:
+        #
+        #  - Token creation & login is handled by the LexikJWTAuthenticationBundle
+        #  - Protected API calls need to pass through the authenticator
+        #
+        api_authentication_login:
             provider: chain_provider
-            pattern: ^/api/checkToken
+            pattern:  ^/api/authentication
+            methods: [POST]
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /api/authentication
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api_authentication_check_token:
+            provider: chain_provider
+            pattern: ^/api/authentication
+            methods: [GET]
             stateless: true
             guard:
                 authenticators:
-                    - App\Catrobat\Security\ApiTokenAuthenticator
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
-        api_upload_v2:
+        api_projects_upload:
             provider: chain_provider
-            pattern: ^/api/projects/upload
+            pattern: ^/api/projects
+            methods: [POST]
             stateless: true
             guard:
                 authenticators:
-                    - App\Catrobat\Security\ApiTokenAuthenticator
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
-        api_logout_v2:
+        api_projects_user:
             provider: chain_provider
-            pattern: ^/api/logout
+            pattern: ^/api/projects/user
+            methods: [GET]
             stateless: true
             guard:
                 authenticators:
-                    - App\Catrobat\Security\ApiTokenAuthenticator
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
-        api_private_user_projects_v2:
-            provider: chain_provider
-            pattern: ^/api/projects/user/*
-            stateless: true
-            guard:
-                authenticators:
-                    - App\Catrobat\Security\ApiTokenAuthenticator
-
-
-        # API V1
+        #
+        # API V1 deprecated
+        #
         api_checktoken:
             provider: chain_provider
             pattern: ^.*?/api/checkToken/check.json
@@ -79,7 +89,7 @@ security:
             security: false
 
         main:
-            pattern:     ^/
+            pattern: ^/(?!(api/))
             provider: chain_provider
             fr3d_ldap:  ~
             form_login:
@@ -87,7 +97,7 @@ security:
                 check_path: fos_user_security_check
                 default_target_path: /
             logout: true
-            anonymous:    true
+            anonymous: true
             remember_me:
                 name: remember_me
                 secret: "%secret%"
@@ -98,7 +108,9 @@ security:
                 httponly: false
             guard:
                 authenticators:
-                    - App\Catrobat\Security\WebviewAuthenticator
+                    - App\Catrobat\Security\WebviewAuthenticator     # @deprecated API v1
+                    - App\Catrobat\Security\WebviewJWTAuthenticator
+                entry_point: App\Catrobat\Security\WebviewJWTAuthenticator
 
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:

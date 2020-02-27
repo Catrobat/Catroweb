@@ -235,6 +235,16 @@ class SymfonySupport
   }
 
   /**
+   * @param $service_name
+   *
+   * @return object|null
+   */
+  public function getService($service_name)
+  {
+    return $this->kernel->getContainer()->get($service_name);
+  }
+
+  /**
    * @return Router
    */
   public function getRouter()

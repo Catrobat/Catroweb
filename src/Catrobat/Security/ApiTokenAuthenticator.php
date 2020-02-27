@@ -25,7 +25,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    *  Must be sent in the request HEADER containing the user token
    *  Must not be empty
    */
-  const TOKEN = 'token';
+  const TOKEN = 'authenticate';
 
   /**
    * @var TranslatorInterface
