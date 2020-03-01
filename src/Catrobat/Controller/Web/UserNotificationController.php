@@ -101,9 +101,9 @@ class UserNotificationController extends AbstractController
       {
         $found_notification = true;
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy([
-          'id' => $notification->getComment()->getUser(),
-        ]);
+        /*$user = $em->getRepository(User::class)->findOneBy([
+          'id' => $notification->getComment()->getUser()->getId(),
+        ]);*/
       }
       elseif ($notification instanceof NewProgramNotification && $notification_type === "followers")
       {

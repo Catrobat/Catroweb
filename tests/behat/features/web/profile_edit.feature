@@ -259,14 +259,47 @@ Feature:
     And I wait for the page to be loaded
     Then I should be on "/app/"
 
-  Scenario: I should be able to delete my account with comments
-    Given there are comments:
-      | program_id | user_id | upload_date      | text | user_name | reported |
-      | 3          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
-      | 2          | 2       | 01.01.2013 12:02 | c2   | User1     | true     |
+  Scenario: I should be able to delete my account with comments and notifications
+    Given I log in as "Catrobat" with the password "123456"
+    And I am on "/app/user"
+    And I wait for the page to be loaded
+    And there are comments:
+    | id  | program_id | user_id | upload_date      | text | user_name | reported |
+    | 1   | 1          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
+    | 2   | 2          | 2       | 01.01.2013 12:02 | c2   | User1     | true     |
+    | 3   | 3          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
     And there are catro notifications:
-      | user     | title                 | message                                      | type    | commentID |
-      | Catrobat | Achievement - Uploads | Congratulations, you uploaded your first app | comment | 2         |
+      | user     | title                 | message         | type                     | commentID | like_from | follower_id | program_id  | prize | image_path | parent_program | child_program |
+      | Catrobat |                       |                 | comment                  | 2         |           |             |             |       |            |                |               |
+      | Catrobat |                       |                 | like                     |           | 2         |             | 2           |       |            |                |               |
+      | Catrobat |                       |                 | follower                 |           |           | 2           |             |       |            |                |               |
+      | Catrobat | title                 | msg             | default                  |           |           |             |             |       |            |                |               |
+      | Catrobat |                       |                 | follow_program           |           |           |             | 2           |       |            |                |               |
+      | Catrobat | title                 | msg             | anniversary              |           |           |             |             | prize |            |                |               |
+      | Catrobat | title                 | msg             | achievement              |           |           |             |             |       | image path |                |               |
+      | Catrobat |                       |                 | remix                    |           |           |             |             |       |            | 1              | 3             |
+      | User1    |                       |                 | comment                  | 1         |           |             |             |       |            |                |               |
+      | User1    |                       |                 | like                     |           | 1         |             | 2           |       |            |                |               |
+      | User1    |                       |                 | follower                 |           |           | 1           |             |       |            |                |               |
+      | User1    | title                 | msg             | default                  |           |           |             |             |       |            |                |               |
+      | User1    |                       |                 | follow_program           |           |           |             | 2           |       |            |                |               |
+      | User1    | title                 | msg             | anniversary              |           |           |             |             | prize |            |                |               |
+      | User1    | title                 | msg             | achievement              |           |           |             |             |       | image path |                |               |
+      | User1    |                       |                 | remix                    |           |           |             |             |       |            | 3              | 2             |
+      | Catrobat | title                 | msg             | broadcast                |           |           |             |             |       |            |                |               |
+      | User1    | title                 | msg             | broadcast                |           |           |             |             |       |            |                |               |
+    Then the element "#delete-account-button" should not be visible
+    When I click "#account-settings-button"
+    And I wait for AJAX to finish
+    Then the element "#delete-account-button" should be visible
+    When I click "#delete-account-button"
+    And I wait for AJAX to finish
+    Then I should see "Account Deletion"
+    When I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    Then I should be logged out
+    And the user "Catrobat" should not exist
+    And I log in as "User1" with the password "123456"
     And I am on "/app/user"
     And I wait for the page to be loaded
     Then the element "#delete-account-button" should not be visible
@@ -279,3 +312,5 @@ Feature:
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then I should be logged out
+    And the user "User1" should not exist
+    And comments or catro notifications should not exist

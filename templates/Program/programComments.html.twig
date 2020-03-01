@@ -41,8 +41,8 @@
 
         <div class="comment-payload-wrapper">
           <div class="name-date-wrapper">
-            <a href="{{ url('profile', { id : comment.user }) }}">
-              <div id="profile-comment-user-id-{{ comment.user }}" class="usr-name">
+            <a href="{{ url('profile', { id : comment.user.id }) }}">
+              <div id="profile-comment-user-id-{{ comment.user.id }}" class="usr-name">
                 {{ comment.username }}
               </div>
             </a>
