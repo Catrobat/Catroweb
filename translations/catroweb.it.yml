@@ -19,11 +19,11 @@ deleteIt: Sì, cancellalo!
 reportIt: Sì, segnalalo!
 areYouSure: Sei sicuro?
 noWayOfReturn: Non è possibile ripristinare queste azioni!
-download: Download the project
+download: Scarica il progetto
 description: Descrizione
 noDescription: Nessuna descrizione disponibile.
-credits: Credits
-noCredits: No credits available.
+credits: Riconoscimenti
+noCredits: Nessun riconoscimento disponibile.
 country: Paese
 loginText: login
 privacyPolicy: Informativa sulla privacy
@@ -36,12 +36,12 @@ less: 'meno'
 show-more: 'Mostra di più'
 show-less: 'Mostra meno'
 ok: Va bene
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Per scaricare il progetto di esempio, fai click su %link_start% questo %link_end% link.'
 registrationError: 'Nome utente o indirizzo email già in uso.'
 notifications: 'Notifiche'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
+allNotifications: 'Tutte le notifiche'
+FollowersNotifications: 'Follower'
+LikeNotifications: 'Mi piace'
 likesNotificationsTitle: 'Like Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
@@ -540,7 +540,7 @@ help:
     description6: |
       Questo tutorial mostra come creare uno sfondo che si sposta verticalmente, muovendo l'oggetto sfondo in un certo modo. Inoltre viene insegnato come far saltare in alto un personaggio quando questo viene toccato.
       Per rendere il gioco un po' più difficile, viene mostrato come rallentare, man mano che passa il tempo, la velocità del personaggio.
-    download: "Download the project"
+    download: "Scarica il progetto"
 oauth:
   username_header: Grazie per esserti registrato a Pocket Code!
   username_chooser: 'Scegli un nome utente:'

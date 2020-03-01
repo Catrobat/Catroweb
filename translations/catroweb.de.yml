@@ -19,11 +19,11 @@ deleteIt: Ja, wirklich löschen!
 reportIt: Ja, melden!
 areYouSure: Bist du sicher?
 noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
-download: Download the project
+download: Projekt herunterladen
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
-credits: Credits
-noCredits: No credits available.
+credits: Anerkennung
+noCredits: Keine Anerkennung verfügbar.
 country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
@@ -36,38 +36,38 @@ less: 'weniger'
 show-more: 'Mehr'
 show-less: 'Weniger'
 ok: OK
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Um das Beispielprojekt herunterzuladen klicke %link_start% hier %link_end%.'
 registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
+allNotifications: 'Alle Benachrichtigungen'
+FollowersNotifications: 'Anhänger'
+LikeNotifications: 'Gefällt mir'
+likesNotificationsTitle: 'Gefällt mir Benachrichtigungen'
+followersNotificationsTitle: 'Anhänger Benachrichtigungen'
+commentsNotificationsTitle: 'Benachrichtigungen über neuen Kommentare'
 CommentNotifications: 'Kommentare'
-oldnotification: 'Old Notifications'
+oldnotification: 'Alte Benachrichtigungen'
 wellDone: "Gut gemacht!"
 done: "Fertig!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "Es scheint, als hättest du keine Benachrichtigungen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
 deleteNotificationConfirmation: "Bist du sicher?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+notificationDeleteMessage: "Bist du dir sicher, dass die Benachrichtigung gelöscht werden soll?"
+notificationDeleteAllMessage: "Bist du dir sicher, dass alle Benachrichtigungen gelöscht werden sollen?"
+confirmMessage: "Ja, jetzt löschen"
 cancelMessage: "Abbrechen"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
+notificationsAllMessagesDeleted: "Alle Benachrichtigungen wurden gelöscht."
+notificationDeletedMessage: "Benachrichtigung wurde erfolgreich gelöscht."
 clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
-deleteAllNotificationsButtonTitle: "Delete all"
+deleteAllNotificationsButtonTitle: "Alle löschen"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
-notificationsDeleteError: "Unable to delete notifications!"
+notificationsDeleteError: "Benachrichtigungen konnten nicht gelöscht werden!"
 pleaseWait: "Bitte warten..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      title: 'Welche Projekte werden hier empfohlen?'
+      description: 'Je mehr "Gefällt mir" (einschließlich "Daumen hoch", "Lachen", "Liebe" und "Woow!") dein Projekt erhält, desto höher erscheint es in dieser Liste.'
 programs:
   welcome:
     title: Willkommen bei Catrobat's %theme%
@@ -75,9 +75,9 @@ programs:
     download: Lade die App herunter
     statistics: Mehr Statistiken
   featured: Empfohlen
-  newest: Newest projects
-  recommended: Recommended projects
-  noPrograms: There are currently no projects.
+  newest: Neueste Projekte
+  recommended: Empfohlene Projekte
+  noPrograms: Derzeit gibt es keine Projekte.
   deleteConfirmation: |+
     Bist du dir sicher?
     Bist du dir sicher, dass du %programName% löschen möchtest?
@@ -85,32 +85,32 @@ programs:
     Ja, löschen!
     Abbrechen
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    Bist du dir sicher?
+    Wenn du '%programName%' auf privat setzt, wird es von anderen Benutzern nicht gesehen oder gefunden.
+    Du kannst den Link dieses Projekts immer noch mit deinen Freunden teilen. Du kannst die Sichtbarkeit umschalten indem du auf das Schlosssymbol klickst.
+    Wenn du "%programName%" auf öffentlich setzt, kann es von anderen Benutzern gesehen und gefunden werden.
+    Ja, auf öffentliche setzen
+    Ja, auf privat setzen
+    Nein
   reportCommentConfirmation: Bist du sicher, dass du diesen Kommentar melden möchtest?
   deleteCommentConfirmation: Bist du sicher, dass du diesen Kommentar löschen möchtest?
   deleteAccountConfirmation: |+
-    Account Deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
+    Konto löschen?
+    Bist du dir sicher, dass du dein Konto löschen möchtest? Dadurch werden auch deine hochgeladenen Projekte und Kommentare gelöscht!
+    Es gibt keine Möglichkeit dein Konto wiederherzustellen!
+    Ja, löschen!
+    Abbrechen
+  tooLongDescription: Die Projektbeschreibung ist zu lang!
   rudeWordsInDescription: Du kannst in deiner Beschreibung keine unhöflichen Wörter verwenden!
-  tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
+  tooLongCredits: Die Anerkennung ist zu lang!
+  rudeWordsInCredits: Du kannst keine unpassenden Wörter in deiner Anerkennung verwenden!
   most:
     viewed: meist gesehen
     downloaded: meist heruntergeladen
-  random: Random projects
-  related: Related projects
+  random: Zufällige Projekte
+  related: Verwandte Projekte
   downloads: '%downloads% heruntergeladen'
-  sample: Example projects
+  sample: Beispielprojekte
   views: '%views% gesehen'
   likeThumbsUpDetailText: '{0}0 Personen befürworten das |{1}1 Person befürwortet das |]1,Inf]%persons% Personen befürworten das'
   likeSmileDetailText: '{0}Menschen lächeln hier |{1}Person lächelt hier |]1,Inf]%persons% Menschen lächeln hier'
@@ -118,25 +118,25 @@ programs:
   likeWowDetailText: '{0}Leute sagen "Wooow!" dazu |{1}Person sagt "Wooow!" dazu |]1,Inf]%persons% Leute sagen "Wooow!" dazu'
   remixes: '{0}0 Remixe |{1}1 Remix |] 1, Inf]%remixes% Remixe'
   newRemixesNotificationTitle: '|{1} "%programName%" hat 1 neuen Remix: |] 1, Inf] "%programName%" hat %remixes% neue Remixe:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  submitted: Eingereichte Projekte
+  uploaded: Hochgeladene Projekte
   reportAsInappropriate: Als unpassend melden
-  reportProgram: Report project
+  reportProgram: Projekt melden
   languageVersion: 'Catrobat Sprachversion: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: Bitte %login% um dieses Projekt zu melden.
+  reportDialogHeader: Warum möchtest du das Projekt melden?
   reportDialogReason: Gib einen Grund an
   reportRadioButtonInappropriate: Es ist unangemessen
   reportRadioButtonCopyright: Urheberrechtsverletzung
   reportRadioButtonSpam: Es ist Spam
   reportRadioButtonDislike: Es gefällt mir nicht
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportOwnProgram: Du kannst dein eigenes Programm nicht melden.
+  reportAlready: Du hast dieses Projekt bereits gemeldet.
+  reportDone: Du hast dieses Projekt gemeldet!
   updateAppHeader: App aktualisieren
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Projekt herunterladen zu können.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: Sieh dir diese Catrobat Projekt an
   show_more: Mehr anzeigen
   comments: Kommentare
   send: Senden
@@ -147,24 +147,24 @@ programs:
   deleted_popup: Der Kommentar wurde erfolgreich gelöscht.
   deleted_popup_header: Gelöscht
   noAdminRights: Du hast keine Administratorenrechte. Bitte melde dich als Administrator an.
-  editDescription: Edit the project Description
+  editDescription: Projektbeschreibung bearbeiten
   saveDescription: Beschreibungsänderung speichern
-  editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  editCredits: Projekt Anerkennung bearbeiten
+  saveCredits: Bearbeitete Anerkennung speichern
   addComment: Kommentar schreiben
   thumbsUp: Daumen hoch!
   smile: Smile!
   love: Love!
   wow: Wooow!
   linkTitle: Link
-  link: Copy project link to clipboard
+  link: Link in Zwischenablage kopieren
 remixGraph:
   showRemixGraph: 'Zeige den Remix Graphen'
   by: 'um'
   open: 'Öffne '
   showPaths: 'Wege anzeigen'
   programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailableErrorDescription: 'Das Projekt ist nicht mehr verfügbar!'
   programNotAvailable: 'Nicht verfügbar'
   programUnknownUser: 'Unbekannter Benutzer'
 noReply: Dies ist eine automatische Meldung, bitte antworte nicht auf diese E-Mail
@@ -227,12 +227,12 @@ profile:
   oldPass: altes Passwort
   firstEmail: Meine erste E-Mail
   secondEmail: Meine zweite E-Mail
-  myPrograms: My projects
+  myPrograms: Meine Projekte
   follows: Folgt
   follower: Follower
   unfollowUser: Entfolgen!
   followUser: Folgen
-  amountOfPrograms: Amount of projects
+  amountOfPrograms: Anzahl der Projekte
   form:
     passwordTooShort: Das neue Passwort muss mindestens %length% Zeichen lang sein.
     passwordTooLong: Das neue Passwort darf maximal %length% Zeichen lang sein.
@@ -241,12 +241,12 @@ profile:
     emailNotValid: Diese E-mail Adresse ist ungültig.
     emailMissing: Fehler beim Speicher dieser E-Mail Adresse. Du musst zumindest eine verifizierte E-Mail Adresse haben.
     emailExists: Die E-Mail Adresse existiert bereits.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: Dieser Benutzername ist ungültig.
+    usernameMissing: Du musst einen Benutzernamen eingeben.
     usernameExists: Dieser Benutzername existiert bereits.
     submitSuccess: gespeichert!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: Willst du wirklich dein Projekt löschen
+  programsOf: Projekte von
   changePicture: Bild ändern
   avatar:
     noImage: Kein Bild vorhanden!
@@ -267,18 +267,18 @@ myprofile:
   editCountry: Land ändern
   editEmail: E-Mail bearbeiten
   deleteAccount: Account löschen
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  deleteAccountText: Bist du dir sicher, dass du dein Konto löschen möchtest? Dadurch werden deine hochgeladenen Projekte und Kommentare gelöscht!
   editAccountSettings: Kontoeinstellungen bearbeiten
   notChangeVisibility: Sichtbarkeit kann nicht geändert werden.
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  notChangeVisibilityReason: Die Sprachversion deines Projekts ist inkompatibel, daher kann es nicht auf sichtbar gesetzt werden.
 licenseToPlay:
   link: 'Lizenzbedingungen'
   title: 'Lizenz zum Spielen - Sag "Danke" und teile deine Programme'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: Stell dir vor, dass jedes Catrobat Projekt ein Kuchen ist, ein sehr spezieller Kuchen, welches ein Rezept beinhaltet (Programmblöcke). Alle Mitglieder der Catrobat Gemeinschaft teilen ihre Kuchen zusammen mit ihren Rezepten. Dadurch kannst du die Kuchen anderer genießen und mithilfe der Rezepte lernen deine eigenen zu machen!
   text2: 'Es gibt keine geheimen Rezepte: die Anweisungen wie diese Kuchen erstellt werden sind offen für jeden um sie zu verwenden, wiederverwenden, ändern und als Inspiration für neue Ideen... Ich meine Kuchen.'
   text3: "Du darfst die Kuchen essen und du darfst die Rezepte von anderen kopieren um deinen eigenen Kuchen zu machen - wenn du möchtest mit anderen Zutaten. Es gibt zwei Dinge die du beachten sollst:"
   text4: "Bei der Einrichtung der Catrobat Gemeinschaft, haben wir beschlossen, diesen Ansatz zu verfolgen, da wir glauben, dass es das Lernen und die Kreativität in der Gemeinschaft unterstützt. Durch den Austausch von Rezepten und Zutaten (Skripte und Grafiken), können Menschen gegenseitig Ideen aufbauen und alle profitieren davon."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text5: Bei der Gestaltung der Catrobat Website, fügten wir Funktionen hinzu, um Menschen zu ermutigen, zu teilen und anderen Respekt zu zollen. Auf jeder Seite des Projektes kannst du immer die ursprünglichen Skripts für das Projekt herunterladen. Wenn du ein Projekt (Veränderung des Skripts oder der Grafiken, und anschließendes Teilen) vermischst, empfehlen wir dir die Menschen und das Projekt, welches dich inspiriert hat, in die Projekt Anerkennung einzutragen.
   text6: 'Erfahre mehr über die Nutzungsbedingungen der online-Community von Catrobat auf %link-termsOfUse%.'
   list1:
     item1: teile Deine Kuchen und die Rezepte mit anderen
@@ -287,9 +287,9 @@ licenseToPlay:
 termsOfUse:
   title: Nutzungsbedingungen
   headline: Willkommen in der Catrobat Gemeinschaft!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'Als Teil der Catrobat Community teilst du Projekte und Ideen mit anderen Leuten:'
   text2: "Wir benötigen Deine Hilfe um diese Community zu einem hilfreichen Platz für alle Mitglieder zu machen. Und so kannst Du uns helfen:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: "Mit dem Catrobat Projekt wollen wir die Zusammenarbeit fördern und damit die Kreativität aller kombinieren - zum Wohle der gesamten Menschheit. Auch du kannst ein aktives Mitglied der Catrobat Gemeinschaft werden, indem du deine Projekte als Geschenk zurück an die Gemeinschaft gibst, in der gleichen Weise wie andere aktive Mitglieder ihre Programme dir geben:"
   text4: 'Unser Geschenk an dich:'
   text5: 'Unsere allgemeinen Geschäftsbedingungen:'
   list1:
@@ -297,7 +297,7 @@ termsOfUse:
     item2: mit unterschiedlichem Alter (von kleinen Kindern über Jugendliche bis Großeltern)
     item3: die unterschiedliche Fähigkeiten haben
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: Sei respektvoll. Wenn du Projekte teilst, denke bitte daran, dass Menschen aus vielen verschiedenen Altersgruppen und Hintergründen deine Beiträge sehen können.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "Sei ehrlich. Versuche nicht Dich als jemand anderes auszugeben oder die Community sonst irgendwie zu betrügen."
     item4: "Behalte persönliche Informationen für Dich. Veröffentliche nicht Deine E-Mail Adresse, Telefonnummer oder andere persönliche Kontakt-Informationen."
@@ -498,7 +498,7 @@ help:
     text0: "Herzlichen Glückwunsch zu deinem Spiel! Du kannst es nun auf %link% hochladen, um eine eigenständige Android App zu erstellen. Diese kannst du dann auf der Game Jolt Seite hochladen."
     title1: "Anmeldung"
     text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Hochladen"
+    title2: "Projekt hochladen"
     text2: "Nachdem du dich angemeldet hast, kannst du dein Spiel hochladen. Überlege dir einen Namen und eine Beschreibung. Füge #AliceJam150 zur Beschreibung hinzu."
     title3: "Search for your project"
     text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
@@ -538,7 +538,7 @@ help:
     subtitle6: "Erstelle einen bewegten Hintergrund"
     description6: |
       Dieses Tutorial zeigt dir wie du vertikal bewegliche Hintergründe erstellen kannst, indem du die Hintergrundgrafiken in einer bestimmten Art und Weise gleiten lässt. Weiters werden wir dir zeigen, wie du Charaktere durch Berührung nach vorne springen lassen kannst. Um das Spiel etwas schwieriger zu gestalten zeigen wir dir, wie du die Geschindigkeit deines Charkaters mit der Zeit drosseln kannst.
-    download: "Download the project"
+    download: "Projekt herunterladen"
 oauth:
   username_header: Danke für deine Anmeldung bei Pocket Code!
   username_chooser: 'Bitte wähle einen Benutzernamen:'
@@ -749,27 +749,27 @@ pmd:
     text: Project upload failed.
 codeview:
   showCode: 'Code anzeigen'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'scenes'
-  scripts: 'scripts'
-  bricks: 'bricks'
-  objects: 'actors and objects'
+  hideCode: 'Code ausblenden'
+  showStatistics: 'Code-Statistiken anzeigen'
+  hideStatistics: 'Code-Statistiken ausblenden'
+  cantDisplayCode: "Code kann nicht angezeigt werden"
+  cantDisplayStatistics: "Code kann nicht angezeigt werden"
+  totalNumberOf: 'Gesamtzahl von'
+  scenes: 'Szenen'
+  scripts: 'Skripte'
+  bricks: 'Bausteine'
+  objects: 'Figuren und Objekte'
   looks: 'looks'
   sounds: 'sounds'
   globals: 'globals'
   locals: 'locals'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
+  eventBricks: 'Event-Bausteine'
+  controlBricks: 'Bausteine steuern'
+  motionBricks: 'Bewegungs-Bausteine'
+  soundBricks: 'Ton-Bausteine'
+  looksBricks: 'Aussehen-Bausteine'
+  penBricks: 'Schreib-Bausteine'
+  dataBricks: 'Daten-Bausteine'
   specialBricks: 'Special Bricks'
 footer:
   usefulLinks: Nützliche Links
@@ -778,9 +778,9 @@ footer:
   download: Hol dir die App
 privacy-policy:
   header: Datenschutz-Vereinbarung
-  version: Version 2.2, 17 October 2019
+  version: Version 2.2, 17. Oktober 2019
   text1: Um dir alle Vorteile unserer Dienste und dem verknüpften Benutzerkonto bieten zu können, ist es notwendig gewisse Daten von dir zu sammeln.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text2: Um unsere Dienste (Apps und Websites) warten und verbessern zu können und um wissenschaftliche Forschung über ICT und STEM/STEAM-Ausbildung zu betreiben, verwenden wir Google Analytics, Crashlytics und Firebase, alle von Google LLC (USA), sowie Dynatrace von Dynatrace LLC (USA), um Metadaten über die Nutzung unserer Dienste zu erhalten, z.B. Absturzinformationen, Zeitstempel, besuchte Seiten/Bildschirme, Nutzung unserer Apps und Dienste, verwendetes Betriebssystem und Informationen über den Netzwerkanbieter. Diese Analyse und die gesammelten Daten werden nicht mit Ihrem Profil verknüpft und enthalten keine persönlichen Informationen (die letzten Bits der IP-Adresse werden anonymisiert). Die gesammelten Daten werden jedoch an die Service-Anbieter (Google LLC, USA und Dynatrace LLC, USA) übermittelt. Die Datenverarbeitung basiert auf Vereinbarungen mit Google LLC und Dynatrace LLC. Diese Beziehung zu den Dienstanbietern entspricht der Allgemeinen Datenschutzverordnung der Europäischen Union (EU GDPR) und dem Abkommen zwischen der EU und den USA "Privacy Shield".
   text3: Um ein Benutzerkonto in unserem System zu erstellen und nutzen, sowie um Nutzer per E-Mail über notwendige Änderungen unserer Dienste/Vereinbarungen zu informieren, werden Nutzername und sofern zur Verfügung gestellt E-Mailadresse von uns gespeichert. Falls der Account via Google Plus oder Facebook erstellt wurde wird zusätzlich ein Identifizierungsschlüssel zu diesen Diensten gespeichert. Diese Daten werden, sofern nicht explizit eingewilligt, nicht für andere Zwecke (z.B. Marketing) verwendet.
   text4: Auf freiwilliger Basis kann das Heimatland auf der Benutzerseite angegeben werden. Diese Information wird öffentlich auf der Benutzerseite angezeigt und für Forschungs-/Statistikzwecke von uns genutzt. Sie kann über die Benutzerseite jederzeit wieder entfernt werden.
   text5: Die Nutzung der persönlichen Daten von uns kann jederzeit durch die Löschung des Benutzerkontos auf https://share.catrob.at widerrufen werden. Durch die Löschung können unsere Dienste weiterhin genutzt werden, jedoch stehen Kontoabhängige Funktionen (z.B. Upload, Kommentieren oder liken) nicht mehr zur Verfügung. Weiters, werden alle mit dem Benutzerkonto verbundenen Inhalte (hochgeladene Programme, Kommentare, etc.) gelöscht.
@@ -788,23 +788,23 @@ privacy-policy:
   text7: Es besteht freiwillig die Möglichkeit den Catrobat-Newsletter (https://catrob.at/newsletter), der von MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA) zur Verfügung gestellt wird, zu abonnieren. Mit dem Newsletter werden regelmäßig Neuigkeiten über Catrobat und unsere Dienste an die angegebene E-Mailadresse gesendet. Der Newsletter kann jederzeit über einen "Unsubscribe" Link in den Mails abbestellt werden. Dieser Dienst wird von MailChimp betrieben, mit denen wir eine entsprechende Vereinbarung zur Datenverarbeitung abgeschlossen haben und die sich der EU-DSGVO und dem EU-USA "Privacy Shield" verpflichten. Für weitere Details über MailChimp zu erfahren bitten wir direkt ihre Datenschutzvereinbarung und Geschäftsbedingungen aufzurufen.
   text8: "Alle Dienste werden von der \"International Catrobat Association - Verein zur Förderung freier Software\", einer non-profit Organisation mit Sitz in Graz (Österreich), betrieben. Unsere Vereinbarung unterliegt Europäischem sowie Österreichischem Datenschutzrecht (DSGVO). Um uns zu kontaktieren, bitten wir eine E-Mail an contact@catrobat.org zu senden oder sich per Post an uns zu wenden:\\n\nCatrobat\\n\nc/o Institut für Softwaretechnologie\\n\nTechnische Universität Graz\\n\nInffeldgasse 16b\\n\n8010 Graz, Österreich (EU)."
   text9: Falls du jünger als 14 Jahre bist muss diese Vereinbarung von deinen Erziehungsberechtigten (üblicherweise die Eltern) akzeptiert werden.
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Die offizielle englischsprachige Datenschutzerklärung von Catrobat ist im Internet unter https://catrob.at/privacypolicy verfügbar.
   disagree-text: Ohne Zustimmung kann kein Benutzerkonto erstellt werden, die Basisfunktionalität kann aber weiterhin genutzt werden.
 catro-notifications:
   markAsRead: "Als gelesen markieren"
   summary: "{0}Du hast keine neuen Benachrichtigungen|{1}Du hast %amount% neue Benachrichtigung!|]1,Inf]Du hast %amount% neue Benachrichtigungen!"
   comment:
-    title: 'New comment for project %program_name%!'
-    message: 'User %user_link% commented on your project %program_link%.'
+    title: 'Neuer Kommentar für Projekt %program_name%!'
+    message: 'Benutzer %user_link% hat Ihr Projekt %program_link% kommentiert.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'Neues Like für Projekt %program_name%!'
+    message: 'Benutzer %user_link% hat Ihr Projekt %program_link% geliked.'
   follow:
     title: 'Neue Follower!'
-    message: 'User %user_link% follows you now.'
+    message: 'Benutzer %user_link% folgt Ihnen jetzt.'
   program-upload:
-    title: 'New Project from someone you follow'
-    message: 'User %user_link% created a new Project %program_link%'
+    title: 'Neues Projekt von jemandem, dem du folgst'
+    message: 'Benutzer %user_link% hat ein neues Projekt %program_link% erstellt'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Fehler beim Kopieren! :(

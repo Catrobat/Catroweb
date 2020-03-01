@@ -119,7 +119,7 @@ programs:
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  uploaded: Postavljeni projekti
   reportAsInappropriate: Prijavi kao neprimjeren
   reportProgram: Report project
   languageVersion: 'Catrobat verzija jezika: %languageVersion%'
