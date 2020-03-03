@@ -2,30 +2,27 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
-use App\Catrobat\Services\ExtractedFileRepository;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-
 /**
- * Class ApproveProgramsAdmin
- * @package App\Admin
+ * Class ApproveProgramsAdmin.
  */
 class ApproveProgramsAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -39,7 +36,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
   /**
    * @var null
    */
-  private $extractedProgram = null;
+  private $extractedProgram;
 
   /**
    * @var ScreenshotRepository
@@ -62,9 +59,6 @@ class ApproveProgramsAdmin extends AbstractAdmin
    * @param $code
    * @param $class
    * @param $baseControllerName
-   * @param ScreenshotRepository $screenshot_repository
-   * @param ProgramManager $program_manager
-   * @param ExtractedFileRepository $extracted_file_repository
    */
   public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository,
                               ProgramManager $program_manager, ExtractedFileRepository $extracted_file_repository)
@@ -83,23 +77,169 @@ class ApproveProgramsAdmin extends AbstractAdmin
   public function createQuery($context = 'list')
   {
     /**
-     * @var $query QueryBuilder
+     * @var QueryBuilder
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0] . '.approved', $query->expr()->literal(false))
+      $query->expr()->eq($query->getRootAliases()[0].'.approved', $query->expr()->literal(false))
     );
     $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0] . '.visible', $query->expr()->literal(true))
+      $query->expr()->eq($query->getRootAliases()[0].'.visible', $query->expr()->literal(true))
     );
 
     return $query;
   }
 
+  /**
+   * @param $program
+   *
+   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
+   */
+  public function preUpdate($program)
+  {
+    /**
+     * @var Program
+     * @var ModelManager $model_manager
+     */
+    $model_manager = $this->getModelManager();
+    $old_program = $model_manager->getEntityManager($this->getClass())->getUnitOfWork()
+      ->getOriginalEntityData($program)
+    ;
+
+    if (false == $old_program['approved'] && true == $program->getApproved())
+    {
+      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()
+        ->get('security.token_storage')->getToken()->getUser());
+      $this->getModelManager()->update($program);
+    }
+    elseif (true == $old_program['approved'] && false == $program->getApproved())
+    {
+      $program->setApprovedByUser(null);
+      $this->getModelManager()->update($program);
+    }
+  }
 
   /**
-   * @param ShowMapper $showMapper
+   * @param $object
+   *
+   * @return string
    */
+  public function getThumbnailImageUrl($object)
+  {
+    /*
+     * @var $object Program
+     */
+
+    return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
+  }
+
+  /**
+   * @param $object
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return array
+   */
+  public function getContainingImageUrls($object)
+  {
+    /*
+     * @var $extractedFileRepository ExtractedFileRepository
+     * @var $program_manager ProgramManager
+     * @var $object Program
+     */
+
+    if (null == $this->extractedProgram)
+    {
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
+    }
+
+    $image_paths = $this->extractedProgram->getContainingImagePaths();
+
+    return $this->encodeFileNameOfPathsArray($image_paths);
+  }
+
+  /**
+   * @param $object
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return array
+   */
+  public function getContainingSoundUrls($object)
+  {
+    /*
+     * @var $extractedFileRepository ExtractedFileRepository
+     * @var $progManager ProgramManager
+     * @var $object Program
+     */
+
+    if (null == $this->extractedProgram)
+    {
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
+    }
+
+    return $this->encodeFileNameOfPathsArray($this->extractedProgram->getContainingSoundPaths());
+  }
+
+  /**
+   * @param $object
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return array
+   */
+  public function getContainingStrings($object)
+  {
+    /*
+     * @var $object Program
+     */
+
+    if (null == $this->extractedProgram)
+    {
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
+    }
+
+    return $this->extractedProgram->getContainingStrings();
+  }
+
+  /**
+   * @param $object
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return array
+   */
+  public function getContainingCodeObjects($object)
+  {
+    /*
+     * @var $object Program
+     */
+
+    if (null == $this->extractedProgram)
+    {
+      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
+        $this->program_manager->find($object->getId())
+      );
+    }
+
+    if ($this->extractedProgram->hasScenes())
+    {
+      return [];
+    }
+
+    return $this->extractedProgram->getContainingCodeObjects();
+  }
+
   protected function configureShowFields(ShowMapper $showMapper)
   {
     // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
@@ -119,38 +259,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('Sounds', null, ['template' => 'Admin/program_containing_sound.html.twig'])
       ->add('Strings', null, ['template' => 'Admin/program_containing_strings.html.twig'])
       ->add('Objects', null, ['template' => 'Admin/program_containing_code_objects.html.twig'])
-      ->add('', null, ['template' => 'Admin/program_approve_action.html.twig']);
+      ->add('', null, ['template' => 'Admin/program_approve_action.html.twig'])
+    ;
   }
-
-
-  /**
-   * @param $program
-   *
-   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
-   */
-  public function preUpdate($program)
-  {
-    /**
-     * @var $program Program
-     * @var $model_manager ModelManager
-     */
-    $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())->getUnitOfWork()
-      ->getOriginalEntityData($program);
-
-    if ($old_program['approved'] == false && $program->getApproved() == true)
-    {
-      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser());
-      $this->getModelManager()->update($program);
-    }
-    elseif ($old_program['approved'] == true && $program->getApproved() == false)
-    {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
-    }
-  }
-
 
   /**
    * @param FormMapper $formMapper
@@ -161,9 +272,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
   {
     $formMapper
       ->add('name', TextType::class, ['label' => 'Program name'])
-      ->add('user', EntityType::class, ['class' => User::class]);
+      ->add('user', EntityType::class, ['class' => User::class])
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -174,9 +285,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
   {
     $datagridMapper
       ->add('name')
-      ->add('user.username');
+      ->add('user.username')
+    ;
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -192,50 +303,18 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('description')
       ->add('visible', 'boolean', ['editable' => true])
       ->add('approved', 'boolean', ['editable' => true])
-      ->add('_action', 'actions', ['actions' => ['show' => []]]);
+      ->add('_action', 'actions', ['actions' => ['show' => []]])
+    ;
   }
 
-
-  /**
-   * @param $object
-   *
-   * @return string
-   */
-  public function getThumbnailImageUrl($object)
+  protected function configureRoutes(RouteCollection $collection)
   {
-    /**
-     * @var $object Program
-     */
-
-    return '/' . $this->screenshot_repository->getThumbnailWebPath($object->getId());
-  }
-
-
-  /**
-   * @param $object
-   *
-   * @return array
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   */
-  public function getContainingImageUrls($object)
-  {
-    /**
-     * @var $extractedFileRepository ExtractedFileRepository
-     * @var $program_manager ProgramManager
-     * @var $object Program
-     */
-
-    if ($this->extractedProgram == null)
-    {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
-      );
-    }
-
-    $image_paths = $this->extractedProgram->getContainingImagePaths();
-
-    return $this->encodeFileNameOfPathsArray($image_paths);
+    $collection->remove('create')->remove('delete')->remove('edit');
+    $collection
+      ->add('approve', $this->getRouterIdParameter().'/approve')
+      ->add('invisible', $this->getRouterIdParameter().'/invisible')
+      ->add('skip', $this->getRouterIdParameter().'/skip')
+    ;
   }
 
   /**
@@ -243,106 +322,17 @@ class ApproveProgramsAdmin extends AbstractAdmin
    *
    * @return array
    */
-  private function encodeFileNameOfPathsArray($paths) {
+  private function encodeFileNameOfPathsArray($paths)
+  {
     $encoded_paths = [];
-    foreach ($paths as $path) {
-      $pieces = explode("/",$path);
+    foreach ($paths as $path)
+    {
+      $pieces = explode('/', $path);
       $filename = array_pop($pieces);
       array_push($pieces, rawurlencode($filename));
       array_push($encoded_paths, implode('/', $pieces));
     }
+
     return $encoded_paths;
-  }
-
-  /**
-   * @param $object
-   *
-   * @return array
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   */
-  public function getContainingSoundUrls($object)
-  {
-    /**
-     * @var $extractedFileRepository ExtractedFileRepository
-     * @var $progManager ProgramManager
-     * @var $object Program
-     */
-
-    if ($this->extractedProgram == null)
-    {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
-      );
-    }
-
-    return $this->encodeFileNameOfPathsArray($this->extractedProgram->getContainingSoundPaths());
-  }
-
-
-  /**
-   * @param $object
-   *
-   * @return array
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   */
-  public function getContainingStrings($object)
-  {
-    /**
-     * @var $object Program
-     */
-
-    if ($this->extractedProgram == null)
-    {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
-      );
-    }
-
-    return $this->extractedProgram->getContainingStrings();
-  }
-
-  /**
-   * @param $object
-   *
-   * @return array
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   */
-  public function getContainingCodeObjects($object)
-  {
-    /**
-     * @var $object Program
-     */
-
-    if ($this->extractedProgram == null)
-    {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
-      );
-    }
-
-    if ($this->extractedProgram->hasScenes())
-    {
-      return [];
-    }
-    else
-    {
-      return $this->extractedProgram->getContainingCodeObjects();
-    }
-  }
-
-
-  /**
-   * @param RouteCollection $collection
-   */
-  protected function configureRoutes(RouteCollection $collection)
-  {
-    $collection->remove('create')->remove('delete')->remove('edit');
-    $collection
-      ->add('approve', $this->getRouterIdParameter() . '/approve')
-      ->add('invisible', $this->getRouterIdParameter() . '/invisible')
-      ->add('skip', $this->getRouterIdParameter() . '/skip');
   }
 }

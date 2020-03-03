@@ -7,21 +7,18 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
- * Class ApproveProgramController
- * @package App\Catrobat\Controller\Admin
+ * Class ApproveProgramController.
  */
 class ApproveProgramController extends Controller
 {
-
   /**
    * @return RedirectResponse
    */
   public function approveAction()
   {
     /**
-     * @var $object Program
+     * @var Program
      */
     $object = $this->admin->getSubject();
     if (!$object)
@@ -31,11 +28,10 @@ class ApproveProgramController extends Controller
     $object->setApproved(true);
     $object->setVisible(true);
     $this->admin->update($object);
-    $this->addFlash('sonata_flash_success', $object->getName() . ' approved. ' . $this->getRemainingProgramCount() . ' remaining.');
+    $this->addFlash('sonata_flash_success', $object->getName().' approved. '.$this->getRemainingProgramCount().' remaining.');
 
     return new RedirectResponse($this->getRedirectionUrl());
   }
-
 
   /**
    * @return RedirectResponse
@@ -47,11 +43,10 @@ class ApproveProgramController extends Controller
     {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }
-    $this->addFlash('sonata_flash_warning', $object->getName() . ' skipped');
+    $this->addFlash('sonata_flash_warning', $object->getName().' skipped');
 
     return new RedirectResponse($this->getRedirectionUrl());
   }
-
 
   /**
    * @return RedirectResponse
@@ -59,9 +54,8 @@ class ApproveProgramController extends Controller
   public function invisibleAction()
   {
     /**
-     * @var $object Program
+     * @var Program
      */
-
     $object = $this->admin->getSubject();
     if (!$object)
     {
@@ -71,11 +65,10 @@ class ApproveProgramController extends Controller
     $object->setVisible(false);
     $this->admin->update($object);
 
-    $this->addFlash('sonata_flash_success', $object->getName() . ' set to invisible' . $this->getRemainingProgramCount() . ' remaining.');
+    $this->addFlash('sonata_flash_success', $object->getName().' set to invisible'.$this->getRemainingProgramCount().' remaining.');
 
     return new RedirectResponse($this->getRedirectionUrl());
   }
-
 
   /**
    * @return string
@@ -83,7 +76,7 @@ class ApproveProgramController extends Controller
   private function getRedirectionUrl()
   {
     $nextId = $this->getNextRandomApproveProgramId();
-    if ($nextId == null)
+    if (null == $nextId)
     {
       return $this->admin->generateUrl('list');
     }
@@ -91,26 +84,25 @@ class ApproveProgramController extends Controller
     return $this->admin->generateUrl('show', ['id' => $nextId]);
   }
 
-
   /**
    * @return Program|null
    */
   private function getNextRandomApproveProgramId()
   {
     /**
-     * @var $object Program
+     * @var Program
      */
-
     $datagrid = $this->admin->getDatagrid();
 
     $objects = $datagrid->getResults();
-    if (count($objects) == 0)
+    if (0 == count($objects))
     {
       return null;
     }
     $object_key = array_rand($objects);
 
     $object = $objects[$object_key];
+
     return $object->getId();
   }
 

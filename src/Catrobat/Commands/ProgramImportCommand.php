@@ -3,8 +3,11 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
+use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\RemixGraph\RemixGraphLayout;
+use App\Catrobat\Requests\AddProgramRequest;
 use App\Entity\User;
+use App\Entity\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,15 +15,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use App\Entity\UserManager;
-use App\Catrobat\Requests\AddProgramRequest;
 use Symfony\Component\HttpFoundation\File\File;
-use App\Catrobat\Exceptions\InvalidCatrobatFileException;
-
 
 /**
- * Class ProgramImportCommand
- * @package App\Catrobat\Commands
+ * Class ProgramImportCommand.
  */
 class ProgramImportCommand extends Command
 {
@@ -43,10 +41,6 @@ class ProgramImportCommand extends Command
 
   /**
    * ProgramImportCommand constructor.
-   *
-   * @param Filesystem                      $filesystem
-   * @param UserManager                     $user_manager
-   * @param RemixManipulationProgramManager $program_manager
    */
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager)
@@ -57,9 +51,6 @@ class ProgramImportCommand extends Command
     $this->remix_manipulation_program_manager = $program_manager;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:import')
@@ -67,15 +58,14 @@ class ProgramImportCommand extends Command
       ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
       ->addArgument('user', InputArgument::REQUIRED, 'User who will be the owner of these programs')
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED, 'Generates remix graph based on given layout',
-        self::REMIX_GRAPH_NO_LAYOUT);
+        self::REMIX_GRAPH_NO_LAYOUT)
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -92,7 +82,7 @@ class ProgramImportCommand extends Command
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
 
-    if ($finder->count() == 0)
+    if (0 == $finder->count())
     {
       $output->writeln('No catrobat files found');
 
@@ -100,9 +90,9 @@ class ProgramImportCommand extends Command
     }
 
     $user = $this->user_manager->findUserByUsername($username);
-    if ($user == null)
+    if (null == $user)
     {
-      $output->writeln('User ' . $username . ' was not found!');
+      $output->writeln('User '.$username.' was not found!');
 
       return 1;
     }
@@ -111,16 +101,17 @@ class ProgramImportCommand extends Command
     {
       try
       {
-        $output->writeln('Importing file ' . $file);
+        $output->writeln('Importing file '.$file);
         /** @var User $user */
         $add_program_request = new AddProgramRequest($user, new File($file));
         $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
         $program->setViews(random_int(0, 10));
-        $output->writeln('Added Program <' . $program->getName() . '>');
-      } catch (InvalidCatrobatFileException $e)
+        $output->writeln('Added Program <'.$program->getName().'>');
+      }
+      catch (InvalidCatrobatFileException $e)
       {
         $output->writeln('FAILED to add program!');
-        $output->writeln($e->getMessage() . ' (' . $e->getCode() . ')');
+        $output->writeln($e->getMessage().' ('.$e->getCode().')');
       }
     }
   }

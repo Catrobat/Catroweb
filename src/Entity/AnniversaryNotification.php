@@ -18,15 +18,14 @@ class AnniversaryNotification extends CatroNotification
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = "Notifications/NotificationTypes/anniversary_notification.html.twig";
+  private $twig_template = 'Notifications/NotificationTypes/anniversary_notification.html.twig';
 
   /**
    * AnniversaryNotification constructor.
    *
-   * @param User $user
-   * @param      $title
-   * @param      $message
-   * @param      $prize
+   * @param $title
+   * @param $message
+   * @param $prize
    */
   public function __construct(User $user, $title, $message, $prize)
   {
@@ -34,7 +33,7 @@ class AnniversaryNotification extends CatroNotification
     $this->prize = $prize;
     /* if you didn't forget to set the member variable to default above
        you don't need the following line */
-    $this->twig_template = "Notifications/NotificationTypes/anniversary_notification.html.twig";
+    $this->twig_template = 'Notifications/NotificationTypes/anniversary_notification.html.twig';
   }
 
   /**
@@ -55,13 +54,12 @@ class AnniversaryNotification extends CatroNotification
 
   /**
    * its important to overwrite the get method, otherwise it won't work
-   * and the wrong template will be rendered
+   * and the wrong template will be rendered.
+   *
    * @return mixed
    */
   public function getTwigTemplate()
   {
     return $this->twig_template;
   }
-
-
 }

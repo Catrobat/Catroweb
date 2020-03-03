@@ -2,21 +2,18 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-
 /**
- * Class AdminCommand
- * @package App\Catrobat\Controller\Admin
+ * Class AdminCommand.
  */
 class AdminCommand
 {
-
   /**
-   * @var String
+   * @var string
    */
   public $name;
 
   /**
-   * @var String
+   * @var string
    */
   public $description;
 
@@ -35,14 +32,10 @@ class AdminCommand
    */
   public $command_name;
 
-
   /**
    * AdminCommand constructor.
-   *
-   * @param String $name
-   * @param String $description
    */
-  public function __construct(String $name = "", String $description = "")
+  public function __construct(string $name = '', string $description = '')
   {
     $this->name = $name;
     $this->description = $description;

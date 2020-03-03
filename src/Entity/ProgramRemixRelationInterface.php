@@ -2,10 +2,8 @@
 
 namespace App\Entity;
 
-
 /**
- * Interface ProgramRemixRelationInterface
- * @package App\Entity
+ * Interface ProgramRemixRelationInterface.
  */
 interface ProgramRemixRelationInterface
 {

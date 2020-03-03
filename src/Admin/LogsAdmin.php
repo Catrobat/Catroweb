@@ -5,14 +5,11 @@ namespace App\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-
 /**
- * Class LogsAdmin
- * @package App\Admin
+ * Class LogsAdmin.
  */
 class LogsAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -23,14 +20,12 @@ class LogsAdmin extends AbstractAdmin
    */
   protected $baseRouteName = 'logs';
 
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(['list']);
-    $collection->add("apk")
-      ->add("extracted")
-      ->add("backup");
+    $collection->add('apk')
+      ->add('extracted')
+      ->add('backup')
+    ;
   }
 }

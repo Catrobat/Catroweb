@@ -6,8 +6,7 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class ProgramBeforeInsertEvent
- * @package App\Catrobat\Events
+ * Class ProgramBeforeInsertEvent.
  */
 class ProgramBeforeInsertEvent extends Event
 {
@@ -18,8 +17,6 @@ class ProgramBeforeInsertEvent extends Event
 
   /**
    * ProgramBeforeInsertEvent constructor.
-   *
-   * @param ExtractedCatrobatFile $extracted_file
    */
   public function __construct(ExtractedCatrobatFile $extracted_file)
   {

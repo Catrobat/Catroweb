@@ -2,18 +2,16 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Catrobat\Commands\Helpers\CommandHelper;
 use App\Entity\Program;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Catrobat\Commands\Helpers\CommandHelper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-
 /**
- * Class CleanApkCommand
- * @package App\Catrobat\Commands
+ * Class CleanApkCommand.
  */
 class CleanApkCommand extends Command
 {
@@ -34,9 +32,6 @@ class CleanApkCommand extends Command
 
   /**
    * CleanApkCommand constructor.
-   *
-   * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
   {
@@ -45,22 +40,17 @@ class CleanApkCommand extends Command
     $this->entity_manager = $entity_manager;
   }
 
-
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:clean:apk')
-      ->setDescription('Delete the APKs and resets the status to NONE');
+      ->setDescription('Delete the APKs and resets the status to NONE')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Doctrine\ORM\NonUniqueResultException
    *
    * @return int|void|null
-   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -71,9 +61,10 @@ class CleanApkCommand extends Command
     CommandHelper::emptyDirectory($apk_dir, 'Emptying apk directory', $output);
 
     $query = $this->entity_manager
-      ->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
+      ->createQuery('UPDATE App\\Entity\\Program p SET p.apk_status = :status WHERE p.apk_status != :status')
+    ;
     $query->setParameter('status', Program::APK_NONE);
     $result = $query->getSingleScalarResult();
-    $this->output->writeln('Reset the apk status of ' . $result . ' projects');
+    $this->output->writeln('Reset the apk status of '.$result.' projects');
   }
-} 
+}

@@ -7,12 +7,10 @@ use OpenAPI\Server\Model\Flavor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class ProjectsApi implements ProjectsApiInterface
 {
-
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectProjectIdGet($projectId, &$responseCode, array &$responseHeaders)
   {
@@ -21,7 +19,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsFeaturedGet($platform = null, $maxVersion = null, $limit = 20, $offset = 0, Flavor $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -30,7 +28,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsMostDownloadedGet($maxVersion = null, $limit = 20, $offset = 0, Flavor $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -39,7 +37,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsMostViewedGet($maxVersion = null, $limit = 20, $offset = 0, Flavor $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -48,7 +46,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsPublicUserUserIdGet($userId, $maxVersion = null, $limit = 20, $offset = null, &$responseCode, array &$responseHeaders)
   {
@@ -57,7 +55,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsRandomProgramsGet($maxVersion = null, $limit = 20, $offset = 0, Flavor $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -66,7 +64,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsRecentGet($maxVersion = null, $limit = 20, $offset = 0, Flavor $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -75,7 +73,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsSearchGet($maxVersion = null, $limit = 20, $offset = 0, Flavor $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -84,7 +82,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsUploadPost($token, $checksum = null, UploadedFile $file = null, Flavor $flavor = null, array $tags = null, &$responseCode, array &$responseHeaders)
   {
@@ -93,7 +91,7 @@ class ProjectsApi implements ProjectsApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function projectsUserUserIdGet($userId, $maxVersion = null, $limit = 20, $offset = null, $token, &$responseCode, array &$responseHeaders)
   {

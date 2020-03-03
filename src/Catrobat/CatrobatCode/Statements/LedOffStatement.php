@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class LedOffStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class LedOffStatement.
  */
 class LedOffStatement extends Statement
 {
-  const BEGIN_STRING = "led off";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'led off';
+  const END_STRING = '<br/>';
 
   /**
    * LedOffStatement constructor.
@@ -30,7 +29,7 @@ class LedOffStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Turn flashlight off";
+    return 'Turn flashlight off';
   }
 
   /**
@@ -38,6 +37,6 @@ class LedOffStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
 }

@@ -3,25 +3,21 @@
 namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
-
 use SimpleXMLElement;
 
 /**
- * Class BrickFactory
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
+ * Class BrickFactory.
  */
 class BrickFactory
 {
   /**
-   * @param SimpleXMLElement $brick_xml_properties
-   *
    * @return BroadcastBrick|BroadcastReceiverBrick|BroadcastWaitBrick|WhenBGChangeBrick|WhenBounceOffBrick|WhenBrick|null
    */
   public static function generate(SimpleXMLElement $brick_xml_properties)
   {
     $generated_brick = null;
 
-    switch ((string)$brick_xml_properties[Constants::TYPE_ATTRIBUTE])
+    switch ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE])
     {
       // EVENT Bricks
       case Constants::BROADCAST_BRICK:

@@ -3,14 +3,13 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ReplaceItemInUserListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ReplaceItemInUserListStatement.
  */
 class ReplaceItemInUserListStatement extends BaseUserListStatement
 {
-  const BEGIN_STRING = "replace item in userlist ";
-  const MIDDLE_STRING = "(";
-  const END_STRING = ")<br/>";
+  const BEGIN_STRING = 'replace item in userlist ';
+  const MIDDLE_STRING = '(';
+  const END_STRING = ')<br/>';
 
   /**
    * ReplaceItemInUserListStatement constructor.
@@ -40,7 +39,7 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
     {
       if ($statement instanceof FormulaStatement)
       {
-        if ($statement->getCategory() === 'REPLACE_ITEM_IN_USERLIST_INDEX')
+        if ('REPLACE_ITEM_IN_USERLIST_INDEX' === $statement->getCategory())
         {
           $formula_string_index = $statement->execute();
         }
@@ -51,10 +50,10 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
       }
     }
 
-    $formula_str_index_no_markup = $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string_index);
-    $formula_str_value_no_markup = $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string_value);
+    $formula_str_index_no_markup = $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
+    $formula_str_value_no_markup = $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
 
-    return "Replace item in list " . $list_variable_name . " at position " . $formula_str_index_no_markup . " with " . $formula_str_value_no_markup;
+    return 'Replace item in list '.$list_variable_name.' at position '.$formula_str_index_no_markup.' with '.$formula_str_value_no_markup;
   }
 
   /**
@@ -62,7 +61,6 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_red.png";
+    return '1h_brick_red.png';
   }
-
 }

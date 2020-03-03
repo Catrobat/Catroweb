@@ -2,26 +2,24 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Forms\FeaturedImageConstraint;
 use App\Catrobat\Services\FeaturedImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use App\Catrobat\Forms\FeaturedImageConstraint;
 use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
- * Class FeaturedUrlAdmin
- * @package App\Admin
+ * Class FeaturedUrlAdmin.
  */
 class FeaturedUrlAdmin extends AbstractAdmin
 {
@@ -61,80 +59,15 @@ class FeaturedUrlAdmin extends AbstractAdmin
   public function createQuery($context = 'list')
   {
     /**
-     * @var $query QueryBuilder
+     * @var QueryBuilder
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->isNull($query->getRootAliases()[0] . '.program')
+      $query->expr()->isNull($query->getRootAliases()[0].'.program')
     );
 
     return $query;
   }
-
-
-  /**
-   * @param FormMapper $formMapper
-   *
-   * Fields to be shown on create/edit forms
-   */
-  protected function configureFormFields(FormMapper $formMapper)
-  {
-    $file_options = [
-      'required'    => ($this->getSubject()->getId() === null),
-      'constraints' => [
-        new FeaturedImageConstraint(),
-      ],];
-    if ($this->getSubject()->getId() != null)
-    {
-      $file_options['help'] = '<img src="../' . $this->getFeaturedImageUrl($this->getSubject()) . '">';
-    }
-
-    $formMapper
-      ->add('file', FileType::class, $file_options)
-      ->add('url', UrlType::class)
-      ->add('flavor')
-      ->add('priority')
-      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
-                              'help' => 'Toggle for iOS featured url api call.'])
-      ->add('active', null, ['required' => false]);
-  }
-
-
-  /**
-   * @param DatagridMapper $datagridMapper
-   *
-   * Fields to be shown on filter forms
-   */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-  {
-    $datagridMapper
-      ->add('url');
-  }
-
-
-  /**
-   * @param ListMapper $listMapper
-   *
-   * Fields to be shown on lists
-   */
-  protected function configureListFields(ListMapper $listMapper)
-  {
-    $listMapper
-      ->addIdentifier('id')
-      ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
-      ->add('url', UrlType::class)
-      ->add('flavor', StringType::class, ['editable' => true])
-      ->add('priority', IntegerType::class, ['editable' => true])
-      ->add('for_ios', null, ['label' => 'iOS only', 'editable' => true])
-      ->add('active', null, ['editable' => true])
-      ->add('_action', 'actions', [
-        'actions' => [
-          'edit'   => [],
-          'delete' => [],
-        ],
-      ]);
-  }
-
 
   /**
    * @param $object
@@ -143,13 +76,12 @@ class FeaturedUrlAdmin extends AbstractAdmin
    */
   public function getFeaturedImageUrl($object)
   {
-    /**
+    /*
      * @var $object FeaturedProgram
      */
 
-    return '../../' . $this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
+    return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
   }
-
 
   /**
    * @param $object
@@ -158,13 +90,12 @@ class FeaturedUrlAdmin extends AbstractAdmin
    */
   public function getObjectMetadata($object)
   {
-    /**
+    /*
      * @var $object FeaturedProgram
      */
 
     return new Metadata($object->getUrl(), '', $this->getFeaturedImageUrl($object));
   }
-
 
   /**
    * @param $image FeaturedProgram
@@ -185,8 +116,69 @@ class FeaturedUrlAdmin extends AbstractAdmin
   }
 
   /**
+   * @param FormMapper $formMapper
    *
+   * Fields to be shown on create/edit forms
    */
+  protected function configureFormFields(FormMapper $formMapper)
+  {
+    $file_options = [
+      'required' => (null === $this->getSubject()->getId()),
+      'constraints' => [
+        new FeaturedImageConstraint(),
+      ], ];
+    if (null != $this->getSubject()->getId())
+    {
+      $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($this->getSubject()).'">';
+    }
+
+    $formMapper
+      ->add('file', FileType::class, $file_options)
+      ->add('url', UrlType::class)
+      ->add('flavor')
+      ->add('priority')
+      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
+        'help' => 'Toggle for iOS featured url api call.', ])
+      ->add('active', null, ['required' => false])
+    ;
+  }
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  {
+    $datagridMapper
+      ->add('url')
+    ;
+  }
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
+  protected function configureListFields(ListMapper $listMapper)
+  {
+    $listMapper
+      ->addIdentifier('id')
+      ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
+      ->add('url', UrlType::class)
+      ->add('flavor', StringType::class, ['editable' => true])
+      ->add('priority', IntegerType::class, ['editable' => true])
+      ->add('for_ios', null, ['label' => 'iOS only', 'editable' => true])
+      ->add('active', null, ['editable' => true])
+      ->add('_action', 'actions', [
+        'actions' => [
+          'edit' => [],
+          'delete' => [],
+        ],
+      ])
+    ;
+  }
+
   private function checkFlavor()
   {
     $flavor = $this->getForm()->get('flavor')->getData();
@@ -196,12 +188,11 @@ class FeaturedUrlAdmin extends AbstractAdmin
       return; // There was no required flavor form field in this Action, so no check is needed!
     }
 
-    $flavor_options =  $this->parameter_bag->get('themes');
+    $flavor_options = $this->parameter_bag->get('themes');
 
-    if (!in_array($flavor, $flavor_options)) {
-      throw new NotFoundHttpException(
-        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
-      );
+    if (!in_array($flavor, $flavor_options, true))
+    {
+      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
     }
   }
 }

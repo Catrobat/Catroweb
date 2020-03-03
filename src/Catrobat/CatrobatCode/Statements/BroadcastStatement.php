@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class BroadcastStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class BroadcastStatement.
  */
 class BroadcastStatement extends Statement
 {
-  const BEGIN_STRING = "broadcast ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'broadcast ';
+  const END_STRING = '<br/>';
 
   /**
    * BroadcastStatement constructor.
@@ -30,7 +29,7 @@ class BroadcastStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Broadcast " . $this->xmlTree->broadcastMessage;
+    return 'Broadcast '.$this->xmlTree->broadcastMessage;
   }
 
   /**
@@ -38,6 +37,6 @@ class BroadcastStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
 }

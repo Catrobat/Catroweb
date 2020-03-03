@@ -5,8 +5,7 @@ namespace App\Catrobat\Services\TestEnv;
 use App\Catrobat\Services\TokenGenerator;
 
 /**
- * Class ProxyTokenGenerator
- * @package App\Catrobat\Services\TestEnv
+ * Class ProxyTokenGenerator.
  */
 class ProxyTokenGenerator extends TokenGenerator
 {
@@ -17,8 +16,6 @@ class ProxyTokenGenerator extends TokenGenerator
 
   /**
    * ProxyTokenGenerator constructor.
-   *
-   * @param TokenGenerator $default_generator
    */
   public function __construct(TokenGenerator $default_generator)
   {
@@ -34,9 +31,6 @@ class ProxyTokenGenerator extends TokenGenerator
     return $this->generator->generateToken();
   }
 
-  /**
-   * @param TokenGenerator $generator
-   */
   public function setTokenGenerator(TokenGenerator $generator)
   {
     $this->generator = $generator;

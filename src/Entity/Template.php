@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Template
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -24,7 +23,6 @@ class Template
    * @ORM\Column(type="string", length=300)
    */
   protected $name;
-
 
   /**
    * @ORM\Column(type="boolean")

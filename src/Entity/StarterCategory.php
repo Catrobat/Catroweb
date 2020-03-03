@@ -18,11 +18,6 @@ class StarterCategory
   protected $id;
 
   /**
-   * @ORM\OneToMany(targetEntity="Program", mappedBy="category", fetch="EAGER")
-   **/
-  private $programs;
-
-  /**
    * @ORM\Column(type="string", length=255)
    */
   protected $name;
@@ -36,6 +31,19 @@ class StarterCategory
    * @ORM\Column(type="integer", name="order_pos")
    */
   protected $order;
+
+  /**
+   * @ORM\OneToMany(targetEntity="Program", mappedBy="category", fetch="EAGER")
+   */
+  private $programs;
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return (string) $this->alias;
+  }
 
   /**
    * @return mixed
@@ -69,17 +77,11 @@ class StarterCategory
     $this->programs = $programs;
   }
 
-  /**
-   * @param Program $program
-   */
   public function addProgram(Program $program)
   {
     $program->setCategory($this);
   }
 
-  /**
-   * @param Program $program
-   */
   public function removeProgram(Program $program)
   {
     $program->setCategory(null);
@@ -131,13 +133,5 @@ class StarterCategory
   public function setOrder($order)
   {
     $this->order = $order;
-  }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return (string)$this->alias;
   }
 }

@@ -5,21 +5,21 @@ namespace App\Utils;
 use App\Catrobat\StatusCode;
 use Exception;
 
-
 /**
- * Class ImageBase64Checks
+ * Class ImageBase64Checks.
  */
-class ImageUtils {
-
+class ImageUtils
+{
   /**
    * @param $image_base64
    * @param $MAX_UPLOAD_SIZE
    * @param $MAX_IMAGE_SIZE
    *
-   * @return string
    * @throws Exception
+   *
+   * @return string
    */
-  public static function checkAndResizeBase64Image($image_base64, $MAX_IMAGE_SIZE = 300, $MAX_UPLOAD_SIZE = 5*1024*1024)
+  public static function checkAndResizeBase64Image($image_base64, $MAX_IMAGE_SIZE = 300, $MAX_UPLOAD_SIZE = 5 * 1024 * 1024)
   {
     $image_data = explode(';base64,', $image_base64);
     $data_regx = '/data:(.+)/';
@@ -54,7 +54,7 @@ class ImageUtils {
     }
 
     // https://en.wikipedia.org/wiki/Base64 not exact but enough for our checks
-    $image_size = (strlen($image_base64) * (3/4));
+    $image_size = (strlen($image_base64) * (3 / 4));
 
     if ($image_size > $MAX_UPLOAD_SIZE)
     {
@@ -64,12 +64,12 @@ class ImageUtils {
     $width = imagesx($image);
     $height = imagesy($image);
 
-    if ($width === 0 || $height === 0)
+    if (0 === $width || 0 === $height)
     {
       throw new Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
     }
 
-    if ($MAX_IMAGE_SIZE !== null && max($width, $height) > $MAX_IMAGE_SIZE)
+    if (null !== $MAX_IMAGE_SIZE && max($width, $height) > $MAX_IMAGE_SIZE)
     {
       $new_image = imagecreatetruecolor($MAX_IMAGE_SIZE, $MAX_IMAGE_SIZE);
       if (!$new_image)
@@ -93,7 +93,7 @@ class ImageUtils {
         throw new Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
       }
 
-      $image_base64 = 'data:image/png;base64,' . base64_encode(ob_get_clean());
+      $image_base64 = 'data:image/png;base64,'.base64_encode(ob_get_clean());
     }
 
     return $image_base64;

@@ -2,14 +2,11 @@
 
 namespace App\Entity;
 
-
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class MigrationManager
- * @package App\Entity
+ * Class MigrationManager.
  */
 class MigrationManager
 {
@@ -34,13 +31,14 @@ class MigrationManager
   }
 
   /**
-   * @return bool
    * @throws \Doctrine\DBAL\DBALException
+   *
+   * @return bool
    */
   public function dropMigrationVersions()
   {
     $schema_manager = $this->connection->getSchemaManager();
-    if ($schema_manager->tablesExist(['migration_versions']) == true)
+    if (true == $schema_manager->tablesExist(['migration_versions']))
     {
       $sql = 'DROP TABLE migration_versions;';
       $connection = $this->entity_manager->getConnection();

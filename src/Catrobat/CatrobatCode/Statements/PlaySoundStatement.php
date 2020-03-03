@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class PlaySoundStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class PlaySoundStatement.
  */
 class PlaySoundStatement extends Statement
 {
-  const BEGIN_STRING = "start sound ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'start sound ';
+  const END_STRING = '<br/>';
 
   /**
    * PlaySoundStatement constructor.
@@ -30,7 +29,7 @@ class PlaySoundStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Start sound";
+    return 'Start sound';
   }
 
   /**
@@ -38,7 +37,6 @@ class PlaySoundStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_violet.png";
+    return '1h_brick_violet.png';
   }
-
 }

@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ComeToFrontStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ComeToFrontStatement.
  */
 class ComeToFrontStatement extends Statement
 {
-  const BEGIN_STRING = "come to front";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'come to front';
+  const END_STRING = '<br/>';
 
   /**
    * ComeToFrontStatement constructor.
@@ -30,7 +29,7 @@ class ComeToFrontStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Go to front";
+    return 'Go to front';
   }
 
   /**
@@ -38,6 +37,6 @@ class ComeToFrontStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

@@ -2,9 +2,6 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use App\Catrobat\Commands\CreateProgramExtensionsCommand;
-use App\Catrobat\Services\ProgramFileRepository;
-use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -16,21 +13,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-
 /**
- * Class ExtensionController
- * @package App\Catrobat\Controller\Admin
+ * Class ExtensionController.
  */
 class ExtensionController extends Controller
 {
-
   /**
-   * @return RedirectResponse
    * @throws \Exception
+   *
+   * @return RedirectResponse
    */
   public function extensionsAction(KernelInterface $kernel)
   {
-    /**
+    /*
      * @var $em EntityManager
      * @var $program_repositorysitory ProgramRepository
      */
@@ -48,7 +43,7 @@ class ExtensionController extends Controller
     ]);
 
     $return = $application->run($input, new NullOutput());
-    if ($return == 0)
+    if (0 == $return)
     {
       $this->addFlash('sonata_flash_success', 'Creating extensions finished!');
     }
@@ -57,13 +52,10 @@ class ExtensionController extends Controller
       $this->addFlash('sonata_flash_error', 'Creating extensions failed!');
     }
 
-    return new RedirectResponse($this->admin->generateUrl("list"));
+    return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
   /**
-   * @param Request|null $request
-   *
    * @return \Symfony\Component\HttpFoundation\Response
    */
   public function listAction(Request $request = null)
@@ -73,7 +65,7 @@ class ExtensionController extends Controller
       throw new AccessDeniedException();
     }
 
-    $url = $this->admin->generateUrl("extensions");
+    $url = $this->admin->generateUrl('extensions');
 
     return $this->renderWithExtraParams('Admin/extension.html.twig', ['url' => $url]);
   }

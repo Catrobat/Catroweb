@@ -3,12 +3,10 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class LeftChildStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class LeftChildStatement.
  */
 class LeftChildStatement extends FormulaStatement
 {
-
   /**
    * LeftChildStatement constructor.
    *
@@ -19,7 +17,6 @@ class LeftChildStatement extends FormulaStatement
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
-      "");
+      '');
   }
-
 }

@@ -2,22 +2,20 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Entity\Program;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\ExceptionInterface;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\ArrayInput;
-use App\Entity\Program;
-
 
 /**
- * Class RestoreBackupCommand
- * @package App\Catrobat\Commands
+ * Class RestoreBackupCommand.
  */
 class RestoreBackupCommand extends Command
 {
@@ -27,21 +25,17 @@ class RestoreBackupCommand extends Command
   public $output;
 
   /**
-   * @var EntityManagerInterface $entity_manager
+   * @var EntityManagerInterface
    */
   private $entity_manager;
 
-
   /**
-   * @var ParameterBagInterface $parameter_bag
+   * @var ParameterBagInterface
    */
   private $parameter_bag;
 
   /**
    * RestoreBackupCommand constructor.
-   *
-   * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
   {
@@ -50,24 +44,20 @@ class RestoreBackupCommand extends Command
     $this->entity_manager = $entity_manager;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:backup:restore')
       ->setDescription('Restores a backup onto a server (ssh). .')
       ->addArgument('file', InputArgument::REQUIRED, 'Backupfile (*.tar.gz)')
-      ->addArgument('local', InputArgument::OPTIONAL, 'Add true after the file name restore the backup local. ');
+      ->addArgument('local', InputArgument::OPTIONAL, 'Add true after the file name restore the backup local. ')
+    ;
   }
 
   /**
-   * @param InputInterface $input
-   * @param OutputInterface $output
-   *
-   * @return int|void|null
    * @throws ExceptionInterface
    * @throws \Doctrine\ORM\NonUniqueResultException | \Exception
+   *
+   * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -83,14 +73,14 @@ class RestoreBackupCommand extends Command
         throw new \Exception('File not found');
       }
     }
-    $this->output->writeln('Backup File: ' . $backup_file);
+    $this->output->writeln('Backup File: '.$backup_file);
 
-    if ($this->parameter_bag->get('database_driver') !== 'pdo_mysql')
+    if ('pdo_mysql' !== $this->parameter_bag->get('database_driver'))
     {
       throw new \Exception('This script only supports mysql databases');
     }
 
-    if ($input->hasArgument('local') && $input->getArgument('local') === 'true')
+    if ($input->hasArgument('local') && 'true' === $input->getArgument('local'))
     {
       $local_resource_directory = $this->parameter_bag->get('catrobat.resources.dir');
       $local_database_name = $this->parameter_bag->get('database_name');
@@ -101,27 +91,28 @@ class RestoreBackupCommand extends Command
 
       $this->executeSymfonyCommand('catrobat:purge', ['--force' => true], $this->output);
 
-      $this->executeShellCommand("time pigz -dc $backup_file | tar -xf - -C $local_resource_directory",
-        "Extracting files to local resources directory");
+      $this->executeShellCommand("time pigz -dc {$backup_file} | tar -xf - -C {$local_resource_directory}",
+        'Extracting files to local resources directory');
 
-      $this->executeShellCommand("time mysql -u $local_database_user -p$local_database_password $local_database_name " .
-        "< " . $local_resource_directory . "database.sql ",
+      $this->executeShellCommand("time mysql -u {$local_database_user} -p{$local_database_password} {$local_database_name} ".
+        '< '.$local_resource_directory.'database.sql ',
         'Restore SQL file');
 
-      @unlink($local_resource_directory . 'database.sql');
+      @unlink($local_resource_directory.'database.sql');
 
       $query = $this->entity_manager
-        ->createQuery("UPDATE App\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
+        ->createQuery('UPDATE App\\Entity\\Program p SET p.apk_status = :status WHERE p.apk_status != :status')
+      ;
       $query->setParameter('status', Program::APK_NONE);
       $result = $query->getSingleScalarResult();
-      $this->output->writeln('Reset the apk status of ' . $result . ' projects');
+      $this->output->writeln('Reset the apk status of '.$result.' projects');
 
       $query = $this->entity_manager
-        ->createQuery("UPDATE App\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
+        ->createQuery('UPDATE App\\Entity\\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash')
+      ;
       $query->setParameter('hash', 'null');
       $result = $query->getSingleScalarResult();
-      $this->output->writeln('Reset the directory hash of ' . $result . ' projects');
-
+      $this->output->writeln('Reset the directory hash of '.$result.' projects');
     }
     else
     {
@@ -135,33 +126,33 @@ class RestoreBackupCommand extends Command
       $backup_database_user = $this->parameter_bag->get('backup_database_user');
       $backup_database_password = $this->parameter_bag->get('backup_database_password');
 
-      $this->output->writeln('Restore backup on server [' . $backup_host_name . ']');
+      $this->output->writeln('Restore backup on server ['.$backup_host_name.']');
 
-      $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
-        "\"php " . $backup_host_directory . "bin/console catrobat:purge --env=prod --force\" ",
+      $this->executeShellCommand("sshpass -p '{$backup_host_password}' ssh {$backup_host_user}@{$backup_host_name} ".
+        '"php '.$backup_host_directory.'bin/console catrobat:purge --env=prod --force" ',
         'Remove files from server resources directory');
 
-      $this->executeShellCommand("gzip -dc $backup_file | " .
-        "sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
-        "tar -xf - -C " . $backup_host_directory . $backup_host_resource_directory . " ",
+      $this->executeShellCommand("gzip -dc {$backup_file} | ".
+        "sshpass -p '{$backup_host_password}' ssh {$backup_host_user}@{$backup_host_name} ".
+        'tar -xf - -C '.$backup_host_directory.$backup_host_resource_directory.' ',
         'Extract files to server resources directory');
 
-      $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
-        "\"mysql -u $backup_database_user -p$backup_database_password $backup_database_name " .
-        "< " . $backup_host_directory . $backup_host_resource_directory . "database.sql\" ",
+      $this->executeShellCommand("sshpass -p '{$backup_host_password}' ssh {$backup_host_user}@{$backup_host_name} ".
+        "\"mysql -u {$backup_database_user} -p{$backup_database_password} {$backup_database_name} ".
+        '< '.$backup_host_directory.$backup_host_resource_directory.'database.sql" ',
         'Restore SQL file');
 
-      $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
-        "\"unlink " . $backup_host_directory . $backup_host_resource_directory . "database.sql\" ",
+      $this->executeShellCommand("sshpass -p '{$backup_host_password}' ssh {$backup_host_user}@{$backup_host_name} ".
+        '"unlink '.$backup_host_directory.$backup_host_resource_directory.'database.sql" ',
         'Remove files from server resources directory');
 
-      $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
-        "\"mysql -u $backup_database_user -p$backup_database_password $backup_database_name " .
-        "-e 'UPDATE program p SET p.apk_status = " . Program::APK_NONE . " WHERE p.apk_status != " . Program::APK_NONE . "'\" ",
+      $this->executeShellCommand("sshpass -p '{$backup_host_password}' ssh {$backup_host_user}@{$backup_host_name} ".
+        "\"mysql -u {$backup_database_user} -p{$backup_database_password} {$backup_database_name} ".
+        "-e 'UPDATE program p SET p.apk_status = ".Program::APK_NONE.' WHERE p.apk_status != '.Program::APK_NONE."'\" ",
         'Reset the apk status');
 
-      $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
-        "\"mysql -u $backup_database_user -p$backup_database_password $backup_database_name " .
+      $this->executeShellCommand("sshpass -p '{$backup_host_password}' ssh {$backup_host_user}@{$backup_host_name} ".
+        "\"mysql -u {$backup_database_user} -p{$backup_database_password} {$backup_database_name} ".
         "-e 'UPDATE program p SET p.directory_hash = \"null\" WHERE p.directory_hash != \"null\"'\" ",
         'Reset the directory hash');
     }
@@ -173,12 +164,13 @@ class RestoreBackupCommand extends Command
    * @param $command
    * @param $description
    *
-   * @return bool
    * @throws \Exception
+   *
+   * @return bool
    */
   private function executeShellCommand($command, $description)
   {
-    $this->output->write($description . " ('" . $command . "') ... ");
+    $this->output->write($description." ('".$command."') ... ");
     $process = new Process($command);
     $process->setTimeout(86400);
     $process->run();
@@ -189,7 +181,7 @@ class RestoreBackupCommand extends Command
       return true;
     }
 
-    throw new \Exception("failed: " . $process->getErrorOutput());
+    throw new \Exception('failed: '.$process->getErrorOutput());
   }
 
   /**

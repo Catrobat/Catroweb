@@ -6,8 +6,7 @@ use App\Repository\RudeWordsRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
 /**
- * Class RudeWordFilter
- * @package App\Catrobat\Services
+ * Class RudeWordFilter.
  */
 class RudeWordFilter
 {
@@ -18,8 +17,6 @@ class RudeWordFilter
 
   /**
    * RudeWordFilter constructor.
-   *
-   * @param RudeWordsRepository $repository
    */
   public function __construct(RudeWordsRepository $repository)
   {
@@ -29,8 +26,9 @@ class RudeWordFilter
   /**
    * @param $string
    *
-   * @return bool
    * @throws NonUniqueResultException
+   *
+   * @return bool
    */
   public function containsRudeWord($string)
   {

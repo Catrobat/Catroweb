@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class SetTransparencyStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class SetTransparencyStatement.
  */
 class SetTransparencyStatement extends BaseSetToStatement
 {
-  const BEGIN_STRING = "transparency";
-  const END_STRING = ")%<br/>";
+  const BEGIN_STRING = 'transparency';
+  const END_STRING = ')%<br/>';
 
   /**
    * SetTransparencyStatement constructor.
@@ -31,9 +30,9 @@ class SetTransparencyStatement extends BaseSetToStatement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Set transparency to " . $formula_string_without_markup . "%";
+    return 'Set transparency to '.$formula_string_without_markup.'%';
   }
 
   /**
@@ -41,7 +40,6 @@ class SetTransparencyStatement extends BaseSetToStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
-
 }

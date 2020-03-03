@@ -22,13 +22,11 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class OAuthService
- * @package App\Catrobat\Services
+ * Class OAuthService.
  */
 class OAuthService
 {
@@ -63,7 +61,7 @@ class OAuthService
   private $translator;
 
   /**
-   * @var TokenStorageInterface 
+   * @var TokenStorageInterface
    */
   private $token_storage;
 
@@ -73,33 +71,21 @@ class OAuthService
   private $token_generator;
 
   /**
-   * @var EventDispatcherInterface 
+   * @var EventDispatcherInterface
    */
   private $dispatcher;
 
   /**
-   * @var RouterInterface 
+   * @var RouterInterface
    */
   private $router;
 
-
   /**
    * OAuthService constructor.
-   *
-   * @param UserManager $user_manager
-   * @param ParameterBagInterface $parameter_bag
-   * @param ValidatorInterface $validator
-   * @param ProgramManager $program_manager
-   * @param EntityManagerInterface $em
-   * @param TranslatorInterface $translator
-   * @param TokenStorageInterface $token_storage
-   * @param EventDispatcherInterface $dispatcher
-   * @param RouterInterface $router
-   * @param TokenGenerator $token_generator
    */
   public function __construct(UserManager $user_manager, ParameterBagInterface $parameter_bag,
                               ValidatorInterface $validator, ProgramManager $program_manager,
-                              EntityManagerInterface $em, TranslatorInterface $translator, 
+                              EntityManagerInterface $em, TranslatorInterface $translator,
                               TokenStorageInterface $token_storage, EventDispatcherInterface $dispatcher,
                               RouterInterface $router, TokenGenerator $token_generator)
   {
@@ -116,15 +102,14 @@ class OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws Exception
    *
    * @return JsonResponse
-   * @throws Exception
    */
   public function isOAuthUser(Request $request)
   {
     /**
-     * @var $user        User
+     * @var User
      */
     $username_email = $request->request->get('username_email');
 
@@ -154,15 +139,14 @@ class OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws Exception
    *
    * @return JsonResponse
-   * @throws Exception
    */
   public function checkEMailAvailable(Request $request)
   {
     /**
-     * @var $user        User
+     * @var User
      */
     $email = $request->request->get('email');
 
@@ -184,16 +168,14 @@ class OAuthService
   }
 
   /**
-   * @param Request $request
-
+   * @throws Exception
    *
    * @return JsonResponse
-   * @throws Exception
    */
   public function checkUserNameAvailable(Request $request)
   {
     /**
-     * @var $user        User
+     * @var User
      */
     $username = $request->request->get('username');
 
@@ -217,28 +199,14 @@ class OAuthService
   }
 
   /**
-   * @param $e \Error
-   *
-   * @return JsonResponse
-   */
-  private function returnErrorCode($e)
-  {
-    $retArray['error_code'] = $e->getCode();
-    $retArray['error_description'] = $e->getMessage();
-
-    return JsonResponse::create($retArray);
-  }
-
-  /**
-   * @param Request $request
-   *
-   * @return JsonResponse
    * @throws Exception
+   *
+   * @return JsonResponse
    */
   public function checkGoogleServerTokenAvailable(Request $request)
   {
     /**
-     * @var $google_user User
+     * @var User
      */
     $google_id = $request->request->get('id');
 
@@ -263,27 +231,26 @@ class OAuthService
   }
 
   /**
-   * @param Request $request
-  *
-   * @return JsonResponse|Response
    * @throws Exception
+   *
+   * @return JsonResponse|Response
    */
   public function exchangeGoogleCodeAction(Request $request)
   {
     /**
-     * @var $google_user User
-     * @var $user        User
+     * @var User
+     * @var User $user
      */
-
     $retArray = [];
 
-    $client_id = $this->parameter_bag-> get('google_app_id');
+    $client_id = $this->parameter_bag->get('google_app_id');
     $id_token = $request->request->get('id_token');
     $username = $request->request->get('username');
 
     $google_user = null;
 
-    try {
+    try
+    {
       $client = new Google_Client(['client_id' => $client_id]);  // Specify the CLIENT_ID of the app that accesses the backend
       $payload = $client->verifyIdToken($id_token);
       if ($payload)
@@ -332,20 +299,20 @@ class OAuthService
         $retArray['statusCode'] = 201;
       }
     }
+
     return JsonResponse::create($retArray);
   }
 
   /**
-   * @param Request $request
+   * @throws Exception
    *
    * @return JsonResponse
-   * @throws Exception
    */
   public function loginWithGoogleAction(Request $request)
   {
     /**
-     * @var $user        User
-     * @var $google_user User
+     * @var User
+     * @var User $google_user
      */
     $retArray = [];
 
@@ -382,17 +349,15 @@ class OAuthService
   }
 
   /**
-   * @param Request $request
+   * @throws Exception
    *
    * @return JsonResponse
-   * @throws Exception
    */
   public function getGoogleUserProfileInfo(Request $request)
   {
     /**
-     * @var $google_user User
+     * @var User
      */
-
     $retArray = [];
 
     $google_id = $request->request->get('id');
@@ -422,6 +387,126 @@ class OAuthService
   }
 
   /**
+   * @return JsonResponse
+   */
+  public function loginWithTokenAndRedirectAction(Request $request)
+  {
+    /**
+     * @var User
+     */
+    $retArray = [];
+
+    $user = null;
+
+    if ($request->request->has('gplus_id'))
+    {
+      $id = $request->request->get('gplus_id');
+      $retArray['g_id'] = $id;
+      $user = $this->user_manager->findUserBy([
+        'gplusUid' => $id,
+      ]);
+    }
+
+    if (null != $user)
+    {
+      $retArray['user'] = true;
+      $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+      $retArray['token'] = $token;
+      $this->token_storage->setToken($token);
+
+      // now dispatch the login event
+      $event = new InteractiveLoginEvent($request, $token);
+      $this->dispatcher->dispatch($event);
+
+      $retArray['url'] = $this->router->generate('index');
+
+      return JsonResponse::create($retArray);
+    }
+
+    $retArray['error'] = 'Google User not found!';
+
+    return JsonResponse::create($retArray);
+  }
+
+  /**
+   * @return string
+   */
+  public function randomPassword()
+  {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = []; //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; ++$i)
+    {
+      $n = rand(0, $alphaLength);
+      $pass[] = $alphabet[$n];
+    }
+
+    return implode($pass); //turn the array into a string
+  }
+
+  /**
+   * @throws ORMException
+   * @throws OptimisticLockException
+   *
+   * @return JsonResponse
+   */
+  public function deleteOAuthTestUserAccounts()
+  {
+    /**
+     * @var User
+     */
+    $retArray = [];
+
+    $deleted = '';
+
+    $google_testuser_mail = $this->parameter_bag->get('google_testuser_mail');
+    $google_testuser_username = $this->parameter_bag->get('google_testuser_name');
+    $google_testuser_id = $this->parameter_bag->get('google_testuser_id');
+
+    $user = $this->user_manager->findUserByEmail($google_testuser_mail);
+    if (null != $user)
+    {
+      $deleted = $deleted.'_G+-Mail:'.$user->getEmail();
+      $this->deleteUser($user);
+    }
+
+    $user = $this->user_manager->findUserByUsername($google_testuser_username);
+    if (null != $user)
+    {
+      $deleted = $deleted.'_G+-User'.$user->getUsername();
+      $this->deleteUser($user);
+    }
+
+    $user = $this->user_manager->findUserBy([
+      'gplusUid' => $google_testuser_id,
+    ]);
+    if (null != $user)
+    {
+      $deleted = $deleted.'_G+-ID'.$user->getGplusUid();
+      $this->deleteUser($user);
+    }
+
+    $retArray['deleted'] = $deleted;
+    $retArray['statusCode'] = StatusCode::OK;
+
+    return JsonResponse::create($retArray);
+  }
+
+  /**
+   * @param $e \Error
+   *
+   * @return JsonResponse
+   */
+  private function returnErrorCode($e)
+  {
+    $retArray['error_code'] = $e->getCode();
+    $retArray['error_description'] = $e->getMessage();
+
+    return JsonResponse::create($retArray);
+  }
+
+  /**
    * @param $user
    * @param $access_token
    * @param $refresh_token
@@ -429,7 +514,7 @@ class OAuthService
    */
   private function setGoogleTokens($user, $access_token, $refresh_token, $id_token)
   {
-    /**
+    /*
      * @var $user        User
      */
     if ($access_token)
@@ -460,17 +545,17 @@ class OAuthService
   private function connectGoogleUserToExistingUserAccount($request, &$retArray, $user, $googleId, $googleUsername, $locale)
   {
     /**
-     * @var $user        User
+     * @var User
      */
     $violations = $this->validateOAuthUser($request, $retArray);
-    if (count($violations) === 0)
+    if (0 === count($violations))
     {
-      if ($user->getUsername() === '')
+      if ('' === $user->getUsername())
       {
         $locale = substr($locale, 0, 180);
         $user->setUsername($googleUsername);
       }
-      if ($user->getCountry() === '' && $locale !== "NO_GOOGLE_LOCALE")
+      if ('' === $user->getCountry() && 'NO_GOOGLE_LOCALE' !== $locale)
       {
         $locale = substr($locale, 0, 5);
         $user->setCountry($locale);
@@ -481,7 +566,7 @@ class OAuthService
       $user->setEnabled(true);
       $this->user_manager->updateUser($user);
       $retArray['statusCode'] = 201;
-      $retArray['answer'] = $this->trans("success.registration");
+      $retArray['answer'] = $this->trans('success.registration');
     }
   }
 
@@ -503,7 +588,7 @@ class OAuthService
   {
     $violations = $this->validateOAuthUser($request, $retArray);
     $retArray['violations'] = count($violations);
-    if (count($violations) == 0)
+    if (0 == count($violations))
     {
       /** @var User $user */
       $user = $this->user_manager->createUser();
@@ -528,7 +613,7 @@ class OAuthService
       $this->user_manager->updateUser($user);
 
       $retArray['statusCode'] = 201;
-      $retArray['answer'] = $this->trans("success.registration");
+      $retArray['answer'] = $this->trans('success.registration');
     }
   }
 
@@ -538,19 +623,18 @@ class OAuthService
   private function refreshGoogleAccessToken($user)
   {
     /**
-     * @var $user        User
+     * @var User
      */
     // Google offline server tokens are valid for ~1h. So, we need to check if the token has to be refreshed
     // before making server-side requests. The refresh token has an unlimited lifetime.
     $server_access_token = $user->getGplusAccessToken();
     $refresh_token = $user->getGplusRefreshToken();
 
-    if ($server_access_token != null && $refresh_token != null)
+    if (null != $server_access_token && null != $refresh_token)
     {
-
       $client = $this->getAuthenticatedGoogleClientForGPlusUser($user);
 
-      $reqUrl = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=' . $server_access_token;
+      $reqUrl = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token='.$server_access_token;
       $req = new Google_Http_Request($reqUrl);
 
       /*
@@ -575,7 +659,7 @@ class OAuthService
         ->authenticatedRequest($req)
         ->getResponseBody()));
 
-      if (isset($results['error_description']) && $results['error_description'] == 'Invalid Value')
+      if (isset($results['error_description']) && 'Invalid Value' == $results['error_description'])
       {
         // token is expired --> refresh
         $newtoken_array = $client->getAccessToken();
@@ -594,7 +678,7 @@ class OAuthService
   private function getAuthenticatedGoogleClientForGPlusUser($user)
   {
     /**
-     * @var $user        User
+     * @var User
      */
     $application_name = $this->parameter_bag->get('application_name');
     $client_id = $this->parameter_bag->get('google_app_id');
@@ -625,67 +709,6 @@ class OAuthService
   }
 
   /**
-   * @param Request $request
-   *
-   * @return JsonResponse
-   */
-  public function loginWithTokenAndRedirectAction(Request $request)
-  {
-    /**
-     * @var $user        User
-     */
-    $retArray = [];
-
-    $user = null;
-
-    if ($request->request->has('gplus_id'))
-    {
-      $id = $request->request->get('gplus_id');
-      $retArray['g_id'] = $id;
-      $user = $this->user_manager->findUserBy([
-        'gplusUid' => $id,
-      ]);
-    }
-
-    if ($user != null)
-    {
-      $retArray['user'] = true;
-      $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
-      $retArray['token'] = $token;
-      $this->token_storage->setToken($token);
-
-      // now dispatch the login event
-      $event = new InteractiveLoginEvent($request, $token);
-      $this->dispatcher->dispatch($event);
-
-      $retArray['url'] = $this->router->generate('index');
-
-      return JsonResponse::create($retArray);
-    }
-
-    $retArray['error'] = 'Google User not found!';
-
-    return JsonResponse::create($retArray);
-  }
-
-  /**
-   * @return string
-   */
-  function randomPassword()
-  {
-    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    $pass = []; //remember to declare $pass as an array
-    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-    for ($i = 0; $i < 8; $i++)
-    {
-      $n = rand(0, $alphaLength);
-      $pass[] = $alphabet[$n];
-    }
-
-    return implode($pass); //turn the array into a string
-  }
-
-  /**
    * @param $retArray
    */
   private function setLoginOAuthUserStatusCode(&$retArray)
@@ -697,8 +720,9 @@ class OAuthService
    * @param $request
    * @param $retArray
    *
-   * @return mixed
    * @throws Exception
+   *
+   * @return mixed
    */
   private function validateOAuthUser($request, &$retArray)
   {
@@ -715,54 +739,6 @@ class OAuthService
   }
 
   /**
-   * @return JsonResponse
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function deleteOAuthTestUserAccounts()
-  {
-    /**
-     * @var $user        User
-     */
-    $retArray = [];
-
-    $deleted = '';
-
-    $google_testuser_mail = $this->parameter_bag->get('google_testuser_mail');
-    $google_testuser_username = $this->parameter_bag->get('google_testuser_name');
-    $google_testuser_id = $this->parameter_bag->get('google_testuser_id');
-
-
-    $user = $this->user_manager->findUserByEmail($google_testuser_mail);
-    if ($user != null)
-    {
-      $deleted = $deleted . '_G+-Mail:' . $user->getEmail();
-      $this->deleteUser($user);
-    }
-
-    $user = $this->user_manager->findUserByUsername($google_testuser_username);
-    if ($user != null)
-    {
-      $deleted = $deleted . '_G+-User' . $user->getUsername();
-      $this->deleteUser($user);
-    }
-
-    $user = $this->user_manager->findUserBy([
-      'gplusUid' => $google_testuser_id,
-    ]);
-    if ($user != null)
-    {
-      $deleted = $deleted . '_G+-ID' . $user->getGplusUid();
-      $this->deleteUser($user);
-    }
-
-    $retArray['deleted'] = $deleted;
-    $retArray['statusCode'] = StatusCode::OK;
-
-    return JsonResponse::create($retArray);
-  }
-
-  /**
    * @param $user
    *
    * @throws ORMException
@@ -772,9 +748,8 @@ class OAuthService
   private function deleteUser($user)
   {
     /**
-     * @var $user            User
+     * @var User
      */
-
     $user_programs = $this->program_manager->getUserPrograms($user->getId(), true);
 
     foreach ($user_programs as $user_program)
@@ -790,8 +765,9 @@ class OAuthService
    * @param       $message
    * @param array $parameters
    *
-   * @return string
    * @throws Exception
+   *
+   * @return string
    */
   private function trans($message, $parameters = [])
   {

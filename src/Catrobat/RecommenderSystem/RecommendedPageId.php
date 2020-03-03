@@ -3,8 +3,7 @@
 namespace App\Catrobat\RecommenderSystem;
 
 /**
- * Class RecommendedPageId
- * @package App\Catrobat\RecommenderSystem
+ * Class RecommendedPageId.
  */
 class RecommendedPageId
 {
@@ -27,15 +26,13 @@ class RecommendedPageId
     // -> ... and here
   ];
 
-
   /**
    * @param $page_id
    *
    * @return bool
    */
-  static public function isValidRecommendedPageId($page_id)
+  public static function isValidRecommendedPageId($page_id)
   {
-    return in_array($page_id, self::$VALID_PAGE_IDS);
+    return in_array($page_id, self::$VALID_PAGE_IDS, true);
   }
-
 }

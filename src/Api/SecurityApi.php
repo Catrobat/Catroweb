@@ -9,11 +9,10 @@ use OpenAPI\Server\Model\Register;
 use OpenAPI\Server\Model\UsernameObject;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class SecurityApi implements SecurityApiInterface
 {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function checkTokenPost($token, UsernameObject $usernameObject, &$responseCode, array &$responseHeaders)
   {
@@ -22,7 +21,7 @@ class SecurityApi implements SecurityApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function loginPost(Login $login, &$responseCode, array &$responseHeaders)
   {
@@ -31,7 +30,7 @@ class SecurityApi implements SecurityApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function logoutPost($token, Logout $logout, &$responseCode, array &$responseHeaders)
   {
@@ -40,7 +39,7 @@ class SecurityApi implements SecurityApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function registerUserPost(Register $register, &$responseCode, array &$responseHeaders)
   {
@@ -49,7 +48,7 @@ class SecurityApi implements SecurityApiInterface
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function registerValidationPost(Register $register, &$responseCode, array &$responseHeaders)
   {

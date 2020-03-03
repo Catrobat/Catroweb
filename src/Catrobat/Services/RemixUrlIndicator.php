@@ -2,10 +2,8 @@
 
 namespace App\Catrobat\Services;
 
-
 /**
- * Class RemixUrlIndicator
- * @package App\Catrobat\Services
+ * Class RemixUrlIndicator.
  */
 class RemixUrlIndicator
 {

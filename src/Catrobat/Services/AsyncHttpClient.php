@@ -3,13 +3,11 @@
 namespace App\Catrobat\Services;
 
 use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Promise\EachPromise;
-
+use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class AsyncHttpClient
- * @package App\Catrobat\Services
+ * Class AsyncHttpClient.
  */
 class AsyncHttpClient
 {
@@ -30,8 +28,6 @@ class AsyncHttpClient
 
   /**
    * AsyncHttpClient constructor.
-   *
-   * @param array $config
    */
   public function __construct(array $config = [])
   {
@@ -47,7 +43,7 @@ class AsyncHttpClient
    */
   public function fetchScratchProgramDetails(array $scratch_program_ids)
   {
-    if (count($scratch_program_ids) === 0)
+    if (0 === count($scratch_program_ids))
     {
       return [];
     }
@@ -59,11 +55,12 @@ class AsyncHttpClient
       $scratch_program_ids = array_slice($scratch_program_ids, 0, $max_number_of_total_requests);
     }
 
-    $promises = (function () use ($scratch_program_ids) {
-      /** @var \GuzzleHttp\Client $http_client */
+    $promises = (function () use ($scratch_program_ids)
+    {
+      /* @var \GuzzleHttp\Client $http_client */
       foreach ($scratch_program_ids as $scratch_program_id)
       {
-        $scratch_api_url = 'https://api.scratch.mit.edu/projects/' . $scratch_program_id . '/?format=json';
+        $scratch_api_url = 'https://api.scratch.mit.edu/projects/'.$scratch_program_id.'/?format=json';
         yield $this->async_http_client->requestAsync('GET', $scratch_api_url);
       }
     });
@@ -79,9 +76,10 @@ class AsyncHttpClient
 
     (new EachPromise($promises, [
       'concurrency' => $max_number_of_concurrent_requests,
-      'fulfilled'   => function (ResponseInterface $responses) {
+      'fulfilled' => function (ResponseInterface $responses)
+      {
         $data = @json_decode($responses->getBody(), true);
-        if ($data != null && array_key_exists('id', $data) && intval($data['id']) > 0)
+        if (null != $data && array_key_exists('id', $data) && intval($data['id']) > 0)
         {
           $this->scratch_info_data[intval($data['id'])] = $data;
         }

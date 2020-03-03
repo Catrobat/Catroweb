@@ -7,14 +7,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class ScratchProgramRepository
- * @package App\Repository
+ * Class ScratchProgramRepository.
  */
 class ScratchProgramRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, ScratchProgram::class);
@@ -35,6 +31,7 @@ class ScratchProgramRepository extends ServiceEntityRepository
       ->setParameter('scratch_program_ids', $scratch_program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 }

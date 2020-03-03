@@ -2,15 +2,13 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-
 /**
- * Class ChangeBrightnessByNStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ChangeBrightnessByNStatement.
  */
 class ChangeBrightnessByNStatement extends BaseChangeByNStatement
 {
-  const BEGIN_STRING = "brightness";
-  const END_STRING = ")%<br/>";
+  const BEGIN_STRING = 'brightness';
+  const END_STRING = ')%<br/>';
 
   /**
    * ChangeBrightnessByNStatement constructor.
@@ -32,9 +30,9 @@ class ChangeBrightnessByNStatement extends BaseChangeByNStatement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Change brightness by " . $formula_string_without_markup;
+    return 'Change brightness by '.$formula_string_without_markup;
   }
 
   /**
@@ -42,6 +40,6 @@ class ChangeBrightnessByNStatement extends BaseChangeByNStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
 }

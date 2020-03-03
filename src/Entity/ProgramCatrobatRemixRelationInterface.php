@@ -3,8 +3,7 @@
 namespace App\Entity;
 
 /**
- * Interface ProgramCatrobatRemixRelationInterface
- * @package App\Entity
+ * Interface ProgramCatrobatRemixRelationInterface.
  */
 interface ProgramCatrobatRemixRelationInterface
 {
@@ -24,8 +23,6 @@ interface ProgramCatrobatRemixRelationInterface
   public function getCreatedAt();
 
   /**
-   * @param \DateTime $created_at
-   *
    * @return mixed
    */
   public function setCreatedAt(\DateTime $created_at);

@@ -4,11 +4,11 @@ namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use App\Entity\User;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
@@ -16,14 +16,11 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
- * Class AllProgramsAdmin
- * @package App\Admin
+ * Class AllProgramsAdmin.
  */
 class AllProgramsAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -38,7 +35,7 @@ class AllProgramsAdmin extends AbstractAdmin
    * @var array
    */
   protected $datagridValues = [
-    '_sort_by'    => 'id',
+    '_sort_by' => 'id',
     '_sort_order' => 'DESC',
   ];
 
@@ -53,7 +50,6 @@ class AllProgramsAdmin extends AbstractAdmin
    * @param $code
    * @param $class
    * @param $baseControllerName
-   * @param ScreenshotRepository $screenshot_repository
    */
   public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository)
   {
@@ -62,6 +58,68 @@ class AllProgramsAdmin extends AbstractAdmin
     $this->screenshot_repository = $screenshot_repository;
   }
 
+  /**
+   * @param $program
+   *
+   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
+   */
+  public function preUpdate($program)
+  {
+    /**
+     * @var Program
+     * @var ModelManager $model_manager
+     */
+    $model_manager = $this->getModelManager();
+    $old_program = $model_manager->getEntityManager($this->getClass())
+      ->getUnitOfWork()->getOriginalEntityData($program);
+
+    if (false == $old_program['approved'] && true == $program->getApproved())
+    {
+      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()
+        ->get('security.token_storage')->getToken()->getUser());
+      $this->getModelManager()->update($program);
+    }
+    elseif (true == $old_program['approved'] && false == $program->getApproved())
+    {
+      $program->setApprovedByUser(null);
+      $this->getModelManager()->update($program);
+    }
+    $this->checkFlavor();
+  }
+
+  /**
+   * @param $object
+   */
+  public function prePersist($object)
+  {
+    $this->checkFlavor();
+  }
+
+  /**
+   * @param $object
+   *
+   * @return Metadata
+   */
+  public function getObjectMetadata($object)
+  {
+    /*
+     * @var $object object
+     */
+    return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
+  }
+
+  /**
+   * @param $object
+   *
+   * @return string
+   */
+  public function getThumbnailImageUrl($object)
+  {
+    /*
+     * @var $object object
+     */
+    return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
+  }
 
   /**
    * @param FormMapper $formMapper
@@ -78,9 +136,9 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('views')
       ->add('flavor')
       ->add('visible', null, ['required' => false])
-      ->add('approved', null, ['required' => false]);
+      ->add('approved', null, ['required' => false])
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -93,45 +151,8 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('id')
       ->add('name')
       ->add('downloads')
-      ->add('user.username');
-  }
-
-
-  /**
-   * @param $program
-   *
-   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
-   */
-  public function preUpdate($program)
-  {
-    /**
-     * @var $program Program
-     * @var $model_manager ModelManager
-     */
-    $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())
-      ->getUnitOfWork()->getOriginalEntityData($program);
-
-    if ($old_program['approved'] == false && $program->getApproved() == true)
-    {
-      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser());
-      $this->getModelManager()->update($program);
-    }
-    elseif ($old_program['approved'] == true && $program->getApproved() == false)
-    {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
-    }
-    $this->checkFlavor();
-  }
-
-  /**
-   * @param $object
-   */
-  public function prePersist($object)
-  {
-    $this->checkFlavor();
+      ->add('user.username')
+    ;
   }
 
   /**
@@ -151,7 +172,7 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('downloads')
       ->add('thumbnail', 'string',
         [
-          'template' => 'Admin/program_thumbnail_image_list.html.twig'
+          'template' => 'Admin/program_thumbnail_image_list.html.twig',
         ]
       )
       ->add('approved', null, ['editable' => true])
@@ -159,49 +180,15 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('_action', 'actions', ['actions' => [
         'show' => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
         'edit' => [],
-      ]]);
+      ]])
+    ;
   }
 
-
-  /**
-   * @param $object
-   *
-   * @return Metadata
-   */
-  public function getObjectMetadata($object)
-  {
-    /**
-     * @var $object object
-     */
-    return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
-  }
-
-
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('create')->remove('delete')->remove('export');
   }
 
-
-  /**
-   * @param $object
-   *
-   * @return string
-   */
-  public function getThumbnailImageUrl($object)
-  {
-    /**
-     * @var $object object
-     */
-    return '/' . $this->screenshot_repository->getThumbnailWebPath($object->getId());
-  }
-
-  /**
-   *
-   */
   private function checkFlavor()
   {
     $flavor = $this->getForm()->get('flavor')->getData();
@@ -211,12 +198,11 @@ class AllProgramsAdmin extends AbstractAdmin
       return; // There was no required flavor form field in this Action, so no check is needed!
     }
 
-    $flavor_options =  $this->getConfigurationPool()->getContainer()->getParameter('themes');
+    $flavor_options = $this->getConfigurationPool()->getContainer()->getParameter('themes');
 
-    if (!in_array($flavor, $flavor_options)) {
-      throw new NotFoundHttpException(
-        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
-      );
+    if (!in_array($flavor, $flavor_options, true))
+    {
+      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
     }
   }
 }

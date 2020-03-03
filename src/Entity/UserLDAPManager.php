@@ -4,19 +4,17 @@ namespace App\Entity;
 
 use App\Catrobat\Ldap\UserHydrator;
 use FR3D\LdapBundle\Driver\LdapDriverException;
-use FR3D\LdapBundle\Ldap\LdapManager;
 use FR3D\LdapBundle\Driver\LdapDriverInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bridge\Monolog\Logger;
+use FR3D\LdapBundle\Ldap\LdapManager;
 use FR3D\LdapBundle\Model\LdapUserInterface;
+use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class UserLDAPManager
- * @package App\Entity
+ * Class UserLDAPManager.
  */
 class UserLDAPManager extends LdapManager
 {
-
   /**
    * @var
    */
@@ -40,13 +38,9 @@ class UserLDAPManager extends LdapManager
   /**
    * UserLDAPManager constructor.
    *
-   * @param LdapDriverInterface $driver
-   * @param UserHydrator        $user_manager
-   * @param array               $params
-   * @param                     $role_mappings
-   * @param                     $group_filter
-   * @param                     $tokengenerator
-   * @param Logger              $logger
+   * @param $role_mappings
+   * @param $group_filter
+   * @param $tokengenerator
    */
   public function __construct(LdapDriverInterface $driver, UserHydrator $user_manager,
                               array $params, $role_mappings, $group_filter, $tokengenerator, Logger $logger)
@@ -60,10 +54,9 @@ class UserLDAPManager extends LdapManager
   }
 
   /**
-   * @param array $criteria
+   * @throws \Exception
    *
    * @return bool|\FOS\UserBundle\Model\UserInterface|object|UserInterface|null
-   * @throws \Exception
    */
   public function findUserBy(array $criteria): ?UserInterface
   {
@@ -76,20 +69,20 @@ class UserLDAPManager extends LdapManager
         throw new \Exception('This search can only return a single user');
       }
 
-      if ($entries['count'] == 0)
+      if (0 == $entries['count'])
       {
         return null;
       }
 
       // same Email-Address already in system?
       /**
-       * @var UserManager $usermanager
+       * @var UserManager
        */
       $usermanager = $this->user_manager;
       $sameEmailUser = $usermanager->findOneBy([
-        "email" => $entries[0]['mail'],
+        'email' => $entries[0]['mail'],
       ]);
-      if ($sameEmailUser != null)
+      if (null != $sameEmailUser)
       {
         if ($sameEmailUser instanceof LdapUserInterface)
         {
@@ -104,19 +97,17 @@ class UserLDAPManager extends LdapManager
       $this->hydrate($user, $entries[0]);
 
       return $user;
-    } catch (LdapDriverException $e)
+    }
+    catch (LdapDriverException $e)
     {
-      $this->logger->error("LDAP-Server not reachable?: " . $e->getMessage());
+      $this->logger->error('LDAP-Server not reachable?: '.$e->getMessage());
 
       return null;
     }
   }
 
   /**
-   * @param UserInterface $user
-   * @param               $password
-   *
-   * @return bool
+   * @param $password
    */
   public function bind(UserInterface $user, $password): bool
   {
@@ -124,19 +115,20 @@ class UserLDAPManager extends LdapManager
     {
       $filter = sprintf($this->group_filter, $user->getDn());
       $entries = $this->driver->search($this->params['baseDn'], $filter, [
-        "cn",
+        'cn',
       ]);
       $binding = $this->driver->bind($user, $password);
-    } catch (LdapDriverException $e)
+    }
+    catch (LdapDriverException $e)
     {
-      $this->logger->error("LDAP-Server not reachable?: " . $e->getMessage());
+      $this->logger->error('LDAP-Server not reachable?: '.$e->getMessage());
 
       return false;
     }
 
     if ($binding)
     {
-      /**
+      /*
        * @var $user \App\Entity\User*
        */
       $user->setRealRoles([]);
@@ -144,8 +136,8 @@ class UserLDAPManager extends LdapManager
       $roles = [];
       foreach ($entries as $entry)
       {
-        $ldap_group_name = $entry["cn"][0];
-        if ($role_to_add = array_search($ldap_group_name, $this->role_mappings))
+        $ldap_group_name = $entry['cn'][0];
+        if ($role_to_add = array_search($ldap_group_name, $this->role_mappings, true))
         {
           array_push($roles, $role_to_add);
         }
@@ -156,10 +148,6 @@ class UserLDAPManager extends LdapManager
     return $binding;
   }
 
-  /**
-   * @param UserInterface $user
-   * @param array         $entry
-   */
   protected function hydrate(UserInterface $user, array $entry)
   {
     parent::hydrate($user, $entry);

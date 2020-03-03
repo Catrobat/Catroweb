@@ -8,14 +8,10 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class RudeWordsRepository
- * @package App\Repository
+ * Class RudeWordsRepository.
  */
 class RudeWordsRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, RudeWord::class);
@@ -24,15 +20,17 @@ class RudeWordsRepository extends ServiceEntityRepository
   /**
    * @param $array
    *
-   * @return bool
    * @throws NonUniqueResultException
+   *
+   * @return bool
    */
   public function contains($array)
   {
     $qb = $this->createQueryBuilder('e');
     $qb->select($qb->expr()->count('e.word'))
       ->where($qb->expr()->in('e.word', '?1'))
-      ->setParameter(1, $array);
+      ->setParameter(1, $array)
+    ;
     $result = $qb->getQuery()->getSingleScalarResult();
 
     return $result > 0;

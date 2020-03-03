@@ -1,13 +1,11 @@
 <?php
 
-
 namespace App\Catrobat\Services;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 /**
- * Class TemplateFileRepository
- * @package App\Catrobat\Services
+ * Class TemplateFileRepository.
  */
 class TemplateFileRepository extends ProgramFileRepository
 {
@@ -16,7 +14,6 @@ class TemplateFileRepository extends ProgramFileRepository
    *
    * @param $catrobat_template_storage_dir
    * @param $catrobat_template_storage_path
-   * @param CatrobatFileCompressor $file_compressor
    * @param $catrobat_upload_temp_dir
    */
   public function __construct($catrobat_template_storage_dir, $catrobat_template_storage_path,
@@ -35,7 +32,8 @@ class TemplateFileRepository extends ProgramFileRepository
     {
       $file = $this->getProgramFile($id);
       unlink($file->getPathname());
-    } catch (FileNotFoundException $e)
+    }
+    catch (FileNotFoundException $e)
     {
     }
   }

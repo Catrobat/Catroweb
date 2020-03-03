@@ -5,8 +5,7 @@ namespace App\Catrobat\Services\TestEnv;
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
 
 /**
- * Class FakeJenkinsDispatcher
- * @package App\Catrobat\Features\Helpers
+ * Class FakeJenkinsDispatcher.
  */
 class FakeJenkinsDispatcher extends JenkinsDispatcher
 {
@@ -14,6 +13,14 @@ class FakeJenkinsDispatcher extends JenkinsDispatcher
    * @var
    */
   protected $last_params;
+
+  /**
+   * @return mixed
+   */
+  public function getLastParameters()
+  {
+    return $this->last_params;
+  }
 
   /**
    * @param $params
@@ -24,14 +31,6 @@ class FakeJenkinsDispatcher extends JenkinsDispatcher
   {
     $this->last_params = $params;
 
-    return $this->config['url'] . '?' . http_build_query($params);
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getLastParameters()
-  {
-    return $this->last_params;
+    return $this->config['url'].'?'.http_build_query($params);
   }
 }

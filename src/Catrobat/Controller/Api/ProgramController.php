@@ -7,7 +7,6 @@ use App\Catrobat\Twig\AppExtension;
 use App\Entity\Program;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
-use App\Repository\ProgramLikeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,18 +14,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 /**
- * Class ProgramController
- * @package App\Catrobat\Controller\Api
+ * Class ProgramController.
  */
 class ProgramController extends AbstractController
 {
   /**
    * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @param Request        $request
-   * @param ProgramManager $program_manager
    *
    * @return ProgramListResponse|JsonResponse
    */
@@ -37,26 +31,25 @@ class ProgramController extends AbstractController
 
     $programs = [];
     $program = $program_manager->find($id);
-    if ($program === null)
+    if (null === $program)
     {
       return JsonResponse::create(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
     }
-    else
-    {
-      $numbOfTotalProjects = 1;
-      $programs[] = $program;
-    }
+
+    $numbOfTotalProjects = 1;
+    $programs[] = $program;
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
 
   /**
    * @Route("/api/project/{id}/likes", name="api_project_likes", methods={"GET"})
-   * @param                       $id
-   * @param ProgramManager        $program_manager
+   *
+   * @param $id
+   *
+   * @throws \Exception
    *
    * @return JsonResponse
-   * @throws \Exception
    */
   public function projectLikesAction($id, ProgramManager $program_manager)
   {
@@ -96,13 +89,12 @@ class ProgramController extends AbstractController
 
   /**
    * @Route("/api/project/{id}/likes/count", name="api_project_likes_count", methods={"GET"})
-   * @param Request               $request
-   * @param                       $id
-   * @param ProgramManager        $program_manager
-   * @param TranslatorInterface   $translator
+   *
+   * @param $id
+   *
+   * @throws NotFoundHttpException
    *
    * @return JsonResponse
-   * @throws NotFoundHttpException
    */
   public function projectLikesCountAction(Request $request, $id, ProgramManager $program_manager,
                                           TranslatorInterface $translator)
@@ -126,10 +118,10 @@ class ProgramController extends AbstractController
     foreach (ProgramLike::$VALID_TYPES as $type_id)
     {
       $type_name = ProgramLike::$TYPE_NAMES[$type_id];
-      $data->$type_name = new \stdClass();
-      $data->$type_name->value = $program_manager->likeTypeCount($program->getId(), $type_id);
-      $data->$type_name->stringValue = AppExtension::humanFriendlyNumber(
-        $data->$type_name->value, $translator, $user_locale
+      $data->{$type_name} = new \stdClass();
+      $data->{$type_name}->value = $program_manager->likeTypeCount($program->getId(), $type_id);
+      $data->{$type_name}->stringValue = AppExtension::humanFriendlyNumber(
+        $data->{$type_name}->value, $translator, $user_locale
       );
     }
 

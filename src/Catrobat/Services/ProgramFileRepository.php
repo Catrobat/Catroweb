@@ -2,14 +2,12 @@
 
 namespace App\Catrobat\Services;
 
+use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
-
 
 /**
- * Class ProgramFileRepository
- * @package App\Catrobat\Services
+ * Class ProgramFileRepository.
  */
 class ProgramFileRepository
 {
@@ -18,13 +16,13 @@ class ProgramFileRepository
    */
   public $directory;
   /**
-   * @var Filesystem
-   */
-  private $filesystem;
-  /**
    * @var
    */
   protected $webpath;
+  /**
+   * @var Filesystem
+   */
+  private $filesystem;
   /**
    * @var CatrobatFileCompressor
    */
@@ -40,7 +38,6 @@ class ProgramFileRepository
    *
    * @param $catrobat_file_storage_dir
    * @param $catrobat_file_storage_path
-   * @param CatrobatFileCompressor $file_compressor
    * @param $catrobat_upload_temp_dir
    */
   public function __construct($catrobat_file_storage_dir, $catrobat_file_storage_path,
@@ -51,12 +48,12 @@ class ProgramFileRepository
 
     if (!is_dir($directory))
     {
-      throw new InvalidStorageDirectoryException($directory . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($directory.' is not a valid directory');
     }
 
     if ($tmp_dir && !is_dir($tmp_dir))
     {
-      throw new InvalidStorageDirectoryException($tmp_dir . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($tmp_dir.' is not a valid directory');
     }
 
     $this->directory = $directory;
@@ -67,8 +64,7 @@ class ProgramFileRepository
   }
 
   /**
-   * @param ExtractedCatrobatFile $extracted
-   * @param                       $id
+   * @param $id
    */
   public function saveProgram(ExtractedCatrobatFile $extracted, $id)
   {
@@ -76,8 +72,7 @@ class ProgramFileRepository
   }
 
   /**
-   * @param ExtractedCatrobatFile $extracted
-   * @param                       $id
+   * @param $id
    */
   public function saveProgramTemp(ExtractedCatrobatFile $extracted, $id)
   {
@@ -94,8 +89,8 @@ class ProgramFileRepository
   {
     if ($this->tmp_dir)
     {
-      $this->filesystem->copy($this->tmp_dir . $id . ".catrobat", $this->directory . $id . ".catrobat", true);
-      $this->filesystem->remove($this->tmp_dir . $id . ".catrobat");
+      $this->filesystem->copy($this->tmp_dir.$id.'.catrobat', $this->directory.$id.'.catrobat', true);
+      $this->filesystem->remove($this->tmp_dir.$id.'.catrobat');
     }
   }
 
@@ -104,16 +99,15 @@ class ProgramFileRepository
    */
   public function deleteProgramFile($id)
   {
-    $this->filesystem->remove($this->directory . $id . ".catrobat");
+    $this->filesystem->remove($this->directory.$id.'.catrobat');
   }
 
   /**
-   * @param File $file
-   * @param      $id
+   * @param $id
    */
   public function saveProgramfile(File $file, $id)
   {
-    $this->filesystem->copy($file->getPathname(), $this->directory . $id . '.catrobat');
+    $this->filesystem->copy($file->getPathname(), $this->directory.$id.'.catrobat');
   }
 
   /**
@@ -123,6 +117,6 @@ class ProgramFileRepository
    */
   public function getProgramFile($id)
   {
-    return new File($this->directory . $id . '.catrobat');
+    return new File($this->directory.$id.'.catrobat');
   }
 }

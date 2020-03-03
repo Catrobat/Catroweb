@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class BroadcastWaitStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class BroadcastWaitStatement.
  */
 class BroadcastWaitStatement extends Statement
 {
-  const BEGIN_STRING = "broadcast and wait ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'broadcast and wait ';
+  const END_STRING = '<br/>';
 
   /**
    * BroadcastWaitStatement constructor.
@@ -30,7 +29,7 @@ class BroadcastWaitStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Broadcast and wait " . $this->xmlTree->broadcastMessage;
+    return 'Broadcast and wait '.$this->xmlTree->broadcastMessage;
   }
 
   /**
@@ -38,6 +37,6 @@ class BroadcastWaitStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
 }

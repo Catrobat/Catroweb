@@ -2,10 +2,8 @@
 
 namespace App\Catrobat\CatrobatCode;
 
-
 /**
- * Class CodeObject
- * @package App\Catrobat\CatrobatCode
+ * Class CodeObject.
  */
 class CodeObject
 {
@@ -85,26 +83,10 @@ class CodeObject
     $objects[] = $this;
     foreach ($this->codeObjects as $object)
     {
-      if ($object != null)
+      if (null != $object)
       {
         $objects = $this->addObjectsToArray($objects, $object->getCodeObjectsRecursively());
       }
-    }
-
-    return $objects;
-  }
-
-  /**
-   * @param $objects
-   * @param $objectsToAdd
-   *
-   * @return array
-   */
-  private function addObjectsToArray($objects, $objectsToAdd)
-  {
-    foreach ($objectsToAdd as $object)
-    {
-      $objects[] = $object;
     }
 
     return $objects;
@@ -123,7 +105,7 @@ class CodeObject
    */
   public function getCode()
   {
-    $code = "";
+    $code = '';
     foreach ($this->scripts as $script)
     {
       $code .= $script->execute();
@@ -138,5 +120,21 @@ class CodeObject
   public function getScripts()
   {
     return $this->scripts;
+  }
+
+  /**
+   * @param $objects
+   * @param $objectsToAdd
+   *
+   * @return array
+   */
+  private function addObjectsToArray($objects, $objectsToAdd)
+  {
+    foreach ($objectsToAdd as $object)
+    {
+      $objects[] = $object;
+    }
+
+    return $objects;
   }
 }

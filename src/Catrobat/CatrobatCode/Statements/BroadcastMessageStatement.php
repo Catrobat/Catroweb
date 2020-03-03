@@ -5,12 +5,10 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class BroadcastMessageStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class BroadcastMessageStatement.
  */
 class BroadcastMessageStatement extends Statement
 {
-
   /**
    * BroadcastMessageStatement constructor.
    *
@@ -21,9 +19,8 @@ class BroadcastMessageStatement extends Statement
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $value)
   {
-    $value = SyntaxHighlightingConstants::VALUE . $value . SyntaxHighlightingConstants::END;
+    $value = SyntaxHighlightingConstants::VALUE.$value.SyntaxHighlightingConstants::END;
     parent::__construct($statementFactory, $xmlTree, $spaces,
-      $value, "");
+      $value, '');
   }
-
 }

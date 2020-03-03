@@ -3,12 +3,11 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class WhenScriptStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class WhenScriptStatement.
  */
 class WhenScriptStatement extends Statement
 {
-  const BEGIN_STRING = "when program started <br/>";
+  const BEGIN_STRING = 'when program started <br/>';
 
   /**
    * WhenScriptStatement constructor.
@@ -21,6 +20,6 @@ class WhenScriptStatement extends Statement
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
-      "");
+      '');
   }
 }

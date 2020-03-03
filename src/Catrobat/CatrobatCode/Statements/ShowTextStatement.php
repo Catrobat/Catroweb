@@ -3,14 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ShowTextStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ShowTextStatement.
  */
 class ShowTextStatement extends Statement
 {
-  const BEGIN_STRING = "show variable ";
-  const END_STRING = ")<br/>";
-
+  const BEGIN_STRING = 'show variable ';
+  const END_STRING = ')<br/>';
 
   /**
    * ShowTextStatement constructor.
@@ -48,10 +46,10 @@ class ShowTextStatement extends Statement
         }
       }
     }
-    $formula_x_pos_no_markup = preg_replace("#<[^>]*>#", '', $formula_x_pos);
-    $formula_y_pos_no_markup = preg_replace("#<[^>]*>#", '', $formula_y_pos);
+    $formula_x_pos_no_markup = preg_replace('#<[^>]*>#', '', $formula_x_pos);
+    $formula_y_pos_no_markup = preg_replace('#<[^>]*>#', '', $formula_y_pos);
 
-    return "Show variable " . $variable_name . " at X: " . $formula_x_pos_no_markup . " Y: " . $formula_y_pos_no_markup;
+    return 'Show variable '.$variable_name.' at X: '.$formula_x_pos_no_markup.' Y: '.$formula_y_pos_no_markup;
   }
 
   /**
@@ -59,7 +57,6 @@ class ShowTextStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_red.png";
+    return '1h_brick_red.png';
   }
-
 }

@@ -5,8 +5,7 @@ namespace App\Catrobat\Services\TestEnv;
 use App\Catrobat\Services\Time;
 
 /**
- * Class ProxyTime
- * @package App\Catrobat\Services\TestEnv
+ * Class ProxyTime.
  */
 class ProxyTime extends Time
 {
@@ -17,8 +16,6 @@ class ProxyTime extends Time
 
   /**
    * ProxyTime constructor.
-   *
-   * @param Time $time
    */
   public function __construct(Time $time)
   {

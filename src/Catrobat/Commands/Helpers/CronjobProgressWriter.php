@@ -4,32 +4,26 @@ namespace App\Catrobat\Commands\Helpers;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 /**
- * Class CronjobProgressWriter
- * @package App\Catrobat\Commands
+ * Class CronjobProgressWriter.
  */
-class CronjobProgressWriter #extends ProgressBar
+class CronjobProgressWriter //extends ProgressBar
 {
   /**
    * @var OutputInterface
    */
-  private $_output = null;
+  private $_output;
 
   /**
    * CronjobProgressWriter constructor.
    *
-   * @param OutputInterface $output
-   * @param int             $max
+   * @param int $max
    */
   public function __construct(OutputInterface $output, $max = 0)
   {
     $this->_output = $output;
   }
 
-  /**
-   *
-   */
   public function clear()
   {
   }
@@ -41,9 +35,6 @@ class CronjobProgressWriter #extends ProgressBar
   {
   }
 
-  /**
-   *
-   */
   public function display()
   {
   }
@@ -55,9 +46,6 @@ class CronjobProgressWriter #extends ProgressBar
   {
   }
 
-  /**
-   *
-   */
   public function finish()
   {
   }
@@ -77,6 +65,6 @@ class CronjobProgressWriter #extends ProgressBar
    */
   public function setMessage($message, $name = 'message')
   {
-    $this->_output->writeln('[' . date_format(new \DateTime(), "Y-m-d H:i:s") . '] ' . $message);
+    $this->_output->writeln('['.date_format(new \DateTime(), 'Y-m-d H:i:s').'] '.$message);
   }
 }

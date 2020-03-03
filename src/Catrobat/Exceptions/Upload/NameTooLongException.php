@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class NameTooLongException
- * @package App\Catrobat\Exceptions\Upload
+ * Class NameTooLongException.
  */
 class NameTooLongException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class NameTooLongException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("errors.name.toolong", StatusCode::PROGRAM_NAME_TOO_LONG);
+    parent::__construct('errors.name.toolong', StatusCode::PROGRAM_NAME_TOO_LONG);
   }
 }

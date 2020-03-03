@@ -5,14 +5,11 @@ namespace App\Catrobat\Controller\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-
 /**
- * Class LogoutController
- * @package App\Catrobat\Controller\Security
+ * Class LogoutController.
  */
 class LogoutController extends AbstractController
 {
-
   /**
    * @return RedirectResponse
    */

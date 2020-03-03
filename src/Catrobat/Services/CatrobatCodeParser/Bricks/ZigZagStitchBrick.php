@@ -5,8 +5,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
 /**
- * Class ZigZagStitchBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
+ * Class ZigZagStitchBrick.
  */
 class ZigZagStitchBrick extends Brick
 {
@@ -16,7 +15,7 @@ class ZigZagStitchBrick extends Brick
   protected function create()
   {
     $this->type = Constants::ZIG_ZAG_STITCH_BRICK;
-    $this->caption = "ZigZag Stitch";
+    $this->caption = 'ZigZag Stitch';
     $this->setImgFile(Constants::EMBROIDERY_BRICK_IMG);
   }
 }

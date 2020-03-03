@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class NextLookStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class NextLookStatement.
  */
 class NextLookStatement extends Statement
 {
-  const BEGIN_STRING = "next look";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'next look';
+  const END_STRING = '<br/>';
 
   /**
    * NextLookStatement constructor.
@@ -30,7 +29,7 @@ class NextLookStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Next look";
+    return 'Next look';
   }
 
   /**
@@ -38,7 +37,6 @@ class NextLookStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
-
 }

@@ -6,16 +6,14 @@ use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\Commands\Helpers\ResetController;
 use App\Entity\Program;
 use App\Entity\User;
+use App\Entity\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\UserManager;
-
 
 /**
- * Class CreateCommentCommand
- * @package App\Catrobat\Commands
+ * Class CreateCommentCommand.
  */
 class CreateCommentCommand extends Command
 {
@@ -29,7 +27,6 @@ class CreateCommentCommand extends Command
    */
   private $remix_manipulation_program_manager;
 
-
   /**
    * @var ResetController
    */
@@ -37,9 +34,6 @@ class CreateCommentCommand extends Command
 
   /**
    * ProgramImportCommand constructor.
-   *
-   * @param UserManager                     $user_manager
-   * @param RemixManipulationProgramManager $program_manager
    */
   public function __construct(UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager,
@@ -51,9 +45,6 @@ class CreateCommentCommand extends Command
     $this->reset_controller = $reset_controller;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:comment')
@@ -61,23 +52,21 @@ class CreateCommentCommand extends Command
       ->addArgument('user', InputArgument::REQUIRED, 'User who comments on program')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Program name of program to comment on')
       ->addArgument('message', InputArgument::REQUIRED, 'Comment message')
-      ->addArgument('reported', InputArgument::REQUIRED, 'Boolean if it should be a reported comment');
+      ->addArgument('reported', InputArgument::REQUIRED, 'Boolean if it should be a reported comment')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     /**
-     * @var $user    User
-     * @var $program Program
+     * @var User
+     * @var Program $program
      */
-
     $username = $input->getArgument('user');
     $program_name = $input->getArgument('program_name');
     $message = $input->getArgument('message');
@@ -86,7 +75,7 @@ class CreateCommentCommand extends Command
     $user = $this->user_manager->findUserByUsername($username);
     $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
 
-    if ($user == null || $program == null)
+    if (null == $user || null == $program)
     {
       return;
     }
@@ -94,10 +83,11 @@ class CreateCommentCommand extends Command
     try
     {
       $this->reset_controller->postComment($user, $program, $message, $reported);
-    } catch (\Exception $e)
+    }
+    catch (\Exception $e)
     {
       return;
     }
-    $output->writeln('Commenting on ' . $program->getName() . ' with user ' . $user->getUsername());
+    $output->writeln('Commenting on '.$program->getName().' with user '.$user->getUsername());
   }
 }

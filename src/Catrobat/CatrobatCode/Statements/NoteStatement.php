@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class NoteStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class NoteStatement.
  */
 class NoteStatement extends Statement
 {
-  const BEGIN_STRING = "note ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'note ';
+  const END_STRING = '<br/>';
 
   /**
    * NoteStatement constructor.
@@ -31,9 +30,9 @@ class NoteStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Note " . $formula_string_without_markup;
+    return 'Note '.$formula_string_without_markup;
   }
 
   /**
@@ -41,6 +40,6 @@ class NoteStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
 }

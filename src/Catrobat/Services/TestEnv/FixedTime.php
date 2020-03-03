@@ -4,10 +4,8 @@ namespace App\Catrobat\Services\TestEnv;
 
 use App\Catrobat\Services\Time;
 
-
 /**
- * Class FixedTime
- * @package App\Catrobat\Features\Api\Context
+ * Class FixedTime.
  */
 class FixedTime extends Time
 {

@@ -3,11 +3,9 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\StatementFactory;
-use Symfony\Component\DomCrawler\Form;
 
 /**
- * Class Statement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class Statement.
  */
 class Statement
 {
@@ -35,11 +33,10 @@ class Statement
   /**
    * Statement constructor.
    *
-   * @param StatementFactory $statementFactory
-   * @param                  $xmlTree
-   * @param                  $spaces
-   * @param                  $beginString
-   * @param                  $endString
+   * @param $xmlTree
+   * @param $spaces
+   * @param $beginString
+   * @param $endString
    */
   public function __construct(StatementFactory $statementFactory, $xmlTree, $spaces, $beginString, $endString)
   {
@@ -53,51 +50,11 @@ class Statement
   }
 
   /**
-   * @param StatementFactory $statementFactory
-   */
-  protected function createChildren(StatementFactory $statementFactory)
-  {
-    if ($this->xmlTree != null)
-    {
-      $this->addAllScripts($statementFactory->createStatement($this->xmlTree, $this->spaces + 1));
-    }
-  }
-
-  /**
-   * @param $statementsToAdd
-   */
-  protected function addAllScripts($statementsToAdd)
-  {
-    foreach ($statementsToAdd as $statement)
-    {
-      $this->statements[] = $statement;
-    }
-  }
-
-  /**
    * @return string
    */
   public function execute()
   {
-    $code = $this->addSpaces() . $this->beginString . $this->executeChildren() . $this->endString;
-
-    return $code;
-  }
-
-  /**
-   * @param int $offset
-   *
-   * @return string
-   */
-  protected function addSpaces($offset = 0)
-  {
-    $stringSpaces = "";
-    for ($i = 0; $i < ($this->spaces + $offset) * 4; $i++)
-    {
-      $stringSpaces .= "&nbsp;";
-    }
-
-    return $stringSpaces;
+    return $this->addSpaces().$this->beginString.$this->executeChildren().$this->endString;
   }
 
   /**
@@ -163,6 +120,41 @@ class Statement
     return static::class;
   }
 
+  protected function createChildren(StatementFactory $statementFactory)
+  {
+    if (null != $this->xmlTree)
+    {
+      $this->addAllScripts($statementFactory->createStatement($this->xmlTree, $this->spaces + 1));
+    }
+  }
+
+  /**
+   * @param $statementsToAdd
+   */
+  protected function addAllScripts($statementsToAdd)
+  {
+    foreach ($statementsToAdd as $statement)
+    {
+      $this->statements[] = $statement;
+    }
+  }
+
+  /**
+   * @param int $offset
+   *
+   * @return string
+   */
+  protected function addSpaces($offset = 0)
+  {
+    $stringSpaces = '';
+    for ($i = 0; $i < ($this->spaces + $offset) * 4; ++$i)
+    {
+      $stringSpaces .= '&nbsp;';
+    }
+
+    return $stringSpaces;
+  }
+
   /**
    * @return mixed
    */
@@ -181,10 +173,12 @@ class Statement
   {
     $formula_list_stmt = null;
     foreach ($this->statements as $child_stmt)
+    {
       if ($child_stmt instanceof FormulaListStatement)
       {
         $formula_list_stmt = $child_stmt;
       }
+    }
 
     return $formula_list_stmt;
   }

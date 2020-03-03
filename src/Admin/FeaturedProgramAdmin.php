@@ -20,12 +20,9 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\RouterInterface;
-
 
 /**
- * Class FeaturedProgramAdmin
- * @package App\Admin
+ * Class FeaturedProgramAdmin.
  */
 class FeaturedProgramAdmin extends AbstractAdmin
 {
@@ -60,9 +57,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
    * @param $code
    * @param $class
    * @param $baseControllerName
-   * @param EntityManagerInterface $entity_manager
-   * @param ParameterBagInterface $parameter_bag
-   * @param FeaturedImageRepository $featured_image_repository
    */
   public function __construct($code, $class, $baseControllerName, EntityManagerInterface $entity_manager,
                               ParameterBagInterface $parameter_bag, FeaturedImageRepository $featured_image_repository)
@@ -81,89 +75,15 @@ class FeaturedProgramAdmin extends AbstractAdmin
   public function createQuery($context = 'list')
   {
     /**
-     * @var $query QueryBuilder
+     * @var QueryBuilder
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->isNotNull($query->getRootAliases()[0] . '.program')
+      $query->expr()->isNotNull($query->getRootAliases()[0].'.program')
     );
 
     return $query;
   }
-
-
-  /**
-   * @param FormMapper $formMapper
-   *
-   * Fields to be shown on create/edit forms
-   */
-  protected function configureFormFields(FormMapper $formMapper)
-  {
-    $file_options = [
-      'required'    => ($this->getSubject()->getId() === null),
-      'constraints' => [
-        new FeaturedImageConstraint(),
-      ],
-    ];
-
-    $id_value = '';
-
-    if ($this->getSubject()->getId() !== null)
-    {
-      $file_options['help'] = '<img src="../' . $this->getFeaturedImageUrl($this->getSubject()) . '">';
-      $id_value = $this->getSubject()->getProgram()->getId();
-    }
-
-    $formMapper
-      ->add('file', FileType::class, $file_options)
-      ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
-      ->add('flavor')
-      ->add('priority')
-      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
-                              'help'  => 'Toggle for iOS featured programs api call.'])
-      ->add('active', null, ['required' => false]);
-  }
-
-
-  /**
-   * @param DatagridMapper $datagridMapper
-   *
-   * Fields to be shown on filter forms
-   */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-  {
-    $datagridMapper
-      ->add('program.name');
-  }
-
-
-  /**
-   * @param ListMapper $listMapper
-   *
-   * Fields to be shown on lists
-   */
-  protected function configureListFields(ListMapper $listMapper)
-  {
-    $listMapper
-      ->addIdentifier('id')
-      ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
-      ->add('program', EntityType::class, [
-        'class'      => Program::class,
-        'route'      => ['name' => 'show'],
-        'admin_code' => 'catrowebadmin.block.programs.all',
-      ])
-      ->add('flavor', 'string')
-      ->add('priority', 'integer')
-      ->add('for_ios', null, ['label' => 'iOS only'])
-      ->add('active', null)
-      ->add('_action', 'actions', [
-        'actions' => [
-          'edit'   => [],
-          'delete' => [],
-        ],
-      ]);
-  }
-
 
   /**
    * @param $object FeaturedProgram
@@ -172,9 +92,8 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   public function getFeaturedImageUrl($object)
   {
-    return '../../' . $this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
+    return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
   }
-
 
   /**
    * @param $object FeaturedProgram
@@ -187,7 +106,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
       $this->getFeaturedImageUrl($object));
   }
 
-
   /**
    * @param $object FeaturedProgram
    */
@@ -199,7 +117,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
     $this->checkFlavor();
   }
 
-
   /**
    * @param $object
    */
@@ -209,6 +126,78 @@ class FeaturedProgramAdmin extends AbstractAdmin
     $this->checkFlavor();
   }
 
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
+  protected function configureFormFields(FormMapper $formMapper)
+  {
+    $file_options = [
+      'required' => (null === $this->getSubject()->getId()),
+      'constraints' => [
+        new FeaturedImageConstraint(),
+      ],
+    ];
+
+    $id_value = '';
+
+    if (null !== $this->getSubject()->getId())
+    {
+      $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($this->getSubject()).'">';
+      $id_value = $this->getSubject()->getProgram()->getId();
+    }
+
+    $formMapper
+      ->add('file', FileType::class, $file_options)
+      ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
+      ->add('flavor')
+      ->add('priority')
+      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
+        'help' => 'Toggle for iOS featured programs api call.', ])
+      ->add('active', null, ['required' => false])
+    ;
+  }
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  {
+    $datagridMapper
+      ->add('program.name')
+    ;
+  }
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
+  protected function configureListFields(ListMapper $listMapper)
+  {
+    $listMapper
+      ->addIdentifier('id')
+      ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
+      ->add('program', EntityType::class, [
+        'class' => Program::class,
+        'route' => ['name' => 'show'],
+        'admin_code' => 'catrowebadmin.block.programs.all',
+      ])
+      ->add('flavor', 'string')
+      ->add('priority', 'integer')
+      ->add('for_ios', null, ['label' => 'iOS only'])
+      ->add('active', null)
+      ->add('_action', 'actions', [
+        'actions' => [
+          'edit' => [],
+          'delete' => [],
+        ],
+      ])
+    ;
+  }
 
   /**
    * @param $object FeaturedProgram
@@ -216,10 +205,9 @@ class FeaturedProgramAdmin extends AbstractAdmin
   private function checkProgramID($object)
   {
     /**
-     * @var $program         Program
-     * @var $program_manager ProgramManager
+     * @var Program
+     * @var ProgramManager $program_manager
      */
-
     $id = $this->getForm()->get('program_id')->getData();
 
     $program_manager = $this->entity_manager->getRepository('\App\Entity\Program');
@@ -235,9 +223,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
     }
   }
 
-  /**
-   *
-   */
   private function checkFlavor()
   {
     $flavor = $this->getForm()->get('flavor')->getData();
@@ -247,12 +232,11 @@ class FeaturedProgramAdmin extends AbstractAdmin
       return; // There was no required flavor form field in this Action, so no check is needed!
     }
 
-    $flavor_options =  $this->parameter_bag->get('themes');
+    $flavor_options = $this->parameter_bag->get('themes');
 
-    if (!in_array($flavor, $flavor_options)) {
-      throw new NotFoundHttpException(
-        '"' . $flavor . '"Flavor is unknown! Choose either ' . implode(",", $flavor_options)
-      );
+    if (!in_array($flavor, $flavor_options, true))
+    {
+      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
     }
   }
 }

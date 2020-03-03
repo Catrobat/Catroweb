@@ -2,12 +2,10 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
-
 use SimpleXMLElement;
 
 /**
- * Class ParsedSimpleProgram
- * @package App\Catrobat\Services\CatrobatCodeParser
+ * Class ParsedSimpleProgram.
  */
 class ParsedSimpleProgram extends ParsedObjectsContainer
 {
@@ -18,8 +16,6 @@ class ParsedSimpleProgram extends ParsedObjectsContainer
 
   /**
    * ParsedSimpleProgram constructor.
-   *
-   * @param SimpleXMLElement $program_xml_properties
    */
   public function __construct(SimpleXMLElement $program_xml_properties)
   {
@@ -27,15 +23,6 @@ class ParsedSimpleProgram extends ParsedObjectsContainer
 
     $this->code_statistic = new CodeStatistic();
     $this->computeCodeStatistic();
-  }
-
-  /**
-   *
-   */
-  protected function computeCodeStatistic()
-  {
-    $this->code_statistic->update($this);
-    $this->code_statistic->computeVariableStatistic($this->xml_properties);
   }
 
   /**
@@ -52,5 +39,11 @@ class ParsedSimpleProgram extends ParsedObjectsContainer
   public function hasScenes()
   {
     return false;
+  }
+
+  protected function computeCodeStatistic()
+  {
+    $this->code_statistic->update($this);
+    $this->code_statistic->computeVariableStatistic($this->xml_properties);
   }
 }

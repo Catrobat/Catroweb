@@ -2,25 +2,21 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Entity\Program;
-
+use Sonata\AdminBundle\Controller\CRUDController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ApkController
- * @package App\Catrobat\Controller\Admin
+ * Class ApkController.
  */
 class ApkController extends CRUDController
 {
-
   public function resetStatusAction()
   {
     /**
-     * @var $object Program
+     * @var Program
      */
-
     $object = $this->admin->getSubject();
 
     if (!$object)
@@ -32,22 +28,21 @@ class ApkController extends CRUDController
 
     $this->admin->update($object);
 
-    $this->addFlash('sonata_flash_success', 'Reseted APK status of ' . $object->getName());
+    $this->addFlash('sonata_flash_success', 'Reseted APK status of '.$object->getName());
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
   /**
-   * @return RedirectResponse
    * @throws \Exception
+   *
+   * @return RedirectResponse
    */
   public function rebuildApkAction()
   {
     /**
-     * @var $object Program
+     * @var Program
      */
-
     $object = $this->admin->getSubject();
 
     if (!$object)
@@ -63,11 +58,10 @@ class ApkController extends CRUDController
 
     $this->admin->update($object);
 
-    $this->addFlash('sonata_flash_success', 'Requested a rebuild of ' . $object->getName());
+    $this->addFlash('sonata_flash_success', 'Requested a rebuild of '.$object->getName());
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
-
 
   /**
    * @return RedirectResponse
@@ -75,9 +69,8 @@ class ApkController extends CRUDController
   public function resetAllApkAction()
   {
     /**
-     * @var $program Program
+     * @var Program
      */
-
     $datagrid = $this->admin->getDatagrid();
 
     $objects = $datagrid->getResults();
@@ -88,7 +81,7 @@ class ApkController extends CRUDController
       $this->admin->update($program);
     }
 
-    if (count($objects) != 0)
+    if (0 != count($objects))
     {
       $this->addFlash('sonata_flash_success', 'All Apks reseted');
     }
@@ -100,10 +93,10 @@ class ApkController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
   /**
-   * @return RedirectResponse
    * @throws \Exception
+   *
+   * @return RedirectResponse
    */
   public function rebuildAllApkAction()
   {
@@ -122,7 +115,7 @@ class ApkController extends CRUDController
       $this->admin->update($program);
     }
 
-    if (count($objects) != 0)
+    if (0 != count($objects))
     {
       $this->addFlash('sonata_flash_success', 'Requested rebuild for all Apks');
     }

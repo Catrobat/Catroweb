@@ -3,18 +3,16 @@
 namespace App\Catrobat\Commands\Helpers;
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Process\Process;
 
-
 /**
- * Class CommandHelper
- * @package App\Catrobat\Commands\Helpers
+ * Class CommandHelper.
  */
 class CommandHelper
 {
@@ -29,9 +27,9 @@ class CommandHelper
   {
     $pos = strpos($string, $needle);
 
-    if ($pos === false)
+    if (false === $pos)
     {
-      return "";
+      return '';
     }
     if ($last_char)
     {
@@ -48,14 +46,14 @@ class CommandHelper
    *
    * @return bool
    */
-  public static function emptyDirectory($directory, $description = "", $output = null)
+  public static function emptyDirectory($directory, $description = '', $output = null)
   {
     if ($output)
     {
-      $output->write($description . " ('" . $directory . "') ... ");
+      $output->write($description." ('".$directory."') ... ");
     }
 
-    if ($directory == '')
+    if ('' == $directory)
     {
       if ($output)
       {
@@ -72,7 +70,7 @@ class CommandHelper
     foreach ($finder as $file)
     {
       // skip folder in templates directory
-      if (($file->getFilename() !== "screenshots") && ($file->getFilename() !== "thumbnails"))
+      if (('screenshots' !== $file->getFilename()) && ('thumbnails' !== $file->getFilename()))
       {
         $filesystem->remove($file);
       }
@@ -93,8 +91,8 @@ class CommandHelper
    */
   public static function createDirectory($directory, $description, $output)
   {
-    $output->write($description . " ('" . $directory . "') ... ");
-    if ($directory == '')
+    $output->write($description." ('".$directory."') ... ");
+    if ('' == $directory)
     {
       $output->writeln('failed');
 
@@ -112,6 +110,7 @@ class CommandHelper
    * @param $application Application
    * @param $args
    * @param $output Output|NullOutput|OutputInterface
+   *
    * @throws \Exception
    */
   public static function executeSymfonyCommand($command, $application, $args, $output)
@@ -124,17 +123,17 @@ class CommandHelper
 
   /**
    * @param $command
-   * @param array   $args
-   * @param string  $description
-   * @param Output  $output
+   * @param array  $args
+   * @param string $description
+   * @param Output $output
    *
    * @return bool
    */
-  public static function executeShellCommand($command, $args = [], $description = "", $output = null)
+  public static function executeShellCommand($command, $args = [], $description = '', $output = null)
   {
     if ($output)
     {
-      $output->write($description . " ('" . $command . "') ... ");
+      $output->write($description." ('".$command."') ... ");
     }
 
     $process = new Process($command);
@@ -158,8 +157,8 @@ class CommandHelper
 
     if ($output)
     {
-      $output->writeln('failed! - Exit-Code: ' . $process->getExitCode());
-      $output->writeln('Error output: ' . $process->getErrorOutput());
+      $output->writeln('failed! - Exit-Code: '.$process->getExitCode());
+      $output->writeln('Error output: '.$process->getErrorOutput());
     }
 
     return false;

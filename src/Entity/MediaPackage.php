@@ -32,24 +32,23 @@ class MediaPackage
    */
   protected $categories;
 
-
   protected $flavors = [];
 
-  /**
-   * @return array
-   */
+  public function __toString()
+  {
+    return (string) $this->name;
+  }
+
   public function getFlavors(): array
   {
     return $this->flavors;
   }
 
-  /**
-   * @param array $flavors
-   */
   public function setFlavors(array $flavors): void
   {
     $this->flavors = $flavors;
   }
+
   /**
    * @return mixed
    */
@@ -112,10 +111,5 @@ class MediaPackage
   public function setCategories($categories)
   {
     $this->categories = $categories;
-  }
-
-  public function __toString()
-  {
-    return (string)$this->name;
   }
 }

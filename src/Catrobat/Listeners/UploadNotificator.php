@@ -6,8 +6,7 @@ use App\Catrobat\Events\ProgramAfterInsertEvent;
 use App\Repository\NotificationRepository;
 
 /**
- * Class UploadNotificator
- * @package App\Catrobat\Listeners
+ * Class UploadNotificator.
  */
 class UploadNotificator
 {
@@ -22,9 +21,6 @@ class UploadNotificator
 
   /**
    * UploadNotificator constructor.
-   *
-   * @param \Swift_Mailer                                     $mailer
-   * @param NotificationRepository $repository
    */
   public function __construct(\Swift_Mailer $mailer, NotificationRepository $repository)
   {
@@ -32,12 +28,8 @@ class UploadNotificator
     $this->notification_repo = $repository;
   }
 
-  /**
-   * @param ProgramAfterInsertEvent $event
-   */
   public function onProgramInsertEvent(ProgramAfterInsertEvent $event)
   {
-
     /* @var $notification_repo \App\Repository\NotificationRepository */
     $notification_repo = $this->notification_repo;
     $all_users = $notification_repo->findAll();
@@ -57,8 +49,8 @@ class UploadNotificator
         ->setContentType('text/html')
         ->setBody('A Project was uploaded.
 
-Name: ' . $program->getName() . '
-Description: ' . $program->getDescription() . '
+Name: '.$program->getName().'
+Description: '.$program->getDescription().'
 ')/*
          * If you also want to include a plaintext version of the message
         ->addPart(

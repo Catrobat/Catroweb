@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class NoGameJamException
- * @package App\Catrobat\Exceptions\Upload
+ * Class NoGameJamException.
  */
 class NoGameJamException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class NoGameJamException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("gamejam.nojam", StatusCode::NO_GAME_JAM);
+    parent::__construct('gamejam.nojam', StatusCode::NO_GAME_JAM);
   }
 }

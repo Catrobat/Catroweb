@@ -2,13 +2,12 @@
 
 namespace App\Catrobat\Events;
 
-use App\Entity\Program;
 use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Entity\Program;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class ProgramAfterInsertEvent
- * @package App\Catrobat\Events
+ * Class ProgramAfterInsertEvent.
  */
 class ProgramAfterInsertEvent extends Event
 {
@@ -23,9 +22,6 @@ class ProgramAfterInsertEvent extends Event
 
   /**
    * ProgramAfterInsertEvent constructor.
-   *
-   * @param ExtractedCatrobatFile $extracted_file
-   * @param Program               $program
    */
   public function __construct(ExtractedCatrobatFile $extracted_file, Program $program)
   {

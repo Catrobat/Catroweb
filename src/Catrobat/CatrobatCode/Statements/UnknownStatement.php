@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class UnknownStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class UnknownStatement.
  */
 class UnknownStatement extends Statement
 {
-  const BEGIN_STRING = "Unknown Statement";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'Unknown Statement';
+  const END_STRING = '<br/>';
 
   /**
    * UnknownStatement constructor.
@@ -30,7 +29,7 @@ class UnknownStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Unknown Brick";
+    return 'Unknown Brick';
   }
 
   /**
@@ -38,7 +37,6 @@ class UnknownStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_grey.png";
+    return '1h_brick_grey.png';
   }
-
 }

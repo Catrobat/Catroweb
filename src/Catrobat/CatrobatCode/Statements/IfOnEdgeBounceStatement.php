@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class IfOnEdgeBounceStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class IfOnEdgeBounceStatement.
  */
 class IfOnEdgeBounceStatement extends Statement
 {
-  const BEGIN_STRING = "if on edge, bounce";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'if on edge, bounce';
+  const END_STRING = '<br/>';
 
   /**
    * IfOnEdgeBounceStatement constructor.
@@ -30,7 +29,7 @@ class IfOnEdgeBounceStatement extends Statement
    */
   public function getBrickText()
   {
-    return "If on edge, bounce";
+    return 'If on edge, bounce';
   }
 
   /**
@@ -38,6 +37,6 @@ class IfOnEdgeBounceStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

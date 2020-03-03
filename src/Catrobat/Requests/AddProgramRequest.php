@@ -2,12 +2,11 @@
 
 namespace App\Catrobat\Requests;
 
-use Symfony\Component\HttpFoundation\File\File;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class AddProgramRequest
- * @package App\Catrobat\Requests
+ * Class AddProgramRequest.
  */
 class AddProgramRequest
 {
@@ -39,8 +38,6 @@ class AddProgramRequest
   /**
    * AddProgramRequest constructor.
    *
-   * @param User   $user
-   * @param File   $programfile
    * @param string $ip
    * @param null   $gamejam
    * @param null   $language
@@ -64,9 +61,6 @@ class AddProgramRequest
     return $this->user;
   }
 
-  /**
-   * @param User $user
-   */
   public function setUser(User $user)
   {
     $this->user = $user;
@@ -80,9 +74,6 @@ class AddProgramRequest
     return $this->programfile;
   }
 
-  /**
-   * @param File $programfile
-   */
   public function setProgramfile(File $programfile)
   {
     $this->programfile = $programfile;
@@ -96,17 +87,11 @@ class AddProgramRequest
     return $this->ip;
   }
 
-  /**
-   * @return null
-   */
   public function getGamejam()
   {
     return $this->gamejam;
   }
 
-  /**
-   * @return null
-   */
   public function getLanguage()
   {
     return $this->language;

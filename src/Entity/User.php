@@ -6,9 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\GuidType;
+use Doctrine\ORM\Mapping as ORM;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -16,7 +16,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser implements LdapUserInterface
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(name="id", type="guid")
@@ -35,7 +34,7 @@ class User extends BaseUser implements LdapUserInterface
   protected $avatar;
 
   /**
-   * @ORM\Column(type="string", length=5, nullable=false, options={"default":""})
+   * @ORM\Column(type="string", length=5, nullable=false, options={"default": ""})
    */
   protected $country;
 
@@ -54,11 +53,12 @@ class User extends BaseUser implements LdapUserInterface
    * When this user is deleted, all the programs owned by him should be deleted too.
    *
    * @ORM\OneToMany(
-   *   targetEntity="Program",
-   *   mappedBy="user",
-   *   fetch="EXTRA_LAZY",
-   *   cascade={"remove"}
+   *     targetEntity="Program",
+   *     mappedBy="user",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
    * )
+   *
    * @var Collection|Program[]
    */
   protected $programs;
@@ -72,7 +72,8 @@ class User extends BaseUser implements LdapUserInterface
    *     mappedBy="user",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
+   *
    * @var Collection|CatroNotification[]
    */
   protected $notifications;
@@ -86,7 +87,8 @@ class User extends BaseUser implements LdapUserInterface
    *     mappedBy="user",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
+   *
    * @var Collection|UserComment[]
    */
   protected $comments;
@@ -97,11 +99,12 @@ class User extends BaseUser implements LdapUserInterface
    * him as a follower, should also be deleted.
    *
    * @ORM\OneToMany(
-   *   targetEntity="App\Entity\FollowNotification",
-   *   mappedBy="follower",
-   *   fetch="EXTRA_LAZY",
-   *   cascade={"remove"}
+   *     targetEntity="App\Entity\FollowNotification",
+   *     mappedBy="follower",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
    * )
+   *
    * @var Collection|FollowNotification[]
    */
   protected $follow_notification_mentions;
@@ -112,11 +115,12 @@ class User extends BaseUser implements LdapUserInterface
    * him as a user giving a like to another user, should also be deleted.
    *
    * @ORM\OneToMany(
-   *   targetEntity="App\Entity\LikeNotification",
-   *   mappedBy="like_from",
-   *   fetch="EXTRA_LAZY",
-   *   cascade={"remove"}
+   *     targetEntity="App\Entity\LikeNotification",
+   *     mappedBy="like_from",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
    * )
+   *
    * @var Collection|LikeNotification[]
    */
   protected $like_notification_mentions;
@@ -138,6 +142,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|ProgramLike[]
    */
   protected $likes;
@@ -149,6 +154,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|UserLikeSimilarityRelation[]
    */
   protected $relations_of_similar_users_based_on_likes;
@@ -160,6 +166,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|UserLikeSimilarityRelation[]
    */
   protected $reverse_relations_of_similar_users_based_on_likes;
@@ -171,6 +178,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|UserRemixSimilarityRelation[]
    */
   protected $relations_of_similar_users_based_on_remixes;
@@ -182,6 +190,7 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|UserRemixSimilarityRelation[]
    */
   protected $reverse_relations_of_similar_users_based_on_remixes;
@@ -202,7 +211,7 @@ class User extends BaseUser implements LdapUserInterface
   protected $gplus_refresh_token;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
   protected $limited = false;
 
@@ -224,7 +233,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @param mixed $gplus_access_token
    */
   public function setGplusAccessToken($gplus_access_token)
@@ -233,7 +241,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @return mixed
    */
   public function getGplusAccessToken()
@@ -242,7 +249,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @param mixed $gplus_id_token
    */
   public function setGplusIdToken($gplus_id_token)
@@ -251,7 +257,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @return mixed
    */
   public function getGplusIdToken()
@@ -260,7 +265,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @param mixed $gplus_refresh_token
    */
   public function setGplusRefreshToken($gplus_refresh_token)
@@ -269,7 +273,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @return mixed
    */
   public function getGplusRefreshToken()
@@ -290,8 +293,6 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * Add programs.
    *
-   * @param Program $programs
-   *
    * @return User
    */
   public function addProgram(Program $programs)
@@ -302,9 +303,7 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   * Remove programs
-   *
-   * @param Program $programs
+   * Remove programs.
    */
   public function removeProgram(Program $programs)
   {
@@ -366,7 +365,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @param mixed $additional_email
    */
   public function setAdditionalEmail($additional_email)
@@ -375,7 +373,6 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
-   *
    * @return mixed
    */
   public function getAdditionalEmail()
@@ -407,7 +404,7 @@ class User extends BaseUser implements LdapUserInterface
    * Set Ldap Distinguished Name.
    *
    * @param string $dn
-   *            Distinguished Name
+   *                   Distinguished Name
    */
   public function setDn($dn)
   {
@@ -421,7 +418,7 @@ class User extends BaseUser implements LdapUserInterface
    */
   public function getDn(): string
   {
-    return $this->dn !== null ? $this->dn : '';
+    return null !== $this->dn ? $this->dn : '';
   }
 
   /**
@@ -445,7 +442,7 @@ class User extends BaseUser implements LdapUserInterface
    */
   public function getLikes()
   {
-    return ($this->likes != null) ? $this->likes : new ArrayCollection();
+    return (null != $this->likes) ? $this->likes : new ArrayCollection();
   }
 
   /**
@@ -459,17 +456,17 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * Returns the Notifications which are available for this user (shown upon login).
    *
-   * @return CatroNotification[]|Collection The Notifications which are available for this user (shown upon login).
+   * @return CatroNotification[]|Collection the Notifications which are available for this user (shown upon login)
    */
   public function getNotifications()
   {
-    return ($this->notifications != null) ? $this->notifications : new ArrayCollection();
+    return (null != $this->notifications) ? $this->notifications : new ArrayCollection();
   }
 
   /**
    * Sets the Notifications which are available for this user (shown upon login).
    *
-   * @param CatroNotification[]|Collection $notifications Notifications which are available for this user (shown upon login).
+   * @param CatroNotification[]|Collection $notifications notifications which are available for this user (shown upon login)
    */
   public function setNotifications($notifications)
   {
@@ -582,8 +579,9 @@ class User extends BaseUser implements LdapUserInterface
     $count = 0;
     foreach ($programs as $program)
     {
-      $count +=$program->getReportsCount();
+      $count += $program->getReportsCount();
     }
+
     return $count;
   }
 
@@ -598,11 +596,11 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * @return mixed
    */
-    public function getReportedCommentsCount()
-    {
-      $comments_collection = $this->getComments();
-      $criteria = Criteria::create()->andWhere(Criteria::expr()->eq('isReported', 1));
+  public function getReportedCommentsCount()
+  {
+    $comments_collection = $this->getComments();
+    $criteria = Criteria::create()->andWhere(Criteria::expr()->eq('isReported', 1));
 
-      return $comments_collection->matching($criteria)->count();
-    }
+    return $comments_collection->matching($criteria)->count();
+  }
 }

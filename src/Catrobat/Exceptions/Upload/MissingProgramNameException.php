@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class MissingProgramNameException
- * @package App\Catrobat\Exceptions\Upload
+ * Class MissingProgramNameException.
  */
 class MissingProgramNameException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class MissingProgramNameException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("errors.name.missing", StatusCode::MISSING_PROGRAM_TITLE);
+    parent::__construct('errors.name.missing', StatusCode::MISSING_PROGRAM_TITLE);
   }
 }

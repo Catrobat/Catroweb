@@ -5,29 +5,21 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Entity\UserRemixSimilarityRelation;
 use DateTime;
-use Doctrine\DBAL\DBALException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Exception;
+use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
-
+use Exception;
 
 /**
- * Class UserRemixSimilarityRelationRepository
- * @package App\Repository
+ * Class UserRemixSimilarityRelationRepository.
  */
 class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, UserRemixSimilarityRelation::class);
   }
 
-  /**
-   *
-   */
   public function removeAllUserRelations()
   {
     $qb = $this->createQueryBuilder('ur');
@@ -35,12 +27,11 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
     $qb
       ->delete()
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
   /**
-   * @param User $user
-   *
    * @return UserRemixSimilarityRelation[]
    */
   public function getRelationsOfSimilarUsers(User $user)
@@ -55,7 +46,8 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
       ->setParameter('user', $user)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -70,10 +62,10 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
   {
     $connection = $this->getEntityManager()->getConnection();
     $connection->insert('user_remix_similarity_relation', [
-      'first_user_id'  => $first_user_id,
+      'first_user_id' => $first_user_id,
       'second_user_id' => $second_user_id,
-      'similarity'     => $similarity,
-      'created_at'     => date_format(new DateTime(), "Y-m-d H:i:s"),
+      'similarity' => $similarity,
+      'created_at' => date_format(new DateTime(), 'Y-m-d H:i:s'),
     ]);
   }
 }

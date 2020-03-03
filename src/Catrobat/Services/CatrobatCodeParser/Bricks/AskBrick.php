@@ -5,8 +5,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
 /**
- * Class AskBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
+ * Class AskBrick.
  */
 class AskBrick extends Brick
 {
@@ -16,7 +15,7 @@ class AskBrick extends Brick
   protected function create()
   {
     $this->type = Constants::ASK_BRICK;
-    $this->caption = "Ask _ and store written answer in _";
+    $this->caption = 'Ask _ and store written answer in _';
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);
   }
 }

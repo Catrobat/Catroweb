@@ -3,17 +3,14 @@
 namespace App\Catrobat\Controller\Admin;
 
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
-
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class LogsController
- * @package App\Catrobat\Controller\Admin
+ * Class LogsController.
  */
 class LogsController extends CRUDController
 {
-
   const LOG_DIR = '../var/log/';
   const LOG_PATTERN = '*.log';
 
@@ -27,15 +24,13 @@ class LogsController extends CRUDController
   const FILTER_LEVEL_EMERGENCY = 7;
 
   /**
-   * @param Request|null $request
-   *
    * @return \Symfony\Component\HttpFoundation\Response
    */
   public function listAction(Request $request = null)
   {
     /**
-      * @var $finder Finder
-      */
+     * @var Finder
+     */
     $filter = self::FILTER_LEVEL_WARNING;
     $greater_equal_than_level = true;
     $line_count = 20;
@@ -45,7 +40,7 @@ class LogsController extends CRUDController
       {
         $line_count = $request->query->getInt('count');
       }
-      if ($request->query->get('filter') !== false)
+      if (false !== $request->query->get('filter'))
       {
         $filter = $request->query->getInt('filter');
       }
@@ -66,10 +61,10 @@ class LogsController extends CRUDController
     }
 
     $content = [];
-    for ($i = 0; $i < count($files); $i++)
+    for ($i = 0; $i < count($files); ++$i)
     {
-      $filename = self::LOG_DIR . $files[$i];
-      $file = popen("tac $filename", "r");
+      $filename = self::LOG_DIR.$files[$i];
+      $file = popen("tac {$filename}", 'r');
 
       $index = 0;
       while (($line = fgets($file)) && ($index < $line_count))
@@ -78,11 +73,10 @@ class LogsController extends CRUDController
 
         if (($greater_equal_than_level && $log_line->debug_level >= $filter) ||
           (!$greater_equal_than_level && $log_line->debug_level == $filter)
-        )
-        {
+        ) {
           $content[$i][$index] = $log_line;
 
-          $index++;
+          ++$index;
         }
       }
       if (!array_key_exists($i, $content))
@@ -93,7 +87,7 @@ class LogsController extends CRUDController
     }
 
     return $this->renderWithExtraParams('Admin/logs.html.twig', [
-      'files'   => $files,
+      'files' => $files,
       'content' => $content,
     ]);
   }

@@ -5,13 +5,12 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class IfLogicElseStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class IfLogicElseStatement.
  */
 class IfLogicElseStatement extends Statement
 {
-  const BEGIN_STRING = "else";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'else';
+  const END_STRING = '<br/>';
 
   /**
    * IfLogicElseStatement constructor.
@@ -22,7 +21,7 @@ class IfLogicElseStatement extends Statement
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
-    $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END;
+    $stmt = SyntaxHighlightingConstants::LOOP.self::BEGIN_STRING.SyntaxHighlightingConstants::END;
 
     parent::__construct($statementFactory, $xmlTree, $spaces - 1,
       $stmt,
@@ -42,7 +41,7 @@ class IfLogicElseStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Else";
+    return 'Else';
   }
 
   /**
@@ -50,6 +49,6 @@ class IfLogicElseStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
 }

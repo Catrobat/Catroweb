@@ -2,51 +2,43 @@
 
 namespace App\Catrobat\RemixGraph;
 
-use Doctrine\ORM\EntityManager;
 use App\Entity\Program;
-use App\Entity\ProgramRemixRelation;
 use App\Entity\ProgramRemixBackwardRelation;
-use App\Repository\ProgramRepository;
-use App\Repository\ProgramRemixRepository;
+use App\Entity\ProgramRemixRelation;
 use App\Repository\ProgramRemixBackwardRepository;
+use App\Repository\ProgramRemixRepository;
+use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-
 /**
- * Class RemixSubgraphManipulator
- * @package App\Catrobat\RemixGraph
+ * Class RemixSubgraphManipulator.
  */
 class RemixSubgraphManipulator
 {
   const COMMON_TIMESTAMP = 'common_timestamp';
 
   /**
-   * @var EntityManagerInterface The entity manager.
+   * @var EntityManagerInterface the entity manager
    */
   private $entity_manager;
 
   /**
-   * @var ProgramRepository The program repository.
+   * @var ProgramRepository the program repository
    */
   private $program_repository;
 
   /**
-   * @var ProgramRemixRepository The program remix repository.
+   * @var ProgramRemixRepository the program remix repository
    */
   private $program_remix_repository;
 
   /**
-   * @var ProgramRemixBackwardRepository The program remix backward repository.
+   * @var ProgramRemixBackwardRepository the program remix backward repository
    */
   private $program_remix_backward_repository;
 
   /**
    * RemixManager constructor.
-   *
-   * @param EntityManagerInterface         $entity_manager
-   * @param ProgramRepository              $program_repository
-   * @param ProgramRemixRepository         $program_remix_repository
-   * @param ProgramRemixBackwardRepository $program_remix_backward_repository
    */
   public function __construct(EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository,
@@ -60,11 +52,6 @@ class RemixSubgraphManipulator
   }
 
   /**
-   * @param Program $program
-   * @param array   $ids_of_new_parents
-   * @param array   $preserved_creation_date_mapping
-   * @param array   $preserved_seen_date_mapping
-   *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
    */
@@ -79,19 +66,22 @@ class RemixSubgraphManipulator
     $backward_parent_ids = $result['backwardParentIds'];
 
     $parents_ancestor_relations = $this->program_remix_repository->getAncestorRelations($forward_parent_ids);
-    $parent_ancestor_ids = array_unique(array_map(function ($r) {
-      /**
+    $parent_ancestor_ids = array_unique(array_map(function ($r)
+    {
+      /*
        * @var $r ProgramRemixRelation
        */
       return $r->getAncestorId();
     }, $parents_ancestor_relations));
     $parent_ancestors_descendant_relations = $this->program_remix_repository
-      ->getDescendantRelations($parent_ancestor_ids);
+      ->getDescendantRelations($parent_ancestor_ids)
+    ;
     $backward_parent_relations = $this->program_remix_backward_repository->getParentRelations([$program->getId()]);
 
     $all_existing_relations = array_merge($parent_ancestors_descendant_relations, $backward_parent_relations);
-    $unique_keys_of_all_existing_relations = array_map(function ($r) {
-      /**
+    $unique_keys_of_all_existing_relations = array_map(function ($r)
+    {
+      /*
        * @var $r ProgramRemixRelation
        */
       return $r->getUniqueKey();
@@ -103,13 +93,13 @@ class RemixSubgraphManipulator
     foreach ($backward_parent_ids as $backward_parent_id)
     {
       /**
-       * @var $parent_program Program
+       * @var Program
        */
       $parent_program = $this->program_repository->find($backward_parent_id);
       $program_remix_backward_relation = new ProgramRemixBackwardRelation($parent_program, $program);
       $unique_key = $program_remix_backward_relation->getUniqueKey();
 
-      if (!in_array($unique_key, $unique_keys_of_all_existing_relations))
+      if (!in_array($unique_key, $unique_keys_of_all_existing_relations, true))
       {
         $all_program_remix_relations[$unique_key] = $program_remix_backward_relation;
       }
@@ -152,7 +142,7 @@ class RemixSubgraphManipulator
           }
         }
 
-        if (!in_array($unique_key, $unique_keys_of_all_existing_relations))
+        if (!in_array($unique_key, $unique_keys_of_all_existing_relations, true))
         {
           $all_program_remix_relations[$unique_key] = $program_remix_relation;
         }
@@ -168,9 +158,6 @@ class RemixSubgraphManipulator
   }
 
   /**
-   * @param array $existing_descendant_relations_of_program
-   * @param array $ids_of_new_parents
-   *
    * @return array
    */
   private function splitNewParentIdsByRelationDirection(array $existing_descendant_relations_of_program,
@@ -183,7 +170,7 @@ class RemixSubgraphManipulator
     $backward_parent_ids = [];
     foreach ($existing_descendant_relations_of_program as $descendant_relation)
     {
-      if (in_array($descendant_relation->getDescendantId(), $ids_of_new_parents))
+      if (in_array($descendant_relation->getDescendantId(), $ids_of_new_parents, true))
       {
         $backward_parent_ids[] = $descendant_relation->getDescendantId();
       }

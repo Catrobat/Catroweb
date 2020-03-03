@@ -5,13 +5,12 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class ForeverStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ForeverStatement.
  */
 class ForeverStatement extends Statement
 {
-  const BEGIN_STRING = "forever";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'forever';
+  const END_STRING = '<br/>';
 
   /**
    * ForeverStatement constructor.
@@ -22,7 +21,7 @@ class ForeverStatement extends Statement
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
-    $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END;
+    $stmt = SyntaxHighlightingConstants::LOOP.self::BEGIN_STRING.SyntaxHighlightingConstants::END;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $stmt,
       self::END_STRING);
@@ -41,7 +40,7 @@ class ForeverStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Forever";
+    return 'Forever';
   }
 
   /**
@@ -49,6 +48,6 @@ class ForeverStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
 }

@@ -2,33 +2,31 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\StatisticsService;
 use App\Catrobat\Services\TestEnv\FakeStatisticsService;
+use App\Entity\FeaturedProgram;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use App\Entity\User;
 use App\Entity\UserManager;
+use App\Repository\FeaturedRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Catrobat\Services\FeaturedImageRepository;
-use App\Entity\FeaturedProgram;
-use App\Repository\FeaturedRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
- * Class DefaultController
- * @package App\Catrobat\Controller\Web
+ * Class DefaultController.
  */
 class DefaultController extends AbstractController
 {
-
   /**
    * @var StatisticsService | FakeStatisticsService
    */
@@ -36,11 +34,8 @@ class DefaultController extends AbstractController
 
   /**
    * DefaultController constructor.
-   *
-   * @param StatisticsService $statistics_service
    */
   public function __construct(StatisticsService $statistics_service)
-
   {
     $this->statistics = $statistics_service;
   }
@@ -48,25 +43,21 @@ class DefaultController extends AbstractController
   /**
    * @Route("/", name="index", methods={"GET"})
    *
-   * @param Request $request
-   * @param FeaturedImageRepository $image_repository
-   * @param FeaturedRepository $repository
+   * @throws \Twig\Error\Error
    *
    * @return Response
-   * @throws \Twig\Error\Error
    */
   public function indexAction(Request $request, FeaturedImageRepository $image_repository, FeaturedRepository $repository)
   {
     /**
-     * @var $image_repository FeaturedImageRepository
-     * @var $repository       FeaturedRepository
-     * @var $user             User
-     * @var $item             FeaturedProgram
+     * @var FeaturedImageRepository
+     * @var FeaturedRepository      $repository
+     * @var User                    $user
+     * @var FeaturedProgram         $item
      */
-
     $flavor = $request->get('flavor');
 
-    if ($flavor === 'phirocode')
+    if ('phirocode' === $flavor)
     {
       $featured_items = $repository->getFeaturedItems('pocketcode', 10, 0);
     }
@@ -79,7 +70,7 @@ class DefaultController extends AbstractController
     foreach ($featured_items as $item)
     {
       $info = [];
-      if ($item->getProgram() !== null)
+      if (null !== $item->getProgram())
       {
         if ($flavor)
         {
@@ -105,22 +96,24 @@ class DefaultController extends AbstractController
     ]);
   }
 
-
   /**
    * @Route("/termsOfUse", name="termsOfUse", methods={"GET"})
    *
-   * @return Response
    * @throws \Twig\Error\Error
+   *
+   * @return Response
    */
   public function termsOfUseAction()
   {
     return $this->render('PrivacyAndTerms/termsOfUse.html.twig');
   }
+
   /**
    * @Route("/privacypolicy", name="privacypolicy", methods={"GET"})
    *
-   * @return Response
    * @throws \Twig\Error\Error
+   *
+   * @return Response
    */
   public function privacypolicyAction()
   {
@@ -130,39 +123,38 @@ class DefaultController extends AbstractController
   /**
    * @Route("/licenseToPlay", name="licenseToPlay", methods={"GET"})
    *
-   * @return Response
    * @throws \Twig\Error\Error
+   *
+   * @return Response
    */
   public function licenseToPlayAction()
   {
     return $this->render('PrivacyAndTerms/licenseToPlay.html.twig');
   }
 
-
   /**
    * @Route("/pocket-library/{package_name}", name="pocket_library", methods={"GET"})
    * @Route("/media-library/{package_name}", name="media_package", methods={"GET"})
    *
-   * @param Request $request
-   * @param         $package_name
-   * @param string  $flavor
-   * @param UserManager $user_manager
-   * @param EventDispatcherInterface $event_dispatcher
+   * @param        $package_name
+   * @param string $flavor
+   *
+   * @throws \Twig\Error\Error
    *
    * @return Response
-   * @throws \Twig\Error\Error
    */
   public function MediaPackageAction(Request $request, $package_name, $flavor, UserManager $user_manager,
                                      EventDispatcherInterface $event_dispatcher)
   {
-    /**
+    /*
      * @var $package  MediaPackage
      * @var $file     MediaPackageFile
      * @var $category MediaPackageCategory
      * @var $user     User
      */
 
-    if (!isset($flavor)) {
+    if (!isset($flavor))
+    {
       $flavor = 'pocketcode';
     }
 
@@ -174,7 +166,7 @@ class DefaultController extends AbstractController
       if ($user->getUploadToken() == $token_check)
       {
         $user = $user_manager->findUserByUsername($username);
-        $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
+        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
         $this->get('security.token_storage')->setToken($token);
         // now dispatch the login event
         $event = new InteractiveLoginEvent($request, $token);
@@ -183,7 +175,8 @@ class DefaultController extends AbstractController
     }
     $em = $this->getDoctrine()->getManager();
     $package = $em->getRepository('\App\Entity\MediaPackage')
-      ->findOneBy(['name_url' => $package_name]);
+      ->findOneBy(['name_url' => $package_name])
+    ;
 
     if (!$package)
     {
@@ -196,13 +189,13 @@ class DefaultController extends AbstractController
       $files = [];
       $files = $this->generateDownloadUrl($flavor, $category, $files);
       $categories[] = [
-        'name'     => $category->getName(),
-        'files'    => $files,
+        'name' => $category->getName(),
+        'files' => $files,
         'priority' => $category->getPriority(),
       ];
     }
 
-    usort($categories, "comparePriorities");
+    usort($categories, 'comparePriorities');
 
     return $this->render('MediaLibrary/mediapackage.html.twig', [
       'categories' => $categories,
@@ -215,8 +208,7 @@ class DefaultController extends AbstractController
    *
    * @return int
    */
-
-  public function  comparePriorities($current, $next)
+  public function comparePriorities($current, $next)
   {
     if ($current['priority'] == $next['priority'])
     {
@@ -227,13 +219,12 @@ class DefaultController extends AbstractController
   }
 
   /**
-   *  @Route("/click-statistic", name="click_stats", methods={"POST"})
+   * @Route("/click-statistic", name="click_stats", methods={"POST"})
    *
-   * @param Request $request
-   *
-   * @return Response
    * @throws ORMException
    * @throws OptimisticLockException
+   *
+   * @return Response
    */
   public function makeClickStatisticAction(Request $request)
   {
@@ -242,54 +233,46 @@ class DefaultController extends AbstractController
     $locale = strtolower($request->getLocale());
 
     if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph',
-    'rec_remix_notification', 'rec_specific_programs']))
+      'rec_remix_notification', 'rec_specific_programs', ], true))
     {
       $rec_from_id = $_POST['recFromID'];
       $rec_program_id = $_POST['recID'];
       $is_user_specific_recommendation = isset($_POST['recIsUserSpecific'])
-      ? (bool)$_POST['recIsUserSpecific'] : false;
-      $is_recommended_program_a_scratch_program = (($type == 'rec_remix_graph')
-      && isset($_POST['isScratchProgram'])) ? (bool)$_POST['isScratchProgram'] : false;
+      ? (bool) $_POST['recIsUserSpecific'] : false;
+      $is_recommended_program_a_scratch_program = (('rec_remix_graph' == $type)
+      && isset($_POST['isScratchProgram'])) ? (bool) $_POST['isScratchProgram'] : false;
 
       $this->statistics->createClickStatistics($request, $type, $rec_from_id, $rec_program_id, null, null,
         $referrer, $locale, $is_recommended_program_a_scratch_program, $is_user_specific_recommendation);
 
       return new Response('ok');
     }
-    else
+
+    if ('tags' == $type)
     {
-      if ($type == 'tags')
-      {
-        $tag_id = $_POST['recID'];
-        $this->statistics->createClickStatistics($request, $type, null, null, $tag_id, null, $referrer, $locale);
+      $tag_id = $_POST['recID'];
+      $this->statistics->createClickStatistics($request, $type, null, null, $tag_id, null, $referrer, $locale);
 
-        return new Response('ok');
-      }
-      else
-      {
-        if ($type == 'extensions')
-        {
-          $extension_name = $_POST['recID'];
-          $this->statistics->createClickStatistics($request, $type, null, null, null, $extension_name, $referrer, $locale);
-
-          return new Response('ok');
-        }
-        else
-        {
-          return new Response('error');
-        }
-      }
+      return new Response('ok');
     }
-  }
 
+    if ('extensions' == $type)
+    {
+      $extension_name = $_POST['recID'];
+      $this->statistics->createClickStatistics($request, $type, null, null, null, $extension_name, $referrer, $locale);
+
+      return new Response('ok');
+    }
+
+    return new Response('error');
+  }
 
   /**
    * @Route("/homepage-click-statistic", name="homepage_click_stats", methods={"POST"})
    *
-   * @param Request $request
+   * @throws \Exception
    *
    * @return Response
-   * @throws \Exception
    */
   public function makeNonRecommendedProgramClickStatisticAction(Request $request)
   {
@@ -298,19 +281,16 @@ class DefaultController extends AbstractController
 
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['featured', 'newest', 'mostDownloaded','scratchRemixes', 'mostViewed', 'random']))
+    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'scratchRemixes', 'mostViewed', 'random'], true))
     {
       $program_id = $_POST['programID'];
       $this->statistics->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);
 
       return new Response('ok');
     }
-    else
-    {
-      return new Response('error');
-    }
-  }
 
+    return new Response('error');
+  }
 
   /**
    * @param $flavor
@@ -321,29 +301,28 @@ class DefaultController extends AbstractController
    */
   private function generateDownloadUrl($flavor, $category, $files)
   {
-    /**
-     * @var $file MediaPackageFile
+    /*
+     * @var MediaPackageFile
      */
     foreach ($category->getFiles() as $file)
     {
-      $flavors_arr = preg_replace("/ /", "", $file->getFlavor());
-      $flavors_arr = explode(",", $flavors_arr);
-      if (!$file->getActive() || ($file->getFlavor() != null && !in_array($flavor, $flavors_arr)))
+      $flavors_arr = preg_replace('/ /', '', $file->getFlavor());
+      $flavors_arr = explode(',', $flavors_arr);
+      if (!$file->getActive() || (null != $file->getFlavor() && !in_array($flavor, $flavors_arr, true)))
       {
         continue;
       }
       $files[] = [
-        'id'          => $file->getId(),
-        'data'        => $file,
+        'id' => $file->getId(),
+        'data' => $file,
         'downloadUrl' => $this->generateUrl('download_media', [
-            'id'    => $file->getId(),
-            'fname' => $file->getName(),
-          ]
+          'id' => $file->getId(),
+          'fname' => $file->getName(),
+        ]
         ),
-    ];
+      ];
     }
 
     return $files;
   }
-
 }

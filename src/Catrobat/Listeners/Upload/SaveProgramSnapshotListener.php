@@ -2,18 +2,16 @@
 
 namespace App\Catrobat\Listeners\Upload;
 
-use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Events\ProgramAfterInsertEvent;
-use App\Entity\Program;
+use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\Time;
+use App\Entity\Program;
 
 /**
- * Class SaveProgramSnapshotListener
- * @package App\Catrobat\Listeners\Upload
+ * Class SaveProgramSnapshotListener.
  */
 class SaveProgramSnapshotListener
 {
-
   /**
    * @var ProgramFileRepository
    */
@@ -30,9 +28,7 @@ class SaveProgramSnapshotListener
   /**
    * SaveProgramSnapshotListener constructor.
    *
-   * @param Time                  $time
-   * @param ProgramFileRepository $file_repository
-   * @param                       $snapshot_dir
+   * @param $snapshot_dir
    */
   public function __construct(Time $time, ProgramFileRepository $file_repository, $snapshot_dir)
   {
@@ -41,17 +37,11 @@ class SaveProgramSnapshotListener
     $this->time = $time;
   }
 
-  /**
-   * @param ProgramAfterInsertEvent $event
-   */
   public function handleEvent(ProgramAfterInsertEvent $event)
   {
     $this->saveProgramSnapshot($event->getProgramEntity());
   }
 
-  /**
-   * @param Program $program
-   */
   public function saveProgramSnapshot(Program $program)
   {
     if ($program->getUser()->isLimited())
@@ -60,9 +50,10 @@ class SaveProgramSnapshotListener
       try
       {
         $file = $this->file_repository->getProgramFile($program->getId());
-        $date = date("Y-m-d_H-i-s", $this->time->getTime());
-        $file->move($this->snapshot_dir, $program->getId() . "_" . $date . ".catrobat");
-      } catch (\Exception $exception)
+        $date = date('Y-m-d_H-i-s', $this->time->getTime());
+        $file->move($this->snapshot_dir, $program->getId().'_'.$date.'.catrobat');
+      }
+      catch (\Exception $exception)
       {
         return;
       }

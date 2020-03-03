@@ -4,33 +4,28 @@ namespace App\Catrobat\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 /**
- * Class ApiTokenAuthenticator
- * @package App\Catrobat\Security
+ * Class ApiTokenAuthenticator.
  */
 class ApiTokenAuthenticator extends AbstractGuardAuthenticator
 {
-
   /**
    * @required request parameter TOKEN
    *
    *  Must be sent in the request HEADER containing the user token
    *  Must not be empty
-   *
    */
   const TOKEN = 'token';
-
 
   /**
    * @var TranslatorInterface
@@ -42,12 +37,8 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    */
   private $em;
 
-
   /**
    * ApiTokenAuthenticator constructor.
-   *
-   * @param EntityManagerInterface $em
-   * @param TranslatorInterface    $translator
    */
   public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
   {
@@ -60,8 +51,6 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    * used for the request. Returning false will cause this authenticator
    * to be skipped.
    *
-   * @param Request $request
-   *
    * @return bool
    */
   public function supports(Request $request)
@@ -73,8 +62,6 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    * Called on every request. Return whatever credentials you want to
    * be passed to getUser() as $credentials.
    *
-   * @param Request $request
-   *
    * @return array|mixed
    */
   public function getCredentials(Request $request)
@@ -85,8 +72,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param mixed                 $credentials
-   * @param UserProviderInterface $userProvider
+   * @param mixed $credentials
    *
    * @return User|null
    */
@@ -94,23 +80,23 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
   {
     $token = $credentials[self::TOKEN];
 
-    if (null === $token || "" === $token)
+    if (null === $token || '' === $token)
     {
       return null;
     }
 
     // if a User object, checkCredentials() is called
     return $this->em->getRepository(User::class)
-      ->findOneBy(['upload_token' => $token]);
+      ->findOneBy(['upload_token' => $token])
+    ;
   }
 
   /**
    *  Called to make sure the credentials are valid
    *    - E.g mail, username, or password
-   *    - no additional checks would also be valid
+   *    - no additional checks would also be valid.
    *
-   * @param mixed         $credentials
-   * @param UserInterface $user
+   * @param mixed $credentials
    *
    * @return bool
    */
@@ -121,9 +107,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param Request        $request
-   * @param TokenInterface $token
-   * @param string         $providerKey
+   * @param string $providerKey
    *
    * @return Response|null
    */
@@ -134,9 +118,6 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param Request                 $request
-   * @param AuthenticationException $exception
-   *
    * @return JsonResponse|Response|null
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
@@ -149,10 +130,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * Called when authentication is needed, but it's not sent
-   *
-   * @param Request                      $request
-   * @param AuthenticationException|null $authException
+   * Called when authentication is needed, but it's not sent.
    *
    * @return JsonResponse|Response
    */
@@ -174,13 +152,10 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param Request $request
-   *
    * @return bool
    */
   private function requestHasValidAuthTokenInHeader(Request $request)
   {
-    return $request->headers->has(self::TOKEN) && "" !== $request->headers->get(self::TOKEN);
+    return $request->headers->has(self::TOKEN) && '' !== $request->headers->get(self::TOKEN);
   }
-
 }

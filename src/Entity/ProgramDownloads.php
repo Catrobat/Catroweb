@@ -20,6 +20,7 @@ class ProgramDownloads
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program_downloads")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
+   *
    * @var Program
    */
   protected $program;
@@ -36,7 +37,7 @@ class ProgramDownloads
   protected $recommended_by_program;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+   * @ORM\Column(type="boolean", options={"default": false}, nullable=true)
    */
   protected $user_specific_recommendation = false;
 
@@ -52,17 +53,17 @@ class ProgramDownloads
   protected $downloaded_at;
 
   /**
-   * @ORM\Column(type="text", options={"default":""})
+   * @ORM\Column(type="text", options={"default": ""})
    */
   protected $ip;
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=true)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
   protected $country_code;
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=true)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
   protected $country_name;
 
@@ -72,7 +73,7 @@ class ProgramDownloads
   protected $locale;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
   protected $user_agent;
 
@@ -83,7 +84,7 @@ class ProgramDownloads
   protected $user;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
   protected $referrer;
 

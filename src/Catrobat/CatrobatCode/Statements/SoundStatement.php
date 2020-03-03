@@ -3,8 +3,7 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class SoundStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class SoundStatement.
  */
 class SoundStatement extends Statement
 {
@@ -34,7 +33,7 @@ class SoundStatement extends Statement
     $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
 
   /**
@@ -45,28 +44,33 @@ class SoundStatement extends Statement
     $code = $this->value;
     $this->findNames();
 
-    if ($this->name != null)
+    if (null != $this->name)
     {
       $code .= $this->name->execute();
     }
 
-    if ($this->fileName != null)
+    if (null != $this->fileName)
     {
-      $code .= ' (filename: ' . $this->fileName->execute() . ')';
+      $code .= ' (filename: '.$this->fileName->execute().')';
     }
 
     return $code;
   }
 
   /**
-   *
+   * @return mixed
    */
+  public function getName()
+  {
+    return $this->name;
+  }
+
   private function findNames()
   {
     $tmpStatements = parent::getStatements();
     foreach ($tmpStatements as $statement)
     {
-      if ($statement != null)
+      if (null != $statement)
       {
         if ($statement instanceof ValueStatement)
         {
@@ -81,13 +85,5 @@ class SoundStatement extends Statement
         }
       }
     }
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getName()
-  {
-    return $this->name;
   }
 }

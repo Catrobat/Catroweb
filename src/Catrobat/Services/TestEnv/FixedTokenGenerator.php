@@ -2,13 +2,10 @@
 
 namespace App\Catrobat\Services\TestEnv;
 
-
 use App\Catrobat\Services\TokenGenerator;
 
-
 /**
- * Class FixedTokenGenerator
- * @package App\Catrobat\Features\Api\Context
+ * Class FixedTokenGenerator.
  */
 class FixedTokenGenerator extends TokenGenerator
 {
@@ -16,7 +13,6 @@ class FixedTokenGenerator extends TokenGenerator
    * @var
    */
   private $token;
-
 
   /**
    * FixedTokenGenerator constructor.
@@ -28,7 +24,6 @@ class FixedTokenGenerator extends TokenGenerator
     parent::__construct();
     $this->token = $token;
   }
-
 
   /**
    * @return string

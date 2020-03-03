@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class MissingChecksumException
- * @package App\Catrobat\Exceptions\Upload
+ * Class MissingChecksumException.
  */
 class MissingChecksumException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class MissingChecksumException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("errors.checksum.missing", StatusCode::MISSING_CHECKSUM);
+    parent::__construct('errors.checksum.missing', StatusCode::MISSING_CHECKSUM);
   }
 }

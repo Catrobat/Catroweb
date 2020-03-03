@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ChangeXByNStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ChangeXByNStatement.
  */
 class ChangeXByNStatement extends BaseChangeByNStatement
 {
-  const BEGIN_STRING = "X";
-  const END_STRING = ")<br/>";
+  const BEGIN_STRING = 'X';
+  const END_STRING = ')<br/>';
 
   /**
    * ChangeXByNStatement constructor.
@@ -31,9 +30,9 @@ class ChangeXByNStatement extends BaseChangeByNStatement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Change X by " . $formula_string_without_markup;
+    return 'Change X by '.$formula_string_without_markup;
   }
 
   /**
@@ -41,6 +40,6 @@ class ChangeXByNStatement extends BaseChangeByNStatement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

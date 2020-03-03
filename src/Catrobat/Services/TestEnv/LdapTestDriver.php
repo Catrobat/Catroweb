@@ -8,14 +8,11 @@ use FR3D\LdapBundle\Model\LdapUserInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 /**
- * Class LdapTestDriver
- * @package App\Catrobat\Services\TestEnv
+ * Class LdapTestDriver.
  */
 class LdapTestDriver implements LdapDriverInterface
 {
-
   /**
    * @var
    */
@@ -34,12 +31,10 @@ class LdapTestDriver implements LdapDriverInterface
   /**
    * @var string
    */
-  private static $APC_OBJECTS = "LdapTestDriverFixture";
+  private static $APC_OBJECTS = 'LdapTestDriverFixture';
 
   /**
    * LdapTestDriver constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -50,10 +45,10 @@ class LdapTestDriver implements LdapDriverInterface
   /**
    * Bind to LDAP directory.
    *
-   * @param UserInterface $user
-   *            The user for authenticating the bind.
+   * @param userInterface $user
+   *                                The user for authenticating the bind
    * @param string        $password
-   *            The password for authenticating the bind.
+   *                                The password for authenticating the bind
    *
    * @return bool true on success or false on failure
    */
@@ -64,7 +59,7 @@ class LdapTestDriver implements LdapDriverInterface
     {
       foreach ($this->objects as $object)
       {
-        if ($object["ObjectClass"] == "person" && $user->getDn() == $object["dn"] && $object["password"] == $password)
+        if ('person' == $object['ObjectClass'] && $user->getDn() == $object['dn'] && $object['password'] == $password)
         {
           return true;
         }
@@ -73,7 +68,7 @@ class LdapTestDriver implements LdapDriverInterface
 
     foreach ($this->objects as $object)
     {
-      if ($object["ObjectClass"] == "person" && in_array($user->getUsername(), $object["cn"]) && $object["password"] == $password)
+      if ('person' == $object['ObjectClass'] && in_array($user->getUsername(), $object['cn'], true) && $object['password'] == $password)
       {
         return true;
       }
@@ -86,27 +81,27 @@ class LdapTestDriver implements LdapDriverInterface
    * Search LDAP tree.
    *
    * @param string $baseDn
-   *            The base DN for the directory.
+   *                           The base DN for the directory
    * @param string $filter
-   *            The search filter.
+   *                           The search filter
    * @param array  $attributes
-   *            The array of the required attributes,
-   *            'dn' is always returned. If array is
-   *            empty then will return all attributes
-   *            and their associated values.
+   *                           The array of the required attributes,
+   *                           'dn' is always returned. If array is
+   *                           empty then will return all attributes
+   *                           and their associated values.
+   *
+   * @throws LdapDriverException if some error occurs
    *
    * @return array|bool Returns a complete result information in a
-   *         multi-dimensional array on success and FALSE on error.
-   *         see {@link http://www.php.net/function.ldap-get-entries.php}
-   *         for array format examples.
-   *
-   * @throws LdapDriverException if some error occurs.
+   *                    multi-dimensional array on success and FALSE on error.
+   *                    see {@link http://www.php.net/function.ldap-get-entries.php}
+   *                    for array format examples.
    */
   public function search($baseDn, $filter, array $attributes = [])
   {
     if ($this->throw_expection_on_search)
     {
-      throw new LdapDriverException("Test Exception on Search!");
+      throw new LdapDriverException('Test Exception on Search!');
     }
     // load users
     $this->loadFixtures();
@@ -118,33 +113,33 @@ class LdapTestDriver implements LdapDriverInterface
       $isOk = true;
       foreach ($searchRequirements as $reqKey => $reqVal)
       {
-        var_export("\nKey: " . $reqKey . "\nVal: " . $reqVal);
-        if (is_array($object[$reqKey]) && in_array($reqVal, $object[$reqKey]))
+        var_export("\nKey: ".$reqKey."\nVal: ".$reqVal);
+        if (is_array($object[$reqKey]) && in_array($reqVal, $object[$reqKey], true))
         {
           continue;
         }
-        else
+
+        if ($object[$reqKey] != $reqVal)
         {
-          if ($object[$reqKey] != $reqVal)
-          {
-            $isOk = false;
-            break;
-          }
+          $isOk = false;
+          break;
         }
       }
       if ($isOk)
       {
         $object_entity = [];
         foreach ($attributes as $at)
+        {
           $object_entity[$at] = $object[$at];
+        }
 
-        $object_entity["dn"] = $object["dn"];
+        $object_entity['dn'] = $object['dn'];
 
         array_push($result, $object_entity);
       }
     }
 
-    $result["count"] = count($result);
+    $result['count'] = count($result);
 
     return $result;
   }
@@ -173,27 +168,27 @@ class LdapTestDriver implements LdapDriverInterface
       $key = null;
       foreach ($this->objects as $existing_group)
       {
-        if ($existing_group["ObjectClass"] != "groupOfUniqueNames")
+        if ('groupOfUniqueNames' != $existing_group['ObjectClass'])
         {
           continue;
         }
 
-        if (in_array($group, $existing_group["cn"]))
+        if (in_array($group, $existing_group['cn'], true))
         {
-          array_push($existing_group["uniqueMember"], "cn=" . strtolower($username) . "," . $this->baseDN);
+          array_push($existing_group['uniqueMember'], 'cn='.strtolower($username).','.$this->baseDN);
           break;
         }
       }
-      if ($key == null)
+      if (null == $key)
       {
         $group_entity = [
-          "ObjectClass"  => "groupOfUniqueNames",
-          "dn"           => "cn=" . strtolower($group) . ", " . $this->baseDN,
-          "cn"           => [
+          'ObjectClass' => 'groupOfUniqueNames',
+          'dn' => 'cn='.strtolower($group).', '.$this->baseDN,
+          'cn' => [
             $group,
           ],
-          "uniqueMember" => [
-            "cn=" . strtolower($username) . "," . $this->baseDN,
+          'uniqueMember' => [
+            'cn='.strtolower($username).','.$this->baseDN,
           ],
         ];
         array_push($this->objects, $group_entity);
@@ -201,20 +196,28 @@ class LdapTestDriver implements LdapDriverInterface
     }
 
     $user_entity = [
-      "ObjectClass" => "person",
-      "dn"          => "cn=" . strtolower($username) . "," . $this->baseDN,
-      "cn"          => [
+      'ObjectClass' => 'person',
+      'dn' => 'cn='.strtolower($username).','.$this->baseDN,
+      'cn' => [
         $username,
       ],
-      "password"    => $password,
-      "mail"        => $mail != null ? $mail : [
-        $username . "@generated.at",
+      'password' => $password,
+      'mail' => null != $mail ? $mail : [
+        $username.'@generated.at',
       ],
     ];
 
     array_push($this->objects, $user_entity);
 
     return ApcReplace::Instance()->apc_store($this::$APC_OBJECTS, $this->objects);
+  }
+
+  /**
+   * @param $value
+   */
+  public function setThrowExceptionOnSearch($value)
+  {
+    $this->throw_expection_on_search = $value;
   }
 
   /**
@@ -230,7 +233,7 @@ class LdapTestDriver implements LdapDriverInterface
     {
       foreach ($matches[1] as $match)
       {
-        $array = explode("=", $match, 2);
+        $array = explode('=', $match, 2);
         $result[$array[0]] = $array[1];
       }
     }
@@ -238,26 +241,15 @@ class LdapTestDriver implements LdapDriverInterface
     return $result;
   }
 
-  /**
-   *
-   */
   private function loadFixtures()
   {
     if (!is_array($this->objects))
     {
       $this->objects = [];
-      if (ApcReplace::Instance()->apc_fetch($this::$APC_OBJECTS) != false)
+      if (false != ApcReplace::Instance()->apc_fetch($this::$APC_OBJECTS))
       {
         $this->objects = ApcReplace::Instance()->apc_fetch($this::$APC_OBJECTS);
       }
     }
-  }
-
-  /**
-   * @param $value
-   */
-  public function setThrowExceptionOnSearch($value)
-  {
-    $this->throw_expection_on_search = $value;
   }
 }

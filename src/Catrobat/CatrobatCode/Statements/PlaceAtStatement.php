@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class PlaceAtStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class PlaceAtStatement.
  */
 class PlaceAtStatement extends Statement
 {
-  const BEGIN_STRING = "place at ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'place at ';
+  const END_STRING = '<br/>';
 
   /**
    * PlaceAtStatement constructor.
@@ -64,10 +63,10 @@ class PlaceAtStatement extends Statement
       }
     }
 
-    $formula_x_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_x_dest);
-    $formula_y_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_y_dest);
+    $formula_x_dest_no_markup = preg_replace('#<[^>]*>#', '', $formula_x_dest);
+    $formula_y_dest_no_markup = preg_replace('#<[^>]*>#', '', $formula_y_dest);
 
-    return "Place at X: " . $formula_x_dest_no_markup . " Y: " . $formula_y_dest_no_markup;
+    return 'Place at X: '.$formula_x_dest_no_markup.' Y: '.$formula_y_dest_no_markup;
   }
 
   /**
@@ -75,6 +74,6 @@ class PlaceAtStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

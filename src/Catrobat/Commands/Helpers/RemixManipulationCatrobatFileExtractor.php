@@ -6,10 +6,8 @@ use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\RemixUrlIndicator;
 use Symfony\Component\HttpFoundation\File\File;
 
-
 /**
- * Class RemixManipulationCatrobatFileExtractor
- * @package App\Catrobat\Commands
+ * Class RemixManipulationCatrobatFileExtractor.
  */
 class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 {
@@ -37,8 +35,6 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
   }
 
   /**
-   * @param File $file
-   *
    * @return \App\Catrobat\Services\ExtractedCatrobatFile
    */
   public function extract(File $file)
@@ -48,20 +44,20 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     $all_parent_program_ids = [];
     foreach ($this->remix_graph_mapping as $parent_program_data => $child_program_ids)
     {
-      if (in_array($this->current_program_id, $child_program_ids))
+      if (in_array($this->current_program_id, $child_program_ids, true))
       {
         $all_parent_program_ids[] = explode(',', $parent_program_data);
       }
     }
 
     $previous_parent_string = '';
-    for ($parent_program_index = 0; $parent_program_index < count($all_parent_program_ids); $parent_program_index++)
+    for ($parent_program_index = 0; $parent_program_index < count($all_parent_program_ids); ++$parent_program_index)
     {
       $parent_program_data = $all_parent_program_ids[$parent_program_index];
       $parent_id = $parent_program_data[0];
       $current_parent_url = !$parent_program_data[1]
-        ? '//app/project/' . $parent_id
-        : 'https://scratch.mit.edu/projects/' . $parent_id . '/';
+        ? '//app/project/'.$parent_id
+        : 'https://scratch.mit.edu/projects/'.$parent_id.'/';
       $previous_parent_string = $this->generateRemixUrlsStringForMergedProgram($previous_parent_string,
         $current_parent_url);
     }
@@ -77,7 +73,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     $program_xml_properties->header->url = $remix_url_string;
     $extracted_catrobat_file->saveProgramXmlProperties();
 
-    $this->current_program_id++;
+    ++$this->current_program_id;
 
     return $extracted_catrobat_file;
   }
@@ -90,14 +86,14 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
    */
   public function generateRemixUrlsStringForMergedProgram($previous_parent_string, $current_parent_url)
   {
-    if ($previous_parent_string == '')
+    if ('' == $previous_parent_string)
     {
       return $current_parent_url;
     }
 
     return 'PREVIOUS: '
-      . RemixUrlIndicator::PREFIX_INDICATOR . $previous_parent_string . RemixUrlIndicator::SUFFIX_INDICATOR . ', '
-      . 'NEXT: '
-      . RemixUrlIndicator::PREFIX_INDICATOR . $current_parent_url . RemixUrlIndicator::SUFFIX_INDICATOR;
+      .RemixUrlIndicator::PREFIX_INDICATOR.$previous_parent_string.RemixUrlIndicator::SUFFIX_INDICATOR.', '
+      .'NEXT: '
+      .RemixUrlIndicator::PREFIX_INDICATOR.$current_parent_url.RemixUrlIndicator::SUFFIX_INDICATOR;
   }
 }

@@ -9,8 +9,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class FakeStatisticsService
- * @package App\Catrobat\Features\Helpers
+ * Class FakeStatisticsService.
  */
 class FakeStatisticsService extends StatisticsService
 {
@@ -25,12 +24,6 @@ class FakeStatisticsService extends StatisticsService
 
   /**
    * FakeStatisticsService constructor.
-   *
-   * @param StatisticsService $geocoder_service
-   * @param ProgramManager $program_manager
-   * @param EntityManagerInterface $entity_manager
-   * @param LoggerInterface $logger
-   * @param TokenStorageInterface $security_token_storage
    */
   public function __construct(StatisticsService $geocoder_service, ProgramManager $program_manager,
                               EntityManagerInterface $entity_manager, LoggerInterface $logger,
@@ -50,8 +43,9 @@ class FakeStatisticsService extends StatisticsService
    * @param $locale
    * @param bool $not_needed
    *
-   * @return bool
    * @throws \Exception
+   *
+   * @return bool
    */
   public function createProgramDownloadStatistics($event, $program_id, $referrer, $rec_tag_by_program_id,
                                                   $rec_by_page_id, $rec_by_program_id, $locale, $not_needed = false)
@@ -78,9 +72,10 @@ class FakeStatisticsService extends StatisticsService
    * @param bool $not_needed3
    * @param bool $not_needed4
    *
-   * @return bool
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return bool
    */
   public function createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name,
                                         $referrer, $not_needed = false, $not_needed2 = false, $not_needed3 = false,
@@ -97,8 +92,9 @@ class FakeStatisticsService extends StatisticsService
    * @param $referrer
    * @param $locale
    *
-   * @return bool
    * @throws \Exception
+   *
+   * @return bool
    */
   public function createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale)
   {

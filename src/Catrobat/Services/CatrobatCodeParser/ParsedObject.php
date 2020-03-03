@@ -6,8 +6,7 @@ use App\Catrobat\Services\CatrobatCodeParser\Scripts\ScriptFactory;
 use SimpleXMLElement;
 
 /**
- * Class ParsedObject
- * @package App\Catrobat\Services\CatrobatCodeParser
+ * Class ParsedObject.
  */
 class ParsedObject
 {
@@ -34,8 +33,6 @@ class ParsedObject
 
   /**
    * ParsedObject constructor.
-   *
-   * @param SimpleXMLElement $object_xml_properties
    */
   public function __construct(SimpleXMLElement $object_xml_properties)
   {
@@ -48,65 +45,6 @@ class ParsedObject
     $this->parseLooks();
     $this->parseSounds();
     $this->parseScripts();
-  }
-
-  /**
-   * @return SimpleXMLElement
-   */
-  private function resolveName()
-  {
-    if ($this->object_xml_properties[Constants::NAME_ATTRIBUTE] != null)
-    {
-      return $this->object_xml_properties[Constants::NAME_ATTRIBUTE];
-    }
-    else
-    {
-      return $this->object_xml_properties->name;
-    }
-  }
-
-  /**
-   *
-   */
-  private function parseLooks()
-  {
-    foreach ($this->object_xml_properties->lookList->children() as $look_xml_properties)
-      $this->looks[] = new ParsedObjectAsset($this->dereference($look_xml_properties));
-  }
-
-  /**
-   *
-   */
-  private function parseSounds()
-  {
-    foreach ($this->object_xml_properties->soundList->children() as $sound_xml_properties)
-      $this->sounds[] = new ParsedObjectAsset($this->dereference($sound_xml_properties));
-  }
-
-  /**
-   *
-   */
-  private function parseScripts()
-  {
-    foreach ($this->object_xml_properties->scriptList->children() as $script_xml_properties)
-      $this->scripts[] = ScriptFactory::generate($this->dereference($script_xml_properties));
-  }
-
-  /**
-   * @param $xml_properties SimpleXMLElement
-   *
-   * @return mixed
-   */
-  private function dereference($xml_properties)
-  {
-    if ($xml_properties[Constants::REFERENCE_ATTRIBUTE] != null)
-    {
-      return $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE])[0];
-    }
-    else
-    {
-      return $xml_properties;
-    }
   }
 
   /**
@@ -147,5 +85,57 @@ class ParsedObject
   public function isGroup()
   {
     return false;
+  }
+
+  /**
+   * @return SimpleXMLElement
+   */
+  private function resolveName()
+  {
+    if (null != $this->object_xml_properties[Constants::NAME_ATTRIBUTE])
+    {
+      return $this->object_xml_properties[Constants::NAME_ATTRIBUTE];
+    }
+
+    return $this->object_xml_properties->name;
+  }
+
+  private function parseLooks()
+  {
+    foreach ($this->object_xml_properties->lookList->children() as $look_xml_properties)
+    {
+      $this->looks[] = new ParsedObjectAsset($this->dereference($look_xml_properties));
+    }
+  }
+
+  private function parseSounds()
+  {
+    foreach ($this->object_xml_properties->soundList->children() as $sound_xml_properties)
+    {
+      $this->sounds[] = new ParsedObjectAsset($this->dereference($sound_xml_properties));
+    }
+  }
+
+  private function parseScripts()
+  {
+    foreach ($this->object_xml_properties->scriptList->children() as $script_xml_properties)
+    {
+      $this->scripts[] = ScriptFactory::generate($this->dereference($script_xml_properties));
+    }
+  }
+
+  /**
+   * @param $xml_properties SimpleXMLElement
+   *
+   * @return mixed
+   */
+  private function dereference($xml_properties)
+  {
+    if (null != $xml_properties[Constants::REFERENCE_ATTRIBUTE])
+    {
+      return $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE])[0];
+    }
+
+    return $xml_properties;
   }
 }

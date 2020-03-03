@@ -3,8 +3,7 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class ObjectStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class ObjectStatement.
  */
 class ObjectStatement extends Statement
 {
@@ -24,8 +23,7 @@ class ObjectStatement extends Statement
   {
     $this->name = $name;
     parent::__construct($statementFactory, null, 0,
-      "", "");
-
+      '', '');
   }
 
   /**

@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class OldCatrobatLanguageVersionException
- * @package App\Catrobat\Exceptions\Upload
+ * Class OldCatrobatLanguageVersionException.
  */
 class OldCatrobatLanguageVersionException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class OldCatrobatLanguageVersionException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("errors.languageversion.tooold", StatusCode::OLD_CATROBAT_LANGUAGE);
+    parent::__construct('errors.languageversion.tooold', StatusCode::OLD_CATROBAT_LANGUAGE);
   }
 }

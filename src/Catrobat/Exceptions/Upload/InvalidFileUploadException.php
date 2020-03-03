@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class InvalidFileUploadException
- * @package App\Catrobat\Exceptions\Upload
+ * Class InvalidFileUploadException.
  */
 class InvalidFileUploadException extends InvalidCatrobatFileException
 {

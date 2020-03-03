@@ -4,23 +4,21 @@ namespace App\Admin;
 
 use App\Entity\Program;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-
 /**
- * Class GameJamAdmin
- * @package App\Admin
+ * Class GameJamAdmin.
  */
 class GameJamAdmin extends AbstractAdmin
 {
-
   /**
-   * @return mixed
    * @throws \Exception
+   *
+   * @return mixed
    */
   public function getNewInstance()
   {
@@ -32,7 +30,6 @@ class GameJamAdmin extends AbstractAdmin
     return $instance;
   }
 
-
   /**
    * @param FormMapper $formMapper
    *
@@ -41,14 +38,15 @@ class GameJamAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $returnurl = $this->getConfigurationPool()->getContainer()->get('router')
-      ->generate('gamejam_form_submission', ["id" => 42], true);
+      ->generate('gamejam_form_submission', ['id' => 42], true)
+    ;
     $returnurl = str_replace('42', '%CAT_ID%', $returnurl);
     $flavor = $this->getFlavorOptions();
     $formMapper
       ->add('name')
       ->add('form_url', null, ['sonata_help' => '
                 Url to the google form, use <code>%CAT_NAME%</code>, <code>%CAT_ID%</code>, <code>%CAT_EMAIL%</code>, and <code>%CAT_LANGUAGE%</code> as placeholder<br>
-                Make sure this form calls <code>' . $returnurl . '</code> after completion
+                Make sure this form calls <code>'.$returnurl.'</code> after completion
                 ',
       ])
       ->add('hashtag')
@@ -56,27 +54,9 @@ class GameJamAdmin extends AbstractAdmin
       ->add('start')
       ->add('end')
       ->add('sample_programs', null, ['class' => 'App\Entity\Program'],
-        ['admin_code' => 'catrowebadmin.block.programs.all']);
+        ['admin_code' => 'catrowebadmin.block.programs.all'])
+    ;
   }
-
-
-  /**
-   * @return array
-   */
-  private function getFlavorOptions()
-  {
-    $flavors = $this->getConfigurationPool()->getContainer()->getParameter('gamejam');
-    $results = [];
-    $results['no flavor'] = null;
-    $keys = array_keys($flavors);
-    for ($i = 0; $i < count($keys); $i++)
-    {
-      $results[$keys[$i]] = $keys[$i];
-    }
-
-    return $results;
-  }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -89,9 +69,9 @@ class GameJamAdmin extends AbstractAdmin
       ->add('name')
       ->add('form_url')
       ->add('start')
-      ->add('end');
+      ->add('end')
+    ;
   }
-
 
   /**
    * @param ListMapper $listMapper
@@ -109,16 +89,13 @@ class GameJamAdmin extends AbstractAdmin
       ->add('start')
       ->add('end')
       ->add('_action', 'actions', ['actions' => [
-        'edit'             => [],
-        'delete'           => [],
+        'edit' => [],
+        'delete' => [],
         'show_submissions' => ['template' => 'Admin/CRUD/list__action_show_submitted_programs.html.twig'],
-      ]]);
+      ]])
+    ;
   }
 
-
-  /**
-   * @param ShowMapper $showMapper
-   */
   protected function configureShowFields(ShowMapper $showMapper)
   {
     // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
@@ -130,6 +107,24 @@ class GameJamAdmin extends AbstractAdmin
       ->add('start')
       ->add('end')
       ->add('sample_programs', null,
-        ['class' => Program::class, 'admin_code' => 'catrowebadmin.block.programs.all']);
+        ['class' => Program::class, 'admin_code' => 'catrowebadmin.block.programs.all'])
+    ;
+  }
+
+  /**
+   * @return array
+   */
+  private function getFlavorOptions()
+  {
+    $flavors = $this->getConfigurationPool()->getContainer()->getParameter('gamejam');
+    $results = [];
+    $results['no flavor'] = null;
+    $keys = array_keys($flavors);
+    for ($i = 0; $i < count($keys); ++$i)
+    {
+      $results[$keys[$i]] = $keys[$i];
+    }
+
+    return $results;
   }
 }

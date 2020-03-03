@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class SpeakStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class SpeakStatement.
  */
 class SpeakStatement extends Statement
 {
-  const BEGIN_STRING = "speak ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'speak ';
+  const END_STRING = '<br/>';
 
   /**
    * SpeakStatement constructor.
@@ -31,9 +30,9 @@ class SpeakStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Speak " . $formula_string_without_markup;
+    return 'Speak '.$formula_string_without_markup;
   }
 
   /**
@@ -41,7 +40,6 @@ class SpeakStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_violet.png";
+    return '1h_brick_violet.png';
   }
-
 }

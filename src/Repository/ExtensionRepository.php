@@ -6,16 +6,11 @@ use App\Entity\Extension;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
- * Class ExtensionRepository
- * @package App\Repository
+ * Class ExtensionRepository.
  */
 class ExtensionRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, Extension::class);
@@ -31,7 +26,8 @@ class ExtensionRepository extends ServiceEntityRepository
     return $qb
       ->select('e.prefix')
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
@@ -48,6 +44,7 @@ class ExtensionRepository extends ServiceEntityRepository
       ->where($qb->expr()->eq('e.name', ':name'))
       ->setParameter('name', $name)
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 }

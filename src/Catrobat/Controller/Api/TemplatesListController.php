@@ -8,18 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
- * Class TemplatesListController
- * @package App\Catrobat\Controller\Api
+ * Class TemplatesListController.
  */
 class TemplatesListController extends AbstractController
 {
-
   /**
    * @Route("/api/templates/list.json", name="api_template_list", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @param Request $request
    *
    * @return TemplateListResponse
    */

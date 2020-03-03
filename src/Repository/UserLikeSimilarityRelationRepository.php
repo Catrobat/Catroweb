@@ -7,24 +7,16 @@ use App\Entity\UserLikeSimilarityRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
- * Class UserLikeSimilarityRelationRepository
- * @package App\Repository
+ * Class UserLikeSimilarityRelationRepository.
  */
 class UserLikeSimilarityRelationRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, UserLikeSimilarityRelation::class);
   }
 
-  /**
-   *
-   */
   public function removeAllUserRelations()
   {
     $qb = $this->createQueryBuilder('ul');
@@ -32,12 +24,11 @@ class UserLikeSimilarityRelationRepository extends ServiceEntityRepository
     $qb
       ->delete()
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
   /**
-   * @param User $user
-   *
    * @return UserLikeSimilarityRelation[]
    */
   public function getRelationsOfSimilarUsers(User $user)
@@ -52,6 +43,7 @@ class UserLikeSimilarityRelationRepository extends ServiceEntityRepository
       ->setParameter('user', $user)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 }

@@ -11,22 +11,19 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Class ResetCommand
- * @package App\Catrobat\Commands
+ * Class ResetCommand.
  */
 class ResetCommand extends Command
 {
   const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 20;
 
   /**
-   * @var ParameterBagInterface $parameter_bag
+   * @var ParameterBagInterface
    */
   private $parameter_bag;
 
   /**
    * ResetCommand constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -34,9 +31,6 @@ class ResetCommand extends Command
     $this->parameter_bag = $parameter_bag;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:reset')
@@ -47,15 +41,14 @@ class ResetCommand extends Command
         self::DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT)
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
-        ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT);
+        ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT)
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -111,32 +104,33 @@ class ResetCommand extends Command
       'Create default admin user', $output);
 
     $user_array = ['catroweb', 'user', 'Elliot', 'Darlene', 'Angela', 'Tyrell', 'Edward', 'Price', 'Dom',
-                  'ZhiZhang', 'Irving', 'Janice', 'Vera', 'Sam', 'TheHero', 'Esmail'];
+      'ZhiZhang', 'Irving', 'Janice', 'Vera', 'Sam', 'TheHero', 'Esmail', ];
 
-    for($i = 1; $i < sizeof($user_array); $i++) //starting at one because of admin user
-    {
-      CommandHelper::executeShellCommand('php bin/console fos:user:create ' .
-        $user_array[$i] . ' ' . $user_array[$i] . '@localhost.at catroweb', [],
+    for ($i = 1; $i < sizeof($user_array); ++$i)
+    { //starting at one because of admin user
+      CommandHelper::executeShellCommand('php bin/console fos:user:create '.
+        $user_array[$i].' '.$user_array[$i].'@localhost.at catroweb', [],
         'Create default user named '.$user_array[$i], $output);
     }
 
-    $temp_dir = sys_get_temp_dir() . '/catrobat.program.import/';
+    $temp_dir = sys_get_temp_dir().'/catrobat.program.import/';
 
     $filesystem = new Filesystem();
     $filesystem->remove($temp_dir);
 
     foreach ($user_array as $user)
     {
-      $filesystem->mkdir($temp_dir . $user);
+      $filesystem->mkdir($temp_dir.$user);
     }
 
     $program_names = $this->downloadPrograms($temp_dir, intval($input->getOption('more')), $output, $user_array);
 
-    $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
-    foreach ($user_array as $user) {
-      $temp_dir_user = $temp_dir . $user;
+    $remix_layout_option = '--remix-layout='.intval($input->getOption('remix-layout'));
+    foreach ($user_array as $user)
+    {
+      $temp_dir_user = $temp_dir.$user;
       CommandHelper::executeShellCommand(
-        "php bin/console catrobat:import $temp_dir_user $user $remix_layout_option",
+        "php bin/console catrobat:import {$temp_dir_user} {$user} {$remix_layout_option}",
         ['timeout' => 900], 'Importing Projects', $output);
       CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), [
         'directory' => $temp_dir_user,
@@ -145,7 +139,7 @@ class ResetCommand extends Command
       ], $output);
 
       $filesystem->remove($temp_dir_user);
-      $output->write("Removing directory $temp_dir_user");
+      $output->write("Removing directory {$temp_dir_user}");
     }
 
     $this->commentOnProjects($program_names, $user_array, $output);
@@ -155,27 +149,24 @@ class ResetCommand extends Command
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
 
-
-
     CommandHelper::executeShellCommand('chmod o+w -R public/resources', [],
       'Setting resources permissions', $output);
 
     CommandHelper::executeShellCommand('chmod o+w -R public/resources_test', [],
       'Setting test resources permissions', $output);
 
-     CommandHelper::executeShellCommand('chmod o+w tests -R', [],
+    CommandHelper::executeShellCommand('chmod o+w tests -R', [],
       'Setting test resources permissions', $output);
 
     CommandHelper::executeShellCommand('chmod o+w+x tests/behat/sqlite/ -R', [],
       'Setting permissions for behat sqlite test database', $output);
-
   }
 
   /**
-   * @param                 $dir
-   * @param                 $amount int The amount of programs to be downloaded
-   * @param OutputInterface $output
-   * @param                 $user_array
+   * @param $dir
+   * @param $amount     int The amount of programs to be downloaded
+   * @param $user_array
+   *
    * @return array
    */
   private function downloadPrograms($dir, $amount, OutputInterface $output, $user_array = null)
@@ -184,8 +175,7 @@ class ResetCommand extends Command
     $user = 0;
     $program_ids = [];
 
-    $output->writeln('Downloading ' . $amount . ' Projects...');
-
+    $output->writeln('Downloading '.$amount.' Projects...');
 
     while ($already_downloaded < $amount)
     {
@@ -199,48 +189,49 @@ class ResetCommand extends Command
           break;
         }
 
-        $url = $base_url . $program['DownloadUrl'];
-        if($user_array !== null)
+        $url = $base_url.$program['DownloadUrl'];
+        if (null !== $user_array)
         {
-          $name = $dir . $user_array[$user % sizeof($user_array)] . '/' . $program['ProjectId'] . '.catrobat';
+          $name = $dir.$user_array[$user % sizeof($user_array)].'/'.$program['ProjectId'].'.catrobat';
           $program_ids[$already_downloaded] = $program['ProjectName'];
-          $user++;
+          ++$user;
         }
         else
         {
-          $name = $dir . $program['ProjectId'] . '.catrobat';
+          $name = $dir.$program['ProjectId'].'.catrobat';
         }
-        $output->writeln('Saving <' . $url . '> to <' . $name . '>');
+        $output->writeln('Saving <'.$url.'> to <'.$name.'>');
         try
         {
           file_put_contents($name, file_get_contents($url));
-          $already_downloaded++;
+          ++$already_downloaded;
         }
         catch (\Exception $e)
         {
-          $output->writeln("File <" . $url . "> returned error 500, continuing...");
+          $output->writeln('File <'.$url.'> returned error 500, continuing...');
           continue;
         }
       }
     }
+
     return $program_ids;
   }
 
-
   private function randomCommentGenerator()
   {
-    $first = ["I am", "You are", "He is", "They are", "She is", "It is", "We are", "This is"];
-    $second = [" ", " not ", " extremly "];
-    $third = ["good", "hideous", "fabulous", "amazing", "cute", "lovely"];
-    $fourth = [" ;)", " :D", " :(", " xD", " :O"];
+    $first = ['I am', 'You are', 'He is', 'They are', 'She is', 'It is', 'We are', 'This is'];
+    $second = [' ', ' not ', ' extremly '];
+    $third = ['good', 'hideous', 'fabulous', 'amazing', 'cute', 'lovely'];
+    $fourth = [' ;)', ' :D', ' :(', ' xD', ' :O'];
 
-    return $first[array_rand($first)] . $second[array_rand($second)] . $third[array_rand($third)] . $fourth[array_rand($fourth)];
+    return $first[array_rand($first)].$second[array_rand($second)].$third[array_rand($third)].$fourth[array_rand($fourth)];
   }
 
   /**
    * @param $program_names
    * @param $user_array
    * @param $output
+   *
    * @throws \Exception
    */
   private function commentOnProjects($program_names, $user_array, $output)
@@ -249,20 +240,21 @@ class ResetCommand extends Command
     foreach ($program_names as $program_name)
     {
       $random_reported = random_int(-10, 1);
-      if($random_reported <= 0){
+      if ($random_reported <= 0)
+      {
         $random_reported = 0;
       }
       $random_comment_amount = random_int(0, 3);
-      for($j = 0; $j <= $random_comment_amount; $j++)
+      for ($j = 0; $j <= $random_comment_amount; ++$j)
       {
         CommandHelper::executeSymfonyCommand('catrobat:comment', $this->getApplication(), [
           'user' => $user_array[array_rand($user_array)],
           'program_name' => $program_name,
           'message' => $this->randomCommentGenerator(),
-          'reported' => $random_reported
+          'reported' => $random_reported,
         ], $output);
       }
-      $i++;
+      ++$i;
     }
   }
 
@@ -270,16 +262,17 @@ class ResetCommand extends Command
    * @param $program_names
    * @param $user_array
    * @param $output
+   *
    * @throws \Exception
    */
   private function reportProjects($program_names, $user_array, $output)
   {
-    for($i = 0; $i < sizeof($program_names); $i += 10)
+    for ($i = 0; $i < sizeof($program_names); $i += 10)
     {
       CommandHelper::executeSymfonyCommand('catrobat:report', $this->getApplication(), [
         'user' => $user_array[$i],
         'program_name' => $program_names[$i],
-        'note' => "bad"
+        'note' => 'bad',
       ], $output);
     }
   }
@@ -288,6 +281,7 @@ class ResetCommand extends Command
    * @param $program_names
    * @param $user_array
    * @param $output
+   *
    * @throws \Exception
    */
   private function likeProjects($program_names, $user_array, $output)
@@ -295,11 +289,11 @@ class ResetCommand extends Command
     foreach ($program_names as $program_name)
     {
       $like_amount = random_int(1, 5);
-      for($i = 0; $i < $like_amount; $i++)
+      for ($i = 0; $i < $like_amount; ++$i)
       {
         CommandHelper::executeSymfonyCommand('catrobat:like', $this->getApplication(), [
           'program_name' => $program_name,
-          'user_name' =>  $user_array[($i+$like_amount)%sizeof($user_array)]
+          'user_name' => $user_array[($i + $like_amount) % sizeof($user_array)],
         ], $output);
       }
     }
@@ -309,6 +303,7 @@ class ResetCommand extends Command
    * @param $program_names
    * @param $user_array
    * @param $output
+   *
    * @throws \Exception
    */
   private function downloadProjects($program_names, $user_array, $output)
@@ -316,11 +311,11 @@ class ResetCommand extends Command
     foreach ($program_names as $program_name)
     {
       $download_amount = random_int(1, 5);
-      for($i = 0; $i < $download_amount; $i++)
+      for ($i = 0; $i < $download_amount; ++$i)
       {
         CommandHelper::executeSymfonyCommand('catrobat:download', $this->getApplication(), [
           'program_name' => $program_name,
-          'user_name' =>  $user_array[array_rand($user_array)]
+          'user_name' => $user_array[array_rand($user_array)],
         ], $output);
       }
     }
@@ -329,30 +324,29 @@ class ResetCommand extends Command
   /**
    * @param $program_names
    * @param $output
+   *
    * @throws \Exception
    */
   private function featureProjects($program_names, $output)
   {
-    for($i = 0; $i < sizeof($program_names); $i += 5)
+    for ($i = 0; $i < sizeof($program_names); $i += 5)
     {
       CommandHelper::executeSymfonyCommand('catrobat:feature', $this->getApplication(), [
-        'program_name' => $program_names[$i % sizeof($program_names)]
+        'program_name' => $program_names[$i % sizeof($program_names)],
       ], $output);
     }
   }
 
   /**
-   * @param array $user_array
-   * @param OutputInterface $output
    * @throws \Exception
    */
   private function followUsers(array $user_array, OutputInterface $output)
   {
-    for($i = 0; $i < sizeof($user_array); $i++)
+    for ($i = 0; $i < sizeof($user_array); ++$i)
     {
       CommandHelper::executeSymfonyCommand('catrobat:follow', $this->getApplication(), [
         'user_name' => $user_array[$i],
-        'follower'  => $user_array[($i+random_int(1, sizeof($user_array)))%sizeof($user_array)]
+        'follower' => $user_array[($i + random_int(1, sizeof($user_array))) % sizeof($user_array)],
       ], $output);
     }
   }

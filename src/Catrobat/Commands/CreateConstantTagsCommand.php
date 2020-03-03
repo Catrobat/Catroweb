@@ -2,21 +2,19 @@
 
 namespace App\Catrobat\Commands;
 
+use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\Tag;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class CreateConstantTagsCommand
- * @package App\Catrobat\Commands
+ * Class CreateConstantTagsCommand.
  */
 class CreateConstantTagsCommand extends Command
 {
-
   /**
    * @var
    */
@@ -28,7 +26,7 @@ class CreateConstantTagsCommand extends Command
   private $translator;
 
   /**
-   * @var TagRepository $tag_repository
+   * @var TagRepository
    */
   private $tag_repository;
 
@@ -39,10 +37,6 @@ class CreateConstantTagsCommand extends Command
 
   /**
    * CreateConstantTagsCommand constructor.
-   *
-   * @param EntityManagerInterface $entity_manager
-   * @param TranslatorInterface $translator
-   * @param TagRepository $tag_repository
    */
   public function __construct(EntityManagerInterface $entity_manager,TranslatorInterface $translator,
                               TagRepository $tag_repository)
@@ -53,22 +47,18 @@ class CreateConstantTagsCommand extends Command
     $this->tag_repository = $tag_repository;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:create:tags')
-      ->setDescription('Creating constant tags in supported languages');
+      ->setDescription('Creating constant tags in supported languages')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
-   *
-   * @return int|void|null
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
@@ -77,35 +67,33 @@ class CreateConstantTagsCommand extends Command
 
     $number_of_tags = 7; // uses the tag names defined in the translation files!
 
-    for ($i = 1; $i <= $number_of_tags; $i++)
+    for ($i = 1; $i <= $number_of_tags; ++$i)
     {
       $tag = $this->tag_repository->find($i);
 
-      if ($tag != null)
+      if (null != $tag)
       {
-
-        for ($j = 1; $j < count($metadata); $j++)
+        for ($j = 1; $j < count($metadata); ++$j)
         {
-          $language = 'set' . $metadata[$j];
+          $language = 'set'.$metadata[$j];
 
-          $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
+          $tag->{$language}($this->trans('tags.constant.tag'.$i, $metadata[$j]));
 
-          $this->entity_manager->persist($tag);;
+          $this->entity_manager->persist($tag);
           $this->entity_manager->flush();
         }
-
       }
       else
       {
         $tag = new Tag();
 
-        for ($j = 1; $j < count($metadata); $j++)
+        for ($j = 1; $j < count($metadata); ++$j)
         {
-          $language = 'set' . $metadata[$j];
-          $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
+          $language = 'set'.$metadata[$j];
+          $tag->{$language}($this->trans('tags.constant.tag'.$i, $metadata[$j]));
         }
 
-        $this->entity_manager->persist($tag);;
+        $this->entity_manager->persist($tag);
         $this->entity_manager->flush();
       }
     }

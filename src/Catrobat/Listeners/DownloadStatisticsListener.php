@@ -8,10 +8,8 @@ use Exception;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
-
 /**
- * Class DownloadStatisticsListener
- * @package App\Catrobat\Listeners
+ * Class DownloadStatisticsListener.
  */
 class DownloadStatisticsListener
 {
@@ -26,19 +24,14 @@ class DownloadStatisticsListener
 
   /**
    * DownloadStatisticsListener constructor.
-   *
-   * @param StatisticsService $statistics_service
-   * @param TokenStorageInterface $security_token_storage
    */
-  public function __construct(StatisticsService $statistics_service, TokenStorageInterface$security_token_storage)
+  public function __construct(StatisticsService $statistics_service, TokenStorageInterface $security_token_storage)
   {
     $this->statistics_service = $statistics_service;
     $this->security_token_storage = $security_token_storage;
   }
 
   /**
-   * @param TerminateEvent $event
-   *
    * @throws Exception
    */
   public function onTerminateEvent(TerminateEvent $event)
@@ -68,7 +61,7 @@ class DownloadStatisticsListener
         }
         if ($attributes->has('rec_user_specific'))
         {
-          $rec_user_specific = (bool)$attributes->get('rec_user_specific');
+          $rec_user_specific = (bool) $attributes->get('rec_user_specific');
         }
       }
       else
@@ -102,7 +95,7 @@ class DownloadStatisticsListener
                                                   $rec_by_page_id, $rec_by_program_id, $locale,
                                                   $is_user_specific_recommendation)
   {
-    if ((strpos($request->headers->get('User-Agent'), 'okhttp') === false) || ($rec_by_page_id != null))
+    if ((false === strpos($request->headers->get('User-Agent'), 'okhttp')) || (null != $rec_by_page_id))
     {
       $this->statistics_service->createProgramDownloadStatistics($request, $program_id, $referrer,
         $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale, $is_user_specific_recommendation);

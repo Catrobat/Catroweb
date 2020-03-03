@@ -2,12 +2,10 @@
 
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- *
  * This entity is designed to assign users to certain or random groups for testing
  * purposes. It has been created in order to not rely on assigning users to groups
  * based on language or location, hence eliminating possible biases. An example use
@@ -39,14 +37,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *   }
  * }
  *
- *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="user_test_group")
  * @UniqueEntity("$user")
- *
  */
-
 class UserTestGroup
 {
   /**
@@ -71,7 +66,7 @@ class UserTestGroup
    */
   public function __construct($user_id, $group_number)
   {
-    if ($user_id !== null)
+    if (null !== $user_id)
     {
       $this->setUserId($user_id);
       $this->setGroupNumber($group_number);
@@ -83,7 +78,7 @@ class UserTestGroup
    */
   public function updateTimestamps()
   {
-    if ($this->getCreatedAt() === null)
+    if (null === $this->getCreatedAt())
     {
       $this->setCreatedAt(new \DateTime());
     }
@@ -122,8 +117,6 @@ class UserTestGroup
   }
 
   /**
-   * @param \DateTime $created_at
-   *
    * @return $this
    */
   public function setCreatedAt(\DateTime $created_at)

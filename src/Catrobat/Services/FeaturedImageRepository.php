@@ -6,10 +6,8 @@ use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
-
 /**
- * Class FeaturedImageRepository
- * @package App\Catrobat\Services
+ * Class FeaturedImageRepository.
  */
 class FeaturedImageRepository
 {
@@ -24,8 +22,6 @@ class FeaturedImageRepository
 
   /**
    * FeaturedImageRepository constructor.
-   *
-   * @param ParameterBagInterface $parameter_bag
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -36,7 +32,7 @@ class FeaturedImageRepository
 
     if (!is_dir($dir))
     {
-      throw new InvalidStorageDirectoryException($dir . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($dir.' is not a valid directory');
     }
 
     $this->dir = $dir;
@@ -59,7 +55,7 @@ class FeaturedImageRepository
    */
   public function remove($id, $extension)
   {
-    $path = $this->dir . $this->generateFileNameFromId($id, $extension);
+    $path = $this->dir.$this->generateFileNameFromId($id, $extension);
     if (is_file($path))
     {
       unlink($path);
@@ -72,9 +68,9 @@ class FeaturedImageRepository
    *
    * @return string
    */
-  private function generateFileNameFromId($id, $extension)
+  public function getWebPath($id, $extension)
   {
-    return 'featured_' . $id . '.' . $extension;
+    return $this->path.$this->generateFileNameFromId($id, $extension);
   }
 
   /**
@@ -83,8 +79,8 @@ class FeaturedImageRepository
    *
    * @return string
    */
-  public function getWebPath($id, $extension)
+  private function generateFileNameFromId($id, $extension)
   {
-    return $this->path . $this->generateFileNameFromId($id, $extension);
+    return 'featured_'.$id.'.'.$extension;
   }
 }

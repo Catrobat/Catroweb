@@ -3,20 +3,17 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-
 /**
- * Class AllExtensionsAdmin
- * @package App\Admin
+ * Class AllExtensionsAdmin.
  */
 class AllExtensionsAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -31,10 +28,9 @@ class AllExtensionsAdmin extends AbstractAdmin
    * @var array
    */
   protected $datagridValues = [
-    '_sort_by'    => 'id',
+    '_sort_by' => 'id',
     '_sort_order' => 'ASC',
   ];
-
 
   /**
    * @param FormMapper $formMapper
@@ -45,9 +41,9 @@ class AllExtensionsAdmin extends AbstractAdmin
   {
     $formMapper
       ->add('name', TextType::class, ['label' => 'Extension name'])
-      ->add('prefix', TextType::class);
+      ->add('prefix', TextType::class)
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -58,7 +54,8 @@ class AllExtensionsAdmin extends AbstractAdmin
   {
     $datagridMapper
       ->add('name')
-      ->add('prefix');
+      ->add('prefix')
+    ;
   }
 
   /**
@@ -74,15 +71,12 @@ class AllExtensionsAdmin extends AbstractAdmin
       ->add('prefix')
       ->add('_action', 'actions', ['actions' => [
         'edit' => [],
-      ]]);
+      ]])
+    ;
   }
 
-  /**
-   * @param RouteCollection $collection
-   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('delete')->remove('export');
   }
-
 }

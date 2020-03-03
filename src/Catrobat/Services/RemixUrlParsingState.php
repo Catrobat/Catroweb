@@ -2,10 +2,8 @@
 
 namespace App\Catrobat\Services;
 
-
 /**
- * Class RemixUrlParsingState
- * @package App\Catrobat\Services
+ * Class RemixUrlParsingState.
  */
 class RemixUrlParsingState
 {

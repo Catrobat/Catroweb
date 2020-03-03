@@ -6,8 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
 /**
- * Class InvalidArchiveException
- * @package App\Catrobat\Exceptions\Upload
+ * Class InvalidArchiveException.
  */
 class InvalidArchiveException extends InvalidCatrobatFileException
 {
@@ -16,6 +15,6 @@ class InvalidArchiveException extends InvalidCatrobatFileException
    */
   public function __construct()
   {
-    parent::__construct("errors.file.invalid", StatusCode::INVALID_FILE);
+    parent::__construct('errors.file.invalid', StatusCode::INVALID_FILE);
   }
 }

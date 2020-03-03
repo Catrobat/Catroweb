@@ -5,16 +5,12 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use Exception;
 
-
 /**
- * Class CatrobatCodeParser
- * @package App\Catrobat\Services\CatrobatCodeParser
+ * Class CatrobatCodeParser.
  */
 class CatrobatCodeParser
 {
   /**
-   * @param ExtractedCatrobatFile $extracted_catrobat_program
-   *
    * @return ParsedSceneProgram|ParsedSimpleProgram|null
    */
   public function parse(ExtractedCatrobatFile $extracted_catrobat_program)
@@ -22,7 +18,8 @@ class CatrobatCodeParser
     try
     {
       $parsed_program = $this->parseProgram($extracted_catrobat_program);
-    } catch (Exception $e)
+    }
+    catch (Exception $e)
     {
       $parsed_program = null;
     }
@@ -31,8 +28,6 @@ class CatrobatCodeParser
   }
 
   /**
-   * @param ExtractedCatrobatFile $extracted_program
-   *
    * @return ParsedSceneProgram|ParsedSimpleProgram
    */
   private function parseProgram(ExtractedCatrobatFile $extracted_program)
@@ -43,9 +38,7 @@ class CatrobatCodeParser
     {
       return new ParsedSceneProgram($program_xml_properties);
     }
-    else
-    {
-      return new ParsedSimpleProgram($program_xml_properties);
-    }
+
+    return new ParsedSimpleProgram($program_xml_properties);
   }
 }

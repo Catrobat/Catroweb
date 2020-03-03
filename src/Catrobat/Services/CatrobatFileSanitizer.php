@@ -11,48 +11,42 @@ use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class CatrobatFileSanitizer
- * @package App\Catrobat\Services
- *
- * All files not mentioned in the code.xml should be removed.
- * Only exceptions: 1x code.xml, 1x permissions.txt, 1x (automatic|manual)_screenhot.png
+ * Class CatrobatFileSanitizer.
  */
 class CatrobatFileSanitizer
 {
   /**
-   * @var $scenes
-   */
+   * @var
+   * $scenes*/
   private $scenes;
 
   /**
-   * @var $image_paths array
+   * @var array
    */
   private $image_paths;
 
   /**
-   * @var $sound_paths array
+   * @var array
    */
   private $sound_paths;
 
   /**
-   * @var $screenshot_path string
+   * @var string
    */
   private $screenshot_path;
 
   /**
-   * @var $extracted_file_root_path string
+   * @var string
    */
   private $extracted_file_root_path;
 
   /**
-   * @var $scenes array
+   * @var array
    */
   private $catrobat_code_parser;
 
   /**
    * CatrobatFileSanitizer constructor.
-   *
-   * @param CatrobatCodeParser $catrobat_code_parser
    */
   public function __construct(CatrobatCodeParser $catrobat_code_parser)
   {
@@ -60,8 +54,6 @@ class CatrobatFileSanitizer
   }
 
   /**
-   * @param ExtractedCatrobatFile $extracted_file
-   *
    * @throws \Exception
    */
   public function sanitize(ExtractedCatrobatFile $extracted_file)
@@ -79,7 +71,7 @@ class CatrobatFileSanitizer
 
     foreach ($files as $file)
     {
-      /** @var $file File */
+      /** @var File $file */
       $filename = $file->getFilename();
       $filepath = $file->getRealPath();
       $relative_filepath = $this->getRelativePath($filepath);
@@ -93,10 +85,8 @@ class CatrobatFileSanitizer
       {
         continue;
       }
-      else
-      {
-        is_file($filepath) ? unlink($filepath) : $this->deleteDirectory($filepath);
-      }
+
+      is_file($filepath) ? unlink($filepath) : $this->deleteDirectory($filepath);
     }
   }
 
@@ -108,7 +98,7 @@ class CatrobatFileSanitizer
   private function isTheOnlyCodeXmlFile($relative_filepath)
   {
     // code.xml must only be found once in the root directory
-    return $relative_filepath === "/code.xml";
+    return '/code.xml' === $relative_filepath;
   }
 
   /**
@@ -119,7 +109,7 @@ class CatrobatFileSanitizer
   private function isTheOnlyPermissionsFile($relative_filepath)
   {
     // permissions.txt must only be found once in the root directory
-    return $relative_filepath === "/permissions.txt";
+    return '/permissions.txt' === $relative_filepath;
   }
 
   /**
@@ -143,7 +133,7 @@ class CatrobatFileSanitizer
     // Besides image and sound directories the root directory can contain a directory for every scene.
     foreach ($this->scenes as $scene)
     {
-      if ($relative_filepath === "/" . $scene)
+      if ($relative_filepath === '/'.$scene)
       {
         return true;
       }
@@ -153,43 +143,40 @@ class CatrobatFileSanitizer
   }
 
   /**
-   * @param                       $filename
-   * @param                       $relative_filepath
-   * @param ExtractedCatrobatFile $extracted_file
+   * @param $filename
+   * @param $relative_filepath
+   *
+   * @throws \Exception
    *
    * @return bool
-   * @throws \Exception
    */
   private function isAValidSoundFile($filename, $relative_filepath, ExtractedCatrobatFile $extracted_file)
   {
-    return $this->isAValidImageOrSoundFile("/sounds", $this->sound_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidImageOrSoundFile('/sounds', $this->sound_paths, $filename, $relative_filepath, $extracted_file);
   }
 
   /**
-   * @param                       $filename
-   * @param                       $relative_filepath
-   * @param ExtractedCatrobatFile $extracted_file
+   * @param $filename
+   * @param $relative_filepath
    *
    * @return bool
    */
   private function isAValidImageFile($filename, $relative_filepath, ExtractedCatrobatFile $extracted_file)
   {
-    return $this->isAValidImageOrSoundFile("/images", $this->image_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidImageOrSoundFile('/images', $this->image_paths, $filename, $relative_filepath, $extracted_file);
   }
 
   /**
-   * @param                       $dir_name
-   * @param                       $paths_array
-   * @param                       $filename
-   * @param                       $relative_filepath
-   * @param ExtractedCatrobatFile $extracted_file
+   * @param $dir_name
+   * @param $paths_array
+   * @param $filename
+   * @param $relative_filepath
    *
    * @return bool
    */
   private function isAValidImageOrSoundFile($dir_name, $paths_array, $filename, $relative_filepath,
                                             ExtractedCatrobatFile $extracted_file)
   {
-
     // Here we must accept:
     //   - image and sound directories in the root directory.
     //   - image and sound directories in Scene directories
@@ -202,7 +189,7 @@ class CatrobatFileSanitizer
 
     foreach ($this->scenes as $scene)
     {
-      if ($relative_filepath === "/" . $scene . $dir_name)
+      if ($relative_filepath === '/'.$scene.$dir_name)
       {
         return true;
       }
@@ -218,21 +205,19 @@ class CatrobatFileSanitizer
   }
 
   /**
-   * @param ExtractedCatrobatFile $extracted_file
-   *
    * @return array
    */
   private function getScenes(ExtractedCatrobatFile $extracted_file)
   {
     $scenes = [];
     $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
-    /** @var $parsed_project ParsedSceneProgram|ParsedSimpleProgram */
-    if ($parsed_project !== null && $parsed_project->hasScenes())
+    /** @var ParsedSceneProgram|ParsedSimpleProgram $parsed_project */
+    if (null !== $parsed_project && $parsed_project->hasScenes())
     {
       $scenes_array = $parsed_project->getScenes();
       foreach ($scenes_array as $scene)
       {
-        /** @var $scene ParsedScene */
+        /* @var $scene ParsedScene */
         array_push($scenes, $scene->getName());
       }
     }
@@ -274,11 +259,11 @@ class CatrobatFileSanitizer
 
     foreach (scandir($dir) as $item)
     {
-      if ($item == '.' || $item == '..')
+      if ('.' == $item || '..' == $item)
       {
         continue;
       }
-      if (!$this->deleteDirectory($dir . DIRECTORY_SEPARATOR . $item))
+      if (!$this->deleteDirectory($dir.DIRECTORY_SEPARATOR.$item))
       {
         return false;
       }

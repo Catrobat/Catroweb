@@ -5,13 +5,12 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class IfLogicBeginStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class IfLogicBeginStatement.
  */
 class IfLogicBeginStatement extends Statement
 {
-  const BEGIN_STRING = "if ";
-  const END_STRING = ")<br/>";
+  const BEGIN_STRING = 'if ';
+  const END_STRING = ')<br/>';
 
   /**
    * IfLogicBeginStatement constructor.
@@ -22,7 +21,7 @@ class IfLogicBeginStatement extends Statement
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
-    $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END . "(";
+    $stmt = SyntaxHighlightingConstants::LOOP.self::BEGIN_STRING.SyntaxHighlightingConstants::END.'(';
 
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $stmt,
@@ -43,9 +42,9 @@ class IfLogicBeginStatement extends Statement
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "If " . $formula_string_without_markup . " is true then";
+    return 'If '.$formula_string_without_markup.' is true then';
   }
 
   /**
@@ -53,6 +52,6 @@ class IfLogicBeginStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
 }

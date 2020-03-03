@@ -3,12 +3,11 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class LookListStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class LookListStatement.
  */
 class LookListStatement extends BaseListStatement
 {
-  const BEGIN_STRING = "used looks: <br/>";
+  const BEGIN_STRING = 'used looks: <br/>';
 
   /**
    * LookListStatement constructor.
@@ -21,6 +20,6 @@ class LookListStatement extends BaseListStatement
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
-      "");
+      '');
   }
 }

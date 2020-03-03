@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class PointToStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class PointToStatement.
  */
 class PointToStatement extends Statement
 {
-  const BEGIN_STRING = "point to ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'point to ';
+  const END_STRING = '<br/>';
 
   /**
    * PointToStatement constructor.
@@ -30,7 +29,7 @@ class PointToStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Point towards " . $this->xmlTree->pointedObject['name'];
+    return 'Point towards '.$this->xmlTree->pointedObject['name'];
   }
 
   /**
@@ -38,7 +37,6 @@ class PointToStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
-
 }

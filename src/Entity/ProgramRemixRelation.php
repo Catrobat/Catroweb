@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,7 +14,8 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -28,8 +28,9 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_descendant_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="ancestor_id", referencedColumnName="id")
+   *
    * @var Program
    */
   protected $ancestor;
@@ -42,15 +43,16 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_ancestor_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="descendant_id", referencedColumnName="id")
+   *
    * @var Program
    */
   protected $descendant;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false, options={"default" = 0})
+   * @ORM\Column(type="integer", nullable=false, options={"default": 0})
    */
   protected $depth = 0;
 
@@ -66,9 +68,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected $seen_at;
 
   /**
-   * @param Program $ancestor
-   * @param Program $descendant
-   * @param int                                $depth
+   * @param int $depth
    */
   public function __construct(Program $ancestor, Program $descendant, $depth)
   {
@@ -80,21 +80,27 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   }
 
   /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return '(#'.$this->ancestor_id.', #'.$this->descendant_id.', depth: '.$this->depth.')';
+  }
+
+  /**
    * @ORM\PrePersist
    *
    * @throws \Exception
    */
   public function updateTimestamps()
   {
-    if ($this->getCreatedAt() == null)
+    if (null == $this->getCreatedAt())
     {
       $this->setCreatedAt(new \DateTime());
     }
   }
 
   /**
-   * @param Program $ancestor
-   *
    * @return ProgramRemixRelation
    */
   public function setAncestor(Program $ancestor)
@@ -122,8 +128,6 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   }
 
   /**
-   * @param Program $descendant
-   *
    * @return ProgramRemixRelation
    */
   public function setDescendant(Program $descendant)
@@ -157,7 +161,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    */
   public function setDepth($depth)
   {
-    $this->depth = (int)$depth;
+    $this->depth = (int) $depth;
 
     return $this;
   }
@@ -179,8 +183,6 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   }
 
   /**
-   * @param \DateTime $created_at
-   *
    * @return $this
    */
   public function setCreatedAt(\DateTime $created_at)
@@ -215,15 +217,6 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    */
   public function getUniqueKey()
   {
-    return sprintf("ProgramRemixRelation(%d,%d,%d)", $this->ancestor_id, $this->descendant_id, $this->depth);
+    return sprintf('ProgramRemixRelation(%d,%d,%d)', $this->ancestor_id, $this->descendant_id, $this->depth);
   }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return "(#" . $this->ancestor_id . ", #" . $this->descendant_id . ", depth: " . $this->depth . ")";
-  }
-
 }

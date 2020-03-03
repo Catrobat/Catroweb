@@ -5,12 +5,10 @@ namespace App\Catrobat\CatrobatCode\Statements;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
 /**
- * Class BaseChangeByNStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class BaseChangeByNStatement.
  */
 class BaseChangeByNStatement extends Statement
 {
-
   /**
    * BaseChangeByNStatement constructor.
    *
@@ -22,7 +20,7 @@ class BaseChangeByNStatement extends Statement
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $beginString, $endString)
   {
-    $beginString = "change " . SyntaxHighlightingConstants::VARIABLES . $beginString . SyntaxHighlightingConstants::END . " by (";
+    $beginString = 'change '.SyntaxHighlightingConstants::VARIABLES.$beginString.SyntaxHighlightingConstants::END.' by (';
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $beginString,
       $endString);

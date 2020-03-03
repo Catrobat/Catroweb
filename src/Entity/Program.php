@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
@@ -17,24 +16,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Program
 {
-  /**
-   *
-   */
   const APK_NONE = 0;
 
-  /**
-   *
-   */
   const APK_PENDING = 1;
 
-  /**
-   *
-   */
   const APK_READY = 2;
 
-  /**
-   *
-   */
   const INITIAL_VERSION = 1;
 
   /**
@@ -60,7 +47,7 @@ class Program
   protected $credits;
 
   /**
-   * @ORM\Column(type="integer", options={"default" = 1})
+   * @ORM\Column(type="integer", options={"default": 1})
    */
   protected $version = self::INITIAL_VERSION;
 
@@ -68,53 +55,53 @@ class Program
    * @var User The user owning this Program. If this User gets deleted, this Program gets deleted as well.
    *
    * @ORM\ManyToOne(
-   *   targetEntity="\App\Entity\User",
-   *   inversedBy="programs"
+   *     targetEntity="\App\Entity\User",
+   *     inversedBy="programs"
    * )
    * @ORM\JoinColumn(
-   *   name="user_id",
-   *   referencedColumnName="id",
-   *   nullable=false
+   *     name="user_id",
+   *     referencedColumnName="id",
+   *     nullable=false
    * )
    */
   protected $user;
 
   /**
    * @var Collection|UserComment[] The UserComments commenting this Program. If this Program gets deleted, these UserComments get
-   *                              deleted as well.
+   *                               deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="UserComment",
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
   protected $comments;
 
   /**
    * @var Collection|LikeNotification[] The LikeNotifications mentioning this Program. If this Program gets deleted, these
-   *                                   LikeNotifications get deleted as well.
+   *                                    LikeNotifications get deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="App\Entity\LikeNotification",
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
   protected $like_notification_mentions;
 
   /**
    * @var Collection|NewProgramNotification[] The NewProgramNotification mentioning this Program as a new Program.
-   *                                         If this Program gets deleted, these NewProgramNotifications get deleted as well.
+   *                                          If this Program gets deleted, these NewProgramNotifications get deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="App\Entity\NewProgramNotification",
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
   protected $new_program_notification_mentions;
 
@@ -128,7 +115,7 @@ class Program
    *     mappedBy="remix_program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
   protected $remix_notification_mentions_as_child;
 
@@ -142,23 +129,22 @@ class Program
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
   protected $remix_notification_mentions_as_parent;
-
 
   /**
    * @var Collection|Tag[]
    *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Tag", inversedBy="programs")
    * @ORM\JoinTable(
-   *  name="program_tag",
-   *  joinColumns={
-   *      @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
-   *  },
-   *  inverseJoinColumns={
-   *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
-   *  }
+   *     name="program_tag",
+   *     joinColumns={
+   *         @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+   *     },
+   *     inverseJoinColumns={
+   *         @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
+   *     }
    * )
    */
   protected $tags;
@@ -168,13 +154,13 @@ class Program
    *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Extension", inversedBy="programs")
    * @ORM\JoinTable(
-   *  name="program_extension",
-   *  joinColumns={
-   *      @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
-   *  },
-   *  inverseJoinColumns={
-   *      @ORM\JoinColumn(name="extension_id", referencedColumnName="id", nullable=true)
-   *  }
+   *     name="program_extension",
+   *     joinColumns={
+   *         @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+   *     },
+   *     inverseJoinColumns={
+   *         @ORM\JoinColumn(name="extension_id", referencedColumnName="id", nullable=true)
+   *     }
    * )
    */
   protected $extensions;
@@ -205,52 +191,52 @@ class Program
   protected $last_modified_at;
 
   /**
-   * @ORM\Column(type="string", options={"default":0})
+   * @ORM\Column(type="string", options={"default": 0})
    */
   protected $language_version = 0;
 
   /**
-   * @ORM\Column(type="string", options={"default":""})
+   * @ORM\Column(type="string", options={"default": ""})
    */
   protected $catrobat_version_name;
 
   /**
-   * @ORM\Column(type="integer", options={"default":0})
+   * @ORM\Column(type="integer", options={"default": 0})
    */
   protected $catrobat_version;
 
   /**
-   * @ORM\Column(type="string", options={"default":""})
+   * @ORM\Column(type="string", options={"default": ""})
    */
   protected $upload_ip;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":true})
+   * @ORM\Column(type="boolean", options={"default": true})
    */
   protected $visible;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
   protected $private = false;
 
   /**
-   * @ORM\Column(type="string", options={"default":"pocketcode"})
+   * @ORM\Column(type="string", options={"default": "pocketcode"})
    */
   protected $flavor = 'pocketcode';
 
   /**
-   * @ORM\Column(type="string", options={"default":""})
+   * @ORM\Column(type="string", options={"default": ""})
    */
   protected $upload_language;
 
   /**
-   * @ORM\Column(type="integer", options={"default":0})
+   * @ORM\Column(type="integer", options={"default": 0})
    */
   protected $filesize;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":true})
+   * @ORM\Column(type="boolean", options={"default": true})
    */
   protected $remix_root;
 
@@ -266,6 +252,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|ProgramRemixRelation[]
    */
   protected $catrobat_remix_ancestor_relations;
@@ -277,6 +264,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|ProgramRemixBackwardRelation[]
    */
   protected $catrobat_remix_backward_parent_relations;
@@ -288,6 +276,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|ProgramRemixRelation[]
    */
   protected $catrobat_remix_descendant_relations;
@@ -299,6 +288,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|ProgramRemixBackwardRelation[]
    */
   protected $catrobat_remix_backward_child_relations;
@@ -310,6 +300,7 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|ScratchProgramRemixRelation[]
    */
   protected $scratch_remix_parent_relations;
@@ -321,12 +312,13 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
+   *
    * @var Collection|ProgramLike[]
    */
   protected $likes;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
   protected $approved;
 
@@ -343,7 +335,7 @@ class Program
   protected $category;
 
   /**
-   * @ORM\Column(type="smallint", options={"default":0})
+   * @ORM\Column(type="smallint", options={"default": 0})
    */
   protected $apk_status = 0;
 
@@ -353,7 +345,7 @@ class Program
   protected $apk_request_time;
 
   /**
-   * @ORM\Column(type="integer", options={"default":0})
+   * @ORM\Column(type="integer", options={"default": 0})
    */
   protected $apk_downloads = 0;
 
@@ -364,7 +356,7 @@ class Program
   protected $gamejam;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
   protected $gamejam_submission_accepted = false;
 
@@ -379,14 +371,13 @@ class Program
   protected $program_downloads;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
   protected $debug_build;
 
   /**
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="program", fetch="EXTRA_LAZY")
    */
-
   protected $reports;
 
   /**
@@ -402,6 +393,14 @@ class Program
     $this->catrobat_remix_descendant_relations = new ArrayCollection();
     $this->remix_migrated_at = null;
     $this->likes = new ArrayCollection();
+  }
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->name.' (#'.$this->id.')';
   }
 
   /**
@@ -438,9 +437,9 @@ class Program
   public function updateTimestamps()
   {
     $this->updateLastModifiedTimestamp();
-    if ($this->getUploadedAt() == null)
+    if (null == $this->getUploadedAt())
     {
-      $this->setUploadedAt(new \DateTime("now", new DateTimeZone('UTC')));
+      $this->setUploadedAt(new \DateTime('now', new DateTimeZone('UTC')));
     }
   }
 
@@ -457,7 +456,7 @@ class Program
    */
   public function isInitialVersion()
   {
-    return $this->version == self::INITIAL_VERSION;
+    return self::INITIAL_VERSION == $this->version;
   }
 
   /**
@@ -587,7 +586,7 @@ class Program
    */
   public function incrementVersion()
   {
-    $this->version += 1;
+    ++$this->version;
 
     return $this;
   }
@@ -697,7 +696,7 @@ class Program
   /**
    * Sets the user owning this Program.
    *
-   * @param User $user The user owning this Program.
+   * @param User $user the user owning this Program
    *
    * @return Program
    */
@@ -711,7 +710,7 @@ class Program
   /**
    * Returns the user owning this Program.
    *
-   * @return User The user owning this Program.
+   * @return User the user owning this Program
    */
   public function getUser()
   {
@@ -732,14 +731,6 @@ class Program
   public function setComments($comments)
   {
     $this->comments = $comments;
-  }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->name . " (#" . $this->id . ")";
   }
 
   /**
@@ -939,6 +930,7 @@ class Program
    *
    * @param
    *            boolean
+   * @param mixed $approved
    */
   public function setApproved($approved)
   {
@@ -1112,7 +1104,7 @@ class Program
   }
 
   /**
-   * Set gamejam
+   * Set gamejam.
    *
    * @param GameJam $gamejam
    *
@@ -1126,7 +1118,7 @@ class Program
   }
 
   /**
-   * Get gamejam
+   * Get gamejam.
    *
    * @return GameJam
    */
@@ -1136,9 +1128,9 @@ class Program
   }
 
   /**
-   * Set accepted
+   * Set accepted.
    *
-   * @param boolean $accepted
+   * @param bool $accepted
    *
    * @return Program
    */
@@ -1166,9 +1158,9 @@ class Program
   }
 
   /**
-   * Get accepted
+   * Get accepted.
    *
-   * @return boolean
+   * @return bool
    */
   public function isAcceptedForGameJam()
   {
@@ -1208,8 +1200,6 @@ class Program
   }
 
   /**
-   * @param ProgramDownloads $program_download
-   *
    * @return ProgramDownloads[]|Collection
    */
   public function addProgramDownloads(ProgramDownloads $program_download)
@@ -1219,9 +1209,6 @@ class Program
     return $this->program_downloads;
   }
 
-  /**
-   * @param Tag $tag
-   */
   public function addTag(Tag $tag)
   {
     if ($this->tags->contains($tag))
@@ -1232,9 +1219,6 @@ class Program
     $tag->addProgram($this);
   }
 
-  /**
-   * @param Tag $tag
-   */
   public function removeTag(Tag $tag)
   {
     if (!$this->tags->contains($tag))
@@ -1245,9 +1229,6 @@ class Program
     $tag->removeProgram($this);
   }
 
-  /**
-   * @param Extension $extension
-   */
   public function addExtension(Extension $extension)
   {
     if ($this->extensions->contains($extension))
@@ -1258,9 +1239,6 @@ class Program
     $extension->addProgram($this);
   }
 
-  /**
-   * @param Extension $extension
-   */
   public function removeExtension(Extension $extension)
   {
     if (!$this->extensions->contains($extension))
@@ -1271,9 +1249,6 @@ class Program
     $extension->removeProgram($this);
   }
 
-  /**
-   *
-   */
   public function removeAllExtensions()
   {
     foreach ($this->extensions as $extension)
@@ -1307,7 +1282,7 @@ class Program
    */
   public function getCatrobatRemixAncestorRelations()
   {
-    return ($this->catrobat_remix_ancestor_relations != null)
+    return (null != $this->catrobat_remix_ancestor_relations)
       ? $this->catrobat_remix_ancestor_relations
       : new ArrayCollection();
   }
@@ -1317,7 +1292,7 @@ class Program
    */
   public function getCatrobatRemixBackwardParentRelations()
   {
-    return ($this->catrobat_remix_backward_parent_relations != null)
+    return (null != $this->catrobat_remix_backward_parent_relations)
       ? $this->catrobat_remix_backward_parent_relations
       : new ArrayCollection();
   }
@@ -1327,7 +1302,7 @@ class Program
    */
   public function getCatrobatRemixDescendantRelations()
   {
-    return ($this->catrobat_remix_descendant_relations != null)
+    return (null != $this->catrobat_remix_descendant_relations)
       ? $this->catrobat_remix_descendant_relations
       : new ArrayCollection();
   }
@@ -1338,12 +1313,12 @@ class Program
   public function getCatrobatRemixDescendantIds()
   {
     /**
-     * @var $ra ProgramRemixRelation
+     * @var ProgramRemixRelation
      */
-
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(function ($ra) {
+    return array_unique(array_map(function ($ra)
+    {
       return $ra->getDescendantId();
     }, $relations));
   }
@@ -1353,7 +1328,7 @@ class Program
    */
   public function getScratchRemixParentRelations()
   {
-    return ($this->scratch_remix_parent_relations != null)
+    return (null != $this->scratch_remix_parent_relations)
       ? $this->scratch_remix_parent_relations
       : new ArrayCollection();
   }
@@ -1363,7 +1338,7 @@ class Program
    */
   public function getLikes()
   {
-    return ($this->likes != null) ? $this->likes : new ArrayCollection();
+    return (null != $this->likes) ? $this->likes : new ArrayCollection();
   }
 
   /**
@@ -1409,7 +1384,7 @@ class Program
   /**
    * Returns the LikeNotifications mentioning this Program.
    *
-   * @return LikeNotification|Collection The LikeNotifications mentioning this Program.
+   * @return LikeNotification|Collection the LikeNotifications mentioning this Program
    */
   public function getLikeNotificationMentions()
   {
@@ -1419,7 +1394,7 @@ class Program
   /**
    * Sets the LikeNotifications mentioning this Program.
    *
-   * @param LikeNotification|Collection $like_notification_mentions The LikeNotifications mentioning this Program.
+   * @param LikeNotification|Collection $like_notification_mentions the LikeNotifications mentioning this Program
    */
   public function setLikeNotificationMentions($like_notification_mentions): void
   {
@@ -1429,7 +1404,7 @@ class Program
   /**
    * Returns the NewProgramNotification mentioning this Program as a new Program.
    *
-   * @return NewProgramNotification|Collection The NewProgramNotifications mentioning this Program as a new Program.
+   * @return NewProgramNotification|Collection the NewProgramNotifications mentioning this Program as a new Program
    */
   public function getNewProgramNotificationMentions()
   {
@@ -1450,6 +1425,7 @@ class Program
   {
     return $this->reports;
   }
+
   public function getReportsCount()
   {
     return $this->getReports()->count();
@@ -1459,8 +1435,8 @@ class Program
    * Returns the RemixNotifications which are triggered when this Program (child) is created as a remix of
    * another one (parent).
    *
-   * @return RemixNotification[]|Collection The RemixNotifications which are triggered when this Program (child) is
-   *                                        created as a remix of another one (parent).
+   * @return RemixNotification[]|Collection the RemixNotifications which are triggered when this Program (child) is
+   *                                        created as a remix of another one (parent)
    */
   public function getRemixNotificationMentionsAsChild()
   {
@@ -1471,9 +1447,9 @@ class Program
    * Sets theRemixNotifications which are triggered when this Program (child) is created as a remix of
    * another one (parent).
    *
-   * @param RemixNotification[]|Collection $remix_notification_mentions_as_child The RemixNotifications which are
-   *                                                                            triggered when this Program (child) is
-   *                                                                            created as a remix of another one (parent).
+   * @param RemixNotification[]|Collection $remix_notification_mentions_as_child the RemixNotifications which are
+   *                                                                             triggered when this Program (child) is
+   *                                                                             created as a remix of another one (parent)
    */
   public function setRemixNotificationMentionsAsChild($remix_notification_mentions_as_child): void
   {
@@ -1483,8 +1459,8 @@ class Program
   /**
    * Returns the RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
    *
-   * @return RemixNotification[]|Collection RemixNotifications mentioning this Program as a parent Program of a new remix
-   *                                        Program (child).
+   * @return RemixNotification[]|Collection remixNotifications mentioning this Program as a parent Program of a new remix
+   *                                        Program (child)
    */
   public function getRemixNotificationMentionsAsParent()
   {
@@ -1494,9 +1470,9 @@ class Program
   /**
    * Sets the RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
    *
-   * @param RemixNotification[]|Collection $remix_notification_mentions_as_parent RemixNotifications mentioning this
+   * @param RemixNotification[]|Collection $remix_notification_mentions_as_parent remixNotifications mentioning this
    *                                                                              Program as a parent Program of a new remix
-   *                                                                              Program (child).
+   *                                                                              Program (child)
    */
   public function setRemixNotificationMentionsAsParent($remix_notification_mentions_as_parent): void
   {

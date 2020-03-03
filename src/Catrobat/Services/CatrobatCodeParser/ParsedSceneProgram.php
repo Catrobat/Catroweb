@@ -5,8 +5,7 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 use SimpleXMLElement;
 
 /**
- * Class ParsedSceneProgram
- * @package App\Catrobat\Services\CatrobatCodeParser
+ * Class ParsedSceneProgram.
  */
 class ParsedSceneProgram
 {
@@ -27,8 +26,6 @@ class ParsedSceneProgram
 
   /**
    * ParsedSceneProgram constructor.
-   *
-   * @param SimpleXMLElement $program_xml_properties
    */
   public function __construct(SimpleXMLElement $program_xml_properties)
   {
@@ -39,27 +36,6 @@ class ParsedSceneProgram
 
     $this->code_statistic = new CodeStatistic();
     $this->computeCodeStatistic();
-  }
-
-  /**
-   *
-   */
-  protected function parseScenes()
-  {
-    foreach ($this->program_xml_properties->scenes->scene as $scene_xml_properties)
-      $this->scenes[] = new ParsedScene($scene_xml_properties);
-  }
-
-  /**
-   *
-   */
-  protected function computeCodeStatistic()
-  {
-    foreach ($this->scenes as $scene)
-    {
-      $this->code_statistic->update($scene);
-    }
-    $this->code_statistic->computeVariableStatistic($this->program_xml_properties);
   }
 
   /**
@@ -84,5 +60,22 @@ class ParsedSceneProgram
   public function getCodeStatistic()
   {
     return $this->code_statistic;
+  }
+
+  protected function parseScenes()
+  {
+    foreach ($this->program_xml_properties->scenes->scene as $scene_xml_properties)
+    {
+      $this->scenes[] = new ParsedScene($scene_xml_properties);
+    }
+  }
+
+  protected function computeCodeStatistic()
+  {
+    foreach ($this->scenes as $scene)
+    {
+      $this->code_statistic->update($scene);
+    }
+    $this->code_statistic->computeVariableStatistic($this->program_xml_properties);
   }
 }

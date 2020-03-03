@@ -3,8 +3,7 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class FormulaStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class FormulaStatement.
  */
 class FormulaStatement extends Statement
 {
@@ -36,7 +35,7 @@ class FormulaStatement extends Statement
   public function __construct($statementFactory, $xmlTree, $spaces, $category)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
-      "", "");
+      '', '');
     $this->category = $category;
   }
 
@@ -45,9 +44,7 @@ class FormulaStatement extends Statement
    */
   public function execute()
   {
-    $code = $this->executeChildren();
-
-    return $code;
+    return $this->executeChildren();
   }
 
   /**
@@ -60,42 +57,44 @@ class FormulaStatement extends Statement
 
     $this->setVariables();
 
-
-    if ($this->type != null)
+    if (null != $this->type)
     {
       $code .= $this->type->execute();
     }
-    if ($this->type != null && ($this->leftChild != null || $this->rightChild != null))
+    if (null != $this->type && (null != $this->leftChild || null != $this->rightChild))
     {
       $code .= '(';
       $endCode = ')';
     }
 
-    if ($this->leftChild != null)
+    if (null != $this->leftChild)
     {
       $code .= $this->leftChild->execute();
     }
 
-    if ($this->leftChild != null && $this->rightChild != null)
+    if (null != $this->leftChild && null != $this->rightChild)
     {
       $code .= ', ';
     }
 
-    if ($this->rightChild != null)
+    if (null != $this->rightChild)
     {
       $code .= $this->rightChild->execute();
     }
 
-    return $code . $endCode;
+    return $code.$endCode;
   }
 
-
   /**
-   *
+   * @return mixed
    */
+  public function getCategory()
+  {
+    return $this->category;
+  }
+
   protected function setVariables()
   {
-
     foreach ($this->statements as $value)
     {
       if ($value instanceof LeftChildStatement)
@@ -118,13 +117,4 @@ class FormulaStatement extends Statement
       }
     }
   }
-
-  /**
-   * @return mixed
-   */
-  public function getCategory()
-  {
-    return $this->category;
-  }
-
 }

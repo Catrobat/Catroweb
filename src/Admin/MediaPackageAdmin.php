@@ -3,19 +3,16 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-
 /**
- * Class MediaPackageAdmin
- * @package App\Admin
+ * Class MediaPackageAdmin.
  */
 class MediaPackageAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -26,7 +23,6 @@ class MediaPackageAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'media_package';
 
-
   /**
    * @param FormMapper $formMapper
    *
@@ -36,9 +32,9 @@ class MediaPackageAdmin extends AbstractAdmin
   {
     $formMapper
       ->add('name', TextType::class, ['label' => 'Name'])
-      ->add('name_url', TextType::class, ['label' => 'Url']);
+      ->add('name_url', TextType::class, ['label' => 'Url'])
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
@@ -49,7 +45,6 @@ class MediaPackageAdmin extends AbstractAdmin
   {
   }
 
-
   /**
    * @param ListMapper $listMapper
    *
@@ -59,12 +54,13 @@ class MediaPackageAdmin extends AbstractAdmin
   {
     $listMapper
       ->addIdentifier('name')
-      ->add('name_url', null, ["label" => "Url"])
+      ->add('name_url', null, ['label' => 'Url'])
       ->add('_action', 'actions', [
         'actions' => [
-          'edit'   => [],
+          'edit' => [],
           'delete' => [],
         ],
-      ]);
+      ])
+    ;
   }
 }

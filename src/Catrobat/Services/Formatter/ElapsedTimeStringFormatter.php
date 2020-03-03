@@ -5,10 +5,8 @@ namespace App\Catrobat\Services\Formatter;
 use App\Catrobat\Services\Time;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 /**
- * Class ElapsedTimeStringFormatter
- * @package App\Catrobat\Services\Formatter
+ * Class ElapsedTimeStringFormatter.
  */
 class ElapsedTimeStringFormatter
 {
@@ -24,9 +22,6 @@ class ElapsedTimeStringFormatter
 
   /**
    * ElapsedTimeStringFormatter constructor.
-   *
-   * @param TranslatorInterface $translator
-   * @param Time                $time
    */
   public function __construct(TranslatorInterface $translator, Time $time)
   {
@@ -49,19 +44,19 @@ class ElapsedTimeStringFormatter
 
       return $this->translator->trans('time.minutes.ago', ['%count%' => $minutes], 'catroweb');
     }
-    elseif ($elapsed <= 82800)
+    if ($elapsed <= 82800)
     {
       $hours = round($elapsed / 3600);
 
       return $this->translator->trans('time.hours.ago', ['%count%' => $hours], 'catroweb');
     }
-    elseif ($elapsed <= 2505600)
+    if ($elapsed <= 2505600)
     {
       $days = round($elapsed / 86400);
 
       return $this->translator->trans('time.days.ago', ['%count%' => $days], 'catroweb');
     }
-    elseif ($elapsed <= 28927800)
+    if ($elapsed <= 28927800)
     {
       $months = round($elapsed / 2629800);
 

@@ -3,13 +3,12 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 /**
- * Class SetLookStatement
- * @package App\Catrobat\CatrobatCode\Statements
+ * Class SetLookStatement.
  */
 class SetLookStatement extends Statement
 {
-  const BEGIN_STRING = "switch to look ";
-  const END_STRING = "<br/>";
+  const BEGIN_STRING = 'switch to look ';
+  const END_STRING = '<br/>';
 
   /**
    * SetLookStatement constructor.
@@ -30,7 +29,7 @@ class SetLookStatement extends Statement
    */
   public function getBrickText()
   {
-    return "Switch to look";
+    return 'Switch to look';
   }
 
   /**
@@ -38,7 +37,6 @@ class SetLookStatement extends Statement
    */
   public function getBrickColor()
   {
-    return "1h_brick_green.png";
+    return '1h_brick_green.png';
   }
-
 }

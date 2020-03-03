@@ -1,16 +1,15 @@
 <?php
 
-
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\Commands\Helpers\ResetController;
 use App\Entity\Program;
+use App\Entity\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\UserManager;
 
 class CreateFeatureProgramCommand extends Command
 {
@@ -31,10 +30,6 @@ class CreateFeatureProgramCommand extends Command
 
   /**
    * FeaturedProgramCommand constructor.
-   *
-   * @param UserManager                     $user_manager
-   * @param RemixManipulationProgramManager $program_manager
-   * @param ResetController                 $reset_controller
    */
   public function __construct(UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager,
@@ -46,34 +41,29 @@ class CreateFeatureProgramCommand extends Command
     $this->reset_controller = $reset_controller;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:feature')
       ->setDescription('feature a project')
-      ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets featured');
+      ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets featured')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
+   * @throws \Exception
    *
    * @return int|void|null
-   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     /**
-     * @var $program Program
+     * @var Program
      */
-
     $program_name = $input->getArgument('program_name');
 
     $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
 
-    if ($program == null || $this->reset_controller == null)
+    if (null == $program || null == $this->reset_controller)
     {
       return;
     }
@@ -81,10 +71,11 @@ class CreateFeatureProgramCommand extends Command
     try
     {
       $this->reset_controller->featureProgram($program);
-    } catch (\Exception $e)
+    }
+    catch (\Exception $e)
     {
       return;
     }
-    $output->writeln('Featuring ' . $program->getName());
+    $output->writeln('Featuring '.$program->getName());
   }
 }

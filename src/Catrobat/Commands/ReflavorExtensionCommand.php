@@ -13,11 +13,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class ReflavorExtensionCommand
- * @package App\Catrobat\Commands
+ * Class ReflavorExtensionCommand.
  */
 class ReflavorExtensionCommand extends Command
 {
+  /**
+   * @var AppRequest
+   */
+  protected $app_request;
   /**
    * @var EntityManagerInterface
    */
@@ -28,16 +31,9 @@ class ReflavorExtensionCommand extends Command
   private $program_repository;
 
   /**
-   * @var AppRequest
-   */
-  protected $app_request;
-
-  /**
    * ReflavorExtensionCommand constructor.
    *
-   * @param EntityManagerInterface $em
-   * @param               $program_repo
-   * @param AppRequest    $app_request
+   * @param $program_repo
    */
   public function __construct(EntityManagerInterface $em, ProgramRepository $program_repo, AppRequest $app_request)
   {
@@ -47,29 +43,25 @@ class ReflavorExtensionCommand extends Command
     $this->app_request = $app_request;
   }
 
-  /**
-   *
-   */
   protected function configure()
   {
     $this->setName('catrobat:reflavor:extension')
       ->setDescription('Reflavor programs with the given extension')
       ->addArgument('extension', InputArgument::REQUIRED, 'Extension')
-      ->addArgument('flavor', InputArgument::REQUIRED, 'Flavor');
+      ->addArgument('flavor', InputArgument::REQUIRED, 'Flavor')
+    ;
   }
 
   /**
-   * @param InputInterface  $input
-   * @param OutputInterface $output
-   *
-   * @return int|void|null
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
+   *
+   * @return int|void|null
    */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     /**
-     * @var $program Program
+     * @var Program
      */
     $extension = $input->getArgument('extension');
     $flavor = $input->getArgument('flavor');
@@ -83,7 +75,7 @@ class ReflavorExtensionCommand extends Command
 
     $progress_indicator = new ConsoleProgressIndicator($output);
 
-    for ($index = 1; $count !== 0; $index += 1)
+    for ($index = 1; 0 !== $count; ++$index)
     {
       foreach ($programs as $program)
       {
