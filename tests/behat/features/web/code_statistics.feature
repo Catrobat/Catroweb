@@ -1,10 +1,11 @@
-@homepage
-Feature: As a visitor I want to see a project page
+@web @project_page
+Feature: As a visitor I want to see code statistics on the project page
 
   Scenario: On a project page there should be correct stats for all code bricks
     Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "COMPOUND2"
     And the "#brick-statistic-block-event .total-brick-statistic" element should not contain "0"
     And the "#brick-statistic-block-event .different-brick-statistic" element should not contain "0"
@@ -12,7 +13,7 @@ Feature: As a visitor I want to see a project page
     And the "#brick-statistic-block-control .different-brick-statistic" element should not contain "0"
     And the "#brick-statistic-block-motion .total-brick-statistic" element should not contain "0"
     And the "#brick-statistic-block-motion .different-brick-statistic" element should not contain "0"
-    And the "#brick-statistic-block-event .total-brick-statistic" element should contain "1"
+    But the "#brick-statistic-block-event .total-brick-statistic" element should contain "1"
     And the "#brick-statistic-block-event .different-brick-statistic" element should contain "1"
     And the "#brick-statistic-block-control .total-brick-statistic" element should contain "7"
     And the "#brick-statistic-block-control .different-brick-statistic" element should contain "6"
@@ -33,28 +34,30 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "COMPOUND2"
     And the "#scene-statistics" element should contain "1"
-    And the "#scene-statistics" element should not contain "0"
+    But the "#scene-statistics" element should not contain "0"
     And the "#script-statistics" element should contain "1"
-    And the "#script-statistics" element should not contain "0"
+    But the "#script-statistics" element should not contain "0"
     And the "#brick-statistics" element should contain "14"
-    And the "#brick-statistics" element should not contain "0"
+    But the "#brick-statistics" element should not contain "0"
     And the "#object-statistics" element should contain "1"
-    And the "#object-statistics" element should not contain "0"
+    But the "#object-statistics" element should not contain "0"
     And the "#look-statistics" element should contain "0"
-    And the "#look-statistics" element should not contain "1"
+    But the "#look-statistics" element should not contain "1"
     And the "#sound-statistics" element should contain "0"
-    And the "#sound-statistics" element should not contain "3"
+    But the "#sound-statistics" element should not contain "3"
     And the "#global-variable-statistics" element should contain "0"
-    And the "#global-variable-statistics" element should not contain "3"
+    But the "#global-variable-statistics" element should not contain "3"
     And the "#local-variable-statistics" element should contain "0"
-    And the "#local-variable-statistics" element should not contain "7"
+    But the "#local-variable-statistics" element should not contain "7"
 
   Scenario: On a project page there should be correct stats
     Given I have a project zip "CodeStatistics/code_statistics_mixed_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "CODESTATS"
     And the "#scene-statistics" element should contain "2"
     And the "#script-statistics" element should contain "12"
@@ -85,6 +88,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_global_vs_local_variables.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "LOCALVSGLOBAL"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "2"
@@ -115,6 +119,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_event_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ALLEVENTS"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "8"
@@ -145,6 +150,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_control_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ALLCONTROLS"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -175,6 +181,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_motion_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ALLMOTION"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -205,6 +212,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_sound_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ALLSOUNDS"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -235,6 +243,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_look_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ALLLOOKS"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -265,6 +274,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_pen_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ALLPEN"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -295,6 +305,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_data_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ALLDATA"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -326,6 +337,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_arduino_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "Arduino"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -356,6 +368,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_lego_ev3_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "LEGO EV3"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -386,6 +399,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_lego_nxt_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "LEGONXT"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -416,6 +430,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_embroidery_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "Embroidery"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -442,10 +457,42 @@ Feature: As a visitor I want to see a project page
     And the "#brick-statistic-block-special .total-brick-statistic" element should contain "1"
     And the "#brick-statistic-block-special .different-brick-statistic" element should contain "1"
 
+  Scenario: On a project page there should be correct stats about all extended embroidery bricks
+    Given I have a project zip "CodeStatistics/code_statistics_embroidery_blocks_extended.catrobat"
+    When I upload this project with id "1"
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then I should see "Embroidery"
+    And the "#scene-statistics" element should contain "1"
+    And the "#script-statistics" element should contain "1"
+    And the "#brick-statistics" element should contain "6"
+    And the "#object-statistics" element should contain "1"
+    And the "#look-statistics" element should contain "0"
+    And the "#sound-statistics" element should contain "0"
+    And the "#global-variable-statistics" element should contain "0"
+    And the "#local-variable-statistics" element should contain "0"
+    And the "#brick-statistic-block-event .total-brick-statistic" element should contain "1"
+    And the "#brick-statistic-block-event .different-brick-statistic" element should contain "1"
+    And the "#brick-statistic-block-control .total-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-control .different-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-motion .total-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-motion .different-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-sound .total-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-sound .different-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-looks .total-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-looks .different-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-pen .total-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-pen .different-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-data .total-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-data .different-brick-statistic" element should contain "0"
+    And the "#brick-statistic-block-special .total-brick-statistic" element should contain "5"
+    And the "#brick-statistic-block-special .different-brick-statistic" element should contain "5"
+
   Scenario: On a project page there should be correct stats about all ar drone bricks
     Given I have a project zip "CodeStatistics/code_statistics_ar_drone_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "ARDRONE"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -476,6 +523,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_jumping_sumo_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "SUMO"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -506,6 +554,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_raspberrypi_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "RASBPERRYPI"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -536,6 +585,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_nfc_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "nfc"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
@@ -566,6 +616,7 @@ Feature: As a visitor I want to see a project page
     Given I have a project zip "CodeStatistics/code_statistics_phiro_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "phiro"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"

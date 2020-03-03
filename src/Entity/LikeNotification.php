@@ -10,15 +10,33 @@ use Doctrine\ORM\Mapping as ORM;
 class LikeNotification extends CatroNotification
 {
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User")
-   * @ORM\JoinColumn(name="like_from", referencedColumnName="id", nullable=true)
+   * @var User The User which "like action" to another user triggered this LikeNotification. If this user gets deleted,
+   *           this LikeNotification gets deleted as well.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\User",
+   *   inversedBy="like_notification_mentions"
+   * )
+   * @ORM\JoinColumn(
+   *   name="like_from",
+   *   referencedColumnName="id",
+   *   nullable=true
+   *   )
    */
   private $like_from;
 
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
-   * @var Program
+   * @var Program The Program about which this LikeNotification is notifying, belongs to.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\Program",
+   *   inversedBy="like_notification_mentions"
+   * )
+   * @ORM\JoinColumn(
+   *   name="program_id",
+   *   referencedColumnName="id",
+   *   nullable=true
+   * )
    */
   private $program;
 
@@ -28,11 +46,11 @@ class LikeNotification extends CatroNotification
   private $twig_template = "/Notifications/NotificationTypes/like_notification.html.twig";
 
   /**
-   * CommentNotification constructor.
+   * LikeNotification constructor.
    *
-   * @param User $user
-   * @param      $like_from
-   * @param      $program
+   * @param User $user The User to which this LikeNotification will be shown.
+   * @param User $like_from The User which "like action" to another user triggered this LikeNotification.
+   * @param Program $program The Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
    */
   public function __construct(User $user, $like_from, $program)
   {
@@ -42,7 +60,9 @@ class LikeNotification extends CatroNotification
   }
 
   /**
-   * @return mixed
+   * Returns the User which "like action" to another user triggered this LikeNotification.
+   *
+   * @return User The User which "like action" to another user triggered this LikeNotification.
    */
   public function getLikeFrom()
   {
@@ -50,7 +70,9 @@ class LikeNotification extends CatroNotification
   }
 
   /**
-   * @param $like_from
+   * Sets the User which "like action" to another user triggered this LikeNotification.
+   *
+   * @param User $like_from The User which "like action" to another user triggered this LikeNotification.
    */
   public function setLikeFrom($like_from)
   {
@@ -68,7 +90,9 @@ class LikeNotification extends CatroNotification
   }
 
   /**
-   * @return Program
+   * Returns the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
+   *
+   * @return Program The Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
    */
   public function getProgram()
   {
@@ -76,7 +100,9 @@ class LikeNotification extends CatroNotification
   }
 
   /**
-   * @param Program $program
+   * Sets the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
+   *
+   * @param Program $program The Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
    */
   public function setProgram($program)
   {

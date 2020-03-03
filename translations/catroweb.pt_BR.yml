@@ -10,20 +10,20 @@ aboutPocketCode: Sobre o Pocket Code
 aboutCatrobat: Sobre o Catrobat
 tutorials: Tutoriais
 googlePlay: Google Play
-iosAppStore: IOS App store
+iosAppStore: Loja de Aplicativos IOS
 passwordsNoMatch: As senhas não coincidem.
 error: Erro
 cancel: Cancelar
 report: Denunciar
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+deleteIt: Sim, delete isso!
+reportIt: Sim, denunciar!
+areYouSure: Você tem certeza?
+noWayOfReturn: Não há maneira de restaurar suas ações!
+download: Baixe o projeto
 description: Descrição
 noDescription: Sem descrição disponível.
-credits: Credits
-noCredits: No credits available.
+credits: Créditos
+noCredits: Créditos não disponíveis.
 country: País
 loginText: login
 privacyPolicy: Política de Privacidade
@@ -33,40 +33,40 @@ pleaseTryAgain: 'Por favor, tente de novo!'
 oldVersionError: 'Por favor, atualize para a versão mais recente do Pocket Code!'
 more: 'mais'
 less: 'menos'
-show-more: 'Show more'
-show-less: 'Show less'
+show-more: 'Mostre mais'
+show-less: 'Mostre menos'
 ok: OK
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Para baixar o projeto de exemplo clique %link_start% aqui %link_end%.'
 registrationError: 'Este nome de usuário ou endereço de e-mail já está em uso.'
 notifications: 'Notificações'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
+allNotifications: 'Todas as notificações'
+FollowersNotifications: 'Seguidores'
+LikeNotifications: 'Curtidas'
+likesNotificationsTitle: 'Notificações de Curtidas'
+followersNotificationsTitle: 'Notificações de seguidores'
+commentsNotificationsTitle: 'Notificações de comentários'
 CommentNotifications: 'Comentários'
-oldnotification: 'Old Notifications'
+oldnotification: 'Notificações antigas'
 wellDone: "Muito bem!"
 done: "Pronto!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "Parece que você não tem nenhuma notificação."
 notificationsClearedMessage: "Todas as notificações foram marcadas como lidas."
-deleteNotificationConfirmation: "Are you sure?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+deleteNotificationConfirmation: "Você tem certeza?"
+notificationDeleteMessage: "Você tem certeza que deseja excluir esta Notificação?"
+notificationDeleteAllMessage: "Tem certeza que deseja excluir todas as notificações?"
+confirmMessage: "Sim, delete isso"
 cancelMessage: "Cancelar"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
+notificationsAllMessagesDeleted: "Todas as notificações foram excluídas."
+notificationDeletedMessage: "Notificação foi excluída com sucesso."
 clearAllNotificationsButtonTitle: "Marcar todos como lidos"
-deleteAllNotificationsButtonTitle: "Delete all"
+deleteAllNotificationsButtonTitle: "Apagar tudo"
 notificationsClearError: "Não foi possível marcar as notificações como lidas!"
-notificationsDeleteError: "Unable to delete notifications!"
+notificationsDeleteError: "Não foi possível excluir as notificações!"
 pleaseWait: "Por favor, aguarde..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
+      title: 'Quais projetos são recomendados aqui?'
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
 programs:
   welcome:
@@ -540,7 +540,7 @@ help:
     description6: |
       Este tutorial te mostra como criar um fundo que se move verticalmente, deslizando os gráficos do fundo. Outra coisa que te ensinaremos é a fazer a personagem saltar à frente quando tocada.
       Para tornar o jogo um pouco mais difícil, te mostraremos como diminuir a velocidade da personagem com o tempo.
-    download: "Download the project"
+    download: "Baixe o projeto"
 oauth:
   username_header: Obrigado por registrar-se no Pocket Code!
   username_chooser: 'Por favor, escolha um nome de usuário:'

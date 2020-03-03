@@ -42,10 +42,10 @@ class RemixUpdater
   /**
    * RemixUpdater constructor.
    *
-   * @param RemixManager $remix_manager
+   * @param RemixManager    $remix_manager
    * @param AsyncHttpClient $async_http_client
    * @param RouterInterface $router
-   * @param $kernel_root_dir
+   * @param                 $kernel_root_dir
    */
   public function __construct(RemixManager $remix_manager, AsyncHttpClient $async_http_client, RouterInterface $router,
                               $kernel_root_dir)
@@ -77,7 +77,11 @@ class RemixUpdater
    */
   public function update(ExtractedCatrobatFile $file, Program $program)
   {
-    $remixes_data = $file->getRemixesData($program->getId(), $program->isInitialVersion());
+    $remixes_data = $file->getRemixesData(
+      $program->getId(),
+      $program->isInitialVersion(),
+      $this->remix_manager->getProgramRepository()
+    );
     $scratch_remixes_data = array_filter($remixes_data, function ($remix_data) {
       /**
        * @var $remix_data RemixData

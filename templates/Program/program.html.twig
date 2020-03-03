@@ -45,51 +45,123 @@
 
       {% include 'Program/projectThumbnail.html.twig' %}
 
-      <div id="program-like-container">
-        <div>
-          <div id="program-like-buttons-container">
-            <a id="program-like-thumbs-up" class="program-like-button" href="#"
-               data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
-               data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
-              <div class="like-round-icon-container mr-3"><i
-                    class="like-round-icon fas fa-thumbs-up"></i></div>
-              <span
-                  class="singular">{{ "programs.likeThumbsUpDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span
-                  class="plural">{{ "programs.likeThumbsUpDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
-            </a>
-            <a id="program-like-smile" class="program-like-button" href="#"
-               data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_SMILE') }}"
-               data-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
-              <i class="like-icon mr-3 fas fa-grin-squint"></i>
-              <span
-                  class="singular">{{ "programs.likeSmileDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span
-                  class="plural">{{ "programs.likeSmileDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
-            </a>
-            <a id="program-like-love" class="program-like-button" href="#"
-               data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_LOVE') }}"
-               data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
-              <div class="like-round-icon-container mr-3"><i
-                    class="like-round-icon-heart fas fa-heart"></i></div>
-              <span
-                  class="singular">{{ "programs.likeLoveDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span
-                  class="plural">{{ "programs.likeLoveDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
-            </a>
-            <a id="program-like-wow" class="program-like-button" href="#"
-               data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_WOW') }}"
-               data-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
-              <i class="like-icon mr-3 fas fa-surprise"></i>
-              <span
-                  class="singular">{{ "programs.likeWowDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span
-                  class="plural">{{ "programs.likeWowDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
-            </a>
-            <span id="program-like-counter" class="program-like-counter"></span>
+      <div id="project-like">
+        {# If you change #project-like-buttons, you need to change it in Program.js in sendProjectLike too #}
+        {% if program_details.totalLikeCount is same as(0) %}
+          <div id="project-like-buttons">
+            <div class="btn btn-primary btn-round">
+              <i class="fas fa-thumbs-up"></i>
+            </div>
+          </div>
+          <span id="project-like-counter" class="d-none">0</span>
+        {% else %}
+          <div id="project-like-buttons">
+            {% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeLikeTypes %}
+              <div class="btn btn-primary btn-round">
+                <i class="fas fa-thumbs-up"></i>
+              </div>
+            {% endif %}
+            {% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeLikeTypes %}
+              <div class="btn icon-only">
+                <i class="fas fa-grin-squint"></i>
+              </div>
+            {% endif %}
+            {% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeLikeTypes %}
+              <div class="btn btn-primary btn-round">
+                <i class="fas fa-heart"></i>
+              </div>
+            {% endif %}
+            {% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeLikeTypes %}
+              <div class="btn icon-only">
+                <i class="fas fa-surprise"></i>
+              </div>
+            {% endif %}
+          </div>
+          <span id="project-like-counter">{{ program_details.totalLikeCount | humanFriendlyNumber }}</span>
+        {% endif %}
+        <div id="project-like-detail">
+          {# Thumbs-Up Button #}
+          <div
+                  class="btn btn-primary btn-round{% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeUserLikeTypes %} active{% endif %}"
+                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
+                  data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
+            <i class="fas fa-thumbs-up"></i>
+          </div>
+          {# Smile Button #}
+          <div
+                  class="btn icon-only{% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeUserLikeTypes %} active{% endif %}"
+                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_SMILE') }}"
+                  data-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
+            <i class="fas fa-grin-squint"></i>
+          </div>
+          {# Love Button #}
+          <div
+                  class="btn btn-primary btn-round{% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeUserLikeTypes %} active{% endif %}"
+                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_LOVE') }}"
+                  data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
+            <i class="fas fa-heart"></i>
+          </div>
+          {# Wow Button #}
+          <div
+                  class="btn icon-only{% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeUserLikeTypes %} active{% endif %}"
+                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_WOW') }}"
+                  data-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
+            <i class="fas fa-surprise"></i>
           </div>
         </div>
-        <div id="program-like-detail-container">&nbsp;</div>
+      </div>
+
+      <div class="modal fade" id="project-like-modal" tabindex="-1" role="dialog"
+           aria-labelledby="project-like-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"
+                  id="project-like-modal-label">{{ "programs.likes.likersTitle"|trans({}, 'catroweb') }}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all-tab-content" role="tab"
+                     aria-controls="all-tab-content"
+                     aria-selected="true">{{ 'programs.likes.all' | trans({}, 'catroweb') }}<span></span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="thumbs-up-tab" data-toggle="tab" href="#thumbs-up-tab-content" role="tab"
+                     aria-controls="thumbs-up-tab-content" aria-selected="false"><i
+                            class="fas fa-thumbs-up"></i><span></span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="smile-tab" data-toggle="tab" href="#smile-tab-content" role="tab"
+                     aria-controls="smile-tab-content" aria-selected="false"><i
+                            class="fas fa-grin-squint"></i><span></span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="love-tab" data-toggle="tab" href="#love-tab-content" role="tab"
+                     aria-controls="love-tab-content" aria-selected="false"><i
+                            class="fas fa-heart"></i><span></span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="wow-tab" data-toggle="tab" href="#wow-tab-content" role="tab"
+                     aria-controls="wow-tab-content" aria-selected="false"><i
+                            class="fas fa-surprise"></i><span></span></a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="all-tab-content" role="tabpanel"
+                     aria-labelledby="all-tab"></div>
+                <div class="tab-pane fade" id="thumbs-up-tab-content" role="tabpanel"
+                     aria-labelledby="thumbs-up-tab"></div>
+                <div class="tab-pane fade" id="smile-tab-content" role="tabpanel" aria-labelledby="smile-tab"></div>
+                <div class="tab-pane fade" id="love-tab-content" role="tabpanel" aria-labelledby="love-tab"></div>
+                <div class="tab-pane fade" id="wow-tab-content" role="tabpanel" aria-labelledby="wow-tab"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -317,10 +389,15 @@
   </div>
 
   {#
-     # CODEVIEW
+     # CODEVIEW & CatBlocks
    #}
-  {% if program_details.languageVersion >= 0.97 %}
-    {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:viewCodeAction', {'id' : program.id})) }}
+  {% if app.environment == "dev" %}
+    <h1>Codeview</h1>
+    <div id='catblocks-code-container'></div>
+  {% else %}
+    {% if program_details.languageVersion >= 0.97 %}
+      {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:viewCodeAction', {'id' : program.id})) }}
+    {% endif %}
   {% endif %}
 
   <div id="program-bottom">
@@ -461,6 +538,52 @@
     )
   </script>
 
+  <script src=" {{ asset('compiled/js/CatBlocks.js') }}"></script>
+    <script>
+      const progPath = '{{ app.request.getSchemeAndHttpHost() ~ '/resources/extract/' ~ program.getExtractedDirectoryHash() ~ '/'}}';
+      const progLang = 'en_GB';
+
+      /**
+       * initiate share
+       *
+       * define element:
+       *  - container to inject catblocks hidden workflow
+       *  - renderSize to use for blocks
+       *  - language to use for rendering texts
+       *  - media for catblocks
+       */
+      share.init({
+        'container': 'catblocks-code-container',
+        'renderSize': 0.75,
+        'language': progLang,
+        'media': '{{ app.request.getSchemeAndHttpHost() ~ '/catblocks/' }}',
+      });
+
+      /**
+       * start rendering program into div
+       *
+       */
+      window.onload = function() {
+        share.parser.parseFile(`${progPath}code.xml`)
+        .then(xmlDoc => {
+          // render pogram into div element
+          const div = document.getElementById('catblocks-code-container');
+          share.injectAllScenes(div, xmlDoc, {
+            object: {
+              programRoot: `${progPath}`
+            }
+          });
+        })
+        .catch(err => {
+          console.error(`Failed to parse catroid file.`);
+          console.error(err);
+        });
+
+      };
+    </script>
+
+
+
   <script>
 
     $(function () {
@@ -499,14 +622,25 @@
 
     })
 
+    const project_id = '{{ program.id }}'
+
     let program = new Program(
-      '{{ path('ci_status', { 'id' : program.id }) }}',
-      '{{ path('ci_build', { 'id' : program.id }) }}',
-      '{{ 'apk.preparing'|trans({}, "catroweb") }}',
-      '{{ 'apk.text'|trans({}, "catroweb") }}',
-      '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}',
-      '{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
-      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}'
+            project_id,
+            '{{ csrf_token('project') }}',
+            {% if app.user %} 'user', {% else %} 'guest', {% endif %}
+            {% if my_program %} true, {% else %} false, {% endif %}
+            '{{ path('ci_status', { 'id' : program.id }) }}',
+            '{{ path('ci_build', { 'id' : program.id }) }}',
+            '{{ path('project_like', { 'id' : program.id }) }}',
+            '{{ path('api_project_likes', { 'id' : program.id }) }}',
+            '{{ 'apk.preparing'|trans({}, "catroweb") }}',
+            '{{ 'apk.text'|trans({}, "catroweb") }}',
+            '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}',
+            '{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
+            '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}',
+            '{{ constant('App\\Entity\\ProgramLike::ACTION_ADD') }}',
+            '{{ constant('App\\Entity\\ProgramLike::ACTION_REMOVE') }}',
+            '{{ path('profile', {'id': 'USERID'}) }}',
     )
     program.getApkStatus()
     program.createLinks()
@@ -533,17 +667,15 @@
       return false
     })
 
-    var undefined
-    var programID = '{{ program.id }}';
-    var recs = new ProjectLoader('#recommendations', '{{ path('api_recsys_programs') }}', programID)
+    var recs = new ProjectLoader('#recommendations', '{{ path('api_recsys_programs') }}', project_id)
     recs.initRecsys()
 
     var recommendedByPageId = {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
-    var specificRecommender = new ProjectLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_projects', { 'id': program.id }) }}', programID, recommendedByPageId)
+    var specificRecommender = new ProjectLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_projects', { 'id': program.id }) }}', project_id, recommendedByPageId)
     specificRecommender.init()
 
     let more_from_this_user = new ProjectLoader('#more-from-this-user-recommendations', '{{ path('api_user_programs') }}')
-    more_from_this_user.initMoreFromThisUser('{{ program.user.id }}', programID)
+    more_from_this_user.initMoreFromThisUser('{{ program.user.id }}', project_id)
 
     counter = 10
     var cachedRemixData = null
@@ -558,52 +690,13 @@
       programUnknownUser                 : "{{ "remixGraph.programUnknownUser"|trans({}, "catroweb") }}"
     }
 
-    var PROGRAM_LIKE_TYPE_NONE = {{ constant('App\\Entity\\ProgramLike::TYPE_NONE') }};
-
-    function convertToHumanFriendlyNumberText (number)
-    {
-      if (number >= 10000)
-      {
-        return (number / 1000.0).toFixed(0) + 'k'
-      }
-      else if (number >= 1000)
-      {
-        return (number / 1000.0).toFixed(1).replace('.0', '') + 'k'
-      }
-      else
-      {
-        return number
-      }
-    }
-
-    function updateLikeCount (likeType, likeTypeCount, totalLikeCount)
-    {
-      var programLikeDetailContainer = $('#program-like-detail-container')
-      $('a.program-like-button').addClass('not-selected')
-      $('#program-like-buttons-container > .program-like-counter').text(convertToHumanFriendlyNumberText(totalLikeCount))
-      if (likeType === PROGRAM_LIKE_TYPE_NONE)
-      {
-        programLikeDetailContainer.html('&nbsp;')
-        return
-      }
-      var likeTypeButton = $('a.program-like-button[data-like-type=' + likeType + ']')
-      likeTypeButton.removeClass('not-selected')
-      var singularOrPlural = (likeTypeCount === 1)
-      var translatedDetailSpanTextTemplate = likeTypeButton.children(singularOrPlural ? '.singular' : '.plural')[0]
-      var replaceCount = '<span class="program-like-counter">' + convertToHumanFriendlyNumberText(likeTypeCount) + '<span>'
-      var translatedDetailText = translatedDetailSpanTextTemplate.innerHTML.replace((singularOrPlural ? '1' : '2'), replaceCount)
-      programLikeDetailContainer.html(translatedDetailText)
-    }
-
     $(document).ready(function () {
       var loadingAnimation = new LoadingAnimation('#177f8d', "{{ "pleaseWait"|trans({}, "catroweb") }}")
       var recommendedByRemixGraphPageId = {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }};
       var networkDirector = new NetworkDirector()
       var remixGraph = RemixGraph.getInstance()
-      remixGraph.init(programID, recommendedByRemixGraphPageId, 'remix-graph-modal', 'remix-graph-layer', 'close-button',
+      remixGraph.init(project_id, recommendedByRemixGraphPageId, 'remix-graph-modal', 'remix-graph-layer', 'close-button',
         "{{ program_details_url_template }}", "{{ path('click_stats') }}", remixGraphTranslations)
-
-      updateLikeCount({{ program_details.likeType }}, {{ program_details.likeTypeCount }}, {{ program_details.totalLikeCount }})
 
       $('#remix-graph-modal-link').animatedModal({
         modalTarget: 'remix-graph-modal',
@@ -616,7 +709,7 @@
           {
             document.addEventListener('gesturestart', blockEventListener)
             document.ontouchmove = blockEventListener
-            var networkBuilder = new NetworkBuilder(programID, 'remix-graph-layer', remixGraphTranslations, cachedRemixData)
+            var networkBuilder = new NetworkBuilder(project_id, 'remix-graph-layer', remixGraphTranslations, cachedRemixData)
             var networkDescription = networkDirector.construct(networkBuilder)
             remixGraph.render(loadingAnimation, networkDescription)
           }
@@ -629,7 +722,7 @@
                 cachedRemixData = remixData
                 document.addEventListener('gesturestart', blockEventListener)
                 document.ontouchmove = blockEventListener
-                var networkBuilder = new NetworkBuilder(programID, 'remix-graph-layer', remixGraphTranslations, remixData)
+                var networkBuilder = new NetworkBuilder(project_id, 'remix-graph-layer', remixGraphTranslations, remixData)
                 var networkDescription = networkDirector.construct(networkBuilder)
                 remixGraph.render(loadingAnimation, networkDescription)
               },
@@ -660,46 +753,6 @@
         $('#remix-graph-modal-link').click()
       })
 
-      $(document).on('click', 'a.program-like-button', function (event) {
-        event.preventDefault()
-        var type = $(this).attr('data-like-type')
-        var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type
-        var username = "{{ user_name }}"
-        if (username === '')
-        {
-          window.location.href = url
-          return false
-        }
-
-        $('#program-like-detail-container').text("{{ "pleaseWait"|trans({}, "catroweb") }}")
-        $('a.program-like-button').addClass('not-selected')
-        $(this).removeClass('not-selected')
-
-        $.ajax({
-          url    : url,
-          type   : 'get',
-          data   : {type: type},
-          success: function (data) {
-            if (data.statusCode !== {{ constant('App\\Catrobat\\StatusCode::OK') }})
-            {
-              if (data.statusCode === {{ constant('App\\Catrobat\\StatusCode::LOGIN_ERROR') }})
-              {
-                window.location.href = url
-                return
-              }
-              alert('something went wrong')
-              $(this).addClass('not-selected')
-              return
-            }
-            updateLikeCount(data.data.likeType, data.data.likeTypeCount, data.data.totalLikeCount)
-          },
-          error  : function () {
-            alert('something went terribly wrong')
-            $(this).addClass('not-selected')
-          }
-        })
-        return false
-      })
     })
 
     $(document).ready(function () {

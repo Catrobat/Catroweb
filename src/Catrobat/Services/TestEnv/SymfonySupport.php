@@ -15,6 +15,7 @@ use App\Entity\ScratchProgramRemixRelation;
 use App\Entity\User;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
+use App\Repository\CatroNotificationRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
@@ -223,6 +224,14 @@ class SymfonySupport
   }
 
   /**
+   * @return CatroNotificationRepository
+   */
+  public function getCatroNotificationRepository()
+  {
+    return $this->kernel->getContainer()->get(CatroNotificationRepository::class);
+  }
+
+  /**
    * @return EntityManager
    */
   public function getManager()
@@ -391,10 +400,12 @@ class SymfonySupport
 
     $em = $this->getManager();
 
-    if (array_key_exists('id', $config) && $config['id'] !== null) {
+    if (array_key_exists('id', $config) && $config['id'] !== null)
+    {
       $user->setId($config['id']);
     }
-    else {
+    else
+    {
       $user->setId('' . $this->test_user_count);
     }
 
@@ -404,7 +415,7 @@ class SymfonySupport
   }
 
   /**
-   * 
+   *
    */
   public function computeAllLikeSimilaritiesBetweenUsers()
   {
@@ -664,7 +675,8 @@ class SymfonySupport
     $em->persist($program);
 
     // overwrite id if desired
-    if (array_key_exists('id', $config) && $config['id'] !== null) {
+    if (array_key_exists('id', $config) && $config['id'] !== null)
+    {
       $program->setId($config['id']);
       $em->persist($program);
       $em->flush();
@@ -769,10 +781,12 @@ class SymfonySupport
     $filesystem = new Filesystem();
     $this->emptyDirectory(sys_get_temp_dir() . '/program_generated/');
     $new_program_dir = sys_get_temp_dir() . '/program_generated/';
-    if ($is_embroidery) {
+    if ($is_embroidery)
+    {
       $filesystem->mirror($this->fixture_dir . '/GeneratedFixtures/embroidery', $new_program_dir);
     }
-    else {
+    else
+    {
       $filesystem->mirror($this->fixture_dir . '/GeneratedFixtures/base', $new_program_dir);
     }
     $properties = simplexml_load_file($new_program_dir . '/code.xml');
@@ -818,11 +832,11 @@ class SymfonySupport
   }
 
   /**
-   * @param $file
-   * @param $user
-   * @param $desired_id
+   * @param        $file
+   * @param        $user
+   * @param        $desired_id
    * @param string $flavor
-   * @param null $request_param
+   * @param null   $request_param
    *
    * @return Response | null
    * @throws ORMException
@@ -859,12 +873,13 @@ class SymfonySupport
     $client = $this->getClient();
     $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, [$file]);
     $response = $client->getResponse();
-
+    $em = $this->getManager();
     if ($desired_id)
     {
       /**
        * @var $new_program Program
        */
+
       $matches = [];
       preg_match('/"projectId":".*?"/', $response->getContent(), $matches);
       $old_id = substr($matches[0], strlen('"projectId":"'), -1);
@@ -874,19 +889,21 @@ class SymfonySupport
       $this->getManager()->persist($new_program);
       $this->getManager()->flush();
 
-      foreach ($this->getProgramRemixForwardRepository()->findAll() as $entry) {
+      foreach ($this->getProgramRemixForwardRepository()->findAll() as $entry)
+      {
         /**
          * @var $entry ProgramRemixRelation
          */
-        if ($entry->getDescendantId() == $old_id) {
+        if ($entry->getDescendantId() == $old_id)
+        {
           $entry->setDescendant($new_program);
         }
-        if ($entry->getAncestorId() == $old_id) {
+        if ($entry->getAncestorId() == $old_id)
+        {
           $entry->setAncestor($new_program);
         }
       }
 
-      $em = $this->getManager();
       $em->persist($new_program);
       $em->flush();
 
@@ -907,7 +924,9 @@ class SymfonySupport
    * @param $file
    * @param $user
    *
-   * @return \Symfony\Component\HttpFoundation\Response|null
+   * @return Response
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function submit($file, $user)
   {

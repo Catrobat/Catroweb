@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\GuidType;
@@ -64,10 +65,87 @@ class Program
   protected $version = self::INITIAL_VERSION;
 
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="programs")
-   * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+   * @var User The user owning this Program. If this User gets deleted, this Program gets deleted as well.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\User",
+   *   inversedBy="programs"
+   * )
+   * @ORM\JoinColumn(
+   *   name="user_id",
+   *   referencedColumnName="id",
+   *   nullable=false
+   * )
    */
   protected $user;
+
+  /**
+   * @var Collection|UserComment[] The UserComments commenting this Program. If this Program gets deleted, these UserComments get
+   *                              deleted as well.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity="UserComment",
+   *     mappedBy="program",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   */
+  protected $comments;
+
+  /**
+   * @var Collection|LikeNotification[] The LikeNotifications mentioning this Program. If this Program gets deleted, these
+   *                                   LikeNotifications get deleted as well.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity="App\Entity\LikeNotification",
+   *     mappedBy="program",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   */
+  protected $like_notification_mentions;
+
+  /**
+   * @var Collection|NewProgramNotification[] The NewProgramNotification mentioning this Program as a new Program.
+   *                                         If this Program gets deleted, these NewProgramNotifications get deleted as well.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity="App\Entity\NewProgramNotification",
+   *     mappedBy="program",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   */
+  protected $new_program_notification_mentions;
+
+  /**
+   * @var Collection|RemixNotification[] RemixNotifications which are triggered when this Program (child) is created as a remix of
+   *                                     another one (parent). If this Program gets deleted, all those RemixNotifications get deleted
+   *                                     as well.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity="RemixNotification",
+   *     mappedBy="remix_program",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   */
+  protected $remix_notification_mentions_as_child;
+
+  /**
+   * @var Collection|RemixNotification[] RemixNotifications mentioning this Program as a parent Program of a new remix
+   *                                     Program (child). If this Program gets deleted, all RemixNotifications mentioning
+   *                                     this program get deleted as well.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity="RemixNotification",
+   *     mappedBy="program",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   */
+  protected $remix_notification_mentions_as_parent;
+
 
   /**
    * @var Collection|Tag[]
@@ -306,6 +384,12 @@ class Program
   protected $debug_build;
 
   /**
+   * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="program", fetch="EXTRA_LAZY")
+   */
+
+  protected $reports;
+
+  /**
    * Program constructor.
    */
   public function __construct()
@@ -356,7 +440,7 @@ class Program
     $this->updateLastModifiedTimestamp();
     if ($this->getUploadedAt() == null)
     {
-      $this->setUploadedAt(new \DateTime());
+      $this->setUploadedAt(new \DateTime("now", new DateTimeZone('UTC')));
     }
   }
 
@@ -611,9 +695,9 @@ class Program
   }
 
   /**
-   * Set user.
+   * Sets the user owning this Program.
    *
-   * @param User $user
+   * @param User $user The user owning this Program.
    *
    * @return Program
    */
@@ -625,13 +709,29 @@ class Program
   }
 
   /**
-   * Get user.
+   * Returns the user owning this Program.
    *
-   * @return User
+   * @return User The user owning this Program.
    */
   public function getUser()
   {
     return $this->user;
+  }
+
+  /**
+   * @return UserComment|Collection
+   */
+  public function getComments()
+  {
+    return $this->comments;
+  }
+
+  /**
+   * @param UserComment|Collection $comments
+   */
+  public function setComments($comments)
+  {
+    $this->comments = $comments;
   }
 
   /**
@@ -1304,5 +1404,102 @@ class Program
   public function setDebugBuild($debug_build): void
   {
     $this->debug_build = $debug_build;
+  }
+
+  /**
+   * Returns the LikeNotifications mentioning this Program.
+   *
+   * @return LikeNotification|Collection The LikeNotifications mentioning this Program.
+   */
+  public function getLikeNotificationMentions()
+  {
+    return $this->like_notification_mentions;
+  }
+
+  /**
+   * Sets the LikeNotifications mentioning this Program.
+   *
+   * @param LikeNotification|Collection $like_notification_mentions The LikeNotifications mentioning this Program.
+   */
+  public function setLikeNotificationMentions($like_notification_mentions): void
+  {
+    $this->like_notification_mentions = $like_notification_mentions;
+  }
+
+  /**
+   * Returns the NewProgramNotification mentioning this Program as a new Program.
+   *
+   * @return NewProgramNotification|Collection The NewProgramNotifications mentioning this Program as a new Program.
+   */
+  public function getNewProgramNotificationMentions()
+  {
+    return $this->new_program_notification_mentions;
+  }
+
+  /**
+   * Sets the NewProgramNotifications mentioning this Program as a new Program.
+   *
+   * @param NewProgramNotification|Collection $new_program_notification_mentions
+   */
+  public function setNewProgramNotificationMentions($new_program_notification_mentions): void
+  {
+    $this->new_program_notification_mentions = $new_program_notification_mentions;
+  }
+
+  public function getReports()
+  {
+    return $this->reports;
+  }
+  public function getReportsCount()
+  {
+    return $this->getReports()->count();
+  }
+
+  /**
+   * Returns the RemixNotifications which are triggered when this Program (child) is created as a remix of
+   * another one (parent).
+   *
+   * @return RemixNotification[]|Collection The RemixNotifications which are triggered when this Program (child) is
+   *                                        created as a remix of another one (parent).
+   */
+  public function getRemixNotificationMentionsAsChild()
+  {
+    return $this->remix_notification_mentions_as_child;
+  }
+
+  /**
+   * Sets theRemixNotifications which are triggered when this Program (child) is created as a remix of
+   * another one (parent).
+   *
+   * @param RemixNotification[]|Collection $remix_notification_mentions_as_child The RemixNotifications which are
+   *                                                                            triggered when this Program (child) is
+   *                                                                            created as a remix of another one (parent).
+   */
+  public function setRemixNotificationMentionsAsChild($remix_notification_mentions_as_child): void
+  {
+    $this->remix_notification_mentions_as_child = $remix_notification_mentions_as_child;
+  }
+
+  /**
+   * Returns the RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
+   *
+   * @return RemixNotification[]|Collection RemixNotifications mentioning this Program as a parent Program of a new remix
+   *                                        Program (child).
+   */
+  public function getRemixNotificationMentionsAsParent()
+  {
+    return $this->remix_notification_mentions_as_parent;
+  }
+
+  /**
+   * Sets the RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
+   *
+   * @param RemixNotification[]|Collection $remix_notification_mentions_as_parent RemixNotifications mentioning this
+   *                                                                              Program as a parent Program of a new remix
+   *                                                                              Program (child).
+   */
+  public function setRemixNotificationMentionsAsParent($remix_notification_mentions_as_parent): void
+  {
+    $this->remix_notification_mentions_as_parent = $remix_notification_mentions_as_parent;
   }
 }

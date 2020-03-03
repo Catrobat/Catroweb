@@ -15,6 +15,7 @@ use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\User;
 use App\Repository\ExtensionRepository;
+use App\Repository\FeaturedRepository;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
@@ -50,6 +51,7 @@ class ProgramManagerSpec extends ObjectBehavior
    * @param Program                  $inserted_program
    * @param TagRepository            $tag_repository
    * @param ProgramLikeRepository    $program_like_repository
+   * @param FeaturedRepository       $featured_repository
    * @param LoggerInterface          $logger
    * @param AppRequest               $app_request
    * @param ExtensionRepository      $extension_repository
@@ -60,12 +62,12 @@ class ProgramManagerSpec extends ObjectBehavior
                       ProgramRepository $program_repository, EventDispatcherInterface $event_dispatcher,
                       AddProgramRequest $request, User $user, ExtractedCatrobatFile $extracted_file,
                       Program $inserted_program, TagRepository $tag_repository,
-                      ProgramLikeRepository $program_like_repository, LoggerInterface $logger,
-                      AppRequest $app_request, ProgramBeforeInsertEvent $event,
+                      ProgramLikeRepository $program_like_repository, FeaturedRepository $featured_repository,
+                      LoggerInterface $logger, AppRequest $app_request, ProgramBeforeInsertEvent $event,
                       ExtensionRepository $extension_repository, CatrobatFileSanitizer $catrobat_file_sanitizer)
   {
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository,
-      $entity_manager, $program_repository, $tag_repository, $program_like_repository,
+      $entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
       $event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer);
 
     fopen('/tmp/phpSpecTest', 'w');

@@ -1,12 +1,11 @@
-@homepage
+@web @debug
 Feature: Using a release app I should not see debug programs
 
   Background:
-
     Given there are users:
-      | name     | password | token      | email               | id |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-    And there are programs:
+      | id | name     |
+      | 1  | Catrobat |
+    And there are projects:
       | id | name          | owned by | downloads | views | upload time      | version | debug |
       | 1  | program 1     | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false |
       | 2  | program 2     | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.9.10  | false |
@@ -16,6 +15,7 @@ Feature: Using a release app I should not see debug programs
   Scenario: Viewing homepage with debug app
     Given I use a debug build of the Catroid app
     And I am on homepage
+    And I wait for the page to be loaded
     Then I should see 1 "#newest #program-1"
     And I should see 1 "#newest #program-2"
     And I should see 1 "#newest #program-3"
@@ -36,6 +36,7 @@ Feature: Using a release app I should not see debug programs
   Scenario: Viewing homepage with release app
     Given I use a release build of the Catroid app
     And I am on homepage
+    And I wait for the page to be loaded
     Then I should see 1 "#newest #program-1"
     And I should see 1 "#newest #program-2"
     And I should not see "#newest #program-3"
@@ -57,6 +58,7 @@ Feature: Using a release app I should not see debug programs
     Given I use a debug build of the Catroid app
     And I log in as "Catrobat" with the password "123456"
     And I am on "/app/user"
+    And I wait for the page to be loaded
     Then I should see "program 1"
     And I should see "program 2"
     And I should see "debug program"
@@ -66,6 +68,7 @@ Feature: Using a release app I should not see debug programs
     Given I use a release build of the Catroid app
     And I log in as "Catrobat" with the password "123456"
     And I am on "/app/user"
+    And I wait for the page to be loaded
     Then I should see "program 1"
     And I should see "program 2"
     And I should not see "debug program"
@@ -74,12 +77,14 @@ Feature: Using a release app I should not see debug programs
   Scenario: Viewing program marked as debug using debug app
     Given I use a debug build of the Catroid app
     And I am on "/app/project/3"
+    And I wait for the page to be loaded
 #    Then the response status code should be 200
     And I should see "debug program"
 
   Scenario: Viewing program marked as debug using release app
     Given I use a release build of the Catroid app
     And I am on "/app/project/3"
+    And I wait for the page to be loaded
 #    Then the response status code should be 404
     And I should not see "debug program"
     And I should see "Ooooops something went wrong"

@@ -19,15 +19,53 @@ class UserComment
   protected $id;
 
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="programId", referencedColumnName="id", nullable=true)
+   * @var Program The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted
+   *              as well.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\Program",
+   *   inversedBy="comments"
+   * )
+   * @ORM\JoinColumn(
+   *   name="programId",
+   *   referencedColumnName="id",
+   *   nullable=true
+   *  )
    */
   private $program;
 
   /**
-   * @ORM\Column(type="guid")
+   * @var User The User who wrote this UserComment. If this User gets deleted, this UserComment gets deleted as well.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\User",
+   *   inversedBy="comments"
+   * )
+   * @ORM\JoinColumn(
+   *   name="user_id",
+   *   referencedColumnName="id",
+   *   nullable=true
+   * )
    */
-  protected $userId;
+  protected $user;
+
+  /**
+   * @var CommentNotification The CommentNotification triggered by creating this UserComment. If this UserComment
+   *                          gets deleted, this CommentNotification gets deleted as well.
+   *
+   * @ORM\OneToOne(
+   *   targetEntity="\App\Entity\CommentNotification",
+   *   mappedBy="comment",
+   *   cascade={"remove"}
+   * )
+   * @ORM\JoinColumn(
+   *   name="notification_id",
+   *   referencedColumnName="id",
+   *   onDelete="SET NULL",
+   *   nullable=true
+   *  )
+   */
+  protected $notification;
 
   /**
    * @ORM\Column(type="date")
@@ -50,7 +88,9 @@ class UserComment
   protected $isReported;
 
   /**
-   * @return mixed
+   * Returns the Program which this UserComment comments.
+   *
+   * @return Program The Program which this UserComment comments.
    */
   public function getProgram()
   {
@@ -58,7 +98,9 @@ class UserComment
   }
 
   /**
-   * @param mixed $program
+   * Sets the Program which this UserComment comments.
+   *
+   * @param Program $program The Program which this UserComment comments.
    */
   public function setProgram($program)
   {
@@ -82,19 +124,23 @@ class UserComment
   }
 
   /**
-   * @return mixed
+   * Returns the User who wrote this UserComment.
+   *
+   * @return User
    */
-  public function getUserId()
+  public function getUser()
   {
-    return $this->userId;
+    return $this->user;
   }
 
   /**
-   * @param mixed $userId
+   * Sets the User who wrote this UserComment.
+   *
+   * @param User $user The User who wrote this UserComment.
    */
-  public function setUserId($userId)
+  public function setUser($user)
   {
-    $this->userId = $userId;
+    $this->user = $user;
   }
 
   /**
@@ -159,6 +205,26 @@ class UserComment
   public function setIsReported($isReported)
   {
     $this->isReported = $isReported;
+  }
+
+  /**
+   * Returns the CommentNotification triggered by creating this UserComment.
+   *
+   * @return CommentNotification The CommentNotification triggered by creating this UserComment.
+   */
+  public function getNotification()
+  {
+    return $this->notification;
+  }
+
+  /**
+   * Sets the CommentNotification triggered by creating this UserComment.
+   *
+   * @param CommentNotification $notification The CommentNotification triggered by creating this UserComment.
+   */
+  public function setNotification($notification)
+  {
+    $this->notification = $notification;
   }
 
   /**

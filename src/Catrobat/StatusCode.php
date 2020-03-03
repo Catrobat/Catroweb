@@ -41,6 +41,8 @@ class StatusCode
   const PASSWORD_INVALID = 532;
   const CREDITS_TO_LONG = 833;
 
+  const CSRF_FAILURE = 590;
+
   const LOGIN_ERROR = 601;
   const REGISTRATION_ERROR = 602;
 

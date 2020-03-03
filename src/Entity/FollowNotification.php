@@ -10,8 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
 class FollowNotification extends CatroNotification
 {
   /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User")
-   * @ORM\JoinColumn(name="follower_id", referencedColumnName="id", nullable=true)
+   * @var User The User which "follow action" to another user triggered this FollowNotification. If this user gets deleted,
+   *           this FollowNotification gets deleted as well.
+   *
+   * @ORM\ManyToOne(
+   *   targetEntity="\App\Entity\User",
+   *   inversedBy="follow_notification_mentions"
+   * )
+   * @ORM\JoinColumn(
+   *   name="follower_id",
+   *   referencedColumnName="id",
+   *   nullable=true
+   *  )
    */
   private $follower;
 
@@ -21,10 +31,10 @@ class FollowNotification extends CatroNotification
   private $twig_template = "/Notifications/NotificationTypes/follow_notification.html.twig";
 
   /**
-   * CommentNotification constructor.
+   * FollowNotification constructor.
    *
-   * @param User $user
-   * @param      $profile
+   * @param User $user The User to which this FollowNotification should be shown.
+   * @param User $profile The User which "follow action" to another user triggered this FollowNotification.
    *
    */
   public function __construct(User $user, $profile)
@@ -34,7 +44,9 @@ class FollowNotification extends CatroNotification
   }
 
   /**
-   * @return User
+   * Returns the User which "follow action" to another user triggered this FollowNotification.
+   *
+   * @return User The User which "follow action" to another user triggered this FollowNotification.
    */
   public function getFollower()
   {
@@ -42,7 +54,9 @@ class FollowNotification extends CatroNotification
   }
 
   /**
-   * @param $follower
+   * Sets the User which "follow action" to another user triggered this FollowNotification.
+   *
+   * @param User $follower The User which "follow action" to another user triggered this FollowNotification.
    */
   public function setFollower($follower)
   {

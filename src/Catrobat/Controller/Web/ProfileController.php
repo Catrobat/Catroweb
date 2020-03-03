@@ -2,6 +2,8 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Repository\CatroNotificationRepository;
+use App\Repository\UserCommentRepository;
 use App\Utils\ImageUtils;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\FollowNotification;
@@ -379,11 +381,15 @@ class ProfileController extends AbstractController
   /**
    * @Route("/deleteAccount", name="profile_delete_account", methods={"POST"})
    *
+   * @param CatroNotificationRepository $notification_repository
+   * @param UserCommentRepository $comment_repository
+   *
    * @return JsonResponse|RedirectResponse
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function deleteAccountAction()
+  public function deleteAccountAction(CatroNotificationRepository $notification_repository,
+                                      UserCommentRepository $comment_repository)
   {
     /**
      * @var $user User
@@ -395,18 +401,9 @@ class ProfileController extends AbstractController
       return $this->redirectToRoute('fos_user_security_login');
     }
 
+    $user_comments = $comment_repository->getCommentsWrittenByUser($user);
+
     $em = $this->getDoctrine()->getManager();
-
-    $user_id = $user->getId();
-    $user_comments = $this->getDoctrine()
-      ->getRepository('App\Entity\UserComment')
-      ->findBy(['userId' => $user_id], ['id' => 'DESC']);
-
-    foreach ($user_comments as $comment)
-    {
-      $em->remove($comment);
-    }
-
     $em->remove($user);
     $em->flush();
 

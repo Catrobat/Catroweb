@@ -45,12 +45,12 @@ class RemixUpdaterSpec extends ObjectBehavior
   }
 
   public function it_saves_the_new_url_to_xml(Program $program_entity, AsyncHttpClient $async_http_client,
-                                              RemixManager $remix_manager)
+                                              RemixManager $remix_manager, ProgramRepository $program_repository)
   {
     $expected_url = 'http://share.catrob.at/details/3571';
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
-    $program_entity->getId()->willReturn(3571);
+    $program_entity->getId()->willReturn("3571");
     $program_entity->isInitialVersion()->willReturn(true);
 
     $async_http_client
@@ -59,7 +59,7 @@ class RemixUpdaterSpec extends ObjectBehavior
       ->willReturn([]);
 
     $remix_manager
-      ->filterExistingScratchProgramIds(Argument::exact([117697631]))
+      ->filterExistingScratchProgramIds(Argument::exact(["117697631"]))
       ->shouldBeCalled()
       ->willReturn([]);
 
@@ -69,18 +69,21 @@ class RemixUpdaterSpec extends ObjectBehavior
       ->addRemixes(Argument::type('\App\Entity\Program'), Argument::type('array'))
       ->shouldBeCalled();
 
+
+    $remix_manager->getProgramRepository()->shouldBeCalled();
+
     expect($xml->header->url->__toString())->notToBeLike($expected_url);
-    $this->update($file, $program_entity);
+    $this->update($file, $program_entity, $program_repository);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
     expect($xml->header->url->__toString())->toBeLike($expected_url);
   }
 
   public function it_call_fetches_scratch_program_details_and_add_scratch_program_method_if_catrobat_language_version_is_0993(
-    Program $program_entity, RemixManager $remix_manager, AsyncHttpClient $async_http_client)
+    Program $program_entity, RemixManager $remix_manager, AsyncHttpClient $async_http_client, ProgramRepository $program_repository)
   {
-    $new_program_id = 3571;
-    $first_expected_scratch_id = 118499611;
-    $second_expected_scratch_id = 70058680;
+    $new_program_id = "3571";
+    $first_expected_scratch_id = "118499611";
+    $second_expected_scratch_id = "70058680";
     $expected_scratch_ids = [$first_expected_scratch_id, $second_expected_scratch_id];
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/' . $first_expected_scratch_id
       . '], Scratch 2 [https://scratch.mit.edu/projects/' . $second_expected_scratch_id . ']';
@@ -117,21 +120,23 @@ class RemixUpdaterSpec extends ObjectBehavior
         expect($scratch_programs_data)->shouldHaveCount(2);
         expect($scratch_programs_data)->shouldReturn($expected_scratch_info);
       });
+    $remix_manager->getProgramRepository()->shouldBeCalled();
+
 
     $remix_manager
       ->addRemixes(Argument::type('\App\Entity\Program'), Argument::type('array'))
       ->shouldBeCalled();
 
-    $this->update($file, $program_entity);
+    $this->update($file, $program_entity, $program_repository);
   }
 
 
   public function it_ignores_multiple_remix_parents_if_catrobat_language_version_is_0992_or_lower(
-    Program $program_entity, RemixManager $remix_manager, AsyncHttpClient $async_http_client)
+    Program $program_entity, RemixManager $remix_manager, AsyncHttpClient $async_http_client, ProgramRepository $program_repository)
   {
-    $new_program_id = 3571;
-    $first_expected_scratch_id = 118499611;
-    $second_expected_scratch_id = 70058680;
+    $new_program_id = "3571";
+    $first_expected_scratch_id = "118499611";
+    $second_expected_scratch_id = "70058680";
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/' . $first_expected_scratch_id
       . '], Scratch 2 [https://scratch.mit.edu/projects/' . $second_expected_scratch_id . ']';
 
@@ -160,17 +165,19 @@ class RemixUpdaterSpec extends ObjectBehavior
     $remix_manager
       ->addRemixes(Argument::type('\App\Entity\Program'), Argument::type('array'))
       ->shouldBeCalled();
+    $remix_manager->getProgramRepository()->shouldBeCalled();
 
-    $this->update($file, $program_entity);
+    $this->update($file, $program_entity, $program_repository);
   }
 
   public function it_call_fetches_only_details_of_not_yet_existing_scratch_programs(Program $program_entity,
                                                                                     RemixManager $remix_manager,
-                                                                                    AsyncHttpClient $async_http_client)
+                                                                                    AsyncHttpClient $async_http_client,
+                                                                                    ProgramRepository $program_repository)
   {
-    $new_program_id = 3571;
-    $first_expected_scratch_id = 118499611;
-    $second_expected_scratch_id = 70058680;
+    $new_program_id = "3571";
+    $first_expected_scratch_id = "118499611";
+    $second_expected_scratch_id = "70058680";
     $expected_scratch_ids = [$first_expected_scratch_id, $second_expected_scratch_id];
     $expected_already_existing_scratch_programs = [$first_expected_scratch_id];
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/' . $first_expected_scratch_id
@@ -210,17 +217,20 @@ class RemixUpdaterSpec extends ObjectBehavior
       ->addRemixes(Argument::type('\App\Entity\Program'), Argument::type('array'))
       ->shouldBeCalled();
 
-    $this->update($file, $program_entity);
+    $remix_manager->getProgramRepository()->shouldBeCalled();
+
+    $this->update($file, $program_entity, $program_repository);
   }
 
   public function it_call_add_remixes_method_of_remix_manager_with_correct_remixes_data(Program $program_entity,
                                                                                         RemixManager $remix_manager,
-                                                                                        AsyncHttpClient $async_http_client)
+                                                                                        AsyncHttpClient $async_http_client,
+                                                                                        ProgramRepository $program_repository)
   {
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/app/project/3570';
     $expected_scratch_info = [[
-      'id'          => 117697631,
+      'id'          => '117697631',
       'creator'     => ['username' => 'Techno-CAT'],
       'title'       => 'やねうら部屋(びっくりハウス) remix お化け屋敷',
       'description' => '◆「Why!?大喜利」8月のお題・キミのびっくりハウスをつくろう！～やねうら部屋 編～広い“屋根裏部屋”には、'
@@ -234,7 +244,7 @@ class RemixUpdaterSpec extends ObjectBehavior
     $xml->asXML(__SPEC_CACHE_DIR__ . '/base/code.xml');
 
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
-    $program_entity->getId()->willReturn(3571);
+    $program_entity->getId()->willReturn("3571");
     $program_entity->isInitialVersion()->willReturn(true);
 
     $async_http_client
@@ -258,14 +268,14 @@ class RemixUpdaterSpec extends ObjectBehavior
         $first_parent_remix_data = $remixes_data[0];
         expect($first_parent_remix_data)->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
         expect($first_parent_remix_data)->getUrl()->shouldReturn($first_expected_url);
-        expect($first_parent_remix_data)->getProgramId()->shouldReturn(117697631);
+        expect($first_parent_remix_data)->getProgramId()->shouldReturn("117697631");
         expect($first_parent_remix_data)->isScratchProgram()->shouldReturn(true);
         expect($first_parent_remix_data)->isAbsoluteUrl()->shouldReturn(true);
 
         $second_parent_remix_data = $remixes_data[1];
         expect($second_parent_remix_data)->shouldBeAnInstanceOf('App\Catrobat\Services\RemixData');
         expect($second_parent_remix_data)->getUrl()->shouldReturn($second_expected_url);
-        expect($second_parent_remix_data)->getProgramId()->shouldReturn(3570);
+        expect($second_parent_remix_data)->getProgramId()->shouldReturn("3570");
         expect($second_parent_remix_data)->isScratchProgram()->shouldReturn(false);
         expect($second_parent_remix_data)->isAbsoluteUrl()->shouldReturn(false);
       });
@@ -279,10 +289,14 @@ class RemixUpdaterSpec extends ObjectBehavior
         expect($scratch_programs_data)->shouldReturn($expected_scratch_info);
       });
 
-    $this->update($file, $program_entity);
+
+    $remix_manager->getProgramRepository()->shouldBeCalled();
+
+
+    $this->update($file, $program_entity, $program_repository);
   }
 
-  public function it_saves_the_old_url_to_remixOf(Program $program_entity)
+  public function it_saves_the_old_url_to_remixOf(Program $program_entity, ProgramRepository $program_repository)
   {
     $current_url = 'http://share.catrob.at/details/3570';
     $new_url = 'http://share.catrob.at/details/3571';
@@ -293,19 +307,20 @@ class RemixUpdaterSpec extends ObjectBehavior
     $xml->asXML(__SPEC_CACHE_DIR__ . '/base/code.xml');
 
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
-    $program_entity->getId()->willReturn(3571);
+    $program_entity->getId()->willReturn("3571");
     $program_entity->isInitialVersion()->willReturn(true);
 
-    $this->update($file, $program_entity);
+
+    $this->update($file, $program_entity, $program_repository);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
     expect($xml->header->url)->toBeLike($new_url);
     expect($xml->header->remixOf)->toBeLike($current_url);
   }
 
   public function it_saves_the_scratch_url_to_remixOf(Program $program_entity, AsyncHttpClient $async_http_client,
-                                                      RemixManager $remix_manager)
+                                                      RemixManager $remix_manager, ProgramRepository $program_repository)
   {
-    $expected_scratch_program_id = 70058680;
+    $expected_scratch_program_id = "70058680";
     $current_url = 'https://scratch.mit.edu/projects/' . $expected_scratch_program_id;
     $new_url = 'http://share.catrob.at/details/3571';
 
@@ -315,7 +330,7 @@ class RemixUpdaterSpec extends ObjectBehavior
     $xml->asXML(__SPEC_CACHE_DIR__ . '/base/code.xml');
 
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
-    $program_entity->getId()->willReturn(3571);
+    $program_entity->getId()->willReturn("3571");
     $program_entity->isInitialVersion()->willReturn(true);
 
     $async_http_client->fetchScratchProgramDetails(Argument::exact([]))->shouldBeCalled()->willReturn([]);
@@ -327,8 +342,9 @@ class RemixUpdaterSpec extends ObjectBehavior
 
     $remix_manager->addScratchPrograms(Argument::exact([]))->shouldBeCalled();
     $remix_manager->addRemixes(Argument::type('\App\Entity\Program'), Argument::type('array'))->shouldBeCalled();
+    $remix_manager->getProgramRepository()->shouldBeCalled();
 
-    $this->update($file, $program_entity);
+    $this->update($file, $program_entity, $program_repository);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
     expect($xml->header->url)->toBeLike($new_url);
     expect($xml->header->remixOf)->toBeLike($current_url);
@@ -336,10 +352,11 @@ class RemixUpdaterSpec extends ObjectBehavior
 
   public function it_saves_remix_of_multiple_scratch_urls_to_remixOf(Program $program_entity,
                                                                      AsyncHttpClient $async_http_client,
-                                                                     RemixManager $remix_manager)
+                                                                     RemixManager $remix_manager,
+                                                                      ProgramRepository $program_repository)
   {
-    $first_expected_scratch_id = 118499611;
-    $second_expected_scratch_id = 70058680;
+    $first_expected_scratch_id = "118499611";
+    $second_expected_scratch_id = "70058680";
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/' . $first_expected_scratch_id
       . '], Scratch 2 [https://scratch.mit.edu/projects/' . $second_expected_scratch_id . ']';
     $new_url = 'http://share.catrob.at/details/3571';
@@ -364,10 +381,12 @@ class RemixUpdaterSpec extends ObjectBehavior
     $remix_manager->addRemixes(Argument::type('\App\Entity\Program'), Argument::type('array'))->shouldBeCalled();
 
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
-    $program_entity->getId()->willReturn(3571);
+    $program_entity->getId()->willReturn("3571");
     $program_entity->isInitialVersion()->willReturn(true);
+    $remix_manager->getProgramRepository()->shouldBeCalled();
+    $this->update($file, $program_entity, $program_repository);
 
-    $this->update($file, $program_entity);
+
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
     expect($xml->header->url)->toBeLike($new_url);
     expect($xml->header->remixOf)->toBeLike($current_url);
@@ -377,7 +396,7 @@ class RemixUpdaterSpec extends ObjectBehavior
                                                       ProgramRepository $programRepository)
   {
     $current_url = 'http://share.catrob.at/details/3570';
-    $programRepository->find(3570)->willReturn($parent_entity);
+    $programRepository->find("3570")->willReturn($parent_entity);
 
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
     $xml->header->url = $current_url;
@@ -385,10 +404,10 @@ class RemixUpdaterSpec extends ObjectBehavior
     $xml->asXML(__SPEC_CACHE_DIR__ . '/base/code.xml');
 
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__ . '/base/', '/webpath', 'hash');
-    $program_entity->getId()->willReturn(3571);
+    $program_entity->getId()->willReturn("3571");
     $program_entity->isInitialVersion()->willReturn(true);
 
-    $this->update($file, $program_entity);
+    $this->update($file, $program_entity, $programRepository);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__ . '/base/code.xml');
     expect($xml->header->userHandle)->toBeLike('catroweb');
   }

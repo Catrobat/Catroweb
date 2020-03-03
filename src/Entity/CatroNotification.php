@@ -22,7 +22,8 @@ use Doctrine\ORM\Mapping as ORM;
  *   "like" = "LikeNotification",
  *   "follow" = "FollowNotification",
  *   "follow_program" = "NewProgramNotification",
- *   "broadcast_notification" = "BroadcastNotification"
+ *   "broadcast_notification" = "BroadcastNotification",
+ *   "remix_notification" = "RemixNotification"
  * })
  */
 class CatroNotification
@@ -37,10 +38,15 @@ class CatroNotification
   private $id;
 
   /**
-   * @var User
+   * @var User The user to which this CatroNotification will be shown. If the user gets deleted, this CatroNotification
+   *      gets deleted as well.
    *
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User")
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="notifications")
+   * @ORM\JoinColumn(
+   *   name="user",
+   *   referencedColumnName="id",
+   *   nullable=false
+   * )
    */
   private $user;
 
@@ -56,7 +62,7 @@ class CatroNotification
   /**
    * @ORM\Column(name="seen", type="boolean", options={"default":false})
    */
-  private $seen =  false;
+  private $seen = false;
 
   private $twig_template = "Notifications/NotificationTypes/catro_notification.html.twig";
 
@@ -89,6 +95,18 @@ class CatroNotification
   }
 
   /**
+   * Set id
+   *
+   *
+   * @param integer $id
+   */
+
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+
+  /**
    * Set title
    *
    * @param string $title
@@ -111,6 +129,7 @@ class CatroNotification
   {
     return $this->title;
   }
+
   /**
    * Set seen
    *
@@ -134,6 +153,7 @@ class CatroNotification
   {
     return $this->seen;
   }
+
   /**
    * Set message
    *
@@ -159,9 +179,9 @@ class CatroNotification
   }
 
   /**
-   * Set user
+   * Sets he user to which this CatroNotification will be shown.
    *
-   * @param User $user
+   * @param User $user The user to which this CatroNotification will be shown.
    *
    * @return CatroNotification
    */
@@ -173,7 +193,7 @@ class CatroNotification
   }
 
   /**
-   * Get user
+   * Returns the user to which this CatroNotification will be shown.
    *
    * @return User
    */
@@ -197,9 +217,6 @@ class CatroNotification
   {
     $this->twig_template = $twig_template;
   }
-
-
-
 
 
 }

@@ -2,11 +2,13 @@
 
 namespace App\Admin;
 
+use App\Entity\Program;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 /**
@@ -65,8 +67,13 @@ class ReportedCommentsAdmin extends AbstractAdmin
   {
     $listMapper
       ->add('id')
-      ->add('programId')
-      ->add('userId')
+      ->add('program', EntityType::class,
+        [
+          'class'      => Program::class,
+          'admin_code' => 'catrowebadmin.block.programs.all',
+          'editable'   => false,
+        ])
+      ->add('user')
       ->add('uploadDate')
       ->add('text')
       ->add('username')

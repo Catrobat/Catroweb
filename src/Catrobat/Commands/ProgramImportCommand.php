@@ -96,7 +96,7 @@ class ProgramImportCommand extends Command
     {
       $output->writeln('No catrobat files found');
 
-      return;
+      return 1;
     }
 
     $user = $this->user_manager->findUserByUsername($username);
@@ -104,7 +104,7 @@ class ProgramImportCommand extends Command
     {
       $output->writeln('User ' . $username . ' was not found!');
 
-      return;
+      return 1;
     }
 
     foreach ($finder as $file)
@@ -115,6 +115,7 @@ class ProgramImportCommand extends Command
         /** @var User $user */
         $add_program_request = new AddProgramRequest($user, new File($file));
         $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
+        $program->setViews(random_int(0, 10));
         $output->writeln('Added Program <' . $program->getName() . '>');
       } catch (InvalidCatrobatFileException $e)
       {

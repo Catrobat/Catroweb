@@ -16,6 +16,8 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Repository\ExtensionRepository;
+use App\Repository\FeaturedRepository;
+use DateTimeZone;
 use Doctrine\DBAL\Types\GuidType;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
@@ -27,6 +29,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
@@ -84,6 +87,9 @@ class ProgramManager
    */
   protected $program_like_repository;
 
+  /** @var FeaturedRepository */
+  protected $featured_repository;
+
   /**
    * @var LoggerInterface
    */
@@ -109,6 +115,7 @@ class ProgramManager
    * @param ProgramRepository        $program_repository
    * @param TagRepository            $tag_repository
    * @param ProgramLikeRepository    $program_like_repository
+   * @param FeaturedRepository       $featured_repository
    * @param EventDispatcherInterface $event_dispatcher
    * @param LoggerInterface          $logger
    * @param AppRequest               $app_request
@@ -119,6 +126,7 @@ class ProgramManager
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
+                              FeaturedRepository $featured_repository,
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer)
@@ -131,10 +139,50 @@ class ProgramManager
     $this->program_repository = $program_repository;
     $this->tag_repository = $tag_repository;
     $this->program_like_repository = $program_like_repository;
+    $this->featured_repository = $featured_repository;
     $this->logger = $logger;
     $this->app_request = $app_request;
     $this->file_sanitizer = $file_sanitizer;
     $this->extension_repository = $extension_repository;
+  }
+
+  /**
+   * Check visibility of the given project for the current user
+   *
+   * @param Program $project
+   *
+   * @return bool
+   */
+  public function isProjectVisibleForCurrentUser(Program $project)
+  {
+    if (!$project)
+    {
+      return false;
+    }
+
+    if (!$project->isVisible())
+    {
+      if (!$this->featured_repository->isFeatured($project))
+      {
+        return false;
+      }
+    }
+
+//    Right now everyone should find even private programs via the correct link! SHARE-49
+//    if ($program->getPrivate() && $program->getUser()->getId() !== $this->getUser()->getId()) {
+//      // only program owners should be allowed to see their programs
+//      return false;
+//    }
+
+    if ($project->isDebugBuild())
+    {
+      if (!$this->app_request->isDebugBuildRequest())
+      {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /**
@@ -196,7 +244,7 @@ class ProgramManager
     $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage('en');
-    $program->setUploadedAt(new DateTime());
+    $program->setUploadedAt(new DateTime("now", new DateTimeZone("UTC")));
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
@@ -291,55 +339,67 @@ class ProgramManager
   }
 
   /**
-   * @param $program_id
+   * @param $project_id
    * @param $user_id
    *
-   * @return mixed
+   * @return ProgramLike[]
    */
-  public function findUserLike($program_id, $user_id)
+  public function findUserLikes($project_id, $user_id)
   {
-    return $this->program_like_repository->findOneBy(['program_id' => $program_id, 'user_id' => $user_id]);
+    return $this->program_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
   }
 
   /**
-   * @param Program $program
+   * @param $project_id
+   *
+   * @return array
+   */
+  public function findProgramLikeTypes($project_id)
+  {
+    return $this->program_like_repository->likeTypesOfProject($project_id);
+  }
+
+  /**
+   * @param Program $project
    * @param User    $user
    * @param         $type
-   * @param         $no_unlike
+   * @param string  $action
    *
-   * @return int
+   * @throws InvalidArgumentException
+   * @throws ORMException
    */
-  public function toggleLike(Program $program, User $user, $type, $no_unlike)
+  public function changeLike(Program $project, User $user, $type, $action)
   {
-    $existing_program_like = $this->program_like_repository->findOneBy([
-      'program_id' => $program->getId(),
-      'user_id'    => $user->getId(),
-    ]);
-
-    if ($existing_program_like !== null)
+    if ($action === ProgramLike::ACTION_ADD)
     {
-      $existing_program_like_type = $existing_program_like->getType();
-      $this->entity_manager->remove($existing_program_like);
-
-      // case: unlike
-      if ($existing_program_like_type === $type)
-      {
-        if ($no_unlike)
-        {
-          return $type;
-        }
-        $this->entity_manager->flush();
-
-        return ProgramLike::TYPE_NONE;
-      }
+      $this->program_like_repository->addLike($project, $user, $type);
     }
+    elseif ($action === ProgramLike::ACTION_REMOVE)
+    {
+      $this->program_like_repository->removeLike($project, $user, $type);
+    }
+    else
+    {
+      throw new InvalidArgumentException('Invalid action "' . $action . '"');
+    }
+  }
 
-    // case: like
-    $program_like = new ProgramLike($program, $user, $type);
-    $this->entity_manager->persist($program_like);
-    $this->entity_manager->flush();
-
-    return $type;
+  /**
+   * @param Program $project
+   * @param User    $user
+   * @param         $type
+   *
+   * @return bool
+   */
+  public function areThereOtherLikeTypes(Program $project, User $user, $type)
+  {
+    try
+    {
+      return $this->program_like_repository->areThereOtherLikeTypes($project, $user, $type);
+    } catch (NonUniqueResultException $exception)
+    {
+      return false;
+    }
   }
 
   /**
@@ -617,6 +677,20 @@ class ProgramManager
   {
     return $this->program_repository->getMostViewedPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+    );
+  }
+
+  /**
+   * @param string|null $flavor
+   * @param int|null    $limit
+   * @param int         $offset
+   *
+   * @return Program[]
+   */
+  public function getScratchRemixesPrograms($flavor, $limit = null, $offset = 0)
+  {
+    return $this->program_repository->getScratchRemixesPrograms(
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
     );
   }
 

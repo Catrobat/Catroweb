@@ -111,6 +111,12 @@ module.exports = function (grunt) {
         src: '**',
         dest: publicDir + '/images/'
       },
+      catblocks: {
+        expand: true,
+        cwd: assetsDir + '/catblocks',
+        src: '**',
+        dest: publicDir + '/catblocks/'
+      },
       clipboard_js: {
         expand: true,
         cwd: 'node_modules/clipboard/dist/',

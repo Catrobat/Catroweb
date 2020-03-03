@@ -1,0 +1,23 @@
+{% extends 'Notifications/NotificationTypes/baseNotification.html.twig' %}
+
+{% block notification_title%}
+  {{ 'catro-notifications.remix.title'|trans({'%program_name%' : notification.program.name}, 'catroweb') }}
+{% endblock %}
+
+{% block notification_leftAvatar %}
+  {{ include('Notifications/NotificationTypes/userAvatar.html.twig') }}
+{% endblock %}
+
+{% block notification_body%}
+  {{ 'catro-notifications.remix.message' | trans
+    (
+    {
+      '%user_link%': '<a href="'~path('profile', {'id': notification.getRemixFrom.id})~'">'~notification.getRemixFrom.getUserName~'</a>',
+      '%program_link%': '<a href="'~path('program', {'id': notification.program.id})~'">'~notification.program.name~'</a>',
+      '%remix_program_link%': '<a href="'~path('program', {'id': notification.getRemixProgram.id})~'">'~notification.getRemixProgram.name~'</a>'
+    },
+    'catroweb'
+  )
+  |raw
+  }}
+{% endblock %}

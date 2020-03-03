@@ -703,6 +703,17 @@ services:
       - App\Catrobat\Controller\Admin\StoredUserDataController
     public: true
 
+  catrowebadmin.block.users.reported:
+    class: App\Admin\ReportedUsersAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Reported Users", pager_type: "simple",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\User
+      - ~
+    public: true
+
   # ===== Tools
 
   catrowebadmin.block.tools.maintain:

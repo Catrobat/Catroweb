@@ -20,7 +20,7 @@ Feature: Get details for a specific program
       """
       {
           "CatrobatProjects":[{
-                                "ProjectId": "(.*?)",
+                                "ProjectId": "REGEX_STRING_WILDCARD",
                                 "ProjectName":"program 2",
                                 "ProjectNameShort":"program 2",
                                 "Author":"Catrobat",
@@ -29,12 +29,12 @@ Feature: Get details for a specific program
                                 "Views":9,
                                 "Downloads":333,
                                 "Private":false,
-                                "Uploaded": 1398164400,
+                                "Uploaded": "REGEX_INT_WILDCARD",
                                 "UploadedString":"3 months ago",
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
-                                "ProjectUrl":"app/project/(.*?)",
-                                "DownloadUrl":"app/download/(.*?).catrobat",
+                                "ProjectUrl":"app/project/REGEX_STRING_WILDCARD",
+                                "DownloadUrl":"app/download/REGEX_STRING_WILDCARD.catrobat",
                                 "FileSize":2.5
 
                             }],

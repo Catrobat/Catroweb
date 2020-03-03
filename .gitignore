@@ -31,6 +31,7 @@ public/font_awesome_wrapper
 public/images
 public/js
 public/webfonts
+public/catblocks
 
 ### tests ###
 tests/behat/sqlite/**
@@ -48,7 +49,6 @@ var/log/**
 vendor/
 
 ### root ###
-*.sh
 crowdin.yml
 ###> symfony/framework-bundle ###
 /.env.local

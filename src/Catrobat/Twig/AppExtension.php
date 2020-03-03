@@ -5,6 +5,7 @@ namespace App\Catrobat\Twig;
 use App\Catrobat\Services\CommunityStatisticsService;
 use App\Entity\MediaPackageFile;
 use App\Catrobat\Services\MediaPackageFileRepository;
+use NumberFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -13,6 +14,7 @@ use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -55,18 +57,25 @@ class AppExtension extends AbstractExtension
   private $parameter_bag;
 
   /**
+   * @var TranslatorInterface
+   */
+  private $translator;
+
+  /**
    * AppExtension constructor.
    *
-   * @param RequestStack $request_stack
+   * @param RequestStack               $request_stack
    * @param MediaPackageFileRepository $mediapackage_file_repo
-   * @param GameJamRepository $gamejamrepository
-   * @param ActiveTheme $theme
-   * @param ParameterBagInterface $parameter_bag
-   * @param $catrobat_translation_dir
+   * @param GameJamRepository          $gamejamrepository
+   * @param ActiveTheme                $theme
+   * @param ParameterBagInterface      $parameter_bag
+   * @param string                     $catrobat_translation_dir
+   * @param TranslatorInterface        $translator
    */
   public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo,
                               GameJamRepository $gamejamrepository, ActiveTheme $theme,
-                              ParameterBagInterface $parameter_bag, $catrobat_translation_dir)
+                              ParameterBagInterface $parameter_bag, $catrobat_translation_dir,
+                              TranslatorInterface $translator)
   {
     $this->translationPath = $catrobat_translation_dir;
     $this->parameter_bag = $parameter_bag;
@@ -74,6 +83,7 @@ class AppExtension extends AbstractExtension
     $this->mediapackage_file_repository = $mediapackage_file_repo;
     $this->gamejamrepository = $gamejamrepository;
     $this->theme = $theme;
+    $this->translator = $translator;
   }
 
   /**
@@ -83,6 +93,7 @@ class AppExtension extends AbstractExtension
   {
     return [
       new TwigFilter('decamelize', [$this, 'decamelizeFilter']),
+      new TwigFilter('humanFriendlyNumber', [$this, 'humanFriendlyNumberFilter']),
     ];
   }
 
@@ -99,6 +110,48 @@ class AppExtension extends AbstractExtension
     }
 
     return preg_replace('/(?<!^)[A-Z]/', ' $0', $input);
+  }
+
+  /**
+   * @param $input
+   *
+   * @return string
+   */
+  public function humanFriendlyNumberFilter($input)
+  {
+    $user_locale = $this->request_stack->getCurrentRequest()->getLocale();
+    return AppExtension::humanFriendlyNumber($input, $this->translator, $user_locale);
+  }
+
+  /**
+   * @param                     $input
+   * @param TranslatorInterface $translator
+   * @param                     $user_locale
+   *
+   * @return bool|false|string
+   */
+  public static function humanFriendlyNumber($input, TranslatorInterface $translator, $user_locale)
+  {
+    if (!is_numeric($input))
+    {
+      return $input;
+    }
+
+    $number_formatter = new NumberFormatter($user_locale, NumberFormatter::DECIMAL);
+
+    if ($input >= 1000000)
+    {
+      $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 1);
+
+      return $number_formatter->format($input / 1000000) . ' ' .
+        $translator->trans("format.million_abbreviation", [], "catroweb");
+    }
+    else
+    {
+      $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+
+      return $number_formatter->format($input);
+    }
   }
 
   /**

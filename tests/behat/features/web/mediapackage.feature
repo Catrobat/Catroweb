@@ -1,4 +1,4 @@
-@homepage
+@web @media
 Feature:
   In order to speed up the creation of a pocketcode program
   As UX/Design team
@@ -29,6 +29,7 @@ Feature:
 
   Scenario: Viewing defined categories in a specific package
     Given I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
     Then I should see "Animals"
 
   Scenario: Download a media file
@@ -39,10 +40,12 @@ Feature:
 
   Scenario: The app needs the filename, so the media file link must provide the media file's name
     When I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
     Then the media file "1" must have the download url "/pocketcode/download-media/1"
 
   Scenario: Viewing only media files for the pocketcode flavor
     Given I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
     Then I should see media file with id "1"
     And I should see media file with id "5"
     And I should see media file with id "6"
@@ -52,6 +55,7 @@ Feature:
 
   Scenario: When using Luna-Flavor, there should be a theme-special category
     Given I am on "/luna/media-library/looks"
+    And I wait for the page to be loaded
     Then I should see a "#category-theme-special" element
     And I should see media file with id 7 in category "Luna & Cat Theme Special"
     And I should see 1 media file in category "Luna & Cat Theme Special"
@@ -59,4 +63,5 @@ Feature:
 
   Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
     Given I am on "/app/media-library/looks"
-    And I should not see a "#project-navigation" element
+    And I wait for the page to be loaded
+    But I should not see a "#project-navigation" element

@@ -233,7 +233,7 @@
           {% for uc in user_comments %}
             <div class="lrow">ID</div><div class="rrow">{{ uc.id }}</div>
             <div class="lrow">Program</div><div class="rrow">{{ uc.program }}</div>
-            <div class="lrow">User ID</div><div class="rrow">{{ uc.userID }}</div>
+            <div class="lrow">User ID</div><div class="rrow">{{ uc.user.id }}</div>
             <div class="lrow">User name</div><div class="rrow">{{ uc.userName }}</div>
             <div class="lrow">Uploaded at</div><div class="rrow">{{ uc.uploadDate|date('Y-m-d h:m:s') }}</div>
             <div class="lrow">Text</div><div class="rrow">{{ uc.text }}</div>

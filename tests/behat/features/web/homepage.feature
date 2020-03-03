@@ -1,65 +1,75 @@
-@homepage
+@web
 Feature: Pocketcode homepage
-  In order to access and browse the programs
+  In order to access and browse the projects
   As a visitor
   I want to be able to see the homepage
 
   Background:
     Given there are users:
-      | name     | password | token      | email               | id |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |  2 |
-    And there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version |
-      | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
-      | 3  | program 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 4  | program 4 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 5  | program 5 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
-    And following programs are featured:
-      | id | program   | url                   | active | priority |
-      | 1  | program 1 |                       | no     | 1        |
-      | 2  | program 2 |                       | yes    | 3        |
-      | 3  | program 3 |                       | yes    | 2        |
+      | id | name     |
+      | 1  | Catrobat |
+      | 2  | User1    |
+      | 3  | Catrobat2|
+
+    And there are projects:
+      | id | name      | owned by |
+      | 1  | project 1 | Catrobat |
+      | 2  | project 2 | Catrobat |
+      | 3  | project 3 | User1    |
+      | 4  | project 4 | User1    |
+      | 5  | project 5 | User1    |
+      | 6  | project 6 | Catrobat2|
+      | 7  | project 7 | Catrobat2|
+
+    And following projects are featured:
+      | id | project   | url                   | active | priority |
+      | 1  | project 1 |                       | no     | 1        |
+      | 2  | project 2 |                       | yes    | 3        |
+      | 3  | project 3 |                       | yes    | 2        |
       | 4  |           | http://www.google.at/ | yes    | 5        |
       | 5  |           | http://www.orf.at/    | no     | 4        |
 
+    Given there are Scratch remix relations:
+      | scratch_parent_id | catrobat_child_id |
+      | 70058680          | 6                 |
+      | 70058680          | 7                 |
+
+  Scenario: Scratch remixes project should be visible:
+    Given I am on homepage
+    And I wait for the page to be loaded
+    Then I should see the featured slider
+    Then the element "#scratchRemixes" should exist
+    And the "#scratchRemixes" element should contain "project 6"
+    And the "#scratchRemixes" element should contain "project 7"
+    And the "#scratchRemixes" element should not contain "project 1"
+
   Scenario: Viewing the homepage at website root
     Given I am on homepage
+    And I wait for the page to be loaded
     Then I should see the featured slider
-    And I should see newest programs
-    And I should see recommended programs
-    And I should see most downloaded programs
-    And I should see most viewed programs
-    And I should see random programs
+    Then the element "#newest" should exist
+    Then the element "#recommended" should exist
+    Then the element "#mostDownloaded" should exist
+    Then the element "#random" should exist
+    Then the element "#scratchRemixes" should exist
+    Then the element "#mostViewed" should exist
 
   Scenario: Welcome Section
     Given I am on homepage
+    And I wait for the page to be loaded
     Then I should see the welcome section
     And I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
     And I should see "Get it on Google Play"
     And I should see "Get it on IOS"
 
-  Scenario: Cant see the Welcome Section
-    Given I am on homepage
-    When I click the "login" button
-    Then I should be on "/app/login"
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
-    Then I press "Login"
+  Scenario: Cant see the Welcome Section when logged in
+    Given I log in as "Catrobat"
+    And I go to the homepage
+    And I wait for the page to be loaded
     Then I should not see the welcome section
-
-  Scenario: Login and logout
-    Given I am on homepage
-    Then I should see an "#btn-login" element
-    When I click the "login" button
-    Then I should be on "/app/login"
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
-    Then I press "Login"
-    Then I should be logged in
 
   Scenario: Featured Programs and Urls
     Given I am on homepage
+    And I wait for the page to be loaded
     Then I should see the featured slider
-    And I should see the slider with the values "http://www.google.at/,program 2,program 3"
+    And I should see the slider with the values "http://www.google.at/,project 2,project 3"

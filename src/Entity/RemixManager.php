@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Catrobat\RemixGraph\RemixGraphManipulator;
 use App\Catrobat\Requests\AppRequest;
+use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\RemixData;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
@@ -59,12 +60,17 @@ class RemixManager
   private $remix_graph_manipulator;
 
   /**
+   * @var CatroNotificationService The notification_service.
+   */
+  private $catro_notification_service;
+
+  /**
    * @var AppRequest
    */
   protected $app_request;
 
   /**
-   * @param EntityManagerInterface                  $entity_manager
+   * @param EntityManagerInterface         $entity_manager
    * @param ProgramRepository              $program_repository
    * @param ScratchProgramRepository       $scratch_program_repository
    * @param ProgramRemixRepository         $program_remix_repository
@@ -72,6 +78,7 @@ class RemixManager
    * @param ScratchProgramRemixRepository  $scratch_program_remix_repository
    * @param RemixGraphManipulator          $remix_graph_manipulator
    * @param AppRequest                     $app_request
+   * @param CatroNotificationService       $catro_notification_service
    */
   public function __construct(EntityManagerInterface $entity_manager, ProgramRepository $program_repository,
                               ScratchProgramRepository $scratch_program_repository,
@@ -79,7 +86,7 @@ class RemixManager
                               ProgramRemixBackwardRepository $program_remix_backward_repository,
                               ScratchProgramRemixRepository $scratch_program_remix_repository,
                               RemixGraphManipulator $remix_graph_manipulator,
-                              AppRequest $app_request)
+                              AppRequest $app_request, CatroNotificationService $catro_notification_service)
   {
     $this->entity_manager = $entity_manager;
     $this->program_repository = $program_repository;
@@ -89,6 +96,7 @@ class RemixManager
     $this->scratch_program_remix_repository = $scratch_program_remix_repository;
     $this->remix_graph_manipulator = $remix_graph_manipulator;
     $this->app_request = $app_request;
+    $this->catro_notification_service = $catro_notification_service;
   }
 
   /**
@@ -229,7 +237,19 @@ class RemixManager
       {
         continue;
       }
+      if ($parent_program->getUser() !== null && $program->getUser() !== null)
+      {
+        $remix_notification = new RemixNotification(
+          $parent_program->getUser(),
+          $program->getUser(),
+          $parent_program,
+          $program
+        );
+        $this->catro_notification_service->addNotification($remix_notification);
+      }
+
       $this->createNewCatrobatRemixRelations($program, $parent_program, $all_program_remix_relations);
+
     }
 
     return $all_program_remix_relations;
@@ -685,4 +705,15 @@ class RemixManager
 
     return count($result["catrobatNodes"]) - 1;
   }
+
+  /**
+   * Get program repository.
+   *
+   * @return ProgramRepository
+   */
+  public function getProgramRepository()
+  {
+    return $this->program_repository;
+  }
+
 }

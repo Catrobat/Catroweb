@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\GuidType;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -49,9 +50,76 @@ class User extends BaseUser implements LdapUserInterface
   protected $dn;
 
   /**
-   * @ORM\OneToMany(targetEntity="Program", mappedBy="user", fetch="EXTRA_LAZY", cascade={"remove"})
+   * Programs owned by this user.
+   * When this user is deleted, all the programs owned by him should be deleted too.
+   *
+   * @ORM\OneToMany(
+   *   targetEntity="Program",
+   *   mappedBy="user",
+   *   fetch="EXTRA_LAZY",
+   *   cascade={"remove"}
+   * )
+   * @var Collection|Program[]
    */
   protected $programs;
+
+  /**
+   * Notifications which are available for this user (shown upon login).
+   * When this user is deleted, all notifications for him should also be deleted.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity="CatroNotification",
+   *     mappedBy="user",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   * @var Collection|CatroNotification[]
+   */
+  protected $notifications;
+
+  /**
+   * Comments written by this user.
+   * When this user is deleted, all the comments he wrote should be deleted too.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity="UserComment",
+   *     mappedBy="user",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   *   )
+   * @var Collection|UserComment[]
+   */
+  protected $comments;
+
+  /**
+   * FollowNotifications mentioning this user as a follower.
+   * When this user will be deleted, all FollowNotifications mentioning
+   * him as a follower, should also be deleted.
+   *
+   * @ORM\OneToMany(
+   *   targetEntity="App\Entity\FollowNotification",
+   *   mappedBy="follower",
+   *   fetch="EXTRA_LAZY",
+   *   cascade={"remove"}
+   * )
+   * @var Collection|FollowNotification[]
+   */
+  protected $follow_notification_mentions;
+
+  /**
+   * LikeNotifications mentioning this user as giving a like to another user.
+   * When this user will be deleted, all LikeNotifications mentioning
+   * him as a user giving a like to another user, should also be deleted.
+   *
+   * @ORM\OneToMany(
+   *   targetEntity="App\Entity\LikeNotification",
+   *   mappedBy="like_from",
+   *   fetch="EXTRA_LAZY",
+   *   cascade={"remove"}
+   * )
+   * @var Collection|LikeNotification[]
+   */
+  protected $like_notification_mentions;
 
   /**
    * @ORM\ManyToMany(targetEntity="\App\Entity\User", mappedBy="following")
@@ -139,6 +207,11 @@ class User extends BaseUser implements LdapUserInterface
   protected $limited = false;
 
   /**
+   * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="reportingUser", fetch="EXTRA_LAZY")
+   */
+  protected $program_inappropriate_reports;
+
+  /**
    * User constructor.
    */
   public function __construct()
@@ -149,8 +222,6 @@ class User extends BaseUser implements LdapUserInterface
     $this->following = new ArrayCollection();
     $this->country = '';
   }
-
-
 
   /**
    *
@@ -386,6 +457,26 @@ class User extends BaseUser implements LdapUserInterface
   }
 
   /**
+   * Returns the Notifications which are available for this user (shown upon login).
+   *
+   * @return CatroNotification[]|Collection The Notifications which are available for this user (shown upon login).
+   */
+  public function getNotifications()
+  {
+    return ($this->notifications != null) ? $this->notifications : new ArrayCollection();
+  }
+
+  /**
+   * Sets the Notifications which are available for this user (shown upon login).
+   *
+   * @param CatroNotification[]|Collection $notifications Notifications which are available for this user (shown upon login).
+   */
+  public function setNotifications($notifications)
+  {
+    $this->notifications_for_this_user = $notifications;
+  }
+
+  /**
    * @return mixed
    */
   public function getFollowers()
@@ -452,4 +543,66 @@ class User extends BaseUser implements LdapUserInterface
   {
     return $this->following->contains($user);
   }
+
+  /**
+   * Returns the FollowNotifications mentioning this user as a follower.
+   *
+   * @return FollowNotification[]|Collection
+   */
+  public function getFollowNotificationMentions()
+  {
+    return $this->follow_notification_mentions;
+  }
+
+  /**
+   * Sets the FollowNotifications mentioning this user as a follower.
+   *
+   * @param FollowNotification[]|Collection $follow_notification_mentions
+   */
+  public function setFollowNotificationMentions($follow_notification_mentions): void
+  {
+    $this->follow_notification_mentions = $follow_notification_mentions;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getProgramInappropriateReports()
+  {
+    return $this->program_inappropriate_reports;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getProgramInappropriateReportsCount()
+  {
+    $programs_collection = $this->getPrograms();
+    $programs = $programs_collection->getValues();
+    $count = 0;
+    foreach ($programs as $program)
+    {
+      $count +=$program->getReportsCount();
+    }
+    return $count;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getComments()
+  {
+    return $this->comments;
+  }
+
+  /**
+   * @return mixed
+   */
+    public function getReportedCommentsCount()
+    {
+      $comments_collection = $this->getComments();
+      $criteria = Criteria::create()->andWhere(Criteria::expr()->eq('isReported', 1));
+
+      return $comments_collection->matching($criteria)->count();
+    }
 }

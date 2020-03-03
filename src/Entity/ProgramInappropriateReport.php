@@ -29,7 +29,7 @@ class ProgramInappropriateReport
   /**
    * @var \App\Entity\User
    *
-   * @ORM\ManyToOne(targetEntity="\App\Entity\User")
+   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="program_inappropriate_reports")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
   private $reportingUser;
@@ -65,7 +65,7 @@ class ProgramInappropriateReport
   /**
    * @var \App\Entity\Program
    *
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
+   * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="reports")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", onDelete="SET NULL")
    */
   private $program;

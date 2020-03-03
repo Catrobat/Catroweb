@@ -20,7 +20,7 @@ Feature: Upload a program
     When I POST these parameters to "/app/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"projectId":"(.*?)","statusCode":200,"answer":"Your project was uploaded successfully!","token":"(.*?)","preHeaderMessages":""}
+      {"projectId":"REGEX_STRING_WILDCARD","statusCode":200,"answer":"Your project was uploaded successfully!","token":"REGEX_STRING_WILDCARD","preHeaderMessages":""}
       """
 
   Scenario: missing all prameters will result in an error
@@ -85,11 +85,11 @@ Feature: Upload a program
       {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
       """
 
-  Scenario:
+  Scenario: Token is not changing on upload
     Given the next generated token will be "aabbccddee"
     And I am "Catrobat"
     And I upload a catrobat program
-    When I upload another program using token "aabbccddee"
+    When I upload another program using token "cccccccccc"
     Then It should be uploaded
 
   Scenario: Program Sanitizer should remove unnecessary files

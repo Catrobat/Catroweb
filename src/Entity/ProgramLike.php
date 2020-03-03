@@ -24,8 +24,19 @@ class ProgramLike
     self::TYPE_SMILE,
     self::TYPE_LOVE,
     self::TYPE_WOW,
+    // -> ... and here ...
+  ];
+
+  public static $TYPE_NAMES = [
+    self::TYPE_THUMBS_UP => 'thumbs_up',
+    self::TYPE_SMILE     => 'smile',
+    self::TYPE_LOVE      => 'love',
+    self::TYPE_WOW       => 'wow',
     // -> ... and here
   ];
+
+  const ACTION_ADD = 'add';
+  const ACTION_REMOVE = 'remove';
 
   /**
    * @param $type
@@ -84,7 +95,7 @@ class ProgramLike
   /**
    * @param Program $program
    * @param User    $user
-   * @param int                                $type
+   * @param int     $type
    */
   public function __construct(Program $program, User $user, $type)
   {
@@ -183,6 +194,20 @@ class ProgramLike
   public function getType()
   {
     return $this->type;
+  }
+
+  /**
+   * @return string|null
+   */
+  public function getTypeAsString()
+  {
+    try
+    {
+      return self::$TYPE_NAMES[$this->type];
+    } catch (\ErrorException $exception)
+    {
+      return null;
+    }
   }
 
   /**
