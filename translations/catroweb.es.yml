@@ -161,7 +161,7 @@ programs:
 remixGraph:
   showRemixGraph: 'Mostrar gráfico de remixes'
   by: 'por'
-  open: 'Abierto '
+  open: 'Abrir'
   showPaths: 'Mostrar rutas'
   programNotAvailableErrorTitle: 'Lo sentimos...'
   programNotAvailableErrorDescription: 'The project is not available any more!'

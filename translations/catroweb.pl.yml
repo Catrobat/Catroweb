@@ -19,11 +19,11 @@ deleteIt: Tak, usuń!
 reportIt: Tak, zgłoś to!
 areYouSure: Jesteś pewien?
 noWayOfReturn: To działanie jest nieodwracalne!
-download: Download the project
+download: Pobierz projekt
 description: Opis
 noDescription: Brak opisu.
-credits: Credits
-noCredits: No credits available.
+credits: Podziękowania
+noCredits: Nie ma podziękowań.
 country: Kraj
 loginText: zaloguj się
 privacyPolicy: Polityka prywatności
@@ -36,38 +36,38 @@ less: 'mniej'
 show-more: 'Pokaż więcej'
 show-less: 'Pokaż mniej'
 ok: OK
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Aby pobrać przykładowy projekt kliknij %link_start% tutaj %link_end%.'
 registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
 notifications: 'Powiadomienia'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
+allNotifications: 'Wszystkie powiadomienia'
+FollowersNotifications: 'Obserwujący'
+LikeNotifications: 'Polubienia'
 likesNotificationsTitle: 'Like Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
 CommentNotifications: 'Komentarze'
-oldnotification: 'Old Notifications'
+oldnotification: 'Stare powiadomienia'
 wellDone: "Świetnie!"
 done: "Gotowe!"
 notificationsReadMessage: "It looks like you dont have any notifications."
 notificationsClearedMessage: "Wszystkie powiadomienia zostały oznaczone jako przeczytane."
 deleteNotificationConfirmation: "Jesteś pewien?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+notificationDeleteMessage: "Na pewno chcesz usunąć to powiadomienie?"
+notificationDeleteAllMessage: "Na pewno chcesz usunąć wszystkie powiadomienia?"
+confirmMessage: "Tak, usuń"
 cancelMessage: "Anuluj"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
+notificationsAllMessagesDeleted: "Wszystkie powiadomienia zostały usunięte."
+notificationDeletedMessage: "Powiadomienie zostało pomyślnie usunięte."
 clearAllNotificationsButtonTitle: "Oznacz wszystkie jako przeczytane"
-deleteAllNotificationsButtonTitle: "Delete all"
+deleteAllNotificationsButtonTitle: "Usuń wszystko"
 notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
-notificationsDeleteError: "Unable to delete notifications!"
+notificationsDeleteError: "Nie można usunąć powiadomień!"
 pleaseWait: "Proszę czekać..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      title: 'Jakie projekty są tutaj polecane?'
+      description: 'Im więcej polubień (w tym "Kciuk do góry", "Uśmiech", "Miłość" i "wow!") projekt otrzyma, tym wyżej na liście się znajdzie.'
 programs:
   welcome:
     title: Witamy w Catrobat %theme%
@@ -75,9 +75,9 @@ programs:
     download: Pobierz aplikację
     statistics: Więcej Statystyk
   featured: Polecane
-  newest: Newest projects
-  recommended: Recommended projects
-  noPrograms: There are currently no projects.
+  newest: Najnowsze projekty
+  recommended: Polecane projekty
+  noPrograms: Nie ma żadnego projektu.
   deleteConfirmation: |+
     Na pewno?
     Na pewno chcesz usunąć "%programName%"?
@@ -85,32 +85,32 @@ programs:
     Tak, usuń!
     Anuluj
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    Jesteś pewien?
+    Jeśli ustawisz '%programName%' na prywatny, nie będzie on widoczny ani możliwy do znalezienia przez innych użytkowników.
+    Nadal możesz udostępnić link do swojego projektu znajomym. Możesz przełączyć widoczność dotykającą ikonę kłódki.
+    Jeśli ustawisz "%programName%" jako publiczne, może być widoczny i znaleziony przez innych użytkowników.
+    Tak, ustaw publiczne
+    Tak, ustaw prywatne
+    Nie
   reportCommentConfirmation: Na pewno chcesz zgłosić ten komentarz?
   deleteCommentConfirmation: Na pewno chcesz usunąć ten komentarz?
   deleteAccountConfirmation: |+
-    Account Deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
+    Usunąć konto?
+    Na pewno chcesz usunąć swoje konto? Spowoduje to również usunięcie przesłanych projektów i komentarzy!
+    To jest nieodwracalne!
+    Tak, usuń!
+    Anuluj
+  tooLongDescription: Opis projektu jest za długi!
   rudeWordsInDescription: Nie można używać brzydkich słów w opisie!
-  tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
+  tooLongCredits: Podziękowania są za długie!
+  rudeWordsInCredits: Nie można używać brzydkich słów w podziękowaniach!
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
-  random: Random projects
+  random: Losowe projekty
   related: Related projects
   downloads: '%downloads% pobrań'
-  sample: Example projects
+  sample: Przykładowe projekty
   views: '%views% odsłon'
   likeThumbsUpDetailText: '{0}0 ludzi polubiło to |{1}1 osoba polubiła to |] 1, Inf]%persons% ludzi polubiło to'
   likeSmileDetailText: '{0}0 ludzi uśmiecha się do tego |{1}1 osoba uśmiecha się do tego |] 1, Inf]%persons% ludzi uśmiecha się do tego'
@@ -118,25 +118,25 @@ programs:
   likeWowDetailText: '{0}0 ludzi mówi o tym "wow!" |{1}1 osoba mówi o tym "wow!" |] 1, Inf]%persons% ludzi mówi o tym "wow!"'
   remixes: '{0}0 remiksów |{1}1 remiks |]1,Inf]%remixes% remiksów'
   newRemixesNotificationTitle: '|{1}"%programName%" ma 1 nowy remiks: |]1,Inf] "%programName%" ma %remixes% nowych remiksów:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  submitted: Przesłane projekty
+  uploaded: Przesłane projekty
   reportAsInappropriate: Zgłoś jako niewłaściwe
-  reportProgram: Report project
+  reportProgram: Zgłoś projekt
   languageVersion: 'Wersja języka Catrobat: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: Proszę, %login%, aby zgłosić ten program.
+  reportDialogHeader: Dlaczego chcesz zgłosić ten projekt?
   reportDialogReason: Podaj powód
   reportRadioButtonInappropriate: To jest nieodpowiednie
   reportRadioButtonCopyright: Naruszenie praw autorskich
   reportRadioButtonSpam: To jest spam
   reportRadioButtonDislike: Nie lubię tego
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportOwnProgram: Nie możesz oflagować własnego projektu.
+  reportAlready: Już oflagowałeś ten projekt.
+  reportDone: Zgłosiłeś ten projekt!
   updateAppHeader: Aktualizacja aplikacji
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji, aby móc pobrać ten projekt.
   btnClosePopup: OK
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: Sprawdź ten projekt z Catrobat
   show_more: Pokaż więcej
   comments: Komentarze
   send: Wyślij
@@ -147,24 +147,24 @@ programs:
   deleted_popup: Komentarz został pomyślnie usunięty.
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
-  editDescription: Edit the project Description
+  editDescription: Edytuj opis projektu
   saveDescription: Zapisz zmiany w Opisie
-  editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  editCredits: Edytuj podziękowania
+  saveCredits: Zapisz zmiany w Podziękowaniach
   addComment: Napisz komentarz
   thumbsUp: Kciuk do góry!
   smile: Uśmiech!
   love: Kocham!
   wow: Wow!
   linkTitle: Link
-  link: Copy project link to clipboard
+  link: Skopiuj link do projektu do schowka
 remixGraph:
   showRemixGraph: 'Pokaż wykres remiksów'
   by: 'o'
   open: 'Otwórz '
   showPaths: 'Pokaż ścieżki'
   programNotAvailableErrorTitle: 'Przepraszamy...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailableErrorDescription: 'Projekt nie jest już dostępny!'
   programNotAvailable: 'Niedostępny'
   programUnknownUser: 'Nieznany użytkownik'
 noReply: To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
@@ -223,12 +223,12 @@ profile:
   oldPass: stare hasło
   firstEmail: Mój pierwszy e-mail
   secondEmail: Mój drugi e-mail
-  myPrograms: My projects
+  myPrograms: Moje projekty
   follows: Obserwowani
   follower: Obserwujący
   unfollowUser: Przestań obserwować tego użytkownika!
   followUser: Obserwuj tego użytkownika!
-  amountOfPrograms: Amount of projects
+  amountOfPrograms: Liczba projektów
   form:
     passwordTooShort: Nowe hasło musi mieć co najmniej %length% znaków.
     passwordTooLong: Nowe hasło może mieć maksymalnie %length% znaków.
@@ -237,12 +237,12 @@ profile:
     emailNotValid: Adres e-mail jest nieprawidłowy.
     emailMissing: Błąd podczas aktualizowania tego adresu e-mail. Musisz mieć co najmniej jeden potwierdzony adres e-mail.
     emailExists: Ten adres e-mail już istnieje.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: Nieprawidłowa nazwa użytkownika.
+    usernameMissing: Musisz mieć nazwę użytkownika.
     usernameExists: Ta nazwa użytkownika już istnieje.
     submitSuccess: zapisane!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: Czy naprawdę chcesz usunąć swój projekt
+  programsOf: Projekty
   changePicture: Zmień zdjęcie
   avatar:
     noImage: Brak obrazka!
@@ -263,7 +263,7 @@ myprofile:
   editCountry: Edytuj kraj
   editEmail: Edytuj e-mail
   deleteAccount: Usuń konto
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  deleteAccountText: Jesteś pewien, że chcesz usunąć swoje konto? Spowoduje to usunięcie przesłanych projektów i komentarzy!
   editAccountSettings: Edytuj ustawienia konta
   notChangeVisibility: Nie można zmienić widoczności
   notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
@@ -274,7 +274,7 @@ licenseToPlay:
   text2: 'Nie ma sekretnych przepisów: instrukcje, jak zrobić ciasteczko są dostępne dla każdego, aby je wykorzystywać, modyfikować i traktować je jako inspirację dla nowych pomysłów... to znaczy ciasteczek.'
   text3: "Możesz zjeść ciasteczko możesz też skopiować przepisy innych, aby zrobić własne z nieco innymi składnikami. Ta swoboda pociąga za sobą dwa proste wymagania:"
   text4: "Ustalając reguły dla społeczności Catrobata zdecydowaliśmy się na takie podejście, ponieważ wierzymy, że to pomaga w uczeniu się i kreatywności. Poprzez dzielenie się przepisami i składnikami (skryptami, rysunkami, dźwiękami) ludzie mogą opierać się na pomysłach innych z korzyścią dla wszystkich."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text5: Projektując stronę projektu Catrobat włączyliśmy do niej elementy pomagające ludziom dzielić się projektami i wspierać innych. Na stronie każdego projektu możesz zawsze pobrać oryginalne skrypty. Jeśli remiksujesz projekt (modyfikując skrypty, obrazki lub dźwięki i dzieląc się wynikiem), zachęcamy Cię do podziękowań w uwagach do projektu i wymienienia osób lub projektów, które Cię zainspirowały.
   text6: 'Dowiedz się więcej o warunkach korzystania ze społecznościowej strony projektu Catrobat na %link-termsOfUse%.'
   list1:
     item1: dziel się swoimi ciasteczkami wraz z przepisami na nie
@@ -283,7 +283,7 @@ licenseToPlay:
 termsOfUse:
   title: Warunki użytkowania
   headline: Witaj w społeczności Catrobat!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'Jako uczestnik społeczności Catrobat dzielisz się programami i pomysłami z innymi ludźmi:'
   text2: "Potrzebujemy Twojej pomocy, aby ta społeczność dawała wsparcie dla każdego jej członka. Oto jak możesz pomóc:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: 'Nasz prezent dla Ciebie:'
@@ -293,8 +293,8 @@ termsOfUse:
     item2: w każdym wieku (od małych dzieci do nastolatków i ich dziadków)
     item3: na wszystkich poziomach doświadczenia
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item1: Miej szacunek. Podczas udostępniania projektów, pamiętaj proszę, że ludzie z różnych grup wiekowych i środowisk zobaczą Twoje dzieło.
+    item2: "Podziękuj. Masz swobodę przerabiania projektów innych ludzi - po prostu upewnij się, że składasz im podziękowania. Jednym z miejsc podziękowań jest sekcja podziękowań. Zobacz ustęp poniżej, wypunktowaną listę szczegółowych informacji na temat modyfikowania projektów innych użytkowników."
     item3: "Zachowaj uczciwość. Nie udawaj, że jesteś kimś innym i nie staraj się oszukać społeczności."
     item4: "Nie ujawniaj informacji osobistych. Nie dziel się swoim adresem e-mail, numerem telefonu lub innymi danymi osobowymi."
     item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
@@ -326,10 +326,10 @@ help:
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: 'Make a new project'
+      title: 'Stwórz nowy projekt'
       detail:
         text1: 'Naciśnij na "Nowy".'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
+        text2: 'Wprowadź nazwę projektu, wybierz "Utwórz pusty projekt" i naciśnij "OK".'
     step2:
       title: "Utwórz nowy obiekt"
       detail:
@@ -370,14 +370,14 @@ help:
       description: "Ten krok pokazuje, jak można powtarzać zachowanie się obiektów."
       detail:
         text1: 'Wybierz blok "Zawsze". Wszystko w pętli będzie nieustannie powtarzane.'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
+        text2: 'Przyczep blok "Zawsze" pod blokiem "Kiedy projekt startuje".'
         text3: 'Dodaj kolejny blok "Leć".'
         text4: 'Przyczep blok “Leć” ponad blokiem “Koniec pętli”.'
         text5: 'Wybierz w polu tekstowym wartości  x i y i ustaw je na 0.'
         text6: 'Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.'
     step7:
       title: "Naciskanie jest wszystkim"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
+      description: 'Możesz również kontrolować zachowanie obiektu, gdy projekt już działa na scenie.'
       detail:
         text1: 'Wybierz blok "Kiedy naciśnięty". Każdy blok umieszczony pod nim zostanie raz wykonany, gdy naciśniesz obiekt na scenie.'
         text2: 'Umieść blok "Kiedy naciśnięty" pod innymi blokami.'
@@ -404,12 +404,12 @@ help:
       title: "Menu główne"
       description: "Użyj przycisku wstecz Androida, aby dostać się do tego ekranu."
       detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
+        text1: 'Kontynuuj pracę z obecnie otwartym projektem.'
+        text2: 'Dodaj nowy projekt.'
+        text3: 'Zobacz wszystkie lokalne projekty.'
         text4: 'Przejdź do witryny Pomoc i podyskutuj z innymi użytkownikami.'
         text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
+        text6: 'Wyślij projekt, który jest obecnie otwarty.'
   tutorialcards:
     title: "Poradniki"
     description1: "Te poradniki pokazują, jak stosować skuteczne triki w"
@@ -482,8 +482,8 @@ help:
       one: "Najpierw upewnij się, że bloczki wykrywania twarzy są włączone. W związku z tym przejdź do ustawień."
       two: "Dodaj nowy obiekt i wstaw następujące bloczki, aby pokazać go, jeśli aparat wykryje twarz. Umieść, \"jeśli twarz jest wykryta\" i umieścić to w pętli \"zawsze\". Jeśli aparat wykrywa twarz zmienna przyjmuje wartość \"Prawda\", w przeciwnym razie - \"Fałsz\"."
   starterPrograms:
-    title: "Starter Projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
+    title: "Projekty na start"
+    description: "Poznaj te projekty na start. Zajrzyj do środka, żeby coś zmienić i dodać swoje pomysły."
     categories:
       games: "Gry"
       animations: "Animacje"
@@ -493,13 +493,13 @@ help:
     title: "Jak wgrać grę Pocket Code na stronę Game Jolt?"
     text0: "Po pierwsze gratulujemy Ci stworzenia nowej gry! Teraz możesz przesłać ją na %link%, aby utworzyć samodzielną aplikację na Android, którą następnie można przesyłać na stronę Game Jolt."
     title1: "Rejestracja"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    text1: "Najpierw musisz utworzyć konto. Następnie będziesz mógł przesłać stworzony projekt. Nie martw się, to proste: wystarczy wymyślić nazwę użytkownika i hasło. Po wypełnieniu obu, kliknij na 'Zaloguj albo zarejestruj się'. I gotowe!"
     title2: "Wyślij"
     text2: "Po zakończeniu procesu rejestracji będziesz mógł przesłać swoją grę. Wymyśl nazwę i dodaj opis - nie zapomnij dodać #Alicejam150 do opisu."
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
+    title3: "Wyszukaj swój projekt"
+    text3: "Przejdź do swojego profilu na Pocket Code, w którym znajdują się wszystkie Twoje projekty, lub wyszukaj projekt bezpośrednio, używając wyszukiwania i nazwy projektu."
     title4: "Stwórz aplikację na Android"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    text4: "Bezpośrednio na stronie projektu możesz utworzyć aplikację na Androida. Po kliknięciu „Przygotuj aplikację” aplikacja zostanie zbudowana."
     title5: "Pobierz aplikację"
     text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
     title6: "Zarejestruj się/zaloguj na GameJolt.com"
@@ -535,7 +535,7 @@ help:
     subtitle6: "Stwórz ruchome tło"
     description6: |
       Ten poradnik pokazuje, jak utworzyć przewijane w pionie tło przez przesuwanie grafiki tła w określony sposób. Inną rzeczą, której cię nauczymy jest, skakanie postaci do przodu, gdy naciskasz na nią. Aby gra była nieco trudniejsza, pokażemy jak spowolnić swoją postać w miarę upływu czasu.
-    download: "Download the project"
+    download: "Pobierz projekt"
 oauth:
   username_header: Dziękujemy za rejestrację w Pocket Code!
   username_chooser: 'Proszę wybrać nazwę użytkownika:'
@@ -593,7 +593,7 @@ errors:
   description:
     rude: Opis nie może zawierać niecenzuralnych zwrotów.
   credit:
-    rude: Credits must not contain rude words.
+    rude: Podziękowania nie mogą zawierać brzydkich słów.
   country:
     blank: Brakuje kraju.
     invalid: Nieprawidłowy kraj
@@ -619,24 +619,24 @@ errors:
   token: 'Uwierzytelnienie urządzenia nie powiodło się: nieprawidłowy token uwierzytelniania!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
-    rude: Project name must not contain rude wordes.
+    rude: Nazwa projektu nie może zawierać brzydkich słów.
   program:
-    invalid: Invalid project.
+    invalid: Nieprawidłowy projekt.
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'Przepraszamy, Twój projekt zawiera starą wersję języka Catrobat! Czy używasz najnowszej wersji Pocket Code?'
   programversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'Przepraszamy, używasz starej wersji Pocket Code. Zaktualizuj do najnowszej wersji.'
   authentication:
     title: Uwierzytelnianie nie powiodło się
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      Twoje dane użytkownika są błędne.
+      Spróbuj zalogować się ponownie w aplikacji.
 success:
   text: Sukces
   registration: Rejestracja udana!
   token: OK
   upload: Projekt został wysłany pomyślnie!
-  imgUpload: Your image was uploaded successfully!
+  imgUpload: Twoje zdjęcie zostało pomyślnie przesłane!
   report: Twój raport został wysłany!
 time:
   minutes.ago: '{0} < 1 minuta temu |{1}1 minuta temu |]1,Inf] %count% minut(y) temu'
@@ -702,7 +702,7 @@ gamejam:
   whats: Co to jest %gamejamname%?
   submitown:
     header: pamiętaj
-    subheader: You can only submit your own projects
+    subheader: Możesz przesyłać tylko własne projekty
     text: |
       Ale dlaczego nie stworzysz swojego własnego? Weź udział w %gamejamtag%
 tag-text: Tagi
@@ -715,7 +715,7 @@ tags:
     tag4: Muzyka
     tag5: Sztuka
     tag6: Eksperymentalne
-    tag7: Tutorial
+    tag7: Samouczek
 admin:
   maintain:
     diskMaintenance: Zarządzanie dyskiem
@@ -731,9 +731,9 @@ admin:
     createBackupConfirmationTitle: Tworzenie kopii zapasowej
     createBackupConfirmationText: Ten proces może trochę potrwać. Następnie strona zostanie odświeżona!
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: Podobne projekty
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Użytkownicy, którzy pobrali ten projekt, pobrali również
+  moreFromThisUser: Więcej od %username%
 pmd:
   submitBtn: Prześlij swój projekt
   submitBox:
@@ -741,9 +741,9 @@ pmd:
     text: Masz zamiar wysłać swój projekt. Proszę wpisać kod projektu i kliknij wyślij.
     btnText: Wyślij
   successful:
-    text: Your project upload was successful.
+    text: Projekt został przesłany pomyślnie.
   failed:
-    text: Project upload failed.
+    text: Przesyłanie projektu nie powiodło się.
 codeview:
   showCode: 'Pokaż kod'
   hideCode: 'Ukryj kod'
@@ -755,7 +755,7 @@ codeview:
   scenes: 'scen'
   scripts: 'skryptów'
   bricks: 'bloków'
-  objects: 'actors and objects'
+  objects: 'aktorzy i obiekty'
   looks: 'wyglądów'
   sounds: 'dźwięków'
   globals: 'zm. globalnych'
@@ -775,7 +775,7 @@ footer:
   download: Pobierz aplikację
 privacy-policy:
   header: Polityka prywatności
-  version: Version 2.2, 17 October 2019
+  version: Wersja 2.2, 17 października 2019
   text1: Aby zaoferować Ci wszystkie korzyści z naszych usług i powiązanego konta, konieczne jest zebranie pewnych danych od Ciebie.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
   text3: Aby utworzyć i korzystać z konta w naszych systemach oraz aby informować Cię o niezbędnych zmianach dotyczących Twojego konta za pośrednictwem poczty e-mail, np. aktualizacji lub naruszeń naszych Warunków korzystania i usług, naszych zasad dla społeczności lub naszej polityki, będziemy przechowywać Twoją nazwa użytkownika i, jeśli podałeś, twój adres e-mail. Jeśli podłączyłeś swoje konto przez Google Plus lub Facebook, dodatkowo przechowujemy klucz identyfikacyjny podłączony do Twojego konta w tych usługach. Nie wykorzystamy tych danych do jakichkolwiek innych celów (np. marketingowych), chyba że wyrazisz na to zgodę.
@@ -791,19 +791,19 @@ catro-notifications:
   markAsRead: "Oznacz jako przeczytane"
   summary: "{0}Nie masz nowych powiadomień|{1}Masz %amount% nowe powiadomienie!|]1,Inf]Masz %amount% nowych powiadomień!"
   comment:
-    title: 'New comment for project %program_name%!'
-    message: 'User %user_link% commented on your project %program_link%.'
+    title: 'Nowy komentarz do projektu %program_name%!'
+    message: 'Użytkownik %user_link% skomentował Twój projekt %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'Nowe polubienie projektu %program_name%!'
+    message: 'Użytkownik %user_link% polubił Twój projekt %program_link%.'
   follow:
     title: 'Nowy Obserwator!'
     message: 'Użytkownik %user_link% obserwuje Cię teraz.'
   program-upload:
-    title: 'New Project from someone you follow'
-    message: 'User %user_link% created a new Project %program_link%'
+    title: 'Nowy projekt użytkownika, którego obserwujesz'
+    message: 'Użytkownik %user_link% stworzył nowy projekt %program_link%'
 clipboard:
-  success: Link to project copied to clipboard!
+  success: Link do projektu skopiowany do schowka!
   fail: Nie udało się skopiować linku do schowka! :(
 next: Dalej
 previous: Poprzedni
@@ -814,7 +814,7 @@ help-cards:
     stepbystep: Krok po Kroku
     getinvolvedGoogle: Pobierz z Google Play
     getinvolvedApple: Pobierz na IOS
-    discord: Join on Discord
+    discord: Dołącz do Discorda
     game_design: Projektowanie gier
     education: Platforma edukacyjna
     discuss: Forum dyskusyjne
@@ -823,7 +823,7 @@ help-cards:
     tutorials: "Przydatne triki w %theme%"
     stepbystep: "Zrób 10 prostych kroków w %theme%"
     getinvolved: Pobierz aplikację i rozpocznij
-    discord: Join the community on discord
+    discord: Dołącz do społeczności na Discordzie
     game_design_1: Skuteczne triki dla
     game_design_2: tworzenie gry
     education: Kurs dla początkujących i świetne zasoby

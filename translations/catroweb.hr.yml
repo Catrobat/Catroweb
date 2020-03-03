@@ -19,11 +19,11 @@ deleteIt: Da, izbrisi!
 reportIt: Da, prijavi!
 areYouSure: Jeste li sigurni?
 noWayOfReturn: Ne postoji nacin da ponistite vase radnje!
-download: Download the project
+download: Preuzmi program
 description: Opis
 noDescription: Opis nije dostupan.
-credits: Credits
-noCredits: No credits available.
+credits: Zasluge
+noCredits: Nema dostupnih zasluga.
 country: Država
 loginText: prijava
 privacyPolicy: Pravila privatnosti
@@ -36,38 +36,38 @@ less: 'manje'
 show-more: 'Prikaži više'
 show-less: 'Prikaži manje'
 ok: OK
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Kako bi preuzeli program kliknite %link_start% ovdje %link_end%.'
 registrationError: 'Žao nam je, ovo ime ili e-mail adresa je već u upotrebi.'
 notifications: 'Obavijesti'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
+allNotifications: 'Sve obavijesti'
+FollowersNotifications: 'Pratitelji'
+LikeNotifications: 'Sviđanja'
 likesNotificationsTitle: 'Like Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
 CommentNotifications: 'Komentari'
-oldnotification: 'Old Notifications'
+oldnotification: 'Stare obavijesti'
 wellDone: "Bravo!"
 done: "Gotovo!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "Izgleda da nemate novih obavijesti."
 notificationsClearedMessage: "Sve obavijesti su oznacene kao procitane."
 deleteNotificationConfirmation: "Jeste li sigurni?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+notificationDeleteMessage: "Jeste li sigurni da želite izbrisati ovu obavijest?"
+notificationDeleteAllMessage: "Jeste li sigurni da želite izbrisati sve obavijesti?"
+confirmMessage: "Da, izbrisi"
 cancelMessage: "Odustani"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
+notificationsAllMessagesDeleted: "Sve obavijesti su izbrisane."
+notificationDeletedMessage: "Obavijest je uspjesno izbrisana."
 clearAllNotificationsButtonTitle: "Označi sve kao pročitano"
-deleteAllNotificationsButtonTitle: "Delete all"
+deleteAllNotificationsButtonTitle: "Izbriši sve"
 notificationsClearError: "Obavijesti ne mogu biti oznacene kao procitane!"
-notificationsDeleteError: "Unable to delete notifications!"
+notificationsDeleteError: "Nije moguce izbrisati obavijest!"
 pleaseWait: "Molimo pričekajte..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      title: 'Koji programi su preporuceni ovdje?'
+      description: 'Sto vise lajkova (ukljucujuci "Palac gore", "Smijeh", "Srce", "Woow") vas program dobije, veca je sansa da ce se pojaviti u ovoj listi.'
 programs:
   welcome:
     title: Dobrodosli u Catrobat %theme%
@@ -75,9 +75,9 @@ programs:
     download: Preuzmite aplikaciju
     statistics: Vise statistika
   featured: Izdvojeni
-  newest: Newest projects
-  recommended: Recommended projects
-  noPrograms: There are currently no projects.
+  newest: Najnoviji programi
+  recommended: Preporuceni programi
+  noPrograms: Trenutno nema projekata.
   deleteConfirmation: |+
     Jeste li sigurni?
     Jeste li sigurni da zelite izbrisati "%programName%"?
@@ -85,32 +85,32 @@ programs:
     Da, izbrisi!
     Otkazi
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    Jeste li sigurni?
+    Ako postavite %programName% kao privatan, drugi korisnici ga nece moci viditi ili pronaci.
+    I dalje mozete podijeliti link vasega programa sa prijateljima. Mozete promijeniti vidljivost dodriom na lokot.
+    Ako postavite %programName% na javno, drugi korisnici ce moci pronaci i vidjeti vas program.
+    Da, postavi na javno
+    Da, postavi na privatno
+    Ne
   reportCommentConfirmation: Jeste li sigurni da želite prijaviti ovaj komentar?
   deleteCommentConfirmation: Jeste li sigurni da želite obrisati ovaj komentar?
   deleteAccountConfirmation: |+
-    Account Deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
+    Brisanje racuna?
+    Jeste li sigurni da zelite izbrisati vas racun? To ce takodjer izbrisati vase programe i komentare!
+    Nema nacina da ponistite vase radnje!
+    Da, izbrisi!
+    Otkazi
+  tooLongDescription: Opis programa je predug!
   rudeWordsInDescription: Ne mozete koristiti nepristojne rijeci u vasem opisu!
-  tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
+  tooLongCredits: Zasluge programa su preduge!
+  rudeWordsInCredits: Ne mozete koristiti nepristojne rijeci u vasem opisu!
   most:
     viewed: Najgledanije
     downloaded: Sa najviše preuzimanja
   random: Random projects
-  related: Related projects
+  related: Slicni Projekti
   downloads: '%downloads% preuzimanja'
-  sample: Example projects
+  sample: Primjeri projekata
   views: '%views% pregledi'
   likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
@@ -118,25 +118,25 @@ programs:
   likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  submitted: Objavljeni programi
+  uploaded: Postavljeni programi
   reportAsInappropriate: Prijavi kao neprikladno
-  reportProgram: Report project
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportProgram: Prijavi projekt
+  languageVersion: 'Catrobat verzija jezika: %languageVersion%'
+  reportLoginText: Molimo %login% kako bi prijavili ovaj program.
+  reportDialogHeader: Zasto zelite prijaviti ovaj projekt?
   reportDialogReason: Unesite razlog
   reportRadioButtonInappropriate: Neprikladan je
   reportRadioButtonCopyright: Kršenje autorskih prava
   reportRadioButtonSpam: Spam je
   reportRadioButtonDislike: Ne sviđa mi se
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportOwnProgram: Ne možeš označiti vlastiti program.
+  reportAlready: Vec ste oznacili ovaj program.
+  reportDone: Prijavili ste ovaj program!
   updateAppHeader: Ažuriraj aplikaciju
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Molimo azurirajte apliakciju na najnoviju verziju kako bi mogli preuzeti ovaj program.
   btnClosePopup: U redu
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: Provjerite ovaj Catrobat program
   show_more: Prikaži više
   comments: Komentari
   send: Pošalji
@@ -146,107 +146,108 @@ programs:
   report_popup_header: Prijavljeno
   deleted_popup: Komentar je uspješno izbrisan.
   deleted_popup_header: Izbrisano
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project Description
-  saveDescription: Save Description change
-  editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  noAdminRights: Nemate prava administratora. Molimo prijavite se kao administrator.
+  editDescription: Promijenite opis Projekta
+  saveDescription: Spremite promjene opisa
+  editCredits: Promijenit zasluge za ovaj projekt
+  saveCredits: Spremite promjene zasluga za ovaj projekt
   addComment: Ostavite komentar
   thumbsUp: Palac gore!
   smile: Osmijeh!
   love: Ljubav!
   wow: Wooow!
   linkTitle: Poveznica
-  link: Copy project link to clipboard
+  link: Kopirajte poveznicu programa u medjuspremnik
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: 'Prikazi Remix Graf'
   by: 'od'
   open: 'Otvori '
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  showPaths: 'Prikazi puteve'
+  programNotAvailableErrorTitle: 'Oprostite...'
+  programNotAvailableErrorDescription: 'Program nije dostupan vise!'
   programNotAvailable: 'Nije dostupno'
   programUnknownUser: 'Nepoznati korisnik'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: Ovo je automatska poruka - Molimo ne odgovarajte direktno na ovaj email.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Potvrda vaseg Catrobat racuna
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Postovani %username%.
+    Kako bi zavrsili aktivaciju vasega korisnickoga racuna - molimo posjetite %confirmationUrl%
+    Ovaj link moze biti iskoristen samo jednom za potvrdu vasega racuna.
+
+    Srdacan pozdrav,
+    Vas Catrobat Team.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Postovani %username%.<br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    Kako bi zavrsili aktivaciju vasega korisnickoga racuna - molimo posjetite <a href=%confirmationUrl%>here.</a><br>
     <br>
-    This link can only be used once to validate your account.<br>
+    Ovaj link moze biti iskoristen samo jednom za potvrdu vasega racuna.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Srdacan Pozdrav,<br>
+    Vas Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Oporavak vase Catrobat lozinke
   message: |
-    Dear %username%.
+    Postovani %username%.
 
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    Zatrazili ste resetiranje vase lozinke na %appplication_url% zato sto se zaboravili vasu lozinku.
+    Ako vi niste zatrazili ovo, onda igrnorirajte ovu poruku. Isteci ce za 24 sata i nece se vise moci koristiti.
 
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Kako bi resetirali vasu lozinku i kreirali novu, molimo vas posjetite sljedecu stranicu: %confirmationUrl%
 
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Mozete koristiti vase korisnicko ime i lozinku u bilo kojem trenutku kako bi pristupili %appplication_url% zajednici.
+    Kako bi to ucinili, posjetite sljedecu stranicu: %loginPage%
+    Kako bi promijenili vase korisnicke podatke, idite ne sljedecu stranicu: %profilePage%
 
-    Best regards,
-    Your Catrobat Team.
+    Srdacan Pozdrav,
+    Vas Catrobat Team.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Postovani %username%.<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Zatrazili ste resetiranje vase lozinke na <a href=%appplication_url%>Pocket Code</a> zato sto se zaboravili vasu lozinku.
+    Ako vi niste zatrazili ovo, onda igrnorirajte ovu poruku. Isteci ce za 24 sata i nece se vise moci koristiti.<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    Kako bi resetirali vasu lozinku i kreirali novu, molimo vas posjetite sljedecu stranicu: <a href=%confirmationUrl%>here.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    Mozete koristiti vase korisnicko ime i lozinku u bilo kojem trenutku kako bi pristupili the <a href=%appplication_url%>Pocket Code</a> zajednici.<br>
+    Kako bi to ucinili, posjetite sljedecu stranicu:<a href=%loginPage%>Login Page</a><br>
+    Kako bi promijenili vase korisnicke podatke, idite ne sljedecu stranicu: <a href=%profilePage%>page</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Srdacan Pozdrav,<br>
+    Vas Catrobat Team.
     </p>
 profile:
   edit: Uredite svoj profil
   saveChanges: spremi izmjene
   newPass: nova lozinka
-  repeatPass: repeat password
+  repeatPass: ponovite lozinku
   oldPass: stara lozinka
   firstEmail: Moja prva email adresa
   secondEmail: Moja druga email adresa
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: Moji projekti
+  follows: Slijedi
+  follower: Sljedbenik
+  unfollowUser: Prestani pratiti ovog korisnika!
+  followUser: Zaslijedi ovoga korisnika!
+  amountOfPrograms: Broj programa
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
+    passwordTooShort: Lozinka mora imati najmanje %length% znakova.
+    passwordTooLong: Nova lozinka moze imati najvise %length% znakova.
     passwordIsUsername: Lozinka se mora razlikovati od korisničkog imena.
     passwordWrong: Pogrešna lozinka
     emailNotValid: Ova email adresa nije valjana.
     emailMissing: Pogreška tijekom ažuriranja email adrese. Moraš imati barem jednu potvrđenu email adresu.
     emailExists: Email adresa već postoji.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: Korisničko ime nije valjano.
+    usernameMissing: Morate imati korisnicko ime.
     usernameExists: Ovo korisničko ime već postoji.
     submitSuccess: spremljeno!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: Želiš li zaista izbrisati svoj program
+  programsOf: Projekti
   changePicture: Promijeni sliku
   avatar:
     noImage: Nema slike!
@@ -361,24 +362,24 @@ help:
         text3: 'Tap into the dropdown field to create a new look.'
         text4: 'Choose the source of the image like before.'
         text5: 'Sada trebaš izabrati novu sliku.'
-        text6: 'Tap play to see the behaviour on the stage.'
+        text6: 'Pritisnite play kako bi vidjeli ponasanje na sceni.'
     step5:
       title: "Govori"
       description: "Sada ćeš saznati kako napraviti objekt koji govori."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: 'Tap play to see the behaviour on the stage.'
+        text3: 'Pritisnite play kako bi vidjeli ponasanje na sceni.'
     step6:
-      title: 'Again and again'
-      description: "This step shows you how to repeat behaviour of objects."
+      title: 'Opet i opet'
+      description: "Ovi koraci Vam pokazuju kako ponoviti ponasanje objekata."
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text1: 'Odaberi "Zauvijek" blok. Sve što se nalazi u petlji se ponavlja zauvijek.'
         text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: 'Add another "Glide" brick.'
+        text3: 'Dodaj još jedan "Klizeci" blok.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
         text5: 'Pritisni na polje za tekst od x i y vrijednosti i postavi ih na 0.'
-        text6: 'Tap play to see the behaviour on the stage.'
+        text6: 'Pritisnite play kako bi vidjeli ponasanje na sceni.'
     step7:
       title: "Tapping is everything"
       description: 'You can also control the behaviour of the object when the project is running on the stage.'
@@ -405,12 +406,12 @@ help:
         text1: 'Pozadina je kao objekt, ali ti možeš imati samo jednu pozadinu.'
         text2: 'Možeš dodati skripte, zvukove i izglede na isti način na objekt pozadine.'
     step11:
-      title: "Main Menu"
+      title: "Glavni izbornik"
       description: "Koristi Android-ov gumb za natrag da bi došao/la na ovaj zaslon."
       detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
+        text1: 'Nastavi sa trenutno otvorenim programom.'
+        text2: 'Dodaj novi program.'
+        text3: 'Vidi sve svoje lokalne programe.'
         text4: 'Idi na stranicu za pomoć i razgovaraj sa drugim korisnicima.'
         text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
         text6: 'Upload the project that is currently opened.'
@@ -418,13 +419,13 @@ help:
     title: "Vodiči"
     description1: "Ovaj vodič će ti pokazati kako korisiti učinkovite trikove u"
     getReady: "Pripremi se:"
-    tryCode: "Try this code:"
+    tryCode: "Isprobaj ovaj kod:"
     doIt: "Učini to:"
     tip: "Dodatni savjet:"
     card1:
       title: "Promjena veličine"
-      description: "Change the size of an object."
-      one: "Add the object of which you would like to change the size, e.g. Animal."
+      description: "Promijeni velicinu objekta."
+      one: "Dodajte objekt kojemu zelite da promijenite velicinu, npr. Zivotinja"
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
       title: "Promjena izgleda"
@@ -456,7 +457,7 @@ help:
     card7:
       title: "GSenzor"
       description: "Iskorisiti ovu vještinu za kontrolu objekta sa nagibanjem uređaja."
-      one: "Add the object you want to be moving on stage."
+      one: "Dodajte objekat koji zelite da bude na pokretnoj sceni."
       two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
       title: "Kompas"
@@ -492,7 +493,7 @@ help:
       games: "Igre"
       animations: "Animacije"
       interactive: "Interactive Art and Stories"
-      music: "Music And Dance"
+      music: "Glazba i ples"
   gameJam:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
@@ -500,7 +501,7 @@ help:
     text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
     title2: "Upload"
     text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your project"
+    title3: "Traži vlastite projekte"
     text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
     title4: "Napravi android aplikaciju"
     text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
@@ -540,7 +541,7 @@ help:
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the project"
+    download: "Preuzmi program"
 oauth:
   username_header: Hvala vam na registraciji za Pocket Code!
   username_chooser: 'Molimo Vas odaberite korisnicko ime:'
@@ -637,7 +638,7 @@ errors:
       Your user credentials are wrong.
       Please try to log in again in the app.
 success:
-  text: Success
+  text: Uspješno
   registration: Registracija uspješna!
   token: ok
   upload: Tvoj projekat je uspiješno uploadovan!
@@ -698,9 +699,9 @@ language:
   ukrainian: Ukrajinski
   vietnamese: Vijetnamski
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Generiraj aplikaciju
+  pending: Generiranje aplikacije
+  download: Preuzmite aplikaciju
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: Submit to %gamejamname%
@@ -711,23 +712,23 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the %gamejamtag%
-tag-text: Tags
+tag-text: Oznake
 extenstion-text: Extensions
 tags:
   constant:
     tag1: Igre
     tag2: Pokretne animacije
-    tag3: Story
-    tag4: Music
-    tag5: Art
+    tag3: Prica
+    tag4: Glazba
+    tag5: Umjetnost
     tag6: Experimental
-    tag7: Tutorial
+    tag7: Vodič
 admin:
   maintain:
     diskMaintenance: Odrzavanje diska
     ramMaintenance: Odrzavanje RAM-a
     noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    removableObjects: Izmjenjivi objekti
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Stvaranje sigurnosne kopije
@@ -737,7 +738,7 @@ admin:
     createBackupConfirmationTitle: Stvaranje sigurnosne kopije
     createBackupConfirmationText: Ovaj proces moze potrajati. Stranica ce se ponovno ucitati poslije!
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: Slicni programi
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
   moreFromThisUser: More from %username%
 pmd:
@@ -798,18 +799,18 @@ catro-notifications:
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: 'New comment for project %program_name%!'
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: 'Korisnik %user_link% je ostavio komentar na vas projekt %program_link.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'Nova oznaka svidja mi se na program %program_name%!'
+    message: 'Korisnik %user_link% je oznacio vas projekt %program_link% sa svidja mi se.'
   follow:
     title: 'Novi pratitelj!'
-    message: 'User %user_link% follows you now.'
+    message: 'Korisnik %user_link% vas slijedi sada.'
   program-upload:
-    title: 'New Project from someone you follow'
+    title: 'Novi projekt od nekoga koga slijedite'
     message: 'User %user_link% created a new Project %program_link%'
 clipboard:
-  success: Link to project copied to clipboard!
+  success: Poveznica na program kopirana u medjuspremnik!
   fail: Failed to copy link to clipboard! :(
 next: Dalje
 previous: Previous
@@ -817,11 +818,11 @@ help-cards:
   headings:
     starters: Starters
     tutorials: Vodiči
-    stepbystep: Step by Step
+    stepbystep: Korak-po-korak
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
-    discord: Join on Discord
-    game_design: Game Design
+    discord: Pridružite se našem Discord-u
+    game_design: Dizajn igre
     education: Education platform
     discuss: Discuss
   text:
@@ -834,15 +835,15 @@ help-cards:
     game_design_2: creating a game
     education: Beginner's course & great resources
     discuss_1: Get in touch with other
-    discuss_2: users
+    discuss_2: korisnici
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: Preview Size
-    sm: small
-    md: medium
-    lg: large
+    sm: malo
+    md: srednje
+    lg: veliko
   theme-special: "%flavor% Theme Special"
 flavor:
   pocketcode: Pocket Code
