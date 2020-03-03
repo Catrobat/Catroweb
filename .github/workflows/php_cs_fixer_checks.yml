@@ -1,0 +1,17 @@
+
+# Checking the php code style
+
+name: Php-CS-Fixer Code Style checks
+
+on: [push, pull_request]
+
+jobs:
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHP-CS-Fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+        with:
+          args: --config=.php_cs.dist --diff --dry-run --allow-risky=yes --verbose --format=txt
