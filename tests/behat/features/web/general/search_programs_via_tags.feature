@@ -24,7 +24,7 @@ Feature: Searching for programs with tags
     And I should see "Game"
     And I should see "Animation"
     When I press on the tag "Animation"
-    And I wait for AJAX to finish
+    And I wait for the page to be loaded
     Then I should see "Your search returned 2 results"
     And I should see "project 1"
     And I should see "project 2"

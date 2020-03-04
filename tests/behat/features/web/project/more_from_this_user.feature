@@ -75,6 +75,13 @@ Feature: There should be a more from this user category on project pages
     And I should see "project 23"
     But I should not see "More from"
 
+  Scenario: Not showing more programs when it's your own program
+    Given I log in as "Catrobat"
+    When I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then I should not see "More from"
+    But I should see 0 "#more-from-this-user-recommendations .program"
+
   Scenario: When a user has loaded more projects the number of loaded projects should be stored in the session
     Given I am on "/app/project/3"
     And I wait for the page to be loaded

@@ -19,18 +19,6 @@ Feature: As a visitor I want to see a program page
     And I should see "public project 2"
     But I should not see "private project"
 
-  Scenario: Your own projects should always be visible to you, not matter if private or not
-    Given I am log in as "Catrobat"
-    When I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then I should see "public project 1"
-    When I am on "/app/project/2"
-    And I wait for the page to be loaded
-    Then I should see "public project 2"
-    When I am on "/app/project/3"
-    And I wait for the page to be loaded
-    Then I should see "private project"
-
   Scenario: Private projects should be accessible when not logged in over the link
     When I go to "/app/project/3"
     And I wait for the page to be loaded

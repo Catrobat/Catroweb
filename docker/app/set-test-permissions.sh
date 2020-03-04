@@ -6,12 +6,8 @@
 #  As a workaround we make sure the folders already exists with the correct permissions, else
 #  var/cache/test/sessions will be created with wrong permissions
 #
-mkdir var
-mkdir var/cache
-mkdir var/log
-mkdir var/cache/test
-mkdir var/log/test
-mkdir var/cache/test/sessions
+mkdir -p var/log/test
+mkdir -p var/cache/test/sessions
 ## ~~
 
 # Symfony 4+ Permissions

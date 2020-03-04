@@ -31,16 +31,6 @@ Feature: As a project owner, I should be able to give credits for my project.
     Then I should see "Credits"
     But the element "#edit-credits-button" should not exist
 
-  Scenario: If I click the edit credits button, a textarea should appear in which I can write my credits
-    Given I log in as "Catrobat"
-    When I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then I should see "Credits"
-    And the element "#edit-credits-button" should be visible
-    When I click "#edit-credits-button"
-    And I wait for AJAX to finish
-    Then the element "#edit-credits" should be visible
-
   Scenario: I should be able to write new credits, if I am the owner of the project
     Given I log in as "Catrobat"
     When I am on "/app/project/1"

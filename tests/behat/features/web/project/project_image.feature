@@ -33,7 +33,7 @@ Feature:
     Then I should see "project 1"
     But the element "#change-project-thumbnail-button" should not exist
 
-  Scenario: Uploading a new image should work when I am logged in and it is my program
+  Scenario: Uploading a new image should work when I am logged in and it is my project
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded

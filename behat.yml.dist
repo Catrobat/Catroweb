@@ -58,8 +58,26 @@ default:
                 - AdminFeatureContext:
                     - "tests/testreports/screens/"
 
-        api:
-            paths:    [ "tests/behat/features/api" ]
+        api_general:
+            paths:    [ "tests/behat/features/api/general" ]
+            contexts:
+                - ApiFeatureContext:
+                    - "tests/testreports/behat/"
+
+        api_profile:
+            paths:    [ "tests/behat/features/api/profile" ]
+            contexts:
+                - ApiFeatureContext:
+                    - "tests/testreports/behat/"
+
+        api_project:
+            paths:    [ "tests/behat/features/api/project" ]
+            contexts:
+                - ApiFeatureContext:
+                    - "tests/testreports/behat/"
+
+        api_upload:
+            paths:    [ "tests/behat/features/api/upload" ]
             contexts:
                 - ApiFeatureContext:
                     - "tests/testreports/behat/"
@@ -76,8 +94,20 @@ default:
                 - FlavorFeatureContext:
                     - "tests/testreports/behat/"
 
-        web:
-            paths:    [ "tests/behat/features/web" ]
+        web_general:
+            paths:    [ "tests/behat/features/web/general" ]
+            contexts:
+                - WebFeatureContext:
+                    - "tests/testreports/screens/"
+
+        web_profile:
+            paths:    [ "tests/behat/features/web/profile" ]
+            contexts:
+                - WebFeatureContext:
+                    - "tests/testreports/screens/"
+
+        web_project:
+            paths:    [ "tests/behat/features/web/project" ]
             contexts:
                 - WebFeatureContext:
                     - "tests/testreports/screens/"

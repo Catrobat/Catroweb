@@ -595,6 +595,8 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^I am a user with role "([^"]*)"$/
    * @param $role
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function iAmAUserWithRole($role)
   {

@@ -22,7 +22,7 @@ Feature: As a visitor I want to see public user profiles
     And I wait for the page to be loaded
     Then I should see "My Profile"
 
-  Scenario: Calling the profile route with my user id id should bring me to myProfile
+  Scenario: Calling the profile route with my user id should bring me to myProfile
     Given I log in as "Catrobat"
     And I am on "/app/user/1"
     And I wait for the page to be loaded

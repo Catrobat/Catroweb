@@ -61,24 +61,23 @@ COPY --from=node-build /app/node_modules node_modules
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock package.json package-lock.json ./
 
-# CONFIGURATIONS
-ARG APP_ENVIRONMENT
-COPY /config config
-COPY /docker/config/parameters.yml.dist config/packages/parameters.yml
-RUN cp config/packages/test/parameters.yml.dist config/packages/test/parameters.yml && \
-    cp config/packages/dev/parameters.yml.dist config/packages/dev/parameters.yml && \
-    echo 'APP_ENV=$APP_ENVIRONMENT' > .env.local && \
-    echo 'SECURE_SCHEME=http' > .env.local && \
-    echo 'SECURE_SCHEME=http' > .env.test.local && \
-    echo 'SECURE_SCHEME=http' > .env.dev.local
-
 # ADD CODE
 ADD / ./
-COPY /docker/config/behat.yml.dist behat.yml.dist
-RUN sed -i "s|APP_ENVIRONMENT|$APP_ENVIRONMENT|g" behat.yml.dist
+
+# CONFIGURATIONS
+ARG APP_ENVIRONMENT
+RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb.$APP_ENVIRONMENT/index_test.php/|g" behat.yml.dist && \
+    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb.$APP_ENVIRONMENT:9222|g" behat.yml.dist && \
+    sed -i -r "s|(database_password:)(\s+.+)|database_password: root|g" config/packages/parameters.yml.dist && \
+    sed -i -r "s|(database_host:)(\s+.+)|database_host: db.catroweb.$APP_ENVIRONMENT|g" config/packages/parameters.yml.dist && \
+    sed -i -r "s|(database_port:)(\s+.+)|database_port: 3306|g" config/packages/parameters.yml.dist && \
+    cp config/packages/parameters.yml.dist config/packages/parameters.yml && \
+    cp config/packages/test/parameters.yml.dist config/packages/test/parameters.yml && \
+    cp config/packages/dev/parameters.yml.dist config/packages/dev/parameters.yml && \
+    echo "SECURE_SCHEME=http" | tee -a .env.local .env.test.local .env.dev.local && \
+    echo "APP_ENV=$APP_ENVIRONMENT" > .env.local
 
 # PERMISSIONS
-RUN composer run-script post-install-cmd && \
-    sh docker/app/prepare-test-env.sh
+RUN sh docker/app/prepare-test-env.sh
 
 EXPOSE 80

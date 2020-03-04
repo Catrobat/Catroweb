@@ -18,15 +18,15 @@ Feature:
     And I log in as "Catrobat"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    And I should see "My Profile"
+    Then I should see "My Profile"
 
   Scenario: changing my username must work
     Given I click "#edit-username-button"
     And I wait for AJAX to finish
-    And I fill in "username" with "Mr.Catro"
+    When I fill in "username" with "Mr.Catro"
     And I click "#save-username"
     And I wait for the page to be loaded
-    And I should be on "/app/user"
+    Then I should be on "/app/user"
     When I go to "/app/logout"
     And I wait for the page to be loaded
     And I log in as "Catrobat"
@@ -37,11 +37,11 @@ Feature:
   Scenario: When changing the username the min length must be 3
     Given I click "#edit-username-button"
     And I wait for AJAX to finish
-    And I fill in "username" with "Mr"
+    When I fill in "username" with "Mr"
     And I click "#save-username"
     And I wait for the page to be loaded
-    And I should be on "/app/user"
-    Then I should see "This username is not valid."
+    Then I should be on "/app/user"
+    And I should see "This username is not valid."
     When I go to "/app/logout"
     And I wait for the page to be loaded
     And I log in as "Mr"
@@ -50,8 +50,8 @@ Feature:
   Scenario: When changing the username the max length must be 180
     Given I click "#edit-username-button"
     And I wait for AJAX to finish
-    And I fill in "username" with "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!+++++"
-    When I click "#save-username"
+    When I fill in "username" with "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!+++++"
+    And I click "#save-username"
     And I wait for the page to be loaded
     Then I should be on "/app/user"
     And I should see "ThisUsernameConsistOf185CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180CharsThisUsernameConsistOfMoreThan180Chars!!!"
@@ -60,12 +60,12 @@ Feature:
   Scenario: changing password must work
     Given I click "#edit-password-button"
     And I wait for AJAX to finish
-    And I fill in "old-password" with "123456"
+    When I fill in "old-password" with "123456"
     And I fill in "password" with "abcdef"
     And I fill in "repeat-password" with "abcdef"
     And I click "#save-password"
     And I wait for the page to be loaded
-    And I should be on "/app/user"
+    Then I should be on "/app/user"
     When I go to "/app/logout"
     And I wait for the page to be loaded
     And I log in as "Catrobat"
@@ -76,7 +76,7 @@ Feature:
   Scenario: changing password with a typo in repeat-password should not work
     Given I click "#edit-password-button"
     And I wait for AJAX to finish
-    And I fill in "old-password" with "123456"
+    When I fill in "old-password" with "123456"
     And I fill in "password" with "abcdef"
     And I fill in "repeat-password" with "fedcba"
     And I click "#save-password"
@@ -86,7 +86,7 @@ Feature:
   Scenario: a short password should not work
     Given I click "#edit-password-button"
     And I wait for AJAX to finish
-    And I fill in "old-password" with "123456"
+    When I fill in "old-password" with "123456"
     And I fill in "password" with "abc"
     And I fill in "repeat-password" with "abc"
     And I click "#save-password"
@@ -96,7 +96,7 @@ Feature:
   Scenario: too long password should not work
     Given I click "#edit-password-button"
     And I wait for AJAX to finish
-    And I fill in "old-password" with "123456"
+    When I fill in "old-password" with "123456"
     And I fill in "password" with "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
     And I fill in "repeat-password" with "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
     And I click "#save-password"
@@ -106,7 +106,7 @@ Feature:
   Scenario: changing email and additional email should work (shows pop up)
     Given I click "#edit-email-button"
     And I wait for AJAX to finish
-    And I fill in "email" with "first@email.com"
+    When I fill in "email" with "first@email.com"
     And I fill in "additional-email" with "second@email.com"
     And I click "#save-email"
     And I wait for the page to be loaded
@@ -115,13 +115,13 @@ Feature:
     And I should see "An email was sent to your email address"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
-    And I should see "first@email.com"
+    Then I should see "first@email.com"
     And I should see "second@email.com"
 
   Scenario: changing email addresses with an invalid email should not work
     Given I click "#edit-email-button"
     And I wait for AJAX to finish
-    And I fill in "email" with "first"
+    When I fill in "email" with "first"
     And I click "#save-email"
     And I wait for AJAX to finish
     Then I should see "This email address is not valid."
@@ -157,7 +157,7 @@ Feature:
   Scenario: when deleting the first mail, the additional mail should become the first mail
     Given I click "#edit-email-button"
     And I wait for AJAX to finish
-    And I fill in "email" with ""
+    When I fill in "email" with ""
     And I fill in "additional-email" with "second@email.com"
     When I click "#save-email"
     And I wait for the page to be loaded
@@ -250,7 +250,6 @@ Feature:
     And I wait for the page to be loaded
     Then the element "#delete-account-button" should not be visible
     When I click "#account-settings-button"
-    And I wait for AJAX to finish
     Then the element "#delete-account-button" should be visible
     When I click "#delete-account-button"
     And I wait for AJAX to finish

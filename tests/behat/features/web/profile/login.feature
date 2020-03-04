@@ -43,18 +43,18 @@ Feature:
     And I wait for the page to be loaded
     When I fill in "username" with "abcd"
     And I press "recover"
-    And I wait for AJAX to finish
-    Then I should see "Your username or email address was not found."
+    Then I wait for the page to be loaded
+    And I should see "Your username or email address was not found."
     When I fill in "username" with "Catrobat"
     And I press "recover"
-    And I wait for AJAX to finish
-    Then I should see "An email was sent to your email address. Please check your inbox."
+    Then I wait for the page to be loaded
+    And I should see "An email was sent to your email address. Please check your inbox."
     When I go to "/app/resetting/request"
     And I wait for the page to be loaded
     And I fill in "username" with "Catrobat"
     And I press "recover"
-    And I wait for AJAX to finish
-    Then I should see "The password for this user has already been requested within the last 24 hours."
+    Then I wait for the page to be loaded
+    And I should see "The password for this user has already been requested within the last 24 hours."
 
   Scenario: The referer should work even after one failed login
     Given I am on "/app/help"
@@ -86,3 +86,25 @@ Feature:
     When I press "Login"
     And I wait for the page to be loaded
     Then I should see "Newest"
+
+  Scenario: The password should be hidden as default behaviour
+    Given I am on "/app/login"
+    And I wait for the page to be loaded
+    And I fill in "username" with "Catrobat"
+    And I fill in "password" with "123456"
+    Then the element ".show-hide-password input" should have type "password"
+    But the element ".show-hide-password input" should not have type "text"
+
+  Scenario: It should be possible to change the visibility of the password
+    Given I am on "/app/login"
+    And I wait for the page to be loaded
+    And I fill in "username" with "Catrobat"
+    And I fill in "password" with "123456"
+    Then the element ".show-hide-password input" should have type "password"
+    But the element ".show-hide-password input" should not have type "text"
+    When I click "#password-visibility-toggler"
+    Then the element ".show-hide-password input" should have type "text"
+    But the element ".show-hide-password input" should not have type "password"
+    When I click "#password-visibility-toggler"
+    Then the element ".show-hide-password input" should have type "password"
+    But the element ".show-hide-password input" should not have type "text"
