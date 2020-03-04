@@ -1,5 +1,5 @@
 @web @debug
-Feature: Using a release app I should not see debug programs
+Feature: Using a release app I should not see debug projects
 
   Background:
     Given there are users:
@@ -78,13 +78,11 @@ Feature: Using a release app I should not see debug programs
     Given I use a debug build of the Catroid app
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-#    Then the response status code should be 200
     And I should see "debug program"
 
   Scenario: Viewing program marked as debug using release app
     Given I use a release build of the Catroid app
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-#    Then the response status code should be 404
     And I should not see "debug program"
     And I should see "Ooooops something went wrong"

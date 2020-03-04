@@ -40,23 +40,22 @@ Feature: Searching for programs
     Then no ".search-input-header" element should be visible
     Then no "#btn-search-header" element should be visible
     And I click the currently visible search icon
-    And I wait for AJAX to finish
     Then no ".search-icon-header" element should be visible
-    Then at least one ".search-input-header" element should be visible
-    Then at least one "#btn-search-header" element should be visible
+    And at least one ".search-input-header" element should be visible
+    And at least one "#btn-search-header" element should be visible
 
   Scenario: consecutive searches should lead to different results
     Given I am on "/app"
     And I wait for the page to be loaded
-    And I click the currently visible search icon
-    Then I enter "prog" into the currently visible search input
-    And I click the currently visible search button
+    Then I click ".search-icon-header"
+    And I enter "prog" into visible ".input-search"
+    And I click "#btn-search-header"
     And I wait for the page to be loaded
     Then I should be on "/app/search/prog"
     And I should see "Your search returned 4 results"
     And at least one ".search-input-header" element should be visible
     And at least one "#btn-search-header" element should be visible
-    Then I enter "yahoo myprog" into the currently visible search input
+    Then I enter "yahoo myprog" into visible ".input-search"
     And I click "#btn-search-header"
     And I wait for the page to be loaded
     Then I should be on "/app/search/yahoo%20myprog"

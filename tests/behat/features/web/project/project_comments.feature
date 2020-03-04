@@ -108,7 +108,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for the page to be loaded
     Then the element ".single-comment" should not exist
 
-  Scenario: When there are less than 5 program i should not see the show more/less buttons
+  Scenario: When there are less than 5 comments i should not see the show more/less buttons
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#show-more-comments-button" should not be visible
@@ -126,22 +126,15 @@ Feature: As a visitor I want to write, see and report comments.
     And the element "#show-more-comments-button" should be visible
     But the element "#show-less-comments-button" should not be visible
 
-  Scenario: Pressing the show more button should result in more displayed comments
+  Scenario: Pressing the show more/less button should result in more/less displayed comments
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then I should not see "c3"
+    And I should not see "c3"
     When I click "#show-more-comments-button"
     And I wait for AJAX to finish
     Then I should see "c3"
     And the element "#show-less-comments-button" should be visible
     But the element "#show-more-comments-button" should not be visible
-
-  Scenario: Pressing the show less button should result in less displayed comments
-    Given I am on "/app/project/2"
-    And I wait for the page to be loaded
-    And I click "#show-more-comments-button"
-    And I wait for AJAX to finish
-    Then I should see "c3"
     When I click "#show-less-comments-button"
     And I wait for AJAX to finish
     Then I should not see "c3"
@@ -154,7 +147,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for the page to be loaded
     Then the element ".comment-report-button" should not exist
 
-  Scenario: When I click the report button, I should be redirected to the login page
+  Scenario: When I click the report button and I am not logged in, I should be redirected to the login page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     And I click ".comment-report-button"

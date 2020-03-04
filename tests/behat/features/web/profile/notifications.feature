@@ -73,14 +73,6 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     But I should not see "#mark-as-read-17"
     And I should not see "#mark-as-read-18"
 
-  Scenario: User should see the amount of his notifications in the menu
-    Given I log in as "Achiever"
-    And I am on "/app/"
-    And I wait for the page to be loaded
-    When I open the menu
-    And the element "#notifications-dropdown-toggler" should be visible
-    And the "#notifications-dropdown-toggler" element should contain "2"
-
   Scenario: New user should not have any notifications
     Given I log in as "Drago"
     And I am on the homepage

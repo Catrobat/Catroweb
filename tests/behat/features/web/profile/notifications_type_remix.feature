@@ -36,8 +36,8 @@ Feature: User gets notifications when somebody uploads a remix of his project
     And I log in as "Catrobat"
     And I am on "/app/notifications/allNotifications"
     And I wait for the page to be loaded
-    And I open the menu
-    And the ".all-notifications-dropdown" element should contain "1"
+    When I open the menu
+    Then the ".all-notifications-dropdown" element should contain "1"
     And I should see "You have 1 new Notification!"
     And I should see "New remix for project project 1!"
     And I should see "User Drago remixed your project"
@@ -50,8 +50,8 @@ Feature: User gets notifications when somebody uploads a remix of his project
     When I log in as "Catrobat"
     And I am on "/app/notifications/allNotifications"
     And I wait for the page to be loaded
-    And I open the menu
-    And the ".all-notifications-dropdown" element should contain "1"
+    When I open the menu
+    Then the ".all-notifications-dropdown" element should contain "1"
     And I should see "You have 1 new Notification!"
     And I should see "New remix for project project 1!"
     And I should see "User Drago remixed your project"

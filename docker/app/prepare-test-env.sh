@@ -5,4 +5,5 @@ sh docker/app/set-test-permissions.sh
 grunt
 bin/console cache:clear -e test
 bin/console catrobat:test:generate --force
+bin/console assets:install --symlink public
 echo "Test environment prepared"

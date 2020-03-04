@@ -9,7 +9,7 @@ Feature: As a visitor I want to see a project page
       | id | name      | downloads | owned by | views | apk_ready | upload time      |
       | 1  | project 1 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 |
 
-  Scenario: Viewing project page
+  Scenario: Showing statistics on project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "project 1"

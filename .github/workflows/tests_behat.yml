@@ -19,7 +19,20 @@ jobs:
       #
       fail-fast: false
       matrix:
-        testSuite: ['admin', 'api', 'ci', 'flavor', 'web', 'gamejam', 'gamejam_web', 'gamejam_javascript']
+        testSuite:
+          - admin
+          - api_general
+          - api_profile
+          - api_project
+          - api_upload
+          - ci
+          - flavor
+          - web_general
+          - web_profile
+          - web_project
+          - gamejam
+          - gamejam_web
+          - gamejam_javascript
     steps:
       - name: Checkout
         uses: actions/checkout@v2

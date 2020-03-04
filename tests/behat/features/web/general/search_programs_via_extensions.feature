@@ -26,7 +26,7 @@ Feature: Searching for programs with extensions
     And I should see "Lego"
     And I should see "Phiro"
     When I press on the extension "Lego"
-    And I wait for AJAX to finish
+    And I wait for the page to be loaded
     Then I should see "Your search returned 2 results"
     Then I should see "project 1"
     And I should see "project 2"
