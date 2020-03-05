@@ -1,10 +1,7 @@
 {% extends "Default/base.html.twig" %}
 
 {% block head %}
-
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
-  <script src="{{ asset('compiled/js/jquery-ui.js') }}"></script>
-
 {% endblock %}
 
 {% block header "" %}
@@ -16,6 +13,9 @@
     <div class="container-fluid" style="width:100%">
 
       {% include 'UserManagement/login_logo.html.twig' %}
+
+      <!-- Policy -->
+      {% include 'PrivacyAndTerms/policy.html.twig' %}
 
       <div class="row justify-content-center">
         <div class="col-sm-11 col-md-8 col-lg-6 center">
@@ -70,3 +70,17 @@
   {% endblock fos_user_content %}
 
 {% endblock body %}
+
+{% block js %}
+  <script src="{{ asset('js/register.min.js') }}"></script>
+  <script>
+    const register =new Register(
+      "{{ flavor() }}",
+      "{{ "oauth.username_header"|trans({}, "catroweb") }}",
+      "{{ "oauth.username_chooser"|trans({}, "catroweb") }}",
+      "{{ "oauth.usernameTaken"|trans({}, "catroweb") }}",
+      "{{ "errors.username.size"|trans({}, "catroweb") }}",
+      "{{ "ok"|trans({}, "catroweb") }}"
+    )
+  </script>
+{% endblock js %}

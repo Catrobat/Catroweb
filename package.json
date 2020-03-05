@@ -1,13 +1,11 @@
 {
   "name": "catroweb",
-  "baseJSName": "script",
-  "registerJSName": "register",
   "version": "1.0.0",
   "description": "Catroweb =========",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "standard 'public/js/base/*'",
-    "fix": "standard --fix 'public/js/base/*'"
+    "test": "npx eslint assets/js/**/*.js",
+    "fix": "npx eslint assets/js/**/*.js --fix"
   },
   "repository": {
     "type": "git",
@@ -20,27 +18,40 @@
   },
   "homepage": "https://github.com/Catrobat/Catroweb-Symfony#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.12.0",
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "grunt": "^1.0.4",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-less": "^2.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "~4.0.1",
     "grunt-contrib-watch": "^1.1.0",
     "jit-grunt": "^0.10.0",
-    "sass": "^1.25.0",
-    "standard": "^14.3.1"
+    "sass": "^1.26.2",
+    "standard": "*"
   },
   "dependencies": {
-    "ajv": "^6.11.0",
+    "ajv": "^6.12.0",
+    "animate.css": "^3.7.2",
+    "animatedmodal": "^1.0.0",
     "bootstrap": "^4.4.1",
-    "clipboard": "^2.0.4",
+    "clipboard": "^2.0.5",
     "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
     "jquery": "^3.4.1",
-    "npm": "^6.13.6",
-    "npm-check-updates": "^4.0.1",
+    "jquery-contextmenu": "^2.9.0",
+    "jquery-ui-dist": "^1.12.1",
+    "js-yaml": "^3.13.1",
+    "npm": "^6.14.1",
+    "npm-check-updates": "^4.0.3",
+    "sweetalert2": "^9.8.2",
+    "textfilljs": "^1.0.3-a",
+    "vis": "^4.21.0-EOL",
     "popper.js": "^1.16.1"
   },
   "standard": {

@@ -1,0 +1,16 @@
+
+name: ESLint JavaScript Code Style checks (standard)
+
+on: [push, pull_request]
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run test

@@ -21,11 +21,9 @@ class CodeViewController extends AbstractController
   public function viewCodeAction($id, ProgramManager $programManager, ExtractedFileRepository $extractedFileRepository,
                                  CatrobatCodeParser $catrobatCodeParser)
   {
-    /*
-     * @var $program Program
-     */
     try
     {
+      /** @var Program $program */
       $program = $programManager->find($id);
       $extracted_program = $extractedFileRepository->loadProgramExtractedFile($program);
       if (null === $extracted_program)

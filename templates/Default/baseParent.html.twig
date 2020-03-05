@@ -5,31 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-  
   <meta name='viewport' content='width=device-width, user-scalable=no'/>
+
   <title>{% block title %}Pocket Code Website{% endblock %}</title>
 
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
 
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
-  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
-  <script src="{{ asset( getJavascriptPath('script.js') ) }}"></script>
-  <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
-  <script>
-    {# seems to be needed for some behat tests #}
-    let configGA = {
-      'UaId': 'UA-42270417-5',
-      //'DebugOutput' : true,
-    }
-  </script>
-
-  <script async src="{{ asset(getJavascriptPath('analytics.js')) }}"></script>
-
+  {# Head block for child views #}
   {% block head %}{% endblock %}
 </head>
 
@@ -42,6 +26,7 @@
     </header>
     {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
     <div class="container">
+      {# Body block where child views will appear #}
       {% block body %}{% endblock %}
     </div>
   </div>
@@ -52,6 +37,48 @@
 
   <div id="app-version" style="display:none">{{ app_version }}</div>
 
+  {#
+     !!Important!! Define scripts here and not in the head to prevent render-blocking resources
+      This should increase performance. As a sidenote. The JS block can't be used in twig templates that are included.
+      The scripts have to be in the file that is extending the base and have to be in the JS blocks, not in the head!
+  #}
+  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/modules/textfill.min.js') }}"></script>
+  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('js/modules/sweetalert2.all.min.js') }}"></script>
+  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+  <script src="{{ asset('js/base.min.js') }}"></script>
+
+  <script> {# seems to be needed for some behat tests #} let configGA = {'UaId': 'UA-42270417-5' } </script>
+
+  <script async src="{{ asset('js/analytics.min.js') }}"></script>
+
+  {# SEARCH HEADER #}
+  <script>
+    $('#nav-search').submit(function (e) {
+      e.preventDefault()
+    })
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('.search-icon-header').on('click', function() {
+        console.log("clicked")
+        $(this).hide()
+        const input_group = $("#search-input-group-header");
+        input_group.removeClass('d-none')
+
+        let search_header = $('.search-input-header')
+        let val = search_header.val()
+        search_header
+        .focus()
+        .val('')
+        .val(val)
+      })
+    })
+  </script>
+
+  {# Main Script #}
   <script>
     function scrollToHash() {
       if (window.location.hash && $(window.location.hash).offset()) {
@@ -66,10 +93,23 @@
     new Main('{{ path('search', {'q': 0 } ) }}')
   </script>
 
-  {% block js %}{% endblock %}
+  {# Sidebar #}
+  <script>
+    enableNavButtonIfCategoryContainsProjects('#nav-newest', '{{ path('api_recent_programs') }}')
+    enableNavButtonIfRecommendedCategoryContainsProjects(
+      '#nav-recommended',
+      '{{ path('api_recsys_general_projects') }}',
+        {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}
+    )
+    enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-scratch-remixes', '{{ path('api_scratch_remix') }}')
+    enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
+    manageNotificationsDropdown()
+  </script>
 
   {% if app.user %}
-    <script src="{{ asset('compiled/js/FetchNotifications.js') }}"></script>
+    <script src="{{ asset('js/FetchNotifications.min.js') }}"></script>
     <script>
       let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
       $(document).ready(function () {
@@ -77,11 +117,9 @@
       })
     </script>
   {% endif %}
-  <script>
-    $('#nav-search').submit(function (e) {
-      e.preventDefault()
-    })
-  </script>
+
+  {# JS block where all the scripts written in the child views should appear #}
+  {% block js %}{% endblock %}
 
 </body>
 </html>

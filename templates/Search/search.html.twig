@@ -21,9 +21,10 @@
     let search = new ProjectLoader('#search-results', '{{ path('api_search_programs') }}')
     let search_input = $('.input-search')
     let old_query = search_input.html('{{ q }}').text()
+    console.log(old_query)
     search.initSearch(old_query)
     search_input.val(old_query)
-    $(function () {
+    $(document).ready(function() {
       $('.search-icon-header').click()
     })
   </script>

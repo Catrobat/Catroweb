@@ -191,7 +191,7 @@
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('compiled/js/Help.js') }}"></script>
+  <script src="{{ asset('js/Help.min.js') }}"></script>
   <script>
     var help = new Help()
     help.setImageModal("{{ asset('images/help/game_jam/') }}")

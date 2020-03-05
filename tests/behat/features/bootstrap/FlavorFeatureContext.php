@@ -64,7 +64,7 @@ class FlavorFeatureContext extends BaseContext
   {
     $user = $this->insertUser();
     $program = $this->getStandardProgramFile();
-    $response = $this->upload($program, $user, 1,'pocketphiro');
+    $response = $this->upload($program, $user, 1,'phirocode');
     Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
 
@@ -76,7 +76,7 @@ class FlavorFeatureContext extends BaseContext
     $program_manager = $this->getProgramManger();
     $program = $program_manager->find(1);
     Assert::assertNotNull($program, 'No program added');
-    Assert::assertEquals('pocketphiro', $program->getFlavor(), 'Program is NOT flagged a phiro');
+    Assert::assertEquals('phirocode', $program->getFlavor(), 'Program is NOT flagged aa a phiro');
   }
 
   /**
@@ -98,7 +98,7 @@ class FlavorFeatureContext extends BaseContext
     $program_manager = $this->getProgramManger();
     $program = $program_manager->find(1);
     Assert::assertNotNull($program, 'No program added');
-    Assert::assertNotEquals('pocketphiropro', $program->getFlavor(), 'Program is flagged a phiro');
+    Assert::assertNotEquals('phirocode', $program->getFlavor(), 'Program is flagged as a phiro');
   }
 
   /**

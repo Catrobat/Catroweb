@@ -108,7 +108,7 @@
       }
     })
   </script>
-  <script src="{{ asset('compiled/js/ProfileLoader.js') }}"></script>
+  <script src="{{ asset('js/ProfileLoader.min.js') }}"></script>
   <script>
     let follower = new ProfileLoader('{{ profile.id }}' , '{{ path('list_follow',  { type: 'follower' }) }}',
       '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')

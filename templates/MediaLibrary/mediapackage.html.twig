@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('compiled/js/MediaLib.js') }}"></script>
+  <script src="{{ asset('js/MediaLib.min.js') }}"></script>
   <script>
     new MediaLib("{{ package }}", "{{ flavor }}", "{{ mediaDir }}");
   </script>

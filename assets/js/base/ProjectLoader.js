@@ -1,172 +1,164 @@
-let ProjectLoader = function(container, url, recommended_by_project_id, recommended_by_page_id) {
-  
-  let self = this
-  
+/* eslint-env jquery */
+/* global Routing */
+
+// eslint-disable-next-line no-unused-vars
+const ProjectLoader = function (container, url, recommendedByProjectId, recommendedByPageId) {
+  const self = this
+
   // The container where the projects will be appended (must be set!)
   self.container = container
-  
+
   // the url where the correct projects will be loaded (must be set!)
   self.url = url
-  
-  self.recommended_by_project_id = (typeof recommended_by_project_id === 'undefined') ? null : recommended_by_project_id
-  
-  self.recommended_by_page_id = (typeof recommended_by_page_id === 'undefined') ? null : recommended_by_page_id
-  
+
+  self.recommendedByProjectId = (typeof recommendedByProjectId === 'undefined') ? null : recommendedByProjectId
+
+  self.recommendedByPageId = (typeof recommendedByPageId === 'undefined') ? null : recommendedByPageId
+
   // before changing columns_min, columns_max, have a look at '.projects{.project{width:.%}}' in 'brain.scss' first
-  self.default_rows = 2
+  self.defaultRows = 2
   self.columns = 0
   self.columns_min = 2
   self.columns_max = 9
-  
+
   self.windowWidth = $(window).width()
-  
-  self.download_limit = 0
-  self.initial_download_limit = self.default_rows * self.columns_max // this way, always enough projects will be loaded
-  self.number_of_loaded_projects = 0
-  self.number_of_visible_projects = 0
-  self.default_number_of_visible_projects = 0
-  self.total_number_of_found_projects = 0
-  
+
+  self.downloadLimit = 0
+  self.initialDownloadLimit = self.defaultRows * self.columns_max // this way, always enough projects will be loaded
+  self.numberOfLoadedProjects = 0
+  self.numberOfVisibleProjects = 0
+  self.defaultNumberOfVisibleProjects = 0
+  self.totalNumberOfFoundProjects = 0
+
   // Setting this variable to true will display all fitting projects of a category
   self.show_all_projects = false
-  
-  
+
   // ----------------------------------
   // - Default init:
   //
-  self.init = function() {
+  self.init = function () {
     restoreParamsWithSessionStorage()
-    $.get(self.url, {limit: self.initial_download_limit, offset: self.number_of_loaded_projects}, function (data) {
-      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
-      {
+    $.get(self.url, { limit: self.initialDownloadLimit, offset: self.numberOfLoadedProjects }, function (data) {
+      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
         $(self.container).hide()
         return
       }
       $(self.container).show()
-      self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
+      self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
       setup(data)
     })
   }
-  
+
   // ----------------------------------
   // - Recommended Programs
   //
-  self.initRecsys = function() {
-    
-    if (($(self.container).length <= 0))
-    {
+  self.initRecsys = function () {
+    if (($(self.container).length <= 0)) {
       return
     }
-    
+
     restoreParamsWithSessionStorage()
-    $.get(self.url, {program_id: self.recommended_by_project_id,}, function (data) {
-      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
-      {
+    $.get(self.url, { program_id: self.recommendedByProjectId }, function (data) {
+      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
         $(self.container).hide()
         return
       }
       $(self.container).show()
-      self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
+      self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
       setup(data)
     })
   }
-  
+
   // ----------------------------------
   // - More from this user
   //
-  self.project_id = undefined // save the id of a project (project detail page)
-  
-  self.initMoreFromThisUser = function(user_id, project_id) {
+  self.projectId = undefined // save the id of a project (project detail page)
+
+  self.initMoreFromThisUser = function (userId, projectId) {
     restoreParamsWithSessionStorage()
     $.get(self.url, {
-      limit  : self.initial_download_limit,
-      offset : self.number_of_loaded_projects,
-      user_id: user_id
+      limit: self.initialDownloadLimit,
+      offset: self.numberOfLoadedProjects,
+      user_id: userId
     }, function (data) {
-      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
-      {
+      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
         $(self.container).hide()
         return
       }
       $(self.container).show()
-      self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
-      self.project_id = project_id
+      self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
+      self.projectId = projectId
       setup(data)
-      if (self.total_number_of_found_projects <= 1) {
+      if (self.totalNumberOfFoundProjects <= 1) {
         $(self.container).hide()
       }
     })
   }
-  
+
   // ----------------------------------
   // - Profile programs
   //
-  self.initProfile = function(user_id) {
+  self.initProfile = function (userId) {
     self.show_all_projects = true // since we show all programs no need to restore a session
     $.get(self.url, {
-      limit  : self.initial_download_limit,
-      offset : self.number_of_loaded_projects,
-      user_id: user_id
+      limit: self.initialDownloadLimit,
+      offset: self.numberOfLoadedProjects,
+      user_id: userId
     }, function (data) {
-      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
-      {
-        let url = Routing.generate('translate_word', {
-          'word'  : 'programs.noPrograms',
-          'domain': 'catroweb'
+      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
+        const url = Routing.generate('translate_word', {
+          word: 'programs.noPrograms',
+          domain: 'catroweb'
         })
         $.get(url, function (data) {
           $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>')
         })
         return
       }
-      self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
+      self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
       setup(data)
     })
   }
-  
+
   // ----------------------------------
   // - Search Programs
   //
   self.query = ''
-  
-  self.initSearch = function(query) {
-    let old_query = sessionStorage.getItem(self.query)
-    if (query === old_query)
-    { // same search -> restore old session limits
+
+  self.initSearch = function (query) {
+    const oldQuery = sessionStorage.getItem(self.query)
+    if (query === oldQuery) { // same search -> restore old session limits
       restoreParamsWithSessionStorage()
     }
     sessionStorage.setItem(self.query, query)
     self.query = query
-    
-    $.get(self.url, {q: query, limit: self.initial_download_limit, offset: self.number_of_loaded_projects},
+
+    $.get(self.url, { q: query, limit: self.initialDownloadLimit, offset: self.numberOfLoadedProjects },
       function (data) {
-        let search_results_text = $('#search-results-text')
-        
-        if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
-        {
-          search_results_text.addClass('no-results')
-          search_results_text.find('span').text(0)
+        const searchResultsText = $('#search-results-text')
+
+        if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
+          searchResultsText.addClass('no-results')
+          searchResultsText.find('span').text(0)
           return
         }
-        search_results_text.find('span').text(data.CatrobatInformation.TotalProjects)
-        self.total_number_of_found_projects = parseInt(data.CatrobatInformation.TotalProjects)
+        searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects)
+        self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
         setup(data)
       })
   }
-  
-  //--------------------------------------------------------------------------------------------------------------------
+
+  // --------------------------------------------------------------------------------------------------------------------
   //
-  async function setup(data) {
-    
-    if (!self.show_all_projects)
-    {
+  async function setup (data) {
+    if (!self.show_all_projects) {
       // We need to load all buttons for the show more/less logic if we don't display all projects
-      await initLoaderUI();
+      await initLoaderUI()
     }
-    
+
     showMoreListener()
     showLessListener()
-    
+
     await loadProjectsIntoContainer(data)
     await initParameters()
     await initNumberOfVisibleProjects()
@@ -174,416 +166,363 @@ let ProjectLoader = function(container, url, recommended_by_project_id, recommen
 
     await updateUIVisibility()
   }
-  
-  async function loadProjectsIntoContainer(data) {
-    let projects = data.CatrobatProjects
-    for (let i = 0; i < projects.length; i++)
-    {
-      if (projects[i].ProjectId === self.project_id)
-      {
+
+  async function loadProjectsIntoContainer (data) {
+    const projects = data.CatrobatProjects
+    for (let i = 0; i < projects.length; i++) {
+      if (projects[i].ProjectId === self.projectId) {
         // When the user is on a projects detail page no recommendations etc. should contain the same project
-        continue;
+        continue
       }
-      
-      const html_project = await buildProjectInHtml(projects[i], data)
-      
-      $(self.container).find('.programs').append(html_project)
+
+      const htmlProject = await buildProjectInHtml(projects[i], data)
+
+      $(self.container).find('.programs').append(htmlProject)
       $(self.container).show()
-      
-      if (isMyProject())
-      {
-        await addMyProfileProgramButtons(html_project, projects[i]);
+
+      if (isMyProject()) {
+        await addMyProfileProgramButtons(htmlProject, projects[i])
       }
     }
-    self.number_of_loaded_projects += projects.length
+    self.numberOfLoadedProjects += projects.length
   }
-  
-  async function setNumberOfColumns() {
-    
-    let programs_container_width =$(self.container).find('.programs').width()
-    let program_outer_width = $(self.container).find('.program').outerWidth(true)
-    
-    let columns = Math.floor(programs_container_width / program_outer_width)
-    
-    if (columns < self.columns_min)
-    {
+
+  async function setNumberOfColumns () {
+    const projectsContainerWidth = $(self.container).find('.programs').width()
+    const projectsOuterWidth = $(self.container).find('.program').outerWidth(true)
+
+    let columns = Math.floor(projectsContainerWidth / projectsOuterWidth)
+
+    if (columns < self.columns_min) {
       columns = self.columns_min
-    }
-    else if (columns > self.columns_max)
-    {
+    } else if (columns > self.columns_max) {
       columns = self.columns_max
     }
     self.columns = columns
   }
-  
-  async function updateInitialDownloadLimit() {
-    if (self.restored_number_of_visible_projects === self.total_number_of_found_projects) {
-      self.initial_download_limit = self.total_number_of_found_projects
-    }
-    else if (self.initial_download_limit > self.download_limit)
-    {
-      self.initial_download_limit = self.initial_download_limit - (self.initial_download_limit % self.download_limit)
-    }
-    else
-    {
-      self.initial_download_limit = self.download_limit
+
+  async function updateInitialDownloadLimit () {
+    if (self.restored_numberOfVisibleProjects === self.totalNumberOfFoundProjects) {
+      self.initialDownloadLimit = self.totalNumberOfFoundProjects
+    } else if (self.initialDownloadLimit > self.downloadLimit) {
+      self.initialDownloadLimit = self.initialDownloadLimit - (self.initialDownloadLimit % self.downloadLimit)
+    } else {
+      self.initialDownloadLimit = self.downloadLimit
     }
   }
-  
-  async function initNumberOfVisibleProjects() {
-    if (self.restored_number_of_visible_projects > 0) {
-      await updateNumberOfVisiblePrograms(self.restored_number_of_visible_projects)
-    }
-    else {
-      await updateNumberOfVisiblePrograms(self.default_number_of_visible_projects)
+
+  async function initNumberOfVisibleProjects () {
+    if (self.restored_numberOfVisibleProjects > 0) {
+      await updateNumberOfVisiblePrograms(self.restored_numberOfVisibleProjects)
+    } else {
+      await updateNumberOfVisiblePrograms(self.defaultNumberOfVisibleProjects)
     }
   }
-  
-  async function initParameters() {
+
+  async function initParameters () {
     await setNumberOfColumns()
-    self.download_limit = self.default_rows * self.columns
+    self.downloadLimit = self.defaultRows * self.columns
     await updateInitialDownloadLimit()
-    self.default_number_of_visible_projects = self.download_limit
+    self.defaultNumberOfVisibleProjects = self.downloadLimit
   }
-  
-  async function keepRowsFull() {
-    
-    if (self.number_of_visible_projects < self.default_number_of_visible_projects &&
-      self.number_of_visible_projects < self.total_number_of_found_projects)
-    {
+
+  async function keepRowsFull () {
+    if (self.numberOfVisibleProjects < self.defaultNumberOfVisibleProjects &&
+      self.numberOfVisibleProjects < self.totalNumberOfFoundProjects) {
       await showMoreProjects()
-    }
-    else if (self.number_of_visible_projects > self.default_number_of_visible_projects &&
-      self.number_of_visible_projects % self.download_limit !== 0 &&
-      self.number_of_visible_projects !== self.total_number_of_found_projects)
-    {
+    } else if (self.numberOfVisibleProjects > self.defaultNumberOfVisibleProjects &&
+      self.numberOfVisibleProjects % self.downloadLimit !== 0 &&
+      self.numberOfVisibleProjects !== self.totalNumberOfFoundProjects) {
       await showLessProjects()
     }
   }
-  
-  async function updateNumberOfVisiblePrograms(number) {
-    self.number_of_visible_projects = number
-    setSessionStorage(self.number_of_visible_projects)
+
+  async function updateNumberOfVisiblePrograms (number) {
+    self.numberOfVisibleProjects = number
+    setSessionStorage(self.numberOfVisibleProjects)
   }
-  
-  async function showMoreProjects() {
-    
-    if (self.number_of_visible_projects >= self.total_number_of_found_projects)
-    {
+
+  async function showMoreProjects () {
+    if (self.numberOfVisibleProjects >= self.totalNumberOfFoundProjects) {
       // No projects can be retrieved anymore and they are all already visible
-      await hide(show_more_button)
-    }
-    else if (self.number_of_loaded_projects >= self.number_of_visible_projects + self.download_limit)
-    {
+      await hide(showMoreButton)
+    } else if (self.numberOfLoadedProjects >= self.numberOfVisibleProjects + self.downloadLimit) {
       // Enough projects are loaded. Just set the next project rows visible
-      await updateNumberOfVisiblePrograms(self.number_of_visible_projects + self.download_limit)
+      await updateNumberOfVisiblePrograms(self.numberOfVisibleProjects + self.downloadLimit)
       await updateUIVisibility()
-    }
-    else if (self.total_number_of_found_projects === self.number_of_loaded_projects)
-    {
+    } else if (self.totalNumberOfFoundProjects === self.numberOfLoadedProjects) {
       // All projects are loaded so just set them all visible
-      await updateNumberOfVisiblePrograms(self.total_number_of_found_projects)
+      await updateNumberOfVisiblePrograms(self.totalNumberOfFoundProjects)
       await updateUIVisibility()
-    }
-    else
-    {
+    } else {
       // We need to load more projects
       await loadMoreProjects()
     }
   }
-  
-  async function loadMoreProjects() {
-    await hide(show_more_button)
-    await hide(show_less_button)
-    await show(ajax_animation)
-    if (self.query !== '')
-    {
+
+  async function loadMoreProjects () {
+    await hide(showMoreButton)
+    await hide(showLessButton)
+    await show(ajaxAnimation)
+    if (self.query !== '') {
       $.get(self.url, {
-        q     : self.query,
-        limit : self.download_limit,
-        offset: self.number_of_loaded_projects
+        q: self.query,
+        limit: self.downloadLimit,
+        offset: self.numberOfLoadedProjects
       }, async function (data) {
-        if ((data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0))
-        {
-          await hide(ajax_animation)
+        if ((data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)) {
+          await hide(ajaxAnimation)
           return
         }
         await loadProjectsIntoContainer(data)
         await showMoreProjects()
-        await hide(ajax_animation)
+        await hide(ajaxAnimation)
       })
-      
-    }
-    else
-    {
-      $.get(self.url, {limit: self.download_limit, offset: self.number_of_loaded_projects}, async function (data) {
-        if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
-        {
-          await hide(ajax_animation)
+    } else {
+      $.get(self.url, { limit: self.downloadLimit, offset: self.numberOfLoadedProjects }, async function (data) {
+        if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
+          await hide(ajaxAnimation)
           return
         }
         await loadProjectsIntoContainer(data)
         await showMoreProjects()
-        await hide(ajax_animation)
+        await hide(ajaxAnimation)
       })
     }
   }
-  
-  async function showLessProjects() {
-    
-    if (self.default_number_of_visible_projects > self.number_of_visible_projects)
-    {
+
+  async function showLessProjects () {
+    if (self.defaultNumberOfVisibleProjects > self.numberOfVisibleProjects) {
       // we already display the minimum number of projects!
-      await hide(show_less_button)
+      await hide(showLessButton)
       return
     }
-    
+
     // hides visible projects in a way that all columns are filled for rows that are visible
-    if (self.number_of_visible_projects % self.default_number_of_visible_projects === 0)
-    {
-      await updateNumberOfVisiblePrograms(self.number_of_visible_projects - self.download_limit)
+    if (self.numberOfVisibleProjects % self.defaultNumberOfVisibleProjects === 0) {
+      await updateNumberOfVisiblePrograms(self.numberOfVisibleProjects - self.downloadLimit)
+    } else {
+      await updateNumberOfVisiblePrograms(self.numberOfVisibleProjects -
+        self.numberOfVisibleProjects % self.defaultNumberOfVisibleProjects)
     }
-    else
-    {
-      await updateNumberOfVisiblePrograms(self.number_of_visible_projects -
-        self.number_of_visible_projects % self.default_number_of_visible_projects)
-    }
-    await updateUIVisibility();
+    await updateUIVisibility()
   }
   // -------------------------------------------------------------------------------------------------------------------
   // UI elements and helper functions to control the UI
   //
-  const show_more_button = 'button-show-more';
-  const show_less_button = 'button-show-less';
-  const ajax_animation = 'button-show-ajax';
-  
-  async function hide(button_name) {
-    $(self.container).find('.' + button_name).hide()
+  const showMoreButton = 'button-show-more'
+  const showLessButton = 'button-show-less'
+  const ajaxAnimation = 'button-show-ajax'
+
+  async function hide (buttonName) {
+    $(self.container).find('.' + buttonName).hide()
   }
-  
-  async function show(button_name) {
-    $(self.container).find('.' + button_name).show()
+
+  async function show (buttonName) {
+    $(self.container).find('.' + buttonName).show()
   }
-  
-  async function initLoaderUI() {
+
+  async function initLoaderUI () {
     $(self.container).append('' +
       '<div class="button-show-placeholder">' +
-      '<div class=' + show_more_button + '>' +
+      '<div class=' + showMoreButton + '>' +
       '  <i class="fa fa-chevron-circle-down catro-icon-button"></i>' +
       '</div>' +
-      '<div class=' + ajax_animation + '>' +
+      '<div class=' + ajaxAnimation + '>' +
       '  <i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i>' +
       '</div>' +
-      '<div class=' + show_less_button + '>' +
+      '<div class=' + showLessButton + '>' +
       '  <i class="fa fa-chevron-circle-up catro-icon-button"></i></div>' +
       '</div>')
   }
-  
-  async function showVisibleButtons() {
-    
+
+  async function showVisibleButtons () {
     // As long as not all projects are visible -> show the "show more button"
-    if (self.number_of_visible_projects < self.total_number_of_found_projects)
-    {
-      await show(show_more_button)
+    if (self.numberOfVisibleProjects < self.totalNumberOfFoundProjects) {
+      await show(showMoreButton)
+    } else {
+      await hide(showMoreButton)
     }
-    else
-    {
-      await hide(show_more_button)
-    }
-    
+
     // As long as there are more than the minimum number of projects displayed
     //   -> give the user the possibility to show less projects
-    if (self.number_of_visible_projects > self.default_number_of_visible_projects)
-    {
-      await show(show_less_button)
-    }
-    else
-    {
-      await hide(show_less_button)
+    if (self.numberOfVisibleProjects > self.defaultNumberOfVisibleProjects) {
+      await show(showLessButton)
+    } else {
+      await hide(showLessButton)
     }
   }
-  
-  async function showVisibleProjects() {
-    let projects = $(self.container).find('.program')
+
+  async function showVisibleProjects () {
+    const projects = $(self.container).find('.program')
     $(projects).hide()
-    for (let i = 0; i < self.number_of_visible_projects && i < self.number_of_loaded_projects; i++)
-    {
+    for (let i = 0; i < self.numberOfVisibleProjects && i < self.numberOfLoadedProjects; i++) {
       $(projects[i]).show()
     }
   }
-  
-  async function updateUIVisibility() {
-    if (self.show_all_projects)
-    {
+
+  async function updateUIVisibility () {
+    if (self.show_all_projects) {
       return
     }
-    
+
     await showVisibleProjects()
-    
+
     await showVisibleButtons()
   }
-  
-  async function buildProjectInHtml(project, data) {
-    
-    let div = await initDivWithCorrectContainerIcon(project)
-    let link_css_classes = await getLinkCssClasses()
-    let project_link = await getProjectLink(project, data)
-    let stored_visits = sessionStorage.getItem('visits')
+
+  async function buildProjectInHtml (project, data) {
+    const div = await initDivWithCorrectContainerIcon(project)
+    const linkCssClasses = await getLinkCssClasses()
+    const projectLink = await getProjectLink(project, data)
+    const storedVisits = sessionStorage.getItem('visits')
     let visited = false
-    if (stored_visits)
-    {
-      let parsed_visits = JSON.parse(stored_visits)
-      let project_id = project.ProjectId.toString()
-      visited = $.inArray(project_id, parsed_visits) >= 0
+    if (storedVisits) {
+      const parsedVisits = JSON.parse(storedVisits)
+      const projectId = project.ProjectId.toString()
+      visited = $.inArray(projectId, parsedVisits) >= 0
     }
-    
+
     return $(
       '<div class="program ' + (visited ? 'visited-program ' : '') + '" id="program-' + project.ProjectId + '">' +
-      '<a href="' + project_link + '" class="' + link_css_classes + '">' +
+      '<a href="' + projectLink + '" class="' + linkCssClasses + '">' +
       '<img src="' + data.CatrobatInformation.BaseUrl + project.ScreenshotSmall + '" alt="" />' +
       '<span class="program-name">' + self.escapeJavaScript(project.ProjectName) + '</span>' +
       div +
       '</a></div>'
     )
   }
-  
-  async function initDivWithCorrectContainerIcon(project) {
+
+  async function initDivWithCorrectContainerIcon (project) {
     // Extend this for new containers...
-    switch (self.container)
-    {
+    switch (self.container) {
       case '#newest':
       case '#search-results':
       case '#random':
         return '<div><i class="fas fa-clock program-small-icon"></i>' + project.UploadedString + '</div>'
-      
+
       case '#myprofile-programs':
       case '#user-programs':
         return '<div><i class="fas fa-clock program-small-icon"></i>' + project.UploadedString + '</div>'
-      
+
       case '#mostDownloaded':
-        return  '<div><i class="fas fa-download program-small-icon"></i>' + project.Downloads + '</div>'
-  
+        return '<div><i class="fas fa-download program-small-icon"></i>' + project.Downloads + '</div>'
+
       case '#scratchRemixes':
       case '#mostViewed':
-        return  '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
-  
+        return '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
+
       case '#recommendations':
       case '#more-from-this-user-recommendations':
-        return  '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
-      
+        return '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
+
       case '#recommended':
         return '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
-      
+
       case '#specific-programs-recommendations':
         return '<div><i class="fas fa-download program-small-icon"></i>' + project.Downloads + '</div>'
-      
+
       default:
-        if ($(self.container).hasClass('starterDownloads'))
-        {
+        if ($(self.container).hasClass('starterDownloads')) {
           return '<div><i class="fas fa-download program-small-icon"></i>' + project.Downloads + '</div>'
-        }
-        else
-        {
-          div = '<div><i class="fas fa-user program-small-icon"></i>' + self.escapeJavaScript(project.Author) + '</div>'
+        } else {
+          return '<div><i class="fas fa-user program-small-icon"></i>' + self.escapeJavaScript(project.Author) + '</div>'
         }
     }
   }
-  
-  async function getLinkCssClasses() {
-    let additional_link_css_class = '';
-    if (self.container === '#recommended')
-    {
-      additional_link_css_class = 'homepage-recommended-programs'
+
+  async function getLinkCssClasses () {
+    let additionalLinkCssClass = ''
+    if (self.container === '#recommended') {
+      additionalLinkCssClass = 'homepage-recommended-programs'
     }
-    return 'rec-programs' + ' ' + additional_link_css_class + ' '
+    return 'rec-programs' + ' ' + additionalLinkCssClass + ' '
   }
-  
-  async function getProjectLink(project, data) {
-    switch (self.container)
-    {
+
+  async function getProjectLink (project, data) {
+    let link = data.CatrobatInformation.BaseUrl + project.ProjectUrl
+    switch (self.container) {
       case '#recommendations':
-        return data.CatrobatInformation.BaseUrl + project.ProjectUrl + '?rec_from=' + self.recommended_by_project_id
-      
+        return link + '?rec_from=' + self.recommendedByProjectId
+
       case '#recommended':
       case '#specific-programs-recommendations':
-        let link =  data.CatrobatInformation.BaseUrl + project.ProjectUrl
-        link += '?rec_by_page_id=' + self.recommended_by_page_id
-        if (self.recommended_by_project_id !== null) {
-          link += '&rec_by_program_id=' + self.recommended_by_project_id
+        link += '?rec_by_page_id=' + self.recommendedByPageId
+        if (self.recommendedByProjectId !== null) {
+          link += '&rec_by_program_id=' + self.recommendedByProjectId
         }
         link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) &&
           data.isUserSpecificRecommendation ? 1 : 0)
     }
-    return data.CatrobatInformation.BaseUrl + project.ProjectUrl
+    return link
   }
-  
-  function isMyProject() {
+
+  function isMyProject () {
     return self.container === '#myprofile-programs'
   }
-  
-  async function addMyProfileProgramButtons(html_project, project) {
-    $(html_project).prepend('<div id="delete-' + project.ProjectId + '" class="img-delete" ' +
+
+  async function addMyProfileProgramButtons (htmlProject, project) {
+    $(htmlProject).prepend('<div id="delete-' + project.ProjectId + '" class="img-delete" ' +
       'onclick="profile.deleteProgram(\'' + project.ProjectId + '\')">' +
       '<i class="fas fa-times-circle catro-icon-button"></i></div>')
-    
-    $(html_project).prepend('<div id="visibility-lock-open-' + project.ProjectId + '" class="img-lock-open" ' +
+
+    $(htmlProject).prepend('<div id="visibility-lock-open-' + project.ProjectId + '" class="img-lock-open" ' +
       (project.Private ? 'style="display: none;"' : '') +
       ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
       '<i class="fas fa-lock-open catro-icon-button"></i></div>')
-    
-    $(html_project).prepend('<div id="visibility-lock-' + project.ProjectId + '" class="img-lock" ' +
+
+    $(htmlProject).prepend('<div id="visibility-lock-' + project.ProjectId + '" class="img-lock" ' +
       (project.Private ? '' : 'style="display: none;"') +
       ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
       '<i class="fas fa-lock catro-icon-button"></i></div>')
   }
-  
+
   // -------------------------------------------------------------------------------------------------------------------
   // Listeners
   //
-  function showMoreListener() {
-    $(self.container + ' .' + show_more_button).click(async function () {
+  function showMoreListener () {
+    $(self.container + ' .' + showMoreButton).click(async function () {
       await showMoreProjects()
     })
   }
-  
-  async function showLessListener() {
-    $(self.container + ' .' + show_less_button).click(async function () {
+
+  async function showLessListener () {
+    $(self.container + ' .' + showLessButton).click(async function () {
       await showLessProjects()
     })
   }
-  
+
   $(window).resize(async function () {
-    if (self.windowWidth === $(window).width())
-    {
+    if (self.windowWidth === $(window).width()) {
       return
     }
     self.windowWidth = $(window).width()
     await initParameters()
-    await updateNumberOfVisiblePrograms(Math.min(self.initial_download_limit, self.total_number_of_found_projects))
+    await updateNumberOfVisiblePrograms(Math.min(self.initialDownloadLimit, self.totalNumberOfFoundProjects))
     await keepRowsFull()
     await updateUIVisibility()
   })
-  
+
   // -------------------------------------------------------------------------------------------------------------------
   // Session Handling - When returning to a page everything should be as it was when it was abandoned
   //
-  self.restored_number_of_visible_projects = 0;
-  
-  function restoreParamsWithSessionStorage() {
-    self.restored_number_of_visible_projects = parseInt(sessionStorage.getItem(self.container))
-    if (self.restored_number_of_visible_projects > self.initial_download_limit) {
-      self.initial_download_limit = self.restored_number_of_visible_projects;
+  self.restored_numberOfVisibleProjects = 0
+
+  function restoreParamsWithSessionStorage () {
+    self.restored_numberOfVisibleProjects = parseInt(sessionStorage.getItem(self.container))
+    if (self.restored_numberOfVisibleProjects > self.initialDownloadLimit) {
+      self.initialDownloadLimit = self.restored_numberOfVisibleProjects
     }
   }
-  
-  function setSessionStorage(value) {
+
+  function setSessionStorage (value) {
     sessionStorage.setItem(self.container, value)
   }
-  
+
   // -------------------------------------------------------------------------------------------------------------------
   // prevent JS code execution! (Encoding the < and > chars to their HTML equivalents)
   //
-  self.escapeJavaScript = function(html) {
-    return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  self.escapeJavaScript = function (html) {
+    return html.replace(/</g, '&lt;').replace(/>/g, '&gt;')
   }
 }
