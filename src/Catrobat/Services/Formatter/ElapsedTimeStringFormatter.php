@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Services\Formatter;
 
-use App\Catrobat\Services\Time;
+use App\Utils\TimeUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -16,17 +16,11 @@ class ElapsedTimeStringFormatter
   private $translator;
 
   /**
-   * @var Time
-   */
-  private $time;
-
-  /**
    * ElapsedTimeStringFormatter constructor.
    */
-  public function __construct(TranslatorInterface $translator, Time $time)
+  public function __construct(TranslatorInterface $translator)
   {
     $this->translator = $translator;
-    $this->time = $time;
   }
 
   /**
@@ -36,8 +30,12 @@ class ElapsedTimeStringFormatter
    */
   public function getElapsedTime($timestamp)
   {
-    $elapsed = $this->time->getTime() - $timestamp;
+    $elapsed = TimeUtils::getTimestamp() - $timestamp;
 
+    if ($elapsed < 0)
+    {
+      $elapsed = 0;
+    }
     if ($elapsed <= 3540)
     {
       $minutes = round($elapsed / 60);

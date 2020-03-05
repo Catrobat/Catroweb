@@ -30,6 +30,7 @@ use App\Repository\ScratchProgramRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserLikeSimilarityRelationRepository;
 use App\Repository\UserRemixSimilarityRelationRepository;
+use App\Utils\TimeUtils;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Doctrine\ORM\EntityManager;
@@ -45,7 +46,6 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Class SymfonySupport.
@@ -351,9 +351,9 @@ class SymfonySupport
     @$gamejam->setFlavor(null == $config['flavor'] ? 'pocketalice' :
       'no flavor' != $config['flavor'] ?: null);
 
-    $start_date = new \DateTime();
+    $start_date = TimeUtils::getDateTime();
     $start_date->sub(new \DateInterval('P10D'));
-    $end_date = new \DateTime();
+    $end_date = TimeUtils::getDateTime();
     $end_date->add(new \DateInterval('P10D'));
 
     @$gamejam->setStart($config['start'] ?: $start_date);
@@ -639,7 +639,7 @@ class SymfonySupport
     $program->setDescription(isset($config['description']) ? $config['description'] : 'Generated');
     $program->setViews(isset($config['views']) ? $config['views'] : 1);
     $program->setDownloads(isset($config['downloads']) ? $config['downloads'] : 1);
-    $program->setUploadedAt(isset($config['uploadtime']) ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : new \DateTime());
+    $program->setUploadedAt(isset($config['uploadtime']) ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : TimeUtils::getDateTime());
     $program->setRemixMigratedAt(isset($config['remixmigratedtime']) ? new \DateTime($config['remixmigratedtime'], new \DateTimeZone('UTC')) : null);
     $program->setCatrobatVersion(isset($config['catrobatversion']) ? $config['catrobatversion'] : 1);
     $program->setCatrobatVersionName(isset($config['catrobatversionname']) ? $config['catrobatversionname'] : '0.9.1');
@@ -729,7 +729,7 @@ class SymfonySupport
      */
     $program_statistics = new ProgramDownloads();
     $program_statistics->setProgram($program);
-    $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
+    $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: TimeUtils::getDateTime());
     $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
     $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
     $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');

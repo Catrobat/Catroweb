@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
 use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -426,7 +427,7 @@ class Program
    */
   public function updateLastModifiedTimestamp()
   {
-    $this->setLastModifiedAt(new \DateTime());
+    $this->setLastModifiedAt(TimeUtils::getDateTime());
   }
 
   /**

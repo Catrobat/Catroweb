@@ -20,6 +20,7 @@ use App\Repository\FeaturedRepository;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
+use App\Utils\TimeUtils;
 use DateTime;
 use DateTimeZone;
 use Doctrine\DBAL\DBALException;
@@ -234,7 +235,7 @@ class ProgramManager
     if (null !== $request->getGamejam())
     {
       $program->setGamejam($request->getGamejam());
-      $program->setGameJamSubmissionDate(new DateTime());
+      $program->setGameJamSubmissionDate(TimeUtils::getDateTime());
     }
 
     $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));

@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use App\Entity\Program;
+use App\Utils\TimeUtils;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -24,8 +25,8 @@ class GameJamAdmin extends AbstractAdmin
   {
     $instance = parent::getNewInstance();
 
-    $instance->setStart(new \DateTime());
-    $instance->setEnd(new \DateTime());
+    $instance->setStart(TimeUtils::getDateTime());
+    $instance->setEnd(TimeUtils::getDateTime());
 
     return $instance;
   }

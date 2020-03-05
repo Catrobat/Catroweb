@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -96,7 +97,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   {
     if (null == $this->getCreatedAt())
     {
-      $this->setCreatedAt(new \DateTime());
+      $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 

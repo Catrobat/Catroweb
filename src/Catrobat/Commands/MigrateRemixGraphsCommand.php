@@ -11,6 +11,7 @@ use App\Entity\ProgramManager;
 use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use App\Utils\TimeUtils;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
@@ -196,7 +197,7 @@ class MigrateRemixGraphsCommand extends Command
      * @var Program
      * @var Program $unmigrated_program
      */
-    $migration_start_time = new DateTime();
+    $migration_start_time = TimeUtils::getDateTime();
     $progress_bar_format_simple = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
     $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | '.
       'ETA: %estimated:-6s% | Status: %message%';
@@ -250,7 +251,7 @@ class MigrateRemixGraphsCommand extends Command
       $previous_program_id = $program_id;
     }
 
-    $duration = (new DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
+    $duration = TimeUtils::getDateTimeStamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -282,7 +283,7 @@ class MigrateRemixGraphsCommand extends Command
       $progress_bar->display();
     }
 
-    $duration = (new DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
+    $duration = TimeUtils::getDateTimeStamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -321,7 +322,7 @@ class MigrateRemixGraphsCommand extends Command
       ++$intermediate_uploads;
     }
 
-    $duration = (new DateTime())->getTimestamp() - $migration_start_time->getTimestamp();
+    $duration = TimeUtils::getDateTimeStamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -336,7 +337,7 @@ class MigrateRemixGraphsCommand extends Command
     //==============================================================================================================
     // (7) finally mark all relations as seen, so the users will not get bothered with many remix user notifications
     //==============================================================================================================
-    $seen_at = new DateTime();
+    $seen_at = TimeUtils::getDateTime();
     $seen_at->setTimestamp(0); // 1970-01-01 in order to indicate that this was not seen by the user
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
   }

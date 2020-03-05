@@ -6,7 +6,7 @@ use App\Catrobat\Commands\Helpers\CronjobProgressWriter;
 use App\Catrobat\Commands\Helpers\RecommenderFileLock;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Entity\UserManager;
-use DateTime;
+use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -136,7 +136,7 @@ class RecommenderUserSimilaritiesCommand extends Command
    */
   private function computeUserSimilarities(OutputInterface $output, $type, $is_cronjob)
   {
-    $computation_start_time = new DateTime();
+    $computation_start_time = TimeUtils::getDateTime();
     $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
 
     $progress_bar = $is_cronjob ? new CronjobProgressWriter($output) : new ProgressBar($output);
@@ -163,7 +163,7 @@ class RecommenderUserSimilaritiesCommand extends Command
 
     $this->migration_file_lock->unlock();
 
-    $duration = (new DateTime())->getTimestamp() - $computation_start_time->getTimestamp();
+    $duration = TimeUtils::getTimestamp() - $computation_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');

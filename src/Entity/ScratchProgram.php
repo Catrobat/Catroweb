@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -94,7 +95,7 @@ class ScratchProgram
    */
   public function updateLastModifiedTimestamp()
   {
-    $this->setLastModifiedAt(new \DateTime());
+    $this->setLastModifiedAt(TimeUtils::getDateTime());
   }
 
   /**

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,7 +80,7 @@ class UserLikeSimilarityRelation
   {
     if (null == $this->getCreatedAt())
     {
-      $this->setCreatedAt(new \DateTime());
+      $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 

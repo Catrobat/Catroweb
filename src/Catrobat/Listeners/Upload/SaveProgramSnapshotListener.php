@@ -4,8 +4,8 @@ namespace App\Catrobat\Listeners\Upload;
 
 use App\Catrobat\Events\ProgramAfterInsertEvent;
 use App\Catrobat\Services\ProgramFileRepository;
-use App\Catrobat\Services\Time;
 use App\Entity\Program;
+use App\Utils\TimeUtils;
 
 /**
  * Class SaveProgramSnapshotListener.
@@ -20,21 +20,16 @@ class SaveProgramSnapshotListener
    * @var
    */
   private $snapshot_dir;
-  /**
-   * @var Time
-   */
-  private $time;
 
   /**
    * SaveProgramSnapshotListener constructor.
    *
    * @param $snapshot_dir
    */
-  public function __construct(Time $time, ProgramFileRepository $file_repository, $snapshot_dir)
+  public function __construct(ProgramFileRepository $file_repository, $snapshot_dir)
   {
     $this->file_repository = $file_repository;
     $this->snapshot_dir = $snapshot_dir;
-    $this->time = $time;
   }
 
   public function handleEvent(ProgramAfterInsertEvent $event)
@@ -50,7 +45,7 @@ class SaveProgramSnapshotListener
       try
       {
         $file = $this->file_repository->getProgramFile($program->getId());
-        $date = date('Y-m-d_H-i-s', $this->time->getTime());
+        $date = date('Y-m-d_H-i-s', TimeUtils::getTimestamp());
         $file->move($this->snapshot_dir, $program->getId().'_'.$date.'.catrobat');
       }
       catch (\Exception $exception)

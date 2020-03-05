@@ -215,10 +215,6 @@ services:
     class: App\Catrobat\Services\TokenGenerator
     public: true
 
-  App\Catrobat\Services\Time:
-    class: App\Catrobat\Services\Time
-    public: true
-
   App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser:
     class: App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser
     public: true

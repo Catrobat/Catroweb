@@ -51,6 +51,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use App\Catrobat\Services\TestEnv\SymfonySupport;
+use App\Utils\TimeUtils;
 
 
 /**
@@ -1715,7 +1716,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setUploadLanguage('en');
       $program->setApproved(false);
       $program->setRemixRoot(true);
-      $program->setRemixMigratedAt(new DateTime());
+      $program->setRemixMigratedAt(TimeUtils::getDateTime());
       $program->setDebugBuild(false);
       $em->persist($program);
 
@@ -1847,7 +1848,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       ];
       $program_statistics = new ProgramDownloads();
       $program_statistics->setProgram($program);
-      $program_statistics->setDownloadedAt(new DateTime($config['downloaded_at']) ?: new DateTime());
+      $program_statistics->setDownloadedAt(new DateTime($config['downloaded_at']) ?: TimeUtils::getDateTime());
       $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
       $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
       $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');

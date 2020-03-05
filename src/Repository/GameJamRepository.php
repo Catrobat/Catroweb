@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\GameJam;
-use DateTime;
+use App\Utils\TimeUtils;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\NonUniqueResultException;
@@ -35,7 +35,7 @@ class GameJamRepository extends ServiceEntityRepository
       ->select('e')
       ->where('e.start < :current')
       ->andWhere('e.end > :current')
-      ->setParameter('current', new DateTime(), Types::DATETIME_MUTABLE)
+      ->setParameter('current', TimeUtils::getDateTime(), Types::DATETIME_MUTABLE)
       ->getQuery()->getOneOrNullResult();
   }
 

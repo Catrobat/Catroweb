@@ -6,6 +6,7 @@ use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Utils\TimeUtils;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,7 +49,7 @@ class BuildApkController extends AbstractController
     $dispatcher->sendBuildRequest($program->getId());
 
     $program->setApkStatus(Program::APK_PENDING);
-    $program->setApkRequestTime(new \DateTime());
+    $program->setApkRequestTime(TimeUtils::getDateTime());
     $program_manager->save($program);
 
     return JsonResponse::create(['status' => 'pending']);

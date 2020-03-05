@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Commands\Helpers;
 
+use App\Utils\TimeUtils;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -65,6 +66,6 @@ class CronjobProgressWriter //extends ProgressBar
    */
   public function setMessage($message, $name = 'message')
   {
-    $this->_output->writeln('['.date_format(new \DateTime(), 'Y-m-d H:i:s').'] '.$message);
+    $this->_output->writeln('['.date_format(TimeUtils::getDateTime(), 'Y-m-d H:i:s').'] '.$message);
   }
 }

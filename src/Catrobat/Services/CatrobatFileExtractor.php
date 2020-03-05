@@ -4,6 +4,7 @@ namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Catrobat\Exceptions\Upload\InvalidArchiveException;
+use App\Utils\TimeUtils;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
@@ -41,7 +42,7 @@ class CatrobatFileExtractor
    */
   public function extract(File $file)
   {
-    $temp_path = hash('md5', time().mt_rand());
+    $temp_path = hash('md5', TimeUtils::getTimestamp().mt_rand());
     $full_extract_dir = $this->extract_dir.$temp_path.'/';
     $full_extract_path = $this->extract_path.$temp_path.'/';
 
