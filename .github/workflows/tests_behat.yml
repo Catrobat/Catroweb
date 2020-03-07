@@ -78,7 +78,21 @@ jobs:
         run: |
           docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
 
+      - name: DEBUG
+          if: always()
+          run: |
+            ls
+            cd tests
+            ls
+            cd testreports
+            ls
+            cd behat
+            ls
+            cd htmlTestReport
+            ls
+
       - name: Create Artifacts
+        if: always()
         uses: actions/upload-artifact@v1
         with:
           name: Behat-${{ matrix.testSuite }}-TestReport
