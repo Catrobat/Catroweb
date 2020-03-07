@@ -101,11 +101,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build & Run all tests
+      - name: Build
+        continue-on-error: true
         run: |
           cd docker
           docker-compose -f docker-compose.test.yml build
           docker-compose -f docker-compose.test.yml up -d
+
+      - name: Behat test
+        continue-on-error: true
+        run: |
           docker exec app.catroweb.test bin/behat -f html
 
       - name: Prepare Artifact creation
