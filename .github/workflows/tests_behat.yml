@@ -76,16 +76,47 @@ jobs:
         if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
         id: test-rerun-3
         run: |
+          echo ::set-output name=status::failure
           docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+          echo ::set-output name=status::success
+
+      # Creating separate test reports only for failed failed scenarios
+      - name: Prepare Artifact creation
+        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success' && steps.test-rerun-3.outputs.status != 'success'
+        run: |
+          docker cp app.catroweb.test:/var/www/catroweb/tests/testreports/behat dockerTestReportsOnlyFail
+
+      - name: Create Artifacts
+        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success' && steps.test-rerun-3.outputs.status != 'success'
+        uses: actions/upload-artifact@v1
+        with:
+          name: BehatReportonlyFails-${{ matrix.testSuite }}
+          path: dockerTestReportsOnlyFail
+
+
+  # Creating a report containing all suites
+  report_creation:
+    name: Behat test - report creation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build & Run all tests
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+          docker exec app.catroweb.test bin/behat -f html
 
       - name: Prepare Artifact creation
         if: always()
         run: |
-          docker cp app.catroweb.test:/var/www/catroweb/tests/testreports/ dockerTestReports
+          docker cp app.catroweb.test:/var/www/catroweb/tests/testreports/behat dockerTestReports
 
       - name: Create Artifacts
         if: always()
         uses: actions/upload-artifact@v1
         with:
-          name: Behat-${{ matrix.testSuite }}-TestReport
+          name: BehatTestReport
           path: dockerTestReports
+
