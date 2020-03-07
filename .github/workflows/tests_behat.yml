@@ -81,7 +81,7 @@ jobs:
 
   # Creating a report containing all suites
   report_creation:
-    name: Behat test - report creation
+    name: Report creation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -93,10 +93,10 @@ jobs:
           docker-compose -f docker-compose.test.yml build
           docker-compose -f docker-compose.test.yml up -d
 
-      - name: Behat test
+      - name: Run tests
         continue-on-error: true
         run: |
-          docker exec app.catroweb.test bin/behat -f html
+          docker exec app.catroweb.test bin/behat
 
       - name: Prepare Artifact creation
         if: always()
