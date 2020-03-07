@@ -81,14 +81,7 @@ jobs:
       - name: DEBUG
         if: always()
         run: |
-          ls
-          cd tests
-          ls
-          cd testreports
-          ls
-          cd behat
-          ls
-          cd htmlTestReport
+          cd tests/testreports/behat
           ls
 
       - name: Create Artifacts
