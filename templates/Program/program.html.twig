@@ -375,13 +375,14 @@
         <span class="fa fa-link" aria-hidden="true"></span>
         {{ "programs.linkTitle"|trans({}, "catroweb") }}
       </button>
-
+      {% if not featured %}
       {% if not my_program %}
         <button type="button" class="btn btn-lg btn-link" style="text-shadow: none;"
                 id="report-program-button">
           <i class="fas fa-ban mr-1"></i>
           {{ "programs.reportProgram"|trans({}, 'catroweb') }}
         </button>
+      {% endif %}
       {% endif %}
     </div>
 

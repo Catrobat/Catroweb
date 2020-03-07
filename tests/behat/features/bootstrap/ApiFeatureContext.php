@@ -719,7 +719,7 @@ class ApiFeatureContext extends BaseContext
         'filesize'            => @$programs[$i]['FileSize'],
         'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
         'approved'            => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '')
-          ? null : true,
+          ? null : false,
         'tags'                => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
         'extensions'          => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
         'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,

@@ -54,6 +54,16 @@ class ReportController extends AbstractController
 
       return JsonResponse::create($response);
     }
+    $is_featured = $program_manager->getFeaturedRepository()->isFeatured($program);
+    $is_approved = $program->getApproved();
+    if ($is_featured || $is_approved)
+    {
+      $response['statusCode'] = StatusCode::INVALID_PROGRAM;
+      $response['answer'] = $translator->trans('errors.program.invalid.', [], 'catroweb');
+      $response['preHeaderMessages'] = '';
+
+      return JsonResponse::create($response);
+    }
 
     $report = new ProgramInappropriateReport();
 

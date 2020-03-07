@@ -78,10 +78,10 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I fill in "report-reason" with "I do not like this project ... hehe"
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
-    Then I should see "Your report was successfully sent!"
+    Then I should see "Error"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
-    Then I should be on "/app/"
+    Then I should be on "/app/project/1"
 
   Scenario: I should be able to report a project due to copyright infringement
     Given I log in as "OtherUser"
@@ -94,10 +94,10 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I fill in "report-reason" with "That was my idea!!!"
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
-    Then I should see "Your report was successfully sent!"
+    Then I should see "Error"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
-    Then I should be on "/app/"
+    Then I should be on "/app/project/1"
 
   Scenario: I should be able to report a project due to spam
     Given I log in as "OtherUser"
@@ -110,10 +110,10 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I fill in "report-reason" with "That's just spam!!!"
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
-    Then I should see "Your report was successfully sent!"
+    Then I should see "Error"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
-    Then I should be on "/app/"
+    Then I should be on "/app/project/1"
 
   Scenario: I should be able to report a project due to dislike
     Given I log in as "OtherUser"
@@ -127,10 +127,10 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I fill in "report-reason" with "I do not like this project ... hehe"
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
-    Then I should see "Your report was successfully sent!"
+    Then I should see "Error"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
-    Then I should be on "/app/"
+    Then I should be on "/app/project/1"
 
   Scenario: A reported project should not be visible anymore
     Given I log in as "OtherUser"
@@ -162,9 +162,9 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I fill in "report-reason" with "That's just spam!!!"
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
-    Then I should see "Your report was successfully sent!"
+    Then I should see "Error"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
-    Then I should be on "/app/"
+    Then I should be on "/app/project/1"
     When I go to "/app/project/1"
     Then I should see "project 1"

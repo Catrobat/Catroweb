@@ -1006,7 +1006,7 @@ class AdminFeatureContext extends MinkContext implements KernelAwareContext
         'filesize'            => @$program['FileSize'],
         'visible'             => filter_var($program["visible"], FILTER_VALIDATE_BOOLEAN),
         'approved'            => (isset($program['approved_by_user']) &&
-          $program['approved_by_user'] === '') ? null : true,
+          $program['approved_by_user'] === '') ? null : false,
         'tags'                => isset($program['tags_id']) ? $program['tags_id'] : null,
         'extensions'          => isset($program['extensions']) ? $program['extensions'] : null,
         'remix_root'          => filter_var($program["remix_root"], FILTER_VALIDATE_BOOLEAN),

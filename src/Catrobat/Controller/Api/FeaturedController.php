@@ -44,6 +44,20 @@ class FeaturedController extends AbstractController
     return $this->getFeaturedPrograms($request, true, $image_repository, $repository);
   }
 
+  public function getFeaturedArray(FeaturedRepository $repository, Request $request)
+  {
+    $limit = intval($request->query->get('limit', 20));
+    $offset = intval($request->query->get('offset', 0));
+    $flavor = $request->get('flavor');
+
+    return $repository->getFeaturedPrograms($flavor, $limit, $offset, false);
+  }
+
+  public function getGeneratedObject($featured_program, $image_repository)
+  {
+    return $this->generateProgramObject($featured_program, $image_repository);
+  }
+
   /**
    * @param $ios_only
    *

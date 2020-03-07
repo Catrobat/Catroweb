@@ -2,9 +2,11 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Controller\Api\FeaturedController;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
+use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -21,6 +23,7 @@ use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserComment;
 use App\Repository\CatroNotificationRepository;
+use App\Repository\FeaturedRepository;
 use App\Repository\GameJamRepository;
 use App\Utils\ImageUtils;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -117,16 +120,33 @@ class ProgramController extends AbstractController
                                 ScreenshotRepository $screenshot_repository,
                                 ElapsedTimeStringFormatter $elapsed_time,
                                 RemixManager $remix_manager, GameJamRepository $game_jam_repository,
-                                ExtractedFileRepository $extractedFileRepository)
+                                ExtractedFileRepository $extractedFileRepository,
+                                FeaturedController $featured_controller,
+                                FeaturedImageRepository $featured_image_repository, FeaturedRepository $featured_repository)
   {
     /**
      * @var User
      * @var Program                    $project
-     * @var ProgramInappropriateReport $reported_program
+     * @var ProgramInappropriateReport $reported_program8:52
      * @var ProgramLike                $like
      */
     $project = $program_manager->find($id);
     $router = $this->get('router');
+
+    $checker = false;
+    $featured_array = $featured_controller->getFeaturedArray($featured_repository, $request);
+    $ret_array = [];
+    foreach ($featured_array as $new_counter)
+    {
+      $ret_array[] = $featured_controller->getGeneratedObject($new_counter, $featured_image_repository);
+    }
+    foreach ($ret_array as $counter)
+    {
+      if ($counter['ProjectId'] == $id)
+      {
+        $checker = true;
+      }
+    }
 
     if (!$program_manager->isProjectVisibleForCurrentUser($project))
     {
@@ -196,6 +216,7 @@ class ProgramController extends AbstractController
       'user_name' => $user_name,
       'max_description_size' => $max_description_size,
       'logged_in' => $logged_in,
+      'featured' => $checker,
     ]);
   }
 
