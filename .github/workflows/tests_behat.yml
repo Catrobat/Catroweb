@@ -76,22 +76,7 @@ jobs:
         if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
         id: test-rerun-3
         run: |
-          echo ::set-output name=status::failure
           docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
-          echo ::set-output name=status::success
-
-      # Creating separate test reports only for failed failed scenarios
-      - name: Prepare Artifact creation
-        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success' && steps.test-rerun-3.outputs.status != 'success'
-        run: |
-          docker cp app.catroweb.test:/var/www/catroweb/tests/testreports/behat dockerTestReportsOnlyFail
-
-      - name: Create Artifacts
-        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success' && steps.test-rerun-3.outputs.status != 'success'
-        uses: actions/upload-artifact@v1
-        with:
-          name: BehatReportonlyFails-${{ matrix.testSuite }}
-          path: dockerTestReportsOnlyFail
 
 
   # Creating a report containing all suites
