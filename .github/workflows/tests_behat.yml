@@ -77,3 +77,9 @@ jobs:
         id: test-rerun-3
         run: |
           docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Behat-${{ matrix.testSuite }}-TestReport
+          path: tests/testreports/behat/htmlTestReport
