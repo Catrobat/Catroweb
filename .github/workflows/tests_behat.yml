@@ -88,4 +88,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Behat-${{ matrix.testSuite }}-TestReport
-          path: tests/testreports/behat/htmlTestReport
+          path: dockerTestReports
