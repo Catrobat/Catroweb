@@ -304,15 +304,3 @@
   </div>
 
 {% endblock %}
-
-{% block js %}
-  <script src="{{ asset('compiled/js/CodeView.js') }}"></script>
-  <script>
-    initCodeView(
-      '{{ "codeview.showCode"|trans({}, "catroweb") }}',
-      '{{ "codeview.hideCode"|trans({}, "catroweb") }}',
-      '{{ "codeview.showStatistics"|trans({}, "catroweb") }}',
-      '{{ "codeview.hideStatistics"|trans({}, "catroweb") }}',
-    )
-  </script>
-{% endblock %}

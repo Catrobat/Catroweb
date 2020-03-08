@@ -1,8 +1,8 @@
 
 liip_theme:
-  themes: ['app', 'pocketcode', 'pocketalice', 'pocketgalaxy', 'pocketphiro', 'phirocode', 'luna', 'create@school', 'embroidery', 'arduino']
+  themes: ['app', 'pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school', 'embroidery', 'arduino']
   active_theme: 'app'
 
 # used to access all themes via php
 parameters:
-  themes: ['pocketcode', 'pocketalice', 'pocketgalaxy', 'pocketphiro', 'phirocode', 'luna', 'create@school', 'embroidery', 'arduino']
+  themes: ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school', 'embroidery', 'arduino']

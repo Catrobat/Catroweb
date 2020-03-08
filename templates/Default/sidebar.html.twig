@@ -173,19 +173,3 @@
 
 </nav>
 <div id="sidebar-overlay"></div>
-
-{% block js %}
-  <script>
-    enableNavButtonIfCategoryContainsProjects('#nav-newest', '{{ path('api_recent_programs') }}')
-    enableNavButtonIfRecommendedCategoryContainsProjects(
-      '#nav-recommended',
-      '{{ path('api_recsys_general_projects') }}',
-        {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}
-    )
-    enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
-    enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
-    enableNavButtonIfCategoryContainsProjects('#nav-scratch-remixes', '{{ path('api_scratch_remix') }}')
-    enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
-    manageNotificationsDropdown()
-  </script>
-{% endblock %}

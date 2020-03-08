@@ -2,21 +2,11 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('css/plugins/jquery.contextMenu.min.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('css/plugins/vis.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/modules/jquery.contextMenu.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('vis/vis.min.css') }}"/> {# We need acces to all images #}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}"/>
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}"/>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css"/>
-
-  <script src=" {{ asset( getJavascriptPath('LoadingAnimation.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('jquery.contextMenu.min.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('jquery.ui.position.min.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('animatedModal.min.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('vis.min.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('clipboard.min.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('remixgraph.configuration.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('remixgraph.builder.js') ) }}"></script>
-  <script src=" {{ asset( getJavascriptPath('remixgraph.visualization.js') ) }}"></script>
+  <link rel="stylesheet" href="{{ asset('css/modules/animate.min.css') }}"/>
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:type" content="website"/>
@@ -477,8 +467,29 @@
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('compiled/js/Program.js') }}"></script>
-  <script src="{{ asset('compiled/js/ProgramReport.js') }}"></script>
+
+  <script src=" {{ asset( 'js/LoadingAnimation.min.js') }}"></script>
+  <script src=" {{ asset( 'js/modules/jquery.contextMenu.min.js') }}"></script>
+  <script src=" {{ asset( 'js/modules/jquery.ui.position.min.js') }}"></script>
+  <script src=" {{ asset( 'js/modules/animatedModal.min.js') }}"></script>
+  <script src=" {{ asset( 'vis/vis.min.js') }}"></script>
+  <script src=" {{ asset( 'js/modules/clipboard.min.js') }}"></script>
+  <script src=" {{ asset( 'js/remixgraph.configuration.min.js') }}"></script>
+  <script src=" {{ asset( 'js/remixgraph.builder.min.js') }}"></script>
+  <script src=" {{ asset( 'js/remixgraph.visualization.min.js') }}"></script>
+
+  <script src="{{ asset('js/ImageUpload.min.js') }}"></script>
+  <script>
+    setImageUploadListener('{{ path('upload_project_thumbnail', { 'id': program.id }) }}',
+      '#change-project-thumbnail-button', '#project-thumbnail-big',
+        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_EXCEEDING_FILESIZE') }},
+        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE') }}
+    )
+  </script>
+
+  <script src="{{ asset('js/Program.min.js') }}"></script>
+  <script src="{{ asset('js/ProgramReport.min.js') }}"></script>
   <script>
     new ProgramReport('{{ program.id }}', '{{ path('catrobat_api_report_program') }}', '{{ url('login') }}',
       "{{ 'success.report'                          |trans({}, 'catroweb') }}",
@@ -495,7 +506,7 @@
         {{ logged_in }}
     )
   </script>
-  <script src="{{ asset('compiled/js/ProgramComments.js') }}"></script>
+  <script src="{{ asset('js/ProgramComments.min.js') }}"></script>
   <script>
     new ProgramComments('{{ program_details.id }}', 5, 5, 5, {{ (program_details.comments|length) }},
       "{{ 'cancel'                                  |trans({}, 'catroweb') }}",
@@ -516,7 +527,7 @@
       "{{ constant('App\\Catrobat\\StatusCode::NO_ADMIN_RIGHTS') }}"
     )
   </script>
-  <script src="{{ asset('compiled/js/ProgramDescription.js') }}"></script>
+  <script src="{{ asset('js/ProgramDescription.min.js') }}"></script>
   <script>
     new ProgramDescription('{{ program.id }}',
       '{{ ("show-more")                             |trans({}, "catroweb") }}',
@@ -527,7 +538,7 @@
     )
   </script>
 
-  <script src="{{ asset('compiled/js/ProgramCredits.js') }}"></script>
+  <script src="{{ asset('js/ProgramCredits.min.js') }}"></script>
   <script>
     new ProgramCredits('{{ program.id }}',
       '{{ ("show-more")                             |trans({}, "catroweb") }}',
@@ -538,7 +549,17 @@
     )
   </script>
 
-  <script src=" {{ asset('compiled/js/CatBlocks.js') }}"></script>
+  <script src="{{ asset('js/CodeView.min.js') }}"></script>
+  <script>
+    initCodeView(
+      '{{ "codeview.showCode"|trans({}, "catroweb") }}',
+      '{{ "codeview.hideCode"|trans({}, "catroweb") }}',
+      '{{ "codeview.showStatistics"|trans({}, "catroweb") }}',
+      '{{ "codeview.hideStatistics"|trans({}, "catroweb") }}',
+    )
+  </script>
+
+  <script src=" {{ asset('catblocks/CatBlocks.js') }}"></script>
     <script>
       const progPath = '{{ app.request.getSchemeAndHttpHost() ~ '/resources/extract/' ~ program.getExtractedDirectoryHash() ~ '/'}}';
       const progLang = 'en_GB';
@@ -582,12 +603,10 @@
       };
     </script>
 
-
-
   <script>
 
     $(function () {
-      var copy_button = $('.btn-copy')
+      const copy_button = $('.btn-copy')
 
       copy_button.tooltip({
         trigger  : 'manual',
@@ -601,7 +620,7 @@
         }, 1000)
       })
 
-      var cb = new Clipboard('.btn-copy')
+      const cb = new ClipboardJS('.btn-copy')
       cb.on('success', function () {
         copy_button
         .attr('data-original-title', '{{ "clipboard.success"|trans({}, "catroweb") }}')

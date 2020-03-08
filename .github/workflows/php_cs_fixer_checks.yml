@@ -1,7 +1,5 @@
 
-# Checking the php code style
-
-name: Php-CS-Fixer Code Style checks
+name: Php-CS-Fixer Php Code Style checks
 
 on: [push, pull_request]
 

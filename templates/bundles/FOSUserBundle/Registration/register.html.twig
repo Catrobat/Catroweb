@@ -1,13 +1,7 @@
 {% extends "Default/base.html.twig" %}
 
 {% block head %}
-
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
-
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-  <script src="{{ asset('compiled/js/jquery-ui.js') }}"></script>
-
 {% endblock %}
 
 {% block header "" %}
@@ -132,5 +126,16 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('compiled/js/PasswordVisibilityToggler.js') }}"></script>
+  <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
+  <script src="{{ asset('js/register.min.js') }}"></script>
+  <script>
+    const register =new Register(
+      "{{ flavor() }}",
+      "{{ "oauth.username_header"|trans({}, "catroweb") }}",
+      "{{ "oauth.username_chooser"|trans({}, "catroweb") }}",
+      "{{ "oauth.usernameTaken"|trans({}, "catroweb") }}",
+      "{{ "errors.username.size"|trans({}, "catroweb") }}",
+      "{{ "ok"|trans({}, "catroweb") }}"
+    )
+  </script>
 {% endblock js %}

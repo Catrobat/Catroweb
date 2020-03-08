@@ -1,7 +1,10 @@
-let LoadingAnimation = function (color, loaderText) {
+/* eslint-env jquery */
+
+// eslint-disable-next-line no-unused-vars
+const LoadingAnimation = function (color, loaderText) {
   color = typeof color !== 'undefined' ? color : '#177f8d'
-  let self = this
-  
+  const self = this
+
   self.spinnerLayer = $('<div id="loader"></div>')
   self.spinner = $('<div class="loader"></div>')
   self.spinner.append($('<div class="loader-inner"></div>'))
@@ -10,11 +13,11 @@ let LoadingAnimation = function (color, loaderText) {
   self.spinnerLayer.appendTo($('body'))
   $('.loader-inner').css('background-color', color)
   self.spinnerLayer.hide()
-  
+
   self.show = function () {
     self.spinnerLayer.show()
   }
-  
+
   self.hide = function () {
     self.spinnerLayer.hide()
   }

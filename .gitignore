@@ -23,15 +23,13 @@ config/packages/test/parameters.yml
 node_modules/
 
 ### public ###
-public/bootstrap_vendor
-public/bundles
-public/compiled
-public/css
-public/font_awesome_wrapper
-public/images
-public/js
-public/webfonts
-public/catblocks
+public/**
+!public/.well-known
+!public/resources
+!public/resources_test
+!public/index.php
+!public/index_test.php
+!public/robots.txt
 
 ### tests ###
 tests/behat/sqlite/**

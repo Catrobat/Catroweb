@@ -51,10 +51,13 @@ class ProfileController extends AbstractController
     $user = null;
     $my_profile = false;
 
+    $view = 'UserManagement/Profile/profile.html.twig';
+
     if (0 === $id || ($this->getUser() && $this->getUser()->getId() === $id))
     {
       $my_profile = true;
       $user = $this->getUser();
+      $view = 'UserManagement/Profile/myProfile.html.twig';
     }
     else
     {
@@ -91,7 +94,7 @@ class ProfileController extends AbstractController
     $secondMail = $user->getAdditionalEmail();
     $followerCount = $user->getFollowers()->count();
 
-    return $this->render('UserManagement/Profile/profileHandler.html.twig', [
+    return $this->render($view, [
       'profile' => $user,
       'program_count' => $program_count,
       'follower_count' => $followerCount,

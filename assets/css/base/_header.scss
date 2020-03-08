@@ -1,8 +1,8 @@
-@import '../../../public/bootstrap_vendor/scss/functions';
+@import '../../../public/bootstrap/scss/functions';
 @import 'variables';
 @import 'mixins';
-@import '../../../public/bootstrap_vendor/scss/variables';
-@import '../../../public/bootstrap_vendor/scss/mixins';
+@import '../../../public/bootstrap/scss/variables';
+@import '../../../public/bootstrap/scss/mixins';
 @import 'theme_settings';
 
 $nav-font-size: $default-font-size + 0.25;

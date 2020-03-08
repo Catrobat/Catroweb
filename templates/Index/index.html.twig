@@ -197,15 +197,13 @@
     })
 
     $(document).on('click', '#help-button', function () {
-      swal({
+      Swal.fire({
           title            : $(this).attr('data-help-title'),
           text             : $(this).attr('data-help-description'),
           showCancelButton : false,
           confirmButtonText: "{{ "ok"|trans({}, "catroweb") }}",
           closeOnConfirm   : true,
-          type             : 'question',
-        },
-        function () {
+          icon             : 'question',
         }
       )
     })
