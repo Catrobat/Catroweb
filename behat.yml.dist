@@ -58,26 +58,32 @@ default:
                 - AdminFeatureContext:
                     - "tests/testreports/screens/"
 
-        api_general:
-            paths:    [ "tests/behat/features/api/general" ]
+        api-authentication:
+            paths:    [ "tests/behat/features/api/authentication" ]
+            contexts:
+                - DataFixturesContext
+                - RequestResponseContext
+
+        deprecated_api_general:
+            paths:    [ "tests/behat/features/api/deprecated/general" ]
             contexts:
                 - ApiFeatureContext:
                     - "tests/testreports/behat/"
 
-        api_profile:
-            paths:    [ "tests/behat/features/api/profile" ]
+        deprecated_api_profile:
+            paths:    [ "tests/behat/features/api/deprecated/profile" ]
             contexts:
                 - ApiFeatureContext:
                     - "tests/testreports/behat/"
 
-        api_project:
-            paths:    [ "tests/behat/features/api/project" ]
+        deprecated_api_project:
+            paths:    [ "tests/behat/features/api/deprecated/project" ]
             contexts:
                 - ApiFeatureContext:
                     - "tests/testreports/behat/"
 
-        api_upload:
-            paths:    [ "tests/behat/features/api/upload" ]
+        deprecated_api_upload:
+            paths:    [ "tests/behat/features/api/deprecated/upload" ]
             contexts:
                 - ApiFeatureContext:
                     - "tests/testreports/behat/"

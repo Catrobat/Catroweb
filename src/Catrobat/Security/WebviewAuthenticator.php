@@ -17,6 +17,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class WebviewAuthenticator.
+ *
+ * @deprecated
  */
 class WebviewAuthenticator extends AbstractGuardAuthenticator
 {

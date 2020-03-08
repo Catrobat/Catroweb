@@ -9,6 +9,8 @@ class TokenGenerator
 {
   /**
    * TokenGenerator constructor.
+   *
+   * @deprecated use JWT tokens
    */
   public function __construct()
   {

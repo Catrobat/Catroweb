@@ -24,6 +24,8 @@ class User extends BaseUser implements LdapUserInterface
   protected $id;
 
   /**
+   * @deprecated API v1
+   *
    * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected $upload_token;

@@ -10,7 +10,7 @@ parameters:
   catrobat.invalidupload.dir:           "%kernel.project_dir%/src/Catrobat/Commands/invisible_programs/"
   catrobat.logs.dir:                    "%kernel.project_dir%/var/log/"
   catrobat.max_description_upload_size: 10000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
-  catrobat.max_credits_upload_size: 3000
+  catrobat.max_credits_upload_size:     3000
   catrobat.mediapackage.dir:            "%catrobat.pubdir%resources/mediapackage/"
   catrobat.mediapackage.path:           "resources/mediapackage/"
   catrobat.pubdir:                      "%kernel.project_dir%/public/"
@@ -281,11 +281,6 @@ services:
   # ====================================================================================================================
   #   User Authentication
   #
-  webview_authenticator:
-    class: App\Catrobat\Security\WebviewAuthenticator
-    public: true
-  App\Catrobat\Security\WebviewAuthenticator: "@webview_authenticator"
-
   user_authenticator:
     class: App\Catrobat\Security\UserAuthenticator
     arguments:
@@ -875,14 +870,15 @@ services:
     public: true
 
 
-# ====================================================================================================================
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ====================================================================================================================
+  # ====================================================================================================================
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ====================================================================================================================
 
-# ====================================================================================================================
-#  CAPI
-#
-  api.mediaLibrary:
+  # ====================================================================================================================
+  #  CAPI:
+  #        We need to register the API server as handler for our open api generated APIs
+  #
+  api.media-library:
     class: App\Api\MediaLibraryApi
     tags:
       - { name: "open_api_server.api", api: "mediaLibrary" }
@@ -890,9 +886,14 @@ services:
   api.projects:
     class: App\Api\ProjectsApi
     tags:
-        - { name: "open_api_server.api", api: "projects" }
+      - { name: "open_api_server.api", api: "projects" }
 
-  api.security:
-    class: App\Api\SecurityApi
+  api.user:
+    class: App\Api\UserApi
     tags:
-      - { name: "open_api_server.api", api: "security" }
+      - { name: "open_api_server.api", api: "user" }
+
+  api.authentication:
+    class: App\Api\AuthenticationApi
+    tags:
+      - { name: "open_api_server.api", api: "authentication" }

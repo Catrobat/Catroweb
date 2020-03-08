@@ -21,10 +21,11 @@ jobs:
       matrix:
         testSuite:
           - admin
-          - api_general
-          - api_profile
-          - api_project
-          - api_upload
+          - api-authentication
+          - deprecated_api_general
+          - deprecated_api_profile
+          - deprecated_api_project
+          - deprecated_api_upload
           - ci
           - flavor
           - web_general
