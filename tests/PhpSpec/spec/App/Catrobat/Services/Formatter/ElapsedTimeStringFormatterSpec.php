@@ -5,7 +5,9 @@ namespace tests\PhpSpec\spec\App\Catrobat\Services\Formatter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use \App\Catrobat\Services\Time;
+use App\Utils\TimeUtils;
+use \DateTime;
+use \Exception;
 
 /**
  * Class ElapsedTimeStringFormatterSpec
@@ -20,13 +22,14 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
 
   /**
    * @param TranslatorInterface $translator
-   * @param Time $time
+   * @throws Exception
    */
-  public function let(TranslatorInterface $translator, Time $time)
+  public function let(TranslatorInterface $translator)
   {
-    $this->testTime = 9999999999999;
-    $time->getTime()->willReturn($this->testTime);
-    $this->beConstructedWith($translator, $time);
+    TimeUtils::freezeTime(new DateTime('2015-10-26 13:33:37'));
+    $this->testTime = TimeUtils::getTimestamp();
+
+    $this->beConstructedWith($translator);
   }
 
   /**
@@ -47,6 +50,8 @@ class ElapsedTimeStringFormatterSpec extends ObjectBehavior
     $translator->trans(Argument::exact('time.minutes.ago'), ['%count%' => 5], Argument::any(), Argument::any())->willReturn('5 minutes ago');
     $translator->trans(Argument::exact('time.minutes.ago'), ['%count%' => 59], Argument::any(), Argument::any())->willReturn('59 minutes ago');
 
+    $this->getElapsedTime($this->testTime + 10 )->shouldReturn('< 1 minute ago');
+    $this->getElapsedTime($this->testTime)->shouldReturn('< 1 minute ago');
     $this->getElapsedTime($this->testTime - 10)->shouldReturn('< 1 minute ago');
     $this->getElapsedTime($this->testTime - 80)->shouldReturn('1 minute ago');
     $this->getElapsedTime($this->testTime - 60 * 5)->shouldReturn('5 minutes ago');

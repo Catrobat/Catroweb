@@ -8,6 +8,7 @@ use App\Entity\HomepageClickStatistic;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramManager;
+use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
@@ -108,7 +109,7 @@ class StatisticsService
     $program_download_statistic->setUserAgent($user_agent);
     $program_download_statistic->setUser($user);
     $program_download_statistic->setReferrer($referrer);
-    $program_download_statistic->setDownloadedAt(new \DateTime());
+    $program_download_statistic->setDownloadedAt(TimeUtils::getDateTime());
     $program_download_statistic->setIp($ip);
     $program_download_statistic->setCountryCode($country_code);
     $program_download_statistic->setCountryName($country_name);
@@ -272,7 +273,7 @@ class StatisticsService
       $click_statistics->setUserAgent($user_agent);
       $click_statistics->setUser($user);
       $click_statistics->setReferrer($referrer);
-      $click_statistics->setClickedAt(new \DateTime());
+      $click_statistics->setClickedAt(TimeUtils::getDateTime());
       $click_statistics->setIp($ip);
       $click_statistics->setCountryCode($country_code);
       $click_statistics->setCountryName($country_name);
@@ -317,7 +318,7 @@ class StatisticsService
         $click_statistics->setUserAgent($user_agent);
         $click_statistics->setUser($user);
         $click_statistics->setReferrer($referrer);
-        $click_statistics->setClickedAt(new \DateTime());
+        $click_statistics->setClickedAt(TimeUtils::getDateTime());
         $click_statistics->setIp($ip);
         $click_statistics->setCountryCode($country_code);
         $click_statistics->setCountryName($country_name);
@@ -345,7 +346,7 @@ class StatisticsService
           $click_statistics->setUserAgent($user_agent);
           $click_statistics->setUser($user);
           $click_statistics->setReferrer($referrer);
-          $click_statistics->setClickedAt(new \DateTime());
+          $click_statistics->setClickedAt(TimeUtils::getDateTime());
           $click_statistics->setIp($ip);
           $click_statistics->setCountryCode($country_code);
           $click_statistics->setCountryName($country_name);
@@ -405,7 +406,7 @@ class StatisticsService
     $homepage_click_statistics->setUserAgent($user_agent);
     $homepage_click_statistics->setUser($user);
     $homepage_click_statistics->setReferrer($referrer);
-    $homepage_click_statistics->setClickedAt(new \DateTime());
+    $homepage_click_statistics->setClickedAt(TimeUtils::getDateTime());
     $homepage_click_statistics->setIp($ip);
     $homepage_click_statistics->setLocale($locale);
     $program = $this->programmanager->find($program_id);

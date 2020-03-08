@@ -3,12 +3,12 @@
 namespace tests\PhpSpec\spec\App\Catrobat\Listeners\Upload;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\HttpFoundation\File\File;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\User;
 use App\Entity\Program;
 use Prophecy\Argument;
-use App\Catrobat\Services\Time;
+use App\Utils\TimeUtils;
+use \DateTime;
 
 class SaveProgramSnapshotListenerSpec extends ObjectBehavior
 {
@@ -19,10 +19,10 @@ class SaveProgramSnapshotListenerSpec extends ObjectBehavior
   private $file;
 
 
-  public function let(ProgramFileRepository $repo, Time $time, User $user, Program $program, MyFile $file)
+  public function let(ProgramFileRepository $repo, User $user, Program $program, MyFile $file)
   {
-    $this->beConstructedWith($time, $repo, self::STORAGE_DIR);
-    $time->getTime()->willReturn(strtotime("2015-10-26 13:33:37"));
+    $this->beConstructedWith($repo, self::STORAGE_DIR);
+    TimeUtils::freezeTime(new DateTime('2015-10-26 13:33:37'));
 
     $this->user = new User();
     $this->user->setLimited(true);
@@ -34,7 +34,7 @@ class SaveProgramSnapshotListenerSpec extends ObjectBehavior
     $this->file = $file;
   }
 
-  public function it_backups_the_current_program_file_of_a_limited_account_on_update(ProgramFileRepository $repo, Time $time)
+  public function it_backups_the_current_program_file_of_a_limited_account_on_update(ProgramFileRepository $repo)
   {
     $repo->getProgramFile(1)->willReturn($this->file);
 
@@ -43,7 +43,7 @@ class SaveProgramSnapshotListenerSpec extends ObjectBehavior
     $this->file->move(self::STORAGE_DIR, "1_2015-10-26_13-33-37.catrobat")->shouldHaveBeenCalled();
   }
 
-  public function it_does_not_backup_if_user_is_not_limited(ProgramFileRepository $repo, Time $time)
+  public function it_does_not_backup_if_user_is_not_limited(ProgramFileRepository $repo)
   {
     $this->user->setLimited(false);
 
@@ -52,7 +52,7 @@ class SaveProgramSnapshotListenerSpec extends ObjectBehavior
     $this->file->move(Argument::any(), Argument::any())->shouldNotHaveBeenCalled();
   }
 
-  public function it_does_not_backup_if_there_is_no_existing_file(ProgramFileRepository $repo, Time $time)
+  public function it_does_not_backup_if_there_is_no_existing_file(ProgramFileRepository $repo)
   {
     $repo->getProgramFile(1)->willThrow('\Symfony\Component\Filesystem\Exception\FileNotFoundException');
 
@@ -61,7 +61,7 @@ class SaveProgramSnapshotListenerSpec extends ObjectBehavior
     $this->file->move(Argument::any(), Argument::any())->shouldNotHaveBeenCalled();
   }
 
-  public function it_does_not_throw_an_exception_if_backup_fails(ProgramFileRepository $repo, Time $time)
+  public function it_does_not_throw_an_exception_if_backup_fails(ProgramFileRepository $repo)
   {
     $repo->getProgramFile(1)->willReturn($this->file);
 

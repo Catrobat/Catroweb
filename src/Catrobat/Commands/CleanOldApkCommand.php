@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Entity\Program;
+use App\Utils\TimeUtils;
 use ArrayObject;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -70,7 +71,7 @@ class CleanOldApkCommand extends Command
     }
 
     $output->writeln('Deleting all APKs older than '.$days.' days.');
-    $last_point_of_time_to_save = time() - ((int) $days * HOURS * MINUTES * SECONDS);
+    $last_point_of_time_to_save = TimeUtils::getTimestamp() - ((int) $days * HOURS * MINUTES * SECONDS);
 
     $directory = $this->parameter_bag->get('catrobat.apk.dir');
     $filesystem = new Filesystem();

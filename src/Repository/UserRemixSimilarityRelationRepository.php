@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\UserRemixSimilarityRelation;
-use DateTime;
+use App\Utils\TimeUtils;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -65,7 +65,7 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
       'first_user_id' => $first_user_id,
       'second_user_id' => $second_user_id,
       'similarity' => $similarity,
-      'created_at' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+      'created_at' => date_format(TimeUtils::getDateTime(), 'Y-m-d H:i:s'),
     ]);
   }
 }

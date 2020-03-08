@@ -1,7 +1,6 @@
 <?php
 
 use App\Catrobat\Services\MediaPackageFileRepository;
-use App\Catrobat\Services\TestEnv\FixedTime;
 use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
 use App\Catrobat\Services\TestEnv\LdapTestDriver;
 use App\Entity\Extension;
@@ -29,7 +28,7 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use App\Utils\TimeUtils;
 
 
 /**
@@ -1584,8 +1583,7 @@ class ApiFeatureContext extends BaseContext
   public function theCurrentTimeIs($time)
   {
     $date = new DateTime($time, new DateTimeZone('UTC'));
-    $time_service = $this->getSymfonyService('App\Catrobat\Services\Time');
-    $time_service->setTime(new FixedTime($date->getTimestamp()));
+    TimeUtils::freezeTime($date);
   }
 
   /**
@@ -1703,7 +1701,7 @@ class ApiFeatureContext extends BaseContext
       $limit = 5.0;
 
       $download_time = $program_download_statistics->getDownloadedAt();
-      $current_time = new DateTime();
+      $current_time = TimeUtils::getDateTime();
 
       $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
 

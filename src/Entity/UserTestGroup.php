@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -80,7 +81,7 @@ class UserTestGroup
   {
     if (null === $this->getCreatedAt())
     {
-      $this->setCreatedAt(new \DateTime());
+      $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 

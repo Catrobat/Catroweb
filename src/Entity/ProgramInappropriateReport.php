@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -86,7 +87,7 @@ class ProgramInappropriateReport
   {
     if (null == $this->getTime())
     {
-      $this->setTime(new \DateTime());
+      $this->setTime(TimeUtils::getDateTime());
     }
   }
 

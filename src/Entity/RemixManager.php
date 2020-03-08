@@ -11,6 +11,7 @@ use App\Repository\ProgramRemixRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ScratchProgramRemixRepository;
 use App\Repository\ScratchProgramRepository;
+use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -170,7 +171,7 @@ class RemixManager
 
       $contains_only_catrobat_self_relation = (1 === count($catrobat_remix_relations));
       $program->setRemixRoot($contains_only_catrobat_self_relation);
-      $program->setRemixMigratedAt(new DateTime());
+      $program->setRemixMigratedAt(TimeUtils::getDateTime());
       $this->entity_manager->persist($program);
 
       foreach ($all_program_remix_relations as $uniqueKey => $program_remix_relation)
@@ -354,7 +355,7 @@ class RemixManager
   public function markAllUnseenRemixRelationsOfUserAsSeen(User $user)
   {
     $unseen_relations = $this->getUnseenRemixRelationsOfUser($user);
-    $now = new DateTime();
+    $now = TimeUtils::getDateTime();
     foreach ($unseen_relations as $relation)
     {
       $relation->setSeenAt($now);
@@ -376,7 +377,7 @@ class RemixManager
    */
   public function markRemixRelationAsSeen(ProgramCatrobatRemixRelationInterface $remix_relation)
   {
-    $now = new DateTime();
+    $now = TimeUtils::getDateTime();
     $remix_relation->setSeenAt($now);
     $this->entity_manager->persist($remix_relation);
     $this->entity_manager->flush();
@@ -678,7 +679,7 @@ class RemixManager
     $has_no_catrobat_forward_parents = (0 === count($new_parent_ancestor_relations));
 
     $program->setRemixRoot($has_no_catrobat_forward_parents);
-    $program->setRemixMigratedAt(new DateTime());
+    $program->setRemixMigratedAt(TimeUtils::getDateTime());
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
   }

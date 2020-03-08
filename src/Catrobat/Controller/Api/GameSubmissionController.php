@@ -9,6 +9,7 @@ use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\User;
 use App\Repository\GameJamRepository;
+use App\Utils\TimeUtils;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -145,7 +146,7 @@ class GameSubmissionController extends AbstractController
     }
 
     $program->setGamejam($gamejam);
-    $program->setGameJamSubmissionDate(new \DateTime());
+    $program->setGameJamSubmissionDate(TimeUtils::getDateTime());
 
     $gameJamTagListener->checkDescriptionTag($program);
 

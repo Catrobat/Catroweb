@@ -4,6 +4,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Symfony\Component\Finder\Finder;
 use PHPUnit\Framework\Assert;
+use App\Utils\TimeUtils;
 
 
 /**
@@ -379,7 +380,7 @@ class GamejamFeatureContext extends BaseContext
    */
   private function getDateFromNow($days)
   {
-    $date = new \DateTime();
+    $date = TimeUtils::getDateTime();
     if ($days < 0)
     {
       $days = abs($days);

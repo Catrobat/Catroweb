@@ -3,6 +3,7 @@
 namespace App\Catrobat\Controller\Admin;
 
 use App\Entity\Program;
+use App\Utils\TimeUtils;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -53,7 +54,7 @@ class ApkController extends CRUDController
     $dispatcher = $this->container->get('App\Catrobat\Services\Ci\JenkinsDispatcher');
     $dispatcher->sendBuildRequest($object->getId());
 
-    $object->setApkRequestTime(new \DateTime());
+    $object->setApkRequestTime(TimeUtils::getDateTime());
     $object->setApkStatus(Program::APK_PENDING);
 
     $this->admin->update($object);
@@ -110,7 +111,7 @@ class ApkController extends CRUDController
     foreach ($objects as $program)
     {
       $dispatcher->sendBuildRequest($program->getId());
-      $program->setApkRequestTime(new \DateTime());
+      $program->setApkRequestTime(TimeUtils::getDateTime());
       $program->setApkStatus(Program::APK_PENDING);
       $this->admin->update($program);
     }

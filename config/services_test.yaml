@@ -72,16 +72,6 @@ services:
     arguments:
       - "@statistics.inner"
 
-  # ======== Overwriting the time service
-
-  time.inner:
-    class: App\Catrobat\Services\Time
-
-  App\Catrobat\Services\Time:
-    arguments:
-      - '@time.inner'
-    class: App\Catrobat\Services\TestEnv\ProxyTime
-
   # ======== Overwriting the jenkins dispatcher
 
   App\Catrobat\Services\Ci\JenkinsDispatcher:
