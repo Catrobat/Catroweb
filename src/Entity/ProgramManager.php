@@ -131,6 +131,14 @@ class ProgramManager
   }
 
   /**
+   * @return FeaturedRepository
+   */
+  public function getFeaturedRepository()
+  {
+    return $this->featured_repository;
+  }
+
+  /**
    * Check visibility of the given project for the current user.
    *
    * @return bool
@@ -144,7 +152,7 @@ class ProgramManager
 
     if (!$project->isVisible())
     {
-      if (!$this->featured_repository->isFeatured($project))
+      if (!$this->featured_repository->isFeatured($project) || !$project->getApproved())
       {
         return false;
       }
