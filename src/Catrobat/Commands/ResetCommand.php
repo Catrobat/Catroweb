@@ -64,7 +64,7 @@ class ResetCommand extends Command
 
     CommandHelper::executeShellCommand('php bin/console catrobat:drop:migration', [],
       'Dropping the migration_versions table', $output);
-    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate', ['timeout' => 320],
+    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate --no-interaction', ['timeout' => 320],
       'Execute the migration to the latest version', $output);
     CommandHelper::executeShellCommand('php bin/console catrobat:create:tags', [],
       'Creating constant tags', $output);
@@ -91,7 +91,7 @@ class ResetCommand extends Command
     CommandHelper::executeShellCommand('php bin/console sonata:admin:generate-object-acl', [],
       'Generate Sonata object ACL', $output);
 
-    CommandHelper::executeShellCommand('php bin/console catrobat:test:generate --env=test', [],
+    CommandHelper::executeShellCommand('php bin/console catrobat:test:generate --env=test --no-interaction', [],
       'Generating test data', $output);
 
     CommandHelper::executeShellCommand('php bin/console cache:clear --no-warmup', [],
