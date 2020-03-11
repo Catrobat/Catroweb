@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "817f3f23b38fc83b74b86bc970b67346",
+    "content-hash": "94717a23dadfe656ee0642a25d02e2ee",
     "packages": [
         {
             "name": "catrobat/capi",
-            "version": "v1.0.23",
+            "version": "v1.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HCrane/CAPI.git",
-                "reference": "51b1857867ad5f716efb1186d1fded8de4745f37"
+                "reference": "194648929282025284d74a8469c29af1c279f033"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HCrane/CAPI/zipball/51b1857867ad5f716efb1186d1fded8de4745f37",
-                "reference": "51b1857867ad5f716efb1186d1fded8de4745f37",
+                "url": "https://api.github.com/repos/HCrane/CAPI/zipball/194648929282025284d74a8469c29af1c279f033",
+                "reference": "194648929282025284d74a8469c29af1c279f033",
                 "shasum": ""
             },
             "require": {
@@ -60,10 +60,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/HCrane/CAPI/tree/v1.0.23",
+                "source": "https://github.com/HCrane/CAPI/tree/v1.0.26",
                 "issues": "https://github.com/HCrane/CAPI/issues"
             },
-            "time": "2020-03-05T18:19:51+00:00"
+            "time": "2020-03-11T10:51:15+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -10719,18 +10719,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -11266,8 +11266,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -11308,8 +11308,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Simple template engine.",
@@ -12157,8 +12157,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
