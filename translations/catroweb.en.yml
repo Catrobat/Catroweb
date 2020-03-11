@@ -682,6 +682,20 @@ time:
 failure:
   upload: There was an error during the upload of your app.
 
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+
 
 #languages and countries
 language:

@@ -634,6 +634,22 @@ errors:
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
+
+api:
+  registerUser:
+    emailMissing: 'EMail fehlt'
+    notAValidEmail: 'Email ungültig'
+    emailAlreadyInUse: 'EMail wird bereits benützt'
+    usernameMissing: 'Benutzername fehlt'
+    usernameTooShort: 'Benutzername zu kurz'
+    usernameTooLong: 'Benutzername zu lang'
+    usernameAlreadyInUse: 'Benutzername wird bereits benützt'
+    passwordMissing: 'Passwort fehlt'
+    passwordTooShort: 'Passwort zu kurz'
+    passwordTooLong: 'Passwort zu lang'
+    passwordInvalidChars: 'Password enthält ungültige Zeichen'
+
+
 success:
   text: Abgeschlossen
   registration: Registrierung erfolgreich!

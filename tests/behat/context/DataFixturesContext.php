@@ -107,6 +107,24 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the user "([^"]*)" with email "([^"]*)" should exist and be enabled$/
+   *
+   * @param $arg1
+   * @param mixed $arg2
+   */
+  public function theUserWithUsernameAndEmailShouldExistAndBeEnabled($arg1, $arg2)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $user = $em->getRepository('App\Entity\User')->findOneBy([
+      'username' => $arg1,
+    ]);
+
+    Assert::assertInstanceOf('App\\Entity\\User', $user);
+    Assert::assertEquals($arg2, $user->getEmail());
+    Assert::isTrue($user->IsEnabled());
+  }
+
+  /**
    * @Given :number_of_users users follow:
    *
    * @param mixed $number_of_users

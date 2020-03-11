@@ -77,6 +77,14 @@ default:
                 - DataFixturesContext
                 - ApiContext
 
+        api-user:
+                    paths:    [ "tests/behat/features/api/user" ]
+                    contexts:
+                        - RefreshEnvironmentContext
+                        - DataFixturesContext
+                        - CatrowebBrowserContext
+                        - ApiContext
+
         api-projects:
             paths:    [ "tests/behat/features/api/projects" ]
             contexts:
