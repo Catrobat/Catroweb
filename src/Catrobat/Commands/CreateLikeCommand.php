@@ -4,6 +4,8 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\Commands\Helpers\ResetController;
+use App\Catrobat\Services\CatroNotificationService;
+use App\Entity\LikeNotification;
 use App\Entity\Program;
 use App\Entity\User;
 use App\Entity\UserManager;
@@ -30,16 +32,23 @@ class CreateLikeCommand extends Command
   private $reset_controller;
 
   /**
+   * @var CatroNotificationService
+   */
+  private $notification_service;
+
+  /**
    * CreateLikeCommand constructor.
    */
   public function __construct(UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager,
-                              ResetController $reset_controller)
+                              ResetController $reset_controller,
+                              CatroNotificationService $notification_service)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
     $this->remix_manipulation_program_manager = $program_manager;
     $this->reset_controller = $reset_controller;
+    $this->notification_service = $notification_service;
   }
 
   protected function configure()
@@ -72,10 +81,12 @@ class CreateLikeCommand extends Command
     {
       return;
     }
-
     try
     {
+      $notification = new LikeNotification($program->getUser(), $user, $program);
       $this->reset_controller->likeProgram($program, $user);
+      $notification->setSeen(random_int(0, 3));
+      $this->notification_service->addNotification($notification);
     }
     catch (\Exception $e)
     {
