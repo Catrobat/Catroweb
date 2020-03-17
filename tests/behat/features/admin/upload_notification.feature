@@ -4,9 +4,6 @@ Feature: Admin Upload Notification
   As a subscribed admin
   I want to get an email when a program is uploaded or reported
 
-  Background:
-    Given I am a valid user
-
   Scenario: Email only subscribed admins directly after upload
     Given there are users:
       | name     | email           | id |

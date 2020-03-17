@@ -140,8 +140,8 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     And there are "20" "comment" notifications for program "program 3" from "Chris"
     And there are "12" "remix" notifications for program "program 3" from "Chris"
     And there are "5"+ notifications for "Sue"
-    And "Catrobat" have just followed "Sue"
-    And "Drago" have just followed "Sue"
+    And there is a notification that "Catrobat" follows "Sue"
+    And there is a notification that "Drago" follows "Sue"
     And I log in as "Sue"
     And I am on "/app/notifications/likes"
     And I wait for the page to be loaded
@@ -165,29 +165,15 @@ Feature: User gets notifications for new followers, reactions, comments and othe
 
    Scenario: User should get new program notifications under follower category
      Given I log in as "Peter"
-     And I am on "/app/user/10"
+     And I am on "/app/followUser/10"
      And I wait for the page to be loaded
-     And I click "#follow-btn"
-     And I wait for the page to be loaded
-     And I am on "/app/user/11"
-     And I wait for the page to be loaded
-     And I click "#follow-btn"
+     And I am on "/app/followUser/11"
      And I wait for the page to be loaded
      Given I have a project with "url" set to "/app/project/99"
      And User "Karen" uploads the project
      And User "Brent" uploads the project
      And I am on "/app/notifications/followers"
+     And I wait for the page to be loaded
      Then I should see "You have 2 new Notifications"
      And I should see "User Karen created a new Project test"
      And I should see "User Brent created a new Project test"
-
-
-
-
-
-
-
-
-
-
-

@@ -210,6 +210,7 @@ class ProgramManager
       return null;
     }
 
+    /** @var Program $old_program */
     $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
     if (null !== $old_program)
     {
@@ -526,16 +527,18 @@ class ProgramManager
   }
 
   /**
-   * @param $array
-   *
-   * @return array|Program[]|StarterCategory[]
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @param null $limit
+   * @param null $offset
+   *
+   * @return array|Program[]|StarterCategory[]
+   * @return array
    */
-  public function findBy($array)
+  public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
   {
-    return $this->program_repository->findBy($array);
+    return $this->program_repository->findBy($criteria);
   }
 
   /**

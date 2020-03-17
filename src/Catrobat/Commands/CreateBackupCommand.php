@@ -61,7 +61,7 @@ class CreateBackupCommand extends Command
 
     $progress->setMessage('Using backup directory '.$backup_dir);
 
-    if ('pdo_mysql' != $this->parameter_bag->get('database_driver'))
+    if ('pdo_mysql' !== $_ENV['DATABASE_DRIVER'])
     {
       $progress->setMessage('Error: This script only supports mysql databases');
       $progress->finish();
@@ -82,13 +82,15 @@ class CreateBackupCommand extends Command
     $progress->setMessage('Database driver set, Outputpath specified as '.$zip_path);
 
     $sql_path = @tempnam($backup_dir, 'Sql');
-    $database_name = $this->parameter_bag->get('database_name');
-    $database_user = $this->parameter_bag->get('database_user');
-    $database_password = $this->parameter_bag->get('database_password');
+    $database_name = $_ENV['DATABASE_NAME'];
+    $database_user = $_ENV['DATABASE_USER'];
+    $database_password = $_ENV['DATABASE_PASSWORD'];
     $progress->setMessage('Saving SQL file');
 
-    CommandHelper::executeShellCommand("mysqldump -u {$database_user} -p{$database_password} {$database_name} > {$sql_path}",
-      ['timeout' => 14400]);
+    CommandHelper::executeShellCommand(
+      "mysqldump -u {$database_user} -p{$database_password} {$database_name} > {$sql_path}",
+      ['timeout' => 14400]
+    );
 
     $progress->advance();
     $progress->setMessage('Database dump completed.'.' Creating archive at '.$zip_path);

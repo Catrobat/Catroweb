@@ -11,7 +11,7 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
     Given there are LDAP-users:
       | name              | password | groups                            |
       | ldap-user         | 123456   | Webserver-Administrators          |
-      | ldap-mediapackage | 654321   | Webserver-MediaPackageMaintainers |
+      | ldap-media-package | 654321   | Webserver-MediaPackageMaintainers |
     When I POST login with user "ldap-user" and password "123456"
     Then the client response should contain "Featured"
 
@@ -41,12 +41,12 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
     Then the client response should contain "Admin Panel"
 
 
-  Scenario: login as Mediapackage-User should give access only to mediapackage in admin-area
+  Scenario: login as Mediapackage-User should give access only to media package in admin-area
     Given there are LDAP-users:
       | name              | password | groups                            |
       | ldap-user         | 123456   | Webserver-Administrators          |
-      | ldap-mediapackage | 654321   | Webserver-MediaPackageMaintainers |
-    When I POST login with user "ldap-mediapackage" and password "654321"
+      | ldap-media-package | 654321   | Webserver-MediaPackageMaintainers |
+    When I POST login with user "ldap-media-package" and password "654321"
     And I GET "/admin/media_package/list"
     Then the client response should contain "Media Package List"
     When I GET "/admin/upload_notification/list"

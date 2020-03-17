@@ -17,6 +17,7 @@ use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Repository\GameJamRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -72,12 +73,17 @@ class UploadController
   private $logger;
 
   /**
+   * @var EntityManagerInterface
+   */
+  private $em;
+
+  /**
    * UploadController constructor.
    */
   public function __construct(UserManager $usermanager, TokenStorageInterface $tokenstorage, ProgramManager $programmanager,
                               GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator,
                               TranslatorInterface $translator, LoggerInterface $logger,
-                              CatroNotificationService $catroNotificationService)
+                              CatroNotificationService $catroNotificationService, EntityManagerInterface $em)
   {
     $this->usermanager = $usermanager;
     $this->tokenstorage = $tokenstorage;
@@ -87,6 +93,7 @@ class UploadController
     $this->translator = $translator;
     $this->logger = $logger;
     $this->catroNotificationService = $catroNotificationService;
+    $this->em = $em;
   }
 
   /**
@@ -132,10 +139,8 @@ class UploadController
    */
   private function processUpload(Request $request, $gamejam = null)
   {
-    /*
-     * @var $file File
-     * @var $user User
-     */
+    /* @var $file File */
+    /* @var $user User */
 
     if (1 !== $request->files->count())
     {
@@ -158,9 +163,13 @@ class UploadController
       throw new InvalidChecksumException();
     }
 
+    $flavor = 'pocketcode';
+
     $user = $this->tokenstorage->getToken()->getUser();
 
-    $flavor = 'pocketcode';
+    // Needed (for tests) to make sure everything is up to date (followers, ..)
+    $this->em->refresh($user);
+    // ---
 
     if ($request->request->has('flavor'))
     {

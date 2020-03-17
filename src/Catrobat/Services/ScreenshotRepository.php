@@ -3,6 +3,8 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use Imagick;
+use ImagickException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
@@ -89,7 +91,7 @@ class ScreenshotRepository
    * @param $screenshot_filepath
    * @param $id
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
   public function saveProgramAssets($screenshot_filepath, $id)
   {
@@ -116,7 +118,7 @@ class ScreenshotRepository
    * @param $image
    * @param $id
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
   public function updateProgramAssets($image, $id)
   {
@@ -130,14 +132,20 @@ class ScreenshotRepository
    * @param $filepath
    * @param $id
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
   public function saveScreenshot($filepath, $id)
   {
     $screen = $this->getImagick();
     $screen->readImage($filepath);
     $screen->cropThumbnailImage(480, 480);
-    $screen->writeImage($this->screenshot_dir.$this->generateFileNameFromId($id));
+    $filename = $this->screenshot_dir.$this->generateFileNameFromId($id);
+    if (file_exists($filename))
+    {
+      unlink($filename);
+    }
+    $screen->writeImage($filename);
+    chmod($filename, 0777);
     $screen->destroy();
   }
 
@@ -184,15 +192,15 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws \ImagickException
+   * @throws ImagickException
    *
-   * @return \Imagick
+   * @return Imagick
    */
   public function getImagick()
   {
     if (null == $this->imagick)
     {
-      $this->imagick = new \Imagick();
+      $this->imagick = new Imagick();
     }
 
     return $this->imagick;
@@ -218,7 +226,7 @@ class ScreenshotRepository
    * @param $screenshot_filepath
    * @param $id
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
   public function saveProgramAssetsTemp($screenshot_filepath, $id)
   {
@@ -259,14 +267,20 @@ class ScreenshotRepository
    * @param $filepath
    * @param $id
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
   public function saveScreenshotTemp($filepath, $id)
   {
     $screen = $this->getImagick();
     $screen->readImage($filepath);
     $screen->cropThumbnailImage(480, 480);
-    $screen->writeImage($this->tmp_dir.$this->generateFileNameFromId($id));
+    $filename = $this->tmp_dir.$this->generateFileNameFromId($id);
+    if (file_exists($filename))
+    {
+      unlink($filename);
+    }
+    $screen->writeImage($filename);
+    chmod($filename, 0777);
     $screen->destroy();
   }
 
@@ -311,14 +325,20 @@ class ScreenshotRepository
    * @param $filepath
    * @param $id
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
   private function saveThumbnail($filepath, $id)
   {
     $thumb = $this->getImagick();
     $thumb->readImage($filepath);
     $thumb->cropThumbnailImage(80, 80);
-    $thumb->writeImage($this->thumbnail_dir.$this->generateFileNameFromId($id));
+    $filename = $this->thumbnail_dir.$this->generateFileNameFromId($id);
+    if (file_exists($filename))
+    {
+      unlink($filename);
+    }
+    $thumb->writeImage($filename);
+    chmod($filename, 0777);
     $thumb->destroy();
   }
 
@@ -352,14 +372,20 @@ class ScreenshotRepository
    * @param $filepath
    * @param $id
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
   private function saveThumbnailTemp($filepath, $id)
   {
     $thumb = $this->getImagick();
     $thumb->readImage($filepath);
     $thumb->cropThumbnailImage(80, 80);
-    $thumb->writeImage($this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id));
+    $filename = $this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id);
+    if (file_exists($filename))
+    {
+      unlink($filename);
+    }
+    $thumb->writeImage($filename);
+    chmod($filename, 0777);
     $thumb->destroy();
   }
 

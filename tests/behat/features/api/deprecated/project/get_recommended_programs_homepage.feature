@@ -27,7 +27,7 @@ Feature: Get recommended programs on homepage
   Scenario Outline: Test if recommendation fallback is active when similar users only like same programs
   (i.e. they don't like any differing programs). Using debug and release app.
 
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.3        |
@@ -51,7 +51,7 @@ Feature: Get recommended programs on homepage
       | release    | 1     | Game         |
 
   Scenario Outline: No recommendations because there are no liked programs
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I have a parameter "test_user_id_for_like_recommendation" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
@@ -65,7 +65,7 @@ Feature: Get recommended programs on homepage
 
   Scenario: Recommend all other unliked programs, liked by similar user (debug app)
   (example: #1, "Only one similar user, recommend me programs I've not liked so far and only those that are not mine")
-    Given I use a debug build of the Catroid app
+    Given I request from a debug build of the Catroid app
     And there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.3        |
@@ -82,12 +82,12 @@ Feature: Get recommended programs on homepage
     Then I should get user-specific recommended projects
     Then I should get a total of 1 projects
     Then I should get following programs:
-      | Name   |
+      | name   |
       | Galaxy |
 
   Scenario: Recommend all other unliked programs, liked by similar user (release app)
   (example: #1, "Only one similar user, recommend me programs I've not liked so far and only those that are not mine")
-    Given I use a release build of the Catroid app
+    Given I request from a release build of the Catroid app
     And there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.3        |
@@ -103,12 +103,12 @@ Feature: Get recommended programs on homepage
     When I GET "/app/api/projects/recsys_general_projects.json" with these parameters
     Then I should get a total of 1 projects
     Then I should get following programs:
-      | Name   |
+      | name   |
       | Game |
 
   Scenario Outline: Recommend all other unliked programs, liked by similar user
   (example: #2 "Three similar users with different similarity values")
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.1        |
@@ -136,7 +136,7 @@ Feature: Get recommended programs on homepage
 
   Scenario Outline: Recommend all other unliked programs, liked by similar user
   (example: #3, "Four similar users with different similarity values")
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.1        |

@@ -21,7 +21,6 @@ RUN apt-get update && \
     php7.3-ldap \
     php7.3-cli \
     php7.3-curl \
-    php7.3-sqlite3 \
     php7.3-intl \
     php7.3-gd \
     php7.3-zip \
@@ -68,12 +67,11 @@ ADD / ./
 ARG APP_ENVIRONMENT
 RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb.$APP_ENVIRONMENT/index_test.php/|g" behat.yml.dist && \
     sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb.$APP_ENVIRONMENT:9222|g" behat.yml.dist && \
-    sed -i -r "s|(database_password:)(\s+.+)|database_password: root|g" config/packages/parameters.yml.dist && \
-    sed -i -r "s|(database_host:)(\s+.+)|database_host: db.catroweb.$APP_ENVIRONMENT|g" config/packages/parameters.yml.dist && \
-    sed -i -r "s|(database_port:)(\s+.+)|database_port: 3306|g" config/packages/parameters.yml.dist && \
     cp config/packages/parameters.yml.dist config/packages/parameters.yml && \
-    echo "SECURE_SCHEME=http" | tee -a .env.local .env.test.local .env.dev.local && \
-    echo "APP_ENV=$APP_ENVIRONMENT" > .env.local
+    echo "\n" >> .env.local && \
+    echo APP_ENV=$APP_ENVIRONMENT >> .env.local && \
+    echo "\n" >> .env.$APP_ENVIRONMENT.local && \
+    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.$APP_ENVIRONMENT:3306/catroweb_$APP_ENVIRONMENT >> .env.$APP_ENVIRONMENT.local
 
 # PERMISSIONS
 RUN sh docker/app/prepare-test-env.sh

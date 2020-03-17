@@ -24,7 +24,7 @@ Feature: Open Authentication
     When I log in to Google with valid credentials
     And I choose the username 'PocketGoogler'
     Then I should be logged in
-    And there is a user in the database:
+    And the following users exist in the database:
       | name          | email                      | google_uid            | google_name | country |
       | PocketGoogler | pocketcodetester@gmail.com | 105155320106786463089 |             | de      |
     And I am on "/app/emailEdit"

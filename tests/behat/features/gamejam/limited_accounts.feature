@@ -7,17 +7,18 @@ Feature: Limited Accounts
   I need the possibility to prevent program deletions and password changes
 
 
-  @web
+  @web @disabled
   Scenario: My Profile of a limited account does not show edit fields
 
     Given I am logged in
     And I have a limited account
     When I visit my profile
+    And I wait for the page to be loaded
+    Then I should be on "/app/user"
     Then I do not see a form to edit my profile
     And I do not see a button to change the profile picture
 
-
-  @javascript
+  @javascript @disabled
   Scenario: My Profile of a limited account does not allow deletion of programs
 
     Given I am logged in

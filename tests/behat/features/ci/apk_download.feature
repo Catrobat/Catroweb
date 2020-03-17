@@ -2,7 +2,7 @@ Feature:
 
   Background:
     Given there are programs:
-      | name              | apk status | visible | id |
+      | name              | apk_status | visible | id |
       | Galaxy War        | none       | true    | 1  |
       | My little program | pending    | true    | 2  |
       | Bunny             | ready      | true    | 3  |

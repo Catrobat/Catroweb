@@ -29,7 +29,7 @@ Feature: Search extensions programs
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search/extensionProjects.json" with these parameters
     Then I should get following programs:
-      | Name    |
+      | name    |
       | Minions |
 
 
@@ -39,6 +39,6 @@ Feature: Search extensions programs
     And I use the offset "0"
     When I search for "Lego"
     Then I should get following programs:
-      | Name    |
+      | name    |
       | Galaxy  |
       | Minions |

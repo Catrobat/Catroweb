@@ -13,9 +13,19 @@ services:
     image: app.catroweb.test
     command: ["sh", "/var/www/catroweb/docker/app/startup-test.sh"]
     depends_on:
+      - db.catroweb.test
       - chrome.catroweb.test
     ports:
       - 8080:80
+
+  # DATABASE
+  db.catroweb.test:
+    image: mariadb:10.3.11
+    container_name: db.catroweb.test
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=catroweb_test
 
   chrome.catroweb.test:
     image: zenika/alpine-chrome

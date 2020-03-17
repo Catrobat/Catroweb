@@ -19,7 +19,8 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * @ORM\Id
    * @ORM\Column(name="id", type="guid")
-   * @ORM\GeneratedValue(strategy="UUID")
+   * @ORM\GeneratedValue(strategy="CUSTOM")
+   * @ORM\CustomIdGenerator(class="App\Utils\MyUuidGenerator")
    */
   protected $id;
 

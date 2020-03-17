@@ -1,11 +1,9 @@
 ### Catroweb ###
 .idea/
 composer.phar
-behat.yml
 phpspec.yml
 phpunit.xml
 *.local
-.phpunit.result.cache
 
 ### backups ###
 backups/**
@@ -32,7 +30,6 @@ public/**
 !public/robots.txt
 
 ### tests ###
-tests/behat/sqlite/**
 tests/style-report/**
 !tests/style-report/catroweb.xml
 tests/testreports/behat/**

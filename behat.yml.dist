@@ -1,10 +1,10 @@
 default:
 
 # --------------------------------------------------------------------------------------------------
-# Telling Behat where to find the FeatureContext files
+# Telling Behat where to find the Context files
 #
     autoload:
-        - "tests/behat/features/bootstrap/"
+        - "tests/behat/context/"
 
 
 # --------------------------------------------------------------------------------------------------
@@ -50,103 +50,112 @@ default:
 # --------------------------------------------------------------------------------------------------
 # Register test suites here:
 #
+# Note: Also define them in the github action work flows. Else they will not be checked automatically.
+#
+#
     suites:
 
         admin:
             paths:    [ "tests/behat/features/admin" ]
             contexts:
-                - AdminFeatureContext:
-                    - "tests/testreports/screens/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
         api-authentication:
             paths:    [ "tests/behat/features/api/authentication" ]
             contexts:
+                - RefreshEnvironmentContext
                 - DataFixturesContext
-                - RequestResponseContext
+                - ApiContext
 
-        api-mediapackage:
-                    paths:    [ "tests/behat/features/api/mediapackage" ]
-                    contexts:
-                        - MediaPackageContext
-                        - RequestResponseContext
+        api-media-package:
+            paths:    [ "tests/behat/features/api/mediapackage" ]
+            contexts:
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - ApiContext
 
-        deprecated_api_general:
+        deprecated-api-general:
             paths:    [ "tests/behat/features/api/deprecated/general" ]
             contexts:
-                - ApiFeatureContext:
-                    - "tests/testreports/behat/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
-        deprecated_api_profile:
+        deprecated-api-profile:
             paths:    [ "tests/behat/features/api/deprecated/profile" ]
             contexts:
-                - ApiFeatureContext:
-                    - "tests/testreports/behat/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
-        deprecated_api_project:
+        deprecated-api-project:
             paths:    [ "tests/behat/features/api/deprecated/project" ]
             contexts:
-                - ApiFeatureContext:
-                    - "tests/testreports/behat/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
-        deprecated_api_upload:
+        deprecated-api-upload:
             paths:    [ "tests/behat/features/api/deprecated/upload" ]
             contexts:
-                - ApiFeatureContext:
-                    - "tests/testreports/behat/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
         ci:
             paths:    [ "tests/behat/features/ci" ]
             contexts:
-                - CiFeatureContext:
-                    - "tests/testreports/behat/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
         flavor:
             paths:    [ "tests/behat/features/flavor" ]
             contexts:
-                - FlavorFeatureContext:
-                    - "tests/testreports/behat/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
-        web_general:
+        web-general:
             paths:    [ "tests/behat/features/web/general" ]
             contexts:
-                - WebFeatureContext:
-                    - "tests/testreports/screens/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
-        web_profile:
+        web-profile:
             paths:    [ "tests/behat/features/web/profile" ]
             contexts:
-                - WebFeatureContext:
-                    - "tests/testreports/screens/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
-        web_project:
+        web-project:
             paths:    [ "tests/behat/features/web/project" ]
             contexts:
-                - WebFeatureContext:
-                    - "tests/testreports/screens/"
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
         gamejam:
-            filters:
-                tags: "~@web&&~@javascript"
             paths:    [ "tests/behat/features/gamejam" ]
             contexts:
-                - GamejamFeatureContext:
-                    - "tests/testreports/behat/"
-
-        gamejam_web:
-            filters:
-                tags: "@web~"
-            paths:    [ "tests/behat/features/gamejam" ]
-            contexts:
-                - GamejamWebContext:
-                    - "tests/testreports/behat/"
-
-        gamejam_javascript:
-            filters:
-                tags: "@javascript"
-            paths:    [ "tests/behat/features/gamejam" ]
-            contexts:
-                - GamejamJavascriptContext
-
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - CatrowebBrowserContext
+                - ApiContext
 
 # --------------------------------------------------------------------------------------------------
 # Exclude specific tests based on their tags here:

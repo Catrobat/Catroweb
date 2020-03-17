@@ -11,9 +11,9 @@ Feature:
       | 2  | User1    |
     And there are projects:
       | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | language version | private |
-      | 1  | project 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | 0       |
-      | 2  | project 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | 999              | 1       |
-      | 3  | project 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | 0       |
+      | 1  | project 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | false   |
+      | 2  | project 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | 999              | true    |
+      | 3  | project 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | false   |
 
     And I log in as "Catrobat"
     And I am on "/app/user"

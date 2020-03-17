@@ -26,7 +26,7 @@ Feature: Search programs
   Scenario: Search for a program
 
     Given the HTTP Request:
-      | Method | GET                                  |
+      | Method | GET                           |
       | Url    | /app/api/projects/search.json |
     And the GET parameters:
       | Name   | Value  |

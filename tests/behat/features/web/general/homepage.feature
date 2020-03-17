@@ -22,12 +22,12 @@ Feature: Pocketcode homepage
       | 7  | project 7 | Catrobat2|
 
     And following projects are featured:
-      | id | project   | url                   | active | priority |
-      | 1  | project 1 |                       | no     | 1        |
-      | 2  | project 2 |                       | yes    | 3        |
-      | 3  | project 3 |                       | yes    | 2        |
-      | 4  |           | http://www.google.at/ | yes    | 5        |
-      | 5  |           | http://www.orf.at/    | no     | 4        |
+      | name      | url                   | active | priority |
+      | project 1 |                       | 0      | 1        |
+      | project 2 |                       | 1      | 3        |
+      | project 3 |                       | 1      | 2        |
+      |           | http://www.google.at/ | 1      | 5        |
+      |           | http://www.orf.at/    | 0      | 4        |
 
     Given there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |

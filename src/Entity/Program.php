@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use App\Utils\TimeUtils;
+use DateTime;
 use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity
@@ -28,7 +30,8 @@ class Program
   /**
    * @ORM\Id
    * @ORM\Column(name="id", type="guid")
-   * @ORM\GeneratedValue(strategy="UUID")
+   * @ORM\GeneratedValue(strategy="CUSTOM")
+   * @ORM\CustomIdGenerator(class="App\Utils\MyUuidGenerator")
    */
   protected $id;
 
@@ -330,7 +333,7 @@ class Program
   protected $approved_by_user;
 
   /**
-   * @ORM\ManyToOne(targetEntity="StarterCategory", inversedBy="programs")
+   * @ORM\ManyToOne(targetEntity="StarterCategory", inversedBy="programs", cascade={"persist"})
    * @ORM\JoinColumn(nullable=true)
    */
   protected $category;
@@ -423,7 +426,7 @@ class Program
   /**
    * @ORM\PreUpdate
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function updateLastModifiedTimestamp()
   {
@@ -433,14 +436,14 @@ class Program
   /**
    * @ORM\PrePersist
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function updateTimestamps()
   {
     $this->updateLastModifiedTimestamp();
     if (null == $this->getUploadedAt())
     {
-      $this->setUploadedAt(new \DateTime('now', new DateTimeZone('UTC')));
+      $this->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
     }
   }
 
@@ -629,7 +632,7 @@ class Program
   /**
    * Set uploaded_at.
    *
-   * @param \DateTime $uploadedAt
+   * @param DateTime $uploadedAt
    *
    * @return Program
    */
@@ -643,7 +646,7 @@ class Program
   /**
    * Get uploaded_at.
    *
-   * @return \DateTime
+   * @return DateTime
    */
   public function getUploadedAt()
   {
@@ -653,7 +656,7 @@ class Program
   /**
    * Set last_modified_at.
    *
-   * @param \DateTime $lastModifiedAt
+   * @param DateTime $lastModifiedAt
    *
    * @return Program
    */
@@ -667,7 +670,7 @@ class Program
   /**
    * Get last_modified_at.
    *
-   * @return \DateTime
+   * @return DateTime
    */
   public function getLastModifiedAt()
   {
@@ -675,7 +678,7 @@ class Program
   }
 
   /**
-   * @param \DateTime $remix_migrated_at
+   * @param DateTime $remix_migrated_at
    *
    * @return Program
    */
@@ -687,7 +690,7 @@ class Program
   }
 
   /**
-   * @return \DateTime
+   * @return DateTime
    */
   public function getRemixMigratedAt()
   {
@@ -711,7 +714,7 @@ class Program
   /**
    * Returns the user owning this Program.
    *
-   * @return User the user owning this Program
+   * @return User
    */
   public function getUser()
   {
@@ -927,11 +930,7 @@ class Program
   }
 
   /**
-   * Set if program is approved.
-   *
-   * @param
-   *            boolean
-   * @param mixed $approved
+   * @param $approved
    */
   public function setApproved($approved)
   {
@@ -1059,7 +1058,7 @@ class Program
   /**
    * Set apk_request_time.
    *
-   * @param \DateTime $apkRequestTime
+   * @param DateTime $apkRequestTime
    *
    * @return Program
    */
@@ -1073,7 +1072,7 @@ class Program
   /**
    * Get apk_request_time.
    *
-   * @return \DateTime
+   * @return DateTime
    */
   public function getApkRequestTime()
   {
