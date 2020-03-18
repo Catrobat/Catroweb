@@ -62,9 +62,7 @@ class CreateDownloadsCommand extends Command
 
     $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
 
-    /**
-     * @var User
-     */
+    /** @var User */
     $user = $this->user_manager->findUserByUsername($user_name);
 
     if (null == $program || null == $user || null == $this->reset_controller)
@@ -74,6 +72,7 @@ class CreateDownloadsCommand extends Command
 
     try
     {
+      /* @var User $user */
       $this->reset_controller->downloadProgram($program, $user);
     }
     catch (\Exception $e)

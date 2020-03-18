@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Commands\Helpers;
 
+use App\Entity\CommentNotification;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
@@ -47,7 +48,7 @@ class ResetController extends AbstractController
     $entity_manager->flush();
   }
 
-  public function postComment(User $user, Program $program, string $message, bool $reported)
+  public function postComment(User $user, Program $program, string $message, bool $reported, CommentNotification $notification)
   {
     $temp_comment = new UserComment();
     $temp_comment->setUsername($user->getUsername());
@@ -56,9 +57,20 @@ class ResetController extends AbstractController
     $temp_comment->setProgram($program);
     $temp_comment->setUploadDate(date_create());
     $temp_comment->setIsReported($reported);
+    $notification->setComment($temp_comment);
+    $temp_comment->setNotification($notification);
 
     $em = $this->getDoctrine()->getManager();
     $em->persist($temp_comment);
+    try
+    {
+      $notification->setSeen(random_int(0, 2));
+    }
+    catch (\Exception $e)
+    {
+      $notification->setSeen(0);
+    }
+    $em->persist($notification);
     $em->flush();
     $em->refresh($temp_comment);
   }
@@ -72,7 +84,6 @@ class ResetController extends AbstractController
     $report->setCategory('Inappropriate');
     $report->setNote($note);
     $report->setProgram($program);
-
     $entity_manager->persist($report);
     $entity_manager->flush();
   }

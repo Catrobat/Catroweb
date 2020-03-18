@@ -18,6 +18,11 @@ class ResetCommand extends Command
   const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 20;
 
   /**
+   * @var array
+   */
+  private $reported = [];
+
+  /**
    * @var ParameterBagInterface
    */
   private $parameter_bag;
@@ -139,11 +144,12 @@ class ResetCommand extends Command
       ], $output);
 
       $filesystem->remove($temp_dir_user);
-      $output->write("Removing directory {$temp_dir_user}");
+      $output->writeln("Removing directory {$temp_dir_user}");
     }
 
-    $this->commentOnProjects($program_names, $user_array, $output);
     $this->reportProjects($program_names, $user_array, $output);
+    $this->remixGen($program_names, $output);
+    $this->commentOnProjects($program_names, $user_array, $output);
     $this->likeProjects($program_names, $user_array, $output);
     $this->featureProjects($program_names, $output);
     $this->followUsers($user_array, $output);
@@ -160,6 +166,11 @@ class ResetCommand extends Command
 
     CommandHelper::executeShellCommand('chmod o+w+x tests/behat/sqlite/ -R', [],
       'Setting permissions for behat sqlite test database', $output);
+
+    CommandHelper::executeShellCommand('sh docker/app/set-test-permissions.sh', [],
+        'Executing set_test_permissions.sh', $output);
+
+    //https://share.catrob.at/app/project/remixgraph/{idofproject} to get remixes
   }
 
   /**
@@ -228,9 +239,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names
-   * @param $user_array
-   * @param $output
+   * @param $program_names array
+   * @param $user_array array
+   * @param $output OutputInterface
    *
    * @throws \Exception
    */
@@ -259,18 +270,22 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names
-   * @param $user_array
-   * @param $output
+   * @param $program_names array
+   * @param $user_array array
+   * @param $output OutputInterface
    *
    * @throws \Exception
    */
   private function reportProjects($program_names, $user_array, $output)
   {
-    for ($i = 0; $i < sizeof($program_names); $i += 10)
+    $rand_start = random_int(0, 2);
+    $rand_intervall = random_int(4, 6);
+
+    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_intervall)
     {
+      $this->reported[sizeof($this->reported)] = $i;
       CommandHelper::executeSymfonyCommand('catrobat:report', $this->getApplication(), [
-        'user' => $user_array[$i],
+        'user' => $user_array[array_rand($user_array)],
         'program_name' => $program_names[$i],
         'note' => 'bad',
       ], $output);
@@ -278,9 +293,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names
-   * @param $user_array
-   * @param $output
+   * @param $program_names array
+   * @param $user_array array
+   * @param $output OutputInterface
    *
    * @throws \Exception
    */
@@ -300,9 +315,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names
-   * @param $user_array
-   * @param $output
+   * @param $program_names array
+   * @param $user_array array
+   * @param $output OutputInterface
    *
    * @throws \Exception
    */
@@ -322,14 +337,17 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names
-   * @param $output
+   * @param $program_names array
+   * @param $output OutputInterface
    *
    * @throws \Exception
    */
   private function featureProjects($program_names, $output)
   {
-    for ($i = 0; $i < sizeof($program_names); $i += 5)
+    $rand_start = random_int(1, 2);
+    $rand_intervall = random_int(4, 6);
+
+    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_intervall)
     {
       CommandHelper::executeSymfonyCommand('catrobat:feature', $this->getApplication(), [
         'program_name' => $program_names[$i % sizeof($program_names)],
@@ -347,6 +365,29 @@ class ResetCommand extends Command
       CommandHelper::executeSymfonyCommand('catrobat:follow', $this->getApplication(), [
         'user_name' => $user_array[$i],
         'follower' => $user_array[($i + random_int(1, sizeof($user_array))) % sizeof($user_array)],
+      ], $output);
+    }
+  }
+
+  /**
+   * @throws \Exception
+   */
+  private function remixGen(array $program_array, OutputInterface $output)
+  {
+    $rand_start = random_int(2, 3);
+    $rand_intervall = random_int(3, 6);
+
+    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_intervall)
+    {
+      $report_index = ($i + random_int(1, sizeof($program_array))) % sizeof($program_array);
+      if (in_array($i, $this->reported, true) || in_array($report_index, $this->reported, true))
+      {
+        $i = $i - $rand_intervall + 1;
+        continue;
+      }
+      CommandHelper::executeSymfonyCommand('catrobat:remix', $this->getApplication(), [
+        'program_original' => $program_array[$i],
+        'program_remix' => $program_array[$report_index],
       ], $output);
     }
   }

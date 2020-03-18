@@ -4,6 +4,8 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
 use App\Catrobat\Commands\Helpers\ResetController;
+use App\Catrobat\Services\CatroNotificationService;
+use App\Entity\CommentNotification;
 use App\Entity\Program;
 use App\Entity\User;
 use App\Entity\UserManager;
@@ -33,16 +35,23 @@ class CreateCommentCommand extends Command
   private $reset_controller;
 
   /**
+   * @var CatroNotificationService
+   */
+  private $notification_service;
+
+  /**
    * ProgramImportCommand constructor.
    */
   public function __construct(UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager,
-                              ResetController $reset_controller)
+                              ResetController $reset_controller,
+                              CatroNotificationService $notification_service)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
     $this->remix_manipulation_program_manager = $program_manager;
     $this->reset_controller = $reset_controller;
+    $this->notification_service = $notification_service;
   }
 
   protected function configure()
@@ -82,7 +91,10 @@ class CreateCommentCommand extends Command
 
     try
     {
-      $this->reset_controller->postComment($user, $program, $message, $reported);
+      /** @var User $user */
+      $notification = new CommentNotification($user, null);
+      $this->reset_controller->postComment($user, $program, $message, $reported, $notification);
+      $this->notification_service->addNotification($notification);
     }
     catch (\Exception $e)
     {
