@@ -1,14 +1,4 @@
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
-    database_server_v: mariadb-10.3.11
-
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
     security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
     proxies: []
     jenkins:

@@ -30,7 +30,7 @@ Feature: Follow feature on profiles
     And I wait for the page to be loaded
     And the element "#follow-btn" should be visible
     And I should see text matching "Follower: 1"
-    And Element "#follow-btn" should have attribute "title" with value "Unfollow this user!"
+    And the element "#follow-btn" should have attribute "title" with value "Unfollow this user!"
 
   Scenario: Unfollow user should unfollow and decrease counter
     Given I log in as "Catrobat2"
@@ -46,7 +46,7 @@ Feature: Follow feature on profiles
     And I wait for the page to be loaded
     And the element "#follow-btn" should be visible
     And I should see text matching "Follower: 0"
-    And Element "#follow-btn" should have attribute "title" with value "Follow this user!"
+    And the element "#follow-btn" should have attribute "title" with value "Follow this user!"
 
   Scenario: Follower and Following should show on my profile:
     Given I log in as "Catrobat2"

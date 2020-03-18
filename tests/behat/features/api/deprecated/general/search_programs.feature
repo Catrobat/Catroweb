@@ -12,15 +12,15 @@ Feature: Search programs
     And there are programs:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | Minions         |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
-      | 3  | Fisch           |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 4  | Ponny           | p2          | User1    | 245       | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 5  | MarkoTheBest    |             | NewUser  | 335       | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 6  | Whack the Marko | Universe    | Catrobat | 2         | 33    | 01.02.2012 13:00 | 0.8.5   |
-      | 7  | Superponny      | p1 p2 p3    | User1    | 4         | 33    | 01.01.2012 12:00 | 0.8.5   |
-      | 8  | Universe        |             | User1    | 23        | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 9  | Webteam         |             | User1    | 100       | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 10 | Fritz the Cat   |             | User1    | 112       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 2  | Minions         |             | Catrobat | 33        | 9     | 02.02.2013 13:00 | 0.8.5   |
+      | 3  | Fisch           |             | User1    | 133       | 33    | 10.01.2012 13:00 | 0.8.5   |
+      | 4  | Ponny           | p2          | User1    | 245       | 33    | 09.01.2012 13:00 | 0.8.5   |
+      | 5  | MarkoTheBest    |             | NewUser  | 335       | 33    | 08.01.2012 13:00 | 0.8.5   |
+      | 6  | Whack the Marko | Universe    | Catrobat | 2         | 33    | 07.02.2012 13:00 | 0.8.5   |
+      | 7  | Superponny      | p1 p2 p3    | User1    | 4         | 33    | 06.01.2012 12:00 | 0.8.5   |
+      | 8  | Universe        |             | User1    | 23        | 33    | 05.01.2012 13:00 | 0.8.5   |
+      | 9  | Webteam         |             | User1    | 100       | 33    | 04.01.2012 13:00 | 0.8.5   |
+      | 10 | Fritz the Cat   |             | User1    | 112       | 33    | 03.01.2012 13:00 | 0.8.5   |
     And the current time is "01.08.2014 13:00"
 
 
@@ -31,7 +31,7 @@ Feature: Search programs
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search.json" with these parameters
     Then I should get following programs:
-      | Name       |
+      | name       |
       | Galaxy War |
 
 
@@ -74,7 +74,7 @@ Feature: Search programs
 
     When I search for "Minions"
     Then I should get following programs:
-      | Name    |
+      | name    |
       | Minions |
 
 
@@ -84,7 +84,7 @@ Feature: Search programs
     And I have a parameter "offset" with value "0"
     When I search for "marko"
     Then I should get following programs:
-      | Name            |
+      | name            |
       | Whack the Marko |
       | MarkoTheBest    |
 
@@ -93,7 +93,7 @@ Feature: Search programs
 
     When I search for "NewUser"
     Then I should get following programs:
-      | Name         |
+      | name         |
       | MarkoTheBest |
 
 
@@ -120,7 +120,7 @@ Feature: Search programs
     Given I use the limit "10"
     When I search for "p1"
     Then I should get following programs:
-      | Name       |
+      | name       |
       | Galaxy War |
       | Superponny |
 
@@ -130,7 +130,7 @@ Feature: Search programs
     Given I use the limit "10"
     When I search for "p2"
     Then I should get following programs:
-      | Name       |
+      | name       |
       | Ponny      |
       | Superponny |
 
@@ -140,7 +140,7 @@ Feature: Search programs
     Given I use the limit "10"
     When I search for "Universe"
     Then I should get following programs:
-      | Name            |
+      | name            |
       | Universe        |
       | Whack the Marko |
 
@@ -165,7 +165,7 @@ Feature: Search programs
     And I use the offset "0"
     When I search for "User1"
     Then I should get following programs:
-      | Name       |
+      | name       |
       | Galaxy War |
       | Fisch      |
 
@@ -175,7 +175,7 @@ Feature: Search programs
     And I use the offset "0"
     When I search for "User1"
     Then I should get following programs:
-      | Name       |
+      | name       |
       | Galaxy War |
 
   Scenario: to browse programs in smaller chunks you can request a subset of found projects
@@ -184,7 +184,7 @@ Feature: Search programs
     And I use the offset "1"
     When I search for "User1"
     Then I should get following programs:
-      | Name  |
+      | name  |
       | Fisch |
 
   Scenario: find a program with its id
@@ -193,7 +193,7 @@ Feature: Search programs
     And I use the offset "0"
     When I search for "8"
     Then I should get following programs:
-      | Name     |
+      | name     |
       | Universe |
 
   Scenario: find a program with its id
@@ -202,7 +202,7 @@ Feature: Search programs
     And I use the offset "0"
     When I search for "2"
     Then I should get following programs:
-      | Name       |
+      | name       |
       | Minions    |
       | Ponny      |
       | Superponny |
@@ -213,5 +213,5 @@ Feature: Search programs
     And I use the limit "10"
     When I search for "p2"
     Then I should get following programs:
-      | Name       |
+      | name       |
       | Superponny |

@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -69,7 +68,6 @@ class RefreshCommand extends Command
     {
       case 'test':
         $this->generateTestdata();
-        $this->deleteSqLiteDatabase();
         break;
     }
     $this->clearCache();
@@ -101,20 +99,5 @@ class RefreshCommand extends Command
   protected function generateTestdata()
   {
     CommandHelper::executeSymfonyCommand('catrobat:test:generate', $this->getApplication(), [], $this->output);
-  }
-
-  protected function deleteSqLiteDatabase()
-  {
-    $database_path = $this->kernel->getRootDir().'/../tests/behat/sqlite/behattest.sqlite';
-    $this->output->write('Deleting SQLite database ('.$database_path.')... ');
-    try
-    {
-      $this->filesystem->remove($database_path);
-      $this->output->writeln(' done!');
-    }
-    catch (IOException $e)
-    {
-      $this->output->writeln('Could not delete '.$e->getPath());
-    }
   }
 }

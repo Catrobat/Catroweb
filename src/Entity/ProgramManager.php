@@ -34,6 +34,7 @@ use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * Class ProgramManager.
@@ -104,6 +105,11 @@ class ProgramManager
   private $logger;
 
   /**
+   * @var UrlHelper
+   */
+  private $urlHelper;
+
+  /**
    * ProgramManager constructor.
    */
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
@@ -113,7 +119,8 @@ class ProgramManager
                               FeaturedRepository $featured_repository,
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
-                              ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer)
+                              ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
+                              UrlHelper $urlHelper = null)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -128,6 +135,7 @@ class ProgramManager
     $this->app_request = $app_request;
     $this->file_sanitizer = $file_sanitizer;
     $this->extension_repository = $extension_repository;
+    $this->urlHelper = $urlHelper;
   }
 
   /**
@@ -210,6 +218,7 @@ class ProgramManager
       return null;
     }
 
+    /** @var Program $old_program */
     $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
     if (null !== $old_program)
     {
@@ -526,16 +535,34 @@ class ProgramManager
   }
 
   /**
-   * @param $array
-   *
-   * @return array|Program[]|StarterCategory[]
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @param null $limit
+   * @param null $offset
+   *
+   * @return array|Program[]|StarterCategory[]
+   * @return array
    */
-  public function findBy($array)
+  public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
   {
-    return $this->program_repository->findBy($array);
+    return $this->program_repository->findBy($criteria);
+  }
+
+  /**
+   * @param string      $username
+   * @param int         $limit
+   * @param int         $offset
+   * @param string|null $flavor
+   * @param string      $max_version
+   *
+   * @return Program[]
+   */
+  public function getAuthUserPrograms($username, $limit = 20, $offset = 0, $flavor = null, $max_version = '0')
+  {
+    $debug_build = $this->app_request->isDebugBuildRequest();
+
+    return $this->program_repository->getAuthUserPrograms($username, $limit, $offset, $flavor, $debug_build, $max_version);
   }
 
   /**
@@ -933,5 +960,38 @@ class ProgramManager
   public function findOneByRemixMigratedAt($remix_migrated_at)
   {
     return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
+  }
+
+  /**
+   * @param $id
+   *
+   * @return string
+   */
+  public function getScreenshotLarge($id)
+  {
+    return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getScreenshotWebPath($id);
+  }
+
+  /**
+   * @param $id
+   *
+   * @return string
+   */
+  public function getScreenshotSmall($id)
+  {
+    return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getThumbnailWebPath($id);
+  }
+
+  /**
+   * @param string $token
+   *
+   * @return mixed
+   */
+  public function decodeToken($token)
+  {
+    $tokenParts = explode('.', $token);
+    $tokenPayload = base64_decode($tokenParts[1], true);
+
+    return json_decode($tokenPayload, true);
   }
 }

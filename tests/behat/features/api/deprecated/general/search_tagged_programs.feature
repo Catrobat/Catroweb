@@ -5,10 +5,16 @@ Feature: Search tagged programs
 
   Background:
     Given there are users:
-      | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc |  1 |
-      | User1    | vwxyz    | aaaaaaaaaa |  2 |
-      | Bob      | vewqw    | eeeeeeeeee |  3 |
+      | name     |  id |
+      | Catrobat |   1 |
+      | User1    |   2 |
+      | Bob      |   3 |
+      | NewUser  |   4 |
+      | Fritz    |   5 |
+      | Frank    |   6 |
+      | Emi      |   7 |
+      | Judi     |   8 |
+      | User2    |   9 |
     And there are tags:
       | id | en     | de         |
       | 1  | Games  | Spiele     |
@@ -43,9 +49,8 @@ Feature: Search tagged programs
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search/tagProjects.json" with these parameters
     Then I should get following programs:
-      | Name    |
+      | name    |
       | Minions |
-
 
   Scenario: Search more programs with the same tag over the normal search
 
@@ -53,41 +58,25 @@ Feature: Search tagged programs
     And I use the offset "0"
     When I search for "Story"
     Then I should get following programs:
-      | Name    |
+      | name    |
       | Galaxy  |
       | Minions |
-
 
   Scenario: Search a program with the tag over the normal search
 
     When I search for "Single"
     Then I should get following programs:
-      | Name  |
+      | name  |
       | Alone |
 
-  Scenario: Search for programs assuming search will respect every term individually
+  Scenario: Search is using And operation. More keywords reduce the result set.
     Given I use the limit "10"
     And I use the offset "0"
     When I search for "Bob Game"
-    Then I should get following programs:
-      | Name      |
-      | Minions   |
-      | Webteam   |
-      | Bobs Game |
-      | tap bird  |
-      | Wather    |
+    Then I should get no programs
 
-  Scenario: Search for programs with many terms
+  Scenario: Search is using And operation. More keywords reduce the result set.
     Given I use the limit "30"
     And I use the offset "0"
     When I search for "Galaxy Ponny Webteam dec1 Single"
-    Then I should get following programs:
-      | Name         |
-      | Alone        |
-      | Galaxy       |
-      | Ponny        |
-      | Webteam      |
-      | Superponny   |
-      | Bobs Game    |
-      | Undertale    |
-      | Pocketmaster |
+    Then I should get no programs

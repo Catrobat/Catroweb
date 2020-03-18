@@ -16,6 +16,10 @@ parameters:
   catrobat.backup.dir:         "%catrobat.pubdir%resources_test/backups/"
   catrobat.snapshot.dir:       "%catrobat.pubdir%resources_test/snapshots/"
   catrobat.logs.dir:           "%kernel.project_dir%/tests/testdata/DataFixtures/GeneratedFixtures/log/"
+  catrobat.testreports.behat:  "tests/testreports/behat/"
+  catrobat.testreports.screenshot:  "tests/testreports/screens/"
+
+
   jenkins:
     url: https://jenkins.catrob.at/buildByToken/buildWithParameters
     job: "Build-Program"
@@ -91,3 +95,12 @@ services:
     arguments:
       - "%catrobat.test.directory.target%"
       - "%catrobat.file.extract.path%"
+
+  # ======== Data fixtures helper services
+  App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures:
+    class: App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures
+    public: true
+
+  App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures:
+    class: App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures
+    public: true

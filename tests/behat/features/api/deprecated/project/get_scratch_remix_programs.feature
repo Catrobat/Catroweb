@@ -101,9 +101,9 @@ Feature: Get a remixed program from Scratch
     When I GET "/app/api/projects/scratchRemixes.json" with these parameters
     Then I should get 8 programs in the following order:
       | Name       |
-      | program 9  |
       | program 10 |
       | program 11 |
+      | program 9  |
       | program 7  |
       | program 6  |
       | program 8  |

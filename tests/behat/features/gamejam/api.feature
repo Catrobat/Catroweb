@@ -2,7 +2,7 @@ Feature:
 
   Scenario:
     Given There is an ongoing game jam
-    And There are follwing gamejam programs:
+    And There are following gamejam programs:
       | Name        | Submitted | Accepted |
       | First Entry | yes       | yes      |
       | Unfinished  | yes       | no       |
@@ -14,10 +14,10 @@ Feature:
     And The total number of found projects should be 1
 
   Scenario:
-    Given There is an ongoing game jam
-    And I already submitted my game
-    And the program has the id "1"
-    And I already filled the google form
+    Given I am logged in
+    And There is an ongoing game jam
+    And I already submitted my game with id "1"
+    And I already filled the google form with id "1"
     When I GET "/pocketalice/api/gamejam/submissions.json"
     Then I should receive my program
 
@@ -27,7 +27,7 @@ Feature:
       | Jam B | -8 days   | -2 days |
       | Jam C | 1 day     | 4 days  |
       | Jam A | -4 day    | -1 days |
-    And There are follwing gamejam programs:
+    And There are following gamejam programs:
       | Name        | Submitted | Accepted | GameJam |
       | Entry for A | yes       | yes      | Jam A   |
       | Entry for C | yes       | yes      | Jam C   |

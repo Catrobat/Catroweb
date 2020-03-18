@@ -8,9 +8,9 @@ Feature: As a visitor I want to see a program page
       | 2  | OtherUser |
     And there are projects:
       | id | name             | owned by | private |
-      | 1  | public project 1 | Catrobat | 0       |
-      | 2  | public project 2 | Catrobat | 0       |
-      | 3  | private project  | Catrobat | 1       |
+      | 1  | public project 1 | Catrobat | false   |
+      | 2  | public project 2 | Catrobat | false   |
+      | 3  | private project  | Catrobat | true    |
 
   Scenario: Private projects should not be visible on the homepage
     Given I am on the homepage

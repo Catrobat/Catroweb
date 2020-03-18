@@ -3,9 +3,9 @@ Feature: Login with an existing account or register a new one
 
   Background:
     Given there are users:
-      | name      | password | token      | dn           | email                   | id |
-      | Catrobat  | 123456   | cccccccccc |              | default1@pocketcode.org |  1 |
-      | LDAP-user |          | cccccccccc | cn=LDAP-user | casdasdsassadsada@d.com |  2 |
+      | name      |  token      | dn           | email                   | id |
+      | Catrobat  |  cccccccccc |              | default1@pocketcode.org |  1 |
+      | LDAP-user |  cccccccccc | cn=LDAP-user | casdasdsassadsada@d.com |  2 |
 
   Scenario: Register
     Given the next generated token will be "rrrrrrrrrrr"

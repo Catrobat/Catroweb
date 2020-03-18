@@ -61,12 +61,12 @@ class RemixNotification extends CatroNotification
   /**
    * RemixNotification constructor.
    *
-   * @param User $user          the User to which this RemixNotification will be shown
-   * @param      $remix_from    the owner of the parent Program
-   * @param      $program       the parent Program
-   * @param      $remix_program the newly remixed child Program
+   * @param User    $user          the User to which this RemixNotification will be shown
+   * @param User    $remix_from    the owner of the parent Program
+   * @param Program $program       the parent Program
+   * @param Program $remix_program the newly remixed child Program
    */
-  public function __construct(User $user, $remix_from, $program, $remix_program)
+  public function __construct(User $user, User $remix_from, Program $program, Program $remix_program)
   {
     parent::__construct($user);
     $this->remix_from = $remix_from;
@@ -87,9 +87,9 @@ class RemixNotification extends CatroNotification
   /**
    * Sets the owner of the parent Program.
    *
-   * @param $remix_from the owner of the parent Program
+   * @param User $remix_from the owner of the parent Program
    */
-  public function setRemixFrom($remix_from)
+  public function setRemixFrom(User $remix_from)
   {
     $this->remix_from = $remix_from;
   }

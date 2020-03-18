@@ -8,7 +8,6 @@ Feature:
     Given there are users:
       | id | name     |
       | 1  | Catrobat |
-    And I start a new session
     And I log in as "Catrobat"
     And I am on "/app/user"
     And I wait for AJAX to finish

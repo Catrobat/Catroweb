@@ -9,7 +9,7 @@ Feature: Checking for rude words
 
   Scenario: upload a program with a rude word in description should be rejected
     Given I am a valid user
-    And I have a program with "assbite" as name
+    And I have a program with "name" set to "assbite"
     When I upload this program
     Then I should get the json object:
     """
@@ -18,7 +18,7 @@ Feature: Checking for rude words
 
   Scenario: upload a program with a rude word in description should be rejected
     Given I am a valid user
-    And I have a program with "assbite" as description
+    And I have a program with "description" set to "assbite"
     When I upload this program
     Then I should get the json object:
       """
@@ -27,7 +27,7 @@ Feature: Checking for rude words
 
   Scenario Outline: a program with a rude word in description should be rejected
     Given I am a valid user
-    And I have a program with "<description>" as description
+    And I have a program with "description" set to "<description>"
     When I upload this program
     Then the program should get <accepted or rejected>
 

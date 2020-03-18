@@ -5,7 +5,6 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given there are users:
       | id | name        | email          |
       | 1  | WebViewUser | dev1@catrob.at |
-    And I start a new session
 
   Scenario: Log in using Catrobat user and show profile
     Given I use a valid JWT token for "WebViewUser"

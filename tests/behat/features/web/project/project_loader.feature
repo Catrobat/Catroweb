@@ -33,7 +33,6 @@ Feature: Project loader & show more/less programs button behaviour
       | 21 | project 21 |             | User2    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 22 | project 22 |             | User2    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 23 | project 23 |             | User3    | 1         | 1             | 1     | 01.01.2011 13:00 | 0.8.5   |
-    And I start a new session
 
   Scenario Outline: Should see all buttons at homepage
     Given I am on <page>

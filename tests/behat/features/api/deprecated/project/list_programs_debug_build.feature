@@ -174,7 +174,7 @@ Feature: List programs with and without debug build type
       """
 
   Scenario Outline: Show most downloaded/viewed/recent program (ids) with debug and release app
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/<end point>.json" with these parameters
@@ -196,7 +196,7 @@ Feature: List programs with and without debug build type
       | recentIDs         | release    | program_2_id     |
 
   Scenario Outline: Show random programs (ids) with debug and release app
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/<end point>.json" with these parameters
@@ -211,7 +211,7 @@ Feature: List programs with and without debug build type
       | randomProjectIDs | release    | 3     | program 1,program 2,program 4               |
 
   Scenario Outline: Show user projects with debug and release app
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I have a parameter "user_id" with value "1"
     When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get a total of <total> projects
@@ -223,7 +223,7 @@ Feature: List programs with and without debug build type
       | release    | 3     | program 2,program 1,program 4               |
 
   Scenario Outline: Search for debug program in debug and release app
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     When searching for "debug"
     Then I should get a total of <total> projects
     And I should get the programs "<programs>"
@@ -234,7 +234,7 @@ Feature: List programs with and without debug build type
       | release    | 0     |               |
 
   Scenario Outline: Search for programs with specific tag in debug and release app
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I have a parameter "q" with the tag id "1"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
@@ -247,7 +247,7 @@ Feature: List programs with and without debug build type
       | release    | program 1,program 4               | 2     |
 
   Scenario Outline: Search for programs with specific extension in debug and release app
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I have a parameter "q" with value "<q>"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"

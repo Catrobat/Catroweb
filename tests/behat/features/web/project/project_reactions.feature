@@ -113,7 +113,7 @@ Feature: Reactions to projects "likes"
     And the "#all-tab-content .reaction:first-child a" element should contain "Catrobat"
     And I should see 1 "#all-tab-content .reaction:first-child .types > i"
     And the element "#all-tab-content .reaction:first-child .types .fa-surprise" should be visible
-    And the "#all-tab-content .reaction:nth-child(2) a" element should contain "LovelyUser"
+    And the "#all-tab-content .reaction:nth-child(3) a" element should contain "LovelyUser"
     And I should see 1 "#all-tab-content .reaction:nth-child(3) .types > i"
     And the element "#all-tab-content .reaction:nth-child(3) .types .fa-heart" should be visible
     When I click "#love-tab"

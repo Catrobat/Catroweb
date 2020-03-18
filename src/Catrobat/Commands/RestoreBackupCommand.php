@@ -75,7 +75,7 @@ class RestoreBackupCommand extends Command
     }
     $this->output->writeln('Backup File: '.$backup_file);
 
-    if ('pdo_mysql' !== $this->parameter_bag->get('database_driver'))
+    if ('pdo_mysql' !== $_ENV['DATABASE_DRIVER'])
     {
       throw new \Exception('This script only supports mysql databases');
     }
@@ -83,9 +83,9 @@ class RestoreBackupCommand extends Command
     if ($input->hasArgument('local') && 'true' === $input->getArgument('local'))
     {
       $local_resource_directory = $this->parameter_bag->get('catrobat.resources.dir');
-      $local_database_name = $this->parameter_bag->get('database_name');
-      $local_database_user = $this->parameter_bag->get('database_user');
-      $local_database_password = $this->parameter_bag->get('database_password');
+      $local_database_name = $_ENV['DATABASE_NAME'];
+      $local_database_user = $_ENV['DATABASE_USER'];
+      $local_database_password = $_ENV['DATABASE_PASSWORD'];
 
       $this->output->writeln('Restore backup on localhost');
 

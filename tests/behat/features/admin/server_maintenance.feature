@@ -19,9 +19,11 @@ Feature: Admin Server Maintenance
   Scenario: As a valid admin I want to be able to remove the APKs through the backend
   which should result in deleting apk from disk and reset entity state
     Given I am a logged in as super admin
+    When I GET "/admin/maintain/apk"
+    Then the client response should contain "Generated APKs (0.00 B)"
     And there are programs:
       | id | name      | apk_status | directory_hash |
-      | 1  | program 1 | 2          | null           |
+      | 1  | program 1 | ready      | null           |
     And there is a file "1.apk" with size "4096" bytes in the APK-folder
     When I GET "/admin/maintain/list"
     Then the client response should contain "Generated APKs (4.00 KiB)"
@@ -58,7 +60,7 @@ Feature: Admin Server Maintenance
     Given I am a logged in as super admin
     And there are programs:
       | id | name    | apk_status | directory_hash |
-      | 1  | program | 0          | generated_hash |
+      | 1  | program | none       | generated_hash |
     And there is a file "generated_hash/code.xml" with size "4096" bytes in the extracted-folder
     When I GET "/admin/maintain/list"
     Then the client response should contain "Extracted Catrobatfiles (4.00 KiB)"
