@@ -164,13 +164,10 @@ class ResetCommand extends Command
     CommandHelper::executeShellCommand('chmod o+w tests -R', [],
       'Setting test resources permissions', $output);
 
-    CommandHelper::executeShellCommand('chmod o+w+x tests/behat/sqlite/ -R', [],
-      'Setting permissions for behat sqlite test database', $output);
-
     CommandHelper::executeShellCommand('sh docker/app/set-test-permissions.sh', [],
         'Executing set_test_permissions.sh', $output);
 
-    //https://share.catrob.at/app/project/remixgraph/{idofproject} to get remixes
+    //https://share.catrob.at/app/project/remixgraph/{id_of_project} to get remixes
   }
 
   /**

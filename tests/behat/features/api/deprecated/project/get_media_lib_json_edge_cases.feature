@@ -31,7 +31,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package when the package does exist but there are no categories
-    Given there are mediapackages:
+    Given there are media packages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
     When I GET from the api "/app/api/media/package/Looks/json"
@@ -43,7 +43,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package by nameUrl when the package does exist but there are no categories
-    Given there are mediapackages:
+    Given there are media packages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
     When I GET from the api "/app/api/media/packageByNameUrl/looks/json"
@@ -65,7 +65,7 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package and a certain category when the package does exist but has no categories
-    Given there are mediapackages:
+    Given there are media packages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
     When I GET from the api "/app/api/media/package/Looks/Space/json"
@@ -78,10 +78,10 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package and a certain category when the package does exist but the wanted category does not
-    Given there are mediapackages:
+    Given there are media packages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
-    Given there are mediapackage categories:
+    Given there are media package categories:
       | id | name    | package |
       | 1  | Animals | Looks   |
     When I GET from the api "/app/api/media/package/Looks/Space/json"
@@ -94,10 +94,10 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib package and a certain category when the package and the category exist but there are no files
-    Given there are mediapackages:
+    Given there are media packages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
-    Given there are mediapackage categories:
+    Given there are media package categories:
       | id | name  | package |
       | 1  | Space | Looks   |
     When I GET from the api "/app/api/media/package/Looks/Space/json"
@@ -119,10 +119,10 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib category when the category exists but there are no files
-    Given there are mediapackages:
+    Given there are media packages:
       | id | name  | name_url |
       | 1  | Looks | looks    |
-    Given there are mediapackage categories:
+    Given there are media package categories:
       | id | name  | package |
       | 1  | Space | Looks   |
     When I GET from the api "/app/api/media/category/Space/json"

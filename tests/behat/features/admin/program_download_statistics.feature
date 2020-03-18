@@ -8,11 +8,11 @@ Feature: Program Download Statistics
     Given I am a logged in as super admin
     And there are programs:
       | id | name      | apk_status | directory_hash |
-      | 1  | program 1 | 2          | null           |
-      | 2  | program 2 | 2          | null           |
+      | 1  | program 1 | ready      | null           |
+      | 2  | program 2 | ready      | null           |
     And there are users:
       | name | email        | token | password   | id |
-      | cat  | cat@robat.at | ccccc | highsecure |  1 |
+      | cat  | cat@robat.at | ccccc | highsecure |  2 |
     And there are program download statistics:
       | id | program_id | downloaded_at       | ip             | country_code | country_name | user_agent | user_name | referrer |
       | 1  | 1          | 2015-11-21 13:39:00 | 88.116.169.222 | AT           | Austria      | okhttp     | cat       | Facebook |

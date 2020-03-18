@@ -7,7 +7,6 @@ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log
 sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log 
 sudo chmod o+w public/resources/ -R
 sudo chmod o+w public/resources_test/ -R
-chmod o+w+x tests/behat/sqlite/ -R
 composer install
 npm install
 bin/console catrobat:reset --hard

@@ -18,12 +18,12 @@ Feature: Get featured programs
       | 6  | Mega Game1   |             | User1    | 22        | 78    | 01.01.2012 13:00 | 0.8.5   |
     And following programs are featured:
       | name         | active | priority | ios_only |
-      | Invaders     | yes    | 1        | no       |
-      | A new world  | yes    | 3        | no       |
-      | Soon to be   | yes    | 2        | no       |
-      | Simple click | no     | 4        | no       |
-      | IOS test     | yes    | 0        | yes      |
-      | Mega Game1   | no     | 1        | yes      |
+      | Invaders     | 1      | 1        | no       |
+      | A new world  | 1      | 3        | no       |
+      | Soon to be   | 1      | 2        | no       |
+      | Simple click | 0      | 4        | no       |
+      | IOS test     | 1      | 0        | yes      |
+      | Mega Game1   | 0      | 1        | yes      |
 
   Scenario: show featured programs with limit 1 and offset 1
     Given I have a parameter "limit" with value "1"

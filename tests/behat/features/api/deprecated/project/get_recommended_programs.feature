@@ -19,6 +19,9 @@ Feature: Get recommended programs
       | 4  | Music        |
       | 5  | Art          |
       | 6  | Experimental |
+    And there are users:
+      | name     | id |
+      | Catrobat |  1 |
     And there are programs:
       | id | name    | description | owned by | downloads | views | upload time      | version | extensions | tags_id | debug |
       | 1  | Game    | p4          | Catrobat | 5         | 1     | 01.03.2013 12:00 | 0.8.5   |            | 5       | false |
@@ -30,7 +33,7 @@ Feature: Get recommended programs
 
   Scenario Outline: A request must have specific parameters to succeed with the recommender api
 
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I have a parameter "program_id" with value "1"
     And I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
@@ -44,7 +47,7 @@ Feature: Get recommended programs
 
   Scenario Outline: You get recommended programs which are more similar to the selected program first
 
-    Given I use a <build type> build of the Catroid app
+    Given I request from a <build type> build of the Catroid app
     And I use the limit "10"
     And I use the offset "0"
     When I search similar programs for program id "2"

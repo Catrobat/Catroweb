@@ -68,7 +68,7 @@ Feature: Sidebar should show amount of new notifications in form of a badge
     And there are "20" "comment" notifications for program "program 1" from "Drago"
     And there are "18" "remix" notifications for program "program 1" from "Drago"
     And there are "5"+ notifications for "Catrobat"
-    And "John" have just followed "Catrobat"
+    And there is a notification that "John" follows "Catrobat"
     And I log in as "Catrobat"
     And I open the menu
     When I click ".collapsible"
@@ -84,7 +84,7 @@ Feature: Sidebar should show amount of new notifications in form of a badge
     And there are "20" "comment" notifications for program "program 1" from "Drago"
     And there are "42" "remix" notifications for program "program 1" from "Drago"
     And there are "5"+ notifications for "Catrobat"
-    And "John" have just followed "Catrobat"
+    And there is a notification that "John" follows "Catrobat"
     And I log in as "Catrobat"
     And I open the menu
     When I click ".collapsible"

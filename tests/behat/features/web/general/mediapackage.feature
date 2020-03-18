@@ -6,18 +6,18 @@ Feature:
 
 
   Background:
-    Given there are mediapackages:
+    Given there are media packages:
       | id | name   | name_url |
       | 1  | Looks  | looks    |
       | 2  | Sounds | sounds   |
-    And there are mediapackage categories:
+    And there are media package categories:
       | id | name         | package |
       | 1  | Animals      | Looks   |
       | 2  | Fantasy      | Sounds  |
       | 3  | Bla          | Looks   |
       | 4  | ThemeSpecial | Looks   |
 
-    And there are mediapackage files:
+    And there are media package files:
       | id | name       | category     | extension | active | file   | flavor     | author        |
       | 1  | Dog (😊🐶) | Animals      | png       | 1      | 1.png  | pocketcode | Bob Schmidt   |
       | 2  | Bubble     | Fantasy      | mpga      | 1      | 2.mpga | pocketcode |               |

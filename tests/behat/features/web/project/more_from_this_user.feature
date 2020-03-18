@@ -33,7 +33,6 @@ Feature: There should be a more from this user category on project pages
       | 21 | project 21 | User2    |
       | 22 | project 22 | User2    |
       | 23 | project 23 | User3    |
-    And I start a new session
 
   Scenario: at a projects detail page I should get more projects from this user recommended
     Given I am on "/app/project/3"

@@ -2,7 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
   ->exclude(['Migrations', 'Resources'])
-  ->in('src');
+  ->in(['src', 'tests/behat/context']);
 
 return PhpCsFixer\Config::create()
   ->setRules([
@@ -13,9 +13,7 @@ return PhpCsFixer\Config::create()
     'strict_param'        => true,
     'braces'              => ['position_after_control_structures'   => 'next',
                               'position_after_anonymous_constructs' => 'next'],
-//    'phpdoc_to_return_type' => true, EXPERIMENTAL
-//    'phpdoc_to_param_type'  => true, EXPERIMENTAL
   ])
   ->setFinder($finder)
-  ->setUsingCache(false)
+  ->setUsingCache(true)
   ->setIndent('  ');

@@ -22,19 +22,18 @@ jobs:
         testSuite:
           - admin
           - api-authentication
-          - api-mediapackage
-          - deprecated_api_general
-          - deprecated_api_profile
-          - deprecated_api_project
-          - deprecated_api_upload
+          - api-media-package
+          - deprecated-api-general
+          - deprecated-api-profile
+          - deprecated-api-project
+          - deprecated-api-upload
           - ci
           - flavor
-          - web_general
-          - web_profile
-          - web_project
+          - web-general
+          - web-profile
+          - web-project
           - gamejam
-          - gamejam_web
-          - gamejam_javascript
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -43,6 +42,7 @@ jobs:
           cd docker
           docker-compose -f docker-compose.test.yml build
           docker-compose -f docker-compose.test.yml up -d
+          sleep 30
 
       # Test Run
       - name: Behat ${{ matrix.testSuite }} tests
@@ -79,3 +79,12 @@ jobs:
         id: test-rerun-3
         run: |
           docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+
+      - name: DEBUG
+        if: always()
+        run: |
+          docker ps -a
+          echo "---"
+          docker logs app.catroweb.test
+          echo "---"
+          docker logs db.catroweb.test

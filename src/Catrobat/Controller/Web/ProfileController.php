@@ -14,7 +14,6 @@ use App\Utils\ImageUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\GuidType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -375,11 +374,9 @@ class ProfileController extends AbstractController
   public function deleteAccountAction(CatroNotificationRepository $notification_repository,
                                       UserCommentRepository $comment_repository)
   {
-    /**
-     * @var User
-     * @var EntityManager $em
-     */
+    /** @var User $user */
     $user = $this->getUser();
+
     if (!$user)
     {
       return $this->redirectToRoute('fos_user_security_login');
@@ -402,16 +399,11 @@ class ProfileController extends AbstractController
    *
    * @param $id
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
    * @return RedirectResponse
    */
   public function followUser($id, UserManager $user_manager, CatroNotificationService $notification_service)
   {
-    /**
-     * @var User
-     */
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -423,14 +415,12 @@ class ProfileController extends AbstractController
       return $this->redirectToRoute('profile');
     }
 
-    /**
-     * @var User
-     */
-    $userToFollow = $user_manager->find($id);
-    $user->addFollowing($userToFollow);
+    /** @var User $user_to_follow */
+    $user_to_follow = $user_manager->find($id);
+    $user->addFollowing($user_to_follow);
     $user_manager->updateUser($user);
 
-    $notification = new FollowNotification($userToFollow, $user);
+    $notification = new FollowNotification($user_to_follow, $user);
     $notification_service->addNotification($notification);
 
     return $this->redirectToRoute('profile', ['id' => $id]);

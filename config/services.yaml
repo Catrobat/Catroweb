@@ -268,6 +268,10 @@ services:
       - max_number_of_concurrent_requests: 4
     public: true
 
+  App\Utils\MyUuidGenerator:
+    class: App\Utils\MyUuidGenerator
+    public: true
+
   # =============== Stuff that needs different parameters/services based on the environment
 
   App\Catrobat\Services\CatrobatFileExtractor:

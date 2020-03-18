@@ -7,7 +7,6 @@ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log
 
 sudo chmod o+w public/resources/ -R
 sudo chmod o+w public/resources_test/ -R
-chmod o+w+x tests/behat/sqlite/ -R
 
 bin/console cache:clear -e test
 bin/console cache:clear -e prod
@@ -24,4 +23,3 @@ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log
 
 sudo chmod o+w public/resources/ -R
 sudo chmod o+w public/resources_test/ -R
-chmod o+w+x tests/behat/sqlite/ -R

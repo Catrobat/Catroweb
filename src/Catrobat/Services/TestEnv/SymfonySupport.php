@@ -7,10 +7,15 @@ use App\Catrobat\Services\CatrobatFileCompressor;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
+use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
+use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
 use App\Entity\Extension;
+use App\Entity\FeaturedProgram;
 use App\Entity\GameJam;
+use App\Entity\Notification;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
+use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
 use App\Entity\ProgramRemixBackwardRelation;
@@ -18,6 +23,7 @@ use App\Entity\ProgramRemixRelation;
 use App\Entity\ScratchProgramRemixRelation;
 use App\Entity\Tag;
 use App\Entity\User;
+use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
 use App\Entity\UserRemixSimilarityRelation;
@@ -31,205 +37,179 @@ use App\Repository\TagRepository;
 use App\Repository\UserLikeSimilarityRelationRepository;
 use App\Repository\UserRemixSimilarityRelationRepository;
 use App\Utils\TimeUtils;
-use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Tester\Exception\PendingException;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use Behat\Symfony2Extension\Context\KernelDictionary;
+use DateInterval;
+use DateTime;
+use DateTimeZone;
+use Doctrine\Persistence\ObjectManager;
+use Exception;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Router;
 
 /**
- * Class SymfonySupport.
+ * Trait SymfonySupport.
+ *
+ * Php only supports single inheritance, therefore we can't extend all our Context Classes from the same BaseContext.
+ * Some Context Classes must extend the (Mink)BrowserContext. That's why we use this trait in all our Context
+ * files to provide them with the same basic functionality.
+ *
+ * A trait is basically just a copy & paste and therefore every context uses its own instances.
+ * Since some variables must exist only once, we have to set them to static members. (E.g. kernel_browser)
  */
-class SymfonySupport
+trait SymfonySupport
 {
+  use KernelDictionary;
   /**
-   * @var
+   * @var string
    */
-  private $fixture_dir;
+  public $ERROR_DIR;
 
   /**
+   * @var string
+   */
+  public $FIXTURES_DIR;
+
+  /**
+   * @var string
+   */
+  public $SCREENSHOT_DIR;
+
+  /**
+   * @var string
+   */
+  public $MEDIA_PACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
+
+  /**
+   * @var string
+   */
+  public $EXTRACT_RESOURCES_DIR;
+
+  /**
+   * @override
+   *
    * @var Kernel
    */
   private $kernel;
-  /**
-   * @var
-   */
-  private $client;
-  /**
-   * @var int
-   */
-  private $test_user_count = 0;
-  /**
-   * @var User
-   */
-  private $default_user;
-  /**
-   * @var
-   */
-  private $error_directory;
 
   /**
-   * SymfonySupport constructor.
-   *
-   * @param $fixture_dir
+   * @override
+   * Sets Kernel instance.
    */
-  public function __construct($fixture_dir)
-  {
-    $this->fixture_dir = $fixture_dir;
-  }
-
   public function setKernel(KernelInterface $kernel)
   {
     $this->kernel = $kernel;
+    // look into services(_test).yml
+    $this->ERROR_DIR = $this->getSymfonyParameter('catrobat.testreports.behat');
+    $this->SCREENSHOT_DIR = $this->getSymfonyParameter('catrobat.testreports.screenshot');
+    $this->FIXTURES_DIR = $this->getSymfonyParameter('catrobat.test.directory.source');
+    $this->MEDIA_PACKAGE_DIR = $this->FIXTURES_DIR.'MediaPackage/';
+    $this->EXTRACT_RESOURCES_DIR = $this->getSymfonyParameter('catrobat.file.extract.dir');
   }
 
-  /**
-   * @return KernelBrowser
-   */
-  public function getClient()
-  {
-    if (null == $this->client)
-    {
-      $this->client = $this->kernel->getContainer()->get('test.client');
-    }
-
-    return $this->client;
-  }
-
-  /**
-   * @return UserManager
-   */
-  public function getUserManager()
+  public function getUserManager(): UserManager
   {
     return $this->kernel->getContainer()->get(UserManager::class);
   }
 
-  /**
-   * @return ProgramManager
-   */
-  public function getProgramManager()
+  public function getUserDataFixtures(): UserDataFixtures
+  {
+    return $this->kernel->getContainer()->get(UserDataFixtures::class);
+  }
+
+  public function getProgramManager(): ProgramManager
   {
     return $this->kernel->getContainer()->get(ProgramManager::class);
   }
 
-  /**
-   * @return TagRepository
-   */
-  public function getTagRepository()
+  public function getProjectDataFixtures(): ProjectDataFixtures
+  {
+    return $this->kernel->getContainer()->get(ProjectDataFixtures::class);
+  }
+
+  public function getJwtManager(): JWTManager
+  {
+    return $this->kernel->getContainer()->get('lexik_jwt_authentication.jwt_manager');
+  }
+
+  public function getJwtEncoder(): JWTEncoderInterface
+  {
+    return $this->kernel->getContainer()->get('lexik_jwt_authentication.encoder');
+  }
+
+  public function getTagRepository(): TagRepository
   {
     return $this->kernel->getContainer()->get(TagRepository::class);
   }
 
-  /**
-   * @return ExtensionRepository
-   */
-  public function getExtensionRepository()
+  public function getExtensionRepository(): ExtensionRepository
   {
     return $this->kernel->getContainer()->get(ExtensionRepository::class);
   }
 
-  /**
-   * @return ProgramRemixRepository
-   */
-  public function getProgramRemixForwardRepository()
+  public function getProgramRemixForwardRepository(): ProgramRemixRepository
   {
     return $this->kernel->getContainer()->get(ProgramRemixRepository::class);
   }
 
-  /**
-   * @return ProgramRemixBackwardRepository
-   */
-  public function getProgramRemixBackwardRepository()
+  public function getProgramRemixBackwardRepository(): ProgramRemixBackwardRepository
   {
     return $this->kernel->getContainer()->get(ProgramRemixBackwardRepository::class);
   }
 
-  /**
-   * @return ScratchProgramRepository
-   */
-  public function getScratchProgramRepository()
+  public function getScratchProgramRepository(): ScratchProgramRepository
   {
     return $this->kernel->getContainer()->get(ScratchProgramRepository::class);
   }
 
-  /**
-   * @return ScratchProgramRemixRepository
-   */
-  public function getScratchProgramRemixRepository()
+  public function getScratchProgramRemixRepository(): ScratchProgramRemixRepository
   {
     return $this->kernel->getContainer()->get(ScratchProgramRemixRepository::class);
   }
 
-  /**
-   * @return ProgramFileRepository
-   */
-  public function getFileRepository()
+  public function getFileRepository(): ProgramFileRepository
   {
     return $this->kernel->getContainer()->get(ProgramFileRepository::class);
   }
 
-  /**
-   * @return ExtractedFileRepository
-   */
-  public function getExtractedFileRepository()
+  public function getExtractedFileRepository(): ExtractedFileRepository
   {
     return $this->kernel->getContainer()->get(ExtractedFileRepository::class);
   }
 
-  /**
-   * @return MediaPackageFileRepository
-   */
-  public function getMediaPackageFileRepository()
+  public function getMediaPackageFileRepository(): MediaPackageFileRepository
   {
     return $this->kernel->getContainer()->get(MediaPackageFileRepository::class);
   }
 
-  /**
-   * @return RecommenderManager
-   */
-  public function getRecommenderManager()
+  public function getRecommenderManager(): RecommenderManager
   {
     return $this->kernel->getContainer()->get(RecommenderManager::class);
   }
 
-  /**
-   * @return UserLikeSimilarityRelationRepository
-   */
-  public function getUserLikeSimilarityRelationRepository()
+  public function getUserLikeSimilarityRelationRepository(): UserLikeSimilarityRelationRepository
   {
     return $this->kernel->getContainer()->get(UserLikeSimilarityRelationRepository::class);
   }
 
-  /**
-   * @return UserRemixSimilarityRelationRepository
-   */
-  public function getUserRemixSimilarityRelationRepository()
+  public function getUserRemixSimilarityRelationRepository(): UserRemixSimilarityRelationRepository
   {
     return $this->kernel->getContainer()->get(UserRemixSimilarityRelationRepository::class);
   }
 
-  /**
-   * @return CatroNotificationRepository
-   */
-  public function getCatroNotificationRepository()
+  public function getCatroNotificationRepository(): CatroNotificationRepository
   {
     return $this->kernel->getContainer()->get(CatroNotificationRepository::class);
   }
 
-  /**
-   * @return EntityManager
-   */
-  public function getManager()
+  public function getManager(): ObjectManager
   {
     return $this->kernel->getContainer()->get('doctrine')->getManager();
   }
@@ -244,10 +224,7 @@ class SymfonySupport
     return $this->kernel->getContainer()->get($service_name);
   }
 
-  /**
-   * @return Router
-   */
-  public function getRouter()
+  public function getRouter(): Router
   {
     return $this->kernel->getContainer()->get('router');
   }
@@ -273,56 +250,14 @@ class SymfonySupport
   }
 
   /**
-   * @return false | Profiler
-   */
-  public function getSymfonyProfile()
-  {
-    $profile = $this->getClient()->getProfile();
-    if (!$profile)
-    {
-      throw new \RuntimeException('The profiler is disabled. Activate it by setting '.'framework.profiler.only_exceptions to false in '.'your config');
-    }
-
-    return $profile;
-  }
-
-  /**
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return User|object|null
-   */
-  public function getDefaultUser()
-  {
-    if (null == $this->default_user)
-    {
-      $this->default_user = $this->insertUser();
-    }
-    else
-    {
-      $this->default_user = $this->getUserManager()->find($this->default_user->getId());
-    }
-
-    return $this->default_user;
-  }
-
-  /**
    * @return string
    */
   public function getDefaultProgramFile()
   {
-    $file = $this->fixture_dir.'/test.catrobat';
+    $file = $this->FIXTURES_DIR.'/test.catrobat';
     Assert::assertTrue(is_file($file));
 
     return $file;
-  }
-
-  /**
-   * @param $dir
-   */
-  public function setErrorDirectory($dir)
-  {
-    $this->error_directory = $dir;
   }
 
   /**
@@ -347,399 +282,332 @@ class SymfonySupport
   /**
    * @param array $config
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   * @throws \Exception
+   * @throws Exception
    *
    * @return GameJam
    */
-  public function insertDefaultGamejam($config = [])
+  public function insertDefaultGameJam($config = [])
   {
-    $gamejam = new GameJam();
-    @$gamejam->setName($config['name'] ?: 'pocketalice');
-    @$gamejam->setHashtag($config['hashtag'] ?: null);
-    @$gamejam->setFlavor(null == $config['flavor'] ? 'pocketalice' :
-      'no flavor' != $config['flavor'] ?: null);
+    $game_jam = new GameJam();
+    $game_jam->setName(isset($config['name']) ? $config['name'] : 'pocketalice');
+    $game_jam->setHashtag(isset($config['hashtag']) ? $config['hashtag'] : null);
+
+    if (isset($config['flavor']) && 'no-flavor' !== $config['flavor'])
+    {
+      $game_jam->setFlavor($config['flavor']);
+    }
+    elseif (!isset($config['flavor']))
+    {
+      $game_jam->setFlavor('pocketalice');
+    }
 
     $start_date = TimeUtils::getDateTime();
-    $start_date->sub(new \DateInterval('P10D'));
+    $start_date->sub(new DateInterval('P10D'));
     $end_date = TimeUtils::getDateTime();
-    $end_date->add(new \DateInterval('P10D'));
+    $end_date->add(new DateInterval('P10D'));
 
-    @$gamejam->setStart($config['start'] ?: $start_date);
-    @$gamejam->setEnd($config['end'] ?: $end_date);
+    $game_jam->setStart(isset($config['start']) ? $config['start'] : $start_date);
+    $game_jam->setEnd(isset($config['end']) ? $config['end'] : $end_date);
 
-    @$gamejam->setFormUrl($config['formurl'] ?: 'https://catrob.at/url/to/form');
+    $game_jam->setFormUrl(isset($config['formurl']) ? $config['formurl'] : 'https://catrob.at/url/to/form');
 
-    $this->getManager()->persist($gamejam);
+    $this->getManager()->persist($game_jam);
     $this->getManager()->flush();
 
-    return $gamejam;
+    return $game_jam;
   }
 
-  /**
-   * @param array $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return object|null
-   */
-  public function insertUser($config = [])
+  public function insertUser(array $config = [], bool $andFlush = true): User
   {
-    ++$this->test_user_count;
+    return $this->getUserDataFixtures()->insertUser($config, $andFlush);
+  }
+
+  public function assertUser(array $config = [])
+  {
+    $this->getUserDataFixtures()->assertUser($config);
+  }
+
+  public function insertUserLikeSimilarity(array $config = [], bool $andFlush = true): UserLikeSimilarityRelation
+  {
     $user_manager = $this->getUserManager();
-    $user = $user_manager->createUser();
-    @$user->setUsername($config['name'] ?: 'GeneratedUser'.$this->test_user_count);
-    @$user->setEmail($config['email'] ?: 'default'.$this->test_user_count.'@pocketcode.org');
-    @$user->setPlainPassword($config['password'] ?: 'GeneratedPassword');
-    @$user->setEnabled($config['enabled'] ?: true);
-    @$user->setUploadToken($config['token'] ?: 'GeneratedToken');
-    @$user->setCountry($config['country'] ?: 'at');
-    @$user->setLimited($config['limited'] ?: 'false');
-    @$user->addRole($config['role'] ?: 'ROLE_USER');
-    $user_manager->updateUser($user, true);
 
-    $em = $this->getManager();
+    /** @var User $first_user */
+    $first_user = $user_manager->find($config['first_user_id']);
 
-    if (array_key_exists('id', $config) && null !== $config['id'])
+    /** @var User $second_user */
+    $second_user = $user_manager->find($config['second_user_id']);
+
+    $relation = new UserLikeSimilarityRelation($first_user, $second_user, $config['similarity']);
+
+    $this->getManager()->persist($relation);
+    if ($andFlush)
     {
-      $user->setId($config['id']);
-    }
-    else
-    {
-      $user->setId(''.$this->test_user_count);
+      $this->getManager()->flush();
     }
 
-    $em->flush();
-
-    return $user_manager->find($user->getId());
+    return $relation;
   }
 
-  public function computeAllLikeSimilaritiesBetweenUsers()
+  public function insertUserRemixSimilarity(array $config = [], bool $andFlush = true): UserRemixSimilarityRelation
   {
-    //$this->getRecommenderManager()->computeUserLikeSimilarities(null);
-    $catroweb_dir = $this->kernel->getProjectDir().'/..';
-    $similarity_computation_service = $catroweb_dir.'/bin/recsys-similarity-computation-service.jar';
-    $output_dir = $catroweb_dir;
-    $sqlite_db_path = "{$catroweb_dir}/tests/behat/sqlite/behattest.sqlite";
-
-    shell_exec("{$catroweb_dir}/bin/console catrobat:recommender:export --env=test");
-    shell_exec("/usr/bin/env java -jar {$similarity_computation_service} catroweb user_like_similarity_relation {$catroweb_dir} {$output_dir}");
-    shell_exec("/usr/bin/env printf \"with open('{$catroweb_dir}/import_likes.sql') as file:\\n  for line in file:".
-      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | ".
-      "/usr/bin/env python2 > {$catroweb_dir}/import_likes_output.sql");
-    shell_exec("/usr/bin/env cat {$catroweb_dir}/import_likes_output.sql | /usr/bin/env sqlite3 {$sqlite_db_path}");
-    @unlink("{$catroweb_dir}/data_likes");
-    @unlink("{$catroweb_dir}/data_remixes");
-    @unlink("{$catroweb_dir}/import_likes.sql");
-    @unlink("{$catroweb_dir}/import_likes_output.sql");
-  }
-
-  public function computeAllRemixSimilaritiesBetweenUsers()
-  {
-    //$this->getRecommenderManager()->computeUserRemixSimilarities(null);
-    $catroweb_dir = $this->kernel->getProjectDir().'/..';
-    $similarity_computation_service = $catroweb_dir.'/bin/recsys-similarity-computation-service.jar';
-    $output_dir = $catroweb_dir;
-    $sqlite_db_path = "{$catroweb_dir}/tests/behat/sqlite/behattest.sqlite";
-
-    shell_exec("{$catroweb_dir}/bin/console catrobat:recommender:export --env=test");
-    shell_exec("/usr/bin/env java -jar {$similarity_computation_service} catroweb user_remix_similarity_relation {$catroweb_dir} {$output_dir}");
-    shell_exec("/usr/bin/env printf \"with open('{$catroweb_dir}/import_remixes.sql') as file:\\n  for line in file:".
-      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | ".
-      "/usr/bin/env python2 > {$catroweb_dir}/import_remixes_output.sql");
-    shell_exec("/usr/bin/env cat {$catroweb_dir}/import_remixes_output.sql | /usr/bin/env sqlite3 {$sqlite_db_path}");
-    @unlink("{$catroweb_dir}/data_likes");
-    @unlink("{$catroweb_dir}/data_remixes");
-    @unlink("{$catroweb_dir}/import_remixes.sql");
-    @unlink("{$catroweb_dir}/import_remixes_output.sql");
-  }
-
-  /**
-   * @param array $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function insertUserLikeSimilarity($config = [])
-  {
-    /**
-     * @var User
-     * @var User $second_user
-     */
-    $em = $this->getManager();
     $user_manager = $this->getUserManager();
+
+    /** @var User $first_user */
     $first_user = $user_manager->find($config['first_user_id']);
+
+    /** @var User $second_user */
     $second_user = $user_manager->find($config['second_user_id']);
-    $em->persist(new UserLikeSimilarityRelation($first_user, $second_user, $config['similarity']));
-    $em->flush();
+
+    $relation = new UserRemixSimilarityRelation($first_user, $second_user, $config['similarity']);
+
+    $this->getManager()->persist($relation);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $relation;
   }
 
   /**
-   * @param array $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
-  public function insertUserRemixSimilarity($config = [])
+  public function insertProgramLike(array $config = [], bool $andFlush = true): ProgramLike
   {
-    /**
-     * @var User
-     * @var User $second_user
-     */
-    $em = $this->getManager();
-    $user_manager = $this->getUserManager();
-    $first_user = $user_manager->find($config['first_user_id']);
-    $second_user = $user_manager->find($config['second_user_id']);
-    $em->persist(new UserRemixSimilarityRelation($first_user, $second_user, $config['similarity']));
-    $em->flush();
-  }
-
-  /**
-   * @param array $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function insertProgramLike($config = [])
-  {
-    /**
-     * @var User
-     * @var Program $program
-     */
-    $em = $this->getManager();
     $user_manager = $this->getUserManager();
     $program_manager = $this->getProgramManager();
-    $user = $user_manager->findOneBy(['username' => $config['username']]);
+
+    /** @var User $user */
+    $user = $user_manager->findUserByUsername($config['username']);
+
+    /** @var Program $program */
     $program = $program_manager->find($config['program_id']);
 
     $program_like = new ProgramLike($program, $user, $config['type']);
-    $program_like->setCreatedAt(new \DateTime($config['created at'], new \DateTimeZone('UTC')));
+    $program_like->setCreatedAt(new DateTime($config['created at'], new DateTimeZone('UTC')));
 
-    $em->persist($program_like);
-    $em->flush();
+    $this->getManager()->persist($program_like);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $program_like;
   }
 
   /**
    * @param $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function insertTag($config)
+  public function insertTag(array $config = [], bool $andFlush = true): Tag
   {
-    $em = $this->getManager();
     $tag = new Tag();
-
     $tag->setEn($config['en']);
-    $tag->setDe($config['de']);
+    $tag->setDe(isset($config['de']) ? $config['de'] : null);
 
-    $em->persist($tag);
-    $em->flush();
+    $this->getManager()->persist($tag);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $tag;
   }
 
   /**
    * @param $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function insertExtension($config)
+  public function insertExtension(array $config = [], bool $andFlush = true): Extension
   {
-    $em = $this->getManager();
     $extension = new Extension();
-
     $extension->setName($config['name']);
     $extension->setPrefix($config['prefix']);
 
-    $em->persist($extension);
-    $em->flush();
+    $this->getManager()->persist($extension);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $extension;
   }
 
-  /**
-   * @param $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function insertForwardRemixRelation($config)
+  public function insertForwardRemixRelation(array $config = [], bool $andFlush = true): ProgramRemixRelation
   {
-    /**
-     * @var Program
-     * @var Program $descendant
-     */
+    /** @var Program $ancestor */
     $ancestor = $this->getProgramManager()->find($config['ancestor_id']);
+
+    /** @var Program $descendant */
     $descendant = $this->getProgramManager()->find($config['descendant_id']);
+
     $forward_relation = new ProgramRemixRelation($ancestor, $descendant, (int) $config['depth']);
 
-    $em = $this->getManager();
-    $em->persist($forward_relation);
-    $em->flush();
+    $this->getManager()->persist($forward_relation);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $forward_relation;
   }
 
   /**
    * @param $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function insertBackwardRemixRelation($config)
+  public function insertBackwardRemixRelation(array $config = [], bool $andFlush = true): ProgramRemixBackwardRelation
   {
-    /**
-     * @var Program
-     * @var Program $child
-     */
+    /** @var Program $parent */
     $parent = $this->getProgramManager()->find($config['parent_id']);
-    $child = $this->getProgramManager()->find($config['child_id']);
-    $forward_relation = new ProgramRemixBackwardRelation($parent, $child);
 
-    $em = $this->getManager();
-    $em->persist($forward_relation);
-    $em->flush();
+    /** @var Program $child */
+    $child = $this->getProgramManager()->find($config['child_id']);
+
+    $backward_relation = new ProgramRemixBackwardRelation($parent, $child);
+
+    $this->getManager()->persist($backward_relation);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $backward_relation;
   }
 
   /**
    * @param $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function insertScratchRemixRelation($config)
+  public function insertScratchRemixRelation(array $config = [], bool $andFlush = true): ScratchProgramRemixRelation
   {
-    /**
-     * @var Program
-     */
+    /** @var Program $catrobat_child */
     $catrobat_child = $this->getProgramManager()->find($config['catrobat_child_id']);
+
     $scratch_relation = new ScratchProgramRemixRelation(
       $config['scratch_parent_id'],
       $catrobat_child
     );
 
-    $em = $this->getManager();
-    $em->persist($scratch_relation);
-    $em->flush();
+    $this->getManager()->persist($scratch_relation);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $scratch_relation;
   }
 
   /**
-   * @param $user
-   * @param $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   * @throws \Exception
-   *
-   * @return Program
+   * @throws Exception
    */
-  public function insertProgram($user, $config)
+  public function insertProject(array $config, bool $andFlush = true): Program
   {
-    /*
-     * @var $tag       Tag
-     * @var $extension Extension
-     */
-    if (null == $user)
+    return $this->getProjectDataFixtures()->insertProject($config, $andFlush);
+  }
+
+  public function insertFeaturedProject(array $config, bool $andFlush = true): FeaturedProgram
+  {
+    $featured_program = new FeaturedProgram();
+
+    /* @var Program $program */
+    if (isset($config['program_id']))
     {
-      $user = $this->getDefaultUser();
+      $program = $this->getProgramManager()->find($config['program_id']);
+      $featured_program->setProgram($program);
+    }
+    else
+    {
+      $program = $this->getProgramManager()->findOneByName($config['name']);
+      $featured_program->setProgram($program);
     }
 
-    $em = $this->getManager();
-    $program = new Program();
-    $program->setUser($user);
-    $program->setName($config['name'] ?: 'Generated program');
-    $program->setDescription(isset($config['description']) ? $config['description'] : 'Generated');
-    $program->setViews(isset($config['views']) ? $config['views'] : 1);
-    $program->setDownloads(isset($config['downloads']) ? $config['downloads'] : 1);
-    $program->setUploadedAt(isset($config['uploadtime']) ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : TimeUtils::getDateTime());
-    $program->setRemixMigratedAt(isset($config['remixmigratedtime']) ? new \DateTime($config['remixmigratedtime'], new \DateTimeZone('UTC')) : null);
-    $program->setCatrobatVersion(isset($config['catrobatversion']) ? $config['catrobatversion'] : 1);
-    $program->setCatrobatVersionName(isset($config['catrobatversionname']) ? $config['catrobatversionname'] : '0.9.1');
-    $program->setLanguageVersion(isset($config['language_version']) ? $config['language_version'] : 1);
-    $program->setUploadIp('127.0.0.1');
-    $program->setFilesize(isset($config['filesize']) ? $config['filesize'] : 0);
-    $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);
-    $program->setUploadLanguage('en');
-    $program->setApproved(isset($config['approved']) ? $config['approved'] : true);
-    $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
-    $program->setApkStatus(isset($config['apk_status']) ? $config['apk_status'] : Program::APK_NONE);
-    $program->setDirectoryHash(isset($config['directory_hash']) ? $config['directory_hash'] : null);
-    $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
-    $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
-    $program->setRemixRoot(isset($config['remix_root']) ? $config['remix_root'] : true);
-    $program->setDebugBuild(isset($config['debug']) ? $config['debug'] : false);
+    $featured_program->setUrl(isset($config['url']) ? $config['url'] : null);
+    $featured_program->setImageType(isset($config['imagetype']) ? $config['imagetype'] : 'jpg');
+    $featured_program->setActive(isset($config['active']) ? intval($config['active']) : true);
+    $featured_program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
+    $featured_program->setPriority(isset($config['priority']) ? intval($config['priority']) : 1);
+    $featured_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 
-    $em->persist($program);
-
-    // overwrite id if desired
-    if (array_key_exists('id', $config) && null !== $config['id'])
+    $this->getManager()->persist($featured_program);
+    if ($andFlush)
     {
-      $program->setId($config['id']);
-      $em->persist($program);
-      $em->flush();
-      $program_repo = $em->getRepository('App\Entity\Program');
-      $program = $program_repo->find($config['id']);
+      $this->getManager()->flush();
     }
 
-    if (isset($config['tags']) && null != $config['tags'])
-    {
-      $tags = explode(',', $config['tags']);
-      foreach ($tags as $tag_id)
-      {
-        $tag = $this->getTagRepository()->find($tag_id);
-        $program->addTag($tag);
-      }
-    }
-
-    if (isset($config['extensions']) && null != $config['extensions'])
-    {
-      $extensions = explode(',', $config['extensions']);
-      foreach ($extensions as $extension_name)
-      {
-        $extension = $this->getExtensionRepository()->findOneBy(['name' => $extension_name]);
-        $program->addExtension($extension);
-      }
-    }
-
-    $em->persist($program);
-
-    $user->addProgram($program);
-    $em->persist($user);
-
-    // FIXXME: why exactly do we have to do this?
-    if (isset($config['gamejam']))
-    {
-      /**
-       * @var GameJam
-       */
-      $jam = $config['gamejam'];
-      $jam->addProgram($program);
-      $em->persist($jam);
-    }
-
-    $em->flush();
-
-    return $program;
+    return $featured_program;
   }
 
   /**
-   * @param $program Program
-   * @param $config
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   * @throws \Exception
-   *
-   * @return ProgramDownloads
+   * @throws Exception
    */
-  public function insertProgramDownloadStatistics($program, $config)
+  public function insertUserComment(array $config, bool $andFlush = true): UserComment
   {
-    $em = $this->getManager();
-    /**
-     * @var ProgramDownloads
-     * @var Program;         $program
-     */
+    /** @var Program $project */
+    $project = $this->getProgramManager()->find($config['program_id']);
+
+    /** @var User $user */
+    $user = $this->getUserManager()->find($config['user_id']);
+
+    $new_comment = new UserComment();
+    $new_comment->setUploadDate(new DateTime($config['upload_date'], new DateTimeZone('UTC')));
+    $new_comment->setProgram($project);
+    $new_comment->setUser($user);
+    $new_comment->setUsername($config['user_name']);
+    $new_comment->setIsReported($config['reported']);
+    $new_comment->setText($config['text']);
+
+    $this->getManager()->persist($new_comment);
+
+    if (isset($comment['id']))
+    {
+      // overwrite id if desired
+      $new_comment->setId($config['id']);
+      $this->getManager()->persist($new_comment);
+    }
+
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $new_comment;
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function insertProjectReport(array $config, bool $andFlush = true): ProgramInappropriateReport
+  {
+    /** @var Program $project */
+    $project = $this->getProgramManager()->find($config['program_id']);
+
+    /** @var User $user */
+    $user = $this->getUserManager()->find($config['user_id']);
+
+    $new_report = new ProgramInappropriateReport();
+    $new_report->setCategory($config['category']);
+    $new_report->setProgram($project);
+    $new_report->setReportingUser($user);
+    $new_report->setTime(new DateTime($config['time'], new DateTimeZone('UTC')));
+    $new_report->setNote($config['note']);
+    $this->getManager()->persist($new_report);
+
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $new_report;
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function insertProgramDownloadStatistics(array $config, bool $andFlush = true): ProgramDownloads
+  {
+    /** @var Program $project */
+    $project = $this->getProgramManager()->find($config['program_id']);
+
     $program_statistics = new ProgramDownloads();
-    $program_statistics->setProgram($program);
-    $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: TimeUtils::getDateTime());
+    $program_statistics->setProgram($project);
+    $program_statistics->setDownloadedAt(new DateTime($config['downloaded_at']) ?: TimeUtils::getDateTime());
     $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
     $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
     $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
@@ -749,22 +617,44 @@ class SymfonySupport
     if (isset($config['username']))
     {
       $user_manager = $this->getUserManager();
-      $user = $user_manager->createUser();
-      $user->setUsername($config['username']);
-      $user->setEmail('dog@robat.at');
-      $user->setPassword('test');
-      $user_manager->updateUser($user);
+      $user = $user_manager->findUserByUsername($config['username']);
+      if (null === $user)
+      {
+        $this->insertUser(['name' => $config['username']], false);
+      }
       $program_statistics->setUser($user);
     }
 
-    $em->persist($program_statistics);
+    $this->getManager()->persist($program_statistics);
+    $project->addProgramDownloads($program_statistics);
+    $this->getManager()->persist($project);
 
-    $program->addProgramDownloads($program_statistics);
-    $em->persist($program);
-
-    $em->flush();
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
 
     return $program_statistics;
+  }
+
+  public function insertNotification(array $config, bool $andFlush = true): Notification
+  {
+    /** @var User $user */
+    $user = $this->getUserManager()->findUserByUsername($config['user']);
+
+    $notification = new Notification();
+    $notification->setUser($user);
+    $notification->setReport($config['report']);
+    $notification->setSummary($config['summary']);
+    $notification->setUpload($config['upload']);
+    $this->getManager()->persist($notification);
+
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $notification;
   }
 
   /**
@@ -780,11 +670,11 @@ class SymfonySupport
     $new_program_dir = sys_get_temp_dir().'/program_generated/';
     if ($is_embroidery)
     {
-      $filesystem->mirror($this->fixture_dir.'/GeneratedFixtures/embroidery', $new_program_dir);
+      $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/embroidery', $new_program_dir);
     }
     else
     {
-      $filesystem->mirror($this->fixture_dir.'/GeneratedFixtures/base', $new_program_dir);
+      $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/base', $new_program_dir);
     }
     $properties = simplexml_load_file($new_program_dir.'/code.xml');
 
@@ -829,146 +719,38 @@ class SymfonySupport
   }
 
   /**
-   * @param        $file
-   * @param        $user
-   * @param        $desired_id
-   * @param string $flavor
-   * @param null   $request_param
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return Response | null
+   * @return UploadedFile
    */
-  public function upload($file, $user, $desired_id, $flavor = 'pocketcode', $request_param = null)
+  public function getStandardProgramFile()
   {
-    if (null == $user)
-    {
-      $user = $this->getDefaultUser();
-    }
+    $filepath = $this->FIXTURES_DIR.'test.catrobat';
+    Assert::assertTrue(file_exists($filepath), 'File not found');
 
-    if (is_string($file))
-    {
-      try
-      {
-        $file = new UploadedFile($file, 'uploadedFile');
-      }
-      catch (\Exception $e)
-      {
-        throw new PendingException('No case defined for '.$e);
-      }
-    }
-
-    $parameters = [];
-    $parameters['username'] = $user->getUsername();
-    $parameters['token'] = $user->getUploadToken();
-    $parameters['fileChecksum'] = md5_file($file->getPathname());
-
-    if (null != $request_param['deviceLanguage'])
-    {
-      $parameters['deviceLanguage'] = $request_param['deviceLanguage'];
-    }
-
-    $client = $this->getClient();
-    $client->request('POST', '/'.$flavor.'/api/upload/upload.json', $parameters, [$file]);
-    $response = $client->getResponse();
-    $em = $this->getManager();
-    if ($desired_id)
-    {
-      /**
-       * @var Program
-       */
-      $matches = [];
-      preg_match('/"projectId":".*?"/', $response->getContent(), $matches);
-      $old_id = substr($matches[0], strlen('"projectId":"'), -1);
-      $new_program = $this->getProgramManager()->find($old_id);
-
-      $new_program->setId($desired_id);
-      $this->getManager()->persist($new_program);
-      $this->getManager()->flush();
-
-      foreach ($this->getProgramRemixForwardRepository()->findAll() as $entry)
-      {
-        /*
-         * @var ProgramRemixRelation
-         */
-        if ($entry->getDescendantId() == $old_id)
-        {
-          $entry->setDescendant($new_program);
-        }
-        if ($entry->getAncestorId() == $old_id)
-        {
-          $entry->setAncestor($new_program);
-        }
-      }
-
-      $em->persist($new_program);
-      $em->flush();
-
-      // rename project file
-      rename('./public/resources_test/projects/'.$old_id.'.catrobat',
-        './public/resources_test/projects/'.$desired_id.'.catrobat');
-
-      $content = json_decode($response->getContent(), true);
-      $content['projectId'] = $desired_id;
-      $client->getResponse()->setContent(json_encode($content));
-      $response = $client->getResponse();
-    }
-
-    return $response;
+    return new UploadedFile($filepath, 'test.catrobat');
   }
 
-  /**
-   * @param $file
-   * @param $user
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return Response
-   */
-  public function submit($file, $user)
+  public function assertJsonRegex($pattern, $json)
   {
-    if (null == $user)
-    {
-      $user = $this->getDefaultUser();
-    }
+    // allows to compare strings using a regex wildcard (.*?)
+    $pattern = json_encode(json_decode($pattern)); // reformat string
 
-    if (is_string($file))
-    {
-      $file = new UploadedFile($file, 'uploadedFile');
-    }
+    // escape chars that should not be used as regex
+    $pattern = str_replace('\\', '\\\\', $pattern);
+    $pattern = str_replace('[', '\\[', $pattern);
+    $pattern = str_replace(']', '\\]', $pattern);
+    $pattern = str_replace('?', '\\?', $pattern);
+    $pattern = str_replace('*', '\\*', $pattern);
+    $pattern = str_replace('(', '\\(', $pattern);
+    $pattern = str_replace(')', '\\)', $pattern);
+    $pattern = str_replace('+', '\\+', $pattern);
 
-    $parameters = [];
-    $parameters['username'] = $user->getUsername();
-    $parameters['token'] = $user->getUploadToken();
-    $parameters['fileChecksum'] = md5_file($file->getPathname());
-    $client = $this->getClient();
-    $client->request('POST', '/app/api/gamejam/submit.json', $parameters, [$file]);
+    // define regex wildcards
+    $pattern = str_replace('REGEX_STRING_WILDCARD', '(.+?)', $pattern);
+    $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
 
-    return $client->getResponse();
-  }
-
-  public function logOnError(AfterStepScope $scope)
-  {
-    if (null == $this->error_directory)
-    {
-      return;
-    }
-
-    if (!$scope->getTestResult()->isPassed() && null != $this->getClient())
-    {
-      $response = $this->getClient()->getResponse();
-      if (null != $response && '' != $response->getContent())
-      {
-        file_put_contents($this->error_directory.'errors.json', $response->getContent());
-      }
-    }
-  }
-
-  public function clearDefaultUser()
-  {
-    $this->default_user = null;
+    $delimter = '#';
+    $json = json_encode(json_decode($json));
+    Assert::assertRegExp($delimter.$pattern.$delimter, $json);
   }
 
   /**
@@ -976,11 +758,11 @@ class SymfonySupport
    *
    * @return bool|string
    */
-  protected function getTempCopy($path)
+  public function getTempCopy($path)
   {
-    $temppath = tempnam(sys_get_temp_dir(), 'apktest');
-    copy($path, $temppath);
+    $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
+    copy($path, $temp_path);
 
-    return $temppath;
+    return $temp_path;
   }
 }

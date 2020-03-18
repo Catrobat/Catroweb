@@ -7,6 +7,7 @@ use App\Catrobat\Listeners\GameJamTagListener;
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\GameJam;
 use App\Entity\Program;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Repository\GameJamRepository;
 use App\Utils\TimeUtils;
@@ -27,9 +28,11 @@ class GameSubmissionController extends AbstractController
   /**
    * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission", methods={"GET"})
    *
+   * @param mixed $id
+   *
    * @return JsonResponse
    */
-  public function formSubmittedAction(Request $request, Program $program)
+  public function formSubmittedAction(Request $request, $id, Program $program)
   {
     if (null != $program->getGamejam())
     {
@@ -87,26 +90,29 @@ class GameSubmissionController extends AbstractController
    *
    * @return ProgramListResponse
    */
-  public function getSubmissionsForLatestGamejam(Request $request, GameJamRepository $game_jam_repository)
+  public function getSubmissionsForLatestGamejam(Request $request,
+                                                 GameJamRepository $game_jam_repository,
+                                                 ProgramManager $program_manager)
   {
     $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));
 
     $flavor = $request->get('flavor');
 
-    $gamejam = $this->getGameJam($flavor, $game_jam_repository);
+    /** @var GameJam $game_jam */
+    $game_jam = $this->getGameJam($flavor, $game_jam_repository);
 
-    $criteria_count = Criteria::create()->where(Criteria::expr()->eq('gamejam_submission_accepted', true));
-    $criteria = Criteria::create()->where(Criteria::expr()->eq('gamejam_submission_accepted', true))
-      ->andWhere(Criteria::expr()->eq('visible', true))
-      ->orderBy(['gamejam_submission_date' => Criteria::DESC])
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
+    $accepted_game_jam_projects = $program_manager->findBy(
+      ['visible' => true, 'gamejam' => $game_jam->getId(), 'gamejam_submission_accepted' => true],
+      ['gamejam_submission_date' => Criteria::DESC],
+      $limit,
+      $offset
+    );
 
-    return new ProgramListResponse($gamejam->getPrograms()->matching($criteria), $gamejam->getPrograms()
-      ->matching($criteria_count)
-      ->count());
+    return new ProgramListResponse(
+      $accepted_game_jam_projects,
+      sizeof($accepted_game_jam_projects)
+    );
   }
 
   /**

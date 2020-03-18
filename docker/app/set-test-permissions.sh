@@ -8,6 +8,7 @@
 #
 mkdir -p var/log/test
 mkdir -p var/cache/test/sessions
+mkdir -p var/cache/test/profiler
 ## ~~
 
 # Symfony 4+ Permissions
@@ -26,10 +27,6 @@ chmod o+w public/resources_test/ -R
 
 # some test dirs must be writable
 chmod o+w tests -R
-
-# Make sure the sqlite db exists and has the right permissions
-touch tests/behat/sqlite/behattest.sqlite
-chmod o+w+x tests/behat/sqlite/ -R
 
 # Jwt tokens need ssh keys with full access
 mkdir -p config/jwt

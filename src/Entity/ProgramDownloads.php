@@ -89,7 +89,7 @@ class ProgramDownloads
   protected $referrer;
 
   /**
-   * @return mixed
+   * @return Program
    */
   public function getProgram()
   {
@@ -97,7 +97,7 @@ class ProgramDownloads
   }
 
   /**
-   * @param mixed $program
+   * @param Program $program
    */
   public function setProgram($program)
   {

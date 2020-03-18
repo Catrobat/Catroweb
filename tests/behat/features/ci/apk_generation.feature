@@ -2,7 +2,6 @@ Feature:
 
   Background:
     Given the server name is "pocketcode.org"
-    And I use a secure connection
     And the token to upload an apk file is "UPLOADTOKEN"
 
   Scenario: Transmit data needed to build the apk to jenkins
@@ -46,7 +45,7 @@ Feature:
     Then the program apk status will still be flagged "ready"
 
   Scenario: reset apk status after an update
-    Given I have a program "My little program2" with id "1"
+    Given I have a program "My little program" with id "1"
     And the program apk status is flagged "ready"
     When I update this program
     Then the program apk status will still be flagged "none"
