@@ -22,6 +22,7 @@ jobs:
         testSuite:
           - admin
           - api-authentication
+          - api-mediapackage
           - deprecated_api_general
           - deprecated_api_profile
           - deprecated_api_project

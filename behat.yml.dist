@@ -64,6 +64,12 @@ default:
                 - DataFixturesContext
                 - RequestResponseContext
 
+        api-mediapackage:
+                    paths:    [ "tests/behat/features/api/mediapackage" ]
+                    contexts:
+                        - MediaPackageContext
+                        - RequestResponseContext
+
         deprecated_api_general:
             paths:    [ "tests/behat/features/api/deprecated/general" ]
             contexts:
