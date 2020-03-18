@@ -956,7 +956,7 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $program->setFilesize(0);
       $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
       $program->setUploadLanguage('en');
-      $program->setApproved(false);
+      $program->setApproved(isset($programs[$i]['approved']) ? 'true' === $programs[$i]['approved'] : false);
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
       $program->setPrivate(isset($programs[$i]['private']) ? $programs[$i]['private'] : 0);
       $program->setDebugBuild(isset($programs[$i]['debug']) ? $programs[$i]['debug'] == 'true' : false);

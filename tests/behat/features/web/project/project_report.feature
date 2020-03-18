@@ -7,10 +7,12 @@ Feature: As a project owner, I should be able to give credits for my project.
       | 1  | Catrobat  |
       | 2  | OtherUser |
     And there are projects:
-      | id | name      | owned by  |
-      | 1  | project 1 | Catrobat  |
-      | 2  | project 2 | OtherUser |
-      | 3  | project 3 | Catrobat  |
+      | id | name      | owned by  | approved |
+      | 1  | project 1 | Catrobat  |  false   |
+      | 2  | project 2 | OtherUser |  false   |
+      | 3  | project 3 | Catrobat  |  false   |
+      | 4  | project 4 | Catrobat  |  true    |
+
     And following projects are featured:
       | id | project   | url | active | priority |
       | 1  | project 1 |     | yes    | 1        |
@@ -167,4 +169,24 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I wait for the page to be loaded
     Then I should be on "/app/"
     When I go to "/app/project/1"
+    And I wait for the page to be loaded
     Then I should see "project 1"
+
+  Scenario: Clicking on a approved project should still show its page
+    Given I log in as "OtherUser"
+    And I am on "/app/project/4"
+    And I wait for the page to be loaded
+    When I click "#report-program-button"
+    And I wait for AJAX to finish
+    Then I should see "Why do you want to report this project?"
+    And I click the "#report-spam" RadioButton
+    And I fill in "report-reason" with "That's just spam!!!"
+    And I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    Then I should see "Your report was successfully sent!"
+    When I click ".swal2-confirm"
+    And I wait for the page to be loaded
+    Then I should be on "/app/"
+    When I go to "/app/project/4"
+    And I wait for the page to be loaded
+    Then I should see "project 4"

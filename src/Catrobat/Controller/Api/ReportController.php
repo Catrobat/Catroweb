@@ -56,6 +56,16 @@ class ReportController extends AbstractController
     }
 
     $report = new ProgramInappropriateReport();
+    $approved_project = $program->getApproved();
+    $featured_project = $program_manager->getFeaturedRepository()->isFeatured($program);
+    if ($approved_project || $featured_project)
+    {
+      $response = [];
+      $response['answer'] = $translator->trans('success.report', [], 'catroweb');
+      $response['statusCode'] = StatusCode::OK;
+
+      return JsonResponse::create($response);
+    }
 
     if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
     {
