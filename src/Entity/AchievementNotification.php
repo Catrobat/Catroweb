@@ -12,13 +12,13 @@ class AchievementNotification extends CatroNotification
   /**
    * @ORM\Column(name="image_path", type="text")
    */
-  private $image_path;
+  private string $image_path;
 
   /*
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = 'Notifications/NotificationTypes/achievement_notification.html.twig';
+  private string $twig_template = 'Notifications/NotificationTypes/achievement_notification.html.twig';
 
   /**
    * AchievementNotification constructor.

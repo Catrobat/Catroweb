@@ -15,6 +15,10 @@ use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -131,13 +135,11 @@ class ImportLegacyCommand extends Command
   }
 
   /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): void
   {
     $this->output = $output;
     $this->filesystem = new Filesystem();
@@ -151,10 +153,22 @@ class ImportLegacyCommand extends Command
     $this->writeln('Using Temp directory '.$this->importdir);
 
     $temp_dir = $this->importdir;
-    CommandHelper::executeShellCommand("tar xfz {$backup_file} --directory {$temp_dir}", ['timeout' => 3600], 'Extracting backupfile', $output);
-    CommandHelper::executeShellCommand("tar xf {$temp_dir}/".self::SQL_CONTAINER_FILE." --directory {$temp_dir}", ['timeout' => 3600], 'Extracting SQL files', $output);
-    CommandHelper::executeShellCommand("tar xfz {$temp_dir}/".self::SQL_WEB_CONTAINER_FILE." --directory {$temp_dir}", ['timeout' => 3600], 'Extracting Catroweb SQL files', $output);
-    CommandHelper::executeShellCommand("tar xf {$temp_dir}/".self::RESOURCE_CONTAINER_FILE." --directory {$temp_dir}", ['timeout' => 3600], 'Extracting resource files', $output);
+    CommandHelper::executeShellCommand(
+      ['tar', 'xfz', $backup_file, '--directory', $temp_dir], ['timeout' => 3600],
+      'Extracting backupfile', $output
+    );
+    CommandHelper::executeShellCommand(
+      ['tar', 'xf', $temp_dir.'/'.self::SQL_CONTAINER_FILE, '--directory', $temp_dir], ['timeout' => 3600],
+      'Extracting SQL files', $output
+  );
+    CommandHelper::executeShellCommand(
+      ['tar', 'xf', $temp_dir.'/'.self::SQL_WEB_CONTAINER_FILE, '--directory', $temp_dir], ['timeout' => 3600],
+      'Extracting Catroweb SQL files', $output
+  );
+    CommandHelper::executeShellCommand(
+      ['tar', 'xf', $temp_dir.'/'.self::RESOURCE_CONTAINER_FILE, '--directory', $temp_dir], ['timeout' => 3600],
+      'Extracting resource files', $output
+  );
 
     $this->importUsers($this->importdir.'/'.self::TSV_USERS_FILE);
     $this->importPrograms($this->importdir.'/'.self::TSV_PROGRAMS_FILE);
@@ -169,11 +183,13 @@ class ImportLegacyCommand extends Command
         $num = count($data);
         if ($num > 2)
         {
-          $program = new FeaturedProgram();
-          $program->setProgram($this->program_manager->find($data[1]));
-          $program->setActive('t' === $data[3]);
-          $program->setNewFeaturedImage(new File($this->importdir.'/resources/featured/'.$data[1].'.jpg'));
-          $this->em->persist($program);
+          $featured_program = new FeaturedProgram();
+          /** @var Program $project */
+          $project = $this->program_manager->find($data[1]);
+          $featured_program->setProgram($project);
+          $featured_program->setActive('t' === $data[3]);
+          $featured_program->setNewFeaturedImage(new File($this->importdir.'/resources/featured/'.$data[1].'.jpg'));
+          $this->em->persist($featured_program);
         }
         else
         {
@@ -203,8 +219,8 @@ class ImportLegacyCommand extends Command
     $progress->setFormat(' %current%/%max% [%bar%] %message%');
     $progress->start();
 
-    $metadata = $this->em->getClassMetaData('App\\Entity\\Program');
-    $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+    $metadata = $this->em->getClassMetaData(Program::class);
+    $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     if (false !== ($handle = fopen($program_file, 'r')))
     {
@@ -281,8 +297,8 @@ class ImportLegacyCommand extends Command
   /**
    * @param $program_file
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   protected function importProgramFiles($program_file)
   {
@@ -294,7 +310,7 @@ class ImportLegacyCommand extends Command
     $progress->start();
 
     $metadata = $this->em->getClassMetaData('App\\Entity\\Program');
-    $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+    $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     if (false !== ($handle = fopen($program_file, 'r')))
     {
@@ -352,7 +368,7 @@ class ImportLegacyCommand extends Command
     $progress->start();
 
     $metadata = $this->em->getClassMetaData('App\\Entity\\User');
-    $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+    $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     if (false !== ($handle = fopen($user_file, 'r')))
     {

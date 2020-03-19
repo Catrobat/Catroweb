@@ -40,20 +40,11 @@ class CatrowebBrowserContext extends BrowserContext
 
   const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
-  /**
-   * @var bool
-   */
-  private $use_real_oauth_javascript_code = false;
+  private bool $use_real_oauth_javascript_code = false;
 
-  /**
-   * @var GameJam ToDo GameJam Data fixtures
-   */
-  private $game_jam;
+  private GameJam $game_jam;
 
-  /**
-   * @var Program ToDo move to Project Data fixtures if needed
-   */
-  private $my_program;
+  private Program $my_program;
 
   // -------------------------------------------------------------------------------------------------------------------
   //  Initialization

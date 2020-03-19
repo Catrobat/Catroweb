@@ -168,7 +168,7 @@ Feature: Logged in user projects
   Scenario: Get logged in user projects with maxVersion = 0.984
     Given I use a valid JWT Bearer token for "User1"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/user/?maxVersion=0.984"
+    And I request "GET" "/api/projects/user/?max_version=0.984"
     Then the response status code should be "200"
     Then I should get the json object:
       """

@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,15 +16,9 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  */
 class CreateBackupCommand extends Command
 {
-  /**
-   * @var
-   */
-  public $output;
+  public OutputInterface $output;
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
   /**
    * CreateBackupCommand constructor.
@@ -43,11 +38,9 @@ class CreateBackupCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): void
   {
     $this->output = $output;
 
@@ -66,7 +59,7 @@ class CreateBackupCommand extends Command
       $progress->setMessage('Error: This script only supports mysql databases');
       $progress->finish();
 
-      throw new \Exception('This script only supports mysql databases');
+      throw new Exception('This script only supports mysql databases');
     }
     $progress->advance();
 
@@ -88,8 +81,8 @@ class CreateBackupCommand extends Command
     $progress->setMessage('Saving SQL file');
 
     CommandHelper::executeShellCommand(
-      "mysqldump -u {$database_user} -p{$database_password} {$database_name} > {$sql_path}",
-      ['timeout' => 14400]
+      ['mysqldump', '--user='.$database_user, '--password='.$database_password, $database_name,
+        '--result-file='.$sql_path, ], ['timeout' => 14400]
     );
 
     $progress->advance();
@@ -105,13 +98,19 @@ class CreateBackupCommand extends Command
     $progress->advance();
     $progress->setMessage('Compression started');
 
-    CommandHelper::executeShellCommand('tar --exclude=.gitignore --mode=0777 --transform "s|public/resources||" --transform "s|'.substr($sql_path, 1)."|database.sql|\" -cv 
-      {$sql_path} {$thumbnail_dir} {$screenshot_dir} {$featuredimage_dir} {$programs_dir} {$mediapackage_dir} {$template_dir} | pigz > {$zip_path}",
+    CommandHelper::executeShellCommand(
+      [
+        'tar', 'cvf', $zip_path, '--absolute-names', '--exclude=.gitignore', '--mode=0777',
+        '--transform', 's|public/resources||',
+        '--transform', 's|'.substr($sql_path, 1).'|database.sql|',
+        '-cv', $sql_path,
+        $thumbnail_dir, $screenshot_dir, $featuredimage_dir, $programs_dir, $mediapackage_dir, $template_dir,
+      ],
       ['timeout' => 14400]);
     $progress->advance();
     $progress->setMessage('Compression finished. Setting permissions.');
 
-    CommandHelper::executeShellCommand('chmod 777 '.$zip_path, []);
+    CommandHelper::executeShellCommand(['chmod', '777', $zip_path], []);
     $progress->advance();
     $progress->setMessage('Permissions set.');
 
