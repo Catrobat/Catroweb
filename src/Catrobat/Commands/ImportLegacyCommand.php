@@ -157,13 +157,11 @@ class ImportLegacyCommand extends Command
         $num = count($data);
         if ($num > 2)
         {
-          $featured_program = new FeaturedProgram();
-          /** @var Program $project */
-          $project = $this->program_manager->find($data[1]);
-          $featured_program->setProgram($project);
-          $featured_program->setActive('t' === $data[3]);
-          $featured_program->setNewFeaturedImage(new File($this->importdir.'/resources/featured/'.$data[1].'.jpg'));
-          $this->em->persist($featured_program);
+          $program = new FeaturedProgram();
+          $program->setProgram($this->program_manager->find($data[1]));
+          $program->setActive('t' === $data[3]);
+          $program->setNewFeaturedImage(new File($this->importdir.'/resources/featured/'.$data[1].'.jpg'));
+          $this->em->persist($program);
         }
         else
         {
