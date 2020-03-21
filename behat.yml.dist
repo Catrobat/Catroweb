@@ -77,6 +77,13 @@ default:
                 - DataFixturesContext
                 - ApiContext
 
+        api-projects:
+            paths:    [ "tests/behat/features/api/projects" ]
+            contexts:
+                - RefreshEnvironmentContext
+                - DataFixturesContext
+                - ApiContext
+
         deprecated-api-general:
             paths:    [ "tests/behat/features/api/deprecated/general" ]
             contexts:

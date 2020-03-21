@@ -755,6 +755,44 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   /**
+   * @param        $username
+   * @param int    $limit
+   * @param int    $offset
+   * @param string $flavor
+   * @param bool   $debug_build If debug builds should be included
+   * @param string $max_version
+   *
+   * @return Program[]
+   */
+  public function getAuthUserPrograms($username, $limit, $offset, $flavor, $debug_build, $max_version)
+  {
+    if (!$username)
+    {
+      return [];
+    }
+
+    $query_builder = $this->createQueryBuilder('e');
+
+    $query_builder
+      ->select('e')
+      ->leftJoin('e.user', 'f')
+      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('f.username', ':username'))
+      ->setParameter('username', $username)
+      ->orderBy('e.uploaded_at', 'DESC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+    ;
+
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
+    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
+
+    return $query_builder->getQuery()->getResult();
+  }
+
+  /**
    * @param      $user_id
    * @param bool $debug_build If debug builds should be included
    *

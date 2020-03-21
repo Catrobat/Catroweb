@@ -23,6 +23,7 @@ jobs:
           - admin
           - api-authentication
           - api-media-package
+          - api-projects
           - deprecated-api-general
           - deprecated-api-profile
           - deprecated-api-project
