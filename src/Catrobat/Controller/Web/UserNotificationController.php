@@ -4,67 +4,42 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\StatisticsService;
-use App\Catrobat\Services\TestEnv\FakeStatisticsService;
 use App\Catrobat\StatusCode;
 use App\Entity\CatroNotification;
 use App\Entity\CommentNotification;
 use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\NewProgramNotification;
-use App\Entity\Notification;
 use App\Entity\RemixManager;
 use App\Entity\RemixNotification;
 use App\Entity\User;
 use App\Repository\CatroNotificationRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class UserNotificationController.
- */
 class UserNotificationController extends AbstractController
 {
-  /**
-   * @var StatisticsService | FakeStatisticsService
-   */
-  private $statistics;
+  private StatisticsService $statistics;
 
-  /**
-   * UserNotificationController constructor.
-   */
-  public function __construct(ParameterBagInterface $parameter_bag,
-                              StatisticsService $statistics_service)
+  public function __construct(StatisticsService $statistics_service)
   {
     $this->statistics = $statistics_service;
   }
 
   /**
    * @Route("/notifications/{notification_type}", name="user_notifications", methods={"GET"})
-   *
-   * @param $notification_type
-   *
-   * @return RedirectResponse|Response
    */
-  public function userNotificationsAction($notification_type,
-                                          CatroNotificationRepository $notification_repo)
+  public function userNotificationsAction(string $notification_type,
+                                          CatroNotificationRepository $notification_repo): Response
   {
-    /**
-     * @var CatroNotification
-     * @var User                       $user
-     * @var EntityManager              $em
-     * @var ElapsedTimeStringFormatter $elapsed_time
-     * @var
-     * $remix_data*/
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -109,16 +84,13 @@ class UserNotificationController extends AbstractController
         $found_notification = true;
         $user = $notification->getFollower();
       }
-      else
+      elseif ($notification instanceof RemixNotification)
       {
-        if ($notification instanceof RemixNotification)
+        if ('remix' === $notification_type)
         {
-          if ('remix' === $notification_type)
-          {
-            $found_notification = true;
-          }
-          $user = $notification->getRemixFrom();
+          $found_notification = true;
         }
+        $user = $notification->getRemixFrom();
       }
       if (null !== $user)
       {
@@ -128,11 +100,11 @@ class UserNotificationController extends AbstractController
           $avatars[$notification->getId()] = $avatar;
         }
       }
-      if ($notification->getSeen() && true === $found_notification)
+      if ($notification->getSeen() && $found_notification)
       {
         $old_notifications[$notification->getId()] = $notification;
       }
-      elseif (!$notification->getSeen() && true === $found_notification)
+      elseif (!$notification->getSeen() && $found_notification)
       {
         $new_notifications[$notification->getId()] = $notification;
       }
@@ -152,11 +124,9 @@ class UserNotificationController extends AbstractController
 
   /**
    * @Route("/notifications/notifications/count", name="user_notifications_count", methods={"GET"})
-   *
-   * @return JsonResponse
    */
   public function userNotificationsCountAction(CatroNotificationRepository $notification_repo,
-                                               RemixManager $remix_manager)
+                                               RemixManager $remix_manager): JsonResponse
   {
     /** @var User $user */
     $user = $this->getUser();
@@ -213,19 +183,15 @@ class UserNotificationController extends AbstractController
   }
 
   /**
-   * @Route("/notifications/{notification_type}/seen", name="user_notifications_seen",
-   * methods={"GET"})
-   *
-   * @param $notification_type
+   * @Route("/notifications/{notification_type}/seen", name="user_notifications_seen", methods={"GET"})
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   *
-   * @return JsonResponse
    */
-  public function userNotificationsSeenAction($notification_type,
-                                              CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
-                                              RemixManager $remix_manager)
+  public function userNotificationsSeenAction(string $notification_type,
+                                              CatroNotificationRepository $notification_repo,
+                                              CatroNotificationService $notification_service,
+                                              RemixManager $remix_manager): JsonResponse
   {
     /** @var User $user */
     $user = $this->getUser();
@@ -255,19 +221,14 @@ class UserNotificationController extends AbstractController
   }
 
   /**
-   * @Route("/notifications/{notification_type}/deleteAll", name="delete_all_notifications",
-   * methods={"GET"})
-   *
-   * @param $notification_type
+   * @Route("/notifications/{notification_type}/deleteAll", name="delete_all_notifications", methods={"GET"})
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   *
-   * @return JsonResponse
    */
-  public function userNotificationsDeleteAllAction($notification_type,
+  public function userNotificationsDeleteAllAction(string $notification_type,
                                                    CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
-                                                   RemixManager $remix_manager)
+                                                   RemixManager $remix_manager): JsonResponse
   {
     /** @var User $user */
     $user = $this->getUser();
@@ -305,14 +266,12 @@ class UserNotificationController extends AbstractController
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   *
-   * @return RedirectResponse
    */
   public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id,
-                                            RemixManager $remix_manager)
+                                            RemixManager $remix_manager): RedirectResponse
   {
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
@@ -345,19 +304,13 @@ class UserNotificationController extends AbstractController
   /**
    * @Route("/notifications/markasread/{notification_id}", name="catro_notification_mark_as_read",
    * requirements={"notification_id": "\d+"}, defaults={"notification_id": null}, methods={"GET"})
-   *
-   * @param $notification_id
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return JsonResponse
    */
-  public function markCatroNotificationAsRead($notification_id,
-                                              CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
+  public function markCatroNotificationAsRead(int $notification_id,
+                                              CatroNotificationService $notification_service,
+                                              CatroNotificationRepository $notification_repo): JsonResponse
   {
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return JsonResponse::create(['success' => false, 'message' => 'User not logged in']);
     }
@@ -375,19 +328,13 @@ class UserNotificationController extends AbstractController
   /**
    * @Route("/notifications/deleteNotification/{notification_id}", name="delete_notification",
    * requirements={"notification_id": "\d+"}, defaults={"notification_id": null}, methods={"GET"})
-   *
-   * @param $notification_id
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return JsonResponse
    */
-  public function userNotificationDeleteAction($notification_id,
-                                               CatroNotificationService $notification_service, CatroNotificationRepository $notification_repo)
+  public function userNotificationDeleteAction(int $notification_id,
+                                               CatroNotificationService $notification_service,
+                                               CatroNotificationRepository $notification_repo): JsonResponse
   {
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }

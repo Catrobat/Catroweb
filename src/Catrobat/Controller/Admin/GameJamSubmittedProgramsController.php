@@ -7,19 +7,11 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * Class GameJamSubmittedProgramsController.
- */
 class GameJamSubmittedProgramsController extends CRUDController
 {
-  /**
-   * @return RedirectResponse
-   */
-  public function removeFromGameJamAction()
+  public function removeFromGameJamAction(): RedirectResponse
   {
-    /**
-     * @var Program
-     */
+    /** @var Program $object */
     $object = $this->admin->getSubject();
 
     if (!$object)

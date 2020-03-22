@@ -2,26 +2,24 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class TaggingController.
- */
 class TaggingController extends AbstractController
 {
   /**
-   * @Route("/api/tags/getTags.json", name="api_get_tags", defaults={"_format": "json"}, methods={"GET"})
+   * @deprecated
    *
-   * @return JsonResponse
+   * @Route("/api/tags/getTags.json", name="api_get_tags", defaults={"_format": "json"}, methods={"GET"})
    */
-  public function taggingAction(Request $request, TagRepository $tags_repo)
+  public function taggingAction(Request $request, TagRepository $tags_repo): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
-    $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
+    $metadata = $em->getClassMetadata(Tag::class)->getFieldNames();
 
     $tags = [];
     $tags['statusCode'] = 200;
@@ -37,7 +35,7 @@ class TaggingController extends AbstractController
 
     foreach ($results as $tag)
     {
-      array_push($tags['constantTags'], $tag[$language]);
+      $tags['constantTags'][] = $tag[$language];
     }
 
     return JsonResponse::create($tags);

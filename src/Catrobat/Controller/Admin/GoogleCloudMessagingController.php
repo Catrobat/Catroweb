@@ -2,39 +2,33 @@
 
 namespace App\Catrobat\Controller\Admin;
 
+use Nette\Utils\Json;
+use Nette\Utils\JsonException;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class GoogleCloudMessagingController.
- */
 class GoogleCloudMessagingController extends CRUDController
 {
-  /**
-   * @return Response
-   */
-  public function listAction(Request $request = null)
+  public function listAction(Request $request = null): Response
   {
     return $this->renderWithExtraParams('Admin/gcm.html.twig');
   }
 
   /**
-   * @return Response
+   * @throws JsonException
    */
-  public function sendAction(Request $request = null)
+  public function sendAction(): Response
   {
     if (!isset($_GET['a']) || !isset($_GET['m']))
     {
       return new Response('Error: Invalid parameters');
     }
-
     $apikey = htmlentities($_GET['a']);
     $message = htmlentities($_GET['m']);
-
     $url = 'https://gcm-http.googleapis.com/gcm/send';
-    $data = '{"to" : "/topics/catroweb", "data" : {"message" : "'.$message.'"}}';
-
+    $jsonData = ['to' => '/topics/catroweb', 'data' => ['message' => $message]];
+    $data = Json::encode($jsonData);
     $options = [
       'http' => [
         'header' => "Content-type: application/json\r\nAuthorization:key=".$apikey."\r\n",
@@ -42,15 +36,12 @@ class GoogleCloudMessagingController extends CRUDController
         'content' => $data,
       ],
     ];
-
     $context = stream_context_create($options);
     $result = @file_get_contents($url, false, $context);
-
-    if (false === $result)
+    if (!$result)
     {
       return new Response('Error: Invalid response or API key');
     }
-
     if (strpos($result, '"message_id":') > 0)
     {
       return new Response('OK');

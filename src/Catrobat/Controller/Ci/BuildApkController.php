@@ -9,17 +9,14 @@ use App\Entity\ProgramManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class BuildApkController.
- */
 class BuildApkController extends AbstractController
 {
   /**
@@ -27,10 +24,9 @@ class BuildApkController extends AbstractController
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function createApkAction(Program $program, JenkinsDispatcher $dispatcher, ProgramManager $program_manager)
+  public function createApkAction(Program $program, JenkinsDispatcher $dispatcher, ProgramManager $program_manager): JsonResponse
   {
     if (!$program->isVisible())
     {
@@ -50,6 +46,7 @@ class BuildApkController extends AbstractController
 
     $program->setApkStatus(Program::APK_PENDING);
     $program->setApkRequestTime(TimeUtils::getDateTime());
+
     $program_manager->save($program);
 
     return JsonResponse::create(['status' => 'pending']);
@@ -60,15 +57,10 @@ class BuildApkController extends AbstractController
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   *
-   * @return JsonResponse
    */
   public function uploadApkAction(Request $request, Program $program,
-                                  ApkRepository $apk_repository, ProgramManager $program_manager)
+                                  ApkRepository $apk_repository, ProgramManager $program_manager): JsonResponse
   {
-    /**
-     * @var File
-     */
     $config = $this->getParameter('jenkins');
     if ($request->query->get('token') !== $config['uploadtoken'])
     {
@@ -92,10 +84,8 @@ class BuildApkController extends AbstractController
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   *
-   * @return JsonResponse
    */
-  public function failedApkAction(Request $request, Program $program, ProgramManager $program_manager)
+  public function failedApkAction(Request $request, Program $program, ProgramManager $program_manager): JsonResponse
   {
     $config = $this->getParameter('jenkins');
     if ($request->query->get('token') !== $config['uploadtoken'])

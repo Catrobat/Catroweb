@@ -2,37 +2,17 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-/**
- * Class LogLine.
- */
 class LogLine
 {
-  /**
-   * @var string
-   */
-  public $date = '';
+  public string $date = '';
 
-  /**
-   * @var string
-   */
-  public $debug_code = '';
+  public string $debug_code = '';
 
-  /**
-   * @var int
-   */
-  public $debug_level = 0;
+  public int $debug_level = 0;
 
-  /**
-   * @var string
-   */
-  public $msg = '';
+  public string $msg = '';
 
-  /**
-   * LogLine constructor.
-   *
-   * @param null $line
-   */
-  public function __construct($line = null)
+  public function __construct(string $line = null)
   {
     if (null === $line)
     {
@@ -51,16 +31,9 @@ class LogLine
     }
   }
 
-  /**
-   * @param      $string
-   * @param      $needle
-   * @param bool $last_char
-   *
-   * @return bool|string
-   */
-  private function getSubstring($string, $needle, $last_char = false)
+  private function getSubstring(string $string, string $needle, bool $last_char = false): string
   {
-    $pos = strpos($string, $needle);
+    $pos = strpos($string, (string) $needle);
 
     if (false === $pos)
     {
@@ -68,18 +41,13 @@ class LogLine
     }
     if ($last_char)
     {
-      $pos = $pos + 1;
+      ++$pos;
     }
 
     return substr($string, 0, $pos);
   }
 
-  /**
-   * @param $string
-   *
-   * @return int
-   */
-  private function getDebugLevel($string)
+  private function getDebugLevel(string $string): int
   {
     $pos = strpos($string, '.');
     $extracted_string = substr($string, $pos + 1);

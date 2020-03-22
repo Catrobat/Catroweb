@@ -6,32 +6,25 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\StatusCode;
 use App\Entity\CommentNotification;
 use App\Entity\Program;
-use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserComment;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class CommentsController.
- */
 class CommentsController extends AbstractController
 {
   /**
    * @Route("/reportComment", name="report", methods={"GET"})
    *
-   * @throws \Exception
-   *
-   * @return Response
+   * @throws Exception
    */
-  public function reportCommentAction()
+  public function reportCommentAction(): Response
   {
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
@@ -39,7 +32,7 @@ class CommentsController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if (!$comment)
+    if (null === $comment)
     {
       throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
@@ -53,16 +46,11 @@ class CommentsController extends AbstractController
   /**
    * @Route("/deleteComment", name="delete", methods={"GET"})
    *
-   * @throws \Exception
-   *
-   * @return Response
+   * @throws Exception
    */
-  public function deleteCommentAction()
+  public function deleteCommentAction(): Response
   {
-    /**
-     * @var UserComment
-     * @var User        $user
-     */
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -77,7 +65,7 @@ class CommentsController extends AbstractController
       return new Response(StatusCode::NO_ADMIN_RIGHTS);
     }
 
-    if (!$comment)
+    if (null === $comment)
     {
       throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
@@ -89,28 +77,19 @@ class CommentsController extends AbstractController
 
   /**
    * @Route("/comment", name="comment", methods={"POST"})
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return Response
    */
-  public function postCommentAction(CatroNotificationService $notification_service, ProgramManager $program_manager)
+  public function postCommentAction(CatroNotificationService $notification_service, ProgramManager $program_manager): Response
   {
-    /**
-     * @var User
-     * @var Program                    $program
-     * @var ProgramInappropriateReport $reported_program
-     * @var ProgramManager             $program_manager
-     */
+    /** @var User $user */
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
     $user = $this->get('security.token_storage')->getToken()->getUser();
 
+    /** @var Program $program */
     $program = $program_manager->find($_POST['ProgramId']);
 
     $temp_comment = new UserComment();

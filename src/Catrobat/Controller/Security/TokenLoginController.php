@@ -11,17 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-/**
- * Class TokenLoginController.
- */
 class TokenLoginController extends AbstractController
 {
   /**
    * @Route("/tokenlogin", name="token_login", methods={"GET"})
-   *
-   * @return RedirectResponse
    */
-  public function tokenloginAction(Request $request, UserManager $user_manager)
+  public function tokenLoginAction(Request $request, UserManager $user_manager): RedirectResponse
   {
     /**
      * @var User

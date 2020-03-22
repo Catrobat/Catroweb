@@ -6,181 +6,167 @@ use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\ProgramManager;
 use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class ListProgramsController.
- */
 class ListProgramsController extends AbstractController
 {
-  /**
-   * @var ProgramManager
-   */
-  private $program_manager;
+  private ProgramManager $program_manager;
 
-  /**
-   * ListProgramsController constructor.
-   */
   public function __construct(ProgramManager $program_manager)
   {
     $this->program_manager = $program_manager;
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listProgramsAction(Request $request)
+  public function listProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'recent');
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listProgramIdsAction(Request $request)
+  public function listProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'recent', false);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listMostDownloadedProgramsAction(Request $request)
+  public function listMostDownloadedProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'downloads');
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listMostDownloadedProgramIdsAction(Request $request)
+  public function listMostDownloadedProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'downloads', false);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listMostViewedProgramsAction(Request $request)
+  public function listMostViewedProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'views');
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listMostViewedProgramIdsAction(Request $request)
+  public function listMostViewedProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'views', false);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/scratchRemixes.json", name="api_scratch_remix",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listScratchRemixProjectsAction(Request $request)
+  public function listScratchRemixProjectsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'scratchRemix');
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/randomProjects.json", name="api_random_programs",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listRandomProgramsAction(Request $request)
+  public function listRandomProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'random');
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/randomProjectIDs.json", name="api_random_programids",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listRandomProgramIdsAction(Request $request)
+  public function listRandomProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'random', false);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/userProjects.json", name="api_user_programs",
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  public function listUserProgramsAction(Request $request)
+  public function listUserProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'user');
   }
 
   /**
-   * @param      $sortBy
-   * @param bool $details
-   * @param bool $useRequestFlavor
-   * @param      $flavor
-   *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return ProgramListResponse
+   * @throws NoResultException
    */
-  private function listSortedPrograms(Request $request, $sortBy, $details = true, $useRequestFlavor = true)
+  private function listSortedPrograms(Request $request, string $sortBy, bool $details = true,
+                                      bool $useRequestFlavor = true): ProgramListResponse
   {
     $flavor = null;
-    if (true === $useRequestFlavor)
+    if ($useRequestFlavor)
     {
       $flavor = $request->get('flavor');
     }
@@ -188,8 +174,8 @@ class ListProgramsController extends AbstractController
     /**
      * @var GuidType
      */
-    $limit = intval($request->get('limit', 20));
-    $offset = intval($request->get('offset', 0));
+    $limit = (int) $request->get('limit', 20);
+    $offset = (int) $request->get('offset', 0);
     $user_id = $request->get('user_id', 0);
     $max_version = $request->query->get('max_version', '0');
 
@@ -260,21 +246,16 @@ class ListProgramsController extends AbstractController
   }
 
   /**
-   * @param $projects
-   * @param $flavor
-   * @param $limit
-   * @param $offset
-   * @param $max_version
-   *
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
-   *
-   * @return array
+   * @throws NoResultException
    */
-  private function fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors($projects, callable $getMoreProjects,
-                                                                              $flavor, $limit, $offset, $max_version)
+  private function fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(array $projects,
+                                                                              callable $getMoreProjects,
+                                                                              string $flavor,
+                                                                              int $limit, int $offset,
+                                                                              string $max_version): array
   {
-    $number_of_projects = count($projects);
+    $number_of_projects = is_countable($projects) ? count($projects) : 0;
 
     if ($number_of_projects >= $limit || !$flavor)
     {

@@ -24,7 +24,6 @@ use App\Utils\TimeUtils;
 use DateTime;
 use DateTimeZone;
 use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -566,12 +565,11 @@ class ProgramManager
   }
 
   /**
-   * @param GuidType $user_id
-   * @param bool     $include_debug_build_programs If programs marked as debug_build should be returned
+   * @param bool $include_debug_build_programs If programs marked as debug_build should be returned
    *
    * @return Program[]
    */
-  public function getUserPrograms($user_id, bool $include_debug_build_programs = false, string $max_version = '0')
+  public function getUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0')
   {
     $debug_build = (true === $include_debug_build_programs) ? true : $this->app_request->isDebugBuildRequest();
 

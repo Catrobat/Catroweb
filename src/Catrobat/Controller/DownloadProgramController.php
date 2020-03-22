@@ -18,16 +18,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class DownloadProgramController.
- */
 class DownloadProgramController extends AbstractController
 {
   /**
    * @Route("/download/{id}.catrobat", name="download", options={"expose": true}, defaults={"_format": "json"},
    * methods={"GET"})
    *
-   * @param $id
+   * @param mixed $id
    *
    * @throws ORMException
    * @throws OptimisticLockException
@@ -41,7 +38,7 @@ class DownloadProgramController extends AbstractController
     $referrer = $request->getSession()->get('referer');
 
     $program = $program_manager->find($id);
-    if (!$program)
+    if (null === $program)
     {
       throw new NotFoundHttpException();
     }
@@ -50,15 +47,15 @@ class DownloadProgramController extends AbstractController
       throw new NotFoundHttpException();
     }
 
-    $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
-    $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
-    $rec_user_specific = 1 == intval($request->query->get('rec_user_specific', 0)) ? true : false;
-    $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
+    $rec_by_page_id = (int) $request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE);
+    $rec_by_program_id = (int) $request->query->get('rec_by_program_id', 0);
+    $rec_user_specific = 1 == (int) $request->query->get('rec_user_specific', 0);
+    $rec_tag_by_program_id = (int) $request->query->get('rec_from', 0);
     try
     {
       $file = $file_repository->getProgramFile($id);
     }
-    catch (FileNotFoundException $e)
+    catch (FileNotFoundException $fileNotFoundException)
     {
       $logger->error('[FILE] failed to get program file with id: '.$id);
 
@@ -83,13 +80,10 @@ class DownloadProgramController extends AbstractController
           $request->attributes->set('rec_by_program_id', $rec_by_program_id);
           $request->attributes->set('rec_user_specific', $rec_user_specific);
         }
-        else
+        elseif ($rec_tag_by_program_id > 0)
         {
-          if ($rec_tag_by_program_id > 0)
-          {
-            // tag-recommendations
-            $request->attributes->set('rec_from', $rec_tag_by_program_id);
-          }
+          // tag-recommendations
+          $request->attributes->set('rec_from', $rec_tag_by_program_id);
         }
       }
 

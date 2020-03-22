@@ -21,13 +21,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ReportController extends AbstractController
 {
   /**
+   * @deprecated
+   *
    * @Route("/api/reportProject/reportProject.json", name="catrobat_api_report_program",
    * defaults={"_format": "json"}, methods={"POST", "GET"})
-   *
-   * @return JsonResponse
    */
   public function reportProgramAction(Request $request, ProgramManager $program_manager,
-                                      TranslatorInterface $translator, EventDispatcherInterface $event_dispatcher)
+                                      TranslatorInterface $translator, EventDispatcherInterface $event_dispatcher): JsonResponse
   {
     /* @var $program_manager ProgramManager */
     /* @var $program Program */

@@ -5,26 +5,19 @@ namespace App\Catrobat\Controller\Admin;
 use App\Entity\User;
 use App\Entity\UserManager;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class EmailUserMessageController.
- */
 class EmailUserMessageController extends CRUDController
 {
-  /**
-   * @return Response
-   */
-  public function listAction(Request $request = null)
+  public function listAction(Request $request = null): Response
   {
     return $this->renderWithExtraParams('Admin/mail.html.twig');
   }
 
-  /**
-   * @return Response
-   */
-  public function sendAction(Request $request, \Swift_Mailer $mailer, UserManager $user_manager)
+  public function sendAction(Request $request, Swift_Mailer $mailer, UserManager $user_manager): Response
   {
     /**
      * @var User
@@ -45,7 +38,7 @@ class EmailUserMessageController extends CRUDController
       return new Response('Empty message!');
     }
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
-    $message = (new \Swift_Message($subject))
+    $message = (new Swift_Message($subject))
       ->setFrom('webteam@catrob.at')
       ->setTo($user->getEmail())
       ->setBody(

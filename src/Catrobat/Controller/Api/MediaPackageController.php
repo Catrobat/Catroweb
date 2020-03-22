@@ -12,20 +12,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class MediaPackageController.
- */
 class MediaPackageController extends AbstractController
 {
   /**
-   * @Route("/api/media/json", name="api_media_lib", defaults={"_format": "json"}, methods={"GET"})
+   * @deprecated
    *
-   * @return JsonResponse
+   * @Route("/api/media/json", name="api_media_lib", defaults={"_format": "json"}, methods={"GET"})
    */
-  public function getMediaLib()
+  public function getMediaLib(): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
-    $media_package_files = $em->getRepository('App\Entity\MediaPackageFile')
+    $media_package_files = $em->getRepository(MediaPackageFile::class)
       ->findAll()
     ;
     $json_response_array = [];
@@ -38,20 +35,19 @@ class MediaPackageController extends AbstractController
     foreach ($media_package_files as $media_package_file)
     {
       /* @var MediaPackageFile $media_package_file */
-      array_push($json_response_array,
-        $this->createArrayOfMediaData($media_package_file));
+      $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
     }
 
     return JsonResponse::create($json_response_array);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/media/category/json", name="api_media_lib_all_category",
    * defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @return JsonResponse
    */
-  public function getCategories(Request $request)
+  public function getCategories(Request $request): JsonResponse
   {
     /**
      * @var array[MediaPackageCategory]
@@ -71,7 +67,7 @@ class MediaPackageController extends AbstractController
     $json_response_array = [];
     foreach ($categories as $category)
     {
-      array_push($json_response_array, $this->createArrayOfCategory($category));
+      $json_response_array[] = $this->createArrayOfCategory($category);
     }
 
     $flavor = $request->get('flavor');
@@ -83,7 +79,7 @@ class MediaPackageController extends AbstractController
         'name' => $flavor,
         'displayID' => str_replace(' ', '', $flavor),
       ];
-      array_push($json_response_array, $snowflake);
+      $json_response_array[] = $snowflake;
     }
 
     return JsonResponse::create([
@@ -94,14 +90,14 @@ class MediaPackageController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/media/category/{category}/json", name="api_media_lib_category",
    * requirements={"category": "\w+"}, defaults={"_format": "json"}, methods={"GET"})
    *
    * @param $category
-   *
-   * @return JsonResponse
    */
-  public function getMediaFilesForCategory($category)
+  public function getMediaFilesForCategory($category): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
     $json_response_array = [];
@@ -129,11 +125,11 @@ class MediaPackageController extends AbstractController
        * @var array|MediaPackageCategory $media_package_category
        */
       $media_package_files = $media_package_category->getFiles();
-      if (null !== $media_package_files && count($media_package_files) > 0)
+      if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0)
       {
         foreach ($media_package_files as $media_package_file)
         {
-          array_push($json_response_array, $this->createArrayOfMediaData($media_package_file));
+          $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
         }
       }
     }
@@ -146,17 +142,17 @@ class MediaPackageController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/media/package/{package}/json", name="api_media_lib_package",
    * requirements={"package": "\w+"}, defaults={"_format": "json"}, methods={"GET"})
    *
    * @param $package
-   *
-   * @return JsonResponse
    */
-  public function getMediaFilesForPackage($package)
+  public function getMediaFilesForPackage($package): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
-    $media_package = $em->getRepository('App\Entity\MediaPackage')
+    $media_package = $em->getRepository(MediaPackage::class)
       ->findOneBy(['name' => $package])
     ;
     if (null === $media_package)
@@ -179,11 +175,11 @@ class MediaPackageController extends AbstractController
     {
       /** @var array|MediaPackageFile $media_package_files */
       $media_package_files = $media_package_category->getFiles();
-      if (null !== $media_package_files && count($media_package_files) > 0)
+      if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0)
       {
         foreach ($media_package_files as $media_package_file)
         {
-          array_push($json_response_array, $this->createArrayOfMediaData($media_package_file));
+          $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
         }
       }
     }
@@ -194,17 +190,17 @@ class MediaPackageController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/media/packageByNameUrl/{package}/json", name="api_media_lib_package_bynameurl",
    * requirements={"package": "\w+"}, defaults={"_format": "json"}, methods={"GET"})
    *
    * @param $package
-   *
-   * @return JsonResponse
    */
-  public function getMediaFilesForPackageByNameUrl($package)
+  public function getMediaFilesForPackageByNameUrl($package): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
-    $media_package = $em->getRepository('App\Entity\MediaPackage')
+    $media_package = $em->getRepository(MediaPackage::class)
       ->findOneBy(['nameUrl' => $package])
     ;
     if (null === $media_package)
@@ -227,11 +223,11 @@ class MediaPackageController extends AbstractController
     {
       /** @var array|MediaPackageFile $media_package_files */
       $media_package_files = $media_package_category->getFiles();
-      if (null !== $media_package_files && count($media_package_files) > 0)
+      if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0)
       {
         foreach ($media_package_files as $media_package_file)
         {
-          array_push($json_response_array, $this->createArrayOfMediaData($media_package_file));
+          $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
         }
       }
     }
@@ -242,19 +238,19 @@ class MediaPackageController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/media/package/{package}/{category}/json", name="api_media_lib_package_category",
    *     requirements={"package": "\w+", "category": "\w+"},
    * defaults={"_format": "json"}, methods={"GET"})
    *
    * @param $package
    * @param $category
-   *
-   * @return JsonResponse
    */
-  public function getMediaFilesForPackageAndCategory($package, $category)
+  public function getMediaFilesForPackageAndCategory($package, $category): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
-    $media_package = $em->getRepository('App\Entity\MediaPackage')
+    $media_package = $em->getRepository(MediaPackage::class)
       ->findOneBy(['name' => $package])
     ;
     if (null === $media_package)
@@ -290,11 +286,11 @@ class MediaPackageController extends AbstractController
         $category_not_found = false;
         /** @var array|MediaPackageFile $media_package_files */
         $media_package_files = $media_package_category->getFiles();
-        if (null !== $media_package_files && count($media_package_files) > 0)
+        if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0)
         {
           foreach ($media_package_files as $media_package_file)
           {
-            array_push($json_response_array, $this->createArrayOfMediaData($media_package_file));
+            $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
           }
         }
       }
@@ -315,14 +311,14 @@ class MediaPackageController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/media/file/{id}/json", name="api_media_lib_file", requirements={"id": "\d+"},
    * defaults={"id": 0, "_format": "json"}, methods={"GET"})
    *
    * @param $id
-   *
-   * @return JsonResponse
    */
-  public function getSingleMediaFile($id)
+  public function getSingleMediaFile($id): JsonResponse
   {
     if (0 === $id)
     {
@@ -333,7 +329,7 @@ class MediaPackageController extends AbstractController
       );
     }
     $em = $this->getDoctrine()->getManager();
-    $media_file = $em->getRepository('App\Entity\MediaPackageFile')
+    $media_file = $em->getRepository(MediaPackageFile::class)
       ->find($id)
     ;
     if (null === $media_file)
@@ -352,10 +348,8 @@ class MediaPackageController extends AbstractController
 
   /**
    * @param $category MediaPackageCategory
-   *
-   * @return array
    */
-  private function createArrayOfCategory($category)
+  private function createArrayOfCategory($category): array
   {
     $id = $category->getId();
     $name = $category->getName();
@@ -370,10 +364,8 @@ class MediaPackageController extends AbstractController
 
   /**
    * @param $media_package_file MediaPackageFile
-   *
-   * @return array
    */
-  private function createArrayOfMediaData($media_package_file)
+  private function createArrayOfMediaData($media_package_file): array
   {
     /**
      * @var MediaPackageFile

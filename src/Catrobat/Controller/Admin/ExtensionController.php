@@ -2,35 +2,25 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use App\Repository\ProgramRepository;
-use Doctrine\ORM\EntityManager;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Exception;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-/**
- * Class ExtensionController.
- */
-class ExtensionController extends Controller
+class ExtensionController extends CRUDController
 {
   /**
-   * @throws \Exception
-   *
-   * @return RedirectResponse
+   * @throws Exception
    */
-  public function extensionsAction(KernelInterface $kernel)
+  public function extensionsAction(KernelInterface $kernel): RedirectResponse
   {
-    /*
-     * @var $em EntityManager
-     * @var $program_repositorysitory ProgramRepository
-     */
-
-    if (false === $this->admin->isGranted('EXTENSIONS'))
+    if (!$this->admin->isGranted('EXTENSIONS'))
     {
       throw new AccessDeniedException();
     }
@@ -55,12 +45,9 @@ class ExtensionController extends Controller
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @return \Symfony\Component\HttpFoundation\Response
-   */
-  public function listAction(Request $request = null)
+  public function listAction(Request $request = null): Response
   {
-    if (false === $this->admin->isGranted('LIST'))
+    if (!$this->admin->isGranted('LIST'))
     {
       throw new AccessDeniedException();
     }

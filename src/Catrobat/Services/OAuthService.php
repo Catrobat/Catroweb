@@ -233,7 +233,7 @@ class OAuthService
   /**
    * @throws Exception
    *
-   * @return JsonResponse|Response
+   * @return JsonResponse
    */
   public function exchangeGoogleCodeAction(Request $request)
   {
@@ -261,7 +261,7 @@ class OAuthService
       }
       else
       {
-        return new Response('Token invalid', 777);
+        return new JsonResponse('Token invalid', 777);
       }
 
       if ($gEmail)
@@ -278,7 +278,7 @@ class OAuthService
     }
     catch (Exception $e)
     {
-      return new Response('Token invalid', 777);
+      return new JsonResponse('Token invalid', 777);
     }
 
     if ($google_user)

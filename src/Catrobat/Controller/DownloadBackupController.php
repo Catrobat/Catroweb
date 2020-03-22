@@ -15,11 +15,9 @@ class DownloadBackupController extends AbstractController
   /**
    * @Route("/download-backup/{backupFile}", name="backup_download", methods={"GET"})
    *
-   * @param $backupFile
-   *
-   * @return BinaryFileResponse
+   * @param mixed $backupFile
    */
-  public function downloadBackupAction(Request $request, $backupFile, BackupFileRepository $backupFileRepository)
+  public function downloadBackupAction(Request $request, $backupFile, BackupFileRepository $backupFileRepository): BinaryFileResponse
   {
     $file = $backupFileRepository->getBackupFile($backupFile);
     if ($file->isFile())

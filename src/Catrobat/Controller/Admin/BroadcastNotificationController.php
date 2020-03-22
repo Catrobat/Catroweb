@@ -5,32 +5,18 @@ namespace App\Catrobat\Controller\Admin;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\BroadcastNotification;
 use App\Entity\UserManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class BroadcastNotificationController.
- */
 class BroadcastNotificationController extends CRUDController
 {
-  /**
-   * @return Response
-   */
-  public function listAction()
+  public function listAction(): Response
   {
     return $this->renderWithExtraParams('Admin/broadcast_notification.html.twig');
   }
 
-  /**
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return Response
-   */
-  public function sendAction(Request $request, CatroNotificationService $notification_service, UserManager $user_manager)
+  public function sendAction(Request $request, CatroNotificationService $notification_service, UserManager $user_manager): Response
   {
     $message = $request->get('Message');
     $title = $request->get('Title');
@@ -41,12 +27,9 @@ class BroadcastNotificationController extends CRUDController
   }
 
   /**
-   * @param $message
-   * @param $title
-   *
-   * @return \Generator
+   * @return BroadcastNotification[]
    */
-  private function getNotifications($message, $title, UserManager $user_manager)
+  private function getNotifications(string $message, string $title, UserManager $user_manager): iterable
   {
     foreach ($user_manager->findAll() as $user)
     {

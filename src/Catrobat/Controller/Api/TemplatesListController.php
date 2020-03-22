@@ -14,11 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class TemplatesListController extends AbstractController
 {
   /**
-   * @Route("/api/templates/list.json", name="api_template_list", defaults={"_format": "json"}, methods={"GET"})
+   * @deprecated
    *
-   * @return TemplateListResponse
+   * @Route("/api/templates/list.json", name="api_template_list", defaults={"_format": "json"}, methods={"GET"})
    */
-  public function listTemplatesAction(Request $request, TemplateManager $template_manager)
+  public function listTemplatesAction(Request $request, TemplateManager $template_manager): TemplateListResponse
   {
     $templates = $template_manager->findAllActive();
 

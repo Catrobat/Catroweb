@@ -68,7 +68,12 @@
         "phpunit/phpunit": "^8.1",
         "symfony/phpunit-bridge": "*",
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
-        "wapmorgan/php-code-fixer": "dev-master"
+        "wapmorgan/php-code-fixer": "dev-master",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.17",
+        "phpstan/phpstan-doctrine": "^0.12.10",
+        "phpstan/phpstan-symfony": "^0.12.4",
+        "rector/rector": "^0.7.7"
     },
 
     "conflict": {

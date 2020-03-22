@@ -6,20 +6,14 @@ use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class CodeViewController.
- */
 class CodeViewController extends AbstractController
 {
-  /**
-   * @param $id
-   *
-   * @return mixed
-   */
-  public function viewCodeAction($id, ProgramManager $programManager, ExtractedFileRepository $extractedFileRepository,
-                                 CatrobatCodeParser $catrobatCodeParser)
+  public function viewCodeAction(string $id, ProgramManager $programManager, ExtractedFileRepository $extractedFileRepository,
+                                 CatrobatCodeParser $catrobatCodeParser): Response
   {
     try
     {
@@ -28,13 +22,13 @@ class CodeViewController extends AbstractController
       $extracted_program = $extractedFileRepository->loadProgramExtractedFile($program);
       if (null === $extracted_program)
       {
-        throw new \Exception();
+        throw new Exception();
       }
       $parsed_program = $catrobatCodeParser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
     }
-    catch (\Exception $e)
+    catch (Exception $exception)
     {
       $parsed_program = null;
       $web_path = null;
