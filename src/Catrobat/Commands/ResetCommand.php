@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,17 +16,11 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ResetCommand extends Command
 {
-  const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 20;
+  const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 30;
 
-  /**
-   * @var array
-   */
-  private $reported = [];
+  private array $reported = [];
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
   /**
    * ResetCommand constructor.
@@ -51,11 +46,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): void
   {
     if (!$input->getOption('hard'))
     {
@@ -64,58 +57,92 @@ class ResetCommand extends Command
       return;
     }
 
-    CommandHelper::executeShellCommand('php bin/console doctrine:schema:drop --force', [],
-      'Dropping database', $output);
-
-    CommandHelper::executeShellCommand('php bin/console catrobat:drop:migration', [],
-      'Dropping the migration_versions table', $output);
-    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate --no-interaction', ['timeout' => 320],
-      'Execute the migration to the latest version', $output);
-    CommandHelper::executeShellCommand('php bin/console catrobat:create:tags', [],
-      'Creating constant tags', $output);
-
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.screenshot.dir'),
-      'Delete screenshots', $output);
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.thumbnail.dir'),
-      'Delete thumbnails', $output);
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.storage.dir'),
-      'Delete programs', $output);
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.extract.dir'),
-      'Delete extracted programs', $output);
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.featuredimage.dir'),
-      'Delete featured images', $output);
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.mediapackage.dir'),
-      'Delete mediapackages', $output);
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.template.dir'),
-      'Delete templates', $output);
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.template.screenshot.dir'),
-      'Delete templates-screenshots', $output);
-
-    CommandHelper::executeShellCommand('php bin/console sonata:admin:setup-acl', [],
-      'Set up Sonata admin ACL', $output);
-    CommandHelper::executeShellCommand('php bin/console sonata:admin:generate-object-acl', [],
-      'Generate Sonata object ACL', $output);
-
-    CommandHelper::executeShellCommand('php bin/console catrobat:test:generate --env=test --no-interaction', [],
-      'Generating test data', $output);
-
-    CommandHelper::executeShellCommand('php bin/console cache:clear --no-warmup', [],
-      'Clearing cache', $output);
-    CommandHelper::executeShellCommand('php bin/console cache:clear --env=test', ['timeout' => 120],
-      'Resetting Cache', $output);
-
+    // Setting up the project permissions
     CommandHelper::executeShellCommand(
-      'php bin/console fos:user:create catroweb catroweb@localhost.at catroweb --super-admin', [],
-      'Create default admin user', $output);
+        ['sh', 'docker/app/set-permissions.sh'], [], 'Setting up permissions', $output
+    );
+
+    // Rebuild the database
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'doctrine:schema:drop', '--force'], [], 'Dropping database', $output
+    );
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'catrobat:drop:migration'], [], 'Dropping the migration_versions table', $output
+    );
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'doctrine:migrations:migrate', '--no-interaction'], ['timeout' => 320],
+      'Execute the migration to the latest version', $output
+    );
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'catrobat:create:tags'], [], 'Creating constant tags', $output
+    );
+
+    // Clear old files
+    CommandHelper::emptyDirectory(
+      $this->parameter_bag->get('catrobat.apk.dir'), 'Deleting APKs', $output
+    );
+    CommandHelper::emptyDirectory(
+      $this->parameter_bag->get('catrobat.file.extract.dir'), 'Delete extracted programs', $output
+    );
+    CommandHelper::emptyDirectory(
+      $this->parameter_bag->get('catrobat.featuredimage.dir'), 'Delete featured images', $output
+    );
+    CommandHelper::emptyDirectory(
+      $this->parameter_bag->get('catrobat.mediapackage.dir'), 'Delete media packages', $output
+    );
+    CommandHelper::emptyDirectory(
+      $this->parameter_bag->get('catrobat.file.storage.dir'), 'Delete programs', $output
+    );
+    CommandHelper::emptyDirectory(
+        $this->parameter_bag->get('catrobat.screenshot.dir'), 'Delete screenshots', $output
+    );
+    CommandHelper::emptyDirectory(
+      $this->parameter_bag->get('catrobat.template.dir'), 'Delete templates', $output
+    );
+    CommandHelper::emptyDirectory(
+        $this->parameter_bag->get('catrobat.thumbnail.dir'), 'Delete thumbnails', $output
+    );
+
+    // SetUp Acl
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'sonata:admin:setup-acl'], [], 'Set up Sonata admin ACL', $output
+    );
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'sonata:admin:generate-object-acl'], [], 'Generate Sonata object ACL', $output
+    );
+
+    // Generate test data
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [],
+      'Generating test data', $output
+    );
+
+    // Clear caches
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'cache:clear', '--env=dev'], [], 'Clearing dev cache', $output
+    );
+    CommandHelper::executeShellCommand(
+        ['bin/console', 'cache:clear', '--env=test'], ['timeout' => 120], 'Clearing test cache', $output
+    );
+
+    // Create Users  with their projects and add interactions.
 
     $user_array = ['catroweb', 'user', 'Elliot', 'Darlene', 'Angela', 'Tyrell', 'Edward', 'Price', 'Dom',
       'ZhiZhang', 'Irving', 'Janice', 'Vera', 'Sam', 'TheHero', 'Esmail', ];
 
+    $password = 'catroweb';
+
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'fos:user:create', 'catroweb', 'catroweb@localhost.at', $password, '--super-admin'],
+      ['timeout' => 300], 'Create default admin user named catroweb with password catroweb', $output
+    );
+
     for ($i = 1; $i < sizeof($user_array); ++$i)
     { //starting at one because of admin user
-      CommandHelper::executeShellCommand('php bin/console fos:user:create '.
-        $user_array[$i].' '.$user_array[$i].'@localhost.at catroweb', [],
-        'Create default user named '.$user_array[$i], $output);
+      CommandHelper::executeShellCommand(
+          ['bin/console', 'fos:user:create', $user_array[$i], $user_array[$i].'@localhost.at', $password],
+          ['timeout' => 300], 'Create default user named '.$user_array[$i].' with password catroweb', $output
+      );
     }
 
     $temp_dir = sys_get_temp_dir().'/catrobat.program.import/';
@@ -135,8 +162,9 @@ class ResetCommand extends Command
     {
       $temp_dir_user = $temp_dir.$user;
       CommandHelper::executeShellCommand(
-        "php bin/console catrobat:import {$temp_dir_user} {$user} {$remix_layout_option}",
-        ['timeout' => 900], 'Importing Projects', $output);
+        ['bin/console', 'catrobat:import', $temp_dir_user, $user, $remix_layout_option], ['timeout' => 900],
+        'Importing Projects', $output
+      );
       CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), [
         'directory' => $temp_dir_user,
         'user' => $user,
@@ -155,29 +183,10 @@ class ResetCommand extends Command
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
 
-    CommandHelper::executeShellCommand('chmod o+w -R public/resources', [],
-      'Setting resources permissions', $output);
-
-    CommandHelper::executeShellCommand('chmod o+w -R public/resources_test', [],
-      'Setting test resources permissions', $output);
-
-    CommandHelper::executeShellCommand('chmod o+w tests -R', [],
-      'Setting test resources permissions', $output);
-
-    CommandHelper::executeShellCommand('sh docker/app/set-test-permissions.sh', [],
-        'Executing set_test_permissions.sh', $output);
-
     //https://share.catrob.at/app/project/remixgraph/{id_of_project} to get remixes
   }
 
-  /**
-   * @param $dir
-   * @param $amount     int The amount of programs to be downloaded
-   * @param $user_array
-   *
-   * @return array
-   */
-  private function downloadPrograms($dir, $amount, OutputInterface $output, $user_array = null)
+  private function downloadPrograms(string $dir, int $amount, OutputInterface $output, array $user_array = null): array
   {
     $already_downloaded = 0;
     $user = 0;
@@ -214,7 +223,7 @@ class ResetCommand extends Command
           file_put_contents($name, file_get_contents($url));
           ++$already_downloaded;
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
           $output->writeln('File <'.$url.'> returned error 500, continuing...');
           continue;
@@ -236,13 +245,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names array
-   * @param $user_array array
-   * @param $output OutputInterface
-   *
-   * @throws \Exception
+   * @throws Exception
    */
-  private function commentOnProjects($program_names, $user_array, $output)
+  private function commentOnProjects(array $program_names, array $user_array, OutputInterface $output)
   {
     $i = 0;
     foreach ($program_names as $program_name)
@@ -267,18 +272,14 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names array
-   * @param $user_array array
-   * @param $output OutputInterface
-   *
-   * @throws \Exception
+   * @throws Exception
    */
-  private function reportProjects($program_names, $user_array, $output)
+  private function reportProjects(array $program_names, array $user_array, OutputInterface $output)
   {
     $rand_start = random_int(0, 2);
-    $rand_intervall = random_int(4, 6);
+    $rand_interval = random_int(4, 6);
 
-    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_intervall)
+    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_interval)
     {
       $this->reported[sizeof($this->reported)] = $i;
       CommandHelper::executeSymfonyCommand('catrobat:report', $this->getApplication(), [
@@ -290,13 +291,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names array
-   * @param $user_array array
-   * @param $output OutputInterface
-   *
-   * @throws \Exception
+   * @throws Exception
    */
-  private function likeProjects($program_names, $user_array, $output)
+  private function likeProjects(array $program_names, array $user_array, OutputInterface $output)
   {
     foreach ($program_names as $program_name)
     {
@@ -312,13 +309,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names array
-   * @param $user_array array
-   * @param $output OutputInterface
-   *
-   * @throws \Exception
+   * @throws Exception
    */
-  private function downloadProjects($program_names, $user_array, $output)
+  private function downloadProjects(array $program_names, array $user_array, OutputInterface $output)
   {
     foreach ($program_names as $program_name)
     {
@@ -334,17 +327,14 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param $program_names array
-   * @param $output OutputInterface
-   *
-   * @throws \Exception
+   * @throws Exception
    */
-  private function featureProjects($program_names, $output)
+  private function featureProjects(array $program_names, OutputInterface $output)
   {
     $rand_start = random_int(1, 2);
-    $rand_intervall = random_int(4, 6);
+    $rand_interval = random_int(4, 6);
 
-    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_intervall)
+    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_interval)
     {
       CommandHelper::executeSymfonyCommand('catrobat:feature', $this->getApplication(), [
         'program_name' => $program_names[$i % sizeof($program_names)],
@@ -353,7 +343,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws Exception
    */
   private function followUsers(array $user_array, OutputInterface $output)
   {
@@ -367,7 +357,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws Exception
    */
   private function remixGen(array $program_array, OutputInterface $output)
   {

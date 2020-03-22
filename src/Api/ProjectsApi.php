@@ -15,25 +15,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProjectsApi extends AbstractController implements ProjectsApiInterface
 {
-  /**
-   * @var ProgramManager
-   */
-  private $program_manager;
+  private string $token;
 
-  /**
-   * @var SessionInterface
-   */
-  private $session;
+  private ProgramManager $program_manager;
 
-  /**
-   * @var ElapsedTimeStringFormatter
-   */
-  private $time_formatter;
+  private SessionInterface $session;
 
-  /**
-   * @var string
-   */
-  private $token;
+  private ElapsedTimeStringFormatter $time_formatter;
 
   /**
    * ProjectsApi constructor.
@@ -57,7 +45,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectProjectIdGet(string $projectId, &$responseCode, array &$responseHeaders)
+  public function projectProjectIdGet(string $project_id, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectProjectIdGet() method.
   }
@@ -73,7 +61,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsGet(string $projectType, string $acceptLanguage = null, string $maxVersion = null, int $limit = 20, int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsGet(string $project_type, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectsGet() method.
   }
@@ -81,7 +69,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsPost(string $acceptLanguage = null, string $checksum = null, UploadedFile $file = null, string $flavor = null, array $tags = null, &$responseCode, array &$responseHeaders)
+  public function projectsPost(?string $accept_language = null, ?string $checksum = null, ?UploadedFile $file = null, ?string $flavor = null, ?array $tags = null, ?bool $private = false, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectsPost() method.
   }
@@ -89,7 +77,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsSearchGet(string $queryString, string $maxVersion = null, int $limit = 20, int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsSearchGet(string $query_string, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectsSearchGet() method.
   }
@@ -97,17 +85,17 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsUserGet(string $maxVersion = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    if (null == $maxVersion)
+    if (null === $max_version)
     {
-      $maxVersion = '0';
+      $max_version = '0';
     }
-    if (null == $limit)
+    if (null === $limit)
     {
       $limit = 20;
     }
-    if (null == $offset)
+    if (null === $offset)
     {
       $offset = 0;
     }
@@ -116,7 +104,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     {
       return [];
     }
-    $programs = $this->program_manager->getAuthUserPrograms($jwtPayload['username'], $limit, $offset, $flavor, $maxVersion);
+    $programs = $this->program_manager->getAuthUserPrograms($jwtPayload['username'], $limit, $offset, $flavor, $max_version);
     $responseData = $this->getProjectsResponseData($programs);
     $responseCode = Response::HTTP_OK;
 
@@ -126,7 +114,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsUserUserIdGet(string $userId, string $maxVersion = null, int $limit = 20, int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsUserUserIdGet(string $user_id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectsUserUserIdGet() method.
   }
@@ -152,17 +140,23 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'private' => $program->getPrivate(),
         'flavor' => $program->getFlavor(),
         'uploaded' => $program->getUploadedAt()->getTimestamp(),
-        'uploadedString' => $this->time_formatter->getElapsedTime($program->getUploadedAt()
-          ->getTimestamp()),
-        'screenshotLarge' => $this->program_manager->getScreenshotLarge($program->getId()),
-        'screenshotSmall' => $this->program_manager->getScreenshotSmall($program->getId()),
-        'projectUrl' => ltrim($this->generateUrl('program', [
-          'flavor' => $this->session->get('flavor_context'),
-          'id' => $program->getId(),
-        ], UrlGeneratorInterface::ABSOLUTE_URL), '/'),
-        'downloadUrl' => ltrim($this->generateUrl('download', [
-          'id' => $program->getId(),
-        ], UrlGeneratorInterface::ABSOLUTE_URL), '/'),
+        'uploaded_string' => $this->time_formatter->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+        'screenshot_large' => $this->program_manager->getScreenshotLarge($program->getId()),
+        'screenshot_small' => $this->program_manager->getScreenshotSmall($program->getId()),
+        'project_url' => ltrim($this->generateUrl(
+          'program',
+          [
+            'flavor' => $this->session->get('flavor_context'),
+            'id' => $program->getId(),
+          ],
+          UrlGeneratorInterface::ABSOLUTE_URL), '/'
+        ),
+        'download_url' => ltrim($this->generateUrl(
+          'download',
+          [
+            'id' => $program->getId(),
+          ],
+          UrlGeneratorInterface::ABSOLUTE_URL), '/'),
         'filesize' => $program->getFilesize() / 1048576,
       ];
       $project = new Project($result);

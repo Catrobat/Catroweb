@@ -2,10 +2,9 @@
 
 namespace App\Catrobat\Commands\Helpers;
 
+use Exception;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -16,37 +15,7 @@ use Symfony\Component\Process\Process;
  */
 class CommandHelper
 {
-  /**
-   * @param      $string
-   * @param      $needle
-   * @param bool $last_char
-   *
-   * @return bool|string
-   */
-  public static function getSubstring($string, $needle, $last_char = false)
-  {
-    $pos = strpos($string, $needle);
-
-    if (false === $pos)
-    {
-      return '';
-    }
-    if ($last_char)
-    {
-      $pos = $pos + 1;
-    }
-
-    return substr($string, 0, $pos);
-  }
-
-  /**
-   * @param        $directory
-   * @param string $description
-   * @param Output $output
-   *
-   * @return bool
-   */
-  public static function emptyDirectory($directory, $description = '', $output = null)
+  public static function emptyDirectory(string $directory, string $description = '', OutputInterface $output = null): bool
   {
     if ($output)
     {
@@ -84,12 +53,7 @@ class CommandHelper
     return true;
   }
 
-  /**
-   * @param $directory
-   * @param $description
-   * @param $output Output
-   */
-  public static function createDirectory($directory, $description, $output)
+  public static function createDirectory(string $directory, string $description, OutputInterface $output): void
   {
     $output->write($description." ('".$directory."') ... ");
     if ('' == $directory)
@@ -106,14 +70,10 @@ class CommandHelper
   }
 
   /**
-   * @param $command
-   * @param $application Application
-   * @param $args
-   * @param $output Output|NullOutput|OutputInterface
-   *
-   * @throws \Exception
+   * @throws Exception
    */
-  public static function executeSymfonyCommand($command, $application, $args, $output)
+  public static function executeSymfonyCommand(string $command, Application $application, array $args,
+                                               OutputInterface $output): void
   {
     $command = $application->find($command);
     $args['command'] = $command;
@@ -121,26 +81,19 @@ class CommandHelper
     $command->run($input, $output);
   }
 
-  /**
-   * @param $command
-   * @param array  $args
-   * @param string $description
-   * @param Output $output
-   *
-   * @return bool
-   */
-  public static function executeShellCommand($command, $args = [], $description = '', $output = null)
+  public static function executeShellCommand(array $command, array $config, string $description = '',
+                                             OutputInterface $output = null): bool
   {
     if ($output)
     {
-      $output->write($description." ('".$command."') ... ");
+      $output->write($description." ('".implode(' ', $command)."') ... ");
     }
 
     $process = new Process($command);
 
-    if (isset($args['timeout']))
+    if (isset($config['timeout']))
     {
-      $process->setTimeout($args['timeout']);
+      $process->setTimeout($config['timeout']);
     }
 
     $process->run();

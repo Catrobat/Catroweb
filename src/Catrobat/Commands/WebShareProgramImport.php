@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,11 +25,9 @@ class WebShareProgramImport extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): void
   {
     $amount = $input->getArgument('amount');
     $temp_dir = sys_get_temp_dir().'/catrobat.program.import/';
@@ -37,18 +36,12 @@ class WebShareProgramImport extends Command
     $filesystem->remove($temp_dir);
     $filesystem->mkdir($temp_dir);
     $this->downloadPrograms($temp_dir, $output, $amount);
-    CommandHelper::executeShellCommand("php bin/console catrobat:import {$temp_dir} catroweb", [],
-      'Importing Projects', $output);
     CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
       ['directory' => $temp_dir, 'user' => 'catroweb'], $output);
     $filesystem->remove($temp_dir);
   }
 
-  /**
-   * @param     $dir
-   * @param int $limit
-   */
-  private function downloadPrograms($dir, OutputInterface $output, $limit = 20)
+  private function downloadPrograms(string $dir, OutputInterface $output, int $limit = 20): void
   {
     $server_json = json_decode(file_get_contents(
       'https://share.catrob.at/app/api/projects/recent.json?limit='.$limit), true);

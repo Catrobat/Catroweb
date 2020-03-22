@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Output\Output;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -428,12 +428,7 @@ class MaintainController extends Controller
     return sprintf('%.2f '.$symbol[$exp], ($bytes / pow(1024, floor($exp))));
   }
 
-  /**
-   * @param $command
-   * @param $description
-   * @param $output Output
-   */
-  private function executeShellCommand($command, $description, $output)
+  private function executeShellCommand(array $command, string $description, OutputInterface $output): void
   {
     $output->write($description." ('".$command."') ... ");
     $process = new Process($command);

@@ -73,7 +73,7 @@ behat.yml
 ### docker ###
 !/docker/app/startup.sh
 !/docker/app/wait-for-it.sh
-!/docker/app/test-permissions.sh
+!/docker/app/set-permissions.sh
 !/docker/app/execute-tests.sh
 
 ###> friendsofphp/php-cs-fixer ###

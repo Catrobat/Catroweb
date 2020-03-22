@@ -6,6 +6,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -14,6 +15,20 @@ use Symfony\Component\Process\Process;
  */
 class CheckCodeStyleCommand extends Command
 {
+  private ParameterBagInterface $parameter_bag;
+
+  private string $root_dir;
+
+  /**
+   * CreateBackupCommand constructor.
+   */
+  public function __construct(ParameterBagInterface $parameter_bag)
+  {
+    parent::__construct();
+    $this->parameter_bag = $parameter_bag;
+    $this->root_dir = $parameter_bag->get('kernel.root_dir');
+  }
+
   protected function configure()
   {
     $this
@@ -25,7 +40,10 @@ class CheckCodeStyleCommand extends Command
       // the "--help" option
       ->setHelp('This command allows you to check the php coding style. 
                   The report can be found in tests\style-report')
-      ->addArgument('githash', InputArgument::OPTIONAL, 'The git hash of the git commit you want to check. Only modified fiels and newly added files in the src/ directory will be checked.')
+      ->addArgument('githash', InputArgument::OPTIONAL,
+        'The git hash of the git commit you want to check.'
+        .'Only modified fiels and newly added files in the src/ directory will be checked.'
+      )
     ;
   }
 
@@ -38,13 +56,13 @@ class CheckCodeStyleCommand extends Command
     {
       $output->writeln('PHP code style checking running only for git commit: '.$input->getArgument('githash'));
 
-      $command_git = 'git diff-tree --no-commit-id --name-only -r '.$input->getArgument('githash');
+      $command_git = ['git', 'diff-tree', '--no-commit-id', '--name-only', '-r', $input->getArgument('githash')];
       $process_git = new Process($command_git);
       $process_git->run();
 
       if (!$process_git->isSuccessful())
       {
-        throw new ProcessFailedException($command_git);
+        throw new ProcessFailedException($process_git);
       }
 
       $process_git_output = array_filter(explode("\n", $process_git->getOutput()), 'strlen');
@@ -66,7 +84,12 @@ class CheckCodeStyleCommand extends Command
         return 0;
       }
 
-      $command = 'time php ~/Catroweb-Symfony/vendor/phpcheckstyle/phpcheckstyle/run.php --config ~/Catroweb-Symfony/tests/style-report/catroweb.xml --outdir ~/Catroweb-Symfony/tests/style-report';
+      $command = [
+        'time',
+        'php', 'vendor/phpcheckstyle/phpcheckstyle/run.php',
+        '--config', 'tests/style-report/catroweb.xml',
+        '--outdir', 'tests/style-report',
+      ];
       foreach ($git_files as $entry)
       {
         $command = $command.' --src '.$entry;
@@ -84,7 +107,13 @@ class CheckCodeStyleCommand extends Command
     }
 
     $output->writeln('PHP code style checking running. This may take a few moments...');
-    $command = 'time php ~/Catroweb-Symfony/vendor/phpcheckstyle/phpcheckstyle/run.php --src ~/Catroweb-Symfony/src/ --config ~/Catroweb-Symfony/tests/style-report/catroweb.xml --outdir ~/Catroweb-Symfony/tests/style-report';
+    $command = [
+      'time',
+      'php', 'vendor/phpcheckstyle/phpcheckstyle/run.php',
+      '--src', 'src/',
+      '--config', 'tests/style-report/catroweb.xml',
+      '--outdir', 'tests/style-report',
+    ];
     $process = new Process($command);
 
     // Getting real time output

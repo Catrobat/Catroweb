@@ -2871,7 +2871,7 @@ class ApiContext implements KernelAwareContext
     $parameters['token'] = $user->getUploadToken();
     $parameters['fileChecksum'] = md5_file($file->getPathname());
 
-    if (null != $request_param['deviceLanguage'])
+    if (isset($request_param['deviceLanguage']))
     {
       $parameters['deviceLanguage'] = $request_param['deviceLanguage'];
     }

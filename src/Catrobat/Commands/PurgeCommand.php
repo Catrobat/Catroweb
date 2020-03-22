@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,10 +15,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  */
 class PurgeCommand extends Command
 {
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
   /**
    * PurgeCommand constructor.
@@ -37,11 +35,9 @@ class PurgeCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): void
   {
     if (!$input->getOption('force'))
     {
@@ -52,7 +48,7 @@ class PurgeCommand extends Command
 
     $output->writeln('Deleting all catrobat data');
 
-    $progress = new ProgressBar($output, 8);
+    $progress = new ProgressBar($output, 10);
     $progress->start();
 
     $progress->setMessage('Deleting Screenshots');
@@ -79,19 +75,29 @@ class PurgeCommand extends Command
     CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.apk.dir'));
     $progress->advance();
 
+    $progress->setMessage('Deleting Media Packages');
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.mediapackage.dir'));
+    $progress->advance();
+
+    $progress->setMessage('Deleting Templates');
+    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.template.dir'));
+    $progress->advance();
+
     $progress->setMessage('Dropping Database');
-    CommandHelper::executeShellCommand('php bin/console doctrine:schema:drop --force', [],
-      'Dropping database', $output);
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'doctrine:schema:drop', '--force'], [], 'Dropping database', $output
+    );
     $progress->advance();
 
     $progress->setMessage('Dropping Migrations');
-    CommandHelper::executeShellCommand('php bin/console catrobat:drop:migration', [],
-      'Dropping the migration_versions table', $output);
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:drop:migration'], [], 'Dropping the migration_versions table', $output);
     $progress->advance();
 
     $progress->setMessage('(Re-) Creating Database; executing migrations');
-    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate', [],
-      'Execute the migration to the latest version', $output);
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'doctrine:migrations:migrate'], [], 'Execute the migration to the latest version', $output
+    );
     $progress->advance();
 
     $progress->finish();

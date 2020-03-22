@@ -8,17 +8,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationApi implements AuthenticationApiInterface
 {
-  /**
-   * @var string
-   */
-  private $token;
+  private string $token;
 
   /**
    * {@inheritdoc}
    */
   public function setPandaAuth($value)
   {
-    $this->token = $value;
+    $this->token = preg_split('/\s+/', $value)[1];
   }
 
   /**

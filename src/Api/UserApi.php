@@ -7,23 +7,20 @@ use OpenAPI\Server\Model\Register;
 
 class UserApi implements UserApiInterface
 {
-  /**
-   * @var string
-   */
-  private $token;
+  private string $token;
 
   /**
    * {@inheritdoc}
    */
   public function setPandaAuth($value)
   {
-    $this->token = $value;
+    $this->token = preg_split('/\s+/', $value)[1];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function userPost(Register $register, string $acceptLanguage = null, &$responseCode, array &$responseHeaders)
+  public function userPost(Register $register, ?string $accept_language = null, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement userPost() method.
   }
