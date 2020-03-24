@@ -74,7 +74,11 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectProjectIdGet(string $project_id, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement projectProjectIdGet() method.
+    $programs = $this->program_manager->getProgram($project_id);
+    $responseData = $this->getProjectsResponseData($programs);
+    $responseCode = Response::HTTP_OK;
+
+    return $responseData;
   }
 
   /**
