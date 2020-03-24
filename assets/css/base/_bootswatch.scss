@@ -6,9 +6,6 @@
 @import '../../../public/bootstrap/scss/bootstrap';
 // Variables ===================================================================
 
-$web-font-path: "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700" !default;
-@import url($web-font-path);
-
 // Font Awesome
 $fa-font-path: "../../webfonts";
 @import "../../../public/font_awesome_wrapper/fontawesome-free/scss/fontawesome";
