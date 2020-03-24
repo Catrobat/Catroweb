@@ -335,6 +335,13 @@
             <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
           </button>
         </div>
+
+        <div id="apk-steal" class="btn-container col-12 col-xl-6">
+          <button class="btn btn-primary">
+            <i class="program-big-button-icon mr-3 fab fa-android"></i>
+            <span>{{ "Steal this project"|trans({}, "catroweb") }}</span>
+          </button>
+        </div>
       </div>
       {% endif %}
 
@@ -822,7 +829,40 @@
         })
         window.location.href = href
       })
+      $(document).on('click', '#apk-steal', function(event) {
+        console.log('hallo');
+
+        event.preventDefault();
+
+        var url = "{{ path('project-steal', {'id' : program.id}) }}";
+
+        $.ajax({
+          url : url,
+          type : 'get',
+          data : {},
+          success: function (data) {
+            if (data.statusCode === {{ constant('App\\Catrobat\\StatusCode::OK') }})
+            {
+              console.log("Success");
+              window.location.reload();
+            }
+
+            if (data.statusCode === {{ constant('App\\Catrobat\\StatusCode::LOGIN_ERROR') }})
+            {
+              console.log("LOGIN");
+              window.location.href = '/app/login';
+            }
+
+          },
+          error : function (jxHR, errorText, status) {
+            console.log(jxHR);
+          }
+        })
+
+      })
     })
+
+
 
   </script>
 {% endblock %}

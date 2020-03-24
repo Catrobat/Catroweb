@@ -199,6 +199,71 @@ class ProgramController extends AbstractController
     ]);
   }
 
+    /**
+     * @Route("/project/steal/{id}", name="project-steal", methods={"GET"})
+     *
+     * @param Request                     $request
+     * @param GuidType                    $id
+     * @param ProgramManager              $program_manager
+
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function projectStealAction(Request $request, $id, ProgramManager $program_manager)
+    {
+        /**
+         * @var User           $user
+         * @var Program        $program
+         */
+        $user = $this->getUser();
+        if (!$user)
+        {
+            if ($request->isXmlHttpRequest())
+            {
+                return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
+            }
+            else
+            {
+                $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
+                    'project-steal', ['id' => $id]));
+
+                return $this->redirectToRoute('login');
+            }
+        }
+
+        $program = $program_manager->find($id);
+
+        if ($program === NULL)
+        {
+            if ($request->isXmlHttpRequest())
+            {
+                return JsonResponse::create(['statusCode' => StatusCode::INVALID_PARAM]);
+            }
+            else{
+                throw $this->createNotFoundException('Program with the given id does not exist');
+            }
+
+        }
+
+        $program->setUser($user);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($program);
+        $em->flush();
+
+
+        if (!$request->isXmlHttpRequest())
+        {
+            print("In");
+            return $this->redirect('program');
+        }
+
+        return new JsonResponse(['statusCode' => StatusCode::OK, 'data' => [
+            'id'    =>  $id,
+            'thief' =>  $user->getId(),
+        ]]);
+
+    }
+
   /**
    * @Route("/project/like/{id}", name="project_like", methods={"GET"})
    *
