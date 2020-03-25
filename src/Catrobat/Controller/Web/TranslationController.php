@@ -7,21 +7,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class TranslationController.
- */
 class TranslationController extends AbstractController
 {
   /**
    * @Route("/translate/{word}/{array}/{domain}", name="translate_word", defaults={"array": "", "domain": "catroweb"})
    *
-   * @param        $word
-   * @param string $array
-   * @param string $domain
-   *
-   * @return JsonResponse
+   * @param mixed $word
    */
-  public function translateAction(TranslatorInterface $translator, $word, $array = '', $domain = 'catroweb')
+  public function translateAction(TranslatorInterface $translator, $word, string $array = '',
+                                  string $domain = 'catroweb'): JsonResponse
   {
     $decodedArray = [];
 
@@ -36,15 +30,9 @@ class TranslationController extends AbstractController
   /**
    * @Route("/transChoice/{word}/{count}/{array}/{domain}", name="translate_choice",
    * defaults={"array": "", "domain": "catroweb"})
-   *
-   * @param        $word
-   * @param int    $count
-   * @param string $array
-   * @param string $domain
-   *
-   * @return JsonResponse
    */
-  public function transChoiceAction(TranslatorInterface $translator, $word, $count, $array, $domain)
+  public function transChoiceAction(TranslatorInterface $translator, string $word, int $count,
+                                    string $array, string $domain): JsonResponse
   {
     $decodedArray = [];
 
@@ -56,14 +44,9 @@ class TranslationController extends AbstractController
     return JsonResponse::create($translator->transChoice($word, $count, $decodedArray, $domain), 200);
   }
 
-  /**
-   * @param $array
-   *
-   * @return array
-   */
-  private function parseJavascriptDictArrayToPhp($array)
+  private function parseJavascriptDictArrayToPhp(string $array): array
   {
-    $array = (array) json_decode($array);
+    $array = (array) json_decode($array, false, 512, JSON_THROW_ON_ERROR);
     $decodedArray = [];
     foreach ($array as $value)
     {

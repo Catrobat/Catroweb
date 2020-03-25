@@ -1,3 +1,5 @@
+# Eslint javascript coding standard config:
+
 env:
   browser: true
   es6: true

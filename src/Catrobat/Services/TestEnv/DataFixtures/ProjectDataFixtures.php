@@ -13,7 +13,6 @@ use App\Entity\UserManager;
 use App\Utils\MyUuidGenerator;
 use DateTime;
 use DateTimeZone;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -26,49 +25,22 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class ProjectDataFixtures
 {
-  /**
-   * @var string
-   */
-  private $FIXTURE_DIR;
+  private string $FIXTURE_DIR;
 
-  /**
-   * @var ProgramManager
-   */
-  private $project_manager;
+  private ProgramManager $project_manager;
 
-  /**
-   * @var EntityManager
-   */
-  private $entity_manager;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var UserManager
-   */
-  private $apk_repository;
+  private ApkRepository $apk_repository;
 
-  /**
-   * @var UserManager
-   */
-  private $project_file_repository;
+  private ProgramFileRepository $project_file_repository;
 
-  /**
-   * @var int
-   */
-  private static $number_of_projects = 0;
+  private static int $number_of_projects = 0;
 
-  /**
-   * @var UserDataFixtures
-   */
-  private $user_data_fixtures;
+  private UserDataFixtures $user_data_fixtures;
 
-  /**
-   * ProjectDataFixtures constructor.
-   */
   public function __construct(ProgramManager $project_manager, UserManager $user_manager,
                               EntityManagerInterface $entity_manager, ProgramFileRepository $project_file_repository,
                               ApkRepository $apk_repository, UserDataFixtures $user_data_fixtures,

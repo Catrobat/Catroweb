@@ -1,0 +1,110 @@
+
+name: Tests
+
+on: [push, pull_request]
+
+
+jobs:
+
+  tests_phpunit:
+    # Runs all PhpUnit tests via docker in the latest ubuntu build
+    name: PhpUnit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+
+      - name: PhpUnit tests
+        run:
+          docker exec app.catroweb.test bin/phpunit
+
+
+  tests_behat:
+    # Runs all Behat test suites parallel using the matrix strategy via docker in the latest ubuntu build.
+    name: Behat Tests
+    runs-on: ubuntu-latest
+    strategy:
+      #
+      #  Notes:
+      #         - Check the behat.yml when changing / creating new suites
+      #         - suites will finish their work even if another suite fails (fail-fast: false)
+      #
+      fail-fast: false
+      matrix:
+        testSuite:
+          - admin
+          - api-authentication
+          - api-media-package
+          - api-user
+          - api-projects
+          - deprecated-api-general
+          - deprecated-api-profile
+          - deprecated-api-project
+          - deprecated-api-upload
+          - ci
+          - flavor
+          - web-general
+          - web-profile
+          - web-project
+          - gamejam
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+          sleep 30
+
+      # Test Run
+      - name: Behat ${{ matrix.testSuite }} tests
+        id: test-run
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }}
+          echo ::set-output name=status::success
+
+      # Rerun #1
+      - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests
+        if: steps.test-run.outputs.status != 'success'
+        id: test-rerun-1
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+          echo ::set-output name=status::success
+
+        # Rerun #2
+      - name: 2. Rerun for Behat ${{ matrix.testSuite }} tests
+        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success'
+        id: test-rerun-2
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+          echo ::set-output name=status::success
+
+      # Rerun #3
+      - name: 3. Rerun for Behat ${{ matrix.testSuite }} tests
+        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
+        id: test-rerun-3
+        run: |
+          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+
+      - name: DEBUG
+        if: always()
+        run: |
+          docker ps -a
+          echo "---"
+          docker logs app.catroweb.test
+          echo "---"
+          docker logs db.catroweb.test

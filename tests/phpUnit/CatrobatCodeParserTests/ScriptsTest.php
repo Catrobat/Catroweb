@@ -1,29 +1,49 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\ScriptFactory;
+use PHPUnit\Framework\TestCase;
+use SimpleXMLElement;
 
-class ScriptsTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class ScriptsTest extends TestCase
 {
+  /**
+   * @var string
+   */
   const TYPE = 'type';
+  /**
+   * @var string
+   */
   const CAPTION = 'caption';
+  /**
+   * @var string
+   */
   const IMG_FILE = 'img_file';
 
+  /**
+   * @var SimpleXMLElement[]|bool
+   */
   protected $script_xml_properties_list;
 
-  public function setUp(): void
+  protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->script_xml_properties_list = $xml_properties->xpath('//script');
   }
 
   /**
    * @test
    * @dataProvider provideMethodNames
+   *
+   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name)
+  public function mustHaveMethod($method_name): void
   {
     foreach ($this->script_xml_properties_list as $script_xml_properties)
     {
@@ -32,7 +52,7 @@ class ScriptsTest extends \PHPUnit\Framework\TestCase
     }
   }
 
-  public function provideMethodNames()
+  public function provideMethodNames(): array
   {
     return [
       ['getType'],
@@ -46,8 +66,11 @@ class ScriptsTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends      mustHaveMethod
    * @dataProvider provideScriptXMLProperties
+   *
+   * @param mixed $script_xml_properties
+   * @param mixed $expected
    */
-  public function factoryMustGenerateValidScript($script_xml_properties, $expected)
+  public function factoryMustGenerateValidScript($script_xml_properties, $expected): void
   {
     $actual = ScriptFactory::generate($script_xml_properties);
 
@@ -58,25 +81,27 @@ class ScriptsTest extends \PHPUnit\Framework\TestCase
     $this->assertTrue(true);
   }
 
-  public function provideScriptXMLProperties()
+  /**
+   * @return mixed[][]
+   */
+  public function provideScriptXMLProperties(): array
   {
     $data = [];
 
     $reference_output =
-      file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/script_reference.output', FILE_IGNORE_NEW_LINES);
+      file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/script_reference.output', FILE_IGNORE_NEW_LINES);
     $reference_output_index = 0;
 
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
     foreach ($xml_properties->xpath('//script') as $script_xml_properties)
     {
-
       $expected = [
-        self::TYPE     => $reference_output[$reference_output_index++],
-        self::CAPTION  => $reference_output[$reference_output_index++],
+        self::TYPE => $reference_output[$reference_output_index++],
+        self::CAPTION => $reference_output[$reference_output_index++],
         self::IMG_FILE => $reference_output[$reference_output_index++],
       ];
       // To omit '---' after each script information block in file 'script_reference.ouput'
-      $reference_output_index++;
+      ++$reference_output_index;
 
       $data[] = [
         $script_xml_properties,
@@ -98,8 +123,8 @@ class ScriptsTest extends \PHPUnit\Framework\TestCase
     $actual = ScriptFactory::generate($script_xml_properties);
 
     $expected = [
-      self::TYPE     => Constants::UNKNOWN_SCRIPT,
-      self::CAPTION  => 'Unknown Script',
+      self::TYPE => Constants::UNKNOWN_SCRIPT,
+      self::CAPTION => 'Unknown Script',
       self::IMG_FILE => Constants::UNKNOWN_SCRIPT_IMG,
     ];
 
@@ -114,7 +139,7 @@ class ScriptsTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function outCommentedScriptsMustContainOnlyGrayBricks()
+  public function outCommentedScriptsMustContainOnlyGrayBricks(): void
   {
     $script_xml_properties = $this->script_xml_properties_list[0];
     $script_xml_properties->commentedOut = 'true'; // Fake out-commented script
@@ -122,6 +147,8 @@ class ScriptsTest extends \PHPUnit\Framework\TestCase
 
     $expected_img_file = Constants::UNKNOWN_BRICK_IMG;
     foreach ($actual->getBricks() as $brick)
+    {
       $this->assertEquals($expected_img_file, $brick->getImgFile());
+    }
   }
 }

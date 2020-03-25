@@ -2,7 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
   ->exclude(['Migrations', 'Resources'])
-  ->in(['src', 'tests/behat/context']);
+  ->in(['src', 'tests']);
 
 return PhpCsFixer\Config::create()
   ->setRules([

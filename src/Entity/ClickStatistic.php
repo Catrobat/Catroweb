@@ -180,14 +180,6 @@ class ClickStatistic
   }
 
   /**
-   * @param mixed $latitude
-   */
-  public function setLatitude($latitude)
-  {
-    $this->latitude = $latitude;
-  }
-
-  /**
    * @return mixed
    */
   public function getCountryCode()

@@ -5,16 +5,11 @@ namespace App\Catrobat\Controller\Admin;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class SnapshotController.
- */
 class SnapshotController extends CRUDController
 {
-  /**
-   * @return \Symfony\Component\HttpFoundation\Response
-   */
-  public function listAction(Request $request = null)
+  public function listAction(Request $request = null): Response
   {
     $finder = new Finder();
     $directory = $this->container->getParameter('catrobat.snapshot.dir');

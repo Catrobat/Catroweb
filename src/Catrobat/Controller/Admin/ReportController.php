@@ -2,84 +2,58 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
 use App\Entity\UserComment;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * Class ReportController.
- */
-class ReportController extends Controller
+class ReportController extends CRUDController
 {
-  /**
-   * @return RedirectResponse
-   */
-  public function unreportProgramAction(Request $request = null)
+  public function unreportProgramAction(): RedirectResponse
   {
-    /**
-     * @var ProgramInappropriateReport
-     * @var Program                    $program
-     */
+    /** @var ProgramInappropriateReport $object */
     $object = $this->admin->getSubject();
-
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
-
     $program = $object->getProgram();
     $program->setVisible(true);
-
     $em = $this->getDoctrine()->getManager();
     $em->remove($object);
     $em->flush();
-
     $this->addFlash('sonata_flash_success', 'Program '.$object->getId().' is no longer reported');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @return RedirectResponse
-   */
-  public function unreportCommentAction(Request $request = null)
+  public function unreportCommentAction(): RedirectResponse
   {
-    /* @var $object \App\Entity\UserComment */
+    /* @var $object UserComment */
     $object = $this->admin->getSubject();
-
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
-
     $object->setIsReported(false);
     $this->admin->update($object);
-
     $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' is no longer reported');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @return RedirectResponse
-   */
-  public function deleteCommentAction(Request $request = null)
+  public function deleteCommentAction(): RedirectResponse
   {
-    /* @var $object \App\Entity\UserComment */
+    /* @var $object UserComment */
     $object = $this->admin->getSubject();
-
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($object->getId());
-
-    if (!$comment)
+    if (null === $comment)
     {
       throw $this->createNotFoundException('No comment found for this id '.$object->getId());
     }

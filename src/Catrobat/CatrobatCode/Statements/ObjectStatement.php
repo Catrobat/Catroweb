@@ -2,34 +2,19 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class ObjectStatement.
- */
+use App\Catrobat\CatrobatCode\StatementFactory;
+
 class ObjectStatement extends Statement
 {
-  /**
-   * @var
-   */
-  private $name;
+  private string $name;
 
-  /**
-   * ObjectStatement constructor.
-   *
-   * @param $statementFactory
-   * @param $spaces
-   * @param $name
-   */
-  public function __construct($statementFactory, $spaces, $name)
+  public function __construct(StatementFactory $statementFactory, string $spaces, string $name)
   {
     $this->name = $name;
-    parent::__construct($statementFactory, null, 0,
-      '', '');
+    parent::__construct($statementFactory, null, $spaces, '', '');
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     return $this->name;
   }

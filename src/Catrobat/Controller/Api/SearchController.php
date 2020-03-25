@@ -4,34 +4,26 @@ namespace App\Catrobat\Controller\Api;
 
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\ProgramManager;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class SearchController.
- */
 class SearchController extends AbstractController
 {
-  /**
-   * @var int
-   */
-  private $DEFAULT_LIMIT = 20;
+  private int $DEFAULT_LIMIT = 20;
+
+  private int $DEFAULT_OFFSET = 0;
 
   /**
-   * @var int
-   */
-  private $DEFAULT_OFFSET = 0;
-
-  /**
+   * @deprecated
+   *
    * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"},
    * methods={"GET"})
    *
-   * @throws \Exception
-   *
-   * @return ProgramListResponse
+   * @throws Exception
    */
-  public function searchProgramsAction(Request $request, ProgramManager $program_manager)
+  public function searchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
   {
     $query = $request->query->get('q');
 
@@ -40,8 +32,8 @@ class SearchController extends AbstractController
     $query = str_replace('gmx', '', $query);
     $query = trim($query);
 
-    $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
-    $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
+    $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
+    $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
     $max_version = $request->query->get('max_version', '0');
 
     $programs = $program_manager->search($query, $limit, $offset, $max_version);
@@ -54,16 +46,16 @@ class SearchController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/search/tagProjects.json", name="api_search_tag",
    * defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @return ProgramListResponse
    */
-  public function tagSearchProgramsAction(Request $request, ProgramManager $program_manager)
+  public function tagSearchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
   {
     $query = $request->query->get('q');
-    $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
-    $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
+    $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
+    $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
     $programs = $program_manager->getProgramsByTagId($query, $limit, $offset);
 
     $numbOfTotalProjects = $program_manager->searchTagCount($query);
@@ -72,17 +64,16 @@ class SearchController extends AbstractController
   }
 
   /**
-   * @Route("/api/projects/search/extensionProjects.json", name="api_search_extension",
-   *     defaults={"_format": "json"},
-   * methods={"GET"})
+   * @deprecated
    *
-   * @return ProgramListResponse
+   * @Route("/api/projects/search/extensionProjects.json", name="api_search_extension",
+   * defaults={"_format": "json"}, methods={"GET"})
    */
-  public function extensionSearchProgramsAction(Request $request, ProgramManager $program_manager)
+  public function extensionSearchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
   {
     $query = $request->query->get('q');
-    $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
-    $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
+    $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
+    $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
     $programs = $program_manager->getProgramsByExtensionName($query, $limit, $offset);
 
     $numbOfTotalProjects = $program_manager->searchExtensionCount($query);

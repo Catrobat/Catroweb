@@ -1,0 +1,53 @@
+name: Code Quality Checks
+
+on: [push, pull_request]
+
+jobs:
+
+  eslint:
+    #  JS CodeStyle
+    name: ESLint
+    runs-on: ubuntu-latest
+    # config defined in .eslintrc.yml
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run test
+
+  php-loc:
+    #  Measuring the size and analyzing the structure of the project (php)
+    name: PHP Loc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          wget https://phar.phpunit.de/phploc.phar
+          php phploc.phar src tests
+
+  php-cs-fixer:
+    # Checking the Coding standard
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+    # config defined in .php_cs(.dist)
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://oskarstark/php-cs-fixer-ga:latest
+        with:
+          args: --config=.php_cs.dist --diff --dry-run --allow-risky=yes --verbose --format=txt
+
+  phpstan:
+    # Additional static code quality checks
+    name: PHPStan
+    runs-on: ubuntu-latest
+    # config defined in phpstan.neon(.dist)
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHPStan
+        uses: docker://oskarstark/phpstan-ga:latest
+        env:
+          REQUIRE_DEV: true
+        with:
+          args: analyse

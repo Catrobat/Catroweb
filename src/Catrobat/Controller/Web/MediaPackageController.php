@@ -4,17 +4,10 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
-use App\Entity\MediaPackageFile;
-use App\Entity\User;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Error\Error;
 
 /**
  * Class MediaPackageController.
@@ -23,19 +16,14 @@ class MediaPackageController extends AbstractController
 {
   /**
    * @Route("/media-library/", name="media_library_overview", methods={"GET"})
+   *
+   * Legacy route:
    * @Route("/pocket-library/", name="pocket_library_overview", methods={"GET"})
-   *
-   * @throws Error
-   *
-   * @return Response
    */
-  public function indexAction()
+  public function indexAction(): Response
   {
-    /**
-     * @var EntityManager
-     * @var MediaPackage  $packages
-     */
     $em = $this->getDoctrine()->getManager();
+    /** @var MediaPackage $packages */
     $packages = $em->getRepository(MediaPackage::class)->findAll();
 
     return $this->render('MediaLibrary/mediapackageindex.html.twig',
@@ -47,29 +35,14 @@ class MediaPackageController extends AbstractController
   }
 
   /**
+   * @Route("/media-library/{package_name}", name="media_library", methods={"GET"})
+   *
+   * Legacy route:
    * @Route("/pocket-library/{package_name}", name="pocket_library", methods={"GET"})
-   * @Route("/media-library/{package_name}", name="media_package", methods={"GET"})
-   *
-   * @param        $package_name
-   * @param string $flavor
-   *
-   * @throws Error
-   *
-   * @return Response
    */
-  public function mediaPackageAction(Request $request, $package_name, $flavor, TranslatorInterface $translator)
+  public function mediaPackageAction(string $package_name, string $flavor, TranslatorInterface $translator): Response
   {
-    /*
-     * @var $package  MediaPackage
-     * @var $file     MediaPackageFile
-     * @var $category MediaPackageCategory
-     * @var $user     User
-     * @var $token    UsernamePasswordToken
-     * @var $event    InteractiveLoginEvent
-     * @var TranslatorInterface $translator
-     */
-
-    if (!isset($flavor))
+    if ('' === $flavor)
     {
       $flavor = 'pocketcode';
     }
@@ -81,7 +54,7 @@ class MediaPackageController extends AbstractController
       ])
     ;
 
-    if (!$package)
+    if (null === $package)
     {
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
@@ -101,6 +74,7 @@ class MediaPackageController extends AbstractController
       ];
     }
 
+    /** @var MediaPackageCategory $category */
     foreach ($package->getCategories() as $category)
     {
       if (0 === strpos($category->getName(), 'ThemeSpecial'))
@@ -109,21 +83,13 @@ class MediaPackageController extends AbstractController
       }
 
       $categories[] = [
-        'displayID' => preg_replace('/[^A-Za-z0-9-_:.]/', '', $category->getName()),
+        'displayID' => preg_replace('#[^A-Za-z0-9-_:.]#', '', $category->getName()),
         'name' => $category->getName(),
         'priority' => $category->getPriority(),
       ];
     }
 
-    usort($categories, function ($category_a, $category_b)
-    {
-      if ($category_a['priority'] === $category_b['priority'])
-      {
-        return 0;
-      }
-
-      return ($category_a['priority'] > $category_b['priority']) ? -1 : 1;
-    });
+    usort($categories, fn ($category_a, $category_b): int => $category_a['priority'] <=> $category_b['priority']);
 
     $mediaDir = $this->getParameter('catrobat.mediapackage.path');
 
@@ -134,38 +100,5 @@ class MediaPackageController extends AbstractController
       'new_nav' => true,
       'mediaDir' => '../../'.$mediaDir,
     ]);
-  }
-
-  /**
-   * @param $flavor
-   * @param $category MediaPackageCategory
-   * @param $files
-   *
-   * @return array
-   */
-  private function generateDownloadUrl($flavor, $category, $files)
-  {
-    /*
-     * @var MediaPackageFile
-     */
-    foreach ($category->getFiles() as $file)
-    {
-      $flavors_arr = preg_replace('/ /', '', $file->getFlavor());
-      $flavors_arr = explode(',', $flavors_arr);
-      if (!$file->getActive() || (null !== $file->getFlavor() && !in_array($flavor, $flavors_arr, true)))
-      {
-        continue;
-      }
-      $files[] = [
-        'id' => $file->getId(),
-        'data' => $file,
-        'downloadUrl' => $this->generateUrl('download_media', [
-          'id' => $file->getId(),
-          'fname' => $file->getName(), ]
-        ),
-      ];
-    }
-
-    return $files;
   }
 }

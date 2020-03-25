@@ -9,17 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class ApkStatusController.
- */
 class ApkStatusController extends AbstractController
 {
   /**
    * @Route("/ci/status/{id}", name="ci_status", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @return JsonResponse
    */
-  public function getApkStatusAction(Program $program, TranslatorInterface $translator)
+  public function getApkStatusAction(Program $program, TranslatorInterface $translator): JsonResponse
   {
     $result = [];
     switch ($program->getApkStatus())

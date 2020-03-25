@@ -14,8 +14,11 @@ use App\Entity\UserManager;
 use App\Utils\TimeUtils;
 use DateTime;
 use DateTimeZone;
+use Doctrine\Common\Persistence\Mapping\MappingException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -32,62 +35,26 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class MigrateRemixGraphsCommand extends Command
 {
-  /**
-   * @var Filesystem
-   */
-  private $file_system;
+  private Filesystem $file_system;
 
-  /**
-   * @var AsyncHttpClient
-   */
-  private $async_http_client;
+  private AsyncHttpClient $async_http_client;
 
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var ProgramManager
-   */
-  private $program_manager;
+  private ProgramManager $program_manager;
 
-  /**
-   * @var RemixManager
-   */
-  private $remix_manager;
+  private RemixManager $remix_manager;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $entity_manager;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var string
-   */
-  private $app_root_dir;
+  private string $app_root_dir;
 
-  /**
-   * @var OutputInterface
-   */
-  private $output;
+  private ?OutputInterface $output;
 
-  /**
-   * @var MigrationFileLock
-   */
-  private $migration_file_lock;
+  private ?MigrationFileLock $migration_file_lock;
 
-  /**
-   * @var CatrobatFileExtractor
-   */
-  private $file_extractor;
+  private CatrobatFileExtractor $file_extractor;
 
-  /**
-   * MigrateRemixGraphsCommand constructor.
-   *
-   * @param CatrobatFileExtractor file_extractor
-   * @param $kernel_root_dir
-   */
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
                               ProgramManager $program_manager, RemixManager $remix_manager,
                               EntityManagerInterface $entity_manager, CatrobatFileExtractor $file_extractor,
@@ -146,13 +113,12 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   *
-   * @return int|void|null
+   * @throws ORMException
+   * @throws OptimisticLockException
+   * @throws MappingException
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): void
   {
     declare(ticks=1);
     $this->migration_file_lock = new MigrationFileLock($this->app_root_dir, $output);
@@ -186,9 +152,9 @@ class MigrateRemixGraphsCommand extends Command
   /**
    * @param $directory
    *
-   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws MappingException
+   * @throws ORMException
+   * @throws OptimisticLockException
    * @throws Exception
    */
   private function migrateRemixDataOfExistingPrograms(OutputInterface $output, $directory)
@@ -230,6 +196,7 @@ class MigrateRemixGraphsCommand extends Command
     while (null != ($program_id = $this->program_manager->findNext($previous_program_id)))
     {
       $program_file_path = $directory.$program_id.'.catrobat';
+      /** @var Program $program */
       $program = $this->program_manager->find($program_id);
       assert(null != $program);
       $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, '...');
@@ -251,7 +218,7 @@ class MigrateRemixGraphsCommand extends Command
       $previous_program_id = $program_id;
     }
 
-    $duration = TimeUtils::getDateTimeStamp() - $migration_start_time->getTimestamp();
+    $duration = TimeUtils::getDateTime()->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -283,7 +250,7 @@ class MigrateRemixGraphsCommand extends Command
       $progress_bar->display();
     }
 
-    $duration = TimeUtils::getDateTimeStamp() - $migration_start_time->getTimestamp();
+    $duration = TimeUtils::getDateTime()->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -322,7 +289,7 @@ class MigrateRemixGraphsCommand extends Command
       ++$intermediate_uploads;
     }
 
-    $duration = TimeUtils::getDateTimeStamp() - $migration_start_time->getTimestamp();
+    $duration = TimeUtils::getDateTime()->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
     $output->writeln('');
@@ -378,7 +345,7 @@ class MigrateRemixGraphsCommand extends Command
       // NOTE: this is a workaround only needed for migration purposes in order to stay backward compatible
       //       with older XML files -> do not change order here
       //----------------------------------------------------------------------------------------------------------
-      $url_data = $extracted_file->getRemixesData(PHP_INT_MAX, true, false);
+      $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, false);
       assert(1 == count($url_data), 'WTH! This program has multiple urls with different program IDs?!!');
       assert($url_data[0]->getProgramId() == $program_id);
 
@@ -409,27 +376,21 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param bool $is_update
-   *
-   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
-  private function addRemixData(Program $program, array $remixes_data, $is_update = false)
+  private function addRemixData(Program $program, array $remixes_data, bool $is_update = false)
   {
     assert(null != $program);
-    $scratch_remixes_data = array_filter($remixes_data, function ($remix_data)
+    $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data)
     {
-      /*
-       * @var RemixData $remix_data
-       */
       return $remix_data->isScratchProgram();
     });
     $scratch_info_data = [];
 
     if (count($scratch_remixes_data) > 0)
     {
-      $scratch_ids = array_map(function ($data)
+      $scratch_ids = array_map(function (RemixData $data)
       {
         /*
          * @var $data RemixData
@@ -454,14 +415,9 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param $directory
-   * @param $username
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
    * @throws Exception
    */
-  private function debugImportMissingPrograms(OutputInterface $output, $directory, $username)
+  private function debugImportMissingPrograms(OutputInterface $output, string $directory, string $username)
   {
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
@@ -473,6 +429,7 @@ class MigrateRemixGraphsCommand extends Command
       return;
     }
 
+    /** @var User $user */
     $user = $this->user_manager->findUserByUsername($username);
     if (null == $user)
     {
@@ -495,9 +452,6 @@ class MigrateRemixGraphsCommand extends Command
 
     foreach ($finder as $program_file_path)
     {
-      /**
-       * @var User
-       */
       $program_file = new File($program_file_path);
       $extracted_file = $this->file_extractor->extract($program_file);
 

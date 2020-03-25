@@ -2,22 +2,19 @@
 
 namespace App\Catrobat\Controller\Admin;
 
+use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Entity\Program;
 use App\Utils\TimeUtils;
+use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * Class ApkController.
- */
 class ApkController extends CRUDController
 {
-  public function resetStatusAction()
+  public function resetStatusAction(): RedirectResponse
   {
-    /**
-     * @var Program
-     */
+    /** @var Program $object */
     $object = $this->admin->getSubject();
 
     if (!$object)
@@ -35,15 +32,11 @@ class ApkController extends CRUDController
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return RedirectResponse
+   * @throws Exception
    */
-  public function rebuildApkAction()
+  public function rebuildApkAction(): RedirectResponse
   {
-    /**
-     * @var Program
-     */
+    /** @var Program $object */
     $object = $this->admin->getSubject();
 
     if (!$object)
@@ -51,7 +44,7 @@ class ApkController extends CRUDController
       throw new NotFoundHttpException();
     }
 
-    $dispatcher = $this->container->get('App\Catrobat\Services\Ci\JenkinsDispatcher');
+    $dispatcher = $this->container->get(JenkinsDispatcher::class);
     $dispatcher->sendBuildRequest($object->getId());
 
     $object->setApkRequestTime(TimeUtils::getDateTime());
@@ -64,17 +57,12 @@ class ApkController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @return RedirectResponse
-   */
-  public function resetAllApkAction()
+  public function resetAllApkAction(): RedirectResponse
   {
-    /**
-     * @var Program
-     */
-    $datagrid = $this->admin->getDatagrid();
+    /** @var Program $object */
+    $data_grid = $this->admin->getDatagrid();
 
-    $objects = $datagrid->getResults();
+    $objects = $data_grid->getResults();
 
     foreach ($objects as $program)
     {
@@ -82,31 +70,29 @@ class ApkController extends CRUDController
       $this->admin->update($program);
     }
 
-    if (0 != count($objects))
+    if (0 != (is_countable($objects) ? count($objects) : 0))
     {
-      $this->addFlash('sonata_flash_success', 'All Apks reseted');
+      $this->addFlash('sonata_flash_success', 'All APKs reset');
     }
     else
     {
-      $this->addFlash('sonata_flash_info', 'No Apks to be reseted');
+      $this->addFlash('sonata_flash_info', 'No APKs to reset');
     }
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return RedirectResponse
+   * @throws Exception
    */
-  public function rebuildAllApkAction()
+  public function rebuildAllApkAction(): RedirectResponse
   {
     /* @var $program Program */
 
-    $datagrid = $this->admin->getDatagrid();
+    $data_grid = $this->admin->getDatagrid();
 
-    $objects = $datagrid->getResults();
-    $dispatcher = $this->container->get('App\Catrobat\Services\Ci\JenkinsDispatcher');
+    $objects = $data_grid->getResults();
+    $dispatcher = $this->container->get(JenkinsDispatcher::class);
 
     foreach ($objects as $program)
     {
@@ -118,7 +104,7 @@ class ApkController extends CRUDController
 
     if (0 != count($objects))
     {
-      $this->addFlash('sonata_flash_success', 'Requested rebuild for all Apks');
+      $this->addFlash('sonata_flash_success', 'Requested rebuild for all APks');
     }
     else
     {

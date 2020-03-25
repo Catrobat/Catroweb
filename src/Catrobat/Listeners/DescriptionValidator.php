@@ -7,6 +7,7 @@ use App\Catrobat\Exceptions\Upload\DescriptionTooLongException;
 use App\Catrobat\Exceptions\Upload\RudewordInDescriptionException;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RudeWordFilter;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * Class DescriptionValidator.
@@ -40,7 +41,9 @@ class DescriptionValidator
   }
 
   /**
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws DescriptionTooLongException
+   * @throws RudewordInDescriptionException
+   * @throws NonUniqueResultException
    */
   public function validate(ExtractedCatrobatFile $file)
   {

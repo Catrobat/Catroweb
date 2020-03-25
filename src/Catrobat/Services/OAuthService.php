@@ -233,7 +233,7 @@ class OAuthService
   /**
    * @throws Exception
    *
-   * @return JsonResponse|Response
+   * @return JsonResponse
    */
   public function exchangeGoogleCodeAction(Request $request)
   {
@@ -261,7 +261,7 @@ class OAuthService
       }
       else
       {
-        return new Response('Token invalid', 777);
+        return new JsonResponse('Token invalid', 777);
       }
 
       if ($gEmail)
@@ -278,7 +278,7 @@ class OAuthService
     }
     catch (Exception $e)
     {
-      return new Response('Token invalid', 777);
+      return new JsonResponse('Token invalid', 777);
     }
 
     if ($google_user)
@@ -619,55 +619,12 @@ class OAuthService
 
   /**
    * @param $user
+   *
+   * @throws Exception
    */
   private function refreshGoogleAccessToken($user)
   {
-    /**
-     * @var User
-     */
-    // Google offline server tokens are valid for ~1h. So, we need to check if the token has to be refreshed
-    // before making server-side requests. The refresh token has an unlimited lifetime.
-    $server_access_token = $user->getGplusAccessToken();
-    $refresh_token = $user->getGplusRefreshToken();
-
-    if (null != $server_access_token && null != $refresh_token)
-    {
-      $client = $this->getAuthenticatedGoogleClientForGPlusUser($user);
-
-      $reqUrl = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token='.$server_access_token;
-      $req = new Google_Http_Request($reqUrl);
-
-      /*
-       * result for valid token:
-       * {
-       * "issued_to": "[app id]",
-       * "audience": "[app id]",
-       * "user_id": "[user id]",
-       * "scope": "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.moments.write https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.profile.agerange.read https://www.googleapis.com/auth/plus.profile.language.read https://www.googleapis.com/auth/plus.circles.members.read https://www.googleapis.com/auth/userinfo.profile",
-       * "expires_in": 3181,
-       * "email": "[email]",
-       * "verified_email": [true/false],
-       * "access_type": "offline"
-       * }
-       * result for invalid token:
-       * {
-       * "error_description": "Invalid Value"
-       * }
-       */
-
-      $results = get_object_vars(json_decode($client->getAuth()
-        ->authenticatedRequest($req)
-        ->getResponseBody()));
-
-      if (isset($results['error_description']) && 'Invalid Value' == $results['error_description'])
-      {
-        // token is expired --> refresh
-        $newtoken_array = $client->getAccessToken();
-        $newtoken = $newtoken_array->access_token;
-        $user->setGplusAccessToken($newtoken);
-        $this->user_manager->updateUser($user);
-      }
-    }
+    throw new Exception('not implemented');
   }
 
   /**

@@ -5,42 +5,27 @@ namespace App\Catrobat\Controller\Web;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use App\Entity\StarterCategory;
-use Doctrine\DBAL\Types\GuidType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Error\Error;
 
-/**
- * Class TutorialController.
- */
 class TutorialController extends AbstractController
 {
   /**
    * @Route("/help", name="catrobat_web_help", methods={"GET"})
-   *
-   * @throws Error
-   *
-   * @return Response
    */
-  public function helpAction()
+  public function helpAction(): Response
   {
     return $this->render('help/help.html.twig');
   }
 
   /**
-   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page": 1},
-   * requirements={"page": "\d+"}, methods={"GET"})
-   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page": 1},
-   * requirements={"page": "\d+"}, methods={"GET"})
-   *
-   * @throws Error
-   *
-   * @return Response
+   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page": 1}, requirements={"page": "\d+"}, methods={"GET"})
+   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page": 1}, requirements={"page": "\d+"}, methods={"GET"})
    */
-  public function stepByStepAction()
+  public function stepByStepAction(): Response
   {
     return $this->render('help/stepByStep.html.twig', []);
   }
@@ -48,14 +33,8 @@ class TutorialController extends AbstractController
   /**
    * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page": -1},
    * requirements={"page": "\d+"}, methods={"GET"})
-   *
-   * @param $page
-   *
-   * @throws Error
-   *
-   * @return Response
    */
-  public function tutorialCardsAction($page)
+  public function tutorialCardsAction(int $page): Response
   {
     $cards_num = 12;
 
@@ -82,19 +61,11 @@ class TutorialController extends AbstractController
 
   /**
    * @Route("/starter-project/", name="catrobat_web_starter", methods={"GET"})
-   *
-   * @throws Error
-   *
-   * @return Response
    */
-  public function starterProgramsAction()
+  public function starterProgramsAction(): Response
   {
-    /**
-     * @var StarterCategory
-     */
     $em = $this->getDoctrine()->getManager();
-
-    $categories = $em->getRepository('App\Entity\StarterCategory')->findBy([], ['order' => 'asc']);
+    $categories = $em->getRepository(StarterCategory::class)->findBy([], ['order' => 'asc']);
 
     $categories_twig = $this->generateCategoryArray($categories);
 
@@ -104,25 +75,21 @@ class TutorialController extends AbstractController
   }
 
   /**
-   * @Route("/category-project//{id}", name="catrobat_web_category_programs", methods={"GET"})
-   *
-   * @param GuidType $id
-   *
-   * @return JsonResponse
+   * @Route("/category-project/{id}", name="catrobat_web_category_programs", methods={"GET"})
    */
-  public function categoryProgramsAction(Request $request, $id, ScreenshotRepository $screenshot_repository)
+  public function categoryProgramsAction(Request $request, string $id, ScreenshotRepository $screenshot_repository): JsonResponse
   {
     /**
      * @var Program
      */
     $em = $this->getDoctrine()->getManager();
-    $programs = $em->getRepository('App\Entity\Program')->findBy(['category' => $id]);
+    $programs = $em->getRepository(Program::class)->findBy(['category' => $id]);
 
     $retArray = $this->receiveCategoryPrograms($request, $programs, $screenshot_repository);
 
     $retArray['CatrobatInformation'] = [
       'BaseUrl' => $request->getSchemeAndHttpHost().'/',
-      'TotalProjects' => count($programs),
+      'TotalProjects' => is_countable($programs) ? count($programs) : 0,
       'ProjectsExtension' => '.catrobat',
     ];
 
@@ -131,22 +98,16 @@ class TutorialController extends AbstractController
 
   /**
    * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
-   *
-   * @throws Error
-   *
-   * @return Response
    */
-  public function gameJamAction()
+  public function gameJamAction(): Response
   {
     return $this->render('help/gamejam.html.twig');
   }
 
   /**
    * @param $page
-   *
-   * @return array
    */
-  private function generateBlocks($page)
+  private function generateBlocks($page): array
   {
     $blocks = [];
     $blocks[0] = ['block' => 'one', 'images' => 1];
@@ -177,51 +138,46 @@ class TutorialController extends AbstractController
     return $blocks;
   }
 
-  /**
-   * @param $page
-   *
-   * @return string|null
-   */
-  private function setExampleLink($page)
+  private function setExampleLink(int $page): ?string
   {
     $example_link = null;
     switch ($page)
     {
       case 1:
-        $example_link = $this->generateUrl('program', ['id' => 3983, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_983, 'flavor' => 'pocketcode']);
         break;
       case 2:
-        $example_link = $this->generateUrl('program', ['id' => 3984, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_984, 'flavor' => 'pocketcode']);
         break;
       case 3:
-        $example_link = $this->generateUrl('program', ['id' => 3985, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_985, 'flavor' => 'pocketcode']);
         break;
       case 4:
-        $example_link = $this->generateUrl('program', ['id' => 3986, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_986, 'flavor' => 'pocketcode']);
         break;
       case 5:
-        $example_link = $this->generateUrl('program', ['id' => 3987, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_987, 'flavor' => 'pocketcode']);
         break;
       case 6:
-        $example_link = $this->generateUrl('program', ['id' => 3988, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_988, 'flavor' => 'pocketcode']);
         break;
       case 7:
-        $example_link = $this->generateUrl('program', ['id' => 3990, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_990, 'flavor' => 'pocketcode']);
         break;
       case 8:
-        $example_link = $this->generateUrl('program', ['id' => 3991, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_991, 'flavor' => 'pocketcode']);
         break;
       case 9:
-        $example_link = $this->generateUrl('program', ['id' => 3992, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_992, 'flavor' => 'pocketcode']);
         break;
       case 10:
-        $example_link = $this->generateUrl('program', ['id' => 3979, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_979, 'flavor' => 'pocketcode']);
         break;
       case 11:
-        $example_link = $this->generateUrl('program', ['id' => 3981, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_981, 'flavor' => 'pocketcode']);
         break;
       case 12:
-        $example_link = $this->generateUrl('program', ['id' => 3982, 'flavor' => 'pocketcode']);
+        $example_link = $this->generateUrl('program', ['id' => 3_982, 'flavor' => 'pocketcode']);
         break;
     }
 
@@ -229,19 +185,16 @@ class TutorialController extends AbstractController
   }
 
   /**
-   * @param $categories
-   *
-   * @return array
+   * @return StarterCategory[]
    */
-  private function generateCategoryArray($categories)
+  private function generateCategoryArray(array $categories): array
   {
-    /**
-     * @var StarterCategory
-     */
     $categories_twig = [];
 
+    /** @var StarterCategory $category */
     foreach ($categories as $category)
     {
+      $categories_twig = (array) $categories_twig;
       $categories_twig[] = [
         'id' => $category->getId(),
         'alias' => $category->getAlias(),
@@ -251,21 +204,14 @@ class TutorialController extends AbstractController
     return $categories_twig;
   }
 
-  /**
-   * @param array                $programs
-   * @param ScreenshotRepository $screenshot_repository
-   *
-   * @return array
-   */
-  private function receiveCategoryPrograms(Request $request, $programs, $screenshot_repository)
+  private function receiveCategoryPrograms(Request $request, array $programs,
+                                           ScreenshotRepository $screenshot_repository): array
   {
-    /**
-     * @var Program
-     */
     $retArray = [
       'CatrobatProjects' => [],
     ];
 
+    /** @var Program $program */
     foreach ($programs as $program)
     {
       $retArray['CatrobatProjects'][] = [

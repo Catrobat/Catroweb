@@ -7,6 +7,7 @@ use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,9 +15,6 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class DownloadApkController.
- */
 class DownloadApkController extends AbstractController
 {
   /**
@@ -24,11 +22,9 @@ class DownloadApkController extends AbstractController
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   *
-   * @return BinaryFileResponse
    */
   public function downloadApkAction(Request $request, Program $program, ApkRepository $apk_repository,
-                                    ProgramManager $programManager)
+                                    ProgramManager $programManager): BinaryFileResponse
   {
     if (!$program->isVisible())
     {
@@ -43,9 +39,9 @@ class DownloadApkController extends AbstractController
     {
       $file = $apk_repository->getProgramFile($program->getId());
     }
-    catch (\Exception $e)
+    catch (Exception $exception)
     {
-      throw new NotFoundHttpException();
+      throw new NotFoundHttpException($exception);
     }
     if ($file->isFile())
     {
@@ -63,12 +59,7 @@ class DownloadApkController extends AbstractController
     throw new NotFoundHttpException();
   }
 
-  /**
-   * @param $file
-   *
-   * @return BinaryFileResponse
-   */
-  private function createBinaryFileResponse(Program $program, $file)
+  private function createBinaryFileResponse(Program $program, $file): BinaryFileResponse
   {
     $response = new BinaryFileResponse($file);
     $d = $response->headers->makeDisposition(

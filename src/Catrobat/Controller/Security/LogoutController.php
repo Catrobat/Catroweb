@@ -5,15 +5,9 @@ namespace App\Catrobat\Controller\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-/**
- * Class LogoutController.
- */
 class LogoutController extends AbstractController
 {
-  /**
-   * @return RedirectResponse
-   */
-  public function logoutAction()
+  public function logoutAction(): RedirectResponse
   {
     $this->get('security.token_storage')->setToken(null);
 

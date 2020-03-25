@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\behat\context;
+
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
 use App\Catrobat\Services\TestEnv\SymfonySupport;

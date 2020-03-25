@@ -49,7 +49,7 @@ class UserTestGroup
    * @ORM\Id
    * @ORM\Column(type="guid", unique=true, nullable=false)
    */
-  protected $user_id;
+  protected string $user_id;
 
   /**
    * @ORM\Column(type="integer")
@@ -61,11 +61,7 @@ class UserTestGroup
    */
   protected $created_at;
 
-  /**
-   * @param int $user_id
-   * @param int $group_number
-   */
-  public function __construct($user_id, $group_number)
+  public function __construct(string $user_id, int $group_number)
   {
     if (null !== $user_id)
     {
@@ -86,15 +82,15 @@ class UserTestGroup
   }
 
   /**
-   * @param int $user_id
+   * @param $user_id
    */
-  public function setUserId($user_id)
+  public function setUserId(string $user_id)
   {
     $this->user_id = $user_id;
   }
 
   /**
-   * @return int
+   * @return string
    */
   public function getUserId()
   {

@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -283,12 +282,7 @@ class User extends BaseUser implements LdapUserInterface
     return $this->gplus_refresh_token;
   }
 
-  /**
-   * Get id.
-   *
-   * @return GuidType
-   */
-  public function getId()
+  public function getId(): ?string
   {
     return $this->id;
   }
@@ -454,26 +448,6 @@ class User extends BaseUser implements LdapUserInterface
   public function setLikes($likes)
   {
     $this->likes = $likes;
-  }
-
-  /**
-   * Returns the Notifications which are available for this user (shown upon login).
-   *
-   * @return CatroNotification[]|Collection the Notifications which are available for this user (shown upon login)
-   */
-  public function getNotifications()
-  {
-    return (null != $this->notifications) ? $this->notifications : new ArrayCollection();
-  }
-
-  /**
-   * Sets the Notifications which are available for this user (shown upon login).
-   *
-   * @param CatroNotification[]|Collection $notifications notifications which are available for this user (shown upon login)
-   */
-  public function setNotifications($notifications)
-  {
-    $this->notifications_for_this_user = $notifications;
   }
 
   /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\behat\context;
+
 use App\Catrobat\Services\TestEnv\SymfonySupport;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Element\NodeElement;

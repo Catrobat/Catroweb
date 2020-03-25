@@ -4,6 +4,7 @@ composer.phar
 phpspec.yml
 phpunit.xml
 *.local
+phploc.phar
 
 ### backups ###
 backups/**

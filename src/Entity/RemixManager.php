@@ -13,7 +13,6 @@ use App\Repository\ScratchProgramRemixRepository;
 use App\Repository\ScratchProgramRepository;
 use App\Utils\TimeUtils;
 use DateTime;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -184,11 +183,9 @@ class RemixManager
   }
 
   /**
-   * @param GuidType $program_id
-   *
    * @return array
    */
-  public function getFullRemixGraph($program_id)
+  public function getFullRemixGraph(string $program_id)
   {
     static $MAX_RECURSION_DEPTH = 6;
     $recursion_depth = 0;
@@ -411,12 +408,7 @@ class RemixManager
     return $unseen_remix_programs_data;
   }
 
-  /**
-   * @param GuidType $program_id
-   *
-   * @return int
-   */
-  public function remixCount($program_id)
+  public function remixCount(string $program_id): int
   {
     $result = $this->getFullRemixGraph($program_id);
 

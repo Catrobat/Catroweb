@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Catrobat\Ldap\UserHydrator;
+use App\Catrobat\Services\TokenGenerator;
+use Exception;
 use FR3D\LdapBundle\Driver\LdapDriverException;
 use FR3D\LdapBundle\Driver\LdapDriverInterface;
 use FR3D\LdapBundle\Ldap\LdapManager;
@@ -25,36 +27,34 @@ class UserLDAPManager extends LdapManager
    */
   protected $group_filter;
 
-  /**
-   * @var
-   */
-  protected $tokengenerator;
+  protected TokenGenerator $token_generator;
 
-  /**
-   * @var Logger
-   */
-  protected $logger;
+  protected Logger $logger;
+
+  private UserManager $user_manager;
 
   /**
    * UserLDAPManager constructor.
    *
    * @param $role_mappings
    * @param $group_filter
-   * @param $tokengenerator
+   * @param $token_generator
    */
-  public function __construct(LdapDriverInterface $driver, UserHydrator $user_manager,
-                              array $params, $role_mappings, $group_filter, $tokengenerator, Logger $logger)
+  public function __construct(LdapDriverInterface $driver, UserHydrator $user_hydrator, UserManager $user_manager,
+                              array $params, $role_mappings, $group_filter, TokenGenerator $token_generator,
+                              Logger $logger)
   {
     $this->role_mappings = $role_mappings;
     $this->group_filter = $group_filter;
     $this->logger = $logger;
-    $this->tokengenerator = $tokengenerator;
+    $this->token_generator = $token_generator;
+    $this->user_manager = $user_manager;
 
-    parent::__construct($driver, $user_manager, $params);
+    parent::__construct($driver, $user_hydrator, $params);
   }
 
   /**
-   * @throws \Exception
+   * @throws Exception
    *
    * @return bool|\FOS\UserBundle\Model\UserInterface|object|UserInterface|null
    */
@@ -66,7 +66,7 @@ class UserLDAPManager extends LdapManager
       $entries = $this->driver->search($this->params['baseDn'], $filter, $this->params['attributes']);
       if ($entries['count'] > 1)
       {
-        throw new \Exception('This search can only return a single user');
+        throw new Exception('This search can only return a single user');
       }
 
       if (0 == $entries['count'])
@@ -75,28 +75,21 @@ class UserLDAPManager extends LdapManager
       }
 
       // same Email-Address already in system?
-      /**
-       * @var UserManager
-       */
-      $usermanager = $this->user_manager;
-      $sameEmailUser = $usermanager->findOneBy([
+      $same_email_user = $this->user_manager->findOneBy([
         'email' => $entries[0]['mail'],
       ]);
-      if (null != $sameEmailUser)
+      if (null != $same_email_user)
       {
-        if ($sameEmailUser instanceof LdapUserInterface)
+        if ($same_email_user instanceof LdapUserInterface)
         {
-          $sameEmailUser->setDn($entries[0]['dn']);
+          $same_email_user->setDn($entries[0]['dn']);
         }
-        $usermanager->updateUser($sameEmailUser);
+        $this->user_manager->updateUser($same_email_user);
 
-        return $sameEmailUser;
+        return $same_email_user;
       }
 
-      $user = $this->user_manager->createUser();
-      $this->hydrate($user, $entries[0]);
-
-      return $user;
+      return $this->hydrator->hydrate($entries[0]);
     }
     catch (LdapDriverException $e)
     {
@@ -128,9 +121,6 @@ class UserLDAPManager extends LdapManager
 
     if ($binding)
     {
-      /*
-       * @var $user \App\Entity\User*
-       */
       $user->setRealRoles([]);
       $user->setRoles([]);
       $roles = [];
@@ -146,11 +136,5 @@ class UserLDAPManager extends LdapManager
     }
 
     return $binding;
-  }
-
-  protected function hydrate(UserInterface $user, array $entry)
-  {
-    parent::hydrate($user, $entry);
-    $user->setUploadToken($this->tokengenerator->generateToken());
   }
 }

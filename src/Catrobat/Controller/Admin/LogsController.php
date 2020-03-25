@@ -5,32 +5,26 @@ namespace App\Catrobat\Controller\Admin;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class LogsController.
- */
 class LogsController extends CRUDController
 {
   const LOG_DIR = '../var/log/';
+
   const LOG_PATTERN = '*.log';
 
   const FILTER_LEVEL_DEBUG = 0;
   const FILTER_LEVEL_INFO = 1;
   const FILTER_LEVEL_NOTICE = 2;
+
   const FILTER_LEVEL_WARNING = 3;
   const FILTER_LEVEL_ERROR = 4;
   const FILTER_LEVEL_CRITICAL = 5;
   const FILTER_LEVEL_ALERT = 6;
   const FILTER_LEVEL_EMERGENCY = 7;
 
-  /**
-   * @return \Symfony\Component\HttpFoundation\Response
-   */
-  public function listAction(Request $request = null)
+  public function listAction(Request $request = null): Response
   {
-    /**
-     * @var Finder
-     */
     $filter = self::FILTER_LEVEL_WARNING;
     $greater_equal_than_level = true;
     $line_count = 20;

@@ -338,6 +338,8 @@ class AppExtension extends AbstractExtension
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/twig/getMediaPackageImageUrl", name="catrobat_twig_getMediaPackageImageUrl",
    * methods={"POST"})
    *

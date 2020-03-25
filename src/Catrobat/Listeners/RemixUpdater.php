@@ -8,6 +8,8 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Entity\RemixManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -52,8 +54,8 @@ class RemixUpdater
   }
 
   /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function onProgramAfterInsert(ProgramAfterInsertEvent $event)
   {
@@ -61,8 +63,8 @@ class RemixUpdater
   }
 
   /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   public function update(ExtractedCatrobatFile $file, Program $program)
   {
@@ -71,11 +73,8 @@ class RemixUpdater
       $program->isInitialVersion(),
       $this->remix_manager->getProgramRepository()
     );
-    $scratch_remixes_data = array_filter($remixes_data, function ($remix_data)
+    $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data)
     {
-      /*
-       * @var $remix_data RemixData
-       */
       return $remix_data->isScratchProgram();
     });
     $scratch_info_data = [];
@@ -92,11 +91,8 @@ class RemixUpdater
 
     if (count($scratch_remixes_data) > 0)
     {
-      $scratch_ids = array_map(function ($data)
+      $scratch_ids = array_map(function (RemixData $data)
       {
-        /*
-         * @var $data RemixData
-         */
         return $data->getProgramId();
       }, $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);

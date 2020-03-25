@@ -7,7 +7,6 @@ use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
 use App\Repository\ProgramRepository;
-use Doctrine\DBAL\Types\GuidType;
 use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
@@ -332,15 +331,8 @@ class ExtractedCatrobatFile
 
   /**
    * based on: http://stackoverflow.com/a/27295688.
-   *
-   * @param GuidType          $program_id
-   * @param bool              $is_initial_version
-   * @param ProgramRepository $program_repository
-   * @param bool              $migration_mode
-   *
-   * @return RemixData[]
    */
-  public function getRemixesData($program_id, $is_initial_version, $program_repository, $migration_mode = false)
+  public function getRemixesData(string $program_id, bool $is_initial_version, ProgramRepository $program_repository, bool $migration_mode = false): array
   {
     $remixes_string = $migration_mode ? $this->getRemixMigrationUrlsString() : $this->getRemixUrlsString();
     $state = RemixUrlParsingState::STARTING;

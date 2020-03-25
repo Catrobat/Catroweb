@@ -7,6 +7,7 @@ use App\Catrobat\Responses\ProgramListResponse;
 use App\Catrobat\StatusCode;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Entity\User;
 use App\Entity\UserManager;
 use App\Entity\UserTestGroup;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,30 +15,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class RecommenderController.
- */
 class RecommenderController extends AbstractController
 {
-  /**
-   * @var int
-   */
-  private $DEFAULT_LIMIT = 20;
+  private int $DEFAULT_LIMIT = 20;
+
+  private int $DEFAULT_OFFSET = 0;
 
   /**
-   * @var int
-   */
-  private $DEFAULT_OFFSET = 0;
-
-  /**
-   * @Route("/api/projects/recsys.json", name="api_recsys_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @deprecated
    *
-   * @return ProgramListResponse
+   * @Route("/api/projects/recsys.json", name="api_recsys_programs", defaults={"_format": "json"}, methods={"GET"})
    */
-  public function listRecsysProgramAction(Request $request, ProgramManager $program_manager)
+  public function listRecsysProgramAction(Request $request, ProgramManager $program_manager): ProgramListResponse
   {
-    $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
-    $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
+    $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
+    $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
     $program_id = $request->query->get('program_id');
 
     $flavor = $request->get('flavor');
@@ -49,18 +41,19 @@ class RecommenderController extends AbstractController
   }
 
   /**
-   * @Route("/api/projects/recsys_specific_projects/{id}.json", name="api_recsys_specific_projects",
-   * defaults={"_format": "json"},  methods={"GET"})
+   * @deprecated
+   *
+   * @Route("/api/projects/recsys_specific_projects/{id}.json", name="api_recsys_specific_projects", defaults={"_format": "json"},  methods={"GET"})
    *
    * @param $id
    *
-   * @return ProgramListResponse|JsonResponse
+   * @return JsonResponse|ProgramListResponse
    */
   public function listRecsysSpecificProgramsAction(Request $request, $id, ProgramManager $program_manager)
   {
     $is_test_environment = ('test' == $this->getParameter('kernel.environment'));
-    $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
-    $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
+    $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
+    $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
 
     $flavor = $request->get('flavor');
 
@@ -79,18 +72,20 @@ class RecommenderController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/recsys_general_projects.json", name="api_recsys_general_projects",
    * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @return ProgramListResponse
+   * @throws \Exception
    */
-  public function listRecsysGeneralProgramsAction(Request $request, UserManager $user_manager, RecommenderManager $recommender_manager)
+  public function listRecsysGeneralProgramsAction(Request $request, UserManager $user_manager, RecommenderManager $recommender_manager): ProgramListResponse
   {
     $is_test_environment = ('test' == $this->getParameter('kernel.environment'));
     $test_user_id_for_like_recommendation = $is_test_environment ?
       $request->query->get('test_user_id_for_like_recommendation', 0) : '';
-    $limit = intval($request->query->get('limit', $this->DEFAULT_LIMIT));
-    $offset = intval($request->query->get('offset', $this->DEFAULT_OFFSET));
+    $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
+    $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
 
     $flavor = $request->get('flavor');
 
@@ -98,6 +93,7 @@ class RecommenderController extends AbstractController
     $programs = [];
     $is_user_specific_recommendation = false;
 
+    /** @var User $user */
     $user = ('' == $test_user_id_for_like_recommendation) ?
       $this->getUser() : $user_manager->find($test_user_id_for_like_recommendation);
 
@@ -129,9 +125,9 @@ class RecommenderController extends AbstractController
       $user_id = $user->getId();
       $em = $this->getDoctrine()->getManager();
       $user_test_group = $em->find(UserTestGroup::class, $user_id);
-      if (!$user_test_group)
+      if (null === $user_test_group)
       {
-        $user_test_group = new UserTestGroup($user_id, rand(1, 3));
+        $user_test_group = new UserTestGroup($user_id, random_int(1, 3));
         $em->persist($user_test_group);
         $em->flush();
       }

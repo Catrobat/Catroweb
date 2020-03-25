@@ -14,25 +14,13 @@ use PHPUnit\Framework\Assert;
  */
 class UserDataFixtures
 {
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var User
-   */
-  private static $default_user;
+  private static ?User $default_user;
 
-  /**
-   * @var User
-   */
-  private static $current_user;
+  private static ?User $current_user;
 
-  /**
-   * @var int
-   */
-  private static $number_of_users = 0;
+  private static int $number_of_users = 0;
 
   public function __construct(UserManager $user_manager)
   {
@@ -113,18 +101,12 @@ class UserDataFixtures
     return UserDataFixtures::$default_user;
   }
 
-  /**
-   * @return User|null
-   */
-  public function getCurrentUser()
+  public function getCurrentUser(): ?User
   {
     return UserDataFixtures::$current_user;
   }
 
-  /**
-   * @param User|null $current_user
-   */
-  public function setCurrentUser($current_user)
+  public function setCurrentUser(?User $current_user)
   {
     UserDataFixtures::$current_user = $current_user;
   }

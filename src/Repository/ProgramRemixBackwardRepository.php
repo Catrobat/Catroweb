@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\ProgramRemixBackwardRelation;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -57,10 +56,9 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param GuidType $program_id
-   * @param int[]    $parent_program_ids
+   * @param int[] $parent_program_ids
    */
-  public function removeParentRelations($program_id, array $parent_program_ids)
+  public function removeParentRelations(string $program_id, array $parent_program_ids)
   {
     $qb = $this->createQueryBuilder('b');
 

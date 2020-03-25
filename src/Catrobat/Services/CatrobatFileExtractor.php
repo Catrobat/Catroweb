@@ -5,29 +5,17 @@ namespace App\Catrobat\Services;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Catrobat\Exceptions\Upload\InvalidArchiveException;
 use App\Utils\TimeUtils;
+use Exception;
 use Symfony\Component\HttpFoundation\File\File;
+use ZipArchive;
 
-/**
- * Class CatrobatFileExtractor.
- */
 class CatrobatFileExtractor
 {
-  /**
-   * @var
-   */
-  private $extract_dir;
-  /**
-   * @var
-   */
-  private $extract_path;
+  private string $extract_dir;
 
-  /**
-   * CatrobatFileExtractor constructor.
-   *
-   * @param $extract_dir
-   * @param $extract_path
-   */
-  public function __construct($extract_dir, $extract_path)
+  private string $extract_path;
+
+  public function __construct(string $extract_dir, string $extract_path)
   {
     if (!is_dir($extract_dir))
     {
@@ -38,15 +26,15 @@ class CatrobatFileExtractor
   }
 
   /**
-   * @return ExtractedCatrobatFile
+   * @throws Exception
    */
-  public function extract(File $file)
+  public function extract(File $file): ExtractedCatrobatFile
   {
     $temp_path = hash('md5', TimeUtils::getTimestamp().mt_rand());
     $full_extract_dir = $this->extract_dir.$temp_path.'/';
     $full_extract_path = $this->extract_path.$temp_path.'/';
 
-    $zip = new \ZipArchive();
+    $zip = new ZipArchive();
     $res = $zip->open($file->getPathname());
 
     if (true === $res)
@@ -62,18 +50,12 @@ class CatrobatFileExtractor
     return new ExtractedCatrobatFile($full_extract_dir, $full_extract_path, $temp_path);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getExtractDir()
+  public function getExtractDir(): string
   {
     return $this->extract_dir;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getExtractPath()
+  public function getExtractPath(): string
   {
     return $this->extract_path;
   }

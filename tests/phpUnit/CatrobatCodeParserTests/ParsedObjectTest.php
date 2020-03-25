@@ -1,32 +1,38 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\ParsedObject;
+use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset;
+use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
+use PHPUnit\Framework\TestCase;
 
-class ParsedObjectTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class ParsedObjectTest extends TestCase
 {
-  /**
-   * @var ParsedObject
-   */
-  protected $object;
+  protected ParsedObject $object;
 
-  public function setUp(): void
+  protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->object = new ParsedObject($xml_properties->xpath('//object')[0]);
   }
 
   /**
    * @test
    * @dataProvider provideMethodNames
+   *
+   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name)
+  public function mustHaveMethod($method_name): void
   {
     $this->assertTrue(method_exists($this->object, $method_name));
   }
 
-  public function provideMethodNames()
+  public function provideMethodNames(): array
   {
     return [
       ['getName'],
@@ -41,7 +47,7 @@ class ParsedObjectTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function isGroupMustReturnFalse()
+  public function isGroupMustReturnFalse(): void
   {
     $this->assertFalse($this->object->isGroup());
   }
@@ -50,45 +56,51 @@ class ParsedObjectTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function getLooksMustReturnArrayOfParsedObjectAsset()
+  public function getLooksMustReturnArrayOfParsedObjectAsset(): void
   {
-    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset';
+    $expected = ParsedObjectAsset::class;
 
     foreach ($this->object->getLooks() as $actual)
+    {
       $this->assertInstanceOf($expected, $actual);
+    }
   }
 
   /**
    * @test
    * @depends mustHaveMethod
    */
-  public function getSoundsMustReturnArrayOfParsedObjectAsset()
+  public function getSoundsMustReturnArrayOfParsedObjectAsset(): void
   {
-    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset';
+    $expected = ParsedObjectAsset::class;
 
     $this->assertTrue($this->object->getSounds() === []);
 
-    foreach($this->object->getSounds() as $actual)
-        $this->assertInstanceOf($expected, $actual);
+    foreach ($this->object->getSounds() as $actual)
+    {
+      $this->assertInstanceOf($expected, $actual);
+    }
   }
 
   /**
    * @test
    * @depends mustHaveMethod
    */
-  public function getScriptsMustReturnArrayOfScript()
+  public function getScriptsMustReturnArrayOfScript(): void
   {
-    $expected = 'App\Catrobat\Services\CatrobatCodeParser\Scripts\Script';
+    $expected = Script::class;
 
     foreach ($this->object->getScripts() as $actual)
+    {
       $this->assertInstanceOf($expected, $actual);
+    }
   }
 
   /**
    * @test
    * @depends mustHaveMethod
    */
-  public function getNameMustReturnCertainString()
+  public function getNameMustReturnCertainString(): void
   {
     $expected = 'Background';
     $actual = $this->object->getName();

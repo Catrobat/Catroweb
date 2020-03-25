@@ -6,11 +6,10 @@ use App\Catrobat\Requests\CreateUserRequest;
 use App\Catrobat\Requests\LoginUserRequest;
 use App\Catrobat\Security\UserAuthenticator;
 use App\Catrobat\Services\OAuthService;
-use App\Catrobat\Services\TestEnv\FakeOAuthService;
 use App\Catrobat\Services\TokenGenerator;
 use App\Catrobat\StatusCode;
-use App\Entity\User;
 use App\Entity\UserManager;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,31 +20,22 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class SecurityController.
- */
 class SecurityController extends AbstractController
 {
-  /**
-   * @var OAuthService|FakeOAuthService
-   */
-  private $oauth_service;
+  private OAuthService $oauth_service;
 
-  /**
-   * SecurityController constructor.
-   */
   public function __construct(OAuthService $oauth_service)
   {
     $this->oauth_service = $oauth_service;
   }
 
   /**
-   * @Route("/api/checkToken/check.json", name="catrobat_api_check_token", defaults={"_format": "json"},
-   * methods={"POST"})
+   * @deprecated
    *
-   * @return JsonResponse
+   * @Route("/api/checkToken/check.json", name="catrobat_api_check_token",
+   * defaults={"_format": "json"}, methods={"POST"})
    */
-  public function checkTokenAction(TranslatorInterface $translator)
+  public function checkTokenAction(TranslatorInterface $translator): JsonResponse
   {
     return JsonResponse::create([
       'statusCode' => StatusCode::OK,
@@ -57,21 +47,18 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register", defaults={"_format": "json"}, methods={"POST"})
-   *
-   * @return JsonResponse
+   * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register",
+   * defaults={"_format": "json"}, methods={"POST"})
    */
   public function loginOrRegisterAction(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
                                         TranslatorInterface $translator, UserAuthenticator $user_authenticator,
-                                        ValidatorInterface $validator)
+                                        ValidatorInterface $validator): JsonResponse
   {
-    /**
-     * @var User
-     */
     $retArray = [];
 
     $this->signInLdapUser($request, $retArray, $user_authenticator, $translator);
-    if (array_key_exists('statusCode', $retArray) && (StatusCode::OK === $retArray['statusCode'] || StatusCode::LOGIN_ERROR === $retArray['statusCode']))
+    if (array_key_exists('statusCode', $retArray) &&
+      (StatusCode::OK === $retArray['statusCode'] || StatusCode::LOGIN_ERROR === $retArray['statusCode']))
     {
       return JsonResponse::create($retArray);
     }
@@ -82,14 +69,13 @@ class SecurityController extends AbstractController
     foreach ($violations as $violation)
     {
       $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
-      switch ($violation->getMessageTemplate())
+      if ('errors.password.short' == $violation->getMessageTemplate())
       {
-        case 'errors.password.short':
-          $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-          break;
-        case 'errors.email.invalid':
-          $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
-          break;
+        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+      }
+      elseif ('errors.email.invalid' == $violation->getMessageTemplate())
+      {
+        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
       }
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
 
@@ -134,16 +120,14 @@ class SecurityController extends AbstractController
   }
 
   /**
-   * @Route("/api/register/Register.json", name="catrobat_api_register", options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
+   * @deprecated
    *
-   * @return JsonResponse
+   * @Route("/api/register/Register.json", name="catrobat_api_register", options={"expose": true},
+   * defaults={"_format": "json"}, methods={"POST"})
    */
   public function registerNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
-                                     TranslatorInterface $translator, ValidatorInterface $validator)
+                                     TranslatorInterface $translator, ValidatorInterface $validator): JsonResponse
   {
-    /**
-     * @var User
-     */
     $retArray = [];
 
     $create_request = new CreateUserRequest($request);
@@ -151,14 +135,13 @@ class SecurityController extends AbstractController
     foreach ($violations as $violation)
     {
       $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
-      switch ($violation->getMessageTemplate())
+      if ('errors.password.short' == $violation->getMessageTemplate())
       {
-        case 'errors.password.short':
-          $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-          break;
-        case 'errors.email.invalid':
-          $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
-          break;
+        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+      }
+      elseif ('errors.email.invalid' == $violation->getMessageTemplate())
+      {
+        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
       }
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
@@ -171,28 +154,25 @@ class SecurityController extends AbstractController
         $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
         $retArray['answer'] = $translator->trans('errors.email.exists', [], 'catroweb');
       }
+      elseif (null != $user_manager->findUserByUsername($create_request->username))
+      {
+        $retArray['statusCode'] = StatusCode::USER_ADD_USERNAME_EXISTS;
+        $retArray['answer'] = $translator->trans('errors.username.exists', [], 'catroweb');
+      }
       else
       {
-        if (null != $user_manager->findUserByUsername($create_request->username))
-        {
-          $retArray['statusCode'] = StatusCode::USER_ADD_USERNAME_EXISTS;
-          $retArray['answer'] = $translator->trans('errors.username.exists', [], 'catroweb');
-        }
-        else
-        {
-          $user = $user_manager->createUser();
-          $user->setUsername($create_request->username);
-          $user->setEmail($create_request->mail);
-          $user->setPlainPassword($create_request->password);
-          $user->setEnabled(true);
-          $user->setUploadToken($token_generator->generateToken());
-          $user->setCountry($create_request->country);
+        $user = $user_manager->createUser();
+        $user->setUsername($create_request->username);
+        $user->setEmail($create_request->mail);
+        $user->setPlainPassword($create_request->password);
+        $user->setEnabled(true);
+        $user->setUploadToken($token_generator->generateToken());
+        $user->setCountry($create_request->country);
 
-          $user_manager->updateUser($user);
-          $retArray['statusCode'] = 201;
-          $retArray['answer'] = $translator->trans('success.registration', [], 'catroweb');
-          $retArray['token'] = $user->getUploadToken();
-        }
+        $user_manager->updateUser($user);
+        $retArray['statusCode'] = 201;
+        $retArray['answer'] = $translator->trans('success.registration', [], 'catroweb');
+        $retArray['token'] = $user->getUploadToken();
       }
     }
     $retArray['preHeaderMessages'] = '';
@@ -201,18 +181,15 @@ class SecurityController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/login/Login.json", name="catrobat_api_login", options={"expose": true}, defaults={"_format": "json"},
    * methods={"POST"})
-   *
-   * @return JsonResponse
    */
   public function loginNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
                                   TranslatorInterface $translator, UserAuthenticator $user_authenticator,
-                                  ValidatorInterface $validator, EncoderFactoryInterface $factory)
+                                  ValidatorInterface $validator, EncoderFactoryInterface $factory): JsonResponse
   {
-    /**
-     * @var User
-     */
     $retArray = [];
 
     $login_request = new LoginUserRequest($request);
@@ -220,14 +197,13 @@ class SecurityController extends AbstractController
     foreach ($violations as $violation)
     {
       $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-      switch ($violation->getMessageTemplate())
+      if ('errors.password.short' == $violation->getMessageTemplate())
       {
-        case 'errors.password.short':
-          $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-          break;
-        case 'errors.email.invalid':
-          $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
-          break;
+        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+      }
+      elseif ('errors.email.invalid' == $violation->getMessageTemplate())
+      {
+        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
       }
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
@@ -247,7 +223,7 @@ class SecurityController extends AbstractController
 
       $user = $user_manager->findUserByUsername($username);
 
-      if (!$user)
+      if (null === $user)
       {
         $this->signInLdapUser($request, $retArray, $user_authenticator, $translator);
         if (array_key_exists('statusCode', $retArray) &&
@@ -293,78 +269,78 @@ class SecurityController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/IsOAuthUser/IsOAuthUser.json", name="catrobat_is_oauth_user", options={"expose": true},
    * defaults={"_format": "json"}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return OAuthService
+   * @throws Exception
    */
-  public function isOAuthUser(Request $request)
+  public function isOAuthUser(Request $request): JsonResponse
   {
     return $this->getOAuthService()->isOAuthUser($request);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/EMailAvailable/EMailAvailable.json", name="catrobat_oauth_login_email_available",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return OAuthService
+   * @throws Exception
    */
-  public function checkEMailAvailable(Request $request)
+  public function checkEMailAvailable(Request $request): JsonResponse
   {
     return $this->getOAuthService()->checkEMailAvailable($request);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/UsernameAvailable/UsernameAvailable.json", name="catrobat_oauth_login_username_available",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return OAuthService
+   * @throws Exception
    */
-  public function checkUserNameAvailable(Request $request)
+  public function checkUserNameAvailable(Request $request): JsonResponse
   {
     return $this->getOAuthService()->checkUserNameAvailable($request);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/GoogleServerTokenAvailable/GoogleServerTokenAvailable.json",
    *     name="catrobat_oauth_login_google_servertoken_available", options={"expose": true},
    * defaults={"_format": "json"}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return FakeOAuthService|OAuthService
+   * @throws Exception
    */
-  public function checkGoogleServerTokenAvailable(Request $request)
+  public function checkGoogleServerTokenAvailable(Request $request): JsonResponse
   {
     return $this->getOAuthService()->checkGoogleServerTokenAvailable($request);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/exchangeGoogleCode/exchangeGoogleCode.json", name="catrobat_oauth_login_google_code",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return FakeOAuthService|OAuthService
+   * @throws Exception
    */
-  public function exchangeGoogleCodeAction(Request $request)
+  public function exchangeGoogleCodeAction(Request $request): JsonResponse
   {
     return $this->getOAuthService()->exchangeGoogleCodeAction($request);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/loginWithGoogle/loginWithGoogle.json", name="catrobat_oauth_login_google",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return FakeOAuthService|OAuthService
+   * @throws Exception
    */
   public function loginWithGoogleAction(Request $request)
   {
@@ -372,38 +348,38 @@ class SecurityController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/getGoogleUserInfo/getGoogleUserInfo.json", name="catrobat_google_userinfo",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return FakeOAuthService|OAuthService
+   * @throws Exception
    */
-  public function getGoogleUserProfileInfo(Request $request)
+  public function getGoogleUserProfileInfo(Request $request): JsonResponse
   {
     return $this->getOAuthService()->getGoogleUserProfileInfo($request);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/loginWithTokenAndRedirect/loginWithTokenAndRedirect", name="catrobat_oauth_login_redirect",
    * options={"expose": true}, methods={"POST"})
    *
-   * @throws \Exception
-   *
-   * @return FakeOAuthService|OAuthService
+   * @throws Exception
    */
-  public function loginWithTokenAndRedirectAction(Request $request)
+  public function loginWithTokenAndRedirectAction(Request $request): JsonResponse
   {
     return $this->getOAuthService()->loginWithTokenAndRedirectAction($request);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/getGoogleAppId/getGoogleAppId.json", name="catrobat_oauth_login_get_google_appid",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @return JsonResponse
    */
-  public function getGoogleAppId()
+  public function getGoogleAppId(): JsonResponse
   {
     $retArray = [];
     $retArray['gplus_appid'] = $this->getParameter('google_app_id');
@@ -412,12 +388,12 @@ class SecurityController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/generateCsrfToken/generateCsrfToken.json", name="catrobat_oauth_register_get_csrftoken",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @return JsonResponse
    */
-  public function generateCsrfToken()
+  public function generateCsrfToken(): JsonResponse
   {
     $retArray = [];
     $retArray['csrf_token'] = $this->container->get('security.csrf.token_manager')
@@ -427,25 +403,19 @@ class SecurityController extends AbstractController
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/deleteOAuthUserAccounts/deleteOAuthUserAccounts.json", name="catrobat_oauth_delete_testusers",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
    *
-   * @throws \Exception
-   *
-   * @return FakeOAuthService|OAuthService
+   * @throws Exception
    */
-  public function deleteOAuthTestUserAccounts()
+  public function deleteOAuthTestUserAccounts(): JsonResponse
   {
     return $this->getOAuthService()->deleteOAuthTestUserAccounts();
   }
 
-  /**
-   * @param $request
-   * @param $retArray
-   *
-   * @return JsonResponse
-   */
-  private function signInLdapUser($request, &$retArray, UserAuthenticator $authenticator, TranslatorInterface $translator)
+  private function signInLdapUser(Request $request, array &$retArray, UserAuthenticator $authenticator, TranslatorInterface $translator): JsonResponse
   {
     $token = null;
     $username = $request->request->get('registrationUsername');
@@ -457,7 +427,7 @@ class SecurityController extends AbstractController
       $retArray['token'] = $token->getUser()->getUploadToken();
       $retArray['preHeaderMessages'] = '';
     }
-    catch (UsernameNotFoundException $exception)
+    catch (UsernameNotFoundException $usernameNotFoundException)
     {
       $retArray['statusCode'] = StatusCode::USERNAME_NOT_FOUND;
       $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
@@ -465,7 +435,7 @@ class SecurityController extends AbstractController
 
       return JsonResponse::create($retArray);
     }
-    catch (AuthenticationException $exception)
+    catch (AuthenticationException $authenticationException)
     {
       $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
       $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
@@ -477,10 +447,7 @@ class SecurityController extends AbstractController
     return JsonResponse::create($retArray);
   }
 
-  /**
-   * @return FakeOAuthService|OAuthService|object
-   */
-  private function getOAuthService()
+  private function getOAuthService(): ?OAuthService
   {
     return $this->oauth_service;
   }

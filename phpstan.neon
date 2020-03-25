@@ -1,0 +1,7 @@
+parameters:
+  level: 1  # 0 is the loosest lvl and 8 is the strictest
+  paths:
+      - src
+      - tests
+  excludes_analyse:
+      - src/Migrations

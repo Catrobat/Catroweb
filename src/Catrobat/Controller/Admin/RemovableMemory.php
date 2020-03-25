@@ -2,64 +2,28 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-/**
- * Class RemovableMemory.
- */
 class RemovableMemory
 {
-  /**
-   * @var string
-   */
-  public $name;
+  public string $name;
 
-  /**
-   * @var string
-   */
-  public $description;
+  public string $description;
 
-  /**
-   * @var
-   */
   public $size;
 
-  /**
-   * @var
-   */
   public $size_raw;
 
-  /**
-   * @var
-   */
   public $command_link;
 
-  /**
-   * @var
-   */
   public $command_name;
 
-  /**
-   * @var
-   */
   public $download_link;
 
-  /**
-   * @var
-   */
   public $execute_link;
 
-  /**
-   * @var
-   */
   public $archive_command_link;
 
-  /**
-   * @var
-   */
   public $archive_command_name;
 
-  /**
-   * RemovableMemory constructor.
-   */
   public function __construct(string $name = '', string $description = '')
   {
     $this->name = $name;
@@ -69,7 +33,7 @@ class RemovableMemory
   /**
    * @param mixed $size
    */
-  public function setSize($size)
+  public function setSize($size): void
   {
     $this->size = $size;
   }
@@ -77,7 +41,7 @@ class RemovableMemory
   /**
    * @param mixed $size
    */
-  public function setSizeRaw($size)
+  public function setSizeRaw($size): void
   {
     $this->size_raw = $size;
   }
@@ -85,7 +49,7 @@ class RemovableMemory
   /**
    * @param mixed $command
    */
-  public function setCommandLink($command)
+  public function setCommandLink($command): void
   {
     $this->command_link = $command;
   }
@@ -93,7 +57,7 @@ class RemovableMemory
   /**
    * @param mixed $command
    */
-  public function setCommandName($command)
+  public function setCommandName($command): void
   {
     $this->command_name = $command;
   }
@@ -101,7 +65,7 @@ class RemovableMemory
   /**
    * @param mixed $download_link
    */
-  public function setDownloadLink($download_link)
+  public function setDownloadLink($download_link): void
   {
     $this->download_link = $download_link;
   }
@@ -117,7 +81,7 @@ class RemovableMemory
   /**
    * @param mixed $archive_command_link
    */
-  public function setArchiveCommandLink($archive_command_link)
+  public function setArchiveCommandLink($archive_command_link): void
   {
     $this->archive_command_link = $archive_command_link;
   }
@@ -133,7 +97,7 @@ class RemovableMemory
   /**
    * @param mixed $archive_command_name
    */
-  public function setArchiveCommandName($archive_command_name)
+  public function setArchiveCommandName($archive_command_name): void
   {
     $this->archive_command_name = $archive_command_name;
   }
@@ -141,7 +105,7 @@ class RemovableMemory
   /**
    * @param mixed $execute_link
    */
-  public function setExecuteLink($execute_link)
+  public function setExecuteLink($execute_link): void
   {
     $this->execute_link = $execute_link;
   }

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\behat\context;
+
 use App\Catrobat\Services\TestEnv\SymfonySupport;
 use App\Entity\AchievementNotification;
 use App\Entity\AnniversaryNotification;
@@ -28,6 +30,10 @@ use App\Utils\MyUuidGenerator;
 use App\Utils\TimeUtils;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use DateTime;
+use DateTimeZone;
+use Exception;
+use ImagickException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -107,6 +113,17 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the user "([^"]*)" should not exist$/
+   *
+   * @param $arg1
+   */
+  public function theUserShouldNotExist($arg1)
+  {
+    $user = $this->getUserManager()->findUserByUsername($arg1);
+    Assert::assertNull($user);
+  }
+
+  /**
    * @Then /^the user "([^"]*)" with email "([^"]*)" should exist and be enabled$/
    *
    * @param $arg1
@@ -121,7 +138,7 @@ class DataFixturesContext implements KernelAwareContext
 
     Assert::assertInstanceOf('App\\Entity\\User', $user);
     Assert::assertEquals($arg2, $user->getEmail());
-    Assert::isTrue($user->IsEnabled());
+    Assert::assertTrue($user->IsEnabled());
   }
 
   /**

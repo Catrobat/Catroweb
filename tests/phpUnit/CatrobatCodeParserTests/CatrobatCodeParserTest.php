@@ -1,13 +1,20 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
+use App\Catrobat\Services\CatrobatCodeParser\ParsedSceneProgram;
+use App\Catrobat\Services\CatrobatCodeParser\ParsedSimpleProgram;
+use App\Catrobat\Services\ExtractedCatrobatFile;
+use PHPUnit\Framework\TestCase;
 
-class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class CatrobatCodeParserTest extends TestCase
 {
-  protected $parser;
+  protected CatrobatCodeParser $parser;
 
   protected function setUp(): void
   {
@@ -17,13 +24,15 @@ class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @dataProvider validProgramProvider
+   *
+   * @param mixed $extracted_catrobat_program
    */
-  public function mustReturnParsedProgram($extracted_catrobat_program)
+  public function mustReturnParsedProgram($extracted_catrobat_program): void
   {
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = [
-      'App\Catrobat\Services\CatrobatCodeParser\ParsedSimpleProgram',
-      'App\Catrobat\Services\CatrobatCodeParser\ParsedSceneProgram',
+      ParsedSimpleProgram::class,
+      ParsedSceneProgram::class,
     ];
 
     $this->assertThat($actual, $this->logicalOr(
@@ -35,12 +44,12 @@ class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    */
-  public function mustReturnParsedSimpleProgramIfNoScenes()
+  public function mustReturnParsedSimpleProgramIfNoScenes(): void
   {
     $extracted_catrobat_program = new ExtractedCatrobatFile(__DIR__
-      . '/Resources/ValidPrograms/SimpleProgram/', '', '');
+      .'/Resources/ValidPrograms/SimpleProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
-    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedSimpleProgram';
+    $expected = ParsedSimpleProgram::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
@@ -48,12 +57,12 @@ class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    */
-  public function mustReturnParsedSceneProgramIfScenes()
+  public function mustReturnParsedSceneProgramIfScenes(): void
   {
     $extracted_catrobat_program = new ExtractedCatrobatFile(__DIR__
-      . '/Resources/ValidPrograms/SceneProgram/', '', '');
+      .'/Resources/ValidPrograms/SceneProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
-    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedSceneProgram';
+    $expected = ParsedSceneProgram::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
@@ -61,30 +70,38 @@ class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @dataProvider faultyProgramProvider
+   *
+   * @param mixed $faulty_program
    */
-  public function mustReturnNullOnError($faulty_program)
+  public function mustReturnNullOnError($faulty_program): void
   {
     $this->assertNull($this->parser->parse($faulty_program));
   }
 
-  public function validProgramProvider()
+  /**
+   * @return \App\Catrobat\Services\ExtractedCatrobatFile[][]
+   */
+  public function validProgramProvider(): array
   {
     $programs = [];
-    $programs[] = [new ExtractedCatrobatFile(__DIR__ . '/Resources/ValidPrograms/SimpleProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(__DIR__ . '/Resources/ValidPrograms/SceneProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/', '', '')];
+    $programs[] = [new ExtractedCatrobatFile(__DIR__.'/Resources/ValidPrograms/SimpleProgram/', '', '')];
+    $programs[] = [new ExtractedCatrobatFile(__DIR__.'/Resources/ValidPrograms/SceneProgram/', '', '')];
+    $programs[] = [new ExtractedCatrobatFile(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/', '', '')];
 
     return $programs;
   }
 
-  public function faultyProgramProvider()
+  /**
+   * @return \App\Catrobat\Services\ExtractedCatrobatFile[][]
+   */
+  public function faultyProgramProvider(): array
   {
     $programs = [];
     $programs[] = [new ExtractedCatrobatFile(
-      __DIR__ . '/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/', '', ''),
+      __DIR__.'/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/', '', ''),
     ];
     $programs[] = [new ExtractedCatrobatFile(
-      __DIR__ . '/Resources/FaultyPrograms/ScenesWithoutNamesFaultyProgram/', '', ''),
+      __DIR__.'/Resources/FaultyPrograms/ScenesWithoutNamesFaultyProgram/', '', ''),
     ];
 
     return $programs;
