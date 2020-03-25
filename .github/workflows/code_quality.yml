@@ -8,6 +8,7 @@ jobs:
     #  JS CodeStyle
     name: ESLint
     runs-on: ubuntu-latest
+    # config defined in .eslintrc.yml
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -33,7 +34,7 @@ jobs:
     # config defined in .php_cs(.dist)
     steps:
       - uses: actions/checkout@v2
-      - uses: docker://oskarstark/php-cs-fixer-ga
+      - uses: docker://oskarstark/php-cs-fixer-ga:latest
         with:
           args: --config=.php_cs.dist --diff --dry-run --allow-risky=yes --verbose --format=txt
 
@@ -45,7 +46,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: PHPStan
-        uses: docker://oskarstark/phpstan-ga
+        uses: docker://oskarstark/phpstan-ga:latest
+        env:
+          REQUIRE_DEV: true
         with:
           args: analyse
-

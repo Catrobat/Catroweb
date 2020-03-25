@@ -27,7 +27,7 @@ class ApkCleanupListener
   public function handleEvent(ProgramBeforePersistEvent $event)
   {
     $program = $event->getProgramEntity();
-    if (0 !== $program->getId())
+    if (null !== $program->getId())
     {
       $this->repository->remove($program->getId());
       $program->setApkStatus(Program::APK_NONE);

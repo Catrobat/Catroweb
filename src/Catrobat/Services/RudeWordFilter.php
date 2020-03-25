@@ -5,15 +5,9 @@ namespace App\Catrobat\Services;
 use App\Repository\RudeWordsRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
-/**
- * Class RudeWordFilter.
- */
 class RudeWordFilter
 {
-  /**
-   * @var RudeWordsRepository
-   */
-  private $repository;
+  private RudeWordsRepository $repository;
 
   /**
    * RudeWordFilter constructor.
@@ -24,17 +18,13 @@ class RudeWordFilter
   }
 
   /**
-   * @param $string
-   *
    * @throws NonUniqueResultException
-   *
-   * @return bool
    */
-  public function containsRudeWord($string)
+  public function containsRudeWord(string $string): bool
   {
     $string = strtolower($string);
-    $rudewords = explode(' ', $string);
+    $rude_words = explode(' ', $string);
 
-    return $this->repository->contains($rudewords);
+    return $this->repository->contains($rude_words);
   }
 }

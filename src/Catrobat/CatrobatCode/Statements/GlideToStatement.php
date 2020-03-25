@@ -29,6 +29,10 @@ class GlideToStatement extends Statement
    */
   public function getBrickText()
   {
+    $formula_x_dest = '';
+    $formula_y_dest = '';
+    $formula_duration = '';
+
     foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
     {
       if ($statement instanceof FormulaStatement)

@@ -1,25 +1,33 @@
 <?php
 
-namespace tests;
+namespace Tests\phpUnit;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Translation\Formatter\MessageFormatter;
-use Symfony\Component\Translation\MessageCatalogueInterface;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\MessageSelector;
-use Symfony\Component\Translation\Loader\YamlFileLoader;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Translation\Formatter\MessageFormatter;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorBagInterface;
 
-class TranschoiceTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class TranschoiceTest extends TestCase
 {
-
+  /**
+   * @var string
+   */
   const LANGUAGE_DIR = './translations/';
 
   /**
    * @test
    * @dataProvider language_provider
+   *
+   * @param mixed $language_code
+   * @param mixed $message_ids
    */
-  public function all_transchoice_entries_should_have_a_correct_syntax(Translator $translator, $language_code, $message_ids)
+  public function allTranschoiceEntriesShouldHaveACorrectSyntax(TranslatorBagInterface $translator, $language_code, $message_ids): void
   {
     foreach ($message_ids as $message_id)
     {
@@ -30,7 +38,7 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
     $this->assertTrue(true);
   }
 
-  public function language_provider()
+  public function language_provider(): array
   {
     $directory = self::LANGUAGE_DIR;
 
@@ -42,7 +50,7 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
     $language_codes = [];
     foreach ($files as $file)
     {
-      $parts = explode(".", $file->getFilename());
+      $parts = explode('.', $file->getFilename());
       $language_codes[] = $parts[1];
       $translator->addResource('yaml', $file, $parts[1], 'catroweb');
     }
@@ -66,20 +74,5 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
     }
 
     return $data;
-  }
-
-  private function getLanguageCodesFromFilenames()
-  {
-    $finder = new Finder();
-    $directory = self::LANGUAGE_DIR;
-    $files = $finder->in($directory)->files();
-    $language_codes = [];
-    foreach ($files as $file)
-    {
-      $parts = explode(".", $file->getFilename());
-      $language_codes[] = $parts[1];
-    }
-
-    return $language_codes;
   }
 }

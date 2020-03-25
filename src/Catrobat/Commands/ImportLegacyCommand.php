@@ -4,7 +4,6 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
 use App\Catrobat\Listeners\RemixUpdater;
-use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -14,6 +13,8 @@ use App\Entity\ProgramManager;
 use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\OptimisticLockException;
@@ -23,7 +24,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -47,31 +47,17 @@ class ImportLegacyCommand extends Command
 
   const TSV_FEATURED_PROGRAMS = '2037.dat';
 
-  /**
-   * @var Filesystem
-   */
-  private $fileystem;
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
-  /**
-   * @var ProgramManager
-   */
-  private $program_manager;
-  /**
-   * @var RemixManager
-   */
-  private $remix_manager;
-  /**
-   * @var Output
-   */
-  private $output;
+  private Filesystem $file_system;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $em;
+  private UserManager $user_manager;
+
+  private ProgramManager $program_manager;
+
+  private RemixManager $remix_manager;
+
+  private OutputInterface $output;
+
+  private EntityManagerInterface $em;
 
   /**
    * @var
@@ -81,41 +67,28 @@ class ImportLegacyCommand extends Command
    * @var
    */
   private $finder;
-  /**
-   * @var
-   */
-  private $filesystem;
 
-  /**
-   * @var
-   */
-  private $screenshot_repository;
+  private ScreenshotRepository $screenshot_repository;
 
-  /**
-   * @var ProgramFileRepository
-   */
-  private $catrobat_file_repository;
+  private ProgramFileRepository $catrobat_file_repository;
 
-  /**
-   * @var RouterInterface
-   */
-  private $router;
+  private RouterInterface $router;
 
-  /**
-   * @var CatrobatFileExtractor
-   */
-  private $file_extractor;
+  private CatrobatFileExtractor $file_extractor;
+
+  private RemixUpdater $remix_updater;
 
   /**
    * ImportLegacyCommand constructor.
    */
-  public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager,
+  public function __construct(Filesystem $file_system, UserManager $user_manager, ProgramManager $program_manager,
                               RemixManager $remix_manager, EntityManagerInterface $em,
                               ScreenshotRepository $screenshot_repository, ProgramFileRepository $file_repository,
-                              CatrobatFileExtractor $catrobat_file_extractor, RouterInterface $router)
+                              CatrobatFileExtractor $catrobat_file_extractor, RouterInterface $router,
+                              RemixUpdater $remix_updater)
   {
     parent::__construct();
-    $this->fileystem = $filesystem;
+    $this->file_system = $file_system;
     $this->user_manager = $user_manager;
     $this->program_manager = $program_manager;
     $this->remix_manager = $remix_manager;
@@ -124,6 +97,7 @@ class ImportLegacyCommand extends Command
     $this->catrobat_file_repository = $file_repository;
     $this->router = $router;
     $this->file_extractor = $catrobat_file_extractor;
+    $this->remix_updater = $remix_updater;
   }
 
   protected function configure()
@@ -142,7 +116,7 @@ class ImportLegacyCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): void
   {
     $this->output = $output;
-    $this->filesystem = new Filesystem();
+    $this->file_system = new Filesystem();
     $this->finder = new Finder();
 
     CommandHelper::executeSymfonyCommand('catrobat:purge', $this->getApplication(), ['--force' => true], $output);
@@ -202,13 +176,13 @@ class ImportLegacyCommand extends Command
       $this->writeln('Imported '.$row.' featured programs');
     }
 
-    $this->filesystem->remove($temp_dir);
+    $this->file_system->remove($temp_dir);
   }
 
   /**
    * @param $program_file
    *
-   * @throws \Exception
+   * @throws Exception
    */
   protected function importPrograms($program_file)
   {
@@ -252,13 +226,16 @@ class ImportLegacyCommand extends Command
           $program->setDescription($description);
           $credits = "No credits available.\n";
           $program->setCredits($credits);
-          $program->setUploadedAt(new \DateTime($data[4], new \DateTimeZone('UTC')));
+          $program->setUploadedAt(new DateTime($data[4], new DateTimeZone('UTC')));
           $program->setUploadIp($data[5]);
           $program->setRemixMigratedAt(null);
           $program->setDownloads($data[6]);
           $program->setViews($data[7]);
           $program->setVisible('t' === $data[8]);
-          $program->setUser($this->user_manager->find($data[9]));
+
+          /** @var User $user */
+          $user = $this->user_manager->find($data[9]);
+          $program->setUser($user);
           $program->setUploadLanguage($data[10]);
           $program->setFilesize($data[11]);
           $program->setCatrobatVersionName($data[12]);
@@ -353,9 +330,6 @@ class ImportLegacyCommand extends Command
 
   /**
    * @param $user_file
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
    */
   protected function importUsers($user_file)
   {
@@ -437,31 +411,28 @@ class ImportLegacyCommand extends Command
   /**
    * @param $id
    *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws ORMException
+   * @throws OptimisticLockException
    */
   private function importProgramfile($id)
   {
     $filepath = $this->importdir.'/resources/projects/'."{$id}".'.catrobat';
-    $async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
 
     if (file_exists($filepath))
     {
       $extracted_catrobat_file = $this->file_extractor->extract(new File($filepath));
 
+      /** @var Program $program */
       $program = $this->program_manager->find($id);
-      $remix_updater = new RemixUpdater($this->remix_manager, $async_http_client, $this->router);
-      $remix_updater->update($extracted_catrobat_file, $program);
+
+      $this->remix_updater->update($extracted_catrobat_file, $program);
 
       $this->catrobat_file_repository->saveProgram($extracted_catrobat_file, $id);
       $this->catrobat_file_repository->saveProgramfile(new File($filepath), $id);
     }
   }
 
-  /**
-   * @param $string
-   */
-  private function writeln($string)
+  private function writeln(string $string)
   {
     if (null != $this->output)
     {
@@ -470,19 +441,20 @@ class ImportLegacyCommand extends Command
   }
 
   /**
-   * @return bool|string
+   * @throws Exception
    */
-  private function createTempDir()
+  private function createTempDir(): string
   {
-    $tempfile = tempnam(sys_get_temp_dir(), 'catimport');
-    if (file_exists($tempfile))
+    $temp_file = tempnam(sys_get_temp_dir(), 'catimport');
+    if (file_exists($temp_file))
     {
-      unlink($tempfile);
+      unlink($temp_file);
     }
-    mkdir($tempfile);
-    if (is_dir($tempfile))
+    mkdir($temp_file);
+    if (is_dir($temp_file))
     {
-      return $tempfile;
+      return $temp_file;
     }
+    throw new Exception('Dir creation failed');
   }
 }

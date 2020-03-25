@@ -37,24 +37,15 @@ parameters:
     - 'celebrity'
     - 'framework-extra-bundle-30'
     - 'framework-extra-bundle-50'
-    - 'twig112'
-    - 'twig127'
-    - 'twig134'
-    - 'twig140'
-    - 'twig20'
-    - 'twig240'
-    - 'swiftmailer60'
-    - 'twig-underscore-to-namespace'
+    - phpunit40
+    - phpunit50
+    - phpunit60
+    - phpunit70
+    - phpunit75
+    - phpunit80
+    - phpunit80-dms
+    - phpunit90
 
-#    - action-injection-to-constructor-injection
-#    - ServiceLocatorToDIRector
-#    - MoveEntitiesToEntityDirectoryRector
-#    - MoveInterfacesToContractNamespaceDirectoryRector
-#    - MoveServicesBySuffixToDirectoryRector
-#    - doctrine-code-quality
-#    - doctrine-gedmo-to-knplabs
-#    - doctrine-repository-as-service
-#    - doctrine-services
   exclude_paths:
     - '*/src/*/Migrations/*'
   auto_import_names: true

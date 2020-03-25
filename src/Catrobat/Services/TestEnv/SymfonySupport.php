@@ -50,7 +50,6 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Router;
 
@@ -67,37 +66,16 @@ use Symfony\Component\Routing\Router;
 trait SymfonySupport
 {
   use KernelDictionary;
-  /**
-   * @var string
-   */
-  public $ERROR_DIR;
 
-  /**
-   * @var string
-   */
-  public $FIXTURES_DIR;
+  public string $ERROR_DIR;
 
-  /**
-   * @var string
-   */
-  public $SCREENSHOT_DIR;
+  public string $FIXTURES_DIR;
 
-  /**
-   * @var string
-   */
-  public $MEDIA_PACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
+  public string $SCREENSHOT_DIR;
 
-  /**
-   * @var string
-   */
-  public $EXTRACT_RESOURCES_DIR;
+  public string $MEDIA_PACKAGE_DIR = './tests/testdata/DataFixtures/MediaPackage/';
 
-  /**
-   * @override
-   *
-   * @var Kernel
-   */
-  private $kernel;
+  public string $EXTRACT_RESOURCES_DIR;
 
   /**
    * @override
@@ -214,39 +192,25 @@ trait SymfonySupport
     return $this->kernel->getContainer()->get('doctrine')->getManager();
   }
 
-  /**
-   * @param $service_name
-   *
-   * @return object|null
-   */
-  public function getService($service_name)
-  {
-    return $this->kernel->getContainer()->get($service_name);
-  }
-
   public function getRouter(): Router
   {
     return $this->kernel->getContainer()->get('router');
   }
 
   /**
-   * @param $param
-   *
    * @return mixed
    */
-  public function getSymfonyParameter($param)
+  public function getSymfonyParameter(string $param)
   {
     return $this->kernel->getContainer()->getParameter($param);
   }
 
   /**
-   * @param $param
-   *
    * @return object
    */
-  public function getSymfonyService($param)
+  public function getSymfonyService(string $service_name)
   {
-    return $this->kernel->getContainer()->get($param);
+    return $this->kernel->getContainer()->get($service_name);
   }
 
   /**
@@ -555,7 +519,7 @@ trait SymfonySupport
 
     $this->getManager()->persist($new_comment);
 
-    if (isset($comment['id']))
+    if (isset($config['id']))
     {
       // overwrite id if desired
       $new_comment->setId($config['id']);

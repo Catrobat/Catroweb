@@ -34,7 +34,7 @@ class ProfileController extends AbstractController
    * @Route("/user/{id}", name="profile", defaults={"id": "0"}, methods={"GET"})
    *
    * Overwrite for FosUser Profile Route (We don't use it!)
-   * @Route("/user/{id}")
+   * @Route("/user/}")
    */
   public function profileAction(Request $request, ProgramManager $program_manager, UserManager $user_manager, string $id): Response
   {

@@ -7,7 +7,6 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 
@@ -33,7 +32,7 @@ class Program
    * @ORM\GeneratedValue(strategy="CUSTOM")
    * @ORM\CustomIdGenerator(class="App\Utils\MyUuidGenerator")
    */
-  protected $id;
+  protected ?string $id = null;
 
   /**
    * @ORM\Column(type="string", length=300)
@@ -463,12 +462,7 @@ class Program
     return self::INITIAL_VERSION == $this->version;
   }
 
-  /**
-   * Get id.
-   *
-   * @return GuidType
-   */
-  public function getId()
+  public function getId(): ?string
   {
     return $this->id;
   }

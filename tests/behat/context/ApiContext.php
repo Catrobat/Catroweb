@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\behat\context;
+
 use App\Catrobat\Services\TestEnv\SymfonySupport;
 use App\Entity\Program;
 use App\Entity\ProgramRemixBackwardRelation;
@@ -14,9 +16,12 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
+use RuntimeException;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -111,14 +116,14 @@ class ApiContext implements KernelAwareContext
   {
     if (null === $this->kernel_browser)
     {
-      $this->kernel_browser = $this->kernel->getContainer()->get('test.client');
+      $this->kernel_browser = $this->getSymfonyService('test.client');
     }
 
     return $this->kernel_browser;
   }
 
   // -------------------------------------------------------------------------------------------------------------------
-  //  Hooks
+  //  Hook
   // -------------------------------------------------------------------------------------------------------------------
 
   /**
@@ -1598,7 +1603,7 @@ class ApiContext implements KernelAwareContext
    * @param $parameter
    * @param $file
    */
-  public function iHaveAParameterWithTheMdChecksumOf($parameter, $file = null)
+  public function iHaveAParameterWithTheMdChecksumOf($parameter)
   {
     $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
   }
@@ -2276,14 +2281,10 @@ class ApiContext implements KernelAwareContext
    */
   public function iSubmitMyProgramToAGamejam()
   {
-    $this->iAmLoggedIn();
+    $this->insertDefaultGameJam([
+      'formurl' => 'https://localhost/url/to/form',
+    ]);
 
-    if (null == $this->game_jam)
-    {
-      $this->game_jam = $this->insertDefaultGameJam([
-        'formurl' => 'https://localhost/url/to/form',
-      ]);
-    }
     if (null == $this->my_program)
     {
       $this->my_program = $this->insertProject([

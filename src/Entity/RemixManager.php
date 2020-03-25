@@ -408,10 +408,7 @@ class RemixManager
     return $unseen_remix_programs_data;
   }
 
-  /**
-   * @return int
-   */
-  public function remixCount(string $program_id)
+  public function remixCount(string $program_id): int
   {
     $result = $this->getFullRemixGraph($program_id);
 

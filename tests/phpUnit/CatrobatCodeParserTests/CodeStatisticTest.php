@@ -1,30 +1,44 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\CodeStatistic;
 use App\Catrobat\Services\CatrobatCodeParser\ParsedScene;
+use PHPUnit\Framework\TestCase;
+use SimpleXMLElement;
 
-class CodeStatisticTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class CodeStatisticTest extends TestCase
 {
+  /**
+   * @var SimpleXMLElement|bool
+   */
   protected $xml_properties;
 
-  public function setUp(): void
+  protected function setUp(): void
   {
-    $this->xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $this->xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
   }
 
   /**
    * @test
    * @dataProvider provideMethodNames
+   *
+   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name)
+  public function mustHaveMethod($method_name): void
   {
     $code_statistic = new CodeStatistic();
     $this->assertTrue(method_exists($code_statistic, $method_name));
   }
 
-  public function provideMethodNames()
+  /**
+   * @return string[][]
+   */
+  public function provideMethodNames(): array
   {
     return [
       ['update'],
@@ -44,7 +58,7 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function mustComputeCorrectScriptStatistic()
+  public function mustComputeCorrectScriptStatistic(): CodeStatistic
   {
     $code_statistic = new CodeStatistic();
     $code_statistic->update(new ParsedScene($this->xml_properties->xpath('//scene')[0]));
@@ -60,8 +74,10 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @depends mustComputeCorrectScriptStatistic
+   *
+   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectBrickStatistic($code_statistic)
+  public function mustComputeCorrectBrickStatistic($code_statistic): void
   {
     $expected = 170;
     $actual = $code_statistic->getBrickStatistic();
@@ -72,8 +88,10 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @depends mustComputeCorrectScriptStatistic
+   *
+   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectObjectStatistic($code_statistic)
+  public function mustComputeCorrectObjectStatistic($code_statistic): void
   {
     $expected = 16;
     $actual = $code_statistic->getObjectStatistic();
@@ -84,8 +102,10 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @depends mustComputeCorrectScriptStatistic
+   *
+   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectLookStatistic($code_statistic)
+  public function mustComputeCorrectLookStatistic($code_statistic): void
   {
     $expected = 19;
     $actual = $code_statistic->getLookStatistic();
@@ -96,8 +116,10 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @depends mustComputeCorrectScriptStatistic
+   *
+   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectSoundStatistic($code_statistic)
+  public function mustComputeCorrectSoundStatistic($code_statistic): void
   {
     $expected = 4;
     $actual = $code_statistic->getSoundStatistic();
@@ -109,7 +131,7 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function mustComputeCorrectGlobalVariableStatistic()
+  public function mustComputeCorrectGlobalVariableStatistic(): CodeStatistic
   {
     $code_statistic = new CodeStatistic();
     $code_statistic->computeVariableStatistic($this->xml_properties);
@@ -125,8 +147,10 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @depends mustComputeCorrectGlobalVariableStatistic
+   *
+   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectLocalVariableStatistic($code_statistic)
+  public function mustComputeCorrectLocalVariableStatistic($code_statistic): void
   {
     $expected = 0;
     $actual = $code_statistic->getLocalVarStatistic();
@@ -134,9 +158,3 @@ class CodeStatisticTest extends \PHPUnit\Framework\TestCase
     $this->assertEquals($expected, $actual);
   }
 }
-
-
-
-
-
-

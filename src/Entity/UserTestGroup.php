@@ -90,7 +90,7 @@ class UserTestGroup
   }
 
   /**
-   * @return int
+   * @return string
    */
   public function getUserId()
   {

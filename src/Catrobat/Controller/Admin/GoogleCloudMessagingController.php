@@ -2,8 +2,6 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use Nette\Utils\Json;
-use Nette\Utils\JsonException;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +13,6 @@ class GoogleCloudMessagingController extends CRUDController
     return $this->renderWithExtraParams('Admin/gcm.html.twig');
   }
 
-  /**
-   * @throws JsonException
-   */
   public function sendAction(): Response
   {
     if (!isset($_GET['a']) || !isset($_GET['m']))
@@ -28,7 +23,7 @@ class GoogleCloudMessagingController extends CRUDController
     $message = htmlentities($_GET['m']);
     $url = 'https://gcm-http.googleapis.com/gcm/send';
     $jsonData = ['to' => '/topics/catroweb', 'data' => ['message' => $message]];
-    $data = Json::encode($jsonData);
+    $data = json_encode($jsonData);
     $options = [
       'http' => [
         'header' => "Content-type: application/json\r\nAuthorization:key=".$apikey."\r\n",

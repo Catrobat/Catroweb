@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\behat\context;
+
 use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\TestEnv\CheckCatroidRepositoryForNewBricks;
 use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
@@ -19,9 +21,15 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
+use DateInterval;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use PHPUnit\Framework\Assert;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -68,7 +76,7 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   // -------------------------------------------------------------------------------------------------------------------
-  //  Hooks
+  //  Hook
   // -------------------------------------------------------------------------------------------------------------------
 
   /**
@@ -735,17 +743,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^the user "([^"]*)" should not exist$/
-   *
-   * @param $arg1
-   */
-  public function theUserShouldNotExist($arg1)
-  {
-    $user = $this->getUserManager()->findUserByUsername($arg1);
-    Assert::assertNull($user);
-  }
-
-  /**
    * @Then /^comments or catro notifications should not exist$/
    *
    * @param $arg1
@@ -957,7 +954,7 @@ class CatrowebBrowserContext extends BrowserContext
     $program = $page->find('css', $arg1);
     if (!$program->hasClass('visited-program'))
     {
-      assertTrue(false);
+      Assert::assertTrue(false);
     }
   }
 
@@ -2217,22 +2214,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @When /^I compute all like similarities between users$/
-   */
-  public function iComputeAllLikeSimilaritiesBetweenUsers()
-  {
-    $this->computeAllLikeSimilaritiesBetweenUsers();
-  }
-
-  /**
-   * @When /^I compute all remix similarities between users$/
-   */
-  public function iComputeAllRemixSimilaritiesBetweenUsers()
-  {
-    $this->computeAllRemixSimilaritiesBetweenUsers();
-  }
-
-  /**
    * @Then /^I should get following like similarities:$/
    */
   public function iShouldGetFollowingLikePrograms(TableNode $table)
@@ -2375,7 +2356,9 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iFilledOutTheGoogleForm()
   {
-    $this->my_program = $this->getProgramManager()->find(1);
+    /** @var Program $project */
+    $project = $this->getProgramManager()->find(1);
+    $this->my_program = $project;
     $this->my_program->setAcceptedForGameJam(true);
     $this->getManager()->persist($this->my_program);
     $this->getManager()->flush();

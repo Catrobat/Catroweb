@@ -5,21 +5,14 @@ namespace App\Catrobat\Controller\Web;
 use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\StatisticsService;
 use App\Entity\FeaturedProgram;
-use App\Entity\MediaPackage;
-use App\Entity\MediaPackageCategory;
-use App\Entity\MediaPackageFile;
-use App\Entity\UserManager;
 use App\Repository\FeaturedRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class DefaultController extends AbstractController
 {
@@ -101,64 +94,6 @@ class DefaultController extends AbstractController
     return $this->render('PrivacyAndTerms/licenseToPlay.html.twig');
   }
 
-  /**
-   * @Route("/media-library/{package_name}", name="media_library", methods={"GET"})
-   *
-   * Legacy route:
-   * @Route("/pocket-library/{package_name}", name="pocket_library", methods={"GET"})
-   */
-  public function MediaPackageAction(Request $request, string $package_name, string $flavor, UserManager $user_manager,
-                                     EventDispatcherInterface $event_dispatcher): Response
-  {
-    if (!isset($flavor))
-    {
-      $flavor = 'pocketcode';
-    }
-
-    if ($request->query->get('username') && $request->query->get('token'))
-    {
-      $username = $request->query->get('username');
-      $user = $user_manager->findUserByUsername($username);
-      $token_check = $request->query->get('token');
-      if ($user->getUploadToken() == $token_check)
-      {
-        $user = $user_manager->findUserByUsername($username);
-        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-        $this->get('security.token_storage')->setToken($token);
-        // now dispatch the login event
-        $event = new InteractiveLoginEvent($request, $token);
-        $event_dispatcher->dispatch($event);
-      }
-    }
-    $em = $this->getDoctrine()->getManager();
-    $package = $em->getRepository(MediaPackage::class)->findOneBy(['name_url' => $package_name])
-    ;
-
-    if (!$package)
-    {
-      throw $this->createNotFoundException('Unable to find Package entity.');
-    }
-
-    $categories = [];
-    /** @var MediaPackageCategory $category */
-    foreach ($package->getCategories() as $category)
-    {
-      $files = [];
-      $files = $this->generateDownloadUrl($flavor, $category, $files);
-      $categories[] = [
-        'name' => $category->getName(),
-        'files' => $files,
-        'priority' => $category->getPriority(),
-      ];
-    }
-
-    usort($categories, 'comparePriorities');
-
-    return $this->render('MediaLibrary/mediapackage.html.twig', [
-      'categories' => $categories,
-    ]);
-  }
-
   public function comparePriorities($current, $next): int
   {
     if ($current['priority'] == $next['priority'])
@@ -237,30 +172,5 @@ class DefaultController extends AbstractController
     }
 
     return new Response('error');
-  }
-
-  private function generateDownloadUrl(string $flavor, MediaPackageCategory $category, array $files): array
-  {
-    /** @var MediaPackageFile $file */
-    foreach ($category->getFiles() as $file)
-    {
-      $flavors_arr = preg_replace('/ /', '', $file->getFlavor());
-      $flavors_arr = explode(',', $flavors_arr);
-      if (!$file->getActive() || (null != $file->getFlavor() && !in_array($flavor, $flavors_arr, true)))
-      {
-        continue;
-      }
-      $files[] = [
-        'id' => $file->getId(),
-        'data' => $file,
-        'downloadUrl' => $this->generateUrl('download_media', [
-          'id' => $file->getId(),
-          'fname' => $file->getName(),
-        ]
-        ),
-      ];
-    }
-
-    return $files;
   }
 }

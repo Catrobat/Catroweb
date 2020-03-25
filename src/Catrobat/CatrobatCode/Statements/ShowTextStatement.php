@@ -2,6 +2,8 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
+use App\Catrobat\CatrobatCode\StatementFactory;
+
 /**
  * Class ShowTextStatement.
  */
@@ -10,26 +12,19 @@ class ShowTextStatement extends Statement
   const BEGIN_STRING = 'show variable ';
   const END_STRING = ')<br/>';
 
-  /**
-   * ShowTextStatement constructor.
-   *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces)
+  public function __construct(StatementFactory $statementFactory, $xmlTree, string $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $variable_name = $this->xmlTree->userVariableName;
+
+    $formula_x_pos = '';
+    $formula_y_pos = '';
 
     foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
     {

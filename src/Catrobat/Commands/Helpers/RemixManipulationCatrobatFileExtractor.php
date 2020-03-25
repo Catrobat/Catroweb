@@ -3,6 +3,7 @@
 namespace App\Catrobat\Commands\Helpers;
 
 use App\Catrobat\Services\CatrobatFileExtractor;
+use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RemixUrlIndicator;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -34,10 +35,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     parent::__construct($extract_dir, $extract_path);
   }
 
-  /**
-   * @return \App\Catrobat\Services\ExtractedCatrobatFile
-   */
-  public function extract(File $file)
+  public function extract(File $file): ExtractedCatrobatFile
   {
     $extracted_catrobat_file = parent::extract($file);
 

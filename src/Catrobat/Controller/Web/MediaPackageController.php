@@ -42,7 +42,7 @@ class MediaPackageController extends AbstractController
    */
   public function mediaPackageAction(string $package_name, string $flavor, TranslatorInterface $translator): Response
   {
-    if (!isset($flavor))
+    if ('' === $flavor)
     {
       $flavor = 'pocketcode';
     }
