@@ -435,6 +435,34 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder->getQuery()->getResult();
   }
 
+  public function getUserPublicPrograms(string $user_id, bool $debug_build, string $max_version,
+                                        int $limit, int $offset, string $flavor = null): array
+  {
+    if (!$user_id)
+    {
+      return [];
+    }
+
+    $query_builder = $this->createQueryBuilder('e');
+
+    $query_builder
+      ->select('e')
+      ->leftJoin('e.user', 'f')
+      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq('f.id', ':user_id'))
+      ->setParameter('user_id', $user_id)
+      ->orderBy('e.uploaded_at', 'DESC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+    ;
+
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
+    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
+
+    return $query_builder->getQuery()->getResult();
+  }
+
   /**
    * @param bool $debug_build If debug builds should be included
    *

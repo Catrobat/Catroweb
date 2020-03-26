@@ -103,10 +103,7 @@ class ProgramManager
    */
   private $logger;
 
-  /**
-   * @var UrlHelper
-   */
-  private $urlHelper;
+  private UrlHelper $urlHelper;
 
   /**
    * ProgramManager constructor.
@@ -958,6 +955,14 @@ class ProgramManager
   public function findOneByRemixMigratedAt($remix_migrated_at)
   {
     return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
+  }
+
+  public function getUserPublicPrograms(string $user_id, int $limit = 20, int $offset = 0,
+                                        string $flavor = null, string $max_version = '0'): array
+  {
+    $debug_build = $this->app_request->isDebugBuildRequest();
+
+    return $this->program_repository->getUserPublicPrograms($user_id, $debug_build, $max_version, $limit, $offset, $flavor);
   }
 
   /**

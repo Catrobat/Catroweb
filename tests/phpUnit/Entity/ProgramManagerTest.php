@@ -29,6 +29,8 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
@@ -91,8 +93,9 @@ class ProgramManagerTest extends TestCase
     $event = $this->createMock(ProgramBeforeInsertEvent::class);
     $extension_repository = $this->createMock(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
+    $urlHelper = new UrlHelper(new RequestStack());
 
-    $this->program_manager = new ProgramManager($file_extractor, $this->file_repository, $this->screenshot_repository, $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer);
+    $this->program_manager = new ProgramManager($file_extractor, $this->file_repository, $this->screenshot_repository, $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer, $urlHelper);
     fopen('/tmp/phpUnitTest', 'w');
     $file = new File('/tmp/phpUnitTest');
     $this->request->expects($this->any())->method('getProgramfile')->willReturn($file);
