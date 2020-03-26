@@ -650,73 +650,43 @@ class ProgramManager
     return $this->program_repository->getProgramsWithExtractedDirectoryHash();
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   *
-   * @return Program[]
-   */
-  public function getRecentPrograms($flavor, $limit = null, $offset = 0, string $max_version = '0')
+  public function getRecentPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                    string $max_version = '0', array $accept_language = []): array
   {
     return $this->program_repository->getRecentPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   *
-   * @return Program[]
-   */
-  public function getMostViewedPrograms($flavor, $limit = null, $offset = 0, string $max_version = '0')
+  public function getMostViewedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                        string $max_version = '0', array $accept_language = []): array
   {
     return $this->program_repository->getMostViewedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   *
-   * @return Program[]
-   */
-  public function getScratchRemixesPrograms($flavor, $limit = null, $offset = 0)
+  public function getScratchRemixesPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                            string $max_version = '0', array $accept_language = []): array
   {
     return $this->program_repository->getScratchRemixesPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   *
-   * @return mixed
-   */
-  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = 0, string $max_version = '0')
+  public function getMostDownloadedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                            string $max_version = '0', array $accept_language = []): array
   {
     return $this->program_repository->getMostDownloadedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   *
-   * @return array
-   */
-  public function getRandomPrograms($flavor, $limit = null, $offset = 0, string $max_version = '0')
+  public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                    string $max_version = '0', array $accept_language = []): array
   {
     return $this->program_repository->getRandomPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
     );
   }
 
@@ -965,36 +935,66 @@ class ProgramManager
     return $this->program_repository->getUserPublicPrograms($user_id, $debug_build, $max_version, $limit, $offset, $flavor);
   }
 
-  /**
-   * @param $id
-   *
-   * @return string
-   */
-  public function getScreenshotLarge($id)
+  public function getScreenshotLarge(string $id): string
   {
     return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getScreenshotWebPath($id);
   }
 
-  /**
-   * @param $id
-   *
-   * @return string
-   */
-  public function getScreenshotSmall($id)
+  public function getScreenshotSmall(string $id): string
   {
     return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getThumbnailWebPath($id);
   }
 
-  /**
-   * @param string $token
-   *
-   * @return mixed
-   */
-  public function decodeToken($token)
+  public function decodeToken(string $token)
   {
     $tokenParts = explode('.', $token);
     $tokenPayload = base64_decode($tokenParts[1], true);
 
     return json_decode($tokenPayload, true);
+  }
+
+  public function getProjects(string $project_type, array $accept_language = ['en'],
+                              string $max_version = '0', int $limit = 20,
+                              int $offset = 0, string $flavor = null): array
+  {
+    switch ($project_type){
+      case 'recent':
+        return $this->getRecentPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        break;
+      case 'random':
+        return $this->getRandomPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        break;
+      case 'most_viewed':
+        return $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        break;
+      case 'most_downloaded':
+        return $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        break;
+      case 'example':
+        return [];
+        break;
+      case 'scratch':
+        return $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        break;
+      default:
+        return [];
+        break;
+    }
+  }
+
+  public function parseAcceptLanguage(string $acceptLanguage): array
+  {
+    $prefLocales = array_reduce(
+      explode(',', $acceptLanguage),
+      function ($res, $el)
+      {
+        [$l, $q] = array_merge(explode(';q=', $el), [1]);
+        array_push($res, $l);
+
+        return $res;
+      }, []);
+    arsort($prefLocales);
+
+    return $prefLocales;
   }
 }

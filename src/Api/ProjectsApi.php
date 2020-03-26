@@ -86,7 +86,28 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsGet(string $project_type, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement projectsGet() method.
+    if (null === $max_version)
+    {
+      $max_version = '0';
+    }
+    if (null === $limit)
+    {
+      $limit = 20;
+    }
+    if (null === $offset)
+    {
+      $offset = 0;
+    }
+    if (null === $accept_language)
+    {
+      $accept_language = 'en';
+    }
+    $accept_language_array = $this->program_manager->parseAcceptLanguage($accept_language);
+    $programs = $this->program_manager->getProjects($project_type, $accept_language_array, $max_version, $limit, $offset, $flavor);
+    $responseData = $this->getProjectsResponseData($programs);
+    $responseCode = Response::HTTP_OK;
+
+    return $responseData;
   }
 
   /**
