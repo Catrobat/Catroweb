@@ -13,7 +13,7 @@
         "ext-pcntl": "*",
         "ext-posix": "*",
         "ext-zip": "*",
-        "catrobat/capi": "^1.0.29",
+        "catrobat/capi": "v1.0.32",
         "doctrine/data-fixtures": "^1.4",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-fixtures-bundle": "^3.3",

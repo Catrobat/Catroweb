@@ -72,8 +72,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -90,8 +90,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         }
       ]
@@ -119,8 +119,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         }
       ]
@@ -148,8 +148,8 @@ Feature: Logged in user projects
             "uploaded_string":"REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/5",
-            "downloadUrl": "http://localhost/app/download/5.catrobat",
+            "project_url": "http://localhost/app/project/5",
+            "download_url": "http://localhost/app/download/5.catrobat",
             "filesize": 0
         }
       ]
@@ -187,8 +187,8 @@ Feature: Logged in user projects
             "uploaded_string":"REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/2",
-            "downloadUrl": "http://localhost/app/download/2.catrobat",
+            "project_url": "http://localhost/app/project/2",
+            "download_url": "http://localhost/app/download/2.catrobat",
             "filesize": 0
         }
       ]
@@ -215,8 +215,8 @@ Feature: Logged in user projects
             "uploaded_string":"REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/26",
-            "downloadUrl": "http://localhost/app/download/26.catrobat",
+            "project_url": "http://localhost/app/project/26",
+            "download_url": "http://localhost/app/download/26.catrobat",
             "filesize": 0
         }
       ]
@@ -244,8 +244,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -262,8 +262,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -280,8 +280,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -298,8 +298,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -316,8 +316,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -334,8 +334,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -352,8 +352,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -370,8 +370,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -388,8 +388,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -406,8 +406,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -424,8 +424,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -442,8 +442,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -460,8 +460,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -478,8 +478,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -496,8 +496,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -514,8 +514,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -532,8 +532,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -550,8 +550,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -568,8 +568,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         },
         {
@@ -586,8 +586,8 @@ Feature: Logged in user projects
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "projectUrl": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "downloadUrl": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
+            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
             "filesize": 0
         }
       ]

@@ -101,7 +101,14 @@ Feature:
     Then I should see a "#termsModal" element
     When I click "#agreeButton"
     And I wait for the page to be loaded
-    Then I should be on "/app/register/check-email"
+    Then I should be on "/app/register/"
+    When I click "#btn-login"
+    And I wait for the page to be loaded
+    And I fill in "username" with "catro@bat.org"
+    And I fill in "password" with "123456"
+    And I press "Login"
+    And I wait for the page to be loaded
+    Then I should see "Your password or username was incorrect."
 
   Scenario: Registering and login with the registered user but wrong password should not work
     Given I am on "/app/register/"

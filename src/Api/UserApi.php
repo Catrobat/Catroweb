@@ -125,6 +125,10 @@ class UserApi implements UserApiInterface
     {
       $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameTooLong', [], 'catroweb'));
     }
+    elseif (filter_var(str_replace(' ', '', $register->getUsername()), FILTER_VALIDATE_EMAIL))
+    {
+      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameContainsEmail', [], 'catroweb'));
+    }
     elseif (null != $this->user_manager->findUserByUsername($register->getUsername()))
     {
       $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameAlreadyInUse', [], 'catroweb'));
