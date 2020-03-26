@@ -296,7 +296,7 @@ class ApiContext implements KernelAwareContext
     $this->iHaveAParameterWithValue('username', 'Catrobat');
     $this->iHaveAParameterWithValue('token', 'cccccccccc');
     $this->iHaveAValidCatrobatFile();
-    $this->iHaveAParameterWithTheMdchecksumOf('fileChecksum', 'test.catrobat');
+    $this->iHaveAParameterWithTheMdchecksumOf('fileChecksum');
     $this->iPostTo('/app/api/upload/upload.json');
     $this->iHaveAParameterWithTheReturnedProjectid('program');
   }
