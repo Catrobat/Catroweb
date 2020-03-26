@@ -5,6 +5,7 @@ namespace App\Catrobat\Services;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * Class FeaturedImageRepository.
@@ -20,10 +21,12 @@ class FeaturedImageRepository
    */
   private $path;
 
+  private UrlHelper $urlHelper;
+
   /**
    * FeaturedImageRepository constructor.
    */
-  public function __construct(ParameterBagInterface $parameter_bag)
+  public function __construct(ParameterBagInterface $parameter_bag, UrlHelper $urlHelper = null)
   {
     $dir = $parameter_bag->get('catrobat.featuredimage.dir');
     $path = $parameter_bag->get('catrobat.featuredimage.path');
@@ -37,6 +40,7 @@ class FeaturedImageRepository
 
     $this->dir = $dir;
     $this->path = $path;
+    $this->urlHelper = $urlHelper;
   }
 
   /**
@@ -71,6 +75,11 @@ class FeaturedImageRepository
   public function getWebPath($id, $extension)
   {
     return $this->path.$this->generateFileNameFromId($id, $extension);
+  }
+
+  public function getAbsoluteWWebPath($id, $extension)
+  {
+    return $this->urlHelper->getAbsoluteUrl('/').$this->path.$this->generateFileNameFromId($id, $extension);
   }
 
   /**

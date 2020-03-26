@@ -78,7 +78,13 @@ Feature: Get featured programs
               "ProjectName": "Invaders",
               "Author": "Catrobat",
               "FeaturedImage": "resources_test/featured/featured_1.jpg"
-            }
+            },
+            {
+              "ProjectId": "REGEX_STRING_WILDCARD",
+              "ProjectName":"IOS test",
+              "Author":"User1",
+              "FeaturedImage":"resources_test/featured/featured_5.jpg"
+             }
           ],
          "preHeaderMessages":"",
          "CatrobatInformation":
@@ -146,6 +152,12 @@ Feature: Get featured programs
               "ProjectName":"Invaders",
               "Author":"Catrobat",
               "FeaturedImage": "resources_test/featured/featured_1.jpg"
+             },
+             {
+              "ProjectId": "REGEX_STRING_WILDCARD",
+              "ProjectName":"IOS test",
+              "Author":"User1",
+              "FeaturedImage":"resources_test/featured/featured_5.jpg"
              }
           ],
          "preHeaderMessages":"",

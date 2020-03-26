@@ -2,10 +2,13 @@
 
 namespace App\Api;
 
+use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Repository\FeaturedRepository;
 use OpenAPI\Server\Api\ProjectsApiInterface;
+use OpenAPI\Server\Model\FeaturedProject;
 use OpenAPI\Server\Model\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,15 +26,19 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   private ElapsedTimeStringFormatter $time_formatter;
 
-  /**
-   * ProjectsApi constructor.
-   */
+  private FeaturedRepository $featured_repository;
+
+  private FeaturedImageRepository $featured_image_repository;
+
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
-                              ElapsedTimeStringFormatter $time_formatter)
+                              ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
+                              FeaturedImageRepository $featured_image_repository)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
     $this->time_formatter = $time_formatter;
+    $this->featured_repository = $featured_repository;
+    $this->featured_image_repository = $featured_image_repository;
   }
 
   /**
@@ -53,9 +60,25 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(string $platform = null, string $maxVersion = null, int $limit = 20, int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsFeaturedGet(string $platform = null, string $maxVersion = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement projectsFeaturedGet() method.
+    $programs = $this->featured_repository->getFeaturedPrograms($flavor, $limit, $offset, $platform, $maxVersion);
+    $responseCode = Response::HTTP_OK;
+
+    $featured_programs = [];
+    foreach ($programs as &$featured_program)
+    {
+      $result = [
+        'id' => $featured_program->getId(),
+        'name' => $featured_program->getProgram()->getName(),
+        'author' => $featured_program->getProgram()->getUser()->getUsername(),
+        'featured_image' => $this->featured_image_repository->getAbsoluteWWebPath($featured_program->getId(), $featured_program->getImageType()),
+      ];
+      $new_featured_project = new FeaturedProject($result);
+      array_push($featured_programs, $new_featured_project);
+    }
+
+    return $featured_programs;
   }
 
   /**

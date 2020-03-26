@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\FeaturedProgram;
+use App\Entity\Program;
+use App\Utils\APIQueryHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,44 +19,27 @@ class FeaturedRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, FeaturedProgram::class);
   }
 
-  /**
-   * @param      $flavor
-   * @param int  $limit
-   * @param int  $offset
-   * @param bool $for_ios
-   *
-   * @return mixed
-   */
-  public function getFeaturedPrograms($flavor, $limit = 20, $offset = 0, $for_ios = false)
+  public function getFeaturedPrograms(?string $flavor, ?int $limit = 20, ?int $offset = 0, ?string $platform = null, ?string $max_version = null)
   {
     $qb = $this->createQueryBuilder('e');
 
     $qb
       ->select('e')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
       ->andWhere($qb->expr()->isNotNull('e.program'))
-      ->andWhere($qb->expr()->eq('e.for_ios', ':for_ios'))
-      ->setParameter('flavor', $flavor)
-      ->setParameter('for_ios', $for_ios)
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
-
     $qb->orderBy('e.priority', 'DESC');
+
+    APIQueryHelper::addMaxVersionCondition($qb, $max_version);
+    APIQueryHelper::addFlavorCondition($qb, $flavor);
+    APIQueryHelper::addPlatformCondition($qb, $platform);
 
     return $qb->getQuery()->getResult();
   }
 
-  /**
-   * @param      $flavor
-   * @param bool $for_ios
-   *
-   * @throws \Doctrine\ORM\NonUniqueResultException
-   *
-   * @return mixed
-   */
-  public function getFeaturedProgramCount($flavor, $for_ios = false)
+  public function getFeaturedProgramCount(string $flavor, bool $for_ios = false)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -71,14 +56,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getSingleScalarResult();
   }
 
-  /**
-   * @param     $flavor
-   * @param int $limit
-   * @param int $offset
-   *
-   * @return mixed
-   */
-  public function getFeaturedItems($flavor, $limit = 20, $offset = 0)
+  public function getFeaturedItems(string $flavor, int $limit = 20, int $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -94,14 +72,7 @@ class FeaturedRepository extends ServiceEntityRepository
       ->getQuery()->getResult();
   }
 
-  /**
-   * @param $flavor
-   *
-   * @throws \Doctrine\ORM\NonUniqueResultException
-   *
-   * @return mixed
-   */
-  public function getFeaturedItemCount($flavor)
+  public function getFeaturedItemCount(string $flavor)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -114,12 +85,7 @@ class FeaturedRepository extends ServiceEntityRepository
       ->getQuery()->getSingleScalarResult();
   }
 
-  /**
-   * @param $program
-   *
-   * @return bool
-   */
-  public function isFeatured($program)
+  public function isFeatured(Program $program)
   {
     $qb = $this->createQueryBuilder('e');
     $qb
