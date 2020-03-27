@@ -326,6 +326,9 @@ class BrickFactory
       case Constants::REPLACE_ITEM_LIST_BRICK:
         $generated_brick = new ReplaceItemInUserListBrick($brick_xml_properties);
         break;
+      case Constants::CLEAR_LIST_BRICK:
+        $generated_brick = new ClearUserListBrick($brick_xml_properties);
+        break;
       case Constants::WRITE_LIST_ON_DEVICE_BRICK:
         $generated_brick = new WriteListOnDeviceBrick($brick_xml_properties);
         break;

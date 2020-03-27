@@ -301,7 +301,7 @@ Feature: As a visitor I want to see code statistics on the project page
     And the "#brick-statistic-block-special .total-brick-statistic" element should contain "0"
     And the "#brick-statistic-block-special .different-brick-statistic" element should contain "0"
 
-  Scenario: On a project page there should be correct stats about all look bricks
+  Scenario: On a project page there should be correct stats about all data bricks
     Given I have a project zip "CodeStatistics/code_statistics_data_blocks.catrobat"
     When I upload this project with id "1"
     Given I am on "/app/project/1"
@@ -309,7 +309,7 @@ Feature: As a visitor I want to see code statistics on the project page
     Then I should see "ALLDATA"
     And the "#scene-statistics" element should contain "1"
     And the "#script-statistics" element should contain "1"
-    And the "#brick-statistics" element should contain "14"
+    And the "#brick-statistics" element should contain "15"
     And the "#object-statistics" element should contain "2"
     And the "#look-statistics" element should contain "1"
     And the "#sound-statistics" element should contain "0"
@@ -327,8 +327,8 @@ Feature: As a visitor I want to see code statistics on the project page
     And the "#brick-statistic-block-looks .different-brick-statistic" element should contain "0"
     And the "#brick-statistic-block-pen .total-brick-statistic" element should contain "0"
     And the "#brick-statistic-block-pen .different-brick-statistic" element should contain "0"
-    And the "#brick-statistic-block-data .total-brick-statistic" element should contain "13"
-    And the "#brick-statistic-block-data .different-brick-statistic" element should contain "13"
+    And the "#brick-statistic-block-data .total-brick-statistic" element should contain "14"
+    And the "#brick-statistic-block-data .different-brick-statistic" element should contain "14"
     And the "#brick-statistic-block-special .total-brick-statistic" element should contain "0"
     And the "#brick-statistic-block-special .different-brick-statistic" element should contain "0"
 

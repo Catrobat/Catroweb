@@ -153,6 +153,7 @@ class Constants
   const DELETE_ITEM_LIST_BRICK = 'DeleteItemOfUserListBrick';
   const INSERT_ITEM_LIST_BRICK = 'InsertItemIntoUserListBrick';
   const REPLACE_ITEM_LIST_BRICK = 'ReplaceItemInUserListBrick';
+  const CLEAR_LIST_BRICK = 'ClearUserListBrick';
   const WRITE_LIST_ON_DEVICE_BRICK = 'WriteListOnDeviceBrick';
   const READ_LIST_FROM_DEVICE_BRICK = 'ReadListFromDeviceBrick';
 
