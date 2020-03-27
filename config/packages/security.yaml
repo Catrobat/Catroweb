@@ -51,7 +51,7 @@ security:
 
         api_projects_user:
             provider: chain_provider
-            pattern: ^/api/projects/user
+            pattern: ^/api/projects/user$
             methods: [GET]
             stateless: true
             guard:

@@ -139,7 +139,23 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsUserUserIdGet(string $user_id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement projectsUserUserIdGet() method.
+    if (null == $max_version)
+    {
+      $max_version = '0';
+    }
+    if (null == $limit)
+    {
+      $limit = 20;
+    }
+    if (null == $offset)
+    {
+      $offset = 0;
+    }
+    $programs = $this->program_manager->getUserPublicPrograms($user_id, $limit, $offset, $flavor, $max_version);
+    $responseData = $this->getProjectsResponseData($programs);
+    $responseCode = Response::HTTP_OK;
+
+    return $responseData;
   }
 
   /**
