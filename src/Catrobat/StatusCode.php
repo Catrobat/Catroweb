@@ -78,6 +78,7 @@ class StatusCode
   const USERNAME_ALREADY_EXISTS = 801;
   const USERNAME_INVALID = 802;
   const USERNAME_NOT_FOUND = 803;
+  const USERNAME_CONTAINS_EMAIL = 804;
 
   const NO_GAME_JAM = 900;
 }

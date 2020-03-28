@@ -199,3 +199,26 @@ Feature: Registering a new user.
     And I request "POST" "/api/user"
     Then the response status code should be "201"
     And the user "Testuser" with email "test@test.at" should exist and be enabled
+
+
+  Scenario: Trying to register user with username that contains an email address should fail
+    Given I have the following JSON request body:
+    """
+      {
+        "dry-run": true,
+        "email": "catro@localhost.at",
+        "username": "catroweb@localhost.at",
+        "password": "1234567"
+      }
+    """
+
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "422"
+    And I should get the json object:
+    """
+      {
+        "username": "Username shouldn't contain an email address"
+      }
+    """

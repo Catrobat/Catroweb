@@ -294,6 +294,10 @@ class ProfileController extends AbstractController
     {
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_ALREADY_EXISTS]);
     }
+    if (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL))
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::USERNAME_CONTAINS_EMAIL]);
+    }
 
     $user->setUsername($username);
     $user_manager->updateUser($user);

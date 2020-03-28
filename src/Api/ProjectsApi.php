@@ -92,9 +92,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsPost(?string $accept_language = null, ?string $checksum = null, ?UploadedFile $file = null, ?string $flavor = null, ?string $tag1 = null, ?string $tag2 = null, ?string $tag3 = null, ?bool $private = false, &$responseCode, array &$responseHeaders)
+  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?string $tag1 = null, ?string $tag2 = null, ?string $tag3 = null, ?bool $private = null, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement projectsPost() method.
   }
 
   /**

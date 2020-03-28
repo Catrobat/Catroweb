@@ -313,3 +313,18 @@ Feature:
     Then I should be logged out
     And the user "User1" should not exist
     And comments or catro notifications should not exist
+
+
+
+  Scenario: When changing the username it shouldn't contain an email address
+    Given I click "#edit-username-button"
+    And I wait for AJAX to finish
+    When I fill in "username" with "catro catro@gmail.com"
+    And I click "#save-username"
+    And I wait for the page to be loaded
+    Then I should be on "/app/user"
+    And I should see "Username shouldn't contain an email address."
+    When I go to "/app/logout"
+    And I wait for the page to be loaded
+    And I log in as "Mr"
+    Then I should see "Your password or username was incorrect."

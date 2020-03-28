@@ -68,7 +68,9 @@
         '{{ "myprofile.checkMail"|trans({}, "catroweb") }}',
         '{{ "myprofile.passwordUpdated"|trans({}, "catroweb") }}',
         '{{ "myprofile.notChangeVisibility"|trans({}, "catroweb") }}',
-        '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}'
+        '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}',
+         {{ constant('App\\Catrobat\\StatusCode::USERNAME_CONTAINS_EMAIL') }}
+
       )
     {% else %}
       programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')

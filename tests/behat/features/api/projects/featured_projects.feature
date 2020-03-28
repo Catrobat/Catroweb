@@ -189,7 +189,7 @@ Feature: Fetured Projects
 
   Scenario: Get featured projects for iOS platform
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/featured/?platform=iOS"
+    And I request "GET" "/api/projects/featured/?platform=ios"
     Then the response status code should be "200"
     And I should get the json object:
       """

@@ -22,7 +22,8 @@ const MyProfile = function (profileUrl, saveUsername,
   statusCodePasswordInvalid,
   successText, checkMailText, passwordUpdatedText,
   programCanNotChangeVisibilityTitle,
-  programCanNotChangeVisibilityText) {
+  programCanNotChangeVisibilityText,
+  statusCodeUsernameContainsEmail) {
   const self = this
   self.profileUrl = profileUrl
   self.profile_edit_url = profileUrl
@@ -298,7 +299,9 @@ const MyProfile = function (profileUrl, saveUsername,
         case statusCodeUsernameInvalid:
           $('.text-username-not-valid').removeClass('d-none')
           break
-
+        case statusCodeUsernameContainsEmail:
+          $('.text-username-contains-email').removeClass('d-none')
+          break
         default:
           window.location.href = self.profile_edit_url
       }
