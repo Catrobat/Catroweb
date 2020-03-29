@@ -16,9 +16,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ElapsedTimeStringFormatterTest extends TestCase
 {
-  /**
-   * @var int
-   */
   protected int $test_time;
 
   private ElapsedTimeStringFormatter $elapsed_time_string_formatter;
@@ -28,14 +25,9 @@ class ElapsedTimeStringFormatterTest extends TestCase
    */
   private $translator;
 
-  /**
-   * @var int[][][]|string[][]|null[][]
-   */
   private array $translation_map;
 
   /**
-   * @param TranslatorInterface $translator
-   *
    * @throws Exception
    */
   protected function setUp(): void

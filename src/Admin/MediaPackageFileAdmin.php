@@ -5,6 +5,7 @@ namespace App\Admin;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use ImagickException;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -15,38 +16,26 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * Class MediaPackageFileAdmin.
- */
 class MediaPackageFileAdmin extends AbstractAdmin
 {
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRouteName = 'adminmedia_package_file';
 
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRoutePattern = 'media_package_file';
 
-  /**
-   * @var MediaPackageFileRepository
-   */
-  private $media_package_file_repository;
+  private MediaPackageFileRepository $media_package_file_repository;
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
-  /**
-   * MediaPackageFileAdmin constructor.
-   *
-   * @param $code
-   * @param $class
-   * @param $baseControllerName
-   */
   public function __construct($code, $class, $baseControllerName,
                               MediaPackageFileRepository $media_package_file_repository,
                               ParameterBagInterface $parameter_bag)
@@ -57,13 +46,11 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object MediaPackageFile
+   * @param MediaPackageFile $object
    */
-  public function prePersist($object)
+  public function prePersist($object): void
   {
-    /**
-     * @var File
-     */
+    /** @var File $file */
     $file = $object->file;
     if (null == $file)
     {
@@ -74,17 +61,14 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object MediaPackageFile
+   * @param MediaPackageFile $object
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function postPersist($object)
+  public function postPersist($object): void
   {
-    /**
-     * @var File
-     */
     $file = $object->file;
-    if (null == $file)
+    if (null === $file)
     {
       return;
     }
@@ -92,19 +76,14 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object MediaPackageFile
+   * @param MediaPackageFile $object
    */
-  public function preUpdate($object)
+  public function preUpdate($object): void
   {
-    /*
-     * @var $file File
-     */
-
     $object->old_extension = $object->getExtension();
-    $object->setExtension(null);
 
     $file = $object->file;
-    if (null == $file)
+    if (null === $file)
     {
       $object->setExtension($object->old_extension);
 
@@ -115,14 +94,14 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object MediaPackageFile
+   * @param MediaPackageFile $object
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function postUpdate($object)
+  public function postUpdate($object): void
   {
     $file = $object->file;
-    if (null == $file)
+    if (null === $file)
     {
       return;
     }
@@ -130,17 +109,17 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object MediaPackageFile
+   * @param MediaPackageFile $object
    */
-  public function preRemove($object)
+  public function preRemove($object): void
   {
     $object->removed_id = $object->getId();
   }
 
   /**
-   * @param $object MediaPackageFile
+   * @param MediaPackageFile $object
    */
-  public function postRemove($object)
+  public function postRemove($object): void
   {
     $this->media_package_file_repository->remove($object->removed_id, $object->getExtension());
   }
@@ -150,7 +129,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $file_options = [
       'required' => (null === $this->getSubject()->getId()), ];
@@ -172,7 +151,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -192,7 +171,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     ;
   }
 
-  private function checkFlavor()
+  private function checkFlavor(): void
   {
     $flavor = $this->getForm()->get('flavor')->getData();
 

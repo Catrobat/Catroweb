@@ -168,7 +168,7 @@ class GameSubmissionController extends AbstractController
   }
 
   /**
-   * @param $flavor
+   * @param mixed $flavor
    *
    * @throws NonUniqueResultException
    */

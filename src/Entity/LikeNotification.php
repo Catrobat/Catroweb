@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class LikeNotification extends CatroNotification
 {
   /**
-   * @var User The User which "like action" to another user triggered this LikeNotification. If this user gets deleted,
-   *           this LikeNotification gets deleted as well.
+   * he User which "like action" to another user triggered this LikeNotification.
+   * If this user gets deleted, this LikeNotification gets deleted as well.
    *
    * @ORM\ManyToOne(
    *     targetEntity="\App\Entity\User",
@@ -23,10 +23,10 @@ class LikeNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private $like_from;
+  private ?User $like_from = null;
 
   /**
-   * @var Program the Program about which this LikeNotification is notifying, belongs to
+   * the Program about which this LikeNotification is notifying, belongs to.
    *
    * @ORM\ManyToOne(
    *     targetEntity="\App\Entity\Program",
@@ -38,12 +38,12 @@ class LikeNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private $program;
+  private ?Program $program = null;
 
   /*
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private $twig_template = '/Notifications/NotificationTypes/like_notification.html.twig';
+  private string $twig_template = '/Notifications/NotificationTypes/like_notification.html.twig';
 
   /**
    * LikeNotification constructor.
@@ -52,7 +52,7 @@ class LikeNotification extends CatroNotification
    * @param User    $like_from the User which "like action" to another user triggered this LikeNotification
    * @param Program $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
    */
-  public function __construct(User $user, $like_from, $program)
+  public function __construct(User $user, User $like_from, Program $program)
   {
     parent::__construct($user);
     $this->like_from = $like_from;
@@ -61,20 +61,16 @@ class LikeNotification extends CatroNotification
 
   /**
    * Returns the User which "like action" to another user triggered this LikeNotification.
-   *
-   * @return User the User which "like action" to another user triggered this LikeNotification
    */
-  public function getLikeFrom()
+  public function getLikeFrom(): ?User
   {
     return $this->like_from;
   }
 
   /**
    * Sets the User which "like action" to another user triggered this LikeNotification.
-   *
-   * @param User $like_from the User which "like action" to another user triggered this LikeNotification
    */
-  public function setLikeFrom($like_from)
+  public function setLikeFrom(?User $like_from): void
   {
     $this->like_from = $like_from;
   }
@@ -82,30 +78,24 @@ class LikeNotification extends CatroNotification
   /**
    * its important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
-   *
-   * @return mixed
    */
-  public function getTwigTemplate()
+  public function getTwigTemplate(): string
   {
     return $this->twig_template;
   }
 
   /**
    * Returns the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
-   *
-   * @return Program the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
    */
-  public function getProgram()
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
 
   /**
    * Sets the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
-   *
-   * @param Program $program the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
    */
-  public function setProgram($program)
+  public function setProgram(?Program $program): void
   {
     $this->program = $program;
   }

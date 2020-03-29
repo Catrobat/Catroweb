@@ -2,11 +2,13 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
-use App\Catrobat\Commands\Helpers\ResetController;
 use App\Entity\Program;
+use App\Entity\ProgramInappropriateReport;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,35 +16,25 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateProgramInappropriateReportCommand extends Command
 {
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  protected static $defaultName = 'catrobat:report';
 
-  /**
-   * @var RemixManipulationProgramManager
-   */
-  private $remix_manipulation_program_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var ResetController
-   */
-  private $reset_controller;
+  private ProgramManager $program_manager;
 
-  /**
-   * CreateProgramInappropriateReportCommand constructor.
-   */
+  private EntityManagerInterface $entity_manager;
+
   public function __construct(UserManager $user_manager,
-                              RemixManipulationProgramManager $program_manager,
-                              ResetController $reset_controller)
+                              ProgramManager $program_manager,
+                              EntityManagerInterface $entity_manager)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
-    $this->remix_manipulation_program_manager = $program_manager;
-    $this->reset_controller = $reset_controller;
+    $this->program_manager = $program_manager;
+    $this->entity_manager = $entity_manager;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:report')
       ->setDescription('Report a project')
@@ -53,41 +45,50 @@ class CreateProgramInappropriateReportCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    /**
-     * @var User
-     * @var Program $program
-     */
     $username = $input->getArgument('user');
     $program_name = $input->getArgument('program_name');
     $note = $input->getArgument('note');
 
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
-    $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
+    $program = $this->program_manager->findOneByName($program_name);
 
-    if (null == $user || null == $program || null == $this->reset_controller)
+    if (null === $user || null === $program)
     {
-      return;
+      return -1;
     }
 
     if ($program->getUser() === $user)
     {
-      return;
+      return -1;
     }
 
     try
     {
-      $this->reset_controller->reportProgram($program, $user, $note);
+      $this->reportProgram($program, $user, $note);
     }
-    catch (\Exception $e)
+    catch (Exception $e)
     {
-      return;
+      return -1;
     }
     $output->writeln('Reporting '.$program->getName());
+
+    return 0;
+  }
+
+  private function reportProgram(Program $program, User $user, string $note): void
+  {
+    $report = new ProgramInappropriateReport();
+    $report->setReportingUser($user);
+    $program->setVisible(false);
+    $report->setCategory('Inappropriate');
+    $report->setNote($note);
+    $report->setProgram($program);
+    $this->entity_manager->persist($report);
+    $this->entity_manager->flush();
   }
 }

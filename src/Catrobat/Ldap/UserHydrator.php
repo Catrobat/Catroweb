@@ -6,9 +6,6 @@ use App\Entity\User;
 use FR3D\LdapBundle\Hydrator\HydratorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * Class UserHydrator.
- */
 class UserHydrator implements HydratorInterface
 {
   /**

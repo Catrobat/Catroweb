@@ -2,82 +2,52 @@
 
 namespace App\Catrobat\CatrobatCode;
 
-/**
- * Class CodeObject.
- */
 class CodeObject
 {
-  /**
-   * @var
-   */
-  private $name;
+  private ?string $name = null;
 
-  /**
-   * @var array
-   */
-  private $scripts;
+  private array $scripts = [];
 
-  /**
-   * @var array
-   */
-  private $codeObjects;
+  private array $codeObjects = [];
 
-  /**
-   * CodeObject constructor.
-   */
   public function __construct()
   {
     $this->scripts = [];
     $this->codeObjects = [];
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @param $name
-   */
-  public function setName($name)
+  public function setName(?string $name): void
   {
     $this->name = $name;
   }
 
   /**
-   * @param $scriptsToAdd
+   * @param mixed $scriptsToAdd
    */
-  public function addAllScripts($scriptsToAdd)
+  public function addAllScripts($scriptsToAdd): void
   {
-    foreach ($scriptsToAdd as $script)
-    {
-      $this->scripts[] = $script;
-    }
+    $this->scripts = $scriptsToAdd;
   }
 
-  /**
-   * @return array
-   */
-  public function getCodeObjects()
+  public function getCodeObjects(): array
   {
     return $this->codeObjects;
   }
 
   /**
-   * @param $codeObjects
+   * @param mixed $codeObjects
    */
-  public function setCodeObjects($codeObjects)
+  public function setCodeObjects($codeObjects): void
   {
     $this->codeObjects = $codeObjects;
   }
 
-  /**
-   * @return array
-   */
-  public function getCodeObjectsRecursively()
+  public function getCodeObjectsRecursively(): array
   {
     $objects = [];
     $objects[] = $this;
@@ -93,17 +63,14 @@ class CodeObject
   }
 
   /**
-   * @param $codeObject
+   * @param mixed $codeObject
    */
-  public function addCodeObject($codeObject)
+  public function addCodeObject($codeObject): void
   {
     $this->codeObjects[] = $codeObject;
   }
 
-  /**
-   * @return string
-   */
-  public function getCode()
+  public function getCode(): string
   {
     $code = '';
     foreach ($this->scripts as $script)
@@ -114,21 +81,16 @@ class CodeObject
     return $code;
   }
 
-  /**
-   * @return array
-   */
-  public function getScripts()
+  public function getScripts(): array
   {
     return $this->scripts;
   }
 
   /**
-   * @param $objects
-   * @param $objectsToAdd
-   *
-   * @return array
+   * @param mixed $objects
+   * @param mixed $objectsToAdd
    */
-  private function addObjectsToArray($objects, $objectsToAdd)
+  private function addObjectsToArray($objects, $objectsToAdd): array
   {
     foreach ($objectsToAdd as $object)
     {

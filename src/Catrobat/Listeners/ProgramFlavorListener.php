@@ -6,30 +6,21 @@ use App\Catrobat\Events\ProgramBeforePersistEvent;
 use App\Entity\Program;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * Class ProgramFlavorListener.
- */
 class ProgramFlavorListener
 {
-  /**
-   * @var RequestStack
-   */
-  private $request_stack;
+  private RequestStack $request_stack;
 
-  /**
-   * ProgramFlavorListener constructor.
-   */
   public function __construct(RequestStack $stack)
   {
     $this->request_stack = $stack;
   }
 
-  public function onEvent(ProgramBeforePersistEvent $event)
+  public function onEvent(ProgramBeforePersistEvent $event): void
   {
     $this->checkFlavor($event->getProgramEntity());
   }
 
-  public function checkFlavor(Program $program)
+  public function checkFlavor(Program $program): void
   {
     $request = $this->request_stack->getCurrentRequest();
     if (null == $request)

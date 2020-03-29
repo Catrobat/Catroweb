@@ -25,7 +25,9 @@ node_modules/
 public/**
 !public/.well-known
 !public/resources
+!public/resources/**
 !public/resources_test
+!public/resources_test/**
 !public/index.php
 !public/index_test.php
 !public/robots.txt

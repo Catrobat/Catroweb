@@ -10,12 +10,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * Class WebShareProgramImport.
- */
 class WebShareProgramImport extends Command
 {
-  protected function configure()
+  protected static $defaultName = 'catrobat:import:webshare';
+
+  protected function configure(): void
   {
     $this->setName('catrobat:import:webshare')
       ->setDescription('Imports the specified amount of recent programs from share.catrob.at')
@@ -27,9 +26,9 @@ class WebShareProgramImport extends Command
   /**
    * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output): void
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $amount = $input->getArgument('amount');
+    $amount = intval($input->getArgument('amount'));
     $temp_dir = sys_get_temp_dir().'/catrobat.program.import/';
 
     $filesystem = new Filesystem();
@@ -39,9 +38,11 @@ class WebShareProgramImport extends Command
     CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
       ['directory' => $temp_dir, 'user' => 'catroweb'], $output);
     $filesystem->remove($temp_dir);
+
+    return 0;
   }
 
-  private function downloadPrograms(string $dir, OutputInterface $output, int $limit = 20): void
+  private function downloadPrograms(string $dir, OutputInterface $output, ?int $limit = 20): void
   {
     $server_json = json_decode(file_get_contents(
       'https://share.catrob.at/app/api/projects/recent.json?limit='.$limit), true);

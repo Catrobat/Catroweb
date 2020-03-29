@@ -6,14 +6,14 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Id\UuidGenerator;
 
 /**
- * Class FixedUuidGenerator.
+ * Class MyUuidGenerator.
+ *
+ * This Class can be used as Strategy for GuidType ID generation using Doctrine.
+ * This allows to work with fixed UUID values in the test environment to ease the testing process.
  */
 class MyUuidGenerator extends UuidGenerator
 {
-  /**
-   * @var string
-   */
-  private static $next_value = '';
+  private static string $next_value = '';
 
   /**
    * {@inheritdoc}
@@ -33,9 +33,6 @@ class MyUuidGenerator extends UuidGenerator
     return parent::generate($em, $entity);
   }
 
-  /**
-   * @param $next_value
-   */
   public static function setNextValue(string $next_value): void
   {
     MyUuidGenerator::$next_value = $next_value;

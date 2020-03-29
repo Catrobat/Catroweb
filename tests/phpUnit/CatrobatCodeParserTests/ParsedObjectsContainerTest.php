@@ -6,6 +6,7 @@ use App\Catrobat\Services\CatrobatCodeParser\ParsedObject;
 use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectGroup;
 use App\Catrobat\Services\CatrobatCodeParser\ParsedScene;
 use Exception;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +20,10 @@ class ParsedObjectsContainerTest extends TestCase
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
-    $this->container = new ParsedScene($xml_properties->xpath('//scene')[0]);
+    Assert::assertNotFalse($xml_properties);
+    $xml_scene = $xml_properties->xpath('//scene');
+    Assert::assertNotFalse($xml_scene);
+    $this->container = new ParsedScene($xml_scene[0]);
   }
 
   /**
@@ -78,17 +82,24 @@ class ParsedObjectsContainerTest extends TestCase
 
   /**
    * @test
+   *
+   * @throws Exception
    */
-  public function mustThrowExceptionIfCorruptedGroup()
+  public function mustThrowExceptionIfCorruptedGroup(): void
   {
     $this->expectExceptionMessage(Exception::class);
 
-    $xml_properties = simplexml_load_file(__DIR__
-      .'/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml');
+    $xml_properties = simplexml_load_file(
+      __DIR__.'/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
+    );
+    Assert::assertNotFalse($xml_properties);
 
-    if (!array_key_exists(0, $xml_properties->xpath('//scene')))
+    $xml_scene = $xml_properties->xpath('//scene');
+    Assert::assertNotFalse($xml_scene);
+
+    if (!array_key_exists(0, $xml_scene))
     {
-      new ParsedScene($xml_properties->xpath('//scene')[0]);
+      new ParsedScene($xml_scene[0]);
     }
     else
     {

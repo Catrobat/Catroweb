@@ -62,8 +62,8 @@ class ProjectDataFixtures
   {
     ++ProjectDataFixtures::$number_of_projects;
 
-    /** @var User $user */
     // get user before setting the fixing the next id, else it might get used for the default user
+    /** @var User|null $user */
     $user = isset($config['owned by']) ?
       $this->user_manager->findUserByUsername($config['owned by']) : $this->user_data_fixtures->getDefaultUser();
 
@@ -76,9 +76,8 @@ class ProjectDataFixtures
     $project = new Program();
     $project->setUser($user);
 
-    $project->setName(isset($config['name']) ?
-      $config['name'] : 'Project '.ProjectDataFixtures::$number_of_projects);
-    $project->setDescription(isset($config['description']) ? $config['description'] : '');
+    $project->setName($config['name'] ?? 'Project '.ProjectDataFixtures::$number_of_projects);
+    $project->setDescription($config['description'] ?? '');
     $project->setViews(isset($config['views']) ? (int) $config['views'] : 0);
     $project->setDownloads(isset($config['downloads']) ? (int) $config['downloads'] : 0);
     $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
@@ -102,21 +101,21 @@ class ProjectDataFixtures
     );
     $project->setRemixMigratedAt(null);
     $project->setCatrobatVersion(1);
-    $project->setCatrobatVersionName(isset($config['version']) ? $config['version'] : '');
-    $project->setLanguageVersion(isset($config['language version']) ? $config['language version'] : 1);
-    $project->setUploadIp(isset($config['upload_ip']) ? $config['upload_ip'] : '127.0.0.1');
-    $project->setFilesize(isset($config['file_size']) ? $config['file_size'] : 0);
+    $project->setCatrobatVersionName($config['version'] ?? '');
+    $project->setLanguageVersion($config['language version'] ?? 1);
+    $project->setUploadIp($config['upload_ip'] ?? '127.0.0.1');
+    $project->setFilesize($config['file_size'] ?? 0);
     $project->setVisible(isset($config['visible']) ? 'true' === $config['visible'] : true);
-    $project->setUploadLanguage(isset($config['upload_language']) ? $config['upload_language'] : 'en');
+    $project->setUploadLanguage($config['upload_language'] ?? 'en');
     $project->setApproved(isset($config['approved']) ? 'true' === $config['approved'] : false);
     $project->setRemixRoot(isset($config['remix_root']) ? 'true' === $config['remix_root'] : true);
     $project->setPrivate(isset($config['private']) ? 'true' === $config['private'] : false);
     $project->setDebugBuild(isset($config['debug']) ? 'true' === $config['debug'] : false);
-    $project->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
-    $project->setDirectoryHash(isset($config['directory_hash']) ? $config['directory_hash'] : null);
+    $project->setFlavor($config['flavor'] ?? 'pocketcode');
+    $project->setDirectoryHash($config['directory_hash'] ?? null);
 
-    $project->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
-    $project->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
+    $project->setAcceptedForGameJam($config['accepted'] ?? false);
+    $project->setGamejam($config['gamejam'] ?? null);
 
     $this->entity_manager->persist($project);
 
@@ -149,7 +148,7 @@ class ProjectDataFixtures
       $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
       copy($this->FIXTURE_DIR.'test.catrobat', $temp_path);
       $this->apk_repository->save(new File($temp_path), $project->getId());
-      $this->project_file_repository->saveProgramfile(
+      $this->project_file_repository->saveProgramFile(
         new File($this->FIXTURE_DIR.'test.catrobat'), $project->getId()
       );
     }
@@ -162,7 +161,7 @@ class ProjectDataFixtures
     return $project;
   }
 
-  public static function clear()
+  public static function clear(): void
   {
     ProjectDataFixtures::$number_of_projects = 0;
   }

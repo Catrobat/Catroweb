@@ -6,9 +6,6 @@ use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class TagRepository.
- */
 class TagRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -17,11 +14,9 @@ class TagRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $language
-   *
    * @return mixed
    */
-  public function getConstantTags($language)
+  public function getConstantTags(string $language)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -33,12 +28,9 @@ class TagRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $program_id
-   * @param $language
-   *
    * @return mixed
    */
-  public function getTagsWithProgramIdAndLanguage($program_id, $language)
+  public function getTagsWithProgramIdAndLanguage(string $program_id, string $language)
   {
     $qb = $this->createQueryBuilder('e');
 

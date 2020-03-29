@@ -11,9 +11,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-/**
- * Class ProgramDownloadStatisticsAdmin.
- */
 class ProgramDownloadStatisticsAdmin extends AbstractAdmin
 {
   /**
@@ -50,7 +47,7 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('program', EntityType::class, ['class' => Program::class],
@@ -77,7 +74,7 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('id')
@@ -104,7 +101,7 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -130,7 +127,7 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete');
   }

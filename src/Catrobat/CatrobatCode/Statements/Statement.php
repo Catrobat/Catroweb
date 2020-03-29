@@ -3,42 +3,21 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\StatementFactory;
+use SimpleXMLElement;
 
-/**
- * Class Statement.
- */
 class Statement
 {
-  /**
-   * @var
-   */
-  protected $xmlTree;
-  /**
-   * @var array
-   */
-  protected $statements;
-  /**
-   * @var
-   */
-  protected $spaces;
-  /**
-   * @var
-   */
-  private $beginString;
-  /**
-   * @var
-   */
-  private $endString;
+  protected ?SimpleXMLElement $xmlTree = null;
 
-  /**
-   * Statement constructor.
-   *
-   * @param $xmlTree
-   * @param $spaces
-   * @param $beginString
-   * @param $endString
-   */
-  public function __construct(StatementFactory $statementFactory, $xmlTree, $spaces, $beginString, $endString)
+  protected array $statements = [];
+
+  protected int $spaces;
+
+  private string $beginString;
+
+  private string $endString;
+
+  public function __construct(StatementFactory $statementFactory, ?SimpleXMLElement $xmlTree, int $spaces, string $beginString, string $endString)
   {
     $this->statements = [];
     $this->xmlTree = $xmlTree;
@@ -49,18 +28,12 @@ class Statement
     $this->createChildren($statementFactory);
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     return $this->addSpaces().$this->beginString.$this->executeChildren().$this->endString;
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
 
@@ -72,55 +45,37 @@ class Statement
     return $code;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getSpacesForNextBrick()
+  public function getSpacesForNextBrick(): int
   {
     return $this->spaces;
   }
 
-  /**
-   * @return array
-   */
-  public function getStatements()
+  public function getStatements(): array
   {
     return $this->statements;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getBeginString()
+  public function getBeginString(): string
   {
     return $this->beginString;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getEndString()
+  public function getEndString(): string
   {
     return $this->endString;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getXmlTree()
+  public function getXmlTree(): SimpleXMLElement
   {
     return $this->xmlTree;
   }
 
-  /**
-   * @return string
-   */
-  public function getClassName()
+  public function getClassName(): string
   {
     return static::class;
   }
 
-  protected function createChildren(StatementFactory $statementFactory)
+  protected function createChildren(StatementFactory $statementFactory): void
   {
     if (null != $this->xmlTree)
     {
@@ -129,9 +84,9 @@ class Statement
   }
 
   /**
-   * @param $statementsToAdd
+   * @param Statement[] $statementsToAdd
    */
-  protected function addAllScripts($statementsToAdd)
+  protected function addAllScripts(array $statementsToAdd): void
   {
     foreach ($statementsToAdd as $statement)
     {
@@ -139,12 +94,7 @@ class Statement
     }
   }
 
-  /**
-   * @param int $offset
-   *
-   * @return string
-   */
-  protected function addSpaces($offset = 0)
+  protected function addSpaces(int $offset = 0): string
   {
     $stringSpaces = '';
     for ($i = 0; $i < ($this->spaces + $offset) * 4; ++$i)
@@ -155,21 +105,15 @@ class Statement
     return $stringSpaces;
   }
 
-  /**
-   * @return mixed
-   */
-  protected function getLastChildStatement()
+  protected function getLastChildStatement(): Statement
   {
     $child_statement_keys = array_keys($this->statements);
-    $last_child_stmt_key = $child_statement_keys[sizeof($child_statement_keys) - 1];
+    $last_child_stmt_key = $child_statement_keys[count($child_statement_keys) - 1];
 
     return $this->statements[$last_child_stmt_key];
   }
 
-  /**
-   * @return FormulaListStatement|mixed|null
-   */
-  protected function getFormulaListChildStatement()
+  protected function getFormulaListChildStatement(): ?FormulaListStatement
   {
     $formula_list_stmt = null;
     foreach ($this->statements as $child_stmt)

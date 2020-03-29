@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class DeleteThisCloneBrick.
- */
 class DeleteThisCloneBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::DELETE_THIS_CLONE_BRICK;
     $this->caption = 'Delete this';

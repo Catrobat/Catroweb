@@ -20,11 +20,9 @@ define('HOURS', 24);
 define('MINUTES', 60);
 define('SECONDS', 60);
 
-/**
- * Class CleanOldApkCommand.
- */
 class CleanOldApkCommand extends Command
 {
+  protected static $defaultName = 'catrobat:clean:old-apk';
   /**
    * @var EntityManagerInterface
    */
@@ -35,9 +33,6 @@ class CleanOldApkCommand extends Command
    */
   private $parameter_bag;
 
-  /**
-   * CleanOldApkCommand constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -45,7 +40,7 @@ class CleanOldApkCommand extends Command
     $this->entity_manager = $entity_manager;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:clean:old-apk')
       ->setDescription('Delete all APKs older than X days and resets the status to NONE')
@@ -56,10 +51,8 @@ class CleanOldApkCommand extends Command
   /**
    * @throws NoResultException
    * @throws NonUniqueResultException
-   *
-   * @return int|void
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $days = $input->getArgument('days');
 
@@ -106,11 +99,9 @@ class CleanOldApkCommand extends Command
   }
 
   /**
-   * @param $removed_apk_ids
-   *
-   * @return Query
+   * @param mixed $removed_apk_ids
    */
-  private function createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids)
+  private function createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids): Query
   {
     $id_query_part = '';
     $i = 0;

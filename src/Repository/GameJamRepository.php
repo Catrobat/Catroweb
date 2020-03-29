@@ -11,9 +11,6 @@ use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 
-/**
- * Class GameJamRepository.
- */
 class GameJamRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -56,13 +53,11 @@ class GameJamRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $flavor
-   *
    * @throws NonUniqueResultException
    *
    * @return mixed
    */
-  public function getLatestGameJamByFlavor($flavor)
+  public function getLatestGameJamByFlavor(string $flavor)
   {
     $qb = $this->createQueryBuilder('e');
 

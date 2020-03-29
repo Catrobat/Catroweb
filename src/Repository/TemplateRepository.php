@@ -6,9 +6,6 @@ use App\Entity\Template;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class TemplateRepository.
- */
 class TemplateRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -17,11 +14,9 @@ class TemplateRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $active
-   *
    * @return mixed
    */
-  public function findByActive($active)
+  public function findByActive(bool $active)
   {
     $qb = $this->createQueryBuilder('e');
 

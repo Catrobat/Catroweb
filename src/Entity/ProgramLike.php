@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Utils\TimeUtils;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity
@@ -23,7 +25,7 @@ class ProgramLike
   const ACTION_REMOVE = 'remove';
   // -> new types go here...
 
-  public static $VALID_TYPES = [
+  public static array $VALID_TYPES = [
     self::TYPE_THUMBS_UP,
     self::TYPE_SMILE,
     self::TYPE_LOVE,
@@ -31,7 +33,7 @@ class ProgramLike
     // -> ... and here ...
   ];
 
-  public static $TYPE_NAMES = [
+  public static array $TYPE_NAMES = [
     self::TYPE_THUMBS_UP => 'thumbs_up',
     self::TYPE_SMILE => 'smile',
     self::TYPE_LOVE => 'love',
@@ -51,45 +53,38 @@ class ProgramLike
    * @ORM\Id
    * @ORM\Column(type="guid", nullable=false)
    */
-  protected $program_id;
+  protected string $program_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="likes", fetch="LAZY")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
-   *
-   * @var Program
    */
-  protected $program;
+  protected Program $program;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="guid", nullable=false)
    */
-  protected $user_id;
+  protected string $user_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="likes", fetch="LAZY")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-   *
-   * @var User
    */
-  protected $user;
+  protected User $user;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="integer", nullable=false, options={"default": 0})
    */
-  protected $type = self::TYPE_THUMBS_UP;
+  protected int $type = self::TYPE_THUMBS_UP;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $created_at;
+  protected ?DateTime $created_at = null;
 
-  /**
-   * @param int $type
-   */
-  public function __construct(Program $program, User $user, $type)
+  public function __construct(Program $program, User $user, int $type)
   {
     $this->setProgram($program);
     $this->setUser($user);
@@ -97,20 +92,12 @@ class ProgramLike
     $this->created_at = null;
   }
 
-  /**
-   * @return string
-   */
-  public function __toString()
+  public function __toString(): string
   {
     return $this->program.'';
   }
 
-  /**
-   * @param $type
-   *
-   * @return bool
-   */
-  public static function isValidType($type)
+  public static function isValidType(int $type): bool
   {
     return in_array($type, self::$VALID_TYPES, true);
   }
@@ -118,22 +105,17 @@ class ProgramLike
   /**
    * @ORM\PrePersist
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateTimestamps()
+  public function updateTimestamps(): void
   {
-    if (null == $this->getCreatedAt())
+    if (null === $this->getCreatedAt())
     {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 
-  /**
-   * @param \App\Entity\Program $program
-   *
-   * @return ProgramLike
-   */
-  public function setProgram(Program $program)
+  public function setProgram(Program $program): ProgramLike
   {
     $this->program = $program;
     $this->program_id = $program->getId();
@@ -141,28 +123,17 @@ class ProgramLike
     return $this;
   }
 
-  /**
-   * @return Program
-   */
-  public function getProgram()
+  public function getProgram(): Program
   {
     return $this->program;
   }
 
-  /**
-   * @return int
-   */
-  public function getProgramId()
+  public function getProgramId(): string
   {
     return $this->program_id;
   }
 
-  /**
-   * @param \App\Entity\User $user
-   *
-   * @return ProgramLike
-   */
-  public function setUser(User $user)
+  public function setUser(User $user): ProgramLike
   {
     $this->user = $user;
     $this->user_id = $user->getId();
@@ -170,69 +141,46 @@ class ProgramLike
     return $this;
   }
 
-  /**
-   * @return User
-   */
-  public function getUser()
+  public function getUser(): User
   {
     return $this->user;
   }
 
-  /**
-   * @return int
-   */
-  public function getUserId()
+  public function getUserId(): string
   {
     return $this->user_id;
   }
 
-  /**
-   * @param int $type
-   *
-   * @return ProgramLike
-   */
-  public function setType($type)
+  public function setType(int $type): ProgramLike
   {
-    $this->type = (int) $type;
+    $this->type = $type;
 
     return $this;
   }
 
-  /**
-   * @return int
-   */
-  public function getType()
+  public function getType(): int
   {
     return $this->type;
   }
 
-  /**
-   * @return string|null
-   */
-  public function getTypeAsString()
+  public function getTypeAsString(): ?string
   {
     try
     {
       return self::$TYPE_NAMES[$this->type];
     }
-    catch (\ErrorException $exception)
+    catch (Exception $exception)
     {
       return null;
     }
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getCreatedAt()
+  public function getCreatedAt(): ?DateTime
   {
     return $this->created_at;
   }
 
-  /**
-   * @return $this
-   */
-  public function setCreatedAt(\DateTime $created_at)
+  public function setCreatedAt(DateTime $created_at): ProgramLike
   {
     $this->created_at = $created_at;
 

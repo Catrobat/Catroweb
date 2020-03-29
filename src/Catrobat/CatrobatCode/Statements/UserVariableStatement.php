@@ -4,26 +4,31 @@ namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
-/**
- * Class UserVariableStatement.
- */
 class UserVariableStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = '';
 
+  /**
+   * @var string
+   */
   const AT_END_STRING = ' at (';
+  /**
+   * @var string
+   */
   const TO_END_STRING = ' to (';
 
   /**
    * UserVariableStatement constructor.
    *
-   * @param      $statementFactory
-   * @param      $xmlTree
-   * @param      $spaces
-   * @param      $value
-   * @param bool $useAt
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $value
    */
-  public function __construct($statementFactory, $xmlTree, $spaces, $value, $useAt = false)
+  public function __construct($statementFactory, $xmlTree, $spaces, $value, bool $useAt = false)
   {
     $end = self::TO_END_STRING;
     if ($useAt)

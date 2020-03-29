@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Scripts;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class WhenTouchScript.
- */
 class WhenTouchScript extends Script
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::WHEN_TOUCH_SCRIPT;
     $this->caption = 'When screen is touched';

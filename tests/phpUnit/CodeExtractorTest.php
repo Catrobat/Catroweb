@@ -2,6 +2,7 @@
 
 namespace Tests\phpUnit;
 
+use App\Catrobat\CatrobatCode\CodeObject;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use PHPUnit\Framework\TestCase;
@@ -68,19 +69,14 @@ class CodeExtractorTest extends TestCase
     $this->checkFiles('/Resources/CodeXmls/nestedObjects/');
   }
 
-  private function checkFiles($path): void
+  private function checkFiles(string $path): void
   {
     $output = $this->getCode($path);
     $referenceOutput = $this->readReferenceOutputFile($path);
     $this->assertEquals($referenceOutput, $output);
   }
 
-  /**
-   * @param mixed $path
-   *
-   * @return mixed[]|string
-   */
-  private function getCode($path)
+  private function getCode(string $path): string
   {
     $eCFile = new ExtractedCatrobatFile(__DIR__.$path, '', '');
 
@@ -90,13 +86,13 @@ class CodeExtractorTest extends TestCase
   }
 
   /**
-   * @param mixed $objects
-   *
-   * @return mixed[]|string
+   * @param CodeObject[] $objects
    */
-  private function generateCode($objects)
+  private function generateCode(array $objects): string
   {
     $code = '';
+
+    /** @var CodeObject $object */
     foreach ($objects as $object)
     {
       $code .= $object->getCode();
@@ -106,12 +102,7 @@ class CodeExtractorTest extends TestCase
     return $this->replaceSyntaxStrings($code);
   }
 
-  /**
-   * @param mixed $code
-   *
-   * @return mixed[]|string
-   */
-  private function replaceSyntaxStrings($code)
+  private function replaceSyntaxStrings(string $code): string
   {
     $code = str_replace('&nbsp;', ' ', $code);
     $code = str_replace('<br/>', PHP_EOL, $code);
@@ -124,16 +115,24 @@ class CodeExtractorTest extends TestCase
     return str_replace(SyntaxHighlightingConstants::VARIABLES, '', $code);
   }
 
-  /**
-   * @param mixed $path
-   *
-   * @return string|bool
-   */
-  private function readReferenceOutputFile($path)
+  private function readReferenceOutputFile(string $path): string
   {
     $absolutePath = __DIR__.$path.'reference.output';
-    ($referenceOutputFile = fopen($absolutePath, 'r')) || die('Unable to open file!');
-    $referenceOutput = fread($referenceOutputFile, filesize($absolutePath));
+    $referenceOutputFile = fopen($absolutePath, 'r');
+    $size = filesize($absolutePath);
+
+    if (!$referenceOutputFile || !$size)
+    {
+      exit('Unable to open file!');
+    }
+
+    $referenceOutput = fread($referenceOutputFile, $size);
+
+    if (!$referenceOutput)
+    {
+      exit('Unable to redd file!');
+    }
+
     fclose($referenceOutputFile);
 
     return $referenceOutput;

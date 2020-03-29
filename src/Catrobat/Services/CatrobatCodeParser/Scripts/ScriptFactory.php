@@ -5,9 +5,6 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Scripts;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use SimpleXMLElement;
 
-/**
- * Class ScriptFactory.
- */
 class ScriptFactory
 {
   /**

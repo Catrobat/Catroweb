@@ -5,17 +5,14 @@ namespace App\Catrobat\Listeners;
 use App\Catrobat\Events\ProgramBeforePersistEvent;
 use App\Entity\Program;
 
-/**
- * Class GameJamTagListener.
- */
 class GameJamTagListener
 {
-  public function onEvent(ProgramBeforePersistEvent $event)
+  public function onEvent(ProgramBeforePersistEvent $event): void
   {
     $this->checkDescriptionTag($event->getProgramEntity());
   }
 
-  public function checkDescriptionTag(Program $program)
+  public function checkDescriptionTag(Program $program): void
   {
     if (null == $program->getGamejam() || null == $program->getGamejam()->getHashtag())
     {
@@ -23,7 +20,7 @@ class GameJamTagListener
     }
 
     $description = $program->getDescription();
-    if (false === strpos($description, $program->getGamejam()->getHashtag()))
+    if (false === strpos($description, (string) $program->getGamejam()->getHashtag()))
     {
       $description = $description."\n\n".$program->getGamejam()->getHashtag();
       $program->setDescription($description);

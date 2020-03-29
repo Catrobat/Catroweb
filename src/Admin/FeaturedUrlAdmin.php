@@ -7,6 +7,7 @@ use App\Catrobat\Services\FeaturedImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\StringType;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -18,30 +19,25 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * Class FeaturedUrlAdmin.
- */
 class FeaturedUrlAdmin extends AbstractAdmin
 {
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRouteName = 'admin_featured_url';
 
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRoutePattern = 'featured_url';
 
-  /**
-   * @var FeaturedImageRepository
-   */
-  private $featured_image_repository;
+  private FeaturedImageRepository $featured_image_repository;
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
   public function __construct($code, $class, $baseControllerName, FeaturedImageRepository $featured_image_repository,
                               ParameterBagInterface $parameter_bag)
@@ -52,47 +48,38 @@ class FeaturedUrlAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object
+   * @param FeaturedProgram $object
    *
    * @return string
    */
   public function getFeaturedImageUrl($object)
   {
-    /*
-     * @var $object FeaturedProgram
-     */
-
     return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
   }
 
   /**
-   * @param $object
+   * @param FeaturedProgram $object
    *
    * @return Metadata
    */
   public function getObjectMetadata($object)
   {
-    /*
-     * @var $object FeaturedProgram
-     */
-
     return new Metadata($object->getUrl(), '', $this->getFeaturedImageUrl($object));
   }
 
   /**
-   * @param $image FeaturedProgram
+   * @param FeaturedProgram $image
    */
-  public function preUpdate($image)
+  public function preUpdate($image): void
   {
     $image->old_image_type = $image->getImageType();
-    $image->setImageType(null);
     $this->checkFlavor();
   }
 
   /**
-   * @param $object
+   * @param mixed $object
    */
-  public function prePersist($object)
+  public function prePersist($object): void
   {
     $this->checkFlavor();
   }
@@ -100,8 +87,17 @@ class FeaturedUrlAdmin extends AbstractAdmin
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     $query = parent::configureQuery($query);
-    $query->andWhere(
-      $query->expr()->isNull($query->getRootAliases()[0].'.program')
+
+    if (!$query instanceof \Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery)
+    {
+      return $query;
+    }
+
+    /** @var QueryBuilder $qb */
+    $qb = $query->getQueryBuilder();
+
+    $qb->andWhere(
+      $qb->expr()->isNull($qb->getRootAliases()[0].'.program')
     );
 
     return $query;
@@ -112,16 +108,20 @@ class FeaturedUrlAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
+    /** @var FeaturedProgram $featured_project */
+    $featured_project = $this->getSubject();
+
     $file_options = [
-      'required' => (null === $this->getSubject()->getId()),
+      'required' => (null === $featured_project->getId()),
       'constraints' => [
         new FeaturedImageConstraint(),
       ], ];
+
     if (null != $this->getSubject()->getId())
     {
-      $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($this->getSubject()).'">';
+      $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($featured_project).'">';
     }
 
     $formMapper
@@ -140,7 +140,7 @@ class FeaturedUrlAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('url')
@@ -152,7 +152,7 @@ class FeaturedUrlAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -171,7 +171,7 @@ class FeaturedUrlAdmin extends AbstractAdmin
     ;
   }
 
-  private function checkFlavor()
+  private function checkFlavor(): void
   {
     $flavor = $this->getForm()->get('flavor')->getData();
 

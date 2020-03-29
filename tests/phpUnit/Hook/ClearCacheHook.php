@@ -9,7 +9,9 @@ use Symfony\Component\Finder\Finder;
 class ClearCacheHook implements BeforeTestHook
 {
   public static string $CACHE_DIR;
+
   public static string $FIXTURES_DIR;
+
   public static string $GENERATED_FIXTURES_DIR;
 
   public function __construct()

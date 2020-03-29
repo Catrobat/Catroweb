@@ -6,9 +6,6 @@ use App\Entity\ProgramInappropriateReport;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class ProgramInappropriateReportRepository.
- */
 class ProgramInappropriateReportRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

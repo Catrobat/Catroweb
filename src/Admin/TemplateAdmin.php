@@ -11,21 +11,24 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-/**
- * Class TemplateAdmin.
- */
 class TemplateAdmin extends AbstractAdmin
 {
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_templateadmin';
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRoutePattern = 'template';
 
   /**
+   * @override
+   *
    * @var array
    */
   protected $datagridValues = [
@@ -45,7 +48,7 @@ class TemplateAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object Template
+   * @param Template $object
    *
    * @return string
    */
@@ -61,7 +64,7 @@ class TemplateAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $isNew = null == $this->getSubject()->getId();
     $formMapper
@@ -78,7 +81,7 @@ class TemplateAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('id')
@@ -91,7 +94,7 @@ class TemplateAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -105,7 +108,7 @@ class TemplateAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('export');
   }

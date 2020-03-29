@@ -2,46 +2,39 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
-use App\Catrobat\Commands\Helpers\ResetController;
+use App\Entity\FeaturedProgram;
 use App\Entity\Program;
+use App\Entity\ProgramManager;
 use App\Entity\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 class CreateFeatureProgramCommand extends Command
 {
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  protected static $defaultName = 'catrobat:feature';
 
-  /**
-   * @var RemixManipulationProgramManager
-   */
-  private $remix_manipulation_program_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var ResetController
-   */
-  private $reset_controller;
+  private ProgramManager $program_manager;
 
-  /**
-   * FeaturedProgramCommand constructor.
-   */
+  private EntityManagerInterface $entity_manager;
+
   public function __construct(UserManager $user_manager,
-                              RemixManipulationProgramManager $program_manager,
-                              ResetController $reset_controller)
+                              ProgramManager $program_manager,
+                              EntityManagerInterface $entity_manager)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
-    $this->remix_manipulation_program_manager = $program_manager;
-    $this->reset_controller = $reset_controller;
+    $this->program_manager = $program_manager;
+    $this->entity_manager = $entity_manager;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:feature')
       ->setDescription('feature a project')
@@ -49,33 +42,46 @@ class CreateFeatureProgramCommand extends Command
     ;
   }
 
-  /**
-   * @throws \Exception
-   *
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    /**
-     * @var Program
-     */
     $program_name = $input->getArgument('program_name');
 
-    $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
+    $program = $this->program_manager->findOneByName($program_name);
 
-    if (null == $program || null == $this->reset_controller)
+    if (null === $program)
     {
-      return;
+      return -1;
     }
 
     try
     {
-      $this->reset_controller->featureProgram($program);
+      $this->featureProgram($program);
     }
-    catch (\Exception $e)
+    catch (Exception $e)
     {
-      return;
+      return -1;
     }
     $output->writeln('Featuring '.$program->getName());
+
+    return 0;
+  }
+
+  private function featureProgram(Program $program): void
+  {
+    $feature = new FeaturedProgram();
+    $feature->setProgram($program);
+    $feature->setActive(true);
+    $feature->setFlavor('pocketcode');
+    $feature->setImageType('jpeg'); //todo picture?
+    $feature->setUrl(null);
+
+    $source_img = 'public/resources/screenshots/screen_'.$program->getId().'.png';
+    $dest_img = 'public/resources/featured/screen_'.$program->getId().'.png';
+    copy($source_img, $dest_img);
+    $file = new File($dest_img);
+    $feature->setNewFeaturedImage($file);
+
+    $this->entity_manager->persist($feature);
+    $this->entity_manager->flush();
   }
 }

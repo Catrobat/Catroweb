@@ -2,12 +2,13 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
-use App\Catrobat\Commands\Helpers\ResetController;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\FollowNotification;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,42 +16,29 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateFollowersCommand extends Command
 {
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  protected static $defaultName = 'catrobat:follow';
 
-  /**
-   * @var RemixManipulationProgramManager
-   */
-  private $remix_manipulation_program_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var ResetController
-   */
-  private $reset_controller;
+  private ProgramManager $program_manager;
 
-  /**
-   * @var CatroNotificationService
-   */
-  private $notification_service;
+  private CatroNotificationService $notification_service;
 
-  /**
-   * CreateFollowersCommand constructor.
-   */
+  private EntityManagerInterface $entity_manager;
+
   public function __construct(UserManager $user_manager,
-                              RemixManipulationProgramManager $program_manager,
-                              ResetController $reset_controller,
+                              ProgramManager $program_manager,
+                              EntityManagerInterface $entity_manager,
                               CatroNotificationService $notification_service)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
-    $this->remix_manipulation_program_manager = $program_manager;
-    $this->reset_controller = $reset_controller;
+    $this->program_manager = $program_manager;
+    $this->entity_manager = $entity_manager;
     $this->notification_service = $notification_service;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:follow')
       ->setDescription('follow an user')
@@ -60,42 +48,51 @@ class CreateFollowersCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $user_name = $input->getArgument('user_name');
     $follower_name = $input->getArgument('follower');
 
     if ($user_name == $follower_name)
     {
-      return;
+      return -1;
     }
 
-    /**
-     * @var User
-     * @var User $follower
-     */
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
+
+    /** @var User|null $follower */
     $follower = $this->user_manager->findUserByUsername($follower_name);
 
-    if (null == $user || null == $follower || null == $this->reset_controller)
+    if (null === $user || null === $follower)
     {
-      return;
+      return -1;
     }
 
     try
     {
       $notification = new FollowNotification($user, $follower);
-      $this->reset_controller->followUser($user, $follower);
+      $this->followUser($user, $follower);
       $this->notification_service->addNotification($notification);
     }
-    catch (\Exception $e)
+    catch (Exception $e)
     {
-      return;
+      return -1;
     }
     $output->writeln($follower_name.' follows '.$user_name);
+
+    return 0;
+  }
+
+  private function followUser(User $user, User $follower): void
+  {
+    $user->addFollower($follower);
+    $follower->addFollowing($user);
+
+    $this->entity_manager->persist($user);
+    $this->entity_manager->persist($follower);
+    $this->entity_manager->flush();
   }
 }

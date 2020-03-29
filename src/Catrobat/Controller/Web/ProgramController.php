@@ -22,6 +22,8 @@ use App\Entity\UserComment;
 use App\Repository\CatroNotificationRepository;
 use App\Repository\GameJamRepository;
 use App\Utils\ImageUtils;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -33,6 +35,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -50,12 +53,9 @@ class ProgramController extends AbstractController
   /**
    * @Route("/project/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
    *
-   * @param mixed $id
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
-  public function programRemixGraphAction(Request $request, $id, RemixManager $remix_manager,
+  public function programRemixGraphAction(Request $request, string $id, RemixManager $remix_manager,
                                           ScreenshotRepository $screenshot_repository): JsonResponse
   {
     $remix_graph_data = $remix_manager->getFullRemixGraph($id);
@@ -75,7 +75,7 @@ class ProgramController extends AbstractController
 
     $locale = strtolower($request->getLocale());
     $referrer = $request->headers->get('referer');
-    $this->statistics->createClickStatistics($request, 'show_remix_graph', 0, $id, null,
+    $this->statistics->createClickStatistics($request, 'show_remix_graph', null, $id, null,
       null, $referrer, $locale, false, false);
 
     return new JsonResponse([
@@ -94,13 +94,11 @@ class ProgramController extends AbstractController
    * Legacy routes
    * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
    *
-   * @param mixed $id
-   *
    * @throws NonUniqueResultException
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function projectAction(Request $request, $id, ProgramManager $program_manager,
+  public function projectAction(Request $request, string $id, ProgramManager $program_manager,
                                 ScreenshotRepository $screenshot_repository,
                                 ElapsedTimeStringFormatter $elapsed_time,
                                 RemixManager $remix_manager, GameJamRepository $game_jam_repository,
@@ -120,7 +118,7 @@ class ProgramController extends AbstractController
     $referrer = $request->headers->get('referer');
     $request->getSession()->set('referer', $referrer);
 
-    /** @var user $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     $logged_in = false;
 
@@ -151,7 +149,8 @@ class ProgramController extends AbstractController
     $isReportedByUser = $this->checkReportedByUser($project, $user);
 
     $program_url = $this->generateUrl('program',
-      ['id' => $project->getId()], true);
+      ['id' => $project->getId()], UrlGeneratorInterface::ABSOLUTE_PATH);
+
     $share_text = trim($project->getName().' on '.$program_url.' '.
       $project->getDescription());
 
@@ -222,7 +221,6 @@ class ProgramController extends AbstractController
       throw $this->createAccessDeniedException('Invalid like-type for project given!');
     }
 
-    /** @var Program $project */
     $project = $program_manager->find($id);
     if (null === $project)
     {
@@ -237,7 +235,7 @@ class ProgramController extends AbstractController
       throw $this->createNotFoundException('Project with given ID does not exist!');
     }
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -322,9 +320,9 @@ class ProgramController extends AbstractController
 
   /**
    * @Route("/search/{q}", name="search", requirements={"q": ".+"}, methods={"GET"})
-   * @Route("/search/{q}", name="search", methods={"GET"})
+   * @Route("/search/", name="empty_search", defaults={"q": null}, methods={"GET"})
    */
-  public function searchAction(string $q)
+  public function searchAction(string $q): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
@@ -341,25 +339,26 @@ class ProgramController extends AbstractController
       return $this->redirectToRoute('profile');
     }
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
 
+    /** @var ArrayCollection $user_programs */
     $user_programs = $user->getPrograms();
 
     $programs = $user_programs->matching(Criteria::create()
       ->where(Criteria::expr()->eq('id', $id)));
 
-    /** @var Program $program */
-    $program = $programs[0];
-    if (!$program)
+    if ($programs->isEmpty())
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
+    /** @var Program $program */
+    $program = $programs[0];
     $program->setVisible(false);
 
     $em = $this->getDoctrine()->getManager();
@@ -377,26 +376,27 @@ class ProgramController extends AbstractController
    */
   public function toggleProgramVisibilityAction(string $id): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
 
+    /** @var ArrayCollection $user_programs */
     $user_programs = $user->getPrograms();
+
     $programs = $user_programs->matching(
       Criteria::create()->where(Criteria::expr()->eq('id', $id))
     );
 
-    /** @var Program $program */
-    $program = $programs[0];
-
-    if (!$program)
+    if ($programs->isEmpty())
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
+    /** @var Program $program */
+    $program = $programs[0];
     $program->setPrivate(!$program->getPrivate());
 
     $em = $this->getDoctrine()->getManager();
@@ -415,10 +415,6 @@ class ProgramController extends AbstractController
   public function editProgramDescription(string $id, string $newDescription, RudeWordFilter $rude_word_filter,
                                          ProgramManager $program_manager, TranslatorInterface $translator): Response
   {
-    /**
-     * @var User
-     * @var Program $program
-     */
     $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
 
     if (strlen($newDescription) > $max_description_size)
@@ -436,7 +432,7 @@ class ProgramController extends AbstractController
     }
 
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
@@ -469,10 +465,6 @@ class ProgramController extends AbstractController
   public function editProgramCredits(string $id, string $newCredits, RudeWordFilter $rude_word_filter,
                                      ProgramManager $program_manager, TranslatorInterface $translator): Response
   {
-    /**
-     * @var User
-     * @var Program $program
-     */
     $max_credits_size = $this->getParameter('catrobat.max_credits_upload_size');
 
     if (strlen($newCredits) > $max_credits_size)
@@ -490,13 +482,13 @@ class ProgramController extends AbstractController
     }
 
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
 
     $program = $program_manager->find($id);
-    if (!$program)
+    if (null === $program)
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
@@ -523,14 +515,18 @@ class ProgramController extends AbstractController
   public function uploadAvatarAction(Request $request, ProgramManager $project_manager,
                                      ScreenshotRepository $screenshot_repository, string $id): Response
   {
-    /**
-     * @var User
-     * @var Program $project
-     */
+    /** @var User|null $user */
     $user = $this->getUser();
+
+    /** @var Program|null $project */
     $project = $project_manager->find($id);
 
-    if (!$user || $project->getUser() !== $user)
+    if (null === $project)
+    {
+      throw new NotFoundHttpException();
+    }
+
+    if (null === $user || $project->getUser() !== $user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
@@ -587,13 +583,7 @@ class ProgramController extends AbstractController
     return $jam;
   }
 
-  /**
-   * @param mixed $viewed
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  private function checkAndAddViewed(Request $request, Program $program, $viewed, ProgramManager $program_manager)
+  private function checkAndAddViewed(Request $request, Program $program, array $viewed, ProgramManager $program_manager): void
   {
     if (!in_array($program->getId(), $viewed, true))
     {
@@ -603,17 +593,10 @@ class ProgramController extends AbstractController
     }
   }
 
-  /**
-   * @param $active_like_types          int[]
-   * @param $active_user_like_types     int[]
-   * @param mixed $total_like_count
-   * @param mixed $referrer
-   * @param mixed $program_comments
-   */
   private function createProgramDetailsArray(ScreenshotRepository $screenshot_repository, Program $program,
                                              array $active_like_types, array $active_user_like_types,
-                                             $total_like_count, ElapsedTimeStringFormatter $elapsed_time,
-                                             $referrer, $program_comments,
+                                             int $total_like_count, ElapsedTimeStringFormatter $elapsed_time,
+                                             ?string $referrer, array $program_comments,
                                              Request $request, RemixManager $remix_manager): array
   {
     $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
@@ -705,11 +688,12 @@ class ProgramController extends AbstractController
       ;
   }
 
-  private function findUserPrograms(?User $user, Program $program)
+  private function findUserPrograms(?User $user, Program $program): ?Collection
   {
     $user_programs = null;
     if (null !== $user)
     {
+      /** @var ArrayCollection $programs */
       $programs = $user->getPrograms();
       $user_programs = $programs->matching(Criteria::create()
         ->where(Criteria::expr()->eq('id', $program->getId())));

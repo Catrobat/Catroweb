@@ -9,9 +9,6 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class CatroNotificationRepository.
- */
 class CatroNotificationRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -22,13 +19,13 @@ class CatroNotificationRepository extends ServiceEntityRepository
   /**
    * @return LikeNotification[]
    */
-  public function getLikeNotificationsForProject(Program $project, User $owner = null, User $likeFrom = null)
+  public function getLikeNotificationsForProject(Program $project, User $owner = null, User $likeFrom = null): array
   {
     $qb = $this->_em->createQueryBuilder();
 
     $qb
       ->select('n')
-      ->from('\App\Entity\LikeNotification', 'n')
+      ->from(LikeNotification::class, 'n')
       ->where($qb->expr()->eq('n.program', ':program_id'))
       ->setParameter(':program_id', $project->getId())
     ;

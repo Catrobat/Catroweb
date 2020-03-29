@@ -6,29 +6,21 @@ use App\Utils\TimeUtils;
 use Exception;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class ElapsedTimeStringFormatter.
- */
 class ElapsedTimeStringFormatter
 {
   private TranslatorInterface $translator;
 
-  /**
-   * ElapsedTimeStringFormatter constructor.
-   */
   public function __construct(TranslatorInterface $translator)
   {
     $this->translator = $translator;
   }
 
   /**
-   * @param $timestamp
+   * @param mixed $timestamp
    *
    * @throws Exception
-   *
-   * @return string
    */
-  public function getElapsedTime($timestamp)
+  public function getElapsedTime($timestamp): string
   {
     $elapsed = TimeUtils::getTimestamp() - $timestamp;
 
@@ -36,32 +28,32 @@ class ElapsedTimeStringFormatter
     {
       $elapsed = 0;
     }
-    if ($elapsed <= 3540)
+    if ($elapsed <= 3_540)
     {
       $minutes = (int) round($elapsed / 60);
 
       return $this->translator->trans('time.minutes.ago', ['%count%' => $minutes], 'catroweb');
     }
-    if ($elapsed <= 82800)
+    if ($elapsed <= 82_800)
     {
-      $hours = (int) round($elapsed / 3600);
+      $hours = (int) round($elapsed / 3_600);
 
       return $this->translator->trans('time.hours.ago', ['%count%' => $hours], 'catroweb');
     }
-    if ($elapsed <= 2505600)
+    if ($elapsed <= 2_505_600)
     {
-      $days = (int) round($elapsed / 86400);
+      $days = (int) round($elapsed / 86_400);
 
       return $this->translator->trans('time.days.ago', ['%count%' => $days], 'catroweb');
     }
-    if ($elapsed <= 28927800)
+    if ($elapsed <= 28_927_800)
     {
-      $months = (int) round($elapsed / 2629800);
+      $months = (int) round($elapsed / 2_629_800);
 
       return $this->translator->trans('time.months.ago', ['%count%' => $months], 'catroweb');
     }
 
-    $years = (int) round($elapsed / 31557600);
+    $years = (int) round($elapsed / 31_557_600);
 
     return $this->translator->trans('time.years.ago', ['%count%' => $years], 'catroweb');
   }

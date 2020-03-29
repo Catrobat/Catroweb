@@ -13,29 +13,15 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-/**
- * Class InvalidFileUploadCleanupCommand.
- */
 class InvalidFileUploadCleanupCommand extends Command
 {
-  /**
-   * @var EntityManagerInterface
-   */
-  private $entity_manager;
+  protected static $defaultName = 'catrobat:clean:invalid-upload';
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
-  /**
-   * @var ProgramRepository
-   */
-  private $program_repository;
+  private ProgramRepository $program_repository;
 
-  /**
-   * InvalidFileUploadCleanupCommand constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag,
                               ProgramRepository $program_repository)
   {
@@ -45,7 +31,7 @@ class InvalidFileUploadCleanupCommand extends Command
     $this->program_repository = $program_repository;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:clean:invalid-upload')
       ->setDescription('Sets all files given in command file to invisible.
@@ -54,13 +40,7 @@ class InvalidFileUploadCleanupCommand extends Command
     ;
   }
 
-  /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   *
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $finder = new Finder();
     $file_name = $input->getArgument('file');
@@ -70,7 +50,7 @@ class InvalidFileUploadCleanupCommand extends Command
     $content = '';
     foreach ($finder->in($folder) as $file)
     {
-      $content = $file->getContents();
+      $content = file_get_contents($file);
     }
     $ids = explode(",\n", $content);
 
@@ -78,9 +58,9 @@ class InvalidFileUploadCleanupCommand extends Command
 
     foreach ($ids as $id)
     {
-      /** @var Program $program */
+      /** @var Program|null $program */
       $program = $this->program_repository->find($id);
-      if (!$program)
+      if (null === $program)
       {
         $output->writeln('[Error] Program with id <'.$id.'> doesnt exist! Skipping...');
         continue;
@@ -92,5 +72,7 @@ class InvalidFileUploadCleanupCommand extends Command
     $this->entity_manager->flush();
     $fs->copy($folder.$file_name, $folder.'/executed/'.date('Y-m-d_H:i:s').'_done');
     $fs->remove($folder.$file_name);
+
+    return 0;
   }
 }

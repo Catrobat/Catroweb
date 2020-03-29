@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class RaspiSendDigitalValueBrick.
- */
 class RaspiSendDigitalValueBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::RASPI_SEND_DIGITAL_VALUE_BRICK;
     $this->caption = 'Set Raspberry Pi pin _ to _';

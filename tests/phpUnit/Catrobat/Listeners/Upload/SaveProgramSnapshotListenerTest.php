@@ -53,7 +53,7 @@ class SaveProgramSnapshotListenerTest extends TestCase
 
     $this->program = new Program();
     $this->program->setUser($this->user);
-    $this->program->setId(1);
+    $this->program->setId('1');
   }
 
   public function testBackupsTheCurrentProgramFileOfALimitedAccountOnUpdate(): void

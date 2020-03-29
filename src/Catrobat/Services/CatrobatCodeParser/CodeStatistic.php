@@ -2,60 +2,33 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
+use App\Catrobat\Services\CatrobatCodeParser\Bricks\Brick;
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
 use SimpleXMLElement;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-/**
- * Class CodeStatistic.
- */
 class CodeStatistic
 {
-  /**
-   * @var int
-   */
-  private $total_num_scenes;
-  /**
-   * @var int
-   */
-  private $total_num_scripts;
-  /**
-   * @var int
-   */
-  private $total_num_bricks;
-  /**
-   * @var int
-   */
-  private $total_num_objects;
-  /**
-   * @var int
-   */
-  private $total_num_looks;
-  /**
-   * @var int
-   */
-  private $total_num_sounds;
-  /**
-   * @var int
-   */
-  private $total_num_global_vars;
-  /**
-   * @var int
-   */
-  private $total_num_local_vars;
+  private int $total_num_scenes;
 
-  /**
-   * @var array
-   */
-  private $brick_type_statistic;
-  /**
-   * @var array
-   */
-  private $brick_type_register;
+  private int $total_num_scripts;
 
-  /**
-   * CodeStatistic constructor.
-   */
+  private int $total_num_bricks;
+
+  private int $total_num_objects;
+
+  private int $total_num_looks;
+
+  private ?int $total_num_sounds;
+
+  private ?int $total_num_global_vars;
+
+  private ?int $total_num_local_vars;
+
+  private array $brick_type_statistic;
+
+  private array $brick_type_register;
+
   public function __construct()
   {
     $this->total_num_scenes = 0;
@@ -138,14 +111,14 @@ class CodeStatistic
     ];
   }
 
-  public function update(ParsedObjectsContainer $object_list_container)
+  public function update(ParsedObjectsContainer $object_list_container): void
   {
     if ($object_list_container instanceof ParsedScene)
     {
       $this->updateSceneStatistic();
     }
 
-    $objects = array_merge([$object_list_container->getBackground()], $object_list_container->getObjects());
+    $objects = [...[$object_list_container->getBackground()], ...$object_list_container->getObjects()];
 
     foreach ($objects as $object)
     {
@@ -166,90 +139,63 @@ class CodeStatistic
     }
   }
 
-  public function computeVariableStatistic(SimpleXMLElement $program_xml_properties)
+  public function computeVariableStatistic(SimpleXMLElement $program_xml_properties): void
   {
     $this->countGlobalVariables($program_xml_properties);
     $this->countLocalVariables($program_xml_properties);
   }
 
-  /**
-   * @return int
-   */
-  public function getSceneStatistic()
+  public function getSceneStatistic(): int
   {
     return $this->total_num_scenes;
   }
 
-  /**
-   * @return int
-   */
-  public function getScriptStatistic()
+  public function getScriptStatistic(): int
   {
     return $this->total_num_scripts;
   }
 
-  /**
-   * @return int
-   */
-  public function getBrickStatistic()
+  public function getBrickStatistic(): int
   {
     return $this->total_num_bricks;
   }
 
-  /**
-   * @return array
-   */
-  public function getBrickTypeStatistic()
+  public function getBrickTypeStatistic(): array
   {
     return $this->brick_type_statistic;
   }
 
-  /**
-   * @return int
-   */
-  public function getObjectStatistic()
+  public function getObjectStatistic(): int
   {
     return $this->total_num_objects;
   }
 
-  /**
-   * @return int
-   */
-  public function getLookStatistic()
+  public function getLookStatistic(): int
   {
     return $this->total_num_looks;
   }
 
-  /**
-   * @return int
-   */
-  public function getSoundStatistic()
+  public function getSoundStatistic(): int
   {
     return $this->total_num_sounds;
   }
 
-  /**
-   * @return int
-   */
-  public function getGlobalVarStatistic()
+  public function getGlobalVarStatistic(): int
   {
     return $this->total_num_global_vars;
   }
 
-  /**
-   * @return int
-   */
-  public function getLocalVarStatistic()
+  public function getLocalVarStatistic(): int
   {
     return $this->total_num_local_vars;
   }
 
-  protected function updateSceneStatistic()
+  protected function updateSceneStatistic(): void
   {
     ++$this->total_num_scenes;
   }
 
-  protected function updateObjectStatistic(ParsedObject $object)
+  protected function updateObjectStatistic(ParsedObject $object): void
   {
     ++$this->total_num_objects;
 
@@ -262,23 +208,17 @@ class CodeStatistic
     }
   }
 
-  /**
-   * @param $num_looks
-   */
-  protected function updateLookStatistic($num_looks)
+  protected function updateLookStatistic(int $num_looks): void
   {
     $this->total_num_looks += $num_looks;
   }
 
-  /**
-   * @param $num_sounds
-   */
-  protected function updateSoundStatistic($num_sounds)
+  protected function updateSoundStatistic(int $num_sounds): void
   {
     $this->total_num_sounds += $num_sounds;
   }
 
-  protected function updateScriptStatistic(Script $script)
+  protected function updateScriptStatistic(Script $script): void
   {
     ++$this->total_num_scripts;
 
@@ -291,9 +231,9 @@ class CodeStatistic
   }
 
   /**
-   * @param $brick Script
+   * @param Script|Brick $brick
    */
-  protected function updateBrickStatistic($brick)
+  protected function updateBrickStatistic($brick): void
   {
     ++$this->total_num_bricks;
     switch ($brick->getImgFile())
@@ -349,10 +289,10 @@ class CodeStatistic
   }
 
   /**
-   * @param $brick_type
-   * @param $brick_category
+   * @param mixed $brick_type
+   * @param mixed $brick_category
    */
-  protected function updateBrickTypeStatistic($brick_type, $brick_category)
+  protected function updateBrickTypeStatistic($brick_type, $brick_category): void
   {
     ++$this->brick_type_statistic[$brick_category]['numTotal'];
     if (!in_array($brick_type, $this->brick_type_register[$brick_category], true))
@@ -363,36 +303,36 @@ class CodeStatistic
     }
   }
 
-  protected function countGlobalVariables(SimpleXMLElement $program_xml_properties)
+  protected function countGlobalVariables(SimpleXMLElement $program_xml_properties): void
   {
     try
     {
       $this->total_num_global_vars =
-        count($program_xml_properties->xpath('//programVariableList//userVariable')) +
-        count($program_xml_properties->xpath('//programListOfLists//userVariable'));
+        (is_countable($program_xml_properties->xpath('//programVariableList//userVariable')) ? count($program_xml_properties->xpath('//programVariableList//userVariable')) : 0) +
+        (is_countable($program_xml_properties->xpath('//programListOfLists//userVariable')) ? count($program_xml_properties->xpath('//programListOfLists//userVariable')) : 0);
     }
-    catch (Exception $e)
+    catch (Exception $exception)
     {
       $this->total_num_global_vars = null;
     }
   }
 
-  protected function countLocalVariables(SimpleXMLElement $program_xml_properties)
+  protected function countLocalVariables(SimpleXMLElement $program_xml_properties): void
   {
     try
     {
       $this->total_num_local_vars =
-        count($program_xml_properties->xpath('//userVariable//userVariable')) - $this->total_num_global_vars;
+        (is_countable($program_xml_properties->xpath('//userVariable//userVariable')) ? count($program_xml_properties->xpath('//userVariable//userVariable')) : 0) - $this->total_num_global_vars;
 
       if ($this->total_num_local_vars <= 0)
       {
         // might be a old project using the old deprecated format to define local variables
         $this->total_num_local_vars =
-          count($program_xml_properties->xpath('//objectListOfList//userVariable')) +
-          count($program_xml_properties->xpath('//objectVariableList//userVariable'));
+          (is_countable($program_xml_properties->xpath('//objectListOfList//userVariable')) ? count($program_xml_properties->xpath('//objectListOfList//userVariable')) : 0) +
+          (is_countable($program_xml_properties->xpath('//objectVariableList//userVariable')) ? count($program_xml_properties->xpath('//objectVariableList//userVariable')) : 0);
       }
     }
-    catch (Exception $e)
+    catch (Exception $exception)
     {
       $this->total_num_local_vars = null;
     }

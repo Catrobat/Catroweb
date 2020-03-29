@@ -3,16 +3,20 @@
 namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\StatementFactory;
+use SimpleXMLElement;
 
-/**
- * Class ShowTextStatement.
- */
 class ShowTextStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'show variable ';
+  /**
+   * @var string
+   */
   const END_STRING = ')<br/>';
 
-  public function __construct(StatementFactory $statementFactory, $xmlTree, string $spaces)
+  public function __construct(StatementFactory $statementFactory, ?SimpleXMLElement $xmlTree, int $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
@@ -30,14 +34,13 @@ class ShowTextStatement extends Statement
     {
       if ($statement instanceof FormulaStatement)
       {
-        switch ($statement->getCategory())
+        if ('Y_POSITION' == $statement->getCategory())
         {
-          case 'Y_POSITION':
-            $formula_y_pos = $statement->execute();
-            break;
-          case 'X_POSITION':
-            $formula_x_pos = $statement->execute();
-            break;
+          $formula_y_pos = $statement->execute();
+        }
+        elseif ('X_POSITION' == $statement->getCategory())
+        {
+          $formula_x_pos = $statement->execute();
         }
       }
     }
@@ -47,10 +50,7 @@ class ShowTextStatement extends Statement
     return 'Show variable '.$variable_name.' at X: '.$formula_x_pos_no_markup.' Y: '.$formula_y_pos_no_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
     return '1h_brick_red.png';
   }

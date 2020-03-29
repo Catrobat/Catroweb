@@ -10,23 +10,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-/**
- * Class PurgeCommand.
- */
 class PurgeCommand extends Command
 {
+  protected static $defaultName = 'catrobat:purge';
   private ParameterBagInterface $parameter_bag;
 
-  /**
-   * PurgeCommand constructor.
-   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->parameter_bag = $parameter_bag;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:purge')
       ->setDescription('Purge all database and file data')
@@ -37,13 +32,13 @@ class PurgeCommand extends Command
   /**
    * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output): void
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     if (!$input->getOption('force'))
     {
       $output->writeln("This command will delete everything, use with caution! Use '--force' option if you are sure.");
 
-      return;
+      return -1;
     }
 
     $output->writeln('Deleting all catrobat data');
@@ -103,5 +98,7 @@ class PurgeCommand extends Command
     $progress->finish();
 
     $output->writeln('');
+
+    return 0;
   }
 }

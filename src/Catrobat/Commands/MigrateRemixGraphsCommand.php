@@ -11,10 +11,10 @@ use App\Entity\ProgramManager;
 use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use App\Repository\ProgramRepository;
 use App\Utils\TimeUtils;
 use DateTime;
 use DateTimeZone;
-use Doctrine\Common\Persistence\Mapping\MappingException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\OptimisticLockException;
@@ -24,17 +24,15 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class MigrateRemixGraphsCommand.
- */
 class MigrateRemixGraphsCommand extends Command
 {
+  protected static $defaultName = 'catrobat:remixgraph:migrate';
   private Filesystem $file_system;
 
   private AsyncHttpClient $async_http_client;
@@ -55,10 +53,12 @@ class MigrateRemixGraphsCommand extends Command
 
   private CatrobatFileExtractor $file_extractor;
 
+  private ProgramRepository $program_repository;
+
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
                               ProgramManager $program_manager, RemixManager $remix_manager,
                               EntityManagerInterface $entity_manager, CatrobatFileExtractor $file_extractor,
-                              $kernel_root_dir)
+                              ProgramRepository $program_repository, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->file_system = $filesystem;
@@ -67,16 +67,14 @@ class MigrateRemixGraphsCommand extends Command
     $this->program_manager = $program_manager;
     $this->remix_manager = $remix_manager;
     $this->entity_manager = $entity_manager;
-    $this->app_root_dir = $kernel_root_dir;
+    $this->app_root_dir = $parameter_bag->get('kernel.project_dir');
     $this->output = null;
     $this->migration_file_lock = null;
     $this->file_extractor = $file_extractor;
+    $this->program_repository = $program_repository;
   }
 
-  /**
-   * @param $signal_number
-   */
-  public function signalHandler($signal_number)
+  public function signalHandler(int $signal_number): void
   {
     $this->output->writeln('[SignalHandler] Called Signal Handler');
     switch ($signal_number)
@@ -101,24 +99,23 @@ class MigrateRemixGraphsCommand extends Command
     exit(-1);
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:remixgraph:migrate')
       ->setDescription('Imports remix graphs from all XML files of uploaded programs to database')
       ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
       ->addArgument('user', InputArgument::OPTIONAL, 'User who will be the owner of these programs '.
         '(only required if --debug-import-missing-programs is set)')
-      ->addOption('debug-import-missing-programs', InputOption::VALUE_OPTIONAL)
+      ->addOption('debug-import-missing-programs', 'debug')
     ;
   }
 
   /**
    * @throws ORMException
    * @throws OptimisticLockException
-   * @throws MappingException
    * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output): void
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     declare(ticks=1);
     $this->migration_file_lock = new MigrationFileLock($this->app_root_dir, $output);
@@ -135,7 +132,7 @@ class MigrateRemixGraphsCommand extends Command
     {
       $output->writeln('Given directory does not exist!');
 
-      return;
+      return -1;
     }
 
     $directory = ('/' != substr($directory, -1)) ? $directory.'/' : $directory;
@@ -147,22 +144,21 @@ class MigrateRemixGraphsCommand extends Command
     }
 
     $this->migrateRemixDataOfExistingPrograms($output, $directory);
+
+    return 0;
   }
 
   /**
-   * @param $directory
+   * @param mixed $directory
    *
-   * @throws MappingException
    * @throws ORMException
    * @throws OptimisticLockException
    * @throws Exception
    */
-  private function migrateRemixDataOfExistingPrograms(OutputInterface $output, $directory)
+  private function migrateRemixDataOfExistingPrograms(OutputInterface $output, $directory): void
   {
-    /**
-     * @var Program
-     * @var Program $unmigrated_program
-     */
+    /* @var Program $unmigrated_program */
+
     $migration_start_time = TimeUtils::getDateTime();
     $progress_bar_format_simple = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
     $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | '.
@@ -196,7 +192,7 @@ class MigrateRemixGraphsCommand extends Command
     while (null != ($program_id = $this->program_manager->findNext($previous_program_id)))
     {
       $program_file_path = $directory.$program_id.'.catrobat';
-      /** @var Program $program */
+
       $program = $this->program_manager->find($program_id);
       assert(null != $program);
       $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, '...');
@@ -310,13 +306,11 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param $program_file_path
-   * @param $program_id
-   * @param $program_name
-   *
-   * @return array
+   * @param mixed $program_file_path
+   * @param mixed $program_id
+   * @param mixed $program_name
    */
-  private function extractRemixData($program_file_path, $program_id, $program_name, OutputInterface $output, ProgressBar $progress_bar)
+  private function extractRemixData($program_file_path, $program_id, $program_name, OutputInterface $output, ProgressBar $progress_bar): array
   {
     $extracted_file = null;
 
@@ -345,13 +339,13 @@ class MigrateRemixGraphsCommand extends Command
       // NOTE: this is a workaround only needed for migration purposes in order to stay backward compatible
       //       with older XML files -> do not change order here
       //----------------------------------------------------------------------------------------------------------
-      $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, false);
+      $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->program_repository, false);
       assert(1 == count($url_data), 'WTH! This program has multiple urls with different program IDs?!!');
       assert($url_data[0]->getProgramId() == $program_id);
 
       //$remix_of_string = $extracted_file->getRemixMigrationUrlsString();
-      $remix_data_only_forward_parents = $extracted_file->getRemixesData($program_id, true, true);
-      $full_remix_data = $extracted_file->getRemixesData($program_id, false, true);
+      $remix_data_only_forward_parents = $extracted_file->getRemixesData($program_id, true, $this->program_repository, true);
+      $full_remix_data = $extracted_file->getRemixesData($program_id, false, $this->program_repository, true);
       $language_version = $extracted_file->getLanguageVersion();
 
       $result = [
@@ -379,10 +373,10 @@ class MigrateRemixGraphsCommand extends Command
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  private function addRemixData(Program $program, array $remixes_data, bool $is_update = false)
+  private function addRemixData(Program $program, array $remixes_data, bool $is_update = false): void
   {
     assert(null != $program);
-    $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data)
+    $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data): bool
     {
       return $remix_data->isScratchProgram();
     });
@@ -390,11 +384,8 @@ class MigrateRemixGraphsCommand extends Command
 
     if (count($scratch_remixes_data) > 0)
     {
-      $scratch_ids = array_map(function (RemixData $data)
+      $scratch_ids = array_map(function (RemixData $data): string
       {
-        /*
-         * @var $data RemixData
-         */
         return $data->getProgramId();
       }, $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);
@@ -417,7 +408,7 @@ class MigrateRemixGraphsCommand extends Command
   /**
    * @throws Exception
    */
-  private function debugImportMissingPrograms(OutputInterface $output, string $directory, string $username)
+  private function debugImportMissingPrograms(OutputInterface $output, string $directory, string $username): void
   {
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
@@ -429,7 +420,7 @@ class MigrateRemixGraphsCommand extends Command
       return;
     }
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
     if (null == $user)
     {

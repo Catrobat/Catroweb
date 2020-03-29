@@ -19,18 +19,15 @@ use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 class Group extends BaseGroup
 {
   /**
-   * @var int @ORM\Id
+   * @var int
+   *
+   * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected $id;
 
-  /**
-   * Get id.
-   *
-   * @return int $id
-   */
-  public function getId()
+  public function getId(): int
   {
     return $this->id;
   }

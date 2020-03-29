@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class TapAtBrick.
- */
 class TapAtBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::TAP_AT_BRICK;
     $this->caption = 'Tap At';

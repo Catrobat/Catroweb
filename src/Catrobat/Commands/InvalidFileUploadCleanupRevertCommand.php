@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Entity\Program;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -14,29 +13,15 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class InvalidFileUploadCleanupRevertCommand.
- */
 class InvalidFileUploadCleanupRevertCommand extends Command
 {
-  /**
-   * @var EntityManagerInterface
-   */
-  private $entity_manager;
+  protected static $defaultName = 'catrobat:clean:invalid-upload:revert';
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
-  /**
-   * @var ProgramRepository
-   */
-  private $program_repository;
+  private ProgramRepository $program_repository;
 
-  /**
-   * InvalidFileUploadCleanupRevertCommand constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag,
                               ProgramRepository $program_repository)
   {
@@ -46,7 +31,7 @@ class InvalidFileUploadCleanupRevertCommand extends Command
     $this->program_repository = $program_repository;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:clean:invalid-upload:revert')
       ->setDescription('Sets all files given in command file to visible.
@@ -55,26 +40,19 @@ class InvalidFileUploadCleanupRevertCommand extends Command
     ;
   }
 
-  /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   *
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    /**
-     * @var File
-     */
     $finder = new Finder();
     $file_name = $input->getArgument('file');
     $finder->files()->name($file_name);
     $folder = $this->parameter_bag->get('catrobat.invalidupload.dir');
 
     $content = '';
+
+    /** @var File $file */
     foreach ($finder->in($folder) as $file)
     {
-      $content = $file->getContents();
+      $content = file_get_contents($file);
     }
     $ids = explode(",\n", $content);
 
@@ -82,7 +60,6 @@ class InvalidFileUploadCleanupRevertCommand extends Command
 
     foreach ($ids as $id)
     {
-      /** @var Program $program */
       $program = $this->program_repository->find($id);
       if (!$program)
       {
@@ -96,5 +73,7 @@ class InvalidFileUploadCleanupRevertCommand extends Command
     $this->entity_manager->flush();
     $fs->copy($folder.$file_name, $folder.'/executed/'.date('Y-m-d_H:i:s').'_revert');
     $fs->remove($folder.$file_name);
+
+    return 0;
   }
 }

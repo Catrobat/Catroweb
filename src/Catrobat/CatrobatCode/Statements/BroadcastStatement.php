@@ -2,20 +2,23 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class BroadcastStatement.
- */
 class BroadcastStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'broadcast ';
+  /**
+   * @var string
+   */
   const END_STRING = '<br/>';
 
   /**
    * BroadcastStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -24,18 +27,12 @@ class BroadcastStatement extends Statement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     return 'Broadcast '.$this->xmlTree->broadcastMessage;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
     return '1h_brick_orange.png';
   }

@@ -13,9 +13,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-/**
- * Class ReportedProgramsAdmin.
- */
 class ReportedProgramsAdmin extends AbstractAdmin
 {
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
@@ -44,7 +41,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('reportingUser.username')
@@ -59,7 +56,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->add('state',
@@ -88,7 +85,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('state',
@@ -103,7 +100,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->add('unreportProgram');
     $collection->remove('create')->remove('delete')->remove('export');

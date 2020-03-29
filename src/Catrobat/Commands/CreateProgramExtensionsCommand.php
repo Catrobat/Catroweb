@@ -4,10 +4,10 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Services\ProgramFileRepository;
-use App\Entity\Extension;
 use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use SplFileInfo;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,39 +15,20 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 use ZipArchive;
 
-/**
- * Class CreateProgramExtensionsCommand.
- */
 class CreateProgramExtensionsCommand extends Command
 {
-  /**
-   * @var OutputInterface
-   */
-  private $output;
+  protected static $defaultName = 'catrobat:create:extensions';
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $em;
+  private OutputInterface $output;
 
-  /**
-   * @var ProgramFileRepository
-   */
-  private $program_file_repository;
+  private EntityManagerInterface $em;
 
-  /**
-   * @var ProgramRepository
-   */
-  private $program_repository;
+  private ProgramFileRepository $program_file_repository;
 
-  /**
-   * @var ExtensionRepository
-   */
-  private $extension_repository;
+  private ProgramRepository $program_repository;
 
-  /**
-   * CreateProgramExtensionsCommand constructor.
-   */
+  private ExtensionRepository $extension_repository;
+
   public function __construct(EntityManagerInterface $em, ProgramFileRepository $program_file_repository,
                               ProgramRepository $program_repo, ExtensionRepository $extension_repository)
   {
@@ -58,24 +39,18 @@ class CreateProgramExtensionsCommand extends Command
     $this->extension_repository = $extension_repository;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:create:extensions')
       ->setDescription('Creating extensions from uploaded programs')
     ;
   }
 
-  /**
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    /*
-     * @var $extension Extension
-     */
     $this->output = $output;
     $xpath = '//@category';
-    $program_with_extensiones = false;
+    $program_with_extensions = false;
 
     $this->writeln('Deleting all linked extensions');
 
@@ -94,6 +69,7 @@ class CreateProgramExtensionsCommand extends Command
 
     $this->writeln('Searching for extensions ...');
 
+    /** @var File $element */
     foreach ($finder as $element)
     {
       $zip = new ZipArchive();
@@ -137,7 +113,7 @@ class CreateProgramExtensionsCommand extends Command
 
       if (!empty($nodes))
       {
-        $prefixes = array_map(function ($elem)
+        $prefixes = array_map(function ($elem): string
         {
           return explode('_', $elem['category'], 2)[0];
         }, $nodes);
@@ -148,7 +124,7 @@ class CreateProgramExtensionsCommand extends Command
           if (in_array($extension->getPrefix(), $prefixes, true))
           {
             $program->addExtension($extension);
-            $program_with_extensiones = true;
+            $program_with_extensions = true;
 
             if ('PHIRO' == $extension->getPrefix())
             {
@@ -166,40 +142,34 @@ class CreateProgramExtensionsCommand extends Command
               if (0 == strcmp($cast_value[0], 'true'))
               {
                 $program->addExtension($extension);
-                $program_with_extensiones = true;
+                $program_with_extensions = true;
               }
             }
           }
         }
 
-        if (true == $program_with_extensiones)
+        if (true == $program_with_extensions)
         {
           $this->em->persist($program);
           $this->em->flush();
-          $program_with_extensiones = false;
+          $program_with_extensions = false;
         }
       }
     }
 
     $this->writeln('Done!');
+
+    return 0;
   }
 
-  /**
-   * @param File $element
-   *
-   * @return object|null
-   */
-  private function getProgram($element)
+  private function getProgram(SplFileInfo $element): ?object
   {
     $id = explode('.', $element->getFilename());
 
     return $this->program_repository->find($id[0]);
   }
 
-  /**
-   * @param $string
-   */
-  private function writeln($string)
+  private function writeln(string $string): void
   {
     if (null != $this->output)
     {

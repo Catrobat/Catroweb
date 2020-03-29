@@ -222,9 +222,12 @@ function Notification (newNotifications, oldNotifications, markAsReadUrl, markAl
       key: '%amount%',
       value: self.notifications
     })
-    const url = Routing.generate('translate_choice', {
+    translations.push({
+      key: '%count%',
+      value: self.notifications
+    })
+    const url = Routing.generate('translate', {
       word: 'catro-notifications.summary',
-      count: self.notifications,
       array: JSON.stringify(translations),
       domain: 'catroweb'
     })

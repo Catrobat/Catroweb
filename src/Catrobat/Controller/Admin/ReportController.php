@@ -12,7 +12,7 @@ class ReportController extends CRUDController
 {
   public function unreportProgramAction(): RedirectResponse
   {
-    /** @var ProgramInappropriateReport $object */
+    /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
     if (null === $object)
     {

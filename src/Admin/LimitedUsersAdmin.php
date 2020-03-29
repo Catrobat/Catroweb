@@ -7,9 +7,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-/**
- * Class LimitedUsersAdmin.
- */
 class LimitedUsersAdmin extends AbstractAdmin
 {
   /**
@@ -27,7 +24,7 @@ class LimitedUsersAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper->addIdentifier('id')
       ->add('username')
@@ -43,7 +40,7 @@ class LimitedUsersAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper->add('username', null, [
       'show_filter' => true,
@@ -53,7 +50,7 @@ class LimitedUsersAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->clearExcept([
       'list',

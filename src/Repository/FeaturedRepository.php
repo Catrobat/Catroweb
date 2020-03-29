@@ -7,11 +7,9 @@ use App\Entity\Program;
 use App\Utils\APIQueryHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class FeaturedRepository.
- */
 class FeaturedRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -19,6 +17,9 @@ class FeaturedRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, FeaturedProgram::class);
   }
 
+  /**
+   * @return mixed
+   */
   public function getFeaturedPrograms(?string $flavor, ?int $limit = 20, ?int $offset = 0, ?string $platform = null, ?string $max_version = null)
   {
     $qb = $this->createQueryBuilder('e');
@@ -39,6 +40,12 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * @throws NoResultException
+   * @throws NonUniqueResultException
+   *
+   * @return mixed
+   */
   public function getFeaturedProgramCount(string $flavor, bool $for_ios = false)
   {
     $qb = $this->createQueryBuilder('e');
@@ -56,7 +63,10 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getSingleScalarResult();
   }
 
-  public function getFeaturedItems(string $flavor, int $limit = 20, int $offset = 0)
+  /**
+   * @return mixed
+   */
+  public function getFeaturedItems(string $flavor, ?int $limit = 20, int $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -72,6 +82,12 @@ class FeaturedRepository extends ServiceEntityRepository
       ->getQuery()->getResult();
   }
 
+  /**
+   * @throws NoResultException
+   * @throws NonUniqueResultException
+   *
+   * @return mixed
+   */
   public function getFeaturedItemCount(string $flavor)
   {
     $qb = $this->createQueryBuilder('e');
@@ -85,7 +101,10 @@ class FeaturedRepository extends ServiceEntityRepository
       ->getQuery()->getSingleScalarResult();
   }
 
-  public function isFeatured(Program $program)
+  /**
+   * @throws NoResultException
+   */
+  public function isFeatured(Program $program): bool
   {
     $qb = $this->createQueryBuilder('e');
     $qb
@@ -99,7 +118,7 @@ class FeaturedRepository extends ServiceEntityRepository
 
       return $count > 0;
     }
-    catch (NonUniqueResultException $exception)
+    catch (NonUniqueResultException $nonUniqueResultException)
     {
       return false;
     }

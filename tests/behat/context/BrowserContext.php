@@ -30,16 +30,16 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @BeforeScenario
    */
-  public function setup()
+  public function setup(): void
   {
     $this->getMink()->restartSessions();
-    $this->getSession()->resizeWindow(320 + 15, 1024);
+    $this->getSession()->resizeWindow(320 + 15, 1_024);
   }
 
   /**
    * @AfterScenario
    */
-  public function resetSession()
+  public function resetSession(): void
   {
     $this->getSession()->getDriver()->reset();
   }
@@ -47,7 +47,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Given I start a new session
    */
-  public function iStartANewSession()
+  public function iStartANewSession(): void
   {
     $this->getMink()->restartSessions();
   }
@@ -55,7 +55,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^I ensure pop ups work$/
    */
-  public function iEnsurePopUpsWork()
+  public function iEnsurePopUpsWork(): void
   {
     try
     {
@@ -81,7 +81,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    *
    * @throws ExpectationException
    */
-  public function theElementShouldNotExist($locator)
+  public function theElementShouldNotExist($locator): void
   {
     $this->assertSession()->elementNotExists('css', $locator);
   }
@@ -93,7 +93,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    *
    * @throws ElementNotFoundException
    */
-  public function theElementShouldExist($locator)
+  public function theElementShouldExist($locator): void
   {
     $this->assertSession()->elementExists('css', $locator);
   }
@@ -103,7 +103,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    *
    * @param mixed $locator
    */
-  public function theElementShouldNotBeVisible($locator)
+  public function theElementShouldNotBeVisible($locator): void
   {
     $element = $this->getSession()->getPage()->find('css', $locator);
     Assert::assertNotNull($element);
@@ -113,11 +113,11 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^the element "([^"]*)" should have attribute "([^"]*)" with value "([^"]*)"$/
    *
-   * @param $locator
-   * @param $attribute
-   * @param $value
+   * @param mixed $locator
+   * @param mixed $attribute
+   * @param mixed $value
    */
-  public function theElementShouldHaveAttributeWith($locator, $attribute, $value)
+  public function theElementShouldHaveAttributeWith($locator, $attribute, $value): void
   {
     $element = $this->getSession()->getPage()->find('css', $locator);
 
@@ -130,9 +130,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^at least one "([^"]*)" element should be visible$/
    *
-   * @param $locator
+   * @param mixed $locator
    */
-  public function atLeastOneElementShouldBeVisible($locator)
+  public function atLeastOneElementShouldBeVisible($locator): void
   {
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
     foreach ($elements as $e)
@@ -149,9 +149,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^no "([^"]*)" element should be visible$/
    *
-   * @param $locator
+   * @param mixed $locator
    */
-  public function atLeastOneElementShouldNotBeVisible($locator)
+  public function atLeastOneElementShouldNotBeVisible($locator): void
   {
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
     foreach ($elements as $element)
@@ -164,10 +164,10 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^the element "([^"]*)" should have type "([^"]*)"$/
    *
-   * @param $locator
-   * @param $expected_type
+   * @param mixed $locator
+   * @param mixed $expected_type
    */
-  public function theElementShouldHaveType($locator, $expected_type)
+  public function theElementShouldHaveType($locator, $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
     $type = $page->find('css', $locator)->getAttribute('type');
@@ -177,10 +177,10 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Then /^the element "([^"]*)" should not have type "([^"]*)"$/
    *
-   * @param $element
-   * @param $expected_type
+   * @param mixed $element
+   * @param mixed $expected_type
    */
-  public function theElementShouldNotHaveType($element, $expected_type)
+  public function theElementShouldNotHaveType($element, $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
     $type = $page->find('css', $element)->getAttribute('type');
@@ -190,9 +190,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Given /^the element "([^"]*)" should be visible$/
    *
-   * @param $element
+   * @param mixed $element
    */
-  public function theElementShouldBeVisible($element)
+  public function theElementShouldBeVisible($element): void
   {
     $element = $this->getSession()->getPage()->find('css', $element);
     Assert::assertNotNull($element);
@@ -206,11 +206,11 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click "([^"]*)"$/
    *
-   * @param $arg1
+   * @param mixed $arg1
    *
    * @throws ElementNotFoundException
    */
-  public function iClick($arg1)
+  public function iClick($arg1): void
   {
     $arg1 = trim($arg1);
     $this->assertSession()->elementExists('css', $arg1);
@@ -220,7 +220,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I click browser's back button$/
    */
-  public function iClickBrowsersBackButton()
+  public function iClickBrowsersBackButton(): void
   {
     $this->getSession()->back();
   }
@@ -231,10 +231,10 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    * @param mixed $text
    * @param mixed $locator
    */
-  public function iEnterIntoVisibleField($text, $locator)
+  public function iEnterIntoVisibleField($text, $locator): void
   {
     $fields = $this->getSession()->getPage()->findAll('css', $locator);
-    Assert::assertLessThanOrEqual(1, count($fields), "No field with selector '{$locator}' found");
+    Assert::assertLessThanOrEqual(1, count($fields), sprintf("No field with selector '%s' found", $locator));
     foreach ($fields as $field)
     {
       /** @var NodeElement $field */
@@ -256,9 +256,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    *
    * @When /^I wait (\d+) milliseconds$/
    *
-   * @param $milliseconds
+   * @param mixed $milliseconds
    */
-  public function iWaitMilliseconds($milliseconds)
+  public function iWaitMilliseconds($milliseconds): void
   {
     $this->getSession()->wait($milliseconds);
   }
@@ -268,9 +268,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    *
    * @Given I wait for the page to be loaded
    */
-  public function iWaitForThePageToBeLoaded()
+  public function iWaitForThePageToBeLoaded(): void
   {
-    $this->getSession()->wait(15000, "document.readyState === 'complete'");
+    $this->getSession()->wait(15_000, "document.readyState === 'complete'");
     $this->iWaitForAjaxToFinish();
   }
 
@@ -279,9 +279,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    *
    * @Given /^I wait for AJAX to finish$/
    */
-  public function iWaitForAjaxToFinish()
+  public function iWaitForAjaxToFinish(): void
   {
-    $this->getSession()->wait(15000,
+    $this->getSession()->wait(15_000,
       '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
     );
   }
@@ -289,11 +289,11 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @Then I wait for the element :selector to be visible
    *
-   * @param $locator
+   * @param mixed $locator
    *
    * @throws ResponseTextException
    */
-  public function iWaitForTheElementToBeVisible($locator)
+  public function iWaitForTheElementToBeVisible($locator): void
   {
     /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $locator);
@@ -307,19 +307,19 @@ class BrowserContext extends MinkContext implements KernelAwareContext
       sleep(1);
     }
 
-    $message = "The element '{$locator}' was not visible after a {$timeout_in_seconds} seconds timeout";
+    $message = sprintf("The element '%s' was not visible after a %s seconds timeout", $locator, $timeout_in_seconds);
     throw new ResponseTextException($message, $this->getSession());
   }
 
   /**
    * @Then I wait for the element :selector to contain :text
    *
-   * @param $locator
-   * @param $text
+   * @param mixed $locator
+   * @param mixed $text
    *
    * @throws ResponseTextException
    */
-  public function iWaitForTheElementToContain($locator, $text)
+  public function iWaitForTheElementToContain($locator, $text): void
   {
     /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $locator);
@@ -333,7 +333,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
       sleep(1);
     }
 
-    $message = "The text '{$text}' was not found after a {$timeout_in_seconds} seconds timeout";
+    $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, $timeout_in_seconds);
     throw new ResponseTextException($message, $this->getSession());
   }
 
@@ -344,7 +344,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @AfterStep
    */
-  public function makeScreenshot(AfterStepScope $scope)
+  public function makeScreenshot(AfterStepScope $scope): void
   {
     if (!$scope->getTestResult()->isPassed())
     {
@@ -355,9 +355,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   /**
    * @When /^I get page content$/
    */
-  public function iGetPageContent()
+  public function iGetPageContent(): void
   {
     var_dump($this->getSession()->getPage()->getContent());
-    die;
+    exit;
   }
 }

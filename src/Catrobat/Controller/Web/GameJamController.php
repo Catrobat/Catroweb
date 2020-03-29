@@ -20,10 +20,10 @@ class GameJamController extends AbstractController
   {
     $jam = null;
 
-    /** @var GameJam $game_jam */
+    /** @var GameJam|null $game_jam */
     $game_jam = $game_jam_repository->getCurrentGameJam();
 
-    if ($game_jam)
+    if (null !== $game_jam)
     {
       $game_jam_flavor = $game_jam->getFlavor();
 

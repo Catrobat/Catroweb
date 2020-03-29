@@ -12,9 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\ToolsException;
 
-/**
- * Class RefreshEnvironmentContext.
- */
 class RefreshEnvironmentContext implements KernelAwareContext
 {
   use SymfonySupport;
@@ -31,7 +28,7 @@ class RefreshEnvironmentContext implements KernelAwareContext
    *
    * @throws ToolsException
    */
-  public static function prepare()
+  public static function prepare(): void
   {
     $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
     $kernel->boot();
@@ -52,9 +49,8 @@ class RefreshEnvironmentContext implements KernelAwareContext
    *
    * @throws DBALException
    */
-  public function databaseRollback()
+  public function databaseRollback(): void
   {
-    /* @var EntityManagerInterface $em */
     $em = $this->getManager();
 
     $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0');
@@ -78,7 +74,7 @@ class RefreshEnvironmentContext implements KernelAwareContext
    *
    * @BeforeScenario
    */
-  public function emptyStorage()
+  public function emptyStorage(): void
   {
     $this->emptyDirectory($this->getSymfonyParameter('catrobat.file.extract.dir'));
     $this->emptyDirectory($this->getSymfonyParameter('catrobat.file.storage.dir'));

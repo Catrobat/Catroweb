@@ -4,39 +4,20 @@ namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Requests\AppRequest;
 use Liip\ThemeBundle\ActiveTheme;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * Class FlavorListener.
- */
 class FlavorListener
 {
-  /**
-   * @var ParameterBag
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
-  /**
-   * @var RouterInterface
-   */
-  private $router;
+  private RouterInterface $router;
 
-  /**
-   * @var ActiveTheme
-   */
-  private $theme;
+  private ActiveTheme $theme;
 
-  /**
-   * @var AppRequest
-   */
-  private $app_request;
+  private AppRequest $app_request;
 
-  /**
-   * FlavorListener constructor.
-   */
   public function __construct(ParameterBagInterface $parameter_bag, RouterInterface $router, ActiveTheme $theme,
                               AppRequest $app_request)
   {
@@ -46,11 +27,11 @@ class FlavorListener
     $this->app_request = $app_request;
   }
 
-  public function onKernelRequest(RequestEvent $event)
+  public function onKernelRequest(RequestEvent $event): void
   {
     // check the url for an requested flavor (needed to keep old flavoring alive)
     $current_url = $event->getRequest()->getUri();
-    preg_match('>http(s)?://(.*?)/(.*)>', $current_url, $parsed_url);
+    preg_match('#http(s)?://(.*?)/(.*)#', $current_url, $parsed_url);
     $parsed_url = explode('/', $parsed_url[3]);
     $url_requested_flavor = $parsed_url[0];
 
@@ -72,46 +53,40 @@ class FlavorListener
       $session->set('flavor', $url_requested_flavor);
       $session->set('flavor_context', $url_requested_flavor);
     }
-    else
+    elseif ('app' == $url_requested_flavor)
     {
-      if ('app' == $url_requested_flavor)
+      $requested_theme = $this->app_request->getThemeDefinedInRequest();
+      if ('' !== $requested_theme && $this->checkFlavor($requested_theme))
       {
-        $requested_theme = $this->app_request->getThemeDefinedInRequest();
-        if ('' !== $requested_theme && $this->checkFlavor($requested_theme))
-        {
-          $attributes->set('flavor', $requested_theme);
-          $this->theme->setName($requested_theme);
-          $session->set('flavor', $requested_theme);
-        }
-        else
-        {
-          // no specific theme was requested, use the default one
-          $attributes->set('flavor', 'pocketcode');
-          $this->theme->setName('pocketcode');
-          $session->set('flavor', 'pocketcode');
-        }
-        $context->setParameter('flavor', 'app');
-        $session->set('flavor_context', 'app');
+        $attributes->set('flavor', $requested_theme);
+        $this->theme->setName($requested_theme);
+        $session->set('flavor', $requested_theme);
       }
       else
       {
-        if ($session->has('flavor'))
-        {
-          $this->theme->setName($session->get('flavor'));
-          $context->setParameter('flavor', $session->get('flavor_context'));
-        }
-        else
-        {
-          $attributes->set('flavor', 'pocketcode');
-          $this->theme->setName('pocketcode');
-          $context->setParameter('flavor', 'app');
-          $session->set('flavor_context', 'app');
-        }
+        // no specific theme was requested, use the default one
+        $attributes->set('flavor', 'pocketcode');
+        $this->theme->setName('pocketcode');
+        $session->set('flavor', 'pocketcode');
       }
+      $context->setParameter('flavor', 'app');
+      $session->set('flavor_context', 'app');
+    }
+    elseif ($session->has('flavor'))
+    {
+      $this->theme->setName($session->get('flavor'));
+      $context->setParameter('flavor', $session->get('flavor_context'));
+    }
+    else
+    {
+      $attributes->set('flavor', 'pocketcode');
+      $this->theme->setName('pocketcode');
+      $context->setParameter('flavor', 'app');
+      $session->set('flavor_context', 'app');
     }
   }
 
-  public function checkFlavor($flavor): bool
+  public function checkFlavor(?string $flavor): bool
   {
     $flavor_options = $this->parameter_bag->get('themes');
 

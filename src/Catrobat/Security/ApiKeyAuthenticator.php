@@ -24,21 +24,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
-  /**
-   * @var TranslatorInterface
-   */
-  protected $translator;
+  protected TranslatorInterface $translator;
 
-  /**
-   * ApiKeyAuthenticator constructor.
-   */
   public function __construct(TranslatorInterface $translator)
   {
     $this->translator = $translator;
   }
 
   /**
-   * @param $providerKey
+   * @param mixed $providerKey
    *
    * @throws BadCredentialsException
    *
@@ -63,7 +57,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
   }
 
   /**
-   * @param $providerKey
+   * @param mixed $providerKey
    *
    * @throws AuthenticationException
    *
@@ -71,25 +65,22 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
    */
   public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
   {
-    /*
-     * @var $user User
-     */
-
     if (!$token->getCredentials())
     {
       throw new AuthenticationException($this->translator->trans('errors.token', [], 'catroweb'));
     }
 
-    if (!$token->getUsername())
+    if ('' === $token->getUsername())
     {
       throw new AuthenticationException($this->translator->trans('errors.username.blank', [], 'catroweb'));
     }
 
     try
     {
+      /** @var User|null $user */
       $user = $userProvider->loadUserByUsername($token->getUsername());
     }
-    catch (UsernameNotFoundException $exception)
+    catch (UsernameNotFoundException $usernameNotFoundException)
     {
       throw new AuthenticationException($this->translator->trans('errors.username.not_exists', [], 'catroweb'));
     }
@@ -108,7 +99,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
   }
 
   /**
-   * @param $providerKey
+   * @param mixed $providerKey
    *
    * @return bool
    */

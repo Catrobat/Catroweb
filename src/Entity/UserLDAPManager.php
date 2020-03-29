@@ -12,20 +12,11 @@ use FR3D\LdapBundle\Model\LdapUserInterface;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * Class UserLDAPManager.
- */
 class UserLDAPManager extends LdapManager
 {
-  /**
-   * @var
-   */
-  protected $role_mappings;
+  protected array $role_mappings;
 
-  /**
-   * @var
-   */
-  protected $group_filter;
+  protected string $group_filter;
 
   protected TokenGenerator $token_generator;
 
@@ -33,15 +24,8 @@ class UserLDAPManager extends LdapManager
 
   private UserManager $user_manager;
 
-  /**
-   * UserLDAPManager constructor.
-   *
-   * @param $role_mappings
-   * @param $group_filter
-   * @param $token_generator
-   */
   public function __construct(LdapDriverInterface $driver, UserHydrator $user_hydrator, UserManager $user_manager,
-                              array $params, $role_mappings, $group_filter, TokenGenerator $token_generator,
+                              array $params, array $role_mappings, string $group_filter, TokenGenerator $token_generator,
                               Logger $logger)
   {
     $this->role_mappings = $role_mappings;
@@ -55,8 +39,6 @@ class UserLDAPManager extends LdapManager
 
   /**
    * @throws Exception
-   *
-   * @return bool|\FOS\UserBundle\Model\UserInterface|object|UserInterface|null
    */
   public function findUserBy(array $criteria): ?UserInterface
   {
@@ -99,11 +81,15 @@ class UserLDAPManager extends LdapManager
     }
   }
 
-  /**
-   * @param $password
-   */
-  public function bind(UserInterface $user, $password): bool
+  public function bind(UserInterface $user_interface, string $password): bool
   {
+    if (!$user_interface instanceof User)
+    {
+      return false;
+    }
+    /** @var User $user */
+    $user = $user_interface;
+
     try
     {
       $filter = sprintf($this->group_filter, $user->getDn());

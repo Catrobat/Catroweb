@@ -9,22 +9,31 @@ use App\Catrobat\Exceptions\Upload\OldCatrobatLanguageVersionException;
 use App\Catrobat\StatusCode;
 use SimpleXMLElement;
 
-/**
- * Class VersionValidator.
- */
 class VersionValidator
 {
+  /**
+   * @var string
+   */
   const MIN_LANGUAGE_VERSION = '0.92';
+  /**
+   * @var string
+   */
   const MIN_ANDROID_PROGRAM_VERSION = '0.7.3';
+  /**
+   * @var string
+   */
   const MIN_IOS_PROGRAM_VERSION = '0.1';
+  /**
+   * @var string
+   */
   const MIN_WINDOWS_PROGRAM_VERSION = '0.1';
 
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile()->getProgramXmlProperties());
   }
 
-  public function validate(SimpleXMLElement $xml)
+  public function validate(SimpleXMLElement $xml): void
   {
     if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<'))
     {

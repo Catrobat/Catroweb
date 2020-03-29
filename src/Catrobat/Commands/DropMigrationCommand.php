@@ -3,34 +3,25 @@
 namespace App\Catrobat\Commands;
 
 use App\Entity\MigrationManager;
+use Doctrine\DBAL\DBALException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class DropMigrationCommand.
- */
 class DropMigrationCommand extends Command
 {
-  /**
-   * @var
-   */
-  private $output;
-  /**
-   * @var MigrationManager
-   */
-  private $migration_manager;
+  protected static $defaultName = 'catrobat:drop:migration';
+  private OutputInterface $output;
 
-  /**
-   * DropMigrationCommand constructor.
-   */
+  private MigrationManager $migration_manager;
+
   public function __construct(MigrationManager $migration_manager)
   {
     parent::__construct();
     $this->migration_manager = $migration_manager;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:drop:migration')
       ->setDescription('Dropping the migration_versions table')
@@ -38,11 +29,9 @@ class DropMigrationCommand extends Command
   }
 
   /**
-   * @throws \Doctrine\DBAL\DBALException
-   *
-   * @return int|void|null
+   * @throws DBALException
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->output = $output;
     if ($this->migration_manager->dropMigrationVersions())
@@ -53,5 +42,7 @@ class DropMigrationCommand extends Command
     {
       $this->output->writeln('Table migration_versions doesn\'t exist!');
     }
+
+    return 0;
   }
 }

@@ -4,16 +4,17 @@ namespace Tests\phpUnit;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Translation\Formatter\MessageFormatter;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\TranslatorBagInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
  * @coversNothing
  */
-class TranschoiceTest extends TestCase
+class TransChoiceTest extends TestCase
 {
   /**
    * @var string
@@ -23,11 +24,8 @@ class TranschoiceTest extends TestCase
   /**
    * @test
    * @dataProvider language_provider
-   *
-   * @param mixed $language_code
-   * @param mixed $message_ids
    */
-  public function allTranschoiceEntriesShouldHaveACorrectSyntax(TranslatorBagInterface $translator, $language_code, $message_ids): void
+  public function allTransChoiceEntriesShouldHaveACorrectSyntax(TranslatorInterface $translator, string $language_code, array $message_ids): void
   {
     foreach ($message_ids as $message_id)
     {
@@ -48,6 +46,7 @@ class TranschoiceTest extends TestCase
     $finder = new Finder();
     $files = $finder->in($directory)->files();
     $language_codes = [];
+    /** @var File $file */
     foreach ($files as $file)
     {
       $parts = explode('.', $file->getFilename());

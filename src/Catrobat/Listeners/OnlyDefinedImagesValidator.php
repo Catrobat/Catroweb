@@ -9,17 +9,14 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\StatusCode;
 use Symfony\Component\Finder\Finder;
 
-/**
- * Class OnlyDefinedImagesValidator.
- */
 class OnlyDefinedImagesValidator
 {
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
   }
 
-  public function validate(ExtractedCatrobatFile $file)
+  public function validate(ExtractedCatrobatFile $file): void
   {
     $files_in_xml = self::getImagesFromXml($file->getProgramXmlProperties());
     $files_in_directory = self::getImagesFromImageDirectory($file->getPath());
@@ -37,11 +34,9 @@ class OnlyDefinedImagesValidator
   }
 
   /**
-   * @param $base_path
-   *
-   * @return array
+   * @param mixed $base_path
    */
-  protected static function getImagesFromImageDirectory($base_path)
+  protected static function getImagesFromImageDirectory($base_path): array
   {
     $images = [];
     $finder = new Finder();
@@ -55,19 +50,14 @@ class OnlyDefinedImagesValidator
   }
 
   /**
-   * @param $xml
-   *
-   * @return array
+   * @param mixed $xml
    */
-  protected static function getImagesFromXml($xml)
+  protected static function getImagesFromXml($xml): array
   {
     $defined_file_nodes = $xml->xpath('/program/objectList/object/lookList/look/fileName');
     $defined_files = [];
 
-    foreach ($defined_file_nodes as $key => $node)
-    {
-      $defined_files[] = $node;
-    }
+    $defined_files = $defined_file_nodes;
 
     return array_unique($defined_files);
   }

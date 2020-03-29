@@ -17,7 +17,7 @@ class Notification
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  private int $id;
+  private ?int $id = null;
 
   /**
    * @ORM\OneToOne(targetEntity="User")
@@ -42,15 +42,10 @@ class Notification
 
   public function __toString(): string
   {
-    if (is_object($this->user))
-    {
-      return $this->user->__toString().' notification';
-    }
-
-    return 'notification';
+    return $this->user->__toString().' notification';
   }
 
-  public function getId(): int
+  public function getId(): ?int
   {
     return $this->id;
   }
@@ -91,26 +86,14 @@ class Notification
     return $this->report;
   }
 
-  /**
-   * Set summary.
-   *
-   * @param bool $summary
-   *
-   * @return Notification
-   */
-  public function setSummary($summary)
+  public function setSummary(bool $summary): Notification
   {
     $this->summary = $summary;
 
     return $this;
   }
 
-  /**
-   * Get summary.
-   *
-   * @return bool
-   */
-  public function getSummary()
+  public function getSummary(): bool
   {
     return $this->summary;
   }

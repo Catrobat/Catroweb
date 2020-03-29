@@ -11,7 +11,7 @@ class GameJamSubmittedProgramsController extends CRUDController
 {
   public function removeFromGameJamAction(): RedirectResponse
   {
-    /** @var Program $object */
+    /** @var Program|null $object */
     $object = $this->admin->getSubject();
 
     if (!$object)

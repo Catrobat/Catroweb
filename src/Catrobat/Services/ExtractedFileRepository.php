@@ -6,49 +6,29 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 
-/**
- * Class ExtractedFileRepository.
- */
 class ExtractedFileRepository
 {
-  /**
-   * @var
-   */
-  private $local_path;
-  /**
-   * @var
-   */
-  private $webpath;
-  /**
-   * @var
-   */
-  private $local_storage_path;
-  /**
-   * @var CatrobatFileExtractor
-   */
-  private $file_extractor;
-  /**
-   * @var ProgramManager
-   */
-  private $program_manager;
-  /**
-   * @var ProgramFileRepository
-   */
-  private $prog_file_repo;
-  /**
-   * @var LoggerInterface
-   */
-  private $l;
+  private string $local_path;
 
-  /**
-   * ExtractedFileRepository constructor.
-   */
+  private string $web_path;
+
+  private string $local_storage_path;
+
+  private CatrobatFileExtractor $file_extractor;
+
+  private ProgramManager $program_manager;
+
+  private ProgramFileRepository $program_file_repo;
+
+  private LoggerInterface $l;
+
   public function __construct(ParameterBagInterface $parameter_bag, CatrobatFileExtractor $file_extractor,
-                              ProgramManager $program_manager, ProgramFileRepository $prog_file_rep,
+                              ProgramManager $program_manager, ProgramFileRepository $program_file_repo,
                               LoggerInterface $l)
   {
     $local_extracted_path = $parameter_bag->get('catrobat.file.extract.dir');
@@ -61,26 +41,20 @@ class ExtractedFileRepository
     }
     $this->local_storage_path = $local_storage_path;
     $this->local_path = $local_extracted_path;
-    $this->webpath = $web_extracted_path;
+    $this->web_path = $web_extracted_path;
     $this->file_extractor = $file_extractor;
     $this->program_manager = $program_manager;
-    $this->prog_file_repo = $prog_file_rep;
+    $this->program_file_repo = $program_file_repo;
     $this->l = $l;
   }
 
-  /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   *
-   * @return ExtractedCatrobatFile
-   */
-  public function loadProgramExtractedFile(Program $program)
+  public function loadProgramExtractedFile(Program $program): ?ExtractedCatrobatFile
   {
     try
     {
       $hash = $program->getExtractedDirectoryHash();
 
-      return new ExtractedCatrobatFile($this->local_path.$hash.'/', $this->webpath.$hash.'/', $hash);
+      return new ExtractedCatrobatFile($this->local_path.$hash.'/', $this->web_path.$hash.'/', $hash);
     }
     catch (InvalidCatrobatFileException $e)
     {
@@ -90,24 +64,20 @@ class ExtractedFileRepository
 
     try
     {
-      $program_file = $this->prog_file_repo->getProgramFile($program->getId());
+      $program_file = $this->program_file_repo->getProgramFile($program->getId());
       $extracted_file = $this->file_extractor->extract($program_file);
       $program->setExtractedDirectoryHash($extracted_file->getDirHash());
       $this->program_manager->save($program);
 
       return $extracted_file;
     }
-    catch (\Exception $e)
+    catch (Exception $e)
     {
       return null;
     }
   }
 
-  /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   */
-  public function removeProgramExtractedFile(Program $program)
+  public function removeProgramExtractedFile(Program $program): void
   {
     try
     {

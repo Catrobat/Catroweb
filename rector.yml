@@ -10,12 +10,12 @@ parameters:
     - 'php72'
     - 'php73'
     - 'php74'
-    - 'dead-code'
-    - 'dead-classes'
-    - 'dead-classes'
+#    - 'dead-code'
+#    - 'dead-classes'
+#    - 'dead-classes'
     - 'symfony'
     - 'symfony-code-quality'
-    - 'type-declaration'
+#    - 'type-declaration'
     - 'action-injection-to-constructor-injection'
     - 'symfony26'
     - 'symfony28'
@@ -47,7 +47,9 @@ parameters:
     - phpunit90
 
   exclude_paths:
-    - '*/src/*/Migrations/*'
+    - 'src/Migrations/*'
+    - 'src/Entity/*'
+    - 'src/Catrobat/Controller'
   auto_import_names: true
   import_short_classes: true
   import_doc_blocks: true

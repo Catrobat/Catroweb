@@ -4,46 +4,48 @@ namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-/**
- * Class PendingApkRequestsAdmin.
- */
 class PendingApkRequestsAdmin extends AbstractAdmin
 {
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRouteName = 'admin_catrobat_apk_pending_requests';
 
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRoutePattern = 'apk_pending_requests';
 
   /**
+   * @override
+   *
    * @var array
    */
   protected $datagridValues = [
     '_sort_by' => 'apk_request_time',
   ];
 
-  /**
-   * @var ScreenshotRepository
-   */
-  private $screenshot_repository;
+  private ScreenshotRepository $screenshot_repository;
 
   /**
    * PendingApkRequestsAdmin constructor.
    *
-   * @param $code
-   * @param $class
-   * @param $baseControllerName
+   * @param mixed $code
+   * @param mixed $class
+   * @param mixed $baseControllerName
    */
   public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository)
   {
@@ -52,7 +54,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object Program
+   * @param Program $object
    *
    * @return string
    */
@@ -64,10 +66,19 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     $query = parent::configureQuery($query);
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0].'.apk_status', ':apk_status')
+
+    if (!$query instanceof ProxyQuery)
+    {
+      return $query;
+    }
+
+    /** @var QueryBuilder $qb */
+    $qb = $query->getQueryBuilder();
+
+    $qb->andWhere(
+      $qb->expr()->eq($qb->getRootAliases()[0].'.apk_status', ':apk_status')
     );
-    $query->setParameter('apk_status', Program::APK_PENDING);
+    $qb->setParameter('apk_status', Program::APK_PENDING);
 
     return $query;
   }
@@ -77,7 +88,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('id')
@@ -92,7 +103,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -123,7 +134,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->clearExcept(['list']);
     $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');

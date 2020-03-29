@@ -5,9 +5,6 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use SimpleXMLElement;
 
-/**
- * Class BrickFactory.
- */
 class BrickFactory
 {
   /**

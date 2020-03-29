@@ -5,9 +5,6 @@ namespace App\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-/**
- * Class MaintainAdmin.
- */
 class MaintainAdmin extends AbstractAdmin
 {
   /**
@@ -20,7 +17,7 @@ class MaintainAdmin extends AbstractAdmin
    */
   protected $baseRouteName = 'maintain';
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     //Find the implementation in the Controller-Folder
     $collection->clearExcept(['list']);

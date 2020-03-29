@@ -4,7 +4,6 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
-use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +16,6 @@ class CodeViewController extends AbstractController
   {
     try
     {
-      /** @var Program $program */
       $program = $programManager->find($id);
       $extracted_program = $extractedFileRepository->loadProgramExtractedFile($program);
       if (null === $extracted_program)

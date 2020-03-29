@@ -6,38 +6,22 @@ use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\TemplateFileRepository;
 use App\Repository\TemplateRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use ImagickException;
+use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class TemplateManager.
- */
 class TemplateManager
 {
   const LANDSCAPE_PREFIX = 'l_';
   const PORTRAIT_PREFIX = 'p_';
 
-  /**
-   * @var TemplateFileRepository
-   */
-  protected $file_repository;
+  protected TemplateFileRepository $file_repository;
 
-  /**
-   * @var ScreenshotRepository
-   */
-  protected $screenshot_repository;
+  protected ScreenshotRepository $screenshot_repository;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  protected $entity_manager;
+  protected EntityManagerInterface $entity_manager;
 
-  /**
-   * @var TemplateRepository
-   */
-  protected $template_repository;
+  protected TemplateRepository $template_repository;
 
-  /**
-   * TemplateManager constructor.
-   */
   public function __construct(TemplateFileRepository $file_repository, ScreenshotRepository $screenshot_repository,
                               EntityManagerInterface $entity_manager, TemplateRepository $template_repository)
   {
@@ -48,11 +32,11 @@ class TemplateManager
   }
 
   /**
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function saveTemplateFiles(Template $template)
+  public function saveTemplateFiles(Template $template): void
   {
-    if (null != $template->getId())
+    if (null !== $template->getId())
     {
       $this->saveThumbnail($template);
       $this->savePortraitProgram($template);
@@ -61,11 +45,9 @@ class TemplateManager
   }
 
   /**
-   * @param $templateName
-   *
    * @return mixed
    */
-  public function findOneByName($templateName)
+  public function findOneByName(string $templateName)
   {
     return $this->template_repository->findOneBy(['name' => $templateName]);
   }
@@ -86,10 +68,7 @@ class TemplateManager
     return $this->template_repository->findByActive(true);
   }
 
-  /**
-   * @param $id
-   */
-  public function deleteTemplateFiles($id)
+  public function deleteTemplateFiles(string $id): void
   {
     $this->file_repository->deleteTemplateFiles(self::LANDSCAPE_PREFIX.$id);
     $this->file_repository->deleteTemplateFiles(self::PORTRAIT_PREFIX.$id);
@@ -98,39 +77,34 @@ class TemplateManager
   }
 
   /**
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  private function saveThumbnail(Template $template)
+  private function saveThumbnail(Template $template): void
   {
     $file = $template->getThumbnail();
     if (null == $file)
     {
       return;
     }
-    /* @var $thumbnail \Symfony\Component\HttpFoundation\File\UploadedFile */
     $thumbnail = $template->getThumbnail();
-    $this->screenshot_repository->saveProgramAssets($thumbnail->getPathname(), $template->getId());
+    $this->screenshot_repository->saveProgramAssets($thumbnail->getPathname(), (string) $template->getId());
   }
 
-  private function saveLandscapeProgram(Template $template)
+  private function saveLandscapeProgram(Template $template): void
   {
     $file = $template->getLandscapeProgramFile();
     $this->saveTemplateProgram($file, self::LANDSCAPE_PREFIX.$template->getId());
   }
 
-  private function savePortraitProgram(Template $template)
+  private function savePortraitProgram(Template $template): void
   {
     $file = $template->getPortraitProgramFile();
     $this->saveTemplateProgram($file, self::PORTRAIT_PREFIX.$template->getId());
   }
 
-  /**
-   * @param $file
-   * @param $id
-   */
-  private function saveTemplateProgram($file, $id)
+  private function saveTemplateProgram(?File $file, string $id): void
   {
-    if (null == $file)
+    if (null === $file)
     {
       return;
     }

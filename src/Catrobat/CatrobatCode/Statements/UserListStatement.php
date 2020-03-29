@@ -2,18 +2,15 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class UserListStatement.
- */
 class UserListStatement extends Statement
 {
   /**
    * UserListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $value
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $value
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $value)
   {

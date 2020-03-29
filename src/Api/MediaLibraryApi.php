@@ -17,9 +17,6 @@ class MediaLibraryApi implements MediaLibraryApiInterface
 
   private UrlGeneratorInterface $url_generator;
 
-  /**
-   * MediaLibraryApi constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager, UrlGeneratorInterface $url_generator)
   {
     $this->entity_manager = $entity_manager;
@@ -42,18 +39,19 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     }
 
     $json_response_array = [];
-    /** @var array|MediaPackageCategory $media_package_categories */
     $media_package_categories = $media_package->getCategories();
-    if (null === $media_package_categories || empty($media_package_categories))
+    if (empty($media_package_categories))
     {
       return $json_response_array;
     }
+
+    /** @var MediaPackageCategory $media_package_category */
     foreach ($media_package_categories as $media_package_category)
     {
-      /** @var array|MediaPackageFile $media_package_files */
       $media_package_files = $media_package_category->getFiles();
-      if (null != $media_package_files)
+      if (null !== $media_package_files)
       {
+        /** @var MediaPackageFile $media_package_file */
         foreach ($media_package_files as $media_package_file)
         {
           $json_media_package = new Package();
@@ -73,7 +71,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
             UrlGenerator::ABSOLUTE_URL);
           $json_media_package->setDownloadUrl($download_url);
 
-          array_push($json_response_array, $json_media_package);
+          $json_response_array[] = $json_media_package;
         }
       }
     }

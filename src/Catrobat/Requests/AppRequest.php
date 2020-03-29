@@ -5,19 +5,10 @@ namespace App\Catrobat\Requests;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * Class AppRequest.
- */
 class AppRequest
 {
-  /**
-   * @var RequestStack
-   */
-  protected $request_stack;
+  protected RequestStack $request_stack;
 
-  /**
-   * AppRequest constructor.
-   */
   public function __construct(RequestStack $request_stack)
   {
     $this->request_stack = $request_stack;
@@ -28,10 +19,7 @@ class AppRequest
     return $this->request_stack;
   }
 
-  /**
-   * @return Request|null
-   */
-  public function getCurrentRequest()
+  public function getCurrentRequest(): ?Request
   {
     return $this->request_stack->getCurrentRequest();
   }
@@ -52,19 +40,8 @@ class AppRequest
     {
       return false;
     }
-    if (is_array($user_agent))
-    {
-      if (count($user_agent) > 0)
-      {
-        $user_agent = $user_agent[0];
-      }
-      else
-      {
-        return false;
-      }
-    }
 
-    return false !== strpos(strtolower($user_agent), ' buildtype/debug');
+    return false !== stripos($user_agent, ' buildtype/debug');
   }
 
   /**
@@ -82,17 +59,6 @@ class AppRequest
     if (null === $user_agent)
     {
       return '';
-    }
-    if (is_array($user_agent))
-    {
-      if (count($user_agent) > 0)
-      {
-        $user_agent = $user_agent[0];
-      }
-      else
-      {
-        return '';
-      }
     }
 
     $user_agent_attributes = explode(' ', strtolower($user_agent));

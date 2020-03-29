@@ -9,39 +9,34 @@ use App\Catrobat\Exceptions\Upload\RudewordInNameException;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\StatusCode;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
-/**
- * Class NameValidator.
- */
 class NameValidator
 {
-  /**
-   * @var RudeWordFilter
-   */
-  private $rudeWordFilter;
+  private RudeWordFilter $rudeWordFilter;
 
-  /**
-   * NameValidator constructor.
-   */
   public function __construct(RudeWordFilter $rudeWordFilter)
   {
     $this->rudeWordFilter = $rudeWordFilter;
   }
 
   /**
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
+   * @throws NoResultException
    */
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
   }
 
   /**
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NoResultException
+   * @throws NonUniqueResultException
    */
-  public function validate(ExtractedCatrobatFile $file)
+  public function validate(ExtractedCatrobatFile $file): void
   {
-    if (null == $file->getName() || '' == $file->getName())
+    if ('' == $file->getName())
     {
       throw new MissingProgramNameException();
     }

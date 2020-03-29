@@ -7,23 +7,12 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-/**
- * Class UserAuthenticator.
- */
 class UserAuthenticator
 {
-  /**
-   * @var AuthenticationManagerInterface
-   */
-  private $authentication_manager;
-  /**
-   * @var UserProviderInterface
-   */
-  private $user_provider;
+  private AuthenticationManagerInterface $authentication_manager;
 
-  /**
-   * UserAuthenticator constructor.
-   */
+  private UserProviderInterface $user_provider;
+
   public function __construct(UserProviderInterface $user_provider, AuthenticationManagerInterface $authentication_manager)
   {
     $this->authentication_manager = $authentication_manager;
@@ -31,8 +20,8 @@ class UserAuthenticator
   }
 
   /**
-   * @param $username
-   * @param $password
+   * @param mixed $username
+   * @param mixed $password
    *
    * @return TokenInterface
    */

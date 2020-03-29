@@ -106,7 +106,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
       user_id: userId
     }, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
-        const url = Routing.generate('translate_word', {
+        const url = Routing.generate('translate', {
           word: 'programs.noPrograms',
           domain: 'catroweb'
         })

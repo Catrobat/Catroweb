@@ -2,20 +2,23 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class WaitStatement.
- */
 class WaitStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'wait (';
+  /**
+   * @var string
+   */
   const END_STRING = ') seconds<br/>';
 
   /**
    * WaitStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -24,10 +27,7 @@ class WaitStatement extends Statement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
     $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
@@ -35,10 +35,7 @@ class WaitStatement extends Statement
     return 'Wait '.$formula_string_without_markup.' seconds';
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
     return '1h_brick_orange.png';
   }

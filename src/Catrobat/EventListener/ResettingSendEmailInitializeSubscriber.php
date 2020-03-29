@@ -2,66 +2,51 @@
 
 namespace App\Catrobat\EventListener;
 
+use App\Entity\User;
 use FOS\UserBundle\Event\GetResponseNullableUserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * Class ResettingSendEmailInitializeSubscriber.
- */
 class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
 {
-  /**
-   * @var RouterInterface
-   */
-  private $router;
-  /**
-   * @var ContainerInterface
-   */
-  private $container;
+  private RouterInterface $router;
 
-  /**
-   * ResettingSendEmailInitializeSubscriber constructor.
-   */
+  private ContainerInterface $container;
+
   public function __construct(RouterInterface $router, ContainerInterface $container)
   {
     $this->router = $router;
     $this->container = $container;
   }
 
-  /**
-   * @return GetResponseNullableUserEvent
-   */
-  public function onResettingSendEmailInitialize(GetResponseNullableUserEvent $event)
+  public function onResettingSendEmailInitialize(?GetResponseNullableUserEvent $event): ?GetResponseNullableUserEvent
   {
+    /** @var User|null $user */
     $user = $event->getUser();
 
     if (null === $user)
     {
       $url = $this->router->generate('reset_invalid');
 
-      return $event->setResponse(new RedirectResponse($url));
+      $event->setResponse(new RedirectResponse($url));
     }
-
-    if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl')))
+    elseif ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl')))
     {
       $url = $this->router->generate('reset_already_requested');
 
-      return $event->setResponse(new RedirectResponse($url));
+      $event->setResponse(new RedirectResponse($url));
     }
 
     return $event;
   }
 
-  /**
-   * @return array
-   */
-  public static function getSubscribedEvents()
+  public static function getSubscribedEvents(): array
   {
     return [
-      \FOS\UserBundle\FOSUserEvents::RESETTING_SEND_EMAIL_INITIALIZE => 'onResettingSendEmailInitialize',
+      FOSUserEvents::RESETTING_SEND_EMAIL_INITIALIZE => 'onResettingSendEmailInitialize',
     ];
   }
 }

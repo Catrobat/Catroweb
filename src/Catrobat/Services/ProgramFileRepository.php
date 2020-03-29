@@ -6,42 +6,20 @@ use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class ProgramFileRepository.
- */
 class ProgramFileRepository
 {
-  /**
-   * @var
-   */
-  public $directory;
-  /**
-   * @var
-   */
-  protected $webpath;
-  /**
-   * @var Filesystem
-   */
-  private $filesystem;
-  /**
-   * @var CatrobatFileCompressor
-   */
-  private $file_compressor;
+  public string $directory;
 
-  /**
-   * @var
-   */
-  private $tmp_dir;
+  protected string $web_path;
 
-  /**
-   * ProgramFileRepository constructor.
-   *
-   * @param $catrobat_file_storage_dir
-   * @param $catrobat_file_storage_path
-   * @param $catrobat_upload_temp_dir
-   */
-  public function __construct($catrobat_file_storage_dir, $catrobat_file_storage_path,
-                              CatrobatFileCompressor $file_compressor, $catrobat_upload_temp_dir)
+  private Filesystem $filesystem;
+
+  private CatrobatFileCompressor $file_compressor;
+
+  private string $tmp_dir;
+
+  public function __construct(string $catrobat_file_storage_dir, string $catrobat_file_storage_path,
+                              CatrobatFileCompressor $file_compressor, string $catrobat_upload_temp_dir)
   {
     $directory = $catrobat_file_storage_dir;
     $tmp_dir = $catrobat_upload_temp_dir;
@@ -57,65 +35,45 @@ class ProgramFileRepository
     }
 
     $this->directory = $directory;
-    $this->webpath = $catrobat_file_storage_path;
+    $this->web_path = $catrobat_file_storage_path;
     $this->tmp_dir = $tmp_dir;
     $this->filesystem = new Filesystem();
     $this->file_compressor = $file_compressor;
   }
 
-  /**
-   * @param $id
-   */
-  public function saveProgram(ExtractedCatrobatFile $extracted, $id)
+  public function saveProgram(ExtractedCatrobatFile $extracted, string $id): void
   {
     $this->file_compressor->compress($extracted->getPath(), $this->directory, $id);
   }
 
-  /**
-   * @param $id
-   */
-  public function saveProgramTemp(ExtractedCatrobatFile $extracted, $id)
+  public function saveProgramTemp(ExtractedCatrobatFile $extracted, string $id): void
   {
-    if ($this->tmp_dir)
+    if ('' !== $this->tmp_dir)
     {
       $this->file_compressor->compress($extracted->getPath(), $this->tmp_dir, $id);
     }
   }
 
-  /**
-   * @param $id
-   */
-  public function makeTempProgramPerm($id)
+  public function makeTempProgramPerm(string $id): void
   {
-    if ($this->tmp_dir)
+    if ('' !== $this->tmp_dir)
     {
       $this->filesystem->copy($this->tmp_dir.$id.'.catrobat', $this->directory.$id.'.catrobat', true);
       $this->filesystem->remove($this->tmp_dir.$id.'.catrobat');
     }
   }
 
-  /**
-   * @param $id
-   */
-  public function deleteProgramFile($id)
+  public function deleteProgramFile(string $id): void
   {
     $this->filesystem->remove($this->directory.$id.'.catrobat');
   }
 
-  /**
-   * @param $id
-   */
-  public function saveProgramfile(File $file, $id)
+  public function saveProgramFile(File $file, string $id): void
   {
     $this->filesystem->copy($file->getPathname(), $this->directory.$id.'.catrobat');
   }
 
-  /**
-   * @param $id
-   *
-   * @return File|null
-   */
-  public function getProgramFile($id)
+  public function getProgramFile(string $id): File
   {
     return new File($this->directory.$id.'.catrobat');
   }

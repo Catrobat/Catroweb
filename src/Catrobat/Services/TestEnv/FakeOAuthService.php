@@ -8,6 +8,7 @@ use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,29 +18,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class FakeOAuthService.
- */
 class FakeOAuthService extends OAuthService
 {
-  /**
-   * @var OAuthService
-   */
-  private $oauth_service;
+  private OAuthService $oauth_service;
 
-  /**
-   * @var mixed
-   */
-  private $use_real_oauth_service;
+  private bool $use_real_oauth_service;
 
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  private UserManager $user_manager;
 
-  /**
-   * FakeOAuthService constructor.
-   */
   public function __construct(OAuthService $oauth_service, ParameterBagInterface $parameter_bag,
                               UserManager $user_manager, ValidatorInterface $validator, ProgramManager $program_manager,
                               EntityManagerInterface $em, TranslatorInterface $translator,
@@ -52,9 +38,9 @@ class FakeOAuthService extends OAuthService
     $this->oauth_service = $oauth_service;
     try
     {
-      $this->use_real_oauth_service = $parameter_bag->get('oauth_use_real_service');
+      $this->use_real_oauth_service = boolval($parameter_bag->get('oauth_use_real_service'));
     }
-    catch (\Exception $e)
+    catch (Exception $exception)
     {
       $this->use_real_oauth_service = false;
     }
@@ -63,69 +49,58 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function isOAuthUser(Request $request)
+  public function isOAuthUser(Request $request): JsonResponse
   {
     return $this->oauth_service->isOAuthUser($request);
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function checkEMailAvailable(Request $request)
+  public function checkEMailAvailable(Request $request): JsonResponse
   {
     return $this->oauth_service->checkEMailAvailable($request);
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function checkUserNameAvailable(Request $request)
+  public function checkUserNameAvailable(Request $request): JsonResponse
   {
     return $this->oauth_service->checkUserNameAvailable($request);
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function checkGoogleServerTokenAvailable(Request $request)
+  public function checkGoogleServerTokenAvailable(Request $request): JsonResponse
   {
     return $this->oauth_service->checkGoogleServerTokenAvailable($request);
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return OAuthService|JsonResponse
+   * @throws Exception
    */
-  public function exchangeGoogleCodeAction(Request $request)
+  public function exchangeGoogleCodeAction(Request $request): JsonResponse
   {
     if ($this->use_real_oauth_service)
     {
       return $this->oauth_service->exchangeGoogleCodeAction($request);
     }
-    /**
-     * @var User
-     * @var Request $request
-     */
     $retArray = [];
+
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByEmail($request->get('email'));
-    if (null != $user)
+    if (null !== $user)
     {
       $retArray['statusCode'] = 200;
       $retArray['answer'] = 'Login successful!';
     }
     else
     {
+      /** @var User $user */
       $user = $this->user_manager->createUser();
       $user->setUsername('PocketGoogler');
       $user->setEmail('pocketcodetester@gmail.com');
@@ -133,6 +108,7 @@ class FakeOAuthService extends OAuthService
       $retArray['statusCode'] = 201;
       $retArray['answer'] = 'Registration successful!';
     }
+    /* @var User|null $user */
     $user->setGplusUid('105155320106786463089');
     $user->setCountry('de');
     $user->setGplusAccessToken('just invalid fake');
@@ -145,11 +121,9 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return OAuthService|JsonResponse
+   * @throws Exception
    */
-  public function loginWithGoogleAction(Request $request)
+  public function loginWithGoogleAction(Request $request): JsonResponse
   {
     if ($this->use_real_oauth_service)
     {
@@ -163,55 +137,43 @@ class FakeOAuthService extends OAuthService
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function getGoogleUserProfileInfo(Request $request)
+  public function getGoogleUserProfileInfo(Request $request): JsonResponse
   {
     if ($this->use_real_oauth_service)
     {
       return $this->oauth_service->isOAuthUser($request);
     }
-    throw new \Exception('Function not implemented in FakeOAuthService');
+    throw new Exception('Function not implemented in FakeOAuthService');
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function loginWithTokenAndRedirectAction(Request $request)
+  public function loginWithTokenAndRedirectAction(Request $request): JsonResponse
   {
     return $this->oauth_service->loginWithTokenAndRedirectAction($request);
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return JsonResponse
+   * @throws Exception
    */
-  public function deleteOAuthTestUserAccounts()
+  public function deleteOAuthTestUserAccounts(): JsonResponse
   {
     if ($this->use_real_oauth_service)
     {
       return $this->oauth_service->deleteOAuthTestUserAccounts();
     }
-    throw new \Exception('Function not implemented in FakeOAuthService');
+    throw new Exception('Function not implemented in FakeOAuthService');
   }
 
-  /**
-   * @param $use_real
-   */
-  public function useRealService($use_real)
+  public function useRealService(bool $use_real): void
   {
     $this->use_real_oauth_service = $use_real;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUseRealOauthService()
+  public function getUseRealOauthService(): bool
   {
     return $this->use_real_oauth_service;
   }

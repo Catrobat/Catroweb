@@ -6,23 +6,14 @@ use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class ApkRepository.
- */
 class ApkRepository
 {
-  /**
-   * @var string|string[]|null
-   */
-  private $dir;
+  private ?string $dir;
 
-  /**
-   * ApkRepository constructor.
-   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     $apk_dir = $parameter_bag->get('catrobat.apk.dir');
-    $dir = preg_replace('/([^\/]+)$/', '$1/', $apk_dir);
+    $dir = preg_replace('#([^/]+)$#', '$1/', $apk_dir);
 
     if (!is_dir($dir))
     {
@@ -32,19 +23,12 @@ class ApkRepository
     $this->dir = $dir;
   }
 
-  /**
-   * @param $file File
-   * @param $id
-   */
-  public function save($file, $id)
+  public function save(File $file, string $id): void
   {
     $file->move($this->dir, $this->generateFileNameFromId($id));
   }
 
-  /**
-   * @param $id
-   */
-  public function remove($id)
+  public function remove(string $id): void
   {
     $path = $this->dir.$this->generateFileNameFromId($id);
     if (is_file($path))
@@ -53,22 +37,12 @@ class ApkRepository
     }
   }
 
-  /**
-   * @param $id
-   *
-   * @return File
-   */
-  public function getProgramFile($id)
+  public function getProgramFile(string $id): File
   {
     return new File($this->dir.$this->generateFileNameFromId($id));
   }
 
-  /**
-   * @param $id
-   *
-   * @return string
-   */
-  private function generateFileNameFromId($id)
+  private function generateFileNameFromId(string $id): string
   {
     return $id.'.apk';
   }

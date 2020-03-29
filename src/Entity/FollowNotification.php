@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class FollowNotification extends CatroNotification
 {
   /**
-   * @var User The User which "follow action" to another user triggered this FollowNotification. If this user gets deleted,
-   *           this FollowNotification gets deleted as well.
+   * The User which "follow action" to another user triggered this FollowNotification.
+   * If this user gets deleted, this FollowNotification gets deleted as well.
    *
    * @ORM\ManyToOne(
    *     targetEntity="\App\Entity\User",
@@ -23,12 +23,12 @@ class FollowNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private $follower;
+  private ?User $follower = null;
 
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private $twig_template = '/Notifications/NotificationTypes/follow_notification.html.twig';
+  private string $twig_template = '/Notifications/NotificationTypes/follow_notification.html.twig';
 
   /**
    * FollowNotification constructor.
@@ -36,7 +36,7 @@ class FollowNotification extends CatroNotification
    * @param User $user    the User to which this FollowNotification should be shown
    * @param User $profile the User which "follow action" to another user triggered this FollowNotification
    */
-  public function __construct(User $user, $profile)
+  public function __construct(User $user, User $profile)
   {
     parent::__construct($user);
     $this->follower = $profile;
@@ -44,20 +44,16 @@ class FollowNotification extends CatroNotification
 
   /**
    * Returns the User which "follow action" to another user triggered this FollowNotification.
-   *
-   * @return User the User which "follow action" to another user triggered this FollowNotification
    */
-  public function getFollower()
+  public function getFollower(): User
   {
     return $this->follower;
   }
 
   /**
    * Sets the User which "follow action" to another user triggered this FollowNotification.
-   *
-   * @param User $follower the User which "follow action" to another user triggered this FollowNotification
    */
-  public function setFollower($follower)
+  public function setFollower(User $follower): void
   {
     $this->follower = $follower;
   }
@@ -65,10 +61,8 @@ class FollowNotification extends CatroNotification
   /**
    * its important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
-   *
-   * @return mixed
    */
-  public function getTwigTemplate()
+  public function getTwigTemplate(): string
   {
     return $this->twig_template;
   }

@@ -10,34 +10,17 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class CreateConstantTagsCommand.
- */
 class CreateConstantTagsCommand extends Command
 {
-  /**
-   * @var
-   */
-  private $output;
+  protected static $defaultName = 'catrobat:create:tags';
+  private OutputInterface $output;
 
-  /**
-   * @var TranslatorInterface
-   */
-  private $translator;
+  private TranslatorInterface $translator;
 
-  /**
-   * @var TagRepository
-   */
-  private $tag_repository;
+  private TagRepository $tag_repository;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $entity_manager;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * CreateConstantTagsCommand constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager,TranslatorInterface $translator,
                               TagRepository $tag_repository)
   {
@@ -47,20 +30,14 @@ class CreateConstantTagsCommand extends Command
     $this->tag_repository = $tag_repository;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:create:tags')
       ->setDescription('Creating constant tags in supported languages')
     ;
   }
 
-  /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   *
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->output = $output;
     $metadata = $this->entity_manager->getClassMetadata('App\Entity\Tag')->getFieldNames();
@@ -97,15 +74,15 @@ class CreateConstantTagsCommand extends Command
         $this->entity_manager->flush();
       }
     }
+
+    return 0;
   }
 
   /**
-   * @param $message
-   * @param $locale
-   *
-   * @return string
+   * @param mixed $message
+   * @param mixed $locale
    */
-  private function trans($message, $locale)
+  private function trans($message, $locale): string
   {
     $parameters = [];
 

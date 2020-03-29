@@ -3,27 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * Class MigrationManager.
- */
 class MigrationManager
 {
-  /**
-   * @var EntityManagerInterface
-   */
-  protected $entity_manager;
-  /**
-   * @var Connection
-   */
-  protected $connection;
+  protected EntityManagerInterface $entity_manager;
 
-  /**
-   * MigrationManager constructor.
-   *
-   * @param $entity_manager EntityManagerInterface
-   */
+  protected Connection $connection;
+
   public function __construct(EntityManagerInterface $entity_manager)
   {
     $this->entity_manager = $entity_manager;
@@ -31,11 +19,9 @@ class MigrationManager
   }
 
   /**
-   * @throws \Doctrine\DBAL\DBALException
-   *
-   * @return bool
+   * @throws DBALException
    */
-  public function dropMigrationVersions()
+  public function dropMigrationVersions(): bool
   {
     $schema_manager = $this->connection->getSchemaManager();
     if (true == $schema_manager->tablesExist(['migration_versions']))

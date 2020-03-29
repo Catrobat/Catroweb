@@ -8,25 +8,19 @@ use App\Repository\NotificationRepository;
 use Swift_Mailer;
 use Swift_Message;
 
-/**
- * Class UploadNotificator.
- */
 class UploadNotificator
 {
   private Swift_Mailer $mailer;
 
   private NotificationRepository $notification_repo;
 
-  /**
-   * UploadNotificator constructor.
-   */
   public function __construct(Swift_Mailer $mailer, NotificationRepository $repository)
   {
     $this->mailer = $mailer;
     $this->notification_repo = $repository;
   }
 
-  public function onProgramInsertEvent(ProgramAfterInsertEvent $event)
+  public function onProgramInsertEvent(ProgramAfterInsertEvent $event): void
   {
     /* @var $notification_repo NotificationRepository */
     $notification_repo = $this->notification_repo;

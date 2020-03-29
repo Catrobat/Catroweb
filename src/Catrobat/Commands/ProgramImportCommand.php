@@ -8,6 +8,7 @@ use App\Catrobat\RemixGraph\RemixGraphLayout;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Entity\User;
 use App\Entity\UserManager;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,31 +18,18 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class ProgramImportCommand.
- */
 class ProgramImportCommand extends Command
 {
   const REMIX_GRAPH_NO_LAYOUT = 0;
 
-  /**
-   * @var Filesystem
-   */
-  private $file_system;
+  protected static $defaultName = 'catrobat:import';
 
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  private Filesystem $file_system;
 
-  /**
-   * @var RemixManipulationProgramManager
-   */
-  private $remix_manipulation_program_manager;
+  private UserManager $user_manager;
 
-  /**
-   * ProgramImportCommand constructor.
-   */
+  private RemixManipulationProgramManager $remix_manipulation_program_manager;
+
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
                               RemixManipulationProgramManager $program_manager)
   {
@@ -51,7 +39,7 @@ class ProgramImportCommand extends Command
     $this->remix_manipulation_program_manager = $program_manager;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:import')
       ->setDescription('Import programs from a given directory to the application')
@@ -63,11 +51,9 @@ class ProgramImportCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $directory = $input->getArgument('directory');
     $username = $input->getArgument('user');
@@ -89,6 +75,7 @@ class ProgramImportCommand extends Command
       return 1;
     }
 
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
     if (null == $user)
     {
@@ -102,7 +89,6 @@ class ProgramImportCommand extends Command
       try
       {
         $output->writeln('Importing file '.$file);
-        /** @var User $user */
         $add_program_request = new AddProgramRequest($user, new File($file));
         $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
         $program->setViews(random_int(0, 10));
@@ -114,5 +100,7 @@ class ProgramImportCommand extends Command
         $output->writeln($e->getMessage().' ('.$e->getCode().')');
       }
     }
+
+    return 0;
   }
 }

@@ -30,7 +30,7 @@ class CatrobatFileExtractor
    */
   public function extract(File $file): ExtractedCatrobatFile
   {
-    $temp_path = hash('md5', TimeUtils::getTimestamp().mt_rand());
+    $temp_path = hash('md5', TimeUtils::getTimestamp().random_int(0, mt_getrandmax()));
     $full_extract_dir = $this->extract_dir.$temp_path.'/';
     $full_extract_path = $this->extract_path.$temp_path.'/';
 

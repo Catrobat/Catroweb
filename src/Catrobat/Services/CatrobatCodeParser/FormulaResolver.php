@@ -4,17 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use SimpleXMLElement;
 
-/**
- * Class FormulaResolver.
- */
 class FormulaResolver
 {
-  /**
-   * @param SimpleXMLElement $formula_list
-   *
-   * @return array
-   */
-  public static function resolve($formula_list)
+  public static function resolve(SimpleXMLElement $formula_list): array
   {
     $formulas = [];
     foreach ($formula_list->children() as $formula)
@@ -26,11 +18,9 @@ class FormulaResolver
   }
 
   /**
-   * @param $formula
-   *
-   * @return string|null
+   * @param mixed $formula
    */
-  private static function resolveFormula($formula)
+  private static function resolveFormula($formula): ?string
   {
     $resolved_formula = null;
     if (null != $formula)
@@ -58,11 +48,9 @@ class FormulaResolver
   }
 
   /**
-   * @param $formula
-   *
-   * @return string|null
+   * @param mixed $formula
    */
-  private static function resolveFunction($formula)
+  private static function resolveFunction($formula): string
   {
     $resolved_function = null;
 
@@ -70,36 +58,31 @@ class FormulaResolver
     {
       $resolved_function = 'true';
     }
+    elseif ('FALSE' == $formula->value)
+    {
+      $resolved_function = 'false';
+    }
     else
     {
-      if ('FALSE' == $formula->value)
+      if (null != $formula->rightChild)
       {
-        $resolved_function = 'false';
+        $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild)
+          .', '.FormulaResolver::resolveFormula($formula->rightChild);
       }
       else
       {
-        if (null != $formula->rightChild)
-        {
-          $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild)
-            .', '.FormulaResolver::resolveFormula($formula->rightChild);
-        }
-        else
-        {
-          $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild);
-        }
-        $resolved_function = strtolower($formula->value).'( '.$function_input_formula.' )';
+        $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild);
       }
+      $resolved_function = strtolower($formula->value).'( '.$function_input_formula.' )';
     }
 
     return $resolved_function;
   }
 
   /**
-   * @param $operator
-   *
-   * @return string|null
+   * @param mixed $operator
    */
-  private static function resolveOperator($operator)
+  private static function resolveOperator($operator): ?string
   {
     $resolved_operator = null;
     switch ($operator)

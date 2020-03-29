@@ -14,20 +14,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-/**
- * Class RestoreBackupCommand.
- */
 class RestoreBackupCommand extends Command
 {
   public OutputInterface $output;
+  protected static $defaultName = 'catrobat:backup:restore';
 
   private EntityManagerInterface $entity_manager;
 
   private ParameterBagInterface $parameter_bag;
 
-  /**
-   * RestoreBackupCommand constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -35,7 +30,7 @@ class RestoreBackupCommand extends Command
     $this->entity_manager = $entity_manager;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:backup:restore')
       ->setDescription('Restores a backup onto a server (ssh). .')
@@ -49,7 +44,7 @@ class RestoreBackupCommand extends Command
    * @throws NonUniqueResultException
    * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output): void
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->output = $output;
 
@@ -170,5 +165,7 @@ class RestoreBackupCommand extends Command
     }
 
     $this->output->writeln('Import finished!');
+
+    return 0;
   }
 }

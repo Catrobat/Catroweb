@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,136 +17,104 @@ class MediaPackageCategory
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="text", nullable=false)
    */
-  protected $name;
+  protected ?string $name = null;
 
   /**
    * @ORM\ManyToMany(targetEntity="MediaPackage", inversedBy="categories")
    */
-  protected $package;
+  protected Collection $package;
 
   /**
    * @ORM\OneToMany(targetEntity="MediaPackageFile", mappedBy="category")
    */
-  protected $files;
+  protected Collection $files;
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $priority = 0;
+  protected int $priority = 0;
 
-  /**
-   * @return string
-   */
-  public function __toString()
+  public function __construct()
   {
-    if (null !== $this->package)
+    $this->package = new ArrayCollection();
+    $this->files = new ArrayCollection();
+  }
+
+  public function __toString(): string
+  {
+    if (count($this->package))
     {
-      if (count($this->package))
+      $string = $this->name.' (';
+      $count = count($this->package);
+
+      for ($it = 0; $it < $count; ++$it)
       {
-        $string = $this->name.' (';
-        $count = count($this->package);
+        $string .= $this->package[$it];
 
-        for ($it = 0; $it < $count; ++$it)
+        if ($it < ($count - 1))
         {
-          $string .= $this->package[$it];
-
-          if ($it < ($count - 1))
-          {
-            $string .= ', ';
-          }
+          $string .= ', ';
         }
-        $string .= ')';
-
-        return (string) $string;
       }
+      $string .= ')';
 
-      return (string) $this->name;
+      return (string) $string;
     }
 
     return (string) $this->name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @param mixed $name
-   */
-  public function setName($name)
+  public function setName(string $name): void
   {
     $this->name = $name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPackage()
+  public function getPackage(): Collection
   {
     return $this->package;
   }
 
-  /**
-   * @param mixed $package
-   */
-  public function setPackage($package)
+  public function setPackage(Collection $package): void
   {
     $this->package = $package;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFiles()
+  public function getFiles(): Collection
   {
     return $this->files;
   }
 
-  /**
-   * @param mixed $files
-   */
-  public function setFiles($files)
+  public function setFiles(Collection $files): void
   {
     $this->files = $files;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPriority()
+  public function getPriority(): int
   {
     return $this->priority;
   }
 
-  /**
-   * @param mixed $priority
-   */
-  public function setPriority($priority)
+  public function setPriority(int $priority): void
   {
     $this->priority = $priority;
   }

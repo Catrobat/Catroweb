@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class DroneSwitchCameraBrick.
- */
 class DroneSwitchCameraBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::AR_DRONE_SWITCH_CAMERA_BRICK;
     $this->caption = 'Switch Camera';

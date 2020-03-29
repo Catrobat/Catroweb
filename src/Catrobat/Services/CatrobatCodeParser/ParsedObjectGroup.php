@@ -4,27 +4,14 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use SimpleXMLElement;
 
-/**
- * Class ParsedObjectGroup.
- */
 class ParsedObjectGroup
 {
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $object_group_xml_properties;
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $name;
-  /**
-   * @var array
-   */
-  protected $objects;
+  protected SimpleXMLElement$object_group_xml_properties;
 
-  /**
-   * ParsedObjectGroup constructor.
-   */
+  protected SimpleXMLElement $name;
+
+  protected array $objects;
+
   public function __construct(SimpleXMLElement $object_group_xml_properties)
   {
     $this->object_group_xml_properties = $object_group_xml_properties;
@@ -33,41 +20,29 @@ class ParsedObjectGroup
   }
 
   /**
-   * @param $object
+   * @param mixed $object
    */
-  public function addObject($object)
+  public function addObject($object): void
   {
     $this->objects[] = $object;
   }
 
-  /**
-   * @return SimpleXMLElement
-   */
-  public function getName()
+  public function getName(): SimpleXMLElement
   {
     return $this->name;
   }
 
-  /**
-   * @return array
-   */
-  public function getObjects()
+  public function getObjects(): array
   {
     return $this->objects;
   }
 
-  /**
-   * @return bool
-   */
-  public function isGroup()
+  public function isGroup(): bool
   {
     return true;
   }
 
-  /**
-   * @return SimpleXMLElement
-   */
-  private function resolveName()
+  private function resolveName(): SimpleXMLElement
   {
     if (null != $this->object_group_xml_properties[Constants::NAME_ATTRIBUTE])
     {

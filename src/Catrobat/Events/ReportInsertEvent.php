@@ -5,57 +5,32 @@ namespace App\Catrobat\Events;
 use App\Entity\ProgramInappropriateReport;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * Class ReportInsertEvent.
- */
 class ReportInsertEvent extends Event
 {
-  /**
-   * @var
-   */
-  protected $category;
-  /**
-   * @var
-   */
-  protected $note;
-  /**
-   * @var ProgramInappropriateReport
-   */
-  protected $program;
+  protected ?string $category;
 
-  /**
-   * ReportInsertEvent constructor.
-   *
-   * @param $category
-   * @param $description
-   */
-  public function __construct($category, $description, ProgramInappropriateReport $program)
+  protected ?string $note;
+
+  protected ProgramInappropriateReport $program;
+
+  public function __construct(?string $category, ?string $description, ProgramInappropriateReport $program)
   {
     $this->category = $category;
     $this->note = $description;
     $this->program = $program;
   }
 
-  /**
-   * @return string
-   */
-  public function getCategory()
+  public function getCategory(): ?string
   {
     return $this->category;
   }
 
-  /**
-   * @return string
-   */
-  public function getNote()
+  public function getNote(): ?string
   {
     return $this->note;
   }
 
-  /**
-   * @return \App\Entity\ProgramInappropriateReport
-   */
-  public function getReport()
+  public function getReport(): ProgramInappropriateReport
   {
     return $this->program;
   }

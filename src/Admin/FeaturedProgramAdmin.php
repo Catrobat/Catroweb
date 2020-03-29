@@ -8,6 +8,7 @@ use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -20,54 +21,50 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * Class FeaturedProgramAdmin.
- */
 class FeaturedProgramAdmin extends AbstractAdmin
 {
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRouteName = 'adminfeatured_program';
 
   /**
+   * @override
+   *
    * @var string
    */
   protected $baseRoutePattern = 'featured_program';
 
-  /**
-   * @var
-   */
-  private $entity_manager;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private ParameterBagInterface $parameter_bag;
 
-  /**
-   * @var
-   */
-  private $featured_image_repository;
+  private FeaturedImageRepository $featured_image_repository;
+
+  private ProgramManager $program_manager;
 
   /**
    * FeaturedProgramAdmin constructor.
    *
-   * @param $code
-   * @param $class
-   * @param $baseControllerName
+   * @param mixed $code
+   * @param mixed $class
+   * @param mixed $baseControllerName
    */
   public function __construct($code, $class, $baseControllerName, EntityManagerInterface $entity_manager,
-                              ParameterBagInterface $parameter_bag, FeaturedImageRepository $featured_image_repository)
+                              ParameterBagInterface $parameter_bag, FeaturedImageRepository $featured_image_repository,
+                              ProgramManager $program_manager)
   {
     parent::__construct($code, $class, $baseControllerName);
     $this->entity_manager = $entity_manager;
     $this->parameter_bag = $parameter_bag;
     $this->featured_image_repository = $featured_image_repository;
+    $this->program_manager = $program_manager;
   }
 
   /**
-   * @param $object FeaturedProgram
+   * @param FeaturedProgram $object
    *
    * @return string
    */
@@ -77,7 +74,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object FeaturedProgram
+   * @param FeaturedProgram $object
    *
    * @return Metadata
    */
@@ -88,20 +85,19 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object FeaturedProgram
+   * @param FeaturedProgram $object
    */
-  public function preUpdate($object)
+  public function preUpdate($object): void
   {
     $object->old_image_type = $object->getImageType();
-    $object->setImageType(null);
     $this->checkProgramID($object);
     $this->checkFlavor();
   }
 
   /**
-   * @param $object
+   * @param mixed $object
    */
-  public function prePersist($object)
+  public function prePersist($object): void
   {
     $this->checkProgramID($object);
     $this->checkFlavor();
@@ -110,8 +106,17 @@ class FeaturedProgramAdmin extends AbstractAdmin
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     $query = parent::configureQuery($query);
-    $query->andWhere(
-      $query->expr()->isNotNull($query->getRootAliases()[0].'.program')
+
+    if (!$query instanceof \Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery)
+    {
+      return $query;
+    }
+
+    /** @var QueryBuilder $qb */
+    $qb = $query->getQueryBuilder();
+
+    $qb->andWhere(
+      $qb->expr()->isNotNull($qb->getRootAliases()[0].'.program')
     );
 
     return $query;
@@ -122,10 +127,12 @@ class FeaturedProgramAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
+    /** @var FeaturedProgram $featured_project */
+    $featured_project = $this->getSubject();
     $file_options = [
-      'required' => (null === $this->getSubject()->getId()),
+      'required' => (null === $featured_project->getId()),
       'constraints' => [
         new FeaturedImageConstraint(),
       ],
@@ -135,7 +142,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
     if (null !== $this->getSubject()->getId())
     {
-      $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($this->getSubject()).'">';
+      $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($featured_project).'">';
       $id_value = $this->getSubject()->getProgram()->getId();
     }
 
@@ -155,7 +162,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('program.name')
@@ -167,7 +174,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -191,20 +198,15 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object FeaturedProgram
+   * @param FeaturedProgram $object
    */
-  private function checkProgramID($object)
+  private function checkProgramID($object): void
   {
-    /**
-     * @var Program
-     * @var ProgramManager $program_manager
-     */
     $id = $this->getForm()->get('program_id')->getData();
 
-    $program_manager = $this->entity_manager->getRepository('\App\Entity\Program');
-    $program = $program_manager->find($id);
+    $program = $this->program_manager->find($id);
 
-    if ($program)
+    if (null !== $program)
     {
       $object->setProgram($program);
     }
@@ -214,7 +216,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
     }
   }
 
-  private function checkFlavor()
+  private function checkFlavor(): void
   {
     $flavor = $this->getForm()->get('flavor')->getData();
 

@@ -9,6 +9,7 @@ use App\Catrobat\Listeners\NameValidator;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RudeWordFilter;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -21,7 +22,7 @@ class NameValidatorTest extends TestCase
   private NameValidator $name_validator;
 
   /**
-   * @var MockObject|RudeWordFilter
+   * @var RudeWordFilter|MockObject
    */
   private $rude_word_filter;
 
@@ -37,6 +38,7 @@ class NameValidatorTest extends TestCase
   }
 
   /**
+   * @throws NoResultException
    * @throws NonUniqueResultException
    */
   public function testMakesSureTheGivenProgramNameIsValid(): void
@@ -48,27 +50,18 @@ class NameValidatorTest extends TestCase
 
   /**
    * @throws NonUniqueResultException
-   */
-  public function testThrowsAnExceptionIfTheNameIsNull(): void
-  {
-    $file = $this->createMock(ExtractedCatrobatFile::class);
-    $file->expects($this->atLeastOnce())->method('getName')->willReturn(null);
-    $this->expectException(MissingProgramNameException::class);
-    $this->name_validator->validate($file);
-  }
-
-  /**
-   * @throws NonUniqueResultException
+   * @throws NoResultException
    */
   public function testThrowsAnExceptionIfTheNameIsEmpty(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
-    $file->expects($this->atLeastOnce())->method('getName')->willReturn(null);
+    $file->expects($this->atLeastOnce())->method('getName')->willReturn('');
     $this->expectException(MissingProgramNameException::class);
     $this->name_validator->validate($file);
   }
 
   /**
+   * @throws NoResultException
    * @throws NonUniqueResultException
    */
   public function testThrowsAnExceptionIfTheNameIsTooLong(): void
@@ -81,6 +74,7 @@ class NameValidatorTest extends TestCase
   }
 
   /**
+   * @throws NoResultException
    * @throws NonUniqueResultException
    */
   public function testThrowsAnExceptionIfTheNameContainsARudeWord(): void

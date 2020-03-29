@@ -10,9 +10,6 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 
-/**
- * Class UserRemixSimilarityRelationRepository.
- */
 class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -20,7 +17,7 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, UserRemixSimilarityRelation::class);
   }
 
-  public function removeAllUserRelations()
+  public function removeAllUserRelations(): void
   {
     $qb = $this->createQueryBuilder('ur');
 
@@ -34,7 +31,7 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
   /**
    * @return UserRemixSimilarityRelation[]
    */
-  public function getRelationsOfSimilarUsers(User $user)
+  public function getRelationsOfSimilarUsers(User $user): array
   {
     $qb = $this->createQueryBuilder('ur');
 
@@ -51,14 +48,10 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $first_user_id
-   * @param $second_user_id
-   * @param $similarity
-   *
    * @throws DBALException
    * @throws Exception
    */
-  public function insertRelation($first_user_id, $second_user_id, $similarity)
+  public function insertRelation(string $first_user_id, string $second_user_id, float $similarity): void
   {
     $connection = $this->getEntityManager()->getConnection();
     $connection->insert('user_remix_similarity_relation', [

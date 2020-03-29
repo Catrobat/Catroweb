@@ -6,9 +6,6 @@ use App\Entity\ScratchProgram;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class ScratchProgramRepository.
- */
 class ScratchProgramRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -17,11 +14,9 @@ class ScratchProgramRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param int[] $scratch_program_ids
-   *
-   * @return array
+   * @param string[] $scratch_program_ids
    */
-  public function getProgramDataByIds(array $scratch_program_ids)
+  public function getProgramDataByIds(array $scratch_program_ids): array
   {
     $qb = $this->createQueryBuilder('s');
 

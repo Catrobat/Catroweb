@@ -7,44 +7,20 @@ use App\Entity\ScratchProgramRemixRelation;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
 use App\Repository\ScratchProgramRemixRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 
-/**
- * Class RemixGraphManipulator.
- */
 class RemixGraphManipulator
 {
-  /**
-   * @var EntityManager the entity manager
-   */
-  private $entity_manager;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var RemixSubgraphManipulator the remix subgraph program manipulator
-   */
-  private $remix_subgraph_manipulator;
+  private RemixSubgraphManipulator $remix_subgraph_manipulator;
 
-  /**
-   * @var ProgramRemixRepository the program remix repository
-   */
-  private $program_remix_repository;
+  private ProgramRemixRepository $program_remix_repository;
 
-  /**
-   * @var ProgramRemixBackwardRepository the program remix backward repository
-   */
-  private $program_remix_backward_repository;
+  private ProgramRemixBackwardRepository $program_remix_backward_repository;
 
-  /**
-   * @var ScratchProgramRemixRepository the scratch program remix repository
-   */
-  private $scratch_program_remix_repository;
+  private ScratchProgramRemixRepository $scratch_program_remix_repository;
 
-  /**
-   * RemixManager constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager,
                               RemixSubgraphManipulator $remix_subgraph_manipulator,
                               ProgramRemixRepository $program_remix_repository,
@@ -58,11 +34,7 @@ class RemixGraphManipulator
     $this->scratch_program_remix_repository = $scratch_program_remix_repository;
   }
 
-  /**
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function convertBackwardParentsHavingNoForwardAncestor(Program $program, array $removed_forward_parent_ids)
+  public function convertBackwardParentsHavingNoForwardAncestor(Program $program, array $removed_forward_parent_ids): void
   {
     $removed_forward_parents_ancestor_ids = $this->program_remix_repository->getAncestorIds($removed_forward_parent_ids);
     $removed_forward_parents_ancestor_descendant_relations = $this->program_remix_repository->getDescendantRelations($removed_forward_parents_ancestor_ids);
@@ -79,8 +51,8 @@ class RemixGraphManipulator
       $cycle_exists = false;
       foreach ($removed_forward_parents_ancestor_descendant_relations as $descendant_relation)
       {
-        if ($backward_relation->getParentId() == $descendant_relation->getDescendantId()
-          && $backward_relation->getChildId() == $descendant_relation->getAncestorId())
+        if ($backward_relation->getParentId() === $descendant_relation->getDescendantId()
+          && $backward_relation->getChildId() === $descendant_relation->getAncestorId())
         {
           $cycle_exists = true;
           break;
@@ -106,21 +78,18 @@ class RemixGraphManipulator
   }
 
   /**
-   * @param int[] $all_catrobat_forward_parent_ids
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @param string[] $all_catrobat_forward_parent_ids
    */
-  public function unlinkFromAllCatrobatForwardParents(Program $program, array $all_catrobat_forward_parent_ids)
+  public function unlinkFromAllCatrobatForwardParents(Program $program, array $all_catrobat_forward_parent_ids): void
   {
     $program_id = $program->getId();
     $parents_ancestor_ids = $this->program_remix_repository->getAncestorIds($all_catrobat_forward_parent_ids);
-    $program_ancestor_ids = array_merge([$program_id], $parents_ancestor_ids);
+    $program_ancestor_ids = [...[$program_id], ...$parents_ancestor_ids];
     $program_descendant_ids = $program->getCatrobatRemixDescendantIds();
 
     $direct_and_indirect_descendant_ids = $this->program_remix_repository->getDirectAndIndirectDescendantIds(
       $program_ancestor_ids, $program_descendant_ids);
-    $direct_and_indirect_descendant_ids_with_program_id = array_merge([$program_id], $direct_and_indirect_descendant_ids);
+    $direct_and_indirect_descendant_ids_with_program_id = [...[$program_id], ...$direct_and_indirect_descendant_ids];
 
     $preserved_edges = $this
       ->program_remix_repository
@@ -143,10 +112,7 @@ class RemixGraphManipulator
     }
   }
 
-  /**
-   * @param int[] $catrobat_backward_parent_ids_to_be_removed
-   */
-  public function unlinkFromCatrobatBackwardParents(Program $program, array $catrobat_backward_parent_ids_to_be_removed)
+  public function unlinkFromCatrobatBackwardParents(Program $program, array $catrobat_backward_parent_ids_to_be_removed): void
   {
     $this
       ->program_remix_backward_repository
@@ -154,10 +120,7 @@ class RemixGraphManipulator
     ;
   }
 
-  /**
-   * @param int[] $scratch_parent_ids_to_be_removed
-   */
-  public function unlinkFromScratchParents(Program $program, $scratch_parent_ids_to_be_removed)
+  public function unlinkFromScratchParents(Program $program, array $scratch_parent_ids_to_be_removed): void
   {
     $this
       ->scratch_program_remix_repository
@@ -165,32 +128,20 @@ class RemixGraphManipulator
     ;
   }
 
-  /**
-   * @param $scratch_parent_ids_to_be_added
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function linkToScratchParents(Program $program, $scratch_parent_ids_to_be_added)
+  public function linkToScratchParents(Program $program, array $scratch_parent_ids_to_be_added): void
   {
     foreach ($scratch_parent_ids_to_be_added as $scratch_parent_id)
     {
-      $scratch_remix_relation = new ScratchProgramRemixRelation($scratch_parent_id, $program);
+      $scratch_remix_relation = new ScratchProgramRemixRelation((string) $scratch_parent_id, $program);
       $this->entity_manager->detach($scratch_remix_relation);
       $this->entity_manager->persist($scratch_remix_relation);
       $this->entity_manager->flush();
     }
   }
 
-  /**
-   * @param int[] $ids_of_new_parents
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,
                                                        array $preserved_creation_date_mapping,
-                                                       array $preserved_seen_date_mapping)
+                                                       array $preserved_seen_date_mapping): void
   {
     $this
       ->remix_subgraph_manipulator

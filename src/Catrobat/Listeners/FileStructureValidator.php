@@ -7,17 +7,14 @@ use App\Catrobat\Exceptions\Upload\UnexpectedFileException;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
 
-/**
- * Class FileStructureValidator.
- */
 class FileStructureValidator
 {
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
   }
 
-  public function validate(ExtractedCatrobatFile $file)
+  public function validate(ExtractedCatrobatFile $file): void
   {
     $finder = new Finder();
     $finder->in($file->getPath())

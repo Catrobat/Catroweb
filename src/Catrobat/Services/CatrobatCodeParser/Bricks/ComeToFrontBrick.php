@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class ComeToFrontBrick.
- */
 class ComeToFrontBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::COME_TO_FRONT_BRICK;
     $this->caption = 'Go to front';

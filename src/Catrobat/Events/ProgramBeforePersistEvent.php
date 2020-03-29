@@ -6,41 +6,24 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Entity\Program;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * Class ProgramBeforePersistEvent.
- */
 class ProgramBeforePersistEvent extends Event
 {
-  /**
-   * @var ExtractedCatrobatFile
-   */
-  protected $extracted_file;
-  /**
-   * @var Program
-   */
-  protected $program;
+  protected ExtractedCatrobatFile $extracted_file;
 
-  /**
-   * ProgramBeforePersistEvent constructor.
-   */
+  protected Program $program;
+
   public function __construct(ExtractedCatrobatFile $extracted_file, Program $program)
   {
     $this->extracted_file = $extracted_file;
     $this->program = $program;
   }
 
-  /**
-   * @return ExtractedCatrobatFile
-   */
-  public function getExtractedFile()
+  public function getExtractedFile(): ExtractedCatrobatFile
   {
     return $this->extracted_file;
   }
 
-  /**
-   * @return Program
-   */
-  public function getProgramEntity()
+  public function getProgramEntity(): Program
   {
     return $this->program;
   }

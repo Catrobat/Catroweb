@@ -47,17 +47,19 @@ class FeaturedController extends AbstractController
   private function getFeaturedPrograms(Request $request, bool $ios_only, FeaturedImageRepository $image_repository,
                                        FeaturedRepository $repository): JsonResponse
   {
-    /**
-     * @var FeaturedImageRepository
-     * @var FeaturedRepository      $repository
-     * @var FeaturedProgram         $featured_program
-     */
     $flavor = $request->get('flavor');
 
     $limit = (int) $request->query->get('limit', 20);
     $offset = (int) $request->query->get('offset', 0);
 
-    $featured_programs = $repository->getFeaturedPrograms($flavor, $limit, $offset, $ios_only);
+    $platform = null;
+
+    if ($ios_only)
+    {
+      $platform = 'ios';
+    }
+
+    $featured_programs = $repository->getFeaturedPrograms($flavor, $limit, $offset, $platform);
     $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, $ios_only);
 
     $retArray = [];

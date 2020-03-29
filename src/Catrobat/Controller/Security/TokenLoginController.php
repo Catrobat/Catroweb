@@ -18,18 +18,17 @@ class TokenLoginController extends AbstractController
    */
   public function tokenLoginAction(Request $request, UserManager $user_manager): RedirectResponse
   {
-    /**
-     * @var User
-     */
     $username = $request->query->get('username');
     $token = $request->query->get('token');
+
+    /** @var User|null $user */
     $user = $user_manager->findUserByUsername($username);
 
-    if (null == $user)
+    if (null === $user)
     {
       return $this->logout();
     }
-    if ($user->getUploadToken() != $token)
+    if ($user->getUploadToken() !== $token)
     {
       return $this->logout();
     }
@@ -43,10 +42,7 @@ class TokenLoginController extends AbstractController
     return $this->redirect($this->generateUrl('index').'?login');
   }
 
-  /**
-   * @return RedirectResponse
-   */
-  private function logout()
+  private function logout(): RedirectResponse
   {
     $this->get('security.token_storage')->setToken(null);
 

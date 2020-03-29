@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class PlaySoundWaitBrick.
- */
 class PlaySoundWaitBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::PLAY_SOUND_WAIT_BRICK;
     $this->caption = 'Start sound and wait';

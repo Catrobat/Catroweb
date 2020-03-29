@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
@@ -19,9 +20,6 @@ use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-/**
- * Class ApproveProgramsAdmin.
- */
 class ApproveProgramsAdmin extends AbstractAdmin
 {
   /**
@@ -34,32 +32,20 @@ class ApproveProgramsAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'approve';
 
-  /**
-   * @var null
-   */
-  private $extractedProgram;
+  private ?ExtractedCatrobatFile $extractedProgram = null;
 
-  /**
-   * @var ScreenshotRepository
-   */
-  private $screenshot_repository;
+  private ScreenshotRepository $screenshot_repository;
 
-  /**
-   * @var ProgramManager
-   */
-  private $program_manager;
+  private ProgramManager $program_manager;
 
-  /**
-   * @var ExtractedFileRepository
-   */
-  private $extracted_file_repository;
+  private ExtractedFileRepository $extracted_file_repository;
 
   /**
    * ApproveProgramsAdmin constructor.
    *
-   * @param $code
-   * @param $class
-   * @param $baseControllerName
+   * @param mixed $code
+   * @param mixed $class
+   * @param mixed $baseControllerName
    */
   public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository,
                               ProgramManager $program_manager, ExtractedFileRepository $extracted_file_repository)
@@ -71,16 +57,13 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $program
+   * @param mixed|Program $program
    *
    * @throws \Sonata\AdminBundle\Exception\ModelManagerException
    */
-  public function preUpdate($program)
+  public function preUpdate($program): void
   {
-    /**
-     * @var Program
-     * @var ModelManager $model_manager
-     */
+    /** @var ModelManager $model_manager */
     $model_manager = $this->getModelManager();
     $old_program = $model_manager->getEntityManager($this->getClass())->getUnitOfWork()
       ->getOriginalEntityData($program)
@@ -88,8 +71,10 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
     if (false == $old_program['approved'] && true == $program->getApproved())
     {
-      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser());
+      /** @var User $user */
+      $user = $this->getConfigurationPool()->getContainer()
+        ->get('security.token_storage')->getToken()->getUser();
+      $program->setApprovedByUser($user);
       $this->getModelManager()->update($program);
     }
     elseif (true == $old_program['approved'] && false == $program->getApproved())
@@ -100,24 +85,17 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object
+   * @param mixed|Program $object
    *
    * @return string
    */
   public function getThumbnailImageUrl($object)
   {
-    /*
-     * @var $object Program
-     */
-
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
   /**
-   * @param $object
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @param mixed $object
    *
    * @return array
    */
@@ -142,10 +120,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @param mixed $object
    *
    * @return array
    */
@@ -168,19 +143,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @param mixed|Program $object
    *
    * @return array
    */
   public function getContainingStrings($object)
   {
-    /*
-     * @var $object Program
-     */
-
     if (null == $this->extractedProgram)
     {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
@@ -192,19 +160,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $object
-   *
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
+   * @param mixed|Program $object
    *
    * @return array
    */
   public function getContainingCodeObjects($object)
   {
-    /*
-     * @var $object Program
-     */
-
     if (null == $this->extractedProgram)
     {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
@@ -222,21 +183,27 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
-    /**
-     * @var QueryBuilder
-     */
     $query = parent::configureQuery($query);
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0].'.approved', $query->expr()->literal(false))
+
+    if (!$query instanceof \Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery)
+    {
+      return $query;
+    }
+
+    /** @var QueryBuilder $qb */
+    $qb = $query->getQueryBuilder();
+
+    $qb->andWhere(
+      $qb->expr()->eq($qb->getRootAliases()[0].'.approved', $qb->expr()->literal(false))
     );
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0].'.visible', $query->expr()->literal(true))
+    $qb->andWhere(
+      $qb->expr()->eq($qb->getRootAliases()[0].'.visible', $qb->expr()->literal(true))
     );
 
     return $query;
   }
 
-  protected function configureShowFields(ShowMapper $showMapper)
+  protected function configureShowFields(ShowMapper $showMapper): void
   {
     // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
     $showMapper
@@ -264,7 +231,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('name', TextType::class, ['label' => 'Program name'])
@@ -277,7 +244,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('name')
@@ -290,7 +257,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -303,7 +270,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete')->remove('edit');
     $collection
@@ -314,7 +281,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param $paths
+   * @param mixed $paths
    *
    * @return array
    */
@@ -325,8 +292,8 @@ class ApproveProgramsAdmin extends AbstractAdmin
     {
       $pieces = explode('/', $path);
       $filename = array_pop($pieces);
-      array_push($pieces, rawurlencode($filename));
-      array_push($encoded_paths, implode('/', $pieces));
+      $pieces[] = rawurlencode($filename);
+      $encoded_paths[] = implode('/', $pieces);
     }
 
     return $encoded_paths;
