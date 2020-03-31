@@ -4,10 +4,10 @@ namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -52,25 +52,6 @@ class ApkListAdmin extends AbstractAdmin
   }
 
   /**
-   * @param string $context
-   *
-   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
-   */
-  public function createQuery($context = 'list')
-  {
-    /**
-     * @var QueryBuilder
-     */
-    $query = parent::createQuery();
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0].'.apk_status', ':apk_status')
-    );
-    $query->setParameter('apk_status', Program::APK_READY);
-
-    return $query;
-  }
-
-  /**
    * @param $object
    *
    * @return string
@@ -81,6 +62,17 @@ class ApkListAdmin extends AbstractAdmin
      * @var $object Program
      */
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
+  }
+
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+  {
+    $query = parent::configureQuery($query);
+    $query->andWhere(
+      $query->expr()->eq($query->getRootAliases()[0].'.apk_status', ':apk_status')
+    );
+    $query->setParameter('apk_status', Program::APK_READY);
+
+    return $query;
   }
 
   /**

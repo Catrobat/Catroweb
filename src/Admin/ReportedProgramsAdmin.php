@@ -7,6 +7,7 @@ use App\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,14 +18,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
  */
 class ReportedProgramsAdmin extends AbstractAdmin
 {
-  /**
-   * @param string $context
-   *
-   * @return \Sonata\AdminBundle\Datagrid\ProxyQueryInterface
-   */
-  public function createQuery($context = 'list')
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
-    return parent::createQuery();
+    return parent::configureQuery($query);
   }
 
 //  TODO: Log who accepted/rejected

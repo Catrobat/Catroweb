@@ -3,10 +3,10 @@
 namespace App\Admin;
 
 use App\Entity\Program;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -25,17 +25,9 @@ class ReportedCommentsAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'report';
 
-  /**
-   * @param string $context
-   *
-   * @return QueryBuilder
-   */
-  public function createQuery($context = 'list')
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
-    /**
-     * @var QueryBuilder
-     */
-    $query = parent::createQuery();
+    $query = parent::configureQuery($query);
     $query->andWhere(
       $query->expr()->eq($query->getRootAliases()[0].'.isReported', $query->expr()->literal(true))
     );

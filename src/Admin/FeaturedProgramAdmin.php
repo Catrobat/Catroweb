@@ -8,7 +8,6 @@ use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -68,24 +67,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param string $context
-   *
-   * @return QueryBuilder|ProxyQueryInterface
-   */
-  public function createQuery($context = 'list')
-  {
-    /**
-     * @var QueryBuilder
-     */
-    $query = parent::createQuery();
-    $query->andWhere(
-      $query->expr()->isNotNull($query->getRootAliases()[0].'.program')
-    );
-
-    return $query;
-  }
-
-  /**
    * @param $object FeaturedProgram
    *
    * @return string
@@ -124,6 +105,16 @@ class FeaturedProgramAdmin extends AbstractAdmin
   {
     $this->checkProgramID($object);
     $this->checkFlavor();
+  }
+
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+  {
+    $query = parent::configureQuery($query);
+    $query->andWhere(
+      $query->expr()->isNotNull($query->getRootAliases()[0].'.program')
+    );
+
+    return $query;
   }
 
   /**

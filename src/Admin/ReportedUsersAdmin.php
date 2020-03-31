@@ -4,14 +4,12 @@ namespace App\Admin;
 
 use App\Entity\User;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
@@ -29,49 +27,37 @@ class ReportedUsersAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'reported_users';
 
-  /**
-   * @param string $context
-   *
-   * @return ProxyQueryInterface|ProxyQuery
-   */
-  public function createQuery($context = 'list')
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
-    /** @var ProxyQueryInterface $query */
-    $query = parent::createQuery();
+    $query = parent::configureQuery($query);
 
-    /** @var QueryBuilder $qb */
-    $qb = $query->getQueryBuilder();
+    $rootAlias = $query->getRootAliases()[0];
+    $parameters = $this->getFilterParameters();
 
-    if ('list' === $context)
+    if ('getReportedCommentsCount' === $parameters['_sort_by'])
     {
-      $rootAlias = $query->getRootAliases()[0];
-      $parameters = $this->getFilterParameters();
-
-      if ('getReportedCommentsCount' === $parameters['_sort_by'])
-      {
-        $qb->leftJoin('App\Entity\UserComment', 'cm',
+      $query->leftJoin('App\Entity\UserComment', 'cm',
             Join::WITH, $rootAlias.'.id = cm.user')
-          ->where($qb->expr()->eq('cm.isReported', '1'))
-          ->groupBy($rootAlias.'.id')
-          ->orderBy('COUNT(cm.user )', $parameters['_sort_order'])
+        ->where($query->expr()->eq('cm.isReported', '1'))
+        ->groupBy($rootAlias.'.id')
+        ->orderBy('COUNT(cm.user )', $parameters['_sort_order'])
           ;
-      }
-
-      if ('getProgramInappropriateReportsCount' === $parameters['_sort_by'])
-      {
-        $qb
-          ->leftJoin('App\Entity\Program', 'p', Join::WITH,
-              $rootAlias.'.id = p.user')
-          ->leftJoin('App\Entity\ProgramInappropriateReport',
-              'pr', Join::WITH, 'p.id = pr.program')
-          ->where($qb->expr()->isNotNull('pr.program'))
-          ->groupBy($rootAlias.'.id')
-          ->orderBy('COUNT(pr.program)', $parameters['_sort_order'])
-          ;
-      }
     }
 
-    return new ProxyQuery($qb);
+    if ('getProgramInappropriateReportsCount' === $parameters['_sort_by'])
+    {
+      $query
+        ->leftJoin('App\Entity\Program', 'p', Join::WITH,
+              $rootAlias.'.id = p.user')
+        ->leftJoin('App\Entity\ProgramInappropriateReport',
+              'pr', Join::WITH, 'p.id = pr.program')
+        ->where($query->expr()->isNotNull('pr.program'))
+        ->groupBy($rootAlias.'.id')
+        ->orderBy('COUNT(pr.program)', $parameters['_sort_order'])
+          ;
+    }
+
+    return $query;
   }
 
   protected function configureFormFields(FormMapper $formMapper)

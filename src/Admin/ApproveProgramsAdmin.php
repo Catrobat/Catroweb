@@ -11,6 +11,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -67,27 +68,6 @@ class ApproveProgramsAdmin extends AbstractAdmin
     $this->screenshot_repository = $screenshot_repository;
     $this->program_manager = $program_manager;
     $this->extracted_file_repository = $extracted_file_repository;
-  }
-
-  /**
-   * @param string $context
-   *
-   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
-   */
-  public function createQuery($context = 'list')
-  {
-    /**
-     * @var QueryBuilder
-     */
-    $query = parent::createQuery();
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0].'.approved', $query->expr()->literal(false))
-    );
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0].'.visible', $query->expr()->literal(true))
-    );
-
-    return $query;
   }
 
   /**
@@ -238,6 +218,22 @@ class ApproveProgramsAdmin extends AbstractAdmin
     }
 
     return $this->extractedProgram->getContainingCodeObjects();
+  }
+
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+  {
+    /**
+     * @var QueryBuilder
+     */
+    $query = parent::configureQuery($query);
+    $query->andWhere(
+      $query->expr()->eq($query->getRootAliases()[0].'.approved', $query->expr()->literal(false))
+    );
+    $query->andWhere(
+      $query->expr()->eq($query->getRootAliases()[0].'.visible', $query->expr()->literal(true))
+    );
+
+    return $query;
   }
 
   protected function configureShowFields(ShowMapper $showMapper)
