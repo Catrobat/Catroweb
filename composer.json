@@ -1,6 +1,8 @@
 {
+    "name": "catrobat/catroweb",
     "type": "project",
     "license": "proprietary",
+    "description": "Catroweb Symfony Share Platform",
 
     "require": {
         "php": ">=7.4",
@@ -14,17 +16,13 @@
         "ext-posix": "*",
         "ext-zip": "*",
         "catrobat/capi": "v1.0.32",
-        "doctrine/data-fixtures": "^1.4",
         "doctrine/doctrine-bundle": "^2.0",
-        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^2.1",
-        "doctrine/migrations": "^2.2",
         "doctrine/orm": "^2.7",
         "eightpoints/guzzle-bundle": "^8.0",
         "fr3d/ldap-bundle": "^4.0",
         "friendsofsymfony/jsrouting-bundle": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.7",
-        "friendsofsymfony/user-bundle": "^2.1",
         "google/apiclient": "^2.4",
         "incenteev/composer-parameter-handler": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.6",
@@ -36,23 +34,23 @@
         "sonata-project/doctrine-orm-admin-bundle": "3.15",
         "sonata-project/user-bundle": "4.5.2",
         "symfony/acl-bundle": "*",
-        "symfony/browser-kit": "*",
-        "symfony/console": "*",
-        "symfony/dotenv": "*",
+        "symfony/console": "^4.4",
+        "symfony/dotenv": "^4.4",
         "symfony/flex": "^1.6",
         "symfony/framework-bundle": "*",
-        "symfony/intl": "*",
-        "symfony/maker-bundle": "*",
+        "symfony/intl": "^4.4",
         "symfony/monolog-bundle": "*",
         "symfony/polyfill-iconv": "*",
-        "symfony/process": "*",
-        "symfony/profiler-pack": "*",
-        "symfony/swiftmailer-bundle": "*",
+        "symfony/process": "^4.4",
+        "symfony/swiftmailer-bundle": "^3.4",
         "symfony/twig-pack": "^1.0",
-        "symfony/yaml": "*",
+        "symfony/yaml": "^4.4",
         "twbs/bootstrap": "4.4.1"
     },
     "require-dev": {
+        "symfony/browser-kit": "^4.4",
+        "symfony/maker-bundle": "*",
+        "symfony/profiler-pack": "^1.0",
         "behat/behat": "^3.6",
         "behat/mink": "1.7",
         "behat/mink-extension": "^2.3",
@@ -61,22 +59,19 @@
         "deployer/recipes": "^6.2",
         "dmore/behat-chrome-extension": "^1.3",
         "dmore/chrome-mink-driver": "^2.7",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "emuse/behat-html-formatter": "@dev",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "3.0.x-dev",
         "phpcheckstyle/phpcheckstyle": "^0.14.8",
-        "phpstan/phpstan": "^0.12.17",
-        "phpstan/phpstan-doctrine": "^0.12.10",
-        "phpstan/phpstan-phpunit": "^0.12.6",
-        "phpstan/phpstan-symfony": "^0.12.4",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-doctrine": "^0.12",
+        "phpstan/phpstan-phpunit": "^0.12",
+        "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.1",
-        "rector/rector": "^0.7.7",
+        "rector/rector": "^0.7",
         "symfony/phpunit-bridge": "*",
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
         "wapmorgan/php-code-fixer": "dev-master"
-    },
-
-    "conflict": {
-        "symfony/symfony": "*"
     },
 
     "config": {
@@ -110,7 +105,6 @@
         }
     },
 
-
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
@@ -126,16 +120,15 @@
         ]
     },
 
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+
     "extra": {
         "symfony": {
             "allow-contrib": false
         },
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "public",
-        "symfony-var-dir": "var",
-        "symfony-bin-dir": "bin",
-        "symfony-assets-install": "relative",
-        "public-dir": "public"
+        "require": "^4.4"
     },
     "repositories": [{
         "type": "vcs",
