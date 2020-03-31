@@ -7,10 +7,10 @@ use App\Catrobat\Services\FeaturedImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\StringType;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -49,24 +49,6 @@ class FeaturedUrlAdmin extends AbstractAdmin
     parent::__construct($code, $class, $baseControllerName);
     $this->featured_image_repository = $featured_image_repository;
     $this->parameter_bag = $parameter_bag;
-  }
-
-  /**
-   * @param string $context
-   *
-   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
-   */
-  public function createQuery($context = 'list')
-  {
-    /**
-     * @var QueryBuilder
-     */
-    $query = parent::createQuery();
-    $query->andWhere(
-      $query->expr()->isNull($query->getRootAliases()[0].'.program')
-    );
-
-    return $query;
   }
 
   /**
@@ -113,6 +95,16 @@ class FeaturedUrlAdmin extends AbstractAdmin
   public function prePersist($object)
   {
     $this->checkFlavor();
+  }
+
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+  {
+    $query = parent::configureQuery($query);
+    $query->andWhere(
+      $query->expr()->isNull($query->getRootAliases()[0].'.program')
+    );
+
+    return $query;
   }
 
   /**
