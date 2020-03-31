@@ -1588,6 +1588,33 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I should get (\d+) projects in the following order:$/
+   *
+   * @param $program_count
+   */
+  public function iShouldGetScratchProjectsInTheFollowingOrder($program_count, TableNode $table)
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $returned_programs = json_decode($response->getContent(), true);
+    $programs = $table->getHash();
+
+    $scratch_programs_count = count($programs);
+    Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
+
+    $expected_programs = $table->getHash();
+    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($returned_programs));
+
+    for ($i = 0; $i < count($returned_programs); ++$i)
+    {
+      Assert::assertEquals(
+        $expected_programs[$i]['Name'], $returned_programs[$i]['name'],
+        'Wrong order of results'
+      );
+    }
+  }
+
+  /**
    * @Given /^I have a parameter "([^"]*)" with an invalid md5checksum of my file$/
    *
    * @param $parameter
