@@ -2,21 +2,27 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class InsertItemIntoUserListStatement.
- */
 class InsertItemIntoUserListStatement extends BaseUserListStatement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'insert item into userlist ';
+  /**
+   * @var string
+   */
   const MIDDLE_STRING = '(';
+  /**
+   * @var string
+   */
   const END_STRING = ')<br/>';
 
   /**
    * InsertItemIntoUserListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -26,10 +32,7 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $list_variable_name = $this->xmlTree->userList->name;
     $formula_string_index = null;
@@ -50,16 +53,15 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
       }
     }
 
-    $formula_str_index_no_markup = $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
-    $formula_str_value_no_markup = $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
+    $formula_str_index_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
+    $formula_str_value_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
 
     return 'Insert item into list '.$list_variable_name.' at position '.$formula_str_index_no_markup.' with '.$formula_str_value_no_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
     return '1h_brick_red.png';
   }

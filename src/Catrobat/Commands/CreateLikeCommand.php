@@ -2,13 +2,15 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
-use App\Catrobat\Commands\Helpers\ResetController;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\LikeNotification;
 use App\Entity\Program;
+use App\Entity\ProgramLike;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,42 +18,29 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateLikeCommand extends Command
 {
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  protected static $defaultName = 'catrobat:like';
 
-  /**
-   * @var RemixManipulationProgramManager
-   */
-  private $remix_manipulation_program_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var ResetController
-   */
-  private $reset_controller;
+  private ProgramManager $remix_manipulation_program_manager;
 
-  /**
-   * @var CatroNotificationService
-   */
-  private $notification_service;
+  private CatroNotificationService $notification_service;
 
-  /**
-   * CreateLikeCommand constructor.
-   */
+  private EntityManagerInterface $entity_manager;
+
   public function __construct(UserManager $user_manager,
-                              RemixManipulationProgramManager $program_manager,
-                              ResetController $reset_controller,
+                              ProgramManager $program_manager,
+                              EntityManagerInterface $entity_manager,
                               CatroNotificationService $notification_service)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
     $this->remix_manipulation_program_manager = $program_manager;
-    $this->reset_controller = $reset_controller;
+    $this->entity_manager = $entity_manager;
     $this->notification_service = $notification_service;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:like')
       ->setDescription('like a project')
@@ -61,37 +50,48 @@ class CreateLikeCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $program_name = $input->getArgument('program_name');
     $user_name = $input->getArgument('user_name');
 
-    /**
-     * @var Program
-     * @var User    $user
-     */
     $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
+
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (null == $program || null == $user || null == $this->reset_controller)
+    if (null === $program || null === $user)
     {
-      return;
+      $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
+
+      return -1;
     }
     try
     {
       $notification = new LikeNotification($program->getUser(), $user, $program);
-      $this->reset_controller->likeProgram($program, $user);
-      $notification->setSeen(random_int(0, 3));
+      $this->likeProgram($program, $user);
+      $notification->setSeen(boolval(random_int(0, 3)));
       $this->notification_service->addNotification($notification);
     }
-    catch (\Exception $e)
+    catch (Exception $e)
     {
-      return;
+      $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
+
+      return -1;
     }
     $output->writeln('Liking '.$program->getName().' with user '.$user_name);
+
+    return 0;
+  }
+
+  private function likeProgram(Program $program, User $user): void
+  {
+    $like = new ProgramLike($program, $user, array_rand(ProgramLike::$TYPE_NAMES));
+    $like->setCreatedAt(date_create());
+
+    $this->entity_manager->persist($like);
+    $this->entity_manager->flush();
   }
 }

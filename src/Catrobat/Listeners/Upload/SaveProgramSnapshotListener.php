@@ -6,38 +6,26 @@ use App\Catrobat\Events\ProgramAfterInsertEvent;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Program;
 use App\Utils\TimeUtils;
+use Exception;
 
-/**
- * Class SaveProgramSnapshotListener.
- */
 class SaveProgramSnapshotListener
 {
-  /**
-   * @var ProgramFileRepository
-   */
-  private $file_repository;
-  /**
-   * @var
-   */
-  private $snapshot_dir;
+  private ProgramFileRepository $file_repository;
 
-  /**
-   * SaveProgramSnapshotListener constructor.
-   *
-   * @param $snapshot_dir
-   */
-  public function __construct(ProgramFileRepository $file_repository, $snapshot_dir)
+  private string $snapshot_dir;
+
+  public function __construct(ProgramFileRepository $file_repository, string $snapshot_dir)
   {
     $this->file_repository = $file_repository;
     $this->snapshot_dir = $snapshot_dir;
   }
 
-  public function handleEvent(ProgramAfterInsertEvent $event)
+  public function handleEvent(ProgramAfterInsertEvent $event): void
   {
     $this->saveProgramSnapshot($event->getProgramEntity());
   }
 
-  public function saveProgramSnapshot(Program $program)
+  public function saveProgramSnapshot(Program $program): void
   {
     if ($program->getUser()->isLimited())
     {
@@ -48,7 +36,7 @@ class SaveProgramSnapshotListener
         $date = date('Y-m-d_H-i-s', TimeUtils::getTimestamp());
         $file->move($this->snapshot_dir, $program->getId().'_'.$date.'.catrobat');
       }
-      catch (\Exception $exception)
+      catch (Exception $exception)
       {
         return;
       }

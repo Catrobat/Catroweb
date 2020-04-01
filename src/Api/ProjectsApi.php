@@ -4,9 +4,11 @@ namespace App\Api;
 
 use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
+use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Repository\FeaturedRepository;
+use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProject;
 use OpenAPI\Server\Model\Project;
@@ -44,9 +46,9 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function setPandaAuth($value)
+  public function setPandaAuth($value): void
   {
-    $this->token = preg_split('/\s+/', $value)[1];
+    $this->token = preg_split('#\s+#', $value)[1];
   }
 
   /**
@@ -66,6 +68,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $responseCode = Response::HTTP_OK;
 
     $featured_programs = [];
+
+    /** @var FeaturedProgram $featured_program */
     foreach ($programs as &$featured_program)
     {
       $result = [
@@ -75,7 +79,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'featured_image' => $this->featured_image_repository->getAbsoluteWWebPath($featured_program->getId(), $featured_program->getImageType()),
       ];
       $new_featured_project = new FeaturedProject($result);
-      array_push($featured_programs, $new_featured_project);
+      $featured_programs[] = $new_featured_project;
     }
 
     return $featured_programs;
@@ -179,11 +183,9 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   }
 
   /**
-   * @param Program[] $programs
-   *
-   * @return Project[]
+   * @throws Exception
    */
-  private function getProjectsResponseData($programs)
+  private function getProjectsResponseData(array $programs): array
   {
     $projects = [];
     foreach ($programs as &$program)
@@ -216,10 +218,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
             'id' => $program->getId(),
           ],
           UrlGeneratorInterface::ABSOLUTE_URL), '/'),
-        'filesize' => $program->getFilesize() / 1048576,
+        'filesize' => $program->getFilesize() / 1_048_576,
       ];
       $project = new Project($result);
-      array_push($projects, $project);
+      $projects[] = $project;
     }
 
     return $projects;

@@ -195,14 +195,13 @@ class MaintainController extends CRUDController
 
     $output = new NullOutput();
 
-    $is_name_defined = false;
-    if (null !== $request->get('backupName'))
+    $backup_name = $request->get('backupName');
+    if (null !== $backup_name)
     {
       $input = new ArrayInput([
         'command' => 'catrobat:backup:create',
-        'backupName' => $request->get('backupName'),
+        'backupName' => $backup_name,
       ]);
-      $is_name_defined = true;
     }
 
     try
@@ -210,14 +209,7 @@ class MaintainController extends CRUDController
       $return = $application->run($input, $output);
       if (0 == $return)
       {
-        if ($is_name_defined)
-        {
-          $this->addFlash('sonata_flash_success', 'Create Backup: ['.$input['backupName'].'] OK');
-        }
-        else
-        {
-          $this->addFlash('sonata_flash_success', 'Create Backup OK');
-        }
+        $this->addFlash('sonata_flash_success', 'Create Backup: '.$backup_name.' OK');
       }
     }
     catch (Exception $exception)
@@ -342,7 +334,7 @@ class MaintainController extends CRUDController
     return $objects;
   }
 
-  private function get_dir_size(string $directory, $extension = null): int
+  private function get_dir_size(string $directory, ?array $extension = null): int
   {
     $count_size = 0;
     $count = 0;
@@ -371,9 +363,8 @@ class MaintainController extends CRUDController
     return $count_size;
   }
 
-  private function setSizeOfObject(&$object, string $path, $extension = null): void
+  private function setSizeOfObject(RemovableMemory &$object, string $path, ?array $extension = null): void
   {
-    /* @var RemovableMemory $object */
     if (is_dir($path))
     {
       $size = $this->get_dir_size($path, $extension);
@@ -382,7 +373,7 @@ class MaintainController extends CRUDController
     }
   }
 
-  private function getSymbolByQuantity($bytes): string
+  private function getSymbolByQuantity(float $bytes): string
   {
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
     $exp = floor(log($bytes) / log(1_024)) > 0 ? floor(log($bytes) / log(1_024)) : 0;
@@ -390,7 +381,7 @@ class MaintainController extends CRUDController
     return sprintf('%.2f '.$symbol[$exp], ($bytes / 1_024 ** floor($exp)));
   }
 
-  private function generateBackupObject($file): RemovableMemory
+  private function generateBackupObject(string $file): RemovableMemory
   {
     $filename = pathinfo($file, PATHINFO_BASENAME);
     $backupObject = new RemovableMemory($filename, 'created at: '.date('d.F.Y H:i:s', filemtime($file)));

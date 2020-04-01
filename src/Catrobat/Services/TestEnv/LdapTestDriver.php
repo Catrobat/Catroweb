@@ -8,38 +8,20 @@ use FR3D\LdapBundle\Model\LdapUserInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * Class LdapTestDriver.
- */
 class LdapTestDriver implements LdapDriverInterface
 {
-  /**
-   * @var
-   */
-  protected $objects;
+  protected ?array $objects = null;
 
-  /**
-   * @var
-   */
-  private $baseDN;
+  private string $baseDN;
 
-  /**
-   * @var bool
-   */
-  private $throw_expection_on_search;
+  private bool $throw_exception_on_search;
 
-  /**
-   * @var string
-   */
-  private static $APC_OBJECTS = 'LdapTestDriverFixture';
+  private static string $APC_OBJECTS = 'LdapTestDriverFixture';
 
-  /**
-   * LdapTestDriver constructor.
-   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     $this->baseDN = $parameter_bag->get('ldap_base_dn');
-    $this->throw_expection_on_search = false;
+    $this->throw_exception_on_search = false;
   }
 
   /**
@@ -99,7 +81,7 @@ class LdapTestDriver implements LdapDriverInterface
    */
   public function search($baseDn, $filter, array $attributes = [])
   {
-    if ($this->throw_expection_on_search)
+    if ($this->throw_exception_on_search)
     {
       throw new LdapDriverException('Test Exception on Search!');
     }
@@ -153,10 +135,10 @@ class LdapTestDriver implements LdapDriverInterface
   }
 
   /**
-   * @param       $username
-   * @param       $password
    * @param array $groups
    * @param null  $mail
+   * @param mixed $username
+   * @param mixed $password
    *
    * @return bool
    */
@@ -213,15 +195,15 @@ class LdapTestDriver implements LdapDriverInterface
   }
 
   /**
-   * @param $value
+   * @param mixed $value
    */
-  public function setThrowExceptionOnSearch($value)
+  public function setThrowExceptionOnSearch($value): void
   {
-    $this->throw_expection_on_search = $value;
+    $this->throw_exception_on_search = $value;
   }
 
   /**
-   * @param $string
+   * @param mixed $string
    *
    * @return array
    */
@@ -241,7 +223,7 @@ class LdapTestDriver implements LdapDriverInterface
     return $result;
   }
 
-  private function loadFixtures()
+  private function loadFixtures(): void
   {
     if (!is_array($this->objects))
     {

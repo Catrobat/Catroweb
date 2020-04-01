@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class SetVolumeToBrick.
- */
 class SetVolumeToBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::SET_VOLUME_TO_BRICK;
     $this->caption = 'Set volume to _ %';

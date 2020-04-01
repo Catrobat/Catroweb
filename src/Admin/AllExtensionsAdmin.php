@@ -9,9 +9,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-/**
- * Class AllExtensionsAdmin.
- */
 class AllExtensionsAdmin extends AbstractAdmin
 {
   /**
@@ -37,7 +34,7 @@ class AllExtensionsAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('name', TextType::class, ['label' => 'Extension name'])
@@ -50,7 +47,7 @@ class AllExtensionsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('name')
@@ -63,7 +60,7 @@ class AllExtensionsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -75,7 +72,7 @@ class AllExtensionsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('delete')->remove('export');
   }

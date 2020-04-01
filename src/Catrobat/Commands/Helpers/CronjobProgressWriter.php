@@ -15,40 +15,40 @@ class CronjobProgressWriter //extends ProgressBar
     $this->output = $output;
   }
 
-  public function clear()
+  public function clear(): void
   {
   }
 
-  public function advance(int $step = 1)
+  public function advance(int $step = 1): void
   {
   }
 
-  public function display()
+  public function display(): void
   {
   }
 
   /**
    * @param null $max
    */
-  public function start($max = null)
+  public function start($max = null): void
   {
   }
 
-  public function finish()
+  public function finish(): void
   {
   }
 
   /**
-   * @param $format
+   * @param mixed $format
    */
-  public function setFormat($format)
+  public function setFormat($format): void
   {
   }
 
   /**
    * @throws Exception
    */
-  public function setMessage(string $message)
+  public function setMessage(string $message): void
   {
     $this->output->writeln('['.date_format(TimeUtils::getDateTime(), 'Y-m-d H:i:s').'] '.$message);
   }

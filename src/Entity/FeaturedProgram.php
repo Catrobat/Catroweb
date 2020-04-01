@@ -12,208 +12,138 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class FeaturedProgram
 {
-  /**
-   * @var File
-   */
-  public $file;
-  /**
-   * @var
-   */
-  public $removed_id;
-  /**
-   * @var
-   */
-  public $old_image_type;
+  public ?File $file = null;
+
+  public ?int $removed_id = null;
+
+  public ?string $old_image_type = null;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="string")
    */
-  protected $imagetype;
+  protected string $imagetype;
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $url;
+  protected ?string $url = null;
 
   /**
    * @ORM\Column(type="boolean")
    */
-  protected $active;
+  protected bool $active = true;
 
   /**
    * @ORM\Column(type="string", options={"default": "pocketcode"})
    */
-  protected $flavor = 'pocketcode';
+  protected string $flavor = 'pocketcode';
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $priority = 0;
+  protected int $priority = 0;
 
   /**
    * @ORM\Column(type="boolean", options={"default": false})
    */
-  protected $for_ios = false;
+  protected bool $for_ios = false;
 
   /**
    * @ORM\ManyToOne(targetEntity="Program", fetch="EAGER")
    */
-  private $program;
+  private ?Program $program = null;
 
-  /**
-   * @return mixed
-   */
-  public function getFlavor()
+  public function getFlavor(): string
   {
     return $this->flavor;
   }
 
-  /**
-   * @param mixed $flavor
-   */
-  public function setFlavor($flavor)
+  public function setFlavor(string $flavor): void
   {
     $this->flavor = $flavor;
   }
 
-  /**
-   * Get id.
-   *
-   * @return int
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * Set image.
-   *
-   * @param string $image
-   *
-   * @return FeaturedProgram
-   */
-  public function setImageType($image)
+  public function setImageType(string $image): FeaturedProgram
   {
     $this->imagetype = $image;
 
     return $this;
   }
 
-  /**
-   * Get image.
-   *
-   * @return string
-   */
-  public function getImageType()
+  public function getImageType(): string
   {
     return $this->imagetype;
   }
 
-  /**
-   * Set program.
-   *
-   * @param Program $program
-   *
-   * @return FeaturedProgram
-   */
-  public function setProgram(Program $program = null)
+  public function setProgram(?Program $program): FeaturedProgram
   {
     $this->program = $program;
 
     return $this;
   }
 
-  /**
-   * Get program.
-   *
-   * @return \App\Entity\Program
-   */
-  public function getProgram()
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUrl()
+  public function getUrl(): ?string
   {
     return $this->url;
   }
 
-  /**
-   * @param $url
-   *
-   * @return $this
-   */
-  public function setUrl($url)
+  public function setUrl(?string $url): FeaturedProgram
   {
     $this->url = $url;
 
     return $this;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getActive()
+  public function getActive(): bool
   {
     return $this->active;
   }
 
-  /**
-   * @param $active
-   *
-   * @return $this
-   */
-  public function setActive($active)
+  public function setActive(bool $active): FeaturedProgram
   {
     $this->active = $active;
 
     return $this;
   }
 
-  public function setNewFeaturedImage(File $file)
+  public function setNewFeaturedImage(File $file): void
   {
     $this->file = $file;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPriority()
+  public function getPriority(): int
   {
     return $this->priority;
   }
 
-  /**
-   * @param mixed $priority
-   */
-  public function setPriority($priority)
+  public function setPriority(int $priority): void
   {
     $this->priority = $priority;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getForIos()
+  public function getForIos(): bool
   {
     return $this->for_ios;
   }
 
-  /**
-   * @param mixed $for_ios
-   */
-  public function setForIos($for_ios)
+  public function setForIos(bool $for_ios): void
   {
     $this->for_ios = $for_ios;
   }

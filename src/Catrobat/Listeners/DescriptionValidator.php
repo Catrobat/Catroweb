@@ -8,44 +8,33 @@ use App\Catrobat\Exceptions\Upload\RudewordInDescriptionException;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RudeWordFilter;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
-/**
- * Class DescriptionValidator.
- */
 class DescriptionValidator
 {
-  /**
-   * @var RudeWordFilter
-   */
-  private $rudeWordFilter;
-  /**
-   * @var int
-   */
-  private $max_description_size;
+  private RudeWordFilter $rudeWordFilter;
+  private int $max_description_size;
 
-  /**
-   * DescriptionValidator constructor.
-   */
   public function __construct(RudeWordFilter $rudeWordFilter)
   {
     $this->rudeWordFilter = $rudeWordFilter;
-    $this->max_description_size = 10000;
+    $this->max_description_size = 10_000;
   }
 
   /**
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NoResultException
+   * @throws NonUniqueResultException
    */
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
   }
 
   /**
-   * @throws DescriptionTooLongException
-   * @throws RudewordInDescriptionException
    * @throws NonUniqueResultException
+   * @throws NoResultException
    */
-  public function validate(ExtractedCatrobatFile $file)
+  public function validate(ExtractedCatrobatFile $file): void
   {
     if (strlen($file->getDescription()) > $this->max_description_size)
     {

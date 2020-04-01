@@ -2,19 +2,19 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class SoundListStatement.
- */
 class SoundListStatement extends BaseListStatement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'used sounds: <br/>';
 
   /**
    * SoundListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {

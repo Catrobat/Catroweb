@@ -27,27 +27,17 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    *
    *  Must be sent as cookie containing the user token
    *  Must not be empty
+   *
+   * @var string
    */
   const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
 
-  /**
-   * @var TranslatorInterface
-   */
-  protected $translator;
+  protected TranslatorInterface $translator;
 
-  /**
-   * @var SessionInterface
-   */
-  protected $session;
+  protected SessionInterface $session;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $em;
+  private EntityManagerInterface $em;
 
-  /**
-   * WebviewAuthenticator constructor.
-   */
   public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, SessionInterface $session)
   {
     $this->em = $em;
@@ -100,7 +90,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
       ->findOneBy(['upload_token' => $token])
     ;
 
-    if (!$user)
+    if (null === $user)
     {
       throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
     }
@@ -139,6 +129,8 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
 
   /**
    * @throws HttpException
+   *
+   * {@inheritdoc}
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {

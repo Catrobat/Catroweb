@@ -5,33 +5,26 @@ namespace App\Catrobat\Services\TestEnv;
 use App\Catrobat\Services\TokenGenerator;
 
 /**
- * Class ProxyTokenGenerator.
+ * TokenGenerator constructor.
+ *
+ * @deprecated use JWT tokens
  */
 class ProxyTokenGenerator extends TokenGenerator
 {
-  /**
-   * @var TokenGenerator
-   */
-  private $generator;
+  private TokenGenerator $generator;
 
-  /**
-   * ProxyTokenGenerator constructor.
-   */
   public function __construct(TokenGenerator $default_generator)
   {
     parent::__construct();
     $this->generator = $default_generator;
   }
 
-  /**
-   * @return string
-   */
-  public function generateToken()
+  public function generateToken(): string
   {
     return $this->generator->generateToken();
   }
 
-  public function setTokenGenerator(TokenGenerator $generator)
+  public function setTokenGenerator(TokenGenerator $generator): void
   {
     $this->generator = $generator;
   }

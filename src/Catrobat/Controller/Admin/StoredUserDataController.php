@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 class StoredUserDataController extends CRUDController
 {
   /**
-   * @param int $id The id of the user which data should be shown
+   * @param string $id The id of the user which data should be shown
    */
-  public function retrieveAction(int $id, UserManager $user_manager, CatroNotificationRepository $notification_repo,
+  public function retrieveAction(string $id, UserManager $user_manager, CatroNotificationRepository $notification_repo,
                                   EntityManagerInterface $entity_manager): Response
   {
     $user = $user_manager->find($id);
-    $catro_user_notifications = $notification_repo->findByUser($user, ['id' => 'DESC']);
+    $catro_user_notifications = $notification_repo->findBy(['user' => $user], ['id' => 'DESC']);
     $query = $entity_manager->createQuery(sprintf('SELECT cs FROM App\Entity\ClickStatistic cs WHERE cs.user=\'%s\'', $id));
     $click_statistics = $query->getResult();
     $query = $entity_manager->createQuery(sprintf('SELECT hcs FROM App\Entity\HomepageClickStatistic hcs WHERE hcs.user=\'%s\'', $id));

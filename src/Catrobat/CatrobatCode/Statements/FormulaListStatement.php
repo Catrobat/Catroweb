@@ -2,30 +2,28 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class FormulaListStatement.
- */
 class FormulaListStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const X_POSITION = 'X_POSITION';
 
+  /**
+   * @var string
+   */
   const Y_POSITION = 'Y_POSITION';
 
-  /**
-   * @var
-   */
-  private $xPosition;
-  /**
-   * @var
-   */
-  private $yPosition;
+  private FormulaStatement $xPosition;
+
+  private FormulaStatement $yPosition;
 
   /**
    * FormulaListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -33,15 +31,12 @@ class FormulaListStatement extends Statement
       '', '');
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
     $counter = 0;
 
-    $statementCount = count($this->statements);
+    $statementCount = is_countable($this->statements) ? count($this->statements) : 0;
     foreach ($this->statements as $value)
     {
       ++$counter;
@@ -56,10 +51,7 @@ class FormulaListStatement extends Statement
     return $code;
   }
 
-  /**
-   * @return string
-   */
-  public function executePlaceAtFormula()
+  public function executePlaceAtFormula(): string
   {
     $code = '';
     $endCode = '';
@@ -84,7 +76,7 @@ class FormulaListStatement extends Statement
     return $code.$endCode;
   }
 
-  protected function setVariables()
+  protected function setVariables(): void
   {
     foreach ($this->statements as $value)
     {
@@ -94,12 +86,9 @@ class FormulaListStatement extends Statement
         {
           $this->xPosition = $value;
         }
-        else
+        elseif (self::Y_POSITION == $value->getCategory())
         {
-          if (self::Y_POSITION == $value->getCategory())
-          {
-            $this->yPosition = $value;
-          }
+          $this->yPosition = $value;
         }
       }
     }

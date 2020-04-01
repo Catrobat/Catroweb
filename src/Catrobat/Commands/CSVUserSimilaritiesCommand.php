@@ -2,94 +2,77 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Entity\ProgramLike;
+use App\Entity\User;
+use App\Entity\UserManager;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRemixRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-/**
- * Class CSVUserSimilaritiesCommand.
- */
 class CSVUserSimilaritiesCommand extends Command
 {
-  /**
-   * @var ProgramRemixRepository
-   */
-  private $program_remix_repository;
+  protected static $defaultName = 'catrobat:recommender:export';
+  private ProgramRemixRepository $program_remix_repository;
 
-  /**
-   * @var ProgramLikeRepository
-   */
-  private $program_like_repository;
+  private ProgramLikeRepository $program_like_repository;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $entity_manager;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var string
-   */
-  private $app_root_dir;
+  private UserManager $user_manager;
 
-  /**
-   * CSVUserSimilaritiesCommand constructor.
-   *
-   * @param $kernel_root_dir
-   */
+  private string $app_root_dir;
+
   public function __construct(ProgramRemixRepository $program_remix_repository,
                               ProgramLikeRepository $program_like_repository,
                               EntityManagerInterface $entity_manager,
-                              $kernel_root_dir)
+                              UserManager $user_manager,
+                              ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->program_remix_repository = $program_remix_repository;
     $this->program_like_repository = $program_like_repository;
     $this->entity_manager = $entity_manager;
-    $this->app_root_dir = $kernel_root_dir;
+    $this->user_manager = $user_manager;
+    $this->app_root_dir = $parameter_bag->get('kernel.project_dir');
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     date_default_timezone_set('Europe/Berlin');
     $this->setName('catrobat:recommender:export')->setDescription('Export command');
   }
 
-  /**
-   * @throws \Doctrine\DBAL\DBALException
-   *
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    /*
-     * @var $likes_of_users array
-     * @var $likes_of_user ProgramLike
-     */
-
     @unlink($this->app_root_dir.'/../data_remixes');
     @unlink($this->app_root_dir.'/../data_likes');
 
-    $statement = $this->entity_manager->getConnection()
-      ->prepare('SELECT MAX(id) as id_of_last_user FROM fos_user')
-    ;
-    $statement->execute();
-    $id_of_last_user = $statement->fetch()['id_of_last_user'];
-    echo PHP_EOL.'Last ID: '.$id_of_last_user.PHP_EOL;
+    $users = $this->user_manager->findAll();
+
+    echo PHP_EOL.'Number of users: '.count($users).PHP_EOL;
 
     $output_string = '';
-    for ($user_id = 1; $user_id <= $id_of_last_user; ++$user_id)
+
+    /** @var User $user */
+    foreach ($users as $user)
     {
+      $user_id = $user->getId();
+
       $remixes_of_user = $this->program_remix_repository->getDirectParentRelationDataOfUser($user_id);
+
+      /** @var array $remix_of_user */
       foreach ($remixes_of_user as $remix_of_user)
       {
         $output_string .= $user_id.';'.$remix_of_user['ancestor_id'].';'.$remix_of_user['descendant_id'].PHP_EOL;
       }
     }
+
     file_put_contents($this->app_root_dir.'/../data_remixes', $output_string);
+
+    echo PHP_EOL.'Content written to '.$this->app_root_dir.'/../data_remixes';
 
     $output_string = '';
     $likes_of_all_users = $this->program_like_repository->findAll();
@@ -99,6 +82,11 @@ class CSVUserSimilaritiesCommand extends Command
       $program_id = $likes_of_user->getProgramId();
       $output_string .= $user_id.';'.$program_id.PHP_EOL;
     }
+
     file_put_contents($this->app_root_dir.'/../data_likes', $output_string);
+
+    echo PHP_EOL.'Content written to '.$this->app_root_dir.'/../data_likes';
+
+    return 0;
   }
 }

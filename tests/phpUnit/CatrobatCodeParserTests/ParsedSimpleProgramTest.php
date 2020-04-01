@@ -4,6 +4,7 @@ namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\CodeStatistic;
 use App\Catrobat\Services\CatrobatCodeParser\ParsedSimpleProgram;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,6 +18,7 @@ class ParsedSimpleProgramTest extends TestCase
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/SimpleProgram/code.xml');
+    Assert::assertNotFalse($xml_properties);
     $this->program = new ParsedSimpleProgram($xml_properties);
   }
 

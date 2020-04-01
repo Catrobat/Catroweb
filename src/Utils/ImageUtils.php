@@ -5,31 +5,22 @@ namespace App\Utils;
 use App\Catrobat\StatusCode;
 use Exception;
 
-/**
- * Class ImageBase64Checks.
- */
 class ImageUtils
 {
   /**
-   * @param $image_base64
-   * @param $MAX_UPLOAD_SIZE
-   * @param $MAX_IMAGE_SIZE
-   *
    * @throws Exception
-   *
-   * @return string
    */
-  public static function checkAndResizeBase64Image($image_base64, $MAX_IMAGE_SIZE = 300, $MAX_UPLOAD_SIZE = 5 * 1024 * 1024)
+  public static function checkAndResizeBase64Image(string $image_base64, ?int $MAX_IMAGE_SIZE = 300, int $MAX_UPLOAD_SIZE = 5 * 1_024 * 1_024): string
   {
     $image_data = explode(';base64,', $image_base64);
     $data_regx = '/data:(.+)/';
 
     if (!preg_match($data_regx, $image_data[0]))
     {
-      throw new Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+      throw new Exception('UPLOAD_UNSUPPORTED_FILE_TYPE', StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
     }
 
-    $image_type = preg_replace('/data:(.+)/', '\\1', $image_data[0]);
+    $image_type = preg_replace('#data:(.+)#', '\\1', $image_data[0]);
     $image = null;
 
     switch ($image_type)
@@ -45,12 +36,12 @@ class ImageUtils
         $image = imagecreatefromgif($image_base64);
         break;
       default:
-        throw new Exception(StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE);
+        throw new Exception('UPLOAD_UNSUPPORTED_MIME_TYPE', StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE);
     }
 
     if (!$image)
     {
-      throw new Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+      throw new Exception('UPLOAD_UNSUPPORTED_FILE_TYPE', StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
     }
 
     // https://en.wikipedia.org/wiki/Base64 not exact but enough for our checks
@@ -58,7 +49,7 @@ class ImageUtils
 
     if ($image_size > $MAX_UPLOAD_SIZE)
     {
-      throw new Exception(StatusCode::UPLOAD_EXCEEDING_FILESIZE);
+      throw new Exception('UPLOAD_EXCEEDING_FILESIZE', StatusCode::UPLOAD_EXCEEDING_FILESIZE);
     }
 
     $width = imagesx($image);
@@ -66,7 +57,7 @@ class ImageUtils
 
     if (0 === $width || 0 === $height)
     {
-      throw new Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+      throw new Exception('UPLOAD_UNSUPPORTED_FILE_TYPE', StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
     }
 
     if (null !== $MAX_IMAGE_SIZE && max($width, $height) > $MAX_IMAGE_SIZE)
@@ -74,7 +65,7 @@ class ImageUtils
       $new_image = imagecreatetruecolor($MAX_IMAGE_SIZE, $MAX_IMAGE_SIZE);
       if (!$new_image)
       {
-        throw new Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+        throw new Exception('USER_AVATAR_UPLOAD_ERROR', StatusCode::USER_AVATAR_UPLOAD_ERROR);
       }
 
       imagesavealpha($new_image, true);
@@ -83,14 +74,14 @@ class ImageUtils
       if (!imagecopyresized($new_image, $image, 0, 0, 0, 0, $MAX_IMAGE_SIZE, $MAX_IMAGE_SIZE, $width, $height))
       {
         imagedestroy($new_image);
-        throw new Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+        throw new Exception('USER_AVATAR_UPLOAD_ERROR', StatusCode::USER_AVATAR_UPLOAD_ERROR);
       }
 
       ob_start();
       if (!imagepng($new_image))
       {
         imagedestroy($new_image);
-        throw new Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+        throw new Exception('USER_AVATAR_UPLOAD_ERROR', StatusCode::USER_AVATAR_UPLOAD_ERROR);
       }
 
       $image_base64 = 'data:image/png;base64,'.base64_encode(ob_get_clean());

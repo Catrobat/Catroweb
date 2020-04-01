@@ -8,6 +8,7 @@ use App\Catrobat\Security\UserAuthenticator;
 use App\Catrobat\Services\OAuthService;
 use App\Catrobat\Services\TokenGenerator;
 use App\Catrobat\StatusCode;
+use App\Entity\User;
 use App\Entity\UserManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -91,6 +92,7 @@ class SecurityController extends AbstractController
       }
       else
       {
+        /** @var User $user */
         $user = $user_manager->createUser();
         $user->setUsername($create_request->username);
         $user->setEmail($create_request->mail);
@@ -161,6 +163,7 @@ class SecurityController extends AbstractController
       }
       else
       {
+        /** @var User $user */
         $user = $user_manager->createUser();
         $user->setUsername($create_request->username);
         $user->setEmail($create_request->mail);
@@ -221,6 +224,7 @@ class SecurityController extends AbstractController
       $username = $request->request->get('registrationUsername');
       $password = $request->request->get('registrationPassword');
 
+      /** @var User|null $user */
       $user = $user_manager->findUserByUsername($username);
 
       if (null === $user)
@@ -342,7 +346,7 @@ class SecurityController extends AbstractController
    *
    * @throws Exception
    */
-  public function loginWithGoogleAction(Request $request)
+  public function loginWithGoogleAction(Request $request): JsonResponse
   {
     return $this->getOAuthService()->loginWithGoogleAction($request);
   }
@@ -424,7 +428,9 @@ class SecurityController extends AbstractController
     {
       $token = $authenticator->authenticate($username, $request->request->get('registrationPassword'));
       $retArray['statusCode'] = StatusCode::OK;
-      $retArray['token'] = $token->getUser()->getUploadToken();
+      /** @var User|null $user */
+      $user = $token->getUser();
+      $retArray['token'] = $user->getUploadToken();
       $retArray['preHeaderMessages'] = '';
     }
     catch (UsernameNotFoundException $usernameNotFoundException)
@@ -447,7 +453,7 @@ class SecurityController extends AbstractController
     return JsonResponse::create($retArray);
   }
 
-  private function getOAuthService(): ?OAuthService
+  private function getOAuthService(): OAuthService
   {
     return $this->oauth_service;
   }

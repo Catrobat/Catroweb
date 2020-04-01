@@ -4,6 +4,7 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Services\CatrobatFileCompressor;
 use App\Catrobat\Services\CatrobatFileExtractor;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,44 +14,21 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class GenerateTestDataCommand.
- */
 class GenerateTestDataCommand extends Command
 {
-  /**
-   * @var Filesystem
-   */
-  protected $filesystem;
-  /**
-   * @var
-   */
-  protected $source;
+  protected static $defaultName = 'catrobat:test:generate';
+  protected Filesystem $filesystem;
 
-  /**
-   * @var string
-   */
-  protected $target_directory;
-  /**
-   * @var CatrobatFileExtractor
-   */
-  protected $extractor;
-  /**
-   * @var
-   */
-  protected $extracted_source_program_directory;
-  /**
-   * @var CatrobatFileCompressor
-   */
-  protected $compressor;
+  protected string $source;
 
-  /**
-   * GenerateTestDataCommand constructor.
-   *
-   * @param $source
-   * @param $target_directory
-   * @param $source_extensions
-   */
+  protected string $target_directory;
+
+  protected CatrobatFileExtractor $extractor;
+
+  protected string $extracted_source_program_directory;
+
+  protected CatrobatFileCompressor $compressor;
+
   public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor,
                               CatrobatFileCompressor $compressor, ParameterBagInterface $parameter_bag)
   {
@@ -62,7 +40,7 @@ class GenerateTestDataCommand extends Command
     $this->compressor = $compressor;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this
       ->setName('catrobat:test:generate')
@@ -71,10 +49,7 @@ class GenerateTestDataCommand extends Command
     ;
   }
 
-  /**
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $dialog = $this->getHelper('question');
     $question = new ConfirmationQuestion('<question>Generate test data in '.$this->target_directory.' (Y/n)?</question>', true);
@@ -116,12 +91,14 @@ class GenerateTestDataCommand extends Command
       }
       $output->writeln('<info>Test data generated</info>');
     }
+
+    return 0;
   }
 
   /**
-   * @param $directory
+   * @throws Exception
    */
-  protected function extractBaseTestProgram($directory)
+  protected function extractBaseTestProgram(string $directory): void
   {
     $extracted = $this->extractor->extract(new File($this->source.'test.catrobat'));
     $extracted_path = $extracted->getPath();
@@ -130,9 +107,9 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @param $directory
+   * @throws Exception
    */
-  protected function extractEmbroideryTestProgram($directory)
+  protected function extractEmbroideryTestProgram(string $directory): void
   {
     $extracted = $this->extractor->extract(new File($this->source.'embroidery.catrobat'));
     $extracted_path = $extracted->getPath();
@@ -141,9 +118,9 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @param $directory
+   * @throws Exception
    */
-  protected function extractExtensionTestProgram($directory)
+  protected function extractExtensionTestProgram(string $directory): void
   {
     $extracted = $this->extractor->extract(new File($this->source.'extensions.catrobat'));
     $extracted_path = $extracted->getPath();
@@ -151,83 +128,56 @@ class GenerateTestDataCommand extends Command
     $this->filesystem->rename($extracted_path, $extracted_source_program_directory, true);
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithExtraImage($directory)
+  protected function generateProgramWithExtraImage(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->copy($this->target_directory.$directory.'/images/6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png', $this->target_directory.$directory.'/images/6153c44ce0f49f21facbb8c2b2263ce8_extra.png');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithMissingImage($directory)
+  protected function generateProgramWithMissingImage(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->remove($this->target_directory.$directory.'/images/6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithTooManyFiles($directory)
+  protected function generateProgramWithTooManyFiles(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->copy($this->target_directory.$directory.'/code.xml', $this->target_directory.$directory.'/extraFile.xml');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithTooManyFolders($directory)
+  protected function generateProgramWithTooManyFolders(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->mirror($this->target_directory.$directory.'/sounds', $this->target_directory.$directory.'/extraFolder');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithMissingCodeXML($directory)
+  protected function generateProgramWithMissingCodeXML(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->remove($this->target_directory.$directory.'/code.xml');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithInvalidCodeXML($directory)
+  protected function generateProgramWithInvalidCodeXML(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->remove($this->target_directory.$directory.'/code.xml');
     $this->filesystem->copy($this->target_directory.$directory.'/automatic_screenshot.png', $this->target_directory.$directory.'/code.xml');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithManualScreenshot($directory)
+  protected function generateProgramWithManualScreenshot(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->rename($this->target_directory.$directory.'/automatic_screenshot.png', $this->target_directory.$directory.'/manual_screenshot.png');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithScreenshot($directory)
+  protected function generateProgramWithScreenshot(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->rename($this->target_directory.$directory.'/automatic_screenshot.png', $this->target_directory.$directory.'/screenshot.png');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithRudeWordInDescription($directory)
+  protected function generateProgramWithRudeWordInDescription(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
@@ -235,10 +185,7 @@ class GenerateTestDataCommand extends Command
     $properties->asXML($this->target_directory.$directory.'/code.xml');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithRudeWordInName($directory)
+  protected function generateProgramWithRudeWordInName(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
@@ -246,10 +193,7 @@ class GenerateTestDataCommand extends Command
     $properties->asXML($this->target_directory.$directory.'/code.xml');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateProgramWithTags($directory)
+  protected function generateProgramWithTags(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
@@ -257,19 +201,13 @@ class GenerateTestDataCommand extends Command
     $properties->asXML($this->target_directory.$directory.'/code.xml');
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generatePhiroProgram($directory)
+  protected function generatePhiroProgram(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     file_put_contents($this->target_directory.$directory.'/permissions.txt', "TEXT_TO_SPEECH\nBLUETOOTH_PHIRO\nVIBRATOR");
   }
 
-  /**
-   * @param $directory
-   */
-  protected function generateLegoProgram($directory)
+  protected function generateLegoProgram(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     file_put_contents($this->target_directory.$directory.'/permissions.txt', "TEXT_TO_SPEECH\nBLUETOOTH_LEGO_NXT\nVIBRATOR");

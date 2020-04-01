@@ -5,11 +5,11 @@ namespace App\Catrobat\Controller\Api;
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Catrobat\StatusCode;
-use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Entity\UserTestGroup;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,18 +21,39 @@ class RecommenderController extends AbstractController
 
   private int $DEFAULT_OFFSET = 0;
 
+  private ProgramManager $program_manager;
+
+  public function __construct(ProgramManager $program_manager)
+  {
+    $this->program_manager = $program_manager;
+  }
+
   /**
    * @deprecated
    *
    * @Route("/api/projects/recsys.json", name="api_recsys_programs", defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @return JsonResponse|ProgramListResponse
    */
-  public function listRecsysProgramAction(Request $request, ProgramManager $program_manager): ProgramListResponse
+  public function listRecsysProgramAction(Request $request, ProgramManager $program_manager)
   {
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
+    $flavor = $request->get('flavor', 'pocketcode');
+
     $program_id = $request->query->get('program_id');
 
-    $flavor = $request->get('flavor');
+    if (null === $program_id)
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
+    }
+
+    $program = $this->program_manager->find($program_id);
+
+    if (null === $program)
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
+    }
 
     $programs_count = $program_manager->getRecommendedProgramsCount($program_id, $flavor);
     $programs = $program_manager->getRecommendedProgramsById($program_id, $flavor, $limit, $offset);
@@ -45,11 +66,9 @@ class RecommenderController extends AbstractController
    *
    * @Route("/api/projects/recsys_specific_projects/{id}.json", name="api_recsys_specific_projects", defaults={"_format": "json"},  methods={"GET"})
    *
-   * @param $id
-   *
    * @return JsonResponse|ProgramListResponse
    */
-  public function listRecsysSpecificProgramsAction(Request $request, $id, ProgramManager $program_manager)
+  public function listRecsysSpecificProgramsAction(Request $request, string $id, ProgramManager $program_manager)
   {
     $is_test_environment = ('test' == $this->getParameter('kernel.environment'));
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
@@ -57,9 +76,8 @@ class RecommenderController extends AbstractController
 
     $flavor = $request->get('flavor');
 
-    /** @var Program $program */
     $program = $program_manager->find($id);
-    if (null == $program)
+    if (null === $program)
     {
       return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
     }
@@ -77,7 +95,7 @@ class RecommenderController extends AbstractController
    * @Route("/api/projects/recsys_general_projects.json", name="api_recsys_general_projects",
    * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function listRecsysGeneralProgramsAction(Request $request, UserManager $user_manager, RecommenderManager $recommender_manager): ProgramListResponse
   {
@@ -93,7 +111,7 @@ class RecommenderController extends AbstractController
     $programs = [];
     $is_user_specific_recommendation = false;
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = ('' == $test_user_id_for_like_recommendation) ?
       $this->getUser() : $user_manager->find($test_user_id_for_like_recommendation);
 

@@ -4,15 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Scripts;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class BroadcastScript.
- */
 class BroadcastScript extends Script
 {
-  /**
-   * @return mixed|void
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::BROADCAST_SCRIPT;
     $this->caption = 'When I receive _';

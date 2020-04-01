@@ -42,9 +42,9 @@
     </div>
 
     <div class="col-2 mt-4 mt-sm-1 center">
-      {% if app.user == null or app.user.id != profile.id %}
+
         <div id="follow-icon">
-          {% if profile.hasFollower(app.user) %}
+          {% if app.user != null and profile.hasFollower(app.user)%}
             <a id="follow-btn" class="pull-right"
                data-toggle="tooltip" title="{{ "profile.unfollowUser"|trans({}, "catroweb") }}"
                href="{{ url('unfollow_user', { id : profile.id }) }}">
@@ -58,7 +58,6 @@
             </a>
           {% endif %}
         </div>
-      {% endif %}
     </div>
 
     <div class="col-12 mt-3">

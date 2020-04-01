@@ -5,11 +5,9 @@ namespace App\Repository;
 use App\Entity\RudeWord;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class RudeWordsRepository.
- */
 class RudeWordsRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -18,13 +16,10 @@ class RudeWordsRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $array
-   *
    * @throws NonUniqueResultException
-   *
-   * @return bool
+   * @throws NoResultException
    */
-  public function contains($array)
+  public function contains(array $array): bool
   {
     $qb = $this->createQueryBuilder('e');
     $qb->select($qb->expr()->count('e.word'))

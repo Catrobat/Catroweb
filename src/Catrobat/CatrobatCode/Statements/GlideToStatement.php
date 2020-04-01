@@ -2,20 +2,23 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class GlideToStatement.
- */
 class GlideToStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'glide (';
+  /**
+   * @var string
+   */
   const END_STRING = ')<br/>';
 
   /**
    * GlideToStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -24,10 +27,7 @@ class GlideToStatement extends Statement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $formula_x_dest = '';
     $formula_y_dest = '';
@@ -59,10 +59,7 @@ class GlideToStatement extends Statement
     return 'Glide '.$formula_duration_no_markup.' second(s) to X: '.$formula_x_dest_no_markup.' Y: '.$formula_y_dest_no_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
     return '1h_brick_blue.png';
   }

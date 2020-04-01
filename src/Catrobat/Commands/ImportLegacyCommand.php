@@ -30,9 +30,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * Class ImportLegacyCommand.
- */
 class ImportLegacyCommand extends Command
 {
   const RESOURCE_CONTAINER_FILE = 'resources.tar';
@@ -46,6 +43,7 @@ class ImportLegacyCommand extends Command
   const TSV_PROGRAMS_FILE = '2041.dat';
 
   const TSV_FEATURED_PROGRAMS = '2037.dat';
+  protected static $defaultName = 'catrobat:legacy:import';
 
   private Filesystem $file_system;
 
@@ -59,14 +57,9 @@ class ImportLegacyCommand extends Command
 
   private EntityManagerInterface $em;
 
-  /**
-   * @var
-   */
-  private $importdir;
-  /**
-   * @var
-   */
-  private $finder;
+  private string $importdir;
+
+  private Finder $finder;
 
   private ScreenshotRepository $screenshot_repository;
 
@@ -78,9 +71,6 @@ class ImportLegacyCommand extends Command
 
   private RemixUpdater $remix_updater;
 
-  /**
-   * ImportLegacyCommand constructor.
-   */
   public function __construct(Filesystem $file_system, UserManager $user_manager, ProgramManager $program_manager,
                               RemixManager $remix_manager, EntityManagerInterface $em,
                               ScreenshotRepository $screenshot_repository, ProgramFileRepository $file_repository,
@@ -100,7 +90,7 @@ class ImportLegacyCommand extends Command
     $this->remix_updater = $remix_updater;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:legacy:import')
       ->setDescription('Import a legacy backup')
@@ -113,7 +103,7 @@ class ImportLegacyCommand extends Command
    * @throws OptimisticLockException
    * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output): void
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->output = $output;
     $this->file_system = new Filesystem();
@@ -175,14 +165,16 @@ class ImportLegacyCommand extends Command
     }
 
     $this->file_system->remove($temp_dir);
+
+    return 0;
   }
 
   /**
-   * @param $program_file
+   * @param mixed $program_file
    *
    * @throws Exception
    */
-  protected function importPrograms($program_file)
+  protected function importPrograms($program_file): void
   {
     $row = 0;
     $skipped = 0;
@@ -231,7 +223,7 @@ class ImportLegacyCommand extends Command
           $program->setViews($data[7]);
           $program->setVisible('t' === $data[8]);
 
-          /** @var User $user */
+          /** @var User|null $user */
           $user = $this->user_manager->find($data[9]);
           $program->setUser($user);
           $program->setUploadLanguage($data[10]);
@@ -270,12 +262,12 @@ class ImportLegacyCommand extends Command
   }
 
   /**
-   * @param $program_file
+   * @param mixed $program_file
    *
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  protected function importProgramFiles($program_file)
+  protected function importProgramFiles($program_file): void
   {
     $row = 0;
     $skipped = 0;
@@ -327,9 +319,9 @@ class ImportLegacyCommand extends Command
   }
 
   /**
-   * @param $user_file
+   * @param mixed $user_file
    */
-  protected function importUsers($user_file)
+  protected function importUsers($user_file): void
   {
     print_r($user_file);
 
@@ -393,9 +385,9 @@ class ImportLegacyCommand extends Command
   }
 
   /**
-   * @param $id
+   * @param mixed $id
    */
-  private function importScreenshots($id)
+  private function importScreenshots($id): void
   {
     $screenhot_dir = $this->importdir.'/resources/thumbnails/';
     $screenshot_path = $screenhot_dir.$id.'_large.png';
@@ -407,12 +399,12 @@ class ImportLegacyCommand extends Command
   }
 
   /**
-   * @param $id
+   * @param mixed $id
    *
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  private function importProgramfile($id)
+  private function importProgramfile($id): void
   {
     $filepath = $this->importdir.'/resources/projects/'."{$id}".'.catrobat';
 
@@ -420,17 +412,16 @@ class ImportLegacyCommand extends Command
     {
       $extracted_catrobat_file = $this->file_extractor->extract(new File($filepath));
 
-      /** @var Program $program */
       $program = $this->program_manager->find($id);
 
       $this->remix_updater->update($extracted_catrobat_file, $program);
 
       $this->catrobat_file_repository->saveProgram($extracted_catrobat_file, $id);
-      $this->catrobat_file_repository->saveProgramfile(new File($filepath), $id);
+      $this->catrobat_file_repository->saveProgramFile(new File($filepath), $id);
     }
   }
 
-  private function writeln(string $string)
+  private function writeln(string $string): void
   {
     if (null != $this->output)
     {

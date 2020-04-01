@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,342 +16,244 @@ class ClickStatistic
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="text", options={"default": ""}, nullable=false)
    */
-  protected $type;
+  protected ?string $type = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Tag", inversedBy="tags")
    * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
    */
-  protected $tag;
+  protected ?Tag $tag = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Extension", inversedBy="extension")
    * @ORM\JoinColumn(name="extension_id", referencedColumnName="id", nullable=true)
    */
-  protected $extension;
+  protected ?Extension $extension = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-   *
-   * @var Program
    */
-  protected $program;
+  protected ?Program $program = null;
 
   /**
    * @ORM\Column(type="integer", nullable=true)
    */
-  protected $scratch_program_id;
+  protected ?int $scratch_program_id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program")
    * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  protected $recommended_from_program;
+  protected ?Program $recommended_from_program = null;
 
   /**
    * @ORM\Column(type="boolean", options={"default": false}, nullable=true)
    */
-  protected $user_specific_recommendation = false;
+  protected bool $user_specific_recommendation = false;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $clicked_at;
+  protected ?DateTime $clicked_at = null;
 
   /**
    * @ORM\Column(type="text", options={"default": ""})
    */
-  protected $ip;
+  protected string $ip = '';
 
   /**
    * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
-  protected $country_code;
+  protected ?string $country_code = '';
 
   /**
    * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
-  protected $country_name;
+  protected ?string $country_name = '';
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $locale;
+  protected ?string $locale = null;
 
   /**
    * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
-  protected $user_agent;
+  protected ?string $user_agent = '';
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  protected $user;
+  protected ?User $user = null;
 
   /**
    * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
-  protected $referrer;
+  protected ?string $referrer = '';
 
-  /**
-   * @return Program
-   */
-  public function getProgram()
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
 
-  /**
-   * @param Program $program
-   */
-  public function setProgram($program)
+  public function setProgram(?Program $program): void
   {
     $this->program = $program;
   }
 
-  /**
-   * @return int
-   */
-  public function getScratchProgramId()
+  public function getScratchProgramId(): ?int
   {
     return $this->scratch_program_id;
   }
 
-  /**
-   * @param int $scratch_program_id
-   */
-  public function setScratchProgramId($scratch_program_id)
+  public function setScratchProgramId(?int $scratch_program_id): void
   {
     $this->scratch_program_id = $scratch_program_id;
   }
 
-  /**
-   * @return Program
-   */
-  public function getRecommendedFromProgram()
+  public function getRecommendedFromProgram(): ?Program
   {
     return $this->recommended_from_program;
   }
 
-  /**
-   * @param Program $recommended_from_program
-   */
-  public function setRecommendedFromProgram($recommended_from_program)
+  public function setRecommendedFromProgram(?Program $recommended_from_program): void
   {
     $this->recommended_from_program = $recommended_from_program;
   }
 
-  /**
-   * @return bool
-   */
-  public function getUserSpecificRecommendation()
+  public function getUserSpecificRecommendation(): bool
   {
     return $this->user_specific_recommendation;
   }
 
-  /**
-   * @param bool $is_user_specific_recommendation
-   */
-  public function setUserSpecificRecommendation($is_user_specific_recommendation)
+  public function setUserSpecificRecommendation(bool $is_user_specific_recommendation): void
   {
     $this->user_specific_recommendation = $is_user_specific_recommendation;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getIp()
+  public function getIp(): string
   {
     return $this->ip;
   }
 
-  /**
-   * @param mixed $ip
-   */
-  public function setIp($ip)
+  public function setIp(string $ip): void
   {
     $this->ip = $ip;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCountryCode()
+  public function getCountryCode(): ?string
   {
     return $this->country_code;
   }
 
-  /**
-   * @param mixed $country_code
-   */
-  public function setCountryCode($country_code)
+  public function setCountryCode(?string $country_code): void
   {
     $this->country_code = $country_code;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCountryName()
+  public function getCountryName(): ?string
   {
     return $this->country_name;
   }
 
-  /**
-   * @param mixed $country_name
-   */
-  public function setCountryName($country_name)
+  public function setCountryName(?string $country_name): void
   {
     $this->country_name = $country_name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getLocale()
+  public function getLocale(): ?string
   {
     return $this->locale;
   }
 
-  /**
-   * @param mixed $locale
-   */
-  public function setLocale($locale)
+  public function setLocale(?string $locale): void
   {
     $this->locale = $locale;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUserAgent()
+  public function getUserAgent(): ?string
   {
     return $this->user_agent;
   }
 
-  /**
-   * @param mixed $user_agent
-   */
-  public function setUserAgent($user_agent)
+  public function setUserAgent(?string $user_agent): void
   {
     $this->user_agent = $user_agent;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUser()
+  public function getUser(): ?User
   {
     return $this->user;
   }
 
-  /**
-   * @param mixed $user
-   */
-  public function setUser($user)
+  public function setUser(?User $user): void
   {
     $this->user = $user;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getReferrer()
+  public function getReferrer(): ?string
   {
     return $this->referrer;
   }
 
-  /**
-   * @param mixed $referrer
-   */
-  public function setReferrer($referrer)
+  public function setReferrer(?string $referrer): void
   {
     $this->referrer = $referrer;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getType()
+  public function getType(): ?string
   {
     return $this->type;
   }
 
-  /**
-   * @param mixed $type
-   */
-  public function setType($type)
+  public function setType(?string $type): void
   {
     $this->type = $type;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getTag()
+  public function getTag(): ?Tag
   {
     return $this->tag;
   }
 
-  /**
-   * @param mixed $tag
-   */
-  public function setTag($tag)
+  public function setTag(?Tag $tag): void
   {
     $this->tag = $tag;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getExtension()
+  public function getExtension(): ?Extension
   {
     return $this->extension;
   }
 
-  /**
-   * @param mixed $extension
-   */
-  public function setExtension($extension)
+  public function setExtension(?Extension $extension): void
   {
     $this->extension = $extension;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getClickedAt()
+  public function getClickedAt(): ?DateTime
   {
     return $this->clicked_at;
   }
 
-  /**
-   * @param mixed $clicked_at
-   */
-  public function setClickedAt($clicked_at)
+  public function setClickedAt(?DateTime $clicked_at): void
   {
     $this->clicked_at = $clicked_at;
   }

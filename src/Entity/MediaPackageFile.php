@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity
@@ -10,268 +11,179 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MediaPackageFile
 {
-  /**
-   * @var
-   */
-  public $file;
+  public ?File $file = null;
 
-  /**
-   * @var
-   */
-  public $removed_id;
+  public ?int $removed_id;
 
-  /**
-   * @var
-   */
-  public $old_extension;
+  public ?string $old_extension;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="text", nullable=false)
    */
-  protected $name;
+  protected string $name = '';
 
   /**
    * @ORM\Column(type="string")
    */
-  protected $extension;
+  protected string $extension = '';
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $url;
+  protected ?string $url = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="MediaPackageCategory", inversedBy="files")
    */
-  protected $category;
+  protected ?MediaPackageCategory $category = null;
 
   /**
    * @ORM\Column(type="boolean")
    */
-  protected $active;
+  protected bool $active = true;
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $downloads = 0;
+  protected int $downloads = 0;
 
   /**
    * @ORM\Column(type="string", options={"default": "pocketcode"}, nullable=true)
    */
-  protected $flavor = 'pocketcode';
+  protected ?string $flavor = 'pocketcode';
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $author;
+  protected ?string $author = null;
 
-  /**
-   * @return bool
-   */
-  public function getActive()
+  public function getActive(): bool
   {
     return $this->active;
   }
 
-  /**
-   * @param mixed $active
-   *
-   * @return MediaPackageFile
-   */
-  public function setActive($active)
+  public function setActive(bool $active): MediaPackageFile
   {
     $this->active = $active;
 
     return $this;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): string
   {
     return $this->name;
   }
 
-  /**
-   * @param mixed $name
-   */
-  public function setName($name)
+  public function setName(string $name): void
   {
     $this->name = $name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUrl()
+  public function getUrl(): ?string
   {
     return $this->url;
   }
 
-  /**
-   * @param mixed $url
-   */
-  public function setUrl($url)
+  public function setUrl(?string $url): void
   {
     $this->url = $url;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCategory()
+  public function getCategory(): ?MediaPackageCategory
   {
     return $this->category;
   }
 
-  /**
-   * @param mixed $category
-   */
-  public function setCategory($category)
+  public function setCategory(MediaPackageCategory $category): void
   {
     $this->category = $category;
   }
 
-  /**
-   * Set extension.
-   *
-   * @param string $extension
-   *
-   * @return MediaPackageFile
-   */
-  public function setExtension($extension)
+  public function setExtension(string $extension): MediaPackageFile
   {
     $this->extension = $extension;
 
     return $this;
   }
 
-  /**
-   * Get extension.
-   *
-   * @return string
-   */
-  public function getExtension()
+  public function getExtension(): string
   {
     return $this->extension;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFile()
+  public function getFile(): ?File
   {
     return $this->file;
   }
 
-  /**
-   * @param mixed $file
-   */
-  public function setFile($file)
+  public function setFile(File $file): void
   {
     $this->file = $file;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getRemovedId()
+  public function getRemovedId(): ?int
   {
     return $this->removed_id;
   }
 
-  /**
-   * @param mixed $removed_id
-   */
-  public function setRemovedId($removed_id)
+  public function setRemovedId(?int $removed_id): void
   {
     $this->removed_id = $removed_id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getOldExtension()
+  public function getOldExtension(): ?string
   {
     return $this->old_extension;
   }
 
-  /**
-   * @param mixed $old_extension
-   */
-  public function setOldExtension($old_extension)
+  public function setOldExtension(string $old_extension): void
   {
     $this->old_extension = $old_extension;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getDownloads()
+  public function getDownloads(): int
   {
     return $this->downloads;
   }
 
-  /**
-   * @param mixed $downloads
-   */
-  public function setDownloads($downloads)
+  public function setDownloads(int $downloads): void
   {
     $this->downloads = $downloads;
   }
 
-  /**
-   * @return string
-   */
-  public function getFlavor()
+  public function getFlavor(): ?string
   {
     return $this->flavor;
   }
 
-  /**
-   * @param mixed $flavor
-   */
-  public function setFlavor($flavor)
+  public function setFlavor(?string $flavor): void
   {
     $this->flavor = $flavor;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getAuthor()
+  public function getAuthor(): ?string
   {
     return $this->author;
   }
 
-  /**
-   * @param mixed $author
-   */
-  public function setAuthor($author)
+  public function setAuthor(?string $author): void
   {
     $this->author = $author;
   }

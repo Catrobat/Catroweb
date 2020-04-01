@@ -14,24 +14,12 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class WebviewAuthenticator.
- */
 class WebviewJWTAuthenticator extends JWTTokenAuthenticator
 {
-  /**
-   * @var TranslatorInterface
-   */
-  protected $translator;
+  protected TranslatorInterface $translator;
 
-  /**
-   * @var SessionInterface
-   */
-  protected $session;
+  protected SessionInterface $session;
 
-  /**
-   * WebviewAuthenticator constructor.
-   */
   public function __construct(
     JWTTokenManagerInterface $jwtManager,
     EventDispatcherInterface $dispatcher,

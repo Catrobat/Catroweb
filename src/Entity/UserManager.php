@@ -3,17 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
 use FOS\UserBundle\Util\PasswordUpdaterInterface;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
-/**
- * Class UserManager.
- */
 class UserManager extends \Sonata\UserBundle\Entity\UserManager
 {
-  /**
-   * UserManager constructor.
-   */
   public function __construct(PasswordUpdaterInterface $passwordUpdater,
                               CanonicalFieldsUpdater $canonicalFieldsUpdater,
                               EntityManagerInterface $om)
@@ -21,14 +17,7 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
   }
 
-  /**
-   * @param $user
-   * @param $password
-   * @param $encoder
-   *
-   * @return mixed
-   */
-  public function isPasswordValid($user, $password, $encoder)
+  public function isPasswordValid(UserInterface $user, string $password, PasswordEncoderInterface $encoder): bool
   {
     return $encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt());
   }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,122 +17,94 @@ class StarterCategory
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="string", length=255)
    */
-  protected $name;
+  protected ?string $name = null;
 
   /**
    * @ORM\Column(type="string", length=255)
    */
-  protected $alias;
+  protected ?string $alias = null;
 
   /**
    * @ORM\Column(type="integer", name="order_pos")
    */
-  protected $order;
+  protected ?int $order = null;
 
   /**
    * @ORM\OneToMany(targetEntity="Program", mappedBy="category", fetch="EAGER")
    */
-  private $programs;
+  private Collection $programs;
 
-  /**
-   * @return string
-   */
-  public function __toString()
+  public function __construct()
+  {
+    $this->programs = new ArrayCollection();
+  }
+
+  public function __toString(): string
   {
     return (string) $this->alias;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPrograms()
+  public function getPrograms(): Collection
   {
     return $this->programs;
   }
 
-  /**
-   * @param mixed $programs
-   */
-  public function setPrograms($programs)
+  public function setPrograms(Collection $programs): void
   {
     $this->programs = $programs;
   }
 
-  public function addProgram(Program $program)
+  public function addProgram(Program $program): void
   {
     $program->setCategory($this);
   }
 
-  public function removeProgram(Program $program)
+  public function removeProgram(Program $program): void
   {
     $program->setCategory(null);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @param mixed $name
-   */
-  public function setName($name)
+  public function setName(?string $name): void
   {
     $this->name = $name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getAlias()
+  public function getAlias(): ?string
   {
     return $this->alias;
   }
 
-  /**
-   * @param mixed $alias
-   */
-  public function setAlias($alias)
+  public function setAlias(string $alias): void
   {
     $this->alias = $alias;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getOrder()
+  public function getOrder(): ?int
   {
     return $this->order;
   }
 
-  /**
-   * @param mixed $order
-   */
-  public function setOrder($order)
+  public function setOrder(int $order): void
   {
     $this->order = $order;
   }

@@ -10,41 +10,26 @@ use App\Entity\Program;
 use App\Entity\RemixManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * Class RemixUpdater.
- */
 class RemixUpdater
 {
-  const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
-  /**
-   * @var RemixManager the remix manager
-   */
-  private $remix_manager;
-
-  /**
-   * @var AsyncHttpClient
-   */
-  private $async_http_client;
-
-  /**
-   * @var RouterInterface the router
-   */
-  private $router;
-
   /**
    * @var string
    */
-  private $migration_lock_file_path;
+  const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
 
-  /**
-   * RemixUpdater constructor.
-   *
-   * @param $kernel_root_dir
-   */
+  private RemixManager $remix_manager;
+
+  private AsyncHttpClient $async_http_client;
+
+  private RouterInterface $router;
+
+  private string $migration_lock_file_path;
+
   public function __construct(RemixManager $remix_manager, AsyncHttpClient $async_http_client, RouterInterface $router,
-                              $kernel_root_dir)
+                              string $kernel_root_dir)
   {
     $this->remix_manager = $remix_manager;
     $this->async_http_client = $async_http_client;
@@ -57,7 +42,7 @@ class RemixUpdater
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function onProgramAfterInsert(ProgramAfterInsertEvent $event)
+  public function onProgramAfterInsert(ProgramAfterInsertEvent $event): void
   {
     $this->update($event->getExtractedFile(), $event->getProgramEntity());
   }
@@ -65,18 +50,16 @@ class RemixUpdater
   /**
    * @throws ORMException
    * @throws OptimisticLockException
+   * @throws Exception
    */
-  public function update(ExtractedCatrobatFile $file, Program $program)
+  public function update(ExtractedCatrobatFile $file, Program $program): void
   {
     $remixes_data = $file->getRemixesData(
       $program->getId(),
       $program->isInitialVersion(),
       $this->remix_manager->getProgramRepository()
     );
-    $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data)
-    {
-      return $remix_data->isScratchProgram();
-    });
+    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data) => $remix_data->isScratchProgram());
     $scratch_info_data = [];
     $program_xml_properties = $file->getProgramXmlProperties();
     $remix_url_string = $file->getRemixUrlsString();
@@ -91,10 +74,7 @@ class RemixUpdater
 
     if (count($scratch_remixes_data) > 0)
     {
-      $scratch_ids = array_map(function (RemixData $data)
-      {
-        return $data->getProgramId();
-      }, $scratch_remixes_data);
+      $scratch_ids = array_map(fn (RemixData $data) => $data->getProgramId(), $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
       $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails($not_existing_scratch_ids);

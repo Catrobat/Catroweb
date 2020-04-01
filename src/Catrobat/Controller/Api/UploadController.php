@@ -45,9 +45,6 @@ class UploadController
 
   private EntityManagerInterface $em;
 
-  /**
-   * UploadController constructor.
-   */
   public function __construct(UserManager $user_manager, TokenStorageInterface $token_storage,
                               ProgramManager $program_manager, GameJamRepository $game_jam_repository,
                               TranslatorInterface $translator, LoggerInterface $logger,
@@ -128,6 +125,7 @@ class UploadController
 
     $flavor = 'pocketcode';
 
+    /** @var User $user */
     $user = $this->token_storage->getToken()->getUser();
 
     // Needed (for tests) to make sure everything is up to date (followers, ..)
@@ -149,6 +147,7 @@ class UploadController
     }
     else
     {
+      /** @var User $follower */
       foreach ($user->getFollowers() as $follower)
       {
         $notification = new NewProgramNotification($follower, $program);

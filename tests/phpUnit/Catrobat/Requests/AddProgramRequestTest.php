@@ -47,9 +47,9 @@ class AddProgramRequestTest extends TestCase
   public function testHoldsAFile(): void
   {
     $new_file = $this->file;
-    $this->assertSame($this->file, $this->add_program_request->getProgramfile());
-    $this->add_program_request->setProgramfile($new_file);
-    $this->assertSame($new_file, $this->add_program_request->getProgramfile());
+    $this->assertSame($this->file, $this->add_program_request->getProgramFile());
+    $this->add_program_request->setProgramFile($new_file);
+    $this->assertSame($new_file, $this->add_program_request->getProgramFile());
   }
 
   public function testHoldsAnIp(): void
@@ -59,7 +59,7 @@ class AddProgramRequestTest extends TestCase
 
   public function testNotAGameJam(): void
   {
-    $this->assertNull($this->add_program_request->getGamejam());
+    $this->assertNull($this->add_program_request->getGameJam());
   }
 
   public function testHasALanguage(): void

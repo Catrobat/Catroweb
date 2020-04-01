@@ -14,9 +14,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class ApiTokenAuthenticator.
- */
 class ApiTokenAuthenticator extends AbstractGuardAuthenticator
 {
   /**
@@ -24,22 +21,15 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    *
    *  Must be sent in the request HEADER containing the user token
    *  Must not be empty
+   *
+   * @var string
    */
   const TOKEN = 'authenticate';
 
-  /**
-   * @var TranslatorInterface
-   */
-  protected $translator;
+  protected TranslatorInterface $translator;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $em;
+  private EntityManagerInterface $em;
 
-  /**
-   * ApiTokenAuthenticator constructor.
-   */
   public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
   {
     $this->em = $em;

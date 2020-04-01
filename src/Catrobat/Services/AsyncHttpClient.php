@@ -6,30 +6,20 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Promise\EachPromise;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Class AsyncHttpClient.
- */
 class AsyncHttpClient
 {
   private array $config;
 
   private Client $async_http_client;
 
-  private ?array $scratch_info_data;
+  private ?array $scratch_info_data = null;
 
-  /**
-   * AsyncHttpClient constructor.
-   */
   public function __construct(array $config = [])
   {
     $this->config = $config;
     $this->async_http_client = new Client($config);
-    $this->scratch_info_data = null;
   }
 
-  /**
-   * @param RemixData[] $scratch_program_ids
-   */
   public function fetchScratchProgramDetails(array $scratch_program_ids): array
   {
     if (0 === count($scratch_program_ids))
@@ -46,7 +36,7 @@ class AsyncHttpClient
 
     $promises = (function () use ($scratch_program_ids)
     {
-      /* @var Client $http_client */
+      /** @var string $scratch_program_id */
       foreach ($scratch_program_ids as $scratch_program_id)
       {
         $scratch_api_url = 'https://api.scratch.mit.edu/projects/'.$scratch_program_id.'/?format=json';
@@ -67,10 +57,10 @@ class AsyncHttpClient
       'concurrency' => $max_number_of_concurrent_requests,
       'fulfilled' => function (ResponseInterface $responses)
       {
-        $data = @json_decode($responses->getBody(), true);
-        if (null != $data && array_key_exists('id', $data) && intval($data['id']) > 0)
+        $data = @json_decode($responses->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        if (null != $data && array_key_exists('id', $data) && (int) $data['id'] > 0)
         {
-          $this->scratch_info_data[intval($data['id'])] = $data;
+          $this->scratch_info_data[(int) $data['id']] = $data;
         }
       },
     ]))->promise()->wait();

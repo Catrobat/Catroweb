@@ -3,7 +3,9 @@
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
+use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\ScriptFactory;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use SimpleXMLElement;
 
@@ -27,14 +29,17 @@ class ScriptsTest extends TestCase
   const IMG_FILE = 'img_file';
 
   /**
-   * @var SimpleXMLElement[]|bool
+   * @var SimpleXMLElement[]
    */
-  protected $script_xml_properties_list;
+  protected array $script_xml_properties_list;
 
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
-    $this->script_xml_properties_list = $xml_properties->xpath('//script');
+    Assert::assertNotFalse($xml_properties);
+    $xml_script = $xml_properties->xpath('//script');
+    Assert::assertNotFalse($xml_script);
+    $this->script_xml_properties_list = $xml_script;
   }
 
   /**
@@ -90,10 +95,17 @@ class ScriptsTest extends TestCase
 
     $reference_output =
       file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/script_reference.output', FILE_IGNORE_NEW_LINES);
+    Assert::assertNotFalse($reference_output);
+
     $reference_output_index = 0;
 
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
-    foreach ($xml_properties->xpath('//script') as $script_xml_properties)
+    Assert::assertNotFalse($xml_properties);
+
+    $xml_script = $xml_properties->xpath('//script');
+    Assert::assertNotFalse($xml_script);
+
+    foreach ($xml_script as $script_xml_properties)
     {
       $expected = [
         self::TYPE => $reference_output[$reference_output_index++],
@@ -116,7 +128,7 @@ class ScriptsTest extends TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function factoryMustGenerateUnknownScriptOtherwise()
+  public function factoryMustGenerateUnknownScriptOtherwise(): ?Script
   {
     $script_xml_properties = $this->script_xml_properties_list[0];
     $script_xml_properties[Constants::TYPE_ATTRIBUTE] = 'Foo'; // Fake random script

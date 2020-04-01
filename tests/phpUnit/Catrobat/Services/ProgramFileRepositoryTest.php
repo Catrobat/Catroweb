@@ -19,9 +19,6 @@ use Tests\phpUnit\Hook\ClearCacheHook;
  */
 class ProgramFileRepositoryTest extends TestCase
 {
-  /**
-   * @var string
-   */
   private string $storage_dir;
 
   private Filesystem $filesystem;
@@ -60,7 +57,7 @@ class ProgramFileRepositoryTest extends TestCase
     $id = 'test';
     $file = new File($file_name);
 
-    $this->program_file_repository->saveProgramfile($file, $id);
+    $this->program_file_repository->saveProgramFile($file, $id);
 
     $finder = new Finder();
     Assert::assertEquals(1, $finder->files()->in($this->storage_dir)->count());
@@ -83,7 +80,7 @@ class ProgramFileRepositoryTest extends TestCase
     $id = 'test';
     $file = new File($file_name);
 
-    $this->program_file_repository->saveProgramfile($file, $id);
+    $this->program_file_repository->saveProgramFile($file, $id);
 
     $original_md5_sum = md5_file($file);
     $returned_file = $this->program_file_repository->getProgramFile($id);

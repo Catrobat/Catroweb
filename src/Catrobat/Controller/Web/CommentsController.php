@@ -5,7 +5,6 @@ namespace App\Catrobat\Controller\Web;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\StatusCode;
 use App\Entity\CommentNotification;
-use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserComment;
@@ -50,7 +49,7 @@ class CommentsController extends AbstractController
    */
   public function deleteCommentAction(): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -80,7 +79,7 @@ class CommentsController extends AbstractController
    */
   public function postCommentAction(CatroNotificationService $notification_service, ProgramManager $program_manager): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (null === $user)
     {
@@ -89,7 +88,6 @@ class CommentsController extends AbstractController
 
     $user = $this->get('security.token_storage')->getToken()->getUser();
 
-    /** @var Program $program */
     $program = $program_manager->find($_POST['ProgramId']);
 
     $temp_comment = new UserComment();

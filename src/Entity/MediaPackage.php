@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,24 +17,29 @@ class MediaPackage
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="text", nullable=false)
    */
-  protected $name;
+  protected ?string $name = null;
 
   /**
    * @ORM\Column(type="text", nullable=false)
    */
-  protected $nameUrl;
+  protected ?string $nameUrl = null;
 
   /**
    * @ORM\ManyToMany(targetEntity="MediaPackageCategory", mappedBy="package")
    */
-  protected $categories;
+  protected Collection $categories;
 
-  protected $flavors = [];
+  protected array $flavors = [];
+
+  public function __construct()
+  {
+    $this->categories = new ArrayCollection();
+  }
 
   public function __toString()
   {
@@ -49,66 +56,42 @@ class MediaPackage
     $this->flavors = $flavors;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @param mixed $name
-   */
-  public function setName($name)
+  public function setName(string $name): void
   {
     $this->name = $name;
   }
 
-  /**
-   * @return string
-   */
-  public function getNameUrl()
+  public function getNameUrl(): ?string
   {
     return $this->nameUrl;
   }
 
-  /**
-   * @param mixed $name_url
-   */
-  public function setNameUrl($name_url)
+  public function setNameUrl(string $name_url): void
   {
     $this->nameUrl = $name_url;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCategories()
+  public function getCategories(): Collection
   {
     return $this->categories;
   }
 
-  /**
-   * @param mixed $categories
-   */
-  public function setCategories($categories)
+  public function setCategories(Collection $categories): void
   {
     $this->categories = $categories;
   }

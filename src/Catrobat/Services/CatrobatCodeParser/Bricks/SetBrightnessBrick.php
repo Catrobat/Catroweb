@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class SetBrightnessBrick.
- */
 class SetBrightnessBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::SET_BRIGHTNESS_BRICK;
     $this->caption = 'Set brightness to _ %';

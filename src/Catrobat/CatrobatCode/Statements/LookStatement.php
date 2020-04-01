@@ -2,31 +2,17 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
+use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
+use SimpleXMLElement;
 
-/**
- * Class LookStatement.
- */
 class LookStatement extends Statement
 {
-  /**
-   * @var
-   */
-  private $value;
-  /**
-   * @var Statement
-   */
-  private $fileName;
+  private ?string $value = null;
 
-  /**
-   * LookStatement constructor.
-   *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $value
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, $value)
+  private ?Statement $fileName = null;
+
+  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, string $value)
   {
     $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -34,20 +20,17 @@ class LookStatement extends Statement
       '');
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     $this->findNames();
 
     $code = '';
 
-    if (null != $this->value)
+    if (null !== $this->value)
     {
       $code = SyntaxHighlightingConstants::VARIABLES.$this->value.SyntaxHighlightingConstants::END;
     }
-    if (null != $this->fileName)
+    if (null !== $this->fileName)
     {
       $code .= ' (filename: '.$this->fileName->execute().')';
     }
@@ -71,17 +54,14 @@ class LookStatement extends Statement
     return $this->fileName;
   }
 
-  private function findNames()
+  private function findNames(): void
   {
     $tmpStatements = parent::getStatements();
     foreach ($tmpStatements as $statement)
     {
-      if (null != $statement)
+      if (null != $statement && $statement instanceof FileNameStatement)
       {
-        if ($statement instanceof FileNameStatement)
-        {
-          $this->fileName = $statement;
-        }
+        $this->fileName = $statement;
       }
     }
   }

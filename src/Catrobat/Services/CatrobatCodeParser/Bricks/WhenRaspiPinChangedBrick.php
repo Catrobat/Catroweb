@@ -5,12 +5,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
 
-/**
- * Class WhenRaspiPinChangedBrick.
- */
 class WhenRaspiPinChangedBrick extends Script
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::WHEN_RASPI_PIN_CHANGED_BRICK;
     $this->caption = 'When Raspberry pin _ changes to _';

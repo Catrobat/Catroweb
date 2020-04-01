@@ -5,6 +5,7 @@ namespace App\DQL;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
+use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\Query\SqlWalker;
 
 /**
@@ -17,24 +18,21 @@ use Doctrine\ORM\Query\SqlWalker;
 class TimeDiff extends FunctionNode
 {
   /**
-   * @var string
+   * @var mixed
    */
   public $dateTime1;
 
   /**
-   * @var string
+   * @var mixed
    */
   public $dateTime2;
 
-  /**
-   * @var string
-   */
-  public $type;
+  public string $type;
 
   /**
-   * @throws \Doctrine\ORM\Query\QueryException
+   * @throws QueryException
    */
-  public function parse(Parser $parser)
+  public function parse(Parser $parser): void
   {
     $parser->match(Lexer::T_IDENTIFIER);
     $parser->match(Lexer::T_OPEN_PARENTHESIS);
@@ -46,10 +44,7 @@ class TimeDiff extends FunctionNode
     $parser->match(Lexer::T_CLOSE_PARENTHESIS);
   }
 
-  /**
-   * @return string
-   */
-  public function getSql(SqlWalker $sqlWalker)
+  public function getSql(SqlWalker $sqlWalker): string
   {
     switch ($this->type)
     {
@@ -57,16 +52,16 @@ class TimeDiff extends FunctionNode
         $time = 60;
         break;
       case 'hour':
-        $time = 3600;
+        $time = 3_600;
         break;
       case 'day':
-        $time = 86400;
+        $time = 86_400;
         break;
       case 'month':
-        $time = 2622585.6;
+        $time = 2_622_585.6;
         break;
       case 'year':
-        $time = 31471200;
+        $time = 31_471_200;
         break;
       default:
         $time = 1;

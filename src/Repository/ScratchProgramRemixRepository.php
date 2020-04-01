@@ -6,9 +6,6 @@ use App\Entity\ScratchProgramRemixRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class ScratchProgramRemixRepository.
- */
 class ScratchProgramRemixRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -17,11 +14,11 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param int[] $program_ids
+   * @param string[] $program_ids
    *
-   * @return int[]
+   * @return string[]
    */
-  public function getDirectEdgeRelationsOfProgramIds(array $program_ids)
+  public function getDirectEdgeRelationsOfProgramIds(array $program_ids): array
   {
     $qb = $this->createQueryBuilder('s');
 
@@ -36,9 +33,9 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param int[] $scratch_parent_program_ids
+   * @param string[] $scratch_parent_program_ids
    */
-  public function removeParentRelations(string $program_id, array $scratch_parent_program_ids)
+  public function removeParentRelations(string $program_id, array $scratch_parent_program_ids): void
   {
     $qb = $this->createQueryBuilder('s');
 
@@ -53,7 +50,7 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
     ;
   }
 
-  public function removeAllRelations()
+  public function removeAllRelations(): void
   {
     $qb = $this->createQueryBuilder('s');
 

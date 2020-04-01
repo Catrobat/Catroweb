@@ -4,17 +4,16 @@ namespace App\Admin;
 
 use App\Entity\User;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-/**
- * Class ReportedUsersAdmin.
- */
 class ReportedUsersAdmin extends AbstractAdmin
 {
   /**
@@ -31,14 +30,22 @@ class ReportedUsersAdmin extends AbstractAdmin
   {
     $query = parent::configureQuery($query);
 
-    $rootAlias = $query->getRootAliases()[0];
+    if (!$query instanceof ProxyQuery)
+    {
+      return $query;
+    }
+
+    /** @var QueryBuilder $qb */
+    $qb = $query->getQueryBuilder();
+
+    $rootAlias = $qb->getRootAliases()[0];
     $parameters = $this->getFilterParameters();
 
     if ('getReportedCommentsCount' === $parameters['_sort_by'])
     {
-      $query->leftJoin('App\Entity\UserComment', 'cm',
+      $qb->leftJoin('App\Entity\UserComment', 'cm',
             Join::WITH, $rootAlias.'.id = cm.user')
-        ->where($query->expr()->eq('cm.isReported', '1'))
+        ->where($qb->expr()->eq('cm.isReported', '1'))
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(cm.user )', $parameters['_sort_order'])
           ;
@@ -46,12 +53,12 @@ class ReportedUsersAdmin extends AbstractAdmin
 
     if ('getProgramInappropriateReportsCount' === $parameters['_sort_by'])
     {
-      $query
+      $qb
         ->leftJoin('App\Entity\Program', 'p', Join::WITH,
               $rootAlias.'.id = p.user')
         ->leftJoin('App\Entity\ProgramInappropriateReport',
               'pr', Join::WITH, 'p.id = pr.program')
-        ->where($query->expr()->isNotNull('pr.program'))
+        ->where($qb->expr()->isNotNull('pr.program'))
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(pr.program)', $parameters['_sort_order'])
           ;
@@ -60,14 +67,14 @@ class ReportedUsersAdmin extends AbstractAdmin
     return $query;
   }
 
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('user', EntityType::class, ['class' => User::class])
       ;
   }
 
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->add(
@@ -101,7 +108,7 @@ class ReportedUsersAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper->add('username', null, [
       'show_filter' => true,
@@ -111,7 +118,7 @@ class ReportedUsersAdmin extends AbstractAdmin
       ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete');
   }

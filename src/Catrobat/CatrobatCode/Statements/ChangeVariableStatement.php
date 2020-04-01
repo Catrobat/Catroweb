@@ -2,20 +2,23 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class ChangeVariableStatement.
- */
 class ChangeVariableStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'change ';
+  /**
+   * @var string
+   */
   const END_STRING = ')<br/>';
 
   /**
    * ChangeVariableStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -24,10 +27,7 @@ class ChangeVariableStatement extends Statement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $variable_name = $this->xmlTree->userVariable;
 
@@ -37,10 +37,7 @@ class ChangeVariableStatement extends Statement
     return 'Change variable '.$variable_name.' by '.$formula_string_without_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
     return '1h_brick_red.png';
   }

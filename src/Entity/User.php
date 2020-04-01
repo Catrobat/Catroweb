@@ -20,6 +20,8 @@ class User extends BaseUser implements LdapUserInterface
    * @ORM\Column(name="id", type="guid")
    * @ORM\GeneratedValue(strategy="CUSTOM")
    * @ORM\CustomIdGenerator(class="App\Utils\MyUuidGenerator")
+   *
+   * @var string
    */
   protected $id;
 
@@ -28,27 +30,27 @@ class User extends BaseUser implements LdapUserInterface
    *
    * @ORM\Column(type="string", length=300, nullable=true)
    */
-  protected $upload_token;
+  protected ?string $upload_token = null;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $avatar;
+  protected ?string $avatar = null;
 
   /**
    * @ORM\Column(type="string", length=5, nullable=false, options={"default": ""})
    */
-  protected $country;
+  protected string $country = '';
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $additional_email;
+  protected ?string $additional_email = null;
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $dn;
+  protected ?string $dn = null;
 
   /**
    * Programs owned by this user.
@@ -60,10 +62,8 @@ class User extends BaseUser implements LdapUserInterface
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
    * )
-   *
-   * @var Collection|Program[]
    */
-  protected $programs;
+  protected Collection $programs;
 
   /**
    * Notifications which are available for this user (shown upon login).
@@ -75,10 +75,8 @@ class User extends BaseUser implements LdapUserInterface
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
    * )
-   *
-   * @var Collection|CatroNotification[]
    */
-  protected $notifications;
+  protected Collection $notifications;
 
   /**
    * Comments written by this user.
@@ -90,10 +88,8 @@ class User extends BaseUser implements LdapUserInterface
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
    * )
-   *
-   * @var Collection|UserComment[]
    */
-  protected $comments;
+  protected Collection $comments;
 
   /**
    * FollowNotifications mentioning this user as a follower.
@@ -106,10 +102,8 @@ class User extends BaseUser implements LdapUserInterface
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
    * )
-   *
-   * @var Collection|FollowNotification[]
    */
-  protected $follow_notification_mentions;
+  protected Collection $follow_notification_mentions;
 
   /**
    * LikeNotifications mentioning this user as giving a like to another user.
@@ -122,20 +116,18 @@ class User extends BaseUser implements LdapUserInterface
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
    * )
-   *
-   * @var Collection|LikeNotification[]
    */
-  protected $like_notification_mentions;
+  protected Collection $like_notification_mentions;
 
   /**
    * @ORM\ManyToMany(targetEntity="\App\Entity\User", mappedBy="following")
    */
-  protected $followers;
+  protected Collection $followers;
 
   /**
    * @ORM\ManyToMany(targetEntity="\App\Entity\User", inversedBy="followers")
    */
-  protected $following;
+  protected Collection $following;
 
   /**
    * @ORM\OneToMany(
@@ -144,10 +136,8 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   *
-   * @var Collection|ProgramLike[]
    */
-  protected $likes;
+  protected Collection $likes;
 
   /**
    * @ORM\OneToMany(
@@ -156,10 +146,8 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   *
-   * @var Collection|UserLikeSimilarityRelation[]
    */
-  protected $relations_of_similar_users_based_on_likes;
+  protected Collection $relations_of_similar_users_based_on_likes;
 
   /**
    * @ORM\OneToMany(
@@ -168,10 +156,8 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   *
-   * @var Collection|UserLikeSimilarityRelation[]
    */
-  protected $reverse_relations_of_similar_users_based_on_likes;
+  protected Collection $reverse_relations_of_similar_users_based_on_likes;
 
   /**
    * @ORM\OneToMany(
@@ -180,10 +166,8 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   *
-   * @var Collection|UserRemixSimilarityRelation[]
    */
-  protected $relations_of_similar_users_based_on_remixes;
+  protected Collection $relations_of_similar_users_based_on_remixes;
 
   /**
    * @ORM\OneToMany(
@@ -192,92 +176,78 @@ class User extends BaseUser implements LdapUserInterface
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   *
-   * @var Collection|UserRemixSimilarityRelation[]
    */
-  protected $reverse_relations_of_similar_users_based_on_remixes;
+  protected Collection $reverse_relations_of_similar_users_based_on_remixes;
 
   /**
    * @ORM\Column(type="string", length=300, nullable=true)
    */
-  protected $gplus_access_token;
+  protected ?string $gplus_access_token = null;
 
   /**
    * @ORM\Column(type="string", length=5000, nullable=true)
    */
-  protected $gplus_id_token;
+  protected ?string $gplus_id_token = null;
 
   /**
    * @ORM\Column(type="string", length=300, nullable=true)
    */
-  protected $gplus_refresh_token;
+  protected ?string $gplus_refresh_token = null;
 
   /**
    * @ORM\Column(type="boolean", options={"default": false})
    */
-  protected $limited = false;
+  protected bool $limited = false;
 
   /**
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="reportingUser", fetch="EXTRA_LAZY")
    */
-  protected $program_inappropriate_reports;
+  protected Collection $program_inappropriate_reports;
 
-  /**
-   * User constructor.
-   */
   public function __construct()
   {
     parent::__construct();
     $this->programs = new ArrayCollection();
+    $this->notifications = new ArrayCollection();
+    $this->comments = new ArrayCollection();
+    $this->follow_notification_mentions = new ArrayCollection();
+    $this->like_notification_mentions = new ArrayCollection();
     $this->followers = new ArrayCollection();
     $this->following = new ArrayCollection();
-    $this->country = '';
+    $this->likes = new ArrayCollection();
+    $this->relations_of_similar_users_based_on_likes = new ArrayCollection();
+    $this->reverse_relations_of_similar_users_based_on_likes = new ArrayCollection();
+    $this->relations_of_similar_users_based_on_remixes = new ArrayCollection();
+    $this->reverse_relations_of_similar_users_based_on_remixes = new ArrayCollection();
+    $this->program_inappropriate_reports = new ArrayCollection();
   }
 
-  /**
-   * @param mixed $gplus_access_token
-   */
-  public function setGplusAccessToken($gplus_access_token)
+  public function setGplusAccessToken(?string $gplus_access_token): void
   {
     $this->gplus_access_token = $gplus_access_token;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getGplusAccessToken()
+  public function getGplusAccessToken(): ?string
   {
     return $this->gplus_access_token;
   }
 
-  /**
-   * @param mixed $gplus_id_token
-   */
-  public function setGplusIdToken($gplus_id_token)
+  public function setGplusIdToken(?string $gplus_id_token): void
   {
     $this->gplus_id_token = $gplus_id_token;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getGplusIdToken()
+  public function getGplusIdToken(): ?string
   {
     return $this->gplus_id_token;
   }
 
-  /**
-   * @param mixed $gplus_refresh_token
-   */
-  public function setGplusRefreshToken($gplus_refresh_token)
+  public function setGplusRefreshToken(?string $gplus_refresh_token): void
   {
     $this->gplus_refresh_token = $gplus_refresh_token;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getGplusRefreshToken()
+  public function getGplusRefreshToken(): ?string
   {
     return $this->gplus_refresh_token;
   }
@@ -287,110 +257,66 @@ class User extends BaseUser implements LdapUserInterface
     return $this->id;
   }
 
-  /**
-   * Add programs.
-   *
-   * @return User
-   */
-  public function addProgram(Program $programs)
+  public function addProgram(Program $program): User
   {
-    $this->programs[] = $programs;
+    $this->programs[] = $program;
 
     return $this;
   }
 
-  /**
-   * Remove programs.
-   */
-  public function removeProgram(Program $programs)
+  public function removeProgram(Program $program): void
   {
-    $this->programs->removeElement($programs);
+    $this->programs->removeElement($program);
   }
 
-  /**
-   * Get programs.
-   *
-   * @return Collection
-   */
-  public function getPrograms()
+  public function getPrograms(): Collection
   {
     return $this->programs;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUploadToken()
+  public function getUploadToken(): ?string
   {
     return $this->upload_token;
   }
 
-  /**
-   * @param $upload_token
-   */
-  public function setUploadToken($upload_token)
+  public function setUploadToken(?string $upload_token): void
   {
     $this->upload_token = $upload_token;
   }
 
-  /**
-   * @return string
-   */
-  public function getCountry()
+  public function getCountry(): string
   {
     return $this->country;
   }
 
-  /**
-   * @param $country
-   *
-   * @return $this
-   */
-  public function setCountry($country)
+  public function setCountry(string $country): User
   {
     $this->country = $country;
 
     return $this;
   }
 
-  /**
-   * @param $id
-   */
-  public function setId($id)
+  public function setId(string $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @param mixed $additional_email
-   */
-  public function setAdditionalEmail($additional_email)
+  public function setAdditionalEmail(?string $additional_email): void
   {
     $this->additional_email = $additional_email;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getAdditionalEmail()
+  public function getAdditionalEmail(): ?string
   {
     return $this->additional_email;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getAvatar()
+  public function getAvatar(): ?string
   {
     return $this->avatar;
   }
 
-  /**
-   * @param $avatar
-   *
-   * @return $this
-   */
-  public function setAvatar($avatar)
+  public function setAvatar(?string $avatar): User
   {
     $this->avatar = $avatar;
 
@@ -399,157 +325,102 @@ class User extends BaseUser implements LdapUserInterface
 
   /**
    * Set Ldap Distinguished Name.
-   *
-   * @param string $dn
-   *                   Distinguished Name
    */
-  public function setDn($dn)
+  public function setDn(string $dn): void
   {
     $this->dn = strtolower($dn);
   }
 
   /**
    * Get Ldap Distinguished Name.
-   *
-   * @return string Distinguished Name
    */
-  public function getDn(): string
+  public function getDn(): ?string
   {
     return null !== $this->dn ? $this->dn : '';
   }
 
-  /**
-   * @return bool
-   */
-  public function isLimited()
+  public function isLimited(): bool
   {
     return $this->limited;
   }
 
-  /**
-   * @param $limited
-   */
-  public function setLimited($limited)
+  public function setLimited(bool $limited): void
   {
     $this->limited = $limited;
   }
 
-  /**
-   * @return ProgramLike[]|Collection
-   */
-  public function getLikes()
+  public function getLikes(): Collection
   {
-    return (null != $this->likes) ? $this->likes : new ArrayCollection();
+    return $this->likes;
   }
 
-  /**
-   * @param ProgramLike[]|Collection $likes
-   */
-  public function setLikes($likes)
+  public function setLikes(Collection $likes): void
   {
     $this->likes = $likes;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFollowers()
+  public function getFollowers(): Collection
   {
     return $this->followers;
   }
 
-  /**
-   * @param $follower
-   */
-  public function addFollower($follower)
+  public function addFollower(User $follower): void
   {
     $this->followers->add($follower);
   }
 
-  /**
-   * @param $follower
-   */
-  public function removeFollower($follower)
+  public function removeFollower(User $follower): void
   {
     $this->followers->removeElement($follower);
   }
 
-  /**
-   * @param $user
-   *
-   * @return bool
-   */
-  public function hasFollower($user)
+  public function hasFollower(User $user): bool
   {
     return $this->followers->contains($user);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFollowing()
+  public function getFollowing(): Collection
   {
     return $this->following;
   }
 
-  /**
-   * @param $follower
-   */
-  public function addFollowing($follower)
+  public function addFollowing(User $follower): void
   {
     $this->following->add($follower);
   }
 
-  /**
-   * @param $follower
-   */
-  public function removeFollowing($follower)
+  public function removeFollowing(User $follower): void
   {
     $this->following->removeElement($follower);
   }
 
-  /**
-   * @param $user
-   *
-   * @return bool
-   */
-  public function isFollowing($user)
+  public function isFollowing(User $user): bool
   {
     return $this->following->contains($user);
   }
 
   /**
    * Returns the FollowNotifications mentioning this user as a follower.
-   *
-   * @return FollowNotification[]|Collection
    */
-  public function getFollowNotificationMentions()
+  public function getFollowNotificationMentions(): Collection
   {
     return $this->follow_notification_mentions;
   }
 
   /**
    * Sets the FollowNotifications mentioning this user as a follower.
-   *
-   * @param FollowNotification[]|Collection $follow_notification_mentions
    */
-  public function setFollowNotificationMentions($follow_notification_mentions): void
+  public function setFollowNotificationMentions(Collection $follow_notification_mentions): void
   {
     $this->follow_notification_mentions = $follow_notification_mentions;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getProgramInappropriateReports()
+  public function getProgramInappropriateReports(): Collection
   {
     return $this->program_inappropriate_reports;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getProgramInappropriateReportsCount()
+  public function getProgramInappropriateReportsCount(): int
   {
     $programs_collection = $this->getPrograms();
     $programs = $programs_collection->getValues();
@@ -562,19 +433,14 @@ class User extends BaseUser implements LdapUserInterface
     return $count;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getComments()
+  public function getComments(): Collection
   {
     return $this->comments;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getReportedCommentsCount()
+  public function getReportedCommentsCount(): int
   {
+    /** @var ArrayCollection $comments_collection */
     $comments_collection = $this->getComments();
     $criteria = Criteria::create()->andWhere(Criteria::expr()->eq('isReported', 1));
 

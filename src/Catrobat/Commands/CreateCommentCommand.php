@@ -2,59 +2,44 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Commands\Helpers\RemixManipulationProgramManager;
-use App\Catrobat\Commands\Helpers\ResetController;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\CommentNotification;
 use App\Entity\Program;
+use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Entity\UserComment;
 use App\Entity\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class CreateCommentCommand.
- */
 class CreateCommentCommand extends Command
 {
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  protected static $defaultName = 'catrobat:comment';
 
-  /**
-   * @var RemixManipulationProgramManager
-   */
-  private $remix_manipulation_program_manager;
+  private UserManager $user_manager;
 
-  /**
-   * @var ResetController
-   */
-  private $reset_controller;
+  private ProgramManager $program_manager;
 
-  /**
-   * @var CatroNotificationService
-   */
-  private $notification_service;
+  private CatroNotificationService $notification_service;
 
-  /**
-   * ProgramImportCommand constructor.
-   */
-  public function __construct(UserManager $user_manager,
-                              RemixManipulationProgramManager $program_manager,
-                              ResetController $reset_controller,
+  private EntityManagerInterface $em;
+
+  public function __construct(UserManager $user_manager, EntityManagerInterface $em,
+                              ProgramManager $program_manager,
                               CatroNotificationService $notification_service)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
-    $this->remix_manipulation_program_manager = $program_manager;
-    $this->reset_controller = $reset_controller;
+    $this->em = $em;
+    $this->program_manager = $program_manager;
     $this->notification_service = $notification_service;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:comment')
       ->setDescription('Add comment to a project')
@@ -66,40 +51,67 @@ class CreateCommentCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    /**
-     * @var User
-     * @var Program $program
-     */
     $username = $input->getArgument('user');
     $program_name = $input->getArgument('program_name');
     $message = $input->getArgument('message');
-    $reported = $input->getArgument('reported');
+    $reported = 'true' === $input->getArgument('reported');
 
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
-    $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
 
-    if (null == $user || null == $program)
+    $program = $this->program_manager->findOneByName($program_name);
+
+    if (null === $user || null === $program)
     {
-      return;
+      return -1;
     }
 
     try
     {
-      /** @var User $user */
-      $notification = new CommentNotification($user, null);
-      $this->reset_controller->postComment($user, $program, $message, $reported, $notification);
-      $this->notification_service->addNotification($notification);
+      $this->postComment($user, $program, $message, $reported);
     }
-    catch (\Exception $e)
+    catch (Exception $e)
     {
-      return;
+      return -1;
     }
     $output->writeln('Commenting on '.$program->getName().' with user '.$user->getUsername());
+
+    return 0;
+  }
+
+  private function postComment(User $user, Program $program, string $message, bool $reported): void
+  {
+    $temp_comment = new UserComment();
+    $temp_comment->setUsername($user->getUsername());
+    $temp_comment->setUser($user);
+    $temp_comment->setText($message);
+    $temp_comment->setProgram($program);
+    $temp_comment->setUploadDate(date_create());
+    $temp_comment->setIsReported($reported);
+
+    $this->em->persist($temp_comment);
+
+    $notification = new CommentNotification($user, $temp_comment);
+    $notification->setComment($temp_comment);
+    $this->notification_service->addNotification($notification);
+
+    $temp_comment->setNotification($notification);
+
+    $this->em->persist($temp_comment);
+    try
+    {
+      $notification->setSeen(boolval(random_int(0, 2)));
+    }
+    catch (Exception $e)
+    {
+      $notification->setSeen(false);
+    }
+    $this->em->persist($notification);
+    $this->em->flush();
+    $this->em->refresh($temp_comment);
   }
 }

@@ -8,34 +8,22 @@ use App\Entity\Extension;
 use App\Entity\Program;
 use App\Repository\ExtensionRepository;
 
-/**
- * Class ProgramExtensionListener.
- */
 class ProgramExtensionListener
 {
-  /**
-   * @var ExtensionRepository
-   */
-  private $extension_repository;
+  private ExtensionRepository $extension_repository;
 
-  /**
-   * ProgramExtensionListener constructor.
-   */
   public function __construct(ExtensionRepository $repo)
   {
     $this->extension_repository = $repo;
   }
 
-  public function onEvent(ProgramBeforePersistEvent $event)
+  public function onEvent(ProgramBeforePersistEvent $event): void
   {
     $this->checkExtension($event->getExtractedFile(), $event->getProgramEntity());
   }
 
-  public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program)
+  public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program): void
   {
-    /**
-     * @var Extension
-     */
     $xml = $extracted_file->getProgramXmlProperties();
 
     $xpath = '//@category';
@@ -48,14 +36,12 @@ class ProgramExtensionListener
       return;
     }
 
-    $prefixes = array_map(function ($element)
-    {
-      return explode('_', $element['category'], 2)[0];
-    }, $nodes);
+    $prefixes = array_map(fn ($element) => explode('_', $element['category'], 2)[0], $nodes);
     $prefixes = array_unique($prefixes);
 
     $extensions = $this->extension_repository->findAll();
 
+    /** @var Extension $extension */
     foreach ($extensions as $extension)
     {
       if (in_array($extension->getPrefix(), $prefixes, true))

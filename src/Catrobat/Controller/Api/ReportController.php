@@ -15,9 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class ReportController.
- */
 class ReportController extends AbstractController
 {
   /**

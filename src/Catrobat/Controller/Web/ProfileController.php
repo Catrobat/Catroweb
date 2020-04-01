@@ -38,7 +38,7 @@ class ProfileController extends AbstractController
    */
   public function profileAction(Request $request, ProgramManager $program_manager, UserManager $user_manager, string $id): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = null;
     $my_profile = false;
 
@@ -105,7 +105,7 @@ class ProfileController extends AbstractController
    */
   public function countrySaveAction(Request $request, UserManager $user_manager): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
 
     if (!$user)
@@ -122,7 +122,7 @@ class ProfileController extends AbstractController
     catch (Exception $exception)
     {
       return JsonResponse::create([
-        'statusCode' => $exception->getMessage(),
+        'statusCode' => $exception->getCode(),
       ]);
     }
 
@@ -140,7 +140,7 @@ class ProfileController extends AbstractController
    */
   public function passwordSaveAction(Request $request, UserManager $user_manager, EncoderFactoryInterface $factory): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -170,7 +170,7 @@ class ProfileController extends AbstractController
     catch (Exception $exception)
     {
       return JsonResponse::create([
-        'statusCode' => $exception->getMessage(),
+        'statusCode' => $exception->getCode(),
       ]);
     }
 
@@ -192,7 +192,7 @@ class ProfileController extends AbstractController
    */
   public function emailSaveAction(Request $request, UserManager $user_manager): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -213,7 +213,7 @@ class ProfileController extends AbstractController
     }
     catch (Exception $exception)
     {
-      return JsonResponse::create(['statusCode' => $exception->getMessage(), 'email' => 1]);
+      return JsonResponse::create(['statusCode' => $exception->getCode(), 'email' => 1]);
     }
     try
     {
@@ -221,7 +221,7 @@ class ProfileController extends AbstractController
     }
     catch (Exception $exception)
     {
-      return JsonResponse::create(['statusCode' => $exception->getMessage(), 'email' => 2]);
+      return JsonResponse::create(['statusCode' => $exception->getCode(), 'email' => 2]);
     }
 
     if ($this->checkEmailExists($firstMail, $user_manager))
@@ -267,7 +267,7 @@ class ProfileController extends AbstractController
    */
   public function usernameSaveAction(Request $request, UserManager $user_manager): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -276,7 +276,7 @@ class ProfileController extends AbstractController
 
     $username = $request->request->get('username');
 
-    if ('' === $username)
+    if (null === $username || '' === $username)
     {
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_MISSING]);
     }
@@ -312,7 +312,7 @@ class ProfileController extends AbstractController
    */
   public function uploadAvatarAction(Request $request, UserManager $user_manager): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -327,7 +327,7 @@ class ProfileController extends AbstractController
     }
     catch (Exception $exception)
     {
-      return JsonResponse::create(['statusCode' => $exception->getMessage()]);
+      return JsonResponse::create(['statusCode' => $exception->getCode()]);
     }
 
     $user->setAvatar($image_base64);
@@ -344,7 +344,7 @@ class ProfileController extends AbstractController
    */
   public function deleteAccountAction(UserCommentRepository $comment_repository): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
 
     if (!$user)
@@ -369,7 +369,7 @@ class ProfileController extends AbstractController
    */
   public function followUser(string $id, UserManager $user_manager, CatroNotificationService $notification_service): RedirectResponse
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (null === $user)
     {
@@ -397,7 +397,7 @@ class ProfileController extends AbstractController
    */
   public function unfollowUser(string $id, UserManager $user_manager): RedirectResponse
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (null === $user)
     {
@@ -430,16 +430,17 @@ class ProfileController extends AbstractController
       ->setMaxResults($request->get('pageSize'))
     ;
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $user_manager->find($request->get('id'));
 
-    /* @var ArrayCollection $followCollection */
     switch ($type)
     {
       case 'follower':
+        /** @var ArrayCollection $followCollection */
         $followCollection = $user->getFollowers();
         break;
       case 'follows':
+        /** @var ArrayCollection $followCollection */
         $followCollection = $user->getFollowing();
         break;
     }
@@ -471,22 +472,22 @@ class ProfileController extends AbstractController
   {
     if ($pass1 !== $pass2)
     {
-      throw new Exception(StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2);
+      throw new Exception('USER_PASSWORD_NOT_EQUAL_PASSWORD2', StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2);
     }
 
     if (0 === strcasecmp($this->getUser()->getUsername(), $pass1))
     {
-      throw new Exception(StatusCode::USER_USERNAME_PASSWORD_EQUAL);
+      throw new Exception('USER_USERNAME_PASSWORD_EQUAL', StatusCode::USER_USERNAME_PASSWORD_EQUAL);
     }
 
     if ('' !== $pass1 && strlen($pass1) < self::MIN_PASSWORD_LENGTH)
     {
-      throw new Exception(StatusCode::USER_PASSWORD_TOO_SHORT);
+      throw new Exception('USER_PASSWORD_TOO_SHORT', StatusCode::USER_PASSWORD_TOO_SHORT);
     }
 
     if ('' !== $pass1 && strlen($pass1) > self::MAX_PASSWORD_LENGTH)
     {
-      throw new Exception(StatusCode::USER_PASSWORD_TOO_LONG);
+      throw new Exception('USER_PASSWORD_TOO_LONG', StatusCode::USER_PASSWORD_TOO_LONG);
     }
   }
 
@@ -502,7 +503,7 @@ class ProfileController extends AbstractController
 
     if (!preg_match($regEx, $email) && !empty($email))
     {
-      throw new Exception(StatusCode::USER_EMAIL_INVALID);
+      throw new Exception('USER_EMAIL_INVALID', StatusCode::USER_EMAIL_INVALID);
     }
   }
 
@@ -512,9 +513,9 @@ class ProfileController extends AbstractController
   private function validateUsername(string $username): void
   {
     // also take a look at /config/validator/validation.xml when applying changes!
-    if (null === $username || strlen($username) < 3 || strlen($username) > 180)
+    if (strlen($username) < 3 || strlen($username) > 180)
     {
-      throw new Exception(StatusCode::USERNAME_INVALID);
+      throw new Exception('USERNAME_INVALID', StatusCode::USERNAME_INVALID);
     }
   }
 
@@ -523,12 +524,12 @@ class ProfileController extends AbstractController
    *
    * @throws Exception
    */
-  private function validateCountryCode($country)
+  private function validateCountryCode($country): void
   {
     //todo: check if code is really from the drop-down
     if (!empty($country) && !preg_match('/[a-zA-Z]{2}/', $country))
     {
-      throw new Exception(StatusCode::USER_COUNTRY_INVALID);
+      throw new Exception('USER_COUNTRY_INVALID', StatusCode::USER_COUNTRY_INVALID);
     }
   }
 

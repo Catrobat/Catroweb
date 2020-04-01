@@ -27,6 +27,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use SimpleXMLElement;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -95,7 +96,19 @@ class ProgramManagerTest extends TestCase
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
     $urlHelper = new UrlHelper(new RequestStack());
 
-    $this->program_manager = new ProgramManager($file_extractor, $this->file_repository, $this->screenshot_repository, $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer, $urlHelper);
+    $this->program_manager = new ProgramManager(
+      $file_extractor, $this->file_repository, $this->screenshot_repository,
+      $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
+      $this->event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer, $urlHelper
+    );
+
+    $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');
+    $this->extracted_file->expects($this->any())->method('getApplicationVersion')->willReturn('0.999');
+    $this->extracted_file->expects($this->any())->method('getProgramXmlProperties')
+      ->willReturn(new SimpleXMLElement('<empty></empty>')
+    )
+    ;
+
     fopen('/tmp/phpUnitTest', 'w');
     $file = new File('/tmp/phpUnitTest');
     $this->request->expects($this->any())->method('getProgramfile')->willReturn($file);
@@ -126,7 +139,7 @@ class ProgramManagerTest extends TestCase
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
       ->will($this->returnCallback(function (Program $project): Program
       {
-        $project->setId(1);
+        $project->setId('1');
 
         return $project;
       }))
@@ -147,7 +160,7 @@ class ProgramManagerTest extends TestCase
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback(function (Program $project): Program
       {
-        $project->setId(1);
+        $project->setId('1');
 
         return $project;
       }))
@@ -170,17 +183,16 @@ class ProgramManagerTest extends TestCase
     $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
     $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->extracted_file->expects($this->atLeastOnce())->method('getScreenshotPath')->willReturn('./path/to/screenshot');
-    $this->extracted_file->expects($this->atLeastOnce())->method('getName')->willReturn(null);
-    $this->extracted_file->expects($this->atLeastOnce())->method('getDescription')->willReturn(null);
-    $this->extracted_file->expects($this->atLeastOnce())->method('getApplicationVersion')->willReturn(null);
-    $this->extracted_file->expects($this->atLeastOnce())->method('getLanguageVersion')->willReturn(null);
-    $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn(null);
-    $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(null);
-    $this->extracted_file->expects($this->atLeastOnce())->method('getProgramXmlProperties')->willReturn(null);
+    $this->extracted_file->expects($this->atLeastOnce())->method('getName')->willReturn('TestProject');
+    $this->extracted_file->expects($this->atLeastOnce())->method('getDescription')->willReturn('');
+    $this->extracted_file->expects($this->atLeastOnce())->method('getApplicationVersion')->willReturn('');
+    $this->extracted_file->expects($this->atLeastOnce())->method('getLanguageVersion')->willReturn('');
+    $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn([]);
+    $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(false);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback(function (Program $project): Program
       {
-        $project->setId(1);
+        $project->setId('1');
 
         return $project;
       }))
@@ -205,7 +217,7 @@ class ProgramManagerTest extends TestCase
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback(function (Program $project): Program
       {
-        $project->setId(1);
+        $project->setId('1');
 
         return $project;
       }))
@@ -248,7 +260,7 @@ class ProgramManagerTest extends TestCase
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback(function (Program $project): Program
       {
-        $project->setId(1);
+        $project->setId('1');
 
         return $project;
       }))
@@ -272,7 +284,7 @@ class ProgramManagerTest extends TestCase
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback(function (Program $project): Program
       {
-        $project->setId(1);
+        $project->setId('1');
 
         return $project;
       }))

@@ -4,6 +4,7 @@ namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\ParsedObject;
 use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectGroup;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,7 +18,10 @@ class ParsedObjectGroupTest extends TestCase
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
-    $this->group = new ParsedObjectGroup($xml_properties->xpath('//object[@type="GroupSprite"]')[0]);
+    Assert::assertNotFalse($xml_properties);
+    $xml_object = $xml_properties->xpath('//object[@type="GroupSprite"]');
+    Assert::assertNotFalse($xml_object);
+    $this->group = new ParsedObjectGroup($xml_object[0]);
   }
 
   /**
@@ -54,16 +58,9 @@ class ParsedObjectGroupTest extends TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function getObjectsMustReturnArrayOfParsedObject(): void
+  public function getObjectsMustReturnEmptyArrayOfParsedObject(): void
   {
-    $expected = ParsedObject::class;
-
     $this->assertTrue($this->group->getObjects() === []);
-
-    foreach ($this->group->getObjects() as $actual)
-    {
-      $this->assertInstanceOf($expected, $actual);
-    }
   }
 
   /**
@@ -73,7 +70,10 @@ class ParsedObjectGroupTest extends TestCase
   public function addObjectMustAddObjectToObjects(): void
   {
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
-    $this->group->addObject(new ParsedObject($xml_properties->xpath('//object')[0]));
+    Assert::assertNotFalse($xml_properties);
+    $xml_object = $xml_properties->xpath('//object');
+    Assert::assertNotFalse($xml_object);
+    $this->group->addObject(new ParsedObject($xml_object[0]));
     $this->assertNotEmpty($this->group->getObjects());
   }
 

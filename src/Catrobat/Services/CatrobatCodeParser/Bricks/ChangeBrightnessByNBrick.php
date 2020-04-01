@@ -6,7 +6,7 @@ use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
 class ChangeBrightnessByNBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::CHANGE_BRIGHTNESS_BY_N_BRICK;
     $this->caption = 'Change brightness by _';

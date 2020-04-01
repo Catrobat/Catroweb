@@ -36,24 +36,26 @@ class UserDataFixtures
     }
 
     ++UserDataFixtures::$number_of_users;
+
+    /** @var User $user */
     $user = $this->user_manager->createUser();
-    $user->setUsername(isset($config['name']) ? $config['name'] : 'User'.UserDataFixtures::$number_of_users);
-    $user->setEmail(isset($config['email']) ? $config['email'] : $user->getUsername().'@catrobat.at');
-    $user->setPlainPassword(isset($config['password']) ? $config['password'] : '123456');
-    $user->setUploadToken(isset($config['token']) ? $config['token'] : 'default_token');
+    $user->setUsername($config['name'] ?? 'User'.UserDataFixtures::$number_of_users);
+    $user->setEmail($config['email'] ?? $user->getUsername().'@catrobat.at');
+    $user->setPlainPassword($config['password'] ?? '123456');
+    $user->setUploadToken($config['token'] ?? 'default_token');
     $user->setSuperAdmin(isset($config['admin']) ? 'true' === $config['admin'] : false);
-    $user->setAdditionalEmail(isset($config['additional_email']) ? $config['additional_email'] : '');
+    $user->setAdditionalEmail($config['additional_email'] ?? '');
     $user->setEnabled(isset($config['enabled']) ? 'true' === $config['enabled'] : true);
-    $user->setCountry(isset($config['country']) ? $config['country'] : 'at');
-    $user->addRole(isset($config['role']) ? $config['role'] : 'ROLE_USER');
+    $user->setCountry($config['country'] ?? 'at');
+    $user->addRole($config['role'] ?? 'ROLE_USER');
     $this->user_manager->updateUser($user, $andFlush);
 
     return $user;
   }
 
-  public function assertUser(array $config = [])
+  public function assertUser(array $config = []): void
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($config['name']);
 
     Assert::assertNotNull($user);
@@ -106,18 +108,19 @@ class UserDataFixtures
     return UserDataFixtures::$current_user;
   }
 
-  public function setCurrentUser(?User $current_user)
+  public function setCurrentUser(?User $current_user): void
   {
     UserDataFixtures::$current_user = $current_user;
   }
 
-  public function setCurrentUserByUsername(string $current_username)
+  public function setCurrentUserByUsername(string $current_username): void
   {
+    /** @var User $current_user */
     $current_user = $this->user_manager->findUserByUsername($current_username);
     UserDataFixtures::$current_user = $current_user;
   }
 
-  public static function clear()
+  public static function clear(): void
   {
     UserDataFixtures::$number_of_users = 0;
     UserDataFixtures::$default_user = null;

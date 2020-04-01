@@ -10,9 +10,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-/**
- * Class MediaPackageCategoriesAdmin.
- */
 class MediaPackageCategoriesAdmin extends AbstractAdmin
 {
   /**
@@ -30,7 +27,7 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('name', TextType::class, ['label' => 'Name'])
@@ -47,7 +44,7 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
   }
 
@@ -56,7 +53,7 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('name')

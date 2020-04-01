@@ -2,20 +2,23 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class PlaceAtStatement.
- */
 class PlaceAtStatement extends Statement
 {
+  /**
+   * @var string
+   */
   const BEGIN_STRING = 'place at ';
+  /**
+   * @var string
+   */
   const END_STRING = '<br/>';
 
   /**
    * PlaceAtStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -24,10 +27,7 @@ class PlaceAtStatement extends Statement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
 
@@ -42,10 +42,7 @@ class PlaceAtStatement extends Statement
     return $code;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $formula_x_dest = '';
     $formula_y_dest = '';
@@ -54,14 +51,13 @@ class PlaceAtStatement extends Statement
     {
       if ($statement instanceof FormulaStatement)
       {
-        switch ($statement->getCategory())
+        if ('Y_POSITION' == $statement->getCategory())
         {
-          case 'Y_POSITION':
-            $formula_y_dest = $statement->execute();
-            break;
-          case 'X_POSITION':
-            $formula_x_dest = $statement->execute();
-            break;
+          $formula_y_dest = $statement->execute();
+        }
+        elseif ('X_POSITION' == $statement->getCategory())
+        {
+          $formula_x_dest = $statement->execute();
         }
       }
     }
@@ -72,10 +68,7 @@ class PlaceAtStatement extends Statement
     return 'Place at X: '.$formula_x_dest_no_markup.' Y: '.$formula_y_dest_no_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
     return '1h_brick_blue.png';
   }

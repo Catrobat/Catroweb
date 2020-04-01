@@ -17,6 +17,7 @@ use App\Entity\User;
 use App\Repository\CatroNotificationRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,14 +40,14 @@ class UserNotificationController extends AbstractController
   public function userNotificationsAction(string $notification_type,
                                           CatroNotificationRepository $notification_repo): Response
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
 
-    $catro_user_notifications = $notification_repo->findByUser($user, ['id' => 'DESC']);
+    $catro_user_notifications = $notification_repo->findBy(['user' => $user], ['id' => 'DESC']);
     $avatars = [];
     $new_notifications = [];
     $old_notifications = [];
@@ -69,10 +70,6 @@ class UserNotificationController extends AbstractController
       elseif ($notification instanceof CommentNotification && 'comments' === $notification_type)
       {
         $found_notification = true;
-        $em = $this->getDoctrine()->getManager();
-      /*$user = $em->getRepository(User::class)->findOneBy([
-        'id' => $notification->getComment()->getUser()->getId(),
-      ]);*/
       }
       elseif ($notification instanceof NewProgramNotification && 'followers' === $notification_type)
       {
@@ -128,14 +125,14 @@ class UserNotificationController extends AbstractController
   public function userNotificationsCountAction(CatroNotificationRepository $notification_repo,
                                                RemixManager $remix_manager): JsonResponse
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
 
-    $catro_user_notifications_all = $notification_repo->findByUser($user);
+    $catro_user_notifications_all = $notification_repo->findBy(['user' => $user]);
     $likes = 0;
     $followers = 0;
     $comments = 0;
@@ -193,13 +190,13 @@ class UserNotificationController extends AbstractController
                                               CatroNotificationService $notification_service,
                                               RemixManager $remix_manager): JsonResponse
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
-    $catro_user_notifications = $notification_repo->findByUser($user);
+    $catro_user_notifications = $notification_repo->findBy(['user' => $user]);
     $notifications_seen = [];
     foreach ($catro_user_notifications as $notification)
     {
@@ -230,13 +227,13 @@ class UserNotificationController extends AbstractController
                                                    CatroNotificationRepository $notification_repo, CatroNotificationService $notification_service,
                                                    RemixManager $remix_manager): JsonResponse
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
       return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
     }
-    $catro_user_notifications = $notification_repo->findByUser($user);
+    $catro_user_notifications = $notification_repo->findBy(['user' => $user]);
     $notifications_to_delete = [];
     foreach ($catro_user_notifications as $notification)
     {
@@ -261,13 +258,11 @@ class UserNotificationController extends AbstractController
    * @Route("/notification/ancestor/{ancestor_id}/descendant/{descendant_id}",
    * name="see_user_notification", methods={"GET"})
    *
-   * @param $ancestor_id
-   * @param $descendant_id
-   *
    * @throws ORMException
    * @throws OptimisticLockException
+   * @throws Exception
    */
-  public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id,
+  public function seeUserNotificationAction(Request $request, string $ancestor_id, string $descendant_id,
                                             RemixManager $remix_manager): RedirectResponse
   {
     $user = $this->getUser();

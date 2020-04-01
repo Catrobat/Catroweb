@@ -6,7 +6,7 @@ use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
 class IfOnEdgeBounceBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::IF_ON_EDGE_BOUNCE_BRICK;
     $this->caption = 'If on edge bounce';

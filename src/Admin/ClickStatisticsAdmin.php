@@ -11,9 +11,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-/**
- * Class ClickStatisticsAdmin.
- */
 class ClickStatisticsAdmin extends AbstractAdmin
 {
   /**
@@ -49,7 +46,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('type')
@@ -74,7 +71,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('id')
@@ -96,7 +93,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -123,7 +120,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete');
   }

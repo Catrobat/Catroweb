@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class RemixNotification extends CatroNotification
 {
   /**
-   * @var User the owner of the parent Program
+   * the owner of the parent Program.
    *
    * @ORM\ManyToOne(
    *     targetEntity="\App\Entity\User"
@@ -21,10 +21,10 @@ class RemixNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private $remix_from;
+  private ?User $remix_from = null;
 
   /**
-   * @var Program the parent Program
+   *  the parent Program.
    *
    * @ORM\ManyToOne(
    *     targetEntity="\App\Entity\Program",
@@ -36,7 +36,7 @@ class RemixNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private $program;
+  private ?Program $program = null;
 
   /**
    * @var Program the newly remixed child Program
@@ -51,12 +51,12 @@ class RemixNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private $remix_program;
+  private ?Program $remix_program = null;
 
   /*
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private $twig_template = '/Notifications/NotificationTypes/remix_notification.html.twig';
+  private string $twig_template = '/Notifications/NotificationTypes/remix_notification.html.twig';
 
   /**
    * RemixNotification constructor.
@@ -76,20 +76,16 @@ class RemixNotification extends CatroNotification
 
   /**
    * Returns the owner of the parent Program.
-   *
-   * @return User the owner of the parent Program
    */
-  public function getRemixFrom()
+  public function getRemixFrom(): ?User
   {
     return $this->remix_from;
   }
 
   /**
    * Sets the owner of the parent Program.
-   *
-   * @param User $remix_from the owner of the parent Program
    */
-  public function setRemixFrom(User $remix_from)
+  public function setRemixFrom(?User $remix_from): void
   {
     $this->remix_from = $remix_from;
   }
@@ -97,50 +93,40 @@ class RemixNotification extends CatroNotification
   /**
    * its important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
-   *
-   * @return mixed
    */
-  public function getTwigTemplate()
+  public function getTwigTemplate(): string
   {
     return $this->twig_template;
   }
 
   /**
    * Returns the parent Program.
-   *
-   * @return Program
    */
-  public function getProgram()
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
 
   /**
    * Sets the parent Program.
-   *
-   * @param Program $program the parent Program
    */
-  public function setProgram($program)
+  public function setProgram(?Program $program): void
   {
     $this->program = $program;
   }
 
   /**
    * Returns the child Program.
-   *
-   * @return Program
    */
-  public function getRemixProgram()
+  public function getRemixProgram(): ?Program
   {
     return $this->remix_program;
   }
 
   /**
    * Sets the child Program.
-   *
-   * @param Program $remix_program the child Program
    */
-  public function setRemixProgram($remix_program)
+  public function setRemixProgram(?Program $remix_program): void
   {
     $this->remix_program = $remix_program;
   }

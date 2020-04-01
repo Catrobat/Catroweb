@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class PhiroMotorStopBrick.
- */
 class PhiroMotorStopBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::PHIRO_MOTOR_STOP_BRICK;
     $this->caption = 'Stop Phiro motor';

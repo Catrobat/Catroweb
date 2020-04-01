@@ -2,6 +2,7 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
+use App\Catrobat\Services\CatrobatCodeParser\Bricks\Brick;
 use App\Catrobat\Services\CatrobatCodeParser\Bricks\BrickFactory;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use PHPUnit\Framework\TestCase;
@@ -118,7 +119,7 @@ class BricksTest extends TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function factoryMustGenerateUnknownBrickOtherwise()
+  public function factoryMustGenerateUnknownBrickOtherwise(): ?Brick
   {
     $brick_xml_properties = $this->brick_xml_properties_list[0];
     $brick_xml_properties[Constants::TYPE_ATTRIBUTE] = 'Foo'; // Fake random script

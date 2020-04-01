@@ -2,15 +2,9 @@
 
 namespace App\Catrobat\RemixGraph;
 
-/**
- * Class RemixGraphLayout.
- */
 class RemixGraphLayout
 {
-  /**
-   * @var array
-   */
-  public static $REMIX_GRAPH_MAPPING = [[
+  public static array $REMIX_GRAPH_MAPPING = [[
     //--------------------------------------------------------------------------------------------------------------
     // USAGE: php bin/console catrobat:reset --hard --remix-layout=1
     //--------------------------------------------------------------------------------------------------------------

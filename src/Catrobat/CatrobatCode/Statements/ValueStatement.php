@@ -4,28 +4,20 @@ namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
-/**
- * Class ValueStatement.
- */
 class ValueStatement extends Statement
 {
-  /**
-   * @var
-   */
   private $value;
-  /**
-   * @var
-   */
+
   private $type;
 
   /**
    * ValueStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $value
-   * @param $type
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $value
+   * @param mixed $type
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $value, $type)
   {
@@ -36,10 +28,7 @@ class ValueStatement extends Statement
       '');
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     $color = SyntaxHighlightingConstants::VARIABLES;
     switch ($this->type)

@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class SceneStartBrick.
- */
 class SceneStartBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::SCENE_START_BRICK;
     $this->caption = 'Start scene _';

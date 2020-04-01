@@ -4,18 +4,9 @@
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-translate_word:
+translate:
     path:  /translate/{word}/{array}/{domain}
     controller: App\Catrobat\Controller\Web\TranslationController:translateAction
-    defaults:
-        array: ""
-        domain: "catroweb"
-    options:
-        expose: true
-
-translate_choice:
-    path:  /transChoice/{word}/{count}/{array}/{domain}
-    controller: App\Catrobat\Controller\Web\TranslationController:transChoiceAction
     defaults:
         array: ""
         domain: "catroweb"

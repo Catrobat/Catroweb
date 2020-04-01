@@ -7,26 +7,18 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RemixUrlIndicator;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class RemixManipulationCatrobatFileExtractor.
- */
 class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 {
-  /**
-   * @var int
-   */
-  private $current_program_id;
-  /**
-   * @var
-   */
+  private int $current_program_id;
+
   private $remix_graph_mapping;
 
   /**
    * RemixManipulationCatrobatFileExtractor constructor.
    *
-   * @param $remix_graph_mapping
-   * @param $extract_dir
-   * @param $extract_path
+   * @param mixed $remix_graph_mapping
+   * @param mixed $extract_dir
+   * @param mixed $extract_path
    */
   public function __construct($remix_graph_mapping, $extract_dir, $extract_path)
   {
@@ -49,15 +41,15 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     }
 
     $previous_parent_string = '';
-    for ($parent_program_index = 0; $parent_program_index < count($all_parent_program_ids); ++$parent_program_index)
+    foreach ($all_parent_program_ids as $parent_program_index => $all_parent_program_id)
     {
-      $parent_program_data = $all_parent_program_ids[$parent_program_index];
+      $parent_program_data = $all_parent_program_id;
       $parent_id = $parent_program_data[0];
-      $current_parent_url = !$parent_program_data[1]
-        ? '//app/project/'.$parent_id
-        : 'https://scratch.mit.edu/projects/'.$parent_id.'/';
+      $current_parent_url = '' === $parent_program_data[1]
+          ? '//app/project/'.$parent_id
+          : 'https://scratch.mit.edu/projects/'.$parent_id.'/';
       $previous_parent_string = $this->generateRemixUrlsStringForMergedProgram($previous_parent_string,
-        $current_parent_url);
+          $current_parent_url);
     }
 
     $remix_url_string = $previous_parent_string;
@@ -77,12 +69,10 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
   }
 
   /**
-   * @param $previous_parent_string
-   * @param $current_parent_url
-   *
-   * @return string
+   * @param mixed $previous_parent_string
+   * @param mixed $current_parent_url
    */
-  public function generateRemixUrlsStringForMergedProgram($previous_parent_string, $current_parent_url)
+  public function generateRemixUrlsStringForMergedProgram($previous_parent_string, $current_parent_url): string
   {
     if ('' == $previous_parent_string)
     {

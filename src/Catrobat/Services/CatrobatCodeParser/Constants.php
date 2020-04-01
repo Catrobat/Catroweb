@@ -2,9 +2,6 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
-/**
- * Class Constants.
- */
 class Constants
 {
   // Attributes

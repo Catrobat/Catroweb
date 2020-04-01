@@ -10,21 +10,18 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
 
-/**
- * Class CommandHelper.
- */
 class CommandHelper
 {
   public static function emptyDirectory(string $directory, string $description = '', OutputInterface $output = null): bool
   {
-    if ($output)
+    if (null !== $output)
     {
       $output->write($description." ('".$directory."') ... ");
     }
 
     if ('' == $directory)
     {
-      if ($output)
+      if (null !== $output)
       {
         $output->writeln('failed');
       }
@@ -45,7 +42,7 @@ class CommandHelper
       }
     }
 
-    if ($output)
+    if (null !== $output)
     {
       $output->writeln('OK');
     }
@@ -73,18 +70,19 @@ class CommandHelper
    * @throws Exception
    */
   public static function executeSymfonyCommand(string $command, Application $application, array $args,
-                                               OutputInterface $output): void
+                                               OutputInterface $output): int
   {
     $command = $application->find($command);
     $args['command'] = $command;
     $input = new ArrayInput($args);
-    $command->run($input, $output);
+
+    return $command->run($input, $output);
   }
 
   public static function executeShellCommand(array $command, array $config, string $description = '',
                                              OutputInterface $output = null): bool
   {
-    if ($output)
+    if (null !== $output)
     {
       $output->write($description." ('".implode(' ', $command)."') ... ");
     }
@@ -100,7 +98,7 @@ class CommandHelper
 
     if ($process->isSuccessful())
     {
-      if ($output)
+      if (null !== $output)
       {
         $output->writeln('OK');
       }
@@ -108,7 +106,7 @@ class CommandHelper
       return true;
     }
 
-    if ($output)
+    if (null !== $output)
     {
       $output->writeln('failed! - Exit-Code: '.$process->getExitCode());
       $output->writeln('Error output: '.$process->getErrorOutput());

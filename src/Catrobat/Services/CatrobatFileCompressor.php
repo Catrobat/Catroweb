@@ -4,20 +4,16 @@ namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\Finder\Finder;
+use ZipArchive;
 
-/**
- * Class CatrobatFileCompressor.
- */
 class CatrobatFileCompressor
 {
   /**
-   * @param $source
-   * @param $destination
-   * @param $archive_name
-   *
-   * @return string
+   * @param mixed $source
+   * @param mixed $destination
+   * @param mixed $archive_name
    */
-  public function compress($source, $destination, $archive_name)
+  public function compress($source, $destination, $archive_name): string
   {
     if (!is_dir($source))
     {
@@ -28,10 +24,10 @@ class CatrobatFileCompressor
       mkdir($destination, 0777, true);
     }
 
-    $archive = new \ZipArchive();
+    $archive = new ZipArchive();
     $filename = $archive_name.'.catrobat';
 
-    $archive->open($destination.'/'.$filename, \ZipArchive::OVERWRITE | \ZipArchive::CREATE);
+    $archive->open($destination.'/'.$filename, ZipArchive::OVERWRITE | ZipArchive::CREATE);
 
     $finder = new Finder();
     $finder->in($source);

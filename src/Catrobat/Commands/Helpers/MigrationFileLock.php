@@ -5,37 +5,25 @@ namespace App\Catrobat\Commands\Helpers;
 use App\Catrobat\Listeners\RemixUpdater;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class MigrationFileLock.
- */
 class MigrationFileLock
 {
-  /**
-   * @var string
-   */
-  private $lock_file_path;
-  /**
-   * @var null
-   */
-  private $lock_file;
-  /**
-   * @var OutputInterface
-   */
-  private $output;
+  private string $lock_file_path;
 
   /**
-   * MigrationFileLock constructor.
-   *
-   * @param $app_root_dir
+   * @var resource|false|null
    */
-  public function __construct($app_root_dir, OutputInterface $output)
+  private $lock_file;
+
+  private OutputInterface $output;
+
+  public function __construct(string $app_root_dir, OutputInterface $output)
   {
     $this->lock_file_path = $app_root_dir.'/'.RemixUpdater::MIGRATION_LOCK_FILE_NAME;
     $this->lock_file = null;
     $this->output = $output;
   }
 
-  public function lock()
+  public function lock(): void
   {
     $this->lock_file = fopen($this->lock_file_path, 'w+');
     $this->output->writeln('[MigrationFileLock] Trying to acquire lock...');
@@ -49,7 +37,7 @@ class MigrationFileLock
     fwrite($this->lock_file, 'Migration of remixes in progress...');
   }
 
-  public function unlock()
+  public function unlock(): void
   {
     if (null == $this->lock_file)
     {

@@ -13,15 +13,9 @@ class BroadcastNotification extends CatroNotification
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = 'Notifications/NotificationTypes/broadcast_notification.html.twig';
+  private string $twig_template = 'Notifications/NotificationTypes/broadcast_notification.html.twig';
 
-  /**
-   * BroadcastNotification constructor.
-   *
-   * @param $title
-   * @param $message
-   */
-  public function __construct(User $user, $title, $message)
+  public function __construct(User $user, string $title, string $message)
   {
     parent::__construct($user, $title, $message);
   }
@@ -29,10 +23,8 @@ class BroadcastNotification extends CatroNotification
   /**
    * its important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
-   *
-   * @return mixed
    */
-  public function getTwigTemplate()
+  public function getTwigTemplate(): string
   {
     return $this->twig_template;
   }

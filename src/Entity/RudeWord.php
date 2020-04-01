@@ -16,41 +16,29 @@ class RudeWord
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="string")
    */
-  protected $word;
+  protected string $word = '';
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getWord()
+  public function getWord(): string
   {
     return $this->word;
   }
 
-  /**
-   * @param mixed $word
-   */
-  public function setWord($word)
+  public function setWord(string $word): void
   {
     $this->word = $word;
   }

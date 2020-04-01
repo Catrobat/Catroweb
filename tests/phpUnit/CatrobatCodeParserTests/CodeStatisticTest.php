@@ -13,14 +13,13 @@ use SimpleXMLElement;
  */
 class CodeStatisticTest extends TestCase
 {
-  /**
-   * @var SimpleXMLElement|bool
-   */
-  protected $xml_properties;
+  protected SimpleXMLElement $xml_properties;
 
   protected function setUp(): void
   {
-    $this->xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $xml = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    self::assertNotFalse($xml);
+    $this->xml_properties = $xml;
   }
 
   /**

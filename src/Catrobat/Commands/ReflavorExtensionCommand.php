@@ -4,7 +4,6 @@ namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\ConsoleProgressIndicator;
 use App\Catrobat\Requests\AppRequest;
-use App\Entity\Program;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -12,29 +11,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class ReflavorExtensionCommand.
- */
 class ReflavorExtensionCommand extends Command
 {
-  /**
-   * @var AppRequest
-   */
-  protected $app_request;
-  /**
-   * @var EntityManagerInterface
-   */
-  private $em;
-  /**
-   * @var ProgramRepository
-   */
-  private $program_repository;
+  protected static $defaultName = 'catrobat:reflavor:extension';
 
-  /**
-   * ReflavorExtensionCommand constructor.
-   *
-   * @param $program_repo
-   */
+  protected AppRequest $app_request;
+
+  private EntityManagerInterface $em;
+
+  private ProgramRepository $program_repository;
+
   public function __construct(EntityManagerInterface $em, ProgramRepository $program_repo, AppRequest $app_request)
   {
     parent::__construct();
@@ -43,7 +29,7 @@ class ReflavorExtensionCommand extends Command
     $this->app_request = $app_request;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:reflavor:extension')
       ->setDescription('Reflavor programs with the given extension')
@@ -52,17 +38,8 @@ class ReflavorExtensionCommand extends Command
     ;
   }
 
-  /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   *
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    /**
-     * @var Program
-     */
     $extension = $input->getArgument('extension');
     $flavor = $input->getArgument('flavor');
 
@@ -95,5 +72,7 @@ class ReflavorExtensionCommand extends Command
 
     $output->writeln('');
     $output->writeln('done.');
+
+    return 0;
   }
 }

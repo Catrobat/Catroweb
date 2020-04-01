@@ -3,41 +3,25 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Commands\Helpers\CommandHelper;
+use Exception;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * Class RefreshCommand.
- */
 class RefreshCommand extends Command
 {
-  /**
-   * @var Input
-   */
-  protected $input;
-  /**
-   * @var Output
-   */
-  protected $output;
-  /**
-   * @var Filesystem
-   */
-  protected $filesystem;
-  /**
-   * @var Kernel
-   */
-  protected $kernel;
+  protected static $defaultName = 'catrobat:refresh';
+  protected InputInterface $input;
 
-  /**
-   * RefreshCommand constructor.
-   */
+  protected OutputInterface $output;
+
+  protected Filesystem $filesystem;
+
+  protected KernelInterface $kernel;
+
   public function __construct(Filesystem $filesystem, KernelInterface $kernel)
   {
     parent::__construct();
@@ -45,7 +29,7 @@ class RefreshCommand extends Command
     $this->kernel = $kernel;
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:refresh')
       ->setDescription('Refresh all caches and fixtures')
@@ -53,11 +37,9 @@ class RefreshCommand extends Command
   }
 
   /**
-   * @throws \Exception
-   *
-   * @return int|void|null
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->input = $input;
     $this->output = $output;
@@ -77,14 +59,16 @@ class RefreshCommand extends Command
     $output->writeln($this->getName().' --env=test');
     $output->writeln($this->getName().' --env=prod');
     $output->writeln('</info>');
+
+    return 0;
   }
 
   /**
-   * @throws \Exception
+   * @throws Exception
    */
-  protected function clearCache()
+  protected function clearCache(): void
   {
-    $dialog = $this->getHelperSet()->get('question');
+    $dialog = $this->getHelper('question');
     $question = new ConfirmationQuestion('<question>Clear Cache (Y/n)? </question>', true);
 
     if ($dialog->ask($this->input, $this->output, $question))
@@ -94,9 +78,9 @@ class RefreshCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws Exception
    */
-  protected function generateTestdata()
+  protected function generateTestdata(): void
   {
     CommandHelper::executeSymfonyCommand('catrobat:test:generate', $this->getApplication(), [], $this->output);
   }

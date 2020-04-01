@@ -2,40 +2,25 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class BaseUserListStatement.
- */
 class BaseUserListStatement extends Statement
 {
-  /**
-   * @var
-   */
   private $start;
 
-  /**
-   * @var
-   */
   private $middle;
 
-  /**
-   * @var
-   */
   private $end;
 
-  /**
-   * @var
-   */
-  private $listName;
+  private string $listName;
 
   /**
    * BaseUserListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $start
-   * @param $middle
-   * @param $end
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $start
+   * @param mixed $middle
+   * @param mixed $end
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $start, $middle, $end)
   {
@@ -47,20 +32,14 @@ class BaseUserListStatement extends Statement
       $end);
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     $children = $this->executeChildren();
 
     return parent::addSpaces().$this->start.$this->listName.$this->middle.$children.$this->end;
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
 

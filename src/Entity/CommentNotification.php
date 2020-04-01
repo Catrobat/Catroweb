@@ -24,12 +24,12 @@ class CommentNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private $comment;
+  private ?UserComment $comment = null;
 
   /*
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private $twig_template = 'Notifications/NotificationTypes/comment_notification.html.twig';
+  private string $twig_template = 'Notifications/NotificationTypes/comment_notification.html.twig';
 
   /**
    * CommentNotification constructor.
@@ -37,7 +37,7 @@ class CommentNotification extends CatroNotification
    * @param User        $user    the user to which this CommentNotification should be shown
    * @param UserComment $comment the UserComment which triggered this CommentNotification
    */
-  public function __construct(User $user, $comment)
+  public function __construct(User $user, UserComment $comment)
   {
     parent::__construct($user);
     $this->comment = $comment;
@@ -45,20 +45,16 @@ class CommentNotification extends CatroNotification
 
   /**
    * Returns the UserComment which triggered this CommentNotification.
-   *
-   * @return UserComment the UserComment which triggered this CommentNotification
    */
-  public function getComment()
+  public function getComment(): UserComment
   {
     return $this->comment;
   }
 
   /**
    * Sets the UserComment which triggered this CommentNotification.
-   *
-   * @param UserComment $comment the UserComment which triggered this CommentNotification
    */
-  public function setComment($comment)
+  public function setComment(UserComment $comment): void
   {
     $this->comment = $comment;
   }
@@ -66,10 +62,8 @@ class CommentNotification extends CatroNotification
   /**
    * its important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
-   *
-   * @return mixed
    */
-  public function getTwigTemplate()
+  public function getTwigTemplate(): string
   {
     return $this->twig_template;
   }

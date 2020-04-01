@@ -10,11 +10,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class TranslationController extends AbstractController
 {
   /**
-   * @Route("/translate/{word}/{array}/{domain}", name="translate_word", defaults={"array": "", "domain": "catroweb"})
-   *
-   * @param mixed $word
+   * @Route("/translate/{word}/{array}/{domain}", name="translate", defaults={"array": "", "domain": "catroweb"})
    */
-  public function translateAction(TranslatorInterface $translator, $word, string $array = '',
+  public function translateAction(TranslatorInterface $translator, string $word, string $array = '',
                                   string $domain = 'catroweb'): JsonResponse
   {
     $decodedArray = [];
@@ -25,23 +23,6 @@ class TranslationController extends AbstractController
     }
 
     return JsonResponse::create($translator->trans($word, $decodedArray, $domain), 200);
-  }
-
-  /**
-   * @Route("/transChoice/{word}/{count}/{array}/{domain}", name="translate_choice",
-   * defaults={"array": "", "domain": "catroweb"})
-   */
-  public function transChoiceAction(TranslatorInterface $translator, string $word, int $count,
-                                    string $array, string $domain): JsonResponse
-  {
-    $decodedArray = [];
-
-    if ('' !== $array)
-    {
-      $decodedArray = $this->parseJavascriptDictArrayToPhp($array);
-    }
-
-    return JsonResponse::create($translator->transChoice($word, $count, $decodedArray, $domain), 200);
   }
 
   private function parseJavascriptDictArrayToPhp(string $array): array

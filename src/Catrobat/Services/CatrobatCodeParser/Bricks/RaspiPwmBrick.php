@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class RaspiPwmBrick.
- */
 class RaspiPwmBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::RASPI_PWM_BRICK;
     $this->caption = 'Set Raspberry Pi PWM pin _ to _';

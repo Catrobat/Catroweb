@@ -73,7 +73,7 @@ class TemplateController extends CRUDController
 
   private function getTemplate(): Template
   {
-    /** @var Template $object */
+    /** @var Template|null $object */
     $object = $this->admin->getSubject();
     if (null === $object)
     {

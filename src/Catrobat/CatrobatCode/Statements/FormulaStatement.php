@@ -2,35 +2,26 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class FormulaStatement.
- */
 class FormulaStatement extends Statement
 {
+  private ?LeftChildStatement $leftChild = null;
+
+  private ?RightChildStatement $rightChild = null;
+
+  private ?ValueStatement $type = null;
+
   /**
-   * @var Statement
-   */
-  private $leftChild;
-  /**
-   * @var Statement
-   */
-  private $rightChild;
-  /**
-   * @var Statement
-   */
-  private $type;
-  /**
-   * @var
+   * @var mixed
    */
   private $category;
 
   /**
    * FormulaStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $category
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $category
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $category)
   {
@@ -39,18 +30,12 @@ class FormulaStatement extends Statement
     $this->category = $category;
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     return $this->executeChildren();
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
     $endCode = '';
@@ -93,7 +78,7 @@ class FormulaStatement extends Statement
     return $this->category;
   }
 
-  protected function setVariables()
+  protected function setVariables(): void
   {
     foreach ($this->statements as $value)
     {
@@ -101,19 +86,13 @@ class FormulaStatement extends Statement
       {
         $this->leftChild = $value;
       }
-      else
+      elseif ($value instanceof RightChildStatement)
       {
-        if ($value instanceof RightChildStatement)
-        {
-          $this->rightChild = $value;
-        }
-        else
-        {
-          if ($value instanceof ValueStatement)
-          {
-            $this->type = $value;
-          }
-        }
+        $this->rightChild = $value;
+      }
+      elseif ($value instanceof ValueStatement)
+      {
+        $this->type = $value;
       }
     }
   }

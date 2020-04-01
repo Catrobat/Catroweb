@@ -5,35 +5,18 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\ScriptFactory;
 use SimpleXMLElement;
 
-/**
- * Class ParsedObject.
- */
 class ParsedObject
 {
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $object_xml_properties;
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $name;
-  /**
-   * @var array
-   */
-  protected $looks;
-  /**
-   * @var array
-   */
-  protected $sounds;
-  /**
-   * @var array
-   */
-  protected $scripts;
+  protected SimpleXMLElement $object_xml_properties;
 
-  /**
-   * ParsedObject constructor.
-   */
+  protected SimpleXMLElement $name;
+
+  protected array $looks;
+
+  protected array $sounds;
+
+  protected array $scripts;
+
   public function __construct(SimpleXMLElement $object_xml_properties)
   {
     $this->object_xml_properties = $object_xml_properties;
@@ -47,50 +30,32 @@ class ParsedObject
     $this->parseScripts();
   }
 
-  /**
-   * @return SimpleXMLElement
-   */
-  public function getName()
+  public function getName(): SimpleXMLElement
   {
     return $this->name;
   }
 
-  /**
-   * @return array
-   */
-  public function getLooks()
+  public function getLooks(): array
   {
     return $this->looks;
   }
 
-  /**
-   * @return array
-   */
-  public function getSounds()
+  public function getSounds(): array
   {
     return $this->sounds;
   }
 
-  /**
-   * @return array
-   */
-  public function getScripts()
+  public function getScripts(): array
   {
     return $this->scripts;
   }
 
-  /**
-   * @return bool
-   */
-  public function isGroup()
+  public function isGroup(): bool
   {
     return false;
   }
 
-  /**
-   * @return SimpleXMLElement
-   */
-  private function resolveName()
+  private function resolveName(): SimpleXMLElement
   {
     if (null != $this->object_xml_properties[Constants::NAME_ATTRIBUTE])
     {
@@ -100,7 +65,7 @@ class ParsedObject
     return $this->object_xml_properties->name;
   }
 
-  private function parseLooks()
+  private function parseLooks(): void
   {
     foreach ($this->object_xml_properties->lookList->children() as $look_xml_properties)
     {
@@ -108,7 +73,7 @@ class ParsedObject
     }
   }
 
-  private function parseSounds()
+  private function parseSounds(): void
   {
     foreach ($this->object_xml_properties->soundList->children() as $sound_xml_properties)
     {
@@ -116,7 +81,7 @@ class ParsedObject
     }
   }
 
-  private function parseScripts()
+  private function parseScripts(): void
   {
     foreach ($this->object_xml_properties->scriptList->children() as $script_xml_properties)
     {
@@ -124,12 +89,7 @@ class ParsedObject
     }
   }
 
-  /**
-   * @param $xml_properties SimpleXMLElement
-   *
-   * @return mixed
-   */
-  private function dereference($xml_properties)
+  private function dereference(SimpleXMLElement $xml_properties): SimpleXMLElement
   {
     if (null != $xml_properties[Constants::REFERENCE_ATTRIBUTE])
     {

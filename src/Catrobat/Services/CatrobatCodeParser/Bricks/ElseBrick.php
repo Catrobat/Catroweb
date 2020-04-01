@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class ElseBrick.
- */
 class ElseBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::ELSE_BRICK;
     $this->caption = 'Else';

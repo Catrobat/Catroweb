@@ -7,25 +7,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Class UploadExceptionListener.
- */
 class UploadExceptionListener
 {
-  /**
-   * @var TranslatorInterface
-   */
-  private $translator;
+  private TranslatorInterface $translator;
 
-  /**
-   * UploadExceptionListener constructor.
-   */
   public function __construct(TranslatorInterface $translator)
   {
     $this->translator = $translator;
   }
 
-  public function onKernelException(ExceptionEvent $event)
+  public function onKernelException(ExceptionEvent $event): void
   {
     if ($event->getThrowable() instanceof InvalidCatrobatFileException)
     {

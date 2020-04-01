@@ -6,25 +6,16 @@ use App\Catrobat\Services\FeaturedImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
-/**
- * Class FeaturedProgramImageListener.
- */
 class FeaturedProgramImageListener
 {
-  /**
-   * @var FeaturedImageRepository
-   */
-  private $repository;
+  private FeaturedImageRepository $repository;
 
-  /**
-   * FeaturedProgramImageListener constructor.
-   */
   public function __construct(FeaturedImageRepository $repository)
   {
     $this->repository = $repository;
   }
 
-  public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file)
@@ -34,7 +25,7 @@ class FeaturedProgramImageListener
     $featured->setImageType($file->guessExtension());
   }
 
-  public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file)
@@ -44,7 +35,7 @@ class FeaturedProgramImageListener
     $this->repository->save($file, $featured->getId(), $featured->getImageType());
   }
 
-  public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file)
@@ -56,7 +47,7 @@ class FeaturedProgramImageListener
     $featured->setImageType($file->guessExtension());
   }
 
-  public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file)
@@ -66,12 +57,12 @@ class FeaturedProgramImageListener
     $this->repository->save($file, $featured->getId(), $featured->getImageType());
   }
 
-  public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $featured->removed_id = $featured->getId();
   }
 
-  public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $this->repository->remove($featured->removed_id, $featured->getImageType());
   }

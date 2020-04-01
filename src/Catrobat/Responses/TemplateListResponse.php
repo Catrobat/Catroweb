@@ -2,20 +2,14 @@
 
 namespace App\Catrobat\Responses;
 
-/**
- * Class TemplateListResponse.
- */
 class TemplateListResponse
 {
-  /**
-   * @var
-   */
   private $templates;
 
   /**
    * TemplateListResponse constructor.
    *
-   * @param $templates
+   * @param mixed $templates
    */
   public function __construct($templates)
   {

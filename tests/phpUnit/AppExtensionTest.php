@@ -19,9 +19,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class AppExtensionTest extends TestCase
 {
-  /**
-   * @var string
-   */
   private string $translationPath;
 
   protected function setup(): void
@@ -81,11 +78,9 @@ class AppExtensionTest extends TestCase
   }
 
   /**
-   * @param mixed $locale
-   *
    * @return MockObject&RequestStack
    */
-  private function mockRequestStack($locale)
+  private function mockRequestStack(string $locale)
   {
     $requestStack = $this->createMock(RequestStack::class);
 
@@ -98,7 +93,7 @@ class AppExtensionTest extends TestCase
     return $requestStack;
   }
 
-  private function createAppExtension($locale): AppExtension
+  private function createAppExtension(string $locale): AppExtension
   {
     $repo = $this->createMock(MediaPackageFileRepository::class);
     $request_stack = $this->mockRequestStack($locale);
@@ -111,7 +106,7 @@ class AppExtensionTest extends TestCase
       $theme, $parameter_bag, $this->translationPath, $translator);
   }
 
-  private function inArray($needle, $haystack): bool
+  private function inArray(string $needle, array $haystack): bool
   {
     foreach ($haystack as $value)
     {
@@ -124,7 +119,7 @@ class AppExtensionTest extends TestCase
     return false;
   }
 
-  private function isSelected($short, $locales): bool
+  private function isSelected(string $short, array $locales): bool
   {
     foreach ($locales as $value)
     {

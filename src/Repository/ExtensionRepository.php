@@ -6,9 +6,6 @@ use App\Entity\Extension;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class ExtensionRepository.
- */
 class ExtensionRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -31,11 +28,9 @@ class ExtensionRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $name
-   *
    * @return mixed
    */
-  public function getExtensionByName($name)
+  public function getExtensionByName(string $name)
   {
     $qb = $this->createQueryBuilder('e');
 

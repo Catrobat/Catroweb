@@ -5,6 +5,7 @@ namespace App\DQL;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
+use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\Query\SqlWalker;
 
 /**
@@ -17,24 +18,18 @@ use Doctrine\ORM\Query\SqlWalker;
 class TimeSub extends FunctionNode
 {
   /**
-   * @var string
+   * @var mixed
    */
   public $dateTime;
 
-  /**
-   * @var string
-   */
-  public $interval;
+  public string $interval;
+
+  public string $unit;
 
   /**
-   * @var string
+   * @throws QueryException
    */
-  public $unit;
-
-  /**
-   * @throws \Doctrine\ORM\Query\QueryException
-   */
-  public function parse(Parser $parser)
+  public function parse(Parser $parser): void
   {
     $parser->match(Lexer::T_IDENTIFIER);
     $parser->match(Lexer::T_OPEN_PARENTHESIS);
@@ -46,10 +41,7 @@ class TimeSub extends FunctionNode
     $parser->match(Lexer::T_CLOSE_PARENTHESIS);
   }
 
-  /**
-   * @return string
-   */
-  public function getSql(SqlWalker $sqlWalker)
+  public function getSql(SqlWalker $sqlWalker): string
   {
     return 'DATE_SUB('.
       $this->dateTime->dispatch($sqlWalker).', INTERVAL '.

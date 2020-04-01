@@ -7,31 +7,20 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\UrlHelper;
 
-/**
- * Class FeaturedImageRepository.
- */
 class FeaturedImageRepository
 {
-  /**
-   * @var string|string[]|null
-   */
-  private $dir;
-  /**
-   * @var string|string[]|null
-   */
-  private $path;
+  private ?string $dir;
 
-  private UrlHelper $urlHelper;
+  private ?string $path;
 
-  /**
-   * FeaturedImageRepository constructor.
-   */
-  public function __construct(ParameterBagInterface $parameter_bag, UrlHelper $urlHelper = null)
+  private ?UrlHelper $urlHelper;
+
+  public function __construct(ParameterBagInterface $parameter_bag, ?UrlHelper $urlHelper = null)
   {
     $dir = $parameter_bag->get('catrobat.featuredimage.dir');
     $path = $parameter_bag->get('catrobat.featuredimage.path');
-    $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
-    $path = preg_replace('/([^\/]+)$/', '$1/', $path);
+    $dir = preg_replace('#([^\/]+)$#', '$1/', $dir);
+    $path = preg_replace('#([^\/]+)$#', '$1/', $path);
 
     if (!is_dir($dir))
     {
@@ -43,21 +32,12 @@ class FeaturedImageRepository
     $this->urlHelper = $urlHelper;
   }
 
-  /**
-   * @param $file File
-   * @param $id
-   * @param $extension
-   */
-  public function save($file, $id, $extension)
+  public function save(File $file, int $id, string $extension): void
   {
     $file->move($this->dir, $this->generateFileNameFromId($id, $extension));
   }
 
-  /**
-   * @param $id
-   * @param $extension
-   */
-  public function remove($id, $extension)
+  public function remove(int $id, string $extension): void
   {
     $path = $this->dir.$this->generateFileNameFromId($id, $extension);
     if (is_file($path))
@@ -66,30 +46,23 @@ class FeaturedImageRepository
     }
   }
 
-  /**
-   * @param $id
-   * @param $extension
-   *
-   * @return string
-   */
-  public function getWebPath($id, $extension)
+  public function getWebPath(int $id, string $extension): string
   {
     return $this->path.$this->generateFileNameFromId($id, $extension);
   }
 
-  public function getAbsoluteWWebPath($id, $extension)
+  public function getAbsoluteWWebPath(int $id, string $extension): string
   {
     return $this->urlHelper->getAbsoluteUrl('/').$this->path.$this->generateFileNameFromId($id, $extension);
   }
 
-  /**
-   * @param $id
-   * @param $extension
-   *
-   * @return string
-   */
-  private function generateFileNameFromId($id, $extension)
+  private function generateFileNameFromId(int $id, string $extension): string
   {
+    if ('' === $extension)
+    {
+      return 'featured_'.$id;
+    }
+
     return 'featured_'.$id.'.'.$extension;
   }
 }

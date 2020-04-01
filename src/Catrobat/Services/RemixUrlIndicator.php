@@ -2,12 +2,18 @@
 
 namespace App\Catrobat\Services;
 
-/**
- * Class RemixUrlIndicator.
- */
 class RemixUrlIndicator
 {
+  /**
+   * @var string
+   */
   const PREFIX_INDICATOR = '[';
+  /**
+   * @var string
+   */
   const SUFFIX_INDICATOR = ']';
+  /**
+   * @var string
+   */
   const SEPARATOR = ',';
 }

@@ -14,10 +14,10 @@ class ApkController extends CRUDController
 {
   public function resetStatusAction(): RedirectResponse
   {
-    /** @var Program $object */
+    /** @var Program|null $object */
     $object = $this->admin->getSubject();
 
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
@@ -36,10 +36,10 @@ class ApkController extends CRUDController
    */
   public function rebuildApkAction(): RedirectResponse
   {
-    /** @var Program $object */
+    /** @var Program|null $object */
     $object = $this->admin->getSubject();
 
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
@@ -59,11 +59,10 @@ class ApkController extends CRUDController
 
   public function resetAllApkAction(): RedirectResponse
   {
-    /** @var Program $object */
     $data_grid = $this->admin->getDatagrid();
-
     $objects = $data_grid->getResults();
 
+    /** @var Program $program */
     foreach ($objects as $program)
     {
       $program->setApkStatus(Program::APK_NONE);
@@ -87,13 +86,12 @@ class ApkController extends CRUDController
    */
   public function rebuildAllApkAction(): RedirectResponse
   {
-    /* @var $program Program */
-
     $data_grid = $this->admin->getDatagrid();
 
     $objects = $data_grid->getResults();
     $dispatcher = $this->container->get(JenkinsDispatcher::class);
 
+    /* @var $program Program */
     foreach ($objects as $program)
     {
       $dispatcher->sendBuildRequest($program->getId());

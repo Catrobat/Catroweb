@@ -6,8 +6,6 @@ use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\StatisticsService;
 use App\Entity\FeaturedProgram;
 use App\Repository\FeaturedRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,21 +92,10 @@ class DefaultController extends AbstractController
     return $this->render('PrivacyAndTerms/licenseToPlay.html.twig');
   }
 
-  public function comparePriorities($current, $next): int
-  {
-    if ($current['priority'] == $next['priority'])
-    {
-      return 0;
-    }
-
-    return ($current['priority'] > $next['priority']) ? -1 : 1;
-  }
-
   /**
    * @Route("/click-statistic", name="click_stats", methods={"POST"})
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function makeClickStatisticAction(Request $request): Response
   {
@@ -156,7 +143,7 @@ class DefaultController extends AbstractController
    *
    * @throws Exception
    */
-  public function makeNonRecommendedProgramClickStatisticAction(Request $request)
+  public function makeNonRecommendedProgramClickStatisticAction(Request $request): Response
   {
     $type = $_POST['type'];
     $referrer = $request->headers->get('referer');

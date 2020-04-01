@@ -23,7 +23,7 @@ class TutorialController extends AbstractController
 
   /**
    * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page": 1}, requirements={"page": "\d+"}, methods={"GET"})
-   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page": 1}, requirements={"page": "\d+"}, methods={"GET"})
+   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page": 1}, requirements={"page": "\d+"}, methods={"GET"})
    */
   public function stepByStepAction(): Response
   {
@@ -79,9 +79,6 @@ class TutorialController extends AbstractController
    */
   public function categoryProgramsAction(Request $request, string $id, ScreenshotRepository $screenshot_repository): JsonResponse
   {
-    /**
-     * @var Program
-     */
     $em = $this->getDoctrine()->getManager();
     $programs = $em->getRepository(Program::class)->findBy(['category' => $id]);
 
@@ -105,7 +102,7 @@ class TutorialController extends AbstractController
   }
 
   /**
-   * @param $page
+   * @param mixed $page
    */
   private function generateBlocks($page): array
   {
@@ -184,9 +181,6 @@ class TutorialController extends AbstractController
     return $example_link;
   }
 
-  /**
-   * @return StarterCategory[]
-   */
   private function generateCategoryArray(array $categories): array
   {
     $categories_twig = [];
@@ -194,7 +188,6 @@ class TutorialController extends AbstractController
     /** @var StarterCategory $category */
     foreach ($categories as $category)
     {
-      $categories_twig = (array) $categories_twig;
       $categories_twig[] = [
         'id' => $category->getId(),
         'alias' => $category->getAlias(),

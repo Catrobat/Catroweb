@@ -10,53 +10,26 @@ use RecursiveIteratorIterator;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class CatrobatFileSanitizer.
- */
 class CatrobatFileSanitizer
 {
-  /**
-   * @var
-   * $scenes*/
-  private $scenes;
+  private ?array $scenes;
 
-  /**
-   * @var array
-   */
-  private $image_paths;
+  private ?array $image_paths;
 
-  /**
-   * @var array
-   */
-  private $sound_paths;
+  private ?array $sound_paths;
 
-  /**
-   * @var string
-   */
-  private $screenshot_path;
+  private ?string $screenshot_path;
 
-  /**
-   * @var string
-   */
-  private $extracted_file_root_path;
+  private ?string $extracted_file_root_path;
 
-  /**
-   * @var array
-   */
-  private $catrobat_code_parser;
+  private CatrobatCodeParser $catrobat_code_parser;
 
-  /**
-   * CatrobatFileSanitizer constructor.
-   */
   public function __construct(CatrobatCodeParser $catrobat_code_parser)
   {
     $this->catrobat_code_parser = $catrobat_code_parser;
   }
 
-  /**
-   * @throws \Exception
-   */
-  public function sanitize(ExtractedCatrobatFile $extracted_file)
+  public function sanitize(ExtractedCatrobatFile $extracted_file): void
   {
     $this->extracted_file_root_path = $extracted_file->getPath();
     $this->sound_paths = $extracted_file->getContainingSoundPaths();
@@ -90,45 +63,25 @@ class CatrobatFileSanitizer
     }
   }
 
-  /**
-   * @param $relative_filepath
-   *
-   * @return bool
-   */
-  private function isTheOnlyCodeXmlFile($relative_filepath)
+  private function isTheOnlyCodeXmlFile(string $relative_filepath): bool
   {
     // code.xml must only be found once in the root directory
     return '/code.xml' === $relative_filepath;
   }
 
-  /**
-   * @param $relative_filepath
-   *
-   * @return bool
-   */
-  private function isTheOnlyPermissionsFile($relative_filepath)
+  private function isTheOnlyPermissionsFile(string $relative_filepath): bool
   {
     // permissions.txt must only be found once in the root directory
     return '/permissions.txt' === $relative_filepath;
   }
 
-  /**
-   * @param $relative_filepath
-   *
-   * @return bool
-   */
-  private function isFileTheUsedScreenshot($relative_filepath)
+  private function isFileTheUsedScreenshot(string $relative_filepath): bool
   {
     // the app uploads multiple screenshots, but we only need one
     return $this->getRelativePath($this->screenshot_path) === $relative_filepath;
   }
 
-  /**
-   * @param $relative_filepath
-   *
-   * @return bool
-   */
-  private function isAValidSceneDirectory($relative_filepath)
+  private function isAValidSceneDirectory(string $relative_filepath): bool
   {
     // Besides image and sound directories the root directory can contain a directory for every scene.
     foreach ($this->scenes as $scene)
@@ -142,40 +95,18 @@ class CatrobatFileSanitizer
     return false;
   }
 
-  /**
-   * @param $filename
-   * @param $relative_filepath
-   *
-   * @throws \Exception
-   *
-   * @return bool
-   */
-  private function isAValidSoundFile($filename, $relative_filepath, ExtractedCatrobatFile $extracted_file)
+  private function isAValidSoundFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
     return $this->isAValidImageOrSoundFile('/sounds', $this->sound_paths, $filename, $relative_filepath, $extracted_file);
   }
 
-  /**
-   * @param $filename
-   * @param $relative_filepath
-   *
-   * @return bool
-   */
-  private function isAValidImageFile($filename, $relative_filepath, ExtractedCatrobatFile $extracted_file)
+  private function isAValidImageFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
     return $this->isAValidImageOrSoundFile('/images', $this->image_paths, $filename, $relative_filepath, $extracted_file);
   }
 
-  /**
-   * @param $dir_name
-   * @param $paths_array
-   * @param $filename
-   * @param $relative_filepath
-   *
-   * @return bool
-   */
-  private function isAValidImageOrSoundFile($dir_name, $paths_array, $filename, $relative_filepath,
-                                            ExtractedCatrobatFile $extracted_file)
+  private function isAValidImageOrSoundFile(string $dir_name, array $paths_array, string $filename, string $relative_filepath,
+                                            ExtractedCatrobatFile $extracted_file): bool
   {
     // Here we must accept:
     //   - image and sound directories in the root directory.
@@ -202,12 +133,11 @@ class CatrobatFileSanitizer
         return true;
       }
     }
+
+    return false;
   }
 
-  /**
-   * @return array
-   */
-  private function getScenes(ExtractedCatrobatFile $extracted_file)
+  private function getScenes(ExtractedCatrobatFile $extracted_file): array
   {
     $scenes = [];
     $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
@@ -218,34 +148,30 @@ class CatrobatFileSanitizer
       foreach ($scenes_array as $scene)
       {
         /* @var $scene ParsedScene */
-        array_push($scenes, $scene->getName());
+        $scenes[] = $scene->getName();
       }
     }
 
     return $scenes;
   }
 
-  /**
-   * @param $filepath
-   *
-   * @return mixed
-   */
-  private function getRelativePath($filepath)
+  private function getRelativePath(?string $filepath): string
   {
+    if (null === $filepath)
+    {
+      return '';
+    }
+
     $limit = null;
     $pattern = '@/@';
-    $needle = @end(preg_split($pattern, $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY));
-    $relative_filepath = strstr($filepath, $needle);
+    $array = preg_split($pattern, $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY);
+    $needle = @end($array);
+    $relative_filepath = strstr($filepath, (string) $needle);
 
     return str_replace($needle, '', $relative_filepath);
   }
 
-  /**
-   * @param $dir
-   *
-   * @return bool
-   */
-  private function deleteDirectory($dir)
+  private function deleteDirectory(string $dir): bool
   {
     if (!file_exists($dir))
     {

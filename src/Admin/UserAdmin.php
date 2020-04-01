@@ -4,10 +4,10 @@ namespace App\Admin;
 
 use Sonata\Form\Validator\ErrorElement;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseUserAdmin;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
-/**
- * Class UserAdmin.
- */
 class UserAdmin extends BaseUserAdmin
 {
   /**
@@ -31,20 +31,20 @@ class UserAdmin extends BaseUserAdmin
   }
 
   /**
-   * @param $object
+   * rewrite validation.
    *
-   * rewrite validation
+   * @param mixed $object
    */
-  public function validate(ErrorElement $errorElement, $object)
+  public function validate(ErrorElement $errorElement, $object): void
   {
     $errorElement
       ->with('username')
-      ->addConstraint(new \Symfony\Component\Validator\Constraints\NotBlank())
-      ->addConstraint(new \Symfony\Component\Validator\Constraints\Regex(['pattern' => '/^[\\w@_\\-\\.]+$/']))
+      ->addConstraint(new NotBlank())
+      ->addConstraint(new Regex(['pattern' => '/^[\\w@_\\-\\.]+$/']))
       ->end()
       ->with('email')
-      ->addConstraint(new \Symfony\Component\Validator\Constraints\NotBlank())
-      ->addConstraint(new \Symfony\Component\Validator\Constraints\Email())
+      ->addConstraint(new NotBlank())
+      ->addConstraint(new Email())
       ->end()
     ;
   }
@@ -54,7 +54,7 @@ class UserAdmin extends BaseUserAdmin
    */
   public function getRequest()
   {
-    if (!$this->request)
+    if (null === $this->request)
     {
       return $this->request = $this
         ->getConfigurationPool()->getContainer()->get('request_stack')->getCurrentRequest();

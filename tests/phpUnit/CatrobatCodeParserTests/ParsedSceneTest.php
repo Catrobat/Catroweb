@@ -3,6 +3,7 @@
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\ParsedScene;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,7 +17,10 @@ class ParsedSceneTest extends TestCase
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/SceneProgram/code.xml');
-    $this->scene = new ParsedScene($xml_properties->xpath('//scene')[0]);
+    Assert::assertNotFalse($xml_properties);
+    $xml_scene = $xml_properties->xpath('//scene');
+    Assert::assertNotFalse($xml_scene);
+    $this->scene = new ParsedScene($xml_scene[0]);
   }
 
   /**

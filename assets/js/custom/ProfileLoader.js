@@ -86,7 +86,7 @@ const ProfileLoader = function (profileId, url, profileUrl, container, defaultPr
   }
 
   self.addNothingFoundMessage = function () {
-    const url = Routing.generate('translate_word', {
+    const url = Routing.generate('translate', {
       word: 'profileLoader.noProfiles',
       domain: 'catroweb'
     })

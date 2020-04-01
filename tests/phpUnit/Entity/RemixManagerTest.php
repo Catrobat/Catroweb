@@ -19,6 +19,7 @@ use App\Repository\ScratchProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -71,12 +72,11 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddSingleScratchProgram(): void
   {
-    $expected_id_of_first_program = 123;
+    $expected_id_of_first_program = '123';
     $expected_name_of_first_program = 'Test program';
     $expected_description_of_first_program = 'My description';
     $expected_username_of_first_program = 'John Doe';
@@ -112,12 +112,11 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddSingleScratchProgramWithMissingData(): void
   {
-    $expected_id_of_first_program = 123;
+    $expected_id_of_first_program = '123';
     $scratch_info_data = [$expected_id_of_first_program => []];
 
     $this->scratch_program_repository
@@ -144,16 +143,15 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddMultipleScratchPrograms(): void
   {
-    $expected_id_of_first_program = 123;
+    $expected_id_of_first_program = '123';
     $expected_name_of_first_program = 'Test program';
     $expected_description_of_first_program = 'My description';
     $expected_username_of_first_program = 'John Doe';
-    $expected_id_of_second_program = 121;
+    $expected_id_of_second_program = '121';
     $expected_name_of_second_program = 'Other test program';
     $expected_username_of_second_program = 'Chuck Norris';
     $scratch_info_data = [
@@ -286,8 +284,8 @@ class RemixManagerTest extends TestCase
       ->method('getId')->willReturn('123');
     $program_entity->expects($this->atLeastOnce())
       ->method('isInitialVersion')->willReturn(true);
-    $first_scratch_parent_id = 1;
-    $second_scratch_parent_id = 2;
+    $first_scratch_parent_id = '1';
+    $second_scratch_parent_id = '2';
     $parent_data = [
       $first_scratch_parent_id => [
         'isScratch' => true,
@@ -556,7 +554,7 @@ class RemixManagerTest extends TestCase
     $parent_entity_of_first_parent = $this->createMock(Program::class);
     $parent_entity_of_first_parent->expects($this->atLeastOnce())
       ->method('getId')->willReturn('1');
-    $scratch_parent_id = 29_495_624;
+    $scratch_parent_id = '29495624';
     $first_parent_entity = $this->createMock(Program::class);
     $first_parent_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('2');
@@ -978,7 +976,7 @@ class RemixManagerTest extends TestCase
     //
     //--------------------------------------------------------------------------------------------------------------
 
-    $scratch_parent_id = 29_495_624;
+    $scratch_parent_id = '29495624';
 
     $first_program_entity = $this->createMock(Program::class);
     $first_program_entity->expects($this->atLeastOnce())
@@ -1082,8 +1080,8 @@ class RemixManagerTest extends TestCase
     //                  \______ (5) _______/     <--------- to be added
     //
     //--------------------------------------------------------------------------------------------------------------
-    $first_scratch_ancestor_id = 124_742_637;
-    $second_scratch_parent_id = 29_495_624;
+    $first_scratch_ancestor_id = '124742637';
+    $second_scratch_parent_id = '29495624';
 
     $first_program_entity = $this->createMock(Program::class);
     $first_program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('1');
@@ -1178,9 +1176,9 @@ class RemixManagerTest extends TestCase
     //
     //--------------------------------------------------------------------------------------------------------------
 
-    $first_scratch_ancestor_id = 127_781_769;
-    $second_scratch_parent_id = 29_495_624;
-    $third_scratch_parent_id = 124_742_637;
+    $first_scratch_ancestor_id = '127781769';
+    $second_scratch_parent_id = '29495624';
+    $third_scratch_parent_id = '124742637';
 
     $first_program_entity = $this->createMock(Program::class);
     $first_program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('1');

@@ -6,9 +6,6 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-/**
- * Class GameJamSubmittedProgramsAdmin.
- */
 class GameJamSubmittedProgramsAdmin extends AbstractAdmin
 {
   /**
@@ -16,7 +13,7 @@ class GameJamSubmittedProgramsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -36,7 +33,7 @@ class GameJamSubmittedProgramsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->clearExcept(['list', 'edit']);
     $collection->add('removeFromGameJam', $this->getRouterIdParameter().'/removeFromGameJam');

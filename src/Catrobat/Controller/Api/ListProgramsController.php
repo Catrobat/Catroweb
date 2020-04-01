@@ -4,7 +4,6 @@ namespace App\Catrobat\Controller\Api;
 
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\ProgramManager;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -171,9 +170,6 @@ class ListProgramsController extends AbstractController
       $flavor = $request->get('flavor');
     }
 
-    /**
-     * @var GuidType
-     */
     $limit = (int) $request->get('limit', 20);
     $offset = (int) $request->get('offset', 0);
     $user_id = $request->get('user_id', 0);

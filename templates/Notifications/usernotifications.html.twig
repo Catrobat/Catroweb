@@ -25,7 +25,7 @@
 
         <div class="notification-summary-left">
         <span id="total_amount_of_notifications" class="h4">
-          {{ "catro-notifications.summary"|transchoice(newNotifications|length, {"%amount%": newNotifications|length}, "catroweb") }}
+          {{ "catro-notifications.summary"|trans({'%count%': newNotifications|length, "%amount%": newNotifications|length}, "catroweb") }}
         </span>
         </div>
 

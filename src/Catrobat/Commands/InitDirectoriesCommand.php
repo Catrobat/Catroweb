@@ -2,133 +2,67 @@
 
 namespace App\Catrobat\Commands;
 
-use App\Catrobat\Services\ProgramFileRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * Class InitDirectoriesCommand.
- */
 class InitDirectoriesCommand extends Command
 {
-  /**
-   * @var Filesystem
-   */
-  public $fileystem;
-  /**
-   * @var
-   */
-  public $extract_directory;
-  /**
-   * @var
-   */
-  public $programfile_directory;
-  /**
-   * @var
-   */
-  public $thumbnail_directory;
-  /**
-   * @var
-   */
-  public $screenshot_directory;
-  /**
-   * @var
-   */
-  public $mediapackage_directory;
+  // ToDo this command is not working!
 
-  /**
-   * InitDirectoriesCommand constructor.
-   *
-   * @param $programfile_directory
-   */
-  public function __construct(Filesystem $filesystem, ProgramFileRepository $programfile_directory)
+  public Filesystem $filesystem;
+
+  public string $extract_directory;
+
+  public string $program_file_directory;
+
+  public string $thumbnail_directory;
+
+  public string $screenshot_directory;
+
+  public string $media_package_directory;
+  protected static $defaultName = 'catrobat:init:directories';
+
+  public function __construct(Filesystem $filesystem)
   {
     parent::__construct();
-    $this->fileystem = $filesystem;
-    $this->programfile_directory = $programfile_directory;
+    $this->filesystem = $filesystem;
   }
 
-  /**
-   * @param $extract_directory
-   */
-  public function setExtractDirectory($extract_directory)
-  {
-    $this->extract_directory = $extract_directory;
-  }
-
-  /**
-   * @param $programfile_directory
-   */
-  public function setProgramfileDirectory($programfile_directory)
-  {
-    $this->programfile_directory = $programfile_directory;
-  }
-
-  /**
-   * @param $thumbnail_directory
-   */
-  public function setThumbnailDirectory($thumbnail_directory)
-  {
-    $this->thumbnail_directory = $thumbnail_directory;
-  }
-
-  /**
-   * @param $screenshot_directory
-   */
-  public function setScreenshotDirectory($screenshot_directory)
-  {
-    $this->screenshot_directory = $screenshot_directory;
-  }
-
-  /**
-   * @param $mediapackage_directory
-   */
-  public function setMediaPackageDirectory($mediapackage_directory)
-  {
-    $this->mediapackage_directory = $mediapackage_directory;
-  }
-
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:init:directories')
       ->setDescription('Creates directories needed by the catroweb application')
     ;
   }
 
-  /**
-   * @return int|void|null
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    if (null == $this->fileystem)
+    if (null == $this->filesystem)
     {
-      $output->writeln('Filesystem not initalized');
+      $output->writeln('Filesystem not initialized');
 
-      return;
+      return -1;
     }
     $text = '';
-    $text .= $this->makeSuredirectoryExists($this->programfile_directory);
-    $text .= $this->makeSuredirectoryExists($this->extract_directory);
-    $text .= $this->makeSuredirectoryExists($this->thumbnail_directory);
-    $text .= $this->makeSuredirectoryExists($this->screenshot_directory);
-    $text .= $this->makeSuredirectoryExists($this->mediapackage_directory);
+    $text .= $this->makeSureDirectoryExists($this->program_file_directory);
+    $text .= $this->makeSureDirectoryExists($this->extract_directory);
+    $text .= $this->makeSureDirectoryExists($this->thumbnail_directory);
+    $text .= $this->makeSureDirectoryExists($this->screenshot_directory);
+    $text .= $this->makeSureDirectoryExists($this->media_package_directory);
     $text .= $this->showInfo();
     $output->writeln($text);
+
+    return 0;
   }
 
-  /**
-   * @param $directory
-   *
-   * @return string
-   */
-  private function makeSuredirectoryExists($directory)
+  private function makeSureDirectoryExists(string $directory): string
   {
     $text = '';
-    if (!$this->fileystem->exists($directory))
+    if (!$this->filesystem->exists($directory))
     {
-      $this->fileystem->mkdir($directory);
+      $this->filesystem->mkdir($directory);
       $text .= 'Creating Directory '.$directory."\n";
     }
     else
@@ -139,10 +73,7 @@ class InitDirectoriesCommand extends Command
     return $text;
   }
 
-  /**
-   * @return string
-   */
-  private function showInfo()
+  private function showInfo(): string
   {
     return 'Make sure the above directories are writeable by your console and webuser';
   }

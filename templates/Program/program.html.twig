@@ -423,8 +423,7 @@
         <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i>
         </div>
         <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text">
-          {{ "programs.remixes"|transchoice(program_details.remixesLength,
-            { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+          {{ "programs.remixes"|trans({ '%count%': program_details.remixesLength, '%remixes%' : program_details.remixesLength }, "catroweb") }}
         </a>
       </div>
     </div>

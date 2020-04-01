@@ -17,7 +17,7 @@ parameters:
   catrobat.resources.dir:               "%kernel.project_dir%/public/resources/"
   catrobat.screenshot.dir:              "%catrobat.pubdir%resources/screenshots/"
   catrobat.screenshot.path:             "resources/screenshots/"
-  catrobat.snapshot.dir:                "%catrobat.pubdir%resources/Snapshots"
+  catrobat.snapshot.dir:                "%catrobat.pubdir%resources/snapshots"
   catrobat.template.dir:                "%catrobat.pubdir%resources/templates/"
   catrobat.template.path:               "resources/templates/"
   catrobat.template.screenshot.dir:     "%catrobat.pubdir%resources/templates/screenshots/"

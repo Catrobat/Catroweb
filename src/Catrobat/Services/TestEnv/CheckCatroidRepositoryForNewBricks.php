@@ -9,7 +9,7 @@ class CheckCatroidRepositoryForNewBricks
   /**
    * @throws Exception
    */
-  public static function check()
+  public static function check(): void
   {
     $url1 = 'https://raw.githubusercontent.com/Catrobat/Catroid/develop/catroid/src/main/java/org/catrobat/catroid/io/XstreamSerializer.java';
     $url2 = 'https://raw.githubusercontent.com/Catrobat/Catroid/develop/catroid/src/main/java/org/catrobat/catroid/ui/fragment/CategoryBricksFactory.java';

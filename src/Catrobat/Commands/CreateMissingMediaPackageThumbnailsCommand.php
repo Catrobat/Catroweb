@@ -3,6 +3,8 @@
 namespace App\Catrobat\Commands;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
+use Exception;
+use ImagickException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,24 +14,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CreateMissingMediaPackageThumbnailsCommand extends Command
 {
-  /**
-   * @var MediaPackageFileRepository
-   */
-  private $media_package_file_repository;
+  protected static $defaultName = 'catrobat:create:media-package-thumbnails';
+  private MediaPackageFileRepository $media_package_file_repository;
 
-  /**
-   * CreateMissingMediaPackageThumbnailsCommand constructor.
-   */
   public function __construct(MediaPackageFileRepository $media_package_file_repository)
   {
     parent::__construct();
     $this->media_package_file_repository = $media_package_file_repository;
   }
 
-  /**
-   * Configures the current command.
-   */
-  protected function configure()
+  protected function configure(): void
   {
     $this->setName('catrobat:create:media-package-thumbnails')
       ->setDescription('Creates missing thumbnails for images in media package.')
@@ -38,15 +32,10 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
   }
 
   /**
-   * Executes the current command.
-   *
-   * @param OutputInterface $output [optional]
-   *
-   * @throws \Exception
-   *
-   * @return int|null null or 0 if everything went fine, or an error code
+   * @throws ImagickException
+   * @throws Exception
    */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $username = posix_getpwuid(posix_geteuid())['name'];
 
@@ -54,11 +43,11 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
       !$input->getOption('force') &&
       !in_array($username, ['www-data', 'apache', 'httpd', '_www', 'nginx'], true)
     ) {
-      throw new \Exception('Please run this command as web server user '.'(e.g. sudo -u www-data bin/console ...) or run with --force.');
+      throw new Exception('Please run this command as web server user '.'(e.g. sudo -u www-data bin/console ...) or run with --force.');
     }
 
     $this->media_package_file_repository->createMissingThumbnails();
 
-    return null;
+    return 0;
   }
 }

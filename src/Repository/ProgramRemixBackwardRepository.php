@@ -4,12 +4,11 @@ namespace App\Repository;
 
 use App\Entity\ProgramRemixBackwardRelation;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class ProgramRemixBackwardRepository.
- */
 class ProgramRemixBackwardRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -18,11 +17,11 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param int[] $program_ids
+   * @param string[] $program_ids
    *
    * @return ProgramRemixBackwardRelation[]
    */
-  public function getParentRelations(array $program_ids)
+  public function getParentRelations(array $program_ids): array
   {
     $qb = $this->createQueryBuilder('b');
 
@@ -39,7 +38,7 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   /**
    * @return ProgramRemixBackwardRelation[]
    */
-  public function getDirectEdgeRelations(array $edge_start_program_ids, array $edge_end_program_ids)
+  public function getDirectEdgeRelations(array $edge_start_program_ids, array $edge_end_program_ids): array
   {
     $qb = $this->createQueryBuilder('b');
 
@@ -56,9 +55,9 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param int[] $parent_program_ids
+   * @param string[] $parent_program_ids
    */
-  public function removeParentRelations(string $program_id, array $parent_program_ids)
+  public function removeParentRelations(string $program_id, array $parent_program_ids): void
   {
     $qb = $this->createQueryBuilder('b');
 
@@ -73,7 +72,7 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
     ;
   }
 
-  public function removeAllRelations()
+  public function removeAllRelations(): void
   {
     $qb = $this->createQueryBuilder('b');
 
@@ -87,14 +86,14 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   /**
    * @return ProgramRemixBackwardRelation[]
    */
-  public function getUnseenChildRelationsOfUser(User $user)
+  public function getUnseenChildRelationsOfUser(User $user): array
   {
     $qb = $this->createQueryBuilder('b');
 
     return $qb
       ->select('b')
-      ->innerJoin('b.parent', 'p', \Doctrine\ORM\Query\Expr\Join::WITH, 'b.parent_id = p.id')
-      ->innerJoin('b.child', 'p2', \Doctrine\ORM\Query\Expr\Join::WITH, 'b.child_id = p2.id')
+      ->innerJoin('b.parent', 'p', Join::WITH, 'b.parent_id = p.id')
+      ->innerJoin('b.child', 'p2', Join::WITH, 'b.child_id = p2.id')
       ->where($qb->expr()->eq('p.user', ':user'))
       ->andWhere($qb->expr()->neq('p2.user', 'p.user'))
       ->andWhere($qb->expr()->isNull('b.seen_at'))
@@ -106,7 +105,7 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
     ;
   }
 
-  public function markAllUnseenRelationsAsSeen(\DateTime $seen_at)
+  public function markAllUnseenRelationsAsSeen(DateTime $seen_at): void
   {
     $qb = $this->createQueryBuilder('b');
 
@@ -119,12 +118,7 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
     ;
   }
 
-  /**
-   * @param int $program_id
-   *
-   * @return int
-   */
-  public function remixCount($program_id)
+  public function remixCount(string $program_id): int
   {
     $qb = $this->createQueryBuilder('b');
 
@@ -137,6 +131,6 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
       ->getResult()
     ;
 
-    return count($result);
+    return is_countable($result) ? count($result) : 0;
   }
 }

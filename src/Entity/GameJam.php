@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,37 +17,37 @@ class GameJam
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="string", length=300)
    */
-  protected $name;
+  protected ?string $name = null;
 
   /**
    * @ORM\Column(type="string", length=300, nullable=true)
    */
-  protected $form_url;
+  protected ?string $form_url = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $start;
+  protected ?DateTime $start = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $end;
+  protected ?DateTime $end = null;
 
   /**
    * @ORM\OneToMany(targetEntity="Program", mappedBy="gamejam", fetch="EXTRA_LAZY")
    */
-  protected $programs;
+  protected Collection $programs;
 
   /**
    * @ORM\Column(type="string", length=100, nullable=true)
    */
-  protected $hashtag;
+  protected ?string $hashtag = null;
 
   /**
    * @ORM\ManyToMany(targetEntity="Program")
@@ -55,12 +56,12 @@ class GameJam
    *     inverseJoinColumns={@ORM\JoinColumn(name="program_id", referencedColumnName="id")}
    * )
    */
-  private $sample_programs;
+  private Collection $sample_programs;
 
   /**
    * @ORM\Column(type="string", length=100, nullable=true)
    */
-  private $flavor;
+  private ?string $flavor = null;
 
   public function __construct()
   {
@@ -70,205 +71,113 @@ class GameJam
 
   public function __toString()
   {
-    return (string) $this->getName();
+    return $this->getName();
   }
 
-  /**
-   * Get id.
-   *
-   * @return int
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * Set name.
-   *
-   * @param string $name
-   *
-   * @return GameJam
-   */
-  public function setName($name)
+  public function setName(string $name): GameJam
   {
     $this->name = $name;
 
     return $this;
   }
 
-  /**
-   * Get name.
-   *
-   * @return string
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * Set formUrl.
-   *
-   * @param string $formUrl
-   *
-   * @return GameJam
-   */
-  public function setFormUrl($formUrl)
+  public function setFormUrl(string $formUrl): GameJam
   {
     $this->form_url = $formUrl;
 
     return $this;
   }
 
-  /**
-   * Get formUrl.
-   *
-   * @return string
-   */
-  public function getFormUrl()
+  public function getFormUrl(): ?string
   {
     return $this->form_url;
   }
 
-  /**
-   * Set start.
-   *
-   * @return GameJam
-   */
-  public function setStart(\DateTime $start)
+  public function setStart(DateTime $start): GameJam
   {
     $this->start = $start;
 
     return $this;
   }
 
-  /**
-   * Get start.
-   *
-   * @return \DateTime
-   */
-  public function getStart()
+  public function getStart(): DateTime
   {
     return $this->start;
   }
 
-  /**
-   * Set end.
-   *
-   * @return GameJam
-   */
-  public function setEnd(\DateTime $end)
+  public function setEnd(DateTime $end): GameJam
   {
     $this->end = $end;
 
     return $this;
   }
 
-  /**
-   * Get end.
-   *
-   * @return \DateTime
-   */
-  public function getEnd()
+  public function getEnd(): DateTime
   {
     return $this->end;
   }
 
-  /**
-   * Add program.
-   *
-   * @return GameJam
-   */
-  public function addProgram(Program $program)
+  public function addProgram(Program $program): GameJam
   {
     $this->programs[] = $program;
 
     return $this;
   }
 
-  /**
-   * Remove program.
-   */
-  public function removeProgram(Program $program)
+  public function removeProgram(Program $program): void
   {
     $this->programs->removeElement($program);
   }
 
-  /**
-   * Get programs.
-   *
-   * @return Collection
-   */
-  public function getPrograms()
+  public function getPrograms(): Collection
   {
     return $this->programs;
   }
 
-  /**
-   * Add sampleProgram.
-   *
-   * @return GameJam
-   */
-  public function addSampleProgram(Program $sampleProgram)
+  public function addSampleProgram(Program $sampleProgram): GameJam
   {
     $this->sample_programs[] = $sampleProgram;
 
     return $this;
   }
 
-  /**
-   * Remove sampleProgram.
-   */
-  public function removeSampleProgram(Program $sampleProgram)
+  public function removeSampleProgram(Program $sampleProgram): void
   {
     $this->sample_programs->removeElement($sampleProgram);
   }
 
-  /**
-   * Get samplePrograms.
-   *
-   * @return Collection
-   */
-  public function getSamplePrograms()
+  public function getSamplePrograms(): Collection
   {
     return $this->sample_programs;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getHashtag()
+  public function getHashtag(): ?string
   {
     return $this->hashtag;
   }
 
-  /**
-   * @param mixed $hashtag
-   */
-  public function setHashtag($hashtag)
+  public function setHashtag(?string $hashtag): void
   {
     $this->hashtag = $hashtag;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFlavor()
+  public function getFlavor(): ?string
   {
     return $this->flavor;
   }
 
-  /**
-   * @param mixed $flavor
-   */
-  public function setFlavor($flavor)
+  public function setFlavor(?string $flavor): void
   {
     $this->flavor = $flavor;
-  }
-
-  public function isNull()
-  {
-    return null === $this;
   }
 }

@@ -23,13 +23,13 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $scratch_parent_id;
+  protected string $scratch_parent_id;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $catrobat_child_id;
+  protected string $catrobat_child_id;
 
   /**
    * @ORM\ManyToOne(
@@ -38,54 +38,33 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
    *     fetch="LAZY"
    * )
    * @ORM\JoinColumn(name="catrobat_child_id", referencedColumnName="id")
-   *
-   * @var Program
    */
-  protected $catrobat_child;
+  protected Program $catrobat_child;
 
-  /**
-   * ScratchProgramRemixRelation constructor.
-   *
-   * @param $scratch_parent_id
-   */
-  public function __construct($scratch_parent_id, Program $catrobat_child)
+  public function __construct(string $scratch_parent_id, Program $catrobat_child)
   {
     $this->setScratchParentId($scratch_parent_id);
     $this->setCatrobatChild($catrobat_child);
   }
 
-  /**
-   * @return string
-   */
-  public function __toString()
+  public function __toString(): string
   {
     return '(Scratch: #'.$this->scratch_parent_id.', Catrobat: #'.$this->catrobat_child_id.')';
   }
 
-  /**
-   * @param int $scratch_parent_id
-   *
-   * @return ScratchProgramRemixRelation
-   */
-  public function setScratchParentId($scratch_parent_id)
+  public function setScratchParentId(string $scratch_parent_id): ScratchProgramRemixRelation
   {
     $this->scratch_parent_id = $scratch_parent_id;
 
     return $this;
   }
 
-  /**
-   * @return int
-   */
-  public function getScratchParentId()
+  public function getScratchParentId(): string
   {
     return $this->scratch_parent_id;
   }
 
-  /**
-   * @return ScratchProgramRemixRelation
-   */
-  public function setCatrobatChild(Program $catrobat_child)
+  public function setCatrobatChild(Program $catrobat_child): ScratchProgramRemixRelation
   {
     $this->catrobat_child = $catrobat_child;
     $this->catrobat_child_id = $catrobat_child->getId();
@@ -93,34 +72,22 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
     return $this;
   }
 
-  /**
-   * @return Program
-   */
-  public function getCatrobatChild()
+  public function getCatrobatChild(): Program
   {
     return $this->catrobat_child;
   }
 
-  /**
-   * @return int
-   */
-  public function getCatrobatChildId()
+  public function getCatrobatChildId(): string
   {
     return $this->catrobat_child_id;
   }
 
-  /**
-   * @return int
-   */
-  public function getDepth()
+  public function getDepth(): int
   {
     return 1;
   }
 
-  /**
-   * @return string
-   */
-  public function getUniqueKey()
+  public function getUniqueKey(): string
   {
     return sprintf('ScratchProgramRemixRelation(%d, %d)', $this->scratch_parent_id, $this->catrobat_child_id);
   }

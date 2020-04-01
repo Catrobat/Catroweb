@@ -10,36 +10,21 @@ use App\Repository\ProgramRemixRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * Class RemixSubgraphManipulator.
- */
 class RemixSubgraphManipulator
 {
+  /**
+   * @var string
+   */
   const COMMON_TIMESTAMP = 'common_timestamp';
 
-  /**
-   * @var EntityManagerInterface the entity manager
-   */
-  private $entity_manager;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var ProgramRepository the program repository
-   */
-  private $program_repository;
+  private ProgramRepository $program_repository;
 
-  /**
-   * @var ProgramRemixRepository the program remix repository
-   */
-  private $program_remix_repository;
+  private ProgramRemixRepository $program_remix_repository;
 
-  /**
-   * @var ProgramRemixBackwardRepository the program remix backward repository
-   */
-  private $program_remix_backward_repository;
+  private ProgramRemixBackwardRepository $program_remix_backward_repository;
 
-  /**
-   * RemixManager constructor.
-   */
   public function __construct(EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository,
                               ProgramRemixRepository $program_remix_repository,
@@ -51,13 +36,9 @@ class RemixSubgraphManipulator
     $this->program_remix_backward_repository = $program_remix_backward_repository;
   }
 
-  /**
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
-   */
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,
                                                        array $preserved_creation_date_mapping,
-                                                       array $preserved_seen_date_mapping)
+                                                       array $preserved_seen_date_mapping): void
   {
     $program_descendant_relations = $this->program_remix_repository->getDescendantRelations([$program->getId()]);
 
@@ -66,26 +47,14 @@ class RemixSubgraphManipulator
     $backward_parent_ids = $result['backwardParentIds'];
 
     $parents_ancestor_relations = $this->program_remix_repository->getAncestorRelations($forward_parent_ids);
-    $parent_ancestor_ids = array_unique(array_map(function ($r)
-    {
-      /*
-       * @var $r ProgramRemixRelation
-       */
-      return $r->getAncestorId();
-    }, $parents_ancestor_relations));
+    $parent_ancestor_ids = array_unique(array_map(fn ($r) => $r->getAncestorId(), $parents_ancestor_relations));
     $parent_ancestors_descendant_relations = $this->program_remix_repository
       ->getDescendantRelations($parent_ancestor_ids)
     ;
     $backward_parent_relations = $this->program_remix_backward_repository->getParentRelations([$program->getId()]);
 
-    $all_existing_relations = array_merge($parent_ancestors_descendant_relations, $backward_parent_relations);
-    $unique_keys_of_all_existing_relations = array_map(function ($r)
-    {
-      /*
-       * @var $r ProgramRemixRelation
-       */
-      return $r->getUniqueKey();
-    }, $all_existing_relations);
+    $all_existing_relations = [...$parent_ancestors_descendant_relations, ...$backward_parent_relations];
+    $unique_keys_of_all_existing_relations = array_map(fn ($r) => $r->getUniqueKey(), $all_existing_relations);
 
     $all_program_remix_relations = [];
 
@@ -122,24 +91,18 @@ class RemixSubgraphManipulator
         {
           $program_remix_relation->setCreatedAt($preserved_creation_date_mapping[$unique_key]);
         }
-        else
+        elseif (array_key_exists(self::COMMON_TIMESTAMP, $preserved_creation_date_mapping))
         {
-          if (array_key_exists(self::COMMON_TIMESTAMP, $preserved_creation_date_mapping))
-          {
-            $program_remix_relation->setCreatedAt($preserved_creation_date_mapping[self::COMMON_TIMESTAMP]);
-          }
+          $program_remix_relation->setCreatedAt($preserved_creation_date_mapping[self::COMMON_TIMESTAMP]);
         }
 
         if (array_key_exists($unique_key, $preserved_seen_date_mapping))
         {
           $program_remix_relation->setSeenAt($preserved_seen_date_mapping[$unique_key]);
         }
-        else
+        elseif (array_key_exists(self::COMMON_TIMESTAMP, $preserved_seen_date_mapping))
         {
-          if (array_key_exists(self::COMMON_TIMESTAMP, $preserved_seen_date_mapping))
-          {
-            $program_remix_relation->setSeenAt($preserved_seen_date_mapping[self::COMMON_TIMESTAMP]);
-          }
+          $program_remix_relation->setSeenAt($preserved_seen_date_mapping[self::COMMON_TIMESTAMP]);
         }
 
         if (!in_array($unique_key, $unique_keys_of_all_existing_relations, true))
@@ -157,11 +120,8 @@ class RemixSubgraphManipulator
     }
   }
 
-  /**
-   * @return array
-   */
   private function splitNewParentIdsByRelationDirection(array $existing_descendant_relations_of_program,
-                                                        array $ids_of_new_parents)
+                                                        array $ids_of_new_parents): array
   {
     // check if any new parent is already an existing child of this program
     // (i.e. has a forward descendant connection to the program)!

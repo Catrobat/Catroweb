@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Scripts;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class StartScript.
- */
 class StartScript extends Script
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::START_SCRIPT;
     $this->caption = 'When program started';

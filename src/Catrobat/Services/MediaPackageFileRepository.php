@@ -3,34 +3,28 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use Imagick;
+use ImagickException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class MediaPackageFileRepository.
- */
 class MediaPackageFileRepository
 {
-  private $dir;
-  private $path;
-  private $filesystem;
-  private $thumb_dir;
+  private string $dir;
+  private string $path;
+  private Filesystem $filesystem;
+  private string $thumb_dir;
 
-  /**
-   * MediaPackageFileRepository constructor.
-   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
-    /**
-     * @var string Directory where media package files are stored
-     * @var string $path Path where files in $dir can be accessed via web
-     */
+    /** @var string $dir Directory where media package files are stored */
     $dir = $parameter_bag->get('catrobat.mediapackage.dir');
+    /** @var string $path Path where files in $dir can be accessed via web */
     $path = $parameter_bag->get('catrobat.mediapackage.path');
-    $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
-    $path = preg_replace('/([^\/]+)$/', '$1/', $path);
+    $dir = preg_replace('#([^/]+)$#', '$1/', $dir);
+    $path = preg_replace('#([^/]+)$#', '$1/', $path);
     $thumb_dir = $dir.'thumbs/';
 
     if (!is_dir($dir))
@@ -58,14 +52,14 @@ class MediaPackageFileRepository
    * @param string $extension        File extension
    * @param bool   $create_thumbnail Whether a thumbnail should be created or not. Default is true.
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function save(File $file, $id, string $extension, bool $create_thumbnail = true)
+  public function save(File $file, int $id, string $extension, bool $create_thumbnail = true): void
   {
-    $file->move($this->dir, $this->generateFileNameFromId($id, $extension));
-    if (true === $create_thumbnail)
+    $file->move($this->dir, $this->generateFileNameFromId((string) $id, $extension));
+    if ($create_thumbnail)
     {
-      $this->createThumbnail($id, $extension);
+      $this->createThumbnail((string) $id, $extension);
     }
   }
 
@@ -78,16 +72,16 @@ class MediaPackageFileRepository
    * @param string $extension        file extension
    * @param bool   $create_thumbnail Whether a thumbnail should be created or not. Default is true.
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function saveMediaPackageFile(File $file, $id, string $extension,
-                                       bool $create_thumbnail = true)
+  public function saveMediaPackageFile(File $file, int $id, string $extension,
+                                       bool $create_thumbnail = true): void
   {
-    $target = $this->dir.$this->generateFileNameFromId($id, $extension);
+    $target = $this->dir.$this->generateFileNameFromId((string) $id, $extension);
     $this->filesystem->copy($file->getPathname(), $target);
-    if (true === $create_thumbnail)
+    if ($create_thumbnail)
     {
-      $this->createThumbnail($id, $extension);
+      $this->createThumbnail((string) $id, $extension);
     }
   }
 
@@ -97,9 +91,9 @@ class MediaPackageFileRepository
    * @param int    $id        the database id of the file
    * @param string $extension File extension
    */
-  public function remove($id, string $extension)
+  public function remove(int $id, string $extension): void
   {
-    $file_name = $this->generateFileNameFromId($id, $extension);
+    $file_name = $this->generateFileNameFromId((string) $id, $extension);
     $path = $this->dir.$file_name;
     if (is_file($path))
     {
@@ -117,9 +111,9 @@ class MediaPackageFileRepository
    * Creates missing thumbnails.
    * It checks for files that exist in the base directory but not in the thumbs directory.
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function createMissingThumbnails()
+  public function createMissingThumbnails(): void
   {
     $finder = new Finder();
     $finder->files()->in($this->dir)->depth(0);
@@ -153,12 +147,10 @@ class MediaPackageFileRepository
    *
    * @param int    $id        the database id of the file
    * @param string $extension File extension
-   *
-   * @return string
    */
-  public function getWebPath($id, string $extension)
+  public function getWebPath(int $id, string $extension): string
   {
-    return $this->path.$this->generateFileNameFromId($id, $extension);
+    return $this->path.$this->generateFileNameFromId((string) $id, $extension);
   }
 
   /**
@@ -166,10 +158,8 @@ class MediaPackageFileRepository
    *
    * @param int    $id        the database id of the file
    * @param string $extension File extension
-   *
-   * @return File
    */
-  public function getMediaFile($id, string $extension)
+  public function getMediaFile(int $id, string $extension): File
   {
     return new File($this->dir.$id.'.'.$extension);
   }
@@ -177,46 +167,46 @@ class MediaPackageFileRepository
   /**
    * Creates a thumbnail for the given id and extension.
    *
-   * @param int    $id        the database id of the file
+   * @param string $id        the id/name of the file
    * @param string $extension File extension
    *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  private function createThumbnail($id, string $extension)
+  private function createThumbnail(string $id, string $extension): void
   {
     try
     {
       $path = $this->dir.$this->generateFileNameFromId($id, $extension);
-      $imagick = new \Imagick(realpath($path));
+      $imagick = new Imagick(realpath($path));
       $meanImg = clone $imagick;
       $meanImg->setBackgroundColor('#ffffff');
-      $meanImg->setImageAlphaChannel(\Imagick::ALPHACHANNEL_REMOVE);
-      $meanImg->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
+      $meanImg->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
+      $meanImg->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
       $meanImg->setImageFormat('jpeg');
-      $meanImg->setColorspace(\Imagick::COLORSPACE_GRAY);
-      $mean = $meanImg->getImageChannelMean(\Imagick::CHANNEL_GRAY);
+      $meanImg->setColorspace(Imagick::COLORSPACE_GRAY);
+      $mean = $meanImg->getImageChannelMean(Imagick::CHANNEL_GRAY);
 
       $background = '#ffffff';
-      if ($mean['mean'] > 0xD000 && $mean['standardDeviation'] < 2000)
+      if ($mean['mean'] > 0xD000 && $mean['standardDeviation'] < 2_000)
       {
         $background = '#888888';
       }
 
       $imagick->setImageBackgroundColor($background);
-      $imagick->setImageAlphaChannel(\Imagick::ALPHACHANNEL_REMOVE);
-      $imagick->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
+      $imagick->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
+      $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
       $imagick->setImageFormat('jpeg');
       $imagick->thumbnailImage(200, 0);
       $imagick->writeImage($this->thumb_dir.$id.'.'.'jpeg');
     }
-    catch (\ImagickException $e)
+    catch (ImagickException $imagickException)
     {
-      $code = $e->getCode() % 100;
+      $code = $imagickException->getCode() % 100;
       // for error codes see: https://www.imagemagick.org/script/exception.php
       // allowed: 20 non-images/unknown type; 5 font unavailable (svg etc.)
       if (20 !== $code && 5 !== $code)
       {
-        throw $e;
+        throw $imagickException;
       }
     }
   }
@@ -224,12 +214,10 @@ class MediaPackageFileRepository
   /**
    * Generates a file name from given id and extension.
    *
-   * @param int    $id        the database id of the file
+   * @param string $id        the id/name of the file
    * @param string $extension File extension
-   *
-   * @return string
    */
-  private function generateFileNameFromId($id, string $extension)
+  private function generateFileNameFromId(string $id, string $extension): string
   {
     return $id.'.'.$extension;
   }

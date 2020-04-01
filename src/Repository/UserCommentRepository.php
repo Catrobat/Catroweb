@@ -7,9 +7,6 @@ use App\Entity\UserComment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * Class UserCommentRepository.
- */
 class UserCommentRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -24,7 +21,7 @@ class UserCommentRepository extends ServiceEntityRepository
    *
    * @return UserComment[] The UserComments written by the specified User
    */
-  public function getCommentsWrittenByUser(User $user)
+  public function getCommentsWrittenByUser(User $user): array
   {
     $em = $this->getEntityManager();
 

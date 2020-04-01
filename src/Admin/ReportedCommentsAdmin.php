@@ -3,16 +3,15 @@
 namespace App\Admin;
 
 use App\Entity\Program;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-/**
- * Class ReportedCommentsAdmin.
- */
 class ReportedCommentsAdmin extends AbstractAdmin
 {
   /**
@@ -28,8 +27,17 @@ class ReportedCommentsAdmin extends AbstractAdmin
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     $query = parent::configureQuery($query);
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0].'.isReported', $query->expr()->literal(true))
+
+    if (!$query instanceof ProxyQuery)
+    {
+      return $query;
+    }
+
+    /** @var QueryBuilder $qb */
+    $qb = $query->getQueryBuilder();
+
+    $qb->andWhere(
+      $qb->expr()->eq($qb->getRootAliases()[0].'.isReported', $qb->expr()->literal(true))
     );
 
     return $query;
@@ -40,7 +48,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
   }
 
@@ -49,7 +57,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->add('id')
@@ -70,7 +78,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->add('deleteComment');
     $collection->add('unreportComment');

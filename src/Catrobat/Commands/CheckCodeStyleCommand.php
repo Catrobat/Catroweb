@@ -10,18 +10,13 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-/**
- * Class CheckCodeStyleCommand.
- */
 class CheckCodeStyleCommand extends Command
 {
+  protected static $defaultName = 'phpcheckstyle';
   private ParameterBagInterface $parameter_bag;
 
   private string $root_dir;
 
-  /**
-   * CreateBackupCommand constructor.
-   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -29,7 +24,7 @@ class CheckCodeStyleCommand extends Command
     $this->root_dir = $parameter_bag->get('kernel.root_dir');
   }
 
-  protected function configure()
+  protected function configure(): void
   {
     $this
       // the name of the command (the part after "bin/console")
@@ -47,10 +42,7 @@ class CheckCodeStyleCommand extends Command
     ;
   }
 
-  /**
-   * @return int
-   */
-  protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output): int
   {
     if ($input->getArgument('githash'))
     {
@@ -65,7 +57,7 @@ class CheckCodeStyleCommand extends Command
         throw new ProcessFailedException($process_git);
       }
 
-      $process_git_output = array_filter(explode("\n", $process_git->getOutput()), 'strlen');
+      $process_git_output = array_filter(explode("\n", $process_git->getOutput()));
       $git_files_regex = '/src\\/.*\\.php/';
       $git_files = [];
 
@@ -92,13 +84,14 @@ class CheckCodeStyleCommand extends Command
       ];
       foreach ($git_files as $entry)
       {
-        $command = $command.' --src '.$entry;
+        $command[] = '--src';
+        $command[] = $entry;
       }
 
       $process = new Process($command);
 
       // Getting real time output
-      $process->run(function ($type, $buffer)
+      $process->run(function ($type, $buffer): void
       {
         echo $buffer;
       });
@@ -117,7 +110,7 @@ class CheckCodeStyleCommand extends Command
     $process = new Process($command);
 
     // Getting real time output
-    $process->run(function ($type, $buffer)
+    $process->run(function ($type, $buffer): void
     {
       echo $buffer;
     });

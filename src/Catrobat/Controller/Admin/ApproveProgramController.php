@@ -11,9 +11,9 @@ class ApproveProgramController extends CRUDController
 {
   public function approveAction(): RedirectResponse
   {
-    /** @var Program $object */
+    /** @var Program|null $object */
     $object = $this->admin->getSubject();
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }
@@ -39,9 +39,9 @@ class ApproveProgramController extends CRUDController
 
   public function invisibleAction(): RedirectResponse
   {
-    /** @var Program $object */
+    /** @var Program|null $object */
     $object = $this->admin->getSubject();
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }

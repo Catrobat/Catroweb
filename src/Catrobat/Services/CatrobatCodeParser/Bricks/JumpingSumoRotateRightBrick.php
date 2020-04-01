@@ -4,12 +4,9 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class JumpingSumoRotateRightBrick.
- */
 class JumpingSumoRotateRightBrick extends Brick
 {
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::JUMP_SUMO_ROTATE_RIGHT_BRICK;
     $this->caption = 'ROTATE Sumo RIGHT by _ degrees';

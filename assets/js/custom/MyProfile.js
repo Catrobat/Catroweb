@@ -81,7 +81,7 @@ const MyProfile = function (profileUrl, saveUsername,
   function stringTranslate (programName, catalogEntry) {
     const translations = []
     translations.push({ key: '%programName%', value: programName })
-    return Routing.generate('translate_word', {
+    return Routing.generate('translate', {
       word: catalogEntry,
       array: JSON.stringify(translations),
       domain: 'catroweb'
@@ -191,7 +191,7 @@ const MyProfile = function (profileUrl, saveUsername,
   }
 
   $(document).on('click', '#delete-account-button', function () {
-    const url = Routing.generate('translate_word', {
+    const url = Routing.generate('translate', {
       word: 'programs.deleteAccountConfirmation'
     }, false)
     $.get(url, function (data) {

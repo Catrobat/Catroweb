@@ -5,18 +5,10 @@ namespace App\Catrobat\Exceptions\Upload;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\StatusCode;
 
-/**
- * Class OldApplicationVersionException.
- */
 class OldApplicationVersionException extends InvalidCatrobatFileException
 {
-  /**
-   * OldApplicationVersionException constructor.
-   *
-   * @param $debug
-   */
-  public function __construct($debug)
+  public function __construct(string $debug_message)
   {
-    parent::__construct('errors.programversion.tooold', StatusCode::OLD_APPLICATION_VERSION, $debug);
+    parent::__construct('errors.programversion.tooold', StatusCode::OLD_APPLICATION_VERSION, $debug_message);
   }
 }

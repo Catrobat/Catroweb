@@ -10,9 +10,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-/**
- * Class NotificationAdmin.
- */
 class NotificationAdmin extends AbstractAdmin
 {
   /**
@@ -30,7 +27,7 @@ class NotificationAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('user', EntityType::class, ['class' => User::class])
@@ -46,7 +43,7 @@ class NotificationAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
   }
 
@@ -55,7 +52,7 @@ class NotificationAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->add('user', EntityType::class, ['class' => User::class])
@@ -72,7 +69,7 @@ class NotificationAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
   }
 }

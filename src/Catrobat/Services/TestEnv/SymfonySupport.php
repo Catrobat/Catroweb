@@ -27,6 +27,7 @@ use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
 use App\Entity\UserRemixSimilarityRelation;
+use App\Kernel;
 use App\Repository\CatroNotificationRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\ProgramRemixBackwardRepository;
@@ -42,7 +43,7 @@ use Behat\Symfony2Extension\Context\KernelDictionary;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
@@ -81,10 +82,9 @@ trait SymfonySupport
    * @override
    * Sets Kernel instance.
    */
-  public function setKernel(KernelInterface $kernel)
+  public function setKernel(KernelInterface $kernel): void
   {
     $this->kernel = $kernel;
-    // look into services(_test).yml
     $this->ERROR_DIR = $this->getSymfonyParameter('catrobat.testreports.behat');
     $this->SCREENSHOT_DIR = $this->getSymfonyParameter('catrobat.testreports.screenshot');
     $this->FIXTURES_DIR = $this->getSymfonyParameter('catrobat.test.directory.source');
@@ -187,7 +187,7 @@ trait SymfonySupport
     return $this->kernel->getContainer()->get(CatroNotificationRepository::class);
   }
 
-  public function getManager(): ObjectManager
+  public function getManager(): EntityManagerInterface
   {
     return $this->kernel->getContainer()->get('doctrine')->getManager();
   }
@@ -205,18 +205,12 @@ trait SymfonySupport
     return $this->kernel->getContainer()->getParameter($param);
   }
 
-  /**
-   * @return object
-   */
-  public function getSymfonyService(string $service_name)
+  public function getSymfonyService(string $service_name): object
   {
     return $this->kernel->getContainer()->get($service_name);
   }
 
-  /**
-   * @return string
-   */
-  public function getDefaultProgramFile()
+  public function getDefaultProgramFile(): string
   {
     $file = $this->FIXTURES_DIR.'/test.catrobat';
     Assert::assertTrue(is_file($file));
@@ -224,10 +218,7 @@ trait SymfonySupport
     return $file;
   }
 
-  /**
-   * @param $directory
-   */
-  public function emptyDirectory($directory)
+  public function emptyDirectory(string $directory): void
   {
     if (!is_dir($directory))
     {
@@ -244,17 +235,13 @@ trait SymfonySupport
   }
 
   /**
-   * @param array $config
-   *
    * @throws Exception
-   *
-   * @return GameJam
    */
-  public function insertDefaultGameJam($config = [])
+  public function insertDefaultGameJam(array $config = []): GameJam
   {
     $game_jam = new GameJam();
-    $game_jam->setName(isset($config['name']) ? $config['name'] : 'pocketalice');
-    $game_jam->setHashtag(isset($config['hashtag']) ? $config['hashtag'] : null);
+    $game_jam->setName($config['name'] ?? 'pocketalice');
+    $game_jam->setHashtag($config['hashtag'] ?? null);
 
     if (isset($config['flavor']) && 'no-flavor' !== $config['flavor'])
     {
@@ -267,13 +254,15 @@ trait SymfonySupport
 
     $start_date = TimeUtils::getDateTime();
     $start_date->sub(new DateInterval('P10D'));
+
     $end_date = TimeUtils::getDateTime();
+
     $end_date->add(new DateInterval('P10D'));
 
-    $game_jam->setStart(isset($config['start']) ? $config['start'] : $start_date);
-    $game_jam->setEnd(isset($config['end']) ? $config['end'] : $end_date);
+    $game_jam->setStart($config['start'] ?? $start_date);
+    $game_jam->setEnd($config['end'] ?? $end_date);
 
-    $game_jam->setFormUrl(isset($config['formurl']) ? $config['formurl'] : 'https://catrob.at/url/to/form');
+    $game_jam->setFormUrl($config['formurl'] ?? 'https://catrob.at/url/to/form');
 
     $this->getManager()->persist($game_jam);
     $this->getManager()->flush();
@@ -286,7 +275,7 @@ trait SymfonySupport
     return $this->getUserDataFixtures()->insertUser($config, $andFlush);
   }
 
-  public function assertUser(array $config = [])
+  public function assertUser(array $config = []): void
   {
     $this->getUserDataFixtures()->assertUser($config);
   }
@@ -341,10 +330,9 @@ trait SymfonySupport
     $user_manager = $this->getUserManager();
     $program_manager = $this->getProgramManager();
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $user_manager->findUserByUsername($config['username']);
 
-    /** @var Program $program */
     $program = $program_manager->find($config['program_id']);
 
     $program_like = new ProgramLike($program, $user, $config['type']);
@@ -359,14 +347,11 @@ trait SymfonySupport
     return $program_like;
   }
 
-  /**
-   * @param $config
-   */
   public function insertTag(array $config = [], bool $andFlush = true): Tag
   {
     $tag = new Tag();
     $tag->setEn($config['en']);
-    $tag->setDe(isset($config['de']) ? $config['de'] : null);
+    $tag->setDe($config['de'] ?? null);
 
     $this->getManager()->persist($tag);
     if ($andFlush)
@@ -377,9 +362,6 @@ trait SymfonySupport
     return $tag;
   }
 
-  /**
-   * @param $config
-   */
   public function insertExtension(array $config = [], bool $andFlush = true): Extension
   {
     $extension = new Extension();
@@ -414,9 +396,6 @@ trait SymfonySupport
     return $forward_relation;
   }
 
-  /**
-   * @param $config
-   */
   public function insertBackwardRemixRelation(array $config = [], bool $andFlush = true): ProgramRemixBackwardRelation
   {
     /** @var Program $parent */
@@ -436,9 +415,6 @@ trait SymfonySupport
     return $backward_relation;
   }
 
-  /**
-   * @param $config
-   */
   public function insertScratchRemixRelation(array $config = [], bool $andFlush = true): ScratchProgramRemixRelation
   {
     /** @var Program $catrobat_child */
@@ -482,11 +458,11 @@ trait SymfonySupport
       $featured_program->setProgram($program);
     }
 
-    $featured_program->setUrl(isset($config['url']) ? $config['url'] : null);
-    $featured_program->setImageType(isset($config['imagetype']) ? $config['imagetype'] : 'jpg');
-    $featured_program->setActive(isset($config['active']) ? intval($config['active']) : true);
-    $featured_program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
-    $featured_program->setPriority(isset($config['priority']) ? intval($config['priority']) : 1);
+    $featured_program->setUrl($config['url'] ?? null);
+    $featured_program->setImageType($config['imagetype'] ?? 'jpg');
+    $featured_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
+    $featured_program->setFlavor($config['flavor'] ?? 'pocketcode');
+    $featured_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
     $featured_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 
     $this->getManager()->persist($featured_program);
@@ -506,7 +482,7 @@ trait SymfonySupport
     /** @var Program $project */
     $project = $this->getProgramManager()->find($config['program_id']);
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUserManager()->find($config['user_id']);
 
     $new_comment = new UserComment();
@@ -542,7 +518,7 @@ trait SymfonySupport
     /** @var Program $project */
     $project = $this->getProgramManager()->find($config['program_id']);
 
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUserManager()->find($config['user_id']);
 
     $new_report = new ProgramInappropriateReport();
@@ -571,16 +547,17 @@ trait SymfonySupport
 
     $program_statistics = new ProgramDownloads();
     $program_statistics->setProgram($project);
-    $program_statistics->setDownloadedAt(new DateTime($config['downloaded_at']) ?: TimeUtils::getDateTime());
-    $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
-    $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
-    $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
-    $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
-    $program_statistics->setReferrer(isset($config['referrer']) ? $config['referrer'] : 'Facebook');
+    $program_statistics->setDownloadedAt(isset($config['downloaded_at']) ? new DateTime($config['downloaded_at']) : TimeUtils::getDateTime());
+    $program_statistics->setIp($config['ip'] ?? '88.116.169.222');
+    $program_statistics->setCountryCode($config['country_code'] ?? 'AT');
+    $program_statistics->setCountryName($config['country_name'] ?? 'Austria');
+    $program_statistics->setUserAgent($config['user_agent'] ?? 'okhttp');
+    $program_statistics->setReferrer($config['referrer'] ?? 'Facebook');
 
     if (isset($config['username']))
     {
       $user_manager = $this->getUserManager();
+      /** @var User|null $user */
       $user = $user_manager->findUserByUsername($config['username']);
       if (null === $user)
       {
@@ -603,7 +580,7 @@ trait SymfonySupport
 
   public function insertNotification(array $config, bool $andFlush = true): Notification
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($config['user']);
 
     $notification = new Notification();
@@ -622,12 +599,10 @@ trait SymfonySupport
   }
 
   /**
-   * @param $parameters
    * @param mixed $is_embroidery
-   *
-   * @return string
+   * @param mixed $parameters
    */
-  public function generateProgramFileWith($parameters, $is_embroidery = false)
+  public function generateProgramFileWith($parameters, $is_embroidery = false): string
   {
     $filesystem = new Filesystem();
     $this->emptyDirectory(sys_get_temp_dir().'/program_generated/');
@@ -682,10 +657,7 @@ trait SymfonySupport
     return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
   }
 
-  /**
-   * @return UploadedFile
-   */
-  public function getStandardProgramFile()
+  public function getStandardProgramFile(): UploadedFile
   {
     $filepath = $this->FIXTURES_DIR.'test.catrobat';
     Assert::assertTrue(file_exists($filepath), 'File not found');
@@ -693,10 +665,10 @@ trait SymfonySupport
     return new UploadedFile($filepath, 'test.catrobat');
   }
 
-  public function assertJsonRegex($pattern, $json)
+  public function assertJsonRegex(string $pattern, string $json): void
   {
     // allows to compare strings using a regex wildcard (.*?)
-    $pattern = json_encode(json_decode($pattern)); // reformat string
+    $pattern = json_encode(json_decode($pattern, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR); // reformat string
 
     // escape chars that should not be used as regex
     $pattern = str_replace('\\', '\\\\', $pattern);
@@ -713,12 +685,12 @@ trait SymfonySupport
     $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
 
     $delimter = '#';
-    $json = json_encode(json_decode($json));
+    $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
     Assert::assertRegExp($delimter.$pattern.$delimter, $json);
   }
 
   /**
-   * @param $path
+   * @param mixed $path
    *
    * @return bool|string
    */
