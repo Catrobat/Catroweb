@@ -379,7 +379,7 @@ class ResetCommand extends Command
     for ($i = 0; $i < sizeof($user_array); ++$i)
     {
       $user_id = $i;
-      $follower_id = random_int(0, sizeof($user_array));
+      $follower_id = random_int(0, sizeof($user_array) - 1);
 
       $parameters = [
         'user_name' => $user_array[$user_id],

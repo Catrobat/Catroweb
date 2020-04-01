@@ -99,6 +99,8 @@ class ProgramManager
 
   /**
    * Check visibility of the given project for the current user.
+   *
+   * @throws NoResultException
    */
   public function isProjectVisibleForCurrentUser(?Program $project): bool
   {
@@ -528,19 +530,25 @@ class ProgramManager
     return $this->program_repository->getProgramsWithExtractedDirectoryHash();
   }
 
+  /**
+   * @return Program[]
+   */
   public function getRecentPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0', array $accept_language = []): array
+                                    string $max_version = '0'): array
   {
     return $this->program_repository->getRecentPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
+  /**
+   * @return Program[]
+   */
   public function getMostViewedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                        string $max_version = '0', array $accept_language = []): array
+                                        string $max_version = '0'): array
   {
     return $this->program_repository->getMostViewedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
@@ -548,10 +556,10 @@ class ProgramManager
    * @return Program[]
    */
   public function getScratchRemixesPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0', array $accept_language = []): array
+                                            string $max_version = '0'): array
   {
     return $this->program_repository->getScratchRemixesPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
@@ -559,10 +567,10 @@ class ProgramManager
    * @return Program[]
    */
   public function getMostDownloadedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0', array $accept_language = []): array
+                                            string $max_version = '0'): array
   {
     return $this->program_repository->getMostDownloadedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
@@ -570,10 +578,10 @@ class ProgramManager
    * @return Program[]
    */
   public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0', array $accept_language = []): array
+                                    string $max_version = '0'): array
   {
     return $this->program_repository->getRandomPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version, $accept_language
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
@@ -759,23 +767,22 @@ class ProgramManager
     return json_decode($tokenPayload, true);
   }
 
-  public function getProjects(string $project_type, array $accept_language = ['en'],
-                              string $max_version = '0', int $limit = 20,
-                              int $offset = 0, string $flavor = null): array
+  public function getProjects(string $project_type, string $max_version = '0',
+                              int $limit = 20, int $offset = 0, string $flavor = null): array
   {
     switch ($project_type){
       case 'recent':
-        return $this->getRecentPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        return $this->getRecentPrograms($flavor, $limit, $offset, $max_version);
       case 'random':
-        return $this->getRandomPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        return $this->getRandomPrograms($flavor, $limit, $offset, $max_version);
       case 'most_viewed':
-        return $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        return $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
       case 'most_downloaded':
-        return $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        return $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
       case 'example':
         return [];
       case 'scratch':
-        return $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version, $accept_language);
+        return $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version);
       default:
         return [];
     }

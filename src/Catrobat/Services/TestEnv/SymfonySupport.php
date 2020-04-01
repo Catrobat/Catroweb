@@ -670,6 +670,11 @@ trait SymfonySupport
     // allows to compare strings using a regex wildcard (.*?)
     $pattern = json_encode(json_decode($pattern, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR); // reformat string
 
+    if (is_countable(json_decode($pattern)))
+    {
+      Assert::assertEquals(count(json_decode($pattern)), count(json_decode($json)));
+    }
+
     // escape chars that should not be used as regex
     $pattern = str_replace('\\', '\\\\', $pattern);
     $pattern = str_replace('[', '\\[', $pattern);

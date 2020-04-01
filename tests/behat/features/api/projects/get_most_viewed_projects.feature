@@ -11,12 +11,11 @@ Feature: Get most viewed projects
     And there are programs:
       | id | name      |  owned by | views | upload time      | FileSize | version | language version |   flavor    | upload_language |
       | 1  | project 1 |  Catrobat | 10    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.999            |  pocketcode |      en         |
-      | 2  | project 2 |  User1    | 50    | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.984            |  luna       |      fr         |
+      | 2  | project 2 |  User1    | 50    | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.982            |  luna       |      fr         |
       | 3  | project 3 |  Catrobat |  5    | 03.08.2014 12:00 | 1048576  | 0.8.5   | 0.123            |  pocketcode |      de         |
       | 4  | project 4 |  User2    | 50    | 04.08.2014 12:00 | 1048576  | 0.8.5   | 0.984            |  luna       |      en         |
       | 5  | project 5 |  User1    | 40    | 05.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            |  pocketcode |      de         |
       | 6  | project 6 |  User1    | 20    | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            |  luna       |      fr         |
-
 
 
   Scenario: Get most viewed projects
@@ -25,44 +24,116 @@ Feature: Get most viewed projects
     Then the response status code should be "200"
     Then I should get the json object:
       """
-      [
-        {
-            "id": "REGEX_STRING_WILDCARD",
-            "name":"REGEX_STRING_WILDCARD",
-            "author":"User2",
-            "description":"",
-            "version":"0.8.5",
+        [
+          {
+            "id": "2",
+            "name": "project 2",
+            "author": "User1",
+            "description": "",
+            "version": "0.8.5",
             "views": 50,
             "download": 0,
-            "private":false,
+            "private": false,
             "flavor": "luna",
             "uploaded": "REGEX_INT_WILDCARD",
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/2",
+            "download_url": "http://localhost/app/download/2.catrobat",
             "filesize": 0
-        },
-        {
-            "id": "REGEX_STRING_WILDCARD",
-            "name":"REGEX_STRING_WILDCARD",
-            "author":"Catrobat",
-            "description":"",
-            "version":"0.8.5",
-            "views": 10,
+          },
+          {
+            "id": "4",
+            "name": "project 4",
+            "author": "User2",
+            "description": "",
+            "version": "0.8.5",
+            "views": 50,
             "download": 0,
-            "private":false,
+            "private": false,
+            "flavor": "luna",
+            "uploaded": "REGEX_INT_WILDCARD",
+            "uploaded_string": "REGEX_STRING_WILDCARD",
+            "screenshot_large": "http://localhost/images/default/screenshot.png",
+            "screenshot_small": "http://localhost/images/default/thumbnail.png",
+            "project_url": "http://localhost/app/project/4",
+            "download_url": "http://localhost/app/download/4.catrobat",
+            "filesize": 0
+          },
+          {
+            "id": "5",
+            "name": "project 5",
+            "author": "User1",
+            "description": "",
+            "version": "0.8.5",
+            "views": 40,
+            "download": 0,
+            "private": false,
             "flavor": "pocketcode",
             "uploaded": "REGEX_INT_WILDCARD",
             "uploaded_string": "REGEX_STRING_WILDCARD",
             "screenshot_large": "http://localhost/images/default/screenshot.png",
             "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
+            "project_url": "http://localhost/app/project/5",
+            "download_url": "http://localhost/app/download/5.catrobat",
             "filesize": 0
-        }
-      ]
+          },
+          {
+            "id": "6",
+            "name": "project 6",
+            "author": "User1",
+            "description": "",
+            "version": "0.8.5",
+            "views": 20,
+            "download": 0,
+            "private": false,
+            "flavor": "luna",
+            "uploaded": "REGEX_INT_WILDCARD",
+            "uploaded_string": "REGEX_STRING_WILDCARD",
+            "screenshot_large": "http://localhost/images/default/screenshot.png",
+            "screenshot_small": "http://localhost/images/default/thumbnail.png",
+            "project_url": "http://localhost/app/project/6",
+            "download_url": "http://localhost/app/download/6.catrobat",
+            "filesize": 0
+          },
+          {
+            "id": "1",
+            "name": "project 1",
+            "author": "Catrobat",
+            "description": "",
+            "version": "0.8.5",
+            "views": 10,
+            "download": 0,
+            "private": false,
+            "flavor": "pocketcode",
+            "uploaded": "REGEX_INT_WILDCARD",
+            "uploaded_string": "REGEX_STRING_WILDCARD",
+            "screenshot_large": "http://localhost/images/default/screenshot.png",
+            "screenshot_small": "http://localhost/images/default/thumbnail.png",
+            "project_url": "http://localhost/app/project/1",
+            "download_url": "http://localhost/app/download/1.catrobat",
+            "filesize": 0
+          },
+          {
+            "id": "3",
+            "name": "project 3",
+            "author": "Catrobat",
+            "description": "",
+            "version": "0.8.5",
+            "views": 5,
+            "download": 0,
+            "private": false,
+            "flavor": "pocketcode",
+            "uploaded": "REGEX_INT_WILDCARD",
+            "uploaded_string": "REGEX_STRING_WILDCARD",
+            "screenshot_large": "http://localhost/images/default/screenshot.png",
+            "screenshot_small": "http://localhost/images/default/thumbnail.png",
+            "project_url": "http://localhost/app/project/3",
+            "download_url": "http://localhost/app/download/3.catrobat",
+            "filesize": 0
+          }
+        ]
       """
 
   Scenario: Get most viewed projects in german and limit = 1
@@ -74,80 +145,170 @@ Feature: Get most viewed projects
       """
       [
         {
-            "id": "REGEX_STRING_WILDCARD",
-            "name":"REGEX_STRING_WILDCARD",
-            "author":"User1",
-            "description":"",
-            "version":"0.8.5",
-            "views": 40,
-            "download": 0,
-            "private":false,
-            "flavor": "pocketcode",
-            "uploaded": "REGEX_INT_WILDCARD",
-            "uploaded_string": "REGEX_STRING_WILDCARD",
-            "screenshot_large": "http://localhost/images/default/screenshot.png",
-            "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-            "filesize": 0
-        }
+          "id": "2",
+          "name": "project 2",
+          "author": "User1",
+          "description": "",
+          "version": "0.8.5",
+          "views": 50,
+          "download": 0,
+          "private": false,
+          "flavor": "luna",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/2",
+          "download_url": "http://localhost/app/download/2.catrobat",
+          "filesize": 0
+          }
       ]
       """
 
   Scenario: Get most viewed projects in english with offset = 1
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "en"
-    And I request "GET" "/api/projects/?project_type=most_viewed"
+    And I request "GET" "/api/projects/?project_type=most_viewed&offset=1"
     Then the response status code should be "200"
     Then I should get the json object:
       """
       [
         {
-            "id": "REGEX_STRING_WILDCARD",
-            "name":"REGEX_STRING_WILDCARD",
-            "author":"Catrobat",
-            "description":"",
-            "version":"0.8.5",
-            "views": 10,
-            "download": 0,
-            "private":false,
-            "flavor": "pocketcode",
-            "uploaded": "REGEX_INT_WILDCARD",
-            "uploaded_string": "REGEX_STRING_WILDCARD",
-            "screenshot_large": "http://localhost/images/default/screenshot.png",
-            "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-            "filesize": 0
+          "id": "4",
+          "name": "project 4",
+          "author": "User2",
+          "description": "",
+          "version": "0.8.5",
+          "views": 50,
+          "download": 0,
+          "private": false,
+          "flavor": "luna",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/4",
+          "download_url": "http://localhost/app/download/4.catrobat",
+          "filesize": 0
+        },
+        {
+          "id": "5",
+          "name": "project 5",
+          "author": "User1",
+          "description": "",
+          "version": "0.8.5",
+          "views": 40,
+          "download": 0,
+          "private": false,
+          "flavor": "pocketcode",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/5",
+          "download_url": "http://localhost/app/download/5.catrobat",
+          "filesize": 0
+        },
+        {
+          "id": "6",
+          "name": "project 6",
+          "author": "User1",
+          "description": "",
+          "version": "0.8.5",
+          "views": 20,
+          "download": 0,
+          "private": false,
+          "flavor": "luna",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/6",
+          "download_url": "http://localhost/app/download/6.catrobat",
+          "filesize": 0
+        },
+        {
+          "id": "1",
+          "name": "project 1",
+          "author": "Catrobat",
+          "description": "",
+          "version": "0.8.5",
+          "views": 10,
+          "download": 0,
+          "private": false,
+          "flavor": "pocketcode",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/1",
+          "download_url": "http://localhost/app/download/1.catrobat",
+          "filesize": 0
+        },
+        {
+          "id": "3",
+          "name": "project 3",
+          "author": "Catrobat",
+          "description": "",
+          "version": "0.8.5",
+          "views": 5,
+          "download": 0,
+          "private": false,
+          "flavor": "pocketcode",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/3",
+          "download_url": "http://localhost/app/download/3.catrobat",
+          "filesize": 0
         }
       ]
       """
 
-  Scenario: Get most viewed projects in french with max_version = 0.984
+  Scenario: Get most viewed projects in french with max_version = 0.982
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "fr"
-    And I request "GET" "/api/projects/?project_type=most_viewed&max_version=0.984"
+    And I request "GET" "/api/projects/?project_type=most_viewed&max_version=0.982"
     Then the response status code should be "200"
     Then I should get the json object:
       """
       [
         {
-            "id": "REGEX_STRING_WILDCARD",
-            "name":"REGEX_STRING_WILDCARD",
-            "author":"User1",
-            "description":"",
-            "version":"0.8.5",
-            "views": 50,
-            "download": 0,
-            "private":false,
-            "flavor": "luna",
-            "uploaded": "REGEX_INT_WILDCARD",
-            "uploaded_string": "REGEX_STRING_WILDCARD",
-            "screenshot_large": "http://localhost/images/default/screenshot.png",
-            "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-            "filesize": 0
+          "id": "2",
+          "name": "project 2",
+          "author": "User1",
+          "description": "",
+          "version": "0.8.5",
+          "views": 50,
+          "download": 0,
+          "private": false,
+          "flavor": "luna",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/2",
+          "download_url": "http://localhost/app/download/2.catrobat",
+          "filesize": 0
+        },
+        {
+          "id": "3",
+          "name": "project 3",
+          "author": "Catrobat",
+          "description": "",
+          "version": "0.8.5",
+          "views": 5,
+          "download": 0,
+          "private": false,
+          "flavor": "pocketcode",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/3",
+          "download_url": "http://localhost/app/download/3.catrobat",
+          "filesize": 0
         }
       ]
       """
@@ -160,22 +321,58 @@ Feature: Get most viewed projects
       """
       [
         {
-            "id": "REGEX_STRING_WILDCARD",
-            "name":"REGEX_STRING_WILDCARD",
-            "author":"User2",
-            "description":"",
-            "version":"0.8.5",
-            "views": 50,
-            "download": 0,
-            "private":false,
-            "flavor": "luna",
-            "uploaded": "REGEX_INT_WILDCARD",
-            "uploaded_string": "REGEX_STRING_WILDCARD",
-            "screenshot_large": "http://localhost/images/default/screenshot.png",
-            "screenshot_small": "http://localhost/images/default/thumbnail.png",
-            "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-            "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-            "filesize": 0
+          "id": "2",
+          "name": "project 2",
+          "author": "User1",
+          "description": "",
+          "version": "0.8.5",
+          "views": 50,
+          "download": 0,
+          "private": false,
+          "flavor": "luna",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/2",
+          "download_url": "http://localhost/app/download/2.catrobat",
+          "filesize": 0
+        },
+       {
+          "id": "4",
+          "name": "project 4",
+          "author": "User2",
+          "description": "",
+          "version": "0.8.5",
+          "views": 50,
+          "download": 0,
+          "private": false,
+          "flavor": "luna",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/4",
+          "download_url": "http://localhost/app/download/4.catrobat",
+          "filesize": 0
+        },
+        {
+          "id": "6",
+          "name": "project 6",
+          "author": "User1",
+          "description": "",
+          "version": "0.8.5",
+          "views": 20,
+          "download": 0,
+          "private": false,
+          "flavor": "luna",
+          "uploaded": "REGEX_INT_WILDCARD",
+          "uploaded_string": "REGEX_STRING_WILDCARD",
+          "screenshot_large": "http://localhost/images/default/screenshot.png",
+          "screenshot_small": "http://localhost/images/default/thumbnail.png",
+          "project_url": "http://localhost/app/project/6",
+          "download_url": "http://localhost/app/download/6.catrobat",
+          "filesize": 0
         }
       ]
       """

@@ -106,8 +106,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     {
       $accept_language = 'en';
     }
-    $accept_language_array = $this->program_manager->parseAcceptLanguage($accept_language);
-    $programs = $this->program_manager->getProjects($project_type, $accept_language_array, $max_version, $limit, $offset, $flavor);
+
+    $programs = $this->program_manager->getProjects($project_type, $max_version, $limit, $offset, $flavor);
     $responseData = $this->getProjectsResponseData($programs);
     $responseCode = Response::HTTP_OK;
 
