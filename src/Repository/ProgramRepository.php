@@ -37,7 +37,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @return Program[]
    */
   public function getMostDownloadedPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0', array $accept_language = []): array
+                                            string $max_version = '0'): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -48,7 +48,6 @@ class ProgramRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
 
-    $query_builder = $this->addAcceptLanguageCondition($query_builder, $accept_language);
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addFlavorCondition($query_builder, $flavor);
@@ -61,7 +60,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @return Program[]
    */
   public function getScratchRemixesPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0', array $accept_language = []): array
+                                            string $max_version = '0'): array
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -76,7 +75,6 @@ class ProgramRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
 
-    $qb = $this->addAcceptLanguageCondition($qb, $accept_language);
     $qb = $this->addDebugBuildCondition($qb, $debug_build);
     $qb = $this->addFlavorCondition($qb, $flavor);
     $qb = $this->addMaxVersionCondition($qb, $max_version);
@@ -88,7 +86,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @return Program[]
    */
   public function getMostViewedPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                        string $max_version = '0', array $accept_language = []): array
+                                        string $max_version = '0'): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -100,7 +98,6 @@ class ProgramRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
 
-    $query_builder = $this->addAcceptLanguageCondition($query_builder, $accept_language);
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addFlavorCondition($query_builder, $flavor);
@@ -299,7 +296,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @return Program[]
    */
   public function getRecentPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0', array $accept_language = []): array
+                                    string $max_version = '0'): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -310,7 +307,29 @@ class ProgramRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
 
-    $query_builder = $this->addAcceptLanguageCondition($query_builder, $accept_language);
+    $query_builder = $this->addPrivacyCheckCondition($query_builder);
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
+
+    return $query_builder->getQuery()->getResult();
+  }
+
+  /**
+   * @return Program[]
+   */
+  public function getExamplePrograms(bool $debug_build, ?string $flavor = null, ?int $limit = 20, int $offset = 0, string $max_version = '0'): array
+  {
+    $query_builder = $this->createQueryBuilder('e');
+
+    $query_builder
+      ->select('e')
+      ->where($query_builder->expr()->eq('e.example', $query_builder->expr()->literal(true)))
+      ->orderBy('e.uploaded_at', 'DESC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+    ;
+
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addFlavorCondition($query_builder, $flavor);
@@ -323,7 +342,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @return Program[]
    */
   public function getRandomPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0', array $accept_language = []): array
+                                    string $max_version = '0'): array
   {
     // Rand(), newid() and TABLESAMPLE() doesn't exist in the Native Query
     // therefore we have to do a workaround for random results
@@ -333,7 +352,7 @@ class ProgramRepository extends ServiceEntityRepository
     }
     else
     {
-      $array_program_ids = $this->getVisibleProgramIds($flavor, $debug_build, $max_version, $accept_language);
+      $array_program_ids = $this->getVisibleProgramIds($flavor, $debug_build, $max_version);
       shuffle($array_program_ids);
       $_SESSION['randomProgramIds'] = $array_program_ids;
     }
@@ -355,7 +374,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @return mixed
    */
   public function getVisibleProgramIds(string $flavor = null, bool $debug_build = false,
-                                       string $max_version = '0', array $accept_language = [])
+                                       string $max_version = '0')
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -364,7 +383,6 @@ class ProgramRepository extends ServiceEntityRepository
       ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
     ;
 
-    $query_builder = $this->addAcceptLanguageCondition($query_builder, $accept_language);
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addFlavorCondition($query_builder, $flavor);
@@ -1176,16 +1194,6 @@ class ProgramRepository extends ServiceEntityRepository
     $query_builder->andWhere(
       $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
     );
-
-    return $query_builder;
-  }
-
-  private function addAcceptLanguageCondition(QueryBuilder $query_builder, array $accept_language = [], string $alias = 'e'): QueryBuilder
-  {
-    if (!empty($accept_language))
-    {
-      $query_builder->andWhere($query_builder->expr()->in($alias.'.upload_language', $accept_language));
-    }
 
     return $query_builder;
   }
