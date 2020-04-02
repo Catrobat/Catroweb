@@ -1229,7 +1229,6 @@ class Program
       return;
     }
     $this->tags->add($tag);
-    $tag->addProgram($this);
   }
 
   /**
@@ -1237,12 +1236,7 @@ class Program
    */
   public function removeTag(Tag $tag)
   {
-    if (!$this->tags->contains($tag))
-    {
-      return;
-    }
     $this->tags->removeElement($tag);
-    $tag->removeProgram($this);
   }
 
   /**
@@ -1255,7 +1249,6 @@ class Program
       return;
     }
     $this->extensions->add($extension);
-    $extension->addProgram($this);
   }
 
   /**
@@ -1263,12 +1256,7 @@ class Program
    */
   public function removeExtension(Extension $extension)
   {
-    if (!$this->extensions->contains($extension))
-    {
-      return;
-    }
     $this->extensions->removeElement($extension);
-    $extension->removeProgram($this);
   }
 
   /**

@@ -57,7 +57,6 @@ class Extension
       return;
     }
     $this->programs->add($program);
-    $program->addExtension($this);
   }
 
   /**
@@ -65,12 +64,7 @@ class Extension
    */
   public function removeProgram(Program $program)
   {
-    if (!$this->programs->contains($program))
-    {
-      return;
-    }
     $this->programs->removeElement($program);
-    $program->removeExtension($this);
   }
 
   /**
