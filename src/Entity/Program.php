@@ -1229,7 +1229,6 @@ class Program
       return;
     }
     $this->tags->add($tag);
-    $tag->addProgram($this);
   }
 
   /**
@@ -1237,12 +1236,7 @@ class Program
    */
   public function removeTag(Tag $tag)
   {
-    if (!$this->tags->contains($tag))
-    {
-      return;
-    }
     $this->tags->removeElement($tag);
-    $tag->removeProgram($this);
   }
 
   /**

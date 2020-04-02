@@ -55,7 +55,6 @@ class Tag
       return;
     }
     $this->programs->add($program);
-    $program->addTag($this);
   }
 
   /**
@@ -63,12 +62,7 @@ class Tag
    */
   public function removeProgram(Program $program)
   {
-    if (!$this->programs->contains($program))
-    {
-      return;
-    }
     $this->programs->removeElement($program);
-    $program->removeTag($this);
   }
 
   /**
