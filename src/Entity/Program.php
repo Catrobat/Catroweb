@@ -847,17 +847,11 @@ class Program
       return;
     }
     $this->tags->add($tag);
-    $tag->addProgram($this);
   }
 
   public function removeTag(Tag $tag): void
   {
-    if (!$this->tags->contains($tag))
-    {
-      return;
-    }
     $this->tags->removeElement($tag);
-    $tag->removeProgram($this);
   }
 
   public function addExtension(Extension $extension): void
@@ -867,17 +861,11 @@ class Program
       return;
     }
     $this->extensions->add($extension);
-    $extension->addProgram($this);
   }
 
   public function removeExtension(Extension $extension): void
   {
-    if (!$this->extensions->contains($extension))
-    {
-      return;
-    }
     $this->extensions->removeElement($extension);
-    $extension->removeProgram($this);
   }
 
   public function removeAllExtensions(): void

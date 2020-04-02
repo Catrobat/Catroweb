@@ -68,17 +68,11 @@ class Tag
       return;
     }
     $this->programs->add($program);
-    $program->addTag($this);
   }
 
   public function removeProgram(Program $program): void
   {
-    if (!$this->programs->contains($program))
-    {
-      return;
-    }
     $this->programs->removeElement($program);
-    $program->removeTag($this);
   }
 
   public function getPrograms(): Collection
