@@ -15,7 +15,7 @@ Feature: Upload a program
   Scenario: program upload with valid data
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
-    And I have a valid Catrobat file
+    And I have a valid Catrobat file, API version 1
     And I have a parameter "fileChecksum" with the md5checksum of "test.catrobat"
     When I POST these parameters to "/app/api/upload/upload.json"
     Then I should get the json object:
@@ -58,16 +58,17 @@ Feature: Upload a program
       {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
 
-  Scenario: uploading the same program again should result in an update
+  Scenario: uploading the same project again should result in an update
     Given I am "Catrobat"
-    When I upload a catrobat program
-    And I upload a catrobat program with the same name
-    Then it should be updated
+    When I upload a valid Catrobat project, API version 1
+    And I upload a valid Catrobat project with the same name, API version 1
+    Then the uploaded project should exist in the database, API version 1
+    And it should be updated, API version 1
 
   Scenario: program with missing file checksum are rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
-    And I have a valid Catrobat file
+    And I have a valid Catrobat file, API version 1
     When I POST these parameters to "/app/api/upload/upload.json"
     Then I should get the json object:
       """
@@ -77,7 +78,7 @@ Feature: Upload a program
   Scenario: program with invalid file checksum are rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
-    And I have a valid Catrobat file
+    And I have a valid Catrobat file, API version 1
     And I have a parameter "fileChecksum" with an invalid md5checksum of my file
     When I POST these parameters to "/app/api/upload/upload.json"
     Then I should get the json object:
@@ -88,18 +89,16 @@ Feature: Upload a program
   Scenario: Token is not changing on upload
     Given the next generated token will be "aabbccddee"
     And I am "Catrobat"
-    And I upload a catrobat program
+    And I upload a valid Catrobat project, API version 1
     When I upload another program using token "cccccccccc"
-    Then It should be uploaded
+    Then the uploaded project should exist in the database, API version 1
 
   Scenario: Program Sanitizer should remove unnecessary files
-    Given I am "Catrobat"
-    And I try to upload a program with unnecessary files
-    Then It should be uploaded
+    Given I try to upload a project with unnecessary files, API version 1
+    Then the uploaded project should exist in the database, API version 1
     And the resources should not contain the unnecessary files
 
   Scenario: Program Sanitizer should remove unnecessary files even when scenes are used
-    Given I am "Catrobat"
-    And I try to upload a program with scenes and unnecessary files
-    Then It should be uploaded
+    Given I try to upload a project with scenes and unnecessary files, API version 1
+    Then the uploaded project should exist in the database, API version 1
     And the resources should not contain the unnecessary files

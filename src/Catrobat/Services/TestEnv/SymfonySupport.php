@@ -607,6 +607,7 @@ trait SymfonySupport
     $filesystem = new Filesystem();
     $this->emptyDirectory(sys_get_temp_dir().'/program_generated/');
     $new_program_dir = sys_get_temp_dir().'/program_generated/';
+
     if ($is_embroidery)
     {
       $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/embroidery', $new_program_dir);

@@ -698,6 +698,11 @@ api:
     passwordInvalidChars: 'Password contains invalid chars'
     usernameContainsEmail: "Username shouldn't contain an email address"
 
+  projectsPost:
+      invalid_checksum: 'Invalid checksum. Try uploading again!'
+      upload_error: 'Error while uploading. Try uploading again!'
+      creating_error: 'Error while creating Program Entity. Try uploading again!'
+
 
 #languages and countries
 language:

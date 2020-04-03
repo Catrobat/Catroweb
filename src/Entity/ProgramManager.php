@@ -12,6 +12,7 @@ use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\CatrobatFileSanitizer;
+use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -22,7 +23,6 @@ use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use App\Utils\TimeUtils;
 use DateTime;
-use DateTimeZone;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -60,6 +60,8 @@ class ProgramManager
 
   protected AppRequest $app_request;
 
+  protected CatroNotificationService $notification_service;
+
   protected ExtensionRepository $extension_repository;
 
   private LoggerInterface $logger;
@@ -74,6 +76,7 @@ class ProgramManager
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
+                              CatroNotificationService $notification_service,
                               UrlHelper $urlHelper = null)
   {
     $this->file_extractor = $file_extractor;
@@ -89,6 +92,7 @@ class ProgramManager
     $this->app_request = $app_request;
     $this->file_sanitizer = $file_sanitizer;
     $this->extension_repository = $extension_repository;
+    $this->notification_service = $notification_service;
     $this->urlHelper = $urlHelper;
   }
 
@@ -135,6 +139,8 @@ class ProgramManager
   }
 
   /**
+   * Adds a new program and notifies all followers of the uploader about it.
+   *
    * @throws Exception
    */
   public function addProgram(AddProgramRequest $request): ?Program
@@ -188,7 +194,7 @@ class ProgramManager
     $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage('en');
-    $program->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
+    $program->setUploadedAt(TimeUtils::getDateTime());
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
@@ -209,6 +215,15 @@ class ProgramManager
     $this->addExtensions($program, $extracted_file);
 
     $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
+
+    // Notifying the followers of the uploader that a new program of that user is available
+    $followers = $request->getUser()->getFollowers();
+
+    for ($i = 0; $i < $followers->count(); ++$i)
+    {
+      $notification = new NewProgramNotification($followers->get($i), $program);
+      $this->notification_service->addNotification($notification);
+    }
 
     try
     {

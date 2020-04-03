@@ -94,7 +94,7 @@ Feature: Get the most recent programs
   Scenario: show recent programs after uploading a new program
     Given I am "Catrobat"
     And I have a program with "name" set to "WebTeam"
-    When I upload this program
+    When I upload this generated program, API version 1
     And I get the most recent programs
     Then I should get programs in the following order:
       | Name      |
@@ -105,9 +105,9 @@ Feature: Get the most recent programs
 
   Scenario: show recent programs after updating an existing program
     Given I am "Catrobat"
-    And I upload the program with "WebTeam" as name
-    And I upload the program with "WebTeamV2" as name
-    And I upload the program with "WebTeam" as name again
+    And I upload the program with "WebTeam" as name, API version 1
+    And I upload the program with "WebTeamV2" as name, API version 1
+    And I upload the program with "WebTeam" as name again, API version 1
     When I get the most recent programs
     Then I should get programs in the following order:
       | Name      |
