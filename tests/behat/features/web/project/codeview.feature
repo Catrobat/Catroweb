@@ -1,4 +1,4 @@
-@web @project_page
+@web @project_page @disabled
 Feature: As a visitor I want to see the code view on a project page
 
   Background:
