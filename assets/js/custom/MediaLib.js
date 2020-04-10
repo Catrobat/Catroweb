@@ -2,13 +2,18 @@
 /* global Routing */
 
 // eslint-disable-next-line no-unused-vars
-function MediaLib (packageName, flavor, assetsDir) {
+function MediaLib (packageName, mediaSearchPath, flavor, assetsDir) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
     element.parentNode.removeChild(element)
 
-    getPackageFiles(packageName, flavor, assetsDir)
+    // Adding back button on media library search results
+    $('#medialib-header-back-btn').click(function () {
+      window.history.back()
+    })
+
+    getPackageFiles(packageName, mediaSearchPath, flavor, assetsDir)
     const content = $('#content')
     content.find('#thumbsize-control input[type=radio]').change(function () {
       content.attr('size', this.value)
@@ -16,7 +21,7 @@ function MediaLib (packageName, flavor, assetsDir) {
     initTilePinchToZoom()
   })
 
-  function getPackageFiles (packageName, flavor, assetsDir) {
+  function getPackageFiles (packageName, mediaSearchPath, flavor, assetsDir) {
     var downloadList = []
 
     document.getElementById('downloadbar-start-downloads').onclick = function () {
@@ -31,11 +36,17 @@ function MediaLib (packageName, flavor, assetsDir) {
         document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
       }
       downloadList = []
-      document.getElementById('downloadbar').style.display = 'none'
-      document.getElementById('navbar').style.display = 'inline'
+      hideDownloadbar()
     }
 
-    const url = Routing.generate('api_media_lib_package_bynameurl', { flavor: flavor, package: packageName }, false)
+    var url = null
+
+    if (mediaSearchPath !== '') {
+      url = mediaSearchPath
+    } else {
+      url = Routing.generate('api_media_lib_package_bynameurl', { flavor: flavor, package: packageName }, false)
+    }
+
     $.get(url, {}, pkgFiles => {
       pkgFiles.forEach(file => {
         if (file.flavor !== 'pocketcode' && file.flavor !== flavor) {
@@ -56,11 +67,9 @@ function MediaLib (packageName, flavor, assetsDir) {
           document.getElementById('downloadbar-nr-selected').innerText = downloadList.length
 
           if (downloadList.length > 0) {
-            document.getElementById('downloadbar').style.display = 'flex'
-            document.getElementById('navbar').style.display = 'none'
+            showDownloadbar()
           } else {
-            document.getElementById('downloadbar').style.display = 'none'
-            document.getElementById('navbar').style.display = 'inline'
+            hideDownloadbar()
           }
         })
 
@@ -311,4 +320,16 @@ function medialibDownloadSelectedFile (file) {
   link.click()
   document.body.removeChild(link)
   return false
+}
+
+function showDownloadbar () {
+  document.getElementById('downloadbar').style.display = 'flex'
+  document.getElementById('navbar').style.display = 'none'
+  document.getElementById('searchbar').style.display = 'none'
+}
+
+function hideDownloadbar () {
+  document.getElementById('downloadbar').style.display = 'none'
+  document.getElementById('navbar').style.display = 'inline'
+  document.getElementById('searchbar').style.display = 'inline'
 }

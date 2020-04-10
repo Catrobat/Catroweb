@@ -32,6 +32,12 @@ Feature:
     Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
     Then I should see "Animals"
+    And I should not see an "#medialib-header-back-btn" element
+
+  Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
+    Given I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
+    But I should not see a "#project-navigation" element
 
   Scenario: Viewing only media files for the pocketcode flavor
     Given I am on "/app/media-library/looks"
@@ -78,7 +84,6 @@ Feature:
     Then the element "#mediafile-5" should have no attribute "class" with value "selected"
     And I should not see "SAVE"
 
-
   Scenario: Downloading multiple selected files
     Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
@@ -90,7 +95,68 @@ Feature:
 #   Then I should have downloaded a file named "Dog (-).png"
 #   Then I should have downloaded a file named "SexyNULL.png"
 
-  Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
-    Given I am on "/app/media-library/looks"
+
+  # Media Library search function
+
+  Scenario: Searching the Media Package "looks" with the Pocketcode app and the search term "Snake" should result in an empty result.
+    Given I am on "/app/media-library/Looks"
     And I wait for the page to be loaded
-    But I should not see a "#project-navigation" element
+    Then I click ".search-icon-header"
+    And I enter "Snake" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/app/media-library/Looks/search/Snake"
+    And I should see "Your search returned 0 results"
+    And I should see an "#medialib-header-back-btn" element
+
+  Scenario: Searching the Media Package "looks" with the Luna app and search term "Sexy" should result in 3 found files
+    Given I am on "/luna/media-library/Looks"
+    And I wait for the page to be loaded
+    Then I click ".search-icon-header"
+    And I enter "Sexy" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/luna/media-library/Looks/search/Sexy"
+    And I should see media file with id "4"
+    And I should see media file with id "5"
+    And I should see media file with id "6"
+    And I should not see media file with id "1"
+    And I should not see media file with id "2"
+    And I should not see media file with id "3"
+    And I should not see media file with id "7"
+    And I should see a "#category-theme-special" element
+
+  Scenario: Searching the Media Package "looks" with the Pocketcode app and search term "Sexy" should result in 2 found files
+    Given I am on "/app/media-library/Looks"
+    And I wait for the page to be loaded
+    Then I click ".search-icon-header"
+    And I enter "Sexy" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/app/media-library/Looks/search/Sexy"
+    And I should see media file with id "5"
+    And I should see media file with id "6"
+    And I should not see media file with id "1"
+    And I should not see media file with id "2"
+    And I should not see media file with id "3"
+    And I should not see media file with id "4"
+    And I should not see media file with id "7"
+    And I should not see a "#category-theme-special" element
+
+  Scenario: Searching the Media Package "sounds" with the Pocketcode app and search term "e" should not return results from other packages
+    Given I am on "/app/media-library/Sounds"
+    And I wait for the page to be loaded
+    Then I click ".search-icon-header"
+    And I enter "e" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/app/media-library/Sounds/search/e"
+    And I should see media file with id "2"
+    And I should not see media file with id "1"
+    And I should not see media file with id "3"
+    And I should not see media file with id "4"
+    And I should not see media file with id "5"
+    And I should not see media file with id "6"
+    And I should not see media file with id "7"
+    And I should not see a "#category-theme-special" element
+

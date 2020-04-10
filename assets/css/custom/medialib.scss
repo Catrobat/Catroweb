@@ -31,10 +31,18 @@ $tile-size-sm: 54px;
 $tile-size-lg: 191px;
 $border-spacing: 8px;
 
+#medialib-header-back-btn
+{
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 2.0em;
+  cursor: pointer;
+}
+
 #downloadbar
 {
   width: 100%;
-  display: flex;
+  display: none;
   justify-content: space-between;
   font-size: 1.4rem;
   color: white;
