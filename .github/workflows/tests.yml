@@ -6,6 +6,39 @@ on: [push, pull_request]
 
 jobs:
 
+  tests_dev:
+    # Check that the dev container builds, website + test system is working
+    name: Dev. Container Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.dev.yml build
+          docker-compose -f docker-compose.dev.yml up -d
+          sleep 30
+
+      - name: Check Symfony Application
+        # would be nice to check the reset command in the future, in the current state the reset command can't fail
+        run: |
+          docker exec app.catroweb bin/console about
+          docker exec app.catroweb bin/console catrobat:reset --hard
+
+      - name: Check local share website
+        run: |
+          sudo apt-get install apache2 wget
+          sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
+          sudo service apache2 reload
+          wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
+
+      - name: Check test environment
+        run:
+          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+
+
   tests_phpunit:
     # Runs all PhpUnit tests via docker in the latest ubuntu build
     name: PhpUnit Tests
@@ -22,7 +55,7 @@ jobs:
 
       - name: PhpUnit tests
         run:
-          docker exec app.catroweb.test bin/phpunit
+          docker exec app.catroweb bin/phpunit
 
 
   tests_behat:
@@ -70,7 +103,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }}
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }}
           echo ::set-output name=status::success
 
       # Rerun #1
@@ -80,7 +113,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 
         # Rerun #2
@@ -90,7 +123,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 
       # Rerun #3
@@ -98,13 +131,13 @@ jobs:
         if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
         id: test-rerun-3
         run: |
-          docker exec app.catroweb.test bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
 
       - name: DEBUG
         if: always()
         run: |
           docker ps -a
           echo "---"
-          docker logs app.catroweb.test
+          docker logs app.catroweb
           echo "---"
           docker logs db.catroweb.test

@@ -65,15 +65,24 @@ ADD / ./
 
 # CONFIGURATIONS
 ARG APP_ENVIRONMENT
-RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb.$APP_ENVIRONMENT/index_test.php/|g" behat.yml.dist && \
-    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb.$APP_ENVIRONMENT:9222|g" behat.yml.dist && \
-    cp config/packages/parameters.yml.dist config/packages/parameters.yml && \
-    echo "\n" >> .env.local && \
-    echo APP_ENV=$APP_ENVIRONMENT >> .env.local && \
-    echo "\n" >> .env.$APP_ENVIRONMENT.local && \
-    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.$APP_ENVIRONMENT:3306/catroweb_$APP_ENVIRONMENT >> .env.$APP_ENVIRONMENT.local
 
-# PERMISSIONS
+RUN echo "\n" >> .env.local && \
+    echo APP_ENV=$APP_ENVIRONMENT >> .env.local
+
+ # Updating the behat config to work with our docker containers.
+RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yml.dist && \
+    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yml.dist
+
+# Copying legacy parameters into the project. (ToDo get rid of those file and use .env)
+RUN cp config/packages/parameters.yml.dist config/packages/parameters.yml
+
+# Setting up db configs
+RUN echo "\n" >> .env.dev.local && \
+    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.dev:3306/catroweb_dev >> .env.dev.local && \
+    echo "\n" >> .env.test.local && \
+    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test >> .env.test.local
+
+# Finally we set all permissions, and create required keys and test fixtures.
 RUN sh docker/app/prepare-test-env.sh
 
 EXPOSE 80
