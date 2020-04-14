@@ -1,18 +1,19 @@
+# Use composer image for better caching
 FROM composer AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts --prefer-dist
 
-
+# Use node image for better caching
 FROM node AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install && npm install grunt
 
-
+# Run on:
 FROM ubuntu:18.04
 ARG DEBIAN_FRONTEND=noninteractive
 
-# DEPDEDENCIES
+# Install dependencies
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     add-apt-repository ppa:ondrej/php && \
@@ -47,42 +48,54 @@ RUN apt-get update && \
     grunt && \
     gem install sass
 
-# APACHE CONFIG
+# Overwrite default apache config
 COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
 RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
+# Setting working directory
 WORKDIR /var/www/catroweb
 
-# LIBRARIES
-COPY --from=composer-build /app/vendor vendor
-COPY --from=node-build /app/node_modules node_modules
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY composer.json composer.lock package.json package-lock.json ./
+# Generate jwt config in container (will be overwritten with host keys if they exist)
+COPY /docker/app/init-jwt-config.sh ./docker/app/init-jwt-config.sh
+RUN sh docker/app/init-jwt-config.sh
 
-# ADD CODE
-ADD / ./
+# Copy all files to the container.
+# A change to any project file clears the cache of all layers defined after this command!
+# Make sure to define all project code indepandant commands above to improve performance.
+COPY / ./
 
-# CONFIGURATIONS
-ARG APP_ENVIRONMENT
-
-RUN echo "\n" >> .env.local && \
-    echo APP_ENV=$APP_ENVIRONMENT >> .env.local
-
- # Updating the behat config to work with our docker containers.
+# Overwrite behat config:
+COPY behat.yml.dist ./
 RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yml.dist && \
     sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yml.dist
 
-# Copying legacy parameters into the project. (ToDo get rid of those file and use .env)
-RUN cp config/packages/parameters.yml.dist config/packages/parameters.yml
-
-# Setting up db configs
-RUN echo "\n" >> .env.dev.local && \
+# Overwrite project config:
+ARG APP_ENVIRONMENT
+RUN echo "\n" >> .env.local && \
+    echo APP_ENV=$APP_ENVIRONMENT >> .env.local && \
+    echo "\n" >> .env.dev.local && \
     echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.dev:3306/catroweb_dev >> .env.dev.local && \
     echo "\n" >> .env.test.local && \
     echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test >> .env.test.local
 
+# Copying legacy parameters into the project, else scripts will crash (ToDo replace this file with .env - SHARE-39)
+COPY config/packages/parameters.yml.dist config/packages/parameters.yml
+
+# Add composer executable to the container
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# Add libraries and modules
+COPY --from=composer-build /app/vendor vendor
+COPY --from=node-build /app/node_modules node_modules
+
+# Add library scripts symlinks
+COPY --from=composer-build /app/bin bin
+
 # Finally we set all permissions, and create required keys and test fixtures.
 RUN sh docker/app/prepare-test-env.sh
+
+# (Re-)compile public css/js files
+RUN grunt
 
 EXPOSE 80
