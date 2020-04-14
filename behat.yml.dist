@@ -83,6 +83,7 @@ default:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\ApiContext
+                - Tests\behat\context\CatrowebBrowserContext
 
         deprecated-api-general:
             paths:    [ "tests/behat/features/api/deprecated/general" ]

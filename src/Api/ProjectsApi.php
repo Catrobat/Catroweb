@@ -2,31 +2,40 @@
 
 namespace App\Api;
 
+use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Entity\FeaturedProgram;
-use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Entity\User;
 use App\Repository\FeaturedRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProject;
 use OpenAPI\Server\Model\Project;
+use OpenAPI\Server\Model\UploadError;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectsApi extends AbstractController implements ProjectsApiInterface
 {
   private string $token;
-
   private ProgramManager $program_manager;
-
   private SessionInterface $session;
-
   private ElapsedTimeStringFormatter $time_formatter;
+  private RequestStack $request_stack;
+  private TokenStorageInterface $token_storage;
+  private EntityManagerInterface $entity_manager;
+  private TranslatorInterface $translator;
+  private UrlGeneratorInterface $url_generator;
 
   private FeaturedRepository $featured_repository;
 
@@ -34,13 +43,22 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
-                              FeaturedImageRepository $featured_image_repository)
+                              FeaturedImageRepository $featured_image_repository,
+                              RequestStack $request_stack,
+                              TokenStorageInterface $token_storage,
+                              EntityManagerInterface $entity_manager, TranslatorInterface $translator,
+                              UrlGeneratorInterface $url_generator)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
     $this->time_formatter = $time_formatter;
     $this->featured_repository = $featured_repository;
     $this->featured_image_repository = $featured_image_repository;
+    $this->request_stack = $request_stack;
+    $this->token_storage = $token_storage;
+    $this->entity_manager = $entity_manager;
+    $this->translator = $translator;
+    $this->url_generator = $url_generator;
   }
 
   /**
@@ -117,8 +135,61 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?string $tag1 = null, ?string $tag2 = null, ?string $tag3 = null, ?bool $private = null, &$responseCode, array &$responseHeaders)
+  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?string $tag1 = null, ?string $tag2 = null, ?string $tag3 = null, ?bool $private = false, &$responseCode, array &$responseHeaders)
   {
+    // File uploaded successful?
+    if (!$file->isValid())
+    {
+      $responseCode = 422; // 422 => UploadError
+      return new UploadError(['error' => $this->translator->trans('api.projectsPost.upload_error', [], 'catroweb')]);
+    }
+
+    // Checking checksum
+    $calculated_checksum = md5_file($file->getPathname());
+
+    if (strtolower($calculated_checksum) != strtolower($checksum))
+    {
+      $responseCode = 422; // 422 => UploadError
+      return new UploadError(['error' => $this->translator->trans('api.projectsPost.invalid_checksum', [], 'catroweb')]);
+    }
+
+    // Getting the user who uploaded
+
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    // Needed (for tests) to make sure everything is up to date (followers, ..)
+    $this->entity_manager->refresh($user);
+
+    // Adding the uploaded program
+    $add_program_request = new AddProgramRequest($user, $file,$this->request_stack->getCurrentRequest()->getClientIp(),
+      null, $accept_language, $flavor ? $flavor : 'pocketcode');
+
+    try
+    {
+      $program = $this->program_manager->addProgram($add_program_request);
+    }
+    catch (Exception $e)
+    {
+      $responseCode = 422; // 422 => UploadError
+      return new UploadError(['error' => $this->translator->trans('api.projectsPost.creating_error', [], 'catroweb')]);
+    }
+
+    // Setting the program's attributes
+    if (null !== $private)
+    {
+      $program->setPrivate($private);
+      $this->entity_manager->flush();
+    }
+
+    // Since we have come this far, the project upload is completed
+    $responseCode = 201; // 201 => Successful upload
+    $responseHeaders['Location'] = $this->url_generator->generate(
+      'program',
+      [
+        'id' => $program->getId(),
+      ],
+      UrlGenerator::ABSOLUTE_URL);
   }
 
   /**
@@ -218,7 +289,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
             'id' => $program->getId(),
           ],
           UrlGeneratorInterface::ABSOLUTE_URL), '/'),
-        'filesize' => $program->getFilesize() / 1_048_576,
+        'filesize' => ($program->getFilesize() / 1_048_576),
       ];
       $project = new Project($result);
       $projects[] = $project;

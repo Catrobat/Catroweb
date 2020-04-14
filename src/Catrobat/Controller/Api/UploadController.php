@@ -10,7 +10,6 @@ use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\StatusCode;
 use App\Entity\GameJam;
-use App\Entity\NewProgramNotification;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
@@ -147,12 +146,6 @@ class UploadController
     }
     else
     {
-      /** @var User $follower */
-      foreach ($user->getFollowers() as $follower)
-      {
-        $notification = new NewProgramNotification($follower, $program);
-        $this->catro_notification_service->addNotification($notification);
-      }
       $response = $this->createUploadResponse($request, $game_jam, $user, $program);
     }
     $this->logger->info('Uploading a project done : '.json_encode($response, JSON_THROW_ON_ERROR));

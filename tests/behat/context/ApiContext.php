@@ -2,6 +2,7 @@
 
 namespace Tests\behat\context;
 
+use App\Api\Exceptions\APIVersionNotSupportedException;
 use App\Catrobat\Services\TestEnv\SymfonySupport;
 use App\Entity\Program;
 use App\Entity\ProgramRemixBackwardRelation;
@@ -28,7 +29,6 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -36,6 +36,25 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  * Class ApiContext.
  *
  * Basic request/response handling.
+ *
+ * USAGE for sending a request:
+ *
+ * 1) Fill required fields. Those are cleared at the beginning of a new Scenario. Use $this->clearRequest() if needed additionally.
+ *     - $this->method
+ *     - $this->uri
+ *     - $this->$request_headers
+ *     - $this->$request_parameters
+ *     - $this->request_files
+ *     - $this->request_content
+ *
+ * 2) Call methods
+ *     - $this->iRequest() to send the request with the above parameters
+ *     - $this->iRequestWith(string $method, string $uri) to send a request with the above parameters and the specified
+ *        $method and uri.
+ *     - $this->iGetFrom($uri) to send the request with the above parameters and the specified uri.
+ *     - $this->iPostTo($uri) to send the request with the above parameters and the specified uri.
+ *
+ * 3) Retrieve the response by using $this->getKernelBrowser()->getResponse().
  */
 class ApiContext implements KernelAwareContext
 {
@@ -63,14 +82,9 @@ class ApiContext implements KernelAwareContext
   /**
    * @var mixed[]|string[]|bool[]
    */
-  private array $request_server;
+  private array $request_headers;
 
   private ?string $request_content;
-
-  /**
-   * @var Crawler|string|null and maybe even more types... (Should be refactored!)
-   */
-  private $last_response;
 
   /**
    * @var string[]
@@ -135,7 +149,7 @@ class ApiContext implements KernelAwareContext
     $this->url = '/';
     $this->request_parameters = [];
     $this->request_files = [];
-    $this->request_server = [];
+    $this->request_headers = [];
     $this->request_content = null;
   }
 
@@ -148,31 +162,74 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * Sends a request. The following fields:
+   *   $this->request_parameters
+   *   $this->request_files
+   *   $this->request_headers
+   *   $this->request_content
+   * are automatically added to the request.
+   *
+   * Get the response from $this->getKernelBrowser()->getResponse()
+   *
    * @When /^I request "([^"]*)" "([^"]*)"$/
    * @When /^I :method :url with these parameters$/
    *
-   * @param mixed $method
-   * @param mixed $uri
+   * @param string $method The desired HTTP method
+   * @param string $uri    The requested URI
    */
-  public function iRequest($method, $uri): void
+  public function iRequestWith($method, $uri): void
   {
-    $this->getKernelBrowser()->request(
-      $method, $uri, $this->request_parameters, $this->request_files, $this->request_server, $this->request_content
-    );
+    $this->request_parameters = (null == $this->request_parameters) ? [] : $this->request_parameters;
+    $this->request_files = (null == $this->request_files) ? [] : $this->request_files;
+    $this->request_headers = (null == $this->request_headers) ? [] : $this->request_headers;
+    $this->request_content = (null == $this->request_content) ? '' : $this->request_content;
+
+    if (0 == strcasecmp($method, 'GET'))
+    {
+      $this->getKernelBrowser()->request(
+        $method, $uri, $this->request_parameters, [], $this->request_headers, $this->request_content
+      );
+    }
+    else
+    {
+      $this->getKernelBrowser()->request(
+        $method, $uri, $this->request_parameters, $this->request_files, $this->request_headers, $this->request_content
+      );
+    }
   }
 
   /**
+   * Sends a request. The following fields:
+   *   $this->method
+   *   $this->uri
+   *   $this->request_parameters
+   *   $this->request_files
+   *   $this->request_headers
+   *   $this->request_content
+   * are automatically added to the request.
+   *
+   * Get the response from $this->getKernelBrowser()->getResponse()
+   *
    * @When /^such a Request is invoked$/
    * @When /^a Request is invoked$/
    * @When /^the Request is invoked$/
    * @When /^I invoke the Request$/
    */
-  public function iInvokeTheRequest(): void
+  public function iRequest(): void
   {
-    $this->iRequest($this->method, $this->url);
+    $this->iRequestWith($this->method, $this->url);
   }
 
   /**
+   * Sends a GET request. The following fields:
+   *   $this->uri
+   *   $this->request_parameters
+   *   $this->request_headers
+   *   $this->request_content
+   * are automatically added to the request.
+   *
+   * Get the response from $this->getKernelBrowser()->getResponse()
+   *
    * @When /^I GET "([^"]*)"$/
    * @When I GET :url with these parameters
    * @When /^I GET from the api "([^"]*)"$/
@@ -186,17 +243,26 @@ class ApiContext implements KernelAwareContext
    */
   public function iGetFrom($url): void
   {
-    $this->iRequest('GET', $url);
+    $this->iRequestWith('GET', $url);
   }
 
   /**
+   * Sends a POST request. The following fields:
+   *   $this->request_parameters
+   *   $this->request_headers
+   *   $this->files
+   *   $this->request_content
+   * are automatically added to the request.
+   *
+   * Get the response from $this->getKernelBrowser()->getResponse()
+   *
    * @When /^I POST these parameters to "([^"]*)"$/
    *
    * @param mixed $url
    */
   public function iPostTo($url): void
   {
-    $this->iRequest('POST', $url);
+    $this->iRequestWith('POST', $url);
   }
 
   /**
@@ -265,19 +331,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When /^I upload a valid program$/
-   */
-  public function iUploadAValidProgram(): void
-  {
-    $this->iHaveAParameterWithValue('username', 'Catrobat');
-    $this->iHaveAParameterWithValue('token', 'cccccccccc');
-    $this->iHaveAValidCatrobatFile();
-    $this->iHaveAParameterWithTheMdchecksumOf('fileChecksum');
-    $this->iPostTo('/app/api/upload/upload.json');
-    $this->iHaveAParameterWithTheReturnedProjectid('program');
-  }
-
-  /**
    * @Given /^I am "([^"]*)"$/
    *
    * @param mixed $username
@@ -288,39 +341,29 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When /^I upload a catrobat program with the same name$/
+   * @When I upload a valid Catrobat project, API version :api_version
+   * @When I upload a valid Catrobat project with the same name, API version :api_version
+   *
+   * @param string $api_version The API version to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadACatrobatProgramWithTheSameName(): void
+  public function iUploadAValidCatrobatProject(string $api_version): void
   {
-    /** @var User|null $user */
-    $user = $this->getUserManager()->findUserByUsername($this->username);
-    $this->request_parameters['token'] = $user->getUploadToken();
-    $this->last_response = $this->getKernelBrowser()->getResponse()->getContent()
-    ;
-    $this->iPostTo('/app/api/upload/upload.json');
-  }
-
-  /**
-   * @When /^I upload a catrobat program$/
-   */
-  public function iUploadACatrobatProgram(): void
-  {
-    $this->iHaveAValidCatrobatFile();
-    $this->iHaveAParameterWithTheMdChecksumOf('fileChecksum');
-    $this->request_parameters['username'] = $this->username;
-    $this->request_parameters['token'] = 'cccccccccc';
-    $this->iPostTo('/app/api/upload/upload.json');
+    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', null, $api_version);
   }
 
   /**
    * @When /^I upload another program using token "([^"]*)"$/
    *
    * @param mixed $arg1
+   *
+   * @throws Exception when an error occurs during uploading
    */
   public function iUploadAnotherProgramUsingToken($arg1): void
   {
-    $this->iHaveAValidCatrobatFile();
-    $this->iHaveAParameterWithTheMdChecksumOf('fileChecksum');
+    $this->iHaveAValidCatrobatFile('1');
+    $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
     $this->request_parameters['username'] = $this->username;
     $this->request_parameters['token'] = $arg1;
     $this->iPostTo('/app/api/upload/upload.json');
@@ -493,35 +536,33 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^The upload should be successful$/
+   * @Then the uploaded program should be a remix root, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadShouldBeSuccessful(): void
+  public function theUploadedProgramShouldBeARemixRoot(string $api_version): void
   {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    Assert::assertEquals(200, $responseArray['statusCode']);
+    $this->theProgramShouldBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then /^the uploaded program should be a remix root$/
+   * @Then the uploaded project should exist in the database, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the requested $api_version is not supported
    */
-  public function theUploadedProgramShouldBeARemixRoot(): void
+  public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldBeARemixRoot($json['projectId']);
-  }
+    // Trying to find the id of the last uploaded project in the database
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $uploaded_program = $em->getRepository('App\Entity\Program')->findOneBy([
+      'id' => $this->getIDOfLastUploadedProject($api_version),
+    ]);
 
-  /**
-   * @Then /^It should be uploaded$/
-   */
-  public function itShouldBeUploaded(): void
-  {
-    $json = json_decode($this->getKernelBrowser()
-      ->getResponse()
-      ->getContent(), true);
-    Assert::assertEquals('200', $json['statusCode'], $this->getKernelBrowser()
-      ->getResponse()
-      ->getContent());
+    Assert::assertNotNull($uploaded_program);
   }
 
   /**
@@ -557,7 +598,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iHaveARequestHeaderWithValue($name, $value): void
   {
-    $this->request_server[$name] = $value;
+    $this->request_headers[$name] = $value;
   }
 
   /**
@@ -598,7 +639,7 @@ class ApiContext implements KernelAwareContext
     {
       $token = $this->getJwtEncoder()->encode(['username' => $username, 'exp' => 3600]);
     }
-    $this->request_server['HTTP_authorization'] = 'Bearer '.$token;
+    $this->request_headers['HTTP_authorization'] = 'Bearer '.$token;
   }
 
   /**
@@ -606,7 +647,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iUseAnEmptyJwtBearerToken(): void
   {
-    $this->request_server['HTTP_authorization'] = '';
+    $this->request_headers['HTTP_authorization'] = '';
   }
 
   /**
@@ -614,7 +655,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iUseAnInvalidJwtBearerToken(): void
   {
-    $this->request_server['HTTP_authorization'] = 'Bearer invalid-token';
+    $this->request_headers['HTTP_authorization'] = 'Bearer invalid-token';
   }
 
   /**
@@ -628,7 +669,7 @@ class ApiContext implements KernelAwareContext
   {
     $token = $this->getJwtEncoder()->encode(['username' => $username, 'exp' => 1]);
     sleep(1);
-    $this->request_server['HTTP_authorization'] = 'Bearer '.$token;
+    $this->request_headers['HTTP_authorization'] = 'Bearer '.$token;
   }
 
   public function getSymfonyProfile(): Profile
@@ -643,10 +684,12 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * Submit to gamejam.
+   *
    * @param mixed $file
    * @param mixed $user
    */
-  public function submit($file, $user, string $desired_id = ''): Response
+  public function submit($file, $user, string $desired_id = ''): void
   {
     if (null == $user)
     {
@@ -663,26 +706,22 @@ class ApiContext implements KernelAwareContext
       $file = new UploadedFile($file, 'uploadedFile');
     }
 
-    $parameters = [];
-    $parameters['username'] = $user->getUsername();
-    $parameters['token'] = $user->getUploadToken();
-    $parameters['fileChecksum'] = md5_file($file->getPathname());
-    $client = $this->getKernelBrowser();
-    $client->request('POST', '/app/api/gamejam/submit.json', $parameters, [$file]);
-
-    return $client->getResponse();
+    $this->request_parameters = [];
+    $this->request_parameters['username'] = $user->getUsername();
+    $this->request_parameters['token'] = $user->getUploadToken();
+    $this->request_parameters['fileChecksum'] = md5_file($file->getPathname());
+    $this->request_files[0] = $file;
+    $this->iRequestWith('POST', '/app/api/gamejam/submit.json');
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
-  //  Upload Request process
-  //--------------------------------------------------------------------------------------------------------------------
-
   /**
-   * @When /^I upload a program with (.*)$/
+   * @When I upload a program with ":program_attribute", API version :api_version
    *
-   * @param mixed $program_attribute
+   * @param string $api_version The API version to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAProgramWith($program_attribute): void
+  public function iUploadAProgramWith(string $program_attribute, string $api_version): void
   {
     switch ($program_attribute)
     {
@@ -716,218 +755,254 @@ class ApiContext implements KernelAwareContext
       default:
         throw new PendingException('No case defined for "'.$program_attribute.'"');
     }
-    $this->upload($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename, null);
+    $this->uploadProject($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename, null, $api_version);
   }
 
   /**
-   * @When /^I upload an invalid program file$/
-   */
-  public function iUploadAnInvalidProgramFile(): void
-  {
-    $this->upload($this->FIXTURES_DIR.'/invalid_archive.catrobat', null);
-  }
-
-  /**
-   * @When I upload this project with id :id
+   * @When I upload an invalid program file, API version :api_version
    *
-   * @param mixed $id
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadThisProject($id): void
+  public function iUploadAnInvalidProgramFile(string $api_version): void
   {
-    $this->upload(sys_get_temp_dir().'/program_generated.catrobat', null, $id);
+    $this->uploadProject($this->FIXTURES_DIR.'/invalid_archive.catrobat', null, $api_version);
   }
 
   /**
-   * @When /^User "([^"]*)" uploads the program$/
-   * @When /^User "([^"]*)" uploads the project$/
+   * @When I upload this generated program with id :id, API version :api_version
    *
-   * @param mixed $username
+   * @param string $id          The desired id of the uploaded project
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAProject($username): void
+  public function iUploadThisGeneratedProgramWithId(string $id, string $api_version): void
   {
-    /** @var User|null $user */
-    $user = $this->getUserManager()->findUserByUsername($username);
-    $this->upload(sys_get_temp_dir().'/program_generated.catrobat', $user);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
   }
 
   /**
-   * @Given /^I upload the program with "([^"]*)" as name$/
-   * @When /^I upload the program with "([^"]*)" as name again$/
+   * @Given I upload the program with ":name" as name, API version :api_version
+   * @Given I upload the program with ":name" as name again, API version :api_version
    *
-   * @param mixed $name
+   * @param mixed  $name
+   * @param string $api_version The API version to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadTheProgramWithAsName($name): void
+  public function iUploadTheProgramWithAsName($name, string $api_version): void
   {
     $this->generateProgramFileWith([
       'name' => $name,
     ]);
-    $this->upload(sys_get_temp_dir().'/program_generated.catrobat', null);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version);
   }
 
   /**
-   * @Then /^the uploaded program should not be a remix root$/
+   * @Then the uploaded program should not be a remix root, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified $api_version is not supported
    */
-  public function theUploadedProgramShouldNotBeARemixRoot(): void
+  public function theUploadedProgramShouldNotBeARemixRoot(string $api_version): void
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldNotBeARemixRoot($json['projectId']);
+    $this->theProgramShouldNotBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then /^the uploaded program should have remix migration date NOT NULL$/
+   * @Then the uploaded program should have remix migration date NOT NULL, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified $api_version is not supported
    */
-  public function theUploadedProgramShouldHaveMigrationDateNotNull(): void
+  public function theUploadedProgramShouldHaveMigrationDateNotNull(string $api_version): void
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
     $program_manager = $this->getProgramManager();
-    $uploaded_program = $program_manager->find($json['projectId']);
+    $uploaded_program = $program_manager->find($this->getIDOfLastUploadedProject($api_version));
     Assert::assertNotNull($uploaded_program->getRemixMigratedAt());
   }
 
   /**
-   * @Given /^the uploaded program should have a Scratch parent having id "([^"]*)"$/
+   * @Given the uploaded program should have a Scratch parent having id :id, API version :api_version
    *
-   * @param mixed $scratch_parent_id
-   */
-  public function theUploadedProgramShouldHaveAScratchParentHavingScratchID($scratch_parent_id): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveAScratchParentHavingScratchID($json['projectId'], $scratch_parent_id);
-  }
-
-  /**
-   * @Given /^the uploaded program should have no further Scratch parents$/
-   */
-  public function theUploadedProgramShouldHaveNoFurtherScratchParents(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoFurtherScratchParents($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
+   * @param mixed  $scratch_parent_id
+   * @param string $api_version       The version of the API to be used
    *
-   * @param mixed $id
-   * @param mixed $depth
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($id, $depth): void
+  public function theUploadedProgramShouldHaveAScratchParentHavingScratchID($scratch_parent_id, string $api_version): void
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-
-    $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($json['projectId'], $id, $depth);
+    $this->theProgramShouldHaveAScratchParentHavingScratchID($this->getIDOfLastUploadedProject($api_version), $scratch_parent_id);
   }
 
   /**
-   * @Then the uploaded program should have a Catrobat forward ancestor having its own id and depth :depth
+   * @Given the uploaded program should have no further Scratch parents, API version :api_version
    *
-   * @param mixed $depth
-   */
-  public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth($depth): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-
-    $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($json['projectId'], $json['projectId'], $depth);
-  }
-
-  /**
-   * @Then /^the uploaded program should have a Catrobat backward parent having id "([^"]*)"$/
+   * @param string $api_version The version of the API to be used
    *
-   * @param mixed $id
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveACatrobatBackwardParentHavingId($id): void
+  public function theUploadedProgramShouldHaveNoFurtherScratchParents(string $api_version): void
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveACatrobatBackwardParentHavingId($json['projectId'], $id);
+    $this->theProgramShouldHaveNoFurtherScratchParents($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then /^the uploaded program should have no Catrobat forward ancestors except self-relation$/
-   */
-  public function theUploadedProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have no Catrobat backward parents$/
-   */
-  public function theUploadedProgramShouldHaveNoCatrobatBackwardParents(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoCatrobatBackwardParents($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have no further Catrobat backward parents$/
-   */
-  public function theUploadedProgramShouldHaveNoFurtherCatrobatBackwardParents(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoFurtherCatrobatBackwardParents($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have no Catrobat ancestors except self-relation$/
-   */
-  public function theUploadedProgramShouldHaveNoCatrobatAncestors(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoCatrobatAncestors($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have no Scratch parents$/
-   */
-  public function theUploadedProgramShouldHaveNoScratchParents(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoScratchParents($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
+   * @Then the uploaded program should have a Catrobat forward ancestor having id :id and depth :depth, API version :api_version
    *
-   * @param mixed $id
-   * @param mixed $depth
-   */
-  public function theUploadedProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($id, $depth): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($json['projectId'], $id, $depth);
-  }
-
-  /**
-   * @Then /^the uploaded program should have no Catrobat forward descendants except self-relation$/
-   */
-  public function theUploadedProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have no further Catrobat forward descendants$/
-   */
-  public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardDescendants(): void
-  {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoFurtherCatrobatForwardDescendants($json['projectId']);
-  }
-
-  /**
-   * @Then /^the uploaded program should have RemixOf "([^"]*)" in the xml$/
+   * @param mixed  $id
+   * @param mixed  $depth
+   * @param string $api_version The API version to be used
    *
-   * @param mixed $value
+   * @throws APIVersionNotSupportedException when the specified $api_version is not supported
+   */
+  public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($id, $depth, string $api_version): void
+  {
+    $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version),
+      $id, $depth);
+  }
+
+  /**
+   * @Then the uploaded program should have a Catrobat forward ancestor having its own id and depth :depth, API version :api_version
+   *
+   * @param mixed  $depth
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth($depth, string $api_version): void
+  {
+    $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $this->getIDOfLastUploadedProject($api_version), $depth);
+  }
+
+  /**
+   * @Then the uploaded program should have a Catrobat backward parent having id :id, API version :api_version
+   *
+   * @param mixed  $id
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveACatrobatBackwardParentHavingId($id, $api_version): void
+  {
+    $this->theProgramShouldHaveACatrobatBackwardParentHavingId($this->getIDOfLastUploadedProject($api_version), $id);
+  }
+
+  /**
+   * @Then the uploaded program should have no Catrobat forward ancestors except self-relation, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(string $api_version): void
+  {
+    $this->theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
+  }
+
+  /**
+   * @Then the uploaded program should have no Catrobat backward parents, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveNoCatrobatBackwardParents($api_version): void
+  {
+    $this->theProgramShouldHaveNoCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
+  }
+
+  /**
+   * @Then the uploaded program should have no further Catrobat backward parents, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveNoFurtherCatrobatBackwardParents(string $api_version): void
+  {
+    $this->theProgramShouldHaveNoFurtherCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
+  }
+
+  /**
+   * @Then the uploaded program should have no Catrobat ancestors except self-relation, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveNoCatrobatAncestors(string $api_version): void
+  {
+    $this->theProgramShouldHaveNoCatrobatAncestors($this->getIDOfLastUploadedProject($api_version));
+  }
+
+  /**
+   * @Then the uploaded program should have no Scratch parents, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveNoScratchParents(string $api_version): void
+  {
+    $this->theProgramShouldHaveNoScratchParents($this->getIDOfLastUploadedProject($api_version));
+  }
+
+  /**
+   * @Then the uploaded program should have a Catrobat forward descendant having id :id and depth :depth, API version :api_version
+   *
+   * @param mixed  $id
+   * @param mixed  $depth
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($id, $depth, string $api_version): void
+  {
+    $this->theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $id, $depth);
+  }
+
+  /**
+   * @Then the uploaded program should have no Catrobat forward descendants except self-relation, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(string $api_version): void
+  {
+    $this->theProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
+  }
+
+  /**
+   * @Then the uploaded program should have no further Catrobat forward descendants, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardDescendants(string $api_version): void
+  {
+    $this->theProgramShouldHaveNoFurtherCatrobatForwardDescendants($this->getIDOfLastUploadedProject($api_version));
+  }
+
+  /**
+   * @Then the uploaded program should have RemixOf :value in the xml, API version :api_version
+   *
+   * @param mixed  $value
+   * @param string $api_version The version of the API to be used
    *
    * @throws ORMException
    * @throws OptimisticLockException
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveRemixOfInTheXml($value): void
+  public function theUploadedProgramShouldHaveRemixOfInTheXml($value, string $api_version): void
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-
-    $this->theProgramShouldHaveRemixofInTheXml($json['projectId'], $value);
+    $this->theProgramShouldHaveRemixofInTheXml($this->getIDOfLastUploadedProject($api_version), $value);
   }
 
   /**
@@ -942,17 +1017,6 @@ class ApiContext implements KernelAwareContext
    */
   public function iHaveNoParameters(): void
   {
-  }
-
-  /**
-   * @When /^I upload a standard catrobat program$/
-   */
-  public function iUploadAStandardCatrobatProgram(): void
-  {
-    $user = $this->insertUser();
-    $file = $this->getStandardProgramFile();
-    $response = $this->upload($file, $user, '1');
-    Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
   }
 
   /**
@@ -993,12 +1057,15 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^the uploaded program should have no further Catrobat forward ancestors$/
+   * @Then the uploaded program should have no further Catrobat forward ancestors, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardAncestors(): void
+  public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardAncestors(string $api_version): void
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    $this->theProgramShouldHaveNoFurtherCatrobatForwardAncestors($json['projectId']);
+    $this->theProgramShouldHaveNoFurtherCatrobatForwardAncestors($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
@@ -1176,6 +1243,23 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the response should contain a location header with URL of the uploaded project$/
+   */
+  public function theResponseShouldContainALocationHeaderWithURLOfTheUploadedProject(): void
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $uploaded_program = $em->getRepository('App\Entity\Program')->findOneBy([
+      'name' => 'test',
+    ]);
+
+    $location_header = $this->getKernelBrowser()->getResponse()->headers->get('Location');
+
+    Assert::assertNotNull($location_header);
+    Assert::assertNotNull($uploaded_program);
+    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $location_header);
+  }
+
+  /**
    * @Then /^the client response should contain the elements:$/
    */
   public function theResponseShouldContainTheElements(TableNode $table): void
@@ -1218,7 +1302,7 @@ class ApiContext implements KernelAwareContext
     $file = $this->generateProgramFileWith([
       'name' => $program->getName(),
     ]);
-    $this->upload($file, null);
+    $this->uploadProject($file, null, '1');
   }
 
   /**
@@ -1312,7 +1396,7 @@ class ApiContext implements KernelAwareContext
     $this->method = 'GET';
     $this->url = '/app/api/projects/search.json';
     $this->request_parameters = ['q' => $arg1, 'offset' => 0, 'limit' => 10];
-    $this->iInvokeTheRequest();
+    $this->iRequest();
   }
 
   /**
@@ -1565,6 +1649,14 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
+   */
+  public function iHaveAParameterWithTheMdChecksumOf(string $parameter): void
+  {
+    $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
+  }
+
+  /**
    * @Then /^I should get (\d+) projects in the following order:$/
    */
   public function iShouldGetScratchProjectsInTheFollowingOrder(int $program_count, TableNode $table): void
@@ -1600,13 +1692,27 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
+   * @Given /^I have a parameter ":parameter" with the md5checksum of the file to be uploaded, API version :api_version$/
    *
-   * @param mixed $parameter
+   * @param string $parameter   The HTTP request parameter holding the checksum
+   * @param string $api_version The version of the API which should be used
+   *
+   * @throws APIVersionNotSupportedException When the specified $api_version is not supported
    */
-  public function iHaveAParameterWithTheMdChecksumOf($parameter): void
+  public function iHaveAParameterWithTheMdChecksumOfTheUploadFile(string $parameter, string $api_version): void
   {
-    $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
+    if ('1' == $api_version)
+    {
+      $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
+    }
+    elseif ('2' == $api_version)
+    {
+      $this->request_parameters[$parameter] = md5_file($this->request_files['file']->getPathname());
+    }
+    else
+    {
+      throw new APIVersionNotSupportedException($api_version);
+    }
   }
 
   /**
@@ -1643,15 +1749,31 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Then it should be updated
+   * @Then it should be updated, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException When the specified $api_version is not supported
    */
-  public function itShouldBeUpdated(): void
+  public function itShouldBeUpdated(string $api_version): void
   {
-    $last_json = json_decode($this->last_response, true);
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
-    Assert::assertEquals($last_json['projectId'], $json['projectId'],
-      $this->getKernelBrowser()->getResponse()->getContent()
-    );
+    if ('1' == $api_version)
+    {
+      $last_json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
+      $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
+      Assert::assertEquals($last_json['projectId'], $json['projectId'],
+        $this->getKernelBrowser()->getResponse()->getContent()
+      );
+    }
+    elseif ('2' == $api_version)
+    {
+      Assert::assertEquals($this->getKernelBrowser()->getResponse()->headers->get('Location'),
+        $this->getKernelBrowser()->getResponse()->headers->get('Location'));
+    }
+    else
+    {
+      throw new APIVersionNotSupportedException($api_version);
+    }
   }
 
   /**
@@ -1689,92 +1811,103 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given I try to upload a program with unnecessary files
-   */
-  public function iTryToUploadAProgramWithUnnecessaryFiles(): void
-  {
-    $this->sendUploadRequest($this->FIXTURES_DIR.'unnecessaryFiles.catrobat');
-  }
-
-  /**
-   * @Given I try to upload a program with scenes and unnecessary files
-   */
-  public function iTryToUploadAProgramWithScenesAndUnnecessaryFiles(): void
-  {
-    $this->sendUploadRequest($this->FIXTURES_DIR.'unnecessaryFilesInScenes.catrobat');
-  }
-
-  /**
-   * @When I upload this program with id :id
+   * @Given I try to upload a project with unnecessary files, API version :api_version
    *
-   * @param mixed $id
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API is not supported
    */
-  public function iUploadThisProgramWithId($id): void
+  public function iTryToUploadAProjectWithUnnecessaryFiles(string $api_version): void
   {
-    if (array_key_exists('deviceLanguage', $this->request_parameters))
+    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFiles.catrobat', null, $api_version);
+  }
+
+  /**
+   * @Given I try to upload a project with scenes and unnecessary files, API version :api_version
+   *
+   * @param string $api_version The API version to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API is not supported
+   */
+  public function iTryToUploadAProjectWithScenesAndUnnecessaryFiles(string $api_version): void
+  {
+    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFilesInScenes.catrobat', null, $api_version);
+  }
+
+  /**
+   * @When I upload this program with id :id, API version :api_version
+   *
+   * @param string $id          The desired ID of the newly uploaded project
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API is not supported
+   */
+  public function iUploadThisProgramWithId(string $id, string $api_version): void
+  {
+    if ('1' == $api_version)
     {
-      $response = $this->upload(sys_get_temp_dir().'/program_generated.catrobat', null,
-        $id, 'pocketcode', $this->request_parameters);
+      if (array_key_exists('deviceLanguage', $this->request_parameters))
+      {
+        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null,
+          $api_version, $id, 'pocketcode');
+      }
+      else
+      {
+        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
+      }
+
+      $resp_array = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent());
+      $resp_array['projectId'] = $id;
+      $this->getKernelBrowser()->getResponse()->setContent(json_encode($resp_array));
+    }
+    elseif ('2' == $api_version)
+    {
+      $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
     }
     else
     {
-      $response = $this->upload(sys_get_temp_dir().'/program_generated.catrobat', null, $id);
-    }
-
-    $resp_array = (array) json_decode($response->getContent());
-    $resp_array['projectId'] = $id;
-    $this->getKernelBrowser()->getResponse()->setContent(json_encode($resp_array));
-  }
-
-  /**
-   * @When /^I upload this program$/
-   */
-  public function iUploadThisProgram(): void
-  {
-    if (array_key_exists('deviceLanguage', $this->request_parameters))
-    {
-      $this->upload(sys_get_temp_dir().'/program_generated.catrobat', null,
-        '', 'pocketcode', $this->request_parameters);
-    }
-    else
-    {
-      $this->upload(sys_get_temp_dir().'/program_generated.catrobat', null);
+      throw new APIVersionNotSupportedException($api_version);
     }
   }
 
   /**
-   * @When /^I upload a program$/
-   */
-  public function iUploadAProgram(): void
-  {
-    /** @var User|null $user */
-    $user = $this->username ? $this->getUserManager()->findUserByUsername($this->username) : null;
-    $this->upload(sys_get_temp_dir().'/program_generated.catrobat', $user);
-  }
-
-  /**
-   * @When /^I upload the program with the id "([^"]*)"$/
+   * @When I upload this generated program, API version :api_version
+   * @When I upload a generated program, API version :api_version
    *
-   * @param mixed $id
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAProgramWithId($id): void
+  public function iUploadThisGeneratedProject(string $api_version): void
   {
-    /** @var User|null $user */
-    $user = $this->username ? $this->getUserManager()->findUserByUsername($this->username) : null;
-    $this->upload(sys_get_temp_dir().'/program_generated.catrobat', $user, $id);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version);
   }
 
   /**
-   * @When /^I upload the program with the id "([^"]*)" and name "([^"]*)"$/
+   * @When I upload the program with the id ":id", API version :api_version
    *
-   * @param mixed $id
-   * @param mixed $name
+   * @param mixed  $id
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAProgramWithIdAndName($id, $name): void
+  public function iUploadAProgramWithId($id, string $api_version): void
   {
-    /** @var User|null $user */
-    $user = $this->username ? $this->getUserManager()->findUserByUsername($this->username) : null;
-    $this->upload(sys_get_temp_dir().'/program_generated.catrobat', $user, $id);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
+  }
+
+  /**
+   * @When I upload the generated program with the id :id and name :name, API version :api_version
+   *
+   * @param mixed  $id
+   * @param mixed  $name
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function iUploadTheGeneratedProgramWithIdAndName($id, $name, string $api_version): void
+  {
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
 
     /** @var Program $project */
     $project = $this->getProgramManager()->find($id);
@@ -1782,54 +1915,66 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When /^I upload the program again without extensions$/
+   * @When I upload this generated program again without extensions, API version :api_version
+   *
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API is not supported
    */
-  public function iUploadTheProgramAgainWithoutExtensions(): void
+  public function iUploadTheGeneratedProgramAgainWithoutExtensions(string $api_version): void
   {
     $this->iHaveAProjectWithAs('name', 'extensions');
-    $this->iUploadAProgram();
+    $this->iUploadThisGeneratedProject($api_version);
   }
 
   /**
-   * @When /^I upload another program with name set to "([^"]*)" and url set to "([^"]*)"$/
+   * @When I upload another program with name set to ":name" and url set to ":url", API version :api_version
    *
-   * @param mixed $name
-   * @param mixed $url
+   * @param mixed  $name
+   * @param mixed  $url
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAnotherProgramWithNameSetToAndUrlSetTo($name, $url): void
+  public function iUploadAnotherProgramWithNameSetToAndUrlSetTo($name, $url, $api_version): void
   {
     $this->iHaveAProjectWithAsTwoHeaderFields('name', $name, 'url', $url);
-    $this->iUploadAProgram();
+    $this->iUploadThisGeneratedProject($api_version);
   }
 
   /**
    * @When I upload another program with name set to :arg1, url set to :arg2 \
-   *       and catrobatLanguageVersion set to :arg3
+   *       and catrobatLanguageVersion set to :arg3, API version :api_version
    *
-   * @param mixed $name
-   * @param mixed $url
-   * @param mixed $catrobat_language_version
+   * @param mixed  $name
+   * @param mixed  $url
+   * @param mixed  $catrobat_language_version
+   * @param string $api_version               The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(
-    $name, $url, $catrobat_language_version
-  ): void {
+  public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo($name, $url, $catrobat_language_version, string $api_version): void
+  {
     $this->iHaveAProjectWithAsMultipleHeaderFields('name', $name, 'url', $url,
       'catrobatLanguageVersion', $catrobat_language_version);
-    $this->iUploadAProgram();
+    $this->iUploadThisGeneratedProject($api_version);
   }
 
   /**
-   * @When /^I upload this program again with the tags "([^"]*)"$/
+   * @When I upload this generated program again with the tags :arg1, API version :arg2
    *
-   * @param mixed $tags
+   * @param mixed  $tags        The tags of the project
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadThisProgramAgainWithTheTags($tags): void
+  public function iUploadThisProgramAgainWithTheTags($tags, $api_version): void
   {
     $this->generateProgramFileWith([
       'tags' => $tags,
     ]);
     $file = sys_get_temp_dir().'/program_generated.catrobat';
-    $this->upload($file, null, '', 'pocketcode', $this->request_parameters);
+    $this->uploadProject($file, null, $api_version, '', 'pocketcode');
   }
 
   /**
@@ -1917,11 +2062,14 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I use the "([^"]*)" app$/
+   * @Given I use the :arg1 app, API version :arg2
    *
-   * @param mixed $language
+   * @param string $language    The desired language
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API is not supported
    */
-  public function iUseTheApp($language): void
+  public function iUseTheApp(string $language, string $api_version): void
   {
     switch ($language)
     {
@@ -1935,7 +2083,18 @@ class ApiContext implements KernelAwareContext
         $deviceLanguage = 'NotExisting';
     }
 
-    $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
+    if ('1' == $api_version)
+    {
+      $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
+    }
+    elseif ('2' == $api_version)
+    {
+      $this->iHaveARequestHeaderWithValue('HTTP_ACCEPT_LANGUAGE', $deviceLanguage);
+    }
+    else
+    {
+      throw new APIVersionNotSupportedException($api_version);
+    }
   }
 
   /**
@@ -1976,7 +2135,7 @@ class ApiContext implements KernelAwareContext
    */
   public function theServerNameIs($name): void
   {
-    $this->request_server['HTTP_HOST'] = $name;
+    $this->request_headers['HTTP_HOST'] = $name;
   }
 
   /**
@@ -1984,7 +2143,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iUseASecureConnection(): void
   {
-    $this->request_server['HTTPS'] = true;
+    $this->request_headers['HTTPS'] = true;
   }
 
   /**
@@ -2035,14 +2194,55 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I have a valid Catrobat file$/
+   * @Given I have a valid Catrobat file, API version :api_version
+   *
+   * @param string $api_version the version of the API which should be used
+   *
+   * @throws APIVersionNotSupportedException When a not supported version of the API is passed as parameter
+   *                                         $api_version
    */
-  public function iHaveAValidCatrobatFile(): void
+  public function iHaveAValidCatrobatFile(string $api_version): void
   {
     $filepath = $this->FIXTURES_DIR.'test.catrobat';
     Assert::assertTrue(file_exists($filepath), 'File not found');
     $this->request_files = [];
-    $this->request_files[] = new UploadedFile($filepath, 'test.catrobat');
+
+    if ('1' == $api_version)
+    {
+      $this->request_files[0] = new UploadedFile($filepath, 'test.catrobat');
+    }
+    elseif ('2' == $api_version)
+    {
+      $this->request_files['file'] = new UploadedFile($filepath, 'test.catrobat');
+    }
+    else
+    {
+      throw new APIVersionNotSupportedException($api_version);
+    }
+  }
+
+  /**
+   * @Given I have a broken Catrobat file, API version :api_version
+   *
+   * @param string $api_version the version of the API which should be used
+   *
+   * @throws APIVersionNotSupportedException When a not supported version of the API is passed as parameter
+   *                                         $api_version
+   */
+  public function iHaveABrokenCatrobatFile(string $api_version): void
+  {
+    $filepath = $this->FIXTURES_DIR.'broken.catrobat';
+    Assert::assertTrue(file_exists($filepath), 'File not found');
+    $this->request_files = [];
+
+    if ('2' == $api_version)
+    {
+      $this->request_files['file'] = new UploadedFile($filepath, 'broken.catrobat');
+    }
+    else
+    {
+      throw new APIVersionNotSupportedException($api_version);
+    }
   }
 
   /**
@@ -2112,7 +2312,7 @@ class ApiContext implements KernelAwareContext
   public function iUpdateMyProgram(): void
   {
     $file = $this->getDefaultProgramFile();
-    $this->upload($file, $this->getUserDataFixtures()->getCurrentUser());
+    $this->uploadProject($file, $this->getUserDataFixtures()->getCurrentUser(), '1');
   }
 
   /**
@@ -2144,11 +2344,13 @@ class ApiContext implements KernelAwareContext
    */
   public function iSubmitTheProgram(): void
   {
-    $link = $this->last_response->filter('#gamejam-submission')
+    /** @var Crawler $last_response */
+    $last_response = $this->getKernelBrowser()->getResponse();
+    $link = $last_response->filter('#gamejam-submission')
       ->parents()
       ->link()
     ;
-    $this->last_response = $this->getKernelBrowser()->click($link);
+    $this->getKernelBrowser()->click($link);
   }
 
   /**
@@ -2156,11 +2358,12 @@ class ApiContext implements KernelAwareContext
    */
   public function iLogin(): void
   {
-    $loginButton = $this->last_response;
+    /** @var Crawler $loginButton */
+    $loginButton = $this->getKernelBrowser()->getResponse();
     $form = $loginButton->selectButton('Login')->form();
     $form['_username'] = 'Generated';
     $form['_password'] = 'generated';
-    $this->last_response = $this->getKernelBrowser()->submit($form);
+    $this->getKernelBrowser()->submit($form);
   }
 
   /**
@@ -2185,9 +2388,7 @@ class ApiContext implements KernelAwareContext
       'name' => 'other program',
       'owned by' => $other,
     ]);
-    $this->last_response = $this
-      ->getKernelBrowser()
-      ->request('GET', '/app/project/1')
+    $this->iRequestWith('GET', '/app/project/1')
     ;
   }
 
@@ -2205,15 +2406,15 @@ class ApiContext implements KernelAwareContext
         'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
       ]);
     }
-    $this->last_response = $this
-      ->getKernelBrowser()
-      ->request('GET', '/app/project/1')
-    ;
-    $link = $this->last_response->filter('#gamejam-submission')
+    $this->iRequestWith('GET', '/app/project/1');
+
+    /** @var Crawler $response */
+    $response = $this->getKernelBrowser()->getResponse();
+    $link = $response->filter('#gamejam-submission')
       ->parents()
       ->link()
     ;
-    $this->last_response = $this->getKernelBrowser()->click($link);
+    $this->getKernelBrowser()->click($link);
   }
 
   /**
@@ -2230,7 +2431,7 @@ class ApiContext implements KernelAwareContext
         'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
       ]);
     }
-    $this->last_response = $this->getKernelBrowser()->request('GET', '/app/project/1')
+    $this->iRequestWith('GET', '/app/project/1')
     ;
   }
 
@@ -2239,10 +2440,10 @@ class ApiContext implements KernelAwareContext
    */
   public function thereShouldBeAButtonToSubmitItToTheJam(): void
   {
-    Assert::assertEquals(200, $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-    Assert::assertEquals(1, $this->last_response->filter('#gamejam-submission')->count());
+    /** @var Crawler $response */
+    $response = $this->getKernelBrowser()->getResponse();
+    Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode());
+    Assert::assertEquals(1, $response->filter('#gamejam-submission')->count());
   }
 
   /**
@@ -2250,10 +2451,12 @@ class ApiContext implements KernelAwareContext
    */
   public function thereShouldNotBeAButtonToSubmitItToTheJam(): void
   {
+    /** @var Crawler $response */
+    $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals(200, $this->getKernelBrowser()
       ->getResponse()
       ->getStatusCode());
-    Assert::assertEquals(0, $this->last_response->filter('#gamejam-submission')->count());
+    Assert::assertEquals(0, $response->filter('#gamejam-submission')->count());
   }
 
   /**
@@ -2261,10 +2464,12 @@ class ApiContext implements KernelAwareContext
    */
   public function thereShouldBeADivWithWhatsTheGamejam(): void
   {
+    /** @var Crawler $response */
+    $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals(200, $this->getKernelBrowser()
       ->getResponse()
       ->getStatusCode());
-    Assert::assertEquals(1, $this->last_response->filter('#gamejam-whats')->count());
+    Assert::assertEquals(1, $response->filter('#gamejam-whats')->count());
   }
 
   /**
@@ -2272,10 +2477,12 @@ class ApiContext implements KernelAwareContext
    */
   public function thereShouldNotBeADivWithWhatsTheGamejam(): void
   {
+    /** @var Crawler $response */
+    $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals(200, $this->getKernelBrowser()
       ->getResponse()
       ->getStatusCode());
-    Assert::assertEquals(0, $this->last_response->filter('#gamejam-whats')->count());
+    Assert::assertEquals(0, $response->filter('#gamejam-whats')->count());
   }
 
   /**
@@ -2298,15 +2505,15 @@ class ApiContext implements KernelAwareContext
     }
 
     $this->getKernelBrowser()->followRedirects(false);
-    $this->last_response = $this
-      ->getKernelBrowser()
-      ->request('GET', '/app/project/1')
+    $this->iRequestWith('GET', '/app/project/1')
     ;
-    $link = $this->last_response->filter('#gamejam-submission')
+    /** @var Crawler $response */
+    $response = $this->getKernelBrowser()->getResponse();
+    $link = $response->filter('#gamejam-submission')
       ->parents()
       ->link()
     ;
-    $this->last_response = $this->getKernelBrowser()->click($link);
+    $this->getKernelBrowser()->click($link);
   }
 
   /**
@@ -2372,7 +2579,7 @@ class ApiContext implements KernelAwareContext
   public function iUploadMyGame(): void
   {
     $file = $this->getDefaultProgramFile();
-    $this->upload($file, $this->getUserDataFixtures()->getCurrentUser());
+    $this->uploadProject($file, $this->getUserDataFixtures()->getCurrentUser(), '1');
   }
 
   /**
@@ -2394,7 +2601,7 @@ class ApiContext implements KernelAwareContext
   public function iAlreadySubmittedMyGame($id): void
   {
     $file = $this->getDefaultProgramFile();
-    $this->last_response = $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $id)->getContent();
+    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $id);
   }
 
   /**
@@ -2404,7 +2611,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iAlreadyFilledTheGoogleForm($id): void
   {
-    $this->getKernelBrowser()->request('GET', '/app/api/gamejam/finalize/'.$id);
+    $this->iRequestWith('GET', '/app/api/gamejam/finalize/'.$id);
     Assert::assertEquals('200', $this->getKernelBrowser()
       ->getResponse()
       ->getStatusCode());
@@ -2424,7 +2631,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iFillOutTheGoogleForm(): void
   {
-    $this->getKernelBrowser()->request('GET', '/app/api/gamejam/finalize/1');
+    $this->iRequestWith('GET', '/app/api/gamejam/finalize/1');
     Assert::assertEquals('200', $this->getKernelBrowser()
       ->getResponse()
       ->getStatusCode());
@@ -2705,7 +2912,7 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no further Catrobat forward descendants$/
+   * @Then the program :program_id should have no further Catrobat forward descendants
    *
    * @param mixed $program_id
    */
@@ -2742,37 +2949,6 @@ class ApiContext implements KernelAwareContext
     $extracted_catrobat_file = $efr->loadProgramExtractedFile($uploaded_program);
     $project_xml_prop = $extracted_catrobat_file->getProgramXmlProperties();
     Assert::assertEquals($value, $project_xml_prop->header->remixOf->__toString());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  //  Error Logging
-  //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * @AfterStep
-   */
-  public function saveResponseToFile(AfterStepScope $scope): void
-  {
-    if (null == $this->ERROR_DIR)
-    {
-      return;
-    }
-
-    try
-    {
-      if (!$scope->getTestResult()->isPassed() && null != $this->getKernelBrowser())
-      {
-        $response = $this->getKernelBrowser()->getResponse();
-        if (null != $response && '' != $response->getContent())
-        {
-          file_put_contents($this->ERROR_DIR.'errors.json', $response->getContent());
-        }
-      }
-    }
-    catch (Exception $e)
-    {
-      file_put_contents($this->ERROR_DIR.'errors.json', '');
-    }
   }
 
   /**
@@ -2814,28 +2990,84 @@ class ApiContext implements KernelAwareContext
   {
     $user = $this->insertUser();
     $program = $this->getStandardProgramFile();
-    $response = $this->upload($program, $user, '1', 'phirocode');
-    Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+    $this->uploadProject($program, $user, '1', '1', 'phirocode');
+    Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
+      'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
 
-  private function sendUploadRequest(?string $filepath): void
+  //--------------------------------------------------------------------------------------------------------------------
+  //  Error Logging
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @AfterStep
+   */
+  public function saveResponseToFile(AfterStepScope $scope): void
   {
-    Assert::assertTrue(file_exists($filepath), 'File not found');
-
-    $this->request_files = [];
-    $this->request_files[] = new UploadedFile($filepath, 'unnecessaryFiles.catrobat');
-
-    $this->iHaveAParameterWithTheMdChecksumOf('fileChecksum');
-    $this->request_parameters['username'] = $this->username;
-    $this->request_parameters['token'] = 'cccccccccc';
-    $this->iPostTo('/app/api/upload/upload.json');
-  }
-
-  private function upload(string $file, ?User $user, string $desired_id = '', string $flavor = 'pocketcode', ?array $request_param = null): Response
-  {
-    if (null === $user)
+    if (null == $this->ERROR_DIR)
     {
-      $user = $this->getUserDataFixtures()->getDefaultUser();
+      return;
+    }
+
+    try
+    {
+      if (!$scope->getTestResult()->isPassed() && null != $this->getKernelBrowser())
+      {
+        $response = $this->getKernelBrowser()->getResponse();
+        if (null != $response && '' != $response->getContent())
+        {
+          file_put_contents($this->ERROR_DIR.'errors.json', $response->getContent());
+        }
+      }
+    }
+    catch (Exception $e)
+    {
+      file_put_contents($this->ERROR_DIR.'errors.json', '');
+    }
+  }
+
+  /**
+   * @When /^I upload a standard catrobat program$/
+   */
+  public function iUploadAStandardCatrobatProgram(): void
+  {
+    $user = $this->insertUser();
+    $file = $this->getStandardProgramFile();
+    $this->uploadProject($file, $user, '1', '1');
+    Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
+      'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  //  Upload Request process
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Uploads a Catrobat Project.
+   *
+   * @param string $file        The Catrobat file to be uploaded
+   * @param User   $user        The uploader
+   * @param string $api_version The version of the API to be used
+   * @param string $desired_id  Specifiy, if the uploaded project should get a desired id
+   * @param string $flavor      The flavor of the project
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws Exception                       when an error while uploading occurs
+   */
+  private function uploadProject(string $file, User $user = null, string $api_version, string $desired_id = '',
+                                 string $flavor = 'pocketcode'): void
+  {
+    if (null == $user)
+    {
+      if (isset($this->username))
+      {
+        /** @var User $user */
+        $user = $this->getUserManager()->findUserByUsername($this->username);
+      }
+      else
+      {
+        $user = $this->getUserDataFixtures()->getDefaultUser();
+      }
     }
 
     // overwrite id if desired
@@ -2844,30 +3076,70 @@ class ApiContext implements KernelAwareContext
       MyUuidGenerator::setNextValue($desired_id);
     }
 
-    try
+    if (is_string($file))
     {
-      $file = new UploadedFile($file, 'uploadedFile');
-    }
-    catch (Exception $e)
-    {
-      throw new PendingException('No case defined for '.$e);
-    }
-
-    $parameters = [];
-    $parameters['username'] = $user->getUsername();
-
-    $parameters['token'] = $user->getUploadToken();
-    $parameters['fileChecksum'] = md5_file($file->getPathname());
-
-    if (isset($request_param['deviceLanguage']))
-    {
-      $parameters['deviceLanguage'] = $request_param['deviceLanguage'];
+      try
+      {
+        $file = new UploadedFile($file, basename($file));
+      }
+      catch (Exception $e)
+      {
+        throw new PendingException('No case defined for '.$e);
+      }
     }
 
-    $client = $this->getKernelBrowser();
-    $client->request('POST', '/'.$flavor.'/api/upload/upload.json', $parameters, [$file]);
+    if ('1' == $api_version)
+    {
+      $this->request_parameters['username'] = $user->getUsername();
+      $this->request_parameters['token'] = $user->getUploadToken();
+      $this->request_files[0] = $file;
+      $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
+      $this->iRequestWith('POST', '/'.$flavor.'/api/upload/upload.json');
+    }
+    elseif ('2' == $api_version)
+    {
+      $this->request_headers['CONTENT_TYPE'] = 'multipart/form-data';
+      $this->request_headers['HTTP_ACCEPT'] = 'application/json';
+      $this->request_files['file'] = $file;
+      $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('checksum', '2');
+      $this->iUseAValidJwtBearerTokenFor($user->getUsername());
+      $this->iRequestWith('POST', '/api/projects');
+    }
+    else
+    {
+      throw new APIVersionNotSupportedException($api_version);
+    }
+  }
 
-    return $client->getResponse();
+  /**
+   * Returns the ID of the last uploaded project. The ID is retrieved from the last received response.
+   *
+   * @param string $api_version The API version to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   *
+   * @return string the ID of the last uploaded project or null if not available
+   */
+  private function getIDOfLastUploadedProject(string $api_version)
+  {
+    $last_uploaded_project_id = null;
+
+    if ('1' == $api_version)
+    {
+      $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
+      $last_uploaded_project_id = $json['projectId'];
+    }
+    elseif ('2' == $api_version)
+    {
+      $splitted_project_uri = explode('/', $this->getKernelBrowser()->getResponse()->headers->get('Location'));
+      $last_uploaded_project_id = $splitted_project_uri[sizeof($splitted_project_uri) - 1];
+    }
+    else
+    {
+      throw new APIVersionNotSupportedException($api_version);
+    }
+
+    return $last_uploaded_project_id;
   }
 
   private function prepareValidRegistrationParameters(): void
@@ -2880,7 +3152,7 @@ class ApiContext implements KernelAwareContext
 
   private function iUseTheUserAgent(string $user_agent): void
   {
-    $this->request_server['HTTP_USER_AGENT'] = $user_agent;
+    $this->request_headers['HTTP_USER_AGENT'] = $user_agent;
   }
 
   private function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version,

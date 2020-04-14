@@ -17,7 +17,7 @@ Feature: Upload a program to the website
       | username     | Catrobat               |
       | token        | cccccccccc             |
       | fileChecksum | <md5 checksum of file> |
-    And a catrobat file is attached to the request
+    And I have a valid Catrobat file, API version 1
     And the POST parameter "fileChecksum" contains the MD5 sum of the attached file
     When the Request is invoked
     Then the returned json object with id "1" will be:

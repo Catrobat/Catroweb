@@ -27,7 +27,7 @@ Feature: Submitting games to a game jam
     And I already submitted my game with id "1"
     And I already filled the google form with id "1"
     When I resubmit my game
-    Then it should be updated
+    Then it should be updated, API version 1
     And I should not get the url to the google form
     And My game should still be accepted
 
@@ -40,7 +40,7 @@ Feature: Submitting games to a game jam
     And I already submitted my game with id "1"
     But I did not fill out the google form
     When I resubmit my game
-    Then it should be updated
+    Then it should be updated, API version 1
     And I should get the url to the google form
     But The game is not yet accepted
 
@@ -61,5 +61,5 @@ Feature: Submitting games to a game jam
     Given There is an ongoing game jam
     And I already submitted my game with id "1"
     When I upload my game
-    Then it should be updated
+    Then it should be updated, API version 1
 

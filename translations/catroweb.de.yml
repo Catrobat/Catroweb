@@ -649,6 +649,11 @@ api:
     passwordTooLong: 'Passwort zu lang'
     passwordInvalidChars: 'Password enthält ungültige Zeichen'
 
+  projectsPost:
+    invalid_checksum: 'Checksum ungültig. Bitte versuche es erneu!'
+    upload_error: 'Fehler während dem Upload. Bitte versuche es erneut!'
+    creating_error: 'Fehler während dem Erstellen der Program Entity. Bitte versuche es erneut!'
+
 
 success:
   text: Abgeschlossen

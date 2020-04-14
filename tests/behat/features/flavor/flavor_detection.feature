@@ -13,4 +13,3 @@ Feature: Flag programs based on the app flavor
 
     When I upload a standard catrobat program
     Then the program should not be flagged as phiro
-    

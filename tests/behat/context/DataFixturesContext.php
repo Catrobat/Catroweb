@@ -405,13 +405,13 @@ class DataFixturesContext implements KernelAwareContext
 
     Assert::assertNotNull($program_extensions);
 
-    Assert::assertCount(0, $program_extensions, 'Too much or too less tags found!');
+    Assert::assertCount(0, $program_extensions, 'Too much or too less extensions found!');
 
     $ext = ['Arduino', 'Lego', 'Phiro'];
     foreach ($program_extensions as $program_extension)
     {
       /* @var Extension $program_extension */
-      Assert::assertContains($program_extension->getName(), $ext, 'The Extension is not found!');
+      Assert::assertContains($program_extension->getName(), $ext, 'The extension is not found!');
     }
   }
 
@@ -423,7 +423,7 @@ class DataFixturesContext implements KernelAwareContext
     $program_manager = $this->getProgramManager();
     $program = $program_manager->find('1');
     Assert::assertNotNull($program, 'No program added');
-    Assert::assertEquals('phirocode', $program->getFlavor(), 'Program is NOT flagged aa a phiro');
+    Assert::assertEquals('phirocode', $program->getFlavor(), 'Program is NOT flagged as phiro');
   }
 
   /**

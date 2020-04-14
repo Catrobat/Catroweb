@@ -53,16 +53,16 @@ Feature: Get remixed program from Scratch
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I have a program with "catrobatLanguageVersion" set to "0.999" and "url" set to "Music Inventor [https://scratch.mit.edu/projects/29495624], The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/]"
-    When I upload the program with the id "18" and name "program 18"
-    Then the uploaded program should be a remix root
-    And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
-    And the uploaded program should have no Catrobat ancestors except self-relation
-    And the uploaded program should have a Scratch parent having id "29495624"
-    And the uploaded program should have a Scratch parent having id "70058680"
-    And the uploaded program should have no further Scratch parents
-    And the uploaded program should have no Catrobat forward descendants except self-relation
-    And the uploaded program should have RemixOf "Music Inventor [https://scratch.mit.edu/projects/29495624], The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/]" in the xml
+    When I upload the generated program with the id "18" and name "program 18", API version 2
+    Then the uploaded program should be a remix root, API version 2
+    And the uploaded program should have remix migration date NOT NULL, API version 2
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0", API version 2
+    And the uploaded program should have no Catrobat ancestors except self-relation, API version 2
+    And the uploaded program should have a Scratch parent having id "29495624", API version 2
+    And the uploaded program should have a Scratch parent having id "70058680", API version 2
+    And the uploaded program should have no further Scratch parents, API version 2
+    And the uploaded program should have no Catrobat forward descendants except self-relation, API version 2
+    And the uploaded program should have RemixOf "Music Inventor [https://scratch.mit.edu/projects/29495624], The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/]" in the xml, API version 2
     Given I have a parameter "limit" with value "6"
     And I have a parameter "offset" with value "0"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
@@ -91,14 +91,14 @@ Feature: Get remixed program from Scratch
       | 6         | 1        |
 
     Given I have a program with "catrobatLanguageVersion" set to "1.0" and "url" set to "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Program 2 [/pocketalice/project/2], Merge 1 [Program 6 [/app/project/6], Program 8 [https://share.catrob.at/app/project/8]]]"
-    When I upload the program with the id "18" and name "program 18"
-    And the uploaded program should have remix migration date NOT NULL
-    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0"
-    And the uploaded program should have no Catrobat backward parents
-    And the uploaded program should have a Scratch parent having id "70058680"
-    And the uploaded program should have no further Scratch parents
-    And the uploaded program should have no Catrobat forward descendants except self-relation
-    And the uploaded program should have RemixOf "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Program 2 [/pocketalice/project/2], Merge 1 [Program 6 [/app/project/6], Program 8 [https://share.catrob.at/app/project/8]]]" in the xml
+    When I upload the generated program with the id "18" and name "program 18", API version 2
+    And the uploaded program should have remix migration date NOT NULL, API version 2
+    And the uploaded program should have a Catrobat forward ancestor having its own id and depth "0", API version 2
+    And the uploaded program should have no Catrobat backward parents, API version 2
+    And the uploaded program should have a Scratch parent having id "70058680", API version 2
+    And the uploaded program should have no further Scratch parents, API version 2
+    And the uploaded program should have no Catrobat forward descendants except self-relation, API version 2
+    And the uploaded program should have RemixOf "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Program 2 [/pocketalice/project/2], Merge 1 [Program 6 [/app/project/6], Program 8 [https://share.catrob.at/app/project/8]]]" in the xml, API version 2
     Given I have a parameter "limit" with value "9"
     And I have a parameter "offset" with value "0"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
@@ -114,11 +114,6 @@ Feature: Get remixed program from Scratch
       | program 8  |
       | program 5  |
       | program 18 |
-
-
-
-
-
 
 
 

@@ -8,6 +8,7 @@ use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\CatrobatFileSanitizer;
+use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -94,12 +95,14 @@ class ProgramManagerTest extends TestCase
     $event = $this->createMock(ProgramBeforeInsertEvent::class);
     $extension_repository = $this->createMock(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
+    $notification_service = $this->createMock(CatroNotificationService::class);
     $urlHelper = new UrlHelper(new RequestStack());
 
     $this->program_manager = new ProgramManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
       $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
-      $this->event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer, $urlHelper
+      $this->event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer, $notification_service,
+      $urlHelper
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');
