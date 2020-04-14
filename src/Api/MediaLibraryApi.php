@@ -78,4 +78,9 @@ class MediaLibraryApi implements MediaLibraryApiInterface
 
     return $json_response_array;
   }
+
+  public function mediaFileSearchGet(string $query_string, string $flavor = null, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement mediaFileSearchGet() method.
+  }
 }

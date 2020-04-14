@@ -15,7 +15,7 @@
           <div class="card">
             <div class="card-header">Test</div>
             <div class="card-body">
-              <h4 class="card-title"><a href="{{ path('media_package', {'package_name': item.nameUrl}) }}">{{ item.name }}</a></h4>
+              <h4 class="card-title"><a href="{{ path('media_library', {'package_name': item.nameUrl}) }}">{{ item.name }}</a></h4>
               {% for badge in item.flavors %}
                 <span class="badge badge-pill badge-{{ badge }}">{{ badge }}</span>
               {% endfor %}

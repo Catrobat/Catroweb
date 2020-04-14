@@ -7,6 +7,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * MediaPackage class. A MediaPackage is part of the Media Library and contains MediaCategories which itself contain
+ * MediaFiles.
+ *
+ *                                          Media Library example:
+ *
+ *                          Media Package 1                           Media Package 2
+ *                       /                 \                                |
+ *               Category 1               Category 2                    Category 3
+ *              /     |    \              /        \                        |
+ *         File 1  File 2  File 3      File 4    File 5                  File 6
+ *
  * @ORM\Entity
  * @ORM\Table(name="media_package")
  */

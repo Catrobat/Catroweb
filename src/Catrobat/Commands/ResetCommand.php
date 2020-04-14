@@ -178,7 +178,12 @@ class ResetCommand extends Command
 
     //https://share.catrob.at/app/project/remixgraph/{id_of_project} to get remixes
 
-    echo 'Reset Done';
+    // Creating sample MediaPackages
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:create:media-packages-samples'], [], 'Creating sample Media Packages', $output
+    );
+
+    echo "Reset Done\n";
 
     return 0;
   }

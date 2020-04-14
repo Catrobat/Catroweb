@@ -15,7 +15,7 @@
         "ext-pcntl": "*",
         "ext-posix": "*",
         "ext-zip": "*",
-        "catrobat/capi": "v1.0.32",
+        "catrobat/capi": "v1.0.35",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^2.1",
         "doctrine/orm": "^2.7",

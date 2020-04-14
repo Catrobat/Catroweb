@@ -3,6 +3,10 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use App\Entity\MediaPackageCategory;
+use App\Entity\MediaPackageFile;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Imagick;
 use ImagickException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -10,15 +14,20 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
-class MediaPackageFileRepository
+/**
+ * Class MediaPackageFileRepository used for interacting with the database when handling MediaPackageFiles.
+ */
+class MediaPackageFileRepository extends ServiceEntityRepository
 {
   private string $dir;
   private string $path;
   private Filesystem $filesystem;
   private string $thumb_dir;
 
-  public function __construct(ParameterBagInterface $parameter_bag)
+  public function __construct(ManagerRegistry $manager_registry, ParameterBagInterface $parameter_bag)
   {
+    parent::__construct($manager_registry, MediaPackageFile::class);
+
     /** @var string $dir Directory where media package files are stored */
     $dir = $parameter_bag->get('catrobat.mediapackage.dir');
     /** @var string $path Path where files in $dir can be accessed via web */
@@ -44,6 +53,37 @@ class MediaPackageFileRepository
   }
 
   /**
+   * Creates a new MediaPackageFile and saves the specified file to the correct location.
+   *
+   * @param string               $name     The name
+   * @param File                 $file     The file (e.g. png, jpeg)
+   * @param MediaPackageCategory $category The MediaPackageCategory this MediaPackageFile should belong to
+   * @param string               $flavor   The flavor of this MediaPackageFile (e.g. Luna, embroidery)
+   * @param string               $author   The author of this MediaPackageFile
+   *
+   * @throws \Exception when an error occurs during creating
+   *
+   * @return MediaPackageFile the created MediaPackageFile
+   */
+  public function createMediaPackageFile(string $name, File $file, MediaPackageCategory $category, string $flavor, string $author): MediaPackageFile
+  {
+    $new_media_package_file = new MediaPackageFile();
+    $new_media_package_file->setName($name);
+    $new_media_package_file->setFile($file);
+    $new_media_package_file->setCategory($category);
+    $new_media_package_file->setFlavor($flavor);
+    $new_media_package_file->setAuthor($author);
+    $new_media_package_file->setExtension($file->getExtension());
+
+    $this->getEntityManager()->persist($new_media_package_file);
+    $this->getEntityManager()->flush();
+
+    $this->saveFile($file, $new_media_package_file->getId(), $new_media_package_file->getExtension(), true);
+
+    return $new_media_package_file;
+  }
+
+  /**
    * Saves a file, uploaded by the user, to the media package directory
    * and creates a thumbnail, if chosen.
    *
@@ -54,7 +94,7 @@ class MediaPackageFileRepository
    *
    * @throws ImagickException
    */
-  public function save(File $file, int $id, string $extension, bool $create_thumbnail = true): void
+  public function moveFile(File $file, int $id, string $extension, bool $create_thumbnail = true): void
   {
     $file->move($this->dir, $this->generateFileNameFromId((string) $id, $extension));
     if ($create_thumbnail)
@@ -74,8 +114,8 @@ class MediaPackageFileRepository
    *
    * @throws ImagickException
    */
-  public function saveMediaPackageFile(File $file, int $id, string $extension,
-                                       bool $create_thumbnail = true): void
+  public function saveFile(File $file, int $id, string $extension,
+                           bool $create_thumbnail = true): void
   {
     $target = $this->dir.$this->generateFileNameFromId((string) $id, $extension);
     $this->filesystem->copy($file->getPathname(), $target);
@@ -162,6 +202,28 @@ class MediaPackageFileRepository
   public function getMediaFile(int $id, string $extension): File
   {
     return new File($this->dir.$id.'.'.$extension);
+  }
+
+  /**
+   * Searches the database for MediaPackageFiles containing the mentioned search term in their names.
+   *
+   * @param string $term   The search term
+   * @param string $flavor If you specify a theme flavor, MediaPackageFiles of that flavor plus all files of the standard flavor 'pocketcode'
+   *                       are returned. If you don't specify a theme flavor, only files of the standard flavor 'pocketcode' are returned.
+   *
+   * @return mixed an array containing the found media files or an empty array if no results found
+   */
+  public function search(string $term, string $flavor = 'pocketcode')
+  {
+    $qb = $this->createQueryBuilder('f')
+      ->where('f.name LIKE :term')
+      ->andWhere("f.flavor = 'pocketcode' OR f.flavor = :flavor")
+      ->andWhere('f.active = 1')
+      ->setParameter('term', '%'.$term.'%')
+      ->setParameter('flavor', $flavor)
+    ;
+
+    return $qb->getQuery()->getResult();
   }
 
   /**

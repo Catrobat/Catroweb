@@ -611,7 +611,7 @@ class DataFixturesContext implements KernelAwareContext
       }
       $new_file->setAuthor($file['author']);
 
-      $file_repo->saveMediaPackageFile(new File($this->MEDIA_PACKAGE_DIR.$file['id'].'.'.
+      $file_repo->saveFile(new File($this->MEDIA_PACKAGE_DIR.$file['id'].'.'.
         $file['extension']), $file['id'], $file['extension']);
 
       $em->persist($new_file);

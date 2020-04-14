@@ -72,7 +72,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     {
       return;
     }
-    $this->media_package_file_repository->save($file, $object->getId(), $object->getExtension());
+    $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
   /**
@@ -105,7 +105,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     {
       return;
     }
-    $this->media_package_file_repository->save($file, $object->getId(), $object->getExtension());
+    $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
   /**
@@ -140,7 +140,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ->add('category', EntityType::class, [
         'class' => MediaPackageCategory::class,
         'required' => true, ])
-      ->add('flavor', TextType::class, ['required' => false])
+      ->add('flavor', TextType::class, ['required' => true])
       ->add('author', TextType::class, ['label' => 'Author', 'required' => false])
       ->add('active', null, ['required' => false])
     ;

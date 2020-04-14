@@ -13,6 +13,8 @@ parameters:
   catrobat.max_credits_upload_size:     3000
   catrobat.mediapackage.dir:            "%catrobat.pubdir%resources/mediapackage/"
   catrobat.mediapackage.path:           "resources/mediapackage/"
+  catrobat.mediapackage.sample.dir:     "%catrobat.pubdir%tests/testdata/DataFixtures/MediaPackage/SampleMediaPackage/"
+  catrobat.mediapackage.sample.path:    "tests/testdata/DataFixtures/MediaPackage/SampleMediaPackage/"
   catrobat.pubdir:                      "%kernel.project_dir%/public/"
   catrobat.resources.dir:               "%kernel.project_dir%/public/resources/"
   catrobat.screenshot.dir:              "%catrobat.pubdir%resources/screenshots/"

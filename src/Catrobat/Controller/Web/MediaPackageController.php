@@ -86,7 +86,15 @@ class MediaPackageController extends AbstractController
       ];
     }
 
-    usort($categories, fn ($category_a, $category_b): int => $category_a['priority'] <=> $category_b['priority']);
+    usort($categories, function ($category_a, $category_b)
+    {
+      if ($category_a['priority'] === $category_b['priority'])
+      {
+        return 0;
+      }
+
+      return ($category_a['priority'] > $category_b['priority']) ? -1 : 1;
+    });
 
     $mediaDir = $this->getParameter('catrobat.mediapackage.path');
 
