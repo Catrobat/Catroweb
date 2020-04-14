@@ -354,7 +354,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     /** @var array $result */
     $result = $this->getSession()->evaluateScript(
-            "return { nodeName: RemixGraph.getInstance().getNodes().get('".$node_id."').name,
+      "return { nodeName: RemixGraph.getInstance().getNodes().get('".$node_id."').name,
                      username: RemixGraph.getInstance().getNodes().get('".$node_id."').username };"
     );
     $actual_node_name = is_array($result['nodeName']) ? implode('', $result['nodeName']) : $result['nodeName'];
@@ -1893,9 +1893,9 @@ class CatrowebBrowserContext extends BrowserContext
     foreach ($expected_parameters as $i => $expected_parameter)
     {
       Assert::assertRegExp(
-          $expected_parameter,
-          $parameters[$i]
-        );
+        $expected_parameter,
+        $parameters[$i]
+      );
     }
   }
 
@@ -2551,7 +2551,7 @@ class CatrowebBrowserContext extends BrowserContext
     $this->iUseTheUserAgent($user_agent);
   }
 
-  private function getParameterValue(string $name): string
+  private function getParameterValue(string $name): ?string
   {
     $my_file = fopen('app/config/parameters.yml', 'r');
     if (false === $my_file)
@@ -2572,7 +2572,7 @@ class CatrowebBrowserContext extends BrowserContext
     fclose($my_file);
     Assert::assertTrue(false, 'No entry found in parameters.yml!');
 
-    return false;
+    return null;
   }
 
   /**
