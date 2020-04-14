@@ -381,13 +381,11 @@
   {#
      # CODEVIEW & CatBlocks
    #}
-  {% if app.environment == "dev" %}
+  {% if program_details.languageVersion >= 0.994 %}
     <h1>Codeview</h1>
     <div id='catblocks-code-container'></div>
   {% else %}
-    {% if program_details.languageVersion >= 0.97 %}
-      {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:viewCodeAction', {'id' : program.id})) }}
-    {% endif %}
+    {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:viewCodeAction', {'id' : program.id})) }}
   {% endif %}
 
   <div id="program-bottom">
