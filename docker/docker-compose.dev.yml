@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
 
-  # APACHE WITH PHP
+  # Catroweb Project using APACHE with PHP
   app.catroweb:
     build:
       args:
@@ -18,6 +18,19 @@ services:
       - chrome.catroweb
     ports:
       - 8080:80
+    volumes:
+      # Changes to the following files are shared between host and container - no rebuild needed!
+      - ./../assets:/var/www/catroweb/assets:cached
+      - ./../src:/var/www/catroweb/src:cached
+      - ./../templates:/var/www/catroweb/templates:cached
+      - ./../tests:/var/www/catroweb/tests:cached
+      - ./../translations:/var/www/catroweb/translations:cached
+      # Since we need access to the vendor & node_modules in the Dockerfile, we can not share them.
+      # Shared volumes are attached after the build process,
+      # which will result in else invalid overwritten libraries in the container.
+      # If you need access to them (for example for intellisense), just copy those directories from the container to
+      # the host. E.g with `docker cp app.catroweb:/var/www/catroweb/vendor vendor` In case of errors (mainly on windows
+      # you could tar the directory before copying it from the container to the host.
 
   db.catroweb.dev:
     image: mariadb:10.3.11

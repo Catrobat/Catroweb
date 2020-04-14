@@ -34,9 +34,25 @@ jobs:
           sudo service apache2 reload
           wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
 
-      - name: Check test environment
+      - name: Check tests in dev environment
         run:
           docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+
+      - name: Check shared development volumes must not need a rebuild
+        id: shared-test-run-must-fail
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          echo "INVALID" > tests/behat/features/web/general/homepage.feature
+          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+          echo ::set-output name=status::success
+
+      - name: Check that invalid changes result in a failing testcase
+        if: steps.shared-test-run-must-fail.outputs.status == 'success'
+        run: |
+          exit -1
+
+
 
 
   tests_phpunit:

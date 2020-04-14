@@ -6,6 +6,14 @@ phpunit.xml
 *.local
 phploc.phar
 
+### Scripts ###
+bin/
+!bin/console
+!bin/recsys-similarity-computation-service.jar
+!bin/x_perm.sh
+!bin/x_reset.sh
+!bin/x_test.sh
+
 ### backups ###
 backups/**
 
