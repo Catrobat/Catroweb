@@ -1,3 +1,4 @@
+# keep flavors consistent with config/routes/annotations.yaml
 
 liip_theme:
   themes: ['app', 'pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school', 'embroidery', 'arduino']
