@@ -1,4 +1,8 @@
+# keep flavors consistent with config/packages/liip_theme.yaml
+
 controllers:
     resource: ../../src/Catrobat/Controller/
     type: annotation
     prefix:   /{flavor}/
+    requirements:
+        flavor: 'app|pocketcode|pocketalice|pocketgalaxy|phirocode|luna|create\@school|embroidery|arduino'
