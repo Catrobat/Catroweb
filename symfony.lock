@@ -1,4 +1,7 @@
 {
+    "beberlei/doctrineextensions": {
+        "version": "v1.2.6"
+    },
     "behat/behat": {
         "version": "v3.6.1"
     },

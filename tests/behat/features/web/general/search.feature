@@ -6,32 +6,87 @@ Feature: Searching for programs
       | id | name     |
       | 1  | Catrobat |
       | 2  | User1    |
+    And there are extensions:
+      | id | name         | prefix  |
+      | 1  | Arduino      | ARDUINO |
+      | 2  | Drone        | DRONE   |
+      | 3  | Lego         | LEGO    |
+      | 4  | Phiro        | PHIRO   |
+      | 5  | Raspberry Pi | RASPI   |
+    And there are tags:
+      | id | en        | de         |
+      | 1  | Game      | Spiel      |
+      | 2  | Animation | Animation  |
+      | 3  | Story     | Geschichte |
     And there are projects:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version |
-      | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
-      | 3  | myprog 3  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 4  | myprog 4  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | id | name                | description | owned by | tags_id|extensions | upload time      | version |
+      | 1  | program 1           | p1          | User1    |  1     |  arduino  | 22.04.2014 12:00 | 0.8.5   |
+      | 2  | test program        |             | User1    |  2     |  arduino  | 22.04.2014 13:00 | 0.8.5   |
+      | 3  | Test advanced app   |             | Catrobat |  3     |  drone    | 22.04.2014 14:00 | 0.8.5   |
+      | 4  | Catrobat            | my program  | User1    |  3     |  lego     | 22.04.2014 14:00 | 0.8.5   |
+      | 5  | project 3           |     lego    | Catrobat |  1,2   |  phiro    | 22.04.2014 14:00 | 0.8.5   |
+      | 6  | test advanced games |             | User1    |  2,3   |  lego     | 22.04.2014 14:00 | 0.8.5   |
+      | 7  | test                |             | Catrobat |  3,2   |  lego     | 22.04.2014 14:00 | 0.8.5   |
+      | 8  | project test        |   catrobat  | User1    |   1    |  drone    | 22.04.2014 14:00 | 0.8.5   |
 
-  Scenario: search for programs should work
-    Given I am on "/app/search/prog"
+
+  Scenario: search for programs, which contain the word "program"
+    Given I am on "/app/search/program"
     And I wait for the page to be loaded
-    Then I should see "Your search returned 4 results"
+    Then I should see "Your search returned 3 results"
+    Then I should see "program 1"
+    Then I should see "test program"
+    Then I should see "Catrobat"
 
-  Scenario: search for yahoo myprog should search for all
-    Given I am on "/app/search/yahoo%20myprog"
+  Scenario: search for programs, which contain the word "Test"
+    Given I am on "/app/search/Test"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 5 results"
+    Then I should see "test advanced games"
+    Then I should see "test advanced app"
+    Then I should see "test program"
+    Then I should see "test"
+    Then I should see "project test"
+
+  Scenario: search for programs, which contain the word "test advanced"
+    Given I am on "/app/search/Test%20advanced"
     And I wait for the page to be loaded
     Then I should see "Your search returned 2 results"
+    Then I should see "test advanced games"
+    Then I should see "test advanced app"
 
-  Scenario: search for gmail should search for all
-    Given I am on "/app/search/gmail"
+  Scenario: search for projects, which contain the word "game"
+    Given I am on "/app/search/game"
     And I wait for the page to be loaded
     Then I should see "Your search returned 4 results"
+    Then I should see "test advanced games"
+    Then I should see "program 1"
+    Then I should see "project 3"
+    Then I should see "project test"
 
-  Scenario: search for gmx should search for all
-    Given I am on "/app/search/gmx.at"
+  Scenario: search for projects, which contain the word "program and app"
+    Given I am on "/app/search/program%20and%20app"
     And I wait for the page to be loaded
     Then I should see "Your search returned 0 results"
+
+  Scenario: search for projects, which contain the word "catrobat"
+    Given I am on "/app/search/catrobat"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 5 results"
+    Then I should see "Test advanced app"
+    Then I should see "Catrobat"
+    Then I should see "project 3"
+    Then I should see "test"
+    Then I should see "project test"
+
+  Scenario: search for projects, which contain the word "lego"
+    Given I am on "/app/search/lego"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 4 results"
+    Then I should see "Test advanced games"
+    Then I should see "Catrobat"
+    Then I should see "project 3"
+    Then I should see "test"
 
   Scenario: pressing the search icon should spawn the search bar
     Given I am on "/app"
@@ -48,17 +103,27 @@ Feature: Searching for programs
     Given I am on "/app"
     And I wait for the page to be loaded
     Then I click ".search-icon-header"
-    And I enter "prog" into visible ".input-search"
+    And I enter "program" into visible ".input-search"
     And I click "#btn-search-header"
     And I wait for the page to be loaded
-    Then I should be on "/app/search/prog"
-    And I should see "Your search returned 4 results"
+    Then I should be on "/app/search/program"
+    And I should see "Your search returned 3 results"
     And at least one ".search-input-header" element should be visible
     And at least one "#btn-search-header" element should be visible
-    Then I enter "yahoo myprog" into visible ".input-search"
+    Then I enter "Test advanced" into visible ".input-search"
     And I click "#btn-search-header"
     And I wait for the page to be loaded
-    Then I should be on "/app/search/yahoo%20myprog"
+    Then I should be on "/app/search/Test%20advanced"
     And I should see "Your search returned 2 results"
     And at least one ".search-input-header" element should be visible
     And at least one "#btn-search-header" element should be visible
+
+  Scenario: search for gmail should find no program
+    Given I am on "/app/search/gmail"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 0 results"
+
+  Scenario: search for gmx should find no program
+    Given I am on "/app/search/gmx.at"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 0 results"

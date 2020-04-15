@@ -1438,6 +1438,21 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I should get (\d+) projects$/
+   *
+   * @param mixed $arg1
+   */
+  public function iShouldGetProjects($arg1): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent(), true);
+    Assert::assertEquals(
+      $arg1, count($responseArray['CatrobatProjects']),
+      'Wrong number of total projects'
+    );
+  }
+
+  /**
    * @Then /^I should get user-specific recommended projects$/
    */
   public function iShouldGetUserSpecificRecommendedProjects(): void
