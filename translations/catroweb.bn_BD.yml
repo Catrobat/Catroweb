@@ -41,11 +41,13 @@ registrationError: 'ব্যবহারকারীর নাম অথবা 
 notifications: 'বিজ্ঞপ্তি'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'মন্তব্যসমূহ'
+RemixNotifications: 'রিমিক্স'
 oldnotification: 'Old Notifications'
 wellDone: "ভাল করেছেন"
 done: "সম্পন্ন!"
@@ -67,7 +69,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 programs:
   welcome:
     title: আপনাকে স্বাগতম Catrobat's %theme%
@@ -77,6 +79,7 @@ programs:
   featured: বৈশিষ্ট্য
   newest: Newest projects
   recommended: Recommended projects
+  scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
     আপনি কি নিশ্চিত?
@@ -112,10 +115,9 @@ programs:
   downloads: '%downloads% ডাউনলোড'
   sample: Example projects
   views: '%views% পরিদর্শন'
-  likeThumbsUpDetailText: '{0} ০ জন লোক এতে সাবাশ দেন| {1} ১ জন ব্যক্তি এতে সাবাশ দেন|]1,Inf] %persons% লোক এতে সাবাশ দেন'
-  likeSmileDetailText: '{0} ০ জন লোক এতে হাসি দেন| {1} ১ জন ব্যক্তি এতে হাসি দেন|]1,Inf] %persons% লোক এতে হাসি দেন'
-  likeLoveDetailText: '{0} ০ জন লোক এতে ভালবাসা দেন| {1} ১ জন ব্যক্তি এতে ভালবাসা দেন|]1,Inf] %persons% লোক এতে ভালবাসা দেন'
-  likeWowDetailText: '{0} ০ জন লোক এতে কি দারুন দেন| {1} ১ জন ব্যক্তি এতে কি দারুন দেন|]1,Inf] %persons% লোক এতে কি দারুন দেন'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "সব"
   remixes: '{0} ০ রিমিক্স | {1} ১ রিমিক্স |]1,Inf] %remixes% রিমিক্স'
   newRemixesNotificationTitle: '{1}"%programName%" এর ১ টি নতুন রিমিক্স রয়েছে: |]1,Inf] "%programName%" এর রয়েছে %remixes% নতুন রিমিক্স রয়েছে:'
   submitted: Submitted Projects
@@ -240,6 +242,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: ব্যবহারকারীর নাম ইতোমধ্যে রয়েছে
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: সংরক্ষিত
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -540,7 +543,7 @@ help:
     download: "Download the project"
 oauth:
   username_header: পকেট কোড সাইন আপ করার জন্য আপনাকে ধন্যবাদ!
-  username_chooser: অনুগ্রহ করে একটি ব্যবহারকারীর নাম নির্বাচন করুন।
+  username_chooser: "অনুগ্রহ করে একটি ব্যবহারকারীর নাম নির্বাচন করুন।"
   username_hint: ব্যবহারকারীর নামটি আপনার আসল নাম হওয়া উচিত নয়।
   usernameTaken: ব্যবহারকারীর নাম ইতিমধ্যে নেওয়া হয়েছে, দয়া করে আলাদা একটি পছন্দ করুন।
 search:
@@ -580,6 +583,8 @@ apk:
   prepare: 'অ্যাপ্লিকেশন প্রস্তুত করুন'
   preparing: 'অ্যাপ্লিকেশন প্রস্তুত করুন'
   text: 'প্রক্রিয়াটি কিছুটা সময় নিতে পারে'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -648,6 +653,24 @@ time:
   years.ago: '{1} ১ বছর আগে |]1,Inf] এক বছরেরও বেশি আগে'
 failure:
   upload: আপনার অ্যাপ্লিকেশন আপলোড করার সময় একটি ভুল ছিল।
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: আরবী
@@ -788,7 +811,7 @@ privacy-policy:
   text7: আপনি মেইলচিম্প সেবা(রকেট সায়েন্স গ্রুপ এলএলসি ডি / বি / একটি মেইলচিম্প, আমেরিকা যুক্তরাষ্ট্র) মাধ্যমে প্রদত্ত https://catrob.at/ নিউজলেটারে স্বেচ্ছায় সাবস্ক্রাইব করতে পারেন ।তারপরে আপনি আপনার সরবরাহিত ইমেল ঠিকানাতে ক্যাটরোব্যাট প্রকল্প এবং এর পরিষেবাদির আপডেট পাবেন। আপনি প্রতিটি নিউজলেটারের ফুটারে "আনসাবস্ক্রাইব" লিঙ্কটি ব্যবহার করে যে কোনও সময় নিউজলেটারটি প্রত্যাহার করতে পারেন।এই নিউজলেটারটি মেইলচিম্প সরবরাহ করেছে যার সাথে আমাদের একটি ডেটা-প্রসেসিং চুক্তি রয়েছে এবং যারা ইইউ জেনারেল ডেটা প্রোডাকশন রেগুলেশন এবং ইইউ-মার্কিন যুক্তরাষ্ট্র "প্রাইভেসি শিল্ড" প্রতিশ্রুতিবদ্ধ।মেইলচিম্পে আরও তথ্যের জন্য দয়া করে মেইলচিম্পের গোপনীয়তা নীতি এবং ব্যবহারের শর্তাদি সন্ধান করুন।
   text8: সমস্ত পরিষেবাগুলি বিনামূল্যে ওপেন সোর্স ক্যাট্রোব্যাট প্রকল্প দ্বারা সরবরাহ করা হয়  যেটি আন্তর্জাতিক ক্যাট্রোব্যাট অ্যাসোসিয়েশনের অধীনে - ভেরেইন জুর ফার্ডারং ফ্রিয়ার সফটওয়্যার, অস্ট্রিয়া (ইউরোপীয় ইউনিয়ন) গ্রাজে অন্তর্ভুক্ত একটি অলাভজনক এনজিও।আমাদের নীতিগুলি ই ইউ এবং অস্ট্রিয়ান ডেটা সুরক্ষা আইনের (জিডিপিআর) সম্মান দেয়।আমাদের সাথে যোগাযোগ করতে, দয়া করে contact@catrobat.org এ একটি ইমেল প্রেরণ করুন বা যোগাযোগ করুন ক্যাট্রোব্যাট, সি / ও ইনস্টিটিউট অফ সফটওয়্যার টেকনোলজি, গ্রাজ ইউনিভার্সিটি অফ টেকনোলজি, ইনফেল্ডগ্যাস ১৬ বি, এ-৮০১০ গ্রাজ, অস্ট্রিয়া (ইউরোপীয় ইউনিয়ন) )।
   text9: আপনি যদি ১৪ বছরের কম বয়সী হন তবে এই নীতি অবশ্যই আইনী অভিভাবক (সাধারণত একটি পিতা বা মাতা) দ্বারা গ্রহণ করা উচিত।
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: অনুমোদন ছাড়াই আমরা একটি অ্যাকাউন্ট তৈরি করতে পারি না তবে মূল বৈশিষ্ট্যগুলি এখনও অ্যাক্সেসযোগ্য।
 catro-notifications:
   markAsRead: "পড়ার জন্য চিহ্নিত করুন"
@@ -797,14 +820,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'নতুন অনুকরণকারী'
     message: 'ব্যবহারকারী %user_link% আপনাকে এখন অনুসরণ করে।'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: ক্লিপবোর্ডে কপি করা যায় নি

@@ -41,11 +41,13 @@ registrationError: 'Kullanıcı adı yada e-posta zaten kullanımda.'
 notifications: 'Bildirimler'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'Yorumlar'
+RemixNotifications: 'Klipler'
 oldnotification: 'Old Notifications'
 wellDone: "Tebrikler!"
 done: "Tamam!"
@@ -67,7 +69,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
@@ -77,6 +79,7 @@ programs:
   featured: Seçme
   newest: Newest projects
   recommended: Recommended projects
+  scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?
@@ -112,10 +115,9 @@ programs:
   downloads: '%kere indirildi% kere indirildi'
   sample: Example projects
   views: '%kez bakıldı% kez bakıldı'
-  likeThumbsUpDetailText: '{0}0 kişi bu konuda onay verir | {1}1 kişi bu konuda onay verir |] 1, İnf]%persons% insanlar onay veriyor'
-  likeSmileDetailText: '{0}0 kişi bu konuda gülümser |{1}1 kişi gülümser |]1,İnf]%persons% insanlar bu konuda gülümsüyor'
-  likeLoveDetailText: '{0}0 kişi bunu seviyor |{1}1 kişi bunu seviyor |]1,İnf]%persons% insanlar bunu seviyor'
-  likeWowDetailText: '{0}0 kişi bu konuda "Wooow!" diyor | {1}1 kişi "Wooow!" diyor. |]1,Inf]%persons% insanlar bu konuda "Wooow!" diyor'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "Tüm"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '| {1}"%programName%" yeni 1 remix içeriyor: |] 1,Inf]"%programName%" %remixes% sahip yeni remixler:'
   submitted: Submitted Projects
@@ -244,6 +246,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: Bu kullanıcı adı zaten mevcut.
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: Kaydedildi!
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -542,7 +545,7 @@ help:
     download: "Download the project"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Lütfen bir kullanıcı adı seçin:'
+  username_chooser: "Lütfen bir kullanıcı adı seçin:"
   username_hint: Kullanıcı adınız gerçek adınız olmamalıdır.
   usernameTaken: Kullanıcı adı zaten alınmış, lütfen başka bir tane seçin.
 search:
@@ -582,6 +585,8 @@ apk:
   prepare: 'Uygulamayı hazırla'
   preparing: 'Uygulama hazırlanıyor'
   text: 'İşlem biraz zaman alabilir'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -650,6 +655,24 @@ time:
   years.ago: '{1} 1 yıl önce |]1, INF] bir yıldan fazla'
 failure:
   upload: Uygulamanız yüklenirken bir hata oluştu.
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: Arapça
@@ -790,7 +813,7 @@ privacy-policy:
   text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
   text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
@@ -799,14 +822,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(

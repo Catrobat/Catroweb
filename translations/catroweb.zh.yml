@@ -45,7 +45,9 @@ LikeNotifications: '我喜欢的'
 likesNotificationsTitle: '喜欢通知'
 followersNotificationsTitle: '关注者通知'
 commentsNotificationsTitle: '评论通知'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: '评论'
+RemixNotifications: '调制'
 oldnotification: '旧通知'
 wellDone: "做的好！"
 done: "已完成！"
@@ -77,6 +79,7 @@ programs:
   featured: 经典程序
   newest: 最新项目
   recommended: 推荐的项目
+  scratchremixes: Scratch remixes
   noPrograms: 目前没有项目。
   deleteConfirmation: |+
     您确定吗？
@@ -112,10 +115,9 @@ programs:
   downloads: '%downloads% 下载'
   sample: 范例项目
   views: '%views% 查看'
-  likeThumbsUpDetailText: '{0}0人为此点赞 |{1}1人为此点赞 |]1，Inf]%persons%人为此点赞'
-  likeSmileDetailText: '{0}0人送上笑脸 |{1}1人送上笑脸 |]1，Inf]%persons%人送上笑脸'
-  likeLoveDetailText: '{0}0人喜爱这个 |{1}1人喜爱这个 |]1，Inf]%persons%人喜爱这个'
-  likeWowDetailText: '{0}0人对此说"哇！" |{1}1人对此说"哇！" |]1，Inf]%persons%人对此说"哇！"'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "所有"
   remixes: '{0}0 调制 |{1}1 调制 |]1，Inf]%remixes% 调制'
   newRemixesNotificationTitle: '|{1}"%programName%"有 1 个新调制: |]1，Inf]"%programName%"有 %remixes% 个新调制：'
   submitted: 提交的项目
@@ -154,8 +156,8 @@ programs:
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
-  love: Love!
-  wow: Wooow!
+  love: 爱！
+  wow: 哇！
   linkTitle: 链接
   link: Copy project link to clipboard
 remixGraph:
@@ -244,6 +246,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: 此名称已存在。
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: 已保存！
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -543,7 +546,7 @@ help:
     download: "下载项目"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
-  username_chooser: '请选一个用户名:'
+  username_chooser: "请选一个用户名:"
   username_hint: 用户名不应该是你真名
   usernameTaken: 用户名已经存在，请选择另一个名称。
 search:
@@ -583,6 +586,8 @@ apk:
   prepare: '准备应用程序'
   preparing: '准备应用程序'
   text: '这个过程可能需要一些时间'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -651,6 +656,24 @@ time:
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: There was an error during the upload of your app.
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: Arabic
@@ -791,7 +814,7 @@ privacy-policy:
   text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
   text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
@@ -800,14 +823,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(

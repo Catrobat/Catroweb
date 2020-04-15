@@ -45,7 +45,9 @@ LikeNotifications: '좋아요'
 likesNotificationsTitle: '좋아요 알림'
 followersNotificationsTitle: '팔로워 알림'
 commentsNotificationsTitle: '코멘트 알림'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: '코멘트'
+RemixNotifications: '변환'
 oldnotification: '오래된 알림'
 wellDone: "완료!"
 done: "끝!"
@@ -77,6 +79,7 @@ programs:
   featured: 추천
   newest: 최신 프로그램
   recommended: 추천 프로그램
+  scratchremixes: Scratch remixes
   noPrograms: 프로젝트가 없습니다.
   deleteConfirmation: |+
     맞습니까?
@@ -112,10 +115,9 @@ programs:
   downloads: '%downloads% 다운로드'
   sample: Example projects
   views: '%views% 조회'
-  likeThumbsUpDetailText: '엄지척 0{0} | 엄지척1{1} |] 1, Inf]%persons% 사람들이 엄지척'
-  likeSmileDetailText: '스마일 0{0}|스마일 1{1} |]1, Inf]%persons% 사람들이 스마일'
-  likeLoveDetailText: '좋아요 0{0} | 좋아요 1{1} |] 1, Inf]%persons% 사람들이 좋아해요'
-  likeWowDetailText: '최고! {0}0 | 최고! {1}1 |] 1, Inf]%persons% 사람들이 최고!'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "모두"
   remixes: '리믹스 {0}0|리믹스 {1}1|] 1, Inf]%remixes% 리믹스'
   newRemixesNotificationTitle: '|{1} "%programName%" 1 새로운 리믹스: |] 1, Inf] "%programName%" 새로운 리믹스 %remixes%  :'
   submitted: Submitted Projects
@@ -236,6 +238,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: 이름이 이미 존재합니다.
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: 저장 완료
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -533,7 +536,7 @@ help:
     download: "프로그램 다운로드"
 oauth:
   username_header: 포켓코드에 가입해 주셔서 감사합니다!
-  username_chooser: 사용자명을 선택하여 주십시오.
+  username_chooser: "사용자명을 선택하여 주십시오."
   username_hint: 사용자 이름은 당신의 진짜 이름을 사용할 수 없습니다.
   usernameTaken: 이미 사용중인 사용자 이름입니다. 다른 하나를 선택하십시오!
 search:
@@ -573,6 +576,8 @@ apk:
   prepare: '응용 프로그램 준비'
   preparing: '응용 프로그램 준비'
   text: '프로세스 시간이 걸릴 수 있습니다.'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -641,6 +646,24 @@ time:
   years.ago: '{1}1 년 전에 |] 1, Inf] 1 년 전'
 failure:
   upload: 업로드 중에 오류가 발생했습니다.
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: 아랍어
@@ -780,7 +803,7 @@ privacy-policy:
   text7: MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA)에서 제공하는 메일서비스 https://catrob.at/newsletter 를 통해 Catrobat Newsletter 를 정기적으로 받아 볼 수 있습니다. 언제나 메일 하단의 구독해지(unsubscribe)를 이용해 메일 구독을 변경할 수 있습니다. 이 메일은 EU-USA의 개인보호정책에 따라 관리되고 제공합니다. 더 자세한 내용은 MailChimp's Privacy Policy와 Terms of Use를 확인해 주시기 바랍니다.
   text8: "모든 서비스는 비영리 무료 오픈 소스인 Catrobat 프로젝트에 의해 인터내셔널 Catrobat 협회( International Catrobat Association)의 산하에서 제공된다. 우리와 연락하기 위해서는 contact@catrobat.org로 이메일을 보내시거나 다음 주소로 우편을 보내 실 수 있습니다. \n주소: Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria."
   text9: 14세 미만이면, 법적 보호자(부모) 의 동의를 얻어야 합니다.
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: 승인이 없으면, 계정을 만들 수 없으나 사용할 수는 있습니다.
 catro-notifications:
   markAsRead: "읽음으로 표시"
@@ -789,14 +812,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: '새로운 팔로워'
     message: '%user_link% 사용자가 당신을 팔로우합니다.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: 링크 복사가 안됩니다! :(

@@ -41,11 +41,13 @@ registrationError: 'ユーザー名またはメール アドレスは、すで�
 notifications: '通知'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'コメント'
+RemixNotifications: 'リミックス'
 oldnotification: 'Old Notifications'
 wellDone: "よくできました!"
 done: "完了!"
@@ -67,7 +69,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
@@ -77,6 +79,7 @@ programs:
   featured: おすすめ
   newest: Newest projects
   recommended: Recommended projects
+  scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?
@@ -112,10 +115,9 @@ programs:
   downloads: '%downloads% ダウンロード'
   sample: Example projects
   views: '%views% ビュー'
-  likeThumbsUpDetailText: '{0}0 人がこれにサムズアップしてます |{1}1 人がこれにサムズアップしてます |]1,Inf]%persons% 人がこれにサムズアップしてます'
-  likeSmileDetailText: '{0}0 人がこれにスマイルしてます |{1}1 人がこれにスマイルしてます |]1,Inf]%persons% 人がこれにスマイルしてます'
-  likeLoveDetailText: '{0}0 人がこれにラブしてます |{1}1 人がこれにラブしてます |]1,Inf]%persons% 人がこれにラブしてます'
-  likeWowDetailText: '{0}0 人がこれに「ワオ！」と言ってます |{1}1 人がこれに「ワオ！」と言ってます |]1,Inf]%persons% 人がこれに「ワオ！」と言ってます'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "すべて"
   remixes: '{0}0 リミックス |{1}1 リミックス |]1,Inf]%remixes% リミックス'
   newRemixesNotificationTitle: '|{1}"%programName%" は 1 つの新しいリミックスがあります: |]1,Inf] "%programName%" は %remixes% つの新しいリミックスがあります:'
   submitted: Submitted Projects
@@ -244,6 +246,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: このユーザー名は既に存在します。
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: 保存しました！
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -543,7 +546,7 @@ help:
     download: "Download the project"
 oauth:
   username_header: ポケット コードに登録していただき、ありがとうございます!
-  username_chooser: 'ユーザー名を選択してください:'
+  username_chooser: "ユーザー名を選択してください:"
   username_hint: ユーザー名は、あなたの本当の名前にする必要はありません。
   usernameTaken: ユーザー名はすでに使用されています、別の名前を選んでください。
 search:
@@ -583,6 +586,8 @@ apk:
   prepare: 'アプリを準備する'
   preparing: 'アプリを準備しています'
   text: 'プロセスには時間がかかることがあります'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -651,6 +656,24 @@ time:
   years.ago: '{1}1 年前 |]1,Inf] 1 年以上前'
 failure:
   upload: アプリのアップロード中にエラーが発生しました。
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: '&#x30A2;&#x30E9;&#x30D3;&#x30A2;&#x8A9E;'
@@ -791,7 +814,7 @@ privacy-policy:
   text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
   text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
@@ -800,14 +823,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
