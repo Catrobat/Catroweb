@@ -42,10 +42,12 @@ notifications: 'Notifiche'
 allNotifications: 'Tutte le notifiche'
 FollowersNotifications: 'Follower'
 LikeNotifications: 'Mi piace'
-likesNotificationsTitle: 'Like Notifications'
+likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'Commenti'
+RemixNotifications: 'Remix'
 oldnotification: 'Old Notifications'
 wellDone: "Ottimo lavoro!"
 done: "Fatto!"
@@ -67,7 +69,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 programs:
   welcome:
     title: Benvenuto su Catrobat %theme%
@@ -77,6 +79,7 @@ programs:
   featured: In evidenza
   newest: Newest projects
   recommended: Recommended projects
+  scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Sei sicuro?
@@ -112,10 +115,9 @@ programs:
   downloads: '%downloads% download'
   sample: Example projects
   views: '%views% visualizzazioni'
-  likeThumbsUpDetailText: '{0}0 persone esprimono il gradimento su questo |{1}1 persona dà il proprio gradimento su questo |] 1, Inf]%persons% persone esprimono il gradimento su questo'
-  likeSmileDetailText: 'piace a {0}0 persone|piace a {1}1 persone |piace a ]1, Inf]%persons% persone'
-  likeLoveDetailText: 'Amato da {0}0 persone|Amato da {1}1 persona|Amato da ] 1, Inf]%persons% persone'
-  likeWowDetailText: '{0}0 persone hanno detto "wow!"|{1}1 persona dice "wow!"|] 1, Inf]%persons% persone hanno detto "wow!"'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "Tutti"
   remixes: '{0}0 remixes |{1}1 remix |] 1, Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1} "%programName%" ha 1 nuovo remix: |] 1, Inf] "%programName%" ha %remixes% nuovi remix:'
   submitted: Submitted Projects
@@ -244,6 +246,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: Il nome utente esiste già.
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: salvato!
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -543,7 +546,7 @@ help:
     download: "Scarica il progetto"
 oauth:
   username_header: Grazie per esserti registrato a Pocket Code!
-  username_chooser: 'Scegli un nome utente:'
+  username_chooser: "Scegli un nome utente:"
   username_hint: Il nome utente non dovrebbe essere il tuo vero nome.
   usernameTaken: Nome utente già in uso, scegli uno diverso.
 search:
@@ -583,6 +586,8 @@ apk:
   prepare: 'Prepara l''app'
   preparing: 'App in preparazione'
   text: 'L''attività potrebbe richiedere un po'' di tempo'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -651,6 +656,24 @@ time:
   years.ago: '{1} 1 anno fa |]1, Inf] più di un anno fa'
 failure:
   upload: Si è verificato un errore durante il caricamento della tua app.
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: Arabo
@@ -790,7 +813,7 @@ privacy-policy:
   text7: Puoi liberamente iscriverti alla newsletter di Catrobal, su https://catrob.at/newsletter, erogata grazie al servizio MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Potrai così ricevere aggiornamenti sul progetto Catrobat e i suoi servizi sull'indirizzo e.mail da te indicato. Potrai sospendere in qualsiasi momento l'invio utilizzando il link "unsubscribe" messo in calce a ciascuna newsletter. La newsletter è fornita da MailChimp con cui abbiamo un accordo per elaborare i dati; tale accordo è conforme a EU General Data Prodection Regulation e EU-USA "Privacy Shield". Per ulteriori dettagli su MailChimp si rimanda alla loro informativa sulla privacy e ai loro termini d'uso.
   text8: Tutti i servizi sono forniti gratuitamente dal progetto open source Catrobat che appartiene alla International Catrobat Association – Verein zur Förderung freier Software, un'organizzazione non-profit NGO con sede a Graz, Austria (European Union). Tutte le nostre policy sono conformi alle direttive dell'Unione Europea e della legge sulla protezione dei dati austriaca (GDPR). Per contattarci scrivere una e-mail a contact@catrobat.org o scrivere a Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: Nel caso la tua età sia inferiore ai 14 anni, questi termini devono essere accettati da un tutore legale (solitamente un genitore).
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Senza accettazione non possiamo creare un account ma tutte le caratteristiche principali rimarranno comunque fruibili.
 catro-notifications:
   markAsRead: "Segna come letto"
@@ -799,14 +822,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'Nuovo follower!'
     message: 'L''utente %user_link% ha iniziato a seguirti.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Impossibile copiare il link negli appunti! :(

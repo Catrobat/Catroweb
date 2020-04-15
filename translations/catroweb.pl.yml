@@ -42,14 +42,16 @@ notifications: 'Powiadomienia'
 allNotifications: 'Wszystkie powiadomienia'
 FollowersNotifications: 'Obserwujący'
 LikeNotifications: 'Polubienia'
-likesNotificationsTitle: 'Like Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
+likesNotificationsTitle: 'Powiadomienia o reakcjach'
+followersNotificationsTitle: 'Powiadomienia o obserwatorach'
+commentsNotificationsTitle: 'Powiadomienia o komentarzach'
+remixNotificationsTitle: 'Powiadomienia o remiksach'
 CommentNotifications: 'Komentarze'
+RemixNotifications: 'Remiksy'
 oldnotification: 'Stare powiadomienia'
 wellDone: "Świetnie!"
 done: "Gotowe!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "Wygląda na to, że nie masz żadnych powiadomień."
 notificationsClearedMessage: "Wszystkie powiadomienia zostały oznaczone jako przeczytane."
 deleteNotificationConfirmation: "Jesteś pewien?"
 notificationDeleteMessage: "Na pewno chcesz usunąć to powiadomienie?"
@@ -77,6 +79,7 @@ programs:
   featured: Polecane
   newest: Najnowsze projekty
   recommended: Polecane projekty
+  scratchremixes: Remiksy Scratcha
   noPrograms: Nie ma żadnego projektu.
   deleteConfirmation: |+
     Na pewno?
@@ -108,14 +111,13 @@ programs:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
   random: Losowe projekty
-  related: Related projects
+  related: Powiązane projekty
   downloads: '%downloads% pobrań'
   sample: Przykładowe projekty
   views: '%views% odsłon'
-  likeThumbsUpDetailText: '{0}0 ludzi polubiło to |{1}1 osoba polubiła to |] 1, Inf]%persons% ludzi polubiło to'
-  likeSmileDetailText: '{0}0 ludzi uśmiecha się do tego |{1}1 osoba uśmiecha się do tego |] 1, Inf]%persons% ludzi uśmiecha się do tego'
-  likeLoveDetailText: '{0}0 ludzi kocha to |{1}1 człowiek kocha to |] 1, Inf]%persons% ludzi kocha to'
-  likeWowDetailText: '{0}0 ludzi mówi o tym "wow!" |{1}1 osoba mówi o tym "wow!" |] 1, Inf]%persons% ludzi mówi o tym "wow!"'
+  likes:
+    likersTitle: "Osoby, które zareagowały na ten projekt"
+    all: "Wszystkie"
   remixes: '{0}0 remiksów |{1}1 remiks |]1,Inf]%remixes% remiksów'
   newRemixesNotificationTitle: '|{1}"%programName%" ma 1 nowy remiks: |]1,Inf] "%programName%" ma %remixes% nowych remiksów:'
   submitted: Przesłane projekty
@@ -240,6 +242,7 @@ profile:
     usernameNotValid: Nieprawidłowa nazwa użytkownika.
     usernameMissing: Musisz mieć nazwę użytkownika.
     usernameExists: Ta nazwa użytkownika już istnieje.
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: zapisane!
   reallyDeleteProgram: Czy naprawdę chcesz usunąć swój projekt
   programsOf: Projekty
@@ -270,7 +273,7 @@ myprofile:
 licenseToPlay:
   link: 'Licencja na korzystanie'
   title: 'Licencja na korzystanie - podziękuj i podziel się'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: Wyobraź sobie projekt w Catrobat jako ciasteczko, takie specjalne ciasteczko z przepisem (blokami programu). Wszyscy uczestnicy społeczności Catrobat dzielą się tymi ciasteczkami, łącznie z przepisami na nie. Oznacza to, że możesz posmakować ciasteczka i nauczyć się jak je przygotowywać!
   text2: 'Nie ma sekretnych przepisów: instrukcje, jak zrobić ciasteczko są dostępne dla każdego, aby je wykorzystywać, modyfikować i traktować je jako inspirację dla nowych pomysłów... to znaczy ciasteczek.'
   text3: "Możesz zjeść ciasteczko możesz też skopiować przepisy innych, aby zrobić własne z nieco innymi składnikami. Ta swoboda pociąga za sobą dwa proste wymagania:"
   text4: "Ustalając reguły dla społeczności Catrobata zdecydowaliśmy się na takie podejście, ponieważ wierzymy, że to pomaga w uczeniu się i kreatywności. Poprzez dzielenie się przepisami i składnikami (skryptami, rysunkami, dźwiękami) ludzie mogą opierać się na pomysłach innych z korzyścią dla wszystkich."
@@ -283,9 +286,9 @@ licenseToPlay:
 termsOfUse:
   title: Warunki użytkowania
   headline: Witaj w społeczności Catrobat!
-  text1: 'Jako uczestnik społeczności Catrobat dzielisz się programami i pomysłami z innymi ludźmi:'
+  text1: 'Jako uczestnik społeczności Catrobat dzielisz się projektami i pomysłami z innymi ludźmi:'
   text2: "Potrzebujemy Twojej pomocy, aby ta społeczność dawała wsparcie dla każdego jej członka. Oto jak możesz pomóc:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: "Dzięki projektowi Catrobat chcemy wspierać współpracę i umożliwić połączenie kreatywności wszystkich użytkowników na rzecz całej ludzkości. Również Ty możesz zostać aktywnym członkiem społeczności Catrobat oddając swoje projekty społeczności jako prezent, w taki sam sposób, jak inni aktywni uczestnicy dają swoje projekty Tobie:"
   text4: 'Nasz prezent dla Ciebie:'
   text5: 'Nasze warunki użytkowania i korzystania z usługi:'
   list1:
@@ -297,7 +300,7 @@ termsOfUse:
     item2: "Podziękuj. Masz swobodę przerabiania projektów innych ludzi - po prostu upewnij się, że składasz im podziękowania. Jednym z miejsc podziękowań jest sekcja podziękowań. Zobacz ustęp poniżej, wypunktowaną listę szczegółowych informacji na temat modyfikowania projektów innych użytkowników."
     item3: "Zachowaj uczciwość. Nie udawaj, że jesteś kimś innym i nie staraj się oszukać społeczności."
     item4: "Nie ujawniaj informacji osobistych. Nie dziel się swoim adresem e-mail, numerem telefonu lub innymi danymi osobowymi."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item5: "Pomóż zachować witrynę przyjazną. Jeśli czujesz, że inni mogliby odebrać projekt lub komentarz jako nieprzyjemny, obraźliwy, zbyt agresywny lub w inny sposób nieodpowiedni, po prostu kliknij na przycisk \"Zgłoś jako niewłaściwe\" i zostaw krótkie wyjaśnienie. Zespół Catrobat sprawdzi Twoje zgłoszenie i może usunąć dowolny projekt, komentarz lub post."
   list3:
     item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
@@ -396,7 +399,7 @@ help:
         text3: 'Użyj ponownie przycisku Cofnij systemu Android, aby uzyskać omówienie obiektów i tła.'
     step10:
       title: "Zmiana tła"
-      description: "This is the overview of your objects and your project's background."
+      description: "To jest przegląd obiektów i tła Twojego projektu."
       detail:
         text1: 'Tło jest też obiektem, ale można mieć tylko jedno tło.'
         text2: 'Do obiektu tło można dodać skrypty, dźwięki i wyglądy w ten sam sposób.'
@@ -408,7 +411,7 @@ help:
         text2: 'Dodaj nowy projekt.'
         text3: 'Zobacz wszystkie lokalne projekty.'
         text4: 'Przejdź do witryny Pomoc i podyskutuj z innymi użytkownikami.'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text5: 'Poznaj świat projektów Pocket Code. Pobierz za darmo i remiksuj projekty, które lubisz.'
         text6: 'Wyślij projekt, który jest obecnie otwarty.'
   tutorialcards:
     title: "Poradniki"
@@ -508,7 +511,7 @@ help:
     text7: "Po zalogowaniu przejdź do swojego panelu. Możesz tam dodać swoją grę. Najpierw kliknij na 'Zaakceptuj zasady'. Następnie Wypełnij informacje dotyczące gry. Jako narzędzie do Silnik/Język/Tworzenie wybierz opcję \"Inne\" i dodaj do pola \"Inne\" Silnik/Język/Narzędzie 'Android'. Zaznacz pole \"Rozwój\" jako \"Gotowe/Stabilne'. Upewnij się, czy masz #AliceJam150 w opisie, tak żeby pojawiła się na stronie %link%."
     text7_1: "Zanim będzie można opublikować grę, należy wykonać następujące kroki. Należy dodać obraz miniatury, ustawić 'Klasyfikację wiekową' i przesłać swoje gry klikając na \"pliki kompilacji\"."
     text7_2: "Kliknij na 'Dodaj pakiet' i wypełnij pakiet informacyjny. Zapisz i dodaj nową wersję. "
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_3: "Teraz możesz przesłać APK Twojego projektu. Możesz znaleźć pobraną aplikację w folderze Pobrane. Najlepiej użyć eksploratora danych (np. ES File Explorer)."
     text7_4: "Uwaga: Jeśli aplikacji brakuje rozszerzenia '.apk', trzeba dodać '.apk' ręcznie. Wystarczy zmienić nazwę pliku. Teraz będziesz w stanie go przesłać."
     text7_5: "Po wysłaniu kliknij 'OK', aby opublikować swoją grę. Później będziesz mógł pokazać ludziom link do pobrania gry."
     text7_6: "Przesłałeś swoją pierwszą grę na stronę Game Jolt i ustawiłeś ją jako aktywną. Gratulacje!"
@@ -538,7 +541,7 @@ help:
     download: "Pobierz projekt"
 oauth:
   username_header: Dziękujemy za rejestrację w Pocket Code!
-  username_chooser: 'Proszę wybrać nazwę użytkownika:'
+  username_chooser: "Proszę wybrać nazwę użytkownika:"
   username_hint: Nazwa użytkownika nie powinna być Twoim prawdziwym nazwiskiem.
   usernameTaken: Nazwa użytkownika zajęta, proszę wybrać inną.
 search:
@@ -578,6 +581,8 @@ apk:
   prepare: 'Przygotuj apkę'
   preparing: 'Przygotuj aplikację'
   text: 'Proces może chwilę potrwać'
+format:
+  million_abbreviation: mln
 #api
 errors:
   username:
@@ -617,7 +622,7 @@ errors:
   image.missing: Projekt XML odwołuje się do pliku, którego nie ma w folderze projektu
   unknown: nieznany błąd
   token: 'Uwierzytelnienie urządzenia nie powiodło się: nieprawidłowy token uwierzytelniania!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  uploadTokenAuthFailed: 'Autoryzacja tokena wysyłania nie powiodła się.'
   programname:
     rude: Nazwa projektu nie może zawierać brzydkich słów.
   program:
@@ -646,6 +651,24 @@ time:
   years.ago: '{1}1 rok temu |]1,Inf] ponad rok temu'
 failure:
   upload: Wystąpił błąd podczas wysyłania aplikacji.
+api:
+  registerUser:
+    emailMissing: 'Brak adresu e-mail'
+    notAValidEmail: 'Nieprawidłowy adres e-mail'
+    emailAlreadyInUse: 'Ten adres e-mail jest już zajęty'
+    usernameMissing: 'Brak nazwy użytkownika'
+    usernameTooShort: 'Za krótka nazwa użytkownika'
+    usernameTooLong: 'Za długa nazwa użytkownika'
+    usernameAlreadyInUse: 'Nazwa jest już w użyciu'
+    passwordMissing: 'Brak hasła'
+    passwordTooShort: 'Hasło jest zbyt krótkie'
+    passwordTooLong: 'Zbyt długie hasło'
+    passwordInvalidChars: 'Hasło zawiera nieprawidłowe znaki'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: Arabski
@@ -767,7 +790,7 @@ codeview:
   looksBricks: 'Bloki wyglądu'
   penBricks: 'Bloki pisaka'
   dataBricks: 'Bloki danych'
-  specialBricks: 'Special Bricks'
+  specialBricks: 'Bloki specjalne'
 footer:
   usefulLinks: Przydatne Linki
   legalities: Prawa
@@ -785,7 +808,7 @@ privacy-policy:
   text7: Możesz dobrowolnie zapisać się do biuletynu Catrobat na https://catrob.at/newsletter dostarczonym przez nas za pośrednictwem usługi MailChimp (The Rocket Science Group LLC d /b/a MailChimp, USA). Następnie otrzymasz informacje o projekcie Catrobat i jego usługach na podany adres e-mail. Możesz wycofać biuletyn w dowolnym momencie, korzystając z linku "wypisz się" w stopce każdego biuletynu. Biuletyn ten jest dostarczany przez MailChimp, z którym mamy umowę o przetwarzaniu danych, i który zobowiązał się do przyjęcia unijnego rozporządzenia w sprawie ogólnych przepisów dotyczących danych i EU-USA "Privacy Shield". Aby uzyskać więcej informacji na temat MailChimp, zapoznaj się także z Polityką prywatności MailChimp i Warunkami korzystania.
   text8: Wszystkie usługi są świadczone w ramach darmowego projektu Catrobat o otwartym kodzie źródłowym pod patronatem Międzynarodowego Stowarzyszenia Catrobat - Stowarzyszenie na rzecz promocji wolnego oprogramowania, organizacja pozarządowa non-profit, utworzonego w Graz w Austrii (Unia Europejska). Nasze polityki są zgodne z unijnymi i austriackimi przepisami dotyczącymi ochrony danych (RODO). Aby się z nami skontaktować, wyślij e-mail na adres contact@catrobat.org lub wyślij nam wiadomość do Catrobat, c / o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Unia Europejska).
   text9: W przypadku, gdy masz poniżej 14 lat, te zasady muszą zostać zaakceptowane przez opiekuna prawnego (zwykle rodzica).
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Oficjalna polityka prywatności Catrobat jest dostępna w języku angielskim w Internecie pod adresem https://catrob.at/privacypolicy.
   disagree-text: Bez Twojej zgody nie możemy stworzyć konta, ale podstawowe funkcje są nadal dostępne.
 catro-notifications:
   markAsRead: "Oznacz jako przeczytane"
@@ -802,6 +825,9 @@ catro-notifications:
   program-upload:
     title: 'Nowy projekt użytkownika, którego obserwujesz'
     message: 'Użytkownik %user_link% stworzył nowy projekt %program_link%'
+  remix:
+    title: 'Nowy remiks projektu %program_name%!'
+    message: 'Użytkownik %user_link% zremiksował Twój projekt %program_link%. Możesz zobaczyć remiks klikając link %remix_program_link%.'
 clipboard:
   success: Link do projektu skopiowany do schowka!
   fail: Nie udało się skopiować linku do schowka! :(
@@ -831,7 +857,7 @@ help-cards:
     discuss_2: użytkownicy
 media-packages:
   title: Pakiety multimedialne
-  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  description: W następujących kategoriach można znaleźć dodatkowych aktorów i obiekty, które można dodać do projektów Pocket Code.
   thumb-size:
     description: Pokaż rozmiar
     sm: mały

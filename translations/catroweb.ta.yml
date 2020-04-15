@@ -45,7 +45,9 @@ LikeNotifications: 'விருப்பம்'
 likesNotificationsTitle: 'அறிவிப்புகள்'
 followersNotificationsTitle: 'பின்பற்றுபவர்கள் அறிவிப்புகள்'
 commentsNotificationsTitle: 'கருத்து அறிவப்புகள்'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'கருத்துகள்'
+RemixNotifications: 'ரீமிக்ஸ்கள்'
 oldnotification: 'பழைய அறிவிப்புகள்'
 wellDone: "நன்று!"
 done: "முடிந்தது!"
@@ -77,6 +79,7 @@ programs:
   featured: சிறப்பு
   newest: புதிய திட்டங்கள்
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
+  scratchremixes: Scratch remixes
   noPrograms: தற்போது திட்டங்கள் எதுவும் இல்லை.
   deleteConfirmation: |+
     நீ சொல்வது உறுதியா?
@@ -112,10 +115,9 @@ programs:
   downloads: '%downloads% பதிவிறக்கங்கள்'
   sample: எடுத்துக்காட்டு திட்டங்கள்
   views: '%views% பார்வைகள்'
-  likeThumbsUpDetailText: '{0}0 பேர் இதைப் பற்றி லைக் கொடுக்கிறார்கள் |{1}1 நபர் இதை லைக் கொடுக்கிறார் |] 1, Inf]%persons% மக்கள் லைக் கொடுக்கிறார்கள்'
-  likeSmileDetailText: '{0}0 நபர்கள் இதைப் பார்த்து சிரித்திருக்கிரார்கள்|{1} 1 நபர் இதைப் பார்த்து சிரித்திருக்கிரார்|]1,Inf]%persons% நபர்கள் இதைப் பார்த்து சிரித்திருக்கிரார்கள்'
-  likeLoveDetailText: '{0}0 நபர்கள் இதை விரும்புகிரார்கள்|{1}1 நபர் இதை விரும்புகிரார்|]1,Inf]%persons% நபர்கள் இதை விரும்புகிரார்கள்'
-  likeWowDetailText: '{0}0 பேர் "வாவ்!" கொடுக்கிரார்கள் இதற்க்கு |{1}1 நபர் "வாவ்!" கொடுக்கிரார் இது |]1, Inf]%persons% மக்கள் "வாவ்!" கொடுக்கிரார்கள் இதற்க்கு'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "அனைத்தும்"
   remixes: '{0}0 ரீமிக்ஸ் |{1}1 ரீமிக்ஸ் |]1,Inf]%remixes% ரீமிக்ஸ்'
   newRemixesNotificationTitle: '|{1}"%programName%" இல் 1 புதிய ரீமிக்ஸ் உள்ளது: |]1,Inf] "%programName%" இல் %remixes% புதிய ரீமிக்ஸ் உள்ளது:'
   submitted: சமர்ப்பிக்கப்பட்ட திட்டங்கள்
@@ -244,6 +246,7 @@ profile:
     usernameNotValid: இந்த பயனர்பெயர் செல்லுபடியாகாது.
     usernameMissing: உங்களிடம் பயனர்பெயர் இருக்க வேண்டும்.
     usernameExists: இந்த பயனர்பெயர் ஏற்கனவே உள்ளது.
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: சேமிக்கப்பட்டது!
   reallyDeleteProgram: உங்கள் திட்டத்தை நீக்க விரும்புகிறீர்களா
   programsOf: திட்டங்கள்
@@ -543,7 +546,7 @@ help:
     download: "திட்டத்தை பதிவிறக்கவும்"
 oauth:
   username_header: பாக்கெட் குறியீட்டில் பதிவு செய்ததற்கு நன்றி!
-  username_chooser: 'உங்கள் பயனர்பெயரைத் தேர்வுசெய்க:'
+  username_chooser: "உங்கள் பயனர்பெயரைத் தேர்வுசெய்க:"
   username_hint: பயனர்பெயர் உங்கள் உண்மையான பெயராக இருக்கக்கூடாது.
   usernameTaken: தேர்ந்தெடுத்த பயனர்பெயர் ஏற்கனவே உபயோகத்தில் உள்ளது. வேறொன்றைத் தேர்ந்தெடக்கவும்.
 search:
@@ -583,6 +586,8 @@ apk:
   prepare: 'செயலியை தயாரிக்கவும்'
   preparing: 'செயலி தயாராகிறது'
   text: 'செயல்முறை சிறிது நேரம் ஆகலாம்'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -651,6 +656,24 @@ time:
   years.ago: '{1}1 வருடம் முன்பு |]1,Inf] ஒரு வருடத்திற்கு முன்பு'
 failure:
   upload: உங்கள் app இன் பதிவேற்றத்தின் போது பிழை ஏற்பட்டது.
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: அரபு
@@ -808,6 +831,9 @@ catro-notifications:
   program-upload:
     title: 'நீங்கள் பின்தொடரும் ஒருவரிடமிருந்து ஒரு புதிய திட்டம்'
     message: 'பயனர் %user_link% ஒரு புதிய திட்டத்தை %program_link% உருவாக்கிநார்'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: திட்டத்திற்க்கான இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!
   fail: இனைப்பை கிளிப்போர்டுக்கு நகலெடுப்பது தோல்வி :(
