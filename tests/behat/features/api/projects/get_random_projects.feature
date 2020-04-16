@@ -22,116 +22,25 @@ Feature: Get random projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?project_type=random"
     Then the response status code should be "200"
-    Then I should get the json object:
-      """
-      [
-        {
-          "id": "REGEX_STRING_WILDCARD",
-          "name":"REGEX_STRING_WILDCARD",
-          "author":"REGEX_STRING_WILDCARD",
-          "description":"",
-          "version":"REGEX_STRING_WILDCARD",
-          "views": "REGEX_INT_WILDCARD",
-          "download": "REGEX_INT_WILDCARD",
-          "private":false,
-          "flavor": "REGEX_STRING_WILDCARD",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-          "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "REGEX_STRING_WILDCARD",
-          "name":"REGEX_STRING_WILDCARD",
-          "author":"REGEX_STRING_WILDCARD",
-          "description":"",
-          "version":"REGEX_STRING_WILDCARD",
-          "views": "REGEX_INT_WILDCARD",
-          "download": "REGEX_INT_WILDCARD",
-          "private":false,
-          "flavor": "REGEX_STRING_WILDCARD",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-          "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "REGEX_STRING_WILDCARD",
-          "name":"REGEX_STRING_WILDCARD",
-          "author":"REGEX_STRING_WILDCARD",
-          "description":"",
-          "version":"REGEX_STRING_WILDCARD",
-          "views": "REGEX_INT_WILDCARD",
-          "download": "REGEX_INT_WILDCARD",
-          "private":false,
-          "flavor": "REGEX_STRING_WILDCARD",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-          "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "REGEX_STRING_WILDCARD",
-          "name":"REGEX_STRING_WILDCARD",
-          "author":"REGEX_STRING_WILDCARD",
-          "description":"",
-          "version":"REGEX_STRING_WILDCARD",
-          "views": "REGEX_INT_WILDCARD",
-          "download": "REGEX_INT_WILDCARD",
-          "private":false,
-          "flavor": "REGEX_STRING_WILDCARD",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-          "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "REGEX_STRING_WILDCARD",
-          "name":"REGEX_STRING_WILDCARD",
-          "author":"REGEX_STRING_WILDCARD",
-          "description":"",
-          "version":"REGEX_STRING_WILDCARD",
-          "views": "REGEX_INT_WILDCARD",
-          "download": "REGEX_INT_WILDCARD",
-          "private":false,
-          "flavor": "REGEX_STRING_WILDCARD",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-          "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "REGEX_STRING_WILDCARD",
-          "name":"REGEX_STRING_WILDCARD",
-          "author":"REGEX_STRING_WILDCARD",
-          "description":"",
-          "version":"REGEX_STRING_WILDCARD",
-          "views": "REGEX_INT_WILDCARD",
-          "download": "REGEX_INT_WILDCARD",
-          "private":false,
-          "flavor": "REGEX_STRING_WILDCARD",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/REGEX_STRING_WILDCARD",
-          "download_url": "http://localhost/app/download/REGEX_STRING_WILDCARD.catrobat",
-          "filesize": 0
-        }
-      ]
-      """
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 6
+    Then the response should contain the following projects:
+      | Name       |
+      | project 1  |
+      | project 2  |
+      | project 3  |
+      | project 4  |
+      | project 5  |
+      | project 6  |
+
+  Scenario: Get random projects with flavor = luna
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/projects/?project_type=random&flavor=luna"
+    Then the response status code should be "200"
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 3
+    Then the response should contain the following projects:
+      | Name       |
+      | project 2  |
+      | project 4  |
+      | project 6  |

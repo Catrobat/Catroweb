@@ -40,6 +40,33 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  public function getFeaturedProgramsCount(?string $flavor, ?string $platform = null, ?string $max_version = null): int
+  {
+    $qb = $this->createQueryBuilder('e');
+
+    $qb
+      ->select('count(e.id)')
+      ->where('e.active = true')
+      ->andWhere($qb->expr()->isNotNull('e.program'))
+    ;
+    $qb->orderBy('e.priority', 'DESC');
+
+    APIQueryHelper::addMaxVersionCondition($qb, $max_version);
+    APIQueryHelper::addFlavorCondition($qb, $flavor);
+    APIQueryHelper::addPlatformCondition($qb, $platform);
+
+    try
+    {
+      $projects_count = $qb->getQuery()->getSingleScalarResult();
+    }
+    catch (NoResultException | NonUniqueResultException $e)
+    {
+      $projects_count = 0;
+    }
+
+    return $projects_count;
+  }
+
   /**
    * @throws NoResultException
    * @throws NonUniqueResultException

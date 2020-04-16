@@ -4,6 +4,7 @@ namespace Tests\behat\context;
 
 use App\Api\Exceptions\APIVersionNotSupportedException;
 use App\Catrobat\Services\TestEnv\SymfonySupport;
+use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramRemixBackwardRelation;
 use App\Entity\ProgramRemixRelation;
@@ -11,6 +12,7 @@ use App\Entity\ScratchProgramRemixRelation;
 use App\Entity\User;
 use App\Utils\MyUuidGenerator;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -20,6 +22,7 @@ use Doctrine\ORM\ORMException;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
+use OpenAPI\Server\Model\Projects;
 use PHPUnit\Framework\Assert;
 use RuntimeException;
 use Swift_Message;
@@ -69,6 +72,8 @@ class ApiContext implements KernelAwareContext
 
   private string $url;
 
+  private DataFixturesContext $dataFixturesContext;
+
   /**
    * @var mixed[]|string[]|bool[]
    */
@@ -101,6 +106,22 @@ class ApiContext implements KernelAwareContext
   private array $checked_catrobat_remix_backward_relations;
 
   private Program $my_program;
+
+  private array $program_structure = ['id', 'name', 'author', 'description',
+    'version', 'views', 'download', 'private', 'flavor',
+    'uploaded', 'uploaded_string', 'screenshot_large',
+    'screenshot_small', 'project_url', 'download_url', 'filesize', ];
+
+  private array $featured_program_structure = ['id', 'name', 'author', 'featured_image'];
+
+  private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
+    'author', 'extension', 'download_url', ];
+
+  private array $programs_structure = ['projects', 'total_results'];
+
+  private array $media_files_structure = ['media_files', 'total_results'];
+
+  private array $new_uploaded_projects = [];
 
   public function getKernelBrowser(): KernelBrowser
   {
@@ -151,6 +172,14 @@ class ApiContext implements KernelAwareContext
     $this->request_files = [];
     $this->request_headers = [];
     $this->request_content = null;
+  }
+
+  /** @BeforeScenario */
+  public function gatherContexts(BeforeScenarioScope $scope): void
+  {
+    $environment = $scope->getEnvironment();
+    /* @phpstan-ignore-next-line */
+    $this->dataFixturesContext = $environment->getContext(DataFixturesContext::class);
   }
 
   /**
@@ -1636,6 +1665,270 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the response should contain the following project:$/
+   */
+  public function responseShouldContainTheFollowingProject(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $returned_program = json_decode($response->getContent(), true);
+    $expected_program = $table->getHash();
+    $stored_programs = $this->getStoredPrograms($expected_program);
+
+    Assert::assertEquals(count($returned_program), count($expected_program),
+      'Number of returned programs should be '.count($expected_program));
+
+    $returned_program = array_pop($returned_program);
+    $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
+
+    foreach ($this->program_structure as $key)
+    {
+      Assert::assertNotEmpty($stored_program);
+      if (array_key_exists($key, $stored_program))
+      {
+        Assert::assertEquals($returned_program[$key], $stored_program[$key]);
+      }
+      elseif ('screenshot_large' === $key)
+      {
+        Assert::assertContains($returned_program[$key],
+          ['http://localhost/resources/screenshots/screen_'.$returned_program['id'].'.png',
+            'http://localhost/resources_test/screenshots/screen_'.$returned_program['id'].'.png',
+            'http://localhost/images/default/screenshot.png', ]);
+      }
+      elseif ('screenshot_small' === $key)
+      {
+        Assert::assertContains($returned_program[$key],
+          ['http://localhost/resources/thumbnails/screen_'.$returned_program['id'].'.png',
+            'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
+            'http://localhost/images/default/thumbnail.png', ]);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should contain the following projects:$/
+   * @Then /^the response should contain projects in the following order:$/
+   */
+  public function responseShouldContainProjectsInTheFollowingOrder(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $responseArray = json_decode($response->getContent(), true);
+    $returned_programs = $responseArray['projects'];
+    $expected_programs = $table->getHash();
+    $stored_programs = $this->getStoredPrograms($expected_programs);
+
+    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
+
+    foreach ($returned_programs as $returned_program)
+    {
+      $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
+      foreach ($this->program_structure as $key)
+      {
+        Assert::assertNotEmpty($stored_program);
+        if (array_key_exists($key, $stored_program))
+        {
+          Assert::assertEquals($returned_program[$key], $stored_program[$key]);
+        }
+        elseif ('screenshot_large' === $key)
+        {
+          Assert::assertContains($returned_program[$key],
+            ['http://localhost/resources/screenshots/screen_'.$returned_program['id'].'.png',
+              'http://localhost/resources_test/screenshots/screen_'.$returned_program['id'].'.png',
+              'http://localhost/images/default/screenshot.png', ]);
+        }
+        elseif ('screenshot_small' === $key)
+        {
+          Assert::assertContains($returned_program[$key],
+            ['http://localhost/resources/thumbnails/screen_'.$returned_program['id'].'.png',
+              'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
+              'http://localhost/images/default/thumbnail.png', ]);
+        }
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should contain featured projects in the following order:$/
+   */
+  public function responseShouldContainFeaturedProjectsInTheFollowingOrder(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $responseArray = json_decode($response->getContent(), true);
+    $returned_programs = $responseArray['projects'];
+    $expected_programs = $table->getHash();
+    $stored_programs = $this->getStoredFeaturedPrograms($expected_programs);
+
+    Assert::assertEquals(count($returned_programs), count($expected_programs),
+      'Number of returned programs should be '.count($expected_programs));
+
+    foreach ($returned_programs as $returned_program)
+    {
+      $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
+      foreach ($this->featured_program_structure as $key)
+      {
+        Assert::assertNotEmpty($stored_program);
+        Assert::assertEquals($returned_program[$key], $stored_program[$key]);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should have the projects model structure$/
+   */
+  public function responseShouldHaveProjectsModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent(), true);
+
+    foreach ($this->programs_structure as $key)
+    {
+      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
+    }
+
+    $returned_programs = $responseArray['projects'];
+
+    foreach ($returned_programs as $program)
+    {
+      Assert::assertEquals(count($program), count($this->program_structure),
+        'Number of program fields should be '.count($this->program_structure));
+      foreach ($this->program_structure as $key)
+      {
+        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
+        Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should have the project model structure$/
+   */
+  public function responseShouldHaveProjectModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $returned_programs = json_decode($response->getContent(), true);
+
+    foreach ($returned_programs as $program)
+    {
+      Assert::assertEquals(count($program), count($this->program_structure),
+        'Number of program fields should be '.count($this->program_structure));
+      foreach ($this->program_structure as $key)
+      {
+        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
+        Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should have the featured projects model structure$/
+   */
+  public function responseShouldHaveFeaturedProjectsModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent(), true);
+
+    foreach ($this->programs_structure as $key)
+    {
+      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
+    }
+
+    $returned_programs = $responseArray['projects'];
+
+    foreach ($returned_programs as $program)
+    {
+      Assert::assertEquals(count($program), count($this->featured_program_structure),
+        'Number of program fields should be '.count($this->featured_program_structure));
+      foreach ($this->featured_program_structure as $key)
+      {
+        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
+        Assert::assertEquals($this->checkFeaturedProjectFieldsValue($program, $key), true);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should have the media files model structure$/
+   */
+  public function responseShouldHaveMediaFilesModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent(), true);
+
+    foreach ($this->media_files_structure as $key)
+    {
+      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
+    }
+
+    $returned_programs = $responseArray['media_files'];
+
+    foreach ($returned_programs as $program)
+    {
+      Assert::assertEquals(count($program), count($this->media_file_structure),
+        'Number of program fields should be '.count($this->media_file_structure));
+      foreach ($this->media_file_structure as $key)
+      {
+        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
+        Assert::assertEquals($this->checkMediaFileFieldsValue($program, $key), true);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should contain media files in the following order:$/
+   */
+  public function responseShouldContainMediaFilesInTheFollowingOrder(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $responseArray = json_decode($response->getContent(), true);
+    $returned_files = $responseArray['media_files'];
+    $expected_files = $table->getHash();
+    $stored_files = $this->getStoredMediaFiles($expected_files);
+
+    Assert::assertEquals(count($returned_files), count($expected_files),
+      'Number of returned programs should be '.count($expected_files));
+    foreach ($returned_files as $returned_file)
+    {
+      $stored_file = $this->findProgram($stored_files, $returned_file['name']);
+      foreach ($this->media_file_structure as $key)
+      {
+        Assert::assertNotEmpty($stored_file);
+        Assert::assertEquals($returned_file[$key], $stored_file[$key]);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should contain (\d+) projects$/
+   */
+  public function responseShouldContainNumberProjects(int $projects): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $responseArray = json_decode($response->getContent(), true);
+    $returned_programs = $responseArray['projects'];
+
+    Assert::assertEquals(count($returned_programs), $projects,
+      'Number of returned programs should be '.count($returned_programs));
+  }
+
+  /**
+   * @Then /^the response should contain total projects with value (\d+)$/
+   */
+  public function responseShouldContainTotalProjectsWithNumber(int $total_projects): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $responseArray = json_decode($response->getContent(), true);
+    $returned_total_projects = $responseArray['total_results'];
+
+    Assert::assertEquals($returned_total_projects, $total_projects,
+      'Number of total projects should be '.$returned_total_projects);
+  }
+
+  /**
    * @Then /^I should get (\d+) programs in the following order:$/
    *
    * @param mixed $program_count
@@ -1652,7 +1945,8 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
 
     $expected_programs = $table->getHash();
-    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($returned_programs));
+    Assert::assertEquals(count($returned_programs), count($expected_programs),
+      'Number of returned programs should be '.count($returned_programs));
 
     for ($i = 0; $i < count($returned_programs); ++$i)
     {
@@ -1685,7 +1979,8 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
 
     $expected_programs = $table->getHash();
-    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($returned_programs));
+    Assert::assertEquals(count($returned_programs), count($expected_programs),
+      'Number of returned programs should be '.count($returned_programs));
 
     for ($i = 0; $i < count($returned_programs); ++$i)
     {
@@ -1943,6 +2238,8 @@ class ApiContext implements KernelAwareContext
     /** @var Program $project */
     $project = $this->getProgramManager()->find($id);
     $project->setName($name);
+
+    $this->new_uploaded_projects[] = $project;
   }
 
   /**
@@ -3046,6 +3343,261 @@ class ApiContext implements KernelAwareContext
     $this->uploadProject($file, $user, '1', '1');
     Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
+  }
+
+  private function findProgram(array $programs, string $wanted_program_name): array
+  {
+    foreach ($programs as $program)
+    {
+      if ($program['name'] === $wanted_program_name)
+      {
+        return $program;
+      }
+    }
+
+    return [];
+  }
+
+  private function expectProgram(array $programs, string $value): bool
+  {
+    foreach ($programs as $program)
+    {
+      if ($program['Name'] === $value)
+      {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private function getStoredPrograms(array $expected_programs): array
+  {
+    $programs = array_merge($this->dataFixturesContext->getPrograms(), $this->new_uploaded_projects);
+    $projects = [];
+    /** @var Program $program */
+    foreach ($programs as $program_index => $program)
+    {
+      if (!$this->expectProgram($expected_programs, $program->getName()))
+      {
+        continue;
+      }
+      $result = [
+        'id' => $program->getId(),
+        'name' => $program->getName(),
+        'author' => $program->getUser()->getUserName(),
+        'description' => $program->getDescription(),
+        'version' => $program->getCatrobatVersionName(),
+        'views' => $program->getViews(),
+        'download' => $program->getDownloads(),
+        'private' => $program->getPrivate(),
+        'flavor' => $program->getFlavor(),
+        'project_url' => 'http://localhost/app/project/'.$program->getId(),
+        'download_url' => 'http://localhost/app/download/'.$program->getId().'.catrobat',
+        'filesize' => ($program->getFilesize() / 1_048_576),
+      ];
+      $projects[] = $result;
+    }
+
+    return $projects;
+  }
+
+  private function getStoredFeaturedPrograms(array $expected_programs): array
+  {
+    $programs = $this->dataFixturesContext->getFeaturedPrograms();
+    $projects = [];
+    /** @var FeaturedProgram $program */
+    foreach ($programs as $program_index => $program)
+    {
+      if (!$this->expectProgram($expected_programs, $program->getProgram()->getName()))
+      {
+        continue;
+      }
+      $result = [
+        'id' => $program->getId(),
+        'name' => $program->getProgram()->getName(),
+        'author' => $program->getProgram()->getUser()->getUserName(),
+        'featured_image' => 'http://localhost/resources_test/featured/featured_'.$program->getId().'.jpg',
+      ];
+      $projects[] = $result;
+    }
+
+    return $projects;
+  }
+
+  private function getStoredMediaFiles(array $expected_programs): array
+  {
+    $programs = $this->dataFixturesContext->getMediaFiles();
+    $projects = [];
+    foreach ($programs as $program_index => $program)
+    {
+      if (!$this->expectProgram($expected_programs, $program['name']))
+      {
+        continue;
+      }
+      $projects[] = $program;
+    }
+
+    return $projects;
+  }
+
+  private function checkProjectFieldsValue(array $program, string $key): bool
+  {
+    $fields = [
+      'id' => function ($id)
+      {
+        Assert::assertIsString($id);
+        Assert::assertRegExp('/^[a-zA-Z0-9-]+$/', $id, 'id');
+      },
+      'name' => function ($name)
+      {
+        Assert::assertIsString($name);
+      },
+      'author' => function ($author)
+      {
+        Assert::assertIsString($author);
+      },
+      'description' => function ($description)
+      {
+        Assert::assertIsString($description);
+      },
+      'version' => function ($version)
+      {
+        Assert::assertIsString($version);
+        Assert::assertRegExp('/[0-9]\\.[0-9]\\.[0-9]/', $version);
+      },
+      'views' => function ($views)
+      {
+        Assert::assertIsInt($views);
+      },
+      'download' => function ($download)
+      {
+        Assert::assertIsInt($download);
+      },
+      'private' => function ($private)
+      {
+        Assert::assertIsBool($private);
+      },
+      'flavor' => function ($flavor)
+      {
+        Assert::assertIsString($flavor);
+      },
+      'uploaded' => function ($uploaded)
+      {
+        Assert::assertIsInt($uploaded);
+      },
+      'uploaded_string' => function ($uploaded_string)
+      {
+        Assert::assertIsString($uploaded_string);
+      },
+      'screenshot_large' => function ($screenshot_large)
+      {
+        Assert::assertIsString($screenshot_large);
+        Assert::assertRegExp('/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
+          $screenshot_large);
+      },
+      'screenshot_small' => function ($screenshot_small)
+      {
+        Assert::assertIsString($screenshot_small);
+        Assert::assertRegExp('/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
+          $screenshot_small);
+      },
+      'project_url' => function ($project_url)
+      {
+        Assert::assertIsString($project_url);
+        Assert::assertRegExp('/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/', $project_url);
+      },
+      'download_url' => function ($download_url)
+      {
+        Assert::assertIsString($download_url);
+        Assert::assertRegExp('/http:\\/\\/localhost\\/app\\/download\\/([a-zA-Z0-9-]+)\\.catrobat/',
+          $download_url);
+      },
+      'filesize' => function ($filesize)
+      {
+        Assert::assertEquals(is_float($filesize) || is_int($filesize), true);
+      },
+    ];
+
+    Assert::assertArrayHasKey($key, $fields);
+    call_user_func($fields[$key], $program[$key]);
+
+    return true;
+  }
+
+  private function checkFeaturedProjectFieldsValue(array $program, string $key): bool
+  {
+    $fields = [
+      'id' => function ($id)
+      {
+        Assert::assertIsString($id);
+        Assert::assertRegExp('/^[a-zA-Z0-9-]+$/', $id, 'id');
+      },
+      'name' => function ($name)
+      {
+        Assert::assertIsString($name);
+      },
+      'author' => function ($author)
+      {
+        Assert::assertIsString($author);
+      },
+      'featured_image' => function ($featured_image)
+      {
+        Assert::assertIsString($featured_image);
+        Assert::assertRegExp('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.jpg/',
+          $featured_image);
+      },
+    ];
+
+    Assert::assertArrayHasKey($key, $fields);
+    call_user_func($fields[$key], $program[$key]);
+
+    return true;
+  }
+
+  private function checkMediaFileFieldsValue(array $program, string $key): bool
+  {
+    $fields = [
+      'id' => function ($id)
+      {
+        Assert::assertIsInt($id);
+      },
+      'name' => function ($name)
+      {
+        Assert::assertIsString($name);
+      },
+      'flavor' => function ($flavor)
+      {
+        Assert::assertIsString($flavor);
+      },
+      'package' => function ($package)
+      {
+        Assert::assertIsString($package);
+      },
+      'category' => function ($category)
+      {
+        Assert::assertIsString($category);
+      },
+      'author' => function ($author)
+      {
+        Assert::assertIsString($author);
+      },
+      'extension' => function ($extension)
+      {
+        Assert::assertIsString($extension);
+      },
+      'download_url' => function ($download_url)
+      {
+        Assert::assertIsString($download_url);
+        Assert::assertRegExp('/http:\/\/localhost\/app\/download-media\/[a-zA-Z0-9-]+/',
+          $download_url, 'download_url');
+      },
+    ];
+
+    Assert::assertArrayHasKey($key, $fields);
+    call_user_func($fields[$key], $program[$key]);
+
+    return true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

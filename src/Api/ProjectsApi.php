@@ -13,7 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProject;
+use OpenAPI\Server\Model\FeaturedProjects;
 use OpenAPI\Server\Model\Project;
+use OpenAPI\Server\Model\Projects;
 use OpenAPI\Server\Model\UploadError;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -71,11 +73,13 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function projectProjectIdGet(string $project_id, &$responseCode, array &$responseHeaders)
   {
     $programs = $this->program_manager->getProgram($project_id);
-    $responseData = $this->getProjectsResponseData($programs);
+    $responseData = $this->getProjectResponseData($programs);
     $responseCode = Response::HTTP_OK;
 
     return $responseData;
@@ -87,6 +91,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   public function projectsFeaturedGet(string $platform = null, string $maxVersion = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
   {
     $programs = $this->featured_repository->getFeaturedPrograms($flavor, $limit, $offset, $platform, $maxVersion);
+    $total_results = $this->featured_repository->getFeaturedProgramsCount($flavor, $platform, $maxVersion);
     $responseCode = Response::HTTP_OK;
 
     $featured_programs = [];
@@ -104,11 +109,17 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
       $featured_programs[] = $new_featured_project;
     }
 
-    return $featured_programs;
+    $featured_projects = ['projects' => $featured_programs, 'total_results' => $total_results];
+
+    $responseData = new FeaturedProjects($featured_projects);
+
+    return $responseData;
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function projectsGet(string $project_type, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -130,7 +141,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
 
     $programs = $this->program_manager->getProjects($project_type, $max_version, $limit, $offset, $flavor);
-    $responseData = $this->getProjectsResponseData($programs);
+    $programs_count = $this->program_manager->getProjectsCount($project_type, $max_version, $flavor);
+    $responseData = $this->getProjectsResponseData($programs, $programs_count);
     $responseCode = Response::HTTP_OK;
 
     return $responseData;
@@ -198,14 +210,44 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function projectsSearchGet(string $query_string, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement projectsSearchGet() method.
+    if (null === $max_version)
+    {
+      $max_version = '0';
+    }
+    if (null === $limit)
+    {
+      $limit = 20;
+    }
+    if (null === $offset)
+    {
+      $offset = 0;
+    }
+
+    if ('' === $query_string || ctype_space($query_string))
+    {
+      $responseData = $this->getProjectsResponseData([]);
+      $responseCode = Response::HTTP_OK;
+
+      return $responseData;
+    }
+
+    $programs = $this->program_manager->search($query_string, $limit, $offset, $max_version, $flavor);
+    $total_results = $this->program_manager->searchCount($query_string, $max_version, $flavor);
+    $responseData = $this->getProjectsResponseData($programs, $total_results);
+    $responseCode = Response::HTTP_OK;
+
+    return $responseData;
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -221,13 +263,19 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     {
       $offset = 0;
     }
+
     $jwtPayload = $this->program_manager->decodeToken($this->token);
     if (!array_key_exists('username', $jwtPayload))
     {
-      return [];
+      $responseData = $this->getProjectsResponseData([]);
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return $responseData;
     }
-    $programs = $this->program_manager->getAuthUserPrograms($jwtPayload['username'], $limit, $offset, $flavor, $max_version);
-    $responseData = $this->getProjectsResponseData($programs);
+
+    $programs = $this->program_manager->getUserProjects($jwtPayload['username'], $limit, $offset, $flavor, $max_version);
+    $total_results = $this->program_manager->getUserProjectsCount($jwtPayload['username'], $flavor, $max_version);
+    $responseData = $this->getProjectsResponseData($programs, $total_results);
     $responseCode = Response::HTTP_OK;
 
     return $responseData;
@@ -235,6 +283,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function projectsUserUserIdGet(string $user_id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
@@ -250,8 +300,18 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     {
       $offset = 0;
     }
+
+    if ('' === $user_id || ctype_space($user_id))
+    {
+      $responseData = $this->getProjectsResponseData([]);
+      $responseCode = Response::HTTP_OK;
+
+      return $responseData;
+    }
+
     $programs = $this->program_manager->getUserPublicPrograms($user_id, $limit, $offset, $flavor, $max_version);
-    $responseData = $this->getProjectsResponseData($programs);
+    $total_results = $this->program_manager->getUserPublicProgramsCount($user_id, $flavor, $max_version);
+    $responseData = $this->getProjectsResponseData($programs, $total_results);
     $responseCode = Response::HTTP_OK;
 
     return $responseData;
@@ -260,7 +320,19 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * @throws Exception
    */
-  private function getProjectsResponseData(array $programs): array
+  private function getProjectsResponseData(array $programs, int $total_results = 0): Projects
+  {
+    $projects = $this->getProjectResponseData($programs);
+
+    $response = ['projects' => $projects, 'total_results' => $total_results];
+
+    return new Projects($response);
+  }
+
+  /**
+   * @throws Exception
+   */
+  private function getProjectResponseData(array $programs): array
   {
     $projects = [];
     foreach ($programs as &$program)

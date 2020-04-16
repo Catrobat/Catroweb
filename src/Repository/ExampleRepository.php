@@ -39,6 +39,32 @@ class ExampleRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  public function getExampleProgramsCount(bool $debug_build, ?string $flavor, ?string $max_version = null): int
+  {
+    $qb = $this->createQueryBuilder('e');
+
+    $qb
+      ->select('count(e.id)')
+      ->where('e.active = true')
+      ->andWhere($qb->expr()->isNotNull('e.program'))
+    ;
+    $qb->orderBy('e.priority', 'DESC');
+
+    APIQueryHelper::addMaxVersionCondition($qb, $max_version);
+    APIQueryHelper::addFlavorCondition($qb, $flavor);
+
+    try
+    {
+      $projects_count = $qb->getQuery()->getSingleScalarResult();
+    }
+    catch (NoResultException | NonUniqueResultException $e)
+    {
+      $projects_count = 0;
+    }
+
+    return $projects_count;
+  }
+
   /**
    * @throws NoResultException
    * @throws NonUniqueResultException

@@ -29,3 +29,4 @@ doctrine:
     dql:
       string_functions:
         match: DoctrineExtensions\Query\Mysql\MatchAgainst
+        rand: DoctrineExtensions\Query\Mysql\Rand
