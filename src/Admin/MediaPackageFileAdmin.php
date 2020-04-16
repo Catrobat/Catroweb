@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaPackageFileAdmin extends AbstractAdmin
@@ -50,13 +50,15 @@ class MediaPackageFileAdmin extends AbstractAdmin
    */
   public function prePersist($object): void
   {
-    /** @var File $file */
+    /** @var UploadedFile $file */
     $file = $object->file;
     if (null == $file)
     {
       return;
     }
-    $object->setExtension($file->guessExtension());
+
+    $object->setExtension(('catrobat' == $file->getClientOriginalExtension()) ? 'catrobat' : $file->guessExtension());
+
     $this->checkFlavor();
   }
 
@@ -82,14 +84,15 @@ class MediaPackageFileAdmin extends AbstractAdmin
   {
     $object->old_extension = $object->getExtension();
 
+    /** @var UploadedFile $file */
     $file = $object->file;
-    if (null === $file)
+    if (null == $file)
     {
       $object->setExtension($object->old_extension);
 
       return;
     }
-    $object->setExtension($file->guessExtension());
+    $object->setExtension(('catrobat' == $file->getClientOriginalExtension()) ? 'catrobat' : $file->guessExtension());
     $this->checkFlavor();
   }
 

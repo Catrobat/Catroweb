@@ -153,7 +153,8 @@ function MediaLib (packageName, flavor, assetsDir) {
             mediafileContainer.append($('<i class="fas fa-file-archive"/>'))
             break
           default:
-            image = $('<img src="' + assetsDir + 'thumbs/' + file.id + '.jpeg"/>')
+            var imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
+            image = $('<img src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
             image.attr('title', file.name)
             image.attr('alt', file.name)
             image.on('error', function () {

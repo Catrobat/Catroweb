@@ -296,6 +296,8 @@ class AppExtension extends AbstractExtension
       case 'png':
       case 'gif':
         return $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension());
+      case 'catrobat':
+        return $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension());
       default:
         return null;
     }

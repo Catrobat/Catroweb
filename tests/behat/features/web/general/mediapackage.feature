@@ -18,14 +18,15 @@ Feature:
       | 4  | ThemeSpecial | Looks   |
 
     And there are media package files:
-      | id | name       | category     | extension | active | file   | flavor     | author        |
-      | 1  | Dog (😊🐶) | Animals      | png       | 1      | 1.png  | pocketcode | Bob Schmidt   |
-      | 2  | Bubble     | Fantasy      | mpga      | 1      | 2.mpga | pocketcode |               |
-      | 3  | SexyGrexy  | Bla          | png       | 0      | 3.png  | luna       | Micheal John  |
-      | 4  | SexyFlavor | Animals      | png       | 1      | 4.png  | luna       |               |
-      | 5  | SexyNULL   | Animals      | png       | 1      | 5.png  |            |               |
-      | 6  | SexyWolfi  | Animals      | png       | 1      | 6.png  | pocketcode | Jenifer Shawn |
-      | 7  | MyLuna     | ThemeSpecial | png       | 1      | 7.png  | luna       |               |
+      | id | name       | category     | extension | active | file       | flavor     | author        |
+      | 1  | Dog (😊🐶)   | Animals      | png       | 1      | 1.png      | pocketcode | Bob Schmidt   |
+      | 2  | Bubble     | Fantasy      | mpga      | 1      | 2.mpga     | pocketcode |               |
+      | 3  | SexyGrexy  | Bla          | png       | 0      | 3.png      | luna       | Micheal John  |
+      | 4  | SexyFlavor | Animals      | png       | 1      | 4.png      | luna       |               |
+      | 5  | SexyNULL   | Animals      | png       | 1      | 5.png      |            |               |
+      | 6  | SexyWolfi  | Animals      | png       | 1      | 6.png      | pocketcode | Jenifer Shawn |
+      | 7  | MyLuna     | ThemeSpecial | png       | 1      | 7.png      | luna       |               |
+      | 8  | MyObject   | Bla          | catrobat  | 1      | 8.catrobat | pocketcode |               |
 
   Scenario: Viewing defined categories in a specific package
     Given I am on "/app/media-library/looks"
@@ -49,6 +50,7 @@ Feature:
     Then I should see media file with id "1"
     And I should see media file with id "5"
     And I should see media file with id "6"
+    And I should see media file with id "8"
     But I should not see media file with id "4"
     And I should not see media file with id "7"
     And I should not see a "#category-theme-special" element
@@ -59,7 +61,7 @@ Feature:
     Then I should see a "#category-theme-special" element
     And I should see media file with id 7 in category "Luna & Cat Theme Special"
     And I should see 1 media file in category "Luna & Cat Theme Special"
-    And I should see 1 media file in category "Bla"
+    And I should see 2 media file in category "Bla"
 
   Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
     Given I am on "/app/media-library/looks"
