@@ -12,15 +12,12 @@ Feature: Report a program
       | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
-  Scenario: report program with valid data
+  Scenario: Report project over old API not possible
     Given I have a parameter "program" with value "1"
     And I have a parameter "category" with value "spam"
     And I have a parameter "note" with value "Bad Project"
     When I POST these parameters to "/app/api/reportProject/reportProject.json"
-    Then I should get the json object:
-      """
-      {"answer":"Your report was successfully sent!","statusCode":200}
-      """
+    Then the response status code should be "401"
 
   Scenario: report program with invalid project
     Given I have a parameter "program" with value "4"
