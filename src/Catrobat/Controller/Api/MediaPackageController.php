@@ -119,7 +119,7 @@ class MediaPackageController extends AbstractController
     foreach ($media_package_categories as $media_package_category)
     {
       $media_package_files = $media_package_category->getFiles();
-      if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0)
+      if (null !== $media_package_files)
       {
         /** @var MediaPackageFile $media_package_file */
         foreach ($media_package_files as $media_package_file)

@@ -12,7 +12,7 @@ class SnapshotController extends CRUDController
   public function listAction(Request $request = null): Response
   {
     $finder = new Finder();
-    $directory = $this->container->getParameter('catrobat.snapshot.dir');
+    $directory = $this->getParameter('catrobat.snapshot.dir');
     $files = $finder->files()->in($directory);
 
     return $this->renderWithExtraParams('Admin/snapshots.html.twig', ['files' => $files]);

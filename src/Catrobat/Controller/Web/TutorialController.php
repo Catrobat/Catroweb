@@ -86,7 +86,7 @@ class TutorialController extends AbstractController
 
     $retArray['CatrobatInformation'] = [
       'BaseUrl' => $request->getSchemeAndHttpHost().'/',
-      'TotalProjects' => is_countable($programs) ? count($programs) : 0,
+      'TotalProjects' => count($programs),
       'ProjectsExtension' => '.catrobat',
     ];
 

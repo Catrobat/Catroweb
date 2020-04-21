@@ -37,7 +37,7 @@ class AppExtensionTest extends TestCase
     $appExtension = $this->createAppExtension($short);
     $list = $appExtension->getLanguageOptions();
     // TODO change this to a dynamic number
-    $this->assertEquals(is_countable($list) ? count($list) : 0, 69);
+    $this->assertEquals(count($list), 69);
 
     $this->assertTrue($this->inArray('Deutsch', $list));
     $this->assertTrue($this->inArray('English', $list));

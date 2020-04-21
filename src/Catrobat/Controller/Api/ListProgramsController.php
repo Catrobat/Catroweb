@@ -251,7 +251,7 @@ class ListProgramsController extends AbstractController
                                                                               int $limit, int $offset,
                                                                               string $max_version): array
   {
-    $number_of_projects = is_countable($projects) ? count($projects) : 0;
+    $number_of_projects = count($projects);
 
     if ($number_of_projects >= $limit || !$flavor)
     {

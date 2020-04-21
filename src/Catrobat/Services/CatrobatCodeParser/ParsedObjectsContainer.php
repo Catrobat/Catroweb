@@ -121,6 +121,6 @@ abstract class ParsedObjectsContainer
 
   private function hasName(SimpleXMLElement $object_xml_properties): bool
   {
-    return null != $object_xml_properties[Constants::NAME_ATTRIBUTE] || 0 != (is_countable($object_xml_properties->name) ? count($object_xml_properties->name) : 0);
+    return null != $object_xml_properties[Constants::NAME_ATTRIBUTE] || 0 != count($object_xml_properties->name);
   }
 }
