@@ -7,7 +7,7 @@ use App\Catrobat\Exceptions\Upload\MissingImageException;
 use App\Catrobat\Listeners\OnlyDefinedImagesValidator;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use PHPUnit\Framework\TestCase;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -31,10 +31,10 @@ class OnlyDefinedImagesValidatorTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $file->expects($this->atLeastOnce())->method('getPath')
-      ->willReturn(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base')
+      ->willReturn(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base')
       ;
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')
-      ->willReturn(simplexml_load_file(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/code.xml'))
+      ->willReturn(simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/code.xml'))
       ;
     $this->only_defined_images_validator->validate($file);
   }
@@ -43,10 +43,10 @@ class OnlyDefinedImagesValidatorTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $file->expects($this->atLeastOnce())->method('getPath')
-      ->willReturn(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_extra_image')
+      ->willReturn(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_extra_image')
     ;
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')
-      ->willReturn(simplexml_load_file(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_extra_image/code.xml'))
+      ->willReturn(simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_extra_image/code.xml'))
     ;
     $this->expectException(InvalidCatrobatFileException::class);
     $this->only_defined_images_validator->validate($file);
@@ -57,10 +57,10 @@ class OnlyDefinedImagesValidatorTest extends TestCase
     $file = $this->createMock(ExtractedCatrobatFile::class);
 
     $file->expects($this->atLeastOnce())->method('getPath')
-      ->willReturn(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_missing_image')
+      ->willReturn(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_missing_image')
     ;
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')
-      ->willReturn(simplexml_load_file(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_missing_image/code.xml'))
+      ->willReturn(simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_missing_image/code.xml'))
     ;
     $this->expectException(MissingImageException::class);
 

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -27,7 +27,7 @@ class ProgramFileRepositoryTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->storage_dir = ClearCacheHook::$CACHE_DIR.'file_repository/';
+    $this->storage_dir = RefreshTestEnvHook::$CACHE_DIR.'file_repository/';
     $this->filesystem = new Filesystem();
     $this->filesystem->mkdir($this->storage_dir);
     $this->filesystem->mkdir($this->storage_dir.'tmp/');
@@ -53,7 +53,7 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testStoresAFileToTheGivenDirectory(): void
   {
-    $file_name = ClearCacheHook::$FIXTURES_DIR.'test.catrobat';
+    $file_name = RefreshTestEnvHook::$FIXTURES_DIR.'test.catrobat';
     $id = 'test';
     $file = new File($file_name);
 
@@ -65,7 +65,7 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testSavesAGivenProgramDirectory(): void
   {
-    $extracted_program = new ExtractedCatrobatFile(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
+    $extracted_program = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
     $id = 'test';
 
     $this->program_file_repository->saveProgram($extracted_program, $id);
@@ -76,7 +76,7 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testReturnsTheFile(): void
   {
-    $file_name = ClearCacheHook::$FIXTURES_DIR.'test.catrobat';
+    $file_name = RefreshTestEnvHook::$FIXTURES_DIR.'test.catrobat';
     $id = 'test';
     $file = new File($file_name);
 

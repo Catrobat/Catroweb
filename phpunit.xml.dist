@@ -19,8 +19,14 @@
         </testsuite>
     </testsuites>
 
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+
     <extensions>
-        <extension class="Tests\phpUnit\Hook\ClearCacheHook" />
+        <extension class="Tests\phpUnit\Hook\RefreshTestEnvHook" />
     </extensions>
 
 </phpunit>

@@ -5,7 +5,7 @@ namespace Tests\phpUnit\Catrobat\Listeners;
 use App\Catrobat\Listeners\FileStructureValidator;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use PHPUnit\Framework\TestCase;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -29,7 +29,7 @@ class FileStructureValidatorTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $file->expects($this->atLeastOnce())->method('getPath')
-      ->willReturn(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base')
+      ->willReturn(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base')
       ;
     $this->file_structure_validator->validate($file);
   }

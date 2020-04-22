@@ -5,7 +5,7 @@ namespace Tests\phpUnit\Catrobat\Services;
 use App\Catrobat\Services\ProgramDevicePermissionReader;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\File;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -27,21 +27,21 @@ class ProgramDevicePermissionReaderTest extends TestCase
 
   public function testReturnPermissionsFromACatrobatFilePath(): void
   {
-    $filepath = ClearCacheHook::$GENERATED_FIXTURES_DIR.'phiro.catrobat';
+    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'phiro.catrobat';
     $expected = ['TEXT_TO_SPEECH', 'BLUETOOTH_PHIRO', 'VIBRATOR'];
     $this->assertSame($expected, $this->program_device_permission_reader->getPermissions($filepath));
   }
 
   public function testReturnPermissionsFromACatrobatFile(): void
   {
-    $file = new File(ClearCacheHook::$GENERATED_FIXTURES_DIR.'phiro.catrobat');
+    $file = new File(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'phiro.catrobat');
     $expected = ['TEXT_TO_SPEECH', 'BLUETOOTH_PHIRO', 'VIBRATOR'];
     $this->assertSame($expected, $this->program_device_permission_reader->getPermissions($file));
   }
 
   public function testReturnsAnEmptyArrayIfNoPermissionsAreSet(): void
   {
-    $filepath = ClearCacheHook::$GENERATED_FIXTURES_DIR.'base.catrobat';
+    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base.catrobat';
     $expected = [];
     $this->assertSame($expected, $this->program_device_permission_reader->getPermissions($filepath));
   }
