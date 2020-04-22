@@ -9,6 +9,7 @@ phploc.phar
 ### Scripts ###
 bin/
 !bin/console
+!bin/borg_restore_share.sh
 !bin/checkCatroidRepositoryForNewBricks
 !bin/recsys-similarity-computation-service.jar
 !bin/x_perm.sh
