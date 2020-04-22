@@ -45,5 +45,5 @@ Feature: As a visitor I want to see a program page
     Then I should see "public project 1"
     And I should see "public project 2"
     And I should not see "private project"
-    And I should see "Amount of projects: 2"
+    And I should see "2 projects"
 

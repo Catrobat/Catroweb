@@ -440,3 +440,10 @@ $galaxy-button-background-color: #9583b2;
     }
   }
 }
+
+.swal2-styled {
+  &.swal2-confirm {
+    background-color: $primary !important;
+    border-color: $primary !important;
+  }
+}

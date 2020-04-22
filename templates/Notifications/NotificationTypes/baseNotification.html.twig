@@ -1,44 +1,44 @@
 <div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
 
-  <h5 class="card-header notification-header">
+    <h5 class="card-header notification-header">
 
-    {% block notification_title %}{% endblock %}
+        {% block notification_title %}{% endblock %}
 
-    <button id="delete-notification-{{ notification.id }}" class="btn btn-primary"
-            onclick="notifications.deleteNotification({{ notification.id }})">
-      <i class="fas fa-times fa-2x" aria-hidden="true"></i>
+        <button id="delete-notification-{{ notification.id }}" class="btn btn-primary"
+                onclick="notifications.deleteNotification({{ notification.id }})">
+            <i class="fas fa-times fa-2x" aria-hidden="true"></i>
 
-    </button>
+        </button>
 
-  </h5>
+    </h5>
 
 
 
-  <div class="card-body">
-    <div class="row">
-
-      {% block notification_leftAvatar %}{% endblock %}
-
-      <div class="notification-body">
-        <div class="row mb-4">
-          <p class="card-text">
-            {% block notification_body %}{% endblock %}
-          </p>
-        </div>
-
+    <div class="card-body">
         <div class="row">
-          {% if notification.getSeen() is same as(false) %}
-            <div id="mark-as-read">
-            <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
-                    onclick="notifications.markAsRead({{ notification.id }})">
-              {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
-            </button>
-            </div>
-          {% endif %}
-        </div>
-      </div>
 
+            {% block notification_leftAvatar %}{% endblock %}
+
+            <div class="notification-body">
+                <div class="row mb-4">
+                    <p class="card-text">
+                        {% block notification_body %}{% endblock %}
+                    </p>
+                </div>
+
+                <div class="row">
+                    {% if notification.getSeen() is same as(false) %}
+                        <div id="mark-as-read">
+                            <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
+                                    onclick="notifications.markAsRead({{ notification.id }})">
+                                {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
 
 </div>

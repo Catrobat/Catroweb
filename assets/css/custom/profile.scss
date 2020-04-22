@@ -1,22 +1,15 @@
-@import 'theme_settings';
+@import '../../../public/bootstrap/scss/functions';
 @import '../base/variables';
 @import '../base/mixins';
+@import '../../../public/bootstrap/scss/variables';
+@import '../../../public/bootstrap/scss/mixins';
+@import 'theme_settings';
 
 /* profile */
 
 #follow-icon {
   font-size: 3em;
   color: $primary;
-}
-
-#user-information {
-  font-size: $default-font-size + 0.1875;
-  color: #000;
-  padding: 0 10px;
-
-  p {
-    margin: 10px auto;
-  }
 }
 
 .visited-program {
@@ -101,6 +94,11 @@
   }
 }
 
+.follow-button-container {
+  align-self: flex-end;
+  text-align: right;
+}
+
 .img-lock,
 .img-lock-open {
   text-align: center;
@@ -126,3 +124,43 @@
   }
 }
 
+/* follower section */
+.follower-item {
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__info {
+    font-size: .7em;
+    white-space: normal;
+  }
+
+  .follow-btn {
+    .btn {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+/* should be general */
+.round {
+  border-radius: 100%;
+}
+
+.profile {
+    .follow-button-container button {
+      min-width: 150px;
+
+      @include media-breakpoint-down(xs) {
+        width: 100%;
+        display: block;
+    }
+  }
+}
+
+.follower-tabs {
+  margin-top: -1rem;
+}

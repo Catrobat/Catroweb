@@ -1,0 +1,75 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/profile.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/notifications.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+  <div class="row follower-tabs">
+    <div class="catro-tabs w-100">
+      <ul class="nav nav-tabs nav-fill" id="tabs-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="follower-tab" data-toggle="tab" href="#follower-section"
+             aria-controls="follower-section"
+             aria-selected="true"
+             role="tab">{{ followers_list|length }} {{ 'follower.followers'|trans({}, 'catroweb') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="follows-tab" data-toggle="tab" href="#following-section"
+             aria-controls="following-section" aria-selected="false"
+             role="tab">{{ following_list|length }} {{ 'follower.follows'|trans({}, 'catroweb') }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tab-content mt-4" id="tabs-tabContent">
+    <div id="follower-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="follower-tab">
+      <div id="no-followers" class="text-center mb-5 {{ followers_list is empty ? 'd-block' : 'd-none' }}">
+        {{ "follower.noFollowers"|trans({}, "catroweb") }}
+      </div>
+
+      <div id="follower-cards" class="row mb-5">
+        {% for followerUser in followers_list %}
+          <div id="followers-{{ followerUser.id }}" class="col-12 single-follower my-3">
+            {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followerUser, 'hideFollowsMe': true} only %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="following-section" class="tab-pane fade" role="tabpanel" aria-labelledby="follows-tab">
+      <div id="no-following" class="text-center mb-5 {{ following_list is empty ? 'd-block' : 'd-none' }}">
+        {{ "follower.noFollowing"|trans({}, "catroweb") }}
+      </div>
+
+      <div id="following-cards" class="row mb-5">
+        {% for followsUser in following_list %}
+          <div id="following-{{ followsUser.id }}" class="col-12 single-following my-3">
+            {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followsUser, 'following': true} only %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('js/Follower.min.js') }}"></script>
+  <script>
+    let followers = new Follower(
+      "{{ csrf_token('follower') }}",
+      "{{ url('unfollow') }}",
+      "{{ url('follow') }}",
+      "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
+      "{{ "follower.followError"|trans({}, "catroweb") }}",
+      "{{ "follower.unfollowError"|trans({}, "catroweb") }}",
+      "{{ "follower.unfollowButton"|trans({}, "catroweb") }}",
+      "{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}",
+      "{{ "cancelMessage"|trans({}, "catroweb") }}",
+      "{{ following_list|length }}",
+      true
+    )
+  </script>
+{% endblock %}

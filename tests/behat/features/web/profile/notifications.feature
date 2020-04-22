@@ -163,17 +163,20 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     And I wait for the page to be loaded
     Then I should see "You have 49 new Notifications"
 
-   Scenario: User should get new program notifications under follower category
-     Given I log in as "Peter"
-     And I am on "/app/followUser/10"
-     And I wait for the page to be loaded
-     And I am on "/app/followUser/11"
-     And I wait for the page to be loaded
-     Given I have a project with "url" set to "/app/project/99"
-     And user "Karen" uploads this generated program, API version 1
-     And user "Brent" uploads this generated program, API version 1
-     And I am on "/app/notifications/followers"
-     And I wait for the page to be loaded
-     Then I should see "You have 2 new Notifications"
-     And I should see "User Karen created a new Project test"
-     And I should see "User Brent created a new Project test"
+  Scenario: User should get new program notifications under follower category
+    Given I log in as "Peter"
+    And I am on "/app/user/10"
+    And I wait for the page to be loaded
+    And I click ".profile-follow"
+    And I wait for AJAX to finish
+    And I am on "/app/user/11"
+    And I wait for the page to be loaded
+    And I click ".profile-follow"
+    And I wait for AJAX to finish
+    Given I have a project with "url" set to "/app/project/99"
+    And user "Karen" uploads this generated program, API version 1
+    And user "Brent" uploads this generated program, API version 1
+    And I am on "/app/notifications/followers"
+    Then I should see "You have 2 new Notifications"
+    And I should see "User Karen created a new Project test"
+    And I should see "User Brent created a new Project test"

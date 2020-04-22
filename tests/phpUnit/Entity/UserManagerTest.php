@@ -2,6 +2,7 @@
 
 namespace Tests\phpUnit\Entity;
 
+use App\Entity\ProgramManager;
 use App\Entity\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -27,7 +28,8 @@ class UserManagerTest extends TestCase
     $repository = $this->createMock(EntityRepository::class);
     $object_manager->expects($this->any())->method('getClassMetadata')->willReturn($meta);
     $object_manager->expects($this->any())->method('getRepository')->willReturn($repository);
-    $this->user_manager = new UserManager($passwordUpdater, $canonicalFieldsUpdater, $object_manager);
+    $program_manager = $this->createMock(ProgramManager::class);
+    $this->user_manager = new UserManager($passwordUpdater, $canonicalFieldsUpdater, $object_manager, $program_manager);
   }
 
   public function testInitialization(): void
