@@ -36,7 +36,7 @@ class FormulaListStatement extends Statement
     $code = '';
     $counter = 0;
 
-    $statementCount = is_countable($this->statements) ? count($this->statements) : 0;
+    $statementCount = count($this->statements);
     foreach ($this->statements as $value)
     {
       ++$counter;

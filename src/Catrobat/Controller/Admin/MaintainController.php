@@ -232,26 +232,26 @@ class MaintainController extends CRUDController
 
     $description = "This will remove all extracted catrobat files in the 'extraced'-directory and flag the programs accordingly";
     $rm = new RemovableMemory('Extracted Catrobatfiles', $description);
-    $this->setSizeOfObject($rm, $this->container->getParameter('catrobat.file.extract.dir'));
+    $this->setSizeOfObject($rm, $this->getParameter('catrobat.file.extract.dir'));
     $rm->setCommandName('Delete extracted files');
     $rm->setCommandLink($this->admin->generateUrl('extracted'));
     $RemovableObjects[] = $rm;
 
     $description = "This will remove all generated apk-files in the 'apk'-directory and flag the programs accordingly";
     $rm = new RemovableMemory('Generated APKs', $description);
-    $this->setSizeOfObject($rm, $this->container->getParameter('catrobat.apk.dir'), ['apk']);
+    $this->setSizeOfObject($rm, $this->getParameter('catrobat.apk.dir'), ['apk']);
     $rm->setCommandName('Delete APKs');
     $rm->setCommandLink($this->admin->generateUrl('apk'));
     $RemovableObjects[] = $rm;
 
-    $description = "This will remove all backups stored on this server in the 'backup'-directory (".$this->container->getParameter('catrobat.backup.dir').')';
+    $description = "This will remove all backups stored on this server in the 'backup'-directory (".$this->getParameter('catrobat.backup.dir').')';
     $rm = new RemovableMemory('Manual backups', $description);
-    $this->setSizeOfObject($rm, $this->container->getParameter('catrobat.backup.dir'), ['gz']);
+    $this->setSizeOfObject($rm, $this->getParameter('catrobat.backup.dir'), ['gz']);
     $rm->setCommandName('Delete backups');
     $rm->setCommandLink($this->admin->generateUrl('delete_backups'));
     $RemovableObjects[] = $rm;
 
-    $description = "This will create a backup which will be stored on this server in the 'backup'-directory (".$this->container->getParameter('catrobat.backup.dir').')';
+    $description = "This will create a backup which will be stored on this server in the 'backup'-directory (".$this->getParameter('catrobat.backup.dir').')';
     $ac = new AdminCommand('Create backup', $description);
     $ac->setCommandName('Create backup');
     $ac->setCommandLink($this->admin->generateUrl('create_backup'));
@@ -260,7 +260,7 @@ class MaintainController extends CRUDController
 
     $description = 'This will remove all log files.';
     $rm = new RemovableMemory('Logs', $description);
-    $this->setSizeOfObject($rm, $this->container->getParameter('catrobat.logs.dir'));
+    $this->setSizeOfObject($rm, $this->getParameter('catrobat.logs.dir'));
     $rm->setCommandName('Delete log files');
     $rm->setCommandLink($this->admin->generateUrl('delete_logs'));
     $rm->setArchiveCommandLink($this->admin->generateUrl('archive_logs'));
@@ -276,12 +276,12 @@ class MaintainController extends CRUDController
       $usedSpaceRaw -= $obj->size_raw;
     }
 
-    $programsSize = $this->get_dir_size($this->container->getParameter('catrobat.file.storage.dir'));
+    $programsSize = $this->get_dir_size($this->getParameter('catrobat.file.storage.dir'));
     $usedSpaceRaw -= $programsSize;
 
-    $screenshotSize = $this->get_dir_size($this->container->getParameter('catrobat.screenshot.dir'));
-    $featuredImageSize = $this->get_dir_size($this->container->getParameter('catrobat.featuredimage.dir'));
-    $mediaPackageSize = $this->get_dir_size($this->container->getParameter('catrobat.mediapackage.dir'));
+    $screenshotSize = $this->get_dir_size($this->getParameter('catrobat.screenshot.dir'));
+    $featuredImageSize = $this->get_dir_size($this->getParameter('catrobat.featuredimage.dir'));
+    $mediaPackageSize = $this->get_dir_size($this->getParameter('catrobat.mediapackage.dir'));
     $backupSize = $programsSize + $screenshotSize + $featuredImageSize + $mediaPackageSize;
 
     $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;
@@ -324,7 +324,7 @@ class MaintainController extends CRUDController
   private function getBackupFileObjects(): array
   {
     $objects = [];
-    $backupFolder = $this->container->getParameter('catrobat.backup.dir');
+    $backupFolder = $this->getParameter('catrobat.backup.dir');
     $files = array_reverse(glob($backupFolder.'/*.tar.gz')); // get all file names
     foreach ($files as $file)
     {

@@ -73,7 +73,7 @@ class ApproveProgramController extends CRUDController
     $data_grid = $this->admin->getDatagrid();
 
     $objects = $data_grid->getResults();
-    if (0 == (is_countable($objects) ? count($objects) : 0))
+    if (0 == count($objects))
     {
       return null;
     }
