@@ -511,7 +511,7 @@ services:
   catrowebadmin.block.programs.all:
     class: App\Admin\AllProgramsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "All Projects" }
+      - { name: sonata.admin, manager_type: orm, label: "All Projects", show_mosaic_button: false}
     arguments:
       - ~
       - App\Entity\Program

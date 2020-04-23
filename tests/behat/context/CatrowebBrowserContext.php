@@ -693,6 +693,269 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I click on the column with the name "([^"]*)"$/
+   *
+   * @param mixed $arg1
+   *
+   * @throws Exception
+   */
+  public function iClickOntheColumnName($arg1): void
+  {
+    $page = $this->getSession()->getPage();
+    switch ($arg1)
+    {
+      case 'Name':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[3]/a')
+          ->click()
+        ;
+        break;
+      case 'Views':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[5]/a')
+          ->click()
+        ;
+        break;
+      case 'Downloads':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[6]/a')
+          ->click()
+        ;
+        break;
+      case 'Upload Time':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[1]/a')
+          ->click()
+        ;
+        break;
+
+      default:
+        throw new Exception('Wrong Option');
+    }
+  }
+
+  /**
+   * @Then /^I change the visibility of the project number "([^"]*)" in the list to "([^"]*)"$/
+   *
+   * @param mixed $program_number
+   * @param mixed $visibility
+   *
+   * @throws Exception
+   */
+  public function iChangeTheVisibilityOfTheProgram($program_number, $visibility): void
+  {
+    ///param program number contains the number of the program position in the list on the admin page
+    ///
+    $page = $this->getSession()->getPage();
+
+    ///click the visibility button (yes/no)
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[9]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($visibility);
+  }
+
+  /**
+   * @Then /^I change the approval of the project number "([^"]*)" in the list to "([^"]*)"$/
+   *
+   * @param mixed $program_number
+   * @param mixed $approved
+   *
+   * @throws Exception
+   */
+  public function iChangeTheApprovalOfTheProject($program_number, $approved): void
+  {
+    ///param program number contains the number of the program position in the list on the admin page
+    ///
+    $page = $this->getSession()->getPage();
+    ///click the visibility button (yes/no)
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[8]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($approved);
+  }
+
+  /**
+   * @Then /^I change the flavor of the project number "([^"]*)" in the list to "([^"]*)"$/
+   *
+   * @param mixed $program_number
+   * @param mixed $flavor
+   *
+   * @throws Exception
+   */
+  public function iChangeTheFlavorOfTheProject($program_number, $flavor): void
+  {
+    ///param program number contains the number of the program position in the list on the admin page
+
+    $page = $this->getSession()->getPage();
+    ///click the visibility button (yes/no)
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/span')
+      ->click()
+    ;
+    //click the input on the popup to show yes or no option
+    $page
+      ->find('css', '.editable-input')
+      ->click()
+    ;
+
+    switch ($flavor)
+    {
+      case 'pocketcode':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(1)')
+          ->click()
+        ;
+        break;
+      case 'pocketalice':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(2)')
+          ->click()
+        ;
+        break;
+      case 'pocketgalaxy':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(3)')
+          ->click()
+        ;
+        break;
+      case 'phirocode':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(4)')
+          ->click()
+        ;
+        break;
+      case 'luna':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(5)')
+          ->click()
+        ;
+        break;
+      case 'create@school':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(6)')
+          ->click()
+        ;
+        break;
+      case 'embroidery':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(7)')
+          ->click()
+        ;
+        break;
+      case 'arduino':
+        $page
+          ->find('css', 'select.form-control > option:nth-child(8)')
+          ->click()
+        ;
+        break;
+      default:
+        throw new Exception('Wrong flavor');
+    }
+
+    //click button to confirm the selection
+    $page
+      ->find('css', 'button.btn-sm:nth-child(1)')
+      ->click()
+    ;
+  }
+
+  /**
+   * @Then /^I click on the username "([^"]*)"$/
+   *
+   * @param mixed $username
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iClickOnTheUsername($username): void
+  {
+    $this->assertSession()->elementExists('xpath', "//a[contains(text(),'".$username."')]");
+
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', "//a[contains(text(),'".$username."')]")
+      ->click()
+    ;
+  }
+
+  /**
+   * @Then /^I click on the program name "([^"]*)"$/
+   *
+   * @param mixed $program_name
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iClickOnTheProgramName($program_name): void
+  {
+    $this->assertSession()->elementExists('xpath', "//a[contains(text(),'".$program_name."')]");
+
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', "//a[contains(text(),'".$program_name."')]")
+      ->click()
+    ;
+  }
+
+  /**
+   * @Then /^I click on the show button of the program number "([^"]*)" in the list$/
+   *
+   * @param mixed $program_number
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iClickOnTheShowButton($program_number): void
+  {
+    $page = $this->getSession()->getPage();
+    $this->assertSession()->elementExists('xpath',
+      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[10]/div/a');
+
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[10]/div/a')
+      ->click()
+    ;
+  }
+
+  /**
+   * @When /^I report program (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
+   *
+   * @param mixed $program_id
+   * @param mixed $category
+   * @param mixed $note
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iReportProgramWithNoteInBrowser($program_id, $category, $note): void
+  {
+    $this->visit('app/project/'.$program_id);
+    $this->iWaitForThePageToBeLoaded();
+    $this->iClick('#report-program-button');
+    $this->iWaitForAjaxToFinish();
+    $this->fillField('report-reason', $note);
+    switch ($category) {
+      case 'copyright':
+        $this->iClickTheRadiobutton('#report-copyright');
+        break;
+      case 'inappropriate':
+        $this->iClickTheRadiobutton('#report-inappropriate');
+        break;
+      case 'spam':
+        $this->iClickTheRadiobutton('#report-spam');
+        break;
+      case 'dislike':
+        $this->iClickTheRadiobutton('#report-dislike');
+        break;
+    }
+
+    $this->iClick('.swal2-confirm');
+    $this->iWaitForAjaxToFinish();
+    $this->assertPageContainsText('Your report was successfully sent!');
+  }
+
+  /**
    * @Given /^I write "([^"]*)" in textbox$/
    *
    * @param mixed $arg1
@@ -1988,6 +2251,32 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the table with all projects in the following order:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function shouldSeeReportedProgramsTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
+
+    $actual_values = [];
+    foreach ($td as $value)
+    {
+      $actual_values[] = $value->getText();
+    }
+
+    Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of projects in table');
+
+    $counter = 0;
+    foreach ($user_stats as $user_stat)
+    {
+      Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
+      ++$counter;
+    }
+  }
+
+  /**
    * @Then /^I should see the starter programs table:$/
    *
    * @throws ResponseTextException
@@ -2669,5 +2958,41 @@ class CatrowebBrowserContext extends BrowserContext
     }
 
     return $date;
+  }
+
+  /**
+   * @param mixed $option
+   *
+   * @throws Exception
+   */
+  private function iSelectTheOptionInThePopup($option): void
+  {
+    $page = $this->getSession()->getPage();
+    //click the input on the popup to show yes or no option
+    $page
+      ->find('css', '.editable-input')
+      ->click()
+  ;
+
+    //click yes or no option
+    if ('yes' == $option)
+    {
+      $page
+        ->find('css', 'select.form-control > option:nth-child(2)')
+        ->click()
+    ;
+    }
+    else
+    {
+      $page
+        ->find('css', 'select.form-control > option:nth-child(1)')
+        ->click()
+    ;
+    }
+    //click button to confirm the selection
+    $page
+      ->find('css', 'button.btn-sm:nth-child(1)')
+      ->click()
+  ;
   }
 }
