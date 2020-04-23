@@ -10,7 +10,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use SimpleXMLElement;
 use Symfony\Component\Filesystem\Filesystem;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -22,7 +22,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
   }
 
   public function testInitialization(): void
@@ -390,7 +390,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
   public function testReturnsThePathOfTheBaseDirectory(): void
   {
-    $this->assertSame(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/', $this->extracted_catrobat_file->getPath());
+    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $this->extracted_catrobat_file->getPath());
   }
 
   public function testReturnsTheXmlProperties(): void
@@ -400,53 +400,53 @@ class ExtractedCatrobatFileTest extends TestCase
 
   public function testReturnsThePathOfTheAutomaticScreenshot(): void
   {
-    $this->assertSame(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
+    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
   }
 
   public function testReturnsThePathOfTheManualScreenshot(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/', '/webpath', 'hash');
-    $this->assertSame(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/manual_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/', '/webpath', 'hash');
+    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/manual_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
   }
 
   public function testReturnsThePathOfTheScreenshot(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_screenshot/', '/webpath', 'hash');
-    $this->assertSame(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_screenshot/screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_screenshot/', '/webpath', 'hash');
+    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_screenshot/screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
   }
 
   public function testThrowsAnExceptionWhenCodeXmlIsMissing(): void
   {
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->extracted_catrobat_file->__construct(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_missing_code_xml/', '', '');
+    $this->extracted_catrobat_file->__construct(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_missing_code_xml/', '', '');
   }
 
   public function testThrowsAnExceptionWhenCodeXmlIsInvalid(): void
   {
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->extracted_catrobat_file->__construct(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_invalid_code_xml/', '', '');
+    $this->extracted_catrobat_file->__construct(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_invalid_code_xml/', '', '');
   }
 
   public function testIgnoresAnInvalid0XmlChar(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(ClearCacheHook::$FIXTURES_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
   }
 
   public function testPreservesInvalid0XmlCharFromCollisionsWithOtherActors(): void
   {
     $filesystem = new Filesystem();
-    $filesystem->mirror(ClearCacheHook::$FIXTURES_DIR.'program_with_0_xmlchar/', ClearCacheHook::$CACHE_DIR.'program_with_0_xmlchar/');
+    $filesystem->mirror(RefreshTestEnvHook::$FIXTURES_DIR.'program_with_0_xmlchar/', RefreshTestEnvHook::$CACHE_DIR.'program_with_0_xmlchar/');
 
-    $base_xml_string = file_get_contents(ClearCacheHook::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals($count, 1);
 
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
-    $base_xml_string = file_get_contents(ClearCacheHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals($count, 1);
   }
@@ -454,17 +454,17 @@ class ExtractedCatrobatFileTest extends TestCase
   public function testPreservesInvalid0XmlCharFromCollisionsWithAnything(): void
   {
     $filesystem = new Filesystem();
-    $filesystem->mirror(ClearCacheHook::$FIXTURES_DIR.'/program_with_0_xmlchar/', ClearCacheHook::$CACHE_DIR.'/program_with_0_xmlchar/');
+    $filesystem->mirror(RefreshTestEnvHook::$FIXTURES_DIR.'/program_with_0_xmlchar/', RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/');
 
-    $base_xml_string = file_get_contents(ClearCacheHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals($count, 1);
 
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
-    $base_xml_string = file_get_contents(ClearCacheHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals($count, 1);
   }

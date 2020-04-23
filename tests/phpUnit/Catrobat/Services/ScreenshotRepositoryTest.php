@@ -9,7 +9,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -35,9 +35,9 @@ class ScreenshotRepositoryTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->screenshot_dir = ClearCacheHook::$CACHE_DIR.'screenshot_repository/';
-    $this->thumbnail_dir = ClearCacheHook::$CACHE_DIR.'thumbnail_repository/';
-    $this->tmp_dir = ClearCacheHook::$CACHE_DIR.'tmp/';
+    $this->screenshot_dir = RefreshTestEnvHook::$CACHE_DIR.'screenshot_repository/';
+    $this->thumbnail_dir = RefreshTestEnvHook::$CACHE_DIR.'thumbnail_repository/';
+    $this->tmp_dir = RefreshTestEnvHook::$CACHE_DIR.'tmp/';
     $this->screenshot_base_url = 'screenshots/';
     $this->thumbnail_base_url = 'thumbnails/';
     $this->tmp_base_url = 'tmp/';
@@ -77,7 +77,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testStoresAScreenshot(): void
   {
-    $filepath = ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     $id = 'test';
     $this->screenshot_repository->saveProgramAssets($filepath, $id);
 
@@ -90,7 +90,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testGeneratesAThumbnail(): void
   {
-    $filepath = ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     $id = 'test';
     $this->screenshot_repository->saveProgramAssets($filepath, $id);
 
@@ -103,7 +103,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testReturnsTheUrlOfAScreenshot(): void
   {
-    $filepath = ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     $id = 'test';
     $this->screenshot_repository->saveProgramAssets($filepath, $id);
     $this->assertSame($this->screenshot_base_url.'screen_test.png', $this->screenshot_repository->getScreenshotWebPath($id));
@@ -114,7 +114,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testReturnsTheUrlOfAThumbnail(): void
   {
-    $filepath = ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     $id = 'test';
     $this->screenshot_repository->saveProgramAssets($filepath, $id);
     $this->assertSame($this->thumbnail_base_url.'screen_test.png', $this->screenshot_repository->getThumbnailWebPath($id));

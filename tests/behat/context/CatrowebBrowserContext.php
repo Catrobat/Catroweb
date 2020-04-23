@@ -5,7 +5,6 @@ namespace Tests\behat\context;
 use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Catrobat\Services\StatisticsService;
-use App\Catrobat\Services\TestEnv\CheckCatroidRepositoryForNewBricks;
 use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
 use App\Catrobat\Services\TestEnv\LdapTestDriver;
 use App\Catrobat\Services\TokenGenerator;
@@ -1749,16 +1748,6 @@ class CatrowebBrowserContext extends BrowserContext
     $this->getSession()->evaluateScript(
       'document.getElementById("random").style.display = "none";'
     );
-  }
-
-  /**
-   * @Given all catroid blocks should also be implemented in catroweb
-   *
-   * @throws Exception
-   */
-  public function allCatroidBlocksShouldAlsoBeImplementedInCatroweb(): void
-  {
-    CheckCatroidRepositoryForNewBricks::check();
   }
 
   /**

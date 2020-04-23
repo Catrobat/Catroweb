@@ -104,12 +104,6 @@ class ResetCommand extends Command
         ['bin/console', 'sonata:admin:setup-acl'], [], 'Set up Sonata admin ACL', $output
     );
 
-    // Generate test data
-    CommandHelper::executeShellCommand(
-        ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [],
-      'Generating test data', $output
-    );
-
     // Clear caches
     CommandHelper::executeShellCommand(
         ['bin/console', 'cache:clear', '--env=dev'], [], 'Clearing dev cache', $output
