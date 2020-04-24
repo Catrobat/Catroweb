@@ -2,7 +2,7 @@
 
   <div class="container">
 
-    <div>
+    <div id="navbar">
       <button id="btn-sidebar-toggle" class="navbar-toggler" type="button"
               aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,11 @@
     </div>
 
     {% if 'media-library' in app.request.pathinfo or 'pocket-library' in app.request.pathinfo %}
-      {# TODO ask wolfgang if there should be done something else#}
+      <div id="downloadbar">
+        <span><span class="fas fa-times" id="downloadbar-delete-selection-btn"> </span><span id="downloadbar-nr-selected">1</span></span>
+        <span id="downloadbar-start-downloads"><span class="downloadbar-save">{{ "media-packages.download_these_files"|trans({}, "catroweb")|upper}}</span><span class="fas fa-download" /></span>
+        <span class="clear" />
+      </div>
     {% else %}
       {# START: Searchfield #}
       <div class="input-group d-none" id="search-input-group-header">

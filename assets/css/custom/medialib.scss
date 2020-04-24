@@ -31,6 +31,35 @@ $tile-size-sm: 54px;
 $tile-size-lg: 191px;
 $border-spacing: 8px;
 
+#downloadbar
+{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  color: white;
+
+  #downloadbar-delete-selection-btn
+  {
+    cursor: pointer;
+  }
+
+  #downloadbar-nr-selected
+  {
+    padding-left: 20px;
+  }
+
+  #downloadbar-start-downloads
+  {
+    cursor: pointer;
+
+    .downloadbar-save
+    {
+      margin-right: 20px;
+    }
+  }
+}
+
 .category
 {
   margin-top: 1rem;
@@ -58,10 +87,25 @@ $border-spacing: 8px;
       border-radius: 5px;
       position: relative;
 
-      &:hover
+      .checkbox
       {
-        border-color: $primary;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+        visibility: hidden;
+      }
+
+      &.selected
+      {
+        background-color: #E5E5E5;
         text-decoration: none;
+
+        .checkbox
+        {
+          visibility: visible;
+          color: white;
+        }
       }
 
       > img

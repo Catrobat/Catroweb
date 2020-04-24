@@ -55,7 +55,7 @@ class ResetCommand extends Command
 
     // Setting up the project permissions
     CommandHelper::executeShellCommand(
-        ['sh', 'docker/app/set-permissions.sh'], [], 'Setting up permissions', $output
+        ['sh', 'docker/app/set-permissions.sh'], ['timeout' => 320], 'Setting up permissions', $output
     );
 
     // Rebuild the database
