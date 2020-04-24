@@ -154,6 +154,9 @@ class Constants
   const WRITE_LIST_ON_DEVICE_BRICK = 'WriteListOnDeviceBrick';
   const READ_LIST_FROM_DEVICE_BRICK = 'ReadListFromDeviceBrick';
 
+  // Your Bricks
+  const USER_DEFINED_BRICK = 'UserDefinedBrick';
+
   // Embroidery
   const STITCH_BRICK = 'StitchBrick';
   const RUNNING_STITCH_BRICK = 'RunningStitchBrick';

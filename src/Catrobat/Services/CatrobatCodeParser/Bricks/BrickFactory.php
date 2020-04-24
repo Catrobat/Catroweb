@@ -339,6 +339,11 @@ class BrickFactory
         $generated_brick = new UserListBrick($brick_xml_properties);
         break;
 
+      // Your Bricks
+      case Constants::USER_DEFINED_BRICK:
+        $generated_brick = new UserDefinedBrick($brick_xml_properties);
+        break;
+
       // PEN Bricks
       case Constants::PEN_DOWN_BRICK:
         $generated_brick = new PenDownBrick($brick_xml_properties);
