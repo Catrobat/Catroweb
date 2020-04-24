@@ -1899,6 +1899,22 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @When user :username uploads this generated program, API version :api_version
+   *
+   * @param string $username    The name of the user uploading the project
+   * @param string $api_version The version of the API to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function userUploadThisGeneratedProject(string $username, string $api_version): void
+  {
+    /** @var User|null $user */
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertNotNull($user);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $user, $api_version);
+  }
+
+  /**
    * @When I upload the program with the id ":id", API version :api_version
    *
    * @param mixed  $id

@@ -915,6 +915,7 @@ media-packages:
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
+  download_these_files: SAVE
 
 flavor:
   pocketcode: Pocket Code

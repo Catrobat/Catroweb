@@ -317,7 +317,6 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       }
 
       $imagick->setImageBackgroundColor($background);
-      $imagick->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
       $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
       $imagick->setImageFormat($thumbnail_extension);
       $imagick->thumbnailImage(200, 0);

@@ -170,8 +170,8 @@ Feature: User gets notifications for new followers, reactions, comments and othe
      And I am on "/app/followUser/11"
      And I wait for the page to be loaded
      Given I have a project with "url" set to "/app/project/99"
-     And User "Karen" uploads the project
-     And User "Brent" uploads the project
+     And user "Karen" uploads this generated program, API version 1
+     And user "Brent" uploads this generated program, API version 1
      And I am on "/app/notifications/followers"
      And I wait for the page to be loaded
      Then I should see "You have 2 new Notifications"

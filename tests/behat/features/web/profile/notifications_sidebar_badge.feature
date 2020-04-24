@@ -128,8 +128,8 @@ Feature: Sidebar should show amount of new notifications in form of a badge
       And I click "#follow-btn"
       And I wait for the page to be loaded
       Given I have a project with "url" set to "/app/project/1"
-      And User "User" uploads the project
-      And User "Drago" uploads the project
+      And user "User" uploads this generated program, API version 1
+      And user "Drago" uploads this generated program, API version 1
       Given I log in as "Catrobat"
       And I am on "/app/"
       And I open the menu

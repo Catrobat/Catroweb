@@ -3,6 +3,7 @@
 namespace Tests\behat\context;
 
 use App\Catrobat\Services\TestEnv\SymfonySupport;
+use App\Utils\TimeUtils;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
@@ -12,6 +13,7 @@ use Behat\Mink\Exception\ResponseTextException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Exception;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -111,19 +113,29 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^the element "([^"]*)" should have attribute "([^"]*)" with value "([^"]*)"$/
+   * @Then /^the element "([^"]*)" should have (a|no) attribute "([^"]*)" with value "([^"]*)"$/
    *
    * @param mixed $locator
+   * @param mixed $should_have
    * @param mixed $attribute
    * @param mixed $value
    */
-  public function theElementShouldHaveAttributeWith($locator, $attribute, $value): void
+  public function theElementShouldHaveAttributeWith($locator, $should_have, $attribute, $value): void
   {
     $element = $this->getSession()->getPage()->find('css', $locator);
 
     Assert::assertNotNull($element, $locator.' not found!');
     Assert::assertTrue($element->hasAttribute($attribute), 'Element has no attribute '.$attribute);
-    Assert::assertContains($value, $element->getAttribute($attribute), '<'.$attribute.'> does not contain '.$value);
+
+    if ('a' == $should_have)
+    {
+      Assert::assertContains($value, $element->getAttribute($attribute), '<'.$attribute.'> does not contain '.$value);
+    }
+    else
+    {
+      Assert::assertNotContains($value, $element->getAttribute($attribute), '<'.$attribute.'> does contain '.$value);
+    }
+
     Assert::assertTrue($element->isVisible(), 'Element is not visible.');
   }
 
@@ -335,6 +347,36 @@ class BrowserContext extends MinkContext implements KernelAwareContext
 
     $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, $timeout_in_seconds);
     throw new ResponseTextException($message, $this->getSession());
+  }
+
+  /**
+   * Checks whether the browser downloaded a file and stored it into the default download directory.
+   * The downloaded file gets deleted after the check.
+   *
+   * @Then I should have downloaded a file named ":name"
+   *
+   * @param string $name The name of the file that should have been downloaded
+   *
+   * @throws Exception when an error occurs during checking if the file has been downloaded
+   */
+  public function iShouldHaveDownloadedAFileNamed(string $name): void
+  {
+    $received = false;
+    $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
+
+    $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 10 seconds
+    while (TimeUtils::getTimestamp() < $end_time)
+    {
+      if (file_exists($file_path))
+      {
+        $received = true;
+        unlink($file_path);
+        break;
+      }
+      sleep(1);
+    }
+
+    Assert::assertEquals(true, $received, "File {$name} hasn't been found at location '{$file_path}'");
   }
 
   //--------------------------------------------------------------------------------------------------------------------

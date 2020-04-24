@@ -1,12 +1,19 @@
 
 name: Feature Requests
 
-on: [pull_request]
+on:
+  #
+  # This category of tests should not block the merging process due to a failed pipeline.
+  # This tests are somewhat "independent" of the actual changes a developer made.
+  #
+  push:
+    branches:
+      - master
+      - develop
+  release:
+    types:
+      - created
 
-#
-# This category of tests should not block the merging process due to a failed pipeline.
-# This tests are somewhat "independent" of the actual changes a developer made.
-#
 jobs:
 
   check_for_new_catroid_blocks:

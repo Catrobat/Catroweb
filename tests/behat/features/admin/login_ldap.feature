@@ -1,4 +1,4 @@
-@admin
+@admin @disabled
 Feature: As a member of an AD-Server i want to be able to login and get propper permissions
 
   Background:

@@ -17,6 +17,24 @@ function MediaLib (packageName, flavor, assetsDir) {
   })
 
   function getPackageFiles (packageName, flavor, assetsDir) {
+    var downloadList = []
+
+    document.getElementById('downloadbar-start-downloads').onclick = function () {
+      for (var i = 0; i < downloadList.length; i++) {
+        medialibDownloadSelectedFile(downloadList[i])
+      }
+      document.getElementById('downloadbar-delete-selection-btn').click()
+    }
+
+    document.getElementById('downloadbar-delete-selection-btn').onclick = function () {
+      for (var i = 0; i < downloadList.length; i++) {
+        document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
+      }
+      downloadList = []
+      document.getElementById('downloadbar').style.display = 'none'
+      document.getElementById('navbar').style.display = 'inline'
+    }
+
     const url = Routing.generate('api_media_lib_package_bynameurl', { flavor: flavor, package: packageName }, false)
     $.get(url, {}, pkgFiles => {
       pkgFiles.forEach(file => {
@@ -25,10 +43,25 @@ function MediaLib (packageName, flavor, assetsDir) {
         }
 
         const mediafileContainer = $('<a class="mediafile" id="mediafile-' + file.id + '"/>')
-        mediafileContainer.attr('href', file.download_url)
-        mediafileContainer.attr('data-extension', file.extension)
         mediafileContainer.click(function () {
-          medialibOnDownload(this)
+          mediafileContainer.toggleClass('selected')
+          var indexInDownloadList = downloadList.indexOf(file)
+
+          if (indexInDownloadList === -1) {
+            downloadList.push(file)
+          } else {
+            downloadList.splice(indexInDownloadList, 1)
+          }
+
+          document.getElementById('downloadbar-nr-selected').innerText = downloadList.length
+
+          if (downloadList.length > 0) {
+            document.getElementById('downloadbar').style.display = 'flex'
+            document.getElementById('navbar').style.display = 'none'
+          } else {
+            document.getElementById('downloadbar').style.display = 'none'
+            document.getElementById('navbar').style.display = 'inline'
+          }
         })
 
         if (flavor !== 'pocketcode' && file.flavor === flavor) {
@@ -40,8 +73,10 @@ function MediaLib (packageName, flavor, assetsDir) {
           .replace(/([A-Za-z])([0-9])/g, '$1​$2') // insert zero-width space between letters and numbers
           .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
         mediafileContainer.append($('<div class="name" />').text(name))
+        mediafileContainer.append($('<div class="checkbox fas fa-check-circle" />'))
         mediafileContainer.addClass('showName')
 
+        const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
         let audio, previewBtn, image
         switch (file.extension) {
           case 'adp':
@@ -153,8 +188,7 @@ function MediaLib (packageName, flavor, assetsDir) {
             mediafileContainer.append($('<i class="fas fa-file-archive"/>'))
             break
           default:
-            var imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
-            image = $('<img src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
+            image = $('<img alt="' + file.id + '" src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
             image.attr('title', file.name)
             image.attr('alt', file.name)
             image.on('error', function () {
@@ -269,16 +303,12 @@ function MediaLib (packageName, flavor, assetsDir) {
   }
 }
 
-function medialibOnDownload (link) {
-  if (link.href !== 'javascript:void(0)') {
-    const downloadHref = link.href
-    link.href = 'javascript:void(0)'
-
-    setTimeout(function () {
-      link.href = downloadHref
-    }, 5000)
-
-    window.location = downloadHref
-  }
+function medialibDownloadSelectedFile (file) {
+  var link = document.createElement('a')
+  link.href = file.download_url
+  link.download = file.name
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
   return false
 }
