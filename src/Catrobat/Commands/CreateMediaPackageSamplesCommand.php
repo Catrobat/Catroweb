@@ -94,8 +94,18 @@ class CreateMediaPackageSamplesCommand extends Command
 
     // Creating MediaPackageCategory Machines and filling it with MediaPackageFiles
     $category_machine_sounds = $this->media_package_category_repo->createMediaPackageCategory('Machines', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Plane', new File($sample_pckg_path.'Sounds/Machines/plane.mpga'), $category_machine_sounds, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Ufo', new File($sample_pckg_path.'Sounds/Machines/ufo.wav'), $category_machine_sounds, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Plane', new File($sample_pckg_path.'Sounds/Machines/Plane.mpga'), $category_machine_sounds, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Ufo', new File($sample_pckg_path.'Sounds/Machines/Ufo.wav'), $category_machine_sounds, 'pocketcode', 'Catrobat');
+
+    /*
+     * Creating MediaPackage Objects
+     */
+    $package_objects = $this->media_package_repo->createMediaPackage('Objects', 'Objects');
+    // Creating MediaPackageCategory Miscellaneous and filling it with MediaPackageFiles
+    $category_miscellaneous = $this->media_package_category_repo->createMediaPackageCategory('Miscellaneous', new ArrayCollection([$package_objects]));
+    $this->media_package_file_repo->createMediaPackageFile('House', new File($sample_pckg_path.'Objects/Miscellaneous/House.catrobat'), $category_miscellaneous, 'pocketcode', 'Catrobat');
+
+    // Creating MediaPackageCategory Miscellaneous
 
     return 0;
   }

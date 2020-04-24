@@ -5,14 +5,17 @@ namespace App\Catrobat\Services;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use function Deployer\Support\str_contains;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Imagick;
+use ImagickDraw;
 use ImagickException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
+use ZipArchive;
 
 /**
  * Class MediaPackageFileRepository used for interacting with the database when handling MediaPackageFiles.
@@ -23,13 +26,17 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   private string $path;
   private Filesystem $filesystem;
   private string $thumb_dir;
+  private ParameterBagInterface $parameter_bag;
 
   public function __construct(ManagerRegistry $manager_registry, ParameterBagInterface $parameter_bag)
   {
     parent::__construct($manager_registry, MediaPackageFile::class);
 
+    $this->parameter_bag = $parameter_bag;
+
     /** @var string $dir Directory where media package files are stored */
     $dir = $parameter_bag->get('catrobat.mediapackage.dir');
+
     /** @var string $path Path where files in $dir can be accessed via web */
     $path = $parameter_bag->get('catrobat.mediapackage.path');
     $dir = preg_replace('#([^/]+)$#', '$1/', $dir);
@@ -161,10 +168,10 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     /** @var \SplFileInfo $file */
     foreach ($finder as $file)
     {
-      $ext = $file->getExtension();
+      $ext = 'catrobat' == $file->getExtension() ? 'png' : $file->getExtension();
       $basename = $file->getBasename('.'.$ext);
 
-      if (!is_file($this->thumb_dir.$basename.'.jpeg'))
+      if (!is_file($this->thumb_dir.$basename.'.'.$ext))
       {
         $ignored_extensions = ['adp', 'au', 'mid', 'mp4a', 'mpga', 'oga', 's3m', 'sil', 'uva',
           'eol', 'dra', 'dts', 'dtshd', 'lvp', 'pya', 'ecelp4800', 'ecelp7470', 'ecelp9600', 'rip',
@@ -187,10 +194,27 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    *
    * @param int    $id        the database id of the file
    * @param string $extension File extension
+   *
+   * @return string the web path of a given id and extension
    */
   public function getWebPath(int $id, string $extension): string
   {
     return $this->path.$this->generateFileNameFromId((string) $id, $extension);
+  }
+
+  /**
+   * Returns the thumbnail web path of a given id and extension.
+   *
+   * @param int    $id        the database id of the file
+   * @param string $extension File extension
+   *
+   * @return string the thumbnail web path of a given id and extension
+   */
+  public function getThumbnailWebPath(int $id, string $extension): string
+  {
+    $extension = 'catrobat' == $extension ? 'png' : $extension;
+
+    return $this->path.'/thumbs/'.$id.'.'.$extension;
   }
 
   /**
@@ -227,24 +251,62 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   }
 
   /**
-   * Creates a thumbnail for the given id and extension.
+   * Creates a thumbnail for the given id and extension. If a thumb of a .catrobat-file with missing screenshot
+   * should be created, this method won't create a thumbnail.
    *
-   * @param string $id        the id/name of the file
-   * @param string $extension File extension
+   * @param string $id             the id/name of the file
+   * @param string $file_extension File extension
    *
    * @throws ImagickException
    */
-  private function createThumbnail(string $id, string $extension): void
+  private function createThumbnail(string $id, string $file_extension): void
   {
     try
     {
-      $path = $this->dir.$this->generateFileNameFromId($id, $extension);
-      $imagick = new Imagick(realpath($path));
+      $path = $this->dir.$this->generateFileNameFromId($id, $file_extension);
+      $imagick = new Imagick();
+
+      if ('catrobat' == $file_extension)
+      {
+        // We are dealing with an media library "object" here. An "object" is basically a .catrobat file containing scenes, characters etc.
+
+        // Searching screenshot in .catrobat file
+        $catrobat_archive = new ZipArchive();
+        $catrobat_archive->open($path);
+
+        $screenshot_path_inside_archive = null;
+        for ($i = 0; $i < $catrobat_archive->numFiles; ++$i)
+        {
+          $filename = $catrobat_archive->getNameIndex($i);
+          if (str_contains($filename, 'screenshot.png'))
+          {
+            $screenshot_path_inside_archive = $filename;
+            break;
+          }
+        }
+
+        if (null != $screenshot_path_inside_archive)
+        {
+          // Getting the screenshot out of the .catrobat file
+          $imagick->readImageBlob(file_get_contents('zip://'.$path.'#'.$screenshot_path_inside_archive));
+          $thumbnail_extension = 'png'; // The automatic generated screenshots int the .catrobat file are png
+        }
+        else
+        {
+          // We don't have a screenshot inside the archive, thus we don't have to create a thumb
+          return;
+        }
+      }
+      else
+      {
+        $imagick->readImage(realpath($path));
+        $thumbnail_extension = $file_extension;
+      }
+
       $meanImg = clone $imagick;
       $meanImg->setBackgroundColor('#ffffff');
-      $meanImg->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
       $meanImg->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
-      $meanImg->setImageFormat('jpeg');
+      $meanImg->setImageFormat($thumbnail_extension);
       $meanImg->setColorspace(Imagick::COLORSPACE_GRAY);
       $mean = $meanImg->getImageChannelMean(Imagick::CHANNEL_GRAY);
 
@@ -257,9 +319,30 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       $imagick->setImageBackgroundColor($background);
       $imagick->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
       $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
-      $imagick->setImageFormat('jpeg');
+      $imagick->setImageFormat($thumbnail_extension);
       $imagick->thumbnailImage(200, 0);
-      $imagick->writeImage($this->thumb_dir.$id.'.'.'jpeg');
+
+      if ('catrobat' == $file_extension)
+      {
+        // We want to annotate the thumbnail so that the user can recognize that the thubnail represents an
+        // media library "object"
+
+        /** @var mixed $draw */
+        $draw = new ImagickDraw();
+
+        // Black text
+        $draw->setFillColor('gray');
+        $draw->setTextEncoding('UTF-8');
+
+        // Font properties
+        $draw->setFont($this->parameter_bag->get('catrobat.mediapackage.font.dir'));
+        $draw->setFontSize(50);
+
+        // Create text
+        $imagick->annotateImage($draw, 10, 50, 0, '');
+      }
+
+      $imagick->writeImage($this->thumb_dir.$id.'.'.$thumbnail_extension);
     }
     catch (ImagickException $imagickException)
     {
@@ -278,6 +361,8 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    *
    * @param string $id        the id/name of the file
    * @param string $extension File extension
+   *
+   * @return string The extension
    */
   private function generateFileNameFromId(string $id, string $extension): string
   {
