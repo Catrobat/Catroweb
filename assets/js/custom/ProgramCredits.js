@@ -41,7 +41,7 @@ function ProgramCredits (programId, showMoreButtonText, showLessButtonText,
       }
 
       const url = Routing.generate('edit_program_credits',
-        { id: programId, newCredits: newCredits }, false)
+        { id: programId, new_credits: newCredits }, false)
 
       // let url = "/editProjectCredits/" + programId + "/" + newCredits;
 

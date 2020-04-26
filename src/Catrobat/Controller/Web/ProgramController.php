@@ -32,6 +32,7 @@ use Exception;
 use ImagickException;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,10 +45,43 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProgramController extends AbstractController
 {
   private StatisticsService $statistics;
+  private RemixManager $remix_manager;
+  private ScreenshotRepository $screenshot_repository;
+  private ProgramManager $program_manager;
+  private ElapsedTimeStringFormatter $elapsed_time;
+  private GameJamRepository $game_jam_repository;
+  private ExtractedFileRepository $extracted_file_repository;
+  private CatroNotificationRepository $notification_repo;
+  private CatroNotificationService $notification_service;
+  private TranslatorInterface $translator;
+  private RudeWordFilter $rude_word_filter;
+  private ParameterBagInterface $parameter_bag;
 
-  public function __construct(StatisticsService $statistics_service)
+  public function __construct(StatisticsService $statistics_service,
+                              RemixManager $remix_manager,
+                              ScreenshotRepository $screenshot_repository,
+                              ProgramManager $program_manager,
+                              ElapsedTimeStringFormatter $elapsed_time,
+                              GameJamRepository $game_jam_repository,
+                              ExtractedFileRepository $extracted_file_repository,
+                              CatroNotificationRepository $notification_repo,
+                              CatroNotificationService $notification_service,
+                              TranslatorInterface $translator,
+                              RudeWordFilter $rude_word_filter,
+                              ParameterBagInterface $parameter_bag)
   {
     $this->statistics = $statistics_service;
+    $this->remix_manager = $remix_manager;
+    $this->screenshot_repository = $screenshot_repository;
+    $this->program_manager = $program_manager;
+    $this->elapsed_time = $elapsed_time;
+    $this->game_jam_repository = $game_jam_repository;
+    $this->extracted_file_repository = $extracted_file_repository;
+    $this->notification_repo = $notification_repo;
+    $this->notification_service = $notification_service;
+    $this->translator = $translator;
+    $this->rude_word_filter = $rude_word_filter;
+    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -55,10 +89,9 @@ class ProgramController extends AbstractController
    *
    * @throws Exception
    */
-  public function programRemixGraphAction(Request $request, string $id, RemixManager $remix_manager,
-                                          ScreenshotRepository $screenshot_repository): JsonResponse
+  public function programRemixGraphAction(Request $request, string $id): JsonResponse
   {
-    $remix_graph_data = $remix_manager->getFullRemixGraph($id);
+    $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
 
     $catrobat_program_thumbnails = [];
     foreach ($remix_graph_data['catrobatNodes'] as $node_id)
@@ -68,7 +101,7 @@ class ProgramController extends AbstractController
         $catrobat_program_thumbnails[$node_id] = '/images/default/not_available.png';
         continue;
       }
-      $catrobat_program_thumbnails[$node_id] = '/'.$screenshot_repository
+      $catrobat_program_thumbnails[$node_id] = '/'.$this->screenshot_repository
         ->getThumbnailWebPath($node_id)
       ;
     }
@@ -98,23 +131,19 @@ class ProgramController extends AbstractController
    * @throws ORMException
    * @throws OptimisticLockException
    */
-  public function projectAction(Request $request, string $id, ProgramManager $program_manager,
-                                ScreenshotRepository $screenshot_repository,
-                                ElapsedTimeStringFormatter $elapsed_time,
-                                RemixManager $remix_manager, GameJamRepository $game_jam_repository,
-                                ExtractedFileRepository $extractedFileRepository): Response
+  public function projectAction(Request $request, string $id): Response
   {
     /** @var Program $project */
-    $project = $program_manager->find($id);
+    $project = $this->program_manager->find($id);
     $router = $this->get('router');
 
-    if (!$program_manager->isProjectVisibleForCurrentUser($project))
+    if (!$this->program_manager->isProjectVisibleForCurrentUser($project))
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
     $viewed = $request->getSession()->get('viewed', []);
-    $this->checkAndAddViewed($request, $project, $viewed, $program_manager);
+    $this->checkAndAddViewed($request, $project, $viewed);
     $referrer = $request->headers->get('referer');
     $request->getSession()->set('referer', $referrer);
 
@@ -129,19 +158,19 @@ class ProgramController extends AbstractController
     {
       $logged_in = true;
       $user_name = $user->getUsername();
-      $likes = $program_manager->findUserLikes($project->getId(), $user->getId());
+      $likes = $this->program_manager->findUserLikes($project->getId(), $user->getId());
       foreach ($likes as $like)
       {
         $active_user_like_types[] = $like->getType();
       }
     }
-    $active_like_types = $program_manager->findProgramLikeTypes($project->getId());
+    $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
 
-    $total_like_count = $program_manager->totalLikeCount($project->getId());
+    $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $program_comments = $this->findCommentsById($project);
-    $program_details = $this->createProgramDetailsArray($screenshot_repository, $project,
-      $active_like_types, $active_user_like_types, $total_like_count, $elapsed_time, $referrer,
-      $program_comments, $request, $remix_manager
+    $program_details = $this->createProgramDetailsArray(
+      $project, $active_like_types, $active_user_like_types, $total_like_count,
+      $referrer, $program_comments, $request
     );
 
     $user_programs = $this->findUserPrograms($user, $project);
@@ -154,7 +183,7 @@ class ProgramController extends AbstractController
     $share_text = trim($project->getName().' on '.$program_url.' '.
       $project->getDescription());
 
-    $jam = $this->extractGameJamConfig($game_jam_repository);
+    $jam = $this->extractGameJamConfig();
 
     $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
 
@@ -164,7 +193,7 @@ class ProgramController extends AbstractController
       $my_program = true;
     }
 
-    $extractedFileRepository->loadProgramExtractedFile($project);
+    $this->extracted_file_repository->loadProgramExtractedFile($project);
 
     return $this->render('Program/program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
@@ -178,6 +207,7 @@ class ProgramController extends AbstractController
       'user_name' => $user_name,
       'max_description_size' => $max_description_size,
       'logged_in' => $logged_in,
+      'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
     ]);
   }
 
@@ -186,10 +216,7 @@ class ProgramController extends AbstractController
    *
    * @throws ORMException
    */
-  public function projectLikeAction(Request $request, string $id, ProgramManager $program_manager,
-                                    CatroNotificationRepository $notification_repo,
-                                    CatroNotificationService $notification_service,
-                                    TranslatorInterface $translator): Response
+  public function projectLikeAction(Request $request, string $id): Response
   {
     $csrf_token = $request->query->get('token');
     if (!$this->isCsrfTokenValid('project', $csrf_token))
@@ -221,7 +248,7 @@ class ProgramController extends AbstractController
       throw $this->createAccessDeniedException('Invalid like-type for project given!');
     }
 
-    $project = $program_manager->find($id);
+    $project = $this->program_manager->find($id);
     if (null === $project)
     {
       if ($request->isXmlHttpRequest())
@@ -255,7 +282,7 @@ class ProgramController extends AbstractController
 
     try
     {
-      $program_manager->changeLike($project, $user, $type, $action);
+      $this->program_manager->changeLike($project, $user, $type, $action);
     }
     catch (InvalidArgumentException $exception)
     {
@@ -272,7 +299,7 @@ class ProgramController extends AbstractController
 
     if ($project->getUser() !== $user)
     {
-      $existing_notifications = $notification_repo->getLikeNotificationsForProject(
+      $existing_notifications = $this->notification_repo->getLikeNotificationsForProject(
         $project, $project->getUser(), $user
       );
 
@@ -281,17 +308,17 @@ class ProgramController extends AbstractController
         if (0 === count($existing_notifications))
         {
           $notification = new LikeNotification($project->getUser(), $user, $project);
-          $notification_service->addNotification($notification);
+          $this->notification_service->addNotification($notification);
         }
       }
       elseif (ProgramLike::ACTION_REMOVE === $action)
       {
         // check if there is no other reaction
-        if (!$program_manager->areThereOtherLikeTypes($project, $user, $type))
+        if (!$this->program_manager->areThereOtherLikeTypes($project, $user, $type))
         {
           foreach ($existing_notifications as $notification)
           {
-            $notification_service->removeNotification($notification);
+            $this->notification_service->removeNotification($notification);
           }
         }
       }
@@ -303,16 +330,16 @@ class ProgramController extends AbstractController
     }
 
     $user_locale = $request->getLocale();
-    $total_like_count = $program_manager->totalLikeCount($project->getId());
+    $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $active_like_types = array_map(function ($type_id)
     {
       return ProgramLike::$TYPE_NAMES[$type_id];
-    }, $program_manager->findProgramLikeTypes($project->getId()));
+    }, $this->program_manager->findProgramLikeTypes($project->getId()));
 
     return new JsonResponse([
       'totalLikeCount' => [
         'value' => $total_like_count,
-        'stringValue' => AppExtension::humanFriendlyNumber($total_like_count, $translator, $user_locale),
+        'stringValue' => AppExtension::humanFriendlyNumber($total_like_count, $this->translator, $user_locale),
       ],
       'activeLikeTypes' => $active_like_types,
     ]);
@@ -407,27 +434,26 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/editProjectDescription/{id}/{newDescription}", name="edit_program_description",
+   * @Route("/editProjectDescription/{id}/{new_description}", name="edit_program_description",
    * options={"expose": true}, methods={"GET"})
    *
    * @throws Exception
    */
-  public function editProgramDescription(string $id, string $newDescription, RudeWordFilter $rude_word_filter,
-                                         ProgramManager $program_manager, TranslatorInterface $translator): Response
+  public function editProgramDescription(string $id, string $new_description): Response
   {
     $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
 
-    if (strlen($newDescription) > $max_description_size)
+    if (strlen($new_description) > $max_description_size)
     {
       return JsonResponse::create(['statusCode' => StatusCode::DESCRIPTION_TOO_LONG,
-        'message' => $translator
+        'message' => $this->translator
           ->trans('programs.tooLongDescription', [], 'catroweb'), ]);
     }
 
-    if ($rude_word_filter->containsRudeWord($newDescription))
+    if ($this->rude_word_filter->containsRudeWord($new_description))
     {
       return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_DESCRIPTION,
-        'message' => $translator
+        'message' => $this->translator
           ->trans('programs.rudeWordsInDescription', [], 'catroweb'), ]);
     }
 
@@ -437,7 +463,7 @@ class ProgramController extends AbstractController
       return $this->redirectToRoute('fos_user_security_login');
     }
 
-    $program = $program_manager->find($id);
+    $program = $this->program_manager->find($id);
     if (!$program)
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
@@ -448,7 +474,7 @@ class ProgramController extends AbstractController
       throw $this->createAccessDeniedException('Not your program!');
     }
 
-    $program->setDescription($newDescription);
+    $program->setDescription($new_description);
 
     $em = $this->getDoctrine()->getManager();
     $em->persist($program);
@@ -458,26 +484,25 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/editProjectCredits/{id}/{newCredits}", name="edit_program_credits", options={"expose": true}, methods={"GET"})
+   * @Route("/editProjectCredits/{id}/{new_credits}", name="edit_program_credits", options={"expose": true}, methods={"GET"})
    *
    * @throws Exception
    */
-  public function editProgramCredits(string $id, string $newCredits, RudeWordFilter $rude_word_filter,
-                                     ProgramManager $program_manager, TranslatorInterface $translator): Response
+  public function editProgramCredits(string $id, string $new_credits): Response
   {
     $max_credits_size = $this->getParameter('catrobat.max_credits_upload_size');
 
-    if (strlen($newCredits) > $max_credits_size)
+    if (strlen($new_credits) > $max_credits_size)
     {
       return JsonResponse::create(['statusCode' => StatusCode::CREDITS_TO_LONG,
-        'message' => $translator
+        'message' => $this->translator
           ->trans('programs.tooLongCredits', [], 'catroweb'), ]);
     }
 
-    if ($rude_word_filter->containsRudeWord($newCredits))
+    if ($this->rude_word_filter->containsRudeWord($new_credits))
     {
       return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_CREDITS,
-        'message' => $translator
+        'message' => $this->translator
           ->trans('programs.rudeWordsInCredits', [], 'catroweb'), ]);
     }
 
@@ -487,7 +512,7 @@ class ProgramController extends AbstractController
       return $this->redirectToRoute('fos_user_security_login');
     }
 
-    $program = $program_manager->find($id);
+    $program = $this->program_manager->find($id);
     if (null === $program)
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
@@ -498,7 +523,7 @@ class ProgramController extends AbstractController
       throw $this->createAccessDeniedException('Not your program!');
     }
 
-    $program->setCredits($newCredits);
+    $program->setCredits($new_credits);
 
     $em = $this->getDoctrine()->getManager();
     $em->persist($program);
@@ -512,14 +537,13 @@ class ProgramController extends AbstractController
    *
    * @throws ImagickException
    */
-  public function uploadAvatarAction(Request $request, ProgramManager $project_manager,
-                                     ScreenshotRepository $screenshot_repository, string $id): Response
+  public function uploadAvatarAction(Request $request, string $id): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
 
     /** @var Program|null $project */
-    $project = $project_manager->find($id);
+    $project = $this->program_manager->find($id);
 
     if (null === $project)
     {
@@ -542,7 +566,7 @@ class ProgramController extends AbstractController
       return JsonResponse::create(['statusCode' => $e->getMessage()]);
     }
 
-    $screenshot_repository->updateProgramAssets($image, $id);
+    $this->screenshot_repository->updateProgramAssets($image, $id);
 
     return JsonResponse::create([
       'statusCode' => StatusCode::OK,
@@ -553,11 +577,11 @@ class ProgramController extends AbstractController
   /**
    * @throws NonUniqueResultException
    */
-  private function extractGameJamConfig(GameJamRepository $game_jam_repository): ?array
+  private function extractGameJamConfig(): ?array
   {
     $jam = null;
 
-    $game_jam = $game_jam_repository->getCurrentGameJam();
+    $game_jam = $this->game_jam_repository->getCurrentGameJam();
 
     if ($game_jam)
     {
@@ -583,21 +607,23 @@ class ProgramController extends AbstractController
     return $jam;
   }
 
-  private function checkAndAddViewed(Request $request, Program $program, array $viewed, ProgramManager $program_manager): void
+  private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
   {
     if (!in_array($program->getId(), $viewed, true))
     {
-      $program_manager->increaseViews($program);
+      $this->program_manager->increaseViews($program);
       $viewed[] = $program->getId();
       $request->getSession()->set('viewed', $viewed);
     }
   }
 
-  private function createProgramDetailsArray(ScreenshotRepository $screenshot_repository, Program $program,
-                                             array $active_like_types, array $active_user_like_types,
-                                             int $total_like_count, ElapsedTimeStringFormatter $elapsed_time,
-                                             ?string $referrer, array $program_comments,
-                                             Request $request, RemixManager $remix_manager): array
+  private function createProgramDetailsArray(Program $program,
+                                             array $active_like_types,
+                                             array $active_user_like_types,
+                                             int $total_like_count,
+                                             ?string $referrer,
+                                             array $program_comments,
+                                             Request $request): array
   {
     $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
     $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
@@ -654,19 +680,19 @@ class ProgramController extends AbstractController
     }
 
     return [
-      'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
+      'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($program->getId()),
       'downloadUrl' => $url,
       'languageVersion' => $program->getLanguageVersion(),
       'downloads' => $program->getDownloads() + $program->getApkDownloads(),
       'views' => $program->getViews(),
       'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
-      'age' => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+      'age' => $this->elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
       'referrer' => $referrer,
       'id' => $program->getId(),
       'comments' => $program_comments,
       'commentsLength' => count($program_comments),
       'commentsAvatars' => $comments_avatars,
-      'remixesLength' => $remix_manager->remixCount($program->getId()),
+      'remixesLength' => $this->remix_manager->remixCount($program->getId()),
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,
