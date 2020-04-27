@@ -51,3 +51,32 @@ jobs:
           REQUIRE_DEV: true
         with:
           args: analyse
+
+  Symfony-app-dependent-checks :
+    # to check for custom defined functions/filters the whole Symfony application is required
+    name: Twig Lint, Yaml Lint, Container Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+
+      - name: Yaml Lint
+        # Lints a file and outputs encountered errors. Specify all dirs but vendor
+        run: |
+          docker exec app.catroweb bin/console lint:yaml translations/ config/ .github/ docker/ *.yml
+
+      - name: Twig Lint
+        # Lints a template and outputs encountered errors.
+        run: |
+          docker exec app.catroweb bin/console lint:twig templates/
+
+      - name: Dependeny Injection Lint
+        #  Ensures that arguments injected into services match type declarations
+        run: |
+          docker exec app.catroweb bin/console lint:container
