@@ -10,9 +10,9 @@
   <div class="row">
     <div class="col-md-12">
       {% if notificationType == "allNotifications" %}
-      <h1 class="headline">{{ "notifications"|trans({}, "catroweb") }}</h1>
+      <h1 >{{ "notifications"|trans({}, "catroweb") }}</h1>
       {% else %}
-      <h1 class="headline">{{ (notificationType ~ "NotificationsTitle")|trans({}, "catroweb") }}</h1>
+      <h1 >{{ (notificationType ~ "NotificationsTitle")|trans({}, "catroweb") }}</h1>
       {% endif %}
 
     </div>
@@ -57,7 +57,7 @@
   {%if ( newNotifications | length > 0 ) or ( oldNotifications | length > 0 ) %}
     <div class="row" id = "old-notification-header">
       <div class="col-md-12">
-        <h1 class="headline">{{ "oldnotification"|trans({}, "catroweb") }}</h1>
+        <h1 >{{ "oldnotification"|trans({}, "catroweb") }}</h1>
       </div>
     </div>
   {% endif %}

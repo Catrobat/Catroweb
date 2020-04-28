@@ -1,52 +1,12 @@
-@import "elements";
 @import "variables";
+@import 'theme_settings';
+@import "elements";
 @import "mixins";
-@import "theme_settings";
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('../fonts/Roboto-Regular-webfont.eot');
-  src: local('Roboto Regular'), local('Roboto-Regular'), url('../fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Regular-webfont.woff') format('woff'), url('../fonts/Roboto-Regular-webfont.ttf') format('truetype'), url('../fonts/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('../fonts/Roboto-Italic-webfont.eot');
-  src: local('Roboto Italic'), local('Roboto-Italic'), url('../fonts/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Italic-webfont.woff') format('woff'), url('../fonts/Roboto-Italic-webfont.ttf') format('truetype'), url('../fonts/Roboto-Italic-webfont.svg#RobotoItalic') format('svg');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('../fonts/Roboto-Bold-webfont.eot');
-  src: local('Roboto Bold'), local('Roboto-Bold'), url('../fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Bold-webfont.woff') format('woff'), url('../fonts/Roboto-Bold-webfont.ttf') format('truetype'), url('../fonts/Roboto-Bold-webfont.svg#RobotoBold') format('svg');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
 
 *, *:before, *:after {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-
-}
-
-html,
-button,
-select,
-textarea,
-a {
-  color: $default-text-color;
-}
-
-input {
-  color: #000;
 }
 
 ::-webkit-input-placeholder {
@@ -66,11 +26,6 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
-html {
-  min-height: 100%;
-  font-size: $default-font-size;
-}
-
 body {
   background: $default-background-color!important;
   font-family: $font-family-sans-serif;
@@ -83,51 +38,8 @@ img {
   vertical-align: middle;
 }
 
-h1,
-h2,
-h3,
-.h1,
-.h2,
-.h3 {
-  color: $primary!important;
-  page-break-after: avoid;
-  text-transform: uppercase;
-  margin: 0;
-  font-weight: bold;
-}
-
-h1, .h1 {
-  font-size: $font-size-h1;
-  padding: 1px 1px;
-  border-bottom: 1px solid $default-text-color;
-}
-
-h2, .h2 {
-  font-size: $font-size-h2;
-}
-
-.size-small {
-  font-size: $default-font-size - 0.25;
-}
-
 li {
   word-wrap: break-word;
-}
-
-.size-medium {
-  font-size: $default-font-size;
-}
-
-.size-large {
-  font-size: $default-font-size + 0.25;
-}
-
-.size-xlarge {
-  font-size: $default-font-size + 0.5;
-}
-
-.size-xxlarge {
-  font-size: $default-font-size + 0.75;
 }
 
 .content-container {
@@ -157,34 +69,8 @@ label {
   display: block;
 }
 
-.link {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.error-text {
-  color: #f78181;
-  font-size: 22px;
-  padding: 16px 0;
-  text-align: center;
-}
-
-.notification-text {
-  font-size: 22px;
-  padding: 16px 0;
-  text-align: center;
-}
-
 .center {
   text-align: center;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.uppercase {
-  text-transform: uppercase;
 }
 
 button, .button {
@@ -273,7 +159,6 @@ $program-tile-width: 85px;
       }
 
       .program-name {
-        font-weight: bold;
         width: 100%;
         display: inline-block;
       }
@@ -450,8 +335,4 @@ $program-tile-width: 85px;
   content: "";
   display: block;
   background: $primary;
-}
-
-.force-word-break {
-  @include force-word-break();
 }

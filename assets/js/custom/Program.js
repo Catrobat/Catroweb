@@ -23,6 +23,34 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.apk_url = null
   self.apk_download_timeout = false
 
+  self.download = function (downloadUrl, projectId, buttonId, supported = true) {
+    const button = document.querySelector(buttonId)
+    button.disabled = true
+
+    if (!supported) {
+      self.showPreparingApkPopup()
+      button.disabled = false
+      return
+    }
+    fetch(downloadUrl)
+      .then(resp => resp.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.style.display = 'none'
+        a.href = url
+        a.download = projectId + '.catrobat'
+        document.body.appendChild(a)
+        a.click()
+        window.URL.revokeObjectURL(url)
+        button.disabled = false
+      })
+      .catch(() => {
+        button.disabled = false
+        console.error('downloading project ' + projectId + 'failed')
+      })
+  }
+
   self.getApkStatus = function () {
     $.get(self.statusUrl, null, self.onResult)
   }

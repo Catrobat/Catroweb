@@ -1438,25 +1438,25 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^the href with id "([^"]*)" should be void$/
+   * @Then /^the onclick href in button with id "([^"]*)" should be void$/
    *
    * @param mixed $arg1
    */
   public function theHrefWithIdShouldBeVoid($arg1): void
   {
     $button = $this->getSession()->getPage()->findById($arg1);
-    Assert::assertEquals($button->getAttribute('href'), 'javascript:void(0)');
+    Assert::assertContains('javascript:void(0)', $button->getAttribute('onclick'));
   }
 
   /**
-   * @Then /^the href with id "([^"]*)" should not be void$/
+   * @Then /^the onclick href in button with id "([^"]*)" should not be void$/
    *
    * @param mixed $arg1
    */
   public function theHrefWithIdShouldNotBeVoid($arg1): void
   {
     $button = $this->getSession()->getPage()->findById($arg1);
-    Assert::assertNotEquals($button->getAttribute('href'), 'javascript:void(0)');
+    Assert::assertNotContains('javascript:void(0)', $button->getAttribute('onclick'));
   }
 
   /**
@@ -2520,6 +2520,14 @@ class CatrowebBrowserContext extends BrowserContext
   public function iDoNotSeeADeleteButton(): void
   {
     $this->assertElementNotOnPage('.img-delete');
+  }
+
+  /**
+   * @Then the button :button should be disabled until download is finished
+   */
+  public function theButtonShouldBeDisabledUntilDownloadIsFinished(string $button): void
+  {
+    $this->theElementShouldBeVisible($button);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

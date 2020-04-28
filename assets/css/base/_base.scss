@@ -1,0 +1,44 @@
+@import 'elements'; // A set of useful LESS mixins (More info at: http://lesselements.com)
+@import 'mixins';   // Our own defined Mixins
+
+//
+//  Here we define all colors and variables with their base values
+//  If you have to overwrite values for base or custom scss files consider using variables and store
+//  them in the _variables.scss file! And when creating new scss use variables and put them in this file!
+//
+@import "variables";
+
+
+// BS4 - GruntFile handles coping the files from vendor to the defined public directory
+@import '../../../public/bootstrap/scss/bootstrap';
+
+// Font Awesome - GruntFile handles coping the files from vendor to the defined public directory
+$fa-font-path: "../../webfonts";
+@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/fontawesome";
+@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/solid";
+@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/regular";
+@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/brands";
+
+//
+// In the theme settings file you can overwrite basic theme variables:
+// You can find each theme settings file under /themes/<theme_name>
+// Themes are handled by the lip bundle
+//
+@import 'theme_settings';
+
+
+// Custom Styles
+
+// legacy - ToDo
+@import "catro_bootstrap";
+@import 'brain';
+@import 'icons';
+@import 'header';
+@import 'navbar';
+@import 'buttons';
+
+// new design
+@import 'typography';
+@import "sidebar";
+@import 'footer';
+

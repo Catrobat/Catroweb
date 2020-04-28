@@ -1,9 +1,6 @@
-@import '../../../public/bootstrap/scss/functions';
-@import 'variables';
-@import 'mixins';
-@import '../../../public/bootstrap/scss/variables';
-@import '../../../public/bootstrap/scss/mixins';
+@import "variables";
 @import 'theme_settings';
+@import 'mixins';
 
 $nav-font-size: $default-font-size + 0.25;
 $searchbar-font-size: $default-font-size + 0.125;

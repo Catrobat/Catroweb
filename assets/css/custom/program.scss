@@ -14,14 +14,6 @@ button, .button {
   border-color: red !important;
 }
 
-#program-top {
-
-  #program-name {
-    float: left;
-  }
-
-}
-
 $thumbnail-size: 300px;
 
 .project-thumbnail-wrapper {
@@ -455,20 +447,13 @@ table td:nth-child(1) {
 }
 
 #program-comments {
-  margin-top: 0;
-  padding-top: 25px;
 
   #user-comment-wrapper {
     padding-bottom: 15px;
   }
 }
 
-.h1 {
-  border-bottom: none;
-}
-
 #comments-wrapper {
-  //Todo style stuff
   clear: both;
   display: block;
 }
@@ -623,11 +608,6 @@ input[type='number'] {
 }
 
 @include media-breakpoint-down(md) {
-  #program-top {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
 
   #program-middle {
     #image {
@@ -720,11 +700,6 @@ input[type='number'] {
       }
     }
   }
-}
-
-#recsys-headline, #recsys-specific-programs-headline {
-  margin: 0.85em;
-  text-align: center;
 }
 
 #gamejam-div {

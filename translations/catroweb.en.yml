@@ -853,6 +853,7 @@ codeStatistics:
   specialBricks: 'Special'
 
 footer:
+  language: Language
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
@@ -943,7 +944,7 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
 
 agree: Agree
 disagree: Disagree
