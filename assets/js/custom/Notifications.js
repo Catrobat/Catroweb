@@ -176,9 +176,9 @@ function Notification (newNotifications, oldNotifications, markAsReadUrl, markAl
       const fetchNotifications = new FetchNotifications(countNotificationsUrl, 99, 10000)
       fetchNotifications.run('markAsRead')
     } else {
-      const userNotificationBadge = $('.' + notificationType)
-      const userNotificationBadgeAll = $('.all-notifications')
-      const userNotificationBadgeDropdown = $('.all-notifications-dropdown')
+      const userNotificationBadge = $('#sidebar-notifications .badge-pill.' + notificationType)
+      const userNotificationBadgeAll = $('#notifications-dropdown-content .badge-pill.all-notifications')
+      const userNotificationBadgeDropdown = $('#notifications-dropdown-toggler .badge-pill')
       if (specificNotification === 'specificNotification') {
         self.updateBadgeNumberCurrentType(userNotificationBadgeAll, specificNotification)
         self.updateBadgeNumberCurrentType(userNotificationBadgeDropdown, specificNotification)
@@ -200,7 +200,7 @@ function Notification (newNotifications, oldNotifications, markAsReadUrl, markAl
         userNotificationBadge.hide()
       }
     } else {
-      const userNotificationBadgeSpecific = $('.' + notificationType)
+      const userNotificationBadgeSpecific = $('#sidebar-notifications .badge-pill.' + notificationType)
       userNotificationBadgeSpecific.load(location.href)
       let currentNumberSpecific = Number(userNotificationBadgeSpecific.text())
 
