@@ -9,14 +9,6 @@ button, .button {
   color: white;
 }
 
-body {
-  color: black;
-}
-
-a {
-  text-decoration: none;
-}
-
 .text-area-empty {
   border-width: medium;
   border-color: red !important;
@@ -28,10 +20,6 @@ a {
     float: left;
   }
 
-}
-
-h2 {
-  margin: 0;
 }
 
 $thumbnail-size: 300px;
@@ -87,8 +75,6 @@ $thumbnail-size: 300px;
 }
 
 #program-bottom {
-  border-top: 1px solid $default-text-color;
-  border-bottom: 1px solid $default-text-color;
   padding-top: 25px;
   padding-bottom: 25px;
   display: table;
@@ -517,7 +503,6 @@ table td:nth-child(1) {
   min-height: 80px;
   padding-bottom: 10px;
   padding-top: 10px;
-  border-top: 1px solid $default-border-color;
 
   &.hidden {
     display: none;
@@ -654,7 +639,6 @@ input[type='number'] {
   }
 
   #program-bottom {
-    border-top: 1px solid $default-text-color;
     padding-top: 25px;
     padding-bottom: 25px;
     display: table;
@@ -683,7 +667,6 @@ input[type='number'] {
 
 @include media-breakpoint-down(sm) {
   #program-bottom {
-    border-top: 1px solid $default-text-color;
     padding-top: 25px;
     padding-bottom: 25px;
     display: table;

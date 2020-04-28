@@ -5,3 +5,4 @@ twig:
     exception_controller: null
     globals:
         app_version: '%env(APP_VERSION)%'
+        app_env: '%env(APP_ENV)%'

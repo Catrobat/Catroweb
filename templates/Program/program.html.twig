@@ -2,6 +2,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/card.css') }}"/>
   <link rel="stylesheet" href="{{ asset('css/modules/jquery.contextMenu.min.css') }}"/>
   <link rel="stylesheet" href="{{ asset('vis/vis.min.css') }}"/> {# We need acces to all images #}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}"/>
@@ -378,15 +379,7 @@
     <div class="clear"></div>
   </div>
 
-  {#
-     # CODEVIEW & CatBlocks
-   #}
-  {% if program_details.languageVersion >= 0.994 %}
-    <h1>Codeview</h1>
-    <div id='catblocks-code-container'></div>
-  {% else %}
-    {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:viewCodeAction', {'id' : program.id})) }}
-  {% endif %}
+  {% include 'Program/program_details_accordion.html.twig' %}
 
   <div id="program-bottom">
     <div id="program-bottom-container">
@@ -546,20 +539,14 @@
     )
   </script>
 
-  <script src="{{ asset('js/CodeView.min.js') }}"></script>
-  <script>
-    initCodeView(
-      '{{ "codeview.showCode"|trans({}, "catroweb") }}',
-      '{{ "codeview.hideCode"|trans({}, "catroweb") }}',
-      '{{ "codeview.showStatistics"|trans({}, "catroweb") }}',
-      '{{ "codeview.hideStatistics"|trans({}, "catroweb") }}',
-    )
-  </script>
+  <script src="{{ asset('js/OldCodeView.min.js') }}"></script>
 
-  <script src=" {{ asset('catblocks/CatBlocks.js') }}"></script>
+  {% if isVersionSupportedByCatBlocks(program_details.languageVersion) %}
+    <script src=" {{ asset('catblocks/CatBlocks.js') }}"></script>
     <script>
-      const progPath = '{{ app.request.getSchemeAndHttpHost() ~ '/resources/extract/' ~ program.getExtractedDirectoryHash() ~ '/'}}';
-      const progLang = 'en_GB';
+
+      let progPath = '{{ app.request.getSchemeAndHttpHost() ~ '/' ~ extracted_path ~ program.getExtractedDirectoryHash() ~ '/'}}';
+      let progLang = '{{ app.request.getLocale() }}';
 
       /**
        * initiate share
@@ -582,23 +569,36 @@
        *
        */
       window.onload = function() {
+        const div = document.getElementById('catblocks-code-container');
         share.parser.parseFile(`${progPath}code.xml`)
-        .then(xmlDoc => {
-          // render pogram into div element
-          const div = document.getElementById('catblocks-code-container');
-          share.injectAllScenes(div, xmlDoc, {
-            object: {
-              programRoot: `${progPath}`
-            }
-          });
-        })
-        .catch(err => {
-          console.error(`Failed to parse catroid file.`);
-          console.error(err);
-        });
+          .then(xmlDoc => {
+            // render program into div element
+            share.injectAllScenes(div, xmlDoc, {
+              object: {
+                programRoot: `${progPath}`
+              }
+            });
 
+            if ($("#collapseCodeView .catblocks-scene").length === 0) {
+              // CatBlocks already catches some errors.
+              // But we are not interested in showing users an error message.
+              // Instead we want to display the old view if no scenes could have been rendered.
+              console.error("Using old code view instead of new one");
+              div.innerHTML = "";
+              $("#codeview-wrapper").removeClass('d-none');
+            }
+          })
+          .catch(err => {
+            // Show old view instead
+            console.error(`Failed to parse catroid file.`);
+            console.error(err);
+            console.error("Using old code view instead of new one");
+            div.innerHTML = "";
+            $("#codeview-wrapper").removeClass('d-none');
+          });
       };
     </script>
+  {% endif %}
 
   <script>
 

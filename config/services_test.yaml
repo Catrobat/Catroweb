@@ -3,6 +3,7 @@
 
 parameters:
   catrobat.file.extract.dir:   "%catrobat.pubdir%resources_test/extract/"
+  catrobat.file.extract.path:  "resources_test/extract/"
   catrobat.file.storage.dir:   "%catrobat.pubdir%resources_test/projects/"
   catrobat.screenshot.dir:     "%catrobat.pubdir%resources_test/screenshots/"
   catrobat.screenshot.path:    "resources_test/screenshots/"
@@ -96,8 +97,9 @@ services:
   App\Catrobat\Services\CatrobatFileExtractor:
     class: App\Catrobat\Services\CatrobatFileExtractor
     arguments:
-      - "%catrobat.test.directory.target%"
+      - "%catrobat.file.extract.dir%"
       - "%catrobat.file.extract.path%"
+    public: true
 
   # ======== Data fixtures helper services
   App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures:

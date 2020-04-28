@@ -14,13 +14,13 @@ translate:
         expose: true
 
 edit_program_description:
-    path:  /editProjectDescription/{id}/{newDescription}
+    path:  /editProjectDescription/{id}/{new_description}
     controller: App\Catrobat\Controller\Web\ProgramController:editProgramDescription
     options:
         expose: true
 
 edit_program_credits:
-    path: /editProjectCredits/{id}/{newCredits}
+    path: /editProjectCredits/{id}/{new_credits}
     controller: App\Catrobat\Controller\Web\ProgramController:editProgramCredits
     options:
         expose: true

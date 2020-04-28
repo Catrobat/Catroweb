@@ -66,7 +66,7 @@ class ProgramManager
 
   private LoggerInterface $logger;
 
-  private UrlHelper $urlHelper;
+  private ?UrlHelper $urlHelper;
 
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,

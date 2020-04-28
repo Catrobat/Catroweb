@@ -131,7 +131,7 @@ $sidebar-width: 250px;
 }
 
 @include media-breakpoint-up(md) {
-  body.new-nav .container {
+  body.new-nav .body-content {
     padding-left: 15px + $sidebar-width;
   }
 
