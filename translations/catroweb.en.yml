@@ -915,6 +915,9 @@ media-packages:
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
+  search-input-description: Search Media Library ...
+  search-results : Media Library Search Results
+  no-results: Your search returned 0 results. Please use only English search terms.
   download_these_files: SAVE
 
 flavor:

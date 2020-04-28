@@ -28,7 +28,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   private string $thumb_dir;
   private ParameterBagInterface $parameter_bag;
 
-  public function __construct(ManagerRegistry $manager_registry, ParameterBagInterface $parameter_bag)
+  public function __construct(ParameterBagInterface $parameter_bag, ManagerRegistry $manager_registry)
   {
     parent::__construct($manager_registry, MediaPackageFile::class);
 
@@ -231,21 +231,40 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   /**
    * Searches the database for MediaPackageFiles containing the mentioned search term in their names.
    *
-   * @param string $term   The search term
-   * @param string $flavor If you specify a theme flavor, MediaPackageFiles of that flavor plus all files of the standard flavor 'pocketcode'
-   *                       are returned. If you don't specify a theme flavor, only files of the standard flavor 'pocketcode' are returned.
+   * @param string $term         The search term
+   * @param string $flavor       If you specify a theme flavor, MediaPackageFiles of that flavor plus all files of the standard flavor 'pocketcode'
+   *                             are returned. If you don't specify a theme flavor, only files of the standard flavor 'pocketcode' are returned.
+   * @param string $package_name if set, then just MediaPackageFiles belonging to this MediaPackage will be returned
+   * @param int    $limit        Maximum number of search results that should be returned. Defaults to PHP_INT_MAX.
+   * @param int    $offset       The starting entry in the search results list. Defaults to 0.
    *
-   * @return mixed an array containing the found media files or an empty array if no results found
+   * @return mixed an array containing the found media files or null if no results found
    */
-  public function search(string $term, string $flavor = 'pocketcode')
+  public function search(string $term, ?string $flavor = 'pocketcode', ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
   {
+    $flavor = $flavor ? $flavor : 'pocketcode';
+
     $qb = $this->createQueryBuilder('f')
       ->where('f.name LIKE :term')
       ->andWhere("f.flavor = 'pocketcode' OR f.flavor = :flavor")
       ->andWhere('f.active = 1')
       ->setParameter('term', '%'.$term.'%')
       ->setParameter('flavor', $flavor)
+      ->orderBy('f.name', 'ASC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
     ;
+
+    if (null !== $package_name)
+    {
+      $qb->join('App\Entity\MediaPackageCategory', 'c')
+        ->join('App\Entity\MediaPackage', 'p')
+        ->andWhere('f.category = c')
+        ->andWhere('c MEMBER OF p.categories')
+        ->andWhere('p.name = :package_name')
+        ->setParameter('package_name', $package_name)
+      ;
+    }
 
     return $qb->getQuery()->getResult();
   }

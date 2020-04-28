@@ -90,7 +90,11 @@
     window.addEventListener('load', scrollToHash)
     $(window).on('hashchange', scrollToHash)
 
-    new Main('{{ path('search', {'q': 0 } ) }}')
+    {% if package is defined %}
+      new Main('{{ path('medialibrary_search', {'q': 0, 'package_name' : package} ) }}')
+    {%  else %}
+      new Main('{{ path('search', {'q': 0 } ) }}')
+    {% endif %}
   </script>
 
   {# Sidebar #}
