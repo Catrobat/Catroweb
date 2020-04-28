@@ -818,4 +818,11 @@ class ProgramManager
 
     return $prefLocales;
   }
+
+  public function getProgram(string $id): array
+  {
+    return $this->program_repository->getProgram(
+      $id, $this->app_request->isDebugBuildRequest()
+    );
+  }
 }
