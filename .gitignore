@@ -18,11 +18,6 @@ bin/
 ### backups ###
 backups/**
 
-### config ###
-config/packages/parameters.yml
-config/packages/dev/parameters.yml
-config/packages/test/parameters.yml
-
 ### Sass ###
 .sass-cache/
 *.css.map

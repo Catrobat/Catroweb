@@ -715,7 +715,7 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When I upload a program with ":program_attribute", API version :api_version
+   * @When I upload a program with :program_attribute, API version :api_version
    *
    * @param string $api_version The API version to be used
    *
@@ -2037,27 +2037,6 @@ class ApiContext implements KernelAwareContext
   public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1): void
   {
     $this->request_parameters[$arg1] = md5_file($this->request_files[0]->getPathname());
-  }
-
-  /**
-   * @Given /^the registration problem "([^"]*)"$/
-   * @Given /^there is a registration problem ([^"]*)$/
-   *
-   * @param mixed $problem
-   */
-  public function thereIsARegistrationProblem($problem): void
-  {
-    switch ($problem)
-    {
-      case 'no password given':
-        $this->method = 'POST';
-        $this->url = '/app/api/loginOrRegister/loginOrRegister.json';
-        $this->request_parameters['registrationUsername'] = 'Someone';
-        $this->request_parameters['registrationEmail'] = 'someone@pocketcode.org';
-        break;
-      default:
-        throw new PendingException('No implementation of case "'.$problem.'"');
-    }
   }
 
   /**

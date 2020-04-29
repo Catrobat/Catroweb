@@ -39,9 +39,7 @@ add('shared_files',
   [
     '.env.local',
     '.env.prod.local',
-    '.env.dev.local',
-    'config/packages/parameters.yml',
-    'config/packages/dev/parameters.yml',
+    '.env.dev.local'
   ]);
 
 // Symfony writable dirs

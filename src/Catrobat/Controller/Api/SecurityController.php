@@ -16,8 +16,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -43,82 +41,6 @@ class SecurityController extends AbstractController
       'answer' => $translator->trans('success.token', [], 'catroweb'),
       'preHeaderMessages' => "  \n",
     ]);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register",
-   * defaults={"_format": "json"}, methods={"POST"})
-   */
-  public function loginOrRegisterAction(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
-                                        TranslatorInterface $translator, UserAuthenticator $user_authenticator,
-                                        ValidatorInterface $validator): JsonResponse
-  {
-    $retArray = [];
-
-    $this->signInLdapUser($request, $retArray, $user_authenticator, $translator);
-    if (array_key_exists('statusCode', $retArray) &&
-      (StatusCode::OK === $retArray['statusCode'] || StatusCode::LOGIN_ERROR === $retArray['statusCode']))
-    {
-      return JsonResponse::create($retArray);
-    }
-
-    $create_request = new CreateUserRequest($request);
-
-    $violations = $validator->validate($create_request);
-    foreach ($violations as $violation)
-    {
-      $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
-      if ('errors.password.short' == $violation->getMessageTemplate())
-      {
-        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-      }
-      elseif ('errors.email.invalid' == $violation->getMessageTemplate())
-      {
-        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
-      }
-      $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
-
-      break;
-    }
-
-    if (0 == count($violations))
-    {
-      if (null != $user_manager->findUserByEmail($create_request->mail))
-      {
-        $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
-        $retArray['answer'] = $translator->trans('errors.email.exists', [], 'catroweb');
-      }
-      else
-      {
-        /** @var User $user */
-        $user = $user_manager->createUser();
-        $user->setUsername($create_request->username);
-        $user->setEmail($create_request->mail);
-        $user->setPlainPassword($create_request->password);
-        $user->setEnabled(true);
-        $user->setUploadToken($token_generator->generateToken());
-        $user->setCountry($create_request->country);
-
-        $violations = $validator->validate($user);
-        if (count($violations) > 0)
-        {
-          $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-          $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
-        }
-        else
-        {
-          $user_manager->updateUser($user);
-          $retArray['statusCode'] = 201;
-          $retArray['answer'] = $translator->trans('success.registration', [], 'catroweb');
-          $retArray['token'] = $user->getUploadToken();
-        }
-      }
-    }
-    $retArray['preHeaderMessages'] = '';
-
-    return JsonResponse::create($retArray);
   }
 
   /**
@@ -229,17 +151,8 @@ class SecurityController extends AbstractController
 
       if (null === $user)
       {
-        $this->signInLdapUser($request, $retArray, $user_authenticator, $translator);
-        if (array_key_exists('statusCode', $retArray) &&
-          (StatusCode::OK === $retArray['statusCode']
-            || StatusCode::LOGIN_ERROR === $retArray['statusCode']
-            || StatusCode::USERNAME_NOT_FOUND === $retArray['statusCode']
-          ))
-        {
-          return JsonResponse::create($retArray);
-        }
-        $retArray['statusCode'] = StatusCode::USER_USERNAME_INVALID;
-        $retArray['answer'] = $translator->trans('errors.username.exists', [], 'catroweb');
+        $retArray['statusCode'] = StatusCode::USERNAME_NOT_FOUND;
+        $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
       }
       else
       {
@@ -256,11 +169,6 @@ class SecurityController extends AbstractController
         }
         else
         {
-          $this->signInLdapUser($request, $retArray, $user_authenticator, $translator);
-          if (array_key_exists('statusCode', $retArray) && (StatusCode::OK === $retArray['statusCode'] || StatusCode::LOGIN_ERROR === $retArray['statusCode']))
-          {
-            return JsonResponse::create($retArray);
-          }
           $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
           $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
         }
@@ -386,7 +294,7 @@ class SecurityController extends AbstractController
   public function getGoogleAppId(): JsonResponse
   {
     $retArray = [];
-    $retArray['gplus_appid'] = $this->getParameter('google_app_id');
+    $retArray['gplus_appid'] = getenv('GOOGLE_CLIENT_ID');
 
     return JsonResponse::create($retArray);
   }
@@ -417,40 +325,6 @@ class SecurityController extends AbstractController
   public function deleteOAuthTestUserAccounts(): JsonResponse
   {
     return $this->getOAuthService()->deleteOAuthTestUserAccounts();
-  }
-
-  private function signInLdapUser(Request $request, array &$retArray, UserAuthenticator $authenticator, TranslatorInterface $translator): JsonResponse
-  {
-    $token = null;
-    $username = $request->request->get('registrationUsername');
-
-    try
-    {
-      $token = $authenticator->authenticate($username, $request->request->get('registrationPassword'));
-      $retArray['statusCode'] = StatusCode::OK;
-      /** @var User|null $user */
-      $user = $token->getUser();
-      $retArray['token'] = $user->getUploadToken();
-      $retArray['preHeaderMessages'] = '';
-    }
-    catch (UsernameNotFoundException $usernameNotFoundException)
-    {
-      $retArray['statusCode'] = StatusCode::USERNAME_NOT_FOUND;
-      $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
-      $retArray['preHeaderMessages'] = '';
-
-      return JsonResponse::create($retArray);
-    }
-    catch (AuthenticationException $authenticationException)
-    {
-      $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-      $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
-      $retArray['preHeaderMessages'] = '';
-
-      return JsonResponse::create($retArray);
-    }
-
-    return JsonResponse::create($retArray);
   }
 
   private function getOAuthService(): OAuthService

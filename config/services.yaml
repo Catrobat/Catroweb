@@ -38,13 +38,6 @@ parameters:
   catrobat.upload.temp.dir:             "%catrobat.pubdir%resources/tmp/uploads/"
   catrobat.upload.temp.path:            "resources/tmp/uploads/"
 
-  ldap_role_mappings:
-    ROLE_MEDIAPACKAGE:  "Webserver-MediaPackageMaintainers"
-    ROLE_FEATURED:      "Webserver-FeaturedProgramsMaintainers"
-    ROLE_APPROVE:       "Webserver-AppApprovers"
-    ROLE_SUPER_ADMIN:   "Webserver-Administrators"
-    ROLE_GAMEJAM_ADMIN: "Webserver-GameJam-Administrators"
-
   #      This can drastically improve DX by reducing the time to load classes
   container.dumper.inline_class_loader: true
 

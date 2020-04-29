@@ -414,7 +414,7 @@
 	<!-- see http://php.net/manual/en/migration53.deprecated.php -->
 	<!-- ******************* -->
 
-	<!-- Replace deprecated methods -->
+	<!-- Replace api-deprecated methods -->
 	<test name="checkDeprecation">
 		<deprecated old="call_user_method" new="call_user_func"
 			version="4.1" />
@@ -491,7 +491,7 @@
 	<!-- PHP Aliases -->
 	<!-- ******************* -->
 
-	<!-- Replace deprecated methods -->
+	<!-- Replace api-deprecated methods -->
 	<test name="checkAliases">
 		<alias old="chop" new="rtrim()" />
 		<alias old="close" new="closedir()" />

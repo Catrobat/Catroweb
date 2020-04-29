@@ -1,0 +1,6 @@
+parameters:
+    jenkins:
+        url: '%env(resolve:JENKINS_URL)%'
+        job: '%env(resolve:JENKINS_JOB)%'
+        token: '%env(resolve:JENKINS_TOKEN)%'
+        uploadtoken: '%env(resolve:JENKINS_UPLOAD_TOKEN)%'

@@ -103,14 +103,8 @@ jobs:
       matrix:
         testSuite:
           - admin
-          - api-authentication
-          - api-media-package
-          - api-user
-          - api-projects
-          - deprecated-api-general
-          - deprecated-api-profile
-          - deprecated-api-project
-          - deprecated-api-upload
+          - api
+          - api-deprecated
           - ci
           - flavor
           - web-general
