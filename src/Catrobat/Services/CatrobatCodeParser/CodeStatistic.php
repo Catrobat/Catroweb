@@ -271,9 +271,6 @@ class CodeStatistic
       case Constants::DATA_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'dataBricks');
         break;
-      case Constants::YOUR_BRICK_IMG:
-        $this->updateBrickTypeStatistic($brick->getType(), 'yourBricks');
-        break;
       case Constants::UNKNOWN_BRICK_IMG:
       case Constants::DEPRECATED_BRICK_IMG:
       case Constants::UNKNOWN_SCRIPT_IMG:
