@@ -21,7 +21,6 @@
         "doctrine/doctrine-migrations-bundle": "^2.1",
         "doctrine/orm": "^2.7",
         "eightpoints/guzzle-bundle": "^8.0",
-        "fr3d/ldap-bundle": "^4.0",
         "friendsofsymfony/jsrouting-bundle": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.7",
         "google/apiclient": "^2.4",

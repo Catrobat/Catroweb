@@ -87,11 +87,6 @@ services:
     arguments:
       - "%jenkins%"
 
-  # ======== Overwriting the ldap driver
-
-  fr3d_ldap.ldap_driver:
-    class: App\Catrobat\Services\TestEnv\LdapTestDriver
-
   # ========
 
   App\Catrobat\Services\CatrobatFileExtractor:
