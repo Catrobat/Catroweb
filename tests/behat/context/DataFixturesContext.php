@@ -257,6 +257,34 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Given /^there are starter programs with name "([^"]*)", alias "([^"]*)" and order (\d+):$/
+   *
+   * @param mixed $category_name
+   * @param mixed $category_alias
+   * @param mixed $order
+   *
+   * @throws Exception
+   */
+  public function thereAreStarterProgramsWithNameAndAliasAndOrder($category_name, $category_alias, $order, TableNode $table): void
+  {
+    $em = $this->getManager();
+
+    $starter = new StarterCategory();
+    $starter->setName($category_name);
+    $starter->setAlias($category_alias);
+    $starter->setOrder($order);
+
+    $programs = $table->getHash();
+    foreach ($programs as $config)
+    {
+      $program = $this->insertProject($config);
+      $starter->addProgram($program);
+    }
+    $em->persist($starter);
+    $em->flush();
+  }
+
+  /**
    * @Given /^there are programs with a large description:$/
    * @Given /^there are projects with a large description:$/
    *
