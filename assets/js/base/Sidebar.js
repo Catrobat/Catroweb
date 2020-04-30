@@ -56,7 +56,7 @@ function manageNotificationsDropdown () {
   }
 
   notificationDropdownToggler.addEventListener('click', function () {
-    notificationDropdownContent.style.maxHeight ? collapseNotificationDropdownMenu() : expandNotificationDropdownMenu()
+    notificationDropdownContent.classList.contains('shown') ? collapseNotificationDropdownMenu() : expandNotificationDropdownMenu()
   })
 
   // automatically expand the notification dropdown when the user is on a notification page
@@ -79,7 +79,7 @@ function expandNotificationDropdownMenu () {
   const notificationDropdownArrow = document.getElementById('notifications-dropdown-arrow')
   const notificationDropdownContent = document.getElementById('notifications-dropdown-content')
 
-  notificationDropdownContent.style.maxHeight = notificationDropdownContent.scrollHeight + 'px'
+  notificationDropdownContent.classList.add('shown')
   notificationDropdownArrow.classList.remove('fa-caret-left')
   notificationDropdownArrow.classList.add('fa-caret-down')
 
@@ -93,7 +93,7 @@ function collapseNotificationDropdownMenu () {
   const notificationDropdownArrow = document.getElementById('notifications-dropdown-arrow')
   const notificationDropdownContent = document.getElementById('notifications-dropdown-content')
 
-  notificationDropdownContent.style.maxHeight = null
+  notificationDropdownContent.classList.remove('shown')
   notificationDropdownArrow.classList.remove('fa-caret-down')
   notificationDropdownArrow.classList.add('fa-caret-left')
 

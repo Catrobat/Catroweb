@@ -334,8 +334,8 @@ Feature: Reactions to projects "likes"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I open the menu
-    Then the element "#project-navigation .user-notification-badge" should be visible
-    And the "#project-navigation .user-notification-badge" element should contain "1"
+    Then the element "#project-navigation #notifications-dropdown-toggler .badge-pill" should be visible
+    And the "#project-navigation #notifications-dropdown-toggler .badge-pill" element should contain "1"
     When I am on "/app/notifications/likes"
     And I wait for the page to be loaded
     Then I should see 1 "#new-notifications-container .notification-container"
@@ -356,8 +356,8 @@ Feature: Reactions to projects "likes"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I open the menu
-    Then the element "#project-navigation .user-notification-badge" should be visible
-    And the "#project-navigation .user-notification-badge" element should contain "2"
+    Then the element "#project-navigation #notifications-dropdown-toggler .badge-pill" should be visible
+    And the "#project-navigation #notifications-dropdown-toggler .badge-pill" element should contain "2"
     When I am on "/app/notifications/likes"
     And I wait for the page to be loaded
     Then I should see 2 "#new-notifications-container .notification-container"

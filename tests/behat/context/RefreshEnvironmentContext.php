@@ -2,6 +2,7 @@
 
 namespace Tests\behat\context;
 
+use App\Catrobat\Commands\Helpers\CommandHelper;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
 use App\Catrobat\Services\TestEnv\SymfonySupport;
@@ -26,6 +27,8 @@ class RefreshEnvironmentContext implements KernelAwareContext
    * Since we don't need to recreate the whole database for every suite we will define a preparation suite
    * in behat.yml. This preparation suite will use this hook to prepare the test database.
    *
+   * Additionally, all test files are generated.
+   *
    * @throws ToolsException
    */
   public static function prepare(): void
@@ -39,6 +42,10 @@ class RefreshEnvironmentContext implements KernelAwareContext
     $tool = new SchemaTool($em);
     $tool->dropSchema($metaData);
     $tool->createSchema($metaData);
+
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [], 'Generating test data'
+    );
   }
 
   /**

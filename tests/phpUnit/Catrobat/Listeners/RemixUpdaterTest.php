@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -74,7 +74,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_updater = new RemixUpdater($this->remix_manager, $this->async_http_client, $router, '.');
 
     $filesystem = new Filesystem();
-    $filesystem->mirror(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/', ClearCacheHook::$CACHE_DIR.'base/');
+    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', RefreshTestEnvHook::$CACHE_DIR.'base/');
 
     $user = $this->createMock(User::class);
 
@@ -103,8 +103,8 @@ class RemixUpdaterTest extends TestCase
   public function testSavesTheNewUrlToXml(): void
   {
     $expected_url = 'http://share.catrob.at/details/3571';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
 
     $this->program_entity
       ->expects($this->atLeastOnce())
@@ -145,7 +145,7 @@ class RemixUpdaterTest extends TestCase
 
     $this->remix_updater->update($file, $this->program_entity);
 
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     Assert::assertEquals($xml->header->url->__toString(), $expected_url);
   }
 
@@ -161,13 +161,13 @@ class RemixUpdaterTest extends TestCase
     $expected_scratch_ids = [$first_expected_scratch_id, $second_expected_scratch_id];
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/'.$first_expected_scratch_id
         .'], Scratch 2 [https://scratch.mit.edu/projects/'.$second_expected_scratch_id.']';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->catrobatLanguageVersion = '0.993';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $expected_scratch_info = [
@@ -217,13 +217,13 @@ class RemixUpdaterTest extends TestCase
     $second_expected_scratch_id = '70058680';
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/'.$first_expected_scratch_id
         .'], Scratch 2 [https://scratch.mit.edu/projects/'.$second_expected_scratch_id.']';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->catrobatLanguageVersion = '0.992';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
@@ -256,13 +256,13 @@ class RemixUpdaterTest extends TestCase
     $expected_already_existing_scratch_programs = [$first_expected_scratch_id];
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/'.$first_expected_scratch_id
         .'], Scratch 2 [https://scratch.mit.edu/projects/'.$second_expected_scratch_id.']';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->catrobatLanguageVersion = '0.993';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'/base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $expected_scratch_info = [['id' => $second_expected_scratch_id, 'creator' => ['username' => 'bubble103']]];
@@ -309,11 +309,11 @@ class RemixUpdaterTest extends TestCase
         .'マックスとリンゴがあるぞ！◆自由にリミックス（改造）して、遊んでください！面白い作品ができたら、'
         .'こちらまで投稿を！http://www.nhk.or.jp/xxx※リミックス作品を投稿する時は”共有”を忘れないでね。',
     ]];
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->catrobatLanguageVersion = '0.993';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
@@ -372,16 +372,16 @@ class RemixUpdaterTest extends TestCase
   {
     $current_url = 'http://share.catrob.at/details/3570';
     $new_url = 'http://share.catrob.at/details/3571';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'/base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->remix_updater->update($file, $this->program_entity);
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     Assert::assertEquals($xml->header->url, $new_url);
     Assert::assertEquals($xml->header->remixOf, $current_url);
   }
@@ -395,12 +395,12 @@ class RemixUpdaterTest extends TestCase
     $expected_scratch_program_id = '70058680';
     $current_url = 'https://scratch.mit.edu/projects/'.$expected_scratch_program_id;
     $new_url = 'http://share.catrob.at/details/3571';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'/base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client->expects($this->atLeastOnce())->method('fetchScratchProgramDetails')->with([])->willReturn([]);
@@ -413,7 +413,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
     $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
     $this->remix_updater->update($file, $this->program_entity);
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     Assert::assertEquals($xml->header->url, $new_url);
     Assert::assertEquals($xml->header->remixOf, $current_url);
   }
@@ -429,11 +429,11 @@ class RemixUpdaterTest extends TestCase
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/'.$first_expected_scratch_id
         .'], Scratch 2 [https://scratch.mit.edu/projects/'.$second_expected_scratch_id.']';
     $new_url = 'http://share.catrob.at/details/3571';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->catrobatLanguageVersion = '0.993';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $this->async_http_client
       ->expects($this->atLeastOnce())
       ->method('fetchScratchProgramDetails')->with($this->isType('array'))
@@ -447,12 +447,12 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchPrograms')->with([]);
     $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
     $this->remix_updater->update($file, $this->program_entity);
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     Assert::assertEquals($xml->header->url, $new_url);
     Assert::assertEquals($xml->header->remixOf, $current_url);
   }
@@ -464,16 +464,16 @@ class RemixUpdaterTest extends TestCase
   public function testUpdateTheRemixOfOfTheEntity(): void
   {
     $current_url = 'http://share.catrob.at/details/3570';
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'/base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
 
-    $file = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->remix_updater->update($file, $this->program_entity);
-    $xml = simplexml_load_file(ClearCacheHook::$CACHE_DIR.'base/code.xml');
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     Assert::assertEquals($xml->header->userHandle, 'catroweb');
   }
 }

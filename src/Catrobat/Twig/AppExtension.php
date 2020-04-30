@@ -131,7 +131,16 @@ class AppExtension extends AbstractExtension
       new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
       new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
       new TwigFunction('assetExists', [$this, 'assetExists']),
+      new TwigFunction('isVersionSupportedByCatBlocks', [$this, 'isVersionSupportedByCatBlocks']),
     ];
+  }
+
+  public function isVersionSupportedByCatBlocks(string $version): bool
+  {
+    $MIN_VERSION_SUPPORTED = '0.994';
+    $EPSILON = 0.0000001;
+
+    return floatval($MIN_VERSION_SUPPORTED) - floatval($version) < $EPSILON;
   }
 
   public function getName(): string
@@ -296,6 +305,8 @@ class AppExtension extends AbstractExtension
       case 'png':
       case 'gif':
         return $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension());
+      case 'catrobat':
+        return $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension());
       default:
         return null;
     }

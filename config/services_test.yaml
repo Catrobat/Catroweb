@@ -3,6 +3,7 @@
 
 parameters:
   catrobat.file.extract.dir:   "%catrobat.pubdir%resources_test/extract/"
+  catrobat.file.extract.path:  "resources_test/extract/"
   catrobat.file.storage.dir:   "%catrobat.pubdir%resources_test/projects/"
   catrobat.screenshot.dir:     "%catrobat.pubdir%resources_test/screenshots/"
   catrobat.screenshot.path:    "resources_test/screenshots/"
@@ -13,6 +14,9 @@ parameters:
   catrobat.apk.dir:            "%catrobat.pubdir%resources_test/apk/"
   catrobat.mediapackage.dir:   "%catrobat.pubdir%resources_test/mediapackage/"
   catrobat.mediapackage.path:  "resources_test/mediapackage/"
+  catrobat.mediapackage.font.dir:  "%catrobat.pubdir%webfonts/fa-solid-900.ttf"
+  catrobat.mediapackage.font.path: "webfonts/fa-solid-900.ttf"
+  catrobat.tests.upld-dwnld-dir: "tests/testdata/UploadDownloadTemp"
   catrobat.backup.dir:         "%catrobat.pubdir%resources_test/backups/"
   catrobat.snapshot.dir:       "%catrobat.pubdir%resources_test/snapshots/"
   catrobat.logs.dir:           "%kernel.project_dir%/tests/testdata/DataFixtures/GeneratedFixtures/log/"
@@ -83,18 +87,14 @@ services:
     arguments:
       - "%jenkins%"
 
-  # ======== Overwriting the ldap driver
-
-  fr3d_ldap.ldap_driver:
-    class: App\Catrobat\Services\TestEnv\LdapTestDriver
-
   # ========
 
   App\Catrobat\Services\CatrobatFileExtractor:
     class: App\Catrobat\Services\CatrobatFileExtractor
     arguments:
-      - "%catrobat.test.directory.target%"
+      - "%catrobat.file.extract.dir%"
       - "%catrobat.file.extract.path%"
+    public: true
 
   # ======== Data fixtures helper services
   App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures:

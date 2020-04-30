@@ -177,9 +177,6 @@
     "firebase/php-jwt": {
         "version": "v5.1.0"
     },
-    "fr3d/ldap-bundle": {
-        "version": "v4.0.0"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -323,23 +320,11 @@
     "namshi/jose": {
         "version": "7.2.3"
     },
-    "nette/application": {
-        "version": "v3.0.4"
-    },
-    "nette/component-model": {
-        "version": "v3.0.0"
-    },
     "nette/finder": {
         "version": "v2.5.2"
     },
-    "nette/http": {
-        "version": "v3.0.3"
-    },
     "nette/robot-loader": {
         "version": "v3.2.3"
-    },
-    "nette/routing": {
-        "version": "v3.0.0"
     },
     "nette/utils": {
         "version": "v3.1.1"
@@ -471,6 +456,9 @@
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
@@ -977,8 +965,5 @@
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"
-    },
-    "zendframework/zend-ldap": {
-        "version": "2.10.1"
     }
 }

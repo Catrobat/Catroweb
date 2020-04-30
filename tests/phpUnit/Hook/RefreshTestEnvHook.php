@@ -2,11 +2,13 @@
 
 namespace Tests\phpUnit\Hook;
 
+use App\Catrobat\Commands\Helpers\CommandHelper;
+use PHPUnit\Runner\BeforeFirstTestHook;
 use PHPUnit\Runner\BeforeTestHook;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-class ClearCacheHook implements BeforeTestHook
+class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
 {
   public static string $CACHE_DIR;
 
@@ -19,6 +21,13 @@ class ClearCacheHook implements BeforeTestHook
     self::$CACHE_DIR = 'tests/testdata/Cache/';
     self::$FIXTURES_DIR = 'tests/testdata/DataFixtures/';
     self::$GENERATED_FIXTURES_DIR = self::$FIXTURES_DIR.'GeneratedFixtures/';
+  }
+
+  public function executeBeforeFirstTest(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [], 'Generating test data'
+    );
   }
 
   public function executeBeforeTest(string $test): void

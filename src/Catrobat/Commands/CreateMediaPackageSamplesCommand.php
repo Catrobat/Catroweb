@@ -68,19 +68,19 @@ class CreateMediaPackageSamplesCommand extends Command
 
     // Creating MediaPackageCategory Animals and filling it with MediaPackageFiles
     $category_pocket_family = $this->media_package_category_repo->createMediaPackageCategory('Pocket Family', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Penguin', new File($sample_pckg_path.'Looks/Pocket Family/Penguin.jpeg'), $category_pocket_family, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Elephant', new File($sample_pckg_path.'Looks/Pocket Family/Elephant.jpeg'), $category_pocket_family, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Panda', new File($sample_pckg_path.'Looks/Pocket Family/Panda.jpeg'), $category_pocket_family, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Penguin', new File($sample_pckg_path.'Looks/Pocket Family/Penguin.png'), $category_pocket_family, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Elephant', new File($sample_pckg_path.'Looks/Pocket Family/Elephant.png'), $category_pocket_family, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Panda', new File($sample_pckg_path.'Looks/Pocket Family/Panda.png'), $category_pocket_family, 'pocketcode', 'Catrobat');
 
     // Creating MediaPackageCategory People and filling it with MediaPackageFiles
     $category_people = $this->media_package_category_repo->createMediaPackageCategory('People', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Boy', new File($sample_pckg_path.'Looks/People/Boy.jpeg'), $category_people, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Girl', new File($sample_pckg_path.'Looks/People/Girl.jpeg'), $category_people, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Boy', new File($sample_pckg_path.'Looks/People/Boy.png'), $category_people, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Girl', new File($sample_pckg_path.'Looks/People/Girl.png'), $category_people, 'pocketcode', 'Catrobat');
 
     // Creating MediaPackageCategory Luna and filling it with MediaPackageFiles
     $category_luna = $this->media_package_category_repo->createMediaPackageCategory('ThemeSpecial Luna & Cat', new ArrayCollection([$package_looks]));
     $this->media_package_file_repo->createMediaPackageFile('Luna Cat', new File($sample_pckg_path.'Looks/Luna/Luna-Cat.png'), $category_luna, 'luna', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Luna Girl', new File($sample_pckg_path.'Looks/Luna/Luna-Girl.jpeg'), $category_luna, 'luna', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Luna Girl', new File($sample_pckg_path.'Looks/Luna/Luna-Girl.png'), $category_luna, 'luna', 'Catrobat');
 
     /*
      * Creating MediaPackage Sounds
@@ -94,8 +94,18 @@ class CreateMediaPackageSamplesCommand extends Command
 
     // Creating MediaPackageCategory Machines and filling it with MediaPackageFiles
     $category_machine_sounds = $this->media_package_category_repo->createMediaPackageCategory('Machines', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Plane', new File($sample_pckg_path.'Sounds/Machines/plane.mpga'), $category_machine_sounds, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Ufo', new File($sample_pckg_path.'Sounds/Machines/ufo.wav'), $category_machine_sounds, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Plane', new File($sample_pckg_path.'Sounds/Machines/Plane.mpga'), $category_machine_sounds, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Ufo', new File($sample_pckg_path.'Sounds/Machines/Ufo.wav'), $category_machine_sounds, 'pocketcode', 'Catrobat');
+
+    /*
+     * Creating MediaPackage Objects
+     */
+    $package_objects = $this->media_package_repo->createMediaPackage('Objects', 'Objects');
+    // Creating MediaPackageCategory Miscellaneous and filling it with MediaPackageFiles
+    $category_miscellaneous = $this->media_package_category_repo->createMediaPackageCategory('Miscellaneous', new ArrayCollection([$package_objects]));
+    $this->media_package_file_repo->createMediaPackageFile('House', new File($sample_pckg_path.'Objects/Miscellaneous/House.catrobat'), $category_miscellaneous, 'pocketcode', 'Catrobat');
+
+    // Creating MediaPackageCategory Miscellaneous
 
     return 0;
   }

@@ -69,7 +69,7 @@ class ApkController extends CRUDController
       $this->admin->update($program);
     }
 
-    if (0 != (is_countable($objects) ? count($objects) : 0))
+    if (0 != count($objects))
     {
       $this->addFlash('sonata_flash_success', 'All APKs reset');
     }

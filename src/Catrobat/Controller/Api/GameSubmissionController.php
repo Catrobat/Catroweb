@@ -68,7 +68,7 @@ class GameSubmissionController extends AbstractController
     $limit = (int) $request->query->get('limit', 20);
 
     $all_samples = $game_jam->getSamplePrograms();
-    $count = is_countable($all_samples) ? count($all_samples) : 0;
+    $count = count($all_samples);
     $returning_samples = null;
 
     for ($j = 0, $i = $offset; $i < $count && $i < $limit; $j++, $i++)

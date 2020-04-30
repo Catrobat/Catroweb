@@ -64,7 +64,7 @@ class CreateLikeCommand extends Command
 
     if (null === $program || null === $user)
     {
-      $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
+      $output->writeln('Liking '.$program_name.' with user '.$user_name.' failed');
 
       return -1;
     }

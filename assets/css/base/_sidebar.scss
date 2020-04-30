@@ -1,11 +1,12 @@
+@import 'mixins';
+
 $sidebar-width: 250px;
 
-#sidebar
-{
+#sidebar {
   width: $sidebar-width;
   height: 100vh;
   position: fixed;
-  background: white;
+  background: #fff;
   top: 0;
   left: ($sidebar-width * -1) - 50px;
   /* top layer */
@@ -15,8 +16,7 @@ $sidebar-width: 250px;
   overflow-y: auto;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 
-  &.active
-  {
+  &.active {
     left: 0;
   }
 
@@ -30,10 +30,8 @@ $sidebar-width: 250px;
     background-size: contain;
   }
 
-  li
-  {
-    a
-    {
+  li {
+    a {
       display: block;
       text-decoration: none;
       color: #222;
@@ -42,37 +40,98 @@ $sidebar-width: 250px;
       padding-top: 1rem;
       padding-bottom: 1rem;
 
-      &:hover
-      {
+      &.nav-link {
+        cursor: pointer;
+      }
+
+      &:hover {
         text-decoration: none;
         background: rgba(0, 0, 0, 0.2);
       }
 
-      &:active, &:focus
-      {
+      &:active, &:focus {
         text-decoration: none;
       }
 
-      .user-notification-badge {
-        display: none;
+      .link-icon {
+        margin-right: 0.25rem;
+        display: inline-block;
+        width: 1.3rem;
+        text-align: center;
       }
-      .user-notification-badge-dropdown
-      {
+    }
+  }
+
+  #notifications-dropdown-toggler {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-items: flex-start;
+
+    .text {
+      @include force-word-break();
+      flex-grow: 1;
+      padding-left: 0.3rem;
+    }
+
+    #notifications-dropdown-arrow, .badge-pill {
+      margin-left: 0.25rem;
+    }
+
+    #notifications-dropdown-arrow {
+      width: 0.9rem;
+      text-align: center;
+    }
+
+    .badge-pill {
+      display: none;
+    }
+  }
+
+  #notifications-dropdown-content {
+    overflow: hidden;
+    transition: height 0.4s ease-out;
+
+    &:not(.shown) {
+      height: 0;
+    }
+
+    > .nav-link {
+      padding-left: 1.7rem;
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      justify-items: flex-start;
+
+      .fa, .fas, .far, .fab, .fad {
+        font-size: 1.1rem;
+      }
+
+      .text {
+        @include force-word-break();
+        flex-grow: 1;
+        max-width: calc(100% - 3rem);
+      }
+
+      .badge-pill {
+        margin-left: 0.25rem;
         display: none;
+        font-size: 1rem;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
       }
     }
   }
 
   @include media-breakpoint-up(md) {
-    &:not(.inactive)
-    {
+    &:not(.inactive) {
       left: 0;
     }
   }
 }
 
 @include media-breakpoint-up(md) {
-  body.new-nav .container {
+  body.new-nav .body-content {
     padding-left: 15px + $sidebar-width;
   }
 
@@ -81,8 +140,7 @@ $sidebar-width: 250px;
   }
 }
 
-#sidebar-overlay
-{
+#sidebar-overlay {
   display: none;
   position: fixed;
   /* full screen */
@@ -99,39 +157,8 @@ $sidebar-width: 250px;
   transition: all 0.5s ease-in-out;
 }
 
-#sidebar.active + #sidebar-overlay
-{
+#sidebar.active + #sidebar-overlay {
   display: block;
   opacity: 1;
-}
-
-.collapsible
-{
-  cursor: pointer;
-}
-
-.caret-icon
-{
- float:right;
-}
-
-#btn-notifications
-{
-  margin-left: 11px;
-}
-
-.user-notification-badge-dropdown
-{
-font-size: 15px;
-}
-
-.notifications-dropdown-content
-{
-
-  max-height: 0;
-  overflow: hidden;
-  background-color: white;
-  transition: max-height 0.4s ease-out;
-
 }
 

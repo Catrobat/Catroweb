@@ -698,6 +698,26 @@ class ProgramRepository extends ServiceEntityRepository
     ;
   }
 
+  public function getProgram(string $program_id, bool $debug_build): array
+  {
+    $query_builder = $this->createQueryBuilder('e');
+
+    $query_builder
+      ->where($query_builder->expr()->eq('e.id',
+        $query_builder->expr()->literal($program_id)))
+      ->andWhere($query_builder->expr()->eq('e.visible',
+        $query_builder->expr()->literal(true)))
+    ;
+
+    $query_builder = $this->addPrivacyCheckCondition($query_builder);
+    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
+
+    return $query_builder
+      ->getQuery()
+      ->getResult()
+      ;
+  }
+
   public function getProgramDataByIds(array $program_ids, bool $debug_build): array
   {
     $query_builder = $this->createQueryBuilder('p');

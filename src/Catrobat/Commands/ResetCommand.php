@@ -55,7 +55,7 @@ class ResetCommand extends Command
 
     // Setting up the project permissions
     CommandHelper::executeShellCommand(
-        ['sh', 'docker/app/set-permissions.sh'], [], 'Setting up permissions', $output
+        ['sh', 'docker/app/set-permissions.sh'], ['timeout' => 320], 'Setting up permissions', $output
     );
 
     // Rebuild the database
@@ -102,12 +102,6 @@ class ResetCommand extends Command
     // SetUp Acl
     CommandHelper::executeShellCommand(
         ['bin/console', 'sonata:admin:setup-acl'], [], 'Set up Sonata admin ACL', $output
-    );
-
-    // Generate test data
-    CommandHelper::executeShellCommand(
-        ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [],
-      'Generating test data', $output
     );
 
     // Clear caches

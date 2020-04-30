@@ -17,7 +17,7 @@ Feature: Admin Upload Notification
       | User2    | 0      | 1      | 0       |
     And I activate the Profiler
 
-    When I upload a program with valid parameters
+    When I upload this generated program, API version 1
     Then I should see 2 outgoing emails
     And I should see a email with recipient "admin@catrob.at"
     And I should see a email with recipient "dog@catrob.at"

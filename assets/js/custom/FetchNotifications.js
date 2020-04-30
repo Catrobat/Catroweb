@@ -13,7 +13,7 @@ function FetchNotifications (countNotificationsUrl, maxAmountToFetch, refreshRat
       type: 'get',
       success: function (data) {
         for (const notificationType in data.count) {
-          const userNotificationBadge = $('.' + notificationType)
+          const userNotificationBadge = $('#sidebar-notifications .badge-pill.' + notificationType)
           const numOfNotifications = data.count[notificationType]
           if (numOfNotifications > 0) {
             const text = (numOfNotifications <= self.maxAmountToFetch)

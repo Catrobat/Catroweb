@@ -827,7 +827,8 @@ codeview:
   sounds:  'sounds'
   globals:  'globals'
   locals:  'locals'
-
+  globalVariables: 'global variables'
+  localVariables: 'local variables'
   eventBricks: 'Event Bricks'
   controlBricks: 'Control Bricks'
   motionBricks: 'Motion Bricks'
@@ -836,6 +837,20 @@ codeview:
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
+
+codeStatistics:
+  title: "Code Statistics"
+  error: "Code Statistics can't be displayed."
+  general: 'General'
+  bricks: 'Bricks'
+  eventBricks: 'Event'
+  controlBricks: 'Control'
+  motionBricks: 'Motion'
+  soundBricks: 'Sound'
+  looksBricks: 'Looks'
+  penBricks: 'Pen'
+  dataBricks: 'Data'
+  specialBricks: 'Special'
 
 footer:
   usefulLinks: Useful Links
@@ -915,6 +930,10 @@ media-packages:
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
+  search-input-description: Search Media Library ...
+  search-results : Media Library Search Results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: SAVE
 
 flavor:
   pocketcode: Pocket Code

@@ -426,7 +426,7 @@ class OAuthService
   private function connectGoogleUserToExistingUserAccount(Request $request, array &$retArray, User $user, $googleId, string $googleUsername, string $locale): void
   {
     $violations = $this->validateOAuthUser($request, $retArray);
-    if (0 === (is_countable($violations) ? count($violations) : 0))
+    if (0 === count($violations))
     {
       if ('' === $user->getUsername())
       {
@@ -455,8 +455,8 @@ class OAuthService
                                       string $locale, ?string $access_token = null, ?string $refresh_token = null, ?string $id_token = null): void
   {
     $violations = $this->validateOAuthUser($request, $retArray);
-    $retArray['violations'] = is_countable($violations) ? count($violations) : 0;
-    if (0 == (is_countable($violations) ? count($violations) : 0))
+    $retArray['violations'] = count($violations);
+    if (0 == count($violations))
     {
       /** @var User $user */
       $user = $this->user_manager->createUser();

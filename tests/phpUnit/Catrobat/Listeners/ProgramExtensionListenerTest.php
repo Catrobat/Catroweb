@@ -10,7 +10,7 @@ use App\Repository\ExtensionRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
-use Tests\phpUnit\Hook\ClearCacheHook;
+use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
@@ -40,12 +40,12 @@ class ProgramExtensionListenerTest extends TestCase
     $this->program_extension_listener = new ProgramExtensionListener($extension_repository);
 
     $filesystem = new Filesystem();
-    $filesystem->mirror(ClearCacheHook::$GENERATED_FIXTURES_DIR.'program_with_extensions/', ClearCacheHook::$CACHE_DIR.'program_with_extensions/');
-    $filesystem->mirror(ClearCacheHook::$GENERATED_FIXTURES_DIR.'base/', ClearCacheHook::$CACHE_DIR.'base/');
+    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_extensions/', RefreshTestEnvHook::$CACHE_DIR.'program_with_extensions/');
+    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', RefreshTestEnvHook::$CACHE_DIR.'base/');
 
-    $this->extracted_catrobat_file_without_extensions = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'base/', '', '');
+    $this->extracted_catrobat_file_without_extensions = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '', '');
 
-    $this->extracted_catrobat_file_with_extensions = new ExtractedCatrobatFile(ClearCacheHook::$CACHE_DIR.'program_with_extensions/', '', '');
+    $this->extracted_catrobat_file_with_extensions = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'program_with_extensions/', '', '');
   }
 
   public function testInitialization(): void

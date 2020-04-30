@@ -1,0 +1,88 @@
+<div class="card">
+
+  <div class="card-header d-flex justify-content-between expansion-header" id="statistics" data-toggle="collapse"
+       data-target="#collapseStatistics" aria-expanded="false"
+       aria-controls="collapseStatistics">
+    {{ "codeStatistics.title"|trans({}, "catroweb") }}
+    <i class="fas fa-chevron-left rotate-left"></i>
+  </div>
+
+  <div id="collapseStatistics" class="card-body collapse" aria-labelledby="statistics" data-parent="#programDetails">
+
+    {% if data|default(null) and brick_data|default(null) %}
+      <div class="accordion" id="accordionStatistics">
+        <div class="card">
+
+          <div class="card-header d-flex justify-content-between expansion-header" id="statisticsGeneral"
+               data-toggle="collapse"
+               data-target="#collapseGeneral" aria-expanded="false"
+               aria-controls="collapseGeneral">
+            {{ "codeStatistics.general"|trans({}, "catroweb") }}
+            <i class="fas fa-chevron-left rotate-left"></i>
+          </div>
+
+          <div id="collapseGeneral" class="collapse" aria-labelledby="statisticsGeneral"
+               data-parent="#accordionStatistics">
+            <div class="card-body">
+              <table class="table center table-striped">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, entry in data %}
+                  <tr>
+                    <td>{{ entry['name'] }}</td>
+                    <td id="total-number-of-{{ key }}">{{ entry['total-number'] }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-header collapsed d-flex justify-content-between expansion-header" id="statisticsBricks"
+               data-toggle="collapse" data-target="#collapseBricks" aria-expanded="false"
+               aria-controls="collapseBricks">
+            {{ "codeStatistics.bricks"|trans({}, "catroweb") }}
+            <i class="fas fa-chevron-left rotate-left"></i>
+          </div>
+
+          <div id="collapseBricks" class="collapse" aria-labelledby="statisticsBricks"
+               data-parent="#accordionStatistics">
+            <div class="card-body">
+              <table class="table center table-striped">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>Total</th>
+                  <th>Different</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, entry in brick_data %}
+                  <tr>
+                    <td>{{ entry['name'] }}</td>
+                    <td id="total-number-of-{{ key }}">{{ entry['total-number'] }}</td>
+                    <td id="number-of-different-{{ key }}">{{ entry['different'] }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    {% else %}
+      <div class="card-header">
+        <p>{{ "codeStatistics.error"|trans({}, "catroweb") }}</p>
+      </div>
+    {% endif %}
+
+  </div>
+
+</div>

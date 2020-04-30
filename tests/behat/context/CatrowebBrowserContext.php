@@ -5,9 +5,7 @@ namespace Tests\behat\context;
 use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Catrobat\Services\StatisticsService;
-use App\Catrobat\Services\TestEnv\CheckCatroidRepositoryForNewBricks;
 use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
-use App\Catrobat\Services\TestEnv\LdapTestDriver;
 use App\Catrobat\Services\TokenGenerator;
 use App\Entity\CatroNotification;
 use App\Entity\ClickStatistic;
@@ -136,16 +134,6 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->setOauthServiceParameter('0');
     $this->use_real_oauth_javascript_code = false;
-  }
-
-  /**
-   * @AfterScenario
-   */
-  public function resetLdapTestDriver(): void
-  {
-    /** @var LdapTestDriver $ldap_test_driver */
-    $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
-    $ldap_test_driver->resetFixtures();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -1752,16 +1740,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given all catroid blocks should also be implemented in catroweb
-   *
-   * @throws Exception
-   */
-  public function allCatroidBlocksShouldAlsoBeImplementedInCatroweb(): void
-  {
-    CheckCatroidRepositoryForNewBricks::check();
-  }
-
-  /**
    * @Given I use a valid JWT token for :username
    *
    * @param mixed $username
@@ -2084,35 +2062,6 @@ class CatrowebBrowserContext extends BrowserContext
     $program_manager = $this->getProgramManager();
     $program = $program_manager->find($program_id);
     Assert::assertEquals('null', $program->getDirectoryHash());
-  }
-
-  /**
-   * @Given /^there are LDAP-users:$/
-   */
-  public function thereAreLdapUsers(TableNode $table): void
-  {
-    /** @var LdapTestDriver $ldap_test_driver */
-    $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
-    $ldap_test_driver->resetFixtures();
-    foreach ($table->getHash() as $user)
-    {
-      $username = $user['name'];
-      $pwd = $user['password'];
-      $groups = array_key_exists('groups', $user) ? explode(',', $user['groups']) : [];
-      $ldap_test_driver->addTestUser($username, $pwd, $groups, $user['email'] ?? null);
-    }
-  }
-
-  /**
-   * @Given /^the LDAP server is not available$/
-   */
-  public function theLdapServerIsNotAvailable(): void
-  {
-    /**
-     * @var LdapTestDriver
-     */
-    $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
-    $ldap_test_driver->setThrowExceptionOnSearch(true);
   }
 
   /**

@@ -66,7 +66,7 @@ class ProgramManager
 
   private LoggerInterface $logger;
 
-  private UrlHelper $urlHelper;
+  private ?UrlHelper $urlHelper;
 
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
@@ -817,5 +817,12 @@ class ProgramManager
     arsort($prefLocales);
 
     return $prefLocales;
+  }
+
+  public function getProgram(string $id): array
+  {
+    return $this->program_repository->getProgram(
+      $id, $this->app_request->isDebugBuildRequest()
+    );
   }
 }

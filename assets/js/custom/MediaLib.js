@@ -2,13 +2,18 @@
 /* global Routing */
 
 // eslint-disable-next-line no-unused-vars
-function MediaLib (packageName, flavor, assetsDir) {
+function MediaLib (packageName, mediaSearchPath, flavor, assetsDir) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
     element.parentNode.removeChild(element)
 
-    getPackageFiles(packageName, flavor, assetsDir)
+    // Adding back button on media library search results
+    $('#medialib-header-back-btn').click(function () {
+      window.history.back()
+    })
+
+    getPackageFiles(packageName, mediaSearchPath, flavor, assetsDir)
     const content = $('#content')
     content.find('#thumbsize-control input[type=radio]').change(function () {
       content.attr('size', this.value)
@@ -16,8 +21,32 @@ function MediaLib (packageName, flavor, assetsDir) {
     initTilePinchToZoom()
   })
 
-  function getPackageFiles (packageName, flavor, assetsDir) {
-    const url = Routing.generate('api_media_lib_package_bynameurl', { flavor: flavor, package: packageName }, false)
+  function getPackageFiles (packageName, mediaSearchPath, flavor, assetsDir) {
+    var downloadList = []
+
+    document.getElementById('downloadbar-start-downloads').onclick = function () {
+      for (var i = 0; i < downloadList.length; i++) {
+        medialibDownloadSelectedFile(downloadList[i])
+      }
+      document.getElementById('downloadbar-delete-selection-btn').click()
+    }
+
+    document.getElementById('downloadbar-delete-selection-btn').onclick = function () {
+      for (var i = 0; i < downloadList.length; i++) {
+        document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
+      }
+      downloadList = []
+      hideDownloadbar()
+    }
+
+    var url = null
+
+    if (mediaSearchPath !== '') {
+      url = mediaSearchPath
+    } else {
+      url = Routing.generate('api_media_lib_package_bynameurl', { flavor: flavor, package: packageName }, false)
+    }
+
     $.get(url, {}, pkgFiles => {
       pkgFiles.forEach(file => {
         if (file.flavor !== 'pocketcode' && file.flavor !== flavor) {
@@ -25,10 +54,23 @@ function MediaLib (packageName, flavor, assetsDir) {
         }
 
         const mediafileContainer = $('<a class="mediafile" id="mediafile-' + file.id + '"/>')
-        mediafileContainer.attr('href', file.download_url)
-        mediafileContainer.attr('data-extension', file.extension)
         mediafileContainer.click(function () {
-          medialibOnDownload(this)
+          mediafileContainer.toggleClass('selected')
+          var indexInDownloadList = downloadList.indexOf(file)
+
+          if (indexInDownloadList === -1) {
+            downloadList.push(file)
+          } else {
+            downloadList.splice(indexInDownloadList, 1)
+          }
+
+          document.getElementById('downloadbar-nr-selected').innerText = downloadList.length
+
+          if (downloadList.length > 0) {
+            showDownloadbar()
+          } else {
+            hideDownloadbar()
+          }
         })
 
         if (flavor !== 'pocketcode' && file.flavor === flavor) {
@@ -40,8 +82,10 @@ function MediaLib (packageName, flavor, assetsDir) {
           .replace(/([A-Za-z])([0-9])/g, '$1​$2') // insert zero-width space between letters and numbers
           .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
         mediafileContainer.append($('<div class="name" />').text(name))
+        mediafileContainer.append($('<div class="checkbox fas fa-check-circle" />'))
         mediafileContainer.addClass('showName')
 
+        const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
         let audio, previewBtn, image
         switch (file.extension) {
           case 'adp':
@@ -153,7 +197,7 @@ function MediaLib (packageName, flavor, assetsDir) {
             mediafileContainer.append($('<i class="fas fa-file-archive"/>'))
             break
           default:
-            image = $('<img src="' + assetsDir + 'thumbs/' + file.id + '.jpeg"/>')
+            image = $('<img alt="' + file.id + '" src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
             image.attr('title', file.name)
             image.attr('alt', file.name)
             image.on('error', function () {
@@ -268,16 +312,24 @@ function MediaLib (packageName, flavor, assetsDir) {
   }
 }
 
-function medialibOnDownload (link) {
-  if (link.href !== 'javascript:void(0)') {
-    const downloadHref = link.href
-    link.href = 'javascript:void(0)'
-
-    setTimeout(function () {
-      link.href = downloadHref
-    }, 5000)
-
-    window.location = downloadHref
-  }
+function medialibDownloadSelectedFile (file) {
+  var link = document.createElement('a')
+  link.href = file.download_url
+  link.download = file.name
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
   return false
+}
+
+function showDownloadbar () {
+  document.getElementById('downloadbar').style.display = 'flex'
+  document.getElementById('navbar').style.display = 'none'
+  document.getElementById('searchbar').style.display = 'none'
+}
+
+function hideDownloadbar () {
+  document.getElementById('downloadbar').style.display = 'none'
+  document.getElementById('navbar').style.display = 'inline'
+  document.getElementById('searchbar').style.display = 'inline'
 }

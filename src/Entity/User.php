@@ -7,14 +7,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
-use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user", indexes={@Index(columns={"username"}, flags={"fulltext"})})
  */
-class User extends BaseUser implements LdapUserInterface
+class User extends BaseUser
 {
   /**
    * @ORM\Id
@@ -47,11 +46,6 @@ class User extends BaseUser implements LdapUserInterface
    * @ORM\Column(type="string", nullable=true)
    */
   protected ?string $additional_email = null;
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected ?string $dn = null;
 
   /**
    * Programs owned by this user.
@@ -322,22 +316,6 @@ class User extends BaseUser implements LdapUserInterface
     $this->avatar = $avatar;
 
     return $this;
-  }
-
-  /**
-   * Set Ldap Distinguished Name.
-   */
-  public function setDn(string $dn): void
-  {
-    $this->dn = strtolower($dn);
-  }
-
-  /**
-   * Get Ldap Distinguished Name.
-   */
-  public function getDn(): ?string
-  {
-    return null !== $this->dn ? $this->dn : '';
   }
 
   public function isLimited(): bool

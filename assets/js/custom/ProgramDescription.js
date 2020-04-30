@@ -41,7 +41,7 @@ function ProgramDescription (programId, showMoreButtonText, showLessButtonText,
       }
 
       const url = Routing.generate('edit_program_description',
-        { id: programId, newDescription: newDescription }, false)
+        { id: programId, new_description: newDescription }, false)
 
       $.get(url, function (data) {
         if (data.statusCode === statusCodeOk) {

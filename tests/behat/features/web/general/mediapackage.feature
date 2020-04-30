@@ -1,4 +1,4 @@
-@web @media
+@homepage
 Feature:
   In order to speed up the creation of a pocketcode program
   As UX/Design team
@@ -18,30 +18,26 @@ Feature:
       | 4  | ThemeSpecial | Looks   |
 
     And there are media package files:
-      | id | name       | category     | extension | active | file   | flavor     | author        |
-      | 1  | Dog (😊🐶) | Animals      | png       | 1      | 1.png  | pocketcode | Bob Schmidt   |
-      | 2  | Bubble     | Fantasy      | mpga      | 1      | 2.mpga | pocketcode |               |
-      | 3  | SexyGrexy  | Bla          | png       | 0      | 3.png  | luna       | Micheal John  |
-      | 4  | SexyFlavor | Animals      | png       | 1      | 4.png  | luna       |               |
-      | 5  | SexyNULL   | Animals      | png       | 1      | 5.png  |            |               |
-      | 6  | SexyWolfi  | Animals      | png       | 1      | 6.png  | pocketcode | Jenifer Shawn |
-      | 7  | MyLuna     | ThemeSpecial | png       | 1      | 7.png  | luna       |               |
+      | id | name       | category     | extension | active | file       | flavor     | author        |
+      | 1  | Dog (😊🐶)   | Animals      | png       | 1      | 1.png      | pocketcode | Bob Schmidt   |
+      | 2  | Bubble     | Fantasy      | mpga      | 1      | 2.mpga     | pocketcode |               |
+      | 3  | SexyGrexy  | Bla          | png       | 0      | 3.png      | luna       | Micheal John  |
+      | 4  | SexyFlavor | Animals      | png       | 1      | 4.png      | luna       |               |
+      | 5  | SexyNULL   | Animals      | png       | 1      | 5.png      |            |               |
+      | 6  | SexyWolfi  | Animals      | png       | 1      | 6.png      | pocketcode | Jenifer Shawn |
+      | 7  | MyLuna     | ThemeSpecial | png       | 1      | 7.png      | luna       |               |
+      | 8  | MyObject   | Bla          | catrobat  | 1      | 8.catrobat | pocketcode |               |
 
   Scenario: Viewing defined categories in a specific package
     Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
     Then I should see "Animals"
+    And I should not see an "#medialib-header-back-btn" element
 
-  Scenario: Download a media file
-    When I download "/app/download-media/1"
-    Then I should receive a "png" file
-    And I should receive a file named "Dog (-).png"
-    And the response code should be "200"
-
-  Scenario: The app needs the filename, so the media file link must provide the media file's name
-    When I am on "/app/media-library/looks"
+  Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
+    Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
-    Then the media file "1" must have the download url "/pocketcode/download-media/1"
+    But I should not see a "#project-navigation" element
 
   Scenario: Viewing only media files for the pocketcode flavor
     Given I am on "/app/media-library/looks"
@@ -49,6 +45,7 @@ Feature:
     Then I should see media file with id "1"
     And I should see media file with id "5"
     And I should see media file with id "6"
+    And I should see media file with id "8"
     But I should not see media file with id "4"
     And I should not see media file with id "7"
     And I should not see a "#category-theme-special" element
@@ -59,9 +56,107 @@ Feature:
     Then I should see a "#category-theme-special" element
     And I should see media file with id 7 in category "Luna & Cat Theme Special"
     And I should see 1 media file in category "Luna & Cat Theme Special"
-    And I should see 1 media file in category "Bla"
+    And I should see 2 media file in category "Bla"
 
-  Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
+  Scenario: Selecting and deselecting media files for downloading
     Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
-    But I should not see a "#project-navigation" element
+    And I click "#mediafile-1"
+    Then the element "#mediafile-1" should have a attribute "class" with value "selected"
+    And I click "#mediafile-5"
+    Then the element "#mediafile-5" should have a attribute "class" with value "selected"
+    Then I should see "SAVE"
+    And the "#downloadbar-nr-selected" element should contain "2"
+    And I click "#mediafile-1"
+    Then the element "#mediafile-1" should have no attribute "class" with value "selected"
+    And I click "#mediafile-5"
+    Then the element "#mediafile-5" should have no attribute "class" with value "selected"
+    Then I should not see "SAVE"
+    And the "#downloadbar-nr-selected" element should contain "0"
+
+  Scenario: Pressing the x button in the download bar should delete the selection
+    Given I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
+    And I click "#mediafile-1"
+    And I click "#mediafile-5"
+    And I click "#downloadbar-delete-selection-btn"
+    Then the element "#mediafile-1" should have no attribute "class" with value "selected"
+    Then the element "#mediafile-5" should have no attribute "class" with value "selected"
+    And I should not see "SAVE"
+
+  Scenario: Downloading multiple selected files
+    Given I am on "/app/media-library/looks"
+    And I wait for the page to be loaded
+    And I click "#mediafile-1"
+    And I click "#mediafile-5"
+    And I click "#downloadbar-start-downloads"
+    Then I should not see "SAVE"
+#   Disabled for the moment due to problems with github/docker/shared volumes
+#   Then I should have downloaded a file named "Dog (-).png"
+#   Then I should have downloaded a file named "SexyNULL.png"
+
+
+  # Media Library search function
+
+  Scenario: Searching the Media Package "looks" with the Pocketcode app and the search term "Snake" should result in an empty result.
+    Given I am on "/app/media-library/Looks"
+    And I wait for the page to be loaded
+    Then I click ".search-icon-header"
+    And I enter "Snake" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/app/media-library/Looks/search/Snake"
+    And I should see "Your search returned 0 results"
+    And I should see an "#medialib-header-back-btn" element
+
+  Scenario: Searching the Media Package "looks" with the Luna app and search term "Sexy" should result in 3 found files
+    Given I am on "/luna/media-library/Looks"
+    And I wait for the page to be loaded
+    Then I click ".search-icon-header"
+    And I enter "Sexy" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/luna/media-library/Looks/search/Sexy"
+    And I should see media file with id "4"
+    And I should see media file with id "5"
+    And I should see media file with id "6"
+    And I should not see media file with id "1"
+    And I should not see media file with id "2"
+    And I should not see media file with id "3"
+    And I should not see media file with id "7"
+    And I should see a "#category-theme-special" element
+
+  Scenario: Searching the Media Package "looks" with the Pocketcode app and search term "Sexy" should result in 2 found files
+    Given I am on "/app/media-library/Looks"
+    And I wait for the page to be loaded
+    Then I click ".search-icon-header"
+    And I enter "Sexy" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/app/media-library/Looks/search/Sexy"
+    And I should see media file with id "5"
+    And I should see media file with id "6"
+    And I should not see media file with id "1"
+    And I should not see media file with id "2"
+    And I should not see media file with id "3"
+    And I should not see media file with id "4"
+    And I should not see media file with id "7"
+    And I should not see a "#category-theme-special" element
+
+  Scenario: Searching the Media Package "sounds" with the Pocketcode app and search term "e" should not return results from other packages
+    Given I am on "/app/media-library/Sounds"
+    And I wait for the page to be loaded
+    Then I click ".search-icon-header"
+    And I enter "e" into visible ".input-search"
+    And I click "#btn-search-header"
+    And I wait for the page to be loaded
+    Then I should be on "/app/media-library/Sounds/search/e"
+    And I should see media file with id "2"
+    And I should not see media file with id "1"
+    And I should not see media file with id "3"
+    And I should not see media file with id "4"
+    And I should not see media file with id "5"
+    And I should not see media file with id "6"
+    And I should not see media file with id "7"
+    And I should not see a "#category-theme-special" element
+
