@@ -177,9 +177,6 @@
     "firebase/php-jwt": {
         "version": "v5.1.0"
     },
-    "fr3d/ldap-bundle": {
-        "version": "v4.0.0"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -968,8 +965,5 @@
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"
-    },
-    "zendframework/zend-ldap": {
-        "version": "2.10.1"
     }
 }

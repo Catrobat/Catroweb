@@ -297,19 +297,6 @@ services:
     public: true
   App\Catrobat\Security\UserAuthenticator: "@user_authenticator"
 
-  App\Entity\UserLDAPManager:
-    class: App\Entity\UserLDAPManager
-    arguments:
-      - '@fr3d_ldap.ldap_driver'
-      - '@App\Catrobat\Ldap\UserHydrator'
-      - '@App\Entity\UserManager'
-      - '%fr3d_ldap.ldap_manager.parameters%'
-      - '%ldap_role_mappings%'
-      - '%ldap_group_filter%'
-      - '@App\Catrobat\Services\TokenGenerator'
-      - '@monolog.logger'
-    public: true
-
 
   # ====================================================================================================================
   #   Twig
