@@ -73,7 +73,7 @@ class ReportController extends AbstractController
     {
       $response = [];
       $response['answer'] = $this->translator->trans('success.report', [], 'catroweb');
-      $response['statusCode'] = StatusCode::OK;
+      $response['statusCode'] = Response::HTTP_OK;
 
       return JsonResponse::create($response);
     }
@@ -114,7 +114,7 @@ class ReportController extends AbstractController
 
     $response = [];
     $response['answer'] = $this->translator->trans('success.report', [], 'catroweb');
-    $response['statusCode'] = StatusCode::OK;
+    $response['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($response);
   }

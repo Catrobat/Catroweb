@@ -81,7 +81,7 @@ class MediaPackageController extends AbstractController
     }
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'data' => $json_response_array,
     ]
     );
@@ -130,7 +130,7 @@ class MediaPackageController extends AbstractController
     }
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'data' => $json_response_array,
     ]
     );

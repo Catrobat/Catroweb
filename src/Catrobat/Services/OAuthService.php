@@ -86,7 +86,7 @@ class OAuthService
     }
 
     $retArray['is_oauth_user'] = $user && $user->getGplusUid();
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -111,7 +111,7 @@ class OAuthService
     {
       $retArray['email_available'] = false;
     }
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -130,7 +130,7 @@ class OAuthService
     ]);
 
     $retArray['username_available'] = (bool) $user;
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -157,7 +157,7 @@ class OAuthService
     {
       $retArray['token_available'] = false;
     }
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -364,7 +364,7 @@ class OAuthService
   {
     $retArray = [];
     $retArray['deleted'] = 'deprecated';
-    $retArray['statusCode'] = StatusCode::OK;
+    $retArray['statusCode'] = Response::HTTP_OK;
 
     return JsonResponse::create($retArray);
   }
@@ -485,6 +485,11 @@ class OAuthService
     $client->refreshToken($refresh_token);
 
     return $client;
+  }
+
+  private function setLoginOAuthUserStatusCode(array $retArray): void
+  {
+    $retArray['statusCode'] = Response::HTTP_OK;
   }
 
   /**
