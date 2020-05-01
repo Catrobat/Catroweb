@@ -23,16 +23,6 @@ parameters:
   catrobat.testreports.behat:  "tests/testreports/behat/"
   catrobat.testreports.screenshot:  "tests/testreports/screens/"
 
-
-  jenkins:
-    url: https://jenkins.catrob.at/buildByToken/buildWithParameters
-    job: "Build-Program"
-    token: "SECRETTOKEN"
-    id_parameter_name: "PROJECT"
-    download_url_parameter_name: "download"
-    upload_url_paramenter: "upload"
-    uploadtoken: "UPLOADTOKEN"
-
 services:
 
   # default configuration for services in *this* file

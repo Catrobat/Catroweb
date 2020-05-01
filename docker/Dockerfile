@@ -19,7 +19,6 @@ RUN apt-get update && \
     add-apt-repository ppa:ondrej/php && \
     apt-get install -yq --no-install-recommends \
     php7.4-common \
-    php7.4-ldap \
     php7.4-cli \
     php7.4-curl \
     php7.4-intl \
@@ -41,11 +40,13 @@ RUN apt-get update && \
     git \
     curl \
     php-xdebug \
-    npm \
     ruby \
     ruby-dev \
     libgconf-2-4 \
-    grunt && \
+    grunt \
+    npm && \
+    npm install -g n && \
+    n stable && \
     gem install sass
 
 # Overwrite default apache config
@@ -66,9 +67,9 @@ RUN sh docker/app/init-jwt-config.sh
 COPY / ./
 
 # Overwrite behat config:
-COPY behat.yml.dist ./
-RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yml.dist && \
-    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yml.dist
+COPY behat.yml.dist ./behat.yml
+RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yml && \
+    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yml
 
 # Overwrite project config:
 ARG APP_ENVIRONMENT
@@ -79,11 +80,8 @@ RUN echo "\n" >> .env.local && \
     echo "\n" >> .env.test.local && \
     echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test >> .env.test.local
 
-# Copying legacy parameters into the project, else scripts will crash (ToDo replace this file with .env - SHARE-39)
-COPY config/packages/parameters.yml.dist config/packages/parameters.yml
-
 # Add composer executable to the container
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer-build /usr/bin/composer /usr/bin/composer
 
 # Add libraries and modules
 COPY --from=composer-build /app/vendor vendor

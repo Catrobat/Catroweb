@@ -67,6 +67,12 @@ const COPY_CONFIG =
       src: '**',
       dest: PUBLIC_DIRECTORY + '/css/fonts/'
     },
+    material: {
+      expand: true,
+      cwd: 'node_modules/@material/',
+      src: '**',
+      dest: PUBLIC_DIRECTORY + '/material/'
+    },
     images: {
       expand: true,
       cwd: ASSETS_DIRECTORY + '/images',

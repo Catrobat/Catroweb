@@ -3,9 +3,8 @@ Feature: Login with an existing account or register a new one
 
   Background:
     Given there are users:
-      | name      |  token      | dn           | email                   | id |
-      | Catrobat  |  cccccccccc |              | default1@pocketcode.org |  1 |
-      | LDAP-user |  cccccccccc | cn=LDAP-user | casdasdsassadsada@d.com |  2 |
+      | name      |  token      | email                   | id |
+      | Catrobat  |  cccccccccc | default1@pocketcode.org |  1 |
 
   Scenario: Register
     Given the next generated token will be "rrrrrrrrrrr"
@@ -20,7 +19,6 @@ Feature: Login with an existing account or register a new one
       """
       {"statusCode":201,"answer":"Registration successful!","token":"rrrrrrrrrrr","preHeaderMessages":""}
       """
-
 
   Scenario: Register but username exists
     Given the next generated token will be "rrrrrrrrrrr"

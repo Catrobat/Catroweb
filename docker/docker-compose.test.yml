@@ -15,11 +15,8 @@ services:
     image: app.catroweb
     command: ["sh", "/var/www/catroweb/docker/app/startup-test.sh"]
     volumes:
-      - ./../assets:/var/www/catroweb/assets
-      - ./../src:/var/www/catroweb/src
-      - ./../templates:/var/www/catroweb/templates
+      # We share the test directory for easy access to test reports, error logs, ..
       - ./../tests:/var/www/catroweb/tests
-      - ./../translations:/var/www/catroweb/translations
     depends_on:
       - db.catroweb.test
       - chrome.catroweb

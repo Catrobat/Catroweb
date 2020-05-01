@@ -19,18 +19,76 @@ services:
     ports:
       - 8080:80
     volumes:
-      # Changes to the following files are shared between host and container - no rebuild needed!
+      #
+      # Changes to the following files are shared between host and container.
+      # Which means changes to those files are synced between the host and container. No rebuild needed!
+      #
+      # Make sure the content of the following dirs/files is not changed in the Dockerfile, else the changes will just
+      # be discarded. Otherwise feel free to add every file that is modified regularly.
+      #
       - ./../assets:/var/www/catroweb/assets:cached
+      #
+      # bin: We can't share the bin folder since most files(symlinks) are generated during the build process.
+      #      If needed, shared files have to be explicitly defined:
+      - ./../bin/checkCatroidRepositoryForNewBricks:/var/www/catroweb/bin/checkCatroidRepositoryForNewBricks:cached
+      - ./../bin/console:/var/www/catroweb/bin/console:cached
+      - ./../bin/x_perm.sh:/var/www/catroweb/bin/x_perm.sh:cached
+      - ./../bin/x_reset.sh:/var/www/catroweb/bin/x_reset.sh:cached
+      - ./../bin/x_test.sh:/var/www/catroweb/bin/x_test.sh:cached
+      #
+      #
+      - ./../config:/var/www/catroweb/config:cached
+      - ./../docker:/var/www/catroweb/docker:cached
+      #
+      # public: contains mainly generated files - no need to pollute the host with such files
+      #         If needed, shared files should be explicitly defined:
+      - ./../public/index.php:/var/www/catroweb/public/index.php:cached
+      - ./../public/index_test.php:/var/www/catroweb/public/index_test.php:cached
+      #
       - ./../src:/var/www/catroweb/src:cached
       - ./../templates:/var/www/catroweb/templates:cached
       - ./../tests:/var/www/catroweb/tests:cached
       - ./../translations:/var/www/catroweb/translations:cached
-      # Since we need access to the vendor & node_modules in the Dockerfile, we can not share them.
-      # Shared volumes are attached after the build process,
-      # which will result in else invalid overwritten libraries in the container.
-      # If you need access to them (for example for intellisense), just copy those directories from the container to
-      # the host. E.g with `docker cp app.catroweb:/var/www/catroweb/vendor vendor` In case of errors (mainly on windows
-      # you could tar the directory before copying it from the container to the host.
+      #
+      # 3rd party Libraries: vendor + node_modules:
+      #
+      #  Since we need access to the vendor & node_modules in the Dockerfile, we can not share them.
+      #  Shared volumes are attached after the build process, which will result in else invalid overwritten
+      #  libraries in the container.
+      #
+      #  If you need access to them (for example fohear IntelliSense):
+      #
+      #    - Option 1: Copy those directories from the container to the host. E.g with
+      #                docker cp app.catroweb:/var/www/catroweb/vendor vendor`
+      #                docker cp app.catroweb:/var/www/catroweb/node_modules node_modules `
+      #
+      #        In case of errors (windows) you could tar the directory before copying it from the container to the host.
+      #        A script doing exactly this can be found in `docker/app/import-container-libraries.sh`
+      #
+      #   - Option 2: Install Php and node.js locally.
+      #               Then just run composer install and npm install locally.
+      #
+      #        This option might be a bit redundant, but it also comes with benefits like locally installing
+      #        new libraries. Especially installing node_modules in the container can be problematic (on windows).
+      #        Sharing package(-lock)?.json is not possible (on windows) due to file locks. There for the package files
+      #        must be copied out of the container manually after every npm install.
+      #        The drawback - using a wrong node / php version may result in errors or missing functionality
+      #
+      #
+      # most root files that can be shared can be defined here:
+      - ./../.env:/var/www/catroweb/.env
+      - ./../.env.dev:/var/www/catroweb/.env.dev
+      - ./../.env.test:/var/www/catroweb/.env.test
+      - ./../.env.prod:/var/www/catroweb/.env.prod
+      - ./../deploy.php:/var/www/catroweb/deploy.php
+      - ./../Gruntfile.js:/var/www/catroweb/Gruntfile.js
+      - ./../composer.json:/var/www/catroweb/composer.json
+      - ./../composer.lock:/var/www/catroweb/composer.lock
+      - ./../symfony.lock:/var/www/catroweb/symfony.lock
+
+      # Sharing npm package files is not working (at least on windows) - feel free to try it out on any other OS
+#      - ./../package.json:/var/www/catroweb/package.json
+#      - ./../package-lock.json:/var/www/catroweb/package-lock.json
 
   db.catroweb.dev:
     image: mariadb:10.3.11

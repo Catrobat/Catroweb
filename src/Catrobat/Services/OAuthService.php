@@ -169,7 +169,7 @@ class OAuthService
   {
     $retArray = [];
 
-    $client_id = $this->parameter_bag->get('google_app_id');
+    $client_id = getenv('GOOGLE_CLIENT_ID');
     $id_token = $request->request->get('id_token');
     $username = $request->request->get('username');
 
@@ -362,40 +362,7 @@ class OAuthService
   public function deleteOAuthTestUserAccounts(): JsonResponse
   {
     $retArray = [];
-
-    $deleted = '';
-
-    $google_testuser_mail = $this->parameter_bag->get('google_testuser_mail');
-    $google_testuser_username = $this->parameter_bag->get('google_testuser_name');
-    $google_testuser_id = $this->parameter_bag->get('google_testuser_id');
-
-    /** @var User|null $user */
-    $user = $this->user_manager->findUserByEmail($google_testuser_mail);
-    if (null !== $user)
-    {
-      $deleted = $deleted.'_G+-Mail:'.$user->getEmail();
-      $this->deleteUser($user);
-    }
-
-    /** @var User|null $user */
-    $user = $this->user_manager->findUserByUsername($google_testuser_username);
-    if (null !== $user)
-    {
-      $deleted = $deleted.'_G+-User'.$user->getUsername();
-      $this->deleteUser($user);
-    }
-
-    /** @var User|null $user */
-    $user = $this->user_manager->findUserBy([
-      'gplusUid' => $google_testuser_id,
-    ]);
-    if (null !== $user)
-    {
-      $deleted = $deleted.'_G+-ID'.$user->getGplusUid();
-      $this->deleteUser($user);
-    }
-
-    $retArray['deleted'] = $deleted;
+    $retArray['deleted'] = 'deprecated';
     $retArray['statusCode'] = StatusCode::OK;
 
     return JsonResponse::create($retArray);
@@ -491,10 +458,9 @@ class OAuthService
    */
   private function getAuthenticatedGoogleClientForGPlusUser(?User $user)
   {
-    $application_name = $this->parameter_bag->get('application_name');
-    $client_id = $this->parameter_bag->get('google_app_id');
-    $client_secret = $this->parameter_bag->get('google_secret');
-    // $redirect_uri = 'postmessage';
+    $application_name = getenv('APP_NAME');
+    $client_id = getenv('GOOGLE_CLIENT_ID');
+    $client_secret = getenv('GOOGLE_CLIENT_ID');
 
     if (!$client_secret || !$client_id || !$application_name)
     {

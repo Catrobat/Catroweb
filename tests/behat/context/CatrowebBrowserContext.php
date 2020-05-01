@@ -1182,8 +1182,8 @@ class CatrowebBrowserContext extends BrowserContext
   {
     if ($this->use_real_oauth_javascript_code)
     {
-      $mail = $this->getParameterValue('google_testuser_mail');
-      $password = $this->getParameterValue('google_testuser_pw');
+      $mail = 'google_testuser_mail';
+      $password = 'google_testuser_mail';
       echo 'Login with mail address '.$mail.' and pw '.$password."\n";
       $page = $this->getSession()->getPage();
       if ($page->find('css', '#approval_container') &&
@@ -2165,7 +2165,7 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^the next generated token will be "([^"]*)"$/
+   * @Given the next generated token will be :token
    *
    * @param mixed $token
    */
@@ -2500,43 +2500,17 @@ class CatrowebBrowserContext extends BrowserContext
     $this->iUseTheUserAgent($user_agent);
   }
 
-  private function getParameterValue(string $name): ?string
-  {
-    $my_file = fopen('app/config/parameters.yml', 'r');
-    if (false === $my_file)
-    {
-      exit('Unable to open file!');
-    }
-
-    while (!feof($my_file))
-    {
-      $line = fgets($my_file);
-      if (false != strpos($line, $name))
-      {
-        fclose($my_file);
-
-        return substr(trim($line), strpos(trim($line), ':') + 2);
-      }
-    }
-    fclose($my_file);
-    Assert::assertTrue(false, 'No entry found in parameters.yml!');
-
-    return null;
-  }
-
   /**
    * @param mixed $value
    */
   private function setOauthServiceParameter($value): void
   {
-    $new_content = 'parameters:'.chr(10).'    oauth_use_real_service: '.$value;
-    file_put_contents('config/packages/test/parameters.yml', $new_content);
+    // api-deprecated
   }
 
   private function approveGoogleAccess(): void
   {
-    echo 'Google Approve Access form appeared
-';
+    echo 'Google Approve Access form appeared';
     $page = $this->getSession()->getPage();
     $button = $page->findById('submit_approve_access');
     Assert::assertTrue(null != $button);
