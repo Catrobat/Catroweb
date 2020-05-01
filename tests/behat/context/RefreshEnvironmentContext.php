@@ -2,10 +2,10 @@
 
 namespace Tests\behat\context;
 
-use App\Catrobat\Commands\Helpers\CommandHelper;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
 use App\Catrobat\Services\TestEnv\SymfonySupport;
+use App\Commands\Helpers\CommandHelper;
 use App\Kernel;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\DBAL\DBALException;

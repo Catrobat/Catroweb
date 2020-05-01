@@ -58,7 +58,6 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "emuse/behat-html-formatter": "@dev",
         "friendsofphp/php-cs-fixer": "3.0.x-dev",
-        "phpcheckstyle/phpcheckstyle": "^0.14.8",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
         "phpstan/phpstan-phpunit": "^0.12",

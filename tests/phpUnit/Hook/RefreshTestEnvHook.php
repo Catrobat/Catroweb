@@ -2,7 +2,7 @@
 
 namespace Tests\phpUnit\Hook;
 
-use App\Catrobat\Commands\Helpers\CommandHelper;
+use App\Commands\Helpers\CommandHelper;
 use PHPUnit\Runner\BeforeFirstTestHook;
 use PHPUnit\Runner\BeforeTestHook;
 use Symfony\Component\Filesystem\Filesystem;
