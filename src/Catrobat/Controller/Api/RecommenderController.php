@@ -70,7 +70,6 @@ class RecommenderController extends AbstractController
    */
   public function listRecsysSpecificProgramsAction(Request $request, string $id, ProgramManager $program_manager)
   {
-    $is_test_environment = ('test' == $this->getParameter('kernel.environment'));
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
 
@@ -84,7 +83,7 @@ class RecommenderController extends AbstractController
 
     $programs_count = $program_manager->getRecommendedProgramsCount($id, $flavor);
     $programs = $program_manager->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-      $flavor, $program, $limit, $offset, $is_test_environment);
+      $flavor, $program, $limit, $offset);
 
     return new ProgramListResponse($programs, $programs_count);
   }
