@@ -27,6 +27,17 @@ jobs:
           wget https://phar.phpunit.de/phploc.phar
           php phploc.phar src tests
 
+  phpcpd:
+    # Checking for PHP code that was just copied
+    name: PHP Copy Paste Detector
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHP Copy Paste Detector
+        uses: StephaneBour/actions-php-cpd@1.1
+        with:
+          args: src tests --exclude Admin --exclude Entity --exclude phpUnit
+
   php-cs-fixer:
     # Checking the Coding standard
     name: PHP CS Fixer

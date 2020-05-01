@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
@@ -208,8 +209,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-    bool $debug_build, string $flavor, Program $program, ?int $limit, int $offset,
-    bool $is_test_environment): array
+    bool $debug_build, string $flavor, Program $program, ?int $limit, int $offset): array
   {
     $cache_key = $flavor.'_'.$program->getId();
     if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key]))
@@ -218,7 +218,6 @@ class ProgramRepository extends ServiceEntityRepository
         $offset, $limit);
     }
 
-    $time_frame_length = 600; // in seconds
     $query_builder = $this->createQueryBuilder('e');
 
     $query_builder
@@ -241,13 +240,6 @@ class ProgramRepository extends ServiceEntityRepository
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-
-    if (!$is_test_environment)
-    {
-      $query_builder->andWhere($query_builder->expr()->between("TIME_DIFF(d1.downloaded_at, \n      d2.downloaded_at, 'second')",
-        $query_builder->expr()->literal($time_frame_length / 2 * (-1)),
-        $query_builder->expr()->literal($time_frame_length / 2)));
-    }
 
     $query_builder
       ->groupBy('e.id')
@@ -273,7 +265,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-    bool $debug_build, string $flavor, Program $program, bool $is_test_environment): int
+    bool $debug_build, string $flavor, Program $program): int
   {
     $cache_key = $flavor.'_'.$program->getId();
     if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key]))
@@ -282,7 +274,7 @@ class ProgramRepository extends ServiceEntityRepository
     }
 
     $result = $this->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-      $debug_build, $flavor, $program, 0, 0, $is_test_environment
+      $debug_build, $flavor, $program, 0, 0
     );
     $this->cached_most_downloaded_other_programs_full_result[$cache_key] = $result;
 
@@ -818,66 +810,30 @@ class ProgramRepository extends ServiceEntityRepository
 
   public function getRecommendedProgramsCount(string $id, bool $debug_build, string $flavor = 'pocketcode'): int
   {
-    $qb_tags = $this->createQueryBuilder('e');
-
-    $result = $qb_tags
-      ->select('t.id')
-      ->leftJoin('e.tags', 't')
-      ->where($qb_tags->expr()->eq('e.id', ':id'))
-      ->setParameter('id', $id)
-      ->getQuery()
-      ->getResult()
-    ;
-
-    $qb_extensions = $this->createQueryBuilder('e');
-
-    $result_2 = $qb_extensions
-      ->select('x.id')
-      ->leftJoin('e.extensions', 'x')
-      ->where($qb_tags->expr()->eq('e.id', ':id'))
-      ->setParameter('id', $id)
-      ->getQuery()
-      ->getResult()
-    ;
-
-    $tag_ids = array_map('current', $result);
-    $extensions_id = array_map('current', $result_2);
-
-    $debug_where = (!$debug_build) ? 'AND e.debug_build = false' : '';
-
-    $dql = 'SELECT COUNT(e.id) cnt, e.id
-      FROM App\Entity\Program e
-      LEFT JOIN e.tags t
-      LEFT JOIN e.extensions x
-      WHERE t.id IN (
-        :tag_ids
-      )
-      OR x.id IN (
-        :extension_ids
-      )
-      AND e.flavor = :flavor
-      AND e.id != :id
-      AND e.private = false
-      AND e.visible = true '.
-      $debug_where.'
-      GROUP BY e.id
-      ORDER BY cnt DESC';
-
-    $qb_program = $this->createQueryBuilder('e');
-    $db_query = $qb_program->getEntityManager()->createQuery($dql);
-
-    $parameters = new ArrayCollection();
-    $parameters->add(new Parameter('id', $id));
-    $parameters->add(new Parameter('tag_ids', $tag_ids));
-    $parameters->add(new Parameter('extension_ids', $extensions_id));
-    $parameters->add(new Parameter('flavor', $flavor));
-
-    $db_query->setParameters($parameters);
+    $db_query = $this->createRecommendedProgramQuery($id, $debug_build, $flavor);
 
     return is_countable($db_query->getResult()) ? count($db_query->getResult()) : 0;
   }
 
   public function getRecommendedProgramsById(string $id, bool $debug_build, string $flavor, ?int $limit, int $offset = 0): array
+  {
+    $db_query = $this->createRecommendedProgramQuery($id, $debug_build, $flavor);
+
+    $db_query->setFirstResult($offset);
+    $db_query->setMaxResults($limit);
+
+    $id_list = array_map(fn ($value) => $value['id'], $db_query->getResult());
+
+    $programs = [];
+    foreach ($id_list as $id)
+    {
+      $programs[] = $this->find($id);
+    }
+
+    return $programs;
+  }
+
+  private function createRecommendedProgramQuery(string $id, bool $debug_build, string $flavor): Query
   {
     $qb_tags = $this->createQueryBuilder('e');
 
@@ -910,14 +866,12 @@ class ProgramRepository extends ServiceEntityRepository
       FROM App\Entity\Program e
       LEFT JOIN e.tags t
       LEFT JOIN e.extensions x
-      WHERE (t.id IN (
-        :tag_ids
+      WHERE (
+        t.id IN (:tag_ids)
+        OR x.id IN (:extension_ids)
       )
-      OR x.id IN (
-        :extension_ids
-      ))
       AND e.flavor = :flavor
-      AND e.id != :pid
+      AND e.id != :id
       AND e.private = false
       AND e.visible = TRUE '.
       $debug_where.'  
@@ -928,25 +882,14 @@ class ProgramRepository extends ServiceEntityRepository
     $db_query = $qb_program->getEntityManager()->createQuery($dql);
 
     $parameters = new ArrayCollection();
-    $parameters->add(new Parameter('pid', $id));
+    $parameters->add(new Parameter('id', $id));
     $parameters->add(new Parameter('tag_ids', $tag_ids));
     $parameters->add(new Parameter('extension_ids', $extensions_id));
     $parameters->add(new Parameter('flavor', $flavor));
 
     $db_query->setParameters($parameters);
 
-    $db_query->setFirstResult($offset);
-    $db_query->setMaxResults($limit);
-
-    $id_list = array_map(fn ($value) => $value['id'], $db_query->getResult());
-
-    $programs = [];
-    foreach ($id_list as $id)
-    {
-      $programs[] = $this->find($id);
-    }
-
-    return $programs;
+    return $db_query;
   }
 
   /**

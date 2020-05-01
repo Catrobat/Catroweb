@@ -727,18 +727,18 @@ class ProgramManager
   }
 
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-    string $flavor, Program $program, ?int $limit, int $offset, bool $is_test_environment
-  ): array {
+    string $flavor, Program $program, ?int $limit, int $offset): array
+  {
     return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-      $this->app_request->isDebugBuildRequest(), $flavor, $program, $limit, $offset, $is_test_environment
+      $this->app_request->isDebugBuildRequest(), $flavor, $program, $limit, $offset
     );
   }
 
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-    string $flavor, Program $program, bool $is_test_environment
-  ): int {
+    string $flavor, Program $program): int
+  {
     return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $program, $is_test_environment
+      $this->app_request->isDebugBuildRequest(), $flavor, $program
     );
   }
 
