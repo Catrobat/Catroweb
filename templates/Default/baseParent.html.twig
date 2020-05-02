@@ -18,112 +18,110 @@
 </head>
 
 <body class="new-nav">
-  <div id="wrapper">
-    <header>
-      {% block header %}
-        {% include 'Default/header.html.twig' %}
-      {% endblock %}
-    </header>
-    {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
-    <div class="container body-content">
-      {# Body block where child views will appear #}
-      {% block body %}{% endblock %}
-    </div>
+<div id="page-container" class="pr-0 pl-0">
+
+  {% include 'Default/header.html.twig' %}
+
+  {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
+
+  <div class="container body-content">
+    {# Body block where child views will appear #}
+    {% block body %}{% endblock %}
   </div>
 
-  {% block footer %}
-    {% include 'Default/footer.html.twig' %}
-  {% endblock %}
+  {% include 'Default/footer.html.twig' %}
 
   <div id="app-version" style="display:none">{{ app_version }}</div>
 
-  {#
-     !!Important!! Define scripts here and not in the head to prevent render-blocking resources
-      This should increase performance. As a sidenote. The JS block can't be used in twig templates that are included.
-      The scripts have to be in the file that is extending the base and have to be in the JS blocks, not in the head!
-  #}
-  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/modules/textfill.min.js') }}"></script>
-  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('js/modules/sweetalert2.all.min.js') }}"></script>
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-  <script src="{{ asset('js/base.min.js') }}"></script>
+</div>{# page-container#}
 
-  <script> {# seems to be needed for some behat tests #} let configGA = {'UaId': 'UA-42270417-5' } </script>
+{#
+   !!Important!! Define scripts here and not in the head to prevent render-blocking resources
+    This should increase performance. As a sidenote. The JS block can't be used in twig templates that are included.
+    The scripts have to be in the file that is extending the base and have to be in the JS blocks, not in the head!
+#}
+<script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+<script src="{{ asset('js/modules/textfill.min.js') }}"></script>
+<script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/modules/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<script src="{{ asset('js/base.min.js') }}"></script>
 
-  <script async src="{{ asset('js/analytics.min.js') }}"></script>
+<script> {# seems to be needed for some behat tests #} let configGA = { 'UaId': 'UA-42270417-5' } </script>
 
-  {# SEARCH HEADER #}
-  <script>
-    $('#nav-search').submit(function (e) {
-      e.preventDefault()
-    })
-  </script>
-  <script>
-    $(document).ready(function() {
-      $('.search-icon-header').on('click', function() {
-        console.log("clicked")
-        $(this).hide()
-        const input_group = $("#search-input-group-header");
-        input_group.removeClass('d-none')
+<script async src="{{ asset('js/analytics.min.js') }}"></script>
 
-        let search_header = $('.search-input-header')
-        let val = search_header.val()
-        search_header
+{# SEARCH HEADER #}
+<script>
+  $('#nav-search').submit(function (e) {
+    e.preventDefault()
+  })
+</script>
+<script>
+  $(document).ready(function () {
+    $('.search-icon-header').on('click', function () {
+      console.log('clicked')
+      $(this).hide()
+      const input_group = $('#search-input-group-header')
+      input_group.removeClass('d-none')
+
+      let search_header = $('.search-input-header')
+      let val = search_header.val()
+      search_header
         .focus()
         .val('')
         .val(val)
-      })
+    })
+  })
+</script>
+
+{# Main Script #}
+<script>
+  function scrollToHash () {
+    if (window.location.hash && $(window.location.hash).offset()) {
+      window.scrollTo(0, ($(window.location.hash).offset().top - $('.navbar').outerHeight()))
+    }
+  }
+
+  scrollToHash()
+  window.addEventListener('load', scrollToHash)
+  $(window).on('hashchange', scrollToHash)
+
+  {% if package is defined %}
+  new Main('{{ path('medialibrary_search', {'q': 0, 'package_name' : package} ) }}')
+  {% else %}
+  new Main('{{ path('search', {'q': 0 } ) }}')
+  {% endif %}
+</script>
+
+{# Sidebar #}
+<script>
+  enableNavButtonIfCategoryContainsProjects('#nav-newest', '{{ path('api_recent_programs') }}')
+  enableNavButtonIfRecommendedCategoryContainsProjects(
+    '#nav-recommended',
+    '{{ path('api_recsys_general_projects') }}',
+     {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}
+  )
+  enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
+  enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
+  enableNavButtonIfCategoryContainsProjects('#nav-scratch-remixes', '{{ path('api_scratch_remix') }}')
+  enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
+  manageNotificationsDropdown()
+</script>
+
+{% if app.user %}
+  <script src="{{ asset('js/FetchNotifications.min.js') }}"></script>
+  <script>
+    let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
+    $(document).ready(function () {
+      fetchNotifications.run()
     })
   </script>
+{% endif %}
 
-  {# Main Script #}
-  <script>
-    function scrollToHash() {
-      if (window.location.hash && $(window.location.hash).offset()) {
-        window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
-      }
-    }
-
-    scrollToHash()
-    window.addEventListener('load', scrollToHash)
-    $(window).on('hashchange', scrollToHash)
-
-    {% if package is defined %}
-      new Main('{{ path('medialibrary_search', {'q': 0, 'package_name' : package} ) }}')
-    {%  else %}
-      new Main('{{ path('search', {'q': 0 } ) }}')
-    {% endif %}
-  </script>
-
-  {# Sidebar #}
-  <script>
-    enableNavButtonIfCategoryContainsProjects('#nav-newest', '{{ path('api_recent_programs') }}')
-    enableNavButtonIfRecommendedCategoryContainsProjects(
-      '#nav-recommended',
-      '{{ path('api_recsys_general_projects') }}',
-        {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}
-    )
-    enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
-    enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
-    enableNavButtonIfCategoryContainsProjects('#nav-scratch-remixes', '{{ path('api_scratch_remix') }}')
-    enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
-    manageNotificationsDropdown()
-  </script>
-
-  {% if app.user %}
-    <script src="{{ asset('js/FetchNotifications.min.js') }}"></script>
-    <script>
-      let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
-      $(document).ready(function () {
-        fetchNotifications.run()
-      })
-    </script>
-  {% endif %}
-
-  {# JS block where all the scripts written in the child views should appear #}
-  {% block js %}{% endblock %}
+{# JS block where all the scripts written in the child views should appear #}
+{% block js %}{% endblock %}
 
 </body>
 </html>

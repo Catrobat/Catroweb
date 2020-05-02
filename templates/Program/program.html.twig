@@ -24,12 +24,7 @@
 
 {% block body %}
 
-  <div id="program-top" class="h1">
-    <div id="program-name" class="headline">
-      {{ program.name }}
-    </div>
-    <div class="clear"></div>
-  </div>
+  <h1 id="program-name">{{ program.name }}</h1>
 
   <div id="program-middle">
     <div id="image" class="image-container">
@@ -157,7 +152,7 @@
     </div>
 
     <div id="info">
-      <div class="h2 headline" id="description-headline">
+      <div class="h2" id="description-headline">
         <span>
           {{ "description"|trans({}, "catroweb") }}
           {% if app.user and my_program %}
@@ -212,7 +207,7 @@
 
       <hr>
 
-      <div class="h2 headline" id="credits-headline">
+      <div class="h2" id="credits-headline">
         <span>
           {{ "credits"|trans({}, "catroweb") }}
           {% if app.user and my_program %}
@@ -299,12 +294,13 @@
       {% endif %}
 
       <div class="download-container">
+
         <div class="btn-container col-12 col-xl-6">
-          <a id="url-download" class="btn btn-primary button"
-             href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-            <img class="program-big-button-icon mr-3" src="{{ asset('images/symbols/download.svg') }}" alt=""/>
+          <button id="url-download" class="btn btn-primary"
+                  onclick="program.download('{{ program_details.downloadUrl }}','{{ program.id }}', '#url-download', {{ checkCatrobatLanguage(program_details.languageVersion) }})">
+            <i class="program-big-button-icon mr-3 fa fa-download"></i>
             <span>{{ "download"|trans({}, "catroweb") }}</span>
-          </a>
+          </button>
         </div>
 
         <div id="remix-graph-button" class="btn-container col-12 col-xl-6">
@@ -429,25 +425,19 @@
 
   {% if  program.tags|length > 0  or program.extensions|length > 0 %}
     <div id="recommendations">
-      <div id="recsys-headline" class="headline">
-        <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
-      </div>
+      <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
       <div class="programs"></div>
     </div>
   {% endif %}
 
   <div id="specific-programs-recommendations">
-    <div id="recsys-specific-programs-headline" class="headline">
-      <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
-    </div>
+    <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
     <div class="programs"></div>
   </div>
 
   {% if not(app.user and my_program) %}
   <div id="more-from-this-user-recommendations">
-    <div id="recsys-headline" class="headline">
-      <h2>{{ 'recommender.moreFromThisUser'|trans({"%username%": program.user.username }, 'catroweb') }}</h2>
-    </div>
+    <h2>{{ 'recommender.moreFromThisUser'|trans({"%username%": program.user.username }, 'catroweb') }}</h2>
     <div class="programs"></div>
   </div>
   {% endif %}
@@ -661,27 +651,10 @@
     program.getApkStatus()
     program.createLinks()
 
-    var download_href = document.getElementById('url-download').href
-
     function blockEventListener (event)
     {
       event.preventDefault()
     }
-
-    $(document).on('click', '#url-download', function () {
-      var url_link = document.getElementById('url-download')
-      if (url_link.href !== 'javascript:void(0)')
-      {
-        url_link.href = 'javascript:void(0)'
-
-        setTimeout(function () {
-          url_link.href = download_href
-        }, 5000)
-
-        window.location = download_href
-      }
-      return false
-    })
 
     var recs = new ProjectLoader('#recommendations', '{{ path('api_recsys_programs') }}', project_id)
     recs.initRecsys()

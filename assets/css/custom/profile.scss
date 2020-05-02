@@ -44,11 +44,6 @@
   display: none;
 }
 
-.edit-title {
-  font-weight: bold;
-  @include force-word-break();
-}
-
 .edit-subtitle {
   font-weight: 600;
 }
@@ -56,10 +51,6 @@
 .profile-data {
   padding: 0.5em;
   word-break: break-word;
-}
-
-.edit-category-title {
-  font-size: 1.5em;
 }
 
 .edit-category-button {

@@ -321,10 +321,6 @@
 .tutorialcards-container {
   padding: 0;
 
-  h3 {
-    margin: 25px auto 0 auto;
-  }
-
   .img-container {
     margin: 5px auto;
     width: 60%;
@@ -392,19 +388,6 @@
     .download-button {
       font-weight: normal;
       margin: 25px 0 ;
-    }
-  }
-
-  .headline {
-    h1 {
-      font-size: 25px;
-      border-bottom: none;
-    }
-
-    .subtitle {
-      border-bottom: 1px solid $default-border-color;
-      font-weight: bold;
-      margin-bottom: 25px;
     }
   }
 
@@ -509,12 +492,6 @@
 
 #alice-notice {
   font-size: 1.5em;
-
-  h1 {
-    border: none;
-    color: white;
-    margin-bottom: 0;
-  }
 
   .notice {
     color: white;

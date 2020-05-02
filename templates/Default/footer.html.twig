@@ -1,77 +1,83 @@
-{% block footer %}
-  <footer class="footer">
-    <div class="container">
-      <div class="content">
-        <div class="row">
-          <div class="col-6 col-sm-4 col-lg-3">
-            <h4>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h4>
-            <ul class="list-vertical">
-              <li>
-                <a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a>
-              </li>
-              <li>
-                <a href="https://www.catrobat.org"
-                   target="_blank">{{ "aboutCatrobat"|trans({}, "catroweb") }}</a>
-              </li>
-              <li>
-                <a href="https://edu.catrob.at/">
-                  {{ "help-cards.headings.education"|trans({}, "catroweb") }}</a>
-              </li>
-              <li>
-                <a href="https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode">
-                  {{ "help-cards.headings.discuss"|trans({}, "catroweb") }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-6 col-sm-4 col-lg-3">
-            <h4>{{ "footer.legalities"|trans({}, "catroweb") }}</h4>
-            <ul class="list-vertical">
-              <li>
-                <a href="{{ url('licenseToPlay') }}">{{ "licenseToPlay.link"|trans({}, "catroweb") }}</a>
-              </li>
-              <li>
-                <a href="{{ url('privacypolicy') }}">{{ "privacy-policy.header"|trans({}, "catroweb") }}</a>
-              </li>
-              <li>
-                <a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a>
-              </li>
-              <li>
-                <a href="https://developer.catrobat.org/imprint"
-                   target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-6 mt-4 mt-sm-0 col-sm-4 col-lg-3">
-            <h4>{{ "footer.download"|trans({}, "catroweb") }}</h4>
-            <ul class="list-vertical">
-              <li>
-                <a href="{{ google_play_url }}"
-                   target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
-              </li>
-              {% if theme() == "pocketcode" %}
+<footer class="footer d-flex justify-content-center mt-auto body-content">
+  {% block footer %}
+    <div class="container mt-2">
+
+      <div class="row justify-content-between">
+        <div class="col-6 col-sm-4">
+          <h3>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h3>
+          <ul class="list-vertical">
+            <li>
+              <a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a>
+            </li>
+            <li>
+              <a href="https://www.catrobat.org"
+                 target="_blank">{{ "aboutCatrobat"|trans({}, "catroweb") }}</a>
+            </li>
+            <li>
+              <a href="https://edu.catrob.at/">
+                {{ "help-cards.headings.education"|trans({}, "catroweb") }}</a>
+            </li>
+            <li>
+              <a href="https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode">
+                {{ "help-cards.headings.discuss"|trans({}, "catroweb") }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-6 col-sm-4">
+          <h3>{{ "footer.legalities"|trans({}, "catroweb") }}</h3>
+          <ul class="list-vertical">
+            <li>
+              <a href="{{ url('licenseToPlay') }}">{{ "licenseToPlay.link"|trans({}, "catroweb") }}</a>
+            </li>
+            <li>
+              <a href="{{ url('privacypolicy') }}">{{ "privacy-policy.header"|trans({}, "catroweb") }}</a>
+            </li>
+            <li>
+              <a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a>
+            </li>
+            <li>
+              <a href="https://developer.catrobat.org/imprint"
+                 target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-6 mt-4 mt-sm-0 col-sm-4">
+          <h3>{{ "footer.download"|trans({}, "catroweb") }}</h3>
+          <ul class="list-vertical">
+            <li>
+              <a href="{{ google_play_url }}"
+                 target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
+            </li>
+            {% if theme() == "pocketcode" %}
               <li>
                 <a href="https://itunes.apple.com/app/pocket-code/id1117935892"
                    target="_blank">{{ "iosAppStore"|trans({}, "catroweb") }}</a>
               </li>
-              {% endif %}
-            </ul>
-          </div>
+            {% endif %}
+          </ul>
         </div>
       </div>
 
       <hr>
-      <div class="copyright footer-left">
-        <select id="switch-language" autocomplete="off">
-          {% set countries = getLanguageOptions() %}
-          {% for country in countries %}
-            <option value="{{ country[0] }}"
-                    {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
-          {% endfor %}
-        </select>
+
+      <div class="row justify-content-between">
+        <div class="form-group col-12 col-sm-6">
+          <label for="switch-language">{{ 'footer.language'|trans({}, "catroweb") }}:</label>
+          <select id="switch-language" class="form-control-sm" autocomplete="off">
+            {% set countries = getLanguageOptions() %}
+            {% for country in countries %}
+              <option value="{{ country[0] }}"
+                      {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div id="copyright" class="col-12 col-sm-6">
+          {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
+        </div>
       </div>
-      <div class="copyright footer-right">
-        {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
-      </div>
+
     </div>
-  </footer>
-{% endblock %}
+
+  {% endblock %}
+</footer>
+

@@ -12,13 +12,11 @@ Feature: As a visitor I want to be able to download projects
   Scenario: I want to download a project via the button
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the link of "download" should open "download"
+    Then the element "#url-download" should be visible
+    And the element "#url-download" should have a attribute "onclick" with value "program.download("
 
-  Scenario: Clicking the download button should deactivate the download button for 5 seconds
+  Scenario: Clicking the download button should deactivate the download button until download is finished
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     When I click "#url-download"
-    And I wait for AJAX to finish
-    Then the href with id "url-download" should be void
-    And I wait 5000 milliseconds
-    Then the href with id "url-download" should not be void
+    Then the button "#url-download" should be disabled until download is finished

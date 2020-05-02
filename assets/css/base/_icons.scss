@@ -47,12 +47,6 @@
   font-size: 3em;
 }
 
-.program-big-button-icon
-{
-  font-size: 2.8em !important;
-  vertical-align: middle;
-}
-
 .like-round-icon-container
 {
   background-color: $primary;
@@ -82,4 +76,8 @@
   font-size: 3.2em;
   vertical-align: middle;
   margin-top: -0.25em;
+}
+
+#help-button {
+  cursor:pointer
 }

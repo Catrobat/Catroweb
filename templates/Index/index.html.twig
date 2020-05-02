@@ -11,7 +11,7 @@
   {% endif %}
 
   <div id="featuredPrograms">
-    <h1>{{ "programs.featured"|trans({}, "catroweb") }}</h1>
+    <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
 
     {% if featured|length > 0 %}
       {{ include('Index/featured_programs_carousel.html.twig',
@@ -32,55 +32,55 @@
   {% if theme() == 'pocketgalaxy' %}
 
     <div id="submissions">
-      <h1>{{ "programs.submitted"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.submitted"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
     <div id="sample">
-      <h1>{{ "programs.sample"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.sample"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
     <div id="related">
-      <h1>{{ "programs.related"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.related"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
   {% else %}
 
     <div id="newest" style="display:none">
-      <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.newest"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
     <div id="recommended" style="display:none">
-      <h1>{{ "programs.recommended"|trans({}, "catroweb") }}
-        <i id="help-button" class="help-icon fa fa-question-circle ml-1 catro-icon-button"
+      <h2>{{ "programs.recommended"|trans({}, "catroweb") }}
+        <i id="help-button" class="far fa-question-circle"
            data-toggle="tooltip" title="Help"
            data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
            data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
         </i>
-      </h1>
+      </h2>
       <div class="programs"></div>
     </div>
 
     <div id="mostDownloaded" style="display:none">
-      <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
     <div id="mostViewed" style="display:none">
-      <h1>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
     <div id="scratchRemixes" style="display:none">
-      <h1>{{ "programs.scratchremixes"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.scratchremixes"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
     <div id="random" style="display:none">
-      <h1>{{ "programs.random"|trans({}, "catroweb") }}</h1>
+      <h2>{{ "programs.random"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
