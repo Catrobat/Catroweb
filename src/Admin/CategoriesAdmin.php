@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,6 +22,14 @@ class CategoriesAdmin extends AbstractAdmin
    * @var string
    */
   protected $baseRoutePattern = 'categories';
+
+  /**
+   * @var array
+   */
+  protected $datagridValues = [
+    '_sort_by' => 'order',
+    '_sort_order' => 'ASC',
+  ];
 
   /**
    * @param FormMapper $formMapper
@@ -52,6 +61,12 @@ class CategoriesAdmin extends AbstractAdmin
    */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
+    $datagridMapper
+      ->add('name', null, ['label' => 'Starter Category'])
+      ->add('alias', null, ['label' => 'Category Alias'])
+      ->add('programs', null, ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('order')
+    ;
   }
 
   /**
@@ -62,10 +77,27 @@ class CategoriesAdmin extends AbstractAdmin
   protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
-      ->addIdentifier('name')
-      ->add('alias')
+      ->add('name', null, ['label' => 'Starter Category', 'sortable' => false])
+      ->add('alias', null, ['label' => 'Category Alias', 'sortable' => false])
       ->add('programs', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('order')
+      ->add('_action', 'action', ['actions' => [
+        'edit' => [],
+        'removeFromStarterTable' => ['template' => 'Admin/CRUD/list__action_remove_from_starter_table.html.twig'],
+      ]])
+    ;
+  }
+
+  /**
+   * @param RouteCollection $collection
+   *
+   * Routes to be added/removed
+   */
+  protected function configureRoutes(RouteCollection $collection): void
+  {
+    $collection
+      ->add('removeFromStarterTable')
+      ->remove('delete')
     ;
   }
 }

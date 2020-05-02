@@ -1988,6 +1988,23 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the starter programs table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function shouldSeeStarterProgramsTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['Starter Category']);
+      $this->assertSession()->pageTextContains($user_stat['Category Alias']);
+      $this->assertSession()->pageTextContains($user_stat['Programs']);
+      $this->assertSession()->pageTextContains($user_stat['Order']);
+    }
+  }
+
+  /**
    * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the APK-folder$/
    *
    * @param mixed $filename

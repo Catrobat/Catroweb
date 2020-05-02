@@ -553,10 +553,11 @@ services:
   catrowebadmin.block.programs.categories:
     class: App\Admin\CategoriesAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Starter Projects" }
+      - { name: sonata.admin, manager_type: orm, label: "Starter Projects", show_mosaic_button: false }
     arguments:
       - ~
       - App\Entity\StarterCategory
+      - App\Catrobat\Controller\Admin\CategoriesController
       - ~
     public: true
 
