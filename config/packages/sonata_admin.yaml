@@ -15,6 +15,7 @@ sonata_block:
 sonata_admin:
     title:     Admin Panel
     title_logo: images/admin/admin_logo.png
+    show_mosaic_button: false
     templates:
         layout: 'Admin\standard_layout.html.twig'
     dashboard:

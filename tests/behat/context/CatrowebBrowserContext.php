@@ -427,8 +427,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $arg1 = trim($arg1);
 
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'some':
         $this->assertSession()->elementExists('css', '.program');
         break;
@@ -482,8 +481,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function theSelectedLanguageShouldBe($arg1): void
   {
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'English':
         $cookie = $this->getSession()->getCookie('hl');
         if (!empty($cookie))
@@ -508,8 +506,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iSwitchTheLanguageTo($arg1): void
   {
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'English':
         $this->getSession()->setCookie('hl', 'en');
         break;
@@ -565,8 +562,7 @@ class CatrowebBrowserContext extends BrowserContext
     $img = null;
     $path = null;
 
-    switch ($arg2)
-    {
+    switch ($arg2) {
       case 'Hour of Code':
         if ('big' === $arg1)
         {
@@ -1051,8 +1047,7 @@ class CatrowebBrowserContext extends BrowserContext
     }
     $source = trim($source, '"');
 
-    switch ($name)
-    {
+    switch ($name) {
       case 'logo.png':
         $logoUrl = 'data:image/png;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'logo.png'));
         $isSame = ($source === $logoUrl);
@@ -1095,8 +1090,7 @@ class CatrowebBrowserContext extends BrowserContext
     }
     $source = trim($source, '"');
 
-    switch ($name)
-    {
+    switch ($name) {
       case 'logo.png':
         $logoUrl = 'data:image/png;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'logo.png'));
         $isSame = ($source === $logoUrl);
@@ -1136,8 +1130,7 @@ class CatrowebBrowserContext extends BrowserContext
     $page = $this->getSession()->getPage();
     $button = null;
 
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'login':
         $button = $page->find('css', '#btn-login');
         break;
@@ -1319,8 +1312,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function theLinkOfShouldOpen($identifier, $url_type): void
   {
     $class_name = '';
-    switch ($identifier)
-    {
+    switch ($identifier) {
       case 'image':
         $class_name = 'image-container';
         break;
@@ -1335,8 +1327,7 @@ class CatrowebBrowserContext extends BrowserContext
     Assert::assertTrue(strlen($class_name) > 0);
 
     $url_text = '';
-    switch ($url_type)
-    {
+    switch ($url_type) {
       case 'download':
         $url_text = 'app/download';
         break;
@@ -1552,8 +1543,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iClickOnTheBanner($numb): void
   {
-    switch ($numb)
-    {
+    switch ($numb) {
       case 'first':
         $this->iClick('#tutorial-1');
         break;
@@ -1598,8 +1588,7 @@ class CatrowebBrowserContext extends BrowserContext
         $program = $this->getProgramManager()->findOneByName($url);
         Assert::assertNotNull($program);
         Assert::assertNotNull($program->getId());
-        $url = $this->getRouter()->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode'])
-        ;
+        $url = $this->getRouter()->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -1728,8 +1717,7 @@ class CatrowebBrowserContext extends BrowserContext
 
     Assert::assertEquals($type_name, $click->getType());
 
-    switch ($name_id)
-    {
+    switch ($name_id) {
       case 'tag_id':
         Assert::assertEquals($id_or_value, $click->getTag()->getId());
         break;
@@ -2149,8 +2137,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $pm = $this->getProgramManager();
     $program = $pm->find('1');
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'pending':
         Assert::assertEquals(Program::APK_PENDING, $program->getApkStatus());
         break;
@@ -2195,8 +2182,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $pm = $this->getProgramManager();
     $program = $pm->find('1');
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'pending':
         $program->setApkStatus(Program::APK_PENDING);
         break;
@@ -2290,6 +2276,25 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['Category Alias']);
       $this->assertSession()->pageTextContains($user_stat['Programs']);
       $this->assertSession()->pageTextContains($user_stat['Order']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the reported programs table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeReportedProgramsTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['Note']);
+      $this->assertSession()->pageTextContains($user_stat['State']);
+      $this->assertSession()->pageTextContains($user_stat['Category']);
+      $this->assertSession()->pageTextContains($user_stat['Reporting User']);
+      $this->assertSession()->pageTextContains($user_stat['Program']);
+      $this->assertSession()->pageTextContains($user_stat['Program Visible']);
     }
   }
 
