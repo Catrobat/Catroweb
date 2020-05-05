@@ -7,7 +7,6 @@ parameters:
   catrobat.file.extract.path:           "resources/extract/"
   catrobat.file.storage.dir:            "%kernel.project_dir%/public/resources/programs/"
   catrobat.file.storage.path:           "resources/programs/"
-  catrobat.invalidupload.dir:           "%kernel.project_dir%/src/Catrobat/Commands/invisible_programs/"
   catrobat.logs.dir:                    "%kernel.project_dir%/var/log/"
   catrobat.max_description_upload_size: 10000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
   catrobat.max_credits_upload_size:     3000
@@ -105,8 +104,8 @@ services:
     class: App\Entity\TemplateManager
     public: true
 
-  App\Catrobat\Commands\Helpers\RemixManipulationProgramManager:
-    class: App\Catrobat\Commands\Helpers\RemixManipulationProgramManager
+  App\Commands\Helpers\RemixManipulationProgramManager:
+    class: App\Commands\Helpers\RemixManipulationProgramManager
     public: true
 
   App\Entity\RemixManager:
@@ -145,9 +144,9 @@ services:
   #   Commands:
   #               need a console tag; make sure all commands are in the correct folder and extend Command
   #
-  App\Catrobat\Commands\:
-    resource: '../src/Catrobat/Commands'
-    exclude: '../src/Catrobat/Commands/Helpers'
+  App\Commands\:
+    resource: '../src/Commands'
+    exclude: '../src/Commands/Helpers'
     tags:
       - { name: console.command }
 

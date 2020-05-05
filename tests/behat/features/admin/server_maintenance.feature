@@ -2,7 +2,7 @@
 Feature: Admin Server Maintenance
   In order to keep the server clean
   As Admin
-  I want to be able to delete Extracted Catrobatfiles/APKs and Backups in the Backend
+  I want to be able to delete Extracted Catrobatfiles/APKs in the Backend
 
   Scenario: As a valid admin I want to be able to see the Maintain menu
     Given I am a logged in as super admin
@@ -14,7 +14,6 @@ Feature: Admin Server Maintenance
     When I GET "/admin/maintain/list"
     Then the client response should contain "Delete APKs"
     And the client response should contain "Delete extracted files"
-    And the client response should contain "Delete backups"
 
   Scenario: As a valid admin I want to be able to remove the APKs through the backend
   which should result in deleting apk from disk and reset entity state
@@ -31,30 +30,6 @@ Feature: Admin Server Maintenance
     Then the client response should contain "Generated APKs (0.00 B)"
     And program with id "1" should have no apk
 
-
-  Scenario: As a valid admin I want to be able to delete all backups through the backend
-    Given I am a logged in as super admin
-    And there is a file "a_backup.tar.gz" with size "4096" bytes in the backup-folder
-    And there is a file "a_second_backup.tar.gz" with size "4096" bytes in the backup-folder
-    When I GET "/admin/maintain/list"
-    Then the client response should contain "a_backup.tar.gz"
-    And the client response should contain "a_second_backup.tar.gz"
-    And the client response should contain "Manual backups (8.00 KiB)"
-    When I GET "/admin/maintain/delete_backups"
-    Then the client response should contain "Manual backups (0.00 B)"
-
-
-  Scenario: As a valid admin I want to be able to delete a single backup through the backend
-    Given I am a logged in as super admin
-    And there is a file "a_backup.tar.gz" with size "4096" bytes in the backup-folder
-    And there is a file "a_second_backup.tar.gz" with size "4096" bytes in the backup-folder
-    When I GET "/admin/maintain/list"
-    Then the client response should contain "Manual backups (8.00 KiB)"
-    When I GET "/admin/maintain/delete_backups?backupFile=a_backup.tar.gz"
-    Then the client response should contain "Manual backups (4.00 KiB)"
-    And the client response should contain "a_second_backup.tar.gz"
-
-
   Scenario: As a valid admin I want to be able to remove the extracted program files through the backend
   which should result in deleting resources from disk and reset entity state
     Given I am a logged in as super admin
@@ -67,20 +42,3 @@ Feature: Admin Server Maintenance
     When I GET "/admin/maintain/extracted"
     Then the client response should contain "Extracted Catrobatfiles (0.00 B)"
     And program with id "1" should have no directory_hash
-
-  Scenario: As a valid admin I want to be able to create a single backup through the backend
-    Given I am a logged in as super admin
-    And there is no file in the backup-folder
-    When I GET "/admin/maintain/list"
-    Then the client response should contain "Create backup"
-    When I GET "/admin/maintain/create_backup"
-    Then the client response should contain "Delete backup"
-    And the client response should contain "Download backup"
-
-  Scenario: As a valid admin I want to be able to download a single backup through the backend
-    Given I am a logged in as super admin
-    And there is a file "a_backup.tar.gz" with size "4096" bytes in the backup-folder
-    When I GET "/admin/maintain/list"
-    Then the client response should contain "a_backup.tar.gz"
-    When I GET "/app/download-backup/a_backup.tar.gz"
-    Then the response Header should contain the key "Content-Disposition" with the value 'attachment; filename=a_backup.tar.gz'

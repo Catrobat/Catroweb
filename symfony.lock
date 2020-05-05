@@ -368,9 +368,6 @@
     "php-http/promise": {
         "version": "v1.0.0"
     },
-    "phpcheckstyle/phpcheckstyle": {
-        "version": "v0.14.8"
-    },
     "phpcollection/phpcollection": {
         "version": "0.5.0"
     },
