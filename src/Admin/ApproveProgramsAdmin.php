@@ -113,6 +113,10 @@ class ApproveProgramsAdmin extends AbstractAdmin
         $this->program_manager->find($object->getId())
       );
     }
+    if (null == $this->extractedProgram)
+    {
+      return [];
+    }
 
     $image_paths = $this->extractedProgram->getContainingImagePaths();
 
@@ -139,6 +143,11 @@ class ApproveProgramsAdmin extends AbstractAdmin
       );
     }
 
+    if (null == $this->extractedProgram)
+    {
+      return [];
+    }
+
     return $this->encodeFileNameOfPathsArray($this->extractedProgram->getContainingSoundPaths());
   }
 
@@ -154,6 +163,10 @@ class ApproveProgramsAdmin extends AbstractAdmin
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
+    }
+    if (null == $this->extractedProgram)
+    {
+      return [];
     }
 
     return $this->extractedProgram->getContainingStrings();
@@ -173,7 +186,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
       );
     }
 
-    if ($this->extractedProgram->hasScenes())
+    if (null == $this->extractedProgram || $this->extractedProgram->hasScenes())
     {
       return [];
     }

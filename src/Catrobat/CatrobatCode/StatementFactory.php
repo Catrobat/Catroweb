@@ -426,12 +426,12 @@ class StatementFactory
   {
     $this->currentObject = new CodeObject();
     $this->currentObject->setName($objectTree[self::NAME_ATTRIBUTE]);
-
-    $this->currentObject->addAllScripts($this->createStatement($objectTree, 1));
     if (null == $this->currentObject->getName())
     {
       return null;
     }
+
+    $this->currentObject->addAllScripts($this->createStatement($objectTree, 1));
 
     return $this->currentObject;
   }

@@ -12,7 +12,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
+use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -32,9 +34,11 @@ class AllProgramsAdmin extends AbstractAdmin
    * @var array
    */
   protected $datagridValues = [
-    '_sort_by' => 'id',
+    '_sort_by' => 'uploaded_at',
     '_sort_order' => 'DESC',
   ];
+
+  private ParameterBagInterface $parameter_bag;
 
   private ScreenshotRepository $screenshot_repository;
 
@@ -45,11 +49,13 @@ class AllProgramsAdmin extends AbstractAdmin
    * @param mixed $class
    * @param mixed $baseControllerName
    */
-  public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository)
+  public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository,
+                              ParameterBagInterface $parameter_bag)
   {
     parent::__construct($code, $class, $baseControllerName);
 
     $this->screenshot_repository = $screenshot_repository;
+    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -135,8 +141,10 @@ class AllProgramsAdmin extends AbstractAdmin
     $datagridMapper
       ->add('id')
       ->add('name')
-      ->add('downloads')
-      ->add('user.username')
+      ->add('user.username', null, ['label' => 'Username'])
+      ->add('uploaded_at', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class,
+        'label' => 'Upload Time', ])
+      ->add('flavor')
     ;
   }
 
@@ -147,12 +155,22 @@ class AllProgramsAdmin extends AbstractAdmin
    */
   protected function configureListFields(ListMapper $listMapper): void
   {
+    $flavor_options = $this->parameter_bag->get('themes');
+
+    $choices = [];
+    foreach ($flavor_options as $flavor)
+    {
+      $choices[$flavor] = $flavor;
+    }
     $listMapper
-      ->addIdentifier('id')
+      ->add('uploaded_at', null, ['label' => 'Upload Time'])
       ->add('user')
-      ->add('name')
-      ->add('description')
-      ->add('flavor', 'string', ['editable' => true])
+      ->addIdentifier('name', 'string', ['sortable' => false])
+      ->add('flavor', 'choice', [
+        'editable' => true,
+        'sortable' => false,
+        'choices' => $choices,
+      ])
       ->add('views')
       ->add('downloads')
       ->add('thumbnail', 'string',
@@ -160,11 +178,10 @@ class AllProgramsAdmin extends AbstractAdmin
           'template' => 'Admin/program_thumbnail_image_list.html.twig',
         ]
       )
-      ->add('approved', null, ['editable' => true])
-      ->add('visible', null, ['editable' => true])
+      ->add('approved', null, ['editable' => true, 'sortable' => false])
+      ->add('visible', null, ['editable' => true, 'sortable' => false])
       ->add('_action', 'actions', ['actions' => [
         'show' => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
-        'edit' => [],
       ]])
     ;
   }
