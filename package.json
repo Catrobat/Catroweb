@@ -5,7 +5,9 @@
   "main": "Gruntfile.js",
   "scripts": {
     "test": "npx eslint assets/js/**/*.js",
-    "fix": "npx eslint assets/js/**/*.js --fix"
+    "fix": "npx eslint assets/js/**/*.js --fix",
+    "test-style": "npx stylelint assets/css/**/*.scss",
+    "fix-style": "npx stylelint assets/css/**/*.scss --fix"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,9 @@
     "grunt-contrib-watch": "^1.1.0",
     "jit-grunt": "^0.10.0",
     "sass": "^1.26.5",
-    "standard": "^14.3.3"
+    "standard": "^14.3.3",
+    "stylelint": "^13.3.3",
+    "stylelint-config-twbs-bootstrap": "^2.0.2"
   },
   "dependencies": {
     "ajv": "^6.12.2",
