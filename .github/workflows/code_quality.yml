@@ -17,6 +17,20 @@ jobs:
       - run: npm install
       - run: npm run test
 
+  stylelint:
+    #  SCSS CodeStyle
+    name: StyleLint
+    runs-on: ubuntu-latest
+    # config defined in .stylelintrc.json
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run test-style
+        continue-on-error: true  # TODO: remove after fixing all style errors
+
   php-loc:
     #  Measuring the size and analyzing the structure of the project (php)
     name: PHP Loc
@@ -63,7 +77,7 @@ jobs:
         with:
           args: analyse
 
-  Symfony-app-dependent-checks :
+  Symfony-app-dependent-checks:
     # to check for custom defined functions/filters the whole Symfony application is required
     name: Twig Lint, Yaml Lint, Container Lint
     runs-on: ubuntu-latest
