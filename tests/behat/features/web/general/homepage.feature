@@ -29,6 +29,13 @@ Feature: Pocketcode homepage
       |           | http://www.google.at/ | 1      | 5        |
       |           | http://www.orf.at/    | 0      | 4        |
 
+    And following projects are examples:
+      | name      | active | priority |
+      | project 4 | 0      | 1        |
+      | project 5 | 1      | 3        |
+      | project 6 | 1      | 2        |
+
+
     Given there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
       | 70058680          | 6                 |
@@ -48,6 +55,7 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
     Then the element "#newest" should exist
+    Then the element "#example" should exist
     Then the element "#recommended" should exist
     Then the element "#mostDownloaded" should exist
     Then the element "#random" should exist
@@ -73,3 +81,10 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
     And I should see the slider with the values "http://www.google.at/,project 2,project 3"
+
+  Scenario: Example Programs
+    Given I am on homepage
+    And I wait for the page to be loaded
+    Then the element "#example" should exist
+    And the "#example" element should contain "project 5"
+    And the "#example" element should contain "project 6"

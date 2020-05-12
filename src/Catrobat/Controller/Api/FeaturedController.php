@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Controller\Api;
 
-use App\Catrobat\Services\FeaturedImageRepository;
+use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
 use App\Repository\FeaturedRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -21,7 +21,7 @@ class FeaturedController extends AbstractController
    *
    * @throws NonUniqueResultException
    */
-  public function getFeaturedProgramsAction(Request $request, FeaturedImageRepository $image_repository,
+  public function getFeaturedProgramsAction(Request $request, ImageRepository $image_repository,
                                             FeaturedRepository $repository): JsonResponse
   {
     return $this->getFeaturedPrograms($request, false, $image_repository, $repository);
@@ -35,7 +35,7 @@ class FeaturedController extends AbstractController
    *
    * @throws NonUniqueResultException
    */
-  public function getFeaturedIOSProgramsAction(Request $request, FeaturedImageRepository $image_repository,
+  public function getFeaturedIOSProgramsAction(Request $request, ImageRepository $image_repository,
                                                FeaturedRepository $repository): JsonResponse
   {
     return $this->getFeaturedPrograms($request, true, $image_repository, $repository);
@@ -44,7 +44,7 @@ class FeaturedController extends AbstractController
   /**
    * @throws NonUniqueResultException
    */
-  private function getFeaturedPrograms(Request $request, bool $ios_only, FeaturedImageRepository $image_repository,
+  private function getFeaturedPrograms(Request $request, bool $ios_only, ImageRepository $image_repository,
                                        FeaturedRepository $repository): JsonResponse
   {
     $flavor = $request->get('flavor');
@@ -78,7 +78,7 @@ class FeaturedController extends AbstractController
     return JsonResponse::create($retArray);
   }
 
-  private function generateProgramObject(FeaturedProgram $featured_program, FeaturedImageRepository $image_repository): array
+  private function generateProgramObject(FeaturedProgram $featured_program, ImageRepository $image_repository): array
   {
     $new_program = [];
     $new_program['ProjectId'] = $featured_program->getProgram()->getId();
@@ -90,7 +90,8 @@ class FeaturedController extends AbstractController
 
     $new_program['FeaturedImage'] = $image_repository->getWebPath(
       $featured_program->getId(),
-      $featured_program->getImageType()
+      $featured_program->getImageType(),
+      true
     );
 
     return $new_program;

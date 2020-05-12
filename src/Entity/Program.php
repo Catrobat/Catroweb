@@ -367,6 +367,9 @@ class Program
    */
   protected Collection $reports;
 
+  /**
+   * Program constructor.
+   */
   public function __construct()
   {
     $this->comments = new ArrayCollection();
@@ -1021,5 +1024,20 @@ class Program
   public function setRemixNotificationMentionsAsParent(Collection $remix_notification_mentions_as_parent): void
   {
     $this->remix_notification_mentions_as_parent = $remix_notification_mentions_as_parent;
+  }
+
+  public function isExample(): bool
+  {
+    return false;
+  }
+
+  public function getImageType(): string
+  {
+    return '';
+  }
+
+  public function getProgram(): ?Program
+  {
+    return $this;
   }
 }

@@ -2,15 +2,15 @@
 
 namespace App\Catrobat\Listeners\Entity;
 
-use App\Catrobat\Services\FeaturedImageRepository;
+use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class FeaturedProgramImageListener
 {
-  private FeaturedImageRepository $repository;
+  private ImageRepository $repository;
 
-  public function __construct(FeaturedImageRepository $repository)
+  public function __construct(ImageRepository $repository)
   {
     $this->repository = $repository;
   }
@@ -32,7 +32,7 @@ class FeaturedProgramImageListener
     {
       return;
     }
-    $this->repository->save($file, $featured->getId(), $featured->getImageType());
+    $this->repository->save($file, $featured->getId(), $featured->getImageType(), true);
   }
 
   public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event): void
@@ -54,7 +54,7 @@ class FeaturedProgramImageListener
     {
       return;
     }
-    $this->repository->save($file, $featured->getId(), $featured->getImageType());
+    $this->repository->save($file, $featured->getId(), $featured->getImageType(), true);
   }
 
   public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
@@ -64,6 +64,6 @@ class FeaturedProgramImageListener
 
   public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
-    $this->repository->remove($featured->removed_id, $featured->getImageType());
+    $this->repository->remove($featured->removed_id, $featured->getImageType(), true);
   }
 }

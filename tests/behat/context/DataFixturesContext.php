@@ -232,6 +232,21 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Given /^there are example programs:$/
+   * @Given /^there are example projects:$/
+   * @Given /^following programs are examples:$/
+   * @Given /^following projects are examples:$/
+   */
+  public function thereAreExamplePrograms(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config)
+    {
+      $this->insertExampleProject($config, false);
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
    * @Given /^there are starter programs:$/
    * @Given /^there are starter projects:$/
    *

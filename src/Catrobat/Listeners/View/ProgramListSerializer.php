@@ -4,6 +4,7 @@ namespace App\Catrobat\Listeners\View;
 
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
+use App\Catrobat\Services\ImageRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,13 +23,16 @@ class ProgramListSerializer
 
   private ElapsedTimeStringFormatter $time_formatter;
 
+  private ImageRepository $example_image_repository;
+
   public function __construct(ScreenshotRepository $screenshot_repository, RequestStack $request_stack,
-                              RouterInterface $router, ElapsedTimeStringFormatter $time_formatter)
+                              RouterInterface $router, ElapsedTimeStringFormatter $time_formatter, ImageRepository $example_image_repository)
   {
     $this->request_stack = $request_stack;
     $this->router = $router;
     $this->screenshot_repository = $screenshot_repository;
     $this->time_formatter = $time_formatter;
+    $this->example_image_repository = $example_image_repository;
   }
 
   public function onKernelView(ViewEvent $event): void
@@ -51,6 +55,14 @@ class ProgramListSerializer
       foreach ($programs as $program)
       {
         $new_program = [];
+        $example = false;
+        if ($program->isExample())
+        {
+          $new_program['ExampleId'] = $program->getId();
+          $new_program['Extension'] = $program->getImageType();
+          $example = true;
+          $program = $program->getProgram();
+        }
         $new_program['ProjectId'] = $program->getId();
         $new_program['ProjectName'] = $program->getName();
         if ($details)
@@ -65,8 +77,16 @@ class ProgramListSerializer
           $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
           $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
             ->getTimestamp());
-          $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
-          $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
+          if ($example)
+          {
+            $new_program['ScreenshotBig'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
+            $new_program['ScreenshotSmall'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
+          }
+          else
+          {
+            $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
+            $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
+          }
           $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
             'flavor' => $event->getRequest()->getSession()->get('flavor_context'),
             'id' => $program->getId(),

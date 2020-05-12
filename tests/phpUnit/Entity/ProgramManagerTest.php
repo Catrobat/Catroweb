@@ -16,6 +16,7 @@ use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Repository\ExampleRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;
 use App\Repository\ProgramLikeRepository;
@@ -90,6 +91,7 @@ class ProgramManagerTest extends TestCase
     $tag_repository = $this->createMock(TagRepository::class);
     $program_like_repository = $this->createMock(ProgramLikeRepository::class);
     $featured_repository = $this->createMock(FeaturedRepository::class);
+    $example_repository = $this->createMock(ExampleRepository::class);
     $logger = $this->createMock(LoggerInterface::class);
     $app_request = $this->createMock(AppRequest::class);
     $event = $this->createMock(ProgramBeforeInsertEvent::class);
@@ -101,8 +103,8 @@ class ProgramManagerTest extends TestCase
     $this->program_manager = new ProgramManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
       $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
-      $this->event_dispatcher, $logger, $app_request, $extension_repository, $catrobat_file_sanitizer, $notification_service,
-      $urlHelper
+      $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
+      $catrobat_file_sanitizer, $notification_service, $urlHelper
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');

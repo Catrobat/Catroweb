@@ -3,8 +3,8 @@
 namespace App\Api;
 
 use App\Catrobat\Requests\AddProgramRequest;
-use App\Catrobat\Services\FeaturedImageRepository;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
+use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
 use App\Entity\ProgramManager;
 use App\Entity\User;
@@ -39,11 +39,11 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   private FeaturedRepository $featured_repository;
 
-  private FeaturedImageRepository $featured_image_repository;
+  private ImageRepository $featured_image_repository;
 
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
-                              FeaturedImageRepository $featured_image_repository,
+                              ImageRepository $featured_image_repository,
                               RequestStack $request_stack,
                               TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
@@ -98,7 +98,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'id' => $featured_program->getId(),
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
-        'featured_image' => $this->featured_image_repository->getAbsoluteWWebPath($featured_program->getId(), $featured_program->getImageType()),
+        'featured_image' => $this->featured_image_repository->getAbsoluteWWebPath($featured_program->getId(), $featured_program->getImageType(), true),
       ];
       $new_featured_project = new FeaturedProject($result);
       $featured_programs[] = $new_featured_project;
@@ -265,6 +265,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $projects = [];
     foreach ($programs as &$program)
     {
+      if ($program->isExample())
+      {
+        $program = $program->getProgram();
+      }
       $result = [
         'id' => $program->getId(),
         'name' => $program->getName(),

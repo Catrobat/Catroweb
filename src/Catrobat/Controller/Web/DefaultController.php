@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use App\Catrobat\Services\FeaturedImageRepository;
+use App\Catrobat\Services\ImageRepository;
 use App\Catrobat\Services\StatisticsService;
 use App\Entity\FeaturedProgram;
 use App\Repository\FeaturedRepository;
@@ -24,7 +24,7 @@ class DefaultController extends AbstractController
   /**
    * @Route("/", name="index", methods={"GET"})
    */
-  public function indexAction(Request $request, FeaturedImageRepository $image_repository, FeaturedRepository $repository): Response
+  public function indexAction(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): Response
   {
     $flavor = $request->get('flavor');
 
@@ -58,7 +58,7 @@ class DefaultController extends AbstractController
       {
         $info['url'] = $item->getUrl();
       }
-      $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType());
+      $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType(), true);
 
       $featured[] = $info;
     }

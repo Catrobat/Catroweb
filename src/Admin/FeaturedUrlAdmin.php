@@ -3,7 +3,7 @@
 namespace App\Admin;
 
 use App\Catrobat\Forms\FeaturedImageConstraint;
-use App\Catrobat\Services\FeaturedImageRepository;
+use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\StringType;
@@ -35,11 +35,11 @@ class FeaturedUrlAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'featured_url';
 
-  private FeaturedImageRepository $featured_image_repository;
+  private ImageRepository $featured_image_repository;
 
   private ParameterBagInterface $parameter_bag;
 
-  public function __construct($code, $class, $baseControllerName, FeaturedImageRepository $featured_image_repository,
+  public function __construct($code, $class, $baseControllerName, ImageRepository $featured_image_repository,
                               ParameterBagInterface $parameter_bag)
   {
     parent::__construct($code, $class, $baseControllerName);
@@ -54,7 +54,7 @@ class FeaturedUrlAdmin extends AbstractAdmin
    */
   public function getFeaturedImageUrl($object)
   {
-    return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType());
+    return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
   }
 
   /**

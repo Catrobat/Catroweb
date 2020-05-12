@@ -12,7 +12,6 @@
 
   <div id="featuredPrograms">
     <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
-
     {% if featured|length > 0 %}
       {{ include('Index/featured_programs_carousel.html.twig',
         { 'carousel' :
@@ -50,6 +49,11 @@
 
     <div id="newest" style="display:none">
       <h2>{{ "programs.newest"|trans({}, "catroweb") }}</h2>
+      <div class="programs"></div>
+    </div>
+
+    <div id="example" style="display:none">
+      <h2>{{ "programs.example"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
 
@@ -106,6 +110,7 @@
     let mostViewed = new ProjectLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
     let scratchRemixes = new ProjectLoader('#scratchRemixes', '{{ path('api_scratch_remix') }}')
     let random = new ProjectLoader('#random', '{{ path('api_random_programs') }}')
+    let example = new ProjectLoader('#example', '{{ path('api_example_programs') }}')
 
     newest.init()
     recommended.init()
@@ -113,6 +118,7 @@
     mostViewed.init()
     scratchRemixes.init()
     random.init()
+    example.init()
 
     {% endif %}
 
@@ -125,7 +131,7 @@
       if (!isRecommendedProgram)
       {
         url = "{{ path('homepage_click_stats') }}"
-        if (['featured', 'newest', 'mostDownloaded', 'mostViewed','scratchRemixes', 'random'].indexOf(type) === -1)
+        if (['featured', 'example', 'newest', 'mostDownloaded', 'mostViewed','scratchRemixes', 'random'].indexOf(type) === -1)
         {
           alert('You clicked at a program of an unknown section!')
           return
