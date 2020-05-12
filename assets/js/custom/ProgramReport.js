@@ -14,7 +14,7 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
   const SESSION_OLD_REPORT_REASON = 'oldReportReason' + programId
   const SESSION_OLD_REPORT_CATEGORY = 'oldReportCategory' + programId
 
-  $('#report-program-button').click(function () {
+  $('#top-app-bar__btn-report-project').click(function () {
     if (!loggedIn) {
       window.location.href = loginUrl
       return

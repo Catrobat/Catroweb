@@ -579,6 +579,7 @@ oauth:
 search:
   dotdotdot: Search...
   search: Search
+  inMediaLib: Search in media library
   results: Search Results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
@@ -938,7 +939,6 @@ media-packages:
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
-  search-input-description: Search Media Library ...
   search-results : Media Library Search Results
   no-results: Your search returned 0 results. Please use only English search terms.
   download_these_files: SAVE
@@ -958,3 +958,13 @@ disagree: Disagree
 
 profileLoader:
   noProfiles: There are currently no profiles.
+
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy Link'
+checkOutProject: 'Check out this project:'
+

@@ -20,11 +20,11 @@
 <body class="new-nav">
 <div id="page-container" class="pr-0 pl-0">
 
-  {% include 'Default/header.html.twig' %}
+  {% include 'Header/header.html.twig' %}
 
   {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
-  <div class="container body-content mt-3">
+  <div class="container body-content mb-5" style="margin-top: 6em">
     {# Body block where child views will appear #}
     {% block body %}{% endblock %}
   </div>
@@ -52,46 +52,13 @@
 
 <script async src="{{ asset('js/analytics.min.js') }}"></script>
 
-{# SEARCH HEADER #}
-<script>
-  $('#nav-search').submit(function (e) {
-    e.preventDefault()
-  })
-</script>
-<script>
-  $(document).ready(function () {
-    $('.search-icon-header').on('click', function () {
-      console.log('clicked')
-      $(this).hide()
-      const input_group = $('#search-input-group-header')
-      input_group.removeClass('d-none')
-
-      let search_header = $('.search-input-header')
-      let val = search_header.val()
-      search_header
-        .focus()
-        .val('')
-        .val(val)
-    })
-  })
-</script>
-
 {# Main Script #}
 <script>
-  function scrollToHash () {
-    if (window.location.hash && $(window.location.hash).offset()) {
-      window.scrollTo(0, ($(window.location.hash).offset().top - $('.navbar').outerHeight()))
-    }
-  }
-
-  scrollToHash()
-  window.addEventListener('load', scrollToHash)
-  $(window).on('hashchange', scrollToHash)
-
-  {% if package is defined %}
-  new Main('{{ path('medialibrary_search', {'q': 0, 'package_name' : package} ) }}')
+  new Main()
+  {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
+    setSearchUrl('{{ path('medialibrary_empty_search', {'package_name' : package} ) }}')
   {% else %}
-  new Main('{{ path('search', {'q': 0 } ) }}')
+    setSearchUrl('{{ path('empty_search' ) }}')
   {% endif %}
 </script>
 

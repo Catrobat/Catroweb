@@ -5,12 +5,6 @@
 @import '../../../public/bootstrap/scss/mixins';
 @import 'theme_settings';
 
-/* profile */
-
-#follow-icon {
-  font-size: 3em;
-  color: $primary;
-}
 
 .visited-program {
   opacity: 0.6;
@@ -37,10 +31,6 @@
   display: none;
 }
 
-.edit-subtitle {
-  font-weight: 600;
-}
-
 .profile-data {
   padding: 0.5em;
   word-break: break-word;
@@ -48,7 +38,6 @@
 
 .edit-category-button {
   float: right;
-  color: $primary;
 }
 
 #select-country select {
@@ -79,8 +68,8 @@
   text-align: center;
   position: relative;
   cursor: pointer;
-  left: 35px;
-  top: -10px;
+  left: 30px;
+  top: -23px;
   margin-top: -25px;
   width: 30px !important;
   height: 0 !important; // else the layout gets destroyed

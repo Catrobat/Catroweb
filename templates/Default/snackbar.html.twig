@@ -1,0 +1,11 @@
+<div {% if snackbar_id %} id="{{ snackbar_id }}" {% endif %}
+   class="mdc-snackbar body-content">
+  <div class="mdc-snackbar__surface">
+    <div {% if snackbar_id %} id="{{ snackbar_id }}-label" {% endif %}
+       class="mdc-snackbar__label"
+       role="status"
+       aria-live="polite">
+      {{ snackbar_text|default("") }}
+    </div>
+  </div>
+</div>

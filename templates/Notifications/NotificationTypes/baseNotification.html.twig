@@ -4,10 +4,8 @@
 
         {% block notification_title %}{% endblock %}
 
-        <button id="delete-notification-{{ notification.id }}" class="btn btn-primary"
-                onclick="notifications.deleteNotification({{ notification.id }})">
-            <i class="fas fa-times fa-2x" aria-hidden="true"></i>
-
+        <button id="delete-notification-{{ notification.id }}" class="mdc-icon-button material-icons btn btn-primary"
+                onclick="notifications.deleteNotification({{ notification.id }})">close
         </button>
 
     </h5>

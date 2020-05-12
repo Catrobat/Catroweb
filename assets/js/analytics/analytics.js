@@ -1177,7 +1177,7 @@ if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msT
       // track the search input
       // the input button
       const searchButton = TrackingObjectFactory.createObj({
-        BaseSelector: 'nav button#btn-search-header',
+        BaseSelector: 'nav button#top-app-bar__btn-search',
         Category: 'engagement',
         Action: 'search',
         Label: function (e) { return e.parentElement.previousElementSibling.value },
@@ -1189,7 +1189,7 @@ if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msT
       //
       // tracks the search input
       AnalyticsTracker.trackOnKeyPressEnter({
-        BaseSelector: 'nav input.search-input-header',
+        BaseSelector: '#top-app-bar__search-input',
         Category: 'engagement',
         Action: 'search',
         Label: function (e) { return e.value },

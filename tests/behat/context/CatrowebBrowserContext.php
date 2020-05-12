@@ -19,7 +19,6 @@ use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
@@ -208,10 +207,8 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldNotBeLoggedIn(): void
   {
     $this->getSession()->wait(1_000, 'window.location.href.search("profile") == -1');
-    $this->assertElementOnPage('#logo');
     $this->assertElementOnPage('#btn-login');
     $this->assertElementNotOnPage('#btn-logout');
-    $this->assertElementNotOnPage('#nav-dropdown');
   }
 
   /**
@@ -306,7 +303,7 @@ class CatrowebBrowserContext extends BrowserContext
     $sidebar_open = $this->getSession()->getPage()->find('css', '#sidebar')->isVisible();
     if (!$sidebar_open)
     {
-      $this->getSession()->getPage()->find('css', '#btn-sidebar-toggle')->click();
+      $this->getSession()->getPage()->find('css', '#top-app-bar__btn-sidebar-toggle')->click();
     }
     $this->iWaitForAjaxToFinish();
   }
@@ -928,7 +925,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->visit('app/project/'.$program_id);
     $this->iWaitForThePageToBeLoaded();
-    $this->iClick('#report-program-button');
+    $this->iClick('#top-app-bar__btn-report-project');
     $this->iWaitForAjaxToFinish();
     $this->fillField('report-reason', $note);
     switch ($category) {
@@ -1113,10 +1110,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iPressEnterInTheSearchBar(): void
   {
-    $this->getSession()->evaluateScript("$('#searchbar').trigger($.Event( 'keypress', { which: 13 } ))");
-    $this->getSession()->wait(5_000,
-      '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)'
-    );
+    $this->getSession()->executeScript("$('#top-app-bar__search-form').trigger('submit')");
   }
 
   /**
@@ -1643,11 +1637,11 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws ElementNotFoundException
    */
-  public function iSearchForWithTheSearchbar($arg1): void
+  public function iSearchForWithTheSearchBar($arg1): void
   {
-    $this->iClick('.search-icon-header');
+    $this->iClick('#top-app-bar__btn-search');
     $this->fillField('search-input-header', $arg1);
-    $this->iClick('#btn-search-header');
+    $this->iClick('#top-app-bar__btn-search-header');
   }
 
   /**
@@ -1966,18 +1960,14 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iClickTheCurrentlyVisibleSearchIcon(): void
   {
-    $icons = $this->getSession()->getPage()->findAll('css', '.search-icon-header');
-    foreach ($icons as $icon)
+    $icon = $this->getSession()->getPage()->findById('top-app-bar__btn-search');
+    if ($icon->isVisible())
     {
-      /** @var NodeElement $icon */
-      if ($icon->isVisible())
-      {
-        $icon->click();
+      $icon->click();
 
-        return;
-      }
+      return;
     }
-    Assert::assertTrue(false, 'Tried to click .search-icon-header but no visible element was found.');
+    Assert::assertTrue(false, 'Tried to click #top-app-bar__btn-search but no visible element was found.');
   }
 
   /**

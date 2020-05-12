@@ -20,8 +20,6 @@ Feature: As a visitor I want to see a project page
     And I should see "Download the project"
     And I should see "Show Remix Graph"
     And I should see "Download as app"
-    And I should see "Link"
-    And I should see "Report Project"
     And I should see "Catrobat"
 
   Scenario: Viewing the uploader's profile page
@@ -30,11 +28,6 @@ Feature: As a visitor I want to see a project page
     And I click "#icon-author a"
     And I wait for the page to be loaded
     Then I should be on "/app/user/1"
-
-  Scenario: I want a link to this project
-    Given I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then the element ".btn-copy" should be visible
 
   Scenario: On the project page there should be all buttons visible to web and android
     Given I am on "/app/project/1"

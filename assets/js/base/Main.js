@@ -2,16 +2,34 @@
 /* global TextFill */
 
 // eslint-disable-next-line no-unused-vars
-const Main = function (searchUrl) {
+const Main = function () {
   const self = this
-  self.searchUrl = searchUrl.replace(0, '')
+
+  function scrollToHash () {
+    if (window.location.hash && $(window.location.hash).offset()) {
+      window.scrollTo(0, ($(window.location.hash).offset().top - $('.navbar').outerHeight()))
+    }
+  }
+
+  scrollToHash()
+  window.addEventListener('load', scrollToHash)
+  $(window).on('hashchange', scrollToHash)
 
   $(window).ready(function () {
     self.setClickListener()
-    self.setWindowResizeListener()
     self.initSidebarSwipe()
+    self.setLanguageSwitchListener()
   })
 
+  // ---- Language Selection
+  self.setLanguageSwitchListener = function () {
+    $('#switch-language').on('change', function () {
+      document.cookie = 'hl=' + $(this).val() + '; path=/'
+      window.location.reload()
+    })
+  }
+
+  // ----SideBar
   let sidebar, sidebarToggleBtn
   const fnCloseSidebar = function () {
     sidebar.removeClass('active')
@@ -34,7 +52,7 @@ const Main = function (searchUrl) {
 
   self.setClickListener = function () {
     sidebar = $('#sidebar')
-    sidebarToggleBtn = $('#btn-sidebar-toggle')
+    sidebarToggleBtn = $('#top-app-bar__btn-sidebar-toggle')
 
     if ($(window).width() >= 768) {
       sidebarToggleBtn.attr('aria-expanded', true)
@@ -60,67 +78,6 @@ const Main = function (searchUrl) {
 
     // sidebar.find('a.nav-link').on("click", fnCloseSidebar);
     $('#sidebar-overlay').on('click', fnCloseSidebar)
-
-    self.setSearchBtnListener()
-    self.setLanguageSwitchListener()
-  }
-
-  self.setWindowResizeListener = function () {
-    $(window).resize(function () {
-      $('#nav-dropdown').hide()
-    })
-  }
-
-  self.setSearchBtnListener = function () {
-    // search enter pressed
-    $('input.input-search').keypress(function (event) {
-      if (event.which === 13) {
-        const searchTerm = $(this).val()
-        if (!searchTerm) {
-          $(this).tooltip('show')
-          return
-        }
-        self.searchPrograms(searchTerm)
-      }
-    })
-
-    // search button clicked (header)
-    $('.btn-search').click(function () {
-      const searchField = $(this).parent().parent().find('input.input-search')
-      const searchTerm = searchField.val()
-      if (!searchTerm) {
-        searchField.tooltip('show')
-        return
-      }
-      self.searchPrograms(searchTerm)
-    })
-  }
-
-  self.searchPrograms = function (string) {
-    window.location.href = self.searchUrl + encodeURIComponent(string.trim())
-  }
-
-  self.setLanguageSwitchListener = function () {
-    const select = $('#switch-language')
-    select.change(function () {
-      document.cookie = 'hl=' + $(this).val() + '; path=/'
-      location.reload()
-    })
-  }
-
-  self.getCookie = function (cname) {
-    const name = cname + '='
-    const ca = document.cookie.split(';')
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i]
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1)
-      }
-      if (c.indexOf(name) !== -1) {
-        return c.substring(name.length, c.length)
-      }
-    }
-    return ''
   }
 
   self.initSidebarSwipe = function () {
@@ -286,19 +243,4 @@ $(function () {
       }
     })
   }
-
-  // -------------------------------------------------------------------------------------------------------------------
-  // Search field
-  const searchInput = $('.input-search')
-
-  searchInput.tooltip({
-    trigger: 'manual',
-    placement: 'bottom'
-  })
-
-  searchInput.on('shown.bs.tooltip', function () {
-    setTimeout(function () {
-      searchInput.tooltip('hide')
-    }, 1000)
-  })
 })

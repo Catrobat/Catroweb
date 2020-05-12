@@ -439,7 +439,7 @@
     font-size: $default-font-size;
   }
 
-  @media screen and (max-width: $responsive-width-tablet) {
+  @media screen and (max-width: var(--breakpoint-lg)) {
     .col-per-25 {
       width: 50% !important;
     }
@@ -474,7 +474,7 @@
   }
 
   .clickable {
-    color: $special-font-color;
+    color: black;
     font-weight: bold;
   }
 }

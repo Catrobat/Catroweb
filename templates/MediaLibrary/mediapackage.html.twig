@@ -38,6 +38,13 @@
 {% block js %}
   <script src="{{ asset('js/MediaLib.min.js') }}"></script>
   <script>
-    new MediaLib("{{ package }}", "{{ mediaSearchPath|default('')|raw }}", "{{ flavor }}", "{{ mediaDir }}");
+    new MediaLib(
+      "{{ package }}",
+      "{{ mediaSearchPath|default('')|raw }}",
+      "{{ flavor }}",
+      "{{ mediaDir }}",
+      "{{ "element"|trans({}, "catroweb") }}",
+      "{{ "elements"|trans({}, "catroweb") }}"
+    );
   </script>
 {% endblock %}

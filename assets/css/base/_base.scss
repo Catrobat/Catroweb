@@ -1,5 +1,13 @@
-@import 'elements'; // A set of useful LESS mixins (More info at: http://lesselements.com)
-@import 'mixins';   // Our own defined Mixins
+// material.io components: https://material.io/develop/web/components
+@use "@material/icon-button";
+@use "@material/top-app-bar/mdc-top-app-bar";
+@use "@material/form-field";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/snackbar/mdc-snackbar";
+
+
+@import "elements"; // A set of useful LESS mixins (More info at: http://lesselements.com)
+@import "mixins";   // Our own defined Mixins
 
 //
 //  Here we define all colors and variables with their base values
@@ -8,38 +16,49 @@
 //
 @import "variables";
 
-
-// BS4 - GruntFile handles coping the files from vendor to the defined public directory
-@import '../../../public/bootstrap/scss/bootstrap';
-
-// Font Awesome - GruntFile handles coping the files from vendor to the defined public directory
-$fa-font-path: "../../webfonts";
-@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/fontawesome";
-@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/solid";
-@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/regular";
-@import "../../../public/font_awesome_wrapper/fontawesome-free/scss/brands";
-
 //
 // In the theme settings file you can overwrite basic theme variables:
 // You can find each theme settings file under /themes/<theme_name>
 // Themes are handled by the lip bundle
 //
-@import 'theme_settings';
+// Must be imported before bootstrap so that bootstrap classes can use our ($primary/$...) variables.
+//
+@import "theme_settings";
 
+
+// BS4 - GruntFile is including the node_modules
+@import "bootstrap/scss/bootstrap";
+
+// material.io components - includes
+@include icon-button.core-styles ();
+
+// ToDo - We are switching to Material:
+// Font Awesome - GruntFile handles coping the files from vendor to the defined public directory
+$fa-font-path: "../../webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/brands";
+
+
+// Customizing Material.io:
+:root {
+  // https://material.io/develop/web/docs/theming/
+  --mdc-theme-primary: #{$primary};
+  --mdc-theme-secondary: #{$secondary};
+  --mdc-theme--background: #{$default-background-color};
+}
 
 // Custom Styles
 
 // legacy - ToDo
 @import "catro_bootstrap";
-@import 'brain';
-@import 'icons';
-@import 'header';
-@import 'navbar';
-@import 'buttons';
+@import "brain";
+@import "icons";
 
 // new design
-@import 'typography';
+@import "typography";
+@import "header";
 @import "sidebar";
-@import 'footer';
-@import 'catro_tabs';
-
+@import "footer";
+@import "catro_tabs";

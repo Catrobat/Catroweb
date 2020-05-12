@@ -3,22 +3,13 @@
 @import 'theme_settings';
 
 
-h1 {
-  text-align: center;
-}
-
 .notification-container {
   border-color: $primary;
-
-  .card-body {
-    align-items: center;
-  }
 }
 
 .notification-container-old {
   border-color: $primary;
 }
-
 
 .notification-header {
   background-color: $primary;
@@ -27,13 +18,10 @@ h1 {
 
 .notification-header .btn.btn-primary {
   border: none;
-  width: 40px;
-
+  width: 50px;
   position: absolute;
-
-  margin-right: 2px;
-  right: 5px;
-  top: 2px;
+  right: 0;
+  top: 0;
 }
 
 .notification-avatar {
@@ -92,54 +80,7 @@ h1 {
   }
 }
 
-.notification-summary-left {
-  float: left;
-
-  @media screen and (max-width: 576px) {
-    float: none;
-    text-align: center;
-  }
-}
-
-.mark-all {
-  @media screen and (max-width: 992px) {
-
-    float: right;
-    margin-top: 12px;
-    margin-right: 16px;
-    margin-left: 250px;
-  }
-
-
-}
-
-.notification-summary-right {
-  float: right;
-  margin-right: 16px;
-
-  @media screen and (max-width: 576px) {
-
-    display: block;
-    margin: 1em auto auto auto;
-    float: none;
-  }
-}
-
-.notification-summary-right.btn.btn-danger {
-  width: 125px;
-
-}
-
 .notification-round {
   border-radius: 50%;
   border: 1px $primary;
-}
-
-.notification-button-container {
-  display: flex;
-  justify-content: flex-end;
-
-  #follow-icon {
-    margin-right: .2em;
-  }
 }

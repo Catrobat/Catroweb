@@ -7,3 +7,4 @@ liip_theme:
 # used to access all themes via php
 parameters:
   themes: ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school', 'embroidery', 'arduino']
+#  themes: ['pocketcode'] # switch while debugging for fast grunt builds

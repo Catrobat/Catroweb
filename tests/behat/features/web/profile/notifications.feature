@@ -102,15 +102,16 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     And the ".all-notifications-dropdown" element should contain "20"
     And I should see "You have 20 new Notifications!"
     And I should not see "Old Notifications"
-    And the element "#mark-all-as-seen" should be visible
-    Then I click "#mark-all-as-seen"
+    And I click "#top-app-bar__btn-options"
+    And the element "#top-app-bar__btn-mark-all-notifications" should be visible
+    Then I click "#top-app-bar__btn-mark-all-notifications"
     And I wait for AJAX to finish
     Then I should see "All notifications have been marked as read."
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then I should see "Old Notifications"
     And I should see "You have no new Notifications"
-    And the element "#mark-all-as-seen" should not be visible
+    And the element "#top-app-bar__btn-mark-all-notifications" should not be visible
     And the element ".all-notifications-dropdown" should not be visible
     And the element "#mark-as-read .btn.btn-primary" should not be visible
 
@@ -120,9 +121,10 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     And I am on "/app/notifications/allNotifications"
     And I wait for the page to be loaded
     Then I should see "You have 10 new Notifications!"
-    And the element "#mark-all-as-seen" should be visible
-    And the element "#delete-all" should be visible
-    Then I click "#delete-all"
+    And I click "#top-app-bar__btn-options"
+    And the element "#top-app-bar__btn-mark-all-notifications" should be visible
+    And the element "#top-app-bar__btn-delete-all-notifications" should be visible
+    Then I click "#top-app-bar__btn-delete-all-notifications"
     And I wait for AJAX to finish
     Then I should see "Are you Sure you want to delete all Notifications?"
     And I click ".swal2-confirm"
@@ -131,8 +133,8 @@ Feature: User gets notifications for new followers, reactions, comments and othe
     Then I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then I should see "It looks like you dont have any notifications."
-    And the element "#delete-all" should not be visible
-    And the element "#mark-all-as-seen" should not be visible
+    And the element "#top-app-bar__btn-delete-all-notifications" should not be visible
+    And the element "#top-app-bar__btn-mark-all-notifications" should not be visible
 
   Scenario: If user goes to one of the Notifications subsections he should see
   just notifications of that type

@@ -12,10 +12,11 @@ Feature: Sidebar should have a dropdown for all notification categories
     And I wait for the page to be loaded
     And I open the menu
     Then the element ".collapsible" should be visible
-    And the element ".fa-caret-left" should be visible
+    And the element "#notifications-dropdown-arrow" should be visible
+    And the "#notifications-dropdown-arrow" element should contain "chevron_left"
     When I click ".collapsible"
     And I wait for AJAX to finish
-    Then the element ".fa-caret-down" should be visible
+    And the "#notifications-dropdown-arrow" element should contain "expand_more"
     And the element "#notifications-dropdown-content #btn-notifications" should be visible
     And the element "#notifications-dropdown-content #btn-followers" should be visible
     And the element "#notifications-dropdown-content #btn-likes" should be visible
