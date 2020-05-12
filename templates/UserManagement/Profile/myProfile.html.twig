@@ -21,27 +21,13 @@
     <div class="programs mt-4"></div>
   </div>
 
-  <div class="clear mt-5"></div>
-    <h1 class="header">
-      {{ "profile.follows"|trans({}, "catroweb") }} ({{ app.user.following|length }})
-    </h1>
-  <div id="list-follows"></div>
-
-  <div class="clear mt-5"></div>
-    <h1 class="header">
-      {{ "profile.follower"|trans({}, "catroweb") }} ({{ app.user.followers|length }})
-    </h1>
-  <div id="list-follower"></div>
-
 {% endblock %}
 
 {% block js %}
   <script src="{{ asset('js/MyProfile.min.js') }}"></script>
-  <script src="{{ asset('js/ProfileLoader.min.js') }}"></script>
   <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
 
   <script>
-
     let programs
     {% if not app.user.limited %}
       programs = new ProjectLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
@@ -75,16 +61,7 @@
     {% else %}
       programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     {% endif %}
-
     programs.initProfile('{{ app.user.id }}')
-
-    let follows = new ProfileLoader('{{ app.user.id }}' ,'{{ path('list_follow', { type: 'follows' }) }}',
-    '{{ path('profile') }}', '#list-follows', '{{ asset('images/default/avatar_default.png') }}')
-    follows.init()
-
-    let follower = new ProfileLoader('{{ app.user.id }}' ,'{{ path('list_follow', { type: 'follower' }) }}',
-    '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')
-    follower.init()
   </script>
   <script src="{{ asset('js/ImageUpload.min.js') }}"></script>
   <script>

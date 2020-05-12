@@ -11,11 +11,11 @@
 {% block notification_body%}
   {{ 'catro-notifications.follow.message' | trans
     (
-      {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.follower.id})~'">'~notification.follower.username~'</a>',
-      },
-      'catroweb'
-    )
-    |raw
+    {
+      '%user_link%': '<a href="'~path('profile', {'id': notification.follower.id})~'">'~notification.follower.username~'</a>',
+    },
+    'catroweb'
+  )
+  |raw
   }}
 {% endblock %}

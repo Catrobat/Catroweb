@@ -27,8 +27,15 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 class ProfileController extends AbstractController
 {
   const MIN_PASSWORD_LENGTH = 6;
-
   const MAX_PASSWORD_LENGTH = 4096;
+  private ProgramManager $program_manager;
+  private UserManager $user_manager;
+
+  public function __construct(ProgramManager $program_manager, UserManager $user_manager)
+  {
+    $this->program_manager = $program_manager;
+    $this->user_manager = $user_manager;
+  }
 
   /**
    * @Route("/user/{id}", name="profile", defaults={"id": "0"}, methods={"GET"})
@@ -36,7 +43,7 @@ class ProfileController extends AbstractController
    * Overwrite for FosUser Profile Route (We don't use it!)
    * @Route("/user/}")
    */
-  public function profileAction(Request $request, ProgramManager $program_manager, UserManager $user_manager, string $id): Response
+  public function profileAction(Request $request, string $id): Response
   {
     /** @var User|null $user */
     $user = null;
@@ -52,7 +59,7 @@ class ProfileController extends AbstractController
     }
     else
     {
-      $user = $user_manager->find($id);
+      $user = $this->user_manager->find($id);
     }
 
     if (null === $user)
@@ -62,11 +69,11 @@ class ProfileController extends AbstractController
 
     if ($my_profile)
     {
-      $program_count = count($program_manager->getUserPrograms($user->getId()));
+      $program_count = count($this->program_manager->getUserPrograms($user->getId()));
     }
     else
     {
-      $program_count = count($program_manager->getPublicUserPrograms($id));
+      $program_count = count($this->program_manager->getPublicUserPrograms($id));
     }
 
     $oauth_user = $user->getGplusUid();
@@ -83,12 +90,12 @@ class ProfileController extends AbstractController
 
     $firstMail = $user->getEmail();
     $secondMail = $user->getAdditionalEmail();
-    $followerCount = $user->getFollowers()->count();
+    $follower_list = $this->user_manager->getMappedUserData($user->getFollowers()->toArray());
+    $following_list = $this->user_manager->getMappedUserData($user->getFollowing()->toArray());
 
     return $this->render($view, [
       'profile' => $user,
       'program_count' => $program_count,
-      'follower_count' => $followerCount,
       'country' => $country,
       'firstMail' => $firstMail,
       'secondMail' => $secondMail,
@@ -96,7 +103,8 @@ class ProfileController extends AbstractController
       'minPassLength' => self::MIN_PASSWORD_LENGTH,
       'maxPassLength' => self::MAX_PASSWORD_LENGTH,
       'username' => $user->getUsername(),
-      'myProfile' => $my_profile,
+      'followers_list' => $follower_list,
+      'following_list' => $following_list,
     ]);
   }
 

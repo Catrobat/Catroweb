@@ -117,25 +117,25 @@ Feature: Sidebar should show amount of new notifications in form of a badge
     And the ".likes" element should contain "9"
     And the ".remixes" element should contain "42"
 
-    Scenario: If the user who I am following uploads the program then the followers notification badge should be incremented
-      Given I log in as "Catrobat"
-      And I am on "/app/user/2"
-      And I wait for the page to be loaded
-      And I click "#follow-btn"
-      And I wait for the page to be loaded
-      And I am on "/app/user/3"
-      And I wait for the page to be loaded
-      And I click "#follow-btn"
-      And I wait for the page to be loaded
-      Given I have a project with "url" set to "/app/project/1"
-      And user "User" uploads this generated program, API version 1
-      And user "Drago" uploads this generated program, API version 1
-      Given I log in as "Catrobat"
-      And I am on "/app/"
-      And I open the menu
-      When I click ".collapsible"
-      And I wait for AJAX to finish
-      Then the ".all-notifications" element should contain "4"
-      Then the element ".comments" should not be visible
-      And the ".followers" element should contain "2"
-      Then the element ".likes" should not be visible
+  Scenario: If the user who I am following uploads the program then the followers notification badge should be incremented
+    Given I log in as "Catrobat"
+    And I am on "/app/user/2"
+    And I wait for the page to be loaded
+    And I click ".profile-follow"
+    And I wait for AJAX to finish
+    And I am on "/app/user/3"
+    And I wait for the page to be loaded
+    And I click ".profile-follow"
+    And I wait for AJAX to finish
+    Given I have a project with "url" set to "/app/project/1"
+    And user "User" uploads this generated program, API version 1
+    And user "Drago" uploads this generated program, API version 1
+    Given I log in as "Catrobat"
+    And I am on "/app/"
+    And I open the menu
+    When I click ".collapsible"
+    And I wait for AJAX to finish
+    Then the ".all-notifications" element should contain "4"
+    Then the element ".comments" should not be visible
+    And the ".followers" element should contain "2"
+    Then the element ".likes" should not be visible

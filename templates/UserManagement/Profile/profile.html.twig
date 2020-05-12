@@ -6,78 +6,110 @@
 
 {% block body %}
 
-  <div class="row">
-    <div class="col-12 mb-2">
-      <h1 id="profile-header" class="header">
-        {{ profile.username }}
-      </h1>
-    </div>
-
-    <div class="col-12 col-sm-5 col-md-4 col-lg-3 avatar-container mt-2">
-      <img alt="user-image" id="user-image"
+  <div class="row no-gutters profile">
+    <div class="col-4 col-md-2 avatar-container mt-2 pr-3">
+      <img alt="" id="user-image" class="img-fluid round"
            src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
     </div>
 
-    <div id="user-information" class="col-8 col-sm-5 col-md-6 col-lg-7 ml-3 ml-sm-0 mt-4 mt-sm-2">
-      <p>
-        <strong>
-          {{ "profile.amountOfPrograms"|trans({}, "catroweb") }}:
-        </strong>
-        {{ program_count }}
-      </p>
-      <p>
-        <i class="fas fa-users"></i>
-        <strong>
-          {{ "profile.follower"|trans({}, "catroweb") }}:
-        </strong>
-        {{ follower_count }}
-      </p>
-      <p>
-        <i class="fas fa-globe-africa"></i>
-        <strong>
-          {{ "country"|trans({}, "catroweb") }}:
-        </strong>
-        {{ country }}
-      </p>
+    <div id="user-information" class="col-8 col-md-10 mt-2 user-info d-flex flex-column justify-content-between">
+      <div>
+        <h1 id="profile-header" class="h4">
+          {{ profile.username }}
+        </h1>
+        {% if country %}
+          <span class="d-block">
+            <i class="fas fa-globe-africa"></i>
+            <strong>
+              {{ "country"|trans({}, "catroweb") }}:
+            </strong>
+            {{ country }}
+          </span>
+        {% endif %}
+      </div>
+
+
+      <div id="follow-btn" class="follow-button-container follow-button w-100 mt-3">
+        {% if app.user != null and app.user.id != profile.id %}
+          <button class="btn btn-outline-primary profile-follows mt-0 ml-auto"
+                  style="{{ profile.hasFollower(app.user) ? 'display: block' : 'display:none' }}"
+                  onclick="followers.unfollow('{{ profile.id }}','{{ profile.username }}')">
+            {{ 'follower.follows'|trans({}, 'catroweb') }}
+          </button>
+          <button class="btn btn-primary profile-follow mt-0 ml-auto"
+                  style="{{ profile.hasFollower(app.user) ? 'display: none' : 'display:block' }}"
+                  onclick="followers.follow('{{ profile.id }}')">
+            {{ 'follower.follow'|trans({}, 'catroweb') }}
+          </button>
+        {% endif %}
+        {% if app.user == null %}
+          <button class="btn btn-primary profile-follow mt-0 mt-auto"
+                  onclick="followers.follow('{{ profile.id }}')">
+            {{ 'follower.follow'|trans({}, 'catroweb') }}
+          </button>
+        {% endif %}
+      </div>
     </div>
+  </div>
 
-    <div class="col-2 mt-4 mt-sm-1 center">
-
-        <div id="follow-icon">
-          {% if app.user != null and profile.hasFollower(app.user)%}
-            <a id="follow-btn" class="pull-right"
-               data-toggle="tooltip" title="{{ "profile.unfollowUser"|trans({}, "catroweb") }}"
-               href="{{ url('unfollow_user', { id : profile.id }) }}">
-              <i class="fa fa-user-times catro-icon-button"></i>
-            </a>
-          {% else %}
-            <a id="follow-btn" class="pull-right"
-               data-toggle="tooltip" title="{{ "profile.followUser"|trans({}, "catroweb") }}"
-               href="{{ url('follow_user', { id : profile.id }) }}">
-              <i class="fa fa-user-plus catro-icon-button"></i>
-            </a>
-          {% endif %}
-        </div>
+  <div class="row mt-3">
+    <div class="catro-tabs w-100">
+      <ul class="nav nav-tabs nav-fill" id="tabs-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="projects-tab" data-toggle="tab" href="#projects-section"
+             aria-controls="projects-section" aria-selected="true"
+             role="tab">{{ program_count }} {{ "projects"|trans({}, "catroweb") }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="follower-tab" data-toggle="tab" href="#follower-section"
+             aria-controls="follower-section"
+             aria-selected="false"
+             role="tab">{{ followers_list|length }} {{ 'follower.followers'|trans({}, 'catroweb') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="follows-tab" data-toggle="tab" href="#following-section"
+             aria-controls="following-section" aria-selected="true"
+             role="tab">{{ following_list|length }} {{ 'follower.follows'|trans({}, 'catroweb') }}</a>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <div class="col-12 mt-3">
-
-      <h1 id="profile-programs">
-        {{ "profile.programsOf"|trans({}, "catroweb") }} {{ profile.username }}
-      </h1>
+  <div class="tab-content mt-4" id="tabs-tabContent">
+    <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="projects-tab">
       <div id="user-programs">
         <div class="programs"></div>
       </div>
-
-      <h1 id="profile-follower">
-        {{ "profile.follower"|trans({}, "catroweb") }} ({{ profile.followers|length }})
-      </h1>
-      <div id="list-follower"></div>
-
     </div>
 
-  </div>
+    <div id="following-section" class="tab-pane fade show" role="tabpanel" aria-labelledby="follows-tab">
+      <div id="no-following" class="text-center mb-5 {{ following_list is empty ? 'd-block' : 'd-none' }}">
+        {{ "follower.noOtherFollowing"|trans({}, "catroweb") }}
+      </div>
 
+      <div id="following-cards" class="row mb-5">
+        {% for followsUser in following_list %}
+          <div id="following-{{ followsUser.id }}" class="col-12 single-following my-3">
+            {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followsUser, 'following': true} only %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="follower-section" class="tab-pane fade" role="tabpanel" aria-labelledby="follower-tab">
+      <div id="no-followers" class="text-center mb-5 {{ followers_list is empty ? 'd-block' : 'd-none' }}">
+        {{ "follower.noOtherFollowers"|trans({}, "catroweb") }}
+      </div>
+
+      <div id="follower-cards" class="row mb-5">
+        {% for followerUser in followers_list %}
+          <div id="followers-{{ followerUser.id }}" class="col-12 single-follower my-3">
+            {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followerUser} only %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
 
@@ -85,32 +117,36 @@
   <script>
     let programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     programs.initProfile('{{ profile.id }}')
-
     $(document).on('click', '.program', function () {
       let clicked_program_id = this.id.replace('program-', '')
       this.className += ' visited-program'
-      let stored_visits = sessionStorage.getItem('visits')
-
-      if (!stored_visits)
-      {
+      let stored_visits      = sessionStorage.getItem('visits')
+      if (!stored_visits) {
         let new_visits = [clicked_program_id]
         sessionStorage.setItem('visits', JSON.stringify(new_visits))
-      }
-      else
-      {
+      } else {
         let parsed_visits = JSON.parse(stored_visits)
-        if (!($.inArray(clicked_program_id, parsed_visits) >= 0))
-        {
+        if (!($.inArray(clicked_program_id, parsed_visits) >= 0)) {
           parsed_visits.push(clicked_program_id)
           sessionStorage.setItem('visits', JSON.stringify(parsed_visits))
         }
       }
     })
   </script>
-  <script src="{{ asset('js/ProfileLoader.min.js') }}"></script>
+
+  <script src="{{ asset('js/Follower.min.js') }}"></script>
   <script>
-    let follower = new ProfileLoader('{{ profile.id }}' , '{{ path('list_follow',  { type: 'follower' }) }}',
-      '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')
-    follower.init()
+    let followers = new Follower(
+      "{{ csrf_token('follower') }}",
+      "{{ url('unfollow') }}", "{{ url('follow') }}",
+      "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
+      "{{ "follower.followError"|trans({}, "catroweb") }}",
+      "{{ "follower.unfollowError"|trans({}, "catroweb") }}",
+      "{{ "follower.unfollowButton"|trans({}, "catroweb") }}",
+      "{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}",
+      "{{ "cancelMessage"|trans({}, "catroweb") }}",
+      "{{ followers_list|length }}",
+      false
+    )
   </script>
 {% endblock %}

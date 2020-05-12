@@ -30,11 +30,11 @@
         </div>
 
         <button id="delete-all" class="btn btn-danger download-button notification-summary-right"><i
-              class="fas fa-trash" aria-hidden="true"></i>
+                  class="fas fa-trash" aria-hidden="true"></i>
           {{ "deleteAllNotificationsButtonTitle"|trans({}, "catroweb") }}
         </button>
         <button id="mark-all-as-seen" class="btn btn-primary download-button notification-summary-right mark-all"><i
-              class="fa fa-check" aria-hidden="true"></i>
+                  class="fa fa-check" aria-hidden="true"></i>
           {{ "clearAllNotificationsButtonTitle"|trans({}, "catroweb") }}
         </button>
 
@@ -86,27 +86,25 @@
 {% block js %}
   <script src="{{ asset('js/Notifications.min.js') }}"></script>
   <script>
-
-
     let notifications = new Notification({{ newNotifications|length }},
-      "{{ oldNotifications|length }}",
-      "{{ url('catro_notification_mark_as_read') }}",
-      "{{ url('user_notifications_seen', {'notification_type':  notificationType }) }}",
-      "{{ url('delete_all_notifications', {'notification_type':  notificationType }) }}",
-      "{{ url('delete_notification') }}",
-      "{{ "done"|trans({}, "catroweb") }}",
-      "{{ "notificationsClearedMessage"|trans({}, "catroweb") }}",
-      "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
-      "{{ "notificationsClearError"|trans({}, "catroweb") }}",
-      "{{ "notificationDeleteMessage"|trans({}, "catroweb") }}",
-      "{{ "notificationDeleteAllMessage"|trans({}, "catroweb") }}",
-      "{{ "confirmMessage"|trans({}, "catroweb") }}",
-      "{{ "cancelMessage"|trans({}, "catroweb") }}",
-      "{{ "deleteNotificationConfirmation"|trans({}, "catroweb") }}",
-      "{{ "notificationDeletedMessage"|trans({}, "catroweb") }}",
-      "{{ "notificationsAllMessagesDeleted"|trans({}, "catroweb") }}",
-      "{{ "notificationsDeleteError"|trans({}, "catroweb") }}",
-      "{{ path('user_notifications_count') }}", "{{ notificationType }}"
+            "{{ oldNotifications|length }}",
+            "{{ url('catro_notification_mark_as_read') }}",
+            "{{ url('user_notifications_seen', {'notification_type':  notificationType }) }}",
+            "{{ url('delete_all_notifications', {'notification_type':  notificationType }) }}",
+            "{{ url('delete_notification') }}",
+            "{{ "done"|trans({}, "catroweb") }}",
+            "{{ "notificationsClearedMessage"|trans({}, "catroweb") }}",
+            "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
+            "{{ "notificationsClearError"|trans({}, "catroweb") }}",
+            "{{ "notificationDeleteMessage"|trans({}, "catroweb") }}",
+            "{{ "notificationDeleteAllMessage"|trans({}, "catroweb") }}",
+            "{{ "confirmMessage"|trans({}, "catroweb") }}",
+            "{{ "cancelMessage"|trans({}, "catroweb") }}",
+            "{{ "deleteNotificationConfirmation"|trans({}, "catroweb") }}",
+            "{{ "notificationDeletedMessage"|trans({}, "catroweb") }}",
+            "{{ "notificationsAllMessagesDeleted"|trans({}, "catroweb") }}",
+            "{{ "notificationsDeleteError"|trans({}, "catroweb") }}",
+            "{{ path('user_notifications_count') }}", "{{ notificationType }}"
 
     )
     $(document).ready(function () {

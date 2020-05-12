@@ -40,12 +40,6 @@ $dark:          $gray-900 !default;
 
 $yiq-contrasted-threshold: 200 !default;
 
-// Components
-
-$border-radius:               0 !default;
-$border-radius-lg:            0 !default;
-$border-radius-sm:            0 !default;
-
 // Fonts
 
 // stylelint-disable-next-line value-keyword-case
@@ -144,6 +138,7 @@ $default-text-color: $primary;
 $default-border-color: $primary;
 $help-link-color: $primary;
 $content-default-link-color: $primary;
+$text-color: $gray-900;
 
 
 // Wrapper
