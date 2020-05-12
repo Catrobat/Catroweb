@@ -2801,6 +2801,46 @@ class CatrowebBrowserContext extends BrowserContext
     $this->theElementShouldBeVisible($button);
   }
 
+  /**
+   * @Then /^I should see the featured table:$/
+   */
+  public function iShouldSeeTheFeaturedTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['Program']);
+      $this->assertSession()->pageTextContains($user_stat['Flavor']);
+      $this->assertSession()->pageTextContains($user_stat['Priority']);
+    }
+  }
+
+  /**
+   * @Given /^I click on the "([^"]*)" link$/
+   *
+   * @param mixed $arg1
+   */
+  public function iClickOnTheLink($arg1): void
+  {
+    $page = $this->getSession()->getPage();
+    $link = $page->findLink($arg1);
+    $link->click();
+  }
+
+  /**
+   * @Then /^I write "([^"]*)" in textarea with label "([^"]*)"$/
+   *
+   * @param string $arg1
+   * @param string $arg2
+   */
+  public function iWriteInTextareaWithLabel($arg1, $arg2): void
+  {
+    $textarea = $this->getSession()->getPage()->findField($arg2);
+    Assert::assertNotNull($textarea, 'Textarea not found');
+    $textarea->setValue($arg1);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   //  User Agent
   //--------------------------------------------------------------------------------------------------------------------
