@@ -78,6 +78,7 @@ programs:
     download: Download the app
     statistics: More Statistics
   featured: Featured
+  example: Examples
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes

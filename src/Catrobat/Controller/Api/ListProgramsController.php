@@ -48,6 +48,20 @@ class ListProgramsController extends AbstractController
   /**
    * @deprecated
    *
+   * @Route("/api/projects/exampleProjects.json", name="api_example_programs",
+   * defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @throws NonUniqueResultException
+   * @throws NoResultException
+   */
+  public function listExampleProgramsAction(Request $request): ProgramListResponse
+  {
+    return $this->listSortedPrograms($request, 'example');
+  }
+
+  /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs",
    * defaults={"_format": "json"}, methods={"GET"})
    *
@@ -190,6 +204,10 @@ class ListProgramsController extends AbstractController
         $programs, [$this->program_manager, 'getMostViewedPrograms'],
         $flavor, $limit, $offset, $max_version
       );
+    }
+    elseif ('example' === $sortBy)
+    {
+      $programs = $this->program_manager->getExamplePrograms($flavor, $limit, $offset, $max_version);
     }
     elseif ('scratchRemix' == $sortBy)
     {

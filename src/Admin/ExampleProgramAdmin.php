@@ -2,9 +2,8 @@
 
 namespace App\Admin;
 
-use App\Catrobat\Forms\FeaturedImageConstraint;
 use App\Catrobat\Services\ImageRepository;
-use App\Entity\FeaturedProgram;
+use App\Entity\ExampleProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +13,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -21,71 +21,71 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class FeaturedProgramAdmin extends AbstractAdmin
+class ExampleProgramAdmin extends AbstractAdmin
 {
   /**
    * @override
    *
    * @var string
    */
-  protected $baseRouteName = 'adminfeatured_program';
+  protected $baseRouteName = 'adminexample_program';
 
   /**
    * @override
    *
    * @var string
    */
-  protected $baseRoutePattern = 'featured_program';
+  protected $baseRoutePattern = 'example_program';
 
   private EntityManagerInterface $entity_manager;
 
   private ParameterBagInterface $parameter_bag;
 
-  private ImageRepository $featured_image_repository;
+  private ImageRepository $example_image_repository;
 
   private ProgramManager $program_manager;
 
   /**
-   * FeaturedProgramAdmin constructor.
+   * ExampleProgramAdmin constructor.
    *
    * @param mixed $code
    * @param mixed $class
    * @param mixed $baseControllerName
    */
   public function __construct($code, $class, $baseControllerName, EntityManagerInterface $entity_manager,
-                              ParameterBagInterface $parameter_bag, ImageRepository $featured_image_repository,
+                              ParameterBagInterface $parameter_bag, ImageRepository $example_image_repository,
                               ProgramManager $program_manager)
   {
     parent::__construct($code, $class, $baseControllerName);
     $this->entity_manager = $entity_manager;
     $this->parameter_bag = $parameter_bag;
-    $this->featured_image_repository = $featured_image_repository;
+    $this->example_image_repository = $example_image_repository;
     $this->program_manager = $program_manager;
   }
 
   /**
-   * @param FeaturedProgram $object
+   * @param ExampleProgram $object
    *
    * @return string
    */
-  public function getFeaturedImageUrl($object)
+  public function getExampleImageUrl($object)
   {
-    return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
+    return '../../'.$this->example_image_repository->getWebPath($object->getId(), $object->getImageType(), false);
   }
 
   /**
-   * @param FeaturedProgram $object
+   * @param ExampleProgram $object
    *
    * @return Metadata
    */
   public function getObjectMetadata($object)
   {
     return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(),
-      $this->getFeaturedImageUrl($object));
+      $this->getExampleImageUrl($object));
   }
 
   /**
-   * @param FeaturedProgram $object
+   * @param ExampleProgram $object
    */
   public function preUpdate($object): void
   {
@@ -129,30 +129,32 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   protected function configureFormFields(FormMapper $formMapper): void
   {
-    /** @var FeaturedProgram $featured_project */
-    $featured_project = $this->getSubject();
+    /** @var ExampleProgram $example_project */
+    $example_project = $this->getSubject();
     $file_options = [
-      'required' => (null === $featured_project->getId()),
-      'constraints' => [
-        new FeaturedImageConstraint(),
-      ],
+      'required' => (null === $example_project->getId()),
     ];
 
     $id_value = '';
 
     if (null !== $this->getSubject()->getId())
     {
-      $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($featured_project).'">';
+      $file_options['help'] = '<img src="../'.$this->getExampleImageUrl($example_project).'">';
       $id_value = $this->getSubject()->getProgram()->getId();
     }
 
     $formMapper
       ->add('file', FileType::class, $file_options)
       ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
-      ->add('flavor')
+      ->add('flavor', ChoiceFieldMaskType::class, [
+        'choices' => [
+          'Arduino' => 'arduino',
+          'Embroidery' => 'embroidery',
+        ],
+      ])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
-        'help' => 'Toggle for iOS featured programs api call.', ])
+        'help' => 'Toggle for iOS example programs api call.', ])
       ->add('active', null, ['required' => false])
     ;
   }
@@ -176,9 +178,11 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   protected function configureListFields(ListMapper $listMapper): void
   {
+    unset($this->listModes['mosaic']);
+
     $listMapper
       ->addIdentifier('id')
-      ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
+      ->add('Example Image', 'string', ['template' => 'Admin/example_image.html.twig'])
       ->add('program', EntityType::class, [
         'class' => Program::class,
         'route' => ['name' => 'show'],
@@ -198,7 +202,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FeaturedProgram $object
+   * @param ExampleProgram $object
    */
   private function checkProgramID($object): void
   {

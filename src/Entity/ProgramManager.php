@@ -16,6 +16,7 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Repository\ExampleRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;
 use App\Repository\ProgramLikeRepository;
@@ -58,6 +59,8 @@ class ProgramManager
 
   protected FeaturedRepository $featured_repository;
 
+  protected ExampleRepository $example_repository;
+
   protected AppRequest $app_request;
 
   protected CatroNotificationService $notification_service;
@@ -73,6 +76,7 @@ class ProgramManager
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
                               FeaturedRepository $featured_repository,
+                              ExampleRepository $example_repository,
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
@@ -88,6 +92,7 @@ class ProgramManager
     $this->tag_repository = $tag_repository;
     $this->program_like_repository = $program_like_repository;
     $this->featured_repository = $featured_repository;
+    $this->example_repository = $example_repository;
     $this->logger = $logger;
     $this->app_request = $app_request;
     $this->file_sanitizer = $file_sanitizer;
@@ -99,6 +104,11 @@ class ProgramManager
   public function getFeaturedRepository(): FeaturedRepository
   {
     return $this->featured_repository;
+  }
+
+  public function getExampleRepository(): ExampleRepository
+  {
+    return $this->example_repository;
   }
 
   /**
@@ -570,6 +580,16 @@ class ProgramManager
   /**
    * @return Program[]
    */
+  public function getExamplePrograms(?string $flavor = null, ?int $limit = null, int $offset = 0, string $max_version = '0'): array
+  {
+    return $this->example_repository->getExamplePrograms(
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+    );
+  }
+
+  /**
+   * @return Program[]
+   */
   public function getScratchRemixesPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
                                             string $max_version = '0'): array
   {
@@ -795,7 +815,7 @@ class ProgramManager
       case 'most_downloaded':
         return $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
       case 'example':
-        return [];
+        return $this->getExamplePrograms($flavor, $limit, $offset, $max_version);
       case 'scratch':
         return $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version);
       default:

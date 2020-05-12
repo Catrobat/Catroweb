@@ -3,6 +3,8 @@ parameters:
   catrobat.backup.dir:                  "%kernel.project_dir%/backups/"
   catrobat.featuredimage.dir:           "%catrobat.pubdir%resources/featured/"
   catrobat.featuredimage.path:          "resources/featured/"
+  catrobat.exampleimage.dir:            "%catrobat.pubdir%resources/example/"
+  catrobat.exampleimage.path:           "resources/example/"
   catrobat.file.extract.dir:            "%kernel.project_dir%/public/resources/extract/"
   catrobat.file.extract.path:           "resources/extract/"
   catrobat.file.storage.dir:            "%kernel.project_dir%/public/resources/programs/"
@@ -183,8 +185,8 @@ services:
     class: App\Catrobat\Services\TemplateFileRepository
     public: true
 
-  App\Catrobat\Services\FeaturedImageRepository:
-    class: App\Catrobat\Services\FeaturedImageRepository
+  App\Catrobat\Services\ImageRepository:
+    class: App\Catrobat\Services\ImageRepository
     public: true
 
   App\Catrobat\Services\MediaPackageFileRepository:
@@ -473,6 +475,11 @@ services:
     tags:
       - { name: doctrine.orm.entity_listener }
 
+  catrobat.entity.example.image_listener:
+    class: App\Catrobat\Listeners\Entity\ExampleProgramImageListener
+    tags:
+      - { name: doctrine.orm.entity_listener }
+
   # ======== Views ========
   catrobat.view.uploadexception:
     class: App\Catrobat\Listeners\View\UploadExceptionListener
@@ -588,6 +595,16 @@ services:
       - ~
       - App\Entity\Template
       - App\Catrobat\Controller\Admin\TemplateController
+    public: true
+
+  catrowebadmin.block.example.program:
+    class: App\Admin\ExampleProgramAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Example Projects" }
+    arguments:
+      - ~
+      - App\Entity\ExampleProgram
+      - ~
     public: true
 
   # ===== Media Package

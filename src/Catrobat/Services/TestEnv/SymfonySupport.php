@@ -9,6 +9,7 @@ use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
+use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
 use App\Entity\GameJam;
@@ -472,6 +473,38 @@ trait SymfonySupport
     }
 
     return $featured_program;
+  }
+
+  public function insertExampleProject(array $config, bool $andFlush = true): ExampleProgram
+  {
+    $example_program = new ExampleProgram();
+
+    /* @var Program $program */
+    if (isset($config['program_id']))
+    {
+      $program = $this->getProgramManager()->find($config['program_id']);
+      $example_program->setProgram($program);
+    }
+    else
+    {
+      $program = $this->getProgramManager()->findOneByName($config['name']);
+      $example_program->setProgram($program);
+    }
+
+    $example_program->setUrl($config['url'] ?? null);
+    $example_program->setImageType($config['imagetype'] ?? 'jpg');
+    $example_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
+    $example_program->setFlavor($config['flavor'] ?? 'pocketcode');
+    $example_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
+    $example_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
+
+    $this->getManager()->persist($example_program);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $example_program;
   }
 
   /**
