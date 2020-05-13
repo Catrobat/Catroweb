@@ -14,7 +14,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -86,6 +89,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
   /**
    * @param FeaturedProgram $object
+   * @param mixed           $object
    */
   public function preUpdate($object): void
   {
@@ -107,7 +111,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   {
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof \Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery)
+    if (!$query instanceof ProxyQuery)
     {
       return $query;
     }
@@ -145,11 +149,12 @@ class FeaturedProgramAdmin extends AbstractAdmin
       $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($featured_project).'">';
       $id_value = $this->getSubject()->getProgram()->getId();
     }
-
     $formMapper
       ->add('file', FileType::class, $file_options)
       ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
-      ->add('flavor')
+      ->add('flavor', ChoiceFieldMaskType::class, [
+        'choices' => $this->getFlavor(),
+      ])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
         'help' => 'Toggle for iOS featured programs api call.', ])
@@ -166,6 +171,10 @@ class FeaturedProgramAdmin extends AbstractAdmin
   {
     $datagridMapper
       ->add('program.name')
+      ->add('for_ios')
+      ->add('active')
+      ->add('priority')
+      ->add('flavor')
     ;
   }
 
@@ -176,15 +185,20 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   protected function configureListFields(ListMapper $listMapper): void
   {
+    unset($this->listModes['mosaic']);
     $listMapper
-      ->addIdentifier('id')
+      ->addIdentifier('id', null, [
+        'sortable' => false,
+      ])
       ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
       ->add('program', EntityType::class, [
         'class' => Program::class,
-        'route' => ['name' => 'show'],
         'admin_code' => 'catrowebadmin.block.programs.all',
+        'editable' => false,
       ])
-      ->add('flavor', 'string')
+      ->add('flavor', 'string', [
+        'sortable' => false,
+      ])
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
       ->add('active', null)
@@ -195,6 +209,11 @@ class FeaturedProgramAdmin extends AbstractAdmin
         ],
       ])
     ;
+  }
+
+  protected function configureRoutes(RouteCollection $collection): void
+  {
+    $collection->remove('acl');
   }
 
   /**
@@ -231,5 +250,17 @@ class FeaturedProgramAdmin extends AbstractAdmin
     {
       throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
     }
+  }
+
+  private function getFlavor(): array
+  {
+    $flavor_options = $this->parameter_bag->get('themes');
+    $flavors = [];
+    foreach ($flavor_options as $flavor)
+    {
+      $flavors[$flavor] = $flavor;
+    }
+
+    return $flavors;
   }
 }
