@@ -17,9 +17,15 @@
     text-align: left;
   }
 
-
   tr:last-child td {
     border-bottom: 1px solid #dee2e6;
+  }
+
+  .card {
+    box-shadow: none;
+    border-left: none;
+    border-right: none;
+    border-block-end: none;
   }
 }
 
@@ -43,6 +49,7 @@
   }
 
   .card-body {
+    padding: 0;
 
     .card-header {
       font-size: .8rem;
@@ -71,5 +78,5 @@
 }
 
 [data-toggle="collapse"][aria-expanded="true"] .rotate-left {
-  transform: rotate(-90deg) translate(25%, 25%);
+  transform: rotate(-90deg);
 }

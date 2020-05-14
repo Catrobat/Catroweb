@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}"/>
   <link rel="stylesheet" href="{{ asset('css/modules/animate.min.css') }}"/>
 
+  {% if isVersionSupportedByCatBlocks(program_details.languageVersion) %}
+  <link rel="stylesheet" href="{{ asset('catblocks/main.css') }}"/>
+  {% endif %}
+
   <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig) }}"/>
@@ -516,61 +520,80 @@
   <script src="{{ asset('js/OldCodeView.min.js') }}"></script>
 
   {% if isVersionSupportedByCatBlocks(program_details.languageVersion) %}
-    <script src=" {{ asset('catblocks/CatBlocks.js') }}"></script>
+    <script src="{{ asset('catblocks/CatBlocks.js') }}"></script>
     <script>
+      let shareRoot = '{{ app.request.getSchemeAndHttpHost() ~ '/' }}'
+      let extractedProjectsPath = shareRoot + '{{ extracted_path }}'
+      let projectHash = '{{ program.getExtractedDirectoryHash() }}'
+      let language = '{{ app.request.getLocale() }}'
 
-      let progPath = '{{ app.request.getSchemeAndHttpHost() ~ '/' ~ extracted_path ~ program.getExtractedDirectoryHash() ~ '/'}}';
-      let progLang = '{{ app.request.getLocale() }}';
+      {% if app_env == 'test' %}
+        console.log("Catblocks must be disabled in the test env.  Why?\n"
+          + "Catblocks uses blockly which results in a crash our test system (Behat tests + chrome headless)\n"
+          + "Where? @ init -> blockly.inject(...)\n"
+          + "\n"
+          +  "What do we know so far?\n"
+          + "Pretty sure the fault is not by Catblocks. Even the simple blockly demo crashs -> \n"
+          + "  Given I am on \"https://blockly-demo.appspot.com/static/demos/fixed/index.html\"\n"
+          + "  And I should see \"Fixed Blockly\"\n"
+          + "  Then the element \"#blocklyDiv\" should be visible\n"
+          + "\n"
+          + "Chrome crash does not give much useful information, only that much memory was allocated\n"
+          + "The bug could be either in the chrome headless or the mink implementation\n"
+          + "Large sites per se seem not to be the problem. E.g. tested with https://scratch.mit.edu/projects/390060499/\n"
+          + "\n"
+        )
+        $('#catblocks-code-container').text(
+          "Disabled in test env due to problems in the chrome headless/mink/blockly interactions"
+        )
 
-      /**
-       * initiate share
-       *
-       * define element:
-       *  - container to inject catblocks hidden workflow
-       *  - renderSize to use for blocks
-       *  - language to use for rendering texts
-       *  - media for catblocks
-       */
-      share.init({
-        'container': 'catblocks-code-container',
-        'renderSize': 0.75,
-        'language': progLang,
-        'media': '{{ app.request.getSchemeAndHttpHost() ~ '/catblocks/' }}',
-      });
+      {% else %}
+        /**
+         * initiate Catblocks
+         *
+         * define element:
+         *  - container to inject catblocks hidden workflow
+         *  - renderSize to use for blocks
+         *  - shareRoot
+         *  - language to use for rendering texts
+         *  - i18n to define the path to the translations
+         *  - media for catblocks
+         *  - noImageFound is unused, just a placeholder for now
+         *
+         */
+        CatBlocks.init({
+          'container': 'catblocks-code-container',
+          'renderSize': 0.75,
+          'language': language,
+          'shareRoot': 'catblocks',
+          'media': 'media',
+          'i18n': 'i18n',
+          'noImageFound': 'No_Image_Available.jpg'
+        });
 
-      /**
-       * start rendering program into div
-       *
-       */
-      window.onload = function() {
-        const div = document.getElementById('catblocks-code-container');
-        share.parser.parseFile(`${progPath}code.xml`)
-          .then(xmlDoc => {
-            // render program into div element
-            share.injectAllScenes(div, xmlDoc, {
-              object: {
-                programRoot: `${progPath}`
-              }
-            });
-
-            if ($("#collapseCodeView .catblocks-scene").length === 0) {
-              // CatBlocks already catches some errors.
-              // But we are not interested in showing users an error message.
-              // Instead we want to display the old view if no scenes could have been rendered.
+        /**
+         * start rendering program into div
+         */
+        window.onload = function() {
+          CatBlocks.render(extractedProjectsPath, projectHash)
+            .catch(err => {
+              console.error(`Failed to parse catroid file.`);
+              console.error(err);
               console.error("Using old code view instead of new one");
-              div.innerHTML = "";
+              // Show old view instead
+              $('#catblocks-code-container').innerHTML = "";
               $("#codeview-wrapper").removeClass('d-none');
-            }
-          })
-          .catch(err => {
-            // Show old view instead
-            console.error(`Failed to parse catroid file.`);
-            console.error(err);
-            console.error("Using old code view instead of new one");
-            div.innerHTML = "";
-            $("#codeview-wrapper").removeClass('d-none');
-          });
-      };
+            })
+            .finally(() => {
+              $('#code-view-spinner').addClass('d-none');
+              $('#code-view-toggler').removeClass('d-none');
+              // catblocks need a visible container to calculate the svg sizes.
+              // Still it should be collapsed on a page load.
+              $('#collapseCodeView').addClass('collapse').addClass('hide')
+            });
+        }
+
+      {% endif %}
     </script>
   {% endif %}
 

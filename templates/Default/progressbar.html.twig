@@ -1,5 +1,6 @@
-<div class="circular-progress" {% if progressbar_id %} id="{{ progressbar_id }}" {% endif %}>
-  <div role="progressbar" class="mdc-circular-progress mdc-circular-progress--indeterminate">
+<div class="circular-progress" {% if progressbar_id is defined %} id="{{ progressbar_id }}" {% endif %}>
+  <div role="progressbar" class="mdc-circular-progress mdc-circular-progress--indeterminate
+   {% if small is defined %} mdc-circular-progress--small {% endif %}">
     <div class="mdc-circular-progress__indeterminate-container">
       <div class="mdc-circular-progress__spinner-layer">
         <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
