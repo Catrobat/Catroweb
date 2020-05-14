@@ -9,6 +9,7 @@ use App\Entity\MediaPackageFile;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use OpenAPI\Server\Model\MediaFile;
+use OpenAPI\Server\Model\MediaFiles;
 use OpenAPI\Server\Model\Package;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -72,6 +73,14 @@ class MediaLibraryApi implements MediaLibraryApiInterface
    */
   public function mediaPackagePackageNameGet(string $package_name, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
   {
+    if (null === $limit)
+    {
+      $limit = 20;
+    }
+    if (null === $offset)
+    {
+      $offset = 0;
+    }
     $media_package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy(['nameUrl' => $package_name])
     ;
@@ -82,44 +91,65 @@ class MediaLibraryApi implements MediaLibraryApiInterface
       return null;
     }
 
+    $total_results = 0;
+
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if (empty($media_package_categories))
     {
-      return $json_response_array;
+      $repsonseData = new MediaFiles(['media_files' => $json_response_array, 'total_results' => $total_results]);
+
+      return $repsonseData;
     }
 
     /** @var MediaPackageCategory $media_package_category */
     foreach ($media_package_categories as $media_package_category)
     {
       $media_package_files = $media_package_category->getFiles();
+      $total_results += count($media_package_files);
+      if ((0 != $offset && count($media_package_files) <= $offset) || count($json_response_array) === $limit)
+      {
+        if (0 != $offset)
+        {
+          $offset -= count($media_package_files);
+        }
+        continue;
+      }
       if (null !== $media_package_files)
       {
         /** @var MediaPackageFile $media_package_file */
         foreach ($media_package_files as $media_package_file)
         {
-          $json_media_package = new Package();
-          $json_media_package->setId($media_package_file->getId());
-          $json_media_package->setName($media_package_file->getName());
-          $json_media_package->setPackage($media_package->getName());
-          $json_media_package->setCategory($media_package_file->getCategory()->getName());
-          $json_media_package->setAuthor($media_package_file->getAuthor());
-          $json_media_package->setExtension($media_package_file->getExtension());
-          $json_media_package->setFlavor($media_package_file->getFlavor());
+          if (0 != $offset)
+          {
+            --$offset;
+            continue;
+          }
+          if (count($json_response_array) === $limit)
+          {
+            break;
+          }
+          $mediaFile = [
+            'id' => $media_package_file->getId(),
+            'name' => $media_package_file->getName(),
+            'flavor' => $media_package_file->getFlavor(),
+            'package' => $media_package->getName(),
+            'category' => $media_package_file->getCategory()->getName(),
+            'author' => $media_package_file->getAuthor(),
+            'extension' => $media_package_file->getExtension(),
+            'download_url' => $this->url_generator->generate(
+              'download_media',
+              ['id' => $media_package_file->getId()],
+              UrlGenerator::ABSOLUTE_URL),
+          ];
 
-          $download_url = $this->url_generator->generate(
-            'download_media',
-            [
-              'id' => $media_package_file->getId(),
-            ],
-            UrlGenerator::ABSOLUTE_URL);
-          $json_media_package->setDownloadUrl($download_url);
-
-          $json_response_array[] = $json_media_package;
+          $json_response_array[] = new MediaFile($mediaFile);
         }
       }
     }
 
-    return $json_response_array;
+    $repsonseData = new MediaFiles(['media_files' => $json_response_array, 'total_results' => $total_results]);
+
+    return $repsonseData;
   }
 }

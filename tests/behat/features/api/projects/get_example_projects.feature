@@ -27,44 +27,9 @@ Feature: Get most downloaded projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?project_type=example"
     Then the response status code should be "200"
-    Then I should get the json object:
-      """
-      [
-        {
-          "id": "3",
-          "name": "project 3",
-          "author": "Catrobat",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 40,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/3",
-          "download_url": "http://localhost/app/download/3.catrobat",
-          "filesize": 0
-        },
-                {
-          "id": "2",
-          "name": "project 2",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 5,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/2",
-          "download_url": "http://localhost/app/download/2.catrobat",
-          "filesize": 0
-        }
-      ]
-      """
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 2
+    Then the response should contain projects in the following order:
+      | Name      |
+      | project 3 |
+      | project 2 |

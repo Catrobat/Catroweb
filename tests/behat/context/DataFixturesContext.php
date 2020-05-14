@@ -10,6 +10,7 @@ use App\Entity\CatroNotification;
 use App\Entity\ClickStatistic;
 use App\Entity\CommentNotification;
 use App\Entity\Extension;
+use App\Entity\FeaturedProgram;
 use App\Entity\FollowNotification;
 use App\Entity\HomepageClickStatistic;
 use App\Entity\LikeNotification;
@@ -41,6 +42,10 @@ use Symfony\Component\HttpFoundation\File\File;
 class DataFixturesContext implements KernelAwareContext
 {
   use SymfonySupport;
+
+  private array $programs = [];
+  private array $featured_programs = [];
+  private array $media_files = [];
 
   /**
    * @Given the next Uuid Value will be :id
@@ -194,9 +199,26 @@ class DataFixturesContext implements KernelAwareContext
   {
     foreach ($table->getHash() as $config)
     {
-      $this->insertProject($config, false);
+      /** @var Program $program */
+      $program = $this->insertProject($config, false);
+      $this->programs[] = $program;
     }
     $this->getManager()->flush();
+  }
+
+  public function getPrograms(): array
+  {
+    return $this->programs;
+  }
+
+  public function getFeaturedPrograms(): array
+  {
+    return $this->featured_programs;
+  }
+
+  public function getMediaFiles(): array
+  {
+    return $this->media_files;
   }
 
   /**
@@ -226,7 +248,9 @@ class DataFixturesContext implements KernelAwareContext
   {
     foreach ($table->getHash() as $config)
     {
-      $this->insertFeaturedProject($config, false);
+      /** @var FeaturedProgram $program */
+      $program = $this->insertFeaturedProject($config, false);
+      $this->featured_programs[] = $program;
     }
     $this->getManager()->flush();
   }
@@ -658,6 +682,19 @@ class DataFixturesContext implements KernelAwareContext
         $file['extension']), $file['id'], $file['extension']);
 
       $em->persist($new_file);
+
+      /** @var MediaPackage $mediaPackage */
+      $mediaPackage = $category->getPackage()->getValues()[0];
+      $this->media_files[] = [
+        'id' => $file['id'],
+        'name' => $file['name'],
+        'flavor' => $new_file->getFlavor(),
+        'package' => $mediaPackage->getName(),
+        'category' => $file['category'],
+        'author' => $file['author'],
+        'extension' => $file['extension'],
+        'download_url' => 'http://localhost/app/download-media/'.$file['id'],
+      ];
     }
     $em->flush();
   }

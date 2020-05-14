@@ -17,57 +17,20 @@ Feature: Get project
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/project/1"
     Then the response status code should be "200"
-    Then I should get the json object:
-    """
-      [
-        {
-          "id": "1",
-          "name": "project 1",
-          "author": "Catrobat",
-          "description": "",
-          "version": "0.8.5",
-          "views": 10,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/1",
-          "download_url": "http://localhost/app/download/1.catrobat",
-          "filesize": 0
-        }
-      ]
-   """
+    Then the response should have the project model structure
+    Then the response should contain the following project:
+      | Name       |
+      | project 1  |
+
 
   Scenario: Get specific project
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/project/2"
     Then the response status code should be "200"
-    Then I should get the json object:
-    """
-      [
-        {
-          "id": "2",
-          "name": "project 2",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/2",
-          "download_url": "http://localhost/app/download/2.catrobat",
-          "filesize": 0
-        }
-      ]
-   """
+    Then the response should have the project model structure
+    Then the response should contain the following project:
+      | Name       |
+      | project 2  |
 
   Scenario: Accessing private project must be not possible
     And I have a request header "HTTP_ACCEPT" with value "application/json"

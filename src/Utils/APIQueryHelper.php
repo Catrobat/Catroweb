@@ -10,7 +10,7 @@ class APIQueryHelper
 {
   public static function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null, string $alias = 'e'): QueryBuilder
   {
-    if (null !== $max_version)
+    if (null !== $max_version && '0' !== $max_version)
     {
       $query_builder
         ->innerJoin(Program::class, 'p', Join::WITH, $query_builder->expr()->eq('e.program', 'p'))

@@ -22,339 +22,62 @@ Feature: Get recent projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?project_type=recent"
     Then the response status code should be "200"
-    Then I should get the json object:
-      """
-      [
-        {
-          "id": "5",
-          "name": "project 5",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 40,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/5",
-          "download_url": "http://localhost/app/download/5.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "4",
-          "name": "project 4",
-          "author": "User2",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/4",
-          "download_url": "http://localhost/app/download/4.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "3",
-          "name": "project 3",
-          "author": "Catrobat",
-          "description": "",
-          "version": "0.8.5",
-          "views": 40,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/3",
-          "download_url": "http://localhost/app/download/3.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "6",
-          "name": "project 6",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/6",
-          "download_url": "http://localhost/app/download/6.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "2",
-          "name": "project 2",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/2",
-          "download_url": "http://localhost/app/download/2.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "1",
-          "name": "project 1",
-          "author": "Catrobat",
-          "description": "",
-          "version": "0.8.5",
-          "views": 10,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/1",
-          "download_url": "http://localhost/app/download/1.catrobat",
-          "filesize": 0
-        }
-      ]
-      """
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 6
+    Then the response should contain projects in the following order:
+      | Name      |
+      | project 5 |
+      | project 4 |
+      | project 3 |
+      | project 6 |
+      | project 2 |
+      | project 1 |
 
   Scenario: Get recent projects in german and limit = 1
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
     And I request "GET" "/api/projects/?project_type=recent&limit=1"
     Then the response status code should be "200"
-    Then I should get the json object:
-      """
-      [
-        {
-          "id": "5",
-          "name": "project 5",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 40,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/5",
-          "download_url": "http://localhost/app/download/5.catrobat",
-          "filesize": 0
-        }
-      ]
-      """
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 6
+    Then the response should contain projects in the following order:
+      | Name      |
+      | project 5 |
 
   Scenario: Get recent projects in english with offset = 1
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "en"
     And I request "GET" "/api/projects/?project_type=recent&offset=1"
     Then the response status code should be "200"
-    Then I should get the json object:
-      """
-      [
-        {
-          "id": "4",
-          "name": "project 4",
-          "author": "User2",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/4",
-          "download_url": "http://localhost/app/download/4.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "3",
-          "name": "project 3",
-          "author": "Catrobat",
-          "description": "",
-          "version": "0.8.5",
-          "views": 40,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/3",
-          "download_url": "http://localhost/app/download/3.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "6",
-          "name": "project 6",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/6",
-          "download_url": "http://localhost/app/download/6.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "2",
-          "name": "project 2",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/2",
-          "download_url": "http://localhost/app/download/2.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "1",
-          "name": "project 1",
-          "author": "Catrobat",
-          "description": "",
-          "version": "0.8.5",
-          "views": 10,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/1",
-          "download_url": "http://localhost/app/download/1.catrobat",
-          "filesize": 0
-        }
-      ]
-      """
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 6
+    Then the response should contain projects in the following order:
+      | Name      |
+      | project 4 |
+      | project 3 |
+      | project 6 |
+      | project 2 |
+      | project 1 |
 
   Scenario: Get recent projects in french with max_version = 0.982
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "fr"
     And I request "GET" "/api/projects/?project_type=recent&max_version=0.982"
     Then the response status code should be "200"
-    Then I should get the json object:
-      """
-      [
-        {
-          "id": "3",
-          "name": "project 3",
-          "author": "Catrobat",
-          "description": "",
-          "version": "0.8.5",
-          "views": 40,
-          "download": 0,
-          "private": false,
-          "flavor": "pocketcode",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/3",
-          "download_url": "http://localhost/app/download/3.catrobat",
-          "filesize": 0
-        }
-      ]
-      """
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 1
+    Then the response should contain projects in the following order:
+      | Name      |
+      | project 3 |
 
   Scenario: Get recent projects with flavor = luna
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?project_type=recent&flavor=luna"
     Then the response status code should be "200"
-    Then I should get the json object:
-      """
-      [
-        {
-          "id": "4",
-          "name": "project 4",
-          "author": "User2",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/4",
-          "download_url": "http://localhost/app/download/4.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "6",
-          "name": "project 6",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/6",
-          "download_url": "http://localhost/app/download/6.catrobat",
-          "filesize": 0
-        },
-        {
-          "id": "2",
-          "name": "project 2",
-          "author": "User1",
-          "description": "",
-          "version": "0.8.5",
-          "views": 50,
-          "download": 0,
-          "private": false,
-          "flavor": "luna",
-          "uploaded": "REGEX_INT_WILDCARD",
-          "uploaded_string": "REGEX_STRING_WILDCARD",
-          "screenshot_large": "http://localhost/images/default/screenshot.png",
-          "screenshot_small": "http://localhost/images/default/thumbnail.png",
-          "project_url": "http://localhost/app/project/2",
-          "download_url": "http://localhost/app/download/2.catrobat",
-          "filesize": 0
-        }
-      ]
-      """
+    Then the response should have the projects model structure
+    Then the response should contain total projects with value 3
+    Then the response should contain projects in the following order:
+      | Name      |
+      | project 4 |
+      | project 6 |
+      | project 2 |

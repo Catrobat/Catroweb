@@ -32,58 +32,45 @@ Feature: Get data from the media library in json format
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/package/looks"
     Then the response status code should be "200"
-    And I should get the json object:
-    """
-    [
+    Then the response should have the media files model structure
+    Then the response should contain total projects with value 5
+    Then the response should contain media files in the following order:
+      | Name      |
+      | Dog       |
+      | Cat       |
+      | Ape       |
+      | Spaceship |
+      | Metroid   |
+
+  Scenario: Get all files from a media lib package with limit = 1
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/media/package/looks?limit=1"
+    Then the response status code should be "200"
+    Then the response should have the media files model structure
+    Then the response should contain total projects with value 5
+    Then the response should contain media files in the following order:
+      | Name      |
+      | Dog       |
+
+  Scenario: Get all files from a media lib package with limit = 1 and offset = 3
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/media/package/looks?limit=1&offset=3"
+    Then the response status code should be "200"
+    Then the response should have the media files model structure
+    Then the response should contain total projects with value 5
+    Then the response should contain media files in the following order:
+      | Name      |
+      | Spaceship |
+
+  Scenario: Get all files from a media lib package with limit = 1 and offset = 3
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/media/package/looks?offset=5"
+    Then the response status code should be "200"
+    Then the response should have the media files model structure
+    Then I should get the json object:
+      """
       {
-        "id": 1,
-        "name": "Dog",
-        "flavor": "pocketcode",
-        "package": "Looks",
-        "category": "Animals",
-        "author": "Bob Schmidt",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/1"
-      },
-      {
-        "id": 4,
-        "name": "Cat",
-        "flavor": "pocketcode",
-        "package": "Looks",
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
-      },
-      {
-        "id": 5,
-        "name": "Ape",
-        "flavor": "pocketcode",
-        "package": "Looks",
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
-      },
-      {
-        "id": 3,
-        "name": "Spaceship",
-        "flavor": "pocketcode",
-        "package": "Looks",
-        "category": "Space",
-        "author": "Micheal John",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/3"
-      },
-      {
-        "id": 6,
-        "name": "Metroid",
-        "flavor": "pocketcode",
-        "package": "Looks",
-        "category": "Space",
-        "author": "Jennifer Shawn",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/6"
+        "media_files": [],
+        "total_results": 5
       }
-    ]
-    """
+      """
