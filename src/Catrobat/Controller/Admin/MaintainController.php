@@ -132,94 +132,6 @@ class MaintainController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @throws Exception
-   */
-  public function deleteBackupsAction(KernelInterface $kernel, Request $request = null): RedirectResponse
-  {
-    if (!$this->admin->isGranted('BACKUP'))
-    {
-      throw new AccessDeniedException();
-    }
-
-    $application = new Application($kernel);
-    $application->setAutoExit(false);
-
-    $input = new ArrayInput([
-      'command' => 'catrobat:clean:backup',
-      '--all' => $request->get('--all'),
-    ]);
-
-    if (null !== $request->get('backupFile'))
-    {
-      $input = new ArrayInput([
-        'command' => 'catrobat:clean:backup',
-        'backupfile' => $request->get('backupFile'),
-      ]);
-    }
-
-    $output = new NullOutput();
-
-    try
-    {
-      $return = $application->run($input, $output);
-      if (0 == $return)
-      {
-        $this->addFlash('sonata_flash_success', 'Delete Backups OK');
-      }
-    }
-    catch (Exception $exception)
-    {
-      $this->addFlash('sonata_flash_error', 'Something went wrong: '.$exception->getMessage());
-    }
-
-    return new RedirectResponse($this->admin->generateUrl('list'));
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function createBackupAction(KernelInterface $kernel, Request $request = null): RedirectResponse
-  {
-    if (!$this->admin->isGranted('BACKUP'))
-    {
-      throw new AccessDeniedException();
-    }
-
-    $application = new Application($kernel);
-    $application->setAutoExit(false);
-
-    $input = new ArrayInput([
-      'command' => 'catrobat:backup:create',
-    ]);
-
-    $output = new NullOutput();
-
-    $backup_name = $request->get('backupName');
-    if (null !== $backup_name)
-    {
-      $input = new ArrayInput([
-        'command' => 'catrobat:backup:create',
-        'backupName' => $backup_name,
-      ]);
-    }
-
-    try
-    {
-      $return = $application->run($input, $output);
-      if (0 == $return)
-      {
-        $this->addFlash('sonata_flash_success', 'Create Backup: '.$backup_name.' OK');
-      }
-    }
-    catch (Exception $exception)
-    {
-      $this->addFlash('sonata_flash_error', 'Something went wrong: '.$exception->getMessage());
-    }
-
-    return new RedirectResponse($this->admin->generateUrl('list'));
-  }
-
   public function listAction(Request $request = null): Response
   {
     if (!$this->admin->isGranted('LIST'))
@@ -244,20 +156,6 @@ class MaintainController extends CRUDController
     $rm->setCommandLink($this->admin->generateUrl('apk'));
     $RemovableObjects[] = $rm;
 
-    $description = "This will remove all backups stored on this server in the 'backup'-directory (".$this->getParameter('catrobat.backup.dir').')';
-    $rm = new RemovableMemory('Manual backups', $description);
-    $this->setSizeOfObject($rm, $this->getParameter('catrobat.backup.dir'), ['gz']);
-    $rm->setCommandName('Delete backups');
-    $rm->setCommandLink($this->admin->generateUrl('delete_backups'));
-    $RemovableObjects[] = $rm;
-
-    $description = "This will create a backup which will be stored on this server in the 'backup'-directory (".$this->getParameter('catrobat.backup.dir').')';
-    $ac = new AdminCommand('Create backup', $description);
-    $ac->setCommandName('Create backup');
-    $ac->setCommandLink($this->admin->generateUrl('create_backup'));
-
-    $backupCommand = $ac;
-
     $description = 'This will remove all log files.';
     $rm = new RemovableMemory('Logs', $description);
     $this->setSizeOfObject($rm, $this->getParameter('catrobat.logs.dir'));
@@ -279,11 +177,6 @@ class MaintainController extends CRUDController
     $programsSize = $this->get_dir_size($this->getParameter('catrobat.file.storage.dir'));
     $usedSpaceRaw -= $programsSize;
 
-    $screenshotSize = $this->get_dir_size($this->getParameter('catrobat.screenshot.dir'));
-    $featuredImageSize = $this->get_dir_size($this->getParameter('catrobat.featuredimage.dir'));
-    $mediaPackageSize = $this->get_dir_size($this->getParameter('catrobat.mediapackage.dir'));
-    $backupSize = $programsSize + $screenshotSize + $featuredImageSize + $mediaPackageSize;
-
     $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;
     $used_ram = (float) shell_exec("free | grep Mem | awk '{print $3}'") * 1_000;
     $free_ram = (float) shell_exec("free | grep Mem | awk '{print $4}'") * 1_000;
@@ -298,7 +191,6 @@ class MaintainController extends CRUDController
 
     return $this->renderWithExtraParams('Admin/maintain.html.twig', [
       'RemovableObjects' => $RemovableObjects,
-      'RemovableBackupObjects' => $this->getBackupFileObjects(),
       'wholeSpace' => $this->getSymbolByQuantity($usedSpace + $freeSpace),
       'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),
       'usedSpace_raw' => $usedSpaceRaw,
@@ -316,22 +208,7 @@ class MaintainController extends CRUDController
       'sharedRam' => $this->getSymbolByQuantity($shared_ram),
       'cachedRam' => $this->getSymbolByQuantity($cached_ram),
       'availableRam' => $this->getSymbolByQuantity($available_ram),
-      'backupCommand' => $backupCommand,
-      'backupSize' => $this->getSymbolByQuantity($backupSize),
     ]);
-  }
-
-  private function getBackupFileObjects(): array
-  {
-    $objects = [];
-    $backupFolder = $this->getParameter('catrobat.backup.dir');
-    $files = array_reverse(glob($backupFolder.'/*.tar.gz')); // get all file names
-    foreach ($files as $file)
-    {
-      $objects[] = $this->generateBackupObject($file);
-    }
-
-    return $objects;
   }
 
   private function get_dir_size(string $directory, ?array $extension = null): int
@@ -379,19 +256,5 @@ class MaintainController extends CRUDController
     $exp = floor(log($bytes) / log(1_024)) > 0 ? floor(log($bytes) / log(1_024)) : 0;
 
     return sprintf('%.2f '.$symbol[$exp], ($bytes / 1_024 ** floor($exp)));
-  }
-
-  private function generateBackupObject(string $file): RemovableMemory
-  {
-    $filename = pathinfo($file, PATHINFO_BASENAME);
-    $backupObject = new RemovableMemory($filename, 'created at: '.date('d.F.Y H:i:s', filemtime($file)));
-    $backupObject->setSizeRaw(filesize($file));
-    $backupObject->setSize($this->getSymbolByQuantity($backupObject->size_raw));
-    $backupObject->setCommandLink($this->admin->generateUrl('delete_backups', ['backupFile' => $filename]));
-    $backupObject->setCommandName('Delete backups');
-    $backupObject->setDownloadLink($this->generateUrl('backup_download', ['backupFile' => $filename]));
-    $backupObject->setExecuteLink($this->admin->generateUrl('restore_backup', ['backupFile' => $filename]));
-
-    return $backupObject;
   }
 }
