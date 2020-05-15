@@ -21,12 +21,13 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#report-program-button" should not exist
+    And I click "#top-app-bar__btn-options"
+    Then the element "#top-app-bar__btn-report-project" should not exist
 
   Scenario: report project when not logged in should forward to login page, than back to project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should be on "/app/login"
     When I fill in "username" with "OtherUser"
@@ -39,7 +40,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     When I fill in "report-reason" with "Super secret message"
@@ -47,7 +48,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I wait for AJAX to finish
     And I click ".swal2-cancel"
     And I wait for AJAX to finish
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then the "report-reason" field should contain "Super secret message"
     And the "report-copyright" checkbox should be checked
@@ -55,14 +56,14 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I click ".swal2-cancel"
     And I go to "/app/project/3"
     And I wait for the page to be loaded
-    And I click "#report-program-button"
+    And I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then the "report-reason" field should not contain "Super secret message"
     And the "report-reason" field should not contain "Magic"
     And the "report-copyright" checkbox should not be checked
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then the "report-reason" field should not contain "Super secret message"
     Then the "report-reason" field should contain "Magic"
@@ -72,7 +73,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     And I click the "#report-inappropriate" RadioButton
@@ -89,7 +90,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     And I click the "#report-copyright" RadioButton
@@ -105,7 +106,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     And I click the "#report-spam" RadioButton
@@ -121,7 +122,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     And I click the "#report-dislike" RadioButton
@@ -138,7 +139,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     And I click the "#report-spam" RadioButton
@@ -157,7 +158,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     And I click the "#report-spam" RadioButton
@@ -176,7 +177,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "OtherUser"
     And I am on "/app/project/4"
     And I wait for the page to be loaded
-    When I click "#report-program-button"
+    When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should see "Why do you want to report this project?"
     And I click the "#report-spam" RadioButton

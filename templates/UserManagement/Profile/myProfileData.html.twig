@@ -17,7 +17,8 @@
 
         <div id="username-wrapper">
           <div class="subtitle-1">
-            <span><i class="fas fa-envelope"></i> {{ 'username'|trans({}, 'catroweb') }}</span>
+            <span class="mdc-icon-button material-icons">email</span>
+            <span>{{ 'username'|trans({}, 'catroweb') }}</span>
               <a class="edit-category-button"
                  data-toggle="tooltip" title="{{ 'myprofile.editUsername'|trans({}, 'catroweb') }}">
                 <i id="edit-username-button" class="far fa-edit catro-icon-button"></i>
@@ -39,7 +40,8 @@
 
         <div id="email-wrapper">
           <div class="subtitle-1">
-            <span><i class="fas fa-envelope"></i> {{ 'email'|trans({}, 'catroweb') }}</span>
+            <span class="mdc-icon-button material-icons">email</span>
+            <span>{{ 'email'|trans({}, 'catroweb') }}</span>
             {% if not app.user.limited %}
               <a class="edit-category-button"
                  data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}">
@@ -72,7 +74,8 @@
 
           <div id="password-wrapper">
             <div class="subtitle-1">
-              <span><i class="fas fa-key"></i> {{ 'password'|trans({}, 'catroweb') }}</span>
+              <span class="mdc-icon-button material-icons">vpn_key</span>
+              <span>{{ 'password'|trans({}, 'catroweb') }}</span>
               <a class="edit-category-button"
                  data-toggle="tooltip" title="{{ 'myprofile.editPassword'|trans({}, 'catroweb') }}">
                 <i id="edit-password-button" class="far fa-edit catro-icon-button"></i>
@@ -89,7 +92,8 @@
 
         <div id="country-wrapper">
           <div class="subtitle-1">
-          <span><i class="fas fa-globe-africa"></i> {{ 'country'|trans({}, 'catroweb') }}</span>
+            <span class="mdc-icon-button material-icons">location_on</span>
+          <span>{{ 'country'|trans({}, 'catroweb') }}</span>
             {% if not app.user.limited %}
               <a class="edit-category-button" data-toggle="tooltip" title="todo">
                 <i id="edit-country-button" class="far fa-edit catro-icon-button"></i>
@@ -111,7 +115,8 @@
 
           <div id="account-settings-wrapper">
             <div class="subtitle-1">
-              <span><i class="fas fa-cogs"></i> {{ 'accountSettings'|trans({}, 'catroweb') }}</span>
+              <span class="mdc-icon-button material-icons">settings</span>
+              <span>{{ 'accountSettings'|trans({}, 'catroweb') }}</span>
               <a class="edit-category-button"
                  data-toggle="tooltip" title="{{ 'myprofile.editAccountSettings'|trans({}, 'catroweb') }}">
                 <i id="account-settings-button" class="far fa-edit catro-icon-button"></i>

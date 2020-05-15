@@ -253,6 +253,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
       if ($field->isVisible())
       {
         $field->setValue($text);
+        $field->focus();
 
         return;
       }

@@ -1,0 +1,28 @@
+{% if '/project/'       in app.request.pathinfo and program|default(false) and program.id|default(false) or
+      '/notifications/' in app.request.pathinfo %}
+
+  <div class="mdc-menu-surface--anchor">
+    <button id="top-app-bar__btn-options"
+            class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+            aria-label="Options"
+            onclick="showTopBarOptions()">
+      more_vert
+    </button>
+
+    <div id="top-app-bar__options-container"
+         class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed mdc-menu-surface--open"
+         tabindex="0">
+
+  {% include 'Header/header_project_options.html.twig' %}
+
+  {% include 'Header/header_notification_options.html.twig' %}
+
+    </div>
+  </div>
+
+  {% if '/project/' in app.request.pathinfo and program|default(false) and program.id|default(false) %}
+    {% include 'Default/snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
+  {% endif %}
+
+{% endif %}
+

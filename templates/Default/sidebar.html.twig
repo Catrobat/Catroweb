@@ -17,10 +17,11 @@
 
     <li class="nav-item" id="sidebar-notifications">
         <a id="notifications-dropdown-toggler" class="nav-link collapsible">
-          <i class="link-icon fas fa-bell"></i>
+          <span class="sidebar-link-icon material-icons">notifications</span>
           <span class="text">{{ "notifications"|trans({}, "catroweb") }}</span>
           <span class="badge-pill badge-danger all-notifications-dropdown"></span>
-          <i id="notifications-dropdown-arrow" class="fas fa-caret-left"></i>
+          <span id="notifications-dropdown-arrow"
+                class="sidebar-link-icon material-icons">chevron_left</span>
         </a>
 
         <div id="notifications-dropdown-content" class="notifications-dropdown-content">
@@ -28,7 +29,7 @@
           <a class="nav-link"
              href="{{ path('user_notifications', { 'notification_type': "allNotifications" })}}"
              id="btn-notifications">
-            <i class="link-icon fas fa-bell"></i>
+            <span class="sidebar-link-icon material-icons">notifications</span>
             <span class="text">{{ "allNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger all-notifications"></span>
           </a>
@@ -37,24 +38,24 @@
              href="{{ path('user_notifications', { 'notification_type': "followers" }) }}"
              id="btn-followers">
 
-            <i class="link-icon fas fa-user"></i>
+            <span class="sidebar-link-icon material-icons">person</span>
             <span class="text">{{ "FollowersNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger followers"></span>
           </a>
 
           <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "likes" }) }}" id="btn-likes">
-            <i class="link-icon fas fa-thumbs-up"></i>
+            <span class="sidebar-link-icon material-icons">thumb_up</span>
             <span class="text">{{ "LikeNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger likes"></span>
           </a>
 
           <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "comments" }) }}" id="btn-comments">
-            <i class="link-icon fas fa-comments"></i>
+            <span class="sidebar-link-icon material-icons">comment</span>
             <span class="text">{{ "CommentNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger comments"></span>
           </a>
           <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "remix" }) }}" id="btn-remix">
-            <i class="link-icon fab fa-r-project"></i>
+            <span class="sidebar-link-icon material-icons">call_split</span>
             <span class="text">{{ "RemixNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger remixes"></span>
           </a>
@@ -64,14 +65,14 @@
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
-          <i class="link-icon fas fa-user-circle"></i>
-          {{ 'menu.profile'|trans({}, "catroweb") }}
+          <span class="sidebar-link-icon material-icons">person</span>
+          <span>{{ 'menu.profile'|trans({}, "catroweb") }}</span>
         </a>
       </li>
       {% if is_granted('ROLE_ADMIN') %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-            <i class="link-icon fas fa-user-tie"></i>
+            <span class="sidebar-link-icon material-icons">security</span>
             {{ 'menu.admin'|trans({}, "catroweb") }}
           </a>
         </li>
@@ -79,7 +80,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('catrobat_follower') }}" id="btn-follow">
-          <i class="link-icon fas fa-user"></i>
+          <span class="sidebar-link-icon material-icons">people</span>
           <span>{{ 'menu.followersAndFollowing'|trans({}, "catroweb") }}</span>
         </a>
       </li>
@@ -87,7 +88,7 @@
     {% else %} {# login #}
       <li class="nav-item">
         <a class="nav-link" href="{{ url('login') }}" id="btn-login">
-          <i class="link-icon fas fa-sign-in-alt"></i>
+          <span class="sidebar-link-icon material-icons">exit_to_app</span>
           <span>{{ 'menu.login'|trans({}, "catroweb") }}</span>
         </a>
       </li>
@@ -96,7 +97,7 @@
     {# Always visible #}
     <li class="nav-item">
       <a class="nav-link" href="{{ url('catrobat_web_help') }}" id="btn-tutorials">
-        <i class="link-icon fas fa-hands-helping"></i>
+        <span class="sidebar-link-icon material-icons">help_outline</span>
         <span>{{ 'menu.helpAndTutorials'|trans({}, "catroweb") }}</span>
       </a>
     </li>
@@ -105,8 +106,8 @@
     {% if app.user and app.session and not app.session.get('webview-auth') %}
       <li class="nav-item">
         <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
-          <i class="link-icon fas fa-sign-out-alt"></i>
-          {{ 'menu.logout'|trans({}, "catroweb") }}
+          <span class="sidebar-link-icon material-icons ">exit_to_app</span>
+          <span>{{ 'menu.logout'|trans({}, "catroweb") }}</span>
         </a>
       </li>
     {% endif %}
@@ -116,49 +117,49 @@
     {# Programs #}
     <li id="nav-featured" class="nav-item">
       <a class="nav-link" href="{{ path('index') }}#featured" id="btn-featured">
-        <i class="link-icon fas fa-star"></i>
+        <span class="sidebar-link-icon material-icons">star</span>
         <span>{{ 'programs.featured'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-newest" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#newest" id="btn-newest">
-        <i class="link-icon fas fa-clock"></i>
+        <span class="sidebar-link-icon material-icons">schedule</span>
         <span>{{ 'programs.newest'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-recommended" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#recommended" id="btn-recommended">
-        <i class="link-icon fas fa-thumbs-up"></i>
+        <span class="sidebar-link-icon material-icons">thumb_up</span>
         <span>{{ 'programs.recommended'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-scratch-remixes" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#scratchRemixes" id="btn-recommended">
-        <i class="link-icon fab fa-r-project"></i>
+        <span class="sidebar-link-icon material-icons">call_split</span>
         <span>{{ 'programs.scratchremixes'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-most-downloaded" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#mostDownloaded" id="btn-most-downloaded">
-        <i class="link-icon fas fa-download"></i>
+        <span class="sidebar-link-icon material-icons">get_app</span>
         <span>{{ 'programs.most.downloaded'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-most-viewed" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#mostViewed" id="btn-most-viewed">
-        <i class="link-icon fas fa-eye"></i>
+        <span class="sidebar-link-icon material-icons">visibility</span>
         <span>{{ 'programs.most.viewed'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-random" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#random" id="btn-random">
-        <i class="link-icon fas fa-dice"></i>
+        <span class="sidebar-link-icon material-icons">casino</span>
         <span>{{ 'programs.random'|trans({}, "catroweb") }}</span>
       </a>
     </li>

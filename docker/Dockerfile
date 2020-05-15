@@ -40,14 +40,12 @@ RUN apt-get update && \
     git \
     curl \
     php-xdebug \
-    ruby \
-    ruby-dev \
     libgconf-2-4 \
     grunt \
     npm && \
     npm install -g n && \
     n stable && \
-    gem install sass
+    npm install -g sass
 
 # Overwrite default apache config
 COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf

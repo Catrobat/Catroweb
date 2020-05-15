@@ -104,7 +104,7 @@ Feature: Sidebar should show amount of new notifications in form of a badge
     And the ".remixes" element should contain "42"
     Given I am on "/app/notifications/comments/"
     And I wait for the page to be loaded
-    And I click "#mark-all-as-seen"
+    And I click "#top-app-bar__btn-mark-all-notifications"
     And I wait for AJAX to finish
     Then I should see "All notifications have been marked as read."
     When I click ".swal2-confirm"

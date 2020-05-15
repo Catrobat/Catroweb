@@ -325,15 +325,16 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
   async function initLoaderUI () {
     $(self.container).append('' +
       '<div class="button-show-placeholder">' +
-      '<div class=' + showMoreButton + '>' +
-      '  <i class="fa fa-chevron-circle-down catro-icon-button"></i>' +
-      '</div>' +
+      '<button class="material-icons mdc-icon-button ' + showMoreButton + '">' +
+      'expand_more' +
+      '</button>' +
+      '<button class="material-icons mdc-icon-button ' + showLessButton + '">' +
+      'expand_less' +
+      '</button>' +
       '<div class=' + ajaxAnimation + '>' +
       '  <i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i>' +
-      '</div>' +
-      '<div class=' + showLessButton + '>' +
-      '  <i class="fa fa-chevron-circle-up catro-icon-button"></i></div>' +
-      '</div>')
+      '</div>'
+    )
   }
 
   async function showVisibleButtons () {
@@ -399,34 +400,34 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
       case '#newest':
       case '#search-results':
       case '#random':
-        return '<div><i class="fas fa-clock program-small-icon"></i>' + project.UploadedString + '</div>'
+        return '<div><span class="project-thumb-icon material-icons">schedule</span>' + project.UploadedString + '</div>'
 
       case '#myprofile-programs':
       case '#user-programs':
-        return '<div><i class="fas fa-clock program-small-icon"></i>' + project.UploadedString + '</div>'
+        return '<div><span class="project-thumb-icon material-icons">schedule</span>' + project.UploadedString + '</div>'
 
       case '#mostDownloaded':
-        return '<div><i class="fas fa-download program-small-icon"></i>' + project.Downloads + '</div>'
+        return '<div><span class="project-thumb-icon material-icons">get_app</span>' + project.Downloads + '</div>'
 
       case '#scratchRemixes':
       case '#mostViewed':
-        return '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
+        return '<div><span class="project-thumb-icon material-icons">visibility</span>' + project.Views + '</div>'
 
       case '#recommendations':
       case '#more-from-this-user-recommendations':
-        return '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
+        return '<div><span class="project-thumb-icon material-icons">visibility</span>' + project.Views + '</div>'
 
       case '#recommended':
-        return '<div><i class="fas fa-eye program-small-icon"></i>' + project.Views + '</div>'
+        return '<div><span class="project-thumb-icon material-icons">visibility</span>' + project.Views + '</div>'
 
       case '#specific-programs-recommendations':
-        return '<div><i class="fas fa-download program-small-icon"></i>' + project.Downloads + '</div>'
+        return '<div><span class="project-thumb-icon material-icons">get_app</span>' + project.Downloads + '</div>'
 
       default:
         if ($(self.container).hasClass('starterDownloads')) {
-          return '<div><i class="fas fa-download program-small-icon"></i>' + project.Downloads + '</div>'
+          return '<div><span class="project-thumb-icon material-icons">get_app</span>' + project.Downloads + '</div>'
         } else {
-          return '<div><i class="fas fa-user program-small-icon"></i>' + self.escapeJavaScript(project.Author) + '</div>'
+          return '<div><span class="project-thumb-icon material-icons">person</span>' + self.escapeJavaScript(project.Author) + '</div>'
         }
     }
   }
@@ -464,17 +465,17 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
   async function addMyProfileProgramButtons (htmlProject, project) {
     $(htmlProject).prepend('<div id="delete-' + project.ProjectId + '" class="img-delete" ' +
       'onclick="profile.deleteProgram(\'' + project.ProjectId + '\')">' +
-      '<i class="fas fa-times-circle catro-icon-button"></i></div>')
+      '<span class="mdc-icon-button material-icons">close</span></div>')
 
     $(htmlProject).prepend('<div id="visibility-lock-open-' + project.ProjectId + '" class="img-lock-open" ' +
       (project.Private ? 'style="display: none;"' : '') +
       ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
-      '<i class="fas fa-lock-open catro-icon-button"></i></div>')
+      '<span class="mdc-icon-button material-icons">lock_open</span></i></div>')
 
     $(htmlProject).prepend('<div id="visibility-lock-' + project.ProjectId + '" class="img-lock" ' +
       (project.Private ? '' : 'style="display: none;"') +
       ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
-      '<i class="fas fa-lock catro-icon-button"></i></div>')
+      '<span class="mdc-icon-button material-icons">lock</span></div>')
   }
 
   // -------------------------------------------------------------------------------------------------------------------

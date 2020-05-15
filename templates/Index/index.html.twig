@@ -59,11 +59,12 @@
 
     <div id="recommended" style="display:none">
       <h2>{{ "programs.recommended"|trans({}, "catroweb") }}
-        <i id="help-button" class="far fa-question-circle"
+        <span id="help-button" class="material-icons mdc-icon-button"
            data-toggle="tooltip" title="Help"
            data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
            data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
-        </i>
+          help_outline
+        </span>
       </h2>
       <div class="programs"></div>
     </div>

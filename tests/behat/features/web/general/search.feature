@@ -88,36 +88,6 @@ Feature: Searching for programs
     Then I should see "project 3"
     Then I should see "test"
 
-  Scenario: pressing the search icon should spawn the search bar
-    Given I am on "/app"
-    And I wait for the page to be loaded
-    Then at least one ".search-icon-header" element should be visible
-    Then no ".search-input-header" element should be visible
-    Then no "#btn-search-header" element should be visible
-    And I click the currently visible search icon
-    Then no ".search-icon-header" element should be visible
-    And at least one ".search-input-header" element should be visible
-    And at least one "#btn-search-header" element should be visible
-
-  Scenario: consecutive searches should lead to different results
-    Given I am on "/app"
-    And I wait for the page to be loaded
-    Then I click ".search-icon-header"
-    And I enter "program" into visible ".input-search"
-    And I click "#btn-search-header"
-    And I wait for the page to be loaded
-    Then I should be on "/app/search/program"
-    And I should see "Your search returned 3 results"
-    And at least one ".search-input-header" element should be visible
-    And at least one "#btn-search-header" element should be visible
-    Then I enter "Test advanced" into visible ".input-search"
-    And I click "#btn-search-header"
-    And I wait for the page to be loaded
-    Then I should be on "/app/search/Test%20advanced"
-    And I should see "Your search returned 2 results"
-    And at least one ".search-input-header" element should be visible
-    And at least one "#btn-search-header" element should be visible
-
   Scenario: search for gmail should find no program
     Given I am on "/app/search/gmail"
     And I wait for the page to be loaded

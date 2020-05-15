@@ -67,11 +67,17 @@ const COPY_CONFIG =
       src: '**',
       dest: PUBLIC_DIRECTORY + '/css/fonts/'
     },
+    materialIcons: {
+      expand: true,
+      cwd: 'node_modules/material-design-icons/iconfont',
+      src: '**',
+      dest: PUBLIC_DIRECTORY + '/css/fonts/'
+    },
     material: {
       expand: true,
       cwd: 'node_modules/@material/',
       src: '**',
-      dest: PUBLIC_DIRECTORY + '/material/'
+      dest: PUBLIC_DIRECTORY + '/@material/'
     },
     images: {
       expand: true,
@@ -199,9 +205,9 @@ function addThemeConfig (SASS_CONFIG, theme) {
   SASS_CONFIG[theme] =
     {
       options: {
-        loadPath: [ASSETS_DIRECTORY + '/css/base', ASSETS_DIRECTORY + '/css/themes/' + theme],
+        loadPath: [ASSETS_DIRECTORY + '/css/base', ASSETS_DIRECTORY + '/css/themes/' + theme, 'node_modules'],
         style: 'compressed',
-        sourcemap: 'none'
+        sourceMap: true
       },
       files: [
         THEME_CONFIG,

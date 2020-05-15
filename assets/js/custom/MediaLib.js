@@ -1,17 +1,17 @@
 /* eslint-env jquery */
 /* global Routing */
 
+// TopAppBar.js
+/* global showTopBarDownload */
+/* global showTopBarDefault */
+
 // eslint-disable-next-line no-unused-vars
-function MediaLib (packageName, mediaSearchPath, flavor, assetsDir) {
+function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
+  elementsTranslationSingular, elementsTranslationPlural) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
     element.parentNode.removeChild(element)
-
-    // Adding back button on media library search results
-    $('#medialib-header-back-btn').click(function () {
-      window.history.back()
-    })
 
     getPackageFiles(packageName, mediaSearchPath, flavor, assetsDir)
     const content = $('#content')
@@ -24,19 +24,19 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir) {
   function getPackageFiles (packageName, mediaSearchPath, flavor, assetsDir) {
     var downloadList = []
 
-    document.getElementById('downloadbar-start-downloads').onclick = function () {
+    document.getElementById('top-app-bar__btn-download-selection').onclick = function () {
       for (var i = 0; i < downloadList.length; i++) {
         medialibDownloadSelectedFile(downloadList[i])
       }
-      document.getElementById('downloadbar-delete-selection-btn').click()
+      document.getElementById('top-app-bar__btn-cancel-download-selection').click()
     }
 
-    document.getElementById('downloadbar-delete-selection-btn').onclick = function () {
+    document.getElementById('top-app-bar__btn-cancel-download-selection').onclick = function () {
       for (var i = 0; i < downloadList.length; i++) {
         document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
       }
       downloadList = []
-      hideDownloadbar()
+      showTopBarDefault()
     }
 
     var url = null
@@ -64,12 +64,21 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir) {
             downloadList.splice(indexInDownloadList, 1)
           }
 
-          document.getElementById('downloadbar-nr-selected').innerText = downloadList.length
+          let elementsText = downloadList.length + ' '
+          // Dispense support for languages where the count would be right.
+          // This way there is no need to dynamically load the translation. (No delay - Less requests)
+          if (downloadList.length === 1) {
+            elementsText += elementsTranslationSingular
+          } else {
+            elementsText += elementsTranslationPlural
+          }
+
+          document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
 
           if (downloadList.length > 0) {
-            showDownloadbar()
+            showTopBarDownload()
           } else {
-            hideDownloadbar()
+            showTopBarDefault()
           }
         })
 
@@ -320,16 +329,4 @@ function medialibDownloadSelectedFile (file) {
   link.click()
   document.body.removeChild(link)
   return false
-}
-
-function showDownloadbar () {
-  document.getElementById('downloadbar').style.display = 'flex'
-  document.getElementById('navbar').style.display = 'none'
-  document.getElementById('searchbar').style.display = 'none'
-}
-
-function hideDownloadbar () {
-  document.getElementById('downloadbar').style.display = 'none'
-  document.getElementById('navbar').style.display = 'inline'
-  document.getElementById('searchbar').style.display = 'inline'
 }

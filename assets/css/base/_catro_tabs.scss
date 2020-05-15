@@ -15,17 +15,17 @@
       }
 
       .nav-link {
-        padding: .9em 1.5em;
+        padding: 0.9em 1.5em;
       }
     }
   }
 
   .nav-link {
-    background: none;
-    text-decoration: none;
-    padding: .9em;
-    border: 0;
+    padding: 0.9em;
     color: rgba($text-color, 10);
+    text-decoration: none;
+    background: none;
+    border: 0;
 
     &:hover {
       color: $default-text-color;
@@ -34,8 +34,8 @@
 
     &.active {
       font-weight: 700;
-      border-bottom: 2px solid $primary;
       color: $text-color;
+      border-bottom: 2px solid $primary;
     }
   }
 }

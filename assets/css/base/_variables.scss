@@ -4,7 +4,6 @@
 //
 // Color system
 //
-@import "_colors";
 
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
@@ -29,7 +28,7 @@ $green:   #43ac6a !default;
 $teal:    #20c997 !default;
 $cyan:    #5bc0de !default;
 
-$primary:       custom-color(catrobat, 600) !default;
+$primary:       #00acc1 !default;
 $secondary:     $gray-200 !default;
 $success:       $green !default;
 $info:          $cyan !default;
@@ -38,77 +37,12 @@ $danger:        $red !default;
 $light:         $gray-200 !default;
 $dark:          $gray-900 !default;
 
-$yiq-contrasted-threshold: 200 !default;
 
 // Fonts
 
 // stylelint-disable-next-line value-keyword-case
 $font-family-sans-serif:      Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
-$font-size-base:              1rem !default;
-
-$headings-font-weight:        300 !default;
-
-// Buttons
-
-$input-btn-padding-x:         0.5rem !default;
-
-$btn-font-weight:             300 !default;
-
-// Dropdowns
-
-$dropdown-border-color:             rgba($black,.1) !default;
-$dropdown-divider-bg:               rgba($black,.1) !default;
-
-// Navs
-
-$nav-link-disabled-color:           $gray-400 !default;
-
-$nav-tabs-border-color:             $dropdown-border-color !default;
-$nav-tabs-link-hover-border-color:  $nav-tabs-border-color !default;
-$nav-tabs-link-active-border-color: $nav-tabs-border-color !default;
-
-// Nav Logo
-
-$nav-logo-width: 4rem;
-
-// Navbar
-
-$navbar-dark-color:                 rgba($white,.7) !default;
-$navbar-dark-hover-color:           $white !default;
-$nav-dropdown-color:                #FFFCF4;
-
-// Pagination
-
-$pagination-color:                  $gray-600 !default;
-$pagination-border-color:           $nav-tabs-border-color !default;
-
-$pagination-active-border-color:    darken($primary, 5%) !default;
-
-$pagination-disabled-color:         $gray-200 !default;
-
-// Jumbotron
-
-$jumbotron-padding:                 4rem !default;
-
-// Badges
-
-$badge-font-weight:                 300 !default;
-$badge-padding-x:                   1rem !default;
-
-// Progress bars
-
-$progress-bg:                       #f6f6f6 !default;
-$progress-bar-color:                $primary !default;
-
-// List group
-
-$list-group-disabled-bg:            $gray-200 !default;
-
-// Close
-
-$close-color:                       $gray-600 !default;
-$close-text-shadow:                 none !default;
+$default-font-size: 1rem;
 
 // Login Logo
 
@@ -117,15 +51,10 @@ $theme-logo-color-secondary:        #FF7701;
 $theme-logo-font-size:              40px;
 $theme-logo-font-weight:            800;
 
-
 /* Footer */
 $footer-background-color: #e1e2e1;
 $footer-color: $black;
 
-
-/* Font */
-$default-font-size: 1rem;
-$special-font-color: black;
 
 /* Default */
 $default-background-color: #fefeff;
@@ -139,20 +68,3 @@ $default-border-color: $primary;
 $help-link-color: $primary;
 $content-default-link-color: $primary;
 $text-color: $gray-900;
-
-
-// Wrapper
-$wrapper-padding-top: 7rem;
-
-// image sizes
-
-$avatar-img-size: 31px;
-
-// icon sizes
-
-
-// Responsive sizes
-
-$responsive-width-content: 1054px;
-$responsive-width-tablet: 767px;
-$responsive-width-xs: 576px;

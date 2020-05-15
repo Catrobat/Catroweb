@@ -6,12 +6,6 @@
 @import '../../../public/bootstrap/scss/mixins';
 @import 'theme_settings';
 
-#content
-{
-  padding: 18px;
-  min-height: 100vh;
-  color: darkgrey;
-}
 
 #thumbsize-control
 {
@@ -30,43 +24,6 @@ $tile-size-md-smup: 100px;
 $tile-size-sm: 54px;
 $tile-size-lg: 191px;
 $border-spacing: 8px;
-
-#medialib-header-back-btn
-{
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  font-size: 2.0em;
-  cursor: pointer;
-}
-
-#downloadbar
-{
-  width: 100%;
-  display: none;
-  justify-content: space-between;
-  font-size: 1.4rem;
-  color: white;
-
-  #downloadbar-delete-selection-btn
-  {
-    cursor: pointer;
-  }
-
-  #downloadbar-nr-selected
-  {
-    padding-left: 20px;
-  }
-
-  #downloadbar-start-downloads
-  {
-    cursor: pointer;
-
-    .downloadbar-save
-    {
-      margin-right: 20px;
-    }
-  }
-}
 
 .category
 {

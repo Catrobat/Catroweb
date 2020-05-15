@@ -18,14 +18,14 @@
 
 {% block js %}
   <script>
-    let search = new ProjectLoader('#search-results', '{{ path('api_search_programs') }}')
-    let search_input = $('.input-search')
-    let old_query = search_input.html('{{ q }}').text()
-    console.log(old_query)
-    search.initSearch(old_query)
-    search_input.val(old_query)
+    let projectLoader = new ProjectLoader('#search-results', '{{ path('api_search_programs') }}')
+    let searchInput = $('#top-app-bar__search-input')
+    let oldQuery = searchInput.html('{{ q }}').text()
+    projectLoader.initSearch(oldQuery)
     $(document).ready(function() {
-      $('.search-icon-header').click()
+      showTopBarSearch()
+      searchInput.val(oldQuery)
+      controlTopBarSearchClearButton()
     })
   </script>
 {% endblock %}

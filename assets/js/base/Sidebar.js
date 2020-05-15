@@ -23,10 +23,10 @@ function enableNavButtonIfRecommendedCategoryContainsProjects (container, url, p
 }
 
 function setNavContainerWithSession (container) {
-  const navItem = sessionStorage.getItem(container)
+  const navItem = window.sessionStorage.getItem(container)
 
   if (navItem !== null) {
-    const navItemVisible = parseInt(sessionStorage.getItem(container))
+    const navItemVisible = parseInt(window.sessionStorage.getItem(container))
     if (navItemVisible === 1) {
       $(container).show()
     } else {
@@ -38,10 +38,10 @@ function setNavContainerWithSession (container) {
 
 function setNavContainerAndSession (container, data) {
   if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
-    sessionStorage.setItem(container, 0)
+    window.sessionStorage.setItem(container, 0)
     $(container).hide()
   } else {
-    sessionStorage.setItem(container, 1)
+    window.sessionStorage.setItem(container, 1)
     $(container).show()
   }
 }
@@ -80,8 +80,7 @@ function expandNotificationDropdownMenu () {
   const notificationDropdownContent = document.getElementById('notifications-dropdown-content')
 
   notificationDropdownContent.classList.add('shown')
-  notificationDropdownArrow.classList.remove('fa-caret-left')
-  notificationDropdownArrow.classList.add('fa-caret-down')
+  notificationDropdownArrow.textContent = 'expand_more'
 
   const notificationCategories = notificationDropdownContent.getElementsByTagName('a')
   Array.prototype.forEach.call(notificationCategories, function (category) {
@@ -94,8 +93,7 @@ function collapseNotificationDropdownMenu () {
   const notificationDropdownContent = document.getElementById('notifications-dropdown-content')
 
   notificationDropdownContent.classList.remove('shown')
-  notificationDropdownArrow.classList.remove('fa-caret-down')
-  notificationDropdownArrow.classList.add('fa-caret-left')
+  notificationDropdownArrow.textContent = 'chevron_left'
 
   const notificationCategories = notificationDropdownContent.getElementsByTagName('a')
   Array.prototype.forEach.call(notificationCategories, function (category) {

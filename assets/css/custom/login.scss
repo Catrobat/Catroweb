@@ -18,7 +18,7 @@
   border: none;
   border-bottom: 1px solid rgba($primary, 0.3);
   background: none;
-  color: rgb(0, 172, 193);
+  color: $primary;
 }
 
 .group input:focus {
@@ -209,7 +209,7 @@ input:valid ~ label {
 
 hr {
   width: 100%;
-  border-color: $default-border-color;
+  border-color: $primary;
 }
 
 .hidden {

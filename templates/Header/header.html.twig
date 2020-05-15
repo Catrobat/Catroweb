@@ -1,0 +1,39 @@
+<header class="mdc-top-app-bar">
+  {% block header %}
+
+    <div id="top-app-bar__default" class="mdc-top-app-bar__row body-content">
+
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <button id="top-app-bar__btn-sidebar-toggle"
+                class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+                aria-label="Open sidebar navigation menu">
+          menu
+        </button>
+        <a id="top-app-bar__title"
+           class="mdc-top-app-bar__title"
+           href="{{ path('index') }}">
+          {{ getThemeDisplayName() }}
+        </a>
+      </section>
+
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+        <button id="top-app-bar__btn-search"
+                class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                aria-label="Search"
+                onclick="showTopBarSearch()">
+          search
+        </button>
+
+        {% include 'Header/header_options.html.twig' %}
+
+      </section>
+    </div>
+
+    {#  The Navbar design changes fitting to actions:  #}
+
+    {% include 'Header/header_search.html.twig' %}
+
+    {% include 'Header/header_media_library_download.html.twig' %}
+
+  {% endblock %}
+</header>

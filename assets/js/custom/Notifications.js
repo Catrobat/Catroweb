@@ -31,16 +31,16 @@ function Notification (newNotifications, oldNotifications, markAsReadUrl, markAl
   self.countNotificationsUrl = countNotificationsUrl
 
   self.init = function () {
-    const markAllAsSeenButton = $('#mark-all-as-seen')
-    const deleteAllButton = $('#delete-all')
+    const markAllAsSeenButton = $('#top-app-bar__btn-mark-all-notifications')
+    const deleteAllButton = $('#top-app-bar__btn-delete-all-notifications')
 
     if (self.notifications === 0 && self.oldNotifications === 0) {
-      markAllAsSeenButton.hide()
-      deleteAllButton.hide()
+      // markAllAsSeenButton.hide()
+      // deleteAllButton.hide()
       $('.no-notifications-placeholder').show()
       $('#notifications-summary').hide()
     } else if (self.notifications === 0) {
-      markAllAsSeenButton.hide()
+      // markAllAsSeenButton.hide()
       $('.no-notifications-placeholder').hide()
     } else {
       $('.no-notifications-placeholder').hide()
@@ -61,7 +61,7 @@ function Notification (newNotifications, oldNotifications, markAsReadUrl, markAl
       if (parentProgramsLayer.children().length === 0) {
         remixedProgramsLayer.remove()
         if ($('#notifications').children().length === 0) {
-          $('#mark-all-as-seen').hide()
+          // $('#top-app-bar__btn-mark-all-notifications').hide()
           $('.no-notifications-placeholder').show()
         }
       }
@@ -244,7 +244,7 @@ function Notification (newNotifications, oldNotifications, markAsReadUrl, markAl
     }
     $('#notifications').children().remove()
     $('#new-notifications-container').children().remove()
-    $('#mark-all-as-seen').hide()
+    // $('#top-app-bar__btn-mark-all-notifications').hide()
   }
 
   self.showAllClearedPopUp = function (type) {
@@ -324,14 +324,14 @@ function Notification (newNotifications, oldNotifications, markAsReadUrl, markAl
     if (type === 'markAllAsRead') {
       $('#old-notification-header').show()
       $('#total_amount_of_notifications').load(location.href + ' #total_amount_of_notifications')
-      $('#mark-all-as-seen').hide()
+      // $('#top-app-bar__btn-mark-all-notifications').hide()
       $('#mark-as-read .btn.btn-primary').hide()
     } else if (type === 'deleteAll') {
       $('#notifications').children().remove()
       $('#new-notifications-container').children().remove()
       $('#old-notifications-container').children().remove()
       $('#notifications-summary').hide()
-      $('#mark-all-as-seen').hide()
+      // $('#top-app-bar__btn-mark-all-notifications').hide()
       $('.no-notifications-placeholder').show()
       $('#old-notification-header').hide()
     }

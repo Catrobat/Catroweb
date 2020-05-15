@@ -356,23 +356,7 @@
         {% endif %}
       {% endif %}
       <div class="clear"></div>
-      <button type="button" class="btn btn-lg btn-link btn-copy"
-              data-clipboard-text="{{ url('program', { id : program.id }) }}"
-              style="text-shadow: none;">
-        <span class="fa fa-link" aria-hidden="true"></span>
-        {{ "programs.linkTitle"|trans({}, "catroweb") }}
-      </button>
-
-      {% if not my_program %}
-        <button type="button" class="btn btn-lg btn-link" style="text-shadow: none;"
-                id="report-program-button">
-          <i class="fas fa-ban mr-1"></i>
-          {{ "programs.reportProgram"|trans({}, 'catroweb') }}
-        </button>
-      {% endif %}
     </div>
-
-    <div class="clear"></div>
   </div>
 
   {% include 'Program/program_details_accordion.html.twig' %}
@@ -593,40 +577,36 @@
   <script>
 
     $(function () {
-      const copy_button = $('.btn-copy')
-
-      copy_button.tooltip({
-        trigger  : 'manual',
-        placement: 'right',
-        container: '.btn-copy'
-      })
-
-      copy_button.on('shown.bs.tooltip', function () {
-        setTimeout(function () {
-          copy_button.tooltip('hide')
-        }, 1000)
-      })
-
-      const cb = new ClipboardJS('.btn-copy')
-      cb.on('success', function () {
-        copy_button
-        .attr('data-original-title', '{{ "clipboard.success"|trans({}, "catroweb") }}')
-        .addClass('tooltip-success')
-        .removeClass('tooltip-danger')
-        copy_button.tooltip('show')
-        $('.btn-copy +.tooltip .tooltip-inner').prepend('<i class=\'fa fa-check\' style=\'padding-right: 1em\'></i>')
-      })
-
-      cb.on('error', function () {
-        copy_button
-        .attr('data-original-title', '{{ "clipboard.fail"|trans({}, "catroweb") }}')
-        .addClass('tooltip-danger')
-        .removeClass('tooltip-success')
-        copy_button.tooltip('show')
-        $('.btn-copy +.tooltip .tooltip-inner').prepend('<i class=\'fa fa-close\' style=\'padding-right: 1em\'></i>')
-      })
-
+      if (navigator.share) {
+        $('#top-app-bar__btn-share').on('click', function () {
+          navigator.share({
+            title: '{{ getThemeDisplayName() }}',
+            text: '{{ "checkOutProject"|trans({}, "catroweb") }}',
+            url: '{{ url('program', { id : program.id }) }}'
+          })
+            .then(() => {
+              showSnackbar('#share-snackbar', '{{ "share.success"|trans({}, "catroweb") }}')
+            })
+            .catch((error) => {
+              showSnackbar('#share-snackbar', '{{ "share.error"|trans({}, "catroweb") }}')
+            })
+        })
+      }
+      else {
+        // Web Share API is still very limited - provide copy action as fallback
+        $('#top-app-bar__btn-share-text').text('{{ "copy"|trans({}, "catroweb") }}')
+        const cb = new ClipboardJS('#top-app-bar__btn-share')
+        cb.on('success', function () {
+          showSnackbar('#share-snackbar', '{{ "clipboard.success"|trans({}, "catroweb") }}')
+        })
+        cb.on('error', function () {
+          showSnackbar('#share-snackbar', '{{ "clipboard.fail"|trans({}, "catroweb") }}')
+        })
+      }
     })
+  </script>
+
+  <script>
 
     const project_id = '{{ program.id }}'
 

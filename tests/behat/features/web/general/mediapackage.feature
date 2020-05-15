@@ -32,7 +32,6 @@ Feature:
     Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
     Then I should see "Animals"
-    And I should not see an "#medialib-header-back-btn" element
 
   Scenario: When viewing a media package category the project navigation in the nav sidebar should be hidden
     Given I am on "/app/media-library/looks"
@@ -65,56 +64,59 @@ Feature:
     Then the element "#mediafile-1" should have a attribute "class" with value "selected"
     And I click "#mediafile-5"
     Then the element "#mediafile-5" should have a attribute "class" with value "selected"
-    Then I should see "SAVE"
-    And the "#downloadbar-nr-selected" element should contain "2"
+    Then the element "#top-app-bar__btn-download-selection" should be visible
+    And the "#top-app-bar__download-nr-selected" element should contain "2"
     And I click "#mediafile-1"
     Then the element "#mediafile-1" should have no attribute "class" with value "selected"
     And I click "#mediafile-5"
     Then the element "#mediafile-5" should have no attribute "class" with value "selected"
-    Then I should not see "SAVE"
-    And the "#downloadbar-nr-selected" element should contain "0"
+    Then the element "#top-app-bar__btn-download-selection" should not be visible
+    And the "#top-app-bar__download-nr-selected" element should contain "0"
 
   Scenario: Pressing the x button in the download bar should delete the selection
     Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
     And I click "#mediafile-1"
     And I click "#mediafile-5"
-    And I click "#downloadbar-delete-selection-btn"
+    And I click "#top-app-bar__btn-cancel-download-selection"
     Then the element "#mediafile-1" should have no attribute "class" with value "selected"
     Then the element "#mediafile-5" should have no attribute "class" with value "selected"
-    And I should not see "SAVE"
+    And the element "#top-app-bar__btn-download-selection" should not be visible
 
   Scenario: Downloading multiple selected files
     Given I am on "/app/media-library/looks"
     And I wait for the page to be loaded
     And I click "#mediafile-1"
     And I click "#mediafile-5"
-    And I click "#downloadbar-start-downloads"
-    Then I should not see "SAVE"
+    And I click "#top-app-bar__btn-download-selection"
+    Then the element "#top-app-bar__btn-download-selection" should not be visible
 #   Disabled for the moment due to problems with github/docker/shared volumes
 #   Then I should have downloaded a file named "Dog (-).png"
 #   Then I should have downloaded a file named "SexyNULL.png"
 
 
-  # Media Library search function
-
   Scenario: Searching the Media Package "looks" with the Pocketcode app and the search term "Snake" should result in an empty result.
     Given I am on "/app/media-library/Looks"
     And I wait for the page to be loaded
-    Then I click ".search-icon-header"
-    And I enter "Snake" into visible ".input-search"
-    And I click "#btn-search-header"
+    Then I click "#top-app-bar__btn-search"
+    And I enter "Snake" into visible "#top-app-bar__search-input"
+    And I press enter in the search bar
     And I wait for the page to be loaded
     Then I should be on "/app/media-library/Looks/search/Snake"
     And I should see "Your search returned 0 results"
-    And I should see an "#medialib-header-back-btn" element
+
+  Scenario: The search label in the media library should be different than to the normal search
+    Given I am on "/app/media-library/Looks"
+    And I wait for the page to be loaded
+    And I click the currently visible search icon
+    Then the element "#top-app-bar__search-label" should have a attribute "alt" with value "Search in media library"
 
   Scenario: Searching the Media Package "looks" with the Luna app and search term "Sexy" should result in 3 found files
     Given I am on "/luna/media-library/Looks"
     And I wait for the page to be loaded
-    Then I click ".search-icon-header"
-    And I enter "Sexy" into visible ".input-search"
-    And I click "#btn-search-header"
+    Then I click "#top-app-bar__btn-search"
+    And I enter "Sexy" into visible "#top-app-bar__search-input"
+    And I press enter in the search bar
     And I wait for the page to be loaded
     Then I should be on "/luna/media-library/Looks/search/Sexy"
     And I should see media file with id "4"
@@ -129,9 +131,9 @@ Feature:
   Scenario: Searching the Media Package "looks" with the Pocketcode app and search term "Sexy" should result in 2 found files
     Given I am on "/app/media-library/Looks"
     And I wait for the page to be loaded
-    Then I click ".search-icon-header"
-    And I enter "Sexy" into visible ".input-search"
-    And I click "#btn-search-header"
+    Then I click "#top-app-bar__btn-search"
+    And I enter "Sexy" into visible "#top-app-bar__search-input"
+    And I press enter in the search bar
     And I wait for the page to be loaded
     Then I should be on "/app/media-library/Looks/search/Sexy"
     And I should see media file with id "5"
@@ -146,9 +148,9 @@ Feature:
   Scenario: Searching the Media Package "sounds" with the Pocketcode app and search term "e" should not return results from other packages
     Given I am on "/app/media-library/Sounds"
     And I wait for the page to be loaded
-    Then I click ".search-icon-header"
-    And I enter "e" into visible ".input-search"
-    And I click "#btn-search-header"
+    Then I click "#top-app-bar__btn-search"
+    And I enter "e" into visible "#top-app-bar__search-input"
+    And I press enter in the search bar
     And I wait for the page to be loaded
     Then I should be on "/app/media-library/Sounds/search/e"
     And I should see media file with id "2"
