@@ -4,7 +4,7 @@
 @use "@material/form-field";
 @use "@material/menu-surface/mdc-menu-surface";
 @use "@material/snackbar/mdc-snackbar";
-
+@use "@material/circular-progress/mdc-circular-progress";
 
 @import "elements"; // A set of useful LESS mixins (More info at: http://lesselements.com)
 @import "mixins";   // Our own defined Mixins
@@ -63,3 +63,4 @@ $fa-font-path: "../../webfonts";
 @import "footer";
 @import "catro_tabs";
 @import "bootstrap_overwrite";
+@import "progress_bar";

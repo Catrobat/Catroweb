@@ -206,6 +206,24 @@ class DataFixturesContext implements KernelAwareContext
     $this->getManager()->flush();
   }
 
+  /**
+   * @Given /^there are "([^"]*)" similar projects$/
+   *
+   * @param mixed $num_of_projects
+   *
+   * @throws Exception
+   */
+  public function thereAreNumberOfSimilarProjects($num_of_projects): void
+  {
+    for ($project = 1; $project <= $num_of_projects; ++$project)
+    {
+      $program_info = ['name' => 'basic '.$project];
+      $program = $this->insertProject($program_info, false);
+      $this->programs[] = $program;
+    }
+    $this->getManager()->flush();
+  }
+
   public function getPrograms(): array
   {
     return $this->programs;

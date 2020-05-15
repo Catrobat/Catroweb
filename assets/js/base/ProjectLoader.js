@@ -138,6 +138,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
         const searchResultsText = $('#search-results-text')
 
         if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
+          $('.circular-progress').hide()
           searchResultsText.addClass('no-results')
           searchResultsText.find('span').text(0)
           return
@@ -160,6 +161,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     showLessListener()
 
     await loadProjectsIntoContainer(data)
+    $('.circular-progress').hide()
     await initParameters()
     await initNumberOfVisibleProjects()
     await keepRowsFull()
