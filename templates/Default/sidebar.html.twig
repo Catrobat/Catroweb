@@ -14,14 +14,12 @@
     {# logged in #}
     {% if app.user %}
 
-
     <li class="nav-item" id="sidebar-notifications">
         <a id="notifications-dropdown-toggler" class="nav-link collapsible">
           <span class="sidebar-link-icon material-icons">notifications</span>
-          <span class="text">{{ "notifications"|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ "notifications"|trans({}, "catroweb") }}</span>
           <span class="badge-pill badge-danger all-notifications-dropdown"></span>
-          <span id="notifications-dropdown-arrow"
-                class="sidebar-link-icon material-icons">chevron_left</span>
+          <span id="notifications-dropdown-arrow" class="material-icons">chevron_left</span>
         </a>
 
         <div id="notifications-dropdown-content" class="notifications-dropdown-content">
@@ -30,7 +28,7 @@
              href="{{ path('user_notifications', { 'notification_type': "allNotifications" })}}"
              id="btn-notifications">
             <span class="sidebar-link-icon material-icons">notifications</span>
-            <span class="text">{{ "allNotifications"|trans({}, "catroweb") }}</span>
+            <span class="sidebar-link-text">{{ "allNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger all-notifications"></span>
           </a>
 
@@ -39,24 +37,24 @@
              id="btn-followers">
 
             <span class="sidebar-link-icon material-icons">person</span>
-            <span class="text">{{ "FollowersNotifications"|trans({}, "catroweb") }}</span>
+            <span class="sidebar-link-text">{{ "FollowersNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger followers"></span>
           </a>
 
           <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "likes" }) }}" id="btn-likes">
             <span class="sidebar-link-icon material-icons">thumb_up</span>
-            <span class="text">{{ "LikeNotifications"|trans({}, "catroweb") }}</span>
+            <span class="sidebar-link-text">{{ "LikeNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger likes"></span>
           </a>
 
           <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "comments" }) }}" id="btn-comments">
             <span class="sidebar-link-icon material-icons">comment</span>
-            <span class="text">{{ "CommentNotifications"|trans({}, "catroweb") }}</span>
+            <span class="sidebar-link-text">{{ "CommentNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger comments"></span>
           </a>
           <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "remix" }) }}" id="btn-remix">
             <span class="sidebar-link-icon material-icons">call_split</span>
-            <span class="text">{{ "RemixNotifications"|trans({}, "catroweb") }}</span>
+            <span class="sidebar-link-text">{{ "RemixNotifications"|trans({}, "catroweb") }}</span>
             <span class="badge-pill badge-danger remixes"></span>
           </a>
 
@@ -66,14 +64,14 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
           <span class="sidebar-link-icon material-icons">person</span>
-          <span>{{ 'menu.profile'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.profile'|trans({}, "catroweb") }}</span>
         </a>
       </li>
       {% if is_granted('ROLE_ADMIN') %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
             <span class="sidebar-link-icon material-icons">security</span>
-            {{ 'menu.admin'|trans({}, "catroweb") }}
+            <span class="sidebar-link-text">{{ 'menu.admin'|trans({}, "catroweb") }}</span>
           </a>
         </li>
       {% endif %}
@@ -81,7 +79,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('catrobat_follower') }}" id="btn-follow">
           <span class="sidebar-link-icon material-icons">people</span>
-          <span>{{ 'menu.followersAndFollowing'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.followersAndFollowing'|trans({}, "catroweb") }}</span>
         </a>
       </li>
 
@@ -89,7 +87,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('login') }}" id="btn-login">
           <span class="sidebar-link-icon material-icons">exit_to_app</span>
-          <span>{{ 'menu.login'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.login'|trans({}, "catroweb") }}</span>
         </a>
       </li>
     {% endif %}
@@ -98,7 +96,7 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ url('catrobat_web_help') }}" id="btn-tutorials">
         <span class="sidebar-link-icon material-icons">help_outline</span>
-        <span>{{ 'menu.helpAndTutorials'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'menu.helpAndTutorials'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
@@ -107,7 +105,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
           <span class="sidebar-link-icon material-icons ">exit_to_app</span>
-          <span>{{ 'menu.logout'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, "catroweb") }}</span>
         </a>
       </li>
     {% endif %}
@@ -118,49 +116,49 @@
     <li id="nav-featured" class="nav-item">
       <a class="nav-link" href="{{ path('index') }}#featured" id="btn-featured">
         <span class="sidebar-link-icon material-icons">star</span>
-        <span>{{ 'programs.featured'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'programs.featured'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-newest" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#newest" id="btn-newest">
         <span class="sidebar-link-icon material-icons">schedule</span>
-        <span>{{ 'programs.newest'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'programs.newest'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-recommended" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#recommended" id="btn-recommended">
         <span class="sidebar-link-icon material-icons">thumb_up</span>
-        <span>{{ 'programs.recommended'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'programs.recommended'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-scratch-remixes" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#scratchRemixes" id="btn-recommended">
         <span class="sidebar-link-icon material-icons">call_split</span>
-        <span>{{ 'programs.scratchremixes'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'programs.scratchremixes'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-most-downloaded" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#mostDownloaded" id="btn-most-downloaded">
         <span class="sidebar-link-icon material-icons">get_app</span>
-        <span>{{ 'programs.most.downloaded'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'programs.most.downloaded'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-most-viewed" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#mostViewed" id="btn-most-viewed">
         <span class="sidebar-link-icon material-icons">visibility</span>
-        <span>{{ 'programs.most.viewed'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'programs.most.viewed'|trans({}, "catroweb") }}</span>
       </a>
     </li>
 
     <li id="nav-random" class="nav-item" style="display:none">
       <a class="nav-link" href="{{ path('index') }}#random" id="btn-random">
         <span class="sidebar-link-icon material-icons">casino</span>
-        <span>{{ 'programs.random'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'programs.random'|trans({}, "catroweb") }}</span>
       </a>
     </li>
   </ul>
