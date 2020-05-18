@@ -858,6 +858,89 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I change upload of the entry number "([^"]*)" in the list to "([^"]*)"$/
+   *
+   * @param mixed $program_number
+   * @param mixed $approved
+   *
+   * @throws Exception
+   */
+  public function iChangeUploadOfTheEntry($program_number, $approved): void
+  {
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$program_number.']/td[4]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($approved);
+    $this->iWaitForAjaxToFinish();
+  }
+
+  /**
+   * @Then /^I change report of the entry number "([^"]*)" in the list to "([^"]*)"$/
+   *
+   * @param mixed $program_number
+   * @param mixed $approved
+   *
+   * @throws Exception
+   */
+  public function iChangeReportOfTheEntry($program_number, $approved): void
+  {
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$program_number.']/td[5]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($approved);
+    $this->iWaitForAjaxToFinish();
+  }
+
+  /**
+   * @Then /^I click action button "([^"]*)" of the entry number "([^"]*)"$/
+   *
+   * @param mixed $action_button
+   * @param mixed $entry_number
+   *
+   * @throws Exception
+   */
+  public function iClickActionButtonOfEntry($action_button, $entry_number): void
+  {
+    $page = $this->getSession()->getPage();
+    switch ($action_button) {
+      case 'edit':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[1]')
+          ->click()
+        ;
+        break;
+      case 'delete':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[2]')
+          ->click()
+        ;
+        break;
+    }
+  }
+
+  /**
+   * @Then /^I check the batch action box of entry "([^"]*)"$/
+   *
+   * @param mixed $entry_number
+   *
+   * @throws Exception
+   */
+  public function iCheckBatchActionBoxOfEntry($entry_number): void
+  {
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td/div')
+      ->click()
+    ;
+  }
+
+  /**
    * @Then /^I click on the username "([^"]*)"$/
    *
    * @param mixed $username
@@ -2227,9 +2310,24 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the table with all projects in the following order:$/
+   * @Then /^I should see the notifications table:$/
    *
    * @throws ResponseTextException
+   */
+  public function shouldSeeNotificationTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['User']);
+      $this->assertSession()->pageTextContains($user_stat['User Email']);
+      $this->assertSession()->pageTextContains($user_stat['Upload']);
+      $this->assertSession()->pageTextContains($user_stat['Report']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the table with all projects in the following order:$/
    */
   public function shouldSeeReportedProgramsTable(TableNode $table): void
   {

@@ -29,12 +29,24 @@ class NotificationAdmin extends AbstractAdmin
    */
   protected function configureFormFields(FormMapper $formMapper): void
   {
+    if ($this->isCurrentRoute('create'))
+    {
+      $formMapper
+        ->add('id', EntityType::class, ['class' => User::class, 'label' => 'User'])
+      ;
+    }
+
+    if ($this->isCurrentRoute('edit'))
+    {
+      $formMapper
+        ->add('user', EntityType::class, ['class' => User::class, 'label' => 'User'])
+      ;
+    }
+
     $formMapper
-      ->add('user', EntityType::class, ['class' => User::class])
       ->add('upload', null, ['label' => 'Email bei Upload', 'required' => false])
       ->add('report', null,
         ['label' => 'Email bei Inappropriate Report', 'required' => false])
-      ->add('summary', null, ['label' => 'Emails täglich sammeln', 'required' => false])
     ;
   }
 
@@ -45,6 +57,12 @@ class NotificationAdmin extends AbstractAdmin
    */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
+    $datagridMapper
+      ->add('user')
+      ->add('user.email')
+      ->add('upload')
+      ->add('report')
+    ;
   }
 
   /**
@@ -59,7 +77,6 @@ class NotificationAdmin extends AbstractAdmin
       ->add('user.email')
       ->add('upload', null, ['editable' => true])
       ->add('report', null, ['editable' => true])
-      ->add('summary', null, ['editable' => true])
       ->add('_action', 'actions', [
         'actions' => [
           'edit' => [],
@@ -71,5 +88,6 @@ class NotificationAdmin extends AbstractAdmin
 
   protected function configureRoutes(RouteCollection $collection): void
   {
+    $collection->remove('acl');
   }
 }
