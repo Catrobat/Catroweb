@@ -11,6 +11,7 @@
     <div id="search-results-text">
       {{ "search.resultcount"|trans({'%count%': '<span></span>'}, "catroweb")|raw }}
     </div>
+    {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'search-progressbar'} only %}
     <div class="programs"></div>
   </div>
 

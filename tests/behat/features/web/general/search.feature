@@ -97,3 +97,16 @@ Feature: Searching for programs
     Given I am on "/app/search/gmx.at"
     And I wait for the page to be loaded
     Then I should see "Your search returned 0 results"
+
+
+  Scenario: Progress bar should be displayed when there are many search results being loaded
+    Given there are "2500" similar projects
+    And I am on "/app/search/basic"
+    Then the element ".circular-progress" should be visible
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 2500 results"
+    And the element ".circular-progress" should not be visible
+    Then I should see "basic 1"
+    Then I should see "basic 2"
+    Then I should see "basic 3"
+    Then I should see "basic 4"
