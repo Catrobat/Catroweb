@@ -167,7 +167,10 @@ const _InternalRemixGraph = function () {
     if (nodeId !== self.programID) {
       contextMenuItems.open = {
         name: self.remixGraphTranslations.open,
-        icon: 'fa-external-link',
+        icon: function (opt, $itemElement, itemKey, item) {
+          $itemElement.html('<span class="material-icons">open_in_new</span><span class="text">' + item.name + '</span>')
+          return 'context-menu-icon-material'
+        },
         callback: function () {
           self.performClickStatisticRequest(nodeId, (idParts[0] !== CATROBAT_NODE_PREFIX))
           self.closeButtonSelector.click()
@@ -187,7 +190,10 @@ const _InternalRemixGraph = function () {
     if (self.edges.length > 0) {
       contextMenuItems.edges = {
         name: self.remixGraphTranslations.showPaths,
-        icon: 'fa-retweet', // fa-level-down
+        icon: function (opt, $itemElement, itemKey, item) {
+          $itemElement.html('<span class="material-icons">repeat</span><span class="text">' + item.name + '</span>')
+          return 'context-menu-icon-material'
+        },
         callback: function () { self.highlightPathEdgesOfSelectedNode(nodeId) }
       }
     }

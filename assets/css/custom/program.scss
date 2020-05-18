@@ -112,7 +112,7 @@ $thumbnail-size: 300px;
 
   #project-like-buttons {
     .btn {
-      border: 2px solid white;
+      border: 2px solid #fff;
       border-radius: 50%;
 
       &:not(:first-child) {
@@ -124,16 +124,18 @@ $thumbnail-size: 300px;
     .btn-round {
       width: $like-button-size;
       height: $like-button-size;
+      padding: 0;
+      text-align: center;
 
       .fas {
         font-size: 1.73rem;
 
         &.fa-thumbs-up {
-          margin-top: 0.23rem;
+          margin-top: 0.55rem;
         }
 
         &.fa-heart {
-          margin-top: 0.40rem;
+          margin-top: 0.70rem;
         }
       }
     }
@@ -141,7 +143,7 @@ $thumbnail-size: 300px;
     .btn.icon-only {
       font-size: $like-button-size * 0.99;
       padding: 0;
-      line-height: 1;
+      line-height: 0;
       color: $primary;
       background-color: white;
     }
@@ -200,16 +202,17 @@ $thumbnail-size: 300px;
     .btn-round {
       width: $like-detail-button-size;
       height: $like-detail-button-size;
+      padding: 0;
 
       .fas {
         font-size: 1.3rem;
 
         &.fa-thumbs-up {
-          margin-top: 0.1rem;
+          margin-top: 0.55rem;
         }
 
         &.fa-heart {
-          margin-top: 0.2rem;
+          margin-top: 0.7rem;
         }
       }
     }
@@ -217,7 +220,7 @@ $thumbnail-size: 300px;
     .btn.icon-only {
       font-size: $like-detail-button-size * 0.99;
       padding: 0;
-      line-height: 1;
+      line-height: 0;
       color: $primary;
 
       &:hover {

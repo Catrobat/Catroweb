@@ -31,29 +31,41 @@ $sidebar-width: 250px;
     background-size: contain;
   }
 
-  li {
-    a {
-      display: block;
+  .nav-link { //a-element in li
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
 
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      color: #222;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: #222;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    &:hover {
       text-decoration: none;
-
-      .nav-link {
-        cursor: pointer;
-      }
-
-      &:hover {
-        text-decoration: none;
-        background: rgba(0, 0, 0, 0.2);
-      }
-
-      &:active,
-      &:focus {
-        text-decoration: none;
-      }
+      background: rgba(0, 0, 0, 0.2);
     }
+
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .sidebar-link-icon {
+    flex-shrink: 0;
+    width: 2rem;
+    padding-right: 0.3rem;
+    text-align: center;
+  }
+
+  .sidebar-link-text {
+    @include force-word-break();
+    flex-grow: 1;
+    overflow: hidden;
   }
 
   #notifications-dropdown-toggler {
@@ -61,23 +73,19 @@ $sidebar-width: 250px;
     flex-direction: row;
     justify-items: flex-start;
 
-    .text {
-      @include force-word-break();
-      flex-grow: 1;
-    }
-
     #notifications-dropdown-arrow,
     .badge-pill {
       margin-left: 0.25rem;
     }
 
     #notifications-dropdown-arrow {
-      width: 0.9rem;
+      width: 2rem;
       text-align: center;
     }
 
     .badge-pill {
       display: none;
+      align-self: baseline;
     }
   }
 
@@ -95,22 +103,9 @@ $sidebar-width: 250px;
       padding-left: 1.7rem;
       justify-items: flex-start;
 
-      .fa,
-      .fas,
-      .far,
-      .fab,
-      .fad {
-        font-size: 1.1rem;
-      }
-
-      .text {
-        @include force-word-break();
-        flex-grow: 1;
-        max-width: calc(100% - 3rem);
-      }
-
       .badge-pill {
         display: none;
+        align-self: baseline;
         padding-right: 0.5em;
         padding-left: 0.5em;
         margin-left: 0.25rem;
@@ -127,10 +122,12 @@ $sidebar-width: 250px;
 }
 
 @include media-breakpoint-up(md) {
+  // stylelint-disable-next-line selector-no-qualifying-type
   body.new-nav .body-content {
     padding-left: 15px + $sidebar-width;
   }
 
+  // stylelint-disable-next-line selector-no-qualifying-type
   body.new-nav.modal-open .modal {
     border-left: $sidebar-width solid transparent;
   }
@@ -157,14 +154,8 @@ $sidebar-width: 250px;
   transition: all 0.5s ease-in-out;
 }
 
+// stylelint-disable-next-line selector-max-id
 #sidebar.active + #sidebar-overlay {
   display: block;
   opacity: 1;
 }
-
-.sidebar-link-icon {
-  display:inline-flex;
-  vertical-align:top;
-  padding-right: 0.3em;
-}
-
