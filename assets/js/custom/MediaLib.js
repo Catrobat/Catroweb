@@ -7,7 +7,7 @@
 
 // eslint-disable-next-line no-unused-vars
 function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
-  elementsTranslationSingular, elementsTranslationPlural) {
+  elementsTranslationSingular, elementsTranslationPlural, isWebView = false) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
@@ -22,25 +22,24 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
   })
 
   function getPackageFiles (packageName, mediaSearchPath, flavor, assetsDir) {
-    var downloadList = []
+    let downloadList = []
 
     document.getElementById('top-app-bar__btn-download-selection').onclick = function () {
-      for (var i = 0; i < downloadList.length; i++) {
+      for (let i = 0; i < downloadList.length; i++) {
         medialibDownloadSelectedFile(downloadList[i])
       }
       document.getElementById('top-app-bar__btn-cancel-download-selection').click()
     }
 
     document.getElementById('top-app-bar__btn-cancel-download-selection').onclick = function () {
-      for (var i = 0; i < downloadList.length; i++) {
+      for (let i = 0; i < downloadList.length; i++) {
         document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
       }
       downloadList = []
       showTopBarDefault()
     }
 
-    var url = null
-
+    let url
     if (mediaSearchPath !== '') {
       url = mediaSearchPath
     } else {
@@ -55,30 +54,40 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
 
         const mediafileContainer = $('<a class="mediafile" id="mediafile-' + file.id + '"/>')
         mediafileContainer.click(function () {
-          mediafileContainer.toggleClass('selected')
-          var indexInDownloadList = downloadList.indexOf(file)
+          // !!! Due to missing android web view support the download multiple files feature was "disabled" !!!!!
+          // For now it is only possible to select one element! ToDo: send zip files if multiple files are downloaded.
+          if (isWebView) {
+            mediafileContainer.attr('href', file.download_url)
+            mediafileContainer.attr('data-extension', file.extension)
+            mediafileContainer.click(function () {
+              medialibOnDownload(this)
+            })
+          } else { // -- end of disable
+            mediafileContainer.toggleClass('selected')
+            const indexInDownloadList = downloadList.indexOf(file)
 
-          if (indexInDownloadList === -1) {
-            downloadList.push(file)
-          } else {
-            downloadList.splice(indexInDownloadList, 1)
-          }
+            if (indexInDownloadList === -1) {
+              downloadList.push(file)
+            } else {
+              downloadList.splice(indexInDownloadList, 1)
+            }
 
-          let elementsText = downloadList.length + ' '
-          // Dispense support for languages where the count would be right.
-          // This way there is no need to dynamically load the translation. (No delay - Less requests)
-          if (downloadList.length === 1) {
-            elementsText += elementsTranslationSingular
-          } else {
-            elementsText += elementsTranslationPlural
-          }
+            let elementsText = downloadList.length + ' '
+            // Dispense support for languages where the count would be right.
+            // This way there is no need to dynamically load the translation. (No delay - Less requests)
+            if (downloadList.length === 1) {
+              elementsText += elementsTranslationSingular
+            } else {
+              elementsText += elementsTranslationPlural
+            }
 
-          document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
+            document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
 
-          if (downloadList.length > 0) {
-            showTopBarDownload()
-          } else {
-            showTopBarDefault()
+            if (downloadList.length > 0) {
+              showTopBarDownload()
+            } else {
+              showTopBarDefault()
+            }
           }
         })
 
@@ -310,7 +319,7 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
       }
     })
 
-    document.addEventListener('touchend', function (e) {
+    document.addEventListener('touchend', function () {
       reset()
     })
 
@@ -322,11 +331,25 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
 }
 
 function medialibDownloadSelectedFile (file) {
-  var link = document.createElement('a')
+  const link = document.createElement('a')
   link.href = file.download_url
   link.download = file.name
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
+  return false
+}
+
+function medialibOnDownload (link) {
+  if (link.href !== 'javascript:void(0)') {
+    const downloadHref = link.href
+    link.href = 'javascript:void(0)'
+
+    setTimeout(function () {
+      link.href = downloadHref
+    }, 5000)
+
+    window.location = downloadHref
+  }
   return false
 }
