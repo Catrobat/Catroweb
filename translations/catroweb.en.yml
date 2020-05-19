@@ -591,7 +591,7 @@ menu:
   logout: Logout
   admin: Admin
   home: Home
-  helpAndTutorials: Help & Tutorials
+  helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
 
 login:
@@ -935,14 +935,14 @@ media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview Size
+    description: Preview size
     sm: small
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
-  search-results : Media Library Search Results
+  search-results : Media library search results
   no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: SAVE
+  download_these_files: save
 
 flavor:
   pocketcode: Pocket Code
@@ -966,6 +966,8 @@ share:
   text: 'Share'
   error: 'Share failed'
   success: 'Share successful'
-copy: 'Copy Link'
+copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 
+community: 'Catrobat community'
+back_to_app: 'Exit community'

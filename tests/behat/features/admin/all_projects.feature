@@ -174,7 +174,7 @@ Feature: Admin all projects
     And I wait for the page to be loaded
     Then I should see "program 2"
 
-    Scenario: Change the visibility of the  program
+    Scenario: Change the visibility of the program
       Given I log in as "Admin" with the password "123456"
       And I am on "/app"
       And I wait for the page to be loaded
