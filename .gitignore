@@ -5,6 +5,8 @@ phpspec.yml
 phpunit.xml
 *.local
 phploc.phar
+.jwt/
+
 
 ### Scripts ###
 bin/

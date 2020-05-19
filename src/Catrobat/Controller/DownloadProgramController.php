@@ -42,10 +42,6 @@ class DownloadProgramController extends AbstractController
     {
       throw new NotFoundHttpException();
     }
-    if (!$program->isVisible())
-    {
-      throw new NotFoundHttpException();
-    }
 
     $rec_by_page_id = (int) $request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE);
     $rec_by_program_id = (int) $request->query->get('rec_by_program_id', 0);

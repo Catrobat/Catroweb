@@ -4,26 +4,25 @@
        data-toggle="collapse" data-target="#collapseCodeView" aria-expanded="false"
        aria-controls="collapseCodeView">
     Code View
-    <i class="fas fa-chevron-left rotate-left"></i>
+    {% if isVersionSupportedByCatBlocks(version) %}
+      {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'code-view-spinner', 'small': true} %}
+    {% endif %}
+    <i id="code-view-toggler" class="material-icons rotate-left {% if isVersionSupportedByCatBlocks(version) %} d-none {% endif %}">chevron_left</i>
   </div>
 
-  <div id="collapseCodeView" class="card-body collapse" aria-labelledby="codeView" data-parent="#programDetails">
-    <div class="accordion" id="accordionScenes">
-      <div class="card">
-        <div class="show-hide-code card-header d-flex justify-content-between expansion-header"
-             data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
-             aria-controls="collapseOne">
+  <div id="collapseCodeView"
+       {#  Catblocks needs the container to be visible to generate the SVGs in the correct size #}
+       class="card-body {% if not isVersionSupportedByCatBlocks(version) %} collapse {% endif %}"
+       aria-labelledby="codeView"
+       data-parent="#programDetails">
+    {% if isVersionSupportedByCatBlocks(version) %}
+      <div id='catblocks-code-container'></div>
+      {# As long as catblocks is not stable we need to also load the old view as backup #}
+      {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:oldView', {'id' : id, 'visible' : false })) }}
+    {% else %}
+      {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:oldView', {'id' : id })) }}
+    {% endif %}
 
-          {% if isVersionSupportedByCatBlocks(version) %}
-            <div id='catblocks-code-container'></div>
-            {# As long as catblocks is not stable we need to also load the old view as backup #}
-            {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:oldView', {'id' : id, 'visible' : false })) }}
-          {% else %}
-            {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:oldView', {'id' : id })) }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>
