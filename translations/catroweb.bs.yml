@@ -1,5 +1,4 @@
 ---
-#---
 #homepage translation
 localLanguage: Engleski
 username: Korisničko Ime
@@ -65,11 +64,26 @@ deleteAllNotificationsButtonTitle: "Delete all"
 notificationsClearError: "Nemoguće označiti notifikacije kao pročitane!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Molimo sačekajte..."
+projects: "Programi"
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
@@ -77,6 +91,7 @@ programs:
     download: Download the app
     statistics: More Statistics
   featured: Istaknut
+  example: Examples
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
@@ -193,16 +208,12 @@ passwordRecovery:
   subject: Povrat lozinke
   message: |
     Dear %username%.
-
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
     If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-
     To reset your password and create a new one, please visit the following page: %confirmationUrl%
-
     You can use your username and your password at any time to access the %appplication_url% community.
     To do so, just visit the following page: %loginPage%
     To edit your profile details, go to this page: %profilePage%
-
     Best regards,
     Your Catrobat Team.
   messageHtml: |
@@ -552,6 +563,7 @@ oauth:
 search:
   dotdotdot: Search...
   search: Pretraži
+  inMediaLib: Search in media library
   results: Rezultati pretrage
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
@@ -562,6 +574,7 @@ menu:
   admin: Admin
   home: Home
   helpAndTutorials: Pomoć i tutorijali
+  followersAndFollowing: Follower
 login:
   login: Prijava
   passOrUser: Lozinka ili korisničko ime je netačno.
@@ -784,11 +797,13 @@ codeview:
   scenes: 'scene'
   scripts: 'skripte'
   bricks: 'blokovi'
-  objects: 'actors and objects'
+  objects: 'Actors and Objects'
   looks: 'izgledi'
   sounds: 'zvukovi'
   globals: 'globalni'
   locals: 'lokalni'
+  globalVariables: 'Global Variables'
+  localVariables: 'Local Variables'
   eventBricks: 'Blokovi događaja'
   controlBricks: 'Kontrolni blokovi'
   motionBricks: 'Blokovi pokreta'
@@ -797,7 +812,21 @@ codeview:
   penBricks: 'Pen Bricks'
   dataBricks: 'Blokovi podataka'
   specialBricks: 'Special Bricks'
+codeStatistics:
+  title: "Code Statistics"
+  error: "Code Statistics can't be displayed."
+  general: 'General'
+  bricks: 'Blokovi'
+  eventBricks: 'Događaj'
+  controlBricks: 'Kontrola'
+  motionBricks: 'Kretanje'
+  soundBricks: 'Zvuk'
+  looksBricks: 'Izgledi'
+  penBricks: 'Olovka'
+  dataBricks: 'Podaci'
+  specialBricks: 'Special'
 footer:
+  language: Jezik
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
@@ -865,11 +894,14 @@ media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview Size
+    description: Preview size
     sm: small
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -877,8 +909,18 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
 agree: Slažem se
 disagree: Ne slažem se
 profileLoader:
   noProfiles: Trenutno nema profila.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'Catrobat koalicija'
+back_to_app: 'Exit community'

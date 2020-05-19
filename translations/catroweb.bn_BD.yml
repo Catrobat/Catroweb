@@ -1,5 +1,4 @@
 ---
-#---
 #homepage translation
 localLanguage: ইংরেজি
 username: ব্যবহারকারীর নাম
@@ -65,11 +64,26 @@ deleteAllNotificationsButtonTitle: "Delete all"
 notificationsClearError: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করতে অক্ষম!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "অনুগ্রহ করে অপেক্ষা করুন..."
+projects: "প্রজেক্টসমূহ"
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
 programs:
   welcome:
     title: আপনাকে স্বাগতম Catrobat's %theme%
@@ -77,6 +91,7 @@ programs:
     download: অ্যাপ্লিকেশন ডাউনলোড করুন
     statistics: আরও পরিসংখ্যান
   featured: বৈশিষ্ট্য
+  example: Examples
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
@@ -549,6 +564,7 @@ oauth:
 search:
   dotdotdot: অনুসন্ধান...
   search: অনুসন্ধান
+  inMediaLib: Search in media library
   results: ফলাফল অনুসন্ধান করুন
   resultcount: আপনার অনুসন্ধানে %count% ফলাফল ফিরে এসেছে
   fail: কমপক্ষে একটি অনুসন্ধান শব্দ লিখুন
@@ -559,6 +575,7 @@ menu:
   admin: অ্যাডমিন
   home: মূল পাতা
   helpAndTutorials: সহায়তা ও টিউটোরিয়াল
+  followersAndFollowing: অনুসরণকারী
 login:
   login: প্রবেশ করুন
   passOrUser: আপনার পাসওয়ার্ড বা ব্যবহারকারীর নামটি ভুল ছিল।
@@ -781,11 +798,13 @@ codeview:
   scenes: 'দৃশ্য'
   scripts: 'স্ক্রিপ্ট'
   bricks: 'ব্রিক'
-  objects: 'actors and objects'
+  objects: 'Actors and Objects'
   looks: 'দেখা'
   sounds: 'শব্দ'
   globals: 'বিশ্বব্যাপী'
   locals: 'স্থানীয়'
+  globalVariables: 'Global Variables'
+  localVariables: 'Local Variables'
   eventBricks: 'ইভেন্ট ইট'
   controlBricks: 'ব্রিক নিয়ন্ত্রণ করুন'
   motionBricks: 'গতিশীল ব্রিক'
@@ -794,7 +813,21 @@ codeview:
   penBricks: 'রাজহংসী ব্রিক'
   dataBricks: 'ডেটা ব্রিক'
   specialBricks: 'Special Bricks'
+codeStatistics:
+  title: "Code Statistics"
+  error: "Code Statistics can't be displayed."
+  general: 'General'
+  bricks: 'ব্রিক'
+  eventBricks: 'ঘটনা'
+  controlBricks: 'নিয়ন্ত্রণ'
+  motionBricks: 'গতি'
+  soundBricks: 'শব্দ'
+  looksBricks: 'চেহারা'
+  penBricks: 'কলম'
+  dataBricks: 'তথ্য'
+  specialBricks: 'Special'
 footer:
+  language: ভাষা
   usefulLinks: উপকারী লিংক
   legalities: বৈধতা
   communityStats: সম্প্রদায় পরিসংখ্যান
@@ -867,6 +900,9 @@ media-packages:
     md: মাঝারি
     lg: বড়
   theme-special: "%flavor% থিম বিশেষ"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
 flavor:
   pocketcode: পকেট কোড
   pocketalice: পকেট এলিস
@@ -879,3 +915,13 @@ agree: একমত
 disagree: রাজি না
 profileLoader:
   noProfiles: বর্তমানে কোন প্রোফাইল নেই।
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'ক্যাট্রোব্যাট সম্প্রদায়'
+back_to_app: 'Exit community'

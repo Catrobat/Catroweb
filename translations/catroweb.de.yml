@@ -1,5 +1,4 @@
 ---
-#---
 #homepage translation
 localLanguage: Englisch
 username: Username
@@ -40,10 +39,10 @@ clickToDownloadProgram: 'Um das Beispielprojekt herunterzuladen klicke %link_sta
 registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
 allNotifications: 'Alle Benachrichtigungen'
-FollowersNotifications: 'Anhänger'
+FollowersNotifications: 'Followers'
 LikeNotifications: 'Gefällt mir'
 likesNotificationsTitle: 'Gefällt mir Benachrichtigungen'
-followersNotificationsTitle: 'Anhänger Benachrichtigungen'
+followersNotificationsTitle: 'Follower Benachrichtigungen'
 commentsNotificationsTitle: 'Benachrichtigungen über neuen Kommentare'
 remixNotificationsTitle: 'Remix Benachrichtigungen'
 CommentNotifications: 'Kommentare'
@@ -65,11 +64,26 @@ deleteAllNotificationsButtonTitle: "Alle löschen"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
 notificationsDeleteError: "Benachrichtigungen konnten nicht gelöscht werden!"
 pleaseWait: "Bitte warten..."
+projects: "Projekte"
 indexPage:
   recommendedSection:
     info:
       title: 'Welche Projekte werden hier empfohlen?'
       description: 'Je mehr "Gefällt mir" (einschließlich "Daumen hoch", "Lachen", "Liebe" und "Woow!") dein Projekt erhält, desto höher erscheint es in dieser Liste.'
+follower:
+  follows: Abonniert
+  followers: Abonnenten
+  follow: Folgen
+  username: Benutzer
+  followsMe: Folgt mir
+  noFollowing: Du folgst derzeit niemandem.
+  noFollowers: Du hast derzeit keine Follower.
+  noOtherFollowing: Aktuell von niemanden abonniert.
+  noOtherFollowers: Keine Abonnenten.
+  followError: "Es ist nicht möglich den User zu folgen!"
+  unfollowError: "Es ist nicht möglich den User nicht mehr zu folgen!"
+  unfollowQuestion: "Bist du sicher, dass du diesem User nicht mehr folgen möchtest?"
+  unfollowButton: "%username% entfernen"
 programs:
   welcome:
     title: Willkommen bei Catrobat's %theme%
@@ -77,6 +91,7 @@ programs:
     download: Lade die App herunter
     statistics: Mehr Statistiken
   featured: Empfohlen
+  example: Beispiele
   newest: Neueste Projekte
   recommended: Empfohlene Projekte
   scratchremixes: Scratch Remixes
@@ -108,8 +123,8 @@ programs:
   tooLongCredits: Die Anerkennung ist zu lang!
   rudeWordsInCredits: Du kannst keine unpassenden Wörter in deiner Anerkennung verwenden!
   most:
-    viewed: meist gesehen
-    downloaded: meist heruntergeladen
+    viewed: Meist gesehen
+    downloaded: Meist heruntergeladen
   random: Zufällige Projekte
   related: Verwandte Projekte
   downloads: '%downloads% heruntergeladen'
@@ -231,7 +246,7 @@ profile:
   secondEmail: Meine zweite E-Mail
   myPrograms: Meine Projekte
   follows: Folgt
-  follower: Follower
+  follower: Abonnenten
   unfollowUser: Entfolgen!
   followUser: Folgen
   amountOfPrograms: Anzahl der Projekte
@@ -246,7 +261,7 @@ profile:
     usernameNotValid: Dieser Benutzername ist ungültig.
     usernameMissing: Du musst einen Benutzernamen eingeben.
     usernameExists: Dieser Benutzername existiert bereits.
-    usernameContainsEmail: Username darf keine Email Adresse beinhalten
+    usernameContainsEmail: Der Benutzername darf keine E-Mail-Adresse beinhalten.
     submitSuccess: gespeichert!
   reallyDeleteProgram: Willst du wirklich dein Projekt löschen
   programsOf: Projekte von
@@ -550,6 +565,7 @@ oauth:
 search:
   dotdotdot: Suche...
   search: Suche
+  inMediaLib: In Medienbibliothek suchen
   results: Suchergebnisse
   resultcount: Ihre Suche brachte %count% Ergebnisse
   fail: Bitte gib zumindest ein Wort ein
@@ -560,6 +576,7 @@ menu:
   admin: Administrator
   home: Start
   helpAndTutorials: Hilfe & Tutorials
+  followersAndFollowing: Abonnenten
 login:
   login: Einloggen
   passOrUser: Das Passwort oder der Username ist falsch.
@@ -758,7 +775,7 @@ admin:
     createBackupConfirmationText: Dieser Vorgang kann eine Weile dauern. Die Seite wird danach neu geladen!
 recommender:
   similarPrograms: Ähnliche Projekte
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Benutzer, die dieses Projekt heruntergeladen haben, haben auch heruntergeladen
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Andere haben auch heruntergeladen
   moreFromThisUser: Mehr von %username%
 pmd:
   submitBtn: Projekt abgeben
@@ -786,15 +803,31 @@ codeview:
   sounds: 'Klänge'
   globals: 'Globale'
   locals: 'Lokale'
+  globalVariables: 'Globale Variablen'
+  localVariables: 'Lokale Variablen'
   eventBricks: 'Event-Bausteine'
-  controlBricks: 'Steuer-Bausteine'
-  motionBricks: 'Bewegungs-Bausteine'
-  soundBricks: 'Ton-Bausteine'
+  controlBricks: 'Steuerung-Bausteine'
+  motionBricks: 'Bewegung-Bausteine'
+  soundBricks: 'Klang-Bausteine'
   looksBricks: 'Aussehen-Bausteine'
-  penBricks: 'Schreib-Bausteine'
+  penBricks: 'Malstift-Bausteine'
   dataBricks: 'Daten-Bausteine'
   specialBricks: 'Spezielle Bausteine'
+codeStatistics:
+  title: "Code-Statistiken"
+  error: "Code-Statistiken können nicht angezeigt werden."
+  general: 'Allgemein'
+  bricks: 'Bausteine'
+  eventBricks: 'Event'
+  controlBricks: 'Steuerung'
+  motionBricks: 'Bewegung'
+  soundBricks: 'Klang'
+  looksBricks: 'Aussehen'
+  penBricks: 'Malstift'
+  dataBricks: 'Daten'
+  specialBricks: 'Spezial'
 footer:
+  language: Sprache
   usefulLinks: Nützliche Links
   legalities: Rechtliche Hinweise
   communityStats: Community Statistiken
@@ -824,7 +857,7 @@ catro-notifications:
     message: 'Benutzer %user_link% hat Ihr Projekt %program_link% geliked.'
   follow:
     title: 'Neue Follower!'
-    message: 'Benutzer %user_link% folgt Ihnen jetzt.'
+    message: 'Benutzer %user_link% folgt dir jetzt.'
   program-upload:
     title: 'Neues Projekt von jemandem, dem du folgst'
     message: 'Benutzer %user_link% hat ein neues Projekt %program_link% erstellt'
@@ -867,6 +900,9 @@ media-packages:
     md: mittel
     lg: groß
   theme-special: "%flavor% Themen-Special"
+  search-results: Medienbibliothek Suchergebnisse
+  no-results: Deine Suche lieferte 0 Ergebnisse. Bitte verwende nur englische Suchbegriffe.
+  download_these_files: Speichern
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -879,3 +915,13 @@ agree: Zustimmen
 disagree: Ablehnen
 profileLoader:
   noProfiles: Zur Zeit existieren keine Profile.
+element: 'Element'
+elements: 'Elemente'
+share:
+  text: 'Teilen'
+  error: 'Teilen fehlgeschlagen'
+  success: 'Teilen erfolgreich'
+copy: 'Link kopieren'
+checkOutProject: 'Sieh dir dieses Projekt an:'
+community: 'Catrobat Community'
+back_to_app: 'Community verlassen'
