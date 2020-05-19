@@ -245,15 +245,15 @@ class OAuthService
       'gplusUid' => $google_id,
     ]);
 
-    if (null !== $google_user)
+    if (null !== $google_user && null !== $google_id && '' !== $google_id)
     {
       $google_user->setUploadToken($this->token_generator->generateToken());
       $this->user_manager->updateUser($google_user);
       $retArray['token'] = $google_user->getUploadToken();
       $retArray['username'] = $google_user->getUsername();
-      $this->setLoginOAuthUserStatusCode($retArray);
+      $retArray['statusCode'] = Response::HTTP_OK;
     }
-    else
+    elseif (null !== $google_mail && '' !== $google_mail && null !== $google_username && '' !== $google_username)
     {
       /** @var User|null $user */
       $user = $this->user_manager->findUserByEmail($google_mail);
@@ -265,6 +265,7 @@ class OAuthService
         $this->user_manager->updateUser($user);
         $retArray['token'] = $user->getUploadToken();
         $retArray['username'] = $user->getUsername();
+        $retArray['statusCode'] = Response::HTTP_OK;
       }
     }
 
@@ -484,11 +485,6 @@ class OAuthService
     $client->refreshToken($refresh_token);
 
     return $client;
-  }
-
-  private function setLoginOAuthUserStatusCode(array $retArray): void
-  {
-    $retArray['statusCode'] = StatusCode::OK;
   }
 
   /**
