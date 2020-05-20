@@ -200,6 +200,15 @@ Feature: Search programs
       | name       |
       | Minions    |
 
+  Scenario: find a program with its id
+
+    Given I use the limit "10"
+    And I use the offset "0"
+    When I search for "-etqx"
+    Then I should get following programs:
+      | name       |
+      | Minions    |
+
   Scenario: only show visible programs
     Given program "Ponny" is not visible
     And I use the limit "10"

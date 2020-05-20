@@ -592,7 +592,14 @@ class ProgramRepository extends ServiceEntityRepository
     $final_query = $this->addPrivacyCheckCondition($final_query);
     $final_query = $this->addDebugBuildCondition($final_query, $debug_build);
 
-    $result = $final_query->getQuery()->getResult();
+    try
+    {
+      $result = $final_query->getQuery()->getResult();
+    }
+    catch (\Exception $exception)
+    {
+      return [];
+    }
 
     return array_map(function ($element)
     {
@@ -616,7 +623,14 @@ class ProgramRepository extends ServiceEntityRepository
     $final_query = $this->addPrivacyCheckCondition($final_query);
     $final_query = $this->addDebugBuildCondition($final_query, $debug_build);
 
-    $result = $final_query->getQuery()->getResult();
+    try
+    {
+      $result = $final_query->getQuery()->getResult();
+    }
+    catch (\Exception $exception)
+    {
+      return 0;
+    }
 
     return count($result);
   }
@@ -1039,7 +1053,14 @@ class ProgramRepository extends ServiceEntityRepository
     $words = explode(' ', $query);
     foreach ($words as &$word)
     {
-      $word = '+'.$word.'*';
+      if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $word))
+      {
+        $word = '+'.$word.'*';
+      }
+      else
+      {
+        $word = '\"'.$word.'\"';
+      }
     }
     unset($word);
     $search_terms = implode(' ', $words);
@@ -1070,19 +1091,7 @@ class ProgramRepository extends ServiceEntityRepository
   private function setScore(QueryBuilder &$final_query, string $query): void
   {
     $words = explode(' ', $query);
-    $number_of_words = count($words);
     $wanted_score = 0;
-    switch ($number_of_words)
-    {
-      case 1:
-        $wanted_score = 0;
-        break;
-      case 2:
-        $wanted_score = 0.4;
-        break;
-      default:
-        $wanted_score = 0.8;
-    }
     $final_query->setParameter('score', $wanted_score);
   }
 
