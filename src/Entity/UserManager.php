@@ -23,6 +23,14 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
   }
 
+  public function decodeToken(string $token): array
+  {
+    $tokenParts = explode('.', $token);
+    $tokenPayload = base64_decode($tokenParts[1], true);
+
+    return json_decode($tokenPayload, true);
+  }
+
   public function isPasswordValid(UserInterface $user, string $password, PasswordEncoderInterface $encoder): bool
   {
     return $encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt());

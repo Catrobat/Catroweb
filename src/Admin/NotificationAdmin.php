@@ -15,12 +15,12 @@ class NotificationAdmin extends AbstractAdmin
   /**
    * @var string
    */
-  protected $baseRouteName = 'admin_catrobat_adminbundle_uploadnotificationadmin';
+  protected $baseRouteName = 'admin_catrobat_adminbundle_subscriptonsadmin';
 
   /**
    * @var string
    */
-  protected $baseRoutePattern = 'upload_notification';
+  protected $baseRoutePattern = 'subscriptions';
 
   /**
    * @param FormMapper $formMapper
