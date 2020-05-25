@@ -900,8 +900,14 @@
     "symplify/autowire-array-parameter": {
         "version": "v7.2.8"
     },
+    "symplify/console-color-diff": {
+        "version": "v7.3.18"
+    },
     "symplify/package-builder": {
         "version": "v7.2.8"
+    },
+    "symplify/parameter-name-guard": {
+        "version": "v7.3.18"
     },
     "symplify/set-config-resolver": {
         "version": "v7.2.8"
