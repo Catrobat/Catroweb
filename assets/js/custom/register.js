@@ -2,7 +2,8 @@
 
 // eslint-disable-next-line no-unused-vars
 const Register = function (
-  flavor, chooseUserNameDialogTitleText, chooseUserNameDialogText, usernameTaken, usernameInvalidSize, okButtonText
+  flavor, chooseUserNameDialogTitleText, chooseUserNameDialogText, usernameTaken, usernameInvalidSize, okButtonText,
+  googleLoginUrl, facebookLoginUrl, appleLoginUrl
 ) {
   const self = this
   self.termsModalAgreeButton = ''
@@ -33,13 +34,25 @@ const Register = function (
   $(document).ready(function () {
     $(document).on('click', '#agreeButton', function () {
       if (self.termsModalAgreeButton === 'google_login') {
-        triggerGoogleLogin()
+        window.location.href = googleLoginUrl
+        self.termsModalAgreeButton = ''
+      } else if (self.termsModalAgreeButton === 'facebook_login') {
+        window.location.href = facebookLoginUrl
+        self.termsModalAgreeButton = ''
+      } else if (self.termsModalAgreeButton === 'apple_login') {
+        window.location.href = appleLoginUrl
         self.termsModalAgreeButton = ''
       }
     })
     // Google Sign in
-    $(document).on('click', '#btn-login_google', function () {
+    $(document).on('click', '#btn-login-google', function () {
       self.termsModalAgreeButton = 'google_login'
+    })
+    $(document).on('click', '#btn-login-facebook', function () {
+      self.termsModalAgreeButton = 'facebook_login'
+    })
+    $(document).on('click', '#btn-login-apple', function () {
+      self.termsModalAgreeButton = 'apple_login'
     })
   })
 
@@ -53,7 +66,7 @@ const Register = function (
     $('#email_oauth').val(profile.getEmail())
     $('#id_oauth').val(profile.getId())
     $('#access_token_oauth').val(idToken)
-
+    triggerGoogleLogin()
     checkGoogleCallbackDataWithServer()
   }
 

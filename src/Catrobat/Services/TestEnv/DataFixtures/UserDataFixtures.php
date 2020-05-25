@@ -48,6 +48,7 @@ class UserDataFixtures
     $user->setEnabled(isset($config['enabled']) ? 'true' === $config['enabled'] : true);
     $user->setCountry($config['country'] ?? 'at');
     $user->addRole($config['role'] ?? 'ROLE_USER');
+    $user->setOauthUser(isset($config['oauth_user']) ? 'true' === $config['oauth_user'] : false);
     $this->user_manager->updateUser($user, $andFlush);
 
     return $user;

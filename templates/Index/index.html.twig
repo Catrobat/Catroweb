@@ -107,6 +107,8 @@
       '{{ path('api_recsys_general_projects') }}', '{{ path('api_most_downloaded_programs') }}',
       '{{ path('api_most_viewed_programs') }}', '{{ path('api_scratch_remix') }}',
       '{{ path('api_random_programs') }}', '{{ path('api_example_programs') }}')
+    index.showOauthPopup('{{ path('oauth_first_login') }}','{{ 'oauthInfo' | trans({'%link_start%' : '<a href="'~path('profile')~'">', '%link_end%' : '</a>'}, 'catroweb') | raw }}',
+      '{{ 'oauthPopUpTitle' | trans({}, 'catroweb') }}', '{{ 'ok' | trans({}, 'catroweb') }}')
     {% endif %}
   </script>
 {% endblock %}

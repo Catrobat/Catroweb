@@ -158,10 +158,13 @@ class ProfileController extends AbstractController
     $old_password = $request->request->get('oldPassword');
 
     $encoder = $factory->getEncoder($user);
+    $bool = true;
+    if (null !== $old_password)
+    {
+      $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
+    }
 
-    $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
-
-    if (!$bool)
+    if (!$bool && ($user->isOauthPasswordCreated() || !$user->isOauthUser()))
     {
       return JsonResponse::create([
         'statusCode' => StatusCode::PASSWORD_INVALID,
@@ -186,7 +189,10 @@ class ProfileController extends AbstractController
     {
       $user->setPlainPassword($newPassword);
     }
-
+    if ($user->isOauthUser())
+    {
+      $user->setOauthPasswordCreated(true);
+    }
     $user_manager->updateUser($user);
 
     return JsonResponse::create([

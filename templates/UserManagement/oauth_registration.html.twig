@@ -1,43 +1,36 @@
 {# needed for Google Sign #}
 <head>
-  <meta name="google-signin-scope" content="profile email">
-  <meta name="google-signin-client_id"
-      {# content="YOUR_CLIENT_ID.apps.googleusercontent.com"> #}
-        content="427226922034-r016ige5kb30q9vflqbt1h0i3arng8u1.apps.googleusercontent.com">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 </head>
-
-
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-sm-11 col-md-8 col-lg-5 center">
-
-      <!-- ["g-signin2"] needed for an easy initialization of the google services#} -->
-      <div class="g-signin2" data-onsuccess="onSignIn" style="display: none"></div>
-
-      <div id="googleLoginButton">
-        <!-- Google Login Button is a 2 click button:
-             click 1: shows terms of modal
-             click 2: (terms of modal aggree -> trigger google sign in) -->
-        <a id="btn-login_google" href="#" data-toggle="modal" data-target="#termsModal">
-          <img class="img-socialLogin social-button-effects"
-               src="{{ asset('images/social/btn_google_signin_light_normal_web2x.png') }}"
-               alt="Google Login"></a>
-      </div>
-
-      <!-- Hidden fields that get filled by Google Sign in -->
-      <input type="hidden" id="fb_google">
-      <input type="hidden" id="id_oauth" name="_id"/>
-      <input type="hidden" id="email_oauth" name="_email"/>
-      <input type="hidden" id="locale_oauth" name="_locale"/>
-      <input type="hidden" id="username_oauth" name="_username"/>
-      <input type="hidden" id="access_token_oauth" name="_access_token"/>
-
-    </div>
+<div class="row justify-content-center mt-3">
+     <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-3">
+       <button class="btn btn-primary btn-block p-0 text-center" id="btn-login-google"
+               style="height: 48px; color: rgba(0,0,0,0.54); background-color: #FFFFFF; border-color: rgba(0,0,0,0.54);" onclick="window.location.href={{path('hwi_oauth_service_redirect', {'service': 'google' })}}"
+               data-toggle="modal" data-target="#termsModal">
+              <img class="google-logo" alt="Google Login" style="padding-left: 8px" src="{{ asset('images/social/btn_google_custom.png')}}"/>
+              <span class="log-in-text" style="padding-left: 24px; font-family: Roboto, sans-serif; color: rgba(0,0,0,0.54); padding-right: 8px">Sign in with Google</span>
+       </button>
+     </div>
+  </div>
+<div class="row justify-content-center">
+  <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-3">
+    <button class="btn btn-primary btn-block p-0" id="btn-login-facebook"
+            style="background-color: #1877F2; border-color: #1877F2; height: 48px" onclick="window.location.href={{path('hwi_oauth_service_redirect', {'service': 'facebook' })}}"
+            data-toggle="modal" data-target="#termsModal">
+      <img alt="Facebook Login" class="fb-logo" style="height: 100%; display: inline-block; vertical-align: middle;padding-right: 24px; padding-left: 10px" src="{{ asset('images/social/f_logo_RGB-White_58.png')}}"/>
+      <span class="log-in-text" style="color: white">Log in with Facebook</span>
+    </button>
   </div>
 </div>
-
-{# Test hooks #}
-<button id="btn-gplus-testhook" class="hidden" onclick="checkGoogleCallbackDataWithServer();"></button>
+<div class="row justify-content-center">
+  <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-3">
+    <button class="btn btn-primary btn-block p-0" id="btn-login-apple"
+            style="height: 48px; background-color: #000000; border-color: #000000;" onclick="window.location.href={{path('hwi_oauth_service_redirect', {'service': 'apple' })}}"
+            data-toggle="modal" data-target="#termsModal">
+      <img class="apple-logo" alt="Apple Login"  style="padding-left: 8px;" src="{{ asset('images/social/appleid_button1x.png')}}"/>
+      <span class="log-in-text" style="padding-right: 8px; padding-left: 36px; color: white">Sign in with Apple</span>
+    </button>
+  </div>
+</div>
 
 

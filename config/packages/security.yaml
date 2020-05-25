@@ -135,6 +135,18 @@ security:
                     - App\Catrobat\Security\WebviewAuthenticator     # @deprecated API v1
                     - App\Catrobat\Security\WebviewJWTAuthenticator
                 entry_point: App\Catrobat\Security\WebviewJWTAuthenticator
+            oauth:
+                remember_me: true
+                resource_owners:
+                    google:             "/login/check-google"
+                    facebook:           "/login/check-facebook"
+                    apple:              "/login/check-apple"
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: my.oauth_aware.user_provider.service
 
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
