@@ -666,7 +666,8 @@ services:
   catrowebadmin.block.users.user:
     class: App\Admin\UserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: 'User', icon: '<i class="fa fa-cogs"></i>' }
+      - { name: sonata.admin, manager_type: orm, label: 'User', show_mosaic_button: false,
+          icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
       - App\Entity\User

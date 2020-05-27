@@ -2851,6 +2851,59 @@ class CatrowebBrowserContext extends BrowserContext
     $textarea->setValue($arg1);
   }
 
+  /**
+   * @Then /^I check the checkbox named "([^"]*)"$/
+   *
+   * @param mixed $arg1
+   */
+  public function iCheckTheCheckboxNamed($arg1): void
+  {
+    $this->checkOption($arg1);
+  }
+
+  /**
+   * @Then /^I uncheck the checkbox named "([^"]*)"$/
+   *
+   * @param mixed $arg1
+   */
+  public function iUncheckTheCheckboxNamed($arg1): void
+  {
+    $this->uncheckOption($arg1);
+  }
+
+  /**
+   * @Then /^I click on the button named "([^"]*)"/
+   *
+   * @param mixed $arg1
+   */
+  public function iClickOnTheButton($arg1): void
+  {
+    $this->assertSession()->elementExists('named', ['button', $arg1]);
+
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('named', ['button', $arg1])
+      ->click()
+    ;
+  }
+
+  /**
+   * @Then /^I should see the user table:$/
+   */
+  public function iShouldSeeTheUserTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['username']);
+      $this->assertSession()->pageTextContains($user_stat['email']);
+      $this->assertSession()->pageTextContains($user_stat['groups']);
+      $this->assertSession()->pageTextContains($user_stat['enabled']);
+      $this->assertSession()->pageTextContains($user_stat['createdAt']);
+    }
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   //  User Agent
   //--------------------------------------------------------------------------------------------------------------------

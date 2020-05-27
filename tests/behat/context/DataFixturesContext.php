@@ -1141,4 +1141,16 @@ class DataFixturesContext implements KernelAwareContext
     }
     $em->flush();
   }
+
+  /**
+   * @Given /^the users are created at:$/
+   */
+  public function theUsersAreCreatedAt(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config)
+    {
+      $this->getUserDataFixtures()->createdAt($config);
+    }
+    $this->getManager()->flush();
+  }
 }
