@@ -23,8 +23,14 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.apk_url = null
   self.apk_download_timeout = false
 
-  self.download = function (downloadUrl, projectId, buttonId, supported = true) {
+  self.download = function (downloadUrl, projectId, buttonId, supported = true, isWebView = false) {
     const button = document.querySelector(buttonId)
+
+    if (isWebView) {
+      window.location = downloadUrl
+      return
+    }
+
     button.disabled = true
 
     if (!supported) {
