@@ -45,7 +45,7 @@
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/twig-pack": "^1.0",
         "symfony/yaml": "^4.4",
-        "twbs/bootstrap": "4.4.1"
+        "twbs/bootstrap": "4.5.0"
     },
     "require-dev": {
         "behat/behat": "^3.6",
