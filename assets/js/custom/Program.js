@@ -23,15 +23,10 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.apk_url = null
   self.apk_download_timeout = false
 
-  self.download = function (downloadUrl, projectId, buttonId, supported = true) {
+  self.download = function (downloadUrl, projectId, buttonId) {
     const button = document.querySelector(buttonId)
     button.disabled = true
 
-    if (!supported) {
-      self.showPreparingApkPopup()
-      button.disabled = false
-      return
-    }
     fetch(downloadUrl)
       .then(resp => resp.blob())
       .then(blob => {

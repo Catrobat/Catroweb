@@ -301,7 +301,7 @@
 
         <div class="btn-container col-12 col-xl-6">
           <button id="url-download" class="btn btn-primary"
-                  onclick="program.download('{{ program_details.downloadUrl }}','{{ program.id }}', '#url-download', {{ checkCatrobatLanguage(program_details.languageVersion) }})">
+                  onclick="program.download('{{ program_details.downloadUrl }}','{{ program.id }}', '#url-download')">
             <i class="program-big-button-icon mr-3 fa fa-download"></i>
             <span>{{ "download"|trans({}, "catroweb") }}</span>
           </button>

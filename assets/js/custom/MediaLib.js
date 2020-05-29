@@ -7,7 +7,7 @@
 
 // eslint-disable-next-line no-unused-vars
 function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
-  elementsTranslationSingular, elementsTranslationPlural, isWebView = false) {
+  elementsTranslationSingular, elementsTranslationPlural) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
@@ -56,38 +56,30 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
         mediafileContainer.click(function () {
           // !!! Due to missing android web view support the download multiple files feature was "disabled" !!!!!
           // For now it is only possible to select one element! ToDo: send zip files if multiple files are downloaded.
-          if (isWebView) {
-            mediafileContainer.attr('href', file.download_url)
-            mediafileContainer.attr('data-extension', file.extension)
-            mediafileContainer.click(function () {
-              medialibOnDownload(this)
-            })
-          } else { // -- end of disable
-            mediafileContainer.toggleClass('selected')
-            const indexInDownloadList = downloadList.indexOf(file)
+          mediafileContainer.toggleClass('selected')
+          const indexInDownloadList = downloadList.indexOf(file)
 
-            if (indexInDownloadList === -1) {
-              downloadList.push(file)
-            } else {
-              downloadList.splice(indexInDownloadList, 1)
-            }
+          if (indexInDownloadList === -1) {
+            downloadList.push(file)
+          } else {
+            downloadList.splice(indexInDownloadList, 1)
+          }
 
-            let elementsText = downloadList.length + ' '
-            // Dispense support for languages where the count would be right.
-            // This way there is no need to dynamically load the translation. (No delay - Less requests)
-            if (downloadList.length === 1) {
-              elementsText += elementsTranslationSingular
-            } else {
-              elementsText += elementsTranslationPlural
-            }
+          let elementsText = downloadList.length + ' '
+          // Dispense support for languages where the count would be right.
+          // This way there is no need to dynamically load the translation. (No delay - Less requests)
+          if (downloadList.length === 1) {
+            elementsText += elementsTranslationSingular
+          } else {
+            elementsText += elementsTranslationPlural
+          }
 
-            document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
+          document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
 
-            if (downloadList.length > 0) {
-              showTopBarDownload()
-            } else {
-              showTopBarDefault()
-            }
+          if (downloadList.length > 0) {
+            showTopBarDownload()
+          } else {
+            showTopBarDefault()
           }
         })
 
@@ -337,19 +329,5 @@ function medialibDownloadSelectedFile (file) {
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
-  return false
-}
-
-function medialibOnDownload (link) {
-  if (link.href !== 'javascript:void(0)') {
-    const downloadHref = link.href
-    link.href = 'javascript:void(0)'
-
-    setTimeout(function () {
-      link.href = downloadHref
-    }, 5000)
-
-    window.location = downloadHref
-  }
   return false
 }
