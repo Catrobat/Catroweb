@@ -117,6 +117,11 @@ class ProjectDataFixtures
     $project->setAcceptedForGameJam($config['accepted'] ?? false);
     $project->setGamejam($config['gamejam'] ?? null);
 
+    if (isset($config['apk request time']))
+    {
+      $project->setApkRequestTime(new DateTime($config['apk request time'], new DateTimeZone('UTC')));
+    }
+
     $this->entity_manager->persist($project);
 
     if (isset($config['tags_id']) && null !== $config['tags_id'])

@@ -2407,6 +2407,24 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the pending apk table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seePendingApkTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['User']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Apk Request Time']);
+      $this->assertSession()->pageTextContains($user_stat['Apk Status']);
+    }
+  }
+
+  /**
    * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the APK-folder$/
    *
    * @param mixed $filename
