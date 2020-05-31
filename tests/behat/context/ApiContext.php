@@ -2238,6 +2238,7 @@ class ApiContext implements KernelAwareContext
     /** @var Program $project */
     $project = $this->getProgramManager()->find($id);
     $project->setName($name);
+    $this->getProgramManager()->save($project);
 
     $this->new_uploaded_projects[] = $project;
   }

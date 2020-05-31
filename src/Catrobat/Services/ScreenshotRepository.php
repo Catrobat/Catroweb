@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use App\Utils\Utils;
 use Imagick;
 use ImagickException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -243,7 +244,7 @@ class ScreenshotRepository
    */
   public function deleteTempFiles(): void
   {
-    $this->removeDirectory($this->tmp_dir);
+    Utils::removeDirectory($this->tmp_dir);
   }
 
   /**
@@ -299,36 +300,5 @@ class ScreenshotRepository
     $thumb->writeImage($filename);
     chmod($filename, 0777);
     $thumb->destroy();
-  }
-
-  private function removeDirectory(string $directory): void
-  {
-    foreach (glob(sprintf('%s*', $directory)) as $file)
-    {
-      if (is_dir($file))
-      {
-        $this->recursiveRemoveDirectory($file);
-      }
-      else
-      {
-        unlink($file);
-      }
-    }
-  }
-
-  private function recursiveRemoveDirectory(string $directory): void
-  {
-    foreach (glob(sprintf('%s/*', $directory)) as $file)
-    {
-      if (is_dir($file))
-      {
-        $this->recursiveRemoveDirectory($file);
-      }
-      else
-      {
-        unlink($file);
-      }
-    }
-    rmdir($directory);
   }
 }

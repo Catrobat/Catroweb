@@ -76,7 +76,7 @@ class ParsedObjectTest extends TestCase
    */
   public function getSoundsMustReturnEmptyArrayOfParsedObjectAsset(): void
   {
-    $this->assertTrue($this->object->getSounds() === []);
+    $this->assertTrue([] === $this->object->getSounds());
   }
 
   /**
