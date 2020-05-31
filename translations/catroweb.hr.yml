@@ -1,5 +1,4 @@
 ---
-#---
 #homepage translation
 localLanguage: Engleski
 username: Korisničko ime
@@ -65,11 +64,26 @@ deleteAllNotificationsButtonTitle: "Izbriši sve"
 notificationsClearError: "Obavijesti ne mogu biti oznacene kao procitane!"
 notificationsDeleteError: "Nije moguce izbrisati obavijest!"
 pleaseWait: "Molimo pričekajte..."
+projects: "Programi"
 indexPage:
   recommendedSection:
     info:
       title: 'Koji programi su preporuceni ovdje?'
       description: 'Sto vise lajkova (ukljucujuci "Palac gore", "Smijeh", "Srce", "Woow") vas program dobije, veca je sansa da ce se pojaviti u ovoj listi.'
+follower:
+  follows: Following
+  followers: Pratitelji
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
 programs:
   welcome:
     title: Dobrodosli u Catrobat %theme%
@@ -77,6 +91,7 @@ programs:
     download: Preuzmite aplikaciju
     statistics: Vise statistika
   featured: Izdvojeni
+  example: Examples
   newest: Najnoviji programi
   recommended: Preporuceni programi
   scratchremixes: Scratch remixes
@@ -553,6 +568,7 @@ oauth:
 search:
   dotdotdot: Pretraži...
   search: Pretraga
+  inMediaLib: Search in media library
   results: Rezultati pretraživanja
   resultcount: Pretraživanje je pronašlo %count% rezultata
   fail: Molimo Vas unesite najmanje jedan pojam za pretragu
@@ -563,6 +579,7 @@ menu:
   admin: Administrator
   home: Početna
   helpAndTutorials: Pomoc i Tutorijali
+  followersAndFollowing: Sljedbenik
 login:
   login: prijava
   passOrUser: Lozinka ili korisničko ime je netočno.
@@ -785,11 +802,13 @@ codeview:
   scenes: 'scene'
   scripts: 'skripte'
   bricks: 'blokovi'
-  objects: 'actors and objects'
+  objects: 'Actors and Objects'
   looks: 'izgledi'
   sounds: 'zvukovi'
-  globals: 'globals'
-  locals: 'locals'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global Variables'
+  localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
   controlBricks: 'Control Bricks'
   motionBricks: 'Motion Bricks'
@@ -798,7 +817,21 @@ codeview:
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
+codeStatistics:
+  title: "Code Statistics"
+  error: "Code Statistics can't be displayed."
+  general: 'General'
+  bricks: 'Blokovi'
+  eventBricks: 'Događaj'
+  controlBricks: 'Kontrola'
+  motionBricks: 'Kretanje'
+  soundBricks: 'Zvuk'
+  looksBricks: 'Izgledi'
+  penBricks: 'Olovka'
+  dataBricks: 'Podatci'
+  specialBricks: 'Special'
 footer:
+  language: Jezik
   usefulLinks: Korisne poveznice
   legalities: Legalities
   communityStats: Community Stats
@@ -866,11 +899,14 @@ media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview Size
+    description: Preview size
     sm: malo
     md: srednje
     lg: veliko
   theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -878,8 +914,18 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
 agree: Slažem se
 disagree: Ne slažem se
 profileLoader:
   noProfiles: Trenutačno nema profila.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'Catrobat zajednica'
+back_to_app: 'Exit community'
