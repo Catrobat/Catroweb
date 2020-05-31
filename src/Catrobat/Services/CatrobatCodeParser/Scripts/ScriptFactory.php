@@ -5,22 +5,16 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Scripts;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use SimpleXMLElement;
 
-/**
- * Class ScriptFactory
- * @package App\Catrobat\Services\CatrobatCodeParser\Scripts
- */
 class ScriptFactory
 {
   /**
-   * @param SimpleXMLElement $script_xml_properties
-   *
    * @return BroadcastScript|StartScript|WhenBGChangeScript|WhenConditionScript|WhenScript|WhenTouchScript|null
    */
   public static function generate(SimpleXMLElement $script_xml_properties)
   {
     $generated_script = null;
 
-    switch ((string)$script_xml_properties[Constants::TYPE_ATTRIBUTE])
+    switch ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE])
     {
       case Constants::START_SCRIPT:
         $generated_script = new StartScript($script_xml_properties);

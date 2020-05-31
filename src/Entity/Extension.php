@@ -3,134 +3,99 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Zend\Ldap\Collection;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="extension")
+ * @ORM\Table(name="extension", indexes={@Index(columns={"name"}, flags={"fulltext"})})
  * @ORM\Entity(repositoryClass="App\Repository\ExtensionRepository")
  */
 class Extension
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $name;
+  protected ?string $name = null;
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $prefix;
+  protected ?string $prefix = null;
 
   /**
-   * @var Collection|Program[]
-   *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Program", mappedBy="extensions")
    */
-  protected $programs;
+  protected Collection $programs;
 
-  /**
-   * Default constructor, initializes collections
-   */
   public function __construct()
   {
     $this->programs = new ArrayCollection();
   }
 
-  /**
-   * @param Program $program
-   */
-  public function addProgram(Program $program)
+  public function __toString()
+  {
+    return $this->name;
+  }
+
+  public function addProgram(Program $program): void
   {
     if ($this->programs->contains($program))
     {
       return;
     }
     $this->programs->add($program);
-    $program->addExtension($this);
   }
 
-  /**
-   * @param Program $program
-   */
-  public function removeProgram(Program $program)
+  public function removeProgram(Program $program): void
   {
-    if (!$this->programs->contains($program))
-    {
-      return;
-    }
     $this->programs->removeElement($program);
-    $program->removeExtension($this);
   }
 
-  /**
-   * @return Program[]|Collection
-   */
-  public function getPrograms()
+  public function getPrograms(): Collection
   {
     return $this->programs;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @param mixed $name
-   */
-  public function setName($name)
+  public function setName(?string $name): void
   {
     $this->name = $name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPrefix()
+  public function getPrefix(): ?string
   {
     return $this->prefix;
   }
 
-  /**
-   * @param mixed $prefix
-   */
-  public function setPrefix($prefix)
+  public function setPrefix(?string $prefix): void
   {
     $this->prefix = $prefix;
   }
 
-  public function removeAllPrograms()
+  public function removeAllPrograms(): void
   {
     foreach ($this->programs as $program)
     {
       $this->removeProgram($program);
     }
-  }
-
-  public function __toString()
-  {
-    return $this->name;
   }
 }

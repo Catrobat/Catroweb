@@ -15,79 +15,34 @@ use App\Repository\ProgramRepository;
 use App\Repository\UserLikeSimilarityRelationRepository;
 use App\Repository\UserRemixSimilarityRelationRepository;
 use Doctrine\DBAL\DBALException;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Symfony\Component\Console\Helper\ProgressBar;
 
-
-/**
- * Class RecommenderManager
- * @package App\Catrobat\RecommenderSystem
- */
 class RecommenderManager
 {
+  /**
+   * @var string
+   */
   const RECOMMENDER_LOCK_FILE_NAME = 'CatrobatRecommender.lock';
-  /**
-   * @var EntityManagerInterface The entity manager.
-   */
-  private $entity_manager;
 
-  /**
-   * @var UserManager
-   */
-  private $user_manager;
+  protected AppRequest $app_request;
 
-  /**
-   * @var UserLikeSimilarityRelationRepository
-   */
-  private $user_like_similarity_relation_repository;
+  private EntityManagerInterface $entity_manager;
 
-  /**
-   * @var UserRemixSimilarityRelationRepository
-   */
-  private $user_remix_similarity_relation_repository;
+  private UserManager $user_manager;
 
-  /**
-   * @var ProgramRepository
-   */
-  private $program_repository;
+  private UserLikeSimilarityRelationRepository $user_like_similarity_relation_repository;
 
-  /**
-   * @var ProgramLikeRepository
-   */
-  private $program_like_repository;
+  private UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository;
 
-  /**
-   * @var ProgramRemixRepository
-   */
-  private $program_remix_repository;
+  private ProgramRepository $program_repository;
 
-  /**
-   * @var ProgramRemixBackwardRepository
-   */
-  private $program_remix_backward_repository;
+  private ProgramLikeRepository $program_like_repository;
 
-  /**
-   * @var AppRequest
-   */
-  protected $app_request;
+  private ProgramRemixRepository $program_remix_repository;
 
+  private ProgramRemixBackwardRepository $program_remix_backward_repository;
 
-  /**
-   * RecommenderManager constructor.
-   *
-   * @param EntityManagerInterface                         $entity_manager
-   * @param UserManager                           $user_manager
-   * @param UserLikeSimilarityRelationRepository  $user_like_similarity_relation_repository
-   * @param UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository
-   * @param ProgramRepository                     $program_repository
-   * @param ProgramLikeRepository                 $program_like_repository
-   * @param ProgramRemixRepository                $program_remix_repository
-   * @param ProgramRemixBackwardRepository        $program_remix_backward_repository
-   * @param AppRequest                            $app_request
-   */
   public function __construct(EntityManagerInterface $entity_manager, UserManager $user_manager,
                               UserLikeSimilarityRelationRepository $user_like_similarity_relation_repository,
                               UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository,
@@ -108,36 +63,17 @@ class RecommenderManager
     $this->app_request = $app_request;
   }
 
-  /**
-   * @param $array1
-   * @param $array2
-   */
-  private function imitateMerge(&$array1, &$array2)
-  {
-    foreach ($array2 as $i)
-    {
-      $array1[] = $i;
-    }
-  }
-
-  /**
-   *
-   */
-  public function removeAllUserLikeSimilarityRelations()
+  public function removeAllUserLikeSimilarityRelations(): void
   {
     $this->user_like_similarity_relation_repository->removeAllUserRelations();
   }
 
-  /**
-   *
-   */
-  public function removeAllUserRemixSimilarityRelations()
+  public function removeAllUserRemixSimilarityRelations(): void
   {
     $this->user_remix_similarity_relation_repository->removeAllUserRelations();
   }
 
   /**
-   *
    * Collaborative Filtering by using Jaccard Distance
    * As in this case we have to deal with TRUE/FALSE ratings
    * (i.e. user liked the program OR has not seen/liked it yet)
@@ -148,54 +84,40 @@ class RecommenderManager
    *
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
    * @time_complexity: O(n^2 * m)
-   *
-   * @param ProgressBar $progress_bar
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function computeUserLikeSimilarities($progress_bar = null)
+  public function computeUserLikeSimilarities(?ProgressBar $progress_bar = null): void
   {
     $users = $this->user_manager->findAll();
-    $rated_users = array_unique(array_filter($users, function (User $user) {
-      return (count($this->program_like_repository->findBy(['user_id' => $user->getId()])) > 0);
-    }));
+    $rated_users = array_unique(array_filter($users, fn (User $user) => count($this->getAllUserLikes($user)) > 0));
 
     $already_added_relations = [];
 
-    /**
-     * @var $first_user  User
-     * @var $second_user User
-     */
+    /** @var User $first_user */
     foreach ($rated_users as $first_user)
     {
-      if ($progress_bar !== null)
+      if (null !== $progress_bar)
       {
-        $progress_bar->setMessage('Computing like similarity of user (#' . $first_user->getId() . ')');
+        $progress_bar->setMessage('Computing like similarity of user (#'.$first_user->getId().')');
       }
 
       $first_user_likes = $this->program_like_repository->findBy(['user_id' => $first_user->getId()]);
-      $ids_of_programs_liked_by_first_user = array_map(function (ProgramLike $like) {
-        return $like->getProgramId();
-      }, $first_user_likes);
+      $ids_of_programs_liked_by_first_user = array_map(fn (ProgramLike $like) => $like->getProgramId(), $first_user_likes);
 
+      /** @var User $second_user */
       foreach ($rated_users as $second_user)
       {
-        $key = $first_user->getId() . '_' . $second_user->getId();
-        $reverse_key = $second_user->getId() . '_' . $first_user->getId();
+        $key = $first_user->getId().'_'.$second_user->getId();
+        $reverse_key = $second_user->getId().'_'.$first_user->getId();
 
-        if (($first_user->getId() === $second_user->getId()) || in_array($key, $already_added_relations)
-          || in_array($reverse_key, $already_added_relations)
-        )
-        {
+        if (($first_user->getId() === $second_user->getId()) || in_array($key, $already_added_relations, true)
+          || in_array($reverse_key, $already_added_relations, true)
+        ) {
           continue;
         }
 
         $already_added_relations[] = $key;
-        $second_user_likes = $this->program_like_repository->findBy(['user_id' => $second_user->getId()]);
-        $ids_of_programs_liked_by_second_user = array_map(function (ProgramLike $like) {
-          return $like->getProgramId();
-        }, $second_user_likes);
+        $second_user_likes = $this->getAllUserLikes($second_user);
+        $ids_of_programs_liked_by_second_user = array_map(fn (ProgramLike $like) => $like->getProgramId(), $second_user_likes);
 
         $ids_of_same_programs_liked_by_both = array_unique(
           array_intersect(
@@ -203,7 +125,7 @@ class RecommenderManager
           )
         );
         // make copy of array -> merge with empty array is fast shortcut!
-        $temp = array_merge([], $ids_of_programs_liked_by_first_user);
+        $temp = [...[], ...$ids_of_programs_liked_by_first_user];
         // this imitate merge is way more faster than using array_merge() with huge arrays!
         // -> this has a significant impact on performance here!
         $this->imitateMerge($temp, $ids_of_programs_liked_by_second_user);
@@ -212,7 +134,7 @@ class RecommenderManager
         $number_of_same_programs_liked_by_both = count($ids_of_same_programs_liked_by_both);
         $number_of_all_programs_liked_by_any_of_both = count($ids_of_all_programs_liked_by_any_of_both);
 
-        if ($number_of_same_programs_liked_by_both === 0)
+        if (0 === $number_of_same_programs_liked_by_both)
         {
           continue;
         }
@@ -224,7 +146,7 @@ class RecommenderManager
         $this->entity_manager->flush();
       }
 
-      if ($progress_bar !== null)
+      if (null !== $progress_bar)
       {
         $progress_bar->clear();
         $progress_bar->advance();
@@ -233,7 +155,6 @@ class RecommenderManager
     }
   }
 
-
   /**
    * This function, which is used for non-personalized recommendations for guest users, recommends
    * the most liked programs. However, programs which are featured high in the list of most downloaded
@@ -241,11 +162,11 @@ class RecommenderManager
    * (otherwise it is likely that there are many duplicates in the lists of most downloaded / most
    * viewed programs and recommended programs).
    *
-   * @param $flavor
+   * @param mixed $flavor
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsForGuests($flavor)
+  public function recommendHomepageProgramsForGuests($flavor): array
   {
     $most_liked_programs =
       $this->program_repository->getMostLikedPrograms(
@@ -262,17 +183,14 @@ class RecommenderManager
       $this->program_repository->getMostDownloadedPrograms(
         $this->app_request->isDebugBuildRequest(), $flavor, 75
       );
-    $ids_of_most_downloaded_programs = array_map(function (Program $program) {
-      return $program->getId();
-    }, $most_downloaded_programs);
-
+    $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
     foreach ($programs_total_likes as $program_id => $number_of_likes)
     {
-      $rank_in_top_downloads = array_search($program_id, $ids_of_most_downloaded_programs);
-      if ($rank_in_top_downloads !== false)
+      $rank_in_top_downloads = array_search($program_id, $ids_of_most_downloaded_programs, true);
+      if (false !== $rank_in_top_downloads)
       {
-        $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(70 - $rank_in_top_downloads * 1.5))**2;
+        $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(70 - $rank_in_top_downloads * 1.5)) ** 2;
       }
     }
 
@@ -298,14 +216,13 @@ class RecommenderManager
 
   /**
    * Algorithm 1 is the baseline algorithm, former "recommendProgramsOfLikeSimilarUsers"
-   * (only the function name has been changed here)
+   * (only the function name has been changed here).
    *
-   * @param User $user
-   * @param      $flavor
+   * @param mixed $flavor
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmOne($user, $flavor)
+  public function recommendHomepageProgramsAlgorithmOne(User $user, $flavor): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -314,56 +231,22 @@ class RecommenderManager
     //       -> Don't forget to update them as well.
     $min_num_of_likes_required_to_allow_recommendations = 1;
 
-    $all_likes_of_user = $this->program_like_repository->findBy(['user_id' => $user->getId()]);
-
+    $all_likes_of_user = $this->getAlluserLikes($user);
     if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
     {
       return [];
     }
 
-    $user_similarity_relations =
-      $this->user_like_similarity_relation_repository->getRelationsOfSimilarUsers($user);
-    $similar_user_similarity_mapping = [];
-
-    foreach ($user_similarity_relations as $relation)
-    {
-      $id_of_similar_user = ($relation->getFirstUserId() !== $user->getId()) ?
-        $relation->getFirstUserId() : $relation->getSecondUserId();
-      $similar_user_similarity_mapping[$id_of_similar_user] = $relation->getSimilarity();
-    }
-
-    $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
-    $excluded_ids_of_liked_programs = array_unique(array_map(function (ProgramLike $like) {
-      return $like->getProgramId();
-    }, $all_likes_of_user));
-
-    $differing_likes = $this->program_like_repository->getLikesOfUsers(
-      $ids_of_similar_users, $user->getId(), $excluded_ids_of_liked_programs, $flavor);
-
-    $recommendation_weights = [];
-    $programs_liked_by_others = [];
-    foreach ($differing_likes as $differing_like)
-    {
-      $key = $differing_like->getProgramId();
-      assert(!in_array($key, $excluded_ids_of_liked_programs));
-
-      if (!array_key_exists($key, $recommendation_weights))
-      {
-        $recommendation_weights[$key] = 0.0;
-        $programs_liked_by_others[$key] = $differing_like->getProgram();
-      }
-
-      $recommendation_weights[$key] += $similar_user_similarity_mapping[$differing_like->getUserId()];
-    }
+    $ret = $this->calculateWeights($user, $all_likes_of_user, $flavor);
+    $recommendation_weights = $ret['recommendation_weights'];
+    $programs_liked_by_others = $ret['programs_liked_by_others'];
 
     arsort($recommendation_weights);
 
     // $recommendation_weights only holds the program ids and total weights. In order to
     // return an array with elements of the program entity $programs_liked_by_others is
     // used.
-    $programs = array_map(function ($program_id) use ($programs_liked_by_others) {
-      return $programs_liked_by_others[$program_id];
-    }, array_keys($recommendation_weights));
+    $programs = array_map(fn ($program_id) => $programs_liked_by_others[$program_id], array_keys($recommendation_weights));
 
     return ProgramRepository::filterVisiblePrograms(
       $programs, $this->app_request->isDebugBuildRequest()
@@ -374,12 +257,11 @@ class RecommenderManager
    * Algorithm 2 wants to increase the diversity of recommended programs. The approach is
    * decreasing the weights of the top 75 most downloaded programs.
    *
-   * @param User $user
-   * @param      $flavor
+   * @param mixed $flavor
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmTwo($user, $flavor)
+  public function recommendHomepageProgramsAlgorithmTwo(User $user, $flavor): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -388,47 +270,15 @@ class RecommenderManager
     //       -> Don't forget to update them as well.
     $min_num_of_likes_required_to_allow_recommendations = 1;
 
-    $all_likes_of_user = $this->program_like_repository->findBy(['user_id' => $user->getId()]);
-
+    $all_likes_of_user = $this->getAlluserLikes($user);
     if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
     {
       return [];
     }
 
-    $user_similarity_relations =
-      $this->user_like_similarity_relation_repository->getRelationsOfSimilarUsers($user);
-    $similar_user_similarity_mapping = [];
-
-    foreach ($user_similarity_relations as $relation)
-    {
-      $id_of_similar_user = ($relation->getFirstUserId() !== $user->getId()) ?
-        $relation->getFirstUserId() : $relation->getSecondUserId();
-      $similar_user_similarity_mapping[$id_of_similar_user] = $relation->getSimilarity();
-    }
-
-    $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
-    $excluded_ids_of_liked_programs = array_unique(array_map(function (ProgramLike $like) {
-      return $like->getProgramId();
-    }, $all_likes_of_user));
-
-    $differing_likes = $this->program_like_repository->getLikesOfUsers(
-      $ids_of_similar_users, $user->getId(), $excluded_ids_of_liked_programs, $flavor);
-
-    $recommendation_weights = [];
-    $programs_liked_by_others = [];
-    foreach ($differing_likes as $differing_like)
-    {
-      $key = $differing_like->getProgramId();
-      assert(!in_array($key, $excluded_ids_of_liked_programs));
-
-      if (!array_key_exists($key, $recommendation_weights))
-      {
-        $recommendation_weights[$key] = 0.0;
-        $programs_liked_by_others[$key] = $differing_like->getProgram();
-      }
-
-      $recommendation_weights[$key] += $similar_user_similarity_mapping[$differing_like->getUserId()];
-    }
+    $ret = $this->calculateWeights($user, $all_likes_of_user, $flavor);
+    $recommendation_weights = $ret['recommendation_weights'];
+    $programs_liked_by_others = $ret['programs_liked_by_others'];
 
     /*
      * In order to generate more diverse recommendations, the weights of programs that are
@@ -439,14 +289,12 @@ class RecommenderManager
     $most_downloaded_programs = $this->program_repository->getMostDownloadedPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, 75
     );
-    $ids_of_most_downloaded_programs = array_map(function (Program $program) {
-      return $program->getId();
-    }, $most_downloaded_programs);
+    $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
     foreach ($recommendation_weights as $key => $weight)
     {
-      $rank_in_top_downloads = array_search($key, $ids_of_most_downloaded_programs);
-      if ($rank_in_top_downloads !== false)
+      $rank_in_top_downloads = array_search($key, $ids_of_most_downloaded_programs, true);
+      if (false !== $rank_in_top_downloads)
       {
         $recommendation_weights[$key] = $weight * cos(deg2rad(75 - $rank_in_top_downloads));
       }
@@ -457,9 +305,7 @@ class RecommenderManager
     // $recommendation_weights only holds the program ids and total weights. In order to
     // return an array with elements of the program entity $programs_liked_by_others is
     // used.
-    $programs = array_map(function ($program_id) use ($programs_liked_by_others) {
-      return $programs_liked_by_others[$program_id];
-    }, array_keys($recommendation_weights));
+    $programs = array_map(fn ($program_id) => $programs_liked_by_others[$program_id], array_keys($recommendation_weights));
 
     return ProgramRepository::filterVisiblePrograms(
       $programs, $this->app_request->isDebugBuildRequest()
@@ -470,12 +316,11 @@ class RecommenderManager
    * Algorithm 3 wants to increase the diversity of recommended programs. The approach is
    * re-ranking the recommended items.
    *
-   * @param User $user
-   * @param      $flavor
+   * @param mixed $flavor
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmThree($user, $flavor)
+  public function recommendHomepageProgramsAlgorithmThree(User $user, $flavor): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -484,27 +329,17 @@ class RecommenderManager
     //       -> Don't forget to update them as well.
     $min_num_of_likes_required_to_allow_recommendations = 1;
 
-    $all_likes_of_user = $this->program_like_repository->findBy(['user_id' => $user->getId()]);
+    $all_likes_of_user = $this->getAllUserLikes($user);
 
     if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
     {
       return [];
     }
 
-    $user_similarity_relations = $this->user_like_similarity_relation_repository->getRelationsOfSimilarUsers($user);
-    $similar_user_similarity_mapping = [];
-
-    foreach ($user_similarity_relations as $relation)
-    {
-      $id_of_similar_user = ($relation->getFirstUserId() !== $user->getId()) ?
-        $relation->getFirstUserId() : $relation->getSecondUserId();
-      $similar_user_similarity_mapping[$id_of_similar_user] = $relation->getSimilarity();
-    }
+    $similar_user_similarity_mapping = $this->getSimilarUserSimilarityMapping($user);
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
-    $excluded_ids_of_liked_programs = array_unique(array_map(function (ProgramLike $like) {
-      return $like->getProgramId();
-    }, $all_likes_of_user));
+    $excluded_ids_of_liked_programs = array_unique(array_map(fn (ProgramLike $like) => $like->getProgramId(), $all_likes_of_user));
 
     $differing_likes = $this->program_like_repository->getLikesOfUsers(
       $ids_of_similar_users, $user->getId(), $excluded_ids_of_liked_programs, $flavor);
@@ -515,7 +350,7 @@ class RecommenderManager
     foreach ($differing_likes as $differing_like)
     {
       $key = $differing_like->getProgramId();
-      assert(!in_array($key, $excluded_ids_of_liked_programs));
+      assert(!in_array($key, $excluded_ids_of_liked_programs, true));
 
       if (!array_key_exists($key, $recommendation_weights))
       {
@@ -525,7 +360,7 @@ class RecommenderManager
       }
 
       $recommendation_weights[$key] += $similar_user_similarity_mapping[$differing_like->getUserId()];
-      $number_of_recommendations[$key]++;
+      ++$number_of_recommendations[$key];
     }
 
     arsort($recommendation_weights);
@@ -607,7 +442,8 @@ class RecommenderManager
 
     // $recommendation_by_id only holds the program ids. In order to return an array with
     // elements of the program entity $programs_liked_by_others is used.
-    $programs = array_map(function ($program_id) use ($programs_liked_by_others) {
+    $programs = array_map(function ($program_id) use ($programs_liked_by_others)
+    {
       return $programs_liked_by_others[$program_id];
     }, $recommendations_by_id);
 
@@ -617,7 +453,6 @@ class RecommenderManager
   }
 
   /**
-   *
    * Collaborative Filtering by using Jaccard Distance
    * As in this case we have to deal with TRUE/FALSE values (i.e. user remixed the program OR not yet)
    * the Jaccard distance is used to measure the similarity between two users.
@@ -628,25 +463,25 @@ class RecommenderManager
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
    * @time_complexity: O(n^2 * m)
    *
-   *
    * @param ProgressBar $progress_bar
    *
    * @throws DBALException
    */
-  public function computeUserRemixSimilarities($progress_bar = null)
+  public function computeUserRemixSimilarities(ProgressBar $progress_bar = null): void
   {
     // TODO: consider backward & scratch relations too... (but very low priority as they won't affect the recommendations significantly!)
-    $statement = $this->entity_manager->getConnection()
-      ->prepare("SELECT MAX(id) as id_of_last_user FROM fos_user");
-    $statement->execute();
-    $id_of_last_user = $statement->fetch()['id_of_last_user'];
+
+    $users = $this->user_manager->findAll();
+
     $user_remix_relations = [];
 
-    for ($user_id = 1; $user_id <= $id_of_last_user; $user_id++)
+    /** @var User $user */
+    foreach ($users as $user)
     {
-      if ($progress_bar !== null)
+      $user_id = $user->getId();
+      if (null !== $progress_bar)
       {
-        $progress_bar->setMessage('Fetching remix parents of user (#' . $user_id . ')');
+        $progress_bar->setMessage('Fetching remix parents of user (#'.$user_id.')');
         $progress_bar->clear();
         $progress_bar->advance();
         $progress_bar->display();
@@ -664,33 +499,39 @@ class RecommenderManager
 
     foreach ($user_remix_relations as $first_user_id => $first_user_remix_relations)
     {
-      $ids_of_programs_remixed_by_first_user = array_unique(array_map(function ($data) {
-        return $data['ancestor_id'];
-      }, $first_user_remix_relations));
+      $ids_of_programs_remixed_by_first_user = array_unique(
+        array_map(function (array $data)
+        {
+          return $data['ancestor_id'];
+        }, $first_user_remix_relations)
+      );
+
       ++$user_counter;
 
       foreach ($user_remix_relations as $second_user_id => $second_user_remix_relations)
       {
-        if ($progress_bar !== null)
+        if (null !== $progress_bar)
         {
-          $progress_bar->setMessage('(' . $user_counter . '/' . $total_number_of_remixed_users
-            . ') - Computing remix similarity between user #' . $first_user_id . ' and user #' . $second_user_id);
+          $progress_bar->setMessage('('.$user_counter.'/'.$total_number_of_remixed_users
+            .') - Computing remix similarity between user #'.$first_user_id.' and user #'.$second_user_id);
         }
 
-        $key = $first_user_id . '_' . $second_user_id;
-        $reverse_key = $second_user_id . '_' . $first_user_id;
+        $key = $first_user_id.'_'.$second_user_id;
+        $reverse_key = $second_user_id.'_'.$first_user_id;
 
-        if (($first_user_id === $second_user_id) || in_array($key, $already_added_relations)
-          || in_array($reverse_key, $already_added_relations)
-        )
-        {
+        if (($first_user_id === $second_user_id) || in_array($key, $already_added_relations, true)
+          || in_array($reverse_key, $already_added_relations, true)
+        ) {
           continue;
         }
 
         $already_added_relations[] = $key;
-        $ids_of_programs_remixed_by_second_user = array_unique(array_map(function ($data) {
-          return $data['ancestor_id'];
-        }, $second_user_remix_relations));
+        $ids_of_programs_remixed_by_second_user = array_unique(
+          array_map(function (array $data)
+          {
+            return $data['ancestor_id'];
+          }, $second_user_remix_relations)
+        );
 
         $ids_of_same_programs_remixed_by_both = array_unique(
           array_intersect(
@@ -707,7 +548,7 @@ class RecommenderManager
         $number_of_same_programs_remixed_by_both = count($ids_of_same_programs_remixed_by_both);
         $number_of_all_programs_remixed_by_any_of_both = count($ids_of_all_programs_remixed_by_any_of_both);
 
-        if ($number_of_same_programs_remixed_by_both === 0)
+        if (0 === $number_of_same_programs_remixed_by_both)
         {
           continue;
         }
@@ -721,7 +562,7 @@ class RecommenderManager
           );
         }
 
-        if ($progress_bar !== null)
+        if (null !== $progress_bar)
         {
           $progress_bar->clear();
           $progress_bar->advance();
@@ -732,12 +573,9 @@ class RecommenderManager
   }
 
   /**
-   * @param User $user
-   * @param      $flavor
-   *
    * @return Program[]
    */
-  public function recommendProgramsOfRemixSimilarUsers($user, $flavor)
+  public function recommendProgramsOfRemixSimilarUsers(User $user, string $flavor): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 3-4
@@ -748,39 +586,36 @@ class RecommenderManager
 
     $parent_relations_of_all_remixed_programs_of_user = $this
       ->program_remix_repository
-      ->getDirectParentRelationDataOfUser($user->getId());
+      ->getDirectParentRelationDataOfUser($user->getId())
+    ;
 
     if (count($parent_relations_of_all_remixed_programs_of_user) < $min_num_of_remixes_required_to_allow_recommendations)
     {
       return [];
     }
 
-    $user_similarity_relations = $this->user_remix_similarity_relation_repository->getRelationsOfSimilarUsers($user);
-    $similar_user_similarity_mapping = [];
-
-    foreach ($user_similarity_relations as $relation)
-    {
-      $id_of_similar_user = ($relation->getFirstUserId() !== $user->getId()) ?
-        $relation->getFirstUserId() : $relation->getSecondUserId();
-      $similar_user_similarity_mapping[$id_of_similar_user] = $relation->getSimilarity();
-    }
+    $similar_user_similarity_mapping = $this->getSimilarUserSimilarityMapping($user);
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
-    $excluded_ids_of_remixed_programs = array_unique(array_map(function ($data) {
-      return $data['ancestor_id'];
-    }, $parent_relations_of_all_remixed_programs_of_user));
+    $excluded_ids_of_remixed_programs = array_unique(
+      array_map(function (array $data)
+      {
+        return $data['ancestor_id'];
+      }, $parent_relations_of_all_remixed_programs_of_user)
+    );
 
     $relations_of_differing_parents = $this
       ->program_remix_repository
       ->getDirectParentRelationsOfUsersRemixes(
-        $ids_of_similar_users, $user->getId(), $excluded_ids_of_remixed_programs, $flavor);
+        $ids_of_similar_users, $user->getId(), $excluded_ids_of_remixed_programs, $flavor)
+    ;
 
     $recommendation_weights = [];
     $programs_remixed_by_others = [];
     foreach ($relations_of_differing_parents as $relation_of_differing_parent)
     {
       $key = $relation_of_differing_parent->getAncestorId();
-      assert(!in_array($key, $excluded_ids_of_remixed_programs));
+      assert(!in_array($key, $excluded_ids_of_remixed_programs, true));
 
       if (!array_key_exists($key, $recommendation_weights))
       {
@@ -794,12 +629,72 @@ class RecommenderManager
 
     arsort($recommendation_weights);
 
-    $programs = array_map(function ($program_id) use ($programs_remixed_by_others) {
+    $programs = array_map(function ($program_id) use ($programs_remixed_by_others)
+    {
       return $programs_remixed_by_others[$program_id];
     }, array_keys($recommendation_weights));
 
     return ProgramRepository::filterVisiblePrograms(
       $programs, $this->app_request->isDebugBuildRequest()
     );
+  }
+
+  private function imitateMerge(array &$array1, array $array2): void
+  {
+    foreach ($array2 as $i)
+    {
+      $array1[] = $i;
+    }
+  }
+
+  private function getAllUserLikes(User $user): array
+  {
+    return $this->program_like_repository->findBy(['user_id' => $user->getId()]);
+  }
+
+  private function getSimilarUserSimilarityMapping(User $user): array
+  {
+    $user_similarity_relations = $this->user_like_similarity_relation_repository->getRelationsOfSimilarUsers($user);
+    $similar_user_similarity_mapping = [];
+    foreach ($user_similarity_relations as $relation)
+    {
+      $id_of_similar_user = ($relation->getFirstUserId() !== $user->getId()) ?
+        $relation->getFirstUserId() : $relation->getSecondUserId();
+      $similar_user_similarity_mapping[$id_of_similar_user] = $relation->getSimilarity();
+    }
+
+    return $similar_user_similarity_mapping;
+  }
+
+  private function calculateWeights(User $user, array $all_likes_of_user, string $flavor): array
+  {
+    $similar_user_similarity_mapping = $this->getSimilarUserSimilarityMapping($user);
+
+    $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
+    $excluded_ids_of_liked_programs = array_unique(array_map(fn (ProgramLike $like) => $like->getProgramId(), $all_likes_of_user));
+
+    $differing_likes = $this->program_like_repository->getLikesOfUsers(
+      $ids_of_similar_users, $user->getId(), $excluded_ids_of_liked_programs, $flavor);
+
+    $recommendation_weights = [];
+    $programs_liked_by_others = [];
+    foreach ($differing_likes as $differing_like)
+    {
+      $key = $differing_like->getProgramId();
+      assert(!in_array($key, $excluded_ids_of_liked_programs, true));
+
+      if (!array_key_exists($key, $recommendation_weights))
+      {
+        $recommendation_weights[$key] = 0.0;
+        $programs_liked_by_others[$key] = $differing_like->getProgram();
+      }
+
+      $recommendation_weights[$key] += $similar_user_similarity_mapping[$differing_like->getUserId()];
+    }
+
+    return [
+      'recommendation_weights' => $recommendation_weights,
+      'programs_liked_by_others' => $programs_liked_by_others,
+    ];
   }
 }

@@ -1,24 +1,24 @@
 <?php
 
-
 namespace App\Catrobat\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Class WebviewAuthenticator
- * @package App\Catrobat\Security
+ * Class WebviewAuthenticator.
+ *
+ * @deprecated
  */
 class WebviewAuthenticator extends AbstractGuardAuthenticator
 {
@@ -28,31 +28,16 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    *  Must be sent as cookie containing the user token
    *  Must not be empty
    *
+   * @var string
    */
   const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
 
-  /**
-   * @var TranslatorInterface
-   */
-  protected $translator;
+  protected TranslatorInterface $translator;
 
-  /**
-   * @var SessionInterface
-   */
-  protected $session;
+  protected SessionInterface $session;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $em;
+  private EntityManagerInterface $em;
 
-  /**
-   * WebviewAuthenticator constructor.
-   *
-   * @param EntityManagerInterface $em
-   * @param TranslatorInterface    $translator
-   * @param SessionInterface       $session
-   */
   public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, SessionInterface $session)
   {
     $this->em = $em;
@@ -64,8 +49,6 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    * Called on every request to decide if this authenticator should be
    * used for the request. Returning false will cause this authenticator
    * to be skipped.
-   *
-   * @param Request $request
    *
    * @return bool
    */
@@ -80,8 +63,6 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    * Called on every request. Return whatever credentials you want to
    * be passed to getUser() as $credentials.
    *
-   * @param Request $request
-   *
    * @return array|mixed
    */
   public function getCredentials(Request $request)
@@ -92,8 +73,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param mixed                 $credentials
-   * @param UserProviderInterface $userProvider
+   * @param mixed $credentials
    *
    * @return User|null
    */
@@ -101,21 +81,18 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   {
     $token = $credentials[self::COOKIE_TOKEN_KEY];
 
-    if (null === $token || "" === $token)
+    if (null === $token || '' === $token)
     {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.authentication.webview", [], "catroweb")
-      );
+      throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
     }
 
     $user = $this->em->getRepository(User::class)
-      ->findOneBy(['upload_token' => $token]);
+      ->findOneBy(['upload_token' => $token])
+    ;
 
-    if (!$user)
+    if (null === $user)
     {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.authentication.webview", [], "catroweb")
-      );
+      throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
     }
 
     // if a User object, checkCredentials() is called
@@ -125,10 +102,9 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   /**
    *  Called to make sure the credentials are valid
    *    - E.g mail, username, or password
-   *    - no additional checks are also valid
+   *    - no additional checks are also valid.
    *
-   * @param mixed         $credentials
-   * @param UserInterface $user
+   * @param mixed $credentials
    *
    * @return bool
    */
@@ -139,9 +115,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param Request        $request
-   * @param TokenInterface $token
-   * @param string         $providerKey
+   * @param string $providerKey
    *
    * @return Response|null
    */
@@ -154,28 +128,21 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param Request                 $request
-   * @param AuthenticationException $exception
-   *
    * @throws HttpException
+   *
+   * {@inheritdoc}
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
     throw new HttpException(Response::HTTP_UNAUTHORIZED, $exception->getMessage(), null, [], 0);
   }
 
-
   /**
-   * @param Request                      $request
-   * @param AuthenticationException|null $authException
-   *
    * @return Response|void
    */
   public function start(Request $request, AuthenticationException $authException = null)
   {
-    throw new AuthenticationException(
-      $this->translator->trans("errors.authentication.webview", [], "catroweb")
-    );
+    throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
   }
 
   /**
@@ -187,13 +154,10 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @param Request $request
-   *
    * @return bool
    */
   private function hasValidTokenCookieSet(Request $request)
   {
-    return $request->cookies->has(self::COOKIE_TOKEN_KEY) && "" !== $request->cookies->get(self::COOKIE_TOKEN_KEY);
+    return $request->cookies->has(self::COOKIE_TOKEN_KEY) && '' !== $request->cookies->get(self::COOKIE_TOKEN_KEY);
   }
-
 }

@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-
+use App\Utils\TimeUtils;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- *
  * This entity is designed to assign users to certain or random groups for testing
  * purposes. It has been created in order to not rely on assigning users to groups
  * based on language or location, hence eliminating possible biases. An example use
@@ -39,39 +40,32 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *   }
  * }
  *
- *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="user_test_group")
  * @UniqueEntity("$user")
- *
  */
-
 class UserTestGroup
 {
   /**
    * @ORM\Id
    * @ORM\Column(type="guid", unique=true, nullable=false)
    */
-  protected $user_id;
+  protected ?string $user_id = null;
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $group_number;
+  protected ?int $group_number = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $created_at;
+  protected ?DateTime $created_at = null;
 
-  /**
-   * @param int $user_id
-   * @param int $group_number
-   */
-  public function __construct($user_id, $group_number)
+  public function __construct(string $user_id, int $group_number)
   {
-    if ($user_id !== null)
+    if (null !== $user_id)
     {
       $this->setUserId($user_id);
       $this->setGroupNumber($group_number);
@@ -80,63 +74,45 @@ class UserTestGroup
 
   /**
    * @ORM\PrePersist
+   *
+   * @throws Exception
    */
-  public function updateTimestamps()
+  public function updateTimestamps(): void
   {
-    if ($this->getCreatedAt() === null)
+    if (null === $this->getCreatedAt())
     {
-      $this->setCreatedAt(new \DateTime());
+      $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 
-  /**
-   * @param int $user_id
-   */
-  public function setUserId($user_id)
+  public function setUserId(string $user_id): void
   {
     $this->user_id = $user_id;
   }
 
-  /**
-   * @return int
-   */
-  public function getUserId()
+  public function getUserId(): string
   {
     return $this->user_id;
   }
 
-  /**
-   * @param int $group_number
-   */
-  public function setGroupNumber($group_number)
+  public function setGroupNumber(int $group_number): void
   {
     $this->group_number = $group_number;
   }
 
-  /**
-   * @return int
-   */
-  public function getGroupNumber()
+  public function getGroupNumber(): int
   {
     return $this->group_number;
   }
 
-  /**
-   * @param \DateTime $created_at
-   *
-   * @return $this
-   */
-  public function setCreatedAt(\DateTime $created_at)
+  public function setCreatedAt(DateTime $created_at): UserTestGroup
   {
     $this->created_at = $created_at;
 
     return $this;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getCreatedAt()
+  public function getCreatedAt(): ?DateTime
   {
     return $this->created_at;
   }

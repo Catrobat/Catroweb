@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,227 +12,181 @@ use Doctrine\ORM\Mapping as ORM;
 class UserComment
 {
   /**
-   *
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")
    * @ORM\Column(type="integer")
    */
-  protected $id;
+  protected ?int $id = null;
+
+  /**
+   * The User who wrote this UserComment. If this User gets deleted, this UserComment gets deleted as well.
+   *
+   * @ORM\ManyToOne(
+   *     targetEntity="\App\Entity\User",
+   *     inversedBy="comments"
+   * )
+   * @ORM\JoinColumn(
+   *     name="user_id",
+   *     referencedColumnName="id",
+   *     nullable=true
+   * )
+   */
+  protected ?User $user = null;
+
+  /**
+   * The CommentNotification triggered by creating this UserComment.
+   * If this UserComment gets deleted, this CommentNotification gets deleted as well.
+   *
+   * @ORM\OneToOne(
+   *     targetEntity="\App\Entity\CommentNotification",
+   *     mappedBy="comment",
+   *     cascade={"remove"}
+   * )
+   * @ORM\JoinColumn(
+   *     name="notification_id",
+   *     referencedColumnName="id",
+   *     onDelete="SET NULL",
+   *     nullable=true
+   * )
+   */
+  protected ?CommentNotification $notification = null;
+
+  /**
+   * @ORM\Column(type="date")
+   */
+  protected ?DateTime $uploadDate = null;
+
+  /**
+   * @ORM\Column(type="text")
+   */
+  protected ?string $text = null;
+
+  /**
+   * @ORM\Column(type="string")
+   */
+  protected ?string $username = null;
+
+  /**
+   * @ORM\Column(type="boolean")
+   */
+  protected bool $isReported = false;
 
   /**
    * @var Program The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted
    *              as well.
    *
    * @ORM\ManyToOne(
-   *   targetEntity="\App\Entity\Program",
-   *   inversedBy="comments"
+   *     targetEntity="\App\Entity\Program",
+   *     inversedBy="comments"
    * )
    * @ORM\JoinColumn(
-   *   name="programId",
-   *   referencedColumnName="id",
-   *   nullable=true
-   *  )
-   */
-  private $program;
-
-  /**
-   * @var User The User who wrote this UserComment. If this User gets deleted, this UserComment gets deleted as well.
-   *
-   * @ORM\ManyToOne(
-   *   targetEntity="\App\Entity\User",
-   *   inversedBy="comments"
-   * )
-   * @ORM\JoinColumn(
-   *   name="user_id",
-   *   referencedColumnName="id",
-   *   nullable=true
+   *     name="programId",
+   *     referencedColumnName="id",
+   *     nullable=true
    * )
    */
-  protected $user;
+  private Program $program;
 
-  /**
-   * @var CommentNotification The CommentNotification triggered by creating this UserComment. If this UserComment
-   *                          gets deleted, this CommentNotification gets deleted as well.
-   *
-   * @ORM\OneToOne(
-   *   targetEntity="\App\Entity\CommentNotification",
-   *   mappedBy="comment",
-   *   cascade={"remove"}
-   * )
-   * @ORM\JoinColumn(
-   *   name="notification_id",
-   *   referencedColumnName="id",
-   *   onDelete="SET NULL",
-   *   nullable=true
-   *  )
-   */
-  protected $notification;
-
-  /**
-   * @ORM\Column(type="date")
-   */
-  protected $uploadDate;
-
-  /**
-   * @ORM\Column(type="text")
-   */
-  protected $text;
-
-  /**
-   * @ORM\Column(type="string")
-   */
-  protected $username;
-
-  /**
-   * @ORM\Column(type="boolean")
-   */
-  protected $isReported;
+  public function __toString(): string
+  {
+    return $this->text;
+  }
 
   /**
    * Returns the Program which this UserComment comments.
-   *
-   * @return Program The Program which this UserComment comments.
    */
-  public function getProgram()
+  public function getProgram(): Program
   {
     return $this->program;
   }
 
   /**
    * Sets the Program which this UserComment comments.
-   *
-   * @param Program $program The Program which this UserComment comments.
    */
-  public function setProgram($program)
+  public function setProgram(Program $program): void
   {
     $this->program = $program;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
   /**
    * Returns the User who wrote this UserComment.
-   *
-   * @return User
    */
-  public function getUser()
+  public function getUser(): ?User
   {
     return $this->user;
   }
 
   /**
    * Sets the User who wrote this UserComment.
-   *
-   * @param User $user The User who wrote this UserComment.
    */
-  public function setUser($user)
+  public function setUser(User $user): void
   {
     $this->user = $user;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUploadDate()
+  public function getUploadDate(): ?DateTime
   {
     return $this->uploadDate;
   }
 
-  /**
-   * @param mixed $uploadDate
-   */
-  public function setUploadDate($uploadDate)
+  public function setUploadDate(DateTime $uploadDate): void
   {
     $this->uploadDate = $uploadDate;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getText()
+  public function getText(): ?string
   {
     return $this->text;
   }
 
-  /**
-   * @param mixed $text
-   */
-  public function setText($text)
+  public function setText(string $text): void
   {
     $this->text = $text;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUsername()
+  public function getUsername(): ?string
   {
     return $this->username;
   }
 
-  /**
-   * @param mixed $username
-   */
-  public function setUsername($username)
+  public function setUsername(string $username): void
   {
     $this->username = $username;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getIsReported()
+  public function getIsReported(): bool
   {
     return $this->isReported;
   }
 
-  /**
-   * @param mixed $isReported
-   */
-  public function setIsReported($isReported)
+  public function setIsReported(bool $isReported): void
   {
     $this->isReported = $isReported;
   }
 
   /**
    * Returns the CommentNotification triggered by creating this UserComment.
-   *
-   * @return CommentNotification The CommentNotification triggered by creating this UserComment.
    */
-  public function getNotification()
+  public function getNotification(): ?CommentNotification
   {
     return $this->notification;
   }
 
   /**
    * Sets the CommentNotification triggered by creating this UserComment.
-   *
-   * @param CommentNotification $notification The CommentNotification triggered by creating this UserComment.
    */
-  public function setNotification($notification)
+  public function setNotification(CommentNotification $notification): void
   {
     $this->notification = $notification;
-  }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->text;
   }
 }

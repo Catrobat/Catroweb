@@ -2,52 +2,26 @@
 
 namespace App\Entity;
 
-
-use App\Repository\TemplateRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\TemplateFileRepository;
-use Doctrine\ORM\EntityManager;
+use App\Repository\TemplateRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use ImagickException;
+use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class TemplateManager
- * @package App\Entity
- */
 class TemplateManager
 {
-
   const LANDSCAPE_PREFIX = 'l_';
   const PORTRAIT_PREFIX = 'p_';
 
-  /**
-   * @var TemplateFileRepository
-   */
-  protected $file_repository;
+  protected TemplateFileRepository $file_repository;
 
-  /**
-   * @var ScreenshotRepository
-   */
-  protected $screenshot_repository;
+  protected ScreenshotRepository $screenshot_repository;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  protected $entity_manager;
+  protected EntityManagerInterface $entity_manager;
 
-  /**
-   * @var TemplateRepository
-   */
-  protected $template_repository;
+  protected TemplateRepository $template_repository;
 
-
-  /**
-   * TemplateManager constructor.
-   *
-   * @param TemplateFileRepository $file_repository
-   * @param ScreenshotRepository  $screenshot_repository
-   * @param EntityManagerInterface         $entity_manager
-   * @param TemplateRepository    $template_repository
-   */
   public function __construct(TemplateFileRepository $file_repository, ScreenshotRepository $screenshot_repository,
                               EntityManagerInterface $entity_manager, TemplateRepository $template_repository)
   {
@@ -58,64 +32,11 @@ class TemplateManager
   }
 
   /**
-   * @param Template $template
-   *
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  private function saveThumbnail(Template $template)
+  public function saveTemplateFiles(Template $template): void
   {
-    $file = $template->getThumbnail();
-    if ($file == null)
-    {
-      return;
-    }
-    /* @var $thumbnail \Symfony\Component\HttpFoundation\File\UploadedFile */
-    $thumbnail = $template->getThumbnail();
-    $this->screenshot_repository->saveProgramAssets($thumbnail->getPathname(), $template->getId());
-  }
-
-  /**
-   * @param Template $template
-   */
-  private function saveLandscapeProgram(Template $template)
-  {
-    $file = $template->getLandscapeProgramFile();
-    $this->saveTemplateProgram($file, self::LANDSCAPE_PREFIX . $template->getId());
-
-  }
-
-  /**
-   * @param Template $template
-   */
-  private function savePortraitProgram(Template $template)
-  {
-    $file = $template->getPortraitProgramFile();
-    $this->saveTemplateProgram($file, self::PORTRAIT_PREFIX . $template->getId());
-
-  }
-
-  /**
-   * @param $file
-   * @param $id
-   */
-  private function saveTemplateProgram($file, $id)
-  {
-    if ($file == null)
-    {
-      return;
-    }
-    $this->file_repository->saveProgramFile($file, $id);
-
-  }
-
-  /**
-   * @param Template $template
-   *
-   * @throws \ImagickException
-   */
-  public function saveTemplateFiles(Template $template)
-  {
-    if ($template->getId() != null)
+    if (null !== $template->getId())
     {
       $this->saveThumbnail($template);
       $this->savePortraitProgram($template);
@@ -124,13 +45,11 @@ class TemplateManager
   }
 
   /**
-   * @param $templateName
-   *
    * @return mixed
    */
-  public function findOneByName($templateName)
+  public function findOneByName(string $templateName)
   {
-    return $this->template_repository->findOneBy(["name" => $templateName]);
+    return $this->template_repository->findOneBy(['name' => $templateName]);
   }
 
   /**
@@ -149,14 +68,46 @@ class TemplateManager
     return $this->template_repository->findByActive(true);
   }
 
-  /**
-   * @param $id
-   */
-  public function deleteTemplateFiles($id)
+  public function deleteTemplateFiles(string $id): void
   {
-    $this->file_repository->deleteTemplateFiles(self::LANDSCAPE_PREFIX . $id);
-    $this->file_repository->deleteTemplateFiles(self::PORTRAIT_PREFIX . $id);
+    $this->file_repository->deleteTemplateFiles(self::LANDSCAPE_PREFIX.$id);
+    $this->file_repository->deleteTemplateFiles(self::PORTRAIT_PREFIX.$id);
     $this->screenshot_repository->deleteThumbnail($id);
     $this->screenshot_repository->deleteScreenshot($id);
+  }
+
+  /**
+   * @throws ImagickException
+   */
+  private function saveThumbnail(Template $template): void
+  {
+    $file = $template->getThumbnail();
+    if (null == $file)
+    {
+      return;
+    }
+    $thumbnail = $template->getThumbnail();
+    $this->screenshot_repository->saveProgramAssets($thumbnail->getPathname(), (string) $template->getId());
+  }
+
+  private function saveLandscapeProgram(Template $template): void
+  {
+    $file = $template->getLandscapeProgramFile();
+    $this->saveTemplateProgram($file, self::LANDSCAPE_PREFIX.$template->getId());
+  }
+
+  private function savePortraitProgram(Template $template): void
+  {
+    $file = $template->getPortraitProgramFile();
+    $this->saveTemplateProgram($file, self::PORTRAIT_PREFIX.$template->getId());
+  }
+
+  private function saveTemplateProgram(?File $file, string $id): void
+  {
+    if (null === $file)
+    {
+      return;
+    }
+    $this->file_repository->saveProgramFile($file, $id);
   }
 }

@@ -3,18 +3,12 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
-
-/**
- * Class LimitedUsersAdmin
- * @package App\Admin
- */
 class LimitedUsersAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -25,42 +19,38 @@ class LimitedUsersAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'limited_users';
 
-
   /**
    * @param ListMapper $listMapper
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper->addIdentifier('id')
       ->add('username')
       ->add('email')
       ->add('limited', 'boolean', [
         'editable' => true,
-      ]);
+      ])
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper->add('username', null, [
       'show_filter' => true,
     ])
       ->add('email')
-      ->add('limited');
+      ->add('limited')
+    ;
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->clearExcept([
       'list',

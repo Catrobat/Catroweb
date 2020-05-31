@@ -2,21 +2,16 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class BaseListStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class BaseListStatement extends Statement
 {
-
   /**
    * BaseListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $start
-   * @param $end
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $start
+   * @param mixed $end
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $start, $end)
   {
@@ -25,30 +20,23 @@ class BaseListStatement extends Statement
       $end);
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     if (count(parent::getStatements()) < 1)
     {
       return '';
     }
-    $code = $this->addSpaces() . parent::getBeginString() . $this->executeChildren() . parent::getEndString();
 
-    return $code;
+    return $this->addSpaces().parent::getBeginString().$this->executeChildren().parent::getEndString();
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
     $spacesString = parent::addSpaces(1);
     foreach ($this->statements as $value)
     {
-      $code .= $spacesString . $value->execute() . "<br/>";
+      $code .= $spacesString.$value->execute().'<br/>';
     }
 
     return $code;

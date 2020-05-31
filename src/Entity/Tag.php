@@ -5,167 +5,119 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="tags")
+ * @ORM\Table(name="tags", indexes={@Index(columns={"en", "de", "it", "fr"}, flags={"fulltext"})})
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
 class Tag
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
-   * @return mixed
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  /**
-   * @var Collection|Program[]
-   *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Program", mappedBy="tags")
    */
-  protected $programs;
+  protected Collection $programs;
 
   /**
-   * Default constructor, initializes collections
+   * @ORM\Column(type="string", nullable=true)
    */
+  protected ?string $en = null;
+
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected ?string $de = null;
+
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected ?string $it = null;
+
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected ?string $fr = null;
+
   public function __construct()
   {
     $this->programs = new ArrayCollection();
   }
 
-  /**
-   * @param Program $program
-   */
-  public function addProgram(Program $program)
+  public function __toString()
+  {
+    return $this->id.'';
+  }
+
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
+
+  public function addProgram(Program $program): void
   {
     if ($this->programs->contains($program))
     {
       return;
     }
     $this->programs->add($program);
-    $program->addTag($this);
   }
 
-  /**
-   * @param Program $program
-   */
-  public function removeProgram(Program $program)
+  public function removeProgram(Program $program): void
   {
-    if (!$this->programs->contains($program))
-    {
-      return;
-    }
     $this->programs->removeElement($program);
-    $program->removeTag($this);
   }
 
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected $en;
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected $de;
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected $it;
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected $fr;
-
-  /**
-   * @return Program[]|Collection
-   */
-  public function getPrograms()
+  public function getPrograms(): Collection
   {
     return $this->programs;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getEn()
+  public function getEn(): ?string
   {
     return $this->en;
   }
 
-  /**
-   * @param mixed $en
-   */
-  public function setEn($en)
+  public function setEn(?string $en): void
   {
     $this->en = $en;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getDe()
+  public function getDe(): ?string
   {
     return $this->de;
   }
 
-  /**
-   * @param mixed $de
-   */
-  public function setDe($de)
+  public function setDe(?string $de): void
   {
     $this->de = $de;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getIt()
+  public function getIt(): ?string
   {
     return $this->it;
   }
 
-  /**
-   * @param mixed $it
-   */
-  public function setIt($it)
+  public function setIt(?string $it): void
   {
     $this->it = $it;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFr()
+  public function getFr(): ?string
   {
     return $this->fr;
   }
 
-  /**
-   * @param mixed $fr
-   */
-  public function setFr($fr)
+  public function setFr(?string $fr): void
   {
     $this->fr = $fr;
   }
-
-  public function __toString()
-  {
-    return $this->id . '';
-  }
-
 }

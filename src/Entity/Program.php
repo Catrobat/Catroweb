@@ -2,262 +2,247 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
+use DateTime;
 use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\ORM\Mapping\Index;
+use Exception;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="program")
+ * @ORM\Table(name="program", indexes={@Index(columns={"id", "name", "description", "credits"}, flags={"fulltext"})})
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
 class Program
 {
-  /**
-   *
-   */
   const APK_NONE = 0;
 
-  /**
-   *
-   */
   const APK_PENDING = 1;
 
-  /**
-   *
-   */
   const APK_READY = 2;
 
-  /**
-   *
-   */
   const INITIAL_VERSION = 1;
 
   /**
    * @ORM\Id
    * @ORM\Column(name="id", type="guid")
-   * @ORM\GeneratedValue(strategy="UUID")
+   * @ORM\GeneratedValue(strategy="CUSTOM")
+   * @ORM\CustomIdGenerator(class="App\Utils\MyUuidGenerator")
    */
-  protected $id;
+  protected ?string $id = null;
 
   /**
    * @ORM\Column(type="string", length=300)
    */
-  protected $name;
+  protected string $name;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $description;
+  protected ?string $description = null;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $credits;
+  protected ?string $credits = null;
 
   /**
-   * @ORM\Column(type="integer", options={"default" = 1})
+   * @ORM\Column(type="integer", options={"default": 1})
    */
-  protected $version = self::INITIAL_VERSION;
+  protected int $version = self::INITIAL_VERSION;
 
   /**
-   * @var User The user owning this Program. If this User gets deleted, this Program gets deleted as well.
+   * The user owning this Program. If this User gets deleted, this Program gets deleted as well.
    *
    * @ORM\ManyToOne(
-   *   targetEntity="\App\Entity\User",
-   *   inversedBy="programs"
+   *     targetEntity="\App\Entity\User",
+   *     inversedBy="programs"
    * )
    * @ORM\JoinColumn(
-   *   name="user_id",
-   *   referencedColumnName="id",
-   *   nullable=false
+   *     name="user_id",
+   *     referencedColumnName="id",
+   *     nullable=false
    * )
    */
-  protected $user;
+  protected User $user;
 
   /**
-   * @var Collection|UserComment[] The UserComments commenting this Program. If this Program gets deleted, these UserComments get
-   *                              deleted as well.
+   * The UserComments commenting this Program. If this Program gets deleted, these UserComments get deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="UserComment",
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
-  protected $comments;
+  protected Collection $comments;
 
   /**
-   * @var Collection|LikeNotification[] The LikeNotifications mentioning this Program. If this Program gets deleted, these
-   *                                   LikeNotifications get deleted as well.
+   * The LikeNotifications mentioning this Program. If this Program gets deleted,
+   * these LikeNotifications get deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="App\Entity\LikeNotification",
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
-  protected $like_notification_mentions;
+  protected Collection $like_notification_mentions;
 
   /**
-   * @var Collection|NewProgramNotification[] The NewProgramNotification mentioning this Program as a new Program.
-   *                                         If this Program gets deleted, these NewProgramNotifications get deleted as well.
+   * The NewProgramNotification mentioning this Program as a new Program.
+   * If this Program gets deleted, these NewProgramNotifications get deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="App\Entity\NewProgramNotification",
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
-  protected $new_program_notification_mentions;
+  protected Collection $new_program_notification_mentions;
 
   /**
-   * @var Collection|RemixNotification[] RemixNotifications which are triggered when this Program (child) is created as a remix of
-   *                                     another one (parent). If this Program gets deleted, all those RemixNotifications get deleted
-   *                                     as well.
+   * RemixNotifications which are triggered when this Program (child) is created as a remix of
+   *  another one (parent). If this Program gets deleted, all those RemixNotifications get deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="RemixNotification",
    *     mappedBy="remix_program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
-  protected $remix_notification_mentions_as_child;
+  protected Collection $remix_notification_mentions_as_child;
 
   /**
-   * @var Collection|RemixNotification[] RemixNotifications mentioning this Program as a parent Program of a new remix
-   *                                     Program (child). If this Program gets deleted, all RemixNotifications mentioning
-   *                                     this program get deleted as well.
+   * RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
+   * If this Program gets deleted, all RemixNotifications mentioning this program get deleted as well.
    *
    * @ORM\OneToMany(
    *     targetEntity="RemixNotification",
    *     mappedBy="program",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
-   *   )
+   * )
    */
-  protected $remix_notification_mentions_as_parent;
-
+  protected Collection $remix_notification_mentions_as_parent;
 
   /**
-   * @var Collection|Tag[]
-   *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Tag", inversedBy="programs")
    * @ORM\JoinTable(
-   *  name="program_tag",
-   *  joinColumns={
-   *      @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
-   *  },
-   *  inverseJoinColumns={
-   *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
-   *  }
+   *     name="program_tag",
+   *     joinColumns={
+   *         @ORM\JoinColumn(name="program_id", referencedColumnName="id")
+   *     },
+   *     inverseJoinColumns={
+   *         @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+   *     }
    * )
    */
-  protected $tags;
+  protected Collection $tags;
 
   /**
-   * @var Collection|Extension[]
-   *
    * @ORM\ManyToMany(targetEntity="\App\Entity\Extension", inversedBy="programs")
    * @ORM\JoinTable(
-   *  name="program_extension",
-   *  joinColumns={
-   *      @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
-   *  },
-   *  inverseJoinColumns={
-   *      @ORM\JoinColumn(name="extension_id", referencedColumnName="id", nullable=true)
-   *  }
+   *     name="program_extension",
+   *     joinColumns={
+   *         @ORM\JoinColumn(name="program_id", referencedColumnName="id")
+   *     },
+   *     inverseJoinColumns={
+   *         @ORM\JoinColumn(name="extension_id", referencedColumnName="id")
+   *     }
    * )
    */
-  protected $extensions;
+  protected Collection $extensions;
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $views = 0;
+  protected int $views = 0;
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $downloads = 0;
+  protected int $downloads = 0;
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $directory_hash;
+  protected ?string $directory_hash = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $uploaded_at;
+  protected DateTime $uploaded_at;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $last_modified_at;
+  protected DateTime $last_modified_at;
 
   /**
-   * @ORM\Column(type="string", options={"default":0})
+   * @ORM\Column(type="string", options={"default": "0"})
    */
-  protected $language_version = 0;
+  protected string $language_version = '0';
 
   /**
-   * @ORM\Column(type="string", options={"default":""})
+   * New name in android: applicationVersion.
+   *
+   * @ORM\Column(type="string", options={"default": ""})
    */
-  protected $catrobat_version_name;
+  protected string $catrobat_version_name = '';
 
   /**
-   * @ORM\Column(type="integer", options={"default":0})
+   * @ORM\Column(type="integer", options={"default": 0})
    */
-  protected $catrobat_version;
+  protected int $catrobat_version = 0;
 
   /**
-   * @ORM\Column(type="string", options={"default":""})
+   * @ORM\Column(type="string", options={"default": ""})
    */
-  protected $upload_ip;
+  protected string $upload_ip = '';
 
   /**
-   * @ORM\Column(type="boolean", options={"default":true})
+   * @ORM\Column(type="boolean", options={"default": true})
    */
-  protected $visible;
+  protected bool $visible = true;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
-  protected $private = false;
+  protected bool $private = false;
 
   /**
-   * @ORM\Column(type="string", options={"default":"pocketcode"})
+   * @ORM\Column(type="string", options={"default": "pocketcode"})
    */
-  protected $flavor = 'pocketcode';
+  protected string $flavor = 'pocketcode';
 
   /**
-   * @ORM\Column(type="string", options={"default":""})
+   * @ORM\Column(type="string", options={"default": ""})
    */
-  protected $upload_language;
+  protected string $upload_language = '';
 
   /**
-   * @ORM\Column(type="integer", options={"default":0})
+   * @ORM\Column(type="integer", options={"default": 0})
    */
-  protected $filesize;
+  protected int $filesize = 0;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":true})
+   * @ORM\Column(type="boolean", options={"default": true})
    */
-  protected $remix_root;
+  protected bool $remix_root = true;
 
   /**
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected $remix_migrated_at;
+  protected ?DateTime $remix_migrated_at = null;
 
   /**
    * @ORM\OneToMany(
@@ -266,9 +251,8 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var Collection|ProgramRemixRelation[]
    */
-  protected $catrobat_remix_ancestor_relations;
+  protected Collection $catrobat_remix_ancestor_relations;
 
   /**
    * @ORM\OneToMany(
@@ -277,9 +261,8 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var Collection|ProgramRemixBackwardRelation[]
    */
-  protected $catrobat_remix_backward_parent_relations;
+  protected Collection $catrobat_remix_backward_parent_relations;
 
   /**
    * @ORM\OneToMany(
@@ -288,9 +271,8 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var Collection|ProgramRemixRelation[]
    */
-  protected $catrobat_remix_descendant_relations;
+  protected Collection $catrobat_remix_descendant_relations;
 
   /**
    * @ORM\OneToMany(
@@ -299,9 +281,8 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var Collection|ProgramRemixBackwardRelation[]
    */
-  protected $catrobat_remix_backward_child_relations;
+  protected Collection $catrobat_remix_backward_child_relations;
 
   /**
    * @ORM\OneToMany(
@@ -310,9 +291,8 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var Collection|ScratchProgramRemixRelation[]
    */
-  protected $scratch_remix_parent_relations;
+  protected Collection $scratch_remix_parent_relations;
 
   /**
    * @ORM\OneToMany(
@@ -321,101 +301,105 @@ class Program
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
    * )
-   * @var Collection|ProgramLike[]
    */
-  protected $likes;
+  protected Collection $likes;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
-  protected $approved;
+  protected bool $approved = false;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User")
    * @ORM\JoinColumn(name="approved_by_user", referencedColumnName="id", nullable=true)
    */
-  protected $approved_by_user;
+  protected ?User $approved_by_user;
 
   /**
-   * @ORM\ManyToOne(targetEntity="StarterCategory", inversedBy="programs")
+   * @ORM\ManyToOne(targetEntity="StarterCategory", inversedBy="programs", cascade={"persist"})
    * @ORM\JoinColumn(nullable=true)
    */
-  protected $category;
+  protected ?StarterCategory $category = null;
 
   /**
-   * @ORM\Column(type="smallint", options={"default":0})
+   * @ORM\Column(type="smallint", options={"default": 0})
    */
-  protected $apk_status = 0;
+  protected int $apk_status = 0;
 
   /**
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected $apk_request_time;
+  protected ?DateTime $apk_request_time = null;
 
   /**
-   * @ORM\Column(type="integer", options={"default":0})
+   * @ORM\Column(type="integer", options={"default": 0})
    */
-  protected $apk_downloads = 0;
+  protected int $apk_downloads = 0;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\GameJam", inversedBy="programs")
    * @ORM\JoinColumn(nullable=true)
    */
-  protected $gamejam;
+  protected ?GameJam $gamejam = null;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
-  protected $gamejam_submission_accepted = false;
+  protected bool $gamejam_submission_accepted = false;
 
   /**
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected $gamejam_submission_date;
+  protected ?DateTime $gamejam_submission_date = null;
 
   /**
    * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program", cascade={"remove"})
    */
-  protected $program_downloads;
+  protected Collection $program_downloads;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="boolean", options={"default": false})
    */
-  protected $debug_build;
+  protected bool $debug_build = false;
 
   /**
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="program", fetch="EXTRA_LAZY")
    */
-
-  protected $reports;
+  protected Collection $reports;
 
   /**
    * Program constructor.
    */
   public function __construct()
   {
-    $this->program_downloads = new ArrayCollection();
+    $this->comments = new ArrayCollection();
+    $this->like_notification_mentions = new ArrayCollection();
+    $this->new_program_notification_mentions = new ArrayCollection();
+    $this->remix_notification_mentions_as_child = new ArrayCollection();
+    $this->remix_notification_mentions_as_parent = new ArrayCollection();
     $this->tags = new ArrayCollection();
     $this->extensions = new ArrayCollection();
     $this->catrobat_remix_ancestor_relations = new ArrayCollection();
     $this->catrobat_remix_backward_parent_relations = new ArrayCollection();
     $this->catrobat_remix_descendant_relations = new ArrayCollection();
-    $this->remix_migrated_at = null;
+    $this->catrobat_remix_backward_child_relations = new ArrayCollection();
+    $this->scratch_remix_parent_relations = new ArrayCollection();
     $this->likes = new ArrayCollection();
+    $this->program_downloads = new ArrayCollection();
+    $this->reports = new ArrayCollection();
   }
 
-  /**
-   * @param mixed $approved_by_user
-   */
-  public function setApprovedByUser($approved_by_user)
+  public function __toString(): string
+  {
+    return $this->name.' (#'.$this->id.')';
+  }
+
+  public function setApprovedByUser(?User $approved_by_user): void
   {
     $this->approved_by_user = $approved_by_user;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getApprovedByUser()
+  public function getApprovedByUser(): ?User
   {
     return $this->approved_by_user;
   }
@@ -423,285 +407,164 @@ class Program
   /**
    * @ORM\PreUpdate
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateLastModifiedTimestamp()
+  public function updateLastModifiedTimestamp(): void
   {
-    $this->setLastModifiedAt(new \DateTime());
+    $this->setLastModifiedAt(TimeUtils::getDateTime());
   }
 
   /**
    * @ORM\PrePersist
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateTimestamps()
+  public function updateTimestamps(): void
   {
     $this->updateLastModifiedTimestamp();
-    if ($this->getUploadedAt() == null)
+    if (null == $this->getUploadedAt())
     {
-      $this->setUploadedAt(new \DateTime("now", new DateTimeZone('UTC')));
+      $this->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
     }
   }
 
   /**
    * @ORM\PrePersist
    */
-  public function setInitialVersion()
+  public function setInitialVersion(): void
   {
     $this->version = self::INITIAL_VERSION;
   }
 
-  /**
-   * @return bool
-   */
-  public function isInitialVersion()
+  public function isInitialVersion(): bool
   {
-    return $this->version == self::INITIAL_VERSION;
+    return self::INITIAL_VERSION === $this->version;
   }
 
-  /**
-   * Get id.
-   *
-   * @return GuidType
-   */
-  public function getId()
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  /**
-   * Set name.
-   *
-   * @param string $name
-   *
-   * @return Program
-   */
-  public function setName($name)
+  public function setName(string $name): Program
   {
     $this->name = $name;
 
     return $this;
   }
 
-  /**
-   * Get name.
-   *
-   * @return string
-   */
-  public function getName()
+  public function getName(): string
   {
     return $this->name;
   }
 
-  /**
-   * Set description.
-   *
-   * @param string $description
-   *
-   * @return Program
-   */
-  public function setDescription($description)
+  public function setDescription(?string $description): Program
   {
     $this->description = $description;
 
     return $this;
   }
 
-  /**
-   * Get description.
-   *
-   * @return string
-   */
-  public function getDescription()
+  public function getDescription(): ?string
   {
     return $this->description;
   }
 
-  /**
-   * Set credits.
-   *
-   * @param string $credits
-   *
-   * @return Program
-   */
-  public function setCredits($credits)
+  public function setCredits(?string $credits): Program
   {
     $this->credits = $credits;
 
     return $this;
   }
 
-  /**
-   * Get credits.
-   *
-   * @return string
-   */
-  public function getCredits()
+  public function getCredits(): ?string
   {
     return $this->credits;
   }
 
-  /**
-   * Set views.
-   *
-   * @param int $views
-   *
-   * @return Program
-   */
-  public function setViews($views)
+  public function setViews(int $views): Program
   {
     $this->views = $views;
 
     return $this;
   }
 
-  /**
-   * Get views.
-   *
-   * @return int
-   */
-  public function getViews()
+  public function getViews(): int
   {
     return $this->views;
   }
 
-  /**
-   * Set version.
-   *
-   * @param int $version
-   *
-   * @return Program
-   */
-  public function setVersion($version)
+  public function setVersion(int $version): Program
   {
     $this->version = $version;
 
     return $this;
   }
 
-  /**
-   * Increment version.
-   *
-   * @return Program
-   */
-  public function incrementVersion()
+  public function incrementVersion(): Program
   {
-    $this->version += 1;
+    ++$this->version;
 
     return $this;
   }
 
-  /**
-   * Get Version.
-   *
-   * @return int
-   */
-  public function getVersion()
+  public function getVersion(): int
   {
     return $this->version;
   }
 
-  /**
-   * Set downloads.
-   *
-   * @param int $downloads
-   *
-   * @return Program
-   */
-  public function setDownloads($downloads)
+  public function setDownloads(int $downloads): Program
   {
     $this->downloads = $downloads;
 
     return $this;
   }
 
-  /**
-   * Get downloads.
-   *
-   * @return int
-   */
-  public function getDownloads()
+  public function getDownloads(): int
   {
     return $this->downloads;
   }
 
-  /**
-   * Set uploaded_at.
-   *
-   * @param \DateTime $uploadedAt
-   *
-   * @return Program
-   */
-  public function setUploadedAt($uploadedAt)
+  public function setUploadedAt(DateTime $uploadedAt): Program
   {
     $this->uploaded_at = $uploadedAt;
 
     return $this;
   }
 
-  /**
-   * Get uploaded_at.
-   *
-   * @return \DateTime
-   */
-  public function getUploadedAt()
+  public function getUploadedAt(): DateTime
   {
     return $this->uploaded_at;
   }
 
-  /**
-   * Set last_modified_at.
-   *
-   * @param \DateTime $lastModifiedAt
-   *
-   * @return Program
-   */
-  public function setLastModifiedAt($lastModifiedAt)
+  public function setLastModifiedAt(DateTime $lastModifiedAt): Program
   {
     $this->last_modified_at = $lastModifiedAt;
 
     return $this;
   }
 
-  /**
-   * Get last_modified_at.
-   *
-   * @return \DateTime
-   */
-  public function getLastModifiedAt()
+  public function getLastModifiedAt(): DateTime
   {
     return $this->last_modified_at;
   }
 
-  /**
-   * @param \DateTime $remix_migrated_at
-   *
-   * @return Program
-   */
-  public function setRemixMigratedAt($remix_migrated_at)
+  public function setRemixMigratedAt(?DateTime $remix_migrated_at): Program
   {
     $this->remix_migrated_at = $remix_migrated_at;
 
     return $this;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getRemixMigratedAt()
+  public function getRemixMigratedAt(): ?DateTime
   {
     return $this->remix_migrated_at;
   }
 
   /**
    * Sets the user owning this Program.
-   *
-   * @param User $user The user owning this Program.
-   *
-   * @return Program
    */
-  public function setUser(User $user = null)
+  public function setUser(?User $user = null): Program
   {
     $this->user = $user;
 
@@ -710,571 +573,306 @@ class Program
 
   /**
    * Returns the user owning this Program.
-   *
-   * @return User The user owning this Program.
    */
-  public function getUser()
+  public function getUser(): User
   {
     return $this->user;
   }
 
-  /**
-   * @return UserComment|Collection
-   */
-  public function getComments()
+  public function getComments(): Collection
   {
     return $this->comments;
   }
 
-  /**
-   * @param UserComment|Collection $comments
-   */
-  public function setComments($comments)
+  public function setComments(Collection $comments): void
   {
     $this->comments = $comments;
   }
 
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->name . " (#" . $this->id . ")";
-  }
-
-  /**
-   * Set language_version.
-   *
-   * @param string $languageVersion
-   *
-   * @return Program
-   */
-  public function setLanguageVersion($languageVersion)
+  public function setLanguageVersion(string $languageVersion): Program
   {
     $this->language_version = $languageVersion;
 
     return $this;
   }
 
-  /**
-   * Get language_version.
-   *
-   * @return string
-   */
-  public function getLanguageVersion()
+  public function getLanguageVersion(): string
   {
     return $this->language_version;
   }
 
-  /**
-   * Set catrobat_version_name.
-   *
-   * @param string $catrobatVersionName
-   *
-   * @return Program
-   */
-  public function setCatrobatVersionName($catrobatVersionName)
+  public function setCatrobatVersionName(string $catrobatVersionName): Program
   {
     $this->catrobat_version_name = $catrobatVersionName;
 
     return $this;
   }
 
-  /**
-   * Get catrobat_version_name.
-   *
-   * @return string
-   */
-  public function getCatrobatVersionName()
+  public function getCatrobatVersionName(): string
   {
     return $this->catrobat_version_name;
   }
 
-  /**
-   * Set catrobat_version.
-   *
-   * @param int $catrobatVersion
-   *
-   * @return Program
-   */
-  public function setCatrobatVersion($catrobatVersion)
+  public function setCatrobatVersion(int $catrobatVersion): Program
   {
     $this->catrobat_version = $catrobatVersion;
 
     return $this;
   }
 
-  /**
-   * Get catrobat_version.
-   *
-   * @return int
-   */
-  public function getCatrobatVersion()
+  public function getCatrobatVersion(): int
   {
     return $this->catrobat_version;
   }
 
-  /**
-   * Set upload_ip.
-   *
-   * @param string $uploadIp
-   *
-   * @return Program
-   */
-  public function setUploadIp($uploadIp)
+  public function setUploadIp(string $uploadIp): Program
   {
     $this->upload_ip = $uploadIp;
 
     return $this;
   }
 
-  /**
-   * Get upload_ip.
-   *
-   * @return string
-   */
-  public function getUploadIp()
+  public function getUploadIp(): string
   {
     return $this->upload_ip;
   }
 
-  /**
-   * Set visible.
-   *
-   * @param bool $visible
-   *
-   * @return Program
-   */
-  public function setVisible($visible)
+  public function setVisible(bool $visible): Program
   {
     $this->visible = $visible;
 
     return $this;
   }
 
-  /**
-   * Set private.
-   *
-   * @param bool $private
-   *
-   * @return Program
-   */
-  public function setPrivate($private)
+  public function setPrivate(bool $private): Program
   {
     $this->private = $private;
 
     return $this;
   }
 
-  /**
-   * Get private.
-   *
-   * @return bool
-   */
-  public function getPrivate()
+  public function getPrivate(): bool
   {
     return $this->private;
   }
 
-  /**
-   * Get visible.
-   *
-   * @return bool
-   */
-  public function getVisible()
+  public function getVisible(): bool
   {
     return $this->visible;
   }
 
-  /**
-   * Set upload_language.
-   *
-   * @param string $uploadLanguage
-   *
-   * @return Program
-   */
-  public function setUploadLanguage($uploadLanguage)
+  public function setUploadLanguage(string $uploadLanguage): Program
   {
     $this->upload_language = $uploadLanguage;
 
     return $this;
   }
 
-  /**
-   * Get upload_language.
-   *
-   * @return string
-   */
-  public function getUploadLanguage()
+  public function getUploadLanguage(): string
   {
     return $this->upload_language;
   }
 
-  /**
-   * Set filesize.
-   *
-   * @param int $filesize
-   *
-   * @return Program
-   */
-  public function setFilesize($filesize)
+  public function setFilesize(int $filesize): Program
   {
     $this->filesize = $filesize;
 
     return $this;
   }
 
-  /**
-   * Get filesize.
-   *
-   * @return int
-   */
-  public function getFilesize()
+  public function getFilesize(): int
   {
     return $this->filesize;
   }
 
-  /**
-   * Set if program is approved.
-   *
-   * @param
-   *            boolean
-   */
-  public function setApproved($approved)
+  public function setApproved(bool $approved): void
   {
     $this->approved = $approved;
   }
 
-  /**
-   * Get if program is approved.
-   *
-   * @return bool
-   */
-  public function getApproved()
+  public function getApproved(): bool
   {
     return $this->approved;
   }
 
-  /**
-   * @return mixed
-   */
-  public function isVisible()
+  public function isVisible(): bool
   {
     return $this->visible;
   }
 
-  /**
-   * @param $id
-   */
-  public function setId($id)
+  public function setId(string $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFlavor()
+  public function getFlavor(): ?string
   {
     return $this->flavor;
   }
 
-  /**
-   * @param mixed $flavor
-   */
-  public function setFlavor($flavor)
+  public function setFlavor(?string $flavor): void
   {
     $this->flavor = $flavor;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCategory()
+  public function getCategory(): ?StarterCategory
   {
     return $this->category;
   }
 
-  /**
-   * @param mixed $category
-   */
-  public function setCategory($category)
+  public function setCategory(?StarterCategory $category): void
   {
     $this->category = $category;
   }
 
-  /**
-   * @param mixed $directory_hash
-   */
-  public function setExtractedDirectoryHash($directory_hash)
+  public function setExtractedDirectoryHash(?string $directory_hash): void
   {
     $this->directory_hash = $directory_hash;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getExtractedDirectoryHash()
+  public function getExtractedDirectoryHash(): ?string
   {
     return $this->directory_hash;
   }
 
-  /**
-   * @return int
-   */
-  public function getApkStatus()
+  public function getApkStatus(): int
   {
     return $this->apk_status;
   }
 
-  /**
-   * @param $apk_status
-   *
-   * @return $this
-   */
-  public function setApkStatus($apk_status)
+  public function setApkStatus(int $apk_status): Program
   {
     $this->apk_status = $apk_status;
 
     return $this;
   }
 
-  /**
-   * Set directory_hash.
-   *
-   * @param string $directoryHash
-   *
-   * @return Program
-   */
-  public function setDirectoryHash($directoryHash)
+  public function setDirectoryHash(?string $directoryHash): Program
   {
     $this->directory_hash = $directoryHash;
 
     return $this;
   }
 
-  /**
-   * Get directory_hash.
-   *
-   * @return string
-   */
-  public function getDirectoryHash()
+  public function getDirectoryHash(): string
   {
     return $this->directory_hash;
   }
 
-  /**
-   * Set apk_request_time.
-   *
-   * @param \DateTime $apkRequestTime
-   *
-   * @return Program
-   */
-  public function setApkRequestTime($apkRequestTime)
+  public function setApkRequestTime(?DateTime $apkRequestTime): Program
   {
     $this->apk_request_time = $apkRequestTime;
 
     return $this;
   }
 
-  /**
-   * Get apk_request_time.
-   *
-   * @return \DateTime
-   */
-  public function getApkRequestTime()
+  public function getApkRequestTime(): ?DateTime
   {
     return $this->apk_request_time;
   }
 
-  /**
-   * Set apk_downloads.
-   *
-   * @param int $apkDownloads
-   *
-   * @return Program
-   */
-  public function setApkDownloads($apkDownloads)
+  public function setApkDownloads(int $apkDownloads): Program
   {
     $this->apk_downloads = $apkDownloads;
 
     return $this;
   }
 
-  /**
-   * Get apk_downloads.
-   *
-   * @return int
-   */
-  public function getApkDownloads()
+  public function getApkDownloads(): int
   {
     return $this->apk_downloads;
   }
 
-  /**
-   * Set gamejam
-   *
-   * @param GameJam $gamejam
-   *
-   * @return Program
-   */
-  public function setGamejam(GameJam $gamejam = null)
+  public function setGamejam(?GameJam $gamejam = null): Program
   {
     $this->gamejam = $gamejam;
 
     return $this;
   }
 
-  /**
-   * Get gamejam
-   *
-   * @return GameJam
-   */
-  public function getGamejam()
+  public function getGamejam(): ?GameJam
   {
     return $this->gamejam;
   }
 
-  /**
-   * Set accepted
-   *
-   * @param boolean $accepted
-   *
-   * @return Program
-   */
-  public function setAcceptedForGameJam($accepted)
+  public function setAcceptedForGameJam(bool $accepted): Program
   {
     $this->gamejam_submission_accepted = $accepted;
 
     return $this;
   }
 
-  /**
-   * @param $accepted
-   */
-  public function setGamejamSubmissionAccepted($accepted)
+  public function setGamejamSubmissionAccepted(bool $accepted): void
   {
     $this->gamejam_submission_accepted = $accepted;
   }
 
-  /**
-   * @return bool
-   */
-  public function getGamejamSubmissionAccepted()
+  public function getGamejamSubmissionAccepted(): bool
   {
     return $this->gamejam_submission_accepted;
   }
 
-  /**
-   * Get accepted
-   *
-   * @return boolean
-   */
-  public function isAcceptedForGameJam()
+  public function isAcceptedForGameJam(): bool
   {
     return $this->gamejam_submission_accepted;
   }
 
-  /**
-   * @param $date
-   */
-  public function setGameJamSubmissionDate($date)
+  public function setGameJamSubmissionDate(?DateTime $date): void
   {
     $this->gamejam_submission_date = $date;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getGameJamSubmissionDate()
+  public function getGameJamSubmissionDate(): ?DateTime
   {
     return $this->gamejam_submission_date;
   }
 
-  /**
-   * @return bool
-   */
-  public function getGamejam_submission_accepted()
+  public function getGamejam_submission_accepted(): bool
   {
     return $this->gamejam_submission_accepted;
   }
 
-  /**
-   * @return Collection
-   */
-  public function getProgramDownloads()
+  public function getProgramDownloads(): Collection
   {
     return $this->program_downloads;
   }
 
-  /**
-   * @param ProgramDownloads $program_download
-   *
-   * @return ProgramDownloads[]|Collection
-   */
-  public function addProgramDownloads(ProgramDownloads $program_download)
+  public function addProgramDownloads(ProgramDownloads $program_download): Collection
   {
     $this->program_downloads[] = $program_download;
 
     return $this->program_downloads;
   }
 
-  /**
-   * @param Tag $tag
-   */
-  public function addTag(Tag $tag)
+  public function addTag(Tag $tag): void
   {
     if ($this->tags->contains($tag))
     {
       return;
     }
     $this->tags->add($tag);
-    $tag->addProgram($this);
   }
 
-  /**
-   * @param Tag $tag
-   */
-  public function removeTag(Tag $tag)
+  public function removeTag(Tag $tag): void
   {
-    if (!$this->tags->contains($tag))
-    {
-      return;
-    }
     $this->tags->removeElement($tag);
-    $tag->removeProgram($this);
   }
 
-  /**
-   * @param Extension $extension
-   */
-  public function addExtension(Extension $extension)
+  public function addExtension(Extension $extension): void
   {
     if ($this->extensions->contains($extension))
     {
       return;
     }
     $this->extensions->add($extension);
-    $extension->addProgram($this);
   }
 
-  /**
-   * @param Extension $extension
-   */
-  public function removeExtension(Extension $extension)
+  public function removeExtension(Extension $extension): void
   {
-    if (!$this->extensions->contains($extension))
-    {
-      return;
-    }
     $this->extensions->removeElement($extension);
-    $extension->removeProgram($this);
   }
 
-  /**
-   *
-   */
-  public function removeAllExtensions()
+  public function removeAllExtensions(): void
   {
     foreach ($this->extensions as $extension)
     {
@@ -1282,175 +880,114 @@ class Program
     }
   }
 
-  /**
-   * Set as remix root.
-   *
-   * @param bool $is_remix_root
-   */
-  public function setRemixRoot($is_remix_root)
+  public function setRemixRoot(bool $is_remix_root): void
   {
     $this->remix_root = $is_remix_root;
   }
 
-  /**
-   * Get remix root.
-   *
-   * @return bool
-   */
-  public function isRemixRoot()
+  public function isRemixRoot(): bool
   {
     return $this->remix_root;
   }
 
-  /**
-   * @return ProgramRemixRelation[]|Collection
-   */
-  public function getCatrobatRemixAncestorRelations()
+  public function getCatrobatRemixAncestorRelations(): Collection
   {
-    return ($this->catrobat_remix_ancestor_relations != null)
-      ? $this->catrobat_remix_ancestor_relations
-      : new ArrayCollection();
+    return $this->catrobat_remix_ancestor_relations;
   }
 
-  /**
-   * @return ProgramRemixBackwardRelation[]|Collection
-   */
-  public function getCatrobatRemixBackwardParentRelations()
+  public function getCatrobatRemixBackwardParentRelations(): Collection
   {
-    return ($this->catrobat_remix_backward_parent_relations != null)
-      ? $this->catrobat_remix_backward_parent_relations
-      : new ArrayCollection();
+    return $this->catrobat_remix_backward_parent_relations;
   }
 
-  /**
-   * @return ProgramRemixRelation[]|Collection
-   */
-  public function getCatrobatRemixDescendantRelations()
+  public function getCatrobatRemixDescendantRelations(): Collection
   {
-    return ($this->catrobat_remix_descendant_relations != null)
-      ? $this->catrobat_remix_descendant_relations
-      : new ArrayCollection();
+    return $this->catrobat_remix_descendant_relations;
   }
 
-  /**
-   * @return array
-   */
-  public function getCatrobatRemixDescendantIds()
+  public function getCatrobatRemixDescendantIds(): array
   {
-    /**
-     * @var $ra ProgramRemixRelation
-     */
-
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(function ($ra) {
+    return array_unique(array_map(function (ProgramRemixRelation $ra)
+    {
       return $ra->getDescendantId();
     }, $relations));
   }
 
-  /**
-   * @return ScratchProgramRemixRelation[]|Collection
-   */
-  public function getScratchRemixParentRelations()
+  public function getScratchRemixParentRelations(): Collection
   {
-    return ($this->scratch_remix_parent_relations != null)
-      ? $this->scratch_remix_parent_relations
-      : new ArrayCollection();
+    return $this->scratch_remix_parent_relations;
   }
 
-  /**
-   * @return ProgramLike[]|Collection
-   */
-  public function getLikes()
+  public function getLikes(): Collection
   {
-    return ($this->likes != null) ? $this->likes : new ArrayCollection();
+    return $this->likes;
   }
 
-  /**
-   * @param ProgramLike[]|Collection $likes
-   */
-  public function setLikes($likes)
+  public function setLikes(Collection $likes): void
   {
     $this->likes = $likes;
   }
 
-  /**
-   * @return Tag[]|Collection
-   */
-  public function getTags()
+  public function getTags(): Collection
   {
     return $this->tags;
   }
 
-  /**
-   * @return Extension[]|Collection
-   */
-  public function getExtensions()
+  public function getExtensions(): Collection
   {
     return $this->extensions;
   }
 
-  /**
-   * @return mixed
-   */
-  public function isDebugBuild()
+  public function isDebugBuild(): bool
   {
     return $this->debug_build;
   }
 
-  /**
-   * @param mixed $debug_build
-   */
-  public function setDebugBuild($debug_build): void
+  public function setDebugBuild(bool $debug_build): void
   {
     $this->debug_build = $debug_build;
   }
 
   /**
    * Returns the LikeNotifications mentioning this Program.
-   *
-   * @return LikeNotification|Collection The LikeNotifications mentioning this Program.
    */
-  public function getLikeNotificationMentions()
+  public function getLikeNotificationMentions(): Collection
   {
     return $this->like_notification_mentions;
   }
 
   /**
    * Sets the LikeNotifications mentioning this Program.
-   *
-   * @param LikeNotification|Collection $like_notification_mentions The LikeNotifications mentioning this Program.
    */
-  public function setLikeNotificationMentions($like_notification_mentions): void
+  public function setLikeNotificationMentions(Collection $like_notification_mentions): void
   {
     $this->like_notification_mentions = $like_notification_mentions;
   }
 
   /**
    * Returns the NewProgramNotification mentioning this Program as a new Program.
-   *
-   * @return NewProgramNotification|Collection The NewProgramNotifications mentioning this Program as a new Program.
    */
-  public function getNewProgramNotificationMentions()
+  public function getNewProgramNotificationMentions(): Collection
   {
     return $this->new_program_notification_mentions;
   }
 
   /**
    * Sets the NewProgramNotifications mentioning this Program as a new Program.
-   *
-   * @param NewProgramNotification|Collection $new_program_notification_mentions
    */
-  public function setNewProgramNotificationMentions($new_program_notification_mentions): void
+  public function setNewProgramNotificationMentions(Collection $new_program_notification_mentions): void
   {
     $this->new_program_notification_mentions = $new_program_notification_mentions;
   }
 
-  public function getReports()
+  public function getReports(): Collection
   {
     return $this->reports;
   }
-  public function getReportsCount()
+
+  public function getReportsCount(): int
   {
     return $this->getReports()->count();
   }
@@ -1458,11 +995,8 @@ class Program
   /**
    * Returns the RemixNotifications which are triggered when this Program (child) is created as a remix of
    * another one (parent).
-   *
-   * @return RemixNotification[]|Collection The RemixNotifications which are triggered when this Program (child) is
-   *                                        created as a remix of another one (parent).
    */
-  public function getRemixNotificationMentionsAsChild()
+  public function getRemixNotificationMentionsAsChild(): Collection
   {
     return $this->remix_notification_mentions_as_child;
   }
@@ -1470,36 +1004,40 @@ class Program
   /**
    * Sets theRemixNotifications which are triggered when this Program (child) is created as a remix of
    * another one (parent).
-   *
-   * @param RemixNotification[]|Collection $remix_notification_mentions_as_child The RemixNotifications which are
-   *                                                                            triggered when this Program (child) is
-   *                                                                            created as a remix of another one (parent).
    */
-  public function setRemixNotificationMentionsAsChild($remix_notification_mentions_as_child): void
+  public function setRemixNotificationMentionsAsChild(Collection $remix_notification_mentions_as_child): void
   {
     $this->remix_notification_mentions_as_child = $remix_notification_mentions_as_child;
   }
 
   /**
    * Returns the RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
-   *
-   * @return RemixNotification[]|Collection RemixNotifications mentioning this Program as a parent Program of a new remix
-   *                                        Program (child).
    */
-  public function getRemixNotificationMentionsAsParent()
+  public function getRemixNotificationMentionsAsParent(): Collection
   {
     return $this->remix_notification_mentions_as_parent;
   }
 
   /**
    * Sets the RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
-   *
-   * @param RemixNotification[]|Collection $remix_notification_mentions_as_parent RemixNotifications mentioning this
-   *                                                                              Program as a parent Program of a new remix
-   *                                                                              Program (child).
    */
-  public function setRemixNotificationMentionsAsParent($remix_notification_mentions_as_parent): void
+  public function setRemixNotificationMentionsAsParent(Collection $remix_notification_mentions_as_parent): void
   {
     $this->remix_notification_mentions_as_parent = $remix_notification_mentions_as_parent;
+  }
+
+  public function isExample(): bool
+  {
+    return false;
+  }
+
+  public function getImageType(): string
+  {
+    return '';
+  }
+
+  public function getProgram(): ?Program
+  {
+    return $this;
   }
 }

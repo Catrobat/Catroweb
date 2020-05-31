@@ -2,49 +2,28 @@
 
 namespace App\Catrobat\Events;
 
-use Symfony\Component\HttpFoundation\File\File;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * Class InvalidProgramUploadedEvent
- * @package App\Catrobat\Events
- */
 class InvalidProgramUploadedEvent extends Event
 {
-  /**
-   * @var File
-   */
-  protected $file;
-  /**
-   * @var InvalidCatrobatFileException
-   */
-  protected $exception;
+  protected File $file;
 
-  /**
-   * InvalidProgramUploadedEvent constructor.
-   *
-   * @param File                         $file
-   * @param InvalidCatrobatFileException $exception
-   */
+  protected InvalidCatrobatFileException $exception;
+
   public function __construct(File $file, InvalidCatrobatFileException $exception)
   {
     $this->file = $file;
     $this->exception = $exception;
   }
 
-  /**
-   * @return File
-   */
-  public function getFile()
+  public function getFile(): File
   {
     return $this->file;
   }
 
-  /**
-   * @return InvalidCatrobatFileException
-   */
-  public function getException()
+  public function getException(): InvalidCatrobatFileException
   {
     return $this->exception;
   }

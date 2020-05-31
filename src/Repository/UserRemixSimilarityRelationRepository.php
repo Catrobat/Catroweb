@@ -4,46 +4,34 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\UserRemixSimilarityRelation;
-use DateTime;
-use Doctrine\DBAL\DBALException;
+use App\Utils\TimeUtils;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Exception;
+use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
-
-/**
- * Class UserRemixSimilarityRelationRepository
- * @package App\Repository
- */
 class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, UserRemixSimilarityRelation::class);
   }
 
-  /**
-   *
-   */
-  public function removeAllUserRelations()
+  public function removeAllUserRelations(): void
   {
     $qb = $this->createQueryBuilder('ur');
 
     $qb
       ->delete()
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
   /**
-   * @param User $user
-   *
    * @return UserRemixSimilarityRelation[]
    */
-  public function getRelationsOfSimilarUsers(User $user)
+  public function getRelationsOfSimilarUsers(User $user): array
   {
     $qb = $this->createQueryBuilder('ur');
 
@@ -55,25 +43,22 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
       ->setParameter('user', $user)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
-   * @param $first_user_id
-   * @param $second_user_id
-   * @param $similarity
-   *
    * @throws DBALException
    * @throws Exception
    */
-  public function insertRelation($first_user_id, $second_user_id, $similarity)
+  public function insertRelation(string $first_user_id, string $second_user_id, float $similarity): void
   {
     $connection = $this->getEntityManager()->getConnection();
     $connection->insert('user_remix_similarity_relation', [
-      'first_user_id'  => $first_user_id,
+      'first_user_id' => $first_user_id,
       'second_user_id' => $second_user_id,
-      'similarity'     => $similarity,
-      'created_at'     => date_format(new DateTime(), "Y-m-d H:i:s"),
+      'similarity' => $similarity,
+      'created_at' => date_format(TimeUtils::getDateTime(), 'Y-m-d H:i:s'),
     ]);
   }
 }

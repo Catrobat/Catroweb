@@ -2,43 +2,24 @@
 
 namespace App\Catrobat\Exceptions;
 
-/**
- * Class InvalidCatrobatFileException
- * @package App\Catrobat\Exceptions
- */
-class InvalidCatrobatFileException extends \RuntimeException
+use RuntimeException;
+
+class InvalidCatrobatFileException extends RuntimeException
 {
-  /**
-   * @var string
-   */
-  private $debug_message;
+  private string $debug_message;
 
-
-  /**
-   * InvalidCatrobatFileException constructor.
-   *
-   * @param        $message
-   * @param        $code
-   * @param string $debug_message
-   */
-  public function __construct($message, $code, $debug_message = "")
+  public function __construct(string $message, int $code, string $debug_message = '')
   {
     parent::__construct($message, $code);
     $this->debug_message = $debug_message;
   }
 
-  /**
-   * @return int|mixed
-   */
-  public function getStatusCode()
+  public function getStatusCode(): int
   {
     return $this->getCode();
   }
 
-  /**
-   * @return string
-   */
-  public function getDebugMessage()
+  public function getDebugMessage(): string
   {
     return $this->debug_message;
   }

@@ -3,7 +3,7 @@
 {% block body %}
   <div id="error">
     <h1>{{ "errors.authentication.title" | trans({}, "catroweb") }}</h1>
-    <i class="fas fa-exclamation-triangle fa-7x"></i>
+    <span style="font-size: 100px" class="material-icons">warning</span>
     <p>{{ exception.message | nl2br }}</p>
   </div>
 

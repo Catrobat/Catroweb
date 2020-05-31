@@ -1,8 +1,11 @@
+/* eslint-env jquery */
+/* global Swal */
+
+// eslint-disable-next-line no-unused-vars
 function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorText,
-                        reportButtonText, cancelText, reportDialogTitle, reportDialogReason,
-                        inappropriateLabel, copyrightLabel, spamLabel, dislikeLabel,
-                        statusCode_OK, loggedIn)
-{
+  reportButtonText, cancelText, reportDialogTitle, reportDialogReason,
+  inappropriateLabel, copyrightLabel, spamLabel, dislikeLabel,
+  statusCodeOk, loggedIn) {
   const INAPPROPRIATE_VALUE = 'inappropriate'
   const COPYRIGHT_VALUE = 'copyright infringement'
   const SPAM_VALUE = 'spam'
@@ -10,40 +13,35 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
   const CHECKED = 'checked'
   const SESSION_OLD_REPORT_REASON = 'oldReportReason' + programId
   const SESSION_OLD_REPORT_CATEGORY = 'oldReportCategory' + programId
-  
-  $('#report-program-button').click(function () {
-    
-    if (!loggedIn)
-    {
+
+  $('#top-app-bar__btn-report-project').click(function () {
+    if (!loggedIn) {
       window.location.href = loginUrl
       return
     }
-    
+
     let oldReportReason = sessionStorage.getItem(SESSION_OLD_REPORT_REASON)
-    if (oldReportReason === null)
-    {
+    if (oldReportReason === null) {
       oldReportReason = ''
     }
     let oldReportCategory = sessionStorage.getItem(SESSION_OLD_REPORT_CATEGORY)
-    if (oldReportCategory === null)
-    {
+    if (oldReportCategory === null) {
       oldReportCategory = ''
     }
     reportProgramDialog(false, oldReportReason, oldReportCategory)
   })
-  
-  function reportProgramDialog (error = false, oldReason = '', oldCategory = '')
-  {
-    swal({
-      title             : reportDialogTitle,
-      html              : getReportDialogHtml(error, oldReason, oldCategory),
-      focusConfirm      : false,
-      showCancelButton  : true,
+
+  function reportProgramDialog (error = false, oldReason = '', oldCategory = '') {
+    Swal.fire({
+      title: reportDialogTitle,
+      html: getReportDialogHtml(error, oldReason, oldCategory),
+      focusConfirm: false,
+      showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor : '#d33',
-      confirmButtonText : reportButtonText,
-      cancelButtonText  : cancelText,
-      preConfirm        : function () {
+      cancelButtonColor: '#d33',
+      confirmButtonText: reportButtonText,
+      cancelButtonText: cancelText,
+      preConfirm: function () {
         return new Promise(function (resolve) {
           resolve([
             $('#report-reason').val(),
@@ -51,105 +49,90 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
           ])
         })
       }
-    }).then(function (result) {
-      handleSubmitProgramReport(result)
-    }).catch(swal.noop)
+    }).then((result) => {
+      if (result.value) {
+        handleSubmitProgramReport(result.value)
+      }
+    })
   }
-  
+
   $(document).on('keyup', '#report-reason', function () {
     sessionStorage.setItem(SESSION_OLD_REPORT_REASON, $('#report-reason').val())
   })
   $(document).on('change', '#report-reason', function () {
     sessionStorage.setItem(SESSION_OLD_REPORT_REASON, $('#report-reason').val())
   })
-  
+
   $(document).on('change', 'input[name=report-category]', function () {
     sessionStorage.setItem(SESSION_OLD_REPORT_CATEGORY, $('input[name=report-category]:checked').val())
   })
-  
-  function handleSubmitProgramReport (result)
-  {
+
+  function handleSubmitProgramReport (result) {
     let reason = result[0]
     let category = result[1]
-    
-    if (reason === null || reason === '' || category === null)
-    {
-      
-      if (reason === null)
-      {
+
+    if (reason === null || reason === '' || category === null) {
+      if (reason === null) {
         reason = ''
       }
-      if (category === null)
-      {
+      if (category === null) {
         category = ''
       }
       reportProgramDialog(true, reason, category)
-    }
-    
-    else
-    {
+    } else {
       reportProgram(reason, category)
     }
   }
-  
-  function reportProgram (reason, category)
-  {
+
+  function reportProgram (reason, category) {
     $.post(reportUrl, {
-      program : programId,
+      program: programId,
       category: category,
-      note    : reason
+      note: reason
     }, function (data) {
-      if (data['statusCode'] === statusCode_OK)
-      {
-        swal({
-          text              : reportSentText,
-          type              : 'success',
-          confirmButtonClass: 'btn btn-success',
+      if (data.statusCode === statusCodeOk) {
+        Swal.fire({
+          text: reportSentText,
+          icon: 'success',
+          confirmButtonClass: 'btn btn-success'
         }).then(function () {
           window.location.href = '/'
         })
-      }
-      else
-      {
-        swal({
+      } else {
+        Swal.fire({
           title: errorText,
-          type : 'error',
+          icon: 'error'
         })
       }
-      
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-      swal({
+      Swal.fire({
         title: errorText,
-        text : errorThrown,
-        type : 'error',
+        text: errorThrown,
+        icon: 'error'
       })
     })
   }
-  
-  function getReportDialogHtml (error, oldReason, oldCategory)
-  {
+
+  function getReportDialogHtml (error, oldReason, oldCategory) {
     let errorClass = ''
-    if (error)
-    {
+    if (error) {
       errorClass = 'text-area-empty'
     }
-    
+
     let reasonPlaceholder = reportDialogReason
     let reason = ''
-    if (oldReason !== '')
-    {
+    if (oldReason !== '') {
       reasonPlaceholder = ''
       reason = oldReason
     }
-    
+
     let checkedInappropriate = ''
     let checkedCopyright = ''
     let checkedSpam = ''
     let checkedDislike = ''
-    
-    switch (oldCategory)
-    {
-      case INAPPROPRIATE_VALUE  :
+
+    switch (oldCategory) {
+      case INAPPROPRIATE_VALUE :
         checkedInappropriate = CHECKED
         break
       case COPYRIGHT_VALUE:
@@ -165,7 +148,7 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
         checkedInappropriate = CHECKED
         break
     }
-    
+
     return '<div class="text-left">' +
       '<div class="radio-item">' +
       '<input type="radio" id="report-inappropriate" name="report-category" value="' +

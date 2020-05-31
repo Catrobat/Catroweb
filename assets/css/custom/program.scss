@@ -1,37 +1,17 @@
-@import '../../../public/bootstrap_vendor/scss/functions';
+@import '../../../public/bootstrap/scss/functions';
 @import '../base/variables';
 @import '../base/mixins';
-@import '../../../public/bootstrap_vendor/scss/variables';
-@import '../../../public/bootstrap_vendor/scss/mixins';
+@import '../../../public/bootstrap/scss/variables';
+@import '../../../public/bootstrap/scss/mixins';
 @import 'theme_settings';
 
 button, .button {
   color: white;
 }
 
-body {
-  color: black;
-}
-
-a {
-  text-decoration: none;
-}
-
 .text-area-empty {
   border-width: medium;
   border-color: red !important;
-}
-
-#program-top {
-
-  #program-name {
-    float: left;
-  }
-
-}
-
-h2 {
-  margin: 0;
 }
 
 $thumbnail-size: 300px;
@@ -87,8 +67,6 @@ $thumbnail-size: 300px;
 }
 
 #program-bottom {
-  border-top: 1px solid $default-text-color;
-  border-bottom: 1px solid $default-text-color;
   padding-top: 25px;
   padding-bottom: 25px;
   display: table;
@@ -134,7 +112,7 @@ $thumbnail-size: 300px;
 
   #project-like-buttons {
     .btn {
-      border: 2px solid white;
+      border: 2px solid #fff;
       border-radius: 50%;
 
       &:not(:first-child) {
@@ -146,16 +124,18 @@ $thumbnail-size: 300px;
     .btn-round {
       width: $like-button-size;
       height: $like-button-size;
+      padding: 0;
+      text-align: center;
 
       .fas {
         font-size: 1.73rem;
 
         &.fa-thumbs-up {
-          margin-top: 0.23rem;
+          margin-top: 0.55rem;
         }
 
         &.fa-heart {
-          margin-top: 0.40rem;
+          margin-top: 0.70rem;
         }
       }
     }
@@ -163,7 +143,7 @@ $thumbnail-size: 300px;
     .btn.icon-only {
       font-size: $like-button-size * 0.99;
       padding: 0;
-      line-height: 1;
+      line-height: 0;
       color: $primary;
       background-color: white;
     }
@@ -222,16 +202,17 @@ $thumbnail-size: 300px;
     .btn-round {
       width: $like-detail-button-size;
       height: $like-detail-button-size;
+      padding: 0;
 
       .fas {
         font-size: 1.3rem;
 
         &.fa-thumbs-up {
-          margin-top: 0.1rem;
+          margin-top: 0.55rem;
         }
 
         &.fa-heart {
-          margin-top: 0.2rem;
+          margin-top: 0.7rem;
         }
       }
     }
@@ -239,7 +220,7 @@ $thumbnail-size: 300px;
     .btn.icon-only {
       font-size: $like-detail-button-size * 0.99;
       padding: 0;
-      line-height: 1;
+      line-height: 0;
       color: $primary;
 
       &:hover {
@@ -258,6 +239,7 @@ $thumbnail-size: 300px;
       left: $like-detail-triangle-left;
       width: $like-detail-triangle-width;
       height: $like-detail-triangle-height;
+      // stylelint-disable-next-line scss/operator-no-unspaced
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.17 23.98"><defs><style>.a{fill:white}.b{fill:none;stroke:rgb(178,178,178);stroke-linecap:square;stroke-linejoin:round;stroke-width:2px;}</style></defs><polygon class="a" points="10.19 0 1 22.98 33.17 0 10.19 0"/><polyline class="b" points="9.28 2.27 1 22.98 30 2.27"/></svg>');
       background-repeat: no-repeat;
     }
@@ -469,20 +451,13 @@ table td:nth-child(1) {
 }
 
 #program-comments {
-  margin-top: 0;
-  padding-top: 25px;
 
   #user-comment-wrapper {
     padding-bottom: 15px;
   }
 }
 
-.h1 {
-  border-bottom: none;
-}
-
 #comments-wrapper {
-  //Todo style stuff
   clear: both;
   display: block;
 }
@@ -517,7 +492,6 @@ table td:nth-child(1) {
   min-height: 80px;
   padding-bottom: 10px;
   padding-top: 10px;
-  border-top: 1px solid $default-border-color;
 
   &.hidden {
     display: none;
@@ -638,11 +612,6 @@ input[type='number'] {
 }
 
 @include media-breakpoint-down(md) {
-  #program-top {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
 
   #program-middle {
     #image {
@@ -654,7 +623,6 @@ input[type='number'] {
   }
 
   #program-bottom {
-    border-top: 1px solid $default-text-color;
     padding-top: 25px;
     padding-bottom: 25px;
     display: table;
@@ -683,7 +651,6 @@ input[type='number'] {
 
 @include media-breakpoint-down(sm) {
   #program-bottom {
-    border-top: 1px solid $default-text-color;
     padding-top: 25px;
     padding-bottom: 25px;
     display: table;
@@ -739,11 +706,6 @@ input[type='number'] {
   }
 }
 
-#recsys-headline, #recsys-specific-programs-headline {
-  margin: 0.85em;
-  text-align: center;
-}
-
 #gamejam-div {
   overflow: auto;
 }
@@ -776,4 +738,9 @@ input[type='number'] {
 .add-comment-button {
   float: right;
   font-size: 2em;
+}
+.sonata-admin-thumbnail-image
+{
+    height: 96px;
+    width: 96px;
 }

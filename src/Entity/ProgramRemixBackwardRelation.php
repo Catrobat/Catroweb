@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity
@@ -14,7 +17,8 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -23,72 +27,63 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $parent_id;
+  protected string $parent_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_backward_child_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-   * @var Program
    */
-  protected $parent;
+  protected Program $parent;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $child_id;
+  protected string $child_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_backward_parent_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
-   * @var Program
    */
-  protected $child;
+  protected Program $child;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $created_at;
+  protected ?DateTime $created_at = null;
 
   /**
-   * @var \DateTime
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected $seen_at;
+  protected ?DateTime $seen_at = null;
 
-  /**
-   * @param Program $parent
-   * @param Program $child
-   */
   public function __construct(Program $parent, Program $child)
   {
     $this->setParent($parent);
     $this->setChild($child);
-    $this->created_at = null;
-    $this->seen_at = null;
+  }
+
+  public function __toString(): string
+  {
+    return '(#'.$this->parent_id.', #'.$this->child_id.')';
   }
 
   /**
    * @ORM\PrePersist
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateTimestamps()
+  public function updateTimestamps(): void
   {
-    if ($this->getCreatedAt() == null)
+    if (null == $this->getCreatedAt())
     {
-      $this->setCreatedAt(new \DateTime());
+      $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 
-  /**
-   * @param Program $parent
-   *
-   * @return $this
-   */
-  public function setParent(Program $parent)
+  public function setParent(Program $parent): ProgramRemixBackwardRelation
   {
     $this->parent = $parent;
     $this->parent_id = $parent->getId();
@@ -96,28 +91,17 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this;
   }
 
-  /**
-   * @return Program
-   */
-  public function getParent()
+  public function getParent(): Program
   {
     return $this->parent;
   }
 
-  /**
-   * @return int
-   */
-  public function getParentId()
+  public function getParentId(): string
   {
     return $this->parent_id;
   }
 
-  /**
-   * @param Program $child
-   *
-   * @return $this
-   */
-  public function setChild(Program $child)
+  public function setChild(Program $child): ProgramRemixBackwardRelation
   {
     $this->child = $child;
     $this->child_id = $child->getId();
@@ -125,98 +109,52 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this;
   }
 
-  /**
-   * @return Program
-   */
-  public function getChild()
+  public function getChild(): Program
   {
     return $this->child;
   }
 
-  /**
-   * @return int
-   */
-  public function getChildId()
+  public function getChildId(): string
   {
     return $this->child_id;
   }
 
-  /**
-   * @return int
-   */
-  public function getDepth()
+  public function getDepth(): int
   {
     return 1;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getCreatedAt()
+  public function getCreatedAt(): ?DateTime
   {
     return $this->created_at;
   }
 
-  /**
-   * @param \DateTime $created_at
-   *
-   * @return $this
-   */
-  public function setCreatedAt(\DateTime $created_at)
+  public function setCreatedAt(DateTime $created_at): void
   {
     $this->created_at = $created_at;
-
-    return $this;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getSeenAt()
+  public function getSeenAt(): ?DateTime
   {
     return $this->seen_at;
   }
 
-  /**
-   * @param \DateTime $seen_at
-   *
-   * @return $this
-   */
-  public function setSeenAt($seen_at)
+  public function setSeenAt(?DateTime $seen_at): void
   {
     $this->seen_at = $seen_at;
-
-    return $this;
   }
 
-  /**
-   * @return string
-   */
-  public function getUniqueKey()
+  public function getUniqueKey(): string
   {
-    return sprintf("ProgramRemixBackwardRelation(%d,%d)", $this->parent_id, $this->child_id);
+    return sprintf('ProgramRemixBackwardRelation(%d,%d)', $this->parent_id, $this->child_id);
   }
 
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return "(#" . $this->parent_id . ", #" . $this->child_id . ")";
-  }
-
-  /**
-   * @return Program
-   */
-  public function getAncestor()
+  public function getAncestor(): Program
   {
     return $this->parent;
   }
 
-  /**
-   * @return Program
-   */
-  public function getDescendant()
+  public function getDescendant(): Program
   {
     return $this->child;
   }

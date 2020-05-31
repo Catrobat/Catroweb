@@ -2,56 +2,60 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use App\Catrobat\Services\ExtractedFileRepository;
-use App\Entity\Program;
-use App\Entity\ProgramManager;
 use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
+use App\Catrobat\Services\ExtractedFileRepository;
+use App\Entity\ProgramManager;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
-
-/**
- * Class CodeViewController
- * @package App\Catrobat\Controller\Web
- */
 class CodeViewController extends AbstractController
 {
+  private ProgramManager $program_manager;
+  private ExtractedFileRepository $extracted_file_repository;
+  private CatrobatCodeParser $code_parser;
 
-  /**
-   * @param                         $id
-   * @param ProgramManager          $programManager
-   * @param ExtractedFileRepository $extractedFileRepository
-   * @param CatrobatCodeParser      $catrobatCodeParser
-   *
-   * @return mixed
-   */
-  public function viewCodeAction($id, ProgramManager $programManager, ExtractedFileRepository $extractedFileRepository,
-                                 CatrobatCodeParser $catrobatCodeParser)
+  public function __construct(ProgramManager $program_manager,
+                              ExtractedFileRepository $extracted_file_repository,
+                              CatrobatCodeParser $code_parser)
   {
-    /**
-     * @var $program Program
-     */
+    $this->program_manager = $program_manager;
+    $this->extracted_file_repository = $extracted_file_repository;
+    $this->code_parser = $code_parser;
+  }
+
+  public function view(string $id, string $version): Response
+  {
+    return $this->render('Program/code_view.html.twig', [
+      'id' => $id,
+      'version' => $version,
+    ]);
+  }
+
+  public function oldView(string $id, bool $visible = true): Response
+  {
     try
     {
-      $program = $programManager->find($id);
-      $extracted_program = $extractedFileRepository->loadProgramExtractedFile($program);
-      if ($extracted_program === null)
+      $program = $this->program_manager->find($id);
+      $extracted_program = $this->extracted_file_repository->loadProgramExtractedFile($program);
+      if (null === $extracted_program)
       {
-        throw new \Exception();
+        throw new Exception();
       }
-      $parsed_program = $catrobatCodeParser->parse($extracted_program);
+      $parsed_program = $this->code_parser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
-    } catch (\Exception $e)
+    }
+    catch (Exception $exception)
     {
       $parsed_program = null;
       $web_path = null;
     }
 
-    $code_view_twig_params = [
+    return $this->render('Program/old_code_view.html.twig', [
       'parsed_program' => $parsed_program,
-      'path'           => $web_path,
-    ];
-
-    return $this->render('Program/codeview.html.twig', $code_view_twig_params);
+      'path' => $web_path,
+      'visible' => $visible,
+    ]);
   }
 }

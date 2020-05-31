@@ -4,19 +4,12 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class LegoNxtMotorTurnAngleBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 class LegoNxtMotorTurnAngleBrick extends Brick
 {
-  /**
-   *
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::LEGO_NXT_MOTOR_TURN_ANGLE_BRICK;
-    $this->caption = "Turn NXT motor";
+    $this->caption = 'Turn NXT motor';
     $this->setImgFile(Constants::LEGO_NXT_BRICK_IMG);
   }
 }

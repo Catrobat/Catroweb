@@ -3,45 +3,25 @@
 @import 'theme_settings';
 
 
-body .btn{
-  border-radius: 10%;
-
-}
-h1 {
-  text-align: center;
-}
-
-
 .notification-container {
   border-color: $primary;
-
-
-
 }
 
 .notification-container-old {
   border-color: $primary;
 }
 
-
 .notification-header {
   background-color: $primary;
   color: white;
 }
-.notification-header .btn.btn-primary
-{
 
-
+.notification-header .btn.btn-primary {
   border: none;
-  width: 40px;
-
+  width: 50px;
   position: absolute;
-
-  margin-right:2px;
-  right:5px;
-  top: 2px;
-
-
+  right: 0;
+  top: 0;
 }
 
 .notification-avatar {
@@ -49,88 +29,55 @@ h1 {
   width: 6rem;
   margin-right: 5%;
 
-  @media screen and (max-width: 500px)
-  {
+  @media screen and (max-width: 500px) {
     margin-right: 10%;
+  }
+  @media screen and (max-width: 216px) {
+    margin-left: 25%;
+  }
+  @media screen and (max-width: 180px) {
+    margin-left: 2%;
   }
 }
 
 .notification-body {
   width: auto;
+  align-items: center;
+  justify-content: center;
+  white-space: initial;
+  vertical-align: middle;
   @include force-word-break();
 
-  @media screen and (min-width: 1600px)
-  {
+  @media screen and (min-width: 1600px) {
     max-width: 90%;
   }
-  @media screen and (min-width: 1400px)
-  {
+  @media screen and (min-width: 1400px) {
     max-width: 85%;
   }
-  @media screen and (min-width: 1200px)
-  {
+  @media screen and (min-width: 1200px) {
     max-width: 81%;
   }
-  @media screen and (max-width: 1200px)
-  {
+  @media screen and (max-width: 1200px) {
     max-width: 77%;
   }
-  @media screen and (max-width: 900px)
-  {
-    max-width: 70%;
-  }
-  @media screen and (max-width: 500px)
-  {
-    max-width: 60%;
-  }
-  @media screen and (max-width: 400px)
-  {
-    max-width: 50%;
-  }
-  @media screen and (max-width: 300px)
-  {
+  @media screen and (max-width: 990px) {
     max-width: 40%;
   }
-}
-
-.notification-summary-left {
-  float: left;
-
-  @media screen and (max-width: 576px)
-  {
-    float: none;
-    text-align: center;
+  @media screen and (max-width: 500px) {
+    max-width: 60%;
   }
-}
-.mark-all{
-  @media screen and (max-width: 992px)
-  {
-
-    float: right;
-    margin-top: 12px;
-    margin-right: 16px;
-    margin-left: 250px;
+  @media screen and (max-width: 400px) {
+    max-width: 50%;
   }
-
-
-}
-.notification-summary-right {
-  float: right;
-  margin-right:16px;
-
-  @media screen and (max-width: 576px)
-  {
-
-    display: block;
-    margin: 1em auto auto auto;
-    float: none;
+  @media screen and (max-width: 300px) {
+    max-width: 40%;
   }
-}
-
-.notification-summary-right.btn.btn-danger
-{
-  width:125px;
-
+  @media screen and (max-width: 216px) {
+    margin-left: 25%;
+  }
+  @media screen and (max-width: 180px) {
+    margin-left: 2%;
+  }
 }
 
 .notification-round {

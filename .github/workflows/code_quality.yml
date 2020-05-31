@@ -1,0 +1,107 @@
+name: Code Quality Checks
+
+on: [push, pull_request]
+
+jobs:
+
+  eslint:
+    #  JS CodeStyle
+    name: ESLint
+    runs-on: ubuntu-latest
+    # config defined in .eslintrc.yml
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run test
+
+  stylelint:
+    #  SCSS CodeStyle
+    name: StyleLint
+    runs-on: ubuntu-latest
+    # config defined in .stylelintrc.json
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run test-style
+        continue-on-error: true  # TODO: remove after fixing all style errors
+
+  php-loc:
+    #  Measuring the size and analyzing the structure of the project (php)
+    name: PHP Loc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          wget https://phar.phpunit.de/phploc.phar
+          php phploc.phar src tests
+
+  phpcpd:
+    # Checking for PHP code that was just copied
+    name: PHP Copy Paste Detector
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHP Copy Paste Detector
+        uses: StephaneBour/actions-php-cpd@1.1
+        with:
+          args: src tests --exclude Admin --exclude Entity --exclude phpUnit
+
+  php-cs-fixer:
+    # Checking the Coding standard
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+    # config defined in .php_cs(.dist)
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://oskarstark/php-cs-fixer-ga:latest
+        with:
+          args: --config=.php_cs.dist --diff --dry-run --allow-risky=yes --verbose --format=txt
+
+  phpstan:
+    # Additional static code quality checks
+    name: PHPStan
+    runs-on: ubuntu-latest
+    # config defined in phpstan.neon(.dist)
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHPStan
+        uses: docker://oskarstark/phpstan-ga:latest
+        env:
+          REQUIRE_DEV: true
+        with:
+          args: analyse
+
+  Symfony-app-dependent-checks:
+    # to check for custom defined functions/filters the whole Symfony application is required
+    name: Twig Lint, Yaml Lint, Container Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+
+      - name: Yaml Lint
+        # Lints a file and outputs encountered errors. Specify all dirs but vendor
+        run: |
+          docker exec app.catroweb bin/console lint:yaml translations/ config/ .github/ docker/ *.yml
+
+      - name: Twig Lint
+        # Lints a template and outputs encountered errors.
+        run: |
+          docker exec app.catroweb bin/console lint:twig templates/
+
+      - name: Dependeny Injection Lint
+        #  Ensures that arguments injected into services match type declarations
+        run: |
+          docker exec app.catroweb bin/console lint:container

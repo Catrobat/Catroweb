@@ -2,31 +2,33 @@
 
 namespace App\Catrobat\Forms;
 
-use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * Class FeaturedImageConstraintValidator
- * @package App\Catrobat\Forms
- */
 class FeaturedImageConstraintValidator extends ConstraintValidator
 {
   /**
-   * @param mixed      $value
-   * @param Constraint $constraint
+   * @param UploadedFile|null $value
    */
-  public function validate($value, Constraint $constraint)
+  public function validate($value, Constraint $constraint): void
   {
-    if ($value != null)
+    if (null === $value || !$constraint instanceof FeaturedImageConstraint)
     {
-      $imageinfo = getimagesize($value);
-      if ($imageinfo[0] != $constraint->required_width || $imageinfo[1] != $constraint->required_height)
-      {
-        $this->context->buildViolation($constraint->message)
-          ->setParameter('%width%', $constraint->required_width)
-          ->setParameter('%height%', $constraint->required_height)
-          ->addViolation();
-      }
+      return;
+    }
+
+    /** @var FeaturedImageConstraint $featured_constraint */
+    $featured_constraint = $constraint;
+
+    $image_info = getimagesize($value);
+    if ($image_info[0] != $featured_constraint->required_width || $image_info[1] != $featured_constraint->required_height)
+    {
+      $this->context->buildViolation($constraint->message)
+        ->setParameter('%width%', (string) $constraint->required_width)
+        ->setParameter('%height%', (string) $constraint->required_height)
+        ->addViolation()
+      ;
     }
   }
 }

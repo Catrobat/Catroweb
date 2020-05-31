@@ -2,41 +2,35 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Catrobat\Exceptions\Upload\NoGameJamException;
 use App\Catrobat\Listeners\GameJamTagListener;
+use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\GameJam;
+use App\Entity\Program;
+use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Repository\GameJamRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Program;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Catrobat\Exceptions\Upload\NoGameJamException;
-use App\Catrobat\Responses\ProgramListResponse;
+use App\Utils\TimeUtils;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\NonUniqueResultException;
+use Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-
-/**
- * Class GameSubmissionController
- * @package App\Catrobat\Controller\Api
- */
 class GameSubmissionController extends AbstractController
 {
-
   /**
+   * @deprecated
+   *
    * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission", methods={"GET"})
-   *
-   * @param Request $request
-   * @param Program $program
-   *
-   * @return JsonResponse
    */
-  public function formSubmittedAction(Request $request, Program $program)
+  public function formSubmittedAction(Request $request, string $id, Program $program): JsonResponse
   {
-    if ($program->getGamejam() != null)
+    if (null != $program->getGamejam())
     {
       if (!$program->isAcceptedForGameJam())
       {
@@ -45,40 +39,35 @@ class GameSubmissionController extends AbstractController
       }
 
       return JsonResponse::create([
-        "statusCode" => "200",
-        "message"    => "Program accepted for this gamejam",
+        'statusCode' => '200',
+        'message' => 'Program accepted for this gamejam',
       ]);
     }
-    else
-    {
-      return JsonResponse::create([
-        "statusCode" => "999",
-        "message"    => "This program was not submitted to a gamejam",
-      ]);
-    }
+
+    return JsonResponse::create([
+      'statusCode' => '999',
+      'message' => 'This program was not submitted to a gamejam',
+    ]);
   }
 
-
   /**
-   *   /**
+   * @deprecated
+   *
    * @Route("/api/gamejam/sampleProjects.json", name="api_gamejam_sample_programs", methods={"GET"})
    *
-   * @param Request $request
-   * @param GameJamRepository $game_jam_repository
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
    */
-  public function getSampleProgramsForLatestGamejam(Request $request, GameJamRepository $game_jam_repository)
+  public function getSampleProgramsForLatestGameJam(Request $request,
+                                                    GameJamRepository $game_jam_repository): ProgramListResponse
   {
     $flavor = $request->get('flavor');
 
-    $gamejam = $this->getGameJam($flavor, $game_jam_repository);
+    $game_jam = $this->getGameJam($flavor, $game_jam_repository);
 
-    $offset = intval($request->query->get('offset', 0));
-    $limit = intval($request->query->get('limit', 20));
+    $offset = (int) $request->query->get('offset', 0);
+    $limit = (int) $request->query->get('limit', 20);
 
-    $all_samples = $gamejam->getSamplePrograms();
+    $all_samples = $game_jam->getSamplePrograms();
     $count = count($all_samples);
     $returning_samples = null;
 
@@ -87,152 +76,133 @@ class GameSubmissionController extends AbstractController
       $returning_samples[$j] = $all_samples[$i];
     }
 
-    return new ProgramListResponse($returning_samples, $returning_samples !== null ? count($returning_samples) : 0);
+    return new ProgramListResponse($returning_samples, null !== $returning_samples ? count($returning_samples) : 0);
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions", methods={"GET"})
    *
-   * @param Request $request
-   * @param GameJamRepository $game_jam_repository
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
    */
-  public function getSubmissionsForLatestGamejam(Request $request, GameJamRepository $game_jam_repository)
+  public function getSubmissionsForLatestGameJam(Request $request,
+                                                 GameJamRepository $game_jam_repository,
+                                                 ProgramManager $program_manager): ProgramListResponse
   {
-    $limit = intval($request->query->get('limit', 20));
-    $offset = intval($request->query->get('offset', 0));
+    $limit = (int) $request->query->get('limit', 20);
+    $offset = (int) $request->query->get('offset', 0);
 
     $flavor = $request->get('flavor');
 
-    $gamejam = $this->getGameJam($flavor, $game_jam_repository);
+    /** @var GameJam $game_jam */
+    $game_jam = $this->getGameJam($flavor, $game_jam_repository);
 
-    $criteria_count = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true));
-    $criteria = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true))
-      ->andWhere(Criteria::expr()->eq("visible", true))
-      ->orderBy(["gamejam_submission_date" => Criteria::DESC])
-      ->setFirstResult($offset)
-      ->setMaxResults($limit);
+    $accepted_game_jam_projects = $program_manager->findBy(
+      ['visible' => true, 'gamejam' => $game_jam->getId(), 'gamejam_submission_accepted' => true],
+      ['gamejam_submission_date' => Criteria::DESC],
+      $limit,
+      $offset
+    );
 
-    return new ProgramListResponse($gamejam->getPrograms()->matching($criteria), $gamejam->getPrograms()
-      ->matching($criteria_count)
-      ->count());
-  }
-
-
-  /**
-   * @param $flavor
-   *
-   * @return mixed
-   * @throws \Doctrine\ORM\NonUniqueResultException
-   */
-  private function getGameJam($flavor, GameJamRepository $game_jam_repository)
-  {
-    $gamejam = $game_jam_repository->getLatestGameJamByFlavor($flavor);
-
-    if ($gamejam == null)
-    {
-      $gamejam = $game_jam_repository->getLatestGameJam();
-    }
-
-    if ($gamejam == null)
-    {
-      throw new NoGameJamException();
-    }
-
-    return $gamejam;
+    return new ProgramListResponse(
+      $accepted_game_jam_projects,
+      count($accepted_game_jam_projects)
+    );
   }
 
   /**
    * @Route("/gamejam/submit/{id}", name="gamejam_web_submit", methods={"GET"})
    *
-   * @param Request $request
-   * @param Program $program
-   * @param GameJamRepository $game_jam_repository
-   * @param GameJamTagListener $gameJamTagListener
-   *
-   * @return RedirectResponse
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws Exception
+   * @throws NonUniqueResultException
    */
-  public function webSubmitAction(Request $request, Program $program, GameJamRepository $game_jam_repository, GameJamTagListener $gameJamTagListener)
+  public function webSubmitAction(Request $request, Program $program,
+                                  GameJamRepository $game_jam_repository,
+                                  GameJamTagListener $gameJamTagListener): RedirectResponse
   {
-    if ($this->getUser() == null)
+    if (null == $this->getUser())
     {
       throw new AuthenticationException();
     }
-    $gamejam = $game_jam_repository->getCurrentGameJam();
-    if ($gamejam == null)
+    $game_jam = $game_jam_repository->getCurrentGameJam();
+    if (null == $game_jam)
     {
-      throw new \Exception("No Game Jam!");
+      throw new Exception('No Game Jam!');
     }
 
-    if ($program->getGamejam() != null && $program->getGamejam() != $gamejam)
+    if (null != $program->getGamejam() && $program->getGamejam() != $game_jam)
     {
-      throw new \Exception("Game was alraedy submitted to another gamejam!");
+      throw new Exception('Game was alraedy submitted to another gamejam!');
     }
 
     if ($program->isAcceptedForGameJam())
     {
-      return new RedirectResponse($this->generateUrl("program", [
-        "id" => $program->getId(),
+      return new RedirectResponse($this->generateUrl('program', [
+        'id' => $program->getId(),
       ]));
     }
 
     if ($this->getUser() != $program->getUser())
     {
-      return new RedirectResponse($this->generateUrl("gamejam_submit_own"));
+      return new RedirectResponse($this->generateUrl('gamejam_submit_own'));
     }
 
-    $program->setGamejam($gamejam);
-    $program->setGameJamSubmissionDate(new \DateTime());
+    $program->setGamejam($game_jam);
+    $program->setGameJamSubmissionDate(TimeUtils::getDateTime());
 
     $gameJamTagListener->checkDescriptionTag($program);
 
     $this->persistAndFlush($program);
 
-    $url = $this->assembleFormUrl($gamejam, $program->getUser(), $program, $request);
+    $url = $this->assembleFormUrl($game_jam, $program->getUser(), $program, $request);
 
-    if ($url != null)
+    if (null != $url)
     {
       return new RedirectResponse($url);
     }
-    else
-    {
-      return new RedirectResponse($this->generateUrl("program", [
-        "id" => $program->getId(),
-      ]));
-    }
+
+    return new RedirectResponse($this->generateUrl('program', [
+      'id' => $program->getId(),
+    ]));
   }
 
   /**
-   * @param $gamejam GameJam
-   * @param $user User
-   * @param $program Program
-   * @param $request Request
+   * @param mixed $flavor
    *
-   * @return mixed
+   * @throws NonUniqueResultException
    */
-  private function assembleFormUrl($gamejam, $user, $program, $request)
+  private function getGameJam($flavor, GameJamRepository $game_jam_repository): GameJam
+  {
+    /** @var GameJam $game_jam */
+    $game_jam = $game_jam_repository->getLatestGameJamByFlavor($flavor);
+
+    if (null == $game_jam)
+    {
+      $game_jam = $game_jam_repository->getLatestGameJam();
+    }
+
+    if (null == $game_jam)
+    {
+      throw new NoGameJamException();
+    }
+
+    return $game_jam;
+  }
+
+  private function assembleFormUrl(GameJam $game_jam, User $user, Program $program, Request $request): string
   {
     $languageCode = $this->getLanguageCode($request);
 
-    $url = $gamejam->getFormUrl();
-    $url = str_replace("%CAT_ID%", $program->getId(), $url);
-    $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
-    $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
-    $url = str_replace("%CAT_LANGUAGE%", $languageCode, $url);
+    $url = $game_jam->getFormUrl();
+    $url = str_replace('%CAT_ID%', $program->getId(), $url);
+    $url = str_replace('%CAT_MAIL%', $user->getEmail(), $url);
+    $url = str_replace('%CAT_NAME%', $user->getUsername(), $url);
 
-    return $url;
+    return str_replace('%CAT_LANGUAGE%', $languageCode, $url);
   }
 
-
-  /**
-   * @param $request Request
-   *
-   * @return string
-   */
-  private function getLanguageCode($request)
+  private function getLanguageCode(Request $request): string
   {
     $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
 
@@ -250,10 +220,7 @@ class GameSubmissionController extends AbstractController
     return $languageCode;
   }
 
-  /**
-   * @param Program $program
-   */
-  private function persistAndFlush(Program $program)
+  private function persistAndFlush(Program $program): void
   {
     $this->getDoctrine()->getManager()->persist($program);
     $this->getDoctrine()->getManager()->flush();

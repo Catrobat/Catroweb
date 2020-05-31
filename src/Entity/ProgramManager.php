@@ -12,124 +12,76 @@ use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\CatrobatFileSanitizer;
+use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Repository\ExampleRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;
-use DateTimeZone;
-use Doctrine\DBAL\Types\GuidType;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
+use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\ORMException;
 use Exception;
+use FOS\UserBundle\Model\UserInterface;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\HttpFoundation\UrlHelper;
 
-
-/**
- * Class ProgramManager
- * @package App\Entity
- */
 class ProgramManager
 {
+  protected CatrobatFileExtractor $file_extractor;
 
-  /**
-   * @var CatrobatFileExtractor
-   */
-  protected $file_extractor;
+  protected CatrobatFileSanitizer $file_sanitizer;
 
-  /**
-   * @var CatrobatFileSanitizer
-   */
-  protected $file_sanitizer;
+  protected ProgramFileRepository $file_repository;
 
-  /**
-   * @var ProgramFileRepository
-   */
-  protected $file_repository;
+  protected ScreenshotRepository $screenshot_repository;
 
-  /**
-   * @var ScreenshotRepository
-   */
-  protected $screenshot_repository;
+  protected EventDispatcherInterface $event_dispatcher;
 
-  /**
-   * @var EventDispatcherInterface
-   */
-  protected $event_dispatcher;
+  protected EntityManagerInterface $entity_manager;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  protected $entity_manager;
+  protected ProgramRepository $program_repository;
 
-  /**
-   * @var ProgramRepository
-   */
-  protected $program_repository;
+  protected TagRepository $tag_repository;
 
-  /**
-   * @var TagRepository
-   */
-  protected $tag_repository;
+  protected ProgramLikeRepository $program_like_repository;
 
-  /**
-   * @var ProgramLikeRepository
-   */
-  protected $program_like_repository;
+  protected FeaturedRepository $featured_repository;
 
-  /** @var FeaturedRepository */
-  protected $featured_repository;
+  protected ExampleRepository $example_repository;
 
-  /**
-   * @var LoggerInterface
-   */
-  private $logger;
+  protected AppRequest $app_request;
 
-  /**
-   * @var AppRequest
-   */
-  protected $app_request;
+  protected CatroNotificationService $notification_service;
 
-  /**
-   * @var ExtensionRepository
-   */
-  protected $extension_repository;
+  protected ExtensionRepository $extension_repository;
 
-  /**
-   * ProgramManager constructor.
-   *
-   * @param CatrobatFileExtractor    $file_extractor
-   * @param ProgramFileRepository    $file_repository
-   * @param ScreenshotRepository     $screenshot_repository
-   * @param EntityManagerInterface   $entity_manager
-   * @param ProgramRepository        $program_repository
-   * @param TagRepository            $tag_repository
-   * @param ProgramLikeRepository    $program_like_repository
-   * @param FeaturedRepository       $featured_repository
-   * @param EventDispatcherInterface $event_dispatcher
-   * @param LoggerInterface          $logger
-   * @param AppRequest               $app_request
-   * @param ExtensionRepository      $extension_repository
-   * @param CatrobatFileSanitizer    $file_sanitizer
-   */
+  private LoggerInterface $logger;
+
+  private ?UrlHelper $urlHelper;
+
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
                               ProgramLikeRepository $program_like_repository,
                               FeaturedRepository $featured_repository,
+                              ExampleRepository $example_repository,
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
-                              ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer)
+                              ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
+                              CatroNotificationService $notification_service,
+                              UrlHelper $urlHelper = null)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -140,29 +92,40 @@ class ProgramManager
     $this->tag_repository = $tag_repository;
     $this->program_like_repository = $program_like_repository;
     $this->featured_repository = $featured_repository;
+    $this->example_repository = $example_repository;
     $this->logger = $logger;
     $this->app_request = $app_request;
     $this->file_sanitizer = $file_sanitizer;
     $this->extension_repository = $extension_repository;
+    $this->notification_service = $notification_service;
+    $this->urlHelper = $urlHelper;
+  }
+
+  public function getFeaturedRepository(): FeaturedRepository
+  {
+    return $this->featured_repository;
+  }
+
+  public function getExampleRepository(): ExampleRepository
+  {
+    return $this->example_repository;
   }
 
   /**
-   * Check visibility of the given project for the current user
+   * Check visibility of the given project for the current user.
    *
-   * @param Program $project
-   *
-   * @return bool
+   * @throws NoResultException
    */
-  public function isProjectVisibleForCurrentUser(Program $project)
+  public function isProjectVisibleForCurrentUser(?Program $project): bool
   {
-    if (!$project)
+    if (null === $project)
     {
       return false;
     }
 
     if (!$project->isVisible())
     {
-      if (!$this->featured_repository->isFeatured($project))
+      if (!$this->featured_repository->isFeatured($project) || !$project->getApproved())
       {
         return false;
       }
@@ -186,18 +149,13 @@ class ProgramManager
   }
 
   /**
-   * @param AddProgramRequest $request
+   * Adds a new program and notifies all followers of the uploader about it.
    *
-   * @return Program|null
    * @throws Exception
    */
-  public function addProgram(AddProgramRequest $request)
+  public function addProgram(AddProgramRequest $request): ?Program
   {
-    /**
-     * @var $program        Program
-     * @var $extracted_file ExtractedCatrobatFile
-     */
-    $file = $request->getProgramfile();
+    $file = $request->getProgramFile();
 
     $extracted_file = $this->file_extractor->extract($file);
 
@@ -206,7 +164,8 @@ class ProgramManager
     try
     {
       $event = $this->event_dispatcher->dispatch(new ProgramBeforeInsertEvent($extracted_file));
-    } catch (InvalidCatrobatFileException $e)
+    }
+    catch (InvalidCatrobatFileException $e)
     {
       $this->logger->error($e);
       $this->event_dispatcher->dispatch(new InvalidProgramUploadedEvent($file, $e));
@@ -215,13 +174,14 @@ class ProgramManager
 
     if ($event->isPropagationStopped())
     {
-      $this->logger->error("UploadError -> Propagation stopped");
+      $this->logger->error('UploadError -> Propagation stopped');
 
       return null;
     }
 
+    /** @var Program|null $old_program */
     $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
-    if ($old_program !== null)
+    if (null !== $old_program)
     {
       $program = $old_program;
       $this->removeAllTags($program);
@@ -244,16 +204,16 @@ class ProgramManager
     $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage('en');
-    $program->setUploadedAt(new DateTime("now", new DateTimeZone("UTC")));
+    $program->setUploadedAt(TimeUtils::getDateTime());
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
     $this->addTags($program, $extracted_file, $request->getLanguage());
 
-    if ($request->getGamejam() !== null)
+    if (null !== $request->getGameJam())
     {
-      $program->setGamejam($request->getGamejam());
-      $program->setGameJamSubmissionDate(new DateTime());
+      $program->setGamejam($request->getGameJam());
+      $program->setGameJamSubmissionDate(TimeUtils::getDateTime());
     }
 
     $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
@@ -266,10 +226,18 @@ class ProgramManager
 
     $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
 
+    // Notifying the followers of the uploader that a new program of that user is available
+    $followers = $request->getUser()->getFollowers();
+
+    for ($i = 0; $i < $followers->count(); ++$i)
+    {
+      $notification = new NewProgramNotification($followers->get($i), $program);
+      $this->notification_service->addNotification($notification);
+    }
 
     try
     {
-      if ($extracted_file->getScreenshotPath() === null)
+      if (null === $extracted_file->getScreenshotPath())
       {
         // Todo: maybe for later implementations
       }
@@ -279,18 +247,20 @@ class ProgramManager
       }
 
       $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
-    } catch (Exception $e)
+    }
+    catch (Exception $e)
     {
-      $this->logger->error("UploadError -> saveProgramAssetsTemp failed!", ["exception" => $e->getMessage()]);
+      $this->logger->error('UploadError -> saveProgramAssetsTemp failed!', ['exception' => $e->getMessage()]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();
       try
       {
         $this->screenshot_repository->deleteTempFilesForProgram($program_id);
-      } catch (IOException $error)
+      }
+      catch (IOException $error)
       {
-        $this->logger->error("UploadError -> deleteTempFilesForProgram failed!", ["exception" => $error]);
+        $this->logger->error('UploadError -> deleteTempFilesForProgram failed!', ['exception' => $error]);
         throw $error;
       }
 
@@ -299,7 +269,7 @@ class ProgramManager
 
     try
     {
-      if ($extracted_file->getScreenshotPath() === null)
+      if (null === $extracted_file->getScreenshotPath())
       {
         // Todo: maybe for later implementations
       }
@@ -308,9 +278,10 @@ class ProgramManager
         $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
       }
       $this->file_repository->makeTempProgramPerm($program->getId());
-    } catch (Exception $e)
+    }
+    catch (Exception $e)
     {
-      $this->logger->error("UploadError -> makeTempProgramPerm failed!", ["exception" => $e]);
+      $this->logger->error('UploadError -> makeTempProgramPerm failed!', ['exception' => $e]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();
@@ -318,10 +289,11 @@ class ProgramManager
       {
         $this->screenshot_repository->deletePermProgramAssets($program_id);
         $this->file_repository->deleteProgramFile($program_id);
-      } catch (IOException $error)
+      }
+      catch (IOException $error)
       {
         $this->logger->error(
-          "UploadError -> deletePermProgramAssets or deleteProgramFile failed!", ["exception" => $e]
+          'UploadError -> deletePermProgramAssets or deleteProgramFile failed!', ['exception' => $e]
         );
         throw $error;
       }
@@ -339,103 +311,71 @@ class ProgramManager
   }
 
   /**
-   * @param $project_id
-   * @param $user_id
-   *
    * @return ProgramLike[]
    */
-  public function findUserLikes($project_id, $user_id)
+  public function findUserLikes(string $project_id, string $user_id)
   {
     return $this->program_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
   }
 
-  /**
-   * @param $project_id
-   *
-   * @return array
-   */
-  public function findProgramLikeTypes($project_id)
+  public function findProgramLikeTypes(string $project_id): array
   {
     return $this->program_like_repository->likeTypesOfProject($project_id);
   }
 
   /**
-   * @param Program $project
-   * @param User    $user
-   * @param         $type
-   * @param string  $action
-   *
    * @throws InvalidArgumentException
    * @throws ORMException
    */
-  public function changeLike(Program $project, User $user, $type, $action)
+  public function changeLike(Program $project, User $user, int $type, string $action): void
   {
-    if ($action === ProgramLike::ACTION_ADD)
+    if (ProgramLike::ACTION_ADD === $action)
     {
       $this->program_like_repository->addLike($project, $user, $type);
     }
-    elseif ($action === ProgramLike::ACTION_REMOVE)
+    elseif (ProgramLike::ACTION_REMOVE === $action)
     {
       $this->program_like_repository->removeLike($project, $user, $type);
     }
     else
     {
-      throw new InvalidArgumentException('Invalid action "' . $action . '"');
+      throw new InvalidArgumentException('Invalid action "'.$action.'"');
     }
   }
 
   /**
-   * @param Program $project
-   * @param User    $user
-   * @param         $type
-   *
-   * @return bool
+   * @throws NoResultException
    */
-  public function areThereOtherLikeTypes(Program $project, User $user, $type)
+  public function areThereOtherLikeTypes(Program $project, User $user, int $type): bool
   {
     try
     {
       return $this->program_like_repository->areThereOtherLikeTypes($project, $user, $type);
-    } catch (NonUniqueResultException $exception)
+    }
+    catch (NonUniqueResultException $exception)
     {
       return false;
     }
   }
 
-  /**
-   * @param $program_id
-   * @param $type
-   *
-   * @return mixed
-   */
-  public function likeTypeCount($program_id, $type)
+  public function likeTypeCount(string $program_id, int $type): int
   {
     return $this->program_like_repository->likeTypeCount($program_id, $type);
   }
 
-  /**
-   * @param $program_id
-   *
-   * @return mixed
-   */
-  public function totalLikeCount($program_id)
+  public function totalLikeCount(string $program_id): int
   {
     return $this->program_like_repository->totalLikeCount($program_id);
   }
 
   /**
-   * @param Program               $program
-   * @param ExtractedCatrobatFile $extracted_file
-   * @param                       $language
+   * @param mixed $language
    */
-  public function addTags(Program $program, ExtractedCatrobatFile $extracted_file, $language)
+  public function addTags(Program $program, ExtractedCatrobatFile $extracted_file, $language): void
   {
-    /**
-     * @var $db_tag Tag
-     */
     $metadata = $this->entity_manager->getClassMetadata(Tag::class)->getFieldNames();
 
-    if (!in_array($language, $metadata))
+    if (!in_array($language, $metadata, true))
     {
       $language = 'en';
     }
@@ -447,37 +387,36 @@ class ProgramManager
       $i = 0;
       foreach ($tags as $tag)
       {
+        /** @var Tag|null $db_tag */
         $db_tag = $this->tag_repository->findOneBy([$language => $tag]);
 
-        if ($db_tag !== null)
+        if (null !== $db_tag)
         {
           $program->addTag($db_tag);
-          $i++;
+          ++$i;
         }
 
-        if ($i === 3)
+        if (3 === $i)
         {
+          // Only 3 tags at once!
           break;
         }
       }
     }
   }
 
-
   /**
-   * @param Program               $program
-   * @param ExtractedCatrobatFile $extracted_file
+   * Adding the embroidery extension if an embroidery block was used in the project.
    */
-  public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file)
+  public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file): void
   {
-//     Adding the embroidery extension if an embroidery block was used in the project
-    $EMBROIDERY = "Embroidery";
-    if ($extracted_file !== null && $extracted_file->getProgramXmlProperties() !== null &&
-      strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">') !== false)
+    $EMBROIDERY = 'Embroidery';
+    if (null !== $extracted_file
+      && false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">'))
     {
-      /** @var Extension $embroidery_extension */
+      /** @var Extension|null $embroidery_extension */
       $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
-      if ($embroidery_extension === null)
+      if (null === $embroidery_extension)
       {
         $embroidery_extension = new Extension();
         $embroidery_extension->setName($EMBROIDERY);
@@ -486,20 +425,11 @@ class ProgramManager
       }
       $program->addExtension($embroidery_extension);
     }
-
   }
 
-  /**
-   * @param Program $program
-   */
-  public function removeAllTags(Program $program)
+  public function removeAllTags(Program $program): void
   {
-    /* @var $program Program */
     $tags = $program->getTags();
-    if ($tags === null)
-    {
-      return;
-    }
 
     foreach ($tags as $tag)
     {
@@ -511,21 +441,18 @@ class ProgramManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function markAllProgramsAsNotYetMigrated()
+  public function markAllProgramsAsNotYetMigrated(): void
   {
     $this->program_repository->markAllProgramsAsNotYetMigrated();
   }
 
   /**
-   * @param $program_name
-   * @param $user
-   *
-   * @return object|null
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @return Program|object|null
    */
-  public function findOneByNameAndUser($program_name, $user)
+  public function findOneByNameAndUser(string $program_name, UserInterface $user)
   {
     return $this->program_repository->findOneBy([
       'name' => $program_name,
@@ -534,109 +461,89 @@ class ProgramManager
   }
 
   /**
-   * @param $programName
-   *
-   * @return mixed
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @return Program|object|null
    */
-  public function findOneByName($programName)
+  public function findOneByName(string $programName)
   {
-    return $this->program_repository->findOneBy(["name" => $programName]);
+    return $this->program_repository->findOneBy(['name' => $programName]);
   }
 
   /**
-   * @param $array
-   *
-   * @return array|Program[]|StarterCategory[]
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findBy($array)
+  public function findBy(array $criteria, array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
-    return $this->program_repository->findBy($array);
+    return $this->program_repository->findBy($criteria, $orderBy, $limit, $offset);
+  }
+
+  public function getUserProjects(string $username, ?int $limit = 20, int $offset = 0, ?string $flavor = null, string $max_version = '0'): array
+  {
+    return $this->program_repository->getUserProjects(
+      $username, $limit, $offset, $flavor, $this->app_request->isDebugBuildRequest(), $max_version);
+  }
+
+  public function getUserProjectsCount(string $username, ?string $flavor = null, string $max_version = '0'): int
+  {
+    return $this->program_repository->getUserProjectsCount(
+      $username, $flavor, $this->app_request->isDebugBuildRequest(), $max_version);
   }
 
   /**
-   * @param GuidType $user_id
-   * @param bool     $include_debug_build_programs If programs marked as debug_build should be returned
-   * @param string   $max_version
-   *
    * @return Program[]
    */
-  public function getUserPrograms($user_id, bool $include_debug_build_programs = false, string $max_version = "0")
+  public function getUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0'): array
   {
-    $debug_build = ($include_debug_build_programs === true) ? true : $this->app_request->isDebugBuildRequest();
+    $debug_build = (true === $include_debug_build_programs) ? true : $this->app_request->isDebugBuildRequest();
 
     return $this->program_repository->getUserPrograms($user_id, $debug_build, $max_version);
   }
 
   /**
-   * @param        $user_id
-   * @param bool   $include_debug_build_programs If programs marked as debug_build should be returned
-   * @param string $max_version
-   *
    * @return Program[]
    */
-  public function getPublicUserPrograms($user_id, bool $include_debug_build_programs = false, string $max_version = "0")
+  public function getPublicUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0'): array
   {
-    $debug_build = ($include_debug_build_programs === true) ?
+    $debug_build = (true === $include_debug_build_programs) ?
       true : $this->app_request->isDebugBuildRequest();
 
     return $this->program_repository->getPublicUserPrograms($user_id, $debug_build, $max_version);
   }
 
   /**
-   * @return array
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findAll()
+  public function findAll(): array
   {
     return $this->program_repository->findAll();
   }
 
   /**
-   * @param $previous_program_id
+   * @throws NoResultException
+   * @throws NonUniqueResultException*@internal
+   *
+   * ATTENTION! Internal use only! (no visible/private/debug check)
    *
    * @return mixed
-   * @throws NonUniqueResultException
-   *
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findNext($previous_program_id)
+  public function findNext(string $previous_program_id)
   {
     return $this->program_repository->findNext($previous_program_id);
   }
 
   /**
-   * @param $id
-   *
-   * @return object|null
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @return Program|object|null
    */
-  public function find($id)
+  public function find(string $id)
   {
     return $this->program_repository->find($id);
-  }
-
-  /**
-   * @param $apk_status
-   *
-   * @return mixed
-   *
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
-   */
-  public function getProgramsWithApkStatus($apk_status)
-  {
-    return $this->program_repository->getProgramsWithApkStatus($apk_status);
   }
 
   /**
@@ -650,242 +557,176 @@ class ProgramManager
     return $this->program_repository->getProgramsWithExtractedDirectoryHash();
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   * @param string      $max_version
-   *
-   * @return Program[]
-   */
-  public function getRecentPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
+  public function getRecentPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                    string $max_version = '0'): array
   {
     return $this->program_repository->getRecentPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   * @param string      $max_version
-   *
-   * @return Program[]
-   */
-  public function getMostViewedPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
+  public function getRecentProgramsCount(string $flavor = null, string $max_version = '0'): int
+  {
+    return $this->program_repository->getRecentProgramsCount(
+      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
+    );
+  }
+
+  public function getMostViewedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                        string $max_version = '0'): array
   {
     return $this->program_repository->getMostViewedPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   *
-   * @return Program[]
-   */
-  public function getScratchRemixesPrograms($flavor, $limit = null, $offset = 0)
+  public function getExamplePrograms(?string $flavor = null, ?int $limit = null, int $offset = 0, string $max_version = '0'): array
   {
-    return $this->program_repository->getScratchRemixesPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
+    return $this->example_repository->getExamplePrograms(
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   * @param string      $max_version
-   *
-   * @return mixed
-   */
-  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
+  public function getExampleProgramsCount(?string $flavor = null, string $max_version = '0'): int
+  {
+    return $this->example_repository->getExampleProgramsCount(
+      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
+    );
+  }
+
+  public function getMostViewedProgramsCount(string $flavor = null, string $max_version = '0'): int
+  {
+    return $this->program_repository->getMostViewedProgramsCount(
+      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
+    );
+  }
+
+  public function getScratchRemixesPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                            string $max_version = '0'): array
+  {
+    return $this->program_repository->getScratchRemixesPrograms(
+      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
+    );
+  }
+
+  public function getScratchRemixesProgramsCount(string $flavor = null, string $max_version = '0'): int
+  {
+    return $this->program_repository->getScratchRemixesProgramsCount(
+      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
+    );
+  }
+
+  public function getMostDownloadedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                            string $max_version = '0'): array
   {
     return $this->program_repository->getMostDownloadedPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  /**
-   * @param string|null $flavor
-   * @param int|null    $limit
-   * @param int         $offset
-   * @param string      $max_version
-   *
-   * @return array
-   */
-  public function getRandomPrograms($flavor, $limit = null, $offset = 0, string $max_version = "0")
+  public function getMostDownloadedProgramsCount(string $flavor = null, string $max_version = '0'): int
+  {
+    return $this->program_repository->getMostDownloadedProgramsCount(
+      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
+    );
+  }
+
+  public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
+                                    string $max_version = '0'): array
   {
     return $this->program_repository->getRandomPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  /**
-   * @param string $query
-   * @param int    $limit
-   * @param int    $offset
-   * @param string $max_version
-   *
-   * @return array
-   * @throws Exception
-   */
-  public function search(string $query, $limit = 10, $offset = 0, string $max_version = "0")
+  public function getRandomProgramsCount(string $flavor = null, string $max_version = '0'): int
   {
-    return $this->program_repository->search(
-      $query, $this->app_request->isDebugBuildRequest(), $limit, $offset, $max_version
+    return $this->program_repository->getRandomProgramsCount(
+      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
     );
   }
 
-  /**
-   * @param string $query The query to search for (search terms)
-   * @param string $max_version
-   *
-   * @return int
-   */
-  public function searchCount(string $query, string $max_version = "0")
+  public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '0', ?string $flavor = null): array
   {
-    return $this->program_repository->searchCount($query, $this->app_request->isDebugBuildRequest(), $max_version);
+    return $this->program_repository->search(
+      $query, $this->app_request->isDebugBuildRequest(), $limit, $offset, $max_version, $flavor
+    );
+  }
+
+  public function searchCount(string $query, string $max_version = '0', ?string $flavor = null): int
+  {
+    return $this->program_repository->searchCount($query, $this->app_request->isDebugBuildRequest(), $max_version, $flavor);
   }
 
   /**
-   * @param        $flavor
-   * @param string $max_version
-   *
-   * @return int
+   * @throws NoResultException
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
    */
-  public function getTotalPrograms($flavor, string $max_version = "0")
+  public function getTotalPrograms(?string $flavor, string $max_version = '0'): int
   {
     return $this->program_repository->getTotalPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $max_version
     );
   }
 
-  /**
-   * @param Program $program
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function increaseViews(Program $program)
+  public function increaseViews(Program $program): void
   {
     $program->setViews($program->getViews() + 1);
     $this->save($program);
   }
 
-  /**
-   * @param Program $program
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function increaseDownloads(Program $program)
+  public function increaseDownloads(Program $program): void
   {
     $program->setDownloads($program->getDownloads() + 1);
     $this->save($program);
   }
 
-  /**
-   * @param Program $program
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function increaseApkDownloads(Program $program)
+  public function increaseApkDownloads(Program $program): void
   {
     $program->setApkDownloads($program->getApkDownloads() + 1);
     $this->save($program);
   }
 
-  /**
-   * @param Program $program
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
-  public function save(Program $program)
+  public function save(Program $program): void
   {
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
   }
 
-  /**
-   * @param          $id
-   * @param int|null $limit
-   * @param int      $offset
-   *
-   * @return Program[]
-   */
-  public function getProgramsByTagId($id, $limit, int $offset)
+  public function getProgramsByTagId(int $id, ?int $limit, int $offset): array
   {
     return $this->program_repository->getProgramsByTagId(
       $id, $this->app_request->isDebugBuildRequest(), $limit, $offset
     );
   }
 
-  /**
-   * @param string   $name
-   * @param int|null $limit
-   * @param int      $offset
-   *
-   * @return mixed
-   */
-  public function getProgramsByExtensionName(string $name, $limit, int $offset)
+  public function getProgramsByExtensionName(string $name, ?int $limit, int $offset): array
   {
     return $this->program_repository->getProgramsByExtensionName(
       $name, $this->app_request->isDebugBuildRequest(), $limit, $offset
     );
   }
 
-  /**
-   * @param string $query The query to search for (search terms)
-   *
-   * @return int
-   */
-  public function searchTagCount(string $query)
+  public function searchTagCount(string $query): int
   {
     return $this->program_repository->searchTagCount($query, $this->app_request->isDebugBuildRequest());
   }
 
-  /**
-   * @param string $query The query to search for (search terms)
-   *
-   * @return int
-   */
-  public function searchExtensionCount(string $query)
+  public function searchExtensionCount(string $query): int
   {
     return $this->program_repository->searchExtensionCount(
       $query, $this->app_request->isDebugBuildRequest()
     );
   }
 
-  /**
-   * @param          $id
-   * @param string   $flavor
-   * @param int|null $limit
-   * @param int      $offset
-   *
-   * @return array
-   */
-  public function getRecommendedProgramsById($id, string $flavor, $limit, int $offset)
+  public function getRecommendedProgramsById(string $id, string $flavor, ?int $limit, int $offset): array
   {
     return $this->program_repository->getRecommendedProgramsById(
       $id, $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
     );
   }
 
-  /**
-   * @param        $id
-   * @param string $flavor
-   *
-   * @return int
-   */
-  public function getRecommendedProgramsCount($id, string $flavor)
+  public function getRecommendedProgramsCount(string $id, string $flavor): int
   {
     return $this->program_repository->getRecommendedProgramsCount(
       $id, $this->app_request->isDebugBuildRequest(), $flavor
@@ -893,14 +734,9 @@ class ProgramManager
   }
 
   /**
-   * @param string   $flavor
-   * @param int|null $limit
-   * @param int      $offset
-   *
-   * @return array
    * @throws DBALException
    */
-  public function getMostRemixedPrograms(string $flavor, $limit, int $offset)
+  public function getMostRemixedPrograms(string $flavor, ?int $limit, int $offset): array
   {
     return $this->program_repository->getMostRemixedPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
@@ -908,88 +744,149 @@ class ProgramManager
   }
 
   /**
-   * @param string $flavor
-   *
-   * @return int
    * @throws DBALException
    */
-  public function getTotalRemixedProgramsCount(string $flavor)
+  public function getTotalRemixedProgramsCount(string $flavor): int
   {
     return $this->program_repository->getTotalRemixedProgramsCount(
       $this->app_request->isDebugBuildRequest(), $flavor
     );
   }
 
-  /**
-   * @param string   $flavor
-   * @param int|null $limit
-   * @param int      $offset
-   *
-   * @return array
-   */
-  public function getMostLikedPrograms(string $flavor, $limit, int $offset)
+  public function getMostLikedPrograms(string $flavor, ?int $limit, int $offset): array
   {
     return $this->program_repository->getMostLikedPrograms(
       $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
     );
   }
 
-  /**
-   * @param string $flavor
-   *
-   * @return int
-   */
-  public function getTotalLikedProgramsCount(string $flavor)
+  public function getTotalLikedProgramsCount(string $flavor): int
   {
     return $this->program_repository->getTotalLikedProgramsCount(
       $this->app_request->isDebugBuildRequest(), $flavor
     );
   }
 
-  /**
-   * @param string   $flavor
-   * @param Program  $program
-   * @param int|null $limit
-   * @param int      $offset
-   * @param bool     $is_test_environment
-   *
-   * @return array
-   */
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-    string $flavor, Program $program, $limit, int $offset, bool $is_test_environment
-  )
+    string $flavor, Program $program, ?int $limit, int $offset): array
   {
     return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-      $this->app_request->isDebugBuildRequest(), $flavor, $program, $limit, $offset, $is_test_environment
+      $this->app_request->isDebugBuildRequest(), $flavor, $program, $limit, $offset
     );
   }
 
-  /**
-   * @param string  $flavor
-   * @param Program $program
-   * @param bool    $is_test_environment
-   *
-   * @return int
-   */
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-    string $flavor, Program $program, bool $is_test_environment
-  )
+    string $flavor, Program $program): int
   {
     return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $program, $is_test_environment
+      $this->app_request->isDebugBuildRequest(), $flavor, $program
     );
   }
 
   /**
-   * @param $remix_migrated_at
-   *
-   * @return object|null
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @return Program|object|null
    */
-  public function findOneByRemixMigratedAt($remix_migrated_at)
+  public function findOneByRemixMigratedAt(?DateTime $remix_migrated_at)
   {
     return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
+  }
+
+  public function getUserPublicPrograms(string $user_id, ?int $limit = 20, int $offset = 0,
+                                        string $flavor = null, string $max_version = '0'): array
+  {
+    return $this->program_repository->getUserPublicPrograms(
+      $user_id, $this->app_request->isDebugBuildRequest(), $max_version, $limit, $offset, $flavor);
+  }
+
+  public function getUserPublicProgramsCount(string $user_id, string $flavor = null,
+                                             string $max_version = '0'): int
+  {
+    return $this->program_repository->getUserPublicProgramsCount(
+      $user_id, $this->app_request->isDebugBuildRequest(), $max_version, $flavor);
+  }
+
+  public function getScreenshotLarge(string $id): string
+  {
+    return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getScreenshotWebPath($id);
+  }
+
+  public function getScreenshotSmall(string $id): string
+  {
+    return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getThumbnailWebPath($id);
+  }
+
+  public function decodeToken(string $token): array
+  {
+    $tokenParts = explode('.', $token);
+    $tokenPayload = base64_decode($tokenParts[1], true);
+
+    return json_decode($tokenPayload, true);
+  }
+
+  public function getProjects(string $project_type, string $max_version = '0',
+                              int $limit = 20, int $offset = 0, string $flavor = null): array
+  {
+    switch ($project_type){
+      case 'recent':
+        return $this->getRecentPrograms($flavor, $limit, $offset, $max_version);
+      case 'random':
+        return $this->getRandomPrograms($flavor, $limit, $offset, $max_version);
+      case 'most_viewed':
+        return $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
+      case 'most_downloaded':
+        return $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
+      case 'example':
+        return $this->getExamplePrograms($flavor, $limit, $offset, $max_version);
+      case 'scratch':
+        return $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version);
+      default:
+        return [];
+    }
+  }
+
+  public function getProjectsCount(string $project_type, string $max_version = '0', string $flavor = null): int
+  {
+    switch ($project_type){
+      case 'recent':
+        return $this->getRecentProgramsCount($flavor, $max_version);
+      case 'random':
+        return $this->getRandomProgramsCount($flavor, $max_version);
+      case 'most_viewed':
+        return $this->getMostViewedProgramsCount($flavor, $max_version);
+      case 'most_downloaded':
+        return $this->getMostDownloadedProgramsCount($flavor, $max_version);
+      case 'example':
+        return $this->getExampleProgramsCount($flavor, $max_version);
+      case 'scratch':
+        return $this->getScratchRemixesProgramsCount($flavor, $max_version);
+      default:
+        return 0;
+    }
+  }
+
+  public function parseAcceptLanguage(string $acceptLanguage): array
+  {
+    $prefLocales = array_reduce(
+      explode(',', $acceptLanguage),
+      function ($res, $el)
+      {
+        [$l, $q] = array_merge(explode(';q=', $el), [1]);
+        array_push($res, $l);
+
+        return $res;
+      }, []);
+    arsort($prefLocales);
+
+    return $prefLocales;
+  }
+
+  public function getProgram(string $id): array
+  {
+    return $this->program_repository->getProgram(
+      $id, $this->app_request->isDebugBuildRequest()
+    );
   }
 }

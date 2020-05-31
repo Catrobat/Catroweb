@@ -2,52 +2,28 @@
 
 namespace App\Catrobat\Listeners;
 
-use App\Entity\Extension;
-use App\Repository\ExtensionRepository;
 use App\Catrobat\Events\ProgramBeforePersistEvent;
 use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Entity\Extension;
 use App\Entity\Program;
+use App\Repository\ExtensionRepository;
 
-
-/**
- * Class ProgramExtensionListener
- * @package App\Catrobat\Listeners
- */
 class ProgramExtensionListener
 {
-  /**
-   * @var ExtensionRepository
-   */
-  private $extension_repository;
+  private ExtensionRepository $extension_repository;
 
-  /**
-   * ProgramExtensionListener constructor.
-   *
-   * @param ExtensionRepository $repo
-   */
   public function __construct(ExtensionRepository $repo)
   {
     $this->extension_repository = $repo;
   }
 
-  /**
-   * @param ProgramBeforePersistEvent $event
-   */
-  public function onEvent(ProgramBeforePersistEvent $event)
+  public function onEvent(ProgramBeforePersistEvent $event): void
   {
     $this->checkExtension($event->getExtractedFile(), $event->getProgramEntity());
   }
 
-  /**
-   * @param ExtractedCatrobatFile $extracted_file
-   * @param Program               $program
-   */
-  public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program)
+  public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program): void
   {
-    /**
-     * @var $extension Extension
-     */
-
     $xml = $extracted_file->getProgramXmlProperties();
 
     $xpath = '//@category';
@@ -60,33 +36,32 @@ class ProgramExtensionListener
       return;
     }
 
-    $prefixes = array_map(function ($element) {
-      return explode("_", $element['category'], 2)[0];
-    }, $nodes);
+    $prefixes = array_map(fn ($element) => explode('_', $element['category'], 2)[0], $nodes);
     $prefixes = array_unique($prefixes);
 
     $extensions = $this->extension_repository->findAll();
 
+    /** @var Extension $extension */
     foreach ($extensions as $extension)
     {
-      if (in_array($extension->getPrefix(), $prefixes))
+      if (in_array($extension->getPrefix(), $prefixes, true))
       {
         $program->addExtension($extension);
 
-        if ($extension->getPrefix() == 'PHIRO')
+        if ('PHIRO' == $extension->getPrefix())
         {
           $program->setFlavor('phirocode');
         }
       }
 
-      if (strcmp($extension->getPrefix(), 'CHROMECAST') == 0)
+      if (0 == strcmp($extension->getPrefix(), 'CHROMECAST'))
       {
         $is_cast = $xml->xpath('header/isCastProject');
 
         if (!empty($is_cast))
         {
-          $cast_value = ((array)$is_cast[0]);
-          if (strcmp($cast_value[0], 'true') == 0)
+          $cast_value = ((array) $is_cast[0]);
+          if (0 == strcmp($cast_value[0], 'true'))
           {
             $program->addExtension($extension);
           }

@@ -1,19 +1,12 @@
-@import '../../../public/bootstrap_vendor/scss/functions';
+@import '../../../public/bootstrap/scss/functions';
 @import '../base/variables';
-@import '../../../public/bootstrap_vendor/scss/variables';
-@import '../../../public/bootstrap_vendor/scss/mixins';
+@import '../../../public/bootstrap/scss/variables';
+@import '../../../public/bootstrap/scss/mixins';
 @import 'theme_settings';
 
-h1 {
-  text-align: center;
-}
 
 #featuredPrograms {
   margin-bottom: 25px;
-
-  h1 {
-    margin-bottom: 25px;
-  }
 }
 
 #recommended {
@@ -22,11 +15,7 @@ h1 {
 
 .visited-program {
   opacity: 0.6;
-  a {
-    color: $primary;
-  }
 }
-
 
 // feature bootstrap carousel
 $carousel-indicator-size: 1em;

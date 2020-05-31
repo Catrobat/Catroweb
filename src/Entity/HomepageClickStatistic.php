@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,191 +16,136 @@ class HomepageClickStatistic
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=false)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=false)
    */
-  protected $type;
+  protected string $type = '';
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-   * @var Program
    */
-  protected $program;
+  protected ?Program $program = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $clicked_at;
+  protected ?DateTime $clicked_at = null;
 
   /**
-   * @ORM\Column(type="text", options={"default":""})
+   * @ORM\Column(type="text", options={"default": ""})
    */
-  protected $ip;
+  protected string $ip = '';
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $locale;
+  protected ?string $locale = null;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
-  protected $user_agent;
+  protected ?string $user_agent = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  protected $user;
+  protected ?User $user = null;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
-  protected $referrer;
+  protected ?string $referrer = null;
 
-  /**
-   * @return Program
-   */
-  public function getProgram()
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
 
-  /**
-   * @param Program $program
-   */
-  public function setProgram($program)
+  public function setProgram(?Program $program): void
   {
     $this->program = $program;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getIp()
+  public function getIp(): string
   {
     return $this->ip;
   }
 
-  /**
-   * @param mixed $ip
-   */
-  public function setIp($ip)
+  public function setIp(string $ip): void
   {
     $this->ip = $ip;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getLocale()
+  public function getLocale(): ?string
   {
     return $this->locale;
   }
 
-  /**
-   * @param mixed $locale
-   */
-  public function setLocale($locale)
+  public function setLocale(?string $locale): void
   {
     $this->locale = $locale;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUserAgent()
+  public function getUserAgent(): ?string
   {
     return $this->user_agent;
   }
 
-  /**
-   * @param mixed $user_agent
-   */
-  public function setUserAgent($user_agent)
+  public function setUserAgent(?string $user_agent): void
   {
     $this->user_agent = $user_agent;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUser()
+  public function getUser(): ?User
   {
     return $this->user;
   }
 
-  /**
-   * @param mixed $user
-   */
-  public function setUser($user)
+  public function setUser(?User $user): void
   {
     $this->user = $user;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getReferrer()
+  public function getReferrer(): ?string
   {
     return $this->referrer;
   }
 
-  /**
-   * @param mixed $referrer
-   */
-  public function setReferrer($referrer)
+  public function setReferrer(?string $referrer): void
   {
     $this->referrer = $referrer;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getType()
+  public function getType(): string
   {
     return $this->type;
   }
 
-  /**
-   * @param mixed $type
-   */
-  public function setType($type)
+  public function setType(string $type): void
   {
     $this->type = $type;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getClickedAt()
+  public function getClickedAt(): ?DateTime
   {
     return $this->clicked_at;
   }
 
-  /**
-   * @param mixed $clicked_at
-   */
-  public function setClickedAt($clicked_at)
+  public function setClickedAt(DateTime $clicked_at): void
   {
     $this->clicked_at = $clicked_at;
   }

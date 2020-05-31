@@ -2,24 +2,24 @@
 
 namespace App\Catrobat\Services;
 
-/**
- * Class TokenGenerator
- * @package App\Catrobat\Services
- */
+use Exception;
+
 class TokenGenerator
 {
   /**
    * TokenGenerator constructor.
+   *
+   * @deprecated use JWT tokens
    */
   public function __construct()
   {
   }
 
   /**
-   * @return string
+   * @throws Exception
    */
-  public function generateToken()
+  public function generateToken(): string
   {
-    return md5(uniqid(rand(), false));
+    return md5(uniqid((string) random_int(0, mt_getrandmax()), false));
   }
 }

@@ -2,52 +2,28 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-
-/**
- * Class LogLine
- * @package App\Catrobat\Controller\Admin
- */
 class LogLine
 {
+  public string $date = '';
 
-  /**
-   * @var string
-   */
-  public $date = "";
+  public string $debug_code = '';
 
-  /**
-   * @var string
-   */
-  public $debug_code = "";
+  public int $debug_level = 0;
 
-  /**
-   * @var int
-   */
-  public $debug_level = 0;
+  public string $msg = '';
 
-  /**
-   * @var string
-   */
-  public $msg = "";
-
-
-  /**
-   * LogLine constructor.
-   *
-   * @param null $line
-   */
-  public function __construct($line = null)
+  public function __construct(string $line = null)
   {
-    if ($line === null)
+    if (null === $line)
     {
-      $this->msg = "No Logs with Loglevel";
-      $this->debug_code = "No search results";
+      $this->msg = 'No Logs with Loglevel';
+      $this->debug_code = 'No search results';
     }
     else
     {
-      $this->date = $this->getSubstring($line, "]", true);
+      $this->date = $this->getSubstring($line, ']', true);
       $line = substr($line, strlen($this->date) + 1);
-      $this->debug_code = $this->getSubstring($line, ":");
+      $this->debug_code = $this->getSubstring($line, ':');
       $line = substr($line, strlen($this->debug_code) + 2);
       $this->msg = $line;
 
@@ -55,39 +31,25 @@ class LogLine
     }
   }
 
-
-  /**
-   * @param      $string
-   * @param      $needle
-   * @param bool $last_char
-   *
-   * @return bool|string
-   */
-  private function getSubstring($string, $needle, $last_char = false)
+  private function getSubstring(string $string, string $needle, bool $last_char = false): string
   {
-    $pos = strpos($string, $needle);
+    $pos = strpos($string, (string) $needle);
 
-    if ($pos === false)
+    if (false === $pos)
     {
-      return "";
+      return '';
     }
     if ($last_char)
     {
-      $pos = $pos + 1;
+      ++$pos;
     }
 
     return substr($string, 0, $pos);
   }
 
-
-  /**
-   * @param $string
-   *
-   * @return int
-   */
-  private function getDebugLevel($string)
+  private function getDebugLevel(string $string): int
   {
-    $pos = strpos($string, ".");
+    $pos = strpos($string, '.');
     $extracted_string = substr($string, $pos + 1);
 
     switch ($extracted_string)

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,298 +16,213 @@ class ProgramDownloads
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program_downloads")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
-   * @var Program
    */
-  protected $program;
+  protected Program $program;
 
   /**
    * @ORM\Column(type="integer", nullable=true)
    */
-  protected $recommended_by_page_id;
+  protected ?int $recommended_by_page_id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
    * @ORM\JoinColumn(name="recommended_by_program_id", referencedColumnName="id", nullable=true)
    */
-  protected $recommended_by_program;
+  protected ?Program $recommended_by_program = null;
 
   /**
-   * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+   * @ORM\Column(type="boolean", options={"default": false}, nullable=true)
    */
-  protected $user_specific_recommendation = false;
+  protected bool $user_specific_recommendation = false;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
    * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
    */
-  protected $recommended_from_program_via_tag;
+  protected ?Program $recommended_from_program_via_tag = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $downloaded_at;
+  protected ?DateTime $downloaded_at = null;
 
   /**
-   * @ORM\Column(type="text", options={"default":""})
+   * @ORM\Column(type="text", options={"default": ""})
    */
-  protected $ip;
+  protected string $ip = '';
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=true)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
-  protected $country_code;
+  protected ?string $country_code = '';
 
   /**
-   * @ORM\Column(type="text", options={"default":""}, nullable=true)
+   * @ORM\Column(type="text", options={"default": ""}, nullable=true)
    */
-  protected $country_name;
+  protected ?string $country_name = '';
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $locale;
+  protected ?string $locale = null;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
-  protected $user_agent;
+  protected ?string $user_agent = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  protected $user;
+  protected ?User $user = null;
 
   /**
-   * @ORM\Column(type="string", options={"default":""}, nullable=true)
+   * @ORM\Column(type="string", options={"default": ""}, nullable=true)
    */
-  protected $referrer;
+  protected ?string $referrer = null;
 
-  /**
-   * @return mixed
-   */
-  public function getProgram()
+  public function getProgram(): Program
   {
     return $this->program;
   }
 
-  /**
-   * @param mixed $program
-   */
-  public function setProgram($program)
+  public function setProgram(Program $program): void
   {
     $this->program = $program;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getRecommendedFromProgramViaTag()
+  public function getRecommendedFromProgramViaTag(): ?Program
   {
     return $this->recommended_from_program_via_tag;
   }
 
-  /**
-   * @param mixed $recommended_from_program_via_tag
-   */
-  public function setRecommendedFromProgramViaTag($recommended_from_program_via_tag)
+  public function setRecommendedFromProgramViaTag(?Program $recommended_from_program_via_tag): void
   {
     $this->recommended_from_program_via_tag = $recommended_from_program_via_tag;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getDownloadedAt()
+  public function getDownloadedAt(): ?DateTime
   {
     return $this->downloaded_at;
   }
 
-  /**
-   * @param mixed $downloaded_at
-   */
-  public function setDownloadedAt($downloaded_at)
+  public function setDownloadedAt(?DateTime $downloaded_at): void
   {
     $this->downloaded_at = $downloaded_at;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getIp()
+  public function getIp(): string
   {
     return $this->ip;
   }
 
-  /**
-   * @param mixed $ip
-   */
-  public function setIp($ip)
+  public function setIp(string $ip): void
   {
     $this->ip = $ip;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCountryCode()
+  public function getCountryCode(): ?string
   {
     return $this->country_code;
   }
 
-  /**
-   * @param mixed $country_code
-   */
-  public function setCountryCode($country_code)
+  public function setCountryCode(?string $country_code): void
   {
     $this->country_code = $country_code;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCountryName()
+  public function getCountryName(): ?string
   {
     return $this->country_name;
   }
 
-  /**
-   * @param mixed $country_name
-   */
-  public function setCountryName($country_name)
+  public function setCountryName(?string $country_name): void
   {
     $this->country_name = $country_name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getLocale()
+  public function getLocale(): ?string
   {
     return $this->locale;
   }
 
-  /**
-   * @param mixed $locale
-   */
-  public function setLocale($locale)
+  public function setLocale(?string $locale): void
   {
     $this->locale = $locale;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUserAgent()
+  public function getUserAgent(): ?string
   {
     return $this->user_agent;
   }
 
-  /**
-   * @param mixed $user_agent
-   */
-  public function setUserAgent($user_agent)
+  public function setUserAgent(?string $user_agent): void
   {
     $this->user_agent = $user_agent;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getUser()
+  public function getUser(): ?User
   {
     return $this->user;
   }
 
-  /**
-   * @param mixed $user
-   */
-  public function setUser($user)
+  public function setUser(?User $user): void
   {
     $this->user = $user;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getReferrer()
+  public function getReferrer(): ?string
   {
     return $this->referrer;
   }
 
-  /**
-   * @return int
-   */
-  public function getRecommendedByPageId()
+  public function getRecommendedByPageId(): ?int
   {
     return $this->recommended_by_page_id;
   }
 
-  /**
-   * @param int $recommended_by_page_id
-   */
-  public function setRecommendedByPageId($recommended_by_page_id)
+  public function setRecommendedByPageId(int $recommended_by_page_id): void
   {
     $this->recommended_by_page_id = $recommended_by_page_id;
   }
 
-  /**
-   * @return Program
-   */
-  public function getRecommendedByProgram()
+  public function getRecommendedByProgram(): ?Program
   {
     return $this->recommended_by_program;
   }
 
-  /**
-   * @param Program $recommended_by_program
-   */
-  public function setRecommendedByProgram($recommended_by_program)
+  public function setRecommendedByProgram(Program $recommended_by_program): void
   {
     $this->recommended_by_program = $recommended_by_program;
   }
 
-  /**
-   * @return bool
-   */
-  public function getUserSpecificRecommendation()
+  public function getUserSpecificRecommendation(): bool
   {
     return $this->user_specific_recommendation;
   }
 
-  /**
-   * @param bool $is_user_specific_recommendation
-   */
-  public function setUserSpecificRecommendation($is_user_specific_recommendation)
+  public function setUserSpecificRecommendation(bool $is_user_specific_recommendation): void
   {
     $this->user_specific_recommendation = $is_user_specific_recommendation;
   }
 
-  /**
-   * @param mixed $referrer
-   */
-  public function setReferrer($referrer)
+  public function setReferrer(?string $referrer): void
   {
     $this->referrer = $referrer;
   }

@@ -2,22 +2,27 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class ReplaceItemInUserListStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class ReplaceItemInUserListStatement extends BaseUserListStatement
 {
-  const BEGIN_STRING = "replace item in userlist ";
-  const MIDDLE_STRING = "(";
-  const END_STRING = ")<br/>";
+  /**
+   * @var string
+   */
+  const BEGIN_STRING = 'replace item in userlist ';
+  /**
+   * @var string
+   */
+  const MIDDLE_STRING = '(';
+  /**
+   * @var string
+   */
+  const END_STRING = ')<br/>';
 
   /**
    * ReplaceItemInUserListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -27,10 +32,7 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $list_variable_name = $this->xmlTree->userList->name;
     $formula_string_index = null;
@@ -40,7 +42,7 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
     {
       if ($statement instanceof FormulaStatement)
       {
-        if ($statement->getCategory() === 'REPLACE_ITEM_IN_USERLIST_INDEX')
+        if ('REPLACE_ITEM_IN_USERLIST_INDEX' === $statement->getCategory())
         {
           $formula_string_index = $statement->execute();
         }
@@ -51,18 +53,16 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
       }
     }
 
-    $formula_str_index_no_markup = $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string_index);
-    $formula_str_value_no_markup = $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string_value);
+    $formula_str_index_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
+    $formula_str_value_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
 
-    return "Replace item in list " . $list_variable_name . " at position " . $formula_str_index_no_markup . " with " . $formula_str_value_no_markup;
+    return 'Replace item in list '.$list_variable_name.' at position '.$formula_str_index_no_markup.' with '.$formula_str_value_no_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
-    return "1h_brick_red.png";
+    return '1h_brick_red.png';
   }
-
 }

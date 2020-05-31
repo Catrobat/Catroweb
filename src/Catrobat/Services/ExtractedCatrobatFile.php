@@ -7,256 +7,195 @@ use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
 use App\Repository\ProgramRepository;
-use Doctrine\DBAL\Types\GuidType;
 use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
-
-/**
- * Class ExtractedCatrobatFile
- * @package App\Catrobat\Services
- */
 class ExtractedCatrobatFile
 {
-  /**
-   * @var
-   */
-  protected $path;
+  protected string $path;
 
-  /**
-   * @var
-   */
-  protected $web_path;
+  protected string $web_path;
 
-  /**
-   * @var
-   */
-  protected $dir_hash;
+  protected ?string $dir_hash;
 
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $program_xml_properties;
+  protected SimpleXMLElement $program_xml_properties;
 
-  /**
-   * ExtractedCatrobatFile constructor.
-   *
-   * @param $base_dir
-   * @param $base_path
-   * @param $dir_hash
-   */
-  public function __construct($base_dir, $base_path, $dir_hash)
+  public function __construct(string $base_dir, string $base_path, ?string $dir_hash)
   {
     $this->path = $base_dir;
     $this->dir_hash = $dir_hash;
     $this->web_path = $base_path;
 
-    if (!file_exists($base_dir . 'code.xml'))
+    if (!file_exists($base_dir.'code.xml'))
     {
       throw new MissingXmlException();
     }
 
-    $content = file_get_contents($base_dir . 'code.xml');
-    if ($content === false)
+    $content = file_get_contents($base_dir.'code.xml');
+    if (!$content)
     {
       throw new InvalidXmlException();
     }
     $content = str_replace('&#x0;', '', $content, $count);
-    $this->program_xml_properties = @simplexml_load_string($content);
-    if ($this->program_xml_properties === false)
+    $xml = @simplexml_load_string($content);
+    if (!$xml)
     {
       throw new InvalidXmlException();
     }
+    $this->program_xml_properties = $xml;
   }
 
-  /**
-   * @return string
-   */
-  public function getName()
+  public function getName(): string
   {
-    return (string)$this->program_xml_properties->header->programName;
+    return (string) $this->program_xml_properties->header->programName;
   }
 
-  /**
-   * @return string
-   */
-  public function isDebugBuild()
+  public function isDebugBuild(): bool
   {
     if (!isset($this->program_xml_properties->header->applicationBuildType))
     {
       return false; // old program do not have this field, + they should be release programs
     }
 
-    return (string)$this->program_xml_properties->header->applicationBuildType === "debug";
+    return 'debug' === (string) $this->program_xml_properties->header->applicationBuildType;
   }
 
-  /**
-   * @return string
-   */
-  public function getLanguageVersion()
+  public function getLanguageVersion(): string
   {
-    return (string)$this->program_xml_properties->header->catrobatLanguageVersion;
+    return (string) $this->program_xml_properties->header->catrobatLanguageVersion;
   }
 
-  /**
-   * @return string
-   */
-  public function getDescription()
+  public function getDescription(): string
   {
-    return (string)$this->program_xml_properties->header->description;
+    return (string) $this->program_xml_properties->header->description;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getDirHash()
+  public function getDirHash(): ?string
   {
     return $this->dir_hash;
   }
 
-  /**
-   * @return array
-   */
-  public function getTags()
+  public function getTags(): array
   {
-    $tags = (string)$this->program_xml_properties->header->tags;
+    $tags = (string) $this->program_xml_properties->header->tags;
     if (strlen($tags) > 0)
     {
-      return explode(',', (string)$this->program_xml_properties->header->tags);
+      return explode(',', (string) $this->program_xml_properties->header->tags);
     }
 
     return [];
   }
 
-  /**
-   * @return array
-   */
-  public function getContainingImagePaths()
+  public function getContainingImagePaths(): array
   {
     $finder = new Finder();
     $file_paths = [];
 
     if ($this->hasScenes())
     {
-      $dir_regex = $this->path . '/*/images/';
-      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, "/images");
+      $dir_regex = $this->path.'/*/images/';
+      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/images');
       $finder->files()->in($dir_regex);
       foreach ($finder as $file)
       {
-        $parts = explode($this->dir_hash . '/', $file->getRealPath());
-        $file_paths[] = '/' . $this->web_path . $parts[1];
+        $parts = explode($this->dir_hash.'/', $file->getRealPath());
+        $file_paths[] = '/'.$this->web_path.$parts[1];
       }
     }
     else
     {
-      $directory = $this->path . 'images/';
+      $directory = $this->path.'images/';
       $this->createDirectoryIfNotExist($directory);
       $finder->files()->in($directory);
       foreach ($finder as $file)
       {
-        $file_paths[] = '/' . $this->web_path . 'images/' . $file->getFilename();
+        $file_paths[] = '/'.$this->web_path.'images/'.$file->getFilename();
       }
     }
 
     return $file_paths;
   }
 
-  /**
-   * @param $filename
-   *
-   * @return bool
-   */
-  public function isFileMentionedInXml($filename)
+  public function isFileMentionedInXml(string $filename): bool
   {
-    $xml = file_get_contents($this->path . 'code.xml');
+    $xml = file_get_contents($this->path.'code.xml');
 
-    return strpos($xml, $filename) !== false;
+    return false !== strpos($xml, (string) $filename);
   }
 
-
-  /**
-   * @return array
-   */
-  public function getContainingSoundPaths()
+  public function getContainingSoundPaths(): array
   {
     $finder = new Finder();
     $file_paths = [];
 
     if ($this->hasScenes())
     {
-      $dir_regex = $this->path . '/*/sounds/';
-      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, "/sounds");
+      $dir_regex = $this->path.'/*/sounds/';
+      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/sounds');
       $finder->files()->in($dir_regex);
       foreach ($finder as $file)
       {
-        $parts = explode($this->dir_hash . '/', $file->getRealPath());
-        $file_paths[] = '/' . $this->web_path . $parts[1];
+        $parts = explode($this->dir_hash.'/', $file->getRealPath());
+        $file_paths[] = '/'.$this->web_path.$parts[1];
       }
     }
     else
     {
-      $directory = $this->path . 'sounds/';
+      $directory = $this->path.'sounds/';
       $this->createDirectoryIfNotExist($directory);
       $finder->files()->in($directory);
       foreach ($finder as $file)
       {
-        $file_paths[] = '/' . $this->web_path . 'sounds/' . $file->getFilename();
+        $file_paths[] = '/'.$this->web_path.'sounds/'.$file->getFilename();
       }
     }
 
     return $file_paths;
   }
 
-  /**
-   * @return array
-   */
-  public function getContainingStrings()
+  public function getContainingStrings(): array
   {
-    $xml = file_get_contents($this->path . 'code.xml');
+    $xml = file_get_contents($this->path.'code.xml');
     $matches = [];
     preg_match_all('#>(.*[a-zA-Z].*)<#', $xml, $matches);
 
     return array_unique($matches[1]);
   }
 
-  /**
-   * @return string|null
-   */
-  public function getScreenshotPath()
+  public function getScreenshotPath(): ?string
   {
-    /**
-     * @var $file File
-     */
     $screenshot_path = null;
-    if (is_file($this->path . 'screenshot.png'))
+    if (is_file($this->path.'screenshot.png'))
     {
-      $screenshot_path = $this->path . 'screenshot.png';
+      $screenshot_path = $this->path.'screenshot.png';
     }
-    elseif (is_file($this->path . 'manual_screenshot.png'))
+    elseif (is_file($this->path.'manual_screenshot.png'))
     {
-      $screenshot_path = $this->path . 'manual_screenshot.png';
+      $screenshot_path = $this->path.'manual_screenshot.png';
     }
-    elseif (is_file($this->path . 'automatic_screenshot.png'))
+    elseif (is_file($this->path.'automatic_screenshot.png'))
     {
-      $screenshot_path = $this->path . 'automatic_screenshot.png';
+      $screenshot_path = $this->path.'automatic_screenshot.png';
     }
     $finder = new Finder();
-    //$finder->in($this->path->getPath())->directories()->name("automatic_screenshot.png")
-    if ($screenshot_path === null)
-    {
-      $fu = $finder->in($this->path)->files()->name("manual_screenshot.png");
 
+    if (null === $screenshot_path)
+    {
+      $fu = $finder->in($this->path)->files()->name('manual_screenshot.png');
+
+      /** @var File $file */
       foreach ($fu as $file)
       {
         $screenshot_path = $file->getPathname();
         break;
       }
     }
-    if ($screenshot_path === null)
+    if (null === $screenshot_path)
     {
-      $fu = $finder->in($this->path)->files()->name("automatic_screenshot.png");
+      $fu = $finder->in($this->path)->files()->name('automatic_screenshot.png');
 
+      /** @var File $file */
       foreach ($fu as $file)
       {
         $screenshot_path = $file->getPathname();
@@ -267,136 +206,102 @@ class ExtractedCatrobatFile
     return $screenshot_path;
   }
 
-  /**
-   * @return string
-   */
-  public function getApplicationVersion()
+  public function getApplicationVersion(): string
   {
-    return (string)$this->program_xml_properties->header->applicationVersion;
+    return (string) $this->program_xml_properties->header->applicationVersion;
   }
 
-  /**
-   * @return string
-   */
-  public function getRemixUrlsString()
+  public function getRemixUrlsString(): string
   {
-    return trim((string)$this->program_xml_properties->header->url);
+    return trim((string) $this->program_xml_properties->header->url);
   }
 
-  /**
-   * @return string
-   */
-  public function getRemixMigrationUrlsString()
+  public function getRemixMigrationUrlsString(): string
   {
-    return trim((string)$this->program_xml_properties->header->remixOf);
+    return trim((string) $this->program_xml_properties->header->remixOf);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPath()
+  public function getPath(): string
   {
     return $this->path;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getWebPath()
+  public function getWebPath(): string
   {
     return $this->web_path;
   }
 
-  /**
-   * @return SimpleXMLElement
-   */
-  public function getProgramXmlProperties()
+  public function getProgramXmlProperties(): SimpleXMLElement
   {
     return $this->program_xml_properties;
   }
 
-  /**
-   *
-   */
-  public function saveProgramXmlProperties()
+  public function saveProgramXmlProperties(): void
   {
-    $this->program_xml_properties->asXML($this->path . 'code.xml');
+    $this->program_xml_properties->asXML($this->path.'code.xml');
 
-    $xml_string = file_get_contents($this->path . 'code.xml');
+    $xml_string = file_get_contents($this->path.'code.xml');
 
-    $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;ANYTHING<\/receivedMessage>/',
+    $xml_string = preg_replace('#<receivedMessage>(.*)&lt;-&gt;ANYTHING<\/receivedMessage>#',
       '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>', $xml_string);
 
-    $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;(.*)<\/receivedMessage>/',
+    $xml_string = preg_replace('#<receivedMessage>(.*)&lt;-&gt;(.*)<\/receivedMessage>#',
       '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;$2</receivedMessage>', $xml_string);
 
-    if ($xml_string != null)
+    if (null != $xml_string)
     {
-      file_put_contents($this->path . 'code.xml', $xml_string);
+      file_put_contents($this->path.'code.xml', $xml_string);
     }
   }
 
   /**
-   * based on: http://stackoverflow.com/a/27295688
-   *
-   * @param GuidType          $program_id
-   * @param boolean           $is_initial_version
-   * @param ProgramRepository $program_repository
-   * @param bool              $migration_mode
-   *
-   * @return RemixData[]
+   * based on: http://stackoverflow.com/a/27295688.
    */
-  public function getRemixesData($program_id, $is_initial_version, $program_repository, $migration_mode = false)
+  public function getRemixesData(string $program_id, bool $is_initial_version, ProgramRepository $program_repository, bool $migration_mode = false): array
   {
     $remixes_string = $migration_mode ? $this->getRemixMigrationUrlsString() : $this->getRemixUrlsString();
     $state = RemixUrlParsingState::STARTING;
     $extracted_remixes = [];
     $temp = '';
 
-    for ($index = 0; $index < strlen($remixes_string); $index++)
+    for ($index = 0; $index < strlen($remixes_string); ++$index)
     {
       $current_character = $remixes_string[$index];
 
-      if ($current_character == RemixUrlIndicator::PREFIX_INDICATOR)
+      if (RemixUrlIndicator::PREFIX_INDICATOR == $current_character)
       {
-        if ($state == RemixUrlParsingState::STARTING)
+        if (RemixUrlParsingState::STARTING == $state)
         {
           $state = RemixUrlParsingState::BETWEEN;
         }
-        else
+        elseif (RemixUrlParsingState::TOKEN == $state)
         {
-          if ($state == RemixUrlParsingState::TOKEN)
+          $temp = '';
+          $state = RemixUrlParsingState::BETWEEN;
+        }
+      }
+      elseif (RemixUrlIndicator::SUFFIX_INDICATOR == $current_character)
+      {
+        if (RemixUrlParsingState::TOKEN == $state)
+        {
+          $extracted_url = trim($temp);
+          if (false === strpos($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0)
           {
-            $temp = '';
-            $state = RemixUrlParsingState::BETWEEN;
+            $extracted_remixes[] = new RemixData($extracted_url);
           }
+          $temp = '';
+          $state = RemixUrlParsingState::BETWEEN;
         }
       }
       else
       {
-        if ($current_character == RemixUrlIndicator::SUFFIX_INDICATOR)
-        {
-          if ($state == RemixUrlParsingState::TOKEN)
-          {
-            $extracted_url = trim($temp);
-            if (strpos($extracted_url, RemixUrlIndicator::SEPARATOR) === false && strlen($extracted_url) > 0)
-            {
-              $extracted_remixes[] = new RemixData($extracted_url);
-            }
-            $temp = '';
-            $state = RemixUrlParsingState::BETWEEN;
-          }
-        }
-        else
-        {
-          $state = RemixUrlParsingState::TOKEN;
-          $temp .= $current_character;
-        }
+        $state = RemixUrlParsingState::TOKEN;
+        $temp .= $current_character;
       }
     }
 
-    if (count($extracted_remixes) == 0 && strlen($remixes_string) > 0 &&
-      strpos($remixes_string, RemixUrlIndicator::SEPARATOR) === false)
+    if (0 == count($extracted_remixes) && strlen($remixes_string) > 0 &&
+      false === strpos($remixes_string, RemixUrlIndicator::SEPARATOR))
     {
       $extracted_remixes[] = new RemixData($remixes_string);
     }
@@ -405,7 +310,7 @@ class ExtractedCatrobatFile
     foreach ($extracted_remixes as $remix_data)
     {
       /** @var RemixData $remix_data */
-      if ($remix_data->getProgramId() === "")
+      if ('' === $remix_data->getProgramId())
       {
         continue;
       }
@@ -426,13 +331,13 @@ class ExtractedCatrobatFile
         $parent = null;
         $child = null;
 
-        if ($program_repository !== null)
+        if (null !== $program_repository)
         {
           $parent = $program_repository->find($remix_data->getProgramId());
           $child = $program_repository->find($program_id);
         }
 
-        if ($parent !== null && $child !== null)
+        if (null !== $parent && null !== $child)
         {
           $parent_upload_time = $parent->getUploadedAt();
           $child_upload_time = $child->getUploadedAt();
@@ -445,7 +350,7 @@ class ExtractedCatrobatFile
         }
       }
 
-      $unique_key = $remix_data->getProgramId() . '_' . $remix_data->isScratchProgram();
+      $unique_key = $remix_data->getProgramId().'_'.$remix_data->isScratchProgram();
       if (!array_key_exists($unique_key, $unique_remixes))
       {
         $unique_remixes[$unique_key] = $remix_data;
@@ -455,10 +360,7 @@ class ExtractedCatrobatFile
     return array_values($unique_remixes);
   }
 
-  /**
-   * @return array
-   */
-  public function getContainingCodeObjects()
+  public function getContainingCodeObjects(): array
   {
     $objects = [];
     $objectList = $this->getCodeObjects();
@@ -470,17 +372,14 @@ class ExtractedCatrobatFile
     return $objectList + $objects;
   }
 
-  /**
-   * @return array
-   */
-  public function getCodeObjects()
+  public function getCodeObjects(): array
   {
     $objects = [];
     $objectList = $this->program_xml_properties->objectList->children();
     foreach ($objectList as $object)
     {
       $newObject = $this->getObject($object);
-      if ($newObject != null)
+      if (null != $newObject)
       {
         $objects[] = $newObject;
       }
@@ -489,12 +388,12 @@ class ExtractedCatrobatFile
     return $objects;
   }
 
-  /**
-   * @param $objectTree
-   *
-   * @return CodeObject
-   */
-  private function getObject($objectTree)
+  public function hasScenes(): bool
+  {
+    return 0 !== (is_countable($this->program_xml_properties->xpath('//scenes')) ? count($this->program_xml_properties->xpath('//scenes')) : 0);
+  }
+
+  private function getObject(SimpleXMLElement $objectTree): ?CodeObject
   {
     $factory = new StatementFactory();
 
@@ -502,14 +401,10 @@ class ExtractedCatrobatFile
   }
 
   /**
-   * @param $objects
-   * @param $objectsToAdd
-   *
-   * @return array
+   * @param mixed $objectsToAdd
    */
-  private function addObjectsToArray($objects, $objectsToAdd)
+  private function addObjectsToArray(array $objects, $objectsToAdd): array
   {
-
     foreach ($objectsToAdd as $object)
     {
       $objects[] = $object;
@@ -518,26 +413,14 @@ class ExtractedCatrobatFile
     return $objects;
   }
 
-  /**
-   * @return bool
-   */
-  public function hasScenes()
+  private function createDirectoryInSceneIfNotExist(string $base_path, string $dir_regex, string $dir_name): void
   {
-    return count($this->program_xml_properties->xpath('//scenes')) != 0;
-  }
+    preg_match('@'.$dir_regex.'@', $dir_regex, $scene_names);
 
-  /**
-   * @param $base_path
-   * @param $dir_regex
-   * @param $dir_name
-   */
-  private function createDirectoryInSceneIfNotExist($base_path, $dir_regex, $dir_name)
-  {
-    preg_match("@" . $dir_regex . "@", $dir_regex, $scene_names);
-
+    /** @var string $scene_name */
     foreach ($scene_names as $scene_name)
     {
-      $directory = $base_path + $scene_name + $dir_name;
+      $directory = $base_path.$scene_name.$dir_name;
       if (!file_exists($directory))
       {
         mkdir($directory, 0777, true);
@@ -545,15 +428,11 @@ class ExtractedCatrobatFile
     }
   }
 
-  /**
-   * @param $directory
-   */
-  private function createDirectoryIfNotExist($directory)
+  private function createDirectoryIfNotExist(string $directory): void
   {
     if (!file_exists($directory))
     {
       mkdir($directory, 0777, true);
     }
   }
-
 }

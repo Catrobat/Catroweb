@@ -4,53 +4,42 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use SimpleXMLElement;
 
-/**
- * Class FormulaResolver
- * @package App\Catrobat\Services\CatrobatCodeParser
- */
 class FormulaResolver
 {
-  /**
-   * @param SimpleXMLElement $formula_list
-   *
-   * @return array
-   */
-  public static function resolve($formula_list)
+  public static function resolve(SimpleXMLElement $formula_list): array
   {
     $formulas = [];
     foreach ($formula_list->children() as $formula)
     {
-      $formulas[(string)$formula[Constants::CATEGORY_ATTRIBUTE]] = FormulaResolver::resolveFormula($formula);
+      $formulas[(string) $formula[Constants::CATEGORY_ATTRIBUTE]] = FormulaResolver::resolveFormula($formula);
     }
 
     return $formulas;
   }
 
   /**
-   * @param $formula
-   *
-   * @return string|null
+   * @param mixed $formula
    */
-  private static function resolveFormula($formula)
+  private static function resolveFormula($formula): ?string
   {
     $resolved_formula = null;
-    if ($formula != null)
+    if (null != $formula)
     {
       switch ($formula->type)
       {
         case Constants::OPERATOR_FORMULA_TYPE:
           $resolved_formula = FormulaResolver::resolveFormula($formula->leftChild)
-            . " " . FormulaResolver::resolveOperator($formula->value)
-            . " " . FormulaResolver::resolveFormula($formula->rightChild);
+            .' '.FormulaResolver::resolveOperator($formula->value)
+            .' '.FormulaResolver::resolveFormula($formula->rightChild);
           break;
         case Constants::FUNCTION_FORMULA_TYPE:
           $resolved_formula = FormulaResolver::resolveFunction($formula);
           break;
         case Constants::BRACKET_FORMULA_TYPE:
-          $resolved_formula = "(" . FormulaResolver::resolveFormula($formula->rightChild) . ")";
+          $resolved_formula = '('.FormulaResolver::resolveFormula($formula->rightChild).')';
           break;
         default:
-          $resolved_formula = (string)$formula->value;
+          $resolved_formula = (string) $formula->value;
           break;
       }
     }
@@ -59,48 +48,41 @@ class FormulaResolver
   }
 
   /**
-   * @param $formula
-   *
-   * @return string|null
+   * @param mixed $formula
    */
-  private static function resolveFunction($formula)
+  private static function resolveFunction($formula): string
   {
     $resolved_function = null;
 
-    if ($formula->value == 'TRUE')
+    if ('TRUE' == $formula->value)
     {
-      $resolved_function = "true";
+      $resolved_function = 'true';
+    }
+    elseif ('FALSE' == $formula->value)
+    {
+      $resolved_function = 'false';
     }
     else
     {
-      if ($formula->value == 'FALSE')
+      if (null != $formula->rightChild)
       {
-        $resolved_function = "false";
+        $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild)
+          .', '.FormulaResolver::resolveFormula($formula->rightChild);
       }
       else
       {
-        if ($formula->rightChild != null)
-        {
-          $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild)
-            . ", " . FormulaResolver::resolveFormula($formula->rightChild);
-        }
-        else
-        {
-          $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild);
-        }
-        $resolved_function = strtolower($formula->value) . "( " . $function_input_formula . " )";
+        $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild);
       }
+      $resolved_function = strtolower($formula->value).'( '.$function_input_formula.' )';
     }
 
     return $resolved_function;
   }
 
   /**
-   * @param $operator
-   *
-   * @return string|null
+   * @param mixed $operator
    */
-  private static function resolveOperator($operator)
+  private static function resolveOperator($operator): ?string
   {
     $resolved_operator = null;
     switch ($operator)

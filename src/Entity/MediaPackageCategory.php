@@ -2,9 +2,21 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * MediaPackageCategory class. A MediaPackageCategory is part of a MediaPackage and contains MediaPackageFiles.
+ *
+ *                                          Media Library example:
+ *
+ *                          Media Package 1                           Media Package 2
+ *                       /                 \                                |
+ *               Category 1               Category 2                    Category 3
+ *              /     |    \              /        \                        |
+ *         File 1  File 2  File 3      File 4    File 5                  File 6
+ *
  * @ORM\Entity
  * @ORM\Table(name="media_package_category")
  */
@@ -15,142 +27,105 @@ class MediaPackageCategory
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="text", nullable=false)
    */
-  protected $name;
+  protected ?string $name = null;
 
   /**
    * @ORM\ManyToMany(targetEntity="MediaPackage", inversedBy="categories")
-   **/
-  protected $package;
+   */
+  protected Collection $package;
 
   /**
    * @ORM\OneToMany(targetEntity="MediaPackageFile", mappedBy="category")
    */
-  protected $files;
+  protected Collection $files;
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $priority = 0;
+  protected int $priority = 0;
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function __construct()
+  {
+    $this->package = new ArrayCollection();
+    $this->files = new ArrayCollection();
+  }
+
+  public function __toString(): string
+  {
+    if (count($this->package))
+    {
+      $string = $this->name.' (';
+      $count = count($this->package);
+
+      for ($it = 0; $it < $count; ++$it)
+      {
+        $string .= $this->package[$it];
+
+        if ($it < ($count - 1))
+        {
+          $string .= ', ';
+        }
+      }
+      $string .= ')';
+
+      return (string) $string;
+    }
+
+    return (string) $this->name;
+  }
+
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @param mixed $name
-   */
-  public function setName($name)
+  public function setName(string $name): void
   {
     $this->name = $name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPackage()
+  public function getPackage(): Collection
   {
     return $this->package;
   }
 
-  /**
-   * @param mixed $package
-   */
-  public function setPackage($package)
+  public function setPackage(Collection $package): void
   {
     $this->package = $package;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFiles()
+  public function getFiles(): Collection
   {
     return $this->files;
   }
 
-  /**
-   * @param mixed $files
-   */
-  public function setFiles($files)
+  public function setFiles(Collection $files): void
   {
     $this->files = $files;
   }
 
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    if ($this->package !== null)
-    {
-      if (count($this->package))
-      {
-        $string = $this->name . " (";
-        $count = count($this->package);
-
-        for ($it = 0; $it < $count; $it++)
-        {
-          $string .= $this->package[$it];
-
-          if ($it < ($count - 1))
-          {
-            $string .= ", ";
-          }
-        }
-        $string .= ")";
-
-        return (string)$string;
-      }
-      else
-      {
-        return (string)$this->name;
-      }
-    }
-    else
-    {
-      return (string)$this->name;
-    }
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getPriority()
+  public function getPriority(): int
   {
     return $this->priority;
   }
 
-  /**
-   * @param mixed $priority
-   */
-  public function setPriority($priority)
+  public function setPriority(int $priority): void
   {
     $this->priority = $priority;
   }
-
 }

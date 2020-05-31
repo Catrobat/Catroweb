@@ -29,56 +29,40 @@
 
 namespace App\Catrobat\Services;
 
-
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * Class CatroNotificationService
- * @package App\Catrobat\Services
- */
 class CatroNotificationService
 {
   /**
-   *
+   * @var int
    */
   const DEFAULT_NOTIFICATION = 0;
 
-  /**
-   * @var EntityManagerInterface
-   */
-  private $em;
+  private EntityManagerInterface $em;
 
-  /**
-   * CatroNotificationService constructor.
-   *
-   * @param EntityManagerInterface $em
-   */
   public function __construct(EntityManagerInterface $em)
   {
     $this->em = $em;
   }
 
-  /**
-   * @return string
-   */
-  public function drawHeartbeat()
+  public function drawHeartbeat(): string
   {
-    return "heartbeat";
+    return 'heartbeat';
   }
 
   /**
-   * @param $notification
+   * @param mixed $notification
    */
-  public function addNotification($notification)
+  public function addNotification($notification): void
   {
     $this->em->persist($notification);
     $this->em->flush();
   }
 
   /**
-   * @param $notifications
+   * @param mixed $notifications
    */
-  public function addNotifications($notifications)
+  public function addNotifications($notifications): void
   {
     foreach ($notifications as $notification)
     {
@@ -88,34 +72,30 @@ class CatroNotificationService
   }
 
   /**
-   * @param $notification
+   * @param mixed $notification
    */
-  public function removeNotification($notification)
+  public function removeNotification($notification): void
   {
     $this->em->remove($notification);
     $this->em->flush();
   }
 
   /**
-   * @param $notifications
+   * @param mixed $notifications
    */
-  public function markSeen($notifications)
+  public function markSeen($notifications): void
   {
     foreach ($notifications as $notification)
     {
       $notification->setSeen(true);
     }
     $this->em->flush();
-
   }
 
-
-
-
   /**
-   * @param $notifications
+   * @param mixed $notifications
    */
-  public function deleteNotifications($notifications)
+  public function deleteNotifications($notifications): void
   {
     foreach ($notifications as $notification)
     {

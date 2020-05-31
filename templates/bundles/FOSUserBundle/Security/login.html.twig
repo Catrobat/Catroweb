@@ -2,8 +2,6 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
-  <script src="{{ asset('compiled/js/jquery-ui.js') }}"></script>
-
 {% endblock %}
 
 
@@ -101,7 +99,7 @@
                 <!-- Button -->
                 <div style="margin-top:10px" class="form-group">
                   <div class="col-sm-12 controls">
-                    <button id="_submit" value="Login" href="#" class="login btn-primary"
+                    <button id="_submit" value="Login" href="#" class="login btn btn-primary"
                             name="_submit">{{ 'login.login'|trans({}, 'catroweb') }}</button>
                   </div>
                 </div>
@@ -139,5 +137,16 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('compiled/js/PasswordVisibilityToggler.js') }}"></script>
+  <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
+  <script src="{{ asset('js/register.min.js') }}"></script>
+  <script>
+    const register =new Register(
+      "{{ flavor() }}",
+      "{{ "oauth.username_header"|trans({}, "catroweb") }}",
+      "{{ "oauth.username_chooser"|trans({}, "catroweb") }}",
+      "{{ "oauth.usernameTaken"|trans({}, "catroweb") }}",
+      "{{ "errors.username.size"|trans({}, "catroweb") }}",
+      "{{ "ok"|trans({}, "catroweb") }}"
+    )
+  </script>
 {% endblock js %}

@@ -4,19 +4,12 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class DronePlayedAnimationBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 class DronePlayedAnimationBrick extends Brick
 {
-  /**
-   *
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::AR_DRONE_PLAYED_ANIMATION_BRICK;
-    $this->caption = "Played drone animation";
+    $this->caption = 'Played drone animation';
     $this->setImgFile(Constants::AR_DRONE_MOTION_BRICK_IMG);
   }
 }

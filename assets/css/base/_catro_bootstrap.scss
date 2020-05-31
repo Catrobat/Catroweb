@@ -1,14 +1,7 @@
 @import "variables";
-@import "bootswatch";
+@import 'theme_settings';
 @import "mixins";
 @import "elements";
-@import "sidebar";
-@import "theme_settings";
-
-html, body {
-  margin: 0;
-  height: 50%;
-}
 
 // can/should be used for uniform width of page containers
 .content {
@@ -351,8 +344,6 @@ html, body {
 }
 
 .help-video-container {
-  padding: 0 15px 0 15px;
-  border-radius: 5px;
   min-width: 300px;
   flex: 1;
 
@@ -447,5 +438,12 @@ $galaxy-button-background-color: #9583b2;
       opacity: 0.001;
       cursor: pointer;
     }
+  }
+}
+
+.swal2-styled {
+  &.swal2-confirm {
+    background-color: $primary !important;
+    border-color: $primary !important;
   }
 }

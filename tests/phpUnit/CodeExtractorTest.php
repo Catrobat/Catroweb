@@ -1,19 +1,22 @@
 <?php
 
-namespace tests;
+namespace Tests\phpUnit;
 
+use App\Catrobat\CatrobatCode\CodeObject;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use PHPUnit\Framework\TestCase;
 
-
-class CodeExtractor extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class CodeExtractorTest extends TestCase
 {
-
   /**
    * @test
    */
-  public function xmlWithIfAndCondition()
+  public function xmlWithIfAndCondition(): void
   {
     $this->checkFiles('/Resources/CodeXmls/ifWithCondition/');
   }
@@ -21,7 +24,7 @@ class CodeExtractor extends TestCase
   /**
    * @test
    */
-  public function xmlWithFormula()
+  public function xmlWithFormula(): void
   {
     $this->checkFiles('/Resources/CodeXmls/formula/');
   }
@@ -29,7 +32,7 @@ class CodeExtractor extends TestCase
   /**
    * @test
    */
-  public function xmlWithIf()
+  public function xmlWithIf(): void
   {
     $this->checkFiles('/Resources/CodeXmls/if/');
   }
@@ -37,7 +40,7 @@ class CodeExtractor extends TestCase
   /**
    * @test
    */
-  public function xmlWithLoop()
+  public function xmlWithLoop(): void
   {
     $this->checkFiles('/Resources/CodeXmls/loop/');
   }
@@ -45,49 +48,51 @@ class CodeExtractor extends TestCase
   /**
    * @test
    */
-  public function xmlWithAllBricks()
+  public function xmlWithAllBricks(): void
   {
     $this->checkFiles('/Resources/CodeXmls/allBricks/');
   }
 
-
   /**
    * @test
    */
-  public function xmlWithNestedFormula()
+  public function xmlWithNestedFormula(): void
   {
     $this->checkFiles('/Resources/CodeXmls/nestedFormula/');
   }
 
-
   /**
    * @test
    */
-  public function xmlWithNestedObjects()
+  public function xmlWithNestedObjects(): void
   {
     $this->checkFiles('/Resources/CodeXmls/nestedObjects/');
   }
 
-
-  private function checkFiles($path)
+  private function checkFiles(string $path): void
   {
     $output = $this->getCode($path);
     $referenceOutput = $this->readReferenceOutputFile($path);
     $this->assertEquals($referenceOutput, $output);
   }
 
-  private function getCode($path)
+  private function getCode(string $path): string
   {
-    $eCFile = new ExtractedCatrobatFile(__DIR__ . $path, '', '');
+    $eCFile = new ExtractedCatrobatFile(__DIR__.$path, '', '');
 
     $objects = $eCFile->getCodeObjects();
 
     return $this->generateCode($objects);
   }
 
-  private function generateCode($objects)
+  /**
+   * @param CodeObject[] $objects
+   */
+  private function generateCode(array $objects): string
   {
     $code = '';
+
+    /** @var CodeObject $object */
     foreach ($objects as $object)
     {
       $code .= $object->getCode();
@@ -97,28 +102,39 @@ class CodeExtractor extends TestCase
     return $this->replaceSyntaxStrings($code);
   }
 
-  private function replaceSyntaxStrings($code)
+  private function replaceSyntaxStrings(string $code): string
   {
-    $code = str_replace("&nbsp;", " ", $code);
-    $code = str_replace("<br/>", PHP_EOL, $code);
-    $code = str_replace(SyntaxHighlightingConstants::LOOP, "", $code);
-    $code = str_replace(SyntaxHighlightingConstants::END, "", $code);
-    $code = str_replace(SyntaxHighlightingConstants::FUNCTIONS, "", $code);
-    $code = str_replace(SyntaxHighlightingConstants::OBJECTS, "", $code);
-    $code = str_replace(SyntaxHighlightingConstants::VALUE, "", $code);
-    $code = str_replace(SyntaxHighlightingConstants::VARIABLES, "", $code);
+    $code = str_replace('&nbsp;', ' ', $code);
+    $code = str_replace('<br/>', PHP_EOL, $code);
+    $code = str_replace(SyntaxHighlightingConstants::LOOP, '', $code);
+    $code = str_replace(SyntaxHighlightingConstants::END, '', $code);
+    $code = str_replace(SyntaxHighlightingConstants::FUNCTIONS, '', $code);
+    $code = str_replace(SyntaxHighlightingConstants::OBJECTS, '', $code);
+    $code = str_replace(SyntaxHighlightingConstants::VALUE, '', $code);
 
-    return $code;
+    return str_replace(SyntaxHighlightingConstants::VARIABLES, '', $code);
   }
 
-  private function readReferenceOutputFile($path)
+  private function readReferenceOutputFile(string $path): string
   {
-    $absolutePath = __DIR__ . $path . 'reference.output';
-    $referenceOutputFile = fopen($absolutePath, "r") or die('Unable to open file!');
-    $referenceOutput = fread($referenceOutputFile, filesize($absolutePath));
+    $absolutePath = __DIR__.$path.'reference.output';
+    $referenceOutputFile = fopen($absolutePath, 'r');
+    $size = filesize($absolutePath);
+
+    if (!$referenceOutputFile || !$size)
+    {
+      exit('Unable to open file!');
+    }
+
+    $referenceOutput = fread($referenceOutputFile, $size);
+
+    if (!$referenceOutput)
+    {
+      exit('Unable to redd file!');
+    }
+
     fclose($referenceOutputFile);
 
     return $referenceOutput;
   }
-
 }

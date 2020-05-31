@@ -2,128 +2,76 @@
 
 namespace App\Catrobat\Requests;
 
-use Symfony\Component\HttpFoundation\File\File;
+use App\Entity\GameJam;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class AddProgramRequest
- * @package App\Catrobat\Requests
- */
 class AddProgramRequest
 {
-  /**
-   * @var User
-   */
-  private $user;
-  /**
-   * @var File
-   */
-  private $programfile;
-  /**
-   * @var string
-   */
-  private $ip;
-  /**
-   * @var null
-   */
-  private $gamejam;
-  /**
-   * @var null
-   */
-  private $language;
-  /**
-   * @var string
-   */
-  private $flavor;
+  private User $user;
 
-  /**
-   * AddProgramRequest constructor.
-   *
-   * @param User   $user
-   * @param File   $programfile
-   * @param string $ip
-   * @param null   $gamejam
-   * @param null   $language
-   * @param string $flavor
-   */
-  public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null, $language = null, $flavor = 'pocketcode')
+  private File $program_file;
+
+  private string $ip;
+
+  private ?GameJam $game_jam;
+
+  private ?string $language;
+
+  private string $flavor;
+
+  public function __construct(User $user, File $program_file, ?string $ip = '127.0.0.1', ?GameJam $game_jam = null,
+                              ?string $language = null, ?string $flavor = 'pocketcode')
   {
     $this->user = $user;
-    $this->programfile = $programfile;
+    $this->program_file = $program_file;
     $this->ip = $ip;
-    $this->gamejam = $gamejam;
+    $this->game_jam = $game_jam;
     $this->language = $language;
     $this->flavor = $flavor;
   }
 
-  /**
-   * @return User
-   */
-  public function getUser()
+  public function getUser(): User
   {
     return $this->user;
   }
 
-  /**
-   * @param User $user
-   */
-  public function setUser(User $user)
+  public function setUser(User $user): void
   {
     $this->user = $user;
   }
 
-  /**
-   * @return File
-   */
-  public function getProgramfile()
+  public function getProgramFile(): File
   {
-    return $this->programfile;
+    return $this->program_file;
   }
 
-  /**
-   * @param File $programfile
-   */
-  public function setProgramfile(File $programfile)
+  public function setProgramFile(File $program_file): void
   {
-    $this->programfile = $programfile;
+    $this->program_file = $program_file;
   }
 
-  /**
-   * @return string
-   */
-  public function getIp()
+  public function getIp(): string
   {
     return $this->ip;
   }
 
-  /**
-   * @return null
-   */
-  public function getGamejam()
+  public function getGameJam(): ?GameJam
   {
-    return $this->gamejam;
+    return $this->game_jam;
   }
 
-  /**
-   * @return null
-   */
-  public function getLanguage()
+  public function getLanguage(): ?string
   {
     return $this->language;
   }
 
-  /**
-   * @param $language
-   */
-  public function setLanguage($language)
+  public function setLanguage(?string $language): void
   {
     $this->language = $language;
   }
 
-  /**
-   * @return string
-   */
-  public function getFlavor()
+  public function getFlavor(): string
   {
     return $this->flavor;
   }

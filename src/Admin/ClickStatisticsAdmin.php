@@ -5,20 +5,14 @@ namespace App\Admin;
 use App\Entity\Program;
 use App\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
-/**
- * Class ClickStatisticsAdmin
- * @package App\Admin
- */
 class ClickStatisticsAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -33,22 +27,31 @@ class ClickStatisticsAdmin extends AbstractAdmin
    * @var array
    */
   protected $datagridValues = [
-    '_sort_by'    => 'id',
+    '_sort_by' => 'id',
     '_sort_order' => 'DESC',
   ];
 
+  /**
+   * @return array
+   */
+  public function getExportFields()
+  {
+    return ['id', 'type', 'user.username', 'program.id', 'program.name', 'scratch_program_id',
+      'recommended_from_program.id', 'recommended_from_program.name', 'tag.en', 'extension.name',
+      'clicked_at', 'ip', 'country_code', 'country_name', 'locale', 'user_agent', 'referrer', ];
+  }
 
   /**
    * @param FormMapper $formMapper
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper)
+  protected function configureFormFields(FormMapper $formMapper): void
   {
     $formMapper
       ->add('type')
       ->add('program', EntityType::class, ['class' => Program::class], [
-        'admin_code' => 'catrowebadmin.block.programs.all'])
+        'admin_code' => 'catrowebadmin.block.programs.all', ])
       ->add('scratch_program_id')
       ->add('recommended_from_program', EntityType::class, ['class' => Program::class],
         ['admin_code' => 'catrowebadmin.block.programs.all'])
@@ -59,16 +62,16 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('country_name')
       ->add('locale')
       ->add('user_agent')
-      ->add('referrer');
+      ->add('referrer')
+    ;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
       ->add('id')
@@ -81,16 +84,16 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('country_name')
       ->add('user_agent')
       ->add('referrer')
-      ->add('locale');
+      ->add('locale')
+    ;
   }
-
 
   /**
    * @param ListMapper $listMapper
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->addIdentifier('id')
@@ -101,9 +104,9 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('recommended_from_program',
         EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('tag.en', null, [
-        'label' => 'Tag'])
+        'label' => 'Tag', ])
       ->add('extension.name', null, [
-        'label' => 'Extension'])
+        'label' => 'Extension', ])
       ->add('clicked_at')
       ->add('ip')
       ->add('country_code')
@@ -113,25 +116,11 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('referrer')
       ->add('_action', 'actions', ['actions' => [
         'edit' => [],
-      ]]);
+      ]])
+    ;
   }
 
-
-  /**
-   * @return array
-   */
-  public function getExportFields()
-  {
-    return ['id', 'type', 'user.username', 'program.id', 'program.name', 'scratch_program_id',
-      'recommended_from_program.id', 'recommended_from_program.name', 'tag.en', 'extension.name',
-      'clicked_at', 'ip', 'country_code', 'country_name', 'locale', 'user_agent', 'referrer'];
-  }
-
-
-  /**
-   * @param RouteCollection $collection
-   */
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete');
   }

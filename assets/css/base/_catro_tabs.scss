@@ -1,0 +1,41 @@
+.catro-tabs {
+  .nav-tabs {
+    padding: 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    .nav-item {
+      flex: 1 1;
+    }
+
+    @include media-breakpoint-up(md) {
+      &.nav-fill {
+        .nav-item {
+          flex: unset;
+        }
+      }
+
+      .nav-link {
+        padding: 0.9em 1.5em;
+      }
+    }
+  }
+
+  .nav-link {
+    padding: 0.9em;
+    color: rgba($text-color, 10);
+    text-decoration: none;
+    background: none;
+    border: 0;
+
+    &:hover {
+      color: $default-text-color;
+      background: none;
+    }
+
+    &.active {
+      font-weight: 700;
+      color: $text-color;
+      border-bottom: 2px solid $primary;
+    }
+  }
+}

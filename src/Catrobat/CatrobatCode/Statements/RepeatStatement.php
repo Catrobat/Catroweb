@@ -4,55 +4,47 @@ namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
-/**
- * Class RepeatStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class RepeatStatement extends Statement
 {
-  const BEGIN_STRING = "repeat ";
-  const END_STRING = ")<br/>";
+  /**
+   * @var string
+   */
+  const BEGIN_STRING = 'repeat ';
+  /**
+   * @var string
+   */
+  const END_STRING = ')<br/>';
 
   /**
    * RepeatStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
-    $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END . "(";
+    $stmt = SyntaxHighlightingConstants::LOOP.self::BEGIN_STRING.SyntaxHighlightingConstants::END.'(';
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $stmt,
       self::END_STRING);
   }
 
-  /**
-   * @return int
-   */
-  public function getSpacesForNextBrick()
+  public function getSpacesForNextBrick(): int
   {
     return $this->spaces + 1;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Repeat " . $formula_string_without_markup . " times";
+    return 'Repeat '.$formula_string_without_markup.' times';
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
-    return "1h_brick_orange.png";
+    return '1h_brick_orange.png';
   }
-
 }

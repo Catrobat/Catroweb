@@ -2,44 +2,24 @@
 
 namespace App\Catrobat\Listeners;
 
-use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
+use App\Catrobat\Services\ExtractedCatrobatFile;
 
-/**
- * Class ProgramXmlHeaderValidator
- * @package App\Catrobat\Listeners
- */
 class ProgramXmlHeaderValidator
 {
-  /**
-   * @param ProgramBeforeInsertEvent $event
-   */
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
   }
 
-  /**
-   * @param ExtractedCatrobatFile $file
-   */
-  public function validate(ExtractedCatrobatFile $file)
+  public function validate(ExtractedCatrobatFile $file): void
   {
     $program_xml_properties = $file->getProgramXmlProperties();
     if (isset($program_xml_properties->header))
     {
-      if (!(isset($program_xml_properties->header->applicationName) &&
-        isset($program_xml_properties->header->applicationVersion) &&
-        isset($program_xml_properties->header->catrobatLanguageVersion) &&
-        isset($program_xml_properties->header->description) &&
-        isset($program_xml_properties->header->mediaLicense) &&
-        isset($program_xml_properties->header->platform) &&
-        isset($program_xml_properties->header->platformVersion) &&
-        isset($program_xml_properties->header->programLicense) &&
-        isset($program_xml_properties->header->programName) &&
-        isset($program_xml_properties->header->remixOf) &&
-        isset($program_xml_properties->header->url) &&
-        isset($program_xml_properties->header->userHandle)))
+      if (!(isset($program_xml_properties->header->applicationName, $program_xml_properties->header->applicationVersion, $program_xml_properties->header->catrobatLanguageVersion, $program_xml_properties->header->description, $program_xml_properties->header->mediaLicense, $program_xml_properties->header->platform, $program_xml_properties->header->platformVersion, $program_xml_properties->header->programLicense, $program_xml_properties->header->programName, $program_xml_properties->header->remixOf, $program_xml_properties->header->url, $program_xml_properties->header->userHandle)
+        ))
       {
         throw new InvalidXmlException('Program XML header information missing');
       }

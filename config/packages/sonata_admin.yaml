@@ -15,6 +15,7 @@ sonata_block:
 sonata_admin:
     title:     Admin Panel
     title_logo: images/admin/admin_logo.png
+    show_mosaic_button: false
     templates:
         layout: 'Admin\standard_layout.html.twig'
     dashboard:
@@ -41,6 +42,7 @@ sonata_admin:
                     icon: fa-cubes
                     text: All projects
                     color: bg-blue
+
 
             -  # Programs Approve
                 class:    col-lg-3 col-xs-6
@@ -98,6 +100,8 @@ sonata_admin:
                     - catrowebadmin.block.featured.program
                     - catrowebadmin.block.featured.url
                     - catrowebadmin.block.programs.templates
+                    - catrowebadmin.block.example.program
+
 
             sonata.admin.group.mediapackage:
                 label:           Media Package

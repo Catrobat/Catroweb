@@ -3,26 +3,16 @@
 namespace App\Catrobat\Controller\Admin;
 
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-
-/**
- * Class SnapshotController
- * @package App\Catrobat\Controller\Admin
- */
 class SnapshotController extends CRUDController
 {
-
-  /**
-   * @param Request|null $request
-   *
-   * @return \Symfony\Component\HttpFoundation\Response
-   */
-  public function listAction(Request $request = null)
+  public function listAction(Request $request = null): Response
   {
     $finder = new Finder();
-    $directory = $this->container->getParameter('catrobat.snapshot.dir');
+    $directory = $this->getParameter('catrobat.snapshot.dir');
     $files = $finder->files()->in($directory);
 
     return $this->renderWithExtraParams('Admin/snapshots.html.twig', ['files' => $files]);

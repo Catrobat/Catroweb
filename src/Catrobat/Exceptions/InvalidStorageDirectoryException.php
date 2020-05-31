@@ -2,19 +2,11 @@
 
 namespace App\Catrobat\Exceptions;
 
-/**
- * Class InvalidStorageDirectoryException
- * @package App\Catrobat\Exceptions
- */
-class InvalidStorageDirectoryException extends \RuntimeException
-{
+use RuntimeException;
 
-  /**
-   * InvalidStorageDirectoryException constructor.
-   *
-   * @param $message
-   */
-  public function __construct($message)
+class InvalidStorageDirectoryException extends RuntimeException
+{
+  public function __construct(string $message)
   {
     parent::__construct($message);
   }

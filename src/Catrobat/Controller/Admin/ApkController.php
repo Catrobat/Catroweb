@@ -2,28 +2,22 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Entity\Program;
+use App\Utils\TimeUtils;
+use Exception;
+use Sonata\AdminBundle\Controller\CRUDController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
-/**
- * Class ApkController
- * @package App\Catrobat\Controller\Admin
- */
 class ApkController extends CRUDController
 {
-
-  public function resetStatusAction()
+  public function resetStatusAction(): RedirectResponse
   {
-    /**
-     * @var $object Program
-     */
-
+    /** @var Program|null $object */
     $object = $this->admin->getSubject();
 
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
@@ -32,99 +26,83 @@ class ApkController extends CRUDController
 
     $this->admin->update($object);
 
-    $this->addFlash('sonata_flash_success', 'Reseted APK status of ' . $object->getName());
+    $this->addFlash('sonata_flash_success', 'Reseted APK status of '.$object->getName());
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
   /**
-   * @return RedirectResponse
-   * @throws \Exception
+   * @throws Exception
    */
-  public function rebuildApkAction()
+  public function rebuildApkAction(): RedirectResponse
   {
-    /**
-     * @var $object Program
-     */
-
+    /** @var Program|null $object */
     $object = $this->admin->getSubject();
 
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
 
-    $dispatcher = $this->container->get('App\Catrobat\Services\Ci\JenkinsDispatcher');
+    $dispatcher = $this->container->get(JenkinsDispatcher::class);
     $dispatcher->sendBuildRequest($object->getId());
 
-    $object->setApkRequestTime(new \DateTime());
+    $object->setApkRequestTime(TimeUtils::getDateTime());
     $object->setApkStatus(Program::APK_PENDING);
 
     $this->admin->update($object);
 
-    $this->addFlash('sonata_flash_success', 'Requested a rebuild of ' . $object->getName());
+    $this->addFlash('sonata_flash_success', 'Requested a rebuild of '.$object->getName());
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
-  /**
-   * @return RedirectResponse
-   */
-  public function resetAllApkAction()
+  public function resetAllApkAction(): RedirectResponse
   {
-    /**
-     * @var $program Program
-     */
+    $data_grid = $this->admin->getDatagrid();
+    $objects = $data_grid->getResults();
 
-    $datagrid = $this->admin->getDatagrid();
-
-    $objects = $datagrid->getResults();
-
+    /** @var Program $program */
     foreach ($objects as $program)
     {
       $program->setApkStatus(Program::APK_NONE);
       $this->admin->update($program);
     }
 
-    if (count($objects) != 0)
+    if (0 != count($objects))
     {
-      $this->addFlash('sonata_flash_success', 'All Apks reseted');
+      $this->addFlash('sonata_flash_success', 'All APKs reset');
     }
     else
     {
-      $this->addFlash('sonata_flash_info', 'No Apks to be reseted');
+      $this->addFlash('sonata_flash_info', 'No APKs to reset');
     }
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
   /**
-   * @return RedirectResponse
-   * @throws \Exception
+   * @throws Exception
    */
-  public function rebuildAllApkAction()
+  public function rebuildAllApkAction(): RedirectResponse
   {
+    $data_grid = $this->admin->getDatagrid();
+
+    $objects = $data_grid->getResults();
+    $dispatcher = $this->container->get(JenkinsDispatcher::class);
+
     /* @var $program Program */
-
-    $datagrid = $this->admin->getDatagrid();
-
-    $objects = $datagrid->getResults();
-    $dispatcher = $this->container->get('App\Catrobat\Services\Ci\JenkinsDispatcher');
-
     foreach ($objects as $program)
     {
       $dispatcher->sendBuildRequest($program->getId());
-      $program->setApkRequestTime(new \DateTime());
+      $program->setApkRequestTime(TimeUtils::getDateTime());
       $program->setApkStatus(Program::APK_PENDING);
       $this->admin->update($program);
     }
 
-    if (count($objects) != 0)
+    if (0 != count($objects))
     {
-      $this->addFlash('sonata_flash_success', 'Requested rebuild for all Apks');
+      $this->addFlash('sonata_flash_success', 'Requested rebuild for all APks');
     }
     else
     {

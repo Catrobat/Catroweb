@@ -1,0 +1,198 @@
+@admin
+Feature: Admin featured programs
+  IT should be possible to list all featured programs, sort and filter etc.
+
+  Background:
+    Given there are admins:
+      | name     | password | token      | email                | id |
+      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+
+    And there are users:
+      | name      | password | token      | email               | id |
+      | Superman  | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
+      | Gregor    | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
+      | Frank Jr. | 123456   | qwertyuiop | dev3@pocketcode.org |  3 |
+
+    And there are programs:
+      | id           | name      | description             | owned by  | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
+      | 1337-c0ffee  | program 1 | my superman description | Superman  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
+      | c0ffee-b00b  | program 2 | abcef                   | Gregor    | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
+      | c01d-cafe    | program 3 | abcef                   | Gregor    | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
+      | b100d-c01d   | program 4 | abc                     | Superman  | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
+      | dead-beef    | to add    | add me if u can         | Frank Jr. | 123       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
+
+    And there are featured programs:
+      | id | program_id  | active   | flavor     | priority | ios_only |
+      | 1  | 1337-c0ffee | 1        | pocketcode | 1        |   yes    |
+      | 2  | c0ffee-b00b |  false   | arduino    | 1        |   no     |
+      | 3  | c01d-cafe   | 1        | luna       | 2        |   no     |
+      | 4  | b100d-c01d  |  false   | embroidery | 3        |   no     |
+
+  Scenario: List all featured programs:
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+    And I should not see "Adminius"
+
+
+  Scenario: List featured programs just for arduino
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=arduino&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor   | Priority   |
+      | 2  | program 2 (#c0ffee-b00b) | arduino  | 1          |
+    And I should not see "Adminius"
+    And I should not see "program 1"
+    And I should not see "program 3"
+
+  Scenario: List featured programs just for IOS
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=1&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor     | Priority   |
+      | 1  | program 1 (#1337-c0ffee) | pocketcode | 1          |
+    And I should not see "Adminius"
+    And I should not see "program 2"
+    And I should not see "program 3"
+
+  Scenario: List featured programs with priority above 1
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=2&filter%5Bpriority%5D%5Bvalue%5D=1&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor     | Priority |
+      | 3  | program 3 (#c01d-cafe)   | luna       | 2        |
+      | 4  | program 4 (#b100d-c01d)  | embroidery | 3        |
+    And I should not see "Adminius"
+    And I should not see "program 1"
+    And I should not see "program 2"
+
+  Scenario: List only active featured programs
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=1&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor     | Priority |
+      | 1  | program 1 (#1337-c0ffee) | pocketcode | 1        |
+      | 3  | program 3 (#c01d-cafe)   | luna       | 2        |
+    And I should not see "Adminius"
+    And I should not see "program 2"
+    And I should not see "program 4"
+
+  Scenario: Delete first Featured Program
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+    Then I am on "/admin/featured_program/1/delete"
+    And I wait for the page to be loaded
+    Then I click on the first ".btn-danger" button
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor      | Priority   |
+      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+    And I should not see "Adminius"
+    And I should not see "program 1"
+    Then I am on "/app"
+    And I wait for the page to be loaded
+    Then I should not see "featured program"
+
+    Scenario: Click on program link
+      Given I log in as "Adminius" with the password "123456"
+      And I am on "/admin/featured_program/list"
+      And I wait for the page to be loaded
+      Then I should see the featured table:
+        | Id | Program                  | Flavor      | Priority   |
+        | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+        | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+        | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+        | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      And I click on the "program 1 (#1337-c0ffee)" link
+      And I wait for the page to be loaded
+      Then I should see "Edit \"program 1 (#1337-c0ffee)\""
+
+    Scenario: Adding a featured Program (success)
+      Given I log in as "Adminius" with the password "123456"
+      And I am on "/admin/featured_program/list"
+      And I wait for the page to be loaded
+      Then I should see the featured table:
+        | Id | Program                  | Flavor      | Priority   |
+        | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+        | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+        | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+        | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      And I click on the "new" link
+      And I wait for the page to be loaded
+      Then I should be on "/admin/featured_program/create"
+      When I attach the avatar "galaxy.jpg" to "File"
+      Then I write "dead-beef" in textarea with label "Program Id"
+      Then I write "3" in textarea with label "Priority"
+      Then I click ".btn-success"
+      Then I should see "has been successfully created"
+      And I am on "/admin/featured_program/list"
+      Then I should see the featured table:
+        | Id | Program                  | Flavor      | Priority   |
+        | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+        | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+        | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+        | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+        | 5  | to add (#dead-beef)      | pocketcode  | 3          |
+
+  Scenario: Adding a featured Program (fail)
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+    And I click on the "new" link
+    And I wait for the page to be loaded
+    Then I should be on "/admin/featured_program/create"
+    When I attach the avatar "galaxy.jpg" to "File"
+    Then I write "dead-b00f" in textarea with label "Program Id"
+    Then I write "3" in textarea with label "Priority"
+    Then I click ".btn-success"
+    And I am on "/admin/featured_program/list"
+    Then I should see the featured table:
+      | Id | Program                  | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+
+  Scenario: Adding a featured Program (wrong picture)
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+    And I click on the "new" link
+    And I wait for the page to be loaded
+    Then I should be on "/admin/featured_program/create"
+    When I attach the avatar "fail.tif" to "File"
+    Then I write "dead-b00f" in textarea with label "Program Id"
+    Then I write "3" in textarea with label "Priority"
+    Then I click ".btn-success"
+    Then I should see "Error"

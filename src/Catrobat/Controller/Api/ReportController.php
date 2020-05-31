@@ -2,40 +2,30 @@
 
 namespace App\Catrobat\Controller\Api;
 
-use App\Entity\Program;
-use App\Entity\User;
 use App\Catrobat\Events\ReportInsertEvent;
+use App\Catrobat\StatusCode;
+use App\Entity\Program;
+use App\Entity\ProgramInappropriateReport;
+use App\Entity\ProgramManager;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
-use App\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Catrobat\StatusCode;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\ProgramInappropriateReport;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
-/**
- * Class ReportController
- * @package App\Catrobat\Controller\Api
- */
 class ReportController extends AbstractController
 {
-
   /**
+   * @deprecated
+   *
    * @Route("/api/reportProject/reportProject.json", name="catrobat_api_report_program",
-   *   defaults={"_format": "json"}, methods={"POST", "GET"})
-   *
-   * @param Request $request
-   * @param ProgramManager $program_manager
-   * @param TranslatorInterface $translator
-   * @param EventDispatcherInterface $event_dispatcher
-   *
-   * @return JsonResponse
+   * defaults={"_format": "json"}, methods={"POST", "GET"})
    */
   public function reportProgramAction(Request $request, ProgramManager $program_manager,
-                                      TranslatorInterface $translator, EventDispatcherInterface $event_dispatcher)
+                                      TranslatorInterface $translator, EventDispatcherInterface $event_dispatcher): JsonResponse
   {
     /* @var $program_manager ProgramManager */
     /* @var $program Program */
@@ -54,7 +44,7 @@ class ReportController extends AbstractController
     }
 
     $program = $program_manager->find($request->get('program'));
-    if ($program == null)
+    if (null == $program)
     {
       $response['statusCode'] = StatusCode::INVALID_PROGRAM;
       $response['answer'] = $translator->trans('errors.program.invalid', [], 'catroweb');
@@ -64,6 +54,16 @@ class ReportController extends AbstractController
     }
 
     $report = new ProgramInappropriateReport();
+    $approved_project = $program->getApproved();
+    $featured_project = $program_manager->getFeaturedRepository()->isFeatured($program);
+    if ($approved_project || $featured_project)
+    {
+      $response = [];
+      $response['answer'] = $translator->trans('success.report', [], 'catroweb');
+      $response['statusCode'] = StatusCode::OK;
+
+      return JsonResponse::create($response);
+    }
 
     if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
     {
@@ -72,7 +72,7 @@ class ReportController extends AbstractController
     }
     else
     {
-      $report->setReportingUser(null); // could be anon
+      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
     }
 
     $program->setVisible(false);

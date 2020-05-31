@@ -4,8 +4,7 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
 {% endblock %}
 
-{% block header %}
-{% endblock header %}
+{% block header "" %}
 
 {% block body %}
 
@@ -14,6 +13,9 @@
     <div class="container-fluid" style="width:100%">
 
       {% include 'UserManagement/login_logo.html.twig' %}
+
+      <!-- Policy -->
+      {% include 'PrivacyAndTerms/policy.html.twig' %}
 
       <div class="row justify-content-center">
         <div class="col-sm-11 col-md-8 col-lg-6 center">
@@ -63,7 +65,7 @@
             <div style="margin-top:30px; margin-bottom:30px" class="form-group">
               <div class="col-sm-12 controls">
                 <button id="_submit" type="submit" style="width: 100%;" data-toggle="modal" data-target="#termsModal"
-                        class="login btn-primary"
+                        class="login btn btn-primary"
                         name="_create">{{ "login.changePass"|trans({}, "catroweb") }}</button>
               </div>
             </div>
@@ -77,5 +79,5 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('compiled/js/PasswordVisibilityToggler.js') }}"></script>
+  <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
 {% endblock js %}

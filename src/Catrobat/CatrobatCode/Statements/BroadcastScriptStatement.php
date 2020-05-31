@@ -2,54 +2,45 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-
-/**
- * Class BroadcastScriptStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class BroadcastScriptStatement extends Statement
 {
-  const BEGIN_STRING = "when receive message ";
+  /**
+   * @var string
+   */
+  const BEGIN_STRING = 'when receive message ';
 
   /**
-   * @var
+   * @var mixed
    */
   private $message;
 
   /**
    * BroadcastScriptStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
-      "");
+      '');
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     $children = $this->executeChildren();
-    $code = parent::addSpaces() . self::BEGIN_STRING;
-    if ($this->message != null)
+    $code = parent::addSpaces().self::BEGIN_STRING;
+    if (null != $this->message)
     {
       $code .= $this->message->execute();
     }
-    $code .= "<br/>" . $children;
 
-    return $code;
+    return $code.('<br/>'.$children);
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
     foreach ($this->statements as $value)
@@ -72,7 +63,7 @@ class BroadcastScriptStatement extends Statement
    */
   public function getMessage()
   {
-    if ($this->message == null)
+    if (null == $this->message)
     {
       $this->message = $this->xmlTree->receivedMessage;
     }

@@ -2,26 +2,16 @@
 
 namespace App\Catrobat\Services\TestEnv;
 
-
 use App\Catrobat\Services\TokenGenerator;
 
-
-/**
- * Class FixedTokenGenerator
- * @package App\Catrobat\Features\Api\Context
- */
 class FixedTokenGenerator extends TokenGenerator
 {
-  /**
-   * @var
-   */
-  private $token;
-
+  private string $token;
 
   /**
    * FixedTokenGenerator constructor.
    *
-   * @param $token
+   * @param mixed $token
    */
   public function __construct($token)
   {
@@ -29,11 +19,7 @@ class FixedTokenGenerator extends TokenGenerator
     $this->token = $token;
   }
 
-
-  /**
-   * @return string
-   */
-  public function generateToken()
+  public function generateToken(): string
   {
     return $this->token;
   }

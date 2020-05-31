@@ -5,38 +5,21 @@ namespace App\Catrobat\Listeners;
 use App\Catrobat\Events\ReportInsertEvent;
 use App\Entity\Notification;
 use App\Repository\NotificationRepository;
+use Swift_Mailer;
+use Swift_Message;
 
-/**
- * Class ReportNotificator
- * @package App\Catrobat\Listeners
- */
 class ReportNotificator
 {
-  /**
-   * @var \Swift_Mailer
-   */
-  private $mailer;
-  /**
-   * @var NotificationRepository
-   */
-  private $notification_repo;
+  private Swift_Mailer $mailer;
+  private NotificationRepository $notification_repo;
 
-  /**
-   * ReportNotificator constructor.
-   *
-   * @param \Swift_Mailer                                     $mailer
-   * @param NotificationRepository $repository
-   */
-  public function __construct(\Swift_Mailer $mailer, NotificationRepository $repository)
+  public function __construct(Swift_Mailer $mailer, NotificationRepository $repository)
   {
     $this->mailer = $mailer;
     $this->notification_repo = $repository;
   }
 
-  /**
-   * @param ReportInsertEvent $event
-   */
-  public function onReportInsertEvent(ReportInsertEvent $event)
+  public function onReportInsertEvent(ReportInsertEvent $event): void
   {
     /* @var $notification_repo NotificationRepository */
 
@@ -53,18 +36,19 @@ class ReportNotificator
         continue;
       }
 
-      $message = (new \Swift_Message())
+      $message = (new Swift_Message())
         ->setSubject('[Pocketcode] reported project!')
         ->setFrom('noreply@catrob.at')
         ->setTo($user->getUser()->getEmail())
         ->setContentType('text/html')
         ->setBody('A Project got reported!
 
-Note: ' . $event->getNote() . '
-Project Name:' . $program->getName() . '
-Project Description: ' . $program->getDescription() . '
+Note: '.$event->getNote().'
+Project Name:'.$program->getName().'
+Project Description: '.$program->getDescription().'
 
-');
+')
+      ;
 
       $this->mailer->send($message);
     }

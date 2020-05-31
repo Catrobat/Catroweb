@@ -5,19 +5,12 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
 
-/**
- * Class WhenBGChangeBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 class WhenBGChangeBrick extends Script
 {
-  /**
-   *
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::WHEN_BG_CHANGE_BRICK;
-    $this->caption = "When background changes to _";
+    $this->caption = 'When background changes to _';
     $this->setImgFile(Constants::EVENT_SCRIPT_IMG);
   }
 }

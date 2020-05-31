@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\GameJam;
-use DateTime;
+use App\Utils\TimeUtils;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\NonUniqueResultException;
@@ -11,25 +11,18 @@ use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 
-
-/**
- * Class GameJamRepository
- * @package App\Repository
- */
 class GameJamRepository extends ServiceEntityRepository
 {
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, GameJam::class);
   }
 
   /**
-   * @return mixed
    * @throws NonUniqueResultException
    * @throws Exception
+   *
+   * @return mixed
    */
   public function getCurrentGameJam()
   {
@@ -39,13 +32,14 @@ class GameJamRepository extends ServiceEntityRepository
       ->select('e')
       ->where('e.start < :current')
       ->andWhere('e.end > :current')
-      ->setParameter('current', new DateTime(), Types::DATETIME_MUTABLE)
+      ->setParameter('current', TimeUtils::getDateTime(), Types::DATETIME_MUTABLE)
       ->getQuery()->getOneOrNullResult();
   }
 
   /**
-   * @return mixed
    * @throws NonUniqueResultException
+   *
+   * @return mixed
    */
   public function getLatestGameJam()
   {
@@ -59,12 +53,11 @@ class GameJamRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param $flavor
+   * @throws NonUniqueResultException
    *
    * @return mixed
-   * @throws NonUniqueResultException
    */
-  public function getLatestGameJamByFlavor($flavor)
+  public function getLatestGameJamByFlavor(string $flavor)
   {
     $qb = $this->createQueryBuilder('e');
 

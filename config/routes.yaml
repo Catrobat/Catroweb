@@ -1,6 +1,11 @@
 # This file is the entry point to configure your own HTTP routes.
 # Files in the routes/ subdirectory configure the routes for your dependencies.
 
+# ===== Api =====
+open_api_server:
+  prefix: /api
+  resource: "@OpenAPIServerBundle/Resources/config/routing.yml"
+
 # ===== Themes and flavors =====
 catrobat_web_index:
   path: /
@@ -30,7 +35,3 @@ fos_user_registration_confirmed:
 sonata_user_admin_security_logout:
   path: /{flavor}/logout
   defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }
-
-open_api_server:
-  prefix: /api
-  resource: "@OpenAPIServerBundle/Resources/config/routing.yml"

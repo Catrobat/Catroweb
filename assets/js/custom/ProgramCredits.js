@@ -1,89 +1,78 @@
+/* eslint-env jquery */
+/* global Routing */
+
+// eslint-disable-next-line no-unused-vars
 function ProgramCredits (programId, showMoreButtonText, showLessButtonText,
-                             statusCode_OK, statusCode_CREDITS_TOO_LONG,
-                             statusCode_RUDE_WORD_IN_CREDITS)
-{
-  
+  statusCodeOk, statusCodeCreditsTooLong,
+  statusCodeRudeWordInCredits) {
   // Edit Credits
   $(function () {
-    
-    let credits = $('#credits')
-    let editCreditsUI = $('#edit-credits-ui')
-    let editCreditsButton = $('#edit-credits-button')
-    let editCredits = $('#edit-credits')
-    let editCreditsSubmitButton = $('#edit-credits-submit-button')
-    let editCreditsError = $('#edit-credits-error')
-    
+    const credits = $('#credits')
+    const editCreditsUI = $('#edit-credits-ui')
+    const editCreditsButton = $('#edit-credits-button')
+    const editCredits = $('#edit-credits')
+    const editCreditsSubmitButton = $('#edit-credits-submit-button')
+    const editCreditsError = $('#edit-credits-error')
+
     // set default visibilities
     initCreditsEdit()
-    
-    function initCreditsEdit ()
-    {
+
+    function initCreditsEdit () {
       editCreditsUI.hide()
       credits.show()
     }
-    
+
     editCreditsButton.click(function () {
-      if (credits.is(':visible'))
-      {
+      if (credits.is(':visible')) {
         credits.hide()
         editCreditsUI.show()
-      }
-      else
-      {
+      } else {
         credits.show()
         editCreditsUI.hide()
       }
     })
-    
+
     editCreditsSubmitButton.click(function () {
-      let newCredits = editCredits.val().trim()
-      if (newCredits === credits.text().trim())
-      {
+      const newCredits = editCredits.val().trim()
+      if (newCredits === credits.text().trim()) {
         editCreditsUI.hide()
         credits.show()
         return
       }
-      
-      let url = Routing.generate('edit_program_credits',
-        {id: programId, newCredits: newCredits}, false);
-      
-      //let url = "/editProjectCredits/" + programId + "/" + newCredits;
-      
+
+      const url = Routing.generate('edit_program_credits',
+        { id: programId, new_credits: newCredits }, false)
+
+      // let url = "/editProjectCredits/" + programId + "/" + newCredits;
+
       $.get(url, function (data) {
-        if (data.statusCode === statusCode_OK)
-        {
+        if (data.statusCode === statusCodeOk) {
           location.reload()
-        }
-        else if (data.statusCode === statusCode_CREDITS_TOO_LONG ||
-          data.statusCode === statusCode_RUDE_WORD_IN_CREDITS)
-        {
+        } else if (data.statusCode === statusCodeCreditsTooLong ||
+          data.statusCode === statusCodeRudeWordInCredits) {
           editCredits.addClass('danger')
           editCreditsError.show()
           editCreditsError.text(data.message)
         }
       })
     })
-    
   })
-  
+
   // Long Credits Collapse
   $(function () {
-    let creditsFulltext = $('#creditsFulltext')
-    let creditsPoints = $('#creditsPoints')
-    let creditsShowMoreToggle = $('#creditsShowMoreToggle')
-    let creditsShowMoreText = $('#creditsShowMoreText')
+    const creditsFulltext = $('#creditsFulltext')
+    const creditsPoints = $('#creditsPoints')
+    const creditsShowMoreToggle = $('#creditsShowMoreToggle')
+    const creditsShowMoreText = $('#creditsShowMoreText')
     creditsFulltext.hide()
     creditsPoints.show()
     creditsShowMoreToggle.click(function () {
-      if (creditsFulltext.is(':visible'))
-      {
+      if (creditsFulltext.is(':visible')) {
         creditsFulltext.fadeOut()
         creditsPoints.show()
         creditsShowMoreText.text(showMoreButtonText)
         creditsShowMoreToggle.css('aria-expanded', false)
-      }
-      else
-      {
+      } else {
         creditsFulltext.fadeIn()
         creditsPoints.hide()
         creditsShowMoreText.text(showLessButtonText)
@@ -91,5 +80,4 @@ function ProgramCredits (programId, showMoreButtonText, showLessButtonText,
       }
     })
   })
-  
 }

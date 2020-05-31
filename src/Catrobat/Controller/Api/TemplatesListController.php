@@ -8,22 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-/**
- * Class TemplatesListController
- * @package App\Catrobat\Controller\Api
- */
 class TemplatesListController extends AbstractController
 {
-
   /**
+   * @deprecated
+   *
    * @Route("/api/templates/list.json", name="api_template_list", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @param Request $request
-   *
-   * @return TemplateListResponse
    */
-  public function listTemplatesAction(Request $request, TemplateManager $template_manager)
+  public function listTemplatesAction(Request $request, TemplateManager $template_manager): TemplateListResponse
   {
     $templates = $template_manager->findAllActive();
 

@@ -4,19 +4,12 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class RepeatBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 class RepeatBrick extends Brick
 {
-  /**
-   *
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::REPEAT_BRICK;
-    $this->caption = "Repeat _ times";
+    $this->caption = 'Repeat _ times';
     $this->setImgFile(Constants::CONTROL_BRICK_IMG);
   }
 }

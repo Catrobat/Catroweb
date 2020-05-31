@@ -2,21 +2,23 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class UnknownStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class UnknownStatement extends Statement
 {
-  const BEGIN_STRING = "Unknown Statement";
-  const END_STRING = "<br/>";
+  /**
+   * @var string
+   */
+  const BEGIN_STRING = 'Unknown Statement';
+  /**
+   * @var string
+   */
+  const END_STRING = '<br/>';
 
   /**
    * UnknownStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -25,20 +27,13 @@ class UnknownStatement extends Statement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
-    return "Unknown Brick";
+    return 'Unknown Brick';
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
-    return "1h_brick_grey.png";
+    return '1h_brick_grey.png';
   }
-
 }

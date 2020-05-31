@@ -18,7 +18,7 @@
   border: none;
   border-bottom: 1px solid rgba($primary, 0.3);
   background: none;
-  color: rgb(0, 172, 193);
+  color: $primary;
 }
 
 .group input:focus {
@@ -192,13 +192,6 @@ input:valid ~ label {
   min-height: 39px;
 }
 
-h1 {
-  width: 318px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
 #login_links {
   font-size: 16px;
   width: 318px;
@@ -216,7 +209,7 @@ h1 {
 
 hr {
   width: 100%;
-  border-color: $default-border-color;
+  border-color: $primary;
 }
 
 .hidden {

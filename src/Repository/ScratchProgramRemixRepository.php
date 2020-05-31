@@ -5,29 +5,20 @@ namespace App\Repository;
 use App\Entity\ScratchProgramRemixRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\DBAL\Types\GuidType;
 
-/**
- * Class ScratchProgramRemixRepository
- * @package App\Repository
- */
 class ScratchProgramRemixRepository extends ServiceEntityRepository
 {
-
-  /**
-   * @param ManagerRegistry $managerRegistry
-   */
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, ScratchProgramRemixRelation::class);
   }
 
   /**
-   * @param int[] $program_ids
+   * @param string[] $program_ids
    *
-   * @return int[]
+   * @return string[]
    */
-  public function getDirectEdgeRelationsOfProgramIds(array $program_ids)
+  public function getDirectEdgeRelationsOfProgramIds(array $program_ids): array
   {
     $qb = $this->createQueryBuilder('s');
 
@@ -37,14 +28,14 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('program_ids', $program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult();
+      ->getResult()
+    ;
   }
 
   /**
-   * @param GuidType   $program_id
-   * @param int[] $scratch_parent_program_ids
+   * @param string[] $scratch_parent_program_ids
    */
-  public function removeParentRelations($program_id, array $scratch_parent_program_ids)
+  public function removeParentRelations(string $program_id, array $scratch_parent_program_ids): void
   {
     $qb = $this->createQueryBuilder('s');
 
@@ -55,19 +46,18 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
       ->setParameter('scratch_parent_program_ids', $scratch_parent_program_ids)
       ->setParameter('program_id', $program_id)
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 
-  /**
-   *
-   */
-  public function removeAllRelations()
+  public function removeAllRelations(): void
   {
     $qb = $this->createQueryBuilder('s');
 
     $qb
       ->delete()
       ->getQuery()
-      ->execute();
+      ->execute()
+    ;
   }
 }

@@ -5,35 +5,25 @@ namespace App\Catrobat\Controller\Web;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\StatusCode;
 use App\Entity\CommentNotification;
-use App\Entity\Program;
-use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserComment;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-/**
- * Class CommentsController
- * @package App\Catrobat\Controller\Web
- */
 class CommentsController extends AbstractController
 {
-
   /**
    * @Route("/reportComment", name="report", methods={"GET"})
    *
-   * @throws \Exception
-   * @return Response
+   * @throws Exception
    */
-  public function reportCommentAction()
+  public function reportCommentAction(): Response
   {
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
@@ -41,11 +31,9 @@ class CommentsController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if (!$comment)
+    if (null === $comment)
     {
-      throw $this->createNotFoundException(
-        'No comment found for this id ' . $_GET['CommentId']
-      );
+      throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
 
     $comment->setIsReported(true);
@@ -54,19 +42,14 @@ class CommentsController extends AbstractController
     return new Response(StatusCode::OK);
   }
 
-
   /**
    * @Route("/deleteComment", name="delete", methods={"GET"})
    *
-   * @throws \Exception
-   * @return Response
+   * @throws Exception
    */
-  public function deleteCommentAction()
+  public function deleteCommentAction(): Response
   {
-    /**
-     * @var $comment UserComment
-     * @var $user    User
-     */
+    /** @var User|null $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -76,16 +59,14 @@ class CommentsController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted("ROLE_ADMIN"))
+    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted('ROLE_ADMIN'))
     {
       return new Response(StatusCode::NO_ADMIN_RIGHTS);
     }
 
-    if (!$comment)
+    if (null === $comment)
     {
-      throw $this->createNotFoundException(
-        'No comment found for this id ' . $_GET['CommentId']
-      );
+      throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
     $em->remove($comment);
     $em->flush();
@@ -93,33 +74,19 @@ class CommentsController extends AbstractController
     return new Response(StatusCode::OK);
   }
 
-
   /**
    * @Route("/comment", name="comment", methods={"POST"})
-   *
-   * @param CatroNotificationService $notification_service
-   * @param ProgramManager $program_manager
-   *
-   * @return Response
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function postCommentAction(CatroNotificationService $notification_service, ProgramManager $program_manager)
+  public function postCommentAction(CatroNotificationService $notification_service, ProgramManager $program_manager): Response
   {
-    /**
-     * @var $user             User
-     * @var $program          Program
-     * @var $reported_program ProgramInappropriateReport
-     * @var $program_manager  ProgramManager
-     */
-
+    /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
+    if (null === $user)
     {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
-    $user = $this->get("security.token_storage")->getToken()->getUser();
+    $user = $this->get('security.token_storage')->getToken()->getUser();
 
     $program = $program_manager->find($_POST['ProgramId']);
 

@@ -3,14 +3,15 @@
 namespace App\Catrobat\Twig;
 
 use App\Catrobat\Services\CommunityStatisticsService;
-use App\Entity\MediaPackageFile;
 use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Entity\MediaPackageFile;
+use App\Repository\GameJamRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Liip\ThemeBundle\ActiveTheme;
 use NumberFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
-use App\Repository\GameJamRepository;
-use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,78 +19,39 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Twig_Function;
 
-/**
- * Class AppExtension
- * @package App\Catrobat\Twig
- */
 class AppExtension extends AbstractExtension
 {
+  private RequestStack $request_stack;
 
-  /**
-   * @var RequestStack
-   */
-  private $request_stack;
+  private MediaPackageFileRepository $media_package_file_repository;
 
-  /**
-   * @var MediaPackageFileRepository
-   */
-  private $mediapackage_file_repository;
+  private GameJamRepository $game_jam_repository;
 
-  /**
-   * @var GameJamRepository
-   */
-  private $gamejamrepository;
+  private ActiveTheme $theme;
 
-  /**
-   * @var ActiveTheme
-   */
-  private $theme;
+  private string $translation_path;
 
-  /**
-   * @var
-   */
-  private $translationPath;
+  private ParameterBagInterface $parameter_bag;
 
-  /**
-   * @var ParameterBagInterface
-   */
-  private $parameter_bag;
+  private TranslatorInterface $translator;
 
-  /**
-   * @var TranslatorInterface
-   */
-  private $translator;
-
-  /**
-   * AppExtension constructor.
-   *
-   * @param RequestStack               $request_stack
-   * @param MediaPackageFileRepository $mediapackage_file_repo
-   * @param GameJamRepository          $gamejamrepository
-   * @param ActiveTheme                $theme
-   * @param ParameterBagInterface      $parameter_bag
-   * @param string                     $catrobat_translation_dir
-   * @param TranslatorInterface        $translator
-   */
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo,
-                              GameJamRepository $gamejamrepository, ActiveTheme $theme,
-                              ParameterBagInterface $parameter_bag, $catrobat_translation_dir,
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo,
+                              GameJamRepository $game_jam_repository, ActiveTheme $theme,
+                              ParameterBagInterface $parameter_bag, string $catrobat_translation_dir,
                               TranslatorInterface $translator)
   {
-    $this->translationPath = $catrobat_translation_dir;
+    $this->translation_path = $catrobat_translation_dir;
     $this->parameter_bag = $parameter_bag;
     $this->request_stack = $request_stack;
-    $this->mediapackage_file_repository = $mediapackage_file_repo;
-    $this->gamejamrepository = $gamejamrepository;
+    $this->media_package_file_repository = $media_package_file_repo;
+    $this->game_jam_repository = $game_jam_repository;
     $this->theme = $theme;
     $this->translator = $translator;
   }
 
-  /**
-   * @return array|\Twig_Filter[]
-   */
-  public function getFilters()
+  public function getFilters(): array
   {
     return [
       new TwigFilter('decamelize', [$this, 'decamelizeFilter']),
@@ -98,7 +60,7 @@ class AppExtension extends AbstractExtension
   }
 
   /**
-   * @param $input
+   * @param mixed $input
    *
    * @return string|string[]|null
    */
@@ -109,24 +71,22 @@ class AppExtension extends AbstractExtension
       return $input;
     }
 
-    return preg_replace('/(?<!^)[A-Z]/', ' $0', $input);
+    return preg_replace('#(?<!^)[A-Z]#', ' $0', $input);
   }
 
   /**
-   * @param $input
-   *
-   * @return string
+   * @param mixed $input
    */
-  public function humanFriendlyNumberFilter($input)
+  public function humanFriendlyNumberFilter($input): string
   {
     $user_locale = $this->request_stack->getCurrentRequest()->getLocale();
+
     return AppExtension::humanFriendlyNumber($input, $this->translator, $user_locale);
   }
 
   /**
-   * @param                     $input
-   * @param TranslatorInterface $translator
-   * @param                     $user_locale
+   * @param mixed $input
+   * @param mixed $user_locale
    *
    * @return bool|false|string
    */
@@ -139,25 +99,23 @@ class AppExtension extends AbstractExtension
 
     $number_formatter = new NumberFormatter($user_locale, NumberFormatter::DECIMAL);
 
-    if ($input >= 1000000)
+    if ($input >= 1_000_000)
     {
       $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 1);
 
-      return $number_formatter->format($input / 1000000) . ' ' .
-        $translator->trans("format.million_abbreviation", [], "catroweb");
+      return $number_formatter->format($input / 1_000_000).' '.
+        $translator->trans('format.million_abbreviation', [], 'catroweb');
     }
-    else
-    {
-      $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
 
-      return $number_formatter->format($input);
-    }
+    $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+
+    return $number_formatter->format($input);
   }
 
   /**
-   * @return array|\Twig_Function[]
+   * @return Twig_Function[]
    */
-  public function getFunctions()
+  public function getFunctions(): array
   {
     return [
       new TwigFunction('countriesList', [$this, 'getCountriesList']),
@@ -171,16 +129,21 @@ class AppExtension extends AbstractExtension
       new TwigFunction('theme', [$this, 'getTheme']),
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
       new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
-      new TwigFunction('getJavascriptPath', [$this, 'getJavascriptPath']),
       new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
-      new TwigFunction('assetExists', [$this, 'assetExists'])
+      new TwigFunction('assetExists', [$this, 'assetExists']),
+      new TwigFunction('isVersionSupportedByCatBlocks', [$this, 'isVersionSupportedByCatBlocks']),
     ];
   }
 
-  /**
-   * @return string
-   */
-  public function getName()
+  public function isVersionSupportedByCatBlocks(string $version): bool
+  {
+    $MIN_VERSION_SUPPORTED = '0.994';
+    $EPSILON = 0.0000001;
+
+    return floatval($MIN_VERSION_SUPPORTED) - floatval($version) < $EPSILON;
+  }
+
+  public function getName(): string
   {
     return 'app_extension';
   }
@@ -188,20 +151,17 @@ class AppExtension extends AbstractExtension
   /**
    * @return string[]
    */
-  public function getCountriesList()
+  public function getCountriesList(): array
   {
     return Countries::getNames();
   }
 
-  /**
-   * @return array
-   */
-  public function getLanguageOptions()
+  public function getLanguageOptions(): array
   {
-    $path = $this->translationPath;
+    $path = $this->translation_path;
     $current_language = $this->request_stack->getCurrentRequest()->getLocale();
 
-    if (strpos($current_language, '_DE') !== false || strpos($current_language, '_US') !== false)
+    if (false !== strpos($current_language, '_DE') || false !== strpos($current_language, '_US'))
     {
       $current_language = substr($current_language, 0, 2);
     }
@@ -211,7 +171,8 @@ class AppExtension extends AbstractExtension
     $finder = new Finder();
     $finder->files()
       ->in($path)
-      ->sortByName();
+      ->sortByName()
+    ;
 
     $isSelectedLanguage = false;
 
@@ -236,7 +197,7 @@ class AppExtension extends AbstractExtension
         $list[] = [
           $shortName,
           $locale,
-          strcmp($current_language, $shortName) === 0,
+          0 === strcmp($current_language, $shortName),
         ];
       }
     }
@@ -249,77 +210,28 @@ class AppExtension extends AbstractExtension
     return $list;
   }
 
-  /**
-   * @param $languages
-   * @param $currentLanguage
-   *
-   * @return array
-   */
-  private function setSelectedLanguage($languages, $currentLanguage)
-  {
-    $list = [];
-    foreach ($languages as $language)
-    {
-      if (strpos($currentLanguage, $language[0]) !== false)
-      {
-
-        $language = [
-          $language[0],
-          $language[1],
-          true,
-        ];
-      }
-      $list[] = $language;
-    }
-
-    return $list;
-  }
-
-  /**
-   * @param $filename
-   *
-   * @return bool|string
-   */
-  private function getShortLanguageNameFromFileName($filename)
-  {
-    $firstOccurrence = strpos($filename, '.') + 1;
-    $lastOccurrence = strpos($filename, '.', $firstOccurrence);
-
-    return substr($filename, $firstOccurrence, $lastOccurrence - $firstOccurrence);
-  }
-
-  /**
-   * @return bool
-   */
-  public function isWebview()
+  public function isWebview(): bool
   {
     $request = $this->request_stack->getCurrentRequest();
     $user_agent = $request->headers->get('User-Agent');
 
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    return preg_match('/Catrobat/', $user_agent) || strpos($user_agent, 'Android') !== false ||
-      strpos($user_agent, 'iPad') !== false || strpos($user_agent, 'iPhone') !== false;
+    return preg_match('/Catrobat/', $user_agent) || false !== strpos($user_agent, 'Android') ||
+      false !== strpos($user_agent, 'iPad') || false !== strpos($user_agent, 'iPhone');
   }
 
-  /**
-   * @return bool
-   */
-  public function isIOSWebview()
+  public function isIOSWebview(): bool
   {
     $request = $this->request_stack->getCurrentRequest();
     $user_agent = $request->headers->get('User-Agent');
 
-    return strpos($user_agent, 'iPad') !== false || strpos($user_agent, 'iPhone') !== false;
+    return false !== strpos($user_agent, 'iPad') || false !== strpos($user_agent, 'iPhone');
   }
 
   /**
-   *
-   * @param
-   *            $program_catrobat_language
-   *
-   * @return true|false
+   * @param mixed $program_catrobat_language
    */
-  public function checkCatrobatLanguage($program_catrobat_language)
+  public function checkCatrobatLanguage($program_catrobat_language): bool
   {
     $request = $this->request_stack->getCurrentRequest();
     $user_agent = $request->headers->get('User-Agent');
@@ -327,10 +239,10 @@ class AppExtension extends AbstractExtension
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
     if (preg_match('/Catrobat/', $user_agent))
     {
-      $user_agent_array = explode("/", $user_agent);
+      $user_agent_array = explode('/', $user_agent);
 
       // $user_agent_array = [ "Catrobat", "0.93 PocketCode", 0.9.14 Platform", "Android" ];
-      $catrobat_language_array = explode(" ", $user_agent_array[1]);
+      $catrobat_language_array = explode(' ', $user_agent_array[1]);
       // $catrobat_language_array = [ "0.93", "PocketCode" ];
       $catrobat_language = $catrobat_language_array[0] * 1.0;
 
@@ -343,115 +255,85 @@ class AppExtension extends AbstractExtension
     return true;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFlavor()
+  public function getFlavor(): ?string
   {
     $request = $this->request_stack->getCurrentRequest();
 
     return $request->get('flavor');
   }
 
-  /**
-   * @return string
-   */
-  public function getTheme()
+  public function getTheme(): string
   {
     return $this->theme->getName();
   }
 
-  /**
-   * @return string
-   */
-  public function getThemeDisplayName()
+  public function getThemeDisplayName(): string
   {
     switch ($this->getTheme()) {
       case 'luna':
-        return "Luna & Cat";
+        return 'Luna & Cat';
 
       case 'phirocode':
-        return "Phirocode";
+        return 'Phirocode';
 
       case 'create@school':
-        return "Create@School";
+        return 'Create@School';
 
       case 'embroidery':
-        return "Embroidery Designer";
+        return 'Embroidery Designer';
 
       case 'arduino':
-        return "Arduino Code";
+        return 'Arduino Code';
 
       default:
-        return "Pocket Code";
+        return 'Pocket Code';
     }
   }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/twig/getMediaPackageImageUrl", name="catrobat_twig_getMediaPackageImageUrl",
-   *                                                 methods={"POST"})
-   *
-   * @param $object MediaPackageFile
-   *
-   * @return null|string
+   * methods={"POST"})
    */
-  public function getMediaPackageImageUrl($object)
+  public function getMediaPackageImageUrl(MediaPackageFile $object): ?string
   {
     switch ($object->getExtension())
     {
-      case "jpg":
-      case "jpeg":
-      case "png":
-      case "gif":
-        return $this->mediapackage_file_repository->getWebPath($object->getId(), $object->getExtension());
-        break;
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'gif':
+        return $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension());
+      case 'catrobat':
+        return $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension());
+      default:
+        return null;
+    }
+  }
+
+  public function getMediaPackageSoundUrl(MediaPackageFile $object): ?string
+  {
+    switch ($object->getExtension())
+    {
+      case 'mp3':
+      case 'mpga':
+      case 'wav':
+      case 'ogg':
+        return $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension());
       default:
         return null;
     }
   }
 
   /**
+   * @throws NonUniqueResultException
    *
-   * @param $object MediaPackageFile
-   *
-   * @return null|string
-   */
-  public function getMediaPackageSoundUrl($object)
-  {
-    switch ($object->getExtension())
-    {
-      case "mp3":
-      case "mpga":
-      case "wav":
-      case "ogg":
-        return $this->mediapackage_file_repository->getWebPath($object->getId(), $object->getExtension());
-        break;
-      default:
-        return null;
-    }
-  }
-
-  /**
    * @return mixed
-   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function getCurrentGameJam()
   {
-    return $this->gamejamrepository->getCurrentGameJam();
-  }
-
-  /**
-   * @param $jsFile
-   *
-   * @return mixed|string
-   */
-  public function getJavascriptPath($jsFile)
-  {
-    $jsPath = $this->parameter_bag->get('jspath');
-    $jsPath .= $jsFile;
-    $jsPath = str_replace("//", "/", $jsPath);
-
-    return $jsPath;
+    return $this->game_jam_repository->getCurrentGameJam();
   }
 
   /**
@@ -460,14 +342,13 @@ class AppExtension extends AbstractExtension
    *
    * See the fetchStatistics implementation of Services\CommunityStatisticsService.php for details.
    *
-   * @param CommunityStatisticsService $communityStatisticsService
-   *
    * @return array|mixed
    */
   public function getCommunityStats(CommunityStatisticsService $communityStatisticsService)
   {
     $cms_s = $communityStatisticsService;
-    $stats = $cms_s->fetchStatistics();
+
+    return $cms_s->fetchStatistics();
 
     /* Numberformatter could be used to apply the locale. However this requires the intl extension to be fully working.
 
@@ -477,22 +358,41 @@ class AppExtension extends AbstractExtension
       $stats[$key] = $nf->format($value);
     }
     */
-
-    return $stats;
   }
 
-  /**
-   * @param $filename
-   *
-   * @return bool
-   */
-  public function assetExists($filename)
+  public function assetExists(string $filename): bool
   {
     $public_dir = $this->parameter_bag->get('catrobat.pubdir');
     $filename = rawurldecode($filename);
-    $filename = $public_dir . $filename;
+    $filename = $public_dir.$filename;
 
     return file_exists($filename);
   }
 
+  private function setSelectedLanguage(array $languages, string $currentLanguage): array
+  {
+    $list = [];
+    foreach ($languages as $language)
+    {
+      if (false !== strpos($currentLanguage, $language[0]))
+      {
+        $language = [
+          $language[0],
+          $language[1],
+          true,
+        ];
+      }
+      $list[] = $language;
+    }
+
+    return $list;
+  }
+
+  private function getShortLanguageNameFromFileName(string $filename): string
+  {
+    $firstOccurrence = strpos($filename, '.') + 1;
+    $lastOccurrence = strpos($filename, '.', $firstOccurrence);
+
+    return substr($filename, $firstOccurrence, $lastOccurrence - $firstOccurrence);
+  }
 }

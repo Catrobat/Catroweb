@@ -1,24 +1,17 @@
 <?php
 
-
 namespace App\Catrobat\Controller\Admin;
 
 use App\Catrobat\Services\TemplateService;
 use App\Entity\Template;
+use ImagickException;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
-/**
- * Class TemplateController
- * @package App\Catrobat\Controller\Admin
- */
 class TemplateController extends CRUDController
 {
-
-  private $template_service;
+  private TemplateService $template_service;
 
   public function __construct(TemplateService $template_service)
   {
@@ -26,10 +19,9 @@ class TemplateController extends CRUDController
   }
 
   /**
-   * @return Response
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function createAction()
+  public function createAction(): Response
   {
     $response = parent::createAction();
     $this->saveFiles();
@@ -37,13 +29,10 @@ class TemplateController extends CRUDController
     return $response;
   }
 
-
   /**
    * @param int|null $id
-   *
-   * @return RedirectResponse|Response
    */
-  public function deleteAction($id)
+  public function deleteAction($id): Response
   {
     $templateService = $this->getTemplateService();
     $templateService->deleteTemplateFiles($id);
@@ -51,14 +40,12 @@ class TemplateController extends CRUDController
     return parent::deleteAction($id);
   }
 
-
   /**
    * @param null $id
    *
-   * @return RedirectResponse|Response
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  public function editAction($id = null)
+  public function editAction($id = null): Response
   {
     $render = parent::editAction($id);
     $this->saveFiles();
@@ -66,41 +53,29 @@ class TemplateController extends CRUDController
     return $render;
   }
 
-
   /**
-   * @throws \ImagickException
+   * @throws ImagickException
    */
-  private function saveFiles()
+  private function saveFiles(): void
   {
-    /**
-     * @var $templateService TemplateService
-     * @var $template Template
-     */
     $template = $this->getTemplate();
-    if ($template->getId() != null)
+    if (null != $template->getId())
     {
       $templateService = $this->getTemplateService();
       $templateService->saveFiles($template);
     }
   }
 
-
-  /**
-   * @return TemplateService|object
-   */
-  private function getTemplateService()
+  private function getTemplateService(): TemplateService
   {
     return $this->template_service;
   }
 
-
-  /**
-   * @return mixed
-   */
-  private function getTemplate()
+  private function getTemplate(): Template
   {
+    /** @var Template|null $object */
     $object = $this->admin->getSubject();
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }

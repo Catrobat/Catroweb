@@ -4,41 +4,29 @@ namespace App\Catrobat\CatrobatCode\Statements;
 
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
 
-/**
- * Class FileNameStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class FileNameStatement extends Statement
 {
-  /**
-   * @var
-   */
   private $value;
 
   /**
    * FileNameStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $value
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $value
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $value)
   {
     $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
-    $code = SyntaxHighlightingConstants::VALUE . $this->value . $this->executeChildren() . SyntaxHighlightingConstants::END;
-
-    return $code;
+    return SyntaxHighlightingConstants::VALUE.$this->value.$this->executeChildren().SyntaxHighlightingConstants::END;
   }
 
   /**

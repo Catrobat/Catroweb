@@ -5,11 +5,6 @@ namespace App\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-
-/**
- * Class BroadcastNotificationAdmin
- * @package App\Admin
- */
 class BroadcastNotificationAdmin extends AbstractAdmin
 {
   /**
@@ -22,10 +17,7 @@ class BroadcastNotificationAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'broadcast';
 
-  /**
-   * @param RouteCollection $collection
-   */
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->clearExcept(['list']);
     $collection->add('send');

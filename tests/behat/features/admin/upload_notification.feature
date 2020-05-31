@@ -4,9 +4,6 @@ Feature: Admin Upload Notification
   As a subscribed admin
   I want to get an email when a program is uploaded or reported
 
-  Background:
-    Given I am a valid user
-
   Scenario: Email only subscribed admins directly after upload
     Given there are users:
       | name     | email           | id |
@@ -20,7 +17,7 @@ Feature: Admin Upload Notification
       | User2    | 0      | 1      | 0       |
     And I activate the Profiler
 
-    When I upload a program with valid parameters
+    When I upload this generated program, API version 1
     Then I should see 2 outgoing emails
     And I should see a email with recipient "admin@catrob.at"
     And I should see a email with recipient "dog@catrob.at"

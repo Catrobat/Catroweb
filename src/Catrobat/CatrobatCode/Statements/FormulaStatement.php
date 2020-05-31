@@ -2,121 +2,72 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class FormulaStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class FormulaStatement extends Statement
 {
+  private ?LeftChildStatement $leftChild = null;
+
+  private ?RightChildStatement $rightChild = null;
+
+  private ?ValueStatement $type = null;
+
   /**
-   * @var Statement
-   */
-  private $leftChild;
-  /**
-   * @var Statement
-   */
-  private $rightChild;
-  /**
-   * @var Statement
-   */
-  private $type;
-  /**
-   * @var
+   * @var mixed
    */
   private $category;
 
   /**
    * FormulaStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $category
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
+   * @param mixed $category
    */
   public function __construct($statementFactory, $xmlTree, $spaces, $category)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
-      "", "");
+      '', '');
     $this->category = $category;
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
-    $code = $this->executeChildren();
-
-    return $code;
+    return $this->executeChildren();
   }
 
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
     $endCode = '';
 
     $this->setVariables();
 
-
-    if ($this->type != null)
+    if (null != $this->type)
     {
       $code .= $this->type->execute();
     }
-    if ($this->type != null && ($this->leftChild != null || $this->rightChild != null))
+    if (null != $this->type && (null != $this->leftChild || null != $this->rightChild))
     {
       $code .= '(';
       $endCode = ')';
     }
 
-    if ($this->leftChild != null)
+    if (null != $this->leftChild)
     {
       $code .= $this->leftChild->execute();
     }
 
-    if ($this->leftChild != null && $this->rightChild != null)
+    if (null != $this->leftChild && null != $this->rightChild)
     {
       $code .= ', ';
     }
 
-    if ($this->rightChild != null)
+    if (null != $this->rightChild)
     {
       $code .= $this->rightChild->execute();
     }
 
-    return $code . $endCode;
-  }
-
-
-  /**
-   *
-   */
-  protected function setVariables()
-  {
-
-    foreach ($this->statements as $value)
-    {
-      if ($value instanceof LeftChildStatement)
-      {
-        $this->leftChild = $value;
-      }
-      else
-      {
-        if ($value instanceof RightChildStatement)
-        {
-          $this->rightChild = $value;
-        }
-        else
-        {
-          if ($value instanceof ValueStatement)
-          {
-            $this->type = $value;
-          }
-        }
-      }
-    }
+    return $code.$endCode;
   }
 
   /**
@@ -127,4 +78,22 @@ class FormulaStatement extends Statement
     return $this->category;
   }
 
+  protected function setVariables(): void
+  {
+    foreach ($this->statements as $value)
+    {
+      if ($value instanceof LeftChildStatement)
+      {
+        $this->leftChild = $value;
+      }
+      elseif ($value instanceof RightChildStatement)
+      {
+        $this->rightChild = $value;
+      }
+      elseif ($value instanceof ValueStatement)
+      {
+        $this->type = $value;
+      }
+    }
+  }
 }

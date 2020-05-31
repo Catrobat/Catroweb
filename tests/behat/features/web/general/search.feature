@@ -1,0 +1,112 @@
+@web @search
+Feature: Searching for programs
+
+  Background:
+    Given there are users:
+      | id | name     |
+      | 1  | Catrobat |
+      | 2  | User1    |
+    And there are extensions:
+      | id | name         | prefix  |
+      | 1  | Arduino      | ARDUINO |
+      | 2  | Drone        | DRONE   |
+      | 3  | Lego         | LEGO    |
+      | 4  | Phiro        | PHIRO   |
+      | 5  | Raspberry Pi | RASPI   |
+    And there are tags:
+      | id | en        | de         |
+      | 1  | Game      | Spiel      |
+      | 2  | Animation | Animation  |
+      | 3  | Story     | Geschichte |
+    And there are projects:
+      | id | name                | description | owned by | tags_id|extensions | upload time      | version |
+      | 1  | program 1           | p1          | User1    |  1     |  arduino  | 22.04.2014 12:00 | 0.8.5   |
+      | 2  | test program        |             | User1    |  2     |  arduino  | 22.04.2014 13:00 | 0.8.5   |
+      | 3  | Test advanced app   |             | Catrobat |  3     |  drone    | 22.04.2014 14:00 | 0.8.5   |
+      | 4  | Catrobat            | my program  | User1    |  3     |  lego     | 22.04.2014 14:00 | 0.8.5   |
+      | 5  | project 3           |     lego    | Catrobat |  1,2   |  phiro    | 22.04.2014 14:00 | 0.8.5   |
+      | 6  | test advanced games |             | User1    |  2,3   |  lego     | 22.04.2014 14:00 | 0.8.5   |
+      | 7  | test                |             | Catrobat |  3,2   |  lego     | 22.04.2014 14:00 | 0.8.5   |
+      | 8  | project test        |   catrobat  | User1    |   1    |  drone    | 22.04.2014 14:00 | 0.8.5   |
+
+
+  Scenario: search for programs, which contain the word "program"
+    Given I am on "/app/search/program"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 3 results"
+    Then I should see "program 1"
+    Then I should see "test program"
+    Then I should see "Catrobat"
+
+  Scenario: search for programs, which contain the word "Test"
+    Given I am on "/app/search/Test"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 5 results"
+    Then I should see "test advanced games"
+    Then I should see "test advanced app"
+    Then I should see "test program"
+    Then I should see "test"
+    Then I should see "project test"
+
+  Scenario: search for programs, which contain the word "test advanced"
+    Given I am on "/app/search/Test%20advanced"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 2 results"
+    Then I should see "test advanced games"
+    Then I should see "test advanced app"
+
+  Scenario: search for projects, which contain the word "game"
+    Given I am on "/app/search/game"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 4 results"
+    Then I should see "test advanced games"
+    Then I should see "program 1"
+    Then I should see "project 3"
+    Then I should see "project test"
+
+  Scenario: search for projects, which contain the word "program and app"
+    Given I am on "/app/search/program%20and%20app"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 0 results"
+
+  Scenario: search for projects, which contain the word "catrobat"
+    Given I am on "/app/search/catrobat"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 5 results"
+    Then I should see "Test advanced app"
+    Then I should see "Catrobat"
+    Then I should see "project 3"
+    Then I should see "test"
+    Then I should see "project test"
+
+  Scenario: search for projects, which contain the word "lego"
+    Given I am on "/app/search/lego"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 4 results"
+    Then I should see "Test advanced games"
+    Then I should see "Catrobat"
+    Then I should see "project 3"
+    Then I should see "test"
+
+  Scenario: search for gmail should find no program
+    Given I am on "/app/search/gmail"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 0 results"
+
+  Scenario: search for gmx should find no program
+    Given I am on "/app/search/gmx.at"
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 0 results"
+
+
+  Scenario: Progress bar should be displayed when there are many search results being loaded
+    Given there are "2500" similar projects
+    And I am on "/app/search/basic"
+    Then the element ".circular-progress" should be visible
+    And I wait for the page to be loaded
+    Then I should see "Your search returned 2500 results"
+    And the element ".circular-progress" should not be visible
+    Then I should see "basic 1"
+    Then I should see "basic 2"
+    Then I should see "basic 3"
+    Then I should see "basic 4"

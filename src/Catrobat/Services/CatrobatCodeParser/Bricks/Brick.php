@@ -5,75 +5,47 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 use SimpleXMLElement;
 
-/**
- * Class Brick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 abstract class Brick
 {
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $brick_xml_properties;
-  /**
-   * @var
-   */
-  protected $type;
-  /**
-   * @var
-   */
-  protected $caption;
-  /**
-   * @var
-   */
-  private $img_file;
+  protected SimpleXMLElement $brick_xml_properties;
 
-  /**
-   * Brick constructor.
-   *
-   * @param SimpleXMLElement $brick_xml_properties
-   */
+  protected string $type;
+
+  protected string $caption;
+
+  private string $img_file;
+
   public function __construct(SimpleXMLElement $brick_xml_properties)
   {
     $this->brick_xml_properties = $brick_xml_properties;
     $this->create();
   }
 
-  /**
-   * @return mixed
-   */
-  abstract protected function create();
-
-  /**
-   * @return mixed
-   */
-  public function getType()
+  public function getType(): string
   {
     return $this->type;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCaption()
+  public function getCaption(): string
   {
     return $this->caption;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getImgFile()
+  public function getImgFile(): string
   {
     return $this->img_file;
   }
 
-  /**
-   * @param $img_file
-   */
-  protected function setImgFile($img_file)
+  public function commentOut(): void
   {
-    if ($this->isCommentedOut() or $this->hasCommentedOutParentScript())
+    $this->img_file = Constants::UNKNOWN_BRICK_IMG;
+  }
+
+  abstract protected function create(): void;
+
+  protected function setImgFile(string $img_file): void
+  {
+    if ($this->isCommentedOut() || $this->hasCommentedOutParentScript())
     {
       $this->commentOut();
     }
@@ -83,30 +55,15 @@ abstract class Brick
     }
   }
 
-  /**
-   * @return bool
-   */
-  private function isCommentedOut()
+  private function isCommentedOut(): bool
   {
-    return ($this->brick_xml_properties->commentedOut != null
-      and $this->brick_xml_properties->commentedOut == 'true');
+    return null != $this->brick_xml_properties->commentedOut && 'true' == $this->brick_xml_properties->commentedOut;
   }
 
-  /**
-   * @return bool
-   */
-  private function hasCommentedOutParentScript()
+  private function hasCommentedOutParentScript(): bool
   {
     $xpath_query_result = $this->brick_xml_properties->xpath('../../commentedOut');
 
-    return ($xpath_query_result != null and $xpath_query_result[0] == 'true');
-  }
-
-  /**
-   *
-   */
-  public function commentOut()
-  {
-    $this->img_file = Constants::UNKNOWN_BRICK_IMG;
+    return null != $xpath_query_result && 'true' == $xpath_query_result[0];
   }
 }

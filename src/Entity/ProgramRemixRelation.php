@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Utils\TimeUtils;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity
@@ -15,7 +17,8 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -24,206 +27,133 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $ancestor_id;
+  protected string $ancestor_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_descendant_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="ancestor_id", referencedColumnName="id")
-   * @var Program
    */
-  protected $ancestor;
+  protected Program $ancestor;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $descendant_id;
+  protected string $descendant_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="catrobat_remix_ancestor_relations",
-   *                                                                   fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="descendant_id", referencedColumnName="id")
-   * @var Program
    */
-  protected $descendant;
+  protected Program $descendant;
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false, options={"default" = 0})
+   * @ORM\Column(type="integer", nullable=false, options={"default": 0})
    */
-  protected $depth = 0;
+  protected int $depth = 0;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $created_at;
+  protected ?DateTime $created_at = null;
 
   /**
-   * @var \DateTime
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected $seen_at;
+  protected ?DateTime $seen_at = null;
 
-  /**
-   * @param Program $ancestor
-   * @param Program $descendant
-   * @param int                                $depth
-   */
-  public function __construct(Program $ancestor, Program $descendant, $depth)
+  public function __construct(Program $ancestor, Program $descendant, int $depth)
   {
     $this->setAncestor($ancestor);
     $this->setDescendant($descendant);
     $this->setDepth($depth);
-    $this->created_at = null;
-    $this->seen_at = null;
+  }
+
+  public function __toString(): string
+  {
+    return '(#'.$this->ancestor_id.', #'.$this->descendant_id.', depth: '.$this->depth.')';
   }
 
   /**
    * @ORM\PrePersist
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateTimestamps()
+  public function updateTimestamps(): void
   {
-    if ($this->getCreatedAt() == null)
+    if (null == $this->getCreatedAt())
     {
-      $this->setCreatedAt(new \DateTime());
+      $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 
-  /**
-   * @param Program $ancestor
-   *
-   * @return ProgramRemixRelation
-   */
-  public function setAncestor(Program $ancestor)
+  public function setAncestor(Program $ancestor): void
   {
     $this->ancestor = $ancestor;
     $this->ancestor_id = $ancestor->getId();
-
-    return $this;
   }
 
-  /**
-   * @return Program
-   */
-  public function getAncestor()
+  public function getAncestor(): Program
   {
     return $this->ancestor;
   }
 
-  /**
-   * @return int
-   */
-  public function getAncestorId()
+  public function getAncestorId(): string
   {
     return $this->ancestor_id;
   }
 
-  /**
-   * @param Program $descendant
-   *
-   * @return ProgramRemixRelation
-   */
-  public function setDescendant(Program $descendant)
+  public function setDescendant(Program $descendant): void
   {
     $this->descendant = $descendant;
     $this->descendant_id = $descendant->getId();
-
-    return $this;
   }
 
-  /**
-   * @return Program
-   */
-  public function getDescendant()
+  public function getDescendant(): Program
   {
     return $this->descendant;
   }
 
-  /**
-   * @return int
-   */
-  public function getDescendantId()
+  public function getDescendantId(): string
   {
     return $this->descendant_id;
   }
 
-  /**
-   * @param int $depth
-   *
-   * @return ProgramRemixRelation
-   */
-  public function setDepth($depth)
+  public function setDepth(int $depth): void
   {
-    $this->depth = (int)$depth;
-
-    return $this;
+    $this->depth = (int) $depth;
   }
 
-  /**
-   * @return int
-   */
-  public function getDepth()
+  public function getDepth(): int
   {
     return $this->depth;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getCreatedAt()
+  public function getCreatedAt(): ?DateTime
   {
     return $this->created_at;
   }
 
-  /**
-   * @param \DateTime $created_at
-   *
-   * @return $this
-   */
-  public function setCreatedAt(\DateTime $created_at)
+  public function setCreatedAt(DateTime $created_at): void
   {
     $this->created_at = $created_at;
-
-    return $this;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getSeenAt()
+  public function getSeenAt(): ?DateTime
   {
     return $this->seen_at;
   }
 
-  /**
-   * @param \DateTime $seen_at
-   *
-   * @return $this
-   */
-  public function setSeenAt($seen_at)
+  public function setSeenAt(?DateTime $seen_at): void
   {
     $this->seen_at = $seen_at;
-
-    return $this;
   }
 
-  /**
-   * @return string
-   */
-  public function getUniqueKey()
+  public function getUniqueKey(): string
   {
-    return sprintf("ProgramRemixRelation(%d,%d,%d)", $this->ancestor_id, $this->descendant_id, $this->depth);
+    return sprintf('ProgramRemixRelation(%d,%d,%d)', $this->ancestor_id, $this->descendant_id, $this->depth);
   }
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return "(#" . $this->ancestor_id . ", #" . $this->descendant_id . ", depth: " . $this->depth . ")";
-  }
-
 }

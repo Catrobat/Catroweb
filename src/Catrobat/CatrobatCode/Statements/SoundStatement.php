@@ -2,92 +2,64 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class SoundStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
+use App\Catrobat\CatrobatCode\StatementFactory;
+use SimpleXMLElement;
+
 class SoundStatement extends Statement
 {
-  /**
-   * @var
-   */
-  private $value;
-  /**
-   * @var
-   */
-  private $fileName;
-  /**
-   * @var
-   */
-  private $name;
+  private string $value;
 
-  /**
-   * SoundStatement constructor.
-   *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $value
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, $value)
+  private ?FileNameStatement $fileName = null;
+
+  private ?ValueStatement $name = null;
+
+  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, string $value)
   {
     $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     $code = $this->value;
     $this->findNames();
 
-    if ($this->name != null)
+    if (null !== $this->name)
     {
       $code .= $this->name->execute();
     }
 
-    if ($this->fileName != null)
+    if (null !== $this->fileName)
     {
-      $code .= ' (filename: ' . $this->fileName->execute() . ')';
+      $code .= ' (filename: '.$this->fileName->execute().')';
     }
 
     return $code;
   }
 
-  /**
-   *
-   */
-  private function findNames()
+  public function getName(): ?ValueStatement
+  {
+    return $this->name;
+  }
+
+  private function findNames(): void
   {
     $tmpStatements = parent::getStatements();
     foreach ($tmpStatements as $statement)
     {
-      if ($statement != null)
+      if (null != $statement)
       {
         if ($statement instanceof ValueStatement)
         {
           $this->name = $statement;
         }
-        else
+        elseif ($statement instanceof FileNameStatement)
         {
-          if ($statement instanceof FileNameStatement)
-          {
-            $this->fileName = $statement;
-          }
+          $this->fileName = $statement;
         }
       }
     }
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getName()
-  {
-    return $this->name;
   }
 }

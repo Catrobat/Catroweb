@@ -2,38 +2,23 @@
 
 namespace App\Catrobat\Listeners;
 
-use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Events\ProgramBeforePersistEvent;
+use App\Catrobat\Services\ApkRepository;
 use App\Entity\Program;
 
-/**
- * Class ApkCleanupListener
- * @package App\Catrobat\Listeners
- */
 class ApkCleanupListener
 {
-  /**
-   * @var ApkRepository
-   */
-  protected $repository;
+  protected ApkRepository $repository;
 
-  /**
-   * ApkCleanupListener constructor.
-   *
-   * @param ApkRepository $repository
-   */
   public function __construct(ApkRepository $repository)
   {
     $this->repository = $repository;
   }
 
-  /**
-   * @param ProgramBeforePersistEvent $event
-   */
-  public function handleEvent(ProgramBeforePersistEvent $event)
+  public function handleEvent(ProgramBeforePersistEvent $event): void
   {
     $program = $event->getProgramEntity();
-    if ($program->getId() !== 0)
+    if (null !== $program->getId())
     {
       $this->repository->remove($program->getId());
       $program->setApkStatus(Program::APK_NONE);

@@ -1,25 +1,15 @@
 <?php
 
-
 namespace App\Catrobat\Responses;
 
-
-/**
- * Class TemplateListResponse
- * @package App\Catrobat\Responses
- */
 class TemplateListResponse
 {
-
-  /**
-   * @var
-   */
   private $templates;
 
   /**
    * TemplateListResponse constructor.
    *
-   * @param $templates
+   * @param mixed $templates
    */
   public function __construct($templates)
   {
@@ -33,5 +23,4 @@ class TemplateListResponse
   {
     return $this->templates;
   }
-
 }

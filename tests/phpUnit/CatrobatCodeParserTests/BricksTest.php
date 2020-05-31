@@ -1,29 +1,50 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\Constants;
+use App\Catrobat\Services\CatrobatCodeParser\Bricks\Brick;
 use App\Catrobat\Services\CatrobatCodeParser\Bricks\BrickFactory;
+use App\Catrobat\Services\CatrobatCodeParser\Constants;
+use PHPUnit\Framework\TestCase;
+use SimpleXMLElement;
 
-class BricksTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class BricksTest extends TestCase
 {
+  /**
+   * @var string
+   */
   const TYPE = 'type';
+  /**
+   * @var string
+   */
   const CAPTION = 'caption';
+  /**
+   * @var string
+   */
   const IMG_FILE = 'img_file';
 
+  /**
+   * @var SimpleXMLElement[]|bool
+   */
   protected $brick_xml_properties_list;
 
-  public function setUp(): void
+  protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->brick_xml_properties_list = $xml_properties->xpath('//brick');
   }
 
   /**
    * @test
    * @dataProvider provideMethodNames
+   *
+   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name)
+  public function mustHaveMethod($method_name): void
   {
     foreach ($this->brick_xml_properties_list as $brick_xml_properties)
     {
@@ -32,7 +53,10 @@ class BricksTest extends \PHPUnit\Framework\TestCase
     }
   }
 
-  public function provideMethodNames()
+  /**
+   * @return string[][]
+   */
+  public function provideMethodNames(): array
   {
     return [
       ['getType'],
@@ -45,8 +69,11 @@ class BricksTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends      mustHaveMethod
    * @dataProvider provideBrickXMLProperties
+   *
+   * @param mixed $brick_xml_properties
+   * @param mixed $expected
    */
-  public function factoryMustGenerateValidBrick($brick_xml_properties, $expected)
+  public function factoryMustGenerateValidBrick($brick_xml_properties, $expected): void
   {
     $actual = BrickFactory::generate($brick_xml_properties);
 
@@ -57,25 +84,27 @@ class BricksTest extends \PHPUnit\Framework\TestCase
     $this->assertTrue(true);
   }
 
-  public function provideBrickXMLProperties()
+  /**
+   * @return mixed[][]
+   */
+  public function provideBrickXMLProperties(): array
   {
     $data = [];
 
     $reference_output =
-      file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/brick_reference.output', FILE_IGNORE_NEW_LINES);
+      file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/brick_reference.output', FILE_IGNORE_NEW_LINES);
     $reference_output_index = 0;
 
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
     foreach ($xml_properties->xpath('//brick') as $brick_xml_properties)
     {
-
       $expected = [
-        self::TYPE     => $reference_output[$reference_output_index++],
-        self::CAPTION  => $reference_output[$reference_output_index++],
+        self::TYPE => $reference_output[$reference_output_index++],
+        self::CAPTION => $reference_output[$reference_output_index++],
         self::IMG_FILE => $reference_output[$reference_output_index++],
       ];
       // To omit '---' after each script information block in file 'script_reference.ouput'
-      $reference_output_index++;
+      ++$reference_output_index;
 
       $data[] = [
         $brick_xml_properties,
@@ -90,15 +119,15 @@ class BricksTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function factoryMustGenerateUnknownBrickOtherwise()
+  public function factoryMustGenerateUnknownBrickOtherwise(): ?Brick
   {
     $brick_xml_properties = $this->brick_xml_properties_list[0];
     $brick_xml_properties[Constants::TYPE_ATTRIBUTE] = 'Foo'; // Fake random script
     $actual = BrickFactory::generate($brick_xml_properties);
 
     $expected = [
-      self::TYPE     => Constants::UNKNOWN_BRICK,
-      self::CAPTION  => 'Unknown Brick',
+      self::TYPE => Constants::UNKNOWN_BRICK,
+      self::CAPTION => 'Unknown Brick',
       self::IMG_FILE => Constants::UNKNOWN_BRICK_IMG,
     ];
 

@@ -9,36 +9,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class NewProgramNotification extends CatroNotification
 {
-
   /**
-   * @var Program The new Program which triggered this NewProgramNotification. If this Program gets deleted,
-   *              this NewProgramNotification gets deleted as well.
+   * The new Program which triggered this NewProgramNotification. If this Program gets deleted,
+   * this NewProgramNotification gets deleted as well.
    *
    * @ORM\ManyToOne(
-   *   targetEntity="\App\Entity\Program",
-   *   inversedBy="new_program_notification_mentions"
+   *     targetEntity="\App\Entity\Program",
+   *     inversedBy="new_program_notification_mentions"
    * )
    * @ORM\JoinColumn(
-   *   name="program_id",
-   *   referencedColumnName="id",
-   *   nullable=true
-   *  )
+   *     name="program_id",
+   *     referencedColumnName="id",
+   *     nullable=true
+   * )
    */
-  private $program;
+  private ?Program $program;
 
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private $twig_template = "Notifications/NotificationTypes/new_program_notification.html.twig";
+  private string $twig_template = 'Notifications/NotificationTypes/new_program_notification.html.twig';
 
-  /**
-   * NewProgramNotification constructor.
-   *
-   * @param User $user
-   * @param      $program
-   *
-   */
-  public function __construct(User $user, $program)
+  public function __construct(User $user, ?Program $program)
   {
     parent::__construct($user);
     $this->program = $program;
@@ -46,30 +38,25 @@ class NewProgramNotification extends CatroNotification
 
   /**
    * Returns the new Program which triggered this NewProgramNotification.
-   *
-   * @return Program The new Program which triggered this NewProgramNotification.
    */
-  public function getProgram()
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
 
   /**
    * Sets the new Program which triggered this NewProgramNotification.
-   *
-   * @param Program $program The new Program which triggered this NewProgramNotification.
    */
-  public function setProgram($program)
+  public function setProgram(?Program $program): void
   {
     $this->program = $program;
   }
 
   /**
    * its important to overwrite the get method, otherwise it won't work
-   * and the wrong template will be rendered
-   * @return mixed
+   * and the wrong template will be rendered.
    */
-  public function getTwigTemplate()
+  public function getTwigTemplate(): string
   {
     return $this->twig_template;
   }

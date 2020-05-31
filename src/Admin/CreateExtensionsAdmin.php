@@ -5,14 +5,8 @@ namespace App\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-
-/**
- * Class CreateExtensionsAdmin
- * @package App\Admin
- */
 class CreateExtensionsAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -23,14 +17,10 @@ class CreateExtensionsAdmin extends AbstractAdmin
    */
   protected $baseRouteName = 'create';
 
-
-  /**
-   * @param RouteCollection $collection
-   */
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     // Find the implementation in the Controller-Folder
     $collection->clearExcept(['list']);
-    $collection->add("extensions");
+    $collection->add('extensions');
   }
 }

@@ -1,29 +1,42 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
+use App\Catrobat\Services\CatrobatCodeParser\CodeStatistic;
 use App\Catrobat\Services\CatrobatCodeParser\ParsedSimpleProgram;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 
-class ParsedSimpleProgramTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class ParsedSimpleProgramTest extends TestCase
 {
-  protected $program;
+  protected ParsedSimpleProgram $program;
 
-  public function setUp(): void
+  protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/SimpleProgram/code.xml');
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/SimpleProgram/code.xml');
+    Assert::assertNotFalse($xml_properties);
     $this->program = new ParsedSimpleProgram($xml_properties);
   }
 
   /**
    * @test
    * @dataProvider provideMethodNames
+   *
+   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name)
+  public function mustHaveMethod($method_name): void
   {
     $this->assertTrue(method_exists($this->program, $method_name));
   }
 
-  public function provideMethodNames()
+  /**
+   * @return string[][]
+   */
+  public function provideMethodNames(): array
   {
     return [
       ['hasScenes'],
@@ -35,7 +48,7 @@ class ParsedSimpleProgramTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function hasScenesMustReturnFalse()
+  public function hasScenesMustReturnFalse(): void
   {
     $this->assertFalse($this->program->hasScenes());
   }
@@ -44,10 +57,10 @@ class ParsedSimpleProgramTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function getCodeStatisticMustReturnCodeStatistic()
+  public function getCodeStatisticMustReturnCodeStatistic(): void
   {
     $actual = $this->program->getCodeStatistic();
-    $expected = 'App\Catrobat\Services\CatrobatCodeParser\CodeStatistic';
+    $expected = CodeStatistic::class;
 
     $this->assertInstanceOf($expected, $actual);
   }

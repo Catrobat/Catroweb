@@ -6,43 +6,24 @@ use App\Catrobat\Events\ProgramBeforePersistEvent;
 use App\Entity\Program;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * Class ProgramFlavorListener
- * @package App\Catrobat\Listeners
- */
 class ProgramFlavorListener
 {
+  private RequestStack $request_stack;
 
-  /**
-   * @var RequestStack
-   */
-  private $request_stack;
-
-  /**
-   * ProgramFlavorListener constructor.
-   *
-   * @param RequestStack $stack
-   */
   public function __construct(RequestStack $stack)
   {
     $this->request_stack = $stack;
   }
 
-  /**
-   * @param ProgramBeforePersistEvent $event
-   */
-  public function onEvent(ProgramBeforePersistEvent $event)
+  public function onEvent(ProgramBeforePersistEvent $event): void
   {
     $this->checkFlavor($event->getProgramEntity());
   }
 
-  /**
-   * @param Program $program
-   */
-  public function checkFlavor(Program $program)
+  public function checkFlavor(Program $program): void
   {
     $request = $this->request_stack->getCurrentRequest();
-    if ($request == null)
+    if (null == $request)
     {
       $program->setFlavor('pocketcode');
     }

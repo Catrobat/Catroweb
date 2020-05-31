@@ -1,0 +1,192 @@
+
+name: Tests
+
+on: [push, pull_request]
+
+
+jobs:
+
+  tests_dev:
+    # Check that the dev container builds and website + test system is working
+    name: Dev. Container Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.dev.yml build
+          docker-compose -f docker-compose.dev.yml up -d
+          sleep 30
+
+      - name: Check Symfony Application
+        # would be nice to check the reset command in the future, in the current state the reset command can't fail
+        run: |
+          docker exec app.catroweb bin/console about
+          docker exec app.catroweb bin/console catrobat:reset --hard
+
+      - name: Check local share website
+        run: |
+          sudo apt-get install apache2 wget
+          sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
+          sudo service apache2 reload
+          wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
+
+      - name: Check tests in dev environment
+        run:
+          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+
+      - name: Check shared development volumes must not need a rebuild
+        id: shared-test-run-must-fail
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          echo "INVALID" > tests/behat/features/web/general/homepage.feature
+          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+          echo ::set-output name=status::success
+
+      - name: Check that invalid changes result in a failing testcase
+        if: steps.shared-test-run-must-fail.outputs.status == 'success'
+        run: |
+          exit -1
+
+
+  tests_phpunit:
+    # Runs all PhpUnit tests via docker in the latest ubuntu build
+    # Additionally code coverage report ist generated and can be downloaded from the artifacts.
+    # Keep in mind the report is not including the functional tests written for behat.
+    name: PhpUnit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+
+      - name: PhpUnit tests
+        run:
+          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage
+
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: PhpUnitTestReport
+          path: tests/testreports/coverage
+
+
+  tests_behat:
+    # Runs all Behat test suites parallel using the matrix strategy via docker in the latest ubuntu build.
+    #
+    # - Behat and especially UI tests using Mink tend to flaky.
+    #   A test will only be marked as failed if a test fails more than 3 times in a row.
+    #   Flaky tests should be reduced to a minimum in the codebase!
+    #
+    # - Behat only reruns failed tests - Not pending tests!
+    #   A pending test will NOT result in a failed pipeline!
+    #   This is the reason why the explicit check for the log file had to be added.
+    #
+    name: Behat Tests
+    runs-on: ubuntu-latest
+    strategy:
+      #
+      #  Notes:
+      #         - Check the behat.yml when changing / creating new suites
+      #         - suites will finish their work even if another suite fails (fail-fast: false)
+      #
+      fail-fast: false
+      matrix:
+        testSuite:
+          - admin
+          - api
+          - api-deprecated
+          - ci
+          - flavor
+          - web-general
+          - web-profile
+          - web-project
+          - gamejam
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+          sleep 30
+
+      # Test Run
+      - name: Behat ${{ matrix.testSuite }} tests
+        id: test-run
+        continue-on-error: true
+        # - The output will of the tests will be piped to the stdout and into the log file.
+        # - A return code != 0 stops the execution of further commands in the pipeline.
+        #   "tee" always returns 0, even if the behat test fails. Therefore we need to exit with the first entry of
+        #   the pipe status, which contains the correct exit code.
+        # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
+        run: |
+          echo ::set-output name=status::failure
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} \
+            | tee tests/testreports/behat/${{ matrix.testSuite }}.log \
+            ; ( exit ${PIPESTATUS[0]} )
+          echo ::set-output name=status::success
+
+      # Missing steps are not rerun by behat, without this step they will be lost in the process
+      # We must explicitly kill the pipeline if the log contains undefined steps
+      - name: Check that suite has NO missing steps
+        if: always()
+        id: pending-check
+        run: |
+          if grep -q 'has missing steps. Define them with these snippets:' tests/testreports/behat/${{ matrix.testSuite }}.log; then
+            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+            false;
+          fi
+
+      # Rerun #1
+      - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests
+        if: steps.test-run.outputs.status != 'success'
+        id: test-rerun-1
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+          echo ::set-output name=status::success
+
+        # Rerun #2
+      - name: 2. Rerun for Behat ${{ matrix.testSuite }} tests
+        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success'
+        id: test-rerun-2
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+          echo ::set-output name=status::success
+
+      # Rerun #3
+      - name: 3. Rerun for Behat ${{ matrix.testSuite }} tests
+        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
+        id: test-rerun-3
+        run: |
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+
+      - name: DEBUG
+        if: always()
+        run: |
+          docker ps -a
+          echo "---"
+          docker logs app.catroweb
+          echo "---"
+          docker logs db.catroweb.test
+
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: screenshots_${{ matrix.testSuite }}
+          path: tests/testreports/screens

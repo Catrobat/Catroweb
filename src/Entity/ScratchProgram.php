@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity
@@ -14,73 +17,56 @@ class ScratchProgram
 {
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer", nullable=false)
+   * @ORM\Column(type="guid", nullable=false)
    */
-  protected $id;
+  protected string $id;
 
   /**
    * @ORM\Column(type="string", length=300, nullable=true)
    */
-  protected $name;
+  protected ?string $name = null;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $description;
+  protected ?string $description = null;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $username;
+  protected ?string $username = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $last_modified_at;
+  protected ?DateTime $last_modified_at = null;
 
   /**
    * ScratchProgram constructor.
    *
-   * @param $id
-   *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function __construct($id)
+  public function __construct(string $id)
   {
     $this->id = $id;
     $this->updateLastModifiedTimestamp();
   }
 
-  /**
-   * @param string $name
-   *
-   * @return ScratchProgram
-   */
-  public function setName($name)
+  public function setName(?string $name): ScratchProgram
   {
     $this->name = $name;
 
     return $this;
   }
 
-  /**
-   * @param string $description
-   *
-   * @return ScratchProgram
-   */
-  public function setDescription($description)
+  public function setDescription(?string $description): ScratchProgram
   {
     $this->description = $description;
 
     return $this;
   }
 
-  /**
-   * @param string $username
-   *
-   * @return ScratchProgram
-   */
-  public function setUsername($username)
+  public function setUsername(?string $username): ScratchProgram
   {
     $this->username = $username;
 
@@ -90,65 +76,42 @@ class ScratchProgram
   /**
    * @ORM\PreUpdate
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateLastModifiedTimestamp()
+  public function updateLastModifiedTimestamp(): void
   {
-    $this->setLastModifiedAt(new \DateTime());
+    $this->setLastModifiedAt(TimeUtils::getDateTime());
   }
 
-  /**
-   * @return int
-   */
-  public function getId()
+  public function getId(): string
   {
     return $this->id;
   }
 
-  /**
-   * @return string|null
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @return string|null
-   */
-  public function getDescription()
+  public function getDescription(): ?string
   {
     return $this->description;
   }
 
-  /**
-   * @return string|null
-   */
-  public function getUsername()
+  public function getUsername(): ?string
   {
     return $this->username;
   }
 
-  /**
-   * Set last_modified_at.
-   *
-   * @param \DateTime $last_modified_at
-   *
-   * @return ScratchProgram
-   */
-  public function setLastModifiedAt(\DateTime $last_modified_at)
+  public function setLastModifiedAt(DateTime $last_modified_at): ScratchProgram
   {
     $this->last_modified_at = $last_modified_at;
 
     return $this;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getLastModifiedAt()
+  public function getLastModifiedAt(): ?DateTime
   {
     return $this->last_modified_at;
   }
-
 }

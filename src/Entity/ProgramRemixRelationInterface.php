@@ -2,20 +2,9 @@
 
 namespace App\Entity;
 
-
-/**
- * Interface ProgramRemixRelationInterface
- * @package App\Entity
- */
 interface ProgramRemixRelationInterface
 {
-  /**
-   * @return string
-   */
-  public function getUniqueKey();
+  public function getUniqueKey(): string;
 
-  /**
-   * @return int
-   */
-  public function getDepth();
+  public function getDepth(): int;
 }

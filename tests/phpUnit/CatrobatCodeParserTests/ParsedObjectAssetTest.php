@@ -1,16 +1,24 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
 use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset;
+use PHPUnit\Framework\TestCase;
 
-class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class ParsedObjectAssetTest extends TestCase
 {
-  protected $assets;
+  /**
+   * @var ParsedObjectAsset[]
+   */
+  protected array $assets = [];
 
-  public function setUp(): void
+  protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
     $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//look')[0]);
     $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//sound')[0]);
   }
@@ -18,14 +26,19 @@ class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
   /**
    * @test
    * @dataProvider provideMethodNames
+   *
+   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name)
+  public function mustHaveMethod($method_name): void
   {
     $this->assertTrue(method_exists($this->assets[0], $method_name));
     $this->assertTrue(method_exists($this->assets[1], $method_name));
   }
 
-  public function provideMethodNames()
+  /**
+   * @return string[][]
+   */
+  public function provideMethodNames(): array
   {
     return [
       ['getFileName'],
@@ -37,7 +50,7 @@ class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function getFileNameMustReturnCertainString()
+  public function getFileNameMustReturnCertainString(): void
   {
     $expected = [
       'e3b880f6b5eb89981ddb0cf18c545e4d_Mars%20%28Landscape%29.png',
@@ -56,7 +69,7 @@ class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function getNameMustReturnCertainString()
+  public function getNameMustReturnCertainString(): void
   {
     $expected = [
       'Mars (Landscape)',

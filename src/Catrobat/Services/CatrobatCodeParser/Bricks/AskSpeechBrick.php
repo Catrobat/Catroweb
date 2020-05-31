@@ -4,19 +4,12 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class AskSpeechBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 class AskSpeechBrick extends Brick
 {
-  /**
-   * @return mixed|void
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::ASK_SPEECH_BRICK;
-    $this->caption = "Ask _ and store written answer in _";
+    $this->caption = 'Ask _ and store written answer in _';
     $this->setImgFile(Constants::SOUND_BRICK_IMG);
   }
 }

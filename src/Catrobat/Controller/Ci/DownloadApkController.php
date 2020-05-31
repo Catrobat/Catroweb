@@ -3,45 +3,30 @@
 namespace App\Catrobat\Controller\Ci;
 
 use App\Catrobat\Services\ApkRepository;
-use App\Entity\ProgramManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Program;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Entity\ProgramManager;
+use Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
-
-/**
- * Class DownloadApkController
- * @package App\Catrobat\Controller\Ci
- */
 class DownloadApkController extends AbstractController
 {
-
   /**
    * @Route("/ci/download/{id}", name="ci_download", methods={"GET"})
-   *
-   * @param Request $request
-   * @param Program $program
-   * @param ApkRepository $apk_repository
-   * @param ProgramManager $programManager
-   *
-   * @return BinaryFileResponse
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function downloadApkAction(Request $request, Program $program, ApkRepository $apk_repository,
-                                    ProgramManager $programManager)
+                                    ProgramManager $programManager): BinaryFileResponse
   {
     if (!$program->isVisible())
     {
       throw new NotFoundHttpException();
     }
-    if ($program->getApkStatus() != Program::APK_READY)
+    if (Program::APK_READY != $program->getApkStatus())
     {
       throw new NotFoundHttpException();
     }
@@ -49,42 +34,33 @@ class DownloadApkController extends AbstractController
     try
     {
       $file = $apk_repository->getProgramFile($program->getId());
-    } catch (\Exception $e)
+    }
+    catch (Exception $exception)
     {
-      throw new NotFoundHttpException();
+      throw new NotFoundHttpException($exception);
     }
     if ($file->isFile())
     {
-
       $downloaded = $request->getSession()->get('apk_downloaded', []);
-      if (!in_array($program->getId(), $downloaded))
+      if (!in_array($program->getId(), $downloaded, true))
       {
         $programManager->increaseApkDownloads($program);
         $downloaded[] = $program->getId();
         $request->getSession()->set('apk_downloaded', $downloaded);
       }
 
-      $response = $this->createBinaryFileResponse($program, $file);
-
-      return $response;
+      return $this->createBinaryFileResponse($program, $file);
     }
 
     throw new NotFoundHttpException();
   }
 
-
-  /**
-   * @param Program $program
-   * @param         $file
-   *
-   * @return BinaryFileResponse
-   */
-  private function createBinaryFileResponse(Program $program, $file)
+  private function createBinaryFileResponse(Program $program, File $file): BinaryFileResponse
   {
     $response = new BinaryFileResponse($file);
     $d = $response->headers->makeDisposition(
       ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-      $program->getId() . '.apk'
+      $program->getId().'.apk'
     );
     $response->headers->set('Content-Disposition', $d);
     $response->headers->set('Content-type', 'application/vnd.android.package-archive');

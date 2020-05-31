@@ -1,5 +1,4 @@
 ---
-#---
 #homepage translation
 localLanguage: 英語
 username: ユーザー名
@@ -41,11 +40,13 @@ registrationError: 'ユーザー名またはメール アドレスは、すで�
 notifications: '通知'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'コメント'
+RemixNotifications: 'リミックス'
 oldnotification: 'Old Notifications'
 wellDone: "よくできました!"
 done: "完了!"
@@ -63,11 +64,26 @@ deleteAllNotificationsButtonTitle: "Delete all"
 notificationsClearError: "通知を既読にできません!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "しばらくお待ちください..."
+projects: "プログラム"
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
@@ -75,8 +91,10 @@ programs:
     download: Download the app
     statistics: More Statistics
   featured: おすすめ
+  example: Examples
   newest: Newest projects
   recommended: Recommended projects
+  scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?
@@ -112,10 +130,9 @@ programs:
   downloads: '%downloads% ダウンロード'
   sample: Example projects
   views: '%views% ビュー'
-  likeThumbsUpDetailText: '{0}0 人がこれにサムズアップしてます |{1}1 人がこれにサムズアップしてます |]1,Inf]%persons% 人がこれにサムズアップしてます'
-  likeSmileDetailText: '{0}0 人がこれにスマイルしてます |{1}1 人がこれにスマイルしてます |]1,Inf]%persons% 人がこれにスマイルしてます'
-  likeLoveDetailText: '{0}0 人がこれにラブしてます |{1}1 人がこれにラブしてます |]1,Inf]%persons% 人がこれにラブしてます'
-  likeWowDetailText: '{0}0 人がこれに「ワオ！」と言ってます |{1}1 人がこれに「ワオ！」と言ってます |]1,Inf]%persons% 人がこれに「ワオ！」と言ってます'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "すべて"
   remixes: '{0}0 リミックス |{1}1 リミックス |]1,Inf]%remixes% リミックス'
   newRemixesNotificationTitle: '|{1}"%programName%" は 1 つの新しいリミックスがあります: |]1,Inf] "%programName%" は %remixes% つの新しいリミックスがあります:'
   submitted: Submitted Projects
@@ -191,16 +208,12 @@ passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
     Dear %username%.
-
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
     If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-
     To reset your password and create a new one, please visit the following page: %confirmationUrl%
-
     You can use your username and your password at any time to access the %appplication_url% community.
     To do so, just visit the following page: %loginPage%
     To edit your profile details, go to this page: %profilePage%
-
     Best regards,
     Your Catrobat Team.
   messageHtml: |
@@ -244,6 +257,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: このユーザー名は既に存在します。
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: 保存しました！
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -543,12 +557,13 @@ help:
     download: "Download the project"
 oauth:
   username_header: ポケット コードに登録していただき、ありがとうございます!
-  username_chooser: 'ユーザー名を選択してください:'
+  username_chooser: "ユーザー名を選択してください:"
   username_hint: ユーザー名は、あなたの本当の名前にする必要はありません。
   usernameTaken: ユーザー名はすでに使用されています、別の名前を選んでください。
 search:
   dotdotdot: 検索...
   search: 検索
+  inMediaLib: Search in media library
   results: 検索結果
   resultcount: 検索結果は %count% です
   fail: Please enter at least a single search term
@@ -558,7 +573,8 @@ menu:
   logout: ログアウト
   admin: Admin
   home: Home
-  helpAndTutorials: Help & Tutorials
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Follower
 login:
   login: ログイン
   passOrUser: ユーザー名またはパスワードが正しくありません。
@@ -583,6 +599,8 @@ apk:
   prepare: 'アプリを準備する'
   preparing: 'アプリを準備しています'
   text: 'プロセスには時間がかかることがあります'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -651,6 +669,24 @@ time:
   years.ago: '{1}1 年前 |]1,Inf] 1 年以上前'
 failure:
   upload: アプリのアップロード中にエラーが発生しました。
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: '&#x30A2;&#x30E9;&#x30D3;&#x30A2;&#x8A9E;'
@@ -758,14 +794,16 @@ codeview:
   cantDisplayCode: "Code can't be displayed"
   cantDisplayStatistics: "Code can't be displayed"
   totalNumberOf: 'Total number of'
-  scenes: 'scenes'
-  scripts: 'scripts'
-  bricks: 'bricks'
-  objects: 'actors and objects'
-  looks: 'looks'
-  sounds: 'sounds'
-  globals: 'globals'
-  locals: 'locals'
+  scenes: 'Scenes'
+  scripts: 'スクリプト'
+  bricks: 'ブロック'
+  objects: 'Actors and Objects'
+  looks: '外見'
+  sounds: 'サウンド'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global Variables'
+  localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
   controlBricks: 'Control Bricks'
   motionBricks: 'Motion Bricks'
@@ -774,7 +812,21 @@ codeview:
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
+codeStatistics:
+  title: "Code Statistics"
+  error: "Code Statistics can't be displayed."
+  general: 'General'
+  bricks: 'ブロック'
+  eventBricks: 'イベント'
+  controlBricks: '制御'
+  motionBricks: '動き'
+  soundBricks: '音'
+  looksBricks: '外見'
+  penBricks: 'ペン'
+  dataBricks: 'データ'
+  specialBricks: 'Special'
 footer:
+  language: 言語
   usefulLinks: 役に立つリンク
   legalities: 法的
   communityStats: コミュニティ状況
@@ -791,7 +843,7 @@ privacy-policy:
   text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
   text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
@@ -800,14 +852,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
@@ -839,11 +894,14 @@ media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview Size
+    description: Preview size
     sm: small
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
 flavor:
   pocketcode: ポケット\nコード
   pocketalice: Pocket Alice
@@ -851,8 +909,18 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
 agree: 同意する
 disagree: 同意しない
 profileLoader:
   noProfiles: There are currently no profiles.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'Catrobat community'
+back_to_app: 'Exit community'

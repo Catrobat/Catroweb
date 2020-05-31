@@ -2,78 +2,40 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
+use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\CatrobatCode\SyntaxHighlightingConstants;
+use SimpleXMLElement;
 
-/**
- * Class LookStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class LookStatement extends Statement
 {
+  private ?string $value = null;
 
-  /**
-   * @var
-   */
-  private $value;
-  /**
-   * @var Statement
-   */
-  private $fileName;
+  private ?Statement $fileName = null;
 
-  /**
-   * LookStatement constructor.
-   *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
-   * @param $value
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, $value)
+  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, string $value)
   {
     $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
-      "");
+      '');
   }
 
-  /**
-   * @return string
-   */
-  public function execute()
+  public function execute(): string
   {
     $this->findNames();
 
     $code = '';
 
-    if ($this->value != null)
+    if (null !== $this->value)
     {
-      $code = SyntaxHighlightingConstants::VARIABLES . $this->value . SyntaxHighlightingConstants::END;
+      $code = SyntaxHighlightingConstants::VARIABLES.$this->value.SyntaxHighlightingConstants::END;
     }
-    if ($this->fileName != null)
+    if (null !== $this->fileName)
     {
-      $code .= ' (filename: ' . $this->fileName->execute() . ')';
+      $code .= ' (filename: '.$this->fileName->execute().')';
     }
 
     return $code;
-  }
-
-
-  /**
-   *
-   */
-  private function findNames()
-  {
-    $tmpStatements = parent::getStatements();
-    foreach ($tmpStatements as $statement)
-    {
-      if ($statement != null)
-      {
-        if ($statement instanceof FileNameStatement)
-        {
-          $this->fileName = $statement;
-        }
-      }
-    }
   }
 
   /**
@@ -90,5 +52,17 @@ class LookStatement extends Statement
   public function getFileName()
   {
     return $this->fileName;
+  }
+
+  private function findNames(): void
+  {
+    $tmpStatements = parent::getStatements();
+    foreach ($tmpStatements as $statement)
+    {
+      if (null != $statement && $statement instanceof FileNameStatement)
+      {
+        $this->fileName = $statement;
+      }
+    }
   }
 }

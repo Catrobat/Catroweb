@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use InvalidArgumentException;
 
 /**
  * ProgramInappropriateReport.
  *
- * @ORM\HasLifecycleCallbacks()
- * @ORM\Table()
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table
  * @ORM\Entity(repositoryClass="App\Repository\ProgramInappropriateReportRepository")
  */
 class ProgramInappropriateReport
@@ -18,84 +22,68 @@ class ProgramInappropriateReport
   const STATUS_ACCEPTED = 3;
 
   /**
-   * @var int
-   *
    * @ORM\Column(name="id", type="integer")
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  private $id;
+  private ?int $id = null;
 
   /**
-   * @var \App\Entity\User
-   *
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="program_inappropriate_reports")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  private $reportingUser;
+  private ?User $reportingUser = null;
 
   /**
-   * @var string
-   *
    * @ORM\Column(name="category", type="text", length=256)
    */
-  private $category;
+  private ?string $category = null;
 
   /**
-   * @var string
-   *
    * @ORM\Column(name="note", type="text")
    */
-  private $note;
+  private ?string $note = null;
 
   /**
-   * @var \DateTime
-   *
    * @ORM\Column(name="time", type="datetime")
    */
-  private $time;
+  private ?DateTime $time = null;
 
   /**
-   * @var int
-   *
    * @ORM\Column(type="integer")
    */
-  private $state;
+  private ?int $state = null;
 
   /**
-   * @var \App\Entity\Program
-   *
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="reports")
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", onDelete="SET NULL")
    */
-  private $program;
+  private ?Program $program = null;
 
   /**
-   * @var int
-   *
    * @ORM\Column(name="projectVersion", type="integer")
    */
-  private $projectVersion;
+  private int $projectVersion;
 
   /**
    * @ORM\PrePersist
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateTimestamps()
+  public function updateTimestamps(): void
   {
-    if ($this->getTime() == null)
+    if (null === $this->getTime())
     {
-      $this->setTime(new \DateTime());
+      $this->setTime(TimeUtils::getDateTime());
     }
   }
 
   /**
    * @ORM\PrePersist
    */
-  public function updateState()
+  public function updateState(): void
   {
-    if ($this->getState() == null)
+    if (null === $this->getState())
     {
       $this->setState(self::STATUS_NEW);
     }
@@ -104,191 +92,103 @@ class ProgramInappropriateReport
   /**
    * @ORM\PrePersist
    */
-  public function updateProgramVersion()
+  public function updateProgramVersion(): void
   {
     $this->setProjectVersion($this->getProgram()->getVersion());
   }
 
-  /**
-   * Get id.
-   *
-   * @return int
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * Set reportingUser.
-   *
-   * @param \App\Entity\User $reportingUser
-   *
-   * @return ProgramInappropriateReport
-   */
-  public function setReportingUser($reportingUser)
+  public function setReportingUser(?User $reportingUser): ProgramInappropriateReport
   {
     $this->reportingUser = $reportingUser;
 
     return $this;
   }
 
-  /**
-   * Get reportingUser.
-   *
-   * @return \App\Entity\User
-   */
-  public function getReportingUser()
+  public function getReportingUser(): ?User
   {
     return $this->reportingUser;
   }
 
-  /**
-   * Set category.
-   *
-   * @param string $category
-   *
-   * @return ProgramInappropriateReport
-   */
-  public function setCategory($category)
+  public function setCategory(string $category): ProgramInappropriateReport
   {
     $this->category = $category;
 
     return $this;
   }
 
-  /**
-   * Get category.
-   *
-   * @return string
-   */
-  public function getCategory()
+  public function getCategory(): ?string
   {
     return $this->category;
   }
 
-  /**
-   * Set note.
-   *
-   * @param string $note
-   *
-   * @return ProgramInappropriateReport
-   */
-  public function setNote($note)
+  public function setNote(string $note): ProgramInappropriateReport
   {
     $this->note = $note;
 
     return $this;
   }
 
-  /**
-   * Get note.
-   *
-   * @return string
-   */
-  public function getNote()
+  public function getNote(): string
   {
     return $this->note;
   }
 
-  /**
-   * Set time.
-   *
-   * @param \DateTime $time
-   *
-   * @return ProgramInappropriateReport
-   */
-  public function setTime($time)
+  public function setTime(DateTime $time): ProgramInappropriateReport
   {
     $this->time = $time;
 
     return $this;
   }
 
-  /**
-   * Get time.
-   *
-   * @return \DateTime
-   */
-  public function getTime()
+  public function getTime(): ?DateTime
   {
     return $this->time;
   }
 
   /**
-   * Set state.
-   *
-   * @param int $state
-   *
-   * @return ProgramInappropriateReport
-   *
-   * @throws \InvalidArgumentException
+   * @throws InvalidArgumentException
    */
-  public function setState($state)
+  public function setState(int $state): ProgramInappropriateReport
   {
-    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED]))
+    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true))
     {
-      throw new \InvalidArgumentException('Invalid state');
+      throw new InvalidArgumentException('Invalid state');
     }
     $this->state = $state;
 
     return $this;
   }
 
-  /**
-   * Get state.
-   *
-   * @return int
-   */
-  public function getState()
+  public function getState(): ?int
   {
     return $this->state;
   }
 
-  /**
-   * Set project.
-   *
-   * @param Program $program
-   *
-   * @return ProgramInappropriateReport
-   */
-  public function setProgram($program)
+  public function setProgram(?Program $program): ProgramInappropriateReport
   {
     $this->program = $program;
 
     return $this;
   }
 
-  /**
-   * Get program.
-   *
-   * @return \App\Entity\Program
-   */
-  public function getProgram()
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
 
-  /**
-   * Set projectVersion.
-   *
-   * @param int $projectVersion
-   *
-   * @return ProgramInappropriateReport
-   */
-  public function setProjectVersion($projectVersion)
+  public function setProjectVersion(int $projectVersion): ProgramInappropriateReport
   {
     $this->projectVersion = $projectVersion;
 
     return $this;
   }
 
-  /**
-   * Get projectVersion.
-   *
-   * @return int
-   */
-  public function getProjectVersion()
+  public function getProjectVersion(): int
   {
     return $this->projectVersion;
   }

@@ -5,45 +5,24 @@ namespace App\Catrobat\Events;
 use App\Entity\Program;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * Class ProgramDownloadedEvent
- * @package App\Catrobat\Events
- */
 class ProgramDownloadedEvent extends Event
 {
-  /**
-   * @var Program
-   */
-  protected $program;
-  /**
-   * @var
-   */
-  protected $ip;
+  protected Program $program;
 
-  /**
-   * ProgramDownloadedEvent constructor.
-   *
-   * @param Program $program
-   * @param         $ip
-   */
-  public function __construct(Program $program, $ip)
+  protected ?string $ip;
+
+  public function __construct(Program $program, ?string $ip)
   {
     $this->program = $program;
     $this->ip = $ip;
   }
 
-  /**
-   * @return Program
-   */
-  public function getProgram()
+  public function getProgram(): Program
   {
     return $this->program;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getIp()
+  public function getIp(): ?string
   {
     return $this->ip;
   }

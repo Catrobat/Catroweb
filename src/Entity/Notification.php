@@ -7,164 +7,93 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Notification.
  *
- * @ORM\Table()
+ * @ORM\Table
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
  */
 class Notification
 {
   /**
-   * @var int
-   *
    * @ORM\Column(name="id", type="integer")
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  private $id;
+  private ?int $id = null;
 
   /**
-   * @var User
-   *
    * @ORM\OneToOne(targetEntity="User")
    * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
    */
-  private $user;
+  private User $user;
 
   /**
-   * @var bool
-   *
    * @ORM\Column(name="upload", type="boolean")
    */
-  private $upload;
+  private bool $upload;
 
   /**
-   * @var bool
-   *
    * @ORM\Column(name="report", type="boolean")
    */
-  private $report;
+  private bool $report;
 
   /**
-   * @var bool
-   *
    * @ORM\Column(name="summary", type="boolean")
    */
-  private $summary;
+  private bool $summary;
 
-  /**
-   * @return string
-   */
-  public function __toString()
+  public function __toString(): string
   {
-    if (is_object($this->user))
-    {
-      return $this->user->__toString() . ' notification';
-    }
-
-    return 'notification';
+    return $this->user->__toString().' notification';
   }
 
-  /**
-   * Get id.
-   *
-   * @return int
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * Set user.
-   *
-   * @param \App\Entity\User $user
-   *
-   * @return Notification
-   */
-  public function setUser($user)
+  public function setUser(User $user): Notification
   {
     $this->user = $user;
 
     return $this;
   }
 
-  /**
-   * Get user.
-   *
-   * @return User
-   */
-  public function getUser()
+  public function getUser(): User
   {
     return $this->user;
   }
 
-  /**
-   * Set upload.
-   *
-   * @param bool $upload
-   *
-   * @return Notification
-   */
-  public function setUpload($upload)
+  public function setUpload(bool $upload): Notification
   {
     $this->upload = $upload;
 
     return $this;
   }
 
-  /**
-   * Get upload.
-   *
-   * @return bool
-   */
-  public function getUpload()
+  public function getUpload(): bool
   {
     return $this->upload;
   }
 
-  /**
-   * Set report.
-   *
-   * @param bool $report
-   *
-   * @return Notification
-   */
-  public function setReport($report)
+  public function setReport(bool $report): Notification
   {
     $this->report = $report;
 
     return $this;
   }
 
-  /**
-   * Get report.
-   *
-   * @return bool
-   */
-  public function getReport()
+  public function getReport(): bool
   {
     return $this->report;
   }
 
-  /**
-   * Set summary.
-   *
-   * @param bool $summary
-   *
-   * @return Notification
-   */
-  public function setSummary($summary)
+  public function setSummary(bool $summary): Notification
   {
     $this->summary = $summary;
 
     return $this;
   }
 
-  /**
-   * Get summary.
-   *
-   * @return bool
-   */
-  public function getSummary()
+  public function getSummary(): bool
   {
     return $this->summary;
   }

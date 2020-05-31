@@ -1,0 +1,15 @@
+{
+  "extends": "stylelint-config-twbs-bootstrap/scss",
+  "rules": {
+    "number-leading-zero": "always",
+    "selector-max-id": 1,
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": [
+          "attribute"
+        ]
+      }
+    ]
+  }
+}

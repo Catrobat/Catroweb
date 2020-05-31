@@ -4,7 +4,7 @@
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-translate_word:
+translate:
     path:  /translate/{word}/{array}/{domain}
     controller: App\Catrobat\Controller\Web\TranslationController:translateAction
     defaults:
@@ -13,23 +13,14 @@ translate_word:
     options:
         expose: true
 
-translate_choice:
-    path:  /transChoice/{word}/{count}/{array}/{domain}
-    controller: App\Catrobat\Controller\Web\TranslationController:transChoiceAction
-    defaults:
-        array: ""
-        domain: "catroweb"
-    options:
-        expose: true
-
 edit_program_description:
-    path:  /editProjectDescription/{id}/{newDescription}
+    path:  /editProjectDescription/{id}/{new_description}
     controller: App\Catrobat\Controller\Web\ProgramController:editProgramDescription
     options:
         expose: true
 
 edit_program_credits:
-    path: /editProjectCredits/{id}/{newCredits}
+    path: /editProjectCredits/{id}/{new_credits}
     controller: App\Catrobat\Controller\Web\ProgramController:editProgramCredits
     options:
         expose: true

@@ -2,30 +2,19 @@
 
 namespace App\Catrobat\Controller\Ci;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Program;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
-/**
- * Class ApkStatusController
- * @package App\Catrobat\Controller\Ci
- */
 class ApkStatusController extends AbstractController
 {
-
   /**
    * @Route("/ci/status/{id}", name="ci_status", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @param Program $program
-   * @param TranslatorInterface $translator
-   *
-   * @return JsonResponse
    */
-  public function getApkStatusAction(Program $program, TranslatorInterface $translator)
+  public function getApkStatusAction(Program $program, TranslatorInterface $translator): JsonResponse
   {
     $result = [];
     switch ($program->getApkStatus())

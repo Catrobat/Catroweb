@@ -1,30 +1,46 @@
 <?php
 
-namespace tests\CatrobatCodeParserTests;
+namespace Tests\phpUnit\CatrobatCodeParserTests;
 
+use App\Catrobat\Services\CatrobatCodeParser\ParsedObject;
+use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectGroup;
 use App\Catrobat\Services\CatrobatCodeParser\ParsedScene;
-use function PHPSTORM_META\type;
+use Exception;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 
-class ParsedObjectsContainerTest extends \PHPUnit\Framework\TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+class ParsedObjectsContainerTest extends TestCase
 {
-  protected $container;
+  protected ParsedScene $container;
 
-  public function setUp(): void
+  protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
-    $this->container = new ParsedScene($xml_properties->xpath('//scene')[0]);
+    $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    Assert::assertNotFalse($xml_properties);
+    $xml_scene = $xml_properties->xpath('//scene');
+    Assert::assertNotFalse($xml_scene);
+    $this->container = new ParsedScene($xml_scene[0]);
   }
 
   /**
    * @test
    * @dataProvider provideMethodNames
+   *
+   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name)
+  public function mustHaveMethod($method_name): void
   {
     $this->assertTrue(method_exists($this->container, $method_name));
   }
 
-  public function provideMethodNames()
+  /**
+   * @return string[][]
+   */
+  public function provideMethodNames(): array
   {
     return [
       ['getObjects'],
@@ -36,10 +52,10 @@ class ParsedObjectsContainerTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function getBackgroundMustReturnParsedObject()
+  public function getBackgroundMustReturnParsedObject(): void
   {
     $actual = $this->container->getBackground();
-    $expected = 'App\Catrobat\Services\CatrobatCodeParser\ParsedObject';
+    $expected = ParsedObject::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
@@ -48,38 +64,46 @@ class ParsedObjectsContainerTest extends \PHPUnit\Framework\TestCase
    * @test
    * @depends mustHaveMethod
    */
-  public function getObjectsMustReturnArrayOfParsedObjectOrParsedObjectGroup()
+  public function getObjectsMustReturnArrayOfParsedObjectOrParsedObjectGroup(): void
   {
     $expected = [
-      'App\Catrobat\Services\CatrobatCodeParser\ParsedObject',
-      'App\Catrobat\Services\CatrobatCodeParser\ParsedObjectGroup',
+      ParsedObject::class,
+      ParsedObjectGroup::class,
     ];
 
     foreach ($this->container->getObjects() as $actual)
+    {
       $this->assertThat($actual, $this->logicalOr(
         $this->isInstanceOf($expected[0]),
         $this->isInstanceOf($expected[1])
       ));
+    }
   }
 
   /**
    * @test
+   *
+   * @throws Exception
    */
-  public function mustThrowExceptionIfCorruptedGroup()
+  public function mustThrowExceptionIfCorruptedGroup(): void
   {
-    $this->expectExceptionMessage('\Exception');
+    $this->expectExceptionMessage(Exception::class);
 
-    $xml_properties = simplexml_load_file(__DIR__
-      . '/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml');
+    $xml_properties = simplexml_load_file(
+      __DIR__.'/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
+    );
+    Assert::assertNotFalse($xml_properties);
 
-    if (!array_key_exists(0, $xml_properties->xpath('//scene')))
+    $xml_scene = $xml_properties->xpath('//scene');
+    Assert::assertNotFalse($xml_scene);
+
+    if (!array_key_exists(0, $xml_scene))
     {
-      new ParsedScene($xml_properties->xpath('//scene')[0]);
+      new ParsedScene($xml_scene[0]);
     }
     else
     {
-      throw new \Exception("\Exception");
+      throw new Exception(Exception::class);
     }
-
   }
 }

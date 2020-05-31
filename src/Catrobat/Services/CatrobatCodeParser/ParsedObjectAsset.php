@@ -2,33 +2,16 @@
 
 namespace App\Catrobat\Services\CatrobatCodeParser;
 
-
 use SimpleXMLElement;
 
-/**
- * Class ParsedObjectAsset
- * @package App\Catrobat\Services\CatrobatCodeParser
- */
 class ParsedObjectAsset
 {
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $asset_xml_properties;
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $name;
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $file_name;
+  protected SimpleXMLElement $asset_xml_properties;
 
-  /**
-   * ParsedObjectAsset constructor.
-   *
-   * @param SimpleXMLElement $asset_xml_properties
-   */
+  protected ?string $name;
+
+  protected ?string $file_name;
+
   public function __construct(SimpleXMLElement $asset_xml_properties)
   {
     $this->asset_xml_properties = $asset_xml_properties;
@@ -36,18 +19,12 @@ class ParsedObjectAsset
     $this->file_name = rawurlencode($asset_xml_properties['fileName']);
   }
 
-  /**
-   * @return SimpleXMLElement
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @return SimpleXMLElement
-   */
-  public function getFileName()
+  public function getFileName(): ?string
   {
     return $this->file_name;
   }

@@ -2,46 +2,41 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class ChangeYByNStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class ChangeYByNStatement extends BaseChangeByNStatement
 {
-  const BEGIN_STRING = "Y";
-  const END_STRING = ")<br/>";
+  /**
+   * @var string
+   */
+  const BEGIN_STRING = 'Y';
+  /**
+   * @var string
+   */
+  const END_STRING = ')<br/>';
 
   /**
    * ChangeYByNStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
-
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
-    $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string);
 
-    return "Change Y by " . $formula_string_without_markup;
+    return 'Change Y by '.$formula_string_without_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

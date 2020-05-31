@@ -6,65 +6,42 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
-/**
- * Class GoogleCloudMessagingController
- * @package App\Catrobat\Controller\Admin
- */
 class GoogleCloudMessagingController extends CRUDController
 {
-
-  /**
-   * @param Request|null $request
-   *
-   * @return Response
-   */
-  public function listAction(Request $request = null)
+  public function listAction(Request $request = null): Response
   {
     return $this->renderWithExtraParams('Admin/gcm.html.twig');
   }
 
-
-  /**
-   * @param Request|null $request
-   *
-   * @return Response
-   */
-  public function sendAction(Request $request = null)
+  public function sendAction(): Response
   {
     if (!isset($_GET['a']) || !isset($_GET['m']))
     {
-      return new Response("Error: Invalid parameters");
+      return new Response('Error: Invalid parameters');
     }
-
     $apikey = htmlentities($_GET['a']);
     $message = htmlentities($_GET['m']);
-
     $url = 'https://gcm-http.googleapis.com/gcm/send';
-    $data = '{"to" : "/topics/catroweb", "data" : {"message" : "' . $message . '"}}';
-
+    $jsonData = ['to' => '/topics/catroweb', 'data' => ['message' => $message]];
+    $data = json_encode($jsonData);
     $options = [
       'http' => [
-        'header'  => "Content-type: application/json\r\nAuthorization:key=" . $apikey . "\r\n",
-        'method'  => 'POST',
+        'header' => "Content-type: application/json\r\nAuthorization:key=".$apikey."\r\n",
+        'method' => 'POST',
         'content' => $data,
       ],
     ];
-
     $context = stream_context_create($options);
     $result = @file_get_contents($url, false, $context);
-
-    if ($result === false)
+    if (!$result)
     {
-      return new Response("Error: Invalid response or API key");
+      return new Response('Error: Invalid response or API key');
     }
-
-    if (strpos($result, "\"message_id\":") > 0)
+    if (strpos($result, '"message_id":') > 0)
     {
-      return new Response("OK");
+      return new Response('OK');
     }
 
     return new Response($result);
   }
-
 }

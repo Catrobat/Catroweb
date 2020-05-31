@@ -4,19 +4,12 @@ namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
-/**
- * Class ChangeColorByNBrick
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 class ChangeColorByNBrick extends Brick
 {
-  /**
-   *
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::CHANGE_COLOR_BY_N_BRICK;
-    $this->caption = "Change color by _";
+    $this->caption = 'Change color by _';
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);
   }
 }

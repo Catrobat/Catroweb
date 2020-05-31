@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity
@@ -12,132 +13,85 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Template
 {
-
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\Column(type="string", length=300)
    */
-  protected $name;
-
+  protected ?string $name = null;
 
   /**
    * @ORM\Column(type="boolean")
    */
-  protected $active = true;
+  protected bool $active = true;
 
-  /**
-   * @var
-   */
-  protected $thumbnail;
+  protected ?File $thumbnail = null;
 
-  /**
-   * @var
-   */
-  protected $landscape_program_file;
+  protected ?File $landscape_program_file = null;
 
-  /**
-   * @var
-   */
-  protected $portrait_program_file;
+  protected ?File $portrait_program_file = null;
 
-  /**
-   * @return mixed
-   */
-  public function getId()
+  public function getId(): ?int
   {
     return $this->id;
   }
 
-  /**
-   * @param mixed $id
-   */
-  public function setId($id)
+  public function setId(int $id): void
   {
     $this->id = $id;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getName()
+  public function getName(): ?string
   {
     return $this->name;
   }
 
-  /**
-   * @param mixed $name
-   */
-  public function setName($name)
+  public function setName(string $name): void
   {
     $this->name = $name;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getActive()
+  public function getActive(): bool
   {
     return $this->active;
   }
 
-  /**
-   * @param mixed $active
-   */
-  public function setActive($active)
+  public function setActive(bool $active): void
   {
     $this->active = $active;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getThumbnail()
+  public function getThumbnail(): ?File
   {
     return $this->thumbnail;
   }
 
-  /**
-   * @param mixed $thumbnail
-   */
-  public function setThumbnail($thumbnail)
+  public function setThumbnail(File $thumbnail): void
   {
     $this->thumbnail = $thumbnail;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getLandscapeProgramFile()
+  public function getLandscapeProgramFile(): ?File
   {
     return $this->landscape_program_file;
   }
 
-  /**
-   * @param mixed $landscape_program_file
-   */
-  public function setLandscapeProgramFile($landscape_program_file)
+  public function setLandscapeProgramFile(File $landscape_program_file): void
   {
     $this->landscape_program_file = $landscape_program_file;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPortraitProgramFile()
+  public function getPortraitProgramFile(): ?File
   {
     return $this->portrait_program_file;
   }
 
-  /**
-   * @param mixed $portrait_program_file
-   */
-  public function setPortraitProgramFile($portrait_program_file)
+  public function setPortraitProgramFile(File $portrait_program_file): void
   {
     $this->portrait_program_file = $portrait_program_file;
   }

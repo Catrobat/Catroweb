@@ -6,13 +6,10 @@ use App\Catrobat\Services\CatrobatCodeParser\Constants;
 
 class PointToBrick extends Brick
 {
-  /**
-   *
-   */
-  protected function create()
+  protected function create(): void
   {
     $this->type = Constants::POINT_TO_BRICK;
-    $this->caption = "Point towards _";
+    $this->caption = 'Point towards _';
     $this->setImgFile(Constants::MOTION_BRICK_IMG);
   }
 }

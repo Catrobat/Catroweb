@@ -2,226 +2,194 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\ProgramManager;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Catrobat\Responses\ProgramListResponse;
 
-
-/**
- * Class ListProgramsController
- * @package App\Catrobat\Controller\Api
- */
 class ListProgramsController extends AbstractController
 {
+  private ProgramManager $program_manager;
 
-  /**
-   * @var ProgramManager
-   */
-  private $program_manager;
-
-
-  /**
-   * ListProgramsController constructor.
-   *
-   * @param ProgramManager $program_manager
-   */
   public function __construct(ProgramManager $program_manager)
   {
     $this->program_manager = $program_manager;
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listProgramsAction(Request $request)
+  public function listProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'recent');
   }
 
-
   /**
-   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format":"json"}, methods={"GET"})
+   * @deprecated
    *
-   * @param Request $request
+   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"}, methods={"GET"})
    *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listProgramIdsAction(Request $request)
+  public function listProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'recent', false);
   }
 
+  /**
+   * @deprecated
+   *
+   * @Route("/api/projects/exampleProjects.json", name="api_example_programs",
+   * defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @throws NonUniqueResultException
+   * @throws NoResultException
+   */
+  public function listExampleProgramsAction(Request $request): ProgramListResponse
+  {
+    return $this->listSortedPrograms($request, 'example');
+  }
 
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs",
-   *   defaults={"_format": "json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listMostDownloadedProgramsAction(Request $request)
+  public function listMostDownloadedProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'downloads');
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids",
-   *   defaults={"_format":"json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listMostDownloadedProgramIdsAction(Request $request)
+  public function listMostDownloadedProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'downloads', false);
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs",
-   *   defaults={"_format":"json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listMostViewedProgramsAction(Request $request)
+  public function listMostViewedProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'views');
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids",
-   *   defaults={"_format": "json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listMostViewedProgramIdsAction(Request $request)
+  public function listMostViewedProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'views', false);
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/scratchRemixes.json", name="api_scratch_remix",
-   *   defaults={"_format": "json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listScratchRemixProjectsAction(Request $request)
+  public function listScratchRemixProjectsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'scratchRemix');
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/randomProjects.json", name="api_random_programs",
-   *   defaults={"_format":"json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listRandomProgramsAction(Request $request)
+  public function listRandomProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'random');
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/randomProjectIDs.json", name="api_random_programids",
-   *   defaults={"_format": "json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listRandomProgramIdsAction(Request $request)
+  public function listRandomProgramIdsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'random', false);
   }
 
-
   /**
+   * @deprecated
+   *
    * @Route("/api/projects/userProjects.json", name="api_user_programs",
-   *   defaults={"_format":"json"}, methods={"GET"})
+   * defaults={"_format": "json"}, methods={"GET"})
    *
-   * @param Request $request
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  public function listUserProgramsAction(Request $request)
+  public function listUserProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'user');
   }
 
-
   /**
-   * @param Request $request
-   * @param         $sortBy
-   * @param bool    $details
-   * @param bool    $useRequestFlavor
-   * @param         $flavor
-   *
-   * @return ProgramListResponse
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  private function listSortedPrograms(Request $request, $sortBy, $details = true, $useRequestFlavor = true)
+  private function listSortedPrograms(Request $request, string $sortBy, bool $details = true,
+                                      bool $useRequestFlavor = true): ProgramListResponse
   {
-
     $flavor = null;
-    if ($useRequestFlavor === true)
+    if ($useRequestFlavor)
     {
       $flavor = $request->get('flavor');
     }
 
-    /**
-     * @var GuidType $user_id
-     */
-    $limit = intval($request->get('limit', 20));
-    $offset = intval($request->get('offset', 0));
+    $limit = (int) $request->get('limit', 20);
+    $offset = (int) $request->get('offset', 0);
     $user_id = $request->get('user_id', 0);
-    $max_version = $request->query->get('max_version', "0");
+    $max_version = $request->query->get('max_version', '0');
 
-    if ($sortBy === 'downloads')
+    if ('downloads' === $sortBy)
     {
       $programs = $this->program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
@@ -229,7 +197,7 @@ class ListProgramsController extends AbstractController
         $flavor, $limit, $offset, $max_version
       );
     }
-    elseif ($sortBy === 'views')
+    elseif ('views' === $sortBy)
     {
       $programs = $this->program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
@@ -237,7 +205,11 @@ class ListProgramsController extends AbstractController
         $flavor, $limit, $offset, $max_version
       );
     }
-    elseif ($sortBy == 'scratchRemix')
+    elseif ('example' === $sortBy)
+    {
+      $programs = $this->program_manager->getExamplePrograms($flavor, $limit, $offset, $max_version);
+    }
+    elseif ('scratchRemix' == $sortBy)
     {
       $programs = $this->program_manager->getScratchRemixesPrograms($flavor, $limit, $offset);
 
@@ -246,7 +218,7 @@ class ListProgramsController extends AbstractController
         $flavor, $limit, $offset, $max_version
       );
     }
-    elseif ($sortBy === 'random')
+    elseif ('random' === $sortBy)
     {
       $programs = $this->program_manager->getRandomPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
@@ -254,9 +226,9 @@ class ListProgramsController extends AbstractController
         $flavor, $limit, $offset, $max_version
       );
     }
-    elseif ($sortBy === 'user')
+    elseif ('user' === $sortBy)
     {
-      if ($this->getUser() !== null && $this->getUser()->getId() === $user_id)
+      if (null !== $this->getUser() && $this->getUser()->getId() === $user_id)
       {
         $programs = $this->program_manager->getUserPrograms($user_id, $max_version);
       }
@@ -267,7 +239,7 @@ class ListProgramsController extends AbstractController
     }
     else
     {
-      if ($flavor === 'pocketcode')
+      if ('pocketcode' === $flavor)
       {
         // For our default flavor we like to provide users with new projects of all flavors in the recent category
         $flavor = null;
@@ -275,7 +247,7 @@ class ListProgramsController extends AbstractController
       $programs = $this->program_manager->getRecentPrograms($flavor, $limit, $offset, $max_version);
     }
 
-    if ($sortBy === 'user')
+    if ('user' === $sortBy)
     {
       $numbOfTotalProjects = count($programs);
     }
@@ -287,21 +259,15 @@ class ListProgramsController extends AbstractController
     return new ProgramListResponse($programs, $numbOfTotalProjects, $details);
   }
 
-
   /**
-   * @param          $projects
-   * @param callable $getMoreProjects
-   * @param          $flavor
-   * @param          $limit
-   * @param          $offset
-   * @param          $max_version
-   *
-   * @return array
    * @throws NonUniqueResultException
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
-  private function fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors($projects, callable $getMoreProjects,
-                                                                              $flavor, $limit, $offset, $max_version)
+  private function fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(array $projects,
+                                                                              callable $getMoreProjects,
+                                                                              string $flavor,
+                                                                              int $limit, int $offset,
+                                                                              string $max_version): array
   {
     $number_of_projects = count($projects);
 
@@ -315,9 +281,6 @@ class ListProgramsController extends AbstractController
     $total_number_of_correct_flavored_projects = $this->program_manager->getTotalPrograms($flavor, $max_version);
     $new_offset = max($offset - $total_number_of_correct_flavored_projects + $number_of_projects, 0);
 
-    $projects = array_merge($projects, $getMoreProjects('!' . $flavor, $new_limit, $new_offset, $max_version));
-
-    return $projects;
+    return array_merge($projects, $getMoreProjects('!'.$flavor, $new_limit, $new_offset, $max_version));
   }
-
 }

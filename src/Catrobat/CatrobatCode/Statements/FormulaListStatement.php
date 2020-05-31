@@ -2,49 +2,36 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class FormulaListStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class FormulaListStatement extends Statement
 {
   /**
-   *
+   * @var string
    */
-  const X_POSITION = "X_POSITION";
-  /**
-   *
-   */
-  const Y_POSITION = "Y_POSITION";
+  const X_POSITION = 'X_POSITION';
 
   /**
-   * @var
+   * @var string
    */
-  private $xPosition;
-  /**
-   * @var
-   */
-  private $yPosition;
+  const Y_POSITION = 'Y_POSITION';
 
+  private FormulaStatement $xPosition;
+
+  private FormulaStatement $yPosition;
 
   /**
    * FormulaListStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces - 1,
-      "", "");
+      '', '');
   }
 
-
-  /**
-   * @return string
-   */
-  public function executeChildren()
+  public function executeChildren(): string
   {
     $code = '';
     $counter = 0;
@@ -52,8 +39,7 @@ class FormulaListStatement extends Statement
     $statementCount = count($this->statements);
     foreach ($this->statements as $value)
     {
-
-      $counter++;
+      ++$counter;
 
       $code .= $value->execute();
       if ($counter < $statementCount)
@@ -65,55 +51,44 @@ class FormulaListStatement extends Statement
     return $code;
   }
 
-  /**
-   * @return string
-   */
-  public function executePlaceAtFormula()
+  public function executePlaceAtFormula(): string
   {
     $code = '';
     $endCode = '';
 
     $this->setVariables();
 
-
-    if ($this->xPosition != null)
+    if (null != $this->xPosition)
     {
-      $code .= "X(" . $this->xPosition->execute() . ")";
+      $code .= 'X('.$this->xPosition->execute().')';
     }
 
-    if ($this->xPosition != null && $this->yPosition != null)
+    if (null != $this->xPosition && null != $this->yPosition)
     {
       $code .= ', ';
     }
 
-    if ($this->yPosition != null)
+    if (null != $this->yPosition)
     {
-      $code .= "Y(" . $this->yPosition->execute() . ")";
+      $code .= 'Y('.$this->yPosition->execute().')';
     }
 
-    return $code . $endCode;
+    return $code.$endCode;
   }
 
-  /**
-   *
-   */
-  protected function setVariables()
+  protected function setVariables(): void
   {
-
     foreach ($this->statements as $value)
     {
       if ($value instanceof FormulaStatement)
       {
-        if ($value->getCategory() == self::X_POSITION)
+        if (self::X_POSITION == $value->getCategory())
         {
           $this->xPosition = $value;
         }
-        else
+        elseif (self::Y_POSITION == $value->getCategory())
         {
-          if ($value->getCategory() == self::Y_POSITION)
-          {
-            $this->yPosition = $value;
-          }
+          $this->yPosition = $value;
         }
       }
     }

@@ -2,68 +2,43 @@
 
 namespace App\Catrobat\Listeners\Entity;
 
+use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use App\Catrobat\Services\FeaturedImageRepository;
 
-
-/**
- * Class FeaturedProgramImageListener
- * @package App\Catrobat\Listeners\Entity
- */
 class FeaturedProgramImageListener
 {
-  /**
-   * @var FeaturedImageRepository
-   */
-  private $repository;
+  private ImageRepository $repository;
 
-  /**
-   * FeaturedProgramImageListener constructor.
-   *
-   * @param FeaturedImageRepository $repository
-   */
-  public function __construct(FeaturedImageRepository $repository)
+  public function __construct(ImageRepository $repository)
   {
     $this->repository = $repository;
   }
 
-  /**
-   * @param FeaturedProgram    $featured
-   * @param LifecycleEventArgs $event
-   */
-  public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
-    if ($file == null)
+    if (null == $file)
     {
       return;
     }
     $featured->setImageType($file->guessExtension());
   }
 
-  /**
-   * @param FeaturedProgram    $featured
-   * @param LifecycleEventArgs $event
-   */
-  public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
-    if ($file == null)
+    if (null == $file)
     {
       return;
     }
-    $this->repository->save($file, $featured->getId(), $featured->getImageType());
+    $this->repository->save($file, $featured->getId(), $featured->getImageType(), true);
   }
 
-  /**
-   * @param FeaturedProgram    $featured
-   * @param LifecycleEventArgs $event
-   */
-  public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
-    if ($file == null)
+    if (null == $file)
     {
       $featured->setImageType($featured->old_image_type);
 
@@ -72,35 +47,23 @@ class FeaturedProgramImageListener
     $featured->setImageType($file->guessExtension());
   }
 
-  /**
-   * @param FeaturedProgram    $featured
-   * @param LifecycleEventArgs $event
-   */
-  public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $file = $featured->file;
-    if ($file == null)
+    if (null == $file)
     {
       return;
     }
-    $this->repository->save($file, $featured->getId(), $featured->getImageType());
+    $this->repository->save($file, $featured->getId(), $featured->getImageType(), true);
   }
 
-  /**
-   * @param FeaturedProgram    $featured
-   * @param LifecycleEventArgs $event
-   */
-  public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
     $featured->removed_id = $featured->getId();
   }
 
-  /**
-   * @param FeaturedProgram    $featured
-   * @param LifecycleEventArgs $event
-   */
-  public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {
-    $this->repository->remove($featured->removed_id, $featured->getImageType());
+    $this->repository->remove($featured->removed_id, $featured->getImageType(), true);
   }
 }

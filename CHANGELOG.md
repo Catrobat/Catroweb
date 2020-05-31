@@ -5,6 +5,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [3.3.0]
+### Added
+- added Apple Site Association
+- CODE QUALITY TOOLS :innocent:
+- New Brick (ClearUserListBrick)
+- New Brick (UserBrick)
+- Download Multiple Media Files
+- Media Library Search
+- Download whole Media Library Objects
+- various Material.io Content
+- SCSS coding standard
+- Search Progress Indicator added
+- Loading spinner for codeview added
+- Releasing Catblocks for the first time :birthday:
+### Changed
+- improved GithubActions :heart_eyes:
+- complete rework of follower feature
+- Major refactoring of Behat Test System
+- Major refactoring of ResetCommand
+- DB switched for test environment (mysql instead of sqlite3)
+- Migrated to php7.4 (hyped for php8.0)
+- Updated Search to find meaningful content
+- Switched Backup Strategies to BORG
+- Major Admin Area Refactoring
+- Typography
+### Fixed
+- fixed consistent time access
+- Featured and Approved projects cant be reported anymore (bad spammers :facepunch:)
+- Invisible projects can be downloaded
+- NPM & Composer Security Fixes and Updates
+- Fontloading Improved
+- No email in username allowed anymore
+- Upload with Tags / Extensions
+### Removed
+- removed LDAP login
+- removed download of multiple media files
+### API
+- Catroweb-API in basic version added (v1.0.38) https://app.swaggerhub.com/apis-docs/HCrane/CAPI/v1.0.38
 ## [3.2.0]
 ### Added
 - Added 4 new Blocks used in Catrobat
@@ -133,12 +171,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.2.0...HEAD
-[3.2.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.1.1...v3.2.0
-[3.1.1]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.1.0...v3.1.1
-[3.1.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v3.0.0...v3.1.0
-[3.0.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v3.0.0
-[2.3.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.2.0...v2.3.0
-[2.2.0]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.1...v2.2.0
-[2.1.1]: https://github.com/Catrobat/Catroweb-Symfony/compare/v2.1.0...v2.1.1
-[2.1.0]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v2.1.0
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.3.0...HEAD
+[3.3.0]: https://github.com/Catrobat/Catroweb/compare/v3.2.0...v3.3.0
+[3.2.0]: https://github.com/Catrobat/Catroweb/compare/v3.1.1...v3.2.0
+[3.1.1]: https://github.com/Catrobat/Catroweb/compare/v3.1.0...v3.1.1
+[3.1.0]: https://github.com/Catrobat/Catroweb/compare/v3.0.0...v3.1.0
+[3.0.0]: https://github.com/Catrobat/Catroweb/compare/v2.2.0...v3.0.0
+[2.3.0]: https://github.com/Catrobat/Catroweb/compare/v2.2.0...v2.3.0
+[2.2.0]: https://github.com/Catrobat/Catroweb/compare/v2.1.1...v2.2.0
+[2.1.1]: https://github.com/Catrobat/Catroweb/compare/v2.1.0...v2.1.1
+[2.1.0]: https://github.com/Catrobat/Catroweb/releases/tag/v2.1.0

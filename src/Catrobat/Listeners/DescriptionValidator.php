@@ -2,57 +2,39 @@
 
 namespace App\Catrobat\Listeners;
 
-use App\Catrobat\Services\ExtractedCatrobatFile;
-use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
-use App\Catrobat\Services\RudeWordFilter;
-use App\Catrobat\StatusCode;
 use App\Catrobat\Exceptions\Upload\DescriptionTooLongException;
 use App\Catrobat\Exceptions\Upload\RudewordInDescriptionException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use App\Catrobat\Services\ExtractedCatrobatFile;
+use App\Catrobat\Services\RudeWordFilter;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
-/**
- * Class DescriptionValidator
- * @package App\Catrobat\Listeners
- */
 class DescriptionValidator
 {
-  /**
-   * @var RudeWordFilter
-   */
-  private $rudeWordFilter;
-  /**
-   * @var int
-   */
-  private $max_description_size;
+  private RudeWordFilter $rudeWordFilter;
+  private int $max_description_size;
 
-  /**
-   * DescriptionValidator constructor.
-   *
-   * @param RudeWordFilter $rudeWordFilter
-   */
   public function __construct(RudeWordFilter $rudeWordFilter)
   {
     $this->rudeWordFilter = $rudeWordFilter;
-    $this->max_description_size = 10000;
+    $this->max_description_size = 10_000;
   }
 
   /**
-   * @param ProgramBeforeInsertEvent $event
-   *
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NoResultException
+   * @throws NonUniqueResultException
    */
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
   }
 
   /**
-   * @param ExtractedCatrobatFile $file
-   *
-   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws NonUniqueResultException
+   * @throws NoResultException
    */
-  public function validate(ExtractedCatrobatFile $file)
+  public function validate(ExtractedCatrobatFile $file): void
   {
     if (strlen($file->getDescription()) > $this->max_description_size)
     {

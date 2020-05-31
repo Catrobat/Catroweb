@@ -2,105 +2,82 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
 use App\Entity\UserComment;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
-/**
- * Class ReportController
- * @package App\Catrobat\Controller\Admin
- */
-class ReportController extends Controller
+class ReportController extends CRUDController
 {
-
-  /**
-   * @param Request|null $request
-   *
-   * @return RedirectResponse
-   */
-  public function unreportProgramAction(Request $request = null)
+  public function unreportProgramAction(): RedirectResponse
   {
-    /**
-      * @var $object ProgramInappropriateReport
-      * @var $program Program
-      */
-
+    /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
-
     $program = $object->getProgram();
     $program->setVisible(true);
-
-    $em = $this->getDoctrine()->getManager();
-    $em->remove($object);
-    $em->flush();
-
-
-    $this->addFlash('sonata_flash_success', 'Program ' . $object->getId() . ' is no longer reported');
+    $program->setApproved(true);
+    $object->setState(3);
+    $this->admin->update($object);
+    $this->addFlash('sonata_flash_success', 'Program '.$object->getId().' is no longer reported');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
-  /**
-   * @param Request|null $request
-   *
-   * @return RedirectResponse
-   */
-  public function unreportCommentAction(Request $request = null)
+  public function acceptProgramReportAction(): RedirectResponse
   {
-
-    /* @var $object \App\Entity\UserComment */
+    /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-
-    if (!$object)
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
-
-    $object->setIsReported(false);
+    $program = $object->getProgram();
+    $program->setVisible(false);
+    $program->setApproved(false);
+    $object->setState(2);
     $this->admin->update($object);
-
-    $this->addFlash('sonata_flash_success', 'Comment ' . $object->getId() . ' is no longer reported');
+    $this->addFlash('sonata_flash_error', 'Program '.$object->getId().' report got accepted');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-
-  /**
-   * @param Request|null $request
-   *
-   * @return RedirectResponse
-   */
-  public function deleteCommentAction(Request $request = null)
+  public function unreportCommentAction(): RedirectResponse
   {
-    /* @var $object \App\Entity\UserComment */
+    /* @var $object UserComment */
     $object = $this->admin->getSubject();
+    if (null === $object)
+    {
+      throw new NotFoundHttpException();
+    }
+    $object->setIsReported(false);
+    $this->admin->update($object);
+    $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' is no longer reported');
 
-    if (!$object)
+    return new RedirectResponse($this->admin->generateUrl('list'));
+  }
+
+  public function deleteCommentAction(): RedirectResponse
+  {
+    /* @var $object UserComment */
+    $object = $this->admin->getSubject();
+    if (null === $object)
     {
       throw new NotFoundHttpException();
     }
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($object->getId());
-
-    if (!$comment)
+    if (null === $comment)
     {
-      throw $this->createNotFoundException(
-        'No comment found for this id ' . $object->getId());
+      throw $this->createNotFoundException('No comment found for this id '.$object->getId());
     }
     $em->remove($comment);
     $em->flush();
-    $this->addFlash('sonata_flash_success', 'Comment ' . $object->getId() . ' deleted');
+    $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' deleted');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }

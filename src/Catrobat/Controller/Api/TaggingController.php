@@ -2,38 +2,31 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
-
-/**
- * Class TaggingController
- * @package App\Catrobat\Controller\Api
- */
 class TaggingController extends AbstractController
 {
-
   /**
+   * @deprecated
+   *
    * @Route("/api/tags/getTags.json", name="api_get_tags", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @param Request $request
-   *
-   * @return JsonResponse
    */
-  public function taggingAction(Request $request, TagRepository $tags_repo)
+  public function taggingAction(Request $request, TagRepository $tags_repo): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
-    $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
+    $metadata = $em->getClassMetadata(Tag::class)->getFieldNames();
 
     $tags = [];
     $tags['statusCode'] = 200;
     $tags['constantTags'] = [];
 
     $language = $request->query->get('language');
-    if (!in_array($language, $metadata))
+    if (!in_array($language, $metadata, true))
     {
       $language = 'en';
       $tags['statusCode'] = 404;
@@ -42,7 +35,7 @@ class TaggingController extends AbstractController
 
     foreach ($results as $tag)
     {
-      array_push($tags['constantTags'], $tag[$language]);
+      $tags['constantTags'][] = $tag[$language];
     }
 
     return JsonResponse::create($tags);

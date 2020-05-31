@@ -1,13 +1,6 @@
 default:
 
 # --------------------------------------------------------------------------------------------------
-# Telling Behat where to find the FeatureContext files
-#
-    autoload:
-        - "tests/behat/features/bootstrap/"
-
-
-# --------------------------------------------------------------------------------------------------
 # Output formatting:
 #                     - only shows the progress in command line and then creates a new html report
 #
@@ -37,6 +30,9 @@ default:
                 default:
                     chrome:
                         api_url: "http://localhost:9222"
+                        download_behavior: allow
+                        download_path: tests/testdata/UploadDownloadTemp
+
 
         emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
               name: html
@@ -50,61 +46,82 @@ default:
 # --------------------------------------------------------------------------------------------------
 # Register test suites here:
 #
+# Note: Also define them in the github action work flows. Else they will not be checked automatically.
+#
+#
     suites:
 
         admin:
             paths:    [ "tests/behat/features/admin" ]
             contexts:
-                - AdminFeatureContext:
-                    - "tests/testreports/screens/"
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
 
         api:
             paths:    [ "tests/behat/features/api" ]
             contexts:
-                - ApiFeatureContext:
-                    - "tests/testreports/behat/"
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\ApiContext
+                - Tests\behat\context\CatrowebBrowserContext
+
+        api-deprecated:
+            paths:    [ "tests/behat/features/api-deprecated" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
 
         ci:
             paths:    [ "tests/behat/features/ci" ]
             contexts:
-                - CiFeatureContext:
-                    - "tests/testreports/behat/"
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
 
         flavor:
             paths:    [ "tests/behat/features/flavor" ]
             contexts:
-                - FlavorFeatureContext:
-                    - "tests/testreports/behat/"
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
 
-        web:
-            paths:    [ "tests/behat/features/web" ]
+        web-general:
+            paths:    [ "tests/behat/features/web/general" ]
             contexts:
-                - WebFeatureContext:
-                    - "tests/testreports/screens/"
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-profile:
+            paths:    [ "tests/behat/features/web/profile" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-project:
+            paths:    [ "tests/behat/features/web/project" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
 
         gamejam:
-            filters:
-                tags: "~@web&&~@javascript"
             paths:    [ "tests/behat/features/gamejam" ]
             contexts:
-                - GamejamFeatureContext:
-                    - "tests/testreports/behat/"
-
-        gamejam_web:
-            filters:
-                tags: "@web~"
-            paths:    [ "tests/behat/features/gamejam" ]
-            contexts:
-                - GamejamWebContext:
-                    - "tests/testreports/behat/"
-
-        gamejam_javascript:
-            filters:
-                tags: "@javascript"
-            paths:    [ "tests/behat/features/gamejam" ]
-            contexts:
-                - GamejamJavascriptContext
-
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
 
 # --------------------------------------------------------------------------------------------------
 # Exclude specific tests based on their tags here:
@@ -112,4 +129,3 @@ default:
     gherkin:
         filters:
             tags: "@~disabled&&~wip&&~external&&~RealOAuth"
-

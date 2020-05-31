@@ -2,80 +2,40 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-
-/**
- * Class AdminCommand
- * @package App\Catrobat\Controller\Admin
- */
 class AdminCommand
 {
+  public string $name;
 
-  /**
-   * @var String
-   */
-  public $name;
+  public string $description;
 
-  /**
-   * @var String
-   */
-  public $description;
+  public string $command_link;
 
-  /**
-   * @var
-   */
-  public $command_link;
+  public string $progress_link;
 
-  /**
-   * @var
-   */
-  public $progress_link;
+  public string $command_name;
 
-  /**
-   * @var
-   */
-  public $command_name;
-
-
-  /**
-   * AdminCommand constructor.
-   *
-   * @param String $name
-   * @param String $description
-   */
-  public function __construct(String $name = "", String $description = "")
+  public function __construct(string $name = '', string $description = '')
   {
     $this->name = $name;
     $this->description = $description;
   }
 
-  /**
-   * @param mixed $command
-   */
-  public function setCommandLink($command)
+  public function setCommandLink(string $command): void
   {
     $this->command_link = $command;
   }
 
-  /**
-   * @param mixed $command
-   */
-  public function setCommandName($command)
+  public function setCommandName(string $command): void
   {
     $this->command_name = $command;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getProgressLink()
+  public function getProgressLink(): string
   {
     return $this->progress_link;
   }
 
-  /**
-   * @param mixed $progress_link
-   */
-  public function setProgressLink($progress_link)
+  public function setProgressLink(string $progress_link): void
   {
     $this->progress_link = $progress_link;
   }

@@ -1,6 +1,11 @@
-![Behat Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/Behat%20Tests/badge.svg)
-![PhpSpec Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/PhpSpec%20Tests/badge.svg)
-![PhpUnit Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/PhpUnit%20Tests/badge.svg)
+![Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/Tests/badge.svg)
+![Code Quality Checks](https://github.com/Catrobat/Catroweb-Symfony/workflows/Code%20Quality%20Checks/badge.svg)
+
+[![Php 7.4](https://img.shields.io/badge/PHP-7.4-informational.svg)](https://cs.symfony.com/)
+[![Eslint Standard](https://img.shields.io/badge/Code_Style-PHP_CS_Fixer-informational.svg)](https://cs.symfony.com/)
+[![PHPStan](https://img.shields.io/badge/Code_Quality-PHPStan-informational.svg)](https://github.com/phpstan/phpstan)
+
+[![JavaScript Style Guide](https://img.shields.io/badge/JavaScript-Eslint_Standard-informational.svg)](https://standardjs.com)
 
 Catroweb
 =========

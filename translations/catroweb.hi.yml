@@ -1,5 +1,4 @@
 ---
-#---
 #homepage translation
 localLanguage: अंग्रेजी
 username: 'उपयोगकर्ता नाम:'
@@ -41,11 +40,13 @@ registrationError: 'यूज़रनेम या पासवर्ड पह
 notifications: 'सूचनाएँ'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
-LikeNotifications: 'Likes'
-likesNotificationsTitle: 'Like Notifications'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction Notifications'
 followersNotificationsTitle: 'Follower Notifications'
 commentsNotificationsTitle: 'Comment Notifications'
+remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'टिप्पणियाँ'
+RemixNotifications: 'Remixes'
 oldnotification: 'Old Notifications'
 wellDone: "बहुत ख़ूब!"
 done: "समाप्त"
@@ -63,11 +64,26 @@ deleteAllNotificationsButtonTitle: "Delete all"
 notificationsClearError: "पढ़ें के रूप में सूचनाओं को चिह्नित करने में असमर्थ!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "कृपया प्रतीक्षा करें..."
+projects: "प्रोग्राम्स"
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
@@ -75,8 +91,10 @@ programs:
     download: ऐप डाउनलोड करें
     statistics: अधिक सांख्यिकी
   featured: विशेषताएं
+  example: Examples
   newest: Newest projects
   recommended: Recommended projects
+  scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?
@@ -112,10 +130,9 @@ programs:
   downloads: '%downloads% डाउनलोड'
   sample: Example projects
   views: '%views% बार देखे गए'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 लोग इसे देखकर मुस्करातें हैं|{1}1 कोई एक इसे देखकर मुस्कराता है|]1,Inf]%persons% लोग इसे देखकर मुस्करातें हैं|'
-  likeLoveDetailText: '{0}0 लोगो को ये पसंद आया|{1}1 को ये पसंद आया|]1,Inf]%persons% लोगो को ये पसंद आया'
-  likeWowDetailText: '{0}0 लोग इसे "वाह!" कहते है |{1}1 व्यक्ति इसे "वाह!" कहता है |] 1, Inf]%persons% लोग इसे "वाह!" कहता है'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "सब"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
@@ -191,16 +208,12 @@ passwordRecovery:
   subject: आपका Catrobat पारण शब्द वसूली
   message: |
     Dear %username%.
-
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
     If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-
     To reset your password and create a new one, please visit the following page: %confirmationUrl%
-
     You can use your username and your password at any time to access the %appplication_url% community.
     To do so, just visit the following page: %loginPage%
     To edit your profile details, go to this page: %profilePage%
-
     Best regards,
     Your Catrobat Team.
   messageHtml: |
@@ -244,6 +257,7 @@ profile:
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: This username already exists.
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: सहेज दिया गया !
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
@@ -543,12 +557,13 @@ help:
     download: "Download the project"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
+  username_chooser: "Please choose a username:"
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: खोज़े...
   search: खोजें
+  inMediaLib: Search in media library
   results: खोज परिणाम
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
@@ -558,7 +573,8 @@ menu:
   logout: बाहर जाए
   admin: Admin
   home: Home
-  helpAndTutorials: Help & Tutorials
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Follower
 login:
   login: प्रवेश करे
   passOrUser: आपका पासवर्ड या उपयोगकर्ता नाम गलत था।
@@ -583,6 +599,8 @@ apk:
   prepare: 'एप्लिकेशन तैयार करें'
   preparing: 'ऐप तैयार कर रहे हैं'
   text: 'The process may take a while'
+format:
+  million_abbreviation: M
 #api
 errors:
   username:
@@ -651,6 +669,24 @@ time:
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: There was an error during the upload of your app.
+api:
+  registerUser:
+    emailMissing: 'EMail missing'
+    notAValidEmail: 'Not a valid EMail'
+    emailAlreadyInUse: 'EMail already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username shouldn't contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
   arabic: अरबी
@@ -758,14 +794,16 @@ codeview:
   cantDisplayCode: "Code can't be displayed"
   cantDisplayStatistics: "Code can't be displayed"
   totalNumberOf: 'Total number of'
-  scenes: 'scenes'
-  scripts: 'scripts'
-  bricks: 'bricks'
-  objects: 'actors and objects'
-  looks: 'looks'
-  sounds: 'sounds'
-  globals: 'globals'
-  locals: 'locals'
+  scenes: 'Scenes'
+  scripts: 'लिपिया:'
+  bricks: 'ईंटे'
+  objects: 'Actors and Objects'
+  looks: 'नज़ारे:'
+  sounds: 'ध्वनियाँ'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global Variables'
+  localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
   controlBricks: 'Control Bricks'
   motionBricks: 'Motion Bricks'
@@ -774,7 +812,21 @@ codeview:
   penBricks: 'Pen Bricks'
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
+codeStatistics:
+  title: "Code Statistics"
+  error: "Code Statistics can't be displayed."
+  general: 'General'
+  bricks: 'ईंटे'
+  eventBricks: 'Event'
+  controlBricks: 'नियंत्रण'
+  motionBricks: 'Motion'
+  soundBricks: 'आवाज़'
+  looksBricks: 'नज़ारे:'
+  penBricks: 'Pen'
+  dataBricks: 'Data'
+  specialBricks: 'Special'
 footer:
+  language: भाषा
   usefulLinks: उपयोगी कड़ियां
   legalities: कानूनी निर्देशों
   communityStats: Community Stats
@@ -791,7 +843,7 @@ privacy-policy:
   text7: आप स्वेच्छा से Catrobat ंयूज़लेटर के लिए सदस्यता ले सकते हैं, https://catrob.at/newsletter पर MailChimp सेवा के माध्यम से हमारे द्वारा प्रदान की (रॉकेट विज्ञान समूह LLC डी/ इसके बाद आपको Catrobat प्रोजेक्ट और उसकी सेवाओं पर आपके द्वारा प्रदत्त ई-मेल पता पर अद्यतन प्राप्त होंगे । आप हर ंयूजलेटर के पाद लेख में "सदस्यता समाप्त" लिंक का उपयोग करके किसी भी समय ंयूजलेटर वापस ले सकते हैं । इस ंयूजलेटर MailChimp द्वारा प्रदान की है जिनके साथ हम एक डेटा प्रसंस्करण समझौते है और जो यूरोपीय संघ के जनरल डाटा Prodection विनियमन और यूरोपीय संघ के लिए प्रतिबद्ध संयुक्त राज्य अमेरिका "गोपनीयता शील्ड" । MailChimp पर अधिक जानकारी के लिए कृपया यह भी MailChimp की गोपनीयता नीति और उपयोग की शर्तों को देखो ।
   text8: सभी सेवाएं अंतर्राष्ट्रीय Catrobat संघ की छतरी के नीचे मुक्त खुला स्रोत Catrobat परियोजना द्वारा प्रदान की जाती है – Verein zur Förderung freier सॉफ्टवेयर, एक गैर लाभ चरने, ऑस्ट्रिया (यूरोपीय संघ) में शामिल एनजीओ । हमारी नीतियां यूरोपीय संघ और ऑस्ट्रिया के डेटा संरक्षण कानून (GDPR) को संमान देते हैं । हमारे साथ संपर्क में पाने के लिए, कृपया एक ई मेल भेजने के लिए contact@catrobat.org या हमें catrobat, सी/ओ सॉफ्टवेयर प्रौद्योगिकी के संस्थान, चराई प्रौद्योगिकी विश्वविद्यालय, Inffeldgasse 16b, ए-८०१० चराई, ऑस्ट्रिया (यूरोपीय संघ) ।
   text9: यदि आपकी आयु 14 वर्ष से कम है, तो यह पॉलिसी कानूनी अभिभावक (आमतौर पर माता-पिता) द्वारा स्वीकार की जानी चाहिए।
-  text10: Catrobat's official English language privacy policy is available on the web under https://catrob.at/privacypolicy.
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: अनुमोदन के बिना, हम एक खाता नहीं बना सकते हैं लेकिन मूल विशेषताएं अभी भी उपलब्ध हैं।
 catro-notifications:
   markAsRead: "Mark as read"
@@ -800,14 +852,17 @@ catro-notifications:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New like for project %program_name%!'
-    message: 'User %user_link% liked your project %program_link%.'
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
     title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
@@ -839,11 +894,14 @@ media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview Size
+    description: Preview size
     sm: small
     md: medium
     lg: large
   theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
 flavor:
   pocketcode: पॉकेट कोड
   pocketalice: Pocket Alice
@@ -851,8 +909,18 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
 agree: सहमत
 disagree: असहमत
 profileLoader:
   noProfiles: There are currently no profiles.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'Catrobat community'
+back_to_app: 'Exit community'

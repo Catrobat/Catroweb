@@ -3,21 +3,26 @@ parameters:
   catrobat.backup.dir:                  "%kernel.project_dir%/backups/"
   catrobat.featuredimage.dir:           "%catrobat.pubdir%resources/featured/"
   catrobat.featuredimage.path:          "resources/featured/"
+  catrobat.exampleimage.dir:            "%catrobat.pubdir%resources/example/"
+  catrobat.exampleimage.path:           "resources/example/"
   catrobat.file.extract.dir:            "%kernel.project_dir%/public/resources/extract/"
   catrobat.file.extract.path:           "resources/extract/"
   catrobat.file.storage.dir:            "%kernel.project_dir%/public/resources/programs/"
   catrobat.file.storage.path:           "resources/programs/"
-  catrobat.invalidupload.dir:           "%kernel.project_dir%/src/Catrobat/Commands/invisible_programs/"
   catrobat.logs.dir:                    "%kernel.project_dir%/var/log/"
   catrobat.max_description_upload_size: 10000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
-  catrobat.max_credits_upload_size: 3000
+  catrobat.max_credits_upload_size:     3000
   catrobat.mediapackage.dir:            "%catrobat.pubdir%resources/mediapackage/"
   catrobat.mediapackage.path:           "resources/mediapackage/"
+  catrobat.mediapackage.sample.dir:     "%catrobat.pubdir%tests/testdata/DataFixtures/MediaPackage/SampleMediaPackage/"
+  catrobat.mediapackage.sample.path:    "tests/testdata/DataFixtures/MediaPackage/SampleMediaPackage/"
+  catrobat.mediapackage.font.dir:  "%catrobat.pubdir%webfonts/fa-solid-900.ttf"
+  catrobat.mediapackage.font.path: "webfonts/fa-solid-900.ttf"
   catrobat.pubdir:                      "%kernel.project_dir%/public/"
   catrobat.resources.dir:               "%kernel.project_dir%/public/resources/"
   catrobat.screenshot.dir:              "%catrobat.pubdir%resources/screenshots/"
   catrobat.screenshot.path:             "resources/screenshots/"
-  catrobat.snapshot.dir:                "%catrobat.pubdir%resources/Snapshots"
+  catrobat.snapshot.dir:                "%catrobat.pubdir%resources/snapshots"
   catrobat.template.dir:                "%catrobat.pubdir%resources/templates/"
   catrobat.template.path:               "resources/templates/"
   catrobat.template.screenshot.dir:     "%catrobat.pubdir%resources/templates/screenshots/"
@@ -33,13 +38,6 @@ parameters:
   catrobat.translations.dir:            "%kernel.project_dir%/translations"
   catrobat.upload.temp.dir:             "%catrobat.pubdir%resources/tmp/uploads/"
   catrobat.upload.temp.path:            "resources/tmp/uploads/"
-
-  ldap_role_mappings:
-    ROLE_MEDIAPACKAGE:  "Webserver-MediaPackageMaintainers"
-    ROLE_FEATURED:      "Webserver-FeaturedProgramsMaintainers"
-    ROLE_APPROVE:       "Webserver-AppApprovers"
-    ROLE_SUPER_ADMIN:   "Webserver-Administrators"
-    ROLE_GAMEJAM_ADMIN: "Webserver-GameJam-Administrators"
 
   #      This can drastically improve DX by reducing the time to load classes
   container.dumper.inline_class_loader: true
@@ -108,8 +106,8 @@ services:
     class: App\Entity\TemplateManager
     public: true
 
-  App\Catrobat\Commands\Helpers\RemixManipulationProgramManager:
-    class: App\Catrobat\Commands\Helpers\RemixManipulationProgramManager
+  App\Commands\Helpers\RemixManipulationProgramManager:
+    class: App\Commands\Helpers\RemixManipulationProgramManager
     public: true
 
   App\Entity\RemixManager:
@@ -148,9 +146,9 @@ services:
   #   Commands:
   #               need a console tag; make sure all commands are in the correct folder and extend Command
   #
-  App\Catrobat\Commands\:
-    resource: '../src/Catrobat/Commands'
-    exclude: '../src/Catrobat/Commands/Helpers'
+  App\Commands\:
+    resource: '../src/Commands'
+    exclude: '../src/Commands/Helpers'
     tags:
       - { name: console.command }
 
@@ -187,8 +185,8 @@ services:
     class: App\Catrobat\Services\TemplateFileRepository
     public: true
 
-  App\Catrobat\Services\FeaturedImageRepository:
-    class: App\Catrobat\Services\FeaturedImageRepository
+  App\Catrobat\Services\ImageRepository:
+    class: App\Catrobat\Services\ImageRepository
     public: true
 
   App\Catrobat\Services\MediaPackageFileRepository:
@@ -213,10 +211,6 @@ services:
 
   App\Catrobat\Services\TokenGenerator:
     class: App\Catrobat\Services\TokenGenerator
-    public: true
-
-  App\Catrobat\Services\Time:
-    class: App\Catrobat\Services\Time
     public: true
 
   App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser:
@@ -272,6 +266,10 @@ services:
       - max_number_of_concurrent_requests: 4
     public: true
 
+  App\Utils\MyUuidGenerator:
+    class: App\Utils\MyUuidGenerator
+    public: true
+
   # =============== Stuff that needs different parameters/services based on the environment
 
   App\Catrobat\Services\CatrobatFileExtractor:
@@ -285,11 +283,6 @@ services:
   # ====================================================================================================================
   #   User Authentication
   #
-  webview_authenticator:
-    class: App\Catrobat\Security\WebviewAuthenticator
-    public: true
-  App\Catrobat\Security\WebviewAuthenticator: "@webview_authenticator"
-
   user_authenticator:
     class: App\Catrobat\Security\UserAuthenticator
     arguments:
@@ -297,24 +290,6 @@ services:
       - "@security.authentication.manager"
     public: true
   App\Catrobat\Security\UserAuthenticator: "@user_authenticator"
-
-  ldap_user_hydrator:
-    alias: App\Catrobat\Ldap\UserHydrator
-
-  tokengenerator:
-    alias: App\Catrobat\Services\TokenGenerator
-
-  App\Entity\UserLDAPManager:
-    class: App\Entity\UserLDAPManager
-    arguments:
-      - "@fr3d_ldap.ldap_driver"
-      - "@ldap_user_hydrator"
-      - '%fr3d_ldap.ldap_manager.parameters%'
-      - '%ldap_role_mappings%'
-      - '%ldap_group_filter%'
-      - "@tokengenerator"
-      - "@monolog.logger"
-    public: true
 
 
   # ====================================================================================================================
@@ -500,6 +475,11 @@ services:
     tags:
       - { name: doctrine.orm.entity_listener }
 
+  catrobat.entity.example.image_listener:
+    class: App\Catrobat\Listeners\Entity\ExampleProgramImageListener
+    tags:
+      - { name: doctrine.orm.entity_listener }
+
   # ======== Views ========
   catrobat.view.uploadexception:
     class: App\Catrobat\Listeners\View\UploadExceptionListener
@@ -537,7 +517,7 @@ services:
   catrowebadmin.block.programs.all:
     class: App\Admin\AllProgramsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "All Projects" }
+      - { name: sonata.admin, manager_type: orm, label: "All Projects", show_mosaic_button: false}
     arguments:
       - ~
       - App\Entity\Program
@@ -579,10 +559,11 @@ services:
   catrowebadmin.block.programs.categories:
     class: App\Admin\CategoriesAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Starter Projects" }
+      - { name: sonata.admin, manager_type: orm, label: "Starter Projects", show_mosaic_button: false }
     arguments:
       - ~
       - App\Entity\StarterCategory
+      - App\Catrobat\Controller\Admin\CategoriesController
       - ~
     public: true
 
@@ -614,6 +595,16 @@ services:
       - ~
       - App\Entity\Template
       - App\Catrobat\Controller\Admin\TemplateController
+    public: true
+
+  catrowebadmin.block.example.program:
+    class: App\Admin\ExampleProgramAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Example Projects" }
+    arguments:
+      - ~
+      - App\Entity\ExampleProgram
+      - ~
     public: true
 
   # ===== Media Package
@@ -879,14 +870,15 @@ services:
     public: true
 
 
-# ====================================================================================================================
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ====================================================================================================================
+  # ====================================================================================================================
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ====================================================================================================================
 
-# ====================================================================================================================
-#  CAPI
-#
-  api.mediaLibrary:
+  # ====================================================================================================================
+  #  CAPI:
+  #        We need to register the API server as handler for our open api generated APIs
+  #
+  api.media-library:
     class: App\Api\MediaLibraryApi
     tags:
       - { name: "open_api_server.api", api: "mediaLibrary" }
@@ -894,9 +886,14 @@ services:
   api.projects:
     class: App\Api\ProjectsApi
     tags:
-        - { name: "open_api_server.api", api: "projects" }
+      - { name: "open_api_server.api", api: "projects" }
 
-  api.security:
-    class: App\Api\SecurityApi
+  api.user:
+    class: App\Api\UserApi
     tags:
-      - { name: "open_api_server.api", api: "security" }
+      - { name: "open_api_server.api", api: "user" }
+
+  api.authentication:
+    class: App\Api\AuthenticationApi
+    tags:
+      - { name: "open_api_server.api", api: "authentication" }

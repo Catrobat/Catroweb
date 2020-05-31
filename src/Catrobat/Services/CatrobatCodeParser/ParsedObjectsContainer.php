@@ -4,57 +4,43 @@ namespace App\Catrobat\Services\CatrobatCodeParser;
 
 use SimpleXMLElement;
 
-/**
- * Class ParsedObjectsContainer
- * @package App\Catrobat\Services\CatrobatCodeParser
- */
 abstract class ParsedObjectsContainer
 {
-  /**
-   * @var SimpleXMLElement
-   */
-  protected $xml_properties;
+  protected SimpleXMLElement $xml_properties;
 
-  /**
-   * @var null
-   */
-  protected $background;
+  protected ?ParsedObject $background = null;
 
-  /**
-   * @var array
-   */
-  protected $objects;
+  protected array $objects = [];
 
-  /**
-   * ParsedObjectsContainer constructor.
-   *
-   * @param SimpleXMLElement $xml_properties
-   */
   public function __construct(SimpleXMLElement $xml_properties)
   {
     $this->xml_properties = $xml_properties;
-    $this->background = null;
-    $this->objects = [];
 
     $this->parseObjects();
   }
 
-  /**
-   *
-   */
-  private function parseObjects()
+  public function getBackground(): ?ParsedObject
   {
-    /**
-     * @var $current_group null|ParsedObjectGroup
-     */
+    return $this->background;
+  }
+
+  public function getObjects(): array
+  {
+    return $this->objects;
+  }
+
+  private function parseObjects(): void
+  {
+    /** @var ParsedObjectGroup|null $current_group */
     $current_group = null;
     foreach ($this->getAllObjectXMLProperties() as $object_xml_properties)
     {
-      if ($this->background === null)
+      if (null === $this->background)
       {
         $this->background = new ParsedObject($object_xml_properties);
       }
       else
+      {
         switch ($object_xml_properties[Constants::TYPE_ATTRIBUTE])
         {
           case Constants::GROUP_SPRITE_TYPE:
@@ -72,14 +58,15 @@ abstract class ParsedObjectsContainer
             $this->objects[] = new ParsedObject($object_xml_properties);
             break;
         }
+      }
     }
     $this->addCurrentGroup($current_group);
   }
 
   /**
-   * @param $current_group
+   * @param mixed $current_group
    */
-  private function addCurrentGroup(&$current_group)
+  private function addCurrentGroup(&$current_group): void
   {
     if ($current_group)
     {
@@ -88,10 +75,7 @@ abstract class ParsedObjectsContainer
     }
   }
 
-  /**
-   * @return array
-   */
-  private function getAllObjectXMLProperties()
+  private function getAllObjectXMLProperties(): array
   {
     $all_object_xmls = [];
     foreach ($this->xml_properties->objectList->object as $object_xml_properties)
@@ -101,22 +85,17 @@ abstract class ParsedObjectsContainer
       if ($this->hasName($object_xml))
       {
         $all_object_xmls[] = $object_xml;
-        $all_object_xmls = array_merge($all_object_xmls, $this->getPointedObjectXMLProperties($object_xml));
+        $all_object_xmls = [...$all_object_xmls, ...$this->getPointedObjectXMLProperties($object_xml)];
       }
     }
 
     return $all_object_xmls;
   }
 
-  /**
-   * @param $object_xml SimpleXMLElement
-   *
-   * @return array
-   */
-  private function getPointedObjectXMLProperties($object_xml)
+  private function getPointedObjectXMLProperties(SimpleXMLElement $object_xml): array
   {
     $all_pointed_object_xmls = [];
-    foreach ($object_xml->xpath('scriptList//' . Constants::POINTED_OBJECT_TAG) as $pointed_object_xml_properties)
+    foreach ($object_xml->xpath('scriptList//'.Constants::POINTED_OBJECT_TAG) as $pointed_object_xml_properties)
     {
       $pointed_object_xml = $this->dereference($pointed_object_xml_properties);
 
@@ -129,47 +108,19 @@ abstract class ParsedObjectsContainer
     return $all_pointed_object_xmls;
   }
 
-  /**
-   * @param $object_xml_properties SimpleXMLElement
-   *
-   * @return mixed
-   */
-  private function dereference($object_xml_properties)
+  private function dereference(SimpleXMLElement $object_xml_properties): SimpleXMLElement
   {
-    if ($object_xml_properties[Constants::REFERENCE_ATTRIBUTE] != null)
+    if (null != $object_xml_properties[Constants::REFERENCE_ATTRIBUTE])
     {
       return $this->dereference($object_xml_properties
         ->xpath($object_xml_properties[Constants::REFERENCE_ATTRIBUTE])[0]);
     }
-    else
-    {
-      return $object_xml_properties;
-    }
+
+    return $object_xml_properties;
   }
 
-  /**
-   * @param $object_xml_properties
-   *
-   * @return bool
-   */
-  private function hasName($object_xml_properties)
+  private function hasName(SimpleXMLElement $object_xml_properties): bool
   {
-    return ($object_xml_properties[Constants::NAME_ATTRIBUTE] != null) or (count($object_xml_properties->name) != 0);
-  }
-
-  /**
-   * @return null
-   */
-  public function getBackground()
-  {
-    return $this->background;
-  }
-
-  /**
-   * @return array
-   */
-  public function getObjects()
-  {
-    return $this->objects;
+    return null != $object_xml_properties[Constants::NAME_ATTRIBUTE] || 0 != count($object_xml_properties->name);
   }
 }

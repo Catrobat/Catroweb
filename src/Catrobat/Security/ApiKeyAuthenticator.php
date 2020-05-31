@@ -2,18 +2,18 @@
 
 namespace App\Catrobat\Security;
 
+use App\Catrobat\StatusCode;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
-use Symfony\Component\HttpFoundation\Response;
-use App\Catrobat\StatusCode;
 use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -21,33 +21,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @deprecated Class ApiKeyAuthenticator
  *
  *             use only in API version 1!!!
- *
- *
- * @package App\Catrobat\Security
  */
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
-  /**
-   * @var TranslatorInterface
-   */
-  protected $translator;
+  protected TranslatorInterface $translator;
 
-  /**
-   * ApiKeyAuthenticator constructor.
-   *
-   * @param TranslatorInterface $translator
-   */
   public function __construct(TranslatorInterface $translator)
   {
     $this->translator = $translator;
   }
 
   /**
-   * @param Request $request
-   * @param         $providerKey
+   * @param mixed $providerKey
+   *
+   * @throws BadCredentialsException
    *
    * @return PreAuthenticatedToken
-   * @throws BadCredentialsException
    */
   public function createToken(Request $request, $providerKey)
   {
@@ -61,45 +50,39 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
 
     if (!$username)
     {
-      $username = "";
+      $username = '';
     }
 
     return new PreAuthenticatedToken($username, $credentials, $providerKey);
   }
 
   /**
-   * @param TokenInterface        $token
-   * @param UserProviderInterface $userProvider
-   * @param                       $providerKey
+   * @param mixed $providerKey
+   *
+   * @throws AuthenticationException
    *
    * @return PreAuthenticatedToken
-   * @throws AuthenticationException
    */
   public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
   {
-    /**
-     * @var $user User
-     */
-
     if (!$token->getCredentials())
     {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.token", [], 'catroweb'));
+      throw new AuthenticationException($this->translator->trans('errors.token', [], 'catroweb'));
     }
 
-    if (!$token->getUsername())
+    if ('' === $token->getUsername())
     {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.username.blank", [], 'catroweb'));
+      throw new AuthenticationException($this->translator->trans('errors.username.blank', [], 'catroweb'));
     }
 
     try
     {
+      /** @var User|null $user */
       $user = $userProvider->loadUserByUsername($token->getUsername());
-    } catch (UsernameNotFoundException $exception)
+    }
+    catch (UsernameNotFoundException $usernameNotFoundException)
     {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.username.not_exists", [], 'catroweb'));
+      throw new AuthenticationException($this->translator->trans('errors.username.not_exists', [], 'catroweb'));
     }
 
     if ($token->getCredentials() === $user->getUploadToken())
@@ -111,16 +94,12 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
 
       return $authenticated_token;
     }
-    else
-    {
-      throw new AuthenticationException(
-        $this->translator->trans("errors.uploadTokenAuthFailed", [], 'catroweb'));
-    }
+
+    throw new AuthenticationException($this->translator->trans('errors.uploadTokenAuthFailed', [], 'catroweb'));
   }
 
   /**
-   * @param TokenInterface $token
-   * @param                $providerKey
+   * @param mixed $providerKey
    *
    * @return bool
    */
@@ -130,15 +109,12 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
   }
 
   /**
-   * @param Request                 $request
-   * @param AuthenticationException $exception
-   *
    * @return JsonResponse|Response
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
     return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR,
-                                 'answer'     => $exception->getMessage(), 'preHeaderMessages' => ""],
+      'answer' => $exception->getMessage(), 'preHeaderMessages' => '', ],
       Response::HTTP_UNAUTHORIZED);
   }
 }

@@ -3,25 +3,18 @@
 namespace App\Catrobat\Services\CatrobatCodeParser\Bricks;
 
 use App\Catrobat\Services\CatrobatCodeParser\Constants;
-
 use SimpleXMLElement;
 
-/**
- * Class BrickFactory
- * @package App\Catrobat\Services\CatrobatCodeParser\Bricks
- */
 class BrickFactory
 {
   /**
-   * @param SimpleXMLElement $brick_xml_properties
-   *
    * @return BroadcastBrick|BroadcastReceiverBrick|BroadcastWaitBrick|WhenBGChangeBrick|WhenBounceOffBrick|WhenBrick|null
    */
   public static function generate(SimpleXMLElement $brick_xml_properties)
   {
     $generated_brick = null;
 
-    switch ((string)$brick_xml_properties[Constants::TYPE_ATTRIBUTE])
+    switch ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE])
     {
       // EVENT Bricks
       case Constants::BROADCAST_BRICK:
@@ -330,6 +323,9 @@ class BrickFactory
       case Constants::REPLACE_ITEM_LIST_BRICK:
         $generated_brick = new ReplaceItemInUserListBrick($brick_xml_properties);
         break;
+      case Constants::CLEAR_LIST_BRICK:
+        $generated_brick = new ClearUserListBrick($brick_xml_properties);
+        break;
       case Constants::WRITE_LIST_ON_DEVICE_BRICK:
         $generated_brick = new WriteListOnDeviceBrick($brick_xml_properties);
         break;
@@ -341,6 +337,11 @@ class BrickFactory
         break;
       case Constants::USER_LIST_BRICK:
         $generated_brick = new UserListBrick($brick_xml_properties);
+        break;
+
+      // Your Bricks
+      case Constants::USER_DEFINED_BRICK:
+        $generated_brick = new UserDefinedBrick($brick_xml_properties);
         break;
 
       // PEN Bricks

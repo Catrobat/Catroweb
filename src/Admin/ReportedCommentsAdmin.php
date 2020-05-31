@@ -5,19 +5,15 @@ namespace App\Admin;
 use App\Entity\Program;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
-/**
- * Class ReportedCommentsAdmin
- * @package App\Admin
- */
 class ReportedCommentsAdmin extends AbstractAdmin
 {
-
   /**
    * @var string
    */
@@ -28,66 +24,61 @@ class ReportedCommentsAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'report';
 
-
-  /**
-   * @param string $context
-   *
-   * @return QueryBuilder
-   */
-  public function createQuery($context = 'list')
+  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
-    /**
-     * @var $query QueryBuilder
-     */
-    $query = parent::createQuery();
-    $query->andWhere(
-      $query->expr()->eq($query->getRootAliases()[0] . '.isReported', $query->expr()->literal(true))
+    $query = parent::configureQuery($query);
+
+    if (!$query instanceof ProxyQuery)
+    {
+      return $query;
+    }
+
+    /** @var QueryBuilder $qb */
+    $qb = $query->getQueryBuilder();
+
+    $qb->andWhere(
+      $qb->expr()->eq($qb->getRootAliases()[0].'.isReported', $qb->expr()->literal(true))
     );
 
     return $query;
   }
-
 
   /**
    * @param DatagridMapper $datagridMapper
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
   }
-
 
   /**
    * @param ListMapper $listMapper
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper)
+  protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
       ->add('id')
       ->add('program', EntityType::class,
         [
-          'class'      => Program::class,
+          'class' => Program::class,
           'admin_code' => 'catrowebadmin.block.programs.all',
-          'editable'   => false,
+          'editable' => false,
         ])
       ->add('user')
       ->add('uploadDate')
       ->add('text')
       ->add('username')
       ->add('_action', 'actions', ['actions' => [
-        'delete'          => ['template' => 'Admin/CRUD/list__action_delete_comment.html.twig'],
+        'delete' => ['template' => 'Admin/CRUD/list__action_delete_comment.html.twig'],
         'unreportComment' => ['template' => 'Admin/CRUD/list__action_unreportComment.html.twig'],
-      ]]);
+      ]])
+    ;
   }
 
-
-  /**
-   * @param RouteCollection $collection
-   */
-  protected function configureRoutes(RouteCollection $collection)
+  protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->add('deleteComment');
     $collection->add('unreportComment');

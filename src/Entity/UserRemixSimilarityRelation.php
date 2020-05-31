@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity
@@ -14,7 +17,8 @@ class UserRemixSimilarityRelation
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
-   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys
+   * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
+   *
    * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
@@ -23,46 +27,39 @@ class UserRemixSimilarityRelation
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $first_user_id;
+  protected string $first_user_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="relations_of_similar_users_based_on_remixes",
-   *                                                                fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="first_user_id", referencedColumnName="id")
-   * @var User
    */
-  protected $first_user;
+  protected User $first_user;
 
   /**
    * @ORM\Id
    * @ORM\Column(type="guid")
    */
-  protected $second_user_id;
+  protected string $second_user_id;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="reverse_relations_of_similar_users_based_on_remixes",
-   *                                                                fetch="LAZY")
+   * fetch="LAZY")
    * @ORM\JoinColumn(name="second_user_id", referencedColumnName="id")
-   * @var User
    */
-  protected $second_user;
+  protected User $second_user;
 
   /**
-   * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default" = 0.0})
+   * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default": 0.0})
    */
-  protected $similarity;
+  protected float $similarity;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $created_at;
+  protected ?DateTime $created_at = null;
 
-  /**
-   * @param User $first_user
-   * @param User $second_user
-   * @param      $similarity
-   */
-  public function __construct(User $first_user, User $second_user, $similarity)
+  public function __construct(User $first_user, User $second_user, float $similarity)
   {
     $this->setFirstUser($first_user);
     $this->setSecondUser($second_user);
@@ -72,22 +69,17 @@ class UserRemixSimilarityRelation
   /**
    * @ORM\PrePersist
    *
-   * @throws \Exception
+   * @throws Exception
    */
-  public function updateTimestamps()
+  public function updateTimestamps(): void
   {
-    if ($this->getCreatedAt() == null)
+    if (null === $this->getCreatedAt())
     {
-      $this->setCreatedAt(new \DateTime());
+      $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
 
-  /**
-   * @param User $first_user
-   *
-   * @return $this
-   */
-  public function setFirstUser(User $first_user)
+  public function setFirstUser(User $first_user): UserRemixSimilarityRelation
   {
     $this->first_user = $first_user;
     $this->first_user_id = $first_user->getId();
@@ -95,12 +87,7 @@ class UserRemixSimilarityRelation
     return $this;
   }
 
-  /**
-   * @param User $second_user
-   *
-   * @return $this
-   */
-  public function setSecondUser(User $second_user)
+  public function setSecondUser(User $second_user): UserRemixSimilarityRelation
   {
     $this->second_user = $second_user;
     $this->second_user_id = $second_user->getId();
@@ -108,72 +95,44 @@ class UserRemixSimilarityRelation
     return $this;
   }
 
-  /**
-   * @return User
-   */
-  public function getFirstUser()
+  public function getFirstUser(): User
   {
     return $this->first_user;
   }
 
-  /**
-   * @return User
-   */
-  public function getSecondUser()
+  public function getSecondUser(): User
   {
     return $this->second_user;
   }
 
-  /**
-   * @return int
-   */
-  public function getFirstUserId()
+  public function getFirstUserId(): string
   {
     return $this->first_user_id;
   }
 
-  /**
-   * @return int
-   */
-  public function getSecondUserId()
+  public function getSecondUserId(): string
   {
     return $this->second_user_id;
   }
 
-  /**
-   * @param $similarity
-   *
-   * @return $this
-   */
-  public function setSimilarity($similarity)
+  public function setSimilarity(float $similarity): UserRemixSimilarityRelation
   {
-    $this->similarity = (float)$similarity;
+    $this->similarity = $similarity;
 
     return $this;
   }
 
-  /**
-   * @return int
-   */
-  public function getSimilarity()
+  public function getSimilarity(): float
   {
     return $this->similarity;
   }
 
-  /**
-   * @return \DateTime
-   */
-  public function getCreatedAt()
+  public function getCreatedAt(): ?DateTime
   {
     return $this->created_at;
   }
 
-  /**
-   * @param \DateTime $created_at
-   *
-   * @return $this
-   */
-  public function setCreatedAt(\DateTime $created_at)
+  public function setCreatedAt(DateTime $created_at): UserRemixSimilarityRelation
   {
     $this->created_at = $created_at;
 

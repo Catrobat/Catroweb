@@ -39,9 +39,7 @@ add('shared_files',
   [
     '.env.local',
     '.env.prod.local',
-    '.env.dev.local',
-    'config/packages/parameters.yml',
-    'config/packages/dev/parameters.yml',
+    '.env.dev.local'
   ]);
 
 // Symfony writable dirs
@@ -115,7 +113,7 @@ task('restart:nginx', function () {
   run('sudo /usr/sbin/service nginx restart');
 });
 task('restart:php-fpm', function () {
-  run('sudo /usr/sbin/service php7.3-fpm restart');
+  run('sudo /usr/sbin/service php7.4-fpm restart');
 });
 task('install:npm', function () {
   cd('{{release_path}}');
@@ -124,6 +122,11 @@ task('install:npm', function () {
 task('deploy:grunt', function () {
   cd('{{release_path}}');
   run('grunt');
+});
+
+task('deploy:jwt', function () {
+  cd('{{release_path}}');
+  run('sh docker/app/init-jwt-config.sh');
 });
 
 /**
@@ -149,6 +152,7 @@ task('deploy', [
   'database:migrate',
   'install:npm',
   'deploy:grunt',
+  'deploy:jwt',
   'restart:nginx',
   'restart:php-fpm',
   'deploy:unlock',

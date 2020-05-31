@@ -1,17 +1,11 @@
-@import '../../../public/bootstrap_vendor/scss/functions';
+@import '../../../public/bootstrap/scss/functions';
 @import "../base/variables";
 @import "../base/mixins";
 @import "../base/elements";
-@import '../../../public/bootstrap_vendor/scss/variables';
-@import '../../../public/bootstrap_vendor/scss/mixins';
+@import '../../../public/bootstrap/scss/variables';
+@import '../../../public/bootstrap/scss/mixins';
 @import 'theme_settings';
 
-#content
-{
-  padding: 18px;
-  min-height: 100vh;
-  color: darkgrey;
-}
 
 #thumbsize-control
 {
@@ -58,10 +52,25 @@ $border-spacing: 8px;
       border-radius: 5px;
       position: relative;
 
-      &:hover
+      .checkbox
       {
-        border-color: $primary;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+        visibility: hidden;
+      }
+
+      &.selected
+      {
+        background-color: #E5E5E5;
         text-decoration: none;
+
+        .checkbox
+        {
+          visibility: visible;
+          color: white;
+        }
       }
 
       > img

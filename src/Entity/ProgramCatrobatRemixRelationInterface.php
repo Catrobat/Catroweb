@@ -2,43 +2,19 @@
 
 namespace App\Entity;
 
-/**
- * Interface ProgramCatrobatRemixRelationInterface
- * @package App\Entity
- */
+use DateTime;
+
 interface ProgramCatrobatRemixRelationInterface
 {
-  /**
-   * @return Program
-   */
-  public function getAncestor();
+  public function getAncestor(): Program;
 
-  /**
-   * @return Program
-   */
-  public function getDescendant();
+  public function getDescendant(): Program;
 
-  /**
-   * @return \DateTime
-   */
-  public function getCreatedAt();
+  public function getCreatedAt(): ?DateTime;
 
-  /**
-   * @param \DateTime $created_at
-   *
-   * @return mixed
-   */
-  public function setCreatedAt(\DateTime $created_at);
+  public function setCreatedAt(DateTime $created_at): void;
 
-  /**
-   * @return \DateTime
-   */
-  public function getSeenAt();
+  public function getSeenAt(): ?DateTime;
 
-  /**
-   * @param \DateTime $seen_at
-   *
-   * @return $this
-   */
-  public function setSeenAt($seen_at);
+  public function setSeenAt(DateTime $seen_at): void;
 }

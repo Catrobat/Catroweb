@@ -11,12 +11,12 @@
 {% block notification_body%}
   {{ 'catro-notifications.comment.message' | trans
     (
-      {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.comment.user.id})~'">'~notification.comment.username~'</a>',
-        '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
-      },
-      'catroweb'
-    )
-    |raw
+    {
+      '%user_link%': '<a href="'~path('profile', {'id': notification.comment.user.id})~'">'~notification.comment.username~'</a>',
+      '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
+    },
+    'catroweb'
+  )
+  |raw
   }}
 {% endblock %}

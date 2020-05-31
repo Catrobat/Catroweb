@@ -2,21 +2,23 @@
 
 namespace App\Catrobat\CatrobatCode\Statements;
 
-/**
- * Class GlideToStatement
- * @package App\Catrobat\CatrobatCode\Statements
- */
 class GlideToStatement extends Statement
 {
-  const BEGIN_STRING = "glide (";
-  const END_STRING = ")<br/>";
+  /**
+   * @var string
+   */
+  const BEGIN_STRING = 'glide (';
+  /**
+   * @var string
+   */
+  const END_STRING = ')<br/>';
 
   /**
    * GlideToStatement constructor.
    *
-   * @param $statementFactory
-   * @param $xmlTree
-   * @param $spaces
+   * @param mixed $statementFactory
+   * @param mixed $xmlTree
+   * @param mixed $spaces
    */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
@@ -25,11 +27,12 @@ class GlideToStatement extends Statement
       self::END_STRING);
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickText()
+  public function getBrickText(): string
   {
+    $formula_x_dest = '';
+    $formula_y_dest = '';
+    $formula_duration = '';
+
     foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
     {
       if ($statement instanceof FormulaStatement)
@@ -49,18 +52,15 @@ class GlideToStatement extends Statement
       }
     }
 
-    $formula_x_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_x_dest);
-    $formula_y_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_y_dest);
-    $formula_duration_no_markup = preg_replace("#<[^>]*>#", '', $formula_duration);
+    $formula_x_dest_no_markup = preg_replace('#<[^>]*>#', '', $formula_x_dest);
+    $formula_y_dest_no_markup = preg_replace('#<[^>]*>#', '', $formula_y_dest);
+    $formula_duration_no_markup = preg_replace('#<[^>]*>#', '', $formula_duration);
 
-    return "Glide " . $formula_duration_no_markup . " second(s) to X: " . $formula_x_dest_no_markup . " Y: " . $formula_y_dest_no_markup;
+    return 'Glide '.$formula_duration_no_markup.' second(s) to X: '.$formula_x_dest_no_markup.' Y: '.$formula_y_dest_no_markup;
   }
 
-  /**
-   * @return string
-   */
-  public function getBrickColor()
+  public function getBrickColor(): string
   {
-    return "1h_brick_blue.png";
+    return '1h_brick_blue.png';
   }
 }

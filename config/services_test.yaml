@@ -3,6 +3,7 @@
 
 parameters:
   catrobat.file.extract.dir:   "%catrobat.pubdir%resources_test/extract/"
+  catrobat.file.extract.path:  "resources_test/extract/"
   catrobat.file.storage.dir:   "%catrobat.pubdir%resources_test/projects/"
   catrobat.screenshot.dir:     "%catrobat.pubdir%resources_test/screenshots/"
   catrobat.screenshot.path:    "resources_test/screenshots/"
@@ -13,17 +14,14 @@ parameters:
   catrobat.apk.dir:            "%catrobat.pubdir%resources_test/apk/"
   catrobat.mediapackage.dir:   "%catrobat.pubdir%resources_test/mediapackage/"
   catrobat.mediapackage.path:  "resources_test/mediapackage/"
+  catrobat.mediapackage.font.dir:  "%catrobat.pubdir%webfonts/fa-solid-900.ttf"
+  catrobat.mediapackage.font.path: "webfonts/fa-solid-900.ttf"
+  catrobat.tests.upld-dwnld-dir: "tests/testdata/UploadDownloadTemp"
   catrobat.backup.dir:         "%catrobat.pubdir%resources_test/backups/"
   catrobat.snapshot.dir:       "%catrobat.pubdir%resources_test/snapshots/"
   catrobat.logs.dir:           "%kernel.project_dir%/tests/testdata/DataFixtures/GeneratedFixtures/log/"
-  jenkins:
-    url: https://jenkins.catrob.at/buildByToken/buildWithParameters
-    job: "Build-Program"
-    token: "SECRETTOKEN"
-    id_parameter_name: "PROJECT"
-    download_url_parameter_name: "download"
-    upload_url_paramenter: "upload"
-    uploadtoken: "UPLOADTOKEN"
+  catrobat.testreports.behat:  "tests/testreports/behat/"
+  catrobat.testreports.screenshot:  "tests/testreports/screens/"
 
 services:
 
@@ -72,16 +70,6 @@ services:
     arguments:
       - "@statistics.inner"
 
-  # ======== Overwriting the time service
-
-  time.inner:
-    class: App\Catrobat\Services\Time
-
-  App\Catrobat\Services\Time:
-    arguments:
-      - '@time.inner'
-    class: App\Catrobat\Services\TestEnv\ProxyTime
-
   # ======== Overwriting the jenkins dispatcher
 
   App\Catrobat\Services\Ci\JenkinsDispatcher:
@@ -89,15 +77,20 @@ services:
     arguments:
       - "%jenkins%"
 
-  # ======== Overwriting the ldap driver
-
-  fr3d_ldap.ldap_driver:
-    class: App\Catrobat\Services\TestEnv\LdapTestDriver
-
   # ========
 
   App\Catrobat\Services\CatrobatFileExtractor:
     class: App\Catrobat\Services\CatrobatFileExtractor
     arguments:
-      - "%catrobat.test.directory.target%"
+      - "%catrobat.file.extract.dir%"
       - "%catrobat.file.extract.path%"
+    public: true
+
+  # ======== Data fixtures helper services
+  App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures:
+    class: App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures
+    public: true
+
+  App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures:
+    class: App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures
+    public: true
