@@ -604,6 +604,9 @@
     "symfony/dependency-injection": {
         "version": "v4.4.5"
     },
+    "symfony/deprecation-contracts": {
+        "version": "v2.1.2"
+    },
     "symfony/doctrine-bridge": {
         "version": "v4.4.5"
     },
@@ -731,11 +734,17 @@
     "symfony/polyfill-iconv": {
         "version": "v1.14.0"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.17.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.14.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.14.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.17.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.14.0"
@@ -778,9 +787,6 @@
             "config/routes.yaml"
         ]
     },
-    "symfony/security": {
-        "version": "v4.4.5"
-    },
     "symfony/security-acl": {
         "version": "v3.0.4"
     },
@@ -796,6 +802,18 @@
             "config/packages/security.yaml"
         ]
     },
+    "symfony/security-core": {
+        "version": "v4.4.9"
+    },
+    "symfony/security-csrf": {
+        "version": "v4.4.9"
+    },
+    "symfony/security-guard": {
+        "version": "v4.4.9"
+    },
+    "symfony/security-http": {
+        "version": "v4.4.9"
+    },
     "symfony/serializer": {
         "version": "v5.0.5"
     },
@@ -804,6 +822,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.5"
+    },
+    "symfony/string": {
+        "version": "v5.1.0"
     },
     "symfony/swiftmailer-bundle": {
         "version": "2.5",
