@@ -2859,16 +2859,16 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.6.5",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "448551fc08c6cff37aad9d8f27f6b9615cd28966"
+                "reference": "1a110dbb8649e3029140a29f02f812d168008e8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/448551fc08c6cff37aad9d8f27f6b9615cd28966",
-                "reference": "448551fc08c6cff37aad9d8f27f6b9615cd28966",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/1a110dbb8649e3029140a29f02f812d168008e8e",
+                "reference": "1a110dbb8649e3029140a29f02f812d168008e8e",
                 "shasum": ""
             },
             "require": {
@@ -2951,7 +2951,7 @@
                 "rest",
                 "symfony"
             ],
-            "time": "2019-11-22T14:22:26+00:00"
+            "time": "2020-05-28T23:36:57+00:00"
         },
         {
             "name": "liip/theme-bundle",
