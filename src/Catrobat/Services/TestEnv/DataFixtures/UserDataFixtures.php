@@ -126,4 +126,13 @@ class UserDataFixtures
     UserDataFixtures::$default_user = null;
     UserDataFixtures::$current_user = null;
   }
+
+  public function createdAt(array $config = []): void
+  {
+    /** @var User $user */
+    $user = $this->user_manager->findUserByUsername($config['name']);
+    $date = date_create($config['created_at']) ?? date_create($config['created_at'] ?? 'last Monday');
+    $user->changeCreatedAt($date);
+    $this->user_manager->updateUser($user, true);
+  }
 }

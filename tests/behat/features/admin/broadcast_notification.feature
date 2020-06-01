@@ -18,7 +18,8 @@ Feature: Admin Broadcast Notification
     And the element "#msg" should be visible
     Then I fill in "title" with "Test Title"
     And I fill in "msg" with "Test Message"
-    And I click ".btn"
+    And I click on the button named "Send notifications"
+    And I wait for AJAX to finish
     Then I should see "OK"
     When I am on "/app/notifications/allNotifications"
     And I wait for the page to be loaded
