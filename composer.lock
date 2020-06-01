@@ -1869,22 +1869,22 @@
         },
         {
             "name": "google/apiclient",
-            "version": "v2.4.1",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client.git",
-                "reference": "1fdfe942f9aaf3064e621834a5e3047fccb3a6da"
+                "reference": "9ab9cc07f66e2c7274ea2753f102ae24d1271410"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/1fdfe942f9aaf3064e621834a5e3047fccb3a6da",
-                "reference": "1fdfe942f9aaf3064e621834a5e3047fccb3a6da",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/9ab9cc07f66e2c7274ea2753f102ae24d1271410",
+                "reference": "9ab9cc07f66e2c7274ea2753f102ae24d1271410",
                 "shasum": ""
             },
             "require": {
                 "firebase/php-jwt": "~2.0||~3.0||~4.0||~5.0",
                 "google/apiclient-services": "~0.13",
-                "google/auth": "^1.0",
+                "google/auth": "^1.9",
                 "guzzlehttp/guzzle": "~5.3.1||~6.0",
                 "guzzlehttp/psr7": "^1.2",
                 "monolog/monolog": "^1.17|^2.0",
@@ -1926,20 +1926,20 @@
             "keywords": [
                 "google"
             ],
-            "time": "2020-03-26T15:30:32+00:00"
+            "time": "2020-05-26T22:29:38+00:00"
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.137",
+            "version": "v0.138",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "92ae53e812037230b23d373bac12516f90c330cc"
+                "reference": "9e7ea08fbd87e5926d14ef0674626e26843a5508"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/92ae53e812037230b23d373bac12516f90c330cc",
-                "reference": "92ae53e812037230b23d373bac12516f90c330cc",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/9e7ea08fbd87e5926d14ef0674626e26843a5508",
+                "reference": "9e7ea08fbd87e5926d14ef0674626e26843a5508",
                 "shasum": ""
             },
             "require": {
@@ -1963,7 +1963,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2020-05-25T00:24:28+00:00"
+            "time": "2020-05-31T00:25:32+00:00"
         },
         {
             "name": "google/auth",
@@ -2019,16 +2019,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.3",
+            "version": "6.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "aab4ebd862aa7d04f01a4b51849d657db56d882e"
+                "reference": "a4a1b6930528a8f7ee03518e6442ec7a44155d9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/aab4ebd862aa7d04f01a4b51849d657db56d882e",
-                "reference": "aab4ebd862aa7d04f01a4b51849d657db56d882e",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a4a1b6930528a8f7ee03518e6442ec7a44155d9d",
+                "reference": "a4a1b6930528a8f7ee03518e6442ec7a44155d9d",
                 "shasum": ""
             },
             "require": {
@@ -2036,7 +2036,7 @@
                 "guzzlehttp/promises": "^1.0",
                 "guzzlehttp/psr7": "^1.6.1",
                 "php": ">=5.5",
-                "symfony/polyfill-intl-idn": "^1.11"
+                "symfony/polyfill-intl-idn": "1.17.0"
             },
             "require-dev": {
                 "ext-curl": "*",
@@ -2082,7 +2082,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2020-04-18T10:38:46+00:00"
+            "time": "2020-05-25T19:35:05+00:00"
         },
         {
             "name": "guzzlehttp/promises",
