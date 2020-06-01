@@ -10,7 +10,7 @@ COPY package.json package-lock.json ./
 RUN npm install && npm install grunt
 
 # Run on:
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
