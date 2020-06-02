@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3002d56e86c5f7c4bbe59620afd516cb",
+    "content-hash": "a7bd3722897e677bb930256a4180c4b0",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -65,12 +65,12 @@
             "version": "v1.0.37",
             "source": {
                 "type": "git",
-                "url": "https://github.com/HCrane/CAPI.git",
+                "url": "https://github.com/Catrobat/Catroweb-API.git",
                 "reference": "98ac0a593f8b030236010460fd777dfd4497e14b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HCrane/CAPI/zipball/98ac0a593f8b030236010460fd777dfd4497e14b",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/98ac0a593f8b030236010460fd777dfd4497e14b",
                 "reference": "98ac0a593f8b030236010460fd777dfd4497e14b",
                 "shasum": ""
             },
@@ -114,8 +114,8 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/HCrane/CAPI/tree/v1.0.37",
-                "issues": "https://github.com/HCrane/CAPI/issues"
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.37",
+                "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
             "time": "2020-04-22T15:42:05+00:00"
         },
@@ -4662,16 +4662,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "3.17.1",
+            "version": "3.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "cdf7ccfb2d40ca2d5a4ec43e927da8ff0744a753"
+                "reference": "0a16728ffce8e8a6844a107b7f4ccc3c14bd191c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/cdf7ccfb2d40ca2d5a4ec43e927da8ff0744a753",
-                "reference": "cdf7ccfb2d40ca2d5a4ec43e927da8ff0744a753",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/0a16728ffce8e8a6844a107b7f4ccc3c14bd191c",
+                "reference": "0a16728ffce8e8a6844a107b7f4ccc3c14bd191c",
                 "shasum": ""
             },
             "require": {
@@ -4691,7 +4691,8 @@
                 "symfony/http-foundation": "^4.4",
                 "symfony/http-kernel": "^4.4",
                 "symfony/options-resolver": "^4.4",
-                "symfony/security-acl": "^3.0"
+                "symfony/security-acl": "^3.0",
+                "twig/twig": "^1.41 || ^2.10"
             },
             "conflict": {
                 "simplethings/entity-audit-bundle": ">=2.0",
@@ -4743,7 +4744,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2020-04-21T17:37:03+00:00"
+            "time": "2020-06-02T05:53:34+00:00"
         },
         {
             "name": "sonata-project/easy-extends-bundle",
