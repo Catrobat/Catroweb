@@ -15,7 +15,7 @@
         "ext-posix": "*",
         "ext-zip": "*",
         "beberlei/doctrineextensions": "^1.2",
-        "catrobat/capi": "v1.0.37",
+        "catrobat/capi": "v1.0.39",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^2.1",
         "doctrine/orm": "^2.7",
