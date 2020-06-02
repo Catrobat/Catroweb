@@ -2919,6 +2919,7 @@ class CatrowebBrowserContext extends BrowserContext
     {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
+      $this->assertSession()->pageTextContains($user_stat['Url']);
       $this->assertSession()->pageTextContains($user_stat['Flavor']);
       $this->assertSession()->pageTextContains($user_stat['Priority']);
     }

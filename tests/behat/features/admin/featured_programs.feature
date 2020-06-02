@@ -33,11 +33,11 @@ Feature: Admin featured programs
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor      | Priority   |
-      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
     And I should not see "Adminius"
 
 
@@ -46,8 +46,8 @@ Feature: Admin featured programs
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=arduino&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor   | Priority   |
-      | 2  | program 2 (#c0ffee-b00b) | arduino  | 1          |
+      | Id | Program                  | Url | Flavor   | Priority   |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino  | 1          |
     And I should not see "Adminius"
     And I should not see "program 1"
     And I should not see "program 3"
@@ -57,8 +57,8 @@ Feature: Admin featured programs
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=1&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor     | Priority   |
-      | 1  | program 1 (#1337-c0ffee) | pocketcode | 1          |
+      | Id | Program                  | Url | Flavor     | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1          |
     And I should not see "Adminius"
     And I should not see "program 2"
     And I should not see "program 3"
@@ -68,9 +68,9 @@ Feature: Admin featured programs
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=2&filter%5Bpriority%5D%5Bvalue%5D=1&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor     | Priority |
-      | 3  | program 3 (#c01d-cafe)   | luna       | 2        |
-      | 4  | program 4 (#b100d-c01d)  | embroidery | 3        |
+      | Id | Program                  | Url | Flavor     | Priority |
+      | 3  | program 3 (#c01d-cafe)   |     | luna       | 2        |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I should not see "Adminius"
     And I should not see "program 1"
     And I should not see "program 2"
@@ -80,9 +80,9 @@ Feature: Admin featured programs
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=1&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor     | Priority |
-      | 1  | program 1 (#1337-c0ffee) | pocketcode | 1        |
-      | 3  | program 3 (#c01d-cafe)   | luna       | 2        |
+      | Id | Program                  | Url | Flavor     | Priority |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1        |
+      | 3  | program 3 (#c01d-cafe)   |     | luna       | 2        |
     And I should not see "Adminius"
     And I should not see "program 2"
     And I should not see "program 4"
@@ -92,20 +92,20 @@ Feature: Admin featured programs
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor      | Priority   |
-      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
     Then I am on "/admin/featured_program/1/delete"
     And I wait for the page to be loaded
     Then I click on the first ".btn-danger" button
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor      | Priority   |
-      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
     And I should not see "Adminius"
     And I should not see "program 1"
     Then I am on "/app"
@@ -117,11 +117,11 @@ Feature: Admin featured programs
       And I am on "/admin/featured_program/list"
       And I wait for the page to be loaded
       Then I should see the featured table:
-        | Id | Program                  | Flavor      | Priority   |
-        | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-        | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-        | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-        | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+        | Id | Program                  | Url | Flavor      | Priority   |
+        | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+        | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+        | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+        | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
       And I click on the "program 1 (#1337-c0ffee)" link
       And I wait for the page to be loaded
       Then I should see "Edit \"program 1 (#1337-c0ffee)\""
@@ -131,68 +131,150 @@ Feature: Admin featured programs
       And I am on "/admin/featured_program/list"
       And I wait for the page to be loaded
       Then I should see the featured table:
-        | Id | Program                  | Flavor      | Priority   |
-        | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-        | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-        | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-        | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+        | Id | Program                  | Url | Flavor      | Priority   |
+        | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+        | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+        | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+        | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
       And I click on the "new" link
       And I wait for the page to be loaded
       Then I should be on "/admin/featured_program/create"
       When I attach the avatar "galaxy.jpg" to "File"
-      Then I write "dead-beef" in textarea with label "Program Id"
+      Then I write "dead-beef" in textarea with label "Program Id Or Url"
       Then I write "3" in textarea with label "Priority"
       Then I click ".btn-success"
       Then I should see "has been successfully created"
       And I am on "/admin/featured_program/list"
       Then I should see the featured table:
-        | Id | Program                  | Flavor      | Priority   |
-        | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-        | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-        | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-        | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
-        | 5  | to add (#dead-beef)      | pocketcode  | 3          |
+        | Id | Program                  | Url | Flavor      | Priority   |
+        | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+        | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+        | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+        | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
+        | 5  | to add (#dead-beef)      |     | pocketcode  | 3          |
 
   Scenario: Adding a featured Program (fail)
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor      | Priority   |
-      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
     And I click on the "new" link
     And I wait for the page to be loaded
     Then I should be on "/admin/featured_program/create"
     When I attach the avatar "galaxy.jpg" to "File"
-    Then I write "dead-b00f" in textarea with label "Program Id"
+    Then I write "dead-b00f" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
     And I am on "/admin/featured_program/list"
     Then I should see the featured table:
-      | Id | Program                  | Flavor      | Priority   |
-      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
 
   Scenario: Adding a featured Program (wrong picture)
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
-      | Id | Program                  | Flavor      | Priority   |
-      | 1  | program 1 (#1337-c0ffee) | pocketcode  | 1          |
-      | 2  | program 2 (#c0ffee-b00b) | arduino     | 1          |
-      | 3  | program 3 (#c01d-cafe)   | luna        | 2          |
-      | 4  | program 4 (#b100d-c01d)  | embroidery  | 3          |
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
     And I click on the "new" link
     And I wait for the page to be loaded
     Then I should be on "/admin/featured_program/create"
     When I attach the avatar "fail.tif" to "File"
-    Then I write "dead-b00f" in textarea with label "Program Id"
+    Then I write "dead-b00f" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
     Then I should see "Error"
+
+  Scenario: Adding a featured Program with URL - Project (success)
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
+    And I click on the "new" link
+    And I wait for the page to be loaded
+    Then I should be on "/admin/featured_program/create"
+    When I attach the avatar "galaxy.jpg" to "File"
+    Then I write "1" in textarea with label "Use Url"
+    Then I write "catrobat.at/app/project/dead-beef" in textarea with label "Program Id Or Url"
+    Then I write "3" in textarea with label "Priority"
+    Then I click ".btn-success"
+    Then I should see "has been successfully created"
+    And I am on "/admin/featured_program/list"
+    Then I should see the featured table:
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
+      | 5  | to add (#dead-beef)      |     | pocketcode  | 3          |
+
+  Scenario: Adding a featured Program with URL - Extern (success)
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
+    And I click on the "new" link
+    And I wait for the page to be loaded
+    Then I should be on "/admin/featured_program/create"
+    When I attach the avatar "galaxy.jpg" to "File"
+    When I click ".iCheck-helper"
+    Then the "Use Url" checkbox should be checked
+    Then I write "http://www.google.com" in textarea with label "Program Id Or Url"
+    Then I write "3" in textarea with label "Priority"
+    Then I click ".btn-success"
+    And I am on "/admin/featured_program/list"
+    Then I should see the featured table:
+      | Id | Program                  | Url                   | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |                       | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |                       | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |                       | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |                       | embroidery  | 3          |
+      | 5  |                          | http://www.google.com | pocketcode  | 3          |
+
+  Scenario: Adding a featured Program with URL - Project (fail)
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/featured_program/list"
+    And I wait for the page to be loaded
+    Then I should see the featured table:
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
+    And I click on the "new" link
+    And I wait for the page to be loaded
+    Then I should be on "/admin/featured_program/create"
+    When I attach the avatar "galaxy.jpg" to "File"
+    Then I write "catrobat.at/app/project/dead-b00f" in textarea with label "Program Id Or Url"
+    Then I write "3" in textarea with label "Priority"
+    Then I click ".btn-success"
+    Then I should see "Error"
+    And I am on "/admin/featured_program/list"
+    Then I should see the featured table:
+      | Id | Program                  | Url | Flavor      | Priority   |
+      | 1  | program 1 (#1337-c0ffee) |     | pocketcode  | 1          |
+      | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
+      | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
+      | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
