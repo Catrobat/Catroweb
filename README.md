@@ -24,7 +24,7 @@ Make sure all tests are passing when creating a pull request!
 
 [![Docker](https://img.shields.io/badge/Docker-supported-brightgreen.svg)](https://github.com/Catrobat/Catroweb/wiki/Docker)
 
-#####Tools integrated in the project:
+##### Tools integrated in the project:
 
 [![Php-cs-fixer](https://img.shields.io/badge/Php_Code_Style-PHP_CS_Fixer-informational.svg)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 [![PhpStan](https://img.shields.io/badge/Php_Code_Quality-PHPStan,_PhpCPD_-informational.svg)](https://github.com/phpstan/phpstan)
