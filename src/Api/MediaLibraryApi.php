@@ -37,7 +37,23 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFileSearchGet(string $query_string, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
+  public function mediaFileIdGet(int $id, &$responseCode, array &$responseHeaders)
+  {
+    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  {
+    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function mediaFilesSearchGet(string $query_string, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
   {
     $json_response_array = [];
     $responseCode = Response::HTTP_OK; // 200 => OK
