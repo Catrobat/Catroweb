@@ -16,9 +16,9 @@ class UserDataFixtures
 {
   private UserManager $user_manager;
 
-  private static ?User $default_user;
+  private static ?User $default_user = null;
 
-  private static ?User $current_user;
+  private static ?User $current_user = null;
 
   private static int $number_of_users = 0;
 

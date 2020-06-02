@@ -52,6 +52,7 @@ class UserApi implements UserApiInterface
     if ($validation_schema->getEmail() || $validation_schema->getUsername() || $validation_schema->getPassword())
     {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => Unprocessable entity
+
       return $validation_schema;
     }
     if ($register->isDryRun())

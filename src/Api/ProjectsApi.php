@@ -157,6 +157,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     if (!$file->isValid())
     {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
+
       return new UploadError(['error' => $this->translator->trans('api.projectsPost.upload_error', [], 'catroweb')]);
     }
 
@@ -166,6 +167,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     if (strtolower($calculated_checksum) != strtolower($checksum))
     {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
+
       return new UploadError(['error' => $this->translator->trans('api.projectsPost.invalid_checksum', [], 'catroweb')]);
     }
 
@@ -188,6 +190,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     catch (Exception $e)
     {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
+
       return new UploadError(['error' => $this->translator->trans('api.projectsPost.creating_error', [], 'catroweb')]);
     }
 

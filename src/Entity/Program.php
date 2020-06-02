@@ -68,7 +68,7 @@ class Program
    *     nullable=false
    * )
    */
-  protected User $user;
+  protected ?User $user = null;
 
   /**
    * The UserComments commenting this Program. If this Program gets deleted, these UserComments get deleted as well.
@@ -222,7 +222,7 @@ class Program
   /**
    * @ORM\Column(type="string", options={"default": "pocketcode"})
    */
-  protected string $flavor = 'pocketcode';
+  protected ?string $flavor = 'pocketcode';
 
   /**
    * @ORM\Column(type="string", options={"default": ""})
@@ -745,18 +745,6 @@ class Program
     $this->apk_status = $apk_status;
 
     return $this;
-  }
-
-  public function setDirectoryHash(?string $directoryHash): Program
-  {
-    $this->directory_hash = $directoryHash;
-
-    return $this;
-  }
-
-  public function getDirectoryHash(): string
-  {
-    return $this->directory_hash;
   }
 
   public function setApkRequestTime(?DateTime $apkRequestTime): Program

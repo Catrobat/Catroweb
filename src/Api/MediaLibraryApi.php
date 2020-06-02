@@ -89,6 +89,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     if (null === $media_package)
     {
       $responseCode = Response::HTTP_NOT_FOUND; // => Not found
+
       return null;
     }
 

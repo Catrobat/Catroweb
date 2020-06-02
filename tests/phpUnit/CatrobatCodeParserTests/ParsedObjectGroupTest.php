@@ -60,7 +60,7 @@ class ParsedObjectGroupTest extends TestCase
    */
   public function getObjectsMustReturnEmptyArrayOfParsedObject(): void
   {
-    $this->assertTrue($this->group->getObjects() === []);
+    $this->assertTrue([] === $this->group->getObjects());
   }
 
   /**
