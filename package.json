@@ -40,7 +40,7 @@
     "sass": "^1.26.7",
     "standard": "^14.3.4",
     "stylelint": "^13.5.0",
-    "stylelint-config-twbs-bootstrap": "^2.0.2"
+    "stylelint-config-twbs-bootstrap": "^2.0.3"
   },
   "dependencies": {
     "@material/circular-progress": "^6.0.0",
