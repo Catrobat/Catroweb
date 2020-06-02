@@ -35,7 +35,6 @@ Feature: Pocketcode homepage
       | project 5 | 1      | 3        |
       | project 6 | 1      | 2        |
 
-
     Given there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
       | 70058680          | 6                 |

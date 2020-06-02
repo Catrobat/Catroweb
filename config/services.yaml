@@ -577,16 +577,6 @@ services:
       - ~
     public: true
 
-  catrowebadmin.block.featured.url:
-    class: App\Admin\FeaturedUrlAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Featured Urls" }
-    arguments:
-      - ~
-      - App\Entity\FeaturedProgram
-      - ~
-    public: true
-
   catrowebadmin.block.programs.templates:
     class: App\Admin\TemplateAdmin
     tags:

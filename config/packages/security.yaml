@@ -157,7 +157,6 @@ security:
         # Define custom roles here; all catroweb blocks can be found in the admin interface
         ROLE_FEATURED:
             - ROLE_CATROWEBADMIN_BLOCK_FEATURED_PROGRAM_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_FEATURED_URL_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_CATEGORIES_ADMIN
             - ROLE_ADMIN
         ROLE_APPROVE:
