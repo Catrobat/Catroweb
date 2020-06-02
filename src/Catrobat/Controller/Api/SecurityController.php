@@ -14,6 +14,7 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -37,7 +38,7 @@ class SecurityController extends AbstractController
   public function checkTokenAction(TranslatorInterface $translator): JsonResponse
   {
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'answer' => $translator->trans('success.token', [], 'catroweb'),
       'preHeaderMessages' => "  \n",
     ]);
@@ -161,7 +162,7 @@ class SecurityController extends AbstractController
         $dd = null;
         if ($correct_pass)
         {
-          $retArray['statusCode'] = StatusCode::OK;
+          $retArray['statusCode'] = Response::HTTP_OK;
           $user->setUploadToken($token_generator->generateToken());
           $retArray['token'] = $user->getUploadToken();
           $retArray['email'] = $user->getEmail();

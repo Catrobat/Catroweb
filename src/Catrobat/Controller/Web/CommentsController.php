@@ -39,7 +39,7 @@ class CommentsController extends AbstractController
     $comment->setIsReported(true);
     $em->flush();
 
-    return new Response(StatusCode::OK);
+    return new Response(Response::HTTP_OK);
   }
 
   /**
@@ -71,7 +71,7 @@ class CommentsController extends AbstractController
     $em->remove($comment);
     $em->flush();
 
-    return new Response(StatusCode::OK);
+    return new Response(Response::HTTP_OK);
   }
 
   /**
@@ -116,6 +116,6 @@ class CommentsController extends AbstractController
       $em->flush();
     }
 
-    return new Response(StatusCode::OK);
+    return new Response(Response::HTTP_OK);
   }
 }
