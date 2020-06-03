@@ -1,6 +1,5 @@
 parameters:
   catrobat.apk.dir:                     "%catrobat.pubdir%resources/apk/"
-  catrobat.backup.dir:                  "%kernel.project_dir%/backups/"
   catrobat.featuredimage.dir:           "%catrobat.pubdir%resources/featured/"
   catrobat.featuredimage.path:          "resources/featured/"
   catrobat.exampleimage.dir:            "%catrobat.pubdir%resources/example/"
@@ -195,10 +194,6 @@ services:
 
   App\Catrobat\Services\ApkRepository:
     class: App\Catrobat\Services\ApkRepository
-    public: true
-
-  App\Catrobat\Services\BackupFileRepository:
-    class: App\Catrobat\Services\BackupFileRepository
     public: true
 
   App\Catrobat\Services\ProgramDevicePermissionReader:

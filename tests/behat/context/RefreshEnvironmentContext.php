@@ -89,7 +89,6 @@ class RefreshEnvironmentContext implements KernelAwareContext
     $this->emptyDirectory($this->getSymfonyParameter('catrobat.thumbnail.dir'));
     $this->emptyDirectory($this->getSymfonyParameter('catrobat.featuredimage.dir'));
     $this->emptyDirectory($this->getSymfonyParameter('catrobat.apk.dir'));
-    $this->emptyDirectory($this->getSymfonyParameter('catrobat.backup.dir'));
     $this->emptyDirectory($this->getSymfonyParameter('catrobat.snapshot.dir'));
   }
 }
