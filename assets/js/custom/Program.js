@@ -3,7 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
-  likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
+  likeDetailUrl, stealUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
   btnClosePopup, likeActionAdd, likeActionRemove, profileUrl) {
   const self = this
 
@@ -13,6 +13,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.myProgram = myProgram
   self.statusUrl = statusUrl
   self.createUrl = createUrl
+  self.stealUrl = stealUrl
   self.apkPreparing = apkPreparing
   self.apkText = apkText
   self.updateAppHeader = updateAppHeader
@@ -354,6 +355,19 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         console.error('Like failure', jqXHR, textStatus, errorThrown)
         self.showErrorAlert()
       }
+    })
+  }
+
+  self.steal = function (projectId) {
+    $.ajax({
+      url: self.stealUrl,
+      type: 'post',
+      success: function (data) {
+        location.reload()
+      }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      console.error('Steal failure', jqXHR, textStatus, errorThrown)
+      self.showErrorAlert()
     })
   }
 

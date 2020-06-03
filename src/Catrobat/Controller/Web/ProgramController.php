@@ -575,6 +575,39 @@ class ProgramController extends AbstractController
   }
 
   /**
+   * @Route("/project/{id}/steal", name="steal_project", methods={"POST"})
+   *
+   * @throws Exception
+   */
+  public function stealProjectAction(string $id): Response
+  {
+    /** @var Program|null $program */
+    $program = $this->program_manager->find($id);
+    if (null === $program)
+    {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (null === $user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    if ($program !== $user)
+    {
+      $program->setUser($user);
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($program);
+      $em->flush();
+    }
+
+    return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
+  }
+
+  /**
    * @throws NonUniqueResultException
    */
   private function extractGameJamConfig(): ?array

@@ -314,6 +314,17 @@
           </button>
         </div>
 
+
+        {% if app.user and not my_program %}
+        <div id="steal-project" class="btn-container col-12 col-xl-6">
+          <button class="btn btn-primary"
+                  onclick="program.steal('{{ program_details.id }}')">
+            <i class="program-big-button-icon mr-3 fa"></i>
+            <span>{{ "steal_the_project"|trans({}, "catroweb") }}</span>
+          </button>
+        </div>
+        {% endif %}
+
         {% if not isIOSWebview() %}
         <div id="apk-generate" class="btn-container col-12 col-xl-6">
           <button class="btn btn-primary">
@@ -632,7 +643,6 @@
   <script>
 
     const project_id = '{{ program.id }}'
-
     let program = new Program(
             project_id,
             '{{ csrf_token('project') }}',
@@ -642,6 +652,7 @@
             '{{ path('ci_build', { 'id' : program.id }) }}',
             '{{ path('project_like', { 'id' : program.id }) }}',
             '{{ path('api_project_likes', { 'id' : program.id }) }}',
+            '{{ path('steal_project', { 'id' : program.id }) }}',
             '{{ 'apk.preparing'|trans({}, "catroweb") }}',
             '{{ 'apk.text'|trans({}, "catroweb") }}',
             '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}',
