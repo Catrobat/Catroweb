@@ -10,7 +10,7 @@ COPY package.json package-lock.json ./
 RUN npm install && npm install grunt
 
 # Run on:
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
@@ -36,16 +36,16 @@ RUN apt-get update && \
     apache2 \
     php-imagick \
     php-mbstring \
-    php-gettext \
+    gettext \
     git \
     curl \
     php-xdebug \
     libgconf-2-4 \
-    grunt \
-    npm && \
-    npm install -g n && \
-    n stable && \
-    npm install -g sass
+    npm
+RUN npm install -g n
+RUN n stable && \
+    npm install -g sass && \
+    npm install -g grunt-cli
 
 # Overwrite default apache config
 COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
