@@ -115,7 +115,7 @@ class MediaPackageController extends AbstractController
       'mediaDir' => '/'.$this->getParameter('catrobat.mediapackage.path'),
       'foundResults' => (count($found_media_files) ? true : false),
       'mediaSearchPath' => $url_generator->generate(
-        'open_api_server_mediaLibrary_mediafilesearchget',
+        'open_api_server_mediaLibrary_mediafilessearchget',
         [
           'query_string' => $q,
           'flavor' => $flavor,
