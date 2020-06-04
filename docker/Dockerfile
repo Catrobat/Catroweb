@@ -10,13 +10,16 @@ COPY package.json package-lock.json ./
 RUN npm install && npm install grunt
 
 # Run on:
-FROM ubuntu:18.04
+FROM debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && \
+    apt-get install -yq --no-install-recommends wget apt-transport-https lsb-release ca-certificates && \
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    echo "deb https://packages.sury.org/php/ buster main" >> /etc/apt/sources.list.d/php.list && \
+    apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
-    add-apt-repository ppa:ondrej/php && \
     apt-get install -yq --no-install-recommends \
     php7.4-common \
     php7.4-cli \
@@ -41,10 +44,10 @@ RUN apt-get update && \
     curl \
     php-xdebug \
     libgconf-2-4 \
-    grunt \
-    npm && \
-    npm install -g n && \
-    n stable && \
+    npm
+RUN npm install -g n
+RUN n stable && \
+    npm install -g grunt-cli && \
     npm install -g sass
 
 # Overwrite default apache config
