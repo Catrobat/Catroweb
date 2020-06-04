@@ -338,6 +338,12 @@ class BrickFactory
       case Constants::USER_LIST_BRICK:
         $generated_brick = new UserListBrick($brick_xml_properties);
         break;
+      case Constants::STORE_CSV_INTO_USERLIST_BRICK:
+        $generated_brick = new StoreCSVIntoUserListBrick($brick_xml_properties);
+        break;
+      case Constants::WEB_REQUEST_BRICK:
+        $generated_brick = new WebRequestBrick($brick_xml_properties);
+        break;
 
       // Your Bricks
       case Constants::USER_DEFINED_BRICK:
