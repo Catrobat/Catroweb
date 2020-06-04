@@ -2430,18 +2430,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the backup-folder$/
-   *
-   * @param mixed $filename
-   * @param mixed $size
-   */
-  public function thereIsAFileWithSizeBytesInTheBackupFolder($filename, $size): void
-  {
-    $this->generateFileInPath($this->getSymfonyParameter('catrobat.backup.dir'),
-      $filename, $size);
-  }
-
-  /**
    * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the extracted-folder$/
    *
    * @param mixed $filename
@@ -2451,24 +2439,6 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->generateFileInPath($this->getSymfonyParameter('catrobat.file.extract.dir'),
       $filename, $size);
-  }
-
-  /**
-   * @Given /^there is no file in the backup-folder$/
-   */
-  public function thereIsNoFileInTheBackupFolder(): void
-  {
-    $backupDirectory = $this->getSymfonyParameter('catrobat.backup.dir');
-
-    $files = glob($backupDirectory.'/*');
-    foreach ($files as $file)
-    {
-      $ext = pathinfo($file, PATHINFO_EXTENSION);
-      if (('zip' === $ext || 'tar' === $ext) && is_file($file))
-      {
-        unlink($file);
-      }
-    }
   }
 
   /**

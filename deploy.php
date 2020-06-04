@@ -30,8 +30,7 @@ set('shared_dirs',
   [
     'var/log',
     'var/sessions',
-    'public/resources',
-    'backups'
+    'public/resources'
   ]);
 
 // Shared files between deploys
@@ -47,8 +46,7 @@ set('writable_dirs',
   [
     'var/cache',
     'var/log',
-    'var/sessions',
-    'backups',
+    'var/sessions'
   ]);
 
 
