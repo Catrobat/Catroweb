@@ -19,6 +19,16 @@ class Utils
     }
   }
 
+  public static function getTimestampParameter(string $filename): string
+  {
+    if (file_exists($filename))
+    {
+      return '?t='.filemtime($filename);
+    }
+
+    return '';
+  }
+
   private static function recursiveRemoveDirectory(string $directory): void
   {
     foreach (glob(sprintf('%s/*', $directory)) as $file)

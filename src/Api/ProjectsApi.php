@@ -103,7 +103,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'id' => $featured_program->getId(),
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
-        'featured_image' => $this->featured_image_repository->getAbsoluteWWebPath($featured_program->getId(), $featured_program->getImageType(), true),
+        'featured_image' => $this->featured_image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
       ];
       $new_featured_project = new FeaturedProject($result);
       $featured_programs[] = $new_featured_project;

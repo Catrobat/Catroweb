@@ -498,6 +498,12 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 
+  # ======== Versioning ========
+
+  catrobat.versioning:
+    class: App\Utils\VersionStrategy
+    arguments:
+      - '%env(string:APP_VERSION)%'
 
   # ====================================================================================================================
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

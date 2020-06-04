@@ -5,6 +5,7 @@ namespace App\Catrobat\Services;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use App\Utils\Utils;
 use function Deployer\Support\str_contains;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -199,7 +200,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    */
   public function getWebPath(int $id, string $extension): string
   {
-    return $this->path.$this->generateFileNameFromId((string) $id, $extension);
+    return $this->path.$this->generateFileNameFromId((string) $id, $extension).Utils::getTimestampParameter($this->getMediaPath($id, $extension));
   }
 
   /**
@@ -214,7 +215,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   {
     $extension = 'catrobat' == $extension ? 'png' : $extension;
 
-    return $this->path.'/thumbs/'.$id.'.'.$extension;
+    return $this->path.'/thumbs/'.$id.'.'.$extension.Utils::getTimestampParameter($this->getMediaPath($id, $extension));
   }
 
   /**
@@ -225,7 +226,16 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    */
   public function getMediaFile(int $id, string $extension): File
   {
-    return new File($this->dir.$id.'.'.$extension);
+    return new File($this->getMediaPath($id, $extension));
+  }
+
+  /**
+   * @param int    $id        the database id of the file
+   * @param string $extension File extension
+   */
+  public function getMediaPath(int $id, string $extension): string
+  {
+    return $this->dir.$id.'.'.$extension;
   }
 
   /**

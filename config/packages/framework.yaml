@@ -9,4 +9,4 @@ framework:
   session:         ~
   fragments:       ~
   assets:
-    version: '%env(string:APP_VERSION)%'
+    version_strategy: 'catrobat.versioning'
