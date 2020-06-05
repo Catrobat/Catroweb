@@ -32,6 +32,9 @@ default:
                         api_url: "http://localhost:9222"
                         download_behavior: allow
                         download_path: tests/testdata/UploadDownloadTemp
+                        socket_timeout: 60
+                        dom_wait_timeout: 6000
+
 
 
         emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
