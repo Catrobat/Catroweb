@@ -3,6 +3,7 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use App\Utils\Utils;
 use Imagick;
 use ImagickException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -104,20 +105,19 @@ class ImageRepository
   {
     if ($featured)
     {
-      return $this->featured_path.$this->generateFileNameFromId($id, $extension, $featured);
+      $path = $this->featured_path.$this->generateFileNameFromId($id, $extension, $featured);
+    }
+    else
+    {
+      $path = $this->example_path.$this->generateFileNameFromId($id, $extension, $featured);
     }
 
-    return $this->example_path.$this->generateFileNameFromId($id, $extension, $featured);
+    return $path.Utils::getTimestampParameter($this->example_dir.$this->generateFileNameFromId($id, $extension, $featured));
   }
 
-  public function getAbsoluteWWebPath(int $id, string $extension, bool $featured): string
+  public function getAbsoluteWebPath(int $id, string $extension, bool $featured): string
   {
-    if ($featured)
-    {
-      return $this->urlHelper->getAbsoluteUrl('/').$this->featured_path.$this->generateFileNameFromId($id, $extension, $featured);
-    }
-
-    return $this->urlHelper->getAbsoluteUrl('/').$this->example_path.$this->generateFileNameFromId($id, $extension, $featured);
+    return $this->urlHelper->getAbsoluteUrl('/').$this->getWebPath($id, $extension, $featured);
   }
 
   /**

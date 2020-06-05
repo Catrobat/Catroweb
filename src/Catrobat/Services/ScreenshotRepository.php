@@ -119,9 +119,10 @@ class ScreenshotRepository
 
   public function getScreenshotWebPath(string $id): string
   {
-    if (file_exists($this->screenshot_dir.$this->generateFileNameFromId($id)))
+    $filename = $this->screenshot_dir.$this->generateFileNameFromId($id);
+    if (file_exists($filename))
     {
-      return $this->screenshot_path.$this->generateFileNameFromId($id);
+      return $this->screenshot_path.$this->generateFileNameFromId($id).Utils::getTimestampParameter($filename);
     }
 
     return self::DEFAULT_SCREENSHOT;
@@ -132,9 +133,10 @@ class ScreenshotRepository
    */
   public function getThumbnailWebPath($id): string
   {
-    if (file_exists($this->thumbnail_dir.$this->generateFileNameFromId((string) $id)))
+    $filename = $this->thumbnail_dir.$this->generateFileNameFromId((string) $id);
+    if (file_exists($filename))
     {
-      return $this->thumbnail_path.$this->generateFileNameFromId((string) $id);
+      return $this->thumbnail_path.$this->generateFileNameFromId((string) $id).Utils::getTimestampParameter($filename);
     }
 
     return self::DEFAULT_THUMBNAIL;
