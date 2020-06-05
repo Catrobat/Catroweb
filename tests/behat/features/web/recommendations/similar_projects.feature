@@ -1,10 +1,10 @@
-@homepage
-Feature: Cross validation for recommendation system
+@web @recommendations
+Feature: Similar project
 
   Background:
     Given there are users:
-      | name     | password | token      | email               | id |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
+      | name     | id |
+      | Catrobat | 1  |
     And there are extensions:
       | id | name         | prefix  |
       | 1  | Arduino      | ARDUINO |
@@ -28,15 +28,9 @@ Feature: Cross validation for recommendation system
       | 4  | Trolol  | p5          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       |
       | 5  | Nothing | p6          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
 
-  Scenario: User with selected russian language cant see the recommender
+  Scenario: Project pages have recommendations about similar projects
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I should see "Similar Projects"
+    Then I should see "Similar Projects"
     And the element "#recommendations" should be visible
-    When I switch the language to "Russisch"
-    And I wait for the page to be loaded
-    Then I should not see "Similar Programs"
-    And I should not see "#recommendations"
-
-
-
+    And I should see 3 "#recommendations .program"

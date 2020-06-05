@@ -86,11 +86,3 @@ Feature: User gets notifications when somebody uploads a remix of his project
     Then the ".all-notifications-dropdown" element should contain "2"
     And I should see "You have 2 new Notifications!"
     And I should see "New remix for project project 3!"
-
-
-
-
-
-
-
-

@@ -65,7 +65,7 @@ jobs:
     # Runs all PhpUnit tests via docker in the latest ubuntu build
     # Additionally code coverage report ist generated and can be downloaded from the artifacts.
     # Keep in mind the report is not including the functional tests written for behat.
-    name: PhpUnit Tests
+    name: PhpUnit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -99,7 +99,7 @@ jobs:
     #   A pending test will NOT result in a failed pipeline!
     #   This is the reason why the explicit check for the log file had to be added.
     #
-    name: Behat Tests
+    name: Behat
     runs-on: ubuntu-latest
     strategy:
       #
@@ -110,15 +110,20 @@ jobs:
       fail-fast: false
       matrix:
         testSuite:
-          - admin
           - api
           - api-deprecated
-          - ci
-          - flavor
+          - web-admin
+          - web-authentication
+          - web-gamejam
           - web-general
+          - web-notifications
           - web-profile
-          - web-project
-          - gamejam
+          - web-project-details
+          - web-project-details-2
+          - web-project-details-3
+          - web-project-loader
+          - web-search
+          - web-top-bar
 
     steps:
       - name: Checkout
@@ -141,14 +146,14 @@ jobs:
         # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} \
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} \
             | tee tests/testreports/behat/${{ matrix.testSuite }}.log \
             ; ( exit ${PIPESTATUS[0]} )
           echo ::set-output name=status::success
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
       # We must explicitly kill the pipeline if the log contains undefined steps
-      - name: Check that suite has NO missing steps or chrome exceptions
+      - name: Check that suite has NO missing steps
         if: always()
         id: pending-check
         run: |
@@ -156,6 +161,12 @@ jobs:
             cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
+
+      # Chrome exception are problems that can't be fixed with a rerun
+      - name: Check that suite has NO chrome exceptions
+        if: always()
+        id: chrome-exception-check
+        run: |
           if grep -q 'DMore\ChromeDriver\StreamReadException' tests/testreports/behat/${{ matrix.testSuite }}.log; then
             cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
@@ -168,7 +179,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 
         # Rerun #2
@@ -178,7 +189,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 
       # Rerun #3
