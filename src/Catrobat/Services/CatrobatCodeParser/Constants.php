@@ -128,7 +128,6 @@ class Constants
   const STOP_SCRIPT_BRICK = 'StopScriptBrick';
   const CLONE_BRICK = 'CloneBrick';
   const DELETE_THIS_CLONE_BRICK = 'DeleteThisCloneBrick';
-  const WEB_REQUEST_BRICK = 'WebRequestBrick';
 
   // auto generated control blocks
   const ELSE_BRICK = 'IfLogicElseBrick';
@@ -153,6 +152,8 @@ class Constants
   const CLEAR_LIST_BRICK = 'ClearUserListBrick';
   const WRITE_LIST_ON_DEVICE_BRICK = 'WriteListOnDeviceBrick';
   const READ_LIST_FROM_DEVICE_BRICK = 'ReadListFromDeviceBrick';
+  const STORE_CSV_INTO_USERLIST_BRICK = 'StoreCSVIntoUserListBrick';
+  const WEB_REQUEST_BRICK = 'WebRequestBrick';
 
   // Your Bricks
   const USER_DEFINED_BRICK = 'UserDefinedBrick';
@@ -335,6 +336,8 @@ class Constants
   const INSERT_ITEM_LIST_INDEX_FORMULA = 'INSERT_ITEM_INTO_USERLIST_INDEX';
   const REPLACE_ITEM_LIST_VALUE_FORMULA = 'REPLACE_ITEM_IN_USERLIST_VALUE';
   const REPLACE_ITEM_LIST_INDEX_FORMULA = 'REPLACE_ITEM_IN_USERLIST_INDEX';
+  const STORE_CSV_INTO_LIST_COLUMN_FORMULA = 'STORE_CSV_INTO_USERLIST_COLUMN';
+  const STORE_CSV_INTO_LIST_CSV_FORMULA = 'STORE_CSV_INTO_USERLIST_CSV';
   const REPEAT_UNTIL_CONDITION_FORMULA = 'REPEAT_UNTIL_CONDITION';
   const ASK_QUESTION_FORMULA = 'ASK_QUESTION';
   const ASK_SPEECH_QUESTION_FORMULA = 'ASK_SPEECH_QUESTION';
