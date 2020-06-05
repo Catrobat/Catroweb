@@ -102,7 +102,7 @@ jobs:
       - name: Yaml Lint
         # Lints a file and outputs encountered errors. Specify all dirs but vendor
         run: |
-          docker exec app.catroweb bin/console lint:yaml translations/ config/ .github/ docker/ *.yml
+          docker exec app.catroweb bin/console lint:yaml translations/ config/ .github/ docker/ behat.yml .eslintrc.yml
 
       - name: Twig Lint
         # Lints a template and outputs encountered errors.

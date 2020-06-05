@@ -63,7 +63,6 @@
         "phpstan/phpstan-symfony": "*",
         "phpstan/phpstan-phpunit": "*",
         "phpunit/phpunit": "^8.1",
-        "rector/rector": "*",
         "symfony/browser-kit": "^5.0",
         "symfony/maker-bundle": "*",
         "symfony/phpunit-bridge": "*",
