@@ -141,18 +141,22 @@ jobs:
         # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} \
+          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} \
             | tee tests/testreports/behat/${{ matrix.testSuite }}.log \
             ; ( exit ${PIPESTATUS[0]} )
           echo ::set-output name=status::success
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
       # We must explicitly kill the pipeline if the log contains undefined steps
-      - name: Check that suite has NO missing steps
+      - name: Check that suite has NO missing steps or chrome exceptions
         if: always()
         id: pending-check
         run: |
           if grep -q 'has missing steps. Define them with these snippets:' tests/testreports/behat/${{ matrix.testSuite }}.log; then
+            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+            false;
+          fi
+          if grep -q 'DMore\ChromeDriver\StreamReadException' tests/testreports/behat/${{ matrix.testSuite }}.log; then
             cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
@@ -164,7 +168,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 
         # Rerun #2
@@ -174,7 +178,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 
       # Rerun #3
@@ -182,16 +186,18 @@ jobs:
         if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
         id: test-rerun-3
         run: |
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
 
       - name: DEBUG
         if: always()
         run: |
           docker ps -a
-          echo "---"
+          echo "--- App ---"
           docker logs app.catroweb
-          echo "---"
+          echo "--- DB ---"
           docker logs db.catroweb.test
+          echo "--- Chrome ---"
+          docker logs chrome.catroweb
 
       - uses: actions/upload-artifact@v1
         if: failure()
