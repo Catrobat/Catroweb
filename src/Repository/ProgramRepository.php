@@ -998,7 +998,7 @@ class ProgramRepository extends ServiceEntityRepository
     $tag_ids = array_map('current', $result);
     $extensions_id = array_map('current', $result_2);
 
-    $debug_where = (!$debug_build) ? 'AND e.debug_build = false' : '';
+    $debug_where = (!$debug_build && 'dev' !== $_ENV['APP_ENV']) ? 'AND e.debug_build = false' : '';
 
     $dql = 'SELECT COUNT(e.id) cnt, e.id
       FROM App\Entity\Program e
@@ -1104,7 +1104,7 @@ class ProgramRepository extends ServiceEntityRepository
     //---------------------------------------------------------------------------------------------
     $limit_clause = (int) $limit > 0 ? 'LIMIT '.(int) $limit : '';
     $offset_clause = (int) $offset > 0 ? 'OFFSET '.(int) $offset : '';
-    $debug_where = (!$debug_build) ? 'AND p.debug_build = false' : '';
+    $debug_where = (!$debug_build && 'dev' !== $_ENV['APP_ENV']) ? 'AND p.debug_build = false' : '';
 
     return '
             SELECT sum(remixes_count) AS total_remixes_count, id FROM (
@@ -1141,47 +1141,6 @@ class ProgramRepository extends ServiceEntityRepository
       $offset_clause.' ';
   }
 
-  private function getAppendableSqlStringForEveryTerm(array $search_terms, array $metadata, bool $debug_build): string
-  {
-    $sql = '';
-    $metadata_count = count($metadata);
-
-    $debug_where = (!$debug_build) ? 'e.debug_build = false AND' : '';
-
-    $search_terms_count = count($search_terms);
-    for ($parameter_index = 0; $parameter_index < $search_terms_count; ++$parameter_index)
-    {
-      $parameter = ':st'.$parameter_index;
-      $tag_string = '';
-      $metadata_index = 0;
-      foreach ($metadata as $language)
-      {
-        if ($metadata_index === $metadata_count - 1)
-        {
-          $tag_string .= '(t.'.$language.' LIKE '.$parameter.')';
-        }
-        else
-        {
-          $tag_string .= '(t.'.$language.' LIKE '.$parameter.') OR ';
-        }
-        ++$metadata_index;
-      }
-
-      $sql .= 'AND 
-          ((e.name LIKE '.$parameter.' OR
-          f.username LIKE '.$parameter.' OR
-          e.description LIKE '.$parameter.' OR
-          x.name LIKE '.$parameter.' OR
-          '.$tag_string.' OR
-          e.id = '.$parameter.'int'.') AND
-          e.visible = true AND '.
-        $debug_where.'
-          e.private = false) ';
-    }
-
-    return $sql;
-  }
-
   private function addFlavorCondition(QueryBuilder $query_builder, ?string $flavor, string $alias = 'e'): QueryBuilder
   {
     if ($flavor)
@@ -1205,9 +1164,9 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addDebugBuildCondition(QueryBuilder $query_builder, bool $debug_build, string $alias = 'e'): QueryBuilder
+  private function addDebugBuildCondition(QueryBuilder $query_builder, bool $debug_build_request, string $alias = 'e'): QueryBuilder
   {
-    if (!$debug_build)
+    if (!$debug_build_request && 'dev' !== $_ENV['APP_ENV'])
     {
       $query_builder->andWhere($query_builder->expr()->eq($alias.'.debug_build',
         $query_builder->expr()->literal(false)));
