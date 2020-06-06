@@ -9,7 +9,6 @@ use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Entity\RemixManager;
 use App\Entity\User;
-use App\Repository\ProgramRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use PHPUnit\Framework\Assert;
@@ -46,13 +45,6 @@ class RemixUpdaterTest extends TestCase
   protected function setUp(): void
   {
     $this->remix_manager = $this->createMock(RemixManager::class);
-    $program_repository = $this->createMock(ProgramRepository::class);
-
-    $this->remix_manager
-      ->expects($this->any())
-      ->method('getProgramRepository')
-      ->willReturn($program_repository)
-    ;
 
     $this->async_http_client = $this->createMock(AsyncHttpClient::class);
     $router = $this->createMock(RouterInterface::class);

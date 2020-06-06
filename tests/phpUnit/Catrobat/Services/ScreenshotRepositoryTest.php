@@ -108,7 +108,7 @@ class ScreenshotRepositoryTest extends TestCase
     $this->screenshot_repository->saveProgramAssets($filepath, $id);
     $web_path = $this->screenshot_repository->getScreenshotWebPath($id);
     $this->assertStringStartsWith($this->screenshot_base_url.'screen_test.png', $web_path);
-    $this->assertRegExp('/\?t=\d+$/', $web_path);
+    $this->assertMatchesRegularExpression('/\?t=\d+$/', $web_path);
   }
 
   /**
@@ -121,7 +121,7 @@ class ScreenshotRepositoryTest extends TestCase
     $this->screenshot_repository->saveProgramAssets($filepath, $id);
     $web_path = $this->screenshot_repository->getThumbnailWebPath($id);
     $this->assertStringStartsWith($this->thumbnail_base_url.'screen_test.png', $web_path);
-    $this->assertRegExp('/\?t=\d+$/', $web_path);
+    $this->assertMatchesRegularExpression('/\?t=\d+$/', $web_path);
   }
 
   public function testDeletesAllTemporaryFilesFromUploadProcess(): void

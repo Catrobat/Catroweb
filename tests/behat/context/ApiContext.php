@@ -22,7 +22,6 @@ use Doctrine\ORM\ORMException;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
-use OpenAPI\Server\Model\Projects;
 use PHPUnit\Framework\Assert;
 use RuntimeException;
 use Swift_Message;
@@ -1190,7 +1189,7 @@ class ApiContext implements KernelAwareContext
 
     $pattern = json_encode(json_decode($string));
     $pattern = str_replace('\\', '\\\\', $pattern);
-    Assert::assertRegExp($pattern, $response->getContent());
+    Assert::assertMatchesRegularExpression($pattern, $response->getContent());
   }
 
   /**
@@ -1314,7 +1313,7 @@ class ApiContext implements KernelAwareContext
    */
   public function theResponseShouldNotContain($needle): void
   {
-    Assert::assertNotContains($needle, $this->getKernelBrowser()->getResponse()->getContent());
+    Assert::assertStringNotContainsString($needle, $this->getKernelBrowser()->getResponse()->getContent());
   }
 
   /**
@@ -2910,7 +2909,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iShouldSeeAMessage($arg1): void
   {
-    Assert::assertContains($arg1, $this->getKernelBrowser()->getResponse()->getContent());
+    Assert::assertStringContainsString($arg1, $this->getKernelBrowser()->getResponse()->getContent());
   }
 
   /**
@@ -2920,7 +2919,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iShouldSeeTheHashtagInTheProgramDescription($hashtag): void
   {
-    Assert::assertContains($hashtag, $this->getKernelBrowser()
+    Assert::assertStringContainsString($hashtag, $this->getKernelBrowser()
       ->getResponse()
       ->getContent());
   }
@@ -3406,7 +3405,7 @@ class ApiContext implements KernelAwareContext
       'id' => function ($id)
       {
         Assert::assertIsString($id);
-        Assert::assertRegExp('/^[a-zA-Z0-9-]+$/', $id, 'id');
+        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
       'name' => function ($name)
       {
@@ -3423,7 +3422,7 @@ class ApiContext implements KernelAwareContext
       'version' => function ($version)
       {
         Assert::assertIsString($version);
-        Assert::assertRegExp('/[0-9]\\.[0-9]\\.[0-9]/', $version);
+        Assert::assertMatchesRegularExpression('/[0-9]\\.[0-9]\\.[0-9]/', $version);
       },
       'views' => function ($views)
       {
@@ -3452,24 +3451,24 @@ class ApiContext implements KernelAwareContext
       'screenshot_large' => function ($screenshot_large)
       {
         Assert::assertIsString($screenshot_large);
-        Assert::assertRegExp('/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
+        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
           $screenshot_large);
       },
       'screenshot_small' => function ($screenshot_small)
       {
         Assert::assertIsString($screenshot_small);
-        Assert::assertRegExp('/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
+        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
           $screenshot_small);
       },
       'project_url' => function ($project_url)
       {
         Assert::assertIsString($project_url);
-        Assert::assertRegExp('/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/', $project_url);
+        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/', $project_url);
       },
       'download_url' => function ($download_url)
       {
         Assert::assertIsString($download_url);
-        Assert::assertRegExp('/http:\\/\\/localhost\\/app\\/download\\/([a-zA-Z0-9-]+)\\.catrobat/',
+        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/app\\/download\\/([a-zA-Z0-9-]+)\\.catrobat/',
           $download_url);
       },
       'filesize' => function ($filesize)
@@ -3490,7 +3489,7 @@ class ApiContext implements KernelAwareContext
       'id' => function ($id)
       {
         Assert::assertIsString($id);
-        Assert::assertRegExp('/^[a-zA-Z0-9-]+$/', $id, 'id');
+        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
       'name' => function ($name)
       {
@@ -3503,7 +3502,7 @@ class ApiContext implements KernelAwareContext
       'featured_image' => function ($featured_image)
       {
         Assert::assertIsString($featured_image);
-        Assert::assertRegExp('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.jpg/',
+        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.jpg/',
           $featured_image);
       },
     ];
@@ -3548,7 +3547,7 @@ class ApiContext implements KernelAwareContext
       'download_url' => function ($download_url)
       {
         Assert::assertIsString($download_url);
-        Assert::assertRegExp('/http:\/\/localhost\/app\/download-media\/[a-zA-Z0-9-]+/',
+        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/download-media\/[a-zA-Z0-9-]+/',
           $download_url, 'download_url');
       },
     ];
