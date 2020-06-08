@@ -725,7 +725,7 @@ trait SymfonySupport
 
     $delimter = '#';
     $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
-    Assert::assertRegExp($delimter.$pattern.$delimter, $json);
+    Assert::assertMatchesRegularExpression($delimter.$pattern.$delimter, $json);
   }
 
   /**

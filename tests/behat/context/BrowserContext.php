@@ -129,11 +129,11 @@ class BrowserContext extends MinkContext implements KernelAwareContext
 
     if ('a' == $should_have)
     {
-      Assert::assertContains($value, $element->getAttribute($attribute), '<'.$attribute.'> does not contain '.$value);
+      Assert::assertStringContainsString($value, $element->getAttribute($attribute), '<'.$attribute.'> does not contain '.$value);
     }
     else
     {
-      Assert::assertNotContains($value, $element->getAttribute($attribute), '<'.$attribute.'> does contain '.$value);
+      Assert::assertStringNotContainsString($value, $element->getAttribute($attribute), '<'.$attribute.'> does contain '.$value);
     }
 
     Assert::assertTrue($element->isVisible(), 'Element is not visible.');

@@ -1669,7 +1669,7 @@ class CatrowebBrowserContext extends BrowserContext
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
-      Assert::assertContains($url, $feature_url);
+      Assert::assertStringContainsString($url, $feature_url);
     }
   }
 
@@ -1763,7 +1763,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function theHrefWithIdShouldBeVoid($arg1): void
   {
     $button = $this->getSession()->getPage()->findById($arg1);
-    Assert::assertContains('javascript:void(0)', $button->getAttribute('onclick'));
+    Assert::assertStringContainsString('javascript:void(0)', $button->getAttribute('onclick'));
   }
 
   /**
@@ -1774,7 +1774,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function theHrefWithIdShouldNotBeVoid($arg1): void
   {
     $button = $this->getSession()->getPage()->findById($arg1);
-    Assert::assertNotContains('javascript:void(0)', $button->getAttribute('onclick'));
+    Assert::assertStringNotContainsString('javascript:void(0)', $button->getAttribute('onclick'));
   }
 
   /**
@@ -2194,7 +2194,7 @@ class CatrowebBrowserContext extends BrowserContext
 
     foreach ($expected_parameters as $i => $expected_parameter)
     {
-      Assert::assertRegExp(
+      Assert::assertMatchesRegularExpression(
         $expected_parameter,
         $parameters[$i]
       );
@@ -2477,7 +2477,7 @@ class CatrowebBrowserContext extends BrowserContext
     foreach ($files as $file)
     {
       $filename = $file->getFilename();
-      Assert::assertNotContains('remove_me', $filename);
+      Assert::assertStringNotContainsString('remove_me', $filename);
     }
   }
 

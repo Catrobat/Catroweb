@@ -2,6 +2,7 @@
 
 namespace Tests\phpUnit\Entity;
 
+use App\Catrobat\Events\ProgramAfterInsertEvent;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
@@ -74,6 +75,16 @@ class ProgramManagerTest extends TestCase
   private $extracted_file;
 
   /**
+   * @var ProgramBeforeInsertEvent|MockObject
+   */
+  private $programBeforeInsertEvent;
+
+  /**
+   * @var ProgramAfterInsertEvent|MockObject
+   */
+  private $programAfterInsertEvent;
+
+  /**
    * @throws Exception
    */
   protected function setUp(): void
@@ -94,7 +105,8 @@ class ProgramManagerTest extends TestCase
     $example_repository = $this->createMock(ExampleRepository::class);
     $logger = $this->createMock(LoggerInterface::class);
     $app_request = $this->createMock(AppRequest::class);
-    $event = $this->createMock(ProgramBeforeInsertEvent::class);
+    $this->programBeforeInsertEvent = $this->createMock(ProgramBeforeInsertEvent::class);
+    $this->programAfterInsertEvent = $this->createMock(ProgramAfterInsertEvent::class);
     $extension_repository = $this->createMock(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
     $notification_service = $this->createMock(CatroNotificationService::class);
@@ -111,7 +123,7 @@ class ProgramManagerTest extends TestCase
     $this->extracted_file->expects($this->any())->method('getApplicationVersion')->willReturn('0.999');
     $this->extracted_file->expects($this->any())->method('getProgramXmlProperties')
       ->willReturn(new SimpleXMLElement('<empty></empty>')
-    )
+      )
     ;
     $this->extracted_file->expects($this->any())->method('getDirHash')->willReturn('451f778e4bf3');
 
@@ -125,8 +137,8 @@ class ProgramManagerTest extends TestCase
     $this->request->expects($this->any())->method('getFlavor')->willReturn('pocketcode');
     $file_extractor->expects($this->any())->method('extract')->with($file)->willReturn($this->extracted_file);
     $inserted_program->expects($this->any())->method('getId')->willReturn('1');
-    $event->expects($this->any())->method('isPropagationStopped')->willReturn(false);
-    $this->event_dispatcher->expects($this->any())->method('dispatch')->willReturn($event);
+
+    $this->programBeforeInsertEvent->expects($this->any())->method('isPropagationStopped')->willReturn(false);
   }
 
   public function testInitialization(): void
@@ -149,9 +161,10 @@ class ProgramManagerTest extends TestCase
 
         return $project;
       }))
-      ;
+    ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
   }
 
@@ -170,12 +183,14 @@ class ProgramManagerTest extends TestCase
 
         return $project;
       }))
-      ;
+    ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
 
     $this->file_repository->expects($this->atLeastOnce())->method('saveProgramTemp')->with($this->extracted_file, 1);
     $this->file_repository->expects($this->atLeastOnce())->method('makeTempProgramPerm')->with(1);
+
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
     $this->program_manager->addProgram($this->request);
   }
@@ -189,9 +204,7 @@ class ProgramManagerTest extends TestCase
     $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
     $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->extracted_file->expects($this->atLeastOnce())->method('getScreenshotPath')->willReturn('./path/to/screenshot');
-    $this->extracted_file->expects($this->atLeastOnce())->method('getName')->willReturn('TestProject');
     $this->extracted_file->expects($this->atLeastOnce())->method('getDescription')->willReturn('');
-    $this->extracted_file->expects($this->atLeastOnce())->method('getApplicationVersion')->willReturn('');
     $this->extracted_file->expects($this->atLeastOnce())->method('getLanguageVersion')->willReturn('');
     $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn([]);
     $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(false);
@@ -202,12 +215,17 @@ class ProgramManagerTest extends TestCase
 
         return $project;
       }))
-      ;
+    ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
+    $this->entity_manager->expects($this->atLeastOnce())
+      ->method('refresh')->with($this->isInstanceOf(Program::class));
 
-    $this->screenshot_repository->expects($this->atLeastOnce())->method('saveProgramAssetsTemp')->with('./path/to/screenshot', 1);
-    $this->screenshot_repository->expects($this->atLeastOnce())->method('makeTempProgramAssetsPerm')->with(1);
+    $this->screenshot_repository->expects($this->atLeastOnce())
+      ->method('saveProgramAssetsTemp')->with('./path/to/screenshot', 1);
+    $this->screenshot_repository->expects($this->atLeastOnce())
+      ->method('makeTempProgramAssetsPerm')->with(1);
+
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
     $this->program_manager->addProgram($this->request);
   }
@@ -227,12 +245,16 @@ class ProgramManagerTest extends TestCase
 
         return $project;
       }))
-      ;
+    ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
+    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
+      ->with($this->isInstanceOf(Program::class))
+    ;
 
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch');
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
+      ->willReturn($this->programBeforeInsertEvent)
+    ;
 
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
   }
@@ -250,7 +272,7 @@ class ProgramManagerTest extends TestCase
       ->expects($this->atLeastOnce())
       ->method('dispatch')
       ->will($this->throwException($validation_exception))
-      ;
+    ;
 
     $this->program_manager->addProgram($this->request);
   }
@@ -273,8 +295,13 @@ class ProgramManagerTest extends TestCase
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch');
+    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
+      ->with($this->isInstanceOf(Program::class))
+    ;
+
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
+      ->will($this->onConsecutiveCalls($this->programBeforeInsertEvent, $this->programAfterInsertEvent))
+    ;
 
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
   }
@@ -297,7 +324,9 @@ class ProgramManagerTest extends TestCase
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
+    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
+      ->with($this->isInstanceOf(Program::class))
+    ;
 
     $game_jam = $this->createMock(GameJam::class);
 
@@ -308,6 +337,10 @@ class ProgramManagerTest extends TestCase
     $request->expects($this->any())->method('getUser')->willReturn($this->createMock(User::class));
     $request->expects($this->any())->method('getGamejam')->willReturn($game_jam);
     $request->expects($this->any())->method('getLanguage')->willReturn('en');
+
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
+      ->willReturn($this->programBeforeInsertEvent)
+    ;
 
     $program = $this->program_manager->addProgram($request);
     Assert::assertEquals($game_jam, $program->getGamejam());
@@ -340,6 +373,8 @@ class ProgramManagerTest extends TestCase
     $request->expects($this->any())->method('getProgramfile')->willReturn($file);
     $request->expects($this->any())->method('getUser')->willReturn($this->createMock(User::class));
     $request->expects($this->any())->method('getLanguage')->willReturn('en');
+
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
     $program = $this->program_manager->addProgram($request);
     Assert::assertEquals($this->extracted_file->getDirHash(), $program->getExtractedDirectoryHash());

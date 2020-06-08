@@ -456,7 +456,7 @@ class DataFixturesContext implements KernelAwareContext
     foreach ($program_extensions as $program_extension)
     {
       /* @var $program_extension Extension */
-      Assert::assertContains($program_extension->getName(), $extension, 'The Extension was not found!');
+      Assert::assertStringContainsString($program_extension->getName(), $extension, 'The Extension was not found!');
     }
   }
 
