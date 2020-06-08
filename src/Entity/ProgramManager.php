@@ -125,24 +125,20 @@ class ProgramManager
 
     if (!$project->isVisible())
     {
+      // featured or approved projects should never be invisible
       if (!$this->featured_repository->isFeatured($project) || !$project->getApproved())
       {
         return false;
       }
     }
 
-//    Right now everyone should find even private programs via the correct link! SHARE-49
-//    if ($program->getPrivate() && $program->getUser()->getId() !== $this->getUser()->getId()) {
-//      // only program owners should be allowed to see their programs
-//      return false;
-//    }
+    // SHARE-49: Private projects are visible to everyone.
+    // -
 
-    if ($project->isDebugBuild())
+    // SHARE-70/SHARE-296: Debug projects must only be seen in the dev env or if explicitly requested
+    if ($project->isDebugBuild() && !$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV'])
     {
-      if (!$this->app_request->isDebugBuildRequest())
-      {
-        return false;
-      }
+      return false;
     }
 
     return true;
