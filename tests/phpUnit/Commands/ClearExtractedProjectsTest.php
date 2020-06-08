@@ -27,7 +27,7 @@ class ClearExtractedProjectsTest extends KernelTestCase
   {
     $kernel = static::createKernel();
     $application = new Application($kernel);
-    $command = $application->find('catrobat:clear:extracted');
+    $command = $application->find('catrobat:clean:extracted');
     $this->command_tester = new CommandTester($command);
 
     $this->project_data_fixtures = $kernel->getContainer()->get(ProjectDataFixtures::class);
@@ -116,8 +116,13 @@ class ClearExtractedProjectsTest extends KernelTestCase
     {
       $dir_name = $this->extract_dir.DIRECTORY_SEPARATOR.'fakeHash'.$i;
       mkdir($dir_name);
-      mkdir($dir_name.DIRECTORY_SEPARATOR.'recursive_dir');
       touch($dir_name.DIRECTORY_SEPARATOR.'code.xml');
+      touch($dir_name.DIRECTORY_SEPARATOR.'a.txt');
+      mkdir($dir_name.DIRECTORY_SEPARATOR.'recursive_dir');
+      touch($dir_name.DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'recursive_dir'.'code.xml');
+      mkdir($dir_name.DIRECTORY_SEPARATOR.'recursive_dir'.DIRECTORY_SEPARATOR.'r2');
+      touch($dir_name.DIRECTORY_SEPARATOR.'recursive_dir'.DIRECTORY_SEPARATOR.'r2'.DIRECTORY_SEPARATOR.'x.png');
+      touch($dir_name.DIRECTORY_SEPARATOR.'recursive_dir'.DIRECTORY_SEPARATOR.'r2'.DIRECTORY_SEPARATOR.'y.png');
     }
   }
 }

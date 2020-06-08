@@ -81,3 +81,12 @@
 #help-button {
   cursor:pointer
 }
+
+.text-icon-aligned {
+  display: flex;
+  align-items: center;
+}
+
+.trailing-icon {
+  margin-left: auto;
+}

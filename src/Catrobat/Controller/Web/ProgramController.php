@@ -149,15 +149,12 @@ class ProgramController extends AbstractController
 
     /** @var User|null $user */
     $user = $this->getUser();
-    $logged_in = false;
+    $logged_in = null !== $user;
+    $my_program = $logged_in && $project->getUser() === $user;
 
     $active_user_like_types = [];
-    $user_name = null;
-
-    if (null !== $user)
+    if ($logged_in)
     {
-      $logged_in = true;
-      $user_name = $user->getUsername();
       $likes = $this->program_manager->findUserLikes($project->getId(), $user->getId());
       foreach ($likes as $like)
       {
@@ -173,41 +170,20 @@ class ProgramController extends AbstractController
       $referrer, $program_comments, $request
     );
 
-    $user_programs = $this->findUserPrograms($user, $project);
-
-    $isReportedByUser = $this->checkReportedByUser($project, $user);
-
-    $program_url = $this->generateUrl('program',
-      ['id' => $project->getId()], UrlGeneratorInterface::ABSOLUTE_PATH);
-
-    $share_text = trim($project->getName().' on '.$program_url.' '.
-      $project->getDescription());
-
     $jam = $this->extractGameJamConfig();
 
-    $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
-
-    $my_program = false;
-    if ($user_programs && count($user_programs) > 0)
-    {
-      $my_program = true;
-    }
-
-    $this->extracted_file_repository->loadProgramExtractedFile($project);
+    // Catblocks is working with the extracted files not the project zip.
+    $this->extracted_file_repository->ensureProjectIsExtracted($project);
 
     return $this->render('Program/program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program' => $project,
       'program_details' => $program_details,
       'my_program' => $my_program,
-      'already_reported' => $isReportedByUser,
-      'shareText' => $share_text,
-      'program_url' => $program_url,
-      'jam' => $jam,
-      'user_name' => $user_name,
-      'max_description_size' => $max_description_size,
       'logged_in' => $logged_in,
+      'max_description_size' => $this->getParameter('catrobat.max_description_upload_size'),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
+      'jam' => $jam,
     ]);
   }
 
@@ -692,7 +668,7 @@ class ProgramController extends AbstractController
       'comments' => $program_comments,
       'commentsLength' => count($program_comments),
       'commentsAvatars' => $comments_avatars,
-      'remixesLength' => $this->remix_manager->remixCount($program->getId()),
+      'remixesLength' => $this->remix_manager->remixCount($program->getId()), // Huge performance killer!
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,
