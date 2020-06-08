@@ -192,12 +192,8 @@ Feature: Admin all projects
       And I wait for the page to be loaded
       And I click on the username "Pauli"
       Then I should be on "/admin/app/user/3/edit"
-      And I should see "Firstname"
-      And I should see "LastName"
-      And I should see "Username"
       And I should see "Pauli"
       And I should see "E-Mail-Address"
-      And I should see "Date of birth"
 
      Scenario: Clicking on the show button should take me to the page with program details
        Given I log in as "Admin" with the password "123456"

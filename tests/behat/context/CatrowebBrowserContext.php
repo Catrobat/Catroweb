@@ -858,6 +858,89 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I change upload of the entry number "([^"]*)" in the list to "([^"]*)"$/
+   *
+   * @param mixed $program_number
+   * @param mixed $approved
+   *
+   * @throws Exception
+   */
+  public function iChangeUploadOfTheEntry($program_number, $approved): void
+  {
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$program_number.']/td[4]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($approved);
+    $this->iWaitForAjaxToFinish();
+  }
+
+  /**
+   * @Then /^I change report of the entry number "([^"]*)" in the list to "([^"]*)"$/
+   *
+   * @param mixed $program_number
+   * @param mixed $approved
+   *
+   * @throws Exception
+   */
+  public function iChangeReportOfTheEntry($program_number, $approved): void
+  {
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$program_number.']/td[5]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($approved);
+    $this->iWaitForAjaxToFinish();
+  }
+
+  /**
+   * @Then /^I click action button "([^"]*)" of the entry number "([^"]*)"$/
+   *
+   * @param mixed $action_button
+   * @param mixed $entry_number
+   *
+   * @throws Exception
+   */
+  public function iClickActionButtonOfEntry($action_button, $entry_number): void
+  {
+    $page = $this->getSession()->getPage();
+    switch ($action_button) {
+      case 'edit':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[1]')
+          ->click()
+        ;
+        break;
+      case 'delete':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[2]')
+          ->click()
+        ;
+        break;
+    }
+  }
+
+  /**
+   * @Then /^I check the batch action box of entry "([^"]*)"$/
+   *
+   * @param mixed $entry_number
+   *
+   * @throws Exception
+   */
+  public function iCheckBatchActionBoxOfEntry($entry_number): void
+  {
+    $page = $this->getSession()->getPage();
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td/div')
+      ->click()
+    ;
+  }
+
+  /**
    * @Then /^I click on the username "([^"]*)"$/
    *
    * @param mixed $username
@@ -2227,9 +2310,24 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the table with all projects in the following order:$/
+   * @Then /^I should see the notifications table:$/
    *
    * @throws ResponseTextException
+   */
+  public function shouldSeeNotificationTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['User']);
+      $this->assertSession()->pageTextContains($user_stat['User Email']);
+      $this->assertSession()->pageTextContains($user_stat['Upload']);
+      $this->assertSession()->pageTextContains($user_stat['Report']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the table with all projects in the following order:$/
    */
   public function shouldSeeReportedProgramsTable(TableNode $table): void
   {
@@ -2332,18 +2430,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the backup-folder$/
-   *
-   * @param mixed $filename
-   * @param mixed $size
-   */
-  public function thereIsAFileWithSizeBytesInTheBackupFolder($filename, $size): void
-  {
-    $this->generateFileInPath($this->getSymfonyParameter('catrobat.backup.dir'),
-      $filename, $size);
-  }
-
-  /**
    * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the extracted-folder$/
    *
    * @param mixed $filename
@@ -2356,24 +2442,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^there is no file in the backup-folder$/
-   */
-  public function thereIsNoFileInTheBackupFolder(): void
-  {
-    $backupDirectory = $this->getSymfonyParameter('catrobat.backup.dir');
-
-    $files = glob($backupDirectory.'/*');
-    foreach ($files as $file)
-    {
-      $ext = pathinfo($file, PATHINFO_EXTENSION);
-      if (('zip' === $ext || 'tar' === $ext) && is_file($file))
-      {
-        unlink($file);
-      }
-    }
-  }
-
-  /**
    * @Then /^program with id "([^"]*)" should have no directory_hash$/
    *
    * @param mixed $program_id
@@ -2382,7 +2450,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $program_manager = $this->getProgramManager();
     $program = $program_manager->find($program_id);
-    Assert::assertEquals('null', $program->getDirectoryHash());
+    Assert::assertEquals('null', $program->getExtractedDirectoryHash());
   }
 
   /**
@@ -2821,6 +2889,7 @@ class CatrowebBrowserContext extends BrowserContext
     {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
+      $this->assertSession()->pageTextContains($user_stat['Url']);
       $this->assertSession()->pageTextContains($user_stat['Flavor']);
       $this->assertSession()->pageTextContains($user_stat['Priority']);
     }
@@ -2849,6 +2918,59 @@ class CatrowebBrowserContext extends BrowserContext
     $textarea = $this->getSession()->getPage()->findField($arg2);
     Assert::assertNotNull($textarea, 'Textarea not found');
     $textarea->setValue($arg1);
+  }
+
+  /**
+   * @Then /^I check the checkbox named "([^"]*)"$/
+   *
+   * @param mixed $arg1
+   */
+  public function iCheckTheCheckboxNamed($arg1): void
+  {
+    $this->checkOption($arg1);
+  }
+
+  /**
+   * @Then /^I uncheck the checkbox named "([^"]*)"$/
+   *
+   * @param mixed $arg1
+   */
+  public function iUncheckTheCheckboxNamed($arg1): void
+  {
+    $this->uncheckOption($arg1);
+  }
+
+  /**
+   * @Then /^I click on the button named "([^"]*)"/
+   *
+   * @param mixed $arg1
+   */
+  public function iClickOnTheButton($arg1): void
+  {
+    $this->assertSession()->elementExists('named', ['button', $arg1]);
+
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('named', ['button', $arg1])
+      ->click()
+    ;
+  }
+
+  /**
+   * @Then /^I should see the user table:$/
+   */
+  public function iShouldSeeTheUserTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['username']);
+      $this->assertSession()->pageTextContains($user_stat['email']);
+      $this->assertSession()->pageTextContains($user_stat['groups']);
+      $this->assertSession()->pageTextContains($user_stat['enabled']);
+      $this->assertSession()->pageTextContains($user_stat['createdAt']);
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

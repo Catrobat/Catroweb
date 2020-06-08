@@ -480,7 +480,7 @@ class ProgramController extends AbstractController
     $em->persist($program);
     $em->flush();
 
-    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+    return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }
 
   /**
@@ -529,7 +529,7 @@ class ProgramController extends AbstractController
     $em->persist($program);
     $em->flush();
 
-    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+    return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }
 
   /**
@@ -569,7 +569,7 @@ class ProgramController extends AbstractController
     $this->screenshot_repository->updateProgramAssets($image, $id);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'image_base64' => null,
     ]);
   }

@@ -208,6 +208,7 @@ class ProgramManager
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
+    $program->setExtractedDirectoryHash($extracted_file->getDirHash());
     $this->addTags($program, $extracted_file, $request->getLanguage());
 
     if (null !== $request->getGameJam())

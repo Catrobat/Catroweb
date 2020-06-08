@@ -98,7 +98,6 @@ Feature: Searching for programs
     And I wait for the page to be loaded
     Then I should see "Your search returned 0 results"
 
-
   Scenario: Progress bar should be displayed when there are many search results being loaded
     Given there are "2500" similar projects
     And I am on "/app/search/basic"

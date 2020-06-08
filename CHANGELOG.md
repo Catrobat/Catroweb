@@ -5,13 +5,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [3.3.0]
+## [3.3.4]
+### Changed
+- Admin Interface
+- Bumped many dependencies (Thx to dependabot)
+- Improved CI system
+- Docker switch from Ubuntu to Debian
+### Fixed
+- Search queries including special character
+- Project Code/Stats view will be updated on every project upload
+- static images optimized
+- mutable assets are no longer wrongly cached after an update (profile/project images)
+## [3.3.3]
 ### Added
 - added Apple Site Association
 - CODE QUALITY TOOLS :innocent:
 - New Brick (ClearUserListBrick)
 - New Brick (UserBrick)
-- Download Multiple Media Files
+- Download Multiple Media Files (only web)
 - Media Library Search
 - Download whole Media Library Objects
 - various Material.io Content

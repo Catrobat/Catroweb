@@ -8,9 +8,9 @@ use App\Catrobat\Exceptions\Upload\NameTooLongException;
 use App\Catrobat\Exceptions\Upload\RudewordInNameException;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RudeWordFilter;
-use App\Catrobat\StatusCode;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\HttpFoundation\Response;
 
 class NameValidator
 {
@@ -40,7 +40,7 @@ class NameValidator
     {
       throw new MissingProgramNameException();
     }
-    if (strlen($file->getName()) > StatusCode::OK)
+    if (strlen($file->getName()) > Response::HTTP_OK)
     {
       throw new NameTooLongException();
     }

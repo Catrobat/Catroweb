@@ -425,4 +425,9 @@ class User extends BaseUser
 
     return $comments_collection->matching($criteria)->count();
   }
+
+  public function changeCreatedAt(\DateTime $createdAt): void
+  {
+    $this->createdAt = $createdAt;
+  }
 }

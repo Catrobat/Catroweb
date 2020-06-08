@@ -32,6 +32,9 @@ default:
                         api_url: "http://localhost:9222"
                         download_behavior: allow
                         download_path: tests/testdata/UploadDownloadTemp
+                        socket_timeout: 60
+                        dom_wait_timeout: 6000
+
 
 
         emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
@@ -51,14 +54,6 @@ default:
 #
     suites:
 
-        admin:
-            paths:    [ "tests/behat/features/admin" ]
-            contexts:
-                - Tests\behat\context\RefreshEnvironmentContext
-                - Tests\behat\context\DataFixturesContext
-                - Tests\behat\context\CatrowebBrowserContext
-                - Tests\behat\context\ApiContext
-
         api:
             paths:    [ "tests/behat/features/api" ]
             contexts:
@@ -75,16 +70,24 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        ci:
-            paths:    [ "tests/behat/features/ci" ]
+        web-admin:
+            paths:    [ "tests/behat/features/web/admin" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        flavor:
-            paths:    [ "tests/behat/features/flavor" ]
+        web-authentication:
+            paths:    [ "tests/behat/features/web/authentication" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-gamejam:
+            paths:    [ "tests/behat/features/web/gamejam" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
@@ -92,7 +95,18 @@ default:
                 - Tests\behat\context\ApiContext
 
         web-general:
-            paths:    [ "tests/behat/features/web/general" ]
+            paths:
+                - "tests/behat/features/web/general"
+                - "tests/behat/features/web/media-library"
+                - "tests/behat/features/web/recommendations"
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-notifications:
+            paths: ["tests/behat/features/web/notifications"]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
@@ -107,21 +121,54 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        web-project:
-            paths:    [ "tests/behat/features/web/project" ]
+        web-project-details:
+            paths:    [ "tests/behat/features/web/project-details" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        gamejam:
-            paths:    [ "tests/behat/features/gamejam" ]
+        web-project-details-2:
+            paths:    [ "tests/behat/features/web/project-details-2" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
+
+        web-project-details-3:
+            paths:    [ "tests/behat/features/web/project-details-3" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-project-loader:
+            paths:    [ "tests/behat/features/web/project-loader" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-search:
+            paths:    [ "tests/behat/features/web/search" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-top-bar:
+            paths:    [ "tests/behat/features/web/top-bar" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
 
 # --------------------------------------------------------------------------------------------------
 # Exclude specific tests based on their tags here:

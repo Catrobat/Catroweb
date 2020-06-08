@@ -156,6 +156,9 @@
     "doctrine/reflection": {
         "version": "v1.1.0"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.0"
+    },
     "egulias/email-validator": {
         "version": "2.1.17"
     },
@@ -246,15 +249,6 @@
     "incenteev/composer-parameter-handler": {
         "version": "v2.1.3"
     },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
-    },
-    "jean85/pretty-package-versions": {
-        "version": "1.2"
-    },
-    "jetbrains/phpstorm-stubs": {
-        "version": "v2019.3"
-    },
     "jms/metadata": {
         "version": "1.7.0"
     },
@@ -320,23 +314,11 @@
     "namshi/jose": {
         "version": "7.2.3"
     },
-    "nette/finder": {
-        "version": "v2.5.2"
-    },
-    "nette/robot-loader": {
-        "version": "v3.2.3"
-    },
-    "nette/utils": {
-        "version": "v3.1.1"
-    },
     "nikic/php-parser": {
         "version": "v4.3.0"
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
-    },
-    "ondram/ci-detector": {
-        "version": "3.3.0"
     },
     "paragonie/random_compat": {
         "version": "v2.0.18"
@@ -391,9 +373,6 @@
     },
     "phpstan/extension-installer": {
         "version": "1.0.3"
-    },
-    "phpstan/phpdoc-parser": {
-        "version": "0.4.3"
     },
     "phpstan/phpstan": {
         "version": "0.12.17"
@@ -454,14 +433,8 @@
     "psr/log": {
         "version": "1.1.2"
     },
-    "psr/simple-cache": {
-        "version": "1.0.1"
-    },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
-    },
-    "rector/rector": {
-        "version": "v0.7.7"
     },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
@@ -604,6 +577,9 @@
     "symfony/dependency-injection": {
         "version": "v4.4.5"
     },
+    "symfony/deprecation-contracts": {
+        "version": "v2.1.2"
+    },
     "symfony/doctrine-bridge": {
         "version": "v4.4.5"
     },
@@ -731,11 +707,17 @@
     "symfony/polyfill-iconv": {
         "version": "v1.14.0"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.17.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.14.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.14.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.17.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.14.0"
@@ -751,6 +733,9 @@
     },
     "symfony/polyfill-php73": {
         "version": "v1.14.0"
+    },
+    "symfony/polyfill-php80": {
+        "version": "v1.17.0"
     },
     "symfony/polyfill-util": {
         "version": "v1.14.0"
@@ -778,9 +763,6 @@
             "config/routes.yaml"
         ]
     },
-    "symfony/security": {
-        "version": "v4.4.5"
-    },
     "symfony/security-acl": {
         "version": "v3.0.4"
     },
@@ -796,6 +778,18 @@
             "config/packages/security.yaml"
         ]
     },
+    "symfony/security-core": {
+        "version": "v4.4.9"
+    },
+    "symfony/security-csrf": {
+        "version": "v4.4.9"
+    },
+    "symfony/security-guard": {
+        "version": "v4.4.9"
+    },
+    "symfony/security-http": {
+        "version": "v4.4.9"
+    },
     "symfony/serializer": {
         "version": "v5.0.5"
     },
@@ -804,6 +798,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.5"
+    },
+    "symfony/string": {
+        "version": "v5.1.0"
     },
     "symfony/swiftmailer-bundle": {
         "version": "2.5",
@@ -894,29 +891,11 @@
     "symfony/yaml": {
         "version": "v4.4.5"
     },
-    "symplify/auto-bind-parameter": {
-        "version": "v7.2.8"
-    },
-    "symplify/autowire-array-parameter": {
-        "version": "v7.2.8"
-    },
-    "symplify/package-builder": {
-        "version": "v7.2.8"
-    },
-    "symplify/set-config-resolver": {
-        "version": "v7.2.8"
-    },
-    "symplify/smart-file-system": {
-        "version": "v7.2.8"
-    },
     "textalk/websocket": {
         "version": "1.2.0"
     },
     "theseer/tokenizer": {
         "version": "1.1.3"
-    },
-    "tracy/tracy": {
-        "version": "v2.7.3"
     },
     "twbs/bootstrap": {
         "version": "v4.1.3"
@@ -934,6 +913,9 @@
         ]
     },
     "twig/extra-bundle": {
+        "version": "v3.0.3"
+    },
+    "twig/string-extra": {
         "version": "v3.0.3"
     },
     "twig/twig": {

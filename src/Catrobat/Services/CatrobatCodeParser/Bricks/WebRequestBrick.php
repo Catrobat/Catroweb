@@ -10,6 +10,6 @@ class WebRequestBrick extends Brick
   {
     $this->type = Constants::WEB_REQUEST_BRICK;
     $this->caption = 'Web Request';
-    $this->setImgFile(Constants::CONTROL_BRICK_IMG);
+    $this->setImgFile(Constants::DATA_BRICK_IMG);
   }
 }

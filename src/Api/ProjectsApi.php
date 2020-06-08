@@ -103,7 +103,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'id' => $featured_program->getId(),
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
-        'featured_image' => $this->featured_image_repository->getAbsoluteWWebPath($featured_program->getId(), $featured_program->getImageType(), true),
+        'featured_image' => $this->featured_image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
       ];
       $new_featured_project = new FeaturedProject($result);
       $featured_programs[] = $new_featured_project;
@@ -156,7 +156,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     // File uploaded successful?
     if (!$file->isValid())
     {
-      $responseCode = 422; // 422 => UploadError
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
+
       return new UploadError(['error' => $this->translator->trans('api.projectsPost.upload_error', [], 'catroweb')]);
     }
 
@@ -165,7 +166,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
     if (strtolower($calculated_checksum) != strtolower($checksum))
     {
-      $responseCode = 422; // 422 => UploadError
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
+
       return new UploadError(['error' => $this->translator->trans('api.projectsPost.invalid_checksum', [], 'catroweb')]);
     }
 
@@ -187,7 +189,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
     catch (Exception $e)
     {
-      $responseCode = 422; // 422 => UploadError
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
+
       return new UploadError(['error' => $this->translator->trans('api.projectsPost.creating_error', [], 'catroweb')]);
     }
 
@@ -199,7 +202,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
 
     // Since we have come this far, the project upload is completed
-    $responseCode = 201; // 201 => Successful upload
+    $responseCode = Response::HTTP_CREATED; // 201 => Successful upload
     $responseHeaders['Location'] = $this->url_generator->generate(
       'program',
       [

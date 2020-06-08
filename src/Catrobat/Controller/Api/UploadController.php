@@ -22,6 +22,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -187,7 +188,7 @@ class UploadController
     $this->user_manager->updateUser($user);
 
     $response['projectId'] = $program->getId();
-    $response['statusCode'] = StatusCode::OK;
+    $response['statusCode'] = Response::HTTP_OK;
     $response['answer'] = $this->trans('success.upload');
     $response['token'] = $user->getUploadToken();
     if (null !== $game_jam && !$program->isAcceptedForGameJam())

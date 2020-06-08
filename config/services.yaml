@@ -1,6 +1,5 @@
 parameters:
   catrobat.apk.dir:                     "%catrobat.pubdir%resources/apk/"
-  catrobat.backup.dir:                  "%kernel.project_dir%/backups/"
   catrobat.featuredimage.dir:           "%catrobat.pubdir%resources/featured/"
   catrobat.featuredimage.path:          "resources/featured/"
   catrobat.exampleimage.dir:            "%catrobat.pubdir%resources/example/"
@@ -195,10 +194,6 @@ services:
 
   App\Catrobat\Services\ApkRepository:
     class: App\Catrobat\Services\ApkRepository
-    public: true
-
-  App\Catrobat\Services\BackupFileRepository:
-    class: App\Catrobat\Services\BackupFileRepository
     public: true
 
   App\Catrobat\Services\ProgramDevicePermissionReader:
@@ -503,6 +498,12 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 
+  # ======== Versioning ========
+
+  catrobat.versioning:
+    class: App\Utils\VersionStrategy
+    arguments:
+      - '%env(string:APP_VERSION)%'
 
   # ====================================================================================================================
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -571,16 +572,6 @@ services:
     class: App\Admin\FeaturedProgramAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, label: "Featured Projects" }
-    arguments:
-      - ~
-      - App\Entity\FeaturedProgram
-      - ~
-    public: true
-
-  catrowebadmin.block.featured.url:
-    class: App\Admin\FeaturedUrlAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Featured Urls" }
     arguments:
       - ~
       - App\Entity\FeaturedProgram
@@ -666,7 +657,8 @@ services:
   catrowebadmin.block.users.user:
     class: App\Admin\UserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: 'User', icon: '<i class="fa fa-cogs"></i>' }
+      - { name: sonata.admin, manager_type: orm, label: 'User', show_mosaic_button: false,
+          icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
       - App\Entity\User

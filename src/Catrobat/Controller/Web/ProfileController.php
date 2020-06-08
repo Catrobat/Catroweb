@@ -139,7 +139,7 @@ class ProfileController extends AbstractController
     $user_manager->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
     ]);
   }
 
@@ -190,7 +190,7 @@ class ProfileController extends AbstractController
     $user_manager->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'saved_password' => 'supertoll',
     ]);
   }
@@ -266,7 +266,7 @@ class ProfileController extends AbstractController
     $user_manager->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
     ]);
   }
 
@@ -311,7 +311,7 @@ class ProfileController extends AbstractController
     $user_manager->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
     ]);
   }
 
@@ -342,7 +342,7 @@ class ProfileController extends AbstractController
     $user_manager->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'image_base64' => $image_base64,
     ]);
   }
@@ -367,7 +367,7 @@ class ProfileController extends AbstractController
     $em->flush();
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
+      'statusCode' => Response::HTTP_OK,
       'count' => count($user_comments),
     ]);
   }

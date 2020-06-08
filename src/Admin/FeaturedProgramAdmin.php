@@ -8,20 +8,20 @@ use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FeaturedProgramAdmin extends AbstractAdmin
@@ -94,7 +94,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
   public function preUpdate($object): void
   {
     $object->old_image_type = $object->getImageType();
-    $this->checkProgramID($object);
     $this->checkFlavor();
   }
 
@@ -103,27 +102,50 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   public function prePersist($object): void
   {
-    $this->checkProgramID($object);
     $this->checkFlavor();
   }
 
-  protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+  public function validate(ErrorElement $errorElement, $object): void
   {
-    $query = parent::configureQuery($query);
+    $id = $this->getForm()->get('Program_Id_or_Url')->getData();
 
-    if (!$query instanceof ProxyQuery)
+    if ($this->getForm()->get('Use_Url')->getData())
     {
-      return $query;
+      if (filter_var($id, FILTER_VALIDATE_URL))
+      {
+        $object->setUrl($id);
+        if (null !== $object->getId())
+        {
+          $object->setProgram(null);
+        }
+      }
+      else
+      {
+        $errorElement->with('ID')->addViolation('Please enter a valid URL.')->end();
+      }
     }
+    else
+    {
+      if (null !== $id)
+      {
+        $id = preg_replace('$(.*)/project/$', '', $id);
+      }
 
-    /** @var QueryBuilder $qb */
-    $qb = $query->getQueryBuilder();
+      $program = $this->program_manager->find($id);
 
-    $qb->andWhere(
-      $qb->expr()->isNotNull($qb->getRootAliases()[0].'.program')
-    );
-
-    return $query;
+      if (null !== $program)
+      {
+        $object->setProgram($program);
+        if (null !== $object->getURL())
+        {
+          $object->setURL(null);
+        }
+      }
+      else
+      {
+        $errorElement->with('ID')->addViolation('Unable to find program with given ID.')->end();
+      }
+    }
   }
 
   /**
@@ -147,11 +169,13 @@ class FeaturedProgramAdmin extends AbstractAdmin
     if (null !== $this->getSubject()->getId())
     {
       $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($featured_project).'">';
-      $id_value = $this->getSubject()->getProgram()->getId();
     }
     $formMapper
-      ->add('file', FileType::class, $file_options)
-      ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
+      ->add('file', FileType::class, $file_options,
+        ['help' => 'The featured image must be of size 1024 x 400'])
+      ->add('Use_Url', CheckboxType::class, ['mapped' => false, 'required' => false,
+        'help' => 'Toggle to save URL instead of Program ID.', ])
+      ->add('Program_Id_or_Url', TextType::class, ['mapped' => false, 'data' => $id_value])
       ->add('flavor', ChoiceFieldMaskType::class, [
         'choices' => $this->getFlavor(),
       ])
@@ -196,6 +220,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
         'admin_code' => 'catrowebadmin.block.programs.all',
         'editable' => false,
       ])
+      ->add('url', UrlType::class)
       ->add('flavor', 'string', [
         'sortable' => false,
       ])
@@ -214,25 +239,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('acl');
-  }
-
-  /**
-   * @param FeaturedProgram $object
-   */
-  private function checkProgramID($object): void
-  {
-    $id = $this->getForm()->get('program_id')->getData();
-
-    $program = $this->program_manager->find($id);
-
-    if (null !== $program)
-    {
-      $object->setProgram($program);
-    }
-    else
-    {
-      throw new NotFoundHttpException(sprintf('Unable to find program with id : %s', $id));
-    }
   }
 
   private function checkFlavor(): void

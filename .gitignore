@@ -18,9 +18,6 @@ bin/
 !bin/x_reset.sh
 !bin/x_test.sh
 
-### backups ###
-backups/**
-
 ### Sass ###
 .sass-cache/
 *.css.map

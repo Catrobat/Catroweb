@@ -8,6 +8,7 @@ use App\Entity\UserManager;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\Register;
 use OpenAPI\Server\Model\ValidationSchema;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -50,12 +51,13 @@ class UserApi implements UserApiInterface
 
     if ($validation_schema->getEmail() || $validation_schema->getUsername() || $validation_schema->getPassword())
     {
-      $responseCode = 422; // 422 => Unprocessable entity
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => Unprocessable entity
+
       return $validation_schema;
     }
     if ($register->isDryRun())
     {
-      $responseCode = 204; // 204 => Dry-run successful, no validation error
+      $responseCode = Response::HTTP_NO_CONTENT; // 204 => Dry-run successful, no validation error
     }
     else
     {

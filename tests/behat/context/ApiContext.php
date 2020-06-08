@@ -1681,28 +1681,7 @@ class ApiContext implements KernelAwareContext
     $returned_program = array_pop($returned_program);
     $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
 
-    foreach ($this->program_structure as $key)
-    {
-      Assert::assertNotEmpty($stored_program);
-      if (array_key_exists($key, $stored_program))
-      {
-        Assert::assertEquals($returned_program[$key], $stored_program[$key]);
-      }
-      elseif ('screenshot_large' === $key)
-      {
-        Assert::assertContains($returned_program[$key],
-          ['http://localhost/resources/screenshots/screen_'.$returned_program['id'].'.png',
-            'http://localhost/resources_test/screenshots/screen_'.$returned_program['id'].'.png',
-            'http://localhost/images/default/screenshot.png', ]);
-      }
-      elseif ('screenshot_small' === $key)
-      {
-        Assert::assertContains($returned_program[$key],
-          ['http://localhost/resources/thumbnails/screen_'.$returned_program['id'].'.png',
-            'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
-            'http://localhost/images/default/thumbnail.png', ]);
-      }
-    }
+    $this->assertProgramsEqual($stored_program, $returned_program);
   }
 
   /**
@@ -1723,28 +1702,7 @@ class ApiContext implements KernelAwareContext
     foreach ($returned_programs as $returned_program)
     {
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
-      foreach ($this->program_structure as $key)
-      {
-        Assert::assertNotEmpty($stored_program);
-        if (array_key_exists($key, $stored_program))
-        {
-          Assert::assertEquals($returned_program[$key], $stored_program[$key]);
-        }
-        elseif ('screenshot_large' === $key)
-        {
-          Assert::assertContains($returned_program[$key],
-            ['http://localhost/resources/screenshots/screen_'.$returned_program['id'].'.png',
-              'http://localhost/resources_test/screenshots/screen_'.$returned_program['id'].'.png',
-              'http://localhost/images/default/screenshot.png', ]);
-        }
-        elseif ('screenshot_small' === $key)
-        {
-          Assert::assertContains($returned_program[$key],
-            ['http://localhost/resources/thumbnails/screen_'.$returned_program['id'].'.png',
-              'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
-              'http://localhost/images/default/thumbnail.png', ]);
-        }
-      }
+      $this->assertProgramsEqual($stored_program, $returned_program);
     }
   }
 
@@ -2238,6 +2196,7 @@ class ApiContext implements KernelAwareContext
     /** @var Program $project */
     $project = $this->getProgramManager()->find($id);
     $project->setName($name);
+    $this->getProgramManager()->save($project);
 
     $this->new_uploaded_projects[] = $project;
   }
@@ -3725,5 +3684,37 @@ class ApiContext implements KernelAwareContext
     $user_agent = 'Catrobat/'.$lang_version.' '.$flavor.'/'.$app_version.' Platform/'.$platform.
       ' BuildType/'.$build_type.' Theme/'.$theme;
     $this->iUseTheUserAgent($user_agent);
+  }
+
+  private function pathWithoutParam(string $path): string
+  {
+    return strtok($path, '?');
+  }
+
+  private function assertProgramsEqual(array $stored_program, array $returned_program): void
+  {
+    Assert::assertNotEmpty($stored_program);
+    Assert::assertNotEmpty($returned_program);
+    foreach ($this->program_structure as $key)
+    {
+      if (array_key_exists($key, $stored_program))
+      {
+        Assert::assertEquals($stored_program[$key], $returned_program[$key]);
+      }
+      elseif ('screenshot_large' === $key)
+      {
+        Assert::assertContains($this->pathWithoutParam($returned_program[$key]),
+          ['http://localhost/resources/screenshots/screen_'.$returned_program['id'].'.png',
+            'http://localhost/resources_test/screenshots/screen_'.$returned_program['id'].'.png',
+            'http://localhost/images/default/screenshot.png', ]);
+      }
+      elseif ('screenshot_small' === $key)
+      {
+        Assert::assertContains($this->pathWithoutParam($returned_program[$key]),
+          ['http://localhost/resources/thumbnails/screen_'.$returned_program['id'].'.png',
+            'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
+            'http://localhost/images/default/thumbnail.png', ]);
+      }
+    }
   }
 }

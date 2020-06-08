@@ -12,6 +12,7 @@ use OpenAPI\Server\Model\MediaFile;
 use OpenAPI\Server\Model\MediaFiles;
 use OpenAPI\Server\Model\Package;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -36,10 +37,10 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFileSearchGet(string $query_string, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
+  public function mediaFilesSearchGet(string $query_string, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
   {
     $json_response_array = [];
-    $responseCode = 200; // 200 => OK
+    $responseCode = Response::HTTP_OK; // 200 => OK
 
     $found_media_files = $this->mediapackage_file_repository->search($query_string, $flavor, $package_name, $limit, $offset);
 
@@ -87,7 +88,8 @@ class MediaLibraryApi implements MediaLibraryApiInterface
 
     if (null === $media_package)
     {
-      $responseCode = 404; // => Not found
+      $responseCode = Response::HTTP_NOT_FOUND; // => Not found
+
       return null;
     }
 
@@ -151,5 +153,21 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     $repsonseData = new MediaFiles(['media_files' => $json_response_array, 'total_results' => $total_results]);
 
     return $repsonseData;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function mediaFileIdGet(int $id, &$responseCode, array &$responseHeaders)
+  {
+    $responseCode = Response::HTTP_I_AM_A_TEAPOT;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  {
+    $responseCode = Response::HTTP_I_AM_A_TEAPOT;
   }
 }

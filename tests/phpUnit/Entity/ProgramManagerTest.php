@@ -113,6 +113,7 @@ class ProgramManagerTest extends TestCase
       ->willReturn(new SimpleXMLElement('<empty></empty>')
     )
     ;
+    $this->extracted_file->expects($this->any())->method('getDirHash')->willReturn('451f778e4bf3');
 
     fopen('/tmp/phpUnitTest', 'w');
     $file = new File('/tmp/phpUnitTest');
@@ -310,5 +311,37 @@ class ProgramManagerTest extends TestCase
 
     $program = $this->program_manager->addProgram($request);
     Assert::assertEquals($game_jam, $program->getGamejam());
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function testProjectHashMustBeUpdatedOnUploads(): void
+  {
+    $metadata = $this->createMock(ClassMetadata::class);
+    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
+    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
+    $this->entity_manager->expects($this->atLeastOnce())->method('persist')
+      ->will($this->returnCallback(function (Program $project): Program
+      {
+        $project->setId('1');
+
+        return $project;
+      }))
+    ;
+
+    $this->entity_manager->expects($this->atLeastOnce())->method('flush');
+    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
+
+    $request = $this->createMock(AddProgramRequest::class);
+
+    fopen('/tmp/phpUnitTest', 'w');
+    $file = new File('/tmp/phpUnitTest');
+    $request->expects($this->any())->method('getProgramfile')->willReturn($file);
+    $request->expects($this->any())->method('getUser')->willReturn($this->createMock(User::class));
+    $request->expects($this->any())->method('getLanguage')->willReturn('en');
+
+    $program = $this->program_manager->addProgram($request);
+    Assert::assertEquals($this->extracted_file->getDirHash(), $program->getExtractedDirectoryHash());
   }
 }

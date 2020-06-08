@@ -104,7 +104,7 @@ services:
   # --- Tests:
 
   chrome.catroweb:
-    image: zenika/alpine-chrome
+    image: zenika/alpine-chrome:81
     container_name: chrome.catroweb
     restart: on-failure
     volumes:

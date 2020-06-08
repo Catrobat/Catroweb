@@ -98,7 +98,6 @@ sonata_admin:
                 items:
                     - catrowebadmin.block.programs.categories
                     - catrowebadmin.block.featured.program
-                    - catrowebadmin.block.featured.url
                     - catrowebadmin.block.programs.templates
                     - catrowebadmin.block.example.program
 

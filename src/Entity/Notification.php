@@ -28,17 +28,17 @@ class Notification
   /**
    * @ORM\Column(name="upload", type="boolean")
    */
-  private bool $upload;
+  private bool $upload = false;
 
   /**
    * @ORM\Column(name="report", type="boolean")
    */
-  private bool $report;
+  private bool $report = false;
 
   /**
    * @ORM\Column(name="summary", type="boolean")
    */
-  private bool $summary;
+  private bool $summary = false;
 
   public function __toString(): string
   {
@@ -48,6 +48,13 @@ class Notification
   public function getId(): ?int
   {
     return $this->id;
+  }
+
+  public function Id(User $user): Notification
+  {
+    $this->user = $user;
+
+    return $this;
   }
 
   public function setUser(User $user): Notification

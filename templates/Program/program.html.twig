@@ -450,7 +450,7 @@
   <script>
     setImageUploadListener('{{ path('upload_project_thumbnail', { 'id': program.id }) }}',
       '#change-project-thumbnail-button', '#project-thumbnail-big',
-        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ constant('App\\Catrobat\\StatusCode::UPLOAD_EXCEEDING_FILESIZE') }},
         {{ constant('App\\Catrobat\\StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE') }}
     )
@@ -470,7 +470,7 @@
       '{{ "programs.reportRadioButtonCopyright"     |trans({}, "catroweb") }}',
       '{{ "programs.reportRadioButtonSpam"          |trans({}, "catroweb") }}',
       '{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}',
-        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ logged_in }}
     )
   </script>
@@ -490,7 +490,7 @@
       "{{ 'programs.deleted_popup'                  |trans({}, 'catroweb') }}",
       "{{ 'programs.noAdminRights'                  |trans({}, 'catroweb') }}",
       "{{ 'somethingWentWrong'                      |trans({}, 'catroweb') }}",
-      "{{ constant('App\\Catrobat\\StatusCode::OK') }}",
+      "{{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }}",
       "{{ constant('App\\Catrobat\\StatusCode::NOT_LOGGED_IN') }}",
       "{{ constant('App\\Catrobat\\StatusCode::NO_ADMIN_RIGHTS') }}"
     )
@@ -500,7 +500,7 @@
     new ProgramDescription('{{ program.id }}',
       '{{ ("show-more")                             |trans({}, "catroweb") }}',
       '{{ ("show-less")                             |trans({}, "catroweb") }}',
-        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ constant('App\\Catrobat\\StatusCode::DESCRIPTION_TOO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
     )
@@ -511,7 +511,7 @@
     new ProgramCredits('{{ program.id }}',
       '{{ ("show-more")                             |trans({}, "catroweb") }}',
       '{{ ("show-less")                             |trans({}, "catroweb") }}',
-        {{ constant('App\\Catrobat\\StatusCode::OK') }},
+        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ constant('App\\Catrobat\\StatusCode::CREDITS_TO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_CREDITS') }}
     )

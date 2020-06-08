@@ -1,7 +1,15 @@
 
 name: Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+  release:
+    types:
+      - created
 
 
 jobs:
@@ -57,7 +65,7 @@ jobs:
     # Runs all PhpUnit tests via docker in the latest ubuntu build
     # Additionally code coverage report ist generated and can be downloaded from the artifacts.
     # Keep in mind the report is not including the functional tests written for behat.
-    name: PhpUnit Tests
+    name: PhpUnit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -91,7 +99,7 @@ jobs:
     #   A pending test will NOT result in a failed pipeline!
     #   This is the reason why the explicit check for the log file had to be added.
     #
-    name: Behat Tests
+    name: Behat
     runs-on: ubuntu-latest
     strategy:
       #
@@ -102,15 +110,20 @@ jobs:
       fail-fast: false
       matrix:
         testSuite:
-          - admin
           - api
           - api-deprecated
-          - ci
-          - flavor
+          - web-admin
+          - web-authentication
+          - web-gamejam
           - web-general
+          - web-notifications
           - web-profile
-          - web-project
-          - gamejam
+          - web-project-details
+          - web-project-details-2
+          - web-project-details-3
+          - web-project-loader
+          - web-search
+          - web-top-bar
 
     steps:
       - name: Checkout
@@ -149,6 +162,16 @@ jobs:
             false;
           fi
 
+      # Chrome exception are problems that can't be fixed with a rerun
+      - name: Check that suite has NO chrome exceptions
+        if: always()
+        id: chrome-exception-check
+        run: |
+          if grep -q 'DMore\ChromeDriver\StreamReadException' tests/testreports/behat/${{ matrix.testSuite }}.log; then
+            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+            false;
+          fi
+
       # Rerun #1
       - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests
         if: steps.test-run.outputs.status != 'success'
@@ -174,16 +197,18 @@ jobs:
         if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
         id: test-rerun-3
         run: |
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
 
       - name: DEBUG
         if: always()
         run: |
           docker ps -a
-          echo "---"
+          echo "--- App ---"
           docker logs app.catroweb
-          echo "---"
+          echo "--- DB ---"
           docker logs db.catroweb.test
+          echo "--- Chrome ---"
+          docker logs chrome.catroweb
 
       - uses: actions/upload-artifact@v1
         if: failure()

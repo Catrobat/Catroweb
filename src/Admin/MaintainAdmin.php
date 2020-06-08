@@ -23,9 +23,6 @@ class MaintainAdmin extends AbstractAdmin
     $collection->clearExcept(['list']);
     $collection->add('apk')
       ->add('extracted')
-      ->add('delete_backups')
-      ->add('create_backup')
-      ->add('restore_backup')
       ->add('archive_logs')
       ->add('delete_logs')
     ;
