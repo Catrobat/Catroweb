@@ -148,7 +148,6 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   {
     $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
     $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
-    //$collection->add('deleteAllApk');
     $collection->add('rebuildAllApk');
     $collection->add('resetAllApk');
     $collection->remove('create')->remove('delete')->remove('export');
