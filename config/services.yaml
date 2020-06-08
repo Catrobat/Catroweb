@@ -230,6 +230,7 @@ services:
     class: App\Catrobat\Services\Ci\JenkinsDispatcher
     arguments:
       - "%jenkins%"
+    public: true
 
   screenshot_repository:
     class: App\Catrobat\Services\ScreenshotRepository

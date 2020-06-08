@@ -26,7 +26,7 @@ Feature: APK-Generation Pending in Admin Area
       | 1  | Superman | program 1 | May 27, 2020 10:00 | ready      |
       | 3  | Adminius | program 3 |                    | none       |
 
-  Scenario: The Rebuild button should rebuild apk and set state to pending
+  Scenario: The rebuild button should rebuild apk and set state to pending
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/apk_pending_requests/list"
     And I wait for the page to be loaded
@@ -38,7 +38,7 @@ Feature: APK-Generation Pending in Admin Area
       | 2  | Gregor   | program 2 | May 27, 2020 11:00 | none       |
       | 1  | Superman | program 1 | May 27, 2020 10:00 | ready      |
 
-  Scenario: The Reset button should reset the apk status and the request time
+  Scenario: The reset button should reset the apk status and the request time
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/apk_pending_requests/list"
     And I wait for the page to be loaded
