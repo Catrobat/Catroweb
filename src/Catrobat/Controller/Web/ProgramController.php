@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Events\CheckScratchProgramEvent;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
@@ -33,6 +34,7 @@ use ImagickException;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +58,7 @@ class ProgramController extends AbstractController
   private TranslatorInterface $translator;
   private RudeWordFilter $rude_word_filter;
   private ParameterBagInterface $parameter_bag;
+  private EventDispatcherInterface $event_dispatcher;
 
   public function __construct(StatisticsService $statistics_service,
                               RemixManager $remix_manager,
@@ -68,7 +71,8 @@ class ProgramController extends AbstractController
                               CatroNotificationService $notification_service,
                               TranslatorInterface $translator,
                               RudeWordFilter $rude_word_filter,
-                              ParameterBagInterface $parameter_bag)
+                              ParameterBagInterface $parameter_bag,
+                              EventDispatcherInterface $event_dispatcher)
   {
     $this->statistics = $statistics_service;
     $this->remix_manager = $remix_manager;
@@ -82,6 +86,7 @@ class ProgramController extends AbstractController
     $this->translator = $translator;
     $this->rude_word_filter = $rude_word_filter;
     $this->parameter_bag = $parameter_bag;
+    $this->event_dispatcher = $event_dispatcher;
   }
 
   /**
@@ -140,6 +145,11 @@ class ProgramController extends AbstractController
     if (!$this->program_manager->isProjectVisibleForCurrentUser($project))
     {
       throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    if ($project->isScratchProgram())
+    {
+      $this->event_dispatcher->dispatch(new CheckScratchProgramEvent($project->getScratchId()));
     }
 
     $viewed = $request->getSession()->get('viewed', []);

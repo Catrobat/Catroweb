@@ -15,6 +15,7 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
  */
 class User extends BaseUser
 {
+  public static string $SCRATCH_PREFIX = 'Scratch:';
   /**
    * @ORM\Id
    * @ORM\Column(name="id", type="guid")
@@ -193,6 +194,11 @@ class User extends BaseUser
    * @ORM\Column(type="boolean", options={"default": false})
    */
   protected bool $limited = false;
+
+  /**
+   * @ORM\Column(type="integer", nullable=true, unique=true)
+   */
+  protected ?int $scratch_user_id = null;
 
   /**
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="reportingUser", fetch="EXTRA_LAZY")
@@ -429,5 +435,30 @@ class User extends BaseUser
   public function changeCreatedAt(\DateTime $createdAt): void
   {
     $this->createdAt = $createdAt;
+  }
+
+  public function getScratchUserId(): ?int
+  {
+    return $this->scratch_user_id;
+  }
+
+  public function isScratchUser(): bool
+  {
+    return null !== $this->scratch_user_id;
+  }
+
+  public function setScratchUsername(string $username): void
+  {
+    $this->setUsername(self::$SCRATCH_PREFIX.$username);
+  }
+
+  public function getScratchUsername(): string
+  {
+    return preg_replace('/^'.self::$SCRATCH_PREFIX.'/', '', $this->getUsername());
+  }
+
+  public function setScratchUserId(?int $scratch_user_id): void
+  {
+    $this->scratch_user_id = $scratch_user_id;
   }
 }

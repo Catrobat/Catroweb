@@ -82,9 +82,12 @@
   }
 }
 
-.follow-button-container {
+.button-container {
   align-self: flex-end;
   text-align: right;
+  button {
+    margin-bottom: 0.2em;
+  }
 }
 
 .img-lock,
@@ -139,12 +142,12 @@
 }
 
 .profile {
-    .follow-button-container button {
-      min-width: 150px;
+  .button-container button {
+    min-width: 150px;
 
-      @include media-breakpoint-down(xs) {
-        width: 100%;
-        display: block;
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+      display: block;
     }
   }
 }

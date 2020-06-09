@@ -7,6 +7,7 @@ use App\Catrobat\StatusCode;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use App\Utils\Utils;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Google_Client;
@@ -343,20 +344,6 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
-  public function randomPassword(): string
-  {
-    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    $pass = []; //remember to declare $pass as an array
-    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-    for ($i = 0; $i < 8; ++$i)
-    {
-      $n = random_int(0, $alphaLength);
-      $pass[] = $alphabet[$n];
-    }
-
-    return implode('', $pass); //turn the array into a string
-  }
-
   /**
    * @throws Exception
    */
@@ -431,7 +418,7 @@ class OAuthService
       $user->setGplusUid($googleId);
       $user->setUsername($googleUsername);
       $user->setEmail($googleEmail);
-      $user->setPlainPassword($this->randomPassword());
+      $user->setPlainPassword(Utils::randomPassword());
       $user->setEnabled(true);
       $user->setCountry($locale);
       if ($id_token)

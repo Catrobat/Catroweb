@@ -3303,6 +3303,14 @@ class ApiContext implements KernelAwareContext
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
 
+  /**
+   * @Then /^I should be redirected to a catrobat program$/
+   */
+  public function iShouldBeRedirectedToACatrobatProgram(): void
+  {
+    Assert::assertStringStartsWith('/app/project/', $this->getKernelBrowser()->getRequest()->getPathInfo());
+  }
+
   private function findProgram(array $programs, string $wanted_program_name): array
   {
     foreach ($programs as $program)

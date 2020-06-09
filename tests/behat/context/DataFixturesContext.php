@@ -1153,4 +1153,15 @@ class DataFixturesContext implements KernelAwareContext
     }
     $this->getManager()->flush();
   }
+
+  /**
+   * @Then /^there should be "([^"]*)" users in the database$/
+   *
+   * @param mixed $number_of_users
+   */
+  public function thereShouldBeUsersInTheDatabase($number_of_users): void
+  {
+    $users = $this->getUserManager()->findAll();
+    Assert::assertCount($number_of_users, $users);
+  }
 }

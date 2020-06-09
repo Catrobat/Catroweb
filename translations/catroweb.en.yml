@@ -276,6 +276,7 @@ profile:
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
 
 myprofile:
   editProfile: Edit profile
@@ -702,6 +703,7 @@ api:
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
