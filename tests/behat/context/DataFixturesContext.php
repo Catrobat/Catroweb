@@ -38,6 +38,7 @@ use Exception;
 use ImagickException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Process\Process;
 
 class DataFixturesContext implements KernelAwareContext
 {
@@ -46,6 +47,16 @@ class DataFixturesContext implements KernelAwareContext
   private array $programs = [];
   private array $featured_programs = [];
   private array $media_files = [];
+
+  /**
+   * @AfterFeature
+   * @BeforeFeature
+   */
+  public static function resetElastic(): void
+  {
+    $process = new Process(['bin/console', 'fos:elastica:reset', '-q']);
+    $process->run();
+  }
 
   /**
    * @Given the next Uuid Value will be :id

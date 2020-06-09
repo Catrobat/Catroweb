@@ -4,6 +4,7 @@ namespace App\Catrobat\Controller\Api;
 
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\ProgramManager;
+use Elastica\Query;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,12 +42,20 @@ class SearchController extends AbstractController
       return new ProgramListResponse([], 0);
     }
 
-    $programs = $program_manager->search($query, $limit, $offset, $max_version);
     // we can't count the results since we apply limit and offset.
     // so we indeed have to use a separate query that ignores
     // limit and offset to get the number of results.
 
-    $numbOfTotalProjects = $program_manager->searchCount($query, $max_version);
+    try
+    {
+      $programs = $program_manager->search($query, $limit, $offset, $max_version);
+      $numbOfTotalProjects = $program_manager->searchCount($query, $max_version);
+    }
+    catch (Exception $e)
+    {
+      $programs = [];
+      $numbOfTotalProjects = 0;
+    }
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }

@@ -26,6 +26,7 @@ use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Exception;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -110,13 +111,14 @@ class ProgramManagerTest extends TestCase
     $extension_repository = $this->createMock(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
     $notification_service = $this->createMock(CatroNotificationService::class);
+    $program_finder = $this->createMock(TransformedFinder::class);
     $urlHelper = new UrlHelper(new RequestStack());
 
     $this->program_manager = new ProgramManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
       $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
       $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
-      $catrobat_file_sanitizer, $notification_service, $urlHelper
+      $catrobat_file_sanitizer, $notification_service, $program_finder, $urlHelper
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');

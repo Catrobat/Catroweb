@@ -28,6 +28,7 @@ Feature: Searching for programs
       | 6  | test advanced games |             | User1    |  2,3   |  lego     | 22.04.2014 14:00 | 0.8.5   |
       | 7  | test                |             | Catrobat |  3,2   |  lego     | 22.04.2014 14:00 | 0.8.5   |
       | 8  | project test        |   catrobat  | User1    |   1    |  drone    | 22.04.2014 14:00 | 0.8.5   |
+    And I wait 1000 milliseconds
 
 
   Scenario: search for programs, which contain the word "program"
@@ -69,16 +70,6 @@ Feature: Searching for programs
     And I wait for the page to be loaded
     Then I should see "Your search returned 0 results"
 
-  Scenario: search for projects, which contain the word "catrobat"
-    Given I am on "/app/search/catrobat"
-    And I wait for the page to be loaded
-    Then I should see "Your search returned 5 results"
-    Then I should see "Test advanced app"
-    Then I should see "Catrobat"
-    Then I should see "project 3"
-    Then I should see "test"
-    Then I should see "project test"
-
   Scenario: search for projects, which contain the word "lego"
     Given I am on "/app/search/lego"
     And I wait for the page to be loaded
@@ -97,15 +88,3 @@ Feature: Searching for programs
     Given I am on "/app/search/gmx.at"
     And I wait for the page to be loaded
     Then I should see "Your search returned 0 results"
-
-  Scenario: Progress bar should be displayed when there are many search results being loaded
-    Given there are "2500" similar projects
-    And I am on "/app/search/basic"
-    Then the element ".circular-progress" should be visible
-    And I wait for the page to be loaded
-    Then I should see "Your search returned 2500 results"
-    And the element ".circular-progress" should not be visible
-    Then I should see "basic 1"
-    Then I should see "basic 2"
-    Then I should see "basic 3"
-    Then I should see "basic 4"

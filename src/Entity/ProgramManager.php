@@ -29,7 +29,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\ORMException;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\QueryString;
+use Elastica\Query\Terms;
+use Elastica\Util;
 use Exception;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 use FOS\UserBundle\Model\UserInterface;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -71,6 +76,8 @@ class ProgramManager
 
   private ?UrlHelper $urlHelper;
 
+  private TransformedFinder $program_finder;
+
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
@@ -80,7 +87,7 @@ class ProgramManager
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
-                              CatroNotificationService $notification_service,
+                              CatroNotificationService $notification_service, TransformedFinder $program_finder,
                               UrlHelper $urlHelper = null)
   {
     $this->file_extractor = $file_extractor;
@@ -99,6 +106,7 @@ class ProgramManager
     $this->extension_repository = $extension_repository;
     $this->notification_service = $notification_service;
     $this->urlHelper = $urlHelper;
+    $this->program_finder = $program_finder;
   }
 
   public function getFeaturedRepository(): FeaturedRepository
@@ -727,14 +735,18 @@ class ProgramManager
 
   public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '0', ?string $flavor = null): array
   {
-    return $this->program_repository->search(
-      $query, $this->app_request->isDebugBuildRequest(), $limit, $offset, $max_version, $flavor
-    );
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+
+    return $this->program_finder->find($program_query, $limit, ['from' => $offset]);
   }
 
   public function searchCount(string $query, string $max_version = '0', ?string $flavor = null): int
   {
-    return $this->program_repository->searchCount($query, $this->app_request->isDebugBuildRequest(), $max_version, $flavor);
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+
+    $paginator = $this->program_finder->findPaginated($program_query);
+
+    return $paginator->getNbResults();
   }
 
   /**
@@ -967,6 +979,43 @@ class ProgramManager
     return $this->program_repository->getProgram(
       $id, $this->app_request->isDebugBuildRequest()
     );
+  }
+
+  private function programSearchQuery(string $query, string $max_version = '0', ?string $flavor = null): BoolQuery
+  {
+    $query = Util::escapeTerm($query);
+
+    $words = explode(' ', $query);
+    foreach ($words as &$word)
+    {
+      $word = $word.'*';
+    }
+    unset($word);
+    $query = implode(' ', $words);
+
+    $query_string = new QueryString();
+    $query_string->setQuery($query);
+    $query_string->setFields(['id', 'name', 'description', 'getTagsString', 'getExtensionsString']);
+    $query_string->setAnalyzeWildcard();
+    $query_string->setDefaultOperator('AND');
+
+    $category_query[] = new Terms('private', [false]);
+    $category_query[] = new Terms('visible', [true]);
+
+    if ('0' !== $max_version)
+    {
+      $category_query[] = new Terms('language_version', [$max_version]);
+    }
+    if (null !== $flavor)
+    {
+      $category_query[] = new Terms('flavor', [$flavor]);
+    }
+
+    $bool_query = new BoolQuery();
+    $bool_query->addMust($category_query);
+    $bool_query->addMust($query_string);
+
+    return $bool_query;
   }
 
   private function notifyFollower(Program $program): void

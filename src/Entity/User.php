@@ -6,12 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user", indexes={@Index(columns={"username"}, flags={"fulltext"})})
+ * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
 {

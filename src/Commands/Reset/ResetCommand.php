@@ -117,6 +117,14 @@ class ResetCommand extends Command
       ['bin/console', 'catrobat:create:media-packages-samples'], [], 'Creating sample Media Packages', $output
     );
 
+    // Resetting Elastic
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'fos:elastica:reset', '-q'], [], 'Resetting', $output
+    );
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'fos:elastica:populate', '-q'], [], 'Populating data', $output
+    );
+
     $output->writeln('Reset Done');
 
     return 0;
