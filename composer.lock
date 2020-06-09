@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8550819d809ab7ccfcc7675a2945495",
+    "content-hash": "67ae2db50817559f9a7f62eae19ff92a",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -62,16 +62,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.0.39",
+            "version": "v1.0.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "3a53243c7c5a3517e9d31972da3319e3c34f01d9"
+                "reference": "60aa9aee7cc344a65ec41ce2cad6eb8fd1c6b95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/3a53243c7c5a3517e9d31972da3319e3c34f01d9",
-                "reference": "3a53243c7c5a3517e9d31972da3319e3c34f01d9",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/60aa9aee7cc344a65ec41ce2cad6eb8fd1c6b95e",
+                "reference": "60aa9aee7cc344a65ec41ce2cad6eb8fd1c6b95e",
                 "shasum": ""
             },
             "require": {
@@ -114,10 +114,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.39",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.40",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2020-06-02T09:03:50+00:00"
+            "time": "2020-06-09T11:06:10+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -3679,16 +3679,16 @@
         },
         {
             "name": "phpoption/phpoption",
-            "version": "1.7.3",
+            "version": "1.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae"
+                "reference": "b2ada2ad5d8a32b89088b8adc31ecd2e3a13baf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
-                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/b2ada2ad5d8a32b89088b8adc31ecd2e3a13baf3",
+                "reference": "b2ada2ad5d8a32b89088b8adc31ecd2e3a13baf3",
                 "shasum": ""
             },
             "require": {
@@ -3730,7 +3730,7 @@
                 "php",
                 "type"
             ],
-            "time": "2020-03-21T18:07:53+00:00"
+            "time": "2020-06-07T10:40:07+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
