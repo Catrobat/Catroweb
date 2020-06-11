@@ -18,7 +18,6 @@ Feature: As a visitor I want to see a project page
     And I should see "0.00 MB"
     And I should see "5 downloads"
     And I should see "43 views"
-    And I should see "0 remixes"
 
   Scenario: Increasing download counter after an APK download
     Given I am on "/app/project/1"

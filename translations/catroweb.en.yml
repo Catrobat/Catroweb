@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure:  Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: DOWNLOAD
 description: Description
 noDescription: No description available.
 credits: Credits
@@ -27,13 +27,14 @@ country: Country
 loginText: login
 privacyPolicy: Privacy Policy
 imprint: Imprint
+programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
 pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
+show-more: 'MORE INFORMATION'
+show-less: 'LESS INFORMATION'
 ok: OK
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
@@ -179,9 +180,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: 'REMIX GRAPH'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
@@ -616,9 +618,9 @@ login:
   passwordSecond: Password Confirm
 
 apk:
-  download: Download as app
-  prepare: 'Prepare app'
-  preparing: 'Preparing app'
+  download: DOWNLOAD AS APP
+  prepare: 'GET AS APP'
+  preparing: 'PREPARING APP'
   text: 'The process may take a while'
 
 format:

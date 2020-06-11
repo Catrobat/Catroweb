@@ -390,7 +390,6 @@ $galaxy-button-background-color: #9583b2;
 .title-color-right {
   color: $theme-logo-color-secondary;
 }
-
 .upload-image {
   position: relative;
   top: -45px;
@@ -440,6 +439,28 @@ $galaxy-button-background-color: #9583b2;
     }
   }
 }
+.upload-project-image {
+  position: absolute;
+  bottom: 0;
+  right: -20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  .button-show-ajax {
+    margin: 0 auto;
+  }
+    input {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0.001;
+      cursor: pointer;
+    }
+  }
+
 
 .swal2-styled {
   &.swal2-confirm {

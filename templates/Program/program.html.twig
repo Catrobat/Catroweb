@@ -12,7 +12,6 @@
   {% if isVersionSupportedByCatBlocks(program_details.languageVersion) %}
   <link rel="stylesheet" href="{{ asset('catblocks/main.css') }}"/>
   {% endif %}
-
   <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig) }}"/>
@@ -27,249 +26,445 @@
 {% endblock %}
 
 {% block body %}
-
-  <h1 id="program-name">{{ program.name }}</h1>
-
-  <div id="program-middle">
-    <div id="image" class="image-container">
-
+  <div class="row">
+    <div class="col-5 col-sm-4 col-md-4 col-lg-3">
       {% include 'Program/projectThumbnail.html.twig' %}
-
-      <div id="project-like">
+    </div>
+    <div class="col-7 col-sm-8 col-md-8 col-lg-6">
+      <h1 class="h2 buttons-small">{{ program.name }}</h1>
+      <a href="{{ url('profile', { id : program.user.id }) }}"
+         class="icon-text align-bottom" id="program-owner-username">
+        <i class="material-icons pr-2" id="user-profile-icon">person</i>
+        {{ program.user }}</a>
+      <div class="program-date mt-2 buttons-small">
+        <i class="material-icons">query_builder</i>
+        <span class="icon-text ml-2 align-bottom">{{ program_details.age }}</span>
+      </div>
+      <i class="material-icons mt-2">description</i>
+      <span class="icon-text ml-2 align-bottom mt-2">{{ program_details.filesize }} MB</span>
+      <div id="project-like" class="d-none d-lg-block mt-3">
         {# If you change #project-like-buttons, you need to change it in Program.js in sendProjectLike too #}
         {% if program_details.totalLikeCount is same as(0) %}
           <div id="project-like-buttons">
-            <div class="btn btn-primary btn-round">
-              <i class="fas fa-thumbs-up"></i>
+            <div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+              <span class="material-icons md-28">
+                thumb_up
+              </span>
             </div>
           </div>
-          <span id="project-like-counter" class="d-none">0</span>
+          <span id="project-like-counter" class="d-none ml-3 align-bottom">0</span>
         {% else %}
-          <div id="project-like-buttons">
+          <div id="project-like-buttons" style="display: inline">
             {% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeLikeTypes %}
-              <div class="btn btn-primary btn-round">
-                <i class="fas fa-thumbs-up"></i>
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                <i class="material-icons md-28">
+                  thumb_up
+                </i>
               </div>
             {% endif %}
             {% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeLikeTypes %}
-              <div class="btn icon-only">
-                <i class="fas fa-grin-squint"></i>
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                <i class="material-icons md-28">
+                  sentiment_very_satisfied
+                </i>
               </div>
             {% endif %}
             {% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeLikeTypes %}
-              <div class="btn btn-primary btn-round">
-                <i class="fas fa-heart"></i>
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                <i class="material-icons md-28">
+                  favorite
+                </i>
               </div>
             {% endif %}
             {% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeLikeTypes %}
-              <div class="btn icon-only">
-                <i class="fas fa-surprise"></i>
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center" id="wow-reaction">
+                <img alt="Wow reaction" id="wow-reaction-img" src="{{ asset('images/default/wow_white.svg') }}">
               </div>
             {% endif %}
           </div>
-          <span id="project-like-counter">{{ program_details.totalLikeCount | humanFriendlyNumber }}</span>
+          <span class="ml-3 align-bottom" id="project-like-counter">{{ program_details.totalLikeCount | humanFriendlyNumber }}
+            {{ 'programs.reactionsText'|trans({}, 'catroweb') }}</span>
         {% endif %}
         <div id="project-like-detail">
           {# Thumbs-Up Button #}
           <div
-                  class="btn btn-primary btn-round{% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeUserLikeTypes %} active{% endif %}"
-                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
-                  data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
-            <i class="fas fa-thumbs-up"></i>
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
+              data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
+            <i class="material-icons md-24">
+              thumb_up
+            </i>
           </div>
           {# Smile Button #}
           <div
-                  class="btn icon-only{% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeUserLikeTypes %} active{% endif %}"
-                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_SMILE') }}"
-                  data-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
-            <i class="fas fa-grin-squint"></i>
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_SMILE') }}"
+              data-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
+            <i class="material-icons md-24">
+              sentiment_very_satisfied
+            </i>
           </div>
           {# Love Button #}
           <div
-                  class="btn btn-primary btn-round{% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeUserLikeTypes %} active{% endif %}"
-                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_LOVE') }}"
-                  data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
-            <i class="fas fa-heart"></i>
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_LOVE') }}"
+              data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
+            <span class="material-icons md-24">
+              favorite
+            </span>
           </div>
           {# Wow Button #}
           <div
-                  class="btn icon-only{% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeUserLikeTypes %} active{% endif %}"
-                  data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_WOW') }}"
-                  data-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
-            <i class="fas fa-surprise"></i>
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_WOW') }}"
+              data-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
+            <img alt="Wow reaction" id="wow-reaction-img-small" src="{{ asset('images/default/wow_white.svg') }}">
           </div>
         </div>
       </div>
-
-      <div class="modal fade" id="project-like-modal" tabindex="-1" role="dialog"
-           aria-labelledby="project-like-modal-label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title"
-                  id="project-like-modal-label">{{ "programs.likes.likersTitle"|trans({}, 'catroweb') }}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+    </div>
+    <div class="col-lg-3 mt-4 d-none d-lg-block">
+      <button id="url-download" class="btn btn-primary btn-block"
+              onclick="program.download('{{ program_details.downloadUrl }}','{{ program.id }}',
+                  '#url-download', '{{ checkCatrobatLanguage(program_details.languageVersion) }}', '{{ isWebview() }}',
+                  '#download-pb', '#download-icon')">
+        <i class="material-icons text-left d-none" id="download-pb">
+          {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'download-progressbar', 'small': 'true'} only %}</i>
+        <i class="material-icons" id="download-icon">get_app</i>
+        <span>{{ "download"|trans({}, "catroweb") }}</span>
+      </button>
+      {% if not isIOS() %}
+        <div id="apk-generate" class="mt-3">
+          <button class="btn btn-outline-primary btn-block">
+            <i class="material-icons">casino</i>
+            <span>{{ "apk.prepare"|trans({}, "catroweb") }}</span>
+          </button>
+        </div>
+        <div id="apk-pending" class="text-center mt-3 align-content-center d-none">
+          <button class="btn btn-primary btn-block">
+            <i class="material-icons text-left">
+              {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'apk-progressbar', 'small': true} %}</i>
+            <span>{{ "apk.preparing"|trans({}, "catroweb") }}</span>
+          </button>
+        </div>
+        <div id="apk-download" class="mt-3 d-none align-items-center text-center">
+          <button class="btn btn-primary btn-block">
+            <i class="material-icons">casino</i>
+            <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
+          </button>
+        </div>
+      {% endif %}
+      <div id="remix-graph-button" class="text-center mt-3">
+        <button class="btn btn-outline-primary btn-block">
+          <i class="material-icons text-left d-none">
+            {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'code-view-spinner', 'small': true} %}</i>
+          <i class="material-icons">call_split</i>
+          <span>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5 col-sm-4 mt-3 d-lg-none">
+      <div id="project-like-small">
+        {# If you change #project-like-buttons, you need to change it in Program.js in sendProjectLike too #}
+        {% if program_details.totalLikeCount is same as(0) %}
+          <div id="project-like-buttons-small">
+            <div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+              <i class="material-icons thumbs-up md-24">
+                thumb_up
+              </i>
             </div>
-            <div class="modal-body">
-              <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all-tab-content" role="tab"
-                     aria-controls="all-tab-content"
-                     aria-selected="true">{{ 'programs.likes.all' | trans({}, 'catroweb') }}<span></span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="thumbs-up-tab" data-toggle="tab" href="#thumbs-up-tab-content" role="tab"
-                     aria-controls="thumbs-up-tab-content" aria-selected="false"><i
-                            class="fas fa-thumbs-up"></i><span></span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="smile-tab" data-toggle="tab" href="#smile-tab-content" role="tab"
-                     aria-controls="smile-tab-content" aria-selected="false"><i
-                            class="fas fa-grin-squint"></i><span></span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="love-tab" data-toggle="tab" href="#love-tab-content" role="tab"
-                     aria-controls="love-tab-content" aria-selected="false"><i
-                            class="fas fa-heart"></i><span></span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="wow-tab" data-toggle="tab" href="#wow-tab-content" role="tab"
-                     aria-controls="wow-tab-content" aria-selected="false"><i
-                            class="fas fa-surprise"></i><span></span></a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="all-tab-content" role="tabpanel"
-                     aria-labelledby="all-tab"></div>
-                <div class="tab-pane fade" id="thumbs-up-tab-content" role="tabpanel"
-                     aria-labelledby="thumbs-up-tab"></div>
-                <div class="tab-pane fade" id="smile-tab-content" role="tabpanel" aria-labelledby="smile-tab"></div>
-                <div class="tab-pane fade" id="love-tab-content" role="tabpanel" aria-labelledby="love-tab"></div>
-                <div class="tab-pane fade" id="wow-tab-content" role="tabpanel" aria-labelledby="wow-tab"></div>
+          </div>
+          <div class="text-nowrap mt-2">
+            <span id="project-like-counter-small" class="like-counter d-none">0</span>
+          </div>
+        {% else %}
+          <div id="project-like-buttons-small" class="buttons-small">
+            {% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeLikeTypes %}
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center">
+                <i class="material-icons md-24 thumbs-up">
+                  thumb_up
+                </i>
               </div>
+            {% endif %}
+            {% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeLikeTypes %}
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center">
+                <i class="material-icons md-24 smile">
+                  sentiment_very_satisfied
+                </i>
+              </div>
+            {% endif %}
+            {% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeLikeTypes %}
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center">
+                <i class="material-icons md-24 love">
+                  favorite
+                </i>
+              </div>
+            {% endif %}
+            {% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeLikeTypes %}
+              <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center" id="wow-reaction">
+                <img alt="Wow reaction" id="wow-reaction-img-small" class="wow" src="{{ asset('images/default/wow_white.svg') }}">
+              </div>
+            {% endif %}
+          </div>
+          <div class="text-nowrap mt-2">
+            <span id="project-like-counter-small" class="like-counter">{{ program_details.totalLikeCount | humanFriendlyNumber }} Reactions</span>
+          </div>
+        {% endif %}
+        <div id="project-like-detail-small">
+          {# Thumbs-Up Button #}
+          <div
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
+              data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
+            <i class="material-icons md-24">
+              thumb_up
+            </i>
+          </div>
+          {# Smile Button #}
+          <div
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_SMILE') }}"
+              data-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
+            <span class="material-icons md-24">
+              sentiment_very_satisfied
+            </span>
+          </div>
+          {# Love Button #}
+          <div
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_LOVE') }}"
+              data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
+            <span class="material-icons md-24">
+              favorite
+            </span>
+          </div>
+          {# Wow Button #}
+          <div
+              class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
+              {% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeUserLikeTypes %} active{% endif %}"
+              data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_WOW') }}"
+              data-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
+            <img alt="Wow reaction" id="wow-reaction-img-small" src="{{ asset('images/default/wow_white.svg') }}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-7 col-sm-8 mt-3 d-lg-none">
+      <button id="url-download-small" class="btn btn-primary btn-block url-download buttons-small"
+              onclick="program.download('{{ program_details.downloadUrl }}','{{ program.id }}',
+                  '#url-download-small', '{{ checkCatrobatLanguage(program_details.languageVersion) }}', '{{ isWebview() }}',
+                  '#download-pb-small', '#download-icon-small')">
+        <i class="material-icons text-left d-none" id="download-pb-small">{% include 'Default/progressbar.html.twig' with {'progressbar_id': 'download-progressbar-small', 'small': 'true'} only %}</i>
+        <i class="material-icons" id="download-icon-small">get_app</i>
+        <span>{{ "download"|trans({}, "catroweb") }}</span>
+      </button>
+    </div>
+  </div>
+    <div class="modal fade" id="project-like-modal" tabindex="-1" role="dialog"
+         aria-labelledby="project-like-modal-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"
+                id="project-like-modal-la</div>bel">{{ "programs.likes.likersTitle"|trans({}, 'catroweb') }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all-tab-content" role="tab"
+                   aria-controls="all-tab-content"
+                   aria-selected="true">{{ 'programs.likes.all' | trans({}, 'catroweb') }}<span></span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="thumbs-up-tab" data-toggle="tab" href="#thumbs-up-tab-content" role="tab"
+                   aria-controls="thumbs-up-tab-content" aria-selected="false">
+                  <i class="material-icons md-18 thumbs-up">thumb_up</i><span></span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="smile-tab" data-toggle="tab" href="#smile-tab-content" role="tab"
+                   aria-controls="smile-tab-content" aria-selected="false">
+                  <i class="material-icons md-18 smile">sentiment_very_satisfied</i><span></span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="love-tab" data-toggle="tab" href="#love-tab-content" role="tab"
+                   aria-controls="love-tab-content" aria-selected="false"><i class="material-icons md-18 love">favorite</i><span></span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="wow-tab" data-toggle="tab" href="#wow-tab-content" role="tab"
+                   aria-controls="wow-tab-content" aria-selected="false"><img alt="Wow reaction" id="wow-reaction-modal" class="wow" src="{{ asset('images/default/wow_black.svg') }}">
+                  <span></span></a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="all-tab-content" role="tabpanel"
+                   aria-labelledby="all-tab"></div>
+              <div class="tab-pane fade" id="thumbs-up-tab-content" role="tabpanel"
+                   aria-labelledby="thumbs-up-tab"></div>
+              <div class="tab-pane fade" id="smile-tab-content" role="tabpanel" aria-labelledby="smile-tab"></div>
+              <div class="tab-pane fade" id="love-tab-content" role="tabpanel" aria-labelledby="love-tab"></div>
+              <div class="tab-pane fade" id="wow-tab-content" role="tabpanel" aria-labelledby="wow-tab"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div id="info">
+  <div class="row">
+    <div class="col mt-5 mb-4">
       <div class="h2" id="description-headline">
         <span>
           {{ "description"|trans({}, "catroweb") }}
           {% if app.user and my_program %}
             <a data-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
               <i id="edit-description-button"
-                 class="ml-3 far fa-edit catro-icon-button"></i>
+                 class="ml-3 material-icons catro-icon-button">edit</i>
             </a>
           {% endif %}
         </span>
       </div>
-
-      <div id="description" style="max-height: 300px; overflow: auto;">
-        {% if program.description %}
-          {% if program.description|length <= 250 %}
-            {{ program.description|nl2br }}
-          {% else %}
-            <p>
-              <span>{{ program.description[:250]|nl2br }}</span><!--- NO white space hack
-                  --><span id="descriptionPoints">...</span><!--- NO white space hack
-                  --><span id="descriptionFulltext"
-                           class="fulltext">{{ program.description[250:]|nl2br }}</span>
-            </p>
-            <a id="descriptionShowMoreToggle" aria-expanded="false"
-               aria-controls="descriptionFulltext" href="#"
-               class="toggle-content">
-                  <span id="descriptionShowMoreText" class="text text-capitalize">
-                    {{ ("show-more")|trans({}, "catroweb") }}
-                  </span>
-            </a>
-          {% endif %}
-        {% else %}
-          {{ "noDescription"|trans({}, "catroweb") }}
-        {% endif %}
-      </div>
-
-
       {% if app.user and my_program %}
-        <div id="edit-description-ui">
+        <div id="edit-description-ui" class="d-none">
           <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
           <textarea id="edit-description" name="edit-description" class="mt-2 mb-2"
                     title="_edit-description"
-                    maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
-{% if program.description %}{{ program.description }}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
+                    maxlength="{{ max_description_size }}" style="width: 100%;" rows="10">
+{% if program.description %}{{program.description}}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
           </textarea>
-
           <button id="edit-description-submit-button" class="btn btn-primary p-3 mb-5">
             <i class="fa fa-floppy-o mr-2"></i>
             {{ 'programs.saveDescription'|trans({}, 'catroweb') }}
           </button>
         </div>
       {% endif %}
-
-      <hr>
-
-      <div class="h2" id="credits-headline">
-        <span>
-          {{ "credits"|trans({}, "catroweb") }}
-          {% if app.user and my_program %}
-            <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
-              <i id="edit-credits-button"
-                 class="ml-3 far fa-edit catro-icon-button"></i>
-            </a>
+      <div id="description-credits-container" style="height:auto; overflow: hidden;">
+        <div id="description" class="text-break">
+          {% if program.description %}
+            {{ program.description|nl2br }}
+          {% else %}
+            {{ "noDescription"|trans({}, "catroweb") }}
           {% endif %}
-        </span>
-      </div>
-
-      <div id="credits" style="max-height: 300px; overflow: auto;">
-        {% if program.credits %}
-          {% if program.credits|length <= 250 %}
+        </div>
+        <div class="h2 mt-3" id="credits-headline">
+          <span>
+            {{ "credits"|trans({}, "catroweb") }}
+            {% if app.user and my_program %}
+              <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
+                <i id="edit-credits-button"
+                   class="ml-3 material-icons catro-icon-button">edit</i>
+              </a>
+            {% endif %}
+          </span>
+        </div>
+        <div id="credits" class="text-break">
+          {% if program.credits %}
             {{ program.credits|nl2br }}
           {% else %}
-            <p>
-              <span>{{ program.credits[:250]|nl2br }}</span><!--- NO white space hack
-                --><span id="creditsPoints">...</span><!--- NO white space hack
-                --><span id="creditsFulltext"
-                           class="fulltext">{{ program.credits[250:]|nl2br }}</span>
-            </p>
-            <a id="creditsShowMoreToggle" aria-expanded="false"
-               aria-controls="creditsFulltext" href="#"
-               class="toggle-content">
-              <span id="creditsShowMoreText" class="text text-capitalize">
-                {{ ("show-more")|trans({}, "catroweb") }}
-              </span>
-            </a>
+            {{ "noCredits"|trans({}, "catroweb") }}
           {% endif %}
-        {% else %}
-          {{ "noCredits"|trans({}, "catroweb") }}
-        {% endif %}
+        </div>
       </div>
-
-
-        {% if app.user and my_program %}
-          <div id="edit-credits-ui">
-            <div id="edit-credits-error" style="display:none;" class="alert alert-danger"></div>
-            <textarea id="edit-credits" name="edit-credits" class="mt-2 mb-2"
-                      title="_edit-credits"
-                      maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      {% if app.user and my_program %}
+        <div id="edit-credits-ui" class="d-none">
+          <div class="h2 mt-3" id="credits-headline">
+            <span>
+              {{ "credits"|trans({}, "catroweb") }}
+              {% if app.user and my_program %}
+                <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
+                  <i id="edit-credits-button"
+                     class="ml-3 material-icons catro-icon-button">edit</i>
+                </a>
+              {% endif %}
+            </span>
+          </div>
+          <div id="edit-credits-error" style="display:none;" class="alert alert-danger"></div>
+          <textarea id="edit-credits" name="edit-credits" class="mt-2 mb-2"
+                    title="_edit-credits"
+                    maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
 {% if program.credits %}{{ program.credits }}{% else %}{{ "noCredits"|trans({}, "catroweb") }}{% endif %}
           </textarea>
-
-            <button id="edit-credits-submit-button" class="btn btn-primary p-3 mb-5">
-              <i class="fa fa-floppy-o mr-2"></i>
-              {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
+          <button id="edit-credits-submit-button" class="btn btn-primary p-3 mb-5">
+            <i class="fa fa-floppy-o mr-2"></i>
+            {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
+          </button>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <a id="descriptionShowMoreToggle" aria-expanded="false"
+         aria-controls="descriptionFulltext" href="#"
+         class="toggle-content d-none">
+        <i class="material-icons">keyboard_arrow_down</i>
+        <span id="descriptionShowMoreText" class="text text-capitalize">
+          {{ ("show-more")|trans({}, "catroweb") }}
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+      {% if not isIOS()%}
+        <div class="col-6 mb-3 d-lg-none mt-3">
+          <div id="apk-generate-small" class="text-center">
+            <button class="btn btn-outline-primary btn-block buttons-small">
+              <i class="material-icons">casino</i>
+              <span>{{ "apk.prepare"|trans({}, "catroweb") }}</span>
             </button>
           </div>
-        {% endif %}
-        <hr>
-
-
-
-      {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+          <div id="apk-pending-small" class="text-center align-content-center d-none">
+            <button class="btn btn-primary btn-block buttons-small">
+              <i class="material-icons text-left">{% include 'Default/progressbar.html.twig' with {'progressbar_id': 'apk-progressbar', 'small': true} %}</i>
+              <span>{{ "apk.preparing"|trans({}, "catroweb") }}</span>
+            </button>
+          </div>
+          <div id="apk-download-small" class="d-none">
+            <button class="btn btn-primary">
+              <i class="material-icons text-left d-none">{% include 'Default/progressbar.html.twig' with {'progressbar_id': 'download-spinner', 'small': true} %}</i>
+              <i class="material-icons">casino</i>
+              <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-6 mb-3 d-lg-none mt-3">
+          <div id="remix-graph-button-small" class="text-center remix-graph">
+            <button class="btn btn-outline-primary btn-block buttons-small">
+              <i class="material-icons text-left d-none">{% include 'Default/progressbar.html.twig' with {'progressbar_id': 'remix-graph-spinner', 'small': true} %}</i>
+              <i class="material-icons">call_split</i>
+              <span>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</span>
+            </button>
+          </div>
+        </div>
+    {% else %}
+    <div class="col-12 mb-3 d-lg-none">
+      <div id="remix-graph-button" class="text-center">
+        <button class="btn btn-outline-primary btn-block buttons-small">
+          <i class="material-icons text-left d-none">{% include 'Default/progressbar.html.twig' with {'progressbar_id': 'code-view-spinner', 'small': true} %}</i>
+          <i class="material-icons">call_split</i>
+          <span>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</span>
+        </button>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+    <div class="row">
+      <div class="col-12 mb-3">
         <div id="tag-extension-container">
-
           {% if program.extensions|length > 0 %}
             <div id="extensions">
               <p>{{ ("extenstion-text")|trans({}, "catroweb") }}:</p>
@@ -281,157 +476,107 @@
               </div>
             </div>
           {% endif %}
-
           {% if  program.tags|length > 0 %}
             <div id="tags">
-              <p>{{ ("tag-text")|trans({}, "catroweb") }}:</p>
               <div class="list">
                 {% for tag in program.tags %}
-                  <a class="rec-programs badge badge-primary"
+                  <a class="rec-programs badge badge-pill badge-primary"
                      href="{{ url('tag_search', { q : tag.id }) }}">{{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</a>
                 {% endfor %}
               </div>
             </div>
           {% endif %}
-
         </div>
-      {% endif %}
-
-      <div class="download-container">
-
-        <div class="btn-container col-12 col-xl-6">
-          <button id="url-download" class="btn btn-primary"
-                  onclick="program.download('{{ program_details.downloadUrl }}','{{ program.id }}', '#url-download', {{ checkCatrobatLanguage(program_details.languageVersion) }}, {{ isWebview() }})">
-            <i class="program-big-button-icon mr-3 fa fa-download"></i>
-            <span>{{ "download"|trans({}, "catroweb") }}</span>
-          </button>
-        </div>
-
-        <div id="remix-graph-button" class="btn-container col-12 col-xl-6">
-          <button class="btn btn-primary">
-            <i class="program-big-button-icon mr-3 fa fa-sitemap"></i>
-            <span>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</span>
-          </button>
-        </div>
-
-        {% if not isIOS() %}
-        <div id="apk-generate" class="btn-container col-12 col-xl-6">
-          <button class="btn btn-primary">
-            <i class="program-big-button-icon mr-3 fab fa-android"></i>
-            <span>{{ "apk.prepare"|trans({}, "catroweb") }}</span>
-          </button>
-        </div>
-
-        <div id="apk-pending" class="btn-container col-12 col-xl-6 d-none">
-          <button class="btn btn-primary">
-            <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw"
-               aria-hidden="true"></i>
-            <span>{{ "apk.preparing"|trans({}, "catroweb") }}</span>
-          </button>
-        </div>
-
-        <div id="apk-download" class="btn-container col-12 col-xl-6 d-none">
-          <button class="btn btn-primary">
-            <i class="program-big-button-icon mr-3 fab fa-android"></i>
-            <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
-          </button>
-        </div>
-        {% endif %}
       </div>
-
-      {% if not program.gamejam or not program.acceptedforgamejam %}
-        {% if jam %}
-          <div id="gamejam-div">
-            <a href="{% if app.user %} {{ url('gamejam_web_submit', { "id": program.id }) }}{% else %}{{ url('login') }}{% endif %}"
-               title="{{ jam.name }}">
-              <button id="gamejam-submission" class="btn btn-jam download-button">
-                <table>
-                  <tr>
-                    <td><img src="{{ asset( jam.logo_url ) }}"></td>
-                    <td>{{ "gamejam.submit"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</td>
-                  </tr>
-                </table>
-              </button>
-            </a>
-          </div>
-          <div id="gamejam-whats">
-            <a href="{{ jam.gamejam_url }}">{{ "gamejam.whats"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</a>
-          </div>
-        {% endif %}
-      {% endif %}
-      <div class="clear"></div>
     </div>
-  </div>
-
+  {% endif %}
+  {% if not program.gamejam or not program.acceptedforgamejam %}
+    {% if jam %}
+    <div class="row">
+      <div class="col-12 mb-3 mt-4">
+        <div id="gamejam-div">
+          <a href="{% if app.user %} {{ url('gamejam_web_submit', { "id": program.id }) }}{% else %}{{ url('login') }}{% endif %}"
+             title="{{ jam.name }}">
+            <button id="gamejam-submission" class="btn btn-jam download-button">
+              <table>
+                <tr>
+                  <td><img src="{{ asset( jam.logo_url ) }}"></td>
+                  <td>{{ "gamejam.submit"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</td>
+                </tr>
+              </table>
+            </button>
+          </a>
+        </div>
+        <div id="gamejam-whats">
+          <a href="{{ jam.gamejam_url }}">{{ "gamejam.whats"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endif %}
   {% include 'Program/program_details_accordion.html.twig' %}
-
-  <div id="program-bottom">
-    <div id="program-bottom-container">
-      <div id="icon-author">
-        <div class="program-round-icon-container"><i class="program-round-icon fas fa-user"></i></div>
-        <a href="{{ url('profile', { id : program.user.id }) }}"
-           class="icon-text">{{ program.user }}</a>
-      </div>
-      <div>
-        <div class="program-round-icon-container"><i class="program-round-icon far fa-clock"></i>
-        </div>
-        <span class="icon-text">{{ program_details.age }}</span>
-      </div>
-      <div>
-        <div class="program-round-icon-container"><i class="program-round-icon fas fa-file-alt"></i>
-        </div>
-        <span class="icon-text">{{ program_details.filesize }} MB</span>
-      </div>
-      <div>
-        <div class="program-round-icon-container"><i class="program-round-icon fas fa-download"></i>
-        </div>
-        <span
-            class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
+  <div class="row mt-4">
+    <div class="h2">
+      <div class="col-12">
+        <span>
+          {{ "programDetails"|trans({}, "catroweb") }}
         </span>
       </div>
-      <div>
-        <div class="program-round-icon-container"><i class="program-round-icon fas fa-eye"></i></div>
-        <span
-            class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
-      </div>
-      <div>
-        <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i>
-        </div>
-        <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text">
-          {{ "programs.remixes"|trans({ '%count%': program_details.remixesLength, '%remixes%' : program_details.remixesLength }, "catroweb") }}
-        </a>
-      </div>
     </div>
   </div>
-
+  <div class="row mt-2 mb-4" id="details">
+    <div class="col-6">
+      <i class="material-icons pr-2" id="user-profile-icon">person</i>
+      <span>{{ program.user }}</span>
+    </div>
+    <div class="col-6 buttons-small">
+      <i class="material-icons">visibility</i>
+      <span class="icon-text ml-2 mt-2">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
+    </div>
+    <div class="col-6 mt-3 buttons-small">
+      <i class="material-icons">query_builder</i>
+      <span class="icon-text ml-2 align-bottom">{{ program_details.age }}</span>
+    </div>
+    <div class="col-6 mt-3 buttons-small">
+      <i class="material-icons">call_split</i>
+      <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text ml-2">
+        {{ "programs.remixes"|trans({ '%count%': program_details.remixesLength, '%remixes%' : program_details.remixesLength }, "catroweb") }}
+      </a>
+    </div>
+    <div class="col-6 mt-3 buttons-small">
+      <i class="material-icons">description</i>
+      <span class="icon-text ml-2">{{ program_details.filesize }} MB</span>
+    </div>
+    <div class="col-6 mt-3 buttons-small">
+      <i class="material-icons ">get_app</i>
+      <span
+          class="icon-text ml-2">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
+      </span>
+    </div>
+  </div>
   <div id="remix-graph-modal">
     <div class="close-remix-graph-modal">
       <i class="fas fa-times-circle catro-icon-button remix-close-icon"></i>
     </div>
     <div id="remix-graph-layer" class="modal-content"></div>
   </div>
-
-  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
-    <div id="recommendations">
-      <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
-      <div class="programs"></div>
-    </div>
-  {% endif %}
-
-  <div id="specific-programs-recommendations">
-    <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
-    <div class="programs"></div>
-  </div>
-
-  {% if not(app.user and my_program) %}
-  <div id="more-from-this-user-recommendations">
-    <h2>{{ 'recommender.moreFromThisUser'|trans({"%username%": program.user.username }, 'catroweb') }}</h2>
-    <div class="programs"></div>
-  </div>
-  {% endif %}
-
+      {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+        <div id="recommendations">
+          <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
+          <div class="programs"></div>
+        </div>
+      {% endif %}
+      <div id="specific-programs-recommendations">
+        <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
+        <div class="programs"></div>
+      </div>
+      {% if not(app.user and my_program) %}
+        <div id="more-from-this-user-recommendations">
+          <h2>{{ 'recommender.moreFromThisUser'|trans({"%username%": program.user.username }, 'catroweb') }}</h2>
+          <div class="programs"></div>
+        </div>
+      {% endif %}
   {% include 'Program/programComments.html.twig' %}
-
 {% endblock %}
 
 {% block js %}
@@ -559,6 +704,9 @@
       '{{ constant('App\\Entity\\ProgramLike::ACTION_ADD') }}',
       '{{ constant('App\\Entity\\ProgramLike::ACTION_REMOVE') }}',
       '{{ path('profile', {'id': 'USERID'}) }}',
+      '{{ asset('images/default/wow_white.svg') }}',
+      '{{ asset('images/default/wow_black.svg') }}',
+      '{{ 'programs.reactionsText'|trans({}, 'catroweb') }}',
     )
     var recs = new ProjectLoader('#recommendations', '{{ path('api_recsys_programs') }}', '{{ program.id }}')
     var specificRecommender = new ProjectLoader(

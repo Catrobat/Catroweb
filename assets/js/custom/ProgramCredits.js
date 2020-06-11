@@ -9,34 +9,35 @@ function ProgramCredits (programId, showMoreButtonText, showLessButtonText,
   $(function () {
     const credits = $('#credits')
     const editCreditsUI = $('#edit-credits-ui')
-    const editCreditsButton = $('#edit-credits-button')
+    const editCreditsButton = $('i[id=edit-credits-button]')
     const editCredits = $('#edit-credits')
     const editCreditsSubmitButton = $('#edit-credits-submit-button')
     const editCreditsError = $('#edit-credits-error')
-
-    // set default visibilities
-    initCreditsEdit()
-
-    function initCreditsEdit () {
-      editCreditsUI.hide()
-      credits.show()
-    }
+    const descriptionCreditsContainer = $('#description-credits-container')
+    const showMoreToggle = $('#descriptionShowMoreToggle')
+    const descriptionHeadline = $('#description-headline')
 
     editCreditsButton.click(function () {
-      if (credits.is(':visible')) {
-        credits.hide()
-        editCreditsUI.show()
+      if (editCreditsUI.hasClass('d-none')) {
+        descriptionCreditsContainer.hide()
+        descriptionHeadline.hide()
+        editCreditsUI.removeClass('d-none')
+        showMoreToggle.addClass('d-none')
       } else {
-        credits.show()
-        editCreditsUI.hide()
+        descriptionCreditsContainer.show()
+        descriptionHeadline.show()
+        editCreditsUI.addClass('d-none')
+        handleShowMore()
       }
     })
 
     editCreditsSubmitButton.click(function () {
       const newCredits = editCredits.val().trim()
       if (newCredits === credits.text().trim()) {
-        editCreditsUI.hide()
-        credits.show()
+        editCreditsUI.addClass('d-none')
+        descriptionHeadline.show()
+        descriptionCreditsContainer.show()
+        handleShowMore()
         return
       }
 
@@ -57,27 +58,11 @@ function ProgramCredits (programId, showMoreButtonText, showLessButtonText,
       })
     })
   })
-
-  // Long Credits Collapse
-  $(function () {
-    const creditsFulltext = $('#creditsFulltext')
-    const creditsPoints = $('#creditsPoints')
-    const creditsShowMoreToggle = $('#creditsShowMoreToggle')
-    const creditsShowMoreText = $('#creditsShowMoreText')
-    creditsFulltext.hide()
-    creditsPoints.show()
-    creditsShowMoreToggle.click(function () {
-      if (creditsFulltext.is(':visible')) {
-        creditsFulltext.fadeOut()
-        creditsPoints.show()
-        creditsShowMoreText.text(showMoreButtonText)
-        creditsShowMoreToggle.css('aria-expanded', false)
-      } else {
-        creditsFulltext.fadeIn()
-        creditsPoints.hide()
-        creditsShowMoreText.text(showLessButtonText)
-        creditsShowMoreToggle.css('aria-expanded', true)
-      }
-    })
-  })
+  function handleShowMore () {
+    const descriptionCreditsContainer = $('#description-credits-container')
+    const showMoreToggle = $('#descriptionShowMoreToggle')
+    if (descriptionCreditsContainer.height() === 200 || descriptionCreditsContainer.height() > 300) {
+      showMoreToggle.removeClass('d-none')
+    }
+  }
 }
