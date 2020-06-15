@@ -47,9 +47,10 @@ const MyProfile = function (profileUrl, saveUsername,
   const emailData = $('#email-wrapper > .profile-data')
   const countryEditContainer = $('#country-edit-container')
   const countryData = $('#country-wrapper > .profile-data')
+  const passwordData = $('#password-wrapper > .profile-data')
   const accountSettingsContainer = $('#account-settings-container')
   const profileSections = [
-    [passwordEditContainer, null],
+    [passwordEditContainer, passwordData],
     [emailEditContainer, emailData], [countryEditContainer, countryData],
     [accountSettingsContainer, null]
   ]
@@ -59,7 +60,7 @@ const MyProfile = function (profileUrl, saveUsername,
   })
 
   $('#edit-password-button').on('click', function () {
-    toggleEditSection(passwordEditContainer)
+    toggleEditSection(passwordEditContainer, passwordData)
   })
 
   $('#edit-email-button').on('click', function () {
@@ -227,10 +228,9 @@ const MyProfile = function (profileUrl, saveUsername,
     $('.error-message').addClass('d-none')
 
     const newEmail = email.val()
-    const additionalEmail = $('#additional-email').val()
     $.post(self.saveEmailUrl, {
       firstEmail: newEmail,
-      secondEmail: additionalEmail
+      secondEmail: ''
     }, function (data) {
       switch (parseInt(data.statusCode)) {
         case statusCodeOk:

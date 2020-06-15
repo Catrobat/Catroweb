@@ -2450,7 +2450,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $program_manager = $this->getProgramManager();
     $program = $program_manager->find($program_id);
-    Assert::assertEquals('null', $program->getExtractedDirectoryHash());
+    Assert::assertEquals(null, $program->getExtractedDirectoryHash());
   }
 
   /**

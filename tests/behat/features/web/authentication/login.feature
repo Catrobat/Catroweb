@@ -94,6 +94,7 @@ Feature:
     And I fill in "password" with "123456"
     Then the element ".show-hide-password input" should have type "password"
     But the element ".show-hide-password input" should not have type "text"
+    And the ".show-hide-password .pw-toggler" element should contain "visibility"
 
   Scenario: It should be possible to change the visibility of the password
     Given I am on "/app/login"
@@ -101,10 +102,13 @@ Feature:
     And I fill in "username" with "Catrobat"
     And I fill in "password" with "123456"
     Then the element ".show-hide-password input" should have type "password"
+    And the ".show-hide-password .pw-toggler" element should contain "visibility"
     But the element ".show-hide-password input" should not have type "text"
-    When I click "#password-visibility-toggler"
+    When I click ".show-hide-password .pw-toggler"
     Then the element ".show-hide-password input" should have type "text"
+    And the ".show-hide-password .pw-toggler" element should contain "visibility_off"
     But the element ".show-hide-password input" should not have type "password"
-    When I click "#password-visibility-toggler"
+    When I click ".show-hide-password .pw-toggler"
     Then the element ".show-hide-password input" should have type "password"
+    And the ".show-hide-password .pw-toggler" element should contain "visibility"
     But the element ".show-hide-password input" should not have type "text"

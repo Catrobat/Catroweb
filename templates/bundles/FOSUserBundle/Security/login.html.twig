@@ -49,16 +49,12 @@
             <div class="group">
               <span class="highlight"></span>
               <span class="bar"></span>
-              <div class="group-with-icon-wrapper show-hide-password">
-                <div class="group-with-icon">
-                  <span>
-                    <input id="password" type="password" name="_password" required>
-                    <label><span class="span-input">{{ "password"|trans({}, "catroweb") }}</span></label>
-                  </span>
-                </div>
-                <a id="password-visibility-toggler" href="">
-                  <i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i>
-                </a>
+              <div class="show-hide-password">
+                <span class="w-100">
+                  <input id="password" type="password" name="_password" required>
+                  <label><span class="span-input">{{ "password"|trans({}, "catroweb") }}</span></label>
+                </span>
+                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
               </div>
             </div>
 

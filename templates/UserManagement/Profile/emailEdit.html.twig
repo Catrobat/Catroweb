@@ -29,16 +29,6 @@
     </div>
   </div>
 
-  <div class="group mb-2">
-    <input title="second_email" type="text" id="additional-email" name="_additional-email"
-           value="{{ secondMail }}" required>
-    <span class="highlight"></span>
-    <span class="bar"></span>
-    <label {% if secondMail %}class="label-with-value" {% endif %}>
-      <span class="span-input">{{ 'profile.secondEmail'|trans({}, 'catroweb') }}</span>
-    </label>
-  </div>
-
   <button id="save-email" class="btn btn-primary save-button">
     {{ 'profile.saveChanges'|trans({}, 'catroweb') }}
   </button>
