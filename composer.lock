@@ -6095,32 +6095,32 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.7.1",
+            "version": "v1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "a53056880aae0ce034ac6c38906e162ee5cfd2df"
+                "reference": "967fb2d58d4e8437e0e417979dd0e8ee4891cfb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/a53056880aae0ce034ac6c38906e162ee5cfd2df",
-                "reference": "a53056880aae0ce034ac6c38906e162ee5cfd2df",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/967fb2d58d4e8437e0e417979dd0e8ee4891cfb9",
+                "reference": "967fb2d58d4e8437e0e417979dd0e8ee4891cfb9",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0",
+                "composer-plugin-api": "^1.0|^2.0",
                 "php": ">=7.1"
             },
             "require-dev": {
-                "composer/composer": "^1.0.2",
+                "composer/composer": "^1.0.2|^2.0",
                 "symfony/dotenv": "^4.4|^5.0",
                 "symfony/phpunit-bridge": "^4.4|^5.0",
-                "symfony/process": "^4.4|^5.0"
+                "symfony/process": "^3.4|^4.4|^5.0"
             },
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7-dev"
+                    "dev-master": "1.8-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -6140,7 +6140,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2020-05-28T07:16:35+00:00"
+            "time": "2020-06-14T09:29:35+00:00"
         },
         {
             "name": "symfony/form",
@@ -10532,12 +10532,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "fc2f4e87f57230a33d52e42973b898175199d065"
+                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/fc2f4e87f57230a33d52e42973b898175199d065",
-                "reference": "fc2f4e87f57230a33d52e42973b898175199d065",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
+                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
                 "shasum": ""
             },
             "require": {
@@ -10574,7 +10574,7 @@
             },
             "suggest": {
                 "ext-dom": "For handling output formats in XML",
-                "ext-mbstring": "For handling non-UTF8 characters in cache signature.",
+                "ext-mbstring": "For handling non-UTF8 characters.",
                 "php-cs-fixer/phpunit-constraint-isidenticalstring": "For IsIdenticalString constraint.",
                 "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "For XmlMatchesXsd constraint.",
                 "symfony/polyfill-mbstring": "When enabling `ext-mbstring` is not possible."
@@ -10615,7 +10615,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2020-06-04T06:31:49+00:00"
+            "time": "2020-06-14T17:24:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -13031,19 +13031,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wapmorgan/PhpCodeFixer.git",
-                "reference": "120f71563d73f1ad54dfade7e32b395f83178204"
+                "reference": "8b4ea516a1e5f163cbd9e3426bbe3a23532997d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wapmorgan/PhpCodeFixer/zipball/120f71563d73f1ad54dfade7e32b395f83178204",
-                "reference": "120f71563d73f1ad54dfade7e32b395f83178204",
+                "url": "https://api.github.com/repos/wapmorgan/PhpCodeFixer/zipball/8b4ea516a1e5f163cbd9e3426bbe3a23532997d2",
+                "reference": "8b4ea516a1e5f163cbd9e3426bbe3a23532997d2",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "php": ">=5.4",
-                "symfony/console": "^3.4|^4.0"
+                "symfony/console": "^3.4|^4.0|^5.0"
             },
             "suggest": {
                 "ext-json": "Adds ability to store report in JSON format"
@@ -13081,7 +13081,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Analyzer of PHP code to search issues with deprecated functionality in newer interpreter versions.",
-            "time": "2020-02-07T16:57:27+00:00"
+            "time": "2020-06-13T18:33:47+00:00"
         },
         {
             "name": "webmozart/assert",
