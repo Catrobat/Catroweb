@@ -9129,7 +9129,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v5.1.0",
+            "version": "v5.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -10532,12 +10532,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "fc2f4e87f57230a33d52e42973b898175199d065"
+                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/fc2f4e87f57230a33d52e42973b898175199d065",
-                "reference": "fc2f4e87f57230a33d52e42973b898175199d065",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
+                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
                 "shasum": ""
             },
             "require": {
@@ -10574,7 +10574,7 @@
             },
             "suggest": {
                 "ext-dom": "For handling output formats in XML",
-                "ext-mbstring": "For handling non-UTF8 characters in cache signature.",
+                "ext-mbstring": "For handling non-UTF8 characters.",
                 "php-cs-fixer/phpunit-constraint-isidenticalstring": "For IsIdenticalString constraint.",
                 "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "For XmlMatchesXsd constraint.",
                 "symfony/polyfill-mbstring": "When enabling `ext-mbstring` is not possible."
@@ -10615,7 +10615,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2020-06-04T06:31:49+00:00"
+            "time": "2020-06-14T17:24:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -13031,19 +13031,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wapmorgan/PhpCodeFixer.git",
-                "reference": "120f71563d73f1ad54dfade7e32b395f83178204"
+                "reference": "8b4ea516a1e5f163cbd9e3426bbe3a23532997d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wapmorgan/PhpCodeFixer/zipball/120f71563d73f1ad54dfade7e32b395f83178204",
-                "reference": "120f71563d73f1ad54dfade7e32b395f83178204",
+                "url": "https://api.github.com/repos/wapmorgan/PhpCodeFixer/zipball/8b4ea516a1e5f163cbd9e3426bbe3a23532997d2",
+                "reference": "8b4ea516a1e5f163cbd9e3426bbe3a23532997d2",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "php": ">=5.4",
-                "symfony/console": "^3.4|^4.0"
+                "symfony/console": "^3.4|^4.0|^5.0"
             },
             "suggest": {
                 "ext-json": "Adds ability to store report in JSON format"
@@ -13081,7 +13081,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Analyzer of PHP code to search issues with deprecated functionality in newer interpreter versions.",
-            "time": "2020-02-07T16:57:27+00:00"
+            "time": "2020-06-13T18:33:47+00:00"
         },
         {
             "name": "webmozart/assert",
