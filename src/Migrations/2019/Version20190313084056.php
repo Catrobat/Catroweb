@@ -37,7 +37,6 @@ final class Version20190313084056 extends AbstractMigration
         $this->addSql('ALTER TABLE media_package_category CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE media_package_file CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE mediapackagecategory_mediapackage CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE migration_versions CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE nolb_example_program CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE program CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE program_downloads CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
