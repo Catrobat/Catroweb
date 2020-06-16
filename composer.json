@@ -17,7 +17,7 @@
         "beberlei/doctrineextensions": "^1.2",
         "catrobat/capi": "v1.0.40",
         "doctrine/doctrine-bundle": "^2.0",
-        "doctrine/doctrine-migrations-bundle": "^2.1",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "eightpoints/guzzle-bundle": "^8.0",
         "friendsofsymfony/jsrouting-bundle": "^2.6",
