@@ -20,13 +20,6 @@
 {% block js %}
   <script>
     let projectLoader = new ProjectLoader('#search-results', '{{ path('api_search_programs') }}')
-    let searchInput = $('#top-app-bar__search-input')
-    let oldQuery = searchInput.html('{{ q }}').text()
-    projectLoader.initSearch(oldQuery)
-    $(document).ready(function() {
-      showTopBarSearch()
-      searchInput.val(oldQuery)
-      controlTopBarSearchClearButton()
-    })
+    projectLoader.searchResult('{{ q }}')
   </script>
 {% endblock %}
