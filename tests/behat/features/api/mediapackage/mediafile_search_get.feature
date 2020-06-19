@@ -11,14 +11,18 @@ Feature: Get data from the media library in json format
       | 1  | Animals | Looks   |
       | 2  | Fantasy | Sounds  |
       | 3  | Space   | Looks   |
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 2  | luna       |
 
     And there are media package files:
-      | id | name      | category | extension | active | file   | flavor     | author         |
+      | id | name      | category | extension | active | file   | flavors    | author         |
       | 1  | Dog 1     | Animals  | png       | 1      | 1.png  | pocketcode | Bob Schmidt    |
       | 2  | Dog 2     | Fantasy  | mpga      | 1      | 2.mpga | pocketcode |                |
-      | 3  | Spaceship | Space    | png       | 0      | 3.png  |            | Micheal John   |
+      | 3  | Spaceship | Space    | png       | 0      | 3.png  | pocketcode | Micheal John   |
       | 4  | Cat       | Animals  | png       | 1      | 4.png  | luna       |                |
-      | 5  | Ape       | Animals  | png       | 1      | 5.png  |            |                |
+      | 5  | Ape       | Animals  | png       | 1      | 5.png  | pocketcode |                |
       | 6  | Metroid   | Space    | png       | 1      | 6.png  | pocketcode | Jennifer Shawn |
 
 

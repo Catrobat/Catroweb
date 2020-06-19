@@ -673,6 +673,7 @@ class DataFixturesContext implements KernelAwareContext
   {
     $em = $this->getManager();
     $file_repo = $this->getMediaPackageFileRepository();
+    $flavor_repo = $this->getFlavorRepository();
     $files = $table->getHash();
     foreach ($files as $file)
     {
@@ -690,9 +691,12 @@ class DataFixturesContext implements KernelAwareContext
       $old_files = null == $old_files ? [] : $old_files;
       $old_files->add($new_file);
       $category->setFiles($old_files);
-      if (!empty($file['flavor']))
+      if (!empty($file['flavors']))
       {
-        $new_file->setFlavor($file['flavor']);
+        foreach (explode(',', $file['flavors']) as $flavor)
+        {
+          $new_file->addFlavor($flavor_repo->getFlavorByName(trim($flavor)));
+        }
       }
       $new_file->setAuthor($file['author']);
 
@@ -707,6 +711,7 @@ class DataFixturesContext implements KernelAwareContext
         'id' => $file['id'],
         'name' => $file['name'],
         'flavor' => $new_file->getFlavor(),
+        'flavors' => $new_file->getFlavorNames(),
         'package' => $mediaPackage->getName(),
         'category' => $file['category'],
         'author' => $file['author'],
@@ -715,6 +720,18 @@ class DataFixturesContext implements KernelAwareContext
       ];
     }
     $em->flush();
+  }
+
+  /**
+   * @Given /^there are flavors:$/
+   */
+  public function thereAreFlavors(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config)
+    {
+      $this->insertFlavor($config, false);
+    }
+    $this->getManager()->flush();
   }
 
   // -------------------------------------------------------------------------------------------------------------------

@@ -5,6 +5,7 @@ namespace App\Catrobat\Services;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use App\Utils\APIQueryHelper;
 use App\Utils\Utils;
 use function Deployer\Support\str_contains;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -66,20 +67,20 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string               $name     The name
    * @param File                 $file     The file (e.g. png, jpeg)
    * @param MediaPackageCategory $category The MediaPackageCategory this MediaPackageFile should belong to
-   * @param string               $flavor   The flavor of this MediaPackageFile (e.g. Luna, embroidery)
+   * @param iterable             $flavors  The flavors of this MediaPackageFile (e.g. Luna, embroidery)
    * @param string               $author   The author of this MediaPackageFile
    *
    * @throws \Exception when an error occurs during creating
    *
    * @return MediaPackageFile the created MediaPackageFile
    */
-  public function createMediaPackageFile(string $name, File $file, MediaPackageCategory $category, string $flavor, string $author): MediaPackageFile
+  public function createMediaPackageFile(string $name, File $file, MediaPackageCategory $category, iterable $flavors, string $author): MediaPackageFile
   {
     $new_media_package_file = new MediaPackageFile();
     $new_media_package_file->setName($name);
     $new_media_package_file->setFile($file);
     $new_media_package_file->setCategory($category);
-    $new_media_package_file->setFlavor($flavor);
+    $new_media_package_file->setFlavors($flavors);
     $new_media_package_file->setAuthor($author);
     $new_media_package_file->setExtension($file->getExtension());
 
@@ -256,14 +257,13 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
     $qb = $this->createQueryBuilder('f')
       ->where('f.name LIKE :term')
-      ->andWhere("f.flavor = 'pocketcode' OR f.flavor = :flavor")
       ->andWhere('f.active = 1')
       ->setParameter('term', '%'.$term.'%')
-      ->setParameter('flavor', $flavor)
       ->orderBy('f.name', 'ASC')
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
+    APIQueryHelper::addFileFlavorsCondition($qb, $flavor, 'f', true);
 
     if (null !== $package_name)
     {

@@ -11,15 +11,20 @@ Feature: Get data from the media library in json format
       | 1  | Animals | Looks   |
       | 2  | Fantasy | Sounds  |
       | 3  | Space   | Looks   |
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 2  | luna       |
+      | 3  | arduino    |
 
     And there are media package files:
-      | id | name      | category | extension | active | file   | flavor     | author         |
-      | 1  | Dog 1     | Animals  | png       | 1      | 1.png  | pocketcode | Bob Schmidt    |
-      | 2  | Dog 2     | Fantasy  | mpga      | 1      | 2.mpga | pocketcode |                |
-      | 3  | Spaceship | Space    | png       | 0      | 3.png  |            | Micheal John   |
-      | 4  | Cat       | Animals  | png       | 1      | 4.png  | luna       |                |
-      | 5  | Ape       | Animals  | png       | 1      | 5.png  |            |                |
-      | 6  | Metroid   | Space    | png       | 1      | 6.png  | pocketcode | Jennifer Shawn |
+      | id | name      | category | extension | active | file   | flavors             | author         |
+      | 1  | Dog 1     | Animals  | png       | 1      | 1.png  | pocketcode          | Bob Schmidt    |
+      | 2  | Dog 2     | Fantasy  | mpga      | 1      | 2.mpga | pocketcode          |                |
+      | 3  | Spaceship | Space    | png       | 0      | 3.png  | pocketcode, arduino | Micheal John   |
+      | 4  | Cat       | Animals  | png       | 1      | 4.png  | luna, arduino       |                |
+      | 5  | Ape       | Animals  | png       | 1      | 5.png  | pocketcode          |                |
+      | 6  | Metroid   | Space    | png       | 1      | 6.png  | pocketcode          | Jennifer Shawn |
 
 
   Scenario: Requests with wrong HTTP_ACCEPT value should result in an error
@@ -207,6 +212,41 @@ Feature: Get data from the media library in json format
       }
       ],
       "total_results": 1
+   }
+    """
+
+  Scenario: Getting files with flavor "arduino" should return 2 media file
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "flavor" with value "arduino"
+    And I request "GET" "/api/media/files"
+    Then the response status code should be "200"
+    And I should get the json object:
+    """
+      {
+        "media_files":
+    [
+      {
+        "id": 3,
+        "name": "Spaceship",
+        "flavor": "pocketcode",
+        "package": "Looks",
+        "category": "Space",
+        "author": "Micheal John",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/3"
+      },
+        {
+        "id": 4,
+        "name": "Cat",
+        "flavor": "luna",
+        "package": "Looks",
+        "category": "Animals",
+        "author": "",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+      }
+      ],
+      "total_results": 2
    }
     """
 

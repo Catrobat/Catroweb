@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Entity\Flavor;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use ImagickException;
@@ -14,7 +15,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaPackageFileAdmin extends AbstractAdmin
 {
@@ -58,8 +58,6 @@ class MediaPackageFileAdmin extends AbstractAdmin
     }
 
     $object->setExtension(('catrobat' == $file->getClientOriginalExtension()) ? 'catrobat' : $file->guessExtension());
-
-    $this->checkFlavor();
   }
 
   /**
@@ -93,7 +91,6 @@ class MediaPackageFileAdmin extends AbstractAdmin
       return;
     }
     $object->setExtension(('catrobat' == $file->getClientOriginalExtension()) ? 'catrobat' : $file->guessExtension());
-    $this->checkFlavor();
   }
 
   /**
@@ -143,7 +140,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ->add('category', EntityType::class, [
         'class' => MediaPackageCategory::class,
         'required' => true, ])
-      ->add('flavor', TextType::class, ['required' => true])
+      ->add('flavors', null, ['class' => Flavor::class, 'multiple' => true, 'required' => true])
       ->add('author', TextType::class, ['label' => 'Author', 'required' => false])
       ->add('active', null, ['required' => false])
     ;
@@ -162,7 +159,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ->add('file', 'string', ['template' => 'Admin/mediapackage_file.html.twig'])
       ->add('category', EntityType::class, ['class' => MediaPackageCategory::class])
       ->add('author', null, ['editable' => true])
-      ->add('flavor', null, ['editable' => true])
+      ->add('flavors', null, ['multiple' => true])
       ->add('downloads')
       ->add('active', null, ['editable' => true])
       ->add('_action', 'actions', [
@@ -172,22 +169,5 @@ class MediaPackageFileAdmin extends AbstractAdmin
         ],
       ])
     ;
-  }
-
-  private function checkFlavor(): void
-  {
-    $flavor = $this->getForm()->get('flavor')->getData();
-
-    if (!$flavor)
-    {
-      return; // There was no required flavor form field in this Action, so no check is needed!
-    }
-
-    $flavor_options = $this->parameter_bag->get('themes');
-
-    if (!in_array($flavor, $flavor_options, true))
-    {
-      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
-    }
   }
 }

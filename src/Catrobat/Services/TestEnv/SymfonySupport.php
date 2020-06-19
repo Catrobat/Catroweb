@@ -12,6 +12,7 @@ use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
 use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
+use App\Entity\Flavor;
 use App\Entity\GameJam;
 use App\Entity\Notification;
 use App\Entity\Program;
@@ -31,6 +32,7 @@ use App\Entity\UserRemixSimilarityRelation;
 use App\Kernel;
 use App\Repository\CatroNotificationRepository;
 use App\Repository\ExtensionRepository;
+use App\Repository\FlavorRepository;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
 use App\Repository\ScratchProgramRemixRepository;
@@ -186,6 +188,11 @@ trait SymfonySupport
   public function getCatroNotificationRepository(): CatroNotificationRepository
   {
     return $this->kernel->getContainer()->get(CatroNotificationRepository::class);
+  }
+
+  public function getFlavorRepository(): FlavorRepository
+  {
+    return $this->kernel->getContainer()->get(FlavorRepository::class);
   }
 
   public function getManager(): EntityManagerInterface
@@ -726,6 +733,20 @@ trait SymfonySupport
     $delimter = '#';
     $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
     Assert::assertMatchesRegularExpression($delimter.$pattern.$delimter, $json);
+  }
+
+  public function insertFlavor(array $config = [], bool $andFlush = true): Flavor
+  {
+    $flavor = new Flavor();
+    $flavor->setName($config['name']);
+
+    $this->getManager()->persist($flavor);
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $flavor;
   }
 
   /**

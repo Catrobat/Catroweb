@@ -6,6 +6,7 @@ use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use App\Utils\APIQueryHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use OpenAPI\Server\Model\MediaFile;
@@ -47,22 +48,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     /** @var MediaPackageFile $found_media_file */
     foreach ($found_media_files as $found_media_file)
     {
-      $json_media_file = new MediaFile();
-      $json_media_file->setId($found_media_file->getId());
-      $json_media_file->setName($found_media_file->getName());
-      $json_media_file->setPackage($found_media_file->getCategory()->getPackage()->first());
-      $json_media_file->setCategory($found_media_file->getCategory()->getName());
-      $json_media_file->setAuthor($found_media_file->getAuthor());
-      $json_media_file->setExtension($found_media_file->getExtension());
-      $json_media_file->setFlavor($found_media_file->getFlavor());
-      $download_url = $this->url_generator->generate(
-          'download_media',
-          [
-            'id' => $found_media_file->getId(),
-          ],
-          UrlGenerator::ABSOLUTE_URL);
-      $json_media_file->setDownloadUrl($download_url);
-
+      $json_media_file = new MediaFile($this->getMediaFileResponseData($found_media_file));
       $json_response_array[] = $json_media_file;
     }
 
@@ -131,21 +117,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
           {
             break;
           }
-          $mediaFile = [
-            'id' => $media_package_file->getId(),
-            'name' => $media_package_file->getName(),
-            'flavor' => $media_package_file->getFlavor(),
-            'package' => $media_package->getName(),
-            'category' => $media_package_file->getCategory()->getName(),
-            'author' => $media_package_file->getAuthor(),
-            'extension' => $media_package_file->getExtension(),
-            'download_url' => $this->url_generator->generate(
-              'download_media',
-              ['id' => $media_package_file->getId()],
-              UrlGenerator::ABSOLUTE_URL),
-          ];
-
-          $json_response_array[] = new MediaFile($mediaFile);
+          $json_response_array[] = new MediaFile($this->getMediaFileResponseData($media_package_file, $media_package));
         }
       }
     }
@@ -195,36 +167,23 @@ class MediaLibraryApi implements MediaLibraryApiInterface
       $offset = 0;
     }
 
-    $total_results = 0;
+    $qb = $this->entity_manager->createQueryBuilder()
+      ->select('f')
+      ->from('App\Entity\MediaPackageFile', 'f')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+    ;
+    APIQueryHelper::addFileFlavorsCondition($qb, $flavor, 'f');
+    $media_package_files = $qb->getQuery()->getResult();
+
+    $count_qb = $this->entity_manager->createQueryBuilder()
+      ->select('COUNT(f.id)')
+      ->from('App\Entity\MediaPackageFile', 'f')
+    ;
+    APIQueryHelper::addFileFlavorsCondition($count_qb, $flavor, 'f');
+    $total_results = $count_qb->getQuery()->getSingleScalarResult();
 
     $json_response_array = [];
-    $media_package_files = null;
-    if (null == $flavor)
-    {
-      $query = $this->entity_manager->createQuery('SELECT u FROM App\Entity\MediaPackageFile u')
-        ->setFirstResult($offset)
-        ->setMaxResults($limit)
-      ;
-      $media_package_files = $query->getResult();
-
-      $num_query = $this->entity_manager->createQuery('SELECT COUNT(u.id) FROM App\Entity\MediaPackageFile u');
-      $total_results = $num_query->getSingleScalarResult();
-    }
-    else
-    {
-      $query = $this->entity_manager->createQuery('SELECT u FROM App\Entity\MediaPackageFile u WHERE u.flavor = :flavor')
-        ->setParameter('flavor', $flavor)
-        ->setFirstResult($offset)
-        ->setMaxResults($limit)
-      ;
-
-      $media_package_files = $query->getResult();
-
-      $num_query = $this->entity_manager->createQuery('SELECT COUNT(u.id) FROM App\Entity\MediaPackageFile u WHERE u.flavor = :flavor')
-        ->setParameter('flavor', $flavor)
-        ;
-      $total_results = $num_query->getSingleScalarResult();
-    }
     if (null !== $media_package_files)
     {
       /** @var MediaPackageFile $media_package_file */
@@ -233,18 +192,23 @@ class MediaLibraryApi implements MediaLibraryApiInterface
         $json_response_array[] = new MediaFile($this->getMediaFileResponseData($media_package_file));
       }
     }
-    $responseData = new MediaFiles(['media_files' => $json_response_array, 'total_results' => $total_results]);
 
-    return $responseData;
+    return new MediaFiles(['media_files' => $json_response_array, 'total_results' => $total_results]);
   }
 
-  public function getMediaFileResponseData(MediaPackageFile $media_package_file)
+  public function getMediaFileResponseData(MediaPackageFile $media_package_file, ?MediaPackage $package = null): array
   {
+    if (null === $package)
+    {
+      $package = $media_package_file->getCategory()->getPackage()->first();
+    }
+
     return $mediaFile = [
       'id' => $media_package_file->getId(),
       'name' => $media_package_file->getName(),
       'flavor' => $media_package_file->getFlavor(),
-      'package' => $media_package_file->getCategory()->getPackage()->first()->getName(),
+      'flavors' => $media_package_file->getFlavorNames(),
+      'package' => $package->getName(),
       'category' => $media_package_file->getCategory()->getName(),
       'author' => $media_package_file->getAuthor(),
       'extension' => $media_package_file->getExtension(),
