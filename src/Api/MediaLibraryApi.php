@@ -160,7 +160,25 @@ class MediaLibraryApi implements MediaLibraryApiInterface
    */
   public function mediaFileIdGet(int $id, &$responseCode, array &$responseHeaders)
   {
-    $responseCode = Response::HTTP_I_AM_A_TEAPOT;
+    $json_response_array = [];
+    $media_package_file = $this->entity_manager->getRepository(MediaPackageFile::class)
+      ->findOneBy(['id' => $id])
+        ;
+
+    if (null !== $media_package_file)
+    {
+      $responseCode = Response::HTTP_OK; // 200 => OK
+      $json_response_array[] = new MediaFile($this->getMediaFileResponseData($media_package_file));
+    }
+    else
+    {
+      $responseCode = Response::HTTP_NOT_FOUND; // => Not found
+
+      return null;
+    }
+    $responseData = new MediaFiles(['media_files' => $json_response_array]);
+
+    return $responseData;
   }
 
   /**
@@ -168,6 +186,72 @@ class MediaLibraryApi implements MediaLibraryApiInterface
    */
   public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    $responseCode = Response::HTTP_I_AM_A_TEAPOT;
+    if (null === $limit)
+    {
+      $limit = 20;
+    }
+    if (null === $offset)
+    {
+      $offset = 0;
+    }
+
+    $total_results = 0;
+
+    $json_response_array = [];
+    $media_package_files = null;
+    if (null == $flavor)
+    {
+      $query = $this->entity_manager->createQuery('SELECT u FROM App\Entity\MediaPackageFile u')
+        ->setFirstResult($offset)
+        ->setMaxResults($limit)
+      ;
+      $media_package_files = $query->getResult();
+
+      $num_query = $this->entity_manager->createQuery('SELECT COUNT(u.id) FROM App\Entity\MediaPackageFile u');
+      $total_results = $num_query->getSingleScalarResult();
+    }
+    else
+    {
+      $query = $this->entity_manager->createQuery('SELECT u FROM App\Entity\MediaPackageFile u WHERE u.flavor = :flavor')
+        ->setParameter('flavor', $flavor)
+        ->setFirstResult($offset)
+        ->setMaxResults($limit)
+      ;
+
+      $media_package_files = $query->getResult();
+
+      $num_query = $this->entity_manager->createQuery('SELECT COUNT(u.id) FROM App\Entity\MediaPackageFile u WHERE u.flavor = :flavor')
+        ->setParameter('flavor', $flavor)
+        ;
+      $total_results = $num_query->getSingleScalarResult();
+    }
+    if (null !== $media_package_files)
+    {
+      /** @var MediaPackageFile $media_package_file */
+      foreach ($media_package_files as $media_package_file)
+      {
+        $json_response_array[] = new MediaFile($this->getMediaFileResponseData($media_package_file));
+      }
+    }
+    $responseData = new MediaFiles(['media_files' => $json_response_array, 'total_results' => $total_results]);
+
+    return $responseData;
+  }
+
+  public function getMediaFileResponseData(MediaPackageFile $media_package_file)
+  {
+    return $mediaFile = [
+      'id' => $media_package_file->getId(),
+      'name' => $media_package_file->getName(),
+      'flavor' => $media_package_file->getFlavor(),
+      'package' => $media_package_file->getCategory()->getPackage()->first()->getName(),
+      'category' => $media_package_file->getCategory()->getName(),
+      'author' => $media_package_file->getAuthor(),
+      'extension' => $media_package_file->getExtension(),
+      'download_url' => $this->url_generator->generate(
+          'download_media',
+          ['id' => $media_package_file->getId()],
+          UrlGenerator::ABSOLUTE_URL),
+    ];
   }
 }
