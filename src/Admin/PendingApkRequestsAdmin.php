@@ -10,8 +10,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
 class PendingApkRequestsAdmin extends AbstractAdmin
 {
@@ -36,6 +37,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
    */
   protected $datagridValues = [
     '_sort_by' => 'apk_request_time',
+    '_sort_order' => 'DESC',
   ];
 
   private ScreenshotRepository $screenshot_repository;
@@ -92,9 +94,17 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   {
     $datagridMapper
       ->add('id')
+      ->add('user.username', null, ['label' => 'User'])
       ->add('name')
-      ->add('user.username')
-      ->add('apk_request_time')
+      ->add('apk_request_time', 'doctrine_orm_datetime_range',
+        [
+          'field_type' => DateTimeRangePickerType::class,
+        ])
+      ->add('apk_status',null,
+        [
+          'field_type' => SymfonyChoiceType::class,
+          'field_options' => ['choices' => ['None' => Program::APK_NONE, 'Pending' => Program::APK_PENDING, 'Ready' => Program::APK_READY]],
+        ])
     ;
   }
 
@@ -106,7 +116,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
-      ->addIdentifier('id')
+      ->add('id')
       ->add('user', null, [
         'route' => [
           'name' => 'show',
@@ -115,11 +125,11 @@ class PendingApkRequestsAdmin extends AbstractAdmin
       ->add('name')
       ->add('apk_request_time')
       ->add('thumbnail', 'string', ['template' => 'Admin/program_thumbnail_image_list.html.twig'])
-      ->add('apk_status', ChoiceType::class, [
+      ->add('apk_status', 'choice', [
         'choices' => [
-          Program::APK_NONE => 'none',
-          Program::APK_PENDING => 'pending',
-          Program::APK_READY => 'ready',
+          Program::APK_NONE => 'None',
+          Program::APK_PENDING => 'Pending',
+          Program::APK_READY => 'Ready',
         ], ])
       ->add('_action', 'actions', [
         'actions' => [
@@ -136,11 +146,10 @@ class PendingApkRequestsAdmin extends AbstractAdmin
 
   protected function configureRoutes(RouteCollection $collection): void
   {
-    $collection->clearExcept(['list']);
     $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
     $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
-    $collection->add('deleteAllApk');
     $collection->add('rebuildAllApk');
     $collection->add('resetAllApk');
+    $collection->remove('create')->remove('delete')->remove('export');
   }
 }
