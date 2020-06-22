@@ -17,7 +17,7 @@ Feature: Follow feature on profiles
     Given I log in as "Catrobat"
     And I am on "/app/user/2"
     And I wait for the page to be loaded
-    And the element "#follow-btn" should be visible
+    And the element ".button-container" should be visible
     And the element ".profile-follow" should be visible
     And the element ".profile-follows" should not be visible
 

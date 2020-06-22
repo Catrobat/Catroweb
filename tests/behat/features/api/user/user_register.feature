@@ -222,3 +222,25 @@ Feature: Registering a new user.
         "username": "Username shouldn't contain an email address"
       }
     """
+
+  Scenario: Trying to register user with username that starts with Scratch:
+    Given I have the following JSON request body:
+    """
+      {
+        "dry-run": true,
+        "email": "catro@localhost.at",
+        "username": "Scratch: user",
+        "password": "1234567"
+      }
+    """
+
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "422"
+    And I should get the json object:
+    """
+      {
+        "username": "Username invalid"
+      }
+    """

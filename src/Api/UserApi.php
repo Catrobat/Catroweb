@@ -124,6 +124,10 @@ class UserApi implements UserApiInterface
     {
       $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameAlreadyInUse', [], 'catroweb'));
     }
+    elseif (0 === strncasecmp($register->getUsername(), User::$SCRATCH_PREFIX, strlen(User::$SCRATCH_PREFIX)))
+    {
+      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameInvalid', [], 'catroweb'));
+    }
 
     // Password
     if ('' === $register->getPassword())

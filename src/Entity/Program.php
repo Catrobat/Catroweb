@@ -56,6 +56,11 @@ class Program
   protected int $version = self::INITIAL_VERSION;
 
   /**
+   * @ORM\Column(type="integer", nullable=true, unique=true)
+   */
+  protected ?int $scratch_id = null;
+
+  /**
    * The user owning this Program. If this User gets deleted, this Program gets deleted as well.
    *
    * @ORM\ManyToOne(
@@ -1027,5 +1032,20 @@ class Program
   public function getProgram(): ?Program
   {
     return $this;
+  }
+
+  public function setScratchId(?int $scratch_id): void
+  {
+    $this->scratch_id = $scratch_id;
+  }
+
+  public function getScratchId(): ?int
+  {
+    return $this->scratch_id;
+  }
+
+  public function isScratchProgram(): bool
+  {
+    return null !== $this->scratch_id;
   }
 }

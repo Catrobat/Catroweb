@@ -105,15 +105,16 @@ class ScreenshotRepository
   {
     $screen = $this->getImagick();
     $screen->readImage($filepath);
-    $screen->cropThumbnailImage(480, 480);
+    $this->saveImagickScreenshot($screen, $id);
+    $screen->destroy();
+  }
 
-    $filename = $this->screenshot_dir.$this->generateFileNameFromId($id);
-    if (file_exists($filename))
-    {
-      unlink($filename);
-    }
-    $screen->writeImage($filename);
-    chmod($filename, 0777);
+  public function saveScratchScreenshot(int $Scratch_id, string $id): void
+  {
+    $screen = $this->getImagick();
+    $image = file_get_contents('https://cdn2.scratch.mit.edu/get_image/project/'.$Scratch_id.'_480x360.png');
+    $screen->readImageBlob($image);
+    $this->saveImagickScreenshot($screen, $id);
     $screen->destroy();
   }
 
@@ -302,5 +303,18 @@ class ScreenshotRepository
     $thumb->writeImage($filename);
     chmod($filename, 0777);
     $thumb->destroy();
+  }
+
+  private function saveImagickScreenshot(Imagick $screen, string $id): void
+  {
+    $screen->cropThumbnailImage(480, 480);
+
+    $filename = $this->screenshot_dir.$this->generateFileNameFromId($id);
+    if (file_exists($filename))
+    {
+      unlink($filename);
+    }
+    $screen->writeImage($filename);
+    chmod($filename, 0777);
   }
 }

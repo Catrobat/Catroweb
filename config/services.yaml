@@ -463,6 +463,12 @@ services:
         method: onInvalidProgramUploadedEvent
       }
 
+  # ======== Scratch ========
+  catrobat.scratch.check:
+    class: App\Catrobat\Listeners\ScratchProgramUpdater
+    tags:
+      - { name: kernel.event_listener, event: App\Catrobat\Events\CheckScratchProgramEvent, method: onCheckScratchProgram }
+
   # ======== Entity ========
 
   catrobat.entity.featured.image_listener:

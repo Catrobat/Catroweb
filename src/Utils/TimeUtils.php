@@ -40,6 +40,17 @@ class TimeUtils
     return new DateTime();
   }
 
+  public static function dateTimeFromScratch(string $time): ?DateTime
+  {
+    $dateTime = DateTime::createFromFormat('Y-m-d\\TG\\:i\\:s\\.ve', $time);
+    if ($dateTime)
+    {
+      return $dateTime;
+    }
+
+    return null;
+  }
+
   /**
    * Freezes the time.
    *

@@ -223,14 +223,7 @@ class ProgramManager
 
     $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
 
-    // Notifying the followers of the uploader that a new program of that user is available
-    $followers = $request->getUser()->getFollowers();
-
-    for ($i = 0; $i < $followers->count(); ++$i)
-    {
-      $notification = new NewProgramNotification($followers->get($i), $program);
-      $this->notification_service->addNotification($notification);
-    }
+    $this->notifyFollower($program);
 
     try
     {
@@ -303,6 +296,84 @@ class ProgramManager
     $this->entity_manager->refresh($program);
 
     $this->event_dispatcher->dispatch(new ProgramInsertEvent());
+
+    return $program;
+  }
+
+  /**
+   * Adds a new program from a scratch_program. Doesn't add the Project file.
+   */
+  public function createProgramFromScratch(?Program $program, User $user, array $program_data): Program
+  {
+    $modified_time = TimeUtils::dateTimeFromScratch($program_data['history']['modified']);
+    if (null === $program)
+    {
+      $program = new Program();
+      $program->setUser($user);
+      $program->setScratchId($program_data['id']);
+      $program->setDebugBuild(false);
+    }
+    else
+    {
+      //throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
+      if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp())
+      {
+        return $program;
+      }
+      $program->incrementVersion();
+    }
+    $program->setCatrobatVersion(1);
+    $program->setVisible(true);
+    $program->setApproved(false);
+
+    $description_text = '';
+    if ($instructions = $program_data['instructions'] ?? null)
+    {
+      $description_text .= $instructions;
+    }
+    if ($description = $program_data['description'] ?? null)
+    {
+      if ($instructions)
+      {
+        $description_text .= "\n\n";
+      }
+      $description_text .= $description;
+    }
+    $program->setDescription($description_text);
+
+    if ($title = $program_data['title'] ?? null)
+    {
+      $program->setName($title);
+    }
+
+    $shared_time = TimeUtils::dateTimeFromScratch($program_data['history']['shared']);
+    if ($shared_time)
+    {
+      $program->setUploadedAt($shared_time);
+    }
+    else
+    {
+      $program->setUploadedAt(TimeUtils::getDateTime());
+    }
+    if ($modified_time)
+    {
+      $program->setLastModifiedAt($modified_time);
+    }
+    else
+    {
+      $program->setLastModifiedAt(TimeUtils::getDateTime());
+    }
+
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($program);
+
+    $this->notifyFollower($program);
+
+    if ($image_url = $program_data['image'] ?? null)
+    {
+      $this->screenshot_repository->saveScratchScreenshot($program->getScratchId(), $program->getId());
+    }
 
     return $program;
   }
@@ -466,6 +537,17 @@ class ProgramManager
   public function findOneByName(string $programName)
   {
     return $this->program_repository->findOneBy(['name' => $programName]);
+  }
+
+  /**
+   * @internal
+   * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @return Program|object|null
+   */
+  public function findOneByScratchId(int $scratch_id)
+  {
+    return $this->program_repository->findOneBy(['scratch_id' => $scratch_id]);
   }
 
   /**
@@ -885,5 +967,15 @@ class ProgramManager
     return $this->program_repository->getProgram(
       $id, $this->app_request->isDebugBuildRequest()
     );
+  }
+
+  private function notifyFollower(Program $program): void
+  {
+    $followers = $program->getUser()->getFollowers();
+    for ($i = 0; $i < $followers->count(); ++$i)
+    {
+      $notification = new NewProgramNotification($followers[$i], $program);
+      $this->notification_service->addNotification($notification);
+    }
   }
 }
