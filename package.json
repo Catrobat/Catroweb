@@ -49,7 +49,7 @@
     "@material/menu-surface": "^6.0.0",
     "@material/progress-indicator": "^6.0.0",
     "@material/snackbar": "^6.0.0",
-    "@material/top-app-bar": "^6.0.0",
+    "@material/top-app-bar": "^7.0.0",
     "ajv": "^6.12.2",
     "animate.css": "^4.1.0",
     "animatedmodal": "^1.0.0",
