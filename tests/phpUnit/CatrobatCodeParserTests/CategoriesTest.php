@@ -38,6 +38,17 @@ class CategoriesTest extends TestCase
     $this->assertBrickCount($category, 16, 16, $stats);
   }
 
+  /**
+   * @test
+   */
+  public function mustDetectAllLookBricks(): void
+  {
+    $category = 'looks';
+    $stats = $this->loadStatistics($category);
+
+    $this->assertBrickCount($category, 31, 29, $stats);
+  }
+
   private function loadStatistics(string $category): CodeStatistic
   {
     $xml = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/CategoryPrograms/'.$category.'.xml');
@@ -53,6 +64,6 @@ class CategoriesTest extends TestCase
     $brick_statistic = $code_statistic->getBrickTypeStatistic()[$category.'Bricks'];
     self::assertEquals($expected_count, $brick_statistic['numTotal']);
     self::assertEquals($expected_different_count, $brick_statistic['different']['numDifferent']);
-    self::assertEquals($expected_count + 1, $code_statistic->getBrickStatistic());
+    self::assertEquals($expected_count + $code_statistic->getScriptStatistic(), $code_statistic->getBrickStatistic());
   }
 }
