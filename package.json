@@ -47,7 +47,7 @@
     "@material/form-field": "^6.0.0",
     "@material/icon-button": "^6.0.0",
     "@material/menu-surface": "^6.0.0",
-    "@material/progress-indicator": "^6.0.0",
+    "@material/progress-indicator": "^7.0.0",
     "@material/snackbar": "^6.0.0",
     "@material/top-app-bar": "^6.0.0",
     "ajv": "^6.12.2",
