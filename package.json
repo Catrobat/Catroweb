@@ -43,7 +43,7 @@
     "stylelint-config-twbs-bootstrap": "^2.0.3"
   },
   "dependencies": {
-    "@material/circular-progress": "^6.0.0",
+    "@material/circular-progress": "^7.0.0",
     "@material/form-field": "^6.0.0",
     "@material/icon-button": "^6.0.0",
     "@material/menu-surface": "^6.0.0",
