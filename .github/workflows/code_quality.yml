@@ -1,5 +1,7 @@
 name: Code Quality Checks
 
+# ToDo: Replace latest with fixed versions for a more stable pipeline as soon as dependabot supports github action again
+
 on:
   push:
     branches:
@@ -79,7 +81,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: PHPStan
-        uses: docker://oskarstark/phpstan-ga:latest
+        uses: docker://oskarstark/phpstan-ga:0.12.28 # Not latest since 0.12.29/30 have breaking changes.
         env:
           REQUIRE_DEV: true
         with:
