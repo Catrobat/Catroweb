@@ -288,6 +288,12 @@ class BrickFactory
       case Constants::SET_LOOK_BY_INDEX_BRICK:
         $generated_brick = new SetLookByIndexBrick($brick_xml_properties);
         break;
+      case Constants::LOOK_REQUEST_BRICK:
+        $generated_brick = new LookRequestBrick($brick_xml_properties);
+        break;
+      case Constants::BACKGROUND_REQUEST_BRICK:
+        $generated_brick = new BackgroundRequestBrick($brick_xml_properties);
+        break;
 
       // DATA Bricks
       case Constants::SET_VARIABLE_BRICK:
