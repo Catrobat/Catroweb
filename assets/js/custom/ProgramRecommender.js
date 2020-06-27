@@ -94,9 +94,6 @@ function ProgramRecommender (program, programId, recs, specificRecommender, more
         beforeClose: function () {
           console.log('The animation was called')
           loadingAnimation.hide()
-        },
-        afterClose: function () {
-          console.log('The animation is completed')
           document.removeEventListener('gesturestart', blockEventListener)
           document.ontouchmove = null
           location.reload()
