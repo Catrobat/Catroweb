@@ -1862,16 +1862,16 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "cc53e997761a56f657d2cae2d49e91dd64a7da76"
+                "reference": "5a8675e38684480afbabda61bdc9986eda19f913"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/cc53e997761a56f657d2cae2d49e91dd64a7da76",
-                "reference": "cc53e997761a56f657d2cae2d49e91dd64a7da76",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/5a8675e38684480afbabda61bdc9986eda19f913",
+                "reference": "5a8675e38684480afbabda61bdc9986eda19f913",
                 "shasum": ""
             },
             "require": {
@@ -1964,7 +1964,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2020-06-03T06:41:50+00:00"
+            "time": "2020-06-29T10:27:43+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -11706,12 +11706,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a"
+                "reference": "9249b0c368e5d056167292293afa580d4467787a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
-                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/9249b0c368e5d056167292293afa580d4467787a",
+                "reference": "9249b0c368e5d056167292293afa580d4467787a",
                 "shasum": ""
             },
             "require": {
@@ -11795,7 +11795,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-14T17:24:09+00:00"
+            "time": "2020-06-27T17:13:42+00:00"
         },
         {
             "name": "myclabs/deep-copy",
