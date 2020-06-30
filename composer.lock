@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
-            "version": "v1.2.6",
+            "version": "v1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "af72c4a136b744f1268ca8bb4da47a2f8af78f86"
+                "reference": "5f16b305dda06eda0d2d293c9d2bbd299249a996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/af72c4a136b744f1268ca8bb4da47a2f8af78f86",
-                "reference": "af72c4a136b744f1268ca8bb4da47a2f8af78f86",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/5f16b305dda06eda0d2d293c9d2bbd299249a996",
+                "reference": "5f16b305dda06eda0d2d293c9d2bbd299249a996",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2019-12-05T09:49:04+00:00"
+            "time": "2020-06-30T03:28:02+00:00"
         },
         {
             "name": "catrobat/capi",
@@ -11706,12 +11706,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a"
+                "reference": "9249b0c368e5d056167292293afa580d4467787a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
-                "reference": "d7512330d3f29e1a1716e457423bb8d9fe75ba9a",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/9249b0c368e5d056167292293afa580d4467787a",
+                "reference": "9249b0c368e5d056167292293afa580d4467787a",
                 "shasum": ""
             },
             "require": {
@@ -11795,7 +11795,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-14T17:24:09+00:00"
+            "time": "2020-06-27T17:13:42+00:00"
         },
         {
             "name": "myclabs/deep-copy",
