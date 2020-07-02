@@ -244,3 +244,23 @@ Feature: Registering a new user.
         "username": "Username invalid"
       }
     """
+
+  Scenario: Missing request fields should result in an error
+    Given I have the following JSON request body:
+    """
+      {
+        "dry-run": false
+      }
+    """
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "422"
+    And I should get the json object:
+    """
+      {
+        "email": "EMail missing",
+        "username": "Username missing",
+        "password": "Password missing"
+      }
+    """
