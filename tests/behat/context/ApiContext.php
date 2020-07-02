@@ -1325,7 +1325,7 @@ class ApiContext implements KernelAwareContext
     $program = $pm->find('1');
     if (null === $program)
     {
-      throw new PendingException('last program not found');
+      throw new Exception('last program not found');
     }
     $file = $this->generateProgramFileWith([
       'name' => $program->getName(),
@@ -3612,7 +3612,7 @@ class ApiContext implements KernelAwareContext
       }
       catch (Exception $e)
       {
-        throw new PendingException('No case defined for '.$e);
+        throw new Exception('File to upload does not exist'.$e);
       }
     }
 
