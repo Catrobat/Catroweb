@@ -1,0 +1,998 @@
+openapi: 3.0.2
+info:
+  title: Catroweb API
+  description: API for the Catrobat Share Platform
+  version: "v1.0.40"
+  termsOfService: 'https://share.catrob.at/pocketcode/termsOfUse'
+  contact:
+    name: Catrobat
+    url: 'https://share.catrob.at'
+    email: webmaster@catrobat.org
+servers:
+  - url: 'https://share.catrob.at/api'
+    description: Main production server
+  - url: 'https://web-test.catrob.at/api'
+    description: WEB test server (might be unstabe)
+  - url: 'https://catblocks.test.catrob.at/api'
+    description: Catblocks test server
+  - url: 'https://android.test.catrob.at/api'
+    description: Android test server
+  - url: 'http://localhost/api'
+    description: Local test server (postman help)
+tags:
+  - name: Authentication
+    description: Everything related to authenticating to our project
+  - name: User
+    description: Everything related to users
+  - name: Projects
+    description: Everything related to projects
+  - name: Media Library
+    description: Everything related to the media library
+  - name: Utility
+    description: Utility frunctionality for infrastructure
+paths:
+  /authentication:
+    get:
+      security:
+        - PandaAuth: []
+      tags:
+        - Authentication
+      summary: Check Token
+      description: Checks if a token is valid or expired.
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      security:
+        - PandaAuth: []
+      tags:
+        - Authentication
+      summary: Login
+      description: Returns an JWT token which provides authorization.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWTTokenResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/InvalidCredentials'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+  /health:
+    get:
+      tags:
+        - Utility
+      summary: Health Check
+      responses:
+        '204':
+          description: System is alive and healthy!
+
+  /user:
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+    delete:
+      security:
+        - PandaAuth: []
+      tags:
+        - User
+      summary: Delete User
+      responses:
+        '204':
+          description: Valid request
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    get:
+      security:
+        - PandaAuth: []
+      tags:
+        - User
+      summary: Get logged in user information
+      responses:
+        '200':
+          description: Valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPrivateGet'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+    post:
+      tags:
+        - User
+      summary: Register
+      description: Register a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+      responses:
+        201:
+          description: User successfully registered.
+          headers:
+            Location:
+              schema:
+                type: string
+                example: >-
+                  https://share.catrob.at/app/user/3ef85528-5f08-11ea-a2ae-000c292a0f49
+              description: Resource location on server
+          content:
+            application/json:
+              schema:
+                type: object
+        204:
+          description: 'Dry-run successful (No Validation Error)'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        415:
+          $ref: '#/components/responses/UnsupportedMediaType'
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    enum:
+                      - EMail already in use
+                      - Not a valid EMail
+                      - EMail missing
+                  username:
+                    type: string
+                    enum:
+                      - Username too short
+                      - Username too long
+                      - Username already in use
+                      - Username missing
+                      - Username must not be email
+                  password:
+                    type: string
+                    enum:
+                      - Password too short
+                      - Password too long
+                      - Password contains invalid chars
+                      - Password missing
+    put:
+      security:
+        - PandaAuth: []
+      tags:
+        - User
+      summary: Update
+      description: Update a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPrivatePut'
+      responses:
+        204:
+          description: User successfully updated.
+        400:
+          $ref: '#/components/responses/BadRequest'
+        415:
+          $ref: '#/components/responses/UnsupportedMediaType'
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    enum:
+                      - EMail already in use
+                      - Not a valid EMail
+                      - EMail missing
+                  username:
+                    type: string
+                    enum:
+                      - Username too short
+                      - Username too long
+                      - Username already in use
+                      - Username missing
+                      - Username must not be email
+                  password:
+                    type: string
+                    enum:
+                      - Password too short
+                      - Password too long
+                      - Password contains invalid chars
+                      - Password missing
+  /user/{user_id}:
+    get:
+      tags:
+        - User
+      summary: Get the public information of a user
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9-]+$'
+            example: 1234abcd-12ab-12ab-12ab-123456abcdef
+          required: true
+          description: UUID/ID of any given user
+      responses:
+        '200':
+          description: Valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPublicGet'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  /users/search:
+    get:
+      tags:
+        - User
+      summary: Search for users associated with a keywords
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  /projects:
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+    get:
+      tags:
+        - Projects
+      summary: Get projects
+      parameters:
+        - $ref: '#/components/parameters/ProjectType'
+        - $ref: '#/components/parameters/MaxVersion'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Flavor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+    post:
+      security:
+        - PandaAuth: []
+      tags:
+        - Projects
+      summary: Upload a catrobat project
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                checksum:
+                  type: string
+                  example: asd
+                  description: Checksum of the *.catrobat file
+                file:
+                  type: string
+                  format: binary
+                  description: '*.catrobat file'
+                flavor:
+                  type: string
+                  description: Available flavors
+                  enum:
+                    - pocketcode
+                    - pocketalice
+                    - pocketgalaxy
+                    - pocketphiro
+                    - phirocode
+                    - luna
+                    - create@school
+                    - embroidery
+                    - arduino
+                  example: pocketcode
+                private:
+                  type: boolean
+                  description: Indicates whether a program should be private from the start.
+              required:
+                - checksum
+                - file
+      responses:
+        '201':
+          description: Project successfully uploaded.
+          headers:
+            Location:
+              schema:
+                type: string
+                example: >-
+                  https://share.catrob.at/app/project/63768cf1-5f07-11ea-a2ae-000c292a0f49
+              description: Resource location on server
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          description: Upload Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadError'
+  /projects/featured:
+    get:
+      tags:
+        - Projects
+      summary: Get the currently featured projects
+      parameters:
+        - name: platform
+          in: query
+          schema:
+            type: string
+            description: 'Indication what platform should be used (ios, android)'
+            enum:
+              - android
+              - ios
+        - $ref: '#/components/parameters/MaxVersion'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Flavor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeaturedProjects'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  /projects/search:
+    get:
+      tags:
+        - Projects
+      summary: Search for projects associated with a keywords
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/MaxVersion'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Flavor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  /projects/user/:
+    get:
+      security:
+        - PandaAuth: []
+      tags:
+        - Projects
+      summary: Get the projects of the logged in user
+      parameters:
+        - $ref: '#/components/parameters/MaxVersion'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Flavor'
+      responses:
+        '200':
+          description: Valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  '/projects/user/{user_id}':
+    get:
+      tags:
+        - Projects
+      summary: Get the public projects of a given user
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9-]+$'
+            example: 1234abcd-12ab-12ab-12ab-123456abcdef
+          required: true
+          description: UUID/ID of any given user
+        - $ref: '#/components/parameters/MaxVersion'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Flavor'
+      responses:
+        '200':
+          description: Valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  '/project/{project_id}':
+    get:
+      tags:
+        - Projects
+      summary: Get the information of a project
+      parameters:
+        - in: path
+          name: project_id
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9-]+$'
+            example: 1234abcd-12ab-12ab-12ab-123456abcdef
+          required: true
+          description: UUID/ID of any given project
+      responses:
+        '200':
+          description: Valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  '/media/package/{package_name}':
+    get:
+      tags:
+        - Media Library
+      summary: Get media-library asstes of a named package
+      parameters:
+        - in: path
+          name: package_name
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9-_]+$'
+            example: looks
+          required: true
+          description: Name of the package
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaFiles'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/media/files':
+    get:
+      tags:
+        - Media Library
+      summary: 'Get *all* content of the media library.'
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Flavor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaFiles'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+  '/media/file/{id}':
+    get:
+      tags:
+        - Media Library
+      summary: Get the information of a specific media file
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 123
+          required: true
+          description: ID of any given media file
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaFile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/media/files/search':
+    get:
+      tags:
+        - Media Library
+      summary: Search for mediafiles associated with keywords
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Flavor'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - name: package_name
+          description: In which package you want to search (for more fine tuned results)
+          example: looks
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaFiles'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+components:
+  responses:
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Invalid JWT token | JWT token not found | JWT token expired
+    BadRequest:
+      description: BAD Request - invalid or missing required parameters
+    InvalidCredentials:
+      description: Invalid Credentials
+    NotAcceptable:
+      description: Not Acceptable - client must accept application/json as content type
+    UnsupportedMediaType:
+      description: >-
+        Unsupported Media Type - request must use application/json as content
+        type
+    NotFound:
+      description: Not Found
+
+  securitySchemes:
+    PandaAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Locale:
+      in: header
+      name: Accept-Language
+      required: false
+      schema:
+        type: string
+        description: ISO_639-1 or ISO_3166-1 locale of the user. Defaults internally to en
+    ProjectType:
+      in: query
+      name: project_type
+      required: true
+      schema:
+        type: string
+        enum:
+          - recent
+          - random
+          - most_viewed
+          - most_downloaded
+          - example
+          - scratch
+    Flavor:
+      name: flavor
+      in: query
+      schema:
+        type: string
+        description: Available flavors
+        enum:
+          - pocketcode
+          - pocketalice
+          - pocketgalaxy
+          - pocketphiro
+          - phirocode
+          - luna
+          - create@school
+          - embroidery
+          - arduino
+    MaxVersion:
+      name: max_version
+      in: query
+      schema:
+        $ref: '#/components/schemas/MaxVersion'
+    Limit:
+      name: limit
+      in: query
+      schema:
+        $ref: '#/components/schemas/Limit'
+    Offset:
+      name: offset
+      in: query
+      schema:
+        $ref: '#/components/schemas/Offset'
+  schemas:
+    MediaPackages:
+      type: object
+      properties:
+        media_packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaPackage'
+    MediaPackage:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+          description: ID of the package
+        name:
+          type: string
+          example: Looks
+          description: Name of the package
+        url:
+          type: string
+          example: 'https://share.catrob.at/app/media-library/looks'
+          description: Absolute path to the package
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaCategories'
+    MediaCategories:
+      type: object
+      properties:
+        media_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaCategory'
+    MediaCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+          description: ID of the category
+        name:
+          type: string
+          example: Portrait
+          description: Name of the category
+        priority:
+          type: integer
+          example: 10
+          description: Shows how important a category is (0 is the least priority)
+          minimum: 0
+    MaxVersion:
+      type: string
+      description: Only shows project with a smaller version number than max version
+      example: '0.999'
+      pattern: '[0-9]\.[0-9]{3}'
+    Limit:
+      type: integer
+      minimum: 0
+      description: How many projects should be shown at maximum
+      default: 20
+      example: 3
+    Offset:
+      type: integer
+      minimum: 0
+      description: How many projects should be skipped
+      default: 0
+      example: 2
+    JWTToken:
+      type: string
+      example: xxxxx.yyyyy.zzzzz
+    UploadError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: There is a problem
+    Register:
+      type: object
+      properties:
+        dry-run:
+          type: boolean
+          default: false
+          description: Indicates wether sent user should be verified or registerd.
+        email:
+          type: string
+          format: email
+          example: test@test.lan
+          description: EMail of the user.
+        username:
+          type: string
+          example: Testuser
+          description: 'Name of the user | minLength: 3 |maxLength: 180'
+        password:
+          type: string
+          format: password
+          example: password
+          description: 'A secure password | minLength: 6 | maxLength: 4096'
+    Login:
+      type: object
+      properties:
+        username:
+          $ref: '#/components/schemas/Username'
+        password:
+          $ref: '#/components/schemas/Password'
+    JWTTokenResponse:
+      type: object
+      properties:
+        token:
+          $ref: '#/components/schemas/JWTToken'
+    MediaFiles:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaFile'
+    MediaFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: luna_sinde_2
+        flavor:
+          type: string
+          description: Available flavors
+          enum:
+            - pocketcode
+            - pocketalice
+            - pocketgalaxy
+            - pocketphiro
+            - phirocode
+            - luna
+            - create@school
+            - embroidery
+            - arduino
+          example: pocketcode
+        package:
+          type: string
+          example: Looks
+        category:
+          type: string
+          example: Luna&Cat
+        author:
+          type: string
+          example: CatrowebAdmin
+        extension:
+          type: string
+          example: png
+        download_url:
+          type: string
+          example: 'https://share.catrob.at/pocketcode/download-media/983.png'
+    FeaturedProjects:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturedProject'
+    FeaturedProject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1234abcd-12ab-12ab-12ab-123456abcdef
+        name:
+          type: string
+          example: My example of a Project
+        author:
+          type: string
+          example: Admin
+        featured_image:
+          type: string
+          example: 'https://share.catrob.at/resources/featured/featured_999.png'
+    Projects:
+      type: array
+      items:
+        $ref: '#/components/schemas/Project'
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1234abcd-12ab-12ab-12ab-123456abcdef
+        name:
+          type: string
+          example: My example of a Project
+        author:
+          type: string
+          example: Admin
+        description:
+          type: string
+          example: My very cool project!
+        version:
+          type: string
+          example: 0.9.66
+        views:
+          type: integer
+          example: 2
+        download:
+          type: integer
+          example: 2
+        private:
+          type: boolean
+          example: false
+        flavor:
+          type: string
+          description: Available flavors
+          enum:
+            - pocketcode
+            - pocketalice
+            - pocketgalaxy
+            - pocketphiro
+            - phirocode
+            - luna
+            - create@school
+            - embroidery
+            - arduino
+          example: pocketcode
+        uploaded:
+          type: integer
+          example: 1575562569
+        uploaded_string:
+          type: string
+          example: 11 minutes ago
+        screenshot_large:
+          type: string
+          example: >-
+            https://share.catrob.at/resources/screenshots/screen_1234abcd-12ab-12ab-12ab-123456abcdef.png
+        screenshot_small:
+          type: string
+          example: >-
+            https://share.catrob.at/resources/thumbnails/screen_1234abcd-12ab-12ab-12ab-123456abcdef.png
+        project_url:
+          type: string
+          example: >-
+            https://share.catrob.at/pocketcode/project/1234abcd-12ab-12ab-12ab-123456abcdef
+        download_url:
+          type: string
+          example: >-
+            https://share.catrob.at/pocketcode/download/1234abcd-12ab-12ab-12ab-123456abcdef.catrobat
+        filesize:
+          type: number
+          example: 0.14381762458251943
+          description: filesize in megabytes
+    UserPrivateGet:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1234abcd-12ab-12ab-12ab-123456abcdef
+        username:
+          type: string
+          example: My example of a Project
+        email:
+          type: string
+          format: email
+          example: test@test.lan
+          description: EMail of the user.
+        profile_image:
+          type: string
+        country:
+          type: string
+        projects:
+          type: integer
+        followers:
+          type: integer
+        following:
+          type: integer
+    UserPrivatePut:
+      type: object
+      properties:
+        username:
+          $ref: '#/components/schemas/Username'
+        email:
+          type: string
+          format: email
+          example: test@test.lan
+          description: EMail of the user.
+        password:
+          $ref: '#/components/schemas/Password'
+        profile_image:
+          type: string
+        country:
+          type: string
+    UserPublicGet:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1234abcd-12ab-12ab-12ab-123456abcdef
+        username:
+          type: string
+          example: My example of a Project
+        profile_image:
+          type: string
+        country:
+          type: string
+        projects:
+          type: integer
+        followers:
+          type: integer
+        following:
+          type: integer
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserPublicGet'
+    Username:
+      type: string
+      minLength: 3
+      maxLength: 180
+      example: Testuser
+      description: Name of the user
+    Password:
+      type: string
+      format: password
+      minLength: 6
+      maxLength: 4096
+      example: password
+      description: A secure password.
