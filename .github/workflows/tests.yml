@@ -81,7 +81,7 @@ jobs:
         run:
           docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2.0.1
         if: always()
         with:
           name: PhpUnitTestReport
@@ -210,7 +210,7 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2.0.1
         if: failure()
         with:
           name: screenshots_${{ matrix.testSuite }}
