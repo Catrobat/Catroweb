@@ -155,9 +155,20 @@ jobs:
       # We must explicitly kill the pipeline if the log contains undefined steps
       - name: Check that suite has NO missing steps
         if: always()
-        id: pending-check
+        id: missing-check
         run: |
           if grep -q 'has missing steps. Define them with these snippets:' tests/testreports/behat/${{ matrix.testSuite }}.log; then
+            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+            false;
+          fi
+
+      # Pending steps are not rerun by behat, without this step they will be lost in the process
+      # We must explicitly kill the pipeline if the log contains pending steps
+      - name: Check that suite has NO pending steps
+        if: always()
+        id: pending-check
+        run: |
+          if grep -q 'pending)' tests/testreports/behat/${{ matrix.testSuite }}.log; then
             cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
