@@ -16,14 +16,18 @@ Feature:
       | 2  | Fantasy      | Sounds  |
       | 3  | Bla          | Looks   |
       | 4  | ThemeSpecial | Looks   |
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 2  | luna       |
 
     And there are media package files:
-      | id | name       | category     | extension | active | file       | flavor     | author        |
+      | id | name       | category     | extension | active | file       | flavors    | author        |
       | 1  | Dog (😊🐶)   | Animals      | png       | 1      | 1.png      | pocketcode | Bob Schmidt   |
       | 2  | Bubble     | Fantasy      | mpga      | 1      | 2.mpga     | pocketcode |               |
       | 3  | SexyGrexy  | Bla          | png       | 0      | 3.png      | luna       | Micheal John  |
       | 4  | SexyFlavor | Animals      | png       | 1      | 4.png      | luna       |               |
-      | 5  | SexyNULL   | Animals      | png       | 1      | 5.png      |            |               |
+      | 5  | SexyNULL   | Animals      | png       | 1      | 5.png      | pocketcode |               |
       | 6  | SexyWolfi  | Animals      | png       | 1      | 6.png      | pocketcode | Jenifer Shawn |
       | 7  | MyLuna     | ThemeSpecial | png       | 1      | 7.png      | luna       |               |
       | 8  | MyObject   | Bla          | catrobat  | 1      | 8.catrobat | pocketcode |               |
