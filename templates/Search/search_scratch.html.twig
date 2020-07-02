@@ -1,0 +1,26 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <!-- JUST FOR DEMOSTRATION, REMOVE -->
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/search.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+
+  <div id="search-results">
+    <h1>{{ "search.results"|trans({}, "catroweb") }}</h1>
+    <div id="search-results-text">
+      {{ "search.resultcount"|trans({'%count%': '<span></span>'}, "catroweb")|raw }}
+    </div>
+    {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'search-progressbar'} only %}
+    <div class="programs"></div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script>
+    let projectLoader = new ProjectLoader('#search-results', '{{ path('search_scratch_program') }}')
+    projectLoader.searchResult('{{ q }}')
+  </script>
+{% endblock %}

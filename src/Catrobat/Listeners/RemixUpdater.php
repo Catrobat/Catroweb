@@ -3,9 +3,9 @@
 namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Events\ProgramAfterInsertEvent;
-use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RemixData;
+use App\Catrobat\Services\ScratchHttpClient;
 use App\Entity\Program;
 use App\Entity\RemixManager;
 use Doctrine\ORM\OptimisticLockException;
@@ -22,17 +22,17 @@ class RemixUpdater
 
   private RemixManager $remix_manager;
 
-  private AsyncHttpClient $async_http_client;
+  private ScratchHttpClient $scratch_http_client;
 
   private RouterInterface $router;
 
   private string $migration_lock_file_path;
 
-  public function __construct(RemixManager $remix_manager, AsyncHttpClient $async_http_client, RouterInterface $router,
+  public function __construct(RemixManager $remix_manager, ScratchHttpClient $scratch_http_client, RouterInterface $router,
                               string $kernel_root_dir)
   {
     $this->remix_manager = $remix_manager;
-    $this->async_http_client = $async_http_client;
+    $this->scratch_http_client = $scratch_http_client;
     $this->router = $router;
     $app_root_dir = $kernel_root_dir;
     $this->migration_lock_file_path = $app_root_dir.'/'.self::MIGRATION_LOCK_FILE_NAME;
@@ -77,7 +77,7 @@ class RemixUpdater
       $scratch_ids = array_map(fn (RemixData $data) => $data->getProgramId(), $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
-      $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails($not_existing_scratch_ids);
+      $scratch_info_data = $this->scratch_http_client->fetchScratchProgramDetails($not_existing_scratch_ids);
     }
 
     if (!file_exists($this->migration_lock_file_path))

@@ -2,9 +2,9 @@
 
 namespace App\Commands;
 
-use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\CatrobatFileExtractor;
 use App\Catrobat\Services\RemixData;
+use App\Catrobat\Services\ScratchHttpClient;
 use App\Commands\Helpers\MigrationFileLock;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
@@ -35,7 +35,7 @@ class MigrateRemixGraphsCommand extends Command
   protected static $defaultName = 'catrobat:remixgraph:migrate';
   private Filesystem $file_system;
 
-  private AsyncHttpClient $async_http_client;
+  private ScratchHttpClient $scratch_http_client;
 
   private UserManager $user_manager;
 
@@ -62,7 +62,7 @@ class MigrateRemixGraphsCommand extends Command
   {
     parent::__construct();
     $this->file_system = $filesystem;
-    $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
+    $this->scratch_http_client = new ScratchHttpClient(['timeout' => 12]);
     $this->user_manager = $user_manager;
     $this->program_manager = $program_manager;
     $this->remix_manager = $remix_manager;
@@ -390,7 +390,7 @@ class MigrateRemixGraphsCommand extends Command
       }, $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
-      $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails($not_existing_scratch_ids);
+      $scratch_info_data = $this->scratch_http_client->fetchScratchProgramDetails($not_existing_scratch_ids);
     }
 
     $preserved_version = $program->getVersion();

@@ -2,30 +2,29 @@
 
 namespace App\Entity;
 
-use App\Catrobat\Services\AsyncHttpClient;
+use App\Catrobat\Services\ScratchHttpClient;
 
 class ScratchManager
 {
   protected ProgramManager $program_manager;
   protected UserManager $user_manager;
-  protected AsyncHttpClient $async_http_client;
+  protected ScratchHttpClient $scratch_http_client;
 
   public function __construct(ProgramManager $program_manager,
                               UserManager $user_manager)
   {
     $this->program_manager = $program_manager;
     $this->user_manager = $user_manager;
-    $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
+    $this->scratch_http_client = new ScratchHttpClient(['timeout' => 12]);
   }
 
   public function createScratchProgramFromId(int $id): ?Program
   {
-    $program_arr = $this->async_http_client->fetchScratchProgramDetails([$id]);
-    if (null == $program_arr)
+    $program_data = $this->scratch_http_client->getProjectData($id);
+    if (null === $program_data)
     {
       return null;
     }
-    $program_data = $program_arr[$id];
     /** @var Program|null $old_program */
     $old_program = $this->program_manager->findOneByScratchId($id);
     if (null === $old_program)
@@ -38,5 +37,23 @@ class ScratchManager
     }
 
     return $this->program_manager->createProgramFromScratch($old_program, $user, $program_data);
+  }
+
+  public function createScratchUserFromName(string $name): ?User
+  {
+    $user_data = $this->scratch_http_client->getUserData($name);
+    if (null === $user_data)
+    {
+      return null;
+    }
+
+    return $this->user_manager->createUserFromScratch($user_data);
+  }
+
+  public function getPseudoProgramFromData(array $program_data): Program
+  {
+    $user = $this->user_manager->createUserFromScratch($program_data['author'], false);
+
+    return $this->program_manager->createProgramFromScratch(null, $user, $program_data, false);
   }
 }

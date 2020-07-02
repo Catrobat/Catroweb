@@ -254,12 +254,8 @@ services:
       - "%catrobat.upload.temp.path%"
     public: true
 
-  App\Catrobat\Services\AsyncHttpClient:
-    class: App\Catrobat\Services\AsyncHttpClient
-    arguments:
-      - timeout: 8.0
-      - max_number_of_total_requests: 12
-      - max_number_of_concurrent_requests: 4
+  App\Catrobat\Services\ScratchHttpClient:
+    class: App\Catrobat\Services\ScratchHttpClient
     public: true
 
   App\Utils\MyUuidGenerator:

@@ -3,9 +3,9 @@
 namespace Tests\phpUnit\Catrobat\Listeners;
 
 use App\Catrobat\Listeners\RemixUpdater;
-use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RemixData;
+use App\Catrobat\Services\ScratchHttpClient;
 use App\Entity\Program;
 use App\Entity\RemixManager;
 use App\Entity\User;
@@ -33,7 +33,7 @@ class RemixUpdaterTest extends TestCase
   private $remix_manager;
 
   /**
-   * @var AsyncHttpClient|MockObject
+   * @var ScratchHttpClient|MockObject
    */
   private $async_http_client;
 
@@ -46,7 +46,7 @@ class RemixUpdaterTest extends TestCase
   {
     $this->remix_manager = $this->createMock(RemixManager::class);
 
-    $this->async_http_client = $this->createMock(AsyncHttpClient::class);
+    $this->async_http_client = $this->createMock(ScratchHttpClient::class);
     $router = $this->createMock(RouterInterface::class);
 
     $route_map = [

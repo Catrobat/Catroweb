@@ -303,7 +303,7 @@ class ProgramManager
   /**
    * Adds a new program from a scratch_program. Doesn't add the Project file.
    */
-  public function createProgramFromScratch(?Program $program, User $user, array $program_data): Program
+  public function createProgramFromScratch(?Program $program, ?User $user, array $program_data, bool $persist = true): Program
   {
     $modified_time = TimeUtils::dateTimeFromScratch($program_data['history']['modified']);
     if (null === $program)
@@ -315,8 +315,7 @@ class ProgramManager
     }
     else
     {
-      //throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
-      if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp())
+      if ($program->getLastModifiedAt()->getTimestamp() >= $modified_time->getTimestamp())
       {
         return $program;
       }
@@ -364,15 +363,18 @@ class ProgramManager
       $program->setLastModifiedAt(TimeUtils::getDateTime());
     }
 
-    $this->entity_manager->persist($program);
-    $this->entity_manager->flush();
-    $this->entity_manager->refresh($program);
-
-    $this->notifyFollower($program);
-
-    if ($image_url = $program_data['image'] ?? null)
+    if ($persist)
     {
-      $this->screenshot_repository->saveScratchScreenshot($program->getScratchId(), $program->getId());
+      $this->entity_manager->persist($program);
+      $this->entity_manager->flush();
+      $this->entity_manager->refresh($program);
+
+      $this->notifyFollower($program);
+
+      if ($image_url = $program_data['image'] ?? null)
+      {
+        $this->screenshot_repository->saveScratchScreenshot($program->getScratchId(), $program->getId());
+      }
     }
 
     return $program;

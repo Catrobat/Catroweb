@@ -65,7 +65,7 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     return $response_data;
   }
 
-  public function createUserFromScratch(array $userdata): ?User
+  public function createUserFromScratch(array $userdata, bool $persist = true): User
   {
     $scratch_user_id = intval($userdata['id']);
     /** @var User|null $user */
@@ -88,9 +88,13 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
       {
         $user->changeCreatedAt($joined);
       }
-      $this->objectManager->persist($user);
-      $this->objectManager->flush();
-      $this->objectManager->refresh($user);
+
+      if ($persist)
+      {
+        $this->objectManager->persist($user);
+        $this->objectManager->flush();
+        $this->objectManager->refresh($user);
+      }
     }
 
     return $user;

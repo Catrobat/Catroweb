@@ -55,14 +55,14 @@ class ProgramListSerializer
       foreach ($programs as $program)
       {
         $new_program = [];
-        $example = false;
-        if ($program->isExample())
+        $example = $program->isExample();
+        if ($example)
         {
           $new_program['ExampleId'] = $program->getId();
           $new_program['Extension'] = $program->getImageType();
-          $example = true;
           $program = $program->getProgram();
         }
+        $is_scratch_pseudo_program = (null === $program->getId() && $program->isScratchProgram());
         $new_program['ProjectId'] = $program->getId();
         $new_program['ProjectName'] = $program->getName();
         if ($details)
@@ -77,24 +77,41 @@ class ProgramListSerializer
           $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
           $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
             ->getTimestamp());
+          if ($program->isScratchProgram())
+          {
+            $new_program['ScratchId'] = $program->getScratchId();
+          }
           if ($example)
           {
             $new_program['ScreenshotBig'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
             $new_program['ScreenshotSmall'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
+          }
+          elseif ($is_scratch_pseudo_program)
+          {
+            $new_program['ScreenshotBig'] = 'https://cdn2.scratch.mit.edu/get_image/project/'.$program->getScratchId().'_480x360.png';
+            $new_program['ScreenshotSmall'] = 'https://cdn2.scratch.mit.edu/get_image/project/'.$program->getScratchId().'_100x80.png';
+            $new_program['ScreenshotPathAbsolute'] = true;
           }
           else
           {
             $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
             $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
           }
-          $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
-            'flavor' => $event->getRequest()->getSession()->get('flavor_context'),
-            'id' => $program->getId(),
-          ]), '/');
-          $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
-            'id' => $program->getId(),
-          ]), '/');
-          $new_program['FileSize'] = $program->getFilesize() / 1_048_576;
+          if ($is_scratch_pseudo_program)
+          {
+            $new_program['ProjectUrl'] = ltrim($this->generateUrl('scratch_program', ['flavor' => $event->getRequest()->getSession()->get('flavor_context'), 'id' => $program->getScratchId()]), '/');
+          }
+          else
+          {
+            $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
+              'flavor' => $event->getRequest()->getSession()->get('flavor_context'),
+              'id' => $program->getId(),
+            ]), '/');
+            $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
+              'id' => $program->getId(),
+            ]), '/');
+            $new_program['FileSize'] = $program->getFilesize() / 1_048_576;
+          }
         }
         $retArray['CatrobatProjects'][] = $new_program;
       }

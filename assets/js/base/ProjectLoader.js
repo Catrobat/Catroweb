@@ -428,10 +428,14 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
       visited = $.inArray(projectId, parsedVisits) >= 0
     }
 
+    const imageSrc = project.ScreenshotPathAbsolute
+      ? project.ScreenshotSmall
+      : data.CatrobatInformation.BaseUrl + project.ScreenshotSmall
+
     return $(
       '<div class="program ' + (visited ? 'visited-program ' : '') + '" id="program-' + project.ProjectId + '">' +
       '<a href="' + projectLink + '" class="' + linkCssClasses + '">' +
-      '<img src="' + data.CatrobatInformation.BaseUrl + project.ScreenshotSmall + '" alt="" />' +
+      '<img src="' + imageSrc + '" alt="" />' +
       '<span class="program-name">' + self.escapeJavaScript(project.ProjectName) + '</span>' +
       div +
       '</a></div>'
