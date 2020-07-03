@@ -31,24 +31,22 @@ Feature: Search projects
 
   Scenario: Search for projects with specific word
 
-    Given I have a parameter "query_string" with value "Galaxy"
+    Given I have a parameter "query" with value "Galaxy"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 1
     Then the response should contain projects in the following order:
       | Name      |
       | Galaxy War|
 
   Scenario: Search for projects with specific user
 
-    Given I have a parameter "query_string" with value "User1"
+    Given I have a parameter "query" with value "User1"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 2
     Then the response should contain projects in the following order:
       | Name      |
       | Superponny|
@@ -56,43 +54,36 @@ Feature: Search projects
 
   Scenario: Private projects must not appear in the results
 
-    Given I have a parameter "query_string" with value "Fisch"
+    Given I have a parameter "query" with value "Fisch"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then I should get the json object:
       """
-      {
-        "projects": [],
-        "total_results": 0
-      }
+      []
       """
 
   Scenario: Hidden projects must not appear in the results
 
-    Given I have a parameter "query_string" with value "Ponny description2"
+    Given I have a parameter "query" with value "Ponny description2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then I should get the json object:
       """
-      {
-        "projects": [],
-        "total_results": 0
-      }
+      []
       """
 
   Scenario: Search for project using the limit query, total project value must be the overall result count without limit
 
-    Given I have a parameter "query_string" with value "NewUser"
+    Given I have a parameter "query" with value "NewUser"
     And I have a parameter "limit" with value "2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 4
     Then the response should contain projects in the following order:
       | Name      |
       | Webteam   |
@@ -100,25 +91,22 @@ Feature: Search projects
 
   Scenario: Search for project using the offset query
 
-    Given I have a parameter "query_string" with value "description"
+    Given I have a parameter "query" with value "description"
     And I have a parameter "offset" with value "1"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
-    Then the response should contain total projects with value 2
     Then the response should contain projects in the following order:
       | Name      |
       | Galaxy War|
 
   Scenario: Search for project with specific extension
 
-    Given I have a parameter "query_string" with value "Arduino"
+    Given I have a parameter "query" with value "Arduino"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 2
     Then the response should contain projects in the following order:
       | Name      |
       | ponny     |

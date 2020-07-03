@@ -32,10 +32,9 @@ Feature: Get remixed program from Scratch
     Given I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?project_type=scratch"
+    And I request "GET" "/api/projects/?category=scratch"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 5
     Then the response should contain projects in the following order:
       | Name      |
       | program 9 |
@@ -69,10 +68,9 @@ Feature: Get remixed program from Scratch
     Given I have a parameter "limit" with value "6"
     And I have a parameter "offset" with value "0"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?project_type=scratch"
+    And I request "GET" "/api/projects/?category=scratch"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 7
     Then the response should contain projects in the following order:
       | Name      |
       | program 9 |
@@ -107,10 +105,9 @@ Feature: Get remixed program from Scratch
     Given I have a parameter "limit" with value "9"
     And I have a parameter "offset" with value "0"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?project_type=scratch"
+    And I request "GET" "/api/projects/?category=scratch"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 8
     Then the response should contain projects in the following order:
       | Name       |
       | program 10 |

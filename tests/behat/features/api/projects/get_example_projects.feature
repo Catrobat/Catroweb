@@ -25,10 +25,9 @@ Feature: Get most downloaded projects
 
   Scenario: Get example projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?project_type=example"
+    And I request "GET" "/api/projects/?category=example"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 2
     Then the response should contain projects in the following order:
       | Name      |
       | project 3 |

@@ -36,7 +36,7 @@
             <constraint name="Regex">
                 <option name="pattern">/^[A-Za-z][A-Za-z0-9]{2,180}$/</option>
                 <option name="match">true</option>
-                <option name="message">Username shouldn't contain an email address</option>
+                <option name="message">Username must not contain an email address</option>
                 <option name="groups">
                     <value>Registration</value>
                     <value>Profile</value>

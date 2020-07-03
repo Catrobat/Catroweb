@@ -5,18 +5,20 @@ namespace App\Api;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\ImageRepository;
+use App\Entity\ExampleProgram;
 use App\Entity\FeaturedProgram;
+use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Entity\UserManager;
 use App\Repository\FeaturedRepository;
+use App\Utils\APIHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
-use OpenAPI\Server\Model\FeaturedProject;
-use OpenAPI\Server\Model\FeaturedProjects;
-use OpenAPI\Server\Model\Project;
-use OpenAPI\Server\Model\Projects;
-use OpenAPI\Server\Model\UploadError;
+use OpenAPI\Server\Model\FeaturedProjectResponse;
+use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -31,6 +33,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 {
   private string $token;
   private ProgramManager $program_manager;
+  private UserManager $user_manager;
   private SessionInterface $session;
   private ElapsedTimeStringFormatter $time_formatter;
   private RequestStack $request_stack;
@@ -45,9 +48,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
-                              ImageRepository $featured_image_repository,
-                              RequestStack $request_stack,
-                              TokenStorageInterface $token_storage,
+                              ImageRepository $featured_image_repository, UserManager $user_manager,
+                              RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
                               UrlGeneratorInterface $url_generator)
   {
@@ -61,14 +63,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->entity_manager = $entity_manager;
     $this->translator = $translator;
     $this->url_generator = $url_generator;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setPandaAuth($value): void
-  {
-    $this->token = preg_split('#\s+#', $value)[1];
+    $this->user_manager = $user_manager;
   }
 
   /**
@@ -76,22 +71,42 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectProjectIdGet(string $project_id, &$responseCode, array &$responseHeaders)
+  public function setPandaAuth($value): void
   {
-    $programs = $this->program_manager->getProgram($project_id);
-    $responseData = $this->getProjectResponseData($programs);
+    $this->token = APIHelper::getPandaAuth($value);
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @throws Exception
+   */
+  public function projectIdGet(string $project_id, &$responseCode, array &$responseHeaders)
+  {
+    $projects = $this->program_manager->getProgram($project_id);
+    if (null == $projects || empty($projects))
+    {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
     $responseCode = Response::HTTP_OK;
 
-    return $responseData;
+    return $this->getProjectDataResponse($projects[0]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(string $platform = null, string $maxVersion = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    $programs = $this->featured_repository->getFeaturedPrograms($flavor, $limit, $offset, $platform, $maxVersion);
-    $total_results = $this->featured_repository->getFeaturedProgramsCount($flavor, $platform, $maxVersion);
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+
+    $programs = $this->featured_repository->getFeaturedPrograms($flavor, $limit, $offset, $platform, $max_version);
+
     $responseCode = Response::HTTP_OK;
 
     $featured_programs = [];
@@ -105,15 +120,11 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
         'featured_image' => $this->featured_image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
       ];
-      $new_featured_project = new FeaturedProject($result);
+      $new_featured_project = new FeaturedProjectResponse($result);
       $featured_programs[] = $new_featured_project;
     }
 
-    $featured_projects = ['projects' => $featured_programs, 'total_results' => $total_results];
-
-    $responseData = new FeaturedProjects($featured_projects);
-
-    return $responseData;
+    return $featured_programs;
   }
 
   /**
@@ -121,31 +132,17 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsGet(string $project_type, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    if (null === $max_version)
-    {
-      $max_version = '0';
-    }
-    if (null === $limit)
-    {
-      $limit = 20;
-    }
-    if (null === $offset)
-    {
-      $offset = 0;
-    }
-    if (null === $accept_language)
-    {
-      $accept_language = 'en';
-    }
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
-    $programs = $this->program_manager->getProjects($project_type, $max_version, $limit, $offset, $flavor);
-    $programs_count = $this->program_manager->getProjectsCount($project_type, $max_version, $flavor);
-    $responseData = $this->getProjectsResponseData($programs, $programs_count);
+    $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
     $responseCode = Response::HTTP_OK;
 
-    return $responseData;
+    return $this->getProjectsDataResponse($programs);
   }
 
   /**
@@ -153,12 +150,15 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode, array &$responseHeaders)
   {
+    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $private = null === $private ? false : $private;
+
     // File uploaded successful?
     if (!$file->isValid())
     {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
 
-      return new UploadError(['error' => $this->translator->trans('api.projectsPost.upload_error', [], 'catroweb')]);
+      return new UploadErrorResponse(['error' => $this->translator->trans('api.projectsPost.upload_error', [], 'catroweb')]);
     }
 
     // Checking checksum
@@ -168,7 +168,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
 
-      return new UploadError(['error' => $this->translator->trans('api.projectsPost.invalid_checksum', [], 'catroweb')]);
+      return new UploadErrorResponse(['error' => $this->translator->trans('api.projectsPost.invalid_checksum', [], 'catroweb')]);
     }
 
     // Getting the user who uploaded
@@ -191,7 +191,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
 
-      return new UploadError(['error' => $this->translator->trans('api.projectsPost.creating_error', [], 'catroweb')]);
+      return new UploadErrorResponse(['error' => $this->translator->trans('api.projectsPost.creating_error', [], 'catroweb')]);
     }
 
     // Setting the program's attributes
@@ -209,6 +209,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'id' => $program->getId(),
       ],
       UrlGenerator::ABSOLUTE_URL);
+
+    return null;
   }
 
   /**
@@ -218,33 +220,20 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsSearchGet(string $query_string, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    if (null === $max_version)
-    {
-      $max_version = '0';
-    }
-    if (null === $limit)
-    {
-      $limit = 20;
-    }
-    if (null === $offset)
-    {
-      $offset = 0;
-    }
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+
+    $responseCode = Response::HTTP_OK;
 
     if ('' === $query_string || ctype_space($query_string))
     {
-      $responseData = $this->getProjectsResponseData([]);
-      $responseCode = Response::HTTP_OK;
-
-      return $responseData;
+      return [];
     }
 
     $programs = $this->program_manager->search($query_string, $limit, $offset, $max_version, $flavor);
-    $total_results = $this->program_manager->searchCount($query_string, $max_version, $flavor);
-    $responseData = $this->getProjectsResponseData($programs, $total_results);
-    $responseCode = Response::HTTP_OK;
 
-    return $responseData;
+    return $this->getProjectsDataResponse($programs);
   }
 
   /**
@@ -254,34 +243,22 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    if (null === $max_version)
-    {
-      $max_version = '0';
-    }
-    if (null === $limit)
-    {
-      $limit = 20;
-    }
-    if (null === $offset)
-    {
-      $offset = 0;
-    }
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
     $jwtPayload = $this->program_manager->decodeToken($this->token);
     if (!array_key_exists('username', $jwtPayload))
     {
-      $responseData = $this->getProjectsResponseData([]);
       $responseCode = Response::HTTP_FORBIDDEN;
 
-      return $responseData;
+      return null;
     }
 
     $programs = $this->program_manager->getUserProjects($jwtPayload['username'], $limit, $offset, $flavor, $max_version);
-    $total_results = $this->program_manager->getUserProjectsCount($jwtPayload['username'], $flavor, $max_version);
-    $responseData = $this->getProjectsResponseData($programs, $total_results);
     $responseCode = Response::HTTP_OK;
 
-    return $responseData;
+    return $this->getProjectsDataResponse($programs);
   }
 
   /**
@@ -289,95 +266,78 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsUserUserIdGet(string $user_id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsUserIdGet(string $user_id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
-    if (null == $max_version)
-    {
-      $max_version = '0';
-    }
-    if (null == $limit)
-    {
-      $limit = 20;
-    }
-    if (null == $offset)
-    {
-      $offset = 0;
-    }
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
-    if ('' === $user_id || ctype_space($user_id))
+    if ('' === $user_id || ctype_space($user_id) || null == $this->user_manager->findOneBy(['id' => $user_id]))
     {
-      $responseData = $this->getProjectsResponseData([]);
-      $responseCode = Response::HTTP_OK;
+      $responseCode = Response::HTTP_NOT_FOUND;
 
-      return $responseData;
+      return null;
     }
 
     $programs = $this->program_manager->getUserPublicPrograms($user_id, $limit, $offset, $flavor, $max_version);
-    $total_results = $this->program_manager->getUserPublicProgramsCount($user_id, $flavor, $max_version);
-    $responseData = $this->getProjectsResponseData($programs, $total_results);
     $responseCode = Response::HTTP_OK;
 
-    return $responseData;
+    return $this->getProjectsDataResponse($programs);
   }
 
   /**
+   * @param Program|ExampleProgram $program
+   *
    * @throws Exception
    */
-  private function getProjectsResponseData(array $programs, int $total_results = 0): Projects
+  private function getProjectDataResponse($program): ProjectResponse
   {
-    $projects = $this->getProjectResponseData($programs);
-
-    $response = ['projects' => $projects, 'total_results' => $total_results];
-
-    return new Projects($response);
-  }
-
-  /**
-   * @throws Exception
-   */
-  private function getProjectResponseData(array $programs): array
-  {
-    $projects = [];
-    foreach ($programs as &$program)
+    if ($program->isExample())
     {
-      if ($program->isExample())
-      {
-        $program = $program->getProgram();
-      }
-      $result = [
-        'id' => $program->getId(),
-        'name' => $program->getName(),
-        'author' => $program->getUser()->getUserName(),
-        'description' => $program->getDescription(),
-        'version' => $program->getCatrobatVersionName(),
-        'views' => $program->getViews(),
-        'download' => $program->getDownloads(),
-        'private' => $program->getPrivate(),
-        'flavor' => $program->getFlavor(),
-        'uploaded' => $program->getUploadedAt()->getTimestamp(),
-        'uploaded_string' => $this->time_formatter->getElapsedTime($program->getUploadedAt()->getTimestamp()),
-        'screenshot_large' => $this->program_manager->getScreenshotLarge($program->getId()),
-        'screenshot_small' => $this->program_manager->getScreenshotSmall($program->getId()),
-        'project_url' => ltrim($this->generateUrl(
-          'program',
-          [
-            'flavor' => $this->session->get('flavor_context'),
-            'id' => $program->getId(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL), '/'
-        ),
-        'download_url' => ltrim($this->generateUrl(
-          'download',
-          [
-            'id' => $program->getId(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL), '/'),
-        'filesize' => ($program->getFilesize() / 1_048_576),
-      ];
-      $project = new Project($result);
-      $projects[] = $project;
+      $program = $program->getProgram();
     }
 
-    return $projects;
+    return new ProjectResponse([
+      'id' => $program->getId(),
+      'name' => $program->getName(),
+      'author' => $program->getUser()->getUserName(),
+      'description' => $program->getDescription(),
+      'version' => $program->getCatrobatVersionName(),
+      'views' => $program->getViews(),
+      'download' => $program->getDownloads(),
+      'private' => $program->getPrivate(),
+      'flavor' => $program->getFlavor(),
+      'uploaded' => $program->getUploadedAt()->getTimestamp(),
+      'uploaded_string' => $this->time_formatter->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+      'screenshot_large' => $this->program_manager->getScreenshotLarge($program->getId()),
+      'screenshot_small' => $this->program_manager->getScreenshotSmall($program->getId()),
+      'project_url' => ltrim($this->generateUrl(
+        'program',
+        [
+          'flavor' => $this->session->get('flavor_context'),
+          'id' => $program->getId(),
+        ],
+        UrlGeneratorInterface::ABSOLUTE_URL), '/'
+      ),
+      'download_url' => ltrim($this->generateUrl(
+        'download',
+        [
+          'id' => $program->getId(),
+        ],
+        UrlGeneratorInterface::ABSOLUTE_URL), '/'),
+      'filesize' => ($program->getFilesize() / 1_048_576),
+    ]);
+  }
+
+  private function getProjectsDataResponse(array $projects): array
+  {
+    $projectsDataResponse = [];
+    foreach ($projects as $project)
+    {
+      $projectData = $this->getProjectDataResponse($project);
+      $projectsDataResponse[] = $projectData;
+    }
+
+    return $projectsDataResponse;
   }
 }

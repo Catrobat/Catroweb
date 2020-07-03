@@ -117,7 +117,7 @@ class MediaPackageController extends AbstractController
       'mediaSearchPath' => $url_generator->generate(
         'open_api_server_mediaLibrary_mediafilessearchget',
         [
-          'query_string' => $q,
+          'query' => $q,
           'flavor' => $flavor,
           'package' => $package_name,
         ],

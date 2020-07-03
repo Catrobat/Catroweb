@@ -116,10 +116,6 @@ class ApiContext implements KernelAwareContext
   private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
     'author', 'extension', 'download_url', ];
 
-  private array $programs_structure = ['projects', 'total_results'];
-
-  private array $media_files_structure = ['media_files', 'total_results'];
-
   private array $new_uploaded_projects = [];
 
   public function getKernelBrowser(): KernelBrowser
@@ -644,6 +640,15 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
     $this->assertJsonRegex($string, $response->getContent());
+  }
+
+  /**
+   * @Then the response content must be empty
+   */
+  public function theResponseContentMustBeEmpty(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    Assert::assertEmpty($response->getContent());
   }
 
   /**
@@ -1671,13 +1676,9 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
 
     $returned_program = json_decode($response->getContent(), true);
+
     $expected_program = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_program);
-
-    Assert::assertEquals(count($returned_program), count($expected_program),
-      'Number of returned programs should be '.count($expected_program));
-
-    $returned_program = array_pop($returned_program);
     $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
 
     $this->assertProgramsEqual($stored_program, $returned_program);
@@ -1691,8 +1692,7 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_programs);
 
@@ -1712,8 +1712,7 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredFeaturedPrograms($expected_programs);
 
@@ -1739,16 +1738,9 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
 
-    foreach ($this->programs_structure as $key)
+    foreach ($responseArray as $program)
     {
-      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
-    }
-
-    $returned_programs = $responseArray['projects'];
-
-    foreach ($returned_programs as $program)
-    {
-      Assert::assertEquals(count($program), count($this->program_structure),
+      Assert::assertEquals(count($this->program_structure), count($program),
         'Number of program fields should be '.count($this->program_structure));
       foreach ($this->program_structure as $key)
       {
@@ -1764,17 +1756,14 @@ class ApiContext implements KernelAwareContext
   public function responseShouldHaveProjectModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_programs = json_decode($response->getContent(), true);
+    $program = json_decode($response->getContent(), true);
 
-    foreach ($returned_programs as $program)
+    Assert::assertEquals(count($program), count($this->program_structure),
+      'Number of program fields should be '.count($this->program_structure));
+    foreach ($this->program_structure as $key)
     {
-      Assert::assertEquals(count($program), count($this->program_structure),
-        'Number of program fields should be '.count($this->program_structure));
-      foreach ($this->program_structure as $key)
-      {
-        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
-        Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
-      }
+      Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
+      Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
     }
   }
 
@@ -1784,14 +1773,7 @@ class ApiContext implements KernelAwareContext
   public function responseShouldHaveFeaturedProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-
-    foreach ($this->programs_structure as $key)
-    {
-      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
-    }
-
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
 
     foreach ($returned_programs as $program)
     {
@@ -1811,16 +1793,9 @@ class ApiContext implements KernelAwareContext
   public function responseShouldHaveMediaFilesModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
+    $returned_media_files = json_decode($response->getContent(), true);
 
-    foreach ($this->media_files_structure as $key)
-    {
-      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
-    }
-
-    $returned_programs = $responseArray['media_files'];
-
-    foreach ($returned_programs as $program)
+    foreach ($returned_media_files as $program)
     {
       Assert::assertEquals(count($program), count($this->media_file_structure),
         'Number of program fields should be '.count($this->media_file_structure));
@@ -1839,8 +1814,7 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_files = $responseArray['media_files'];
+    $returned_files = json_decode($response->getContent(), true);
     $expected_files = $table->getHash();
     $stored_files = $this->getStoredMediaFiles($expected_files);
 
@@ -1864,25 +1838,10 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
 
     Assert::assertEquals(count($returned_programs), $projects,
       'Number of returned programs should be '.count($returned_programs));
-  }
-
-  /**
-   * @Then /^the response should contain total projects with value (\d+)$/
-   */
-  public function responseShouldContainTotalProjectsWithNumber(int $total_projects): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_total_projects = $responseArray['total_results'];
-
-    Assert::assertEquals($returned_total_projects, $total_projects,
-      'Number of total projects should be '.$returned_total_projects);
   }
 
   /**

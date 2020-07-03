@@ -47,21 +47,16 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-     {
-      "media_files":
-    [
-      {
-        "id": 5,
-        "name": "Ape",
-        "flavor": "pocketcode",
-        "package": "Looks",
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
-      }
-    ]
-     }
+    {
+      "id": 5,
+      "name": "Ape",
+      "flavor": "pocketcode",
+      "package": "Looks",
+      "category": "Animals",
+      "author": "",
+      "extension": "png",
+      "download_url": "http:\/\/localhost\/app\/download-media\/5"
+    }
     """
 
   Scenario: Getting file with id should return one media file with that exact id
@@ -70,19 +65,14 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-       {
-        "media_files":
-    [
-      {
-        "id": 1,
-        "name": "Dog 1",
-        "flavor": "pocketcode",
-        "package": "Looks",
-        "category": "Animals",
-        "author": "Bob Schmidt",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/1"
-      }
-    ]
-     }
+    {
+      "id": 1,
+      "name": "Dog 1",
+      "flavor": "pocketcode",
+      "package": "Looks",
+      "category": "Animals",
+      "author": "Bob Schmidt",
+      "extension": "png",
+      "download_url": "http:\/\/localhost\/app\/download-media\/1"
+    }
     """

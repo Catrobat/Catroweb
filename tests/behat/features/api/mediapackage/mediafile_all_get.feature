@@ -44,12 +44,6 @@ Feature: Get data from the media library in json format
     And I request "GET" "/api/media/files"
     Then the response status code should be "400"
 
-  Scenario: Requests with invalid offset parameter should result in an error
-    Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "flavor" with value "100"
-    And I request "GET" "/api/media/files"
-    Then the response status code should be "400"
-
   Scenario: Getting all files with limit "6" should return all media files
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "limit" with value "6"
@@ -57,8 +51,6 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-      {
-        "media_files":
     [
       {
         "id": 1,
@@ -80,7 +72,7 @@ Feature: Get data from the media library in json format
         "extension": "mpga",
         "download_url": "http:\/\/localhost\/app\/download-media\/2"
       },
-        {
+      {
         "id": 3,
         "name": "Spaceship",
         "flavor": "pocketcode",
@@ -90,7 +82,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/3"
       },
-        {
+      {
         "id": 4,
         "name": "Cat",
         "flavor": "luna",
@@ -100,7 +92,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/4"
       },
-        {
+      {
         "id": 5,
         "name": "Ape",
         "flavor": "pocketcode",
@@ -110,7 +102,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/5"
       },
-        {
+      {
         "id": 6,
         "name": "Metroid",
         "flavor": "pocketcode",
@@ -120,9 +112,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/6"
       }
-    ],
-      "total_results": 6
-   }
+    ]
     """
 
   Scenario: Getting files with limit "5" should return first 5 media files
@@ -132,8 +122,6 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-      {
-        "media_files":
     [
       {
         "id": 1,
@@ -155,7 +143,7 @@ Feature: Get data from the media library in json format
         "extension": "mpga",
         "download_url": "http:\/\/localhost\/app\/download-media\/2"
       },
-        {
+      {
         "id": 3,
         "name": "Spaceship",
         "flavor": "pocketcode",
@@ -165,7 +153,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/3"
       },
-        {
+      {
         "id": 4,
         "name": "Cat",
         "flavor": "luna",
@@ -175,7 +163,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/4"
       },
-        {
+      {
         "id": 5,
         "name": "Ape",
         "flavor": "pocketcode",
@@ -185,9 +173,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/5"
       }
-      ],
-      "total_results": 6
-   }
+    ]
     """
 
   Scenario: Getting files with flavor "luna" should return 1 media file
@@ -197,10 +183,8 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-      {
-        "media_files":
     [
-        {
+      {
         "id": 4,
         "name": "Cat",
         "flavor": "luna",
@@ -210,9 +194,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/4"
       }
-      ],
-      "total_results": 1
-   }
+    ]
     """
 
   Scenario: Getting files with flavor "arduino" should return 2 media file
@@ -222,8 +204,6 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-      {
-        "media_files":
     [
       {
         "id": 3,
@@ -245,9 +225,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/4"
       }
-      ],
-      "total_results": 2
-   }
+    ]
     """
 
   Scenario: Getting all files with offset "3" should ignore 3 media files
@@ -257,10 +235,8 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-      {
-        "media_files":
     [
-        {
+      {
         "id": 4,
         "name": "Cat",
         "flavor": "luna",
@@ -290,9 +266,7 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/6"
       }
-    ],
-      "total_results": 6
-   }
+    ]
     """
 
   Scenario: Getting files with flavor "pocketcode" and offset 3 should return 2 media files
@@ -303,8 +277,6 @@ Feature: Get data from the media library in json format
     Then the response status code should be "200"
     And I should get the json object:
     """
-      {
-        "media_files":
     [
      {
         "id": 5,
@@ -326,7 +298,5 @@ Feature: Get data from the media library in json format
         "extension": "png",
         "download_url": "http:\/\/localhost\/app\/download-media\/6"
       }
-      ],
-      "total_results": 5
-   }
+    ]
     """

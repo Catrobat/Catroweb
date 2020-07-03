@@ -35,29 +35,20 @@ Feature: Get project
   Scenario: Accessing private project must be not possible
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/project/3"
-    Then the response status code should be "200"
-    Then I should get the json object:
-    """
-      []
-    """
+    Then the response status code should be "404"
+    Then the response content must be empty
 
   Scenario: Accessing hidden project must be not possible
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/project/4"
-    Then the response status code should be "200"
-    Then I should get the json object:
-    """
-      []
-    """
+    Then the response status code should be "404"
+    Then the response content must be empty
 
   Scenario: Get specific project with no existing id
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/project/5"
-    Then the response status code should be "200"
-    Then I should get the json object:
-    """
-      []
-    """
+    Then the response status code should be "404"
+    Then the response content must be empty
 
   Scenario: Get specific project without accept header
     And I request "GET" "/api/project/1"

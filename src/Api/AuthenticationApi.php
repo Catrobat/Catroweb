@@ -2,9 +2,11 @@
 
 namespace App\Api;
 
+use App\Utils\APIHelper;
+use Exception;
 use OpenAPI\Server\Api\AuthenticationApiInterface;
-use OpenAPI\Server\Model\JWTTokenResponse;
-use OpenAPI\Server\Model\Login;
+use OpenAPI\Server\Model\JWTResponse;
+use OpenAPI\Server\Model\LoginRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationApi implements AuthenticationApiInterface
@@ -13,10 +15,12 @@ class AuthenticationApi implements AuthenticationApiInterface
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function setPandaAuth($value): void
   {
-    $this->token = preg_split('#\s+#', $value)[1];
+    $this->token = APIHelper::getPandaAuth($value);
   }
 
   /**
@@ -32,13 +36,13 @@ class AuthenticationApi implements AuthenticationApiInterface
   /**
    * {@inheritdoc}
    */
-  public function authenticationPost(Login $login, &$responseCode, array &$responseHeaders)
+  public function authenticationPost(LoginRequest $login, &$responseCode, array &$responseHeaders)
   {
     // Login Process & token creation is handled by LexikJWTAuthenticationBundle
     // Successful requests are NOT passed to this method. This method will never be called.
     // The AuthenticationController:authenticatePostAction will only be used when Request was invalid.
     $responseCode = Response::HTTP_OK;
 
-    return new JWTTokenResponse();
+    return new JWTResponse();
   }
 }
