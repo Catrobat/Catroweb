@@ -604,6 +604,15 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the response should be in json format$/
+   */
+  public function theResponseShouldBeInJsonFormat(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    Assert::assertJson($response->getContent());
+  }
+
+  /**
    * @Given /^I have a request parameter "([^"]*)" with value "([^"]*)"$/
    *
    * @param mixed $name

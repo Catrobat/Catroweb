@@ -264,3 +264,18 @@ Feature: Registering a new user.
         "password": "Password missing"
       }
     """
+
+
+  Scenario: Trying to send an invalid request, without HTTP_ACCEPT, should return json as response
+    Given I have the following JSON request body:
+    """
+      {
+        "dry-run": false,
+        "username": "Catroweb",
+      }
+    """
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "400"
+    Then the response should be in json format
