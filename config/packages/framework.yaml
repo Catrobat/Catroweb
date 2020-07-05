@@ -6,7 +6,8 @@ framework:
   csrf_protection: ~
   validation:      { enabled: true, enable_annotations: true }
   default_locale:  '%env(LOCALE)%'
-  session:         ~
+  session:
+    handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
   fragments:       ~
   assets:
     version_strategy: 'catrobat.versioning'
