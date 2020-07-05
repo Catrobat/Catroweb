@@ -114,7 +114,6 @@ class RemixSubgraphManipulator
 
     foreach ($all_program_remix_relations as $uniqueKey => $program_remix_relation)
     {
-      $this->entity_manager->detach($program_remix_relation);
       $this->entity_manager->persist($program_remix_relation);
       $this->entity_manager->flush();
     }

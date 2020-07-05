@@ -505,7 +505,6 @@ class MigrateRemixGraphsCommand extends Command
       if (0 === ($number_imported_programs % $batch_size))
       {
         $this->entity_manager->flush();
-        $this->entity_manager->detach($program);
       }
 
       $progress_bar->setMessage('Added program "'.$program->getName().'" (#'.$program_id.')');

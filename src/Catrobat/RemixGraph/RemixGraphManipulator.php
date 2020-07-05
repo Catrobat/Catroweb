@@ -133,7 +133,6 @@ class RemixGraphManipulator
     foreach ($scratch_parent_ids_to_be_added as $scratch_parent_id)
     {
       $scratch_remix_relation = new ScratchProgramRemixRelation((string) $scratch_parent_id, $program);
-      $this->entity_manager->detach($scratch_remix_relation);
       $this->entity_manager->persist($scratch_remix_relation);
       $this->entity_manager->flush();
     }
