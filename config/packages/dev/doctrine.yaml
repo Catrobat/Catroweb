@@ -1,0 +1,39 @@
+doctrine:
+    orm:
+        auto_generate_proxy_classes: false
+        metadata_cache_driver:
+            type: service
+            id: doctrine.system_cache_provider
+        query_cache_driver:
+            type: service
+            id: doctrine.system_cache_provider
+        result_cache_driver:
+            type: service
+            id: doctrine.result_cache_provider
+
+services:
+    doctrine.result_cache_provider:
+        class: Symfony\Component\Cache\DoctrineProvider
+        public: false
+        arguments:
+            - '@doctrine.result_cache_pool'
+    doctrine.system_cache_provider:
+        class: Symfony\Component\Cache\DoctrineProvider
+        public: false
+        arguments:
+            - '@doctrine.system_cache_pool'
+
+framework:
+    cache:
+        app: cache.adapter.redis
+        system: cache.adapter.redis
+        default_redis_provider: 'redis://%ENV(REDIS_PATH)%:%ENV(REDIS_PORT)%'
+        pools:
+            app.cache.redis:
+                adapter: cache.adapter.redis
+                public: false
+                default_lifetime: 120
+            doctrine.result_cache_pool:
+                adapter: app.cache.redis
+            doctrine.system_cache_pool:
+                adapter: app.cache.redis
