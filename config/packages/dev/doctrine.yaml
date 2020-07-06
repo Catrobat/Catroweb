@@ -27,7 +27,7 @@ framework:
     cache:
         app: cache.adapter.redis
         system: cache.adapter.redis
-        default_redis_provider: 'redis://%ENV(REDIS_PATH)%:%ENV(REDIS_PORT)%'
+        default_redis_provider: 'redis://%env(REDIS_PATH)%:%env(REDIS_PORT)%'
         pools:
             app.cache.redis:
                 adapter: cache.adapter.redis
