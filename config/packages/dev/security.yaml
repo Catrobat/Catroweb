@@ -1,0 +1,17 @@
+acl:
+  # ====================================================================================================================
+  #  REDIS:
+  #        Register redis to handle the session data
+  #
+  Redis:
+    class: Redis
+    calls:
+      - method: connect
+        arguments:
+          - '%env(REDIS_PATH)%'
+          - '%env(REDIS_PORT)%'
+
+  Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+    arguments:
+      - '@Redis'
+      - prefix: session_
