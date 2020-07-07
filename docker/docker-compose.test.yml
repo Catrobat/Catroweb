@@ -18,6 +18,8 @@ services:
     depends_on:
       - db.catroweb.test
       - chrome.catroweb
+      - redis.dev
+      - redis.test
     ports:
       - 8080:80
 
@@ -43,6 +45,12 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=catroweb_test
+
+  redis.dev:
+    image: redis
+    container_name: redis.dev
+    ports:
+      - 6379
 
   redis.test:
     image: redis

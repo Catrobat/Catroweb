@@ -16,6 +16,8 @@ services:
       - db.catroweb.dev
       - db.catroweb.test
       - chrome.catroweb
+      - redis.dev
+      - redis.test
     ports:
       - 8080:80
     volumes:
