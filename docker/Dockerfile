@@ -82,7 +82,9 @@ RUN echo "\n" >> .env.local && \
     echo "\n" >> .env.dev.local && \
     echo REDIS_PATH=redis.dev >> .env.dev.local && \
     echo "\n" >> .env.test.local && \
-    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test >> .env.test.local
+    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test >> .env.test.local && \
+    echo "\n" >> .env.test.local && \
+    echo REDIS_PATH=redis.test >> .env.test.local
 
 # Add composer executable to the container
 COPY --from=composer-build /usr/bin/composer /usr/bin/composer

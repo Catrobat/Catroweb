@@ -149,3 +149,9 @@ services:
     container_name: redis.dev
     ports:
       - 6379
+
+  redis.test:
+    image: redis
+    container_name: redis.test
+    ports:
+      - 6379
