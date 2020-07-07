@@ -37,7 +37,7 @@
     "grunt-sass": "^3.1.0",
     "jit-grunt": "^0.10.0",
     "node-sass": "^4.14.1",
-    "sass": "^1.26.9",
+    "sass": "^1.26.10",
     "standard": "^14.3.4",
     "stylelint": "^13.6.1",
     "stylelint-config-twbs-bootstrap": "^2.0.3"
