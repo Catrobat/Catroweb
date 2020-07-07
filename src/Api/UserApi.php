@@ -90,7 +90,7 @@ class UserApi implements UserApiInterface
     $validation_schema = new ValidationSchema();
 
     // E-Mail
-    if ('' === $register->getEmail())
+    if (0 === strlen($register->getEmail()))
     {
       $validation_schema->setEmail($this->translator->trans('api.registerUser.emailMissing', [], 'catroweb'));
     }
@@ -104,7 +104,7 @@ class UserApi implements UserApiInterface
     }
 
     // Username
-    if ('' === $register->getUsername())
+    if (0 === strlen($register->getUsername()))
     {
       $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameMissing', [], 'catroweb'));
     }
@@ -130,7 +130,7 @@ class UserApi implements UserApiInterface
     }
 
     // Password
-    if ('' === $register->getPassword())
+    if (0 === strlen($register->getPassword()))
     {
       $validation_schema->setPassword($this->translator->trans('api.registerUser.passwordMissing', [], 'catroweb'));
     }
