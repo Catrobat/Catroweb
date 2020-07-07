@@ -391,7 +391,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   {
     if (!$scope->getTestResult()->isPassed())
     {
-      $this->saveScreenshot(null, $this->SCREENSHOT_DIR);
+      $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
     }
   }
 

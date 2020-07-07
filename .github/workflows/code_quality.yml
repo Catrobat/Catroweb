@@ -85,31 +85,80 @@ jobs:
         with:
           args: analyse
 
-  Symfony-app-dependent-checks:
-    # to check for custom defined functions/filters the whole Symfony application is required
-    name: Twig Lint, Yaml Lint, Container Lint
+  twig_lint:
+    # Lints a template and outputs encountered errors.
+    name: Twig Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Build
-        run: |
-          cd docker
-          docker-compose -f docker-compose.test.yml build
-          docker-compose -f docker-compose.test.yml up -d
+      - name: Validate composer.json and composer.lock
+        run: composer validate
 
-      - name: Yaml Lint
-        # Lints a file and outputs encountered errors. Specify all dirs but vendor
-        run: |
-          docker exec app.catroweb bin/console lint:yaml translations/ config/ .github/ docker/ behat.yml .eslintrc.yml
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-      - name: Twig Lint
-        # Lints a template and outputs encountered errors.
-        run: |
-          docker exec app.catroweb bin/console lint:twig templates/
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Dependeny Injection Lint
-        #  Ensures that arguments injected into services match type declarations
-        run: |
-          docker exec app.catroweb bin/console lint:container
+      - name: Lint Twig
+        run: composer run-script console lint:twig templates/
+
+  yaml_lint:
+    # Lints a file and outputs encountered errors. Specify all dirs but vendor
+    name: Yaml Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Lint Yaml
+        run: composer run-script console lint:yaml translations/ config/ .github/ docker/ behat.yml.dist .eslintrc.yml
+
+  container_lint:
+    # Ensures that arguments injected into services match type declarations
+    name: Symfony Container Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Lint Container
+        run: composer run-script console lint:container
