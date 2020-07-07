@@ -43,3 +43,9 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=catroweb_test
+
+  redis.test:
+    image: redis
+    container_name: redis.test
+    ports:
+      - 6379

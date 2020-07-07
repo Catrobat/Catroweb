@@ -44,7 +44,8 @@ RUN apt-get update && \
     curl \
     php-xdebug \
     libgconf-2-4 \
-    npm
+    npm \
+    php-redis
 RUN npm install -g n
 RUN n stable && \
     npm install -g grunt-cli && \
