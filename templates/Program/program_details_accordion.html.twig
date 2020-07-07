@@ -1,10 +1,12 @@
 <div class="text-dark">
+  <div class="accordion" id="programDetails">
   <div class="row">
     <div class="col-12">
-      <div class="accordion" id="programDetails">
         {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeStatisticsController:view', {'id' : program.id})) }}
-        {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:view', {'id' : program.id, 'version' : program_details.languageVersion})) }}
-      </div>
     </div>
+    <div class="col-12">
+        {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:view', {'id' : program.id, 'version' : program_details.languageVersion})) }}
+    </div>
+  </div>
   </div>
 </div>

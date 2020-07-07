@@ -11,7 +11,8 @@
   {% endif %}
 
   <div id="featuredPrograms">
-    <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
+
+      <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
     {% if featured|length > 0 %}
       {{ include('Index/featured_programs_carousel.html.twig',
         { 'carousel' :

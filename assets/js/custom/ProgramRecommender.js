@@ -102,6 +102,9 @@ function ProgramRecommender (program, programId, recs, specificRecommender, more
       $(document).on('click', '#remix-graph-button', function () {
         $('#remix-graph-modal-link').click()
       })
+      $(document).on('click', '#remix-graph-button-small', function () {
+        $('#remix-graph-modal-link').click()
+      })
     })
     $(document).ready(function () {
       $(document).on('click', '.rec-programs', function (event) {

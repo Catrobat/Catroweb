@@ -25,40 +25,40 @@ Feature: Reactions to projects "likes"
   Scenario: Thumbs up button with on-click bubble should appear for projects without reactions
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#project-like-buttons" should be visible
-    And I should see 1 "#project-like-buttons > *"
-    And the element "#project-like-buttons .fa-thumbs-up" should be visible
-    And the element "#project-like-counter" should not be visible
-    And the element "#project-like-detail" should not be visible
-    When I click "#project-like-buttons .fa-thumbs-up"
+    Then the element "#project-like-buttons-small" should be visible
+    And I should see 1 "#project-like-buttons-small > *"
+    And the element "#project-like-buttons-small .thumbs-up" should be visible
+    And the element "#project-like-counter-small" should not be visible
+    And the element "#project-like-detail-small" should not be visible
+    When I click "#project-like-buttons-small .thumbs-up"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail" should be visible
-    And I should see 4 "#project-like-detail > .btn"
+    Then the element "#project-like-detail-small" should be visible
+    And I should see 4 "#project-like-detail-small > .btn"
     # bubble should disappear if I click anywhere
     And I click "body"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail" should not be visible
+    Then the element "#project-like-detail-small" should not be visible
 
   Scenario: Thumbs up and smile button with on-click bubble and counter should appear for project 2
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#project-like-buttons" should be visible
-    And I should see 2 "#project-like-buttons > *"
-    And the element "#project-like-buttons .fa-thumbs-up" should be visible
-    And the element "#project-like-buttons .fa-grin-squint" should be visible
-    And the element "#project-like-counter" should be visible
-    And the "#project-like-counter" element should contain "2"
-    And the element "#project-like-detail" should not be visible
-    When I click "#project-like-buttons"
+    Then the element "#project-like-buttons-small" should be visible
+    And I should see 2 "#project-like-buttons-small > *"
+    And the element "#project-like-buttons-small .thumbs-up" should be visible
+    And the element "#project-like-buttons-small .smile" should be visible
+    And the element "#project-like-counter-small" should be visible
+    And the "#project-like-counter-small" element should contain "2"
+    And the element "#project-like-detail-small" should not be visible
+    When I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail" should be visible
-    And I should see 4 "#project-like-detail > .btn"
+    Then the element "#project-like-detail-small" should be visible
+    And I should see 4 "#project-like-detail-small > .btn"
 
   Scenario: Detail dialog for project 2 should open and show reactions
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
     Then the element "#project-like-modal" should not be visible
-    And I click "#project-like-counter"
+    And I click "#project-like-counter-small"
     And I wait for AJAX to finish
     Then the element "#project-like-modal" should be visible
     And I should see 3 "#project-like-modal .modal-body .nav-tabs .nav-item"
@@ -75,8 +75,8 @@ Feature: Reactions to projects "likes"
     And I should see 1 "#all-tab-content .reaction"
     And the "#all-tab-content .reaction:first-child a" element should contain "OtherUser"
     And I should see 2 "#all-tab-content .reaction:first-child .types > i"
-    And the element "#all-tab-content .reaction:first-child .types .fa-grin-squint" should be visible
-    And the element "#all-tab-content .reaction:first-child .types .fa-thumbs-up" should be visible
+    And the element "#all-tab-content .reaction:first-child .types .smile" should be visible
+    And the element "#all-tab-content .reaction:first-child .types .thumbs-up" should be visible
     When I click "#smile-tab"
     And I wait for AJAX to finish
     Then the element "#smile-tab-content" should be visible
@@ -84,8 +84,8 @@ Feature: Reactions to projects "likes"
     And I should see 1 "#smile-tab-content .reaction"
     And the "#smile-tab-content .reaction:first-child a" element should contain "OtherUser"
     And I should see 2 "#smile-tab-content .reaction:first-child .types > i"
-    And the element "#smile-tab-content .reaction:first-child .types .fa-grin-squint" should be visible
-    And the element "#smile-tab-content .reaction:first-child .types .fa-thumbs-up" should be visible
+    And the element "#smile-tab-content .reaction:first-child .types .smile" should be visible
+    And the element "#smile-tab-content .reaction:first-child .types .thumbs-up" should be visible
     And I click "#project-like-modal button.close"
     And I wait for AJAX to finish
     Then the element "#project-like-modal" should not be visible
@@ -94,8 +94,8 @@ Feature: Reactions to projects "likes"
     Given I am on "/app/project/3"
     And I wait for the page to be loaded
     Then the element "#project-like-modal" should not be visible
-    And the "#project-like-counter" element should contain "3"
-    And I click "#project-like-counter"
+    And the ".like-counter" element should contain "3"
+    And I click ".like-counter"
     And I wait for AJAX to finish
     Then the element "#project-like-modal" should be visible
     And I should see 3 "#project-like-modal .modal-body .nav-tabs .nav-item"
@@ -111,11 +111,11 @@ Feature: Reactions to projects "likes"
     And the element "#wow-tab-content" should not be visible
     And I should see 3 "#all-tab-content .reaction"
     And the "#all-tab-content .reaction:first-child a" element should contain "Catrobat"
-    And I should see 1 "#all-tab-content .reaction:first-child .types > i"
-    And the element "#all-tab-content .reaction:first-child .types .fa-surprise" should be visible
+    And I should see 1 "#all-tab-content .reaction:first-child .types > img"
+    And the element "#all-tab-content .reaction:first-child .types .wow" should be visible
     And the "#all-tab-content .reaction:nth-child(3) a" element should contain "LovelyUser"
     And I should see 1 "#all-tab-content .reaction:nth-child(3) .types > i"
-    And the element "#all-tab-content .reaction:nth-child(3) .types .fa-heart" should be visible
+    And the element "#all-tab-content .reaction:nth-child(3) .types .love" should be visible
     When I click "#love-tab"
     And I wait for AJAX to finish
     Then the element "#love-tab-content" should be visible
@@ -123,69 +123,69 @@ Feature: Reactions to projects "likes"
     And I should see 2 "#love-tab-content .reaction"
     And the "#love-tab-content" element should contain "OtherUser"
     And the "#love-tab-content" element should contain "LovelyUser"
-    And the element "#love-tab-content .reaction:nth-child(1) .types .fa-heart" should be visible
-    And the element "#love-tab-content .reaction:nth-child(2) .types .fa-heart" should be visible
+    And the element "#love-tab-content .reaction:nth-child(1) .types .love" should be visible
+    And the element "#love-tab-content .reaction:nth-child(2) .types .love" should be visible
 
   Scenario: A users reactions to a project should be marked
     Given I log in as "OtherUser"
     And I am on "/app/project/2"
     And I wait for the page to be loaded
-    And I click "#project-like-buttons"
+    And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail" should be visible
-    And I should see 4 "#project-like-detail > .btn"
-    And I should see 2 "#project-like-detail > .btn.active"
-    And I should see 2 "#project-like-detail > .btn:not(.active)"
-    And the element "#project-like-detail > .btn.active[data-like-type=1]" should exist
-    And the element "#project-like-detail > .btn.active[data-like-type=2]" should exist
-    And the element "#project-like-detail > .btn.active[data-like-type=3]" should not exist
-    And the element "#project-like-detail > .btn.active[data-like-type=4]" should not exist
+    Then the element "#project-like-detail-small" should be visible
+    And I should see 4 "#project-like-detail-small > .btn"
+    And I should see 2 "#project-like-detail-small > .btn.active"
+    And I should see 2 "#project-like-detail-small > .btn:not(.active)"
+    And the element "#project-like-detail-small > .btn.active[data-like-type=1]" should exist
+    And the element "#project-like-detail-small > .btn.active[data-like-type=2]" should exist
+    And the element "#project-like-detail-small > .btn.active[data-like-type=3]" should not exist
+    And the element "#project-like-detail-small > .btn.active[data-like-type=4]" should not exist
 
   Scenario: A logged-in user should be able to give several reactions to a single project and counter + icons should be refreshed
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the "#project-like-counter" element should contain "0"
-    And I click "#project-like-buttons"
+    Then the "#project-like-counter-small" element should contain "0"
+    And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail" should be visible
-    When I click "#project-like-detail .btn[data-like-type=4]"
+    Then the element "#project-like-detail-small" should be visible
+    When I click "#project-like-detail-small .btn[data-like-type=4]"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail" should not be visible
-    And the "#project-like-counter" element should contain "1"
-    And I should see 1 "#project-like-buttons > *"
-    And the element "#project-like-buttons .fa-surprise" should be visible
-    When I click "#project-like-buttons"
+    Then the element "#project-like-detail-small" should not be visible
+    And the "#project-like-counter-small" element should contain "1"
+    And I should see 1 "#project-like-buttons-small > *"
+    And the element "#project-like-buttons-small .wow" should be visible
+    When I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    And I click "#project-like-detail .btn[data-like-type=2]"
+    And I click "#project-like-detail-small .btn[data-like-type=2]"
     And I wait for AJAX to finish
-    Then the "#project-like-counter" element should contain "2"
-    And I should see 2 "#project-like-buttons > *"
-    And the element "#project-like-buttons .fa-grin-squint" should be visible
-    And the element "#project-like-buttons .fa-surprise" should be visible
+    Then the "#project-like-counter-small" element should contain "2"
+    And I should see 2 "#project-like-buttons-small > *"
+    And the element "#project-like-buttons-small .smile" should be visible
+    And the element "#project-like-buttons-small .wow" should be visible
     When I reload the page
-    Then the "#project-like-counter" element should contain "2"
-    And I should see 2 "#project-like-buttons > *"
-    And the element "#project-like-buttons .fa-grin-squint" should be visible
-    And the element "#project-like-buttons .fa-surprise" should be visible
-    When I click "#project-like-buttons"
+    Then the "#project-like-counter-small" element should contain "2"
+    And I should see 2 "#project-like-buttons-small > *"
+    And the element "#project-like-buttons-small .smile" should be visible
+    And the element "#project-like-buttons-small .wow" should be visible
+    When I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    And I click "#project-like-detail .btn[data-like-type=1]"
+    And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
-    Then the "#project-like-counter" element should contain "3"
-    And I should see 3 "#project-like-buttons > *"
-    And the element "#project-like-buttons .fa-thumbs-up" should be visible
-    And the element "#project-like-buttons .fa-grin-squint" should be visible
-    And the element "#project-like-buttons .fa-surprise" should be visible
+    Then the ".like-counter" element should contain "3"
+    And I should see 3 "#project-like-buttons-small > *"
+    And the element "#project-like-buttons-small .thumbs-up" should be visible
+    And the element "#project-like-buttons-small .smile" should be visible
+    And the element "#project-like-buttons-small .wow" should be visible
 
   Scenario: Guests should be redirected to login page if they react to a project and the reaction should count after login
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And the "#project-like-counter" element should contain "0"
-    And I click "#project-like-buttons"
+    And the "#project-like-counter-small" element should contain "0"
+    And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     # click on Smile button
-    And I click "#project-like-detail .btn:nth-child(2)"
+    And I click "#project-like-detail-small .btn:nth-child(2)"
     And I wait for AJAX to finish
     Then I should be on "/app/login"
     Then I fill in "OtherUser" for "_username"
@@ -193,8 +193,8 @@ Feature: Reactions to projects "likes"
     And I click "#_submit.login"
     And I wait for AJAX to finish
     Then I should be logged in
-    And the "#project-like-counter" element should contain "1"
-    And the element "#project-like-buttons .fa-grin-squint" should be visible
+    And the "#project-like-counter-small" element should contain "1"
+    And the element "#project-like-buttons-small .smile" should be visible
 
   Scenario: Many user reactions with correct reaction count
     Given there are 100 additional users
@@ -302,8 +302,8 @@ Feature: Reactions to projects "likes"
       | 1       | User199 | thumbs_up |
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the "#project-like-counter" element should contain "100"
-    When I click "#project-like-counter"
+    Then the "#project-like-counter-small" element should contain "100"
+    When I click "#project-like-counter-small"
     And I wait for AJAX to finish
     Then I should see 2 "#project-like-modal .modal-body .nav-tabs .nav-item"
     And the "#all-tab > span" element should contain "100"
@@ -315,7 +315,7 @@ Feature: Reactions to projects "likes"
     And the element "#thumbs-up-tab-content" should not be visible
     And I should see 100 "#all-tab-content .reaction"
     And I should see 1 "#all-tab-content .reaction:first-child .types > i"
-    And the element "#all-tab-content .reaction:first-child .types .fa-thumbs-up" should be visible
+    And the element "#all-tab-content .reaction:first-child .types .thumbs-up" should be visible
     When I click "#thumbs-up-tab"
     And I wait for AJAX to finish
     Then I should see 100 "#thumbs-up-tab-content .reaction"
@@ -324,13 +324,13 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#project-like-buttons"
+    And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    And I click "#project-like-detail .btn[data-like-type=1]"
+    And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
-    And I click "#project-like-buttons"
+    And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    And I click "#project-like-detail .btn[data-like-type=2]"
+    And I click "#project-like-detail-small .btn[data-like-type=2]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I open the menu
@@ -348,11 +348,11 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#project-like-detail .btn[data-like-type=1]"
+    And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/project/2"
     And I wait for the page to be loaded
-    And I click "#project-like-detail .btn[data-like-type=4]"
+    And I click "#project-like-detail-small .btn[data-like-type=4]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I open the menu
@@ -372,7 +372,7 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#project-like-detail .btn[data-like-type=1]"
+    And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I am on "/app/notifications/likes"
@@ -385,14 +385,14 @@ Feature: Reactions to projects "likes"
     When I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#project-like-buttons"
+    And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail > .btn.active[data-like-type=1]" should exist
-    When I click "#project-like-detail .btn[data-like-type=1]"
+    Then the element "#project-like-detail-small > .btn.active[data-like-type=1]" should exist
+    When I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail > .btn:not(.active)[data-like-type=1]" should exist
-    And the element "#project-like-counter" should not be visible
-    And the "#project-like-counter" element should contain "0"
+    Then the element "#project-like-detail-small > .btn:not(.active)[data-like-type=1]" should exist
+    And the element "#project-like-counter-small" should not be visible
+    And the "#project-like-counter-small" element should contain "0"
     When I log in as "Catrobat"
     And I am on "/app/notifications/likes"
     And I wait for the page to be loaded
@@ -405,11 +405,11 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#project-like-detail .btn[data-like-type=1]"
+    And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-    And I click "#project-like-detail .btn[data-like-type=1]"
+    And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/notifications/allNotifications"
     And I wait for the page to be loaded

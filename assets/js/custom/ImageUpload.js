@@ -10,20 +10,24 @@ function setImageUploadListener (uploadUrl, uploadButtonContainerId, imageContai
     const file = data.target.files[0]
 
     const imageUpload = $(uploadButtonContainerId)
+    const imageUploadSpinner = $('#upload-image-spinner')
+    const imageUploadSuccess = $('.text-img-upload-success')
     imageUpload.find('span').hide()
     imageUpload.find('.button-show-ajax').show()
+    imageUploadSpinner.removeClass('d-none')
 
     const reader = new FileReader()
 
     reader.onerror = function () {
       $('.text-img-upload-error').removeClass('d-none')
+      imageUploadSpinner.addClass('d-none')
     }
-
     reader.onload = function (event) {
       $.post(uploadUrl, { image: event.currentTarget.result }, function (data) {
         switch (parseInt(data.statusCode)) {
           case statusCodeOK:
-            $('.text-img-upload-success').removeClass('d-none')
+            imageUploadSuccess.removeClass('d-none')
+            imageUploadSpinner.addClass('d-none')
             if (data.image_base64 === null) {
               const src = $(imageContainerId).attr('src')
               const d = new Date()
@@ -35,19 +39,27 @@ function setImageUploadListener (uploadUrl, uploadButtonContainerId, imageContai
 
           case statusCodeUploadExceedingFilesize:
             $('.text-img-upload-too-large').removeClass('d-none')
+            imageUploadSpinner.addClass('d-none')
+
             break
 
           case statusCodeUploadUnsupportedMimeType:
             $('.text-mime-type-not-supported').removeClass('d-none')
+            imageUploadSpinner.addClass('d-none')
             break
 
           default:
             $('.text-img-upload-error').removeClass('d-none')
+            imageUploadSpinner.addClass('d-none')
         }
 
         const imageUpload = $(uploadButtonContainerId)
         imageUpload.find('span').show()
         imageUpload.find('.button-show-ajax').hide()
+        imageUploadSpinner.addClass('d-none')
+        setTimeout(function () {
+          imageUploadSuccess.addClass('d-none')
+        }, 3000)
       })
     }
     reader.readAsDataURL(file)

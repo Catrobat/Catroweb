@@ -1,11 +1,10 @@
 <div class="card">
-
   <div class="card-header d-flex justify-content-between expansion-header collapsed" id="codeView"
        data-toggle="collapse" data-target="#collapseCodeView" aria-expanded="false"
        aria-controls="collapseCodeView">
     Code View
     {% if isVersionSupportedByCatBlocks(version) %}
-      {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'code-view-spinner', 'small': true} %}
+      <span id="code-view-pb">{% include 'Default/progressbar.html.twig' with {'progressbar_id': 'code-view-spinner', 'small': true} %}</span>
     {% endif %}
     <i id="code-view-toggler" class="material-icons rotate-left {% if isVersionSupportedByCatBlocks(version) %} d-none {% endif %}">chevron_left</i>
   </div>
