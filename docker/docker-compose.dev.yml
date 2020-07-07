@@ -143,3 +143,9 @@ services:
     depends_on:
       - db.catroweb.dev
       - db.catroweb.test
+
+  redis.dev:
+    image: redis
+    container_name: redis.dev
+    ports:
+      - 6379
