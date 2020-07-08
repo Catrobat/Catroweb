@@ -1,0 +1,6 @@
+<button id="code-statistics{{ suffix|default('') }}"
+        class="btn btn-outline-primary btn-block"
+        onclick="location.href='{{ path('code_statistics', {'id': program.id }) }}'">
+  <i class="material-icons align-bottom">show_chart</i>
+  <span>{{ "statistics"|trans({}, "catroweb") }}</span>
+</button>

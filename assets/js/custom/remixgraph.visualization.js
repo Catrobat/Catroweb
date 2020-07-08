@@ -38,13 +38,12 @@ const _InternalRemixGraph = function () {
   self.clickStatisticUrl = null
   self.remixGraphTranslations = null
 
-  self.init = function (programID, recommendedByPageID, modalLayerId, remixGraphLayerId, closeButtonClassName,
+  self.init = function (programID, recommendedByPageID, modalLayerId, remixGraphLayerId,
     programDetailsUrlTemplate, clickStatisticUrl, remixGraphTranslations) {
     self.reset()
     self.programID = programID
     self.recommendedByPageID = recommendedByPageID
     self.remixGraphLayerId = remixGraphLayerId
-    self.closeButtonSelector = $('.' + closeButtonClassName)
     self.remixGraphTranslations = remixGraphTranslations
     self.clickStatisticUrl = clickStatisticUrl
     self.programDetailsUrlTemplate = programDetailsUrlTemplate
@@ -173,7 +172,6 @@ const _InternalRemixGraph = function () {
         },
         callback: function () {
           self.performClickStatisticRequest(nodeId, (idParts[0] !== CATROBAT_NODE_PREFIX))
-          self.closeButtonSelector.click()
 
           const newUrlPrefix = (idParts[0] === CATROBAT_NODE_PREFIX)
             ? self.programDetailsUrlTemplate.replace('0', '')

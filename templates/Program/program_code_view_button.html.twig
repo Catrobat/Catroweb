@@ -1,0 +1,6 @@
+<button id="code-view{{ suffix|default('') }}"
+        class="btn btn-outline-primary btn-block"
+        onclick="location.href='{{ path('code_view', {'id': program.id }) }}'">
+  <i class="material-icons align-bottom">extension</i>
+  <span>{{ "codeview.title"|trans({}, "catroweb") }}</span>
+</button>

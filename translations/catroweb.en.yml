@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure:  Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: DOWNLOAD
+download: Download
 description: Description
 noDescription: No description available.
 credits: Credits
@@ -33,9 +33,9 @@ pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
-show-more: 'MORE INFORMATION'
-show-less: 'LESS INFORMATION'
-ok: OK
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
@@ -66,6 +66,7 @@ notificationsClearError: "Unable to mark notifications as read!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Please wait..."
 projects: "Projects"
+statistics: "Statistics"
 
 indexPage:
   recommendedSection:
@@ -183,7 +184,8 @@ programs:
   reactionsText: Reactions
 
 remixGraph:
-  showRemixGraph: 'REMIX GRAPH'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
@@ -618,9 +620,9 @@ login:
   passwordSecond: Password Confirm
 
 apk:
-  download: DOWNLOAD AS APP
-  prepare: 'GET AS APP'
-  preparing: 'PREPARING APP'
+  download: Download as app
+  prepare: 'Get as app'
+  preparing: 'Preparing app'
   text: 'The process may take a while'
 
 format:
@@ -825,6 +827,7 @@ pmd:
     text: Project upload failed.
 
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

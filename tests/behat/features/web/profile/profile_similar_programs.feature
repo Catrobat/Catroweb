@@ -46,7 +46,6 @@ Feature: Showing similar programs on details page of one program
     And I wait for the page to be loaded
     Then I should see 0 "#recommendations .program"
     And I should see "Nothing"
-    But I should not see "Art"
     And I should not see "Similar Programs"
     And I should not see "Trolol"
     And I should not see "Minions"
