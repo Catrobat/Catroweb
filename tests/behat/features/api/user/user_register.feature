@@ -49,7 +49,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "EMail missing",
+        "email": "Email missing",
         "username": "Username missing",
         "password": "Password missing"
       }
@@ -72,7 +72,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "Not a valid EMail",
+        "email": "Email invalid",
         "username": "Username too short",
         "password": "Password too short"
       }
@@ -138,7 +138,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "EMail already in use",
+        "email": "Email already in use",
         "username": "Username already in use"
       }
     """
@@ -219,7 +219,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "username": "Username shouldn't contain an email address"
+        "username": "Username must not contain an email address"
       }
     """
 
@@ -259,7 +259,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "EMail missing",
+        "email": "Email missing",
         "username": "Username missing",
         "password": "Password missing"
       }

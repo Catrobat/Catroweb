@@ -905,10 +905,10 @@ class ProgramManager
     return json_decode($tokenPayload, true);
   }
 
-  public function getProjects(string $project_type, string $max_version = '0',
+  public function getProjects(string $category, string $max_version = '0',
                               int $limit = 20, int $offset = 0, string $flavor = null): array
   {
-    switch ($project_type){
+    switch ($category){
       case 'recent':
         return $this->getRecentPrograms($flavor, $limit, $offset, $max_version);
       case 'random':
@@ -926,9 +926,9 @@ class ProgramManager
     }
   }
 
-  public function getProjectsCount(string $project_type, string $max_version = '0', string $flavor = null): int
+  public function getProjectsCount(string $category, string $max_version = '0', string $flavor = null): int
   {
-    switch ($project_type){
+    switch ($category){
       case 'recent':
         return $this->getRecentProgramsCount($flavor, $max_version);
       case 'random':

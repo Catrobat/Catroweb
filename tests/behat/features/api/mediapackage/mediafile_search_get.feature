@@ -28,7 +28,7 @@ Feature: Get data from the media library in json format
 
   Scenario: Requests with wrong HTTP_ACCEPT value should result in an error
     Given I have a request header "HTTP_ACCEPT" with value "text/html"
-    And I have a parameter "query_string" with value "Dog"
+    And I have a parameter "query" with value "Dog"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "406"
 
@@ -39,21 +39,21 @@ Feature: Get data from the media library in json format
 
   Scenario: Requests with invalid limit parameter should result in an error
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "Dog"
+    And I have a parameter "query" with value "Dog"
     And I have a parameter "limit" with value "a"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "400"
 
   Scenario: Requests with invalid offset parameter should result in an error
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "Dog"
+    And I have a parameter "query" with value "Dog"
     And I have a parameter "offset" with value "a"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "400"
 
   Scenario: Searching files in the media library for "Dog" should return all files containing "dog" in their name
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "Dog"
+    And I have a parameter "query" with value "Dog"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "200"
     And I should get the json object:
@@ -84,7 +84,7 @@ Feature: Get data from the media library in json format
 
   Scenario: Searching files in the media library for "o" and offset set to 1 and limit set to 2 should return 2 files
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "o"
+    And I have a parameter "query" with value "o"
     And I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "1"
     And I request "GET" "/api/media/files/search"
@@ -117,7 +117,7 @@ Feature: Get data from the media library in json format
 
   Scenario: Searching files in the media library for "Ape" should return the only file containing "Ape" in the name
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "Ape"
+    And I have a parameter "query" with value "Ape"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "200"
     And I should get the json object:
@@ -138,7 +138,7 @@ Feature: Get data from the media library in json format
 
   Scenario: Searching files in the media library for "Elephant" should return an empty result
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "Elephant"
+    And I have a parameter "query" with value "Elephant"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "200"
     And I should get the json object:
@@ -148,7 +148,7 @@ Feature: Get data from the media library in json format
 
   Scenario: Searching files in the media library for "Cat" with the "pocketcode" app should return an empty result
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "Cat"
+    And I have a parameter "query" with value "Cat"
     And I have a parameter "flavor" with value "pocketcode"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "200"
@@ -159,7 +159,7 @@ Feature: Get data from the media library in json format
 
   Scenario: Searching files in the media library for "Cat" with the "luna" app should return one result
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "query_string" with value "Cat"
+    And I have a parameter "query" with value "Cat"
     And I have a parameter "flavor" with value "luna"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "200"

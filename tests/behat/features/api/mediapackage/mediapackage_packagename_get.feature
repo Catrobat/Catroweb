@@ -37,7 +37,6 @@ Feature: Get data from the media library in json format
     And I request "GET" "/api/media/package/looks"
     Then the response status code should be "200"
     Then the response should have the media files model structure
-    Then the response should contain total projects with value 5
     Then the response should contain media files in the following order:
       | Name      |
       | Dog       |
@@ -51,7 +50,6 @@ Feature: Get data from the media library in json format
     And I request "GET" "/api/media/package/looks?limit=1"
     Then the response status code should be "200"
     Then the response should have the media files model structure
-    Then the response should contain total projects with value 5
     Then the response should contain media files in the following order:
       | Name      |
       | Dog       |
@@ -61,7 +59,6 @@ Feature: Get data from the media library in json format
     And I request "GET" "/api/media/package/looks?limit=1&offset=3"
     Then the response status code should be "200"
     Then the response should have the media files model structure
-    Then the response should contain total projects with value 5
     Then the response should contain media files in the following order:
       | Name      |
       | Spaceship |
@@ -73,8 +70,5 @@ Feature: Get data from the media library in json format
     Then the response should have the media files model structure
     Then I should get the json object:
       """
-      {
-        "media_files": [],
-        "total_results": 5
-      }
+      []
       """
