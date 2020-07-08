@@ -85,6 +85,13 @@ const COPY_CONFIG =
       src: '**',
       dest: PUBLIC_DIRECTORY + '/images/'
     },
+    favicon: {
+      // must be in root dir of public folder
+      expand: true,
+      cwd: ASSETS_DIRECTORY + '/images',
+      src: 'favicon.ico',
+      dest: PUBLIC_DIRECTORY
+    },
     catBlocks: {
       expand: true,
       cwd: ASSETS_DIRECTORY + '/catblocks',
