@@ -8,13 +8,12 @@ use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 use Exception;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="program", indexes={@Index(columns={"id", "name", "description", "credits"}, flags={"fulltext"})})
+ * @ORM\Table(name="program")
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
 class Program
@@ -931,6 +930,33 @@ class Program
   public function getExtensions(): Collection
   {
     return $this->extensions;
+  }
+
+  public function getExtensionsString(): string
+  {
+    $extensions = [];
+    foreach ($this->extensions as $program_extension)
+    {
+      /* @var Extension $program_extension */
+      $extensions[] = $program_extension->getName();
+    }
+
+    return implode(', ', $extensions);
+  }
+
+  public function getTagsString(): string
+  {
+    $tags = [];
+    foreach ($this->tags as $program_tag)
+    {
+      /* @var Tag $program_tag */
+      $tags[] = $program_tag->getEn();
+      $tags[] = $program_tag->getDe();
+      $tags[] = $program_tag->getIt();
+      $tags[] = $program_tag->getFr();
+    }
+
+    return implode(', ', $tags);
   }
 
   public function isDebugBuild(): bool

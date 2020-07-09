@@ -10,7 +10,7 @@ Feature: Search programs
       | User1    | vwxyz    | aaaaaaaaaa |  2 |
       | NewUser  | 54321    | bbbbbbbbbb |  3 |
     And there are programs:
-      | id      | name            | description                  | owned by | upload time      | version |
+      | id         | name            | description               | owned by | upload time      | version |
       | qysm-rhwt  | Galaxy War      | description1              | User1    | 01.01.2014 12:00 | 0.8.5   |
       | phci-etqx  | Minions         |                           | Catrobat | 02.02.2014 14:00 | 0.8.5   |
       | bbns-hixd  | Fisch           |                           | User1    | 10.01.2012 14:00 | 0.8.5   |
@@ -22,6 +22,7 @@ Feature: Search programs
       | isxs-adkt  | Webteam         |                           | NewUser  | 04.01.2012 14:00 | 0.8.5   |
       | tvut-irkw  | Fritz the Cat   |                           | NewUser  | 03.01.2012 14:00 | 0.8.5   |
     And the current time is "01.08.2014 14:00"
+    And I wait 1000 milliseconds
 
 
   Scenario: A request must have specific parameters to succeed
@@ -88,18 +89,6 @@ Feature: Search programs
       | Whack the Marko |
       | MarkoTheBest    |
 
-
-  Scenario: If a user is found with the given search query, return her programs
-
-    When I search for "NewUser"
-    Then I should get following programs:
-      | name         |
-      | MarkoTheBest |
-      | Universe     |
-      | Webteam      |
-      | Fritz the Cat|
-
-
   Scenario: If nothing is found the following JSON is returned
 
     When I search for "NOTHINGTOBEFIOUND"
@@ -138,6 +127,14 @@ Feature: Search programs
       | Superponny |
 
 
+  Scenario: searching using the AND relation between the words should only show related programs
+
+    Given I use the limit "10"
+    When I search for "description1 description2"
+    Then I should get following programs:
+      | name       |
+      | Superponny |
+
   Scenario: if the query matches in title and description, return the program with the matching title first
 
     Given I use the limit "10"
@@ -157,31 +154,8 @@ Feature: Search programs
 
     Examples:
       | Search | Limit | Offset | TotalProjects |
-      | User1  | 1     | 1      | 4             |
-      | User1  | 9     | 2      | 4             |
       | Marko  | 5     | 0      | 2             |
 
-  Scenario: get total number of found projects with a specific word
-
-    Given I use the limit "2"
-    And I use the offset "0"
-    When I search for "User1"
-    Then I should get a total of 4 projects
-
-  Scenario: limit the number of returned projects
-
-    Given I use the limit "2"
-    And I use the offset "0"
-    When I search for "User1"
-    Then I should get 2 projects
-
-  Scenario: get the programs with offset = 1
-
-    Given I use the limit "10"
-    And I use the offset "1"
-    When I search for "User1"
-    Then I should get 3 projects
-    
   Scenario: find a program with its id
 
     Given I use the limit "10"
@@ -211,12 +185,9 @@ Feature: Search programs
 
   Scenario: only show visible programs
     Given program "Ponny" is not visible
+    And I wait 1000 milliseconds
     And I use the limit "10"
     When I search for "description2"
     Then I should get following programs:
       | name       |
       | Superponny |
-
-  Scenario: Any “word” that is present in the stopword list or is just too short (3 characters or less) is ignored.
-    When I search for "the"
-    Then I should get no programs

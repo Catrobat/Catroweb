@@ -20,6 +20,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "eightpoints/guzzle-bundle": "^8.0",
+        "friendsofsymfony/elastica-bundle": "^5.1",
         "friendsofsymfony/jsrouting-bundle": "^2.6",
         "friendsofsymfony/rest-bundle": "^2.7",
         "google/apiclient": "^2.4",
