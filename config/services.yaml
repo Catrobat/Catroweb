@@ -78,7 +78,8 @@ services:
       $catrobat_template_storage_dir: "%catrobat.template.storage.dir%"
       $catrobat_template_storage_path: "%catrobat.template.storage.path%"
       $snapshot_dir: "%catrobat.snapshot.dir%"
-      $programFinder: '@fos_elastica.finder.app_program.program'
+      $program_finder: '@fos_elastica.finder.app_program.program'
+      $user_finder: '@fos_elastica.finder.app_user.user'
 
 
   # ====================================================================================================================
@@ -306,7 +307,6 @@ services:
   # ====================================================================================================================
   #   Listeners:
   #
-  FOS\ElasticaBundle\Finder\TransformedFinder: '@fos_elastica.finder.app_program.program'
 
   # ======== System Validation ========
 

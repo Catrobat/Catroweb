@@ -112,13 +112,13 @@ class ProgramManagerTest extends TestCase
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
     $notification_service = $this->createMock(CatroNotificationService::class);
     $program_finder = $this->createMock(TransformedFinder::class);
-    $urlHelper = new UrlHelper(new RequestStack());
+    $url_helper = new UrlHelper(new RequestStack());
 
     $this->program_manager = new ProgramManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
       $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
       $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
-      $catrobat_file_sanitizer, $notification_service, $program_finder, $urlHelper
+      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');
