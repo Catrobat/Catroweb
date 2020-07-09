@@ -39,7 +39,7 @@ Feature: As a visitor I want to see a project page
     And I wait for the page to be loaded
     Then I should see "6 downloads"
 
-  Scenario: Increasing download counter after download
+  Scenario: Increasing view counter after new session page visit
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "43 views"
@@ -47,3 +47,11 @@ Feature: As a visitor I want to see a project page
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "44 views"
+
+  Scenario: View counter is not increased on same session
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then I should see "43 views"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then I should see "43 views"

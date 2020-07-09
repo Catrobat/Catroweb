@@ -28,6 +28,7 @@ Feature: Search projects
       | kbrw-khwf | ponny           |                           | NewUser  | Arduino     |05.01.2012 14:00 | 0.8.5   | false   | true    |
       | isxs-adkt | Webteam         |                           | NewUser  | Lego        |04.01.2012 14:00 | 0.8.5   | false   | true    |
       | tvut-irkw | Fritz the Cat   |                           | NewUser  | Lego        |03.01.2012 14:00 | 0.8.5   | false   | true    |
+    And I wait 1000 milliseconds
 
   Scenario: Search for projects with specific word
 
@@ -40,17 +41,6 @@ Feature: Search projects
       | Name      |
       | Galaxy War|
 
-  Scenario: Search for projects with specific user
-
-    Given I have a parameter "query" with value "User1"
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/search"
-    Then the response status code should be "200"
-    Then the response should have the projects model structure
-    Then the response should contain projects in the following order:
-      | Name      |
-      | Superponny|
-      | Galaxy War|
 
   Scenario: Private projects must not appear in the results
 
@@ -76,18 +66,16 @@ Feature: Search projects
       []
       """
 
-  Scenario: Search for project using the limit query, total project value must be the overall result count without limit
+  Scenario: Search for projects with specific word
 
-    Given I have a parameter "query" with value "NewUser"
-    And I have a parameter "limit" with value "2"
+    Given I have a parameter "query" with value "Galaxy"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
       | Name      |
-      | Webteam   |
-      | ponny     |
+      | Galaxy War|
 
   Scenario: Search for project using the offset query
 
@@ -98,7 +86,8 @@ Feature: Search projects
     Then the response status code should be "200"
     Then the response should contain projects in the following order:
       | Name      |
-      | Galaxy War|
+      | Superponny|
+
 
   Scenario: Search for project with specific extension
 

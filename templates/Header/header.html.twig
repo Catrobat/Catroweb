@@ -4,16 +4,35 @@
     <div id="top-app-bar__default" class="mdc-top-app-bar__row body-content">
 
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+
+        {% if back_path is not empty %}
+          <button id="top-app-bar__back__btn-back"
+                  class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                  aria-label="Back to previous page"
+                  onclick="location.href='{{ back_path }}'">
+            arrow_back
+          </button>
+        {% else %}
         <button id="top-app-bar__btn-sidebar-toggle"
                 class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
                 aria-label="Open sidebar navigation menu">
           menu
         </button>
+        {% endif %}
+
+        {% if page_title|default('') is empty %}
         <a id="top-app-bar__title"
            class="mdc-top-app-bar__title"
            href="{{ path('index') }}">
-          {{ "community"|trans({}, "catroweb") }}
+            {{ "community"|trans({}, "catroweb") }}
         </a>
+        {% else %}
+        <span id="top-app-bar__title"
+           class="mdc-top-app-bar__title">
+          {{ page_title }}
+        </span>
+        {% endif %}
+
       </section>
 
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
@@ -28,6 +47,7 @@
 
       </section>
     </div>
+
 
     {#  The Navbar design changes fitting to actions:  #}
 

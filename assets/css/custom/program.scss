@@ -417,7 +417,6 @@ input[type="number"] {
 }
 
 #tag-extension-container {
-  margin-bottom: 1rem;
 
   > #tags:nth-child(2) {
     margin-top: 0.5rem;
@@ -510,9 +509,4 @@ input[type="number"] {
 .nav-tabs *
 {
   color: #000;
-}
-.buttons-small{
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }

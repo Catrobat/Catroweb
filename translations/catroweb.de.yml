@@ -176,7 +176,7 @@ programs:
   linkTitle: Link
   link: Link in Zwischenablage kopieren
 remixGraph:
-  showRemixGraph: 'Zeige den Remix Graphen'
+  showRemixGraph: 'Remix Graph'
   by: 'um'
   open: 'Öffne '
   showPaths: 'Wege anzeigen'

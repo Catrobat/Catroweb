@@ -4,31 +4,51 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
+use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CodeViewController extends AbstractController
 {
   private ProgramManager $program_manager;
   private ExtractedFileRepository $extracted_file_repository;
   private CatrobatCodeParser $code_parser;
+  private ParameterBagInterface $parameter_bag;
 
   public function __construct(ProgramManager $program_manager,
                               ExtractedFileRepository $extracted_file_repository,
-                              CatrobatCodeParser $code_parser)
+                              CatrobatCodeParser $code_parser, ParameterBagInterface $parameter_bag)
   {
     $this->program_manager = $program_manager;
     $this->extracted_file_repository = $extracted_file_repository;
     $this->code_parser = $code_parser;
+    $this->parameter_bag = $parameter_bag;
   }
 
-  public function view(string $id, string $version): Response
+  /**
+   * @Route("/project/{id}/code_view", name="code_view", methods={"GET"})
+   */
+  public function view(string $id): Response
   {
+    /** @var Program $project */
+    $project = $this->program_manager->find($id);
+
+    if (!$this->program_manager->isProjectVisibleForCurrentUser($project))
+    {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    $this->parameter_bag->get('catrobat.file.extract.path');
+
     return $this->render('Program/code_view.html.twig', [
       'id' => $id,
-      'version' => $version,
+      'version' => $project->getLanguageVersion(),
+      'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
+      'extracted_dir_hash' => $project->getExtractedDirectoryHash(),
     ]);
   }
 

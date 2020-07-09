@@ -90,40 +90,6 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/project/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
-   *
-   * @throws Exception
-   */
-  public function programRemixGraphAction(Request $request, string $id): JsonResponse
-  {
-    $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
-
-    $catrobat_program_thumbnails = [];
-    foreach ($remix_graph_data['catrobatNodes'] as $node_id)
-    {
-      if (!array_key_exists($node_id, $remix_graph_data['catrobatNodesData']))
-      {
-        $catrobat_program_thumbnails[$node_id] = '/images/default/not_available.png';
-        continue;
-      }
-      $catrobat_program_thumbnails[$node_id] = '/'.$this->screenshot_repository
-        ->getThumbnailWebPath($node_id)
-      ;
-    }
-
-    $locale = strtolower($request->getLocale());
-    $referrer = $request->headers->get('referer');
-    $this->statistics->createClickStatistics($request, 'show_remix_graph', null, $id, null,
-      null, $referrer, $locale, false, false);
-
-    return new JsonResponse([
-      'id' => $id,
-      'remixGraph' => $remix_graph_data,
-      'catrobatProgramThumbnails' => $catrobat_program_thumbnails,
-    ]);
-  }
-
-  /**
    * @Route("/project/{id}", name="program")
    *
    * Legacy routes:
@@ -186,7 +152,6 @@ class ProgramController extends AbstractController
     $this->extracted_file_repository->ensureProjectIsExtracted($project);
 
     return $this->render('Program/program.html.twig', [
-      'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program' => $project,
       'program_details' => $program_details,
       'my_program' => $my_program,
@@ -678,7 +643,6 @@ class ProgramController extends AbstractController
       'comments' => $program_comments,
       'commentsLength' => count($program_comments),
       'commentsAvatars' => $comments_avatars,
-      'remixesLength' => $this->remix_manager->remixCount($program->getId()), // Huge performance killer!
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,

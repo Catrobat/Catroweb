@@ -1458,7 +1458,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iClickTheProgramDownloadButton(): void
   {
-    $this->iClick('#url-download');
+    $this->iClick('#url-download-small');
   }
 
   /**
