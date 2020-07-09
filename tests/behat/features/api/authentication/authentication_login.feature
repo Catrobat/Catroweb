@@ -6,17 +6,6 @@ Feature: Login with valid credentials should return a valid JWT token
       | id | name     | password |
       | 1  | Catrobat | 123456   |
 
-  Scenario: The Content type of the request must be application/json
-    Given I have the following JSON request body:
-    """
-      {
-        "username": "Catrobat",
-        "password": "123456"
-      }
-    """
-    And I request "POST" "/api/authentication"
-    Then the response status code should be "415"
-
   Scenario: A valid request should return a JWT token
     Given I have the following JSON request body:
     """
