@@ -12,8 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
+ * @covers \MediaLibraryApi
+ *
  * @internal
- * @covers
  */
 class MediaLibraryApiTest extends WebTestCase
 {

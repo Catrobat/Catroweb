@@ -902,3 +902,8 @@ services:
     class: App\Api\AuthenticationApi
     tags:
       - { name: "open_api_server.api", api: "authentication" }
+
+  api.utility:
+    class: App\Api\UtilityApi
+    tags:
+      - { name: "open_api_server.api", api: "utility" }
