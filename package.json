@@ -63,7 +63,7 @@
     "material-design-icons": "^3.0.1",
     "npm": "^6.14.6",
     "popper.js": "^1.16.1",
-    "sweetalert2": "^9.15.2",
+    "sweetalert2": "^9.15.3",
     "textfilljs": "^1.0.3-a",
     "vis": "^4.21.0"
   },
