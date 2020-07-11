@@ -8,6 +8,7 @@ use App\Entity\Program;
 use App\Entity\User;
 use App\Utils\TimeUtils;
 use DateTime;
+use Monolog\Logger;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
@@ -41,34 +42,25 @@ class SaveProgramSnapshotListenerTest extends TestCase
   protected function setUp(): void
   {
     $this->project_file_repository = $this->createMock(ProgramFileRepository::class);
+    $logger = $this->createMock(Logger::class);
 
     $this->file = $this->createMock(File::class);
 
-    $this->save_program_snapshot_listener = new SaveProgramSnapshotListener($this->project_file_repository, self::STORAGE_DIR);
+    $this->save_program_snapshot_listener = new SaveProgramSnapshotListener($this->project_file_repository, self::STORAGE_DIR, $logger);
 
     TimeUtils::freezeTime(new DateTime('2015-10-26 13:33:37'));
 
-    $this->user = new User();
-    $this->user->setLimited(true);
-
     $this->program = new Program();
-    $this->program->setUser($this->user);
+    $this->program->setUser(new User());
     $this->program->setId('1');
   }
 
-  public function testBackupsTheCurrentProgramFileOfALimitedAccountOnUpdate(): void
+  public function testBackupsTheCurrentProgramFileOnUpdate(): void
   {
     $this->project_file_repository->expects($this->atLeastOnce())
       ->method('getProgramFile')->with(1)->willReturn($this->file);
     $this->file->expects($this->atLeastOnce())
-      ->method('move')->with(self::STORAGE_DIR, '1_2015-10-26_13-33-37.catrobat');
-    $this->save_program_snapshot_listener->saveProgramSnapshot($this->program);
-  }
-
-  public function testDoesNotBackupIfUserIsNotLimited(): void
-  {
-    $this->user->setLimited(false);
-    $this->file->expects($this->never())->method('move');
+      ->method('move')->with(self::STORAGE_DIR, '1__2015-10-26_13-33-37.catrobat');
     $this->save_program_snapshot_listener->saveProgramSnapshot($this->program);
   }
 

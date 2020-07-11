@@ -446,7 +446,7 @@ services:
       - {
         name: kernel.event_listener,
         event: App\Catrobat\Events\ProgramAfterInsertEvent,
-        method: onProgramInsertEvent
+        method: onProgramAfterInsertEvent
       }
 
   catrobat.core.services.reportnotificator:
@@ -568,6 +568,17 @@ services:
       - App\Catrobat\Controller\Admin\ReportController
     public: true
 
+  catrowebadmin.block.programs.snapshots:
+    class: App\Admin\SnapshotAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Snapshots",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\SnapshotController
+    public: true
+
   # ===== Special Projects
 
   catrowebadmin.block.programs.categories:
@@ -676,17 +687,6 @@ services:
       - ~
       - App\Entity\User
       - ~
-
-  catrowebadmin.block.users.limited:
-    class: App\Admin\LimitedUsersAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Limited Users",
-          icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\Entity\User
-      - ~
-    public: true
 
   catrowebadmin.block.users.storeduserdata:
     class: App\Admin\StoredUserDataAdmin
@@ -861,17 +861,6 @@ services:
       - ~
       - App\Entity\Program
       - App\Catrobat\Controller\Admin\GameJamSubmittedProgramsController
-    public: true
-
-  catrowebadmin.block.program.snapshots:
-    class: App\Admin\SnapshotAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Snapshots",
-          icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\Entity\Group
-      - App\Catrobat\Controller\Admin\SnapshotController
     public: true
 
 

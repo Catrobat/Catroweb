@@ -40,18 +40,14 @@
         <div id="email-wrapper" class="mt-3 mb-3">
           <div class="subtitle-1 text-icon-aligned">
             <span>{{ 'email'|trans({}, 'catroweb') }}</span>
-            {% if not app.user.limited %}
               <span id="edit-email-button"
                     data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}"
                     class="mdc-icon-button material-icons trailing-icon">edit</span>
-            {% endif %}
           </div>
 
-          {% if not app.user.limited %}
-            <div id="email-edit-container" class="edit-container">
-              {% include 'UserManagement/Profile/emailEdit.html.twig' %}
-            </div>
-          {% endif %}
+          <div id="email-edit-container" class="edit-container">
+            {% include 'UserManagement/Profile/emailEdit.html.twig' %}
+          </div>
 
           <div class="profile-data text-icon-aligned">
             <span class="material-icons mr-2">email</span>
@@ -61,72 +57,60 @@
           </div>
         </div>
 
-        {% if (not app.user.limited) %}
+        <hr>
 
-          <hr>
-
-          <div id="password-wrapper" class="mt-3 mb-3">
-            <div class="subtitle-1 text-icon-aligned">
-              <span>{{ 'password'|trans({}, 'catroweb') }}</span>
-              <span id="edit-password-button"
-                    data-toggle="tooltip" title="{{ 'myprofile.editPassword'|trans({}, 'catroweb') }}"
-                    class="mdc-icon-button material-icons trailing-icon">edit</span>
-            </div>
-            <div id="password-edit-container" class="edit-container">
-              {% include 'UserManagement/Profile/passwordEdit.html.twig' %}
-            </div>
-
-            <div class="profile-data text-icon-aligned">
-              <span class="material-icons mr-2">vpn_key</span>
-              <div id="fake-password">
-                ************
-              </div>
-            </div>
-
+        <div id="password-wrapper" class="mt-3 mb-3">
+          <div class="subtitle-1 text-icon-aligned">
+            <span>{{ 'password'|trans({}, 'catroweb') }}</span>
+            <span id="edit-password-button"
+                  data-toggle="tooltip" title="{{ 'myprofile.editPassword'|trans({}, 'catroweb') }}"
+                  class="mdc-icon-button material-icons trailing-icon">edit</span>
+          </div>
+          <div id="password-edit-container" class="edit-container">
+            {% include 'UserManagement/Profile/passwordEdit.html.twig' %}
           </div>
 
-        {% endif %}
+          <div class="profile-data text-icon-aligned">
+            <span class="material-icons mr-2">vpn_key</span>
+            <div id="fake-password">
+              ************
+            </div>
+          </div>
+
+        </div>
 
         <hr>
 
         <div id="country-wrapper" class="mt-3 mb-3">
           <div class="subtitle-1 text-icon-aligned">
           <span>{{ 'country'|trans({}, 'catroweb') }}</span>
-            {% if not app.user.limited %}
-              <span id="edit-country-button"
-                    data-toggle="tooltip" title="Edit Country"
-                    class="mdc-icon-button material-icons trailing-icon">edit</span>
-            {% endif %}
+            <span id="edit-country-button"
+                  data-toggle="tooltip" title="Edit Country"
+                  class="mdc-icon-button material-icons trailing-icon">edit</span>
           </div>
           <div id="country" class="profile-data text-icon-aligned">
             <span class="material-icons mr-2">location_on</span>
             {{ country }}
           </div>
-          {% if not app.user.limited %}
-            <div id="country-edit-container" class="edit-container">
-              {% include 'UserManagement/Profile/countryEdit.html.twig' %}
-            </div>
-          {% endif %}
+          <div id="country-edit-container" class="edit-container">
+            {% include 'UserManagement/Profile/countryEdit.html.twig' %}
+          </div>
         </div>
 
-        {% if not app.user.limited %}
+        <hr>
 
-          <hr>
-
-          <div id="account-settings-wrapper" class="mt-3">
-            <div class="subtitle-1 text-icon-aligned">
-              <span class="material-icons mr-2">settings</span>
-              <span>{{ 'accountSettings'|trans({}, 'catroweb') }}</span>
-              <span id="account-settings-button"
-                    data-toggle="tooltip" title="{{ 'myprofile.editAccountSettings'|trans({}, 'catroweb') }}"
-                    class="mdc-icon-button material-icons trailing-icon">edit</span>
-            </div>
-            <div id="account-settings-container" class="edit-container">
-              {% include 'UserManagement/Profile/accountSettings.html.twig' %}
-            </div>
+        <div id="account-settings-wrapper" class="mt-3">
+          <div class="subtitle-1 text-icon-aligned">
+            <span class="material-icons mr-2">settings</span>
+            <span>{{ 'accountSettings'|trans({}, 'catroweb') }}</span>
+            <span id="account-settings-button"
+                  data-toggle="tooltip" title="{{ 'myprofile.editAccountSettings'|trans({}, 'catroweb') }}"
+                  class="mdc-icon-button material-icons trailing-icon">edit</span>
           </div>
-
-        {% endif %}
+          <div id="account-settings-container" class="edit-container">
+            {% include 'UserManagement/Profile/accountSettings.html.twig' %}
+          </div>
+        </div>
 
       </div>
     </div>

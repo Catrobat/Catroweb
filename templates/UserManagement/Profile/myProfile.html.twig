@@ -10,11 +10,7 @@
    {%  include 'UserManagement/Profile/myProfileData.html.twig' %}
 
   <div class="clear mt-5"></div>
-    {% if not app.user.limited %}
       <div id="myprofile-programs">
-    {% else %}
-      <div id="user-programs">
-    {% endif %}
     <h1 class="header mb-0">
       {{ "profile.myPrograms"|trans({}, "catroweb") }}
     </h1>
@@ -28,39 +24,33 @@
   <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
 
   <script>
-    let programs
-    {% if not app.user.limited %}
-      programs = new ProjectLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
-      // load programs need profile!
-      let profile = new MyProfile('{{ path('profile') }}', '{{ path('username_save') }}',
-        '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',
-        '{{ path('profile_delete_program') }}', '{{ path('profile_delete_account') }}',
-        '{{ path('profile_toggle_program_visibility') }}',
-        '{{ path('profile_upload_avatar') }}',
-        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
-        {{ constant('App\\Catrobat\\StatusCode::USERNAME_ALREADY_EXISTS') }},
-        {{ constant('App\\Catrobat\\StatusCode::USERNAME_MISSING') }},
-        {{ constant('App\\Catrobat\\StatusCode::USERNAME_INVALID') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_ALREADY_EXISTS') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_MISSING') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_INVALID') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_COUNTRY_INVALID') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_USERNAME_PASSWORD_EQUAL') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_TOO_SHORT') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_TOO_LONG') }},
-        {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2') }},
-        {{ constant('App\\Catrobat\\StatusCode::PASSWORD_INVALID') }},
-        '{{ "success.text"|trans({}, "catroweb") }}',
-        '{{ "myprofile.checkMail"|trans({}, "catroweb") }}',
-        '{{ "myprofile.passwordUpdated"|trans({}, "catroweb") }}',
-        '{{ "myprofile.notChangeVisibility"|trans({}, "catroweb") }}',
-        '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}',
-         {{ constant('App\\Catrobat\\StatusCode::USERNAME_CONTAINS_EMAIL') }}
-
-      )
-    {% else %}
-      programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
-    {% endif %}
+    let programs = new ProjectLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
+    // load programs need profile!
+    let profile = new MyProfile('{{ path('profile') }}', '{{ path('username_save') }}',
+      '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',
+      '{{ path('profile_delete_program') }}', '{{ path('profile_delete_account') }}',
+      '{{ path('profile_toggle_program_visibility') }}',
+      '{{ path('profile_upload_avatar') }}',
+      {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
+      {{ constant('App\\Catrobat\\StatusCode::USERNAME_ALREADY_EXISTS') }},
+      {{ constant('App\\Catrobat\\StatusCode::USERNAME_MISSING') }},
+      {{ constant('App\\Catrobat\\StatusCode::USERNAME_INVALID') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_ALREADY_EXISTS') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_MISSING') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_EMAIL_INVALID') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_COUNTRY_INVALID') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_USERNAME_PASSWORD_EQUAL') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_TOO_SHORT') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_TOO_LONG') }},
+      {{ constant('App\\Catrobat\\StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2') }},
+      {{ constant('App\\Catrobat\\StatusCode::PASSWORD_INVALID') }},
+      '{{ "success.text"|trans({}, "catroweb") }}',
+      '{{ "myprofile.checkMail"|trans({}, "catroweb") }}',
+      '{{ "myprofile.passwordUpdated"|trans({}, "catroweb") }}',
+      '{{ "myprofile.notChangeVisibility"|trans({}, "catroweb") }}',
+      '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}',
+       {{ constant('App\\Catrobat\\StatusCode::USERNAME_CONTAINS_EMAIL') }}
+    )
     programs.initProfile('{{ app.user.id }}')
   </script>
   <script src="{{ asset('js/ImageUpload.min.js') }}"></script>

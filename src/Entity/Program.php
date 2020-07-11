@@ -372,6 +372,11 @@ class Program
   protected Collection $reports;
 
   /**
+   * @ORM\Column(type="boolean", options={"default": false})
+   */
+  private bool $snapshots_enabled = false;
+
+  /**
    * Program constructor.
    */
   public function __construct()
@@ -1073,5 +1078,15 @@ class Program
   public function isScratchProgram(): bool
   {
     return null !== $this->scratch_id;
+  }
+
+  public function setSnapshotsEnabled(bool $snapshots_enabled): void
+  {
+    $this->snapshots_enabled = $snapshots_enabled;
+  }
+
+  public function isSnapshotsEnabled(): bool
+  {
+    return $this->snapshots_enabled;
   }
 }

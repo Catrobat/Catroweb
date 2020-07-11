@@ -90,6 +90,7 @@ sonata_admin:
                     - catrowebadmin.block.programs.approve
                     - catrowebadmin.block.programs.reported
                     - catrowebadmin.block.programs.comments
+                    - catrowebadmin.block.programs.snapshots
 
             sonata.admin.group.featured:
                 label:           Special Projects
@@ -126,7 +127,6 @@ sonata_admin:
                 items:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
-                    - catrowebadmin.block.users.limited
                     - catrowebadmin.block.users.storeduserdata
                     - catrowebadmin.block.users.reported
 
@@ -149,7 +149,6 @@ sonata_admin:
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - catrowebadmin.block.gamejam
-                    - catrowebadmin.block.program.snapshots
 
             sonata.admin.group.extensions:
                 label:           Extensions
