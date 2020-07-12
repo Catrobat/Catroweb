@@ -65,78 +65,69 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
       | 8           | 9             | 1     |
       | 9           | 9             | 0     |
 
-  Scenario: Viewing details of project 8 and number of remixes
-    Given I am on "/app/project/8?show_graph=1"
+  Scenario: For performance reasons the remix graph is on its own page
+    Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "project 8"
-    And I should see "Gangster"
-    And I should see "abcef"
-    And I should see "more than one year ago"
-    And I should see "0.00 MB"
-    And I should see "336 downloads"
-    And I should see "10 views"
-    And I should see "1 remix"
+    And I click "#remix-graph-button-small"
+    Then I should be on "/app/project/1/remix_graph"
+    And the "#top-app-bar__title" element should contain "Remixes"
+
+  Scenario: Remix graphs provides means to return to the project page
+    Given I am on "/app"
+    When I go to "/app/project/1/remix_graph"
+    And I wait for the page to be loaded
+    And I click "#top-app-bar__back__btn-back"
+    Then I should be on "/app/project/1"
+
+  Scenario: Remix graph title is no link
+    Given I am on "/app/project/1/remix_graph"
+    And I click "#top-app-bar__title"
+    Then I should be on "/app/project/1/remix_graph"
+
+  Scenario: Viewing details of project 8 and number of remixes
+    Given I am on "/app/project/8/remix_graph"
+    And I wait for the page to be loaded
+    And I should see "Remixes (1)"
 
   Scenario: Viewing details of project 9 and number of remixes
-    Given I am on "/app/project/9?show_graph=1"
+    Given I am on "/app/project/9/remix_graph"
     And I wait for the page to be loaded
-    Then I should see "project 9"
-    And I should see "Superman"
-    And I should see "abcef"
-    And I should see "more than one year ago"
-    And I should see "0.00 MB"
-    And I should see "336 downloads"
-    And I should see "10 views"
-    And I should see "1 remix"
+    And I should see "Remixes (1)"
 
   Scenario: Viewing remix graph of project 8
-    Given I am on "/app/project/8?show_graph=1"
+    Given I am on "/app/project/8/remix_graph"
     And I wait for the page to be loaded
-    Then I ensure pop ups work
-    When I click "#remix-graph-modal-link"
-    And I wait for AJAX to finish
     And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
 
   Scenario: Viewing remix graph of project 9
-    Given I am on "/app/project/9?show_graph=1"
+    Given I am on "/app/project/9/remix_graph"
     And I wait for the page to be loaded
-    Then I ensure pop ups work
-    When I click "#remix-graph-modal-link"
-    And I wait for AJAX to finish
     And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
 
   Scenario: Viewing details of project 1 and number of remixes
-    Given I am on "/app/project/1?show_graph=1"
+    Given I am on "/app/project/1/remix_graph"
     And I wait for the page to be loaded
-    Then I should see "project 1"
-    And I should see "Superman"
-    And I should see "6 remixes"
+    And I should see "Remixes (6)"
 
   Scenario: Viewing details of project 2 and number of remixes
-    Given I am on "/app/project/2?show_graph=1"
+    Given I am on "/app/project/2/remix_graph"
     And I wait for the page to be loaded
-    Then I should see "project 2"
-    And I should see "Gangster"
-    And I should see "6 remixes"
+    And I should see "Remixes (6)"
 
   Scenario: Viewing details of project 2 using debug app
     Given I use a debug build of the Catroid app
-    And I am on "/app/project/2?show_graph=1"
+    And I am on "/app/project/2/remix_graph"
     And I wait for the page to be loaded
-    When I click "#remix-graph-modal-link"
-    And I wait for AJAX to finish
     Then I should see a node with id "catrobat_7" having name "project 7" and username "Superman"
     And I should see an edge from "catrobat_5" to "catrobat_7"
 
-  Scenario: Viewing details of project 2 using release app
+  Scenario: Viewing remix graph using release app
     Given I use a release build of the Catroid app
-    And I am on "/app/project/2?show_graph=1"
+    And I am on "/app/project/2/remix_graph"
     And I wait for the page to be loaded
-    When I click "#remix-graph-modal-link"
-    And I wait for AJAX to finish
     Then I should see an unavailable node with id "catrobat_7"
     And I should see an edge from "catrobat_5" to "catrobat_7"

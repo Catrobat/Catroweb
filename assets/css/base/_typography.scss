@@ -188,3 +188,9 @@ h6,
 .force-word-break {
   @include force-word-break();
 }
+
+.no-overflow {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

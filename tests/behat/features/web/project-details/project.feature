@@ -13,14 +13,16 @@ Feature: As a visitor I want to see a project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "project 1"
-    Then I should see "DESCRIPTION"
+    Then I should see "Description"
     And I should see "my description"
-    Then I should see "CREDITS"
+    Then I should see "Credits"
     And I should see "No credits available."
-    And I should see "DOWNLOAD"
-    And I should see "REMIX GRAPH"
-    And I should see "DOWNLOAD AS APP"
+    And I should see "Download"
+    And I should see "Remix Graph"
+    And I should see "Download as app"
     And I should see "Catrobat"
+    And I should see "Statistics"
+    And I should see "Code View"
 
   Scenario: Viewing the uploader's profile page
     Given I am on "/app/project/1"
@@ -32,14 +34,18 @@ Feature: As a visitor I want to see a project page
   Scenario: On the project page there should be all buttons visible to web and android
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "DOWNLOAD"
-    And I should see "REMIX GRAPH"
-    And I should see "DOWNLOAD AS APP"
+    Then I should see "Download"
+    And I should see "Remix Graph"
+    And I should see "Download as app"
+    And I should see "Statistics"
+    And I should see "Code View"
 
   Scenario: On the project page there should be no apk button be visible to ios users
     Given I use an ios app
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "DOWNLOAD"
-    And I should see "REMIX GRAPH"
-    And I should not see "DOWNLOAD AS APP"
+    Then I should see "Download"
+    And I should see "Remix Graph"
+    And I should not see "Download as app"
+    And I should see "Statistics"
+    And I should see "Code View"

@@ -110,7 +110,7 @@ class ResetCommand extends Command
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
 
-    //https://share.catrob.at/app/project/remixgraph/{id_of_project} to get remixes
+    //https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
     // Creating sample MediaPackages
     CommandHelper::executeShellCommand(
