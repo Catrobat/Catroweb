@@ -27,6 +27,7 @@ country: Paese
 loginText: login
 privacyPolicy: Informativa sulla privacy
 imprint: Imprint
+programDetails: Dettagli
 somethingWentWrong: 'Ooooops qualcosa è andato storto.'
 pleaseTryAgain: 'Per favore riprova!'
 oldVersionError: 'Si prega di aggiornare alla nuova versione di Pocket Code!'
@@ -34,7 +35,7 @@ more: 'altro'
 less: 'meno'
 show-more: 'Mostra di più'
 show-less: 'Mostra meno'
-ok: Va bene
+ok: Ok
 clickToDownloadProgram: 'Per scaricare il progetto di esempio, fai click su %link_start% questo %link_end% link.'
 registrationError: 'Nome utente o indirizzo email già in uso.'
 notifications: 'Notifiche'
@@ -65,6 +66,7 @@ notificationsClearError: "Impossibile segnare le notifiche come lette!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Attendere prego..."
 projects: "Programmi"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Mi piace
 remixGraph:
+  title: Remix
   showRemixGraph: 'Visualizza il grafo dei Remix'
   by: 'di'
   open: 'Apri '
@@ -271,6 +275,7 @@ profile:
     pictureTooLarge: L'immagine selezionata è troppo grande; non utilizzare immagini di dimensioni superiori a 5mb.
     uploadError: Spiacenti, c'è stato un problema durante il caricamento!
     noSupport: Questo formato di immagine non è supportato, prova un'altra immagine.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Modifica il profilo
   edit: Modifica
@@ -675,18 +680,19 @@ failure:
   upload: Si è verificato un errore durante il caricamento della tua app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -790,6 +796,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Mostra codice'
   hideCode: 'Nascondi codice'
   showStatistics: 'Mostra statistiche sul codice'

@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: ڈاؤنلوڈ
 description: تفصیل (وضاحت)
 noDescription: کوئی وضاحت دستیاب نہیں۔
 credits: Credits
@@ -27,14 +27,15 @@ country: ملک
 loginText: لاگ آن
 privacyPolicy: رازداری کا طریقہ کار
 imprint: طباعت
+programDetails: تفصیلات
 somethingWentWrong: 'اف، کچھ غلط ہوگیا۔.'
 pleaseTryAgain: 'برائے مہربانی دوبارہ کوشش کریں!'
 oldVersionError: 'برائے مہربانی پاکٹ کوڈ کو تازہ ترین ورژن پر اپ ڈیٹ کریں!'
 more: 'مزید'
 less: 'کم'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: ٹھيک ہے
+show-more: 'مزید معلومات'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
 notifications: 'اطلاعات'
@@ -65,6 +66,7 @@ notificationsClearError: "اطلاعات کو پڑھنے کے طور پر نشا
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "براہ مہربانی انتظار کریں..."
 projects: "پروگرامات"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: ریمکسس
+  showRemixGraph: 'Remix graph'
   by: 'کی طرف سے'
   open: 'کھولیں'
   showPaths: 'راستے دکھائیں'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: آپکی منتخب کردہ تصویر بہت بڑی ہے، برائے مہربانی 5mb سے بڑے تصاویر استعمال نہ کریں۔
     uploadError: ہم معذرت خواہ ہیں، اپ لوڈنگ کے دوران کچھ مسئلہ پیش آیا!
     noSupport: اس قسم کی تصویر موزوں نہیں ہے، دوسری تصویر آزمائیے۔
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: پروفائل میں ترمیم کریں
   edit: تدوین کریں
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'کوڈ دکھائیں'
   hideCode: 'کوڈ چھپائیں'
   showStatistics: 'کوڈ کے اعداد و شمار دکھائیں'

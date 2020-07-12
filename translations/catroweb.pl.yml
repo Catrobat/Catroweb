@@ -27,6 +27,7 @@ country: Kraj
 loginText: zaloguj się
 privacyPolicy: Polityka prywatności
 imprint: Stopka
+programDetails: Szczegóły
 somethingWentWrong: 'Ooooops coś poszło nie tak.'
 pleaseTryAgain: 'Spróbuj ponownie!'
 oldVersionError: 'Zaktualizuj do najnowszej wersji Pocket code!'
@@ -34,7 +35,7 @@ more: 'więcej'
 less: 'mniej'
 show-more: 'Pokaż więcej'
 show-less: 'Pokaż mniej'
-ok: OK
+ok: Ok
 clickToDownloadProgram: 'Aby pobrać przykładowy projekt kliknij %link_start% tutaj %link_end%.'
 registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
 notifications: 'Powiadomienia'
@@ -65,6 +66,7 @@ notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
 notificationsDeleteError: "Nie można usunąć powiadomień!"
 pleaseWait: "Proszę czekać..."
 projects: "Programy"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -74,7 +76,7 @@ follower:
   follows: Following
   followers: Obserwujący
   follow: Follow
-  username: User
+  username: Użytkownik
   followsMe: Follows me
   noFollowing: You are not following anybody currently.
   noFollowers: You have no followers currently.
@@ -91,7 +93,7 @@ programs:
     download: Pobierz aplikację
     statistics: Więcej Statystyk
   featured: Polecane
-  example: Examples
+  example: Przykłady
   newest: Najnowsze projekty
   recommended: Polecane projekty
   scratchremixes: Remiksy Scratcha
@@ -175,7 +177,9 @@ programs:
   wow: Wow!
   linkTitle: Link
   link: Skopiuj link do projektu do schowka
+  reactionsText: Polubienia
 remixGraph:
+  title: Remiksy
   showRemixGraph: 'Pokaż wykres remiksów'
   by: 'o'
   open: 'Otwórz '
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Wybrane zdjęcie jest za duże, proszę, nie używaj zdjęć większych niż 5MB.
     uploadError: Przepraszamy, wystąpił błąd podczas wysyłania!
     noSupport: Ten typ obrazu nie jest obsługiwany, proszę wybierz inny obraz.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edytuj profil
   edit: Edytuj
@@ -671,17 +676,18 @@ failure:
 api:
   registerUser:
     emailMissing: 'Brak adresu e-mail'
-    notAValidEmail: 'Nieprawidłowy adres e-mail'
+    emailInvalid: 'Email invalid'
     emailAlreadyInUse: 'Ten adres e-mail jest już zajęty'
     usernameMissing: 'Brak nazwy użytkownika'
     usernameTooShort: 'Za krótka nazwa użytkownika'
     usernameTooLong: 'Za długa nazwa użytkownika'
     usernameAlreadyInUse: 'Nazwa jest już w użyciu'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Brak hasła'
     passwordTooShort: 'Hasło jest zbyt krótkie'
     passwordTooLong: 'Zbyt długie hasło'
     passwordInvalidChars: 'Hasło zawiera nieprawidłowe znaki'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -785,6 +791,7 @@ pmd:
   failed:
     text: Przesyłanie projektu nie powiodło się.
 codeview:
+  title: 'Code View'
   showCode: 'Pokaż kod'
   hideCode: 'Ukryj kod'
   showStatistics: 'Pokaż statystyki kodu'
@@ -918,7 +925,7 @@ share:
   text: 'Share'
   error: 'Share failed'
   success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
+copy: 'Skopiuj link'
+checkOutProject: 'Sprawdź ten projekt:'
 community: 'Społeczność Catrobat'
-back_to_app: 'Exit community'
+back_to_app: 'Opuść społeczność'

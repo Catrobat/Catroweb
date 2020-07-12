@@ -18,7 +18,7 @@ deleteIt: Ja, wirklich löschen!
 reportIt: Ja, melden!
 areYouSure: Bist du sicher?
 noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
-download: Projekt herunterladen
+download: Herunterladen
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
 credits: Anerkennung
@@ -27,6 +27,7 @@ country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
 imprint: Impressum
+programDetails: Einzelheiten
 somethingWentWrong: 'Ooooops etwas ging schief.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
@@ -34,7 +35,7 @@ more: 'mehr'
 less: 'weniger'
 show-more: 'Mehr'
 show-less: 'Weniger'
-ok: OK
+ok: Ok
 clickToDownloadProgram: 'Um das Beispielprojekt herunterzuladen klicke %link_start% hier %link_end%.'
 registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
@@ -65,6 +66,7 @@ notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu m
 notificationsDeleteError: "Benachrichtigungen konnten nicht gelöscht werden!"
 pleaseWait: "Bitte warten..."
 projects: "Projekte"
+statistics: "Statistiken"
 indexPage:
   recommendedSection:
     info:
@@ -78,7 +80,7 @@ follower:
   followsMe: Folgt mir
   noFollowing: Du folgst derzeit niemandem.
   noFollowers: Du hast derzeit keine Follower.
-  noOtherFollowing: Aktuell von niemanden abonniert.
+  noOtherFollowing: Aktuell von niemandem abonniert.
   noOtherFollowers: Keine Abonnenten.
   followError: "Es ist nicht möglich den User zu folgen!"
   unfollowError: "Es ist nicht möglich den User nicht mehr zu folgen!"
@@ -175,7 +177,9 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Link in Zwischenablage kopieren
+  reactionsText: Gefällt mir
 remixGraph:
+  title: Remixe
   showRemixGraph: 'Remix Graph'
   by: 'um'
   open: 'Öffne '
@@ -271,6 +275,7 @@ profile:
     pictureTooLarge: Dein gewähltes Bild ist zu groß, verwende bitte keine Bilder, die größer als 5MB sind.
     uploadError: Tut mir leid, es gab ein Problem beim Hochladen!
     noSupport: Dieser Bild-Typ wird nicht unterstützt, versuche ein anderes Bild.
+  goToScratchProfile: Scratch Profil
 myprofile:
   editProfile: Profil bearbeiten
   edit: Bearbeiten
@@ -597,9 +602,9 @@ login:
   passwordFirst: Passwort
   passwordSecond: Passwort bestätigen
 apk:
-  download: Als app herunterladen
+  download: App herunterladen
   prepare: 'App erstellen'
-  preparing: 'App wird vorbereitet'
+  preparing: 'App vorbereiten'
   text: 'Der Vorgang kann eine Weile dauern'
 format:
   million_abbreviation: M
@@ -674,12 +679,13 @@ failure:
 api:
   registerUser:
     emailMissing: 'EMail fehlt'
-    notAValidEmail: 'Email ungültig'
+    emailInvalid: 'Email ungültig'
     emailAlreadyInUse: 'EMail wird bereits benützt'
     usernameMissing: 'Benutzername fehlt'
     usernameTooShort: 'Benutzername zu kurz'
     usernameTooLong: 'Benutzername zu lang'
     usernameAlreadyInUse: 'Benutzername wird bereits benützt'
+    usernameInvalid: 'Benutzername ungültig'
     passwordMissing: 'Passwort fehlt'
     passwordTooShort: 'Passwort zu kurz'
     passwordTooLong: 'Passwort zu lang'
@@ -736,9 +742,9 @@ language:
   ukrainian: Ukrainisch
   vietnamese: Vietnamesisch
 ci:
-  generate: Apk generieren
-  pending: Generiere Apk
-  download: Apk Runterladen
+  generate: APK generieren
+  pending: Generiere APK
+  download: APK downloaden
 gamejam:
   nojam: Entschuldigung, es findet gerade kein game jam statt
   submit: Einreichen zum %gamejamname%
@@ -768,7 +774,7 @@ admin:
     manualBackups: Manuelle Sicherungen
     noRemovableBackupObjects: Keine entfernbaren Sicherungsdateien auf diesem Server.
     btnCreateBackup: Sicherung erstellen
-    btnDownloadBackup: Sicherung herunterladen
+    btnDownloadBackup: Download backup
     btnRestoreBackup: Sicherung wiederherstellen
     btnDeleteBackup: Sicherung löschen
     createBackupConfirmationTitle: Sicherungsdatei erstellen
@@ -788,6 +794,7 @@ pmd:
   failed:
     text: Fehler beim Hochladen des Projekts.
 codeview:
+  title: 'Code-Ansicht'
   showCode: 'Code anzeigen'
   hideCode: 'Code ausblenden'
   showStatistics: 'Code-Statistiken anzeigen'
