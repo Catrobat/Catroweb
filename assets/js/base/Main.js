@@ -32,6 +32,10 @@ const Main = function () {
   // ----SideBar
   let sidebar, sidebarToggleBtn
   const fnCloseSidebar = function () {
+    window.history.back() // to remove pushed state
+  }
+  const fnCloseSidebarInternal = function () {
+    $(window).off('popstate', fnCloseSidebarInternal)
     sidebar.removeClass('active')
     sidebarToggleBtn.attr('aria-expanded', false)
   }
@@ -43,6 +47,8 @@ const Main = function () {
   const fnOpenSidebar = function () {
     sidebar.addClass('active')
     sidebarToggleBtn.attr('aria-expanded', true)
+    window.history.pushState('sidebar-open', null, '')
+    $(window).on('popstate', fnCloseSidebarInternal)
   }
   const fnOpenSidebarDesktop = function () {
     sidebar.removeClass('inactive')
@@ -96,7 +102,7 @@ const Main = function () {
 
     const touchThreshold = 25 // area where touch is possible
 
-    function refrehSidebar () {
+    function refreshSidebar () {
       const left = (curX >= sidebarWidth) ? 0 : curX - sidebarWidth
       sidebar.css('transition', 'none').css('left', left)
       if (!desktop) {
@@ -129,7 +135,7 @@ const Main = function () {
             startY = touch.pageY
             startTime = Date.now()
             opening = true
-            refrehSidebar()
+            refreshSidebar()
           }
         }
       }
@@ -145,12 +151,12 @@ const Main = function () {
           const xDiff = Math.abs(curX - startX)
 
           if (xDiff > yDiff * 1.25) {
-            refrehSidebar()
+            refreshSidebar()
           } else {
             reset()
           }
         } else {
-          refrehSidebar()
+          refreshSidebar()
         }
       }
     })
