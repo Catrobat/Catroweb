@@ -23,7 +23,8 @@ fos_elastica:
                         description: ~
                         flavor: ~
                         id: ~
-                        language_version: ~
+                        language_version:
+                            type: float
                         name: { boost: 3 }
                         private: ~
                         visible: ~

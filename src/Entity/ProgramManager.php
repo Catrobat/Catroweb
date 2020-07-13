@@ -31,6 +31,7 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\ORMException;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
+use Elastica\Query\Range;
 use Elastica\Query\Terms;
 use Elastica\Util;
 use Exception;
@@ -1004,7 +1005,7 @@ class ProgramManager
 
     if ('0' !== $max_version)
     {
-      $category_query[] = new Terms('language_version', [$max_version]);
+      $category_query[] = new Range('language_version', ['lte' => $max_version]);
     }
     if (null !== $flavor)
     {
