@@ -106,10 +106,6 @@ services:
     class: App\Entity\ProgramManager
     public: true
 
-  App\Entity\TemplateManager:
-    class: App\Entity\TemplateManager
-    public: true
-
   App\Commands\Helpers\RemixManipulationProgramManager:
     class: App\Commands\Helpers\RemixManipulationProgramManager
     public: true
@@ -165,10 +161,6 @@ services:
     class: App\Catrobat\Services\CatrobatFileSanitizer
     public: true
 
-  App\Catrobat\Services\TemplateService:
-    class: App\Catrobat\Services\TemplateService
-    public: true
-
   App\Catrobat\Services\CatroNotificationService:
     class: App\Catrobat\Services\CatroNotificationService
     public: true
@@ -183,10 +175,6 @@ services:
 
   App\Catrobat\Services\ExtractedFileRepository:
     class: App\Catrobat\Services\ExtractedFileRepository
-    public: true
-
-  App\Catrobat\Services\TemplateFileRepository:
-    class: App\Catrobat\Services\TemplateFileRepository
     public: true
 
   App\Catrobat\Services\ImageRepository:
@@ -499,11 +487,6 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
 
-  catrobat.view.templatelist:
-    class:        App\Catrobat\Listeners\View\TemplateListSerializer
-    tags:
-      - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
-
   # ======== Download ========
 
   catrobat.download.stats:
@@ -589,16 +572,6 @@ services:
       - ~
       - App\Entity\FeaturedProgram
       - ~
-    public: true
-
-  catrowebadmin.block.programs.templates:
-    class: App\Admin\TemplateAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Template Projects" }
-    arguments:
-      - ~
-      - App\Entity\Template
-      - App\Catrobat\Controller\Admin\TemplateController
     public: true
 
   catrowebadmin.block.example.program:
