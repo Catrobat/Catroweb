@@ -29,7 +29,7 @@ Feature: Upload a program
     When I POST these parameters to "/app/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":501,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
+      {"statusCode":501,"answer":"POST-data not correct or missing!","preHeaderMessages":""}
       """
 
   Scenario: trying to upload with an invalid user should result in an error

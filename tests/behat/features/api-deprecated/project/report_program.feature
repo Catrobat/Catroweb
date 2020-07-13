@@ -36,5 +36,5 @@ Feature: Report a program
     When I POST these parameters to "/app/api/reportProject/reportProject.json"
     Then I should get the json object:
     """
-      {"statusCode":501,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
+      {"statusCode":501,"answer":"POST-data not correct or missing!","preHeaderMessages":""}
     """
