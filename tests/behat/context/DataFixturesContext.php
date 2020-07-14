@@ -47,6 +47,7 @@ class DataFixturesContext implements KernelAwareContext
   private array $programs = [];
   private array $featured_programs = [];
   private array $media_files = [];
+  private array $users = [];
 
   /**
    * @AfterFeature
@@ -79,9 +80,40 @@ class DataFixturesContext implements KernelAwareContext
   {
     foreach ($table->getHash() as $config)
     {
-      $this->insertUser($config, false);
+      $user = $this->insertUser($config, false);
+      $this->users[] = $user;
     }
     $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are followers:$/
+   */
+  public function thereAreFollowers(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config)
+    {
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findOneBy(['username' => $config['name']]);
+
+      $followings = explode(', ', $config['following']);
+      foreach ($followings as $follow)
+      {
+        /** @var User|null $follow_user */
+        $follow_user = $this->getUserManager()->findOneBy(['username' => $follow]);
+        $user->addFollowing($follow_user);
+        $this->getUserManager()->updateUser($user);
+      }
+    }
+
+    $users = $this->users;
+    unset($this->users);
+
+    /** @var User|null $user */
+    foreach ($users as $user)
+    {
+      $this->users[] = $this->getUserManager()->find($user->getId());
+    }
   }
 
   /**
@@ -248,6 +280,11 @@ class DataFixturesContext implements KernelAwareContext
   public function getMediaFiles(): array
   {
     return $this->media_files;
+  }
+
+  public function getUsers(): array
+  {
+    return $this->users;
   }
 
   /**

@@ -22,6 +22,7 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
                               ProgramManager $program_manager)
   {
     $this->program_manager = $program_manager;
+
     parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
   }
 

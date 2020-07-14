@@ -175,10 +175,19 @@ class UserApi implements UserApiInterface
 
   public function userIdGet(string $id, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement userIdGet() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $responseCode = Response::HTTP_OK;
 
-    return new BasicUserDataResponse();
+    /** @var User|null $user */
+    $user = $this->user_manager->find($id);
+
+    if (null === $user)
+    {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    return $this->getBasicUserDataResponse($user);
   }
 
   public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode, array &$responseHeaders)
@@ -197,5 +206,30 @@ class UserApi implements UserApiInterface
     $responseCode = Response::HTTP_NOT_IMPLEMENTED;
 
     return []; // ...[] =  new BasicUserDataResponse()
+  }
+
+  private function getBasicUserDataResponse(User $user): BasicUserDataResponse
+  {
+    return new BasicUserDataResponse([
+      'id' => $user->getId(),
+      'username' => $user->getUsername(),
+      'email' => $user->getEmail(),
+      'country' => $user->getCountry(),
+      'projects' => $user->getPrograms()->count(),
+      'followers' => $user->getFollowers()->count(),
+      'following' => $user->getFollowing()->count(),
+    ]);
+  }
+
+  private function getUsersDataResponse(array $users): array
+  {
+    $users_data_response = [];
+    foreach ($users as $user)
+    {
+      $user_data = $this->getBasicUserDataResponse($user);
+      $users_data_response[] = $user_data;
+    }
+
+    return $users_data_response;
   }
 }
