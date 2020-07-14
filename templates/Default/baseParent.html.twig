@@ -20,7 +20,13 @@
 <body class="new-nav">
 <div id="page-container" class="pr-0 pl-0">
 
-  {% include 'Header/header.html.twig' with {page_title: block('page_title') ?? '', back_path: block('back_path') ?? ''} %}
+  {% include 'Header/header.html.twig' with
+    {
+      page_title: block('page_title') ?? '',
+      back_path: block('back_path') ?? '',
+      no_search: block('no_search') ?? ''
+    }
+  %}
 
   {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 

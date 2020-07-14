@@ -35,6 +35,7 @@
 
       </section>
 
+      {% if no_search|default('') is empty %}
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
         <button id="top-app-bar__btn-search"
                 class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
@@ -46,6 +47,7 @@
         {% include 'Header/header_options.html.twig' %}
 
       </section>
+      {% endif %}
     </div>
 
 

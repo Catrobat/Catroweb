@@ -77,7 +77,7 @@ Feature: Uploading a project
     And I should get the json object:
     """
       {
-        "error": "Error while creating Program Entity. Try uploading again!"
+        "error": "Error while creating project entity. Try uploading again!"
       }
     """
 

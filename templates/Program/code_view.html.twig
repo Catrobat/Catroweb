@@ -1,6 +1,9 @@
 {% extends 'Default/base.html.twig' %}
 {% block page_title %}{{ "codeview.title"|trans({}, "catroweb") }}{% endblock %}
 {% block back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
+{# Catblocks is broken in the moment therefor no search would work. ToDo: Enable as soon as it's working again #}
+{% block no_search %}true{% endblock %}
+
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/card.css') }}"/>
