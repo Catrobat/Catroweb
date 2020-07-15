@@ -14,6 +14,7 @@ use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -30,13 +31,16 @@ class UserApi implements UserApiInterface
 
   private TranslatorInterface $translator;
 
+  private TokenStorageInterface $token_storage;
+
   public function __construct(ValidatorInterface $validator, UserManager $user_manager, TokenGenerator $token_generator,
-                              TranslatorInterface $translator)
+                              TranslatorInterface $translator, TokenStorageInterface $token_storage)
   {
     $this->validator = $validator;
     $this->user_manager = $user_manager;
     $this->token_generator = $token_generator;
     $this->translator = $translator;
+    $this->token_storage = $token_storage;
   }
 
   /**
@@ -161,8 +165,14 @@ class UserApi implements UserApiInterface
 
   public function userDelete(&$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement userDelete() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $responseCode = Response::HTTP_NO_CONTENT;
+
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    $this->user_manager->delete($user);
+
+    return null;
   }
 
   public function userGet(&$responseCode, array &$responseHeaders)
