@@ -244,6 +244,38 @@ class DataFixturesContext implements KernelAwareContext
     $this->getUserManager()->updateUser($user);
   }
 
+  /**
+   * @Then /^user "([^"]*)" with email "([^"]*)" should exist$/
+   */
+  public function userWithUsernameWithEmailShouldExist(string $username, string $email): void
+  {
+    $em = $this->getManager();
+
+    /** @var User|null $user */
+    $user = $em->getRepository(User::class)->findOneBy([
+      'username' => $username,
+    ]);
+
+    Assert::assertInstanceOf(User::class, $user);
+    Assert::assertEquals($email, $user->getEmail());
+  }
+
+  /**
+   * @Then /^user "([^"]*)" with country code "([^"]*)" should exist$/
+   */
+  public function userWithUsernameWithCountryShouldExist(string $username, string $country_code): void
+  {
+    $em = $this->getManager();
+
+    /** @var User|null $user */
+    $user = $em->getRepository(User::class)->findOneBy([
+      'username' => $username,
+    ]);
+
+    Assert::assertInstanceOf(User::class, $user);
+    Assert::assertEquals($country_code, $user->getCountry());
+  }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
   // -------------------------------------------------------------------------------------------------------------------
@@ -314,6 +346,15 @@ class DataFixturesContext implements KernelAwareContext
 
   public function getUsers(): array
   {
+    $users = $this->users;
+    unset($this->users);
+
+    /** @var User|null $user */
+    foreach ($users as $user)
+    {
+      $this->users[] = $this->getUserManager()->find($user->getId());
+    }
+
     return $this->users;
   }
 

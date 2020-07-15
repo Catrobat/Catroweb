@@ -12,10 +12,13 @@ use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
+use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -206,8 +209,25 @@ class UserApi implements UserApiInterface
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
-    // TODO: Implement userPut() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $update = $this->checkUpdate($update_user_request);
+
+    if (!$this->validUpdate($update))
+    {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return $update;
+    }
+
+    if ($update_user_request->isDryRun())
+    {
+      $responseCode = Response::HTTP_NO_CONTENT;
+    }
+    else
+    {
+      $responseCode = Response::HTTP_OK;
+
+      $this->updateUser($update_user_request);
+    }
 
     return null;
   }
@@ -263,5 +283,171 @@ class UserApi implements UserApiInterface
     }
 
     return $users_data_response;
+  }
+
+  private function checkUpdate(UpdateUserRequest $update_user_request): UpdateUserErrorResponse
+  {
+    $response = new UpdateUserErrorResponse();
+
+    if (0 !== strlen($update_user_request->getCountry()))
+    {
+      $validate_country = $this->validateCountry($update_user_request->getCountry());
+      if (!empty($validate_country))
+      {
+        $response->setCountry($validate_country);
+      }
+    }
+
+    if (0 !== strlen($update_user_request->getEmail()) || !is_null($update_user_request->getEmail()))
+    {
+      $validate_email = $this->validateEmail($update_user_request->getEmail());
+      if (!empty($validate_email))
+      {
+        $response->setEmail($validate_email);
+      }
+    }
+
+    if (0 !== strlen($update_user_request->getUsername()) || !is_null($update_user_request->getUsername()))
+    {
+      $validate_username = $this->validateUsername($update_user_request->getUsername());
+      if (!empty($validate_username))
+      {
+        $response->setUsername($validate_username);
+      }
+    }
+
+    if (0 !== strlen($update_user_request->getPassword()) || !is_null($update_user_request->getPassword()))
+    {
+      $validate_password = $this->validatePassword($update_user_request->getPassword());
+      if (!empty($validate_password))
+      {
+        $response->setPassword($validate_password);
+      }
+    }
+
+    return $response;
+  }
+
+  private function validUpdate(UpdateUserErrorResponse $update): bool
+  {
+    if ($update->getUsername() || $update->getEmail() || $update->getPassword() || $update->getCountry())
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  private function validateEmail(string $email): string
+  {
+    $validation = '';
+
+    if (0 === strlen($email))
+    {
+      $validation = $this->translator->trans('api.updateUser.emailEmpty', [], 'catroweb');
+    }
+    elseif (0 !== count($this->validator->validate($email, new Email())))
+    {
+      $validation = $this->translator->trans('api.updateUser.emailInvalid', [], 'catroweb');
+    }
+    elseif (null != $this->user_manager->findUserByEmail($email))
+    {
+      $validation = $this->translator->trans('api.updateUser.emailAlreadyInUse', [], 'catroweb');
+    }
+
+    return $validation;
+  }
+
+  private function validateUsername(string $username): string
+  {
+    $validation = '';
+
+    if (0 === strlen($username))
+    {
+      $validation = $this->translator->trans('api.updateUser.usernameEmpty', [], 'catroweb');
+    }
+    elseif (strlen($username) < 3)
+    {
+      $validation = $this->translator->trans('api.updateUser.usernameTooShort', [], 'catroweb');
+    }
+    elseif (strlen($username) > 180)
+    {
+      $validation = $this->translator->trans('api.updateUser.usernameTooLong', [], 'catroweb');
+    }
+    elseif (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL))
+    {
+      $validation = $this->translator->trans('api.updateUser.usernameContainsEmail', [], 'catroweb');
+    }
+    elseif (null != $this->user_manager->findUserByUsername($username))
+    {
+      $validation = $this->translator->trans('api.updateUser.usernameAlreadyInUse', [], 'catroweb');
+    }
+    elseif (0 === strncasecmp($username, User::$SCRATCH_PREFIX, strlen(User::$SCRATCH_PREFIX)))
+    {
+      $validation = $this->translator->trans('api.updateUser.usernameInvalid', [], 'catroweb');
+    }
+
+    return $validation;
+  }
+
+  private function validatePassword(string $password): string
+  {
+    $validation = '';
+
+    if (0 === strlen($password))
+    {
+      $validation = $this->translator->trans('api.updateUser.passwordEmpty', [], 'catroweb');
+    }
+    elseif (strlen($password) < 6)
+    {
+      $validation = $this->translator->trans('api.updateUser.passwordTooShort', [], 'catroweb');
+    }
+    elseif (strlen($password) > 4_096)
+    {
+      $validation = $this->translator->trans('api.updateUser.passwordTooLong', [], 'catroweb');
+    }
+    elseif (!mb_detect_encoding($password, 'ASCII', true))
+    {
+      $validation = $this->translator->trans('api.updateUser.passwordInvalidChars', [], 'catroweb');
+    }
+
+    return $validation;
+  }
+
+  private function validateCountry(string $country): string
+  {
+    $validation = '';
+
+    if (!Countries::exists($country))
+    {
+      $validation = $this->translator->trans('api.updateUser.countryCodeInvalid', [], 'catroweb');
+    }
+
+    return $validation;
+  }
+
+  private function updateUser(UpdateUserRequest $update_user_request)
+  {
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    if (!empty($update_user_request->getEmail()))
+    {
+      $user->setEmail($update_user_request->getEmail());
+    }
+    if (!empty($update_user_request->getUsername()))
+    {
+      $user->setUsername($update_user_request->getUsername());
+    }
+    if (!empty($update_user_request->getPassword()))
+    {
+      $user->setPassword($update_user_request->getPassword());
+    }
+    if (!is_null($update_user_request->getCountry()))
+    {
+      $user->setCountry($update_user_request->getCountry());
+    }
+
+    $this->user_manager->updateUser($user, true);
   }
 }
