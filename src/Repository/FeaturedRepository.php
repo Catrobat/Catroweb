@@ -141,11 +141,11 @@ class FeaturedRepository extends ServiceEntityRepository
     ;
     try
     {
-      $count = $qb->getQuery()->getSingleScalarResult();
+      $count = intval($qb->getQuery()->getSingleScalarResult());
 
       return $count > 0;
     }
-    catch (NonUniqueResultException $nonUniqueResultException)
+    catch (NonUniqueResultException | NoResultException $exception)
     {
       return false;
     }
