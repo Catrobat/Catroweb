@@ -1,6 +1,5 @@
 @admin
-Feature: Admin featured programs
-  IT should be possible to list all featured programs, sort and filter etc.
+Feature: Admin approve programs
 
   Background:
     Given there are admins:
@@ -22,7 +21,7 @@ Feature: Admin featured programs
       | 5  | program 5 | description2            | User1     | 22.04.2014 14:00 | 0.8.5   | 0.93             | false   |
 
 
-  Scenario: List all featured programs:
+  Scenario: List all programs:
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/approve/list"
     And I wait for the page to be loaded

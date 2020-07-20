@@ -721,6 +721,12 @@ class CatrowebBrowserContext extends BrowserContext
           ->click()
         ;
         break;
+      case 'Word':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div[1]/table/thead/tr/th[3]/a')
+          ->click()
+        ;
+        break;
 
       default:
         throw new Exception('Wrong Option');
@@ -1049,6 +1055,15 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $page = $this->getSession()->getPage();
     $page->find('xpath', "//a[contains(@href,'/admin/approve/".$program_id."/show')]")->click();
+  }
+
+  /**
+   * @Then /^I click on the edit button of word with id "([^"]*)"$/
+   */
+  public function iClickOnTheEditButtonOfWord(string $word_id): void
+  {
+    $page = $this->getSession()->getPage();
+    $page->find('xpath', "//a[contains(@href,'/admin/rudeword/".$word_id."/edit')]")->click();
   }
 
   /**
@@ -2476,6 +2491,45 @@ class CatrowebBrowserContext extends BrowserContext
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
     }
+  }
+
+  /**
+   * @Then /^I should see the following rude words:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeRudeWords(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
+
+    $actual_values = [];
+    foreach ($td as $value)
+    {
+      $actual_values[] = $value->getText();
+    }
+
+    Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of rude words in table');
+
+    $counter = 0;
+    foreach ($user_stats as $user_stat)
+    {
+      Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
+      ++$counter;
+    }
+  }
+
+  /**
+   * @Then /^I try to add the following word "([^"]*)"$/
+   *
+   * @throws ResponseTextException
+   */
+  public function addFollowingWord(string $word): void
+  {
+    $this->visit('/admin/rudeword/create');
+    $this->iWaitForThePageToBeLoaded();
+    $this->getSession()->getPage()->find('xpath', '//input')->setValue($word);
+    $this->pressButton('Create and return to list');
   }
 
   /**
