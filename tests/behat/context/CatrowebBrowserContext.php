@@ -751,6 +751,29 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I change the visibility of the project number "([^"]*)" in the approve list to "([^"]*)"$/
+   *
+   * @param string $program_number
+   * @param string $visibility
+   *
+   * @throws Exception
+   */
+  public function iChangeTheVisibilityOfTheProgramInTheApproveList($program_number, $visibility): void
+  {
+    ///param program number contains the number of the program position in the list on the admin page
+    ///
+    $page = $this->getSession()->getPage();
+
+    ///click the visibility button (yes/no)
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[5]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($visibility);
+  }
+
+  /**
    * @Then /^I change the approval of the project number "([^"]*)" in the list to "([^"]*)"$/
    *
    * @param mixed $program_number
@@ -766,6 +789,28 @@ class CatrowebBrowserContext extends BrowserContext
     ///click the visibility button (yes/no)
     $page
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[8]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($approved);
+  }
+
+  /**
+   * @Then /^I change the approval of the project number "([^"]*)" in the approve list to "([^"]*)"$/
+   *
+   * @param string $program_number
+   * @param string $approved
+   *
+   * @throws Exception
+   */
+  public function iChangeTheApprovalOfTheProjectInApproveList($program_number, $approved): void
+  {
+    ///param program number contains the number of the program position in the list on the admin page
+    ///
+    $page = $this->getSession()->getPage();
+    ///click the visibility button (yes/no)
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[6]/span')
       ->click()
     ;
 
@@ -993,6 +1038,26 @@ class CatrowebBrowserContext extends BrowserContext
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[10]/div/a')
       ->click()
     ;
+  }
+
+  /**
+   * @Then /^I click on the show button of program with id "([^"]*)" in the approve list$/
+   *
+   * @param string $program_id
+   */
+  public function iClickOnTheShowButtonInTheApproveList($program_id): void
+  {
+    $page = $this->getSession()->getPage();
+    $page->find('xpath', "//a[contains(@href,'/admin/approve/".$program_id."/show')]")->click();
+  }
+
+  /**
+   * @Then /^I click on the code view button$/
+   */
+  public function iClickOnTheCodeViewButtonInTheApproveList(): void
+  {
+    $page = $this->getSession()->getPage();
+    $page->findById('code-view')->click();
   }
 
   /**
@@ -2384,6 +2449,32 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['Category Alias']);
       $this->assertSession()->pageTextContains($user_stat['Programs']);
       $this->assertSession()->pageTextContains($user_stat['Order']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the following not approved projects:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeNotApprovedProjects(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
+
+    $actual_values = [];
+    foreach ($td as $value)
+    {
+      $actual_values[] = $value->getText();
+    }
+
+    Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of projects in table');
+
+    $counter = 0;
+    foreach ($user_stats as $user_stat)
+    {
+      Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
+      ++$counter;
     }
   }
 
