@@ -70,7 +70,7 @@ services:
       App\Catrobat\Services\ScreenshotRepository: '@screenshot_repository'
       $template_screenshot_repository: '@template_screenshot_repository'
 
-      $kernel_root_dir: "kernel.root_dir"
+      $kernel_root_dir: "%kernel.root_dir%"
       $catrobat_translation_dir: "%catrobat.translations.dir%"
       $catrobat_upload_temp_dir: "%catrobat.upload.temp.dir%"
       $catrobat_file_storage_dir: "%catrobat.file.storage.dir%"

@@ -338,6 +338,11 @@ class RecommenderManager
 
     $similar_user_similarity_mapping = $this->getSimilarUserSimilarityMapping($user);
 
+    if (count($similar_user_similarity_mapping) <= 0)
+    {
+      return [];
+    }
+
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_liked_programs = array_unique(array_map(fn (ProgramLike $like) => $like->getProgramId(), $all_likes_of_user));
 
