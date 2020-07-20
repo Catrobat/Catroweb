@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Stáhnout
 description: Popis
 noDescription: Žádný popis není k dispozici
 credits: Credits
@@ -27,14 +27,15 @@ country: Stát
 loginText: Přihlásit
 privacyPolicy: Ochrana soukromí
 imprint: Tiráž
+programDetails: Podrobnosti
 somethingWentWrong: 'Ooooops něco se pokazilo.'
 pleaseTryAgain: 'Prosím, zkuste to znovu!'
 oldVersionError: 'Aktualizujte na nejnovější verzi Pocket Code!'
 more: 'více'
 less: 'Méně'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: OK
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Uživatelské jméno nebo e-mailová adresa je již použita.'
 notifications: 'Oznámení'
@@ -65,6 +66,7 @@ notificationsClearError: "Nelze označit oznámení jako přečtené!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Prosím čekejte..."
 projects: "Programy"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
+  title: Remixy
   showRemixGraph: 'Zobrazit graf Remixů'
   by: 'o'
   open: 'Otevřít '
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Zvolený obrázek je příliš velký, nepoužívejte prosím obrázky větší než 5 MB.
     uploadError: Omlouváme se, ale došlo k potížím během odesílání!
     noSupport: Tento typ obrázku není podporován, zkus prosím jiný obrázek.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Upravit profil
   edit: Úpravy
@@ -594,7 +599,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -669,18 +674,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -785,6 +791,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Zobrazit zdrojový kód'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

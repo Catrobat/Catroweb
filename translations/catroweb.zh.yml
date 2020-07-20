@@ -27,6 +27,7 @@ country: 国家
 loginText: 登录
 privacyPolicy: 隐私策略
 imprint: 版权信息
+programDetails: 详细信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
 pleaseTryAgain: '再试一次吧！'
 oldVersionError: '请更新到最新版的口袋编程！'
@@ -34,7 +35,7 @@ more: '更多'
 less: '更少'
 show-more: '显示更多'
 show-less: '隐藏显示'
-ok: 确定
+ok: Ok
 clickToDownloadProgram: '要下载示例项目，请点击 %link_start% 这里 %link_end%。'
 registrationError: '用户名或邮箱已被占用。'
 notifications: '通知'
@@ -65,6 +66,7 @@ notificationsClearError: "无法将通知标记为已读 ！"
 notificationsDeleteError: "无法删除通知！"
 pleaseWait: "请等待..."
 projects: "程序"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: 哇！
   linkTitle: 链接
   link: 复制项目链接到剪贴板
+  reactionsText: 我喜欢的
 remixGraph:
+  title: 调制
   showRemixGraph: '显示调制关系图'
   by: ' '
   open: '打开 '
@@ -272,6 +276,7 @@ profile:
     pictureTooLarge: 您选择的图片体积过大，请不要使用超过5兆的图片。
     uploadError: 对不起，上传发生错误。
     noSupport: 不支持此图像类型，请尝试其他图像。
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: 编辑档案
   edit: 编辑
@@ -676,18 +681,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -792,6 +798,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

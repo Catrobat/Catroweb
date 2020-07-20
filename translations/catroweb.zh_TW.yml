@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: '&#x8209;&#x5831;'
 description: 描述
 noDescription: 沒有可用的描述。
 credits: Credits
@@ -27,14 +27,15 @@ country: 國家
 loginText: 登入
 privacyPolicy: 隱私權政策
 imprint: 版本說明
+programDetails: Details
 somethingWentWrong: '噢，出錯了'
 pleaseTryAgain: '請再試一次！'
 oldVersionError: '請更新到最新的袖珍版本！'
 more: '更多'
 less: '較少'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: 確認
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: '用戶名或電子郵件地址已被使用。'
 notifications: '注意'
@@ -65,6 +66,7 @@ notificationsClearError: "Unable to mark notifications as read!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Please wait..."
 projects: "程式檔"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: 調製
+  showRemixGraph: 'Remix graph'
   by: '為'
   open: '開啟 '
   showPaths: 'Show Paths'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: 不支援這種圖檔格式,請改用其他圖片。
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
   edit: Edit
@@ -596,7 +601,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

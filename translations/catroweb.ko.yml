@@ -27,6 +27,7 @@ country: 국가
 loginText: 로그인
 privacyPolicy: 개인 정보 보호 정책
 imprint: 표시하기
+programDetails: 세부 사항
 somethingWentWrong: '죄송합니다. 오류가 발생했습니다.'
 pleaseTryAgain: '다시 시도하세요!'
 oldVersionError: '포켓코드를 최신 버전으로 업데이트 하시기 바랍니다!'
@@ -34,7 +35,7 @@ more: '자세히'
 less: '간단히'
 show-more: '더 보기'
 show-less: '간단히 보기'
-ok: OK
+ok: Ok
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
 registrationError: '이미 사용 중인 사용자 이름 또는 이메일 주소입니다.'
 notifications: '알림'
@@ -65,6 +66,7 @@ notificationsClearError: "알림을 읽음으로 표시할 수 없습니다!"
 notificationsDeleteError: "알림 삭제 불가!"
 pleaseWait: "잠시 기다려 주십시오..."
 projects: "프로그램"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: 와우!
   linkTitle: 링크
   link: Copy project link to clipboard
+  reactionsText: 좋아요
 remixGraph:
+  title: 변환
   showRemixGraph: '리믹스 그래프 표시'
   by: '만큼'
   open: '열기'
@@ -263,6 +267,7 @@ profile:
     pictureTooLarge: 선택한 그림이 너무 큽니다, 5mb 보다 큰 이미지를 사용 하지 마십시오.
     uploadError: 죄송합니다, 업로드하는 동안 문제가 발생했습니다!
     noSupport: 이 이미지 형식은 지원되지 않습니다, 그리고 다른 이미지를 시도하십시오.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: 프로필 수정
   edit: 편집
@@ -665,18 +670,19 @@ failure:
   upload: 업로드 중에 오류가 발생했습니다.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -780,6 +786,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: '코드 표시'
   hideCode: '코드 숨기기'
   showStatistics: '코드의 통계 보기'

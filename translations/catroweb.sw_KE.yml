@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Pakua
 description: Maelezo
 noDescription: Hakuna maelezo.
 credits: Credits
@@ -27,14 +27,15 @@ country: Nchi
 loginText: ingia
 privacyPolicy: Sera ya Faragha
 imprint: Imprint
+programDetails: Maelezo
 somethingWentWrong: 'Ooooops kitu kilienda vibaya.'
 pleaseTryAgain: 'Tafadhali jaribu tena!'
 oldVersionError: 'Tafadhali Sasisha toleo jipya zaidi la Msimbo Mfuko!'
 more: 'zaidi'
 less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: Sawa
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Jina la mtumiaji au anuani ya barua pepe tayari inatumika.'
 notifications: 'Taarifa'
@@ -65,6 +66,7 @@ notificationsClearError: "Haiwezi kuweka alama kwenye taarifa kama iliyosomwa!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Tafadhali subiri..."
 projects: "Programu"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Michanganyo mipya
+  showRemixGraph: 'Remix graph'
   by: 'na'
   open: 'Fungua '
   showPaths: 'Onyesha njia'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Picha uliyochagua ni kubwa sana, tafadhali usitumie picha kubwa kuliko 5mb.
     uploadError: Samahani, kulikuwa na tatizo wakati wa upakiaji!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Hariri wasifu
   edit: Hariri
@@ -596,7 +601,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

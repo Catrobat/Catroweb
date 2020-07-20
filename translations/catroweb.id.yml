@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Unduh
 description: Keterangan
 noDescription: Keterangan tidak tersedia.
 credits: Credits
@@ -27,14 +27,15 @@ country: Negara
 loginText: masuk
 privacyPolicy: Kebijakan privasi
 imprint: Jejak
+programDetails: Rincian
 somethingWentWrong: 'Ups ada kesalahan.'
 pleaseTryAgain: 'Silahkan coba lagi!'
 oldVersionError: 'Mohon perbaharui Pocket Code ke versi terbaru!'
 more: 'lebih'
 less: 'kurang'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: Oke
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Nama pengguna atau alamat email sudah di gunakan.'
 notifications: 'Pemberitahuan'
@@ -65,6 +66,7 @@ notificationsClearError: "Tidak bisa menandai pemberitahuan sebagai terbaca!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Mohon tunggu..."
 projects: "Program"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
+  title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'
   by: 'oleh'
   open: 'Buka '
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Gambar pilihan Anda terlalu besar, jangan gunakan gambar yang lebih besar dari 5mb.
     uploadError: Maaf, ada masalah selama mengunggah!
     noSupport: Jenis gambar ini tidak didukung, silakan coba gambar lain.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profil
   edit: Edit
@@ -670,18 +675,19 @@ failure:
   upload: Terjadi kesalahan ketika mengupload aplikasi anda.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -786,6 +792,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Tampilkan Kode'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

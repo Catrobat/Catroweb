@@ -27,6 +27,7 @@ country: Država
 loginText: prijava
 privacyPolicy: Pravila privatnosti
 imprint: Impresum
+programDetails: Detalji
 somethingWentWrong: 'Ups... nešto je otišlo kvragu.'
 pleaseTryAgain: 'Molimo pokušajte ponovno!'
 oldVersionError: 'Molimo Vas azurirajte na najnoviju Pocket Codeu verziju!'
@@ -34,7 +35,7 @@ more: 'više'
 less: 'manje'
 show-more: 'Prikaži više'
 show-less: 'Prikaži manje'
-ok: OK
+ok: Ok
 clickToDownloadProgram: 'Kako bi preuzeli program kliknite %link_start% ovdje %link_end%.'
 registrationError: 'Žao nam je, ovo ime ili e-mail adresa je već u upotrebi.'
 notifications: 'Obavijesti'
@@ -65,6 +66,7 @@ notificationsClearError: "Obavijesti ne mogu biti oznacene kao procitane!"
 notificationsDeleteError: "Nije moguce izbrisati obavijest!"
 pleaseWait: "Molimo pričekajte..."
 projects: "Programi"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: Wooow!
   linkTitle: Poveznica
   link: Kopirajte poveznicu programa u medjuspremnik
+  reactionsText: Sviđanja
 remixGraph:
+  title: Remixi
   showRemixGraph: 'Prikazi Remix Graf'
   by: 'od'
   open: 'Otvori '
@@ -272,6 +276,7 @@ profile:
     pictureTooLarge: Izabrana slika je prevelika, molimo da ne koristiš slike veće od 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: Ovaj tip slike nije podržan, molimo pokušaj sa drugom slikom.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Uredi profil
   edit: Uredi
@@ -676,18 +681,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -792,6 +798,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Prikazi kod'
   hideCode: 'Sakrij kod'
   showStatistics: 'Prikaži statistiku koda'

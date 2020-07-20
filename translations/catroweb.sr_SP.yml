@@ -27,6 +27,7 @@ country: Држава
 loginText: пријава
 privacyPolicy: Правила о приватности
 imprint: Утисак
+programDetails: Детаљи
 somethingWentWrong: 'Упс, дошло је до грешке.'
 pleaseTryAgain: 'Молимо покушајте поново!'
 oldVersionError: 'Ажурирајте на најновију верзију Pocket Code!'
@@ -65,6 +66,7 @@ notificationsClearError: "Обавештења нису могућа да се �
 notificationsDeleteError: "Не могу избрисати обавјестенје"
 pleaseWait: "Молимо сачекајте..."
 projects: "Пројекти"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -152,7 +154,7 @@ programs:
   reportDone: You reported this project!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
+  btnClosePopup: Ок
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
   comments: коментари
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Реакција
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Отвори'
   showPaths: 'Show Paths'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Ваша одабрана слика је превелика, немојте користити слике веће од 5mb.
     uploadError: Извините, дошло је до проблема током отпремања!
     noSupport: Ова врста слике није подржана. Покушајте с другом сликом.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Уреди профил
   edit: Измени
@@ -596,7 +601,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'Процес може потрајати неко време'
 format:
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
