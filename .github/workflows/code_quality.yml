@@ -79,7 +79,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: PHPStan
-        uses: docker://oskarstark/phpstan-ga:0.12.28
+        uses: docker://oskarstark/phpstan-ga:0.12.33
         env:
           REQUIRE_DEV: true
         with:
