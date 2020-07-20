@@ -106,7 +106,6 @@ class ProgramController extends AbstractController
   {
     /** @var Program $project */
     $project = $this->program_manager->find($id);
-    $router = $this->get('router');
 
     if (!$this->program_manager->isProjectVisibleForCurrentUser($project))
     {

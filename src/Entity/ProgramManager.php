@@ -135,7 +135,7 @@ class ProgramManager
     if (!$project->isVisible())
     {
       // featured or approved projects should never be invisible
-      if (!$this->featured_repository->isFeatured($project) || !$project->getApproved())
+      if (!$this->featured_repository->isFeatured($project) && !$project->getApproved())
       {
         return false;
       }
