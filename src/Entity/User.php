@@ -190,11 +190,6 @@ class User extends BaseUser
   protected ?string $gplus_refresh_token = null;
 
   /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
-  protected bool $limited = false;
-
-  /**
    * @ORM\Column(type="integer", nullable=true, unique=true)
    */
   protected ?int $scratch_user_id = null;
@@ -321,16 +316,6 @@ class User extends BaseUser
     $this->avatar = $avatar;
 
     return $this;
-  }
-
-  public function isLimited(): bool
-  {
-    return $this->limited;
-  }
-
-  public function setLimited(bool $limited): void
-  {
-    $this->limited = $limited;
   }
 
   public function getLikes(): Collection

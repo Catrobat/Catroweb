@@ -554,6 +554,28 @@ class DataFixturesContext implements KernelAwareContext
     );
   }
 
+  /**
+   * @Then I enable snapshots for the project with id :id
+   */
+  public function iEnableSnapshotsForTheProjectWithId(string $id): void
+  {
+    $project = $this->getProgramManager()->find($id);
+    $project->setSnapshotsEnabled(true);
+    $this->getManager()->persist($project);
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Then I disable snapshots for the project with id :id
+   */
+  public function iDisableSnapshotsForTheProjectWithId(string $id): void
+  {
+    $project = $this->getProgramManager()->find($id);
+    $project->setSnapshotsEnabled(false);
+    $this->getManager()->persist($project);
+    $this->getManager()->flush();
+  }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Comments
   // -------------------------------------------------------------------------------------------------------------------

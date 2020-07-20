@@ -2843,13 +2843,13 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then A copy of this program will be stored on the server
+   * @Then :count copies of this program will be stored on the server
    */
-  public function aCopyOfThisProgramWillBeStoredOnTheServer(): void
+  public function aCopyOfThisProgramWillBeStoredOnTheServer(int $count): void
   {
     $dir = $this->getSymfonyParameter('catrobat.snapshot.dir');
     $finder = new Finder();
-    Assert::assertEquals(1, $finder->files()->in($dir)->count(), 'Snapshot was not stored!');
+    Assert::assertEquals($count, $finder->files()->in($dir)->count(), 'Invalid number of snapshots');
   }
 
   /**
@@ -2858,17 +2858,6 @@ class CatrowebBrowserContext extends BrowserContext
   public function iVisitMyProfile(): void
   {
     $this->visit('/app/user');
-  }
-
-  /**
-   * @Given /^I have a limited account$/
-   */
-  public function iHaveALimitedAccount(): void
-  {
-    $user = $this->getUserDataFixtures()->getCurrentUser();
-    $user->setLimited(true);
-    $this->getManager()->persist($user);
-    $this->getManager()->flush();
   }
 
   /**

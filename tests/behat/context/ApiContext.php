@@ -1344,7 +1344,7 @@ class ApiContext implements KernelAwareContext
     $file = $this->generateProgramFileWith([
       'name' => $program->getName(),
     ]);
-    $this->uploadProject($file, null, '1');
+    $this->uploadProject($file, $program->getUser(), '2');
   }
 
   /**
@@ -2537,15 +2537,6 @@ class ApiContext implements KernelAwareContext
     $responseArray = json_decode($response->getContent(), true);
     $returned_programs = $responseArray['CatrobatProjects'];
     Assert::assertEquals('test', $returned_programs[0]['ProjectName'], 'Could not find the program');
-  }
-
-  /**
-   * @When I update my program
-   */
-  public function iUpdateMyProgram(): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->uploadProject($file, $this->getUserDataFixtures()->getCurrentUser(), '1');
   }
 
   /**

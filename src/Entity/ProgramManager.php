@@ -6,7 +6,6 @@ use App\Catrobat\Events\InvalidProgramUploadedEvent;
 use App\Catrobat\Events\ProgramAfterInsertEvent;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Events\ProgramBeforePersistEvent;
-use App\Catrobat\Events\ProgramInsertEvent;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
@@ -230,10 +229,6 @@ class ProgramManager
 
     $this->addExtensions($program, $extracted_file);
 
-    $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
-
-    $this->notifyFollower($program);
-
     try
     {
       if (null === $extracted_file->getScreenshotPath())
@@ -304,7 +299,8 @@ class ProgramManager
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
 
-    $this->event_dispatcher->dispatch(new ProgramInsertEvent());
+    $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
+    $this->notifyFollower($program);
 
     return $program;
   }
