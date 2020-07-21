@@ -20,10 +20,9 @@ Feature: Get most downloaded projects
 
   Scenario: Get most downloaded projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?project_type=most_downloaded"
+    And I request "GET" "/api/projects/?category=most_downloaded"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 6
     Then the response should contain projects in the following order:
       | Name      |
       | project 3 |
@@ -36,10 +35,9 @@ Feature: Get most downloaded projects
   Scenario: Get most download projects in german and limit = 1
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
-    And I request "GET" "/api/projects/?project_type=most_downloaded&limit=1"
+    And I request "GET" "/api/projects/?category=most_downloaded&limit=1"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 6
     Then the response should contain projects in the following order:
       | Name      |
       | project 3 |
@@ -47,10 +45,9 @@ Feature: Get most downloaded projects
   Scenario: Get most download projects in english with offset = 1
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "en"
-    And I request "GET" "/api/projects/?project_type=most_downloaded&offset=1"
+    And I request "GET" "/api/projects/?category=most_downloaded&offset=1"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 6
     Then the response should contain projects in the following order:
       | Name      |
       | project 4 |
@@ -62,20 +59,18 @@ Feature: Get most downloaded projects
   Scenario: Get most download projects in french with max_version = 0.982
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "fr"
-    And I request "GET" "/api/projects/?project_type=most_downloaded&max_version=0.982"
+    And I request "GET" "/api/projects/?category=most_downloaded&max_version=0.982"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 1
     Then the response should contain projects in the following order:
       | Name      |
       | project 3 |
 
   Scenario: Get most download projects with flavor = luna
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?project_type=most_downloaded&flavor=luna"
+    And I request "GET" "/api/projects/?category=most_downloaded&flavor=luna"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 3
     Then the response should contain projects in the following order:
       | Name      |
       | project 4 |

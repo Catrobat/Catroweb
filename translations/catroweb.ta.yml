@@ -27,6 +27,7 @@ country: நாடு
 loginText: உள்நுழைவு
 privacyPolicy: தனிமனித உரிமை கொள்கை
 imprint: முத்திரையிடுதல்
+programDetails: விவரங்கள்
 somethingWentWrong: 'ஐய்யோ! ஏதோ தவறு நடந்து விட்டது.'
 pleaseTryAgain: 'தயவுசெய்து மீண்டும் முயற்சிக்கவும்!'
 oldVersionError: 'தயவு செய்து புதிய பாக்கெட் கோட் பதிப்புக்கு மாறவும்!'
@@ -34,7 +35,7 @@ more: 'அதிகம்'
 less: 'குறைந்து'
 show-more: 'மேலும் காண்பி'
 show-less: 'குறைவாக காண்பி'
-ok: சரி
+ok: Ok
 clickToDownloadProgram: 'எடுத்துக்காட்டு திட்டத்தைப் பதிவிறக்க %link_start% இங்கே %link_end% என்பதைக் கிளிக் செய்க.'
 registrationError: 'பயனர் பெயரோ மின்னஞ்சல் முகவரியோ ஏற்கனவே உபயோகத்தில் உள்ளது.'
 notifications: 'அறிவிப்புகள்'
@@ -65,6 +66,7 @@ notificationsClearError: "அறிவிப்புகளை படித்�
 notificationsDeleteError: "அறிவிப்புகளை நீக்க முடியவில்லை!"
 pleaseWait: "தயவு செய்து காத்திருக்கவும்..."
 projects: "திட்டங்கள்"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: அடடே!
   linkTitle: இணைப்பு
   link: திட்ட இணைப்பை கிளிப்போர்டுக்கு நகலெடுக்கவும்
+  reactionsText: விருப்பம்
 remixGraph:
+  title: ரீமிக்ஸ்கள்
   showRemixGraph: 'ரீமிக்ஸ் வரைபடத்தைக் காட்டு'
   by: 'மூலம்'
   open: 'திறந்த'
@@ -271,6 +275,7 @@ profile:
     pictureTooLarge: நீங்கள் தேர்ந்தெடுத்த படம் மிகப் பெரியது, தயவுசெய்து 5mb ஐ விட பெரிய படங்களை பயன்படுத்த வேண்டாம்.
     uploadError: மன்னிக்கவும், பதிவேற்றத்தின் போது சிக்கல் ஏற்பட்டது!
     noSupport: இந்த பட வகை ஆதரிக்கப்படவில்லை, தயவுசெய்து மற்றொரு படத்தை முயற்சிக்கவும்.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: சுயவிவர திருத்தம்
   edit: திருத்து
@@ -675,18 +680,19 @@ failure:
   upload: உங்கள் app இன் பதிவேற்றத்தின் போது பிழை ஏற்பட்டது.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -791,6 +797,7 @@ pmd:
   failed:
     text: திட்ட பதிவேற்றம் தோல்வியுற்றது.
 codeview:
+  title: 'Code View'
   showCode: 'குறியீட்டை காண்பிக்கவும்'
   hideCode: 'குறியீட்டை மறைக்கவும்'
   showStatistics: 'குறியீடு புள்ளிவிவரங்களைக் காட்டவும்'

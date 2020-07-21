@@ -3,7 +3,7 @@
 localLanguage: English
 username: Username
 password: Password
-accountSettings: Account Settings
+accountSettings: Account settings
 email: E-Mail
 aboutPocketCode: About Pocket Code
 aboutCatrobat: About Catrobat
@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure:  Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Download
 description: Description
 noDescription: No description available.
 credits: Credits
@@ -27,34 +27,35 @@ country: Country
 loginText: login
 privacyPolicy: Privacy Policy
 imprint: Imprint
+programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
 pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: OK
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
-allNotifications: 'All Notifications'
+allNotifications: 'All notifications'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
-likesNotificationsTitle: 'Reaction Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
-remixNotificationsTitle: 'Remix Notifications'
+likesNotificationsTitle: 'Reaction notifications'
+followersNotificationsTitle: 'Follower notifications'
+commentsNotificationsTitle: 'Comment notifications'
+remixNotificationsTitle: 'Remix notifications'
 CommentNotifications: 'Comments'
 RemixNotifications: 'Remixes'
-oldnotification: 'Old Notifications'
+oldnotification: 'Old notifications'
 wellDone: "Well done!"
 done: "Done!"
 notificationsReadMessage: "It looks like you dont have any notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 deleteNotificationConfirmation: "Are you sure?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
+notificationDeleteMessage: "Are you sure you want to delete this notification?"
+notificationDeleteAllMessage: "Are you sure you want to delete all notifications?"
 confirmMessage: "Yes, delete it"
 cancelMessage: "Cancel"
 notificationsAllMessagesDeleted: "All notifications have been deleted."
@@ -65,6 +66,7 @@ notificationsClearError: "Unable to mark notifications as read!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Please wait..."
 projects: "Projects"
+statistics: "Statistics"
 
 indexPage:
   recommendedSection:
@@ -93,7 +95,7 @@ programs:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
     download: Download the app
-    statistics: More Statistics
+    statistics: More statistics
   featured: Featured
   example: Examples
   newest: Newest projects
@@ -117,7 +119,7 @@ programs:
   reportCommentConfirmation: Are you sure you want to report this comment?
   deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Account Deletion?
+    Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
@@ -139,11 +141,11 @@ programs:
     all: "All"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  submitted: Submitted projects
+  uploaded: Uploaded projects
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'Catrobat language version: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Enter a reason
@@ -154,7 +156,7 @@ programs:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
-  updateAppHeader: Update App
+  updateAppHeader: Update app
   updateAppText: Please update your app to the newest version to be able to download this project.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
@@ -168,10 +170,10 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project Description
-  saveDescription: Save Description change
-  editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  editDescription: Edit the project description
+  saveDescription: Save description change
+  editCredits: Edit the project credits
+  saveCredits: Save credits change
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -179,23 +181,25 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programUnknownUser: 'Unknown user'
 
 
 noReply:
   This is an automated message - Please do not reply directly to this email.
 
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Your Catrobat account confirmation
   message: |
     Dear %username%.
     To finish activating your account - please visit %confirmationUrl%
@@ -214,7 +218,7 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Your Catrobat password recovery
   message: |
     Dear %username%.
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
@@ -272,10 +276,11 @@ profile:
   programsOf: Projects of
   changePicture: Change picture
   avatar:
-    noImage: No Image!
+    noImage: No image!
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
 
 myprofile:
   editProfile: Edit profile
@@ -284,13 +289,13 @@ myprofile:
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: E-Mail
+  email: Email
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
   editCountry: Edit country
-  editEmail: Edit E-Mail
-  deleteAccount: Delete Account
+  editEmail: Edit email
+  deleteAccount: Delete account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
@@ -304,7 +309,7 @@ licenseToPlay:
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
   text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
     item1: share your cakes along with the recipe
@@ -315,7 +320,7 @@ licenseToPlay:
 
 termsOfUse:
   title: Terms of Use
-  headline: Welcome to the Catrobat Community!
+  headline: Welcome to the Catrobat community!
   text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
@@ -352,7 +357,7 @@ termsOfUse:
 
 help:
   stepByStep:
-    title: "Step-by-Step Intro"
+    title: "Step-by-step intro"
     start: "Starting position:"
     description: |
       Here you create your first project, an interactive postcard using the following walkthrough videos.
@@ -374,7 +379,7 @@ help:
         special2: 'Choose from gallery.'
         special3: 'Take a picture.'
     step3:
-      title: "Start Moving"
+      title: "Start moving"
       detail:
         text1: 'Tap:'
         text2: 'The first brick we use is out of the category "Motion".'
@@ -383,7 +388,7 @@ help:
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
         text6: 'Use the Android Back Button to get back from the stage.'
     step4:
-      title: "Change Look"
+      title: "Change look"
       description: "You can change the look of your object."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
@@ -435,7 +440,7 @@ help:
         text1: 'The background is like an object, but you just can have one background.'
         text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
-      title: "Main Menu"
+      title: "Main menu"
       description: "Use the Android Back Button to get to this screen."
       detail:
         text1: 'Continue with your currently opened project.'
@@ -447,10 +452,10 @@ help:
   tutorialcards:
     title: "Tutorials"
     description1: "These tutorials show you how to use effective tricks in Pocket Code."
-    getReady: "Get Ready:"
+    getReady: "Get ready:"
     tryCode: "Try this code:"
     doIt: "Do it:"
-    tip: "Extra Tip:"
+    tip: "Extra tip:"
     card1:
       title: "Change Size"
       description: "Change the size of an object."
@@ -516,7 +521,7 @@ help:
       one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
       two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: "Starter Projects"
+    title: "Starter projects"
     description: "Try out these starter projects. Look inside to make changes and add your ideas."
     categories:
       games: "Games"
@@ -581,7 +586,7 @@ search:
   dotdotdot: Search...
   search: Search
   inMediaLib: Search in media library
-  results: Search Results
+  results: Search results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 
@@ -612,11 +617,11 @@ login:
   username: Username
   email: Email
   passwordFirst: Password
-  passwordSecond: Password Confirm
+  passwordSecond: Password confirm
 
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 
@@ -647,9 +652,9 @@ errors:
     invalid: Your email seems to be invalid
     exists: This email address already exists.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: Open authentication ID must not be blank
   login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+  post-data: POST-data not correct or missing!
   checksum:
     missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
     invalid: invalid checksum
@@ -695,23 +700,24 @@ failure:
 
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
 
   projectsPost:
-      invalid_checksum: 'Invalid checksum. Try uploading again!'
-      upload_error: 'Error while uploading. Try uploading again!'
-      creating_error: 'Error while creating Program Entity. Try uploading again!'
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
 
 
 #languages and countries
@@ -762,9 +768,9 @@ language:
   vietnamese: Vietnamese
 
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Generate apk
+  pending: Generating apk
+  download: Download apk
 
 gamejam:
   nojam: Sorry, there is no game jam at this time
@@ -795,18 +801,10 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 
 recommender:
   similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
   moreFromThisUser: More from %username%
 
 pmd:
@@ -821,6 +819,7 @@ pmd:
     text: Project upload failed.
 
 codeview:
+  title: 'Code view'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -831,25 +830,25 @@ codeview:
   scenes:  'Scenes'
   scripts:  'Scripts'
   bricks:  'Bricks'
-  objects:  'Actors and Objects'
+  objects:  'Actors and objects'
   looks:  'Looks'
   sounds:  'Sounds'
   globals:  'Globals'
   locals:  'Locals'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
 
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
   general: 'General'
   bricks: 'Bricks'
   eventBricks: 'Event'
@@ -863,13 +862,13 @@ codeStatistics:
 
 footer:
   language: Language
-  usefulLinks: Useful Links
+  usefulLinks: Useful links
   legalities: Legalities
-  communityStats: Community Stats
+  communityStats: Community stats
   download: Get the App
 
 privacy-policy:
-  header: Privacy Policy
+  header: Privacy policy
   version: Version 2.2, 17 October 2019
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
@@ -884,7 +883,7 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
   comment:
     title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
@@ -892,11 +891,11 @@ catro-notifications:
     title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New Follower!'
+    title: 'New follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Project from someone you follow'
-    message: 'User %user_link% created a new Project %program_link%'
+    title: 'New project from someone you follow'
+    message: 'User %user_link% created a new project %program_link%'
   remix:
     title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%.
@@ -912,11 +911,11 @@ help-cards:
   headings:
     starters: Starters
     tutorials: Tutorials
-    stepbystep: Step by Step
+    stepbystep: Step by step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
     discord: Join on Discord
-    game_design: Game Design
+    game_design: Game design
     education: Education platform
     discuss: Discuss
   text:

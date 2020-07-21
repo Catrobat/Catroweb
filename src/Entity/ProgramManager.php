@@ -29,7 +29,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\ORMException;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\QueryString;
+use Elastica\Query\Range;
+use Elastica\Query\Terms;
+use Elastica\Util;
 use Exception;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 use FOS\UserBundle\Model\UserInterface;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -71,6 +77,8 @@ class ProgramManager
 
   private ?UrlHelper $urlHelper;
 
+  private TransformedFinder $program_finder;
+
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
@@ -80,7 +88,7 @@ class ProgramManager
                               EventDispatcherInterface $event_dispatcher,
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
-                              CatroNotificationService $notification_service,
+                              CatroNotificationService $notification_service, TransformedFinder $program_finder,
                               UrlHelper $urlHelper = null)
   {
     $this->file_extractor = $file_extractor;
@@ -99,6 +107,7 @@ class ProgramManager
     $this->extension_repository = $extension_repository;
     $this->notification_service = $notification_service;
     $this->urlHelper = $urlHelper;
+    $this->program_finder = $program_finder;
   }
 
   public function getFeaturedRepository(): FeaturedRepository
@@ -125,24 +134,20 @@ class ProgramManager
 
     if (!$project->isVisible())
     {
+      // featured or approved projects should never be invisible
       if (!$this->featured_repository->isFeatured($project) || !$project->getApproved())
       {
         return false;
       }
     }
 
-//    Right now everyone should find even private programs via the correct link! SHARE-49
-//    if ($program->getPrivate() && $program->getUser()->getId() !== $this->getUser()->getId()) {
-//      // only program owners should be allowed to see their programs
-//      return false;
-//    }
+    // SHARE-49: Private projects are visible to everyone.
+    // -
 
-    if ($project->isDebugBuild())
+    // SHARE-70/SHARE-296: Debug projects must only be seen in the dev env or if explicitly requested
+    if ($project->isDebugBuild() && !$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV'])
     {
-      if (!$this->app_request->isDebugBuildRequest())
-      {
-        return false;
-      }
+      return false;
     }
 
     return true;
@@ -227,14 +232,7 @@ class ProgramManager
 
     $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
 
-    // Notifying the followers of the uploader that a new program of that user is available
-    $followers = $request->getUser()->getFollowers();
-
-    for ($i = 0; $i < $followers->count(); ++$i)
-    {
-      $notification = new NewProgramNotification($followers->get($i), $program);
-      $this->notification_service->addNotification($notification);
-    }
+    $this->notifyFollower($program);
 
     try
     {
@@ -307,6 +305,84 @@ class ProgramManager
     $this->entity_manager->refresh($program);
 
     $this->event_dispatcher->dispatch(new ProgramInsertEvent());
+
+    return $program;
+  }
+
+  /**
+   * Adds a new program from a scratch_program. Doesn't add the Project file.
+   */
+  public function createProgramFromScratch(?Program $program, User $user, array $program_data): Program
+  {
+    $modified_time = TimeUtils::dateTimeFromScratch($program_data['history']['modified']);
+    if (null === $program)
+    {
+      $program = new Program();
+      $program->setUser($user);
+      $program->setScratchId($program_data['id']);
+      $program->setDebugBuild(false);
+    }
+    else
+    {
+      //throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
+      if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp())
+      {
+        return $program;
+      }
+      $program->incrementVersion();
+    }
+    $program->setCatrobatVersion(1);
+    $program->setVisible(true);
+    $program->setApproved(false);
+
+    $description_text = '';
+    if ($instructions = $program_data['instructions'] ?? null)
+    {
+      $description_text .= $instructions;
+    }
+    if ($description = $program_data['description'] ?? null)
+    {
+      if ($instructions)
+      {
+        $description_text .= "\n\n";
+      }
+      $description_text .= $description;
+    }
+    $program->setDescription($description_text);
+
+    if ($title = $program_data['title'] ?? null)
+    {
+      $program->setName($title);
+    }
+
+    $shared_time = TimeUtils::dateTimeFromScratch($program_data['history']['shared']);
+    if ($shared_time)
+    {
+      $program->setUploadedAt($shared_time);
+    }
+    else
+    {
+      $program->setUploadedAt(TimeUtils::getDateTime());
+    }
+    if ($modified_time)
+    {
+      $program->setLastModifiedAt($modified_time);
+    }
+    else
+    {
+      $program->setLastModifiedAt(TimeUtils::getDateTime());
+    }
+
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($program);
+
+    $this->notifyFollower($program);
+
+    if ($image_url = $program_data['image'] ?? null)
+    {
+      $this->screenshot_repository->saveScratchScreenshot($program->getScratchId(), $program->getId());
+    }
 
     return $program;
   }
@@ -470,6 +546,17 @@ class ProgramManager
   public function findOneByName(string $programName)
   {
     return $this->program_repository->findOneBy(['name' => $programName]);
+  }
+
+  /**
+   * @internal
+   * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @return Program|object|null
+   */
+  public function findOneByScratchId(int $scratch_id)
+  {
+    return $this->program_repository->findOneBy(['scratch_id' => $scratch_id]);
   }
 
   /**
@@ -649,14 +736,18 @@ class ProgramManager
 
   public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '0', ?string $flavor = null): array
   {
-    return $this->program_repository->search(
-      $query, $this->app_request->isDebugBuildRequest(), $limit, $offset, $max_version, $flavor
-    );
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+
+    return $this->program_finder->find($program_query, $limit, ['from' => $offset]);
   }
 
   public function searchCount(string $query, string $max_version = '0', ?string $flavor = null): int
   {
-    return $this->program_repository->searchCount($query, $this->app_request->isDebugBuildRequest(), $max_version, $flavor);
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+
+    $paginator = $this->program_finder->findPaginated($program_query);
+
+    return $paginator->getNbResults();
   }
 
   /**
@@ -827,10 +918,10 @@ class ProgramManager
     return json_decode($tokenPayload, true);
   }
 
-  public function getProjects(string $project_type, string $max_version = '0',
+  public function getProjects(string $category, string $max_version = '0',
                               int $limit = 20, int $offset = 0, string $flavor = null): array
   {
-    switch ($project_type){
+    switch ($category){
       case 'recent':
         return $this->getRecentPrograms($flavor, $limit, $offset, $max_version);
       case 'random':
@@ -848,9 +939,9 @@ class ProgramManager
     }
   }
 
-  public function getProjectsCount(string $project_type, string $max_version = '0', string $flavor = null): int
+  public function getProjectsCount(string $category, string $max_version = '0', string $flavor = null): int
   {
-    switch ($project_type){
+    switch ($category){
       case 'recent':
         return $this->getRecentProgramsCount($flavor, $max_version);
       case 'random':
@@ -889,5 +980,52 @@ class ProgramManager
     return $this->program_repository->getProgram(
       $id, $this->app_request->isDebugBuildRequest()
     );
+  }
+
+  private function programSearchQuery(string $query, string $max_version = '0', ?string $flavor = null): BoolQuery
+  {
+    $query = Util::escapeTerm($query);
+
+    $words = explode(' ', $query);
+    foreach ($words as &$word)
+    {
+      $word = $word.'*';
+    }
+    unset($word);
+    $query = implode(' ', $words);
+
+    $query_string = new QueryString();
+    $query_string->setQuery($query);
+    $query_string->setFields(['id', 'name', 'description', 'getTagsString', 'getExtensionsString']);
+    $query_string->setAnalyzeWildcard();
+    $query_string->setDefaultOperator('AND');
+
+    $category_query[] = new Terms('private', [false]);
+    $category_query[] = new Terms('visible', [true]);
+
+    if ('0' !== $max_version)
+    {
+      $category_query[] = new Range('language_version', ['lte' => $max_version]);
+    }
+    if (null !== $flavor)
+    {
+      $category_query[] = new Terms('flavor', [$flavor]);
+    }
+
+    $bool_query = new BoolQuery();
+    $bool_query->addMust($category_query);
+    $bool_query->addMust($query_string);
+
+    return $bool_query;
+  }
+
+  private function notifyFollower(Program $program): void
+  {
+    $followers = $program->getUser()->getFollowers();
+    for ($i = 0; $i < $followers->count(); ++$i)
+    {
+      $notification = new NewProgramNotification($followers[$i], $program);
+      $this->notification_service->addNotification($notification);
+    }
   }
 }

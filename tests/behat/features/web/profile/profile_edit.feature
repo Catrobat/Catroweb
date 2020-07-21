@@ -107,7 +107,6 @@ Feature:
     Given I click "#edit-email-button"
     And I wait for AJAX to finish
     When I fill in "email" with "first@email.com"
-    And I fill in "additional-email" with "second@email.com"
     And I click "#save-email"
     And I wait for the page to be loaded
     Then I should be on "/app/user"
@@ -116,7 +115,6 @@ Feature:
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then I should see "first@email.com"
-    And I should see "second@email.com"
 
   Scenario: changing email addresses with an invalid email should not work
     Given I click "#edit-email-button"
@@ -125,7 +123,6 @@ Feature:
     And I click "#save-email"
     And I wait for AJAX to finish
     Then I should see "This email address is not valid."
-    When I fill in "additional-email" with "second"
     And I click "#save-email"
     And I wait for AJAX to finish
     Then I should see "This email address is not valid."
@@ -133,15 +130,7 @@ Feature:
     And I click "#save-email"
     And I wait for AJAX to finish
     Then I should see "This email address is not valid."
-    When I fill in "additional-email" with "second@email"
-    And I click "#save-email"
-    And I wait for AJAX to finish
-    Then I should see "This email address is not valid."
     When I fill in "email" with "first@email.comcomcom"
-    And I click "#save-email"
-    And I wait for AJAX to finish
-    Then I should see "This email address is not valid."
-    When I fill in "additional-email" with "second@email.comcomcom"
     And I click "#save-email"
     And I wait for AJAX to finish
     Then I should see "This email address is not valid."
@@ -153,19 +142,6 @@ Feature:
     And I click "#save-email"
     And I wait for AJAX to finish
     Then I should see "Error while updating this e-mail address. You must have at least one validated e-mail address."
-
-  Scenario: when deleting the first mail, the additional mail should become the first mail
-    Given I click "#edit-email-button"
-    And I wait for AJAX to finish
-    When I fill in "email" with ""
-    And I fill in "additional-email" with "second@email.com"
-    When I click "#save-email"
-    And I wait for the page to be loaded
-    Then I should be on "/app/user"
-    And I should see "Success"
-    When I click ".swal2-confirm"
-    And I wait for AJAX to finish
-    Then the "#first-mail" element should contain "second@email.com"
 
   Scenario: changing country should work
     Given I click "#edit-country-button"
@@ -313,8 +289,6 @@ Feature:
     Then I should be logged out
     And the user "User1" should not exist
     And comments or catro notifications should not exist
-
-
 
   Scenario: When changing the username it shouldn't contain an email address
     Given I click "#edit-username-button"

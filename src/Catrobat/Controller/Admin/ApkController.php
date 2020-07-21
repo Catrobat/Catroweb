@@ -23,6 +23,7 @@ class ApkController extends CRUDController
     }
 
     $object->setApkStatus(Program::APK_NONE);
+    $object->setApkRequestTime(null);
 
     $this->admin->update($object);
 
@@ -66,6 +67,7 @@ class ApkController extends CRUDController
     foreach ($objects as $program)
     {
       $program->setApkStatus(Program::APK_NONE);
+      $program->setApkRequestTime(null);
       $this->admin->update($program);
     }
 

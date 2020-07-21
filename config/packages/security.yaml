@@ -38,6 +38,33 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
+        api_user:
+            provider: chain_provider
+            pattern: ^/api/user$
+            methods: [GET]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        api_user_delete:
+            provider: chain_provider
+            pattern: ^/api/user$
+            methods: [DELETE]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        api_user_update:
+            provider: chain_provider
+            pattern: ^/api/user$
+            methods: [PUT]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         api_projects_upload:
             provider: chain_provider
             pattern: ^/api/projects

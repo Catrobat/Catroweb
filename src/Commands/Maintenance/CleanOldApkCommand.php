@@ -106,7 +106,7 @@ class CleanOldApkCommand extends Command
       {
         $id_query_part .= 'OR ';
       }
-      $id_query_part .= 'p.id = "'.$apk_id.'" ';
+      $id_query_part .= 'p.id = \''.$apk_id.'\' ';
       ++$i;
     }
 

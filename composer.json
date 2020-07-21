@@ -15,11 +15,12 @@
         "ext-posix": "*",
         "ext-zip": "*",
         "beberlei/doctrineextensions": "^1.2",
-        "catrobat/capi": "v1.0.39",
+        "catrobat/capi": "v1.0.41",
         "doctrine/doctrine-bundle": "^2.0",
-        "doctrine/doctrine-migrations-bundle": "^2.1",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "eightpoints/guzzle-bundle": "^8.0",
+        "friendsofsymfony/elastica-bundle": "^5.1",
         "friendsofsymfony/jsrouting-bundle": "^2.6",
         "friendsofsymfony/rest-bundle": "^2.7",
         "google/apiclient": "^2.4",
@@ -58,11 +59,11 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "emuse/behat-html-formatter": "@dev",
         "friendsofphp/php-cs-fixer": "3.0.x-dev",
-        "phpstan/phpstan": "*",
-        "phpstan/phpstan-doctrine": "*",
-        "phpstan/phpstan-symfony": "*",
-        "phpstan/phpstan-phpunit": "*",
-        "phpunit/phpunit": "^8.1",
+        "phpstan/phpstan": "0.12.32",
+        "phpstan/phpstan-doctrine": "0.12.17",
+        "phpstan/phpstan-symfony": "0.12.6",
+        "phpstan/phpstan-phpunit": "0.12.11",
+        "phpunit/phpunit": "^9.2",
         "symfony/browser-kit": "^5.0",
         "symfony/maker-bundle": "*",
         "symfony/phpunit-bridge": "*",
@@ -102,6 +103,9 @@
     },
 
     "scripts": {
+        "test": "bin/phpunit",
+        "console": "bin/console",
+
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd",
@@ -128,6 +132,6 @@
     },
     "repositories": [{
         "type": "vcs",
-        "url": "https://github.com/HCrane/CAPI"
+        "url": "https://github.com/Catrobat/Catroweb-API"
     }]
 }

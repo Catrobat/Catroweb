@@ -24,9 +24,20 @@ class MigrationManager
   public function dropMigrationVersions(): bool
   {
     $schema_manager = $this->connection->getSchemaManager();
-    if (true == $schema_manager->tablesExist(['migration_versions']))
+    if ($schema_manager->tablesExist(['migration_versions']))
     {
       $sql = 'DROP TABLE migration_versions;';
+      $connection = $this->entity_manager->getConnection();
+      $stmt = $connection->prepare($sql);
+      $stmt->execute();
+      $stmt->closeCursor();
+
+      return true;
+    }
+
+    if ($schema_manager->tablesExist(['doctrine_migration_versions']))
+    {
+      $sql = 'DROP TABLE doctrine_migration_versions;';
       $connection = $this->entity_manager->getConnection();
       $stmt = $connection->prepare($sql);
       $stmt->execute();

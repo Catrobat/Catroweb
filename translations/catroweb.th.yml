@@ -27,6 +27,7 @@ country: ประเทศ
 loginText: login
 privacyPolicy: นโยบายความเป็นส่วนตัว
 imprint: ประทับตรา
+programDetails: รายละเอียด
 somethingWentWrong: 'Ooooops เกิดข้อผิดพลาดบางอย่าง'
 pleaseTryAgain: 'กรุณาลองอีกครั้ง!'
 oldVersionError: 'กรุณาอัพเดต Pocket Code ให้เป็นเวอร์ชั่นล่าสุด'
@@ -34,7 +35,7 @@ more: 'เพิ่มเติม'
 less: 'ย่อ'
 show-more: 'ดูเพิ่มเติม'
 show-less: 'แสดงน้อยลง'
-ok: ตกลง
+ok: Ok
 clickToDownloadProgram: 'ในการดาวน์โหลดตัวอย่างโครงการคลิก %link_start% ที่นี่ %link_end%'
 registrationError: 'ชื่อผู้ใช้หรืออีเมลถูกใช้ไปแล้ว'
 notifications: 'การแจ้งเตือน'
@@ -65,6 +66,7 @@ notificationsClearError: "ไม่สามารถทำเครื่อง
 notificationsDeleteError: "ไม่สามารถลบการแจ้งเตือน!"
 pleaseWait: "กรุณารอสักครู่…"
 projects: "โปรแกรม"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -177,7 +179,9 @@ programs:
   wow: ว้าว
   linkTitle: ลิงก์
   link: คัดลอกลิงค์โครงการไปยังคลิปบอร์ด
+  reactionsText: ถูกใจ
 remixGraph:
+  title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'
   by: 'โดย'
   open: 'เปิด​ '
@@ -269,6 +273,7 @@ profile:
     pictureTooLarge: รูปภาพของท่านมีขนาดใหญ่เกินไป กรุณาใช้ภาพที่มีขนาดเล็กกว่า 5 เมกะไบต์
     uploadError: ขออภัย มีปัญหาในการอัพโหลด
     noSupport: ไม่สนับสนุนนประเภทไฟล์ของรูปนี้ กรุณาลองใช้รูปอื่น
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: แก้ไขโปรไฟล์
   edit: แก้ไข
@@ -598,7 +603,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: ดาวน์โหลด APK
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -673,18 +678,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -789,6 +795,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -819,7 +826,7 @@ codeStatistics:
   error: "Code Statistics can't be displayed."
   general: 'General'
   bricks: 'ก้อนคำสั่ง'
-  eventBricks: 'Event'
+  eventBricks: 'เหตุการณ์'
   controlBricks: 'ควบคุม'
   motionBricks: 'เคลื่อนไหว'
   soundBricks: 'เสียง'

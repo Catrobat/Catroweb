@@ -119,8 +119,10 @@ class AppExtension extends AbstractExtension
   {
     return [
       new TwigFunction('countriesList', [$this, 'getCountriesList']),
+      new TwigFunction('isMobile', [$this, 'isMobile']),
       new TwigFunction('isWebview', [$this, 'isWebview']),
-      new TwigFunction('isIOSWebview', [$this, 'isIOSWebview']),
+      new TwigFunction('isAndroid', [$this, 'isAndroid']),
+      new TwigFunction('isIOS', [$this, 'isIOS']),
       new TwigFunction('checkCatrobatLanguage', [$this, 'checkCatrobatLanguage']),
       new TwigFunction('getLanguageOptions', [$this, 'getLanguageOptions']),
       new TwigFunction('getMediaPackageImageUrl', [$this, 'getMediaPackageImageUrl']),
@@ -210,22 +212,25 @@ class AppExtension extends AbstractExtension
     return $list;
   }
 
-  public function isWebview(): bool
+  public function isMobile(): bool
   {
-    $request = $this->request_stack->getCurrentRequest();
-    $user_agent = $request->headers->get('User-Agent');
-
-    // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    return preg_match('/Catrobat/', $user_agent) || false !== strpos($user_agent, 'Android') ||
-      false !== strpos($user_agent, 'iPad') || false !== strpos($user_agent, 'iPhone');
+    return preg_match('/(Catrobat|Android|Windows Phone|iPad|iPhone)/', $this->getUserAgent());
   }
 
-  public function isIOSWebview(): bool
+  public function isWebview(): bool
   {
-    $request = $this->request_stack->getCurrentRequest();
-    $user_agent = $request->headers->get('User-Agent');
+    // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
+    return preg_match('/Catrobat/', $this->getUserAgent());
+  }
 
-    return false !== strpos($user_agent, 'iPad') || false !== strpos($user_agent, 'iPhone');
+  public function isAndroid(): bool
+  {
+    return preg_match('/Android/', $this->getUserAgent());
+  }
+
+  public function isIOS(): bool
+  {
+    return preg_match('/(iPad|iPhone)/', $this->getUserAgent());
   }
 
   /**
@@ -233,8 +238,7 @@ class AppExtension extends AbstractExtension
    */
   public function checkCatrobatLanguage($program_catrobat_language): bool
   {
-    $request = $this->request_stack->getCurrentRequest();
-    $user_agent = $request->headers->get('User-Agent');
+    $user_agent = $this->getUserAgent();
 
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
     if (preg_match('/Catrobat/', $user_agent))
@@ -394,5 +398,12 @@ class AppExtension extends AbstractExtension
     $lastOccurrence = strpos($filename, '.', $firstOccurrence);
 
     return substr($filename, $firstOccurrence, $lastOccurrence - $firstOccurrence);
+  }
+
+  private function getUserAgent(): string
+  {
+    $request = $this->request_stack->getCurrentRequest();
+
+    return $request->headers->get('User-Agent');
   }
 }

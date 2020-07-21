@@ -16,7 +16,7 @@ Feature: Admin Upload Notification
       | User1    | true   | 0      | 0       |
       | User2    | 0      | 1      | 0       |
     And I activate the Profiler
-
+    And I have a program with "name" set to "NotifyEmAll"
     When I upload this generated program, API version 1
     Then I should see 2 outgoing emails
     And I should see a email with recipient "admin@catrob.at"

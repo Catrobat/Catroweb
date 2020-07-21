@@ -37,9 +37,12 @@ parameters:
   catrobat.translations.dir:            "%kernel.project_dir%/translations"
   catrobat.upload.temp.dir:             "%catrobat.pubdir%resources/tmp/uploads/"
   catrobat.upload.temp.path:            "resources/tmp/uploads/"
+  es_host:                              "%env(ES_HOST)%"
+  es_port:                              "%env(ES_PORT)%"
 
   #      This can drastically improve DX by reducing the time to load classes
   container.dumper.inline_class_loader: true
+
 
 services:
 
@@ -75,6 +78,8 @@ services:
       $catrobat_template_storage_dir: "%catrobat.template.storage.dir%"
       $catrobat_template_storage_path: "%catrobat.template.storage.path%"
       $snapshot_dir: "%catrobat.snapshot.dir%"
+      $programFinder: '@fos_elastica.finder.app_program.program'
+
 
   # ====================================================================================================================
   #  Catrobat:
@@ -230,6 +235,7 @@ services:
     class: App\Catrobat\Services\Ci\JenkinsDispatcher
     arguments:
       - "%jenkins%"
+    public: true
 
   screenshot_repository:
     class: App\Catrobat\Services\ScreenshotRepository
@@ -312,6 +318,7 @@ services:
   # ====================================================================================================================
   #   Listeners:
   #
+  FOS\ElasticaBundle\Finder\TransformedFinder: '@fos_elastica.finder.app_program.program'
 
   # ======== System Validation ========
 
@@ -462,6 +469,12 @@ services:
         event: App\Catrobat\Events\InvalidProgramUploadedEvent,
         method: onInvalidProgramUploadedEvent
       }
+
+  # ======== Scratch ========
+  catrobat.scratch.check:
+    class: App\Catrobat\Listeners\ScratchProgramUpdater
+    tags:
+      - { name: kernel.event_listener, event: App\Catrobat\Events\CheckScratchProgramEvent, method: onCheckScratchProgram }
 
   # ======== Entity ========
 
@@ -889,3 +902,8 @@ services:
     class: App\Api\AuthenticationApi
     tags:
       - { name: "open_api_server.api", api: "authentication" }
+
+  api.utility:
+    class: App\Api\UtilityApi
+    tags:
+      - { name: "open_api_server.api", api: "utility" }

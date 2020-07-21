@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Utils\TimeUtils;
+use App\Utils\Utils;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
@@ -61,5 +63,36 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     }
 
     return $response_data;
+  }
+
+  public function createUserFromScratch(array $userdata): ?User
+  {
+    $scratch_user_id = intval($userdata['id']);
+    /** @var User|null $user */
+    $user = $this->findUserBy(['scratch_user_id' => $scratch_user_id]);
+
+    if (null === $user)
+    {
+      $username = $userdata['username'];
+      $user = new User();
+      $user->setScratchUserId($scratch_user_id);
+      $user->setScratchUsername($username);
+      $user->setEmail($username.'@localhost');
+      $user->setPlainPassword(Utils::randomPassword());
+      if ($avatar = $userdata['profile']['images']['90x90'] ?? null)
+      {
+        $user->setAvatar($avatar);
+      }
+      $joined = TimeUtils::dateTimeFromScratch($userdata['history']['joined']);
+      if ($joined)
+      {
+        $user->changeCreatedAt($joined);
+      }
+      $this->objectManager->persist($user);
+      $this->objectManager->flush();
+      $this->objectManager->refresh($user);
+    }
+
+    return $user;
   }
 }

@@ -57,16 +57,12 @@ Feature: Users can choose between multiple languages. Text should be automatical
     And I am on "/app/project/1"
     And the selected language is "English"
     And I wait for the page to be loaded
-    Then I should see "Show Remix Graph"
-    And I should see "1 remix"
-    And the element "#remix-graph-button" should be visible
-    And the element "#remix-graph-modal-link" should be visible
+    Then I should see "REMIX GRAPH"
+    And the element "#remix-graph-button-small" should be visible
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
     Then I should see "Показать перемешанный граф"
-    And I should see "1 ремикс"
-    And the element "#remix-graph-button" should be visible
-    And the element "#remix-graph-modal-link" should be visible
+    And the element "#remix-graph-button-small" should be visible
 
   Scenario: User with selected russian language sees the recommended programs that have been downloaded by other users on program page
     Given there are program download statistics:

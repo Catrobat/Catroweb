@@ -47,9 +47,6 @@
     "composer/xdebug-handler": {
         "version": "1.4.1"
     },
-    "container-interop/container-interop": {
-        "version": "1.2.0"
-    },
     "deployer/deployer": {
         "version": "v6.7.3"
     },
@@ -174,6 +171,9 @@
             "config/packages/eight_points_guzzle.yaml"
         ]
     },
+    "elasticsearch/elasticsearch": {
+        "version": "v6.7.2"
+    },
     "emuse/behat-html-formatter": {
         "version": "0.1.x-dev"
     },
@@ -190,6 +190,18 @@
         },
         "files": [
             ".php_cs.dist"
+        ]
+    },
+    "friendsofsymfony/elastica-bundle": {
+        "version": "5.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "46c9cd2c1e07f0fcfd97e96f12b03b2e0845c4cd"
+        },
+        "files": [
+            "config/packages/fos_elastica.yaml"
         ]
     },
     "friendsofsymfony/jsrouting-bundle": {
@@ -245,6 +257,12 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
+    },
+    "guzzlehttp/ringphp": {
+        "version": "1.1.1"
+    },
+    "guzzlehttp/streams": {
+        "version": "3.0.0"
     },
     "incenteev/composer-parameter-handler": {
         "version": "v2.1.3"
@@ -320,6 +338,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "pagerfanta/pagerfanta": {
+        "version": "v2.1.3"
+    },
     "paragonie/random_compat": {
         "version": "v2.0.18"
     },
@@ -392,6 +413,9 @@
     "phpunit/php-file-iterator": {
         "version": "2.0.2"
     },
+    "phpunit/php-invoker": {
+        "version": "3.0.0"
+    },
     "phpunit/php-text-template": {
         "version": "1.2.1"
     },
@@ -435,6 +459,15 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "sebastian/code-unit": {
+        "version": "1.0.2"
+    },
+    "react/promise": {
+        "version": "v2.8.0"
+    },
+    "ruflin/elastica": {
+        "version": "6.1.1"
     },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"

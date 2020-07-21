@@ -18,7 +18,7 @@ deleteIt: Da, izbriši!
 reportIt: Da, prijavi!
 areYouSure: Jeste li sigurni?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Preuzmi
 description: Opis
 noDescription: Opis nije dostupan.
 credits: Credits
@@ -27,6 +27,7 @@ country: Država
 loginText: prijava
 privacyPolicy: Pravila o privatnosti
 imprint: Impresum
+programDetails: Detalji
 somethingWentWrong: 'Ooooops nešto je pošlo po zlu.'
 pleaseTryAgain: 'Pokušajte ponovo!'
 oldVersionError: 'Ažurirajte na najnoviju verziju Pocket Code-a!'
@@ -34,7 +35,7 @@ more: 'više'
 less: 'manje'
 show-more: 'Prikaži više'
 show-less: 'Prikaži manje'
-ok: OK
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifikacije'
@@ -65,6 +66,7 @@ notificationsClearError: "Nemoguće označiti notifikacije kao pročitane!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Molimo sačekajte..."
 projects: "Programi"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Veza
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remiksi
+  showRemixGraph: 'Remix graph'
   by: 'od'
   open: 'Otvori '
   showPaths: 'Show Paths'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Izabrana slika je prevelika, molimo ne koristi slike veće od 5mb.
     uploadError: Nažalost, došlo je do problema prilikom upload-a!
     noSupport: Ovaj tip slike nije podržan, molimo probaj sa drugom slikom.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
   edit: Uredi
@@ -596,7 +601,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Prikaži kod'
   hideCode: 'Sakrij kod'
   showStatistics: 'Prikaži statistiku koda'

@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Télécharger
 description: Description
 noDescription: Aucune description disponible.
 credits: Credits
@@ -27,14 +27,15 @@ country: Pays
 loginText: Identifiant
 privacyPolicy: Politique de confidentialité
 imprint: Mentions légales
+programDetails: Details
 somethingWentWrong: 'Ooooops, quelque chose s''est mal passé.'
 pleaseTryAgain: 'Essayez à nouveau !'
 oldVersionError: 'Veuillez mettre à jour vers la dernière version de Pocket Code !'
 more: 'plus'
 less: 'moins'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: OK
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Nom d’utilisateur ou adresse e-mail déjà en cours d’utilisation.'
 notifications: 'Notifications'
@@ -65,6 +66,7 @@ notificationsClearError: "Impossible de marquer les notifications comme lues !"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Merci de patienter..."
 projects: "Programmes"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'par'
   open: 'Ouvrir '
   showPaths: 'Afficher les chemins d''accès'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo.
     uploadError: Désolé, il y a eu un problème pendant le téléchargement !
     noSupport: Ce type d'image n'est pas pris en charge, veuillez essayer une autre image.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Éditer le profil
   edit: Éditer
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

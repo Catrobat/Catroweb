@@ -56,7 +56,6 @@ Feature: Logged in user projects
     And I request "GET" "/api/projects/user?limit=2"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 23
     Then the response should contain projects in the following order:
       | Name       |
       | project 26 |
@@ -68,7 +67,6 @@ Feature: Logged in user projects
     And I request "GET" "/api/projects/user/?limit=1&offset=0"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 23
     Then the response should contain projects in the following order:
       | Name       |
       | project 26 |
@@ -79,7 +77,6 @@ Feature: Logged in user projects
     And I request "GET" "/api/projects/user/?limit=1&offset=1"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 2
     Then the response should contain projects in the following order:
       | Name       |
       | project 5  |
@@ -92,10 +89,7 @@ Feature: Logged in user projects
     Then the response should have the projects model structure
     Then I should get the json object:
       """
-      {
-        "projects": [],
-        "total_results": 1
-      }
+      []
       """
 
   Scenario: Get logged in user projects with maxVersion = 0.984
@@ -104,7 +98,6 @@ Feature: Logged in user projects
     And I request "GET" "/api/projects/user/?max_version=0.984"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 1
     Then the response should contain projects in the following order:
       | Name       |
       | project 2  |
@@ -115,7 +108,6 @@ Feature: Logged in user projects
     And I request "GET" "/api/projects/user/?flavor=luna"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 1
     Then the response should contain projects in the following order:
       | Name       |
       | project 26 |
@@ -126,6 +118,5 @@ Feature: Logged in user projects
     And I request "GET" "/api/projects/user/"
     Then the response status code should be "200"
     Then the response should have the projects model structure
-    Then the response should contain total projects with value 23
     Then the response should contain 20 projects
 

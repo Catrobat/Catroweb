@@ -38,6 +38,7 @@ use Exception;
 use ImagickException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Process\Process;
 
 class DataFixturesContext implements KernelAwareContext
 {
@@ -46,6 +47,16 @@ class DataFixturesContext implements KernelAwareContext
   private array $programs = [];
   private array $featured_programs = [];
   private array $media_files = [];
+
+  /**
+   * @AfterFeature
+   * @BeforeFeature
+   */
+  public static function resetElastic(): void
+  {
+    $process = new Process(['bin/console', 'fos:elastica:reset', '-q']);
+    $process->run();
+  }
 
   /**
    * @Given the next Uuid Value will be :id
@@ -456,7 +467,7 @@ class DataFixturesContext implements KernelAwareContext
     foreach ($program_extensions as $program_extension)
     {
       /* @var $program_extension Extension */
-      Assert::assertContains($program_extension->getName(), $extension, 'The Extension was not found!');
+      Assert::assertStringContainsString($program_extension->getName(), $extension, 'The Extension was not found!');
     }
   }
 
@@ -673,6 +684,7 @@ class DataFixturesContext implements KernelAwareContext
   {
     $em = $this->getManager();
     $file_repo = $this->getMediaPackageFileRepository();
+    $flavor_repo = $this->getFlavorRepository();
     $files = $table->getHash();
     foreach ($files as $file)
     {
@@ -690,9 +702,12 @@ class DataFixturesContext implements KernelAwareContext
       $old_files = null == $old_files ? [] : $old_files;
       $old_files->add($new_file);
       $category->setFiles($old_files);
-      if (!empty($file['flavor']))
+      if (!empty($file['flavors']))
       {
-        $new_file->setFlavor($file['flavor']);
+        foreach (explode(',', $file['flavors']) as $flavor)
+        {
+          $new_file->addFlavor($flavor_repo->getFlavorByName(trim($flavor)));
+        }
       }
       $new_file->setAuthor($file['author']);
 
@@ -707,6 +722,7 @@ class DataFixturesContext implements KernelAwareContext
         'id' => $file['id'],
         'name' => $file['name'],
         'flavor' => $new_file->getFlavor(),
+        'flavors' => $new_file->getFlavorNames(),
         'package' => $mediaPackage->getName(),
         'category' => $file['category'],
         'author' => $file['author'],
@@ -715,6 +731,18 @@ class DataFixturesContext implements KernelAwareContext
       ];
     }
     $em->flush();
+  }
+
+  /**
+   * @Given /^there are flavors:$/
+   */
+  public function thereAreFlavors(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config)
+    {
+      $this->insertFlavor($config, false);
+    }
+    $this->getManager()->flush();
   }
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -1152,5 +1180,16 @@ class DataFixturesContext implements KernelAwareContext
       $this->getUserDataFixtures()->createdAt($config);
     }
     $this->getManager()->flush();
+  }
+
+  /**
+   * @Then /^there should be "([^"]*)" users in the database$/
+   *
+   * @param mixed $number_of_users
+   */
+  public function thereShouldBeUsersInTheDatabase($number_of_users): void
+  {
+    $users = $this->getUserManager()->findAll();
+    Assert::assertCount($number_of_users, $users);
   }
 }

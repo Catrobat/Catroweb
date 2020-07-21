@@ -1,47 +1,58 @@
 @web @project_page
 Feature: As a visitor I want to see code statistics on the project page
 
+  Scenario: For performance reasons the code statistics are on its own page
+    Given there are programs:
+      | id | name      |
+      | 1  | program 1 |
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    And I click "#code-statistics-small"
+    Then I should be on "/app/project/1/code_statistics"
+    And the "#top-app-bar__title" element should contain "Code statistics"
+
+  Scenario: Code statistics provide means to return to the project page
+    Given there are programs:
+      | id | name      |
+      | 1  | program 1 |
+    And I am on "/app"
+    When I go to "/app/project/1/code_statistics"
+    And I click "#top-app-bar__back__btn-back"
+    Then I should be on "/app/project/1"
+
+  Scenario: Code statistics page title is no link
+    Given there are programs:
+      | id | name      |
+      | 1  | program 1 |
+    And I am on "/app/project/1/code_statistics"
+    And I click "#top-app-bar__title"
+    Then I should be on "/app/project/1/code_statistics"
+
   Scenario: The code statistics should use an accordion principle
     Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
     And I upload this generated program with id "1", API version 1
-    And I am on "/app/project/1"
+    And I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then the element "#statistics" should be visible
-    And the element "#statisticsGeneral" should not be visible
-    And the element "#statisticsBricks" should not be visible
-    And the element "#total-number-of-scenes" should not be visible
-    And the element "#total-number-of-event-brick" should not be visible
-    When I click "#statistics"
-    Then the element "#statistics" should be visible
     Then the element "#statisticsGeneral" should be visible
     And the element "#statisticsBricks" should be visible
     And the element "#total-number-of-scenes" should not be visible
     And the element "#total-number-of-event-brick" should not be visible
     When I click "#statisticsGeneral"
-    Then the element "#statistics" should be visible
     Then the element "#statisticsGeneral" should be visible
     And the element "#statisticsBricks" should be visible
     And the element "#total-number-of-scenes" should be visible
     And the element "#total-number-of-event-brick" should not be visible
     When I click "#statisticsBricks"
-    Then the element "#statistics" should be visible
     Then the element "#statisticsGeneral" should be visible
     And the element "#statisticsBricks" should be visible
     And the element "#total-number-of-scenes" should not be visible
     And the element "#total-number-of-event-brick" should be visible
-    When I click "#statistics"
-    Then the element "#statistics" should be visible
-    Then the element "#statisticsGeneral" should not be visible
-    And the element "#statisticsBricks" should not be visible
-    And the element "#total-number-of-scenes" should not be visible
-    And the element "#total-number-of-event-brick" should not be visible
 
   Scenario: On a project page there should be correct stats for all code bricks
     Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "COMPOUND2"
     And the "#total-number-of-event-brick" element should not contain "0"
     And the "#number-of-different-event-brick" element should not contain "0"
     And the "#total-number-of-control-brick" element should not contain "0"
@@ -68,9 +79,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats
     Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "COMPOUND2"
     And the "#total-number-of-scenes" element should contain "1"
     But the "#total-number-of-scenes" element should not contain "0"
     And the "#total-number-of-scripts" element should contain "1"
@@ -91,9 +101,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats
     Given I have a project zip "CodeStatistics/code_statistics_mixed_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "CODESTATS"
     And the "#total-number-of-scenes" element should contain "2"
     And the "#total-number-of-scripts" element should contain "12"
     And the "#total-number-of-bricks" element should contain "80"
@@ -122,9 +131,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about local and global vars
     Given I have a project zip "CodeStatistics/code_statistics_global_vs_local_variables.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "LOCALVSGLOBAL"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "2"
     And the "#total-number-of-bricks" element should contain "9"
@@ -153,9 +161,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all event bricks
     Given I have a project zip "CodeStatistics/code_statistics_event_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ALLEVENTS"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "8"
     And the "#total-number-of-bricks" element should contain "10"
@@ -184,9 +191,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all control bricks
     Given I have a project zip "CodeStatistics/code_statistics_control_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ALLCONTROLS"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "18"
@@ -215,9 +221,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all motion bricks
     Given I have a project zip "CodeStatistics/code_statistics_motion_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ALLMOTION"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "23"
@@ -246,9 +251,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all sound bricks
     Given I have a project zip "CodeStatistics/code_statistics_sound_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ALLSOUNDS"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "9"
@@ -277,9 +281,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all look bricks
     Given I have a project zip "CodeStatistics/code_statistics_look_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ALLLOOKS"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "22"
@@ -308,9 +311,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all look bricks
     Given I have a project zip "CodeStatistics/code_statistics_pen_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ALLPEN"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "7"
@@ -339,9 +341,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all data bricks
     Given I have a project zip "CodeStatistics/code_statistics_data_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ALLDATA"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "15"
@@ -367,13 +368,11 @@ Feature: As a visitor I want to see code statistics on the project page
     And the "#total-number-of-special-brick" element should contain "0"
     And the "#number-of-different-special-brick" element should contain "0"
 
-
   Scenario: On a project page there should be correct stats about all arduino bricks
     Given I have a project zip "CodeStatistics/code_statistics_arduino_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "Arduino"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "3"
@@ -402,9 +401,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all lego ev3 bricks
     Given I have a project zip "CodeStatistics/code_statistics_lego_ev3_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "LEGO EV3"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "6"
@@ -433,9 +431,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all lego nxt bricks
     Given I have a project zip "CodeStatistics/code_statistics_lego_nxt_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "LEGONXT"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "5"
@@ -464,9 +461,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all embroidery bricks
     Given I have a project zip "CodeStatistics/code_statistics_embroidery_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "Embroidery"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "2"
@@ -495,9 +491,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all extended embroidery bricks
     Given I have a project zip "CodeStatistics/code_statistics_embroidery_blocks_extended.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "Embroidery"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "6"
@@ -526,9 +521,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all ar drone bricks
     Given I have a project zip "CodeStatistics/code_statistics_ar_drone_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "ARDRONE"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "14"
@@ -557,9 +551,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all jumping sumo bricks
     Given I have a project zip "CodeStatistics/code_statistics_jumping_sumo_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "SUMO"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "12"
@@ -588,9 +581,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all raspberry pi bricks
     Given I have a project zip "CodeStatistics/code_statistics_raspberrypi_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "RASBPERRYPI"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "6"
@@ -619,9 +611,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all nfc bricks
     Given I have a project zip "CodeStatistics/code_statistics_nfc_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "nfc"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "2"
@@ -650,9 +641,8 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: On a project page there should be correct stats about all phiro bricks
     Given I have a project zip "CodeStatistics/code_statistics_phiro_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
-    Given I am on "/app/project/1"
+    Given I am on "/app/project/1/code_statistics"
     And I wait for the page to be loaded
-    Then I should see "phiro"
     And the "#total-number-of-scenes" element should contain "1"
     And the "#total-number-of-scripts" element should contain "1"
     And the "#total-number-of-bricks" element should contain "15"
@@ -677,5 +667,3 @@ Feature: As a visitor I want to see code statistics on the project page
     And the "#number-of-different-data-brick" element should contain "1"
     And the "#total-number-of-special-brick" element should contain "3"
     And the "#number-of-different-special-brick" element should contain "3"
-
-

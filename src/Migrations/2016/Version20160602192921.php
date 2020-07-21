@@ -2,34 +2,19 @@
 
 namespace DoctrineMigrations;
 
-use App\Entity\Extension;
+use Doctrine\DBAL\DBALException;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20160602192921 extends AbstractMigration implements ContainerAwareInterface
+class Version20160602192921 extends AbstractMigration
 {
-
-    private $container;
-
-    /**
-     * Sets the container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
-     */
-    public function setContainer(ContainerInterface $container = null): void
-    {
-        $this->container = $container;
-    }
-
   /**
    * @param Schema $schema
    *
-   * @throws \Doctrine\DBAL\DBALException
+   * @throws DBALException
    */
     public function up(Schema $schema) : void
     {
@@ -46,31 +31,26 @@ class Version20160602192921 extends AbstractMigration implements ContainerAwareI
     {
         parent::postUp($schema);
 
-        /**
-         * @var $em \Doctrine\ORM\EntityManager
-         */
-        $em = $this->container->get('doctrine')->getManager();
-
-        $em->getConnection()->insert('extension',array('name' => 'Arduino', 'prefix' => 'ARDUINO'));
-        $em->getConnection()->insert('extension',array('name' => 'Drone', 'prefix' => 'DRONE'));
-        $em->getConnection()->insert('extension',array('name' => 'Lego', 'prefix' => 'LEGO'));
-        $em->getConnection()->insert('extension',array('name' => 'Phiro', 'prefix' => 'PHIRO'));
-        $em->getConnection()->insert('extension',array('name' => 'Raspberry Pi', 'prefix' => 'RASPI'));
+        $this->connection->insert('extension',array('name' => 'Arduino', 'prefix' => 'ARDUINO'));
+        $this->connection->insert('extension',array('name' => 'Drone', 'prefix' => 'DRONE'));
+        $this->connection->insert('extension',array('name' => 'Lego', 'prefix' => 'LEGO'));
+        $this->connection->insert('extension',array('name' => 'Phiro', 'prefix' => 'PHIRO'));
+        $this->connection->insert('extension',array('name' => 'Raspberry Pi', 'prefix' => 'RASPI'));
 
         $sql = "SELECT id FROM program WHERE lego = 1";
 
-        $query = $em->getConnection()->query($sql);
+        $query = $this->connection->query($sql);
 
         while($program = $query->fetch()) {
-            $em->getConnection()->insert('program_extension',array('program_id' => $program['id'], 'extension_id' => 3));
+            $this->connection->insert('program_extension',array('program_id' => $program['id'], 'extension_id' => 3));
         }
 
         $sql_2 = "SELECT id FROM program WHERE phiro = 1";
 
-        $query_2 = $em->getConnection()->query($sql_2);
+        $query_2 = $this->connection->query($sql_2);
 
         while($program = $query_2->fetch()) {
-            $em->getConnection()->insert('program_extension',array('program_id' => $program['id'], 'extension_id' => 4));
+            $this->connection->insert('program_extension',array('program_id' => $program['id'], 'extension_id' => 4));
         }
 
     }
@@ -78,7 +58,7 @@ class Version20160602192921 extends AbstractMigration implements ContainerAwareI
   /**
    * @param Schema $schema
    *
-   * @throws \Doctrine\DBAL\DBALException
+   * @throws DBALException
    */
     public function down(Schema $schema) : void
     {
@@ -94,27 +74,20 @@ class Version20160602192921 extends AbstractMigration implements ContainerAwareI
     {
         parent::preDown($schema);
 
-        /**
-         * @var $em \Doctrine\ORM\EntityManager
-         */
-        $em = $this->container->get('doctrine')->getManager();
-
         $sql = "SELECT program_id FROM program_extension WHERE extension_id = 3";
 
-        $query = $em->getConnection()->query($sql);
+        $query = $this->connection->query($sql);
 
         while($program = $query->fetch()) {
-            $em->getConnection()->update('program',array('lego' => 1), array('id' => $program['program_id']));
+            $this->connection->update('program',array('lego' => 1), array('id' => $program['program_id']));
         }
 
         $sql_2 = "SELECT program_id FROM program_extension WHERE extension_id = 4";
 
-        $query_2 = $em->getConnection()->query($sql_2);
+        $query_2 = $this->connection->query($sql_2);
 
         while($program = $query_2->fetch()) {
-            $em->getConnection()->update('program',array('phiro' => 1), array('id' => $program['program_id']));
+            $this->connection->update('program',array('phiro' => 1), array('id' => $program['program_id']));
         }
-
     }
-
 }

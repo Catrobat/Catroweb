@@ -98,23 +98,7 @@ input:valid ~ label {
   width: 50%;
 }
 
-.group-with-icon-wrapper {
-  overflow: hidden;
-}
 
-.group-with-icon {
-  width: 90%;
-  float: left;
-}
-
-.icon-from-group {
-  float: right;
-  width: 10%;
-  text-align: center;
-  font-size: 1.5em;
-  margin-top: 1em;
-  padding-top: 0.1em;
-}
 
 /* HIGHLIGHTER ================================== */
 
@@ -228,4 +212,8 @@ hr {
 
 .align_start {
   text-align: start;
+}
+
+.show-hide-password {
+  display: flex;
 }

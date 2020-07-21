@@ -38,13 +38,8 @@
 .program-round-icon
 {
   margin-top: 0.5em;
-  color: $white;
+  color: $primary;
   font-size: 1.2em;
-}
-
-.remix-close-icon
-{
-  font-size: 3em;
 }
 
 .like-round-icon-container
@@ -81,3 +76,20 @@
 #help-button {
   cursor:pointer
 }
+
+.text-icon-aligned {
+  display: flex;
+  align-items: center;
+}
+
+.trailing-icon {
+  margin-left: auto;
+}
+.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-28 { font-size: 28px; }
+.material-icons.md-26 { font-size: 26px; }
+.material-icons.md-18 { font-size: 18px; }
+
+.material-icons.md-24 { font-size: 24px; }
+
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }

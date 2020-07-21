@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MediaPackageFile class. A MediaPackageFile is part of a MediaPackageCategory and represents an image, sound etc.
@@ -65,14 +68,20 @@ class MediaPackageFile
   protected int $downloads = 0;
 
   /**
-   * @ORM\Column(type="string", options={"default": "pocketcode"}, nullable=true)
+   * @ORM\ManyToMany(targetEntity="\App\Entity\Flavor", inversedBy="media_package_files", fetch="EXTRA_LAZY")
+   * @Assert\Count(min = "1")
    */
-  protected ?string $flavor = 'pocketcode';
+  protected Collection $flavors;
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
   protected ?string $author = null;
+
+  public function __construct()
+  {
+    $this->flavors = new ArrayCollection();
+  }
 
   public function getActive(): bool
   {
@@ -178,16 +187,6 @@ class MediaPackageFile
     $this->downloads = $downloads;
   }
 
-  public function getFlavor(): ?string
-  {
-    return $this->flavor;
-  }
-
-  public function setFlavor(?string $flavor): void
-  {
-    $this->flavor = $flavor;
-  }
-
   public function getAuthor(): ?string
   {
     return $this->author;
@@ -196,5 +195,68 @@ class MediaPackageFile
   public function setAuthor(?string $author): void
   {
     $this->author = $author;
+  }
+
+  public function addFlavor(Flavor $flavor): void
+  {
+    if ($this->flavors->contains($flavor))
+    {
+      return;
+    }
+    $this->flavors[] = $flavor;
+  }
+
+  public function removeFlavor(Flavor $flavor): void
+  {
+    if (!$this->flavors->contains($flavor))
+    {
+      return;
+    }
+    $this->flavors->removeElement($flavor);
+  }
+
+  public function getFlavors(): Collection
+  {
+    return $this->flavors;
+  }
+
+  /** @deprecated */
+  public function getFlavor(): ?string
+  {
+    if ($this->getFlavors()->isEmpty())
+    {
+      return 'pocketcode';
+    }
+
+    return $this->getFlavors()->first()->getName();
+  }
+
+  public function getFlavorNames(): array
+  {
+    $return = [];
+    /** @var Flavor $flavor */
+    foreach ($this->getFlavors() as $flavor)
+    {
+      $return[] = $flavor->getName();
+    }
+
+    return $return;
+  }
+
+  public function clearFlavors(): void
+  {
+    $this->flavors->clear();
+  }
+
+  public function setFlavors(?Iterable $flavors): void
+  {
+    $this->clearFlavors();
+    if (null !== $flavors)
+    {
+      foreach ($flavors as $flavor)
+      {
+        $this->addFlavor($flavor);
+      }
+    }
   }
 }

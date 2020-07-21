@@ -48,11 +48,10 @@ Feature: Projects should have descriptions that can be changed by the project ow
     When I go to "/app/project/3"
     And I wait for the page to be loaded
     Then I should see "long description project"
-    And I should not see "the end of the description"
-    And I should see "Show more"
+    And I should see "MORE INFORMATION"
     When I click "#descriptionShowMoreToggle"
     And I wait for AJAX to finish
-    Then I should see "Show Less"
+    Then I should see "LESS INFORMATION"
     And I should see "the end of the description"
 
   Scenario: Small Project Descriptions are fully visible

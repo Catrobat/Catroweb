@@ -27,6 +27,7 @@ country: País
 loginText: login
 privacyPolicy: Política de Privacidade
 imprint: Imprimir
+programDetails: Detalhes
 somethingWentWrong: 'Ooooops! Algo deu errado.'
 pleaseTryAgain: 'Por favor, tente de novo!'
 oldVersionError: 'Por favor, atualize para a versão mais recente do Pocket Code!'
@@ -34,7 +35,7 @@ more: 'mais'
 less: 'menos'
 show-more: 'Mostre mais'
 show-less: 'Mostre menos'
-ok: OK
+ok: Ok
 clickToDownloadProgram: 'Para baixar o projeto de exemplo clique %link_start% aqui %link_end%.'
 registrationError: 'Este nome de usuário ou endereço de e-mail já está em uso.'
 notifications: 'Notificações'
@@ -65,6 +66,7 @@ notificationsClearError: "Não foi possível marcar as notificações como lidas
 notificationsDeleteError: "Não foi possível excluir as notificações!"
 pleaseWait: "Por favor, aguarde..."
 projects: "Programas"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: Uaaau!
   linkTitle: Vincular
   link: Copiar link do projeto para a área de transferência
+  reactionsText: Curtidas
 remixGraph:
+  title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'
   by: 'por'
   open: 'Abrir '
@@ -266,6 +270,7 @@ profile:
     pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
     uploadError: Desculpe! Houve um problema durante o upload!
     noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Editar perfil
   edit: Editar
@@ -670,18 +675,19 @@ failure:
   upload: Houve um erro durante o envio do seu aplicativo.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -786,6 +792,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Mostrar código'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -816,12 +823,12 @@ codeStatistics:
   error: "Code Statistics can't be displayed."
   general: 'General'
   bricks: 'Blocos'
-  eventBricks: 'Evento'
+  eventBricks: 'Event'
   controlBricks: 'Controle'
   motionBricks: 'Movimento'
   soundBricks: 'Som'
   looksBricks: 'Aparências'
-  penBricks: 'Caneta'
+  penBricks: 'Pen'
   dataBricks: 'Dados'
   specialBricks: 'Special'
 footer:

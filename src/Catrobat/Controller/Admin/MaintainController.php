@@ -31,6 +31,7 @@ class MaintainController extends CRUDController
 
     $input = new ArrayInput([
       'command' => 'catrobat:clean:extracted',
+      '--remove-all' => true,
     ]);
 
     $return = $application->run($input, new NullOutput());

@@ -48,6 +48,24 @@ class ExtractedFileRepository
     $this->logger = $logger;
   }
 
+  public function ensureProjectIsExtracted(Program $project): bool
+  {
+    try
+    {
+      $hash = $project->getExtractedDirectoryHash();
+      if (null === $hash || !file_exists($this->local_path.$hash))
+      {
+        $this->extractProject($project);
+      }
+    }
+    catch (Exception $e)
+    {
+      return false;
+    }
+
+    return true;
+  }
+
   public function loadProgramExtractedFile(Program $program): ?ExtractedCatrobatFile
   {
     try
@@ -64,12 +82,7 @@ class ExtractedFileRepository
 
     try
     {
-      $program_file = $this->program_file_repo->getProgramFile($program->getId());
-      $extracted_file = $this->file_extractor->extract($program_file);
-      $program->setExtractedDirectoryHash($extracted_file->getDirHash());
-      $this->program_manager->save($program);
-
-      return $extracted_file;
+      return $this->extractProject($program);
     }
     catch (Exception $e)
     {
@@ -100,5 +113,15 @@ class ExtractedFileRepository
         "' and message: '".$e->getMessage()."'"
       );
     }
+  }
+
+  private function extractProject(Program $program): ExtractedCatrobatFile
+  {
+    $program_file = $this->program_file_repo->getProgramFile($program->getId());
+    $extracted_file = $this->file_extractor->extract($program_file);
+    $program->setExtractedDirectoryHash($extracted_file->getDirHash());
+    $this->program_manager->save($program);
+
+    return $extracted_file;
   }
 }

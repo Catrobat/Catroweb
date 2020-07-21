@@ -95,6 +95,8 @@ class Constants
   const CAMERA_BRICK = 'CameraBrick';
   const CHOOSE_CAMERA_BRICK = 'ChooseCameraBrick';
   const FLASH_BRICK = 'FlashBrick';
+  const BACKGROUND_REQUEST_BRICK = 'BackgroundRequestBrick';
+  const LOOK_REQUEST_BRICK = 'LookRequestBrick';
 
   // --- Pen ---
   const PEN_DOWN_BRICK = 'PenDownBrick';
@@ -355,6 +357,8 @@ class Constants
   const LEGO_EV3_VOLUME_FORMULA = 'LEGO_EV3_VOLUME';
   const LEGO_EV3_FREQUENCY_FORMULA = 'LEGO_EV3_FREQUENCY';
   const LEGO_EV3_DEGREES_FORMULA = 'LEGO_EV3_DEGREES';
+  const BACKGROUND_REQUEST_FORMULA = 'BACKGROUND_REQUEST';
+  const LOOK_REQUEST_FORMULA = 'LOOK_REQUEST';
 
   // --- AR DRONE FORMULA ---
   const AR_DRONE_TIME_TO_FLY_IN_SECONDS = 'DRONE_TIME_TO_FLY_IN_SECONDS';

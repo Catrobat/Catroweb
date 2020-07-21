@@ -117,48 +117,21 @@
 {% block javascripts %}
   {{ parent() }}
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script src="{{ asset('js/AdminMaintain.min.js') }}"></script>
   <script>
-    google.load('visualization', '1', {packages: ['corechart']})
-    google.setOnLoadCallback(drawDiskChart)
-    google.setOnLoadCallback(drawRamChart)
-
-    function drawDiskChart ()
-    {
-      let data_space = google.visualization.arrayToDataTable([
-        ['name', 'value'],
-        ['Used ({{ usedSpace }})',          {{ usedSpace_raw }}],
-        ['Programs ({{ programsSpace }})',  {{ programsSpace_raw }}],
-        {% for ro in RemovableObjects %}
-        ['{{ ro.name }} ({{ ro.size }})',   {{ ro.size_raw }}],
-        {% endfor %}
-        ['Free ({{ freeSpace }})',          {{ freeSpace_raw }}]
-      ])
-
-      let options_space = {
-        title: 'Disk Space ({{ wholeSpace }})',
-        is3D : true,
-      }
-      let chart = new google.visualization.PieChart(document.getElementById('piechart_3d'))
-      chart.draw(data_space, options_space)
-    }
-
-    function drawRamChart ()
-    {
-      let options_mem = {
-        title: 'RAM ({{ wholeRam }})',
-        is3D : true,
-      }
-
-      let data_mem = google.visualization.arrayToDataTable([
-        ['name', 'value'],
-        ['Free ({{ freeRam }})',          {{ freeRamPercentage }}],
-        ['Used ({{ usedRam }})',          {{ usedRamPercentage }}],
-        ['Shared ({{ sharedRam }})',      {{ sharedRamPercentage }}],
-        ['Buff/Cache ({{ cachedRam }})',  {{ cachedRamPercentage }}]
-      ])
-      let chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'))
-      chart_mem.draw(data_mem, options_mem)
-    }
-
+    let data_space_values = [['name', 'value'],
+      ['Used ({{ usedSpace }})',          {{ usedSpace_raw }}],
+      ['Programs ({{ programsSpace }})',  {{ programsSpace_raw }}],
+      {% for ro in RemovableObjects %}
+      ['{{ ro.name }} ({{ ro.size }})',   {{ ro.size_raw }}],
+      {% endfor %}
+      ['Free ({{ freeSpace }})',          {{ freeSpace_raw }}]]
+    let data_mem_values = [['name', 'value'],
+      ['Free ({{ freeRam }})',          {{ freeRamPercentage }}],
+      ['Used ({{ usedRam }})',          {{ usedRamPercentage }}],
+      ['Shared ({{ sharedRam }})',      {{ sharedRamPercentage }}],
+      ['Buff/Cache ({{ cachedRam }})',  {{ cachedRamPercentage }}]]
+    let maintain = new AdminMaintain(google, data_space_values, data_mem_values, '{{ wholeSpace }}', '{{ wholeRam }}')
+    maintain.init()
   </script>
 {% endblock %}

@@ -15,21 +15,20 @@
 
       <div class="col-12 col-sm-7 col-md-8 col-lg-9 mt-sm-2">
 
-        <div id="username-wrapper">
-          <div class="subtitle-1">
-            <span class="mdc-icon-button material-icons">email</span>
+        <div id="username-wrapper" class="mb-3">
+          <div class="subtitle-1 text-icon-aligned">
             <span>{{ 'username'|trans({}, 'catroweb') }}</span>
-              <a class="edit-category-button"
-                 data-toggle="tooltip" title="{{ 'myprofile.editUsername'|trans({}, 'catroweb') }}">
-                <i id="edit-username-button" class="far fa-edit catro-icon-button"></i>
-              </a>
+            <span id="edit-username-button"
+                  data-toggle="tooltip" title="{{ 'myprofile.editUsername'|trans({}, 'catroweb') }}"
+                  class="mdc-icon-button material-icons trailing-icon">edit</span>
           </div>
 
           <div id="username-edit-container" class="edit-container">
             {% include 'UserManagement/Profile/usernameEdit.html.twig' %}
           </div>
 
-          <div class="profile-data">
+          <div class="profile-data text-icon-aligned">
+            <span class="material-icons mr-2">person</span>
             <div id="username">
               {{ username }}
             </div>
@@ -38,15 +37,13 @@
 
         <hr>
 
-        <div id="email-wrapper">
-          <div class="subtitle-1">
-            <span class="mdc-icon-button material-icons">email</span>
+        <div id="email-wrapper" class="mt-3 mb-3">
+          <div class="subtitle-1 text-icon-aligned">
             <span>{{ 'email'|trans({}, 'catroweb') }}</span>
             {% if not app.user.limited %}
-              <a class="edit-category-button"
-                 data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}">
-                <i id="edit-email-button" class="far fa-edit catro-icon-button"></i>
-              </a>
+              <span id="edit-email-button"
+                    data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}"
+                    class="mdc-icon-button material-icons trailing-icon">edit</span>
             {% endif %}
           </div>
 
@@ -56,14 +53,10 @@
             </div>
           {% endif %}
 
-          <div class="profile-data">
+          <div class="profile-data text-icon-aligned">
+            <span class="material-icons mr-2">email</span>
             <div id="first-mail">
-              <span class="edit-subtitle">{{ 'profile.firstEmail'|trans({}, 'catroweb') }}:</span>
               {{ firstMail }}
-            </div>
-            <div id="second-mail" class="mt-2">
-              <span class="edit-subtitle">{{ 'profile.secondEmail'|trans({}, 'catroweb') }}:</span>
-              {{ secondMail }}
             </div>
           </div>
         </div>
@@ -72,35 +65,41 @@
 
           <hr>
 
-          <div id="password-wrapper">
-            <div class="subtitle-1">
-              <span class="mdc-icon-button material-icons">vpn_key</span>
+          <div id="password-wrapper" class="mt-3 mb-3">
+            <div class="subtitle-1 text-icon-aligned">
               <span>{{ 'password'|trans({}, 'catroweb') }}</span>
-              <a class="edit-category-button"
-                 data-toggle="tooltip" title="{{ 'myprofile.editPassword'|trans({}, 'catroweb') }}">
-                <i id="edit-password-button" class="far fa-edit catro-icon-button"></i>
-              </a>
+              <span id="edit-password-button"
+                    data-toggle="tooltip" title="{{ 'myprofile.editPassword'|trans({}, 'catroweb') }}"
+                    class="mdc-icon-button material-icons trailing-icon">edit</span>
             </div>
             <div id="password-edit-container" class="edit-container">
               {% include 'UserManagement/Profile/passwordEdit.html.twig' %}
             </div>
+
+            <div class="profile-data text-icon-aligned">
+              <span class="material-icons mr-2">vpn_key</span>
+              <div id="fake-password">
+                ************
+              </div>
+            </div>
+
           </div>
 
         {% endif %}
 
         <hr>
 
-        <div id="country-wrapper">
-          <div class="subtitle-1">
-            <span class="mdc-icon-button material-icons">location_on</span>
+        <div id="country-wrapper" class="mt-3 mb-3">
+          <div class="subtitle-1 text-icon-aligned">
           <span>{{ 'country'|trans({}, 'catroweb') }}</span>
             {% if not app.user.limited %}
-              <a class="edit-category-button" data-toggle="tooltip" title="todo">
-                <i id="edit-country-button" class="far fa-edit catro-icon-button"></i>
-              </a>
+              <span id="edit-country-button"
+                    data-toggle="tooltip" title="Edit Country"
+                    class="mdc-icon-button material-icons trailing-icon">edit</span>
             {% endif %}
           </div>
-          <div id="country" class="profile-data">
+          <div id="country" class="profile-data text-icon-aligned">
+            <span class="material-icons mr-2">location_on</span>
             {{ country }}
           </div>
           {% if not app.user.limited %}
@@ -111,16 +110,16 @@
         </div>
 
         {% if not app.user.limited %}
+
           <hr>
 
-          <div id="account-settings-wrapper">
-            <div class="subtitle-1">
-              <span class="mdc-icon-button material-icons">settings</span>
+          <div id="account-settings-wrapper" class="mt-3">
+            <div class="subtitle-1 text-icon-aligned">
+              <span class="material-icons mr-2">settings</span>
               <span>{{ 'accountSettings'|trans({}, 'catroweb') }}</span>
-              <a class="edit-category-button"
-                 data-toggle="tooltip" title="{{ 'myprofile.editAccountSettings'|trans({}, 'catroweb') }}">
-                <i id="account-settings-button" class="far fa-edit catro-icon-button"></i>
-              </a>
+              <span id="account-settings-button"
+                    data-toggle="tooltip" title="{{ 'myprofile.editAccountSettings'|trans({}, 'catroweb') }}"
+                    class="mdc-icon-button material-icons trailing-icon">edit</span>
             </div>
             <div id="account-settings-container" class="edit-container">
               {% include 'UserManagement/Profile/accountSettings.html.twig' %}

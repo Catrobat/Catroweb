@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Download
 description: ವಿವರಣೆ
 noDescription: ವಿವರಣೆ ಲಬ್ಯವಿಲ್ಲ.
 credits: Credits
@@ -27,14 +27,15 @@ country: ದೇಶ
 loginText: ಒಳನಡೆ
 privacyPolicy: ಎಕಾ೦ತತೆ ಕರ್ಯನೀತಿ
 imprint: ಅಚ್ಚು
+programDetails: Details
 somethingWentWrong: 'ಐಯೋ ಎನೋ ತಪಾಯಿತು.'
 pleaseTryAgain: 'ದಯವಿಟ್ಟು ಪುನಹ ಪ್ರಯತ್ನಿಸಿ!'
 oldVersionError: 'ದಯವಿಟ್ಟು ಇತೀಚಿನ ಜೇಬು ಸ೦ಕೆತ ಆದುನಿಕಗೊಳಿಸಿ!'
 more: 'ಇನ್ನಷ್ಟು'
 less: 'ಕಡಿಮೆ'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: ಸರಿ
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'ಬಳಕೆದಾರರ ಹೆಸರು ಅಥವಾ ಇಮೇಲ್ ವಿಳಾಸ ಈಗಾಗಲೇ ಬಳಕೆಯಲ್ಲಿದೆ.'
 notifications: 'ಸೂಚನೆಗಳು'
@@ -65,6 +66,7 @@ notificationsClearError: "ಪ್ರಕಟಣೆಗಳನ್ನು ಓದಲಾ�
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "ದಯವಿಟ್ಟು ತಡೆಯಿರಿ..."
 projects: "Projects"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
+  title: Remixes
   showRemixGraph: 'ರಿಮಿಕ್ಸ್ ಗ್ರಾಫ್ ತೋರಿಸು'
   by: 'by'
   open: 'Open'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
   edit: Edit
@@ -596,7 +601,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

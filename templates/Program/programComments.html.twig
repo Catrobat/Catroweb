@@ -45,13 +45,15 @@
             <div class="date">
               {{ comment.uploadDate.format('Y-m-d') }}
             </div>
-            {% if comment.username != user_name %}
+            {% if not(app.user) or (app.user and comment.username != app.user.username) %}
+            {#  Everybody, but the comment owner must be able to report a comment  #}
               <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
                  data-toggle="tooltip" title="{{ 'programs.report'|trans({}, 'catroweb') }}">
                 <i class="ml-3 fas fa-ban text-danger"></i>
               </a>
             {% endif %}
-            {% if  program_details.isAdmin or comment.username == user_name %}
+            {% if program_details.isAdmin or (app.user and comment.username == app.user.username) %}
+              {#  Only Admins and comment owner can delete the comment  #}
               <a id="comment-delete-button-{{ comment.id }}" class="comment-delete-button"
                  data-toggle="tooltip" title="{{ 'programs.delete'|trans({}, 'catroweb') }}">
                 <i class="ml-2 fas fa-trash-alt text-danger"></i>

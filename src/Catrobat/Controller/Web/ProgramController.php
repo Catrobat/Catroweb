@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
+use App\Catrobat\Events\CheckScratchProgramEvent;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
@@ -33,6 +34,7 @@ use ImagickException;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +58,7 @@ class ProgramController extends AbstractController
   private TranslatorInterface $translator;
   private RudeWordFilter $rude_word_filter;
   private ParameterBagInterface $parameter_bag;
+  private EventDispatcherInterface $event_dispatcher;
 
   public function __construct(StatisticsService $statistics_service,
                               RemixManager $remix_manager,
@@ -68,7 +71,8 @@ class ProgramController extends AbstractController
                               CatroNotificationService $notification_service,
                               TranslatorInterface $translator,
                               RudeWordFilter $rude_word_filter,
-                              ParameterBagInterface $parameter_bag)
+                              ParameterBagInterface $parameter_bag,
+                              EventDispatcherInterface $event_dispatcher)
   {
     $this->statistics = $statistics_service;
     $this->remix_manager = $remix_manager;
@@ -82,40 +86,7 @@ class ProgramController extends AbstractController
     $this->translator = $translator;
     $this->rude_word_filter = $rude_word_filter;
     $this->parameter_bag = $parameter_bag;
-  }
-
-  /**
-   * @Route("/project/remixgraph/{id}", name="program_remix_graph", methods={"GET"})
-   *
-   * @throws Exception
-   */
-  public function programRemixGraphAction(Request $request, string $id): JsonResponse
-  {
-    $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
-
-    $catrobat_program_thumbnails = [];
-    foreach ($remix_graph_data['catrobatNodes'] as $node_id)
-    {
-      if (!array_key_exists($node_id, $remix_graph_data['catrobatNodesData']))
-      {
-        $catrobat_program_thumbnails[$node_id] = '/images/default/not_available.png';
-        continue;
-      }
-      $catrobat_program_thumbnails[$node_id] = '/'.$this->screenshot_repository
-        ->getThumbnailWebPath($node_id)
-      ;
-    }
-
-    $locale = strtolower($request->getLocale());
-    $referrer = $request->headers->get('referer');
-    $this->statistics->createClickStatistics($request, 'show_remix_graph', null, $id, null,
-      null, $referrer, $locale, false, false);
-
-    return new JsonResponse([
-      'id' => $id,
-      'remixGraph' => $remix_graph_data,
-      'catrobatProgramThumbnails' => $catrobat_program_thumbnails,
-    ]);
+    $this->event_dispatcher = $event_dispatcher;
   }
 
   /**
@@ -142,6 +113,11 @@ class ProgramController extends AbstractController
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
+    if ($project->isScratchProgram())
+    {
+      $this->event_dispatcher->dispatch(new CheckScratchProgramEvent($project->getScratchId()));
+    }
+
     $viewed = $request->getSession()->get('viewed', []);
     $this->checkAndAddViewed($request, $project, $viewed);
     $referrer = $request->headers->get('referer');
@@ -149,15 +125,12 @@ class ProgramController extends AbstractController
 
     /** @var User|null $user */
     $user = $this->getUser();
-    $logged_in = false;
+    $logged_in = null !== $user;
+    $my_program = $logged_in && $project->getUser() === $user;
 
     $active_user_like_types = [];
-    $user_name = null;
-
-    if (null !== $user)
+    if ($logged_in)
     {
-      $logged_in = true;
-      $user_name = $user->getUsername();
       $likes = $this->program_manager->findUserLikes($project->getId(), $user->getId());
       foreach ($likes as $like)
       {
@@ -173,41 +146,19 @@ class ProgramController extends AbstractController
       $referrer, $program_comments, $request
     );
 
-    $user_programs = $this->findUserPrograms($user, $project);
-
-    $isReportedByUser = $this->checkReportedByUser($project, $user);
-
-    $program_url = $this->generateUrl('program',
-      ['id' => $project->getId()], UrlGeneratorInterface::ABSOLUTE_PATH);
-
-    $share_text = trim($project->getName().' on '.$program_url.' '.
-      $project->getDescription());
-
     $jam = $this->extractGameJamConfig();
 
-    $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
-
-    $my_program = false;
-    if ($user_programs && count($user_programs) > 0)
-    {
-      $my_program = true;
-    }
-
-    $this->extracted_file_repository->loadProgramExtractedFile($project);
+    // Catblocks is working with the extracted files not the project zip.
+    $this->extracted_file_repository->ensureProjectIsExtracted($project);
 
     return $this->render('Program/program.html.twig', [
-      'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program' => $project,
       'program_details' => $program_details,
       'my_program' => $my_program,
-      'already_reported' => $isReportedByUser,
-      'shareText' => $share_text,
-      'program_url' => $program_url,
-      'jam' => $jam,
-      'user_name' => $user_name,
-      'max_description_size' => $max_description_size,
       'logged_in' => $logged_in,
+      'max_description_size' => $this->getParameter('catrobat.max_description_upload_size'),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
+      'jam' => $jam,
     ]);
   }
 
@@ -692,7 +643,6 @@ class ProgramController extends AbstractController
       'comments' => $program_comments,
       'commentsLength' => count($program_comments),
       'commentsAvatars' => $comments_avatars,
-      'remixesLength' => $this->remix_manager->remixCount($program->getId()),
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,

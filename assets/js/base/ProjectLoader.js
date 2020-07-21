@@ -38,7 +38,10 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
   //
   self.init = function () {
     restoreParamsWithSessionStorage()
-    $.get(self.url, { limit: self.initialDownloadLimit, offset: self.numberOfLoadedProjects }, function (data) {
+    $.get(self.url, {
+      limit: self.initialDownloadLimit,
+      offset: self.numberOfLoadedProjects
+    }, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
         $(self.container).hide()
         return
@@ -120,6 +123,25 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     })
   }
 
+  self.loadProjects = function (profileId) {
+    self.initProfile(profileId)
+    $(document).on('click', '.program', function () {
+      const clickedProgramId = this.id.replace('program-', '')
+      this.className += ' visited-program'
+      const storedVisits = sessionStorage.getItem('visits')
+      if (!storedVisits) {
+        const newVisits = [clickedProgramId]
+        sessionStorage.setItem('visits', JSON.stringify(newVisits))
+      } else {
+        const parsedVisits = JSON.parse(storedVisits)
+        if (!($.inArray(clickedProgramId, parsedVisits) >= 0)) {
+          parsedVisits.push(clickedProgramId)
+          sessionStorage.setItem('visits', JSON.stringify(parsedVisits))
+        }
+      }
+    })
+  }
+
   // ----------------------------------
   // - Search Programs
   //
@@ -133,20 +155,36 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     sessionStorage.setItem(self.query, query)
     self.query = query
 
-    $.get(self.url, { q: query, limit: self.initialDownloadLimit, offset: self.numberOfLoadedProjects },
-      function (data) {
-        const searchResultsText = $('#search-results-text')
+    $.get(self.url, {
+      q: query,
+      limit: self.initialDownloadLimit,
+      offset: self.numberOfLoadedProjects
+    },
+    function (data) {
+      const searchResultsText = $('#search-results-text')
 
-        if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
-          $('.circular-progress').hide()
-          searchResultsText.addClass('no-results')
-          searchResultsText.find('span').text(0)
-          return
-        }
-        searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects)
-        self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
-        setup(data)
-      })
+      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
+        $('#search-progressbar').hide()
+        searchResultsText.addClass('no-results')
+        searchResultsText.find('span').text(0)
+        return
+      }
+      searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects)
+      self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
+      setup(data)
+    })
+  }
+  self.searchResult = function (q) {
+    const searchInput = $('#top-app-bar__search-input')
+    const oldQuery = searchInput.html(q).text()
+    self.initSearch(oldQuery)
+    $(document).ready(function () {
+      // eslint-disable-next-line no-undef
+      showTopBarSearch()
+      searchInput.val(oldQuery)
+      // eslint-disable-next-line no-undef
+      controlTopBarSearchClearButton()
+    })
   }
 
   // --------------------------------------------------------------------------------------------------------------------
@@ -161,7 +199,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     showLessListener()
 
     await loadProjectsIntoContainer(data)
-    $('.circular-progress').hide()
+    $('#search-progressbar').hide()
     await initParameters()
     await initNumberOfVisibleProjects()
     await keepRowsFull()
@@ -281,7 +319,10 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
         await hide(ajaxAnimation)
       })
     } else {
-      $.get(self.url, { limit: self.downloadLimit, offset: self.numberOfLoadedProjects }, async function (data) {
+      $.get(self.url, {
+        limit: self.downloadLimit,
+        offset: self.numberOfLoadedProjects
+      }, async function (data) {
         if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
           await hide(ajaxAnimation)
           return
@@ -309,6 +350,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     }
     await updateUIVisibility()
   }
+
   // -------------------------------------------------------------------------------------------------------------------
   // UI elements and helper functions to control the UI
   //
@@ -455,7 +497,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
           link += '&rec_by_program_id=' + self.recommendedByProjectId
         }
         link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) &&
-          data.isUserSpecificRecommendation ? 1 : 0)
+        data.isUserSpecificRecommendation ? 1 : 0)
     }
     return link
   }

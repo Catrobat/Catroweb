@@ -3,6 +3,7 @@
 namespace App\Commands\Create;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Repository\FlavorRepository;
 use App\Repository\MediaPackageCategoryRepository;
 use App\Repository\MediaPackageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -35,12 +36,14 @@ class CreateMediaPackageSamplesCommand extends Command
   private MediaPackageCategoryRepository $media_package_category_repo;
   private MediaPackageFileRepository $media_package_file_repo;
   private ParameterBagInterface $parameter_bag;
+  private FlavorRepository $flavor_repo;
 
   /**
    * CreateMediaPackageSamplesCommand constructor.
    */
   public function __construct(MediaPackageRepository $media_package_repo, MediaPackageCategoryRepository $media_package_category_repo,
-                              MediaPackageFileRepository $media_package_file_repo, ParameterBagInterface $parameter_bag)
+                              MediaPackageFileRepository $media_package_file_repo, ParameterBagInterface $parameter_bag,
+                              FlavorRepository $flavor_repo)
   {
     parent::__construct();
 
@@ -48,6 +51,7 @@ class CreateMediaPackageSamplesCommand extends Command
     $this->media_package_category_repo = $media_package_category_repo;
     $this->media_package_file_repo = $media_package_file_repo;
     $this->parameter_bag = $parameter_bag;
+    $this->flavor_repo = $flavor_repo;
   }
 
   protected function configure(): void
@@ -67,20 +71,24 @@ class CreateMediaPackageSamplesCommand extends Command
     $package_looks = $this->media_package_repo->createMediaPackage('Looks', 'looks');
 
     // Creating MediaPackageCategory Animals and filling it with MediaPackageFiles
+    $pocketcode_flavor = $this->flavor_repo->getFlavorByName('pocketcode');
+    $luna_flavor = $this->flavor_repo->getFlavorByName('luna');
+    $create_at_school_flavor = $this->flavor_repo->getFlavorByName('create@school');
+
     $category_pocket_family = $this->media_package_category_repo->createMediaPackageCategory('Pocket Family', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Penguin', new File($sample_pckg_path.'Looks/Pocket Family/Penguin.png'), $category_pocket_family, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Elephant', new File($sample_pckg_path.'Looks/Pocket Family/Elephant.png'), $category_pocket_family, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Panda', new File($sample_pckg_path.'Looks/Pocket Family/Panda.png'), $category_pocket_family, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Penguin', new File($sample_pckg_path.'Looks/Pocket Family/Penguin.png'), $category_pocket_family, [$pocketcode_flavor], 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Elephant', new File($sample_pckg_path.'Looks/Pocket Family/Elephant.png'), $category_pocket_family, [$pocketcode_flavor], 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Panda', new File($sample_pckg_path.'Looks/Pocket Family/Panda.png'), $category_pocket_family, [$pocketcode_flavor], 'Catrobat');
 
     // Creating MediaPackageCategory People and filling it with MediaPackageFiles
     $category_people = $this->media_package_category_repo->createMediaPackageCategory('People', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Boy', new File($sample_pckg_path.'Looks/People/Boy.png'), $category_people, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Girl', new File($sample_pckg_path.'Looks/People/Girl.png'), $category_people, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Boy', new File($sample_pckg_path.'Looks/People/Boy.png'), $category_people, [$pocketcode_flavor], 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Girl', new File($sample_pckg_path.'Looks/People/Girl.png'), $category_people, [$pocketcode_flavor], 'Catrobat');
 
     // Creating MediaPackageCategory Luna and filling it with MediaPackageFiles
     $category_luna = $this->media_package_category_repo->createMediaPackageCategory('ThemeSpecial Luna & Cat', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Luna Cat', new File($sample_pckg_path.'Looks/Luna/Luna-Cat.png'), $category_luna, 'luna', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Luna Girl', new File($sample_pckg_path.'Looks/Luna/Luna-Girl.png'), $category_luna, 'luna', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Luna Cat', new File($sample_pckg_path.'Looks/Luna/Luna-Cat.png'), $category_luna, [$luna_flavor], 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Luna Girl', new File($sample_pckg_path.'Looks/Luna/Luna-Girl.png'), $category_luna, [$luna_flavor], 'Catrobat');
 
     /*
      * Creating MediaPackage Sounds
@@ -89,13 +97,13 @@ class CreateMediaPackageSamplesCommand extends Command
 
     // Creating MediaPackageCategory Animals and filling it with MediaPackageFiles
     $category_animal_sounds = $this->media_package_category_repo->createMediaPackageCategory('Animals', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Owl', new File($sample_pckg_path.'Sounds/Animals/Owl.wav'), $category_animal_sounds, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('SeaLion', new File($sample_pckg_path.'Sounds/Animals/SeaLion.mpga'), $category_animal_sounds, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Owl', new File($sample_pckg_path.'Sounds/Animals/Owl.wav'), $category_animal_sounds, [$pocketcode_flavor], 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('SeaLion', new File($sample_pckg_path.'Sounds/Animals/SeaLion.mpga'), $category_animal_sounds, [$pocketcode_flavor], 'Catrobat');
 
     // Creating MediaPackageCategory Machines and filling it with MediaPackageFiles
     $category_machine_sounds = $this->media_package_category_repo->createMediaPackageCategory('Machines', new ArrayCollection([$package_looks]));
-    $this->media_package_file_repo->createMediaPackageFile('Plane', new File($sample_pckg_path.'Sounds/Machines/Plane.mpga'), $category_machine_sounds, 'pocketcode', 'Catrobat');
-    $this->media_package_file_repo->createMediaPackageFile('Ufo', new File($sample_pckg_path.'Sounds/Machines/Ufo.wav'), $category_machine_sounds, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Plane', new File($sample_pckg_path.'Sounds/Machines/Plane.mpga'), $category_machine_sounds, [$pocketcode_flavor, $create_at_school_flavor], 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('Ufo', new File($sample_pckg_path.'Sounds/Machines/Ufo.wav'), $category_machine_sounds, [$pocketcode_flavor, $create_at_school_flavor], 'Catrobat');
 
     /*
      * Creating MediaPackage Objects
@@ -103,7 +111,7 @@ class CreateMediaPackageSamplesCommand extends Command
     $package_objects = $this->media_package_repo->createMediaPackage('Objects', 'Objects');
     // Creating MediaPackageCategory Miscellaneous and filling it with MediaPackageFiles
     $category_miscellaneous = $this->media_package_category_repo->createMediaPackageCategory('Miscellaneous', new ArrayCollection([$package_objects]));
-    $this->media_package_file_repo->createMediaPackageFile('House', new File($sample_pckg_path.'Objects/Miscellaneous/House.catrobat'), $category_miscellaneous, 'pocketcode', 'Catrobat');
+    $this->media_package_file_repo->createMediaPackageFile('House', new File($sample_pckg_path.'Objects/Miscellaneous/House.catrobat'), $category_miscellaneous, [$pocketcode_flavor], 'Catrobat');
 
     // Creating MediaPackageCategory Miscellaneous
 

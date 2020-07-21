@@ -29,7 +29,14 @@
       </div>
 
 
-      <div id="follow-btn" class="follow-button-container follow-button w-100 mt-3">
+      <div class="button-container w-100 mt-3">
+        {% if profile.isScratchUser() %}
+          <a href={{ 'https://scratch.mit.edu/users/' ~ profile.getScratchUsername() }}>
+            <button class="btn btn-outline-primary profile-goto-scratch mt-0 ml-auto">
+              {{ 'profile.goToScratchProfile'|trans({}, 'catroweb') }}
+            </button>
+          </a>
+        {% endif %}
         {% if app.user != null and app.user.id != profile.id %}
           <button class="btn btn-outline-primary profile-follows mt-0 ml-auto"
                   style="{{ profile.hasFollower(app.user) ? 'display: block' : 'display:none' }}"
@@ -116,22 +123,7 @@
 {% block js %}
   <script>
     let programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
-    programs.initProfile('{{ profile.id }}')
-    $(document).on('click', '.program', function () {
-      let clicked_program_id = this.id.replace('program-', '')
-      this.className += ' visited-program'
-      let stored_visits      = sessionStorage.getItem('visits')
-      if (!stored_visits) {
-        let new_visits = [clicked_program_id]
-        sessionStorage.setItem('visits', JSON.stringify(new_visits))
-      } else {
-        let parsed_visits = JSON.parse(stored_visits)
-        if (!($.inArray(clicked_program_id, parsed_visits) >= 0)) {
-          parsed_visits.push(clicked_program_id)
-          sessionStorage.setItem('visits', JSON.stringify(parsed_visits))
-        }
-      }
-    })
+    programs.loadProjects('{{ profile.id }}')
   </script>
 
   <script src="{{ asset('js/Follower.min.js') }}"></script>

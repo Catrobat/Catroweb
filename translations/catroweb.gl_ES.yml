@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Descargar
 description: Descrición
 noDescription: Non hai ningunha descrición dispoñible.
 credits: Credits
@@ -27,14 +27,15 @@ country: País
 loginText: iniciar sesión
 privacyPolicy: Política de privacidade
 imprint: Aviso legal
+programDetails: Details
 somethingWentWrong: 'Algo non saíu ben.'
 pleaseTryAgain: 'Téntao de novo!'
 oldVersionError: 'Actualiza á nova versión de Pocket Code!'
 more: 'máis'
 less: 'menos'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: OK
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notificacións'
@@ -65,6 +66,7 @@ notificationsClearError: "¡Non foi posible marcar as notificacións como lidas!
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Agarda..."
 projects: "Programas"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Mostrar rutas'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: A imaxe seleccionada é moi pesada, non empregues imaxes de máis de 5mb.
     uploadError: Sentímolo, xurdiu un problema durante o proceso de carga!
     noSupport: Este formato de imaxe non é compatible, téntao con outra imaxe.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Editar perfil
   edit: Editar
@@ -596,7 +601,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

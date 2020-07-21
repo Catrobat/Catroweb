@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Descarregar
 description: Descrição
 noDescription: Nenhuma descrição disponível.
 credits: Credits
@@ -27,13 +27,14 @@ country: País
 loginText: entrar
 privacyPolicy: Política de Privacidade
 imprint: Ficha técnica
+programDetails: Pormenores
 somethingWentWrong: 'Ooooops! Algo correu mal.'
 pleaseTryAgain: 'Por favor, tente de novo!'
 oldVersionError: 'Por favor, actualize para a versão mais recente do Pocket Code!'
 more: 'mais'
 less: 'menos'
-show-more: 'Show more'
-show-less: 'Show less'
+show-more: 'More information'
+show-less: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'O nome de utilizador ou o endereço de correio electrónico já estão em uso.'
@@ -65,6 +66,7 @@ notificationsClearError: "Não foi possível marcar as notificações como lidas
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Por favor, espere..."
 projects: "Programas"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,7 +177,9 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
+  title: Remisturas
   showRemixGraph: 'Mostrar Grafo de Remistura'
   by: 'por'
   open: 'Abrir '
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: A fotografia escolhida é demasiado grande. Por favor, não use imagens com mais de 5 Mio.
     uploadError: Desculpe, ocorreu um problema durante o carregamento!
     noSupport: Este tipo de imagem não é suportado; por favor, tente uma outra imagem.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Editar perfil
   edit: Editar
@@ -669,18 +674,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -784,6 +790,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Mostrar código'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

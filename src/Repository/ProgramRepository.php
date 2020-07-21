@@ -573,68 +573,6 @@ class ProgramRepository extends ServiceEntityRepository
     return array_map(fn ($data) => $data['id'], $result);
   }
 
-  public function search(string $query, bool $debug_build, ?int $limit = 10, int $offset = 0,
-                         string $max_version = '0', ?string $flavor = null): array
-  {
-    $parse_languages = $this->getLanguageQuery();
-
-    $search_terms = $this->getWordsQuery($query);
-
-    $final_query = $this->getSearchQuery($parse_languages, $search_terms)
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $this->setScore($final_query, $query);
-
-    $final_query = $this->addFlavorCondition($final_query, $flavor);
-    $final_query = $this->addMaxVersionCondition($final_query, $max_version);
-    $final_query = $this->addPrivacyCheckCondition($final_query);
-    $final_query = $this->addDebugBuildCondition($final_query, $debug_build);
-
-    try
-    {
-      $result = $final_query->getQuery()->getResult();
-    }
-    catch (\Exception $exception)
-    {
-      return [];
-    }
-
-    return array_map(function ($element)
-    {
-      return $element[0];
-    }, $result);
-  }
-
-  public function searchCount(string $query, bool $debug_build,
-                              string $max_version = '0', ?string $flavor = null): int
-  {
-    $parse_languages = $this->getLanguageQuery();
-
-    $search_terms = $this->getWordsQuery($query);
-
-    $final_query = $this->getSearchQuery($parse_languages, $search_terms);
-
-    $this->setScore($final_query, $query);
-
-    $final_query = $this->addFlavorCondition($final_query, $flavor);
-    $final_query = $this->addMaxVersionCondition($final_query, $max_version);
-    $final_query = $this->addPrivacyCheckCondition($final_query);
-    $final_query = $this->addDebugBuildCondition($final_query, $debug_build);
-
-    try
-    {
-      $result = $final_query->getQuery()->getResult();
-    }
-    catch (\Exception $exception)
-    {
-      return 0;
-    }
-
-    return count($result);
-  }
-
   /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
@@ -998,7 +936,7 @@ class ProgramRepository extends ServiceEntityRepository
     $tag_ids = array_map('current', $result);
     $extensions_id = array_map('current', $result_2);
 
-    $debug_where = (!$debug_build) ? 'AND e.debug_build = false' : '';
+    $debug_where = (!$debug_build && 'dev' !== $_ENV['APP_ENV']) ? 'AND e.debug_build = false' : '';
 
     $dql = 'SELECT COUNT(e.id) cnt, e.id
       FROM App\Entity\Program e
@@ -1030,71 +968,6 @@ class ProgramRepository extends ServiceEntityRepository
     return $db_query;
   }
 
-  /**
-   * @return string
-   */
-  private function getLanguageQuery()
-  {
-    $em = $this->getEntityManager();
-    $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
-    array_shift($metadata);
-
-    $parse_languages = '';
-    foreach ($metadata as $language)
-    {
-      $parse_languages .= 't.'.$language.', ';
-    }
-
-    return rtrim($parse_languages, ', ');
-  }
-
-  private function getWordsQuery(string $query): string
-  {
-    $words = explode(' ', $query);
-    foreach ($words as &$word)
-    {
-      if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $word))
-      {
-        $word = '+'.$word.'*';
-      }
-      else
-      {
-        $word = '\"'.$word.'\"';
-      }
-    }
-    unset($word);
-    $search_terms = implode(' ', $words);
-
-    return $search_terms;
-  }
-
-  private function getSearchQuery(string $parse_languages, string $search_terms): QueryBuilder
-  {
-    return $this->createQueryBuilder('e')
-      ->addSelect('MATCH(e.name, e.description, e.credits, e.id) AGAINST(:searchterm boolean) AS name_score')
-      ->addSelect('MATCH(u.username) AGAINST(:searchterm boolean) AS username_score')
-      ->addSelect('MATCH(x.name) AGAINST(:searchterm boolean) AS extension_score')
-      ->addSelect('MATCH('.$parse_languages.') AGAINST(:searchterm boolean) as language_score')
-      ->orWhere('MATCH(e.name, e.description, e.credits, e.id) AGAINST(:searchterm boolean)>:score')
-      ->orWhere('MATCH(u.username) AGAINST(:searchterm boolean)>:score')
-      ->orWhere('MATCH(x.name) AGAINST(:searchterm boolean)>:score')
-      ->orWhere('MATCH('.$parse_languages.') AGAINST(:searchterm boolean)>:score')
-      ->leftJoin('e.tags', 't')
-      ->leftJoin('e.extensions', 'x')
-      ->leftJoin('e.user', 'u')
-      ->andWhere('e.visible = true AND e.private = false')
-      ->orderBy('name_score', 'DESC')
-      ->setParameter('searchterm', $search_terms)
-    ;
-  }
-
-  private function setScore(QueryBuilder &$final_query, string $query): void
-  {
-    $words = explode(' ', $query);
-    $wanted_score = 0;
-    $final_query->setParameter('score', $wanted_score);
-  }
-
   private function generateUnionSqlStatementForMostRemixedPrograms(bool $debug_build,
                                                                    ?int $limit, int $offset = 0): string
   {
@@ -1104,7 +977,7 @@ class ProgramRepository extends ServiceEntityRepository
     //---------------------------------------------------------------------------------------------
     $limit_clause = (int) $limit > 0 ? 'LIMIT '.(int) $limit : '';
     $offset_clause = (int) $offset > 0 ? 'OFFSET '.(int) $offset : '';
-    $debug_where = (!$debug_build) ? 'AND p.debug_build = false' : '';
+    $debug_where = (!$debug_build && 'dev' !== $_ENV['APP_ENV']) ? 'AND p.debug_build = false' : '';
 
     return '
             SELECT sum(remixes_count) AS total_remixes_count, id FROM (
@@ -1141,47 +1014,6 @@ class ProgramRepository extends ServiceEntityRepository
       $offset_clause.' ';
   }
 
-  private function getAppendableSqlStringForEveryTerm(array $search_terms, array $metadata, bool $debug_build): string
-  {
-    $sql = '';
-    $metadata_count = count($metadata);
-
-    $debug_where = (!$debug_build) ? 'e.debug_build = false AND' : '';
-
-    $search_terms_count = count($search_terms);
-    for ($parameter_index = 0; $parameter_index < $search_terms_count; ++$parameter_index)
-    {
-      $parameter = ':st'.$parameter_index;
-      $tag_string = '';
-      $metadata_index = 0;
-      foreach ($metadata as $language)
-      {
-        if ($metadata_index === $metadata_count - 1)
-        {
-          $tag_string .= '(t.'.$language.' LIKE '.$parameter.')';
-        }
-        else
-        {
-          $tag_string .= '(t.'.$language.' LIKE '.$parameter.') OR ';
-        }
-        ++$metadata_index;
-      }
-
-      $sql .= 'AND 
-          ((e.name LIKE '.$parameter.' OR
-          f.username LIKE '.$parameter.' OR
-          e.description LIKE '.$parameter.' OR
-          x.name LIKE '.$parameter.' OR
-          '.$tag_string.' OR
-          e.id = '.$parameter.'int'.') AND
-          e.visible = true AND '.
-        $debug_where.'
-          e.private = false) ';
-    }
-
-    return $sql;
-  }
-
   private function addFlavorCondition(QueryBuilder $query_builder, ?string $flavor, string $alias = 'e'): QueryBuilder
   {
     if ($flavor)
@@ -1205,9 +1037,9 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addDebugBuildCondition(QueryBuilder $query_builder, bool $debug_build, string $alias = 'e'): QueryBuilder
+  private function addDebugBuildCondition(QueryBuilder $query_builder, bool $debug_build_request, string $alias = 'e'): QueryBuilder
   {
-    if (!$debug_build)
+    if (!$debug_build_request && 'dev' !== $_ENV['APP_ENV'])
     {
       $query_builder->andWhere($query_builder->expr()->eq($alias.'.debug_build',
         $query_builder->expr()->literal(false)));

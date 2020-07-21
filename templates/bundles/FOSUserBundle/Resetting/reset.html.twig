@@ -34,28 +34,24 @@
             <div class="group">
               <span class="highlight"></span>
               <span class="bar"></span>
-              <div class="group-with-icon-wrapper show-hide-password">
-                <div class="group-with-icon">
-                    <span>
-                      {{ form_widget(form.plainPassword.first) }}
-                      <label><span class="span-input">{{ 'profile.newPass'|trans({}, 'catroweb') }}</span></label>
-                    </span>
-                </div>
-                <a href=""><i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i></a>
+              <div class="show-hide-password">
+                <span class="w-100">
+                  {{ form_widget(form.plainPassword.first) }}
+                  <label><span class="span-input">{{ 'profile.newPass'|trans({}, 'catroweb') }}</span></label>
+                </span>
+                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
               </div>
             </div>
 
             <div class="group">
               <span class="highlight"></span>
               <span class="bar"></span>
-              <div class="group-with-icon-wrapper show-hide-password">
-                <div class="group-with-icon">
-                    <span>
-                      {{ form_widget(form.plainPassword.second) }}
-                      <label><span class="span-input">{{ 'profile.repeatPass'|trans({}, 'catroweb') }}</span></label>
-                    </span>
-                </div>
-                <a href=""><i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i></a>
+              <div class="show-hide-password">
+                <span class="w-100">
+                  {{ form_widget(form.plainPassword.second) }}
+                  <label><span class="span-input">{{ 'profile.repeatPass'|trans({}, 'catroweb') }}</span></label>
+                </span>
+                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
               </div>
             </div>
 

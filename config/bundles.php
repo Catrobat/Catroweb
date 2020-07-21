@@ -31,4 +31,5 @@ return [
     OpenAPI\Server\OpenAPIServerBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
     Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
+    FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
 ];

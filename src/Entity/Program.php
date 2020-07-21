@@ -8,13 +8,12 @@ use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 use Exception;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="program", indexes={@Index(columns={"id", "name", "description", "credits"}, flags={"fulltext"})})
+ * @ORM\Table(name="program")
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
 class Program
@@ -54,6 +53,11 @@ class Program
    * @ORM\Column(type="integer", options={"default": 1})
    */
   protected int $version = self::INITIAL_VERSION;
+
+  /**
+   * @ORM\Column(type="integer", nullable=true, unique=true)
+   */
+  protected ?int $scratch_id = null;
 
   /**
    * The user owning this Program. If this User gets deleted, this Program gets deleted as well.
@@ -928,6 +932,33 @@ class Program
     return $this->extensions;
   }
 
+  public function getExtensionsString(): string
+  {
+    $extensions = [];
+    foreach ($this->extensions as $program_extension)
+    {
+      /* @var Extension $program_extension */
+      $extensions[] = $program_extension->getName();
+    }
+
+    return implode(', ', $extensions);
+  }
+
+  public function getTagsString(): string
+  {
+    $tags = [];
+    foreach ($this->tags as $program_tag)
+    {
+      /* @var Tag $program_tag */
+      $tags[] = $program_tag->getEn();
+      $tags[] = $program_tag->getDe();
+      $tags[] = $program_tag->getIt();
+      $tags[] = $program_tag->getFr();
+    }
+
+    return implode(', ', $tags);
+  }
+
   public function isDebugBuild(): bool
   {
     return $this->debug_build;
@@ -1027,5 +1058,20 @@ class Program
   public function getProgram(): ?Program
   {
     return $this;
+  }
+
+  public function setScratchId(?int $scratch_id): void
+  {
+    $this->scratch_id = $scratch_id;
+  }
+
+  public function getScratchId(): ?int
+  {
+    return $this->scratch_id;
+  }
+
+  public function isScratchProgram(): bool
+  {
+    return null !== $this->scratch_id;
   }
 }

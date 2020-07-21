@@ -13,30 +13,36 @@ function ProgramDescription (programId, showMoreButtonText, showLessButtonText,
     const editDescription = $('#edit-description')
     const editDescriptionSubmitButton = $('#edit-description-submit-button')
     const editDescriptionError = $('#edit-description-error')
+    const descriptionCreditsContainer = $('#description-credits-container')
+    const showMoreToggle = $('#descriptionShowMoreToggle')
 
-    // set default visibilities
-    initDescriptionEdit()
+    initShowMore()
 
-    function initDescriptionEdit () {
-      editDescriptionUI.hide()
-      description.show()
+    function initShowMore () {
+      if (descriptionCreditsContainer.height() > 300) {
+        showMoreToggle.removeClass('d-none')
+        descriptionCreditsContainer.css({ height: '200px' })
+      }
     }
 
     editDescriptionButton.click(function () {
-      if (description.is(':visible')) {
-        description.hide()
-        editDescriptionUI.show()
+      if (editDescriptionUI.hasClass('d-none')) {
+        descriptionCreditsContainer.hide()
+        editDescriptionUI.removeClass('d-none')
+        showMoreToggle.addClass('d-none')
       } else {
-        description.show()
-        editDescriptionUI.hide()
+        descriptionCreditsContainer.show()
+        editDescriptionUI.addClass('d-none')
+        handleShowMore()
       }
     })
 
     editDescriptionSubmitButton.click(function () {
       const newDescription = editDescription.val().trim()
       if (newDescription === description.text().trim()) {
-        editDescriptionUI.hide()
-        description.show()
+        editDescriptionUI.addClass('d-none')
+        descriptionCreditsContainer.show()
+        handleShowMore()
         return
       }
 
@@ -56,26 +62,34 @@ function ProgramDescription (programId, showMoreButtonText, showLessButtonText,
     })
   })
 
-  // Long Description Collapse
+  // Description Credits container
   $(function () {
-    const descriptionFulltext = $('#descriptionFulltext')
-    const descriptionPoints = $('#descriptionPoints')
-    const descriptionShowMoreToggle = $('#descriptionShowMoreToggle')
+    const showMoreToggle = $('#descriptionShowMoreToggle')
     const descriptionShowMoreText = $('#descriptionShowMoreText')
-    descriptionFulltext.hide()
-    descriptionPoints.show()
-    descriptionShowMoreToggle.click(function () {
-      if (descriptionFulltext.is(':visible')) {
-        descriptionFulltext.fadeOut()
-        descriptionPoints.show()
-        descriptionShowMoreText.text(showMoreButtonText)
-        descriptionShowMoreToggle.css('aria-expanded', false)
+    const descriptionCreditsContainer = $('#description-credits-container')
+    showMoreToggle.click(function () {
+      if ($(this).find('i').text() === 'keyboard_arrow_up') {
+        $(this).find('i').text('keyboard_arrow_down')
       } else {
-        descriptionFulltext.fadeIn()
-        descriptionPoints.hide()
+        $(this).find('i').text('keyboard_arrow_up')
+      }
+      if (descriptionCreditsContainer.height() !== 200) {
+        descriptionShowMoreText.text(showMoreButtonText)
+        showMoreToggle.attr('aria-expanded', false)
+        descriptionCreditsContainer.css({ height: '200px' })
+      } else {
         descriptionShowMoreText.text(showLessButtonText)
-        descriptionShowMoreToggle.css('aria-expanded', true)
+        showMoreToggle.attr('aria-expanded', true)
+        descriptionCreditsContainer.css({ height: '100%' })
       }
     })
   })
+  function handleShowMore () {
+    const descriptionCreditsContainer = $('#description-credits-container')
+    const showMoreToggle = $('#descriptionShowMoreToggle')
+
+    if (descriptionCreditsContainer.height() === 200 || descriptionCreditsContainer.height() > 300) {
+      showMoreToggle.removeClass('d-none')
+    }
+  }
 }
