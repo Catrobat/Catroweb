@@ -6,9 +6,9 @@ use App\Catrobat\Services\TokenGenerator;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\APIHelper;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\UserApiInterface;
-use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
@@ -30,9 +30,12 @@ class UserApi implements UserApiInterface
 
   private TranslatorInterface $translator;
 
-  public function __construct(ValidatorInterface $validator, UserManager $user_manager, TokenGenerator $token_generator,
+  private EntityManagerInterface $entity_manager;
+
+  public function __construct(EntityManagerInterface $entity_manager, ValidatorInterface $validator, UserManager $user_manager, TokenGenerator $token_generator,
                               TranslatorInterface $translator)
   {
+    $this->entity_manager = $entity_manager;
     $this->validator = $validator;
     $this->user_manager = $user_manager;
     $this->token_generator = $token_generator;
@@ -161,41 +164,119 @@ class UserApi implements UserApiInterface
 
   public function userDelete(&$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement userDelete() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $user = $this->getCurrentUser();
+    $this->user_manager->deleteUser($user);
+    $responseCode = Response::HTTP_OK;
+
+    return null;
   }
 
   public function userGet(&$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement userGet() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $user = $this->getCurrentUser();
+    $responseCode = Response::HTTP_OK;
 
-    return new ExtendedUserDataResponse();
+    return new ExtendedUserDataResponse($this->getUserDataResponse($user));
   }
 
   public function userIdGet(string $id, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement userIdGet() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $user = $this->entity_manager->getRepository(User::class)
+      ->findOneBy(['id' => $id])
+      ;
 
-    return new BasicUserDataResponse();
+    if (null === $user)
+    {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $responseCode = Response::HTTP_OK;
+
+    return new ExtendedUserDataResponse($this->getUserDataResponse($user));
   }
 
   public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode, array &$responseHeaders)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
-    // TODO: Implement userPut() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    /*  $validation_schema = $this->validateRegistration($update_user_request);
+
+     if ($validation_schema->getEmail() || $validation_schema->getUsername() || $validation_schema->getPassword())
+      {
+          $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => Unprocessable entity
+
+          return $validation_schema;
+      }*/
+    if ($update_user_request->isDryRun())
+    {
+      $responseCode = Response::HTTP_NO_CONTENT; // 204 => Dry-run successful, no validation error
+    }
+    else
+    {
+      $user = $this->getCurrentUser();
+      // Validation successful, no dry-run requested => we can actually register the user
+      $user->setUsername($update_user_request->getUsername());
+      $user->setEmail($update_user_request->getEmail());
+      $user->setPlainPassword($update_user_request->getPassword());
+      $user->setEnabled(true);
+      $user->setUploadToken($this->token_generator->generateToken());
+      $this->user_manager->updateUser($user);
+      $responseCode = Response::HTTP_CREATED; // 201 => User successfully registered
+    }
 
     return null;
   }
 
   public function usersSearchGet(string $query, int $limit = 20, int $offset = 0, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement usersSearchGet() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $qb = $this->entity_manager->createQueryBuilder()
+      ->select('u')
+      ->where('u.username LIKE :query')
+      ->from('App\Entity\User', 'u')
+      ->setParameter('query', '%'.$query.'%')
+      ->orderBy('u.username', 'ASC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+      ;
+    $users = $qb->getQuery()->getResult();
+    $users_data_response = [];
 
-    return []; // ...[] =  new BasicUserDataResponse()
+    foreach ($users as $user)
+    {
+      $users_data_response[] = new ExtendedUserDataResponse($this->getUserDataResponse($user));
+    }
+
+    return $users_data_response;
+  }
+
+  private function getUserDataResponse(User $user): array
+  {
+    return $user = [
+      'id' => $user->getId(),
+      'username' => $user->getUsername(),
+      'email' => $user->getEmail(),
+      'image' => $user->getAvatar(),
+      'country' => $user->getCountry(),
+      'projects' => $user->getPrograms()->count(),
+      'followers' => $user->getFollowers()->count(),
+      'following' => $user->getFollowing()->count(),
+    ];
+  }
+
+  private function getCurrentUser(): object
+  {
+    $jwtPayload = $this->user_manager->decodeToken($this->token);
+    if (!array_key_exists('username', $jwtPayload))
+    {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    return $this->entity_manager->getRepository(User::class)
+      ->findOneBy(['username' => $jwtPayload['username']])
+        ;
   }
 }
