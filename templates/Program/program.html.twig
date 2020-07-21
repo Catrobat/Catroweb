@@ -27,7 +27,7 @@
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
       <h1 class="h2 no-overflow">{{ program.name }}</h1>
 
-      <div class="">
+      <div id="project-user" class="">
         <a href="{{ url('profile', { id : program.user.id }) }}"
            class="icon-text align-bottom" id="program-owner-username">
           <i class="material-icons pr-2" id="user-profile-icon">person</i>
@@ -60,6 +60,11 @@
       <div class="mt-3">
         {% include 'Program/program_remix_graph_button.html.twig' %}
       </div>
+      {% if app.user and not(my_program) %}
+      <div id="project-steal" class="mt-3">
+        {% include 'Program/program_steal_project_button.html.twig' %}
+      </div>
+      {% endif %}
     </div>
   </div>
 
@@ -88,11 +93,22 @@
       <div class="col-6 mb-3 mt-3">
         {% include 'Program/program_remix_graph_button.html.twig' with {'suffix': '-small'} %}
       </div>
+      {% if app.user and not(my_program) %}
+        <div class="mt-3">
+          {% include 'Program/program_steal_project_button.html.twig' %}
+        </div>
+      {% endif %}
     {% else %}
     <div class="col-12 mt-3 mb-3">
-      {% include 'Program/program_remix_graph_button.html.twig' with {'suffix': '-small'} %}
+      {% include 'Program/program_remix_graph_button.html.twig' %}
     </div>
+      {% if app.user and not(my_program) %}
+        <div class="mt-3">
+          {% include 'Program/program_steal_project_button.html.twig' %}
+        </div>
+      {% endif %}
     {% endif %}
+
   </div>
 
   {% include 'Program/program_details.html.twig' %}
@@ -212,6 +228,7 @@
       '{{ path('ci_build', { 'id' : program.id }) }}',
       '{{ path('project_like', { 'id' : program.id }) }}',
       '{{ path('api_project_likes', { 'id' : program.id }) }}',
+      '{{ path('api_project_steal', { 'id' : program.id }) }}',
       '{{ 'apk.preparing'|trans({}, "catroweb") }}',
       '{{ 'apk.text'|trans({}, "catroweb") }}',
       '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}',

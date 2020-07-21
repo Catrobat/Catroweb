@@ -3,7 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
-  likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
+  likeDetailUrl, stealProjectUrl,  apkPreparing, apkText, updateAppHeader, updateAppText,
   btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText) {
   const self = this
 
@@ -25,6 +25,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.wowWhite = wowWhite
   self.wowBlack = wowBlack
   self.reactionsText = reactionsText
+  self.stealProjectUrl = stealProjectUrl
   self.download = function (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
     downloadPbID, downloadIconID) {
     const downloadProgressBar = $(downloadPbID)
@@ -74,6 +75,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     $.get(self.statusUrl, null, self.onResult)
   }
 
+
   self.createApk = function () {
     $('#apk-generate, #apk-generate-small').addClass('d-none')
     $('#apk-pending, #apk-pending-small').removeClass('d-none')
@@ -116,6 +118,28 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     if (bgDarkPopupInfo.length > 0 && data.status === 'ready') {
       bgDarkPopupInfo.remove()
     }
+  }
+
+  self.stealProgram = function() {
+    console.log('You clicked');
+    $.ajax({
+      url: self.stealProjectUrl,
+      type: 'get',
+      success: function (data) {
+        $("project-user").html('<a href="{{ url(\'profile\', { id : program.user.id }) }}"' +
+            'class="icon-text align-bottom" id="program-owner-username">' +
+            '<i class="material-icons pr-2" id="user-profile-icon">person</i>' + data + '</a>');
+      }
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        // on 401 redirect to url to log in
+        if (jqXHR.status === 401) {
+          window.location.href = url
+        } else {
+          console.error('Stealing failure', jqXHR, textStatus, errorThrown)
+          self.showErrorAlert()
+        }
+    })
   }
 
   self.createLinks = function () {
@@ -425,7 +449,16 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     })
   }
 
+  self.initProjectSteal = function(){
+    const $container = $('#project-steal')
+    const $button = $('#steal-project-button', $container)
+    $button.on('click', function () {
+      self.stealProgram()
+    })
+  }
+
   $(function () {
     self.initProjectLike()
+    self.initProjectSteal()
   })
 }

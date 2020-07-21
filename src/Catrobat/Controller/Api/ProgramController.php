@@ -42,6 +42,34 @@ class ProgramController extends AbstractController
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
 
+    /**
+     * @deprecated
+     *
+     * @Route("/api/project/{id}/steal", name="api_project_steal", methods={"GET"})
+     *
+     */
+
+    public function stealProgram( string $id, ProgramManager $program_manager): JsonResponse
+    {
+        $program = $program_manager->find($id);
+        if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program))
+        {
+            throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+
+        $obj = new stdClass();
+        $obj->user = new stdClass();
+        $obj->user->id = $this->getUser()->getId();
+        $data[] = $obj;
+        $user = $this->getUser();
+
+        $program->setUser($user);
+
+
+        return JsonResponse::create($data);
+    }
+
+
   /**
    * @deprecated
    *

@@ -1,0 +1,7 @@
+<button id="steal-project-button"
+        class="btn btn-outline-primary btn-block">
+  <i class="material-icons d-none">
+    {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'steal-project' ~ suffix|default(), 'small': true} %}
+  </i>
+  <span>{{ "Projekt stehlen"|trans({}, "catroweb") }}</span>
+</button>
