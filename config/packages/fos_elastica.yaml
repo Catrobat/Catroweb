@@ -36,3 +36,28 @@ fos_elastica:
                         provider: ~
                         finder: ~
                         listener: ~
+        app_user:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            program_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [standard, lowercase, elision, language_stop]
+                        filter:
+                            language_stop:
+                                type: stop
+                                ignore_case: true
+                                stopwords: [_english_]
+            types:
+                user:
+                    properties:
+                        id: ~
+                        username: { boost: 3 }
+                    persistence:
+                        driver: orm
+                        model: App\Entity\User
+                        provider: ~
+                        finder: ~
+                        listener: ~

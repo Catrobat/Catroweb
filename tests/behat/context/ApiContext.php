@@ -628,11 +628,8 @@ class ApiContext implements KernelAwareContext
 
   /**
    * @Given /^I have a request header "([^"]*)" with value "([^"]*)"$/
-   *
-   * @param mixed $name
-   * @param mixed $value
    */
-  public function iHaveARequestHeaderWithValue($name, $value): void
+  public function iHaveARequestHeaderWithValue(string $name, string $value): void
   {
     $this->request_headers[$name] = $value;
   }
@@ -2309,11 +2306,8 @@ class ApiContext implements KernelAwareContext
 
   /**
    * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
-   *
-   * @param mixed $name
-   * @param mixed $value
    */
-  public function iHaveAParameterWithValue($name, $value): void
+  public function iHaveAParameterWithValue(string $name, string $value): void
   {
     $this->request_parameters[$name] = $value;
   }

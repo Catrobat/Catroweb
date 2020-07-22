@@ -88,7 +88,7 @@ class ProgramManager
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
                               CatroNotificationService $notification_service, TransformedFinder $program_finder,
-                              UrlHelper $urlHelper = null)
+                              UrlHelper $url_helper = null)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -105,8 +105,8 @@ class ProgramManager
     $this->file_sanitizer = $file_sanitizer;
     $this->extension_repository = $extension_repository;
     $this->notification_service = $notification_service;
-    $this->urlHelper = $urlHelper;
     $this->program_finder = $program_finder;
+    $this->urlHelper = $url_helper;
   }
 
   public function getFeaturedRepository(): FeaturedRepository

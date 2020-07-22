@@ -206,12 +206,21 @@ class UserApi implements UserApiInterface
     return null;
   }
 
-  public function usersSearchGet(string $query, int $limit = 20, int $offset = 0, &$responseCode, array &$responseHeaders)
+  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement usersSearchGet() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
-    return []; // ...[] =  new BasicUserDataResponse()
+    $responseCode = Response::HTTP_OK;
+
+    if ('' === $query || ctype_space($query))
+    {
+      return [];
+    }
+
+    $users = $this->user_manager->search($query, $limit, $offset);
+
+    return $this->getUsersDataResponse($users);
   }
 
   private function getBasicUserDataResponse(User $user): BasicUserDataResponse

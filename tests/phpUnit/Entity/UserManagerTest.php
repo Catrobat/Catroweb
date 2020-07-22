@@ -7,9 +7,12 @@ use App\Entity\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
 use FOS\UserBundle\Util\PasswordUpdaterInterface;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
@@ -29,7 +32,9 @@ class UserManagerTest extends TestCase
     $object_manager->expects($this->any())->method('getClassMetadata')->willReturn($meta);
     $object_manager->expects($this->any())->method('getRepository')->willReturn($repository);
     $program_manager = $this->createMock(ProgramManager::class);
-    $this->user_manager = new UserManager($passwordUpdater, $canonicalFieldsUpdater, $object_manager, $program_manager);
+    $user_finder = $this->createMock(TransformedFinder::class);
+    $url_helper = new UrlHelper(new RequestStack());
+    $this->user_manager = new UserManager($passwordUpdater, $canonicalFieldsUpdater, $object_manager, $user_finder, $program_manager, $url_helper);
   }
 
   public function testInitialization(): void
