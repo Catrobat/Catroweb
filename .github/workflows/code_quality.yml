@@ -19,7 +19,7 @@ jobs:
     # config defined in .eslintrc.yml
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.0
+      - uses: actions/setup-node@v2.1.1
         with:
           node-version: '10.x'
       - run: npm install
@@ -32,7 +32,7 @@ jobs:
     # config defined in .stylelintrc.json
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.0
+      - uses: actions/setup-node@v2.1.1
         with:
           node-version: '10.x'
       - run: npm install
