@@ -165,8 +165,14 @@ class UserApi implements UserApiInterface
 
   public function userDelete(&$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement userDelete() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $responseCode = Response::HTTP_NO_CONTENT;
+
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    $this->user_manager->delete($user);
+
+    return null;
   }
 
   public function userGet(&$responseCode, array &$responseHeaders)
