@@ -2570,6 +2570,26 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the media package files table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeMediaPackageFilesTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Category']);
+      $this->assertSession()->pageTextContains($user_stat['Author']);
+      $this->assertSession()->pageTextContains($user_stat['Flavors']);
+      $this->assertSession()->pageTextContains($user_stat['Downloads']);
+      $this->assertSession()->pageTextContains($user_stat['Active']);
+    }
+  }
+
+  /**
    * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the APK-folder$/
    *
    * @param mixed $filename
