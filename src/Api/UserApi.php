@@ -14,6 +14,7 @@ use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -30,13 +31,16 @@ class UserApi implements UserApiInterface
 
   private TranslatorInterface $translator;
 
+  private TokenStorageInterface $token_storage;
+
   public function __construct(ValidatorInterface $validator, UserManager $user_manager, TokenGenerator $token_generator,
-                              TranslatorInterface $translator)
+                              TranslatorInterface $translator, TokenStorageInterface $token_storage)
   {
     $this->validator = $validator;
     $this->user_manager = $user_manager;
     $this->token_generator = $token_generator;
     $this->translator = $translator;
+    $this->token_storage = $token_storage;
   }
 
   /**
@@ -167,10 +171,12 @@ class UserApi implements UserApiInterface
 
   public function userGet(&$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement userGet() method.
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $responseCode = Response::HTTP_OK;
 
-    return new ExtendedUserDataResponse();
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    return $this->getExtendedUserDataResponse($user);
   }
 
   public function userIdGet(string $id, &$responseCode, array &$responseHeaders)
@@ -211,6 +217,19 @@ class UserApi implements UserApiInterface
   private function getBasicUserDataResponse(User $user): BasicUserDataResponse
   {
     return new BasicUserDataResponse([
+      'id' => $user->getId(),
+      'username' => $user->getUsername(),
+      'email' => $user->getEmail(),
+      'country' => $user->getCountry(),
+      'projects' => $user->getPrograms()->count(),
+      'followers' => $user->getFollowers()->count(),
+      'following' => $user->getFollowing()->count(),
+    ]);
+  }
+
+  private function getExtendedUserDataResponse(User $user): BasicUserDataResponse
+  {
+    return new ExtendedUserDataResponse([
       'id' => $user->getId(),
       'username' => $user->getUsername(),
       'email' => $user->getEmail(),
