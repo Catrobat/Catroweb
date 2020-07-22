@@ -1230,6 +1230,23 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Given /^there are rude words:$/
+   */
+  public function thereAreRudeWords(TableNode $table): void
+  {
+    $words = $table->getHash();
+    $em = $this->getManager();
+
+    foreach ($words as $word)
+    {
+      $rude_word = new RudeWord();
+      $rude_word->setWord($word['word']);
+      $em->persist($rude_word);
+    }
+    $em->flush();
+  }
+
+  /**
    * @Given /^the users are created at:$/
    */
   public function theUsersAreCreatedAt(TableNode $table): void
