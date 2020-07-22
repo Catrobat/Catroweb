@@ -111,6 +111,9 @@ class ApiContext implements KernelAwareContext
     'uploaded', 'uploaded_string', 'screenshot_large',
     'screenshot_small', 'project_url', 'download_url', 'filesize', ];
 
+  private array $user_structure = ['id', 'username', 'email', 'country',
+    'projects', 'followers', 'following', ];
+
   private array $featured_program_structure = ['id', 'name', 'author', 'featured_image'];
 
   private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
@@ -1760,6 +1763,79 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the response should contain the following users:$/
+   * @Then /^the response should contain users in the following order:$/
+   */
+  public function responseShouldContainUsersInTheFollowingOrder(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $returned_users = json_decode($response->getContent(), true);
+    $expected_users = $table->getHash();
+    $stored_users = $this->getStoredUsers($expected_users);
+
+    Assert::assertEquals(count($returned_users), count($expected_users), 'Number of returned users should be '.count($expected_users));
+
+    foreach ($returned_users as $returned_user)
+    {
+      $stored_user = $this->findUser($stored_users, $returned_user['username']);
+      $this->assertUsersEqual($stored_user, $returned_user);
+    }
+  }
+
+  /**
+   * @Then /^the response should contain the following user:$/
+   */
+  public function responseShouldContainTheFollowingUser(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $returned_user = json_decode($response->getContent(), true);
+    $expected_user = $table->getHash();
+    $stored_users = $this->getStoredUsers($expected_user);
+
+    $stored_user = $this->findUser($stored_users, $returned_user['username']);
+    $this->assertUsersEqual($stored_user, $returned_user);
+  }
+
+  /**
+   * @Then /^the response should have the users model structure$/
+   */
+  public function responseShouldHaveUsersModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $returned_users = json_decode($response->getContent(), true);
+
+    foreach ($returned_users as $user)
+    {
+      Assert::assertEquals(count($this->user_structure), count($user),
+        'Number of user fields should be '.count($this->user_structure));
+      foreach ($this->user_structure as $key)
+      {
+        Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
+        Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should have the user model structure$/
+   */
+  public function responseShouldHaveUserModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $user = json_decode($response->getContent(), true);
+
+    Assert::assertEquals(count($this->user_structure), count($user),
+      'Number of user fields should be '.count($this->user_structure));
+    foreach ($this->user_structure as $key)
+    {
+      Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
+      Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
+    }
+  }
+
+  /**
    * @Then /^the response should have the project model structure$/
    */
   public function responseShouldHaveProjectModelStructure(): void
@@ -3283,6 +3359,19 @@ class ApiContext implements KernelAwareContext
     return [];
   }
 
+  private function findUser(array $users, string $wanted_user_name): array
+  {
+    foreach ($users as $user)
+    {
+      if ($user['username'] === $wanted_user_name)
+      {
+        return $user;
+      }
+    }
+
+    return [];
+  }
+
   private function expectProgram(array $programs, string $value): bool
   {
     foreach ($programs as $program)
@@ -3364,6 +3453,28 @@ class ApiContext implements KernelAwareContext
     }
 
     return $projects;
+  }
+
+  private function getStoredUsers(array $expected_users): array
+  {
+    $stored_users = $this->dataFixturesContext->getUsers();
+    $users = [];
+    /** @var User $user */
+    foreach ($stored_users as $program_index => $user)
+    {
+      $result = [
+        'id' => $user->getId(),
+        'username' => $user->getUsername(),
+        'email' => $user->getEmail(),
+        'country' => $user->getCountry(),
+        'projects' => $user->getPrograms()->count(),
+        'followers' => $user->getFollowers()->count(),
+        'following' => $user->getFollowing()->count(),
+      ];
+      $users[] = $result;
+    }
+
+    return $users;
   }
 
   private function checkProjectFieldsValue(array $program, string $key): bool
@@ -3525,6 +3636,46 @@ class ApiContext implements KernelAwareContext
     return true;
   }
 
+  private function checkUserFieldsValue(array $user, string $key): bool
+  {
+    $fields = [
+      'id' => function ($id)
+      {
+        Assert::assertIsString($id);
+        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
+      },
+      'username' => function ($username)
+      {
+        Assert::assertIsString($username);
+      },
+      'email' => function ($email)
+      {
+        Assert::assertIsString($email);
+      },
+      'country' => function ($country)
+      {
+        Assert::assertIsString($country);
+      },
+      'projects' => function ($projects)
+      {
+        Assert::assertIsInt($projects);
+      },
+      'followers' => function ($followers)
+      {
+        Assert::assertIsInt($followers);
+      },
+      'following' => function ($following)
+      {
+        Assert::assertIsInt($following);
+      },
+    ];
+
+    Assert::assertArrayHasKey($key, $fields);
+    call_user_func($fields[$key], $user[$key]);
+
+    return true;
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   //  Upload Request process
   //--------------------------------------------------------------------------------------------------------------------
@@ -3681,6 +3832,16 @@ class ApiContext implements KernelAwareContext
             'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
             'http://localhost/images/default/thumbnail.png', ]);
       }
+    }
+  }
+
+  private function assertUsersEqual(array $stored_user, array $returned_user): void
+  {
+    Assert::assertNotEmpty($stored_user);
+    Assert::assertNotEmpty($returned_user);
+    foreach ($this->user_structure as $key)
+    {
+      Assert::assertEquals($stored_user[$key], $returned_user[$key]);
     }
   }
 }
