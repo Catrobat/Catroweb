@@ -2570,6 +2570,23 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the media package categories table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeMediaPackageCategoriesTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Package']);
+      $this->assertSession()->pageTextContains($user_stat['Priority']);
+    }
+  }
+
+  /**
    * @Then /^I should see the media package files table:$/
    *
    * @throws ResponseTextException

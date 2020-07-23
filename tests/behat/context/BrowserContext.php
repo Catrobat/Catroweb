@@ -261,6 +261,26 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I select package "([^"]*)" for media package category$/
+   *
+   * @param mixed $arg1
+   */
+  public function iSelectPackageForMediaPackageCategory($arg1): void
+  {
+    $this->getSession()->getPage()->find('css', '.select2-choices')->click();
+
+    $packages = $this->getSession()->getPage()->findAll('css', '.select2-results li');
+    foreach ($packages as $package)
+    {
+      if ($package->getText() == $arg1)
+      {
+        $package->click();
+        break;
+      }
+    }
+  }
+
+  /**
    * @Then /^I select flavor "([^"]*)" for media package file$/
    *
    * @param mixed $arg1
