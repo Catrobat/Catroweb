@@ -128,7 +128,7 @@ jobs:
 
       - name: PhpUnit tests
         run:
-          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage
+          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage --coverage-clover=tests/testreports/coverage/coverage.xml
 
       - name: Upload code coverage report
         uses: actions/upload-artifact@v2
@@ -136,6 +136,14 @@ jobs:
         with:
           name: PhpUnitTestReport
           path: tests/testreports/coverage
+
+      - uses: codecov/codecov-action@v1
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: tests/testreports/coverage/coverage.xml
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
 
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
