@@ -719,6 +719,10 @@ class DataFixturesContext implements KernelAwareContext
     {
       $new_category = new MediaPackageCategory();
       $new_category->setName($category['name']);
+      if (!empty($category['priority']))
+      {
+        $new_category->setPriority($category['priority']);
+      }
 
       /** @var MediaPackage|null $package */
       $package = $em->getRepository(MediaPackage::class)->findOneBy(['name' => $category['package']]);

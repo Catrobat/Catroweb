@@ -614,7 +614,7 @@ services:
     arguments:
       - ~
       - App\Entity\MediaPackageCategory
-      - ~
+      - App\Catrobat\Controller\Admin\MediaPackageCategoryController
     public: true
 
   catrowebadmin.block.mediapackage.file:
