@@ -128,20 +128,20 @@ jobs:
 
       - name: PhpUnit tests
         run:
-          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage --coverage-clover=tests/testreports/coverage/coverage.xml
+          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage/phpunit --coverage-clover=tests/testreports/coverage/phpunit/coverage.xml
 
       - name: Upload code coverage report
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: PhpUnitTestReport
-          path: tests/testreports/coverage
+          path: tests/testreports/coverage/phpunit
 
       - uses: codecov/codecov-action@v1
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          file: tests/testreports/coverage/coverage.xml
-          flags: unittests # optional
+          file: tests/testreports/coverage/phpunit/coverage.xml
+          flags: phpunit # optional
           name: codecov-umbrella # optional
           fail_ci_if_error: true # optional (default = false)
 
@@ -261,6 +261,14 @@ jobs:
             cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
+
+      - uses: codecov/codecov-action@v1
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: tests/testreports/coverage/behat/coverage.xml
+          flags: behat # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
 
       # Rerun #1
       - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests
