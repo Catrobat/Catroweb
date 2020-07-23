@@ -254,8 +254,8 @@ class MaintainController extends CRUDController
   private function getSymbolByQuantity(float $bytes): string
   {
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-    $exp = floor(log($bytes) / log(1_024)) > 0 ? floor(log($bytes) / log(1_024)) : 0;
+    $exp = floor(log($bytes) / log(1_024)) > 0 ? intval(floor(log($bytes) / log(1_024))) : 0;
 
-    return sprintf('%.2f '.$symbol[$exp], ($bytes / 1_024 ** floor($exp)));
+    return sprintf('%.2f '.$symbol[$exp], ($bytes / 1_024 ** $exp));
   }
 }

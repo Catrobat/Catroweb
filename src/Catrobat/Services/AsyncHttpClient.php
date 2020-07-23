@@ -57,7 +57,7 @@ class AsyncHttpClient
       'concurrency' => $max_number_of_concurrent_requests,
       'fulfilled' => function (ResponseInterface $responses)
       {
-        $data = @json_decode($responses->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        $data = @json_decode($responses->getBody()->__toString(), true, 512, JSON_THROW_ON_ERROR);
         if (null != $data && array_key_exists('id', $data) && (int) $data['id'] > 0)
         {
           $this->scratch_info_data[(int) $data['id']] = $data;

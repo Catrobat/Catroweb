@@ -13,7 +13,8 @@ class APIQueryHelper
     if (null !== $max_version && '0' !== $max_version)
     {
       $query_builder
-        ->innerJoin(Program::class, 'p', Join::WITH, $query_builder->expr()->eq('e.program', 'p'))
+        ->innerJoin(Program::class, 'p', Join::WITH,
+          $query_builder->expr()->eq('e.program', 'p')->__toString())
         ->andWhere($query_builder->expr()->lte('p.language_version', ':max_version'))
         ->setParameter('max_version', $max_version)
         ->addOrderBy('e.id', 'ASC')

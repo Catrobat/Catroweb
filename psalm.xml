@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!-- 1 is the highest and 8 the lowest error level  -->
+<psalm
+        errorLevel="5"
+        resolveFromConfigFile="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <!-- API code generation is not perfect -->
+                <!-- all UndefinedDocblockClass issues in this directory are suppressed -->
+                <directory name="src/Api" />
+            </errorLevel>
+        </UndefinedDocblockClass>
+        <InvalidNullableReturnType>
+            <errorLevel type="suppress">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <directory name="src/Api" />
+            </errorLevel>
+        </InvalidNullableReturnType>
+        <NullableReturnStatement>
+            <errorLevel type="suppress">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <directory name="src/Api" />
+            </errorLevel>
+        </NullableReturnStatement>
+        <InvalidReturnStatement>
+            <errorLevel type="suppress">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <directory name="src/Api" />
+            </errorLevel>
+        </InvalidReturnStatement>
+        <InvalidNullableReturnType>
+            <errorLevel type="suppress">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <directory name="src/Api" />
+            </errorLevel>
+        </InvalidNullableReturnType>
+        <InvalidReturnType>
+            <errorLevel type="suppress">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <directory name="src/Api" />
+            </errorLevel>
+        </InvalidReturnType>
+        <InvalidArgument>
+            <errorLevel type="suppress">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <directory name="src/Api" />
+            </errorLevel>
+        </InvalidArgument>
+    </issueHandlers>
+</psalm>

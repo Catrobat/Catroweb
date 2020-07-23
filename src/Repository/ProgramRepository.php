@@ -7,13 +7,11 @@ use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ScratchProgramRemixRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -240,7 +238,7 @@ class ProgramRepository extends ServiceEntityRepository
     $query_builder
       ->select(['e as program', 'COUNT(e.id) as like_count'])
       ->innerJoin(ProgramLike::class, 'l', Join::WITH,
-        $query_builder->expr()->eq('e.id', 'l.program_id'))
+        $query_builder->expr()->eq('e.id', 'l.program_id')->__toString())
       ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
       ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
       ->groupBy('e.id')
@@ -296,11 +294,11 @@ class ProgramRepository extends ServiceEntityRepository
       ->select(['e as program', 'COUNT(e.id) as user_download_count'])
       ->innerJoin(
         ProgramDownloads::class, 'd1',
-        Join::WITH, $query_builder->expr()->eq('e.id', 'd1.program')
+        Join::WITH, $query_builder->expr()->eq('e.id', 'd1.program')->__toString()
       )
       ->innerJoin(
         ProgramDownloads::class, 'd2',
-        Join::WITH, $query_builder->expr()->eq('d1.user', 'd2.user')
+        Join::WITH, $query_builder->expr()->eq('d1.user', 'd2.user')->__toString()
       )
       ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
       ->andWhere($query_builder->expr()->isNotNull('d1.user'))
@@ -528,7 +526,7 @@ class ProgramRepository extends ServiceEntityRepository
 
   public static function filterVisiblePrograms(array $programs, bool $debug_build, string $max_version = '0'): array
   {
-    if (!is_array($programs) || 0 === count($programs))
+    if (empty($programs))
     {
       return [];
     }
@@ -834,10 +832,8 @@ class ProgramRepository extends ServiceEntityRepository
     ;
   }
 
-  public function searchTagCount(string $query, bool $debug_build): int
+  public function searchTagCount(int $tag_id, bool $debug_build): int
   {
-    $query = str_replace('yahoo', '', $query);
-
     $query_builder = $this->createQueryBuilder('e');
 
     $query_builder
@@ -846,7 +842,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->where($query_builder->expr()->eq('e.visible',
         $query_builder->expr()->literal(true)))
       ->andWhere($query_builder->expr()->eq('t.id', ':id'))
-      ->setParameter('id', $query)
+      ->setParameter('id', $tag_id)
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
@@ -957,13 +953,10 @@ class ProgramRepository extends ServiceEntityRepository
     $qb_program = $this->createQueryBuilder('e');
     $db_query = $qb_program->getEntityManager()->createQuery($dql);
 
-    $parameters = new ArrayCollection();
-    $parameters->add(new Parameter('id', $id));
-    $parameters->add(new Parameter('tag_ids', $tag_ids));
-    $parameters->add(new Parameter('extension_ids', $extensions_id));
-    $parameters->add(new Parameter('flavor', $flavor));
-
-    $db_query->setParameters($parameters);
+    $db_query->setParameter('id', $id);
+    $db_query->setParameter('tag_ids', $tag_ids);
+    $db_query->setParameter('extension_ids', $extensions_id);
+    $db_query->setParameter('flavor', $flavor);
 
     return $db_query;
   }

@@ -71,7 +71,7 @@ class GameJam
 
   public function __toString()
   {
-    return $this->getName();
+    return $this->getName() ?? '';
   }
 
   public function getId(): ?int
@@ -110,7 +110,7 @@ class GameJam
     return $this;
   }
 
-  public function getStart(): DateTime
+  public function getStart(): ?DateTime
   {
     return $this->start;
   }
@@ -122,7 +122,7 @@ class GameJam
     return $this;
   }
 
-  public function getEnd(): DateTime
+  public function getEnd(): ?DateTime
   {
     return $this->end;
   }

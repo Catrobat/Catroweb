@@ -68,12 +68,12 @@ class SearchController extends AbstractController
    */
   public function tagSearchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
   {
-    $query = $request->query->get('q');
+    $tag_id = (int) $request->query->get('q', 0);
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
-    $programs = $program_manager->getProgramsByTagId($query, $limit, $offset);
+    $programs = $program_manager->getProgramsByTagId($tag_id, $limit, $offset);
 
-    $numbOfTotalProjects = $program_manager->searchTagCount($query);
+    $numbOfTotalProjects = $program_manager->searchTagCount($tag_id);
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }

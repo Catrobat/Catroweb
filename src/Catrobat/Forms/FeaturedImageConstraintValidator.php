@@ -2,14 +2,13 @@
 
 namespace App\Catrobat\Forms;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class FeaturedImageConstraintValidator extends ConstraintValidator
 {
   /**
-   * @param UploadedFile|null $value
+   * {@inheritdoc}
    */
   public function validate($value, Constraint $constraint): void
   {

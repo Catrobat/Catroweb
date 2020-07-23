@@ -52,7 +52,7 @@ class CreateProgramExtensionsCommand extends Command
     $xpath = '//@category';
     $program_with_extensions = false;
 
-    $this->writeln('Deleting all linked extensions');
+    $this->output->writeln('Deleting all linked extensions');
 
     $extensions = $this->extension_repository->findAll();
 
@@ -67,7 +67,7 @@ class CreateProgramExtensionsCommand extends Command
     $finder = new Finder();
     $finder->in($this->program_file_repository->directory);
 
-    $this->writeln('Searching for extensions ...');
+    $this->output->writeln('Searching for extensions ...');
 
     /** @var File $element */
     foreach ($finder as $element)
@@ -78,8 +78,8 @@ class CreateProgramExtensionsCommand extends Command
 
       if (true !== $open)
       {
-        $this->writeln('Cant open: '.$this->program_file_repository->directory.$element->getFilename());
-        $this->writeln('Skipping file ...');
+        $this->output->writeln('Cant open: '.$this->program_file_repository->directory.$element->getFilename());
+        $this->output->writeln('Skipping file ...');
         continue;
       }
 
@@ -87,8 +87,8 @@ class CreateProgramExtensionsCommand extends Command
 
       if (null == $program)
       {
-        $this->writeln('Cant find database entry for file: '.$element->getFilename());
-        $this->writeln('Skipping file ...');
+        $this->output->writeln('Cant find database entry for file: '.$element->getFilename());
+        $this->output->writeln('Skipping file ...');
         continue;
       }
 
@@ -104,7 +104,7 @@ class CreateProgramExtensionsCommand extends Command
 
       if (false === $xml)
       {
-        $this->writeln('Cant load code.xml from: '.$element->getFilename());
+        $this->output->writeln('Cant load code.xml from: '.$element->getFilename());
       }
       else
       {
@@ -157,7 +157,7 @@ class CreateProgramExtensionsCommand extends Command
       }
     }
 
-    $this->writeln('Done!');
+    $this->output->writeln('Done!');
 
     return 0;
   }
@@ -167,13 +167,5 @@ class CreateProgramExtensionsCommand extends Command
     $id = explode('.', $element->getFilename());
 
     return $this->program_repository->find($id[0]);
-  }
-
-  private function writeln(string $string): void
-  {
-    if (null != $this->output)
-    {
-      $this->output->writeln($string);
-    }
   }
 }

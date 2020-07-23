@@ -89,7 +89,7 @@ class UserComment
 
   public function __toString(): string
   {
-    return $this->text;
+    return $this->text ?? '';
   }
 
   /**

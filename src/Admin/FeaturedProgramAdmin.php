@@ -77,23 +77,26 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FeaturedProgram $object
-   *
-   * @return Metadata
+   * {@inheritdoc}
    */
-  public function getObjectMetadata($object)
+  public function getObjectMetadata($object): Metadata
   {
-    return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(),
-      $this->getFeaturedImageUrl($object));
+    /** @var FeaturedProgram $featured_program */
+    $featured_program = $object;
+
+    return new Metadata($featured_program->getProgram()->getName(), $featured_program->getProgram()->getDescription(),
+      $this->getFeaturedImageUrl($featured_program));
   }
 
   /**
-   * @param FeaturedProgram $object
-   * @param mixed           $object
+   * {@inheritdoc}
    */
   public function preUpdate($object): void
   {
-    $object->old_image_type = $object->getImageType();
+    /** @var FeaturedProgram $featured_program */
+    $featured_program = $object;
+
+    $featured_program->old_image_type = $featured_program->getImageType();
     $this->checkFlavor();
   }
 

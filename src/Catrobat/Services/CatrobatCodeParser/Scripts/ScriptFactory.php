@@ -8,7 +8,7 @@ use SimpleXMLElement;
 class ScriptFactory
 {
   /**
-   * @return BroadcastScript|StartScript|WhenBGChangeScript|WhenConditionScript|WhenScript|WhenTouchScript|null
+   * @return BroadcastScript|CollisionScript|StartScript|UnknownScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript
    */
   public static function generate(SimpleXMLElement $script_xml_properties)
   {

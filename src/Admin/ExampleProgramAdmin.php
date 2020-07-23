@@ -74,23 +74,27 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ExampleProgram $object
-   *
-   * @return Metadata
+   * {@inheritdoc}
    */
-  public function getObjectMetadata($object)
+  public function getObjectMetadata($object): Metadata
   {
-    return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(),
-      $this->getExampleImageUrl($object));
+    /** @var ExampleProgram $example_program */
+    $example_program = $object;
+
+    return new Metadata($example_program->getProgram()->getName(), $example_program->getProgram()->getDescription(),
+      $this->getExampleImageUrl($example_program));
   }
 
   /**
-   * @param ExampleProgram $object
+   * {@inheritdoc}
    */
   public function preUpdate($object): void
   {
-    $object->old_image_type = $object->getImageType();
-    $this->checkProgramID($object);
+    /** @var ExampleProgram $example_program */
+    $example_program = $object;
+
+    $example_program->old_image_type = $example_program->getImageType();
+    $this->checkProgramID($example_program);
     $this->checkFlavor();
   }
 

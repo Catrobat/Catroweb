@@ -158,7 +158,7 @@ class ExampleProgram
     return $this->program->getName();
   }
 
-  public function getUser(): User
+  public function getUser(): ?User
   {
     return $this->getProgram()->getUser();
   }

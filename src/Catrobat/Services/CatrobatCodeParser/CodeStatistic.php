@@ -177,17 +177,17 @@ class CodeStatistic
 
   public function getSoundStatistic(): int
   {
-    return $this->total_num_sounds;
+    return $this->total_num_sounds ?? 0;
   }
 
   public function getGlobalVarStatistic(): int
   {
-    return $this->total_num_global_vars;
+    return $this->total_num_global_vars ?? 0;
   }
 
   public function getLocalVarStatistic(): int
   {
-    return $this->total_num_local_vars;
+    return $this->total_num_local_vars ?? 0;
   }
 
   protected function updateSceneStatistic(): void

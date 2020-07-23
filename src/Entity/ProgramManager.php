@@ -171,7 +171,7 @@ class ProgramManager
     }
     catch (InvalidCatrobatFileException $e)
     {
-      $this->logger->error($e);
+      $this->logger->error('addProgram failed with code: '.$e->getCode().' and message:'.$e->getMessage());
       $this->event_dispatcher->dispatch(new InvalidProgramUploadedEvent($file, $e));
       throw $e;
     }
@@ -484,8 +484,7 @@ class ProgramManager
   public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file): void
   {
     $EMBROIDERY = 'Embroidery';
-    if (null !== $extracted_file
-      && false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">'))
+    if (false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">'))
     {
       /** @var Extension|null $embroidery_extension */
       $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
@@ -608,7 +607,7 @@ class ProgramManager
 
   /**
    * @throws NoResultException
-   * @throws NonUniqueResultException*@internal
+   * @throws NonUniqueResultException
    *
    * ATTENTION! Internal use only! (no visible/private/debug check)
    *
@@ -795,9 +794,9 @@ class ProgramManager
     );
   }
 
-  public function searchTagCount(string $query): int
+  public function searchTagCount(int $tag_id): int
   {
-    return $this->program_repository->searchTagCount($query, $this->app_request->isDebugBuildRequest());
+    return $this->program_repository->searchTagCount($tag_id, $this->app_request->isDebugBuildRequest());
   }
 
   public function searchExtensionCount(string $query): int
