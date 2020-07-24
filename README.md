@@ -2,7 +2,8 @@
 
 ![Tests](https://github.com/Catrobat/Catroweb-Symfony/workflows/Tests/badge.svg)
 ![Code Quality Checks](https://github.com/Catrobat/Catroweb-Symfony/workflows/Code%20Quality%20Checks/badge.svg)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=Catrobat/Catroweb)](https://dependabot.com)
+[![Dependabot Status](https://img.shields.io/badge/Dependabot-active-green.svg)](https://dependabot.com)
+[![codecov](https://codecov.io/gh/Catrobat/Catroweb/branch/develop/graph/badge.svg)](https://codecov.io/gh/Catrobat/Catroweb)
 
 [![Php 7.4](https://img.shields.io/badge/PHP-7.4-informational.svg)](https://www.php.net/)
 [![Symfony](https://img.shields.io/badge/Symfony-4.4-informational.svg)](https://cs.symfony.com/)
