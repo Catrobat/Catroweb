@@ -85,7 +85,7 @@ class PurgeCommand extends Command
     );
     $progress->advance();
 
-    $progress->setMessage('Dropping Migrations');
+    $progress->setMessage('Dropping migrations');
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:drop:migration'], [], 'Dropping the migration_versions table', $output);
     $progress->advance();
