@@ -23,8 +23,6 @@ class SaveProgramSnapshotListenerTest extends TestCase
 {
   const STORAGE_DIR = '/path/to/storage/';
 
-  private User $user;
-
   private Program $program;
 
   private SaveProgramSnapshotListener $save_program_snapshot_listener;

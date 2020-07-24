@@ -151,7 +151,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode, array &$responseHeaders)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
-    $private = null === $private ? false : $private;
+    $private = $private ?? false;
 
     // File uploaded successful?
     if (!$file->isValid())
@@ -195,11 +195,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
 
     // Setting the program's attributes
-    if (null !== $private)
-    {
-      $program->setPrivate($private);
-      $this->entity_manager->flush();
-    }
+    $program->setPrivate($private);
+    $this->entity_manager->flush();
 
     // Since we have come this far, the project upload is completed
     $responseCode = Response::HTTP_CREATED; // 201 => Successful upload
@@ -292,40 +289,38 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   private function getProjectDataResponse($program): ProjectResponse
   {
-    if ($program->isExample())
-    {
-      $program = $program->getProgram();
-    }
+    /** @var Program $project */
+    $project = $program->isExample() ? $program->getProgram() : $program;
 
     return new ProjectResponse([
-      'id' => $program->getId(),
-      'name' => $program->getName(),
-      'author' => $program->getUser()->getUserName(),
-      'description' => $program->getDescription(),
-      'version' => $program->getCatrobatVersionName(),
-      'views' => $program->getViews(),
-      'download' => $program->getDownloads(),
-      'private' => $program->getPrivate(),
-      'flavor' => $program->getFlavor(),
-      'uploaded' => $program->getUploadedAt()->getTimestamp(),
-      'uploaded_string' => $this->time_formatter->getElapsedTime($program->getUploadedAt()->getTimestamp()),
-      'screenshot_large' => $this->program_manager->getScreenshotLarge($program->getId()),
-      'screenshot_small' => $this->program_manager->getScreenshotSmall($program->getId()),
+      'id' => $project->getId(),
+      'name' => $project->getName(),
+      'author' => $project->getUser()->getUserName(),
+      'description' => $project->getDescription(),
+      'version' => $project->getCatrobatVersionName(),
+      'views' => $project->getViews(),
+      'download' => $project->getDownloads(),
+      'private' => $project->getPrivate(),
+      'flavor' => $project->getFlavor(),
+      'uploaded' => $project->getUploadedAt()->getTimestamp(),
+      'uploaded_string' => $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp()),
+      'screenshot_large' => $this->program_manager->getScreenshotLarge($project->getId()),
+      'screenshot_small' => $this->program_manager->getScreenshotSmall($project->getId()),
       'project_url' => ltrim($this->generateUrl(
         'program',
         [
           'flavor' => $this->session->get('flavor_context'),
-          'id' => $program->getId(),
+          'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'
       ),
       'download_url' => ltrim($this->generateUrl(
         'download',
         [
-          'id' => $program->getId(),
+          'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'),
-      'filesize' => ($program->getFilesize() / 1_048_576),
+      'filesize' => ($project->getFilesize() / 1_048_576),
     ]);
   }
 

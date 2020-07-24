@@ -583,7 +583,7 @@ class Program
   /**
    * Returns the user owning this Program.
    */
-  public function getUser(): User
+  public function getUser(): ?User
   {
     return $this->user;
   }

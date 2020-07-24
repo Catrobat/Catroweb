@@ -375,7 +375,6 @@ class MigrateRemixGraphsCommand extends Command
    */
   private function addRemixData(Program $program, array $remixes_data, bool $is_update = false): void
   {
-    assert(null != $program);
     $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data): bool
     {
       return $remix_data->isScratchProgram();

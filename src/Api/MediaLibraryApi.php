@@ -91,22 +91,20 @@ class MediaLibraryApi implements MediaLibraryApiInterface
         }
         continue;
       }
-      if (null !== $media_package_files)
+
+      /** @var MediaPackageFile $media_package_file */
+      foreach ($media_package_files as $media_package_file)
       {
-        /** @var MediaPackageFile $media_package_file */
-        foreach ($media_package_files as $media_package_file)
+        if (0 != $offset)
         {
-          if (0 != $offset)
-          {
-            --$offset;
-            continue;
-          }
-          if (count($json_response_array) === $limit)
-          {
-            break;
-          }
-          $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file, $media_package));
+          --$offset;
+          continue;
         }
+        if (count($json_response_array) === $limit)
+        {
+          break;
+        }
+        $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file, $media_package));
       }
     }
 

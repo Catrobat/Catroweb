@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Utils\TimeUtils;
 use App\Utils\Utils;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
@@ -27,15 +28,17 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
 
   public function __construct(PasswordUpdaterInterface $passwordUpdater,
                               CanonicalFieldsUpdater $canonicalFieldsUpdater,
-                              EntityManagerInterface $om,
+                              EntityManagerInterface $em,
                               TransformedFinder $user_finder,
                               ProgramManager $program_manager,
-                              UrlHelper $url_helper = null)
+                              UrlHelper $url_helper)
   {
     $this->user_finder = $user_finder;
     $this->url_helper = $url_helper;
     $this->program_manager = $program_manager;
 
+    /** @var ObjectManager $om */
+    $om = $em;
     parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
   }
 

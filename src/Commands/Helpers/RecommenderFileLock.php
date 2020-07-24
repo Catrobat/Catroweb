@@ -10,7 +10,7 @@ class RecommenderFileLock
   private string $lock_file_path;
 
   /**
-   * @var resource|false|null
+   * @var mixed
    */
   private $lock_file;
 

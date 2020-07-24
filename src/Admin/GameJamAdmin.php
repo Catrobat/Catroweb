@@ -15,9 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class GameJamAdmin extends AbstractAdmin
 {
   /**
-   * @throws Exception
+   * {@inheritdoc}
    *
-   * @return mixed
+   * @throws Exception
    */
   public function getNewInstance()
   {

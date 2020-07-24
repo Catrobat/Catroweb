@@ -102,7 +102,7 @@ class ProjectDataFixtures
     $project->setRemixMigratedAt(null);
     $project->setCatrobatVersion(1);
     $project->setCatrobatVersionName($config['version'] ?? '');
-    $project->setLanguageVersion($config['language version'] ?? 0.92);
+    $project->setLanguageVersion($config['language version'] ?? '0.92');
     $project->setUploadIp($config['upload_ip'] ?? '127.0.0.1');
     $project->setFilesize($config['file_size'] ?? 0);
     $project->setVisible(isset($config['visible']) ? 'true' === $config['visible'] : true);

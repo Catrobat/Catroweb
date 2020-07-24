@@ -37,7 +37,7 @@ class DownloadApkController extends AbstractController
     }
     catch (Exception $exception)
     {
-      throw new NotFoundHttpException($exception);
+      throw new NotFoundHttpException($exception->__toString());
     }
     if ($file->isFile())
     {

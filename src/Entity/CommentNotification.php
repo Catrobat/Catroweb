@@ -46,7 +46,7 @@ class CommentNotification extends CatroNotification
   /**
    * Returns the UserComment which triggered this CommentNotification.
    */
-  public function getComment(): UserComment
+  public function getComment(): ?UserComment
   {
     return $this->comment;
   }

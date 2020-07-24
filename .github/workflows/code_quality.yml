@@ -1,4 +1,16 @@
-name: Code Quality Checks
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** Code Quality **
+#
+#  Code quality checks must fulfill minimum the requirements at all time (Every pull request!).
+#  We should never allow those checks to fail before merging a pull request. Having failing pipelines over a longer
+#  period of time results in developers and code reviewers to ignore those checks, which again results in more and more
+#  errors over time. If necessary it is better to reduce the strictness of some checks in the corresponding config
+#  files, or explicitly tell the tools to ignore a certain pattern or line.
+#
+#  ToDo: As soon as Github Action have support: use templates/components to prevent the duplicated (build/cache) code
+#
+#
+name: Code Quality
 
 on:
   push:
@@ -6,52 +18,223 @@ on:
       - master
       - develop
   pull_request:
-  release:
-    types:
-      - created
+
 
 jobs:
 
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** Javascript **
+  #
+  # Eslint:
+  #  - Statically analyzes javascript code (depends on on node and npm)
+  #  - Config defined in .eslintrc.yml
+  #  - Automatic fix support
+  #  - More information at: (https://eslint.org/)
+  #
   eslint:
-    #  JS CodeStyle
-    name: ESLint
+    name: JavaScript [ESLint]
     runs-on: ubuntu-latest
-    # config defined in .eslintrc.yml
     steps:
       - uses: actions/checkout@v2
+
+      # Download and set up node (caching is enabled)
       - uses: actions/setup-node@v2.1.1
         with:
-          node-version: '10.x'
-      - run: npm install
+          node-version: '10.x'  # optional
+
+      # Optional - improve performance by caching
+      - id: npm-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Only install modules if there is no cache hit
+      - if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      # Run the checks -> test script must be defined in package.json
       - run: npm run test
 
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** Sass,CSS **
+  #
+  # StyleLint:
+  #  - Statically analyzes Sass and css files (depends on on node and npm)
+  #  - Config defined in .stylelintrc.json
+  #  - Automatic fix support
+  #  - More information at: https://stylelint.io/
+  #
   stylelint:
-    #  SCSS CodeStyle
-    name: StyleLint
+    name: Sass,CSS [StyleLint]
     runs-on: ubuntu-latest
-    # config defined in .stylelintrc.json
     steps:
       - uses: actions/checkout@v2
+
+      # Download and set up node (caching is enabled)
       - uses: actions/setup-node@v2.1.1
         with:
-          node-version: '10.x'
-      - run: npm install
+          node-version: '10.x'  # optional
+
+      # Optional - improve performance by caching
+      - id: npm-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Only install modules if there is no cache hit
+      - if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      # Run the checks -> test-style script msut be defined in package.json
       - run: npm run test-style
         continue-on-error: true  # TODO: remove after fixing all style errors
 
-  php-loc:
-    #  Measuring the size and analyzing the structure of the project (php)
-    name: PHP Loc
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** PHP **
+  #
+  #  Php-CS-Fixer, PhpStan and Psalm are included directly in the project using composer. Mainly due to the reason
+  #  that with this approach dependabot can keep those packages up to date for us. No manual upgrades are necessary.
+  #  Additionally we can not just require the latest (phar) version or corresponding docker action: In case of
+  #  (breaking) changes we would have a failing pipeline for all pull request.
+  #  The drawback? This packages might have incompatible dependencies and will result in a failing composer update.
+  #  As long as this is not the case there is no drawback. But as soon as this happens one might consider to remove
+  #  this packages from the project dependencies and only use the phar or docker versions. This is already the case
+  #  for phploc and phpcpd. Phploc can't fail the pipeline so we just require the latest phar. In the worst case
+  #  some statistics are wrong. With phpcpd we require a fixed version so it must be manually updated. (as long
+  #  as dependabot does not support custom github actions)
+  #
+  #  Why use both PhpStan and Psalm? In their current state they are able to find different possible problems
+  #  and the intersection of false positives is very small.
+  #
+
+  #
+  # Php-CS-Fixer:
+  #  - Reports code style issues in php files
+  #  - config defined in .php_cs(.dist)
+  #  - More information at: https://github.com/FriendsOfPHP/PHP-CS-Fixer
+  #
+  php-cs-fixer:
+    name: PHP Code Style [Php-CS-Fixer]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          wget https://phar.phpunit.de/phploc.phar
-          php phploc.phar src tests
 
+      # Optional - ensure composer configuration is valid
+      - run: composer validate
+
+      # Optional - improve performance by caching
+      - id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            bin/behat
+            bin/phpunit
+            bin/phpstan
+            bin/php-cs-fixer
+            bin/phpcf
+            bin/psalm
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      # Only install packages if there is no cache hit
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - run: bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes --verbose --format=txt
+  #
+  # PhpStan:
+  #
+  #  - Statically analyzes php files (The more strongly-typed the code is, the more information we get)
+  #  - config defined in phpstan.neon(.dist)
+  #  - More information at: https://phpstan.org/
+  #
+  phpstan:
+    name: PHP Static Analysis [Php-Stan]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Optional - ensure composer configuration is valid
+      - run: composer validate
+
+      # Optional - improve performance by caching
+      - id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            bin/behat
+            bin/phpunit
+            bin/phpstan
+            bin/php-cs-fixer
+            bin/phpcf
+            bin/psalm
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      # Only install packages if there is no cache hit
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - run: bin/phpstan analyze
+  #
+  # Psalm:
+  #
+  #  - Statically analyzes php files (The more strongly-typed the code is, the more information we get)
+  #  - config defined in psalm.xml(.dist)
+  #  - More information at: https://psalm.dev/
+  #
+  psalm:
+    name: PHP Static Analysis [Psalm]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: sudo apt-get install php-imagick
+
+      # Optional - ensure composer configuration is valid
+      - run: composer validate
+
+      # Optional - improve performance by caching
+      - id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            bin/behat
+            bin/phpunit
+            bin/phpstan
+            bin/php-cs-fixer
+            bin/phpcf
+            bin/psalm
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      # Only install packages if there is no cache hit
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - run: bin/psalm
+  #
+  # phpcpd (Php Copy Paste Detector):
+  #
+  #  - Checking for PHP code that was just copied
+  #  - More information at: https://github.com/sebastianbergmann/phpcpd
+  #
   phpcpd:
-    # Checking for PHP code that was just copied
-    name: PHP Copy Paste Detector
+    name: PHP Static Analysis [PhpCPD]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -59,106 +242,161 @@ jobs:
         uses: StephaneBour/actions-php-cpd@1.1
         with:
           args: src tests --exclude Admin --exclude Entity --exclude phpUnit
-
-  php-cs-fixer:
-    # Checking the Coding standard
-    name: PHP CS Fixer
-    runs-on: ubuntu-latest
-    # config defined in .php_cs(.dist)
-    steps:
-      - uses: actions/checkout@v2
-      - uses: docker://oskarstark/php-cs-fixer-ga:2.16.4
-        with:
-          args: --config=.php_cs.dist --diff --dry-run --allow-risky=yes --verbose --format=txt
-
-  phpstan:
-    # Additional static code quality checks
-    name: PHPStan
-    runs-on: ubuntu-latest
-    # config defined in phpstan.neon(.dist)
-    steps:
-      - uses: actions/checkout@v2
-      - name: PHPStan
-        uses: docker://oskarstark/phpstan-ga:0.12.33
-        env:
-          REQUIRE_DEV: true
-        with:
-          args: analyse
-
-  twig_lint:
-    # Lints a template and outputs encountered errors.
-    name: Twig Lint
+  #
+  # phpcf (Php Code Fixer):
+  #
+  #  - to search issues with deprecated functionality in newer interpreter versions..
+  #  - More information at: https://github.com/wapmorgan/PhpCodeFixer
+  #
+  phpcf:
+    name: PHP Static Analysis [PhpCF]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      # Optional - ensure composer configuration is valid
+      - run: composer validate
 
-      - name: Cache Composer packages
-        id: composer-cache
+      # Optional - improve performance by caching
+      - id: composer-cache
         uses: actions/cache@v2
         with:
-          path: vendor
+          path: |
+            vendor
+            bin/behat
+            bin/phpunit
+            bin/phpstan
+            bin/php-cs-fixer
+            bin/phpcf
+            bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+      # Only install packages if there is no cache hit
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Lint Twig
-        run: composer run-script console lint:twig templates/
+      - run: bin/phpcf src tests
+  #
+  # PhpLoc:
+  #
+  #  - Measuring the size and analyzing the structure of the project (php)
+  #  - More information at: https://github.com/sebastianbergmann/phploc
+  #
+  php-loc:
+    name: PHP Info [PhpLoc]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: wget https://phar.phpunit.de/phploc.phar
+      - run: php phploc.phar src tests
 
-  yaml_lint:
-    # Lints a file and outputs encountered errors. Specify all dirs but vendor
-    name: Yaml Lint
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** Twig **
+  #
+  #  - Lints a template and outputs encountered errors.
+  #
+  lint-twig:
+    name: Twig [Lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      # Optional - ensure composer configuration is valid
+      - run: composer validate
 
-      - name: Cache Composer packages
-        id: composer-cache
+      # Optional - improve performance by caching
+      - id: composer-cache
         uses: actions/cache@v2
         with:
-          path: vendor
+          path: |
+            vendor
+            bin/behat
+            bin/phpunit
+            bin/phpstan
+            bin/php-cs-fixer
+            bin/phpcf
+            bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+      # Only install packages if there is no cache hit
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Lint Yaml
-        run: composer run-script console lint:yaml translations/ config/ .github/ docker/ behat.yml.dist .eslintrc.yml
+      - run: bin/console lint:twig templates/
 
-  container_lint:
-    # Ensures that arguments injected into services match type declarations
-    name: Symfony Container Lint
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** YAML **
+  #
+  #  - Ensures all yaml files contain valid syntax
+  #
+  lint-yaml:
+    name: Yaml [Lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      # Optional - ensure composer configuration is valid
+      - run: composer validate
 
-      - name: Cache Composer packages
-        id: composer-cache
+      # Optional - improve performance by caching
+      - id: composer-cache
         uses: actions/cache@v2
         with:
-          path: vendor
+          path: |
+            vendor
+            bin/behat
+            bin/phpunit
+            bin/phpstan
+            bin/php-cs-fixer
+            bin/phpcf
+            bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+      # Only install packages if there is no cache hit
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Lint Container
-        run: composer run-script console lint:container
+      - run: bin/console lint:yaml translations/ config/ .github/ docker/ behat.yml.dist .eslintrc.yml
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** Container**
+  #
+  #  - Checks the services defined in the container
+  #  - Ensures that arguments injected into services match type declarations
+  #
+  lint-container:
+    name: Symfony Container [Lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Optional - ensure composer configuration is valid
+      - run: composer validate
+
+      # Optional - improve performance by caching
+      - id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            bin/behat
+            bin/phpunit
+            bin/phpstan
+            bin/php-cs-fixer
+            bin/phpcf
+            bin/psalm
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      # Only install packages if there is no cache hit
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - run: bin/console lint:container

@@ -93,11 +93,9 @@ class AllProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed $object
-   *
-   * @return Metadata
+   * {@inheritdoc}
    */
-  public function getObjectMetadata($object)
+  public function getObjectMetadata($object): Metadata
   {
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
   }

@@ -17,11 +17,6 @@ class ProgramRemixRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, ProgramRemixRelation::class);
   }
 
-  /**
-   * @param string[] $descendant_program_ids
-   *
-   * @return ProgramRemixRelation[]
-   */
   public function getAncestorRelations(array $descendant_program_ids): array
   {
     $qb = $this->createQueryBuilder('r');
@@ -36,11 +31,6 @@ class ProgramRemixRepository extends ServiceEntityRepository
     ;
   }
 
-  /**
-   * @param string[] $descendant_program_ids
-   *
-   * @return string[]
-   */
   public function getAncestorIds(array $descendant_program_ids): array
   {
     $parents_catrobat_ancestor_relations = $this->getAncestorRelations($descendant_program_ids);
@@ -48,11 +38,6 @@ class ProgramRemixRepository extends ServiceEntityRepository
     return array_unique(array_map(fn (ProgramRemixRelation $relation) => $relation->getAncestorId(), $parents_catrobat_ancestor_relations));
   }
 
-  /**
-   * @param string[] $descendant_program_ids
-   *
-   * @return ProgramRemixRelation[]
-   */
   public function getParentAncestorRelations(array $descendant_program_ids): array
   {
     $qb = $this->createQueryBuilder('r');
@@ -68,12 +53,6 @@ class ProgramRemixRepository extends ServiceEntityRepository
     ;
   }
 
-  /**
-   * @param string[] $ancestor_program_ids_to_exclude
-   * @param string[] $descendant_program_ids
-   *
-   * @return ProgramRemixRelation[]
-   */
   public function getDirectAndIndirectDescendantRelations(
     array $ancestor_program_ids_to_exclude, array $descendant_program_ids
   ): array {
@@ -91,12 +70,6 @@ class ProgramRemixRepository extends ServiceEntityRepository
     ;
   }
 
-  /**
-   * @param string[] $ancestor_program_ids_to_exclude
-   * @param string[] $descendant_program_ids
-   *
-   * @return string[]
-   */
   public function getDirectAndIndirectDescendantIds(
     array $ancestor_program_ids_to_exclude, array $descendant_program_ids
   ): array {
@@ -107,18 +80,13 @@ class ProgramRemixRepository extends ServiceEntityRepository
     return array_unique(array_map(fn (ProgramRemixRelation $relation) => $relation->getAncestorId(), $direct_and_indirect_descendant_relations));
   }
 
-  /**
-   * @param string[] $program_ids
-   *
-   * @return string[]
-   */
   public function getRootProgramIds(array $program_ids): array
   {
     $qb = $this->createQueryBuilder('r');
 
     $result_data = $qb
       ->select('r.ancestor_id')
-      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('r.ancestor_id', 'p.id'))
+      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('r.ancestor_id', 'p.id')->__toString())
       ->where('r.descendant_id IN (:program_ids)')
       ->andWhere($qb->expr()->eq('p.remix_root', $qb->expr()->literal(true)))
       ->setParameter('program_ids', $program_ids)
@@ -130,11 +98,6 @@ class ProgramRemixRepository extends ServiceEntityRepository
     return array_unique(array_map(fn ($row) => $row['ancestor_id'], $result_data));
   }
 
-  /**
-   * @param string[] $ancestor_program_ids
-   *
-   * @return ProgramRemixRelation[]
-   */
   public function getDescendantRelations(array $ancestor_program_ids): array
   {
     $qb = $this->createQueryBuilder('r');
@@ -149,11 +112,6 @@ class ProgramRemixRepository extends ServiceEntityRepository
     ;
   }
 
-  /**
-   * @param string[] $ancestor_program_ids
-   *
-   * @return string[]
-   */
   public function getDescendantIds(array $ancestor_program_ids): array
   {
     $catrobat_root_descendant_relations = $this->getDescendantRelations($ancestor_program_ids);
@@ -265,7 +223,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
     $qb = $this->createQueryBuilder('r');
 
     return $qb
-      ->select('r.ancestor_id', 'r.descendant_id')
+      ->select('r.ancestor_id, r.descendant_id')
       ->innerJoin('r.descendant', 'p', Join::WITH, 'r.descendant_id = p.id')
       ->where($qb->expr()->eq('IDENTITY(p.user)', ':user_id'))
       ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))

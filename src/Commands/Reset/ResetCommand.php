@@ -363,14 +363,15 @@ class ResetCommand extends Command
   private function remixGen(array $program_array, OutputInterface $output): void
   {
     $rand_start = random_int(2, 3);
-    $rand_intervall = random_int(3, 6);
+    $rand_interval = random_int(3, 6);
 
-    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_intervall)
+    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_interval)
     {
       $report_index = ($i + random_int(1, sizeof($program_array))) % sizeof($program_array);
       if (in_array($i, $this->reported, true) || in_array($report_index, $this->reported, true))
       {
-        $i = $i - $rand_intervall + 1;
+        $i -= $rand_interval;
+        ++$i;
         continue;
       }
 

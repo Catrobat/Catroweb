@@ -75,7 +75,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
 
     return $qb
       ->select('l')
-      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('p.id', 'l.program'))
+      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('p.id', 'l.program')->__toString())
       ->where($qb->expr()->in('l.user_id', ':user_ids'))
       ->andWhere($qb->expr()->neq('IDENTITY(p.user)', ':exclude_user_id'))
       ->andWhere($qb->expr()->notIn('p.id', ':exclude_program_ids'))

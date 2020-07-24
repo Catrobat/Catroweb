@@ -17,8 +17,6 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   }
 
   /**
-   * @param string[] $program_ids
-   *
    * @return ProgramRemixBackwardRelation[]
    */
   public function getParentRelations(array $program_ids): array

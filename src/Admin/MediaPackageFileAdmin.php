@@ -46,10 +46,11 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function prePersist($object): void
   {
+    /* @var MediaPackageFile $object */
     /** @var UploadedFile $file */
     $file = $object->file;
     if (null == $file)
@@ -61,12 +62,13 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    *
    * @throws ImagickException
    */
   public function postPersist($object): void
   {
+    /* @var MediaPackageFile $object */
     $file = $object->file;
     if (null === $file)
     {
@@ -76,10 +78,11 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function preUpdate($object): void
   {
+    /* @var MediaPackageFile $object */
     $object->old_extension = $object->getExtension();
 
     /** @var UploadedFile $file */
@@ -94,12 +97,13 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    *
    * @throws ImagickException
    */
   public function postUpdate($object): void
   {
+    /* @var MediaPackageFile $object */
     $file = $object->file;
     if (null === $file)
     {
@@ -109,18 +113,20 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function preRemove($object): void
   {
+    /* @var MediaPackageFile $object */
     $object->removed_id = $object->getId();
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function postRemove($object): void
   {
+    /* @var MediaPackageFile $object */
     $this->media_package_file_repository->remove($object->removed_id, $object->getExtension());
   }
 

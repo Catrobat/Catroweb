@@ -14,7 +14,10 @@ class InvalidCatrobatFileException extends RuntimeException
     $this->debug_message = $debug_message;
   }
 
-  public function getStatusCode(): int
+  /**
+   * @return int|string
+   */
+  public function getStatusCode()
   {
     return $this->getCode();
   }
