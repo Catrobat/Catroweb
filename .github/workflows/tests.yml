@@ -143,7 +143,7 @@ jobs:
           file: tests/testreports/coverage/phpunit/coverage.xml
           flags: phpunit # optional
           name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
+          # fail_ci_if_error: true # optional (default = false) ToDo: enable once their service stability has
 
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -268,7 +268,7 @@ jobs:
           file: tests/testreports/coverage/behat/coverage.xml
           flags: behat # optional
           name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
+          # fail_ci_if_error: true # optional (default = false)
 
       # Rerun #1
       - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests
