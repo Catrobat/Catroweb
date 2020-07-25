@@ -35,15 +35,23 @@ default:
                         socket_timeout: 60
                         dom_wait_timeout: 6000
 
-
+        DVDoug\Behat\CodeCoverage\Extension:
+            filter:
+                whitelist:
+                    include:
+                        directories:
+                            'src': ~
+            reports:
+                clover:
+                    target: tests/testreports/coverage/behat/coverage.xml
 
         emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
-              name: html
-              renderer: Twig
-              file_name: testreport
-              print_args: true
-              print_outp: true
-              loop_break: true
+            name: html
+            renderer: Twig
+            file_name: testreport
+            print_args: true
+            print_outp: true
+            loop_break: true
 
 
 # --------------------------------------------------------------------------------------------------

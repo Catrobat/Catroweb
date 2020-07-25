@@ -162,6 +162,9 @@
     "doctrine/sql-formatter": {
         "version": "1.1.0"
     },
+    "dvdoug/behat-code-coverage": {
+        "version": "v4.1.1"
+    },
     "egulias/email-validator": {
         "version": "2.1.17"
     },

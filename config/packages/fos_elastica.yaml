@@ -28,6 +28,7 @@ fos_elastica:
                         name: { boost: 3 }
                         private: ~
                         visible: ~
+                        debug_build: ~
                         getTagsString: ~
                         getExtensionsString: ~
                     persistence:

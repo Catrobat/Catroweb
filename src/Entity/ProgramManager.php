@@ -729,16 +729,16 @@ class ProgramManager
     );
   }
 
-  public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '0', ?string $flavor = null): array
+  public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '0', ?string $flavor = null, bool $is_debug_request = false): array
   {
-    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
     return $this->program_finder->find($program_query, $limit, ['from' => $offset]);
   }
 
-  public function searchCount(string $query, string $max_version = '0', ?string $flavor = null): int
+  public function searchCount(string $query, string $max_version = '0', ?string $flavor = null, bool $is_debug_request = false): int
   {
-    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
     $paginator = $this->program_finder->findPaginated($program_query);
 
@@ -977,7 +977,7 @@ class ProgramManager
     );
   }
 
-  private function programSearchQuery(string $query, string $max_version = '0', ?string $flavor = null): BoolQuery
+  private function programSearchQuery(string $query, string $max_version = '0', ?string $flavor = null, bool $is_debug_request = false): BoolQuery
   {
     $query = Util::escapeTerm($query);
 
@@ -997,6 +997,11 @@ class ProgramManager
 
     $category_query[] = new Terms('private', [false]);
     $category_query[] = new Terms('visible', [true]);
+
+    if (!$is_debug_request)
+    {
+      $category_query[] = new Terms('debug_build', [false]);
+    }
 
     if ('0' !== $max_version)
     {

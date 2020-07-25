@@ -15,6 +15,7 @@ Feature: As a visitor I want to be able to download projects
     Then the element "#url-download-small" should be visible
     And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
 
+  @disabled
   Scenario: Clicking the download button should deactivate the download button until download is finished
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
