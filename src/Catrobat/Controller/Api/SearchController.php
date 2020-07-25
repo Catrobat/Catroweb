@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Api;
 
+use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Responses\ProgramListResponse;
 use App\Entity\ProgramManager;
 use Elastica\Query;
@@ -12,9 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends AbstractController
 {
+  protected AppRequest $app_request;
   private int $DEFAULT_LIMIT = 20;
 
   private int $DEFAULT_OFFSET = 0;
+
+  public function __construct(AppRequest $app_request)
+  {
+    $this->app_request = $app_request;
+  }
 
   /**
    * @deprecated
@@ -48,8 +55,12 @@ class SearchController extends AbstractController
 
     try
     {
-      $programs = $program_manager->search($query, $limit, $offset, $max_version);
-      $numbOfTotalProjects = $program_manager->searchCount($query, $max_version);
+      $programs = $program_manager->search(
+        $query, $limit, $offset, $max_version, null, $this->app_request->isDebugBuildRequest()
+      );
+      $numbOfTotalProjects = $program_manager->searchCount(
+        $query, $max_version, null, $this->app_request->isDebugBuildRequest()
+      );
     }
     catch (Exception $e)
     {
