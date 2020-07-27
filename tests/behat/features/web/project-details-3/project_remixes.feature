@@ -76,7 +76,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Given I am on "/app"
     When I go to "/app/project/1/remix_graph"
     And I wait for the page to be loaded
-    And I click "#top-app-ba0r__back__btn-back"
+    And I click "#top-app-bar__back__btn-back"
     Then I should be on "/app/project/1"
 
   Scenario: Remix graph title is no link
