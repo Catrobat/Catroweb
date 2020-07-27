@@ -3,7 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
-  likeDetailUrl, stealProjectUrl,  apkPreparing, apkText, updateAppHeader, updateAppText,
+  likeDetailUrl, stealProjectUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
   btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText) {
   const self = this
 
@@ -75,7 +75,6 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     $.get(self.statusUrl, null, self.onResult)
   }
 
-
   self.createApk = function () {
     $('#apk-generate, #apk-generate-small').addClass('d-none')
     $('#apk-pending, #apk-pending-small').removeClass('d-none')
@@ -120,21 +119,18 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     }
   }
 
-  self.stealProgram = function() {
+  self.stealProgram = function () {
     $.ajax({
       url: self.stealProjectUrl,
       type: 'get',
       success: function (data) {
-        if (data === 0) window.location.reload();
+        window.location.reload()
       }
     }).fail(function (jqXHR, textStatus, errorThrown) {
-        // on 401 redirect to url to log in
-        if (jqXHR.status === 401) {
-          window.location.href = url
-        } else {
-          console.error('Stealing failure', jqXHR, textStatus, errorThrown)
-          self.showErrorAlert()
-        }
+      if (jqXHR.status !== 401) {
+        console.error('Stealing failure', jqXHR, textStatus, errorThrown)
+        self.showErrorAlert()
+      }
     })
   }
 
@@ -444,7 +440,6 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
       }
     })
   }
-
 
   $(function () {
     self.initProjectLike()

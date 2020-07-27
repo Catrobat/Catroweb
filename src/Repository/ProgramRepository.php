@@ -17,7 +17,7 @@ use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
-class   ProgramRepository extends ServiceEntityRepository
+class ProgramRepository extends ServiceEntityRepository
 {
   private array $cached_most_remixed_programs_full_result = [];
 

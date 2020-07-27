@@ -11,7 +11,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -66,7 +65,7 @@ class AllProgramsAdmin extends AbstractAdmin
   public function preUpdate($program): void
   {
     /** @var Program $program */
-    /** @var ModelMaFnager $model_manager */
+    /** @var ModelManager $model_manager */
     $model_manager = $this->getModelManager();
     $old_program = $model_manager->getEntityManager($this->getClass())
       ->getUnitOfWork()->getOriginalEntityData($program);
