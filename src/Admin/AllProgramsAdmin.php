@@ -66,7 +66,7 @@ class AllProgramsAdmin extends AbstractAdmin
   public function preUpdate($program): void
   {
     /** @var Program $program */
-    /** @var ModelManager $model_manager */
+    /** @var ModelMaFnager $model_manager */
     $model_manager = $this->getModelManager();
     $old_program = $model_manager->getEntityManager($this->getClass())
       ->getUnitOfWork()->getOriginalEntityData($program);

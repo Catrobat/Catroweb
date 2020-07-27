@@ -7,31 +7,28 @@ Feature: As a user I want to be able to steal projects from other users
       | 1  | Catrobat  |
       | 2  | OtherUser |
     And there are projects:
-      | id | name      | downloads | owned by  | apk_ready |
-      | 1  | project 1 | 5         | Catrobat  | true      |
-      | 2  | project 2 | 5         | OtherUser | true      |
+      | id | name      |  owned by  |
+      | 1  | project 1 |  Catrobat  |
+      | 2  | project 2 |  OtherUser |
 
   Scenario: The button should not be visible when I am not logged in
     When I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#steal-project-button" should not exists
+    But I should not see "#steal-button"
+
 
   Scenario: The button should not be visible when I am logged in and I am the owner of this project
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#steal-project-button" should not exists
+    But I should not see "#steal-button"
 
-  Scenario: The button should be visible when I am logged in and I am not the owner of this project
-    Given I log in as "Catrobat"
-    When I am on "/app/project/2"
-    And I wait for the page to be loaded
-    Then the element "#steal-project-button" should be visible
 
   Scenario: When clicking the button I am the owner of this project
     Given I log in as "Catrobat"
     When I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#steal-project-button" should be visible
-    When I click "#steal-project-button"
-    Then "project 2" should be owned by "Catrobat"
+    When I click "#steal-button"
+    And I wait for AJAX to finish
+    And I wait for the page to be loaded
+    And I should not see "#steal-button"

@@ -3,10 +3,13 @@
 namespace App\Catrobat\Controller\Api;
 
 use App\Catrobat\Responses\ProgramListResponse;
+use App\Catrobat\StatusCode;
 use App\Catrobat\Twig\AppExtension;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
+use App\Entity\User;
 use Exception;
+use http\Env\Response;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,8 +20,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProgramController extends AbstractController
 {
+    protected EntityManagerInterface $entity_manager;
   /**
-   * @deprecated
+   * @deprecated v
    *
    * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"}, methods={"GET"})
    *
@@ -42,32 +46,35 @@ class ProgramController extends AbstractController
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
 
-    /**
-     * @deprecated
-     *
-     * @Route("/api/project/{id}/steal", name="api_project_steal", methods={"GET"})
-     *
-     */
+  /**
+   *
+   *
+   * @Route("/api/project/{id}/steal", name="api_project_steal", methods={"GET"})
+   *
+   */
+  public function stealProgram( string $id, ProgramManager $program_manager): JsonResponse
+  {
+      $success = "success";
+      $fail = -1;
 
-    public function stealProgram( string $id, ProgramManager $program_manager): JsonResponse
+    $entityManager = $this->getDoctrine()->getManager();
+    $program = $program_manager->find($id);
+    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program))
     {
-        $program = $program_manager->find($id);
-        if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program))
-        {
-            throw $this->createNotFoundException('Unable to find Project entity.');
-        }
-
-        $obj = new stdClass();
-        $obj->user = new stdClass();
-        $obj->user->id = $this->getUser()->getId();
-        $data[] = $obj;
-        $user = $this->getUser();
-
-        $program->setUser($user);
-
-
-        return JsonResponse::create($data);
+        throw $this->createNotFoundException('Unable to find Project entity.');
     }
+
+
+    $user = $this->getUser();
+    $program->setUser($user);
+    $entityManager->persist($program);
+    $entityManager->flush();
+
+    $response = empty($user) ? $fail : $success;
+
+
+    return JsonResponse::create($response);
+  }
 
 
   /**

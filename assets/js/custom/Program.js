@@ -121,16 +121,12 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   }
 
   self.stealProgram = function() {
-    console.log('You clicked');
     $.ajax({
       url: self.stealProjectUrl,
       type: 'get',
       success: function (data) {
-        $("project-user").html('<a href="{{ url(\'profile\', { id : program.user.id }) }}"' +
-            'class="icon-text align-bottom" id="program-owner-username">' +
-            '<i class="material-icons pr-2" id="user-profile-icon">person</i>' + data + '</a>');
+        if (data === 0) window.location.reload();
       }
-
     }).fail(function (jqXHR, textStatus, errorThrown) {
         // on 401 redirect to url to log in
         if (jqXHR.status === 401) {
@@ -449,16 +445,8 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     })
   }
 
-  self.initProjectSteal = function(){
-    const $container = $('#project-steal')
-    const $button = $('#steal-project-button', $container)
-    $button.on('click', function () {
-      self.stealProgram()
-    })
-  }
 
   $(function () {
     self.initProjectLike()
-    self.initProjectSteal()
   })
 }

@@ -1,5 +1,6 @@
 <button id="steal-project-button"
-        class="btn btn-outline-primary btn-block">
+        class="btn btn-outline-primary btn-block"
+        onclick = "program.stealProgram()">
   <i class="material-icons d-none">
     {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'steal-project' ~ suffix|default(), 'small': true} %}
   </i>
