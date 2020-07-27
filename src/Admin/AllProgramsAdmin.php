@@ -6,6 +6,7 @@ use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use App\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
