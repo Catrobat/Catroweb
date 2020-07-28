@@ -1,47 +1,53 @@
-@homepage @disabled
-Feature: Open Authentication
-  I want to be able to sign in as Google user
+@web @security
+Feature:
+  As a user, I want to login using OAuth services
 
   Background:
     Given there are users:
-      | name        | password | token      | email               | id |
-      | Catrobat    | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
-      | AlreadyinDB | 642135   | cccccccccc | dev2@pocketcode.org | 2  |
-
-  @javascript
-  Scenario: Try to login with a new user into Google+ where the username already exists
-    Given I am on "/app/login"
-    And I wait for the page to be loaded
-    When I log in to Google with valid credentials
-    And I choose the username 'AlreadyinDB'
-    Then I should see "Username already taken, please choose a different one."
+      | id | name       | oauth_user |
+      | 1  | Catrobat   | true       |
+      | 2  | TestUser   | false      |
 
 
-  @javascript
-  Scenario: It should be possible to change the E-Mail address on the profile page and login again with the same Google+ account
-    Given I am on "/app/login"
-    And I wait for the page to be loaded
-    When I log in to Google with valid credentials
-    And I choose the username 'PocketGoogler'
-    Then I should be logged in
-    And the following users exist in the database:
-      | name          | email                      | google_uid            | google_name | country |
-      | PocketGoogler | pocketcodetester@gmail.com | 105155320106786463089 |             | de      |
-    And I am on "/app/emailEdit"
-      | name          | email                      | facebook_uid | facebook_name | google_uid            | google_name | country |
-      | PocketGoogler | pocketcodetester@gmail.com |              |               | 105155320106786463089 |             | de      |
-    And I am on "/app/emailEdit"
-    And I wait for AJAX to finish
-    Then I fill in "email" with "pocket-code-tester@gmail.com"
-    When I click the "save-edit" button
-    And I wait for the page to be loaded
-    Then I should be on "/app/user/edit"
-    Then the "#email-text" element should contain "pocket-code-tester@gmail.com"
-    When I go to "/logout"
-    Then I should not be logged in
-    When I trigger Google login with approval prompt "auto"
-    And I click Google login link "once"
-    And I wait for AJAX to finish
-    Then I should be logged in
-    And I am on "/app/user"
-    Then the "#email" element should contain "pocket-code-tester@gmail.com"
+  Scenario: When I login for the first time using OAuth service I should see OAuth Info popup
+      Given I  log in as "Catrobat"
+      Then I should see "External account sign in information"
+      And I logout
+      And  I  log in as "Catrobat"
+      Then I should not see "External account sign in information"
+      Given I log in as "TestUser"
+      Then I should not see "External account sign in information"
+
+
+
+     Scenario: When I click link in the Oauth Info popup I should be redirected on my profile
+       Given I log in as "Catrobat"
+       Then I should see "External account sign in information"
+       And I click on the "here" link
+       Then I should be on "/pocketcode/user"
+
+
+     Scenario: OAuth users should be able to create a new password
+       Given I log in as "Catrobat"
+       And I am on "/app/user"
+       Then I should see "Create new password"
+       Then I click "#edit-password-button"
+       And I fill in "password" with "test12"
+       And I fill in "repeat-password" with "test12"
+       And I click "#save-password"
+       And I wait for AJAX to finish
+       Then I should see "Success"
+       And I click ".swal2-confirm"
+       Then I should see "Password"
+
+      Scenario: I should see google, facebook, and apple log in buttons on the login page
+        Given I am on "app/login"
+        Then the element "#btn-login-google" should be visible
+        And the element "#btn-login-facebook" should be visible
+        And the element "#btn-login-apple" should be visible
+        And I click "#btn-login-google"
+        Then the element "#termsModal" should be visible
+
+
+
+

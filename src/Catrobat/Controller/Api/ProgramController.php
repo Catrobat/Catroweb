@@ -43,6 +43,31 @@ class ProgramController extends AbstractController
   }
 
   /**
+   * @Route("/api/project/{id}/steal", name="api_project_steal", methods={"GET"})
+   */
+  public function stealProgram(string $id, ProgramManager $program_manager): JsonResponse
+  {
+    $success = 'success';
+    $fail = 'fail';
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $program = $program_manager->find($id);
+    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program))
+    {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    $user = $this->getUser();
+    $program->setUser($user);
+    $entityManager->persist($program);
+    $entityManager->flush();
+
+    $response = empty($user) ? $fail : $success;
+
+    return JsonResponse::create($response);
+  }
+
+  /**
    * @deprecated
    *
    * @Route("/api/project/{id}/likes", name="api_project_likes", methods={"GET"})

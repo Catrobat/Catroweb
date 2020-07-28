@@ -3,7 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
-  likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
+  likeDetailUrl, stealProjectUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
   btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText) {
   const self = this
 
@@ -25,6 +25,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.wowWhite = wowWhite
   self.wowBlack = wowBlack
   self.reactionsText = reactionsText
+  self.stealProjectUrl = stealProjectUrl
   self.download = function (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
     downloadPbID, downloadIconID) {
     const downloadProgressBar = $(downloadPbID)
@@ -116,6 +117,21 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     if (bgDarkPopupInfo.length > 0 && data.status === 'ready') {
       bgDarkPopupInfo.remove()
     }
+  }
+
+  self.stealProgram = function () {
+    $.ajax({
+      url: self.stealProjectUrl,
+      type: 'get',
+      success: function (data) {
+        window.location.reload()
+      }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      if (jqXHR.status !== 401) {
+        console.error('Stealing failure', jqXHR, textStatus, errorThrown)
+        self.showErrorAlert()
+      }
+    })
   }
 
   self.createLinks = function () {
