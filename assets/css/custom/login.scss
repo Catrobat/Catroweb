@@ -217,3 +217,18 @@ hr {
 .show-hide-password {
   display: flex;
 }
+
+.log-in-text {
+  vertical-align: middle;
+  font-size: 18px;
+}
+.google-logo, .fb-logo{
+  transform: scale(0.6, 0.6);
+  -ms-transform: scale(0.6, 0.6);
+  -webkit-transform: scale(0.6, 0.6);
+}
+.apple-logo{
+  transform: scale(1.2, 1.2);
+  -ms-transform: scale(1.2, 1.2);
+  -webkit-transform: scale(1.2, 1.2);
+}

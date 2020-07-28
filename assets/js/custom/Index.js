@@ -116,4 +116,23 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
     }
     )
   })
+  self.showOauthPopup = function (firstOauthLoginUrl, informationText, title, okTranslation) {
+    $.get(firstOauthLoginUrl,
+      function (data) {
+        if (data.first_login === true) {
+          var isshow = localStorage.getItem('oauthSignIn')
+          if (isshow == null) {
+            localStorage.setItem('oauthSignIn', 1)
+            Swal.fire({
+              title: title,
+              html: informationText,
+              showCancelButton: false,
+              confirmButtonText: okTranslation,
+              icon: 'info'
+            }
+            )
+          }
+        }
+      })
+  }
 }

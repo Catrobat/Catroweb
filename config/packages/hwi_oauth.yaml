@@ -1,0 +1,41 @@
+hwi_oauth:
+    # list of names of the firewalls in which this bundle is active, this setting MUST be set
+    firewall_names: [main]
+
+    fosub:
+      username_iterations: 30
+      properties:
+        google: google_id
+        facebook: facebook_id
+        apple: apple_id
+
+    # https://github.com/hwi/HWIOAuthBundle/blob/master/Resources/doc/2-configuring_resource_owners.md
+    resource_owners:
+        google:
+            type:                google
+            client_id:           '%env(GOOGLE_ID)%'
+            client_secret:       '%env(GOOGLE_SECRET)%'
+            scope:               'email profile'
+            options:
+                display: popup
+                csrf: true
+        facebook:
+            type:                facebook
+            client_id:           '%env(FB_ID)%'
+            client_secret:       '%env(FB_SECRET)%'
+            scope:               'email'
+            options:
+                display: popup #dialog is optimized for popup window
+                auth_type: rerequest # Re-asking for Declined Permissions
+                csrf: true
+        apple:
+            type:                apple
+            client_id:           '%env(APPLE_ID)%'
+            client_secret:       '%env(APPLE_SECRET)%'
+            scope:               'name email'
+            options:
+                display: popup #dialog is optimized for popup window
+                csrf: true
+
+
+

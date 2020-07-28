@@ -24,10 +24,12 @@
         "friendsofsymfony/jsrouting-bundle": "^2.6",
         "friendsofsymfony/rest-bundle": "^2.7",
         "google/apiclient": "^2.4",
+        "hwi/oauth-bundle": "v1.2.x-dev",
         "incenteev/composer-parameter-handler": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.6",
         "liip/theme-bundle": "^1.7",
         "php-http/guzzle6-adapter": "^2.0",
+        "php-http/httplug-bundle": "^1.18",
         "php-http/message": "^1.8",
         "sensio/framework-extra-bundle": "^5.5",
         "sonata-project/admin-bundle": "^3.68",
@@ -126,12 +128,16 @@
 
     "extra": {
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": true
         },
         "require": "^4.4"
     },
     "repositories": [{
         "type": "vcs",
         "url": "https://github.com/Catrobat/Catroweb-API"
-    }]
+    }, {
+            "type": "vcs",
+            "url":  "git@github.com:leno12/HWIOAuthBundle.git"
+        }]
+
 }

@@ -865,6 +865,15 @@ services:
     tags:
       - { name: "open_api_server.api", api: "authentication" }
 
+
+  #=====================================================================================================================
+  # HWIOAUTH
+  #=====================================================================================================================
+  my.oauth_aware.user_provider.service:
+    class: App\Catrobat\Security\FOSUBUserProvider
+    arguments:
+      - '@fos_user.user_manager'
+      - {google: google_id, facebook: facebook_id, apple: apple_id}
   api.utility:
     class: App\Api\UtilityApi
     tags:
