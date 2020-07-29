@@ -582,11 +582,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Download the project"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Please choose a username:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 
 search:
   dotdotdot: Search...
