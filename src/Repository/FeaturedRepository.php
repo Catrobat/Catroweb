@@ -32,9 +32,9 @@ class FeaturedRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
     $qb->orderBy('e.priority', 'DESC');
-
+    $qb->leftJoin('e.program', 'program');
     APIQueryHelper::addMaxVersionCondition($qb, $max_version);
-    APIQueryHelper::addFlavorCondition($qb, $flavor);
+    APIQueryHelper::addFlavorCondition($qb, $flavor, 'program');
     APIQueryHelper::addPlatformCondition($qb, $platform);
 
     return $qb->getQuery()->getResult();
@@ -50,9 +50,9 @@ class FeaturedRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->isNotNull('e.program'))
     ;
     $qb->orderBy('e.priority', 'DESC');
-
+    $qb->leftJoin('e.program', 'program');
     APIQueryHelper::addMaxVersionCondition($qb, $max_version);
-    APIQueryHelper::addFlavorCondition($qb, $flavor);
+    APIQueryHelper::addFlavorCondition($qb, $flavor, 'program');
     APIQueryHelper::addPlatformCondition($qb, $platform);
 
     try

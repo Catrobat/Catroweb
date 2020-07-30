@@ -11,15 +11,24 @@ Feature: Pocketcode homepage
       | 2  | User1    |
       | 3  | Catrobat2|
 
+    And there are extensions:
+      | id | name         | prefix     |
+      | 1  | Embroidery   | Embroidery |
+
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 3  | embroidery |
+
     And there are projects:
-      | id | name      | owned by |
-      | 1  | project 1 | Catrobat |
-      | 2  | project 2 | Catrobat |
-      | 3  | project 3 | User1    |
-      | 4  | project 4 | User1    |
-      | 5  | project 5 | User1    |
-      | 6  | project 6 | Catrobat2|
-      | 7  | project 7 | Catrobat2|
+      | id | name      | owned by | extensions | flavor     |
+      | 1  | project 1 | Catrobat | Embroidery | pocketcode |
+      | 2  | project 2 | Catrobat | Embroidery | embroidery |
+      | 3  | project 3 | User1    |            | pocketcode |
+      | 4  | project 4 | User1    |            | embroidery |
+      | 5  | project 5 | User1    |            | pocketcode |
+      | 6  | project 6 | Catrobat2|            | pocketcode |
+      | 7  | project 7 | Catrobat2|            | pocketcode |
 
     And following projects are featured:
       | name      | url                   | active | priority |
@@ -35,7 +44,7 @@ Feature: Pocketcode homepage
       | project 5 | 1      | 3        |
       | project 6 | 1      | 2        |
 
-    Given there are Scratch remix relations:
+    And there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
       | 70058680          | 6                 |
       | 70058680          | 7                 |
@@ -87,3 +96,12 @@ Feature: Pocketcode homepage
     Then the element "#example" should exist
     And the "#example" element should contain "project 5"
     And the "#example" element should contain "project 6"
+
+  Scenario: Extension flavored homepage
+    Given I am on "/embroidery"
+    And I wait for the page to be loaded
+    Then the element "#newest" should exist
+    And the "#newest" element should contain "project 1"
+    And the "#newest" element should contain "project 2"
+    And the "#newest" element should contain "project 4"
+    And the "#newest" element should not contain "project 3"
