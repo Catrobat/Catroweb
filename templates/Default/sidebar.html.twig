@@ -118,58 +118,6 @@
         </a>
       </li>
     {% endif %}
-
-    <hr>
-
-    {# Programs #}
-    <li id="nav-featured" class="nav-item">
-      <a class="nav-link" href="{{ path('index') }}#featured" id="btn-featured">
-        <span class="sidebar-link-icon material-icons">star</span>
-        <span class="sidebar-link-text">{{ 'programs.featured'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
-
-    <li id="nav-newest" class="nav-item" style="display:none">
-      <a class="nav-link" href="{{ path('index') }}#newest" id="btn-newest">
-        <span class="sidebar-link-icon material-icons">schedule</span>
-        <span class="sidebar-link-text">{{ 'programs.newest'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
-
-    <li id="nav-recommended" class="nav-item" style="display:none">
-      <a class="nav-link" href="{{ path('index') }}#recommended" id="btn-recommended">
-        <span class="sidebar-link-icon material-icons">thumb_up</span>
-        <span class="sidebar-link-text">{{ 'programs.recommended'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
-
-    <li id="nav-scratch-remixes" class="nav-item" style="display:none">
-      <a class="nav-link" href="{{ path('index') }}#scratchRemixes" id="btn-recommended">
-        <span class="sidebar-link-icon material-icons">call_split</span>
-        <span class="sidebar-link-text">{{ 'programs.scratchremixes'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
-
-    <li id="nav-most-downloaded" class="nav-item" style="display:none">
-      <a class="nav-link" href="{{ path('index') }}#mostDownloaded" id="btn-most-downloaded">
-        <span class="sidebar-link-icon material-icons">get_app</span>
-        <span class="sidebar-link-text">{{ 'programs.most.downloaded'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
-
-    <li id="nav-most-viewed" class="nav-item" style="display:none">
-      <a class="nav-link" href="{{ path('index') }}#mostViewed" id="btn-most-viewed">
-        <span class="sidebar-link-icon material-icons">visibility</span>
-        <span class="sidebar-link-text">{{ 'programs.most.viewed'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
-
-    <li id="nav-random" class="nav-item" style="display:none">
-      <a class="nav-link" href="{{ path('index') }}#random" id="btn-random">
-        <span class="sidebar-link-icon material-icons">casino</span>
-        <span class="sidebar-link-text">{{ 'programs.random'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
   </ul>
   <ul class="list-unstyled">
     {% if sidebar_ul is not empty %}

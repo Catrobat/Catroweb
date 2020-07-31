@@ -29,6 +29,15 @@ const Main = function () {
     })
   }
 
+  // ---- History State
+  window.addEventListener('popstate', function (event) {
+    if (event.state != null) {
+      if (event.state.type === 'ProjectList' && event.state.full === true) {
+        $('#' + event.state.id).data('list').openFullView()
+      }
+    }
+  })
+
   // ----SideBar
   let sidebar, sidebarToggleBtn
   const fnCloseSidebar = function () {
@@ -93,7 +102,8 @@ const Main = function () {
 
     let curX = null
     let startTime = null
-    let startX = null; let startY = null
+    let startX = null
+    let startY = null
 
     let opening = false
     let closing = false

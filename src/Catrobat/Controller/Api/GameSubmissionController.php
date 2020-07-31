@@ -52,6 +52,7 @@ class GameSubmissionController extends AbstractController
 
   /**
    * @deprecated
+   * Unused since 2020-07 (new project list)
    *
    * @Route("/api/gamejam/sampleProjects.json", name="api_gamejam_sample_programs", methods={"GET"})
    *
@@ -81,6 +82,7 @@ class GameSubmissionController extends AbstractController
 
   /**
    * @deprecated
+   * Unused since 2020-07 (new project list)
    *
    * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions", methods={"GET"})
    *

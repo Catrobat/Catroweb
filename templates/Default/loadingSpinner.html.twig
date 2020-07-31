@@ -1,4 +1,5 @@
-<div class="circular-progress" {% if progressbar_id is defined %} id="{{ progressbar_id }}" {% endif %}>
+{# Material Loading Spinner / Circular Progress Bar #}
+<div class="circular-progress" {% if spinner_id is defined %} id="{{ spinner_id }}" {% endif %}>
   <div role="progressbar" class="mdc-circular-progress mdc-circular-progress--indeterminate
    {% if small is defined %} mdc-circular-progress--small {% endif %}">
     <div class="mdc-circular-progress__indeterminate-container">

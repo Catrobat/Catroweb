@@ -10,7 +10,7 @@
   <button id="apk-pending{{ suffix|default('') }}"
           class="btn btn-outline-primary btn-block d-none">
     <i class="material-icons align-bottom text-left">
-      {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'apk-progressbar' ~ suffix|default(), 'small': true} %}
+      {% include 'Default/loadingSpinner.html.twig' with {'progressbar_id': 'apk-progressbar' ~ suffix|default(), 'small': true} %}
     </i>
     <span>{{ "apk.preparing"|trans({}, "catroweb") }}</span>
   </button>
@@ -20,7 +20,7 @@
   <button id="apk-download{{ suffix|default('') }}"
           class="btn btn-outline-primary btn-block d-none">
     <i class="material-icons text-left d-none">
-      {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'download-spinner' ~ suffix|default(), 'small': true} %}
+      {% include 'Default/loadingSpinner.html.twig' with {'progressbar_id': 'download-spinner' ~ suffix|default(), 'small': true} %}
     </i>
     <i class="material-icons align-bottom">casino</i>
     <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
