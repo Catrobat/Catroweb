@@ -94,14 +94,6 @@ class TutorialController extends AbstractController
   }
 
   /**
-   * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
-   */
-  public function gameJamAction(): Response
-  {
-    return $this->render('help/gamejam.html.twig');
-  }
-
-  /**
    * @param mixed $page
    */
   private function generateBlocks($page): array

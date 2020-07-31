@@ -215,12 +215,6 @@ class ProgramManager
     $program->setExtractedDirectoryHash($extracted_file->getDirHash());
     $this->addTags($program, $extracted_file, $request->getLanguage());
 
-    if (null !== $request->getGameJam())
-    {
-      $program->setGamejam($request->getGameJam());
-      $program->setGameJamSubmissionDate(TimeUtils::getDateTime());
-    }
-
     $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
 
     $this->entity_manager->persist($program);

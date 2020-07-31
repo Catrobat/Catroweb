@@ -73,7 +73,6 @@ Feature:
     And I fill in "password" with "123456"
     Then I press "Login"
     And I wait for the page to be loaded
-    And I should see "Game Design"
 
   Scenario: When visiting the page directly to the login page, after login i should be on the index page
     Given  there are projects:

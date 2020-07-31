@@ -142,13 +142,6 @@ sonata_admin:
                     - catrowebadmin.block.tools.broadcast
                     - catrowebadmin.block.tools.mail
 
-            sonata.admin.group.gamejams:
-                label:           GameJam
-                label_catalogue: Catrobat
-                icon:            '<i class="fa fa-cogs"></i>'
-                items:
-                    - catrowebadmin.block.gamejam
-
             sonata.admin.group.extensions:
                 label:           Extensions
                 label_catalogue: Catrobat

@@ -57,11 +57,6 @@ class AddProgramRequestTest extends TestCase
     $this->assertSame('127.0.0.1', $this->add_program_request->getIp());
   }
 
-  public function testNotAGameJam(): void
-  {
-    $this->assertNull($this->add_program_request->getGameJam());
-  }
-
   public function testHasALanguage(): void
   {
     $this->assertNull($this->add_program_request->getLanguage());

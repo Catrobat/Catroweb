@@ -13,7 +13,6 @@ use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
 use App\Entity\Flavor;
-use App\Entity\GameJam;
 use App\Entity\Notification;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
@@ -43,7 +42,6 @@ use App\Repository\UserRemixSimilarityRelationRepository;
 use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Symfony2Extension\Context\KernelDictionary;
-use DateInterval;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
@@ -240,42 +238,6 @@ trait SymfonySupport
     {
       $filesystem->remove($file);
     }
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function insertDefaultGameJam(array $config = []): GameJam
-  {
-    $game_jam = new GameJam();
-    $game_jam->setName($config['name'] ?? 'pocketalice');
-    $game_jam->setHashtag($config['hashtag'] ?? null);
-
-    if (isset($config['flavor']) && 'no-flavor' !== $config['flavor'])
-    {
-      $game_jam->setFlavor($config['flavor']);
-    }
-    elseif (!isset($config['flavor']))
-    {
-      $game_jam->setFlavor('pocketalice');
-    }
-
-    $start_date = TimeUtils::getDateTime();
-    $start_date->sub(new DateInterval('P10D'));
-
-    $end_date = TimeUtils::getDateTime();
-
-    $end_date->add(new DateInterval('P10D'));
-
-    $game_jam->setStart($config['start'] ?? $start_date);
-    $game_jam->setEnd($config['end'] ?? $end_date);
-
-    $game_jam->setFormUrl($config['formurl'] ?? 'https://catrob.at/url/to/form');
-
-    $this->getManager()->persist($game_jam);
-    $this->getManager()->flush();
-
-    return $game_jam;
   }
 
   public function insertUser(array $config = [], bool $andFlush = true): User
