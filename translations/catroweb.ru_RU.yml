@@ -1,0 +1,934 @@
+---
+#homepage translation
+localLanguage: Английский
+username: Имя пользователя
+password: Пароль
+createNewPassword: Create new password
+accountSettings: Настройки аккаунта
+email: E-Mail
+aboutPocketCode: О Pocket Code
+aboutCatrobat: О проекте Catrobat
+tutorials: Обучение
+googlePlay: Google Play
+iosAppStore: Магазин приложений iOS
+passwordsNoMatch: Пароли не совпадают.
+error: Ошибка
+cancel: Отменить
+report: Сообщить о проблеме
+deleteIt: Да, удалить!
+reportIt: Да, сообщить об этом!
+areYouSure: Вы уверены?
+noWayOfReturn: Это безвозвратное действие!
+download: Скачать проект
+description: Описание
+noDescription: Без описания.
+credits: Титры
+noCredits: No credits available.
+country: Страна
+loginText: Войти
+privacyPolicy: Политика конфиденциальности
+imprint: Импринт
+programDetails: Подробности
+somethingWentWrong: 'Упс, что-то пошло не так.'
+pleaseTryAgain: 'Пожалуйста, попробуй еще раз!'
+oldVersionError: 'Пожалуйста, скачай последнюю версию Pocket Code!'
+more: 'больше'
+less: 'меньше'
+show-more: 'Развернуть'
+show-less: 'Спрятать'
+ok: Ok
+clickToDownloadProgram: 'Чтобы скачать пример проекта, нажми %link_start% здесь %link_end%.'
+registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
+notifications: 'Уведомления'
+allNotifications: 'Все уведомления'
+FollowersNotifications: 'Подписчики'
+LikeNotifications: 'Лайки'
+likesNotificationsTitle: 'Reaction notifications'
+followersNotificationsTitle: 'Follower notifications'
+commentsNotificationsTitle: 'Comment notifications'
+remixNotificationsTitle: 'Remix notifications'
+CommentNotifications: 'Комментарии'
+RemixNotifications: 'Ремиксы'
+oldnotification: 'Прочитанные уведомления'
+wellDone: "Великолепно!"
+done: "Готово!"
+notificationsReadMessage: "Похоже, что у вас нет уведомлений."
+notificationsClearedMessage: "Все уведомления были отмечены как прочитанные."
+deleteNotificationConfirmation: "Вы уверены?"
+notificationDeleteMessage: "Вы уверены, что хотите удалить это уведомление?"
+notificationDeleteAllMessage: "Вы Уверены, что хотите удалить все сообщения?"
+confirmMessage: "Да, удалить это"
+cancelMessage: "Отменить"
+notificationsAllMessagesDeleted: "Все уведомления были удалены."
+notificationDeletedMessage: "Notification has been successfully deleted."
+clearAllNotificationsButtonTitle: "Отметить все как прочитанные"
+deleteAllNotificationsButtonTitle: "Delete all"
+notificationsClearError: "Невозможно отметить оповещения, как прочитанные!"
+notificationsDeleteError: "Unable to delete notifications!"
+pleaseWait: "Пожалуйста, подождите..."
+projects: "Проекты"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What projects are recommended here?'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Вы подписаны
+  followers: Подписчики
+  follow: Подписаться
+  username: Пользователь
+  followsMe: Подпишись на меня
+  noFollowing: Вы ни на кого не подписаны.
+  noFollowers: Сейчас у вас нет подписчиков 
+  noOtherFollowing: В настоящее время нет подписанных пользователей.
+  noOtherFollowers: Нет подписчиков
+  followError: "Не удалось подписаться на выбранного пользователя!"
+  unfollowError: "Невозможно отписаться от выбранного пользователя."
+  unfollowQuestion: "Вы действительно хотите отписаться от этого пользователя?"
+  unfollowButton: "Вы отписались от %username%"
+programs:
+  welcome:
+    title: Добро пожаловать в %theme% от Catrobat
+    subtitle: Создавайте истории, игры и многое другое...
+    download: Загрузите приложение
+    statistics: Больше статистики
+  featured: Популярное
+  example: Примеры
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noPrograms: There are currently no projects.
+  deleteConfirmation: |+
+    Вы уверены?
+    Вы уверены, что хотите удалить "%programName%"?
+    Это безвозвратное действие!
+    Да, удалить!
+    Отмена
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Вы точно хотите пожаловаться на этот комментарий?
+  deleteCommentConfirmation: Вы уверены, что хотите удалить этот комментарий?
+  deleteAccountConfirmation: |+
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: Вы не можете использовать грубые слова в вашем описании!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
+  most:
+    viewed: Самые просматриваемые
+    downloaded: Самые скачиваемые
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% загрузок'
+  sample: Example projects
+  views: '%views% просмотров'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "Все"
+  remixes: '{0}0 ремиксов |{1}1 ремикс |]1,Inf]%remixes% ремиксов'
+  newRemixesNotificationTitle: '|{1}"%programName%" имеет 1 новый ремикс: |]1,Inf] "%programName%" имеет %remixes% новых ремиксов:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Пожаловаться
+  reportProgram: Report project
+  languageVersion: 'Версия языка Catrobat: %languageVersion%'
+  reportLoginText: Пожалуйста, %login% чтобы пожаловаться на этот проект.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Введите причину
+  reportRadioButtonInappropriate: Это неуместно
+  reportRadioButtonCopyright: Нарушение авторских прав
+  reportRadioButtonSpam: Это спам
+  reportRadioButtonDislike: Мне не нравится
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeader: Обновить приложение
+  updateAppText: Please update your app to the newest version to be able to download this project.
+  btnClosePopup: Ок
+  checkout_this_program: Checkout this Catrobat project
+  show_more: Показать ещё
+  comments: Комментарии
+  send: Отправить
+  delete: Удалить
+  report: Сообщить о проблеме
+  report_popup: Комментарий добавлен.
+  report_popup_header: Жалоба отправлена
+  deleted_popup: Комментарий был успешно удален.
+  deleted_popup_header: '﻿Удалено'
+  noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Админ.
+  editDescription: Edit the project description
+  saveDescription: Сохранить изменение описания
+  editCredits: Edit the project credits
+  saveCredits: Save credits change
+  addComment: Написать комментарий
+  thumbsUp: Палец вверх!
+  smile: Улыбка!
+  love: Люблю!
+  wow: Вааау!
+  linkTitle: Link
+  link: Copy project link to clipboard
+  reactionsText: Лайки
+remixGraph:
+  title: Ремиксы
+  showRemixGraph: 'Показать перемешанный граф'
+  by: 'на'
+  open: 'Открыть '
+  showPaths: 'Показать Пути'
+  programNotAvailableErrorTitle: 'Извините...'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailable: 'Недоступно'
+  programUnknownUser: 'Неизвестный пользователь'
+noReply: Это автоматическое сообщение - Пожалуйста, не отвечайте непосредственно на это письмо.
+accountConfirmation:
+  subject: Подтверждение учетной записи Catrobat
+  message: |
+    Уважаемый %username%.
+    Чтобы закончить активацию вашей учетной записи - пожалуйста, посетите %confirmationUrl%
+    Эта ссылка может быть использована только один раз для подтверждения вашей учетной записи.
+    С наилучшими пожеланиями,
+    Ваша команда Catrobat.
+  messageHtml: |
+    <p>
+    Уважаемый %username%.<br>
+    <br>
+    Чтобы закончить активацию вашей учетной записи - пожалуйста, нажмите <a href=%confirmationUrl%>здесь.</a><br>
+    <br>
+    Эта ссылка может быть использована только один раз для подтверждения вашей учетной записи.<br>
+    <br>
+    С наилучшими пожеланиями,<br>
+    Ваша команда Catrobat.
+    </p>
+passwordRecovery:
+  subject: Восстановление пароля Catrobat
+  message: |
+    Уважаемый %username%.
+
+    Мы получили запрос на восстановления вашего пароля на %appplication_url%. 
+
+    Для изменения пароля пройдите по ссылке: %confirmationUrl%
+
+    Если вы не делали такой запрос, Вам не нужно предпринимать никаких действий. Срок действия ссылки закончится через 24 часа.
+
+    Вы можете использовать свой логин и пароль для доступа к %appplication_url% в любое время. 
+    Для этого просто перейдите по ссылке: %loginPage%
+    Если вы хотите обновить свой профиль, используйте ссылку %profilePage%
+
+    С уважением,
+    Команда Catrobat.
+  messageHtml: |
+    <p>
+    Уважаемый %username%.<br>
+    <br>
+    Мы получили запрос на восстановления вашего пароля на <a href=%appplication_url%>Pocket Code</a>. 
+    Если вы не делали такой запрос, Вам не нужно предпринимать никаких действий. Срок действия ссылки закончится через 24 часа.<br>
+    <br>
+    Для изменения пароля пройдите по <a href=%confirmationUrl%>ссылке.</a><br>
+    <br>
+    Вы можете использовать свой логин и пароль для доступа к сообществу <a href=%appplication_url%>Pocket Code</a> в любое время. 
+    <br>
+    Для этого просто перейдите по <a href=%loginPage%>ссылке</a><br>
+    Если вы хотите обновить свой профиль, используйте <a href=%profilePage%>ссылку</a>.<br>
+    <br>
+    С наилучшими пожеланиями,<br>
+    Ваша команда Catrobat.
+    </p>
+profile:
+  edit: Редактировать профиль
+  saveChanges: Сохранить
+  newPass: Новый пароль
+  repeatPass: Повторите пароль
+  oldPass: старый пароль
+  firstEmail: Мой первый email
+  secondEmail: Мой второй email
+  myPrograms: My projects
+  follows: Подписан
+  follower: Подписчик
+  unfollowUser: Отписаться от пользователя!
+  followUser: Подписаться на пользователя!
+  amountOfPrograms: Amount of projects
+  form:
+    passwordTooShort: Пароль должен содержать как минимум %length% символов.
+    passwordTooLong: Пароль должен содержать максимум %length% символов.
+    passwordIsUsername: Пароль должен отличаться от имени пользователя.
+    passwordWrong: Неверный пароль
+    emailNotValid: Некорректный электронный адрес.
+    emailMissing: Ошибка во время обновления электронного адреса. Вы должны иметь как минимум один подтвержденный электронный адрес.
+    emailExists: E-mail уже используется.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: Это имя пользователя уже существует.
+    usernameContainsEmail: Username shouldn't contain an email address.
+    submitSuccess: Сохранено!
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
+  changePicture: Изменить картинку
+  avatar:
+    noImage: Нет изображения!
+    pictureTooLarge: Невозможно использовать данное изображение, размер данного изображения превышает 5 мб.
+    uploadError: Простите, к сожалению во время загрузки произошла ошибка!
+    noSupport: Этот тип изображения не поддерживается, попробуйте другое изображение.
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: Редактировать профиль
+  edit: Редактирование
+  done: Готово
+  checkMail: Мы отправили письмо на ваш электронный адрес. Пожалуйста, проверьте входящие сообщения.
+  passwordUpdated: Ваш пароль был успешно обновлён.
+  avatar: Аватар
+  email: Почта
+  editAvatar: Изменить аватар
+  editUsername: Изменить имя пользователя
+  editPassword: Изменить пароль
+  editCountry: Изменить страну
+  editEmail: Изменить E-Mail
+  deleteAccount: Удалить аккаунт
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  editAccountSettings: Изменить настройки аккаунта
+  notChangeVisibility: Не удается изменить видимость
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+licenseToPlay:
+  link: 'Лицензия на игру'
+  title: 'Лицензия на игру - Указывайте источник и делитесь'
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'Нет никаких секретов: все инструкции или рецепты для приготовления какого угодно пирога открыты для всех желающих, любой может использовать эти рецпты сколько угодно раз, менять их или готовить по ним свои собственные идеи... То есть пироги.'
+  text3: "Вы можете есть пироги или используя рецепты других пользователей, создать свой собственный рецепт, возможно с другими ингредиентами. Это возможно благодаря двум простым требованиям:"
+  text4: "В основе сообщества Catrobat, стоит этот подход, поскольку мы считаем что это помогает обучаться и творить внутри нашего сообщества. Раздавая рецепты и ингредиенты (скрипты и изображения), люди могут развивать идеи друг друга, и все останутся в выиграше."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
+  text6: 'Подробнее об условиях использования сообщества Catrobat на сайте %link-termsOfUse%.'
+  list1:
+    item1: Делитесь рецептами ваших пирогов
+    item2: указывайте авторство тех, кто вдохновил вас
+  version: Версия 1.1, 2 Апреля 2013
+termsOfUse:
+  title: Условия использования
+  headline: Добро пожаловать в сообщество Catrobat!
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text2: "Нам нужна ваша помощь для того чтобы сделать это сообщество комфортным для каждого. Вот как вы можете помочь:"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text4: 'Этот подарок вам от нас:'
+  text5: 'Наши условия использования обслуживания:'
+  list1:
+    item1: из многих различных стран и культур
+    item2: Для всех возрастов ( от детей и до подростков, и бабушек, и дедушек)
+    item3: С любым уровнем опыта
+  list2:
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item3: "Будьте честными. Не пытайтесь быть кем-то кроме себя или обманывать сообщество."
+    item4: "Держите личную информацию при себе. Не открывайте ни кому адрес своей электронной почты, номер телефона, или другие личные данные."
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+  list3:
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item3: "Одно из важных дополнительных условий, является то, что ты явно устанавливаешь авторство тех, на основе работ которых, ты сделал свою собственную работу. В то же время, мы будем трудиться не покладая рук, чтобы твоя работа была явно признана другими, даруя авторство уникальному имени, которое ты свободно выбрал для представления тебя в сообществе Catrobat, и даруя другим возможность выразить их признательность тебе на публике за предоставление твоей работы каждому, в частности, им самим."
+    item4: 'Пожалуйста, обратитесь к %link-licenseUploaded% для точных правовых положений и условий.'
+  list4:
+    item1: "Мы предлагаем все наши собственные программные и Интернет-ресурсы, связанные с системой Catrobat, например, программное обеспечение, написанное командой Catrobat, наши веб-сайты и Интернет-ресурсы, наш собственный исходный код, связанный с системой Catrobat, и все дополнительные материалы, такие, как, например, фотографии, звуки и тексты, теперь и в будущем вам под свободными лицензиями Catrobat."
+    item2: Эти лицензии делают все части Catrobat бесплатными и открытыми, в смысле предоставления вам свободы использовать их как вам нравится, с несколькими ограничениями, гарантирующими, среди прочего, что система Catrobat всегда будет оставаться свободной и полезной для всех.
+    item3: 'Пожалуйста, проконсультируйтесь с %link-licenseToPlay% для точных юридических условий. Исходный код системы Catrobat, а также многие другие документы и ресурсы доступны через %link-developer%.'
+  list5:
+    item1: 'Если вы, или, если вы не достигли 13 лет, ваши родители или законные опекуны, связаны с организацией, участвующей в нарушении конфиденциальности и/или в массовой слежке, то вам не разрешается использовать наши приложения или сервисы. Точные сведения об этом ограничении и некоторые исключения к нему указаны в разделах 4.a и 4.b на нашем сайте %link-termsOfUse%.'
+    item2: Если вам меньше 13 лет, то вы должны спросить разрешения своих родителей или законных представителей, чтобы использовать приложения и сервисы Catrobat.
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "Все программные и Интернет-ресурсы Catrobat предлагаются в надежде, что они будут полезны, но без каких-либо гарантий."
+    item5: 'Пожалуйста, обратитесь к %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service для точных формулировок пунктов выше и некоторых дополнительных правовых условий.'
+  bottom1: Заходите сюда время от времени, потому что мы всегда стараемся улучшить наши Условия использования.
+  bottom2: 'Пожалуйста, напишите любые предложения относительно этих Условий использования на %email-webmaster%.'
+  version: Версия 1.3, 4 марта 2014 года
+help:
+  stepByStep:
+    title: "Пошаговое вступление"
+    start: "Исходное положение:"
+    description: |
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+    step1:
+      title: 'Make a new project'
+      detail:
+        text1: 'Нажмите на «Новый».'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
+    step2:
+      title: "Создать новый объект"
+      detail:
+        text1: 'Коснитесь:'
+        text2: 'Выберите источник первого образа вашего нового объекта.'
+        text3: 'Введите имя объекта и нажмите «OK» для создания объекта.'
+        special1: 'Нарисовать новый образ.'
+        special2: 'Выбрать из галереи.'
+        special3: 'Сделать снимок.'
+    step3:
+      title: "Начните движение"
+      detail:
+        text1: 'Коснитесь:'
+        text2: 'Первый блок, который мы используем, относится к категории "Движение".'
+        text3: 'Выберите блок "скользить". Объект будет перемещаться на новую позицию, определенную блоком на сцене.'
+        text4: 'Блок теперь плавает. Чтобы вставить его, передвинь блок куда захочешь. Ты также можешь передвигать уже вставленные блоки, нажимая на них до тех пор, пока они не начнут плавать снова.'
+        text5: 'Нажми "Запуск", чтобы перейти на сцену и увидеть как объект скользит.'
+        text6: 'Используй кнопку "Назад" на телефоне, чтобы вернуться со сцены.'
+    step4:
+      title: "Изменить образ"
+      description: "Вы можете изменить образ вашего объекта."
+      detail:
+        text1: 'Выбери блок "Задать образ". С этим блоком ты можешь выбрать образ или создать новый.'
+        text2: 'Присоедени блок под блоком "Скользить".'
+        text3: 'Нажмите на поле из выпадающего списка, чтобы создать новый образ.'
+        text4: 'Выберите источник изображения так же, как раньше.'
+        text5: 'Теперь выбери новое изображение.'
+        text6: 'Нажми "запуск", чтобы посмотреть на поведение на сцене.'
+    step5:
+      title: "Говорить"
+      description: "Теперь ты узнаешь, как сделать так, объект заговорил."
+      detail:
+        text1: 'Выбери блок "Говорить". Объект скажет текст, когда блок будет выполнен.'
+        text2: 'Соедините выбранный блок с блоком "Переключиться на образ".'
+        text3: 'Нажми "запуск", чтобы посмотреть на поведение на сцене.'
+    step6:
+      title: 'Снова и снова'
+      description: "Этот шаг покажет как повторить поведение объектов."
+      detail:
+        text1: 'Выбери блок "Вечно". Все в цикле будет повторяться вечно.'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
+        text3: 'Добавь ещё один блок «Скользить».'
+        text4: 'Присоедени блок "Скользить" над блоком "Конец цикла".'
+        text5: 'Нажмите на текстовое окно и введите значение ''0'' для х и у.'
+        text6: 'Нажми "запуск", чтобы посмотреть на поведение на сцене.'
+    step7:
+      title: "Нажатие - все"
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
+      detail:
+        text1: 'Выберите блок "При нажатии". Каждый блок под "При нажатии" будет выполнен один раз при нажатии на объект на сцене.'
+        text2: 'Поместите "При нажатии" под другими блоками.'
+        text3: 'Выберите кирпич "Повернуть направо" и запишите его под блок "Когда нажато".'
+        text4: 'Теперь у Вас есть этот скрипт.'
+        text5: 'Коснитесь воспроизведения, чтобы увидеть поведение на сцене. Если вы нажмете на объект, он завращается.'
+    step8:
+      title: "Копировать, удалить или редактировать блок"
+      detail:
+        text1: 'Одно нажатие по левой стороне каждого блока открывает контекстное меню. Там можно переместить, скопировать, удалить или изменить значения блока с помощью редактора формул.'
+    step9:
+      title: "Навигация в приложении"
+      detail:
+        text1: 'Используй кнопку «Назад» на телефоне для навигации в приложении.'
+        text2: 'Вернись на один экран назад к обзору твоего объекта. Здесь ты можешь перейти в скрипты, а также к мощному представлению образов и звуков объекта. Здесь ты можешь переименовать, копировать, добавлять или удалять образы и звуки.'
+        text3: 'Нажми на кнопку "Назад" на телефоне еще раз, чтобы перейти к обзору твоих объектов и фона.'
+    step10:
+      title: "Изменение фона"
+      description: "This is the overview of your objects and your project's background."
+      detail:
+        text1: 'Фон похож на объект, но ты можешь иметь только один фон.'
+        text2: 'Ты можешь добавить скриптов, звуков и образов таким же образом и фону.'
+    step11:
+      title: "Главное меню"
+      description: "Используй кнопку \"Назад\" на телефоне, чтобы вернуться на этот экран."
+      detail:
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
+        text4: 'Перейди на сайт справки и обсуди с другими пользователями.'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
+  tutorialcards:
+    title: "Обучение"
+    description1: "Эти туториалы показывают тебе как эффективно пользоваться Pocket Code."
+    getReady: "Приготовьтесь:"
+    tryCode: "Попробуй этот код:"
+    doIt: "Сделайте это:"
+    tip: "Дополнительный совет:"
+    card1:
+      title: "Изменить размер"
+      description: "Изменить размер объекта."
+      one: "Добавь объект, размер которого ты хочешь изменить, например, Животное."
+      two: "Вставьте следующие блоки в скрипты объекта, чтобы он уменьшался (на 20% от первоначального размера) при нажатии."
+    card2:
+      title: "Изменить образ"
+      description: "Изменение образов объекта."
+      one: "Добавь объект, образ которого ты хочешь изменить, например, предметы."
+      two: "Включи следующие картинки в образы объекта."
+      three: "Вставь следующие блоки в скрипты объекта, чтобы последовательно менять его образ каждую секунду."
+    card3:
+      title: "Анимация"
+      description: "Анимация объектов"
+      one: "Добавьте объект, который должен двигаться."
+      two: "Вставь другую картинку в образы объекта, которая изображает движение."
+      three: "Вставь следующие блоки в скрипты объекта, чтобы последовательно менять позицию объекта через определенный промежуток времени. Также ты можешь окаймить сцену, добавив отскок от края."
+    card4:
+      title: "Скользить "
+      description: "Пусть Ваш объект скользит по экрану."
+      one: "Добавь объект, который будет скользить, например, самолет."
+      two: "Добавь следующие блоки и определи область, в которой будет происходить движение."
+    card5:
+      title: "Воспроизвести звук"
+      description: "Воспроизведение звука при нажатии на объект."
+      one: "Добавьте объект, который должен проигрывать звук, например собаку."
+      two: "Вставьте следующие блоки, чтобы сделать воспроизведение возможным. Выберите звук из вашей библиотеки, библиотеки Pocket Code или запишите сами."
+    card6:
+      title: "Говорить"
+      description: "Пусть Ваш объект заговорит."
+      one: "Добавь объект, который будет разговаривать, например, Керри."
+      two: "Вставь следующие блоки, чтобы сделать возможным голосовой вывод."
+    card7:
+      title: "Датчик"
+      description: "Управляй объектом, используя датчики наклона."
+      one: "Добавь объект, который будет двигаться на сцене."
+      two: "Вставь следующие блоки, чтобы управлять объектом через датчики твоего телефона. Выбери \"наклон по x и y\". Чтобы получить удобное движение, поставь \"-наклон\". Если движение объекта слишком чувствительно, раздели его, например, на 10."
+    card8:
+      title: "Компас"
+      description: "Создайте свой собственный компас"
+      one: "Добавь объект, который будет указывать в направлении компаса."
+      two: "Вставь следующие блоки, чтобы установить ориентацию объекта. Также добавь вечный цикл."
+    card9:
+      title: "Вещать всем"
+      description: "Отправь сигналы от одного объекта к другому."
+      one: "Добавь новый объект, например, Алису, которая будет посылать сигнал. Также, добавь второй образ в образы фона. Как только фон получит синал, он поменяет образ на другой."
+      two: "Вставь блок \"Отправить всем\" и определи, что должно произойти, когда другой объект получит сообщение."
+      three: "В этом случае фон поменяется, когда объект на верхнем слое будет нажат."
+    card10:
+      title: "Показать переменную"
+      description: "Показать значение переменной."
+      one: "Добавь объект, который ты хочешь перемещать с помощью датчиков телефона (посмотри %tutorial_card_link_7% 7 туториал %link_end%). Также, добавь второй образ фону, на который он должен поменяться, когда получит сигнал."
+      two: "Вставь следующие блоки, чтобы сохранить текущие координаты x и y двигающегося объекта в переменную."
+      three: "Через \"Показать переменную\" ты можешь отобразить значения на сцене."
+    card11:
+      title: "Обнаружение столкновений"
+      description: "Обнаружить столкновение двух объектов."
+      one: "Добавь два объекта, один из которых должен двигаться с помощью датчиков твоего телефона, например, Алекс (смотри %tutorial_card_link_7% 7 туториал %link_end%)."
+      two: "Сохрани текующие координаты x и y двигающегося объекта Алекс (смотри %tutorial_card_link_10% 10 туториал %link_end%) и вставь следующие скрипты. Последовательно проверяй если два объекта налезают друг на друга. Если они делают это, то фиксированный объект должен быть скрыт."
+    card12:
+      title: "Распознование лиц"
+      description: "Управляй объектом через обнаружение лица."
+      one: "Сначала проверьте, что блоки обнаружения лиц включены, для этого измените настройки."
+      two: "Добавь новый объект и вставь следующие блоки для того, чтобы показать объект, если лицо обнаружено. Положи проверку на обнаружение лица в бесконечный цикл. Если камера воспримет лицо, то значение переменной будет «ИСТИНА», иначе - «ЛОЖЬ»."
+  starterPrograms:
+    title: "Starter projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
+    categories:
+      games: "Игры"
+      animations: "Анимация"
+      interactive: "Интерактивное искусство и рассказы"
+      music: "Музыка и танцы"
+  gameJam:
+    title: "Как загрузить Pocket Code игру на Game Jolt сайт?"
+    text0: "Поздравляем вас с вашей игрой! Теперь вы можете загрузить ее на %link%, чтобы создать автономное приложение Android, которое вы можете загрузить на сайте Game Jolt."
+    title1: "Регистрация"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title2: "Загрузить"
+    text2: "После процесса регистрации вы сможете загрузить вашу игру. Просто подумайте об имени и добавьте описание. Также добавьте #AliceJam150 в поле описания."
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
+    title4: "Создать Android приложение"
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "Скачать приложение"
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "Зарегистрироваться/Войти на GameJolt.com"
+    text6: "Перейдите сюда: %link% и нажмите \"Войти\" или \"Зарегистрироваться!\" в меню. Если у вас уже есть аккаунт, вы можете просто войти, если же нет - зарегистрируйтесь с помощью вашей электронной почты, имени пользователя и пароля."
+    title7: "Загрузите свою игру на сайте Game Jolt"
+    text7: "После входа, перейдите к монитору ваших приложений. Здесь вы можете добавить вашу игру. Сначала нажмите на \"Приянть правила\". Затем заполните описание игры. В качестве Системы/Языка/Инструмента создания выберите \"Другое\" и добавьте в это поле \"Андроид\". В качестве статуса разработки выберите \"Завершено/Стабильно\". Убедитесь, что вы включили #AliceJam150 в описание, так что оно появится на странице по ссылке %link%."
+    text7_1: "Перед тем, как вы сможете опубликовать вашу игру, добавьте изображение-миниатюру, укажите возрастное ограничение, а затем выгрузите вашу игру, нажав на \"сборки/файлы\"."
+    text7_2: "Нажмите на «Добавить пакет» и заполните информацию о пакете. Сохраните его и добавьте релиз. "
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_4: "Внимание: если в названии приложения отсутствует суффикс расширения '.apk', вы можете добавить его вручную. Просто переименуйте файл. Теперь вы можете выгрузить игру."
+    text7_5: "После загрузки нажмите \"ОК\", чтобы разрешить открытый доступ к вашей игре. Другие пользователи увидят ссылку для скачивания вашей игры."
+    text7_6: "Поздравляем! Вы загрузили вашу первую игру на сайт Game Jolt и сделали её доступной."
+    text7_7: "Другие пользователи теперь смогут найти вашу игру, и она появится на странице по ссылке: %link%."
+  aliceGameJamTutorialcards:
+    title1: "(Добро пожаловать в) Страну чудес"
+    subtitle1: "Анимирование персонажей и создание события по нажатию"
+    description1: |
+      Узнайте, как оживить ваших персонажей простой анимацией и как заставить персонажа делать что-либо, когда вы нажимаете на него. В этом видео объясняется, как можно легко заанимировать персонажа, используя его различные образы.
+      Далее мы расскажем вам как создать событие "по нажатию" и как отправлять сигналы между объектами.
+    title2: "Сохраните Алису!"
+    subtitle2: "Используйте датчики наклона и обнаружьте столкновения между объектами"
+    description2: "Здесь вы узнаете, как управлять персонажем, используя сенсоры наклона телефона. Вы можете контролировать движение Алисы, наклонив телефон влево или вправо. Смотрите наше руководство и позвольте объектам случайно падать с неба и получите опыт обнаружения столкновений с другими объектами."
+    title3: "Шляпник - ударь и беги"
+    subtitle3: "Создайте движущийся пейзаж и контролируйте перемещения Шляпника"
+    description3: "В этом руководстве вы узнаете, как создать ландшафт, который выглядит движущимся. Мы сделаем это, перемещая объекты вдоль экрана, чтобы создать иллюзию движения. Мы также покажем, как научить Шляпника перемещаться, с помощью наклона вашего телефона."
+    title4: "Шляпник - ударь и беги"
+    subtitle4: "Дайте Шляпнику возможность стрелять по злым картам"
+    description4: "В этом руководстве мы покажем вам, как создавать врагов, которые перемещаются случайно в сторону вашего персонажа. Кроме того, вы узнаете, как научить шляпника стрелять чайными каплями и проверять, попали ли они в противников с помощью обнаружения столкновений."
+    title5: "Ударьте Чеширского Кота"
+    subtitle5: "Создать счёт с помощью переменных"
+    description5: "В этом уроке мы покажем Вам, как использовать переменные для того, чтобы создать счёт. Очки - это полезный элемент в игре. Наш счёт показывает, как часто Вы ловили кошку."
+    title6: "Гонка кроликов"
+    subtitle6: "Создать движущийся фон"
+    description6: |
+      Это руководство рассказывает, как создать вертикально прокручивающийся фон с помощью скользящей графики фона. Кроме того, здесь вы можете узнать, как заставить персонажа прыгать, когда вы нажимаете на него.
+      Чтобы сделать игру немного сложнее, вы можете снизить скорость вашего персонажа.
+    download: "Скачать проект"
+oauth:
+  username_header: Спасибо за регистрацию в Pocket Code!
+  username_chooser: "Пожалуйста, выберите имя пользователя:"
+  username_hint: Имя пользователя не должно совпадать с вашим настоящим именем.
+  usernameTaken: Пользователь с таким именем уже существует. Пожалуйста, выберите другое имя.
+search:
+  dotdotdot: Поиск...
+  search: Поиск
+  inMediaLib: Поиск в медиа библиотеке.
+  results: Результаты поиска
+  resultcount: Найдено %count% результатов
+  fail: Пожалуйста, введите хотя бы один поисковый термин
+menu:
+  profile: Мой профиль
+  login: Войти
+  logout: Выйти
+  admin: Админ
+  home: Дом
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Подписчик
+login:
+  login: Войти
+  passOrUser: Ваш пароль или имя пользователя были неверны.
+  noUsername: Ваше имя пользователя или адрес электронной почты не были найдены.
+  forgotPass: Забыли пароль или имя пользователя?
+  recoverPass: Восстановить пароль
+  recoverPassSend: Мы отправили письмо на ваш электронный адрес. Пожалуйста, проверьте входящие сообщения.
+  alreadyReset: Пароль для этого пользователя уже был запрошен в течение последних 24 часов.
+  confirmationSend: Письмо для подтверждения регистрации было отправлено на ваш адрес электронной почты. Пожалуйста, проверьте ваш почтовый ящик и активируйте свой аккаунт.
+  userOrEmail: Имя пользователя или адрес электронной почты
+  changePass: Изменить пароль
+  createAccount: Создание учетной записи
+  noAccount: Нет учетной записи!
+  alreadyAccount: Уже есть аккаунт?
+  or: ИЛИ
+  username: Имя пользователя
+  email: Почта
+  passwordFirst: Пароль
+  passwordSecond: Подтвердить пароль
+apk:
+  download: Скачать приложение
+  prepare: 'Подготовка приложения'
+  preparing: 'Подготовка приложения'
+  text: 'Процесс может занять некоторое время'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: Имя пользователя не должно быть пустым
+    invalid: Ваше имя пользователя не действительно
+    exists: Это имя пользователя уже существует.
+    not_exists: Такого имени пользователя не существует.
+    not_email: Имя пользователя не может быть адресом электронной почты.
+    size: Имя пользователя должно содержать не менее 3 символов и не более 180
+  password:
+    blank: Введите пароль.
+    short: 'Ваш пароль должен содержать как минимум {{ limit }} символов.'
+  description:
+    rude: Описание не должно содержать грубых слов.
+  credit:
+    rude: Credits must not contain rude words.
+  country:
+    blank: Введите страну.
+    invalid: Название страны введено неправильно
+  email:
+    blank: Поле email не должно быть пустым.
+    invalid: Ваш электронный адрес, похоже, не действителен.
+    exists: E-mail уже используется.
+  id:
+    blank: Открытый код проверки подлинности не должен быть пустым.
+  login: Неправильный пароль или имя пользователя.
+  post-data: POST-Data неправильные или отсутствуют!
+  checksum:
+    missing: Клиент не отправил файл контрольной суммы! Вы используете устаревшую версию Pocket Code?
+    invalid: контрольная сумма не верна
+  xml:
+    invalid: недопустимый код xml
+    missing: 'Неизвестная ошибка: project_xml_not_found!'
+  file:
+    unexpected: найден неизвестный файл
+    invalid: Недопустимый файл
+  image.missing: Файл, к которому обращается проект XML, не найден в папке проекта
+  unknown: Неизвестная ошибка
+  token: 'Аутентификация устройства провалилась: недействительный токен!'
+  uploadTokenAuthFailed: 'Ошибка авторизации токена.'
+  programname:
+    rude: Project name must not contain rude wordes.
+  program:
+    invalid: Invalid project.
+  languageversion:
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+  programversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: Ошибка авторизации
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
+success:
+  text: Успех
+  registration: Регистрация завершена успешно!
+  token: ок
+  upload: Проект был успешно загружен!
+  imgUpload: Your image was uploaded successfully!
+  report: Ваше сообщение успешно отправлено!
+time:
+  minutes.ago: '{0} меньше минуты назад |{1}1 минуту назад |]1,Inf] %count% минут(-ы) назад'
+  hours.ago: '{1}1 час назад |[2,4] %count% часа назад |]4,Inf] %count% часов назад'
+  days.ago: '{1}1 день назад |[2,4] %count% дня назад |]4,Inf] %count% дней назад'
+  months.ago: '{1}1 месяц назад |[2,4] %count% месяца назад |]4,Inf] %count% месяцев назад'
+  years.ago: '{1}1 год назад |]1,Inf] более года назад'
+failure:
+  upload: Во время выгрузки приложения произошла ошибка.
+api:
+  registerUser:
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username must not contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
+#languages and countries
+language:
+  arabic: Арабский
+  bulgarian: Болгарский
+  catalan: Каталонский
+  chinese_simplified_han: Китайский (упрощенный)
+  chinese_traditional_han: Китайский (традиционный)
+  croatian: Хорватский
+  czech: Чешский
+  danish: Датский
+  dutch: Нидерландский
+  english_united_kingdom: Английский (британский)
+  english_united_states: Английский (США)
+  estonian: Эстонский
+  filipino: Филиппинский
+  finnish: Финский
+  french: Французский
+  german: Немецкий
+  greek: Греческий
+  hebrew: Иврит
+  hindi: Хинди
+  hungarian: Венгерский
+  indonesian: Индонезийский
+  italian: Итальянский
+  japanese: Японский
+  korean: Корейский
+  latvian: Латвийский
+  lithuanian: Литовский
+  malay: Малайский
+  norwegian: Норвежский
+  persian: Персидский
+  polish: Польский
+  portuguese_brazil: Португальский (Бразилия)
+  portuguese_portugal: Португальский (Португалия)
+  romanian: Румынский
+  russian: Русский
+  serbian: Сербский
+  slovak: Словацкий
+  slovenian: Словенский
+  spanish_latin_america: Испанский (Латинская Америка)
+  spanish_spain: Испанский (Испания)
+  swedish: Шведский
+  thai: Тайский
+  turkish: Турецкий
+  ukrainian: Украинский
+  vietnamese: Вьетнамский
+ci:
+  generate: Генерировать Apk
+  pending: Генерирование Apk
+  download: Скачать Apk
+gamejam:
+  nojam: К сожалению, в данный момент game jam нет
+  submit: Отправить %gamejamname%
+  whats: Что такое %gamejamname%?
+  submitown:
+    header: быть в курсе
+    subheader: You can only submit your own projects
+    text: |
+      А почему бы не создать свой собственный! Принять участие в %gamejamtag%
+tag-text: Тэги
+extenstion-text: Расширения
+tags:
+  constant:
+    tag1: Игра
+    tag2: Анимация
+    tag3: История
+    tag4: Музыка
+    tag5: Искусство
+    tag6: Экспериментальная версия
+    tag7: Tutorial
+admin:
+  maintain:
+    diskMaintenance: Обслуживание диска
+    ramMaintenance: Обслуживание RAM
+    noRemovableObjects: Нет объектов для удаления.
+    removableObjects: Удаляемые объекты
+recommender:
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
+  moreFromThisUser: More from %username%
+pmd:
+  submitBtn: Отправьте ваш проект
+  submitBox:
+    header: Отправка
+    text: Чтобы отправить ваш проект, введите код проекта и нажмите "отослать".
+    btnText: Отправить
+  successful:
+    text: Your project upload was successful.
+  failed:
+    text: Project upload failed.
+codeview:
+  title: 'Code view'
+  showCode: 'Показать код'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'Scenes'
+  scripts: 'Скрипты'
+  bricks: 'Блоки'
+  objects: 'Актеры и объекты'
+  looks: 'Образы'
+  sounds: 'Звуки'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Глобальные переменные'
+  localVariables: 'Локальные переменные'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
+codeStatistics:
+  title: "Статистика кода"
+  error: "Статистика кода не отображается."
+  general: 'Общий'
+  bricks: 'Кирпичи'
+  eventBricks: 'Событие'
+  controlBricks: 'Управление'
+  motionBricks: 'Движение'
+  soundBricks: 'Звук'
+  looksBricks: 'Текстуры'
+  penBricks: 'Ручка'
+  dataBricks: 'Данные'
+  specialBricks: 'Особый'
+footer:
+  language: Язык
+  usefulLinks: Полезные ссылки
+  legalities: Юридическая правомерность
+  communityStats: Статистика сообщества
+  download: Скачать приложение
+privacy-policy:
+  header: Политика конфиденциальности
+  version: Version 2.2, 17 October 2019
+  text1: Для того чтобы предоставить вам все преимущества наших услуг и ассоциированный аккаунт, нам необходимо собрать от вас определенные данные.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: Для создания и использования учетной записи в наших системах и для информирования Вас о необходимых изменениях в вашей учетной записи по e-mail, например, об обновлении или нарушении наших Условий использования и обслуживания, наших правил сообщества или наших политик, мы будем хранить ваше имя пользователя и, если это предусмотрено Вами, ваш адрес электронной почты. Если вы подключили свой аккаунт через Google Plus или Facebook, мы дополнительно храним идентификационный ключ, подключенный к вашей учетной записи на данных сервисах. Мы не будем использовать эти данные для любых других (например, маркетинговых) целей, если вы явно не разрешите нам это сделать.
+  text4: На добровольной основе вы можете предоставить нам страну проживания через страницу вашего аккаунта на сайте. Это будет отображаться в вашем публичном профиле и использоваться только для статистических и исследовательских целей. Это может быть убрано в любое время в настройках вашего профиля.
+  text5: Ты можешь убрать использование персональных данных, принадлежащих твоему аккаунту в любое время удалением твоего аккаунта через страницу профиля https://share.catrob.at/. После удаления твоего аккаунта, ты все еще сможешь использовать предоставленные сервисы, но не взаимодействовать, например, через загрузку программ, комментирование, либо лайки. Также, все предоставленные материалы, связанные с вашим аккаунтом, например, загруженные программы, комментарии, и т.д., будут удалены.
+  text6: Во избежание неправильного использования наших услуг, например, посредством загрузки или комментариев пользователей в незаконных целях, все данные, созданные пользователем (загрузки, комментарии) будут храниться внутри базы данных вместе с отметкой времени и интернет адресом. Эти данные не будут использоваться, либо направлены в какие-либо учреждения, пока не будут действительно заподозрены в нелегальных действиях, и пока официально уполномоченные правовые институты не запросят их на основании применимого законодательства. Каждый случай сначала будет тщательно рассмотрен нами на индивидуальной основе.
+  text7: Вы можете добровольно подписаться на рассылку новостей от Catrobat, на https://catrob.at/newsletter предоставляемых нами через службу MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Затем вы будете получать информацию об обновлениях проекта Catrobat и его сервисов на указанный e-mail адрес. Вы можете отписаться от рассылки в любое время, используя ссылку «отписаться» в нижней части каждого письма. Эта рассылка обеспечивается MailChimp, с которыми у нас есть соглашения об обработке данных, и которые следуют общему регламенту по защите данных ЕС и «Privacy Shield» EU-USA. Для получения более подробной информации о MailChimp, пожалуйста, посмотрите политику конфиденциальности и условия использования MailChimp.
+  text8: Все сервисы предоставлены некоммерческим проектом Catrobat с открытым исходным кодом под эгидой Международной Ассоциации Catrobat – Verein zur Förderung freier Software, некоммерческой общественной организацией, расположенной в Грац, Австрия (Европейский Союз). Наша политика учитывает законы ЕС и Австрии о защите данных (GDPR). Чтобы связаться с нами, пишите на наш электронный адрес contact@catrobat.org или присылайте письма по адресу Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: Если вы младше 14 лет, соглашение с политикой конфиденциальности должен дать законный представитель (обычно родитель).
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  disagree-text: Вы не можете создать аккаунт без подтверждения, однако основные функции будут доступны.
+catro-notifications:
+  markAsRead: "Пометить, как прочитанное"
+  summary: "{0}У вас нет новых уведомлений|{1}У вас %amount% новое уведомление!|]1,Inf]У вас %amount% новых уведомлений!"
+  comment:
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
+  like:
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
+  follow:
+    title: 'Новый подписчик!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New project from someone you follow'
+    message: 'User %user_link% created a new project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+clipboard:
+  success: Link to project copied to clipboard!
+  fail: Не удалось скопировать ссылку в буфер обмена! :(
+next: Далее
+previous: Предыдущий
+help-cards:
+  headings:
+    starters: Стартеры
+    tutorials: Обучение
+    stepbystep: Помаленьку
+    getinvolvedGoogle: Скачать на Google Play
+    getinvolvedApple: Скачать на IOS
+    discord: Join on Discord
+    game_design: Игровой Дизайн
+    education: Образовательная платформа
+    discuss: Обсуждение
+  text:
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
+    getinvolved: Скачивайте приложение и начинайте пользоваться
+    discord: Join the community on discord
+    game_design_1: Эффективные трюки для
+    game_design_2: создание игры
+    education: Курс и ресурсы для начинающих
+    discuss_1: Связаться с другими
+    discuss_2: пользователи
+media-packages:
+  title: Медиа-пакеты
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  thumb-size:
+    description: Размер превью
+    sm: маленький
+    md: средний
+    lg: большой
+  theme-special: "Специальная тема %flavor%"
+  search-results: Результаты поиска медиа библиотеки.
+  no-results: Ваш запрос дал 0 результатов. Пожалуйста, использовать английский язык для поиска.
+  download_these_files: Сохранить
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Карманная Алиса
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: Принять
+disagree: Отклонить
+profileLoader:
+  noProfiles: There are currently no profiles.
+element: 'Элемент'
+elements: 'Элементы'
+share:
+  text: 'Опубликовать'
+  error: 'Ошибка публикации'
+  success: 'Публикация завершена'
+copy: 'Скопировать ссылку'
+checkOutProject: 'Посмотреть проект:'
+community: 'Сообщество Catrobat'
+back_to_app: 'Выйти из  сообщества'

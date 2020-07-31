@@ -1,0 +1,929 @@
+---
+#homepage translation
+localLanguage: انگریزی
+username: صارف کا نام
+password: خفیہ کوڈ
+createNewPassword: Create new password
+accountSettings: اکاؤنٹ کی ترتیبات
+email: ای-میل
+aboutPocketCode: پاکٹ کوڈ کے بارے میں
+aboutCatrobat: کیٹروبیٹ کے بارے میں
+tutorials: اسباق
+googlePlay: گوگل پلے
+iosAppStore: IOS ایپ اسٹور
+passwordsNoMatch: خفیہ کوڈ مشابہ نہیں۔
+error: خرابی
+cancel: منسوخ
+report: رپورٹ
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
+download: ڈاؤنلوڈ
+description: تفصیل (وضاحت)
+noDescription: کوئی وضاحت دستیاب نہیں۔
+credits: Credits
+noCredits: No credits available.
+country: ملک
+loginText: لاگ آن
+privacyPolicy: رازداری کا طریقہ کار
+imprint: طباعت
+programDetails: تفصیلات
+somethingWentWrong: 'اف، کچھ غلط ہوگیا۔.'
+pleaseTryAgain: 'برائے مہربانی دوبارہ کوشش کریں!'
+oldVersionError: 'برائے مہربانی پاکٹ کوڈ کو تازہ ترین ورژن پر اپ ڈیٹ کریں!'
+more: 'مزید'
+less: 'کم'
+show-more: 'مزید معلومات'
+show-less: 'Less information'
+ok: Ok
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
+notifications: 'اطلاعات'
+allNotifications: 'All notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction notifications'
+followersNotificationsTitle: 'Follower notifications'
+commentsNotificationsTitle: 'Comment notifications'
+remixNotificationsTitle: 'Remix notifications'
+CommentNotifications: 'تبصرے'
+RemixNotifications: 'ریمکسس'
+oldnotification: 'Old notifications'
+wellDone: "بہت اچھا!"
+done: "ہوگیا"
+notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsClearedMessage: "تمام اطلاعات کو بطور خواندہ نشان زد کیا گیا ہے ۔"
+deleteNotificationConfirmation: "Are you sure?"
+notificationDeleteMessage: "Are you sure you want to delete this notification?"
+notificationDeleteAllMessage: "Are you sure you want to delete all notifications?"
+confirmMessage: "Yes, delete it"
+cancelMessage: "منسوخ"
+notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationDeletedMessage: "Notification has been successfully deleted."
+clearAllNotificationsButtonTitle: "سب کو پڑھا ہوا شمار کریں"
+deleteAllNotificationsButtonTitle: "Delete all"
+notificationsClearError: "اطلاعات کو پڑھنے کے طور پر نشان زد کرنے میں قاصر!"
+notificationsDeleteError: "Unable to delete notifications!"
+pleaseWait: "براہ مہربانی انتظار کریں..."
+projects: "پروگرامات"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What projects are recommended here?'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
+programs:
+  welcome:
+    title: Welcome to Catrobat's %theme%
+    subtitle: کہانیاں، کھیل اور مزید بنائیں ...
+    download: پروگرام ڈاؤن لوڈ کریں
+    statistics: مزید اعداد و شمار
+  featured: نمایاں
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noPrograms: There are currently no projects.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
+  most:
+    viewed: سب سے زیادہ دیکھے گئے
+    downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% ڈاؤن لوڈز'
+  sample: Example projects
+  views: '%views% مرتبہ دیکھی'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "تمام"
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: رپورٹ غیرموزوں ہے
+  reportProgram: Report project
+  languageVersion: 'کاٹروبٹ زبان ورژن: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: وجہ بتائیں
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeader: پروگرام اپ ڈیٹ کریں
+  updateAppText: Please update your app to the newest version to be able to download this project.
+  btnClosePopup: ٹھیک ہے
+  checkout_this_program: Checkout this Catrobat project
+  show_more: مزید دکھائیں
+  comments: تبصرے
+  send: بھیجیں
+  delete: خارج کر دیں
+  report: رپورٹ
+  report_popup: آپکا تبصرہ کامیابی سے پہنچ گیا.
+  report_popup_header: اطلاعات کے مطابق
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editDescription: Edit the project description
+  saveDescription: Save description change
+  editCredits: Edit the project credits
+  saveCredits: Save credits change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
+  reactionsText: Reactions
+remixGraph:
+  title: ریمکسس
+  showRemixGraph: 'Remix graph'
+  by: 'کی طرف سے'
+  open: 'کھولیں'
+  showPaths: 'راستے دکھائیں'
+  programNotAvailableErrorTitle: 'معاف کریں ...'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailable: 'دستیاب نہیں ہے'
+  programUnknownUser: 'نامعلوم صارف'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat account confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+passwordRecovery:
+  subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
+  message: |
+    Dear %username%.
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+profile:
+  edit: Edit your profile
+  saveChanges: تبدیلیاں محفوظ کریں
+  newPass: نیا خفیہ کوڈ
+  repeatPass: خفیہ کوڈ دہرائیے
+  oldPass: old password
+  firstEmail: میری پہلی ای میل
+  secondEmail: میری دوسری ای میل
+  myPrograms: My projects
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of projects
+  form:
+    passwordTooShort: نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.
+    passwordTooLong: نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.
+    passwordIsUsername: خفیہ کوڈ صارف نام سے مختلف ہوگا۔
+    passwordWrong: غلط پاس ورڈ
+    emailNotValid: یہ ای میل پتہ درست نہیں ہے ۔
+    emailMissing: اس ای میل پتے کی تازہ کاری کے دوران نقص۔ آپ کا کم از کم ایک توثیق شدہ ای میل پتہ ہونا چاہیے ۔
+    emailExists: یہ ای میل پتہ پہلے سے استعمال میں ہے.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: یہ صارف نام پہلے سے موجود ہے۔.
+    usernameContainsEmail: Username shouldn't contain an email address.
+    submitSuccess: محفوظ ہوچکا!
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
+  changePicture: تصویر تبدیل کریں
+  avatar:
+    noImage: No image!
+    pictureTooLarge: آپکی منتخب کردہ تصویر بہت بڑی ہے، برائے مہربانی 5mb سے بڑے تصاویر استعمال نہ کریں۔
+    uploadError: ہم معذرت خواہ ہیں، اپ لوڈنگ کے دوران کچھ مسئلہ پیش آیا!
+    noSupport: اس قسم کی تصویر موزوں نہیں ہے، دوسری تصویر آزمائیے۔
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: پروفائل میں ترمیم کریں
+  edit: تدوین کریں
+  done: مکمل ہوا
+  checkMail: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
+  passwordUpdated: Your password was successfully updated.
+  avatar: اوتار
+  email: ای میل
+  editAvatar: اوتار مین تبدیلی کریں
+  editUsername: صارف کے نام مین تبدیلی کریں
+  editPassword: پاس ورڈ مین تبدیلی کریں
+  editCountry: ملک تبدیل کریں
+  editEmail: ای میل تدوین کریں
+  deleteAccount: اکاؤنٹ ختم کریں
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+licenseToPlay:
+  link: 'کھیلنے کے لئے لائسنس'
+  title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'کوئی خفیہ ترکیبیں نہیں: کیک کے ساتھ کیک بنانے کی دی گئی ہدایات ہر ایک کے لیے قابل استعمال، قابل ترمیم اور نئے خیالات کا اضافہ کرنے کے لیے کھلے ہیں... میرا مطلب ہے کیک۔.'
+  text3: "آپ کیک کھا بھی سکتے ہیں اور دوسروں کی ترکیبیں استعمال کرکے اپنے بنا بھی سکتے ہیں، شاید مختلف اجزاء کے ساتھ۔\nیہ آزادی صرف دو آسان شرائط کے ساتھ مشروط ہے:"
+  text4: "کیٹروبیٹ گروہ قائم کرتے ہوئے ہم نے یہ نقطہ نظر اپنایا کیونکہ ہمیں یقین ہے کہ یہ گروہ کے اندر سیکھنے اور تخلیقی صلاحیتیوں کو اجاگر کرنے میں معاون ثابت ہوگا۔\nترکیبیں اور اجزاء بانٹنے سے لوگ ایک دوسرے کے نظریات سے نئے بنا سکتے ہیں اور جس سے ہر ایک کو فائدہ ہوگا۔."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
+  text6: '%link-termsOfUse% پر کیٹروبیٹ کے آن لائن گروہ کے استعمال کی شرائط کے بارے میں مزید معلومات حاصل کریں ۔'
+  list1:
+    item1: اپنے کیک بمع ترکیب دوسروں کے ساتھ شریک کریں
+    item2: جو لوگ آپ کی حوصلہ افزائی کریں اُن کو اعزاز دیں
+  version: ورژن 1.1, 2 اپریل 2013 ء
+termsOfUse:
+  title: استعمال کی شرائط
+  headline: کاٹروبٹ گروہ میں خوش آمدید!
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text2: "اس گروہ کو تمام ممبران کیلئے ایک معاون جگہ بنانے کے لئے ہمیں آپکے تعاون کی ضرورت ہے۔ یہ تعاون آپ کس طرح کر سکتے ہیں، یہاں ہے۔"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text4: 'ہماری طرف سے آپ کے لیے تحفہ:'
+  text5: 'ہماری خدمات اور استعمال کی شرائط:'
+  list1:
+    item1: بہت سے مختلف ممالک اور ثقافتوں سے
+    item2: ہر عمر ( بچوں سے لیکر نو جوانو تک اور بزرگوں کے لیے )
+    item3: تجربہ کی تمام سطحوں کے ساتھ
+  list2:
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item3: "ایماندار ہو. کسی کے علاوہ کسی دوسرے کا دعوی نہ کریں کہ آپ کون ہیں یا کمیونٹی کو چالنا چاہتے ہیں."
+    item4: "ذاتی معلومات کو نجی رکھیں. اپنے ای میل ایڈریس، فون نمبر، یا دیگر ذاتی رابطے کی معلومات کا اشتراک نہ کریں."
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+  list3:
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item3: "ایک اہم اضافی حالت یہ ہے کہ آپ کو واضح طور پر مصنفین کو ان کے کاموں پر آپ کے اپنے کام کی بنیاد پر انتباہ دیتے ہیں. ایک ہی وقت میں، ہم سخت محنت کریں گے تاکہ آپ کا کام دوسروں کی طرف سے آپ کی مدد کی جائے گی جسے آپ نے منفرد نام سے منسوب کیا ہے، آپ کو Catrobat کی کمیونٹی میں نمائندگی کرنے کے لئے آزادانہ طور پر منتخب کیا جائے گا، اور دوسروں کو عوامی کاموں میں آپ کو ہر ایک کو، اور خاص طور پر ان کے لئے آپ کے شکریہ ادا کرنے کے لئے."
+    item4: 'براہ کرم٪ لنک لائسنس سے مشورہ کریں. درست قانونی شرائط و ضوابط کے لئے اپ لوڈ کیا.'
+  list4:
+    item1: "ہم کیتروبیٹ کے نظام سے متعلق ہمارے تمام سافٹ ویئر اور انٹرنیٹ وسائل پیش کرتے ہیں، مثال کے طور پر، کیتروبیٹ ٹیم کی طرف سے تحریر کردہ سافٹ ویئر، ہماری ویب سائٹس اور انٹرنیٹ وسائل، کیٹٹروب سسٹم سے متعلق ہمارے ذریعہ کوڈ، اور تمام اضافی مواد شامل ہیں جیسے جیسے، مثال کے طور پر ، تصاویر، آواز، اور نصوص، اب اور مستقبل میں آپ کو Catrobat کے مفت لائسنس کے تحت."
+    item2: یہ لائسنس کیٹیٹروبیٹ کے تمام حصوں کو آپ دونوں کے ساتھ ساتھ آزادانہ طور پر آزاد بناتے ہیں اور آپ کو ان کے استعمال کی آزادی دینے کے لۓ آزاد بناتے ہیں لیکن آپ چاہیں گے، صرف چند محدود پابندیوں کے ساتھ، دوسروں کے درمیان، یہ یقینی بنانے کے لئے کہ ہمیشہ کے لئے کیتروبیت کا نظام آزاد ہوجائے گا. اور سب کے لئے مفید.
+    item3: 'براہ کرم واضح لنک شرائط و ضوابط کے لئے٪ لنک لائسنس ٹول ادا کریں. کیتروبیٹ کے نظام کے ذریعہ کوڈ کے ساتھ ساتھ بہت سے دوسرے دستاویزات اور وسائل٪ لنک ڈویلپرر کے ذریعہ دستیاب ہیں.'
+  list5:
+    item1: 'اگر آپ، یا، اگر آپ 13 سال سے کم ہیں تو، آپ کے والدین یا قانونی سرپرست، کسی تنظیم سے منسلک ہوتے ہیں یا ڈریگ نیٹ کی نوعیت کی رازداری کی خلاف ورزیوں اور / یا بلک یا بڑے پیمانے پر نگرانی کے ذمہ دار ہیں، تو آپ کو ہمارے استعمال کی اجازت نہیں ہے. سافٹ ویئر ایپلی کیشنز اور ہماری خدمات تک رسائی حاصل کرنے کے لئے. اس پابندی اور بعض مستثنی استثناء کی عین مطابق تفصیلات سیکشن 4.a اور 4.b میں ہماری٪ لنک شرائط پر نمائش کی گئی ہے.'
+    item2: اگر آپ کی عمر 13 سال سے کم ہے، تو آپ کو اپنے والدین یا قانونی سرپرست سے پوچھنا چاہئے کہ کیا وہ آپ کو کیٹروبیٹ سافٹ ویئر ایپلی کیشنز اور وسائل استعمال کرنے کی اجازت دیتے ہیں؟.
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "کیٹروبیٹ کے تمام سافٹ ویئر اور انٹرنیٹ وسائل اس امید پیش کئے جاتے ہیں کہ وہ مفید ثابت ہونگے، لیکن بغیر کسی گارنٹی کے۔"
+    item5: 'براہ کرم ہماری٪ لنک شرائط سے مشورہ کریں. اعلی درجے کی پوائنٹس کے عین مطابق فارمولیٹس اور کچھ اضافی قانونی شرائط و ضوابط کے لئے٪ ڈویلپر.catrobat.org/terms_of_use_and_service استعمال کریں.'
+  bottom1: ہم ہمیشہ ہمارے استعمال کی شرائط کو بہتر بنانے کی کوشش کر رہے ہیں لہٰذا وقتاً فوقتاً کی پڑتال کیا کریں۔
+  bottom2: 'استعمال کی شرائط کے بارے میں تجاویز %email-webmaster% پر ارسال کریں۔'
+  version: ورژن 1.3, 4 مارچ 2014
+help:
+  stepByStep:
+    title: "مرحلہ وار انٹرو"
+    start: "شروع کی پوزیشن:"
+    description: |
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+    step1:
+      title: 'Make a new project'
+      detail:
+        text1: '"نئی" پر ٹیپ کریں ۔'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
+    step2:
+      title: "ایک نیا آبجیکٹ بنائیں"
+      detail:
+        text1: 'ٹیپ کریں:'
+        text2: 'اپنی نئی چیز کی پہلی نظر کا ذریعہ منتخب کریں.'
+        text3: 'آبجیکٹ نام داخل کریں اور آبجیکٹ بنانے کے لیے "OK" پر ٹیپ کریں ۔'
+        special1: 'ایک نیا منظر بنائیں ۔'
+        special2: 'گیلری سے انتخاب کریں.'
+        special3: 'تصویر لیجیئے.'
+    step3:
+      title: "منتقل کرنا شروع"
+      detail:
+        text1: 'ٹیپ کریں:'
+        text2: 'The first brick we use is out of the category "Motion".'
+        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: 'اینڈرائڈ کا واپسی کا بٹن استعمال کر کے سٹیج سے واپس جائیں.'
+    step4:
+      title: "Change look"
+      description: "آپ اپنے اوبجیکٹ کی دکھا واٹ بَدَل سکتے ہیں."
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Snap the brick underneath the "Glide" - brick.'
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'اب آپکو نئی تصویر کا انتخاب کرنا ہو گا.'
+        text6: 'Tap play to see the behaviour on the stage.'
+    step5:
+      title: "بولیے"
+      description: "Now you will find out how to make an object talk."
+      detail:
+        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text2: 'Snap the brick underneath the "Switch to look" brick.'
+        text3: 'Tap play to see the behaviour on the stage.'
+    step6:
+      title: 'بار بار'
+      description: "یہ مرحلہ آپ کو آبجیکٹ کے طرز عمل کو دہرانے کا طریقہ دکھاتا ہے ۔"
+      detail:
+        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
+        text3: 'Add another "Glide" brick.'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Tap play to see the behaviour on the stage.'
+    step7:
+      title: "Tapping is everything"
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Place the "When tapped" underneath the other bricks.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
+    step8:
+      title: "Copy, delete or edit a brick"
+      detail:
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
+    step9:
+      title: "Navigation in the app"
+      detail:
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
+    step10:
+      title: "پس منظر تبدیل کریں"
+      description: "This is the overview of your objects and your project's background."
+      detail:
+        text1: 'The background is like an object, but you just can have one background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
+    step11:
+      title: "مین مینو\n"
+      description: "Use the Android Back Button to get to this screen."
+      detail:
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
+        text4: 'ہیلپ سائٹ پر جائیں اور دوسرے صارفیں سے مشورہ کریں.'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
+  tutorialcards:
+    title: "اسباق"
+    description1: "یہ سبق آپکو مؤثر چالوں کا استعمال سکھاتی ہے"
+    getReady: "تیار ہو جاؤ:"
+    tryCode: "اِس کوڈ کو استعمال کر کے دیکھیں:"
+    doIt: "یہ کرو:"
+    tip: "اضافی ٹپ:"
+    card1:
+      title: "سائز تبدیل کریں"
+      description: "Change the size of an object."
+      one: "وہ اوبجیکٹ شامل کریں جس کا آپ سائز بدلنا چاہتے ہیں، مثلاً جانور."
+      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+    card2:
+      title: "Change Look"
+      description: "اوبجیکٹ کی دکھا واٹ کو تبدیل کریں."
+      one: "شامل کریں وہ اوبجیکٹ جس کی دکھا واٹ آپ تبدیل کرنا چاہتے ہیں، مثلاً آئیٹمز."
+      two: "Include further pictures in the object's looks."
+      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+    card3:
+      title: "حرکت اندازی"
+      description: "آبجیکٹس کی حرکت اندازی"
+      one: "وہ اوبجیکٹ شامل کریں جو آپ آگے چلانا چاہتے ہیں."
+      two: "Include another picture in the object's looks which illustrates the movement."
+      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+    card4:
+      title: "سرکنا"
+      description: "Let your object glide over the screen."
+      one: "Add the object you want to be gliding. e.g. plane."
+      two: "Insert the following bricks and define the area in which the movement should happen."
+    card5:
+      title: "آواز چلائیں"
+      description: "آواز چلانے کے لئے آبجیکٹ پر ٹیپ کریں۔"
+      one: "Add the object you want to be playing a sound, e.g. dog."
+      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
+    card6:
+      title: "بولیے"
+      description: "Let your object speak."
+      one: "Add the object you want to be speaking, e.g. Carrie."
+      two: "Insert the following bricks in order to make the voice output possible."
+    card7:
+      title: "سینسر"
+      description: "Control an object by using the inclination sensors."
+      one: "Add the object you want to be moving on stage."
+      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
+    card8:
+      title: "قطب نما"
+      description: "اپنا قطب نما بنائین"
+      one: "Add the object you want to point in compass direction."
+      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+    card9:
+      title: "نشریات"
+      description: "ایک اوبجیکٹ سے دوسرے اوبجیکٹ کو میسیج بھجین۔"
+      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
+    card10:
+      title: "ویریئبل دکھائیں"
+      description: "ویریئبل کی ویلیو دکھائیں."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
+      three: "Through „Show variable“ you can display the values on stage."
+    card11:
+      title: "Collision detection"
+      description: "Detect a collision between two objects."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+    card12:
+      title: "چہرے کی شناخت"
+      description: "چہرے کی شناخت سے اوبجیکٹ کو کنٹرول کریں."
+      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
+  starterPrograms:
+    title: "Starter projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
+    categories:
+      games: "کھیل"
+      animations: "حرکت اندازی"
+      interactive: "متعامل آرٹ اور کہانیاں"
+      music: "موسیقی اور رقص"
+  gameJam:
+    title: "How to upload a Pocket Code game to the Game Jolt Site?"
+    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
+    title1: "رجسٹریشن"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title2: "اپ لوڈ کریں"
+    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
+    title4: "اینڈرائیڈ پروگرام بنائیں"
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "پروگرام ڈاؤن لوڈ کریں"
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "Register/Login at GameJolt.com"
+    text6: "%link% پر جائیں اور میں مینو میں ’لوگ ان’ یا ’سائن اپ!’ پر کِلک کریں. اگر آپ کے پاس پہلے سے ہی اکاؤنٹ ہے تو صرف لوگ ان کریں، اگر نہیں، تو آپ کو رجسٹر کرنا پڑے گا آپکی ای میل، یوزر نیم اور پاسورڈ سے."
+    title7: "Game Jolt سائٹ پر اپنی گیم اپ لوڈ کریں"
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
+    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
+    text7_5: "اپ لوڈ ہونے کے بعد اپنی گیم کو شایہ کرنے کے لیے ’او کے’ پر کِلک کریں. یہ بعد میں لوگوں کو آپکی گیم ڈائون لوڈ کرنے کی لنک دکھائے گا."
+    text7_6: "اب اپنے اپنی پہلی گیم اپ لوڈ کردی ہے Game Jolt سائٹ پر اور اسے ایکٹیو کر دیا ہے. مبارک ہو!"
+    text7_7: "اب دوسرے لوگ آپکی گیم کو ڈھونڈھ سکیں گے اور یہ اِس %link% پیج پر ہوگی."
+  aliceGameJamTutorialcards:
+    title1: "(Welcome to) Wonderland"
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: "Save Alice!"
+    subtitle2: "Use the inclination sensors and detect a collision between objects"
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: "دی ہٹر - ضرب و فرار"
+    subtitle3: "اک چلنے والی زمین بنائے اور ہٹرس کی ہلچل کو کنٹرول کریں"
+    description3: "اِس سبق میں آپ سیکھیں گے کے کس طرح لینڈ اسکیپ بنے گا جو ایسا لگتا ہے کے وہ چل رہا ہے. ہم اوبجیکٹس کو اسکریں کے ساتھ آگے چلا کے ہلچل کا بھرم بنائی گے. ہم آپکو یہ بھی دکھائی گے کے کس طرح ہٹر موو بنے گا آپکی فون کو جھکا کے ."
+    title4: "دی ہٹر - ضرب و فرار"
+    subtitle4: "ہٹر کو برے کارڈز کو گولی مرنے دو"
+    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "ویریابلیس کو استعمال کر کے سکور بنائیں"
+    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
+    title6: "A Rabbits Race"
+    subtitle6: "ایک حرکت پذیر پس منظر بنائیں"
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: "Download the project"
+oauth:
+  username_header: پاکٹ کوڈ میں سائن اَپ کے لئے آپ کا شکریہ!
+  username_chooser: "برائے مہربانی یوزر نیم منتخب کریں:"
+  username_hint: یوزر نیم آپکا اصلی نام نہیں ہونا چاہیے.
+  usernameTaken: صارف نام پہلے ہی لیا جا چکا ہے۔ برائے مہربانی کوئی اور منتخب کریں.
+search:
+  dotdotdot: تلاش کریں...
+  search: تلاش
+  inMediaLib: Search in media library
+  results: تلاش کے نتائج
+  resultcount: آپ کی تلاش نے %count% نتائج لوٹائے
+  fail: Please enter at least a single search term
+menu:
+  profile: میری پروفائل
+  login: لاگ اِن
+  logout: لاگ آؤٹ
+  admin: Admin
+  home: Home
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Follower
+login:
+  login: لاگ اِن
+  passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
+  noUsername: آپکا یوزر نیم یا ای میل نہیں ملا.
+  forgotPass: صارف نام یا خفیہ کوڈ بھول گئے ہیں؟
+  recoverPass: خفیہ کوڈ بحال کریں
+  recoverPassSend: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  userOrEmail: صارف کا نام یا ای میل
+  changePass: خفیہ کوڈ تبدیل کریں
+  createAccount: ایک اکاؤنٹ بنائیں
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
+  or: یا
+  username: صارف کا نام
+  email: ای میل
+  passwordFirst: خفیہ کوڈ
+  passwordSecond: Password confirm
+apk:
+  download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
+  prepare: 'ایپ تیار کریں'
+  preparing: 'ایپ تیار کر رہا ہے'
+  text: 'اس عمل میں کچھ وقت لگ سکتا ہے'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: صارف کا نام خالی نہیں ہونا چاہیئے
+    invalid: آپکا صارف نام غلط ہے
+    exists: یہ صارف نام پہلے سے موجود ہے۔.
+    not_exists: یہ صارف نام موجود نہیں ہے.
+    not_email: The username must not be an email address.
+    size: The username must have at least 3 character and not more than 180
+  password:
+    blank: خفیہ کوڈ موجود نہیں۔
+    short: 'آپ کا خفیہ کوڈ کم از کم {{ limit }} حروف پر مشتمل ہونا چاہیئے۔'
+  description:
+    rude: تفصیل سخت الفاظ کا حامل نہیں ہونا چاہیے ۔.
+  credit:
+    rude: Credits must not contain rude words.
+  country:
+    blank: ملک غائب ہے۔
+    invalid: غلط ملک
+  email:
+    blank: ای میل خالی نہیں ہونا چاہیے
+    invalid: آپکی ای میل غلط لگ رہی ہے
+    exists: یہ ای میل پتہ پہلے سے استعمال میں ہے.
+  id:
+    blank: کھولنے کے لیے تصدیقی آئی ڈی خالی نہیں ہونی چاہیے
+  login: صارف نام یا پاس ورڈ غلط تھا ۔
+  post-data: پوسٹ ڈیٹا سہی نہیں یا غیب ہے !
+  checksum:
+    missing: خریدار نئے حیض فائل نہیں بھیجی! کیا آپ پاکٹ کوڈ کا پرانا ورژن استعمال کر رہے ہیں؟
+    invalid: غلط حیض
+  xml:
+    invalid: غلط xml کوڈ
+    missing: 'نامعلوم غلطی: !project_xml_not_found'
+  file:
+    unexpected: غیر متوقع فائل ملی
+    invalid: غلط فائل
+  image.missing: پروجیکٹ xml میں ایک فائل کا ذکر ہے جو پروجیکٹ فولڈر میں موجود نہیں
+  unknown: نامعلوم غلطی
+  token: 'ڈیوائسس کی تصدیق نمک: غلط اوتھ-ٹوکن!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  programname:
+    rude: Project name must not contain rude wordes.
+  program:
+    invalid: Invalid project.
+  languageversion:
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+  programversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: تصدیق میں ناکام رہے
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
+success:
+  text: Success
+  registration: رجسٹریشن کامیاب!
+  token: ٹھيک ہے
+  upload: آپکے پراجیکٹ کو کامیابی کے ساتھ اپ لوڈ کیا گیا!
+  imgUpload: Your image was uploaded successfully!
+  report: آپکی رپورٹ کامیابی سے بھیج دی گئی!
+time:
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+failure:
+  upload: There was an error during the upload of your app.
+api:
+  registerUser:
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username must not contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
+#languages and countries
+language:
+  arabic: عربی
+  bulgarian: بلغاری
+  catalan: کیٹالان
+  chinese_simplified_han: چینی (آسان کردہ)
+  chinese_traditional_han: چینی (روایتی)
+  croatian: کووشین
+  czech: چیک
+  danish: ڈینش
+  dutch: ڈچ
+  english_united_kingdom: انگریزی (برطانیہ)
+  english_united_states: انگریزی (امریکہ)
+  estonian: ایسٹونین
+  filipino: فلیپینو
+  finnish: فینیش
+  french: فرانسیسی
+  german: جرمنی
+  greek: یونانی
+  hebrew: عبرانی
+  hindi: ہندی
+  hungarian: ہنگرین
+  indonesian: انڈونیشی
+  italian: اطالوی
+  japanese: جاپانی
+  korean: کوریائی
+  latvian: لیٹوین
+  lithuanian: لتھونيئن
+  malay: مالے
+  norwegian: نارويجين
+  persian: فارسی
+  polish: پولستانی
+  portuguese_brazil: پرتگالی (برازیل)
+  portuguese_portugal: پرتگالی (پرتگال)
+  romanian: رومنی
+  russian: روسی
+  serbian: سربيئن
+  slovak: سلوواک
+  slovenian: سلووينيئن
+  spanish_latin_america: ہسپانوی (لاطینی امریکہ)
+  spanish_spain: ہسپانوی (سپین)
+  swedish: سویڈنی
+  thai: تھائی
+  turkish: ترکی
+  ukrainian: يوکرينيئن
+  vietnamese: ویتنامی
+ci:
+  generate: آ  پی  کے بنائے
+  pending: آ  پی  کے بن رہی ہے
+  download: آ  پی  کے ڈائون لوڈ کریں
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to %gamejamname%
+  whats: '%gamejamname% کیا ہے؟'
+  submitown:
+    header: خبردار
+    subheader: You can only submit your own projects
+    text: |
+      لیکن کیوں نہ آپ اپنی تخلیق کریں!
+      %gamejamtag% میں شرکت کریں
+tag-text: ٹیگز
+extenstion-text: توسیعات
+tags:
+  constant:
+    tag1: کھیل
+    tag2: حرکت اندازی
+    tag3: کہانی
+    tag4: موسیقی
+    tag5: آرٹ
+    tag6: تجرباتی
+    tag7: Tutorial
+admin:
+  maintain:
+    diskMaintenance: بحالی ڈسک
+    ramMaintenance: RAM maintenance
+    noRemovableObjects: کوئی ہٹائی جانے والی اشیاء دستیاب نہیں ۔
+    removableObjects: Removable objects
+recommender:
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
+  moreFromThisUser: More from %username%
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your project upload was successful.
+  failed:
+    text: Project upload failed.
+codeview:
+  title: 'Code view'
+  showCode: 'کوڈ دکھائیں'
+  hideCode: 'کوڈ چھپائیں'
+  showStatistics: 'کوڈ کے اعداد و شمار دکھائیں'
+  hideStatistics: 'کوڈ کے اعداد و شمار چھپائیں'
+  cantDisplayCode: "کوڈ ظاہر نہیں کیا جا سکتا"
+  cantDisplayStatistics: "کوڈ ظاہر نہیں کیا جا سکتا"
+  totalNumberOf: 'کل تعداد'
+  scenes: 'مناظر'
+  scripts: 'سکرپٹ'
+  bricks: 'اینٹیں'
+  objects: 'اداکار اور آبجیکٹ'
+  looks: 'نظر'
+  sounds: 'آوازیں'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
+codeStatistics:
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
+  general: 'General'
+  bricks: 'اینٹیں'
+  eventBricks: 'واقعہ'
+  controlBricks: 'کنٹرول'
+  motionBricks: 'حرکت'
+  soundBricks: 'آواز'
+  looksBricks: 'نظر'
+  penBricks: 'قلم'
+  dataBricks: 'ڈیٹا'
+  specialBricks: 'Special'
+footer:
+  language: زبان
+  usefulLinks: Useful links
+  legalities: Legalities
+  communityStats: Community stats
+  download: Get the App
+privacy-policy:
+  header: رازداری کا طریقہ کار
+  version: Version 2.2, 17 October 2019
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  comment:
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
+  like:
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
+  follow:
+    title: 'New follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New project from someone you follow'
+    message: 'User %user_link% created a new project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+clipboard:
+  success: Link to project copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: اگلا
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: اسباق
+    stepbystep: Step by step
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    discord: Join on Discord
+    game_design: Game design
+    education: Education platform
+    discuss: Discuss
+  text:
+    starters: "Try out and remix with %theme%"
+    tutorials: "مرکزی خیال، موضوع میں مؤثر چالیں٪"
+    stepbystep: "٪ مرکزی خیال، موضوع میں 10 آسان اقدامات کریں"
+    getinvolved: Download the app and get started
+    discord: Join the community on discord
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  thumb-size:
+    description: Preview size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
+flavor:
+  pocketcode: پاکٹ کوڈ
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'کاپیروبٹ </a> کاپی رائٹ اور کاپی٪ سالہ <a href="http://www.catrobat.org">. جملہ حقوق محفوظ ہیں.'
+agree: متفق
+disagree: غیر متفق
+profileLoader:
+  noProfiles: اس وقت کوئی پروگرام نہیں ہے۔
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'کاٹروبٹ کے تمام لوگ                      '
+back_to_app: 'Exit community'
