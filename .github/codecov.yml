@@ -1,0 +1,10 @@
+# In the moment coverage should only be informational and not provide CI checks to fail the pipeline
+coverage:
+  status:
+    project: off
+    patch: off
+
+# do not comment until at least X builds have been uploaded from the CI pipeline
+# Important keep up to date with behat + phpunit testsuites
+comment:
+    after_n_builds: 15
