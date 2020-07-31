@@ -62,8 +62,8 @@ set('allow_anonymous_stats', false);
 host(getenv('DEPLOY_SHARE'))
   ->stage('share')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'master')
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('branch', 'release/v3.4.3')
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
 
