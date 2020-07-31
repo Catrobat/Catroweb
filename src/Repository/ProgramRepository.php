@@ -6,6 +6,7 @@ use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ScratchProgramRemixRelation;
+use App\Utils\APIQueryHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\NonUniqueResultException;
@@ -42,7 +43,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
@@ -59,7 +60,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try
@@ -91,7 +92,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $qb = $this->addDebugBuildCondition($qb, $debug_build);
-    $qb = $this->addFlavorCondition($qb, $flavor);
+    $qb = APIQueryHelper::addFlavorCondition($qb, $flavor);
     $qb = $this->addMaxVersionCondition($qb, $max_version);
 
     return $qb->getQuery()->getResult();
@@ -111,7 +112,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $qb = $this->addDebugBuildCondition($qb, $debug_build);
-    $qb = $this->addFlavorCondition($qb, $flavor);
+    $qb = APIQueryHelper::addFlavorCondition($qb, $flavor);
     $qb = $this->addMaxVersionCondition($qb, $max_version);
 
     try
@@ -141,7 +142,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
@@ -159,7 +160,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try
@@ -247,7 +248,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
 
     if ((int) $offset > 0)
@@ -308,7 +309,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
 
     $query_builder
@@ -365,7 +366,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
@@ -383,7 +384,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try
@@ -415,7 +416,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
@@ -436,7 +437,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
@@ -454,7 +455,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try
@@ -486,7 +487,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -508,7 +509,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -645,7 +646,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
 
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -665,7 +666,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->orderBy('e.uploaded_at', 'DESC')
     ;
 
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -716,7 +717,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
+    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return (int) $query_builder->getQuery()->getSingleScalarResult();
@@ -1005,29 +1006,6 @@ class ProgramRepository extends ServiceEntityRepository
             ORDER BY remixes_count DESC '.
       $limit_clause.' '.
       $offset_clause.' ';
-  }
-
-  private function addFlavorCondition(QueryBuilder $query_builder, ?string $flavor, string $alias = 'e'): QueryBuilder
-  {
-    if ($flavor)
-    {
-      if ('!' === $flavor[0])
-      {
-        $query_builder
-          ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
-          ->setParameter('flavor', substr($flavor, 1))
-        ;
-      }
-      else
-      {
-        $query_builder
-          ->andWhere($query_builder->expr()->eq($alias.'.flavor', ':flavor'))
-          ->setParameter('flavor', $flavor)
-        ;
-      }
-    }
-
-    return $query_builder;
   }
 
   private function addDebugBuildCondition(QueryBuilder $query_builder, bool $debug_build_request, string $alias = 'e'): QueryBuilder
