@@ -3,6 +3,7 @@
 localLanguage: 英語
 username: '&#x5EFA;&#x7ACB;&#x65B0;&#x5E33;&#x865F;'
 password: '&#x6210;&#x529F;&#x66F4;&#x65B0;&#x60A8;&#x7684;&#x570B;&#x5BB6;&#x3002;'
+createNewPassword: Create new password
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: 關於 Pocket Code
@@ -66,6 +67,9 @@ notificationsClearError: "Unable to mark notifications as read!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Please wait..."
 projects: "程式檔"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
 statistics: "Statistics"
 indexPage:
   recommendedSection:
@@ -770,14 +774,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded

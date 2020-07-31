@@ -3,6 +3,7 @@
 localLanguage: Αγγλικά
 username: Username
 password: Password
+createNewPassword: Create new password
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: About Pocket Code
@@ -66,6 +67,9 @@ notificationsClearError: "Δεν είναι δυνατή η επισήμανση
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Παρακαλώ περιμένετε..."
 projects: "Προγράμματα"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
 statistics: "Statistics"
 indexPage:
   recommendedSection:
@@ -770,14 +774,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
-    manualBackups: Χειροκίνητη δημιουργία αντιγράφων ασφαλείας
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Δημιουργία αντιγράφου ασφαλείας
-    btnDownloadBackup: Λήψη αντιγράφου ασφαλείας
-    btnRestoreBackup: Επαναφορά αντιγράφου ασφαλείας
-    btnDeleteBackup: Διαγραφή αντιγράφου ασφαλείας
-    createBackupConfirmationTitle: Δημιουργία αντιγράφου ασφαλείας
-    createBackupConfirmationText: Αυτή η διαδικασία ενδέχεται να διαρκέσει λίγο. Η σελίδα θα φορτώσεi αμέσως μετά!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded

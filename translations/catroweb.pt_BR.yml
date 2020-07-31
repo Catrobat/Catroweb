@@ -3,6 +3,7 @@
 localLanguage: Inglês
 username: Nome de usuário
 password: Senha
+createNewPassword: Criar uma nova senha
 accountSettings: Configurações da Conta
 email: E-Mail
 aboutPocketCode: Sobre o Pocket Code
@@ -66,6 +67,9 @@ notificationsClearError: "Não foi possível marcar as notificações como lidas
 notificationsDeleteError: "Não foi possível excluir as notificações!"
 pleaseWait: "Por favor, aguarde..."
 projects: "Programas"
+oauthPopUpTitle: "Informação de login da conta externa"
+oauthInfo: 'Você acabou de usar uma conta externa para entrar. Nós criamos um nome de usuário aleatório para você. Se quiser mudar seu nome de usuário ou criar uma nova senha para sua conta, acesse minha página de perfil. Clique %link_start% aqui %link_end% para ir para a sua página de perfil'
+oauthHere: "aqui"
 statistics: "Statistics"
 indexPage:
   recommendedSection:
@@ -141,7 +145,7 @@ programs:
   uploaded: Projetos carregados
   reportAsInappropriate: Reportar como impróprio
   reportProgram: Reportar projeto
-  languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
+  languageVersion: 'Versão de linguagem do Catrobat: %languageVersion%'
   reportLoginText: Por favor, %login% para reportar este projeto.
   reportDialogHeader: Por que você deseja reportar este projeto?
   reportDialogReason: Entre um motivo
@@ -203,11 +207,11 @@ accountConfirmation:
     <br>
     Para finalizar a ativação da sua conta - por favor, clique <a href=%confirmationUrl%>aqui.</a><br>
     <br>
-    Este link pode ser usado uma única vez para validar sua conta.<br>
+    Este link só pode ser usado uma única vez para validar sua conta.<br>
     <br>
-    Sinceros cumprimentos,<br>
-    Seu Time Catrobat.
-    </p>
+    Uma boa sorte,<br>
+    A Equipe Catrobat.
+    </p></p>
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -600,7 +604,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Baixar como app
-  prepare: 'Preparar app'
+  prepare: 'Baixar como app'
   preparing: 'Preparando app'
   text: 'O processo pode demorar um pouco'
 format:
@@ -631,7 +635,7 @@ errors:
   id:
     blank: ID de Autenticação Aberta não pode estar em branco
   login: A senha ou nome de usuário está incorreto.
-  post-data: POST-Data não correto ou faltando!
+  post-data: POST-data não está correta ou faltando!
   checksum:
     missing: Cliente não enviou o arquivo Checksum! Você está usando uma versão desatualizada do Pocket Code?
     invalid: checksum inválido
@@ -769,14 +773,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: Não há objetos removíveis disponíveis.
     removableObjects: Removable objects
-    manualBackups: Backups manuais
-    noRemovableBackupObjects: Não há arquivos de backup removíveis neste servidor.
-    btnCreateBackup: Criar backup
-    btnDownloadBackup: Baixar backup
-    btnRestoreBackup: Restaurar backup
-    btnDeleteBackup: Excluir backup
-    createBackupConfirmationTitle: Criar arquivo de backup
-    createBackupConfirmationText: Este processo pode demorar um pouco. A página recarregará logo após!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded

@@ -3,6 +3,7 @@
 localLanguage: Angličtina
 username: Uživatelské jméno
 password: Heslo
+createNewPassword: Create new password
 accountSettings: Account Settings
 email: E-mail
 aboutPocketCode: O Pocket Code
@@ -66,6 +67,9 @@ notificationsClearError: "Nelze označit oznámení jako přečtené!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Prosím čekejte..."
 projects: "Programy"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
 statistics: "Statistics"
 indexPage:
   recommendedSection:
@@ -768,14 +772,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded

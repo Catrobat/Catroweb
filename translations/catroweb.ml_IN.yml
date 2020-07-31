@@ -1,32 +1,133 @@
 ---
-localLanguage: English
-username: Username
-password: Password
+#homepage translation
+localLanguage: ഇംഗ്ലീഷ്
+username: ഉപയോക്തൃനാമം
+password: പാസ്‌വേഡ്
+createNewPassword: Create new password
+accountSettings: Account settings
+email: E-Mail
 aboutPocketCode: About Pocket Code
-tutorials: Tutorials
+aboutCatrobat: About Catrobat
+tutorials: ട്യൂട്ടോറിയലുകൾ
 googlePlay: Google Play
-passwordsNoMatch: "The passwords didn't match."
+iosAppStore: IOS App store
+passwordsNoMatch: The passwords didn't match.
 error: തെറ്റ്
 cancel: വേണ്ടെന്നു വയ്ക്കുക
-report: Report
+report: റിപ്പോർട്ട് 
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Download as program
 description: Description
 noDescription: No description available.
+credits: Credits
+noCredits: No credits available.
 country: Country
 loginText: login
 privacyPolicy: Privacy Policy
 imprint: Imprint
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
-more: more
-less: less
+programDetails: Details
+somethingWentWrong: 'Ooooops something went wrong.'
+pleaseTryAgain: 'Please try again!'
+oldVersionError: 'Please update to the newest Pocket Code version!'
+more: 'കൂടുതൽ'
+less: 'അല്പം'
+show-more: 'More information'
+show-less: 'Less information'
 ok: OK
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: Username or email address already in use.
+registrationError: 'Username or email address already in use.'
+notifications: 'Notifications'
+allNotifications: 'All notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction notifications'
+followersNotificationsTitle: 'Follower notifications'
+commentsNotificationsTitle: 'Comment notifications'
+remixNotificationsTitle: 'Remix notifications'
+CommentNotifications: 'Comments'
+RemixNotifications: 'Remixes'
+oldnotification: 'Old notifications'
+wellDone: "Well done!"
+done: "കഴിഞ്ഞു!\n"
+notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+deleteNotificationConfirmation: "Are you sure?"
+notificationDeleteMessage: "Are you sure you want to delete this notification?"
+notificationDeleteAllMessage: "Are you sure you want to delete all notifications?"
+confirmMessage: "Yes, delete it"
+cancelMessage: "വേണ്ടെന്നു വയ്ക്കുക"
+notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationDeletedMessage: "Notification has been successfully deleted."
+clearAllNotificationsButtonTitle: "Mark all as read"
+deleteAllNotificationsButtonTitle: "Delete all"
+notificationsClearError: "Unable to mark notifications as read!"
+notificationsDeleteError: "Unable to delete notifications!"
+pleaseWait: "Please wait..."
+projects: "Projects"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What projects are recommended here?'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
 programs:
+  welcome:
+    title: Welcome to Catrobat's %theme%
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More statistics
   featured: Featured
+  example: Examples
   newest: Newest programs
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noPrograms: There are currently no projects.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -35,65 +136,168 @@ programs:
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "All"
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Programs
   uploaded: Uploaded Programs
   reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportLoginText: Please %login% to report this program as inappropriate.
   reportDialogHeader: Why do you think this program is inappropriate?
   reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: You cannot flag your own program.
-  reportAlready: "You've already flagged this program as inappropriate."
+  reportAlready: You've already flagged this program as inappropriate.
   reportDone: You reported this program as inappropriate!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
+  btnClosePopup: OK
   checkout_this_program: Checkout this Catrobat program
   show_more: Show More
   comments: Comments
   send: Send
   delete: ഒഴിവാക്കുക
-  report: Report
+  report: റിപ്പോർട്ട് 
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editDescription: Edit the project description
+  saveDescription: Save description change
+  editCredits: Edit the project credits
+  saveCredits: Save credits change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
+  reactionsText: Reactions
+remixGraph:
+  title: Remixes
+  showRemixGraph: 'Remix graph'
+  by: 'by'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown user'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat account confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
     Dear %username%.
-    
+
     You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
     To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    
+
     You can use your username and your password at any time to access the %appplication_url% community.
     To do so, just visit the following page: %loginPage%
     To edit your profile details, go to this page: %profilePage%
-    
+
     Best regards,
     Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
 profile:
+  edit: Edit your profile
   saveChanges: save changes
   newPass: new password
   repeatPass: repeat password
+  oldPass: old password
   firstEmail: My first email
   secondEmail: My second email
   myPrograms: My programs
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of projects
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordTooShort: The new password must have at least %length% characters.
+    passwordTooLong: The new password can have a maximum of %length% characters.
     passwordIsUsername: The password must differ from the username.
+    passwordWrong: Wrong password
     emailNotValid: This email address is not valid.
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: This username already exists.
+    usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: saved!
   reallyDeleteProgram: Do you really want to delete your program
   programsOf: Programs of
   changePicture: Change picture
   avatar:
+    noImage: No image!
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  checkMail: An email was sent to your email address. Please check your inbox.
+  passwordUpdated: Your password was successfully updated.
+  avatar: Avatar
+  email: Email
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit email
+  deleteAccount: Delete account
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
-  link: License to play
+  link: 'License to play'
   title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
@@ -143,266 +347,287 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 help:
   stepByStep:
-    title: Step-by-Step Intro
-    start: 'Starting position:'
+    title: "Step-by-Step Intro"
+    start: "Starting position:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: Make a new program
+      title: 'Make a new program'
       detail:
         text1: 'Tap on "New".'
         text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
     step2:
-      title: Create a new object
+      title: "Create a new object"
       detail:
         text1: 'Tap:'
-        text2: Choose the source of the first look of your new object.
+        text2: 'Choose the source of the first look of your new object.'
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: Draw a new look.
-        special2: Choose from gallery.
-        special3: Take a picture.
+        special1: 'Draw a new look.'
+        special2: 'Choose from gallery.'
+        special3: 'Take a picture.'
     step3:
-      title: Start Moving
+      title: "Start Moving"
       detail:
         text1: 'Tap:'
         text2: 'The first brick we use is out of the category "Motion".'
         text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Use the Android Back Button to get back from the stage.
+        text6: 'Use the Android Back Button to get back from the stage.'
     step4:
-      title: Change Look
-      description: You can change the look of your object.
+      title: "Change Look"
+      description: "You can change the look of your object."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
         text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: Tap into the dropdown field to create a new look.
-        text4: Choose the source of the image like before.
-        text5: Now you have to select the new image.
-        text6: Tap play to see the behaviour on the stage.
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'Now you have to select the new image.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: Speak
-      description: Now you will find out how to make an object talk.
+      title: "Speak"
+      description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: Tap play to see the behaviour on the stage.
+        text3: 'Tap play to see the behaviour on the stage.'
     step6:
-      title: Again and again
-      description: This step shows you how to repeat behaviour of objects.
+      title: 'Again and again'
+      description: "This step shows you how to repeat behaviour of objects."
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
         text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Tap into the text field of the x and y value and set to 0.
-        text6: Tap play to see the behaviour on the stage.
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step7:
-      title: Tapping is everything
-      description: You can also control the behaviour of the object when the program is running on the stage.
+      title: "Tapping is everything"
+      description: 'You can also control the behaviour of the object when the program is running on the stage.'
       detail:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
-        text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
     step8:
-      title: Copy, delete or edit a brick
+      title: "Copy, delete or edit a brick"
       detail:
-        text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
     step9:
-      title: Navigation in the app
+      title: "Navigation in the app"
       detail:
-        text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
-        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
-      title: Change the background
+      title: "Change the background"
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: The background is like an object, but you just can have on background.
-        text2: You can add scripts, sounds and look in the same way to the background object.
+        text1: 'The background is like an object, but you just can have on background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
-      title: Main Menu
-      description: Use the Android Back Button to get to this screen.
+      title: "Main Menu"
+      description: "Use the Android Back Button to get to this screen."
       detail:
-        text1: Continue with your currently opened program.
-        text2: Add a new program.
-        text3: See all your local programs.
-        text4: Go to the help site and discuss with other users.
-        text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: Upload the program that is currently opened.
+        text1: 'Continue with your currently opened program.'
+        text2: 'Add a new program.'
+        text3: 'See all your local programs.'
+        text4: 'Go to the help site and discuss with other users.'
+        text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
+        text6: 'Upload the program that is currently opened.'
   tutorialcards:
-    title: Tutorials
-    description1: These tutorials show you how to use effective tricks in Pocket Code.
-    getReady: 'Get Ready:'
-    tryCode: 'Try this code:'
-    doIt: 'Do it:'
-    tip: 'Extra Tip:'
+    title: "ട്യൂട്ടോറിയലുകൾ"
+    description1: "These tutorials show you how to use effective tricks in Pocket Code."
+    getReady: "Get Ready:"
+    tryCode: "Try this code:"
+    doIt: "Do it:"
+    tip: "Extra Tip:"
     card1:
-      title: Change Size
-      description: Change the size of an object.
-      one: Add the object of which you would like to change the size, e.g. Animal.
+      title: "Change Size"
+      description: "Change the size of an object."
+      one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: Change Look
-      description: Change the looks of an object.
-      one: Add the object of which you would like to change its look, e.g. items.
+      title: "Change Look"
+      description: "Change the looks of an object."
+      one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
       three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: Animation
-      description: Animate objects
-      one: Add the object you want to be moving.
+      title: "Animation"
+      description: "Animate objects"
+      one: "Add the object you want to be moving."
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: Glide
-      description: Let your object glide over the screen.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: Insert the following bricks and define the area in which the movement should happen.
+      title: "Glide"
+      description: "Let your object glide over the screen."
+      one: "Add the object you want to be gliding. e.g. plane."
+      two: "Insert the following bricks and define the area in which the movement should happen."
     card5:
-      title: Play a Sound
-      description: Play a sound by tapping on the object.
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
+      title: "Play a Sound"
+      description: "Play a sound by tapping on the object."
+      one: "Add the object you want to be playing a sound, e.g. dog."
+      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: Speak
-      description: Let your object speak.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      title: "Speak"
+      description: "Let your object speak."
+      one: "Add the object you want to be speaking, e.g. Carrie."
+      two: "Insert the following bricks in order to make the voice output possible."
     card7:
-      title: Sensor
-      description: Control an object by using the inclination sensors.
-      one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      title: "Sensor"
+      description: "Control an object by using the inclination sensors."
+      one: "Add the object you want to be moving on stage."
+      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
-      title: Compass
-      description: Create you own compass
-      one: Add the object you want to point in compass direction.
+      title: "Compass"
+      description: "Create you own compass"
+      one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: Broadcast
-      description: Send messages from one object to another.
+      title: "Broadcast"
+      description: "Send messages from one object to another."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
     card10:
-      title: Show variable
-      description: Show the value of a variable.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      title: "Show variable"
+      description: "Show the value of a variable."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
+      three: "Through „Show variable“ you can display the values on stage."
     card11:
-      title: Collision detection
-      description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      title: "Collision detection"
+      description: "Detect a collision between two objects."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: Face detection
-      description: Control an object by using face detection.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: "Face detection"
+      description: "Control an object by using face detection."
+      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: Starter Programs
-    description: Try out these starter programs. Look inside to make changes and add your ideas.
+    title: "Starter Programs"
+    description: "Try out these starter programs. Look inside to make changes and add your ideas."
     categories:
-      games: Games
-      animations: Animations
-      interactive: Interactive Art and Stories
-      music: Music And Dance
+      games: "Games"
+      animations: "Animations"
+      interactive: "Interactive Art and Stories"
+      music: "Music And Dance"
   gameJam:
-    title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
-    title1: Registration
-    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: Upload
-    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: Search for your program
-    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
-    title4: Create Android app
-    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: Download app
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
-    title6: Register/Login at GameJolt.com
+    title: "How to upload a Pocket Code game to the Game Jolt Site?"
+    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
+    title1: "Registration"
+    text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title2: "Upload"
+    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
+    title3: "Search for your program"
+    text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
+    title4: "Create Android app"
+    text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "Download app"
+    text5: "After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "Register/Login at GameJolt.com"
     text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: Upload your game on the Game Jolt Site
+    title7: "Upload your game on the Game Jolt Site"
     text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
-    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
-    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
+    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
+    text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
+    text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
+    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
+    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
+    title1: "(Welcome to) Wonderland"
     subtitle1: "Animate Characters and create a 'when tapped' event"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
+    title2: "Save Alice!"
+    subtitle2: "Use the inclination sensors and detect a collision between objects"
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
+    title3: "The Hatter - Hit and Run"
     subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
+    title4: "The Hatter - Hit and Run"
+    subtitle4: "Let the Hatter shoot the evil cards"
+    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "Create a score by using variables"
+    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
+    title6: "A Rabbits Race"
+    subtitle6: "Create a moving background"
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    download: "Download the program"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
+  username_chooser: "Please choose a username:"
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Search...
   search: Search
+  inMediaLib: Search in media library
   results: Search Results
-  resultcount: 'Your search returned %count% results'
+  resultcount: Your search returned %count% results
+  fail: Please enter at least a single search term
 menu:
   profile: My Profile
+  login: Login
   logout: Logout
-programLoader:
-  noPrograms: There are currently no programs.
+  admin: Admin
+  home: Home
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Follower
 login:
+  login: Login
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OR
+  username: ഉപയോക്തൃനാമം
+  email: Email
+  passwordFirst: പാസ്‌വേഡ്
+  passwordSecond: Password confirm
 apk:
   download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  prepare: 'Prepare app'
+  preparing: 'Preparing app'
+  text: 'The process may take a while'
+format:
+  million_abbreviation: M
+#api
 errors:
   username:
     blank: Username must not be blank
     invalid: Your username is invalid
     exists: This username already exists.
     not_exists: This username does not exist.
+    not_email: The username must not be an email address.
+    size: The username must have at least 3 character and not more than 180
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
   description:
     rude: Description must not contain rude wordes.
+  credit:
+    rude: Credits must not contain rude words.
   country:
     blank: The country is missing.
     invalid: Invalid country
@@ -426,18 +651,26 @@ errors:
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: Programname must not contain rude wordes.
   program:
     invalid: Invalid program.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
+  authentication:
+    title: Authentication failed
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
 success:
+  text: Success
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
+  imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
@@ -445,6 +678,28 @@ time:
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+failure:
+  upload: There was an error during the upload of your app.
+api:
+  registerUser:
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username must not contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
+#languages and countries
 language:
   arabic: Arabic
   bulgarian: Bulgarian
@@ -496,7 +751,8 @@ ci:
   download: Download Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
   submitown:
     header: be aware
     subheader: You can only submit your own programs
@@ -513,15 +769,163 @@ tags:
     tag4: Music
     tag5: Art
     tag6: Experimental
+    tag7: Tutorial
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+    removableObjects: Removable objects
+recommender:
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
+  moreFromThisUser: More from %username%
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your project upload was successful.
+  failed:
+    text: Project upload failed.
+codeview:
+  title: 'Code view'
+  showCode: 'Show code'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'Scenes'
+  scripts: 'Scripts'
+  bricks: 'Bricks'
+  objects: 'Actors and objects'
+  looks: 'Looks'
+  sounds: 'Sounds'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
+codeStatistics:
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
+  general: 'General'
+  bricks: 'Bricks'
+  eventBricks: 'Event'
+  controlBricks: 'Control'
+  motionBricks: 'Motion'
+  soundBricks: 'Sound'
+  looksBricks: 'Looks'
+  penBricks: 'Pen'
+  dataBricks: 'Data'
+  specialBricks: 'Special'
+footer:
+  language: Language
+  usefulLinks: Useful links
+  legalities: Legalities
+  communityStats: Community stats
+  download: Get the App
+privacy-policy:
+  header: Privacy policy
+  version: Version 2.2, 17 October 2019
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  comment:
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
+  like:
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
+  follow:
+    title: 'New follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New project from someone you follow'
+    message: 'User %user_link% created a new project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+clipboard:
+  success: Link to project copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: അടുത്തത്
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: ട്യൂട്ടോറിയലുകൾ
+    stepbystep: Step by step
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    discord: Join on Discord
+    game_design: Game design
+    education: Education platform
+    discuss: Discuss
+  text:
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
+    getinvolved: Download the app and get started
+    discord: Join the community on discord
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  thumb-size:
+    description: Preview size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
+flavor:
+  pocketcode: പോക്കറ്റ് കോഡ്
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: സമ്മതിക്കുന്നു
+disagree: വിയോജിക്കുന്നു
+profileLoader:
+  noProfiles: There are currently no profiles.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'Catrobat community'
+back_to_app: 'Exit community'

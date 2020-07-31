@@ -1,0 +1,929 @@
+---
+#homepage translation
+localLanguage: anglais
+username: Nom d'utilisateur
+password: Mot de passe
+createNewPassword: Create new password
+accountSettings: Account settings
+email: E-mail
+aboutPocketCode: À propos de Pocket Code
+aboutCatrobat: A propos de Catrobat
+tutorials: Tutoriels
+googlePlay: Google Play
+iosAppStore: IOS App store
+passwordsNoMatch: Les mots de passe ne sont pas identiques.
+error: Erreur
+cancel: Annuler
+report: Signaler
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
+download: Télécharger
+description: Description
+noDescription: Aucune description disponible.
+credits: Credits
+noCredits: No credits available.
+country: Pays
+loginText: Identifiant
+privacyPolicy: Politique de confidentialité
+imprint: Mentions légales
+programDetails: Details
+somethingWentWrong: 'Ooooops, quelque chose s''est mal passé.'
+pleaseTryAgain: 'Essayez à nouveau !'
+oldVersionError: 'Veuillez mettre à jour vers la dernière version de Pocket Code !'
+more: 'plus'
+less: 'moins'
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+registrationError: 'Nom d’utilisateur ou adresse e-mail déjà en cours d’utilisation.'
+notifications: 'Notifications'
+allNotifications: 'All notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction notifications'
+followersNotificationsTitle: 'Follower notifications'
+commentsNotificationsTitle: 'Comment notifications'
+remixNotificationsTitle: 'Remix notifications'
+CommentNotifications: 'Commentaires'
+RemixNotifications: 'Remixes'
+oldnotification: 'Old notifications'
+wellDone: "Bien joué !"
+done: "Terminé!"
+notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsClearedMessage: "Toutes les notifications ont été marquées comme lues."
+deleteNotificationConfirmation: "Are you sure?"
+notificationDeleteMessage: "Are you sure you want to delete this notification?"
+notificationDeleteAllMessage: "Are you sure you want to delete all notifications?"
+confirmMessage: "Yes, delete it"
+cancelMessage: "Annuler"
+notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationDeletedMessage: "Notification has been successfully deleted."
+clearAllNotificationsButtonTitle: "Tout marquer comme lu"
+deleteAllNotificationsButtonTitle: "Delete all"
+notificationsClearError: "Impossible de marquer les notifications comme lues !"
+notificationsDeleteError: "Unable to delete notifications!"
+pleaseWait: "Merci de patienter..."
+projects: "Programmes"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What projects are recommended here?'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
+programs:
+  welcome:
+    title: Welcome to Catrobat's %theme%
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More statistics
+  featured: A l'affiche
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noPrograms: There are currently no projects.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
+  most:
+    viewed: Les plus populaires
+    downloaded: Les plus téléchargés
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% téléchargements'
+  sample: Example projects
+  views: '%views% vues'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "Tous"
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Signaler comme inapproprié
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Indiquer un motif
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeader: Mettre à jour l'application
+  updateAppText: Please update your app to the newest version to be able to download this project.
+  btnClosePopup: Ok
+  checkout_this_program: Checkout this Catrobat project
+  show_more: Afficher Plus
+  comments: Commentaires
+  send: Envoyer
+  delete: supprimer
+  report: Signaler
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editDescription: Edit the project description
+  saveDescription: Save description change
+  editCredits: Edit the project credits
+  saveCredits: Save credits change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
+  reactionsText: Reactions
+remixGraph:
+  title: Remixes
+  showRemixGraph: 'Remix graph'
+  by: 'par'
+  open: 'Ouvrir '
+  showPaths: 'Afficher les chemins d''accès'
+  programNotAvailableErrorTitle: 'Désolés...'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailable: 'Non disponible'
+  programUnknownUser: 'Utilisateur inconnu'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat account confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+passwordRecovery:
+  subject: Votre récupération de mot de passe Catrobat
+  message: |
+    Dear %username%.
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+profile:
+  edit: Edit your profile
+  saveChanges: enregistrer les changements
+  newPass: nouveau mot de passe
+  repeatPass: confirmez le mot de passe
+  oldPass: old password
+  firstEmail: Mon premier email
+  secondEmail: Mon deuxième email
+  myPrograms: My projects
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of projects
+  form:
+    passwordTooShort: Le nouveau mot de passe doit avoir au moins %length% caractères.
+    passwordTooLong: Le nouveau mot de passe peut avoir un maximum de %length% caractères.
+    passwordIsUsername: Le mot de passe doit être différent de l'identifiant.
+    passwordWrong: Mauvais mot de passe
+    emailNotValid: Cette adresse e-mail n'est pas valide.
+    emailMissing: Erreur lors de la mise à jour de cette adresse e-mail. Vous devez avoir au moins une adresse e-mail validée.
+    emailExists: Cette adresse e-mail existe déjà.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: Cet utilisateur existe déjà.
+    usernameContainsEmail: Username shouldn't contain an email address.
+    submitSuccess: enregistré!
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
+  changePicture: Changer l'image
+  avatar:
+    noImage: No image!
+    pictureTooLarge: L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo.
+    uploadError: Désolé, il y a eu un problème pendant le téléchargement !
+    noSupport: Ce type d'image n'est pas pris en charge, veuillez essayer une autre image.
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: Éditer le profil
+  edit: Éditer
+  done: Terminé
+  checkMail: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
+  passwordUpdated: Your password was successfully updated.
+  avatar: Avatar
+  email: Email
+  editAvatar: Modifier l'avatar
+  editUsername: Modifier le nom d’utilisateur
+  editPassword: Modifier le mot de passe
+  editCountry: Modifier le pays
+  editEmail: Modifier l'adresse mail
+  deleteAccount: Supprimer mon compte
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+licenseToPlay:
+  link: 'Licence pour jouer'
+  title: 'Licence de jeu - Partagez et créditez'
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
+  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
+  text6: 'En savoir plus sur les conditions d''utilisation de la communauté en ligne de Catrobat sur %link-termsOfUse%.'
+  list1:
+    item1: partagez vos gâteaux avec la recette
+    item2: créditez ceux qui vous ont inspiré
+  version: Version 1.1, 2 avril 2013
+termsOfUse:
+  title: Conditions d'utilisation
+  headline: Bienvenue dans la communauté Catrobat !
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text2: "Nous avons besoin de ton aide pour créer un endroit favorable pour tous les membres de la communauté. Voici comment tu peux aider :"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text4: 'Un cadeau pour toi :'
+  text5: 'Conditions d''utilisation et d''entretien :'
+  list1:
+    item1: de beaucoup de pays et cultures diverses
+    item2: de tous les âges (jeunes enfants, adolescents et grands-parents)
+    item3: avec tous les niveaux d'expérience
+  list2:
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item3: "Être honnête. Ne fais pas semblant d'être quelqu'un d'autre et n'essaye pas de tromper la communauté."
+    item4: "Ne partage pas d'informations privées. Notamment l'adesse e-mail, le numéro de téléphone ou d'autres informations de contact."
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+  list3:
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item3: "Si tu utilises et modifies des applis des autres utilisateurs, il faut les mentionner explicitement. Le nom que tu as sélectionné pour ton compte Catrobat sera aussi mentionné si quelqu'un utilise et modifie tes applis. Ainsi tout le monde peut profiter du travail de chacun."
+    item4: 'Pour les conditions juridiques précises, veuillez consulter %link-licenseUploaded%.'
+  list4:
+    item1: "Nous t'offrons nos applications et ressources Internet liées au système Catrobat comme par exemple des applications créees par l'équipe Catrobat, nos sites webs et ressources disponibles sur Internet, notre code source lié au système Catrobat et des matériaux supplémentaires comme par exemple des images, des sons et des texts maintenant et à l'avenir sous des licences libres de Catrobat."
+    item2: Ces licences nous permettent d'offrir Catrobat gratuitement. Grâce à ces licences, il est aussi possible d'utiliser et de modifier nos applications à ton gré. Il n'y a que quelques restrictions pour assurer que le système Catrobat reste libre et utile pour tout le monde pour toujours.
+    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+  list5:
+    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item2: Si tu as moins de 13 ans, il faut demander tes parents ou ton tuteur légal si tu peux utiliser les logiciels et services Catrobat.
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "Les logiciels et ressources Internet Catrobat ont pour but d'être utiles. Pourtant, nous donnons aucune garantie."
+    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
+  bottom1: Retourne-ici de temps en temps car nous cherchons toujours à améliorer nos conditions d'utilisation.
+  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+  version: Version 1.3, 4 mars 2014
+help:
+  stepByStep:
+    title: "Intro premiers pas"
+    start: "Position de départ :"
+    description: |
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+    step1:
+      title: 'Make a new project'
+      detail:
+        text1: 'Appuyer sur  « Nouveau ».'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
+    step2:
+      title: "Créer un nouvel objet"
+      detail:
+        text1: 'Appuyer :'
+        text2: 'Choose the source of the first look of your new object.'
+        text3: 'Enter an object name and tap "OK" to create the object.'
+        special1: 'Dessiner une nouvelle apparence.'
+        special2: 'Sélectionner dans la galerie.'
+        special3: 'Prendre une photo.'
+    step3:
+      title: "Commencer à bouger"
+      detail:
+        text1: 'Appuyer :'
+        text2: 'Le premier élément utilisé se trouve dans la catégorie  « Mouvement ».'
+        text3: 'Sélectionner l''élément  « Glisser ». L''objet est déplacé vers la nouvelle position définie par l''élément sur la scène.'
+        text4: 'L''élément flotte. Placer l''élément dans la position souhaité pour le coller. Il est aussi possible de déplacer des éléments insérés en appuyant sur l''élément jusqu''à ce qu''il flotte.'
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: 'Utiliser le bouton Retour Android pour retourner.'
+    step4:
+      title: "Changer Look"
+      description: "Il est possible de changer l'apparence d'un objet."
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Placer l''élément en-dessous l''élément « Glisser » .'
+        text3: 'Appuyer sur le champ de liste déroulante pour créer une nouvelle apparence.'
+        text4: 'Sélectionner la source de l''image comme décrit avant.'
+        text5: 'Sélectionner l''image.'
+        text6: 'Appuyer sur Play pour regarder la scène.'
+    step5:
+      title: "Parler"
+      description: "Faire un objet parler."
+      detail:
+        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text2: 'Plasser l''élément en-dessous l''élément « Passer au style ».'
+        text3: 'Appuyer sur Play pour regarder la scène.'
+    step6:
+      title: 'Again and again'
+      description: "Les objets en action."
+      detail:
+        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
+        text3: 'Add another "Glide" brick.'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: 'Appuyer sur le champ de texte et mettre les valeurs de x et y à 0.'
+        text6: 'Appuyer sur Play pour regarder la scène.'
+    step7:
+      title: "Tapping is everything"
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Place the "When tapped" underneath the other bricks.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: 'Le script est complet.'
+        text5: 'Appuyer sur play pour regarder les actions. En appuyant l''objet il commence à tourner.'
+    step8:
+      title: "Copy, delete or edit a brick"
+      detail:
+        text1: 'Appuyer sur la gauche de chaque élément pour ouvrir le menu contextuel. L''éditeur de formule permet de déplacer, copier, supprimer ou modifier les valeur de l''élément.'
+    step9:
+      title: "Navigation dans l’application"
+      detail:
+        text1: 'Utiliser le bouton retour Android pour naviguer dans l''appli.'
+        text2: 'Retourner à l''aperçu de l''objet. D''ici, il est possible d''ouvrir les scripts, les looks et les sons de l''objet. Il est aussi possible de renommer, copier, ajouter ou supprimer les sons. '
+        text3: 'Appuyer encore une fois sur le bouton retour Android pour ouvrir l''aperçu des objets et de l''arrière plan.'
+    step10:
+      title: "Modifier l'arrière plan"
+      description: "This is the overview of your objects and your project's background."
+      detail:
+        text1: 'L''arrière-plan est comme un objet mais il n''y a qu''un seul arrière-plan.'
+        text2: 'Il est possible d''ajouter des scripts, sons et looks à l''arrière-plan comme pour les objets.'
+    step11:
+      title: "Menu principal"
+      description: "Appuyer sur le bouton retour Android pour ouvrir le menu principal."
+      detail:
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
+        text4: 'Ouvrir l''aide et discuter avec d''autres utilisateurs.'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
+  tutorialcards:
+    title: "Tutoriels"
+    description1: "Ce tutoriel te montre comment utiliser les astuces efficacement dans"
+    getReady: "Prépare-toi :"
+    tryCode: "Essayez ce code :"
+    doIt: "Fais-le :"
+    tip: "Tuyau pratique :"
+    card1:
+      title: "Changer la tailler"
+      description: "Appuyer sur le canard pour modifier la taille."
+      one: "Add the object of which you would like to change the size, e.g. Animal."
+      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+    card2:
+      title: "Changer Look"
+      description: "Utiliser cette astuce pour compter automatiquement."
+      one: "Add the object of which you would like to change its look, e.g. items."
+      two: "Include further pictures in the object's looks."
+      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+    card3:
+      title: "Animations"
+      description: "Utiliser cette astuce pour faire voler un perroquet."
+      one: "Add the object you want to be moving."
+      two: "Include another picture in the object's looks which illustrates the movement."
+      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+    card4:
+      title: "Glisser"
+      description: "Glisser d'un point à un autre."
+      one: "Add the object you want to be gliding. e.g. plane."
+      two: "Insert the following bricks and define the area in which the movement should happen."
+    card5:
+      title: "Diffuser des sons"
+      description: "Play a sound by tapping on the object."
+      one: "Add the object you want to be playing a sound, e.g. dog."
+      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
+    card6:
+      title: "Parler"
+      description: "Utiliser le code pour faire un objet parler."
+      one: "Add the object you want to be speaking, e.g. Carrie."
+      two: "Insert the following bricks in order to make the voice output possible."
+    card7:
+      title: "Accéléromètre"
+      description: "Cette astuce permet de contrôler un objet avec l'inclinaison de l'appareil mobile."
+      one: "Add the object you want to be moving on stage."
+      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
+    card8:
+      title: "Boussole"
+      description: "Utiliser ce code pour programmer une boussole."
+      one: "Add the object you want to point in compass direction."
+      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+    card9:
+      title: "Diffuser"
+      description: "Regarde ce code ! Il indique comment les objets peuvent communiquer les uns avec les autres."
+      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
+    card10:
+      title: "Montrer la variable"
+      description: "Assignez la valeur d’une variable."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
+      three: "Through „Show variable“ you can display the values on stage."
+    card11:
+      title: "Détection de collision"
+      description: "Detect a collision between two objects."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+    card12:
+      title: "Détection de visage"
+      description: "Control an object by using face detection."
+      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
+  starterPrograms:
+    title: "Starter projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
+    categories:
+      games: "Jeux"
+      animations: "Animations"
+      interactive: "Histoires et Art interactif"
+      music: "Music And Dance"
+  gameJam:
+    title: "How to upload a Pocket Code game to the Game Jolt Site?"
+    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
+    title1: "Registration"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title2: "Envoyer"
+    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
+    title4: "Create Android app"
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "Download app"
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "Register/Login at GameJolt.com"
+    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    title7: "Upload your game on the Game Jolt Site"
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
+    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
+    text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
+    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
+    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
+  aliceGameJamTutorialcards:
+    title1: "(Welcome to) Wonderland"
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: "Sauvez Alice !"
+    subtitle2: "Use the inclination sensors and detect a collision between objects"
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: "The Hatter - Hit and Run"
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
+    title4: "The Hatter - Hit and Run"
+    subtitle4: "Let the Hatter shoot the evil cards"
+    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "Create a score by using variables"
+    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
+    title6: "A Rabbits Race"
+    subtitle6: "Create a moving background"
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: "Download the project"
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: "Please choose a username:"
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+search:
+  dotdotdot: Search...
+  search: Rechercher
+  inMediaLib: Search in media library
+  results: Résultats de recherche
+  resultcount: Your search returned %count% results
+  fail: Please enter at least a single search term
+menu:
+  profile: Mon profil
+  login: Se connecter
+  logout: Déconnexion
+  admin: Admin
+  home: Home
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Follower
+login:
+  login: Se connecter
+  passOrUser: Your password or username was incorrect.
+  noUsername: Your username or email address was not found.
+  forgotPass: Identifiants oubliés?
+  recoverPass: Retrouver le mot de passe
+  recoverPassSend: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  userOrEmail: Nom d'utilisateur ou email
+  changePass: Modifier le mot de passe
+  createAccount: Créer un compte
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
+  or: OU
+  username: Nom d'utilisateur
+  email: Email
+  passwordFirst: Mot de passe
+  passwordSecond: Password confirm
+apk:
+  download: Télécharger comme une application
+  prepare: 'Préparer l''application'
+  preparing: 'Préparation de l''application'
+  text: 'Cela pourrait prendre quelques instants'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: Le pseudo ne doit pas être vide
+    invalid: Ce nom d'utilisateur est invalide
+    exists: Cet utilisateur existe déjà.
+    not_exists: Cet utilisateur n'existe pas.
+    not_email: The username must not be an email address.
+    size: The username must have at least 3 character and not more than 180
+  password:
+    blank: Le mot de passe est manquant.
+    short: 'Your password must have at least {{ limit }} characters.'
+  description:
+    rude: Description must not contain rude wordes.
+  credit:
+    rude: Credits must not contain rude words.
+  country:
+    blank: The country is missing.
+    invalid: Pays non valide
+  email:
+    blank: email must not be blank
+    invalid: L'e-mail ne semble pas valide
+    exists: Cette adresse e-mail existe déjà.
+  id:
+    blank: Open authentication ID must not be blank
+  login: The password or username was incorrect.
+  post-data: POST-data not correct or missing!
+  checksum:
+    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
+    invalid: Checksum invalide
+  xml:
+    invalid: Code XML invalide
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: fichier invalide
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: unknown error
+  token: 'Authentication of device failed: invalid auth-token!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  programname:
+    rude: Project name must not contain rude wordes.
+  program:
+    invalid: Invalid project.
+  languageversion:
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+  programversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: Echec de l'authentification
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
+success:
+  text: Success
+  registration: Enregistrement réussi.
+  token: OK
+  upload: Votre projet a été envoyé avec succès !
+  imgUpload: Your image was uploaded successfully!
+  report: Your report was successfully sent!
+time:
+  minutes.ago: '{0}  < il y a 1 minute |{1} il y a 1 minute |]1, Inf] il y a %count% minutes'
+  hours.ago: '{1} il y a 1 heure |]1, Inf] il y a %count% heures'
+  days.ago: '{1} il y a 1 jour |]1, Inf] il y a %count% jours'
+  months.ago: '{1} il y a 1 mois |]1, Inf] il y a %count% mois'
+  years.ago: '{1} il y a 1 an |]1, Inf] il y a plus d''un an'
+failure:
+  upload: There was an error during the upload of your app.
+api:
+  registerUser:
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username must not contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
+#languages and countries
+language:
+  arabic: Arabe
+  bulgarian: Bulgare
+  catalan: Catalan
+  chinese_simplified_han: Chinois (simplifié Han)
+  chinese_traditional_han: Chinois (traditionnel Han)
+  croatian: Croate
+  czech: Tchèque
+  danish: Danois
+  dutch: Hollandais
+  english_united_kingdom: Anglais (Royaume-Uni)
+  english_united_states: English (United States)
+  estonian: Estonien
+  filipino: Filipino
+  finnish: Finlandais
+  french: Français
+  german: Allemand
+  greek: Grec
+  hebrew: Hébreu
+  hindi: Hindi
+  hungarian: Hongrois
+  indonesian: indonésien
+  italian: Italien
+  japanese: Japonais
+  korean: Coréen
+  latvian: Letton
+  lithuanian: Lituanien
+  malay: Malaisien
+  norwegian: Norvégien
+  persian: Perse
+  polish: Polonais
+  portuguese_brazil: Portugais (Brésil)
+  portuguese_portugal: Portugais (Portugal)
+  romanian: Roumain
+  russian: Russe
+  serbian: Serbe
+  slovak: Slovaque
+  slovenian: Slovène
+  spanish_latin_america: Espagnol (Amérique Latine)
+  spanish_spain: Espagnol (Espagne)
+  swedish: Suédois
+  thai: Thaï
+  turkish: Turc
+  ukrainian: Ukrainien
+  vietnamese: Vietnamien
+ci:
+  generate: Generate apk
+  pending: Generating apk
+  download: Download apk
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
+  submitown:
+    header: be aware
+    subheader: You can only submit your own projects
+    text: |
+      But why not create your own!
+      Take part in the %gamejamtag%
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Jeux
+    tag2: Animations
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental
+    tag7: Tutorial
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
+    noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
+recommender:
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
+  moreFromThisUser: More from %username%
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your project upload was successful.
+  failed:
+    text: Project upload failed.
+codeview:
+  title: 'Code view'
+  showCode: 'Show code'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'Scenes'
+  scripts: 'Scripts'
+  bricks: 'Briques'
+  objects: 'Actors and objects'
+  looks: 'Graphismes'
+  sounds: 'Sons'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
+codeStatistics:
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
+  general: 'General'
+  bricks: 'Briques'
+  eventBricks: 'Évènement'
+  controlBricks: 'Contrôle'
+  motionBricks: 'Mouvement'
+  soundBricks: 'Sons'
+  looksBricks: 'Graphismes'
+  penBricks: 'Stylo'
+  dataBricks: 'Données'
+  specialBricks: 'Special'
+footer:
+  language: Langue
+  usefulLinks: Useful links
+  legalities: Legalities
+  communityStats: Community stats
+  download: Get the App
+privacy-policy:
+  header: Politique de confidentialité
+  version: Version 2.2, 17 October 2019
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  comment:
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
+  like:
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
+  follow:
+    title: 'New follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New project from someone you follow'
+    message: 'User %user_link% created a new project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+clipboard:
+  success: Link to project copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: Suivant
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: Tutoriels
+    stepbystep: Step by step
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    discord: Join on Discord
+    game_design: Game design
+    education: Education platform
+    discuss: Discuss
+  text:
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
+    getinvolved: Download the app and get started
+    discord: Join the community on discord
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  thumb-size:
+    description: Preview size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: Accepter
+disagree: Refuser
+profileLoader:
+  noProfiles: There are currently no profiles.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'Catrobat community'
+back_to_app: 'Exit community'
