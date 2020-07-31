@@ -1,18 +1,10 @@
 
-name: Feature Requests
+name: Check for new bricks
 
 on:
-  #
-  # This category of tests should not block the merging process due to a failed pipeline.
-  # This tests are somewhat "independent" of the actual changes a developer made and therefore must not run on a PR
-  #
-  push:
-    branches:
-      - master
-      - develop
-  release:
-    types:
-      - created
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 7 * *"
 
 jobs:
 
