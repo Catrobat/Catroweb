@@ -1116,19 +1116,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When /^I GET "([^"]*)" with program id "([^"]*)"$/
-   *
-   * @param mixed $id
-   * @param mixed $uri
-   */
-  public function iGetWithProgramID($uri, $id): void
-  {
-    $uri = str_replace('@id@', $id, $uri);
-
-    $this->iGetFrom($uri);
-  }
-
-  /**
    * @When /^I get the most recent programs$/
    */
   public function iGetTheMostRecentPrograms(): void

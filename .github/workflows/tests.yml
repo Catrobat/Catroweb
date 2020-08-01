@@ -177,17 +177,34 @@ jobs:
       fail-fast: false
       matrix:
         testSuite:
-          - api
-          - api-deprecated
+          - api-authentication
+          - api-mediapackage
+          - api-projects
+          - api-user
+          - api-utility
+
+          - api-deprecated-general
+          - api-deprecated-project
+          - api-deprecated-profile
+          - api-deprecated-upload
+
           - web-admin
+          - web-apk-generation
           - web-authentication
+          - web-code-statistics
+          - web-code-view
+          - web-comments
           - web-general
+          - web-media-library
           - web-notifications
           - web-profile
+          - web-project
           - web-project-details
-          - web-project-details-2
-          - web-project-details-3
-          - web-project-loader
+          - web-project-list
+          - web-reactions
+          - web-recommendations
+          - web-remix-system
+          - web-scratch-integration
           - web-search
           - web-top-bar
 
@@ -225,8 +242,8 @@ jobs:
         run: |
           echo ::set-output name=status::failure
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} \
-            | tee tests/testreports/behat/${{ matrix.testSuite }}.log \
-            ; ( exit ${PIPESTATUS[0]} )
+          |& tee tests/testreports/behat/${{ matrix.testSuite }}.log ; \
+          ( exit ${PIPESTATUS[0]} )
           echo ::set-output name=status::success
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
@@ -235,8 +252,8 @@ jobs:
         if: always()
         id: missing-check
         run: |
+          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
           if grep -q 'has missing steps. Define them with these snippets:' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
@@ -246,8 +263,8 @@ jobs:
         if: always()
         id: pending-check
         run: |
+          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
           if grep -q 'pending)' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
@@ -256,8 +273,8 @@ jobs:
         if: always()
         id: chrome-exception-check
         run: |
-          if grep -q 'DMore\ChromeDriver\StreamReadException' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+          if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/testreports/behat/${{ matrix.testSuite }}.log; then
             false;
           fi
 

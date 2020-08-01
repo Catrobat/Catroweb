@@ -51,23 +51,15 @@
   {% endif %}
   <div id="old-notifications-container" class="row mt-4">
     {% for notification in oldNotifications %}
-
-
       <div class="col-md-12" id="old-check">
         {{ include(notification.getTwigTemplate) }}
-
       </div>
-
-
     {% endfor %}
   </div>
-  <div class="clear"></div>
 
-  <div id="error" class="no-notifications-placeholder">
-
-    <b><p>{{ "notificationsReadMessage"|trans({}, "catroweb") }}</p></b>
+  <div class="no-notifications-placeholder">
+    <p>{{ "notificationsReadMessage"|trans({}, "catroweb") }}</p>
   </div>
-
 
 {% endblock %}
 
@@ -93,14 +85,10 @@
             "{{ "notificationsAllMessagesDeleted"|trans({}, "catroweb") }}",
             "{{ "notificationsDeleteError"|trans({}, "catroweb") }}",
             "{{ path('user_notifications_count') }}", "{{ notificationType }}"
-
     )
     $(document).ready(function () {
       notifications.init()
     })
-
-
   </script>
-
 
 {% endblock %}

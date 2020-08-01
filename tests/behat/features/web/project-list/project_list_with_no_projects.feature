@@ -1,5 +1,5 @@
 @homepage
-Feature: Project loader should hide project containers or show a message if there are no projects
+Feature: Project list must be hidden if there are no projects in a category
 
   Background:
     Given there are users:
@@ -10,11 +10,12 @@ Feature: Project loader should hide project containers or show a message if ther
   Scenario: When there are no projects there should not be containers on the homepage
     Given I am on homepage
     And I wait for the page to be loaded
-    Then I should not see "newest"
-    And I should not see "recommended"
-    And I should not see "most downloaded"
-    And I should not see "most viewed"
-    And I should not see "random"
+    Then I should not see "Newest projects"
+    And the element "#home-projects__recent" should not be visible
+    And I should not see "Recommended"
+    And I should not see "Most downloaded"
+    And I should not see "Most viewed"
+    And I should not see "Random projects"
 
   #  user pages
   Scenario: at my profile page when I have no projects there should be a text telling me about it

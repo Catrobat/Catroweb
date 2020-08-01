@@ -68,6 +68,7 @@
 
 {% block js %}
   <script>const flavor = '{{ theme() }}'</script>
+  <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
   <script src="{{ asset('js/ProjectList.min.js') }}"></script>
   <script src="{{ asset('js/Index.min.js') }}"></script>
   <script>

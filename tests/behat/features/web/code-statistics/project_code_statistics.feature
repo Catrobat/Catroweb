@@ -16,7 +16,9 @@ Feature: As a visitor I want to see code statistics on the project page
       | id | name      |
       | 1  | program 1 |
     And I am on "/app"
+    And I wait for the page to be loaded
     When I go to "/app/project/1/code_statistics"
+    And I wait for the page to be loaded
     And I click "#top-app-bar__back__btn-back"
     Then I should be on "/app/project/1"
 

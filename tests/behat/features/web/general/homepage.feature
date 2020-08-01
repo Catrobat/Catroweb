@@ -53,22 +53,21 @@ Feature: Pocketcode homepage
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
-    Then the element "#scratchRemixes" should exist
-    And the "#scratchRemixes" element should contain "project 6"
-    And the "#scratchRemixes" element should contain "project 7"
-    And the "#scratchRemixes" element should not contain "project 1"
+    Then the element "#home-projects__scratch" should exist
+    And the "#home-projects__scratch" element should contain "project 6"
+    And the "#home-projects__scratch" element should contain "project 7"
+    And the "#home-projects__scratch" element should not contain "project 1"
 
   Scenario: Viewing the homepage at website root
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
-    Then the element "#newest" should exist
-    Then the element "#example" should exist
-    Then the element "#recommended" should exist
-    Then the element "#mostDownloaded" should exist
-    Then the element "#random" should exist
-    Then the element "#scratchRemixes" should exist
-    Then the element "#mostViewed" should exist
+    Then one of the ".project-list__title" elements should contain "Newest projects"
+    Then one of the ".project-list__title" elements should contain "Examples"
+    Then one of the ".project-list__title" elements should contain "Most downloaded"
+    Then one of the ".project-list__title" elements should contain "Most viewed"
+    Then one of the ".project-list__title" elements should contain "Scratch remixes"
+    Then one of the ".project-list__title" elements should contain "Random projects"
 
   Scenario: Welcome Section
     Given I am on homepage
@@ -93,15 +92,15 @@ Feature: Pocketcode homepage
   Scenario: Example Programs
     Given I am on homepage
     And I wait for the page to be loaded
-    Then the element "#example" should exist
-    And the "#example" element should contain "project 5"
-    And the "#example" element should contain "project 6"
+    Then the element "#home-projects__example" should exist
+    And the "#home-projects__example" element should contain "project 5"
+    And the "#home-projects__example" element should contain "project 6"
 
   Scenario: Extension flavored homepage
     Given I am on "/embroidery"
     And I wait for the page to be loaded
-    Then the element "#newest" should exist
-    And the "#newest" element should contain "project 1"
-    And the "#newest" element should contain "project 2"
-    And the "#newest" element should contain "project 4"
-    And the "#newest" element should not contain "project 3"
+    Then the element "#home-projects__recent" should exist
+    And the "#home-projects__recent" element should contain "project 1"
+    And the "#home-projects__recent" element should contain "project 2"
+    And the "#home-projects__recent" element should contain "project 4"
+    And the "#home-projects__recent" element should not contain "project 3"

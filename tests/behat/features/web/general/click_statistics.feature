@@ -1,4 +1,6 @@
-@web @click_statistics
+# Not compatible with the new ProjectList and must be reworked once the new design is finished: SHARE-371
+
+@web @click_statistics @disabled
 Feature: Creating click statistics by clicking on tags, extensions and recommended programs
 
   Background:

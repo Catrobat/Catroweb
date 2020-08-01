@@ -24,10 +24,13 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
       const $t = $(this)
       const category = $t.data('category')
       const property = $t.data('property')
-      let url = '/api/projects/?category=' + category
 
       /* eslint-disable no-undef */
-      if (flavor !== undefined) {
+      let url = baseUrl + '/api/projects/?category=' + category
+
+      /* eslint-disable no-undef */
+      if (flavor !== undefined && flavor !== 'pocketcode') {
+        // The pocketcode flavor must use projects from all flavors
         url += '&flavor=' + flavor
       }
       const list = new ProjectList(this, category, url, property)

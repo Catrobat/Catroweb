@@ -59,27 +59,102 @@ default:
 #
 # Note: Also define them in the github action work flows. Else they will not be checked automatically.
 #
+#  The more suites the better.. why?
+#
+#   - Easier parallelization in the test system (github actions)
+#   - Less Chrome Exception due to a less polluted cache during a suites execution
+#
+#  Drawback the suite setup process (DB creation, .. ) is executed more often if ypu intend to run all suites at once
+#
 #
     suites:
 
-        api:
-            paths:    [ "tests/behat/features/api" ]
+        api-authentication:
+            paths:    [ "tests/behat/features/api/authentication" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\ApiContext
                 - Tests\behat\context\CatrowebBrowserContext
 
-        api-deprecated:
-            paths:    [ "tests/behat/features/api-deprecated" ]
+        api-mediapackage:
+            paths:    [ "tests/behat/features/api/mediapackage" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\ApiContext
+                - Tests\behat\context\CatrowebBrowserContext
+
+        api-projects:
+            paths:    [ "tests/behat/features/api/projects" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\ApiContext
+                - Tests\behat\context\CatrowebBrowserContext
+
+        api-user:
+            paths:    [ "tests/behat/features/api/user" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\ApiContext
+                - Tests\behat\context\CatrowebBrowserContext
+
+        api-utility:
+            paths:    [ "tests/behat/features/api/utility" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\ApiContext
+                - Tests\behat\context\CatrowebBrowserContext
+
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
+
+        api-deprecated-general:
+            paths:    [ "tests/behat/features/api-deprecated/general" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
+
+        api-deprecated-profile:
+            paths:    [ "tests/behat/features/api-deprecated/profile" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        api-deprecated-project:
+            paths:    [ "tests/behat/features/api-deprecated/project" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        api-deprecated-upload:
+            paths:    [ "tests/behat/features/api-deprecated/upload" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
 
         web-admin:
             paths:    [ "tests/behat/features/web/admin" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-apk-generation:
+            paths:    [ "tests/behat/features/web/apk-generation" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
@@ -94,11 +169,45 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
+        web-code-statistics:
+            paths:
+                - "tests/behat/features/web/code-statistics"
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-code-view:
+            paths:
+                - "tests/behat/features/web/code-view"
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-comments:
+            paths:
+                - "tests/behat/features/web/comments"
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
         web-general:
             paths:
                 - "tests/behat/features/web/general"
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-media-library:
+            paths:
                 - "tests/behat/features/web/media-library"
-                - "tests/behat/features/web/recommendations"
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
@@ -121,6 +230,14 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
+        web-project:
+            paths:    [ "tests/behat/features/web/project" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
         web-project-details:
             paths:    [ "tests/behat/features/web/project-details" ]
             contexts:
@@ -129,24 +246,44 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        web-project-details-2:
-            paths:    [ "tests/behat/features/web/project-details-2" ]
+        web-project-list:
+            paths:    [ "tests/behat/features/web/project-list" ]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        web-project-details-3:
-            paths:    [ "tests/behat/features/web/project-details-3" ]
+        web-reactions:
+            paths:
+                - "tests/behat/features/web/reactions"
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        web-project-loader:
-            paths:    [ "tests/behat/features/web/project-loader" ]
+        web-recommendations:
+            paths:
+                - "tests/behat/features/web/recommendations"
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-remix-system:
+            paths:
+                - "tests/behat/features/web/remix-system"
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-scratch-integration:
+            paths:
+                - "tests/behat/features/web/scratch-integration"
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
@@ -175,4 +312,4 @@ default:
 #
     gherkin:
         filters:
-            tags: "@~disabled&&~wip&&~external&&~RealOAuth"
+            tags: "@~disabled&&~wip&&~external"

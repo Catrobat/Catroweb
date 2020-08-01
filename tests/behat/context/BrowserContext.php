@@ -318,6 +318,92 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     }
   }
 
+  /**
+   * Checks whether the browser downloaded a file and stored it into the default download directory.
+   * The downloaded file gets deleted after the check.
+   *
+   * @Then I should have downloaded a file named ":name"
+   *
+   * @param string $name The name of the file that should have been downloaded
+   *
+   * @throws Exception when an error occurs during checking if the file has been downloaded
+   */
+  public function iShouldHaveDownloadedAFileNamed(string $name): void
+  {
+    $received = false;
+    $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
+
+    $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 10 seconds
+    while (TimeUtils::getTimestamp() < $end_time)
+    {
+      if (file_exists($file_path))
+      {
+        $received = true;
+        unlink($file_path);
+        break;
+      }
+      sleep(1);
+    }
+
+    Assert::assertEquals(true, $received, "File {$name} hasn't been found at location '{$file_path}'");
+  }
+
+  /**
+   * @Then /^one of the "(?P<selector>[^"]*)" elements should contain "(?P<value>(?:[^"]|\\")*)"$/
+   */
+  public function assertOneOfTheElementsContain(string $selector, string $value): void
+  {
+    $contains = false;
+    $elements = $this->getSession()->getPage()->findAll('css', $selector);
+    foreach ($elements as $element)
+    {
+      if (false !== strpos($element->getText(), $value))
+      {
+        $contains = true;
+        break;
+      }
+    }
+    Assert::assertTrue($contains, "No element '".$selector."' contains '".$value."'");
+  }
+
+  /**
+   * @Then /^none of the "(?P<selector>[^"]*)" elements should contain "(?P<value>(?:[^"]|\\")*)"$/
+   */
+  public function assertNoneOfTheElementsContain(string $selector, string $value): void
+  {
+    $contains = false;
+    $elements = $this->getSession()->getPage()->findAll('css', $selector);
+    foreach ($elements as $element)
+    {
+      if (false !== strpos($element->getText(), $value))
+      {
+        $contains = true;
+        break;
+      }
+    }
+    Assert::assertFalse($contains, "A element '".$selector."' contains '".$value."'");
+  }
+
+  /**
+   * @When I scroll vertical on :selector using a value of :value
+   */
+  public function scrollVertical(string $selector, string $value): void
+  {
+    $this->getSession()->getDriver()->evaluateScript(
+      "$('".$selector."').animate({scrollTop: ".$value.'})'
+    );
+  }
+
+  /**
+   * @When I scroll horizontal on :selector using a value of :value
+   */
+  public function scrollHorizontal(string $selector, string $value): void
+  {
+    $this->getSession()->getDriver()->evaluateScript(
+      "$('".$selector."').animate({scrollLeft: ".$value.'})'
+    );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   //  WAIT - Sometimes it is necessary to wait to prevent timing issues
   //--------------------------------------------------------------------------------------------------------------------
@@ -406,36 +492,6 @@ class BrowserContext extends MinkContext implements KernelAwareContext
 
     $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, $timeout_in_seconds);
     throw new ResponseTextException($message, $this->getSession());
-  }
-
-  /**
-   * Checks whether the browser downloaded a file and stored it into the default download directory.
-   * The downloaded file gets deleted after the check.
-   *
-   * @Then I should have downloaded a file named ":name"
-   *
-   * @param string $name The name of the file that should have been downloaded
-   *
-   * @throws Exception when an error occurs during checking if the file has been downloaded
-   */
-  public function iShouldHaveDownloadedAFileNamed(string $name): void
-  {
-    $received = false;
-    $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
-
-    $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 10 seconds
-    while (TimeUtils::getTimestamp() < $end_time)
-    {
-      if (file_exists($file_path))
-      {
-        $received = true;
-        unlink($file_path);
-        break;
-      }
-      sleep(1);
-    }
-
-    Assert::assertEquals(true, $received, "File {$name} hasn't been found at location '{$file_path}'");
   }
 
   //--------------------------------------------------------------------------------------------------------------------
