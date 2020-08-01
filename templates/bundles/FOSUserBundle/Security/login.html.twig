@@ -124,7 +124,6 @@
       </div>
     </div>
 
-
     {% include 'UserManagement/oauth_registration.html.twig' %}
 
   {% endblock fos_user_content %}
@@ -136,15 +135,9 @@
   <script src="{{ asset('js/register.min.js') }}"></script>
   <script>
     const register =new Register(
-      "{{ flavor() }}",
-      "{{ "oauth.username_header"|trans({}, "catroweb") }}",
-      "{{ "oauth.username_chooser"|trans({}, "catroweb") }}",
-      "{{ "oauth.usernameTaken"|trans({}, "catroweb") }}",
-      "{{ "errors.username.size"|trans({}, "catroweb") }}",
-      "{{ "ok"|trans({}, "catroweb") }}",
       "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
       "{{ path('hwi_oauth_service_redirect', {'service': 'facebook' })  }}",
-    "{{ path('hwi_oauth_service_redirect', {'service': 'apple' })  }}"
+      "{{ path('hwi_oauth_service_redirect', {'service': 'apple' })  }}"
     )
   </script>
 {% endblock js %}
