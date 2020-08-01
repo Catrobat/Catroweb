@@ -228,7 +228,6 @@ class ScreenshotRepository
       [
         $this->tmp_dir.$this->generateFileNameFromId($id),
         $this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id),
-        $this->tmp_dir.$id.'.catrobat',
       ]);
   }
 

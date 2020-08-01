@@ -19,7 +19,7 @@ class MaintainController extends CRUDController
   /**
    * @throws Exception
    */
-  public function extractedAction(KernelInterface $kernel): RedirectResponse
+  public function compressedAction(KernelInterface $kernel): RedirectResponse
   {
     if (!$this->admin->isGranted('EXTRACTED'))
     {
@@ -30,14 +30,13 @@ class MaintainController extends CRUDController
     $application->setAutoExit(false);
 
     $input = new ArrayInput([
-      'command' => 'catrobat:clean:extracted',
-      '--remove-all' => true,
+      'command' => 'catrobat:clean:compressed',
     ]);
 
     $return = $application->run($input, new NullOutput());
     if (0 == $return)
     {
-      $this->addFlash('sonata_flash_success', 'Reset extracted files OK');
+      $this->addFlash('sonata_flash_success', 'Reset compressed files OK');
     }
 
     return new RedirectResponse($this->admin->generateUrl('list'));
@@ -143,11 +142,11 @@ class MaintainController extends CRUDController
     //... use any methods or services to get statistics data
     $RemovableObjects = [];
 
-    $description = "This will remove all extracted catrobat files in the 'extraced'-directory and flag the programs accordingly";
-    $rm = new RemovableMemory('Extracted Catrobatfiles', $description);
-    $this->setSizeOfObject($rm, $this->getParameter('catrobat.file.extract.dir'));
-    $rm->setCommandName('Delete extracted files');
-    $rm->setCommandLink($this->admin->generateUrl('extracted'));
+    $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the programs accordingly";
+    $rm = new RemovableMemory('Compressed Catrobatfiles', $description);
+    $this->setSizeOfObject($rm, $this->getParameter('catrobat.file.storage.dir'));
+    $rm->setCommandName('Delete compressed files');
+    $rm->setCommandLink($this->admin->generateUrl('compressed'));
     $RemovableObjects[] = $rm;
 
     $description = "This will remove all generated apk-files in the 'apk'-directory and flag the programs accordingly";

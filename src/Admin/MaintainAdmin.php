@@ -22,7 +22,7 @@ class MaintainAdmin extends AbstractAdmin
     //Find the implementation in the Controller-Folder
     $collection->clearExcept(['list']);
     $collection->add('apk')
-      ->add('extracted')
+      ->add('compressed')
       ->add('archive_logs')
       ->add('delete_logs')
     ;

@@ -48,7 +48,7 @@ class CodeViewController extends AbstractController
       'id' => $id,
       'version' => $project->getLanguageVersion(),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
-      'extracted_dir_hash' => $project->getExtractedDirectoryHash(),
+      'extracted_dir_hash' => $project->getId(),
     ]);
   }
 

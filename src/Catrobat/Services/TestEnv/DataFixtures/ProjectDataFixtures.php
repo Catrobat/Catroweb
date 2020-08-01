@@ -112,7 +112,6 @@ class ProjectDataFixtures
     $project->setPrivate(isset($config['private']) ? 'true' === $config['private'] : false);
     $project->setDebugBuild(isset($config['debug']) ? 'true' === $config['debug'] : false);
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
-    $project->setExtractedDirectoryHash($config['directory_hash'] ?? null);
 
     $project->setAcceptedForGameJam($config['accepted'] ?? false);
     $project->setGamejam($config['gamejam'] ?? null);
