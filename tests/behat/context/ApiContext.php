@@ -726,37 +726,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * Submit to gamejam.
-   *
-   * @param mixed $file
-   * @param mixed $user
-   */
-  public function submit($file, $user, string $desired_id = ''): void
-  {
-    if (null == $user)
-    {
-      $user = $this->getUserDataFixtures()->getDefaultUser();
-    }
-
-    if ('' !== $desired_id)
-    {
-      MyUuidGenerator::setNextValue($desired_id);
-    }
-
-    if (is_string($file))
-    {
-      $file = new UploadedFile($file, 'uploadedFile');
-    }
-
-    $this->request_parameters = [];
-    $this->request_parameters['username'] = $user->getUsername();
-    $this->request_parameters['token'] = $user->getUploadToken();
-    $this->request_parameters['fileChecksum'] = md5_file($file->getPathname());
-    $this->request_files[0] = $file;
-    $this->iRequestWith('POST', '/app/api/gamejam/submit.json');
-  }
-
-  /**
    * @When I upload a program with :program_attribute, API version :api_version
    *
    * @param string $api_version The API version to be used
@@ -2610,18 +2579,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When I submit a game with id :id
-   * @Given I submitted a game with id :arg1
-   *
-   * @param mixed $id
-   */
-  public function iSubmitAGame($id): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $id);
-  }
-
-  /**
    * @Then I should get the url to the google form
    */
   public function iShouldGetTheUrlToTheGoogleForm(): void
@@ -2631,20 +2588,6 @@ class ApiContext implements KernelAwareContext
       ->getContent(), true);
     Assert::assertArrayHasKey('form', $answer);
     Assert::assertEquals('https://catrob.at/url/to/form', $answer['form']);
-  }
-
-  /**
-   * @When /^I submit the program$/
-   */
-  public function iSubmitTheProgram(): void
-  {
-    /** @var Crawler $last_response */
-    $last_response = $this->getKernelBrowser()->getResponse();
-    $link = $last_response->filter('#gamejam-submission')
-      ->parents()
-      ->link()
-    ;
-    $this->getKernelBrowser()->click($link);
   }
 
   /**
@@ -2687,31 +2630,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I submit a program to this gamejam$/
-   *
-   * @throws Exception
-   */
-  public function iSubmitAProgramToThisGamejam(): void
-  {
-    if (null == $this->my_program)
-    {
-      $this->my_program = $this->insertProject([
-        'name' => 'My Program',
-        'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-      ]);
-    }
-    $this->iRequestWith('GET', '/app/project/1');
-
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    $link = $response->filter('#gamejam-submission')
-      ->parents()
-      ->link()
-    ;
-    $this->getKernelBrowser()->click($link);
-  }
-
-  /**
    * @When /^I visit the details page of my program$/
    *
    * @throws Exception
@@ -2730,104 +2648,12 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^There should be a button to submit it to the jam$/
-   */
-  public function thereShouldBeAButtonToSubmitItToTheJam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode());
-    Assert::assertEquals(1, $response->filter('#gamejam-submission')->count());
-  }
-
-  /**
-   * @Then /^There should not be a button to submit it to the jam$/
-   */
-  public function thereShouldNotBeAButtonToSubmitItToTheJam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-    Assert::assertEquals(0, $response->filter('#gamejam-submission')->count());
-  }
-
-  /**
-   * @Then /^There should be a div with whats the gamejam$/
-   */
-  public function thereShouldBeADivWithWhatsTheGamejam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-    Assert::assertEquals(1, $response->filter('#gamejam-whats')->count());
-  }
-
-  /**
-   * @Then /^There should not be a div with whats the gamejam$/
-   */
-  public function thereShouldNotBeADivWithWhatsTheGamejam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-    Assert::assertEquals(0, $response->filter('#gamejam-whats')->count());
-  }
-
-  /**
-   * @When /^I submit my program to a gamejam$/
-   *
-   * @throws Exception
-   */
-  public function iSubmitMyProgramToAGamejam(): void
-  {
-    $this->insertDefaultGameJam([
-      'formurl' => 'https://localhost/url/to/form',
-    ]);
-
-    if (null == $this->my_program)
-    {
-      $this->my_program = $this->insertProject([
-        'name' => 'My Program',
-        'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-      ]);
-    }
-
-    $this->getKernelBrowser()->followRedirects(false);
-    $this->iRequestWith('GET', '/app/project/1')
-    ;
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    $link = $response->filter('#gamejam-submission')
-      ->parents()
-      ->link()
-    ;
-    $this->getKernelBrowser()->click($link);
-  }
-
-  /**
    * @Then /^I should be redirected to the google form$/
    */
   public function iShouldBeRedirectedToTheGoogleForm(): void
   {
     Assert::assertTrue($this->getKernelBrowser()->getResponse() instanceof RedirectResponse);
     Assert::assertEquals('https://localhost/url/to/form', $this->getKernelBrowser()->getResponse()->headers->get('location'));
-  }
-
-  /**
-   * @When I submit a game which gets the id :arg1
-   *
-   * @param mixed $arg1
-   */
-  public function iSubmitAGameWhichGetsTheId($arg1): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $arg1);
   }
 
   /**
@@ -2868,15 +2694,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When I upload my game
-   */
-  public function iUploadMyGame(): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->uploadProject($file, $this->getUserDataFixtures()->getCurrentUser(), '1');
-  }
-
-  /**
    * @Then I should not get the url to the google form
    */
   public function iShouldNotGetTheUrlToTheGoogleForm(): void
@@ -2885,50 +2702,6 @@ class ApiContext implements KernelAwareContext
       ->getResponse()
       ->getContent(), true);
     Assert::assertArrayNotHasKey('form', $answer);
-  }
-
-  /**
-   * @Given I already submitted my game with id :id
-   *
-   * @param mixed $id
-   */
-  public function iAlreadySubmittedMyGame($id): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $id);
-  }
-
-  /**
-   * @Given I already filled the google form with id :id
-   *
-   * @param mixed $id
-   */
-  public function iAlreadyFilledTheGoogleForm($id): void
-  {
-    $this->iRequestWith('GET', '/app/api/gamejam/finalize/'.$id);
-    Assert::assertEquals('200', $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-  }
-
-  /**
-   * @When I resubmit my game
-   */
-  public function iResubmitMyGame(): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser());
-  }
-
-  /**
-   * @When I fill out the google form
-   */
-  public function iFillOutTheGoogleForm(): void
-  {
-    $this->iRequestWith('GET', '/app/api/gamejam/finalize/1');
-    Assert::assertEquals('200', $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
   }
 
   /**

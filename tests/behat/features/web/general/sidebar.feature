@@ -26,4 +26,3 @@ Feature: Sidebar Navigation
     Then the url should match "/app/help$"
     And the element "#sidebar" should not be visible
     And the element "#sidebar-overlay" should not be visible
-    And I should see "Game Design"

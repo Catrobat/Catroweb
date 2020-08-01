@@ -100,14 +100,6 @@ security:
             simple_preauth:
                 authenticator: App\Catrobat\Security\ApiKeyAuthenticator
 
-        api_submit:
-            provider: chain_provider
-            pattern: ^.*?/api/gamejam/submit.json
-            stateless: true
-            simple_preauth:
-                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
-
-
         debug:
             provider: chain_provider
             pattern: ^/debug
@@ -208,10 +200,6 @@ security:
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_FILE_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
-            - ROLE_ADMIN
-        ROLE_GAMEJAM_ADMIN:
-            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_SUBMITTED_ADMIN
             - ROLE_ADMIN
 
 acl:

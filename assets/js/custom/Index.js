@@ -27,15 +27,6 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
     random.init()
     example.init()
   }
-  self.gamejamInit = function (pathGamejamSample, pathGamejamSubmission, pathRelated) {
-    const sample = new ProjectLoader('#sample', pathGamejamSample)
-    const submissions = new ProjectLoader('#submissions', pathGamejamSubmission)
-    const related = new ProjectLoader('#related', pathRelated)
-
-    sample.init()
-    submissions.init()
-    related.init()
-  }
 
   self.performClickStatisticRequest = function (href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
     let url = self.clickStats

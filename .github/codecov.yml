@@ -7,4 +7,4 @@ coverage:
 # do not comment until at least X builds have been uploaded from the CI pipeline
 # Important keep up to date with behat + phpunit testsuites
 comment:
-    after_n_builds: 15
+    after_n_builds: 14

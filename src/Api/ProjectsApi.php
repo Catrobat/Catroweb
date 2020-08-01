@@ -180,8 +180,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->entity_manager->refresh($user);
 
     // Adding the uploaded program
-    $add_program_request = new AddProgramRequest($user, $file,$this->request_stack->getCurrentRequest()->getClientIp(),
-      null, $accept_language, $flavor ? $flavor : 'pocketcode');
+    $add_program_request = new AddProgramRequest($user, $file, $this->request_stack->getCurrentRequest()->getClientIp(), $accept_language, $flavor ? $flavor : 'pocketcode');
 
     try
     {

@@ -9,15 +9,12 @@ use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
 use App\Catrobat\Services\TokenGenerator;
 use App\Entity\CatroNotification;
 use App\Entity\ClickStatistic;
-use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserRemixSimilarityRelation;
-use App\Repository\GameJamRepository;
 use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
@@ -50,8 +47,6 @@ class CatrowebBrowserContext extends BrowserContext
   const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   private bool $use_real_oauth_javascript_code = false;
-
-  private GameJam $game_jam;
 
   private ?Program $my_program;
 
@@ -570,22 +565,6 @@ class CatrowebBrowserContext extends BrowserContext
         {
           $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
           $path = '/images/help/hour_of_code_mobile.png';
-        }
-        else
-        {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Game Design':
-        if ('big' === $arg1)
-        {
-          $img = $this->getSession()->getPage()->findById('alice-tut-desktop');
-          $path = '/images/help/alice_tut.png';
-        }
-        elseif ('small' === $arg1)
-        {
-          $img = $this->getSession()->getPage()->findById('alice-tut-mobile');
-          $path = '/images/help/alice_tut_mobile.png';
         }
         else
         {
@@ -2799,58 +2778,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given There is an ongoing game jam
-   *
-   * @throws Exception
-   */
-  public function thereIsAnOngoingGameJam(): void
-  {
-    $this->game_jam = $this->insertDefaultGameJam();
-  }
-
-  /**
-   * @Given /^I submitted a program to the gamejam$/
-   *
-   * @throws Exception
-   */
-  public function iSubmittedAProgramToTheGamejam(): void
-  {
-    if (null == $this->game_jam)
-    {
-      $this->game_jam = $this->insertDefaultGameJam([
-        'formurl' => 'https://localhost/url/to/form',
-      ]);
-    }
-    if (null === $this->my_program)
-    {
-      $this->my_program = $this->insertProject([
-        'name' => 'My Program',
-        'gamejam' => $this->game_jam,
-        'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-      ]);
-    }
-  }
-
-  /**
-   * @Given /^I filled out the google form$/
-   */
-  public function iFilledOutTheGoogleForm(): void
-  {
-    $project = $this->getProgramManager()->find('1');
-    $this->my_program = $project;
-    $this->my_program->setAcceptedForGameJam(true);
-    $this->getManager()->persist($this->my_program);
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Given /^There is no ongoing game jam$/
-   */
-  public function thereIsNoOngoingGameJam(): void
-  {
-  }
-
-  /**
    * @Then /^I do not see a form to edit my profile$/
    *
    * @throws ExpectationException
@@ -2886,18 +2813,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^There is an ongoing game jam without flavor $/
-   *
-   * @throws Exception
-   */
-  public function thereIsAnOngoingGameJamWithoutFlavor(): void
-  {
-    $this->game_jam = $this->insertDefaultGameJam([
-      'flavor' => 'no flavor',
-    ]);
-  }
-
-  /**
    * @Given /^I am not logged in$/
    */
   public function iAmNotLoggedIn(): void
@@ -2910,49 +2825,10 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then The game is not yet accepted
-   */
-  public function theGameIsNotYetAccepted(): void
-  {
-    $program = $this->getProgramManager()->find('1');
-    Assert::assertFalse($program->isAcceptedForGameJam());
-  }
-
-  /**
-   * @Then My game should be accepted
-   */
-  public function myGameShouldBeAccepted(): void
-  {
-    $program = $this->getProgramManager()->find('1');
-    Assert::assertTrue($program->isAcceptedForGameJam());
-  }
-
-  /**
-   * @Then My game should still be accepted
-   */
-  public function myGameShouldStillBeAccepted(): void
-  {
-    $program = $this->getProgramManager()->find('1');
-    Assert::assertTrue($program->isAcceptedForGameJam());
-  }
-
-  /**
    * @Given I did not fill out the google form
    */
   public function iDidNotFillOutTheGoogleForm(): void
   {
-  }
-
-  /**
-   * @Given The form url of the current jam is
-   *
-   * @throws Exception
-   */
-  public function theFormUrlOfTheCurrentJamIs(PyStringNode $string): void
-  {
-    $this->insertDefaultGameJam([
-      'formurl' => $string->getRaw(),
-    ]);
   }
 
   /**
@@ -2968,60 +2844,6 @@ class CatrowebBrowserContext extends BrowserContext
       'email' => sprintf('%s', $arg2),
     ]);
     $this->getUserDataFixtures()->setCurrentUser($user);
-  }
-
-  /**
-   * @Given There are following gamejam programs:
-   *
-   * @throws Exception
-   */
-  public function thereAreFollowingGamejamPrograms(TableNode $table): void
-  {
-    $programs = $table->getHash();
-    foreach ($programs as $program)
-    {
-      @$gamejam = $program['GameJam'];
-      if (null == $gamejam)
-      {
-        $gamejam = $this->game_jam;
-      }
-      else
-      {
-        $gamejam = $this->getSymfonyService(GameJamRepository::class)->findOneByName($gamejam);
-      }
-      @$config = [
-        'name' => $program['Name'],
-        'gamejam' => ('yes' == $program['Submitted']) ? $gamejam : null,
-        'accepted' => 'yes' == $program['Accepted'],
-      ];
-      $this->insertProject($config);
-    }
-  }
-
-  /**
-   * @Given There are following gamejams:
-   *
-   * @throws Exception
-   */
-  public function thereAreFollowingGamejams(TableNode $table): void
-  {
-    $jams = $table->getHash();
-    foreach ($jams as $jam)
-    {
-      $config = ['name' => $jam['Name']];
-      $start = $jam['Starts in'];
-      if (null != $start)
-      {
-        $config['start'] = $this->getDateFromNow((int) $start);
-      }
-      $end = $jam['Ends in'];
-      if (null != $end)
-      {
-        $config['end'] = $this->getDateFromNow((int) $end);
-      }
-      $this->insertDefaultGameJam($config);
-      $this->insertProject($config);
-    }
   }
 
   /**
