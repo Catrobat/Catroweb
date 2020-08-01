@@ -5,8 +5,6 @@ namespace App\Catrobat\Twig;
 use App\Catrobat\Services\CommunityStatisticsService;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageFile;
-use App\Repository\GameJamRepository;
-use Doctrine\ORM\NonUniqueResultException;
 use Liip\ThemeBundle\ActiveTheme;
 use NumberFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -27,8 +25,6 @@ class AppExtension extends AbstractExtension
 
   private MediaPackageFileRepository $media_package_file_repository;
 
-  private GameJamRepository $game_jam_repository;
-
   private ActiveTheme $theme;
 
   private string $translation_path;
@@ -37,8 +33,7 @@ class AppExtension extends AbstractExtension
 
   private TranslatorInterface $translator;
 
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo,
-                              GameJamRepository $game_jam_repository, ActiveTheme $theme,
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo, ActiveTheme $theme,
                               ParameterBagInterface $parameter_bag, string $catrobat_translation_dir,
                               TranslatorInterface $translator)
   {
@@ -46,7 +41,6 @@ class AppExtension extends AbstractExtension
     $this->parameter_bag = $parameter_bag;
     $this->request_stack = $request_stack;
     $this->media_package_file_repository = $media_package_file_repo;
-    $this->game_jam_repository = $game_jam_repository;
     $this->theme = $theme;
     $this->translator = $translator;
   }
@@ -132,7 +126,6 @@ class AppExtension extends AbstractExtension
       new TwigFunction('flavor', [$this, 'getFlavor']),
       new TwigFunction('theme', [$this, 'getTheme']),
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
-      new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
       new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
       new TwigFunction('assetExists', [$this, 'assetExists']),
       new TwigFunction('isVersionSupportedByCatBlocks', [$this, 'isVersionSupportedByCatBlocks']),
@@ -330,16 +323,6 @@ class AppExtension extends AbstractExtension
       default:
         return null;
     }
-  }
-
-  /**
-   * @throws NonUniqueResultException
-   *
-   * @return mixed
-   */
-  public function getCurrentGameJam()
-  {
-    return $this->game_jam_repository->getCurrentGameJam();
   }
 
   /**

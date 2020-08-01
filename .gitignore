@@ -40,6 +40,7 @@ public/**
 tests/style-report/**
 !tests/style-report/catroweb.xml
 tests/testreports/behat/**
+tests/testreports/coverage/**
 tests/testreports/screens/**
 
 ### var ###
@@ -51,7 +52,6 @@ vendor/
 
 ### root ###
 *.sh
-crowdin.yml
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

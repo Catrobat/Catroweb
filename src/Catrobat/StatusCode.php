@@ -134,6 +134,4 @@ class StatusCode
   const USERNAME_ALREADY_EXISTS = 812;
   const USER_USERNAME_PASSWORD_EQUAL = 813;
   const USER_AVATAR_UPLOAD_ERROR = 814;
-
-  const NO_GAME_JAM = 900;
 }

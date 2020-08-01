@@ -12,7 +12,6 @@ Feature: Pocketcode help page
     And I should see "Step by step"
     And I should see "Starters"
     And I should see "Education platform"
-    And I should see "Game Design"
     And I should see "Tutorials"
     And I should see "Discuss"
     And I should see "Google Play"
@@ -24,29 +23,10 @@ Feature: Pocketcode help page
     And I should see "Step by step"
     And I should see "Starters"
     And I should see "Education platform"
-    And I should see "Game Design"
     And I should see "Tutorials"
     And I should see "Discuss"
     And I should see "Google Play"
     And I should see "Discord"
-
-  Scenario Outline: Clicking on the alice game jam image at help page
-    When I click "#game-design"
-    And I wait for AJAX to finish
-    Then I should see "6" "desktop" tutorial banners
-    When I click on the "<reference>" banner
-    And I wait for AJAX to finish
-    Then I should see "<title>"
-
-    Examples:
-      | reference | title                    |
-      | first     | (WELCOME TO) WONDERLAND  |
-      | second    | SAVE ALICE!              |
-      | third     | THE HATTER - HIT AND RUN |
-      | fourth    | THE HATTER - HIT AND RUN |
-      | fifth     | WHACK A CHESHIRE CAT     |
-      | sixth     | A RABBITS RACE           |
-
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
     Given I am on "/app/tutorialcards"
@@ -92,18 +72,6 @@ Feature: Pocketcode help page
     When I click ".anchor"
     And I wait for AJAX to finish
     Then I am on "/app/starterProjects"
-
-  Scenario: Game Jam page should be there
-    When I go to "/app/pocket-game-jam"
-    And I wait for the page to be loaded
-    Then I should see "HOW TO UPLOAD A POCKET CODE GAME TO THE GAME JOLT SITE?"
-    And I should see "1. Registration"
-    And I should see "2. Upload"
-    And I should see "3. Search for your project"
-    And I should see "4. Create Android app"
-    And I should see "5. Download app"
-    And I should see "6. Register/Login at GameJolt.com"
-    And I should see "7. Upload your game on the Game Jolt Site"
 
   Scenario: /hourOfCode should redirect to help page
     When I go to "/app/hourOfCode"

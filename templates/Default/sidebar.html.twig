@@ -3,13 +3,6 @@
      style="background-image:url('{{ asset('images/logo/catrobat_text.svg') }}')"><span
         class="sr-only">{{ "menu.home"|trans({}, "catroweb") }}</span></a>
   <ul class="list-unstyled" id="project-navigation">
-    {% if theme() == 'pocketgalaxy' %}{# TODO maybe integrate in dynamic theming? #}
-      <li class="nav-item">
-        <a id="event-link" class="nav-link" href="http://www.galaxygamejam.com/AT/main.html">
-          Event
-        </a>
-      </li>
-    {% endif %}
 
     {% if isWebview() %}
       <li class="nav-item">

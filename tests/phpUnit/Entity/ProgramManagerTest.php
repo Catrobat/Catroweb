@@ -13,7 +13,6 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
-use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
@@ -134,7 +133,6 @@ class ProgramManagerTest extends TestCase
     $this->request->expects($this->any())->method('getProgramfile')->willReturn($file);
     $this->request->expects($this->any())->method('getUser')->willReturn($user);
     $this->request->expects($this->any())->method('getIp')->willReturn('127.0.0.1');
-    $this->request->expects($this->any())->method('getGamejam')->willReturn(null);
     $this->request->expects($this->any())->method('getLanguage')->willReturn('en');
     $this->request->expects($this->any())->method('getFlavor')->willReturn('pocketcode');
     $file_extractor->expects($this->any())->method('extract')->with($file)->willReturn($this->extracted_file);
@@ -306,46 +304,6 @@ class ProgramManagerTest extends TestCase
     ;
 
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function testMarksTheGameAsGameJamSubmissionIfAJamIsProvided(): void
-  {
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
-    $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
-        $project->setId('1');
-
-        return $project;
-      }))
-    ;
-
-    $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
-    ;
-
-    $game_jam = $this->createMock(GameJam::class);
-
-    $request = $this->createMock(AddProgramRequest::class);
-    fopen('/tmp/phpUnitTest', 'w');
-    $file = new File('/tmp/phpUnitTest');
-    $request->expects($this->any())->method('getProgramfile')->willReturn($file);
-    $request->expects($this->any())->method('getUser')->willReturn($this->createMock(User::class));
-    $request->expects($this->any())->method('getGamejam')->willReturn($game_jam);
-    $request->expects($this->any())->method('getLanguage')->willReturn('en');
-
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->willReturn($this->programBeforeInsertEvent)
-    ;
-
-    $program = $this->program_manager->addProgram($request);
-    Assert::assertEquals($game_jam, $program->getGamejam());
   }
 
   /**

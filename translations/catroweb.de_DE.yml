@@ -1,0 +1,930 @@
+---
+#homepage translation
+localLanguage: Englisch
+username: Username
+password: Passwort
+createNewPassword: Create new password
+accountSettings: Kontoeinstellungen
+email: E-Mail
+aboutPocketCode: Über Pocket Code
+aboutCatrobat: Über Catrobat
+tutorials: Tutorials
+googlePlay: Google Play
+iosAppStore: iOS App Store
+passwordsNoMatch: Die Passwörter stimmen nicht überein.
+error: Fehler
+cancel: Abbrechen
+report: Melden
+deleteIt: Ja, wirklich löschen!
+reportIt: Ja, melden!
+areYouSure: Bist du sicher?
+noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
+download: Herunterladen
+description: Beschreibung
+noDescription: Keine Beschreibung verfügbar.
+credits: Anerkennung
+noCredits: Keine Anerkennung verfügbar.
+country: Land
+loginText: Anmelden
+privacyPolicy: Datenschutz-Vereinbarung
+imprint: Impressum
+programDetails: Einzelheiten
+somethingWentWrong: 'Ooooops etwas ging schief.'
+pleaseTryAgain: 'Bitte versuche es noch einmal!'
+oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
+more: 'mehr'
+less: 'weniger'
+show-more: 'Mehr'
+show-less: 'Weniger'
+ok: Ok
+clickToDownloadProgram: 'Um das Beispielprojekt herunterzuladen klicke %link_start% hier %link_end%.'
+registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
+notifications: 'Benachrichtigungen'
+allNotifications: 'Alle Benachrichtigungen'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Gefällt mir'
+likesNotificationsTitle: 'Gefällt mir Benachrichtigungen'
+followersNotificationsTitle: 'Follower Benachrichtigungen'
+commentsNotificationsTitle: 'Benachrichtigungen über neuen Kommentare'
+remixNotificationsTitle: 'Remix Benachrichtigungen'
+CommentNotifications: 'Kommentare'
+RemixNotifications: 'Remixe'
+oldnotification: 'Alte Benachrichtigungen'
+wellDone: "Gut gemacht!"
+done: "Fertig!"
+notificationsReadMessage: "Es scheint, als hättest du keine Benachrichtigungen."
+notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
+deleteNotificationConfirmation: "Bist du sicher?"
+notificationDeleteMessage: "Bist du dir sicher, dass die Benachrichtigung gelöscht werden soll?"
+notificationDeleteAllMessage: "Bist du dir sicher, dass alle Benachrichtigungen gelöscht werden sollen?"
+confirmMessage: "Ja, jetzt löschen"
+cancelMessage: "Abbrechen"
+notificationsAllMessagesDeleted: "Alle Benachrichtigungen wurden gelöscht."
+notificationDeletedMessage: "Benachrichtigung wurde erfolgreich gelöscht."
+clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
+deleteAllNotificationsButtonTitle: "Alle löschen"
+notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
+notificationsDeleteError: "Benachrichtigungen konnten nicht gelöscht werden!"
+pleaseWait: "Bitte warten..."
+projects: "Projekte"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistiken"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'Welche Projekte werden hier empfohlen?'
+      description: 'Je mehr "Gefällt mir" (einschließlich "Daumen hoch", "Lachen", "Liebe" und "Woow!") dein Projekt erhält, desto höher erscheint es in dieser Liste.'
+follower:
+  follows: Abonniert
+  followers: Abonnenten
+  follow: Folgen
+  username: Benutzer
+  followsMe: Folgt mir
+  noFollowing: Du folgst derzeit niemandem.
+  noFollowers: Du hast derzeit keine Follower.
+  noOtherFollowing: Aktuell von niemandem abonniert.
+  noOtherFollowers: Keine Abonnenten.
+  followError: "Es ist nicht möglich den User zu folgen!"
+  unfollowError: "Es ist nicht möglich den User nicht mehr zu folgen!"
+  unfollowQuestion: "Bist du sicher, dass du diesem User nicht mehr folgen möchtest?"
+  unfollowButton: "%username% entfernen"
+programs:
+  welcome:
+    title: Willkommen bei Catrobat's %theme%
+    subtitle: Erstelle Animationen, Spiele und mehr...
+    download: Lade die App herunter
+    statistics: Mehr Statistiken
+  featured: Empfohlen
+  example: Beispiele
+  newest: Neueste Projekte
+  recommended: Empfohlene Projekte
+  scratchremixes: Scratch Remixes
+  noPrograms: Derzeit gibt es keine Projekte.
+  deleteConfirmation: |+
+    Bist du dir sicher?
+    Bist du dir sicher, dass du %programName% löschen möchtest?
+    Es gibt keine Möglichkeit das Projekt wiederherzustellen!
+    Ja, löschen!
+    Abbrechen
+  changeVisibility: |+
+    Bist du dir sicher?
+    Wenn du '%programName%' auf privat setzt, wird es von anderen Benutzern nicht gesehen oder gefunden.
+    Du kannst den Link dieses Projekts immer noch mit deinen Freunden teilen. Du kannst die Sichtbarkeit umschalten indem du auf das Schlosssymbol klickst.
+    Wenn du "%programName%" auf öffentlich setzt, kann es von anderen Benutzern gesehen und gefunden werden.
+    Ja, auf öffentliche setzen
+    Ja, auf privat setzen
+    Nein
+  reportCommentConfirmation: Bist du sicher, dass du diesen Kommentar melden möchtest?
+  deleteCommentConfirmation: Bist du sicher, dass du diesen Kommentar löschen möchtest?
+  deleteAccountConfirmation: |+
+    Konto löschen?
+    Bist du dir sicher, dass du dein Konto löschen möchtest? Dadurch werden auch deine hochgeladenen Projekte und Kommentare gelöscht!
+    Es gibt keine Möglichkeit dein Konto wiederherzustellen!
+    Ja, löschen!
+    Abbrechen
+  tooLongDescription: Die Projektbeschreibung ist zu lang!
+  rudeWordsInDescription: Du kannst in deiner Beschreibung keine unhöflichen Wörter verwenden!
+  tooLongCredits: Die Anerkennung ist zu lang!
+  rudeWordsInCredits: Du kannst keine unpassenden Wörter in deiner Anerkennung verwenden!
+  most:
+    viewed: Meist gesehen
+    downloaded: Meist heruntergeladen
+  random: Zufällige Projekte
+  related: Verwandte Projekte
+  downloads: '%downloads% heruntergeladen'
+  sample: Beispielprojekte
+  views: '%views% gesehen'
+  likes:
+    likersTitle: "Benutzer, die auf dieses Projekt reagiert haben"
+    all: "Alle"
+  remixes: '{0}0 Remixe |{1}1 Remix |] 1, Inf]%remixes% Remixe'
+  newRemixesNotificationTitle: '|{1} "%programName%" hat 1 neuen Remix: |] 1, Inf] "%programName%" hat %remixes% neue Remixe:'
+  submitted: Eingereichte Projekte
+  uploaded: Hochgeladene Projekte
+  reportAsInappropriate: Als unpassend melden
+  reportProgram: Projekt melden
+  languageVersion: 'Catrobat Sprachversion: %languageVersion%'
+  reportLoginText: Bitte %login% um dieses Projekt zu melden.
+  reportDialogHeader: Warum möchtest du das Projekt melden?
+  reportDialogReason: Gib einen Grund an
+  reportRadioButtonInappropriate: Es ist unangemessen
+  reportRadioButtonCopyright: Urheberrechtsverletzung
+  reportRadioButtonSpam: Es ist Spam
+  reportRadioButtonDislike: Es gefällt mir nicht
+  reportOwnProgram: Du kannst dein eigenes Programm nicht melden.
+  reportAlready: Du hast dieses Projekt bereits gemeldet.
+  reportDone: Du hast dieses Projekt gemeldet!
+  updateAppHeader: App aktualisieren
+  updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Projekt herunterladen zu können.
+  btnClosePopup: Ok
+  checkout_this_program: Sieh dir diese Catrobat Projekt an
+  show_more: Mehr anzeigen
+  comments: Kommentare
+  send: Senden
+  delete: Löschen
+  report: Melden
+  report_popup: Der Kommentar wurde erfolgreich gemeldet.
+  report_popup_header: Gemeldet
+  deleted_popup: Der Kommentar wurde erfolgreich gelöscht.
+  deleted_popup_header: Gelöscht
+  noAdminRights: Du hast keine Administratorenrechte. Bitte melde dich als Administrator an.
+  editDescription: Projektbeschreibung bearbeiten
+  saveDescription: Beschreibungsänderung speichern
+  editCredits: Projekt Anerkennung bearbeiten
+  saveCredits: Bearbeitete Anerkennung speichern
+  addComment: Kommentar schreiben
+  thumbsUp: Daumen hoch!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Link in Zwischenablage kopieren
+  reactionsText: Gefällt mir
+remixGraph:
+  title: Remixe
+  showRemixGraph: 'Remix Graph'
+  by: 'um'
+  open: 'Öffne '
+  showPaths: 'Wege anzeigen'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'Das Projekt ist nicht mehr verfügbar!'
+  programNotAvailable: 'Nicht verfügbar'
+  programUnknownUser: 'Unbekannter Benutzer'
+noReply: Dies ist eine automatische Meldung, bitte antworte nicht auf diese E-Mail
+accountConfirmation:
+  subject: Deine Catrobat Account Bestätigung
+  message: |
+    Lieber oder Liebe %username%.
+    Um die Aktivierung deines Kontos abzuschließen besuche bitte %confirmationUrl%
+    Dieser Link kann nur einmal verwendet werden, um dein Konto zu validieren.
+    Mit freundlichen Grüßen,
+    Dein Catrobat Team.
+  messageHtml: |
+    <p>
+    Lieber oder Liebe  %username%.<br>
+    <br>
+    Um die Aktivierung deines Kontos abzuschließen klicke bitte hier <a href=%confirmationUrl%>.</a><br>
+    <br>
+    Dieser Link kann nur einmal verwendet werden um dein Konto zu bestätigen.<br>
+    <br>
+    Grüße,<br>
+    Dein Catrobat Team.
+    </p>
+passwordRecovery:
+  subject: Ihre Catrobat Passwort Wiederherstellung
+  message: |
+    Lieber oder Liebe %username%.
+
+    Du hast ein neues Passwort auf %appplication_url% angefordert, da du dein Passwort vergessen hast.
+    Wenn du kein neues Passwort angefordert hast, ignoriere bitte diese Mail. Dein Passwort läuft ab und wird in 24 Stunden unbrauchbar.
+
+    Um dein Passwort zurückzusetzen und ein neues zu erstellen besuche bitte die folgende Seite: %confirmationUrl%
+
+    Du kannst jederzeit mit deinem Benutzernamen und deinem Passwort auf die %appplication_url% Community zugreifen.
+    Um dies zu tun, besuche einfach die folgende Seite: %loginPage%
+    Um deine Profildaten zu bearbeiten, gehen auf diese Seite: %profilePage%
+
+    Alles Gute,
+    Dein Catrobat Team.
+  messageHtml: |
+    <p>
+    Lieber oder Liebe %username%.<br>
+    <br>
+    Du hast ein neues Passwort auf <a href=%appplication_url%>Pocket Code</a> angefordert, da du dein Passwort vergessen hast.
+    Wenn du kein neues Passwort angefordert hast, ignoriere bitte diese Mail. Dein Passwort läuft ab und wird in 24 Stunden unbrauchbar.<br>
+    <br>
+    Um dein Passwort zurückzusetzen und ein neues zu erstellen besuche bitte die folgende Seite: <a href=%confirmationUrl%>.</a><br>
+    <br>
+    Du kannst jederzeit mit deinem Benutzernamen und deinem Passwort auf die <a href=%appplication_url%>Pocket Code</a> Community zuzugreifen.<br>
+    Besuche dafür einfach die folgende Seite:  <a href=%loginPage%>Anmeldeseite</a><br>
+    Um deine Profildaten zu bearbeiten, gehen auf diese Seite <a href=%profilePage%>Seite</a>.<br>
+    <br>
+    Beste Grüße,<br>
+    Dein Catrobat Team.
+    </p>
+profile:
+  edit: Profil bearbeiten
+  saveChanges: Änderungen speichern
+  newPass: Neues Passwort
+  repeatPass: Passwort wiederholen
+  oldPass: altes Passwort
+  firstEmail: Meine erste E-Mail
+  secondEmail: Meine zweite E-Mail
+  myPrograms: Meine Projekte
+  follows: Folgt
+  follower: Abonnenten
+  unfollowUser: Entfolgen!
+  followUser: Folgen
+  amountOfPrograms: Anzahl der Projekte
+  form:
+    passwordTooShort: Das neue Passwort muss mindestens %length% Zeichen lang sein.
+    passwordTooLong: Das neue Passwort darf maximal %length% Zeichen lang sein.
+    passwordIsUsername: Passwort und Username dürfen nicht gleich sein.
+    passwordWrong: Falsches Passwort
+    emailNotValid: Diese E-mail Adresse ist ungültig.
+    emailMissing: Fehler beim Speicher dieser E-Mail Adresse. Du musst zumindest eine verifizierte E-Mail Adresse haben.
+    emailExists: Die E-Mail Adresse existiert bereits.
+    usernameNotValid: Dieser Benutzername ist ungültig.
+    usernameMissing: Du musst einen Benutzernamen eingeben.
+    usernameExists: Dieser Benutzername existiert bereits.
+    usernameContainsEmail: Der Benutzername darf keine E-Mail-Adresse beinhalten.
+    submitSuccess: gespeichert!
+  reallyDeleteProgram: Willst du wirklich dein Projekt löschen
+  programsOf: Projekte von
+  changePicture: Bild ändern
+  avatar:
+    noImage: Kein Bild vorhanden!
+    pictureTooLarge: Dein gewähltes Bild ist zu groß, verwende bitte keine Bilder, die größer als 5MB sind.
+    uploadError: Tut mir leid, es gab ein Problem beim Hochladen!
+    noSupport: Dieser Bild-Typ wird nicht unterstützt, versuche ein anderes Bild.
+  goToScratchProfile: Scratch Profil
+myprofile:
+  editProfile: Profil bearbeiten
+  edit: Bearbeiten
+  done: Fertig
+  checkMail: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
+  passwordUpdated: Dein Passwort wurde erfolgreich aktualisiert.
+  avatar: Avatar
+  email: Email
+  editAvatar: Avatar bearbeiten
+  editUsername: Benutzernamen bearbeiten
+  editPassword: Passwort ändern
+  editCountry: Land ändern
+  editEmail: E-Mail bearbeiten
+  deleteAccount: Account löschen
+  deleteAccountText: Bist du dir sicher, dass du dein Konto löschen möchtest? Dadurch werden deine hochgeladenen Projekte und Kommentare gelöscht!
+  editAccountSettings: Kontoeinstellungen bearbeiten
+  notChangeVisibility: Sichtbarkeit kann nicht geändert werden.
+  notChangeVisibilityReason: Die Sprachversion deines Projekts ist inkompatibel, daher kann es nicht auf sichtbar gesetzt werden.
+licenseToPlay:
+  link: 'Lizenzbedingungen'
+  title: 'Lizenz zum Spielen - Sag "Danke" und teile deine Programme'
+  text1: Stell dir vor, dass jedes Catrobat Projekt ein Kuchen ist, ein sehr spezieller Kuchen, welches ein Rezept beinhaltet (Programmblöcke). Alle Mitglieder der Catrobat Gemeinschaft teilen ihre Kuchen zusammen mit ihren Rezepten. Dadurch kannst du die Kuchen anderer genießen und mithilfe der Rezepte lernen deine eigenen zu machen!
+  text2: 'Es gibt keine geheimen Rezepte: die Anweisungen wie diese Kuchen erstellt werden sind offen für jeden um sie zu verwenden, wiederverwenden, ändern und als Inspiration für neue Ideen... Ich meine Kuchen.'
+  text3: "Du darfst die Kuchen essen und du darfst die Rezepte von anderen kopieren um deinen eigenen Kuchen zu machen - wenn du möchtest mit anderen Zutaten. Es gibt zwei Dinge die du beachten sollst:"
+  text4: "Bei der Einrichtung der Catrobat Gemeinschaft, haben wir beschlossen, diesen Ansatz zu verfolgen, da wir glauben, dass es das Lernen und die Kreativität in der Gemeinschaft unterstützt. Durch den Austausch von Rezepten und Zutaten (Skripte und Grafiken), können Menschen gegenseitig Ideen aufbauen und alle profitieren davon."
+  text5: Bei der Gestaltung der Catrobat Website, fügten wir Funktionen hinzu, um Menschen zu ermutigen, zu teilen und anderen Respekt zu zollen. Auf jeder Seite des Projektes kannst du immer die ursprünglichen Skripts für das Projekt herunterladen. Wenn du ein Projekt (Veränderung des Skripts oder der Grafiken, und anschließendes Teilen) vermischst, empfehlen wir dir die Menschen und das Projekt, welches dich inspiriert hat, in die Projekt Anerkennung einzutragen.
+  text6: 'Erfahre mehr über die Nutzungsbedingungen der online-Community von Catrobat auf %link-termsOfUse%.'
+  list1:
+    item1: teile Deine Kuchen und die Rezepte mit anderen
+    item2: bedanke Dich bei denen, deren Rezepte Du verwendet hast und die Dich auf neue Ideen gebracht haben
+  version: Version 1.1, 2 April 2013
+termsOfUse:
+  title: Nutzungsbedingungen
+  headline: Willkommen in der Catrobat Gemeinschaft!
+  text1: 'Als Teil der Catrobat Community teilst du Projekte und Ideen mit anderen Leuten:'
+  text2: "Wir benötigen Deine Hilfe um diese Community zu einem hilfreichen Platz für alle Mitglieder zu machen. Und so kannst Du uns helfen:"
+  text3: "Mit dem Catrobat Projekt wollen wir die Zusammenarbeit fördern und damit die Kreativität aller kombinieren - zum Wohle der gesamten Menschheit. Auch du kannst ein aktives Mitglied der Catrobat Gemeinschaft werden, indem du deine Projekte als Geschenk zurück an die Gemeinschaft gibst, in der gleichen Weise wie andere aktive Mitglieder ihre Programme dir geben:"
+  text4: 'Unser Geschenk an dich:'
+  text5: 'Unsere allgemeinen Geschäftsbedingungen:'
+  list1:
+    item1: aus vielen verschieden Ländern und Kulturkreisen
+    item2: mit unterschiedlichem Alter (von kleinen Kindern über Jugendliche bis Großeltern)
+    item3: die unterschiedliche Fähigkeiten haben
+  list2:
+    item1: Sei respektvoll. Wenn du Projekte teilst, denke bitte daran, dass Menschen aus vielen verschiedenen Altersgruppen und Hintergründen deine Beiträge sehen können.
+    item2: "Erwähne Benutzer von denen du etwas übernimmst. Du kannst gerne modifizierte Versionen der Programme eines anderen Benutzers erstellen. Achte jedoch, dass du diesen Benutzer in deinem neuen Programm erwähnst. Untenstehend findest du eine Liste der Details über das Modifizieren von Programmen anderer Benutzer."
+    item3: "Sei ehrlich. Versuche nicht Dich als jemand anderes auszugeben oder die Community sonst irgendwie zu betrügen."
+    item4: "Behalte persönliche Informationen für Dich. Veröffentliche nicht Deine E-Mail Adresse, Telefonnummer oder andere persönliche Kontakt-Informationen."
+    item5: "Hilf die Website freundlich zu halten. Wenn du glaubst, dass andere ein Projekt oder einen Kommentar gemein, beleidigend, zu gewalttätig oder anderweitig unangemessen finden, klicke einfach auf den \"Als unpassend melden\" Button und hinterlasse eine kurze Erklärung. Das Catrobat Team prüft deinen Hinweis und kann ein beliebiges Projekt, einen Kommentar oder Post entfernen."
+  list3:
+    item1: "Wenn du ein Programm auf unsere Website lädst, akzeptierst du unsere freie Lizenz für den Upload von Catrobat-Programmen. Diese Lizenz gibt jedem das Recht von der Arbeit, die von anderem Benutzern hochgeladen wurde zu lernen und diese zu adaptieren. Dadurch kannst du schnell neue faszinierende Spiele, Animationen und andere Projekte erstellen. Von deiner Arbeit wird daher auch die ganze Welt profitieren und sie wird für alle frei zu benutzen sein, ähnlich der Texte und Bilder die du auf der Wikipedia finden kannst und die auch von vielen Freiwilligen auf der ganzen Welt erstellt werden. Stell es dir als ein Geschenk von dir an die Menschheit vor: Du gibst allen etwas und alle anderen geben auch dir etwas. Daher ist ein hoch geladenes Projekt ein Geschenk von großem Wert, welches der Ersteller kostenlos dir gegeben hat allerdings unter der Voraussetzung, das auch du unter den selben Regeln am Projekt teilnimmst."
+    item2: Du musst das Geschenk allerdings nicht annehmen; wenn du es jedoch tust, dann gelten bestimmte Regeln. Die Vorteile dieser Regeln sind, dass du von der Arbeit anderer lernen kannst und auf dieser aufbauend ein noch cooleres Programm erstellen kannst, welches du dann wieder auf unsere Website hochladen kannst. Ein weiterer Vorteil ist, dass diese Lizenz sicherstellt, dass du nicht verantwortlich gemacht werden kannst für irgendwelche Probleme die anderen durch die Verwendung deiner Arbeit entstehen sollten.
+    item3: "Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen geschätzt werden kann, indem wir anderen die Möglichkeit schaffen öffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gwählt hast und der dich in der Catrobat Gemeinschaft vertritt."
+    item4: 'Bitte konsultiere %link-licenseUploaded%  für die genauen rechtlichen Geschäftsbedingungen.'
+  list4:
+    item1: "Wir bieten alle unsere eigenen Software- und Internet-Ressourcen im Zusammenhang mit dem Catrobat System, zB die Software, die von dem Catrobat Team geschrieben wird, unsere Webseiten und Internet-Ressourcen, unseren eigenen Quellcode im Zusammenhang mit dem Catrobat System und alle zusätzlich enthalten Materialien, wie z. B. , Bilder, Sounds und Texte, jetzt und in der Zukunft, unter den freien Lizenzen von Catrobat."
+    item2: Diese Lizenzen machen alle Teile von Catrobat sowohl kostenlos als auch frei im Sinne von Freiheit, dass du alles nutzen kannst wie du willst, lediglich mit ein paar Einschränkungen, um gewährleisten zu können, dass das Catrobat System für immer frei bleiben und nützlich für jeden sein wird.
+    item3: 'Bitte konsultiere %link-licenseToPlay% für die genauen rechtlichen Geschäftsbedingungen. Der Source-Code des Catrobat-Systems sowie viele weitere Dokumente und Ressourcen sind auf %link-developer% erhältlich.'
+  list5:
+    item1: 'Wenn du unter 13 Jahre alt bist, deine Eltern oder gesetzliche Erziehungsberechtigte bei einer Organisation beteiligt oder involviert sind, oder verantwortlich für Datenschutzverletzungen und/oder Bulk- oder Massenüberwachung sind, dann bist du nicht befugt unsere Softwareanwendung zu verwenden. Die genauen Details dieser Beschränkungen und Ausnahmen findest du in den Abschnitten 4.a und 4.b unter diesem Link %link-termsOfUse%.'
+    item2: Wenn du jünger als 13 Jahre bist, musst du deine Eltern oder Erziehungsberechtigten fragen ob sie dir erlauben Catrobat Software-Anwendungen und Services zu nutzen.
+    item3: "Wir behalten uns das Recht vor, Programme, Benutzer-Accounts sowie jegliches digitales Material  zu jeder Zeit abzuweisen, zu verstecken oder zu löschen. Beispiel: Wir finden ein Programm,  das unangemessene Inhalte enthält oder Inhalte welche die Rechte anderer Personen verletzen."
+    item4: "Alle Software und Internet-Ressourcen von Catrobat werden in der Hoffnung, dass sie nützlich sind bereitgestellt, allerdings ohne jeglicher Garantie."
+    item5: 'Bitte konsultiere unsere %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service für genauere Informationen der obigen Punkte und einigen zusätzlichen rechtlichen Bedingungen.'
+  bottom1: Schaue hier von Zeit zu Zeit vorbei, weil wir immer versuchen unsere Nutzungsbedingungen zu verbessern.
+  bottom2: 'Bitte sende Anregungen bezüglich dieser Nutzungsbedingungen an %email-webmaster%.'
+  version: Version 1.3, 4. März 2014
+help:
+  stepByStep:
+    title: "Schrittweise Einführung"
+    start: "Ausgangsposition:"
+    description: |
+      Hier kannst du deine erstes Projekt, eine interaktive Postkarte erstellen. Schau dir dazu die Schritt-für-Schritt-Videos an.
+      Du musst den Anweisungen darin folgen.
+      Während der Erstellung der Postkarte werden dir die Grundlagen von Pocket Code gezeigt, welche du für die Erstellung zukünftiger Projekte benötigst.
+      Nach diesen Videos werden dir alle Aktivitäten mehr Freiheit geben um deine eigenen Pocket Code Projekte zu erstellen.
+    step1:
+      title: 'Erstellen eines neuen Projektes'
+      detail:
+        text1: 'Tippe auf "Neu".'
+        text2: 'Gib einen Projektnamen ein, wähle "Leeres Projekt erstellen" und tippe auf "OK".'
+    step2:
+      title: "Erstellt ein neues Objekt"
+      detail:
+        text1: 'Tippe auf "+".'
+        text2: 'Wähle die Quelle des ersten Aussehens von deinem neuen Objekt.'
+        text3: 'Gib einen Objektnamen ein und tippe auf "OK", um das Objekt zu erstellen.'
+        special1: 'Zeichne ein neues Aussehen.'
+        special2: 'Wähle von der Galerie.'
+        special3: 'Mach ein Foto.'
+    step3:
+      title: "Fange an"
+      detail:
+        text1: 'Tippe auf "+".'
+        text2: 'Wir wollen einen Baustein aus der Kategorie "Bewegung" verwenden.'
+        text3: 'W&#xE4;hle den "Gleiten" - Baustein aus. Das Objekt wird zu der Position gleiten, die du in den Baustein eingibst.'
+        text4: 'Der Baustein wird jetzt schwebend angezeigt. Du kannst ihn einfügen, indem du ihn an die gewünschte Stelle ziehst. Du kannst auch bereits eingefügte Bausteine verschieben, indem du den Baustein solange antippst, bis er wieder schwebend wird.'
+        text5: 'Berühre "Spiel" um die Bühne zu betreten und sehe das Objekt gleiten.'
+        text6: 'Drücke den "Zurück"-Button, um die Bühne zu verlassen.'
+    step4:
+      title: "Aussehen ändern"
+      description: "Du kannst das Aussehen deines Objektes verändern."
+      detail:
+        text1: 'Wähle den "Setze Aussehen" - Baustein aus. Mit diesem Baustein kannst du ein vorhandenes Aussehen auswählen oder ein neues erstellen.'
+        text2: 'Platziere den Baustein unter dem "Gleiten" - Baustein.'
+        text3: 'Um ein neues Aussehen zu erstellen, tippe zuerst in das Dropdown-Feld.'
+        text4: 'Füge wie vorher ein neues Bild hinzu.'
+        text5: 'Jetzt musst du das neue Bild auswählen.'
+        text6: 'Tippe auf den Start-Button, um die Änderungen auf der Bühne zu sehen.'
+    step5:
+      title: "Sprich"
+      description: "Jetzt wirst du herausfinden, wie man ein Objekt zum \"Sprechen\" bringt."
+      detail:
+        text1: 'Wähle den "Sprechen" Baustein. Das Objekt spricht den Text vor, wenn der Baustein ausgeführt wird.'
+        text2: 'Platziere den Baustein unter dem "Setze Aussehen" - Baustein.'
+        text3: 'Tippe auf den Start-Button, um die Änderungen auf der Bühne zu sehen.'
+    step6:
+      title: 'Immer wieder'
+      description: "Jetzt werden wir dir zeigen, wie du das Verhalten deines Objektes wiederholen kannst."
+      detail:
+        text1: 'Wähle den "Wiederhole fortlaufend" Baustein. Alles in der Schleife wiederholt sich für immer.'
+        text2: 'Ziehe den "Forever" Baustein unter den "When project started" Baustein.'
+        text3: 'Füge einen weiteren "Gleiten" Baustein hinzu.'
+        text4: 'Lasse den "Gleiten" Baustein einrasten über dem "Ende der Schleife" Baustein.'
+        text5: 'Tippe in das Textfeld der x und y Koordinaten und setze sie auf 0.'
+        text6: 'Tippe auf den Start-Button, um die Änderungen auf der Bühne zu sehen.'
+    step7:
+      title: "Tippen ist alles"
+      description: 'Du kannst das Verhalten eines Objektes auch verändern, wenn dein Projekt gerade auf der Bühne ausgeführt wird.'
+      detail:
+        text1: 'Wähle den "Wenn angetippt" - Baustein aus. Jeden Baustein, den du unterhalb dieses Bausteins einfügst, wird erst ausgeführt, wenn du das Objekt auf der Bühne antippst.'
+        text2: 'Platziere den "Wenn getippt" Baustein unter den anderen Bausteinen.'
+        text3: 'Wähle den "Drehe nach rechts" Baustein und lass ihn unter den "Wenn getippt" Baustein einrasten.'
+        text4: 'Jetzt solltest du dieses Skript haben.'
+        text5: 'Tippe auf den Start-Button, um die Änderungen auf der Bühne zu sehen. Wenn du jetzt das neue Objekt antippst, wird es sich drehen.'
+    step8:
+      title: "Kopiere, lösche oder bearbeite einen Baustein"
+      detail:
+        text1: 'Wenn du einen Baustein auf der linken Seite antippst, öffnet sich ein Menü. Damit kannst du das Objekt bewegen, kopieren oder die Werte des Bausteins mit dem Formel-Editor verändern.'
+    step9:
+      title: "Navigation in der App"
+      detail:
+        text1: 'Nutze den Android "Zurück" - Button, um zum vorherigen Bildschirm zurück zu gelangen.'
+        text2: 'Gehe einmal zurück um zur Übersicht deines Objektes zu gelangen. Von hier gelangst du zu den Skripten, Aussehen und Klänge deines Objektes. Hier kannst du sie umbenennen, kopieren, editieren oder löschen.'
+        text3: 'Wenn du noch einmal den Android "Zurück"-Button antippst, gelangst du zur Übersicht über deine Objekte und den Hintergrund.'
+    step10:
+      title: "Ändere den Hintergrund"
+      description: "Das ist die Übersicht über deine Objekte und dem Hintergrund deines Projekts."
+      detail:
+        text1: 'Der Hintergrund verhält sich wie ein Objekt, allerdings gibt es nur ein Hintergrund-Objekt.'
+        text2: 'Du kannst Skripte, Aussehen und Klänge auf die gleiche Weise zum Hintergrund-Objekt hinzufügen, wie bei den Objekten.'
+    step11:
+      title: "Hauptmenü"
+      description: "Tippe noch einmal auf den Android \"Zurück\"-Button, um zu diesem Bildschirm zu gelangen."
+      detail:
+        text1: 'Fahre mit deinem aktuell geöffneten Projekt fort.'
+        text2: 'Füge ein neues Projekt hinzu.'
+        text3: 'Schau dir all deine lokalen Projekte an.'
+        text4: 'Besuche die Hilfe Website und diskutiere mit den anderen Benutzern.'
+        text5: 'Entdecke die Welt der Pocket Code Programme. Lade und vermische Projekte, die dir gefallen.'
+        text6: 'Lade das aktuell geöffnete Projekt hoch.'
+  tutorialcards:
+    title: "Tutorials"
+    description1: "Diese Tutorials zeigen dir, wie man effektive Tricks verwendet in "
+    getReady: "Bereite alles vor:"
+    tryCode: "Versuche diesen Code:"
+    doIt: "Tu es:"
+    tip: "Extra Tipp:"
+    card1:
+      title: "Größe ändern"
+      description: "Tippe auf die Ente um ihre Größe zu verändern."
+      one: "Füge das Object hinzu, von dem du die Größe ändern möchtest, z.B. Tier."
+      two: "Füge die folgenden Bausteine in ein Skript eines Objektes ein, um es bei Berührung (um 20% seiner Originalgröße) zu verkleinern."
+    card2:
+      title: "Aussehen ändern"
+      description: "Verwende diesen Trick um automatisch mitzuzählen."
+      one: "Füge das Object hinzu, von dem du das Aussehen ändern möchtest, z.B. Gegenstände."
+      two: "Füge weitere Bilder zum Aussehen des Objektes hinzu."
+      three: "Füge die folgenden Bausteine in ein Skript eines Objektes ein, um sein Aussehen nach jeder Sekunde zu ändern."
+    card3:
+      title: "Bewegte Animation"
+      description: "Verwende diesen Trick um den Papagei fliegen zu lassen."
+      one: "Füge das Objekt hinzu, das du bewegen möchtest."
+      two: "Füge weiter Bilder zum Aussehen des Objekts hinzu, die eine Bewegung veranschaulichen."
+      three: "Füge die folgenden Bausteine in ein Skript eines Objektes ein, um seine Position nach einer gewissen Zeit zu verändern. Zusätzlich kannst du das Feld durch Abprallen am Rand eingrenzen."
+    card4:
+      title: "Gleite"
+      description: "Gleite mit einem Objekt über den Bildschirm."
+      one: "Füge das Objekt hinzu, das du gleiten lassen möchtest. z.B. Flugzeug."
+      two: "Füge die folgenden Bausteine ein und definiere den Bereich in dem die Bewegung stattfinden soll."
+    card5:
+      title: "Spiele einen Klang ab"
+      description: "Tippe auf die Trommel um den Klang abzuspielen."
+      one: "Füge das Objekt hinzu, das einen Ton abspielen soll. z.B. Hund."
+      two: "Füge die folgenden Bausteine ein um eine Tonwiedergabe zu ermöglichen. Nimm selbst einen Ton auf, oder wähle ihn aus deiner persönlichen Bibliothek oder der Pocket Code Medienbibliothek aus."
+    card6:
+      title: "Sprich"
+      description: "Verwende diesen Code damit ein Objekt spricht."
+      one: "Füge das Objekt hinzu, das eine Sprachausgabe machen soll. z.B. Carrie."
+      two: "Füge die folgenden Bausteine in ein, um eine Sprachausgabe zu ermöglichen."
+    card7:
+      title: "GSensor"
+      description: "Verwende diesen Trick um ein Objekt mit Neigung deines Handys zu kontrollieren."
+      one: "Füge das Ojekt hinzu, das sich auf der Bühne bewegen soll."
+      two: "Füge die folgenden Bausteine ein, um das Objekt mit den Sensoren deines Gerätes zu steuern. Dafür wählst du \"x und y Neigung\". Um die passende Bewegung zu erhalten, setze \"- Neigung\". Wenn die Bewegung des Objekts zu sensibel reagiert, teile den Neigungswert z.B. durch 10."
+    card8:
+      title: "Kompass"
+      description: "Verwende diesen Code um einen Kompass zu erstellen."
+      one: "Füge das Objekt hinzu, das in Kompassrichtung zeigen soll."
+      two: "Füge die folgenden Bausteine ein, um ein Objekt auszurichten. Füge zusätzlich eine Forever Schleife ein."
+    card9:
+      title: "Verschicke an alle:"
+      description: "Schau dir diesen Code an! Er zeigt dir, wie man zwischen Objekten kommuniziert."
+      one: "Füge ein neues Objekt hinzu, z.B. Alice, das eine Broadcast Nachricht versenden soll. Füge zusätzlich einen zweiten Hintergrund zu den Aussehen des Hintergrunds hinzu. Sobald der Hintergrund eine Broadcast Nachricht erhält soll er sein Aussehen ändern."
+      two: "Füge den Baustein \"An alle senden\" ein und bestimme was geschehen soll, wenn die anderen Objekte die Nachricht erhalten."
+      three: "In diesem Fall ändert sich der Hintergrund, wenn ein Objekt auf einer vorderen Ebene berührt wird."
+    card10:
+      title: "Zeige Variable"
+      description: "Zeige den Wert der Variable."
+      one: "Füge ein Objekt hinzu, das durch deine Telefonsensoren beweger werden soll (siehe %tutorial_card_link_7% Tutorial Karte 7 %link_end%). Füge zusätzlich einen zweiten Hintergrund hinzu, der verändert werden soll, wenn eine Broadcast Nachricht empfangen wird."
+      two: "Füge die folgenden Bausteine ein, um die aktuelle x und y Position des sich bewegenden Objektes in einer Variable zu speichern."
+      three: "Über \"Zeige Variable\" kannst du die Werte auf der Bühne anzeigen."
+    card11:
+      title: "Kollisionserkennung"
+      description: "Erkenne eine Kollision zwischen zwei Objekten."
+      one: "Füge zwei Objekte hinzu von denen eines durch die Sensoren deines Telefons bewegt werden soll, z.B. Alex (siehe %tutorial_card_link_7% Tutorial Kare 7 %link_end%)."
+      two: "Speichere die aktuelle \"x und y Position\" des sich bewegenden Objekts Alex (siehe %tutorial_card_link_10% Tutorial Karte 10 %link_end%) und füge das folgende Skript hinzu. Überprüfe kontinuierlich, ob sich die zwei Objekte überlagern. Wenn sie das tun, soll das fixierte Objekt ausgeblendet werden."
+    card12:
+      title: "Gesichtserkennung"
+      description: "Steure ein Objekt durch Gesichtserkennung."
+      one: "Stelle zuerst sicher, dass die Gesichtserkennungsbausteine aktiviert sind. Gehe dafür zu den Einstellungen."
+      two: "Füge ein neues Objekt hinzu und füge die folgendne Bausteine ein um anzuzeigen, ob ein Gesicht erkannt wurde. Überprüfe in einer Forever Schleife, ob ein Gesicht erkannt wurde. Wenn die Kamera ein Gesicht wahrnimmt ist der Wert der Variable \"WAHR\", sonst ist er \"FALSCH\"."
+  starterPrograms:
+    title: "Starterprojekte"
+    description: "Probiere diese Starterprojekte aus. Schau dir den Code an und verändere ihn so wie du willst."
+    categories:
+      games: "Spiele"
+      animations: "Animationen"
+      interactive: "Interaktive Kunst und Geschichten"
+      music: "Musik und Tanz"
+  gameJam:
+    title: "Wie du ein Pocket Code Spiel auf die Game Jolt Seite hochladen kannst?"
+    text0: "Herzlichen Glückwunsch zu deinem Spiel! Du kannst es nun auf %link% hochladen, um eine eigenständige Android App zu erstellen. Diese kannst du dann auf der Game Jolt Seite hochladen."
+    title1: "Anmeldung"
+    text1: "Als erstes musst du einen Benutzer-Account erstellen. Danach kannst du dein erstelltes Projekt hochladen. Keine Sorge, das ist einfach und du musst dir nur einen Benutzernamen und ein Passwort ausdenken. Nachdem du beides ausgefüllt hast, klicke einfach auf \"Login\" oder \"Registrierung\". Das war's auch schon!"
+    title2: "Projekt hochladen"
+    text2: "Nachdem du dich angemeldet hast, kannst du dein Spiel hochladen. Überlege dir einen Namen und eine Beschreibung. Füge #AliceJam150 zur Beschreibung hinzu."
+    title3: "Suche nach deinem Programm"
+    text3: "Geh zu deinem Pocket Code Profil wo alle deine Projekte aufgelistet sind. Oder suche direkt nach einem Projekt durch Eingabe des Projektnamens."
+    title4: "Erstelle eine Android App"
+    text4: "Du kannst auf der Detailseite des Projekts eine Android-App davon erzeugen. Klicke einfach auf \"App erstellen\"."
+    title5: "App herunterladen"
+    text5: "Nachdem Erzeugungsprozess kannst du dein Projekt als App herunterladen. Diese heruntergeladene App kannst du dann direkt auf die Game Jolt Seite hochladen. Nutze dafür einfach diesen Link: %link%."
+    title6: "Anmelden/Einloggen bei GameJolt.com"
+    text6: "Besuche %link% und klicke im Menü auf 'Einloggen' oder 'Anmelden!'. Wenn du schon einen Account besitzt, log dich ein, wenn nicht musst du dich mit deiner Email Adresse, dem Benutzernamen und einem Passwort anmelden."
+    title7: "Lade dein Spiel auf der Game Jolt Seite hoch"
+    text7: "Nachdem du angemeldet bist, gehe zu deinem Dashboard. Dort kannst du dein erstes Spiel hinzufügen. Zuerst musst du auf 'Regeln akzeptieren' klicken. Dann füllst du die Informationen zu deinem Spiel aus. Als Motor/Sprache/Kreation Werkzeug wähle 'Sonstige' aus und füge zu dem Feld Sonstige Motor/Sprache/Werkzeug 'Android' hinzu. Als 'Entwicklung' Status wähle 'Fertig/Stabil'. Versichere dich, dass du #AliceJam150 in der Beschreibung hinzugefügt hast, damit es auf %link% erscheint."
+    text7_1: "Bevor du dein Spiel veröffentlichen kannst musst du die folgenden Schritte durchführen. Du musst zumindest ein 'Miniaturbild' hinzugefügt, eine 'Reifebewertung' angelegt und dein Spiel durch klicken von 'Erstellen/Dateien' hochgeladen haben."
+    text7_2: "Klicke auf 'Paket hinzufügen' und fülle die Informationen zum Paket aus. Speichere jetzt und füge dann den Release hinzu. "
+    text7_3: "Jetzt kannst du die APK deines Projekts hochladen. Du findest die heruntergeladene App im Download-Ordner. Am besten du nützt dafür den Datei-Explorer."
+    text7_4: "Hinweis: Wenn die App nicht mit '.apk' endet, musst du '.apk' manuell zum Namen hinzufügen. Ändere dazu einfach den Namen der Datei. Jetzt sollte es dir möglich sein die App hochzuladen."
+    text7_5: "Klicke nach dem Upload auf 'OK', um dein Spiel zu veröffentlichen. Dadurch wird anderen Leuten ein Link angezeigt, mit dem sie dein Spiel herunterladen können."
+    text7_6: "Du hast jetzt dein erstes Spiel auf der Game Jolt Seite hochgeladen und aktiviert. Herzlichen Glückwunsch!"
+    text7_7: "Andere Leute können dein Spiel jetzt finden und es erscheint auf der %link% Seite."
+  aliceGameJamTutorialcards:
+    title1: "Willkommen im Wunderland"
+    subtitle1: "Animiere deine Figuren und erstelle ein 'Wenn angetippt' Event"
+    description1: |
+      Lerne wie du einen deiner Charaktere mit einfachen Animationen zum Leben erwecken kannst und verstehe wie dein Charakter durch Berühung eine Aktion ausführen kann. Das Video zeigt dir, wie du deinen Charakter mit verschiedenen Aussehen einfach animieren kannst. Weiters zeigen wir dir, wie du ein "bei Berühung" Event erstellen kannst und wie dur Broadcast Nachrichten zwischen Objekten verschickst.
+    title2: "Rette Alice!"
+    subtitle2: "Verwende den Neigungssensor und erkenne eine Kollision zwischen Objekten"
+    description2: "Hier lernst du wie du deinen Charakter mit dem Neigungssensor deines Telefons kontrollieren kannst. Du kannst Alice's Bewegungen kontorllieren indem du dein Telefon nach links oder rechts neigst. Schau dir unser Tutorial an, lasse zufällige Objekte vom Himmel fallen und lerne Kollisionen zwischen Objekten festzustellen."
+    title3: "Der Hutmacher - Hit and Run"
+    subtitle3: "Erstelle eine bewegliche Landschaft und steuere die Bewegungen des Hutmachers"
+    description3: "In diesem Tutorial lernst du wie du eine Landschaft, die aussieht als würde sie sich bewegen, erstellen kannst. Wir werden Objekte entlang des Bildschirms bewegen um so eine Bewegung zu simulieren. Ausserdem zeigen wir dir wie du den Hutmacher durch neigen deines Telefons bewegen kannst."
+    title4: "Der Hutmacher - Hit and Run"
+    subtitle4: "Lasse den Hutmacher die bösen Karten abschießen"
+    description4: "In diesem Tutorial zeigen wir dir wir du Feinde, die sich zufällig in Richtung deines Charakters bewegen, erzeugen kannst. Weiters lernst du, wie der Hutmacher Teetropfen abfeuern kann und ob diese einen der Feinde getroffen hat, indem du eine Kollisionen erkennst."
+    title5: "Schlag eine Grinsekatze"
+    subtitle5: "Erstelle einen Spielstand indem du Variablen benützt"
+    description5: "In diesem Tutorial zeigen wir dir, wie du Variablen verwenden kannst, um einen Spielstand zu erstellen. Spielstände sind nützliche Elemente eines Spieles. Unser Spielstand zeigt dir, wie oft du die Grinsekatze gefangen hast."
+    title6: "Ein Kaninchenrennen"
+    subtitle6: "Erstelle einen bewegten Hintergrund"
+    description6: |
+      Dieses Tutorial zeigt dir wie du vertikal bewegliche Hintergründe erstellen kannst, indem du die Hintergrundgrafiken in einer bestimmten Art und Weise gleiten lässt. Weiters werden wir dir zeigen, wie du Charaktere durch Berührung nach vorne springen lassen kannst. Um das Spiel etwas schwieriger zu gestalten zeigen wir dir, wie du die Geschindigkeit deines Charkaters mit der Zeit drosseln kannst.
+    download: "Projekt herunterladen"
+oauth:
+  username_header: Danke für deine Anmeldung bei Pocket Code!
+  username_chooser: "Bitte wähle einen Benutzernamen:"
+  username_hint: Der Benutzername sollte nicht dein richtiger Name sein.
+  usernameTaken: Benutzername bereits vergeben, bitte wähle einen anderen.
+search:
+  dotdotdot: Suche...
+  search: Suche
+  inMediaLib: In Medienbibliothek suchen
+  results: Suchergebnisse
+  resultcount: Ihre Suche brachte %count% Ergebnisse
+  fail: Bitte gib zumindest ein Wort ein
+menu:
+  profile: Mein Profil
+  login: Einloggen
+  logout: Abmelden
+  admin: Administrator
+  home: Start
+  helpAndTutorials: Hilfe & Tutorials
+  followersAndFollowing: Abonnenten
+login:
+  login: Einloggen
+  passOrUser: Das Passwort oder der Username ist falsch.
+  noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.
+  forgotPass: Passwort oder Usernamen vergessen?
+  recoverPass: Passwort wiederherstellen
+  recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
+  alreadyReset: Ein Passwort für diesen Account wurde bereits innerhalb der letzten 24 Stunden angefordert.
+  confirmationSend: Eine E-Mail zur Bestätigung der Registrierung wurde an deine E-Mail-Adresse gesendet. Bitte überprüfe deinen Posteingang und aktivieren deinen Account.
+  userOrEmail: Username oder Email
+  changePass: Passwort ändern
+  createAccount: Erstelle ein Konto
+  noAccount: Ich habe keinen Account!
+  alreadyAccount: Hast du bereits einen Account?
+  or: ODER
+  username: Username
+  email: Email
+  passwordFirst: Passwort
+  passwordSecond: Passwort bestätigen
+apk:
+  download: App herunterladen
+  prepare: 'App erstellen'
+  preparing: 'App vorbereiten'
+  text: 'Der Vorgang kann eine Weile dauern'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: Benutzername darf nicht leer sein
+    invalid: Dein Benutzername ist ungültig
+    exists: Dieser Benutzername existiert bereits.
+    not_exists: Dieser Benutzername existiert nicht.
+    not_email: Ihr Username darf keine E-Mail-Adresse sein.
+    size: Der Benutzername muss mindestens 3 Zeichen lang sein und darf nicht mehr als 180 Zeichen enthalten
+  password:
+    blank: Du hast kein Passwort angegeben.
+    short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
+  description:
+    rude: Beschreibung darf keine unhöflichen Wörter enthalten.
+  credit:
+    rude: Credits dürfen keine unhöflichen Worte enthalten.
+  country:
+    blank: Du hast kein Land angegeben.
+    invalid: Ungültiges Land
+  email:
+    blank: E-Mail Adresse darf nicht leer sein
+    invalid: Deine E-Mail Adresse scheint ungültig zu sein
+    exists: Die E-Mail Adresse existiert bereits.
+  id:
+    blank: Offene Authentifizierungs ID darf nicht leer sein
+  login: Das Passwort oder der Username ist falsch.
+  post-data: POST-Daten nicht korrekt oder fehlt!
+  checksum:
+    missing: Der Client hat die fileChecksum nicht mitgeschickt! Verwendest du eine veraltete Version von Pocket Code?
+    invalid: Ungültige Prüfsumme
+  xml:
+    invalid: Ungültiger xml Code
+    missing: 'Unbekannter Fehler: project_xml_not_found!'
+  file:
+    unexpected: Unerwartete Datei gefunden
+    invalid: Ungültige Datei
+  image.missing: In der Projekt XML ist eine Datei gelistet, die nicht im Projekt Ordner vorhanden ist
+  unknown: Unbekannter Fehler
+  token: 'Authentifizierung des Geräts fehlgeschlagen: ungültiger auth-token!'
+  uploadTokenAuthFailed: 'Upload-Token-Authentifizierung fehlgeschlagen.'
+  programname:
+    rude: Projektname darf keine unhöflichen Wörter enthalten.
+  program:
+    invalid: Ungültiges Projekt.
+  languageversion:
+    tooold: 'Leider enthält dein Projekt eine alte Version der Catrobat-Sprache! Verwendest du die neueste Version von Pocket Code?'
+  programversion:
+    tooold: 'Es tut uns Leid, du nutzt eine alte Version von Pocket Code. Bitte lade dir die aktuelle Version herunter.'
+  authentication:
+    title: Authentifizierung fehlgeschlagen
+    webview: |
+      Deine Benutzerdaten sind falsch.
+      Bitte versuchen dich erneut in der App anzumelden.
+success:
+  text: Abgeschlossen
+  registration: Registrierung erfolgreich!
+  token: Ok
+  upload: Das Projekt wurde erfolgreich hochgeladen!
+  imgUpload: Dein Bild wurde erfolgreich hochgeladen!
+  report: Dein Bericht wurde erfolgreich verschickt!
+time:
+  minutes.ago: '{0} < vor 1 Minute |{1} vor 1 Minute |]1, Inf]  vor %count% Minuten'
+  hours.ago: '{1} vor 1 Stunde |]1, Inf]  vor %count% Stunden'
+  days.ago: '{1} vor 1 Tag |]1, Inf] vor %count% Tagen'
+  months.ago: '{1} vor 1 Monat |]1, Inf] vor %count% Monaten'
+  years.ago: '{1} vor einem Jahr |]1, Inf] vor mehr als einem Jahr'
+failure:
+  upload: Während dem Upload deiner App ist ein Fehler passiert.
+api:
+  registerUser:
+    emailMissing: 'EMail fehlt'
+    emailInvalid: 'Email ungültig'
+    emailAlreadyInUse: 'EMail wird bereits benützt'
+    usernameMissing: 'Benutzername fehlt'
+    usernameTooShort: 'Benutzername zu kurz'
+    usernameTooLong: 'Benutzername zu lang'
+    usernameAlreadyInUse: 'Benutzername wird bereits benützt'
+    usernameInvalid: 'Benutzername ungültig'
+    passwordMissing: 'Passwort fehlt'
+    passwordTooShort: 'Passwort zu kurz'
+    passwordTooLong: 'Passwort zu lang'
+    passwordInvalidChars: 'Password enthält ungültige Zeichen'
+    usernameContainsEmail: "Username darf keine Email Adresse beinhalten"
+  projectsPost:
+    invalid_checksum: 'Checksum ungültig. Bitte versuche es erneut!'
+    upload_error: 'Fehler während dem Upload. Bitte versuche es erneut!'
+    creating_error: 'Fehler während dem Erstellen der Program Entity. Bitte versuche es erneut!'
+#languages and countries
+language:
+  arabic: Arabisch
+  bulgarian: Bulgarisch
+  catalan: Katalanisch
+  chinese_simplified_han: Chinesisch (Vereinfachte Chinesische Schrift)
+  chinese_traditional_han: Chinesisch (Traditionelle Chinesische Schrift)
+  croatian: Kroatisch
+  czech: Tschechisch
+  danish: Dänisch
+  dutch: Niederländisch
+  english_united_kingdom: Englisch (Vereinigtes Königreich)
+  english_united_states: Englisch (Vereinigte Staaten)
+  estonian: Estnisch
+  filipino: Filipino
+  finnish: Finnisch
+  french: Französisch
+  german: Deutsch
+  greek: Griechisch
+  hebrew: Hebräisch
+  hindi: Hindi
+  hungarian: Ungarisch
+  indonesian: Indonesisch
+  italian: Italienisch
+  japanese: Japanisch
+  korean: Koreanisch
+  latvian: Lettisch
+  lithuanian: Litauisch
+  malay: Malaiisch
+  norwegian: Norwegisch
+  persian: Persisch
+  polish: Polnisch
+  portuguese_brazil: Portugiesisch (Brasilien)
+  portuguese_portugal: Portugiesisch (Portugal)
+  romanian: Rumänisch
+  russian: Russisch
+  serbian: Serbisch
+  slovak: Slowakisch
+  slovenian: Slowenisch
+  spanish_latin_america: Spanisch (Lateinamerika und Karibik)
+  spanish_spain: Spanisch (Spanien)
+  swedish: Schwedisch
+  thai: Thailändisch
+  turkish: Türkisch
+  ukrainian: Ukrainisch
+  vietnamese: Vietnamesisch
+ci:
+  generate: APK generieren
+  pending: Generiere APK
+  download: APK downloaden
+gamejam:
+  nojam: Entschuldigung, es findet gerade kein game jam statt
+  submit: Einreichen zum %gamejamname%
+  whats: Was ist der %gamejamname%?
+  submitown:
+    header: Achtung
+    subheader: Du kannst nur deine eigenen Projekte einreichen.
+    text: |
+      Erstelle ein eigenes und mach mit beim %gamejamtag%!
+tag-text: Tags
+extenstion-text: Erweiterungen
+tags:
+  constant:
+    tag1: Spiele
+    tag2: Bewegte Animation
+    tag3: Geschichte
+    tag4: Musik
+    tag5: Kunst
+    tag6: Experimentell
+    tag7: Anleitung
+admin:
+  maintain:
+    diskMaintenance: Festplattenwartung
+    ramMaintenance: Wartungsarbeiten
+    noRemovableObjects: Keine entfernbaren Objekte verfügbar.
+    removableObjects: Entfernbare Objekte
+recommender:
+  similarPrograms: Ähnliche Projekte
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Andere haben auch heruntergeladen
+  moreFromThisUser: Mehr von %username%
+pmd:
+  submitBtn: Projekt abgeben
+  submitBox:
+    header: Abgabe
+    text: Du bist im begriff dein Projekt abzugeben. Bitte gib den Projektcode ein.
+    btnText: Abgeben
+  successful:
+    text: Dein Projekt wurde erfolgreich hochgeladen.
+  failed:
+    text: Fehler beim Hochladen des Projekts.
+codeview:
+  title: 'Code-Ansicht'
+  showCode: 'Code anzeigen'
+  hideCode: 'Code ausblenden'
+  showStatistics: 'Code-Statistiken anzeigen'
+  hideStatistics: 'Code-Statistiken ausblenden'
+  cantDisplayCode: "Code kann nicht angezeigt werden"
+  cantDisplayStatistics: "Code kann nicht angezeigt werden"
+  totalNumberOf: 'Gesamtzahl von'
+  scenes: 'Szenen'
+  scripts: 'Skripte'
+  bricks: 'Bausteine'
+  objects: 'Figuren und Objekte'
+  looks: 'Aussehen'
+  sounds: 'Klänge'
+  globals: 'Globale'
+  locals: 'Lokale'
+  globalVariables: 'Globale Variablen'
+  localVariables: 'Lokale Variablen'
+  eventBricks: 'Event-Bausteine'
+  controlBricks: 'Steuerung-Bausteine'
+  motionBricks: 'Bewegung-Bausteine'
+  soundBricks: 'Klang-Bausteine'
+  looksBricks: 'Aussehen-Bausteine'
+  penBricks: 'Malstift-Bausteine'
+  dataBricks: 'Daten-Bausteine'
+  specialBricks: 'Spezielle Bausteine'
+codeStatistics:
+  title: "Code-Statistiken"
+  error: "Code-Statistiken können nicht angezeigt werden."
+  general: 'Allgemein'
+  bricks: 'Bausteine'
+  eventBricks: 'Event'
+  controlBricks: 'Steuerung'
+  motionBricks: 'Bewegung'
+  soundBricks: 'Klang'
+  looksBricks: 'Aussehen'
+  penBricks: 'Malstift'
+  dataBricks: 'Daten'
+  specialBricks: 'Spezial'
+footer:
+  language: Sprache
+  usefulLinks: Nützliche Links
+  legalities: Rechtliche Hinweise
+  communityStats: Community Statistiken
+  download: Hol dir die App
+privacy-policy:
+  header: Datenschutz-Vereinbarung
+  version: Version 2.2, 17. Oktober 2019
+  text1: Um dir alle Vorteile unserer Dienste und dem verknüpften Benutzerkonto bieten zu können, ist es notwendig gewisse Daten von dir zu sammeln.
+  text2: Um unsere Dienste (Apps und Websites) warten und verbessern zu können und um wissenschaftliche Forschung über ICT und STEM/STEAM-Ausbildung zu betreiben, verwenden wir Google Analytics, Crashlytics und Firebase, alle von Google LLC (USA), sowie Dynatrace von Dynatrace LLC (USA), um Metadaten über die Nutzung unserer Dienste zu erhalten, z.B. Absturzinformationen, Zeitstempel, besuchte Seiten/Bildschirme, Nutzung unserer Apps und Dienste, verwendetes Betriebssystem und Informationen über den Netzwerkanbieter. Diese Analyse und die gesammelten Daten werden nicht mit Ihrem Profil verknüpft und enthalten keine persönlichen Informationen (die letzten Bits der IP-Adresse werden anonymisiert). Die gesammelten Daten werden jedoch an die Service-Anbieter (Google LLC, USA und Dynatrace LLC, USA) übermittelt. Die Datenverarbeitung basiert auf Vereinbarungen mit Google LLC und Dynatrace LLC. Diese Beziehung zu den Dienstanbietern entspricht der Allgemeinen Datenschutzverordnung der Europäischen Union (EU GDPR) und dem Abkommen zwischen der EU und den USA "Privacy Shield".
+  text3: Um ein Benutzerkonto in unserem System zu erstellen und nutzen, sowie um Nutzer per E-Mail über notwendige Änderungen unserer Dienste/Vereinbarungen zu informieren, werden Nutzername und sofern zur Verfügung gestellt E-Mailadresse von uns gespeichert. Falls der Account via Google Plus oder Facebook erstellt wurde wird zusätzlich ein Identifizierungsschlüssel zu diesen Diensten gespeichert. Diese Daten werden, sofern nicht explizit eingewilligt, nicht für andere Zwecke (z.B. Marketing) verwendet.
+  text4: Auf freiwilliger Basis kann das Heimatland auf der Benutzerseite angegeben werden. Diese Information wird öffentlich auf der Benutzerseite angezeigt und für Forschungs-/Statistikzwecke von uns genutzt. Sie kann über die Benutzerseite jederzeit wieder entfernt werden.
+  text5: Die Nutzung der persönlichen Daten von uns kann jederzeit durch die Löschung des Benutzerkontos auf https://share.catrob.at widerrufen werden. Durch die Löschung können unsere Dienste weiterhin genutzt werden, jedoch stehen Kontoabhängige Funktionen (z.B. Upload, Kommentieren oder liken) nicht mehr zur Verfügung. Weiters, werden alle mit dem Benutzerkonto verbundenen Inhalte (hochgeladene Programme, Kommentare, etc.) gelöscht.
+  text6: Um Missbrauch unserer Dienste, z.B. durch das Hochladen illegaler Inhalte, werden alle öffentlich zur Verfügung gestellten Daten (hochgeladene Programme, Kommentare) intern mit einem Zeitstempel und persönlicher IP-Adresse gespeichert. Diese Daten werden erst genutzt bzw. weitergeleitet sofern von Behörden eine offizielle Anfrage die auf gültigem Recht beruht vorliegt. Jeder Fall wird jedoch davor einzeln von uns überprüft.
+  text7: Es besteht freiwillig die Möglichkeit den Catrobat-Newsletter (https://catrob.at/newsletter), der von MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA) zur Verfügung gestellt wird, zu abonnieren. Mit dem Newsletter werden regelmäßig Neuigkeiten über Catrobat und unsere Dienste an die angegebene E-Mailadresse gesendet. Der Newsletter kann jederzeit über einen "Unsubscribe" Link in den Mails abbestellt werden. Dieser Dienst wird von MailChimp betrieben, mit denen wir eine entsprechende Vereinbarung zur Datenverarbeitung abgeschlossen haben und die sich der EU-DSGVO und dem EU-USA "Privacy Shield" verpflichten. Für weitere Details über MailChimp zu erfahren bitten wir direkt ihre Datenschutzvereinbarung und Geschäftsbedingungen aufzurufen.
+  text8: "Alle Dienste werden von der \"International Catrobat Association - Verein zur Förderung freier Software\", einer non-profit Organisation mit Sitz in Graz (Österreich), betrieben. Unsere Vereinbarung unterliegt Europäischem sowie Österreichischem Datenschutzrecht (DSGVO). Um uns zu kontaktieren, bitten wir eine E-Mail an contact@catrobat.org zu senden oder sich per Post an uns zu wenden:\\n\nCatrobat\\n\nc/o Institut für Softwaretechnologie\\n\nTechnische Universität Graz\\n\nInffeldgasse 16b\\n\n8010 Graz, Österreich (EU)."
+  text9: Falls du jünger als 14 Jahre bist muss diese Vereinbarung von deinen Erziehungsberechtigten (üblicherweise die Eltern) akzeptiert werden.
+  text10: Die offizielle englischsprachige Datenschutzerklärung von Catrobat ist im Internet unter https://catrob.at/privacypolicy verfügbar.
+  disagree-text: Ohne Zustimmung kann kein Benutzerkonto erstellt werden, die Basisfunktionalität kann aber weiterhin genutzt werden.
+catro-notifications:
+  markAsRead: "Als gelesen markieren"
+  summary: "{0}Du hast keine neuen Benachrichtigungen|{1}Du hast %amount% neue Benachrichtigung!|]1,Inf]Du hast %amount% neue Benachrichtigungen!"
+  comment:
+    title: 'Neuer Kommentar für Projekt %program_name%!'
+    message: 'Benutzer %user_link% hat Ihr Projekt %program_link% kommentiert.'
+  like:
+    title: 'Neues Like für Projekt %program_name%!'
+    message: 'Benutzer %user_link% hat Ihr Projekt %program_link% geliked.'
+  follow:
+    title: 'Neue Follower!'
+    message: 'Benutzer %user_link% folgt dir jetzt.'
+  program-upload:
+    title: 'Neues Projekt von jemandem, dem du folgst'
+    message: 'Benutzer %user_link% hat ein neues Projekt %program_link% erstellt'
+  remix:
+    title: 'Neuer Remix für Programm %program_name%!'
+    message: 'Benutzer %user_link% hat einen Remix deines Programms %program_link% erstellt. Du kannst diesen unter folgendem Link sehen: %remix_program_link%.'
+clipboard:
+  success: Link zum Projekt in die Zwischenablage kopiert!
+  fail: Fehler beim Kopieren! :(
+next: Weiter
+previous: Vorheriges
+help-cards:
+  headings:
+    starters: Beginner
+    tutorials: Tutorials
+    stepbystep: Schritt für Schritt
+    getinvolvedGoogle: Bei Google Play herunterladen.
+    getinvolvedApple: Auf IOS holen
+    discord: Auf Discord beitreten
+    game_design: Spiel-Design
+    education: Bildungsplattform
+    discuss: Kommentieren
+  text:
+    starters: "Testen und mit %theme% neu mischen"
+    tutorials: "Effektive Tricks in %theme%"
+    stepbystep: "Mache 10 einfache Schritte in %theme%"
+    getinvolved: Lade dir die App herunter und lege los!
+    discord: Trete der Gemeinschaft auf Discord bei
+    game_design_1: Effektive Tricks für
+    game_design_2: ein Spiel erstellen
+    education: Anfängerkurs & Ressourcen
+    discuss_1: Nehmen Sie Kontakt mit anderen
+    discuss_2: Benutzer
+media-packages:
+  title: Medien-Pakete
+  description: In den folgenden Kategorien kannst du zusätzliche Figuren und Obekte zu deinem PocketCode Programm hinzufügen.
+  thumb-size:
+    description: Vorschaugröße
+    sm: klein
+    md: mittel
+    lg: groß
+  theme-special: "%flavor% Themen-Special"
+  search-results: Medienbibliothek Suchergebnisse
+  no-results: Deine Suche lieferte 0 Ergebnisse. Bitte verwende nur englische Suchbegriffe.
+  download_these_files: Speichern
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. Alle Rechte vorbehalten.'
+agree: Zustimmen
+disagree: Ablehnen
+profileLoader:
+  noProfiles: Zur Zeit existieren keine Profile.
+element: 'Element'
+elements: 'Elemente'
+share:
+  text: 'Teilen'
+  error: 'Teilen fehlgeschlagen'
+  success: 'Teilen erfolgreich'
+copy: 'Link kopieren'
+checkOutProject: 'Sieh dir dieses Projekt an:'
+community: 'Catrobat Community'
+back_to_app: 'Community verlassen'

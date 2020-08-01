@@ -1,0 +1,928 @@
+---
+#homepage translation
+localLanguage: اللغة الإنجليزية
+username: اسم المستخدم
+password: كلمة المرور
+createNewPassword: Create new password
+accountSettings: Account settings
+email: البريد الإلكتروني
+aboutPocketCode: حول تطبيق بوكت بينت
+aboutCatrobat: حول كاتروبات
+tutorials: دروس للتعلم
+googlePlay: متجرجوجل
+iosAppStore: IOS App store
+passwordsNoMatch: لا تتطابق كلمات المرور.
+error: خطأ
+cancel: إلغاء
+report: تقرير
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
+download: تحميل
+description: الوصف
+noDescription: لا يوجد أي وصف .
+credits: Credits
+noCredits: No credits available.
+country: البلد
+loginText: تسجيل الدخول
+privacyPolicy: سياسة الخصوصية
+imprint: بصمة
+programDetails: التفاصيل
+somethingWentWrong: 'عذرا, هناك شيء خاطئ.'
+pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
+oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
+more: 'المزيد'
+less: 'أقل'
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+registrationError: 'اسم المستخدم أو عنوان البريد الإلكتروني قيد الاستخدام بالفعل.'
+notifications: 'الاشعارات'
+allNotifications: 'All notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction notifications'
+followersNotificationsTitle: 'Follower notifications'
+commentsNotificationsTitle: 'Comment notifications'
+remixNotificationsTitle: 'Remix notifications'
+CommentNotifications: 'التعليقات'
+RemixNotifications: 'رِمكسات(خليط مُعدل)'
+oldnotification: 'Old notifications'
+wellDone: "أحسنت صنعاً!"
+done: "تم!"
+notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsClearedMessage: "جميع التنبيهات تم تحديدها كـ مقروءة."
+deleteNotificationConfirmation: "Are you sure?"
+notificationDeleteMessage: "Are you sure you want to delete this notification?"
+notificationDeleteAllMessage: "Are you sure you want to delete all notifications?"
+confirmMessage: "Yes, delete it"
+cancelMessage: "إلغاء"
+notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationDeletedMessage: "Notification has been successfully deleted."
+clearAllNotificationsButtonTitle: "تحديد الكل كمقروء"
+deleteAllNotificationsButtonTitle: "Delete all"
+notificationsClearError: "غير قادر على تحديد الإشعارات كـ مقروءة!"
+notificationsDeleteError: "Unable to delete notifications!"
+pleaseWait: "يرجى الانتظار..."
+projects: "البرامج"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What projects are recommended here?'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
+programs:
+  welcome:
+    title: Welcome to Catrobat's %theme%
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More statistics
+  featured: خصائص
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noPrograms: There are currently no projects.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
+  most:
+    viewed: الأكثر عرضاً
+    downloaded: الأكثر تنزيلا
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% التحميلات'
+  sample: Example projects
+  views: '%views% المشاهدات'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "جميع"
+  remixes: '{0}0 رِمكسات(عناصر مُدمجة)|{1}1 رِمكس(عنصر مُدمج)|]1,Inf]%remixes% رِمكسات(عناصر مُدمجة)'
+  newRemixesNotificationTitle: '|{1}"%programName%" يتكون من عنصر مُدمج واحد: |]1,Inf] "%programName%" يتكون من %remixes% عناصر مُدمجة جديدة:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: تبليغ كـ محتوى غير مناسب
+  reportProgram: Report project
+  languageVersion: 'إصدار لغة كاتروبات: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: أدخل السبب
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeader: تحديث التطبيق
+  updateAppText: Please update your app to the newest version to be able to download this project.
+  btnClosePopup: موافق
+  checkout_this_program: Checkout this Catrobat project
+  show_more: مشاهدة المزيد
+  comments: التعليقات
+  send: أرسل
+  delete: حذف
+  report: تقرير
+  report_popup: تم الإبلاغ بنجاح عن التعليق.
+  report_popup_header: تم الإبلاغ
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editDescription: Edit the project description
+  saveDescription: Save description change
+  editCredits: Edit the project credits
+  saveCredits: Save credits change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
+  reactionsText: Reactions
+remixGraph:
+  title: رِمكسات(خليط مُعدل)
+  showRemixGraph: 'إظهار مخطط الدمج المُعدل'
+  by: 'بمقدار'
+  open: 'فتح'
+  showPaths: 'إظهار المسارات'
+  programNotAvailableErrorTitle: 'عذراً...'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailable: 'غير متوفر'
+  programUnknownUser: 'مستخدم غير معروف'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat account confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+passwordRecovery:
+  subject: استعادة كلمة سر كاتروبات الخاصة بك
+  message: |
+    Dear %username%.
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+profile:
+  edit: Edit your profile
+  saveChanges: حفظ التغييرات؟
+  newPass: كلمة المرور الجديدة
+  repeatPass: تكرار كلمة المرور
+  oldPass: old password
+  firstEmail: بريدي الإلكتروني الأول
+  secondEmail: البريد الإلكتروني الثاني الخاص بي
+  myPrograms: My projects
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of projects
+  form:
+    passwordTooShort: كلمة السر الجديدة يجب أن تحتوي على الأقل %length% أحرف.
+    passwordTooLong: كلمة السر الجديدة يجب أن تكون على الأكثر %length% أحرف.
+    passwordIsUsername: كلمة المرور يجب أن تختلف عن اسم المستخدم.
+    passwordWrong: كلمة سر خاطئة
+    emailNotValid: البريد الإلكتروني خطأ.
+    emailMissing: حدث خطأ أثناء تحديث عنوان البريد الإلكتروني هذا. يجب أن يكون لديك على الأقل عنوان بريد إلكتروني  صحيح.
+    emailExists: عنوان البريد الإلكتروني هذا موجود بالفعل.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: اسم المستخدم موجود بالفعل.
+    usernameContainsEmail: Username shouldn't contain an email address.
+    submitSuccess: حفظ!
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
+  changePicture: تغيير الصورة
+  avatar:
+    noImage: No image!
+    pictureTooLarge: الصورة التي تم اختيارها كبيرة جداً، ويرجى عدم استخدام الصور أكبر من 5 ميغا بايت.
+    uploadError: عذراً، هناك مشكلة أثناء التحميل!
+    noSupport: هذا النوع من الصور غير معتمد، الرجاء محاولة صورة أخرى.
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: تحرير الملف الشخصي
+  edit: تحرير
+  done: موافق
+  checkMail: تم إرسال بريد إلكتروني إلى عنوان البريد الإلكتروني الخاص بك. الرجاء التحقق من علبة البريد الخاصة بك.
+  passwordUpdated: Your password was successfully updated.
+  avatar: الصورة الرمزية
+  email: البريد الألكتروني
+  editAvatar: تحرير الصورة الرمزية
+  editUsername: تعديل اسم المستخدم
+  editPassword: تغيير كلمة المرور
+  editCountry: تحرير البلد
+  editEmail: تعديل البريد الالكتروني
+  deleteAccount: حذف الحساب
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+licenseToPlay:
+  link: 'ترخيص لتشغيل'
+  title: 'ترخيص للتشغيل--منح الائتمان والمشاركة'
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'لا يوجد هناك وصفات سرية: إرشادات حول كيفية جعل هذه الكعك مفتوحة لأي شخص يمكنه الاستخدام، إعادة استخدام، والتعديل، وأن تكون بمثابة مصدر الهام لأفكار جديدة... أعني الكعك.'
+  text3: "يمكنك أكل الكعك فضلا عن نسخ الوصفات الأخرى لصنعها بنفسك، ربما بمكونات مختلفة. هذه الحرية تأتي مع اثنين من المتطلبات البسيطة:"
+  text4: "في مجتمع كاتروبات، قررنا اعتماد هذا النهج لأننا نعتقد بأنه يدعم التعلم والإبداع داخل المجتمع. بتبادل الوصفات والمكونات (مخطوطات وأعمال فنية)، يمكن للناس أن يبنوا أفكارهم على أفكار الأخرين، وسوف يستفيد منها الجميع."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
+  text6: 'لمزيد من المعلومات حول شروط استخدام المجتمع كاتروبات على شبكة الإنترنت على الرابط  %link-termsOfUse%.'
+  list1:
+    item1: شارك بالكعكة الخاص بك جنبا إلى جنب مع الوصفة
+    item2: إعطاء الفرصة والثقة لأولئك الذين شكلوا لك إلهاما
+  version: الإصدار 1، 1، 2 أبريل 2013
+termsOfUse:
+  title: شروط الاستخدام
+  headline: مرحبا بكم في بيئة كاتروبات!
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text2: "نحن بحاجة إلى مساعدتكم لجعل هذا المجتمع مكاناً داعماً لكل الأعضاء. كيف يمكنك المساعدة:"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text4: 'هديتنا لكم:'
+  text5: 'شروطنا للاستخدام والخدمة:'
+  list1:
+    item1: من العديد من مختلف البلدان والثقافات
+    item2: من جميع الإعمار (من الأطفال الصغار إلى سن المراهقة والأجداد)
+    item3: مع جميع مستويات الخبرة
+  list2:
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item3: "أن نكون صادقين. لا تدعي بأنك شخص أخر ولا تحاول خداع المجتمع."
+    item4: "الحفاظ على سرية المعلومات الشخصية. عدم مشاركة عنوان البريد الإلكتروني الخاص بك أو رقم الهاتف أو معلومات الاتصال الشخصية الأخرى."
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+  list3:
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item3: "شرط إضافي هام هو أنك تعطي بوضوح الإسناد للمؤلفين الذي اعتمد منتجك على منتجاتهم .و في نفس الوقت، سوف نعمل جاهدين ولذلك سوف تقدر أعمالك من قبل الأخرين  لأنك ساهمت بهذا العمل ، بإعطاء الإسناد إلى الاسم الفريد الذي اخترته بحرية لتمثيلك في مجتمع كاتروبات، وإعطاء الآخرين فرصة للتعبير عن امتنانهم لك بإعطائهم عملك لأي شخص ، وخاصة لهم."
+    item4: 'يرجى استشارة الارتباط-%link-licenseUploaded% لظروف وشروط قانونية دقيقة.'
+  list4:
+    item1: "نحن نقدم جميع البرمجيات الخاصة بنا وموارد الإنترنت المتعلقة بنظام كاتروبات، مثلاً، البرنامج المكتوب من قبل فريق كاتروبات، ومواقعنا الإلكترونية وموارد الإنترنت، والنص البرمجي المتعلق بنظام كاتروبات، وكل المواد الاضافية المضمنة مثل الصور والأصوات والنصوص، الآن وفي المستقبل هي لكم تحت إطار التراخيص الحرة في كاتروبات."
+    item2: هذه التراخيص تجعل جميع أجزاء كاتروبات على حد سواء هي مجانيه  لكم فضلا على أنه يتيح لكم حرية استخدامها كيفما تريدوا، فقط مع بضعة قيود تضمن، أن نظام كاتروبات ستبقى إلى الأبد مجانية ومفيدة للجميع.
+    item3: 'يرجى استشارة  %link-licenseToPlay% لظروف وشروط قانونية دقيقة. يتوفر مصدر النص البرمجي لنظام كاتروبات  فضلا عن العديد من الوثائق والموارد الأخرى عبر %link-developer%.'
+  list5:
+    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item2: إذا كنت دون سن 13 عاماً، عليك أن تطلب من الآباء أو الأوصياء القانونيين عليك في ما إذا كانوا يسمحون لك أن تستخدم تطبيقات البرمجيات والخدمات في كاتروبات.
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "كل برمجيات الكاتروبات وموارد الإنترنت تقدم على أمل أنها سوف تكون مفيدة،، ولكن دون أي ضمان."
+    item5: 'يرجى استشارة  %link-termsOfUse%  لتركيبات دقيقة من أعلى النقاط وبع الشروط والبنود القانونية.'
+  bottom1: التحقق مرة أخرى هنا من وقت لآخر، لأننا نسعى دائماً لتحسين "شروط الاستخدام".
+  bottom2: 'يرجى إرسال أية اقتراحات فيما يتعلق بـ"شروط الاستخدام" الى %email-webmaster% .'
+  version: الإصدار 1، 3، 4 مارس 2014
+help:
+  stepByStep:
+    title: "مقدمة خطوة بخطوة"
+    start: "موضع البداية:"
+    description: |
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+    step1:
+      title: 'Make a new project'
+      detail:
+        text1: 'اضغط على "جديد".'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
+    step2:
+      title: "إنشاء كائن جديد"
+      detail:
+        text1: 'اضغط على:'
+        text2: 'اختر مصدر أول مظهر للكائن الجديد الخاص بك.'
+        text3: 'ادخل اسم الكائن واضغط على " موافق" لإنشاء الكائن.'
+        special1: 'أرسم مظهر جديد.'
+        special2: 'اختر من المعرض.'
+        special3: 'التقاط صورة.'
+    step3:
+      title: "بدء الحركة"
+      detail:
+        text1: 'اضغط على:'
+        text2: 'أول طوبة نستخدم هي خارج فئة "الحركة".'
+        text3: 'اختر الطوب "المنزلق". سيتم نقل الكائن إلى الموضع الجديد المعرف بطوبة في المرحلة.'
+        text4: 'يتحرك الآن الطوب. للصقه، أنقل الطوب إلى الموضع المطلوب. يمكنك أيضا نقل الطوب الذي تم إدراجه مسبقاً بالضغط على الطوبة  حتى تتحرك مرة أخرى.'
+        text5: 'انقر على "تشغيل" للذهاب إلى المرحلة ورؤية الكائن وهو ينزلق.'
+        text6: 'استخدم "الزر الخلفي  لأندرويد" للعودة من المرحلة.'
+    step4:
+      title: "تغيير مظهر"
+      description: "يمكنك تغيير مظهر الكائن الخاص بك."
+      detail:
+        text1: 'اختر طوبة "التبديل للمظهر". مع هذه الطوبة يمكنك اختيار مظهر أو إنشاء مظهر جديد.'
+        text2: 'انجذاب الطوب تحت "الانزلاق"-الطوب.'
+        text3: 'انقر فوق القائمة المنسدلة للحقل لإنشاء مشهد جديد.'
+        text4: 'اختر مصدر الصورة .'
+        text5: 'الآن يجب عليك تحديد صورة جديدة.'
+        text6: 'انقر فوق تشغيل لمشاهدة السلوك على المنصة.'
+    step5:
+      title: "تَحدّث"
+      description: "الآن سوف تجد كيف يمكنك جعل الكائن يتحدث."
+      detail:
+        text1: 'اختر طوبة "الكلام". الكائن سوف يقرأ النص, عندما يتم تنفيذ الطوبة.'
+        text2: 'انجذاب الطوبة تحت "التبديل للمشهد" للطوبة.'
+        text3: 'انقر فوق تشغيل لمشاهدة السلوك على المنصة.'
+    step6:
+      title: 'مراراً وتكراراً'
+      description: "هذه الخطوة توضح لك كيفية تكرار سلوك الكائنات."
+      detail:
+        text1: 'اختر الطوب "إلى الأبد". كل شيء في الحلقة سوف يُكرر إلى الأبد.'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
+        text3: 'إضافة آخر طوبة "الانزلاق".'
+        text4: 'التقط طوبة "الانزلاق" وقم بتغيير موضعها أعلى طوبة "نهاية حلقة التكرار".'
+        text5: 'انقر في حقل النص x والقيمة y وتعيينها إلى 0.'
+        text6: 'انقر فوق تشغيل لمشاهدة السلوك على المنصة.'
+    step7:
+      title: "النقر كل شيء"
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
+      detail:
+        text1: 'اختر طوبة"عند النقر". كل طوبة اسفلها سوف يتم تنفيذها مرة واحدة عندما تنقر على الكائن في المرحلة.'
+        text2: 'قم بتغيير موضع طوبة "عند النقر" تحت الطوبات الأُخرى.'
+        text3: 'قم باختيار طوبة "تشغيل الضوء" و ثبتها اسفل طوبة "عند النقر".'
+        text4: 'الآن لديك هذا البرنامج النصي.'
+        text5: 'انقر فوق تشغيل لمشاهدة السلوك في المرحلة. إذا كنت تضغط الأن على الكائن، فإنه يدور.'
+    step8:
+      title: "نسخ, حذف او تعديل طوبة"
+      detail:
+        text1: 'ضغطه واحدة على الجانب الأيسر من كل طوبة يفتح قائمة السياق. يمكنك نقل، نسخ، حذف أو تحرير قيم الطوب بإستخدام محرر الصيغة.'
+    step9:
+      title: "التنقل في التطبيق"
+      detail:
+        text1: 'استخدم "الزر الخلفي لأندرويد" للتنقل في التطبيق.'
+        text2: 'العودة بشاشة واحدة للإطلاع على للكائن الخاص بك. هنا يمكنك الذهاب إلى البرامج النصية، وأيضا لتمثيل قوي لمشاهد واصوات الكائن. يمكنك إعادة تسمية، نسخ إضافة أو حذف مشاهد وأصوات.'
+        text3: 'استخدم "الزر الخلفي لأندرويد" مرة أخرى للحصول على نظرة عامة حول الكائنات الخاصة بك والخلفية الخاصة بك.'
+    step10:
+      title: "تغيير الخلفية"
+      description: "This is the overview of your objects and your project's background."
+      detail:
+        text1: 'الخلفية مثل كائن، ولكن يمكنك فقط الحصول على الخلفية.'
+        text2: 'يمكنك إضافة البرامج النصية، الأصوات ومناظر بنفس الطريقة إلى كائن الخلفية.'
+    step11:
+      title: "القائمة الرئيسية"
+      description: "استخدم \"الزر الخلفي  لأندرويد\" للحصول على هذه الشاشة."
+      detail:
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
+        text4: 'انتقل إلى موقع المساعدة وناقش مع المستخدمين الآخرين.'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
+  tutorialcards:
+    title: "دروس للتعلم"
+    description1: "هذه الدروس تظهر لك كيفية استخدام الحيل الفعالة في"
+    getReady: "استعد:"
+    tryCode: "جرب هذا النص البرمجي:"
+    doIt: "افعلها:"
+    tip: "نصيحة إضافية:"
+    card1:
+      title: "تغيير الحجم"
+      description: "اضغط على البطة لتغيير الحجم."
+      one: "قم بإضافة الكائن الذي ترغب بتغيير حجمه, مثلاً حيوان."
+      two: "قم بإدراج الطُوب التالية ضمن السكريبت الخاص بالعنصر بغية التقليل إلى الحد الأدنى (بنسبة 20% من الحجم الأصلي) عند النقر."
+    card2:
+      title: "تغيير مظهر"
+      description: "استخدام هذه الحيلة للعد تلقائياً."
+      one: "قم بإضافة الكائن الذي ترغب بتغيير مظهره, مثال عنصر."
+      two: "قم بإدراج العديد من الصور داخل طوبة مظهر العنصر."
+      three: "قم بإدراج الطُوب التالية ضمن سكريبت الكائنات من أجل التبديل المستمر لمظهرها كل ثانية."
+    card3:
+      title: "تحريك الرسوم المتحركة"
+      description: "استخدم هذه الحيلة عندما تريد ببغاء يطير."
+      one: "قم بإضافة الكائن الذي تريد تحريكه."
+      two: "قم بإدراج صورة أُخرى ضمن طوبة مظهر الكائن بحيث توضح الحركة."
+      three: "قم بإدراج الطُوب التالية ضمن سكريبت الكائن من أجل التبديل المستمر لموضع الكائن بعد فترة معينة من الزمن. بالإضافة إلى ذلك يمكنك تحديد هوامش المرحلة لدى الارتداد عند الجوانب."
+    card4:
+      title: "إنزلق خلال"
+      description: "الانتقال بسلاسة من نقطة واحدة إلى أخرى."
+      one: "قم بإضافة الكائن الذي تريد انزلاقه, مثلاً طائرة."
+      two: "قم بإضافة الطُوب التالية وقم بتحديد مجال الحركة لها."
+    card5:
+      title: "شغل الصوت"
+      description: "تشغيل صوت عند النقر على العنصر."
+      one: "قم بإضافة العنصر الذي تريده, ليتم تشغيل صوت عند النقر عليه, مثلاً كلب."
+      two: "قم بإضافة الطُوب التالية حتى تجعل عملية الإعادة ممكنة. قم بإختيار ملف صوتي من مكتبتك الشخصية, مكتبة الوسائط الخاصة بـ\"بوكت كوود\" أو قم بتسجيل ملف صوتي جديد."
+    card6:
+      title: "تَحدّث"
+      description: "استخدم هذه التعليمة البرمجية لجعل الكائن يتحدث."
+      one: "قم بإضافة الكائن الذي تريده ان يتكلم, مثلاً كاري."
+      two: "قم بإدراج الطُوب التالية من أجل تمكين الإخراج الصوتي."
+    card7:
+      title: "جسينسور"
+      description: "استخدام هذه الحيلة للتحكم في الكائن مع الميل للجهاز الخاص بك."
+      one: "قم بإضافة الكائن الذي تريده ليتم تحريكه في المرحلة."
+      two: "قم بإدراج الطُوب التالية من أجل التحكم بالكائنات من خلال أجهزة استشعار الهاتف.\nثم قم باختيار \"احداثيات الميل س و ص\". للحصول على حركة مناسبة, قم بتعيين \"الميل\".\nاذا كانت حركة الكائنات حساسة جداً, قم بتقسيم قيمة الميل مثلاً على 10."
+    card8:
+      title: "بوصلة"
+      description: "استخدم هذه التعليمة البرمجية لإنشاء بوصلة."
+      one: "قم بإضافة الكائن الذي تريده لأجل توجيهه في اتجاه البوصلة."
+      two: "قم بإدراج الطُوب التالية لأجل تعيين اتجاه الكائن. بالإضافة لذلك قم بتضمين حلقة تكرار متواصلة."
+    card9:
+      title: "بث رسالة"
+      description: "انظروا إلى هذا الرمز! يوضح لك كيفية التواصل بين الكائنات."
+      one: "قم بإضافة كائن جديد, الذي ينبغي أن يرسل رسالة بث, مثل أليس. بالإضافة إلى ذلك, قم بإضافة خلفية ثانية إلى طوبة مناظر الخلفية. حالما تتلقى الخلفية رسالة البث سوف تتغير إلى منظر آخر."
+      two: "قم بإدراج طوبة \"ارسال للكل\" وقم بتحديد ما ينبغي حدوثه عندما تتلقى باقي العناصر الرسالة."
+      three: "في هذه الحالة سوف تتغير الخلفية عندما يتم النقر على الكائن الموجود في الطبقة الأمامية."
+    card10:
+      title: "إظهار المتغير"
+      description: "إظهار قيمة المتغير."
+      one: "قم بإضافة الكائن الذي تريد تحريكه خلال أجهزة استشعار هاتفك (القي نظرة على %tutorial_card_link_7% البطاقة التعليمية السابعة %link_end%). بالإضافة إلى ذلك, قم بإضافة خلفية ثانية التي يجب أن تتغير عندما تتلقى رسالة البث."
+      two: "قم بإضافة الطُوب التالية من أجل حفظ قيمة إحداثيات س و ص للكائن المتحرك في متغير."
+      three: "من خلال طوبة \"عرض المتغير\" يمكنك إظهار قيمة المتغير في المرحلة."
+    card11:
+      title: "اكتشاف التصادم"
+      description: "اكتشاف التصادم بين كائنين."
+      one: "قم بإضافة كائنين اثنين, واحد منهما ينبغي ان تتم حركته عبر أجهزة استشعار هاتفك, مثلاً أليس (قم بإلقاء نظرة على %tutorial_card_link_7% البطاقة التعليمية السابعة %link_end%)."
+      two: "قم بحفظ \"الاحداثيات الحالية س و ص\" للعنصر المتحرك أليكس (قم بإلقاء نظرة على %tutorial_card_link_10% البطاقة التعليمية العاشرة %link_end%) ثم قم بإدراج السكريبتات التالية. التحقق بشكل دائم ما إذا تم تشابك العنصرين. اذا تم التشابك يجب أن يكون الكائن المثبت مخفي عند هذه الحالة."
+    card12:
+      title: "اكتشاف الوجه"
+      description: "التحكم بكائن باستخدام خاصية اكتشاف الوجه."
+      one: "أولاً قم بالتأكد من تفعيل طوبة إكتشاف الوجه. ثم انتقل إلى الإعدادات."
+      two: "قم بإضافة كائن جديد وقم بإدراج الطُوب التالية من أجل إظهارها في حال تم اكتشاف الوجه. قم بالتحقق من أنه تم اكتشاف الوجه وقم بوضع الكائن الجديد ضمن حلقة تكرار متواصلة. اذا الكاميرا تتعرف على وجه ستكون القيمة عندها \"TRUE\" خلافاً لذلك ستكون القيمة \"FALSE\"."
+  starterPrograms:
+    title: "Starter projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
+    categories:
+      games: "الألعاب"
+      animations: "الرسوم المتحركة"
+      interactive: " القصص و الفن التفاعلي"
+      music: "الموسيقى والرقص"
+  gameJam:
+    title: "كيف يتم تحميل لعبة \"بوكت كوود\" الى موقع \"Game Jolt \"؟"
+    text0: "بداية أود تهنئتك على لعبتك! الأن يمكنك رفعها على %link% من أجل إنشائها كـ تطبيق أندرويد منفصل, ثم يمكنك فيما بعد رفع لعبتك على موقع \"Game Jolt\"."
+    title1: "تسجيل"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title2: "تحميل"
+    text2: "بعد الانتهاء من عملية التسجيل ستكون قادراً على رفع لعبتك. فقط قم بالتفكير في اسم للعبة و قم بإضافة وصف مناسب. أيضا قم بإضافة #AliceJam150 في حقل الوصف."
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
+    title4: "إنشاء تطبيق أندرويد"
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "تنزيل التطبيق"
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "التسجيل/ تسجيل الدخول على GameJolt.com"
+    text6: "قم بزيارة %link% وقم بالنقر في القائمة على \"تسجيل الدخول\" أو \"التسجيل\". اذا كان لديك حساب فقط قم بتسجيل الدخول, إذا لم يكن لديك حساب, سوف تحتاج للتسجيل باستخدام بريدك الالكتروني, اسم مستخدم وكلمة سر."
+    title7: "قم برفع لعبتك على موقع Game Jolt"
+    text7: "بعد ان تقوم بتسجيل الدخول, توجه الى لوحة إعداداتك\"dashboard\". هناك يمكنك إضافة لعبتك. أولا يجب عليك النقر على أوافق على الشروط \"Accept rules\". ثم قم باختيار 'Complete/Stable' ثم قم بتعبئة معلومات اللعبة. عند حقل الأدوات Engine/Language/Creation قم باختيار 'Other' ثم قم بكتابة 'Android'. قم بالتأكد من تضمين الهاشتاق #AliceJam150 في حقل الوصف حتى تظهر على الرابط التالي %link%."
+    text7_1: "قبل ان تتمكن من نشر لعبتك, قم باتباع الخطوات التالية. يجب عليك على الأقل إضافة صورة مصغرة ‘thumbnail image’, ثم تعيين الفئة العمرية \"Age Rating\" ثم رفع ألعابك بالنقر على بناء الملفات ‘build/files’."
+    text7_2: "قم بالنقر على إضافة حزمة ‘Add Package’ ثم قم بتعبئة معلومات الحزمة. قم بالحفظ ثم أضف رقم الإصدار. "
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_4: "ملاحظة: اذا التطبيق يفقد لاحقته الـ \"apk.\", يجب عليك إضافتها يدوياً \"apk.\". فقط قم بإعادة تسمية الملف وأضف اللاحقة مثلاً \"animal.apk\". الآن يجب أن تكون قادراً على التحميل."
+    text7_5: "بعد الانتهاء من عملية الرفع انقر على موافق \"OK\" لنشر لعبتك. هذه العملية سوف تظهر للمجتمع رابط مباشر لـ تحميل لعبتك."
+    text7_6: "لقد قمت برفع لعبتك الأولى على موقع Game Jolt, قم بتعيينها كـ نشط \"Active\".\nمبروك-تهانينا!"
+    text7_7: "الأشخاص الآخرون سوف يتمكنون الأن من إيجاد لعبتك وسوف تظهر على الرابط التالي %link%."
+  aliceGameJamTutorialcards:
+    title1: "(مرحبا بكم) بلاد العجائب"
+    subtitle1: "قم بتنشيط حركة الشخصيات وانشاء حدث \"عند النقر\""
+    description1: |
+      تعلم كيفية السماح لواحد من الشخصيات الخاصة بك القدوم للحياة مع حركة بسيطة وقم بالتحكم بكيفية فعل المثل للشخصيات الأخرى عند الضغط عليهم. الفيديو يُظهر لك بسهولة كيفية تحريك شخصياتك باستخدام مظاهر مختلفة. كذلك نحن نُظهر لك كيفية إنشاء حدث "عند الضغط" وكيفية ارسال رسائل بث بين العناصر.
+    title2: "حفظ أليس!"
+    subtitle2: "استخدام أجهزة استشعار الميل والكشف عن تصادم بين العناصر"
+    description2: "هنا سوف تتعلم كيفية التحكم بشخصية باستخدام أجهزة استشعار الميل في هاتفك. يمكنك التحكم بحركة أليس بإمالة هاتفك لليسار أو لليمين. شاهد ملفنا التعليمي ودع العناصر تسقط عشوائياً من السماء لتصبح خبيرا في الكشف عن تصادم العناصر الأخرى."
+    title3: "بائع القبعات - الكر والفر"
+    subtitle3: "قم بإنشاء منظر متحرك وقم بالتحكم في حركة بائع القبعات"
+    description3: "في هذا البرنامج التعليمي سوف تتعلم كيفية إنشاء منظر طبيعي والذي يبدو وكأنه يتحرك. سوف نفعل ذلك بتحريك الكائنات على الشاشة لخلق وهم الحركة. أيضاً سوف نُظهر لك كيفية جعل القبعات تتحرك بإمالة هاتفك."
+    title4: "بائع القبعات - الكر والفر"
+    subtitle4: "اسمحوا لـ بائع القبعات برمي كروت الشيطان"
+    description4: "في هذا البرنامج التعليمي سوف نُظهر لكم كيفية إنشاء أعداء الذين يتحركون بشكل عشوائي نحو الشخصية الخاصة بك. علاوة على ذلك, سوف تتعلم كيفية جعل بائع القبعات يُطلق الدموع و التحقق ما إذا كان الأعداء تم ضربهم بكشف التصادم."
+    title5: "إضرب قط تشيشير"
+    subtitle5: "إنشاء نتيجة بإستخدام المتغيرات"
+    description5: "في هذا الملف التعليمي سوف نُظهر لك كيفية استخدام المتغيرات لأجل إنشاء نتيجة. النتائج مقومات مساعدة ضمن اللعبة. نتيجتنا تظهر لك كم غالباً قُمت بالتقاط القطة."
+    title6: "سباق الأرانب"
+    subtitle6: "إنشاء خلفية متحركة"
+    description6: |
+      هذا الملف التعليمي يُظهر لك كيفية إنشاء خلفية تمرير عمودية بواسطة إنزلاق رسومات الخلفية بطريقة معينة. شيءٌ أخر سوف نعلمك اياه وهو جعل الشخصية تقفز للأمام عند النقر عليها.
+      لجعل اللعبة معقدة قليلاً سوف نُظهر لك كيفية إبطاء حركة شخصياتك مع مرور الوقت.
+    download: "Download the project"
+oauth:
+  username_header: شكراً لك للتسجيل في "بوكت كوود"!
+  username_chooser: "من فضلك قم باختيار اسم مستخدم:"
+  username_hint: يجب أن لا يكون اسم المستخدم هو اسمك الحقيقي.
+  usernameTaken: اسم المستخدم هذا موجود بالفعل, من فضلك قم باختيار اسم مستخدم آخر.
+search:
+  dotdotdot: بحث...
+  search: بحث
+  inMediaLib: Search in media library
+  results: نتائج البحث
+  resultcount: نتائج البحث الذي قمت به %count% نتيجة
+  fail: Please enter at least a single search term
+menu:
+  profile: الصفحة الشخصية
+  login: تسجيل الدخول
+  logout: خروج
+  admin: Admin
+  home: Home
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Follower
+login:
+  login: تسجيل الدخول
+  passOrUser: كلمة المرور أو اسم المستخدم غير صحيح.
+  noUsername: لم يتم العثور على عنوان البريد الإلكتروني أو اسم المستخدم الخاص بك.
+  forgotPass: نسيت كلمة المرور أو اسم المستخدم؟
+  recoverPass: استعادة كلمة المرور
+  recoverPassSend: تم إرسال بريد إلكتروني إلى عنوان البريد الإلكتروني الخاص بك. الرجاء التحقق من علبة البريد الخاصة بك.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  userOrEmail: إسم المستخدم أو البريد الإلكتروني
+  changePass: تغيير كلمة السر
+  createAccount: إنشاء حساب
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
+  or: أو
+  username: اسم المستخدم
+  email: البريد الألكتروني
+  passwordFirst: كلمة المرور
+  passwordSecond: Password confirm
+apk:
+  download: تنزيل كـ تطبيق
+  prepare: 'إعداد التطبيق'
+  preparing: 'جاري إعداد التطبيق'
+  text: 'العملية قد تستغرق بعض الوقت'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: يجب أن لا يكون اسم المستخدم فارغ
+    invalid: اسم المستخدم غير صالح
+    exists: اسم المستخدم موجود بالفعل.
+    not_exists: اسم المستخدم هذا غير موجود.
+    not_email: اسم المستخدم لا يمكن أن يكون بريد إلكتروني.
+    size: The username must have at least 3 character and not more than 180
+  password:
+    blank: كلمة المرور غير موجودة.
+    short: 'يجب أن تكون كلمة المرور على الأقل{{ limit }} حروف.'
+  description:
+    rude: لا يجب أن يتضمن الوصف كلمات وقحة.
+  credit:
+    rude: Credits must not contain rude words.
+  country:
+    blank: اسم الدولة غير موجود.
+    invalid: اسم الدولة غير صحيح
+  email:
+    blank: يجب ان لا يكون البريد الالكتروني فارغ
+    invalid: البريد الالكتروني الخاص بك غير صحيح
+    exists: عنوان البريد الإلكتروني هذا موجود بالفعل.
+  id:
+    blank: المصادقة المفتوحة لـ المعرف الشخصي يجب أن لا تكون فارغة
+  login: كلمة المرور أو اسم المستخدم غير صحيح.
+  post-data: البيانات المرسلة غير صحيحة أو مفقودة!
+  checksum:
+    missing: لم يرسل العميل ملف تشيكسوم! هل أنت تستخدم نسخة قديمة ؟
+    invalid: قيمة التحقق(checksum) غير صحيحة
+  xml:
+    invalid: كود xml غير صحيح
+    missing: 'خطأ غير معروف: لم يتم العثور على مشروع_xml!'
+  file:
+    unexpected: تم العثور على ملف غير متوقع
+    invalid: الملف غير صحيح
+  image.missing: يشير مشروع XML إلى ملف غير موجود في مجلد المشروع
+  unknown: خطأ غير معروف
+  token: 'لقد فشل التحقق من الجهاز : رمز مميز غير صالح!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  programname:
+    rude: Project name must not contain rude wordes.
+  program:
+    invalid: Invalid project.
+  languageversion:
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+  programversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: فشلت المصادقة
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
+success:
+  text: Success
+  registration: تم التسجيل بنجاح
+  token: موافق
+  upload: لقد تم تحميل مشروعك بنجاح!
+  imgUpload: Your image was uploaded successfully!
+  report: تم إرسال تقريرك بنجاح!
+time:
+  minutes.ago: '{0} < منذ 1 دقيقة |{1} منذ 1 دقيقة |]1,Inf] %count% منذ دقائق ماضية'
+  hours.ago: '{1}منذ 1 ساعة |]1,Inf] %count% منذ ساعات ماضية'
+  days.ago: '{1}منذ 1 يوم |]1,Inf] %count% منذ أيام ماضية'
+  months.ago: '{1} منذ 1 شهر |]1,Inf] %count% أشهر ماضية'
+  years.ago: '{1}منذ 1 عام |]1,Inf] منذ أكثر من عام'
+failure:
+  upload: حدث خطأ أثناء رفع التطبيق الخاص بك.
+api:
+  registerUser:
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username must not contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
+#languages and countries
+language:
+  arabic: العربية
+  bulgarian: البلغارية
+  catalan: الكتالانية
+  chinese_simplified_han: الصينية (هان التقليدية)
+  chinese_traditional_han: الصينية (هان التقليدية)
+  croatian: الكرواتية
+  czech: التشيكية
+  danish: الدانماركية
+  dutch: هولندي
+  english_united_kingdom: الإنكليزية (المملكة المتحدة)
+  english_united_states: الإنجليزية (الولايات المتحدة)
+  estonian: الإستونية
+  filipino: الفلبينية
+  finnish: الفنلندية
+  french: فرنسية
+  german: اللغة الألمانية
+  greek: اليونانية
+  hebrew: العبرية
+  hindi: الهندية
+  hungarian: الهنغارية
+  indonesian: الإندونيسية
+  italian: الإيطالي
+  japanese: اليابانية
+  korean: كوري
+  latvian: اللاتفية
+  lithuanian: اللتوانية
+  malay: الماليزية
+  norwegian: النرويجية ‏
+  persian: فارسي
+  polish: البولندية
+  portuguese_brazil: اللغة البرتغاليه (البرازيل)
+  portuguese_portugal: البرتغالية (البرتغال)
+  romanian: الرومانية
+  russian: روسية
+  serbian: صربي
+  slovak: السلوفاكية
+  slovenian: السلوفانية
+  spanish_latin_america: الإسبانية (أمريكا اللاتينية)
+  spanish_spain: الإسبانية (إسبانيا)
+  swedish: السويدية
+  thai: التايلندية
+  turkish: التركية
+  ukrainian: الأوكرانية
+  vietnamese: فيتنامية
+ci:
+  generate: إنشاء كـ Apk
+  pending: تتم الآن عملية إنشاء Apk
+  download: تنزيل كـ Apk
+gamejam:
+  nojam: عذراً, لا يوجد في الوقت الحالي لعبة الازدحام
+  submit: تقديم الى %gamejamname%
+  whats: ما هو %gamejamname%؟
+  submitown:
+    header: كن حذراً
+    subheader: You can only submit your own projects
+    text: |
+      لماذا لم تنشئ برنامجك الخاص!
+      قم بالمشاركة في %gamejamtag%
+tag-text: وسوم
+extenstion-text: الإضافات
+tags:
+  constant:
+    tag1: الألعاب
+    tag2: تحريك الرسوم المتحركة
+    tag3: القصة
+    tag4: موسيقى
+    tag5: الفن
+    tag6: إصدار تجريبي
+    tag7: Tutorial
+admin:
+  maintain:
+    diskMaintenance: صيانة القرص
+    ramMaintenance: RAM maintenance
+    noRemovableObjects: لا يوجد كائنات قابلة للإزالة.
+    removableObjects: Removable objects
+recommender:
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
+  moreFromThisUser: More from %username%
+pmd:
+  submitBtn: تقديم مشروعك
+  submitBox:
+    header: تقديم
+    text: أنت على وشك تقديم مشروعك. الرجاء إدخال رمز المشروع وانقر فوق إرسال.
+    btnText: نشر
+  successful:
+    text: Your project upload was successful.
+  failed:
+    text: Project upload failed.
+codeview:
+  title: 'Code view'
+  showCode: 'إظهار الشِفرة البرمجية(الكود)'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'Scenes'
+  scripts: 'النصوص البرمجية'
+  bricks: 'اللّبنات'
+  objects: 'أشكال و عناصر'
+  looks: 'المناظر'
+  sounds: 'الأصوات'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
+codeStatistics:
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
+  general: 'General'
+  bricks: 'اللّبنات'
+  eventBricks: 'الحدث'
+  controlBricks: 'التحكم'
+  motionBricks: 'الحركة'
+  soundBricks: 'الصوت'
+  looksBricks: 'المناظر'
+  penBricks: 'القلم'
+  dataBricks: 'البيانات'
+  specialBricks: 'Special'
+footer:
+  language: اللغة
+  usefulLinks: روابط مفيدة
+  legalities: الجوانب القانونية
+  communityStats: إحصائيات المجتمع
+  download: Get the App
+privacy-policy:
+  header: سياسة الخصوصية
+  version: Version 2.2, 17 October 2019
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  comment:
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
+  like:
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
+  follow:
+    title: 'New follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New project from someone you follow'
+    message: 'User %user_link% created a new project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+clipboard:
+  success: Link to project copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: التالي
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: دروس للتعلم
+    stepbystep: Step by step
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    discord: Join on Discord
+    game_design: Game design
+    education: Education platform
+    discuss: Discuss
+  text:
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
+    getinvolved: Download the app and get started
+    discord: Join the community on discord
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  thumb-size:
+    description: Preview size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
+flavor:
+  pocketcode: بوكت كوود
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: موافق
+disagree: غير موافق
+profileLoader:
+  noProfiles: There are currently no profiles.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'مجتمع كاتروبات'
+back_to_app: 'Exit community'

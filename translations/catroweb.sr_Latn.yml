@@ -1,0 +1,933 @@
+---
+#homepage translation
+localLanguage: Engleski
+username: Korisničko ime
+password: Lozinka
+createNewPassword: Create new password
+accountSettings: Podеšavanja naloga
+email: E-mail
+aboutPocketCode: O Pocket Code-u
+aboutCatrobat: O Catrobat
+tutorials: Vodiči
+googlePlay: Google Play
+iosAppStore: IOS App store
+passwordsNoMatch: Lozinke se ne odgovaraju.
+error: Greška
+cancel: Otkaži
+report: Prijavi
+deleteIt: Da, obriši!
+reportIt: Da, prijavi!
+areYouSure: Jeste li sigurni?
+noWayOfReturn: Nema nacina da obnovite svoje postupke!
+download: Preuzmite projekat
+description: Opis
+noDescription: Opis nije dostupan.
+credits: Zasluge
+noCredits: Zasluge nisu navedene.
+country: Država
+loginText: prijava
+privacyPolicy: Pravila privatnosti
+imprint: Impresum
+programDetails: Detalji
+somethingWentWrong: 'Izvinite, došlo je do greške.'
+pleaseTryAgain: 'Pokušajte ponovo!'
+oldVersionError: 'Molimo vas, ažurirajte Pocketcode.'
+more: 'više'
+less: 'manje'
+show-more: 'Prikaži još'
+show-less: 'Prikaži manjе'
+ok: Ok
+clickToDownloadProgram: 'Da bi preuzeli primjer projekta pritisnite %link_start% ovde %link_end%.'
+registrationError: 'Korisničko ime ili e-mail se već koristi.'
+notifications: 'Obaveštenja'
+allNotifications: 'Sva obaveštenja'
+FollowersNotifications: 'Pratioci'
+LikeNotifications: 'Sviđanja'
+likesNotificationsTitle: 'Obaveštenja sviđanja'
+followersNotificationsTitle: 'Obaveštenja o pratiocima'
+commentsNotificationsTitle: 'Obaveštenja komentara'
+remixNotificationsTitle: 'Remix obaveštenja'
+CommentNotifications: 'Komentari'
+RemixNotifications: 'Remiksi'
+oldnotification: 'Stara obaveštenja'
+wellDone: "Svaka čast!"
+done: "Gotovo!"
+notificationsReadMessage: "Izgleda da nemate nikakvih obaveštenja."
+notificationsClearedMessage: "Sva obavještenja su označena kao pročitana."
+deleteNotificationConfirmation: "Jeste li sigurni?"
+notificationDeleteMessage: "Da li ste sigurni da želite da obrišete ovo obaveštenje?"
+notificationDeleteAllMessage: "Da li ste sigurni da želite da obrišete sva obaveštenja?"
+confirmMessage: "Da, obriši"
+cancelMessage: "Otkaži"
+notificationsAllMessagesDeleted: "Sva obaveštenja su obrisana."
+notificationDeletedMessage: "Obaveštenje je uspešno obrisano."
+clearAllNotificationsButtonTitle: "Označi svе kao pročitano"
+deleteAllNotificationsButtonTitle: "Obriši sve"
+notificationsClearError: "Ne možete označiti nostrifikaciju kao pročitanu."
+notificationsDeleteError: "Obaveštenja nije moguće obrisati!"
+pleaseWait: "Molimo sačekajte..."
+projects: "Programi"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'Koji se projekti preporučuju ovde?'
+      description: 'Što više sviđanja (uključujući „Palac gore“, „Haha“, „Voli“ i „Wow!“) vaš projekat dobije, bolje je rangiran na ovoj listi.'
+follower:
+  follows: Pratim
+  followers: Pratioci
+  follow: Prati
+  username: Korisnik
+  followsMe: Prati me
+  noFollowing: Trenutno nikoga ne pratite.
+  noFollowers: Trenutno nemate pratioce.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Nije moguće pratiti željenog korisnika!"
+  unfollowError: "Ne možete otpratiti željenog korisnika!"
+  unfollowQuestion: "Da li ste sigurni da želite da otpratite ovog korisnika?"
+  unfollowButton: "Otprati %username%"
+programs:
+  welcome:
+    title: Dobrodošli u Catrobatovu %theme%
+    subtitle: Kreirajte priče, igre i još mnogo toga...
+    download: Preuzmi app
+    statistics: Više podataka
+  featured: Izdvojeni
+  example: Primeri
+  newest: Najnoviji projekti
+  recommended: Preporučeni projekti
+  scratchremixes: Scratch remixi
+  noPrograms: Trenutno nema projekata.
+  deleteConfirmation: |+
+    Da li ste sigurni?
+    Da li ste sigurni da želite izbrisati "%programName%"?
+    Nema načina da obnovite svoje postupke.
+    Da, obriši.
+    Otkaži
+  changeVisibility: |+
+    Ako postavite '%programName%'na privatno, drugi korisnici neće ga videti i naći.
+    I dalje možete da delite vezu vašeg projekta sa svojim prijateljima. Možete da prebacite vidljivost dodirom na ikonu katanca.
+    Ako postavite "%programName%"na javno, drugi korisnici ga mogu videti i pronaći.
+    Da, postavi javno
+    Da, postavi privatno
+    Ne
+  reportCommentConfirmation: Da li ste sigurni da želite prijaviti ovaj komentar?
+  deleteCommentConfirmation: Da li ste sigurni da želite da obrišete ovaj komentar?
+  deleteAccountConfirmation: |+
+    Izbrisati nalog?
+    Da li ste sigurni da želite izbrisati nalog? Ovo će takođe izbrisati vaše projekte i komentare!
+    Nema načina da obnovite svoje postupke!
+    Da, obriši!
+    Poništi
+  tooLongDescription: Opis projekta je predug!
+  rudeWordsInDescription: Ne možete koristiti nepristojne riječi u opisu!
+  tooLongCredits: Zasluge projekta su preduge!
+  rudeWordsInCredits: Ne možete koristiti nepristojne reči u zaslugama!
+  most:
+    viewed: Najgledanije
+    downloaded: Sa najviše preuzimanja
+  random: Nasumični projekti
+  related: Povezani projekti
+  downloads: '%downloads% preuzimanja'
+  sample: Primer projekata
+  views: '%views% pregledi'
+  likes:
+    likersTitle: "Ljudi koji su reagovali na ovaj projekat"
+    all: "Sve"
+  remixes: '{0}0 remiksa |{1}1 remiksa |]1,Inf]%remixes% remiksa'
+  newRemixesNotificationTitle: '|{1}"%programName%" ima 1 novi remiks: |]1,Inf] "%programName%" ima %remixes% novih remiksa:'
+  submitted: Poslati projekti
+  uploaded: Otpremljeni projekti
+  reportAsInappropriate: Prijavi kao neprikladno
+  reportProgram: Prijavi projekat
+  languageVersion: 'Catrobat verzija jezika: %languageVersion%'
+  reportLoginText: Molimo vas da se %login% da biste prijavili ovaj projekat.
+  reportDialogHeader: Zašto želite da prijavite ovaj projekat?
+  reportDialogReason: Unesi razlog
+  reportRadioButtonInappropriate: Neprikladno je
+  reportRadioButtonCopyright: Prekršaj autorskih prava
+  reportRadioButtonSpam: Ovo je spam
+  reportRadioButtonDislike: Ne sviđa mi se ovo
+  reportOwnProgram: Ne možeš prijaviti vlastiti projekat.
+  reportAlready: Već ste prijavili ovaj projekat.
+  reportDone: Prijavili ste ovaj projekat!
+  updateAppHeader: Ažuriraj app
+  updateAppText: Molimo vas ažurirajte aplikaciju da bi ste mogli preuzeti ovaj projekat.
+  btnClosePopup: Ok
+  checkout_this_program: Pogledaj ovaj Catrobat projekat
+  show_more: Prikaži više
+  comments: Komentari
+  send: Pošalji
+  delete: Obriši
+  report: Prijavi
+  report_popup: Komentar je uspešno prijavljen.
+  report_popup_header: Prijavljeno
+  deleted_popup: Komentar je uspešno izbrisan.
+  deleted_popup_header: Izbrisano
+  noAdminRights: Nemate administratorska prava. Molimo prijavite se kao administrator.
+  editDescription: Uredite opis projekta
+  saveDescription: Sačuvaj promjenu opisa
+  editCredits: Izmeni zasluge projekta
+  saveCredits: Sačuvaj izmene zasluga
+  addComment: Napiši komentar
+  thumbsUp: Svaka čast!
+  smile: Osmeh!
+  love: Voli!
+  wow: Wooow!
+  linkTitle: Link
+  link: Kopirajte vezu projekta u međuspremnik
+  reactionsText: Sviđanja
+remixGraph:
+  title: Remiksi
+  showRemixGraph: 'Pokaži Remix Graph'
+  by: 'od'
+  open: 'Otvori'
+  showPaths: 'Prikaži putanje'
+  programNotAvailableErrorTitle: 'Izvinite...'
+  programNotAvailableErrorDescription: 'Ovaj projekat nije više dostupan!'
+  programNotAvailable: 'Nije dostupno'
+  programUnknownUser: 'Nepoznat korisnik'
+noReply: Ovo je automatska poruka - Molimo Vas da ne odgovarate na ovaj email.
+accountConfirmation:
+  subject: Potvrda Vašeg Catrobat naloga
+  message: |
+    Dragi %username%.
+    Da završite sa aktivacijom naloga - molimo posjetite %confirmationUrl%
+    Ovaj link se može samo jednom iskoristiti da potvrdite Vaš nalog.
+    Srdačan pozdrav,
+    Vaš Catrobat Tim.
+  messageHtml: |
+    <p>
+    Dragi %username%.<br>
+    <br>
+    Da završite sa aktivacijom naloga - molimo posjetite <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    Ovaj link se može samo jednom iskoristiti da potvrdite Vaš nalog.<br>
+    <br>
+    Srdačan pozdrav,<br>
+    Vaš Catrobat Tim.
+    </p>
+passwordRecovery:
+  subject: Vaša Catrobat lozinka za oporavak
+  message: |
+    Poštovani %username%.
+
+    Tražili ste da obnovite lozinku na %appplication_url% jer ste zaboravili lozinku.
+    Ako ovo niste zatražili, zanemarite. Ističe i postaće beskorisno za 24 sata.
+
+    Da biste resetovali lozinku i kreirali novu, posetite sledeću stranicu: %confirmationUrl%
+
+    Možete koristiti svoje korisničko ime i lozinku u bilo kom trenutku da biste pristupili %appplication_url% zajedinici.
+    Da biste to učinili, samo posetite sledeću stranicu: %loginPage%
+    Da biste izmenili detalje svog profila, idite na ovu stranicu: %profilePage%
+
+    Srdačan pozdrav,
+    Vaš Catrobat tim.
+  messageHtml: |
+    <p>
+    Dragi %username%.<br>
+    <br>
+    Zatražili ste promenu šifre na <a href=%appplication_url%>Pocket Code</a> jer ste zaboravili postojeću.
+    Ako ovo Vi niste tražili, molimo da ignorišete ovu poruku. Isteći će i postaje beskorisna za 24. sata.<br>
+    <br>
+    Da promenite i napravite novu lozinku, molimo kliknite <a href=%confirmationUrl%>ovde.</a><br>
+    <br>
+    Možete koristiti korisničko ime i lozinku bilo kada da pristupite <a href=%appplication_url%>Pocket Code</a> zajednici.<br>
+    <br>
+    Da učinite to, samo posetite datu stranicu: <a href=%loginPage%>Login Page</a><br>
+    Da izmenite detalje Vašega profila, idite na ovu <a href=%profilePage%>stranicu</a>.<br>
+    <br>
+    Srdačan pozdrav,<br>
+    Vaš Catrobat Tim.
+    </p>
+profile:
+  edit: Izmenite svoj profil
+  saveChanges: sačuvaj izmene
+  newPass: nova lozinka
+  repeatPass: ponovi lozinku
+  oldPass: stara lozinka
+  firstEmail: Moja prva e-mail adresa
+  secondEmail: Moja druga e-mail adresa
+  myPrograms: Moji projekti
+  follows: Prati
+  follower: Pratilac
+  unfollowUser: Otpratiti ovog korisnika!
+  followUser: Prati korisnika!
+  amountOfPrograms: Broj projekata
+  form:
+    passwordTooShort: Vaša lozinka mora da bude najmanje %length% znakova duga.
+    passwordTooLong: Nova lozinka može da bude najviše %length% znakova duga.
+    passwordIsUsername: Lozinka se mora razlikovati od korisničkog imena.
+    passwordWrong: Neispravna lozinka
+    emailNotValid: Ova email adresa nije ispravna.
+    emailMissing: Greška prilikom ažuriranja e-mail adrese. Moraš imati barem jednu potvrđenu e-mail adresu.
+    emailExists: E-mail adresa već postoji.
+    usernameNotValid: Korisničko ime nije ispravno.
+    usernameMissing: Morate imati korisničko ime.
+    usernameExists: Ovo korisničko ime već postoji.
+    usernameContainsEmail: Korisničko ime ne sme da sadrži e-mail adresu
+    submitSuccess: sačuvano!
+  reallyDeleteProgram: Želiš li zaista izbrisati svoj projekat
+  programsOf: Projekti od
+  changePicture: Promeni sliku
+  avatar:
+    noImage: Nema slike!
+    pictureTooLarge: Izabrana slika je prevelika, molimo da ne koristiš slike veće od 5mb.
+    uploadError: Izvinite, došlo je do problema tokom otpremanja!
+    noSupport: Ova vrsta slike nije podržana. Pokušajte s drugom slikom.
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: Urеdi profil
+  edit: Izmeni
+  done: Gotovo
+  checkMail: E-mail je poslan na tvoju e-mail adresu. Molimo proveri svoje prijemno sanduče.
+  passwordUpdated: Vaša lozinka je uspešno ažurirana.
+  avatar: Avatar
+  email: Email
+  editAvatar: Izmeni avatar
+  editUsername: Izmeni korisničko ime
+  editPassword: Izmeni lozinku
+  editCountry: Izmeni državu
+  editEmail: Izmeni E-Mail
+  deleteAccount: Obriši nalog
+  deleteAccountText: Da li ste sigurni da želite da obrišete Vaš nalog? Time brišete vaše projekte kao i komentare!
+  editAccountSettings: Izmeni podešavanja naloga
+  notChangeVisibility: Ne mogu da promenim vidljivost
+  notChangeVisibilityReason: Jezička verzija vašeg projekta je previsoka, pa se ne može postaviti na vidljivu.
+licenseToPlay:
+  link: 'Licenca za reproduciranje'
+  title: 'Licenca za reproduciranje - Daj kredit i podeli'
+  text1: "Zamisli da je svaki Catrobat projekat specijalan kolač koji ima svoj recept. (programski blokovi)\nSvi članovi Catrobat zajednice dele svoje kolače uključujući i recepte. To znači da možeš uživati u kolaču i naučiti kako da ga sam napraviš!"
+  text2: 'Ne postoje tajni recepti: uputstva kako da napraviš taj kolač, su dostupna svakom na korištenje, izmenu, preuzimanje, i služe kao inspiracija za nove ideje... Mislim na kolače.'
+  text3: "Možeš jesti te kolače, kao i kopirati recepte od drugih da bi napravio svoj lični, ali možda sa drugim sastojcima.\nTa sloboda dolazi sa dva jednostavna uslova:"
+  text4: "Uspostavljajući Catrobat zajednicu, odlučili smo se za ovaj pristup jer verujemo da podržava učenje i kreativnost u zajednici. Deljenjem recepata i sastojaka (skripte i umetnička dela) ljudi mogu nadograditi ideje drugih i svi će imati koristi."
+  text5: U dizajniranje Catrobat veb stranice uključili smo funkcije za podsticanje ljudi na deljenje i kreditiranje drugih. Na svakoj stranici projekta uvek možete preuzeti originalne skripte za projekat. Ako remiksujete projekat (modifikujete skripte ili umetnička dela i delite rezultat), ohrabrujemo vas da date priznanje u Napomenama o projektu, pominjući ljude i projekat koji vas je inspirisao.
+  text6: 'Saznajte više o uslovima korišćenja Catrobat online zajednice na %link-termsOfUse%.'
+  list1:
+    item1: podeli svoje kolače zajedno sa receptima
+    item2: daj kredit onome koji te je ispirisao
+  version: Verzija 1.1, 2 april 2013
+termsOfUse:
+  title: Uslovi korišćenja
+  headline: Dobrodošli u Catrobat zajednicu!
+  text1: 'Kao dio Catrobat zajednice, deliš projekte i ideje s ljudima:'
+  text2: "Trebamo tvoju pomoć kako bi ova zajednica bila mesto podrške za svakog člana. Evo kako možeš pomoći:"
+  text3: "Kroz Catrobat projekat želimo da potaknemo saradnju i omogućimo da se svačija kreativnost kombinuje u korist čitavog čovečanstva. Takođe možete postati aktivni član Catrobat zajednice tako što svoje projekte vratite zajednici kao poklon, na isti način na koji drugi aktivni članovi daju svoje projekte vama:"
+  text4: 'Naš poklon za tebe:'
+  text5: 'Naši uslovi korišćenja i usluge:'
+  list1:
+    item1: iz više različitih država i kultura
+    item2: svih uzrasta (od djece i tinejdžera do baka i dedova)
+    item3: sa različitim nivoima iskustava
+  list2:
+    item1: Imaj razumevanja. Prilikom deljena projekta, imaj na umu da ljudi mnogih različitih dobi i porekla vide tvoje doprinose.
+    item2: "Dajte zasluge. Slobodno modifikujte projekte drugih ljudi - samo pazite da im date zaslugu. Jedno mesto gde možete dati zaslugu je u opisu Vašeg projekta. Molimo pogledajte paragraf u nastavku za detalje o izmenama projekata drugih korisnika."
+    item3: "Budi iskren. Ne pretvaraj se da si neko drugi da bi prevario zajednicu."
+    item4: "Čuvaj lične podatke. Ne deli svoju e-mail adresu, broj telefona ili druge lične podatke za kontakt."
+    item5: "Pomozi da stranica ostane prijatna. Ako primetiš neki projekat ili komentar uvredljivog, nasilnog ili bilo kakvog drugog neprikladnog karaktera, samo klikni na dugme 'prijavi kao neprikladno' i ostavi kratko objašnjenje. Catrobat tim će pregledati prijave i tako može ukloniti bilo koji projekat, komentar ili slično."
+  list3:
+    item1: "Prenosom projekta na naše veb lokacije prihvatate i pristajete da ovo delo podložite određenim besplatnim licencama poslanih Catrobat projekta. Slično besplatnim licencama pod kojima vam je dostupan samo Catrobat sistem, ove besplatne licence poslanih Catrobat projekata daju svima pravo da uče od rada koje su drugi poslali i da se prilagode i preusmere na taj rad kako bi izgradili svoje nove fascinantne igre, animacije i druge projekte. To omogućava svima da 'nadgledaju svoje vršnjake', a jedan od njih ste i vi! Vaš će rad na taj način profitirati celom svetu i ostaće besplatan za svako korišćenje, pomalo sličan tekstu i slikama, koji su na Vikipediji slobodno doprineli volonteri iz celog sveta. Zamislite to kao svoj poklon čovečanstvu: vi dajete svima, a svi ostali koji svoj rad prenesu na naše veb lokacije daju vama. Tako je poslani projekat poklon od velike vrednosti koji nam ga poklanjate besplatno, pod uslovom da pod istim uslovima učestvujete u zajednici."
+    item2: Ne morate prihvatiti poklon; ako to učinite, primenjuju se određena pravila. Prednosti ovih pravila su u tome što možete naučiti na radu i nadograditi se na tome da sami napravite još zanimljivije stvari, koje zatim možete, npr. Ponovo otpremiti na naše veb lokacije kao svoje. Druga prednost je što se ovim licencama osigurava da ne možete biti odgovorni za probleme koji nastanu drugima zbog njihovog korišćenja vašeg projekta.
+    item3: "Jedan vrlo važan dodatni uslov je da jasno pripisujete autorima delove radova koje ste koristili za svoj rad. Istovremeno, trudićemo se da Vaš rad bude jasno uvažen od strane drugih na taj način što će, nakon što im Vaš rad doprinese, isti pripisati jedinstvenom imenu koje ste odabrali da Vas predstavlja u Catrobat zajednici, i što će davati drugima priliku da izraze zahvalnost Vama na javne načine jer ste svoj rad dali svima na raspolaganje, a posebno njima koji su se njime koristili."
+    item4: 'Molimo pogledajte %link-licenseUploaded% za precizne zakonske uslove i odredbe.'
+  list4:
+    item1: "Nudimo sav svoj sopstveni softver i internetske resurse koji se odnose na Catrobat sistem, npr. Softver koji je napisao Catrobat tim, naše veb stranice i internet resurse, sopstveni izvorni kod vezan za Catrobat sistem i sve dodatne materijale koji se uključuju, npr., slike, zvukove i tekstove, sada i u budućnosti Vama pod Catrobatovim besplatnim licencama."
+    item2: Ove licence čine da svi delovi Catrobat-a budu besplatni za vas, kao i besplatni u smislu davanja slobode da ih koristite koliko god želite, sa samo nekoliko ograničenja koja obezbeđuju, između ostalog, da Catrobat sistem zauvek ostane besplatan i koristan za sve.
+    item3: 'Molimo kontaktirajte %link-licenseToPlay% za precizne zakonske uslove i odredbe. Izvorni kod Catrobat sistema kao i mnogi drugi dokumenti i resursi dostupni su putem %link-developer%.'
+  list5:
+    item1: 'Ako ste, ili ako ste mlađi od 13 godina, vaši roditelji ili zakonski staratelji, povezani sa organizacijom koja je uključena ili odgovorna za kršenje privatnosti dragnet tipa i / ili masovni ili masovni nadzor, tada vam nije dozvoljeno da koristite naše softverske aplikacije i pristup našim uslugama. Precizni detalji ovog ograničenja i određeni izuzeci od njega navedeni su u odeljcima 4.a i 4.b na našim %link-termsOfUse%.'
+    item2: Ako ste mlađi od 13 godina, onda morate pitati roditelje ili zakonske staratelje da li vam dozvoljavaju da koristite Catrobat-ove softverske aplikacije i usluge.
+    item3: "Pridržavamo pravo da odbijemo, obrišemo ili sakrijemo projekte, korisničke naloge i bilo koji digitalni materijal koji je u bilo koje vreme otpremljen na Catrobat-ove veb stranice, po našem vlastitom nahođenju, na primer, ako ustanovimo da projekat sadrži neprikladan materijal ili da korisnik krši pravila o prava drugih lica."
+    item4: "Sav softver i internet resursi Catrobat-a nude se u nadi da će biti korisni, ali bez ikakve garancije."
+    item5: 'Molimo proverite naš%link-termsOfUse% developer.catrobat.org/terms_of_use_and_service za precizne formulacije gornjih tačaka i neke dodatne pravne uslove.'
+  bottom1: Povremeno se vraćajte ovde, jer mi uvek pokušavamo da poboljšamo naše Uslove korišćenja.
+  bottom2: 'Molimo pošaljite bilo koji predlog u vezi sa ovim Uslovima korišćenja na %email-webmaster%.'
+  version: Verzija 1.3, 4. mart. 2014
+help:
+  stepByStep:
+    title: "Uvod korak po korak"
+    start: "Početna pozicija:"
+    description: |
+      Ovde kreirate svoj prvi projekat, interaktivnu razglednicu koristeći sledeće video zapise.
+      Morate da sledite uputstva koja su vam data.
+      Tokom izrade razglednice posreduju se osnove Pocket Code-a koji su vam potrebni za vaše buduće projekte.
+      Nakon ovih vođenih videa, sve ostale aktivnosti će vam dati više slobode da kreirate svoje lične Pocket Code projekte.
+    step1:
+      title: 'Napravi novi projekat'
+      detail:
+        text1: 'Dodirni "Novi".'
+        text2: 'Unesi ime projekta, odaberi "Započni novi projekat" i pritisni "OK".'
+    step2:
+      title: "Kreiraj novi objekt"
+      detail:
+        text1: 'Pritisni:'
+        text2: 'Izaberi izvor za početni izgled svog novog objekta.'
+        text3: 'Unesi ime objekta i pritisni "OK" za kreiranje novog objekta.'
+        special1: 'Nacrtaj novi izgled.'
+        special2: 'Izaberi iz galerije.'
+        special3: 'Slikaj.'
+    step3:
+      title: "Pokreni se"
+      detail:
+        text1: 'Pritisni:'
+        text2: 'Prvi blok koji koristimo pripada kategoriji "Kretanje".'
+        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: 'Koristite Android Back dugme da se vratite sa scene.'
+    step4:
+      title: "Promena izgleda"
+      description: "Možeš promeniti izgled svog objekta."
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Snap the brick underneath the "Glide" - brick.'
+        text3: 'Dodirnite padajuće polje da biste stvorili novi izgled.'
+        text4: 'Odaberite izvor slike kao i pre.'
+        text5: 'Sada morate odabrati novu sliku.'
+        text6: 'Pritisnite na igru da biste videli ponašanje na sceni.'
+    step5:
+      title: "Govori"
+      description: "Sada ćete naučiti kako da priča objekat"
+      detail:
+        text1: 'Izaberite kocku "Govori". Objekat izgovara tekst kada se izvrši ova kocka.'
+        text2: 'Snap the brick underneath the "Switch to look" brick.'
+        text3: 'Pritisnite na igru da biste videli ponašanje na sceni.'
+    step6:
+      title: 'Opet i opet'
+      description: "Ovaj korak Vam pokazuje kako ponoviti ponašanje objekata."
+      detail:
+        text1: 'Izaberite "Zauvek" kocku. Sve u petlji se ponavlja beskonačno.'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
+        text3: 'Dodaje još jednu kocku klizanja'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: 'Dodirnite na tekstno polje x i y vrednosti i podesite na 0.'
+        text6: 'Pritisnite na igru da biste videli ponašanje na sceni.'
+    step7:
+      title: "Tapkanje je sve"
+      description: 'Takođe možete kontrolisati ponašanje objekta kada se projekat izvodi na sceni.'
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Postavite "Kada dodirnem" ispod ostalih kocki.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: 'Sada imate ovu skriptu.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
+    step8:
+      title: "Kopiraj, obriši ili izmeni kocku"
+      detail:
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
+    step9:
+      title: "Navigacija u aplikaciji"
+      detail:
+        text1: 'Koristite Android taster za nazad za navigaciju u aplikaciji.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Ponovo upotrebite Android Back dugme da biste došli do pregleda vaših objekata i pozadine.'
+    step10:
+      title: "Promеni pozadinu"
+      description: "This is the overview of your objects and your project's background."
+      detail:
+        text1: 'Pozadina je poput objekta, ali možete imati samo jednu pozadinu.'
+        text2: 'Objektu u pozadini možete dodati skripte, zvukove i izgledati na isti način.'
+    step11:
+      title: "Glavni meni"
+      description: "Upotrebite Android taster za nazad da biste došli do ovog ekrana."
+      detail:
+        text1: 'Nastavite sa trenutno otvorenim projektom.'
+        text2: 'Dodaj novi projekat.'
+        text3: 'Vidite Vaše lokalne projekte.'
+        text4: 'Idite na stranicu pomoći i razgovarajte sa drugim korisnicima.'
+        text5: 'Istražite svet projekata Pocket Code. Preuzmite i remiksujte projekte koje volite.'
+        text6: 'Pošaljite projekat koji je trenutno otvoren.'
+  tutorialcards:
+    title: "Vodiči"
+    description1: "Ovaj vodič će ti pokazati kako da koristiš korisne trikove u"
+    getReady: "Pripremi se:"
+    tryCode: "Probaj ovaj kod:"
+    doIt: "Učini to:"
+    tip: "Dodatni savet:"
+    card1:
+      title: "Promena veličine"
+      description: "Promeni veličinu objekta."
+      one: "Dodajte objekat za koji želite da promenite veličinu, npr. Životinja."
+      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+    card2:
+      title: "Promena izgleda"
+      description: "Promeni izgled objekta."
+      one: "Dodajte objekat za koji želite da promenite izgled, npr. predmeti."
+      two: "Dodajte dodatne slike u izgledu objekta"
+      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+    card3:
+      title: "Pokretne animacije"
+      description: "Animirajte objekte"
+      one: "Dodajte objekat koji želite da se kreće."
+      two: "Include another picture in the object's looks which illustrates the movement."
+      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+    card4:
+      title: "Klizati"
+      description: "Neka vaš objekat klizi po ekranu."
+      one: "Dodajte objekat koji želite da klizi. Na primer avion."
+      two: "Ubacite sledeće kocke i definišite oblast u kojoj bi se kretanje trebalo dogoditi."
+    card5:
+      title: "Reproduciraj zvuk"
+      description: "Reprodukujte zvuk dodirom na objekat."
+      one: "Dodajte objekat koji želite da reprodukujete zvuk, npr. pas."
+      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
+    card6:
+      title: "Govori"
+      description: "Neka vaš objekat govori."
+      one: "Dodajte objekat koji želite da govori, npr. Keri."
+      two: "Ubacite sledeće kocke da biste omogućili glasovni izlaz."
+    card7:
+      title: "GSenzor"
+      description: "Kontrolišite objekat pomoću senzora nagiba."
+      one: "Dodajte objekat koji želite da se kreće na sceni."
+      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
+    card8:
+      title: "Kompas"
+      description: "Napravite sopstveni kompas"
+      one: "Dodajte objekat koji želite da usmjerite u pravcu kompasa."
+      two: "Ubacite sledeće kocke da biste postavili orijentaciju objekta. Uz to uključite i zauvek petlju."
+    card9:
+      title: "Prenesi"
+      description: "Slanje poruka sa jednog objekta na drugi."
+      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
+    card10:
+      title: "Pokaži varijablu"
+      description: "Prikaži vrednost varijable."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Ubacite sledeće kocke da biste sačuvali trenutni x i y položaj pokretnog objekta u promenljivoj."
+      three: "Through „Show variable“ you can display the values on stage."
+    card11:
+      title: "Detekcija sudara"
+      description: "Otkrijte sudar dva objekta."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+    card12:
+      title: "Prepoznavanje lica"
+      description: "Kontrolišite objekt pomoću prepoznavanja lica."
+      one: "Prvo proverite da li su omogućene kocke za prepoznavanje lica. Stoga idite na podešavanja."
+      two: "Dodajte novi objekt i ubacite sledeće kocke da biste pokazali da li je neko lice otkriveno. Proverite da li je neko lice otkriveno i stavite ovo u zauvek petlju. Ako kamera opazi lice, vrednost promenljive je „TRUE“, a u suprotnom je „FALSE“."
+  starterPrograms:
+    title: "Početni projekti"
+    description: "Isprobajte ove početne projekte. Pogledajte unutra da biste izvršili promene i dodali svoje ideje."
+    categories:
+      games: "Igre"
+      animations: "Animacije"
+      interactive: "Interaktivna umetnost i priče"
+      music: "Muzika i ples"
+  gameJam:
+    title: "Kako da se otpremi Pocket Code igra na Game Jolt stranicu?"
+    text0: "Prve čestitke na vašoj igri! Sada je možete otpremiti na %link% da biste stvorili samostalnu Android aplikaciju koju zatim možete da otpremite na Game Jolt stranici."
+    title1: "Registracija"
+    text1: "Prvo morate da napravite nalog. Nakon toga možete otpremiti napravljeni projekat. Ne brinite, lako je i trebate samo smisliti korisničko ime i lozinku. Nakon što ispunite oba, kliknite na „Prijavi se ili se registruj“. To je to!"
+    title2: "Uploaduj"
+    text2: "Nakon procesa registracije moći ćete otpremiti svoju igru. Samo razmislite o imenu i dodajte opis. Takođe dodajte # AliceJam150 u polje opisa."
+    title3: "Potražite svoj projekat"
+    text3: "Idite na svoj Pocket Code profil na kojem su navedeni svi vaši projekti ili pretražite direktno Vaš projekat koristeći pretragu i ime vašeg projekta."
+    title4: "Napravite Android app"
+    text4: "Direktno na stranici sa detaljima projekta možete da napravite Android aplikaciju. Pritiskom na 'Pripremi aplikaciju' aplikacija će biti stvorena."
+    title5: "Preuzmi app"
+    text5: "Nakon procesa izrade projekat možete preuzeti kao aplikaciju. Ovu preuzetu aplikaciju treba ponovo poslati direktno na veb lokaciju Game Jolt da biste učestvovali u %link%."
+    title6: "Registrujte/prijavite se na GameJolt.com"
+    text6: "Posetite%link% i kliknite na \"Prijavi se\" ili \"Prijavi se!\" u meniju. Ako već imate nalog, samo se prijavite, ako ne, potrebno je da se registrujete pomoću adrese e-pošte, korisničkog imena i lozinke."
+    title7: "Pošaljite svoju igru na veb stranicu Game Jolt"
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: "Pre nego što objavite igru, sledite sledeće korake. Morate najmanje dodati „umanjenu sliku“, postaviti „ocenu zrelosti“ i prenijeti igre klikom na „build/files“."
+    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_4: "Napomena: Ako aplikaciji nedostaje sufiks „.apk“, morate da dodate „.apk“ ručno. Samo preimenujte datoteku. Sada biste trebali biti u mogućnosti da je otpremite."
+    text7_5: "Nakon prenosa kliknite na „OK“ da objavite svoju igru. To će kasnije ljudima pokazati link za preuzimanje vaše igre."
+    text7_6: "Sada ste postavili svoju prvu igru na veb lokaciji Game Jolt i postavili je kao aktivnu. Čestitke!"
+    text7_7: "Drugi ljudi će sada moći da pronađu vašu igru i ona će se pojaviti na stranici %link%."
+  aliceGameJamTutorialcards:
+    title1: "(Dobrodošli u) Wonderland"
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: "Save Alice!"
+    subtitle2: "Koristite senzore nagiba i otkrijte sudar između objekata"
+    description2: "Ovde ćete naučiti kako da upravljate likom pomoću senzora nagiba svog telefona. Kretanje Alice možete kontrolisati naginjanjem telefona levo ili desno. Pogledajte naš vodič i pustite da predmeti nasumično padaju s neba i iskusite u otkrivanju sudara sa drugim objektima."
+    title3: "The Hatter - Hit and Run"
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: "U ovom tutorialu ćete naučiti kako da kreirate pejzaž koji izgleda kao da se kreće. To ćemo uraditi pomeranjem objekata duž ekrana kako bismo stvorili iluziju kretanja. Takođe vam pokazujemo kako da pokrenete Hatter potez naginjući telefon."
+    title4: "The Hatter - Hit and Run"
+    subtitle4: "Let the Hatter shoot the evil cards"
+    description4: "U ovom tutorialu ćemo vam pokazati kako stvoriti neprijatelje koji se nasumično kreću ka vašem liku. Štaviše, naučićete kako da naterate mrzeći suza na kapcima i proverite da li su neprijatelji pogođeni pomoću otkrivanja sudara."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "Kreirajte rezultat koristeći promenljive"
+    description5: "U ovom tutorialu ćemo vam pokazati kako koristiti promenljive da biste stvorili rezultat. Rezultati su korisni elementi u igri. Naš rezultat vam pokazuje koliko ste često uhvatili mačku."
+    title6: "A Rabbits Race"
+    subtitle6: "Kreirajte pokretnu pozadinu"
+    description6: |
+      Ovaj vodič vam pokazuje kako stvoriti vertikalno pomeranje pozadine klizanjem pozadinske grafike na određeni način. Još jedna stvar koju ćemo vas naučiti jeste da naterate lik da skoči napred tako što ćete ga pritiskati.
+      Da biste malo otežali igru, pokazaćemo vam kako da vremenom usporite brzinu svog karaktera.
+    download: "Preuzmite projekat"
+oauth:
+  username_header: Hvala što ste se prijavili na Pocket Code!
+  username_chooser: "Odaberi korisničko ime:"
+  username_hint: Korisničko ime ne bi trebalo da bude vaše pravo ime.
+  usernameTaken: Korisničko ime je već uzeto, izaberite drugo.
+search:
+  dotdotdot: Traži...
+  search: Pretraga
+  inMediaLib: Pretražite u biblioteci medija
+  results: Rezultati pretraživanja
+  resultcount: Pretraživanje je pronašlo %count% rezultata
+  fail: Unesite barem jedan termin za pretragu
+menu:
+  profile: Moj profil
+  login: Prijava
+  logout: Odjava
+  admin: Admin
+  home: Početna
+  helpAndTutorials: Pomoć i tutorijali
+  followersAndFollowing: Pratilac
+login:
+  login: Prijava
+  passOrUser: Lozinka ili korisničko ime je netačno.
+  noUsername: Korisničko ime ili e-mail adresa nije pronađena.
+  forgotPass: Zaboravio lozinku ili korisničko ime?
+  recoverPass: Povrati svoju lozinku
+  recoverPassSend: E-mail je poslan na tvoju e-mail adresu. Molimo proveri svoje prijemno sanduče.
+  alreadyReset: Lozinka za ovog korisnika već je zatražena u poslednja 24 sata.
+  confirmationSend: Na vašu e-mail adresu poslan je e-mail za potvrdu vaše registracije. Proverite svoj inbok i aktivirajte svoj račun.
+  userOrEmail: Korisničko ime ili e-mail
+  changePass: Promeni lozinku
+  createAccount: Napravite nalog
+  noAccount: Nemate nalog!
+  alreadyAccount: Već imate nalog?
+  or: ILI
+  username: Korisničko ime
+  email: Email
+  passwordFirst: Lozinka
+  passwordSecond: Potvrda lozinke
+apk:
+  download: Preuzmi kao app
+  prepare: 'Pripremi app'
+  preparing: 'Pripremam app'
+  text: 'Proces može da potraje'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: Korisničko ime ne sme da bude prazno
+    invalid: Korisničko ime nije ispravno
+    exists: Ovo korisničko ime već postoji.
+    not_exists: Ovo korisničko ime ne postoji.
+    not_email: Korisničko ime ne može biti e-mail adresa.
+    size: Korisničko ime mora imati najmanje 3 znaka i ne više od 180
+  password:
+    blank: Lozinka nedostaje.
+    short: 'Lozinka mora da ima najmanje {{ limit }} karaktera.'
+  description:
+    rude: Opis ne sme da sadrži nepristojne reči.
+  credit:
+    rude: Zasluga ne sme da sadrži nepristojne reči.
+  country:
+    blank: Država nije izabrana.
+    invalid: Nevažeća država
+  email:
+    blank: email ne sme da bude prazan
+    invalid: Tvoja e-mail adresa je nevažeća
+    exists: E-mail adresa već postoji.
+  id:
+    blank: Open authentication ID must not be blank
+  login: Lozinka ili korisničko ime je netačno.
+  post-data: POST-podaci nisu ispravni ili nedostaju!
+  checksum:
+    missing: Program nije poslao fileChecksum! Da li koristite zastarelu verziju Pocket Code-a?
+    invalid: nevažeći checksum
+  xml:
+    invalid: nevažeći kod-xml
+    missing: 'nepoznata greška: project_xml_not_found!'
+  file:
+    unexpected: pronađen neočekivani fajl
+    invalid: nevažeći fajl
+  image.missing: Pojekat XML koristi fajl koji ne postoji u projekt folderu
+  unknown: nepoznata greška
+  token: 'Provjera autentičnosti uređaja nije uspela: neispravan auth-token!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  programname:
+    rude: Ime projekta ne sme da sadrži nepristojne reči.
+  program:
+    invalid: Neispravan projekat.
+  languageversion:
+    tooold: 'Izvinite, vaš projekat sadrži staru verziju Catrobat jezika! Koristite li najnoviju verziju Pocket Code?'
+  programversion:
+    tooold: 'Žao nam je, koristite staru verziju Pocket Code-a. Ažurirajte na najnoviju verziju.'
+  authentication:
+    title: Autentifikacija nije uspela
+    webview: |
+      Korisnički podaci su pogrešni.
+      Pokušajte ponovo da se prijavite u aplikaciji.
+success:
+  text: Uspeh
+  registration: Registracija uspešna!
+  token: u redu
+  upload: Tvoj projekat je uspešno uploadovan!
+  imgUpload: Vaša slika je uspešno postavljena!
+  report: Vaša prijava je bila uspešno poslata!
+time:
+  minutes.ago: '{0} < pre minutu |{1}1 pre minutu |]1, Inf] %count% minuta'
+  hours.ago: '{1}pre 1 sat |]1, Inf] pre %count% sati'
+  days.ago: '{1} pre 1 dan |]1, Inf] pre %count% dana'
+  months.ago: '{1} pre 1 mesec |]1,Inf] pre %count% meseci'
+  years.ago: '{1} pre 1 godinu |]1,Inf] pre više od godinu'
+failure:
+  upload: Došlo je do greške tokom upload-a vaše aplikacije.
+api:
+  registerUser:
+    emailMissing: 'Email nedostaje'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email adresa je već u sistemu'
+    usernameMissing: 'Korisničko ime nedostaje'
+    usernameTooShort: 'Korisničko ime je prekratko'
+    usernameTooLong: 'Korisničko ime je predugačko'
+    usernameAlreadyInUse: 'Korisničko ime već postoji'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Lozinka nedostaje'
+    passwordTooShort: 'Lozinka jе prеvišе kratka'
+    passwordTooLong: 'Lozinka jе prеvišе dugačka'
+    passwordInvalidChars: 'Lozinka sadrži nevažeće znakove'
+    usernameContainsEmail: "Korisničko ime ne sme da sadrži e-mail adresu"
+  projectsPost:
+    invalid_checksum: 'Nevažeća kontrolna suma. Pokušajte sa otpremanjem ponovo!'
+    upload_error: 'Greška prilikom prenošenja. Pokušajte sa otpremanjem ponovo!'
+    creating_error: 'Greška tokom kreiranja entitetskog programa. Pokušajte sa otpremanjem ponovo!'
+#languages and countries
+language:
+  arabic: Arapski
+  bulgarian: Bugarski
+  catalan: Katalonski
+  chinese_simplified_han: Kineski (pojednostavljeni Han)
+  chinese_traditional_han: Kineski (tradicionalni Han)
+  croatian: Hrvatski
+  czech: Češki
+  danish: Danski
+  dutch: Holandski
+  english_united_kingdom: Engleski (Ujedinjeno Kraljevstvo)
+  english_united_states: Engleski (Sjedinjene Države)
+  estonian: Estonski
+  filipino: Filipinski
+  finnish: Finski
+  french: Francuski
+  german: Nemački
+  greek: Grčki
+  hebrew: Hebrejski
+  hindi: Hindski
+  hungarian: Mađarski
+  indonesian: Indonezijski
+  italian: Italijanski
+  japanese: Japanski
+  korean: Korejski
+  latvian: Latvijski
+  lithuanian: Litvanski
+  malay: Malajski
+  norwegian: Norveški
+  persian: Perzijski
+  polish: Poljski
+  portuguese_brazil: Portugalski (Brazil)
+  portuguese_portugal: Portugalski (Portugal)
+  romanian: Rumunski
+  russian: Ruski
+  serbian: Srpski
+  slovak: Slovački
+  slovenian: Slovenski
+  spanish_latin_america: Španski (Latinska Amerika)
+  spanish_spain: Španski (Španija)
+  swedish: Švedski
+  thai: Tajlandski
+  turkish: Turski
+  ukrainian: Ukrajinski
+  vietnamese: Vijetnamski
+ci:
+  generate: Generiši Apk
+  pending: Generiše se Apk
+  download: Preuzmi Apk
+gamejam:
+  nojam: Izvinite, trenutno nema game jam
+  submit: Predaj za %gamejamname%
+  whats: Šta je %gamejamname%?
+  submitown:
+    header: budi svestan
+    subheader: Možete poslati samo svoje projekte
+    text: |
+      Ali zašto ne napravite svoju!
+      Učestvujte u %gamejamtag%
+tag-text: Tagovi
+extenstion-text: Ekstenzije
+tags:
+  constant:
+    tag1: Igre
+    tag2: Pokretne animacije
+    tag3: Priča
+    tag4: Muzika
+    tag5: Umetnost
+    tag6: Eksperimentalno
+    tag7: Uputstvo
+admin:
+  maintain:
+    diskMaintenance: Održavanje diska
+    ramMaintenance: RAM održavanje
+    noRemovableObjects: Nema uklonjivih objekata.
+    removableObjects: Uklonjivi objekti
+recommender:
+  similarPrograms: Slični projekti
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Korisnici koji su preuzeli ovaj projekat takođe su preuzeli
+  moreFromThisUser: Više od %username%
+pmd:
+  submitBtn: Predaj svoj projekat
+  submitBox:
+    header: Predaja
+    text: Predaćete svoj projekat. Unesite kod projekta i kliknite na pošalji.
+    btnText: Pošalji
+  successful:
+    text: Vaš projekat je uspešno postavljen.
+  failed:
+    text: Postavljanje projekta nije uspeo.
+codeview:
+  title: 'Code view'
+  showCode: 'Prikaži kod'
+  hideCode: 'Sakrij kod'
+  showStatistics: 'Prikaži statistiku koda'
+  hideStatistics: 'Sakrij statistiku koda'
+  cantDisplayCode: "Kod se ne može prikazati"
+  cantDisplayStatistics: "Kod se ne može prikazati"
+  totalNumberOf: 'Ukupan broj'
+  scenes: 'scene'
+  scripts: 'skripte'
+  bricks: 'kocke'
+  objects: 'glumci i objekti'
+  looks: 'Izgledi'
+  sounds: 'Zvuci'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Kocke događaja'
+  controlBricks: 'Kocke kontrole'
+  motionBricks: 'Kocke pokreta'
+  soundBricks: 'Kocke zvuka'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Posebne kocke'
+codeStatistics:
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
+  general: 'General'
+  bricks: 'Kocke'
+  eventBricks: 'Događaj'
+  controlBricks: 'Kontrola'
+  motionBricks: 'Pokreti'
+  soundBricks: 'Zvuk'
+  looksBricks: 'Izgledi'
+  penBricks: 'Olovka'
+  dataBricks: 'Podaci'
+  specialBricks: 'Special'
+footer:
+  language: Jezik
+  usefulLinks: Korisni linkovi
+  legalities: Legalnosti
+  communityStats: Statistika zajednice
+  download: Preuzmi aplikaciju
+privacy-policy:
+  header: Pravila o privatnosti
+  version: Verzija 2.2, 17. oktobar 2019
+  text1: Da bismo vam ponudili sve prednosti naših usluga i povezanog naloga, potrebno je od vas prikupiti određene podatke.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: Da biste kreirali i koristili nalog u našim sistemima i vas obavestili o potrebnim izmenama vašeg računa putem e-maila, npr. Ažuriranjima ili kršenjima naših Uslova korišćenja i usluge, naših pravila zajednice ili naših smernica, čuvaćemo vaše korisničko ime i, ako ste ga naveli, svoju adresu e-pošte. Ako ste povezali svoj nalog putem Google Plus-a ili Facebook-a, na tim servisima dodatno čuvamo identifikacijski ključ povezan s vašim nalogom. Te podatke nećemo koristiti u bilo koje druge svrhe (npr. Marketing), osim ako nam to izričito niste dozvolili.
+  text4: Na našoj dobrovoljnoj osnovi možete nam dati svoju zemlju prebivališta putem stranice vašeg naloga na veb lokaciji za deljenje. Ovo će se prikazati na vašem javnom profilu i koristiti ćemo ga samo u statističke i istraživačke svrhe. Može da se ukloni u bilo kom trenutku u podešavanjima vašeg profila.
+  text5: Upotrebu ličnih podataka koji pripadaju vašem nalogu možete bilo kada povući brisanjem računa putem stranice vašeg profila na https://share.catrob.at/. Nakon brisanja naloga i dalje ćete moći da koristite pružene usluge, ali ne i da sarađujete, npr., Prenoseći programe, komentarišući ili voli. Takođe, sav obezbeđeni sadržaj povezan sa vašim nalogom, npr. Preneseni programi, komentari itd., biće izbrisani.
+  text6: Da bi se izbegla zloupotreba naših usluga, npr., putem dodavanja korisnika ili komentara u nezakonite svrhe, svi javni podaci koje generišu korisnik (uploadovi, komentari) biće pohranjeni interno u bazu podataka, zajedno sa vremenskom žigom i korišćenom Internet adresom. Ove podatke neće koristiti niti ih prosleđivati nijednoj instituciji, osim ako se ne sumnja u dovoljno nezakonite radnje i ako ih pravne institucije ne zahtevaju na osnovu važećeg zakona. Svaki slučaj ćemo prvo detaljno proveriti na individualnoj osnovi.
+  text7: Možete se dobrovoljno pretplatiti na Catrobat Newsletter, na https://catrob.at/newsletter koji nam je pružio servis MailChimp (The Rocket Science Group LLC d b/a MailChimp, USA). Tada ćete dobiti ažuriranja o projektu Catrobat i njegovim uslugama na vašu e-mail adresu. Možete da povučete bilten u bilo koje vreme korišćenjem veze "odjava" u podnožju svakog biltena. Ovaj bilten donosi MailChimp sa kojim imamo ugovor o obradi podataka i koji se obavezao na Opštu uredbu o zaštiti podataka EU i „Štit privatnosti“ između EU i SAD. Za dodatne detalje o MailChimp-u, molimo vas da potražite i politiku privatnosti i uslove korišćenja usluge.
+  text8: Sve usluge pružaju besplatni otvoreni izvorni Catrobat projekti pod okriljem Međunarodnog udruženja Catrobat - Verein zur Forderung freier Softvare, neprofitne nevladine organizacije osnovane u Gracu, Austrija (Evropska unija). Naše politike poštuju EU i austrijski zakon o zaštiti podataka (GDPR). Da biste stupili u kontakt s nama, pošaljite nam e-mail na contact@catrobat.org ili nam pišite na Catrobat, c/o Institut za softversku tehnologiju, Tehnički univerzitet u Gracu, Inffeldgasse 16b, A-8010 Graz, Austrija (Evropska unija).
+  text9: U slučaju da ste mlađi od 14 godina, ovo pravilo mora da prihvati zakonski staratelj (obično roditelj).
+  text10: Službena politika privatnosti engleskog jezika Catrobat dostupna je na vebu pod https://catrob.at/privacypolicy.
+  disagree-text: Bez odobrenja ne možemo da stvorimo nalog, ali osnovne su funkcije i dalje dostupne.
+catro-notifications:
+  markAsRead: "Označi kao pročitano"
+  summary: "{0} Nemate novih obaveštenja|{1}Imate%amount% novu obaveštenje!|]1,Inf] Imate%amount% nova obaveštenja!"
+  comment:
+    title: 'Novi komentar za projekat %program_name%!'
+    message: 'Korisnik %user_link% je komentarisao vaš projekat %program_link%.'
+  like:
+    title: 'Novo sviđanje za projektat %program_name%!'
+    message: 'Korisniku %user_link% se dopada Vaš projekat %program_link%.'
+  follow:
+    title: 'Novi pratilac!'
+    message: 'Korisnik %user_link% Vas sada prati.'
+  program-upload:
+    title: 'Novi projekat od nekoga koga pratite'
+    message: 'Korisnik %user_link% je napravio novi projekat %program_link%'
+  remix:
+    title: 'Novo remiks za projektat %program_name%!'
+    message: 'Korisnik %user_link% je remiksao vaš projekat %program_link%. Remiks možete pogledati na sledećem linku %remix_program_link%'
+clipboard:
+  success: Link do projekta kopiran u međuspremnik!
+  fail: Kopiranje veze u međuspremnik nije uspelo! :(
+next: Slеdеćе
+previous: Prethodno
+help-cards:
+  headings:
+    starters: Osnove
+    tutorials: Vodiči
+    stepbystep: Korak po korak
+    getinvolvedGoogle: Skinite na Google Play
+    getinvolvedApple: Skinite na iOS
+    discord: Pridruži se na Discord
+    game_design: Game design
+    education: Obrazovna platforma
+    discuss: Diskusija
+  text:
+    starters: "Isprobajte i remiksajte sa%theme%"
+    tutorials: "Efikasni trikovi u %theme%"
+    stepbystep: "Uradite 10 lakih koraka u%theme%"
+    getinvolved: Preuzmite aplikaciju i počnite
+    discord: Pridružite se zajednici na Discord
+    game_design_1: Efikasni trikovi za
+    game_design_2: kreiranje igre
+    education: Kurs za početnike i dobri resursi
+    discuss_1: Stupite u kontakt sa drugima
+    discuss_2: korisnici
+media-packages:
+  title: Media-Packages
+  description: U sledećim kategorijama možete pronaći dodatne glumce i bojekta koje možete dodati u svoje PocketCode projekte.
+  thumb-size:
+    description: Preview size
+    sm: malo
+    md: srеdnjе
+    lg: veliko
+  theme-special: "%flavor% Theme Special"
+  search-results: Rezultati pretrage medijske biblioteke
+  no-results: Vaša pretraga je dala 0 rezultata. Molimo koristite samo engleske pojmove za pretraživanje.
+  download_these_files: sačuvaj
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'Autorska prava &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. Sva prava zadržana.'
+agree: Prihvati
+disagree: Ne slažem se
+profileLoader:
+  noProfiles: Trenutno nema profila.
+element: 'Elemenat'
+elements: 'Elementi'
+share:
+  text: 'Podeli'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Kopiraj link'
+checkOutProject: 'Pogledajte ovaj projekat:'
+community: 'Catrobat zajednica'
+back_to_app: 'Napusti zajednicu'

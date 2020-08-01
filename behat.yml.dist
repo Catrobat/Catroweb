@@ -94,14 +94,6 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        web-gamejam:
-            paths:    [ "tests/behat/features/web/gamejam" ]
-            contexts:
-                - Tests\behat\context\RefreshEnvironmentContext
-                - Tests\behat\context\DataFixturesContext
-                - Tests\behat\context\CatrowebBrowserContext
-                - Tests\behat\context\ApiContext
-
         web-general:
             paths:
                 - "tests/behat/features/web/general"

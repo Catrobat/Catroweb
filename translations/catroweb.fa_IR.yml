@@ -1,0 +1,928 @@
+---
+#homepage translation
+localLanguage: انگليسی
+username: نام کاربری
+password: رمز عبور
+createNewPassword: Create new password
+accountSettings: Account settings
+email: ایمیل
+aboutPocketCode: درباره پاکت کد
+aboutCatrobat: درباره "کت ربات"
+tutorials: آموزش
+googlePlay: گوگل پلی
+iosAppStore: IOS App store
+passwordsNoMatch: رمز عبور مطابقت نمی کند.
+error: خطا
+cancel: انصراف
+report: گزارش
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
+download: دانلود
+description: توضیح
+noDescription: هیچ توضیحی در دسترس نمی باشد.
+credits: Credits
+noCredits: No credits available.
+country: کشور
+loginText: ورود به سیستم
+privacyPolicy: حریم خصوصی
+imprint: مشخصات ناشر
+programDetails: جزئيات
+somethingWentWrong: 'ای وای یک مشکلی پیش اومد.'
+pleaseTryAgain: 'لطفا دوباره سعی کن!'
+oldVersionError: 'لطفا نسخه ی جدید پاکد کد را به روز کن!'
+more: 'بیشتر'
+less: 'کمتر'
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+registrationError: 'این نام کاربری یا آدرس ایمیل در حال حاضر استفاده شده.'
+notifications: 'Notifications'
+allNotifications: 'All notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Reactions'
+likesNotificationsTitle: 'Reaction notifications'
+followersNotificationsTitle: 'Follower notifications'
+commentsNotificationsTitle: 'Comment notifications'
+remixNotificationsTitle: 'Remix notifications'
+CommentNotifications: 'نظرات'
+RemixNotifications: 'Remixes'
+oldnotification: 'Old notifications'
+wellDone: "آفرین!"
+done: "انجام شد!"
+notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+deleteNotificationConfirmation: "Are you sure?"
+notificationDeleteMessage: "Are you sure you want to delete this notification?"
+notificationDeleteAllMessage: "Are you sure you want to delete all notifications?"
+confirmMessage: "Yes, delete it"
+cancelMessage: "انصراف"
+notificationsAllMessagesDeleted: "All notifications have been deleted."
+notificationDeletedMessage: "Notification has been successfully deleted."
+clearAllNotificationsButtonTitle: "علامتگذاری همه بعنوان خوانده شده"
+deleteAllNotificationsButtonTitle: "Delete all"
+notificationsClearError: "Unable to mark notifications as read!"
+notificationsDeleteError: "Unable to delete notifications!"
+pleaseWait: "لطفا صبر کن..."
+projects: "برنامه ها"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What projects are recommended here?'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
+programs:
+  welcome:
+    title: Welcome to Catrobat's %theme%
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More statistics
+  featured: ' پيشنهادي'
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noPrograms: There are currently no projects.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
+  most:
+    viewed: بیشترین بازدید
+    downloaded: بیشترین برنامه دانلود شده
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads%دانلودها'
+  sample: Example projects
+  views: '%views%نمایش ها'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "همه"
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: به عنوان نامناسب گزارش بده
+  reportProgram: Report project
+  languageVersion: 'زبان برنامه "کت ربات":%languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: یک دلیل وارد کن
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeader: به روز رسانی اپلیکیشن
+  updateAppText: Please update your app to the newest version to be able to download this project.
+  btnClosePopup: Ok
+  checkout_this_program: Checkout this Catrobat project
+  show_more: نمایش بیشتر
+  comments: نظرات
+  send: ارسال
+  delete: حذف
+  report: گزارش
+  report_popup: نظرت با موفقیت گزارش شد.
+  report_popup_header: گزارش شد
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editDescription: Edit the project description
+  saveDescription: Save description change
+  editCredits: Edit the project credits
+  saveCredits: Save credits change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
+  reactionsText: Reactions
+remixGraph:
+  title: Remixes
+  showRemixGraph: 'Remix graph'
+  by: 'به وسیله'
+  open: 'باز کن'
+  showPaths: 'نمایش مسیر'
+  programNotAvailableErrorTitle: 'متأسفم...'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailable: 'در دسترس نیست'
+  programUnknownUser: 'کاربر ناشناس'
+noReply: This is an automated message - Please do not reply directly to this email.
+accountConfirmation:
+  subject: Your Catrobat account confirmation
+  message: |
+    Dear %username%.
+    To finish activating your account - please visit %confirmationUrl%
+    This link can only be used once to validate your account.
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    This link can only be used once to validate your account.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+passwordRecovery:
+  subject: بازیابی رمز عبورت در کت ربات
+  message: |
+    Dear %username%.
+    You have requested to reset your password on %appplication_url% because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    Best regards,
+    Your Catrobat Team.
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    <br>
+    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
+    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
+    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    <br>
+    Best regards,<br>
+    Your Catrobat Team.
+    </p>
+profile:
+  edit: Edit your profile
+  saveChanges: ذخیره تغییرات
+  newPass: رمز عبور جدید
+  repeatPass: رمز عبور را تکرار کنید
+  oldPass: old password
+  firstEmail: اولین ایمیل من
+  secondEmail: دومین ایمیل من
+  myPrograms: My projects
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of projects
+  form:
+    passwordTooShort: رمز عبور جدید باید حداقل %length% کاراکتر داشته باشد.
+    passwordTooLong: رمز عبور جدید می تواند حداکثر %length% کاراکتر داشته باشد.
+    passwordIsUsername: رمز عبور باید متفاوت از نام کاربری باشد.
+    passwordWrong: کلمه عبور اشتباه
+    emailNotValid: اين آدرس رايانامه معتبر نیست.
+    emailMissing: خطا در حین به روز رسانی این آدرس ایمیل. تو باید حداقل یک آدرس ایمیل معتبر داشته باشی.
+    emailExists: این آدرس ایمیل در حال حاضر موجود است.
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: در حال حاضراین نام کاربری وجود دارد.
+    usernameContainsEmail: Username shouldn't contain an email address.
+    submitSuccess: ذخیره شد!
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
+  changePicture: تغییر عکس
+  avatar:
+    noImage: No image!
+    pictureTooLarge: حجم عکس انتخاب شده تان خیلی بزرگ است، لطفا عکس های بزرگتر از حجم 5 مگابایت استفاده نکنید.
+    uploadError: ببخشید، یه مشکلی در حین آپلود پیش اومد!
+    noSupport: این نوع تصویر پشتیبانی نمی شه، لطفا تصویر دیگری را امتحان کن.
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: ویرایش پروفایل
+  edit: ويرايش
+  done: ﺍﻧﺠﺎﻡ شد
+  checkMail: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
+  passwordUpdated: Your password was successfully updated.
+  avatar: آواتار
+  email: رایانامه
+  editAvatar: ویرایش آواتار
+  editUsername: ویرایش نام کاربری
+  editPassword: ویرایش کلمه عبور
+  editCountry: ویرایش کشور
+  editEmail: ویرایش ایمیل
+  deleteAccount: Delete account
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+licenseToPlay:
+  link: 'مجوز بازی'
+  title: 'مجوز بازی - اعتبار بده و به مشارکت بزار'
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'هیچ دستور پخت پنهانی وجود نداره: دستورالعمل چگونگی پخت این کیک ها برای استفاده،استفاده مجدد،تصحیح و سرو کردن بعنوان الهام ایده های جدید... یعنی کیک ها برای همه باز است.'
+  text3: "تو میتونی کیک ها رو بخوری همانطوری که میتونی دستور پخت دیگران رو شاید با مواد اولیه دیگری برای پخت کیک خودت کپی کنی. این آزادی دوتا شرط ساده داره:"
+  text4: "در راه اندازی انجمن کت ربات از آنجایی که معتقدیم این روش یادگیری و خلاقیت را در درون انجمن پشتیبانی می کند، ما تصمیم گرفتیم آن را به کار ببریم. با مشارکت دستورهای پخت و مواد لازم (اثر هنری و اسکریپت)، همه اشخاص میتونن کیک هایشان را بر اساس عقاید دیگران درست کنند و این به سود همه است."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
+  text6: 'در مورد شرایط استفاده از انجمن آنلاین "کت ربات" در %link-termsOfUse% بیشتر یاد بگیر.'
+  list1:
+    item1: کیک هایت را همراه با دستورپخت آنها به اشتراک بگذار
+    item2: دادن اعتبار به کسانی که الهامبخش تو بوده اند
+  version: نسخهٔ 1.1 2 آوریل 2013
+termsOfUse:
+  title: شرایط استفاده
+  headline: به انجمن کت ربات خوش آمدید!
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text2: "ما به کمکت نیازمندیم تا این انجمن را به یک مکان قابل پشتیبانی برای هر عضو ایجاد کنیم. این که چجوری به ما کمک کنی اینجاست:"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text4: 'کادوی ما به شما:'
+  text5: 'شرایط استفاده و خدمات:'
+  list1:
+    item1: از بسیاری از کشورها و فرهنگ های مختلف
+    item2: همه سنین (از کودکان و نوجوانان تا پدربزرگ ها و مادربزرگ ها)
+    item3: با تمام سطوح تجربی
+  list2:
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item3: "صادق باش. خودت را جای کس دیگری جا نزن یا سعی نکن که انجمن را فریب بدهی."
+    item4: "اطلاعات شخصی ات را محرمانه نگه دار. آدرس ایمیل، شماره تلفن یا دیگر اطلاعات شخصی ات را به اشتراک نگذار."
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+  list3:
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item3: "یک شرط مهم دیگر این است که تو به نویسندگانی که روی برنامشون کار کردی اعتبار میدی. همزمان ما به وضوح روی برنامه تو کار می کنیم تا توسط دیگران شناخته شود با اسم خاصی که خودت به صورت آزادانه برای معرفی در انجمن \"کت ربات\" معرفی می کنی و با دادن فرصت به دیگران برای اظهار لطف به تو به صورت عمومی به خاطر در اختیار گذاشتن کارت برای همه."
+    item4: 'لطفا %link-licenseUploaded% برای شرایط و ضوابط قانونی خاص مشاوره کن.'
+  list4:
+    item1: "ما همه ی منابع اینترنتی و نرم افزاریمان را که به سیستم کت ربات مربوط است مانند نرم افزار نوشته شده توسط تیم کت ربات، وبسایت ها و منابع اینترنتی ما، کد منبع مربوط به سیستم کت ربات و همه ویژگی های دیگر مانند تصاویر صداها و متن ها الان و در آینده با مجوز های رایگان کت ربات را به شما پیشنهاد می دهیم."
+    item2: این مجوزها همه ی قسمت های کت ربات را رایگان می کند و تو نه تنها هزینه ای نمی پردازی بلکه این آزادی را به تو می دهد که از آن هر طور که می خواهی استفاده کنی با محدودیت های کمی که تضمین می کند سیستم کت ربات برای همیشه رایگان و مفید در دسترس همه باشد.
+    item3: 'لطفا مشاوره کن %link-licenseToPlay% برای شرایط و ضوابط قانونی خاص. کد منبع سیستم کت ربات مانند خیلی از مدارک و منابع دیگر از طریق لینک %link-developer% قابل دسترسی است.'
+  list5:
+    item1: 'اگر تو زیر سیزده سال هستی، والدین ویا قیمان قانونی تو با سازمان هایی که به حریم خصوصی تعرض می کنند در ارتباطند،و نظارت فشرده دارند، در این صورت تو اجازه استفاده از اپلیکیشن های نرم افزاری و دسترسی به سرویس های ما رو نداری. جزئیات دقیقتر این شرط و استثنائات خاص آن در قسمت های 4.الف و 4.ب روی %link-termsOfUse% مشخص شده.'
+    item2: اگر کمتر از سیزده سال سن داری، باید از والدین و یا قیمین قانونیت اجازه بگیری که از اپلیکیشن ها و سرویس های نرم افزار "کت ربات" استفاده کنی.
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "همه ی نرم افزار کت ربات و منابع اینترنتی با امید به مفید بودن اما بدون هیچ تضمینی ارائه می شود."
+    item5: 'لطفا مشاوره کن با link-termsOfUse%  developer.catrobat.org/terms_of_use_and_service% برای دستور دقیق بالا و شرایط و ضوابط قانونی بیشر.'
+  bottom1: مرتب اینجا را چک کن، چون ما همیشه در حال ارتقا ضوابط استفاده هستیم.
+  bottom2: 'لطفا پیشنهاداتت رو در مورد ضوابط استفاده به %email-webmaster% ایمیل کن.'
+  version: نسخهٔ ۱.۳، ۴ مارس ۲۰۱۴
+help:
+  stepByStep:
+    title: "معرفی گام به گام"
+    start: "موقعیت شروع:"
+    description: |
+      Here you create your first project, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+    step1:
+      title: 'Make a new project'
+      detail:
+        text1: 'روی "جدید" ضربه بزن.'
+        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
+    step2:
+      title: "یک شی جدید ایجاد می کند"
+      detail:
+        text1: 'ضربه بزن:'
+        text2: 'منبع اولین شکل (ظاهر)، از شی جدیدت را انتخاب کن.'
+        text3: 'نام یک شی را وارد کن و روی "تایید" ضربه بزن تا شی ساخته شود.'
+        special1: 'یک شکل جدید رسم کن.'
+        special2: 'انتخاب از گالری.'
+        special3: 'یک عکس بگیر.'
+    step3:
+      title: "شروع به حرکت کن"
+      detail:
+        text1: 'ضربه بزن:'
+        text2: 'آجر اولیه ای که استفاده می کنیم خارج از رده "حرکتی" است.'
+        text3: 'آجر "سر خوردن" را انتخاب کن. شی به سمت موقعیتی که تو در آجر وارد می کنی حرکت خواهد کرد.'
+        text4: 'در حال حاضر آجر به صورت شناور نمایش داده می شود. برای چسباندن آن، آجر را به سمت موقعیت خواسته شده حرکت بده. توهمچنین می توانی آجرهای چسبانده شده را از طریق کشیدن انگشتت روی آجرجابجا کنی، تا آجر دوباره شناور شود.'
+        text5: 'روی "بازی" ضربه بزن تا به صحنه بروی و سر خوردن شی را ببینی.'
+        text6: 'برای رفتن به مرحله قبلی از دگمه برگشت اندروید استفاده کن.'
+    step4:
+      title: "تغییر شکل"
+      description: "تو می توانی شکل شی را عوض کنی."
+      detail:
+        text1: 'آجر تعویض شکل را انتخاب کن. تو می توانی با این آجر یک شکل انتخاب کنی یا یک شکل جدید بسازی.'
+        text2: 'آجر را زیر آجر "سر خوردن" بچسبان.'
+        text3: 'داخل زمینه ی منوی کشویی ضربه بزن تا یک شکل جدید بسازی.'
+        text4: 'منبع تصویر را مانند قبل انتخاب کن.'
+        text5: 'حالا تو باید تصویر جدید را انتخاب کنی.'
+        text6: 'روی بازی ضربه بزن تا تغییرات بازی ات را روی صحنه ببینی.'
+    step5:
+      title: "بگو"
+      description: "حالا تو پی می بری که چطور یک شی می تواند حرف بزند."
+      detail:
+        text1: 'آجر "بگو" را انتخاب کن. وقتی که این آجر فراخوانی شود، شی متن را بازگو می کند.'
+        text2: 'آجر را زیر آجر تعویض شکل بچسبان.'
+        text3: 'روی بازی ضربه بزن تا تغییرات بازی ات را روی صحنه ببینی.'
+    step6:
+      title: 'دوباره و دوباره'
+      description: "این مرحله به تو نشان می دهد که چگونه رفتار اشیاء را تکرار کنی."
+      detail:
+        text1: 'آجر "برای همیشه" را انتخاب کن. همه چیز در حلقه برای همیشه تکرار می شود.'
+        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
+        text3: 'یک آجر "سر بخور" دیگری اضافه کن.'
+        text4: 'آجر "سر بخور" را روی آجر "پایان حلقه" قرار بده.'
+        text5: 'روی زمینه ی متنی متغیرهای x و y ضربه بزن و مقدار آنها را 0 قرار بده.'
+        text6: 'روی بازی ضربه بزن تا تغییرات بازی ات را روی صحنه ببینی.'
+    step7:
+      title: "ضربه زدن همه چیز است"
+      description: 'You can also control the behaviour of the object when the project is running on the stage.'
+      detail:
+        text1: 'آجر "وقتی ضربه زده شد" را انتخاب کن. وقتی تو روی شی بر روی صحنه ضربه بزنی، هر آجری زیر "وقتی ضربه زده شد" یک بار فراخوانی می شود.'
+        text2: 'آجر "وقتی ضربه زده شد" را زیر آجرهای دیگر قرار بده.'
+        text3: 'آجر "بچرخ به راست" را انتخاب کن و آن را زیر آجر "وقتی ضربه زده شد" بچسبان.'
+        text4: 'حالا تو این اسکریپت را داری.'
+        text5: 'روی بازی ضربه بزن تا تغییرات را روی صحنه ببینی. حالا اگر روی شی ضربه بزنی، آنگاه می چرخد.'
+    step8:
+      title: "کپی، حذف و یا ویرایش یک آجر"
+      detail:
+        text1: 'ضربه ی تکی روی سمت چپ هر آجر منوی متن آن آجر را باز می کند.  تو می توانی آنجا مقادیر آجر را با ویرایشگر فرمول حرکت بدی، کپی، حذف یا ویرایش کنی.'
+    step9:
+      title: "راهنمایی در برنامه"
+      detail:
+        text1: 'دکمه بازگشت اندروید را برای راهنمایی شدن در اپلیکیشن استفاده کن.'
+        text2: 'یک بار به عقب برگرد تا به نمای کلی شی برسی. تو اینجا می توانی به دستورات، شکل ها و صداهای شی بروی. اینجا می توانی تغییر نام، کپی، ویرایش یا حذف کنی.'
+        text3: 'اگر دوباره روی دکمه برگشت اندروید ضربه بزنی، به نمای کلی شی هایت و پس زمینه می رسی.'
+    step10:
+      title: "پس زمینه را تغییر بده"
+      description: "This is the overview of your objects and your project's background."
+      detail:
+        text1: 'پس زمینه مانند یک شی است، اما تو فقط می توانی آن را بعنوان پس زمینه داشته باشی.'
+        text2: 'تو می توانی دستورات، صداها و شکل ها را با همان روش به شی پس زمینه اضافه کنی.'
+    step11:
+      title: "منوی اصلی"
+      description: "از دکمه برگشت اندروید استفاده کن تا به این صفحه برسی."
+      detail:
+        text1: 'Continue with your currently opened project.'
+        text2: 'Add a new project.'
+        text3: 'See all your local projects.'
+        text4: 'به سایت کمکی برو و با دیگر کاربران بحث کن.'
+        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
+        text6: 'Upload the project that is currently opened.'
+  tutorialcards:
+    title: "آموزش"
+    description1: "این آموزش ها به تو نشان می دهند که چگونه از ترفندهای موثردر پاکت کد استفاده کنی."
+    getReady: "آماده:"
+    tryCode: "این کد را امتحان کن:"
+    doIt: "انجام بده:"
+    tip: "نکته اضافی:"
+    card1:
+      title: "تغییر اندازه"
+      description: "روی اردک ضربه بزن تا اندازه اش تغییر کند."
+      one: "شی را، که قصد داری تغییر اندازه بدهی، اضافه کن (مانند حیوان)."
+      two: "آجرهای زیر را به دستورات اشیاء اضافه کن به منظور اینکه وقتی ضربه زده شد، اندازه آن (با ٪۲۰ از اندازه ی اصلی) به حداقل برسد."
+    card2:
+      title: "تغییر شکل"
+      description: "از این ترفند برای شمردن خودکار استفاده کن."
+      one: "شی را، که قصد داری شکلش را عوض کنی، بچسبان مانند اشیاء."
+      two: "تصاویر بیشتری برای شکل ظاهری شی اضافه کن."
+      three: "آجرهای زیر را به دستور شی اضافه کن، تا شکل ظاهری شی بعد از هر ثانیه تغییر کند."
+    card3:
+      title: "حرکت دادن انیمیشن"
+      description: "وقتی یک طوطی در حال پرواز می خواهی از این ترفند استفاده کن."
+      one: "شی را که می خواهی به حرکت دربیاری اضافه کن."
+      two: "تصاویر بیشتری به شکل ظاهری شی اضافه کن تا حالتی حرکتی به شی بدهند."
+      three: "آجرهای زیر را داخل دستورات شی قرار بده تا به صورت ادامه دار موقعیت شی را پس از دوره زمانی مشخصی عوض کنی. علاوه بر این می توانی زمینه بازی را بوسیله حاشیه دار کردن لبه محدود کنی."
+    card4:
+      title: "سر بخور"
+      description: "به طور هموار از یک نقطه به نقطه دیگر حرکت کن."
+      one: "شی ای را که قصد پرواز دادن آن را داری، اضافه کن. مانند هواپیما."
+      two: "آجرهای زیر را وارد کن و محیطی که باید حرکت در آن رخ دهد را تعریف کن."
+    card5:
+      title: "پخش صدا"
+      description: "برای پخش آهنگ روی طبل ضربه بزن."
+      one: "شی ای را که قصد داری روی آن صدا بگذاری، اضافه کن. مثلا سگ."
+      two: "آجرهای زیر را به منظور ایجاد پخش صدا وارد کن. ازصداهایی مانند آواهای ضبط شده شخصی ات یا از صوت های آماده ی پاکت کد استفاده کن."
+    card6:
+      title: "بگو"
+      description: "برای این که یک شی صحبت کند از این کد استفاده کن."
+      one: "شی را که قصد پخش صدا روی آن را داری اضافه کن. مثل کری."
+      two: "آجرهای زیر را به منظور ایجاد خروجی صوتی وارد کن."
+    card7:
+      title: "حسگر G"
+      description: "برای اینکه یک شی را با متمایل نگه داشتن دستگاه تنظیم و کنترل کنی از این ترفند استفاده کن."
+      one: "شی را که می خواهی روی صحنه به حرکت دربیاری اضافه کن."
+      two: "آجرهای زیر را اضافه کن تا شی را توسط حسگرهای گوشی کنترل کنی. برای این کار باید میزان شیب x و y را انتخاب کنی. برای بدست آوردن حرکت مناسب، شیب را تنظیم کن. اگر حرکت شی خیلی حساس شد، می توانی برای مثال شیب آن را به ۱۰ تقسیم کنی."
+    card8:
+      title: "قطب نما"
+      description: "برای ساختن قطب نما از این کد استفاده کن."
+      one: "شی ای را که باید جهت قطب نما را نشان دهد، اضافه کن."
+      two: "آجرهای زیر را اضافه کن تا شی جهت شی را تنظیم کنی. علاوه بر این یک حلقه ی بی نهایت اضافه کن."
+    card9:
+      title: "انتشار"
+      description: "به این کد نگاه کن! این بهت نشون می ده که چطوری بین اشیا ارتباط برقرار کنی."
+      one: "شی ای جدید، مانند آلیس، اضافه کن که بتواند یک پیام بفرستد. علاوه بر این پس زمینه ی دومی به اشکال پس زمینه اضافه کن. به محض اینکه پس زمینه پیام را دریافت کرد شکلش عوض خواهد شد."
+      two: "آجر (به همه بفرست) را وارد کن و تعیین کن که چه اتفاقی باید بیفتد، وقتی بقیه اشیاء پیام را دریافت کردند."
+      three: "در این حالت وقتی که شی در سطح جلویی لمس شود، پس زمینه عوض می شود."
+    card10:
+      title: "نشان دادن متغیر"
+      description: "مقدار متغیر را نشان بده."
+      one: "شی ای که قصد حرکت دادنش را از طریق حسگرهای گوشی داری، اضافه کن (کارت آموزشی ۷ %tutorial_card_link_7% را ببین%link_end%). علاوه براین پس زمینه ی دومی اضافه کن برای اینکه اگر پیامی دریافت شد، پس زمینه عوض شود."
+      two: "آجرهای زیر را اضافه کن تا موقعیت فعلی x و y شی متحرک را در متغیری ذخیره کنی."
+      three: "از طریق (نمایش متغیر) می توانی مقادیر مرحله را نمایش دهی."
+    card11:
+      title: "تشخیص تصادم"
+      description: "برخورد بین دو جسم را تشخیص بده."
+      one: "دو شی اضافه کن که یکی از آنها بتواند توسط حسگرهای گوشی حرکت داده شود، مانند آلکز (کارت آموزشی ۷ %tutorial_card_link_7% را ببین %link_end%)."
+      two: "موقعیت فعلی x و y شی متحرک آلکز را ذخیره کن (کارت آموزشی ۱۰ %tutorial_card_link_10% را ببین %link_end%) و دستورات زیر را وارد کن. در ادامه بررسی کن که آیا دو شی روی هم می افتند. اگر آنها روی هم افتادند، باید شی ثابت پنهان شود."
+    card12:
+      title: "تشخیص چهره"
+      description: "شی را با استفاده از تشخیص چهره کنترل کن."
+      one: "اول مطمئن شو که آجرهای تشخیص چهره فعال هستند. بنابراین اول برو به قسمت تنظیمات."
+      two: "یک شی جدید اضافه کن و آجرهای زیر را وارد کن تا نشان دهد که آیا چهره ای تشخیص داده شده است. بررسی کن که آیا چهره ای تشخیص داده شده و آن را در یک حلقه بی نهایت قرار بده. اگر دورببین یک چهره دریافت کرد، مقدار متغیر 'درست' است وگرنه مقدارش 'نادرست' است."
+  starterPrograms:
+    title: "Starter projects"
+    description: "Try out these starter projects. Look inside to make changes and add your ideas."
+    categories:
+      games: "بازی‌ها"
+      animations: "انیمیشن"
+      interactive: "هنر و داستان های تعاملی"
+      music: "موسیقی و رقص"
+  gameJam:
+    title: "چطور می توانی یک بازی پاکت کد را روی سایت (Jolt Game) آپلود کنی؟"
+    text0: "بخاطر بازی ات بهت صمیمانه تبریک می گیم. حالا تو می توانی آن را روی سایت %link% آپلود کنی تا یک اپلیکیشن مستقل اندروید بسازی. بعدا می توانی آن را روی سایت Game Jolt آپلود کنی."
+    title1: "ثبت نام"
+    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title2: "آپلود"
+    text2: "بعد از مرحله ثبت نام، تو قادر به آپلود کردن برنامه ات هستی. فقط به یک اسم برای برنامه ات فکر کن و توضیحی به آن اضافه کن. در قسمت توضیحات AliceJam150# را اضافه کن."
+    title3: "Search for your project"
+    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
+    title4: "ایجاد اپلیکیشن اندروید"
+    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "دانلود اپلیکیشن"
+    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "ثبت نام/ورود در GameJolt.com"
+    text6: "از لینک %link% بازدید کن و روی 'ورود به سیستم' یا 'ثبت نام!' در منو کلیک کن. اگر قبلا حساب کاربری ایجاد کرده ای، فقط ورود به سیستم کن در غیر این صورت تو نیاز به ثبت نام با آدرس ایمیل، نام کاربری و رمز عبور داری."
+    title7: "بازی ات را روی سایت Game Jolt آپلود کن"
+    text7: "بعد از اینکه وارد سیستم شدی، به داشبوردت برو. می توانی آنجا بازی ات را اضاقه کنی. اول از همه تو باید روی 'پذیرفتن قوانین' کلیک کنی. سپس فرم اطلاعات بازی را پر کن. بعنوان ابزار ماشین/زبان/ایجاد، 'دیگر' را انتخاب کن و به زمینه ی ماشین/زبان/ایجاد دیگر، 'اندروید' را اضافه کن. بعنوان وضعیت 'توسعه'، 'در دست اجرا/ پایدار' را انتخاب کن. مطمئن شو که #AliceJam150 را در توضیحاتت قرار داده ای تا به این ترتیب روی صفحه %link% ظاهر شود."
+    text7_1: "قبل از اینکه بازی ات را منتشر کنی، مراحل بعدی را دنبال کن. تو باید حداقل یک 'تصویر کوچک' اضافه کنی، یک 'ارزیابی بلوغ' قرار بدی، و بازی هایت را با کلیک کردن روی 'ساختن/فایل ها' آپلود کنی."
+    text7_2: "روی 'اضافه کردن بسته' کلیک کن و فرم اطلاعات بسته را پر کن. ذخیره اش کن و \"انتشار\" را به آن اضافه کن."
+    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
+    text7_4: "توجه: اگر اپلیکیشن پسوند ‘.apk’ نداشت، تو باید به صورت دستی ‘.apk’ را اضافه کنی. فقط فایل را تغییر نام بده. حالا باید قادر باشی تا آن را آپلود کنی."
+    text7_5: "پس از آپلود برای انتشار بازی روی \"تایید\" کلیک کن. این بعدا لینکی را برای دانلود بازی ات به افراد نشان می دهد."
+    text7_6: "تو الان اولین بازی ات را روی سایت Game Jolt آپلود و فعال کردی. تبریک میگم!"
+    text7_7: "حالا افراد دیگر قادر خواهند بود تا بازی ات را پیدا کنند و این روی صفحه %link% ظاهر خواهد شد."
+  aliceGameJamTutorialcards:
+    title1: "سرزمین عجایب (خوش آمدید)"
+    subtitle1: "شخصیت هایت را انیمیشن سازی کن و یک رویداد 'وقتی ضربه زده شد' ایجاد کن"
+    description1: |
+      یاد بگیر که چطور بتوانی به شخصیت هایت با انیمیشن سازی ساده زندگی ببخشی و درک کن که چطور شخصیت هایت کاری را انجام دهند وقتی که ضربه ای به آن ها زده شود. این ویدئو به تو نشان می دهد که چطور می توانی به راحتی کاراکترت را با استفاده از شکل های متفاوت انیمیشن سازی کنی. در ادامه ما به تو نشان می دهیم که چگونه یک رویداد (وقتی ضربه زده شد) ایجاد کنی و چگونه پیامی بین اشیا بفرستی.
+    title2: "آلیس را نجات بده!"
+    subtitle2: "از سنسورهای شیب استفاده کن و برخورد بین اشیاء را تشخیص بده"
+    description2: "تو در اینجا یاد خواهی گرفت که چگونه شخصیتی را با استفاده از حسگرهای شیب گوشی ات کنترل کنی. تو می توانی حرکت آلیس را با متمایل کردن گوشی به چپ یا راست کنترل کنی. برنامه آموزشی ما را نگاه کن و بگذار تا اشیاء به صورت تصادفی از آسمان بیفتند و ترفند تشخیص برخورد بین اشیاء را یاد بگیر."
+    title3: "کلاهدوز - بزن و بدو"
+    subtitle3: "یک منظره محرک ایجاد کن و حرکت کلاه دوز را تحت نظر بگیر"
+    description3: "تو در این برنامه آموزشی یاد خواهی گرفت که چطور یک منظره ی متحرک بسازی. ما آن را بوسیله حرکت دادن اشیاء در امتداد صفحه نمایش انجام می دهیم تا تصوری خیالی از حرکت بسازیم. ما همچنین به تو نشان می دهیم که چگونه کلاه دوز را بوسیله متمایل کردن گوشی به حرکت دربیاوری."
+    title4: "کلاهدوز - بزن و بدو"
+    subtitle4: "اجازه بده تا کلاهدوز کارت های شرور را پرتاب کند"
+    description4: "در این برنامه آموزشی ما به تو نشان می دهیم که چگونه دشمن بسازی تا بصورت دلخواه به سمت کاراکترت حرکت کند. علاوه بر این، تو یاد خواهی گرفت که چگونه کلاه دوز قطرات چای پرتاب کند و با تشخیص پرتاب متوجه می شوی که قطرات به دشمن ها اصابت کرده اند یا خیر."
+    title5: "گربه ی خندون را بزن"
+    subtitle5: "با بکار بردن متغیرها امتیاز بازی را بساز"
+    description5: "ما در این برنامه آموزشی به تو نشان می دهیم که چگونه از متغیرها برای ایجاد امتیاز استفاده کنی. امتیازات عناصر مفیدی در یک بازی هستند. امتیازات ما به تو نشان می دهد که چند بار گربه را گرفتی."
+    title6: "مسابقه دو خرگوش"
+    subtitle6: "ایجاد یک پس زمینه متحرک"
+    description6: |
+      این برنامه آموزشی به تو نشان می دهد که چگونه یک پس زمینه عمودی بوسیله سر دادن گرافیک پس زمینه در یک راه مشخص، ایجاد کنی. مورد دیگری که قصد آموزش آن را داریم، این است که وقتی روی کاراکتر ضربه بزنی کاراکتر به سمت جلو بپرد.
+      برای اینکه بازی را کمی سخت تر کنیم، ما به تو نشان خواهیم داد که چگونه می توانی سرعت کاراکترت را در طول زمان کم کنی.
+    download: "Download the project"
+oauth:
+  username_header: برای ثبت نام در پاکت کد ازت ممنونیم!
+  username_chooser: "لطفا یک نام کاربری انتخاب کن:"
+  username_hint: نام کاربری نباید نام واقعی ات باشد.
+  usernameTaken: این نام کاربری قبلا واگذلر شده، لطفا یکی دیگر انتخاب کن.
+search:
+  dotdotdot: جستجو...
+  search: جستجو
+  inMediaLib: Search in media library
+  results: نتایج جستجو
+  resultcount: جستجوی تو %count% نتیجه برگرداند
+  fail: Please enter at least a single search term
+menu:
+  profile: مشخصات من
+  login: ورود به سیستم
+  logout: خروج
+  admin: Admin
+  home: Home
+  helpAndTutorials: Help & tutorials
+  followersAndFollowing: Follower
+login:
+  login: ورود به سیستم
+  passOrUser: نام کاربری یا کلمه عبور نادرست است.
+  noUsername: آدرس ایمیل یا نام کاربری یافت نشد.
+  forgotPass: نام کاربری یا رمز عبور را فراموش کرده اید؟
+  recoverPass: بازیابی رمز عبور
+  recoverPassSend: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
+  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  userOrEmail: نام کاربری یا ایمیل
+  changePass: تغییر رمز عبور
+  createAccount: ایجاد یک حساب کاربری
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
+  or: یا
+  username: نام کاربری
+  email: رایانامه
+  passwordFirst: رمز عبور
+  passwordSecond: Password confirm
+apk:
+  download: به عنوان اپلیکیشن دانلود کن
+  prepare: 'تهیه ی اپلیکیشن'
+  preparing: 'اپلیکیشن تهیه می شود'
+  text: 'این روند ممکن است مدتی طول بکشد'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: نام کاربری نباید خالی باشد
+    invalid: نام کاربری تو نامعتبر است
+    exists: در حال حاضراین نام کاربری وجود دارد.
+    not_exists: این نام کاربری وجود ندارد.
+    not_email: نام کاربری نباید آدرس ایمیل باشه.
+    size: The username must have at least 3 character and not more than 180
+  password:
+    blank: تو رمزعبوری وارد نکردی.
+    short: 'رمز عبورت باید حداقل  {{ limit }} نویسه داشته باشه.'
+  description:
+    rude: توضیحاتت نباید شامل کلمات بی ادبانه باشه.
+  credit:
+    rude: Credits must not contain rude words.
+  country:
+    blank: نام کشور را وارد نکردی.
+    invalid: کشور نامعتبر
+  email:
+    blank: آدرس ایمیل نباید خالی باشد
+    invalid: به نظر می رسه که آدرس ایمیلت نا معتبره
+    exists: این آدرس ایمیل در حال حاضر موجود است.
+  id:
+    blank: شناسه تایید باز، نباید خالی باشد
+  login: رمز عبور یا نام کاربری غلط است.
+  post-data: داده ی پستی درست نیست یا اصلا وارد نکردی!
+  checksum:
+    missing: مشتری فایل چکسام (fileChecksum) را نفرستاده! آیا تو از نسخه قدیمی پاکت کد استفاده می کنی؟
+    invalid: '"چکسام" نامعتبر'
+  xml:
+    invalid: کد xml نا معتبر
+    missing: 'خطای ناشناخته: پروژه_xml_یافت_نشد!'
+  file:
+    unexpected: پرونده غیرمنتظره یافت شد
+    invalid: فایل نا معتبر
+  image.missing: پروژه XML به یک فایل که در پوشه پروژه وجود ندارد اشاره می کند
+  unknown: خطای نامشخص
+  token: 'تأیید اعتبار دستگاه انجام نشد: نشانه معتبر نیست!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  programname:
+    rude: Project name must not contain rude wordes.
+  program:
+    invalid: Invalid project.
+  languageversion:
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+  programversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: Authentication failed
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
+success:
+  text: Success
+  registration: عملیات ثبت نام موفقیت‌ آمیز بود!
+  token: باشه
+  upload: پروژه شما با موفقیت ارسال شد!
+  imgUpload: Your image was uploaded successfully!
+  report: گزارشت با موفقیت ارسال شد!
+time:
+  minutes.ago: '{0} < ۱ دقیقه پیش |{1}۱ دقیقه پیش |]1,Inf] %count% دقیقه پیش'
+  hours.ago: '{1}۱ ساعت پیش |]1,Inf] %count% ساعت پیش'
+  days.ago: '{1}۱ روز پیش |]1,Inf] %count% روز پیش'
+  months.ago: '{1}۱ ماه پیش |]1,Inf] %count% ماه پیش'
+  years.ago: '{1}۱ سال پیش |]1,Inf] بیش از یک سال'
+failure:
+  upload: There was an error during the upload of your app.
+api:
+  registerUser:
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Password missing'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username must not contain an email address"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
+#languages and countries
+language:
+  arabic: عربی
+  bulgarian: بلغاری
+  catalan: كاتالونيائى‌
+  chinese_simplified_han: چینی (ساده شده هان)
+  chinese_traditional_han: چینی (سنتی هان)
+  croatian: کرواتی
+  czech: چک
+  danish: دانمارکی
+  dutch: هلندی
+  english_united_kingdom: انگلیسی (انگلستان)
+  english_united_states: انگلیسی (ایالات متحده)
+  estonian: استونیایی
+  filipino: فیلیپینی
+  finnish: فنلاندی
+  french: فرانسوی
+  german: آلمانی
+  greek: یونانی
+  hebrew: عبری
+  hindi: هندی
+  hungarian: مجارستانی
+  indonesian: اندونزیایی
+  italian: ایتالیایی
+  japanese: ژاپنی
+  korean: کره ای
+  latvian: لتونيايى
+  lithuanian: ليتواني‌
+  malay: مالایی
+  norwegian: نروژی
+  persian: پارسی
+  polish: لهستانی
+  portuguese_brazil: پرتعالی (برزیل)
+  portuguese_portugal: پرتغالی (پرتغال)
+  romanian: رومانیایی
+  russian: روسی
+  serbian: صربستانی
+  slovak: اسلواکی
+  slovenian: اسلوونيايى‌
+  spanish_latin_america: اسپانیایی (آمریکای لاتین)
+  spanish_spain: اسپانیایی (اسپانیا)
+  swedish: سوئدی
+  thai: تایلندی
+  turkish: ترکی
+  ukrainian: اوکراینی
+  vietnamese: ویتنامی
+ci:
+  generate: تولید اپلیکیشن
+  pending: تولید اپلیکیشن
+  download: دانلود نرم افزار
+gamejam:
+  nojam: با عرض پوزش، الان بازی جم انجام نمی شود
+  submit: ارسال به %gamejamname%
+  whats: '%gamejamname% چیست؟'
+  submitown:
+    header: توجه
+    subheader: You can only submit your own projects
+    text: |
+      خودت یکی ایجاد کن!
+      در %gamejamtag% مشارکت کن
+tag-text: برچسب‌ها
+extenstion-text: پسوندها
+tags:
+  constant:
+    tag1: بازی‌ها
+    tag2: حرکت دادن انیمیشن
+    tag3: داستان
+    tag4: موسیقی
+    tag5: هنر
+    tag6: آزمایشی
+    tag7: Tutorial
+admin:
+  maintain:
+    diskMaintenance: تعمیر و نگهداری دیسک
+    ramMaintenance: RAM maintenance
+    noRemovableObjects: اشیاء قابل جابجایی در دسترس نیستند.
+    removableObjects: Removable objects
+recommender:
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
+  moreFromThisUser: More from %username%
+pmd:
+  submitBtn: پروژه ات را ارسال کن
+  submitBox:
+    header: ارسال
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your project upload was successful.
+  failed:
+    text: Project upload failed.
+codeview:
+  title: 'Code view'
+  showCode: 'Show code'
+  hideCode: 'Hide code'
+  showStatistics: 'Show code statistics'
+  hideStatistics: 'Hide code statistics'
+  cantDisplayCode: "Code can't be displayed"
+  cantDisplayStatistics: "Code can't be displayed"
+  totalNumberOf: 'Total number of'
+  scenes: 'Scenes'
+  scripts: 'اسکریپت ها'
+  bricks: 'بلاک ها'
+  objects: 'Actors and objects'
+  looks: 'شکل ها'
+  sounds: 'صداها'
+  globals: 'Globals'
+  locals: 'Locals'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
+codeStatistics:
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
+  general: 'General'
+  bricks: 'بلاک ها'
+  eventBricks: 'رویداد'
+  controlBricks: 'کنترل'
+  motionBricks: 'حرکت'
+  soundBricks: 'صدا'
+  looksBricks: 'شکل ها'
+  penBricks: 'Pen'
+  dataBricks: 'داده‌'
+  specialBricks: 'Special'
+footer:
+  language: Language
+  usefulLinks: Useful links
+  legalities: Legalities
+  communityStats: Community stats
+  download: Get the App
+privacy-policy:
+  header: Privacy policy
+  version: Version 2.2, 17 October 2019
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  comment:
+    title: 'New comment for project %program_name%!'
+    message: 'User %user_link% commented on your project %program_link%.'
+  like:
+    title: 'New reaction to project %program_name%!'
+    message: 'User %user_link% reacted to your project %program_link%.'
+  follow:
+    title: 'New follower!'
+    message: 'User %user_link% follows you now.'
+  program-upload:
+    title: 'New project from someone you follow'
+    message: 'User %user_link% created a new project %program_link%'
+  remix:
+    title: 'New remix for project %program_name%!'
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+clipboard:
+  success: Link to project copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: Next
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: آموزش
+    stepbystep: Step by step
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    discord: Join on Discord
+    game_design: Game design
+    education: Education platform
+    discuss: Discuss
+  text:
+    starters: "Try out and remix with %theme%"
+    tutorials: "Effective tricks in %theme%"
+    stepbystep: "Do 10 easy steps in %theme%"
+    getinvolved: Download the app and get started
+    discord: Join the community on discord
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  thumb-size:
+    description: Preview size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
+flavor:
+  pocketcode: پاکت کد
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+agree: Agree
+disagree: Disagree
+profileLoader:
+  noProfiles: There are currently no profiles.
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'Catrobat community'
+back_to_app: 'Exit community'

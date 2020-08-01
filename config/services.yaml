@@ -406,15 +406,6 @@ services:
         method: onEvent
       }
 
-  catroweb.gamejamtag.check:
-    class: App\Catrobat\Listeners\GameJamTagListener
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforePersistEvent,
-        method: onEvent
-      }
-
   # ======== Snapshots =======
 
   catrobat.upload.snapshotlistener:
@@ -811,31 +802,6 @@ services:
       - App\Entity\ClickStatistic
       - ~
     public: true
-
-  # ===== GameJam
-
-  catrowebadmin.block.gamejam:
-    class: App\Admin\GameJamAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "GameJams" }
-    arguments:
-      - catrowebadmin.block.gamejam
-      - App\Entity\GameJam
-      - ~
-    calls:
-      - [addChild, ["@catrowebadmin.block.gamejam.submitted", 'NAME_OF_PARENT']]
-    public: true
-
-  catrowebadmin.block.gamejam.submitted:
-    class: App\Admin\GameJamSubmittedProgramsAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Submissions" }
-    arguments:
-      - ~
-      - App\Entity\Program
-      - App\Catrobat\Controller\Admin\GameJamSubmittedProgramsController
-    public: true
-
 
   # ====================================================================================================================
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

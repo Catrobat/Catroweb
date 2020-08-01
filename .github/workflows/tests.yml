@@ -181,7 +181,6 @@ jobs:
           - api-deprecated
           - web-admin
           - web-authentication
-          - web-gamejam
           - web-general
           - web-notifications
           - web-profile

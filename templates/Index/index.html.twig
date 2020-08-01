@@ -98,10 +98,6 @@
   <script>
     let index = new Index("{{ path('click_stats') }}", "{{ path('homepage_click_stats') }}",
       "{{ "ok"|trans({}, "catroweb") }}")
-    {% if theme() == 'pocketgalaxy' %}
-    index.gamejamInit('{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam',
-      '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam', '{{ path('api_search_programs') }}?q=galaxy')
-    {% else %}
     index.init('{{ path('api_recent_programs') }}',
       "{{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}",
       '{{ path('api_recsys_general_projects') }}', '{{ path('api_most_downloaded_programs') }}',
@@ -109,6 +105,5 @@
       '{{ path('api_random_programs') }}', '{{ path('api_example_programs') }}')
     index.showOauthPopup('{{ path('oauth_first_login') }}','{{ 'oauthInfo' | trans({'%link_start%' : '<a href="'~path('profile')~'">', '%link_end%' : '</a>'}, 'catroweb') | raw }}',
       '{{ 'oauthPopUpTitle' | trans({}, 'catroweb') }}', '{{ 'ok' | trans({}, 'catroweb') }}')
-    {% endif %}
   </script>
 {% endblock %}
