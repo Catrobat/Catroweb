@@ -4,7 +4,7 @@
 // eslint-disable-next-line no-unused-vars
 const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
-  btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText) {
+  btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText) {
   const self = this
 
   self.projectId = projectId
@@ -25,6 +25,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.wowWhite = wowWhite
   self.wowBlack = wowBlack
   self.reactionsText = reactionsText
+  self.downloadErrorText = downloadErrorText
   self.download = function (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
     downloadPbID, downloadIconID) {
     const downloadProgressBar = $(downloadPbID)
@@ -44,7 +45,14 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     downloadProgressBar.removeClass('d-none')
     downloadProgressBar.addClass('d-inline-block')
     fetch(downloadUrl)
-      .then(resp => resp.blob())
+      .then(function (response) {
+        if (!response.ok) {
+          // eslint-disable-next-line no-undef
+          showSnackbar('#share-snackbar', self.downloadErrorText)
+          return null
+        }
+        return response.blob()
+      })
       .then(blob => {
         const url = window.URL.createObjectURL(blob)
         const a = document.createElement('a')
