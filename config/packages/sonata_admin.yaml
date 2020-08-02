@@ -148,7 +148,6 @@ sonata_admin:
                 icon:            '<i class="fa fa-external-link"></i>'
                 items:
                     - catrowebadmin.block.extensions.all
-                    - catrowebadmin.block.extensions.create
 
             sonata.admin.group.statistics:
                 label:           Statistics

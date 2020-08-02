@@ -8,8 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -43,17 +41,5 @@ class ExtensionController extends CRUDController
     }
 
     return new RedirectResponse($this->admin->generateUrl('list'));
-  }
-
-  public function listAction(Request $request = null): Response
-  {
-    if (!$this->admin->isGranted('LIST'))
-    {
-      throw new AccessDeniedException();
-    }
-
-    $url = $this->admin->generateUrl('extensions');
-
-    return $this->renderWithExtraParams('Admin/extension.html.twig', ['url' => $url]);
   }
 }

@@ -769,16 +769,6 @@ services:
     arguments:
       - ~
       - App\Entity\Extension
-      - ~
-    public: true
-
-  catrowebadmin.block.extensions.create:
-    class: App\Admin\CreateExtensionsAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Create Extensions"}
-    arguments:
-      - ~
-      - App\Entity\Group
       - App\Catrobat\Controller\Admin\ExtensionController
     public: true
 
