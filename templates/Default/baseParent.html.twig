@@ -75,7 +75,7 @@
 {% if app.user %}
   <script src="{{ asset('js/FetchNotifications.min.js') }}"></script>
   <script>
-    let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
+    let fetchNotifications = new FetchNotifications("{{ path('notifications_count') }}", 99, 10000)
     $(document).ready(function () {
       fetchNotifications.run()
     })

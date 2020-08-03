@@ -16,51 +16,12 @@
     {# logged in #}
     {% if app.user %}
 
-    <li class="nav-item" id="sidebar-notifications">
-        <a id="notifications-dropdown-toggler" class="nav-link collapsible">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('notifications') }}" id="sidebar-notifications">
           <span class="sidebar-link-icon material-icons">notifications</span>
           <span class="sidebar-link-text">{{ "notifications"|trans({}, "catroweb") }}</span>
-          <span class="badge-pill badge-danger all-notifications-dropdown"></span>
-          <span id="notifications-dropdown-arrow" class="material-icons">chevron_left</span>
+          <span class="badge-pill badge-danger all-notifications"></span>
         </a>
-
-        <div id="notifications-dropdown-content" class="notifications-dropdown-content">
-
-          <a class="nav-link"
-             href="{{ path('user_notifications', { 'notification_type': "allNotifications" })}}"
-             id="btn-notifications">
-            <span class="sidebar-link-icon material-icons">notifications</span>
-            <span class="sidebar-link-text">{{ "allNotifications"|trans({}, "catroweb") }}</span>
-            <span class="badge-pill badge-danger all-notifications"></span>
-          </a>
-
-          <a class="nav-link"
-             href="{{ path('user_notifications', { 'notification_type': "followers" }) }}"
-             id="btn-followers">
-
-            <span class="sidebar-link-icon material-icons">person</span>
-            <span class="sidebar-link-text">{{ "FollowersNotifications"|trans({}, "catroweb") }}</span>
-            <span class="badge-pill badge-danger followers"></span>
-          </a>
-
-          <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "likes" }) }}" id="btn-likes">
-            <span class="sidebar-link-icon material-icons">thumb_up</span>
-            <span class="sidebar-link-text">{{ "LikeNotifications"|trans({}, "catroweb") }}</span>
-            <span class="badge-pill badge-danger likes"></span>
-          </a>
-
-          <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "comments" }) }}" id="btn-comments">
-            <span class="sidebar-link-icon material-icons">comment</span>
-            <span class="sidebar-link-text">{{ "CommentNotifications"|trans({}, "catroweb") }}</span>
-            <span class="badge-pill badge-danger comments"></span>
-          </a>
-          <a class="nav-link" href="{{ path('user_notifications', { 'notification_type': "remix" }) }}" id="btn-remix">
-            <span class="sidebar-link-icon material-icons">call_split</span>
-            <span class="sidebar-link-text">{{ "RemixNotifications"|trans({}, "catroweb") }}</span>
-            <span class="badge-pill badge-danger remixes"></span>
-          </a>
-
-        </div>
       </li>
 
       <li class="nav-item">

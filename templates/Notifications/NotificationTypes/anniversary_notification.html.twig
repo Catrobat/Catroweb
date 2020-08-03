@@ -1,19 +1,20 @@
-<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
+{% extends 'Notifications/NotificationTypes/notification_items.html.twig' %}
 
-  <h5 class="card-header notification-header">{{ notification.title }}</h5>
-  <div class="card-body">
+{% block notification_leftAvatar %}
+  <div class="col-2 col-sm-1 my-auto">
+    <span class="material-icons broadcast-icon">
+      cake
+    </span>
+  </div>
+{% endblock %}
 
+{% block notification_body %}
+  <div class="col-8 col-sm-8 pl-3 my-auto">
     <div class="message">
       {{ notification.message }}
     </div>
-
     <div class="prize">
       {{ notification.prize }}
     </div>
-
-    <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
-            onclick="notifications.markAsRead({{ notification.id }})">
-      {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
-    </button>
   </div>
-</div>
+{% endblock %}

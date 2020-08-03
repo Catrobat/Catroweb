@@ -157,9 +157,14 @@ Feature: Follow feature on profiles
     Then I should be on "/app/user/3"
     Then I should see text matching "Following"
     Then I log in as "Catrobat3"
-    And I am on "/app/notifications/allNotifications"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    Then I should see text matching "Catrobat2 follows you now"
-    Given I am on "/app/notifications/followers"
-    And I wait for the page to be loaded
-    Then I should see text matching "Catrobat2 follows you now"
+    Then I should see text matching "Catrobat2 is now following you."
+    And the element "#all-notif" should be visible
+    And the element "#follow-notif" should be visible
+    And the element "#reaction-notif" should be visible
+    And the element "#comment-notif" should be visible
+    And the element "#remix-notif" should be visible
+    And I click "#follow-notif"
+    And I wait for AJAX to finish
+    Then I should see text matching "Catrobat2 is now following you."

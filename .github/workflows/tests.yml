@@ -196,7 +196,9 @@ jobs:
           - web-comments
           - web-general
           - web-media-library
-          - web-notifications
+          - web-notifications1
+          - web-notifications2
+          - web-notifications3
           - web-profile
           - web-project
           - web-project-details

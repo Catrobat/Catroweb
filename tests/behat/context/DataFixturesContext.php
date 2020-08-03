@@ -1200,7 +1200,7 @@ class DataFixturesContext implements KernelAwareContext
           $em->persist($to_create);
           break;
         case 'remix':
-          $to_create = new RemixNotification($program->getUser(), $program->getUser(), $program, $program);
+          $to_create = new RemixNotification($program->getUser(), $user, $program, $program);
           $em->persist($to_create);
           break;
         case 'catro notifications':

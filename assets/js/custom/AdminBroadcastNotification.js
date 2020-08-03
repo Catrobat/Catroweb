@@ -6,12 +6,10 @@ function AdminBroadcastNotification () {
     $('.resultBox').html('')
 
     var message = $('#msg').val()
-    var title = $('#title').val()
-
     $.ajax({
       url: 'send',
       type: 'get', // send it through get method
-      data: { Title: title, Message: message },
+      data: { Message: message },
       success: function (data) {
         if (data === 'OK') {
           $('.resultBox').switchClass('error', 'success')

@@ -203,8 +203,24 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        web-notifications:
-            paths: ["tests/behat/features/web/notifications"]
+        web-notifications1:
+            paths: ["tests/behat/features/web/notifications1"]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-notifications2:
+            paths: ["tests/behat/features/web/notifications2"]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
+        web-notifications3:
+            paths: ["tests/behat/features/web/notifications3"]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
