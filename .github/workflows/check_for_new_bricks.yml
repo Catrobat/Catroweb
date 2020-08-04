@@ -2,11 +2,13 @@
 name: Check for new bricks
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "0 0 7 * *"
+    - cron:  '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
+  # Only should run on the main repo.
+  if: github.repository == 'Catrobat/Catroweb'
 
   check_for_new_catroid_blocks:
     name: Check for new Catroid Blocks
