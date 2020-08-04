@@ -96,7 +96,7 @@
   </div>
 
   {% include 'Program/program_details.html.twig' %}
-
+{# TODO: needs new CAPI endpoints; see Index.js and index.html.twig for how to integrate ProjectList.js
   {% if program.tags|length > 0  or program.extensions|length > 0 %}
     <div id="recommendations">
       <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
@@ -113,6 +113,7 @@
       <div class="programs"></div>
     </div>
   {% endif %}
+#}
 
   {% include 'Program/programComments.html.twig' %}
 
@@ -172,8 +173,8 @@
   <script src="{{ asset('js/ProgramDescription.min.js') }}"></script>
   <script>
     new ProgramDescription('{{ program.id }}',
-      '{{ ("show-more")                             |trans({}, "catroweb") }}',
-      '{{ ("show-less")                             |trans({}, "catroweb") }}',
+      '{{ ("more-information")                      |trans({}, "catroweb") }}',
+      '{{ ("less-information")                      |trans({}, "catroweb") }}',
         {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ constant('App\\Catrobat\\StatusCode::DESCRIPTION_TOO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
@@ -183,8 +184,8 @@
   <script src="{{ asset('js/ProgramCredits.min.js') }}"></script>
   <script>
     new ProgramCredits('{{ program.id }}',
-      '{{ ("show-more")                             |trans({}, "catroweb") }}',
-      '{{ ("show-less")                             |trans({}, "catroweb") }}',
+      '{{ ("more-information")                      |trans({}, "catroweb") }}',
+      '{{ ("less-information")                      |trans({}, "catroweb") }}',
         {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
         {{ constant('App\\Catrobat\\StatusCode::CREDITS_TO_LONG') }},
         {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_CREDITS') }}
@@ -231,6 +232,8 @@
 
   <script src="{{ asset('js/ProgramRecommender.min.js') }}"></script>
   <script>
+{# TODO: needs new CAPI endpoints; see Index.js and index.html.twig for how to integrate ProjectList.js
+
     let similar_projects = new ProjectLoader(
       '#recommendations', '{{ path('api_recsys_programs') }}', '{{ program.id }}'
     )
@@ -246,6 +249,7 @@
       '#more-from-this-user-recommendations', '{{ path('api_user_programs') }}'
     )
     more_from_this_user.initMoreFromThisUser('{{ program.user.id }}', '{{ program.id }}')
+#}
 
     let programRecommender = new ProgramRecommender (
       '{{ program.id }}',

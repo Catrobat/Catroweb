@@ -1,4 +1,6 @@
-@web @recommendations
+# Missing in new API - To be fixed with SHARE-369
+
+@web @recommendations @disabled
 Feature: There should be a more from this user category on project pages
 
   Background:
@@ -34,7 +36,7 @@ Feature: There should be a more from this user category on project pages
       | 22 | project 22 | User2    |
       | 23 | project 23 | User3    |
 
-  Scenario: at a projects detail page I should get more projects from this user recommended
+  Scenario: At a projects detail page I should get more projects from this user recommended
     Given I am on "/app/project/3"
     And I wait for the page to be loaded
     Then I should see 6 "#more-from-this-user-recommendations .program"
@@ -66,8 +68,8 @@ Feature: There should be a more from this user category on project pages
     But the element "#more-from-this-user-recommendations .button-show-more" should not be visible
     And the element "#more-from-this-user-recommendations .button-show-less" should not be visible
 
-  Scenario: Show more from a user should not show the same project. If it's the only project of this user there is no
-  show more from a user category
+  Scenario: Show more from a user should not show the same project.
+  If it's the only project of this user there is no "show more from a user" category
     And I am on "/app/project/23"
     And I wait for the page to be loaded
     Then I should see 0 "#more-from-this-user-recommendations .program"
@@ -80,39 +82,3 @@ Feature: There should be a more from this user category on project pages
     And I wait for the page to be loaded
     Then I should not see "More from"
     But I should see 0 "#more-from-this-user-recommendations .program"
-
-  Scenario: When a user has loaded more projects the number of loaded projects should be stored in the session
-    Given I am on "/app/project/3"
-    And I wait for the page to be loaded
-    Then I should see 6 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-more"
-    And I wait for AJAX to finish
-    Then I should see 12 "#more-from-this-user-recommendations .program"
-    When I am on "app/help"
-    And I wait for the page to be loaded
-    And I am on "/app/project/3"
-    And I wait for the page to be loaded
-    Then I should see 12 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-more"
-    And I wait for AJAX to finish
-    Then I should see 18 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-more"
-    And I wait for AJAX to finish
-    Then I should see 19 "#more-from-this-user-recommendations .program"
-    When I reload the page
-    And I wait for AJAX to finish
-    Then I should see 19 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-less"
-    And I wait for AJAX to finish
-    Then I should see 18 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-less"
-    And I wait for AJAX to finish
-    Then I should see 12 "#more-from-this-user-recommendations .program"
-    When I move backward one page
-    And I wait for the page to be loaded
-    When I move forward one page
-    And I wait for the page to be loaded
-    Then I should see 12 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-less"
-    And I wait for AJAX to finish
-    Then I should see 6 "#more-from-this-user-recommendations .program"

@@ -112,24 +112,6 @@ class CatrowebBrowserContext extends BrowserContext
     $this->getSymfonyService('profiler')->disable();
   }
 
-  /**
-   * @BeforeScenario @RealOAuth
-   */
-  public function activateRealOAuthService(): void
-  {
-    $this->setOauthServiceParameter('1');
-    $this->use_real_oauth_javascript_code = true;
-  }
-
-  /**
-   * @AfterScenario @RealOAuth
-   */
-  public function deactivateRealOAuthService(): void
-  {
-    $this->setOauthServiceParameter('0');
-    $this->use_real_oauth_javascript_code = false;
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   //  Authentication
   //--------------------------------------------------------------------------------------------------------------------

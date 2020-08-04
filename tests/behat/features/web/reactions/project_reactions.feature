@@ -397,7 +397,7 @@ Feature: Reactions to projects "likes"
     And I am on "/app/notifications/likes"
     And I wait for the page to be loaded
     Then I should see 0 "#new-notifications-container .notification-container"
-    And I should see 1 "#error.no-notifications-placeholder"
+    And I should see 1 ".no-notifications-placeholder"
     And the element "notifications-summary" should not exist
     And I should not see "new Notification"
 

@@ -49,16 +49,6 @@ services:
     arguments:
       - '@token_generator.inner'
 
-  # ======== Overwriting the oauth service
-
-  oauth_service.inner:
-    class: App\Catrobat\Services\OAuthService
-
-  App\Catrobat\Services\OAuthService:
-    class: App\Catrobat\Services\TestEnv\FakeOAuthService
-    arguments:
-      - '@oauth_service.inner'
-
   # ======== Overwriting the statistics service
 
   statistics.inner:

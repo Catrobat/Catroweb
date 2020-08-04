@@ -45,6 +45,7 @@ Feature: As a visitor I want to be able to download projects
 
   @disabled
   Scenario: Clicking the download button should deactivate the download button until download is finished
+    # Disabled due to its flakiness
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     When I click "#url-download-small"
