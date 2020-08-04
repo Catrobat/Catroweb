@@ -39,6 +39,7 @@ services:
       #
       #
       - ./../config:/var/www/catroweb/config:cached
+      - ./../migrations:/var/www/catroweb/migrations:cached
       - ./../docker:/var/www/catroweb/docker:cached
       #
       # public: contains mainly generated files - no need to pollute the host with such files
