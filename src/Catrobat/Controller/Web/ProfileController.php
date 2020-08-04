@@ -64,7 +64,7 @@ class ProfileController extends AbstractController
 
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     if ($my_profile)
@@ -118,7 +118,7 @@ class ProfileController extends AbstractController
 
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $country = $request->request->get('country');
@@ -152,7 +152,7 @@ class ProfileController extends AbstractController
     $user = $this->getUser();
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $old_password = $request->request->get('oldPassword');
@@ -210,7 +210,7 @@ class ProfileController extends AbstractController
     $user = $this->getUser();
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $firstMail = $request->request->get('firstEmail');
@@ -285,7 +285,7 @@ class ProfileController extends AbstractController
     $user = $this->getUser();
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $username = $request->request->get('username');
@@ -330,7 +330,7 @@ class ProfileController extends AbstractController
     $user = $this->getUser();
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $image_base64 = $request->request->get('image');
@@ -363,7 +363,7 @@ class ProfileController extends AbstractController
 
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $user_comments = $comment_repository->getCommentsWrittenByUser($user);
@@ -387,7 +387,7 @@ class ProfileController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     if ('0' === $id || $id === $user->getId())
@@ -415,7 +415,7 @@ class ProfileController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     if ('0' === $id)

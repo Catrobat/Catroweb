@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
+use App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;

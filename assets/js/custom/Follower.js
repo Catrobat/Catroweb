@@ -82,7 +82,7 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
   function handleError (xhr, $buttons) {
     if (xhr.status === 401) {
       // a user must be logged in to (un)follow someone
-      window.location.assign('fos_user_security_login')
+      window.location.assign('login')
       return
     }
     if (xhr.status === 422) {

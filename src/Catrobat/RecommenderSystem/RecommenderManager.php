@@ -84,7 +84,7 @@ class RecommenderManager
    *   m ... total number of liked programs
    *
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
-   * @time_complexity: O(n^2 * m)
+   * time_complexity: O(n^2 * m)
    */
   public function computeUserLikeSimilarities(?ProgressBar $progress_bar = null): void
   {
@@ -467,7 +467,7 @@ class RecommenderManager
    *   m ... total number of remixed programs
    *
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
-   * @time_complexity: O(n^2 * m)
+   * time_complexity: O(n^2 * m)
    *
    * @param ProgressBar $progress_bar
    *

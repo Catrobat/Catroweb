@@ -2,9 +2,9 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\Constants;
-use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
-use App\Catrobat\Services\CatrobatCodeParser\Scripts\ScriptFactory;
+use App\Catrobat\CatrobatCode\Parser\Constants;
+use App\Catrobat\CatrobatCode\Parser\Scripts\Script;
+use App\Catrobat\CatrobatCode\Parser\Scripts\ScriptFactory;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use SimpleXMLElement;

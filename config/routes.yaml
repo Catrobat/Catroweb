@@ -6,17 +6,13 @@ hwi_oauth_redirect:
   resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
   prefix:   /connect
 
-
-
 hwi_oauth_connect:
   resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
   prefix:   /connect
 
-
 hwi_oauth_login:
   resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
   prefix:   /login
-
 
 google_login:
   path: /login/check-google
@@ -26,6 +22,7 @@ facebook_login:
 
 apple_login:
   path: /login/check-apple
+
 # ===== Api =====
 open_api_server:
   prefix: /api
@@ -42,23 +39,5 @@ catrobat_web_index:
     flavor: "app"
 
 catroweb_flavored:
-  resource: "routing_flavored.yml"
+  resource: "routes_flavored.yml"
   prefix:   /{flavor}/
-
-# ===== FOS User Bundle =====
-fos_user:
-  resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-  prefix: /{flavor}
-
-fos_user_security_login:
-  path: /{flavor}/login
-  defaults:  { _controller: fos_user.security.controller:loginAction }
-
-#redirect the user after a successfully registration
-fos_user_registration_confirmed:
-  path: /{flavor}/user
-
-# ===== Logout =====
-sonata_user_admin_security_logout:
-  path: /{flavor}/logout
-  defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }

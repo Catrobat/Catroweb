@@ -2,7 +2,7 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\ParsedScene;
+use App\Catrobat\CatrobatCode\Parser\ParsedScene;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 

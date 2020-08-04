@@ -4,17 +4,11 @@ namespace App\Catrobat\Services;
 
 use Exception;
 
+/**
+ * @deprecated use JWT tokens
+ */
 class TokenGenerator
 {
-  /**
-   * TokenGenerator constructor.
-   *
-   * @deprecated use JWT tokens
-   */
-  public function __construct()
-  {
-  }
-
   /**
    * @throws Exception
    */

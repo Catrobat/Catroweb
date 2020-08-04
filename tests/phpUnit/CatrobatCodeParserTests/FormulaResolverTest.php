@@ -2,8 +2,8 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\Constants;
-use App\Catrobat\Services\CatrobatCodeParser\FormulaResolver;
+use App\Catrobat\CatrobatCode\Parser\Constants;
+use App\Catrobat\CatrobatCode\Parser\FormulaResolver;
 use PHPUnit\Framework\TestCase;
 
 /**

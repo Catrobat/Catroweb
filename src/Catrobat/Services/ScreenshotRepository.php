@@ -240,10 +240,10 @@ class ScreenshotRepository
   }
 
   /**
-   * @desc This function empties the tmp folder.
-   *       When this function is used while a user is
-   *       uploading a program you will kill the process.
-   *       So don't use it. It's for testing purposes.
+   * This function empties the tmp folder.
+   * When this function is used while a user is
+   * uploading a program you will kill the process.
+   * So don't use it. It's for testing purposes.
    */
   public function deleteTempFiles(): void
   {

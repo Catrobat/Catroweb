@@ -2,9 +2,9 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
-use App\Catrobat\Services\CatrobatCodeParser\ParsedSceneProgram;
-use App\Catrobat\Services\CatrobatCodeParser\ParsedSimpleProgram;
+use App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser;
+use App\Catrobat\CatrobatCode\Parser\ParsedSceneProgram;
+use App\Catrobat\CatrobatCode\Parser\ParsedSimpleProgram;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use PHPUnit\Framework\TestCase;
 

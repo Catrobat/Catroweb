@@ -115,10 +115,6 @@ services:
     class: App\Entity\RemixManager
     public: true
 
-  App\Entity\MigrationManager:
-    class: App\Entity\MigrationManager
-    public: true
-
   App\Catrobat\RemixGraph\RemixGraphManipulator:
     class: App\Catrobat\RemixGraph\RemixGraphManipulator
     public: true
@@ -142,6 +138,10 @@ services:
     tags: ['controller.service_arguments']
     public: true
 
+  App\Api_deprecated\Controller\:
+    resource: '../src/Api_deprecated/Controller'
+    tags: ['controller.service_arguments']
+    public: true
 
   # ====================================================================================================================
   #   Commands:
@@ -202,8 +202,8 @@ services:
     class: App\Catrobat\Services\TokenGenerator
     public: true
 
-  App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser:
-    class: App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser
+  App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser:
+    class: App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser
     public: true
 
   App\Catrobat\Services\StatisticsService:
@@ -216,14 +216,26 @@ services:
     class: App\Catrobat\Requests\AppRequest
     public: true
 
-  App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter:
-    class: App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter
+  App\Utils\ElapsedTimeStringFormatter:
+    class: App\Utils\ElapsedTimeStringFormatter
     public: true
 
   App\Catrobat\Services\Ci\JenkinsDispatcher:
     class: App\Catrobat\Services\Ci\JenkinsDispatcher
     arguments:
       - "%jenkins%"
+    public: true
+
+  App\Api_deprecated\Security\ApiTokenAuthenticator:
+    class: App\Api_deprecated\Security\ApiTokenAuthenticator
+    public: true
+
+  App\WebView\WebviewAuthenticator:
+    class: App\WebView\WebviewAuthenticator
+    public: true
+
+  App\WebView\WebviewJWTAuthenticator:
+    class: App\WebView\WebviewJWTAuthenticator
     public: true
 
   screenshot_repository:
@@ -274,12 +286,12 @@ services:
   #   User Authentication
   #
   user_authenticator:
-    class: App\Catrobat\Security\UserAuthenticator
+    class: App\Api_deprecated\Security\UserAuthenticator
     arguments:
       - "@security.user.provider.concrete.chain_provider"
       - "@security.authentication.manager"
     public: true
-  App\Catrobat\Security\UserAuthenticator: "@user_authenticator"
+  App\Api_deprecated\Security\UserAuthenticator: "@user_authenticator"
 
 
   # ====================================================================================================================
@@ -469,12 +481,12 @@ services:
 
   # ======== Views ========
   catrobat.view.uploadexception:
-    class: App\Catrobat\Listeners\View\UploadExceptionListener
+    class: App\Api_deprecated\Listeners\UploadExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
   catrobat.view.programlist:
-    class: App\Catrobat\Listeners\View\ProgramListSerializer
+    class: App\Api_deprecated\Listeners\ProgramListSerializer
     tags:
       - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
 

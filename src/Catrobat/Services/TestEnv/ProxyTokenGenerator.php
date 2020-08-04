@@ -15,7 +15,6 @@ class ProxyTokenGenerator extends TokenGenerator
 
   public function __construct(TokenGenerator $default_generator)
   {
-    parent::__construct();
     $this->generator = $default_generator;
   }
 

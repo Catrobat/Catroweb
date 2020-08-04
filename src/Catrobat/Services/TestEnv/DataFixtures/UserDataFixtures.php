@@ -42,7 +42,7 @@ class UserDataFixtures
     $user->setUsername($config['name'] ?? 'User'.UserDataFixtures::$number_of_users);
     $user->setEmail($config['email'] ?? $user->getUsername().'@catrobat.at');
     $user->setPlainPassword($config['password'] ?? '123456');
-    $user->setUploadToken($config['token'] ?? 'default_token');
+    $user->setUploadToken($config['token'] ?? 'default_token_'.UserDataFixtures::$number_of_users);
     $user->setSuperAdmin(isset($config['admin']) ? 'true' === $config['admin'] : false);
     $user->setAdditionalEmail($config['additional_email'] ?? '');
     $user->setEnabled(isset($config['enabled']) ? 'true' === $config['enabled'] : true);

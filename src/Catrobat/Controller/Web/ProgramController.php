@@ -6,7 +6,6 @@ use App\Catrobat\Events\CheckScratchProgramEvent;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\StatisticsService;
@@ -21,6 +20,7 @@ use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserComment;
 use App\Repository\CatroNotificationRepository;
+use App\Utils\ElapsedTimeStringFormatter;
 use App\Utils\ImageUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -313,7 +313,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     /** @var ArrayCollection $user_programs */
@@ -350,7 +350,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     /** @var ArrayCollection $user_programs */
@@ -403,7 +403,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $program = $this->program_manager->find($id);
@@ -452,7 +452,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $program = $this->program_manager->find($id);
@@ -495,7 +495,7 @@ class ProgramController extends AbstractController
 
     if (null === $user || $project->getUser() !== $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $image = $request->request->get('image');
