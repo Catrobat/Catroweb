@@ -2,9 +2,9 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\Bricks\Brick;
-use App\Catrobat\Services\CatrobatCodeParser\Bricks\BrickFactory;
-use App\Catrobat\Services\CatrobatCodeParser\Constants;
+use App\Catrobat\CatrobatCode\Parser\Bricks\Brick;
+use App\Catrobat\CatrobatCode\Parser\Bricks\BrickFactory;
+use App\Catrobat\CatrobatCode\Parser\Constants;
 use PHPUnit\Framework\TestCase;
 use SimpleXMLElement;
 

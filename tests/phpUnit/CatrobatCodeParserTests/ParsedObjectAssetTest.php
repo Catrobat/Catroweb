@@ -2,7 +2,7 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset;
+use App\Catrobat\CatrobatCode\Parser\ParsedObjectAsset;
 use PHPUnit\Framework\TestCase;
 
 /**

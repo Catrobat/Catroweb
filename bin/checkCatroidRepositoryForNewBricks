@@ -42,7 +42,7 @@ $all_catroid_bricks_and_scripts = array_unique(
 );
 asort($all_catroid_bricks_and_scripts);
 
-$path = './src/Catrobat/Services/CatrobatCodeParser/Constants.php';
+$path = './src/Catrobat/Services/Parser/Constants.php';
 $catroweb_data_set = file_get_contents($path);
 
 if (!$catroweb_data_set)
@@ -75,7 +75,7 @@ if (count($diff_result_not_in_web_but_app) > 0 || count($diff_result_not_in_app_
     '//'."\n".
     "// 1) Set the correct Brick/Scripts classes image to 'Constants::DEPRECATED_SCRIPT_IMG'"."\n".
     "//    The block should from now count to the 'other' category."."\n".
-    '//    E.g look at src/Catrobat/Services/CatrobatCodeParser/Scripts/CollisionScript.php'."\n".
+    '//    E.g look at src/Catrobat/Services/Parser/Scripts/CollisionScript.php'."\n".
     '//'."\n".
     '// 2) Finally add it in this test to the deprecated_bricks array'."\n".
     '//'."\n\n" : '';
@@ -86,17 +86,17 @@ if (count($diff_result_not_in_web_but_app) > 0 || count($diff_result_not_in_app_
     '//'."\n".
     '// For new bricks - Add the Brick/Script! '."\n".
     '//'."\n".
-    '// 1) Create necessary Constants in src/Catrobat/Services/CatrobatCodeParser/Constants.php'."\n".
+    '// 1) Create necessary Constants in src/Catrobat/Services/Parser/Constants.php'."\n".
     '//'."\n".
-    '// 2) Create the new brick/script class in src/Catrobat/Services/CatrobatCodeParser/(Scripts|Bricks)'."\n".
+    '// 2) Create the new brick/script class in src/Catrobat/Services/Parser/(Scripts|Bricks)'."\n".
     "//    Make sure to set the correct img Constant -> that's defining the category of this new block"."\n".
     '//'."\n".
     '// 3) If it is a NEW img_constant(=category) make sure to add the new case in'."\n".
-    '//    src/Catrobat/Services/CatrobatCodeParser/CodeStatistic.php  updateBrickStatistic(...)'."\n".
+    '//    src/Catrobat/Services/Parser/CodeStatistic.php  updateBrickStatistic(...)'."\n".
     '//'."\n".
     '// 4) Make sure to add the new case in'."\n".
-    '//    src/Catrobat/Services/CatrobatCodeParser/Bricks/BrickFactory.php generate(...) or'."\n".
-    '//    src/Catrobat/Services/CatrobatCodeParser/Scripts/ScriptFactory.php generate(...)'."\n".
+    '//    src/Catrobat/Services/Parser/Bricks/BrickFactory.php generate(...) or'."\n".
+    '//    src/Catrobat/Services/Parser/Scripts/ScriptFactory.php generate(...)'."\n".
     '//'."\n".
     '// 5) Write a test to check the code statistics of the new block script!!'."\n".
     '//    -> Create project with app (E.g. upload & download it)'."\n".

@@ -2,7 +2,7 @@
 
 namespace Tests\phpUnit\Catrobat\Services\Formatter;
 
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
+use App\Utils\ElapsedTimeStringFormatter;
 use App\Utils\TimeUtils;
 use DateTime;
 use Exception;

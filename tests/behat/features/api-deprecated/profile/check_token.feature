@@ -31,21 +31,14 @@ Feature: Checking a user's token validity
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "invalid"
     When I POST these parameters to "/app/api/checkToken/check.json"
-    Then I should get the json object:
-      """
-      {"statusCode":601,"answer":"Upload Token auth failed.", "preHeaderMessages":""}
-      """
-    And the response code should be "401"
+    And the response code should be "403"
 
   Scenario: Checking the token of a non-existing user should return an error
     Given I have a parameter "username" with value "doesnotexist"
     And I have a parameter "token" with value "doesnotmatter"
     When I POST these parameters to "/app/api/checkToken/check.json"
-    Then I should get the json object:
-      """
-      {"statusCode":601,"answer":"This username does not exist.", "preHeaderMessages":""}
-      """
+    And the response code should be "403"
+
+  Scenario: Sending no token must fail
+    When I POST these parameters to "/app/api/checkToken/check.json"
     And the response code should be "401"
-    
-  
-  

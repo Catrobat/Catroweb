@@ -90,15 +90,16 @@ security:
             provider: chain_provider
             pattern: ^.*?/api/checkToken/check.json
             stateless: true
-            simple_preauth:
-                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
-
+            guard:
+                authenticators:
+                    - App\Api_deprecated\Security\ApiTokenAuthenticator
         api_upload:
             provider: chain_provider
             pattern: ^.*?/api/upload/upload.json
             stateless: true
-            simple_preauth:
-                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
+            guard:
+                authenticators:
+                    - App\Api_deprecated\Security\ApiTokenAuthenticator
 
         debug:
             provider: chain_provider
@@ -124,9 +125,9 @@ security:
                 httponly: false
             guard:
                 authenticators:
-                    - App\Catrobat\Security\WebviewAuthenticator     # @deprecated API v1
-                    - App\Catrobat\Security\WebviewJWTAuthenticator
-                entry_point: App\Catrobat\Security\WebviewJWTAuthenticator
+                    - App\WebView\WebviewAuthenticator     # @deprecated v1
+                    - App\WebView\WebviewJWTAuthenticator
+                entry_point: App\WebView\WebviewJWTAuthenticator
             oauth:
                 remember_me: true
                 resource_owners:

@@ -44,7 +44,7 @@ class UserNotificationController extends AbstractController
     $user = $this->getUser();
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $catro_user_notifications = $notification_repo->findBy(['user' => $user], ['id' => 'DESC']);
@@ -268,7 +268,7 @@ class UserNotificationController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $remix_relation = $remix_manager->findCatrobatRelation($ancestor_id, $descendant_id);

@@ -2,8 +2,8 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\ParsedObject;
-use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectGroup;
+use App\Catrobat\CatrobatCode\Parser\ParsedObject;
+use App\Catrobat\CatrobatCode\Parser\ParsedObjectGroup;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 

@@ -3,7 +3,6 @@
 namespace App\Api;
 
 use App\Catrobat\Requests\AddProgramRequest;
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
 use App\Entity\FeaturedProgram;
@@ -13,6 +12,7 @@ use App\Entity\User;
 use App\Entity\UserManager;
 use App\Repository\FeaturedRepository;
 use App\Utils\APIHelper;
+use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;

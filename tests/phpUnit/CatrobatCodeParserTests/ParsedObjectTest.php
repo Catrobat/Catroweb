@@ -2,9 +2,9 @@
 
 namespace Tests\phpUnit\CatrobatCodeParserTests;
 
-use App\Catrobat\Services\CatrobatCodeParser\ParsedObject;
-use App\Catrobat\Services\CatrobatCodeParser\ParsedObjectAsset;
-use App\Catrobat\Services\CatrobatCodeParser\Scripts\Script;
+use App\Catrobat\CatrobatCode\Parser\ParsedObject;
+use App\Catrobat\CatrobatCode\Parser\ParsedObjectAsset;
+use App\Catrobat\CatrobatCode\Parser\Scripts\Script;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 

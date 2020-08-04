@@ -32,31 +32,22 @@ Feature: Upload a program
       {"statusCode":501,"answer":"POST-data not correct or missing!","preHeaderMessages":""}
       """
 
-  Scenario: trying to upload with an invalid user should result in an error
+  Scenario: trying to upload with an invalid user is okay, only token is used
     Given I have a parameter "username" with value "INVALID"
     And I have a parameter "token" with value "cccccccccc"
     When I POST these parameters to "/app/api/upload/upload.json"
-    Then I should get the json object:
-      """
-      {"statusCode":601,"answer":"This username does not exist.","preHeaderMessages":""}
-      """
+    Then the response code should be "200"
 
   Scenario: trying to upload with an invalid token should result in an error
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "INVALID"
     When I POST these parameters to "/app/api/upload/upload.json"
-    Then I should get the json object:
-      """
-      {"statusCode":601,"answer":"Upload Token auth failed.","preHeaderMessages":""}
-      """
+    Then the response code should be "403"
 
   Scenario: trying to upload with a missing token should result in an error
     Given I have a parameter "username" with value "Catrobat"
     When I POST these parameters to "/app/api/upload/upload.json"
-    Then I should get the json object:
-      """
-      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
-      """
+    Then the response code should be "401"
 
   Scenario: uploading the same project again should result in an update
     Given I am "Catrobat"

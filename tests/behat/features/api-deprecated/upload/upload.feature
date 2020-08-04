@@ -5,13 +5,13 @@ Feature: Upload a program to the website
 
     Given there are users:
       | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc |  1 |
-      | User1    | vwxyz    | aaaaaaaaaa |  2 |
+      | Catrobat | 12345    | cccccccccc | 1  |
+      | User1    | vwxyz    | aaaaaaaaaa | 2  |
 
   Scenario: Upload program
     Given the HTTP Request:
-      | Method | POST                         |
-      | Url    | /app/api/upload/upload.json  |
+      | Method | POST                        |
+      | Url    | /app/api/upload/upload.json |
     And the POST parameters:
       | Name         | Value                  |
       | username     | Catrobat               |
@@ -44,7 +44,6 @@ Feature: Upload a program to the website
           """
 
     Examples:
-      | problem              | errorcode | answer                                               |
-      | no authentication    | 601       | Authentication of device failed: invalid auth-token! |
-      | missing parameters   | 501       | POST-data not correct or missing!                    |
-      | invalid program file | 505       | invalid file                                         |
+      | problem              | errorcode | answer                            |
+      | missing parameters   | 501       | POST-data not correct or missing! |
+      | invalid program file | 505       | invalid file                      |

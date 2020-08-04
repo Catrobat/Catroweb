@@ -50,7 +50,7 @@ class FollowerController extends AbstractController
 
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $criteria = Criteria::create()

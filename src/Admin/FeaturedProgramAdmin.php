@@ -2,7 +2,7 @@
 
 namespace App\Admin;
 
-use App\Catrobat\Forms\FeaturedImageConstraint;
+use App\Admin\Forms\FeaturedImageConstraint;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
