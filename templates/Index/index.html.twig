@@ -58,18 +58,6 @@
       <div class="programs"></div>
     </div>
 
-    <div id="recommended" style="display:none">
-      <h2>{{ "programs.recommended"|trans({}, "catroweb") }}
-        <span id="help-button" class="material-icons mdc-icon-button"
-           data-toggle="tooltip" title="Help"
-           data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-           data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
-          help_outline
-        </span>
-      </h2>
-      <div class="programs"></div>
-    </div>
-
     <div id="mostDownloaded" style="display:none">
       <h2>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
@@ -80,13 +68,27 @@
       <div class="programs"></div>
     </div>
 
+  {% if theme() != 'embroidery' %}
     <div id="scratchRemixes" style="display:none">
       <h2>{{ "programs.scratchremixes"|trans({}, "catroweb") }}</h2>
       <div class="programs"></div>
     </div>
+  {% endif %}
 
     <div id="random" style="display:none">
       <h2>{{ "programs.random"|trans({}, "catroweb") }}</h2>
+      <div class="programs"></div>
+    </div>
+
+    <div id="recommended" style="display:none">
+      <h2>{{ "programs.recommended"|trans({}, "catroweb") }}
+        <span id="help-button" class="material-icons mdc-icon-button"
+              data-toggle="tooltip" title="Help"
+              data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
+              data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
+          help_outline
+        </span>
+      </h2>
       <div class="programs"></div>
     </div>
 

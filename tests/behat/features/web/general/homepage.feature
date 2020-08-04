@@ -75,8 +75,8 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     Then I should see the welcome section
     And I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
-    And I should see "Get it on Google Play"
-    And I should see "Get it on IOS"
+    And I should see "Google Play"
+    And I should see "App Store"
 
   Scenario: Cant see the Welcome Section when logged in
     Given I log in as "Catrobat"
