@@ -15,7 +15,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Services\ProgramFileRepository
  */
 class ProgramFileRepositoryTest extends TestCase
 {

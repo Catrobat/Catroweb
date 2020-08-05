@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Services\AsyncHttpClient
  */
 class AsyncHttpClientTest extends TestCase
 {

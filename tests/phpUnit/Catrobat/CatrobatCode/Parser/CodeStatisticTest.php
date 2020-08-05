@@ -9,7 +9,7 @@ use SimpleXMLElement;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\CatrobatCode\Parser\CodeStatistic
  */
 class CodeStatisticTest extends TestCase
 {

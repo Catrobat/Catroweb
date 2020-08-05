@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\CatrobatCode\Parser\ParsedObjectsContainer
  */
 class ParsedObjectsContainerTest extends TestCase
 {
@@ -90,7 +90,7 @@ class ParsedObjectsContainerTest extends TestCase
     $this->expectExceptionMessage(Exception::class);
 
     $xml_properties = simplexml_load_file(
-      __DIR__.'/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
+        __DIR__.'/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
     );
     Assert::assertNotFalse($xml_properties);
 

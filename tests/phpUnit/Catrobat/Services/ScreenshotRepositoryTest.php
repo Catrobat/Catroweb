@@ -13,7 +13,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Services\ScreenshotRepository
  */
 class ScreenshotRepositoryTest extends TestCase
 {

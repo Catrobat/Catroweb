@@ -11,7 +11,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Listeners\VersionValidator
  */
 class VersionValidatorTest extends TestCase
 {

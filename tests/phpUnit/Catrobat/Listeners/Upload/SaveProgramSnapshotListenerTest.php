@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\Listeners\Upload\SaveProgramSnapshotListener
  */
 class SaveProgramSnapshotListenerTest extends TestCase
 {

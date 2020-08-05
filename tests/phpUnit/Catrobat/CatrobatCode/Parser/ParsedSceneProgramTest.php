@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\CatrobatCode\Parser\ParsedSceneProgram
  */
 class ParsedSceneProgramTest extends TestCase
 {
