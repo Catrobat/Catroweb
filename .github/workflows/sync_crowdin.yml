@@ -6,10 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Only should run on the main repo.
-  if: github.repository == 'Catrobat/Catroweb'
-
   synchronize-with-crowdin:
+    name: Synchronize Crowdin Translations
+
+    # Only should run on the main repo.
+    if: github.repository == 'Catrobat/Catroweb'
+
     runs-on: ubuntu-latest
 
     steps:
