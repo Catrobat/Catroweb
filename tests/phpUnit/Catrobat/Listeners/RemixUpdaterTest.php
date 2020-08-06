@@ -21,7 +21,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Listeners\RemixUpdater
  */
 class RemixUpdaterTest extends TestCase
 {

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Utils\TimeUtils
  */
 class TimeUtilsTest extends TestCase
 {

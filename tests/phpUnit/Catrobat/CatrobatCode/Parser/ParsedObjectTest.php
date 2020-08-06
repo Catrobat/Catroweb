@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\CatrobatCode\Parser\ParsedObject
  */
 class ParsedObjectTest extends TestCase
 {

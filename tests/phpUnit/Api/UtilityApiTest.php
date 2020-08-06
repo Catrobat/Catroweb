@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \UtilityApi
+ * @covers \App\Api\UtilityApi
  *
  * @internal
  */

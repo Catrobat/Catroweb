@@ -13,7 +13,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Services\CatrobatFileExtractor
  */
 class CatrobatFileExtractorTest extends TestCase
 {

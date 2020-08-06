@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Entity\UserManager
  */
 class UserManagerTest extends TestCase
 {

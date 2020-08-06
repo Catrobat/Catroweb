@@ -38,7 +38,7 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Entity\ProgramManager
  */
 class ProgramManagerTest extends TestCase
 {

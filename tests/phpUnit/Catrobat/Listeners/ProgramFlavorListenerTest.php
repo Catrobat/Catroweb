@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Listeners\ProgramFlavorListener
  */
 class ProgramFlavorListenerTest extends TestCase
 {

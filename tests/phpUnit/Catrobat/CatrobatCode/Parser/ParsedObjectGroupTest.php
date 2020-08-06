@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\CatrobatCode\Parser\ParsedObjectGroup
  */
 class ParsedObjectGroupTest extends TestCase
 {

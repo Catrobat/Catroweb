@@ -14,7 +14,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Services\ExtractedCatrobatFile
  */
 class ExtractedCatrobatFileTest extends TestCase
 {

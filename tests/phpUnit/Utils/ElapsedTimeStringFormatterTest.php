@@ -12,7 +12,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Utils\ElapsedTimeStringFormatter
  */
 class ElapsedTimeStringFormatterTest extends TestCase
 {

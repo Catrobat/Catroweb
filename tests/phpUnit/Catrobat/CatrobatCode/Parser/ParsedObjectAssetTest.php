@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\CatrobatCode\Parser\ParsedObjectAsset
  */
 class ParsedObjectAssetTest extends TestCase
 {

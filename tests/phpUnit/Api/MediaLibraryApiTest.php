@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * @covers \MediaLibraryApi
+ * @covers \App\Api\MediaLibraryApi
  *
  * @internal
  */

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser
  */
 class CatrobatCodeParserTest extends TestCase
 {
@@ -47,7 +47,7 @@ class CatrobatCodeParserTest extends TestCase
   public function mustReturnParsedSimpleProgramIfNoScenes(): void
   {
     $extracted_catrobat_program = new ExtractedCatrobatFile(__DIR__
-      .'/Resources/ValidPrograms/SimpleProgram/', '', '');
+        .'/Resources/ValidPrograms/SimpleProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = ParsedSimpleProgram::class;
 
@@ -60,7 +60,7 @@ class CatrobatCodeParserTest extends TestCase
   public function mustReturnParsedSceneProgramIfScenes(): void
   {
     $extracted_catrobat_program = new ExtractedCatrobatFile(__DIR__
-      .'/Resources/ValidPrograms/SceneProgram/', '', '');
+        .'/Resources/ValidPrograms/SceneProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = ParsedSceneProgram::class;
 

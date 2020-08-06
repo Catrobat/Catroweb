@@ -27,7 +27,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Entity\RemixManager
  */
 class RemixManagerTest extends TestCase
 {
