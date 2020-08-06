@@ -14,6 +14,7 @@
       <div class="flex-shrink help-video-container">
         {{ include('help/youteHelpVideo.html.twig') }}
       </div>
+
       <div class="flex-no-shrink help-download-container">
         <a target="_blank" href="{{ google_play_url }}">
           <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
@@ -37,7 +38,6 @@
           <div class="catro-card help-card primary discord" style="visibility: hidden">
             {#   show nothing for now   #}
           </div>
-
         {% elseif theme() == 'embroidery' %}
             <a target="_blank" href="https://www.instagram.com/code_n_stitch/">
               <div class="primary help-card d-flex align-items-center" style="flex-direction: column; justify-content: center;">
