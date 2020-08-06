@@ -36,6 +36,8 @@ more: 'mehr'
 less: 'weniger'
 show-more: 'Mehr'
 show-less: 'Weniger'
+more-information: 'Mehr Information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'Um das Beispielprojekt herunterzuladen klicke %link_start% hier %link_end%.'
 registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Willkommen bei Catrobat's %theme%
     subtitle: Erstelle Animationen, Spiele und mehr...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Lade die App herunter
     statistics: Mehr Statistiken
   featured: Empfohlen
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Link in Zwischenablage kopieren
   reactionsText: Gefällt mir
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
@@ -566,11 +570,6 @@ help:
     description6: |
       Dieses Tutorial zeigt dir wie du vertikal bewegliche Hintergründe erstellen kannst, indem du die Hintergrundgrafiken in einer bestimmten Art und Weise gleiten lässt. Weiters werden wir dir zeigen, wie du Charaktere durch Berührung nach vorne springen lassen kannst. Um das Spiel etwas schwieriger zu gestalten zeigen wir dir, wie du die Geschindigkeit deines Charkaters mit der Zeit drosseln kannst.
     download: "Projekt herunterladen"
-oauth:
-  username_header: Danke für deine Anmeldung bei Pocket Code!
-  username_chooser: "Bitte wähle einen Benutzernamen:"
-  username_hint: Der Benutzername sollte nicht dein richtiger Name sein.
-  usernameTaken: Benutzername bereits vergeben, bitte wähle einen anderen.
 search:
   dotdotdot: Suche...
   search: Suche

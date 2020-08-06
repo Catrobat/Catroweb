@@ -36,6 +36,8 @@ more: 'lebih'
 less: 'kurang'
 show-more: 'More information'
 show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Nama pengguna atau alamat email sudah di gunakan.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More statistics
   featured: Fitur
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'
@@ -560,14 +564,9 @@ help:
     title6: "Perlombaan Kelinci"
     subtitle6: "Buat latar belakang bergerak"
     description6: |
-      Tutorial ini menunjukkan Anda bagaimana membuat latar belakang vertikal bergulir dengan menggerakkan gambar latar belakang dengan cara tertentu. Hal lain yang kami akan ajarkan pada Anda adalah membuat karakter melompat maju dengan menekan di atasnya. 
+      Tutorial ini menunjukkan Anda bagaimana membuat latar belakang vertikal bergulir dengan menggerakkan gambar latar belakang dengan cara tertentu. Hal lain yang kami akan ajarkan pada Anda adalah membuat karakter melompat maju dengan menekan di atasnya.
       Untuk membuat permainan sedikit lebih sulit kami akan menunjukkan kepada Anda bagaimana memperlambat kecepatan karakter Anda dari waktu ke waktu.
     download: "Download the project"
-oauth:
-  username_header: Terima kasih telah mendaftar pada Pocket Code!
-  username_chooser: "Silahkan pilih satu nama pengguna:"
-  username_hint: Nama pengguna tidak boleh nama asli Anda.
-  usernameTaken: Nama pengguna ini sudah ada. Harap pilih yang lain.
 search:
   dotdotdot: Cari...
   search: Cari
@@ -754,7 +753,7 @@ gamejam:
     header: waspadalah
     subheader: You can only submit your own projects
     text: |
-      Tapi mengapa tidak membuat punya Anda sendiri! 
+      Tapi mengapa tidak membuat punya Anda sendiri!
       Ambil bagian di %gamejamtag%
 tag-text: Label
 extenstion-text: Ekstensi

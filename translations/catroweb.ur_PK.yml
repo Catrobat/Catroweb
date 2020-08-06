@@ -36,6 +36,8 @@ more: 'مزید'
 less: 'کم'
 show-more: 'مزید معلومات'
 show-less: 'Less information'
+more-information: 'مزید معلومات'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: کہانیاں، کھیل اور مزید بنائیں ...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: پروگرام ڈاؤن لوڈ کریں
     statistics: مزید اعداد و شمار
   featured: نمایاں
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: ریمکسس
   showRemixGraph: 'Remix graph'
@@ -564,11 +568,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Download the project"
-oauth:
-  username_header: پاکٹ کوڈ میں سائن اَپ کے لئے آپ کا شکریہ!
-  username_chooser: "برائے مہربانی یوزر نیم منتخب کریں:"
-  username_hint: یوزر نیم آپکا اصلی نام نہیں ہونا چاہیے.
-  usernameTaken: صارف نام پہلے ہی لیا جا چکا ہے۔ برائے مہربانی کوئی اور منتخب کریں.
 search:
   dotdotdot: تلاش کریں...
   search: تلاش

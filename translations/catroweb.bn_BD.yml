@@ -36,6 +36,8 @@ more: 'আরও'
 less: 'কম'
 show-more: 'আরও দেখান'
 show-less: 'অল্প দেখান'
+more-information: 'আরো তথ্য'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'ব্যবহারকারীর নাম অথবা ইমেইল পাঠানোর ঠিকানা ইতিমধ্যে ব্যবহৃত।'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: আপনাকে স্বাগতম Catrobat's %theme%
     subtitle: গল্প, খেলা এবং আরও অনেক কিছু তৈরি করুন ...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: অ্যাপ্লিকেশন ডাউনলোড করুন
     statistics: আরও পরিসংখ্যান
   featured: বৈশিষ্ট্য
@@ -182,6 +185,7 @@ programs:
   linkTitle: যোগসূত্র
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: রিমিক্স
   showRemixGraph: 'রিমিক্স গ্রাফ প্রদর্শন করুন'
@@ -562,11 +566,6 @@ help:
       এই টিউটোরিয়ালটি আপনাকে দেখায় যে কীভাবে একটি নির্দিষ্ট উপায়ে ব্যাকগ্রাউন্ড গ্রাফিক্স গ্লাইড করে উল্লম্বভাবে স্ক্রোলিং ব্যাকগ্রাউন্ড তৈরি করতে হয়। আর একটি জিনিস যা আমরা আপনাকে শিখাব তা হ'ল চরিত্রটিতে আলতো চাপ দিয়ে এগিয়ে আসা।
       গেমটিকে আরও কঠিন করতে আমরা আপনাকে দেখাব কীভাবে সময়ের সাথে আপনার চরিত্রের গতি কমিয়ে আনা যায়।
     download: "Download the project"
-oauth:
-  username_header: পকেট কোড সাইন আপ করার জন্য আপনাকে ধন্যবাদ!
-  username_chooser: "অনুগ্রহ করে একটি ব্যবহারকারীর নাম নির্বাচন করুন।"
-  username_hint: ব্যবহারকারীর নামটি আপনার আসল নাম হওয়া উচিত নয়।
-  usernameTaken: ব্যবহারকারীর নাম ইতিমধ্যে নেওয়া হয়েছে, দয়া করে আলাদা একটি পছন্দ করুন।
 search:
   dotdotdot: অনুসন্ধান...
   search: অনুসন্ধান

@@ -36,6 +36,8 @@ more: 'više'
 less: 'manje'
 show-more: 'Prikaži još'
 show-less: 'Prikaži manjе'
+more-information: 'Više informacija'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'Da bi preuzeli primjer projekta pritisnite %link_start% ovde %link_end%.'
 registrationError: 'Korisničko ime ili e-mail se već koristi.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Dobrodošli u Catrobatovu %theme%
     subtitle: Kreirajte priče, igre i još mnogo toga...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Preuzmi app
     statistics: Više podataka
   featured: Izdvojeni
@@ -181,6 +184,7 @@ programs:
   linkTitle: Link
   link: Kopirajte vezu projekta u međuspremnik
   reactionsText: Sviđanja
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remiksi
   showRemixGraph: 'Pokaži Remix Graph'
@@ -568,11 +572,6 @@ help:
       Ovaj vodič vam pokazuje kako stvoriti vertikalno pomeranje pozadine klizanjem pozadinske grafike na određeni način. Još jedna stvar koju ćemo vas naučiti jeste da naterate lik da skoči napred tako što ćete ga pritiskati.
       Da biste malo otežali igru, pokazaćemo vam kako da vremenom usporite brzinu svog karaktera.
     download: "Preuzmite projekat"
-oauth:
-  username_header: Hvala što ste se prijavili na Pocket Code!
-  username_chooser: "Odaberi korisničko ime:"
-  username_hint: Korisničko ime ne bi trebalo da bude vaše pravo ime.
-  usernameTaken: Korisničko ime je već uzeto, izaberite drugo.
 search:
   dotdotdot: Traži...
   search: Pretraga

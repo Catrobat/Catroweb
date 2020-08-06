@@ -36,6 +36,8 @@ more: 'још'
 less: 'мање'
 show-more: 'Прикажи више'
 show-less: 'Прикажи мање'
+more-information: 'Више информација'
+less-information: 'Less information'
 ok: Ок
 clickToDownloadProgram: 'Да бисте преузели пример програма, кликните %link_start% овде %link_end%.'
 registrationError: 'Корисничко име или адреса е-поште је већ у употреби.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Добродошли у Catrobat %theme%
     subtitle: Креирајте приче, игре и још много тога...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Преузмите апликацију
     statistics: Више статистика
   featured: Истакнуто
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Реакција
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
@@ -564,11 +568,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Преузми пројекат"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Please choose a username:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Тражи...
   search: Search
