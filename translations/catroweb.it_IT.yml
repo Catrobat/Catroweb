@@ -36,6 +36,8 @@ more: 'altro'
 less: 'meno'
 show-more: 'Mostra di più'
 show-less: 'Mostra meno'
+more-information: 'Ulteriori informazioni'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'Per scaricare il progetto di esempio, fai click su %link_start% questo %link_end% link.'
 registrationError: 'Nome utente o indirizzo email già in uso.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Benvenuto su Catrobat %theme%
     subtitle: Crea storie, giochi e molto altro...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Scarica l'app
     statistics: Più statistiche
   featured: In evidenza
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Mi piace
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remix
   showRemixGraph: 'Visualizza il grafo dei Remix'
@@ -568,11 +572,6 @@ help:
       Questo tutorial mostra come creare uno sfondo che si sposta verticalmente, muovendo l'oggetto sfondo in un certo modo. Inoltre viene insegnato come far saltare in alto un personaggio quando questo viene toccato.
       Per rendere il gioco un po' più difficile, viene mostrato come rallentare, man mano che passa il tempo, la velocità del personaggio.
     download: "Scarica il progetto"
-oauth:
-  username_header: Grazie per esserti registrato a Pocket Code!
-  username_chooser: "Scegli un nome utente:"
-  username_hint: Il nome utente non dovrebbe essere il tuo vero nome.
-  usernameTaken: Nome utente già in uso, scegli uno diverso.
 search:
   dotdotdot: Cerca...
   search: Cerca

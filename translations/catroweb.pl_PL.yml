@@ -36,6 +36,8 @@ more: 'więcej'
 less: 'mniej'
 show-more: 'Pokaż więcej'
 show-less: 'Pokaż mniej'
+more-information: 'Więcej informacji'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'Aby pobrać przykładowy projekt kliknij %link_start% tutaj %link_end%.'
 registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Witamy w Catrobat %theme%
     subtitle: Twórz opowiadania, gry i nie tylko...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Pobierz aplikację
     statistics: Więcej Statystyk
   featured: Polecane
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Skopiuj link do projektu do schowka
   reactionsText: Polubienia
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż wykres remiksów'
@@ -215,14 +219,14 @@ accountConfirmation:
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
   message: |
-    Drogi %username%. 
-    Żądasz zresetowania hasła do %appplication_url%, ponieważ zapomniałeś swojego hasła. Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna. 
+    Drogi %username%.
+    Żądasz zresetowania hasła do %appplication_url%, ponieważ zapomniałeś swojego hasła. Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna.
     Aby zresetować hasło i utworzyć nowe, proszę odwiedzić następującą stronę: %confirmationUrl%
 
-    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności %appplication_url%. 
+    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności %appplication_url%.
     Aby to zrobić, odwiedź następującą stronę: %loginPage%
-    Aby edytować swój profil, przejdź do tej strony: %profilePage% 
-    Pozdrawiamy! 
+    Aby edytować swój profil, przejdź do tej strony: %profilePage%
+    Pozdrawiamy!
     Twój zespół Catrobat.
   messageHtml: |
     <p>
@@ -563,11 +567,6 @@ help:
     description6: |
       Ten poradnik pokazuje, jak utworzyć przewijane w pionie tło przez przesuwanie grafiki tła w określony sposób. Inną rzeczą, której cię nauczymy jest, skakanie postaci do przodu, gdy naciskasz na nią. Aby gra była nieco trudniejsza, pokażemy jak spowolnić swoją postać w miarę upływu czasu.
     download: "Pobierz projekt"
-oauth:
-  username_header: Dziękujemy za rejestrację w Pocket Code!
-  username_chooser: "Proszę wybrać nazwę użytkownika:"
-  username_hint: Nazwa użytkownika nie powinna być Twoim prawdziwym nazwiskiem.
-  usernameTaken: Nazwa użytkownika zajęta, proszę wybrać inną.
 search:
   dotdotdot: Szukaj...
   search: Szukaj

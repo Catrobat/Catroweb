@@ -36,6 +36,8 @@ more: 'más'
 less: 'menos'
 show-more: 'More information'
 show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Nombre de usuario o dirección de email ya está en uso.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Bienvenido a %theme% de Catrobat
     subtitle: Crear historias, juegos y mucho más...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Descargue la app
     statistics: Más Estadísticas
   featured: Destacados
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remezclar
   showRemixGraph: 'Mostrar gráfico de remixes'
@@ -562,11 +566,6 @@ help:
     description6: |
       Este tutorial muestra cómo crear un fondo que se desliza verticalmente con un desenvolvimiento gráfico de cierta manera continuo. Otra cosa que te enseñaremos es a que el personaje salte hacia adelante pulsando sobre el. Para hacer el juego un poco más difícil te mostraremos cómo reducir la velocidad de tu personaje con el paso del tiempo.
     download: "Download the project"
-oauth:
-  username_header: Gracias por suscribirse a Pocket Code!
-  username_chooser: "Por favor, elija un nombre de usuario:"
-  username_hint: El nombre de usuario no debe ser su nombre real.
-  usernameTaken: El nombre de usuario ya existe, por favor, elija uno diferente.
 search:
   dotdotdot: Búscar...
   search: Búscar

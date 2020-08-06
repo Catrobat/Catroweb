@@ -36,6 +36,8 @@ more: 'mais'
 less: 'menos'
 show-more: 'Mostre mais'
 show-less: 'Mostre menos'
+more-information: 'Mais informações'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'Para baixar o projeto de exemplo clique %link_start% aqui %link_end%.'
 registrationError: 'Este nome de usuário ou endereço de e-mail já está em uso.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Bem-vindo ao %theme% da Catrobat
     subtitle: Crie histórias, jogos e muito mais...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Baixar o aplicativo
     statistics: Mais Estatísticas
   featured: Em Destaque
@@ -182,6 +185,7 @@ programs:
   linkTitle: Vincular
   link: Copiar link do projeto para a área de transferência
   reactionsText: Curtidas
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'
@@ -563,11 +567,6 @@ help:
       Este tutorial te mostra como criar um fundo que se move verticalmente, deslizando os gráficos do fundo. Outra coisa que te ensinaremos é a fazer a personagem saltar à frente quando tocada.
       Para tornar o jogo um pouco mais difícil, te mostraremos como diminuir a velocidade da personagem com o tempo.
     download: "Baixe o projeto"
-oauth:
-  username_header: Obrigado por registrar-se no Pocket Code!
-  username_chooser: "Por favor, escolha um nome de usuário:"
-  username_hint: O nome de usuário não deve ser seu nome verdadeiro.
-  usernameTaken: Nome de usuário já existente. Por favor, escolha um outro.
 search:
   dotdotdot: Pesquisar...
   search: Pesquisar

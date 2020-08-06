@@ -26,7 +26,7 @@ credits: Credits
 noCredits: No credits available.
 country: Country
 loginText: login
-privacyPolicy: Privacy Policy
+privacyPolicy: Құпиялық саясаты
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
@@ -36,6 +36,8 @@ more: 'more'
 less: 'less'
 show-more: 'More information'
 show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More Statistics
   featured: Featured
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
@@ -564,11 +568,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Download the project"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Please choose a username:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Search...
   search: Search
@@ -579,7 +578,7 @@ search:
 menu:
   profile: My Profile
   login: Login
-  logout: Logout
+  logout: Шығу
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
@@ -829,7 +828,7 @@ codeStatistics:
   dataBricks: 'Data'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: Тіл
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
@@ -869,7 +868,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Келесі
 previous: Previous
 help-cards:
   headings:
@@ -913,8 +912,8 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
-disagree: Disagree
+agree: Келісу
+disagree: Келіспеу
 profileLoader:
   noProfiles: There are currently no profiles.
 element: 'Element'
@@ -925,5 +924,5 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'Catrobat қауымдастығы'
 back_to_app: 'Exit community'

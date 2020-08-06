@@ -36,6 +36,8 @@ more: 'больше'
 less: 'меньше'
 show-more: 'Развернуть'
 show-less: 'Спрятать'
+more-information: 'Подробности'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'Чтобы скачать пример проекта, нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Добро пожаловать в %theme% от Catrobat
     subtitle: Создавайте истории, игры и многое другое...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Загрузите приложение
     statistics: Больше статистики
   featured: Популярное
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Лайки
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Показать перемешанный граф'
@@ -217,13 +221,13 @@ passwordRecovery:
   message: |
     Уважаемый %username%.
 
-    Мы получили запрос на восстановления вашего пароля на %appplication_url%. 
+    Мы получили запрос на восстановления вашего пароля на %appplication_url%.
 
     Для изменения пароля пройдите по ссылке: %confirmationUrl%
 
     Если вы не делали такой запрос, Вам не нужно предпринимать никаких действий. Срок действия ссылки закончится через 24 часа.
 
-    Вы можете использовать свой логин и пароль для доступа к %appplication_url% в любое время. 
+    Вы можете использовать свой логин и пароль для доступа к %appplication_url% в любое время.
     Для этого просто перейдите по ссылке: %loginPage%
     Если вы хотите обновить свой профиль, используйте ссылку %profilePage%
 
@@ -233,12 +237,12 @@ passwordRecovery:
     <p>
     Уважаемый %username%.<br>
     <br>
-    Мы получили запрос на восстановления вашего пароля на <a href=%appplication_url%>Pocket Code</a>. 
+    Мы получили запрос на восстановления вашего пароля на <a href=%appplication_url%>Pocket Code</a>.
     Если вы не делали такой запрос, Вам не нужно предпринимать никаких действий. Срок действия ссылки закончится через 24 часа.<br>
     <br>
     Для изменения пароля пройдите по <a href=%confirmationUrl%>ссылке.</a><br>
     <br>
-    Вы можете использовать свой логин и пароль для доступа к сообществу <a href=%appplication_url%>Pocket Code</a> в любое время. 
+    Вы можете использовать свой логин и пароль для доступа к сообществу <a href=%appplication_url%>Pocket Code</a> в любое время.
     <br>
     Для этого просто перейдите по <a href=%loginPage%>ссылке</a><br>
     Если вы хотите обновить свой профиль, используйте <a href=%profilePage%>ссылку</a>.<br>
@@ -570,11 +574,6 @@ help:
       Это руководство рассказывает, как создать вертикально прокручивающийся фон с помощью скользящей графики фона. Кроме того, здесь вы можете узнать, как заставить персонажа прыгать, когда вы нажимаете на него.
       Чтобы сделать игру немного сложнее, вы можете снизить скорость вашего персонажа.
     download: "Скачать проект"
-oauth:
-  username_header: Спасибо за регистрацию в Pocket Code!
-  username_chooser: "Пожалуйста, выберите имя пользователя:"
-  username_hint: Имя пользователя не должно совпадать с вашим настоящим именем.
-  usernameTaken: Пользователь с таким именем уже существует. Пожалуйста, выберите другое имя.
 search:
   dotdotdot: Поиск...
   search: Поиск

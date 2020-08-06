@@ -36,6 +36,8 @@ more: '更多'
 less: '更少'
 show-more: '显示更多'
 show-less: '隐藏显示'
+more-information: 'More information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: '要下载示例项目，请点击 %link_start% 这里 %link_end%。'
 registrationError: '用户名或邮箱已被占用。'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: 欢迎使用 Catrobatt %theme%
     subtitle: 书写你的故事，游戏以及更多东西...。
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: 下载该APP。
     statistics: 更多统计信息
   featured: 经典程序
@@ -182,6 +185,7 @@ programs:
   linkTitle: 链接
   link: 复制项目链接到剪贴板
   reactionsText: 我喜欢的
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
@@ -222,9 +226,9 @@ passwordRecovery:
 
 
     在任意时刻，您都可以使用您的用户名和密码登录%appplication_url% 社区。
-    登录入口: 
+    登录入口:
     %loginPage%
-    如果要更改您的的档案, 点这里: 
+    如果要更改您的的档案, 点这里:
     %profilePage%
 
     最好的祝福,
@@ -569,11 +573,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "下载项目"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "请选一个用户名:"
-  username_hint: 用户名不应该是你真名
-  usernameTaken: 用户名已经存在，请选择另一个名称。
 search:
   dotdotdot: 搜索。。。
   search: 搜索​​​​

@@ -36,6 +36,8 @@ more: 'יותר'
 less: 'פחות'
 show-more: 'More information'
 show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'שם המשתמש או האימייל שבחרת תפוסים.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More statistics
   featured: Featured
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
@@ -564,11 +568,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Download the project"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Please choose a username:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: חפש...
   search: חפש

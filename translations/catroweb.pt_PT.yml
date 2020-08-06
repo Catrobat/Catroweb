@@ -36,6 +36,8 @@ more: 'mais'
 less: 'menos'
 show-more: 'More information'
 show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'O nome de utilizador ou o endereço de correio electrónico já estão em uso.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More statistics
   featured: Em Destaque
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remisturas
   showRemixGraph: 'Mostrar Grafo de Remistura'
@@ -562,11 +566,6 @@ help:
     description6: |
       Este tutorial mostra como criar um fundo de rolagem vertical, deslizando os gráficos de fundo de uma certa maneira. Outra coisa que vai te ensinar é para fazer o personagem saltar para a frente batendo nele. Para tornar o jogo um pouco mais difícil, que mostraremos a você como diminuir a velocidade do seu personagem ao longo do tempo.
     download: "Download the project"
-oauth:
-  username_header: Obrigado por registrar-se no Pocket Code!
-  username_chooser: "Por favor, escolha um nome de utilizador:"
-  username_hint: O nome de utilizador não deve ser seu nome verdadeiro.
-  usernameTaken: Nome de utilizador já existente. Por favor, escolha um outro.
 search:
   dotdotdot: Pesquisar...
   search: Pesquisar

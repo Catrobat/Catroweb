@@ -36,6 +36,8 @@ more: 'daha fazla'
 less: 'daha az'
 show-more: 'More information'
 show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Kullanıcı adı yada e-posta zaten kullanımda.'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More statistics
   featured: Seçme
@@ -182,6 +185,7 @@ programs:
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Klipler
   showRemixGraph: 'Remix Grafiğini Göster'
@@ -563,11 +567,6 @@ help:
       Bu eğitim, arka plandaki grafikleri belirli bir yönde kaydırarak dikey olarak kaydırılmış bir arka plan oluşturmayı öğretir. Size öğreteceğimiz başka bir şey ise, karakterin üzerine tıklayarak nasıl ilerlediklerini göstermektir.
       Oyunu biraz zorlaştırmak için, karakterinizin zaman içindeki hızını nasıl yavaşlatacağınızı göstereceğiz.
     download: "Download the project"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Lütfen bir kullanıcı adı seçin:"
-  username_hint: Kullanıcı adınız gerçek adınız olmamalıdır.
-  usernameTaken: Kullanıcı adı zaten alınmış, lütfen başka bir tane seçin.
 search:
   dotdotdot: Ara...
   search: Ara

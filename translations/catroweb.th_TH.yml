@@ -36,6 +36,8 @@ more: 'เพิ่มเติม'
 less: 'ย่อ'
 show-more: 'ดูเพิ่มเติม'
 show-less: 'แสดงน้อยลง'
+more-information: 'More information'
+less-information: 'Less information'
 ok: ตกลง
 clickToDownloadProgram: 'ในการดาวน์โหลดตัวอย่างโครงการคลิก %link_start% ที่นี่ %link_end%'
 registrationError: 'ชื่อผู้ใช้หรืออีเมลถูกใช้ไปแล้ว'
@@ -94,6 +96,7 @@ programs:
   welcome:
     title: ยินดีต้อนรับสู่ %theme% ของ Catrobat
     subtitle: สร้างเรื่องราว เกม และอื่น ๆ...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: ดาวน์โหลดแอป
     statistics: สถิติเพิ่มเติม
   featured: รายการเด่น
@@ -103,11 +106,11 @@ programs:
   scratchremixes: เกาผสม
   noPrograms: ขณะนี้ไม่มีโครงการ
   deleteConfirmation: |+
-    คุณแน่ใจไหม? 
+    คุณแน่ใจไหม?
     คุณแน่ใจหรือไม่ว่าต้องการลบ
     "% programName%"
-    ไม่มีวิธีใดที่จะคืนค่าการกระทำของคุณ! 
-    ใช่ลบทิ้ง! 
+    ไม่มีวิธีใดที่จะคืนค่าการกระทำของคุณ!
+    ใช่ลบทิ้ง!
     ยกเลิก
   changeVisibility: |+
     คุณแน่ใจไหม?
@@ -184,6 +187,7 @@ programs:
   linkTitle: ลิงก์
   link: คัดลอกลิงค์โครงการไปยังคลิปบอร์ด
   reactionsText: ถูกใจ
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'
@@ -570,11 +574,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "ดาวน์โหลดโครงการ"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Please choose a username:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: ค้นหา...
   search: ค้นหา
