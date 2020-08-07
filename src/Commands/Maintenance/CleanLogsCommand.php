@@ -2,10 +2,12 @@
 
 namespace App\Commands\Maintenance;
 
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class CleanLogsCommand extends Command
 {
@@ -13,11 +15,13 @@ class CleanLogsCommand extends Command
   private OutputInterface $output;
 
   private ParameterBagInterface $parameter_bag;
+  private Filesystem $fs;
 
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->parameter_bag = $parameter_bag;
+    $this->fs = new Filesystem();
   }
 
   protected function configure(): void
@@ -32,42 +36,19 @@ class CleanLogsCommand extends Command
     $this->output = $output;
     $this->output->writeln('Deleting log files');
     $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
-    $errors = $this->deleteDirectory($log_dir, false);
-    if (0 === $errors)
+    try
     {
-      $this->output->writeln('Successfully deleted log files');
-
-      return 0;
-    }
-
-    $this->output->writeln('Could not delete all log files. Please check permissions.');
-
-    return 1;
-  }
-
-  private function deleteDirectory(string $dir_path, bool $deleteSelf): int
-  {
-    $errors = 0;
-    $objs = array_diff(scandir($dir_path), ['.', '..']);
-    foreach ($objs as $obj)
-    {
-      $file_path = $dir_path.DIRECTORY_SEPARATOR.$obj;
-      if (is_dir($file_path))
+      $objs = glob($log_dir.'/*');
+      foreach ($objs as $obj)
       {
-        $errors += $this->deleteDirectory($file_path, true);
-      }
-      elseif (true !== unlink($file_path))
-      {
-        ++$errors;
-        $this->output->writeln('Failed removing '.$file_path);
+        $this->fs->remove($obj);
       }
     }
-    if ($deleteSelf && true !== rmdir($dir_path))
+    catch (Exception $e)
     {
-      ++$errors;
-      $this->output->writeln('Failed removing directory '.$dir_path);
+      $output->writeln('Removing log files failed with code '.$e->getCode());
     }
 
-    return $errors;
+    return 0;
   }
 }

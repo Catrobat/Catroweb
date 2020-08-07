@@ -14,6 +14,9 @@ Feature: Admin Server Maintenance
     When I GET "/admin/maintain/list"
     Then the client response should contain "Delete APKs"
     And the client response should contain "Delete extracted files"
+    And the client response should contain "Delete log files"
+    And the client response should contain "Archive logs files"
+
 
   Scenario: As a valid admin I want to be able to remove the APKs through the backend
   which should result in deleting apk from disk and reset entity state
@@ -42,3 +45,4 @@ Feature: Admin Server Maintenance
     When I GET "/admin/maintain/extracted"
     Then the client response should contain "Extracted Catrobatfiles (0.00 B)"
     And program with id "1" should have no directory_hash
+
