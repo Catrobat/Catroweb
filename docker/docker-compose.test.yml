@@ -30,7 +30,7 @@ services:
     restart: on-failure
     volumes:
       - ./../tests/testdata/DataFixtures:/var/www/catroweb/tests/testdata/DataFixtures:ro
-    command: ["chromium-browser", "--headless", "--disable-gpu", "--no-sandbox", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222"]
+    command: ["chromium-browser", "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222", "--disable-extensions", "--disable-dev-shm-usage", "--disable-software-rasterizer", "--no-sandbox"]
     ports:
       - 9222
 

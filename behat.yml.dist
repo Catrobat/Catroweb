@@ -31,7 +31,7 @@ default:
                         download_behavior: allow
                         download_path: tests/testdata/UploadDownloadTemp
                         socket_timeout: 60
-                        dom_wait_timeout: 6000
+                        dom_wait_timeout: 10000
 
         DVDoug\Behat\CodeCoverage\Extension:
             filter:
@@ -42,26 +42,18 @@ default:
                 clover:
                     target: tests/testreports/coverage/behat/coverage.xml
 
-        emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
-            name: html
-            renderer: Twig
-            file_name: testreport
-            print_args: true
-            print_outp: true
-            loop_break: true
-
 
 # --------------------------------------------------------------------------------------------------
 # Register test suites here:
 #
-# Note: Also define them in the github action work flows. Else they will not be checked automatically.
+# Note: Also define them in the github action workflows. Else they will not be checked automatically.
 #
 #  The more suites the better.. why?
 #
 #   - Easier parallelization in the test system (github actions)
 #   - Less Chrome Exception due to a less polluted cache during a suites execution
 #
-#  Drawback the suite setup process (DB creation, .. ) is executed more often if ypu intend to run all suites at once
+#  Drawback the suite setup process (DB creation, .. ) is executed more often if you intend to run all suites at once
 #
 #
     suites:

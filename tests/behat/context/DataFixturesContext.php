@@ -50,7 +50,6 @@ class DataFixturesContext implements KernelAwareContext
   private array $users = [];
 
   /**
-   * @AfterFeature
    * @BeforeFeature
    */
   public static function resetElastic(): void
@@ -860,8 +859,7 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
-   * @Then the program download statistic should have a download timestamp, \
-   *       an anonymous user and the following statistics:
+   * @Then the program download statistic should have a download timestamp, an anonymous user and the following statistics:
    *
    * @throws Exception
    */
