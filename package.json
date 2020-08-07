@@ -53,7 +53,7 @@
     "ajv": "^6.12.3",
     "animate.css": "^4.1.0",
     "animatedmodal": "^1.0.0",
-    "bootstrap": "^4.5.1",
+    "bootstrap": "^4.5.2",
     "clipboard": "^2.0.6",
     "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
     "jquery": "^3.5.1",
