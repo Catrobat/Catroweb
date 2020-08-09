@@ -182,41 +182,6 @@
   }
 }
 
-#social-container {
-  display: table;
-  width: 100%;
-
-  li {
-    display: table-cell;
-    width: 20%; /* (100 / numItems)% */
-    text-align: center;
-    white-space: nowrap;
-  }
-
-}
-
-#social-container-footer {
-  margin: auto;
-  font-size: 1px; /* necessary for G+ button alignment */
-  text-align: center;
-  vertical-align: middle;
-
-  #social-like {
-    margin-left: 15px;
-  }
-}
-
-#share {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.img-share {
-  width: 40px;
-  height: 40px;
-  margin-left: 5px;
-}
-
 table td:nth-child(1) {
   width: 45px;
 }
@@ -250,11 +215,6 @@ table td:nth-child(1) {
   min-width: 50%;
   min-height: 10px !important;
   margin-top: 10px;
-}
-
-#post-button {
-  float: right;
-  margin-top: 0.5em;
 }
 
 #program-comments {
@@ -304,12 +264,6 @@ table td:nth-child(1) {
   }
 }
 
-.show-more {
-  color: $primary;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 .usr-name {
   display: block;
   padding-right: 1em;
@@ -321,62 +275,6 @@ input[type="number"] {
   box-sizing: border-box;
   -moz-appearance: textfield;
 }
-
-.download-button.btn {
-  min-height: 64px;
-  line-height: normal;
-}
-
-#comment-successfully-reported {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  display: none;
-  width: 320px;
-  height: 150px;
-  padding-top: 10px;
-  font-size: 15px;
-  text-align: center;
-  background-color: #05222a;
-  border: 3px solid $default-border-color;
-  border-radius: 10px;
-  transform: translate(-50%, -50%);
-}
-
-.delete-button {
-  display: inline-block;
-  float: left;
-  padding: 0 1em;
-  margin: 0;
-  font-family: inherit;
-  font-size: 0.8em;
-  background: none;
-}
-
-#show-more-button {
-  position: relative;
-  left: 50%;
-  text-align: center;
-  background: none;
-  border: none;
-  transform: translate(-50%, 0);
-}
-
-.report-button {
-  display: inline-block;
-  float: left;
-  padding: 0 1em;
-  margin: 0;
-  font-family: inherit;
-  font-size: 0.8em;
-  background: none;
-}
-
-.btn-jam img {
-  float: none;
-}
-
 .pc-startButton,
 .pc-startButton:active {
   position: absolute;
@@ -446,13 +344,6 @@ input[type="number"] {
         font-size: 100%;
       }
     }
-  }
-}
-
-@media screen and (max-width: 534px) {
-  .report-button {
-    padding-left: 0;
-    clear: left;
   }
 }
 
