@@ -16,10 +16,9 @@ Feature: As a visitor I want to be able to download projects
     Then the element "#url-download-small" should be visible
     And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
     And I click "#url-download-small"
+    And I wait 150 milliseconds
     And the element "#share-snackbar" should not be visible
     And I should not see "Error occurred while downloading the project"
-
-
 
   Scenario: If download fails user should see popup and the file should not be downloaded
     When I am on "/app/project/1"
@@ -27,7 +26,9 @@ Feature: As a visitor I want to be able to download projects
     And download button is pointing to the non existing project
     Then the element "#url-download-small" should be visible
     And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
+    And the element "#share-snackbar" should not be visible
     And I click "#url-download-small"
+    And I wait 150 milliseconds
     Then the element "#share-snackbar" should be visible
     And I should see "Error occurred while downloading the project"
     When I am on "/app/project/2"
@@ -36,12 +37,9 @@ Feature: As a visitor I want to be able to download projects
     Then the element "#url-download-small" should be visible
     And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
     And I click "#url-download-small"
+    And I wait 150 milliseconds
     Then the element "#share-snackbar" should be visible
     And I should see "Error occurred while downloading the project"
-
-
-
-
 
   @disabled
   Scenario: Clicking the download button should deactivate the download button until download is finished

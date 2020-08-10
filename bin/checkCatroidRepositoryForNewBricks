@@ -42,7 +42,7 @@ $all_catroid_bricks_and_scripts = array_unique(
 );
 asort($all_catroid_bricks_and_scripts);
 
-$path = './src/Catrobat/Services/Parser/Constants.php';
+$path = './src/Catrobat/CatrobatCode/Parser/Constants.php';
 $catroweb_data_set = file_get_contents($path);
 
 if (!$catroweb_data_set)
