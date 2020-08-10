@@ -4,8 +4,10 @@ namespace App\Admin;
 
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
+use App\Entity\Flavor;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Repository\FlavorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -13,7 +15,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -45,6 +46,8 @@ class ExampleProgramAdmin extends AbstractAdmin
 
   private ProgramManager $program_manager;
 
+  private FlavorRepository $flavor_repository;
+
   /**
    * ExampleProgramAdmin constructor.
    *
@@ -54,13 +57,14 @@ class ExampleProgramAdmin extends AbstractAdmin
    */
   public function __construct($code, $class, $baseControllerName, EntityManagerInterface $entity_manager,
                               ParameterBagInterface $parameter_bag, ImageRepository $example_image_repository,
-                              ProgramManager $program_manager)
+                              ProgramManager $program_manager, FlavorRepository $flavor_repository)
   {
     parent::__construct($code, $class, $baseControllerName);
     $this->entity_manager = $entity_manager;
     $this->parameter_bag = $parameter_bag;
     $this->example_image_repository = $example_image_repository;
     $this->program_manager = $program_manager;
+    $this->flavor_repository = $flavor_repository;
   }
 
   /**
@@ -95,7 +99,6 @@ class ExampleProgramAdmin extends AbstractAdmin
 
     $example_program->old_image_type = $example_program->getImageType();
     $this->checkProgramID($example_program);
-    $this->checkFlavor();
   }
 
   /**
@@ -104,7 +107,6 @@ class ExampleProgramAdmin extends AbstractAdmin
   public function prePersist($object): void
   {
     $this->checkProgramID($object);
-    $this->checkFlavor();
   }
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
@@ -150,12 +152,7 @@ class ExampleProgramAdmin extends AbstractAdmin
     $formMapper
       ->add('file', FileType::class, $file_options)
       ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
-      ->add('flavor', ChoiceFieldMaskType::class, [
-        'choices' => [
-          'Arduino' => 'arduino',
-          'Embroidery' => 'embroidery',
-        ],
-      ])
+      ->add('flavor', null, ['class' => Flavor::class, 'choices' => $this->getFlavors(), 'required' => true])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
         'help' => 'Toggle for iOS example programs api call.', ])
@@ -189,8 +186,8 @@ class ExampleProgramAdmin extends AbstractAdmin
       ->add('Example Image', 'string', ['template' => 'Admin/example_image.html.twig'])
       ->add('program', EntityType::class, [
         'class' => Program::class,
-        'route' => ['name' => 'show'],
         'admin_code' => 'catrowebadmin.block.programs.all',
+        'editable' => false,
       ])
       ->add('flavor', 'string')
       ->add('priority', 'integer')
@@ -224,20 +221,8 @@ class ExampleProgramAdmin extends AbstractAdmin
     }
   }
 
-  private function checkFlavor(): void
+  private function getFlavors(): array
   {
-    $flavor = $this->getForm()->get('flavor')->getData();
-
-    if (!$flavor)
-    {
-      return; // There was no required flavor form field in this Action, so no check is needed!
-    }
-
-    $flavor_options = $this->parameter_bag->get('themes');
-
-    if (!in_array($flavor, $flavor_options, true))
-    {
-      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
-    }
+    return $this->flavor_repository->getFlavorsByNames(['arduino', 'embroidery']);
   }
 }

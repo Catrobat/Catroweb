@@ -428,10 +428,18 @@ trait SymfonySupport
       $featured_program->setProgram($program);
     }
 
+    /* @var Flavor $flavor */
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    if (null == $flavor)
+    {
+      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $flavor = $this->insertFlavor($new_flavor);
+    }
+    $featured_program->setFlavor($flavor);
+
     $featured_program->setUrl($config['url'] ?? null);
     $featured_program->setImageType($config['imagetype'] ?? 'jpg');
     $featured_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
-    $featured_program->setFlavor($config['flavor'] ?? 'pocketcode');
     $featured_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
     $featured_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 
@@ -460,10 +468,18 @@ trait SymfonySupport
       $example_program->setProgram($program);
     }
 
+    /* @var Flavor $flavor */
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    if (null == $flavor)
+    {
+      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $flavor = $this->insertFlavor($new_flavor);
+    }
+    $example_program->setFlavor($flavor);
+
     $example_program->setUrl($config['url'] ?? null);
     $example_program->setImageType($config['imagetype'] ?? 'jpg');
     $example_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
-    $example_program->setFlavor($config['flavor'] ?? 'pocketcode');
     $example_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
     $example_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 

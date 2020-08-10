@@ -319,6 +319,27 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I select flavor "([^"]*)" for example program/
+   * @Then /^I select flavor "([^"]*)" for example project/
+   *
+   * @param mixed $arg1
+   */
+  public function iSelectFlavorForExampleProgram($arg1): void
+  {
+    $this->getSession()->getPage()->find('css', '.select2-container')->click();
+
+    $flavors = $this->getSession()->getPage()->findAll('css', '.select2-results li');
+    foreach ($flavors as $flavor)
+    {
+      if ($flavor->getText() == $arg1)
+      {
+        $flavor->click();
+        break;
+      }
+    }
+  }
+
+  /**
    * Checks whether the browser downloaded a file and stored it into the default download directory.
    * The downloaded file gets deleted after the check.
    *

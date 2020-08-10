@@ -1,5 +1,5 @@
 @api @projects
-Feature: Fetured Projects
+Feature: Featured Projects
 
   Background:
     Given there are users:
@@ -31,7 +31,11 @@ Feature: Fetured Projects
       | 19 | project 19 | Catrobat | 40    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            | arduino    |
       | 20 | project 20 | Catrobat | 40    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            | arduino    |
       | 21 | project 21 | User1    | 40    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            | arduino    |
-
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 2  | luna       |
+      | 3  | arduino    |
     And following programs are featured:
       | name       | active | priority | ios_only | flavor     |
       | project 1  | 1      | 1        | no       | pocketcode |
