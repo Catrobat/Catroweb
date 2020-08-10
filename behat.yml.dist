@@ -3,13 +3,11 @@ default:
 # --------------------------------------------------------------------------------------------------
 # Output formatting:
 #                     - only shows the progress in command line and then creates a new html report
+#                     - default would be pretty
+#                     - switch with explicit parameter "-f pretty" when running behat
 #
     formatters:
-        pretty:   false
         progress: true
-        html:
-            output_path: "tests/testreports/behat/htmlTestReport"
-
 
 # --------------------------------------------------------------------------------------------------
 # Register all Extensions here:
@@ -37,10 +35,9 @@ default:
 
         DVDoug\Behat\CodeCoverage\Extension:
             filter:
-                whitelist:
-                    include:
-                        directories:
-                            'src': ~
+                include:
+                    directories:
+                        'src': ~
             reports:
                 clover:
                     target: tests/testreports/coverage/behat/coverage.xml

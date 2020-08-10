@@ -58,7 +58,7 @@
         "dmore/behat-chrome-extension": "^1.3",
         "dmore/chrome-mink-driver": "^2.7",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
-        "dvdoug/behat-code-coverage": "^4.1",
+        "dvdoug/behat-code-coverage": "^5.0",
         "emuse/behat-html-formatter": "@dev",
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan": "0.12.37",
