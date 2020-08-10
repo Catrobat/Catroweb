@@ -122,7 +122,7 @@ input:valid ~ label {
 
 /* form animasyon ================ */
 
-@-webkit-keyframes inputHighlighter {
+/*@-webkit-keyframes inputHighlighter {
   from {
     background: rgba($primary, 0.7);
   }
@@ -150,7 +150,7 @@ input:valid ~ label {
     width: 0;
     background: transparent;
   }
-}
+}*/
 
 .span-input {
   margin-left: 10px;
@@ -158,14 +158,13 @@ input:valid ~ label {
   top: -5px;
 }
 
-
-.social-button-effects {
+/*.social-button-effects {
   opacity: 0.9;
 }
 
 .social-button-effects:hover {
   opacity: 1.1;
-}
+}*/
 
 
 #_submit {
@@ -176,14 +175,14 @@ input:valid ~ label {
   min-height: 39px;
 }
 
-#login_links {
+/*#login_links {
   font-size: 16px;
   width: 318px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   margin-top: 12px;
-}
+}*/
 
 #seperator-text {
   top: 10px;
@@ -196,7 +195,7 @@ hr {
   border-color: $primary;
 }
 
-.hidden {
+/*.hidden {
   width: 0;
   height: 0;
   background: transparent;
@@ -212,7 +211,7 @@ hr {
 
 .align_start {
   text-align: start;
-}
+}*/
 
 .show-hide-password {
   display: flex;
