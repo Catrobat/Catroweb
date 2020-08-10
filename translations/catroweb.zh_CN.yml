@@ -36,7 +36,7 @@ more: '更多'
 less: '更少'
 show-more: '显示更多'
 show-less: '隐藏显示'
-more-information: 'More information'
+more-information: '详细信息'
 less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: '要下载示例项目，请点击 %link_start% 这里 %link_end%。'
