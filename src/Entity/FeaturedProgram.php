@@ -41,9 +41,9 @@ class FeaturedProgram
   protected bool $active = true;
 
   /**
-   * @ORM\Column(type="string", options={"default": "pocketcode"})
+   * @ORM\ManyToOne(targetEntity="Flavor", fetch="EAGER")
    */
-  protected string $flavor = 'pocketcode';
+  protected ?Flavor $flavor = null;
 
   /**
    * @ORM\Column(type="integer")
@@ -60,12 +60,12 @@ class FeaturedProgram
    */
   private ?Program $program = null;
 
-  public function getFlavor(): string
+  public function getFlavor(): ?Flavor
   {
     return $this->flavor;
   }
 
-  public function setFlavor(string $flavor): void
+  public function setFlavor(Flavor $flavor): void
   {
     $this->flavor = $flavor;
   }

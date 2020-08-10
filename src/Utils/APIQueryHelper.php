@@ -71,6 +71,25 @@ class APIQueryHelper
     return $query_builder;
   }
 
+  public static function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  {
+    if (null !== $flavor)
+    {
+      $where = 'fl.name = :name';
+      if ($include_pocketcode)
+      {
+        $where .= ' OR fl.name = \'pocketcode\'';
+      }
+      $query_builder
+        ->join($alias.'.flavor', 'fl')
+        ->andWhere($where)
+        ->setParameter('name', $flavor)
+      ;
+    }
+
+    return $query_builder;
+  }
+
   public static function addPlatformCondition(QueryBuilder $query_builder, ?string $platform = null): QueryBuilder
   {
     if (null !== $platform)

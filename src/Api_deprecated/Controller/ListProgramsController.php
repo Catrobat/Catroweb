@@ -250,7 +250,7 @@ class ListProgramsController extends AbstractController
       $programs = $this->program_manager->getRecentPrograms($flavor, $limit, $offset, $max_version);
     }
 
-    if ('user' === $sortBy)
+    if ('user' === $sortBy || 'example' === $sortBy)
     {
       $numbOfTotalProjects = count($programs);
     }

@@ -2294,12 +2294,9 @@ class CatrowebBrowserContext extends BrowserContext
     foreach ($user_stats as $user_stat)
     {
       $this->assertSession()->pageTextContains($user_stat['Id']);
-      $this->assertSession()->pageTextContains($user_stat['Example Image']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
       $this->assertSession()->pageTextContains($user_stat['Flavor']);
       $this->assertSession()->pageTextContains($user_stat['Priority']);
-      $this->assertSession()->pageTextContains($user_stat['iOS only']);
-      $this->assertSession()->pageTextContains($user_stat['Active']);
     }
   }
 

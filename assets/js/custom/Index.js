@@ -29,10 +29,11 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
       let url = baseUrl + '/api/projects/?category=' + category
 
       /* eslint-disable no-undef */
-      if (flavor !== undefined && flavor !== 'pocketcode') {
+      if (flavor !== 'pocketcode' || category === 'example') {
         // The pocketcode flavor must use projects from all flavors
         url += '&flavor=' + flavor
       }
+
       const list = new ProjectList(this, category, url, property)
       /* eslint-enable no-undef */
       $t.data('list', list)
