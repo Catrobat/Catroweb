@@ -53,7 +53,7 @@ jobs:
 
       # Only install modules if there is no cache hit
       - if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
 
       # Run the checks -> test script must be defined in package.json
       - run: npm run test
