@@ -23,6 +23,9 @@ on:
     branches:
       - master
   pull_request:
+    branches:
+      - '**'        # all branches
+      - '!master'   # excludes master to prevent double test runs during release prep.
 
 jobs:
 
