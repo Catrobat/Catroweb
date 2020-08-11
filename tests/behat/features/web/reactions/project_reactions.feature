@@ -334,15 +334,19 @@ Feature: Reactions to projects "likes"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I open the menu
-    Then the element "#project-navigation #notifications-dropdown-toggler .badge-pill" should be visible
-    And the "#project-navigation #notifications-dropdown-toggler .badge-pill" element should contain "1"
-    When I am on "/app/notifications/likes"
+    Then the element "#sidebar-notifications" should be visible
+    And the ".all-notifications" element should contain "1"
+    When I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    Then I should see 1 "#new-notifications-container .notification-container"
-    And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(1)" element should contain "OtherUser"
-    And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(2)" element should contain "Minions"
-    And the element "#notifications-summary" should be visible
-    And I should see "1 new Notification"
+    And the element "#all-notif" should be visible
+    And the element "#follow-notif" should be visible
+    And the element "#reaction-notif" should be visible
+    And the element "#comment-notif" should be visible
+    And the element "#remix-notif" should be visible
+    And the element "#catro-notification-1" should be visible
+    And the element "#catro-notification-2" should not exist
+    Then I should see text matching "OtherUser reacted to Minions."
+
 
   Scenario: I should be able to like multiple projects when I am logged in and it should notify the owner multiple times
     Given I log in as "OtherUser"
@@ -356,17 +360,19 @@ Feature: Reactions to projects "likes"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
     And I open the menu
-    Then the element "#project-navigation #notifications-dropdown-toggler .badge-pill" should be visible
-    And the "#project-navigation #notifications-dropdown-toggler .badge-pill" element should contain "2"
-    When I am on "/app/notifications/likes"
+    Then the element "#sidebar-notifications" should be visible
+    And the ".all-notifications" element should contain "2"
+    When I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    Then I should see 2 "#new-notifications-container .notification-container"
-    And the "#new-notifications-container > *:nth-child(1) .notification-body .card-text a:nth-child(1)" element should contain "OtherUser"
-    And the "#new-notifications-container > *:nth-child(1) .notification-body .card-text a:nth-child(2)" element should contain "Minimies"
-    And the "#new-notifications-container > *:nth-child(2) .notification-body .card-text a:nth-child(1)" element should contain "OtherUser"
-    And the "#new-notifications-container > *:nth-child(2) .notification-body .card-text a:nth-child(2)" element should contain "Minions"
-    And the element "#notifications-summary" should be visible
-    And I should see "2 new Notifications"
+    And the element "#all-notif" should be visible
+    And the element "#follow-notif" should be visible
+    And the element "#reaction-notif" should be visible
+    And the element "#comment-notif" should be visible
+    And the element "#remix-notif" should be visible
+    And the element "#catro-notification-1" should be visible
+    And the element "#catro-notification-2" should be visible
+    And I should see "OtherUser reacted to Minions."
+
 
   Scenario: The notification should disappear if I remove my reaction again
     Given I log in as "OtherUser"
@@ -375,13 +381,10 @@ Feature: Reactions to projects "likes"
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
-    And I am on "/app/notifications/likes"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    Then I should see 1 "#new-notifications-container .notification-container"
-    And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(1)" element should contain "OtherUser"
-    And the "#new-notifications-container > *:first-child .notification-body .card-text a:nth-child(2)" element should contain "Minions"
-    And the element "#notifications-summary" should be visible
-    And I should see "1 new Notification"
+    And the element "#catro-notification-1" should be visible
+    And I should see "OtherUser reacted to Minions."
     When I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
@@ -394,12 +397,10 @@ Feature: Reactions to projects "likes"
     And the element "#project-like-counter-small" should not be visible
     And the "#project-like-counter-small" element should contain "0"
     When I log in as "Catrobat"
-    And I am on "/app/notifications/likes"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    Then I should see 0 "#new-notifications-container .notification-container"
-    And I should see 1 ".no-notifications-placeholder"
-    And the element "notifications-summary" should not exist
-    And I should not see "new Notification"
+    And the element "#catro-notification-1" should not exist
+    Then I should see text matching "It looks like you don't have any notifications."
 
   Scenario: I can't notify myself
     Given I log in as "OtherUser"
@@ -411,8 +412,7 @@ Feature: Reactions to projects "likes"
     And I wait for the page to be loaded
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
-    And I am on "/app/notifications/allNotifications"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
     Then the element "#catro-notification-1" should not exist
-    And the element "notifications-summary" should not exist
-    And I should not see "new Notification"
+    And I should not see "OtherUser reacted to otherPro."

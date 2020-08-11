@@ -1,0 +1,9 @@
+{% block notification_leftAvatar %}{% endblock %}
+{% block notification_body %}{% endblock %}
+{% block dot %}
+  <div class="my-auto mark-as-read">
+    {% if notification.getSeen() is same as(false) %}
+      <span class="dot"></span>
+    {% endif %}
+  </div>
+{% endblock %}

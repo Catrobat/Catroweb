@@ -20,7 +20,7 @@ class BroadcastNotificationController extends CRUDController
   public function sendAction(Request $request, CatroNotificationService $notification_service, UserManager $user_manager): Response
   {
     $message = $request->get('Message');
-    $title = $request->get('Title');
+    $title = '';
 
     $notification_service->addNotifications($this->getNotifications($message, $title, $user_manager));
 

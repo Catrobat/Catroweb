@@ -1,22 +1,26 @@
-{% extends 'Notifications/NotificationTypes/baseNotification.html.twig' %}
-
-{% block notification_title%}
-  {{ 'catro-notifications.comment.title'|trans({'%program_name%' : notification.comment.program.name}, 'catroweb') }}
-{% endblock %}
+{% extends 'Notifications/NotificationTypes/notification_items.html.twig' %}
 
 {% block notification_leftAvatar %}
-  {{ include('Notifications/NotificationTypes/userAvatar.html.twig') }}
+  <div class="col-2 col-sm-1 my-auto">
+    <a href="{{ path('profile', { "id" : notification.comment.user.id }) }}">
+      <img class="img-fluid notification-avatar-round"
+           src="{% if notification.comment.user.avatar is not empty %}{{ notification.comment.user.avatar }}
+                          {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
+           alt="">
+    </a>
+  </div>
 {% endblock %}
 
-{% block notification_body%}
-  {{ 'catro-notifications.comment.message' | trans
-    (
-    {
-      '%user_link%': '<a href="'~path('profile', {'id': notification.comment.user.id})~'">'~notification.comment.username~'</a>',
-      '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
-    },
-    'catroweb'
-  )
-  |raw
-  }}
+{% block notification_body %}
+  <div class="col-8 col-sm-8 pl-3 my-auto">
+    {{ 'catro-notifications.comment.message' | trans
+      (
+      {
+        '%user_link%': '<a href="'~path('profile', {'id': notification.comment.user.id})~'">'~notification.comment.username~'</a>',
+        '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id})~'">'~notification.comment.program.name~'</a>'
+      },
+      'catroweb'
+    )
+    |raw }}
+  </div>
 {% endblock %}

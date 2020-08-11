@@ -1,87 +1,116 @@
+@use "@material/chips/mdc-chips";
 @import '../base/variables';
 @import '../base/mixins';
 @import 'theme_settings';
 
-
-
-.notification-container {
-  border-color: $primary;
+.notifications-header {
+  padding-left: 7px;
+}
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: $primary;
+  border-radius: 50%;
+  display: inline-flex;
+  position: relative;
 }
 
-.notification-container-old {
-  border-color: $primary;
+.mark-as-read {
+  @media screen and (max-width: 991px) {
+    margin-left: auto;
+    margin-right: 0;
+  }
+  @media screen and (max-width: 250px) {
+    padding-left: 20px;
+  }
+}
+
+.notif {
+  margin-left: 8px;
+}
+
+.avatar {
+  padding-left: 3px;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.6s;
+}
+
+.ripple:active {
+  background-color: #d9d9d9;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.broadcast-icon {
+  font-size: 2vw;
+  @media screen and (max-width: 2500px) {
+    font-size: 3vw;
+  }
+  @media screen and (max-width: 1600px) {
+    font-size: 4.7vw;
+  }
+  @media screen and (max-width: 1400px) {
+    font-size: 5.0vw;
+  }
+  @media screen and (max-width: 1300px) {
+    font-size: 5.3vw;
+  }
+  @media screen and (max-width: 1198px) {
+    font-size: 4.5vw;
+  }
+  @media screen and (max-width: 1100px) {
+    font-size: 5.7vw;
+  }
+  @media screen and (max-width: 991px) {
+    font-size: 4.0vw;
+  }
+  @media screen and (max-width: 836px) {
+    font-size: 4.5vw;
+  }
+  @media screen and (max-width: 767px) {
+    font-size: 5.5vw;
+  }
+  @media screen and (max-width: 680px) {
+    font-size: 6.0vw;
+  }
+  @media screen and (max-width: 575px) {
+    font-size: 15.0vw;
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 13.5vw;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12.0vw;
+  }
+
 }
 
 .notification-header {
-  background-color: $primary;
-  color: white;
+  width: 100%;
+}
+.notification-avatar-round {
+  border-radius: 100%;
 }
 
-.notification-header .btn.btn-primary {
-  border: none;
-  width: 50px;
-  position: absolute;
-  right: 0;
-  top: 0;
+.chip-selected {
+  background-color: #acacac;
+  color: rgba(0, 0, 0, 0.87);
+}
+.chip-default {
+  backgroundColor: #e0e0e0;
+  color: rgba(0,0,0,0.87);
 }
 
-.notification-avatar {
-  margin-left: 2%;
-  width: 6rem;
-  margin-right: 5%;
+.scroll-wrapper {
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 
-  @media screen and (max-width: 500px) {
-    margin-right: 10%;
+  .chip {
+    flex: 0 0 auto;
   }
-  @media screen and (max-width: 216px) {
-    margin-left: 25%;
-  }
-  @media screen and (max-width: 180px) {
-    margin-left: 2%;
-  }
-}
-
-.notification-body {
-  width: auto;
-  align-items: center;
-  justify-content: center;
-  white-space: initial;
-  vertical-align: middle;
-  @include force-word-break();
-
-  @media screen and (min-width: 1600px) {
-    max-width: 90%;
-  }
-  @media screen and (min-width: 1400px) {
-    max-width: 85%;
-  }
-  @media screen and (min-width: 1200px) {
-    max-width: 81%;
-  }
-  @media screen and (max-width: 1200px) {
-    max-width: 77%;
-  }
-  @media screen and (max-width: 990px) {
-    max-width: 40%;
-  }
-  @media screen and (max-width: 500px) {
-    max-width: 60%;
-  }
-  @media screen and (max-width: 400px) {
-    max-width: 50%;
-  }
-  @media screen and (max-width: 300px) {
-    max-width: 40%;
-  }
-  @media screen and (max-width: 216px) {
-    margin-left: 25%;
-  }
-  @media screen and (max-width: 180px) {
-    margin-left: 2%;
-  }
-}
-
-.notification-round {
-  border-radius: 50%;
-  border: 1px $primary;
 }

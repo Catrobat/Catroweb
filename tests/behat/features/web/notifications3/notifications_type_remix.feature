@@ -1,6 +1,7 @@
 @web @notifications @remix
 Feature: User gets notifications when somebody uploads a remix of his project
 
+
   Background:
     Given there are users:
       | id | name     |
@@ -21,68 +22,67 @@ Feature: User gets notifications when somebody uploads a remix of his project
     Given I have a project with "url" set to "/app/project/2"
     And user "Catrobat" uploads this generated program, API version 1
     And I log in as "Catrobat"
-    When I go to "/app/notifications/allNotifications"
+    When I go to "/app/user_notifications"
     And I wait for the page to be loaded
-    Then I should see "It looks like you dont have any notifications."
+    Then I should see "It looks like you don't have any notifications."
     Given I log in as "User"
-    When I go to "/app/notifications/allNotifications"
+    When I go to "/app/user_notifications"
     And I wait for the page to be loaded
-    Then I should see "You have 1 new Notification!"
+    Then I should see "Catrobat created a remix"
 
   Scenario: User should get remix notification
     Given I have a project with "url" set to "/app/project/1"
     When user "Drago" uploads this generated program, API version 1
     And I log in as "Catrobat"
-    And I am on "/app/notifications/allNotifications"
+    And I open the menu
+    Then the element "#sidebar-notifications" should be visible
+    And the ".all-notifications" element should contain "1"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    When I open the menu
-    Then the ".all-notifications-dropdown" element should contain "1"
-    And I should see "You have 1 new Notification!"
-    And I should see "New remix for project project 1!"
-    And I should see "User Drago remixed your project"
-    And I should see "You can see the remix on the following link test"
+    Then I should see "Drago created a remix"
+    And the element "#remix-notif" should be visible
+    And I click "#remix-notif"
+    And I wait for AJAX to finish
+    And I should see "Drago created a remix"
 
 
   Scenario: User should get remix notification every time somebody makes a remix of his project
     Given I have a project with "url" set to "/app/project/1"
     When user "Drago" uploads this generated program, API version 1
     When I log in as "Catrobat"
-    And I am on "/app/notifications/allNotifications"
+    And I open the menu
+    Then the element "#sidebar-notifications" should be visible
+    And the ".all-notifications" element should contain "1"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    When I open the menu
-    Then the ".all-notifications-dropdown" element should contain "1"
-    And I should see "You have 1 new Notification!"
-    And I should see "New remix for project project 1!"
-    And I should see "User Drago remixed your project"
-    And I should see "You can see the remix on the following link test"
+    And I should see "Drago created a remix"
     Given I have a project with "url" set to "/app/project/1"
     And user "User" uploads this generated program, API version 1
     And I log in as "Catrobat"
-    And I am on "/app/notifications/allNotifications"
+    And I open the menu
+    Then the element "#sidebar-notifications" should be visible
+    And the ".all-notifications" element should contain "1"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    When I open the menu
-    Then the ".all-notifications-dropdown" element should contain "2"
-    And I should see "You have 2 new Notifications!"
-    And I should see "New remix for project project 1!"
-    And I should see "User User remixed your project"
-    And I should see "You can see the remix on the following link test"
+    And I should see "User created a remix"
 
 
   Scenario: User should get remix notification for remix of any of his projects
     Given I have a project with "url" set to "/app/project/4"
     And user "User" uploads this generated program, API version 1
     When I log in as "Catrobat"
-    And I am on "/app/notifications/allNotifications"
-    And I wait for the page to be loaded
     And I open the menu
-    Then the ".all-notifications-dropdown" element should contain "1"
-    And I should see "New remix for project project 4!"
+    Then the element "#sidebar-notifications" should be visible
+    And the ".all-notifications" element should contain "1"
+    And I am on "/app/user_notifications"
+    And I wait for the page to be loaded
+    And I should see "User created a remix"
     Given I have a project with "url" set to "/app/project/3"
     And user "John" uploads this generated program, API version 1
     And I log in as "Catrobat"
-    And I am on "/app/notifications/allNotifications"
+    And I open the menu
+    Then the element "#sidebar-notifications" should be visible
+    And the ".all-notifications" element should contain "1"
+    And I am on "/app/user_notifications"
     And I wait for the page to be loaded
-    When I open the menu
-    Then the ".all-notifications-dropdown" element should contain "2"
-    And I should see "You have 2 new Notifications!"
-    And I should see "New remix for project project 3!"
+    And I should see "John created a remix"
