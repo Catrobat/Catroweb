@@ -18,6 +18,7 @@ Feature: User gets notifications for new followers, reactions, comments and othe
       | 11 | Brent    |
 
 
+
     And there are projects:
       | id | name      | owned by |
       | 1  | program 1 | Catrobat |
@@ -100,10 +101,10 @@ Feature: User gets notifications for new followers, reactions, comments and othe
 
   Scenario: If user goes to one of the Notifications subsections he should see
   just notifications of that type
-    Given there are "10" "like" notifications for program "program 3" from "Andrew"
-    And there are "20" "comment" notifications for program "program 3" from "Chris"
-    And there are "12" "remix" notifications for program "program 3" from "Chris"
-    And there are "5"+ notifications for "Sue"
+    Given there are "2" "like" notifications for program "program 3" from "Andrew"
+    And there are "4" "comment" notifications for program "program 3" from "Chris"
+    And there are "4" "remix" notifications for program "program 3" from "Chris"
+    And there are "2"+ notifications for "Sue"
     And there is a notification that "Catrobat" follows "Sue"
     And there is a notification that "Drago" follows "Sue"
     And I log in as "Sue"

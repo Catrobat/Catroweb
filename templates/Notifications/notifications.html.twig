@@ -66,83 +66,88 @@
   </div>
   <div class="tab-content mt-4">
     <div id="all" class="tab-pane fade show active" role="tabpanel">
-      <div id="no-notifications"
-           class="text-center mb-5 {{ allNotifications is empty ? 'd-block' : 'd-none' }}">
-        {{ "notificationsReadMessage"|trans({}, "catroweb") }}
-      </div>
       <div id="notifications" class="mb-5">
         {% for notification in allNotifications %}
           <div
               onclick="notification.handleNotificationInteract('{{ notification.id }}',
                   '{{ instance[notification.id] }}', '{{ notification.getSeen() }}', '{{ redirect[notification.id] }}')"
-              id="catro-notification-{{ notification.id }}" class="row my-3 no-gutters ripple notif">
+              id="catro-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
             {{ include(notification.getTwigTemplate) }}
           </div>
         {% endfor %}
       </div>
+      <div id="no-notifications"
+           class="text-center mb-5 {{ allNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-all">{{ "notificationsReadMessage"|trans({}, "catroweb") }}</span>
+      </div>
     </div>
     <div id="follow" class="tab-pane fade" role="tabpanel">
-      <div id="no-follow-notifications"
-           class="text-center mb-5 {{ followerNotifications is empty ? 'd-block' : 'd-none' }}">
-        {{ "catro-notifications.noFollowers"|trans({}, "catroweb") }}
-      </div>
       <div id="follow-notifications" class="mb-5">
         {% for notification in followerNotifications %}
           <div
               onclick="notification.handleNotificationInteract('{{ notification.id }}',
                   '{{ instance[notification.id] }}', '{{ notification.getSeen() }}', '{{ redirect[notification.id] }}')"
-              id="follow-notification-{{ notification.id }}" class="row my-3 no-gutters ripple notif">
+              id="follow-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
             {{ include(notification.getTwigTemplate) }}
           </div>
         {% endfor %}
       </div>
+      <div id="no-follow-notifications"
+           class="text-center mb-5 {{ followerNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-follow">{{ "catro-notifications.noFollowers"|trans({}, "catroweb") }}</span>
+      </div>
     </div>
     <div id="comment" class="tab-pane fade" role="tabpanel">
-      <div id="no-comment-notifications"
-           class="text-center mb-5 {{ commentNotifications is empty ? 'd-block' : 'd-none' }}">
-        {{ "catro-notifications.noComments"|trans({}, "catroweb") }}
-      </div>
       <div id="comment-notifications" class="mb-5">
         {% for notification in commentNotifications %}
           <div
               onclick="notification.handleNotificationInteract('{{ notification.id }}', 'comment',
                   '{{ notification.getSeen() }}', '{{ notification.comment.program.id }}')"
-              id="comment-notification-{{ notification.id }}" class="row my-3 no-gutters ripple notif">
+              id="comment-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
             {{ include(notification.getTwigTemplate) }}
           </div>
         {% endfor %}
       </div>
+      <div id="no-comment-notifications"
+           class="text-center mb-5 {{ commentNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-comment">{{ "catro-notifications.noComments"|trans({}, "catroweb") }}</span>
+      </div>
     </div>
     <div id="reaction" class="tab-pane fade" role="tabpanel">
-      <div id="no-reaction-notifications"
-           class="text-center mb-5 {{ reactionNotifications is empty ? 'd-block' : 'd-none' }}">
-        {{ "catro-notifications.noReactions"|trans({}, "catroweb") }}
-      </div>
       <div id="reaction-notifications" class="mb-5">
         {% for notification in reactionNotifications %}
           <div
               onclick="notification.handleNotificationInteract('{{ notification.id }}', 'reaction',
                   '{{ notification.getSeen() }}', '{{ notification.program.id }}')"
-              id="reaction-notification-{{ notification.id }}" class="row my-3 no-gutters ripple notif">
+              id="reaction-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
             {{ include(notification.getTwigTemplate) }}
           </div>
         {% endfor %}
       </div>
+      <div id="no-reaction-notifications"
+           class="text-center mb-5 {{ reactionNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-reaction">{{ "catro-notifications.noReactions"|trans({}, "catroweb") }}</span>
+      </div>
     </div>
     <div id="remix" class="tab-pane fade" role="tabpanel">
-      <div id="no-remix-notifications"
-           class="text-center mb-5 {{ remixNotifications is empty ? 'd-block' : 'd-none' }}">
-        {{ "catro-notifications.noRemixes"|trans({}, "catroweb") }}
-      </div>
       <div id="remix-notifications" class="mb-5">
         {% for notification in remixNotifications %}
           <div
               onclick="notification.handleNotificationInteract('{{ notification.id }}', 'remix',
                   '{{ notification.getSeen() }}', '{{ notification.getRemixProgram.id }}')"
-              id="remix-notification-{{ notification.id }}" class="row my-3 no-gutters ripple notif">
+              id="remix-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
             {{ include(notification.getTwigTemplate) }}
           </div>
         {% endfor %}
+      </div>
+      <div id="no-remix-notifications"
+           class="text-center mb-5 {{ remixNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-remix">{{ "catro-notifications.noRemixes"|trans({}, "catroweb") }}</span>
       </div>
     </div>
   </div>
@@ -152,9 +157,12 @@
   <script src="{{ asset('js/UserNotifications.min.js') }}"></script>
   <script>
     let notification = new UserNotifications("{{ url('notification_mark_as_read') }}", "{{ url('notifications_seen') }}",
-      "{{ path('notifications_count') }}", "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
+      "{{ path('notifications_count') }}", "{{ path('notifications_fetch') }}", "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
       "{{ "notificationsClearError"|trans({}, "catroweb") }}",
-      "{{ "notificationsUnauthorizedError"|trans({}, "catroweb") }}");
+      "{{ "notificationsUnauthorizedError"|trans({}, "catroweb") }}", {{ allNotificationsCount }},
+        {{ followNotificationCount }}, {{ reactionNotificationCount }}, {{ commentNotificationCount }},
+        {{ remixNotificationCount }}, "{{ path('profile') }}", "{{ path('program') }}",
+      "{{ asset('images/default/avatar_default.png') }}");
     notification.markAllRead()
   </script>
 {% endblock %}

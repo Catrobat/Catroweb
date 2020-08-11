@@ -38,7 +38,7 @@ class FollowNotification extends CatroNotification
    */
   public function __construct(User $user, User $profile)
   {
-    parent::__construct($user);
+    parent::__construct($user, '', '', 'follow');
     $this->follower = $profile;
   }
 

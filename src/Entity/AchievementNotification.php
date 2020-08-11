@@ -21,7 +21,7 @@ class AchievementNotification extends CatroNotification
 
   public function __construct(User $user, string $title, string $message, ?string $image_path)
   {
-    parent::__construct($user, $title, $message);
+    parent::__construct($user, $title, $message, 'achievement');
     $this->image_path = $image_path;
   }
 

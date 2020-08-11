@@ -86,7 +86,7 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/project/{id}", name="program")
+   * @Route("/project/{id}", name="program", defaults={"id": "0"})
    *
    * Legacy routes:
    * @Route("/program/{id}", name="program_depricated")

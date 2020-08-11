@@ -17,7 +17,7 @@ class BroadcastNotification extends CatroNotification
 
   public function __construct(User $user, string $title, string $message)
   {
-    parent::__construct($user, $title, $message);
+    parent::__construct($user, $title, $message, 'broadcast');
   }
 
   /**
