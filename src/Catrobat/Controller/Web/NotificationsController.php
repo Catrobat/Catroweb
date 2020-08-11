@@ -47,7 +47,6 @@ class NotificationsController extends AbstractController
     {
       $found_notification = false;
       $user = null;
-      $all_notifications[$notification->getId()] = $notification;
       $notification_instance[$notification->getId()] = null;
       $redirect_array[$notification->getId()] = null;
 
@@ -55,40 +54,64 @@ class NotificationsController extends AbstractController
       {
         $found_notification = true;
         $user = $notification->getLikeFrom();
-        $reaction_notifications[$notification->getId()] = $notification;
-        $notification_instance[$notification->getId()] = 'reaction';
-        $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
+        if ($user != $this->getUser())
+        {
+          $all_notifications[$notification->getId()] = $notification;
+          $reaction_notifications[$notification->getId()] = $notification;
+          $notification_instance[$notification->getId()] = 'reaction';
+          $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
+        }
       }
       elseif ($notification instanceof CommentNotification)
       {
         $found_notification = true;
-        $comment_notifications[$notification->getId()] = $notification;
-        $notification_instance[$notification->getId()] = 'comment';
-        $redirect_array[$notification->getId()] = $notification->getComment()->getProgram()->getId();
+        if ($notification->getComment()->getUser() != $this->getUser())
+        {
+          $all_notifications[$notification->getId()] = $notification;
+          $comment_notifications[$notification->getId()] = $notification;
+          $notification_instance[$notification->getId()] = 'comment';
+          $redirect_array[$notification->getId()] = $notification->getComment()->getProgram()->getId();
+        }
       }
       elseif ($notification instanceof NewProgramNotification)
       {
         $found_notification = true;
         $user = $notification->getProgram()->getUser();
-        $follower_notifications[$notification->getId()] = $notification;
-        $notification_instance[$notification->getId()] = 'program';
-        $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
+        if ($user != $this->getUser())
+        {
+          $all_notifications[$notification->getId()] = $notification;
+          $follower_notifications[$notification->getId()] = $notification;
+          $notification_instance[$notification->getId()] = 'program';
+          $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
+        }
       }
       elseif ($notification instanceof FollowNotification)
       {
         $found_notification = true;
         $user = $notification->getFollower();
-        $follower_notifications[$notification->getId()] = $notification;
-        $notification_instance[$notification->getId()] = 'follow';
-        $redirect_array[$notification->getId()] = $notification->getFollower()->getId();
+        if ($user != $this->getUser())
+        {
+          $all_notifications[$notification->getId()] = $notification;
+          $follower_notifications[$notification->getId()] = $notification;
+          $notification_instance[$notification->getId()] = 'follow';
+          $redirect_array[$notification->getId()] = $notification->getFollower()->getId();
+        }
       }
       elseif ($notification instanceof RemixNotification)
       {
         $found_notification = true;
         $user = $notification->getRemixFrom();
-        $remix_notifications[$notification->getId()] = $notification;
-        $notification_instance[$notification->getId()] = 'remix';
-        $redirect_array[$notification->getId()] = $notification->getRemixProgram()->getId();
+        if ($user != $this->getUser())
+        {
+          $all_notifications[$notification->getId()] = $notification;
+          $remix_notifications[$notification->getId()] = $notification;
+          $notification_instance[$notification->getId()] = 'remix';
+          $redirect_array[$notification->getId()] = $notification->getRemixProgram()->getId();
+        }
+      }
+      else
+      {
+        $all_notifications[$notification->getId()] = $notification;
       }
       if (null == $notification_instance[$notification->getId()])
       {
