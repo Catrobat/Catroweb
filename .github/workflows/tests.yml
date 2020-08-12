@@ -199,6 +199,7 @@ jobs:
           - web-notifications1
           - web-notifications2
           - web-notifications3
+          - web-notifications4
           - web-profile
           - web-project
           - web-project-details

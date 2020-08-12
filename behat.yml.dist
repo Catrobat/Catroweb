@@ -227,6 +227,14 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
+        web-notifications4:
+                    paths: ["tests/behat/features/web/notifications4"]
+                    contexts:
+                        - Tests\behat\context\RefreshEnvironmentContext
+                        - Tests\behat\context\DataFixturesContext
+                        - Tests\behat\context\CatrowebBrowserContext
+                        - Tests\behat\context\ApiContext
+
         web-profile:
             paths:    [ "tests/behat/features/web/profile" ]
             contexts:
