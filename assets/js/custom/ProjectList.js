@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-unused-vars
 class ProjectList {
-  constructor (container, category, apiUrl, propertyToShow) {
+  constructor (container, category, apiUrl, propertyToShow, performClickStatisticRequest) {
     this.container = container
     this.projectsContainer = $('.projects-container', container)
     this.category = category
@@ -13,6 +13,7 @@ class ProjectList {
     this.empty = false
     this.fetchActive = false
     this.isFullView = false
+    this.performClickStatisticRequest = performClickStatisticRequest
 
     this.$title = $('.project-list__title', $(this.container))
     this.$body = $('body')
@@ -43,7 +44,15 @@ class ProjectList {
           return
         }
         data.forEach(function (project) {
-          self.projectsContainer.append(self._generate(project))
+          project = self._generate(project)
+          self.projectsContainer.append(project)
+          project.click(function () {
+            const href = $(this).attr('href')
+            const programID = ((href.indexOf('project') > 0) ? (href.split('project/')[1]).split('?')[0] : 0)
+            const type = self.getClickStatisticType(self.category)
+            const userSpecificRecommendation = type === 'user_who_downloaded_also_downloaded'
+            self.performClickStatisticRequest(href, type[0], type[1], userSpecificRecommendation, programID)
+          })
         })
         self.container.classList.remove('loading')
 
@@ -170,5 +179,26 @@ class ProjectList {
     this.container.classList.remove('vertical')
     this.$body.removeClass('overflow-hidden')
     return false
+  }
+
+  getClickStatisticType (type) {
+    switch (type) {
+      case 'recent':
+        return ['newest', false]
+      case 'most_downloaded':
+        return ['mostDownloaded', false]
+      case 'most_viewed':
+        return ['mostViewed', false]
+      case 'scratch':
+        return ['scratchRemixes', false]
+      case 'recommended':
+        return ['rec_homepage', true]
+      case 'similar':
+        return ['project', true]
+      case 'user_who_downloaded_also_downloaded':
+        return ['rec_specific_programs', true]
+      default:
+        return [type, false]
+    }
   }
 }

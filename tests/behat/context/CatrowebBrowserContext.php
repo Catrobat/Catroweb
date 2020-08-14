@@ -1788,95 +1788,47 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iClickOnAFeaturedHomepageProgram(): void
   {
-    $arg1 = '#feature-slider > div > div:first-child > a';
-    $this->assertSession()->elementExists('css', $arg1);
+    $first_featured_project = $this->getSession()->getPage()->find('css', '#feature-slider a');
+    $this->assertSession()->elementExists('xpath', $first_featured_project->getXpath());
 
     $this
       ->getSession()
       ->getPage()
-      ->find('css', $arg1)
+      ->find('xpath', $first_featured_project->getXpath())
       ->click()
     ;
   }
 
   /**
-   * @When /^I click on a newest homepage program having program id "([^"]*)"$/
+   * @When /^I click on a "([^"]*)" homepage program having program id "([^"]*)"$/
    *
+   * @param mixed $category
    * @param mixed $program_id
    *
    * @throws ElementNotFoundException
    */
-  public function iClickOnANewestHomepageProgram($program_id): void
+  public function iClickOnANewestHomepageProgram($category, $program_id): void
   {
-    $arg1 = '#newest .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
+    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
+    $element = null;
+    foreach ($projects as $project)
+    {
+      $link = explode('/', $project->getAttribute('href'));
+      if (end($link) === $program_id)
+      {
+        $element = $project;
+        break;
+      }
+    }
+
+    $this->assertSession()->elementExists('xpath', $element->getXpath());
 
     $this
       ->getSession()
       ->getPage()
-      ->find('css', $arg1)
+      ->find('xpath', $element->getXpath())
       ->click()
-    ;
-  }
-
-  /**
-   * @When /^I click on a most downloaded homepage program having program id "([^"]*)"$/
-   *
-   * @param mixed $program_id
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnAMostDownloadedHomepageProgram($program_id): void
-  {
-    $arg1 = '#mostDownloaded .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
-  }
-
-  /**
-   * @When /^I click on a most viewed homepage program having program id "([^"]*)"$/
-   *
-   * @param mixed $program_id
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnAMostViewedHomepageProgram($program_id): void
-  {
-    $arg1 = '#mostViewed .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
-  }
-
-  /**
-   * @When /^I click on a random homepage program having program id "([^"]*)"$/
-   *
-   * @param mixed $program_id
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnARandomHomepageProgram($program_id): void
-  {
-    $arg1 = '#random .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
+        ;
   }
 
   /**
