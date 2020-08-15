@@ -10,9 +10,9 @@ use Symfony\Component\Console\Tester\CommandTester;
  * Class CleanupTest.
  *
  * @internal
- * @coversNothing
+ * @covers \App\Commands\Maintenance\CleanLogsCommand
  */
-class CleanupTest extends KernelTestCase
+class CleanLogsTest extends KernelTestCase
 {
   /**
    * @test
@@ -60,6 +60,6 @@ class CleanupTest extends KernelTestCase
 
     // check if directory is empty
     $this->assertEmpty(array_diff(scandir($log_dir), ['.', '..', '.gitignore']),
-      'Not all files in log directory got deleted.');
+            'Not all files in log directory got deleted.');
   }
 }
