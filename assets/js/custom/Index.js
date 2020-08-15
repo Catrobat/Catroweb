@@ -34,7 +34,7 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
         url += '&flavor=' + flavor
       }
 
-      const list = new ProjectList(this, category, url, property)
+      const list = new ProjectList(this, category, url, property, self.performClickStatisticRequest)
       /* eslint-enable no-undef */
       $t.data('list', list)
     })
@@ -43,7 +43,6 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
   self.performClickStatisticRequest = function (href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
     let url = self.clickStats
     let params = {}
-
     if (!isRecommendedProgram) {
       url = self.homepageClickStats
       if (['featured', 'example', 'newest', 'mostDownloaded', 'mostViewed', 'scratchRemixes', 'random'].indexOf(type) === -1) {
@@ -60,7 +59,6 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
         recIsUserSpecific: userSpecificRecommendation
       }
     }
-
     $.post(url, params, function (data) {
       if (data === 'error') {
         console.log('No click statistic is created!')
