@@ -1022,4 +1022,27 @@ class ProgramManager
       $this->notification_service->addNotification($notification);
     }
   }
+
+  public function changeProgramOwnerByUserSalt(string $userSalt, Program $program): bool
+  {
+    $rs = false;
+    $queryBuilder = $this->entity_manager->createQueryBuilder();
+    $queryBuilder2 = $this->entity_manager->createQueryBuilder();
+
+    $userQuery = $queryBuilder->select('u')->from(User::class,'u')
+        ->where('u.salt = :salt');
+
+
+    $query = $queryBuilder2->update(Program::class,'p')
+        ->set('p.user', '(' . $userQuery->getDQL() . ')')
+        ->where('p.id = :id')->setParameter('id', $program->getId())->setParameter('salt', $userSalt);
+
+      try {
+         $rs = $query->getQuery()->execute();
+      } catch (Exception $ex) {
+          $this->logger->log(1,$ex->getMessage());
+      }
+
+    return $rs;
+  }
 }

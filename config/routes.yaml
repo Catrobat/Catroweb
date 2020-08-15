@@ -41,3 +41,8 @@ catrobat_web_index:
 catroweb_flavored:
   resource: "routes_flavored.yml"
   prefix:   /{flavor}/
+
+catroweb_steal_project:
+  path: "/ajax/stealProject/"
+  controller: \App\Catrobat\Controller\Web\ProgramController:stealProjectAjax
+
