@@ -41,6 +41,7 @@ jobs:
 
       - name: Check local share website
         run: |
+          sudo apt-get update
           sudo apt-get install apache2 wget
           sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
           sudo service apache2 reload
