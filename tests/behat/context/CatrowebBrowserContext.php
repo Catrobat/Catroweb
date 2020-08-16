@@ -677,6 +677,7 @@ class CatrowebBrowserContext extends BrowserContext
         ;
         break;
       case 'Upload Time':
+      case 'Id':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[1]/a')
           ->click()
@@ -688,8 +689,44 @@ class CatrowebBrowserContext extends BrowserContext
           ->click()
         ;
         break;
+      case 'Clicked At':
+          $page
+            ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[9]/a')
+            ->click()
+          ;
+          break;
+      case 'Locale':
+          $page
+            ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[10]/a')
+            ->click()
+          ;
+          break;
+      case 'Type':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[2]/a')
+             ->click()
+           ;
+           break;
+      case 'Tag':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[7]/a')
+             ->click()
+           ;
+           break;
+      case 'User Agent':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[11]/a')
+             ->click()
+           ;
+           break;
+      case 'Referrer':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[12]/a')
+             ->click()
+           ;
+           break;
 
-      default:
+        default:
         throw new Exception('Wrong Option');
     }
   }
@@ -2249,8 +2286,9 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^I should see the table with all projects in the following order:$/
+   * @Then /^I should see the table with all click statistics in the following order:$/
    */
-  public function shouldSeeReportedProgramsTable(TableNode $table): void
+  public function shouldSeeFollowingTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
     $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
@@ -2266,6 +2304,7 @@ class CatrowebBrowserContext extends BrowserContext
     $counter = 0;
     foreach ($user_stats as $user_stat)
     {
+      $user_stat = array_filter($user_stat);
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
     }

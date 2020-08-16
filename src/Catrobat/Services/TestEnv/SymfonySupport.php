@@ -9,6 +9,7 @@ use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
+use App\Entity\ClickStatistic;
 use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
@@ -526,6 +527,48 @@ trait SymfonySupport
     }
 
     return $new_comment;
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function insertClickStatistic(array $config, bool $andFlush = true): ClickStatistic
+  {
+    $click_statistics = new ClickStatistic();
+    $click_statistics->setType($config['type']);
+    $click_statistics->setUserAgent($config['user_agent']);
+    /** @var User $user */
+    $user = $this->getUserManager()->findUserByUsername($config['user']);
+    $click_statistics->setUser($user);
+    $click_statistics->setReferrer($config['referrer']);
+    $date = new DateTime($config['clicked_at']);
+    $click_statistics->setClickedAt($date);
+    $click_statistics->setLocale($config['locale']);
+    if ('tags' === $config['type'])
+    {
+      $tag = $this->getTagRepository()->find($config['tag_id']);
+      $click_statistics->setTag($tag);
+    }
+    elseif ('extensions' === $config['type'])
+    {
+      $extension = $this->getExtensionRepository()->getExtensionByName($config['extension_name']);
+      $click_statistics->setExtension($extension[0]);
+    }
+    else
+    {     /** @var Program $recommended_from */
+      $recommended_from = $this->getProgramManager()->find($config['rec_from_id']);
+      $click_statistics->setRecommendedFromProgram($recommended_from);
+      $recommended_program = $this->getProgramManager()->find($config['rec_program_id']);
+      $click_statistics->setProgram($recommended_program);
+    }
+    $this->getManager()->persist($click_statistics);
+
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $click_statistics;
   }
 
   /**
