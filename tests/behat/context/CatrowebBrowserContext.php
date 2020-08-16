@@ -1037,6 +1037,42 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I click on the edit button of the extension number "([^"]*)" in the extensions list$/
+   *
+   * @param mixed $program_number
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iClickOnTheEditButtonInAllExtensions($program_number): void
+  {
+    $page = $this->getSession()->getPage();
+    $this->assertSession()->elementExists('xpath',
+      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/div/a');
+
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/div/a')
+      ->click()
+    ;
+  }
+
+  /**
+   * @Then /^I click on the add new button$/
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iClickOnTheAddNewButton(): void
+  {
+    $page = $this->getSession()->getPage();
+    $this->assertSession()->elementExists('xpath',
+      "//a[contains(text(),'Add new')]");
+
+    $page
+      ->find('xpath', "//a[contains(text(),'Add new')]")
+      ->click()
+    ;
+  }
+
+  /**
    * @When /^I report program (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
    *
    * @param mixed $program_id
@@ -2350,6 +2386,22 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['Reporting User']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
       $this->assertSession()->pageTextContains($user_stat['Program Visible']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the extensions table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeExtensionsTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat)
+    {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Prefix']);
     }
   }
 

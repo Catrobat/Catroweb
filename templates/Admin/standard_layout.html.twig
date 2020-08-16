@@ -57,6 +57,9 @@
               <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('rebuildAllApk') }}">Rebuild
                                                                                                            all</a>
             {% endif %}
+            {% if app.request.requesturi == '/admin/all_extensions/list' %}
+              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('extensions') }}">Create Extensions</a>
+            {% endif %}
           </div>
 
           {% if admin is defined and action is defined and action == 'list' and admin.listModes|length > 1 %}
