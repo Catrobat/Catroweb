@@ -13,7 +13,7 @@ Feature: Admin Server Maintenance
     Given I am a logged in as super admin
     When I GET "/admin/maintain/list"
     Then the client response should contain "Delete APKs"
-    And the client response should contain "Delete extracted files"
+    And the client response should contain "Delete compressed files"
     And the client response should contain "Delete log files"
     And the client response should contain "Archive logs files"
 

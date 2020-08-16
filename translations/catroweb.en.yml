@@ -7,10 +7,13 @@ createNewPassword: Create new password
 accountSettings: Account settings
 email: E-Mail
 aboutPocketCode: About Pocket Code
-aboutCatrobat: About Catrobat
-tutorials: Tutorials
+about: About
+education: Education
+chat: Chat and forums
+others: Others
+tutorials: Help
 googlePlay: Google Play
-iosAppStore: IOS App store
+iosAppStore: iOS App store
 passwordsNoMatch: The passwords didn't match.
 error: Error
 cancel: Cancel

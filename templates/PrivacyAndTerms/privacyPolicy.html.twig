@@ -1,0 +1,28 @@
+{% extends 'Default/base.html.twig' %}
+{% block body %}
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{ 'privacy-policy.header'|trans({}, 'catroweb') }}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'privacy-policy.version'|trans({}, 'catroweb') }}</p>
+                <p class="align_start">{{ 'privacy-policy.text1'|trans({}, 'catroweb') }}</p>
+                <ul>
+                    <li><p class="align_start">{{ 'privacy-policy.text2'|trans({}, 'catroweb') }}</p></li>
+                    <li><p class="align_start">{{ 'privacy-policy.text3'|trans({}, 'catroweb') }}</p></li>
+                    <li><p class="align_start">{{ 'privacy-policy.text4'|trans({}, 'catroweb') }}</p></li>
+                    <li><p class="align_start">{{ 'privacy-policy.text5'|trans({}, 'catroweb') }}</p></li>
+                    <li><p class="align_start">{{ 'privacy-policy.text6'|trans({}, 'catroweb') }}</p></li>
+                    <li><p class="align_start">{{ 'privacy-policy.text7'|trans({}, 'catroweb') }}</p></li>
+                    <li><p class="align_start">{{ 'privacy-policy.text8'|trans({}, 'catroweb') }}</p></li>
+                </ul>
+                <p class="align_start">{{ 'privacy-policy.text9'|trans({}, 'catroweb') }}</p>
+                <p class="align_start">
+                    {{ 'privacy-policy.text10' | trans( {'%privacy_policy%':'<a href="https://developer.catrobat.org/privacy_policy">
+            privacy policy</a>'},'catroweb')|raw }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

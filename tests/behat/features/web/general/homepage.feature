@@ -104,3 +104,17 @@ Feature: Pocketcode homepage
     And the "#home-projects__recent" element should contain "project 2"
     And the "#home-projects__recent" element should contain "project 4"
     And the "#home-projects__recent" element should not contain "project 3"
+  Scenario: User should be able to see useful links
+    Given I am on homepage
+    And I wait for the page to be loaded
+    Then I should see "Useful Links"
+    And I should see "Help"
+    And I should see "About"
+    And I should see "Education"
+    And I should see "Imprint"
+    And I should see "Google PLay"
+    And I should see "iOS App store"
+    And I should see "Others"
+    And I should see "Chat and forums"
+    And I click "#help"
+    Then I should be on "/app/help"
