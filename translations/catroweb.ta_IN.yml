@@ -45,28 +45,15 @@ notifications: 'அறிவிப்புகள்'
 allNotifications: 'அனைத்து அறிவிப்புகள்'
 FollowersNotifications: 'பின்பற்றுபவர்கள்'
 LikeNotifications: 'விருப்பம்'
-likesNotificationsTitle: 'அறிவிப்புகள்'
-followersNotificationsTitle: 'பின்பற்றுபவர்கள் அறிவிப்புகள்'
-commentsNotificationsTitle: 'கருத்து அறிவப்புகள்'
-remixNotificationsTitle: 'Remix notifications'
 CommentNotifications: 'கருத்துகள்'
 RemixNotifications: 'ரீமிக்ஸ்கள்'
-oldnotification: 'பழைய அறிவிப்புகள்'
 wellDone: "நன்று!"
 done: "முடிந்தது!"
 notificationsReadMessage: "உங்களிடம் எந்த அறிவிப்புகளும் இல்லை என்று தெரிகிறது."
-notificationsClearedMessage: "அனைத்து அறிவிப்புகஒளையும் படித்ததாகக் குறிபிடபட்டுள்ளது."
-deleteNotificationConfirmation: "உறுதியாகவா?"
-notificationDeleteMessage: "உறுதியாக இந்த அறிவிப்புகளை அழிக்க வேண்டுமா?"
-notificationDeleteAllMessage: "Are You Sure You Want to Delete All Notifications?"
 confirmMessage: "ஆம், நீக்கு"
 cancelMessage: "தவிர்"
-notificationsAllMessagesDeleted: "அனைத்து அறிவிப்புகளும் நீக்கப்பட்டன."
-notificationDeletedMessage: "அறிவிப்பு வெற்றிகரமாக நீக்கப்பட்டது."
-clearAllNotificationsButtonTitle: "அனைத்தையும் படித்ததாக குறி"
-deleteAllNotificationsButtonTitle: "அனைத்தையும் நீக்கு"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "அறிவிப்புகளை படித்ததாக குறியிட இயலவில்லை!"
-notificationsDeleteError: "அறிவிப்புகளை நீக்க முடியவில்லை!"
 pleaseWait: "தயவு செய்து காத்திருக்கவும்..."
 projects: "திட்டங்கள்"
 oauthPopUpTitle: "External account sign in information"
@@ -853,21 +840,19 @@ privacy-policy:
   disagree-text: ஒப்புதல் இல்லாமல், எங்களால் ஒரு கணக்கை உருவாக்க முடியாது, ஆனால் முக்கிய அம்சங்கள் இன்னும் அணுகக்கூடியவை.
 catro-notifications:
   markAsRead: "படித்ததாகக் குறியிடு"
-  summary: "{0}உங்களிடம் புதிய அறிவிப்புகள் எதுவும் இல்லை| {1}உங்களிடம் %amount% புதிய அறிவிப்புகள் உள்ளது!|]1,Inf] உங்களிடம் %amount% புதிய அறிவிப்புகள் உள்ளது!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: '%program_name% திட்டத்திற்க்கு ஒரு புதிய கருத்து!'
     message: 'பயனர் %user_link% உங்கள் %program_link% திட்டத்தில் கருத்து தெரிவித்தார்.'
   like:
-    title: '%program_name% திட்டத்திற்க்கு ஒரு புதிய லைக்!'
     message: 'பயனர் %user_link% உங்கள் %program_link% திட்டத்திர்க்கு லைக் செய்தார்.'
   follow:
-    title: 'புதிய பின்தொடர்பவர்!'
     message: 'பயனர் %user_link% இப்போது உங்களைப் பின்தொடர்கிறார்.'
   program-upload:
-    title: 'நீங்கள் பின்தொடரும் ஒருவரிடமிருந்து ஒரு புதிய திட்டம்'
     message: 'பயனர் %user_link% ஒரு புதிய திட்டத்தை %program_link% உருவாக்கிநார்'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: திட்டத்திற்க்கான இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!

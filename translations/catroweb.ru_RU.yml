@@ -3,7 +3,7 @@
 localLanguage: Английский
 username: Имя пользователя
 password: Пароль
-createNewPassword: Create new password
+createNewPassword: Создать новый пароль
 accountSettings: Настройки аккаунта
 email: E-Mail
 aboutPocketCode: О Pocket Code
@@ -23,7 +23,7 @@ download: Скачать проект
 description: Описание
 noDescription: Без описания.
 credits: Титры
-noCredits: No credits available.
+noCredits: Кредиты недоступны
 country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности
@@ -37,36 +37,23 @@ less: 'меньше'
 show-more: 'Развернуть'
 show-less: 'Спрятать'
 more-information: 'Подробности'
-less-information: 'Less information'
-ok: Ok
+less-information: 'Меньше информации '
+ok: Хорошо
 clickToDownloadProgram: 'Чтобы скачать пример проекта, нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
 notifications: 'Уведомления'
 allNotifications: 'Все уведомления'
 FollowersNotifications: 'Подписчики'
 LikeNotifications: 'Лайки'
-likesNotificationsTitle: 'Reaction notifications'
-followersNotificationsTitle: 'Follower notifications'
-commentsNotificationsTitle: 'Comment notifications'
-remixNotificationsTitle: 'Remix notifications'
 CommentNotifications: 'Комментарии'
 RemixNotifications: 'Ремиксы'
-oldnotification: 'Прочитанные уведомления'
 wellDone: "Великолепно!"
 done: "Готово!"
 notificationsReadMessage: "Похоже, что у вас нет уведомлений."
-notificationsClearedMessage: "Все уведомления были отмечены как прочитанные."
-deleteNotificationConfirmation: "Вы уверены?"
-notificationDeleteMessage: "Вы уверены, что хотите удалить это уведомление?"
-notificationDeleteAllMessage: "Вы Уверены, что хотите удалить все сообщения?"
 confirmMessage: "Да, удалить это"
 cancelMessage: "Отменить"
-notificationsAllMessagesDeleted: "Все уведомления были удалены."
-notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "Отметить все как прочитанные"
-deleteAllNotificationsButtonTitle: "Delete all"
+notificationsUnauthorizedError: "Невозможно авторизоваться пользователя"
 notificationsClearError: "Невозможно отметить оповещения, как прочитанные!"
-notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Пожалуйста, подождите..."
 projects: "Проекты"
 oauthPopUpTitle: "External account sign in information"
@@ -854,21 +841,19 @@ privacy-policy:
   disagree-text: Вы не можете создать аккаунт без подтверждения, однако основные функции будут доступны.
 catro-notifications:
   markAsRead: "Пометить, как прочитанное"
-  summary: "{0}У вас нет новых уведомлений|{1}У вас %amount% новое уведомление!|]1,Inf]У вас %amount% новых уведомлений!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'Новый подписчик!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New project from someone you follow'
     message: 'User %user_link% created a new project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

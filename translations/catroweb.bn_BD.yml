@@ -45,28 +45,15 @@ notifications: 'বিজ্ঞপ্তি'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
-likesNotificationsTitle: 'Reaction Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
-remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'মন্তব্যসমূহ'
 RemixNotifications: 'রিমিক্স'
-oldnotification: 'Old Notifications'
 wellDone: "ভাল করেছেন"
 done: "সম্পন্ন!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-notificationsClearedMessage: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করা হয়েছে।"
-deleteNotificationConfirmation: "আপনি নিশ্চিত?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
 confirmMessage: "Yes, delete it"
 cancelMessage: "বাতিল"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "সব পড়ার জন্য চিহ্নিত করুন"
-deleteAllNotificationsButtonTitle: "Delete all"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করতে অক্ষম!"
-notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "অনুগ্রহ করে অপেক্ষা করুন..."
 projects: "প্রজেক্টসমূহ"
 oauthPopUpTitle: "External account sign in information"
@@ -847,21 +834,19 @@ privacy-policy:
   disagree-text: অনুমোদন ছাড়াই আমরা একটি অ্যাকাউন্ট তৈরি করতে পারি না তবে মূল বৈশিষ্ট্যগুলি এখনও অ্যাক্সেসযোগ্য।
 catro-notifications:
   markAsRead: "পড়ার জন্য চিহ্নিত করুন"
-  summary: "{0} আপনার কাছে কোনও নতুন বিজ্ঞপ্তি নেই | {1} আপনার কাছে %amount% নতুন বিজ্ঞপ্তি! |]1,Inf] আপনার কাছে %amount% নতুন বিজ্ঞপ্তি রয়েছে!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'নতুন অনুকরণকারী'
     message: 'ব্যবহারকারী %user_link% আপনাকে এখন অনুসরণ করে।'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

@@ -45,28 +45,15 @@ notifications: '알림'
 allNotifications: '모든 알림'
 FollowersNotifications: '팔로워'
 LikeNotifications: '좋아요'
-likesNotificationsTitle: '좋아요 알림'
-followersNotificationsTitle: '팔로워 알림'
-commentsNotificationsTitle: '코멘트 알림'
-remixNotificationsTitle: 'Remix notifications'
 CommentNotifications: '코멘트'
 RemixNotifications: '변환'
-oldnotification: '오래된 알림'
 wellDone: "완료!"
 done: "끝!"
 notificationsReadMessage: "알림이 없습니다."
-notificationsClearedMessage: "모든 알림이 읽은 상태로 표시되었습니다."
-deleteNotificationConfirmation: "계속하시겠습니까?"
-notificationDeleteMessage: "이 알림을 삭제하시겠습니까?"
-notificationDeleteAllMessage: "모든 알림을 삭제하시겠습니까?"
 confirmMessage: "예, 삭제합니다."
 cancelMessage: "취소"
-notificationsAllMessagesDeleted: "알림이 모두 삭제되었습니다."
-notificationDeletedMessage: "잘 삭제되었습니다."
-clearAllNotificationsButtonTitle: "모두 읽음으로 표시"
-deleteAllNotificationsButtonTitle: "모두 삭제"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "알림을 읽음으로 표시할 수 없습니다!"
-notificationsDeleteError: "알림 삭제 불가!"
 pleaseWait: "잠시 기다려 주십시오..."
 projects: "프로그램"
 oauthPopUpTitle: "External account sign in information"
@@ -842,21 +829,19 @@ privacy-policy:
   disagree-text: 승인이 없으면, 계정을 만들 수 없으나 사용할 수는 있습니다.
 catro-notifications:
   markAsRead: "읽음으로 표시"
-  summary: "{0}새 알림 없음|{1}지금 %amount% 새 알림!|]1,Inf]현재 %amount%새 알림!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: '새로운 팔로워'
     message: '%user_link% 사용자가 당신을 팔로우합니다.'
   program-upload:
-    title: 'New project from someone you follow'
     message: 'User %user_link% created a new project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

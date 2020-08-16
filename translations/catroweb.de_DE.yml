@@ -45,28 +45,15 @@ notifications: 'Benachrichtigungen'
 allNotifications: 'Alle Benachrichtigungen'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Gefällt mir'
-likesNotificationsTitle: 'Gefällt mir Benachrichtigungen'
-followersNotificationsTitle: 'Follower Benachrichtigungen'
-commentsNotificationsTitle: 'Benachrichtigungen über neuen Kommentare'
-remixNotificationsTitle: 'Remix Benachrichtigungen'
 CommentNotifications: 'Kommentare'
 RemixNotifications: 'Remixe'
-oldnotification: 'Alte Benachrichtigungen'
 wellDone: "Gut gemacht!"
 done: "Fertig!"
 notificationsReadMessage: "Es scheint, als hättest du keine Benachrichtigungen."
-notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
-deleteNotificationConfirmation: "Bist du sicher?"
-notificationDeleteMessage: "Bist du dir sicher, dass die Benachrichtigung gelöscht werden soll?"
-notificationDeleteAllMessage: "Bist du dir sicher, dass alle Benachrichtigungen gelöscht werden sollen?"
 confirmMessage: "Ja, jetzt löschen"
 cancelMessage: "Abbrechen"
-notificationsAllMessagesDeleted: "Alle Benachrichtigungen wurden gelöscht."
-notificationDeletedMessage: "Benachrichtigung wurde erfolgreich gelöscht."
-clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
-deleteAllNotificationsButtonTitle: "Alle löschen"
+notificationsUnauthorizedError: "Benutzer kann nicht autorisiert werden"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
-notificationsDeleteError: "Benachrichtigungen konnten nicht gelöscht werden!"
 pleaseWait: "Bitte warten..."
 projects: "Projekte"
 oauthPopUpTitle: "External account sign in information"
@@ -850,21 +837,19 @@ privacy-policy:
   disagree-text: Ohne Zustimmung kann kein Benutzerkonto erstellt werden, die Basisfunktionalität kann aber weiterhin genutzt werden.
 catro-notifications:
   markAsRead: "Als gelesen markieren"
-  summary: "{0}Du hast keine neuen Benachrichtigungen|{1}Du hast %amount% neue Benachrichtigung!|]1,Inf]Du hast %amount% neue Benachrichtigungen!"
+  noFollowers: "Es sieht so aus, als hätten Sie keine Follower-Benachrichtigungen"
+  noComments: "Es sieht so aus, als hätten Sie keine Kommentarbenachrichtigungen"
+  noReactions: "Es sieht so aus, als hätten Sie keine Reaktionsbenachrichtigungen"
+  noRemixes: "Es sieht so aus, als hätten Sie keine Reaktionsbenachrichtigungen"
   comment:
-    title: 'Neuer Kommentar für Projekt %program_name%!'
     message: 'Benutzer %user_link% hat Ihr Projekt %program_link% kommentiert.'
   like:
-    title: 'Neues Like für Projekt %program_name%!'
     message: 'Benutzer %user_link% hat Ihr Projekt %program_link% geliked.'
   follow:
-    title: 'Neue Follower!'
     message: 'Benutzer %user_link% folgt dir jetzt.'
   program-upload:
-    title: 'Neues Projekt von jemandem, dem du folgst'
     message: 'Benutzer %user_link% hat ein neues Projekt %program_link% erstellt'
   remix:
-    title: 'Neuer Remix für Programm %program_name%!'
     message: 'Benutzer %user_link% hat einen Remix deines Programms %program_link% erstellt. Du kannst diesen unter folgendem Link sehen: %remix_program_link%.'
 clipboard:
   success: Link zum Projekt in die Zwischenablage kopiert!

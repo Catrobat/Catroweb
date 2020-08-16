@@ -45,28 +45,15 @@ notifications: '通知'
 allNotifications: '全部通知'
 FollowersNotifications: '关注者'
 LikeNotifications: '我喜欢的'
-likesNotificationsTitle: '喜欢通知'
-followersNotificationsTitle: '关注者通知'
-commentsNotificationsTitle: '评论通知'
-remixNotificationsTitle: 'Remix notifications'
 CommentNotifications: '评论'
 RemixNotifications: '调制'
-oldnotification: '旧通知'
 wellDone: "做的好！"
 done: "已完成！"
 notificationsReadMessage: "看起来您没有任何通知。"
-notificationsClearedMessage: "所有通知都已被标记为已读。"
-deleteNotificationConfirmation: "您确定吗？"
-notificationDeleteMessage: "您确定要删除此通知吗？"
-notificationDeleteAllMessage: "您确定要删除所有通知吗？"
 confirmMessage: "是的，将它删除"
 cancelMessage: "取消"
-notificationsAllMessagesDeleted: "已删除所有通知！"
-notificationDeletedMessage: "通知已成功删除。"
-clearAllNotificationsButtonTitle: "标记所有为已读"
-deleteAllNotificationsButtonTitle: "全部删除"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "无法将通知标记为已读 ！"
-notificationsDeleteError: "无法删除通知！"
 pleaseWait: "请等待..."
 projects: "程序"
 oauthPopUpTitle: "External account sign in information"
@@ -854,21 +841,19 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New project from someone you follow'
     message: 'User %user_link% created a new project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
