@@ -247,6 +247,19 @@ class DataFixturesContext implements KernelAwareContext
     }
     $this->getManager()->flush();
   }
+    /**
+     * @Given /^there are click statistics:$/
+     *
+     * @throws Exception
+     */
+    public function thereAreClickStatistics(TableNode $table): void
+    {
+        foreach ($table->getHash() as $config)
+        {
+            $this->insertClickStatistic($config, false);
+        }
+        $this->getManager()->flush();
+    }
 
   /**
    * @Given /^there are "([^"]*)" similar projects$/
