@@ -45,28 +45,15 @@ notifications: 'Obaveštenja'
 allNotifications: 'Sva obaveštenja'
 FollowersNotifications: 'Pratioci'
 LikeNotifications: 'Sviđanja'
-likesNotificationsTitle: 'Obaveštenja sviđanja'
-followersNotificationsTitle: 'Obaveštenja o pratiocima'
-commentsNotificationsTitle: 'Obaveštenja komentara'
-remixNotificationsTitle: 'Remix obaveštenja'
 CommentNotifications: 'Komentari'
 RemixNotifications: 'Remiksi'
-oldnotification: 'Stara obaveštenja'
 wellDone: "Svaka čast!"
 done: "Gotovo!"
 notificationsReadMessage: "Izgleda da nemate nikakvih obaveštenja."
-notificationsClearedMessage: "Sva obavještenja su označena kao pročitana."
-deleteNotificationConfirmation: "Jeste li sigurni?"
-notificationDeleteMessage: "Da li ste sigurni da želite da obrišete ovo obaveštenje?"
-notificationDeleteAllMessage: "Da li ste sigurni da želite da obrišete sva obaveštenja?"
 confirmMessage: "Da, obriši"
 cancelMessage: "Otkaži"
-notificationsAllMessagesDeleted: "Sva obaveštenja su obrisana."
-notificationDeletedMessage: "Obaveštenje je uspešno obrisano."
-clearAllNotificationsButtonTitle: "Označi svе kao pročitano"
-deleteAllNotificationsButtonTitle: "Obriši sve"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Ne možete označiti nostrifikaciju kao pročitanu."
-notificationsDeleteError: "Obaveštenja nije moguće obrisati!"
 pleaseWait: "Molimo sačekajte..."
 projects: "Programi"
 oauthPopUpTitle: "External account sign in information"
@@ -853,21 +840,19 @@ privacy-policy:
   disagree-text: Bez odobrenja ne možemo da stvorimo nalog, ali osnovne su funkcije i dalje dostupne.
 catro-notifications:
   markAsRead: "Označi kao pročitano"
-  summary: "{0} Nemate novih obaveštenja|{1}Imate%amount% novu obaveštenje!|]1,Inf] Imate%amount% nova obaveštenja!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'Novi komentar za projekat %program_name%!'
     message: 'Korisnik %user_link% je komentarisao vaš projekat %program_link%.'
   like:
-    title: 'Novo sviđanje za projektat %program_name%!'
     message: 'Korisniku %user_link% se dopada Vaš projekat %program_link%.'
   follow:
-    title: 'Novi pratilac!'
     message: 'Korisnik %user_link% Vas sada prati.'
   program-upload:
-    title: 'Novi projekat od nekoga koga pratite'
     message: 'Korisnik %user_link% je napravio novi projekat %program_link%'
   remix:
-    title: 'Novo remiks za projektat %program_name%!'
     message: 'Korisnik %user_link% je remiksao vaš projekat %program_link%. Remiks možete pogledati na sledećem linku %remix_program_link%'
 clipboard:
   success: Link do projekta kopiran u međuspremnik!

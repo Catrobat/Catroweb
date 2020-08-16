@@ -45,28 +45,15 @@ notifications: 'การแจ้งเตือน'
 allNotifications: 'การแจ้งเตือนทั้งหมด'
 FollowersNotifications: 'ผู้ติดตาม'
 LikeNotifications: 'ถูกใจ'
-likesNotificationsTitle: 'การแจ้งเตือนผู้กดไลค์'
-followersNotificationsTitle: 'การแจ้งเตือนผู้ติดตาม'
-commentsNotificationsTitle: 'การแจ้งเตือนความคิดเห็น'
-remixNotificationsTitle: 'การแจ้งเตือนเรียบเรียง'
 CommentNotifications: 'ความคิดเห็น'
 RemixNotifications: 'ผสม'
-oldnotification: 'การแจ้งเตือนเก่า'
 wellDone: "ทำได้ดี!"
 done: "เสร็จสิ้น"
 notificationsReadMessage: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนใด ๆ"
-notificationsClearedMessage: "การแจ้งเตือนทั้งหมดถูกทำเครื่องหมายว่าอ่านแล้ว"
-deleteNotificationConfirmation: "คุณแน่ใจหรือไม่?"
-notificationDeleteMessage: "คุณแน่ใจหรือว่าต้องการลบการแจ้งเตือนนี้"
-notificationDeleteAllMessage: "คุณแน่ใจหรือว่าต้องการลบการแจ้งเตือนนี้"
 confirmMessage: "ใช่ ลบทิ้ง!"
 cancelMessage: "ยกเลิก"
-notificationsAllMessagesDeleted: "การแจ้งเตือนทั้งหมดถูกลบ"
-notificationDeletedMessage: "ลบการแจ้งเตือนสำเร็จแล้ว"
-clearAllNotificationsButtonTitle: "ทำเครื่องหมายว่าอ่านทั้งหมดแล้ว"
-deleteAllNotificationsButtonTitle: "ลบทั้งหมด"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "ไม่สามารถทำเครื่องหมายแจ้งเตือนว่าอ่านได้"
-notificationsDeleteError: "ไม่สามารถลบการแจ้งเตือน!"
 pleaseWait: "กรุณารอสักครู่…"
 projects: "โปรแกรม"
 oauthPopUpTitle: "External account sign in information"
@@ -855,21 +842,19 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New project from someone you follow'
     message: 'User %user_link% created a new project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

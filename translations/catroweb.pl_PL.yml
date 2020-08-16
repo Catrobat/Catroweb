@@ -45,28 +45,15 @@ notifications: 'Powiadomienia'
 allNotifications: 'Wszystkie powiadomienia'
 FollowersNotifications: 'Obserwujący'
 LikeNotifications: 'Polubienia'
-likesNotificationsTitle: 'Powiadomienia o reakcjach'
-followersNotificationsTitle: 'Powiadomienia o obserwatorach'
-commentsNotificationsTitle: 'Powiadomienia o komentarzach'
-remixNotificationsTitle: 'Powiadomienia o remiksach'
 CommentNotifications: 'Komentarze'
 RemixNotifications: 'Remiksy'
-oldnotification: 'Stare powiadomienia'
 wellDone: "Świetnie!"
 done: "Gotowe!"
 notificationsReadMessage: "Wygląda na to, że nie masz żadnych powiadomień."
-notificationsClearedMessage: "Wszystkie powiadomienia zostały oznaczone jako przeczytane."
-deleteNotificationConfirmation: "Jesteś pewien?"
-notificationDeleteMessage: "Na pewno chcesz usunąć to powiadomienie?"
-notificationDeleteAllMessage: "Na pewno chcesz usunąć wszystkie powiadomienia?"
 confirmMessage: "Tak, usuń"
 cancelMessage: "Anuluj"
-notificationsAllMessagesDeleted: "Wszystkie powiadomienia zostały usunięte."
-notificationDeletedMessage: "Powiadomienie zostało pomyślnie usunięte."
-clearAllNotificationsButtonTitle: "Oznacz wszystkie jako przeczytane"
-deleteAllNotificationsButtonTitle: "Usuń wszystko"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
-notificationsDeleteError: "Nie można usunąć powiadomień!"
 pleaseWait: "Proszę czekać..."
 projects: "Programy"
 oauthPopUpTitle: "External account sign in information"
@@ -847,21 +834,19 @@ privacy-policy:
   disagree-text: Bez Twojej zgody nie możemy stworzyć konta, ale podstawowe funkcje są nadal dostępne.
 catro-notifications:
   markAsRead: "Oznacz jako przeczytane"
-  summary: "{0}Nie masz nowych powiadomień|{1}Masz %amount% nowe powiadomienie!|]1,Inf]Masz %amount% nowych powiadomień!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'Nowy komentarz do projektu %program_name%!'
     message: 'Użytkownik %user_link% skomentował Twój projekt %program_link%.'
   like:
-    title: 'Nowe polubienie projektu %program_name%!'
     message: 'Użytkownik %user_link% polubił Twój projekt %program_link%.'
   follow:
-    title: 'Nowy Obserwator!'
     message: 'Użytkownik %user_link% obserwuje Cię teraz.'
   program-upload:
-    title: 'Nowy projekt użytkownika, którego obserwujesz'
     message: 'Użytkownik %user_link% stworzył nowy projekt %program_link%'
   remix:
-    title: 'Nowy remiks projektu %program_name%!'
     message: 'Użytkownik %user_link% zremiksował Twój projekt %program_link%. Możesz zobaczyć remiks klikając link %remix_program_link%.'
 clipboard:
   success: Link do projektu skopiowany do schowka!

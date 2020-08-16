@@ -44,29 +44,16 @@ registrationError: 'Kullanıcı adı yada e-posta zaten kullanılıyor.'
 notifications: 'Bildirimler'
 allNotifications: 'Tüm bildirimler'
 FollowersNotifications: 'Takipçiler'
-LikeNotifications: 'İzlenmeler'
-likesNotificationsTitle: 'İzlenme bildirimleri'
-followersNotificationsTitle: 'Takipçi bildirimleri'
-commentsNotificationsTitle: 'Yorum bildirimleri'
-remixNotificationsTitle: 'Remix bildirimleri'
+LikeNotifications: 'Tepkiler'
 CommentNotifications: 'Yorumlar'
 RemixNotifications: 'Remixlenenler'
-oldnotification: 'Eski bildirimler'
 wellDone: "Tebrikler!"
 done: "Tamam!"
 notificationsReadMessage: "Herhangi bir bildiriminiz yok gibi görünüyor."
-notificationsClearedMessage: "Bütün bildirimleri okunmuş olarak işaretlendi."
-deleteNotificationConfirmation: "Emin misiniz?"
-notificationDeleteMessage: "Bu bildirimi silmek istediğinizden emin misiniz?"
-notificationDeleteAllMessage: "Tüm bildirimleri silmek istediğinizden emin misiniz?"
 confirmMessage: "Evet, sil"
 cancelMessage: "İptal et"
-notificationsAllMessagesDeleted: "Tüm bildirimler silindi."
-notificationDeletedMessage: "Bildirim başarıyla silindi."
-clearAllNotificationsButtonTitle: "Hepsini okundu olarak işaretle"
-deleteAllNotificationsButtonTitle: "Hepsini sil"
+notificationsUnauthorizedError: "Kullanıcıya yetki verilemiyor"
 notificationsClearError: "Bildirimler okundu olarak işaretlenemedi!"
-notificationsDeleteError: "Bildirimler silinemedi!"
 pleaseWait: "Lütfen bekleyiniz..."
 projects: "Projelerin"
 oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
@@ -199,7 +186,7 @@ noReply: Bu otomatik bir mesajdır - Lütfen bu e-postayı doğrudan yanıtlamay
 accountConfirmation:
   subject: Catrobat hesap onayınız
   message: |
-    Sayın %username% 
+    Sayın %username%
     Hesabınızı etkinleştirmeyi bitirmek için lütfen
     %confirmationUrl% adresini ziyaret edin. Bu bağlantı, hesabınızı doğrulamak için yalnızca bir kez kullanılabilir. Saygılarımla,
     Catrobat Takımı.
@@ -835,21 +822,19 @@ privacy-policy:
   disagree-text: Onay olmadan bir hesap oluşturamayız, ancak temel özelliklere hâlâ erişilebilir.
 catro-notifications:
   markAsRead: "Okundu olarak işaretle"
-  summary: "{0}Yeni bildirim yok|{1}Yeni %amount% bildirimi|]1,Inf] Yeni %amount% bildirimleri"
+  noFollowers: "Görünüşe göre hiç takipçi bildiriminiz yok."
+  noComments: "Görünüşe göre herhangi bir yorum bildiriminiz yok."
+  noReactions: "Görünüşe göre herhangi bir tepki bildiriminiz yok."
+  noRemixes: "Görünüşe göre herhangi bir remix bildiriminiz yok."
   comment:
-    title: '%program_name% projesi için yeni yorum'
     message: '%user_link% kullanıcısı%program_link% projenize yorum yaptı.'
   like:
-    title: '%program_name% projesine yeni izlenme!'
     message: '%user_link% kullanıcısı %program_link% projenize tepki verdi.'
   follow:
-    title: 'Yeni takipçi!'
     message: 'Kullanıcı %user_link% şimdi sizi takip ediyor.'
   program-upload:
-    title: 'Takip ettiğiniz birinden yeni proje!'
     message: '%user_link% kullanıcısı yeni bir proje oluşturdu %program_link%'
   remix:
-    title: '%program_name% projesi için yeni remix!'
     message: 'Kullanıcı %user_link% projenizi %program_link% yeniden düzenledi. Remix''i aşağıdaki %remix_program_link% bağlantısında görebilirsiniz.'
 clipboard:
   success: Panoya kopyalanan projeye bağlantı!

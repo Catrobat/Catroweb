@@ -45,28 +45,15 @@ notifications: 'Notifications'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
-likesNotificationsTitle: 'Reaction Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
-remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'Comments'
 RemixNotifications: 'Remixes'
-oldnotification: 'Old Notifications'
 wellDone: "Well done!"
 done: "Done!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-deleteNotificationConfirmation: "Are you sure?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
 confirmMessage: "Yes, delete it"
 cancelMessage: "Cancel"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "Mark all as read"
-deleteAllNotificationsButtonTitle: "Delete all"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
-notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Please wait..."
 projects: "Projects"
 oauthPopUpTitle: "External account sign in information"
@@ -849,21 +836,19 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

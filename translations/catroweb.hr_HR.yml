@@ -45,28 +45,15 @@ notifications: 'Obavijesti'
 allNotifications: 'Sve obavijesti'
 FollowersNotifications: 'Pratitelji'
 LikeNotifications: 'Sviđanja'
-likesNotificationsTitle: 'Obavijesti o Likeovima'
-followersNotificationsTitle: 'Obavijesti o sljedbenicima'
-commentsNotificationsTitle: 'Obavijesti o komentarima'
-remixNotificationsTitle: 'Remix notifications'
 CommentNotifications: 'Komentari'
 RemixNotifications: 'Remixi'
-oldnotification: 'Stare obavijesti'
 wellDone: "Bravo!"
 done: "Gotovo!"
 notificationsReadMessage: "Izgleda da nemate novih obavijesti."
-notificationsClearedMessage: "Sve obavijesti su oznacene kao procitane."
-deleteNotificationConfirmation: "Jeste li sigurni?"
-notificationDeleteMessage: "Jeste li sigurni da želite izbrisati ovu obavijest?"
-notificationDeleteAllMessage: "Jeste li sigurni da želite izbrisati sve obavijesti?"
 confirmMessage: "Da, izbrisi"
 cancelMessage: "Odustani"
-notificationsAllMessagesDeleted: "Sve obavijesti su izbrisane."
-notificationDeletedMessage: "Obavijest je uspjesno izbrisana."
-clearAllNotificationsButtonTitle: "Označi sve kao pročitano"
-deleteAllNotificationsButtonTitle: "Izbriši sve"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Obavijesti ne mogu biti oznacene kao procitane!"
-notificationsDeleteError: "Nije moguce izbrisati obavijest!"
 pleaseWait: "Molimo pričekajte..."
 projects: "Programi"
 oauthPopUpTitle: "External account sign in information"
@@ -854,21 +841,19 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new notifications|{1}You have %amount% new notification!|]1,Inf]You have %amount% new notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'Korisnik %user_link% je ostavio komentar na vas projekt %program_link.'
   like:
-    title: 'Nova oznaka svidja mi se na program %program_name%!'
     message: 'Korisnik %user_link% je oznacio vas projekt %program_link% sa svidja mi se.'
   follow:
-    title: 'Novi pratitelj!'
     message: 'Korisnik %user_link% vas slijedi sada.'
   program-upload:
-    title: 'Novi projekt od nekoga koga slijedite'
     message: 'User %user_link% created a new project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Poveznica na program kopirana u medjuspremnik!
