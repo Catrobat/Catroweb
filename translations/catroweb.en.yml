@@ -888,7 +888,7 @@ catro-notifications:
   program-upload:
     message: '%user_link% created a new game %program_link%.'
   remix:
-    message: '%user_link% created a remix %remix_program_link% of your game %program_link%.'
+    message: '%user_link% created a remix %program_link% of your game %remixed_program_link%.'
 
 clipboard:
   success: Link to project copied to clipboard!

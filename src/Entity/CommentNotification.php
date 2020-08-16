@@ -39,7 +39,7 @@ class CommentNotification extends CatroNotification
    */
   public function __construct(User $user, UserComment $comment)
   {
-    parent::__construct($user);
+    parent::__construct($user, '', '', 'comment');
     $this->comment = $comment;
   }
 

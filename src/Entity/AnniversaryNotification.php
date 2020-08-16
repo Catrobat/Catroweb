@@ -21,7 +21,7 @@ class AnniversaryNotification extends CatroNotification
 
   public function __construct(User $user, string $title, string $message, string $prize)
   {
-    parent::__construct($user, $title, $message);
+    parent::__construct($user, $title, $message, 'anniversary');
     $this->prize = $prize;
   }
 
