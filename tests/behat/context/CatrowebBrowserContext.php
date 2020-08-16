@@ -2484,27 +2484,15 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the extracted-folder$/
+   * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the compressed-folder$/
    *
    * @param mixed $filename
    * @param mixed $size
    */
   public function thereIsAFileWithSizeBytesInTheExtractedFolder($filename, $size): void
   {
-    $this->generateFileInPath($this->getSymfonyParameter('catrobat.file.extract.dir'),
+    $this->generateFileInPath($this->getSymfonyParameter('catrobat.file.storage.dir'),
       $filename, $size);
-  }
-
-  /**
-   * @Then /^program with id "([^"]*)" should have no directory_hash$/
-   *
-   * @param mixed $program_id
-   */
-  public function programWithIdShouldHaveNoDirectoryHash($program_id): void
-  {
-    $program_manager = $this->getProgramManager();
-    $program = $program_manager->find($program_id);
-    Assert::assertEquals(null, $program->getExtractedDirectoryHash());
   }
 
   /**

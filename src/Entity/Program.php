@@ -177,11 +177,6 @@ class Program
   protected int $downloads = 0;
 
   /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected ?string $directory_hash = null;
-
-  /**
    * @ORM\Column(type="datetime")
    */
   protected DateTime $uploaded_at;
@@ -732,16 +727,6 @@ class Program
   public function setCategory(?StarterCategory $category): void
   {
     $this->category = $category;
-  }
-
-  public function setExtractedDirectoryHash(?string $directory_hash): void
-  {
-    $this->directory_hash = $directory_hash;
-  }
-
-  public function getExtractedDirectoryHash(): ?string
-  {
-    return $this->directory_hash;
   }
 
   public function getApkStatus(): int

@@ -26,7 +26,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -184,11 +183,11 @@ class ProgramManagerTest extends TestCase
         return $project;
       }))
     ;
+    fopen('/tmp/phpUnitTest', 'w');
+    $file = new File('/tmp/phpUnitTest');
+    $this->file_repository->expects($this->atLeastOnce())->method('saveProgramFile')->with($file, 1);
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
-
-    $this->file_repository->expects($this->atLeastOnce())->method('saveProgramTemp')->with($this->extracted_file, 1);
-    $this->file_repository->expects($this->atLeastOnce())->method('makeTempProgramPerm')->with(1);
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
@@ -304,39 +303,5 @@ class ProgramManagerTest extends TestCase
     ;
 
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function testProjectHashMustBeUpdatedOnUploads(): void
-  {
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
-    $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
-        $project->setId('1');
-
-        return $project;
-      }))
-    ;
-
-    $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
-
-    $request = $this->createMock(AddProgramRequest::class);
-
-    fopen('/tmp/phpUnitTest', 'w');
-    $file = new File('/tmp/phpUnitTest');
-    $request->expects($this->any())->method('getProgramfile')->willReturn($file);
-    $request->expects($this->any())->method('getUser')->willReturn($this->createMock(User::class));
-    $request->expects($this->any())->method('getLanguage')->willReturn('en');
-
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
-
-    $program = $this->program_manager->addProgram($request);
-    Assert::assertEquals($this->extracted_file->getDirHash(), $program->getExtractedDirectoryHash());
   }
 }

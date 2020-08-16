@@ -3,6 +3,7 @@
 namespace App\Api_deprecated\Controller;
 
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
+use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\StatusCode;
 use App\Entity\Program;
@@ -35,7 +36,8 @@ class DownloadProgramController extends AbstractController
    * @return BinaryFileResponse|JsonResponse
    */
   public function downloadProgramAction(Request $request, $id, ProgramManager $program_manager,
-                                        ProgramFileRepository $file_repository, LoggerInterface $logger)
+                                        ProgramFileRepository $file_repository, LoggerInterface $logger,
+                                        ExtractedFileRepository $extracted_file_repository)
   {
     /* @var $program Program */
     $referrer = $request->getSession()->get('referer');
@@ -52,6 +54,11 @@ class DownloadProgramController extends AbstractController
     $rec_tag_by_program_id = (int) $request->query->get('rec_from', 0);
     try
     {
+      if (!$file_repository->checkIfProgramFileExists($program->getId()))
+      {
+        $extracted_file = $extracted_file_repository->loadProgramExtractedFile($program);
+        $file_repository->saveProgram($extracted_file, $program->getId());
+      }
       $file = $file_repository->getProgramFile($id);
     }
     catch (FileNotFoundException $fileNotFoundException)
@@ -87,7 +94,6 @@ class DownloadProgramController extends AbstractController
       }
 
       $response = new BinaryFileResponse($file);
-
       // can be changed back to $response->setContentDisposition
       // after https://github.com/symfony/symfony/issues/34099 has been fixed
       $response->headers->set(

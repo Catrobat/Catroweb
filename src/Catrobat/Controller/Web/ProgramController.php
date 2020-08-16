@@ -141,9 +141,6 @@ class ProgramController extends AbstractController
       $referrer, $program_comments, $request
     );
 
-    // Catblocks is working with the extracted files not the project zip.
-    $this->extracted_file_repository->ensureProjectIsExtracted($project);
-
     return $this->render('Program/program.html.twig', [
       'program' => $project,
       'program_details' => $program_details,

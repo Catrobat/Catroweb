@@ -40,6 +40,7 @@ use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\UrlHelper;
 
 class ProgramManager
@@ -197,6 +198,7 @@ class ProgramManager
       $program = new Program();
       $program->setRemixRoot(true);
     }
+
     $program->setName($extracted_file->getName());
     $program->setDescription($extracted_file->getDescription());
     $program->setUser($request->getUser());
@@ -212,7 +214,6 @@ class ProgramManager
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
-    $program->setExtractedDirectoryHash($extracted_file->getDirHash());
     $this->addTags($program, $extracted_file, $request->getLanguage());
 
     $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
@@ -233,8 +234,6 @@ class ProgramManager
       {
         $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
       }
-
-      $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
     }
     catch (Exception $e)
     {
@@ -265,7 +264,6 @@ class ProgramManager
       {
         $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
       }
-      $this->file_repository->makeTempProgramPerm($program->getId());
     }
     catch (Exception $e)
     {
@@ -276,7 +274,6 @@ class ProgramManager
       try
       {
         $this->screenshot_repository->deletePermProgramAssets($program_id);
-        $this->file_repository->deleteProgramFile($program_id);
       }
       catch (IOException $error)
       {
@@ -292,9 +289,20 @@ class ProgramManager
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
+    $this->file_repository->saveProgramFile($file, $program->getId());
 
     $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
     $this->notifyFollower($program);
+    $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$program->getId();
+    if (is_dir($compressed_file_directory))
+    {
+      (new Filesystem())->remove($compressed_file_directory);
+    }
+    if (is_dir($extracted_file->getPath()))
+    {
+      (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$program->getId());
+    }
+    (new Filesystem())->remove($extracted_file->getPath());
 
     return $program;
   }

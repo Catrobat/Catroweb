@@ -33,16 +33,15 @@ Feature: Admin Server Maintenance
     Then the client response should contain "Generated APKs (0.00 B)"
     And program with id "1" should have no apk
 
-  Scenario: As a valid admin I want to be able to remove the extracted program files through the backend
+  Scenario: As a valid admin I want to be able to remove the compressed program files through the backend
   which should result in deleting resources from disk and reset entity state
     Given I am a logged in as super admin
     And there are programs:
-      | id | name    | apk_status | directory_hash |
-      | 1  | program | none       | generated_hash |
-    And there is a file "generated_hash/code.xml" with size "4096" bytes in the extracted-folder
+      | id | name    | apk_status |
+      | 1  | program | none       |
+    And there is a file "1.catrobat" with size "4096" bytes in the compressed-folder
     When I GET "/admin/maintain/list"
-    Then the client response should contain "Extracted Catrobatfiles (4.00 KiB)"
-    When I GET "/admin/maintain/extracted"
-    Then the client response should contain "Extracted Catrobatfiles (0.00 B)"
-    And program with id "1" should have no directory_hash
+    Then the client response should contain "Compressed Catrobatfiles (4.00 KiB)"
+    When I GET "/admin/maintain/compressed"
+    Then the client response should contain "Compressed Catrobatfiles (0.00 B)"
 

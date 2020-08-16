@@ -32,6 +32,7 @@ class SaveProgramSnapshotListener
     {
       $this->saveProgramSnapshot($project);
     }
+    $this->file_repository->deleteProgramFile($project->getId());
   }
 
   public function saveProgramSnapshot(Program $program): void
