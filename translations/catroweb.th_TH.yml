@@ -52,7 +52,7 @@ done: "เสร็จสิ้น"
 notificationsReadMessage: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนใด ๆ"
 confirmMessage: "ใช่ ลบทิ้ง!"
 cancelMessage: "ยกเลิก"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "ไม่สามารถให้สิทธิ์ผู้ใช้"
 notificationsClearError: "ไม่สามารถทำเครื่องหมายแจ้งเตือนว่าอ่านได้"
 pleaseWait: "กรุณารอสักครู่…"
 projects: "โปรแกรม"
@@ -842,10 +842,10 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  noFollowers: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนผู้ติดตามเลย"
+  noComments: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนความคิดเห็นใด ๆ"
+  noReactions: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนปฏิกิริยาใด ๆ"
+  noRemixes: "ดูเหมือนว่าคุณจะไม่มีการแจ้งเตือนการรีมิกซ์"
   comment:
     message: 'User %user_link% commented on your project %program_link%.'
   like:
