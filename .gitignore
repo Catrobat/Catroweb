@@ -1,0 +1,92 @@
+### Catroweb ###
+.idea/
+composer.phar
+phpspec.yml
+phpunit.xml
+*.local
+phploc.phar
+.jwt/
+
+
+### Scripts ###
+bin/
+!bin/console
+!bin/borg_restore_share.sh
+!bin/checkCatroidRepositoryForNewBricks
+!bin/recsys-similarity-computation-service.jar
+!bin/x_perm.sh
+!bin/x_reset.sh
+!bin/x_test.sh
+
+### Sass ###
+.sass-cache/
+*.css.map
+
+### Node ###
+node_modules/
+
+### public ###
+public/**
+!public/.well-known
+!public/resources
+!public/resources/**
+!public/resources_test
+!public/resources_test/**
+!public/index.php
+!public/index_test.php
+!public/robots.txt
+
+### tests ###
+tests/style-report/**
+!tests/style-report/catroweb.xml
+tests/testreports/behat/**
+tests/testreports/coverage/**
+tests/testreports/screens/**
+
+### var ###
+var/cache/**
+var/log/**
+
+### vendor ###
+vendor/
+
+### root ###
+*.sh
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+### docker ###
+!/docker/app/startup.sh
+!/docker/app/wait-for-it.sh
+!/docker/app/set-permissions.sh
+!/docker/app/execute-tests.sh
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
