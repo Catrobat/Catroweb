@@ -155,9 +155,11 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     const popupBackground = self.createPopupBackgroundDiv()
     const popupDiv = self.createPopupDiv()
     const body = $('body')
+    const apkSpinner = $('#apk-pb')
+    apkSpinner.removeClass('d-none')
 
     popupDiv.append('<h2>' + self.apkPreparing + '</h2><br>')
-    popupDiv.append('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">')
+    popupDiv.append(apkSpinner)
     popupDiv.append('<p>' + self.apkText + '</p>')
 
     const closePopupButton = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + self.btnClosePopup + '</button>'
@@ -167,6 +169,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     body.append(popupDiv)
 
     $('#popup-background, #btn-close-popup').click(function () {
+      apkSpinner.addClass('d-none')
       popupDiv.remove()
       popupBackground.remove()
     })
@@ -249,13 +252,18 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         detailOpened = false
       }
     })
-    $counter.on('click', self.counterClickAction)
-    $counterSmall.on('click', self.counterClickAction)
+    $counter.on('click', { small: false }, self.counterClickAction)
+    $counterSmall.on('click', { small: true }, self.counterClickAction)
     $detail.find('.btn').on('click', self.detailsAction)
     $detailSmall.find('.btn').on('click', self.detailsAction)
   }
 
-  self.counterClickAction = function () {
+  self.counterClickAction = function (event) {
+    if (event.data.small) {
+      $('#project-reactions-spinner-small').removeClass('d-none')
+    } else {
+      $('#project-reactions-spinner').removeClass('d-none')
+    }
     $.getJSON(likeDetailUrl,
       /** @param {{user: {id: string, name: string}, types: string[]}[]} data */
       function (data) {
@@ -333,9 +341,13 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         fnUpdateContent('smile', smileData)
         fnUpdateContent('love', loveData)
         fnUpdateContent('wow', wowData)
+        $('#project-reactions-spinner').addClass('d-none')
+        $('#project-reactions-spinner-small').addClass('d-none')
 
         $modal.modal('show')
       }).fail(function (jqXHR, textStatus, errorThrown) {
+      $('#project-reactions-spinner').hide()
+      $('#project-reactions-spinner-small').hide()
       self.showErrorAlert()
       console.error('Failed fetching like list', jqXHR, textStatus, errorThrown)
     })
@@ -436,4 +448,13 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   $(function () {
     self.initProjectLike()
   })
+  self.projectViewButtonsAction = function (url, spinner, icon = null) {
+    const buttonSpinner = $(spinner)
+    if (icon) {
+      const buttonIcon = $(icon)
+      buttonIcon.hide()
+    }
+    buttonSpinner.removeClass('d-none')
+    window.location.href = url
+  }
 }

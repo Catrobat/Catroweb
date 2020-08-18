@@ -16,9 +16,7 @@
   border-width: medium;
 }
 
-#download-progressbar,
-#download-progressbar-small,
-#apk-progressbar{
+.project-view-spinner{
   @include color(red);
 }
 

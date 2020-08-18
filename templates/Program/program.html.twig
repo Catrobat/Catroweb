@@ -27,12 +27,17 @@
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
       <h1 class="h2 no-overflow">{{ program.name }}</h1>
 
-      <div class="">
-        <a href="{{ url('profile', { id : program.user.id }) }}"
-           class="icon-text align-bottom" id="program-owner-username">
+      <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
+              '#code-view-icon{{ suffix|default('') }}')">
+        <a class="icon-text align-bottom" id="program-owner-username">
           <i class="material-icons pr-2" id="user-profile-icon">person</i>
           {{ program.user }}
         </a>
+        <span>
+          <i class="material-icons d-none project-view-spinner" id="project-user-spinner{{ suffix|default('') }}">
+            {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'user-spinner' ~ suffix|default(), small: 'true'} %}
+          </i>
+        </span>
       </div>
 
       <div class="">

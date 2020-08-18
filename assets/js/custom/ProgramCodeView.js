@@ -65,9 +65,10 @@ function ProgramCodeView (shareRoot, extractedPath, projectHash, language, appen
             // Show old view instead
             $('#catblocks-code-container').innerHTML = ''
             $('#codeview-wrapper').removeClass('d-none')
+            $('#code-view-spinner').addClass('d-none')
           })
           .finally(() => {
-            $('#code-view-pb').hide()
+            $('#code-view-spinner').addClass('d-none')
             $('#code-view-toggler').removeClass('d-none')
             // catblocks need a visible container to calculate the svg sizes.
             // Still it should be collapsed on a page load.

@@ -15,8 +15,15 @@
 
 {% block body %}
 
+  <div class="d-flex justify-content-center">
+    <i class="material-icons" id="code-view-spinner">
+      {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default()} %}
+    </i>
+  </div>
   {% if isVersionSupportedByCatBlocks(version) %}
-    <div id='catblocks-code-container'></div>
+
+    <div id='catblocks-code-container'>
+    </div>
     {# As long as catblocks is not stable we need to also load the old view as backup #}
     {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:oldView', {'id' : id, 'visible' : false })) }}
   {% else %}

@@ -87,6 +87,7 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
                 remixGraph.render(loadingAnimation, networkDescription)
               },
               error: function () {
+                $('#remix-graph-spinner').hide()
                 alert('Unable to fetch remix-graph!')
               }
             })
@@ -105,7 +106,7 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
           location.reload()
         }
       })
-
+      $('#remix-graph-spinner').hide()
       // show graph
       $('#remix-graph-modal-link').click()
     })

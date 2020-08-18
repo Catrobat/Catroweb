@@ -133,8 +133,8 @@
         "type": "vcs",
         "url": "https://github.com/Catrobat/Catroweb-API"
     }, {
-            "type": "vcs",
-            "url":  "git@github.com:leno12/HWIOAuthBundle.git"
-        }]
+        "type": "vcs",
+        "url":  "git@github.com:leno12/HWIOAuthBundle.git"
+    }]
 
 }
