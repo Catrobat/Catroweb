@@ -83,7 +83,7 @@ class DefaultController extends AbstractController
    */
   public function privacypolicyAction(): Response
   {
-    return $this->render('PrivacyAndTerms/policy.html.twig');
+    return $this->render('PrivacyAndTerms/privacyPolicy.html.twig');
   }
 
   /**
