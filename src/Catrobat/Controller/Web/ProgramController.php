@@ -653,4 +653,21 @@ class ProgramController extends AbstractController
 
     return $isReportedByUser;
   }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function stealProjectAjax(Request $request): JsonResponse
+    {
+        $jsonResult = array();
+        if ($request->isXmlHttpRequest()) {
+            $userSalt = $this->getUser()->getSalt();
+            $program = new Program();
+            $program->setId(strval($request->request->get("id")));
+            $rs = $this->program_manager->changeProgramOwnerByUserSalt($userSalt, $program);
+            $jsonResult["userName"] = (($rs == true) ? $this->getUser()->getUsername() : "");
+        }
+        return new JsonResponse($jsonResult);
+    }
 }
