@@ -12,7 +12,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
  * Class ClearCompressedProjectsTest.
  *
  * @internal
- * @covers \App\Commands\Maintenance\CleanExtractedProjectsCommand
+ * @covers \App\Commands\Maintenance\CleanCompressedProjectsCommand
  */
 class ClearCompressedProjectsTest extends KernelTestCase
 {
