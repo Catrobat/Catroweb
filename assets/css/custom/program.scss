@@ -16,7 +16,8 @@
   border-width: medium;
 }
 
-#download-progressbar, #download-progressbar-small,
+#download-progressbar,
+#download-progressbar-small,
 #apk-progressbar{
   @include color(red);
 }
@@ -26,7 +27,8 @@
 }
 
 @media screen and (min-width: 992px){
-  #project-like, #project-like-small {
+  #project-like,
+  #project-like-small {
     .btn-round {
       width: 2.8rem;
       height: 2.8rem;
@@ -35,7 +37,8 @@
 }
 
 @media screen and (max-width: 991px) {
-  #project-like, #project-like-small{
+  #project-like,
+  #project-like-small{
     .btn-round{
       width: 2.5rem;
       height: 2.5rem;
@@ -43,7 +46,8 @@
   }
 }
 
-#project-like, #project-like-small {
+#project-like,
+#project-like-small {
 
   position: relative;
 
@@ -53,7 +57,8 @@
 
   $like-button-size: 3rem;
 
-  #project-like-buttons, #project-like-buttons-small {
+  #project-like-buttons,
+  #project-like-buttons-small {
     .btn {
       border: 2px solid #fff;
       border-radius: 50%;
@@ -94,7 +99,8 @@
       color: darken($primary, 7.5%);
     }
   }
-  #project-like-detail, #project-like-detail-small {
+  #project-like-detail,
+  #project-like-detail-small {
     $like-detail-border-color: #b2b2b2; //edit in svg too; rgb(178,178,178)
     $like-detail-left: 0.5rem;
     $like-detail-padding: 0.5rem;

@@ -3,13 +3,12 @@
 
 .card {
   border-radius: 0;
-  box-shadow: 0 2px 1px -2px rgba(0, 0, 0, .2),
-  0 2px 2px 0 rgba(0, 0, 0, .14),
-  0 1px 4px 0 rgba(0, 0, 0, .12);
+  box-shadow:
+ 0 2px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 4px 0 rgba(0, 0, 0, 0.12);
 
   table.table td,
   table.table th {
-    padding: .25em;
+    padding: 0.25em;
   }
 
   tr td:first-child {
@@ -23,16 +22,16 @@
   }
 
   .card {
-    box-shadow: none;
-    border-left: none;
     border-right: none;
+    border-left: none;
+    box-shadow: none;
     border-block-end: none;
   }
 }
 
 .card-header {
+  font-size: 0.9rem;
   background: none;
-  font-size: .9rem;
   border-bottom: 0;
 
   .collapsed {
@@ -44,18 +43,18 @@
   padding: 0;
 
   .card-header {
-    font-size: .8rem;
-    font-weight: bold;
     padding-left: 2em;
+    font-size: 0.8rem;
+    font-weight: bold;
   }
 
   .card-body {
     padding: 0;
 
     .card-header {
-      font-size: .8rem;
-      font-weight: normal;
       padding-left: 3em;
+      font-size: 0.8rem;
+      font-weight: normal;
     }
   }
 }
@@ -66,8 +65,8 @@
 .card-header[aria-expanded="true"],
 .collapse.show .card-header,
 .collapse.show .card-body {
-  background: rgba(0, 0, 0, .02);
-  transition: .5s background ease;
+  background: rgba(0, 0, 0, 0.02);
+  transition: 0.5s background ease;
 }
 
 .card-header[aria-expanded="true"] {
@@ -75,7 +74,7 @@
 }
 
 .rotate-left {
-  transition: .3s transform ease;
+  transition: 0.3s transform ease;
 }
 
 [data-toggle="collapse"][aria-expanded="true"] .rotate-left {

@@ -1,12 +1,14 @@
 @import "variables";
-@import 'theme_settings';
+@import "theme_settings";
 @import "elements";
 @import "mixins";
 
-*, *:before, *:after {
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 ::-webkit-input-placeholder {
@@ -27,15 +29,15 @@ input:-webkit-autofill {
 }
 
 body {
-  background: $default-background-color!important;
-  font-family: $font-family-sans-serif;
   height: 100%;
+  font-family: $font-family-sans-serif;
+  background: $default-background-color !important;
 }
 
 img {
-  page-break-inside: avoid;
   max-width: 100% !important;
   vertical-align: middle;
+  page-break-inside: avoid;
 }
 
 li {
@@ -47,9 +49,9 @@ li {
 }
 
 .standard-col-text {
-@include box-columns(2, 25px);
-  text-align: justify;
+  @include box-columns(2, 25px);
   padding: 25px 0;
+  text-align: justify;
 }
 
 .standard-article-link {
@@ -81,24 +83,24 @@ form {
   text-align: center;
 
   .input-field {
-    margin: 10px auto;
     width: 320px;
-    background: #fff;
-    border: .2em solid #05222a;
-  @include box-shadow(inset 2px 2px 5px #999);
-    overflow: auto;
     padding: $default-input-padding;
+    margin: 10px auto;
+    overflow: auto;
+    background: #fff;
+    border: 0.2em solid #05222a;
+    @include box-shadow(inset 2px 2px 5px #999);
 
     input {
-      border: none;
-      color: #05222a;
       float: left;
-      font-size: $default-input-size;
-      height: 33px;
-      padding-left: 5px;
-      padding-top: 4px;
-      outline: none;
       width: 80%;
+      height: 33px;
+      padding-top: 4px;
+      padding-left: 5px;
+      font-size: $default-input-size;
+      color: #05222a;
+      border: none;
+      outline: none;
     }
 
     div {
@@ -109,8 +111,8 @@ form {
 }
 
 .no-programs {
-  text-align: center;
   margin-bottom: 25px;
+  text-align: center;
 }
 
 // when changing tile size, adapt self.column_min and self.column_max in ProjectLoader.js
@@ -126,10 +128,10 @@ $program-tile-width: 85px;
 
     display: flex;
     flex-direction: column;
-    width: $program-tile-width;
-    margin: 0.35rem;
     align-items: center;
     justify-content: center;
+    width: $program-tile-width;
+    margin: 0.35rem;
 
     > a {
 
@@ -137,9 +139,9 @@ $program-tile-width: 85px;
       width: 100%;
 
       > img {
-        object-fit: cover;
         max-width: $program-tile-width !important;
         max-height: $program-tile-width;
+        object-fit: cover;
       }
 
       &:hover {
@@ -147,25 +149,26 @@ $program-tile-width: 85px;
       }
 
       .program-name {
-        width: 100%;
         display: inline-block;
+        width: 100%;
       }
 
       > div {
-        font-size: 0.73rem;
         max-width: 100%;
+        font-size: 0.73rem;
       }
 
-      .program-name, > div {
-        white-space: nowrap;
+      .program-name,
+      > div {
+        display: inline-flex;
         overflow: hidden;
         text-overflow: ellipsis;
-        display: inline-flex;
+        white-space: nowrap;
         vertical-align: top;
 
         .project-thumb-icon {
-          font-size: 16px;
           margin-right: 0.3em;
+          font-size: 16px;
         }
       }
     }
@@ -174,21 +177,23 @@ $program-tile-width: 85px;
 }
 
 .button-show-placeholder {
-  margin: 0 auto 30px auto;
-  min-height: 35px;
   display: flex;
   justify-content: center;
+  min-height: 35px;
+  margin: 0 auto 30px;
 }
 
-.button-show-more, .button-show-ajax, .button-show-less {
-  text-align: center;
+.button-show-more,
+.button-show-ajax,
+.button-show-less {
   margin: 0 15px;
   color: $primary;
+  text-align: center;
 }
 
 .button-show-more {
-  cursor: pointer;
   font-size: 3em;
+  cursor: pointer;
 }
 
 .button-show-ajax {
@@ -197,8 +202,8 @@ $program-tile-width: 85px;
 
 .button-show-less {
   display: none;
-  cursor: pointer;
   font-size: 3em;
+  cursor: pointer;
 }
 
 
@@ -228,38 +233,38 @@ $program-tile-width: 85px;
 
 // Old report design (still in use)
 .radio-item {
-  display: inline-block;
   position: relative;
-  padding: 0 0 0 20px;
-  margin: 0 0 0 0;
+  display: inline-block;
   width: 100%;
+  padding: 0 0 0 20px;
+  margin: 0;
 }
 
-.radio-item input[type='radio'] {
+.radio-item input[type="radio"] {
   display: none;
 }
 
-.radio-item label:before {
-  content: " ";
-  display: inline-block;
+.radio-item label::before {
   position: relative;
   top: 5px;
-  margin: 0 5px 0 0;
+  display: inline-block;
   width: 20px;
   height: 20px;
-  border-radius: 11px;
-  border: 2px solid $primary;
+  margin: 0 5px 0 0;
+  content: " ";
   background-color: transparent;
+  border: 2px solid $primary;
+  border-radius: 11px;
 }
 
-.radio-item input[type=radio]:checked + label:after {
-  border-radius: 11px;
-  width: 12px;
-  height: 12px;
+.radio-item input[type=radio]:checked + label::after {
   position: absolute;
   top: 9px;
   left: 24px;
-  content: "";
   display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
   background: $primary;
+  border-radius: 11px;
 }
