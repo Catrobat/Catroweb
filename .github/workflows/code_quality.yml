@@ -243,7 +243,7 @@ jobs:
       - name: PHP Copy Paste Detector
         uses: StephaneBour/actions-php-cpd@1.1
         with:
-          args: src tests --exclude Admin --exclude Entity --exclude phpUnit
+          args: src tests --exclude src/Admin --exclude src/Entity  --exclude tests/phpUnit
   #
   # phpcf (Php Code Fixer):
   #
