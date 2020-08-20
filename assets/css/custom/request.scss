@@ -3,9 +3,9 @@ form {
 }
 
 #reset_pw {
-  margin-left:auto;
-  margin-right:auto;
-  display:block;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #error_user_oauth {
@@ -13,9 +13,9 @@ form {
 }
 
 .hidden {
+  display: none;
   width: 0;
   height: 0;
   background: transparent;
   border: none !important;
-  display: none;
 }

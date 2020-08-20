@@ -1,9 +1,9 @@
-@import '../../../public/bootstrap/scss/functions';
-@import '../base/variables';
-@import '../base/mixins';
-@import '../../../public/bootstrap/scss/variables';
-@import '../../../public/bootstrap/scss/mixins';
-@import 'theme_settings';
+@import "../../../public/bootstrap/scss/functions";
+@import "../base/variables";
+@import "../base/mixins";
+@import "../../../public/bootstrap/scss/variables";
+@import "../../../public/bootstrap/scss/mixins";
+@import "theme_settings";
 
 
 .visited-program {
@@ -42,9 +42,9 @@
 }
 
 .save-button {
-  margin-top: 11px;
-  height: auto;
   width: 100%;
+  height: auto;
+  margin-top: 11px;
   font-size: medium;
   font-weight: normal;
 }
@@ -60,21 +60,21 @@
 }
 
 .img-delete {
-  text-align: center;
   position: relative;
-  cursor: pointer;
-  left: 30px;
   top: -23px;
-  margin-top: -25px;
+  left: 30px;
   width: 30px !important;
   height: 0 !important; // else the layout gets destroyed
+  margin-top: -25px;
+  text-align: center;
+  cursor: pointer;
 
   & i {
-    background-color: rgba($white, 0.9);
-    font-size: 2.0em;
-    border-radius: 50%;
-    margin: 0;
     padding: 0;
+    margin: 0;
+    font-size: 2em;
+    background-color: rgba($white, 0.9);
+    border-radius: 50%;
   }
 }
 
@@ -88,25 +88,25 @@
 
 .img-lock,
 .img-lock-open {
-  text-align: center;
   position: relative;
-  cursor: pointer;
-  left: 25px;
   top: 30px;
+  left: 25px;
   width: 22px !important;
   height: 0 !important; // else the layout gets destroyed
+  text-align: center;
+  cursor: pointer;
 
   & i {
-    background-color: $primary;
-    color: rgba($white, 0.9) !important;
-    font-size: 1em;
-    border-radius: 50%;
-    margin: 0;
     padding: 0.5em;
+    margin: 0;
+    font-size: 1em;
+    color: rgba($white, 0.9) !important;
+    background-color: $primary;
+    border-radius: 50%;
 
     &:hover {
-      background-color: darken($primary, 10);
       color: $primary !important;
+      background-color: darken($primary, 10);
     }
   }
 }
@@ -120,7 +120,7 @@
   }
 
   &__info {
-    font-size: .7em;
+    font-size: 0.7em;
     white-space: normal;
   }
 
@@ -142,8 +142,8 @@
     min-width: 150px;
 
     @include media-breakpoint-down(xs) {
-      width: 100%;
       display: block;
+      width: 100%;
     }
   }
 }

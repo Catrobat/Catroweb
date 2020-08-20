@@ -2,25 +2,25 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 600;
+  transform: translate(-50%, -50%);
 }
 
 
 .loader {
+  position: relative;
   display: inline-block;
   width: 160px;
   height: 160px;
   border: 20px solid #000;
-  position: relative;
   animation: loader 4s infinite ease;
 }
 
 .loader-inner {
-  vertical-align: top;
   display: inline-block;
   width: 100%;
-  background-color: #FFFFFF;
+  vertical-align: top;
+  background-color: #fff;
   animation: loader-inner 4s infinite ease-in;
 }
 
@@ -28,5 +28,5 @@
   margin-top: 20px;
   font-size: 30px;
   color: #000;
-  text-shadow: 1px 1px #CCCCCC;
+  text-shadow: 1px 1px #ccc;
 }

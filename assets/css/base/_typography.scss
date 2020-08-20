@@ -9,11 +9,8 @@
   font-style: normal;
   font-weight: 400;
   src: url("../fonts/MaterialIcons-Regular.eot"); /* For IE6-8 */
-  src: local("Material Icons"),
-  local("MaterialIcons-Regular"),
-  url("../fonts/MaterialIcons-Regular.woff2") format("woff2"),
-  url("../fonts/MaterialIcons-Regular.woff") format("woff"),
-  url("../fonts/MaterialIcons-Regular.ttf") format("truetype");
+  src:
+ local("Material Icons"), local("MaterialIcons-Regular"), url("../fonts/MaterialIcons-Regular.woff2") format("woff2"), url("../fonts/MaterialIcons-Regular.woff") format("woff"), url("../fonts/MaterialIcons-Regular.ttf") format("truetype");
 }
 
 .material-icons {
@@ -50,12 +47,8 @@
   font-style: normal;
   font-weight: normal;
   src: url("../fonts/Roboto-Regular-webfont.eot");
-  src: local("Roboto Regular"),
-  local("Roboto-Regular"),
-  url("../fonts/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../fonts/Roboto-Regular-webfont.woff") format("woff"),
-  url("../fonts/Roboto-Regular-webfont.ttf") format("truetype"),
-  url("../fonts/Roboto-Regular-webfont.svg#RobotoRegular") format("svg");
+  src:
+ local("Roboto Regular"), local("Roboto-Regular"), url("../fonts/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Regular-webfont.woff") format("woff"), url("../fonts/Roboto-Regular-webfont.ttf") format("truetype"), url("../fonts/Roboto-Regular-webfont.svg#RobotoRegular") format("svg");
   font-display: swap;
 }
 
@@ -64,12 +57,8 @@
   font-style: italic;
   font-weight: normal;
   src: url("../fonts/Roboto-Italic-webfont.eot");
-  src: local("Roboto Italic"),
-  local("Roboto-Italic"),
-  url("../fonts/Roboto-Italic-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../fonts/Roboto-Italic-webfont.woff") format("woff"),
-  url("../fonts/Roboto-Italic-webfont.ttf") format("truetype"),
-  url("../fonts/Roboto-Italic-webfont.svg#RobotoItalic") format("svg");
+  src:
+ local("Roboto Italic"), local("Roboto-Italic"), url("../fonts/Roboto-Italic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Italic-webfont.woff") format("woff"), url("../fonts/Roboto-Italic-webfont.ttf") format("truetype"), url("../fonts/Roboto-Italic-webfont.svg#RobotoItalic") format("svg");
   font-display: swap;
 }
 
@@ -78,12 +67,8 @@
   font-style: normal;
   font-weight: bold;
   src: url("../fonts/Roboto-Bold-webfont.eot");
-  src: local("Roboto Bold"),
-  local("Roboto-Bold"),
-  url("../fonts/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../fonts/Roboto-Bold-webfont.woff") format("woff"),
-  url("../fonts/Roboto-Bold-webfont.ttf") format("truetype"),
-  url("../fonts/Roboto-Bold-webfont.svg#RobotoBold") format("svg");
+  src:
+ local("Roboto Bold"), local("Roboto-Bold"), url("../fonts/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Bold-webfont.woff") format("woff"), url("../fonts/Roboto-Bold-webfont.ttf") format("truetype"), url("../fonts/Roboto-Bold-webfont.svg#RobotoBold") format("svg");
   font-display: swap;
 }
 
@@ -190,7 +175,7 @@ h6,
 }
 
 .no-overflow {
-  white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

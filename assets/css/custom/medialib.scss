@@ -1,11 +1,10 @@
-@import '../../../public/bootstrap/scss/functions';
+@import "../../../public/bootstrap/scss/functions";
 @import "../base/variables";
 @import "../base/mixins";
 @import "../base/elements";
-@import '../../../public/bootstrap/scss/variables';
-@import '../../../public/bootstrap/scss/mixins';
-@import 'theme_settings';
-
+@import "../../../public/bootstrap/scss/variables";
+@import "../../../public/bootstrap/scss/mixins";
+@import "theme_settings";
 
 
 #thumbsize-control
@@ -42,16 +41,16 @@ $border-spacing: 8px;
 
     .mediafile
     {
+      position: relative;
       display: flex;
-      height: $tile-size;
-      width: $tile-size;
-      margin: 0.5rem;
       align-items: center;
       justify-content: center;
-      transition: border 0.5s;
+      width: $tile-size;
+      height: $tile-size;
+      margin: 0.5rem;
       border: 2px solid transparent;
       border-radius: 5px;
-      position: relative;
+      transition: border 0.5s;
 
       .checkbox
       {
@@ -64,13 +63,13 @@ $border-spacing: 8px;
 
       &.selected
       {
-        background-color: #E5E5E5;
         text-decoration: none;
+        background-color: #e5e5e5;
 
         .checkbox
         {
-          visibility: visible;
           color: white;
+          visibility: visible;
         }
       }
 
@@ -80,7 +79,8 @@ $border-spacing: 8px;
         max-height: $tile-size - $border-spacing;
       }
 
-      i.fas, i.far
+      i.fas,
+      i.far
       {
         font-size: $tile-size - 15px;
         opacity: 0.13;
@@ -92,17 +92,17 @@ $border-spacing: 8px;
       }
 
       .name {
-        color: $primary;
-        font-size: 1.15rem;
-        text-align: center;
-        @include force-word-break();
-        padding: 1px 4px;
         z-index: 1;
-        max-height: 100%;
         max-width: 100%;
+        max-height: 100%;
+        padding: 1px 4px;
         overflow: hidden;
+        font-size: 1.15rem;
+        color: $primary;
+        text-align: center;
         -ms-text-overflow: ellipsis;
         text-overflow: ellipsis;
+        @include force-word-break();
       }
 
       &:not(.showName) .name
@@ -113,7 +113,9 @@ $border-spacing: 8px;
       &.showName
       {
         display: grid;
-        .name, i.fas, i.far
+        .name,
+        i.fas,
+        i.far
         {
           grid-column: 1;
           grid-row: 1;
@@ -122,17 +124,17 @@ $border-spacing: 8px;
       }
 
       &[data-filetype="audio"] .name {
-        margin-bottom: 1.5rem;
         max-height: calc(100% - 1.5rem);
+        margin-bottom: 1.5rem;
       }
 
       .audio-control {
         position: absolute;
-        bottom: 5px;
         right: 5px;
-        transition: font-size 0.1s;
-        font-size: 1.5rem;
+        bottom: 5px;
         z-index: 2;
+        font-size: 1.5rem;
+        transition: font-size 0.1s;
 
         &:hover {
           font-size: 1.65rem;
@@ -146,8 +148,8 @@ $border-spacing: 8px;
 {
   .category > .files .mediafile
   {
-    height: $tile-size-md-smup;
     width: $tile-size-md-smup;
+    height: $tile-size-md-smup;
 
     > img
     {
@@ -155,7 +157,8 @@ $border-spacing: 8px;
       max-height: $tile-size-md-smup - $border-spacing;
     }
 
-    i.fas, i.far
+    i.fas,
+    i.far
     {
       font-size: $tile-size-md-smup - 15px;
     }
@@ -166,8 +169,8 @@ $border-spacing: 8px;
 {
   > .files .mediafile
   {
-    height: $tile-size-sm;
     width: $tile-size-sm;
+    height: $tile-size-sm;
 
     > img
     {
@@ -175,7 +178,8 @@ $border-spacing: 8px;
       max-height: $tile-size-sm - $border-spacing;
     }
 
-    i.fas, i.far
+    i.fas,
+    i.far
     {
       font-size: $tile-size-sm - 15px;
     }
@@ -186,8 +190,8 @@ $border-spacing: 8px;
 {
   > .files .mediafile
   {
-    height: $tile-size-lg;
     width: $tile-size-lg;
+    height: $tile-size-lg;
 
     > img
     {
@@ -195,7 +199,8 @@ $border-spacing: 8px;
       max-height: $tile-size-lg - $border-spacing;
     }
 
-    i.fas, i.far
+    i.fas,
+    i.far
     {
       font-size: $tile-size-lg - 15px;
     }
