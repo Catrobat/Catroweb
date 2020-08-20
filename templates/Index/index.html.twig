@@ -67,6 +67,7 @@
 {% endblock %}
 
 {% block js %}
+  <script src="{{ asset('js/LazyLoadIframes.min.js') }}"></script>
   <script>const flavor = '{{ theme() }}'</script>
   <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
   <script src="{{ asset('js/ProjectList.min.js') }}"></script>
