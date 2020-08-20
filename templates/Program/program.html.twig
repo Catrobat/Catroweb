@@ -260,8 +260,9 @@
     )
     programRecommender.init();
     function stealProjectAjax(projectID) {
+      {#alert("{{ url("project_steal") }}");#}
       $.ajax({
-        url: "/ajax/stealProject/",
+        url: "{{ url("project_steal") }}",
         data: {"id" : projectID},
         dataType: 'json',
         type: "post",

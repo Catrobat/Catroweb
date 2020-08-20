@@ -655,6 +655,7 @@ class ProgramController extends AbstractController
   }
 
     /**
+     * @Route("/ajax/stealProject/", name="project_steal")
      * @param Request $request
      * @return JsonResponse
      */
