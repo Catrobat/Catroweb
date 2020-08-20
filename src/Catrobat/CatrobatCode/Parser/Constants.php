@@ -115,6 +115,7 @@ class Constants
   const SPEAK_BRICK = 'SpeakBrick';
   const SPEAK_WAIT_BRICK = 'SpeakAndWaitBrick';
   const ASK_SPEECH_BRICK = 'AskSpeechBrick';
+  const STOP_SOUND_BRICK = 'StopSoundBrick';
 
   // --- Control ---
   const WAIT_BRICK = 'WaitBrick';
@@ -156,9 +157,16 @@ class Constants
   const READ_LIST_FROM_DEVICE_BRICK = 'ReadListFromDeviceBrick';
   const STORE_CSV_INTO_USERLIST_BRICK = 'StoreCSVIntoUserListBrick';
   const WEB_REQUEST_BRICK = 'WebRequestBrick';
+  const FOR_VARIABLE_FROM_TO_BRICK = 'ForVariableFromToBrick';
+  const READ_VARIABLE_FROM_FILE_BRICK = 'ReadVariableFromFileBrick';
+  const WRITE_VARIABLE_TO_FILE_BRICK = 'WriteVariableToFileBrick';
 
   // Your Bricks
   const USER_DEFINED_BRICK = 'UserDefinedBrick';
+  const USER_DEFINED_RECEIVER_BRICK = 'UserDefinedReceiverBrick';
+
+  //Your Scripts
+  const USER_DEFINED_SCRIPT = 'UserDefinedScript';
 
   // Embroidery
   const STITCH_BRICK = 'StitchBrick';
@@ -241,6 +249,7 @@ class Constants
   const WAIT_TILL_IDLE_BRICK = 'WaitTillIdleBrick';
   const TAP_AT_BRICK = 'TapAtBrick';
   const FINISH_STAGE_BRICK = 'FinishStageBrick';
+  const ASSERT_USER_LISTS_BRICK = 'AssertUserListsBrick';
 
   // --- Deprecated old bricks - to still provide old projects with correct statistics
   //                             even when the app is not using those bricks anymore
@@ -290,6 +299,7 @@ class Constants
   const TESTING_BRICK_IMG = '1h_brick_light_blue.png';
 
   const YOUR_BRICK_IMG = '1h_brick_light_blue.png';
+  const YOUR_SCRIPT_IMG = '1h_brick_light_blue.png';
 
   // -------------------------------------------------------------------------------------------------------------------
   // Formula Categories

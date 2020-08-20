@@ -8,7 +8,7 @@ use SimpleXMLElement;
 class ScriptFactory
 {
   /**
-   * @return BroadcastScript|CollisionScript|StartScript|UnknownScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript
+   * @return BroadcastScript|CollisionScript|StartScript|UnknownScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript|UserDefinedScript
    */
   public static function generate(SimpleXMLElement $script_xml_properties)
   {
@@ -55,10 +55,15 @@ class ScriptFactory
         $generated_script = new CollisionScript($script_xml_properties);
         break;
 
-      // other scripts
-      default:
-        $generated_script = new UnknownScript($script_xml_properties);
+     // your scripts
+      case Constants::USER_DEFINED_SCRIPT:
+        $generated_script = new UserDefinedScript($script_xml_properties);
         break;
+
+        // other scripts
+        default:
+            $generated_script = new UnknownScript($script_xml_properties);
+            break;
     }
 
     return $generated_script;
