@@ -47,6 +47,7 @@ class ProjectList {
           project = self._generate(project)
           self.projectsContainer.append(project)
           project.click(function () {
+            project.append($('#project-opening-spinner').html())
             const href = $(this).attr('href')
             const programID = ((href.indexOf('project') > 0) ? (href.split('project/')[1]).split('?')[0] : 0)
             const type = self.getClickStatisticType(self.category)
@@ -86,7 +87,6 @@ class ProjectList {
       alt: '',
       class: 'project-list__project__image'
     }).appendTo($p)
-
     $('<span/>', { class: 'project-list__project__name' }).text(data.name).appendTo($p)
     const $prop = $('<div />', { class: 'project-list__project__property project-list__project__property-' + this.propertyToShow })
     $prop.appendTo($p)

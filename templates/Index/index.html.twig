@@ -28,7 +28,6 @@
     {% endif %}
 
     </div>
-
     <div id="home-projects">
         {# array values: [api project_type, translation, property to show] #}
         {% for category in [
@@ -63,6 +62,9 @@
             </div>
         {% endfor %}
     </div>
+    <i class="material-icons d-none" id="project-opening-spinner" style="margin: auto">
+        {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'project-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
+    </i>
 
 {% endblock %}
 
