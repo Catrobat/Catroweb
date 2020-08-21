@@ -116,6 +116,7 @@ class Constants
   const SPEAK_WAIT_BRICK = 'SpeakAndWaitBrick';
   const ASK_SPEECH_BRICK = 'AskSpeechBrick';
   const STOP_SOUND_BRICK = 'StopSoundBrick';
+  const START_LISTENING_BRICK = 'StartListeningBrick';
 
   // --- Control ---
   const WAIT_BRICK = 'WaitBrick';
@@ -131,6 +132,8 @@ class Constants
   const STOP_SCRIPT_BRICK = 'StopScriptBrick';
   const CLONE_BRICK = 'CloneBrick';
   const DELETE_THIS_CLONE_BRICK = 'DeleteThisCloneBrick';
+  const EXIT_STAGE_BRICK = 'ExitStageBrick';
+  const SET_INSTRUMENT_BRICK = 'SetInstrumentBrick';
 
   // auto generated control blocks
   const ELSE_BRICK = 'IfLogicElseBrick';
@@ -160,6 +163,9 @@ class Constants
   const FOR_VARIABLE_FROM_TO_BRICK = 'ForVariableFromToBrick';
   const READ_VARIABLE_FROM_FILE_BRICK = 'ReadVariableFromFileBrick';
   const WRITE_VARIABLE_TO_FILE_BRICK = 'WriteVariableToFileBrick';
+  const PARAMETERIZED_BRICK = 'ParameterizedBrick';
+  const PARAMETERIZED_END_BRICK = 'ParameterizedEndBrick';
+  const FOR_ITEM_IN_USER_LIST_BRICK = 'ForItemInUserListBrick';
 
   // Your Bricks
   const USER_DEFINED_BRICK = 'UserDefinedBrick';
@@ -248,6 +254,7 @@ class Constants
   const ASSERT_EQUALS_BRICK = 'AssertEqualsBrick';
   const WAIT_TILL_IDLE_BRICK = 'WaitTillIdleBrick';
   const TAP_AT_BRICK = 'TapAtBrick';
+  const TAP_FOR_BRICK = 'TapForBrick';
   const FINISH_STAGE_BRICK = 'FinishStageBrick';
   const ASSERT_USER_LISTS_BRICK = 'AssertUserListsBrick';
 
