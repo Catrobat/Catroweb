@@ -654,32 +654,32 @@ class ProgramController extends AbstractController
     return $isReportedByUser;
   }
 
-    /**
-     * @Route("/ajax/stealProject/", name="project_steal")
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function stealProjectAjax(Request $request): JsonResponse
-    {
-        $jsonResult = array();
-        if ($request->isXmlHttpRequest()) {
-            if (is_null($this->getUser())) {
-                return new JsonResponse(null,Response::HTTP_UNAUTHORIZED);
-            } elseif (!is_null(is_null($this->getUser())) && !is_null(trim($request->request->get("id")))
-                && trim($request->request->get("id")) != "") {
-                try {
-                    $program = $this->program_manager->find(strval($request->request->get("id")));
-                    if ($program->getUser() == $this->getUser()) {
-                        return new JsonResponse(null,Response::HTTP_FORBIDDEN);
-                    }
-                    $program->setUser($this->getUser());
-                    $this->program_manager->save($program);
-                } catch (Exception $exception) {
-                    return new JsonResponse(null,Response::HTTP_NOT_FOUND);
-                }
-                    return new JsonResponse(["userName"=> $this->getUser()->getUsername()],Response::HTTP_OK);
-            }
+  /**
+   * @Route("/ajax/stealProject/", name="project_steal")
+   * @param Request $request
+   * @return JsonResponse
+   */
+  public function stealProjectAjax(Request $request): JsonResponse
+  {
+    $jsonResult = array();
+    if ($request->isXmlHttpRequest()) {
+      if (is_null($this->getUser())) {
+        return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
+      } elseif (!is_null($this->getUser()) && !is_null($request->request->get("id"))
+        && trim($request->request->get("id")) != "") {
+        try {
+          $program = $this->program_manager->find(strval($request->request->get("id")));
+          if ($program->getUser() == $this->getUser()) {
+            return new JsonResponse(null, Response::HTTP_FORBIDDEN);
+          }
+          $program->setUser($this->getUser());
+          $this->program_manager->save($program);
+        } catch (Exception $exception) {
+          return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
-        return new JsonResponse($jsonResult,Response::HTTP_BAD_REQUEST);
+        return new JsonResponse(["userName" => $this->getUser()->getUsername()], Response::HTTP_OK);
+      }
     }
+    return new JsonResponse($jsonResult, Response::HTTP_BAD_REQUEST);
+  }
 }
