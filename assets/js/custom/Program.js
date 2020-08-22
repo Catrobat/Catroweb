@@ -437,3 +437,31 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     self.initProjectLike()
   })
 }
+
+function stealProjectAjax(projectID) {
+  $.ajax({
+    url: '/app/ajax/stealProject/',
+    data: { id: projectID },
+    dataType: 'json',
+    type: 'post',
+    complete: function (xhr) {
+      if (xhr.status === 200 && xhr.responseJSON.userName !== '') {
+        // eslint-disable-next-line no-undef
+        showSnackbar('#share-snackbar', 'project has been stolen successfully')
+        $('#program-owner-username').html('<i class="material-icons pr-2" id="user-profile-icon">person</i>' + xhr.responseJSON.userName)
+      } else if (xhr.status === 401) {
+        // eslint-disable-next-line no-undef
+        showSnackbar('#share-snackbar', 'user must be logged in')
+      }  else if (xhr.status === 404) {
+        // eslint-disable-next-line no-undef
+        showSnackbar('#share-snackbar', 'project not found')
+      } else if (xhr.status === 403) {
+        // eslint-disable-next-line no-undef
+        showSnackbar('#share-snackbar', 'project belongs to the same user')
+      } else {
+        // eslint-disable-next-line no-undef
+        showSnackbar('#share-snackbar', 'unknown error has occurred')
+      }
+    }
+  })
+}

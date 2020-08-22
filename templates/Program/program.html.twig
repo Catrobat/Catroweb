@@ -258,20 +258,6 @@
       '{{ program.id }}',
       "{{ path('click_stats') }}"
     )
-    programRecommender.init();
-    function stealProjectAjax(projectID) {
-      {#alert("{{ url("project_steal") }}");#}
-      $.ajax({
-        url: "{{ url("project_steal") }}",
-        data: {"id" : projectID},
-        dataType: 'json',
-        type: "post",
-        success: function (result) {
-          if (result.userName !== "") {
-            $("#program-owner-username").html("<i class=\"material-icons pr-2\" id=\"user-profile-icon\">person</i>"+result.userName);
-          }
-        }
-      });
-    }
+    programRecommender.init()
   </script>
 {% endblock %}

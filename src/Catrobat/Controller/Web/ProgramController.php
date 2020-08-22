@@ -663,12 +663,23 @@ class ProgramController extends AbstractController
     {
         $jsonResult = array();
         if ($request->isXmlHttpRequest()) {
-            $userSalt = $this->getUser()->getSalt();
-            $program = new Program();
-            $program->setId(strval($request->request->get("id")));
-            $rs = $this->program_manager->changeProgramOwnerByUserSalt($userSalt, $program);
-            $jsonResult["userName"] = (($rs == true) ? $this->getUser()->getUsername() : "");
+            if (is_null($this->getUser())) {
+                return new JsonResponse(null,Response::HTTP_UNAUTHORIZED);
+            } elseif (!is_null(is_null($this->getUser())) && !is_null(trim($request->request->get("id")))
+                && trim($request->request->get("id")) != "") {
+                try {
+                    $program = $this->program_manager->find(strval($request->request->get("id")));
+                    if ($program->getUser() == $this->getUser()) {
+                        return new JsonResponse(null,Response::HTTP_FORBIDDEN);
+                    }
+                    $program->setUser($this->getUser());
+                    $this->program_manager->save($program);
+                } catch (Exception $exception) {
+                    return new JsonResponse(null,Response::HTTP_NOT_FOUND);
+                }
+                    return new JsonResponse(["userName"=> $this->getUser()->getUsername()],Response::HTTP_OK);
+            }
         }
-        return new JsonResponse($jsonResult);
+        return new JsonResponse($jsonResult,Response::HTTP_BAD_REQUEST);
     }
 }
