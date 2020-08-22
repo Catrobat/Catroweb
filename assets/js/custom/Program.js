@@ -438,7 +438,8 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   })
 }
 
-function stealProjectAjax(projectID) {
+// eslint-disable-next-line no-unused-vars
+function stealProjectAjax (projectID) {
   $.ajax({
     url: '/app/ajax/stealProject/',
     data: { id: projectID },
@@ -452,7 +453,7 @@ function stealProjectAjax(projectID) {
       } else if (xhr.status === 401) {
         // eslint-disable-next-line no-undef
         showSnackbar('#share-snackbar', 'user must be logged in')
-      }  else if (xhr.status === 404) {
+      } else if (xhr.status === 404) {
         // eslint-disable-next-line no-undef
         showSnackbar('#share-snackbar', 'project not found')
       } else if (xhr.status === 403) {
