@@ -2,6 +2,7 @@
 
 namespace App\Api;
 
+use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
@@ -17,6 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
+use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +43,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   private EntityManagerInterface $entity_manager;
   private TranslatorInterface $translator;
   private UrlGeneratorInterface $url_generator;
+  private RecommenderManager $recommender_manager;
 
   private FeaturedRepository $featured_repository;
 
@@ -51,7 +54,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
                               ImageRepository $featured_image_repository, UserManager $user_manager,
                               RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
-                              UrlGeneratorInterface $url_generator)
+                              UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
@@ -64,6 +67,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->translator = $translator;
     $this->url_generator = $url_generator;
     $this->user_manager = $user_manager;
+    $this->recommender_manager = $recommender_manager;
   }
 
   /**
@@ -139,7 +143,17 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
-    $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+    $recommended = 'recommended' === $category;
+    if ($recommended)
+    {
+      /** @var User $user */
+      $user = $this->getUser();
+      $programs = $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
+    }
+    else
+    {
+      $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+    }
     $responseCode = Response::HTTP_OK;
 
     return $this->getProjectsDataResponse($programs);
@@ -259,6 +273,13 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   /**
    * {@inheritdoc}
+   */
+  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  {
+  }
+
+  /**
+   * {@inheritdoc}
    *
    * @throws Exception
    */
@@ -279,6 +300,13 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $responseCode = Response::HTTP_OK;
 
     return $this->getProjectsDataResponse($programs);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
+  {
   }
 
   /**
