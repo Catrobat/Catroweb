@@ -169,14 +169,8 @@ class RemixManagerTest extends TestCase
     ];
 
     $this->scratch_program_repository
-      ->expects($this->at(0))
-      ->method('find')->with($expected_id_of_first_program)
-      ->willReturn(null)
-    ;
-
-    $this->scratch_program_repository
-      ->expects($this->at(1))
-      ->method('find')->with($expected_id_of_second_program)
+      ->expects($this->exactly(2))
+      ->method('find')
       ->willReturn(null)
     ;
 
