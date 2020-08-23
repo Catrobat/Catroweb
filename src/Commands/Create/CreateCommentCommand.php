@@ -94,8 +94,7 @@ class CreateCommentCommand extends Command
     $temp_comment->setIsReported($reported);
 
     $this->em->persist($temp_comment);
-
-    $notification = new CommentNotification($user, $temp_comment);
+    $notification = new CommentNotification($program->getUser(), $temp_comment);
     $notification->setComment($temp_comment);
     $this->notification_service->addNotification($notification);
 

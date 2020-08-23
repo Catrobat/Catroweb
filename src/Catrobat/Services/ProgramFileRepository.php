@@ -46,23 +46,6 @@ class ProgramFileRepository
     $this->file_compressor->compress($extracted->getPath(), $this->directory, $id);
   }
 
-  public function saveProgramTemp(ExtractedCatrobatFile $extracted, string $id): void
-  {
-    if ('' !== $this->tmp_dir)
-    {
-      $this->file_compressor->compress($extracted->getPath(), $this->tmp_dir, $id);
-    }
-  }
-
-  public function makeTempProgramPerm(string $id): void
-  {
-    if ('' !== $this->tmp_dir)
-    {
-      $this->filesystem->copy($this->tmp_dir.$id.'.catrobat', $this->directory.$id.'.catrobat', true);
-      $this->filesystem->remove($this->tmp_dir.$id.'.catrobat');
-    }
-  }
-
   public function deleteProgramFile(string $id): void
   {
     $this->filesystem->remove($this->directory.$id.'.catrobat');
@@ -76,5 +59,15 @@ class ProgramFileRepository
   public function getProgramFile(string $id): File
   {
     return new File($this->directory.$id.'.catrobat');
+  }
+
+  public function checkIfProgramFileExists(string $id): bool
+  {
+    if (file_exists($this->directory.$id.'.catrobat'))
+    {
+      return true;
+    }
+
+    return false;
   }
 }

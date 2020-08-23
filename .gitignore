@@ -52,7 +52,6 @@ vendor/
 
 ### root ###
 *.sh
-crowdin.yml
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

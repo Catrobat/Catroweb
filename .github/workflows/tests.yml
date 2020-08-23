@@ -14,8 +14,13 @@ on:
 
 jobs:
 
-  tests_dev:
-    # Check that the dev container builds and website + test system is working
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Developer Container:
+  #
+  #   - Since all tests run in a slightly different and reduced test container we must check the dev environment
+  #     explicitly. The container must build, plus the website and test system must be working.
+  #
+  dev_container_checks:
     name: Dev. Container Checks
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +30,6 @@ jobs:
       - name: Build
         run: |
           cd docker
-          docker-compose -f docker-compose.dev.yml build
           docker-compose -f docker-compose.dev.yml up -d
           sleep 30
 
@@ -37,6 +41,7 @@ jobs:
 
       - name: Check local share website
         run: |
+          sudo apt-get update
           sudo apt-get install apache2 wget
           sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
           sudo service apache2 reload
@@ -60,78 +65,172 @@ jobs:
         run: |
           exit -1
 
-
-  tests_phpunit:
-    # Runs all PhpUnit tests via docker in the latest ubuntu build
-    # Additionally code coverage report ist generated and can be downloaded from the artifacts.
-    # Keep in mind the report is not including the functional tests written for behat.
-    name: PhpUnit
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Build:
+  #
+  #   - In order to save computation time the "app.catroweb" image is only build once during this build phase.
+  #     Other jobs can download this image to reduce their build time. With several jobs + the matrix build total
+  #     computation time for this workflow can be highly reduced. This is important since we do not have unlimited
+  #     resources/machines to run the jobs.
+  #
+  build:
+    name: Build catroweb image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Build catroweb app image
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build app.catroweb
+          docker save app.catroweb > catroweb-image.tar
+
+      - name: Upload app.catroweb image
+        uses: actions/upload-artifact@v2
+        with:
+          name: catroweb-image
+          path: docker/catroweb-image.tar
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # PhpUnit:
+  #
+  #   - the tests are executed in our docker since we have many integration tests which access the database, etc.
+  #     One might consider to strictly separate integration and unit tests. Units tests could be executed using
+  #     composer scripts only to reduce the runtime to a few seconds. No build needed + dependencies can be easy cached.
+  #
+  #   - A code coverage report is pushed to the artifacts where it can be downloaded directly on GitHub.
+  #     Keep in mind the report is not including the tests written for behat.
+  #
+  tests_phpunit:
+    name: PhpUnit
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Pull the latest images to build (Faster than caching)
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml pull
+
+      - name: Download app.catroweb image
+        uses: actions/download-artifact@v2
+        with:
+          name: catroweb-image
+          path: docker
+
       - name: Build
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yml build
+          docker load < catroweb-image.tar
           docker-compose -f docker-compose.test.yml up -d
 
       - name: PhpUnit tests
         run:
-          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage
+          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage/phpunit --coverage-clover=tests/testreports/coverage/phpunit/coverage.xml
 
-      - uses: actions/upload-artifact@v2.0.1
+      - name: Upload code coverage report
+        uses: actions/upload-artifact@v2
         if: always()
         with:
           name: PhpUnitTestReport
-          path: tests/testreports/coverage
+          path: tests/testreports/coverage/phpunit
+
+      - uses: codecov/codecov-action@v1
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: tests/testreports/coverage/phpunit/coverage.xml
+          flags: phpunit # optional
+          name: codecov-umbrella # optional
+          # fail_ci_if_error: true # optional (default = false) ToDo: enable once their service stability has
 
 
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Behat:
+  #
+  #  - This job runs all Behat suites parallel using a matrix strategy. This is done since integrations tests which
+  #    are interacting with a browser and the GUI are extremely slow. With a total run-time of over an hour, using this
+  #    approach the run-time can be drastically reduced. The disadvantage, we can't easily create a coverage report
+  #    for the behat scenarios. Something that is considered to be a bad practice anyway since Behat is intended to
+  #    deliver scenario automation in BDD.
+  #
+  #  - Behat and especially UI tests using Mink tend to flaky.
+  #    A test will only be marked as failed if a test fails more than 3 times in a row.
+  #    Flaky tests should be reduced to a minimum in the codebase!
+  #
+  #  - Behat only reruns failed tests - Not pending/missing tests or those with exceptions!
+  #    A pending/missing test will NOT result in a failed pipeline!
+  #    This is the reason why the explicit check for the log file had to be added.
+  #
+  #  - To ease the debugging, besides a log file, screenshots of failing tests are uploaded as artifacts.
+  #
+  #  Notes:
+  #    - Check the behat.yml when changing / creating new suites
+  #    - suites will finish their work even if another suite fails (fail-fast: false)
+  #
   tests_behat:
-    # Runs all Behat test suites parallel using the matrix strategy via docker in the latest ubuntu build.
-    #
-    # - Behat and especially UI tests using Mink tend to flaky.
-    #   A test will only be marked as failed if a test fails more than 3 times in a row.
-    #   Flaky tests should be reduced to a minimum in the codebase!
-    #
-    # - Behat only reruns failed tests - Not pending tests!
-    #   A pending test will NOT result in a failed pipeline!
-    #   This is the reason why the explicit check for the log file had to be added.
-    #
     name: Behat
+    needs: build
     runs-on: ubuntu-latest
     strategy:
-      #
-      #  Notes:
-      #         - Check the behat.yml when changing / creating new suites
-      #         - suites will finish their work even if another suite fails (fail-fast: false)
-      #
       fail-fast: false
       matrix:
         testSuite:
-          - api
-          - api-deprecated
+          - api-authentication
+          - api-mediapackage
+          - api-projects
+          - api-user
+          - api-utility
+
+          - api-deprecated-general
+          - api-deprecated-project
+          - api-deprecated-profile
+          - api-deprecated-upload
+
           - web-admin
+          - web-apk-generation
           - web-authentication
-          - web-gamejam
+          - web-code-statistics
+          - web-code-view
+          - web-comments
           - web-general
-          - web-notifications
+          - web-media-library
+          - web-notifications1
+          - web-notifications2
+          - web-notifications3
+          - web-notifications4
           - web-profile
+          - web-project
           - web-project-details
-          - web-project-details-2
-          - web-project-details-3
-          - web-project-loader
+          - web-project-list
+          - web-reactions
+          - web-recommendations
+          - web-remix-system
+          - web-scratch-integration
           - web-search
           - web-top-bar
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Pull the latest images to build (Faster than caching)
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml pull
+
+      - name: Download app.catroweb image
+        uses: actions/download-artifact@v2
+        with:
+          name: catroweb-image
+          path: docker
+
       - name: Build
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yml build
+          docker load < catroweb-image.tar
           docker-compose -f docker-compose.test.yml up -d
           sleep 30
 
@@ -147,8 +246,8 @@ jobs:
         run: |
           echo ::set-output name=status::failure
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} \
-            | tee tests/testreports/behat/${{ matrix.testSuite }}.log \
-            ; ( exit ${PIPESTATUS[0]} )
+          |& tee tests/testreports/behat/${{ matrix.testSuite }}.log ; \
+          ( exit ${PIPESTATUS[0]} )
           echo ::set-output name=status::success
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
@@ -157,8 +256,8 @@ jobs:
         if: always()
         id: missing-check
         run: |
+          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
           if grep -q 'has missing steps. Define them with these snippets:' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
@@ -168,8 +267,8 @@ jobs:
         if: always()
         id: pending-check
         run: |
+          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
           if grep -q 'pending)' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
@@ -178,10 +277,18 @@ jobs:
         if: always()
         id: chrome-exception-check
         run: |
-          if grep -q 'DMore\ChromeDriver\StreamReadException' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+          if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/testreports/behat/${{ matrix.testSuite }}.log; then
             false;
           fi
+
+      - uses: codecov/codecov-action@v1
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: tests/testreports/coverage/behat/coverage.xml
+          flags: behat # optional
+          name: codecov-umbrella # optional
+          # fail_ci_if_error: true # optional (default = false)
 
       # Rerun #1
       - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests

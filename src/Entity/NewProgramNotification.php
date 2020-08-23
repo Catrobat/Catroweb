@@ -32,7 +32,7 @@ class NewProgramNotification extends CatroNotification
 
   public function __construct(User $user, ?Program $program)
   {
-    parent::__construct($user);
+    parent::__construct($user, '', '', 'follow');
     $this->program = $program;
   }
 

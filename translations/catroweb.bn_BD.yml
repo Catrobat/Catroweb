@@ -3,10 +3,14 @@
 localLanguage: ইংরেজি
 username: ব্যবহারকারীর নাম
 password: পাসওয়ার্ড
+createNewPassword: Create new password
 accountSettings: অ্যাকাউন্ট সেটিংস
 email: ই-মেল
 aboutPocketCode: পকেট কোড সম্পর্কে
-aboutCatrobat: ক্যাট্রোব্যাট সম্পর্কে
+about: সম্পর্কে
+education: Education
+chat: Chat and forums
+others: Others
 tutorials: টিউটোরিয়াল
 googlePlay: গুগল প্লে
 iosAppStore: আইওএস অ্যাপ্লিকেশন ভাণ্ডার
@@ -18,7 +22,7 @@ deleteIt: হ্যাঁ, এটি মুছুন!
 reportIt: হ্যাঁ, রিপোর্ট করুন
 areYouSure: আপনি নিশ্চিত?
 noWayOfReturn: আপনার কাজটি পুনরুদ্ধার করার কোনও উপায় নেই!
-download: Download the project
+download: ডাউনলোড
 description: বর্ণনা
 noDescription: বর্ণনা পাওয়া যায় নি.
 credits: Credits
@@ -27,6 +31,7 @@ country: দেশ
 loginText: প্রবেশ করুন
 privacyPolicy: গোপনীয়তার নীতি
 imprint: মুদ্রিত করা
+programDetails: বিস্তারিত
 somethingWentWrong: 'ওহো, কিছু ভুল হয়েছে'
 pleaseTryAgain: 'অনুগ্রহ করে আবার চেষ্টা করুন।'
 oldVersionError: 'দয়া করে নতুন পকেট কোড সংস্করণটি আপডেট করুন!'
@@ -34,37 +39,30 @@ more: 'আরও'
 less: 'কম'
 show-more: 'আরও দেখান'
 show-less: 'অল্প দেখান'
-ok: সঠিক
+more-information: 'আরো তথ্য'
+less-information: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'ব্যবহারকারীর নাম অথবা ইমেইল পাঠানোর ঠিকানা ইতিমধ্যে ব্যবহৃত।'
 notifications: 'বিজ্ঞপ্তি'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
-likesNotificationsTitle: 'Reaction Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
-remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'মন্তব্যসমূহ'
 RemixNotifications: 'রিমিক্স'
-oldnotification: 'Old Notifications'
 wellDone: "ভাল করেছেন"
 done: "সম্পন্ন!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-notificationsClearedMessage: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করা হয়েছে।"
-deleteNotificationConfirmation: "আপনি নিশ্চিত?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
 confirmMessage: "Yes, delete it"
 cancelMessage: "বাতিল"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "সব পড়ার জন্য চিহ্নিত করুন"
-deleteAllNotificationsButtonTitle: "Delete all"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করতে অক্ষম!"
-notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "অনুগ্রহ করে অপেক্ষা করুন..."
 projects: "প্রজেক্টসমূহ"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -88,6 +86,7 @@ programs:
   welcome:
     title: আপনাকে স্বাগতম Catrobat's %theme%
     subtitle: গল্প, খেলা এবং আরও অনেক কিছু তৈরি করুন ...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: অ্যাপ্লিকেশন ডাউনলোড করুন
     statistics: আরও পরিসংখ্যান
   featured: বৈশিষ্ট্য
@@ -175,7 +174,10 @@ programs:
   wow: কি দারুন
   linkTitle: যোগসূত্র
   link: Copy project link to clipboard
+  reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
+  title: রিমিক্স
   showRemixGraph: 'রিমিক্স গ্রাফ প্রদর্শন করুন'
   by: 'দিয়ে'
   open: 'খুলুন'
@@ -193,7 +195,6 @@ accountConfirmation:
     এই লিঙ্কটি শুধুমাত্র একবার আপনার অ্যাকাউন্টটি বৈধ করার জন্য  ব্যবহার করা যেতে পারে।
     শুভেচ্ছান্তে,
     আপনার Catrobat দল।
-
   messageHtml: |
     প্রিয় %username%.
     আপনার অ্যাকাউন্টটি চালু করতে - দয়া করে এখানে %confirmationUrl% ক্লিক করুন
@@ -216,7 +217,6 @@ passwordRecovery:
 
     শুভেচ্ছান্তে,
     আপনার Catrobat দল।
-
   messageHtml: |
     প্রিয় %username%.
 
@@ -231,7 +231,6 @@ passwordRecovery:
 
     শুভেচ্ছান্তে,
     আপনার Catrobat দল।
-
 profile:
   edit: আপনার প্রোফাইল সম্পাদনা করুন
   saveChanges: পরিবর্তনগুলো সংরক্ষণ করুন
@@ -267,6 +266,7 @@ profile:
     pictureTooLarge: আপনার নির্বাচিত ছবিটি অনেক বড়, দয়া করে ৫ম্যাগা বাইটের চেয়ে বড় ছবিগুলি ব্যবহার করবেন না।
     uploadError: দুঃখিত, ইমেজ/ ছবি আপলোড হতে সমস্যা হচ্ছিল।
     noSupport: এই ধরণের ছবি সমর্থিত নয়, দয়া করে অন্য একটি ছবি চেষ্টা করুন।
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: প্রোফাইল সম্পাদন করুন
   edit: সম্পাদনা করুন
@@ -535,7 +535,7 @@ help:
     title1: "ওয়ান্ডারল্যান্ড এ স্বাগতম"
     subtitle1: "চরিত্রগুলি অ্যানিমেট করুন এবং একটি 'যখন টেপ করা হবে' ইভেন্টটি তৈরি হবে"
     description1: |
-      আপনার চরিত্রগুলির মধ্যে একটিকে কীভাবে একটি সাধারণ অ্যানিমেশন দিয়ে জীবনে নিয়ে আসা যায় এবং 
+      আপনার চরিত্রগুলির মধ্যে একটিকে কীভাবে একটি সাধারণ অ্যানিমেশন দিয়ে জীবনে নিয়ে আসা যায় এবং
       আলতো চেপে কীভাবে আপনার চরিত্র তৈরি করবেন তা শিখুন।ভিডিওটি আপনাকে দেখায় যে কীভাবে আপনি সহজেই বিভিন্ন চেহারা ব্যবহার করে আপনার চরিত্রটি প্রাণবন্ত করতে পারেন।
       আরও আমরা আপনাকে "কখন ট্যাপড" ইভেন্ট তৈরি করা যায় এবং কীভাবে অবজেক্টগুলির মধ্যে সম্প্রচারিত বার্তা প্রেরণ করা যায় তা আপনাকে দেখাব।
     title2: "এলিসকে বাঁচান!"
@@ -556,11 +556,6 @@ help:
       এই টিউটোরিয়ালটি আপনাকে দেখায় যে কীভাবে একটি নির্দিষ্ট উপায়ে ব্যাকগ্রাউন্ড গ্রাফিক্স গ্লাইড করে উল্লম্বভাবে স্ক্রোলিং ব্যাকগ্রাউন্ড তৈরি করতে হয়। আর একটি জিনিস যা আমরা আপনাকে শিখাব তা হ'ল চরিত্রটিতে আলতো চাপ দিয়ে এগিয়ে আসা।
       গেমটিকে আরও কঠিন করতে আমরা আপনাকে দেখাব কীভাবে সময়ের সাথে আপনার চরিত্রের গতি কমিয়ে আনা যায়।
     download: "Download the project"
-oauth:
-  username_header: পকেট কোড সাইন আপ করার জন্য আপনাকে ধন্যবাদ!
-  username_chooser: "অনুগ্রহ করে একটি ব্যবহারকারীর নাম নির্বাচন করুন।"
-  username_hint: ব্যবহারকারীর নামটি আপনার আসল নাম হওয়া উচিত নয়।
-  usernameTaken: ব্যবহারকারীর নাম ইতিমধ্যে নেওয়া হয়েছে, দয়া করে আলাদা একটি পছন্দ করুন।
 search:
   dotdotdot: অনুসন্ধান...
   search: অনুসন্ধান
@@ -672,18 +667,19 @@ failure:
   upload: আপনার অ্যাপ্লিকেশন আপলোড করার সময় একটি ভুল ছিল।
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -765,14 +761,6 @@ admin:
     ramMaintenance: র‌্যাম রক্ষণাবেক্ষণ
     noRemovableObjects: কোন অপসারণযোগ্য সামগ্রী সহজলভ্য নেই।
     removableObjects: অপসারণযোগ্য বস্তু
-    manualBackups: ম্যানুয়াল ব্যাকআপ
-    noRemovableBackupObjects: এই সার্ভারে কোনও অপসারণযোগ্য ব্যাকআপ ফাইল নেই।
-    btnCreateBackup: ব্যাকআপ তৈরি করুন
-    btnDownloadBackup: ব্যাকআপ ডাউনলোড করুন
-    btnRestoreBackup: ব্যাকআপ পুনর্বহাল করুন
-    btnDeleteBackup: ব্যাকআপ মুছুন
-    createBackupConfirmationTitle: ব্যাকআপ ফাইল তৈরি করুন
-    createBackupConfirmationText: এই প্রক্রিয়াটি কিছুটা সময় নিতে পারে। পৃষ্ঠাটি পরে লোড হবে!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
@@ -788,6 +776,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'কোড দেখান'
   hideCode: 'কোড লুকান'
   showStatistics: 'কোড পরিসংখ্যান দেখান'
@@ -848,21 +837,19 @@ privacy-policy:
   disagree-text: অনুমোদন ছাড়াই আমরা একটি অ্যাকাউন্ট তৈরি করতে পারি না তবে মূল বৈশিষ্ট্যগুলি এখনও অ্যাক্সেসযোগ্য।
 catro-notifications:
   markAsRead: "পড়ার জন্য চিহ্নিত করুন"
-  summary: "{0} আপনার কাছে কোনও নতুন বিজ্ঞপ্তি নেই | {1} আপনার কাছে %amount% নতুন বিজ্ঞপ্তি! |]1,Inf] আপনার কাছে %amount% নতুন বিজ্ঞপ্তি রয়েছে!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'নতুন অনুকরণকারী'
     message: 'ব্যবহারকারী %user_link% আপনাকে এখন অনুসরণ করে।'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

@@ -290,8 +290,6 @@ Feature:
     And the user "User1" should not exist
     And comments or catro notifications should not exist
 
-
-
   Scenario: When changing the username it shouldn't contain an email address
     Given I click "#edit-username-button"
     And I wait for AJAX to finish

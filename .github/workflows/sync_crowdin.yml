@@ -1,0 +1,28 @@
+name: Synchronize Crowdin
+
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  synchronize-with-crowdin:
+    name: Synchronize Crowdin Translations
+
+    # Only should run on the main repo.
+    if: github.repository == 'Catrobat/Catroweb'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: crowdin/github-action@1.0.9
+        with:
+          upload_translations: true
+          download_translations: true
+          config: 'crowdin.yml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

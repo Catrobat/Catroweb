@@ -2,12 +2,13 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
+use App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeStatisticsController extends AbstractController
@@ -28,6 +29,9 @@ class CodeStatisticsController extends AbstractController
     $this->translator = $translator;
   }
 
+  /**
+   * @Route("/project/{id}/code_statistics", name="code_statistics", methods={"GET"})
+   */
   public function view(string $id): Response
   {
     // Todo: create useful data structures in CodeStatistic.php
@@ -50,13 +54,16 @@ class CodeStatisticsController extends AbstractController
 
     if (null === $parsed_program)
     {
-      return $this->render('Program/code_statistics.html.twig');
+      return $this->render('Program/code_statistics.html.twig', [
+        'id' => $id,
+      ]);
     }
 
     $stats = $parsed_program->getCodeStatistic();
     $brick_stats = $stats->getBrickTypeStatistic();
 
     return $this->render('Program/code_statistics.html.twig', [
+      'id' => $id,
       'data' => [
         'scenes' => $this->getMappedProjectStatistic('codeview.scenes', $stats->getSceneStatistic()),
         'scripts' => $this->getMappedProjectStatistic('codeview.scripts', $stats->getScriptStatistic()),

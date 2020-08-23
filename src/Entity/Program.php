@@ -8,13 +8,12 @@ use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 use Exception;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="program", indexes={@Index(columns={"id", "name", "description", "credits"}, flags={"fulltext"})})
+ * @ORM\Table(name="program")
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
 class Program
@@ -176,11 +175,6 @@ class Program
    * @ORM\Column(type="integer")
    */
   protected int $downloads = 0;
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected ?string $directory_hash = null;
 
   /**
    * @ORM\Column(type="datetime")
@@ -371,6 +365,11 @@ class Program
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="program", fetch="EXTRA_LAZY")
    */
   protected Collection $reports;
+
+  /**
+   * @ORM\Column(type="boolean", options={"default": false})
+   */
+  private bool $snapshots_enabled = false;
 
   /**
    * Program constructor.
@@ -579,7 +578,7 @@ class Program
   /**
    * Returns the user owning this Program.
    */
-  public function getUser(): User
+  public function getUser(): ?User
   {
     return $this->user;
   }
@@ -728,16 +727,6 @@ class Program
   public function setCategory(?StarterCategory $category): void
   {
     $this->category = $category;
-  }
-
-  public function setExtractedDirectoryHash(?string $directory_hash): void
-  {
-    $this->directory_hash = $directory_hash;
-  }
-
-  public function getExtractedDirectoryHash(): ?string
-  {
-    return $this->directory_hash;
   }
 
   public function getApkStatus(): int
@@ -933,6 +922,33 @@ class Program
     return $this->extensions;
   }
 
+  public function getExtensionsString(): string
+  {
+    $extensions = [];
+    foreach ($this->extensions as $program_extension)
+    {
+      /* @var Extension $program_extension */
+      $extensions[] = $program_extension->getName();
+    }
+
+    return implode(', ', $extensions);
+  }
+
+  public function getTagsString(): string
+  {
+    $tags = [];
+    foreach ($this->tags as $program_tag)
+    {
+      /* @var Tag $program_tag */
+      $tags[] = $program_tag->getEn();
+      $tags[] = $program_tag->getDe();
+      $tags[] = $program_tag->getIt();
+      $tags[] = $program_tag->getFr();
+    }
+
+    return implode(', ', $tags);
+  }
+
   public function isDebugBuild(): bool
   {
     return $this->debug_build;
@@ -1047,5 +1063,15 @@ class Program
   public function isScratchProgram(): bool
   {
     return null !== $this->scratch_id;
+  }
+
+  public function setSnapshotsEnabled(bool $snapshots_enabled): void
+  {
+    $this->snapshots_enabled = $snapshots_enabled;
+  }
+
+  public function isSnapshotsEnabled(): bool
+  {
+    return $this->snapshots_enabled;
   }
 }

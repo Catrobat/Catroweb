@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: הורד
 description: תאור
 noDescription: אין תיאור זמין.
 credits: Credits
@@ -27,14 +27,15 @@ country: מדינה
 loginText: כניסה
 privacyPolicy: מדיניות פרטיות
 imprint: Imprint
+programDetails: Details
 somethingWentWrong: 'Ooooops משהו השתבש.'
 pleaseTryAgain: 'אנא נסה שנית!'
 oldVersionError: 'נא לעדכן הגירסה החדשה ביותר של פוקטקוד!'
 more: 'יותר'
 less: 'פחות'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: OK
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'שם המשתמש או האימייל שבחרת תפוסים.'
 notifications: 'Notifications'
@@ -65,6 +66,7 @@ notificationsClearError: "Unable to mark notifications as read!"
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Please wait..."
 projects: "תוכניות"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'פתח '
   showPaths: 'Show Paths'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: התמונה שבחרת שלך גדולה מדי, אנא אל תשתמש בתמונות הגדולות מ 5 מגהבייט.
     uploadError: מצטער, שהייתה בעיה במהלך ההעלאה!
     noSupport: סוג תמונה זו אינו נתמך, אנא נסה תמונה אחרת.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
   edit: Edit
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

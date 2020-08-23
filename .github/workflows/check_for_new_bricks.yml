@@ -1,0 +1,28 @@
+
+name: Check for new bricks
+
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  check_for_new_catroid_bricks:
+    name: Check for new Catroid Bricks
+
+    # Only should run on the main repo.
+    if: github.repository == 'Catrobat/Catroweb'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install PHP
+        run: sudo apt-get install php
+
+      - name: Set Permissions
+        run: sudo chmod 755 bin/checkCatroidRepositoryForNewBricks
+
+      - name: Check Catroid Repository for new bricks
+        run: bin/checkCatroidRepositoryForNewBricks

@@ -16,6 +16,10 @@ Feature: Users can choose between multiple languages. Text should be automatical
       | Catrobat  | 1       | 1    | 01.01.2017 12:00 |
       | Catrobat  | 2       | 2    | 01.01.2017 12:00 |
       | OtherUser | 1       | 4    | 01.01.2017 12:00 |
+    And there are featured programs:
+      | id | name    | active   | flavor     | priority | ios_only |
+      | 1  | Minions | 1        | pocketcode | 1        |   no    |
+
 
   Scenario: user can choose their language from a dropdown menu in the footer
     Given I am on homepage
@@ -33,19 +37,20 @@ Feature: Users can choose between multiple languages. Text should be automatical
     Given the selected language is "English"
     And I am on the homepage
     And I wait for the page to be loaded
-    And I should see "Recommended projects"
-    And the element "#recommended" should be visible
-    And I should see a recommended homepage program having ID "1" and name "Minions"
+    Then one of the ".project-list__title" elements should contain "Most downloaded"
+    And the element "#home-projects__most_downloaded" should be visible
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
-    Then I should see "ДОБРО ПОЖАЛОВАТЬ"
-    And the element "#recommended" should be visible
-    And I should see a recommended homepage program having ID "1" and name "Minions"
+    Then one of the ".project-list__title" elements should contain "Самые скачиваемые"
+    And the element "#home-projects__most_downloaded" should be visible
     When I switch the language to "French"
     And I wait for the page to be loaded
-    Then I should see "LES PLUS TÉLÉCHARGÉS"
-    And the element "#recommended" should be visible
-    And I should see a recommended homepage program having ID "1" and name "Minions"
+    Then one of the ".project-list__title" elements should contain "Les plus téléchargés"
+    And the element "#home-projects__most_downloaded" should be visible
+    When I switch the language to "Deutsch"
+    And I wait for the page to be loaded
+    Then one of the ".project-list__title" elements should contain "Meist heruntergeladen"
+    And the element "#home-projects__most_downloaded" should be visible
 
   Scenario: User with selected russian language sees the remix graph button and details on program page
     Given there are forward remix relations:
@@ -57,28 +62,9 @@ Feature: Users can choose between multiple languages. Text should be automatical
     And I am on "/app/project/1"
     And the selected language is "English"
     And I wait for the page to be loaded
-    Then I should see "Show Remix Graph"
-    And I should see "1 remix"
-    And the element "#remix-graph-button" should be visible
-    And the element "#remix-graph-modal-link" should be visible
+    Then I should see "REMIX GRAPH"
+    And the element "#remix-graph-button-small" should be visible
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
     Then I should see "Показать перемешанный граф"
-    And I should see "1 ремикс"
-    And the element "#remix-graph-button" should be visible
-    And the element "#remix-graph-modal-link" should be visible
-
-  Scenario: User with selected russian language sees the recommended programs that have been downloaded by other users on program page
-    Given there are program download statistics:
-      | id | program_id | downloaded_at       | ip             | country_code | country_name | user_agent | username  | referrer |
-      | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
-      | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
-    And the selected language is "English"
-    And I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then There should be recommended specific programs
-    And the element "#specific-programs-recommendations" should be visible
-    When I switch the language to "Russisch"
-    And I wait for the page to be loaded
-    Then There should be recommended specific programs
-    And the element "#specific-programs-recommendations" should be visible
+    And the element "#remix-graph-button-small" should be visible

@@ -9,11 +9,11 @@ use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
+use App\Entity\ClickStatistic;
 use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
 use App\Entity\Flavor;
-use App\Entity\GameJam;
 use App\Entity\Notification;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
@@ -43,7 +43,6 @@ use App\Repository\UserRemixSimilarityRelationRepository;
 use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Symfony2Extension\Context\KernelDictionary;
-use DateInterval;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
@@ -242,42 +241,6 @@ trait SymfonySupport
     }
   }
 
-  /**
-   * @throws Exception
-   */
-  public function insertDefaultGameJam(array $config = []): GameJam
-  {
-    $game_jam = new GameJam();
-    $game_jam->setName($config['name'] ?? 'pocketalice');
-    $game_jam->setHashtag($config['hashtag'] ?? null);
-
-    if (isset($config['flavor']) && 'no-flavor' !== $config['flavor'])
-    {
-      $game_jam->setFlavor($config['flavor']);
-    }
-    elseif (!isset($config['flavor']))
-    {
-      $game_jam->setFlavor('pocketalice');
-    }
-
-    $start_date = TimeUtils::getDateTime();
-    $start_date->sub(new DateInterval('P10D'));
-
-    $end_date = TimeUtils::getDateTime();
-
-    $end_date->add(new DateInterval('P10D'));
-
-    $game_jam->setStart($config['start'] ?? $start_date);
-    $game_jam->setEnd($config['end'] ?? $end_date);
-
-    $game_jam->setFormUrl($config['formurl'] ?? 'https://catrob.at/url/to/form');
-
-    $this->getManager()->persist($game_jam);
-    $this->getManager()->flush();
-
-    return $game_jam;
-  }
-
   public function insertUser(array $config = [], bool $andFlush = true): User
   {
     return $this->getUserDataFixtures()->insertUser($config, $andFlush);
@@ -466,10 +429,18 @@ trait SymfonySupport
       $featured_program->setProgram($program);
     }
 
+    /* @var Flavor $flavor */
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    if (null == $flavor)
+    {
+      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $flavor = $this->insertFlavor($new_flavor);
+    }
+    $featured_program->setFlavor($flavor);
+
     $featured_program->setUrl($config['url'] ?? null);
     $featured_program->setImageType($config['imagetype'] ?? 'jpg');
     $featured_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
-    $featured_program->setFlavor($config['flavor'] ?? 'pocketcode');
     $featured_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
     $featured_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 
@@ -498,10 +469,18 @@ trait SymfonySupport
       $example_program->setProgram($program);
     }
 
+    /* @var Flavor $flavor */
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    if (null == $flavor)
+    {
+      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $flavor = $this->insertFlavor($new_flavor);
+    }
+    $example_program->setFlavor($flavor);
+
     $example_program->setUrl($config['url'] ?? null);
     $example_program->setImageType($config['imagetype'] ?? 'jpg');
     $example_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
-    $example_program->setFlavor($config['flavor'] ?? 'pocketcode');
     $example_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
     $example_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 
@@ -548,6 +527,48 @@ trait SymfonySupport
     }
 
     return $new_comment;
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function insertClickStatistic(array $config, bool $andFlush = true): ClickStatistic
+  {
+    $click_statistics = new ClickStatistic();
+    $click_statistics->setType($config['type']);
+    $click_statistics->setUserAgent($config['user_agent']);
+    /** @var User $user */
+    $user = $this->getUserManager()->findUserByUsername($config['user']);
+    $click_statistics->setUser($user);
+    $click_statistics->setReferrer($config['referrer']);
+    $date = new DateTime($config['clicked_at']);
+    $click_statistics->setClickedAt($date);
+    $click_statistics->setLocale($config['locale']);
+    if ('tags' === $config['type'])
+    {
+      $tag = $this->getTagRepository()->find($config['tag_id']);
+      $click_statistics->setTag($tag);
+    }
+    elseif ('extensions' === $config['type'])
+    {
+      $extension = $this->getExtensionRepository()->getExtensionByName($config['extension_name']);
+      $click_statistics->setExtension($extension[0]);
+    }
+    else
+    {     /** @var Program $recommended_from */
+      $recommended_from = $this->getProgramManager()->find($config['rec_from_id']);
+      $click_statistics->setRecommendedFromProgram($recommended_from);
+      $recommended_program = $this->getProgramManager()->find($config['rec_program_id']);
+      $click_statistics->setProgram($recommended_program);
+    }
+    $this->getManager()->persist($click_statistics);
+
+    if ($andFlush)
+    {
+      $this->getManager()->flush();
+    }
+
+    return $click_statistics;
   }
 
   /**

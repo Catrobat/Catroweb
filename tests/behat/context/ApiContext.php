@@ -111,14 +111,13 @@ class ApiContext implements KernelAwareContext
     'uploaded', 'uploaded_string', 'screenshot_large',
     'screenshot_small', 'project_url', 'download_url', 'filesize', ];
 
+  private array $user_structure = ['id', 'username', 'email', 'country',
+    'projects', 'followers', 'following', ];
+
   private array $featured_program_structure = ['id', 'name', 'author', 'featured_image'];
 
   private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
     'author', 'extension', 'download_url', ];
-
-  private array $programs_structure = ['projects', 'total_results'];
-
-  private array $media_files_structure = ['media_files', 'total_results'];
 
   private array $new_uploaded_projects = [];
 
@@ -608,6 +607,15 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the response should be in json format$/
+   */
+  public function theResponseShouldBeInJsonFormat(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    Assert::assertJson($response->getContent());
+  }
+
+  /**
    * @Given /^I have a request parameter "([^"]*)" with value "([^"]*)"$/
    *
    * @param mixed $name
@@ -620,11 +628,8 @@ class ApiContext implements KernelAwareContext
 
   /**
    * @Given /^I have a request header "([^"]*)" with value "([^"]*)"$/
-   *
-   * @param mixed $name
-   * @param mixed $value
    */
-  public function iHaveARequestHeaderWithValue($name, $value): void
+  public function iHaveARequestHeaderWithValue(string $name, string $value): void
   {
     $this->request_headers[$name] = $value;
   }
@@ -644,6 +649,15 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
     $this->assertJsonRegex($string, $response->getContent());
+  }
+
+  /**
+   * @Then the response content must be empty
+   */
+  public function theResponseContentMustBeEmpty(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    Assert::assertEmpty($response->getContent());
   }
 
   /**
@@ -709,37 +723,6 @@ class ApiContext implements KernelAwareContext
     }
 
     return $profile;
-  }
-
-  /**
-   * Submit to gamejam.
-   *
-   * @param mixed $file
-   * @param mixed $user
-   */
-  public function submit($file, $user, string $desired_id = ''): void
-  {
-    if (null == $user)
-    {
-      $user = $this->getUserDataFixtures()->getDefaultUser();
-    }
-
-    if ('' !== $desired_id)
-    {
-      MyUuidGenerator::setNextValue($desired_id);
-    }
-
-    if (is_string($file))
-    {
-      $file = new UploadedFile($file, 'uploadedFile');
-    }
-
-    $this->request_parameters = [];
-    $this->request_parameters['username'] = $user->getUsername();
-    $this->request_parameters['token'] = $user->getUploadToken();
-    $this->request_parameters['fileChecksum'] = md5_file($file->getPathname());
-    $this->request_files[0] = $file;
-    $this->iRequestWith('POST', '/app/api/gamejam/submit.json');
   }
 
   /**
@@ -1133,19 +1116,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When /^I GET "([^"]*)" with program id "([^"]*)"$/
-   *
-   * @param mixed $id
-   * @param mixed $uri
-   */
-  public function iGetWithProgramID($uri, $id): void
-  {
-    $uri = str_replace('@id@', $id, $uri);
-
-    $this->iGetFrom($uri);
-  }
-
-  /**
    * @When /^I get the most recent programs$/
    */
   public function iGetTheMostRecentPrograms(): void
@@ -1330,7 +1300,7 @@ class ApiContext implements KernelAwareContext
     $file = $this->generateProgramFileWith([
       'name' => $program->getName(),
     ]);
-    $this->uploadProject($file, null, '1');
+    $this->uploadProject($file, $program->getUser(), '2');
   }
 
   /**
@@ -1671,13 +1641,9 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
 
     $returned_program = json_decode($response->getContent(), true);
+
     $expected_program = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_program);
-
-    Assert::assertEquals(count($returned_program), count($expected_program),
-      'Number of returned programs should be '.count($expected_program));
-
-    $returned_program = array_pop($returned_program);
     $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
 
     $this->assertProgramsEqual($stored_program, $returned_program);
@@ -1691,8 +1657,7 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_programs);
 
@@ -1712,8 +1677,7 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredFeaturedPrograms($expected_programs);
 
@@ -1739,22 +1703,88 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
 
-    foreach ($this->programs_structure as $key)
+    foreach ($responseArray as $program)
     {
-      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
-    }
-
-    $returned_programs = $responseArray['projects'];
-
-    foreach ($returned_programs as $program)
-    {
-      Assert::assertEquals(count($program), count($this->program_structure),
+      Assert::assertEquals(count($this->program_structure), count($program),
         'Number of program fields should be '.count($this->program_structure));
       foreach ($this->program_structure as $key)
       {
         Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
         Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
       }
+    }
+  }
+
+  /**
+   * @Then /^the response should contain the following users:$/
+   * @Then /^the response should contain users in the following order:$/
+   */
+  public function responseShouldContainUsersInTheFollowingOrder(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $returned_users = json_decode($response->getContent(), true);
+    $expected_users = $table->getHash();
+    $stored_users = $this->getStoredUsers($expected_users);
+
+    Assert::assertEquals(count($returned_users), count($expected_users), 'Number of returned users should be '.count($expected_users));
+
+    foreach ($returned_users as $returned_user)
+    {
+      $stored_user = $this->findUser($stored_users, $returned_user['username']);
+      $this->assertUsersEqual($stored_user, $returned_user);
+    }
+  }
+
+  /**
+   * @Then /^the response should contain the following user:$/
+   */
+  public function responseShouldContainTheFollowingUser(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $returned_user = json_decode($response->getContent(), true);
+    $expected_user = $table->getHash();
+    $stored_users = $this->getStoredUsers($expected_user);
+
+    $stored_user = $this->findUser($stored_users, $returned_user['username']);
+    $this->assertUsersEqual($stored_user, $returned_user);
+  }
+
+  /**
+   * @Then /^the response should have the users model structure$/
+   */
+  public function responseShouldHaveUsersModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $returned_users = json_decode($response->getContent(), true);
+
+    foreach ($returned_users as $user)
+    {
+      Assert::assertEquals(count($this->user_structure), count($user),
+        'Number of user fields should be '.count($this->user_structure));
+      foreach ($this->user_structure as $key)
+      {
+        Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
+        Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
+      }
+    }
+  }
+
+  /**
+   * @Then /^the response should have the user model structure$/
+   */
+  public function responseShouldHaveUserModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $user = json_decode($response->getContent(), true);
+
+    Assert::assertEquals(count($this->user_structure), count($user),
+      'Number of user fields should be '.count($this->user_structure));
+    foreach ($this->user_structure as $key)
+    {
+      Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
+      Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
   }
 
@@ -1764,17 +1794,14 @@ class ApiContext implements KernelAwareContext
   public function responseShouldHaveProjectModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_programs = json_decode($response->getContent(), true);
+    $program = json_decode($response->getContent(), true);
 
-    foreach ($returned_programs as $program)
+    Assert::assertEquals(count($program), count($this->program_structure),
+      'Number of program fields should be '.count($this->program_structure));
+    foreach ($this->program_structure as $key)
     {
-      Assert::assertEquals(count($program), count($this->program_structure),
-        'Number of program fields should be '.count($this->program_structure));
-      foreach ($this->program_structure as $key)
-      {
-        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
-        Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
-      }
+      Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
+      Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
     }
   }
 
@@ -1784,14 +1811,7 @@ class ApiContext implements KernelAwareContext
   public function responseShouldHaveFeaturedProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-
-    foreach ($this->programs_structure as $key)
-    {
-      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
-    }
-
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
 
     foreach ($returned_programs as $program)
     {
@@ -1811,16 +1831,9 @@ class ApiContext implements KernelAwareContext
   public function responseShouldHaveMediaFilesModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
+    $returned_media_files = json_decode($response->getContent(), true);
 
-    foreach ($this->media_files_structure as $key)
-    {
-      Assert::assertArrayHasKey($key, $responseArray, 'Response should contain '.$key);
-    }
-
-    $returned_programs = $responseArray['media_files'];
-
-    foreach ($returned_programs as $program)
+    foreach ($returned_media_files as $program)
     {
       Assert::assertEquals(count($program), count($this->media_file_structure),
         'Number of program fields should be '.count($this->media_file_structure));
@@ -1839,8 +1852,7 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_files = $responseArray['media_files'];
+    $returned_files = json_decode($response->getContent(), true);
     $expected_files = $table->getHash();
     $stored_files = $this->getStoredMediaFiles($expected_files);
 
@@ -1864,25 +1876,10 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['projects'];
+    $returned_programs = json_decode($response->getContent(), true);
 
     Assert::assertEquals(count($returned_programs), $projects,
       'Number of returned programs should be '.count($returned_programs));
-  }
-
-  /**
-   * @Then /^the response should contain total projects with value (\d+)$/
-   */
-  public function responseShouldContainTotalProjectsWithNumber(int $total_projects): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_total_projects = $responseArray['total_results'];
-
-    Assert::assertEquals($returned_total_projects, $total_projects,
-      'Number of total projects should be '.$returned_total_projects);
   }
 
   /**
@@ -2265,11 +2262,8 @@ class ApiContext implements KernelAwareContext
 
   /**
    * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
-   *
-   * @param mixed $name
-   * @param mixed $value
    */
-  public function iHaveAParameterWithValue($name, $value): void
+  public function iHaveAParameterWithValue(string $name, string $value): void
   {
     $this->request_parameters[$name] = $value;
   }
@@ -2572,27 +2566,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When I update my program
-   */
-  public function iUpdateMyProgram(): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->uploadProject($file, $this->getUserDataFixtures()->getCurrentUser(), '1');
-  }
-
-  /**
-   * @When I submit a game with id :id
-   * @Given I submitted a game with id :arg1
-   *
-   * @param mixed $id
-   */
-  public function iSubmitAGame($id): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $id);
-  }
-
-  /**
    * @Then I should get the url to the google form
    */
   public function iShouldGetTheUrlToTheGoogleForm(): void
@@ -2602,20 +2575,6 @@ class ApiContext implements KernelAwareContext
       ->getContent(), true);
     Assert::assertArrayHasKey('form', $answer);
     Assert::assertEquals('https://catrob.at/url/to/form', $answer['form']);
-  }
-
-  /**
-   * @When /^I submit the program$/
-   */
-  public function iSubmitTheProgram(): void
-  {
-    /** @var Crawler $last_response */
-    $last_response = $this->getKernelBrowser()->getResponse();
-    $link = $last_response->filter('#gamejam-submission')
-      ->parents()
-      ->link()
-    ;
-    $this->getKernelBrowser()->click($link);
   }
 
   /**
@@ -2658,31 +2617,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I submit a program to this gamejam$/
-   *
-   * @throws Exception
-   */
-  public function iSubmitAProgramToThisGamejam(): void
-  {
-    if (null == $this->my_program)
-    {
-      $this->my_program = $this->insertProject([
-        'name' => 'My Program',
-        'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-      ]);
-    }
-    $this->iRequestWith('GET', '/app/project/1');
-
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    $link = $response->filter('#gamejam-submission')
-      ->parents()
-      ->link()
-    ;
-    $this->getKernelBrowser()->click($link);
-  }
-
-  /**
    * @When /^I visit the details page of my program$/
    *
    * @throws Exception
@@ -2701,104 +2635,12 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^There should be a button to submit it to the jam$/
-   */
-  public function thereShouldBeAButtonToSubmitItToTheJam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode());
-    Assert::assertEquals(1, $response->filter('#gamejam-submission')->count());
-  }
-
-  /**
-   * @Then /^There should not be a button to submit it to the jam$/
-   */
-  public function thereShouldNotBeAButtonToSubmitItToTheJam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-    Assert::assertEquals(0, $response->filter('#gamejam-submission')->count());
-  }
-
-  /**
-   * @Then /^There should be a div with whats the gamejam$/
-   */
-  public function thereShouldBeADivWithWhatsTheGamejam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-    Assert::assertEquals(1, $response->filter('#gamejam-whats')->count());
-  }
-
-  /**
-   * @Then /^There should not be a div with whats the gamejam$/
-   */
-  public function thereShouldNotBeADivWithWhatsTheGamejam(): void
-  {
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-    Assert::assertEquals(0, $response->filter('#gamejam-whats')->count());
-  }
-
-  /**
-   * @When /^I submit my program to a gamejam$/
-   *
-   * @throws Exception
-   */
-  public function iSubmitMyProgramToAGamejam(): void
-  {
-    $this->insertDefaultGameJam([
-      'formurl' => 'https://localhost/url/to/form',
-    ]);
-
-    if (null == $this->my_program)
-    {
-      $this->my_program = $this->insertProject([
-        'name' => 'My Program',
-        'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-      ]);
-    }
-
-    $this->getKernelBrowser()->followRedirects(false);
-    $this->iRequestWith('GET', '/app/project/1')
-    ;
-    /** @var Crawler $response */
-    $response = $this->getKernelBrowser()->getResponse();
-    $link = $response->filter('#gamejam-submission')
-      ->parents()
-      ->link()
-    ;
-    $this->getKernelBrowser()->click($link);
-  }
-
-  /**
    * @Then /^I should be redirected to the google form$/
    */
   public function iShouldBeRedirectedToTheGoogleForm(): void
   {
     Assert::assertTrue($this->getKernelBrowser()->getResponse() instanceof RedirectResponse);
     Assert::assertEquals('https://localhost/url/to/form', $this->getKernelBrowser()->getResponse()->headers->get('location'));
-  }
-
-  /**
-   * @When I submit a game which gets the id :arg1
-   *
-   * @param mixed $arg1
-   */
-  public function iSubmitAGameWhichGetsTheId($arg1): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $arg1);
   }
 
   /**
@@ -2839,15 +2681,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @When I upload my game
-   */
-  public function iUploadMyGame(): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->uploadProject($file, $this->getUserDataFixtures()->getCurrentUser(), '1');
-  }
-
-  /**
    * @Then I should not get the url to the google form
    */
   public function iShouldNotGetTheUrlToTheGoogleForm(): void
@@ -2856,50 +2689,6 @@ class ApiContext implements KernelAwareContext
       ->getResponse()
       ->getContent(), true);
     Assert::assertArrayNotHasKey('form', $answer);
-  }
-
-  /**
-   * @Given I already submitted my game with id :id
-   *
-   * @param mixed $id
-   */
-  public function iAlreadySubmittedMyGame($id): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser(), $id);
-  }
-
-  /**
-   * @Given I already filled the google form with id :id
-   *
-   * @param mixed $id
-   */
-  public function iAlreadyFilledTheGoogleForm($id): void
-  {
-    $this->iRequestWith('GET', '/app/api/gamejam/finalize/'.$id);
-    Assert::assertEquals('200', $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
-  }
-
-  /**
-   * @When I resubmit my game
-   */
-  public function iResubmitMyGame(): void
-  {
-    $file = $this->getDefaultProgramFile();
-    $this->submit($file, $this->getUserDataFixtures()->getCurrentUser());
-  }
-
-  /**
-   * @When I fill out the google form
-   */
-  public function iFillOutTheGoogleForm(): void
-  {
-    $this->iRequestWith('GET', '/app/api/gamejam/finalize/1');
-    Assert::assertEquals('200', $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode());
   }
 
   /**
@@ -3324,6 +3113,19 @@ class ApiContext implements KernelAwareContext
     return [];
   }
 
+  private function findUser(array $users, string $wanted_user_name): array
+  {
+    foreach ($users as $user)
+    {
+      if ($user['username'] === $wanted_user_name)
+      {
+        return $user;
+      }
+    }
+
+    return [];
+  }
+
   private function expectProgram(array $programs, string $value): bool
   {
     foreach ($programs as $program)
@@ -3405,6 +3207,28 @@ class ApiContext implements KernelAwareContext
     }
 
     return $projects;
+  }
+
+  private function getStoredUsers(array $expected_users): array
+  {
+    $stored_users = $this->dataFixturesContext->getUsers();
+    $users = [];
+    /** @var User $user */
+    foreach ($stored_users as $program_index => $user)
+    {
+      $result = [
+        'id' => $user->getId(),
+        'username' => $user->getUsername(),
+        'email' => $user->getEmail(),
+        'country' => $user->getCountry(),
+        'projects' => $user->getPrograms()->count(),
+        'followers' => $user->getFollowers()->count(),
+        'following' => $user->getFollowing()->count(),
+      ];
+      $users[] = $result;
+    }
+
+    return $users;
   }
 
   private function checkProjectFieldsValue(array $program, string $key): bool
@@ -3566,6 +3390,46 @@ class ApiContext implements KernelAwareContext
     return true;
   }
 
+  private function checkUserFieldsValue(array $user, string $key): bool
+  {
+    $fields = [
+      'id' => function ($id)
+      {
+        Assert::assertIsString($id);
+        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
+      },
+      'username' => function ($username)
+      {
+        Assert::assertIsString($username);
+      },
+      'email' => function ($email)
+      {
+        Assert::assertIsString($email);
+      },
+      'country' => function ($country)
+      {
+        Assert::assertIsString($country);
+      },
+      'projects' => function ($projects)
+      {
+        Assert::assertIsInt($projects);
+      },
+      'followers' => function ($followers)
+      {
+        Assert::assertIsInt($followers);
+      },
+      'following' => function ($following)
+      {
+        Assert::assertIsInt($following);
+      },
+    ];
+
+    Assert::assertArrayHasKey($key, $fields);
+    call_user_func($fields[$key], $user[$key]);
+
+    return true;
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   //  Upload Request process
   //--------------------------------------------------------------------------------------------------------------------
@@ -3722,6 +3586,16 @@ class ApiContext implements KernelAwareContext
             'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
             'http://localhost/images/default/thumbnail.png', ]);
       }
+    }
+  }
+
+  private function assertUsersEqual(array $stored_user, array $returned_user): void
+  {
+    Assert::assertNotEmpty($stored_user);
+    Assert::assertNotEmpty($returned_user);
+    foreach ($this->user_structure as $key)
+    {
+      Assert::assertEquals($stored_user[$key], $returned_user[$key]);
     }
   }
 }

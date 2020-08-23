@@ -133,7 +133,7 @@ class ProgramInappropriateReport
     return $this;
   }
 
-  public function getNote(): string
+  public function getNote(): ?string
   {
     return $this->note;
   }

@@ -1,0 +1,29 @@
+{% if program.tags|length > 0  or program.extensions|length > 0 %}
+  <div class="row">
+    <div class="col-12">
+      <div id="tag-extension-container">
+        {% if program.extensions|length > 0 %}
+          <div id="extensions">
+            <p>{{ ("extenstion-text")|trans({}, "catroweb") }}:</p>
+            <div class="list">
+              {% for extension in program.extensions %}
+                <a class="rec-programs badge badge-primary"
+                   href="{{ url('extension_search', { q : extension.name }) }}">{{ extension.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+        {% if  program.tags|length > 0 %}
+          <div id="tags">
+            <div class="list">
+              {% for tag in program.tags %}
+                <a class="rec-programs badge badge-pill badge-primary"
+                   href="{{ url('tag_search', { q : tag.id }) }}">{{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

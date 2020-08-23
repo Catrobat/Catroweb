@@ -6,6 +6,7 @@ use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\UserManager;
+use App\Repository\FlavorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;
@@ -24,14 +25,16 @@ class CreateFeatureProgramCommand extends Command
 
   private EntityManagerInterface $entity_manager;
 
-  public function __construct(UserManager $user_manager,
-                              ProgramManager $program_manager,
-                              EntityManagerInterface $entity_manager)
+  private FlavorRepository $flavor_repopository;
+
+  public function __construct(UserManager $user_manager, ProgramManager $program_manager,
+                              EntityManagerInterface $entity_manager, FlavorRepository $flavor_repopository)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
     $this->program_manager = $program_manager;
     $this->entity_manager = $entity_manager;
+    $this->flavor_repopository = $flavor_repopository;
   }
 
   protected function configure(): void
@@ -71,7 +74,7 @@ class CreateFeatureProgramCommand extends Command
     $feature = new FeaturedProgram();
     $feature->setProgram($program);
     $feature->setActive(true);
-    $feature->setFlavor('pocketcode');
+    $feature->setFlavor($this->flavor_repopository->getFlavorByName('pocketcode'));
     $feature->setImageType('jpeg'); //todo picture?
     $feature->setUrl(null);
 

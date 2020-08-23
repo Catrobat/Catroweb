@@ -1,5 +1,5 @@
 @api @projects
-Feature: Fetured Projects
+Feature: Featured Projects
 
   Background:
     Given there are users:
@@ -31,7 +31,11 @@ Feature: Fetured Projects
       | 19 | project 19 | Catrobat | 40    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            | arduino    |
       | 20 | project 20 | Catrobat | 40    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            | arduino    |
       | 21 | project 21 | User1    | 40    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            | arduino    |
-
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 2  | luna       |
+      | 3  | arduino    |
     And following programs are featured:
       | name       | active | priority | ios_only | flavor     |
       | project 1  | 1      | 1        | no       | pocketcode |
@@ -58,7 +62,6 @@ Feature: Fetured Projects
     And I request "GET" "/api/projects/featured"
     Then the response status code should be "200"
     Then the response should have the featured projects model structure
-    Then the response should contain total projects with value 7
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -74,7 +77,6 @@ Feature: Fetured Projects
     And I request "GET" "/api/projects/featured/?limit=2&offset=0"
     Then the response status code should be "200"
     Then the response should have the featured projects model structure
-    Then the response should contain total projects with value 7
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -85,7 +87,6 @@ Feature: Fetured Projects
     And I request "GET" "/api/projects/featured/?limit=2&offset=2"
     Then the response status code should be "200"
     Then the response should have the featured projects model structure
-    Then the response should contain total projects with value 7
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |
@@ -96,7 +97,6 @@ Feature: Fetured Projects
     And I request "GET" "/api/projects/featured/?platform=android"
     Then the response status code should be "200"
     Then the response should have the featured projects model structure
-    Then the response should contain total projects with value 4
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -109,7 +109,6 @@ Feature: Fetured Projects
     And I request "GET" "/api/projects/featured/?platform=ios"
     Then the response status code should be "200"
     Then the response should have the featured projects model structure
-    Then the response should contain total projects with value 3
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |
@@ -121,7 +120,6 @@ Feature: Fetured Projects
     And I request "GET" "/api/projects/featured/?flavor=luna"
     Then the response status code should be "200"
     Then the response should have the featured projects model structure
-    Then the response should contain total projects with value 2
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -132,7 +130,6 @@ Feature: Fetured Projects
     And I request "GET" "/api/projects/featured/?max_version=0.985"
     Then the response status code should be "200"
     Then the response should have the featured projects model structure
-    Then the response should contain total projects with value 4
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |

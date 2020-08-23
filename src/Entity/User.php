@@ -6,12 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user", indexes={@Index(columns={"username"}, flags={"fulltext"})})
+ * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
 {
@@ -176,29 +175,62 @@ class User extends BaseUser
   protected Collection $reverse_relations_of_similar_users_based_on_remixes;
 
   /**
+   * @deprecated
    * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected ?string $gplus_access_token = null;
 
   /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  protected ?string $google_id = null;
+  /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  protected ?string $facebook_id = null;
+
+  /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  protected ?string $google_access_token = null;
+  /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  protected ?string $facebook_access_token = null;
+  /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  protected ?string $apple_id = null;
+  /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  protected ?string $apple_access_token = null;
+  /**
+   * @deprecated
    * @ORM\Column(type="string", length=5000, nullable=true)
    */
   protected ?string $gplus_id_token = null;
 
   /**
+   * @deprecated
    * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected ?string $gplus_refresh_token = null;
 
   /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
-  protected bool $limited = false;
-
-  /**
    * @ORM\Column(type="integer", nullable=true, unique=true)
    */
   protected ?int $scratch_user_id = null;
+
+  /**
+   * @ORM\Column(type="boolean", options={"default": false})
+   */
+  protected bool $oauth_password_created = false;
+
+  /**
+   * @ORM\Column(type="boolean", options={"default": false})
+   */
+  protected bool $oauth_user = false;
 
   /**
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="reportingUser", fetch="EXTRA_LAZY")
@@ -221,6 +253,11 @@ class User extends BaseUser
     $this->relations_of_similar_users_based_on_remixes = new ArrayCollection();
     $this->reverse_relations_of_similar_users_based_on_remixes = new ArrayCollection();
     $this->program_inappropriate_reports = new ArrayCollection();
+  }
+
+  public function getAppleId(): ?string
+  {
+    return $this->apple_id;
   }
 
   public function setGplusAccessToken(?string $gplus_access_token): void
@@ -324,16 +361,6 @@ class User extends BaseUser
     return $this;
   }
 
-  public function isLimited(): bool
-  {
-    return $this->limited;
-  }
-
-  public function setLimited(bool $limited): void
-  {
-    $this->limited = $limited;
-  }
-
   public function getLikes(): Collection
   {
     return $this->likes;
@@ -432,6 +459,26 @@ class User extends BaseUser
     return $comments_collection->matching($criteria)->count();
   }
 
+  public function setGoogleId(?string $google_id): void
+  {
+    $this->google_id = $google_id;
+  }
+
+  public function getGoogleId(): ?string
+  {
+    return $this->google_id;
+  }
+
+  public function setGoogleAccessToken(?string $google_access_token): void
+  {
+    $this->google_access_token = $google_access_token;
+  }
+
+  public function getGoogleAccessToken(): ?string
+  {
+    return $this->google_access_token;
+  }
+
   public function changeCreatedAt(\DateTime $createdAt): void
   {
     $this->createdAt = $createdAt;
@@ -460,5 +507,60 @@ class User extends BaseUser
   public function setScratchUserId(?int $scratch_user_id): void
   {
     $this->scratch_user_id = $scratch_user_id;
+  }
+
+  public function isOauthPasswordCreated(): bool
+  {
+    return $this->oauth_password_created;
+  }
+
+  public function setOauthPasswordCreated(bool $oauth_password_created): void
+  {
+    $this->oauth_password_created = $oauth_password_created;
+  }
+
+  public function isOauthUser(): bool
+  {
+    return $this->oauth_user;
+  }
+
+  public function setOauthUser(bool $oauth_user): void
+  {
+    $this->oauth_user = $oauth_user;
+  }
+
+  public function getFacebookId(): ?string
+  {
+    return $this->facebook_id;
+  }
+
+  public function setFacebookId(?string $facebook_id): void
+  {
+    $this->facebook_id = $facebook_id;
+  }
+
+  public function getFacebookAccessToken(): ?string
+  {
+    return $this->facebook_access_token;
+  }
+
+  public function setFacebookAccessToken(?string $facebook_access_token): void
+  {
+    $this->facebook_access_token = $facebook_access_token;
+  }
+
+  public function setAppleId(?string $apple_id): void
+  {
+    $this->apple_id = $apple_id;
+  }
+
+  public function getAppleAccessToken(): ?string
+  {
+    return $this->apple_access_token;
+  }
+
+  public function setAppleAccessToken(?string $apple_access_token): void
+  {
+    $this->apple_access_token = $apple_access_token;
   }
 }

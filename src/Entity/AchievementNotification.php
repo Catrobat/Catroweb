@@ -10,27 +10,27 @@ use Doctrine\ORM\Mapping as ORM;
 class AchievementNotification extends CatroNotification
 {
   /**
-   * @ORM\Column(name="image_path", type="text")
+   * @ORM\Column(name="image_path", type="text", nullable=true)
    */
-  private string $image_path;
+  private ?string $image_path = null;
 
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
   private string $twig_template = 'Notifications/NotificationTypes/achievement_notification.html.twig';
 
-  public function __construct(User $user, string $title, string $message, string $image_path)
+  public function __construct(User $user, string $title, string $message, ?string $image_path)
   {
-    parent::__construct($user, $title, $message);
+    parent::__construct($user, $title, $message, 'achievement');
     $this->image_path = $image_path;
   }
 
-  public function getImagePath(): string
+  public function getImagePath(): ?string
   {
     return $this->image_path;
   }
 
-  public function setImagePath(string $image_path): void
+  public function setImagePath(?string $image_path): void
   {
     $this->image_path = $image_path;
   }

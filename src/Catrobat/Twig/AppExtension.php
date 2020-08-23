@@ -5,8 +5,6 @@ namespace App\Catrobat\Twig;
 use App\Catrobat\Services\CommunityStatisticsService;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageFile;
-use App\Repository\GameJamRepository;
-use Doctrine\ORM\NonUniqueResultException;
 use Liip\ThemeBundle\ActiveTheme;
 use NumberFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -27,8 +25,6 @@ class AppExtension extends AbstractExtension
 
   private MediaPackageFileRepository $media_package_file_repository;
 
-  private GameJamRepository $game_jam_repository;
-
   private ActiveTheme $theme;
 
   private string $translation_path;
@@ -37,8 +33,7 @@ class AppExtension extends AbstractExtension
 
   private TranslatorInterface $translator;
 
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo,
-                              GameJamRepository $game_jam_repository, ActiveTheme $theme,
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo, ActiveTheme $theme,
                               ParameterBagInterface $parameter_bag, string $catrobat_translation_dir,
                               TranslatorInterface $translator)
   {
@@ -46,7 +41,6 @@ class AppExtension extends AbstractExtension
     $this->parameter_bag = $parameter_bag;
     $this->request_stack = $request_stack;
     $this->media_package_file_repository = $media_package_file_repo;
-    $this->game_jam_repository = $game_jam_repository;
     $this->theme = $theme;
     $this->translator = $translator;
   }
@@ -76,8 +70,10 @@ class AppExtension extends AbstractExtension
 
   /**
    * @param mixed $input
+   *
+   * @return bool|string
    */
-  public function humanFriendlyNumberFilter($input): string
+  public function humanFriendlyNumberFilter($input)
   {
     $user_locale = $this->request_stack->getCurrentRequest()->getLocale();
 
@@ -130,7 +126,6 @@ class AppExtension extends AbstractExtension
       new TwigFunction('flavor', [$this, 'getFlavor']),
       new TwigFunction('theme', [$this, 'getTheme']),
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
-      new TwigFunction('getCurrentGameJam', [$this, 'getCurrentGameJam']),
       new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
       new TwigFunction('assetExists', [$this, 'assetExists']),
       new TwigFunction('isVersionSupportedByCatBlocks', [$this, 'isVersionSupportedByCatBlocks']),
@@ -214,23 +209,23 @@ class AppExtension extends AbstractExtension
 
   public function isMobile(): bool
   {
-    return preg_match('/(Catrobat|Android|Windows Phone|iPad|iPhone)/', $this->getUserAgent());
+    return boolval(preg_match('/(Catrobat|Android|Windows Phone|iPad|iPhone)/', $this->getUserAgent()));
   }
 
   public function isWebview(): bool
   {
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    return preg_match('/Catrobat/', $this->getUserAgent());
+    return boolval(preg_match('/Catrobat/', $this->getUserAgent()));
   }
 
   public function isAndroid(): bool
   {
-    return preg_match('/Android/', $this->getUserAgent());
+    return boolval(preg_match('/Android/', $this->getUserAgent()));
   }
 
   public function isIOS(): bool
   {
-    return preg_match('/(iPad|iPhone)/', $this->getUserAgent());
+    return boolval(preg_match('/(iPad|iPhone)/', $this->getUserAgent()));
   }
 
   /**
@@ -248,7 +243,7 @@ class AppExtension extends AbstractExtension
       // $user_agent_array = [ "Catrobat", "0.93 PocketCode", 0.9.14 Platform", "Android" ];
       $catrobat_language_array = explode(' ', $user_agent_array[1]);
       // $catrobat_language_array = [ "0.93", "PocketCode" ];
-      $catrobat_language = $catrobat_language_array[0] * 1.0;
+      $catrobat_language = floatval($catrobat_language_array[0]);
 
       if ($catrobat_language < $program_catrobat_language)
       {
@@ -331,16 +326,6 @@ class AppExtension extends AbstractExtension
   }
 
   /**
-   * @throws NonUniqueResultException
-   *
-   * @return mixed
-   */
-  public function getCurrentGameJam()
-  {
-    return $this->game_jam_repository->getCurrentGameJam();
-  }
-
-  /**
    * Twig extension to provide a function to retrieve the community statistics in any view.
    * Needed to render the footer.
    *
@@ -404,6 +389,6 @@ class AppExtension extends AbstractExtension
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->headers->get('User-Agent');
+    return $request->headers->get('User-Agent') ?? '';
   }
 }

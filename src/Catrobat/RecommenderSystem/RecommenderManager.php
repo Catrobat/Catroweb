@@ -5,6 +5,7 @@ namespace App\Catrobat\RecommenderSystem;
 use App\Catrobat\Requests\AppRequest;
 use App\Entity\Program;
 use App\Entity\ProgramLike;
+use App\Entity\ProgramRemixRelation;
 use App\Entity\User;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
@@ -83,7 +84,7 @@ class RecommenderManager
    *   m ... total number of liked programs
    *
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
-   * @time_complexity: O(n^2 * m)
+   * time_complexity: O(n^2 * m)
    */
   public function computeUserLikeSimilarities(?ProgressBar $progress_bar = null): void
   {
@@ -338,6 +339,11 @@ class RecommenderManager
 
     $similar_user_similarity_mapping = $this->getSimilarUserSimilarityMapping($user);
 
+    if (count($similar_user_similarity_mapping) <= 0)
+    {
+      return [];
+    }
+
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_liked_programs = array_unique(array_map(fn (ProgramLike $like) => $like->getProgramId(), $all_likes_of_user));
 
@@ -461,7 +467,7 @@ class RecommenderManager
    *   m ... total number of remixed programs
    *
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
-   * @time_complexity: O(n^2 * m)
+   * time_complexity: O(n^2 * m)
    *
    * @param ProgressBar $progress_bar
    *
@@ -500,9 +506,9 @@ class RecommenderManager
     foreach ($user_remix_relations as $first_user_id => $first_user_remix_relations)
     {
       $ids_of_programs_remixed_by_first_user = array_unique(
-        array_map(function (array $data)
+        array_map(function (ProgramRemixRelation $relation)
         {
-          return $data['ancestor_id'];
+          return $relation->getAncestorId();
         }, $first_user_remix_relations)
       );
 
@@ -527,9 +533,9 @@ class RecommenderManager
 
         $already_added_relations[] = $key;
         $ids_of_programs_remixed_by_second_user = array_unique(
-          array_map(function (array $data)
+          array_map(function (ProgramRemixRelation $relation)
           {
-            return $data['ancestor_id'];
+            return $relation->getAncestorId();
           }, $second_user_remix_relations)
         );
 
@@ -598,9 +604,9 @@ class RecommenderManager
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_remixed_programs = array_unique(
-      array_map(function (array $data)
+      array_map(function (ProgramRemixRelation $relation)
       {
-        return $data['ancestor_id'];
+        return $relation->getAncestorId();
       }, $parent_relations_of_all_remixed_programs_of_user)
     );
 

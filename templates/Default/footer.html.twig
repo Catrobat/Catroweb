@@ -1,25 +1,24 @@
 <footer class="footer d-flex justify-content-center mt-auto body-content">
   {% block footer %}
     <div class="container mt-2">
-
       <div class="row justify-content-between">
         <div class="col-6 col-sm-4">
           <h3>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h3>
           <ul class="list-vertical">
             <li>
-              <a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a>
+              <a id="help" href={{ url('catrobat_web_help') }}>{{ "tutorials"|trans({}, "catroweb") }}</a>
             </li>
             <li>
-              <a href="https://www.catrobat.org"
-                 target="_blank">{{ "aboutCatrobat"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/ShareAbout"
+                 target="_blank">{{ "about"|trans({}, "catroweb") }}</a>
             </li>
             <li>
-              <a href="https://edu.catrob.at/">
-                {{ "help-cards.headings.education"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/education">
+                {{ "education"|trans({}, "catroweb") }}</a>
             </li>
             <li>
-              <a href="https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode">
-                {{ "help-cards.headings.discuss"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/ChatAndForums">
+                {{ "chat"|trans({}, "catroweb") }}</a>
             </li>
           </ul>
         </div>
@@ -36,7 +35,7 @@
               <a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a>
             </li>
             <li>
-              <a href="https://developer.catrobat.org/imprint"
+              <a href="https://catrob.at/imprint"
                  target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a>
             </li>
           </ul>
@@ -45,15 +44,19 @@
           <h3>{{ "footer.download"|trans({}, "catroweb") }}</h3>
           <ul class="list-vertical">
             <li>
-              <a href="{{ google_play_url }}"
+              <a href="https://catrob.at/gp"
                  target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
             </li>
             {% if theme() == "pocketcode" %}
               <li>
-                <a href="https://itunes.apple.com/app/pocket-code/id1117935892"
+                <a href="https://catrob.at/ca"
                    target="_blank">{{ "iosAppStore"|trans({}, "catroweb") }}</a>
               </li>
             {% endif %}
+            <li>
+              <a href="https://catrob.at/apps"
+                 target="_blank">{{ "others"|trans({}, "catroweb") }}</a>
+            </li>
           </ul>
         </div>
       </div>

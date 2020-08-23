@@ -9,7 +9,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\Listeners\FileStructureValidator
  */
 class FileStructureValidatorTest extends TestCase
 {

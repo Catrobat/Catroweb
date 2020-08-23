@@ -77,9 +77,15 @@ ARG APP_ENVIRONMENT
 RUN echo "\n" >> .env.local && \
     echo APP_ENV=$APP_ENVIRONMENT >> .env.local && \
     echo "\n" >> .env.dev.local && \
-    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.dev:3306/catroweb_dev >> .env.dev.local && \
+    printf "%s\n" DATABASE_URL=pdo-mysql://root:root@db.catroweb.dev:3306/catroweb_dev \
+     ELASTICSEARCH_URL=http://elasticsearch:9200/ \
+     ES_HOST=elasticsearch \
+     ES_PORT=9200 >> .env.dev.local && \
     echo "\n" >> .env.test.local && \
-    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test >> .env.test.local
+    printf "%s\n" DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test \
+     ELASTICSEARCH_URL=http://elasticsearch:9200/ \
+     ES_HOST=elasticsearch \
+     ES_PORT=9200 >> .env.test.local
 
 # Add composer executable to the container
 COPY --from=composer-build /usr/bin/composer /usr/bin/composer

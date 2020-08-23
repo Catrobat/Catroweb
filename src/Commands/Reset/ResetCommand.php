@@ -110,11 +110,19 @@ class ResetCommand extends Command
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
 
-    //https://share.catrob.at/app/project/remixgraph/{id_of_project} to get remixes
+    //https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
     // Creating sample MediaPackages
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:create:media-packages-samples'], [], 'Creating sample Media Packages', $output
+    );
+
+    // Resetting Elastic
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'fos:elastica:reset', '-q'], [], 'Resetting', $output
+    );
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'fos:elastica:populate', '-q'], [], 'Populating data', $output
     );
 
     $output->writeln('Reset Done');
@@ -355,14 +363,15 @@ class ResetCommand extends Command
   private function remixGen(array $program_array, OutputInterface $output): void
   {
     $rand_start = random_int(2, 3);
-    $rand_intervall = random_int(3, 6);
+    $rand_interval = random_int(3, 6);
 
-    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_intervall)
+    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_interval)
     {
       $report_index = ($i + random_int(1, sizeof($program_array))) % sizeof($program_array);
       if (in_array($i, $this->reported, true) || in_array($report_index, $this->reported, true))
       {
-        $i = $i - $rand_intervall + 1;
+        $i -= $rand_interval;
+        ++$i;
         continue;
       }
 

@@ -59,7 +59,7 @@ class ImageRepository
   public function save(File $file, int $id, string $extension, bool $featured): void
   {
     $thumb = $this->getImagick();
-    $thumb->readImage($file);
+    $thumb->readImage($file->__toString());
     if ($featured)
     {
       $filename = $this->featured_dir.$this->generateFileNameFromId($id, $extension, $featured);

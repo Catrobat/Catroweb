@@ -1,0 +1,17 @@
+<button id="url-download{{ suffix|default('') }}"
+        class="btn btn-primary btn-block"
+
+        onclick="program.download(
+          '{{ program_details.downloadUrl }}',
+           '{{ program.id }}',
+           '#url-download{{ suffix|default('') }}',
+           '{{ checkCatrobatLanguage(program_details.languageVersion) }}',
+           '{{ isWebview() }}',
+           '#download-pb{{ suffix|default('') }}',
+           '#download-icon{{ suffix|default('') }}')">
+
+  <i class="material-icons text-left d-none project-view-spinner" id="download-pb{{ suffix|default('') }}">
+  {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'download-progressbar' ~ suffix|default(), 'small': 'true'} only %}</i>
+  <i class="material-icons" id="download-icon{{ suffix|default('') }}">get_app</i>
+  <span>{{ "download"|trans({}, "catroweb") }}</span>
+</button>

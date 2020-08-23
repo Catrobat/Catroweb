@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
   <meta name='viewport' content='width=device-width, user-scalable=no'/>
-
   <title>{% block title %}Pocket Code Website{% endblock %}</title>
 
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
@@ -20,7 +19,13 @@
 <body class="new-nav">
 <div id="page-container" class="pr-0 pl-0">
 
-  {% include 'Header/header.html.twig' %}
+  {% include 'Header/header.html.twig' with
+    {
+      page_title: block('page_title') ?? '',
+      back_path: block('back_path') ?? '',
+      no_search: block('no_search') ?? ''
+    }
+  %}
 
   {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
@@ -64,23 +69,13 @@
 
 {# Sidebar #}
 <script>
-  enableNavButtonIfCategoryContainsProjects('#nav-newest', '{{ path('api_recent_programs') }}')
-  enableNavButtonIfRecommendedCategoryContainsProjects(
-    '#nav-recommended',
-    '{{ path('api_recsys_general_projects') }}',
-     {{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}
-  )
-  enableNavButtonIfCategoryContainsProjects('#nav-most-downloaded', '{{ path('api_most_downloaded_programs') }}')
-  enableNavButtonIfCategoryContainsProjects('#nav-most-viewed', '{{ path('api_most_viewed_programs') }}')
-  enableNavButtonIfCategoryContainsProjects('#nav-scratch-remixes', '{{ path('api_scratch_remix') }}')
-  enableNavButtonIfCategoryContainsProjects('#nav-random', '{{ path('api_random_programs') }}')
   manageNotificationsDropdown()
 </script>
 
 {% if app.user %}
   <script src="{{ asset('js/FetchNotifications.min.js') }}"></script>
   <script>
-    let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
+    let fetchNotifications = new FetchNotifications("{{ path('notifications_count') }}", 99, 10000)
     $(document).ready(function () {
       fetchNotifications.run()
     })

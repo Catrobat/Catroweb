@@ -3,10 +3,14 @@
 localLanguage: Kiswahili
 username: Jina la mtumiaji
 password: Nenosiri
+createNewPassword: Create new password
 accountSettings: Account Settings
 email: Barua pepe
 aboutPocketCode: Kuhusu Msimbo wa Mfukoni
-aboutCatrobat: Kuhusu Catrobat
+about: About
+education: Education
+chat: Chat and forums
+others: Others
 tutorials: Mafunzo
 googlePlay: Google Play
 iosAppStore: IOS App store
@@ -18,7 +22,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Pakua
 description: Maelezo
 noDescription: Hakuna maelezo.
 credits: Credits
@@ -27,44 +31,38 @@ country: Nchi
 loginText: ingia
 privacyPolicy: Sera ya Faragha
 imprint: Imprint
+programDetails: Maelezo
 somethingWentWrong: 'Ooooops kitu kilienda vibaya.'
 pleaseTryAgain: 'Tafadhali jaribu tena!'
 oldVersionError: 'Tafadhali Sasisha toleo jipya zaidi la Msimbo Mfuko!'
 more: 'zaidi'
 less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: Sawa
+show-more: 'More information'
+show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Jina la mtumiaji au anuani ya barua pepe tayari inatumika.'
 notifications: 'Taarifa'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
-likesNotificationsTitle: 'Reaction Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
-remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'Maoni'
 RemixNotifications: 'Michanganyo mipya'
-oldnotification: 'Old Notifications'
 wellDone: "Umefanya vyema!"
 done: "Maliza!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-notificationsClearedMessage: "Taarifa zote zimewekewa alama kama zimeshasomwa."
-deleteNotificationConfirmation: "Are you sure?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
 confirmMessage: "Yes, delete it"
 cancelMessage: "Sitisha"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "Tia alama kama zimeshasomwa"
-deleteAllNotificationsButtonTitle: "Delete all"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Haiwezi kuweka alama kwenye taarifa kama iliyosomwa!"
-notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Tafadhali subiri..."
 projects: "Programu"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -88,6 +86,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More Statistics
   featured: Iliyowekwa
@@ -175,8 +174,11 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Michanganyo mipya
+  showRemixGraph: 'Remix graph'
   by: 'na'
   open: 'Fungua '
   showPaths: 'Onyesha njia'
@@ -267,6 +269,7 @@ profile:
     pictureTooLarge: Picha uliyochagua ni kubwa sana, tafadhali usitumie picha kubwa kuliko 5mb.
     uploadError: Samahani, kulikuwa na tatizo wakati wa upakiaji!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Hariri wasifu
   edit: Hariri
@@ -555,11 +558,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Download the project"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Tafadhali chagua jina la mtumiaji:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Tafutiza...
   search: Tafuta
@@ -596,7 +594,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +669,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -764,14 +763,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
@@ -787,6 +778,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -847,21 +839,19 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

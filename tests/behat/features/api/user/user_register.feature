@@ -49,7 +49,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "EMail missing",
+        "email": "Email missing",
         "username": "Username missing",
         "password": "Password missing"
       }
@@ -72,7 +72,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "Not a valid EMail",
+        "email": "Email invalid",
         "username": "Username too short",
         "password": "Password too short"
       }
@@ -138,7 +138,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "EMail already in use",
+        "email": "Email already in use",
         "username": "Username already in use"
       }
     """
@@ -219,7 +219,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "username": "Username shouldn't contain an email address"
+        "username": "Username must not contain an email address"
       }
     """
 
@@ -244,3 +244,38 @@ Feature: Registering a new user.
         "username": "Username invalid"
       }
     """
+
+  Scenario: Missing request fields should result in an error
+    Given I have the following JSON request body:
+    """
+      {
+        "dry-run": false
+      }
+    """
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "422"
+    And I should get the json object:
+    """
+      {
+        "email": "Email missing",
+        "username": "Username missing",
+        "password": "Password missing"
+      }
+    """
+
+
+  Scenario: Trying to send an invalid request, without HTTP_ACCEPT, should return json as response
+    Given I have the following JSON request body:
+    """
+      {
+        "dry-run": false,
+        "username": "Catroweb",
+      }
+    """
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "400"
+    Then the response should be in json format

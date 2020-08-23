@@ -5,12 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="extension", indexes={@Index(columns={"name"}, flags={"fulltext"})})
+ * @ORM\Table(name="extension")
  * @ORM\Entity(repositoryClass="App\Repository\ExtensionRepository")
  */
 class Extension
@@ -44,7 +43,7 @@ class Extension
 
   public function __toString()
   {
-    return $this->name;
+    return $this->name ?? '';
   }
 
   public function addProgram(Program $program): void

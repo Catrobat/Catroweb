@@ -42,12 +42,13 @@ class UserDataFixtures
     $user->setUsername($config['name'] ?? 'User'.UserDataFixtures::$number_of_users);
     $user->setEmail($config['email'] ?? $user->getUsername().'@catrobat.at');
     $user->setPlainPassword($config['password'] ?? '123456');
-    $user->setUploadToken($config['token'] ?? 'default_token');
+    $user->setUploadToken($config['token'] ?? 'default_token_'.UserDataFixtures::$number_of_users);
     $user->setSuperAdmin(isset($config['admin']) ? 'true' === $config['admin'] : false);
     $user->setAdditionalEmail($config['additional_email'] ?? '');
     $user->setEnabled(isset($config['enabled']) ? 'true' === $config['enabled'] : true);
     $user->setCountry($config['country'] ?? 'at');
     $user->addRole($config['role'] ?? 'ROLE_USER');
+    $user->setOauthUser(isset($config['oauth_user']) ? 'true' === $config['oauth_user'] : false);
     $this->user_manager->updateUser($user, $andFlush);
 
     return $user;

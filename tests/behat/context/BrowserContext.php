@@ -159,6 +159,24 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^download button is pointing to the non existing project$/
+   */
+  public function downloadButtonIsPointingToTheNonExistingProject(): void
+  {
+    $program = $this->getProgramManager()->find('1');
+    $program->setId('123456');
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Then /^project has no valid program file$/
+   */
+  public function projectHasNoValidFile(): void
+  {
+    $this->getFileRepository()->deleteProgramFile('2');
+  }
+
+  /**
    * @Then /^no "([^"]*)" element should be visible$/
    *
    * @param mixed $locator
@@ -260,6 +278,153 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     }
   }
 
+  /**
+   * @Then /^I select package "([^"]*)" for media package category$/
+   *
+   * @param mixed $arg1
+   */
+  public function iSelectPackageForMediaPackageCategory($arg1): void
+  {
+    $this->getSession()->getPage()->find('css', '.select2-choices')->click();
+
+    $packages = $this->getSession()->getPage()->findAll('css', '.select2-results li');
+    foreach ($packages as $package)
+    {
+      if ($package->getText() == $arg1)
+      {
+        $package->click();
+        break;
+      }
+    }
+  }
+
+  /**
+   * @Then /^I select flavor "([^"]*)" for media package file$/
+   *
+   * @param mixed $arg1
+   */
+  public function iSelectFlavorForMediaPackageFile($arg1): void
+  {
+    $this->getSession()->getPage()->find('css', '.select2-choices')->click();
+
+    $flavors = $this->getSession()->getPage()->findAll('css', '.select2-results li');
+    foreach ($flavors as $flavor)
+    {
+      if ($flavor->getText() == $arg1)
+      {
+        $flavor->click();
+        break;
+      }
+    }
+  }
+
+  /**
+   * @Then /^I select flavor "([^"]*)" for example program/
+   * @Then /^I select flavor "([^"]*)" for example project/
+   *
+   * @param mixed $arg1
+   */
+  public function iSelectFlavorForExampleProgram($arg1): void
+  {
+    $this->getSession()->getPage()->find('css', '.select2-container')->click();
+
+    $flavors = $this->getSession()->getPage()->findAll('css', '.select2-results li');
+    foreach ($flavors as $flavor)
+    {
+      if ($flavor->getText() == $arg1)
+      {
+        $flavor->click();
+        break;
+      }
+    }
+  }
+
+  /**
+   * Checks whether the browser downloaded a file and stored it into the default download directory.
+   * The downloaded file gets deleted after the check.
+   *
+   * @Then I should have downloaded a file named ":name"
+   *
+   * @param string $name The name of the file that should have been downloaded
+   *
+   * @throws Exception when an error occurs during checking if the file has been downloaded
+   */
+  public function iShouldHaveDownloadedAFileNamed(string $name): void
+  {
+    $received = false;
+    $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
+
+    $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 10 seconds
+    while (TimeUtils::getTimestamp() < $end_time)
+    {
+      if (file_exists($file_path))
+      {
+        $received = true;
+        unlink($file_path);
+        break;
+      }
+      sleep(1);
+    }
+
+    Assert::assertEquals(true, $received, "File {$name} hasn't been found at location '{$file_path}'");
+  }
+
+  /**
+   * @Then /^one of the "(?P<selector>[^"]*)" elements should contain "(?P<value>(?:[^"]|\\")*)"$/
+   */
+  public function assertOneOfTheElementsContain(string $selector, string $value): void
+  {
+    $contains = false;
+    $elements = $this->getSession()->getPage()->findAll('css', $selector);
+    foreach ($elements as $element)
+    {
+      if (false !== strpos($element->getText(), $value))
+      {
+        $contains = true;
+        break;
+      }
+    }
+    Assert::assertTrue($contains, "No element '".$selector."' contains '".$value."'");
+  }
+
+  /**
+   * @Then /^none of the "(?P<selector>[^"]*)" elements should contain "(?P<value>(?:[^"]|\\")*)"$/
+   */
+  public function assertNoneOfTheElementsContain(string $selector, string $value): void
+  {
+    $contains = false;
+    $elements = $this->getSession()->getPage()->findAll('css', $selector);
+    foreach ($elements as $element)
+    {
+      if (false !== strpos($element->getText(), $value))
+      {
+        $contains = true;
+        break;
+      }
+    }
+    Assert::assertFalse($contains, "A element '".$selector."' contains '".$value."'");
+  }
+
+  /**
+   * @When I scroll vertical on :selector using a value of :value
+   */
+  public function scrollVertical(string $selector, string $value): void
+  {
+    $this->getSession()->getDriver()->evaluateScript(
+      "$('".$selector."').animate({scrollTop: ".$value.'})'
+    );
+  }
+
+  /**
+   * @When I scroll horizontal on :selector using a value of :value
+   */
+  public function scrollHorizontal(string $selector, string $value): void
+  {
+    $this->getSession()->getDriver()->evaluateScript(
+      "$('".$selector."').animate({scrollLeft: ".$value.'})'
+    );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   //  WAIT - Sometimes it is necessary to wait to prevent timing issues
   //--------------------------------------------------------------------------------------------------------------------
@@ -350,36 +515,6 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     throw new ResponseTextException($message, $this->getSession());
   }
 
-  /**
-   * Checks whether the browser downloaded a file and stored it into the default download directory.
-   * The downloaded file gets deleted after the check.
-   *
-   * @Then I should have downloaded a file named ":name"
-   *
-   * @param string $name The name of the file that should have been downloaded
-   *
-   * @throws Exception when an error occurs during checking if the file has been downloaded
-   */
-  public function iShouldHaveDownloadedAFileNamed(string $name): void
-  {
-    $received = false;
-    $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
-
-    $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 10 seconds
-    while (TimeUtils::getTimestamp() < $end_time)
-    {
-      if (file_exists($file_path))
-      {
-        $received = true;
-        unlink($file_path);
-        break;
-      }
-      sleep(1);
-    }
-
-    Assert::assertEquals(true, $received, "File {$name} hasn't been found at location '{$file_path}'");
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   //  Error Logging
   //--------------------------------------------------------------------------------------------------------------------
@@ -391,7 +526,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   {
     if (!$scope->getTestResult()->isPassed())
     {
-      $this->saveScreenshot(null, $this->SCREENSHOT_DIR);
+      $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
     }
   }
 

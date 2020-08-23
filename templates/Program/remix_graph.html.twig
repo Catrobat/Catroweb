@@ -1,0 +1,60 @@
+{% extends 'Default/base.html.twig' %}
+{% block page_title %}{{ "remixGraph.title"|trans({}, "catroweb") }}{% endblock %}
+{% block back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/modules/jquery.contextMenu.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('vis/vis.min.css') }}"/> {# We need acces to all images #}
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/modules/animate.min.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+    <div id="remix-graph-modal">
+        <div id="remix-graph-layer" class="modal-content">
+            <i class="material-icons" id="remix-graph-spinner" style="margin: auto">
+                {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'remix-graph-spinner' ~ suffix|default()} %}
+            </i>
+        </div>
+    </div>
+    <a id="remix-graph-modal-link" href="#remix-graph-modal"></a>
+
+{% endblock %}
+
+
+{% block js %}
+    <script src=" {{ asset( 'js/LoadingAnimation.min.js') }}"></script>
+    <script src=" {{ asset( 'js/modules/jquery.contextMenu.min.js') }}"></script>
+    <script src=" {{ asset( 'js/modules/jquery.ui.position.min.js') }}"></script>
+    <script src=" {{ asset( 'js/modules/animatedModal.min.js') }}"></script>
+    <script src=" {{ asset( 'vis/vis.min.js') }}"></script>
+    <script src=" {{ asset( 'js/remixgraph.configuration.min.js') }}"></script>
+    <script src=" {{ asset( 'js/remixgraph.builder.min.js') }}"></script>
+    <script src=" {{ asset( 'js/remixgraph.visualization.min.js') }}"></script>
+
+    <script src="{{ asset('js/RemixGraphHandler.min.js') }}"></script>
+    <script>
+      let remixGraphHandler = new RemixGraphHandler(
+        "{{ id }}",
+        "{{ "ok"|trans({}, "catroweb") }}",
+        "{{ "remixGraph.by"|trans({}, "catroweb") }}",
+        "{{ "remixGraph.open"|trans({}, "catroweb") }}",
+        "{{ "remixGraph.showPaths"|trans({}, "catroweb") }}",
+        "{{ "remixGraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
+        "{{ "remixGraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}",
+        "{{ "remixGraph.programNotAvailable"|trans({}, "catroweb") }}",
+        "{{ "remixGraph.programUnknownUser"|trans({}, "catroweb") }}",
+        "{{ "pleaseWait"|trans({}, "catroweb") }}",
+        "{{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }}",
+        "{{ program_details_url_template }}",
+        "{{ path('click_stats') }}",
+        "{{ path('remix_graph_data', { 'id' : id }) }}",
+        "{{ path('remix_graph_count', { 'id' : id }) }}"
+      )
+      remixGraphHandler.init()
+    </script>
+
+{% endblock %}
+

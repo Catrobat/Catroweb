@@ -4,6 +4,8 @@
 //
 const ASSETS_DIRECTORY = 'assets'
 const PUBLIC_DIRECTORY = 'public'
+const TEMPLATE_DIRECTORY = 'templates'
+
 
 // -------------------------------------------------------------------------------------------------
 // Register all grunt tasks here:
@@ -15,6 +17,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify-es')
   grunt.loadNpmTasks('grunt-contrib-sass')
   grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-purgecss');
   // define project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -22,10 +25,11 @@ module.exports = function (grunt) {
     concat: CONCAT_CONFIG,
     uglify: UGLIFY_CONFIG,
     sass: SASS_CONFIG,
-    watch: WATCH_CONFIG
+    watch: WATCH_CONFIG,
+    purgecss: PURGECSS_CONFIG
   })
   // define default tasks to run on `grunt`
-  grunt.registerTask('default', ['copy', 'concat', 'sass', 'uglify'])
+  grunt.registerTask('default', ['copy', 'concat', 'sass', 'uglify', 'purgecss'])
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -84,6 +88,13 @@ const COPY_CONFIG =
       cwd: ASSETS_DIRECTORY + '/images',
       src: '**',
       dest: PUBLIC_DIRECTORY + '/images/'
+    },
+    favicon: {
+      // must be in root dir of public folder
+      expand: true,
+      cwd: ASSETS_DIRECTORY + '/images',
+      src: 'favicon.ico',
+      dest: PUBLIC_DIRECTORY
     },
     catBlocks: {
       expand: true,
@@ -148,6 +159,75 @@ const COPY_CONFIG =
       dest: PUBLIC_DIRECTORY + '/css/modules/animate.min.css'
     }
   }
+
+const PURGECSS_CONFIG = {
+  pocketcode: {
+    options: {
+      content: [TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/pocketcode/base.css': ['public/css/pocketcode/base.css'],
+    }
+  },
+  arduino: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/arduino/base.css': ['public/css/arduino/base.css'],
+    }
+  },
+  school: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/create@school/base.css': ['public/css/create@school/base.css'],
+    }
+  },
+  embroidery: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/embroidery/base.css': ['public/css/embroidery/base.css'],
+    }
+  },
+  luna: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/luna/base.css': ['public/css/luna/base.css'],
+    }
+  },
+  phirocode: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/phirocode/base.css': ['public/css/phirocode/base.css'],
+    }
+  },
+  pocketalice: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/pocketalice/base.css': ['public/css/pocketalice/base.css'],
+    }
+  },
+  pocketgalaxy: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/pocketgalaxy/base.css': ['public/css/pocketgalaxy/base.css'],
+    }
+  }
+  
+  
+}
 
 // -------------------------------------------------------------------------------------------------
 // Concat task:

@@ -1,7 +1,7 @@
 # keep flavors consistent with config/packages/liip_theme.yaml
 
 controllers:
-    resource: ../../src/Catrobat/Controller/
+    resource: ../../src/
     type: annotation
     prefix:   /{flavor}/
     requirements:

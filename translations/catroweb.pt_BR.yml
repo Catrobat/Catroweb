@@ -3,10 +3,14 @@
 localLanguage: Inglês
 username: Nome de usuário
 password: Senha
+createNewPassword: Criar uma nova senha
 accountSettings: Configurações da Conta
 email: E-Mail
 aboutPocketCode: Sobre o Pocket Code
-aboutCatrobat: Sobre o Catrobat
+about: Sobre
+education: Education
+chat: Chat and forums
+others: Others
 tutorials: Tutoriais
 googlePlay: Google Play
 iosAppStore: Loja de Aplicativos IOS
@@ -27,6 +31,7 @@ country: País
 loginText: login
 privacyPolicy: Política de Privacidade
 imprint: Imprimir
+programDetails: Detalhes
 somethingWentWrong: 'Ooooops! Algo deu errado.'
 pleaseTryAgain: 'Por favor, tente de novo!'
 oldVersionError: 'Por favor, atualize para a versão mais recente do Pocket Code!'
@@ -34,37 +39,30 @@ more: 'mais'
 less: 'menos'
 show-more: 'Mostre mais'
 show-less: 'Mostre menos'
-ok: OK
+more-information: 'Mais informações'
+less-information: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'Para baixar o projeto de exemplo clique %link_start% aqui %link_end%.'
 registrationError: 'Este nome de usuário ou endereço de e-mail já está em uso.'
 notifications: 'Notificações'
 allNotifications: 'Todas as notificações'
 FollowersNotifications: 'Seguidores'
 LikeNotifications: 'Curtidas'
-likesNotificationsTitle: 'Notificações de Curtidas'
-followersNotificationsTitle: 'Notificações de seguidores'
-commentsNotificationsTitle: 'Notificações de comentários'
-remixNotificationsTitle: 'Notificações de remixes'
 CommentNotifications: 'Comentários'
 RemixNotifications: 'Remixes'
-oldnotification: 'Notificações antigas'
 wellDone: "Muito bem!"
 done: "Pronto!"
 notificationsReadMessage: "Parece que você não tem nenhuma notificação."
-notificationsClearedMessage: "Todas as notificações foram marcadas como lidas."
-deleteNotificationConfirmation: "Você tem certeza?"
-notificationDeleteMessage: "Você tem certeza que deseja excluir esta Notificação?"
-notificationDeleteAllMessage: "Tem certeza que deseja excluir todas as notificações?"
 confirmMessage: "Sim, delete isso"
 cancelMessage: "Cancelar"
-notificationsAllMessagesDeleted: "Todas as notificações foram excluídas."
-notificationDeletedMessage: "Notificação foi excluída com sucesso."
-clearAllNotificationsButtonTitle: "Marcar todos como lidos"
-deleteAllNotificationsButtonTitle: "Apagar tudo"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Não foi possível marcar as notificações como lidas!"
-notificationsDeleteError: "Não foi possível excluir as notificações!"
 pleaseWait: "Por favor, aguarde..."
 projects: "Programas"
+oauthPopUpTitle: "Informação de login da conta externa"
+oauthInfo: 'Você acabou de usar uma conta externa para entrar. Nós criamos um nome de usuário aleatório para você. Se quiser mudar seu nome de usuário ou criar uma nova senha para sua conta, acesse minha página de perfil. Clique %link_start% aqui %link_end% para ir para a sua página de perfil'
+oauthHere: "aqui"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -88,6 +86,7 @@ programs:
   welcome:
     title: Bem-vindo ao %theme% da Catrobat
     subtitle: Crie histórias, jogos e muito mais...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Baixar o aplicativo
     statistics: Mais Estatísticas
   featured: Em Destaque
@@ -139,7 +138,7 @@ programs:
   uploaded: Projetos carregados
   reportAsInappropriate: Reportar como impróprio
   reportProgram: Reportar projeto
-  languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
+  languageVersion: 'Versão de linguagem do Catrobat: %languageVersion%'
   reportLoginText: Por favor, %login% para reportar este projeto.
   reportDialogHeader: Por que você deseja reportar este projeto?
   reportDialogReason: Entre um motivo
@@ -175,7 +174,10 @@ programs:
   wow: Uaaau!
   linkTitle: Vincular
   link: Copiar link do projeto para a área de transferência
+  reactionsText: Curtidas
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
+  title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'
   by: 'por'
   open: 'Abrir '
@@ -199,11 +201,11 @@ accountConfirmation:
     <br>
     Para finalizar a ativação da sua conta - por favor, clique <a href=%confirmationUrl%>aqui.</a><br>
     <br>
-    Este link pode ser usado uma única vez para validar sua conta.<br>
+    Este link só pode ser usado uma única vez para validar sua conta.<br>
     <br>
-    Sinceros cumprimentos,<br>
-    Seu Time Catrobat.
-    </p>
+    Uma boa sorte,<br>
+    A Equipe Catrobat.
+    </p></p>
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -266,6 +268,7 @@ profile:
     pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
     uploadError: Desculpe! Houve um problema durante o upload!
     noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Editar perfil
   edit: Editar
@@ -554,11 +557,6 @@ help:
       Este tutorial te mostra como criar um fundo que se move verticalmente, deslizando os gráficos do fundo. Outra coisa que te ensinaremos é a fazer a personagem saltar à frente quando tocada.
       Para tornar o jogo um pouco mais difícil, te mostraremos como diminuir a velocidade da personagem com o tempo.
     download: "Baixe o projeto"
-oauth:
-  username_header: Obrigado por registrar-se no Pocket Code!
-  username_chooser: "Por favor, escolha um nome de usuário:"
-  username_hint: O nome de usuário não deve ser seu nome verdadeiro.
-  usernameTaken: Nome de usuário já existente. Por favor, escolha um outro.
 search:
   dotdotdot: Pesquisar...
   search: Pesquisar
@@ -595,7 +593,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Baixar como app
-  prepare: 'Preparar app'
+  prepare: 'Baixar como app'
   preparing: 'Preparando app'
   text: 'O processo pode demorar um pouco'
 format:
@@ -626,7 +624,7 @@ errors:
   id:
     blank: ID de Autenticação Aberta não pode estar em branco
   login: A senha ou nome de usuário está incorreto.
-  post-data: POST-Data não correto ou faltando!
+  post-data: POST-data não está correta ou faltando!
   checksum:
     missing: Cliente não enviou o arquivo Checksum! Você está usando uma versão desatualizada do Pocket Code?
     invalid: checksum inválido
@@ -670,18 +668,19 @@ failure:
   upload: Houve um erro durante o envio do seu aplicativo.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -763,14 +762,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: Não há objetos removíveis disponíveis.
     removableObjects: Removable objects
-    manualBackups: Backups manuais
-    noRemovableBackupObjects: Não há arquivos de backup removíveis neste servidor.
-    btnCreateBackup: Criar backup
-    btnDownloadBackup: Baixar backup
-    btnRestoreBackup: Restaurar backup
-    btnDeleteBackup: Excluir backup
-    createBackupConfirmationTitle: Criar arquivo de backup
-    createBackupConfirmationText: Este processo pode demorar um pouco. A página recarregará logo após!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
@@ -786,6 +777,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Mostrar código'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -816,12 +808,12 @@ codeStatistics:
   error: "Code Statistics can't be displayed."
   general: 'General'
   bricks: 'Blocos'
-  eventBricks: 'Evento'
+  eventBricks: 'Event'
   controlBricks: 'Controle'
   motionBricks: 'Movimento'
   soundBricks: 'Som'
   looksBricks: 'Aparências'
-  penBricks: 'Caneta'
+  penBricks: 'Pen'
   dataBricks: 'Dados'
   specialBricks: 'Special'
 footer:
@@ -846,21 +838,19 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

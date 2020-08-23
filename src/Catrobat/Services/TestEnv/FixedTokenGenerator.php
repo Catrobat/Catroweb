@@ -15,7 +15,6 @@ class FixedTokenGenerator extends TokenGenerator
    */
   public function __construct($token)
   {
-    parent::__construct();
     $this->token = $token;
   }
 

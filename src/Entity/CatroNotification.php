@@ -66,13 +66,19 @@ class CatroNotification
    */
   private bool $seen = false;
 
+  /**
+   * @ORM\Column(name="type", type="string")
+   */
+  private string $type = '';
+
   private string $twig_template = 'Notifications/NotificationTypes/catro_notification.html.twig';
 
-  public function __construct(User $user, string $title = '', string $message = '')
+  public function __construct(User $user, string $title = '', string $message = '', string $type = '')
   {
     $this->user = $user;
     $this->title = $title;
     $this->message = $message;
+    $this->type = $type;
   }
 
   public function getId(): ?int
@@ -147,5 +153,17 @@ class CatroNotification
   public function setTwigTemplate(string $twig_template): void
   {
     $this->twig_template = $twig_template;
+  }
+
+  public function setType(string $type): CatroNotification
+  {
+    $this->type = $type;
+
+    return $this;
+  }
+
+  public function getType(): string
+  {
+    return $this->type;
   }
 }

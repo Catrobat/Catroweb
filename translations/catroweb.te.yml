@@ -18,7 +18,7 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Download
 description: వివరణ
 noDescription: డిస్క్రిప్షన్ అంధుబాటులొ లెదు.
 credits: Credits
@@ -27,14 +27,15 @@ country: దేశం
 loginText: లాగిన్
 privacyPolicy: ప్రయివసి పాలిసి
 imprint: ఇంప్రింట్
+programDetails: Details
 somethingWentWrong: 'ఊప్స్ ఎధొ తప్పు జరిగొనది.'
 pleaseTryAgain: 'మళ్ళి ప్రయత్నించండి!'
 oldVersionError: 'కొత్త పాకెట్ కొడ్ వర్షెన్ కి అప్గ్రెడ్ చెసుకొండి!'
 more: 'ఎక్కువ'
 less: 'తక్కువ'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: సరే
+show-more: 'More information'
+show-less: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'మీరు ఉపయోగిస్తున్న పేరు లేదా ఇమెయిల్ ఇప్పటికే ఉపయోగంలో ఉంది.'
 notifications: 'ప్రకటనలు'
@@ -65,6 +66,7 @@ notificationsClearError: "ప్రకటనలను చదివినట్�
 notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "దయచేసి వేచి ఉండండి..."
 projects: "Projects"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -175,8 +177,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: అర్ధముఖము సవరించండి
   edit: Edit
@@ -596,7 +601,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +676,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -787,6 +793,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'

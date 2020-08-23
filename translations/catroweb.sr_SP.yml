@@ -3,10 +3,14 @@
 localLanguage: Енглески
 username: Корисничко име
 password: Лозинка
+createNewPassword: Create new password
 accountSettings: Подешавања налога
 email: E-Мail
 aboutPocketCode: О Pocket Code
-aboutCatrobat: О Catrobat
+about: About
+education: Education
+chat: Chat and forums
+others: Others
 tutorials: Упутства
 googlePlay: Гугл продавница
 iosAppStore: IOS продавница апликација
@@ -27,6 +31,7 @@ country: Држава
 loginText: пријава
 privacyPolicy: Правила о приватности
 imprint: Утисак
+programDetails: Детаљи
 somethingWentWrong: 'Упс, дошло је до грешке.'
 pleaseTryAgain: 'Молимо покушајте поново!'
 oldVersionError: 'Ажурирајте на најновију верзију Pocket Code!'
@@ -34,6 +39,8 @@ more: 'још'
 less: 'мање'
 show-more: 'Прикажи више'
 show-less: 'Прикажи мање'
+more-information: 'Више информација'
+less-information: 'Less information'
 ok: Ок
 clickToDownloadProgram: 'Да бисте преузели пример програма, кликните %link_start% овде %link_end%.'
 registrationError: 'Корисничко име или адреса е-поште је већ у употреби.'
@@ -41,30 +48,21 @@ notifications: 'Обавештења'
 allNotifications: 'Сва обавештења'
 FollowersNotifications: 'Пратиоци'
 LikeNotifications: 'Реакција'
-likesNotificationsTitle: 'Обавјештење реакције'
-followersNotificationsTitle: 'Обавјештење пратиоца'
-commentsNotificationsTitle: 'Обавјештење коментара'
-remixNotificationsTitle: 'Обавјештење ремикса'
 CommentNotifications: 'коментари'
 RemixNotifications: 'Ремикси'
-oldnotification: "Сва обавештења\n"
 wellDone: "Добро урађено!"
 done: "Завршено!"
 notificationsReadMessage: "Изгледа као да немате никаква обавјештења"
-notificationsClearedMessage: "Сва обавештења су означена као прочитана."
-deleteNotificationConfirmation: "Да ли сте сигурни?"
-notificationDeleteMessage: "Желите ли заиста да избришете ово обавјештење?"
-notificationDeleteAllMessage: "Желите ли заиста да избришете ово обавјештење?"
 confirmMessage: "Да, избриши."
 cancelMessage: "Откажи"
-notificationsAllMessagesDeleted: "Сва обавештења су обрисана."
-notificationDeletedMessage: "%resource% је успешно обрисан."
-clearAllNotificationsButtonTitle: "Означи све као прочитано"
-deleteAllNotificationsButtonTitle: "Избриши све"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Обавештења нису могућа да се означе као прочитана!"
-notificationsDeleteError: "Не могу избрисати обавјестенје"
 pleaseWait: "Молимо сачекајте..."
 projects: "Пројекти"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -88,6 +86,7 @@ programs:
   welcome:
     title: Добродошли у Catrobat %theme%
     subtitle: Креирајте приче, игре и још много тога...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Преузмите апликацију
     statistics: Више статистика
   featured: Истакнуто
@@ -152,7 +151,7 @@ programs:
   reportDone: You reported this project!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
+  btnClosePopup: Ок
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
   comments: коментари
@@ -175,8 +174,11 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Реакција
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  title: Remixes
+  showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Отвори'
   showPaths: 'Show Paths'
@@ -267,6 +269,7 @@ profile:
     pictureTooLarge: Ваша одабрана слика је превелика, немојте користити слике веће од 5mb.
     uploadError: Извините, дошло је до проблема током отпремања!
     noSupport: Ова врста слике није подржана. Покушајте с другом сликом.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Уреди профил
   edit: Измени
@@ -555,11 +558,6 @@ help:
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Преузми пројекат"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Please choose a username:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Тражи...
   search: Search
@@ -596,7 +594,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'Процес може потрајати неко време'
 format:
@@ -671,18 +669,19 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -764,14 +763,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Направите резервну копију
-    btnDownloadBackup: Преузми резервну копију
-    btnRestoreBackup: Вратити из резервне копије
-    btnDeleteBackup: Обриши резервну копију
-    createBackupConfirmationTitle: Направите резервну копију
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
@@ -787,6 +778,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -847,21 +839,19 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!

@@ -1,24 +1,24 @@
-@import '../base/variables';
-@import 'theme_settings';
+@import "../base/variables";
+@import "theme_settings";
 
 .login {
   width: 318px;
 }
 
 .group {
-  margin-top: 40px;
   position: relative;
+  margin-top: 40px;
 }
 
 .group input {
-  font-size: 18px;
-  padding: 10px 10px 10px 10px;
   display: block;
   width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: $primary;
+  background: none;
   border: none;
   border-bottom: 1px solid rgba($primary, 0.3);
-  background: none;
-  color: $primary;
 }
 
 .group input:focus {
@@ -27,12 +27,12 @@
 
 // Html5 validation error: red border in all browsers like the default firefox behaviour
 .group input:invalid {
-  border-color: #ffdddd;
+  border-color: #fdd;
   border-width: 3px;
 }
 
 .group input:valid {
-  border-color: #ddffdd;
+  border-color: #dfd;
   border-width: 3px;
 }
 
@@ -40,16 +40,16 @@
 /* LABEL ======================================= */
 
 .group label {
-  color: rgba($primary, 0.5);
+  position: absolute;
+  top: 20px;
+  left: 5px;
   font-size: 18px;
   font-weight: normal;
-  position: absolute;
+  color: rgba($primary, 0.5);
   pointer-events: none;
-  left: 5px;
-  top: 20px;
-  transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
 }
 
 /* active durum */
@@ -70,31 +70,31 @@ input:valid ~ label {
   width: 100%;
 }
 
-.bar:before,
-.bar:after {
-  content: '';
-  height: 2px;
-  width: 0;
-  bottom: 1px;
+.bar::before,
+.bar::after {
   position: absolute;
+  bottom: 1px;
+  width: 0;
+  height: 2px;
+  content: "";
   background: rgba($primary, 0.7);
-  transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
 }
 
-.bar:before {
+.bar::before {
   left: 50%;
 }
 
-.bar:after {
+.bar::after {
   right: 50%;
 }
 
 /* active durum bar */
 
-.group input:focus ~ .bar:before,
-.group input:focus ~ .bar:after {
+.group input:focus ~ .bar::before,
+.group input:focus ~ .bar::after {
   width: 50%;
 }
 
@@ -104,10 +104,10 @@ input:valid ~ label {
 
 .highlight {
   position: absolute;
-  height: 0;
-  width: 100px;
   top: 25%;
   left: 0;
+  width: 100px;
+  height: 0;
   pointer-events: none;
   opacity: 0.5;
 }
@@ -115,14 +115,14 @@ input:valid ~ label {
 /* active durum */
 
 .group input:focus ~ .highlight {
-  -webkit-animation: inputHighlighter 0.3s ease;
-  -moz-animation: inputHighlighter 0.3s ease;
+  -webkit-animation: inputhighlighter 0.3s ease;
+  -moz-animation: inputhighlighter 0.3s ease;
   animation: inputHighlighter 0.3s ease;
 }
 
 /* form animasyon ================ */
 
-@-webkit-keyframes inputHighlighter {
+/* @-webkit-keyframes inputHighlighter {
   from {
     background: rgba($primary, 0.7);
   }
@@ -150,22 +150,21 @@ input:valid ~ label {
     width: 0;
     background: transparent;
   }
-}
+} */
 
 .span-input {
-  margin-left: 10px;
   position: relative;
   top: -5px;
+  margin-left: 10px;
 }
 
-
-.social-button-effects {
+/* .social-button-effects {
   opacity: 0.9;
 }
 
 .social-button-effects:hover {
   opacity: 1.1;
-}
+} */
 
 
 #_submit {
@@ -176,18 +175,18 @@ input:valid ~ label {
   min-height: 39px;
 }
 
-#login_links {
+/* #login_links {
   font-size: 16px;
   width: 318px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   margin-top: 12px;
-}
+} */
 
 #seperator-text {
-  top: 10px;
   position: relative;
+  top: 10px;
   text-align: left;
 }
 
@@ -196,7 +195,7 @@ hr {
   border-color: $primary;
 }
 
-.hidden {
+/* .hidden {
   width: 0;
   height: 0;
   background: transparent;
@@ -212,8 +211,24 @@ hr {
 
 .align_start {
   text-align: start;
-}
+} */
 
 .show-hide-password {
   display: flex;
+}
+
+.log-in-text {
+  font-size: 18px;
+  vertical-align: middle;
+}
+.google-logo,
+.fb-logo{
+  -ms-transform: scale(0.6, 0.6);
+  -webkit-transform: scale(0.6, 0.6);
+  transform: scale(0.6, 0.6);
+}
+.apple-logo{
+  -ms-transform: scale(1.2, 1.2);
+  -webkit-transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
 }

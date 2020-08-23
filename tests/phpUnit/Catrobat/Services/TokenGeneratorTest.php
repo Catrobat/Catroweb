@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Services\TokenGenerator
  */
 class TokenGeneratorTest extends TestCase
 {

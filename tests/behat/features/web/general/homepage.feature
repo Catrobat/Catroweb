@@ -11,15 +11,24 @@ Feature: Pocketcode homepage
       | 2  | User1    |
       | 3  | Catrobat2|
 
+    And there are extensions:
+      | id | name         | prefix     |
+      | 1  | Embroidery   | Embroidery |
+
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 3  | embroidery |
+
     And there are projects:
-      | id | name      | owned by |
-      | 1  | project 1 | Catrobat |
-      | 2  | project 2 | Catrobat |
-      | 3  | project 3 | User1    |
-      | 4  | project 4 | User1    |
-      | 5  | project 5 | User1    |
-      | 6  | project 6 | Catrobat2|
-      | 7  | project 7 | Catrobat2|
+      | id | name      | owned by | extensions | flavor     |
+      | 1  | project 1 | Catrobat | Embroidery | pocketcode |
+      | 2  | project 2 | Catrobat | Embroidery | embroidery |
+      | 3  | project 3 | User1    |            | pocketcode |
+      | 4  | project 4 | User1    |            | embroidery |
+      | 5  | project 5 | User1    |            | pocketcode |
+      | 6  | project 6 | Catrobat2|            | pocketcode |
+      | 7  | project 7 | Catrobat2|            | pocketcode |
 
     And following projects are featured:
       | name      | url                   | active | priority |
@@ -35,7 +44,7 @@ Feature: Pocketcode homepage
       | project 5 | 1      | 3        |
       | project 6 | 1      | 2        |
 
-    Given there are Scratch remix relations:
+    And there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
       | 70058680          | 6                 |
       | 70058680          | 7                 |
@@ -44,30 +53,29 @@ Feature: Pocketcode homepage
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
-    Then the element "#scratchRemixes" should exist
-    And the "#scratchRemixes" element should contain "project 6"
-    And the "#scratchRemixes" element should contain "project 7"
-    And the "#scratchRemixes" element should not contain "project 1"
+    Then the element "#home-projects__scratch" should exist
+    And the "#home-projects__scratch" element should contain "project 6"
+    And the "#home-projects__scratch" element should contain "project 7"
+    And the "#home-projects__scratch" element should not contain "project 1"
 
   Scenario: Viewing the homepage at website root
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
-    Then the element "#newest" should exist
-    Then the element "#example" should exist
-    Then the element "#recommended" should exist
-    Then the element "#mostDownloaded" should exist
-    Then the element "#random" should exist
-    Then the element "#scratchRemixes" should exist
-    Then the element "#mostViewed" should exist
+    Then one of the ".project-list__title" elements should contain "Newest projects"
+    Then one of the ".project-list__title" elements should contain "Examples"
+    Then one of the ".project-list__title" elements should contain "Most downloaded"
+    Then one of the ".project-list__title" elements should contain "Most viewed"
+    Then one of the ".project-list__title" elements should contain "Scratch remixes"
+    Then one of the ".project-list__title" elements should contain "Random projects"
 
   Scenario: Welcome Section
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the welcome section
     And I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
-    And I should see "Get it on Google Play"
-    And I should see "Get it on IOS"
+    And I should see "Google Play"
+    And I should see "App Store"
 
   Scenario: Cant see the Welcome Section when logged in
     Given I log in as "Catrobat"
@@ -84,6 +92,29 @@ Feature: Pocketcode homepage
   Scenario: Example Programs
     Given I am on homepage
     And I wait for the page to be loaded
-    Then the element "#example" should exist
-    And the "#example" element should contain "project 5"
-    And the "#example" element should contain "project 6"
+    Then the element "#home-projects__example" should exist
+    And the "#home-projects__example" element should contain "project 5"
+    And the "#home-projects__example" element should contain "project 6"
+
+  Scenario: Extension flavored homepage
+    Given I am on "/embroidery"
+    And I wait for the page to be loaded
+    Then the element "#home-projects__recent" should exist
+    And the "#home-projects__recent" element should contain "project 1"
+    And the "#home-projects__recent" element should contain "project 2"
+    And the "#home-projects__recent" element should contain "project 4"
+    And the "#home-projects__recent" element should not contain "project 3"
+  Scenario: User should be able to see useful links
+    Given I am on homepage
+    And I wait for the page to be loaded
+    Then I should see "Useful Links"
+    And I should see "Help"
+    And I should see "About"
+    And I should see "Education"
+    And I should see "Imprint"
+    And I should see "Google PLay"
+    And I should see "iOS App store"
+    And I should see "Others"
+    And I should see "Chat and forums"
+    And I click "#help"
+    Then I should be on "/app/help"

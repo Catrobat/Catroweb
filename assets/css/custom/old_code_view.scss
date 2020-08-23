@@ -1,7 +1,7 @@
 // @deprecated
 
 @import "../base/variables";
-@import 'theme_settings';
+@import "theme_settings";
 
 
 #codeview-wrapper {
@@ -16,9 +16,9 @@
         position: relative;
 
         .scene-arrow {
+          top: auto;
           right: 16.7%;
           bottom: 10px;
-          top: auto;
         }
 
         .scene-heading {
@@ -27,8 +27,8 @@
 
           span {
             margin-left: 8px;
-            color: black;
             font-size: 16px;
+            color: black;
           }
         }
       }
@@ -48,63 +48,64 @@
   }
 
   .heading {
-    color: black;
     padding: 5px 10px;
-    border-bottom: solid 3px rgba(115, 154, 166, 0.3);
+    margin-right: 15%;
     margin-bottom: 8px;
     margin-left: 10px;
-    margin-right: 15%;
     font-size: $default-font-size;
+    color: black;
+    border-bottom: solid 3px rgba(115, 154, 166, 0.3);
   }
 
-  .object, #background {
-    margin: 5px 0;
+  .object,
+  #background {
     width: 100%;
+    margin: 5px 0;
   }
 
   .arrow {
     position: absolute;
-    right: 5%;
     top: 5%;
+    right: 5%;
   }
 
   .dropbtn {
     position: relative;
     padding: 5px;
-    background-color: rgb(23,165,184);
+    background-color: rgb(23, 165, 184);
     border-top: solid 2px #739aa6;
     border-bottom: solid 2px black;
     border-radius: 3px;
 
     .object-icon {
-      object-fit: cover;
-      width: 65px;
-      height: 65px;
       position: absolute;
       left: 0;
+      width: 65px;
+      height: 65px;
       margin: 3px 8px 0;
       border: 2px solid #88c7dc;
+      object-fit: cover;
     }
 
     .no-image-found-icon {
-      font-size: 4em;
-      color: #88c7dc;
       position: relative;
-      float: left;
       top: 50%;
       left: 50%;
+      float: left;
+      font-size: 4em;
+      color: #88c7dc;
       transform: translate(-50%, -50%);
     }
 
     .object-meta {
-      color: white;
-      font-size: $default-font-size;
-      text-transform: none;
-      text-shadow: none;
-      font-weight: normal;
-      text-align: left;
-      margin-left: 90px; // to be reset
       position: relative;
+      margin-left: 90px; // to be reset
+      font-size: $default-font-size;
+      font-weight: normal;
+      color: white;
+      text-align: left;
+      text-shadow: none;
+      text-transform: none;
 
       &.outdented {
         margin-left: 3px;
@@ -132,19 +133,19 @@
   }
 
   .dropdown-content {
-    padding-top: 11px;
-    display: none;
     position: relative;
-    background-color: #F5F5F6;
+    display: none;
     height: auto;
-    color: black;
-    border-radius: 3px;
+    padding-top: 11px;
     font-size: $default-font-size;
+    color: black;
+    background-color: #f5f5f6;
+    border-radius: 3px;
 
     .script {
-      margin-bottom: 15px;
       position: relative;
       z-index: 1;
+      margin-bottom: 15px;
 
       .script-top-brick {
         position: relative;
@@ -169,9 +170,9 @@
       .script-bricks-wrapper {
 
         .brick {
-          margin-top: -5px;
           position: relative;
           height: 48px;
+          margin-top: -5px;
           overflow: hidden;
           background-size: cover;
 
@@ -179,31 +180,32 @@
             position: absolute;
             top: 0;
             left: 0;
-            color: lightcoral;
             z-index: 1;
+            color: lightcoral;
           }
 
           .brick-text {
             position: absolute;
             top: 31%;
             left: 50px;
-            display: inline-block;
             z-index: 1;
+            display: inline-block;
             white-space: nowrap;
           }
 
-          .brick-sound {;
-            color: white!important;
-            cursor: pointer;
+          .brick-sound {
+            color: white !important;
             vertical-align: middle;
+            cursor: pointer;
           }
         }
       }
 
-      .brick-look, .brick-sound {
+      .brick-look,
+      .brick-sound {
         position: absolute;
-        bottom: 13px;
         right: 10px;
+        bottom: 13px;
         z-index: 1;
       }
 
@@ -220,9 +222,9 @@
   }
 
   .note {
-    text-align: center;
-    font-size: $default-font-size;
     padding: 20px 0;
+    font-size: $default-font-size;
+    text-align: center;
   }
 
   #object-list-wrapper {
@@ -234,12 +236,12 @@
   }
 
   .rotate {
+    display: inline-block;
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
-    display: inline-block;
   }
 }
 
@@ -251,14 +253,14 @@
     .scenes-wrapper {
       .scene {
         .scene-content {
-          margin-left: 0;
           margin-right: 0;
+          margin-left: 0;
         }
 
         .scene-dropbtn {
+          margin-right: 0;
 
           margin-left: 0;
-          margin-right: 0;
 
           .scene-arrow {
             right: 10%;
@@ -282,3 +284,4 @@
     text-align: center;
   }
 }
+

@@ -13,7 +13,6 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
-use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
@@ -26,7 +25,7 @@ use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Exception;
-use PHPUnit\Framework\Assert;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -38,7 +37,7 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Entity\ProgramManager
  */
 class ProgramManagerTest extends TestCase
 {
@@ -110,13 +109,14 @@ class ProgramManagerTest extends TestCase
     $extension_repository = $this->createMock(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
     $notification_service = $this->createMock(CatroNotificationService::class);
-    $urlHelper = new UrlHelper(new RequestStack());
+    $program_finder = $this->createMock(TransformedFinder::class);
+    $url_helper = new UrlHelper(new RequestStack());
 
     $this->program_manager = new ProgramManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
       $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
       $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
-      $catrobat_file_sanitizer, $notification_service, $urlHelper
+      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');
@@ -132,7 +132,6 @@ class ProgramManagerTest extends TestCase
     $this->request->expects($this->any())->method('getProgramfile')->willReturn($file);
     $this->request->expects($this->any())->method('getUser')->willReturn($user);
     $this->request->expects($this->any())->method('getIp')->willReturn('127.0.0.1');
-    $this->request->expects($this->any())->method('getGamejam')->willReturn(null);
     $this->request->expects($this->any())->method('getLanguage')->willReturn('en');
     $this->request->expects($this->any())->method('getFlavor')->willReturn('pocketcode');
     $file_extractor->expects($this->any())->method('extract')->with($file)->willReturn($this->extracted_file);
@@ -184,11 +183,11 @@ class ProgramManagerTest extends TestCase
         return $project;
       }))
     ;
+    fopen('/tmp/phpUnitTest', 'w');
+    $file = new File('/tmp/phpUnitTest');
+    $this->file_repository->expects($this->atLeastOnce())->method('saveProgramFile')->with($file, 1);
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
-
-    $this->file_repository->expects($this->atLeastOnce())->method('saveProgramTemp')->with($this->extracted_file, 1);
-    $this->file_repository->expects($this->atLeastOnce())->method('makeTempProgramPerm')->with(1);
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
@@ -304,79 +303,5 @@ class ProgramManagerTest extends TestCase
     ;
 
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function testMarksTheGameAsGameJamSubmissionIfAJamIsProvided(): void
-  {
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
-    $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
-        $project->setId('1');
-
-        return $project;
-      }))
-    ;
-
-    $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
-    ;
-
-    $game_jam = $this->createMock(GameJam::class);
-
-    $request = $this->createMock(AddProgramRequest::class);
-    fopen('/tmp/phpUnitTest', 'w');
-    $file = new File('/tmp/phpUnitTest');
-    $request->expects($this->any())->method('getProgramfile')->willReturn($file);
-    $request->expects($this->any())->method('getUser')->willReturn($this->createMock(User::class));
-    $request->expects($this->any())->method('getGamejam')->willReturn($game_jam);
-    $request->expects($this->any())->method('getLanguage')->willReturn('en');
-
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->willReturn($this->programBeforeInsertEvent)
-    ;
-
-    $program = $this->program_manager->addProgram($request);
-    Assert::assertEquals($game_jam, $program->getGamejam());
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function testProjectHashMustBeUpdatedOnUploads(): void
-  {
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
-    $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
-        $project->setId('1');
-
-        return $project;
-      }))
-    ;
-
-    $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
-
-    $request = $this->createMock(AddProgramRequest::class);
-
-    fopen('/tmp/phpUnitTest', 'w');
-    $file = new File('/tmp/phpUnitTest');
-    $request->expects($this->any())->method('getProgramfile')->willReturn($file);
-    $request->expects($this->any())->method('getUser')->willReturn($this->createMock(User::class));
-    $request->expects($this->any())->method('getLanguage')->willReturn('en');
-
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
-
-    $program = $this->program_manager->addProgram($request);
-    Assert::assertEquals($this->extracted_file->getDirHash(), $program->getExtractedDirectoryHash());
   }
 }

@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col mt-3 mb-3">
+    <div class="h2" id="description-headline">
+        <span>
+          {{ "description"|trans({}, "catroweb") }}
+          {% if app.user and my_program %}
+            <a data-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
+              <i id="edit-description-button"
+                 class="ml-3 material-icons catro-icon-button">edit</i>
+            </a>
+          {% endif %}
+        </span>
+    </div>
+    {% if app.user and my_program %}
+      <div id="edit-description-ui" class="d-none">
+        <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
+        <textarea id="edit-description" name="edit-description" class="mt-2 mb-2"
+                  title="_edit-description"
+                  maxlength="{{ max_description_size }}" style="width: 100%;" rows="10">
+    {% if program.description %}{{program.description}}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
+          </textarea>
+        <button id="edit-description-submit-button" class="btn btn-primary p-3 mb-5">
+          <i class="fa fa-floppy-o mr-2"></i>
+          {{ 'programs.saveDescription'|trans({}, 'catroweb') }}
+        </button>
+      </div>
+    {% endif %}
+    <div id="description-credits-container" style="height:auto; overflow: hidden;">
+      <div id="description" class="text-break">
+        {% if program.description %}
+          {{ program.description|nl2br }}
+        {% else %}
+          {{ "noDescription"|trans({}, "catroweb") }}
+        {% endif %}
+      </div>
+      <div class="h2 mt-3" id="credits-headline">
+          <span>
+            {{ "credits"|trans({}, "catroweb") }}
+            {% if app.user and my_program %}
+              <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
+                <i id="edit-credits-button"
+                   class="ml-3 material-icons catro-icon-button">edit</i>
+              </a>
+            {% endif %}
+          </span>
+      </div>
+      <div id="credits" class="text-break">
+        {% if program.credits %}
+          {{ program.credits|nl2br }}
+        {% else %}
+          {{ "noCredits"|trans({}, "catroweb") }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% if app.user and my_program %}
+      <div id="edit-credits-ui" class="d-none">
+        <div class="h2 mt-3" id="credits-headline">
+            <span>
+              {{ "credits"|trans({}, "catroweb") }}
+              {% if app.user and my_program %}
+                <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
+                  <i id="edit-credits-button"
+                     class="ml-3 material-icons catro-icon-button">edit</i>
+                </a>
+              {% endif %}
+            </span>
+        </div>
+        <div id="edit-credits-error" style="display:none;" class="alert alert-danger"></div>
+        <textarea id="edit-credits" name="edit-credits" class="mt-2 mb-2"
+                  title="_edit-credits"
+                  maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
+          {% if program.credits %}{{ program.credits }}{% else %}{{ "noCredits"|trans({}, "catroweb") }}{% endif %}
+          </textarea>
+        <button id="edit-credits-submit-button" class="btn btn-primary p-3 mb-5">
+          <i class="fa fa-floppy-o mr-2"></i>
+          {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 text-center">
+    <a id="descriptionShowMoreToggle" aria-expanded="false"
+       aria-controls="descriptionFulltext" href="#"
+       class="toggle-content d-none">
+      <i class="material-icons">keyboard_arrow_down</i>
+      <span id="descriptionShowMoreText" class="text text-capitalize">
+          {{ ("more-information")|trans({}, "catroweb") }}
+        </span>
+    </a>
+  </div>
+</div>

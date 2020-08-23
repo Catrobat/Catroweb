@@ -60,7 +60,7 @@ class ProgramImportCommand extends Command
   {
     $directory = $input->getArgument('directory');
     $username = $input->getArgument('user');
-    $layout_idx = ($input->getOption('remix-layout') - 1);
+    $layout_idx = intval(($input->getOption('remix-layout') - 1));
 
     $all_layouts = RemixGraphLayout::$REMIX_GRAPH_MAPPING;
     $num_of_layouts = count($all_layouts);

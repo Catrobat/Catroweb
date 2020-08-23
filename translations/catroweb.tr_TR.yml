@@ -1,0 +1,902 @@
+---
+#homepage translation
+localLanguage: İngilizce
+username: Kullanıcı adı
+password: Şifre
+createNewPassword: Yeni şifre oluşturma
+accountSettings: Hesap silme
+email: E-Posta
+aboutPocketCode: Cep kodu hakkında
+about: Daha fazla
+education: Education
+chat: Chat and forums
+others: Others
+tutorials: Öğreticiler
+googlePlay: Google Play
+iosAppStore: IOS App store
+passwordsNoMatch: Şifreler eşleşmedi.
+error: Hata
+cancel: İptal et
+report: Bildir
+deleteIt: Evet, sil!
+reportIt: Evet, bildir!
+areYouSure: Emin misiniz?
+noWayOfReturn: Eylemlerinizi geri getirmenin bir yolu yok!
+download: indir
+description: Açıklama
+noDescription: Açıklama mevcut değil.
+credits: Yapanlar
+noCredits: Her hangi bir yapanlar yok. 
+country: Ülke
+loginText: oturum aç
+privacyPolicy: Gizlilik politikası
+imprint: Damga
+programDetails: Ayrıntılar
+somethingWentWrong: 'Eyvah! Bir hata oluştu.'
+pleaseTryAgain: 'Lütfen yeniden deneyin!'
+oldVersionError: 'En yeni cep kodu sürümüne güncelleyin!'
+more: 'daha fazla'
+less: 'daha az'
+show-more: 'Daha fazla göster'
+show-less: 'Daha az göster'
+more-information: 'Daha fazla bilgi'
+less-information: 'Daha az bilgi'
+ok: Tamam
+clickToDownloadProgram: 'Örnek projeyi indirmek için tıklayınız %link_start% buraya %link_end%'
+registrationError: 'Kullanıcı adı yada e-posta zaten kullanılıyor.'
+notifications: 'Bildirimler'
+allNotifications: 'Tüm bildirimler'
+FollowersNotifications: 'Takipçiler'
+LikeNotifications: 'Tepkiler'
+CommentNotifications: 'Yorumlar'
+RemixNotifications: 'Remixlenenler'
+wellDone: "Tebrikler!"
+done: "Tamam!"
+notificationsReadMessage: "Herhangi bir bildiriminiz yok gibi görünüyor."
+confirmMessage: "Evet, sil"
+cancelMessage: "İptal et"
+notificationsUnauthorizedError: "Kullanıcıya yetki verilemiyor"
+notificationsClearError: "Bildirimler okundu olarak işaretlenemedi!"
+pleaseWait: "Lütfen bekleyiniz..."
+projects: "Projelerin"
+oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
+oauthInfo: 'Oturum açmak için harici bir hesap kullandınız. Sizin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adınızı değiştirmek veya hesabınız için yeni bir şifre oluşturmak istiyorsanız lütfen profil sayfama gidin. Tıklayın %link_start% buraya %link_end% profil sayfanıza gitmek için.'
+oauthHere: "buraya"
+statistics: "İstatistik"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'Burada hangi projeler önerilir?'
+      description: 'Projeniz ne kadar çok tepki alırsa (Beğen, Gülümseyin ...) projeniz bu listede o kadar yüksek görünür.'
+follower:
+  follows: Takip ediliyor
+  followers: Takipçiler
+  follow: Takip et
+  username: kullanıcı
+  followsMe: Beni takip ediyor
+  noFollowing: Şu anda kimseyi takip etmiyorsunuz.
+  noFollowers: Şu anda takipçiniz yok.
+  noOtherFollowing: Şu anda takip eden kullanıcı yok.
+  noOtherFollowers: Şu anda takipte olan kullanıcı yok.
+  followError: "İstenilen kullanıcı takip edilemiyor!"
+  unfollowError: "İstenen kullanıcının takibi kaldırılamıyor!"
+  unfollowQuestion: "Bu kullanıcıyı takip etmeyi bırakmak istediğinden emin misin?"
+  unfollowButton: "Takip etmekten vazgeç %username%"
+programs:
+  welcome:
+    title: Catrobat'ın %theme% hoş geldiniz
+    subtitle: Hikayeler, oyunlar ve daha fazlasını oluşturun ...
+    subtitle_embroidery: T-shirt, çanta, pantolon veya akıllı telefon kasanızda kendi deseninizi dikin!
+    download: Apk'yı indirin
+    statistics: Diğer istatistikler
+  featured: Öne çıkan
+  example: Örnekler
+  newest: Yeni projeler
+  recommended: Önerilen projeler
+  scratchremixes: Scratch remixleri
+  noPrograms: Şu anda proje yok.
+  deleteConfirmation: |+
+    Emin misiniz?
+    Silmek istediğine emin misin "%programName%"?
+    Eylemlerinizi geri getirmenin bir yolu yok!
+    Evet, sil!
+    İptal etmek
+  changeVisibility: |+
+    Emin misiniz?
+    Silmek istediğine emin misin "%programName%"diğer kullanıcılar tarafından görülebilir ve bulunabilir.
+    Yine de projenizin bağlantısını arkadaşlarınızla paylaşabilirsiniz. Asma kilit simgesine dokunarak görünürlüğü değiştirebilirsiniz"%programName%" öğesini genel olarak ayarlarsanız, diğer kullanıcılar tarafından görülebilir ve bulunabilir.
+    Evet, herkese açık olarak ayarla
+    Evet, özel olarak ayarla
+    Hayır
+  reportCommentConfirmation: Bu yorumu bildirmek istediğinizden emin misiniz?
+  deleteCommentConfirmation: Bu yorumu silmek istediğinizden emin misiniz?
+  deleteAccountConfirmation: |+
+    Hesap silme?
+    Hesabınızı silmek istediğinizden emin misiniz?
+    Bu, yüklediğiniz projeleri ve yorumları da silecek! Eylemlerinizi geri getirmenin bir yolu yok!
+    Evet, sil!
+    İptal etmek
+  tooLongDescription: Projenin alt yazısı çok uzun!
+  rudeWordsInDescription: Açıklamanızda kaba kelimeler kullanamazsınız!
+  tooLongCredits: Projenin yapanlar kısmı çok uzun!
+  rudeWordsInCredits: Yapanlarda kaba kelimeler kullanamazsınız!
+  most:
+    viewed: En çok İzlenenler
+    downloaded: En çok indirilen
+  random: Rastgele projeler
+  related: İlgili Projeler
+  downloads: '%downloads% İndirme'
+  sample: Örnek projeler
+  views: '%views%İzlenme'
+  likes:
+    likersTitle: "Bu projeye tepki gösteren insanlar"
+    all: "Hepsi"
+  remixes: '{0}0 remixler |{1}1 remix |]1,Inf]%remixes% remixler'
+  newRemixesNotificationTitle: '| {1}"%programName%" yeni 1 remix içeriyor: |] 1,Inf]"%programName%" %remixes% sahipin yeni remixleri:'
+  submitted: Gönderilen projeler
+  uploaded: Yüklenen projeler
+  reportAsInappropriate: Uygunsuz olarak rapor et
+  reportProgram: Projeyi bildir
+  languageVersion: 'Catrobat dil sürümü: %languageVersion%'
+  reportLoginText: Lütfen %login% bildirmek için kayıt olun.
+  reportDialogHeader: Bu projeyi neden bildirmek istiyorsunuz?
+  reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne?
+  reportRadioButtonInappropriate: Uygunsuz
+  reportRadioButtonCopyright: Telif hakkı ihlali
+  reportRadioButtonSpam: Spam
+  reportRadioButtonDislike: Hoşlanmadım
+  reportOwnProgram: Kendi projenizi işaretleyemezsiniz.
+  reportAlready: Bu projeyi zaten işaretlediniz.
+  reportDone: Bu projeyi bildirdiniz!
+  updateAppHeader: Programı güncelleyin
+  updateAppText: Bu projeyi indirebilmek için lütfen uygulamanızı en yeni sürüme güncelleyin.
+  btnClosePopup: Tamam
+  checkout_this_program: Bu Catrobat projesine göz atın
+  show_more: Daha Fazla Göster
+  comments: Yorumlar
+  send: Gönder
+  delete: Sil
+  report: Bildir
+  report_popup: Bize başarıyla bildirildi.
+  report_popup_header: Raporlandı
+  deleted_popup: Yorum başarıyla silindi.
+  deleted_popup_header: Silindi
+  noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
+  editDescription: Proje açıklamasını düzenleyin
+  saveDescription: Açıklama değişikliğini kaydet
+  editCredits: Yapanları düzenle
+  saveCredits: Yapanları kayıt et
+  addComment: Bir yorum Yaz
+  thumbsUp: Başparmak havaya!
+  smile: Gülümse!
+  love: Aşk!
+  wow: Vaycanına!
+  linkTitle: Link
+  link: Proje bağlantısını panoya kopyala
+  reactionsText: İzlenmeler
+  downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
+remixGraph:
+  title: Remixler
+  showRemixGraph: 'Remix Grafiği'
+  by: 'tarafından'
+  open: 'Açık '
+  showPaths: 'Yolları Göster'
+  programNotAvailableErrorTitle: 'Üzgünüz...'
+  programNotAvailableErrorDescription: 'Proje kullanılabilir değil'
+  programNotAvailable: 'Kullanılabilir değil'
+  programUnknownUser: 'Bilinmeyen kullanıcı'
+noReply: Bu otomatik bir mesajdır - Lütfen bu e-postayı doğrudan yanıtlamayın.
+accountConfirmation:
+  subject: Catrobat hesap onayınız
+  message: |
+    Sayın %username%
+    Hesabınızı etkinleştirmeyi bitirmek için lütfen
+    %confirmationUrl% adresini ziyaret edin. Bu bağlantı, hesabınızı doğrulamak için yalnızca bir kez kullanılabilir. Saygılarımla,
+    Catrobat Takımı.
+  messageHtml: |
+    <p>
+    Sayın %username%.<br>
+    <br>
+    Hesabınızı etkinleştirmeyi tamamlamak için - lütfen tıklayın <a href=%confirmationUrl%>buraya.</a><br>
+    <br>
+    Bu bağlantı, hesabınızı doğrulamak için yalnızca bir kez kullanılabilir.<br>
+    <br>
+    Saygılarla,<br>
+    Catrobat Takımı.
+    </p>
+passwordRecovery:
+  subject: Catrobat şifre kurtarma
+  message: |
+    Sayın %username%. Şifrenizi unuttuğunuz için %appplication_url% adresinde şifrenizi sıfırlamayı istediniz. Bunu talep etmediyseniz, lütfen dikkate almayın. Süresi dolacak ve usele dönüşecek
+    Catrobat takımı
+  messageHtml: |
+    <p>
+    Dear %username%.<br>
+    <br>
+    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
+    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    <br>
+    Şifrenizi sıfırlamak ve yeni bir şifre oluşturmak için lütfen tıklayın <a href=%confirmationUrl%>buraya.</a><br>
+    <br>
+    Kullanıcı adınızı ve şifrenizi istediğiniz zaman erişmek için kullanabilirsiniz. <a href=%appplication_url%>Cep Kodu</a> Birliği<br>
+    Bunu yapmak için aşağıdaki sayfayı ziyaret etmeniz yeterlidir: <a href=%loginPage%>Giriş yap</a><br>
+    Profil ayrıntılarınızı düzenlemek için buna gidin <a href=%profilePage%>sayfaya.</a>.<br>
+    <br>
+    Saygılarla,<br>
+    Catrobat Takımı.
+    </p>
+profile:
+  edit: Profilini düzenle
+  saveChanges: Değişiklikleri kaydet
+  newPass: yeni şifre
+  repeatPass: Şifreyi tekrar girin
+  oldPass: Eşki şifre
+  firstEmail: Benim ilk e-postam
+  secondEmail: İkinci e-postam
+  myPrograms: Projelerim
+  follows: Takipler
+  follower: Takipçin
+  unfollowUser: Takipten çık!
+  followUser: Takip et!
+  amountOfPrograms: Proje miktarı
+  form:
+    passwordTooShort: "Yeni şifrenin en az uzunluk karakteri %length% olmalıdır.\n \nBağlam | Bağlam İste."
+    passwordTooLong: "Yeni şifrenin uzunluğu en fazla %length% olabilir.\n \nBağlam | Bağlam İste."
+    passwordIsUsername: Şifre kullanıcı adından farklı olmalıdır.
+    passwordWrong: Yanlış şifre
+    emailNotValid: Bu e-posta adresi geçerli değil.
+    emailMissing: E-posta adresinizi güncelleştirme sırasında bir hata oluştu. En az bir onaylanmış e-posta adresi olması gerekir.
+    emailExists: Bu e-posta adresi zaten kullanılıyor.
+    usernameNotValid: Bu kullanıcı adı geçerli değil.
+    usernameMissing: Bir kullanıcı adınız olmalı.
+    usernameExists: Bu kullanıcı adı zaten kullanılıyor.
+    usernameContainsEmail: Kullanıcı adı bir e-posta adresi içermemelidir.
+    submitSuccess: Kaydedildi!
+  reallyDeleteProgram: Projeni gerçekten silmek istiyor musun?
+  programsOf: Projeleri
+  changePicture: Website ile resmi değistir
+  avatar:
+    noImage: Resim yok!
+    pictureTooLarge: Seçilen resim çok büyük, 5 mb'den büyük görüntüleri  lütfen kullanmayın.
+    uploadError: Üzgünüz, yükleme sırasında bir sorun oluştu!
+    noSupport: Bu resim türü desteklenmiyor, lütfen başka bir görüntü deneyin.
+  goToScratchProfile: Schart profili
+myprofile:
+  editProfile: Profili düzenle
+  edit: Düzenle
+  done: Tamam
+  checkMail: Adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin.
+  passwordUpdated: Şifreniz başarıyla güncellendi.
+  avatar: Avatar
+  email: E-posta
+  editAvatar: Avatarı düzenle
+  editUsername: Kullanıcı adını düzenle
+  editPassword: Şifreyi düzenle
+  editCountry: Ülke düzenle
+  editEmail: E-Postayı düzenle
+  deleteAccount: Hesabı Sil
+  deleteAccountText: Hesabınızı silmek istediğinizden emin misiniz? Bu, yüklediğiniz projeleri ve yorumları siler!
+  editAccountSettings: Hesap ayarlarını düzenle
+  notChangeVisibility: Görünürlüğü değiştiremezsiniz
+  notChangeVisibilityReason: Projenizin dil versiyonu çok yüksek ve bu nedenle görünür olarak ayarlanamıyor.
+licenseToPlay:
+  link: 'Oynamak için lisansınız'
+  title: 'Oynamak için lisans- prim ver ve paylaş'
+  text1: Her Catrobat projesinin bir kek olduğunu, tarifi ile birlikte gelen çok özel bir kek olduğunu düşünün (programlama blokları). Catrobat topluluğunun tüm üyeleri keklerini tarifleriyle birlikte paylaşıyor.
+  text2: 'Gizli olan hiçbir tarif yok: Bu pastaların nasıl yapılacağını açıklayan bilgileri herkes kullanır, yeniden kullanır, değiştirir ya da yeni fikirler için ilham kaynağı olarak yararlanır... Yani yeni pastalar için.'
+  text3: "Pasta yiyebileceğiniz gibi kendi yemeklerini hazırlamak için diğer insanların yemek tariflerini kopyalayabilirsiniz, belki de farklı malzemelerle yapabilirsiniz. Bu özgürlük iki basit gereklilikle birlikte gelir:"
+  text4: "Catrobat topluluğunu kurarken, topluluk içinde öğrenmeyi ve yaratıcılığı desteklediğine inandığımız için bu yaklaşımı benimsemeye karar verdik. Yemek tariflerini ve içerikleri paylaşarak (metin ve sanat eseri) insanlar fikir alışverişinde bulunabilir ve herkes yararlanabilir."
+  text5: Catrobat web sitesini tasarlarken, insanları paylaşmaya ve başkalarına kredi vermeye teşvik eden özellikler ekledik. Her proje sayfasında, proje için orijinal komut dosyalarını her zaman indirebilirsiniz.
+  text6: 'Catrobat çevrimiçi topluluğunun kullanım şartları hakkında daha fazla bilgi edinin.'
+  list1:
+    item1: Sizinde kendi pastanızı tarifi ile paylaşmanızı
+    item2: ve ilhamı kimden aldığınızı belirterek o kişinin hakkını vermenizi
+  version: Sürüm 1.1, 2 Nisan 2013
+termsOfUse:
+  title: Kullanım Şartları
+  headline: Catrobat Topluluğuna hoşgeldin!
+  text1: 'Catrobat topluluğunun bir parçası olarak, projeleri ve fikirleri insanlarla paylaşıyorsunuz:'
+  text2: "Catrobat toplumunun her bir üyesini desteklemek için yardımına ihtiyacımız var. Yardımcı olmak için yapman gerekenler:"
+  text3: "Catrobat projesi aracılığıyla işbirliğini teşvik etmek ve herkesin yaratıcılığının tüm insanlığın yararına birleşmesine izin vermek istiyoruz. Ayrıca Catrobat topluluğunun aktif bir üyesi de olabilirsiniz."
+  text4: 'Bizim sana hediyemiz:'
+  text5: 'Kullanım ve Hizmet Koşullarımız:'
+  list1:
+    item1: çok sayıda farklı ülke ve kültürlerden
+    item2: her yaştan (küçük çocuklar, gençler ve dedeler)
+    item3: tüm tecrübe seviyelerinde
+  list2:
+    item1: Saygılı ol. Projeleri paylaşırken, farklı yaş ve geçmişe sahip kişilerin katkılarınızı göreceğini lütfen unutmayın.
+    item2: "Kredi verin. Başkalarının projelerinin değiştirilmiş versiyonlarını yapmaktan çekinmeyin - sadece onlara itibar ettiğinizden emin olun. Kredi verebileceğiniz bir yer projenizin krediler bölümünde. Lütfen paragrafa bakınız."
+    item3: "Dürüst olun. Başka birisi gibi davranıp yada kendinizi olduğunuzdan farklı  göstererek baskalarını kandırmaya çalışmayın."
+    item4: "Kişisel bilgilerinizi gizli tutunuz. E-posta adresi, telefon numarası yada diğer kişisel iletişim bilgilerinizi burdan paylaşmayınız."
+    item5: "Sitenin dostça kalmasına yardımcı olun. Başkalarının bir proje veya yorum anlamına geldiğini, hakaret edici, çok şiddetli veya başka bir şekilde uygunsuz olacağını düşünüyorsanız, 'uygunsuz olarak bildir' düğmesini tıklayın."
+  list3:
+    item1: "Web sitelerimize bir proje yükleyerek, bu çalışmayı yüklenen Catrobat projelerinin belirli ücretsiz lisansları altına almayı kabul edersiniz. Catrobat sisteminin altında olduğu ücretsiz lisanslara benzer."
+    item2: Hediyeyi kabul etmek zorunda değilsiniz; bunu yaparsanız, bazı kurallar geçerlidir. Bu kuralların faydaları, işten öğrenebileceğiniz ve daha serin şeyler yapmak için üzerine inşa edebilmenizdir.
+    item3: "Bir diğer önemli şart ise: Eğer eseriniz, başkalarının eserlerinden esinlenerek hazırlanmışsa, orijinal projenin yazarını kendi projenizde açık bir şekilde belirtmelisiniz. Aynı zamanda, çalışmalarınıza başka kullanıcılar tarafından katkı sağlanmasını, sizin çalışmalarınızdan esinlenen diğer kullanıcıların da sizin kullanıcı adınızı eserlerinde kullanarak ve sizi takdir ederek atıfta bulunmalarını sağlamak için çok çalışıyoruz."
+    item4: 'Lütfen tüm yasal koşullar için %link-licenseUploaded% ''a danışın.'
+  list4:
+    item1: "Catrobat sistemi ile ilgili tüm kendi yazılımlarımızı ve İnternet kaynaklarımızı öneriyoruz, örneğin, Catrobat ekibi tarafından yazılmış yazılımlar, web sitelerimiz ve İnternet kaynakları, Catrobat sistemi ile ilgili kendi kaynak kodumuz ve resimler, sesler ve metinler gibi ilave bütün malzemeler şimdi ve gelecekte sizin için Catrobat’ın ücretsiz lisansları altında."
+    item2: Bu lisanslar Catrobat’ın tüm parçalarını ücretsiz yaptığı gibi size onları istediğiniz gibi kullanma özgürlüğünüde verir, diğerleri arasında sadece birkaç kısıtlamayla Catrobat sistemi sonsuza kadar herkese ücretsiz ve faydalı kalacaktır.
+    item3: 'Kesin yasal hüküm ve koşullar için lütfen %link-licenseToPlay% adresine başvurun. Catrobat sisteminin kaynak kodu ve diğer birçok belge ve kaynaklar %link-developer% aracılığıyla edinilebilir.'
+  list5:
+    item1: 'Siz veya 13 yaşın altındaysanız, ebeveynleriniz veya yasal vasileriniz, dragnet tipi gizlilik ihlallerine ve / veya toplu veya kitleye dahil olan veya bunlardan sorumlu bir kuruluşla ilişkilisiniz olur. %link-termsOfUse%'
+    item2: Eğer 13 yaşından küçükseniz ebeveynlerinizden veya yasal koruyucularınızdan Catrobot'un yazılım uygulamaları ve servislerini kullanmak için izin alın.
+    item3: "Örneğin, bulursak, Catrobat'ın web sitelerine yüklenen projeleri, kullanıcı hesaplarını ve yüklenen dijital materyalleri reddetme, silme veya gizleme hakkını saklı tutarız."
+    item4: "Tüm Catrobat yazılımlarının ve internet kaynaklarının herkes için yararlı olduğunu umit ediyoruz, ancak herhangi bir garanti veremiyoruz."
+    item5: 'Lütfen %link-termsOfUse% geliştiricimize danışın.Yukarıdaki noktaların kesin formülasyonları ve bazı ek yasal hüküm ve koşullar için catrobat.org/terms_of_use_and_service.'
+  bottom1: Zaman zaman buradan tekrar kontrol edin, çünkü her zaman kullanım şartlarımızı geliştirmeye çalışıyoruz.
+  bottom2: 'Lütfen Kullanım koşulları ile ilgili önerilerinizi %email-webmaster%''a mail atın.'
+  version: Sürüm 1.3, 4 Mart 2014
+help:
+  stepByStep:
+    title: "Adım adım tanıtım"
+    start: "Başlangıç konumu:"
+    description: |
+      Burada ilk projenizi, aşağıdaki açıklamalı videoları kullanarak etkileşimli bir kartpostal oluşturuyorsunuz. Size verilen talimatları izlemelisiniz. Kartpostalın oluşturulması sırasında temel bilgiler Gelecekteki projeleriniz için ihtiyacınız olan Cep Kodu aracılıklıdır. Bu rehberli videolardan sonra, diğer tüm aktiviteler kendi kişisel Cep Kodu projelerinizi oluşturma konusunda size daha fazla özgürlük verecektir.
+    step1:
+      title: 'Yeni bir proje yap'
+      detail:
+        text1: '"Yeni"''ye dokunun.'
+        text2: 'Bir proje adı girin, "Boş proje oluştur" u seçin ve "Tamam" a dokunun.'
+    step2:
+      title: "Yeni bir nesne oluştur"
+      detail:
+        text1: 'Dokunun:'
+        text2: 'Yeni nesnenizin ilk görünümü için kaynak seçin.'
+        text3: 'Yeni obje oluşturmak için bir obje adı girin ve ''''OK'''' a basın.'
+        special1: 'Yeni bir görünüm çizin.'
+        special2: 'Galeriden seçin.'
+        special3: 'Fotoğraf Çek.'
+    step3:
+      title: "Harekete Başla"
+      detail:
+        text1: 'Dokunun:'
+        text2: 'Kullandığımız ilk tuğla "Hareket" kategorisi dışında.'
+        text3: '"Kay" tuğlasını seçin. Nesne sahnedeki tugla tarafından tanımlanan konuma taşınacaktır.'
+        text4: 'Tuğla yüzer durumda. Yapıştırmak için tuğlayı istediğiniz konuma taşıyın. Eklenmiş durumda olan tuğlalara dokunarak yüzer duruma getirdikten sonra yine taşıyabilirsiniz.'
+        text5: 'Sayfaya gitmek ve "kayma" nesnesini görmek için "Oyna" düğmesine tıklayın.'
+        text6: 'Sahne alanı''ndan geri gitmek için ''Android Geri Düğmesi''ni kullanın.'
+    step4:
+      title: "Görünümü değiştir"
+      description: "Nesnenizin görünümünü değiştirebilirsiniz."
+      detail:
+        text1: '"Bakmak için değiştirin" tuğlasını seçin. Bu tuğla ile bir görünüm seçebilir veya yeni bir tane oluşturabilirsiniz.'
+        text2: 'Tuğlayı "Kayma" - tuğlasının altına oturtun.'
+        text3: 'Yeni bir görünüm oluşturmak için aşağı açılan alana dokunun.'
+        text4: 'Daha önceki gibi resmin kaynağını seçin.'
+        text5: 'Şimdi yeni resmi seçmeniz gerekmektedir.'
+        text6: 'Davranışı sahnede görmek için oyna''ya dokunun.'
+    step5:
+      title: "Konuş"
+      description: "Şimdi nesneyi nasıl konuşturacagınızı öğreneceksiniz."
+      detail:
+        text1: '"Konuş" tuğlasını seçin. Nesne, bu tuğla çalıştırıldığında metni konuşuyor.'
+        text2: 'Tuğla''yı "görünüme geç" tuğlası''nın altına oturtun.'
+        text3: 'Davranışı sahnede görmek için oyna''ya dokunun.'
+    step6:
+      title: 'Tekrar ve tekrar'
+      description: "Bu aşamada, nesnelerin davranışlarının nasıl tekrar edileceği gösterilmektedir."
+      detail:
+        text1: '"Forever" modelini seçin. Döngüdeki her şey devamlı tekrarlar.'
+        text2: '"Sonsuza dek" tuğlasını "Proje başladığında" altına yapıştırın.'
+        text3: 'Başka bir "Kayma" tuğlası ekleyin.'
+        text4: '"Döngü" tuğlasını "Döngü sonu" tuğlası üzerine oturtun.'
+        text5: 'Metin alanına dokunarak x ve y değerlerini 0 olarak ayarlayın.'
+        text6: 'Davranışı sahnede görmek için oyna''ya dokunun.'
+    step7:
+      title: "Dokunmak herşeydir"
+      description: 'Proje sahnede çalışırken nesnenin davranışını da kontrol edebilirsiniz.'
+      detail:
+        text1: '"Ne zaman yüklendi" tuğlasını seçin. Sahnedeki nesneye dokunduğunuzda, "Ne zaman yüklendi" altındaki her tuğla bir kez yerine konulacaktır.'
+        text2: 'Diğer tuğlaların altına "Dokunduğunda" yerleştirin.'
+        text3: '"Doğru dönüş" tuğlasını seçin ve "Ne zaman vuruldu" tuğlasının altına oturtun.'
+        text4: 'Şimdi bu komut dosyanız var.'
+        text5: 'Davranışı sahnede görmek için Oyna''ya dokunun. Nesneye şimdi dokunursanız, dönmeye başlayacaktır.'
+    step8:
+      title: "Tuğla kopyalayın, silin veya düzenleyin"
+      detail:
+        text1: 'Her tuğla''nın sol tarafına bir kez dokundugunuzda  içerik menüsü açılır. Formül düzenleyicisi ile oradaki tuğla degerlerini, taşır, kopyalar, siler yada istediginiz şekilde düzenleyebilirsiniz.'
+    step9:
+      title: "Uygulamada gezinme"
+      detail:
+        text1: 'Proğram içinde gezinmek için Android geri düğmesini kullanın.'
+        text2: 'Nesnenizin genel görünümüne bir ekran geri dönün. Burada senaryolara ve aynı zamanda nesnenin görünüm ve seslerinin güçlü bir temsiline gidebilirsiniz. Orada adlarını değiştirebilir, kopyalayarak görünüm ve sesleri ekleyebilir veya silebilirsiniz.'
+        text3: 'Nesnelerin ve arka planınızın genel görünümüne tekrar ulaşmak için ''''Android Geri Düğmesini'''' kullanın.'
+    step10:
+      title: "Arka planı değiştir"
+      description: "Nesnelerinize ve projenizin arka planına genel bakış budur."
+      detail:
+        text1: 'Arka plan, bir nesne gibi olmakla birlikte, sadece arka planda olabilir.'
+        text2: 'Senaryolar, sesler ekleyebilir ve arka plan nesnesine aynı şekilde bakabilirsiniz.'
+    step11:
+      title: "Ana Menü"
+      description: "Bu ekrana ulaşmak için Android geri düğmesini kullanın."
+      detail:
+        text1: 'Şu anda açık olan projenize devam edin.'
+        text2: 'Yeni bir proje ekleyin.'
+        text3: 'Tüm yerel projelerinizi görün.'
+        text4: 'Yardım sitesini ziyaret edin ve diğer kullanıcılarla görüş alişverişinde bulunun.'
+        text5: 'Cep Kodu projelerinin dünyasını keşfedin. Beğendiğiniz projeleri indirin ve yeniden düzenleyin.'
+        text6: 'Şu anda açık olan projeyi yükleyin.'
+  tutorialcards:
+    title: "Öğreticiler"
+    description1: "Bu öğreticiler size etkili hileleri gösterir"
+    getReady: "Hazır Ol:"
+    tryCode: "Bu kodu dene:"
+    doIt: "Bunu yapın:"
+    tip: "İlave ipucu:"
+    card1:
+      title: "Boyutu değiştir"
+      description: "Boyutu değiştirmek için ördeg'e dokunun."
+      one: "Boyutunu değiştirmek istediğiniz nesneyi ekleyin, ör. Hayvan."
+      two: "Aşağıdaki tuğlaları, dokunduğunda küçültmek için (orijinal boyutunun% 20'si kadar) nesnenin komut dosyalarına yerleştirin."
+    card2:
+      title: "Görünümü değiştir"
+      description: "Otomatik olarak saymak icin bu yöntemi kullanın."
+      one: "Görünüşünü değiştirmek istediğiniz nesneyi ekleyin ör. öğeler."
+      two: "Nesnenin görünümüne daha fazla resimler ekleyin."
+      three: "Bir saniyenin ardından bakmaya devam etmek için aşağıdaki tuğlaları nesnenin komut dosyalarına yerleştirin."
+    card3:
+      title: "Animasyon"
+      description: "Uçan bir papağan istediğinizde, bu yöntemi kullanın."
+      one: "Taşımak istediğiniz nesneyi ekleyin."
+      two: "Hareketi gösteren nesnenin görüntüsüne bir başka resim ekleyin."
+      three: "Belli bir süre sonra nesnenin konumunu sürekli olarak değiştirmek için aşağıdaki tuğlaları nesnenin komut dosyalarına yerleştirin. Ek olarak kenar taraftan zıplayarak sahneyi de değiştirebilirsiniz."
+    card4:
+      title: "Kay"
+      description: "Bir noktadan diğerine yavaşça hareket edin"
+      one: "Kaydırmak istediğiniz nesneyi ekleyin. ör. uçak."
+      two: "Aşağıdaki tuğlaları yerleştirin ve hareketin gerçekleşmesi gereken alanı tanımlayın."
+    card5:
+      title: "Ses çıkar"
+      description: "Nesneye tıklayarak bir ses çalın."
+      one: "Bir sesi istediğiniz nesneye ekleyin ör. köpek."
+      two: "Çalmayı mümkün kılmak için aşağıdaki tuğlaları yerleştirin. Kişisel kütüphanenizden, Cep Kod medya kitaplığından bir ses seçin veya kendiniz bir ses kaydedin."
+    card6:
+      title: "Konuş"
+      description: "Bir nesneyi konuşturmak için bu kodu kullanın."
+      one: "Konuşmak istediğiniz nesneyi ekleyin (ör. Carrie)."
+      two: "Ses çıkışını mümkün kılmak için aşağıdaki tuğlaları takın."
+    card7:
+      title: "GSensor"
+      description: "Eğim sensörlerini kullanarak bir nesneyi kontrol ediniz."
+      one: "Sayfaya taşınmak istediğiniz nesneyi ekleyin."
+      two: "Nesneyi telefonunuzun algılayıcılarıyla kontrol etmek için aşağıdaki tuğlaları yerleştirin. Bu nedenle \"x ve y eğimini\" seçin. Uygun hareketi elde etmek için \"eğim\" i ayarlayın. Örneğin nesnenin hareketi çok mantıklıysa, eğimi 10 ile bölün."
+    card8:
+      title: "Pusula"
+      description: "Kendi pusulanı oluştur"
+      one: "Pusula yönünde işaret etmek istediğiniz nesneyi ekleyin."
+      two: "Nesnenin yönünü ayarlamak için aşağıdaki tuğlaları ekleyin. Ayrıca sonsuza kadar bir döngü ekleyin."
+    card9:
+      title: "Yayınla"
+      description: "Bir nesneden diğerine ileti gönderin."
+      one: "Yeni bir nesne ekleyin, ör. Alice, yayın iletisi göndermelidir. Ayrıca, arka planın görünümüne ikinci bir arka plan ekleyin. Arka plan, yayın iletisini alır almaz diğer görünümüne geçer."
+      two: "Tuğlayı „herkese gönder“e yerleştirir ve diğer nesne mesajı aldığında ne olacağını belirler."
+      three: "Bu durumda, ön katmandaki nesneye tıklandığında arka plan değişir."
+    card10:
+      title: "Değişkeni göster"
+      description: "Bir değişkenin değerini gösterin."
+      one: "Telefonunuzun algılayıcılarıyla taşımasını istediğiniz bir nesne ekleyin (bkz.%tutorial_card_link_7% Tanıtım Kartı %link_end%). Ayrıca, yayın iletisi aldığında değişmesi gereken ikinci bir arka plan ekleyin."
+      two: "Hareket eden nesnenin geçerli x ve y konumunu bir değişkende kaydetmek için aşağıdaki tuğlaları yerleştirin."
+      three: "\"Değişkeni göster\" sayesinde sahnedeki değerleri görüntüleyebilirsiniz."
+    card11:
+      title: "Çarpışma algılama"
+      description: "İki nesne arasında bir çarpışma saptayın."
+      one: "Telefonunuzun algılayıcılarıyla hareket etmesi gereken iki nesne ekleyin, Örneğin. Alex (bkz. %tutorial_card_link_7% Tutorial Card %link_end%)."
+      two: "Hareketli nesne Alex ‘in mevcut \" x ve y konumu \"nu kaydedin (bkz. %tutorial_card_link_10% Öğretici Kart %link_end%) ve aşağıdaki komut dosyalarını ekleyin. İki nesnenin üst üste gelip gelmediğini sürekli olarak kontrol edin. Böyle yaparlarsa, sabit nesne bu durumda gizlenmelidir."
+    card12:
+      title: "Yüz tanıma"
+      description: "Bir nesneyi yüz algılama yöntemiyle kontrol edin."
+      one: "Önce yüz tanıma tuğlalarının etkin olduğundan emin olun. Bu nedenle ayarlara gidin."
+      two: "Yeni bir nesne ekleyin ve bir yüz tespit edilirse göstermek için aşağıdaki tuğlaları yerleştirin. Bir yüzün algılanıp algılanmadığını kontrol edin ve bunu sonsuz döngüye koyun. Kamera bir yüzü algılarsa, değişkenin değeri \"DOĞRU\", aksi takdirde \"YANLIŞ\" tır."
+  starterPrograms:
+    title: "Başlangıç ​​projeleri"
+    description: "Bu başlangıç ​​projelerini deneyin. Değişiklik yapmak ve fikirlerinizi eklemek için içeriye bakın."
+    categories:
+      games: "Oyunlar"
+      animations: "Animasyonlar"
+      interactive: "Etkileşimli sanat ve hikayeler"
+      music: "Müzik ve dans"
+  gameJam:
+    title: "Game jolt Sitesine Cep Kodu oyunu nasıl yüklenir?"
+    text0: "Öncelikle oyununuzda tebrikler! Artık Game Jolt sitesinde yükleyebileceğiniz bağımsız bir Android uygulaması oluşturmak için %link% üzerine yükleyebilirsiniz."
+    title1: "Kaydolma"
+    text1: "İlk önce bir hesap oluşturmanız gerekir. Bundan sonra oluşturulan projenizi yükleyebilirsiniz. Endişelenmeyin kolay ve sadece bir kullanıcı adı ve şifre düşünmeniz gerekiyor. Her ikisini de doldurduktan sonra, Tıklayın 'kayıt ol yada giriş yap'."
+    title2: "Karşıya yükle"
+    text2: "Kayıt işleminden sonra oyununuzu yükleyebilirsiniz. Sadece bir isim düşünün ve bir açıklama ekleyin. Ayrıca açıklama alanına #AliceJam150’yi ekleyin."
+    title3: "Projenizi arayın"
+    text3: "Tüm projelerinizin listelendiği Cep Kodu profilinize gidin veya aramayı ve proje adınızı kullanarak doğrudan projenizi arayın."
+    title4: "Android uygulaması oluştur"
+    text4: "Doğrudan proje detay sayfasında bir Android uygulaması oluşturabilirsiniz.\"Apk'yı hazırla\" yı tıkladığınızda uygulama oluşturulur."
+    title5: "Uygulamayı indir"
+    text5: "İnşaat sürecinden sonra projenizi bir uygulama olarak indirebilirsiniz. İndirilen bu uygulamanın, %link% 'e katılabilmek için doğrudan Game Jolt Sitesine tekrar yüklenmesi gerekiyor."
+    title6: "GameJolt.com'a Kayıt ol/Giriş yap"
+    text6: "%link% 'i ziyaret edin sonra menüdeki 'Oturum Aç' veya 'Kaydol'a tıklayın! Zaten bir hesabınız varsa oturum açın, yoksa E-posta adresiniz, Kullanıcı Adı ve Şifre ile kayıt olmanız gerekir."
+    title7: "Oyununuzu Game Jolt Sitesine yükleyin"
+    text7: "Giriş yaptıktan sonra gösterge tablonuza gidin. Orada oyununuzu ekleyebilirsiniz. Önce 'Kuralları kabul et'i tıklamanız gerekir. Sonra oyun bilgilerini doldurun. Motor/Dil/Yaratım Aracı olarak 'Diğer'i seçin ve Diğer Motor/Dil/Aracı' Android 'alanına ekleyin. 'Geliştirme' statüsü olarak 'Bitti/Kararlı'ı seçin. Açıklamaya #AliceJam150’ yi eklediğinizden emin olun böylece %link% sayfasında görünür."
+    text7_1: "Oyununuzu yayınlamadan önce, bir sonraki adımları izleyin. En azından bir 'küçük resim' eklemelisiniz, 'olgunluk derecelendirmesi'ni ayarlayın ve ' yapı/dosyalar'a tıklayarak oyunlarınızı yükleyin."
+    text7_2: "'Paket Ekle'yi tıklayın ve paket bilgilerini doldurun. Kaydedin ve sürüm ekleyin."
+    text7_3: "Şimdi projenizin apk dosyasını yükleyebilirsiniz. İndirilen uygulamayı indirme klasörünüzde bulabilirsiniz. Veri gezgini kullanmak en iyisidir (örn. Es veri gezgini)."
+    text7_4: "Not: Uygulama '.apk' soneki eksikse, elle '.apk' eklemeniz gerekir. Sadece dosyayı yeniden adlandırın. Şimdi yükleyebilmelisiniz."
+    text7_5: "Yüklemeden sonra oyunu yayınlamak için 'Tamam' üzerine tıklayın. Bu daha sonra, insanlara oyununuzu indirmek için bir bağlantı gösterecektir."
+    text7_6: "Artık ilk oyununuzu Game Jolt sitesine yüklediniz ve aktif hale getirdiniz. Tebrikler!"
+    text7_7: "Artık diğer insanlar oyunu keşfedecek ve %link% sayfasında görünecek."
+  aliceGameJamTutorialcards:
+    title1: "Harikalar Diyarı('na Hoşgeldin)"
+    subtitle1: "Karakterleri canlandırın ve basıldığında bir 'etkinlik oluşturun'"
+    description1: |
+      Karakterinizden birinin basit bir animasyonla canlanmasına nasıl izin vereceğinizi öğrenin ve karakterlerinizin onlara dokunurken nasıl bir şeyler yapacaklarını öğrenin. Video, farklı görünümler kullanarak karakterinizi nasıl kolayca hareketlendirebileceğinizi gösterir. Ayrıca size "ne zaman dokundu" olayını nasıl oluşturacağınızı ve nesneler arasında yayın iletilerinin nasıl gönderileceğini göstereceğiz.
+    title2: "Alice'yi koru!"
+    subtitle2: "Eğitim sensörlerini kullanın ve nesneler arasında bir çarpışma algılayın"
+    description2: "Burada, telefonunuzun eğim sensörlerini kullanarak bir karakteri nasıl kontrol edeceğinizi öğreneceksiniz. Telefonunuzu sola veya sağa doğru yatırarak Alice'in hareketini kontrol edebilirsiniz. Öğreticimizi izleyin ve nesnelerin gökyüzünden rasgele düşmesine ve diğer nesnelerle çarpışmalarının belirlenmesinde deneyimli olmasına izin verin."
+    title3: "Şapkacı - Vur ve Kaç"
+    subtitle3: "Hareketli bir manzara oluşturun ve Şapkaların hareketini kontrol edin"
+    description3: "Bu öğreticide, hareket halindeymiş gibi görünen bir manzaranın nasıl oluşturulacağını öğreneceksiniz. Bunu hareket illüzyonunu yaratmak için ekranda nesneleri hareket ettirerek yapacağız. Aynı zamanda Hatterinizi telefonunuzu eğerek nasıl hareket ettireceğinizi de göstereceğiz."
+    title4: "Şapkacı - Vur ve Kaç"
+    subtitle4: "Şapkacı kötü kartları vursun"
+    description4: "Bu öğreticide, karakterinize doğru rastgele hareket eden düşmanların nasıl oluşturulacağını göstereceğiz. Buna ek olarak, Hatter'in teadrops atmasını ve çarpışma algılamasıyla düşmanın vurulup vurulmadığını öğreneceksiniz."
+    title5: "Bir Cheshire Kedisi Patlat"
+    subtitle5: "Değişkenleri kullanarak bir puan oluşturun"
+    description5: "Bu öğreticide size puan yaratmak için değişkenlerin nasıl kullanılacağını göstereceğiz. Skorlar, oyunda yararlı öğelerdir. Skorumuz kediyi ne sıklıkta yakaladığınızı gösterir."
+    title6: "Bir Tavşan Yarışı"
+    subtitle6: "Hareketli bir arka plan oluşturun"
+    description6: |
+      Bu eğitim, arka plandaki grafikleri belirli bir yönde kaydırarak dikey olarak kaydırılmış bir arka plan oluşturmayı öğretir. Size öğreteceğimiz başka bir şey ise, karakterin üzerine tıklayarak nasıl ilerlediklerini göstermektir.
+      Oyunu biraz zorlaştırmak için, karakterinizin zaman içindeki hızını nasıl yavaşlatacağınızı göstereceğiz.
+    download: "Projeyi indir"
+search:
+  dotdotdot: Ara...
+  search: Ara
+  inMediaLib: Medya kitaplığında ara
+  results: Sonuçlarda Ara
+  resultcount: '%count% tane sonuç bulundu'
+  fail: Lütfen en az bir arama terimi girin
+menu:
+  profile: Benim profilim
+  login: Oturum aç
+  logout: Çıkış Yap
+  admin: Admin
+  home: Ev
+  helpAndTutorials: Yardım ve öğretiçiler
+  followersAndFollowing: Takipçin
+login:
+  login: Oturum aç
+  passOrUser: Kullanıcı adı veya şifre yanlış.
+  noUsername: Kullanıcı adı veya e-posta adresi bulunamadı.
+  forgotPass: Şifre yada kullanıcı adını unuttunuz mu?
+  recoverPass: Parolayı hatırlat
+  recoverPassSend: Adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin.
+  alreadyReset: Bu kullanıcının şifresi son 24 saat içinde istendi.
+  confirmationSend: Kaydınızı onaylamak için posta adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin ve hesabınızı etkinleştirin.
+  userOrEmail: Kullanıcı adı veya E-Posta
+  changePass: Şifre değiştir
+  createAccount: Bir hesap oluştur
+  noAccount: Hesabınız yok!
+  alreadyAccount: Zaten bir hesabınız var mı?
+  or: YADA
+  username: Kullanıcı adı
+  email: E-posta
+  passwordFirst: Şifre
+  passwordSecond: Şifre onayla
+apk:
+  download: Apk olarak indir
+  prepare: 'Apk''yı hazırla'
+  preparing: 'Apk(Uygulama) hazırlanıyor'
+  text: 'İşlem biraz zaman alabilir'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: Kullanıcı adı boş olmamalıdır
+    invalid: Kullanıcı adınız geçersiz
+    exists: Bu kullanıcı adı zaten mevcut.
+    not_exists: Bu kullanıcı adı bulunamıyor.
+    not_email: Kullanıcı adı bir eposta adresi olmamalı.
+    size: Kullanıcı adı en az 3 karakter olmalı ve 180'den fazla olmamalıdır
+  password:
+    blank: Şifre eksik.
+    short: 'Şifreniz en az {{ limit }} karakter içermelidir.'
+  description:
+    rude: Açıklamada argo kelimeler bulunmamalıdır.
+  credit:
+    rude: Yapanlar kısmı kaba kelimeler içermemelidir.
+  country:
+    blank: Ülke adı eksik.
+    invalid: Geçersiz ülke
+  email:
+    blank: e-posta bölümü boş olmamalıdır
+    invalid: E-posta adresiniz geçersiz görünüyor
+    exists: Bu e-posta adresi mevcut.
+  id:
+    blank: Açık kimlik doğrulama boş olmamalıdır
+  login: Kullanıcı adı veya şifre yanlış.
+  post-data: Son veriler eksik yada yanlış!
+  checksum:
+    missing: İstemci sağlama toplamı dosyası göndermedi. Cep Kodu'nun eski bir sürümü nümü kullanıyorsunuz?
+    invalid: geçersiz sağlama
+  xml:
+    invalid: geçersiz xml kodu
+    missing: 'bilinmeyen hata: project_xml_not_found!'
+  file:
+    unexpected: Beklenmeyen dosya bulundu
+    invalid: geçersiz dosya
+  image.missing: Proje XML, proje klasöründe bulunmayan bir dosyadan bahsediyor
+  unknown: bilinmeyen hata
+  token: 'Cihaz doğrulaması başarısız: geçersiz yetki-belirteci!'
+  uploadTokenAuthFailed: 'Yükleme Jetonu kimlik doğrulaması başarısız oldu.'
+  programname:
+    rude: Proje adı kaba kelimeler içermemelidir.
+  program:
+    invalid: Geçersiz proje.
+  languageversion:
+    tooold: 'Üzgünüz, projeniz Catrobat dilinin eski bir sürümünü içeriyor! Cep Kodunun en son sürümünü mü kullanıyorsunuz?'
+  programversion:
+    tooold: 'Maalesef, Cep Kodunun eski bir sürümünü kullanıyorsunuz. Lütfen en son sürüme güncelleyin.'
+  authentication:
+    title: Kimlik doğrulaması başarısız oldu
+    webview: |
+      Kullanıcı kimlik bilgileriniz yanlış. Lütfen uygulamada tekrar giriş yapmayı deneyin.
+success:
+  text: başarı
+  registration: Kayıt başarılı!
+  token: Tamam
+  upload: Proje başarıyla yüklendi!
+  imgUpload: Resminiz başarıyla yüklendi!
+  report: Bildirmeniz başarıyla gönderildi!
+time:
+  minutes.ago: '{0} < 1 dakika önce |{1}1 dakika önce |]1,Inf] %count% dakika önce'
+  hours.ago: '{1}1 saat önce |]1,Inf] %count% saat önce'
+  days.ago: '{1}1 gün önce |]1,Inf] %count% gün önce'
+  months.ago: '{1}1 ay önce |]1,Inf] %count% ay önce'
+  years.ago: '{1} 1 yıl önce |]1,Inf] bir yıldan fazla'
+failure:
+  upload: Uygulamanız yüklenirken bir hata oluştu.
+api:
+  registerUser:
+    emailMissing: 'E-posta eksik'
+    emailInvalid: 'E-posta geçersiz'
+    emailAlreadyInUse: 'E-posta zaten kullanılıyor'
+    usernameMissing: 'Kullanıcı adı eksik'
+    usernameTooShort: 'Kullanıcı adı çok kısa'
+    usernameTooLong: 'Kullanıcı adı çok uzun'
+    usernameAlreadyInUse: 'Kullanıcı adı zaten kullanımda'
+    usernameInvalid: 'Kullanıcı adı geçersiz'
+    passwordMissing: 'Şifre eksik'
+    passwordTooShort: 'Şifre çok kısa'
+    passwordTooLong: 'Şifre çok uzun'
+    passwordInvalidChars: 'Şifre geçersiz karakterler içeriyor'
+    usernameContainsEmail: "Kullanıcı adı bir e-posta adresi içermemelidir"
+  projectsPost:
+    invalid_checksum: 'Geçersiz sağlama toplamı. Tekrar yüklemeyi deneyin!'
+    upload_error: 'Yüklenirken hata oluştu. Tekrar yüklemeyi deneyin!'
+    creating_error: 'Proje varlığı oluşturulurken hata meydana geldi. Tekrar yüklemeyi deneyin!'
+#languages and countries
+language:
+  arabic: Arapça
+  bulgarian: Bulgarca
+  catalan: Katalanca
+  chinese_simplified_han: Çince (Basitleştirilmiş Han)
+  chinese_traditional_han: Çince (geleneksel Han)
+  croatian: Hırvatça
+  czech: Çekçe
+  danish: Danimarkaca
+  dutch: Hollandaca
+  english_united_kingdom: İngilizce (Birleşik Krallık)
+  english_united_states: İngilizce (ABD)
+  estonian: Estonyaca
+  filipino: Filipince
+  finnish: Fince
+  french: Fransızca
+  german: Almanca
+  greek: Yunanca
+  hebrew: İbranice
+  hindi: Hintçe
+  hungarian: Macarca
+  indonesian: Endonezyaca
+  italian: İtalyanca
+  japanese: Japonca
+  korean: Korece
+  latvian: Letonyaca
+  lithuanian: Litvanyaca
+  malay: Malayca
+  norwegian: Norveççe
+  persian: Farsça
+  polish: Polonyaca
+  portuguese_brazil: Portekizce (Brezilya)
+  portuguese_portugal: Portekizce (Portekiz)
+  romanian: Romence
+  russian: Rusça
+  serbian: Sırpça
+  slovak: Slovakça
+  slovenian: Slovakça
+  spanish_latin_america: İspanyolca (Latin Amerika)
+  spanish_spain: İspanyolca (İspanya)
+  swedish: İsveççe
+  thai: Taylandca
+  turkish: Türkçe
+  ukrainian: Ukraynaca
+  vietnamese: Vietnamca
+ci:
+  generate: Apk Oluştur
+  pending: Apk Oluşturuluyor
+  download: Apk indir
+gamejam:
+  nojam: Maalesef şu anda Game Jam yok
+  submit: Gönder %gamejamname%
+  whats: '%gamejamname% nedir?'
+  submitown:
+    header: farkında olmak
+    subheader: Yalnızca kendi projelerinizi gönderebilirsiniz
+    text: |
+      Ama neden kendiniz yaratmıyorsunuz!
+      %gamejamtag% na katılın
+tag-text: Etiketler
+extenstion-text: Uzantılar
+tags:
+  constant:
+    tag1: Oyunlar
+    tag2: Animasyon
+    tag3: Hikaye
+    tag4: Müzik
+    tag5: Sanat
+    tag6: Deneysel
+    tag7: Öğretici
+admin:
+  maintain:
+    diskMaintenance: Disk bakımı
+    ramMaintenance: RAM bakımı
+    noRemovableObjects: Kaldırılamaz objeler mevcut.
+    removableObjects: Çıkarılabilir nesneler
+recommender:
+  similarPrograms: Benzer projeler
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Bu projeyi indiren kullanıcılar ayrıca bunlarıda,
+  moreFromThisUser: '%username%''den daha fazlası'
+pmd:
+  submitBtn: Projenizi gönderin
+  submitBox:
+    header: Gönderim
+    text: Projenizi göndermek üzeresiniz. Lütfen proje kodunu girin ve göndere basın.
+    btnText: Gönder
+  successful:
+    text: Proje yüklemeniz başarılı oldu.
+  failed:
+    text: Proje yüklenemedi.
+codeview:
+  title: 'Kodları göster'
+  showCode: 'Kodu göster'
+  hideCode: 'Kodları gizle'
+  showStatistics: 'Kod istatistiklerini göster'
+  hideStatistics: 'Kod istatistiklerini gizle'
+  cantDisplayCode: "Kod görüntülenemiyor"
+  cantDisplayStatistics: "Kod görüntülenemiyor"
+  totalNumberOf: 'Toplam sayısı'
+  scenes: 'Sahneler'
+  scripts: 'Komut dosyaları'
+  bricks: 'Tuğlalar'
+  objects: 'Objeler'
+  looks: 'Görüntü'
+  sounds: 'Sesler'
+  globals: 'Globaller'
+  locals: 'Yerliler'
+  globalVariables: 'Global değişkenler'
+  localVariables: 'Yerel değişkenler'
+  eventBricks: 'Etkinlik tuğlaları'
+  controlBricks: 'Control tuğlaları'
+  motionBricks: 'Hareket tuğlaları'
+  soundBricks: 'Ses tuğlaları'
+  looksBricks: 'Görüntü blokları'
+  penBricks: 'Kalem blokları'
+  dataBricks: 'Veri blokları'
+  specialBricks: 'Özel tuğlalar'
+codeStatistics:
+  title: "Kod istatistikleri"
+  error: "Kod istatistikleri görüntülenemez."
+  general: 'Genel'
+  bricks: 'Tuğlalar'
+  eventBricks: 'Etkinlik'
+  controlBricks: 'Denetim'
+  motionBricks: 'Hareket'
+  soundBricks: 'Ses'
+  looksBricks: 'Görünüş'
+  penBricks: 'Kalem'
+  dataBricks: 'Veri'
+  specialBricks: 'Özel'
+footer:
+  language: Dil
+  usefulLinks: Yararlı bağlantılar
+  legalities: Yasallık
+  communityStats: Topluluk İstatistikleri
+  download: ' Uygulamayı al'
+privacy-policy:
+  header: Gizlilik politikası
+  version: Versiyon 2.2, 17 Ekim 2019
+  text1: Size hizmetlerimizin ve ilişkili hesabın tüm avantajlarını sunmak için sizden belirli verileri toplamak gerekir.
+  text2: Hizmetlerimizi (uygulamalar ve web siteleri) korumak ve geliştirmek ve ICT ve STEM / STEAM eğitimi hakkında bilimsel araştırma yapmak için, Google Analytics (Crashlytics ve Firebase) ve hepsi de Google LLC (ABD) ve Dynatrace by Dynatrace LLC ( ABD) hizmetlerimizin kullanımıyla ilgili meta verileri (ör. Kilitlenme bilgileri, zaman damgaları, ziyaret edilen sayfalar / ekranlar, uygulamalarımızın ve hizmetlerimizin kullanımı, kullanılan işletim sistemi ve ağ sağlayıcısı hakkında bilgiler) almak için. Bu analiz ve toplanan veriler profilinize bağlı değildir ve herhangi bir kişisel bilgi içermez (IP adresinin son bitleri anonimleştirilir). Ancak toplanan veriler servis sağlayıcılara (Google LLC, ABD ve Dynatrace LLC, ABD) aktarılacaktır. Veri işleme, Google LLC ve Dynatrace LLC ile yapılan anlaşmalara dayanmaktadır. Hizmet sağlayıcılarla olan bu ilişki, Avrupa Birliği'nin Genel Veri Koruma Yönetmeliği (AB GDPR) ve AB-ABD "Gizlilik Kalkanı" anlaşmasına uygundur.
+  text3: Sistemlerimizde bir hesap oluşturmak ve kullanmak ve e-posta yoluyla hesabınızla ilgili gerekli değişiklikler hakkında sizi bilgilendirmek, örneğin Kullanım ve Hizmet Koşullarımızdaki güncellemeler veya ihlaller, topluluk kurallarımızı ilgilendirir.
+  text4: Gönüllü olarak, ikamet ettiğiniz ülkeyi paylaşım sitesindeki hesap sayfanızdan bize verebilirsiniz. Bu, genel profilinizde görüntülenecek ve yalnızca istatistiksel ve araştırma için kullanılacaktır.
+  text5: Https://share.catrob.at/ adresindeki profil sayfanızdan hesabınızı silerek hesabınıza ait kişisel verilerin kullanımını istediğiniz zaman geri alabilirsiniz.
+  text6: Hizmetlerimizin kötüye kullanılmasını önlemek için, örneğin kullanıcı katkısı olan yüklemeler veya yasa dışı amaçlar için yorumlar yoluyla, kullanıcı tarafından oluşturulan tüm genel veriler (yüklemeler, yorumlar) dahili olarak bir veritabanında saklanır.
+  text7: MailChimp hizmeti (Rocket Science Group LLC d / b / a MailChimp, ABD) aracılığıyla tarafımızca sağlanan https://catrob.at/newsletter adresinden Catrobat Haber Bülteni'ne gönüllü olarak abone olabilirsiniz. Daha sonra, sağlanan e-posta adresinize Catrobat projesi ve hizmetleri hakkında güncellemeler alacaksınız. Her bülten altbilgisindeki "abonelikten çık" bağlantısını kullanarak bülteni istediğiniz zaman çekebilirsiniz. Bu bülten, veri işleme anlaşmamız olan ve AB Genel Veri Koruma Yönetmeliği ve AB-ABD "Gizlilik Kalkanı" na bağlı olan MailChimp tarafından sağlanmaktadır. MailChimp hakkında daha fazla bilgi için lütfen MailChimp'in Gizlilik Politikası ve Kullanım Koşulları'na bakın.
+  text8: Tüm Hizmetler, Graz, Avusturya'da (Avrupa Birliği) kurulmuş, kar amacı gütmeyen bir STK olan Uluslararası Catrobat Derneği - Verein zur Förderung freier Software çatısı altında ücretsiz açık kaynaklı Catrobat projesi tarafından sağlanmaktadır. Politikalarımız AB ve Avusturya veri koruma yasasına (GDPR) saygı göstermektedir. Bizimle iletişime geçmek için lütfen contact@catrobat.org adresine bir e-posta gönderin veya Catrobat, c / o Yazılım Teknolojisi Enstitüsü, Graz Teknoloji Üniversitesi, Inffeldgasse 16b, A-8010 Graz, Avusturya (Avrupa Birliği ).
+  text9: 14 yaşından küçük olmanız durumunda, bu politika yasal bir vasi (genellikle ebeveyn) tarafından kabul edilmelidir.
+  text10: "Catrobat'ın resmi İngilizce gizlilik politikası web'de\n%privacy_policy% altında yer almaktadır."
+  disagree-text: Onay olmadan bir hesap oluşturamayız, ancak temel özelliklere hâlâ erişilebilir.
+catro-notifications:
+  markAsRead: "Okundu olarak işaretle"
+  noFollowers: "Görünüşe göre hiç takipçi bildiriminiz yok."
+  noComments: "Görünüşe göre herhangi bir yorum bildiriminiz yok."
+  noReactions: "Görünüşe göre herhangi bir tepki bildiriminiz yok."
+  noRemixes: "Görünüşe göre herhangi bir remix bildiriminiz yok."
+  comment:
+    message: '%user_link% kullanıcısı%program_link% projenize yorum yaptı.'
+  like:
+    message: '%user_link% kullanıcısı %program_link% projenize tepki verdi.'
+  follow:
+    message: 'Kullanıcı %user_link% şimdi sizi takip ediyor.'
+  program-upload:
+    message: '%user_link% kullanıcısı yeni bir proje oluşturdu %program_link%'
+  remix:
+    message: 'Kullanıcı %user_link% projenizi %program_link% yeniden düzenledi. Remix''i aşağıdaki %remix_program_link% bağlantısında görebilirsiniz.'
+clipboard:
+  success: Panoya kopyalanan projeye bağlantı!
+  fail: Bağlantı panoya kopyalanamadı!
+next: İleri
+previous: Önceki
+help-cards:
+  headings:
+    starters: Başlayanlar
+    tutorials: Öğreticiler
+    stepbystep: Adım adım
+    getinvolvedGoogle: Google Play'den indirin
+    getinvolvedApple: IOS'dan indirin
+    discord: Discord'a katılın
+    game_design: Oyun tasarımı
+    education: Eğitim platformu
+    discuss: tartışmak
+  text:
+    starters: "Deneyin ve %theme% ile yeniden karıştırın"
+    tutorials: "%theme% etkili bilgiler"
+    stepbystep: "%theme% içinde 10 kolay adım gerçekleştirin"
+    getinvolved: Uygulamayı indirin ve başlayın
+    discord: Discord topluluğuna katılın
+    game_design_1: İçin etkili bilgiler
+    game_design_2: oyun yaratmak
+    education: Başlangıç ​​kursu ve harika kaynaklar
+    discuss_1: Diğerleriyle iletişim kurun
+    discuss_2: kullanıcılar
+media-packages:
+  title: Medya-Paketler
+  description: Aşağıdaki kategorilerde size Cep Kodu projeleri eklemek için ek aktörler ve nesneler bulabilirsiniz.
+  thumb-size:
+    description: Önizleme boyutu
+    sm: küçük
+    md: orta
+    lg: büyük
+  theme-special: "%flavor% Tema Özel"
+  search-results: Medya kitaplığı arama sonuçları
+  no-results: Aramanızda sonuç bulunamadı. Lütfen yalnızca İngilizce arama terimleri kullanın.
+  download_these_files: kayıt etmek
+flavor:
+  pocketcode: Cep Kodu
+  pocketalice: Cep Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Kedi
+  create@school: Okulu@Oluştur
+copyright: 'Telif hakkı &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Tüm hakları saklıdır.'
+agree: Kabul ediyorum
+disagree: Kabul etmiyorum
+profileLoader:
+  noProfiles: Şu anda profil yok.
+element: 'Eleman'
+elements: 'Elementler'
+share:
+  text: 'Paylaş'
+  error: 'Paylaşım başarısız oldu'
+  success: 'Paylaşım başarılı'
+copy: 'Bağlantıyı kopyala'
+checkOutProject: 'Bu projeye göz atın:'
+community: 'Catrobat Topluluğu'
+back_to_app: 'Topluluktan çık'

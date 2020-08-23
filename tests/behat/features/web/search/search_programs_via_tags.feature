@@ -16,6 +16,7 @@ Feature: Searching for programs with tags
       | 1  | project 1 | Catrobat | 1,2     |
       | 2  | project 2 | Catrobat | 2       |
       | 3  | project 3 | User1    | 3       |
+    And I wait 1000 milliseconds
 
   Scenario: Searching other programs with the same tag
     Given I am on "/app/project/1"

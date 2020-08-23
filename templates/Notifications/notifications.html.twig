@@ -1,0 +1,168 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/notifications.css') }}"/>
+{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="notif-header notifications-header">
+        {{ "notifications"|trans({}, "catroweb") }}
+      </h1>
+    </div>
+  </div>
+  <div class="mdc-chip-set mdc-chip-set--choice scroll-wrapper nav" role="grid">
+    <div id="all-notif" class="mdc-chip chip chip-selected" data-toggle="tab" href="#all"
+         role="tab">
+      <div class="mdc-chip__ripple"></div>
+      <span class="material-icons mdc-chip__icon mdc-chip__icon--leading">notifications</span>
+      <span role="gridcell">
+        <span role="button" tabindex="0" class="mdc-chip__primary-action">
+          <span class="mdc-chip__text">{{ 'allNotifications'|trans({}, 'catroweb') }}</span>
+        </span>
+      </span>
+    </div>
+    <div id="follow-notif" class="mdc-chip chip chip-default" data-toggle="tab" href="#follow"
+         role="tab">
+      <div class="mdc-chip__ripple"></div>
+      <span class="material-icons mdc-chip__icon mdc-chip__icon--leading">person</span>
+      <span role="gridcell">
+        <span role="button" tabindex="-1" class="mdc-chip__primary-action">
+          <span class="mdc-chip__text">{{ 'FollowersNotifications'|trans({}, 'catroweb') }}</span>
+        </span>
+      </span>
+    </div>
+    <div id="comment-notif" class="mdc-chip chip chip-default" data-toggle="tab" href="#comment"
+         role="tab">
+      <div class="mdc-chip__ripple"></div>
+      <span class="material-icons mdc-chip__icon mdc-chip__icon--leading">comment</span>
+      <span role="gridcell">
+        <span role="button" tabindex="-2" class="mdc-chip__primary-action">
+          <span class="mdc-chip__text">{{ 'CommentNotifications'|trans({}, 'catroweb') }}</span>
+        </span>
+      </span>
+    </div>
+    <div id="reaction-notif" class="mdc-chip chip chip-default" data-toggle="tab" href="#reaction"
+         role="tab">
+      <div class="mdc-chip__ripple"></div>
+      <span class="material-icons mdc-chip__icon mdc-chip__icon--leading">thumb_up</span>
+      <span role="gridcell">
+        <span role="button" tabindex="-3" class="mdc-chip__primary-action">
+          <span class="mdc-chip__text">{{ 'LikeNotifications'|trans({}, 'catroweb') }}</span>
+        </span>
+      </span>
+    </div>
+    <div id="remix-notif" class="mdc-chip chip chip-default" data-toggle="tab" href="#remix"
+         role="tab">
+      <div class="mdc-chip__ripple"></div>
+      <span class="material-icons mdc-chip__icon mdc-chip__icon--leading">call_split</span>
+      <span role="gridcell">
+        <span role="button" tabindex="-4" class="mdc-chip__primary-action">
+          <span class="mdc-chip__text">{{ 'RemixNotifications'|trans({}, 'catroweb') }}</span>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="tab-content mt-4">
+    <div id="all" class="tab-pane fade show active" role="tabpanel">
+      <div id="notifications" class="mb-5">
+        {% for notification in allNotifications %}
+          <div
+              onclick="notification.handleNotificationInteract('{{ notification.id }}',
+                  '{{ instance[notification.id] }}', '{{ notification.getSeen() }}', '{{ redirect[notification.id] }}')"
+              id="catro-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
+            {{ include(notification.getTwigTemplate) }}
+          </div>
+        {% endfor %}
+      </div>
+      <div id="no-notifications"
+           class="text-center mb-5 {{ allNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-all">{{ "notificationsReadMessage"|trans({}, "catroweb") }}</span>
+      </div>
+    </div>
+    <div id="follow" class="tab-pane fade" role="tabpanel">
+      <div id="follow-notifications" class="mb-5">
+        {% for notification in followerNotifications %}
+          <div
+              onclick="notification.handleNotificationInteract('{{ notification.id }}',
+                  '{{ instance[notification.id] }}', '{{ notification.getSeen() }}', '{{ redirect[notification.id] }}')"
+              id="follow-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
+            {{ include(notification.getTwigTemplate) }}
+          </div>
+        {% endfor %}
+      </div>
+      <div id="no-follow-notifications"
+           class="text-center mb-5 {{ followerNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-follow">{{ "catro-notifications.noFollowers"|trans({}, "catroweb") }}</span>
+      </div>
+    </div>
+    <div id="comment" class="tab-pane fade" role="tabpanel">
+      <div id="comment-notifications" class="mb-5">
+        {% for notification in commentNotifications %}
+          <div
+              onclick="notification.handleNotificationInteract('{{ notification.id }}', 'comment',
+                  '{{ notification.getSeen() }}', '{{ notification.comment.program.id }}')"
+              id="comment-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
+            {{ include(notification.getTwigTemplate) }}
+          </div>
+        {% endfor %}
+      </div>
+      <div id="no-comment-notifications"
+           class="text-center mb-5 {{ commentNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-comment">{{ "catro-notifications.noComments"|trans({}, "catroweb") }}</span>
+      </div>
+    </div>
+    <div id="reaction" class="tab-pane fade" role="tabpanel">
+      <div id="reaction-notifications" class="mb-5">
+        {% for notification in reactionNotifications %}
+          <div
+              onclick="notification.handleNotificationInteract('{{ notification.id }}', 'reaction',
+                  '{{ notification.getSeen() }}', '{{ notification.program.id }}')"
+              id="reaction-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
+            {{ include(notification.getTwigTemplate) }}
+          </div>
+        {% endfor %}
+      </div>
+      <div id="no-reaction-notifications"
+           class="text-center mb-5 {{ reactionNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-reaction">{{ "catro-notifications.noReactions"|trans({}, "catroweb") }}</span>
+      </div>
+    </div>
+    <div id="remix" class="tab-pane fade" role="tabpanel">
+      <div id="remix-notifications" class="mb-5">
+        {% for notification in remixNotifications %}
+          <div
+              onclick="notification.handleNotificationInteract('{{ notification.id }}', 'remix',
+                  '{{ notification.getSeen() }}', '{{ notification.getRemixProgram.id }}')"
+              id="remix-notification-{{ notification.id }}"
+              class="row my-3 no-gutters ripple notif">
+            {{ include(notification.getTwigTemplate) }}
+          </div>
+        {% endfor %}
+      </div>
+      <div id="no-remix-notifications"
+           class="text-center mb-5 {{ remixNotifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="no-notif-remix">{{ "catro-notifications.noRemixes"|trans({}, "catroweb") }}</span>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('js/UserNotifications.min.js') }}"></script>
+  <script>
+    let notification = new UserNotifications("{{ url('notification_mark_as_read') }}", "{{ url('notifications_seen') }}",
+      "{{ path('notifications_count') }}", "{{ path('notifications_fetch') }}", "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
+      "{{ "notificationsClearError"|trans({}, "catroweb") }}",
+      "{{ "notificationsUnauthorizedError"|trans({}, "catroweb") }}", {{ allNotificationsCount }},
+        {{ followNotificationCount }}, {{ reactionNotificationCount }}, {{ commentNotificationCount }},
+        {{ remixNotificationCount }}, "{{ path('profile') }}", "{{ path('program') }}",
+      "{{ asset('images/default/avatar_default.png') }}");
+    notification.markAllRead()
+  </script>
+{% endblock %}

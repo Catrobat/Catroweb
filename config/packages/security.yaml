@@ -37,6 +37,43 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
+        api_authentication_oauth_login:
+            provider: chain_provider
+            pattern:  ^/api/authentication/oauth
+            methods: [POST]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+
+
+        api_user:
+            provider: chain_provider
+            pattern: ^/api/user$
+            methods: [GET]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        api_user_delete:
+            provider: chain_provider
+            pattern: ^/api/user$
+            methods: [DELETE]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        api_user_update:
+            provider: chain_provider
+            pattern: ^/api/user$
+            methods: [PUT]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
         api_projects_upload:
             provider: chain_provider
@@ -63,23 +100,16 @@ security:
             provider: chain_provider
             pattern: ^.*?/api/checkToken/check.json
             stateless: true
-            simple_preauth:
-                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
-
+            guard:
+                authenticators:
+                    - App\Api_deprecated\Security\ApiTokenAuthenticator
         api_upload:
             provider: chain_provider
             pattern: ^.*?/api/upload/upload.json
             stateless: true
-            simple_preauth:
-                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
-
-        api_submit:
-            provider: chain_provider
-            pattern: ^.*?/api/gamejam/submit.json
-            stateless: true
-            simple_preauth:
-                authenticator: App\Catrobat\Security\ApiKeyAuthenticator
-
+            guard:
+                authenticators:
+                    - App\Api_deprecated\Security\ApiTokenAuthenticator
 
         debug:
             provider: chain_provider
@@ -105,9 +135,21 @@ security:
                 httponly: false
             guard:
                 authenticators:
-                    - App\Catrobat\Security\WebviewAuthenticator     # @deprecated API v1
-                    - App\Catrobat\Security\WebviewJWTAuthenticator
-                entry_point: App\Catrobat\Security\WebviewJWTAuthenticator
+                    - App\WebView\WebviewAuthenticator     # @deprecated v1
+                    - App\WebView\WebviewJWTAuthenticator
+                entry_point: App\WebView\WebviewJWTAuthenticator
+            oauth:
+                remember_me: true
+                resource_owners:
+                    google:             "/login/check-google"
+                    facebook:           "/login/check-facebook"
+                    apple:              "/login/check-apple"
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: my.oauth_aware.user_provider.service
 
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -169,11 +211,6 @@ security:
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_FILE_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
-            - ROLE_ADMIN
-        ROLE_GAMEJAM_ADMIN:
-            - ROLE_CATROWEBADMIN_BLOCK_USERS_LIMITED_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_SUBMITTED_ADMIN
             - ROLE_ADMIN
 
 acl:

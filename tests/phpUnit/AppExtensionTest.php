@@ -4,7 +4,6 @@ namespace Tests\phpUnit;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Twig\AppExtension;
-use App\Repository\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -36,8 +35,9 @@ class AppExtensionTest extends TestCase
 
     $appExtension = $this->createAppExtension($short);
     $list = $appExtension->getLanguageOptions();
-    // TODO change this to a dynamic number
-    $this->assertEquals(count($list), 69);
+
+    // Currently we have over 100 languages and dialects
+    $this->assertGreaterThanOrEqual(100, count($list));
 
     $this->assertTrue($this->inArray('Deutsch', $list));
     $this->assertTrue($this->inArray('English', $list));
@@ -97,12 +97,11 @@ class AppExtensionTest extends TestCase
   {
     $repo = $this->createMock(MediaPackageFileRepository::class);
     $request_stack = $this->mockRequestStack($locale);
-    $game_jam_repository = $this->createMock(GameJamRepository::class);
     $theme = $this->createMock(ActiveTheme::class);
     $parameter_bag = $this->createMock(ParameterBag::class);
     $translator = $this->createMock(TranslatorInterface::class);
 
-    return new AppExtension($request_stack, $repo, $game_jam_repository,
+    return new AppExtension($request_stack, $repo,
       $theme, $parameter_bag, $this->translationPath, $translator);
   }
 
