@@ -3,7 +3,7 @@
         "version": "v2.5.0"
     },
     "amphp/byte-stream": {
-        "version": "v1.7.3"
+        "version": "v1.8.0"
     },
     "beberlei/doctrineextensions": {
         "version": "v1.2.6"
@@ -49,6 +49,9 @@
     },
     "cocur/slugify": {
         "version": "v4.0.0"
+    },
+    "codercat/jwk-to-pem": {
+        "version": "0.0.3"
     },
     "composer/semver": {
         "version": "1.5.1"
