@@ -162,6 +162,13 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
+  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  {
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode, array &$responseHeaders)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
@@ -269,13 +276,6 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $responseCode = Response::HTTP_OK;
 
     return $this->getProjectsDataResponse($programs);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
-  {
   }
 
   /**
