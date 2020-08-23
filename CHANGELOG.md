@@ -5,6 +5,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- serve images as webp
+- CAPI v??
+### Changed
+- use webpack encore
+### Fixed
+
+## [3.5.0]
+### Added
+- various new bricks
+- phpUnit tests
+### Changed
+- new projectList design
+- new Notifications design
+- update dependencies
+- update translations
+- better UX feedback by loading spinners
+- Admin interface refactoring
+- internal concept to store projects (allow deduplication)
+### Fixed
+- project download error handling
+- minor style issues
+- minor CI check issues
+- project structure
+- removed code smells
+### Removed
+- GameJam (will be studios in the future)
+- Recommendation categories (will be re-added in a later release)
+
 ## [3.4.5]
 ### Fixed
 - welcome section for embroidery and luna
@@ -231,7 +260,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.4.3...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.5.0...HEAD
+[3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.5...v3.5.0
 [3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.4...v3.4.5
 [3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.3...v3.4.4
 [3.4.3]: https://github.com/Catrobat/Catroweb/compare/v3.4.0...v3.4.3
