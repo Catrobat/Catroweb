@@ -3,7 +3,6 @@
 namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Utils\Utils;
@@ -35,9 +34,9 @@ class ExtractedFileRepository
     $web_extracted_path = $parameter_bag->get('catrobat.file.extract.path');
     $local_storage_path = $parameter_bag->get('catrobat.file.storage.dir');
 
-    if (!is_dir($local_extracted_path)) {
-      throw new InvalidStorageDirectoryException($local_extracted_path.' is not a valid directory');
-    }
+    Utils::verifyDirectoryExists($local_extracted_path);
+    Utils::verifyDirectoryExists($local_storage_path);
+
     $this->local_storage_path = $local_storage_path;
     $this->local_path = $local_extracted_path;
     $this->web_path = $web_extracted_path;

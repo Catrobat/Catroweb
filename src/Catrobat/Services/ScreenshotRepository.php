@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Utils\Utils;
 use Imagick;
 use ImagickException;
@@ -35,29 +34,25 @@ class ScreenshotRepository
 
   private string $tmp_dir;
 
-  public function __construct(string $screenshot_dir, string $screenshot_path, string $thumbnail_dir, string $thumbnail_path, string $tmp_dir, string $tmp_path)
+  private string $extracted_project_dir;
+
+  private string $project_zip_dir;
+
+  public function __construct(string $screenshot_dir, string $screenshot_path, string $thumbnail_dir,
+                              string $thumbnail_path, string $tmp_dir, string $tmp_path,
+                              string $extracted_project_dir, string $project_zip_dir)
   {
-    $screenshot_dir = preg_replace('#([^/]+)$#', '$1/', $screenshot_dir);
-    $screenshot_path = preg_replace('#([^/]+)$#', '$1/', $screenshot_path);
-    $thumbnail_dir = preg_replace('#([^/]+)$#', '$1/', $thumbnail_dir);
-    $thumbnail_path = preg_replace('#([^/]+)$#', '$1/', $thumbnail_path);
-    $tmp_dir = preg_replace('#([^/]+)$#', '$1/', $tmp_dir);
-    $tmp_path = preg_replace('#([^/]+)$#', '$1/', $tmp_path);
-
-    if (!is_dir($screenshot_dir)) {
-      throw new InvalidStorageDirectoryException($screenshot_dir.' is not a valid directory');
-    }
-    if (!is_dir($thumbnail_dir)) {
-      throw new InvalidStorageDirectoryException($thumbnail_dir.' is not a valid directory');
-    }
-
-    if (!is_dir($tmp_dir)) {
-      throw new InvalidStorageDirectoryException($tmp_dir.' is not a valid directory');
-    }
+    Utils::verifyDirectoryExists($screenshot_dir);
+    Utils::verifyDirectoryExists($thumbnail_dir);
+    Utils::verifyDirectoryExists($tmp_dir);
+    Utils::verifyDirectoryExists($extracted_project_dir);
+    Utils::verifyDirectoryExists($project_zip_dir);
 
     $this->screenshot_dir = $screenshot_dir;
     $this->thumbnail_dir = $thumbnail_dir;
     $this->tmp_dir = $tmp_dir;
+    $this->extracted_project_dir = $extracted_project_dir;
+    $this->project_zip_dir = $project_zip_dir;
 
     $this->screenshot_path = $screenshot_path;
     $this->thumbnail_path = $thumbnail_path;
@@ -102,6 +97,7 @@ class ScreenshotRepository
     $screen = $this->getImagick();
     $screen->readImage($filepath);
     $this->saveImagickScreenshot($screen, $id);
+    $this->overwriteOriginalScreenshot($screen, $id);
     $screen->destroy();
   }
 
@@ -238,7 +234,7 @@ class ScreenshotRepository
    */
   public function deleteTempFiles(): void
   {
-    Utils::removeDirectory($this->tmp_dir);
+    Utils::emptyDirectory($this->tmp_dir);
   }
 
   /**
@@ -301,5 +297,26 @@ class ScreenshotRepository
     }
     $screen->writeImage($filename);
     chmod($filename, 0777);
+  }
+
+  private function overwriteOriginalScreenshot(Imagick $screen, string $id): void
+  {
+    $screen->cropThumbnailImage(480, 480);
+
+    $filename = $this->extracted_project_dir.$id.'/manual_screenshot.png';  // Apps use manual rather that automatic
+    if (file_exists($filename)) {
+      unlink($filename);
+    }
+    $screen->writeImage($filename);
+    chmod($filename, 0777);
+    $this->preventInvalidImagesInCacheZips($id);
+  }
+
+  private function preventInvalidImagesInCacheZips(string $id): void
+  {
+    $filename = $this->project_zip_dir.$id.'catrobat'; // prevent invalid cached images
+    if (file_exists($filename)) {
+      unlink($filename);
+    }
   }
 }

@@ -31,12 +31,13 @@ class SaveProgramSnapshotListener
     if ($project->isSnapshotsEnabled()) {
       $this->saveProgramSnapshot($project);
     }
+    $this->file_repository->deleteProjectZipFile($project->getId());
   }
 
   public function saveProgramSnapshot(Program $program): void
   {
     try {
-      $file = $this->file_repository->getProgramFile($program->getId());
+      $file = $this->file_repository->getProjectZipFile($program->getId());
       $date = TimeUtils::getDateTime()->format('Y-m-d_H-i-s');
       $file->move($this->snapshot_dir, $program->getId().'__'.$date.'.catrobat');
     } catch (Exception $e) {

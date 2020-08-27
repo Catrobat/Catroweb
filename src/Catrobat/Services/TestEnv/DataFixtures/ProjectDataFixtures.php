@@ -11,6 +11,7 @@ use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\MyUuidGenerator;
+use App\Utils\Utils;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +27,10 @@ use Symfony\Component\HttpFoundation\File\File;
 class ProjectDataFixtures
 {
   private string $FIXTURE_DIR;
+
+  private string $GENERATED_FIXTURE_DIR;
+
+  private string $EXTRACT_DIR;
 
   private ProgramManager $project_manager;
 
@@ -53,6 +58,10 @@ class ProjectDataFixtures
     $this->apk_repository = $apk_repository;
     $this->user_data_fixtures = $user_data_fixtures;
     $this->FIXTURE_DIR = $parameter_bag->get('catrobat.test.directory.source');
+    $this->GENERATED_FIXTURE_DIR = $parameter_bag->get('catrobat.test.directory.target');
+    $this->EXTRACT_DIR = $parameter_bag->get('catrobat.file.extract.dir');
+    Utils::verifyDirectoryExists($this->FIXTURE_DIR);
+    Utils::verifyDirectoryExists($this->EXTRACT_DIR);
   }
 
   /**
@@ -141,7 +150,7 @@ class ProjectDataFixtures
       $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
       copy($this->FIXTURE_DIR.'test.catrobat', $temp_path);
       $this->apk_repository->save(new File($temp_path), $project->getId());
-      $this->project_file_repository->saveProgramFile(
+      $this->project_file_repository->saveProjectZipFile(
         new File($this->FIXTURE_DIR.'test.catrobat'), $project->getId()
       );
     }
@@ -149,6 +158,10 @@ class ProjectDataFixtures
     if ($andFlush) {
       $this->entity_manager->flush();
     }
+
+    // Every project should have project files
+    Utils::copyDirectory($this->GENERATED_FIXTURE_DIR.'base', $this->EXTRACT_DIR.$project->getId());
+    Utils::setDirectoryPermissionsRecursive($this->EXTRACT_DIR.$project->getId(), 0777);
 
     return $project;
   }

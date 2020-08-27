@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use App\Utils\Utils;
 use Symfony\Component\Finder\Finder;
 use ZipArchive;
 
@@ -15,9 +15,7 @@ class CatrobatFileCompressor
    */
   public function compress($source, $destination, $archive_name): string
   {
-    if (!is_dir($source)) {
-      throw new InvalidStorageDirectoryException($source.' is not a valid target directory');
-    }
+    Utils::verifyDirectoryExists($source);
     if (!is_dir($destination)) {
       mkdir($destination, 0777, true);
     }

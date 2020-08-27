@@ -56,7 +56,7 @@ class SaveProgramSnapshotListenerTest extends TestCase
   public function testBackupsTheCurrentProgramFileOnUpdate(): void
   {
     $this->project_file_repository->expects($this->atLeastOnce())
-      ->method('getProgramFile')->with(1)->willReturn($this->file);
+      ->method('getProjectZipFile')->with(1)->willReturn($this->file);
     $this->file->expects($this->atLeastOnce())
       ->method('move')->with(self::STORAGE_DIR, '1__2015-10-26_13-33-37.catrobat');
     $this->save_program_snapshot_listener->saveProgramSnapshot($this->program);
@@ -65,7 +65,7 @@ class SaveProgramSnapshotListenerTest extends TestCase
   public function testDoesNotBackupIfThereIsNoExistingFile(): void
   {
     $this->project_file_repository->expects($this->atLeastOnce())
-      ->method('getProgramFile')->with(1)->willThrowException(new FileNotFoundException());
+      ->method('getProjectZipFile')->with(1)->willThrowException(new FileNotFoundException());
     $this->file->expects($this->never())->method('move');
     $this->save_program_snapshot_listener->saveProgramSnapshot($this->program);
   }
@@ -73,7 +73,7 @@ class SaveProgramSnapshotListenerTest extends TestCase
   public function testDoesNotThrowAnExceptionIfBackupFails(): void
   {
     $this->project_file_repository->expects($this->atLeastOnce())
-      ->method('getProgramFile')->with(1)->willReturn($this->file);
+      ->method('getProjectZipFile')->with(1)->willReturn($this->file);
     $this->file->expects($this->atLeastOnce())->method('move')->willThrowException(new FileException());
     $this->save_program_snapshot_listener->saveProgramSnapshot($this->program);
   }

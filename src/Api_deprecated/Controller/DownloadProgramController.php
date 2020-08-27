@@ -52,11 +52,11 @@ class DownloadProgramController extends AbstractController
     $rec_user_specific = 1 == (int) $request->query->get('rec_user_specific', 0);
     $rec_tag_by_program_id = (int) $request->query->get('rec_from', 0);
     try {
-      if (!$file_repository->checkIfProgramFileExists($program->getId())) {
+      if (!$file_repository->checkIfProjectZipFileExists($program->getId())) {
         $extracted_file = $extracted_file_repository->loadProgramExtractedFile($program);
-        $file_repository->saveProgram($extracted_file, $program->getId());
+        $file_repository->zipProject($extracted_file, $program->getId());
       }
-      $file = $file_repository->getProgramFile($id);
+      $file = $file_repository->getProjectZipFile($id);
     } catch (FileNotFoundException $fileNotFoundException) {
       $logger->error('[FILE] failed to get program file with id: '.$id);
 

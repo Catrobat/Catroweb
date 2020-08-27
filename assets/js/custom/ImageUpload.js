@@ -24,35 +24,34 @@ function setImageUploadListener (uploadUrl, uploadButtonContainerId, imageContai
     }
     reader.onload = function (event) {
       $.post(uploadUrl, { image: event.currentTarget.result }, function (data) {
-        switch (parseInt(data.statusCode)) {
-          case statusCodeOK:
-            imageUploadSuccess.removeClass('d-none')
-            imageUploadSpinner.addClass('d-none')
-            if (data.image_base64 === null) {
-              const src = $(imageContainerId).attr('src')
-              const d = new Date()
-              $(imageContainerId).attr('src', src + '?a=' + d.getDate())
-            } else {
-              $(imageContainerId).attr('src', data.image_base64)
-            }
-            break
-
-          case statusCodeUploadExceedingFilesize:
-            $('.text-img-upload-too-large').removeClass('d-none')
-            imageUploadSpinner.addClass('d-none')
-
-            break
-
-          case statusCodeUploadUnsupportedMimeType:
-            $('.text-mime-type-not-supported').removeClass('d-none')
-            imageUploadSpinner.addClass('d-none')
-            break
-
-          default:
-            $('.text-img-upload-error').removeClass('d-none')
-            imageUploadSpinner.addClass('d-none')
+        if (data.statusCode) {
+          // Legacy fake statusCode
+          switch (parseInt(data.statusCode)) {
+            case statusCodeOK:
+              imageUploadSuccess.removeClass('d-none')
+              if (data.image_base64 === null) {
+                const src = $(imageContainerId).attr('src')
+                const d = new Date()
+                $(imageContainerId).attr('src', src + '?a=' + d.getDate())
+              } else {
+                $(imageContainerId).attr('src', data.image_base64)
+              }
+              break
+            case statusCodeUploadExceedingFilesize:
+              $('.text-img-upload-too-large').removeClass('d-none')
+              break
+            case statusCodeUploadUnsupportedMimeType:
+              $('.text-mime-type-not-supported').removeClass('d-none')
+              break
+            default:
+              $('.text-img-upload-error').removeClass('d-none')
+          }
+        } else {
+          imageUploadSuccess.removeClass('d-none')
+          const src = $(imageContainerId).attr('src')
+          const d = new Date()
+          $(imageContainerId).attr('src', src + '?a=' + d.getDate())
         }
-
         const imageUpload = $(uploadButtonContainerId)
         imageUpload.find('span').show()
         imageUpload.find('.button-show-ajax').hide()

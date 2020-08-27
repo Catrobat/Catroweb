@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use App\Utils\APIQueryHelper;
@@ -41,17 +40,13 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
     /** @var string $path Path where files in $dir can be accessed via web */
     $path = $parameter_bag->get('catrobat.mediapackage.path');
-    $dir = preg_replace('#([^/]+)$#', '$1/', $dir);
-    $path = preg_replace('#([^/]+)$#', '$1/', $path);
     $thumb_dir = $dir.'thumbs/';
-
-    if (!is_dir($dir)) {
-      throw new InvalidStorageDirectoryException($dir.' is not a valid directory');
+    if (!is_dir($thumb_dir)) {
+      mkdir($thumb_dir);
     }
 
-    if (!is_dir($thumb_dir) && !mkdir($thumb_dir)) {
-      throw new InvalidStorageDirectoryException($thumb_dir.' is not a valid directory');
-    }
+    Utils::verifyDirectoryExists($dir);
+    Utils::verifyDirectoryExists($thumb_dir);
 
     $this->dir = $dir;
     $this->path = $path;

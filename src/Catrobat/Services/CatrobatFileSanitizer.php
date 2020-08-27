@@ -52,7 +52,7 @@ class CatrobatFileSanitizer
         || $this->isTheOnlyPermissionsFile($relative_filepath)
         || $this->isAValidImageFile($filename, $relative_filepath, $extracted_file)
         || $this->isAValidSoundFile($filename, $relative_filepath, $extracted_file)
-        || $this->isFileTheUsedScreenshot($relative_filepath)
+        || $this->isAValidScreenshot($relative_filepath)
         || $this->isAValidSceneDirectory($relative_filepath)) {
         continue;
       }
@@ -73,10 +73,13 @@ class CatrobatFileSanitizer
     return '/permissions.txt' === $relative_filepath;
   }
 
-  private function isFileTheUsedScreenshot(string $relative_filepath): bool
+  private function isAValidScreenshot(string $relative_filepath): bool
   {
-    // the app uploads multiple screenshots, but we only need one
-    return $this->getRelativePath($this->screenshot_path) === $relative_filepath;
+    // the app uploads multiple screenshots.
+    // We only need one, however, we must leave them untouched for the apps to use
+    return str_contains($relative_filepath, 'screenshot.png')
+      || str_contains($relative_filepath, 'manual_screenshot.png')
+      || str_contains($relative_filepath, 'automatic_screenshot.png');
   }
 
   private function isAValidSceneDirectory(string $relative_filepath): bool
@@ -93,16 +96,16 @@ class CatrobatFileSanitizer
 
   private function isAValidSoundFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
-    return $this->isAValidImageOrSoundFile('/sounds', $this->sound_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidFile('/sounds', $this->sound_paths, $filename, $relative_filepath, $extracted_file);
   }
 
   private function isAValidImageFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
-    return $this->isAValidImageOrSoundFile('/images', $this->image_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidFile('/images', $this->image_paths, $filename, $relative_filepath, $extracted_file);
   }
 
-  private function isAValidImageOrSoundFile(string $dir_name, array $paths_array, string $filename, string $relative_filepath,
-                                            ExtractedCatrobatFile $extracted_file): bool
+  private function isAValidFile(string $dir_name, array $paths_array, string $filename,
+                                string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
     // Here we must accept:
     //   - image and sound directories in the root directory.
