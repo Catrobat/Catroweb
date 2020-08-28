@@ -1759,20 +1759,20 @@
         },
         {
             "name": "eightpoints/guzzle-bundle",
-            "version": "v8.1.0",
+            "version": "v8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/8p/EightPointsGuzzleBundle.git",
-                "reference": "cbb4c8d87f7804e20a1b2372662ed89a1ed328b7"
+                "reference": "84b0f13129f969cbe747015beba95637b71d8b14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/cbb4c8d87f7804e20a1b2372662ed89a1ed328b7",
-                "reference": "cbb4c8d87f7804e20a1b2372662ed89a1ed328b7",
+                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/84b0f13129f969cbe747015beba95637b71d8b14",
+                "reference": "84b0f13129f969cbe747015beba95637b71d8b14",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/guzzle": "~6.0",
+                "guzzlehttp/guzzle": "~6.0|~7.0",
                 "php": ">=7.1",
                 "psr/log": "~1.0",
                 "symfony/expression-language": "~4.0|~5.0",
@@ -1780,7 +1780,6 @@
                 "symfony/stopwatch": "~4.0|~5.0"
             },
             "require-dev": {
-                "namshi/cuzzle": "^2.0",
                 "symfony/phpunit-bridge": "~4.0|~5.0",
                 "symfony/twig-bundle": "~4.0|~5.0",
                 "symfony/var-dumper": "~4.0|~5.0",
@@ -1822,7 +1821,7 @@
                 "symfony",
                 "web service"
             ],
-            "time": "2020-04-13T07:33:52+00:00"
+            "time": "2020-07-14T09:32:00+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
