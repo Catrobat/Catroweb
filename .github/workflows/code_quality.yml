@@ -1,17 +1,42 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ** Code Quality **
+# ** Static analysis **
 #
-#  Code quality checks must fulfill minimum the requirements at all time (Every pull request!).
-#  We should never allow those checks to fail before merging a pull request. Having failing pipelines over a longer
-#  period of time results in developers and code reviewers to ignore those checks, which again results in more and more
-#  errors over time. If necessary it is better to reduce the strictness of some checks in the corresponding config
-#  files, or explicitly tell the tools to ignore a certain pattern or line.
+#  This GitHub Action requires every pull request to fulfill the minimum requirements at all times. Various static
+#  analysis tools are included and executed during this workflow. They only check out the source code without the need
+#  to run the whole Share community platform. Hence, this automated static analysis checks are fast.  Besides, no tests
+#  have to be created manually. However, no behavior can be tested.
 #
-#  ToDo: As soon as Github Action have support: use templates/components to prevent the duplicated (build/cache) code
+#  - This tests must never fail!:
 #
+#      We should never allow those checks to fail before merging a pull request. Having failing pipelines over a more
+#      extended period results in developers and code reviewers to ignore those checks, which again results in more and
+#      more errors over time. If necessary, it is better to reduce the strictness of some checks in the corresponding
+#      config files, or explicitly tell the tools to ignore a particular pattern or line.
 #
-name: Code Quality
+#  - Tool integration:
+#
+#       Most tools are integrated directly using a package manager (npm, composer). This allows to Dependabot to update
+#       the dependencies of the GitHub Actions. Besides, the CI system uses the same versions like developers would
+#       locally. However, this approach also a a drawback. More "artificial" dependencies on the static analysis tools
+#       which are not necessary to run the Share community platform. In case, one they there arise dependency conflicts
+#       just remove the tool from the package manager and add the tool using a pre-built executable (wget) or an action
+#       from the marketplace (This is already the case or This is already the case for `phploc` and `phpcpd`.)
+#
+#  - Caching:
+#
+#      By caching the third party code installed by package manager, the build time can be significantly reduced.
+#
+#   - Composites:
+#
+#      By using composites to build the jobs, a lot of duplicated code can be prevent.
+#      ToDo: As soon as Github Action have `uses` support use composites to prevent the duplicated (build/cache) code
+#      (https://github.com/actions/runner/issues/646)
+#
+name: Static analysis
 
+# Run-on every creation, update and merge of a pull request.
+# However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
+# For example, this happens with dependabot.
 on:
   push:
     branches:
@@ -100,20 +125,6 @@ jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** PHP **
   #
-  #  Php-CS-Fixer, PhpStan and Psalm are included directly in the project using composer. Mainly due to the reason
-  #  that with this approach dependabot can keep those packages up to date for us. No manual upgrades are necessary.
-  #  Additionally we can not just require the latest (phar) version or corresponding docker action: In case of
-  #  (breaking) changes we would have a failing pipeline for all pull request.
-  #  The drawback? This packages might have incompatible dependencies and will result in a failing composer update.
-  #  As long as this is not the case there is no drawback. But as soon as this happens one might consider to remove
-  #  this packages from the project dependencies and only use the phar or docker versions. This is already the case
-  #  for phploc and phpcpd. Phploc can't fail the pipeline so we just require the latest phar. In the worst case
-  #  some statistics are wrong. With phpcpd we require a fixed version so it must be manually updated. (as long
-  #  as dependabot does not support custom github actions)
-  #
-  #  Why use both PhpStan and Psalm? In their current state they are able to find different possible problems
-  #  and the intersection of false positives is very small.
-  #
 
   #
   # Php-CS-Fixer:
@@ -155,8 +166,10 @@ jobs:
   # PhpStan:
   #
   #  - Statically analyzes php files (The more strongly-typed the code is, the more information we get)
-  #  - config defined in phpstan.neon(.dist)
+  #  - config defined in phpstan.neon(.dist) (8 different levels!)
   #  - More information at: https://phpstan.org/
+  #
+  #  - Why use both PhpStan and Psalm? In their current state they are able to find different possible problems.
   #
   phpstan:
     name: PHP Static Analysis [Php-Stan]
@@ -192,8 +205,10 @@ jobs:
   # Psalm:
   #
   #  - Statically analyzes php files (The more strongly-typed the code is, the more information we get)
-  #  - config defined in psalm.xml(.dist)
+  #  - config defined in psalm.xml(.dist) (8 different levels!)
   #  - More information at: https://psalm.dev/
+  #
+  #  - Why use both PhpStan and Psalm? In their current state they are able to find different possible problems.
   #
   psalm:
     name: PHP Static Analysis [Psalm]

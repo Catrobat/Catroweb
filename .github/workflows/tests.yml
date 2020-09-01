@@ -1,69 +1,23 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** Dynamic analysis **
+#
+# Dynamic analysis requires the Share community platform to run during evaluation. Currently Catroweb's dynamic tests
+# are mainly UI-tests and a few unit tests. Hence, the tests take multiple hours. To reduce the run time, the tests
+# are executed in multiple independent jobs. However, all jobs use the same Catroweb Docker image to reduce build time.
+#
+name: Dynamic analysis
 
-name: Tests
-
+# Run-on every creation, update and merge of a pull request.
+# However, prevent checks to be initiated twice if the pull request is a branch on the same repository. (E.g dependabot)
 on:
   push:
     branches:
       - master
       - develop
   pull_request:
-  release:
-    types:
-      - created
 
 
 jobs:
-
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # Developer Container:
-  #
-  #   - Since all tests run in a slightly different and reduced test container we must check the dev environment
-  #     explicitly. The container must build, plus the website and test system must be working.
-  #
-  dev_container_checks:
-    name: Dev. Container Checks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Build
-        run: |
-          cd docker
-          docker-compose -f docker-compose.dev.yml up -d
-          sleep 30
-
-      - name: Check Symfony Application
-        # would be nice to check the reset command in the future, in the current state the reset command can't fail
-        run: |
-          docker exec app.catroweb bin/console about
-          docker exec app.catroweb bin/console catrobat:reset --hard
-
-      - name: Check local share website
-        run: |
-          sudo apt-get update
-          sudo apt-get install apache2 wget
-          sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
-          sudo service apache2 reload
-          wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
-
-      - name: Check tests in dev environment
-        run:
-          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
-
-      - name: Check shared development volumes must not need a rebuild
-        id: shared-test-run-must-fail
-        continue-on-error: true
-        run: |
-          echo ::set-output name=status::failure
-          echo "INVALID" > tests/behat/features/web/general/homepage.feature
-          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
-          echo ::set-output name=status::success
-
-      - name: Check that invalid changes result in a failing testcase
-        if: steps.shared-test-run-must-fail.outputs.status == 'success'
-        run: |
-          exit -1
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Build:
