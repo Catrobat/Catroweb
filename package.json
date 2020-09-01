@@ -41,7 +41,7 @@
     "node-sass": "^4.14.1",
     "sass": "^1.26.10",
     "standard": "^14.3.4",
-    "stylelint": "^13.6.1",
+    "stylelint": "^13.7.0",
     "stylelint-config-twbs-bootstrap": "^2.0.3"
   },
   "dependencies": {
