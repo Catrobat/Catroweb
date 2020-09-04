@@ -71,6 +71,9 @@
     "dmore/chrome-mink-driver": {
         "version": "2.7.0"
     },
+    "dnoegel/php-xdg-base-dir": {
+        "version": "v0.1.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -529,6 +532,9 @@
     },
     "ruflin/elastica": {
         "version": "6.1.1"
+    },
+    "sebastian/cli-parser": {
+        "version": "1.0.0"
     },
     "sebastian/code-unit": {
         "version": "1.0.2"
