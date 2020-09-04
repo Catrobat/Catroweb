@@ -226,8 +226,6 @@ jobs:
       - if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - run: bin/psalm               # QuickFix to prevent parsing errors in vendor
-        continue-on-error: true
       - run: bin/psalm
   #
   # phpcpd (Php Copy Paste Detector):

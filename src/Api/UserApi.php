@@ -56,11 +56,11 @@ class UserApi implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userPost(RegisterRequest $register, string $accept_language = null, &$responseCode, array &$responseHeaders)
+  public function userPost(RegisterRequest $register_request, string $accept_language = null, &$responseCode, array &$responseHeaders)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
-    $validation_schema = $this->validateRegistration($register);
+    $validation_schema = $this->validateRegistration($register_request);
 
     if ($validation_schema->getEmail() || $validation_schema->getUsername() || $validation_schema->getPassword())
     {
@@ -68,7 +68,7 @@ class UserApi implements UserApiInterface
 
       return $validation_schema;
     }
-    if ($register->isDryRun())
+    if ($register_request->isDryRun())
     {
       $responseCode = Response::HTTP_NO_CONTENT; // 204 => Dry-run successful, no validation error
     }
@@ -77,9 +77,9 @@ class UserApi implements UserApiInterface
       // Validation successful, no dry-run requested => we can actually register the user
       /** @var User $user */
       $user = $this->user_manager->createUser();
-      $user->setUsername($register->getUsername());
-      $user->setEmail($register->getEmail());
-      $user->setPlainPassword($register->getPassword());
+      $user->setUsername($register_request->getUsername());
+      $user->setEmail($register_request->getEmail());
+      $user->setPlainPassword($register_request->getPassword());
       $user->setEnabled(true);
       $user->setUploadToken($this->token_generator->generateToken());
       $this->user_manager->updateUser($user);
@@ -98,64 +98,64 @@ class UserApi implements UserApiInterface
    *
    * @return RegisterErrorResponse The RegisterErrorResponse containing possible validation errors
    */
-  public function validateRegistration(RegisterRequest $register): RegisterErrorResponse
+  public function validateRegistration(RegisterRequest $register_request): RegisterErrorResponse
   {
     $response = new RegisterErrorResponse();
 
     // E-Mail
-    if (0 === strlen($register->getEmail()))
+    if (0 === strlen($register_request->getEmail()))
     {
       $response->setEmail($this->translator->trans('api.registerUser.emailMissing', [], 'catroweb'));
     }
-    elseif (0 !== count($this->validator->validate($register->getEmail(), new Email())))
+    elseif (0 !== count($this->validator->validate($register_request->getEmail(), new Email())))
     {
       $response->setEmail($this->translator->trans('api.registerUser.emailInvalid', [], 'catroweb'));
     }
-    elseif (null != $this->user_manager->findUserByEmail($register->getEmail()))
+    elseif (null != $this->user_manager->findUserByEmail($register_request->getEmail()))
     {
       $response->setEmail($this->translator->trans('api.registerUser.emailAlreadyInUse', [], 'catroweb'));
     }
 
     // Username
-    if (0 === strlen($register->getUsername()))
+    if (0 === strlen($register_request->getUsername()))
     {
       $response->setUsername($this->translator->trans('api.registerUser.usernameMissing', [], 'catroweb'));
     }
-    elseif (strlen($register->getUsername()) < 3)
+    elseif (strlen($register_request->getUsername()) < 3)
     {
       $response->setUsername($this->translator->trans('api.registerUser.usernameTooShort', [], 'catroweb'));
     }
-    elseif (strlen($register->getUsername()) > 180)
+    elseif (strlen($register_request->getUsername()) > 180)
     {
       $response->setUsername($this->translator->trans('api.registerUser.usernameTooLong', [], 'catroweb'));
     }
-    elseif (filter_var(str_replace(' ', '', $register->getUsername()), FILTER_VALIDATE_EMAIL))
+    elseif (filter_var(str_replace(' ', '', $register_request->getUsername()), FILTER_VALIDATE_EMAIL))
     {
       $response->setUsername($this->translator->trans('api.registerUser.usernameContainsEmail', [], 'catroweb'));
     }
-    elseif (null != $this->user_manager->findUserByUsername($register->getUsername()))
+    elseif (null != $this->user_manager->findUserByUsername($register_request->getUsername()))
     {
       $response->setUsername($this->translator->trans('api.registerUser.usernameAlreadyInUse', [], 'catroweb'));
     }
-    elseif (0 === strncasecmp($register->getUsername(), User::$SCRATCH_PREFIX, strlen(User::$SCRATCH_PREFIX)))
+    elseif (0 === strncasecmp($register_request->getUsername(), User::$SCRATCH_PREFIX, strlen(User::$SCRATCH_PREFIX)))
     {
       $response->setUsername($this->translator->trans('api.registerUser.usernameInvalid', [], 'catroweb'));
     }
 
     // Password
-    if (0 === strlen($register->getPassword()))
+    if (0 === strlen($register_request->getPassword()))
     {
       $response->setPassword($this->translator->trans('api.registerUser.passwordMissing', [], 'catroweb'));
     }
-    elseif (strlen($register->getPassword()) < 6)
+    elseif (strlen($register_request->getPassword()) < 6)
     {
       $response->setPassword($this->translator->trans('api.registerUser.passwordTooShort', [], 'catroweb'));
     }
-    elseif (strlen($register->getPassword()) > 4_096)
+    elseif (strlen($register_request->getPassword()) > 4_096)
     {
       $response->setPassword($this->translator->trans('api.registerUser.passwordTooLong', [], 'catroweb'));
     }
-    elseif (!mb_detect_encoding($register->getPassword(), 'ASCII', true))
+    elseif (!mb_detect_encoding($register_request->getPassword(), 'ASCII', true))
     {
       $response->setPassword($this->translator->trans('api.registerUser.passwordInvalidChars', [], 'catroweb'));
     }

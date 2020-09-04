@@ -36,7 +36,7 @@ class AuthenticationApi implements AuthenticationApiInterface
   /**
    * {@inheritdoc}
    */
-  public function authenticationPost(LoginRequest $login, &$responseCode, array &$responseHeaders)
+  public function authenticationPost(LoginRequest $login_request, &$responseCode, array &$responseHeaders)
   {
     // Login Process & token creation is handled by LexikJWTAuthenticationBundle
     // Successful requests are NOT passed to this method. This method will never be called.
