@@ -54,7 +54,7 @@
     "@material/snackbar": "^7.0.0",
     "@material/top-app-bar": "^7.0.0",
     "ajv": "^6.12.4",
-    "animate.css": "^4.1.0",
+    "animate.css": "^4.1.1",
     "animatedmodal": "^1.0.0",
     "bootstrap": "^4.5.2",
     "clipboard": "^2.0.6",
