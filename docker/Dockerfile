@@ -51,6 +51,7 @@ RUN n stable && \
     npm install -g sass
 
 # Overwrite default apache config
+RUN a2enmod rewrite
 COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
 RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf

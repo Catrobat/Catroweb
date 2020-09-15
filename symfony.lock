@@ -530,6 +530,12 @@
     "react/promise": {
         "version": "v2.8.0"
     },
+    "rosell-dk/image-mime-type-guesser": {
+        "version": "0.3"
+    },
+    "rosell-dk/webp-convert": {
+        "version": "2.3.2"
+    },
     "ruflin/elastica": {
         "version": "6.1.1"
     },
