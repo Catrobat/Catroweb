@@ -42,7 +42,7 @@
     "sass": "^1.26.10",
     "standard": "^14.3.4",
     "stylelint": "^13.7.1",
-    "stylelint-config-twbs-bootstrap": "^2.0.3"
+    "stylelint-config-twbs-bootstrap": "^2.1.0"
   },
   "dependencies": {
     "@material/chips": "^7.0.0",
