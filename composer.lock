@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b86158e4c6160bf5984ca468f0d5a60",
+    "content-hash": "743d9021cbdaa9050a3e0c7408ccb3cb",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -62,16 +62,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.0.41",
+            "version": "v1.0.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "fd658069865cf36fcd8c5ea5e86c27cd68a7b303"
+                "reference": "8ec154843268165654ed23150253608c7fec823f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/fd658069865cf36fcd8c5ea5e86c27cd68a7b303",
-                "reference": "fd658069865cf36fcd8c5ea5e86c27cd68a7b303",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/8ec154843268165654ed23150253608c7fec823f",
+                "reference": "8ec154843268165654ed23150253608c7fec823f",
                 "shasum": ""
             },
             "require": {
@@ -119,10 +119,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.41",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.43",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2020-07-07T12:09:42+00:00"
+            "time": "2020-08-25T06:37:13+00:00"
         },
         {
             "name": "clue/stream-filter",
