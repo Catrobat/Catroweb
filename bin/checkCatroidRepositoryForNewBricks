@@ -6,7 +6,11 @@
  *
  *  Parsing Bricks and Scripts from XstreamSerializer.java and CategoryBricksFactory.java (Catroid Github)
  *  and comparing them with our defined Bricks and Scripts. The intersection should contain all bricks and scripts.
- *  If not we have to implement them. How to is printed in the error message.
+ *  If not we have to implement them a how to is printed in the error message.
+ *
+ * This check relies on a fixed project strucure in Catroid and also our project. In case file names or paths change,
+ * this script must be adapted.
+ *
  */
 
 $url1 = 'https://raw.githubusercontent.com/Catrobat/Catroid/develop/catroid/src/main/java/org/catrobat/catroid/io/XstreamSerializer.java';
