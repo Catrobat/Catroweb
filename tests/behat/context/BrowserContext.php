@@ -354,7 +354,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $received = false;
     $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
 
-    $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 10 seconds
+    $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 5 seconds
     while (TimeUtils::getTimestamp() < $end_time)
     {
       if (file_exists($file_path))
@@ -363,7 +363,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
         unlink($file_path);
         break;
       }
-      sleep(1);
+      usleep(125000);
     }
 
     Assert::assertEquals(true, $received, "File {$name} hasn't been found at location '{$file_path}'");
@@ -448,7 +448,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForThePageToBeLoaded(): void
   {
-    $this->getSession()->wait(15_000, "document.readyState === 'complete'");
+    $this->getSession()->wait(5_000, "document.readyState === 'complete'");
     $this->iWaitForAjaxToFinish();
   }
 
@@ -459,7 +459,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForAjaxToFinish(): void
   {
-    $this->getSession()->wait(15_000,
+    $this->getSession()->wait(5_000,
       '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
     );
   }
@@ -475,17 +475,18 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   {
     /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $locator);
-    $timeout_in_seconds = 15;
-    for ($timer = 0; $timer < $timeout_in_seconds; ++$timer)
+    $tries = 100;
+    $delay = 100000; // every 1/10 second
+    for ($timer = 0; $timer < $tries; ++$timer)
     {
       if ($element->isVisible())
       {
         return;
       }
-      sleep(1);
+      usleep($delay);
     }
 
-    $message = sprintf("The element '%s' was not visible after a %s seconds timeout", $locator, $timeout_in_seconds);
+    $message = sprintf("The element '%s' was not visible after a %s micro seconds timeout", $locator, ($delay * $tries));
     throw new ResponseTextException($message, $this->getSession());
   }
 
@@ -501,17 +502,18 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   {
     /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $locator);
-    $timeout_in_seconds = 15;
-    for ($timer = 0; $timer < $timeout_in_seconds; ++$timer)
+    $tries = 100;
+    $delay = 100000; // every 1/10 second
+    for ($timer = 0; $timer < $tries; ++$timer)
     {
       if ($element->getText() === $text)
       {
         return;
       }
-      sleep(1);
+      usleep($delay);
     }
 
-    $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, $timeout_in_seconds);
+    $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, ($delay * $tries));
     throw new ResponseTextException($message, $this->getSession());
   }
 

@@ -30,8 +30,8 @@ default:
                         api_url: "http://localhost:9222"
                         download_behavior: allow
                         download_path: tests/testdata/UploadDownloadTemp
-                        socket_timeout: 60
-                        dom_wait_timeout: 10000
+                        socket_timeout: 90
+                        dom_wait_timeout: 15000
 
         DVDoug\Behat\CodeCoverage\Extension:
             filter:
@@ -203,37 +203,13 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
-        web-notifications1:
-            paths: ["tests/behat/features/web/notifications1"]
+        web-notifications:
+            paths: ["tests/behat/features/web/notifications"]
             contexts:
                 - Tests\behat\context\RefreshEnvironmentContext
                 - Tests\behat\context\DataFixturesContext
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
-
-        web-notifications2:
-            paths: ["tests/behat/features/web/notifications2"]
-            contexts:
-                - Tests\behat\context\RefreshEnvironmentContext
-                - Tests\behat\context\DataFixturesContext
-                - Tests\behat\context\CatrowebBrowserContext
-                - Tests\behat\context\ApiContext
-
-        web-notifications3:
-            paths: ["tests/behat/features/web/notifications3"]
-            contexts:
-                - Tests\behat\context\RefreshEnvironmentContext
-                - Tests\behat\context\DataFixturesContext
-                - Tests\behat\context\CatrowebBrowserContext
-                - Tests\behat\context\ApiContext
-
-        web-notifications4:
-                    paths: ["tests/behat/features/web/notifications4"]
-                    contexts:
-                        - Tests\behat\context\RefreshEnvironmentContext
-                        - Tests\behat\context\DataFixturesContext
-                        - Tests\behat\context\CatrowebBrowserContext
-                        - Tests\behat\context\ApiContext
 
         web-profile:
             paths:    [ "tests/behat/features/web/profile" ]
