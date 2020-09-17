@@ -127,7 +127,7 @@ programs:
   related: İlgili Projeler
   downloads: '%downloads% İndirme'
   sample: Örnek projeler
-  views: '%views%İzlenme'
+  views: '%views% İzlenme'
   likes:
     likersTitle: "Bu projeye tepki gösteren insanlar"
     all: "Hepsi"
@@ -173,7 +173,7 @@ programs:
   wow: Vaycanına!
   linkTitle: Link
   link: Proje bağlantısını panoya kopyala
-  reactionsText: İzlenmeler
+  reactionsText: Tepkiler
   downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
 remixGraph:
   title: Remixler
