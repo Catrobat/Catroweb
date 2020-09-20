@@ -21,6 +21,8 @@ class ExtractedCatrobatFile
 
   protected SimpleXMLElement $program_xml_properties;
 
+  private array $xml_filenames;
+
   public function __construct(string $base_dir, string $base_path, ?string $dir_hash)
   {
     $this->path = $base_dir;
@@ -38,6 +40,8 @@ class ExtractedCatrobatFile
       throw new InvalidXmlException();
     }
     $content = str_replace('&#x0;', '', $content, $count);
+    preg_match_all('@fileName="(.*?)"@', $content, $matches);
+    $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
     $xml = @simplexml_load_string($content);
     if (!$xml)
     {
@@ -119,9 +123,7 @@ class ExtractedCatrobatFile
 
   public function isFileMentionedInXml(string $filename): bool
   {
-    $xml = file_get_contents($this->path.'code.xml');
-
-    return false !== strpos($xml, (string) $filename);
+    return in_array($filename, $this->xml_filenames, true);
   }
 
   public function getContainingSoundPaths(): array
