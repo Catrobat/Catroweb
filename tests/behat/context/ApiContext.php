@@ -1660,7 +1660,6 @@ class ApiContext implements KernelAwareContext
     $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_programs);
-
     Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
 
     foreach ($returned_programs as $returned_program)
@@ -1680,7 +1679,6 @@ class ApiContext implements KernelAwareContext
     $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredFeaturedPrograms($expected_programs);
-
     Assert::assertEquals(count($returned_programs), count($expected_programs),
       'Number of returned programs should be '.count($expected_programs));
 
