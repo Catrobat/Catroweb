@@ -4,6 +4,7 @@ namespace Tests\phpUnit\Hook;
 
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
+use App\Commands\Helpers\CommandHelper;
 use App\Kernel;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Runner\BeforeFirstTestHook;
@@ -30,6 +31,10 @@ class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
   public function executeBeforeFirstTest(): void
   {
     RefreshEnvironmentContext::prepare();
+
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'fos:elastic:populate'], [], 'Populate elastic'
+    );
   }
 
   public function executeBeforeTest(string $test): void
