@@ -239,10 +239,10 @@ Feature:
     And I am on "/app/user"
     And I wait for the page to be loaded
     And there are comments:
-    | id  | program_id | user_id | upload_date      | text | user_name | reported |
-    | 1   | 1          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
-    | 2   | 2          | 2       | 01.01.2013 12:02 | c2   | User1     | true     |
-    | 3   | 3          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
+    | id  | program_id | user_id | text |
+    | 1   | 1          | 1       | c1   |
+    | 2   | 2          | 2       | c2   |
+    | 3   | 3          | 1       | c1   |
     And there are catro notifications:
       | user     | title                 | message         | type                     | commentID | like_from | follower_id | program_id  | prize | image_path | parent_program | child_program |
       | Catrobat |                       |                 | comment                  | 2         |           |             |             |       |            |                |               |

@@ -227,6 +227,23 @@ class DataFixturesContext implements KernelAwareContext
     }
   }
 
+  /**
+   * @When /^User "([^"]*)" is followed by user "([^"]*)"$/
+   *
+   * @param mixed $user_id
+   * @param mixed $follow_id
+   */
+  public function userIsFollowedByUser($user_id, $follow_id): void
+  {
+    /** @var User|null $user */
+    $user = $this->getUserManager()->find($user_id);
+
+    /** @var User|null $followUser */
+    $followUser = $this->getUserManager()->find($follow_id);
+    $user->addFollowing($followUser);
+    $this->getUserManager()->updateUser($user);
+  }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
   // -------------------------------------------------------------------------------------------------------------------
@@ -1119,13 +1136,13 @@ class DataFixturesContext implements KernelAwareContext
           $to_create = new NewProgramNotification($user, $program);
           break;
         case 'anniversary':
-          $to_create = new AnniversaryNotification($user, $notification['title'], $notification['message'], $notification['prize']);
+          $to_create = new AnniversaryNotification($user, 'title_deprecated', $notification['message'], 'price');
           break;
         case 'achievement':
-          $to_create = new AchievementNotification($user, $notification['title'], $notification['message'], $notification['image_path']);
+          $to_create = new AchievementNotification($user, 'title_deprecated', $notification['message'], 'image_path');
           break;
         case 'broadcast':
-          $to_create = new BroadcastNotification($user, $notification['title'], $notification['message']);
+          $to_create = new BroadcastNotification($user, 'title_deprecated', $notification['message']);
           break;
         case 'remix':
           /** @var Program $parent_program */
@@ -1160,13 +1177,12 @@ class DataFixturesContext implements KernelAwareContext
   {
     $em = $this->getManager();
 
+    /** @var User|null $user */
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertNotNull($user, 'user is null');
+
     for ($i = 0; $i < $arg1; ++$i)
     {
-      /** @var User|null $user */
-      $user = $this->getUserManager()->findUserByUsername($username);
-
-      Assert::assertNotNull($user, 'user is null');
-
       $to_create = new CatroNotification($user, 'Random Title', 'Random Text');
       $em->persist($to_create);
     }

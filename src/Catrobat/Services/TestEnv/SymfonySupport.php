@@ -505,11 +505,14 @@ trait SymfonySupport
     $user = $this->getUserManager()->find($config['user_id']);
 
     $new_comment = new UserComment();
-    $new_comment->setUploadDate(new DateTime($config['upload_date'], new DateTimeZone('UTC')));
+    $new_comment->setUploadDate(isset($config['upload_date']) ?
+      new DateTime($config['upload_date'], new DateTimeZone('UTC')) :
+      new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+    );
     $new_comment->setProgram($project);
     $new_comment->setUser($user);
-    $new_comment->setUsername($config['user_name']);
-    $new_comment->setIsReported($config['reported']);
+    $new_comment->setUsername($user->getUsername());
+    $new_comment->setIsReported(isset($config['reported']) ? $config['reported'] : false);
     $new_comment->setText($config['text']);
 
     $this->getManager()->persist($new_comment);

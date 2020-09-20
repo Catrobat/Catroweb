@@ -151,10 +151,7 @@ jobs:
           - web-comments
           - web-general
           - web-media-library
-          - web-notifications1
-          - web-notifications2
-          - web-notifications3
-          - web-notifications4
+          - web-notifications
           - web-profile
           - web-project
           - web-project-details
@@ -199,7 +196,7 @@ jobs:
         # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} \
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
           |& tee tests/testreports/behat/${{ matrix.testSuite }}.log ; \
           ( exit ${PIPESTATUS[0]} )
           echo ::set-output name=status::success
@@ -210,8 +207,8 @@ jobs:
         if: always()
         id: missing-check
         run: |
-          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
           if grep -q 'has missing steps. Define them with these snippets:' tests/testreports/behat/${{ matrix.testSuite }}.log; then
+            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
@@ -221,19 +218,19 @@ jobs:
         if: always()
         id: pending-check
         run: |
-          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
           if grep -q 'pending)' tests/testreports/behat/${{ matrix.testSuite }}.log; then
+            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
-      # Chrome exception are problems that can't be fixed with a rerun
+      # Chrome exception are problems that can't be fixed with a rerun. However, we can try to run the whole suite one more time
       - name: Check that suite has NO chrome exceptions
         if: always()
         id: chrome-exception-check
         run: |
-          cat tests/testreports/behat/${{ matrix.testSuite }}.log;
           if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            false;
+            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+            docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
 
       - uses: codecov/codecov-action@v1
