@@ -48,7 +48,7 @@
     {{ 'programs.reactionsText'|trans({}, 'catroweb') }}
     </span>
     <span>
-    <i class="material-icons d-none project-view-spinner" id="project-reactions-spinner{{ suffix|default('') }}">
+    <i class="material-icons d-none" id="project-reactions-spinner{{ suffix|default('') }}">
       {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'reactions-spinner' ~ suffix|default(), small: 'true'} %}
     </i>
     </span>
