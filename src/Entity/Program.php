@@ -583,6 +583,11 @@ class Program
     return $this->user;
   }
 
+  public function getUsernameString(): string
+  {
+    return strval($this->user->getUsername());
+  }
+
   public function getComments(): Collection
   {
     return $this->comments;

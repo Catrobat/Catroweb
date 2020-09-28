@@ -29,6 +29,7 @@ fos_elastica:
                         private: ~
                         visible: ~
                         debug_build: ~
+                        getUsernameString: ~
                         getTagsString: ~
                         getExtensionsString: ~
                     persistence:
