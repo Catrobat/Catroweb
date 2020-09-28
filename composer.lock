@@ -8502,16 +8502,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v5.1.5",
+            "version": "v5.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "b6886c43cc1ae3367c569c5a8d4182555dd694fb"
+                "reference": "9381fd69ce6407041185aa6f1bafbf7d65f0e66a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/b6886c43cc1ae3367c569c5a8d4182555dd694fb",
-                "reference": "b6886c43cc1ae3367c569c5a8d4182555dd694fb",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/9381fd69ce6407041185aa6f1bafbf7d65f0e66a",
+                "reference": "9381fd69ce6407041185aa6f1bafbf7d65f0e66a",
                 "shasum": ""
             },
             "require": {
@@ -8588,7 +8588,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-17T07:42:30+00:00"
+            "time": "2020-09-27T03:44:28+00:00"
         },
         {
             "name": "symfony/mime",
