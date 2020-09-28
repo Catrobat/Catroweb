@@ -997,7 +997,7 @@ class ProgramManager
 
     $query_string = new QueryString();
     $query_string->setQuery($query);
-    $query_string->setFields(['id', 'name', 'description', 'getTagsString', 'getExtensionsString']);
+    $query_string->setFields(['id', 'name', 'description', 'getUsernameString', 'getTagsString', 'getExtensionsString']);
     $query_string->setAnalyzeWildcard();
     $query_string->setDefaultOperator('AND');
 
