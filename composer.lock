@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
-            "version": "v1.2.7",
+            "version": "v1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "5f16b305dda06eda0d2d293c9d2bbd299249a996"
+                "reference": "814183667f1d0d67ed8b9d81c1ee04e557e6a24d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/5f16b305dda06eda0d2d293c9d2bbd299249a996",
-                "reference": "5f16b305dda06eda0d2d293c9d2bbd299249a996",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/814183667f1d0d67ed8b9d81c1ee04e557e6a24d",
+                "reference": "814183667f1d0d67ed8b9d81c1ee04e557e6a24d",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 },
                 {
                     "name": "Steve Lacey",
-                    "email": "steve@stevelacey.net"
+                    "email": "steve@steve.ly"
                 }
             ],
             "description": "A set of extensions to Doctrine 2 that add support for additional query functions available in MySQL and Oracle.",
@@ -58,7 +58,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2020-06-30T03:28:02+00:00"
+            "time": "2020-10-01T05:10:47+00:00"
         },
         {
             "name": "catrobat/capi",
