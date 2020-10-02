@@ -62,16 +62,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.0.43",
+            "version": "v1.0.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "8ec154843268165654ed23150253608c7fec823f"
+                "reference": "6240cb06f75cf28a2ceed00efdd8d727dd2506c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/8ec154843268165654ed23150253608c7fec823f",
-                "reference": "8ec154843268165654ed23150253608c7fec823f",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/6240cb06f75cf28a2ceed00efdd8d727dd2506c9",
+                "reference": "6240cb06f75cf28a2ceed00efdd8d727dd2506c9",
                 "shasum": ""
             },
             "require": {
@@ -119,10 +119,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.43",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.44",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2020-08-25T06:37:13+00:00"
+            "time": "2020-09-21T08:09:39+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -11538,16 +11538,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v4.4.13",
+            "version": "v4.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "cee2f13ddc3fc0cfa2f5b115eaae860cef9c056f"
+                "reference": "8da71f775b7e1ffeed784d27f526527bb8e9504b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/cee2f13ddc3fc0cfa2f5b115eaae860cef9c056f",
-                "reference": "cee2f13ddc3fc0cfa2f5b115eaae860cef9c056f",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/8da71f775b7e1ffeed784d27f526527bb8e9504b",
+                "reference": "8da71f775b7e1ffeed784d27f526527bb8e9504b",
                 "shasum": ""
             },
             "require": {
@@ -11641,7 +11641,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-21T09:47:32+00:00"
+            "time": "2020-09-27T03:36:23+00:00"
         },
         {
             "name": "symfony/var-dumper",
