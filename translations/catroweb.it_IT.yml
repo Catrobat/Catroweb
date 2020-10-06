@@ -3,14 +3,14 @@
 localLanguage: Inglese
 username: Nome utente
 password: Password
-createNewPassword: Create new password
+createNewPassword: Crea una nuova password
 accountSettings: Impostazioni account
 email: E-Mail
 aboutPocketCode: Su Pocket Code
 about: Informazioni
-education: Education
-chat: Chat and forums
-others: Others
+education: Istruzione
+chat: Chat e forum
+others: Altri
 tutorials: Tutorial
 googlePlay: Google Play
 iosAppStore: IOS App store
@@ -39,8 +39,8 @@ more: 'altro'
 less: 'meno'
 show-more: 'Mostra di più'
 show-less: 'Mostra meno'
-more-information: 'Ulteriori informazioni'
-less-information: 'Less information'
+more-information: 'Maggiori informazioni'
+less-information: 'Meno informazioni'
 ok: Ok
 clickToDownloadProgram: 'Per scaricare il progetto di esempio, fai click su %link_start% questo %link_end% link.'
 registrationError: 'Nome utente o indirizzo email già in uso.'
@@ -53,30 +53,30 @@ RemixNotifications: 'Remix'
 wellDone: "Ottimo lavoro!"
 done: "Fatto!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Sì, elimina"
 cancelMessage: "Annulla"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "Impossibile autorizzare l'utente"
 notificationsClearError: "Impossibile segnare le notifiche come lette!"
 pleaseWait: "Attendere prego..."
 projects: "Programmi"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "Informazioni accesso account esterno"
+oauthInfo: 'Hai appena usato un account esterno per accedere. Abbiamo creato un nome utente casuale. Se vuoi cambiare il tuo nome utente o creare una nuova password per il tuo account, vai alla pagina del profilo. Clicca %link_start% qui %link_end% per andare alla pagina del tuo profilo'
+oauthHere: "qui"
+statistics: "Statistiche"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Quali progetti sono raccomandati qui?'
+      description: 'Più reazioni riceve il progetto (Thumbs up, Smile ...), più in alto appare nella lista.'
 follower:
-  follows: Following
+  follows: Seguiti
   followers: Follower
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
+  follow: Segui
+  username: Utente
+  followsMe: Mi seguono
+  noFollowing: Al momento non stai seguendo nessuno.
+  noFollowers: Al momento nessuno ti segue.
+  noOtherFollowing: Attualmente non ci sono utenti che seguono.
   noOtherFollowers: There are no follower users currently.
   followError: "Unable to follow the desired user!"
   unfollowError: "Unable to unfollow the desired user!"
@@ -90,11 +90,11 @@ programs:
     download: Scarica l'app
     statistics: Più statistiche
   featured: In evidenza
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  example: Esempi
+  newest: Progetti più recenti
+  recommended: Progetti consigliati
+  scratchremixes: Remix da Scratch
+  noPrograms: Al momento non ci sono progetti.
   deleteConfirmation: |+
     Sei sicuro?
     Sei sicuro di che voler eliminare "%programName%"?
@@ -102,55 +102,55 @@ programs:
     Sì, eliminalo!
     Annulla
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
+    Sei sicuro?
+    Se si imposta %programName%' a privato, non potrà essere trovato e visto da altri utenti.
+    Puoi ancora condividere il collegamento del tuo progetto con i tuoi amici. È possibile attivare la visibilità toccando l'icona con il lucchetto.
+    Se hai impostato "%programName%" a pubblico, può essere visto e trovato da altri utenti.
+    Sì, imposta a pubblico
+    Sì, imposta a privato
     No
   reportCommentConfirmation: Sei sicuro di voler segnalare questo commento?
   deleteCommentConfirmation: Sei sicuro di voler cancellare questo commento?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
+    Cancelli l'account?
+    Sei sicuro di voler eliminare il tuo account? Questo eliminerà anche i programmi caricati e i loro commenti!
+    Non esiste alcun modo per ripristinare questa azione!
+    Sì, eliminalo!
+    Annulla
+  tooLongDescription: La descrizione del progetto è troppo lunga!
   rudeWordsInDescription: Non è possibile utilizzare parolacce nella descrizione!
-  tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
+  tooLongCredits: I crediti del progetto sono troppo lunghi!
+  rudeWordsInCredits: Non puoi usare parole offensive nei tuoi crediti!
   most:
-    viewed: Il più visto
-    downloaded: Il più scaricato
-  random: Random projects
-  related: Related projects
+    viewed: I più visti
+    downloaded: I più scaricati
+  random: Progetti casuali
+  related: Progetti simili
   downloads: '%downloads% download'
-  sample: Example projects
+  sample: Progetti di esempio
   views: '%views% visualizzazioni'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Persone che hanno messo una reazione a quel progetto"
     all: "Tutti"
   remixes: '{0}0 remixes |{1}1 remix |] 1, Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1} "%programName%" ha 1 nuovo remix: |] 1, Inf] "%programName%" ha %remixes% nuovi remix:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: Progetti inviati
+  uploaded: Progetti caricati
   reportAsInappropriate: Segnala come inappropriato
-  reportProgram: Report project
+  reportProgram: Segnala progetto
   languageVersion: 'Versione del linguaggio Catrobat: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: Per favore %login% per segnalare questo progetto.
+  reportDialogHeader: Perché vuoi segnalare questo progetto?
   reportDialogReason: Inserire un motivo
   reportRadioButtonInappropriate: Non è appropriato
   reportRadioButtonCopyright: Violazione del copyright
   reportRadioButtonSpam: È spam
   reportRadioButtonDislike: Non mi piace
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportOwnProgram: Non puoi contrassegnare un tuo progetto.
+  reportAlready: Hai già segnalato questo progetto.
+  reportDone: Il progetto è stato segnalato!
   updateAppHeader: Aggiorna App
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
   show_more: Mostra altri
@@ -768,7 +768,7 @@ admin:
     removableObjects: Oggetti rimovibili
 recommender:
   similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Gli ultimi utenti che hanno scaricato questo progetto hanno scaricato anche
   moreFromThisUser: More from %username%
 pmd:
   submitBtn: Invia il tuo progetto
