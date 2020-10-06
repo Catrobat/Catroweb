@@ -254,7 +254,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: PHP Copy Paste Detector
-        uses: StephaneBour/actions-php-cpd@1.1
+        uses: StephaneBour/actions-php-cpd@7.4
         with:
           args: src tests --exclude src/Admin --exclude src/Entity  --exclude tests/phpUnit
   #
