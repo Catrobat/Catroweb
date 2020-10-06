@@ -840,6 +840,14 @@ codeview:
   penBricks: 'Pen bricks'
   dataBricks: 'Data bricks'
   specialBricks: 'Special bricks'
+  abstraction: 'Abstraction and problem decomposition'
+  parallelism: 'Parallelism'
+  logical: 'Logical thinking'
+  syn: 'Synchronization'
+  flow: 'Flow control'
+  user: 'User interactivity'
+  data: 'Data representation'
+  total: 'Total'
 
 codeStatistics:
   title: "Code statistics"
@@ -854,6 +862,7 @@ codeStatistics:
   penBricks: 'Pen'
   dataBricks: 'Data'
   specialBricks: 'Special'
+  ctscore: 'Computational thinking score'
 
 footer:
   language: Language

@@ -190,6 +190,46 @@ class CodeStatistic
     return $this->total_num_local_vars ?? 0;
   }
 
+  public function getAbstractionStatistic(): int
+  {
+    return 0;
+  }
+
+  public function getParallelismStatistic(): int
+  {
+    return 0;
+  }
+
+  public function getLogicalStatistic(): int
+  {
+    return 0;
+  }
+
+  public function getSynStatistic(): int
+  {
+    return 0;
+  }
+
+  public function getFlowStatistic(): int
+  {
+    return 0;
+  }
+
+  public function getUserStatistic(): int
+  {
+    return 0;
+  }
+
+  public function getDataStatistic(): int
+  {
+    return 0;
+  }
+
+  public function getCTScoreSum(): int
+  {
+    return $this->getAbstractionStatistic() + $this->getParallelismStatistic() + $this->getLogicalStatistic() + $this->getSynStatistic() + $this->getFlowStatistic() + $this->getUserStatistic() + $this->getDataStatistic();
+  }
+
   protected function updateSceneStatistic(): void
   {
     ++$this->total_num_scenes;

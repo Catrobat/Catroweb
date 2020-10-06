@@ -73,6 +73,40 @@
         </div>
 
       </div>
+
+      <div class="card-header collapsed d-flex justify-content-between expansion-header" id="statisticsCTscore"
+           data-toggle="collapse" data-target="#collapseCTscore" aria-expanded="false"
+           aria-controls="collapseCTscore">
+        {{ "codeStatistics.ctscore"|trans({}, "catroweb") }}
+        <i class="material-icons rotate-left">chevron_left</i>
+      </div>
+
+      <div id="collapseCTscore" class="collapse" aria-labelledby="statisticsCTscore"
+           data-parent="#accordionStatistics">
+        <div class="card-body">
+          <table class="table center table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, entry in ctscore_data %}
+              <tr>
+                <td>{{ entry['name'] }}</td>
+                <td id="points-of-{{ key }}">{{ entry['points'] }}</td>
+              </tr>
+            {% endfor %}
+            <tr>
+              <td> <b>{{ ctscore_data_sum['name'] }} </b></td>
+              <td id="total-points-of-ctscore_data_sum"> <b>{{ ctscore_data_sum['points'] }}</b></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
     </div>
   </div>
 

@@ -117,6 +117,16 @@ class CodeStatisticsController extends AbstractController
           $brick_stats['specialBricks']['different']['numDifferent']
         ),
       ],
+      'ctscore_data' => [
+        'Abstraction and problem decomposition' => $this->getMappedCTscoreStatistic('codeview.abstraction', $stats->getAbstractionStatistic().'/3'),
+        'Parallelism' => $this->getMappedCTscoreStatistic('codeview.parallelism', $stats->getParallelismStatistic().'/3'),
+        'Logical thinking' => $this->getMappedCTscoreStatistic('codeview.logical', $stats->getLogicalStatistic().'/3'),
+        'Synchronization' => $this->getMappedCTscoreStatistic('codeview.syn', $stats->getSynStatistic().'/3'),
+        'Flow control' => $this->getMappedCTscoreStatistic('codeview.flow', $stats->getFlowStatistic().'/3'),
+        'User interactivity' => $this->getMappedCTscoreStatistic('codeview.user', $stats->getUserStatistic().'/3'),
+        'Data representation' => $this->getMappedCTscoreStatistic('codeview.data', $stats->getDataStatistic().'/3'),
+      ],
+      'ctscore_data_sum' => $this->getMappedCTscoreStatistic('codeview.total', $stats->getCTScoreSum().'/12'),
     ]);
   }
 
@@ -134,6 +144,14 @@ class CodeStatisticsController extends AbstractController
       'name' => $this->trans($trans_id),
       'total-number' => $total_number,
       'different' => $different,
+    ];
+  }
+
+  private function getMappedCTscoreStatistic(string $trans_id, string $points): array
+  {
+    return [
+      'name' => $this->trans($trans_id),
+      'points' => $points,
     ];
   }
 
