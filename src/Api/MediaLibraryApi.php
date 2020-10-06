@@ -104,7 +104,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
         {
           break;
         }
-        $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file, $media_package));
+        $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file));
       }
     }
 
@@ -170,19 +170,13 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     return $media_files_data_response;
   }
 
-  private function getMediaFileDataResponse(MediaPackageFile $media_package_file, ?MediaPackage $package = null): array
+  private function getMediaFileDataResponse(MediaPackageFile $media_package_file): array
   {
-    if (null === $package)
-    {
-      $package = $media_package_file->getCategory()->getPackage()->first();
-    }
-
     return $mediaFile = [
       'id' => $media_package_file->getId(),
       'name' => $media_package_file->getName(),
-      'flavor' => $media_package_file->getFlavor(),
-      'flavors' => $media_package_file->getFlavorNames(),
-      'package' => $package->getName(),
+      'flavor' => json_encode($media_package_file->getFlavorNames()),
+      'package' => json_encode($media_package_file->getCategory()->getPackageNames()),
       'category' => $media_package_file->getCategory()->getName(),
       'author' => $media_package_file->getAuthor(),
       'extension' => $media_package_file->getExtension(),
