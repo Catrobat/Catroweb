@@ -10993,16 +10993,16 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "9f86d0f6eb787c4ce422ca428c5305c0067b8798"
+                "reference": "933be6a3196fb354615290f53ff7ff61e0bdde58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/9f86d0f6eb787c4ce422ca428c5305c0067b8798",
-                "reference": "9f86d0f6eb787c4ce422ca428c5305c0067b8798",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/933be6a3196fb354615290f53ff7ff61e0bdde58",
+                "reference": "933be6a3196fb354615290f53ff7ff61e0bdde58",
                 "shasum": ""
             },
             "require": {
@@ -11065,7 +11065,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-28T06:30:25+00:00"
+            "time": "2020-10-06T05:51:35+00:00"
         },
         {
             "name": "symfony/templating",
