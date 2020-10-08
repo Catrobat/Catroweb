@@ -158,11 +158,6 @@ class AppExtension extends AbstractExtension
     $path = $this->translation_path;
     $current_language = $this->request_stack->getCurrentRequest()->getLocale();
 
-    if (false !== strpos($current_language, '_DE') || false !== strpos($current_language, '_US'))
-    {
-      $current_language = substr($current_language, 0, 2);
-    }
-
     $list = [];
 
     $finder = new Finder();
@@ -175,10 +170,25 @@ class AppExtension extends AbstractExtension
 
     $available_locales = Locales::getNames();
 
+    $shortNames = [];
+    $current_language_exists = false;
     foreach ($finder as $translationFileName)
     {
       $shortName = $this->getShortLanguageNameFromFileName($translationFileName->getRelativePathname());
+      $shortNames[] = $shortName;
+      if ($current_language === $shortName)
+      {
+        $current_language_exists = true;
+      }
+    }
 
+    if (!$current_language_exists)
+    {
+      $current_language = explode('_', $current_language)[0];
+    }
+
+    foreach ($shortNames as $shortName)
+    {
       $isSelectedLanguage = $current_language === $shortName;
 
       if (strcmp($current_language, $shortName))
