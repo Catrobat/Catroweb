@@ -1,0 +1,90 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** Build **
+#
+#  Catroweb does not require any build actions such as a compilation process since it is interpreted.
+#  However, Catroweb has various dependencies on third party software to run. (E.g. web server, database, ..)
+#  To ease the setup process we use Docker. This workflow checks that all Docker containers build and their basic
+#  functionality is working.
+#
+#  - This tests must never fail!:
+#
+#      We should never allow those checks to fail before merging a pull request. Having a failing docker container
+#      prevents developers from effectively working with Docker. At all times developers should have easy access to
+#      the development
+#
+#
+name: Docker Container tests
+
+# Run-on every creation, update and merge of a pull request.
+# However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
+# For example, this happens with dependabot.
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+
+jobs:
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Developer Container:
+  #
+  #   - The Docker test container is already thoroughly tested during dynamic software tests.
+  #     However, it is essential to guarantee the functionality of the development container too.
+  #
+  #      -- the container must build,
+  #      -- the container must be filled with dummy data
+  #      -- the website must be available   (check status code of response)
+  #      -- the test system must be working (run a few tests)
+  #      -- the shared volumes must work    (invalid modification must crash the application)
+  #
+  dev_container_checks:
+    name: Development Container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build and start all containers (Docker Compose)
+        run: |
+          cd docker
+          docker-compose -f docker-compose.dev.yml up -d
+          sleep 30
+
+      - name: Check Symfony application (info)
+        run: |
+            docker exec app.catroweb bin/console about
+
+      - name: Create a livid environment with dummy data
+        # ToDo: would be nice to check the reset command, in the current state the reset command can't fail
+        run: |
+          docker exec app.catroweb bin/console catrobat:reset --hard
+
+      - name: Test response of the website running in the container
+        run: |
+          sudo apt-get update
+          sudo apt-get install apache2 wget
+          sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
+          sudo service apache2 reload
+          wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
+
+      - name: Run a few dynamic software tests
+        run: |
+          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+
+      - name: Test shared volumes
+        id: shared-test-run-must-fail
+        # Expecting failure inside a step is not supported. However, by manually adding a status variable and a second
+        # step to verify the result of the previous step (that can't fail) as a workaround it is possible.
+        continue-on-error: true
+        run: |
+          echo ::set-output name=status::failure
+          echo "INVALID" > tests/behat/features/web/general/homepage.feature
+          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+          echo ::set-output name=status::success
+      - name: This step is only executed if shared volumes are not working
+        if: steps.shared-test-run-must-fail.outputs.status == 'success'
+        run: |
+          exit -1
+

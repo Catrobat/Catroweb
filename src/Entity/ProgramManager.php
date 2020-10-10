@@ -285,10 +285,10 @@ class ProgramManager
 
       return null;
     }
-
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
+    $zip_exists = $this->file_repository->checkIfProgramFileExists($program->getId());
     $this->file_repository->saveProgramFile($file, $program->getId());
 
     $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
@@ -303,6 +303,10 @@ class ProgramManager
       (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$program->getId());
     }
     (new Filesystem())->remove($extracted_file->getPath());
+    if (!$zip_exists)
+    {
+      $this->file_repository->deleteProgramFile($program->getId());
+    }
 
     return $program;
   }
@@ -993,7 +997,7 @@ class ProgramManager
 
     $query_string = new QueryString();
     $query_string->setQuery($query);
-    $query_string->setFields(['id', 'name', 'description', 'getTagsString', 'getExtensionsString']);
+    $query_string->setFields(['id', 'name', 'description', 'getUsernameString', 'getTagsString', 'getExtensionsString']);
     $query_string->setAnalyzeWildcard();
     $query_string->setDefaultOperator('AND');
 

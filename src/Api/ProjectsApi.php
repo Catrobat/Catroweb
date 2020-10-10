@@ -2,6 +2,7 @@
 
 namespace App\Api;
 
+use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
@@ -17,6 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
+use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +43,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   private EntityManagerInterface $entity_manager;
   private TranslatorInterface $translator;
   private UrlGeneratorInterface $url_generator;
+  private RecommenderManager $recommender_manager;
 
   private FeaturedRepository $featured_repository;
 
@@ -51,7 +54,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
                               ImageRepository $featured_image_repository, UserManager $user_manager,
                               RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
-                              UrlGeneratorInterface $url_generator)
+                              UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
@@ -64,6 +67,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->translator = $translator;
     $this->url_generator = $url_generator;
     $this->user_manager = $user_manager;
+    $this->recommender_manager = $recommender_manager;
   }
 
   /**
@@ -81,9 +85,9 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectIdGet(string $project_id, &$responseCode, array &$responseHeaders)
+  public function projectIdGet(string $id, &$responseCode, array &$responseHeaders)
   {
-    $projects = $this->program_manager->getProgram($project_id);
+    $projects = $this->program_manager->getProgram($id);
     if (null == $projects || empty($projects))
     {
       $responseCode = Response::HTTP_NOT_FOUND;
@@ -139,10 +143,27 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
-    $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+    $recommended = 'recommended' === $category;
+    if ($recommended)
+    {
+      /** @var User $user */
+      $user = $this->getUser();
+      $programs = $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
+    }
+    else
+    {
+      $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+    }
     $responseCode = Response::HTTP_OK;
 
     return $this->getProjectsDataResponse($programs);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  {
   }
 
   /**
@@ -214,7 +235,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsSearchGet(string $query_string, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsSearchGet(string $query, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -222,12 +243,12 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
     $responseCode = Response::HTTP_OK;
 
-    if ('' === $query_string || ctype_space($query_string))
+    if ('' === $query || ctype_space($query))
     {
       return [];
     }
 
-    $programs = $this->program_manager->search($query_string, $limit, $offset, $max_version, $flavor);
+    $programs = $this->program_manager->search($query, $limit, $offset, $max_version, $flavor);
 
     return $this->getProjectsDataResponse($programs);
   }
@@ -262,23 +283,30 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsUserIdGet(string $user_id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsUserIdGet(string $id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
-    if ('' === $user_id || ctype_space($user_id) || null == $this->user_manager->findOneBy(['id' => $user_id]))
+    if ('' === $id || ctype_space($id) || null == $this->user_manager->findOneBy(['id' => $id]))
     {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
     }
 
-    $programs = $this->program_manager->getUserPublicPrograms($user_id, $limit, $offset, $flavor, $max_version);
+    $programs = $this->program_manager->getUserPublicPrograms($id, $limit, $offset, $flavor, $max_version);
     $responseCode = Response::HTTP_OK;
 
     return $this->getProjectsDataResponse($programs);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
+  {
   }
 
   /**

@@ -20,8 +20,8 @@ The official Swagger API documentation can be found at [GitHub](https://github.c
 
 ## How to get started: 
 
-You can find all important HowTo's in our [wiki](https://github.com/Catrobat/Catroweb-Symfony/wiki).
-Make sure all tests are passing when creating a pull request!
+You can find all important HowTo's in our [wiki](https://github.com/Catrobat/Catroweb-Symfony/wiki) and our [contribution guidelines](https://github.com/Catrobat/Catroweb/blob/develop/.github/contributing.md).
+Make sure all tests are passing when creating a pull request,
 
 [![Docker](https://img.shields.io/badge/Docker-supported-brightgreen.svg)](https://github.com/Catrobat/Catroweb/wiki/Docker)
 

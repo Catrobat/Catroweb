@@ -381,6 +381,21 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @When user :username uploads a valid Catrobat project, API version :api_version
+   *
+   * @param string $username    The name of the user who initiates the upload
+   * @param string $api_version The API version to be used
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function userUploadsAValidCatrobatProject(string $username, string $api_version): void
+  {
+    /** @var User|null $user */
+    $user = $this->getUserManager()->findUserByUsername($username);
+    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $user, $api_version);
+  }
+
+  /**
    * @When /^I upload another program using token "([^"]*)"$/
    *
    * @param mixed $arg1
@@ -1660,7 +1675,6 @@ class ApiContext implements KernelAwareContext
     $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_programs);
-
     Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
 
     foreach ($returned_programs as $returned_program)
@@ -1680,7 +1694,6 @@ class ApiContext implements KernelAwareContext
     $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredFeaturedPrograms($expected_programs);
-
     Assert::assertEquals(count($returned_programs), count($expected_programs),
       'Number of returned programs should be '.count($expected_programs));
 
@@ -2157,10 +2170,24 @@ class ApiContext implements KernelAwareContext
    */
   public function userUploadThisGeneratedProject(string $username, string $api_version): void
   {
+    $this::userUploadThisGeneratedProjectWithID($username, $api_version, '');
+  }
+
+  /**
+   * @When user :username uploads this generated program, API version :api_version, ID :id
+   *
+   * @param string $username    The name of the user uploading the project
+   * @param string $api_version The version of the API to be used
+   * @param string $id          Desired id of the project
+   *
+   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   */
+  public function userUploadThisGeneratedProjectWithID(string $username, string $api_version, string $id): void
+  {
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($username);
     Assert::assertNotNull($user);
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $user, $api_version);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $user, $api_version, $id);
   }
 
   /**
@@ -2515,6 +2542,7 @@ class ApiContext implements KernelAwareContext
   /**
    * @Given /^I have a project with "([^"]*)" set to "([^"]*)"$/
    * @Given /^I have a program with "([^"]*)" set to "([^"]*)"$/
+   * @Given /^there is a project with "([^"]*)" set to "([^"]*)"$/
    *
    * @param mixed $key
    * @param mixed $value

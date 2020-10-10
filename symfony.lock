@@ -42,13 +42,16 @@
         "version": "v1.3.0"
     },
     "catrobat/capi": {
-        "version": "v1.0.26"
+        "version": "v1.0.43"
     },
     "clue/stream-filter": {
         "version": "v1.4.1"
     },
     "cocur/slugify": {
         "version": "v4.0.0"
+    },
+    "codercat/jwk-to-pem": {
+        "version": "0.0.3"
     },
     "composer/semver": {
         "version": "1.5.1"
@@ -70,6 +73,9 @@
     },
     "dmore/chrome-mink-driver": {
         "version": "2.7.0"
+    },
+    "dnoegel/php-xdg-base-dir": {
+        "version": "v0.1.1"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -448,7 +454,7 @@
         "version": "1.1.0"
     },
     "phpoption/phpoption": {
-        "version": "1.7.2"
+        "version": "1.7.5"
     },
     "phpseclib/phpseclib": {
         "version": "2.0.25"
@@ -527,8 +533,17 @@
     "react/promise": {
         "version": "v2.8.0"
     },
+    "rosell-dk/image-mime-type-guesser": {
+        "version": "0.3"
+    },
+    "rosell-dk/webp-convert": {
+        "version": "2.3.2"
+    },
     "ruflin/elastica": {
         "version": "6.1.1"
+    },
+    "sebastian/cli-parser": {
+        "version": "1.0.0"
     },
     "sebastian/code-unit": {
         "version": "1.0.2"

@@ -227,7 +227,7 @@ class ProgramRepository extends ServiceEntityRepository
   /**
    * @return Program[]
    */
-  public function getMostLikedPrograms(bool $debug_build, string $flavor = 'pocketcode', ?int $limit = 20, int $offset = 0): array
+  public function getMostLikedPrograms(bool $debug_build, string $flavor = null, ?int $limit = 20, int $offset = 0): array
   {
     if (isset($this->cached_most_liked_programs_full_result[$flavor]))
     {
@@ -539,7 +539,7 @@ class ProgramRepository extends ServiceEntityRepository
     {
       if (true === $program->getVisible() && false === $program->getPrivate() &&
         ($debug_build || false === $program->isDebugBuild()) &&
-        ('0' === $max_version || $max_version <= $program->getLanguageVersion()))
+        ('0' === $max_version || $program->getLanguageVersion() <= $max_version))
       {
         $filtered_programs[] = $program;
       }

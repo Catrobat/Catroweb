@@ -37,7 +37,14 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-
+        api_authentication_oauth_login:
+            provider: chain_provider
+            pattern:  ^/api/authentication/oauth
+            methods: [POST]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         api_user:
             provider: chain_provider
             pattern: ^/api/user$

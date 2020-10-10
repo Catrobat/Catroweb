@@ -1,0 +1,74 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** Continuous Delivery **
+#
+#  Test deployments are handled by a python script that run on a schedule: https://github.com/Catrobat/Catroweb-API
+#  However, the deployment to production is handled by this workflow.
+#
+#  - Secrets required!
+#
+#  ToDo: currently disabled.
+#
+name: Continuous Delivery
+
+# Run-on every merge of a pull request into the master branch
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Deployment:
+  #
+  #  - requires a VPN connection to the TU Graz. (SSH is only allowed inside the university network)
+  #  - a SSH connection is required (public key must be registered on server!)
+  #  - Add all credentials hidden in secrets to the configuration files
+  #  - The current script is build within the Symfony framework, hence, the container is used to run the script.
+  #
+  deploy:
+    if: false # Currently disabled!
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Connect to TUG via VPN
+        run: |
+          sudo apt-get --yes --force-yes install openconnect
+          printf '${{ secrets.VPN_PASSWD }}' | sudo openconnect vpn.tugraz.at --user=${{ secrets.VPN_USER }} & disown
+
+      - name: Set deployment script secrets (.env.local)
+        run: |
+          printf '\nDEPLOY_GIT=https://github.com/Catrobat/Catroweb-Symfony.git\n' >> .env.local
+          printf 'DEPLOY_WEBTEST=${{ secrets.DEP_WEBTEST_HOST }}\n' >> .env.local
+          printf 'DEPLOY_WEBTEST_BRANCH="master"\n' >> .env.local
+          printf 'DEP_USER="Catroweb Github Action"\n' >> .env.local
+          printf 'SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK }}\n' >> .env.local
+
+      - name: Build Container
+        run: |
+          cd docker
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml up -d
+
+      - name: Install SSH in container
+        run: |
+          docker exec app.catroweb.test apt-get --yes --force-yes install ssh
+
+      - name: Install SSH key in container
+        run: |
+          docker exec app.catroweb.test mkdir /root/.ssh
+          docker exec app.catroweb.test chmod 700 /root/.ssh
+          mkdir ssh_tmp
+          echo "${{ secrets.DEP_WEBTEST_SSH_KEY }}" > ssh_tmp/id_rsa
+          docker cp ssh_tmp/id_rsa app.catroweb.test:/root/.ssh/id_rsa
+          docker exec app.catroweb.test chmod 600 /root/.ssh/id_rsa
+          docker cp app.catroweb.test:/etc/ssh/ssh_config ssh_tmp
+          echo "    StrictHostKeyChecking no" >> ssh_tmp/ssh_config
+          docker cp ssh_tmp/ssh_config app.catroweb.test:/etc/ssh/ssh_config
+          rm -rf ssh_tmp
+
+      - name: Deploy
+        run:
+          docker exec app.catroweb.test bin/dep deploy share

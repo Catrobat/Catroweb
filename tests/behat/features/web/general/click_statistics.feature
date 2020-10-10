@@ -129,29 +129,30 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     And I should see "Galaxy"
     And I should see "p2"
 
-#  @javascript
-#  Scenario: Create one statistic entry from recommended programs on homepage
-#    Given there are projects:
-#      | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version |
-#      | 21 | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
-#      | 22 | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
-#      | 23 | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
-#
-#    And there are project reactions:
-#      | user      | project | type | created at       |
-#      | Catrobat  | 21      | 1    | 01.01.2017 12:00 |
-#      | Catrobat  | 22      | 2    | 01.01.2017 12:00 |
-#      | OtherUser | 21      | 4    | 01.01.2017 12:00 |
-#    Given I am on the homepage
-#    And I wait for the page to be loaded
-#    Then I should see a recommended homepage program having ID "21" and name "Minions"
-#    When I click on the first recommended homepage program
-#    And I wait for AJAX to finish
-#    Then There should be one database entry with type is "rec_homepage" and "program_id" is "21"
-#    And There should be one database entry with type is "rec_homepage" and "user_specific_recommendation" is "false"
-#    And There should be no homepage click statistic database entry
-#    And I should see "Minions"
-#    And I should see "p1"
+  @javascript
+  Scenario: Create one statistic entry from recommended programs on homepage
+    Given there are projects:
+      | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version |
+      | 21 | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 22 | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
+      | 23 | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
+
+    And there are project reactions:
+      | user      | project | type | created at       |
+      | Catrobat  | 21      | 1    | 01.01.2017 12:00 |
+      | Catrobat  | 22      | 2    | 01.01.2017 12:00 |
+      | OtherUser | 21      | 4    | 01.01.2017 12:00 |
+    Given I am on the homepage
+    And I wait for the page to be loaded
+    Then Project with the id "21" should be visible in the "recommended" category
+    When I click on a "recommended" homepage program having program id "21"
+    And I wait for AJAX to finish
+    Then There should be one database entry with type is "rec_homepage" and "program_id" is "21"
+    And There should be one database entry with type is "rec_homepage" and "user_specific_recommendation" is "false"
+    And There should be no homepage click statistic database entry
+    And I should see "Minions"
+    And I should see "p1"
+  
 #
 #  @javascript
 #  Scenario: Create one statistic entry from recommended program that has been also downloaded by users that downloaded this program

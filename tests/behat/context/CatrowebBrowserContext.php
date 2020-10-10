@@ -1905,6 +1905,56 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @When /^Project with the id "([^"]*)" should be visible in the "([^"]*)" category$/
+   *
+   * @param mixed $program_id
+   * @param mixed $category
+   *
+   * @throws ElementNotFoundException
+   */
+  public function projectExistsinTheRecommendedCategory($program_id, $category): void
+  {
+    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
+    $element = null;
+    foreach ($projects as $project)
+    {
+      $link = explode('/', $project->getAttribute('href'));
+      if (end($link) === $program_id)
+      {
+        $element = $project;
+        break;
+      }
+    }
+
+    $this->assertSession()->elementExists('xpath', $element->getXpath());
+  }
+
+  /**
+   * @When /^Project with the id "([^"]*)" should not be visible in the "([^"]*)" category$/
+   *
+   * @param mixed $program_id
+   * @param mixed $category
+   *
+   * @throws ElementNotFoundException
+   * @throws ExpectationException
+   */
+  public function projectDoesNotExistsinTheRecommendedCategory($program_id, $category): void
+  {
+    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
+    $element = null;
+    foreach ($projects as $project)
+    {
+      $link = explode('/', $project->getAttribute('href'));
+      if (end($link) === $program_id)
+      {
+        $element = $project;
+        break;
+      }
+    }
+    Assert::assertNull($element, 'Element exists in the recommended category');
+  }
+
+  /**
    * @When /^I click on the first recommended specific program$/
    *
    * @throws ElementNotFoundException

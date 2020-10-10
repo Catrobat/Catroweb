@@ -15,15 +15,15 @@ Feature: As a visitor I want to write, see and report comments.
       | 3  | project 3 | OtherUser |
 
     And there are comments:
-      | program_id | user_id | upload_date      | text | user_name | reported |
-      | 1          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
-      | 2          | 2       | 01.01.2013 12:01 | c2   | OtherUser | true     |
-      | 2          | 2       | 01.01.2013 12:01 | c3   | OtherUser | true     |
-      | 2          | 2       | 01.01.2013 12:01 | c4   | OtherUser | true     |
-      | 2          | 1       | 01.01.2013 12:01 | c5   | Catrobat  | true     |
-      | 2          | 1       | 01.01.2013 12:01 | c6   | Catrobat  | true     |
-      | 2          | 1       | 01.01.2013 12:01 | c7   | Catrobat  | true     |
-      | 2          | 1       | 01.01.2013 12:01 | c8   | Catrobat  | true     |
+      | program_id | user_id | text |
+      | 1          | 1       | c1   |
+      | 2          | 2       | c2   |
+      | 2          | 2       | c3   |
+      | 2          | 2       | c4   |
+      | 2          | 1       | c5   |
+      | 2          | 1       | c6   |
+      | 2          | 1       | c7   |
+      | 2          | 1       | c8   |
 #      3 has no comments
 
 

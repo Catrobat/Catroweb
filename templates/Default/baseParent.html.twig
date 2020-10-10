@@ -53,9 +53,10 @@
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 <script src="{{ asset('js/base.min.js') }}"></script>
 
-<script> {# seems to be needed for some behat tests #} let configGA = { 'UaId': 'UA-42270417-5' } </script>
-
+{% if app_env == 'prod' %}
+<script> let configGA = { 'UaId': 'UA-42270417-5' } </script>
 <script async src="{{ asset('js/analytics.min.js') }}"></script>
+{% endif %}
 
 {# Main Script #}
 <script>

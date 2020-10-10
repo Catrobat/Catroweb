@@ -34,6 +34,7 @@ public/**
 !public/resources_test/**
 !public/index.php
 !public/index_test.php
+!public/webp-on-demand.php
 !public/robots.txt
 
 ### tests ###

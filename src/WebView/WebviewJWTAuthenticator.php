@@ -54,6 +54,8 @@ class WebviewJWTAuthenticator extends JWTTokenAuthenticator
   }
 
   /**
+   * @psalm-suppress ParamNameMismatch
+   *
    * @throws HttpException
    *
    * @return Response|void|null

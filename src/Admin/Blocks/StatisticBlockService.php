@@ -31,17 +31,17 @@ class StatisticBlockService extends AbstractBlockService
   /**
    * {@inheritdoc}
    */
-  public function execute(BlockContextInterface $block, Response $response = null)
+  public function execute(BlockContextInterface $blockContext, Response $response = null)
   {
-    $settings = $block->getSettings();
+    $settings = $blockContext->getSettings();
 
     $wholeSpace = disk_total_space('/');
     $freeSpaceRaw = disk_free_space('/');
     $wholeSpaceRaw = $wholeSpace;
     $usedSpace = $wholeSpaceRaw - $freeSpaceRaw;
 
-    return $this->renderResponse($block->getTemplate(), [
-      'block' => $block->getBlock(),
+    return $this->renderResponse($blockContext->getTemplate(), [
+      'block' => $blockContext->getBlock(),
       'settings' => $settings,
       'wholeSpace' => $this->getSymbolByQuantity($wholeSpace),
       'wholeSpace_raw' => $wholeSpaceRaw,

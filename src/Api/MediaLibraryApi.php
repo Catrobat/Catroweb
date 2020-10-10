@@ -38,14 +38,14 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesSearchGet(string $query_string, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
+  public function mediaFilesSearchGet(string $query, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
     $responseCode = Response::HTTP_OK;
 
-    $found_media_files = $this->media_package_file_repository->search($query_string, $flavor, $package_name, $limit, $offset);
+    $found_media_files = $this->media_package_file_repository->search($query, $flavor, $package_name, $limit, $offset);
 
     return $this->getMediaFilesDataResponse($found_media_files);
   }
@@ -53,13 +53,13 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaPackageNameGet(string $package_name, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
+  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
     $media_package = $this->entity_manager->getRepository(MediaPackage::class)
-      ->findOneBy(['nameUrl' => $package_name])
+      ->findOneBy(['nameUrl' => $name])
     ;
 
     if (null === $media_package)

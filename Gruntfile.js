@@ -119,8 +119,10 @@ const COPY_CONFIG =
       dest: PUBLIC_DIRECTORY + '/js/modules/clipboard.min.js'
     },
     bootstrap_js: {
-      src: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
-      dest: PUBLIC_DIRECTORY + '/js/modules/bootstrap.min.js'
+      expand: true,
+      cwd: 'node_modules/bootstrap/dist/js',
+      src: '*',
+      dest: PUBLIC_DIRECTORY + '/js/modules/'
     },
     sweetalert_all: {
       src: 'node_modules/sweetalert2/dist/sweetalert2.all.min.js',
@@ -225,8 +227,8 @@ const PURGECSS_CONFIG = {
       'public/css/pocketgalaxy/base.css': ['public/css/pocketgalaxy/base.css'],
     }
   }
-  
-  
+
+
 }
 
 // -------------------------------------------------------------------------------------------------

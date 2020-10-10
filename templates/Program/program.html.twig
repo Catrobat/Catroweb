@@ -34,7 +34,7 @@
           {{ program.user }}
         </a>
         <span>
-          <i class="material-icons d-none project-view-spinner" id="project-user-spinner{{ suffix|default('') }}">
+          <i class="material-icons d-none" id="project-user-spinner{{ suffix|default('') }}">
             {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'user-spinner' ~ suffix|default(), small: 'true'} %}
           </i>
         </span>

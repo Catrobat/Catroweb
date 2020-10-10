@@ -1,6 +1,12 @@
-# Here you can define the update schedule of Dependabot
-# Dependabot is integrated on GitHub and can be deactivated in the GitHub settings
-
+#
+# **Dependabot** (https://dependabot.com/):
+#
+#   - automatically updates all dependencies
+#   - creates a new PR for every updated dependency (PR comment contains change-logs)
+#   - is integrated on GitHub and can be deactivated in the GitHub settings (ask a product-
+#
+#   - use this file to configure which dependencies (package-ecosystem) should be updated and on what schedule_
+#
 version: 2
 updates:
 
@@ -25,5 +31,5 @@ updates:
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    interval: "daily"
+    interval: daily
   open-pull-requests-limit: 99
