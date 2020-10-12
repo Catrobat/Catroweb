@@ -2,7 +2,7 @@
 
 namespace App\Commands\Create;
 
-use App\Entity\FeaturedProgram;
+use App\Entity\ExampleProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\UserManager;
@@ -15,9 +15,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
-class CreateFeatureProgramCommand extends Command
+class CreateExampleProgramCommand extends Command
 {
-  protected static $defaultName = 'catrobat:feature';
+  protected static $defaultName = 'catrobat:example';
 
   private UserManager $user_manager;
 
@@ -39,9 +39,9 @@ class CreateFeatureProgramCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:feature')
-      ->setDescription('feature a project')
-      ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets featured')
+    $this->setName('catrobat:example')
+      ->setDescription('make a example project')
+      ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program which gets a example')
     ;
   }
 
@@ -58,33 +58,39 @@ class CreateFeatureProgramCommand extends Command
 
     try
     {
-      $this->featureProgram($program);
+      $this->exampleProgram($program);
     }
     catch (Exception $e)
     {
+      $output->writeln('Failed to example: '.$program->getName().' '.$e->getMessage());
+
       return 2;
     }
-    $output->writeln('Featuring '.$program->getName());
+    $output->writeln('Example: '.$program->getName());
 
     return 0;
   }
 
-  private function featureProgram(Program $program): void
+  /**
+   * @throws Exception
+   */
+  private function exampleProgram(Program $program): void
   {
-    $feature = new FeaturedProgram();
-    $feature->setProgram($program);
-    $feature->setActive(true);
-    $feature->setFlavor($this->flavor_repository->getFlavorByName('pocketcode'));
-    $feature->setImageType('jpeg'); //todo picture?
-    $feature->setUrl(null);
+    $example = new ExampleProgram();
+    $example->setProgram($program);
+    $example->setActive(true);
+    $example->setFlavor(random_int(0, 1) ? $this->flavor_repository->getFlavorByName('arduino') : $this->flavor_repository->getFlavorByName('embroidery'));
+    $example->setImageType('jpeg'); //todo picture?
+    $example->setUrl(null);
+    $example->setForIos(false);
 
     $source_img = 'public/resources/screenshots/screen_'.$program->getId().'.png';
-    $dest_img = 'public/resources/featured/screen_'.$program->getId().'.png';
+    $dest_img = 'public/resources/example/screen_'.$program->getId().'.png';
     copy($source_img, $dest_img);
     $file = new File($dest_img);
-    $feature->setNewFeaturedImage($file);
+    $example->setNewExampleImage($file);
 
-    $this->entity_manager->persist($feature);
+    $this->entity_manager->persist($example);
     $this->entity_manager->flush();
   }
 }

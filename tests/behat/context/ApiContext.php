@@ -3128,6 +3128,26 @@ class ApiContext implements KernelAwareContext
     Assert::assertStringStartsWith('/app/project/', $this->getKernelBrowser()->getRequest()->getPathInfo());
   }
 
+  /**
+   * @Then /^the response should contain example projects in the following order:$/
+   */
+  public function theResponseShouldContainExampleProjectsInTheFollowingOrder(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $returned_programs = json_decode($response->getContent(), true);
+    $expected_programs = $table->getHash();
+    $stored_programs = $this->getStoredPrograms($expected_programs);
+    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
+
+    foreach ($returned_programs as $returned_program)
+    {
+      $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
+      Assert::assertNotEmpty($stored_program);
+      $this->testExampleProgramStructure($stored_program, $returned_program);
+    }
+  }
+
   private function findProgram(array $programs, string $wanted_program_name): array
   {
     foreach ($programs as $program)
@@ -3624,6 +3644,29 @@ class ApiContext implements KernelAwareContext
     foreach ($this->user_structure as $key)
     {
       Assert::assertEquals($stored_user[$key], $returned_user[$key]);
+    }
+  }
+
+  private function testExampleProgramStructure(array $stored_program, array $example_project): void
+  {
+    Assert::assertNotEmpty($stored_program);
+    Assert::assertNotEmpty($example_project);
+    foreach ($this->program_structure as $key)
+    {
+      if (array_key_exists($key, $stored_program))
+      {
+        Assert::assertEquals($stored_program[$key], $example_project[$key]);
+      }
+      elseif ('screenshot_large' === $key)
+      {
+        Assert::assertContains($this->pathWithoutParam($example_project[$key]),
+          ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);
+      }
+      elseif ('screenshot_small' === $key)
+      {
+        Assert::assertContains($this->pathWithoutParam($example_project[$key]),
+          ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);
+      }
     }
   }
 }

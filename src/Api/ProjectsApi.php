@@ -47,11 +47,11 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   private FeaturedRepository $featured_repository;
 
-  private ImageRepository $featured_image_repository;
+  private ImageRepository $image_repository;
 
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
-                              ImageRepository $featured_image_repository, UserManager $user_manager,
+                              ImageRepository $image_repository, UserManager $user_manager,
                               RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
                               UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager)
@@ -60,7 +60,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->session = $session;
     $this->time_formatter = $time_formatter;
     $this->featured_repository = $featured_repository;
-    $this->featured_image_repository = $featured_image_repository;
+    $this->image_repository = $image_repository;
     $this->request_stack = $request_stack;
     $this->token_storage = $token_storage;
     $this->entity_manager = $entity_manager;
@@ -122,7 +122,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
         'id' => $featured_program->getId(),
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
-        'featured_image' => $this->featured_image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
+        'featured_image' => $this->image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
       ];
       $new_featured_project = new FeaturedProjectResponse($result);
       $featured_programs[] = $new_featured_project;
@@ -331,8 +331,8 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
       'flavor' => $project->getFlavor(),
       'uploaded' => $project->getUploadedAt()->getTimestamp(),
       'uploaded_string' => $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp()),
-      'screenshot_large' => $this->program_manager->getScreenshotLarge($project->getId()),
-      'screenshot_small' => $this->program_manager->getScreenshotSmall($project->getId()),
+      'screenshot_large' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->program_manager->getScreenshotLarge($project->getId()),
+      'screenshot_small' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->program_manager->getScreenshotSmall($project->getId()),
       'project_url' => ltrim($this->generateUrl(
         'program',
         [

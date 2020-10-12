@@ -109,6 +109,7 @@ class ResetCommand extends Command
     $this->featureProjects($program_names, $output);
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
+    $this->exampleProject($program_names, $output);
 
     //https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
@@ -385,6 +386,26 @@ class ResetCommand extends Command
       if (0 !== $ret)
       {
         $output->writeln('Remix Action failed for '.json_encode($parameters).' error code: '.$ret);
+      }
+    }
+  }
+
+  private function exampleProject(array $program_names, OutputInterface $output): void
+  {
+    $rand_start = random_int(1, 2);
+    $rand_interval = random_int(4, 6);
+
+    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_interval)
+    {
+      $parameters = [
+        'program_name' => $program_names[$i % sizeof($program_names)],
+      ];
+      $ret = CommandHelper::executeSymfonyCommand('catrobat:example', $this->getApplication(), $parameters, $output);
+
+      if (0 !== $ret)
+      {
+        // Might fail because of missing screenshots!
+        $output->writeln('Setting project to example failed for '.json_encode($parameters).' error code: '.$ret);
       }
     }
   }
