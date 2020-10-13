@@ -58,7 +58,7 @@
     "@material/progress-indicator": "^7.0.0",
     "@material/snackbar": "^7.0.0",
     "@material/top-app-bar": "^7.0.0",
-    "ajv": "^6.12.5",
+    "ajv": "^6.12.6",
     "animate.css": "^4.1.1",
     "animatedmodal": "^1.0.0",
     "bootstrap": "^4.5.2",
