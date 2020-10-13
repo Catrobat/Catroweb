@@ -216,8 +216,8 @@ class UserNotifications {
       msg = msg.replace('%program_link%', '<a href="' + self.programPath + '/' + fetched.program +
         '">' + fetched.program_name + '</a>')
     }
-    if (msg.includes('%remixed_program_link%')) {
-      msg = msg.replace('%remixed_program_link%', '<a href="' + self.programPath + '/' +
+    if (msg.includes('%remix_program_link%')) {
+      msg = msg.replace('%remix_program_link%', '<a href="' + self.programPath + '/' +
         fetched.remixed_program + '">' + fetched.remixed_program_name + '</a>')
     }
     if (fetched.prize) {
