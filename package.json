@@ -7,7 +7,8 @@
     "test": "npx eslint assets/js/**/*.js",
     "fix": "npx eslint assets/js/**/*.js --fix",
     "test-style": "npx stylelint assets/css/**/*.scss",
-    "fix-style": "npx stylelint assets/css/**/*.scss --fix"
+    "fix-style": "npx stylelint assets/css/**/*.scss --fix",
+    "encore": "encore"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
   "homepage": "https://github.com/Catrobat/Catroweb-Symfony#readme",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@symfony/webpack-encore": "^0.31.0",
+    "core-js": "^3.6.5",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.1",
@@ -40,9 +43,11 @@
     "jit-grunt": "^0.10.0",
     "node-sass": "^4.14.1",
     "sass": "^1.27.0",
+    "sass-loader": "^8.0.2",
     "standard": "^14.3.4",
     "stylelint": "^13.7.2",
-    "stylelint-config-twbs-bootstrap": "^2.1.0"
+    "stylelint-config-twbs-bootstrap": "^2.1.0",
+    "webpack-notifier": "^1.8.0"
   },
   "dependencies": {
     "@material/chips": "^7.0.0",

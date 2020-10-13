@@ -46,6 +46,7 @@ services:
       #         If needed, shared files should be explicitly defined:
       - ./../public/index.php:/var/www/catroweb/public/index.php:cached
       - ./../public/index_test.php:/var/www/catroweb/public/index_test.php:cached
+      - ./../public/build:/var/www/catroweb/public/build
       #
       - ./../src:/var/www/catroweb/src:cached
       - ./../templates:/var/www/catroweb/templates:cached
@@ -87,6 +88,7 @@ services:
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
+      - ./../webpack.config.js:/var/www/catroweb/webpack.config.js
 
       # Sharing npm package files is not working (at least on windows) - feel free to try it out on any other OS
 #      - ./../package.json:/var/www/catroweb/package.json
