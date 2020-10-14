@@ -478,7 +478,6 @@ trait SymfonySupport
     }
     $example_program->setFlavor($flavor);
 
-    $example_program->setUrl($config['url'] ?? null);
     $example_program->setImageType($config['imagetype'] ?? 'jpg');
     $example_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
     $example_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
