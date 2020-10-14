@@ -162,7 +162,7 @@ class CatrobatFileSanitizer
       return '';
     }
 
-    $limit = null;
+    $limit = -1;
     $pattern = '@/@';
     $array = preg_split($pattern, $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY);
     $needle = @end($array);
