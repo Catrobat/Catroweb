@@ -186,18 +186,19 @@ $program-tile-width: 85px;
 .button-show-more,
 .button-show-ajax,
 .button-show-less {
+  display: none;
   margin: 0 15px;
   color: $primary;
   text-align: center;
+
+  .circular-progress {
+    text-align: initial;
+  }
 }
 
 .button-show-more {
   font-size: 3em;
   cursor: pointer;
-}
-
-.button-show-ajax {
-  display: none;
 }
 
 .button-show-less {

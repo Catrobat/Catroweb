@@ -20,7 +20,7 @@
       {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default()} %}
     </i>
   </div>
-  {% if isVersionSupportedByCatBlocks(version) %}
+  {% if isVersionSupportedByCatBlocks(version) == false %}
 
     <div id='catblocks-code-container'>
     </div>
