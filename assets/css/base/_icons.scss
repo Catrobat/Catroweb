@@ -11,6 +11,18 @@
   }
 }
 
+.catro-round-icon-button
+{
+  color: $white;
+  cursor: pointer;
+  background-color: $primary;
+  border-radius: 50%;
+  &:hover
+  {
+    background-color: darken($primary, 10);
+  }
+}
+
 .load-ajax-icon
 {
   display: none;

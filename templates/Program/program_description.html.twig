@@ -6,7 +6,7 @@
           {% if app.user and my_program %}
             <a data-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
               <i id="edit-description-button"
-                 class="ml-3 material-icons catro-icon-button">edit</i>
+                 class="ml-3 material-icons catro-icon-button align-bottom">edit</i>
             </a>
           {% endif %}
         </span>
@@ -19,8 +19,8 @@
                   maxlength="{{ max_description_size }}" style="width: 100%;" rows="10">
     {% if program.description %}{{program.description}}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
           </textarea>
-        <button id="edit-description-submit-button" class="btn btn-primary p-3 mb-5">
-          <i class="fa fa-floppy-o mr-2"></i>
+        <button id="edit-description-submit-button" class="btn btn-primary mb-5">
+          <i class="material-icons align-bottom">save</i>
           {{ 'programs.saveDescription'|trans({}, 'catroweb') }}
         </button>
       </div>
@@ -39,7 +39,7 @@
             {% if app.user and my_program %}
               <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
                 <i id="edit-credits-button"
-                   class="ml-3 material-icons catro-icon-button">edit</i>
+                   class="ml-3 material-icons catro-icon-button align-bottom">edit</i>
               </a>
             {% endif %}
           </span>
@@ -64,7 +64,7 @@
               {% if app.user and my_program %}
                 <a data-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
                   <i id="edit-credits-button"
-                     class="ml-3 material-icons catro-icon-button">edit</i>
+                     class="ml-3 material-icons catro-icon-button align-bottom">edit</i>
                 </a>
               {% endif %}
             </span>
@@ -75,8 +75,8 @@
                   maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
           {% if program.credits %}{{ program.credits }}{% else %}{{ "noCredits"|trans({}, "catroweb") }}{% endif %}
           </textarea>
-        <button id="edit-credits-submit-button" class="btn btn-primary p-3 mb-5">
-          <i class="fa fa-floppy-o mr-2"></i>
+        <button id="edit-credits-submit-button" class="btn btn-primary mb-5">
+          <i class="material-icons align-bottom">save</i>
           {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
         </button>
       </div>
