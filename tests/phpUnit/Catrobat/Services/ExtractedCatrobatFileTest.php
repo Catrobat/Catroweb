@@ -63,17 +63,26 @@ class ExtractedCatrobatFileTest extends TestCase
     $second_expected_url = '/app/project/3570';
     $new_program_id = '3571';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
-    $this->assertCount(2, $urls);
+
+    $expectedCount = 2;
+    $expectedProgramIds = ['117697631', '3570'];
+    $expectedUrls = [$first_expected_url, $second_expected_url];
+    $this->assertions($expectedCount, $urls, $expectedUrls, $expectedProgramIds, [true, false], [true, false]);
+
+    /*
+     $this->assertCount(2, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('117697631', $urls[0]->getProgramId());
     $this->assertTrue($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[1]);
     $this->assertSame($second_expected_url, $urls[1]->getUrl());
     $this->assertSame('3570', $urls[1]->getProgramId());
     $this->assertFalse($urls[1]->isScratchProgram());
     $this->assertFalse($urls[1]->isAbsoluteUrl());
+     */
   }
 
   public function testCanExtractSimpleCatrobatAbsoluteRemixUrl(): void
@@ -83,12 +92,17 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $first_expected_url;
     $new_program_id = '1300';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$first_expected_url], ['1234'], [false], [true]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('1234', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     */
   }
 
   public function testNotExtractNumberFromNormalText(): void
@@ -108,12 +122,17 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $first_expected_url;
     $new_program_id = '1';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$first_expected_url], ['117697631'], [true], [true]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('117697631', $urls[0]->getProgramId());
     $this->assertTrue($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     */
   }
 
   public function testCanExtractSimpleRelativeCatrobatRemixUrl(): void
@@ -123,12 +142,17 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $first_expected_url;
     $new_program_id = '6310';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$first_expected_url], ['3570'], [false], [false]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('3570', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertFalse($urls[0]->isAbsoluteUrl());
+     */
   }
 
   public function testCanExtractMergedProgramRemixUrls(): void
@@ -140,17 +164,23 @@ class ExtractedCatrobatFileTest extends TestCase
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(2, $urls, [$first_expected_url, $second_expected_url], ['1234', '3570'], [false, false], [true, true]);
+
+    /*
     $this->assertCount(2, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('1234', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     *
     $this->assertInstanceOf(RemixData::class, $urls[1]);
     $this->assertSame($second_expected_url, $urls[1]->getUrl());
     $this->assertSame('3570', $urls[1]->getProgramId());
     $this->assertFalse($urls[1]->isScratchProgram());
     $this->assertTrue($urls[1]->isAbsoluteUrl());
+     */
   }
 
   public function testExtractUniqueProgramRemixUrls(): void
@@ -162,12 +192,17 @@ class ExtractedCatrobatFileTest extends TestCase
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$first_expected_url, $second_expected_url], ['1234'], [false], [true]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('1234', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     */
   }
 
   public function testDontExtractProgramRemixUrlsReferencingToCurrentProgram(): void
@@ -179,12 +214,17 @@ class ExtractedCatrobatFileTest extends TestCase
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($second_expected_url, $urls[0]->getUrl());
     $this->assertSame('790', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     * */
   }
 
   public function testExtractOnlyOlderProgramRemixUrls(): void
@@ -196,12 +236,17 @@ class ExtractedCatrobatFileTest extends TestCase
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($second_expected_url, $urls[0]->getUrl());
     $this->assertSame('790', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     * */
   }
 
   public function testCanExtractDoubleMergedProgramRemixUrls(): void
@@ -216,22 +261,30 @@ class ExtractedCatrobatFileTest extends TestCase
         .'], The Periodic Table 2 ['.$third_expected_url.']]';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(3, $urls, [$first_expected_url, $second_expected_url, $third_expected_url],
+      ['1234', '3570', '121648946'], [false, false, true], [true, true, true]);
+
+    /*
     $this->assertCount(3, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('1234', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[1]);
     $this->assertSame($second_expected_url, $urls[1]->getUrl());
     $this->assertSame('3570', $urls[1]->getProgramId());
     $this->assertFalse($urls[1]->isScratchProgram());
     $this->assertTrue($urls[1]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[2]);
     $this->assertSame($third_expected_url, $urls[2]->getUrl());
     $this->assertSame('121648946', $urls[2]->getProgramId());
     $this->assertTrue($urls[2]->isScratchProgram());
     $this->assertTrue($urls[2]->isAbsoluteUrl());
+     * */
   }
 
   public function testExtractUniqueProgramRemixUrlsOfDoubleMergedProgram(): void
@@ -246,17 +299,24 @@ class ExtractedCatrobatFileTest extends TestCase
         .'], The Periodic Table 2 ['.$third_expected_url.']]';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(2, $urls, [$first_expected_url, $second_expected_url],
+      ['1234', '121648946'], [false, true], [true, true]);
+
+    /*
     $this->assertCount(2, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('1234', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[1]);
     $this->assertSame($second_expected_url, $urls[1]->getUrl());
     $this->assertSame('121648946', $urls[1]->getProgramId());
     $this->assertTrue($urls[1]->isScratchProgram());
     $this->assertTrue($urls[1]->isAbsoluteUrl());
+     * */
   }
 
   public function testDontExtractProgramRemixUrlsReferencingToCurrentDoubleMergedProgram(): void
@@ -271,12 +331,18 @@ class ExtractedCatrobatFileTest extends TestCase
         .'], The Periodic Table 2 ['.$third_expected_url.']]';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$first_expected_url],
+      ['1234'], [false], [true]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('1234', $urls[0]->getProgramId());
     $this->assertFalse($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     * */
   }
 
   public function testCanExtractMultipleMergedRemixUrls(): void
@@ -292,27 +358,36 @@ class ExtractedCatrobatFileTest extends TestCase
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(4, $urls, [$first_expected_url, $second_expected_url, $third_expected_url, $fourth_expected_url],
+      ['117697631', '3570', '121648946', '16267'], [true, false, true, false], [true, false, true, true]);
+
+    /*
     $this->assertCount(4, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('117697631', $urls[0]->getProgramId());
     $this->assertTrue($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[1]);
     $this->assertSame($second_expected_url, $urls[1]->getUrl());
     $this->assertSame('3570', $urls[1]->getProgramId());
     $this->assertFalse($urls[1]->isScratchProgram());
     $this->assertFalse($urls[1]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[2]);
     $this->assertSame($third_expected_url, $urls[2]->getUrl());
     $this->assertSame('121648946', $urls[2]->getProgramId());
     $this->assertTrue($urls[2]->isScratchProgram());
     $this->assertTrue($urls[2]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[3]);
     $this->assertSame($fourth_expected_url, $urls[3]->getUrl());
     $this->assertSame('16267', $urls[3]->getProgramId());
     $this->assertFalse($urls[3]->isScratchProgram());
     $this->assertTrue($urls[3]->isAbsoluteUrl());
+     * */
   }
 
   public function testExtractUniqueProgramRemixUrlsOfMultipleMergedProgram(): void
@@ -328,17 +403,24 @@ class ExtractedCatrobatFileTest extends TestCase
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(2, $urls, [$first_expected_url, $second_expected_url],
+      ['117697631', '16267'], [true, false], [true, false]);
+
+    /*
     $this->assertCount(2, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('117697631', $urls[0]->getProgramId());
     $this->assertTrue($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[1]);
     $this->assertSame($second_expected_url, $urls[1]->getUrl());
     $this->assertSame('16267', $urls[1]->getProgramId());
     $this->assertFalse($urls[1]->isScratchProgram());
     $this->assertFalse($urls[1]->isAbsoluteUrl());
+     * */
   }
 
   public function testExtractOnlyOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsAnInitialVersion(): void
@@ -354,12 +436,18 @@ class ExtractedCatrobatFileTest extends TestCase
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+
+    $this->assertions(1, $urls, [$first_expected_url],
+      ['117697631'], [true], [true]);
+
+    /*
     $this->assertCount(1, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('117697631', $urls[0]->getProgramId());
     $this->assertTrue($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+     * */
   }
 
   public function testExtractOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsNotAnInitialVersion(): void
@@ -375,17 +463,24 @@ class ExtractedCatrobatFileTest extends TestCase
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, false, $program_repository);
+
+    $this->assertions(2, $urls, [$first_expected_url, $fourth_expected_url],
+      ['117697631', '16268'], [true, false], [true, true]);
+
+    /*
     $this->assertCount(2, $urls);
     $this->assertInstanceOf(RemixData::class, $urls[0]);
     $this->assertSame($first_expected_url, $urls[0]->getUrl());
     $this->assertSame('117697631', $urls[0]->getProgramId());
     $this->assertTrue($urls[0]->isScratchProgram());
     $this->assertTrue($urls[0]->isAbsoluteUrl());
+
     $this->assertInstanceOf(RemixData::class, $urls[1]);
     $this->assertSame($fourth_expected_url, $urls[1]->getUrl());
     $this->assertSame('16268', $urls[1]->getProgramId());
     $this->assertFalse($urls[1]->isScratchProgram());
     $this->assertTrue($urls[1]->isAbsoluteUrl());
+    */
   }
 
   public function testReturnsThePathOfTheBaseDirectory(): void
@@ -476,5 +571,33 @@ class ExtractedCatrobatFileTest extends TestCase
     Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('4728a2ce6b682ac056b8f8185353108d_Moving Mole.png'));
     Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('1fb4ecf442b988ad20279d95acaf608e_Whacked Mole.png'));
     Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('0370b09e8cd2cd025397a47e24b129d5_Hit2.m4a'));
+  }
+
+  private function assertions(int $expectedCount, array $urls, array $expectedURLs, array $expectedProgramIds, array $scratch, array $absolutePaths): void
+  {
+    $this->assertCount($expectedCount, $urls);
+
+    for ($i = 0; $i < $expectedCount; ++$i)
+    {
+      $this->assertInstanceOf(RemixData::class, $urls[$i]);
+      $this->assertSame($expectedURLs[$i], $urls[$i]->getUrl());
+      $this->assertSame($expectedProgramIds[$i], $urls[$i]->getProgramId());
+      if ($scratch[$i])
+      {
+        $this->assertTrue($urls[$i]->isScratchProgram());
+      }
+      else
+      {
+        $this->assertFalse($urls[$i]->isScratchProgram());
+      }
+      if ($absolutePaths[$i])
+      {
+        $this->assertTrue($urls[$i]->isAbsoluteUrl());
+      }
+      else
+      {
+        $this->assertFalse($urls[$i]->isAbsoluteUrl());
+      }
+    }
   }
 }

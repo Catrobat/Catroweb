@@ -150,20 +150,27 @@ class ProgramManagerTest extends TestCase
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
+    $func = function (Program $project): Program
+    {
+      $project->setId('1');
+
+      return $project;
+    };
+
     $metadata = $this->createMock(ClassMetadata::class);
     $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
     $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
-      ->will($this->returnCallback(function (Program $project): Program
-      {
-        $project->setId('1');
-
-        return $project;
-      }))
+      ->will($this->returnCallback($func))
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
+      ->with($this->isInstanceOf(Program::class))
+    ;
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
+      ->willReturn($this->programBeforeInsertEvent)
+    ;
+
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
   }
 
@@ -234,16 +241,18 @@ class ProgramManagerTest extends TestCase
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
+    $func = function (Program $project): Program
+    {
+      $project->setId('1');
+
+      return $project;
+    };
+
     $metadata = $this->createMock(ClassMetadata::class);
     $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
     $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
-        $project->setId('1');
-
-        return $project;
-      }))
+      ->will($this->returnCallback($func))
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
