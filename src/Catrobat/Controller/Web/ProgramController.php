@@ -519,6 +519,10 @@ class ProgramController extends AbstractController
    */
   public function stealProjectAjax(Request $request): JsonResponse
   {
+    $em = $this->getDoctrine()->getManager();
+    $user = $em->getRepository(User::class)->findOneBy([
+        'salt' => $this->getUser()->getSalt(),
+      ]);
     $jsonResult = [];
     if ($request->isXmlHttpRequest())
     {
@@ -531,13 +535,10 @@ class ProgramController extends AbstractController
       {
         try
         {
-          $program = $this->program_manager->find(strval($request->request->get('id')));
-          if ($program->getUser() == $this->getUser())
+          if(!$this->program_manager->changeProgramUser(strval($request->request->get('id')), $user))
           {
             return new JsonResponse(null, Response::HTTP_FORBIDDEN);
           }
-          $program->setUser($this->getUser());
-          $this->program_manager->save($program);
         }
         catch (Exception $exception)
         {

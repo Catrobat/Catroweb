@@ -74,6 +74,7 @@
     </div>
     <div class="col-7 col-sm-8 mt-3" style="padding-left: 0">
       {% include 'Program/program_download_button.html.twig' with {'suffix': '-small'} %}
+      <button id="steal-project" class="btn btn-outline-danger" onclick="stealProjectAjax('{{ program.id }}')">Steal Project</button>
     </div>
   </div>
 

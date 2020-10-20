@@ -979,6 +979,18 @@ class ProgramManager
     );
   }
 
+  public function changeProgramUser(string $programId, User $user)
+  {
+    $program = $this->find($programId);
+    if ($program->getUser()->getSalt() === $user->getSalt())
+    {
+      return false;
+    }
+    $program->setUser($user);
+    $this->save($program);
+    return true;
+  }
+
   private function programSearchQuery(string $query, string $max_version = '0', ?string $flavor = null, bool $is_debug_request = false): BoolQuery
   {
     $query = Util::escapeTerm($query);
