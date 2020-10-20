@@ -20,7 +20,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
     And the element "#remix-notif" should be visible
     And I click "#remix-notif"
     And I wait for AJAX to finish
-    And I should see "User created a remix"
+    And I should see "User created a remix test of your game project 1."
 
   Scenario: Uses should not be notified about their own remixes
     Given I have a project with "url" set to "/app/project/1"
