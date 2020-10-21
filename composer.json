@@ -71,7 +71,7 @@
         "symfony/maker-bundle": "*",
         "symfony/phpunit-bridge": "*",
         "symfony/profiler-pack": "^1.0",
-        "vimeo/psalm": "^3.15",
+        "vimeo/psalm": "^4.0",
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
         "wapmorgan/php-code-fixer": "dev-master"
     },
