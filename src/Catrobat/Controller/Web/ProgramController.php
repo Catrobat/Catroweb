@@ -6,6 +6,7 @@ use App\Catrobat\Events\CheckScratchProgramEvent;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
+use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\StatisticsService;
@@ -57,6 +58,7 @@ class ProgramController extends AbstractController
   private RudeWordFilter $rude_word_filter;
   private ParameterBagInterface $parameter_bag;
   private EventDispatcherInterface $event_dispatcher;
+  private ProgramFileRepository $file_repository;
 
   public function __construct(StatisticsService $statistics_service,
                               RemixManager $remix_manager,
@@ -69,7 +71,8 @@ class ProgramController extends AbstractController
                               TranslatorInterface $translator,
                               RudeWordFilter $rude_word_filter,
                               ParameterBagInterface $parameter_bag,
-                              EventDispatcherInterface $event_dispatcher)
+                              EventDispatcherInterface $event_dispatcher,
+                              ProgramFileRepository $file_repository)
   {
     $this->statistics = $statistics_service;
     $this->remix_manager = $remix_manager;
@@ -83,6 +86,7 @@ class ProgramController extends AbstractController
     $this->rude_word_filter = $rude_word_filter;
     $this->parameter_bag = $parameter_bag;
     $this->event_dispatcher = $event_dispatcher;
+    $this->file_repository = $file_repository;
   }
 
   /**
@@ -420,6 +424,14 @@ class ProgramController extends AbstractController
     $em->persist($program);
     $em->flush();
 
+    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    if ($extracted_file)
+    {
+      $extracted_file->setDescription($new_description);
+      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+      $this->file_repository->deleteProgramFileIfExists($program->getId());
+    }
+
     return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }
 
@@ -430,18 +442,18 @@ class ProgramController extends AbstractController
    */
   public function editProgramCredits(string $id, string $new_credits): Response
   {
-    $max_credits_size = $this->getParameter('catrobat.max_credits_upload_size');
+    $max_credits_size = $this->getParameter('catrobat.max_notes_and_credits_upload_size');
 
     if (strlen($new_credits) > $max_credits_size)
     {
-      return JsonResponse::create(['statusCode' => StatusCode::CREDITS_TO_LONG,
+      return JsonResponse::create(['statusCode' => StatusCode::NOTES_AND_CREDITS_TOO_LONG,
         'message' => $this->translator
           ->trans('programs.tooLongCredits', [], 'catroweb'), ]);
     }
 
     if ($this->rude_word_filter->containsRudeWord($new_credits))
     {
-      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_CREDITS,
+      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_NOTES_AND_CREDITS,
         'message' => $this->translator
           ->trans('programs.rudeWordsInCredits', [], 'catroweb'), ]);
     }
@@ -468,6 +480,14 @@ class ProgramController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $em->persist($program);
     $em->flush();
+
+    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    if ($extracted_file)
+    {
+      $extracted_file->setNotesAndCredits($new_credits);
+      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+      $this->file_repository->deleteProgramFileIfExists($program->getId());
+    }
 
     return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }

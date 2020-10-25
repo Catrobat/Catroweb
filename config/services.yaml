@@ -10,7 +10,7 @@ parameters:
   catrobat.file.storage.path:           "resources/programs/"
   catrobat.logs.dir:                    "%kernel.project_dir%/var/log/"
   catrobat.max_description_upload_size: 10000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
-  catrobat.max_credits_upload_size:     3000
+  catrobat.max_notes_and_credits_upload_size:     3000
   catrobat.mediapackage.dir:            "%catrobat.pubdir%resources/mediapackage/"
   catrobat.mediapackage.path:           "resources/mediapackage/"
   catrobat.mediapackage.sample.dir:     "%catrobat.pubdir%tests/testdata/DataFixtures/MediaPackage/SampleMediaPackage/"
@@ -345,6 +345,15 @@ services:
 
   catroweb.file.validator.description:
     class: App\Catrobat\Listeners\DescriptionValidator
+    tags:
+      - {
+        name: kernel.event_listener,
+        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        method: onProgramBeforeInsert
+      }
+
+  catroweb.file.validator.notesandcredits:
+    class: App\Catrobat\Listeners\NotesAndCreditsValidator
     tags:
       - {
         name: kernel.event_listener,

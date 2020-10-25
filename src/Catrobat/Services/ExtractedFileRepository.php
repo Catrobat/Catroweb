@@ -85,4 +85,9 @@ class ExtractedFileRepository
       );
     }
   }
+
+  public function saveProgramExtractedFile(ExtractedCatrobatFile $extracted_file): void
+  {
+    $extracted_file->getProgramXmlProperties()->asXML($extracted_file->getPath().'code.xml');
+  }
 }

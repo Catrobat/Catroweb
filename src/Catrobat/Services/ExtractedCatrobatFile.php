@@ -75,6 +75,21 @@ class ExtractedCatrobatFile
     return (string) $this->program_xml_properties->header->description;
   }
 
+  public function setDescription(string $description): void
+  {
+    $this->program_xml_properties->header->description = $description;
+  }
+
+  public function getNotesAndCredits(): string
+  {
+    return (string) $this->program_xml_properties->header->notesAndCredits;
+  }
+
+  public function setNotesAndCredits(string $notesAndCredits): void
+  {
+    $this->program_xml_properties->header->notesAndCredits = $notesAndCredits;
+  }
+
   public function getDirHash(): ?string
   {
     return $this->dir_hash;
