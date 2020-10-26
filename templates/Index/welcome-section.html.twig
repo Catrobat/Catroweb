@@ -57,8 +57,32 @@
           </div>
         </a>
         {% endif %}
+        <button id="translateButton" onClick="translateTestHere()">Show Translation</button>
+        <div id="description">This is some text to translate</div>
+        <div id="translatedDesc" class="transDescription">This is the translated text</div>
       </div>
     </div>
   </div>
 {% endif %}   {#{% if not isWebview() %}#}
 
+{% block js %}
+  <script type="text/javascript">
+    function translateTestHere () {
+      var translation = document.getElementById("translatedDesc");
+      var buttonText = document.getElementById("translateButton").innerHTML;
+      if (!buttonText.localeCompare("Show Translation")) {
+        translation.style.display = "block";
+        document.getElementById("translateButton").innerHTML = "Hide Translation";
+        document.getElementById("translatedDesc").innerHTML = "the text is translated to " + document.documentElement.lang;
+      } else {
+        translation.style.display = "none";
+        document.getElementById("translateButton").innerHTML = "Show Translation";
+      }
+    }
+  </script>
+  <style>
+    div.transDescription {
+      display: none;
+    }
+  </style>
+{% endblock %}
