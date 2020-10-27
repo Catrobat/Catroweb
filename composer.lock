@@ -4394,16 +4394,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.18.0",
+            "version": "1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "027dff799d50f32cb312f383eb631a035d820db2"
+                "reference": "1e9a170992d49d01fda2ab18ac7bdd1bb502ab38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/027dff799d50f32cb312f383eb631a035d820db2",
-                "reference": "027dff799d50f32cb312f383eb631a035d820db2",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/1e9a170992d49d01fda2ab18ac7bdd1bb502ab38",
+                "reference": "1e9a170992d49d01fda2ab18ac7bdd1bb502ab38",
                 "shasum": ""
             },
             "require": {
@@ -4492,7 +4492,7 @@
                 "message",
                 "php-http"
             ],
-            "time": "2020-03-30T07:21:02+00:00"
+            "time": "2020-10-21T06:56:07+00:00"
         },
         {
             "name": "php-http/logger-plugin",
