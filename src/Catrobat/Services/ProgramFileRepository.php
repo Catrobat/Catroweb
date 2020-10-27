@@ -51,6 +51,14 @@ class ProgramFileRepository
     $this->filesystem->remove($this->directory.$id.'.catrobat');
   }
 
+  public function deleteProgramFileIfExists(string $id): void
+  {
+    if ($this->checkIfProgramFileExists($id))
+    {
+      $this->deleteProgramFile($id);
+    }
+  }
+
   public function saveProgramFile(File $file, string $id): void
   {
     $this->filesystem->copy($file->getPathname(), $this->directory.$id.'.catrobat');
