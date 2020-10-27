@@ -12,8 +12,9 @@ education: Education
 chat: Chat and forums
 others: Others
 tutorials: Help
-googlePlay: Google Play
+googlePlay: Google Play Store
 iosAppStore: iOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: The passwords didn't match.
 error: Error
 cancel: Cancel
@@ -904,8 +905,9 @@ help-cards:
     starters: Starters
     tutorials: Tutorials
     stepbystep: Step by step
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
+    getinvolvedGoogle: Get it on Google Play Store
+    getinvolvedApple: Get it on iOS App Store
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game design
     education: Education platform

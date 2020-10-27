@@ -20,7 +20,7 @@
           <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
             <div class="h1 {% if theme() == 'luna'%} text-white {% endif %}">
               <img style="width: 60px;" alt="Play Store Logo" src="{{ asset('images/help/google_playstore.png') }}"/>
-              <span class="ml-2"> Google Play</span>
+              <span class="ml-2"> {{ "googlePlay"|trans({}, "catroweb") }}</span>
             </div>
           </div>
         </a>
@@ -39,23 +39,31 @@
             {#   show nothing for now   #}
           </div>
         {% elseif theme() == 'embroidery' %}
-            <a target="_blank" href="https://www.instagram.com/code_n_stitch/">
-              <div class="primary help-card d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-                <div class="h1">
-                  <img style="width: 60px; vertical-align:middle;" alt="Code&Stich Instagram" src="{{ asset('images/help/instagram.svg') }}">
-                  <span class="ml-2">Instagram</span>
-                </div>
+          <a target="_blank" href="https://www.instagram.com/code_n_stitch/">
+            <div class="primary help-card d-flex align-items-center" style="flex-direction: column; justify-content: center;">
+              <div class="h1">
+                <img style="width: 60px; vertical-align:middle;" alt="Code&Stitch Instagram" src="{{ asset('images/help/instagram.svg') }}">
+                <span class="ml-2">Instagram</span>
               </div>
-            </a>
-        {% else %}
-        <a target="_blank" href="https://itunes.apple.com/app/pocket-code/id1117935892">
-          <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-            <div class="h1">
-              <img style="width: 50px;" alt="Play Store Logo" src="{{ asset('images/help/apple_logo.png') }}"/>
-              <span class="ml-2"> App Store</span>
             </div>
-          </div>
-        </a>
+          </a>
+        {% else %}
+          <a target="_blank" href="https://catrob.at/ca">
+            <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
+              <div class="h1">
+                <img style="width: 50px;" alt="App Store Logo" src="{{ asset('images/help/apple_logo.png') }}"/>
+                <span class="ml-2"> {{ "iosAppStore"|trans({}, "catroweb") }}</span>
+              </div>
+            </div>
+          </a>
+          <a target="_blank" href="https://catrob.at/HuaweiAppGallery">
+            <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
+              <div class="h1 {% if theme() == 'luna'%} text-white {% endif %}">
+                <img style="width: 50px;" alt="Huawei AppGallery Logo" src="{{ asset('images/help/huawei_logo.png') }}"/>
+                <span class="ml-2"> {{ "huaweiAppGallery"|trans({}, "catroweb") }}</span>
+              </div>
+            </div>
+          </a>
         {% endif %}
       </div>
     </div>
