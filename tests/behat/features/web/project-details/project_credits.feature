@@ -14,28 +14,28 @@ Feature: As a project owner, I should be able to give credits for my project.
   Scenario: There should be a credits section on every project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "Credits"
+    Then I should see "Notes and credits"
     But the element "#edit-credits-button" should not exist
 
   Scenario: A button for editing credits should be visible if I am the owner of the project
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "Credits"
+    Then I should see "Notes and credits"
     And the element "#edit-credits-button" should be visible
 
   Scenario: A button for editing credits should not exist if I am not the owner of the project
     Given I log in as "Catrobat"
     When I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then I should see "Credits"
+    Then I should see "Notes and credits"
     But the element "#edit-credits-button" should not exist
 
   Scenario: I should be able to write new credits, if I am the owner of the project
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "Credits"
+    Then I should see "Notes and credits"
     And the element "#edit-credits-button" should be visible
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
