@@ -18,11 +18,11 @@
 
         <div class="text-muted text-uppercase follower-item__info">
           {% if user.country %}
-            <div class="d-inline mr-2"><i class="fas fa-map-marker"></i> {{ user.country }}</div>
+            <div class="d-inline mr-2"><i class="material-icons info-icon">location_on</i> {{ user.country }}</div>
           {% endif %}
           {% if app.user != null and app.user.hasFollower(user.profile) and (hideFollowsMe is not defined or hideFollowsMe != true) %}
             <div class="d-inline">
-              <i class="fas fa-check"></i> {{ "follower.followsMe"|trans({}, "catroweb") }}
+              <i class="material-icons info-icon">done</i> {{ "follower.followsMe"|trans({}, "catroweb") }}
             </div>
           {% endif %}
         </div>
