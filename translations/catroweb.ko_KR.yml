@@ -27,6 +27,7 @@ description: 설명
 noDescription: 설명 없음
 credits: 만든이
 noCredits: 만든이 없음
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: 국가
 loginText: 로그인
 privacyPolicy: 개인 정보 보호 정책

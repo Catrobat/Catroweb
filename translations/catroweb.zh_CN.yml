@@ -27,6 +27,7 @@ description: 描述
 noDescription: 没有可用的描述
 credits: 积分
 noCredits: 没有可用的积分。
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: 国家
 loginText: 登录
 privacyPolicy: 隐私策略
