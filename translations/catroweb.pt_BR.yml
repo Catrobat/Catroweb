@@ -27,6 +27,7 @@ description: Descrição
 noDescription: Sem descrição disponível.
 credits: Créditos
 noCredits: Créditos não disponíveis.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: País
 loginText: login
 privacyPolicy: Política de Privacidade

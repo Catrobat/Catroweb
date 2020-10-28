@@ -27,6 +27,7 @@ description: Описание
 noDescription: Без описание.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Страна
 loginText: вход
 privacyPolicy: Правила за поверителност

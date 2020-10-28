@@ -1,65 +1,65 @@
 ---
 #homepage translation
-localLanguage: Angol
-username: Felhasználónév
-password: Jelszó
+localLanguage: English
+username: Username
+password: Password
 createNewPassword: Create new password
 accountSettings: Account settings
-email: E-mail
-aboutPocketCode: A Pocket Code-ról
+email: E-Mail
+aboutPocketCode: About Pocket Code
 about: About
 education: Education
 chat: Chat and forums
 others: Others
-tutorials: Ismertetők
+tutorials: Help
 googlePlay: Google Play
-iosAppStore: IOS App store
-passwordsNoMatch: A jelszó nem egyezik.
-error: Hiba
-cancel: Mégse
-report: Jelentés
+iosAppStore: iOS App store
+passwordsNoMatch: The passwords didn't match.
+error: Error
+cancel: Cancel
+report: Report
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Letöltés
-description: Leírás
-noDescription: Leírás nem található.
-credits: Credits
-noCredits: No credits available.
+download: Download
+description: Description
+noDescription: No description available.
+credits: Notes and credits
+noCredits: No notes and credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Ország
-loginText: bejelentkezés
-privacyPolicy: Adatvédelem
-imprint: Impresszum
-programDetails: Részletek
-somethingWentWrong: 'Hoppá, hiba történt.'
-pleaseTryAgain: 'Kérjük, próbálkozz újra!'
-oldVersionError: 'Kérjük frissíts a legújabb Pocket Code verzióra!'
-more: 'több'
-less: 'kevesebb'
-show-more: 'More information'
-show-less: 'Less information'
+country: Country
+loginText: login
+privacyPolicy: Privacy Policy
+imprint: Imprint
+programDetails: Details
+somethingWentWrong: 'Ooooops something went wrong.'
+pleaseTryAgain: 'Please try again!'
+oldVersionError: 'Please update to the newest Pocket Code version!'
+more: 'more'
+less: 'less'
+show-more: 'Show more'
+show-less: 'Show less'
 more-information: 'More information'
 less-information: 'Less information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
-allNotifications: 'All notifications'
+allNotifications: 'All'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
 CommentNotifications: 'Comments'
 RemixNotifications: 'Remixes'
 wellDone: "Well done!"
 done: "Done!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "It looks like you don't have any notifications."
 confirmMessage: "Yes, delete it"
-cancelMessage: "Mégse"
+cancelMessage: "Cancel"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
-projects: "Programok"
+projects: "Projects"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
 oauthHere: "here"
@@ -90,7 +90,7 @@ programs:
     subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More statistics
-  featured: Kiemelt
+  featured: Featured
   example: Examples
   newest: Newest projects
   recommended: Recommended projects
@@ -120,29 +120,29 @@ programs:
     Cancel
   tooLongDescription: The project description is too long!
   rudeWordsInDescription: You can't use rude words in your description!
-  tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
+  tooLongCredits: The project notes and credits are too long!
+  rudeWordsInCredits: You can't use rude words in your notes and credits!
   most:
-    viewed: Legnézettebb
-    downloaded: Legtöbbször letöltött
+    viewed: Most viewed
+    downloaded: Most downloaded
   random: Random projects
   related: Related projects
-  downloads: '%downloads% letöltések'
+  downloads: '%downloads% downloads'
   sample: Example projects
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
-    all: "Mind"
+    all: "All"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted projects
   uploaded: Uploaded projects
-  reportAsInappropriate: Jelentés problémásként
+  reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
   languageVersion: 'Catrobat language version: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Add meg az okot
+  reportDialogReason: Enter a reason
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
@@ -150,24 +150,24 @@ programs:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
-  updateAppHeader: App Frissítése
+  updateAppHeader: Update app
   updateAppText: Please update your app to the newest version to be able to download this project.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
   comments: Comments
   send: Send
-  delete: Törlés
-  report: Jelentés
+  delete: Delete
+  report: Report
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: Save
+  editCredits: Edit the project notes and credits
+  saveCredits: Save
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -180,8 +180,8 @@ programs:
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
-  by: 'ennyivel:'
-  open: 'Megnyitás '
+  by: 'by'
+  open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
@@ -208,7 +208,7 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Catrobat jelszó emlékeztető
+  subject: Your Catrobat password recovery
   message: |
     Dear %username%.
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
@@ -237,12 +237,12 @@ passwordRecovery:
     </p>
 profile:
   edit: Edit your profile
-  saveChanges: módosítások mentése
-  newPass: Új jelszó
-  repeatPass: ismételje meg a jelszót
+  saveChanges: save changes
+  newPass: new password
+  repeatPass: repeat password
   oldPass: old password
-  firstEmail: Első e-mailem
-  secondEmail: Második e-mailem
+  firstEmail: My first email
+  secondEmail: My second email
   myPrograms: My projects
   follows: Follows
   follower: Follower
@@ -255,30 +255,30 @@ profile:
     passwordIsUsername: The password must differ from the username.
     passwordWrong: Wrong password
     emailNotValid: This email address is not valid.
-    emailMissing: Hiba az e-mail cím mentése közben. Legalább egy hitelesített e-mail címmel kell rendelkeznie.
-    emailExists: Ez az e-mail cím már létezik.
+    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    emailExists: This email address already exists.
     usernameNotValid: This username is not valid.
     usernameMissing: You must have a username.
     usernameExists: This username already exists.
     usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: mentve!
+    submitSuccess: saved!
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
-  changePicture: Kép módosítása
+  changePicture: Change picture
   avatar:
     noImage: No image!
-    pictureTooLarge: A kiválasztott kép túl nagy, ne használj 5MB-nál nagyobb képeket.
-    uploadError: Probléma merült fel a feltöltés közben!
+    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
+    uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
   goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
-  edit: Szerkesztés
-  done: Kész
-  checkMail: Egy e-mailt küldtünk az e-mail címedre. Kérjük, ellenőrizze a postaládádat.
+  edit: Edit
+  done: Done
+  checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: E-mail
+  email: Email
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
@@ -290,7 +290,7 @@ myprofile:
   notChangeVisibility: Can not change visibility
   notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
-  link: 'Játékengedély'
+  link: 'License to play'
   title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
@@ -299,26 +299,26 @@ licenseToPlay:
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
   text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
-    item1: oszd meg a süteményeket és azok receptjeit
-    item2: ismerd el azokat, akik inspiráltak
+    item1: share your cakes along with the recipe
+    item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
 termsOfUse:
-  title: Felhasználási feltételek
-  headline: Üdvözlünk a Catrobat Közösségben!
+  title: Terms of Use
+  headline: Welcome to the Catrobat community!
   text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "A te segítségedre is szükség van hogy mindenki számára támogató közösséget alakíthassunk ki. Így segíthetsz:"
+  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'A mi ajándékunk:'
-  text5: 'Felhasználási feltételek:'
+  text4: 'Our gift to you:'
+  text5: 'Our Terms of Use and Service:'
   list1:
-    item1: sok különféle országból és kultúrából
-    item2: minden korosztálynak (gyermekektől tinédzserekig és nagyszülőkig)
-    item3: minden tapasztalati szintre
+    item1: from many different countries and cultures
+    item2: of all ages (from young children to teens and grandparents)
+    item3: with all levels of experience
   list2:
     item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Légy őszinte. Ne tettesd másvalakinek magad és ne próbáld meg becsapni a közösséget semmilyen módon."
-    item4: "Tartsd biztonságban a személyes információidat. Ne oszd meg az e-mail címedet, telefonszámodat vagy más személyes adatot."
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's notes and credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
+    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
   list3:
     item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
@@ -340,8 +340,8 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 help:
   stepByStep:
-    title: "Bevezetés lépésről lépésre"
-    start: "Kiindulási helyzet:"
+    title: "Step-by-step intro"
+    start: "Starting position:"
     description: |
       Here you create your first project, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
@@ -350,53 +350,53 @@ help:
     step1:
       title: 'Make a new project'
       detail:
-        text1: 'Koppints az "Új" gombra.'
+        text1: 'Tap on "New".'
         text2: 'Enter a project name, select "Create empty project" and tap "OK".'
     step2:
       title: "Create a new object"
       detail:
-        text1: 'Koppints:'
+        text1: 'Tap:'
         text2: 'Choose the source of the first look of your new object.'
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: 'Kép rajzolása.'
-        special2: 'Kép választása a galériából.'
-        special3: 'Fotó készítése.'
+        special1: 'Draw a new look.'
+        special2: 'Choose from gallery.'
+        special3: 'Take a picture.'
     step3:
       title: "Start moving"
       detail:
-        text1: 'Koppints:'
-        text2: 'Az első használt tégla a "Mozgás" kategóriában található.'
-        text3: 'Válaszd a "Csússz" téglát. Az objektum a téglán megadott pozícióba fog mozogni a játéktéren.'
-        text4: 'A tégla most lebeg. A beillesztéshez mozgasd a téglát a kívánt helyre. Már beszúrt téglákat is mozgathatsz, addig érintve a téglát, amíg újra nem kezd lebegni.'
+        text1: 'Tap:'
+        text2: 'The first brick we use is out of the category "Motion".'
+        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: 'Használd az Android Vissza gombját a játéktér elhagyásához.'
+        text6: 'Use the Android Back Button to get back from the stage.'
     step4:
-      title: "Kinézet módosítása"
-      description: "Az objektum kinézete megváltoztatható."
+      title: "Change look"
+      description: "You can change the look of your object."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Illeszd a téglát a "Csússz" tégla alá.'
-        text3: 'Kattints a legördülő mezőbe egy új kinézet létrehozásához.'
-        text4: 'A korábbihoz hasonlóan válaszd ki a kép forrását.'
-        text5: 'Ezután ki kell választani az új képet.'
-        text6: 'Játszd le a szkriptet, hogy lásd a viselkedést a játéktéren.'
+        text2: 'Snap the brick underneath the "Glide" - brick.'
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'Now you have to select the new image.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Mondd"
-      description: "Most megnézzük, hogyan lehet egy objektumot szóra bírni."
+      title: "Speak"
+      description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Illeszd a téglát a "Kinézet legyen" tégla alá.'
-        text3: 'Játszd le a szkriptet, hogy lásd a viselkedést a játéktéren.'
+        text2: 'Snap the brick underneath the "Switch to look" brick.'
+        text3: 'Tap play to see the behaviour on the stage.'
     step6:
       title: 'Again and again'
-      description: "Ez a lépés bemutatja, hogyan lehet ismételni egy objektum viselkedését."
+      description: "This step shows you how to repeat behaviour of objects."
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
         text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: 'Koppints az x és y szövegmezőkbe, és állítsd az értéküket nullára.'
-        text6: 'Játszd le a szkriptet, hogy lásd a viselkedést a játéktéren.'
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step7:
       title: "Tapping is everything"
       description: 'You can also control the behaviour of the object when the project is running on the stage.'
@@ -404,86 +404,86 @@ help:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: 'Most van egy ilyen szkripted.'
-        text5: 'Koppints a Lejátszás gombra az eredmény megtekintéséhez. Ha most megérinted az objektumot, fordulni fog.'
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
     step8:
       title: "Copy, delete or edit a brick"
       detail:
-        text1: 'Egyszer koppints a tégla bal oldalára a helyi menü megjelenítéséhez. Itt mozgathatod, másolhatod, törölhetrd vagy a képletszerkesztővel szerkesztheted a téglát.'
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
     step9:
       title: "Navigation in the app"
       detail:
-        text1: 'Használd az Android Vissza gombot a navigációra.'
-        text2: 'Menj vissza egy képernyőt az objektum áttekintéséhez. Innen elmehetsz a szkriptekhez, valamint az objektum kinézeteinek és hangjainak megjelenítéseihez.'
-        text3: 'Használd újra az Android Vissza gombját az objektumok és háttér áttekintéséhez.'
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
       title: "Change the background"
       description: "This is the overview of your objects and your project's background."
       detail:
-        text1: 'A háttér olyan, mint egy objektum, de csak egy háttér lehet a programban.'
-        text2: 'Ugyanúgy lehet szkripteket, hangokat és kinézetet adni a háttérhez, mint egy objektumhoz.'
+        text1: 'The background is like an object, but you just can have one background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
       title: "Main menu"
-      description: "Használd az Android Vissza gombját, hogy eljuss erre a képernyőre."
+      description: "Use the Android Back Button to get to this screen."
       detail:
         text1: 'Continue with your currently opened project.'
         text2: 'Add a new project.'
         text3: 'See all your local projects.'
-        text4: 'Menj a súgó oldalra, és beszéld meg másokkal.'
+        text4: 'Go to the help site and discuss with other users.'
         text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
         text6: 'Upload the project that is currently opened.'
   tutorialcards:
-    title: "Ismertetők"
-    description1: "Ez az ismertető bemutatja, hogyan használhatod a Pocket Code"
-    getReady: "Készülj:"
+    title: "Tutorials"
+    description1: "These tutorials show you how to use effective tricks in Pocket Code."
+    getReady: "Get ready:"
     tryCode: "Try this code:"
-    doIt: "Csináld:"
-    tip: "Extra tipp:"
+    doIt: "Do it:"
+    tip: "Extra tip:"
     card1:
-      title: "Méret módosítása"
-      description: "Érintsd meg a kacsát a méretének módosításához."
+      title: "Change Size"
+      description: "Change the size of an object."
       one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: "Kinézet módosítása"
-      description: "Használd ezt a trükköt az automatikus számoláshoz."
+      title: "Change Look"
+      description: "Change the looks of an object."
       one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
       three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: "Mozgó animáció"
-      description: "Használd ezt a trükköt, ha egy repülő papagájt szeretnél."
+      title: "Animation"
+      description: "Animate objects"
       one: "Add the object you want to be moving."
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: "Csússz"
-      description: "Simán mozgasd egyik pontból a másikba."
+      title: "Glide"
+      description: "Let your object glide over the screen."
       one: "Add the object you want to be gliding. e.g. plane."
       two: "Insert the following bricks and define the area in which the movement should happen."
     card5:
-      title: "Hang lejátszása"
+      title: "Play a Sound"
       description: "Play a sound by tapping on the object."
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Mondd"
-      description: "Használd ezt a kódot egy objektum beszéltetésére."
+      title: "Speak"
+      description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
     card7:
-      title: "GSensor"
-      description: "Használd ezt a trükköt, ha szeretnél egy objektumot az eszköz döntésével irányítani."
+      title: "Sensor"
+      description: "Control an object by using the inclination sensors."
       one: "Add the object you want to be moving on stage."
       two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
-      title: "Iránytű"
-      description: "Használd ezt a kódot egy iránytű készítéséhez."
+      title: "Compass"
+      description: "Create you own compass"
       one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: "Küldd ezt:"
-      description: "Nézd meg ezt a kódot! Megmutatja, hogyan kell kommunikálni az objektumok között."
+      title: "Broadcast"
+      description: "Send messages from one object to another."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
       three: "In this case the background changes when the object in the front layer is tapped."
@@ -507,16 +507,16 @@ help:
     title: "Starter projects"
     description: "Try out these starter projects. Look inside to make changes and add your ideas."
     categories:
-      games: "Játékok"
-      animations: "Animációk"
-      interactive: "Interaktív művészeti alkotások és történetek"
+      games: "Games"
+      animations: "Animations"
+      interactive: "Interactive Art and Stories"
       music: "Music And Dance"
   gameJam:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
     title1: "Registration"
     text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Feltöltés"
+    title2: "Upload"
     text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
     title3: "Search for your project"
     text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
@@ -560,38 +560,38 @@ help:
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
     download: "Download the project"
 search:
-  dotdotdot: Keresés...
-  search: Keresés
+  dotdotdot: Search...
+  search: Search
   inMediaLib: Search in media library
-  results: Keresés eredménye
-  resultcount: A keresés %count% eredményt adott
+  results: Search results
+  resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
-  profile: Profilom
-  login: Bejelentkezés
-  logout: Kijelentkezés
+  profile: My Profile
+  login: Login
+  logout: Logout
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
 login:
-  login: Bejelentkezés
+  login: Login
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
-  forgotPass: Elfelejtett a jelszó  vagy a felhasználónév?
-  recoverPass: Jelszó visszaállítása
-  recoverPassSend: Egy e-mailt küldtünk az e-mail címedre. Kérjük, ellenőrizze a postaládádat.
+  forgotPass: Forgot password or username?
+  recoverPass: Recover password
+  recoverPassSend: An email was sent to your email address. Please check your inbox.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Felhasználónév vagy e-mail
-  changePass: Jelszó módosítása
+  userOrEmail: Username or Email
+  changePass: Change password
   createAccount: Create an account
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
-  or: VAGY
-  username: Felhasználónév
-  email: E-mail
-  passwordFirst: Jelszó
+  or: OR
+  username: Username
+  email: Email
+  passwordFirst: Password
   passwordSecond: Password confirm
 apk:
   download: Download as app
@@ -603,7 +603,7 @@ format:
 #api
 errors:
   username:
-    blank: A felhasználónév kitöltése kötelező
+    blank: Username must not be blank
     invalid: Your username is invalid
     exists: This username already exists.
     not_exists: This username does not exist.
@@ -615,14 +615,14 @@ errors:
   description:
     rude: Description must not contain rude wordes.
   credit:
-    rude: Credits must not contain rude words.
+    rude: Notes and credits must not contain rude words.
   country:
     blank: The country is missing.
     invalid: Invalid country
   email:
     blank: email must not be blank
-    invalid: A megadott e-mail cim érvénytelennek tűnik
-    exists: Ez az e-mail cím már létezik.
+    invalid: Your email seems to be invalid
+    exists: This email address already exists.
   id:
     blank: Open authentication ID must not be blank
   login: The password or username was incorrect.
@@ -655,17 +655,17 @@ errors:
       Please try to log in again in the app.
 success:
   text: Success
-  registration: Sikeres regisztráció!
+  registration: Registration successful!
   token: ok
-  upload: A projekt sikeresen feltöltve!
+  upload: Your project was uploaded successfully!
   imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < 1 perccel ezelőtt |{1}1 perccel ezelőtt |]1,Inf] %count% perccel ezelőtt'
-  hours.ago: '{1}1 órája |]1,Inf] %count% órája'
-  days.ago: '{1}1 napja|]1,Inf] %count% napja'
-  months.ago: '{1}1 hónapja |]1,Inf] %count% hónapja'
-  years.ago: '{1}1 éve |]1,Inf] több, mint egy éve'
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: There was an error during the upload of your app.
 api:
@@ -689,50 +689,50 @@ api:
     creating_error: 'Error while creating project entity. Try uploading again!'
 #languages and countries
 language:
-  arabic: Arab
-  bulgarian: Bolgár
-  catalan: Katalán
-  chinese_simplified_han: Kínai (egyszerűsített Han)
-  chinese_traditional_han: Kínai (hagyományos Han)
-  croatian: Horvát
-  czech: Cseh
-  danish: Dán
-  dutch: Holland
-  english_united_kingdom: Angol (Egyesült Királyság)
-  english_united_states: Angol (Egyesült Államok)
-  estonian: Észt
-  filipino: FIlippínó
-  finnish: Finn
+  arabic: Arabic
+  bulgarian: Bulgarian
+  catalan: Catalan
+  chinese_simplified_han: Chinese (Simplified Han)
+  chinese_traditional_han: Chinese (Traditional Han)
+  croatian: Croatian
+  czech: Czech
+  danish: Danish
+  dutch: Dutch
+  english_united_kingdom: English (United Kingdom)
+  english_united_states: English (United States)
+  estonian: Estonian
+  filipino: Filipino
+  finnish: Finnish
   french: French
-  german: Német
-  greek: Görög
-  hebrew: Héber
+  german: German
+  greek: Greek
+  hebrew: Hebrew
   hindi: Hindi
-  hungarian: Magyar
-  indonesian: Indonéz
-  italian: Olasz
-  japanese: Japán
-  korean: Koreai
-  latvian: Lett
-  lithuanian: Litván
-  malay: Maláj
-  norwegian: Norvég
-  persian: Perzsa
-  polish: Lengyel
-  portuguese_brazil: Portugál (Brazil)
-  portuguese_portugal: Portugál (portugáliai)
-  romanian: Román
-  russian: Orosz
-  serbian: Szerb
-  slovak: Szlovák
-  slovenian: Szlovèn
-  spanish_latin_america: Spanyol (Latin-Amerika)
-  spanish_spain: Spanyol (spanyolországi)
-  swedish: Svéd
+  hungarian: Hungarian
+  indonesian: Indonesian
+  italian: Italian
+  japanese: Japanese
+  korean: Korean
+  latvian: Latvian
+  lithuanian: Lithuanian
+  malay: Malay
+  norwegian: Norwegian
+  persian: Persian
+  polish: Polish
+  portuguese_brazil: Portuguese (Brazil)
+  portuguese_portugal: Portuguese (Portugal)
+  romanian: Romanian
+  russian: Russian
+  serbian: Serbian
+  slovak: Slovak
+  slovenian: Slovenian
+  spanish_latin_america: Spanish (Latin America)
+  spanish_spain: Spanish (Spain)
+  swedish: Swedish
   thai: Thai
-  turkish: Török
-  ukrainian: Ukrán
-  vietnamese: Vietnámi
+  turkish: Turkish
+  ukrainian: Ukrainian
+  vietnamese: Vietnamese
 ci:
   generate: Generate apk
   pending: Generating apk
@@ -751,8 +751,8 @@ tag-text: Tags
 extenstion-text: Extensions
 tags:
   constant:
-    tag1: Játékok
-    tag2: Mozgó animáció
+    tag1: Game
+    tag2: Animation
     tag3: Story
     tag4: Music
     tag5: Art
@@ -788,11 +788,11 @@ codeview:
   cantDisplayStatistics: "Code can't be displayed"
   totalNumberOf: 'Total number of'
   scenes: 'Scenes'
-  scripts: 'Szkriptek'
-  bricks: 'Építőelemek'
+  scripts: 'Scripts'
+  bricks: 'Bricks'
   objects: 'Actors and objects'
-  looks: 'Kinézetek'
-  sounds: 'Hangok'
+  looks: 'Looks'
+  sounds: 'Sounds'
   globals: 'Globals'
   locals: 'Locals'
   globalVariables: 'Global variables'
@@ -809,14 +809,14 @@ codeStatistics:
   title: "Code statistics"
   error: "Code statistics can't be displayed."
   general: 'General'
-  bricks: 'Építőelemek'
-  eventBricks: 'Esemény'
-  controlBricks: 'Vezérlés'
-  motionBricks: 'Mozgás'
-  soundBricks: 'Hang'
-  looksBricks: 'Kinézetek'
+  bricks: 'Bricks'
+  eventBricks: 'Event'
+  controlBricks: 'Control'
+  motionBricks: 'Motion'
+  soundBricks: 'Sound'
+  looksBricks: 'Looks'
   penBricks: 'Pen'
-  dataBricks: 'Adatok'
+  dataBricks: 'Data'
   specialBricks: 'Special'
 footer:
   language: Language
@@ -845,15 +845,15 @@ catro-notifications:
   noReactions: "It looks like you don't have any reaction notifications."
   noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% commented on %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% reacted to %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% is now following you.'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link% created a new game %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
@@ -862,7 +862,7 @@ previous: Previous
 help-cards:
   headings:
     starters: Starters
-    tutorials: Ismertetők
+    tutorials: Tutorials
     stepbystep: Step by step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS

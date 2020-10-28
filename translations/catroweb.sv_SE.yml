@@ -3,14 +3,14 @@
 localLanguage: Engelska
 username: Användarnamn
 password: Lösenord
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: Skapa nytt lösenord
+accountSettings: Kontoinställningar
 email: E-post
 aboutPocketCode: Om Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: Om
+education: Utbildning
+chat: Chatt och forum
+others: Övriga
 tutorials: Handledningar
 googlePlay: Google Play
 iosAppStore: IOS App store
@@ -18,62 +18,63 @@ passwordsNoMatch: Lösenorden matchade inte.
 error: Fel
 cancel: Avbryt
 report: Rapportera
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
+deleteIt: Ja, ta bort det!
+reportIt: Ja, rapportera det!
+areYouSure: Är du säker?
 noWayOfReturn: There is no way to restore your actions!
 download: Ladda ner
 description: Beskrivning
 noDescription: Ingen beskrivning tillgänglig.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Land
 loginText: Logga in
 privacyPolicy: Sekretesspolicy
 imprint: Avtryck
 programDetails: Detaljer
-somethingWentWrong: 'Ooooops something went wrong.'
+somethingWentWrong: 'Hoppsan! Något gick fel.'
 pleaseTryAgain: 'Försök igen!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'mer'
 less: 'mindre'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
+more-information: 'Mer information'
+less-information: 'Mindre information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+notifications: 'Aviseringar'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'Följare'
+LikeNotifications: 'Reaktioner'
 CommentNotifications: 'Kommentarer'
 RemixNotifications: 'Remixar'
 wellDone: "Bra gjort!"
 done: "Klar!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Ja, ta bort det!"
 cancelMessage: "Avbryt"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "Vänligen vänta..."
 projects: "Program"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "här"
+statistics: "Statistik "
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
+  follows: Följer
+  followers: Följare
+  follow: Följ
+  username: Användare
+  followsMe: Följer mig
   noFollowing: You are not following anybody currently.
   noFollowers: You have no followers currently.
   noOtherFollowing: There are no following users currently.
@@ -81,16 +82,16 @@ follower:
   followError: "Unable to follow the desired user!"
   unfollowError: "Unable to unfollow the desired user!"
   unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  unfollowButton: "Sluta följa %username%"
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
     subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
-    download: Download the app
-    statistics: More statistics
+    download: Ladda ner appen
+    statistics: Mer statistik
   featured: Dagens
-  example: Examples
+  example: Exempel
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
@@ -159,22 +160,22 @@ programs:
   delete: Radera
   report: Rapportera
   report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
+  report_popup_header: Rapporterad
+  deleted_popup: Kommentaren har raderats.
+  deleted_popup_header: Raderad
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  editDescription: Redigera projektbeskrivningen
   saveDescription: Save description change
   editCredits: Edit the project credits
   saveCredits: Save credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
+  addComment: Skriv en kommentar
+  thumbsUp: Tummen upp!
   smile: Smile!
   love: Love!
   wow: Wooow!
-  linkTitle: Link
+  linkTitle: Länk
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Reaktioner
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixar
@@ -184,8 +185,8 @@ remixGraph:
   showPaths: 'Visa sökvägar'
   programNotAvailableErrorTitle: 'Tyvärr...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown user'
+  programNotAvailable: 'Inte tillgänglig'
+  programUnknownUser: 'Okänd användare'
 noReply: This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat account confirmation
@@ -252,7 +253,7 @@ profile:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
     passwordIsUsername: Lösenordet måste skilja sig från användarnamnet.
-    passwordWrong: Wrong password
+    passwordWrong: Fel lösenord
     emailNotValid: Denna e-postadress är inte giltig.
     emailMissing: Fel vid uppdatering av denna e-postadress. Du måste ha minst en verifierad e-postadress.
     emailExists: Denna e-postadress finns redan.
@@ -818,7 +819,7 @@ codeStatistics:
   dataBricks: 'Data'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: Språk
   usefulLinks: Useful links
   legalities: Legalities
   communityStats: Community stats
@@ -900,7 +901,7 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
+agree: Godkänn
 disagree: Disagree
 profileLoader:
   noProfiles: There are currently no profiles.

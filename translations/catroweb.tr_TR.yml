@@ -27,6 +27,7 @@ description: Açıklama
 noDescription: Açıklama mevcut değil.
 credits: Yapanlar
 noCredits: Her hangi bir yapanlar yok. 
+notesAndCreditsDescription: Bu projeyi nasıl yarattınız? Başkalarının fikirlerini, senaryolarını veya sanat eserlerini kullandınız mı? Onlara burada teşekkür edin.
 country: Ülke
 loginText: oturum aç
 privacyPolicy: Gizlilik politikası

@@ -27,6 +27,7 @@ description: Beschrijving
 noDescription: Geen beschrijving beschikbaar.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Land
 loginText: inloggen
 privacyPolicy: Privacybeleid
@@ -856,7 +857,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Volgende
 previous: Previous
 help-cards:
   headings:
@@ -900,8 +901,8 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
-disagree: Disagree
+agree: Akkoord
+disagree: Niet akkoord
 profileLoader:
   noProfiles: There are currently no profiles.
 element: 'Element'

@@ -27,6 +27,7 @@ description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย
 credits: เครดิต
 noCredits: ไม่มีเครดิต
+notesAndCreditsDescription: คุณสร้างโครงการนี้ได้อย่างไร คุณใช้ไอเดียสคริปต์หรืออาร์ตเวิร์คจากคนอื่นหรือไม่? ขอบคุณพวกเขาที่นี่
 country: ประเทศ
 loginText: login
 privacyPolicy: นโยบายความเป็นส่วนตัว
@@ -609,11 +610,11 @@ format:
 errors:
   username:
     blank: ชื่อผู้ใช้ต้องไม่ว่างเปล่า
-    invalid: Your username is invalid
+    invalid: ชื่อผู้ใช้ไม่ถูกต้อง
     exists: ชื่อนี้มีอยู่แล้ว
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    not_exists: ไม่มีชื่อผู้ใช้นี้
+    not_email: ชื่อผู้ใช้ต้องไม่ใช่อีเมล
+    size: ชื่อผู้ใช้ต้องยาวอย่างน้อย 3 ตัวอักษร และไม่เกิน 180 ตัวอักษร
   password:
     blank: รหัสผ่านหายไป
     short: 'รหัสผ่านต้องมีอย่างน้อย {{ limit }} อักขระ'
@@ -652,18 +653,17 @@ errors:
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'ขออภัย คุณกำลังใช้ Pocket Code รุ่นเก่า  กรุณาปรับปรุงให้เป็นเวอร์ชันล่าสุด.'
   authentication:
-    title: Authentication failed
+    title: การตรวจสอบสมาชิกล้มเหลว
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      ข้อมูลผู้ใช้งานไม่ถูกต้อง กรุณาลองเข้าระบบใหม่ผ่านแอป
 success:
-  text: Success
+  text: สำเร็จ
   registration: ลงทะเบียนเรียบร้อยแล้ว!
   token: ตกลง
   upload: โครงการถูกอัพโหลดเรียบร้อยแล้ว!
-  imgUpload: Your image was uploaded successfully!
+  imgUpload: อัปโหลดรูปภาพสำเร็จ
   report: ส่งรายงานของคุณเรียบร้อยแล้ว!
 time:
   minutes.ago: '{0} < 1 นาทีผ่านมา|{1}1 นาทีผ่านมา|] 1, Inf] %count% นาทีผ่านมา'
@@ -672,26 +672,26 @@ time:
   months.ago: '{1}1 เดือนที่ผ่านมา |] 1, Inf] %count% เดือนที่ผ่านมา'
   years.ago: '{1}1 ปี |] 1, Inf] เกินกว่าหนึ่งปีแล้ว'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: เกิดข้อผิดพลาดระหว่างอัปโหลดแอป
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
+    emailMissing: 'ไม่พบอีเมล'
+    emailInvalid: 'อีเมลไม่ถูกต้อง'
+    emailAlreadyInUse: 'อีเมลถูกใช้งานแล้ว'
+    usernameMissing: 'ไม่พบชื่อผู้ใช้'
+    usernameTooShort: 'ชื่อผู้ใช้สั้นเกินไป'
+    usernameTooLong: 'ชื่อผู้ใช้ยาวเกินไป'
+    usernameAlreadyInUse: 'ชื่อผู้ใช้ถูกใช้แล้ว'
+    usernameInvalid: 'ชื่อผู้ใช้ไม่ถูกต้อง'
+    passwordMissing: 'ไม่พบรหัสผ่าน'
+    passwordTooShort: 'รหัสผ่านสั้นเกินไป'
+    passwordTooLong: 'รหัสผ่านยาวเกินไป'
+    passwordInvalidChars: 'รหัสผ่านมีตัวอักษรที่ไม่รับรอง'
+    usernameContainsEmail: "ไม่สามารถใช้อีเมลเป็นชื่อผู้ใช้"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating project entity. Try uploading again!'
+    upload_error: 'เกิดข้อผิดพลาดระหว่างทำการอัปโหลด กรุณาลองใหม่อีกครั้ง'
+    creating_error: 'เกิดข้อผิดพลาดระหว่างทำการสร้างโปรเจค กรุณาลองใหม่อีกครั้ง'
 #languages and countries
 language:
   arabic: ภาษาอาหรับ
@@ -748,7 +748,7 @@ gamejam:
   whats: What's the %gamejamname%?
   submitown:
     header: be aware
-    subheader: You can only submit your own projects
+    subheader: คุณสามารถส่งโปรเจคของคุณเท่านั้น
     text: |
       But why not create your own!
       Take part in the %gamejamtag%
@@ -759,10 +759,10 @@ tags:
     tag1: เกมส์
     tag2: ย้ายภาพเคลื่อนไหว
     tag3: Story
-    tag4: Music
+    tag4: เพลง
     tag5: Art
-    tag6: Experimental
-    tag7: Tutorial
+    tag6: ทดลอง
+    tag7: วิธีการใช้งาน
 admin:
   maintain:
     diskMaintenance: Disk maintenance
@@ -770,22 +770,22 @@ admin:
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: โปรเจคที่คล้ายกัน
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
   moreFromThisUser: More from %username%
 pmd:
   submitBtn: Submit your project
   submitBox:
     header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
+    text: คุณกำลังจะส่งโปรเจค กรุณาบันทึกโคด และกดส่ง
     btnText: Submit
   successful:
-    text: Your project upload was successful.
+    text: อัปโหลดโปรเจคสำเร็จ
   failed:
-    text: Project upload failed.
+    text: อัปโหลดโปรเจคล้มเหลว
 codeview:
-  title: 'Code view'
-  showCode: 'Show code'
+  title: 'ดูโคด'
+  showCode: 'แสดงโคด'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
   hideStatistics: 'Hide code statistics'
@@ -844,7 +844,7 @@ privacy-policy:
   text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
-  markAsRead: "Mark as read"
+  markAsRead: "ทำเครื่องหมายว่าอ่านแล้ว"
   noFollowers: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนผู้ติดตามเลย"
   noComments: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนความคิดเห็นใด ๆ"
   noReactions: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนปฏิกิริยาใด ๆ"
@@ -869,16 +869,16 @@ help-cards:
     starters: Starters
     tutorials: บทเรียน
     stepbystep: Step by step
-    getinvolvedGoogle: Get it on Google Play
+    getinvolvedGoogle: ดาวน์โหลดที่ Google Play
     getinvolvedApple: Get it on IOS
-    discord: Join on Discord
+    discord: เข้าร่วม Discord ของเรา
     game_design: Game design
     education: Education platform
-    discuss: Discuss
+    discuss: พูดคุย
   text:
     starters: "Try out and remix with %theme%"
     tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
+    stepbystep: "ทำ 10 ขั้นตอนง่ายๆใน"
     getinvolved: Download the app and get started
     discord: Join the community on discord
     game_design_1: Effective tricks for
