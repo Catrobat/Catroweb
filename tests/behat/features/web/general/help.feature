@@ -14,8 +14,9 @@ Feature: Pocketcode help page
     And I should see "Education platform"
     And I should see "Tutorials"
     And I should see "Discuss"
-    And I should see "Google Play"
-    And I should see "IOS"
+    And I should see "Google Play Store"
+    And I should see "iOS App Store"
+    And I should see "Huawei AppGallery"
 
   Scenario: Viewing the help overview at help page for luna flavor i should see discord instead of ios
     Given I am on "/luna/help"
@@ -25,7 +26,7 @@ Feature: Pocketcode help page
     And I should see "Education platform"
     And I should see "Tutorials"
     And I should see "Discuss"
-    And I should see "Google Play"
+    And I should see "Google Play Store"
     And I should see "Discord"
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
