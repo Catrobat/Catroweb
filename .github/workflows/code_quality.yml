@@ -138,6 +138,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies (php-imagick)
+        run: |
+          sudo apt-get update
+          sudo apt-get install php-imagick
       # Optional - ensure composer configuration is valid
       - run: composer validate
 
@@ -176,6 +180,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install dependencies (php-imagick)
+        run: |
+          sudo apt-get update
+          sudo apt-get install php-imagick
 
       # Optional - ensure composer configuration is valid
       - run: composer validate
@@ -272,6 +281,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies (php-imagick)
+        run: |
+          sudo apt-get update
+          sudo apt-get install php-imagick
       # Optional - ensure composer configuration is valid
       - run: composer validate
 
@@ -321,6 +334,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies (php-imagick)
+        run: |
+          sudo apt-get update
+          sudo apt-get install php-imagick
+
       # Optional - ensure composer configuration is valid
       - run: composer validate
 
@@ -357,6 +375,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies (php-imagick)
+        run: |
+          sudo apt-get update
+          sudo apt-get install php-imagick
       # Optional - ensure composer configuration is valid
       - run: composer validate
 
@@ -394,6 +416,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies (php-imagick)
+        run: |
+          sudo apt-get update
+          sudo apt-get install php-imagick
       # Optional - ensure composer configuration is valid
       - run: composer validate
 
