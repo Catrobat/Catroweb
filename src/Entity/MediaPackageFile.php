@@ -69,7 +69,7 @@ class MediaPackageFile
 
   /**
    * @ORM\ManyToMany(targetEntity="\App\Entity\Flavor", inversedBy="media_package_files", fetch="EXTRA_LAZY")
-   * @Assert\Count(min = "1")
+   * @Assert\Count(min="1")
    */
   protected Collection $flavors;
 
@@ -248,7 +248,7 @@ class MediaPackageFile
     $this->flavors->clear();
   }
 
-  public function setFlavors(?Iterable $flavors): void
+  public function setFlavors(?iterable $flavors): void
   {
     $this->clearFlavors();
     if (null !== $flavors)
