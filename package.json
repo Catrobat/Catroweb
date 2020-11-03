@@ -54,7 +54,7 @@
     "@material/circular-progress": "^7.0.0",
     "@material/form-field": "^7.0.0",
     "@material/icon-button": "^7.0.0",
-    "@material/menu-surface": "^7.0.0",
+    "@material/menu-surface": "^8.0.0",
     "@material/progress-indicator": "^7.0.0",
     "@material/snackbar": "^7.0.0",
     "@material/top-app-bar": "^7.0.0",
