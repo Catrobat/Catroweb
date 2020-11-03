@@ -40,7 +40,7 @@ class ExtractedCatrobatFile
       throw new InvalidXmlException();
     }
     $content = str_replace('&#x0;', '', $content, $count);
-    preg_match_all('@fileName="(.*?)"@', $content, $matches);
+    preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
     $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
     $xml = @simplexml_load_string($content);
     if (!$xml)

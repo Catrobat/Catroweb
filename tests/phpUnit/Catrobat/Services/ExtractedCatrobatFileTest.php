@@ -468,4 +468,13 @@ class ExtractedCatrobatFileTest extends TestCase
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals($count, 1);
   }
+
+  public function testIOSXMLVersionWorksWithCurrentRegex(): void
+  {
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'program_with_old_XML/', '/webpath', 'hash');
+    Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('1f363a1435a9497852285dbfa82b74e4_Background.png'));
+    Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('4728a2ce6b682ac056b8f8185353108d_Moving Mole.png'));
+    Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('1fb4ecf442b988ad20279d95acaf608e_Whacked Mole.png'));
+    Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('0370b09e8cd2cd025397a47e24b129d5_Hit2.m4a'));
+  }
 }
