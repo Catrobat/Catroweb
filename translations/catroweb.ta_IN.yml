@@ -14,6 +14,7 @@ others: Others
 tutorials: பயிற்சிகள்
 googlePlay: கூகுள் ப்ளே
 iosAppStore: IOS செயலி அங்காடி
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: கடவுச்சொற்கள் பொருந்தவில்லை.
 error: தவறு
 cancel: தவிர்
@@ -870,6 +871,7 @@ help-cards:
     stepbystep: படி படியாக
     getinvolvedGoogle: இதை Google Play வில் பெறவும்
     getinvolvedApple: இதை IOS இல் பெறவும்
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: பேதத்தில் சேர்க
     game_design: விளையாட்டு வடிவமைப்பு
     education: கல்வி தளம்

@@ -14,6 +14,7 @@ others: Altri
 tutorials: Tutorial
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: AppGallery di Huawei
 passwordsNoMatch: Le due password non coincidono.
 error: Errore
 cancel: Annulla
@@ -27,7 +28,7 @@ description: Descrizione
 noDescription: Nessuna descrizione disponibile.
 credits: Riconoscimenti
 noCredits: Nessun riconoscimento disponibile.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Come hai creato questo progetto? Hai usato idee, script o lavori altrui? Ringraziali qui.
 country: Paese
 loginText: login
 privacyPolicy: Informativa sulla privacy
@@ -867,6 +868,7 @@ help-cards:
     stepbystep: Passo dopo passo
     getinvolvedGoogle: Scaricalo da Google Play
     getinvolvedApple: Scaricalo su IOS
+    getinvolvedHuawei: Ottienilo sull'AppGallery di Huawei
     discord: Unisciti su Discord
     game_design: Game Design
     education: Piattaforma di formazione

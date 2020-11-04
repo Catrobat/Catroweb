@@ -14,6 +14,7 @@ others: อื่นๆ
 tutorials: บทเรียน
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: รหัสผ่านไม่ตรงกัน
 error: ผิดพลาด
 cancel: ยกเลิก
@@ -871,6 +872,7 @@ help-cards:
     stepbystep: Step by step
     getinvolvedGoogle: ดาวน์โหลดที่ Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: เข้าร่วม Discord ของเรา
     game_design: Game design
     education: Education platform

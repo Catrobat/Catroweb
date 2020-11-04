@@ -14,6 +14,7 @@ others: Others
 tutorials: Tutoriales
 googlePlay: Google Play
 iosAppStore: iOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Las contraseñas no coinciden.
 error: Error
 cancel: Cancelar
@@ -863,6 +864,7 @@ help-cards:
     stepbystep: Paso a paso
     getinvolvedGoogle: Disponible en Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game design
     education: Education platform

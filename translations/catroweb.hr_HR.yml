@@ -14,6 +14,7 @@ others: Others
 tutorials: Vodiči
 googlePlay: Google Play
 iosAppStore: Otvori IOS trgovinu aplikacijama
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Lozinke se ne podudaraju.
 error: Pogreška
 cancel: Odustani
@@ -871,6 +872,7 @@ help-cards:
     stepbystep: Korak-po-korak
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Pridružite se našem Discord-u
     game_design: Dizajn igre
     education: Education platform

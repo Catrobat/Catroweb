@@ -14,6 +14,7 @@ others: Другое
 tutorials: Обучение
 googlePlay: Google Play
 iosAppStore: Магазин приложений iOS
+huaweiAppGallery: Галерея приложений Huawei
 passwordsNoMatch: Пароли не совпадают.
 error: Ошибка
 cancel: Отменить
@@ -871,6 +872,7 @@ help-cards:
     stepbystep: Помаленьку
     getinvolvedGoogle: Скачать на Google Play
     getinvolvedApple: Скачать на IOS
+    getinvolvedHuawei: Получите это на Huawei AppGallery
     discord: Присоединяйтесь к нашему Discord-каналу
     game_design: Игровой Дизайн
     education: Образовательная платформа

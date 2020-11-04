@@ -3,31 +3,32 @@
 localLanguage: Nederlands
 username: Gebruikersnaam
 password: Wachtwoord
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
+createNewPassword: Nieuw wachtwoord aanmaken
+accountSettings: Accountinstellingen
+email: E-mail
 aboutPocketCode: Over Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: Over
+education: Onderwijs
+chat: Chat en forums
+others: Overige
 tutorials: Tutorials
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: De wachtwoorden komen niet overeen.
 error: Fout
 cancel: Annuleren
 report: Rapporteren
-deleteIt: Yes, delete it!
+deleteIt: Ja, verwijderen!
 reportIt: Yes, report it!
-areYouSure: Are you sure?
+areYouSure: Ben je zeker?
 noWayOfReturn: There is no way to restore your actions!
 download: Downloaden
 description: Beschrijving
 noDescription: Geen beschrijving beschikbaar.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Hoe heb je dit project gemaakt? Heb je ideeën, scripts of kunst van anderen gebruikt? Bedank hen dan hier.
 country: Land
 loginText: inloggen
 privacyPolicy: Privacybeleid
@@ -40,25 +41,25 @@ more: 'meer'
 less: 'minder'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+more-information: 'Meer informatie'
+less-information: 'Minder informatie'
+ok: OK
+clickToDownloadProgram: 'Om het voorbeeldproject te downloaden klik %link_start% hier %link_end%.'
+registrationError: 'Gebruikersnaam of e-mailadres is al in gebruik.'
+notifications: 'Meldingen'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'Volgers'
+LikeNotifications: 'Reacties'
 CommentNotifications: 'Reacties'
 RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
+wellDone: "Goed gedaan!"
+done: "Klaar!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Ja, verwijder dit"
 cancelMessage: "Annuleren"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "Even geduld..."
 projects: "Programma's"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
@@ -71,7 +72,7 @@ indexPage:
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
   follows: Following
-  followers: Followers
+  followers: Volgers
   follow: Follow
   username: User
   followsMe: Follows me
@@ -175,7 +176,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Reacties
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixes
@@ -866,6 +867,7 @@ help-cards:
     stepbystep: Step by step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game design
     education: Education platform
