@@ -14,6 +14,7 @@ others: Others
 tutorials: Vodiči
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Lozinke se ne odgovaraju.
 error: Greška
 cancel: Otkaži
@@ -870,6 +871,7 @@ help-cards:
     stepbystep: Korak po korak
     getinvolvedGoogle: Skinite na Google Play
     getinvolvedApple: Skinite na iOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Pridruži se na Discord
     game_design: Game design
     education: Obrazovna platforma

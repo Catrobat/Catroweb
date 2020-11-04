@@ -14,6 +14,7 @@ others: Others
 tutorials: Poradniki
 googlePlay: Google Play
 iosAppStore: Sklep iOS App
+huaweiAppGallery: Galeria Huawei
 passwordsNoMatch: Hasła nie pasują.
 error: Błąd
 cancel: Anuluj
@@ -864,6 +865,7 @@ help-cards:
     stepbystep: Krok po Kroku
     getinvolvedGoogle: Pobierz z Google Play
     getinvolvedApple: Pobierz na IOS
+    getinvolvedHuawei: Pobierz na AppGallery Huawei
     discord: Dołącz do Discorda
     game_design: Projektowanie gier
     education: Platforma edukacyjna

@@ -14,6 +14,7 @@ others: Others
 tutorials: টিউটোরিয়াল
 googlePlay: গুগল প্লে
 iosAppStore: আইওএস অ্যাপ্লিকেশন ভাণ্ডার
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: পাসওয়ার্ড মিলছে না
 error: ভুল
 cancel: বাতিল
@@ -864,6 +865,7 @@ help-cards:
     stepbystep: ধাপে ধাপে
     getinvolvedGoogle: এটা গুগল প্লে তে পাবেন
     getinvolvedApple: এটি আইওএসে পাবেন
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: খেলার নকশা
     education: শিক্ষার আলোচনা

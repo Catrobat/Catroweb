@@ -14,6 +14,7 @@ others: Others
 tutorials: Упутства
 googlePlay: Гугл продавница
 iosAppStore: IOS продавница апликација
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Лозинке се не подударају.
 error: Грешка
 cancel: Откажи
@@ -866,6 +867,7 @@ help-cards:
     stepbystep: Корак по корак
     getinvolvedGoogle: Набавите на Google Play
     getinvolvedApple: Набавиоте на IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game Design
     education: Образовна платформа

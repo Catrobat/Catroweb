@@ -14,6 +14,7 @@ others: Others
 tutorials: Ismertetők
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: A jelszó nem egyezik.
 error: Hiba
 cancel: Mégse
@@ -866,6 +867,7 @@ help-cards:
     stepbystep: Step by step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game design
     education: Education platform

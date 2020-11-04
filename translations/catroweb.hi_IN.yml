@@ -14,6 +14,7 @@ others: Others
 tutorials: अनुशिक्षण कक्षा
 googlePlay: गूगल प्ले
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: पासवर्ड मेल नहीं खाते।
 error: त्रुटि
 cancel: रद्द करें
@@ -866,6 +867,7 @@ help-cards:
     stepbystep: क्रमशः
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game design
     education: Education platform

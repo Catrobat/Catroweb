@@ -14,6 +14,7 @@ others: Others
 tutorials: 教程
 googlePlay: Google Play商店
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: 密碼不匹配。
 error: 錯誤
 cancel: 取消
@@ -866,6 +867,7 @@ help-cards:
     stepbystep: Step by Step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game Design
     education: Education platform

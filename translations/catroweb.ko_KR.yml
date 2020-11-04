@@ -14,6 +14,7 @@ others: Others
 tutorials: 튜토리얼
 googlePlay: 구글 플레이
 iosAppStore: IOS 앱 스토어
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: 비밀번호가 일치하지 않습니다.
 error: 오류
 cancel: 취소
@@ -859,6 +860,7 @@ help-cards:
     stepbystep: 단계적으로
     getinvolvedGoogle: Google Play에서 받기
     getinvolvedApple: IOS에서 받기
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: 게임 디자인
     education: 교육용

@@ -14,6 +14,7 @@ others: Others
 tutorials: Tutoriál
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Hesla se neshodují.
 error: Chyba
 cancel: Zrušit
@@ -864,6 +865,7 @@ help-cards:
     stepbystep: Step by Step
     getinvolvedGoogle: Get it on Google Play
     getinvolvedApple: Get it on IOS
+    getinvolvedHuawei: Get it on Huawei AppGallery
     discord: Join on Discord
     game_design: Game Design
     education: Education platform
