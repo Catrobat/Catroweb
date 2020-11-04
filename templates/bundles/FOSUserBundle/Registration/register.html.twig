@@ -36,42 +36,38 @@
               {% endfor %}
             </div>
 
-            <div class="group">
-              {{ form_widget(form.username) }}
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label><span class="span-input">{{ 'login.username'|trans({}, 'catroweb') }}</span></label>
-            </div>
+            <label class="mdc-text-field mdc-text-field--filled username">
+              <span class="mdc-text-field__ripple"></span>
+              {{ form_widget(form.username, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'username-label', 'id': 'username' }}) }}
+              <span class="mdc-floating-label" id="username-label">{{ "login.username"|trans({}, "catroweb") }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
 
-            <div class="group">
-              {{ form_widget(form.email) }}
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label><span class="span-input">{{ 'login.email'|trans({}, 'catroweb') }}</span></label>
-            </div>
+            <label class="mdc-text-field mdc-text-field--filled email">
+              <span class="mdc-text-field__ripple"></span>
+              {{ form_widget(form.email, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'email-label', 'id': 'email', 'name': '_email' }}) }}
+              <span class="mdc-floating-label" id="email-label">{{ "login.email"|trans({}, "catroweb") }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
 
-            <div class="group">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <div class="show-hide-password">
-                <span class="w-100">
-                  {{ form_widget(form.plainPassword.first) }}
-                  <label><span class="span-input">{{ 'login.passwordFirst'|trans({}, 'catroweb') }}</span></label>
-                </span>
+            <div class="show-hide-password">
+              <label class="mdc-text-field mdc-text-field--filled password-first">
+                <span class="mdc-text-field__ripple"></span>
+                {{ form_widget(form.plainPassword.first, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-first-label', 'id': 'password-first', 'name': '_password-first' }}) }}
                 <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-              </div>
+                <span class="mdc-floating-label" id="password-first-label">{{ "login.passwordFirst"|trans({}, "catroweb") }}</span>
+                <span class="mdc-line-ripple"></span>
+              </label>
             </div>
 
-            <div class="group">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <div class="show-hide-password">
-                <span class="w-100">
-                  {{ form_widget(form.plainPassword.second) }}
-                  <label><span class="span-input">{{ 'login.passwordSecond'|trans({}, 'catroweb') }}</span></label>
-                </span>
+            <div class="show-hide-password">
+              <label class="mdc-text-field mdc-text-field--filled password-second">
+                <span class="mdc-text-field__ripple"></span>
+                {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second', 'name': '_password-second' }}) }}
                 <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-              </div>
+                <span class="mdc-floating-label" id="password-second-label">{{ "login.passwordSecond"|trans({}, "catroweb") }}</span>
+                <span class="mdc-line-ripple"></span>
+              </label>
             </div>
 
             <!-- Button -->
@@ -122,6 +118,7 @@
 {% block js %}
   <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
   <script src="{{ asset('js/register.min.js') }}"></script>
+  {{ encore_entry_script_tags('register') }}
   <script>
     const register =new Register(
             "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
