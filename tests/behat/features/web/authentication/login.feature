@@ -57,7 +57,7 @@ Feature:
     And I should see "The password for this user has already been requested within the last 24 hours."
 
   Scenario: The referer should work even after one failed login
-    Given I am on "/app/help"
+    Given I am on homepage
     And I wait for the page to be loaded
     Then I should see an "#btn-login" element
     When I click "#btn-login"
