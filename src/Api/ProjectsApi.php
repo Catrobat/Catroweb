@@ -88,7 +88,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   public function projectIdGet(string $id, &$responseCode, array &$responseHeaders)
   {
     $projects = $this->program_manager->getProgram($id);
-    if (null == $projects || empty($projects))
+    if (empty($projects))
     {
       $responseCode = Response::HTTP_NOT_FOUND;
 
