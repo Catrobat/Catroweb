@@ -131,7 +131,11 @@ const _InternalRemixGraph = function () {
         icon: 'error',
         showCancelButton: false,
         confirmButtonText: self.remixGraphTranslations.ok,
-        closeOnConfirm: true
+        closeOnConfirm: true,
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false
       },
       function () {
         self.network.selectNodes([])

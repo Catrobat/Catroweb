@@ -38,8 +38,6 @@ const MyProfile = function (profileUrl, saveUsername,
   self.regex_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   self.data_changed = false
   self.deleteAccountUrl = deleteAccountUrl
-  const blueColor = '#3085d6'
-  const redColor = '#d33'
   const passwordEditContainer = $('#password-edit-container')
   const usernameEditContainer = $('#username-edit-container')
   const usernameData = $('#username-wrapper > .profile-data')
@@ -123,8 +121,11 @@ const MyProfile = function (profileUrl, saveUsername,
         html: split[1] + '<br><br>' + split[2],
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: blueColor,
-        cancelButtonColor: redColor,
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-primary'
+        },
+        buttonsStyling: false,
         confirmButtonText: split[3],
         cancelButtonText: split[4]
       }).then((result) => {
@@ -152,8 +153,11 @@ const MyProfile = function (profileUrl, saveUsername,
               html: split[3],
               icon: 'warning',
               showCancelButton: true,
-              confirmButtonColor: blueColor,
-              cancelButtonColor: redColor,
+              customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-outline-primary'
+              },
+              buttonsStyling: false,
               confirmButtonText: split[4],
               cancelButtonText: split[6]
             }).then((result) => {
@@ -168,8 +172,11 @@ const MyProfile = function (profileUrl, saveUsername,
               html: split[1] + '<br><br>' + split[2],
               icon: 'warning',
               showCancelButton: true,
-              confirmButtonColor: blueColor,
-              cancelButtonColor: redColor,
+              customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-outline-primary'
+              },
+              buttonsStyling: false,
               confirmButtonText: split[5],
               cancelButtonText: split[6]
             }).then((result) => {
@@ -185,7 +192,10 @@ const MyProfile = function (profileUrl, saveUsername,
           title: programCanNotChangeVisibilityTitle,
           text: programCanNotChangeVisibilityText,
           icon: 'error',
-          confirmButtonClass: 'btn btn-danger'
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
         })
       }
     })
@@ -202,8 +212,11 @@ const MyProfile = function (profileUrl, saveUsername,
         html: split[1] + '<br><br>' + split[2],
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: blueColor,
-        cancelButtonColor: redColor,
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-primary'
+        },
+        buttonsStyling: false,
         confirmButtonText: split[3],
         cancelButtonText: split[4]
       }).then((result) => {
@@ -238,7 +251,10 @@ const MyProfile = function (profileUrl, saveUsername,
             title: successText,
             text: checkMailText,
             icon: 'success',
-            confirmButtonClass: 'btn btn-success'
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
           }).then(() => {
             window.location.href = self.profile_edit_url
           })
@@ -376,7 +392,10 @@ const MyProfile = function (profileUrl, saveUsername,
             title: successText,
             text: passwordUpdatedText,
             icon: 'success',
-            confirmButtonClass: 'btn btn-success'
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
           }).then(() => {
             window.location.href = self.profile_edit_url
           })

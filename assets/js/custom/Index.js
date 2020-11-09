@@ -104,9 +104,12 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
               html: informationText,
               showCancelButton: false,
               confirmButtonText: okTranslation,
-              icon: 'info'
-            }
-            )
+              icon: 'info',
+              customClass: {
+                confirmButton: 'btn btn-primary'
+              },
+              buttonsStyling: false
+            })
           }
         }
       })

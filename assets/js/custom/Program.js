@@ -202,7 +202,11 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: message
+      text: message,
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      buttonsStyling: false
     })
   }
 

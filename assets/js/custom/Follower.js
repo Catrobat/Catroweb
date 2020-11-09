@@ -28,7 +28,12 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: self.unfollowButton.replace('%username%', username),
-      cancelButtonText: self.cancelButton
+      cancelButtonText: self.cancelButton,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false
     }).then((result) => {
       if (result.value) {
         $.ajax({
@@ -91,6 +96,14 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
       return
     }
     $buttons.attr('disabled', false)
-    Swal.fire(somethingWentWrongError, followError, 'error')
+    Swal.fire({
+      title: somethingWentWrongError,
+      text: followError,
+      icon: 'error',
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      buttonsStyling: false
+    })
   }
 }
