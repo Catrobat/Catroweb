@@ -177,28 +177,49 @@ class GenerateTestDataCommand extends Command
     $this->filesystem->rename($this->target_directory.$directory.'/automatic_screenshot.png', $this->target_directory.$directory.'/screenshot.png');
   }
 
+  /**
+   * @throws Exception
+   */
   protected function generateProgramWithRudeWordInDescription(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
     $properties->header->description = 'FUCK YOU';
-    $properties->asXML($this->target_directory.$directory.'/code.xml');
+    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 
+  /**
+   * @throws Exception
+   */
   protected function generateProgramWithRudeWordInName(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
     $properties->header->programName = 'FUCK YOU';
-    $properties->asXML($this->target_directory.$directory.'/code.xml');
+    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 
+  /**
+   * @throws Exception
+   */
   protected function generateProgramWithTags(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
     $properties->header->tags = 'Games,Story';
-    $properties->asXML($this->target_directory.$directory.'/code.xml');
+    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 
   protected function generatePhiroProgram(string $directory): void

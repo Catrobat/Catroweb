@@ -7,6 +7,7 @@ use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
 use App\Repository\ProgramRepository;
+use Exception;
 use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
@@ -253,9 +254,16 @@ class ExtractedCatrobatFile
     return $this->program_xml_properties;
   }
 
+  /**
+   * @throws Exception
+   */
   public function saveProgramXmlProperties(): void
   {
-    $this->program_xml_properties->asXML($this->path.'code.xml');
+    $file_overwritten = $this->program_xml_properties->asXML($this->path.'code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
 
     $xml_string = file_get_contents($this->path.'code.xml');
 
