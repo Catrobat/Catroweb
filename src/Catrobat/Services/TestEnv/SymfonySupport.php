@@ -47,6 +47,7 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use JsonException;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
@@ -662,8 +663,10 @@ trait SymfonySupport
   }
 
   /**
-   * @param mixed $is_embroidery
    * @param mixed $parameters
+   * @param mixed $is_embroidery
+   *
+   * @throws Exception
    */
   public function generateProgramFileWith($parameters, $is_embroidery = false): string
   {
@@ -715,7 +718,12 @@ trait SymfonySupport
       }
     }
 
-    $properties->asXML($new_program_dir.'/code.xml');
+    $file_overwritten = $properties->asXML($new_program_dir.'/code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
+
     $compressor = new CatrobatFileCompressor();
 
     return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
@@ -729,6 +737,9 @@ trait SymfonySupport
     return new UploadedFile($filepath, 'test.catrobat');
   }
 
+  /**
+   * @throws JsonException
+   */
   public function assertJsonRegex(string $pattern, string $json): void
   {
     // allows to compare strings using a regex wildcard (.*?)
@@ -753,9 +764,9 @@ trait SymfonySupport
     $pattern = str_replace('REGEX_STRING_WILDCARD', '(.+?)', $pattern);
     $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
 
-    $delimter = '#';
+    $delimiter = '#';
     $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
-    Assert::assertMatchesRegularExpression($delimter.$pattern.$delimter, $json);
+    Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
   }
 
   public function insertFlavor(array $config = [], bool $andFlush = true): Flavor

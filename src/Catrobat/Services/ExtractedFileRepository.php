@@ -86,8 +86,15 @@ class ExtractedFileRepository
     }
   }
 
+  /**
+   * @throws Exception
+   */
   public function saveProgramExtractedFile(ExtractedCatrobatFile $extracted_file): void
   {
-    $extracted_file->getProgramXmlProperties()->asXML($extracted_file->getPath().'code.xml');
+    $file_overwritten = $extracted_file->getProgramXmlProperties()->asXML($extracted_file->getPath().'code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 }
