@@ -3,14 +3,14 @@
 localLanguage: Polski
 username: Nazwa użytkownika
 password: Hasło
-createNewPassword: Create new password
+createNewPassword: Utwórz nowe hasło
 accountSettings: Ustawienia konta
 email: E-mail
 aboutPocketCode: O Pocket Code
 about: O programie
-education: Education
-chat: Chat and forums
-others: Others
+education: Edukacja
+chat: Czat i fora
+others: Inne
 tutorials: Poradniki
 googlePlay: Google Play
 iosAppStore: Sklep iOS App
@@ -42,8 +42,8 @@ less: 'mniej'
 show-more: 'Pokaż więcej'
 show-less: 'Pokaż mniej'
 more-information: 'Więcej informacji'
-less-information: 'Less information'
-ok: Ok
+less-information: 'Mniej informacji'
+ok: OK
 clickToDownloadProgram: 'Aby pobrać przykładowy projekt kliknij %link_start% tutaj %link_end%.'
 registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
 notifications: 'Powiadomienia'
@@ -57,14 +57,14 @@ done: "Gotowe!"
 notificationsReadMessage: "Wygląda na to, że nie masz żadnych powiadomień."
 confirmMessage: "Tak, usuń"
 cancelMessage: "Anuluj"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "Nie można autoryzować użytkownika"
 notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
 pleaseWait: "Proszę czekać..."
 projects: "Programy"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "tutaj"
+statistics: "Statystyki"
 indexPage:
   recommendedSection:
     info:
@@ -271,7 +271,7 @@ profile:
     pictureTooLarge: Wybrane zdjęcie jest za duże, proszę, nie używaj zdjęć większych niż 5MB.
     uploadError: Przepraszamy, wystąpił błąd podczas wysyłania!
     noSupport: Ten typ obrazu nie jest obsługiwany, proszę wybierz inny obraz.
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Profil w Scratchu
 myprofile:
   editProfile: Edytuj profil
   edit: Edytuj
@@ -562,7 +562,7 @@ help:
 search:
   dotdotdot: Szukaj...
   search: Szukaj
-  inMediaLib: Search in media library
+  inMediaLib: Wyszukaj w bibliotece
   results: Wyniki wyszukiwania
   resultcount: Znaleziono %count% wyników wyszukiwania
   fail: Wprowadź co najmniej jedno wyszukiwane hasło
@@ -906,11 +906,11 @@ disagree: Nie zgadzam się
 profileLoader:
   noProfiles: Obecnie nie ma profili.
 element: 'Element'
-elements: 'Elements'
+elements: 'Elementy'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
+  text: 'Udostępnij'
+  error: 'Udostępnienie nie powiodło się'
+  success: 'Udostępnianie zakończone sukcesem'
 copy: 'Skopiuj link'
 checkOutProject: 'Sprawdź ten projekt:'
 community: 'Społeczność Catrobat'

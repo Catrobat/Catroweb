@@ -717,7 +717,7 @@ language:
   spanish_spain: İspanyolca (İspanya)
   swedish: İsveççe
   thai: Taylandca
-  turkish: Türkçe
+  turkish: Turkish
   ukrainian: Ukraynaca
   vietnamese: Vietnamca
 ci:
@@ -853,7 +853,7 @@ help-cards:
     stepbystep: Adım adım
     getinvolvedGoogle: Google Play'den indirin
     getinvolvedApple: IOS'dan indirin
-    getinvolvedHuawei: Get it on Huawei AppGallery
+    getinvolvedHuawei: Huawei AppGallery'den edinin
     discord: Discord'a katılın
     game_design: Oyun tasarımı
     education: Eğitim platformu
