@@ -3,7 +3,6 @@
 namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
-use App\Entity\Program;
 use App\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -11,15 +10,14 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AllProgramsAdmin extends AbstractAdmin
 {
+  use ProgramsTrait;
   /**
    * @var string
    */
@@ -56,40 +54,6 @@ class AllProgramsAdmin extends AbstractAdmin
 
     $this->screenshot_repository = $screenshot_repository;
     $this->parameter_bag = $parameter_bag;
-  }
-
-  /**
-   * @param mixed $program
-   *
-   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
-   */
-  public function preUpdate($program): void
-  {
-    /** @var Program $program */
-    /** @var ModelManager $model_manager */
-    $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())
-      ->getUnitOfWork()->getOriginalEntityData($program);
-
-    if (false == $old_program['approved'] && true == $program->getApproved())
-    {
-      /** @var User $user */
-      $user = $this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser();
-      $program->setApprovedByUser($user);
-      $this->getModelManager()->update($program);
-    }
-    elseif (true == $old_program['approved'] && false == $program->getApproved())
-    {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
-    }
-    $this->checkFlavor();
-  }
-
-  public function prePersist($object): void
-  {
-    $this->checkFlavor();
   }
 
   /**
@@ -143,6 +107,8 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('uploaded_at', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class,
         'label' => 'Upload Time', ])
       ->add('flavor')
+      ->add('approved')
+      ->add('visible')
     ;
   }
 
@@ -187,22 +153,5 @@ class AllProgramsAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete')->remove('export');
-  }
-
-  private function checkFlavor(): void
-  {
-    $flavor = $this->getForm()->get('flavor')->getData();
-
-    if (!$flavor)
-    {
-      return; // There was no required flavor form field in this Action, so no check is needed!
-    }
-
-    $flavor_options = $this->getConfigurationPool()->getContainer()->getParameter('themes');
-
-    if (!in_array($flavor, $flavor_options, true))
-    {
-      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
-    }
   }
 }
