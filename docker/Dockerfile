@@ -7,7 +7,7 @@ RUN composer install --no-scripts --prefer-dist
 FROM node AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install && npm install grunt
+RUN npm install && npm install grunt && npm install @symfony/webpack-encore
 
 # Run on:
 FROM debian:buster
@@ -100,6 +100,9 @@ COPY --from=composer-build /app/bin bin
 
 # Finally we set all permissions, and create required keys and test fixtures.
 RUN sh docker/app/prepare-test-env.sh
+
+# Run webpack encore
+RUN npm run encore dev
 
 # (Re-)compile public css/js files
 RUN grunt
