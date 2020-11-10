@@ -13,8 +13,14 @@
 
 
   <div id="user-comment-wrapper" class="col-12" style="display: none">
-    <textarea title="{{ 'programs.comments'|trans({}, 'catroweb') }}"
-              id="comment-message" class="msg" style="width: 100%; height: 100px"></textarea>
+    <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label comment-message">
+      <span class="mdc-text-field__ripple"></span>
+      <span class="mdc-text-field__resizer">
+        <textarea class="mdc-text-field__input" title="{{ 'programs.comments'|trans({}, 'catroweb') }}"
+                  id="comment-message" class="msg" style="width: 100%; height: 100px" cols="100"></textarea>
+          </span>
+      <span class="mdc-line-ripple"></span>
+    </label>
     <button id="comment-post-button" class="btn btn-primary">
       {{ 'programs.send'|trans({}, 'catroweb') }}
     </button>
@@ -23,7 +29,7 @@
   <div id="comments-wrapper" class="col-12">
     {% for comment in program_details.comments %}
       <div id="comment-{{ comment.id }}" class="single-comment"
-          {% if loop.index > 5 %} style="display: none" {% endif %}>
+              {% if loop.index > 5 %} style="display: none" {% endif %}>
 
         <div class="comment-avatar">
           <img class="comment-avatar-img"
@@ -51,7 +57,7 @@
               </i>
             </a>
             {% if not(app.user) or (app.user and comment.username != app.user.username) %}
-            {#  Everybody, but the comment owner must be able to report a comment  #}
+              {#  Everybody, but the comment owner must be able to report a comment  #}
               <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
                  data-toggle="tooltip" title="{{ 'programs.report'|trans({}, 'catroweb') }}">
                 <i class="ml-3 material-icons text-danger">not_interested</i>
@@ -86,3 +92,7 @@
     </div>
   </div>
 </div>
+
+{% block js %}
+  {{ encore_entry_script_tags('program_comments') }}
+{% endblock js %}

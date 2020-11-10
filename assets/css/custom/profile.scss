@@ -4,6 +4,7 @@
 @import "../../../public/bootstrap/scss/variables";
 @import "../../../public/bootstrap/scss/mixins";
 @import "theme_settings";
+@import "@material/select/mdc-select";
 
 
 .visited-program {
@@ -154,4 +155,8 @@
 
 .follower-tabs {
   margin-top: -1rem;
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: var(--mdc-theme-primary);
 }

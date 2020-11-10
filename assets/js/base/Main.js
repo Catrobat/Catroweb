@@ -21,14 +21,6 @@ const Main = function () {
     self.setLanguageSwitchListener()
   })
 
-  // ---- Language Selection
-  self.setLanguageSwitchListener = function () {
-    $('#switch-language').on('change', function () {
-      document.cookie = 'hl=' + $(this).val() + '; path=/'
-      window.location.reload()
-    })
-  }
-
   // ---- History State
   window.addEventListener('popstate', function (event) {
     if (event.state != null) {

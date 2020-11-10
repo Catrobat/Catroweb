@@ -5,7 +5,10 @@
 @import "../../../public/bootstrap/scss/mixins";
 @import "theme_settings";
 @import "@material/circular-progress";
-
+@import "@material/textfield/mdc-text-field";
+@import "@material/radio/mdc-radio";
+@import "@material/form-field/mdc-form-field";
+@import "@material/select/mdc-select";
 
 #project-thumbnail-big {
   border-radius: 10%;
@@ -393,4 +396,20 @@ input[type="number"] {
 .nav-tabs *
 {
   color: #000;
+}
+
+.mdc-form-field {
+  width: 100%;
+}
+
+.mdc-form-field label {
+  margin-bottom: 0;
+}
+
+.mdc-radio{
+  --mdc-theme-secondary: #{$primary};
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: var(--mdc-theme-primary);
 }

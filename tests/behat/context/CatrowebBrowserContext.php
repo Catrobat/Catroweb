@@ -128,7 +128,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->visit('/app/login');
     $this->iWaitForThePageToBeLoaded();
-    $this->fillField('_username', $username);
+    $this->fillField('username', $username);
     $this->fillField('password', $password);
     $this->pressButton('Login');
     $this->iWaitForThePageToBeLoaded();
@@ -1152,7 +1152,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iWriteInTextbox($arg1): void
   {
-    $textarea = $this->getSession()->getPage()->find('css', '.msg');
+    $textarea = $this->getSession()->getPage()->find('css', '#comment-message');
     Assert::assertNotNull($textarea, 'Textarea not found');
     $textarea->setValue($arg1);
   }

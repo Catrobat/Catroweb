@@ -35,27 +35,22 @@
                 action="{{ url("fos_user_security_check") }}" method="post">
             <input type="hidden" id="csrf_token" name="_csrf_token" value="{{ csrf_token }}"/>
 
-            <div class="row">
-              <div class="col">
-                <div class="group">
-                  <input type="text" id="username" name="_username" required/>
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-                  <label><span class="span-input">{{ "username"|trans({}, "catroweb") }}</span></label>
-                </div>
-              </div>
-            </div>
 
-            <div class="group">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <div class="show-hide-password">
-                <span class="w-100">
-                  <input id="password" type="password" name="_password" required>
-                  <label><span class="span-input">{{ "password"|trans({}, "catroweb") }}</span></label>
-                </span>
+            <label class="mdc-text-field mdc-text-field--filled username">
+              <span class="mdc-text-field__ripple"></span>
+              <input type="text" class="mdc-text-field__input" aria-labelledby="username-label" id="username" name="_username" required>
+              <span class="mdc-floating-label" id="username-label">{{ "username"|trans({}, "catroweb") }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
+
+            <div class="show-hide-password">
+              <label class="mdc-text-field mdc-text-field--filled password">
+                <span class="mdc-text-field__ripple"></span>
+                <input type="password" class="mdc-text-field__input" aria-labelledby="password-label" id="password" name="_password" required>
                 <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-              </div>
+                <span class="mdc-floating-label" id="password-label">{{ "password"|trans({}, "catroweb") }}</span>
+                <span class="mdc-line-ripple"></span>
+              </label>
             </div>
 
             <div class="row">
@@ -133,6 +128,7 @@
 {% block js %}
   <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
   <script src="{{ asset('js/register.min.js') }}"></script>
+  {{ encore_entry_script_tags('login') }}
   <script>
     const register =new Register(
       "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
