@@ -1,10 +1,10 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/studio.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/modal.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/profile.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('build/css/studio.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('build/css/modal.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('build/css/project_list.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -40,6 +40,6 @@
     <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
 {% endblock %}
 {% block js %}
-    <script src="{{ asset('js/Studio.min.js') }}"></script>
+    <script src="{{ asset('js/Studio.js') }}"></script>
 {#    {{ encore_entry_script_tags('tab-bar') }}#}
 {% endblock %}

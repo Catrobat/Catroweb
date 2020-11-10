@@ -86,7 +86,6 @@ services:
       - ./../.env.test:/var/www/catroweb/.env.test
       - ./../.env.prod:/var/www/catroweb/.env.prod
       - ./../deploy.php:/var/www/catroweb/deploy.php
-      - ./../Gruntfile.js:/var/www/catroweb/Gruntfile.js
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
