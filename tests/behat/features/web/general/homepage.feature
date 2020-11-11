@@ -118,5 +118,3 @@ Feature: Pocketcode homepage
     And I should see "Huawei AppGallery"
     And I should see "Others"
     And I should see "Chat and forums"
-    And I click "#help"
-    Then I should be on "/app/help"
