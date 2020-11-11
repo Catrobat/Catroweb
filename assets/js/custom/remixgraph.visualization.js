@@ -122,7 +122,7 @@ const _InternalRemixGraph = function () {
 
     const selectedNodeId = selectedNodes[0]
     const idParts = selectedNodeId.split('_')
-    const nodeId = parseInt(idParts[1])
+    const nodeId = idParts[1]
 
     if ($.inArray(nodeId, self.unavailableNodes) !== -1) {
       Swal.fire({
@@ -184,7 +184,7 @@ const _InternalRemixGraph = function () {
           const queryString = (idParts[0] === CATROBAT_NODE_PREFIX)
             ? ('?rec_by_page_id=' + self.recommendedByPageID + '&rec_by_program_id=' + self.programID)
             : ''
-          window.location = newUrlPrefix + nodeId + queryString
+          window.location = newUrlPrefix + '/' + nodeId + queryString
         }
       }
     }
