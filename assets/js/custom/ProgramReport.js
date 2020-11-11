@@ -37,8 +37,11 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
       html: getReportDialogHtml(error, oldReason, oldCategory),
       focusConfirm: false,
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false,
       confirmButtonText: reportButtonText,
       cancelButtonText: cancelText,
       preConfirm: function () {
@@ -94,21 +97,32 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
         Swal.fire({
           text: reportSentText,
           icon: 'success',
-          confirmButtonClass: 'btn btn-success'
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
         }).then(function () {
           window.location.href = '/'
         })
       } else {
         Swal.fire({
           title: errorText,
-          icon: 'error'
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
         })
       }
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       Swal.fire({
         title: errorText,
         text: errorThrown,
-        icon: 'error'
+        icon: 'error',
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false
       })
     })
   }
