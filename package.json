@@ -43,7 +43,7 @@
     "jit-grunt": "^0.10.0",
     "node-sass": "^5.0.0",
     "sass": "^1.29.0",
-    "sass-loader": "^10.0.5",
+    "sass-loader": "^10.1.0",
     "standard": "^16.0.1",
     "stylelint": "^13.7.2",
     "stylelint-config-twbs-bootstrap": "^2.1.0",
