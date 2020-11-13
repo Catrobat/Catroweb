@@ -111,7 +111,9 @@ class ApiContext implements KernelAwareContext
     'uploaded', 'uploaded_string', 'screenshot_large',
     'screenshot_small', 'project_url', 'download_url', 'filesize', ];
 
-  private array $user_structure = ['id', 'username', 'email', 'country',
+  private array $user_structure = ['id', 'username',
+    'projects', 'followers', 'following', ];
+  private array $user_structure_extended = ['id', 'username', 'email', 'country',
     'projects', 'followers', 'following', ];
 
   private array $featured_program_structure = ['id', 'name', 'author', 'featured_image'];
@@ -3145,6 +3147,23 @@ class ApiContext implements KernelAwareContext
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
       Assert::assertNotEmpty($stored_program);
       $this->testExampleProgramStructure($stored_program, $returned_program);
+    }
+  }
+
+  /**
+   * @Then /^the response should have the extended user model structure$/
+   */
+  public function theResponseShouldHaveTheExtendedUserModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $user = json_decode($response->getContent(), true);
+
+    Assert::assertEquals(count($this->user_structure_extended), count($user),
+      'Number of user fields should be '.count($this->user_structure_extended));
+    foreach ($this->user_structure_extended as $key)
+    {
+      Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
+      Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
   }
 
