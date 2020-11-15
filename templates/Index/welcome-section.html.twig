@@ -57,9 +57,8 @@
           </div>
         </a>
         {% endif %}
-        <button id="translateButton" onClick="translateTestHere()">Show Translation</button>
         <div id="description">This is some text to translate</div>
-        <div id="translatedDesc" class="transDescription">This is the translated text</div>
+        <a id="googleTranslateLink" href="#" target="_blank" onClick="translateTestHere()">Translate With Google Translate</a>
       </div>
     </div>
   </div>
@@ -68,16 +67,8 @@
 {% block js %}
   <script type="text/javascript">
     function translateTestHere () {
-      var translation = document.getElementById("translatedDesc");
-      var buttonText = document.getElementById("translateButton").innerHTML;
-      if (!buttonText.localeCompare("Show Translation")) {
-        translation.style.display = "block";
-        document.getElementById("translateButton").innerHTML = "Hide Translation";
-        document.getElementById("translatedDesc").innerHTML = "the text is translated to " + document.documentElement.lang;
-      } else {
-        translation.style.display = "none";
-        document.getElementById("translateButton").innerHTML = "Show Translation";
-      }
+      var content = document.getElementById("description").innerHTML;
+      document.getElementById("googleTranslateLink").href= "https://translate.google.com/?q=" + content + "&tl=" + document.documentElement.lang + "&sl=en";
     }
   </script>
   <style>
