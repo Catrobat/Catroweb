@@ -4,14 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.6.0]
 ### Added
 - serve images as webp
 - CAPI v??
+- Huawei App Gallery
+- project credits & discription syncronized with XML
+- new catblocks release
+- username in project search
 ### Changed
 - use webpack encore
+- help pages replaced
+- change buttons to material
 ### Fixed
-
+- Regex Hotfix
+- fixed rremix graph on open
+- language dropdown, shows correct language in certain browsers
+### Security
+- API Hotfix
 ## [3.5.0]
 ### Added
 - various new bricks
@@ -260,9 +270,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.5.0...HEAD
-[3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.5...v3.5.0
-[3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.4...v3.4.5
+
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.6.0...HEAD
+[3.5.0]: https://github.com/Catrobat/Catroweb/compare/v3.4.5...v3.5.0
+[3.4.5]: https://github.com/Catrobat/Catroweb/compare/v3.4.4...v3.4.5
 [3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.3...v3.4.4
 [3.4.3]: https://github.com/Catrobat/Catroweb/compare/v3.4.0...v3.4.3
 [3.4.0]: https://github.com/Catrobat/Catroweb/compare/v3.3.0...v3.4.0
