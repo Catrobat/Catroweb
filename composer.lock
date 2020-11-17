@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "857b133df09cab9bf7bf62496e93b7c8",
+    "content-hash": "a954c03cc8445619ba99bc10adee665f",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -258,16 +258,16 @@
         },
         {
             "name": "codercat/jwk-to-pem",
-            "version": "0.0.3",
+            "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acodercat/php-jwk-to-pem.git",
-                "reference": "52bdaa2bce6c9f08c081aeada3f55d45b1282500"
+                "reference": "e428b7abba5b37676e30e968930f718cf26724ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acodercat/php-jwk-to-pem/zipball/52bdaa2bce6c9f08c081aeada3f55d45b1282500",
-                "reference": "52bdaa2bce6c9f08c081aeada3f55d45b1282500",
+                "url": "https://api.github.com/repos/acodercat/php-jwk-to-pem/zipball/e428b7abba5b37676e30e968930f718cf26724ac",
+                "reference": "e428b7abba5b37676e30e968930f718cf26724ac",
                 "shasum": ""
             },
             "require": {
@@ -276,9 +276,6 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^7.0"
-            },
-            "suggest": {
-                "ext-gmp": ""
             },
             "type": "library",
             "autoload": {
@@ -297,7 +294,7 @@
                 }
             ],
             "description": "Convert JWK to PEM format.",
-            "time": "2019-06-07T06:06:16+00:00"
+            "time": "2020-11-12T05:40:03+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
