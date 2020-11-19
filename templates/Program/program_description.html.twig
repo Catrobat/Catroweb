@@ -33,6 +33,9 @@
           {{ "noDescription"|trans({}, "catroweb") }}
         {% endif %}
       </div>
+      {% if program.description %}
+          <a id="googleTranslateLink" href="#" target="_blank">Translate With Google Translate</a>
+      {% endif %}
       <div class="h2 mt-3" id="credits-headline">
           <span>
             {{ "credits"|trans({}, "catroweb") }}

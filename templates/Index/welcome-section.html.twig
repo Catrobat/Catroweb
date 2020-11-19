@@ -57,18 +57,7 @@
           </div>
         </a>
         {% endif %}
-        <div id="description">This is some text to translate</div>
-        <a id="googleTranslateLink" href="#" target="_blank" onClick="translateLink()">Translate With Google Translate</a>
       </div>
     </div>
   </div>
 {% endif %}   {#{% if not isWebview() %}#}
-
-{% block js %}
-  <script type="text/javascript">
-    function translateLink () {
-      var content = document.getElementById("description").innerHTML;
-      document.getElementById("googleTranslateLink").href= "https://translate.google.com/?q=" + content + "&tl=" + document.documentElement.lang + "&sl=en";
-    }
-  </script>
-{% endblock %}

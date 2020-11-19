@@ -92,4 +92,14 @@ function ProgramDescription (programId, showMoreButtonText, showLessButtonText,
       showMoreToggle.removeClass('d-none')
     }
   }
+  $(function () {
+    const translateLink = $('#googleTranslateLink')
+    const description = $('#description')
+    translateLink.click(function () {
+      var rawContent = description.html()
+      var content = rawContent.replace(/(\r\n|\n|\r)/gm,"").replace(/\s*<.*?>\s*/gm, " ").replace(/\s+/gm, " ").trim();
+      var url = "https://translate.google.com/?q=" + content + "&tl=" + document.documentElement.lang + "&sl=auto";
+      translateLink.attr("href", url)
+    })
+  })
 }
