@@ -31,70 +31,45 @@ class LogLine
     }
   }
 
-  /**
-   * @return int
-   */
   public function getDebugLevel(): int
   {
     return $this->debug_level;
   }
 
-  /**
-   * @param int $debug_level
-   */
   public function setDebugLevel(int $debug_level): void
   {
     $this->debug_level = $debug_level;
   }
 
-  /**
-   * @return string
-   */
   public function getDebugCode(): string
   {
     return $this->debug_code;
   }
 
-  /**
-   * @param string $debug_code
-   */
   public function setDebugCode(string $debug_code): void
   {
     $this->debug_code = $debug_code;
   }
 
-  /**
-   * @return string
-   */
   public function getDate(): string
   {
     return $this->date;
   }
 
-  /**
-   * @param string $date
-   */
   public function setDate(string $date): void
   {
     $this->date = $date;
   }
 
-  /**
-   * @return false|string
-   */
   public function getMsg()
   {
     return $this->msg;
   }
 
-  /**
-   * @param false|string $msg
-   */
   public function setMsg($msg): void
   {
     $this->msg = $msg;
   }
-
 
   private function getSubstring(string $string, string $needle, bool $last_char = false): string
   {
