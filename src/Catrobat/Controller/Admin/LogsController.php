@@ -93,6 +93,7 @@ class LogsController extends CRUDController
       }
       pclose($file);
     }
+
     return ['files' => $files, 'content' => $content];
   }
 }

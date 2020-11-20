@@ -36,49 +36,49 @@ class LogsControllerTest extends CatrowebTestCase
 
     yield 'case 2' => [
       [
-        '[2020-11-05T06:56:56.863408+01:00] php.INFO: User Deprecated:\n',
-        '[2020-11-05T06:56:56.864832+01:00] request.ERROR: Uncaught PHP Exception\n',
-        '[2020-11-05T06:56:56.929542+01:00] php.INFO: User Deprecated:\n',
+        "[2020-11-05T06:56:56.863408+01:00] php.INFO: User Deprecated:\n",
+        "[2020-11-05T06:56:56.864832+01:00] request.ERROR: Uncaught PHP Exception\n",
+        "[2020-11-05T06:56:56.929542+01:00] php.INFO: User Deprecated:\n",
       ],
       [4, true, 20],
-      ['[2020-11-05T06:56:56.864832+01:00] request.ERROR: Uncaught PHP Exception\n'],
+      ["[2020-11-05T06:56:56.864832+01:00] request.ERROR: Uncaught PHP Exception\n"],
     ];
 
     yield 'case 3' => [
       [
-        '[2020-10-20T19:23:21.582916+02:00] php.INFO: User Deprecated:\n',
-        '[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n',
-        '[2020-10-20T19:30:01.531211+02:00] request.CRITICAL: Uncaught PHP Exception\n',
+        "[2020-10-20T19:23:21.582916+02:00] php.INFO: User Deprecated:\n",
+        "[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n",
+        "[2020-10-20T19:30:01.531211+02:00] request.CRITICAL: Uncaught PHP Exception\n",
       ],
       [4, false, 20],
-      ['[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n'],
+      ["[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n"],
     ];
 
     yield 'case 4' => [
       [
-        '[2020-10-20T19:23:21.582916+02:00] php.INFO: User Deprecated:\n',
-        '[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n',
-        '[2020-10-20T19:30:01.531211+02:00] request.CRITICAL: Uncaught PHP Exception\n',
+        "[2020-10-20T19:23:21.582916+02:00] php.INFO: User Deprecated:\n",
+        "[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n",
+        "[2020-10-20T19:30:01.531211+02:00] request.CRITICAL: Uncaught PHP Exception\n",
       ],
       [4, true, 20],
-      ['[2020-10-20T19:30:01.531211+02:00] request.CRITICAL: Uncaught PHP Exception\n',
-        '[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n', ],
+      ["[2020-10-20T19:30:01.531211+02:00] request.CRITICAL: Uncaught PHP Exception\n",
+        "[2020-10-20T19:23:21.284864+02:00] console.ERROR: Error thrown while running command\n", ],
     ];
 
     yield 'case 5' => [
       [
-        '[2020-10-20T19:36:53.703303+02:00] request.INFO: Matched route\n',
-        '[2020-10-20T22:44:12.937973+02:00] request.EMERGENCY: Uncaught PHP Exception\n',
-        '[2020-10-20T19:36:53.894907+02:00] php.INFO: User Deprecated: Checking for the AdvancedUserInterface\n',
-        '[2020-10-20T19:38:16.941917+02:00] console.ERROR: Error thrown\n',
-        '[2020-10-20T22:44:12.937973+02:00] request.CRITICAL: Uncaught PHP Exception\n',
-        '[2020-10-20T22:44:12.937973+02:00] request.ALERT: Uncaught PHP Exception\n',
+        "[2020-10-20T19:36:53.703303+02:00] request.INFO: Matched route\n",
+        "[2020-10-20T22:44:12.937973+02:00] request.EMERGENCY: Uncaught PHP Exception\n",
+        "[2020-10-20T19:36:53.894907+02:00] php.INFO: User Deprecated: Checking for the AdvancedUserInterface\n",
+        "[2020-10-20T19:38:16.941917+02:00] console.ERROR: Error thrown\n",
+        "[2020-10-20T22:44:12.937973+02:00] request.CRITICAL: Uncaught PHP Exception\n",
+        "[2020-10-20T22:44:12.937973+02:00] request.ALERT: Uncaught PHP Exception\n",
       ],
       [5, true, 20],
       [
-        '[2020-10-20T22:44:12.937973+02:00] request.ALERT: Uncaught PHP Exception\n',
-        '[2020-10-20T22:44:12.937973+02:00] request.CRITICAL: Uncaught PHP Exception\n',
-        '[2020-10-20T22:44:12.937973+02:00] request.EMERGENCY: Uncaught PHP Exception\n', ],
+        "[2020-10-20T22:44:12.937973+02:00] request.ALERT: Uncaught PHP Exception\n",
+        "[2020-10-20T22:44:12.937973+02:00] request.CRITICAL: Uncaught PHP Exception\n",
+        "[2020-10-20T22:44:12.937973+02:00] request.EMERGENCY: Uncaught PHP Exception\n", ],
     ];
   }
 
