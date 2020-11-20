@@ -43,20 +43,20 @@ class LogsController extends CRUDController
         $greater_equal_than_level = $request->query->getBoolean('greaterThan');
       }
     }
-    $searchParam = array();
-    $searchParam["filter"] = $filter;
-    $searchParam["greater_equal_than_level"] = $greater_equal_than_level;
-    $searchParam["line_count"] = $line_count;
+    $searchParam = [];
+    $searchParam['filter'] = $filter;
+    $searchParam['greater_equal_than_level'] = $greater_equal_than_level;
+    $searchParam['line_count'] = $line_count;
 
     $result = $this->getFilesAndContentByDirAndPattern($searchParam, self::LOG_DIR, self::LOG_PATTERN);
 
     return $this->renderWithExtraParams('Admin/logs.html.twig', [
-      'files' => $result["files"],
-      'content' => $result["content"],
+      'files' => $result['files'],
+      'content' => $result['content'],
     ]);
   }
 
-  protected function getFilesAndContentByDirAndPattern(array $searchParam, $dir, $pattern): array
+  protected function getFilesAndContentByDirAndPattern(array $searchParam, string $dir, string $pattern): array
   {
     $finder = new Finder();
     $finder->files()->in($dir)->depth('< 2')->name($pattern);
@@ -75,12 +75,12 @@ class LogsController extends CRUDController
       $file = popen("tac {$filename}", 'r');
 
       $index = 0;
-      while (($line = fgets($file)) && ($index < $searchParam["line_count"]))
+      while (($line = fgets($file)) && ($index < $searchParam['line_count']))
       {
         $log_line = new LogLine($line);
 
-        if (($searchParam["greater_equal_than_level"] && $log_line->getDebugLevel() >= $searchParam["filter"]) ||
-          (!$searchParam["greater_equal_than_level"] && $log_line->getDebugLevel() == $searchParam["filter"])
+        if (($searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() >= $searchParam['filter']) ||
+          (!$searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() == $searchParam['filter'])
         ) {
           $content[$i][$index] = $log_line;
 
@@ -93,6 +93,6 @@ class LogsController extends CRUDController
       }
       pclose($file);
     }
-    return array("files" => $files, "content" => $content);
+    return ['files' => $files, 'content' => $content];
   }
 }
