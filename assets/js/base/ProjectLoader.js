@@ -455,7 +455,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     return $(
       '<div class="program ' + (visited ? 'visited-program ' : '') + '" id="program-' + project.ProjectId + '">' +
       '<a href="' + projectLink + '" class="' + linkCssClasses + '">' +
-      '<img src="' + data.CatrobatInformation.BaseUrl + project.ScreenshotSmall + '" alt="" />' +
+      '<img data-src="' + data.CatrobatInformation.BaseUrl + project.ScreenshotSmall + '" alt="" class="lazyload" />' +
       '<span class="program-name">' + self.escapeJavaScript(project.ProjectName) + '</span>' +
       div +
       '</a></div>'

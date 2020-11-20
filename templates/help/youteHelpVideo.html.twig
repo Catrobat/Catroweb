@@ -1,12 +1,12 @@
 {# Different videos for different themes #}
-<iframe
-    id="youtube-help-video"
+<div class="youtube" id="youtube-index"
     {% if flavor() == 'luna' %}
-        data-src="https://www.youtube.com/embed/-6AEZrSbOMg"
+     data-embed="-6AEZrSbOMg">
     {% elseif flavor() == 'embroidery' %}
-        data-src="https://www.youtube.com/embed/xvkVeEEnS0M"
+     data-embed="xvkVeEEnS0M">
     {% else %}
-        data-src="https://www.youtube.com/embed/BHe2r2WU-T8"
+     data-embed="BHe2r2WU-T8">
     {% endif %}
-    allowfullscreen width="100%">
-</iframe>
+  <div class="play-button">
+  </div>
+</div>

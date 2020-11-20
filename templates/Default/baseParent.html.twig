@@ -12,7 +12,8 @@
 
   <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
 
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/base.css') }}" media="screen"/>
+  <link rel="preload" href="{{ asset('css/'~themeAssets()~'/base.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/base.css') }}"></noscript>
 
   {# Head block for child views #}
   {% block head %}{% endblock %}

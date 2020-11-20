@@ -4,7 +4,7 @@
   "description": "Catroweb =========",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "npx eslint assets/js/**/*.js --ignore-pattern \"assets/js/material/\"",
+    "test": "npx eslint assets/js/**/*.js --ignore-pattern \"lazysizes.js\" \"assets/js/material/\"",
     "fix": "npx eslint assets/js/**/*.js --fix",
     "test-style": "npx stylelint assets/css/**/*.scss",
     "fix-style": "npx stylelint assets/css/**/*.scss --fix",

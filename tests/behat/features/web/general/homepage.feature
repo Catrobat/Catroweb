@@ -73,7 +73,9 @@ Feature: Pocketcode homepage
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the welcome section
-    And I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
+    And I click "#youtube-index"
+    And I wait for AJAX to finish
+    Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
     And I should see "Google Play Store"
     And I should see "iOS App Store"
     And I should see "Huawei AppGallery"

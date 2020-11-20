@@ -1574,7 +1574,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeElementWithIdWithSrc($url): void
   {
     $page = $this->getSession()->getPage();
-    $video = $page->find('css', '#youtube-help-video');
+    $video = $page->find('css', '#youtube-index > iframe');
     Assert::assertNotNull($video, 'Video not found on tutorial page!');
     Assert::assertTrue(false !== strpos($video->getAttribute('src'), (string) $url));
   }
