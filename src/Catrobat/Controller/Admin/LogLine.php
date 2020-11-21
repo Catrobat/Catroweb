@@ -61,12 +61,12 @@ class LogLine
     $this->date = $date;
   }
 
-  public function getMsg()
+  public function getMsg(): string
   {
     return $this->msg;
   }
 
-  public function setMsg($msg): void
+  public function setMsg(string $msg): void
   {
     $this->msg = $msg;
   }

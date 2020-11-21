@@ -2,26 +2,23 @@
 
 namespace Tests\phpUnit\CatrowebPhpUnit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
 /**
  * @coversNothing
  *
- * @inernal
+ * @internal
  */
 class CatrowebTestCase extends TestCase
 {
   /**
-   * @param $object
-   * @param $methodName
-   * @param $parameters
-   *
    * @throws ReflectionException
    *
    * @return mixed
    */
-  public function invokeMethod(&$object, $methodName, array $parameters = [])
+  public function invokeMethod(MockObject &$object, string $methodName, array $parameters = [])
   {
     $reflection = new \ReflectionClass(get_class($object));
     $method = $reflection->getMethod($methodName);
