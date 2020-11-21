@@ -4,6 +4,8 @@ namespace Tests\Catrobat\Controller\Admin;
 
 use App\Catrobat\Controller\Admin\LogLine;
 use App\Catrobat\Controller\Admin\LogsController;
+use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionException;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
@@ -14,7 +16,7 @@ use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
  */
 class LogsControllerTest extends CatrowebTestCase
 {
-  private $object;
+  private MockObject $object;
 
   protected function setUp(): void
   {
@@ -83,15 +85,11 @@ class LogsControllerTest extends CatrowebTestCase
   }
 
   /**
-   * @param $actualFileLines
-   * @param $searchFilters
-   * @param $expectedLines
-   *
-   * @throws \ReflectionException
+   * @throws ReflectionException
    * @covers \LogsController::getFilesAndContentByDirAndPattern
    * @dataProvider getFilesAndContentByDirAndPatternDataProvider
    */
-  public function testGetFilesAndContentByDirAndPattern($actualFileLines, $searchFilters, $expectedLines): void
+  public function testGetFilesAndContentByDirAndPattern(array $actualFileLines, array $searchFilters, array $expectedLines): void
   {
     $logDir = 'var/log/LogFilesTest/';
     $logFile = 'test.log';

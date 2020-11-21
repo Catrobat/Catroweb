@@ -52,41 +52,49 @@ class LogLineTest extends CatrowebTestCase
 
   /**
    * @covers \LogLine::setDate, LogLine::getDate
+   *
+   * @throws ReflectionException
    */
   public function testDate(): void
   {
     $date = '21.04.1993';
-    $this->object->setDate($date);
-    $this->assertEquals($this->object->getDate(), $date);
+    $this->invokeMethod($this->object, 'setDate', [$date]);
+    $this->assertEquals($this->invokeMethod($this->object, 'getDate'), $date);
   }
 
   /**
    * @covers \LogLine::setDebugCode, LogLine::getDebugCode
+   *
+   * @throws ReflectionException
    */
   public function testDebugCode(): void
   {
     $debug_code = 'testCode';
-    $this->object->setDebugCode($debug_code);
-    $this->assertEquals($this->object->getDebugCode(), $debug_code);
+    $this->invokeMethod($this->object, 'setDebugCode', [$debug_code]);
+    $this->assertEquals($this->invokeMethod($this->object, 'getDebugCode'), $debug_code);
   }
 
   /**
    * @covers \LogLine::setDebugLevel, LogLine::getDebugLevel
+   *
+   * @throws ReflectionException
    */
   public function testDebugLevel(): void
   {
     $debug_level = 0;
-    $this->object->setDebugLevel($debug_level);
-    $this->assertEquals($this->object->getDebugLevel(), $debug_level);
+    $this->invokeMethod($this->object, 'setDebugLevel', [$debug_level]);
+    $this->assertEquals($this->invokeMethod($this->object, 'getDebugLevel'), $debug_level);
   }
 
   /**
    * @covers \LogLine::setMsg, LogLine::getMsg
+   *
+   * @throws ReflectionException
    */
   public function testMsg(): void
   {
     $msg = 'message';
-    $this->object->setMsg($msg);
-    $this->assertEquals($this->object->getMsg(), $msg);
+    $this->invokeMethod($this->object, 'setMsg', [$msg]);
+    $this->assertEquals($this->invokeMethod($this->object, 'getMsg'), $msg);
   }
 }
