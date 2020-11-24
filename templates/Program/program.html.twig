@@ -25,7 +25,7 @@
     </div>
 
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
-      <h1 class="h2 no-overflow">{{ program.name }}</h1>
+      <h1 id="name" class="h2 no-overflow">{{ program.name }}</h1>
 
       <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
               '#code-view-icon{{ suffix|default('') }}')">
@@ -262,4 +262,6 @@
     )
     programRecommender.init()
   </script>
+
+  <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
 {% endblock %}
