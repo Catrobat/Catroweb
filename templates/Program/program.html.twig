@@ -25,7 +25,14 @@
     </div>
 
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
-      <h1 class="h2 no-overflow">{{ program.name }}</h1>
+      <div style="display: flex;">
+        <span id="name" class="h2" style="min-width: 30px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{ program.name }}</span>
+        <span style="flex: 1; white-space: nowrap;">
+          <a class="icon-text align-bottom" id="translate-program">
+            <i class="ml-2 material-icons">translate</i>
+          </a>
+        </span>
+      </div>
 
       <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
               '#code-view-icon{{ suffix|default('') }}')">
@@ -261,5 +268,13 @@
       "{{ path('click_stats') }}"
     )
     programRecommender.init()
+  </script>
+
+  <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
+  <script>
+    new Translation(
+      {% if program.description %} true, {% else %} false, {% endif %}
+      {% if program.credits %} true {% else %} false {% endif %}
+    )
   </script>
 {% endblock %}
