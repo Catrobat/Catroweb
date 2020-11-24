@@ -3589,23 +3589,23 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "2c3448975c5560f4a29ac6f3bfc1fb24673609c0"
+                "reference": "3c9f4e7f5a0e0817de2dd88ae8347d4da4b0c57b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/2c3448975c5560f4a29ac6f3bfc1fb24673609c0",
-                "reference": "2c3448975c5560f4a29ac6f3bfc1fb24673609c0",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/3c9f4e7f5a0e0817de2dd88ae8347d4da4b0c57b",
+                "reference": "3c9f4e7f5a0e0817de2dd88ae8347d4da4b0c57b",
                 "shasum": ""
             },
             "require": {
                 "ext-openssl": "*",
                 "lcobucci/jwt": "^3.2",
                 "namshi/jose": "^7.2",
-                "php": "^5.6|^7.0",
+                "php": ">=5.6",
                 "symfony/framework-bundle": "^3.4|^4.0|^5.0",
                 "symfony/security-bundle": "^3.4|^4.0|^5.0"
             },
@@ -3687,7 +3687,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-27T17:30:41+00:00"
+            "time": "2020-11-23T15:31:35+00:00"
         },
         {
             "name": "liip/theme-bundle",
@@ -3750,6 +3750,7 @@
                 "themes",
                 "theming"
             ],
+            "abandoned": "sylius/theme-bundle",
             "time": "2019-06-19T12:53:08+00:00"
         },
         {
