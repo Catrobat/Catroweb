@@ -45,6 +45,9 @@
             <div class="date">
               {{ comment.uploadDate.format('Y-m-d') }}
             </div>
+            <a id="comment-translate-button-{{ comment.id }}" onclick="Translation(document.getElementById('comment-text-{{ comment.id }}'))">
+              translate
+            </a>
             {% if not(app.user) or (app.user and comment.username != app.user.username) %}
             {#  Everybody, but the comment owner must be able to report a comment  #}
               <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
@@ -61,7 +64,7 @@
             {% endif %}
           </div>
           <div class="comment-text">
-            <p>{{ comment.text }}</p>
+            <p id="comment-text-{{ comment.id }}">{{ comment.text }}</p>
           </div>
         </div>
       </div>
