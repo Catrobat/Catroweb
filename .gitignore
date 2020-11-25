@@ -6,6 +6,7 @@ phpunit.xml
 *.local
 phploc.phar
 .jwt/
+.sharedLibraries/
 
 
 ### Scripts ###
