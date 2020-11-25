@@ -3,18 +3,18 @@
 localLanguage: 영어
 username: 아이디
 password: 비밀번호
-createNewPassword: Create new password
+createNewPassword: 새로운 비밀번호 생성
 accountSettings: 계정 설정
 email: 이메일
 aboutPocketCode: 포켓 코드에 대하여
 about: 정보
-education: Education
-chat: Chat and forums
-others: Others
+education: 교육
+chat: 채팅과 포럼
+others: 기타
 tutorials: 튜토리얼
 googlePlay: 구글 플레이
 iosAppStore: IOS 앱 스토어
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: 화웨이 앱 갤러리
 passwordsNoMatch: 비밀번호가 일치하지 않습니다.
 error: 오류
 cancel: 취소
@@ -42,8 +42,8 @@ less: '간단히'
 show-more: '더 보기'
 show-less: '간단히 보기'
 more-information: '자세한 정보 보기'
-less-information: 'Less information'
-ok: Ok
+less-information: '작은 정보보기'
+ok: 예
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
 registrationError: '이미 사용 중인 사용자 이름 또는 이메일 주소입니다.'
 notifications: '알림'
@@ -57,33 +57,33 @@ done: "끝!"
 notificationsReadMessage: "알림이 없습니다."
 confirmMessage: "예, 삭제합니다."
 cancelMessage: "취소"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "사용자 승인 안됨"
 notificationsClearError: "알림을 읽음으로 표시할 수 없습니다!"
 pleaseWait: "잠시 기다려 주십시오..."
 projects: "프로그램"
-oauthPopUpTitle: "External account sign in information"
+oauthPopUpTitle: "외부 계정 정보"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "여기"
+statistics: "통계"
 indexPage:
   recommendedSection:
     info:
       title: '어떤 프로그램 추천하세요?'
       description: '더 많은 ''엄지척''("최고야", "웃음", "사랑"과 "와우!"를 포함하여) 을 받으면, 리스트의 위쪽에 표시됩니다.'
 follower:
-  follows: Following
+  follows: 팔로잉
   followers: 팔로워
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follow: 팔로우
+  username: 사용자
+  followsMe: 나를 팔로우 하기
+  noFollowing: 팔로우하는 사용자가 없습니다.
+  noFollowers: 팔로우하는 사용자가 없습니다.
+  noOtherFollowing: 팔로우하는 사용자가 없습니다.
+  noOtherFollowers: 팔로우하는 사용자가 없습니다.
+  followError: "팔로우 할 수 없습니다!"
+  unfollowError: "언팔로우 할 수 없습니다!"
+  unfollowQuestion: "정말 이 사용자를 언팔로우 하시겠습니까?"
+  unfollowButton: "{username} 을(를) 팔로우 취소함"
 programs:
   welcome:
     title: 환영합니다. Catrobat's %theme%
@@ -92,10 +92,10 @@ programs:
     download: 앱 다운로드하기
     statistics: 더 많은 통계자료
   featured: 추천
-  example: Examples
+  example: 예시
   newest: 최신 프로그램
   recommended: 추천 프로그램
-  scratchremixes: Scratch remixes
+  scratchremixes: 스크래치 리믹스
   noPrograms: 프로젝트가 없습니다.
   deleteConfirmation: |+
     맞습니까?
@@ -119,37 +119,37 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The project description is too long!
+  tooLongDescription: 설명이 너무 깁니다!
   rudeWordsInDescription: 설명에 나쁜 표현은 사용할 수 없습니다.
   tooLongCredits: The project credits are too long!
   rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
-  random: Random projects
-  related: Related projects
+  random: 랜덤 프로젝트
+  related: 관련된 프로젝트
   downloads: '%downloads% 다운로드'
-  sample: Example projects
+  sample: 예제 프로젝트
   views: '%views% 조회'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "이 프로젝트에 관심있는 사람들"
     all: "모두"
   remixes: '리믹스 {0}0|리믹스 {1}1|] 1, Inf]%remixes% 리믹스'
   newRemixesNotificationTitle: '|{1} "%programName%" 1 새로운 리믹스: |] 1, Inf] "%programName%" 새로운 리믹스 %remixes%  :'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: 제출된 프로그램
+  uploaded: 업로드된 프로그램
   reportAsInappropriate: 부적합한 프로그램으로 보고
-  reportProgram: Report project
+  reportProgram: 프로젝트를 보고하다
   languageVersion: 'Catrobat 언어 버전: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: 리포트 하려면 %login% 해 주세요.
+  reportDialogHeader: 이 프로그램을 리포트하는 이유는 무엇인가요?
   reportDialogReason: 이유를 입력하세요
   reportRadioButtonInappropriate: 부적절함
   reportRadioButtonCopyright: 복사권 침해
   reportRadioButtonSpam: 스팸입니다
   reportRadioButtonDislike: 싫어요.
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
+  reportOwnProgram: 자신의 프로그램을 추천할 수 없습니다
+  reportAlready: 이미 이 프로그램을 추천했습니다.
   reportDone: You reported this project!
   updateAppHeader: 응용 프로그램 업데이트
   updateAppText: Please update your app to the newest version to be able to download this project.
@@ -240,12 +240,12 @@ profile:
   oldPass: 이전 비밀번호
   firstEmail: 처음 메일
   secondEmail: 두번째 메일
-  myPrograms: My projects
+  myPrograms: 내 프로젝트
   follows: 팔로우
   follower: 팔로워
   unfollowUser: 이 사용자 팔로잉 취소
   followUser: 이 사용자 팔로잉
-  amountOfPrograms: Amount of projects
+  amountOfPrograms: 많은 프로그램들
   form:
     passwordTooShort: 새 암호는 적어도 %length% 문자 이상이어야 합니다.
     passwordTooLong: 새 암호는 최대 %length% 문자 사용할 수 있습니다.
@@ -254,13 +254,13 @@ profile:
     emailNotValid: 이 이메일 주소는 유효하지 않습니다.
     emailMissing: 이 전자 메일 주소를 업데이트 하는 동안 오류가 발생 했습니다. 유효한 전자 메일 주소가 하나 이상 있어야 합니다.
     emailExists: 이 이메일 주소는 이미 존재합니다.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: 사용자 이름을 사용할 수 없습니다.
+    usernameMissing: 사용자이름이 있어야 합니다.
     usernameExists: 이름이 이미 존재합니다.
     usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: 저장 완료
   reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  programsOf: 프로젝트
   changePicture: 사진 변경
   avatar:
     noImage: 이미지 없음
@@ -375,7 +375,7 @@ apk:
   preparing: '응용 프로그램 준비'
   text: '프로세스 시간이 걸릴 수 있습니다.'
 format:
-  million_abbreviation: M
+  million_abbreviation: 월
 #api
 errors:
   username:
@@ -419,9 +419,9 @@ errors:
   programname:
     rude: Project name must not contain rude wordes.
   program:
-    invalid: Invalid project.
+    invalid: 잘못 된 프로그램입니다.
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: '죄송 합니다, 당신의 프로그램에 Catrobat 언어의 오래 된 버전을 포함하고 있습니다! 당신은 포켓 코드의 최신 버전을 사용하세요?'
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
@@ -446,16 +446,16 @@ failure:
   upload: 업로드 중에 오류가 발생했습니다.
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordTooShort: 'Password too short'
+    emailMissing: '이메일 주소 없음'
+    emailInvalid: '사용할 수 없는 이메일'
+    emailAlreadyInUse: '이미 사용 중인 이메일입니다.'
+    usernameMissing: '사용자이름 없음'
+    usernameTooShort: '사용자 이름이 너무 짧음'
+    usernameTooLong: '이메일 주소가 너무 김'
+    usernameAlreadyInUse: '이미 사용중인 사용자 이름 입니다.'
+    usernameInvalid: '사용자명 유효하지 않음'
+    passwordMissing: '비밀번호 없음'
+    passwordTooShort: '암호가 너무 짧음'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
     usernameContainsEmail: "Username must not contain an email address"
@@ -532,7 +532,7 @@ tags:
     tag4: 음악
     tag5: 예술
     tag6: 실험적인 기능 
-    tag7: Tutorial
+    tag7: 튜토리얼
 admin:
   maintain:
     diskMaintenance: 유지 보수 필요
@@ -540,9 +540,9 @@ admin:
     noRemovableObjects: 삭제할 오브젝트가 없음.
     removableObjects: 삭제 가능한 오브젝트
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: 유사한 프로그램
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: 이용자 자료 더 보기
 pmd:
   submitBtn: 프로그램을 제출하세요
   submitBox:
@@ -554,7 +554,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
-  title: 'Code view'
+  title: '코드 보기 (Automatic Translation)'
   showCode: '코드 표시'
   hideCode: '코드 숨기기'
   showStatistics: '코드의 통계 보기'
@@ -570,8 +570,8 @@ codeview:
   sounds: '소리'
   globals: '전체'
   locals: '지역'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
+  globalVariables: '전역 변수'
+  localVariables: '지역 변수'
   eventBricks: '이벤트 블록'
   controlBricks: '제어 블록'
   motionBricks: '동작 블록'
@@ -579,11 +579,11 @@ codeview:
   looksBricks: '모양 블록'
   penBricks: '펜 블록'
   dataBricks: '변수 블록'
-  specialBricks: 'Special bricks'
+  specialBricks: '특별블럭'
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
+  title: "코드 통계"
+  error: "코드 통계 볼 수 없음"
+  general: '일반'
   bricks: '블록'
   eventBricks: '이벤트'
   controlBricks: '제어'
@@ -592,7 +592,7 @@ codeStatistics:
   looksBricks: '모양'
   penBricks: '펜'
   dataBricks: '변수'
-  specialBricks: 'Special'
+  specialBricks: '특수'
 footer:
   language: 언어
   usefulLinks: 유용한 링크
