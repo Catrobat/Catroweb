@@ -295,6 +295,14 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
+        web-translation:
+            paths:    [ "tests/behat/features/web/translation" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
 
 # --------------------------------------------------------------------------------------------------
 # Exclude specific tests based on their tags here:
