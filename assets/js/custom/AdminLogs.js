@@ -19,7 +19,7 @@ function AdminLogs () {
       },
       success: function (data) {
         $('#searchIcon').hide()
-        var innerLogContainerString = $('<div>', { html: data }).find('#innerLogContainer')
+        const innerLogContainerString = $('<div>', { html: data }).find('#innerLogContainer')
         $('#outerLogContainer').html(innerLogContainerString)
       },
       error: function (data) {

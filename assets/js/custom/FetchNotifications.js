@@ -16,8 +16,7 @@ function FetchNotifications (countNotificationsUrl, maxAmountToFetch, refreshRat
           const userNotificationBadge = $('#sidebar-notifications .badge-pill.' + notificationType)
           const numOfNotifications = data[notificationType]
           if (numOfNotifications > 0) {
-            const text = (numOfNotifications <= self.maxAmountToFetch)
-              ? numOfNotifications.toString() : (self.maxAmountToFetch + '+')
+            const text = (numOfNotifications <= self.maxAmountToFetch) ? numOfNotifications.toString() : (self.maxAmountToFetch + '+')
             userNotificationBadge.text(text)
             userNotificationBadge.show()
           } else {

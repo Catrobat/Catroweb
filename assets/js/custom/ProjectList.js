@@ -98,8 +98,7 @@ class ProjectList {
       author: 'person'
     }
 
-    const propertyValue = this.propertyToShow === 'downloads' ? data.download
-      : this.propertyToShow === 'uploaded' ? data.uploaded_string : data[this.propertyToShow]
+    const propertyValue = this.propertyToShow === 'downloads' ? data.download : this.propertyToShow === 'uploaded' ? data.uploaded_string : data[this.propertyToShow]
     $('<i/>', { class: 'material-icons' }).text(icons[this.propertyToShow]).appendTo($prop)
     $('<span/>', { class: 'project-list__project__property__value' }).text(propertyValue).appendTo($prop)
     return $p
