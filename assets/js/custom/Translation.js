@@ -1,6 +1,7 @@
 /* eslint-env jquery */
 
-function Translation(hasDescription, hasCredit) {
+// eslint-disable-next-line no-unused-vars
+function Translation (hasDescription, hasCredit) {
   const elementsToTranslate = [document.getElementById('name')]
 
   if (hasDescription) {
@@ -15,10 +16,10 @@ function Translation(hasDescription, hasCredit) {
     elementsToTranslate
   )
 
-  $('.comment-translate-button').each(function() {
-      const commentId = $(this).attr('id').substring('comment-translate-button-'.length)
-      translation(this, document.getElementById("comment-text-" + commentId))
-    }
+  $('.comment-translate-button').each(function () {
+    const commentId = $(this).attr('id').substring('comment-translate-button-'.length)
+    translation(this, document.getElementById('comment-text-' + commentId))
+  }
   )
 
   function translation (buttonElement, textElements) {
@@ -36,5 +37,4 @@ function Translation(hasDescription, hasCredit) {
 
     buttonElement.setAttribute('href', 'https://translate.google.com/?q=' + encodeURIComponent(text))
   }
-
 }
