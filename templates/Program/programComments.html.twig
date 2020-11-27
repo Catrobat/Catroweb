@@ -45,7 +45,7 @@
             <div class="date">
               {{ comment.uploadDate.format('Y-m-d') }}
             </div>
-            <a id="comment-translate-button-{{ comment.id }}" onclick="Translation(document.getElementById('comment-text-{{ comment.id }}'))">
+            <a id="comment-translate-button-{{ comment.id }}" class="comment-translate-button">
               translate
             </a>
             {% if not(app.user) or (app.user and comment.username != app.user.username) %}
