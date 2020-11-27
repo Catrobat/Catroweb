@@ -71,24 +71,8 @@ class AsyncHttpClientTest extends TestCase
     $expected_id_of_second_program = 118_499_611;
 
     $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program, $expected_id_of_second_program]);
-    $this->assertIsIterable($scratch_info_data);
-    $this->assertCount(2, $scratch_info_data);
-    Assert::assertArrayHasKey($expected_id_of_first_program, $scratch_info_data);
-    Assert::assertArrayHasKey($expected_id_of_second_program, $scratch_info_data);
 
-    $first_program_data = $scratch_info_data[$expected_id_of_first_program];
-    Assert::assertEquals($expected_id_of_first_program, $first_program_data['id']);
-    Assert::assertArrayHasKey('title', $first_program_data);
-    Assert::assertArrayHasKey('description', $first_program_data);
-    Assert::assertArrayHasKey('author', $first_program_data);
-    Assert::assertEquals('nposss', $first_program_data['author']['username']);
-
-    $second_program_data = $scratch_info_data[$expected_id_of_second_program];
-    Assert::assertEquals($expected_id_of_second_program, $second_program_data['id']);
-    Assert::assertArrayHasKey('title', $second_program_data);
-    Assert::assertArrayHasKey('description', $second_program_data);
-    Assert::assertArrayHasKey('author', $second_program_data);
-    Assert::assertEquals('Techno-CAT', $second_program_data['author']['username']);
+    $this->assertTheTwoFetchedPrograms($scratch_info_data, $expected_id_of_first_program, $expected_id_of_second_program);
   }
 
   public function testFetchesScratchProgramDetailsOfMoreThanTwoProgramsAtOnceShouldOnlyFetchDetailsOfFirstTwoProgramsBecauseMaximumLimitIsExceeded(): void
@@ -101,6 +85,12 @@ class AsyncHttpClientTest extends TestCase
 
     $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program,
       $expected_id_of_second_program, $expected_id_of_third_program, ]);
+
+    $this->assertTheTwoFetchedPrograms($scratch_info_data, $expected_id_of_first_program, $expected_id_of_second_program);
+  }
+
+  private function assertTheTwoFetchedPrograms(array $scratch_info_data, int $expected_id_of_first_program, int $expected_id_of_second_program): void
+  {
     $this->assertIsIterable($scratch_info_data);
     $this->assertCount(2, $scratch_info_data);
     Assert::assertArrayHasKey($expected_id_of_first_program, $scratch_info_data);

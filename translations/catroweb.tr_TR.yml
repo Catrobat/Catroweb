@@ -14,6 +14,7 @@ others: Diğerleri
 tutorials: Öğreticiler
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Şifreler eşleşmedi.
 error: Hata
 cancel: İptal et
@@ -27,6 +28,7 @@ description: Açıklama
 noDescription: Açıklama mevcut değil.
 credits: Yapanlar
 noCredits: Her hangi bir yapanlar yok. 
+notesAndCreditsDescription: Bu projeyi nasıl yarattınız? Başkalarının fikirlerini, senaryolarını veya sanat eserlerini kullandınız mı? Onlara burada teşekkür edin.
 country: Ülke
 loginText: oturum aç
 privacyPolicy: Gizlilik politikası
@@ -328,223 +330,6 @@ termsOfUse:
   bottom1: Zaman zaman buradan tekrar kontrol edin, çünkü her zaman kullanım şartlarımızı geliştirmeye çalışıyoruz.
   bottom2: 'Lütfen Kullanım koşulları ile ilgili önerilerinizi %email-webmaster%''a mail atın.'
   version: Sürüm 1.3, 4 Mart 2014
-help:
-  stepByStep:
-    title: "Adım adım tanıtım"
-    start: "Başlangıç konumu:"
-    description: |
-      Burada ilk projenizi, aşağıdaki açıklamalı videoları kullanarak etkileşimli bir kartpostal oluşturuyorsunuz. Size verilen talimatları izlemelisiniz. Kartpostalın oluşturulması sırasında temel bilgiler Gelecekteki projeleriniz için ihtiyacınız olan Cep Kodu aracılıklıdır. Bu rehberli videolardan sonra, diğer tüm aktiviteler kendi kişisel Cep Kodu projelerinizi oluşturma konusunda size daha fazla özgürlük verecektir.
-    step1:
-      title: 'Yeni bir proje yap'
-      detail:
-        text1: '"Yeni"''ye dokunun.'
-        text2: 'Bir proje adı girin, "Boş proje oluştur" u seçin ve "Tamam" a dokunun.'
-    step2:
-      title: "Yeni bir nesne oluştur"
-      detail:
-        text1: 'Dokunun:'
-        text2: 'Yeni nesnenizin ilk görünümü için kaynak seçin.'
-        text3: 'Yeni obje oluşturmak için bir obje adı girin ve ''''OK'''' a basın.'
-        special1: 'Yeni bir görünüm çizin.'
-        special2: 'Galeriden seçin.'
-        special3: 'Fotoğraf Çek.'
-    step3:
-      title: "Harekete Başla"
-      detail:
-        text1: 'Dokunun:'
-        text2: 'Kullandığımız ilk tuğla "Hareket" kategorisi dışında.'
-        text3: '"Kay" tuğlasını seçin. Nesne sahnedeki tugla tarafından tanımlanan konuma taşınacaktır.'
-        text4: 'Tuğla yüzer durumda. Yapıştırmak için tuğlayı istediğiniz konuma taşıyın. Eklenmiş durumda olan tuğlalara dokunarak yüzer duruma getirdikten sonra yine taşıyabilirsiniz.'
-        text5: 'Sayfaya gitmek ve "kayma" nesnesini görmek için "Oyna" düğmesine tıklayın.'
-        text6: 'Sahne alanı''ndan geri gitmek için ''Android Geri Düğmesi''ni kullanın.'
-    step4:
-      title: "Görünümü değiştir"
-      description: "Nesnenizin görünümünü değiştirebilirsiniz."
-      detail:
-        text1: '"Bakmak için değiştirin" tuğlasını seçin. Bu tuğla ile bir görünüm seçebilir veya yeni bir tane oluşturabilirsiniz.'
-        text2: 'Tuğlayı "Kayma" - tuğlasının altına oturtun.'
-        text3: 'Yeni bir görünüm oluşturmak için aşağı açılan alana dokunun.'
-        text4: 'Daha önceki gibi resmin kaynağını seçin.'
-        text5: 'Şimdi yeni resmi seçmeniz gerekmektedir.'
-        text6: 'Davranışı sahnede görmek için oyna''ya dokunun.'
-    step5:
-      title: "Konuş"
-      description: "Şimdi nesneyi nasıl konuşturacagınızı öğreneceksiniz."
-      detail:
-        text1: '"Konuş" tuğlasını seçin. Nesne, bu tuğla çalıştırıldığında metni konuşuyor.'
-        text2: 'Tuğla''yı "görünüme geç" tuğlası''nın altına oturtun.'
-        text3: 'Davranışı sahnede görmek için oyna''ya dokunun.'
-    step6:
-      title: 'Tekrar ve tekrar'
-      description: "Bu aşamada, nesnelerin davranışlarının nasıl tekrar edileceği gösterilmektedir."
-      detail:
-        text1: '"Forever" modelini seçin. Döngüdeki her şey devamlı tekrarlar.'
-        text2: '"Sonsuza dek" tuğlasını "Proje başladığında" altına yapıştırın.'
-        text3: 'Başka bir "Kayma" tuğlası ekleyin.'
-        text4: '"Döngü" tuğlasını "Döngü sonu" tuğlası üzerine oturtun.'
-        text5: 'Metin alanına dokunarak x ve y değerlerini 0 olarak ayarlayın.'
-        text6: 'Davranışı sahnede görmek için oyna''ya dokunun.'
-    step7:
-      title: "Dokunmak herşeydir"
-      description: 'Proje sahnede çalışırken nesnenin davranışını da kontrol edebilirsiniz.'
-      detail:
-        text1: '"Ne zaman yüklendi" tuğlasını seçin. Sahnedeki nesneye dokunduğunuzda, "Ne zaman yüklendi" altındaki her tuğla bir kez yerine konulacaktır.'
-        text2: 'Diğer tuğlaların altına "Dokunduğunda" yerleştirin.'
-        text3: '"Doğru dönüş" tuğlasını seçin ve "Ne zaman vuruldu" tuğlasının altına oturtun.'
-        text4: 'Şimdi bu komut dosyanız var.'
-        text5: 'Davranışı sahnede görmek için Oyna''ya dokunun. Nesneye şimdi dokunursanız, dönmeye başlayacaktır.'
-    step8:
-      title: "Tuğla kopyalayın, silin veya düzenleyin"
-      detail:
-        text1: 'Her tuğla''nın sol tarafına bir kez dokundugunuzda  içerik menüsü açılır. Formül düzenleyicisi ile oradaki tuğla degerlerini, taşır, kopyalar, siler yada istediginiz şekilde düzenleyebilirsiniz.'
-    step9:
-      title: "Uygulamada gezinme"
-      detail:
-        text1: 'Proğram içinde gezinmek için Android geri düğmesini kullanın.'
-        text2: 'Nesnenizin genel görünümüne bir ekran geri dönün. Burada senaryolara ve aynı zamanda nesnenin görünüm ve seslerinin güçlü bir temsiline gidebilirsiniz. Orada adlarını değiştirebilir, kopyalayarak görünüm ve sesleri ekleyebilir veya silebilirsiniz.'
-        text3: 'Nesnelerin ve arka planınızın genel görünümüne tekrar ulaşmak için ''''Android Geri Düğmesini'''' kullanın.'
-    step10:
-      title: "Arka planı değiştir"
-      description: "Nesnelerinize ve projenizin arka planına genel bakış budur."
-      detail:
-        text1: 'Arka plan, bir nesne gibi olmakla birlikte, sadece arka planda olabilir.'
-        text2: 'Senaryolar, sesler ekleyebilir ve arka plan nesnesine aynı şekilde bakabilirsiniz.'
-    step11:
-      title: "Ana Menü"
-      description: "Bu ekrana ulaşmak için Android geri düğmesini kullanın."
-      detail:
-        text1: 'Şu anda açık olan projenize devam edin.'
-        text2: 'Yeni bir proje ekleyin.'
-        text3: 'Tüm yerel projelerinizi görün.'
-        text4: 'Yardım sitesini ziyaret edin ve diğer kullanıcılarla görüş alişverişinde bulunun.'
-        text5: 'Cep Kodu projelerinin dünyasını keşfedin. Beğendiğiniz projeleri indirin ve yeniden düzenleyin.'
-        text6: 'Şu anda açık olan projeyi yükleyin.'
-  tutorialcards:
-    title: "Öğreticiler"
-    description1: "Bu öğreticiler size etkili hileleri gösterir"
-    getReady: "Hazır Ol:"
-    tryCode: "Bu kodu dene:"
-    doIt: "Bunu yapın:"
-    tip: "İlave ipucu:"
-    card1:
-      title: "Boyutu değiştir"
-      description: "Boyutu değiştirmek için ördeg'e dokunun."
-      one: "Boyutunu değiştirmek istediğiniz nesneyi ekleyin, ör. Hayvan."
-      two: "Aşağıdaki tuğlaları, dokunduğunda küçültmek için (orijinal boyutunun% 20'si kadar) nesnenin komut dosyalarına yerleştirin."
-    card2:
-      title: "Görünümü değiştir"
-      description: "Otomatik olarak saymak icin bu yöntemi kullanın."
-      one: "Görünüşünü değiştirmek istediğiniz nesneyi ekleyin ör. öğeler."
-      two: "Nesnenin görünümüne daha fazla resimler ekleyin."
-      three: "Bir saniyenin ardından bakmaya devam etmek için aşağıdaki tuğlaları nesnenin komut dosyalarına yerleştirin."
-    card3:
-      title: "Animasyon"
-      description: "Uçan bir papağan istediğinizde, bu yöntemi kullanın."
-      one: "Taşımak istediğiniz nesneyi ekleyin."
-      two: "Hareketi gösteren nesnenin görüntüsüne bir başka resim ekleyin."
-      three: "Belli bir süre sonra nesnenin konumunu sürekli olarak değiştirmek için aşağıdaki tuğlaları nesnenin komut dosyalarına yerleştirin. Ek olarak kenar taraftan zıplayarak sahneyi de değiştirebilirsiniz."
-    card4:
-      title: "Kay"
-      description: "Bir noktadan diğerine yavaşça hareket edin"
-      one: "Kaydırmak istediğiniz nesneyi ekleyin. ör. uçak."
-      two: "Aşağıdaki tuğlaları yerleştirin ve hareketin gerçekleşmesi gereken alanı tanımlayın."
-    card5:
-      title: "Ses çıkar"
-      description: "Nesneye tıklayarak bir ses çalın."
-      one: "Bir sesi istediğiniz nesneye ekleyin ör. köpek."
-      two: "Çalmayı mümkün kılmak için aşağıdaki tuğlaları yerleştirin. Kişisel kütüphanenizden, Cep Kod medya kitaplığından bir ses seçin veya kendiniz bir ses kaydedin."
-    card6:
-      title: "Konuş"
-      description: "Bir nesneyi konuşturmak için bu kodu kullanın."
-      one: "Konuşmak istediğiniz nesneyi ekleyin (ör. Carrie)."
-      two: "Ses çıkışını mümkün kılmak için aşağıdaki tuğlaları takın."
-    card7:
-      title: "GSensor"
-      description: "Eğim sensörlerini kullanarak bir nesneyi kontrol ediniz."
-      one: "Sayfaya taşınmak istediğiniz nesneyi ekleyin."
-      two: "Nesneyi telefonunuzun algılayıcılarıyla kontrol etmek için aşağıdaki tuğlaları yerleştirin. Bu nedenle \"x ve y eğimini\" seçin. Uygun hareketi elde etmek için \"eğim\" i ayarlayın. Örneğin nesnenin hareketi çok mantıklıysa, eğimi 10 ile bölün."
-    card8:
-      title: "Pusula"
-      description: "Kendi pusulanı oluştur"
-      one: "Pusula yönünde işaret etmek istediğiniz nesneyi ekleyin."
-      two: "Nesnenin yönünü ayarlamak için aşağıdaki tuğlaları ekleyin. Ayrıca sonsuza kadar bir döngü ekleyin."
-    card9:
-      title: "Yayınla"
-      description: "Bir nesneden diğerine ileti gönderin."
-      one: "Yeni bir nesne ekleyin, ör. Alice, yayın iletisi göndermelidir. Ayrıca, arka planın görünümüne ikinci bir arka plan ekleyin. Arka plan, yayın iletisini alır almaz diğer görünümüne geçer."
-      two: "Tuğlayı „herkese gönder“e yerleştirir ve diğer nesne mesajı aldığında ne olacağını belirler."
-      three: "Bu durumda, ön katmandaki nesneye tıklandığında arka plan değişir."
-    card10:
-      title: "Değişkeni göster"
-      description: "Bir değişkenin değerini gösterin."
-      one: "Telefonunuzun algılayıcılarıyla taşımasını istediğiniz bir nesne ekleyin (bkz.%tutorial_card_link_7% Tanıtım Kartı %link_end%). Ayrıca, yayın iletisi aldığında değişmesi gereken ikinci bir arka plan ekleyin."
-      two: "Hareket eden nesnenin geçerli x ve y konumunu bir değişkende kaydetmek için aşağıdaki tuğlaları yerleştirin."
-      three: "\"Değişkeni göster\" sayesinde sahnedeki değerleri görüntüleyebilirsiniz."
-    card11:
-      title: "Çarpışma algılama"
-      description: "İki nesne arasında bir çarpışma saptayın."
-      one: "Telefonunuzun algılayıcılarıyla hareket etmesi gereken iki nesne ekleyin, Örneğin. Alex (bkz. %tutorial_card_link_7% Tutorial Card %link_end%)."
-      two: "Hareketli nesne Alex ‘in mevcut \" x ve y konumu \"nu kaydedin (bkz. %tutorial_card_link_10% Öğretici Kart %link_end%) ve aşağıdaki komut dosyalarını ekleyin. İki nesnenin üst üste gelip gelmediğini sürekli olarak kontrol edin. Böyle yaparlarsa, sabit nesne bu durumda gizlenmelidir."
-    card12:
-      title: "Yüz tanıma"
-      description: "Bir nesneyi yüz algılama yöntemiyle kontrol edin."
-      one: "Önce yüz tanıma tuğlalarının etkin olduğundan emin olun. Bu nedenle ayarlara gidin."
-      two: "Yeni bir nesne ekleyin ve bir yüz tespit edilirse göstermek için aşağıdaki tuğlaları yerleştirin. Bir yüzün algılanıp algılanmadığını kontrol edin ve bunu sonsuz döngüye koyun. Kamera bir yüzü algılarsa, değişkenin değeri \"DOĞRU\", aksi takdirde \"YANLIŞ\" tır."
-  starterPrograms:
-    title: "Başlangıç ​​projeleri"
-    description: "Bu başlangıç ​​projelerini deneyin. Değişiklik yapmak ve fikirlerinizi eklemek için içeriye bakın."
-    categories:
-      games: "Oyunlar"
-      animations: "Animasyonlar"
-      interactive: "Etkileşimli sanat ve hikayeler"
-      music: "Müzik ve dans"
-  gameJam:
-    title: "Game jolt Sitesine Cep Kodu oyunu nasıl yüklenir?"
-    text0: "Öncelikle oyununuzda tebrikler! Artık Game Jolt sitesinde yükleyebileceğiniz bağımsız bir Android uygulaması oluşturmak için %link% üzerine yükleyebilirsiniz."
-    title1: "Kaydolma"
-    text1: "İlk önce bir hesap oluşturmanız gerekir. Bundan sonra oluşturulan projenizi yükleyebilirsiniz. Endişelenmeyin kolay ve sadece bir kullanıcı adı ve şifre düşünmeniz gerekiyor. Her ikisini de doldurduktan sonra, Tıklayın 'kayıt ol yada giriş yap'."
-    title2: "Karşıya yükle"
-    text2: "Kayıt işleminden sonra oyununuzu yükleyebilirsiniz. Sadece bir isim düşünün ve bir açıklama ekleyin. Ayrıca açıklama alanına #AliceJam150’yi ekleyin."
-    title3: "Projenizi arayın"
-    text3: "Tüm projelerinizin listelendiği Cep Kodu profilinize gidin veya aramayı ve proje adınızı kullanarak doğrudan projenizi arayın."
-    title4: "Android uygulaması oluştur"
-    text4: "Doğrudan proje detay sayfasında bir Android uygulaması oluşturabilirsiniz.\"Apk'yı hazırla\" yı tıkladığınızda uygulama oluşturulur."
-    title5: "Uygulamayı indir"
-    text5: "İnşaat sürecinden sonra projenizi bir uygulama olarak indirebilirsiniz. İndirilen bu uygulamanın, %link% 'e katılabilmek için doğrudan Game Jolt Sitesine tekrar yüklenmesi gerekiyor."
-    title6: "GameJolt.com'a Kayıt ol/Giriş yap"
-    text6: "%link% 'i ziyaret edin sonra menüdeki 'Oturum Aç' veya 'Kaydol'a tıklayın! Zaten bir hesabınız varsa oturum açın, yoksa E-posta adresiniz, Kullanıcı Adı ve Şifre ile kayıt olmanız gerekir."
-    title7: "Oyununuzu Game Jolt Sitesine yükleyin"
-    text7: "Giriş yaptıktan sonra gösterge tablonuza gidin. Orada oyununuzu ekleyebilirsiniz. Önce 'Kuralları kabul et'i tıklamanız gerekir. Sonra oyun bilgilerini doldurun. Motor/Dil/Yaratım Aracı olarak 'Diğer'i seçin ve Diğer Motor/Dil/Aracı' Android 'alanına ekleyin. 'Geliştirme' statüsü olarak 'Bitti/Kararlı'ı seçin. Açıklamaya #AliceJam150’ yi eklediğinizden emin olun böylece %link% sayfasında görünür."
-    text7_1: "Oyununuzu yayınlamadan önce, bir sonraki adımları izleyin. En azından bir 'küçük resim' eklemelisiniz, 'olgunluk derecelendirmesi'ni ayarlayın ve ' yapı/dosyalar'a tıklayarak oyunlarınızı yükleyin."
-    text7_2: "'Paket Ekle'yi tıklayın ve paket bilgilerini doldurun. Kaydedin ve sürüm ekleyin."
-    text7_3: "Şimdi projenizin apk dosyasını yükleyebilirsiniz. İndirilen uygulamayı indirme klasörünüzde bulabilirsiniz. Veri gezgini kullanmak en iyisidir (örn. Es veri gezgini)."
-    text7_4: "Not: Uygulama '.apk' soneki eksikse, elle '.apk' eklemeniz gerekir. Sadece dosyayı yeniden adlandırın. Şimdi yükleyebilmelisiniz."
-    text7_5: "Yüklemeden sonra oyunu yayınlamak için 'Tamam' üzerine tıklayın. Bu daha sonra, insanlara oyununuzu indirmek için bir bağlantı gösterecektir."
-    text7_6: "Artık ilk oyununuzu Game Jolt sitesine yüklediniz ve aktif hale getirdiniz. Tebrikler!"
-    text7_7: "Artık diğer insanlar oyunu keşfedecek ve %link% sayfasında görünecek."
-  aliceGameJamTutorialcards:
-    title1: "Harikalar Diyarı('na Hoşgeldin)"
-    subtitle1: "Karakterleri canlandırın ve basıldığında bir 'etkinlik oluşturun'"
-    description1: |
-      Karakterinizden birinin basit bir animasyonla canlanmasına nasıl izin vereceğinizi öğrenin ve karakterlerinizin onlara dokunurken nasıl bir şeyler yapacaklarını öğrenin. Video, farklı görünümler kullanarak karakterinizi nasıl kolayca hareketlendirebileceğinizi gösterir. Ayrıca size "ne zaman dokundu" olayını nasıl oluşturacağınızı ve nesneler arasında yayın iletilerinin nasıl gönderileceğini göstereceğiz.
-    title2: "Alice'yi koru!"
-    subtitle2: "Eğitim sensörlerini kullanın ve nesneler arasında bir çarpışma algılayın"
-    description2: "Burada, telefonunuzun eğim sensörlerini kullanarak bir karakteri nasıl kontrol edeceğinizi öğreneceksiniz. Telefonunuzu sola veya sağa doğru yatırarak Alice'in hareketini kontrol edebilirsiniz. Öğreticimizi izleyin ve nesnelerin gökyüzünden rasgele düşmesine ve diğer nesnelerle çarpışmalarının belirlenmesinde deneyimli olmasına izin verin."
-    title3: "Şapkacı - Vur ve Kaç"
-    subtitle3: "Hareketli bir manzara oluşturun ve Şapkaların hareketini kontrol edin"
-    description3: "Bu öğreticide, hareket halindeymiş gibi görünen bir manzaranın nasıl oluşturulacağını öğreneceksiniz. Bunu hareket illüzyonunu yaratmak için ekranda nesneleri hareket ettirerek yapacağız. Aynı zamanda Hatterinizi telefonunuzu eğerek nasıl hareket ettireceğinizi de göstereceğiz."
-    title4: "Şapkacı - Vur ve Kaç"
-    subtitle4: "Şapkacı kötü kartları vursun"
-    description4: "Bu öğreticide, karakterinize doğru rastgele hareket eden düşmanların nasıl oluşturulacağını göstereceğiz. Buna ek olarak, Hatter'in teadrops atmasını ve çarpışma algılamasıyla düşmanın vurulup vurulmadığını öğreneceksiniz."
-    title5: "Bir Cheshire Kedisi Patlat"
-    subtitle5: "Değişkenleri kullanarak bir puan oluşturun"
-    description5: "Bu öğreticide size puan yaratmak için değişkenlerin nasıl kullanılacağını göstereceğiz. Skorlar, oyunda yararlı öğelerdir. Skorumuz kediyi ne sıklıkta yakaladığınızı gösterir."
-    title6: "Bir Tavşan Yarışı"
-    subtitle6: "Hareketli bir arka plan oluşturun"
-    description6: |
-      Bu eğitim, arka plandaki grafikleri belirli bir yönde kaydırarak dikey olarak kaydırılmış bir arka plan oluşturmayı öğretir. Size öğreteceğimiz başka bir şey ise, karakterin üzerine tıklayarak nasıl ilerlediklerini göstermektir.
-      Oyunu biraz zorlaştırmak için, karakterinizin zaman içindeki hızını nasıl yavaşlatacağınızı göstereceğiz.
-    download: "Projeyi indir"
 search:
   dotdotdot: Ara...
   search: Ara
@@ -715,7 +500,7 @@ language:
   spanish_spain: İspanyolca (İspanya)
   swedish: İsveççe
   thai: Taylandca
-  turkish: Türkçe
+  turkish: Turkish
   ukrainian: Ukraynaca
   vietnamese: Vietnamca
 ci:
@@ -844,28 +629,6 @@ clipboard:
   fail: Bağlantı panoya kopyalanamadı!
 next: İleri
 previous: Önceki
-help-cards:
-  headings:
-    starters: Başlayanlar
-    tutorials: Öğreticiler
-    stepbystep: Adım adım
-    getinvolvedGoogle: Google Play'den indirin
-    getinvolvedApple: IOS'dan indirin
-    discord: Discord'a katılın
-    game_design: Oyun tasarımı
-    education: Eğitim platformu
-    discuss: tartışmak
-  text:
-    starters: "Deneyin ve %theme% ile yeniden karıştırın"
-    tutorials: "%theme% etkili bilgiler"
-    stepbystep: "%theme% içinde 10 kolay adım gerçekleştirin"
-    getinvolved: Uygulamayı indirin ve başlayın
-    discord: Discord topluluğuna katılın
-    game_design_1: İçin etkili bilgiler
-    game_design_2: oyun yaratmak
-    education: Başlangıç ​​kursu ve harika kaynaklar
-    discuss_1: Diğerleriyle iletişim kurun
-    discuss_2: kullanıcılar
 media-packages:
   title: Medya-Paketler
   description: Aşağıdaki kategorilerde size Cep Kodu projeleri eklemek için ek aktörler ve nesneler bulabilirsiniz.

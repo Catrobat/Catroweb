@@ -6,19 +6,24 @@
           <h3>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h3>
           <ul class="list-vertical">
             <li>
-              <a id="help" href={{ url('catrobat_web_help') }}>{{ "tutorials"|trans({}, "catroweb") }}</a>
+              <a id="help" href="https://wiki.catrobat.org/bin/view/Documentation/" target="_blank">
+                {{ "tutorials"|trans({}, "catroweb") }}
+              </a>
             </li>
             <li>
-              <a href="https://catrob.at/ShareAbout"
-                 target="_blank">{{ "about"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/ShareAbout" target="_blank">
+                {{ "about"|trans({}, "catroweb") }}
+              </a>
             </li>
             <li>
-              <a href="https://catrob.at/education">
-                {{ "education"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/education" target="_blank">
+                {{ "education"|trans({}, "catroweb") }}
+              </a>
             </li>
             <li>
-              <a href="https://catrob.at/ChatAndForums">
-                {{ "chat"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/ChatAndForums" target="_blank">
+                {{ "chat"|trans({}, "catroweb") }}
+              </a>
             </li>
           </ul>
         </div>
@@ -51,6 +56,10 @@
               <li>
                 <a href="https://catrob.at/ca"
                    target="_blank">{{ "iosAppStore"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="https://catrob.at/HuaweiAppGallery"
+                   target="_blank">{{ "huaweiAppGallery"|trans({}, "catroweb") }}</a>
               </li>
             {% endif %}
             <li>

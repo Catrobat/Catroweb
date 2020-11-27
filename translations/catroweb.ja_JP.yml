@@ -14,6 +14,7 @@ others: Others
 tutorials: チュートリアル
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: パスワードが一致しませんでした。
 error: エラー
 cancel: キャンセル
@@ -27,6 +28,7 @@ description: 説明
 noDescription: 説明はありません。
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: 国
 loginText: ログイン
 privacyPolicy: プライバシーポリシー
@@ -337,227 +339,6 @@ termsOfUse:
   bottom1: 使用規約を改善するために常に努めておりますので、随時ここに戻ってご確認ください。
   bottom2: 'これらの利用規約に関するあらゆる提案を、%email-webmaster% までメールしてください。'
   version: バージョン 1.3、2014/3/4
-help:
-  stepByStep:
-    title: "順を追って紹介"
-    start: "開始位置:"
-    description: |
-      Here you create your first project, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
-    step1:
-      title: 'Make a new project'
-      detail:
-        text1: '"新しい" をタップします。'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
-    step2:
-      title: "新しいオブジェクトを作成します"
-      detail:
-        text1: 'タップ:'
-        text2: '新しいオブジェクトの最初の外見のソースを選択します。'
-        text3: 'オブジェクト名を入力し、"OK"をタップするとオブジェクトを作成します。'
-        special1: '新しい外見を描画します。'
-        special2: 'ギャラリーから選択します。'
-        special3: '写真を撮影します。'
-    step3:
-      title: "移動を開始します。"
-      detail:
-        text1: 'タップ:'
-        text2: '私たちが最初に使用するブロックは、カテゴリ "動き" の外です。'
-        text3: '"滑空" ブロックを選択します。オブジェクトは、ステージ上をブロックで定義された新しい位置に移動します。'
-        text4: 'ブロックが浮動するようになります。貼り付けるには、目的の位置にブロックを移動します。再び浮動するまでブロックをタップすることで、すでに挿入されたブロックを移動することもできます。'
-        text5: '"再生" をタップして、ステージに移動します。オブジェクトが滑空するのを見てください。'
-        text6: 'ステージから戻るには、Android の戻る ボタンを使用します。'
-    step4:
-      title: "外見を変更します"
-      description: "オブジェクトの外見を変更できます。"
-      detail:
-        text1: '"外見を切り替える" ブロックを選択します。このブロックで、外見を選択したり、新しいものを作成できます。'
-        text2: '"滑空" - ブロックの下にブロックをはめ込みます。'
-        text3: 'ドロップダウン フィールドの中をタップして、新しい外見を作成します。'
-        text4: '前のように、画像のソースを選択します。'
-        text5: '新しいイメージを選択してください。'
-        text6: '再生をタップして、ステージ上の動作を見ます。'
-    step5:
-      title: "話す："
-      description: "オブジェクトの話を作成する方法を確認します。"
-      detail:
-        text1: '"話す" ブロックを選択します。このブロックが実行されたときに、オブジェクトはテキストを話します。'
-        text2: '"外見を切り替える" ブロックの下にブロックをはめ込みます。'
-        text3: '再生をタップして、ステージ上の動作を見ます。'
-    step6:
-      title: '何度も繰り返し'
-      description: "この手順は、オブジェクトの動作を繰り返す方法を示します。"
-      detail:
-        text1: '"永久" ブロックを選択します。ループ内のすべてが永久に繰り返されます。'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: '別の "滑空" ブロックを追加します。'
-        text4: '"滑空" ブロックを、"ループの終わり" ブロックの上にはめ込みます。'
-        text5: 'X と y の値のテキスト フィールドをタップし、 0 に設定します。'
-        text6: '再生をタップして、ステージ上の動作を見ます。'
-    step7:
-      title: "タップがすべて"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
-      detail:
-        text1: '"タップされている" ブロックを選択します。ステージ上のオブジェクトをタップすると、"タップされている" の下のすべてのブロックが同時に実行されます。'
-        text2: '"タップされている" を他のブロックの下に配置します。'
-        text3: '"右方向" ブロックを選択し、"タップされている" ブロックの下にはめ込みます。'
-        text4: 'このスクリプトができました。'
-        text5: '再生をタップして、ステージ上の動作を見ます。オブジェクトをタップすると、回転します。'
-    step8:
-      title: "ブロックのコピー、削除、または編集"
-      detail:
-        text1: '各ブロックの左側で 1 回タップすると、コンテキスト メニューが開きます。そこでブロックの値を移動コピー、削除、または数式エディターで編集することができます。'
-    step9:
-      title: "アプリでのナビゲーション"
-      detail:
-        text1: 'Android の戻るボタンを使用して、アプリに移動します。'
-        text2: 'オブジェクトの概要に 1 つ画面を戻ります。ここでスクリプトに入り、外見およびオブジェクトのサウンドの強力な表現を行うことができます。外見とサウンドの名前を変更、コピー、追加、または削除することができます。'
-        text3: 'Android の戻るボタンを再度使用して、オブジェクトと背景の概要を取得することができます。'
-    step10:
-      title: "背景を変更します"
-      description: "This is the overview of your objects and your project's background."
-      detail:
-        text1: '背景は、背景にだけ置くことができるオブジェクトのようなものです。'
-        text2: '背景オブジェクトと同じ方法で、スクリプト、サウンド、および外見を追加できます。'
-    step11:
-      title: "メイン メニュー"
-      description: "Android の戻るボタンを使用して、この画面を表示します。"
-      detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
-        text4: 'ヘルプ サイトに移動し、他のユーザーと話し合います。'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
-  tutorialcards:
-    title: "チュートリアル"
-    description1: "このチュートリアルでは、効果的な技法の使い方を示します"
-    getReady: "準備してください:"
-    tryCode: "このコードを試しましょう:"
-    doIt: "やってみましょう:"
-    tip: "追加のヒント:"
-    card1:
-      title: "サイズを変更します"
-      description: "タップすると、鴨のサイズを変更します。"
-      one: "サイズを変更したいオブジェクトを追加します。例えば動物など。"
-      two: "タップしたときに最小化するため (元のサイズの 20%) 次のブロックをオブジェクトのスクリプトに挿入します。"
-    card2:
-      title: "外見を変更します"
-      description: "この技法を使用して、自動的にカウントします。"
-      one: "外見を変更したいオブジェクトを追加します。例えばアイテムなど。"
-      two: "オブジェクトの外見に追加の写真を含めます。"
-      three: "1 秒後に継続的に外見を切り替えるために、次のブロックをオブジェクトのスクリプトに挿入します。"
-    card3:
-      title: "アニメーションを動かします"
-      description: "空飛ぶオウムの場合は、この技法を使用します。"
-      one: "移動したいオブジェクトを追加します。"
-      two: "動きをあらわすオブジェクトの外見に別の画像を含めます。"
-      three: "一定の時間後に継続的にオブジェクトの位置を変更するために、次のブロックをオブジェクトのスクリプトに挿入します。さらに、端でバウンスさせることによってステージに余裕を入れることができます。"
-    card4:
-      title: "滑る："
-      description: "ある位置から別の位置にスムーズに移動します。"
-      one: "滑空するオブジェクトを追加します。例えば飛行機など。"
-      two: "次のブロックを挿入し、動きが起こる領域を定義します。"
-    card5:
-      title: "サウンドを再生"
-      description: "ドラムをタップすると、このサウンドを再生します。"
-      one: "サウンドを再生するオブジェクトを追加します。例えば犬など。"
-      two: "再生を実現するために、次のブロックを挿入します。あなたの個人ライブラリー、ポケットコード メディア ライブラリー、または自分で記録したサウンドを選択します。"
-    card6:
-      title: "話す："
-      description: "このコードを使用すると、オブジェクトが話をします。"
-      one: "話したいオブジェクトを追加します。例えばキャリーなど。"
-      two: "音声出力を実現するために、次のブロックを挿入します。"
-    card7:
-      title: "Gセンサー"
-      description: "この技法を使用すると、お使いのデバイスの傾きでオブジェクトを制御します。"
-      one: "ステージ上で移動したいオブジェクトを追加します。"
-      two: "お使いの携帯電話のセンサーを通じてオブジェクトを制御するために、次のブロックを挿入します。したがって、„x と y 傾斜“ を選択します。適切な運動を取得するには „- 傾斜“ を設定します。オブジェクトの動きが敏感すぎる場合、たとえば傾斜を 10 で割ります。"
-    card8:
-      title: "コンパス"
-      description: "このコードを使用すると、コンパスができます。"
-      one: "コンパスの方向に向かせたいオブジェクトを追加します。"
-      two: "オブジェクトの向きを設定するために次のブロックを挿入します。さらに永久ループを含めます。"
-    card9:
-      title: "次のメッセージを送る："
-      description: "このコードを見てください! これはオブジェクト間の通信方法を示しています。"
-      one: "例えばアリスなど、ブロードキャスト メッセージを送信する、新しいオブジェクトを追加します。さらに、背景の外見に 2 番目の背景を追加します。背景がブロードキャスト メッセージを受信するとすぐに、他の外見に変更されます。"
-      two: "ブロック „すべてに送信“ を挿入し、他のオブジェクトがメッセージを受信したときの処理方法を決定します。"
-      three: "この場合、前面のレイヤーのオブジェクトをタップすると背景が変わります。"
-    card10:
-      title: "変数を表示"
-      description: "変数の値を表示します。"
-      one: "お使いの携帯電話のセンサー (%tutorial_card_link_7% を参照) を通じて移動したいオブジェクトを追加します。さらに、ブロードキャスト メッセージを受信したときに変更する 2 番目の背景を追加します。"
-      two: "移動しているオブジェクトの、現在の x と y の位置を変数に保存するために、次のブロックを挿入します。"
-      three: "„変数を表示“ でステージ上の値を表示できます。"
-    card11:
-      title: "衝突の検出"
-      description: "2 つのオブジェクト間の衝突を検出します。"
-      one: "お使いの携帯電話のセンサーを通じて移動する必要がある 2 つのオブジェクトを追加します。例えば Alex など (%tutorial_card_link_7% を参照)。"
-      two: "移動しているオブジェクト Alex の現在の „x と y 位置“ (%tutorial_card_link_10% を参照) を保存し、次のスクリプトを挿入します。2 つのオブジェクトが重なっているかどうかを継続的にチェックします。それらがこれを行う場合、固定オブジェクトを非表示にします。"
-    card12:
-      title: "顔検出"
-      description: "顔検出を使用してオブジェクトを制御します。"
-      one: "まず、顔検出ブロックが有効であることを確認します。そのため設定に移動します。"
-      two: "新しいオブジェクトを追加し、顔が検出された場合、それを表示するために次のブロックを挿入します。顔が検出されたかどうかをチェックし、永久ループにこれを置きます。カメラが顔を認識した場合、変数の値は „TRUE“、それ以外の場合は „FALSE“ です。"
-  starterPrograms:
-    title: "Starter projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
-    categories:
-      games: "ゲーム"
-      animations: "アニメーション"
-      interactive: "インタラクティブなアートとストーリー"
-      music: "音楽とダンス"
-  gameJam:
-    title: "Game Jost サイトにポケット コードのゲームをアップロードする方法は?"
-    text0: "はじめに、あなたのゲームおめでとうございます! それを %link% にアップロードして、Game Jolt サイトにアップロードできるスタンドアロン Android アプリを作成することができます。"
-    title1: "登録"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "アップロード"
-    text2: "登録プロセスの後で、あなたのゲームをアップロードすることができます。名前を考えて、説明を追加します。説明フィールドに #AliceJam150 も追加してください。"
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
-    title4: "Android アプリの作成"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "アプリのダウンロード"
-    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "GameJolt.com に登録/ログイン"
-    text6: "%link% を訪問して、メニューの 'ログイン' または 'サインアップ!' をクリックして ください。アカウントが既にある場合は、ログインするだけです。ない場合は、メール アドレス、ユーザー名、およびパスワードで登録する必要があります。"
-    title7: "Game Jolt サイトでゲームをアップロードします"
-    text7: "ログインして、ダッシュ ボードに移動します。そこでゲームを追加できます。まず ‘規約を承認’ をクリックする必要があります。その後ゲームの情報を入力します。エンジン/言語/作成ツールとして ‘その他’ を選択し、フィールド 他のエンジン/言語/ツール に 'Android' を追加します。'開発' ステータスとして '完了/安定' を選択します。%link% ページに表示されるように、説明を #AliceJam150 が含まれることを確認します。"
-    text7_1: "ゲームを公開する前に、次の手順に従ってください。少なくとも 'サムネイル画像' を追加し、'成熟度評価’ を設定し、‘ビルド/ファイル’ をクリックして、ゲームをアップロードする必要があります。"
-    text7_2: "‘パッケージを追加’ をクリックして、パッケージ情報を記入します。それを保存して、リリースを追加します。 "
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "注: アプリにサフィックス '.apk' がない場合は、手動で '.apk' を追加する必要があります。ファイルの名前を変更するだけです。これで、それをアップロードすることができるはずです。"
-    text7_5: "アップロードした後、‘OK’ をクリックすると、ゲームを公開します。人々がゲームをダウンロードするリンクが、後で表示されます。"
-    text7_6: "今、Game Jolt サイトであなたの最初のゲームをアップロードして、アクティブにしました。おめでとうございます!"
-    text7_7: "他の人が、あなたのゲームを見つけることができるようになりました。%link% ページに表示されます。"
-  aliceGameJamTutorialcards:
-    title1: "(ようこそ) 不思議の国"
-    subtitle1: "キャラクターをアニメートして、'タップしたとき' イベントを作成します"
-    description1: |
-      キャラクターがシンプルなアニメーションで活き活きとなる方法を学び、キャラクターをタップしたときに何かをする方法をマスターします。ビデオは、異なる外見を使用して、キャラクターを簡単にアニメートする方法を示しています。
-      さらに、"タップしたとき" イベントを作成する方法、およびオブジェクト間でブロードキャスト メッセージを送信する方法を紹介します。
-    title2: "アリスを救え!"
-    subtitle2: "傾斜センサーを使用して、オブジェクト間の衝突を検出します"
-    description2: "ここでは、お使いの携帯電話の傾きセンサーを使用して、キャラクターを制御する方法を学びます。お使いの携帯電話を左または右に傾けることによって、アリスの動きを制御できます。私たちのチュートリアルを見ると、空からオブジェクトをランダムに落として、他のオブジェクトとの衝突を検出する経験をすることができます。"
-    title3: "帽子屋 - ヒットエンドラン"
-    subtitle3: "移動する風景を作成し、帽子屋の動きを制御します"
-    description3: "このチュートリアルでは、動いているように見える風景を作る方法を学びます。動きの錯覚を作るために、オブジェクトを画面に沿って移動することによって行います。お使いの携帯電話を傾けることで、帽子屋の動きを作る方法も紹介します。"
-    title4: "帽子屋 - ヒットエンドラン"
-    subtitle4: "帽子屋に悪のカードを撃たせます"
-    description4: "このチュートリアルでは、キャラクターに向かってランダムに移動する敵を作成する方法を示します。さらに、帽子屋がしずくを撃ち、衝突検出を使用して敵をヒットしているかどうかをチェックする方法を学びます。"
-    title5: "チェシャー猫を叩く"
-    subtitle5: "変数を使用してスコアを作成します"
-    description5: "このチュートリアルでは、スコアを作成するために変数を使用する方法を示します。スコアは、ゲームで役に立つ要素です。スコアは、あなたがどのくらいの頻度で猫をキャッチしたかを示します。"
-    title6: "ウサギのレース"
-    subtitle6: "移動する背景を作成します"
-    description6: |
-      このチュートリアルでは、特定の方法で背景のグラフィックスを動かして、垂直方向にスクロールする背景を作成する方法を示します。もう一つ教えることは、キャラクターをタップすることによって、前にジャンプさせることです。
-      ゲームをもう少し難しくするために、時間とともにキャラクターの速度を遅くする方法を示します。
-    download: "Download the project"
 search:
   dotdotdot: 検索...
   search: 検索
@@ -858,28 +639,6 @@ clipboard:
   fail: Failed to copy link to clipboard! :(
 next: 次へ
 previous: Previous
-help-cards:
-  headings:
-    starters: Starters
-    tutorials: チュートリアル
-    stepbystep: Step by step
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
-    discord: Join on Discord
-    game_design: Game design
-    education: Education platform
-    discuss: Discuss
-  text:
-    starters: "Try out and remix with %theme%"
-    tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
-    getinvolved: Download the app and get started
-    discord: Join the community on discord
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.

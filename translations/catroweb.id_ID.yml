@@ -14,6 +14,7 @@ others: Others
 tutorials: Tutorial
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Kata sandi tidak cocok.
 error: Kesalahan
 cancel: Batalkan
@@ -27,6 +28,7 @@ description: Keterangan
 noDescription: Keterangan tidak tersedia.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Negara
 loginText: masuk
 privacyPolicy: Kebijakan privasi
@@ -337,226 +339,6 @@ termsOfUse:
   bottom1: Periksa kembali di sini dari waktu ke waktu, karena kami selalu berusaha untuk memperbaiki syarat penggunaan kami.
   bottom2: 'Silahkan email saran-saran mengenai syarat penggunaan ke %email-webmaster%.'
   version: Versi 1.3, 4 Maret 2014
-help:
-  stepByStep:
-    title: "Langkah demi langkah Intro"
-    start: "Posisi mulai:"
-    description: |
-      Here you create your first project, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
-    step1:
-      title: 'Make a new project'
-      detail:
-        text1: 'Tekan pada "Baru".'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
-    step2:
-      title: "Buat objek baru"
-      detail:
-        text1: 'Tekan:'
-        text2: 'Pilih sumber tampilan pertama dari obyek baru Anda.'
-        text3: 'Masukkan nama objek dan tekan "OK" untuk membuat objek tersebut.'
-        special1: 'Gambar tampilan baru.'
-        special2: 'Memilih dari galeri.'
-        special3: 'Mengambil gambar.'
-    step3:
-      title: "Mulai bergerak"
-      detail:
-        text1: 'Tekan:'
-        text2: 'Brick pertama yang kami gunakan adalah dari kategori "Gerakan".'
-        text3: 'Pilih brick "Meluncur". Objek akan pindah ke posisi baru ditetapkan dengan brick di atas panggung.'
-        text4: 'Brick sekarang mengambang. Paste, pindahkan brick ke posisi yang diinginkan. Anda juga dapat memindahkan brick yang sudah dimasukkan dengan menekan brick sampai mengambang lagi.'
-        text5: 'Tekan "Mainkan" untuk ke panggung dan melihat objek meluncur.'
-        text6: 'Gunakan tombol kembali Android untuk kembali dari panggung.'
-    step4:
-      title: "Ubah Tampilan"
-      description: "Anda dapat mengubah tampilan objek."
-      detail:
-        text1: 'Pilih "Beralih untuk melihat" batu bata. Dengan bata ini Anda dapat memilih tampilan atau membuat yang baru.'
-        text2: 'Letakkan brick di bawah brick "Meluncur".'
-        text3: 'Tekan pada dropdown untuk menciptakan tampilan baru.'
-        text4: 'Pilih sumber gambar seperti sebelumnya.'
-        text5: 'Sekarang Anda harus memilih gambar baru.'
-        text6: 'Tekan play untuk melihat perilaku di panggung.'
-    step5:
-      title: "Berbicara"
-      description: "Sekarang Anda akan menemukan cara untuk membuat sebuah objek yang berbicara."
-      detail:
-        text1: 'Pilih bata "Bicara". Objek membaca teks, ketika bata ini dijalankan.'
-        text2: 'Letakkan brick di bawah brick "Beralih untuk melihat".'
-        text3: 'Tekan play untuk melihat perilaku di panggung.'
-    step6:
-      title: 'Lagi dan lagi'
-      description: "Langkah ini menunjukkan Anda bagaimana untuk mengulangi perilaku objek."
-      detail:
-        text1: 'Pilih bata "Selamanya". Semua dalam lingkaran mengulang selamanya.'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: 'Tambahkan bata "Meluncur" lainnya.'
-        text4: 'Letakkan bata "Meluncur" di atas bata "Akhir putaran".'
-        text5: 'Tekan ke dalam bidang teks x dan y nilai dan set ke 0.'
-        text6: 'Tekan play untuk melihat perilaku di panggung.'
-    step7:
-      title: "Mengetuk adalah segalanya"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
-      detail:
-        text1: 'Pilih bata "ketika diketuk". Setiap bata dibawah "ketika diketuk" akan dijalankan satu kali ketika Anda menekan objek di panggung.'
-        text2: 'Tempatkan bata "ketika diketuk" dibawah bata lainnya.'
-        text3: 'Pilih bata "Belok Kanan" dan letakkan dibawah bata "Ketika diketuk".'
-        text4: 'Sekarang Anda memiliki script ini.'
-        text5: 'Tekan play untuk melihat perilaku di panggung. Jika Anda sekarang tekan pada objek, ia berputar.'
-    step8:
-      title: "Salin, hapus atau edit batu bata"
-      detail:
-        text1: 'Satu Ketukan pada sisi kiri pada setiap brick akan membuka menu konteks. Disana Anda dapat memindahkan, menyalin, menghapus atau mengedit nilai-nilai brick dengan formula editor.'
-    step9:
-      title: "Navigasi di app"
-      detail:
-        text1: 'Gunakan Android tombol kembali untuk menavigasi di app.'
-        text2: 'Kembali satu layar ke Ikhtisar objek. Di sini Anda dapat pergi ke script dan juga untuk menguatkan representasi penampilan dan suara dari suatu objek. Anda dapat mengubah, menyalin serta menambah atau menghapus tampilan dan suara.'
-        text3: 'Gunakan lagi tombol kembali Android untuk melihat Ikhtisar benda-benda dan latar belakang.'
-    step10:
-      title: "Ubah latar belakang"
-      description: "This is the overview of your objects and your project's background."
-      detail:
-        text1: 'Latar belakang seperti objek, tapi Anda hanya dapat memiliki satu latar belakang.'
-        text2: 'Anda dapat menambahkan script, suara-suara dan tampilan dengan cara yang sama ke objek latar belakang.'
-    step11:
-      title: "Menu utama"
-      description: "Gunakan tombol kembali Android untuk ke layar ini."
-      detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
-        text4: 'Pergi ke situs bantuan dan diskusikan dengan pengguna lain.'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
-  tutorialcards:
-    title: "Tutorial"
-    description1: "Tutorial ini menunjukkan kepada Anda bagaimana menggunakan trik yang efektif dalam"
-    getReady: "Bersiaplah:"
-    tryCode: "Coba kode ini:"
-    doIt: "Lakukan:"
-    tip: "Tip tambahan:"
-    card1:
-      title: "Ubah Ukuran"
-      description: "Ketuk bebek untuk mengubah ukuran."
-      one: "Tambahkan objek yang Anda ingin rubah ukuran, misalnya hewan."
-      two: "Masukkan batu bata berikut ke script objek untuk meminimalkannya (20% dari ukuran aslinya) ketika diketuk."
-    card2:
-      title: "Ubah Tampilan"
-      description: "Gunakan trik ini untuk menghitung secara otomatis."
-      one: "Tambahkan objek yang Anda ingin rubah tampilan, misalnya item."
-      two: "Masukkan gambar selanjutnya di tampilan objek."
-      three: "Masukkan bata berikut ke script objek untuk terus merubah tampilannya setelah satu detik."
-    card3:
-      title: "Animasi Bergerak"
-      description: "Gunakan trik ini bila Anda ingin burung beo terbang."
-      one: "Tambahkan objek yang Anda ingin pindah."
-      two: "Masukkan gambar lain di tampilan objek yang menggambarkan gerakan."
-      three: "Masukkan batu bata berikut ke script objek untuk terus mengubah posisi objek setelah waktu tertentu. Selain itu Anda dapat membatasi panggung dengan memantul jika di tepi."
-    card4:
-      title: "Meluncur"
-      description: "Bergerak dengan lancar dari satu tempat ke yang lain."
-      one: "Tambahkan objek yang Anda ingin untuk meluncur misalnya pesawat."
-      two: "Masukkan batu bata berikut dan tentukan daerah di mana gerakan harus terjadi."
-    card5:
-      title: "Putar suara"
-      description: "Mainkan suara dengan menekan pada objek."
-      one: "Tambahkan objek yang Anda ingin untuk dapat memainkan suara misalnya anjing."
-      two: "Masukkan batu bata berikut untuk memungkinkan pemutaran. Pilih suara dari librari pribadi Anda, Librari media Pocket Code atau rekam sendiri. "
-    card6:
-      title: "Berbicara"
-      description: "Gunakan kode ini untuk membuat objek berbicara."
-      one: "Tambahkan objek yang Anda ingin untuk bicara misalnya Carrie."
-      two: "Masukkan batu bata berikut untuk memungkinkan hasil suara."
-    card7:
-      title: "GSensor"
-      description: "Gunakan trik ini untuk mengontrol objek dengan kecenderungan dari perangkat Anda."
-      one: "Tambahkan objek yang Anda ingin pindah."
-      two: "Masukkan batu bata berikut untuk mengendalikan objek melalui sensor telepon. Oleh karena itu pilih \"kecenderungan x dan y\". Untuk mendapatkan gerakan yang cocok, atur \"-kecenderungan\". Jika gerakan objek terlalu masuk akal, bagi kecenderungan menjadi 10 sebagai contoh."
-    card8:
-      title: "Kompas"
-      description: "Gunakan kode ini untuk membuat sebuah kompas."
-      one: "Tambahkan objek yang Anda ingin tunjukkan dengan arah kompas."
-      two: "Masukkan batu bata berikut untuk mengatur orientasi objek. Selain itu masukkan putaran selamanya."
-    card9:
-      title: "Siaran"
-      description: "Lihat kode ini! Ini menunjukkan pada Anda bagaimana untuk berkomunikasi antara objek."
-      one: "Tambahkan objek baru, misalnya Alice, yang harus mengirim pesan siaran. Selain itu, tambahkan latar belakang kedua di tampilan latar belakang. Segera setelah latar belakang menerima pesan siaran itu akan berubah ke tampilan yang lain."
-      two: "Masukkan bata \"Kirim ke semua\" dan tentukan apa yang harus terjadi ketika objek lain menerima pesan."
-      three: "Dalam kasus ini latar belakang berubah ketika objek dalam lapisan depan diketuk."
-    card10:
-      title: "Tampilkan variabel "
-      description: "Tunjukkan nilai variabel."
-      one: "Tambahkan objek yang akan dipindahkan melalui sensor telepon Anda (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%). Selain itu tambahkan latar belakang yang kedua yang seharusnya berubah ketika menerima pesan siaran."
-      two: "Masukkan batu bata berikut untuk menyelamatkan posisi x dan y saat ini dari objek bergerak dalam variabel."
-      three: "Melalui \"Tampilkan variabel\" Anda dapat menampilkan nilai di atas panggung."
-    card11:
-      title: "Deteksi tabrakan"
-      description: "Mendeteksi tabrakan antara dua objek."
-      one: "Tambahkan dua objek yang harus bergerak melalui sensor telepon Anda, misalnya Alex (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
-      two: "Selamatkan posisi \"x dan y \" saat ini dari objek bergerak Alex (Lihat %tutorial_card_link_10% Tutorial Card 10 %link_end%) dan masukkan tulisan berikut. Terus periksa jika dua objek itu tumpang tindih. Jika ya, objek tetap harus tersembunyi dalam peti ini."
-    card12:
-      title: "Deteksi wajah"
-      description: "Kendalikan sebuah objek dengan menggunakan deteksi wajah."
-      one: "Pertama, pastikan bahwa bata deteksi wajah diaktifkan. Karena itu kunjungi pengaturan."
-      two: "Tambahkan objek baru dan masukkan batu bata berikut untuk menunjukkan jika satu wajah terdeteksi. Periksa jika wajah terdeteksi dan tempatkan ini dalam sebuah loop selamanya. Jika kamera mengenali wajah nilai variabel adalah \"BENAR\", kalau tidak \"SALAH\"."
-  starterPrograms:
-    title: "Starter projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
-    categories:
-      games: "Permainan"
-      animations: "Animasi"
-      interactive: "Seni interaktif dan cerita"
-      music: "Musik dan Tari"
-  gameJam:
-    title: "Bagaimana cara meng-unggah permainan Pocket Code ke situs Game Jolt?"
-    text0: "Ucapan selamat pertama pada permainan Anda! Sekarang Anda dapat meng-unggahnya pada %link% untuk membuat aplikasi Android yang berdiri sendiri, yang Anda kemudian dapat meng-unggahnya di situs Game Jolt."
-    title1: "Pendaftaran"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Meng-unggah"
-    text2: "Setelah proses pendaftaran Anda akan dapat meng-unggah permainan Anda. Hanya pikirkan nama dan tambahkan keterangan. Juga tambahkan #AliceJam150 di bidang Deskripsi."
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
-    title4: "Membuat aplikasi Android"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Unduh aplikasi"
-    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "Daftar/Masuk di GameJolt.com"
-    text6: "Kunjungi %link% dan klik 'Masuk' atau 'Daftar!' dalam menu. Jika Anda sudah memiliki akun Anda langsung dapat masuk, jika tidak, Anda perlu mendaftar dengan alamat Email, Nama Pengguna dan Password."
-    title7: "Mengunggah permainan Anda pada situs Game Jolt"
-    text7: "Setelah Anda masuk, kunjungi dashboard Anda. Disana Anda dapat menambahkan permainan Anda. Pertama Anda harus klik pada 'Menerima peraturan'. Kemudian mengisi informasi permainan. Saat Mesin/Bahasa/Penciptaan Alat pilih 'Lainnya' dan tambahkan ke bidang Mesin Lainnya/Bahasa/Alat 'Android'. Saat status 'Pembuatan' pilih 'Selesai/Stabil'. Pastikan untuk memasukkan #AliceJam150 dalam deskripsi sehingga muncul di halaman %link%."
-    text7_1: "Sebelum Anda dapat mempublikasikan permainan Anda, ikuti langkah-langkah berikutnya. Anda setidaknya harus menambahkan 'gambar thumbnail', mengatur 'nilai kedewasaan', dan mengunggah permainan Anda dengan mengklik pada 'membangun/file'."
-    text7_2: "Klik 'Tambahkan Paket' dan isi informasi paket. Simpan dan tambahkan rilis. "
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "Catatan: Jika aplikasi kekurangan akhiran '.apk', Anda harus menambahkan '.apk' secara manual. Langsung ubah nama file. Sekarang Anda harus mampu mengunggahnya."
-    text7_5: "Setelah mengunggah klik pada 'OK' untuk mempublikasikan permainan Anda. Kemudian akan muncul pada orang lain link untuk mengunduh permainan Anda."
-    text7_6: "Anda sekarang sudah mengunggah permainan pertama Anda di situs Game Jolt dan mengaktifkannya. Selamat!"
-    text7_7: "Sekarang orang lain akan dapat menemukan permainan Anda dan akan muncul di halaman %link%."
-  aliceGameJamTutorialcards:
-    title1: "(Selamat datang di) Wonderland"
-    subtitle1: "Gerakkan karakter dan buat 'ketika diketuk'"
-    description1: |
-      Pelajari cara untuk menghidupkan salah satu karakter Anda dalam animasi sederhana dan menguasai cara membuat karakter Anda melakukan sesuatu ketika menekannya. Video menunjukkan kepada Anda bagaimana Anda dapat dengan mudah menghidupkan karakter Anda dengan menggunakan tampilan yang berbeda. Selanjutnya kami menunjukkan Anda bagaimana untuk membuat event "ketika mengetuk" dan bagaimana untuk mengirim pesan siaran antara objek.
-    title2: "Simpan Alice!"
-    subtitle2: "Gunakan sensor kehendak dan mendeteksi tabrakan antara objek"
-    description2: "Di sini Anda akan belajar bagaimana mengendalikan karakter dengan menggunakan sensor kehendak dari telepon Anda. Anda dapat mengontrol gerakan Alice dengan mengungkit telepon ke kiri atau kanan. Tonton tutorial kami dan biarkan benda jatuh secara acak dari langit dan dapatkan pengalaman dalam mendeteksi tabrakan dengan benda-benda lainnya."
-    title3: "Hatter - Tabrak dan Lari"
-    subtitle3: "Buat pemandangan bergerak dan mengontrol pergerakan Hatters"
-    description3: "Dalam tutorial ini Anda akan belajar bagaimana untuk membuat pemandangan yang tampak seperti bergerak. Kita akan melakukannya dengan menggerakkan objek sepanjang layar untuk menciptakan ilusi gerakan. Kami juga menunjukkan Anda bagaimana untuk membuat Hatter bergerak dengan memiringkan telepon Anda."
-    title4: "Hatter - Tabrak dan Lari"
-    subtitle4: "Biarkan Hatter menembak kartu evil"
-    description4: "Dalam tutorial ini kami akan menunjukkan kepada Anda bagaimana untuk membuat musuh yang bergerak secara acak menuju karakter Anda. Selain itu, Anda akan mempelajari cara membuat hatter menembak teadrops dan memeriksa jika musuh tertembak dengan menggunakan deteksi benturan."
-    title5: "Memukul Kucing Cheshire"
-    subtitle5: "Buat skor dengan menggunakan variabel"
-    description5: "Dalam tutorial ini kami akan menunjukkan bagaimana untuk menggunakan variabel untuk membuat skor. Skor adalah unsur-unsur yang berguna dalam permainan. Skor kami menunjukkan seberapa sering Anda telah menangkap kucing."
-    title6: "Perlombaan Kelinci"
-    subtitle6: "Buat latar belakang bergerak"
-    description6: |
-      Tutorial ini menunjukkan Anda bagaimana membuat latar belakang vertikal bergulir dengan menggerakkan gambar latar belakang dengan cara tertentu. Hal lain yang kami akan ajarkan pada Anda adalah membuat karakter melompat maju dengan menekan di atasnya.
-      Untuk membuat permainan sedikit lebih sulit kami akan menunjukkan kepada Anda bagaimana memperlambat kecepatan karakter Anda dari waktu ke waktu.
-    download: "Download the project"
 search:
   dotdotdot: Cari...
   search: Cari
@@ -857,28 +639,6 @@ clipboard:
   fail: Failed to copy link to clipboard! :(
 next: Lanjut
 previous: Previous
-help-cards:
-  headings:
-    starters: Starters
-    tutorials: Tutorial
-    stepbystep: Step by step
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
-    discord: Join on Discord
-    game_design: Game design
-    education: Education platform
-    discuss: Discuss
-  text:
-    starters: "Try out and remix with %theme%"
-    tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
-    getinvolved: Download the app and get started
-    discord: Join the community on discord
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.

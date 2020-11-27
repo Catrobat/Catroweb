@@ -348,7 +348,7 @@ const WATCH_CONFIG =
     },
     scripts: {
       files: [ASSETS_DIRECTORY + '/js/**/*.js'],
-      tasks: ['concat', 'uglify'],
+      tasks: ['copy:custom', 'copy:analytics', 'concat', 'uglify'],
       options: {
         nospawn: true
       }

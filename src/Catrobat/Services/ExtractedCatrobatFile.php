@@ -7,6 +7,7 @@ use App\Catrobat\CatrobatCode\StatementFactory;
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Exceptions\Upload\MissingXmlException;
 use App\Repository\ProgramRepository;
+use Exception;
 use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
@@ -40,7 +41,7 @@ class ExtractedCatrobatFile
       throw new InvalidXmlException();
     }
     $content = str_replace('&#x0;', '', $content, $count);
-    preg_match_all('@fileName="(.*?)"@', $content, $matches);
+    preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
     $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
     $xml = @simplexml_load_string($content);
     if (!$xml)
@@ -73,6 +74,21 @@ class ExtractedCatrobatFile
   public function getDescription(): string
   {
     return (string) $this->program_xml_properties->header->description;
+  }
+
+  public function setDescription(string $description): void
+  {
+    $this->program_xml_properties->header->description = $description;
+  }
+
+  public function getNotesAndCredits(): string
+  {
+    return (string) $this->program_xml_properties->header->notesAndCredits;
+  }
+
+  public function setNotesAndCredits(string $notesAndCredits): void
+  {
+    $this->program_xml_properties->header->notesAndCredits = $notesAndCredits;
   }
 
   public function getDirHash(): ?string
@@ -238,9 +254,16 @@ class ExtractedCatrobatFile
     return $this->program_xml_properties;
   }
 
+  /**
+   * @throws Exception
+   */
   public function saveProgramXmlProperties(): void
   {
-    $this->program_xml_properties->asXML($this->path.'code.xml');
+    $file_overwritten = $this->program_xml_properties->asXML($this->path.'code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
 
     $xml_string = file_get_contents($this->path.'code.xml');
 

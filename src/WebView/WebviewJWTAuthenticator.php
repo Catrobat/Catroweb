@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,9 +25,11 @@ class WebviewJWTAuthenticator extends JWTTokenAuthenticator
     JWTTokenManagerInterface $jwtManager,
     EventDispatcherInterface $dispatcher,
     TokenExtractorInterface $tokenExtractor,
-    TranslatorInterface $translator, SessionInterface $session
+    TokenStorageInterface $tokenStorage,
+    TranslatorInterface $translator,
+    SessionInterface $session
   ) {
-    parent::__construct($jwtManager, $dispatcher, $tokenExtractor);
+    parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $tokenStorage);
     $this->translator = $translator;
     $this->session = $session;
   }

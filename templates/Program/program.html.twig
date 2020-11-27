@@ -25,7 +25,7 @@
     </div>
 
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
-      <h1 class="h2 no-overflow">{{ program.name }}</h1>
+      <h1 id="name" class="h2 no-overflow">{{ program.name }}</h1>
 
       <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
               '#code-view-icon{{ suffix|default('') }}')">
@@ -192,8 +192,8 @@
       '{{ ("more-information")                      |trans({}, "catroweb") }}',
       '{{ ("less-information")                      |trans({}, "catroweb") }}',
         {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
-        {{ constant('App\\Catrobat\\StatusCode::CREDITS_TO_LONG') }},
-        {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_CREDITS') }}
+        {{ constant('App\\Catrobat\\StatusCode::NOTES_AND_CREDITS_TOO_LONG') }},
+        {{ constant('App\\Catrobat\\StatusCode::RUDE_WORD_IN_NOTES_AND_CREDITS') }}
     )
   </script>
 
@@ -262,4 +262,6 @@
     )
     programRecommender.init()
   </script>
+
+  <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
 {% endblock %}

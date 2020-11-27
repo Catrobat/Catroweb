@@ -3,77 +3,79 @@
 localLanguage: Engelska
 username: Användarnamn
 password: Lösenord
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: Skapa nytt lösenord
+accountSettings: Kontoinställningar
 email: E-post
 aboutPocketCode: Om Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: Om
+education: Utbildning
+chat: Chatt och forum
+others: Övriga
 tutorials: Handledningar
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Lösenorden matchade inte.
 error: Fel
 cancel: Avbryt
 report: Rapportera
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
+deleteIt: Ja, ta bort det!
+reportIt: Ja, rapportera det!
+areYouSure: Är du säker?
 noWayOfReturn: There is no way to restore your actions!
 download: Ladda ner
 description: Beskrivning
 noDescription: Ingen beskrivning tillgänglig.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Land
 loginText: Logga in
 privacyPolicy: Sekretesspolicy
 imprint: Avtryck
 programDetails: Detaljer
-somethingWentWrong: 'Ooooops something went wrong.'
+somethingWentWrong: 'Hoppsan! Något gick fel.'
 pleaseTryAgain: 'Försök igen!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'mer'
 less: 'mindre'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
+more-information: 'Mer information'
+less-information: 'Mindre information'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+notifications: 'Aviseringar'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'Följare'
+LikeNotifications: 'Reaktioner'
 CommentNotifications: 'Kommentarer'
 RemixNotifications: 'Remixar'
 wellDone: "Bra gjort!"
 done: "Klar!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Ja, ta bort det!"
 cancelMessage: "Avbryt"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "Vänligen vänta..."
 projects: "Program"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "här"
+statistics: "Statistik "
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
+  follows: Följer
+  followers: Följare
+  follow: Följ
+  username: Användare
+  followsMe: Följer mig
   noFollowing: You are not following anybody currently.
   noFollowers: You have no followers currently.
   noOtherFollowing: There are no following users currently.
@@ -81,16 +83,16 @@ follower:
   followError: "Unable to follow the desired user!"
   unfollowError: "Unable to unfollow the desired user!"
   unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  unfollowButton: "Sluta följa %username%"
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
     subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
-    download: Download the app
-    statistics: More statistics
+    download: Ladda ner appen
+    statistics: Mer statistik
   featured: Dagens
-  example: Examples
+  example: Exempel
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
@@ -159,22 +161,22 @@ programs:
   delete: Radera
   report: Rapportera
   report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
+  report_popup_header: Rapporterad
+  deleted_popup: Kommentaren har raderats.
+  deleted_popup_header: Raderad
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  editDescription: Redigera projektbeskrivningen
   saveDescription: Save description change
   editCredits: Edit the project credits
   saveCredits: Save credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
+  addComment: Skriv en kommentar
+  thumbsUp: Tummen upp!
   smile: Smile!
   love: Love!
   wow: Wooow!
-  linkTitle: Link
+  linkTitle: Länk
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Reaktioner
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixar
@@ -184,8 +186,8 @@ remixGraph:
   showPaths: 'Visa sökvägar'
   programNotAvailableErrorTitle: 'Tyvärr...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown user'
+  programNotAvailable: 'Inte tillgänglig'
+  programUnknownUser: 'Okänd användare'
 noReply: This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat account confirmation
@@ -252,7 +254,7 @@ profile:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
     passwordIsUsername: Lösenordet måste skilja sig från användarnamnet.
-    passwordWrong: Wrong password
+    passwordWrong: Fel lösenord
     emailNotValid: Denna e-postadress är inte giltig.
     emailMissing: Fel vid uppdatering av denna e-postadress. Du måste ha minst en verifierad e-postadress.
     emailExists: Denna e-postadress finns redan.
@@ -337,227 +339,6 @@ termsOfUse:
   bottom1: Kontrollera tillbaka hit från tid till tid, eftersom vi försöker alltid att förbättra våra användarvillkor.
   bottom2: 'Maila några förslag angående dessa användarvillkor till %email-webmaster%.'
   version: Version 1.3, 4 mars 2014
-help:
-  stepByStep:
-    title: "Steg för steg-Intro"
-    start: "Utgångsläget:"
-    description: |
-      Here you create your first project, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
-    step1:
-      title: 'Make a new project'
-      detail:
-        text1: 'Klicka på "Nya".'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
-    step2:
-      title: "Skapa ett nytt objekt"
-      detail:
-        text1: 'tryck på:'
-        text2: 'Choose the source of the first look of your new object.'
-        text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: 'Rita ett nytt utseende.'
-        special2: 'Välj från Galleri.'
-        special3: 'Ta en bild.'
-    step3:
-      title: "Börja flytta"
-      detail:
-        text1: 'tryck på:'
-        text2: 'Den första kloss som vi använder är av kategorin "Rörelser".'
-        text3: 'Välj "Glid" klossen. Objektet flyttas till den nya positionen som definieras med klossen på scenen.'
-        text4: 'Klossen flyter nu. Om du vill klistra in den, flytta klossen till önskad position. Du kan också flytta redan infogade klossar genom att trycka på klossen tills den är flytande igen.'
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: 'Använd Androids tillbaka knapp, för att få tillbaka från scenen.'
-    step4:
-      title: "Ändra utseende"
-      description: "Du kan ändra utseendet på ditt objekt."
-      detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Fäst klossen under "Glid" - klossen.'
-        text3: 'Klicka på fliken för att skapa ett nytt utseende.'
-        text4: 'Välj källan till bilden som innan.'
-        text5: 'Nu måste du att välja den nya bilden.'
-        text6: 'tryck på play för att se uppträdandet på scenen.'
-    step5:
-      title: "Tala"
-      description: "Nu kommer du få reda på hur du får ett objekt att tala."
-      detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Fäst klossen under "byt utseende till" tegel.'
-        text3: 'tryck på play för att se uppträdandet på scenen.'
-    step6:
-      title: 'Igen och igen'
-      description: "Detta steg visar hur du upprepar beteendet hos objekten."
-      detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: 'tryck in till textfältet för x och y-värdet och sätt värdet 0.'
-        text6: 'tryck på play för att se uppträdandet på scenen.'
-    step7:
-      title: "Tapping is everything"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
-      detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: 'Nu har du detta skript.'
-        text5: 'tryck på starta för att se uppträdande på scenen. Om du nu klickar på objektet, snurrar det.'
-    step8:
-      title: "Copy, delete or edit a brick"
-      detail:
-        text1: 'Ett enda tryck på vänster sida av varje kloss öppnar den sammanhangsberoende menyn. Där kan du flytta, kopiera, ta bort eller redigera värdena i klossen med formel redigeraren.'
-    step9:
-      title: "Navigation in the app"
-      detail:
-        text1: 'Använd Android tillbaka knappen för att navigera i app.'
-        text2: 'Gå tillbaka en skärm till översikten över dina objekt. Här kan du gå in i skript och även till en kraftfull representation av utseende och ljud för objektet. Där kan du byta namn, kopiera lägga till eller ta bort utseenden och ljud.'
-        text3: 'Använd igen Android tillbaka knappen för att komma till översikten över dina objekt och din bakgrund.'
-    step10:
-      title: "Change the background"
-      description: "This is the overview of your objects and your project's background."
-      detail:
-        text1: 'Bakgrunden är som ett objekt, men du bara kan ha en bakgrund.'
-        text2: 'Du kan lägga till skript, ljud och utseenden på samma sätt till objektet bakgrund.'
-    step11:
-      title: "Huvudmeny"
-      description: "Använd Android tillbaka knappen för att komma till denna skärm."
-      detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
-        text4: 'Gå till Hjälp sidan och diskutera med andra användare.'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
-  tutorialcards:
-    title: "Handledningar"
-    description1: "Denna handledning visar dig hur du kan använda effektiva tricks i"
-    getReady: "Gör dig beredd:"
-    tryCode: "Prova denna kod:"
-    doIt: "Gör det:"
-    tip: "Extra tips:"
-    card1:
-      title: "Ändra storlek"
-      description: "tryck på ankan för att ändra storlek."
-      one: "Add the object of which you would like to change the size, e.g. Animal."
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
-    card2:
-      title: "Ändra utseende"
-      description: "Använd detta trick för att räkna automatiskt."
-      one: "Add the object of which you would like to change its look, e.g. items."
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
-    card3:
-      title: "Flyttar Animation"
-      description: "Använd detta knep när du vill ha en flygande papegoja."
-      one: "Add the object you want to be moving."
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
-    card4:
-      title: "Glid"
-      description: "Röra sig smidigt från en punkt till en annan."
-      one: "Add the object you want to be gliding. e.g. plane."
-      two: "Insert the following bricks and define the area in which the movement should happen."
-    card5:
-      title: "Spela upp ljud"
-      description: "Play a sound by tapping on the object."
-      one: "Add the object you want to be playing a sound, e.g. dog."
-      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
-    card6:
-      title: "Tala"
-      description: "Använd denna kod för att göra så ett objekt talar."
-      one: "Add the object you want to be speaking, e.g. Carrie."
-      two: "Insert the following bricks in order to make the voice output possible."
-    card7:
-      title: "GSensor"
-      description: "Använd detta trick för att styra ett objekt med lutningen på din enhet."
-      one: "Add the object you want to be moving on stage."
-      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
-    card8:
-      title: "Kompass"
-      description: "Använd denna kod för att göra en kompass."
-      one: "Add the object you want to point in compass direction."
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
-    card9:
-      title: "Sändning"
-      description: "Titta på denna kod! Detta visar hur man kommunicerar mellan objekt."
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
-      three: "In this case the background changes when the object in the front layer is tapped."
-    card10:
-      title: "Visa variabel"
-      description: "Visa värdet på en variabel."
-      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
-      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
-      three: "Through „Show variable“ you can display the values on stage."
-    card11:
-      title: "Collision detection"
-      description: "Detect a collision between two objects."
-      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
-      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
-    card12:
-      title: "Ansiktsigenkänning"
-      description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
-      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
-  starterPrograms:
-    title: "Starter projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
-    categories:
-      games: "Spel"
-      animations: "Animationer"
-      interactive: "Interaktiv konst och berättelser"
-      music: "Musik och dans"
-  gameJam:
-    title: "How to upload a Pocket Code game to the Game Jolt Site?"
-    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
-    title1: "Registrering"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Ladda upp"
-    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
-    title4: "Skapa Android-app"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Ladda ner app"
-    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "Register/Login at GameJolt.com"
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: "Upload your game on the Game Jolt Site"
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
-    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
-    text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
-    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
-    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
-  aliceGameJamTutorialcards:
-    title1: "(Välkommen till) Wonderland"
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: "Save Alice!"
-    subtitle2: "Use the inclination sensors and detect a collision between objects"
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: "The Hatter - Hit and Run"
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
-    title4: "The Hatter - Hit and Run"
-    subtitle4: "Let the Hatter shoot the evil cards"
-    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
-    title5: "Whack a Cheshire Cat"
-    subtitle5: "Create a score by using variables"
-    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
-    title6: "A Rabbits Race"
-    subtitle6: "Create a moving background"
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the project"
 search:
   dotdotdot: Sök...
   search: Sök
@@ -818,7 +599,7 @@ codeStatistics:
   dataBricks: 'Data'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: Språk
   usefulLinks: Useful links
   legalities: Legalities
   communityStats: Community stats
@@ -858,28 +639,6 @@ clipboard:
   fail: Failed to copy link to clipboard! :(
 next: Nästa
 previous: Previous
-help-cards:
-  headings:
-    starters: Starters
-    tutorials: Handledningar
-    stepbystep: Step by step
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
-    discord: Join on Discord
-    game_design: Game design
-    education: Education platform
-    discuss: Discuss
-  text:
-    starters: "Try out and remix with %theme%"
-    tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
-    getinvolved: Download the app and get started
-    discord: Join the community on discord
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
@@ -900,7 +659,7 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
+agree: Godkänn
 disagree: Disagree
 profileLoader:
   noProfiles: There are currently no profiles.

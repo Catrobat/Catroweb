@@ -16,13 +16,13 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ApproveProgramsAdmin extends AbstractAdmin
 {
+  use ProgramsTrait;
   /**
    * @var string
    */
@@ -55,34 +55,6 @@ class ApproveProgramsAdmin extends AbstractAdmin
     $this->screenshot_repository = $screenshot_repository;
     $this->program_manager = $program_manager;
     $this->extracted_file_repository = $extracted_file_repository;
-  }
-
-  /**
-   * @param mixed|Program $program
-   *
-   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
-   */
-  public function preUpdate($program): void
-  {
-    /** @var ModelManager $model_manager */
-    $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())->getUnitOfWork()
-      ->getOriginalEntityData($program)
-    ;
-
-    if (false == $old_program['approved'] && true == $program->getApproved())
-    {
-      /** @var User $user */
-      $user = $this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser();
-      $program->setApprovedByUser($user);
-      $this->getModelManager()->update($program);
-    }
-    elseif (true == $old_program['approved'] && false == $program->getApproved())
-    {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
-    }
   }
 
   /**

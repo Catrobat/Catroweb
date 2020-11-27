@@ -14,6 +14,7 @@ others: Others
 tutorials: Hướng dẫn
 googlePlay: googlePlay
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Mật khẩu không khớp.
 error: Lỗi
 cancel: Hủy bỏ
@@ -27,6 +28,7 @@ description: Mô tả
 noDescription: Không có mô tả.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Quốc gia
 loginText: Đăng nhập
 privacyPolicy: Chính sách bảo mật
@@ -337,227 +339,6 @@ termsOfUse:
   bottom1: Hãy ghé thăm lại tại mọi thời điểm, vì chúng tôi luôn luôn cố gắng hoàn thiện điều khoản sử dụng của mình.
   bottom2: 'Vui lòng gửi bất cứ gợi ý nào về điều khoản sự dụng tới %email-webmaster%.'
   version: Phiên bản 1.3, Ngày 4 Tháng 3 Năm 2014
-help:
-  stepByStep:
-    title: "Giới thiệu từng bước"
-    start: "Vị trí bắt đầu:"
-    description: |
-      Here you create your first project, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
-    step1:
-      title: 'Make a new project'
-      detail:
-        text1: 'Nhấp vào "Mới".'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
-    step2:
-      title: "Tạo một đối tượng mới"
-      detail:
-        text1: 'Nhấp:'
-        text2: 'Chọn nguồn của giao diện đầu tiên của đối tượng mới của bạn.'
-        text3: 'Nhập tên đối tượng và bấm vào "Đồng ý" để tạo ra các đối tượng.'
-        special1: 'Vẽ một giao diện mới.'
-        special2: 'Chọn từ bộ sưu tập.'
-        special3: 'Chụp hình.'
-    step3:
-      title: "Bắt đầu di chuyển"
-      detail:
-        text1: 'Nhấp:'
-        text2: 'Gạch đầu tiên chúng tôi sử dụng không có trong mục "Chuyển động".'
-        text3: 'Chọn gạch "Lướt". Các đối tượng sẽ di chuyển đến vị trí mới được xác định với gạch trên sân khấu.'
-        text4: 'Viên gạch bây giờ nổi. Để dán nó, di chuyển gạch đến vị trí mong muốn. Bạn cũng có thể di chuyển gạch đã được chèn vào bằng cách nhấp vào gạch cho đến khi nó nổi một lần nữa.'
-        text5: 'Bấm vào "Chơi" để đi đến sân khấu và xem đối tượng trượt.'
-        text6: 'Sử dụng nút trở lại của Android để có quay trở lại từ sân khấu.'
-    step4:
-      title: "Thay đổi giao diện"
-      description: "Bạn có thể thay đổi giao diện của đối tượng của bạn."
-      detail:
-        text1: 'Chọn gạch "Chuyển đổi để tìm". Với gạch này bạn có thể chọn xem hoặc tạo ra một hình mới.'
-        text2: 'Bật viên gạch bên dưới gạch "Lướt" -.'
-        text3: 'Nhấp vào trường thả xuống để tạo ra một giao diện mới.'
-        text4: 'Chọn nguồn hình ảnh giống như trước.'
-        text5: 'Bây giờ bạn phải chọn hình ảnh mới.'
-        text6: 'Bấm vào chơi để xem các hành vi thiết lập.'
-    step5:
-      title: "Nói chuyện"
-      description: "Bây giờ bạn sẽ tìm hiểu làm thế nào để làm cho một đối tượng nói chuyện."
-      detail:
-        text1: 'Chọn gạch "Nói chuyện". Đối tượng đọc các văn bản, khi gạch này được thực hiện.'
-        text2: 'Nhấn vào gạch phía bên dưới gạch "Chuyển đổi để nhìn".'
-        text3: 'Bấm vào chơi để xem các hành vi thiết lập.'
-    step6:
-      title: 'Một lần nữa và một lần nữa'
-      description: "Bước này cho bạn thấy làm thế nào để lặp lại hành vi của các đối tượng."
-      detail:
-        text1: 'Chọn gạch "Mãi mãi". Tất cả mọi thứ trong vòng lặp đi lặp lại mãi mãi.'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: 'Thêm gạch "Lướt".'
-        text4: 'Nhấp vào gạch "Lướt" phía trên gạch "Kết thúc vòng lặp".'
-        text5: 'Nhấn vào trường giá trị văn bản x và y và thiết lập thành 0.'
-        text6: 'Bấm vào chơi để xem các hành vi thiết lập.'
-    step7:
-      title: "Bấm là tất cả mọi thứ"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
-      detail:
-        text1: 'Chọn gạch "Khi được nhấp". Mỗi viên gạch bên dưới gạch "Khi được nhấp" sẽ được thực hiện ngay khi bạn bấm vào các đối tượng trên sân khấu.'
-        text2: 'Đặt các "Khi được nhấp" bên dưới những viên gạch khác.'
-        text3: 'Chọn gạch "Rẽ phải" và nhấp nó bên dưới gạch "Khi được nhấp".'
-        text4: 'Bây giờ bạn có tập lệnhnày.'
-        text5: 'Bấm vào chơi để xem các hành vi trên sân khấu. Nếu bạn hiện tại nhấn vào trên đối tượng, nó sẽ quay.'
-    step8:
-      title: "Sao chép, xóa hoặc chỉnh sửa một viên gạch"
-      detail:
-        text1: 'Nhấn một lần duy nhất phía bên trái của mỗi gạch mở ra trình danh sách. Ở đó bạn có thể di chuyển, sao chép, xóa hoặc chỉnh sửa các giá trị của gạch với công cụ chỉnh sửa công thức.'
-    step9:
-      title: "Định vị trong ứng dụng"
-      detail:
-        text1: 'Sử dụng nút trở lại trong Android để định vị trong ứng dụng.'
-        text2: 'Quay trở lại màn hình để tổng quan về đối tượng của bạn. Ở đây bạn có thể đi vào các tập lệnh cũng như các giao diện và âm thanh của các đối tượng. Ở đó, bạn có thể thay đổi tên, sao chép, thêm hoặc xóa hình và âm thanh.'
-        text3: 'Sử dụng một lần nữa nút trở lại trên Android để có được cái nhìn để tổng quan về các đối tượng của bạn và nền của bạn.'
-    step10:
-      title: "Thay đổi nền"
-      description: "This is the overview of your objects and your project's background."
-      detail:
-        text1: 'Nền giống như đối tượng, nhưng bạn chỉ có thể có một nền.'
-        text2: 'Bạn có thể thêm tập lệnh, âm thanh và giao diện t giống như đối tượng nền.'
-    step11:
-      title: "Danh sách chính"
-      description: "Sử dụng nút trở lại của Android để có đến màn hình này."
-      detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
-        text4: 'Truy cập trang trợ giúp và thảo luận với những người dùng khác.'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
-  tutorialcards:
-    title: "Hướng dẫn"
-    description1: "Hướng dẫn này cho bạn thấy làm thế nào để sử dụng các thủ thuật một cách có hiệu quả trong"
-    getReady: "Chuẩn bị sẵn sàng:"
-    tryCode: "Hãy thử mã này:"
-    doIt: "Làm đi:"
-    tip: "Thêm lời khuyên:"
-    card1:
-      title: "Thay đổi kích thước"
-      description: "Bấm vào con vịt để thay đổi kích thước."
-      one: "Add the object of which you would like to change the size, e.g. Animal."
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
-    card2:
-      title: "Thay đổi giao diện"
-      description: "Sử dụng Mẹo này để đếm tự động."
-      one: "Add the object of which you would like to change its look, e.g. items."
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
-    card3:
-      title: "Di chuyển hình ảnh động"
-      description: "Sử dụng Mẹo này khi bạn muốn con vẹt bay."
-      one: "Add the object you want to be moving."
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
-    card4:
-      title: "Lướt"
-      description: "Di chuyển thông suốt từ một điểm tới những điểm khác."
-      one: "Add the object you want to be gliding. e.g. plane."
-      two: "Insert the following bricks and define the area in which the movement should happen."
-    card5:
-      title: "Bật âm thanh"
-      description: "Nhấp vào trống để chơi âm thanh này."
-      one: "Add the object you want to be playing a sound, e.g. dog."
-      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
-    card6:
-      title: "Nói chuyện"
-      description: "Sử dụng mã này để làm cho đối tượng nói."
-      one: "Add the object you want to be speaking, e.g. Carrie."
-      two: "Insert the following bricks in order to make the voice output possible."
-    card7:
-      title: "GSensor"
-      description: "Sử dụng Mẹo này để điều khiển một đối tượng với độ nghiêng của thiết bị của bạn."
-      one: "Add the object you want to be moving on stage."
-      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
-    card8:
-      title: "La bàn"
-      description: "Sử dụng mã này để làm một chiếc la bàn."
-      one: "Add the object you want to point in compass direction."
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
-    card9:
-      title: "Phát sóng"
-      description: "Nhìn vào mã này! Nó chỉ cho bạn làm thế nào để giao tiếp giữa các đối tượng."
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
-      three: "In this case the background changes when the object in the front layer is tapped."
-    card10:
-      title: "Hiển thị các biến"
-      description: "Show the value of a variable."
-      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
-      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
-      three: "Through „Show variable“ you can display the values on stage."
-    card11:
-      title: "Collision detection"
-      description: "Detect a collision between two objects."
-      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
-      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
-    card12:
-      title: "Face detection"
-      description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
-      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
-  starterPrograms:
-    title: "Starter projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
-    categories:
-      games: "Trò chơi"
-      animations: "Hình động"
-      interactive: "Nghệ thuật tương tác và câu chuyện"
-      music: "Âm nhạc và khiêu vũ"
-  gameJam:
-    title: "Làm thế nào để tải trò chơi Pocket Code lên trang web Game Jolt?"
-    text0: "Đầu tiên xin chúc mừng trò chơi của bạn! Bây giờ bạn có thể tải nó lên %link% để tạo ra một ứng dụng Android độc lập, sau đó bạn có thể tải lên trên trang web Game Jolt."
-    title1: "Đăng ký"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Tải lên"
-    text2: "Sau khi đăng ký bạn có thể tải lên trò chơi của bạn. Chỉ cần nghĩ về một cái tên và thêm mô tả. Cũng có thể thêm #AliceJam150 trong trường mô tả."
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
-    title4: "Tạo ra ứng dụng Android"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Tải Ứng Dụng"
-    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "Đăng ký/đăng nhập tại GameJolt.com"
-    text6: "Truy cập %link% và bấm vào 'Đăng nhập' hoặc 'Đăng ký!' trong danh sách. Nếu bạn đã có một tài khoản chỉ cần đăng nhập, nếu không, bạn cần phải đăng ký với địa chỉ Email của bạn, tên người dùng và mật khẩu."
-    title7: "Tải lên trò chơi của bạn trên trang web Game Jolt"
-    text7: "Sau khi bạn đã đăng nhập, đi đến bảng điều khiển của bạn. Ở đó bạn có thể thêm trò chơi của bạn. Trước tiên, bạn phải bấm vào 'Chấp nhận quy tắc'. Sau đó điền vào các thông tin trò chơi. Tại công cụ Động cơ/Ngôn ngữ/Tạo thành, chọn 'Khác' và thêm vào mục Động cơ/Ngôn ngữ/Công cụ 'Android'. Từ trạng thái 'Phát triển' chọn 'Kết thúc/ổn định'. Hãy đảm bảo bao gồm #AliceJam150 trong mô tả để nó xuất hiện trên trang %link%."
-    text7_1: "Trước khi bạn có thể xuất bản trò chơi của mình, hãy thực hiện theo các bước tiếp theo. Bạn phải ít thêm 'ảnh thu nhỏ', thiết lập 'đánh giá', và tải lên trò chơi của bạn bằng cách nhấp vào 'xây dựng/tập tin'."
-    text7_2: "Nhấp vào 'Thêm gói' và điền vào điền đủ thông tin gói. Lưu nó và thêm việc phát hành. "
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "Lưu ý: Nếu ứng dụng thiếu hậu tố '.apk', bạn phải thêm '.apk' theo cách thủ công. Chỉ cần đổi tên file. Bây giờ bạn có thể tải lên nó."
-    text7_5: "Sau khi tải lên nhấp vào 'Đồng ý' để xuất bản trò chơi của bạn. Điều này sau đó sẽ hiển thị link để giúp những người dùng khác tải về trò chơi của bạn."
-    text7_6: "Bây giờ, bạn đã tải lên của bạn trò chơi đầu tiên trên trang web Game Jolt và đặt nó hoạt động. Chúc mừng!"
-    text7_7: "Những người khác sẽ có thể tìm thấy trò chơi của bạn và nó sẽ xuất hiện trên trang %link%."
-  aliceGameJamTutorialcards:
-    title1: "(Welcome to) Wonderland"
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: "Save Alice!"
-    subtitle2: "Use the inclination sensors and detect a collision between objects"
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: "The Hatter - Hit and Run"
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
-    title4: "The Hatter - Hit and Run"
-    subtitle4: "Let the Hatter shoot the evil cards"
-    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
-    title5: "Whack a Cheshire Cat"
-    subtitle5: "Create a score by using variables"
-    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
-    title6: "A Rabbits Race"
-    subtitle6: "Create a moving background"
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the project"
 search:
   dotdotdot: Tìm kiếm...
   search: Tìm kiếm
@@ -858,28 +639,6 @@ clipboard:
   fail: Failed to copy link to clipboard! :(
 next: Next
 previous: Previous
-help-cards:
-  headings:
-    starters: Starters
-    tutorials: Hướng dẫn
-    stepbystep: Step by step
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
-    discord: Join on Discord
-    game_design: Game design
-    education: Education platform
-    discuss: Discuss
-  text:
-    starters: "Try out and remix with %theme%"
-    tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
-    getinvolved: Download the app and get started
-    discord: Join the community on discord
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.

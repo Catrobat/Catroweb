@@ -14,6 +14,7 @@ others: Others
 tutorials: अनुशिक्षण कक्षा
 googlePlay: गूगल प्ले
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: पासवर्ड मेल नहीं खाते।
 error: त्रुटि
 cancel: रद्द करें
@@ -27,6 +28,7 @@ description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: देश
 loginText: प्रवेश करे
 privacyPolicy: गोपनीयता नीति
@@ -337,227 +339,6 @@ termsOfUse:
   bottom1: समय-समय पर यहां वापस देखें, क्योंकि हम हमेशा हमारी उपयोग की शर्तों को बेहतर बनाने की कोशिश कर रहे हैं।
   bottom2: 'कृपया% ईमेल-वेबमास्टर% पर इन शर्तों के संबंध में कोई सुझाव मेल करें।'
   version: संस्करण 1.3, 4 मार्च 2014
-help:
-  stepByStep:
-    title: "कदम दर कदम परिचय"
-    start: "शुरू करने की स्थिति:"
-    description: |
-      Here you create your first project, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
-    step1:
-      title: 'Make a new project'
-      detail:
-        text1: '"नए" पर टैप करें।'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
-    step2:
-      title: "एक नया वस्तु बनाएँ"
-      detail:
-        text1: 'टेप करें:'
-        text2: 'Choose the source of the first look of your new object.'
-        text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: 'एक नया नज़ारा बनाएं'
-        special2: 'गैलरी से चुनें'
-        special3: 'तस्वीर लें'
-    step3:
-      title: "चलना शुरू करें"
-      detail:
-        text1: 'टेप करें:'
-        text2: 'जिस पहली ईंट का हम उपयोग कर रहे हैं वो "गति" श्रेणी से है।'
-        text3: 'ईंट "सरकाना" चयन करें. आपका ऑब्जेक्ट ईंट द्वारा बताई गयी नयी जगह चला जायेगा'
-        text4: 'ईंट अब तैर रही है। उसको चिपकाने के लिए, ईंट को इच्छित स्थान पर ले जाएँ। आप पहले से सम्मिलित किए हुए ईंटों को भी टैप करके स्थानांतरित कर सकते हैं, जैसे ही वो तैरना शुरू कर दें|'
-        text5: 'प्ले दबाये ताकी आप स्टेज पे जाए और अपने ऑब्जेक्ट को सरकते हुए देखे'
-        text6: 'स्टेज से वापस आने के लिए Android के वापस बटन का उपयोग करें।'
-    step4:
-      title: "नज़ारा बदले"
-      description: "आप अपने ऑब्जेक्ट का नज़ारा बदल सकते हैं"
-      detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'ईंट को "सरकाएं" ईंट के नीचे लगायें'
-        text3: 'नया नज़ारा बनाने के लिए ड्रापडाउन क्षेत्र में टैप करें'
-        text4: 'पहले की तरह चित्र के स्रोत का चयन करें'
-        text5: 'अब आपको नया चित्र चयन करना है'
-        text6: 'स्टेज पर व्यवहार को देखने के लिए "प्ले" टैप करें।'
-    step5:
-      title: "बोलिए"
-      description: "अब आपको पता चलेगा की ऑब्जेक्ट से कैसे बात करवाई जाती है|"
-      detail:
-        text1: '"बोलो" ईंट का चयन करें। ऑब्जेक्ट पाठ बोलेगा ये ईंट निष्पादित होगी'
-        text2: 'ईंट को "नज़ारा देखें" ईंट के नीचे लगायें'
-        text3: 'स्टेज पर व्यवहार को देखने के लिए "प्ले" टैप करें।'
-    step6:
-      title: 'फिर से और फिर से'
-      description: "यह चरण आप को दिखाता है की कैसे वस्तुओं के व्यवहार दोहरायें"
-      detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: 'एक और "सरकना" - ईंट जोड़ें।'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: 'X और y मान के पाठ क्षेत्र में टैप करें और 0 सेट करें|'
-        text6: 'स्टेज पर व्यवहार को देखने के लिए "प्ले" टैप करें।'
-    step7:
-      title: "\"टैप\" करना ही सब कुछ है"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
-      detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: 'अब आपके पास यह script है'
-        text5: 'स्टेज का व्यवहार देखने के लिए प्ले टैप करें| अब अगर आप ऑब्जेक्ट पर टैप करोगे तो वो घूमेगा|'
-    step8:
-      title: "ईंट को प्रतिलिपि\n करें, हटायें या सम्पादित करें|"
-      detail:
-        text1: 'ईंट के बायें तरफ एक टैप सन्दर्भ मेनू खोलता है. वहां से आप फार्मूला संपादक की सहायता से ईंट के मूल्यों को कॉपी कर सकते हैं, हटा सकते हैं, स्थानांतरित कर सकते हैं, और सम्पादित कर सकते हैं|'
-    step9:
-      title: "ऐप में नेविगेशन"
-      detail:
-        text1: 'App में नेविगेट करने के लिए Android वापस बटन का उपयोग करें।'
-        text2: 'आपके ऑब्जेक्ट का अवलोकन करने के लिए एक स्क्रीन पीछे जाएँ। यहाँ आप लिपियों में और ऑब्जेक्ट के नज़ारे व आवाज के एक शक्तिशाली प्रतिनिधित्व में जा सकते हैं |वहाँ आप नज़ारे और आवाज को बदल, हटा और जोड़ सकते हैं |'
-        text3: 'फिर से अपनी वस्तुओं और अपनी पृष्ठभूमि का अवलोकन करने के लिए प्राप्त करने के लिए Android के वापस बटन का उपयोग करें।'
-    step10:
-      title: "पृष्ठभूमि परिवर्तित करें"
-      description: "This is the overview of your objects and your project's background."
-      detail:
-        text1: 'पृष्ठभूमि एक तरह का ऑब्जेक्ट है, लेकिन बस पृष्ठभूमि पर है |'
-        text2: 'आप इसी तरह पृष्ठभूमि में लिपियां, ध्वनियाँ और नज़ारा जोड़ सकते हैं | '
-    step11:
-      title: "मुख्य मेनू"
-      description: "इस स्क्रीन पर वापस आने के लिए Android के वापस बटन का उपयोग करें।"
-      detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
-        text4: 'सहायता साइट पर जायें और अन्य उपयोगकर्ताओं के साथ चर्चा करें|'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
-  tutorialcards:
-    title: "अनुशिक्षण कक्षा"
-    description1: "ये ट्यूटोरियल आपको पॉकेट कोड में प्रभावी ट्रिक्स का उपयोग करने का तरीका दिखाते हैं।"
-    getReady: "तैयार हो जाए:"
-    tryCode: "इस कोड का प्रयास करें:"
-    doIt: "इसे करे:"
-    tip: "अतिरिक्त सुझाव:"
-    card1:
-      title: "आकार बदलें"
-      description: "आकार बदलने के लिए बतख को छुये|"
-      one: "उस वस्तु को जोड़ें जिसमें आप आकार बदलना चाहते हैं, उदाहरण जानवर।"
-      two: "वस्तु की लिपियों में निंनलिखित ईंटों डालें क्रम में इसे कम करने के लिए (यह के 20% से मूल आकार है) जब टेप ।"
-    card2:
-      title: "नज़ारा बदले"
-      description: "स्वचालित रूप से गणना करने के लिए इस चाल का उपयोग करें|"
-      one: "उस वस्तु को जोड़ें जिसमें आप अपना रूप बदलना चाहते हैं, उदाहरण. आइटम ।"
-      two: "ऑब्जेक्ट के दिखने में और चित्र शामिल करें।"
-      three: "ऑब्जेक्ट की स्क्रिप्ट में निम्नलिखित ईंटें डालें ताकि लगातार एक सेकंड के बाद इसे देखने के लिए स्विच किया जा सके।"
-    card3:
-      title: "चलता हुआ एनीमेशन"
-      description: "तोता उड़ाने के लिए इस चाल का प्रयोग करे|"
-      one: "वह ऑब्जेक्ट जोड़ें जिसे आप चलाना चाहते हैं।"
-      two: "ऑब्जेक्ट के रूप में एक और चित्र शामिल करें जो आंदोलन को दिखाता है ।"
-      three: "एक निश्चित समय के बाद ऑब्जेक्ट की स्थिति को लगातार बदलने के लिए ऑब्जेक्ट की स्क्रिप्ट में निंन ईंटें संमिलित करें । इसके अलावा आप बढ़त पर अगर उछल द्वारा मंच मार्जिन कर सकते हैं ।"
-    card4:
-      title: "सरकाए"
-      description: "सुचारू रूप से एक बिंदु से दूसरे तक जाए|"
-      one: "वह ऑब्जेक्ट जोड़ें जिसे आप ग्लाइडिंग करना चाहते हैं. विमान उदा ।"
-      two: "निंनलिखित ईंटें डालें और उस क्षेत्र को परिभाषित करें जिसमें आंदोलन होना चाहिए ।"
-    card5:
-      title: "ध्वनि चलाएँ"
-      description: "ऑब्जेक्ट पर टैप करने पर ध्वनि चलाएं ।"
-      one: "वह ऑब्जेक्ट जोड़ें जिसे आप ध्वनि बजाना चाहते हैं, उदा। कुत्ता।"
-      two: "प्लेबैक संभव बनाने के क्रम में निम्नलिखित ईंटों डालें. अपने व्यक्तिगत पुस्तकालय, पॉकेट कोड मीडिया पुस्तकालय या रिकॉर्ड एक अपने आप से एक ध्वनि चुनें ।"
-    card6:
-      title: "बोलिए"
-      description: "इस वस्तु को बुलाने क लिए, इस कोड का प्रयोग करे|"
-      one: "वह ऑब्जेक्ट जोड़ें जिसे आप ग्लाइडिंग करना चाहते हैं. विमान उदा ।"
-      two: "आवाज उत्पादन संभव बनाने के क्रम में निम्नलिखित ईंटों डालें."
-    card7:
-      title: "जी सेंसर"
-      description: "आपके डिवाइस के झुकाव के अनुसार इस वस्तु को नियंत्रित करने के लिए इस चाल का उपयोग करें।"
-      one: "वह ऑब्जेक्ट जोड़ें जिसे आप चलाना चाहते हैं।"
-      two: "अपने फोन के सेंसर के माध्यम से ऑब्जेक्ट को नियंत्रित करने के लिए निम्न ईंटें डालें। इसलिए \"एक्स और वाई झुकाव\" चुनें। उपयुक्त आंदोलन प्राप्त करने के लिए, \"झुकाव\" सेट करें। यदि वस्तु का आंदोलन बहुत समझदार है, उदाहरण के लिए झुकाव 10 से विभाजित करें।"
-    card8:
-      title: "दिशा-सूचक(कम्पास)"
-      description: "दिशा-सूचक (कम्पास) बनाने के लिए इस कोड का उपयोग करें।"
-      one: "Add the object you want to point in compass direction."
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
-    card9:
-      title: "प्रसारण"
-      description: "इस कोड को देखो! यह आपको वस्तुओं के बीच संवाद करना सिखाता है|"
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
-      three: "In this case the background changes when the object in the front layer is tapped."
-    card10:
-      title: "वेरियेबल दिखये"
-      description: "वेरियेबल का मूल्य दिखये"
-      one: "आप अपने फोन के सेंसर के माध्यम से ले जाया जा करना चाहते हैं एक वस्तु जोड़ें (देखें < div class = \"notranslate\" > 0 </div> ट्यूटोरियल कार्ड 7 < div class = \"notranslate\" > 1 </div>). इसके अतिरिक्त एक दूसरी पृष्ठभूमि जिसमें इसे परिवर्तित करना चाहिए जब यह एक प्रसारण संदेश प्राप्त जोड़ें ।"
-      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
-      three: "Through „Show variable“ you can display the values on stage."
-    card11:
-      title: "टक्कर की पहचान हुई है"
-      description: "Detect a collision between two objects."
-      one: "दो वस्तुओं को जोड़ें जिनमें से किसी को आपके फोन के सेंसर के माध्यम से आगे बढ़ना चाहिए, उदा। एलेक्स (% tutorial_card_link_7% ट्यूटोरियल कार्ड 7% link_end% देखें)।"
-      two: "चलायमान ऑब्जेक्ट के वर्तमान \"x और y स्थान\" को सहेजें एलेक्स (देखें < div class = \"notranslate\" > 0 </div> ट्यूटोरियल कार्ड 10 < div class = \"notranslate\" > 1 </div>) और निम्न स्क्रिप्ट डालें. दो ऑब्जेक्ट्स पर अधिव्याप्त होने पर लगातार जांच करें । यदि वे ऐसा करते हैं तो तय वस्तु को इस मामले में छिपाना चाहिए."
-    card12:
-      title: "Face detection"
-      description: "Control an object by using face detection."
-      one: "पहले सुनिश्चित करें कि चेहरा पहचान ईंटें सक्षम हैं । इसलिए सेटिंग्स पर जाएं ।"
-      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
-  starterPrograms:
-    title: "Starter projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
-    categories:
-      games: "क्रीडाये"
-      animations: "जीव-संचारण"
-      interactive: "परस्पर संवादात्मक कला और कहानियाँ"
-      music: "संगीत और नृत्य"
-  gameJam:
-    title: "How to upload a Pocket Code game to the Game Jolt Site?"
-    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
-    title1: "Registration"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "उद्यतन करे"
-    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
-    title4: "Create Android app"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Download app"
-    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "Register/Login at GameJolt.com"
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: "Upload your game on the Game Jolt Site"
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
-    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
-    text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
-    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
-    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
-  aliceGameJamTutorialcards:
-    title1: "(Welcome to) Wonderland"
-    subtitle1: "अक्षरों को एनिमेट करें और 'जब टैप किया गया' ईवेंट बनाएं"
-    description1: |
-      जानें कि कैसे अपने पात्रों में से एक को सरल एनीमेशन के साथ जीवन में आने दें और मास्टर पर टैप करते समय अपने पात्रों पर कुछ कैसे करें। वीडियो आपको दिखाता है कि विभिन्न दिखने का उपयोग करके आप आसानी से अपने चरित्र को कैसे एनिमेट कर सकते हैं।
-      इसके अलावा हम आपको दिखाते हैं कि "कब टैप किया गया" ईवेंट और ऑब्जेक्ट्स के बीच प्रसारण संदेश कैसे भेजें।
-    title2: "ऐलिस को बचाओ!"
-    subtitle2: "Use the inclination sensors and detect a collision between objects"
-    description2: "यहाँ आप अपने फोन के झुकाव सेंसर का उपयोग कर एक चरित्र को नियंत्रित करने के लिए सीखना होगा. आप छोड़ दिया है या सही करने के लिए अपने फोन झुका द्वारा ऐलिस आंदोलन को नियंत्रित कर सकते हैं । हमारे ट्यूटोरियल देखो और वस्तुओं आकाश से बेतरतीब ढंग से गिर जाते हैं और अन्य वस्तुओं के साथ टकराव का पता लगाने में अनुभव मिलता है ।"
-    title3: "The Hatter - Hit and Run"
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
-    title4: "The Hatter - Hit and Run"
-    subtitle4: "हाट् बुराई कार्ड गोली मार दो"
-    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
-    title5: "बिल्ली को मरो"
-    subtitle5: "Create a score by using variables"
-    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
-    title6: "खरगोश दौड़"
-    subtitle6: "Create a moving background"
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the project"
 search:
   dotdotdot: खोज़े...
   search: खोजें
@@ -858,28 +639,6 @@ clipboard:
   fail: Failed to copy link to clipboard! :(
 next: अगला
 previous: Previous
-help-cards:
-  headings:
-    starters: स्टार्टर्स
-    tutorials: अनुशिक्षण कक्षा
-    stepbystep: क्रमशः
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
-    discord: Join on Discord
-    game_design: Game design
-    education: Education platform
-    discuss: Discuss
-  text:
-    starters: "Try out and remix with %theme%"
-    tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
-    getinvolved: Download the app and get started
-    discord: Join the community on discord
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
@@ -912,5 +671,5 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'Catrobat समुदाय'
 back_to_app: 'Exit community'

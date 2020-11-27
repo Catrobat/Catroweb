@@ -48,6 +48,7 @@ $border-spacing: 8px;
       width: $tile-size;
       height: $tile-size;
       margin: 0.5rem;
+      text-decoration: none;
       border: 2px solid transparent;
       border-radius: 5px;
       transition: border 0.5s;
@@ -70,6 +71,12 @@ $border-spacing: 8px;
         {
           color: white;
           visibility: visible;
+          font-size: 20px;
+        }
+
+        i.media-file-type
+        {
+          z-index: initial;
         }
       }
 
@@ -79,11 +86,18 @@ $border-spacing: 8px;
         max-height: $tile-size - $border-spacing;
       }
 
-      i.fas,
-      i.far
+      i.media-file-icon
       {
-        font-size: $tile-size - 15px;
+        font-size: $tile-size;
         opacity: 0.13;
+      }
+
+      i.media-file-type
+      {
+        z-index: 1;
+        margin-top: 1.6rem;
+        font-size: 2.4rem;
+        color: $white;
       }
 
       &.flavored
@@ -114,8 +128,8 @@ $border-spacing: 8px;
       {
         display: grid;
         .name,
-        i.fas,
-        i.far
+        i.media-file-icon,
+        i.media-file-type
         {
           grid-column: 1;
           grid-row: 1;
@@ -130,14 +144,15 @@ $border-spacing: 8px;
 
       .audio-control {
         position: absolute;
-        right: 5px;
-        bottom: 5px;
+        right: 12px;
+        bottom: 0;
         z-index: 2;
-        font-size: 1.5rem;
-        transition: font-size 0.1s;
+        font-size: 2.4rem;
+        cursor: pointer;
+        transition: font-size;
 
         &:hover {
-          font-size: 1.65rem;
+          font-size: 2.6rem;
         }
       }
     }
@@ -157,10 +172,14 @@ $border-spacing: 8px;
       max-height: $tile-size-md-smup - $border-spacing;
     }
 
-    i.fas,
-    i.far
+    i.media-file-icon
     {
-      font-size: $tile-size-md-smup - 15px;
+      font-size: $tile-size-md-smup;
+    }
+
+    i.media-file-type {
+      margin-top: 2rem;
+      font-size: 2.8rem;
     }
   }
 }
@@ -178,10 +197,9 @@ $border-spacing: 8px;
       max-height: $tile-size-sm - $border-spacing;
     }
 
-    i.fas,
-    i.far
+    i.media-file-icon
     {
-      font-size: $tile-size-sm - 15px;
+      font-size: $tile-size-sm;
     }
   }
 }
@@ -199,8 +217,7 @@ $border-spacing: 8px;
       max-height: $tile-size-lg - $border-spacing;
     }
 
-    i.fas,
-    i.far
+    i.media-file-icon
     {
       font-size: $tile-size-lg - 15px;
     }

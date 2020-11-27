@@ -74,8 +74,9 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     Then I should see the welcome section
     And I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
-    And I should see "Google Play"
-    And I should see "App Store"
+    And I should see "Google Play Store"
+    And I should see "iOS App Store"
+    And I should see "Huawei AppGallery"
 
   Scenario: Cant see the Welcome Section when logged in
     Given I log in as "Catrobat"
@@ -112,9 +113,8 @@ Feature: Pocketcode homepage
     And I should see "About"
     And I should see "Education"
     And I should see "Imprint"
-    And I should see "Google PLay"
+    And I should see "Google Play Store"
     And I should see "iOS App store"
+    And I should see "Huawei AppGallery"
     And I should see "Others"
     And I should see "Chat and forums"
-    And I click "#help"
-    Then I should be on "/app/help"

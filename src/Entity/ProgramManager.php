@@ -201,6 +201,7 @@ class ProgramManager
 
     $program->setName($extracted_file->getName());
     $program->setDescription($extracted_file->getDescription());
+    $program->setCredits($extracted_file->getNotesAndCredits());
     $program->setUser($request->getUser());
     $program->setCatrobatVersion(1);
     $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
