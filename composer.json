@@ -63,7 +63,7 @@
         "dvdoug/behat-code-coverage": "^5.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan": "0.12.57",
-        "phpstan/phpstan-doctrine": "0.12.24",
+        "phpstan/phpstan-doctrine": "0.12.25",
         "phpstan/phpstan-phpunit": "0.12.16",
         "phpstan/phpstan-symfony": "0.12.11",
         "phpunit/phpunit": "^9.2",
