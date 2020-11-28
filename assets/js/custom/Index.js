@@ -96,7 +96,7 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
     $.get(firstOauthLoginUrl,
       function (data) {
         if (data.first_login === true) {
-          var isshow = localStorage.getItem('oauthSignIn')
+          const isshow = localStorage.getItem('oauthSignIn')
           if (isshow == null) {
             localStorage.setItem('oauthSignIn', 1)
             Swal.fire({

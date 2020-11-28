@@ -20,7 +20,7 @@ function ProgramRecommender (programId, pathStats) {
           additions = (href.match(/[0-9]+/))[0]
         } else if (href.indexOf('extension') > 0) {
           clickType = 'extensions'
-          var list = href.split('/')
+          const list = href.split('/')
           additions = list[list.length - 1]
         } else if (href.indexOf('project') > 0) {
           clickType = 'project'

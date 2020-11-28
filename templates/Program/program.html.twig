@@ -265,4 +265,10 @@
   </script>
 
   <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
+  <script>
+    new Translation(
+      {% if program.description %} true, {% else %} false, {% endif %}
+      {% if program.credits %} true {% else %} false {% endif %}
+    )
+  </script>
 {% endblock %}

@@ -5,7 +5,7 @@ function AdminBroadcastNotification () {
   $('.btn').click(function () {
     $('.resultBox').html('')
 
-    var message = $('#msg').val()
+    const message = $('#msg').val()
     $.ajax({
       url: 'send',
       type: 'get', // send it through get method

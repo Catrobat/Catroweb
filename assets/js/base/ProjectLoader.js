@@ -520,8 +520,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
         if (self.recommendedByProjectId !== null) {
           link += '&rec_by_program_id=' + self.recommendedByProjectId
         }
-        link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) &&
-        data.isUserSpecificRecommendation ? 1 : 0)
+        link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) && data.isUserSpecificRecommendation ? 1 : 0)
     }
     return link
   }

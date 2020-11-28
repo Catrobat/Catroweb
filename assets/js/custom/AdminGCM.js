@@ -5,8 +5,8 @@ function AdminGCM () {
   $('.btn').click(function () {
     $('.resultBox').html('')
 
-    var apikey = $('.apikey').val()
-    var message = $('.msg').val()
+    let apikey = $('.apikey').val()
+    const message = $('.msg').val()
 
     if (apikey.length === 0) {
       apikey = $('.apikey').attr('placeholder')
