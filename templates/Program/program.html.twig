@@ -25,7 +25,8 @@
     </div>
 
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
-      <h1 id="name" class="h2 no-overflow">{{ program.name }}</h1>
+      <h1 id="name" class="h2 no-overflow" style="display:inline;">{{ program.name }}</h1>
+      <i class="ml-2 material-icons" id="googleTranslateProgram" onclick="Translation([document.getElementById('name'), document.getElementById('description'), document.getElementById('credits')], document.documentElement.lang)">g_translate</i>
 
       <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
               '#code-view-icon{{ suffix|default('') }}')">

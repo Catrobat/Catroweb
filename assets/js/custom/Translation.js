@@ -7,10 +7,13 @@ function Translation (textElements, srcLang) {
       array.push(textElements[i].innerText)
     }
 
-    text = array.join('\n')
+    text = array.join('\n\n')
   } else {
     text = textElements.innerText
   }
 
-  window.location.href = 'https://translate.google.com/?q=' + encodeURIComponent(text)
+  //let url = 'https://translate.google.com/?sl=auto&tl=' + srcLang + '&text=' + encodeURIComponent(text)
+  let url = 'https://translate.google.com/?q=' + encodeURIComponent(text) + '&sl=auto&tl=' + srcLang 
+  window.open(url, '_blank', 'noreferrer')
+  //window.location.href = 'https://translate.google.com/?q=' + encodeURIComponent(text)
 }
