@@ -13,8 +13,9 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Object\Metadata;
+use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -78,7 +79,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    */
-  public function getObjectMetadata($object): Metadata
+  public function getObjectMetadata($object): MetadataInterface
   {
     /** @var FeaturedProgram $featured_program */
     $featured_program = $object;
