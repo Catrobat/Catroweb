@@ -15,7 +15,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\AdminBundle\Object\Metadata;
+use Sonata\AdminBundle\Object\MetadataInterface;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -80,7 +82,7 @@ class ExampleProgramAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    */
-  public function getObjectMetadata($object): Metadata
+  public function getObjectMetadata($object): MetadataInterface
   {
     /** @var ExampleProgram $example_program */
     $example_program = $object;
@@ -113,7 +115,7 @@ class ExampleProgramAdmin extends AbstractAdmin
   {
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof \Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery)
+    if (!$query instanceof ProxyQuery)
     {
       return $query;
     }
