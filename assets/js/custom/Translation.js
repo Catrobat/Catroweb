@@ -13,16 +13,17 @@ function Translation (hasDescription, hasCredit) {
 
   translation(
     document.getElementById('googleTranslateLink'),
-    elementsToTranslate
+    elementsToTranslate,
+    document.documentElement.lang
   )
 
   $('.comment-translate-button').each(function () {
     const commentId = $(this).attr('id').substring('comment-translate-button-'.length)
-    translation(this, document.getElementById('comment-text-' + commentId))
+    translation(this, document.getElementById('comment-text-' + commentId), document.documentElement.lang)
   }
   )
 
-  function translation (buttonElement, textElements) {
+  function translation (buttonElement, textElements, srcLang) {
     let text = ''
     if (Array.isArray(textElements)) {
       const array = []
@@ -30,11 +31,11 @@ function Translation (hasDescription, hasCredit) {
         array.push(textElements[i].innerText)
       }
 
-      text = array.join('\n')
+      text = array.join('\n\n')
     } else {
       text = textElements.innerText
     }
 
-    buttonElement.setAttribute('href', 'https://translate.google.com/?q=' + encodeURIComponent(text))
+    buttonElement.setAttribute('href', 'https://translate.google.com/?q=' + encodeURIComponent(text) + '&sl=auto&tl=' + srcLang)
   }
 }

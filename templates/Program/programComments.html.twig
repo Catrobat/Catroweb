@@ -46,7 +46,9 @@
               {{ comment.uploadDate.format('Y-m-d') }}
             </div>
             <a id="comment-translate-button-{{ comment.id }}" class="comment-translate-button">
-              translate
+              <i class="ml-3 material-icons">
+                g_translate
+              </i>
             </a>
             {% if not(app.user) or (app.user and comment.username != app.user.username) %}
             {#  Everybody, but the comment owner must be able to report a comment  #}
