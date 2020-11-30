@@ -273,7 +273,7 @@ jobs:
   # phpcf (Php Code Fixer):
   #
   #  - to search issues with deprecated functionality in newer interpreter versions..
-  #  - More information at: https://github.com/wapmorgan/PhpCodeFixer
+  #  - More information at: https://github.com/wapmorgan/PhpDeprecationDetector
   #
   phpcf:
     name: PHP Static Analysis [PhpCF]
