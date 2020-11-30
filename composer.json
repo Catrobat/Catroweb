@@ -4,10 +4,9 @@
     "license": "proprietary",
     "description": "Catroweb Symfony Share Platform",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-SimpleXML": "*",
         "ext-gd": "*",
-        "ext-imagick": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pcntl": "*",
@@ -74,16 +73,6 @@
         "wapmorgan/php-deprecation-detector": "^2.0"
     },
     "config": {
-        "platform": {
-            "php": "7.4",
-            "ext-gd": "7.4",
-            "ext-imagick": "3.4.4",
-            "ext-json": "1.7.0",
-            "ext-mbstring": "7.4",
-            "ext-pcntl": "7.4",
-            "ext-posix": "7.4",
-            "ext-zip": "1.15.4"
-        },
         "bin-dir": "bin",
         "preferred-install": {
             "*": "dist"

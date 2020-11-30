@@ -21,30 +21,31 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php7.4-common \
-    php7.4-cli \
-    php7.4-curl \
-    php7.4-intl \
-    php7.4-gd \
-    php7.4-zip \
-    php7.4-mysql \
-    php7.4-xml \
-    php7.4-dom \
-    libapache2-mod-php7.4 \
     zlibc \
     acl \
     make \
     libtool \
+    php8.0-common \
+    php8.0-cli \
+    php8.0-curl \
+    php8.0-dom \
+    php8.0-gd \
+    php8.0-intl \
+    php8.0-mbstring \
+    php8.0-mysql \
+    php8.0-xml \
+    php8.0-zip \
     php-apcu \
-    apache2 \
     php-imagick \
     php-mbstring \
+    php-xdebug \
     php-gettext \
     git \
     curl \
-    php-xdebug \
     libgconf-2-4 \
-    npm
+    npm \
+    apache2 \
+    libapache2-mod-php8.0
 RUN npm install -g n
 RUN n stable && \
     npm install -g grunt-cli && \
