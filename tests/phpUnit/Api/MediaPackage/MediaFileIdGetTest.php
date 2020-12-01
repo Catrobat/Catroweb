@@ -43,11 +43,11 @@ class MediaFileIdGetTest extends WebTestCase
     $client->request('GET', '/api/media/file/1', [], [], ['HTTP_ACCEPT' => 'application/json']);
     $data = $client->getResponse()->getContent();
     $this->assertResponseStatusCodeSame(200);
-    $this->assertJsonStringEqualsJsonString($data, '{"id":1,"name":"Panda 1","flavor":["pocketcode"],"package":["Looks"],"category":"Looks Family","author":"Catrobat","extension":"","download_url":"http:\/\/localhost\/app\/download-media\/1"}');
+    $this->assertJsonStringEqualsJsonString($data, '{"id":1,"name":"Panda 1","flavors":["pocketcode"],"packages":["Looks"],"category":"Looks Family","author":"Catrobat","extension":"","download_url":"http:\/\/localhost\/app\/download-media\/1"}');
 
     $client->request('GET', '/api/media/file/5', [], [], ['HTTP_ACCEPT' => 'application/json']);
     $this->assertResponseStatusCodeSame(200);
     $data = $client->getResponse()->getContent();
-    $this->assertJsonStringEqualsJsonString($data, '{"id":5,"name":"Bear","flavor":["pocketcode"],"package":["Looks"],"category":"Looks Family","author":"Catrobat","extension":"","download_url":"http:\/\/localhost\/app\/download-media\/5"}');
+    $this->assertJsonStringEqualsJsonString($data, '{"id":5,"name":"Bear","flavors":["pocketcode"],"packages":["Looks"],"category":"Looks Family","author":"Catrobat","extension":"","download_url":"http:\/\/localhost\/app\/download-media\/5"}');
   }
 }
