@@ -50,8 +50,8 @@ Feature: Get data from the media library in json format
     {
       "id": 5,
       "name": "Ape",
-      "flavor": "[\"pocketcode\"]",
-      "package": "[\"Looks\"]",
+      "flavor": ["pocketcode"],
+      "package": ["Looks"],
       "category": "Animals",
       "author": "",
       "extension": "png",
@@ -68,8 +68,8 @@ Feature: Get data from the media library in json format
     {
       "id": 1,
       "name": "Dog 1",
-      "flavor": "[\"pocketcode\"]",
-      "package": "[\"Looks\"]",
+      "flavor": ["pocketcode"],
+      "package": ["Looks"],
       "category": "Animals",
       "author": "Bob Schmidt",
       "extension": "png",
