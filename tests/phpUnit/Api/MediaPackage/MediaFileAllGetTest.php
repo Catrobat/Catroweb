@@ -110,9 +110,6 @@ class MediaFileAllGetTest extends WebTestCase
     $client->request('GET', '/api/media/files', ['offset' => 'a'], [], ['HTTP_ACCEPT' => 'application/json']);
     $this->assertResponseStatusCodeSame(400);
 
-    $client->request('GET', '/api/media/files', ['flavor' => 100], [], ['HTTP_ACCEPT' => 'application/json']);
-    $this->assertResponseStatusCodeSame(400);
-
     $client->request('GET', '/api/media/files', [], [], ['HTTP_ACCEPT' => 'application/json']);
     $this->assertResponseStatusCodeSame(200);
     $data = $client->getResponse()->getContent();
