@@ -1973,16 +1973,16 @@
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "581f3dfccd9424c4a5d9713bd8c2fc9f38479a80"
+                "reference": "9e8903aaa0644afc0dbb697e2156e28e5a88865c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/581f3dfccd9424c4a5d9713bd8c2fc9f38479a80",
-                "reference": "581f3dfccd9424c4a5d9713bd8c2fc9f38479a80",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/9e8903aaa0644afc0dbb697e2156e28e5a88865c",
+                "reference": "9e8903aaa0644afc0dbb697e2156e28e5a88865c",
                 "shasum": ""
             },
             "require": {
@@ -2057,7 +2057,7 @@
                 "mongodb",
                 "search"
             ],
-            "time": "2020-09-15T13:32:33+00:00"
+            "time": "2020-11-30T20:16:38+00:00"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -8525,7 +8525,7 @@
         },
         {
             "name": "symfony/inflector",
-            "version": "v5.1.9",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
@@ -10710,16 +10710,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.1.9",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "a97573e960303db71be0dd8fda9be3bca5e0feea"
+                "reference": "40e975edadd4e32cd16f3753b3bad65d9ac48242"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/a97573e960303db71be0dd8fda9be3bca5e0feea",
-                "reference": "a97573e960303db71be0dd8fda9be3bca5e0feea",
+                "url": "https://api.github.com/repos/symfony/string/zipball/40e975edadd4e32cd16f3753b3bad65d9ac48242",
+                "reference": "40e975edadd4e32cd16f3753b3bad65d9ac48242",
                 "shasum": ""
             },
             "require": {
@@ -10786,7 +10786,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:01:57+00:00"
+            "time": "2020-10-24T12:08:07+00:00"
         },
         {
             "name": "symfony/swiftmailer-bundle",
