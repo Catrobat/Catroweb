@@ -73,7 +73,7 @@
         "symfony/profiler-pack": "^1.0",
         "vimeo/psalm": "^4.0",
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
-        "wapmorgan/php-code-fixer": "dev-master"
+        "wapmorgan/php-deprecation-detector": "^2.0"
     },
 
     "config": {

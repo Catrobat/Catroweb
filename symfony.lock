@@ -1045,8 +1045,8 @@
     "vipsoft/doctrine-data-fixtures-extension": {
         "version": "3.0.x-dev"
     },
-    "wapmorgan/php-code-fixer": {
-        "version": "dev-master"
+    "wapmorgan/php-deprecation-detector": {
+        "version": "2.0.24"
     },
     "webimpress/safe-writer": {
         "version": "2.0.0"
