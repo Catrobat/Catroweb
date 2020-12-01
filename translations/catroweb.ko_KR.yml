@@ -552,7 +552,7 @@ pmd:
   successful:
     text: Your project upload was successful.
   failed:
-    text: Project upload failed.
+    text: 프로그램 업로드하지 못했습니다.
 codeview:
   title: '코드 보기 (Automatic Translation)'
   showCode: '코드 표시'
@@ -601,7 +601,7 @@ footer:
   download: 앱 다운로드
 privacy-policy:
   header: 개인 정보 보호 정책
-  version: Version 2.2, 17 October 2019
+  version: 버전 2.2, 2019년 10월 17일
   text1: 당신에게 계정 구성과 우리서비스의 혜택을 제공하기 위해 당신의 일부 정보를 사용할 수 있습니다.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
   text3: 당사의 시스템에서 귀하의 계정을 사용하고 귀하의 계정에 대한 필요한 변경 사항(예:당사의 사용 및 서비스 사용 약관 또는 지역 사회 규칙 사용에 대한 업데이트)을 사용자 이름 또는 정책에 의해 저장합니다. GooglePlus또는 Facebook을 통해 계정을 연결한 경우, 당사는 이러한 서비스에 연결된 Id키를 추가로 저장합니다.
