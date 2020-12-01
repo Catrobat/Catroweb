@@ -12,7 +12,6 @@ use Google_Client;
 use GuzzleHttp\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Api\AuthenticationApiInterface;
-use OpenAPI\Server\Api\OpenAPI;
 use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\OAuthLoginRequest;
@@ -60,7 +59,6 @@ class AuthenticationApi implements AuthenticationApiInterface
   {
     // TODO: Implement authenticationRefreshPost() method.
   }
-
 
   /**
    * {@inheritdoc}

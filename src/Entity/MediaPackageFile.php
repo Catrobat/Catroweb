@@ -239,6 +239,7 @@ class MediaPackageFile
     {
       $return[] = $flavor->getName();
     }
+
     return $return;
   }
 

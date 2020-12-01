@@ -175,8 +175,8 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     return $mediaFile = [
       'id' => $media_package_file->getId(),
       'name' => $media_package_file->getName(),
-      'flavor' => $media_package_file->getFlavorNames(),
-      'package' => $media_package_file->getCategory()->getPackageNames(),
+      'flavors' => $media_package_file->getFlavorNames(),
+      'packages' => $media_package_file->getCategory()->getPackageNames(),
       'category' => $media_package_file->getCategory()->getName(),
       'author' => $media_package_file->getAuthor(),
       'extension' => $media_package_file->getExtension(),

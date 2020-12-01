@@ -16,7 +16,6 @@ use App\Utils\APIHelper;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use OpenAPI\Server\Api\OpenAPI;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectReportRequest;
@@ -310,6 +309,11 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   {
   }
 
+  public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement projectIdReportPost() method.
+  }
+
   /**
    * @param Program|ExampleProgram $program
    *
@@ -362,10 +366,5 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
 
     return $projectsDataResponse;
-  }
-
-  public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
-  {
-    // TODO: Implement projectIdReportPost() method.
   }
 }
