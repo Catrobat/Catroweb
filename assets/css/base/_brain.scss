@@ -44,20 +44,6 @@ li {
   word-wrap: break-word;
 }
 
-.content-container {
-  margin: 25px auto;
-}
-
-.standard-col-text {
-  @include box-columns(2, 25px);
-  padding: 25px 0;
-  text-align: justify;
-}
-
-.standard-article-link {
-  font-weight: bold;
-}
-
 .clear {
   clear: both;
 }
