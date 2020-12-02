@@ -207,6 +207,44 @@ Feature:
     And the element "#visibility-lock-open-1" should be visible
     And the element "#visibility-lock-1" should not be visible
 
+  Scenario: Project visibility should not get updated if the user clicks on cancel
+    Given I am on "/app/user"
+    And I wait for the page to be loaded
+    Then I should see "project 1"
+    And the element "#visibility-lock-open-1" should be visible
+    And the element "#visibility-lock-1" should not be visible
+    When I click "#visibility-lock-open-1"
+    And I wait for AJAX to finish
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-cancel"
+    And I wait for AJAX to finish
+    And the element "#visibility-lock-open-1" should be visible
+    And the element "#visibility-lock-1" should not be visible
+
+  Scenario: It should be possible toggle the project privacy on myprofile for more than 1 project
+    Given I am on "/app/user"
+    And I wait for the page to be loaded
+    Then I should see "project 1"
+    And I should see "project 2"
+    And the element "#visibility-lock-open-1" should be visible
+    And the element "#visibility-lock-1" should not be visible
+    And the element "#visibility-lock-open-2" should not be visible
+    And the element "#visibility-lock-2" should be visible
+    When I click "#visibility-lock-open-1"
+    And I wait for AJAX to finish
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    And the element "#visibility-lock-open-1" should not be visible
+    And the element "#visibility-lock-1" should be visible
+    When I click "#visibility-lock-2"
+    And I wait for AJAX to finish
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    And the element "#visibility-lock-open-2" should be visible
+    And the element "#visibility-lock-2" should not be visible
+
   Scenario: Programs with too high language version can also be set to visible
     Given I am on "/app/user"
     And I wait for the page to be loaded
