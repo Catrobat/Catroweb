@@ -15,7 +15,7 @@
         "ext-posix": "*",
         "ext-zip": "*",
         "beberlei/doctrineextensions": "^1.2",
-        "catrobat/capi": "1.0.47",
+        "catrobat/capi": "1.0.48",
         "codercat/jwk-to-pem": "^1.0",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -119,6 +119,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+
+        "fix": [
+            "bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt"
         ]
     },
 

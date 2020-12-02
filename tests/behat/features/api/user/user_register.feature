@@ -100,27 +100,6 @@ Feature: Registering a new user.
       }
     """
 
-  Scenario: Password with non-ascii chars should result in an error
-    Given I have the following JSON request body:
-    """
-      {
-        "dry-run": true,
-        "email": "test@test.at",
-        "username": "testuser",
-        "password": "1234567ö"
-      }
-    """
-    And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
-    Then the response status code should be "422"
-    And I should get the json object:
-    """
-      {
-        "password": "Password contains invalid chars"
-      }
-    """
-
   Scenario: Trying to register with already existing usernames and emails should result in an error
     Given I have the following JSON request body:
     """
