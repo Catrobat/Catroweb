@@ -36,7 +36,7 @@ Feature: Update user
       }
     """
     And I request "PUT" "/api/user"
-    Then the response code should be "200"
+    Then the response code should be "204"
     And the following users exist in the database:
       | name    |
       | User2   |
@@ -89,12 +89,11 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
         "password": "123456"
       }
     """
     And I request "PUT" "/api/user"
-    Then the response code should be "200"
+    Then the response code should be "204"
 
   Scenario: Update user password with invalid password
     Given I use a valid JWT Bearer token for "Catrobat"
@@ -123,12 +122,11 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
         "country": "AT"
       }
     """
     And I request "PUT" "/api/user"
-    Then the response code should be "200"
+    Then the response code should be "204"
     And user "Catrobat" with country code "AT" should exist
 
   Scenario: Update user country with invalid code
@@ -163,7 +161,7 @@ Feature: Update user
       }
     """
     And I request "PUT" "/api/user"
-    Then the response code should be "200"
+    Then the response code should be "204"
     And user "Catroweb" with email "user@catrobat.at" should exist
 
   Scenario: Update user with invalid email
@@ -173,7 +171,6 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
         "email": "catroweb"
       }
     """
@@ -246,16 +243,3 @@ Feature: Update user
     """
     And I request "PUT" "/api/user"
     Then the response code should be "415"
-
-  Scenario: Update user without setting accept header should return 406 status code
-    Given I use a valid JWT Bearer token for "Catrobat"
-    And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I have the following JSON request body:
-    """
-      {
-        "dry-run": true,
-        "username": "User2"
-      }
-    """
-    And I request "PUT" "/api/user"
-    Then the response code should be "406"

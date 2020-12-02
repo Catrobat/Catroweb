@@ -93,6 +93,100 @@ class UserApi implements UserApiInterface
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function userDelete(&$responseCode, array &$responseHeaders)
+  {
+    $responseCode = Response::HTTP_NO_CONTENT;
+
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    $this->user_manager->delete($user);
+
+    return null;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function userGet(&$responseCode, array &$responseHeaders)
+  {
+    $responseCode = Response::HTTP_OK;
+
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    return $this->getExtendedUserDataResponse($user);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function userIdGet(string $id, &$responseCode, array &$responseHeaders)
+  {
+    $responseCode = Response::HTTP_OK;
+
+    /** @var User|null $user */
+    $user = $this->user_manager->find($id);
+
+    if (null === $user)
+    {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    return $this->getBasicUserDataResponse($user);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode, array &$responseHeaders)
+  {
+    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+
+    $update_error_response = $this->validateUpdateRequest($update_user_request);
+
+    if ($this->isUpdateRequestInvalid($update_error_response))
+    {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return $update_error_response;
+    }
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+
+    if (!$update_user_request->isDryRun())
+    {
+      $this->updateUser($update_user_request);
+    }
+
+    return null;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
+  {
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+
+    $responseCode = Response::HTTP_OK;
+
+    if ('' === $query || ctype_space($query))
+    {
+      return [];
+    }
+
+    $users = $this->user_manager->search($query, $limit, $offset);
+
+    return $this->getUsersDataResponse($users);
+  }
+
+  /**
    * Validates the Register object passed by the request. No automatic validation provided by the OpenApi
    * will be used cause non standard validations (e.g. validation if a username doesn't exist already) must be
    * used here.
@@ -101,7 +195,7 @@ class UserApi implements UserApiInterface
    *
    * @return RegisterErrorResponse The RegisterErrorResponse containing possible validation errors
    */
-  public function validateRegistration(RegisterRequest $register_request): RegisterErrorResponse
+  private function validateRegistration(RegisterRequest $register_request): RegisterErrorResponse
   {
     $response = new RegisterErrorResponse();
 
@@ -158,95 +252,12 @@ class UserApi implements UserApiInterface
     {
       $response->setPassword($this->translator->trans('api.registerUser.passwordTooLong', [], 'catroweb'));
     }
-    elseif (!mb_detect_encoding($register_request->getPassword(), 'ASCII', true))
+    elseif (!mb_detect_encoding($register_request->getPassword(), 'UTF-8', true))
     {
       $response->setPassword($this->translator->trans('api.registerUser.passwordInvalidChars', [], 'catroweb'));
     }
 
     return $response;
-  }
-
-  public function userDelete(&$responseCode, array &$responseHeaders)
-  {
-    $responseCode = Response::HTTP_NO_CONTENT;
-
-    /** @var User $user */
-    $user = $this->token_storage->getToken()->getUser();
-
-    $this->user_manager->delete($user);
-
-    return null;
-  }
-
-  public function userGet(&$responseCode, array &$responseHeaders)
-  {
-    $responseCode = Response::HTTP_OK;
-
-    /** @var User $user */
-    $user = $this->token_storage->getToken()->getUser();
-
-    return $this->getExtendedUserDataResponse($user);
-  }
-
-  public function userIdGet(string $id, &$responseCode, array &$responseHeaders)
-  {
-    $responseCode = Response::HTTP_OK;
-
-    /** @var User|null $user */
-    $user = $this->user_manager->find($id);
-
-    if (null === $user)
-    {
-      $responseCode = Response::HTTP_NOT_FOUND;
-
-      return null;
-    }
-
-    return $this->getBasicUserDataResponse($user);
-  }
-
-  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode, array &$responseHeaders)
-  {
-    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
-
-    $update = $this->checkUpdate($update_user_request);
-
-    if (!$this->validUpdate($update))
-    {
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-
-      return $update;
-    }
-
-    if ($update_user_request->isDryRun())
-    {
-      $responseCode = Response::HTTP_NO_CONTENT;
-    }
-    else
-    {
-      $responseCode = Response::HTTP_OK;
-
-      $this->updateUser($update_user_request);
-    }
-
-    return null;
-  }
-
-  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
-  {
-    $limit = APIHelper::setDefaultLimitOnNull($limit);
-    $offset = APIHelper::setDefaultOffsetOnNull($offset);
-
-    $responseCode = Response::HTTP_OK;
-
-    if ('' === $query || ctype_space($query))
-    {
-      return [];
-    }
-
-    $users = $this->user_manager->search($query, $limit, $offset);
-
-    return $this->getUsersDataResponse($users);
   }
 
   private function getBasicUserDataResponse(User $user): BasicUserDataResponse
@@ -285,7 +296,7 @@ class UserApi implements UserApiInterface
     return $users_data_response;
   }
 
-  private function checkUpdate(UpdateUserRequest $update_user_request): UpdateUserErrorResponse
+  private function validateUpdateRequest(UpdateUserRequest $update_user_request): UpdateUserErrorResponse
   {
     $response = new UpdateUserErrorResponse();
 
@@ -328,14 +339,12 @@ class UserApi implements UserApiInterface
     return $response;
   }
 
-  private function validUpdate(UpdateUserErrorResponse $update): bool
+  private function isUpdateRequestInvalid(UpdateUserErrorResponse $error_response): bool
   {
-    if ($update->getUsername() || $update->getEmail() || $update->getPassword() || $update->getCountry())
-    {
-      return false;
-    }
-
-    return true;
+    return $error_response->getUsername()
+      || $error_response->getEmail()
+      || $error_response->getPassword()
+      || $error_response->getCountry();
   }
 
   private function validateEmail(string $email): string
@@ -344,15 +353,15 @@ class UserApi implements UserApiInterface
 
     if (0 === strlen($email))
     {
-      $validation = $this->translator->trans('api.updateUser.emailEmpty', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.emailEmpty', [], 'catroweb');
     }
     elseif (0 !== count($this->validator->validate($email, new Email())))
     {
-      $validation = $this->translator->trans('api.updateUser.emailInvalid', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.emailInvalid', [], 'catroweb');
     }
     elseif (null != $this->user_manager->findUserByEmail($email))
     {
-      $validation = $this->translator->trans('api.updateUser.emailAlreadyInUse', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.emailAlreadyInUse', [], 'catroweb');
     }
 
     return $validation;
@@ -364,27 +373,27 @@ class UserApi implements UserApiInterface
 
     if (0 === strlen($username))
     {
-      $validation = $this->translator->trans('api.updateUser.usernameEmpty', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.usernameEmpty', [], 'catroweb');
     }
     elseif (strlen($username) < 3)
     {
-      $validation = $this->translator->trans('api.updateUser.usernameTooShort', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.usernameTooShort', [], 'catroweb');
     }
     elseif (strlen($username) > 180)
     {
-      $validation = $this->translator->trans('api.updateUser.usernameTooLong', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.usernameTooLong', [], 'catroweb');
     }
     elseif (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL))
     {
-      $validation = $this->translator->trans('api.updateUser.usernameContainsEmail', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.usernameContainsEmail', [], 'catroweb');
     }
     elseif (null != $this->user_manager->findUserByUsername($username))
     {
-      $validation = $this->translator->trans('api.updateUser.usernameAlreadyInUse', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.usernameAlreadyInUse', [], 'catroweb');
     }
     elseif (0 === strncasecmp($username, User::$SCRATCH_PREFIX, strlen(User::$SCRATCH_PREFIX)))
     {
-      $validation = $this->translator->trans('api.updateUser.usernameInvalid', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.usernameInvalid', [], 'catroweb');
     }
 
     return $validation;
@@ -396,19 +405,19 @@ class UserApi implements UserApiInterface
 
     if (0 === strlen($password))
     {
-      $validation = $this->translator->trans('api.updateUser.passwordEmpty', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.passwordEmpty', [], 'catroweb');
     }
     elseif (strlen($password) < 6)
     {
-      $validation = $this->translator->trans('api.updateUser.passwordTooShort', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.passwordTooShort', [], 'catroweb');
     }
     elseif (strlen($password) > 4_096)
     {
-      $validation = $this->translator->trans('api.updateUser.passwordTooLong', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.passwordTooLong', [], 'catroweb');
     }
     elseif (!mb_detect_encoding($password, 'ASCII', true))
     {
-      $validation = $this->translator->trans('api.updateUser.passwordInvalidChars', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.passwordInvalidChars', [], 'catroweb');
     }
 
     return $validation;
@@ -420,7 +429,7 @@ class UserApi implements UserApiInterface
 
     if (!Countries::exists($country))
     {
-      $validation = $this->translator->trans('api.updateUser.countryCodeInvalid', [], 'catroweb');
+      $validation = $this->translator->trans('api.registerUser.countryCodeInvalid', [], 'catroweb');
     }
 
     return $validation;

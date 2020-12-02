@@ -58,25 +58,10 @@ class UserRegisterTest extends WebTestCase
     $data = $client->getResponse()->getContent();
     $this->assertJsonStringEqualsJsonString($data, '{"username": "Username too long","password": "Password too long"}');
 
-    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json'], '{"dry-run" : true, "email" : "test@test.at", "username" : "testuser", "password" : "1234567ö"}');
-    $this->assertResponseStatusCodeSame(422);
-    $data = $client->getResponse()->getContent();
-    $this->assertJsonStringEqualsJsonString($data, '{"password": "Password contains invalid chars"}');
-
-    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json'], '{"dry-run" : true, "email" : "CatrobatUser@localhost.at", "username" : "Catrobat", "password" : "1234567"}');
-    $this->assertResponseStatusCodeSame(422);
-    $data = $client->getResponse()->getContent();
-    $this->assertJsonStringEqualsJsonString($data, '{"email": "Email already in use","username": "Username already in use"}');
-
-    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT_LANGUAGE' => 'de'], '{"dry-run" : true, "email" : "CatrobatUser@localhost.at", "username" : "Catrobat", "password" : "1234567"}');
-    $this->assertResponseStatusCodeSame(422);
-    $data = $client->getResponse()->getContent();
-    $this->assertJsonStringEqualsJsonString($data, '{"email": "EMail wird bereits benützt","username": "Benutzername wird bereits benützt"}');
-
     $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json'], '{"dry-run" : true, "email" : "test@test.at", "username" : "Testuser", "password" : "1234567"}');
     $this->assertResponseStatusCodeSame(204);
 
-    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json'], '{"dry-run" : false, "email" : "test@test.at", "username" : "Testuser", "password" : "1234567"}');
+    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json'], '{"dry-run" : false, "email" : "test@test.at", "username" : "Testuser", "password" : "123456ö/"}');
     $this->assertResponseStatusCodeSame(201);
     $new_user = $this->entity_manager->getRepository(User::class)
       ->findOneBy(['email' => 'test@test.at'])
@@ -95,5 +80,15 @@ class UserRegisterTest extends WebTestCase
 
     $client->request('POST', '/api/user', [], [], ['CONTENT_TYPE' => 'application/json'], '{"dry-run" : false, "email" : "test@test.at", "username" : "",}');
     $this->assertResponseStatusCodeSame(400);
+
+    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json'], '{"dry-run" : true, "email" : "test@test.at", "username" : "Testuser", "password" : "1234567"}');
+    $this->assertResponseStatusCodeSame(422);
+    $data = $client->getResponse()->getContent();
+    $this->assertJsonStringEqualsJsonString($data, '{"email": "Email already in use","username": "Username already in use"}');
+
+    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT_LANGUAGE' => 'de'], '{"dry-run" : true, "email" : "test@test.at", "username" : "Testuser", "password" : "1234567"}');
+    $this->assertResponseStatusCodeSame(422);
+    $data = $client->getResponse()->getContent();
+    $this->assertJsonStringEqualsJsonString($data, '{"email": "EMail wird bereits benützt","username": "Benutzername wird bereits benützt"}');
   }
 }

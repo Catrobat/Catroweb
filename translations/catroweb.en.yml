@@ -476,28 +476,16 @@ failure:
 api:
   registerUser:
     emailMissing: 'Email missing'
+    emailEmpty: 'Email cannot be empty'
     emailInvalid: 'Email invalid'
     emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
+    usernameEmpty: 'Username cannot be empty'
     usernameAlreadyInUse: 'Username already in use'
     usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-
-  updateUser:
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameEmpty: 'Username cannot be empty'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
     passwordEmpty: 'Password cannot be empty'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
