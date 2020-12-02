@@ -36,32 +36,101 @@ Feature: Get data from the media library in json format
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/package/looks"
     Then the response status code should be "200"
-    Then the response should have the media files model structure
-    Then the response should contain media files in the following order:
-      | Name      |
-      | Dog       |
-      | Cat       |
-      | Ape       |
-      | Spaceship |
-      | Metroid   |
+    And I should get the json object:
+    """
+    [
+      {
+        "id": 1,
+        "name": "Dog",
+        "flavors": ["pocketcode"],
+        "packages": ["Looks"],
+        "category": "Animals",
+        "author": "Bob Schmidt",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/1"
+      },
+        {
+        "id": 4,
+        "name": "Cat",
+        "flavors": ["pocketcode"],
+        "packages": ["Looks"],
+        "category": "Animals",
+        "author": "",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+      },
+      {
+        "id": 5,
+        "name": "Ape",
+        "flavors": ["pocketcode"],
+        "packages": ["Looks"],
+        "category": "Animals",
+        "author": "",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/5"
+      },
+            {
+        "id": 3,
+        "name": "Spaceship",
+        "flavors": ["pocketcode"],
+        "packages": ["Looks"],
+        "category": "Space",
+        "author": "Micheal John",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/3"
+      },
+      {
+        "id": 6,
+        "name": "Metroid",
+        "flavors": ["pocketcode"],
+        "packages": ["Looks"],
+        "category": "Space",
+        "author": "Jennifer Shawn",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/6"
+      }
+    ]
+    """
 
   Scenario: Get all files from a media lib package with limit = 1
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/package/looks?limit=1"
     Then the response status code should be "200"
-    Then the response should have the media files model structure
-    Then the response should contain media files in the following order:
-      | Name      |
-      | Dog       |
+    And I should get the json object:
+    """
+    [
+      {
+        "id": 1,
+        "name": "Dog",
+        "flavors": ["pocketcode"],
+        "packages": ["Looks"],
+        "category": "Animals",
+        "author": "Bob Schmidt",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/1"
+      }
+    ]
+    """
 
   Scenario: Get all files from a media lib package with limit = 1 and offset = 3
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/package/looks?limit=1&offset=3"
     Then the response status code should be "200"
-    Then the response should have the media files model structure
-    Then the response should contain media files in the following order:
-      | Name      |
-      | Spaceship |
+    And I should get the json object:
+    """
+    [
+       {
+        "id": 3,
+        "name": "Spaceship",
+        "flavors": ["pocketcode"],
+        "packages": ["Looks"],
+        "category": "Space",
+        "author": "Micheal John",
+        "extension": "png",
+        "download_url": "http:\/\/localhost\/app\/download-media\/3"
+      }
+    ]
+    """
 
   Scenario: Get all files from a media lib package with limit = 1 and offset = 3
     Given I have a request header "HTTP_ACCEPT" with value "application/json"

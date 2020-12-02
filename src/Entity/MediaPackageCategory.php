@@ -109,6 +109,18 @@ class MediaPackageCategory
     $this->package = $package;
   }
 
+  public function getPackageNames(): array
+  {
+    $return = [];
+    /** @var MediaPackage $media_package */
+    foreach ($this->getPackage() as $media_package)
+    {
+      $return[] = $media_package->getName();
+    }
+
+    return $return;
+  }
+
   public function getFiles(): Collection
   {
     return $this->files;

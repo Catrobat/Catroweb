@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20562ca0743533dcc230f75efeeed838",
+    "content-hash": "2d6aa4c12d693ae2bbd702dff60f4a99",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -65,16 +65,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.0.43",
+            "version": "v1.0.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "8ec154843268165654ed23150253608c7fec823f"
+                "reference": "e7e0dc0419c9f75be731879ce57024903935c5ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/8ec154843268165654ed23150253608c7fec823f",
-                "reference": "8ec154843268165654ed23150253608c7fec823f",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/e7e0dc0419c9f75be731879ce57024903935c5ce",
+                "reference": "e7e0dc0419c9f75be731879ce57024903935c5ce",
                 "shasum": ""
             },
             "require": {
@@ -122,10 +122,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.43",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.47",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2020-08-25T06:37:13+00:00"
+            "time": "2020-11-25T10:13:10+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -2072,16 +2072,16 @@
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "581f3dfccd9424c4a5d9713bd8c2fc9f38479a80"
+                "reference": "9e8903aaa0644afc0dbb697e2156e28e5a88865c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/581f3dfccd9424c4a5d9713bd8c2fc9f38479a80",
-                "reference": "581f3dfccd9424c4a5d9713bd8c2fc9f38479a80",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/9e8903aaa0644afc0dbb697e2156e28e5a88865c",
+                "reference": "9e8903aaa0644afc0dbb697e2156e28e5a88865c",
                 "shasum": ""
             },
             "require": {
@@ -2158,9 +2158,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/tree/v5.2.0"
+                "source": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/tree/v5.2.1"
             },
-            "time": "2020-09-15T13:32:33+00:00"
+            "time": "2020-11-30T20:16:38+00:00"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -2490,16 +2490,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.154",
+            "version": "v0.156",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "7f44a314836c444b7894d648c1c49f83fb9d37ca"
+                "reference": "2f5e54fdef034f856208328126bddd8376dae4b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/7f44a314836c444b7894d648c1c49f83fb9d37ca",
-                "reference": "7f44a314836c444b7894d648c1c49f83fb9d37ca",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/2f5e54fdef034f856208328126bddd8376dae4b3",
+                "reference": "2f5e54fdef034f856208328126bddd8376dae4b3",
                 "shasum": ""
             },
             "require": {
@@ -2525,9 +2525,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.154"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.156"
             },
-            "time": "2020-11-19T19:01:11+00:00"
+            "time": "2020-11-30T20:03:55+00:00"
         },
         {
             "name": "google/auth",
@@ -3529,16 +3529,16 @@
         },
         {
             "name": "laminas/laminas-code",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "cb90ef428da9260c2deaa827b037c20695f968ae"
+                "reference": "b549b70c0bb6e935d497f84f750c82653326ac77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/cb90ef428da9260c2deaa827b037c20695f968ae",
-                "reference": "cb90ef428da9260c2deaa827b037c20695f968ae",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/b549b70c0bb6e935d497f84f750c82653326ac77",
+                "reference": "b549b70c0bb6e935d497f84f750c82653326ac77",
                 "shasum": ""
             },
             "require": {
@@ -3593,7 +3593,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-11-11T22:11:27+00:00"
+            "time": "2020-11-30T20:16:31+00:00"
         },
         {
             "name": "laminas/laminas-eventmanager",
@@ -3960,7 +3960,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lexik/LexikJWTAuthenticationBundle/issues",
-                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.10.1"
+                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.10.3"
             },
             "funding": [
                 {
@@ -15420,16 +15420,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.4.3",
+            "version": "9.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9fa359ff5ddaa5eb2be2bedb08a6a5787a5807ab"
+                "reference": "6535e637961f0829832621dc1b7308c2d24a799e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9fa359ff5ddaa5eb2be2bedb08a6a5787a5807ab",
-                "reference": "9fa359ff5ddaa5eb2be2bedb08a6a5787a5807ab",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6535e637961f0829832621dc1b7308c2d24a799e",
+                "reference": "6535e637961f0829832621dc1b7308c2d24a799e",
                 "shasum": ""
             },
             "require": {
@@ -15507,7 +15507,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.4.3"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.4.4"
             },
             "funding": [
                 {
@@ -15519,7 +15519,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-10T12:53:30+00:00"
+            "time": "2020-12-01T04:58:47+00:00"
         },
         {
             "name": "pimple/pimple",

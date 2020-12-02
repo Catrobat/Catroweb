@@ -15,6 +15,7 @@ use OpenAPI\Server\Api\AuthenticationApiInterface;
 use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\OAuthLoginRequest;
+use OpenAPI\Server\Model\RefreshRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationApi implements AuthenticationApiInterface
@@ -47,6 +48,16 @@ class AuthenticationApi implements AuthenticationApiInterface
     // Check Token is handled by LexikJWTAuthenticationBundle
     // Successful requests are passed to this method.
     $responseCode = Response::HTTP_OK;
+  }
+
+  public function authenticationLogoutPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement authenticationLogoutPost() method.
+  }
+
+  public function authenticationRefreshPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement authenticationRefreshPost() method.
   }
 
   /**

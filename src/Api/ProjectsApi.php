@@ -309,6 +309,11 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   {
   }
 
+  public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement projectIdReportPost() method.
+  }
+
   /**
    * @param Program|ExampleProgram $program
    *
