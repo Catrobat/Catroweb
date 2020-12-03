@@ -71,7 +71,7 @@ class MediaPackageController extends AbstractController
       $json_response_array[] = $this->createArrayOfCategory($category);
     }
 
-    $flavor = $request->get('flavor');
+    $flavor = $request->attributes->get('flavor');
 
     if ('pocketcode' !== $flavor)
     {

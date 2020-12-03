@@ -247,7 +247,7 @@ const CONCAT_CONFIG =
 // -------------------------------------------------------------------------------------------------
 // SASS to CSS task:
 //
-//   - loading all supported themes from the liip config
+//   - loading all supported themes from the themes config
 //   - creating an entry for every theme
 //
 const SASS_CONFIG = {}
@@ -265,14 +265,14 @@ function loadThemesFromSymfonyParameters () {
 
   // load the yaml file
   try {
-    const liipConfig = yaml.safeLoad(
-      fs.readFileSync('config/packages/liip_theme.yaml', 'utf8')
+    const themeConfig = yaml.safeLoad(
+      fs.readFileSync('config/packages/themes.yaml', 'utf8')
     )
-    const themes = liipConfig.parameters.themes
-    if (!Array.isArray(themes) || !themes.length) {
-      console.error('Themes array is empty!')
+    const flavors = themeConfig.parameters.flavors
+    if (!Array.isArray(flavors) || !flavors.length) {
+      console.error('Flavors array is empty!')
     }
-    return themes
+    return flavors
   } catch (e) {
     console.error('Themes could not be loaded!\n' + e)
     return undefined

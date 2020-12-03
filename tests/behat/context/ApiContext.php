@@ -341,7 +341,7 @@ class ApiContext implements KernelAwareContext
       throw new Exception('Program not found: '.$arg1);
     }
     $router = $this->getRouter();
-    $url = $router->generate('ci_download', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
+    $url = $router->generate('ci_download', ['id' => $program->getId(), 'theme' => 'pocketcode']);
     $this->iGetFrom($url);
   }
 

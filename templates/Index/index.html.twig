@@ -1,8 +1,8 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
-    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/project_list.css') }}" media="screen"/>
+    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/index.css') }}" media="screen"/>
+    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
@@ -71,7 +71,8 @@
 
 {% block js %}
   <script src="{{ asset('js/LazyLoadIframes.min.js') }}"></script>
-  <script>const flavor = '{{ theme() }}'</script>
+  <script>const theme = '{{ theme() }}'</script>
+  <script>const flavor = '{{ flavor() }}'</script>
   <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
   <script src="{{ asset('js/ProjectList.min.js') }}"></script>
   <script src="{{ asset('js/Index.min.js') }}"></script>

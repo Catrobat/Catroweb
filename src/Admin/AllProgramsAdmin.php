@@ -120,7 +120,7 @@ class AllProgramsAdmin extends AbstractAdmin
    */
   protected function configureListFields(ListMapper $listMapper): void
   {
-    $flavor_options = $this->parameter_bag->get('themes');
+    $flavor_options = $this->parameter_bag->get('flavors');
 
     $choices = [];
     foreach ($flavor_options as $flavor)

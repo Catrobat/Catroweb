@@ -19,19 +19,19 @@
                 <td align="center" bgcolor="#00acc1" class="title">
                   <a style="color: white; text-decoration:none; font-size: 28px; font-weight: bold;
                   font-family: Arial, sans-serif;" href="https://share.catrob.at/">
-                    {% if theme() == 'luna' %}
+                    {% if flavor() == 'luna' %}
                       LUNA &
-                    {% elseif theme() == 'phirocode' %}
+                    {% elseif flavor() == 'phirocode' %}
                       PHIRO
-                    {% elseif theme() == 'create@school' %}
+                    {% elseif flavor() == 'create@school' %}
                       CREATE @
                     {% else %}
                       POCKET
                     {% endif %}
 
-                    {% if theme() == 'create@school' %}
+                    {% if flavor() == 'create@school' %}
                       SCHOOL
-                    {% elseif theme() == 'luna' %}
+                    {% elseif flavor() == 'luna' %}
                       CAT
                     {% else %}
                       CODE

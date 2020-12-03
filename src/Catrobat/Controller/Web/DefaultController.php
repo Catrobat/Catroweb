@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
    */
   public function indexAction(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): Response
   {
-    $flavor = $request->get('flavor');
+    $flavor = $request->attributes->get('flavor');
 
     if ('phirocode' === $flavor)
     {
@@ -49,7 +49,7 @@ class DefaultController extends AbstractController
         if ($flavor)
         {
           $info['url'] = $this->generateUrl('program',
-          ['id' => $item->getProgram()->getId(), 'flavor' => $flavor]);
+          ['id' => $item->getProgram()->getId(), 'theme' => $flavor]);
         }
         else
         {

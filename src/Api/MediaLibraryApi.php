@@ -11,6 +11,7 @@ use App\Utils\APIQueryHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use OpenAPI\Server\Model\MediaFileResponse;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -26,13 +27,17 @@ class MediaLibraryApi implements MediaLibraryApiInterface
 
   private RequestStack $stack;
 
+  private ParameterBagInterface $parameter_bag;
+
   public function __construct(EntityManagerInterface $entity_manager, UrlGeneratorInterface $url_generator,
-                              MediaPackageFileRepository $media_package_file_repository, RequestStack $stack)
+                              MediaPackageFileRepository $media_package_file_repository, RequestStack $stack,
+                              ParameterBagInterface $parameter_bag)
   {
     $this->entity_manager = $entity_manager;
     $this->url_generator = $url_generator;
     $this->media_package_file_repository = $media_package_file_repository;
     $this->stack = $stack;
+    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -182,7 +187,10 @@ class MediaLibraryApi implements MediaLibraryApiInterface
       'extension' => $media_package_file->getExtension(),
       'download_url' => $this->url_generator->generate(
           'download_media',
-          ['id' => $media_package_file->getId()],
+          [
+            'theme' => $this->parameter_bag->get('umbrellaTheme'),
+            'id' => $media_package_file->getId(),
+          ],
           UrlGenerator::ABSOLUTE_URL),
     ];
   }

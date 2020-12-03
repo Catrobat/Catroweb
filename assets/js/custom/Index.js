@@ -34,7 +34,7 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
         url += '&flavor=' + flavor
       }
 
-      const list = new ProjectList(this, category, url, property, self.performClickStatisticRequest)
+      const list = new ProjectList(this, category, url, property, self.performClickStatisticRequest, theme)
       /* eslint-enable no-undef */
       $t.data('list', list)
     })

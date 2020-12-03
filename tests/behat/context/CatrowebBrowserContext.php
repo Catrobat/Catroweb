@@ -1671,7 +1671,7 @@ class CatrowebBrowserContext extends BrowserContext
         $program = $this->getProgramManager()->findOneByName($url);
         Assert::assertNotNull($program);
         Assert::assertNotNull($program->getId());
-        $url = $this->getRouter()->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
+        $url = $this->getRouter()->generate('program', ['id' => $program->getId(), 'theme' => 'pocketcode']);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');

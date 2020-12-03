@@ -21,7 +21,7 @@ Feature:
     Given I log in as "Catrobat"
     Then I should see "External account sign in information"
     And I click on the "here" link
-    Then I should be on "/pocketcode/user"
+    Then I should be on "/app/user"
 
   Scenario: OAuth users should be able to create a new password
     Given I log in as "Catrobat"

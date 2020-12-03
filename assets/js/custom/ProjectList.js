@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-unused-vars
 class ProjectList {
-  constructor (container, category, apiUrl, propertyToShow, performClickStatisticRequest) {
+  constructor (container, category, apiUrl, propertyToShow, performClickStatisticRequest, theme) {
     this.container = container
     this.projectsContainer = $('.projects-container', container)
     this.category = category
@@ -14,6 +14,7 @@ class ProjectList {
     this.fetchActive = false
     this.isFullView = false
     this.performClickStatisticRequest = performClickStatisticRequest
+    this.theme = theme
 
     this.$title = $('.project-list__title', $(this.container))
     this.$body = $('body')
@@ -77,7 +78,15 @@ class ProjectList {
   }
 
   _generate (data) {
-    const $p = $('<a />', { class: 'project-list__project', href: data.project_url })
+    /*
+    * Necessary to support legacy flavoring with URL:
+    *   Absolute url always uses new 'app' routing flavor. We have to replace it!
+    */
+    let projectUrl = data.project_url
+    projectUrl = projectUrl.replace('/app/', '/' + this.theme + '/')
+    //
+
+    const $p = $('<a />', { class: 'project-list__project', href: projectUrl })
     $p.data('id', data.id)
     $('<img/>', {
       src: data.screenshot_small,
