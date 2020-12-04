@@ -160,6 +160,9 @@ class ProgramManager
    */
   public function addProgram(AddProgramRequest $request): ?Program
   {
+    // TODO: delete later before pull request
+    $this->logger->info('Adding new program');
+
     $file = $request->getProgramFile();
 
     $extracted_file = $this->file_extractor->extract($file);
