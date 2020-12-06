@@ -470,6 +470,16 @@ services:
         method: onInvalidProgramUploadedEvent
       }
 
+  monolog.formatter.catrobat_custom_formatter:
+    class: Monolog\Formatter\LineFormatter
+    arguments:
+      - "[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%%
+      [Client IP: %%extra.client_ip%%, User Agent: %%extra.user_agent%%, Session User: %%extra.session_user%%]\n"
+
+  App\Logger\LoggerProcessor:
+    tags:
+      - { name: monolog.processor }
+
   # ======== Scratch ========
   catrobat.scratch.check:
     class: App\Catrobat\Listeners\ScratchProgramUpdater
