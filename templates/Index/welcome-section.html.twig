@@ -3,7 +3,7 @@
   <div id="welcome-section">
     <div class="mb-4">
       <h1>{{ "programs.welcome.title"|trans({'%theme%': getThemeDisplayName()}, "catroweb") }}</h1>
-      {% if theme() == 'embroidery' %}
+      {% if flavor() == 'embroidery' %}
         <h3>{{ "programs.welcome.subtitle_embroidery"|trans({}, "catroweb") }}</h3>
       {% else %}
       <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
@@ -18,14 +18,14 @@
       <div class="flex-no-shrink help-download-container">
         <a target="_blank" href="https://catrob.at/gp">
           <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-            <div class="h1 {% if theme() == 'luna'%} text-white {% endif %}">
+            <div class="h1 {% if flavor() == 'luna'%} text-white {% endif %}">
               <img style="width: 60px;" alt="Play Store Logo" src="{{ asset('images/help/google_playstore.png') }}"/>
               <span class="ml-2"> {{ "googlePlay"|trans({}, "catroweb") }}</span>
             </div>
           </div>
         </a>
 
-        {% if theme() == "luna" %}
+        {% if flavor() == "luna" %}
           <a target="_blank" href="https://catrob.at/lcd">
             <div class="primary help-card d-flex align-items-center" style="flex-direction: column; justify-content: center;">
               <div class="h1 text-white">
@@ -34,11 +34,11 @@
               </div>
             </div>
           </a>
-        {% elseif theme() == 'arduino' %}
+        {% elseif flavor() == 'arduino' %}
           <div class="catro-card help-card primary discord" style="visibility: hidden">
             {#   show nothing for now   #}
           </div>
-        {% elseif theme() == 'embroidery' %}
+        {% elseif flavor() == 'embroidery' %}
           <a target="_blank" href="https://www.instagram.com/code_n_stitch/">
             <div class="primary help-card d-flex align-items-center" style="flex-direction: column; justify-content: center;">
               <div class="h1">
@@ -58,7 +58,7 @@
           </a>
           <a target="_blank" href="https://catrob.at/HuaweiAppGallery">
             <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-              <div class="h1 {% if theme() == 'luna'%} text-white {% endif %}">
+              <div class="h1 {% if flavor() == 'luna'%} text-white {% endif %}">
                 <img style="width: 50px;" alt="Huawei AppGallery Logo" src="{{ asset('images/help/huawei_logo.png') }}"/>
                 <span class="ml-2"> {{ "huaweiAppGallery"|trans({}, "catroweb") }}</span>
               </div>

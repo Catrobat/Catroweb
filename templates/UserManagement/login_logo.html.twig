@@ -3,15 +3,15 @@
   <div class="row justify-content-center">
     <div class="col-sm-12 mt-4 center" style="max-width: 11em">
       <img class="center-block img-responsive" id="logo"
-        {% if theme() == 'luna' %}
+        {% if flavor() == 'luna' %}
           src="{{ asset('images/logo/logo_luna.svg') }}"
-        {% elseif theme() == 'embroidery' %}
+        {% elseif flavor() == 'embroidery' %}
           src="{{ asset('images/logo/logo_embroidery.svg') }}"
-        {% elseif theme() == 'arduino' %}
+        {% elseif flavor() == 'arduino' %}
           src="{{ asset('images/logo/logo_arduino.png') }}"
-        {% elseif theme() == 'phirocode' %}
+        {% elseif flavor() == 'phirocode' %}
           src="{{ asset('images/logo/logo_phirocode.png') }}"
-        {% elseif theme() == 'create@school' %}
+        {% elseif flavor() == 'create@school' %}
           src="{{ asset('images/logo/logo_create_at_school_icon.png') }}"
         {% else %}
           src="{{ asset('images/logo/logo_icon.png') }}"
@@ -25,28 +25,28 @@
     <div class="col-sm-12 center">
       <p>
         <span class="theme-logo-title title-color-left">
-        {% if theme() == 'luna' %}
+        {% if flavor() == 'luna' %}
           LUNA &
-        {% elseif theme() == 'embroidery' %}
+        {% elseif flavor() == 'embroidery' %}
           EMBROIDERY
-        {% elseif theme() == 'arduino' %}
+        {% elseif flavor() == 'arduino' %}
           ARDUINO
-        {% elseif theme() == 'phirocode' %}
+        {% elseif flavor() == 'phirocode' %}
           PHIRO
-        {% elseif theme() == 'create@school' %}
+        {% elseif flavor() == 'create@school' %}
           CREATE @
         {% else %}
           POCKET
         {% endif %}
 
         </span><span class="theme-logo-title title-color-right">
-        {% if theme() == 'create@school' %}
+        {% if flavor() == 'create@school' %}
           SCHOOL
-        {% elseif theme() == 'luna' %}
+        {% elseif flavor() == 'luna' %}
           CAT
-        {% elseif theme() == 'embroidery' %}
+        {% elseif flavor() == 'embroidery' %}
           DESIGNER
-        {% elseif theme() == 'arduino' %}
+        {% elseif flavor() == 'arduino' %}
           CODE
         {% else %}
           CODE

@@ -50,7 +50,7 @@ class FeaturedController extends AbstractController
   private function getFeaturedPrograms(Request $request, bool $ios_only, ImageRepository $image_repository,
                                        FeaturedRepository $repository): JsonResponse
   {
-    $flavor = $request->get('flavor');
+    $flavor = $request->attributes->get('flavor');
 
     $limit = (int) $request->query->get('limit', 20);
     $offset = (int) $request->query->get('offset', 0);

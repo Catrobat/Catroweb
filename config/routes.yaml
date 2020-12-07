@@ -36,8 +36,8 @@ catrobat_web_index:
   defaults:
     _controller: FrameworkBundle:Redirect:redirect
     route: index
-    flavor: "app"
+    theme: "app"
 
 catroweb_flavored:
   resource: "routes_flavored.yml"
-  prefix:   /{flavor}/
+  prefix:   /{theme}/

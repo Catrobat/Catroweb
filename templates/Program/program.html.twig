@@ -1,8 +1,8 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/card.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/program.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/card.css') }}"/>
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:type" content="website"/>

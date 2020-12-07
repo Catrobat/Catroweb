@@ -42,7 +42,7 @@ class RecommenderController extends AbstractController
   {
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
-    $flavor = $request->get('flavor', 'pocketcode');
+    $flavor = $request->attributes->get('flavor', 'pocketcode');
 
     $program_id = $request->query->get('program_id');
 
@@ -76,7 +76,7 @@ class RecommenderController extends AbstractController
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
 
-    $flavor = $request->get('flavor');
+    $flavor = $request->attributes->get('flavor');
 
     $program = $program_manager->find($id);
     if (null === $program)
@@ -107,7 +107,7 @@ class RecommenderController extends AbstractController
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
 
-    $flavor = $request->get('flavor');
+    $flavor = $request->attributes->get('flavor');
 
     $programs_count = 0;
     $programs = [];

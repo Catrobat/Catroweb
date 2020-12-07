@@ -3,7 +3,6 @@
     "type": "project",
     "license": "proprietary",
     "description": "Catroweb Symfony Share Platform",
-
     "require": {
         "php": ">=7.4",
         "ext-SimpleXML": "*",
@@ -28,7 +27,6 @@
         "hwi/oauth-bundle": "v1.2.x-dev",
         "incenteev/composer-parameter-handler": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "liip/theme-bundle": "^1.7",
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.18",
         "php-http/message": "^1.8",
@@ -75,7 +73,6 @@
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
         "wapmorgan/php-deprecation-detector": "^2.0"
     },
-
     "config": {
         "platform": {
             "php": "7.4",
@@ -93,55 +90,49 @@
         },
         "sort-packages": true
     },
-
     "autoload": {
         "psr-4": {
             "App\\": "src/"
         }
     },
-
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
     },
-
     "scripts": {
-
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
         ],
-
         "fix": [
             "bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt"
         ]
     },
-
     "conflict": {
         "symfony/symfony": "*"
     },
-
     "extra": {
         "symfony": {
             "allow-contrib": true
         },
         "require": "^4.4"
     },
-    "repositories": [{
-        "type": "vcs",
-        "url": "https://github.com/Catrobat/Catroweb-API"
-    }, {
-        "type": "vcs",
-        "url":  "git@github.com:leno12/HWIOAuthBundle.git"
-    }]
-
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Catrobat/Catroweb-API"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:leno12/HWIOAuthBundle.git"
+        }
+    ]
 }

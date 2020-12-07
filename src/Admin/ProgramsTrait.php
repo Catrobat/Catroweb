@@ -50,7 +50,7 @@ trait ProgramsTrait
       return; // There was no required flavor form field in this Action, so no check is needed!
     }
 
-    $flavor_options = $this->getConfigurationPool()->getContainer()->getParameter('themes');
+    $flavor_options = $this->getConfigurationPool()->getContainer()->getParameter('flavors');
 
     if (!in_array($flavor, $flavor_options, true))
     {

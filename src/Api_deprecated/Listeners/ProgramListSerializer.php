@@ -7,6 +7,7 @@ use App\Catrobat\Services\ImageRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use App\Utils\ElapsedTimeStringFormatter;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -28,14 +29,18 @@ class ProgramListSerializer
 
   private ImageRepository $example_image_repository;
 
+  private ParameterBagInterface $parameter_bag;
+
   public function __construct(ScreenshotRepository $screenshot_repository, RequestStack $request_stack,
-                              RouterInterface $router, ElapsedTimeStringFormatter $time_formatter, ImageRepository $example_image_repository)
+                              RouterInterface $router, ElapsedTimeStringFormatter $time_formatter,
+                              ImageRepository $example_image_repository, ParameterBagInterface $parameter_bag)
   {
     $this->request_stack = $request_stack;
     $this->router = $router;
     $this->screenshot_repository = $screenshot_repository;
     $this->time_formatter = $time_formatter;
     $this->example_image_repository = $example_image_repository;
+    $this->parameter_bag = $parameter_bag;
   }
 
   public function onKernelView(ViewEvent $event): void
@@ -91,10 +96,11 @@ class ProgramListSerializer
             $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
           }
           $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
-            'flavor' => $event->getRequest()->getSession()->get('flavor_context'),
+            'theme' => $this->parameter_bag->get('umbrellaTheme'),
             'id' => $program->getId(),
           ]), '/');
           $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
+            'theme' => $this->parameter_bag->get('umbrellaTheme'),
             'id' => $program->getId(),
           ]), '/');
           $new_program['FileSize'] = $program->getFilesize() / 1_048_576;

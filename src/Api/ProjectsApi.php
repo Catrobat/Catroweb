@@ -22,6 +22,7 @@ use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,13 +49,15 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   private FeaturedRepository $featured_repository;
 
   private ImageRepository $image_repository;
+  private ParameterBagInterface $parameter_bag;
 
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
                               ImageRepository $image_repository, UserManager $user_manager,
                               RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
-                              UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager)
+                              UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager,
+                              ParameterBagInterface $parameter_bag)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
@@ -68,6 +71,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->url_generator = $url_generator;
     $this->user_manager = $user_manager;
     $this->recommender_manager = $recommender_manager;
+    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -223,6 +227,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $responseHeaders['Location'] = $this->url_generator->generate(
       'program',
       [
+        'theme' => $this->parameter_bag->get('umbrellaTheme'),
         'id' => $program->getId(),
       ],
       UrlGenerator::ABSOLUTE_URL);
@@ -341,7 +346,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
       'project_url' => ltrim($this->generateUrl(
         'program',
         [
-          'flavor' => $this->session->get('flavor_context'),
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
           'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'
@@ -349,6 +354,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
       'download_url' => ltrim($this->generateUrl(
         'download',
         [
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
           'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'),

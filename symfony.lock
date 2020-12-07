@@ -360,9 +360,6 @@
             "config/packages/lexik_jwt_authentication.yaml"
         ]
     },
-    "liip/theme-bundle": {
-        "version": "1.4-dev"
-    },
     "monolog/monolog": {
         "version": "2.0.2"
     },

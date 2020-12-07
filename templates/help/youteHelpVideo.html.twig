@@ -1,9 +1,9 @@
 {# Different videos for different themes #}
 <iframe
     id="youtube-help-video"
-    {% if theme() == 'luna' %}
+    {% if flavor() == 'luna' %}
         data-src="https://www.youtube.com/embed/-6AEZrSbOMg"
-    {% elseif theme() == 'embroidery' %}
+    {% elseif flavor() == 'embroidery' %}
         data-src="https://www.youtube.com/embed/xvkVeEEnS0M"
     {% else %}
         data-src="https://www.youtube.com/embed/BHe2r2WU-T8"

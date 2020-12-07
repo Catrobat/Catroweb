@@ -302,8 +302,6 @@ services:
     tags:
       - { name: twig.extension }
 
-  Liip\ThemeBundle\ActiveTheme: "@liip_theme.active_theme"
-
 
   # ====================================================================================================================
   #   Event Subscribers
@@ -327,8 +325,8 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
 
-  catrowebbundle.listener.flavor:
-    class: App\Catrobat\Listeners\FlavorListener
+  catrowebbundle.listener.themeRequest:
+    class: App\Catrobat\Listeners\ThemeRequestListener
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
 

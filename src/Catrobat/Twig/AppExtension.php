@@ -5,7 +5,6 @@ namespace App\Catrobat\Twig;
 use App\Catrobat\Services\CommunityStatisticsService;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageFile;
-use Liip\ThemeBundle\ActiveTheme;
 use NumberFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
@@ -25,15 +24,13 @@ class AppExtension extends AbstractExtension
 
   private MediaPackageFileRepository $media_package_file_repository;
 
-  private ActiveTheme $theme;
-
   private string $translation_path;
 
   private ParameterBagInterface $parameter_bag;
 
   private TranslatorInterface $translator;
 
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo, ActiveTheme $theme,
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo,
                               ParameterBagInterface $parameter_bag, string $catrobat_translation_dir,
                               TranslatorInterface $translator)
   {
@@ -41,7 +38,6 @@ class AppExtension extends AbstractExtension
     $this->parameter_bag = $parameter_bag;
     $this->request_stack = $request_stack;
     $this->media_package_file_repository = $media_package_file_repo;
-    $this->theme = $theme;
     $this->translator = $translator;
   }
 
@@ -125,6 +121,7 @@ class AppExtension extends AbstractExtension
       new TwigFunction('getMediaPackageSoundUrl', [$this, 'getMediaPackageSoundUrl']),
       new TwigFunction('flavor', [$this, 'getFlavor']),
       new TwigFunction('theme', [$this, 'getTheme']),
+      new TwigFunction('themeAssets', [$this, 'getFlavor']),
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
       new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
       new TwigFunction('assetExists', [$this, 'assetExists']),
@@ -264,21 +261,23 @@ class AppExtension extends AbstractExtension
     return true;
   }
 
-  public function getFlavor(): ?string
+  public function getFlavor(): string
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->get('flavor');
+    return $request->attributes->get('flavor');
   }
 
   public function getTheme(): string
   {
-    return $this->theme->getName();
+    $request = $this->request_stack->getCurrentRequest();
+
+    return $request->attributes->get('theme');
   }
 
   public function getThemeDisplayName(): string
   {
-    switch ($this->getTheme()) {
+    switch ($this->getFlavor()) {
       case 'luna':
         return 'Luna & Cat';
 

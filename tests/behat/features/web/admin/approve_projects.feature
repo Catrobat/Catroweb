@@ -169,5 +169,5 @@ Feature: Admin approve programs
     And I am on "/admin/approve/5/show"
     And I wait for the page to be loaded
     And I click on the code view button
-    Then I should be on "/pocketcode/project/5/code_view"
+    Then I should be on "/app/project/5/code_view"
 

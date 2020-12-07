@@ -184,7 +184,7 @@ class ListProgramsController extends AbstractController
     $flavor = null;
     if ($useRequestFlavor)
     {
-      $flavor = $request->get('flavor');
+      $flavor = $request->attributes->get('flavor');
     }
 
     $limit = (int) $request->get('limit', 20);

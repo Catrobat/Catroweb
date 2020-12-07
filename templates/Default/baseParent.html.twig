@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
   <meta name='viewport' content='width=device-width, user-scalable=no'/>
-  <title>{% block title %}Pocket Code Website{% endblock %}</title>
+  <title>
+    {% block title %}Catrobat community{% endblock %}
+  </title>
 
-  <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
+  <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
 
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/base.css') }}" media="screen"/>
 
   {# Head block for child views #}
   {% block head %}{% endblock %}

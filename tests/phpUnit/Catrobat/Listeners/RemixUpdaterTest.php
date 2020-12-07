@@ -52,8 +52,8 @@ class RemixUpdaterTest extends TestCase
 
     $route_map = [
       // It is important to explicitly define all optional parameters!
-      ['program', ['id' => '3571', 'flavor' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
-      ['program', ['id' => '3572', 'flavor' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+      ['program', ['id' => '3571', 'theme' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['program', ['id' => '3572', 'theme' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
     ];
 
     $router

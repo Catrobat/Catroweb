@@ -4,7 +4,6 @@ namespace Tests\phpUnit;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Twig\AppExtension;
-use Liip\ThemeBundle\ActiveTheme;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -97,12 +96,10 @@ class AppExtensionTest extends TestCase
   {
     $repo = $this->createMock(MediaPackageFileRepository::class);
     $request_stack = $this->mockRequestStack($locale);
-    $theme = $this->createMock(ActiveTheme::class);
     $parameter_bag = $this->createMock(ParameterBag::class);
     $translator = $this->createMock(TranslatorInterface::class);
 
-    return new AppExtension($request_stack, $repo,
-      $theme, $parameter_bag, $this->translationPath, $translator);
+    return new AppExtension($request_stack, $repo, $parameter_bag, $this->translationPath, $translator);
   }
 
   private function inArray(string $needle, array $haystack): bool
