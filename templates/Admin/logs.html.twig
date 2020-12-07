@@ -18,7 +18,7 @@
         }
       </style>
       <div class="box-body table-responsive no-padding">
-
+        {% if files|length > 0 %}
         <div id="logFiles">
           {% for file in files %}
             <button id="{{ file|replace({"/":'_', ".":"_"}) }}" class="btn files">
@@ -80,22 +80,25 @@
                   {% if content[i][j] != "" %}
                     <div class="panel-heading">
                       <a data-toggle="collapse" href="#toggle_{{ i }}_{{ j }}">
-                        {{ content[i][j].date }}
-                        {{ content[i][j].debug_code }}
+                        {{ content[i][j].getDate }}
+                        {{ content[i][j].getDebugCode }}
                       </a>
                     </div>
                     <div id="toggle_{{ i }}_{{ j }}" class="panel-collapse collapse">
                       <div class="panel-body ">
-                        {{ content[i][j].msg }}
+                        {{ content[i][j].getMsg }}
                       </div>
                     </div>
                   {% endif %}
                 {% endfor %}
 
               </div>
-            {% endfor %}
+              {% endfor %}
           </div>
         </div>
+      {% else %}
+        <h4>No log files found!</h4>
+      {% endif %}
       </div>
     </div>
   </div>
