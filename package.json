@@ -42,7 +42,7 @@
     "grunt-uncss": "^0.9.1",
     "jit-grunt": "^0.10.0",
     "node-sass": "^5.0.0",
-    "sass": "^1.29.0",
+    "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "standard": "^16.0.3",
     "stylelint": "^13.8.0",
