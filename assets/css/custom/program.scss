@@ -399,3 +399,278 @@ input[type="number"] {
 {
   color: #000;
 }
+
+.full-modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.full-modal-content {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow-y: scroll;
+}
+
+.modal-header-full {
+  border: none;
+  padding: 0;
+  background-color: var(--mdc-theme-primary, #00acc1);
+  color: #fff;
+}
+
+.sign-program-help {
+  top: 0;
+  right: 0;
+  display: none;
+  color: #000;
+  border-radius: 0;
+}
+
+.ellipsis-modal-btn {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  padding: 0;
+}
+.ellipsis-modal-btn:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sign-app-form {
+
+  input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #aaa;
+    padding: 1rem 0.75rem 0;
+    font-size: 18px;
+    width: 100%;
+    height: 55px;
+    border-radius: 0;
+  }
+  input[type="submit"] {
+    display: none !important;
+  }
+
+  input:focus {
+    box-shadow: none;
+  }
+
+  input:focus ~ label, input:valid ~ label {
+    position: absolute;
+    top: 4%;
+    left: 8%;
+    font-size: 75%;
+    -webkit-animation: inputhighlighter 0.3s ease;
+    -moz-animation: inputhighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+  }
+
+  div {
+    position: relative;
+    padding: 0 5%;
+  }
+
+  label {
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    opacity: 0.6;
+  }
+
+  h3 {
+    text-align: left;
+  }
+
+  .key_store_file {
+    display: none;
+  }
+
+  .key_store_file_text {
+    background-color: inherit;
+    cursor: pointer;
+  }
+
+  .sign-form-icon {
+    position: absolute;
+    top: 11%;
+    right: 6%;
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  #btn-signing-key {
+    width: 100%;
+  }
+
+  #show_add_label {
+    position: relative;
+    float: left;
+    left: 0;
+    margin-bottom: 0;
+  }
+
+  .ads-toggle-container {
+    display: inline-block;
+    position: absolute;
+    right: calc(2rem + 10px);
+  }
+
+  .show-ads-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .toggle-control {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+    opacity: 1;
+
+    #show_ads_chk {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    input:checked ~ .control {
+      background-color: #f1f1f1;
+
+      &:after {
+        left: 17px;
+        background: var(--mdc-theme-primary, #00acc1);
+      }
+    }
+
+    .control {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 16px;
+      width: 40px;
+      border-radius: 25px;
+      background-color: #bcbbbb;
+      transition: background-color 0.3s ease-in-out;
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: -4px;
+        width: 24px;
+        height: 24px;
+        border-radius: 25px;
+        background: #f1f1f1;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+.years-validity-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  label {
+    opacity: 1;
+    margin: 0;
+  }
+  input:focus {
+    border: 1px solid #ccc;
+  }
+}
+.years-validity-text {
+  font-size: 1rem;
+  margin-left: 2%;
+}
+
+.spinner-container {
+  height: 55px;
+  display: flex;
+  align-items: center;
+  padding-right: 0 !important;
+
+  input {
+    border-radius: 0;
+    display: inline-block;
+    max-width: 60px;
+    border-width: 1px 0;
+    text-align: center
+  }
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  button {
+    background-color: var(--mdc-theme-primary, #00acc1);
+    color: #ffff;
+    border-radius: 0;
+    display: inline-block;
+    border-width: 0;
+    font-size: 1.1rem;
+    width: 40px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .modal-full {
+    left: 250px;
+    width: calc(100% - 250px);
+    padding-right: 0 !important;
+    border-left: none !important;
+  }
+
+  .sign-app-form {
+    label {
+      left: 7%;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .form-input-right {
+    padding: 0 5% 0 1% !important;
+
+    span {
+      right: 12% !important;
+    }
+    input:focus ~ label, input:valid ~ label {
+      left: 4% !important;
+    }
+  }
+
+  .form-input-left {
+    padding: 0 1% 0 5% !important;
+
+    label {
+      left: 14%;
+    }
+
+    input:focus ~ label, input:valid ~ label {
+      left: 12% !important;
+    }
+  }
+  input:focus ~ label, input:valid ~ label {
+    left: 6% !important;
+  }
+
+  .years-validity-container {
+    justify-content: flex-end;
+  }
+}
