@@ -462,3 +462,58 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     window.location.href = url
   }
 }
+
+$(document).on('click', function (e) {
+  var ellipsisContainer = $('#sign-app-ellipsis-container')
+  if (!(ellipsisContainer.is(e.target) || $('#sign-app-ellipsis').is(e.target))) {
+    ellipsisContainer.hide()
+  }
+})
+
+$(document).ready(function () {
+  $('#sign-app-ellipsis').on('click', function () {
+    $('#sign-app-ellipsis-container').show()
+  })
+
+  $('#toggle_ads').on('click', function () {
+    if ($('#show_ads_chk').is(':checked')) {
+      $('#ads_info').show()
+    } else {
+      $('#ads_info').hide()
+    }
+  })
+
+  $('#key_store_file').on('change', function () {
+    $('#key_store_file_text').val($('#key_store_file').val())
+  })
+  $('#key_store_file_text').on('click', function () {
+    $('#key_store_file').trigger('click')
+    $(this).blur()
+  })
+  $('#key_store_icon').on('click', function () {
+    $('#key_store_file').trigger('click')
+  })
+
+  $('#key_store_path').on('change', function () {
+    $('#key_store_path_text').val($('#key_store_path').val())
+  })
+  $('#key_file_path_icon').on('click', function () {
+    $('#key_store_path').trigger('click')
+  })
+  $('#key_store_path_text').on('click', function () {
+    $('#key_store_path').trigger('click')
+    $(this).blur()
+  })
+  $('#inc_years').on('click', function () {
+    var yearsField = $('#key_validity')
+    if (yearsField.val() < 99) {
+      yearsField.val(parseInt(yearsField.val()) + 1)
+    }
+  })
+  $('#dec_years').on('click', function () {
+    var yearsField = $('#key_validity')
+    if (yearsField.val() > 0) {
+      yearsField.val(parseInt(yearsField.val()) - 1)
+    }
+  })
+})
