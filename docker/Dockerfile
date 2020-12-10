@@ -56,6 +56,10 @@ COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
 RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
+# Overwrite php config:
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/cli/php.ini
+
 # Setting working directory
 WORKDIR /var/www/catroweb
 
