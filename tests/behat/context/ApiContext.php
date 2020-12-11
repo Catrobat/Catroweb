@@ -731,6 +731,18 @@ class ApiContext implements KernelAwareContext
     $this->request_headers['HTTP_authorization'] = 'Bearer '.$token;
   }
 
+  /**
+   * @Given I use a valid upload token for :username
+   */
+  public function iUseAValidUploadTokenFor(string $username): void
+  {
+    /** @var User $user */
+    $user = $this->getUserManager()->findUserByUsername($username);
+    $upload_token = $user->getUploadToken();
+
+    $this->request_headers['HTTP_authorization'] = $upload_token;
+  }
+
   public function getSymfonyProfile(): Profile
   {
     $profile = $this->getKernelBrowser()->getProfile();

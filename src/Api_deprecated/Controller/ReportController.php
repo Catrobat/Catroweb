@@ -90,13 +90,26 @@ class ReportController extends AbstractController
     }
     elseif (null !== $token)
     {
-      $token = preg_split('#\s+#', $token)[1]; // strip "bearer"
-      $jwt_payload = $this->user_manager->decodeToken($token);
-      if (!array_key_exists('username', $jwt_payload))
+      $user = $entity_manager->getRepository(User::class)
+        ->findOneBy(['upload_token' => $token])
+      ;
+
+      if (null !== $user)
       {
-        return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+        // old deprecated upload_token Auth
+        $report->setReportingUser($user);
       }
-      $report->setReportingUser($jwt_payload['username']);
+      else
+      {
+        // JWT Auth. (new)
+        $token = preg_split('#\s+#', $token)[1]; // strip "bearer"
+        $jwt_payload = $this->user_manager->decodeToken($token);
+        if (!array_key_exists('username', $jwt_payload))
+        {
+          return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+        }
+        $report->setReportingUser($jwt_payload['username']);
+      }
     }
     else
     {
