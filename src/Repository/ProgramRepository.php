@@ -537,9 +537,9 @@ class ProgramRepository extends ServiceEntityRepository
 
     foreach ($programs as $program)
     {
-      if (true === $program->getVisible() && false === $program->getPrivate() &&
-        ($debug_build || false === $program->isDebugBuild()) &&
-        ('0' === $max_version || $program->getLanguageVersion() <= $max_version))
+      if (true === $program->getVisible() && false === $program->getPrivate()
+        && ($debug_build || false === $program->isDebugBuild())
+        && ('0' === $max_version || $program->getLanguageVersion() <= $max_version))
       {
         $filtered_programs[] = $program;
       }

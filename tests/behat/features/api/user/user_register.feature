@@ -163,7 +163,7 @@ Feature: Registering a new user.
     Then the response status code should be "204"
     And the user "Testuser" should not exist
 
-  Scenario: Registering a user should work
+  Scenario: Registering a user should work and return a login token
     Given I have the following JSON request body:
     """
       {
@@ -177,6 +177,13 @@ Feature: Registering a new user.
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/user"
     Then the response status code should be "201"
+    And I should get the json object:
+    """
+      {
+        "token": "REGEX_STRING_WILDCARD",
+        "refresh_token": "REGEX_STRING_WILDCARD!"
+      }
+    """
     And the user "Testuser" with email "test@test.at" should exist and be enabled
 
 
