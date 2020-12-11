@@ -63,7 +63,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Download and set up node (caching is enabled)
-      - uses: actions/setup-node@v2.1.2
+      - uses: actions/setup-node@v2.1.3
         with:
           node-version: '10.x'  # optional
 
@@ -100,7 +100,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Download and set up node (caching is enabled)
-      - uses: actions/setup-node@v2.1.2
+      - uses: actions/setup-node@v2.1.3
         with:
           node-version: '10.x'  # optional
 
