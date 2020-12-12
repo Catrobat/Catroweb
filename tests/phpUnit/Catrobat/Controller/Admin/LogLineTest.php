@@ -40,7 +40,7 @@ class LogLineTest extends CatrowebTestCase
   }
 
   /**
-   * @covers \LogLine::getDebugLevelByString
+   * @covers LogLine::getDebugLevelByString
    * @dataProvider getDebugLevelDataProvider
    *
    * @throws ReflectionException
@@ -51,7 +51,7 @@ class LogLineTest extends CatrowebTestCase
   }
 
   /**
-   * @covers \LogLine::setDate, LogLine::getDate
+   * @covers LogLine::setDate, LogLine::getDate
    *
    * @throws ReflectionException
    */
@@ -63,7 +63,7 @@ class LogLineTest extends CatrowebTestCase
   }
 
   /**
-   * @covers \LogLine::setDebugCode, LogLine::getDebugCode
+   * @covers LogLine::setDebugCode, LogLine::getDebugCode
    *
    * @throws ReflectionException
    */
@@ -75,7 +75,7 @@ class LogLineTest extends CatrowebTestCase
   }
 
   /**
-   * @covers \LogLine::setDebugLevel, LogLine::getDebugLevel
+   * @covers LogLine::setDebugLevel, LogLine::getDebugLevel
    *
    * @throws ReflectionException
    */
@@ -87,7 +87,7 @@ class LogLineTest extends CatrowebTestCase
   }
 
   /**
-   * @covers \LogLine::setMsg, LogLine::getMsg
+   * @covers LogLine::setMsg, LogLine::getMsg
    *
    * @throws ReflectionException
    */

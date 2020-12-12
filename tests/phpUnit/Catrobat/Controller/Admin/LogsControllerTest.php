@@ -86,7 +86,7 @@ class LogsControllerTest extends CatrowebTestCase
 
   /**
    * @throws ReflectionException
-   * @covers \LogsController::getFilesAndContentByDirAndPattern
+   * @covers LogsController::getFilesAndContentByDirAndPattern
    * @dataProvider getFilesAndContentByDirAndPatternDataProvider
    */
   public function testGetFilesAndContentByDirAndPattern(array $actualFileLines, array $searchFilters, array $expectedLines): void
