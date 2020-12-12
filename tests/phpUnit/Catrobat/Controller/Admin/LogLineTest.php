@@ -40,7 +40,7 @@ class LogLineTest extends CatrowebTestCase
   }
 
   /**
-   * @covers \LogLine::getDebugLevelByLine
+   * @covers \LogLine::getDebugLevelByString
    * @dataProvider getDebugLevelDataProvider
    *
    * @throws ReflectionException
