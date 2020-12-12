@@ -164,6 +164,7 @@ jobs:
           - web-scratch-integration
           - web-search
           - web-top-bar
+          - web-translation
 
     steps:
       - name: Checkout

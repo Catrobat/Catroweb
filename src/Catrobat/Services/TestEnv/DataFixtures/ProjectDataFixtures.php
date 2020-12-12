@@ -78,6 +78,7 @@ class ProjectDataFixtures
 
     $project->setName($config['name'] ?? 'Project '.ProjectDataFixtures::$number_of_projects);
     $project->setDescription($config['description'] ?? '');
+    $project->setCredits($config['credit'] ?? '');
     $project->setViews(isset($config['views']) ? (int) $config['views'] : 0);
     $project->setDownloads(isset($config['downloads']) ? (int) $config['downloads'] : 0);
     $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
