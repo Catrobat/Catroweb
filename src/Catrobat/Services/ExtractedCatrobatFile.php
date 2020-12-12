@@ -325,8 +325,8 @@ class ExtractedCatrobatFile
       }
     }
 
-    if (0 == count($extracted_remixes) && strlen($remixes_string) > 0 &&
-      false === strpos($remixes_string, RemixUrlIndicator::SEPARATOR))
+    if (0 == count($extracted_remixes) && strlen($remixes_string) > 0
+      && false === strpos($remixes_string, RemixUrlIndicator::SEPARATOR))
     {
       $extracted_remixes[] = new RemixData($remixes_string);
     }

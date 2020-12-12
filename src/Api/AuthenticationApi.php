@@ -50,16 +50,6 @@ class AuthenticationApi implements AuthenticationApiInterface
     $responseCode = Response::HTTP_OK;
   }
 
-  public function authenticationLogoutPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
-  {
-    // TODO: Implement authenticationLogoutPost() method.
-  }
-
-  public function authenticationRefreshPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
-  {
-    // TODO: Implement authenticationRefreshPost() method.
-  }
-
   /**
    * {@inheritdoc}
    */
@@ -94,6 +84,16 @@ class AuthenticationApi implements AuthenticationApiInterface
     $responseCode = Response::HTTP_OK;
 
     return new JWTResponse();
+  }
+
+  public function authenticationDelete(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement authenticationDelete() method.
+  }
+
+  public function authenticationPut(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement authenticationPut() method.
   }
 
   private function validateGoogleIdToken($id_token)
@@ -134,8 +134,8 @@ class AuthenticationApi implements AuthenticationApiInterface
 
       return ['response_code' => $responseCode, 'token' => $token];
     }
-    if ($decoded->app_id !== $fb_id || $decoded->expires_at < time() ||
-            $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email)
+    if ($decoded->app_id !== $fb_id || $decoded->expires_at < time()
+            || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email)
             || !isset($decoded->name))
     {
       $responseCode = Response::HTTP_UNAUTHORIZED;

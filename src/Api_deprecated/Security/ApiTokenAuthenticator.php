@@ -53,8 +53,8 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    */
   public function supports(Request $request)
   {
-    return $this->requestHasValidAuthTokenInHeader($request) ||
-      $this->requestHasValidTokenInBody__supportAPIv1($request);
+    return $this->requestHasValidAuthTokenInHeader($request)
+      || $this->requestHasValidTokenInBody__supportAPIv1($request);
   }
 
   /**

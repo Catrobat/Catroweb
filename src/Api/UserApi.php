@@ -7,9 +7,11 @@ use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\APIHelper;
 use Exception;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
+use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserErrorResponse;
@@ -36,14 +38,18 @@ class UserApi implements UserApiInterface
 
   private TokenStorageInterface $token_storage;
 
-  public function __construct(ValidatorInterface $validator, UserManager $user_manager, TokenGenerator $token_generator,
-                              TranslatorInterface $translator, TokenStorageInterface $token_storage)
+  private JWTTokenManagerInterface $jwt_manager;
+
+  public function __construct(ValidatorInterface $validator, UserManager $user_manager,
+                              TokenGenerator $token_generator, TranslatorInterface $translator,
+                              TokenStorageInterface $token_storage, JWTTokenManagerInterface $jwt_manager)
   {
     $this->validator = $validator;
     $this->user_manager = $user_manager;
     $this->token_generator = $token_generator;
     $this->translator = $translator;
     $this->token_storage = $token_storage;
+    $this->jwt_manager = $jwt_manager;
   }
 
   /**
@@ -71,25 +77,34 @@ class UserApi implements UserApiInterface
 
       return $validation_schema;
     }
+
     if ($register_request->isDryRun())
     {
       $responseCode = Response::HTTP_NO_CONTENT; // 204 => Dry-run successful, no validation error
-    }
-    else
-    {
-      // Validation successful, no dry-run requested => we can actually register the user
-      /** @var User $user */
-      $user = $this->user_manager->createUser();
-      $user->setUsername($register_request->getUsername());
-      $user->setEmail($register_request->getEmail());
-      $user->setPlainPassword($register_request->getPassword());
-      $user->setEnabled(true);
-      $user->setUploadToken($this->token_generator->generateToken());
-      $this->user_manager->updateUser($user);
-      $responseCode = Response::HTTP_CREATED; // 201 => User successfully registered
+
+      return null;
     }
 
-    return null;
+    // Validation successful, no dry-run requested => we can actually register the user
+    /** @var User $user */
+    $user = $this->user_manager->createUser();
+    $user->setUsername($register_request->getUsername());
+    $user->setEmail($register_request->getEmail());
+    $user->setPlainPassword($register_request->getPassword());
+    $user->setEnabled(true);
+    $user->setUploadToken($this->token_generator->generateToken());
+    $this->user_manager->updateUser($user);
+
+    $token = $this->jwt_manager->create($user);
+
+    $responseCode = Response::HTTP_CREATED; // 201 => User successfully registered
+
+    return new JWTResponse(
+      [
+        'token' => $token,
+        'refresh_token' => 'ToDo!',
+      ]
+    );
   }
 
   /**
