@@ -45,7 +45,7 @@ class LogLineTest extends CatrowebTestCase
    *
    * @throws ReflectionException
    */
-  public function testGetDebugLevelByLine(string $string, int $output): void
+  public function testGetDebugLevelByString(string $string, int $output): void
   {
     $this->assertEquals($this->invokeMethod($this->object, 'getDebugLevelByString', [$string]), $output);
   }
