@@ -5,7 +5,6 @@ namespace Tests\phpUnit\Catrobat\Listeners;
 use App\Catrobat\Listeners\ThemeRequestListener;
 use App\Catrobat\Requests\AppRequest;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -14,7 +13,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
-use Tests\phpUnit\TestUtils\PHPUnitUtils;
+use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 
 /**
  * Class ThemeRequestListenerTest.
@@ -23,7 +22,7 @@ use Tests\phpUnit\TestUtils\PHPUnitUtils;
  *
  * @internal
  */
-class ThemeRequestListenerTest extends TestCase
+class ThemeRequestListenerTest extends CatrowebTestCase
 {
   /**
    * @var ThemeRequestListener|MockObject
@@ -277,7 +276,7 @@ class ThemeRequestListenerTest extends TestCase
 
     if (null !== $attributes)
     {
-      PHPUnitUtils::mockProperty(Request::class, $request, 'attributes', $attributes);
+      $this->mockProperty(Request::class, $request, 'attributes', $attributes);
     }
 
     if (null !== $uri)
