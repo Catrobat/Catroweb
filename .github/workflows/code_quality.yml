@@ -119,7 +119,7 @@ jobs:
 
       # Run the checks -> test-style script msut be defined in package.json
       - run: npm run test-style
-        continue-on-error: true  # TODO: remove after fixing all style errors
+
 
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

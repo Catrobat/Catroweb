@@ -36,8 +36,7 @@ $border-spacing: 8px;
   > .files
   {
     display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
+    flex-flow: row wrap;
 
     .mediafile
     {
@@ -58,7 +57,7 @@ $border-spacing: 8px;
         position: absolute;
         top: 0;
         right: 0;
-        color: white;
+        color: $white;
         visibility: hidden;
       }
 
@@ -69,12 +68,12 @@ $border-spacing: 8px;
 
         .checkbox
         {
-          color: white;
-          visibility: visible;
           font-size: 20px;
+          color: $white;
+          visibility: visible;
         }
 
-        i.media-file-type
+        .media-file-type
         {
           z-index: initial;
         }
@@ -86,13 +85,13 @@ $border-spacing: 8px;
         max-height: $tile-size - $border-spacing;
       }
 
-      i.media-file-icon
+      .media-file-icon
       {
         font-size: $tile-size;
         opacity: 0.13;
       }
 
-      i.media-file-type
+      .media-file-type
       {
         z-index: 1;
         margin-top: 1.6rem;
@@ -119,17 +118,17 @@ $border-spacing: 8px;
         @include force-word-break();
       }
 
-      &:not(.showName) .name
+      &:not(.show-name) .name
       {
         display: none;
       }
 
-      &.showName
+      &.show-name
       {
         display: grid;
         .name,
-        i.media-file-icon,
-        i.media-file-type
+        .media-file-icon,
+        .media-file-type
         {
           grid-column: 1;
           grid-row: 1;
@@ -172,19 +171,19 @@ $border-spacing: 8px;
       max-height: $tile-size-md-smup - $border-spacing;
     }
 
-    i.media-file-icon
+    .media-file-icon
     {
       font-size: $tile-size-md-smup;
     }
 
-    i.media-file-type {
+    .media-file-type {
       margin-top: 2rem;
       font-size: 2.8rem;
     }
   }
 }
 
-#content[size=sm] .category
+#content[size="sm"] .category
 {
   > .files .mediafile
   {
@@ -197,14 +196,14 @@ $border-spacing: 8px;
       max-height: $tile-size-sm - $border-spacing;
     }
 
-    i.media-file-icon
+    .media-file-icon
     {
       font-size: $tile-size-sm;
     }
   }
 }
 
-#content[size=lg] .category
+#content[size="lg"] .category
 {
   > .files .mediafile
   {
@@ -217,7 +216,7 @@ $border-spacing: 8px;
       max-height: $tile-size-lg - $border-spacing;
     }
 
-    i.media-file-icon
+    .media-file-icon
     {
       font-size: $tile-size-lg - 15px;
     }

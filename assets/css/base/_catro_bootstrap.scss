@@ -9,7 +9,7 @@
 }
 
 @mixin tooltip-border-styles($borderColor) {
-  & + .tooltip {
+  .tooltip {
     &.top .tooltip-arrow,
     &.top-left .tooltip-arrow,
     &.top-right .tooltip-arrow {
@@ -33,12 +33,14 @@
 }
 
 .btn-copy {
-  & > .tooltip .tooltip-inner {
-    background-color: $success;
-  }
+  > .tooltip {
+    .tooltip-inner {
+      background-color: $success;
+    }
 
-  & > .tooltip > .arrow::before {
-    border-right-color: $success;
+    > .arrow::before {
+      border-right-color: $success;
+    }
   }
 
   @include tooltip-border-styles($success);
@@ -263,7 +265,7 @@
   .catro-card-title {
     margin-bottom: 0.7em;
     font-size: 1.7em;
-    font-weight: bold;
+    font-weight: $font-weight-bold;
     color: rgba(0, 0, 0, 0.7);
     text-transform: uppercase;
   }
@@ -339,7 +341,6 @@
 
 #help-container {
   display: flex;
-  flex-wrap: wrap;
   flex-flow: row wrap;
   align-items: stretch;
   width: 100%;
@@ -423,7 +424,7 @@
     max-width: 100%;
     padding: 4px 15px;
     overflow: hidden;
-    font-weight: bold;
+    font-weight: $font-weight-bold;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px rgba($primary, 0.8);
     border-radius: 5px;

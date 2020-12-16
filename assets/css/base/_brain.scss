@@ -25,7 +25,7 @@
 
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px white inset;
+  -webkit-box-shadow: 0 0 0 1000px $white inset;
 }
 
 body {
@@ -42,6 +42,20 @@ img {
 
 li {
   word-wrap: break-word;
+}
+
+.content-container {
+  margin: 25px auto;
+}
+
+.standard-col-text {
+  @include box-columns(2, 25px);
+  padding: 25px 0;
+  text-align: justify;
+}
+
+.standard-article-link {
+  font-weight: $font-weight-bold;
 }
 
 .clear {
@@ -62,7 +76,7 @@ label {
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: $font-weight-bold;
 }
 
 form {
@@ -106,8 +120,7 @@ $program-tile-width: 85px;
 
 .programs {
   display: flex;
-  flex-direction: row;
-  flex-flow: wrap;
+  flex-flow: row wrap;
   justify-content: center;
 
   > .program {
@@ -244,7 +257,7 @@ $program-tile-width: 85px;
   border-radius: 11px;
 }
 
-.radio-item input[type=radio]:checked + label::after {
+.radio-item input[type="radio"]:checked + label::after {
   position: absolute;
   top: 9px;
   left: 24px;

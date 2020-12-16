@@ -1299,7 +1299,7 @@ if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msT
             /**
              * Tracks the interactive execution of the program
              */
-            BaseSelector: 'button.pc-startButton',
+            BaseSelector: 'button.pc-start-button',
             Category: programCategory,
             Action: 'click - launch program',
             Label: function () {
