@@ -1,0 +1,676 @@
+---
+#homepage translation
+localLanguage: ইংরেজি
+username: ব্যবহারকারীর নাম
+password: পাসওয়ার্ড
+createNewPassword: Create new password
+accountSettings: অ্যাকাউন্ট সেটিংস
+email: ই-মেল
+aboutPocketCode: পকেট কোড সম্পর্কে
+about: সম্পর্কে
+education: Education
+chat: Chat and forums
+others: Others
+tutorials: টিউটোরিয়াল
+googlePlay: গুগল প্লে
+iosAppStore: আইওএস অ্যাপ্লিকেশন ভাণ্ডার
+huaweiAppGallery: Huawei AppGallery
+passwordsNoMatch: পাসওয়ার্ড মিলছে না
+error: ভুল
+cancel: বাতিল
+report: প্রতিবেদন করুন
+deleteIt: হ্যাঁ, এটি মুছুন!
+reportIt: হ্যাঁ, রিপোর্ট করুন
+areYouSure: আপনি নিশ্চিত?
+noWayOfReturn: আপনার কাজটি পুনরুদ্ধার করার কোনও উপায় নেই!
+download: ডাউনলোড
+description: বর্ণনা
+noDescription: বর্ণনা পাওয়া যায় নি.
+credits: Credits
+noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+country: দেশ
+loginText: প্রবেশ করুন
+privacyPolicy: গোপনীয়তার নীতি
+imprint: মুদ্রিত করা
+programDetails: বিস্তারিত
+somethingWentWrong: 'ওহো, কিছু ভুল হয়েছে'
+pleaseTryAgain: 'অনুগ্রহ করে আবার চেষ্টা করুন।'
+oldVersionError: 'দয়া করে নতুন পকেট কোড সংস্করণটি আপডেট করুন!'
+more: 'আরও'
+less: 'কম'
+show-more: 'আরও দেখান'
+show-less: 'অল্প দেখান'
+more-information: 'আরো তথ্য'
+less-information: 'Less information'
+ok: Ok
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+registrationError: 'ব্যবহারকারীর নাম অথবা ইমেইল পাঠানোর ঠিকানা ইতিমধ্যে ব্যবহৃত।'
+notifications: 'বিজ্ঞপ্তি'
+allNotifications: 'All Notifications'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Reactions'
+CommentNotifications: 'মন্তব্যসমূহ'
+RemixNotifications: 'রিমিক্স'
+wellDone: "ভাল করেছেন"
+done: "সম্পন্ন!"
+notificationsReadMessage: "It looks like you dont have any notifications."
+confirmMessage: "Yes, delete it"
+cancelMessage: "বাতিল"
+notificationsUnauthorizedError: "Unable to authorize user"
+notificationsClearError: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করতে অক্ষম!"
+pleaseWait: "অনুগ্রহ করে অপেক্ষা করুন..."
+projects: "প্রজেক্টসমূহ"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What projects are recommended here?'
+      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+follower:
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
+  unfollowError: "Unable to unfollow the desired user!"
+  unfollowQuestion: "Are you sure you want to unfollow this user?"
+  unfollowButton: "Unfollow %username%"
+programs:
+  welcome:
+    title: আপনাকে স্বাগতম Catrobat's %theme%
+    subtitle: গল্প, খেলা এবং আরও অনেক কিছু তৈরি করুন ...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    download: অ্যাপ্লিকেশন ডাউনলোড করুন
+    statistics: আরও পরিসংখ্যান
+  featured: বৈশিষ্ট্য
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noPrograms: There are currently no projects.
+  deleteConfirmation: |+
+    আপনি কি নিশ্চিত?
+    আপনি কি  "%programName%" মুছতে চান?
+    আপনার কার্যটি  পুনরুদ্ধার করার কোনও উপায় নেই!
+    হ্যাঁ, এটি মুছুন!
+    বাতিল
+  changeVisibility: |+
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: আপনি কি নিশ্চিত যে আপনি এই মন্তব্যটি বিবরণ পেশ করতে চান?
+  deleteCommentConfirmation: আপনি কি নিশ্চিত যে আপনি এই মন্তব্যটি মুছে ফেলতে চান?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: আপনি আপনার বিবরণে অভদ্র শব্দ ব্যবহার করতে পারবেন না!
+  tooLongCredits: The project credits are too long!
+  rudeWordsInCredits: You can't use rude words in your credits!
+  most:
+    viewed: সর্বোচ্চ  পরিদর্শন
+    downloaded: সর্বোচ্চ ডাউনলোডকৃত
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% ডাউনলোড'
+  sample: Example projects
+  views: '%views% পরিদর্শন'
+  likes:
+    likersTitle: "People who reacted to that project"
+    all: "সব"
+  remixes: '{0} ০ রিমিক্স | {1} ১ রিমিক্স |]1,Inf] %remixes% রিমিক্স'
+  newRemixesNotificationTitle: '{1}"%programName%" এর ১ টি নতুন রিমিক্স রয়েছে: |]1,Inf] "%programName%" এর রয়েছে %remixes% নতুন রিমিক্স রয়েছে:'
+  submitted: Submitted Projects
+  uploaded: Uploaded Projects
+  reportAsInappropriate: অনুপযুক্ত হিসাবে রিপোর্ট করুন
+  reportProgram: Report project
+  languageVersion: 'Catrobat ভাষার সংস্করণ: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: কারণ লিখুন
+  reportRadioButtonInappropriate: এটা সঠিক না
+  reportRadioButtonCopyright: কপিরাইট লঙ্ঘন
+  reportRadioButtonSpam: এটি স্প্যাম
+  reportRadioButtonDislike: আমি এটা পছন্দ করি না
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeader: অ্যাপ্লিকেশন আপডেট করুন
+  updateAppText: Please update your app to the newest version to be able to download this project.
+  btnClosePopup: ঠিক আছে
+  checkout_this_program: Checkout this Catrobat project
+  show_more: আরও দেখান
+  comments: মন্তব্যসমূহ
+  send: পাঠান
+  delete: মুছুন
+  report: প্রতিবেদন করুন
+  report_popup: মন্তব্য সফলভাবে প্রতিবেদন করা হয়েছিল
+  report_popup_header: প্রতিবেদন
+  deleted_popup: মন্তব্যটি সফলভাবে মুছে ফেলা হয়েছে।
+  deleted_popup_header: মুছুন
+  noAdminRights: আপনার অ্যাডমিন অধিকার নেই। অনুগ্রহ করে  অ্যাডমিন হিসাবে প্রবেশ করুন।
+  editDescription: Edit the project Description
+  saveDescription: পরিবর্তীত বর্ণনা সংরক্ষণ করুন
+  editCredits: Edit the project Credits
+  saveCredits: Save Credits change
+  addComment: মন্তব্য লিখুন
+  thumbsUp: সাবাস
+  smile: হাসি!
+  love: ভালবাসা
+  wow: কি দারুন
+  linkTitle: যোগসূত্র
+  link: Copy project link to clipboard
+  reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+remixGraph:
+  title: রিমিক্স
+  showRemixGraph: 'রিমিক্স গ্রাফ প্রদর্শন করুন'
+  by: 'দিয়ে'
+  open: 'খুলুন'
+  showPaths: 'পথ দেখান'
+  programNotAvailableErrorTitle: 'দুঃখিত'
+  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailable: 'পাওয়া যায়নি'
+  programUnknownUser: 'অপরিচিত ব্যবহারকারী'
+noReply: এটি একটি স্বয়ংক্রিয় বার্তা - দয়া করে এই ইমেলের সরাসরি উত্তর দিবেন না।
+accountConfirmation:
+  subject: আপনার Catrobat  অ্যাকাউন্টের নিশ্চয়তা
+  message: |
+    প্রিয় %username%.
+    আপনার অ্যাকাউন্টটি চালু করতে - দয়া করে এখানে %confirmationUrl% ক্লিক করুন
+    এই লিঙ্কটি শুধুমাত্র একবার আপনার অ্যাকাউন্টটি বৈধ করার জন্য  ব্যবহার করা যেতে পারে।
+    শুভেচ্ছান্তে,
+    আপনার Catrobat দল।
+  messageHtml: |
+    প্রিয় %username%.
+    আপনার অ্যাকাউন্টটি চালু করতে - দয়া করে এখানে %confirmationUrl% ক্লিক করুন
+    এই লিঙ্কটি শুধুমাত্র একবার আপনার অ্যাকাউন্টটি বৈধ করার জন্য  ব্যবহার করা যেতে পারে।
+    শুভেচ্ছান্তে,
+    আপনার Catrobat দল।
+passwordRecovery:
+  subject: আপনার Catrobat পাসওয়ার্ড পুনরুদ্ধার
+  message: |
+    প্রিয় %username%.
+
+    আপনি % appplication_url% এ আপনার পাসওয়ার্ড পুনরায় সেট করার জন্য অনুরোধ করেছেন কারণ আপনি নিজের পাসওয়ার্ড ভুলে গেছেন।
+    আপনি যদি এটি অনুরোধ না করেন তবে দয়া করে এটিকে এড়িয়ে যান। এটি ২৪ ঘন্টা সময়ের মধ্যে অব্যবহৃত এবং অকেজো হয়ে যাবে।
+
+    আপনার পাসওয়ার্ডটি পুনরায় সেট করতে এবং একটি নতুন তৈরি করতে, দয়া করে নীচের পৃষ্ঠাটি দেখুন: %confirmationUrl%
+
+    আপনি %appplication_url%  সম্প্রদায়ে প্রবেশ করার জন্য যে কোনও সময় আপনার ব্যবহারকারীর নাম এবং পাসওয়ার্ড ব্যবহার করতে পারেন।
+    এটি করতে, কেবল নিম্নলিখিত পৃষ্ঠায় যান: %loginPage%
+    আপনার বিস্তারিত প্রোফাইল সম্পাদনা করতে, এই পৃষ্ঠায় যান: %profilePage%
+
+    শুভেচ্ছান্তে,
+    আপনার Catrobat দল।
+  messageHtml: |
+    প্রিয় %username%.
+
+    আপনি % appplication_url% এ আপনার পাসওয়ার্ড পুনরায় সেট করার জন্য অনুরোধ করেছেন কারণ আপনি নিজের পাসওয়ার্ড ভুলে গেছেন।
+    আপনি যদি এটি অনুরোধ না করেন তবে দয়া করে এটিকে এড়িয়ে যান। এটি ২৪ ঘন্টা সময়ের মধ্যে অব্যবহৃত এবং অকেজো হয়ে যাবে।
+
+    আপনার পাসওয়ার্ডটি পুনরায় সেট করতে এবং একটি নতুন তৈরি করতে, দয়া করে নীচের পৃষ্ঠাটি দেখুন: %confirmationUrl%
+
+    আপনি %appplication_url%  সম্প্রদায়ে প্রবেশ করার জন্য যে কোনও সময় আপনার ব্যবহারকারীর নাম এবং পাসওয়ার্ড ব্যবহার করতে পারেন।
+    এটি করতে, কেবল নিম্নলিখিত পৃষ্ঠায় যান: %loginPage%
+    আপনার বিস্তারিত প্রোফাইল সম্পাদনা করতে, এই পৃষ্ঠায় যান: %profilePage%
+
+    শুভেচ্ছান্তে,
+    আপনার Catrobat দল।
+profile:
+  edit: আপনার প্রোফাইল সম্পাদনা করুন
+  saveChanges: পরিবর্তনগুলো সংরক্ষণ করুন
+  newPass: নতুন পাসওয়ার্ড
+  repeatPass: পুনরায় পাসওয়ার্ড লিখুন
+  oldPass: পুরাতন পাসওয়ার্ড
+  firstEmail: আমার প্রথম ইমেল
+  secondEmail: আমার দ্বিতীয় ইমেল
+  myPrograms: My projects
+  follows: অনুসরণ
+  follower: অনুসরণকারী
+  unfollowUser: এই ব্যবহারকারীকে অনুসরণ না করুন!
+  followUser: এই ব্যবহারকারীকে অনুসরণ করুন!
+  amountOfPrograms: Amount of projects
+  form:
+    passwordTooShort: নতুন পাসওয়ার্ডে কমপক্ষে %length% অক্ষর থাকতে হবে।
+    passwordTooLong: নতুন পাসওয়ার্ডে সর্বাধিক %length% অক্ষর থাকতে পারে।
+    passwordIsUsername: পাসওয়ার্ডটি অবশ্যই ব্যবহারকারীর নাম থেকে পৃথক হতে হবে।
+    passwordWrong: ভুল পাসওয়ার্ড
+    emailNotValid: এই ইমেল ঠিকানাটি বৈধ নয়।
+    emailMissing: এই ইমেল ঠিকানাটি আপডেট করার সময় ভুল হয়েছে। আপনার অবশ্যই কমপক্ষে একটি বৈধ ইমেল ঠিকানা থাকতে হবে।
+    emailExists: এই ই-মেইল ঠিকানাটি ইতিমধ্যে ব্যবহার করা হয়েছে
+    usernameNotValid: This username is not valid.
+    usernameMissing: You must have a username.
+    usernameExists: ব্যবহারকারীর নাম ইতোমধ্যে রয়েছে
+    usernameContainsEmail: Username shouldn't contain an email address.
+    submitSuccess: সংরক্ষিত
+  reallyDeleteProgram: Do you really want to delete your project
+  programsOf: Projects of
+  changePicture: ছবি পরিবর্তন করুন
+  avatar:
+    noImage: চিত্রবিহীন
+    pictureTooLarge: আপনার নির্বাচিত ছবিটি অনেক বড়, দয়া করে ৫ম্যাগা বাইটের চেয়ে বড় ছবিগুলি ব্যবহার করবেন না।
+    uploadError: দুঃখিত, ইমেজ/ ছবি আপলোড হতে সমস্যা হচ্ছিল।
+    noSupport: এই ধরণের ছবি সমর্থিত নয়, দয়া করে অন্য একটি ছবি চেষ্টা করুন।
+  goToScratchProfile: Profile on Scratch
+myprofile:
+  editProfile: প্রোফাইল সম্পাদন করুন
+  edit: সম্পাদনা করুন
+  done: করা হয়েছে
+  checkMail: আপনার ইমেল ঠিকানায় একটি ইমেল প্রেরণ করা হয়েছিল। অনুগ্রহ করে আপনার ইনবক্স চেক করুন।
+  passwordUpdated: আপনার পাসওয়ার্ডটি সফলভাবে পরিবর্তন করা হয়েছে।
+  avatar: অ্যাভাটার
+  email: ই-মেল
+  editAvatar: অ্যাভাটারটি সম্পাদনা করুন
+  editUsername: ব্যবহারকারীর নাম সম্পাদনা করুন
+  editPassword: পাসওয়ার্ড সম্পাদনা করুন
+  editCountry: দেশ সম্পাদনা করুন
+  editEmail: ই-মেইল সম্পাদনা করুন
+  deleteAccount: অ্যাকাউন্ট মুছে ফেলুন
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  editAccountSettings: অ্যাকাউন্ট সেটিংস সম্পাদনা করুন
+  notChangeVisibility: দৃশ্যটি পরিবর্তন করতে পারবেন না
+  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+licenseToPlay:
+  link: 'খেলার জন্য লাইসেন্স'
+  title: 'খেলার জন্য লাইসেন্স - কৃতিত্ব এবং শেয়ার দিন'
+  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'কোনও গোপন রেসিপি নেই: এই কেকগুলি কীভাবে তৈরি করা যায় সে সম্পর্কে নির্দেশাবলী সকলের  জন্য উন্মুক্ত যারা ব্যবহার ,পুনরায় ব্যবহার , সংশোধন এবং নতুন ধারণাগুলির অনুপ্রেরণা হিসাবে কাজ করতে চান  ... মানে কেক'
+  text3: "আপনি কেক খেতে পারেন পাশাপাশি নিজের তৈরি করতে অন্য ব্যক্তির রেসিপিগুলি অনুকরণ করতে পারেন, হতে পারে বিভিন্ন উপাদান সহ। এই স্বাধীনতা দুটি সহজ প্রয়োজনীয়তার সাথে আসে:"
+  text4: "ক্যাট্রোব্যাট সম্প্রদায়টি স্থাপনে আমরা এই পদ্ধতিকে গ্রহণ করার সিদ্ধান্ত নিয়েছি কারণ আমরা বিশ্বাস করি যে এটি সম্প্রদায়ের মধ্যে শিক্ষা এবং সৃজনশীলতা সমর্থন করে।রেসিপি এবং উপাদানগুলি (স্ক্রিপ্ট এবং শিল্পকর্ম) ভাগ করে লোকেরা একে অপরের  ধারণা জানতে পারে এবং যার ফলে প্রত্যেকে উপকার হবে।"
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text6: 'ক্যাটরোব্যাট অনলাইন সম্প্রদায়ের ব্যবহারের শর্তাদি সম্পর্কে আরও জানুন %link-termsOfUse%'
+  list1:
+    item1: রেসিপি সহ আপনার কেক শেয়ার করুন
+    item2: যারা আপনাকে অনুপ্রাণিত করেছিল তাদের কৃতিত্ব দিন
+  version: সংস্করণ ১.১, ২ এপ্রিল ২০১৩
+termsOfUse:
+  title: ব্যবহারের শর্তাবলী
+  headline: ক্যাটরোব্যাট সম্প্রদায়টিতে আপনাকে স্বাগতম!
+  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text2: "এই সম্প্রদায়টি প্রতিটি সদস্যের জন্য সহায়ক জায়গা হিসাবে গড়ে তুলতে আমাদের আপনার সহায়তা দরকার। আপনি এখানে কীভাবে সহায়তা করতে পারেন :"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text4: 'আপনাকে আমাদের উপহার'
+  text5: 'আমাদের ব্যবহার এবং সেবার শর্তাদি:'
+  list1:
+    item1: বিভিন্ন দেশ এবং সংস্কৃতি থেকে
+    item2: সমস্ত বয়সের (ছোট বাচ্চা থেকে শুরু করে কিশোর এবং দাদা-দাদি)
+    item3: সমস্ত স্তরের অভিজ্ঞতার সাথে
+  list2:
+    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item3: "সৎ হও. আপনি ছাড়া অন্য কেউ হওয়ার ভান করবেন না বা সম্প্রদায়কে ঠকানোর চেষ্টা করবেন না।"
+    item4: "ব্যক্তিগত তথ্য ব্যক্তিগত রাখুন। আপনার ইমেল ঠিকানা, ফোন নম্বর, বা অন্যান্য ব্যক্তিগত যোগাযোগের তথ্য শেয়ার করবেন না।"
+    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+  list3:
+    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item3: "একটি গুরুত্বপূর্ণ অতিরিক্ত শর্ত হ'ল আপনি লেখকদের স্পষ্টভাবে কৃতিত্ব দিন যাঁর কাজের ভিত্তিতে আপনি নিজের কাজ তৈরি করেছেন।একই সাথে, আমরা কঠোর পরিশ্রম করব যাতে আপনার কাজ  আপনার  অবদান রাখার জন্য অন্যদের দ্বারা স্পষ্টভাবে প্রশংসিত হয়,ক্যাটরোবটের সম্প্রদায়ের মধ্যে আপনাকে নির্দ্বিধায় প্রতিনিধিত্ব করার জন্য স্বতন্ত্র নাম  বেছে নেওয়ার সুযোগ দেওয়া হবে এবং অন্যকে আপনার কাজের প্রতি কৃতজ্ঞতা প্রকাশ করার সুযোগ দেওয়ার জন্য আপনার কাজ জনসমক্ষে দেওয়া হবে।"
+    item4: 'সুনির্দিষ্ট আইনী শর্তাদি এবং চুক্তির জন্য দয়া করে %link-licenseUploaded% এর সাথে পরামর্শ করুন।'
+  list4:
+    item1: "আমরা ক্যাট্রোব্যাট সিস্টেম সম্পর্কিত আমাদের নিজস্ব সফ্টওয়্যার এবং ইন্টারনেট সংস্থান সরবরাহ করি যেমন ক্যাট্রোব্যাট দল দ্বারা লিখিত সফ্টওয়্যার,  ওয়েবসাইট এবং ইন্টারনেট সংস্থান, ক্যাট্রোব্যাট সিস্টেম সম্পর্কিত আমাদের নিজস্ব সোর্স কোড এবং  অতিরিক্ত  উপকরণ যেমন, চিত্র, শব্দ এবং পাঠ্য এবং ভবিষ্যতে আপনি ক্যাটরোবটের বিনামূল্যে লাইসেন্সের আওতায় অন্তর্ভুক্ত থাকবেন।"
+    item2: এই লাইসেন্সগুলি ক্যাট্রোব্যাটের সবকিছু আপনার জন্য বিনামূল্যে ব্যবহারের স্বাধীনতা দেয় আপনার পছন্দ অনুযায়ী কিছু নিষেধাজ্ঞাসহ ক্যাট্রোব্যাট সিস্টেম চিরকাল বিনামূল্যে এবং সবার জন্য কার্যকর থাকবে।
+    item3: 'সুনির্দিষ্ট আইনী শর্তাবলী জন্য দয়া করে %link-licenseToPlay% এর সাথে পরামর্শ করুন। ক্যাট্রোব্যাট সিস্টেমের সোর্স কোডের পাশাপাশি আরও অনেক নথি সহজলভ্য %link-developer%'
+  list5:
+    item1: 'যদি আপনি বা আপনার বয়স ১৩ বছরের কম হয় তবে আপনার পিতা-মাতা বা আইনী অভিভাবকরা কোনও সংস্থার সাথে জড়িত আছেন বা টানা-জাল প্রকারের গোপনীয়তা লঙ্ঘনের জন্য এবং / অথবা বাল্ক বা গণ নজরদারিগুলির জন্য দায়ী তাহলে আপনার আমাদের সফ্টওয়্যার অ্যাপ্লিকেশনগুলি এবং পরিষেবাগুলি ব্যবহার করার অনুমতি নেই। এই বিধিনিষেধের সুনির্দিষ্ট বিবরণ এবং এটিতে কিছু ব্যতিক্রমগুলি আমাদের %link-termsOfUse%.  4.a এবং 4.b বিভাগে বর্ণিত হয়েছে।'
+    item2: যদি আপনার বয়স ১৩ বছরের কম হয়, তবে আপনাকে আপনার বাবা-মা বা আইনী অভিভাবকদের জিজ্ঞাসা করতে হবে যে তারা আপনাকে ক্যাট্রোব্যাট এর সফ্টওয়্যার অ্যাপ্লিকেশন এবং পরিষেবাদি ব্যবহার করতে দিবে কিনা।
+    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "ক্যাট্রোব্যাট এর সমস্ত সফ্টওয়্যার এবং ইন্টারনেট সংস্থানগুলি আশা করা যায় যে সেগুলি কার্যকর হবে কোনও ওয়্যারেন্টি ছাড়াই।"
+    item5: 'উপরের পয়েন্টগুলির সুনির্দিষ্ট সূত্র এবং কিছু অতিরিক্ত আইনী শর্তাদি জন্য দয়া করে আমাদের %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service পরামর্শ নিন।'
+  bottom1: সময়ে সময়ে এখানে আবার চেক করুন, কারণ আমরা সর্বদা আমাদের ব্যবহারের শর্তাদি উন্নত করার চেষ্টা করছি।
+  bottom2: 'এই শর্তাদি ব্যবহারের বিষয়ে কোনও পরামর্শ মেইল করুন %email-webmaster%.'
+  version: সংস্করণ ১.৩, ৪ মার্চ ২০১৪
+search:
+  dotdotdot: অনুসন্ধান...
+  search: অনুসন্ধান
+  inMediaLib: Search in media library
+  results: ফলাফল অনুসন্ধান করুন
+  resultcount: আপনার অনুসন্ধানে %count% ফলাফল ফিরে এসেছে
+  fail: কমপক্ষে একটি অনুসন্ধান শব্দ লিখুন
+menu:
+  profile: আমার প্রোফাইল
+  login: প্রবেশ করুন
+  logout: লগআউট
+  admin: অ্যাডমিন
+  home: মূল পাতা
+  helpAndTutorials: সহায়তা ও টিউটোরিয়াল
+  followersAndFollowing: অনুসরণকারী
+login:
+  login: প্রবেশ করুন
+  passOrUser: আপনার পাসওয়ার্ড বা ব্যবহারকারীর নামটি ভুল ছিল।
+  noUsername: আপনার ব্যবহারকারী নাম বা ইমেল ঠিকানা পাওয়া যায় নি।
+  forgotPass: পাসওয়ার্ড বা ব্যবহারকারীর নাম ভুলে গেছেন?
+  recoverPass: পাসওয়ার্ড পুনরুদ্ধার করুন
+  recoverPassSend: আপনার ইমেল ঠিকানায় একটি ইমেল প্রেরণ করা হয়েছিল। অনুগ্রহ করে আপনার ইনবক্স চেক করুন।
+  alreadyReset: এই ব্যবহারকারীর জন্য পাসওয়ার্ড ইতিমধ্যে গত ২৪ ঘন্টা মধ্যে অনুরোধ করা হয়েছে।
+  confirmationSend: আপনার নিবন্ধন নিশ্চিত করার জন্য একটি ইমেল আপনার মেইল ঠিকানায় প্রেরণ করা হয়েছিল। আপনার ইনবক্সটি পরীক্ষা করুন এবং আপনার অ্যাকাউন্টটি সক্রিয় করুন।
+  userOrEmail: ব্যবহারকারীর নাম অথবা ইমেইল
+  changePass: পাসওয়ার্ড পরিবর্তন করুন
+  createAccount: একটি অ্যাকাউন্ট তৈরি করুন
+  noAccount: আপনার একাউন্ট নেই?
+  alreadyAccount: ইতিমধ্যেই একটি অ্যাকাউন্ট রয়েছে?
+  or: অথবা
+  username: ব্যবহারকারীর নাম
+  email: ই-মেইল
+  passwordFirst: পাসওয়ার্ড
+  passwordSecond: পাসওয়ার্ড নিশ্চিত করুন
+apk:
+  download: অ্যাপ্লিকেশন ডাউনলোড করুন
+  prepare: 'অ্যাপ্লিকেশন প্রস্তুত করুন'
+  preparing: 'অ্যাপ্লিকেশন প্রস্তুত করুন'
+  text: 'প্রক্রিয়াটি কিছুটা সময় নিতে পারে'
+format:
+  million_abbreviation: M
+#api
+errors:
+  username:
+    blank: ব্যবহারকারীর নাম শূন্য থাকবে না ।
+    invalid: আপনার ব্যবহারকারীর নামটি অবৈধ
+    exists: ব্যবহারকারীর নাম ইতোমধ্যে রয়েছে
+    not_exists: এই ব্যবহারকারীর নাম বিদ্যমান নেই।
+    not_email: ব্যবহারকারীর নামটি অবশ্যই কোনও ইমেল ঠিকানা হবে না।
+    size: ব্যবহারকারীর নামটিতে কমপক্ষে ৩ টি অক্ষর থাকতে হবে এবং ১৮০ এর বেশি নয়
+  password:
+    blank: পাসওয়ার্ড অনুপস্থিত।
+    short: 'আপনার পাসওয়ার্ডে অন্তত {{ limit }} হরফ থাকতে হবে।'
+  description:
+    rude: বিবরণে অভদ্র শব্দ থাকতে পারবে না।
+  credit:
+    rude: Credits must not contain rude words.
+  country:
+    blank: দেশটি অনুপস্থিত।
+    invalid: অবৈধ দেশ
+  email:
+    blank: ইমেলটি ফাঁকা হওয়া উচিত না
+    invalid: আপনার ইমেলটি অবৈধ বলে মনে হচ্ছে
+    exists: এই ই-মেইল ঠিকানাটি ইতিমধ্যে ব্যবহার করা হয়েছে
+  id:
+    blank: প্রমাণীকরণ আইডি অবশ্যই ফাঁকা হওয়া উচিত নয়
+  login: আপনার পাসওয়ার্ড বা ব্যবহারকারীর নামটি ভুল ছিল।
+  post-data: পোস্ট-ডেটা সঠিক নয় বা অনুপস্থিত!
+  checksum:
+    missing: ক্লায়েন্ট চেকসামফাইল পাঠায়নি! আপনি কি পকেট কোডের পুরানো সংস্করণ ব্যবহার করছেন?
+    invalid: অবৈধ চেকসাম
+  xml:
+    invalid: অবৈধ কোড এক্সএমএল
+    missing: 'অজানা ভুল: প্রজেক্ট_এক্সএমএল পাওয়া যায় নি '
+  file:
+    unexpected: অপ্রত্যাশিত ফাইল পাওয়া গেছে
+    invalid: ভুল ফাইল
+  image.missing: প্রজেক্ট এক্সএমএল এমন একটি ফাইলের উল্লেখ করেছে যা প্রজেক্ট-ফোল্ডারে নেই
+  unknown: অজানা ভুল
+  token: 'ডিভাইসের প্রমাণীকরণ ব্যর্থ হয়েছে: অবৈধ প্রমাণীকরণ-টোকেন!'
+  uploadTokenAuthFailed: 'প্রমাণীকরণ টোকেন আপলোড ব্যর্থ হয়েছে।'
+  programname:
+    rude: Project name must not contain rude wordes.
+  program:
+    invalid: Invalid project.
+  languageversion:
+    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+  programversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+  authentication:
+    title: প্রমাণ করতে ব্যর্থ
+    webview: |
+      Your user credentials are wrong.
+      Please try to log in again in the app.
+success:
+  text: সফল হয়েছে
+  registration: নিবন্ধন সফল হয়েছে৷
+  token: ঠিক আছে
+  upload: আপনার প্রজেক্টটি সফলভাবে আপলোড হয়েছে!
+  imgUpload: Your image was uploaded successfully!
+  report: আপনার প্রতিবেদনটি সফলভাবে পাঠানো হয়েছে
+time:
+  minutes.ago: '{0} <১ মিনিট আগে | {1} ১ মিনিট আগে |]1,Inf] %count% মিনিট আগে'
+  hours.ago: '{1} ১ ঘন্টা আগে |]1,Inf] %count% ঘন্টা আগে'
+  days.ago: '{1} ১ দিন আগে |]1,Inf] %count% দিন আগে'
+  months.ago: '{1} ১ মাস আগে |]1,Inf] %count% মাস আগে'
+  years.ago: '{1} ১ বছর আগে |]1,Inf] এক বছরেরও বেশি আগে'
+failure:
+  upload: আপনার অ্যাপ্লিকেশন আপলোড করার সময় একটি ভুল ছিল।
+api:
+  registerUser:
+    emailMissing: 'Email missing'
+    emailEmpty: 'Email cannot be empty'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
+    usernameMissing: 'Username missing'
+    usernameTooShort: 'Username too short'
+    usernameTooLong: 'Username too long'
+    usernameEmpty: 'Username cannot be empty'
+    usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
+    passwordMissing: 'Password missing'
+    passwordEmpty: 'Password cannot be empty'
+    passwordTooShort: 'Password too short'
+    passwordTooLong: 'Password too long'
+    passwordInvalidChars: 'Password contains invalid chars'
+    usernameContainsEmail: "Username must not contain an email address"
+    countryCodeInvalid: "Country code invalid"
+  projectsPost:
+    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    upload_error: 'Error while uploading. Try uploading again!'
+    creating_error: 'Error while creating Program Entity. Try uploading again!'
+#languages and countries
+language:
+  arabic: আরবী
+  bulgarian: বুলগেরীয়ান
+  catalan: ক্যাটালান
+  chinese_simplified_han: চীনা (সহজবোধ্য হান)
+  chinese_traditional_han: চীনা (সনাতন হান)
+  croatian: ক্রোয়েশিয়ান
+  czech: চেক
+  danish: ডেনমার্ক
+  dutch: হল্যান্ড
+  english_united_kingdom: ইংরেজি (যুক্তরাজ্য)
+  english_united_states: ইংরেজি (মার্কিন যুক্তরাষ্ট্র)
+  estonian: এস্তোনিয়ান
+  filipino: ফিলিপিনো
+  finnish: ফিন্ল্যাণ্ড
+  french: ফরাসি
+  german: জার্মান
+  greek: গ্রিক
+  hebrew: ইহুদি
+  hindi: হিন্দি
+  hungarian: হাঙ্গেরিয়ান
+  indonesian: ইন্দোনেশিয়ান
+  italian: ইতালিয়ান
+  japanese: জাপানি
+  korean: কোরিয়ান
+  latvian: লাটভিয়ান
+  lithuanian: লিথুয়ানিয়ান
+  malay: মালয়েশিয়ান
+  norwegian: নরওয়ে
+  persian: ফার্সি
+  polish: পোল্যান্ড
+  portuguese_brazil: পর্তুগিজ (ব্রাজিল)
+  portuguese_portugal: পর্তুগিজ (পর্তুগাল)
+  romanian: রোমানিয়ন
+  russian: রাশিয়ান
+  serbian: সার্বিয়ান
+  slovak: শ্লোভাকিয়া
+  slovenian: স্লোভেনিয়ান
+  spanish_latin_america: স্পেনীয় (লাতিন আমেরিকা)
+  spanish_spain: স্পেনীয় (স্পেন)
+  swedish: সুইডিশ
+  thai: থাই
+  turkish: তুর্কী
+  ukrainian: ইউক্রেনীয়
+  vietnamese: ভিয়েতনামী
+ci:
+  generate: Apk তৈরি করুন
+  pending: Apk তৈরি করুন
+  download: Apk ডাউনলোড করুন
+gamejam:
+  nojam: দুঃখিত, এই সময় কোনও গেম জ্যাম নেই
+  submit: '%gamejamname% এ জমা দিন'
+  whats: '%gamejamname% কী?'
+  submitown:
+    header: সচেতন থাকা
+    subheader: You can only submit your own projects
+    text: |
+      কেন নিজে তৈরি করবেন না!
+      %gamejamtag% তে অংশ নিন
+tag-text: ট্যাগ
+extenstion-text: সংযোজন
+tags:
+  constant:
+    tag1: খেলা
+    tag2: অ্যানিমেশন
+    tag3: গল্প
+    tag4: সঙ্গীত
+    tag5: শিল্প
+    tag6: পরীক্ষামূলক
+    tag7: Tutorial
+admin:
+  maintain:
+    diskMaintenance: ডিস্ক রক্ষণাবেক্ষণ
+    ramMaintenance: র‌্যাম রক্ষণাবেক্ষণ
+    noRemovableObjects: কোন অপসারণযোগ্য সামগ্রী সহজলভ্য নেই।
+    removableObjects: অপসারণযোগ্য বস্তু
+recommender:
+  similarPrograms: Similar projects
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  moreFromThisUser: More from %username%
+pmd:
+  submitBtn: আপনার প্রজেক্ট জমা দিন
+  submitBox:
+    header: উপস্থাপন
+    text: আপনি আপনার প্রজেক্টটি জমা দিতে চলেছেন। প্রজেক্ট কোডটি প্রবেশ করুন এবং প্রেরণ ক্লিক করুন।
+    btnText: জমা দিন
+  successful:
+    text: Your project upload was successful.
+  failed:
+    text: Project upload failed.
+codeview:
+  title: 'Code View'
+  showCode: 'কোড দেখান'
+  hideCode: 'কোড লুকান'
+  showStatistics: 'কোড পরিসংখ্যান দেখান'
+  hideStatistics: 'কোড পরিসংখ্যান লুকান'
+  cantDisplayCode: "কোড প্রদর্শিত হতে পারে না"
+  cantDisplayStatistics: "কোড প্রদর্শিত হতে পারে না"
+  totalNumberOf: 'মোট সংখ্যা'
+  scenes: 'দৃশ্য'
+  scripts: 'স্ক্রিপ্ট'
+  bricks: 'ব্রিক'
+  objects: 'Actors and Objects'
+  looks: 'দেখা'
+  sounds: 'শব্দ'
+  globals: 'বিশ্বব্যাপী'
+  locals: 'স্থানীয়'
+  globalVariables: 'Global Variables'
+  localVariables: 'Local Variables'
+  eventBricks: 'ইভেন্ট ইট'
+  controlBricks: 'ব্রিক নিয়ন্ত্রণ করুন'
+  motionBricks: 'গতিশীল ব্রিক'
+  soundBricks: 'সাউন্ড ব্রিক'
+  looksBricks: 'ব্রিক দেখাও'
+  penBricks: 'রাজহংসী ব্রিক'
+  dataBricks: 'ডেটা ব্রিক'
+  specialBricks: 'Special Bricks'
+codeStatistics:
+  title: "Code Statistics"
+  error: "Code Statistics can't be displayed."
+  general: 'General'
+  bricks: 'ব্রিক'
+  eventBricks: 'ঘটনা'
+  controlBricks: 'নিয়ন্ত্রণ'
+  motionBricks: 'গতি'
+  soundBricks: 'শব্দ'
+  looksBricks: 'চেহারা'
+  penBricks: 'কলম'
+  dataBricks: 'তথ্য'
+  specialBricks: 'Special'
+footer:
+  language: ভাষা
+  usefulLinks: উপকারী লিংক
+  legalities: বৈধতা
+  communityStats: সম্প্রদায় পরিসংখ্যান
+  download: অ্যাপ্লিকেশনটি পান
+privacy-policy:
+  header: গোপনীয়তার নীতি
+  version: Version 2.2, 17 October 2019
+  text1: আপনাকে আমাদের পরিষেবা এবং অ্যাকাউন্টের সমস্ত সুবিধা দেওয়ার জন্য আপনার কাছ থেকে নির্দিষ্ট ডেটা সংগ্রহ করা প্রয়োজন।
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: আমাদের সিস্টেমগুলিতে একটি অ্যাকাউন্ট তৈরি এবং ব্যবহার করতে এবং প্রতি ইমেল অনুসারে আপনার অ্যাকাউন্ট সম্পর্কে প্রয়োজনীয় পরিবর্তন সম্পর্কে আপনাকে অবহিত করতে, যেমন আমাদের ব্যবহারের শর্তাদি, আমাদের সম্প্রদায়ের নিয়ম বা নীতিমালা আপডেট বা লঙ্ঘন, আমরা আপনার সঞ্চয় করব ব্যবহারকারীর নাম এবং, যদি আপনি ইমেল সরবরাহ করেন তবে আপনার ইমেল ঠিকানা। যদি আপনি গুগল প্লাস বা ফেসবুকের মাধ্যমে আপনার অ্যাকাউন্টটি সংযুক্ত করে থাকেন তবে আমরা অতিরিক্ত এই পরিষেবাগুলিতে আপনার অ্যাকাউন্টের সাথে সংযুক্ত একটি পরিচয় কী সংরক্ষণ করি। আপনি স্পষ্টভাবে আমাদের এটি করার অনুমতি না দিলে আমরা এই ডেটা অন্য কোনও (যেমন, বিপণন) উদ্দেশ্যে ব্যবহার করব না।
+  text4: স্বেচ্ছাসেবীর ভিত্তিতে, আপনি কোন দেশে থাকেন তা আমাদের দিতে আপনার অ্যাকাউন্ট পৃষ্ঠার শেয়ার সাইটের মাধ্যমে। এটি আপনার সর্বজনীন প্রোফাইলে প্রদর্শিত হবে এবং কেবলমাত্র আমাদের পরিসংখ্যান এবং গবেষণা উদ্দেশ্যে ব্যবহার করা হবে।এটি আপনার প্রোফাইল সেটিংসে যে কোনও সময় সরানো যেতে পারে।
+  text5: আপনার প্রোফাইল পৃষ্ঠার https://share.catrob.at/ মাধ্যমে আপনার অ্যাকাউন্ট মুছে ফেলার মাধ্যমে যে কোনও সময় আপনার অ্যাকাউন্টের সাথে সম্পর্কিত ব্যক্তিগত ডেটা ব্যবহার প্রত্যাহার করতে পারেন।আপনার অ্যাকাউন্ট মুছে ফেলার পরেও আপনি প্রদত্ত পরিষেবাগুলি ব্যবহার করতে সক্ষম হবেন, তবে সহযোগিতা না করে উদাঃ, প্রোগ্রামগুলি আপলোড করার মাধ্যমে, মন্তব্য করা বা পছন্দ করার মাধ্যমে।এছাড়া, আপনার অ্যাকাউন্টে লিঙ্কযুক্ত সমস্ত সরবরাহকৃত সামগ্রী, যেমন, আপলোড হওয়া প্রোগ্রাম, মন্তব্যসমূহ, ইত্যাদি মুছে ফেলা হবে।
+  text6: আমাদের পরিষেবাগুলির অপব্যবহার এড়াতে, উদাঃ, ব্যবহারকারীর অবদানের আপলোড বা অবৈধ উদ্দেশ্যে মন্তব্যের মাধ্যমে, ব্যবহারকারীর দ্বারা সৃষ্টি হওয়া সমস্ত পাবলিক ডেটা (আপলোড, মন্তব্য) একটি টাইমস্ট্যাম্প এবং ব্যবহৃত ইন্টারনেট ঠিকানা সহ একত্রে একটি ডাটাবেসে সংরক্ষণ করা হবে।এই ডেটা কোনও সংস্থার দ্বারা ব্যবহৃত বা ফরোয়ার্ড করা হবে না যদি না পর্যাপ্ত অবৈধ পদক্ষেপগুলি যুক্তিসঙ্গতভাবে সন্দেহযুক্ত এবং আনুষ্ঠানিকভাবে অনুমোদিত আইনী সংস্থাগুলি প্রযোজ্য আইনের উপর ভিত্তি করে এটির জন্য অনুরোধ করে। প্রতিটি কেস প্রথমে আমাদের দ্বারা আলাদাভাবে পুঙ্খানুপুঙ্খভাবে পরীক্ষা করা হবে।
+  text7: আপনি মেইলচিম্প সেবা(রকেট সায়েন্স গ্রুপ এলএলসি ডি / বি / একটি মেইলচিম্প, আমেরিকা যুক্তরাষ্ট্র) মাধ্যমে প্রদত্ত https://catrob.at/ নিউজলেটারে স্বেচ্ছায় সাবস্ক্রাইব করতে পারেন ।তারপরে আপনি আপনার সরবরাহিত ইমেল ঠিকানাতে ক্যাটরোব্যাট প্রকল্প এবং এর পরিষেবাদির আপডেট পাবেন। আপনি প্রতিটি নিউজলেটারের ফুটারে "আনসাবস্ক্রাইব" লিঙ্কটি ব্যবহার করে যে কোনও সময় নিউজলেটারটি প্রত্যাহার করতে পারেন।এই নিউজলেটারটি মেইলচিম্প সরবরাহ করেছে যার সাথে আমাদের একটি ডেটা-প্রসেসিং চুক্তি রয়েছে এবং যারা ইইউ জেনারেল ডেটা প্রোডাকশন রেগুলেশন এবং ইইউ-মার্কিন যুক্তরাষ্ট্র "প্রাইভেসি শিল্ড" প্রতিশ্রুতিবদ্ধ।মেইলচিম্পে আরও তথ্যের জন্য দয়া করে মেইলচিম্পের গোপনীয়তা নীতি এবং ব্যবহারের শর্তাদি সন্ধান করুন।
+  text8: সমস্ত পরিষেবাগুলি বিনামূল্যে ওপেন সোর্স ক্যাট্রোব্যাট প্রকল্প দ্বারা সরবরাহ করা হয়  যেটি আন্তর্জাতিক ক্যাট্রোব্যাট অ্যাসোসিয়েশনের অধীনে - ভেরেইন জুর ফার্ডারং ফ্রিয়ার সফটওয়্যার, অস্ট্রিয়া (ইউরোপীয় ইউনিয়ন) গ্রাজে অন্তর্ভুক্ত একটি অলাভজনক এনজিও।আমাদের নীতিগুলি ই ইউ এবং অস্ট্রিয়ান ডেটা সুরক্ষা আইনের (জিডিপিআর) সম্মান দেয়।আমাদের সাথে যোগাযোগ করতে, দয়া করে contact@catrobat.org এ একটি ইমেল প্রেরণ করুন বা যোগাযোগ করুন ক্যাট্রোব্যাট, সি / ও ইনস্টিটিউট অফ সফটওয়্যার টেকনোলজি, গ্রাজ ইউনিভার্সিটি অফ টেকনোলজি, ইনফেল্ডগ্যাস ১৬ বি, এ-৮০১০ গ্রাজ, অস্ট্রিয়া (ইউরোপীয় ইউনিয়ন) )।
+  text9: আপনি যদি ১৪ বছরের কম বয়সী হন তবে এই নীতি অবশ্যই আইনী অভিভাবক (সাধারণত একটি পিতা বা মাতা) দ্বারা গ্রহণ করা উচিত।
+  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  disagree-text: অনুমোদন ছাড়াই আমরা একটি অ্যাকাউন্ট তৈরি করতে পারি না তবে মূল বৈশিষ্ট্যগুলি এখনও অ্যাক্সেসযোগ্য।
+catro-notifications:
+  markAsRead: "পড়ার জন্য চিহ্নিত করুন"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
+  comment:
+    message: 'User %user_link% commented on your project %program_link%.'
+  like:
+    message: 'User %user_link% reacted to your project %program_link%.'
+  follow:
+    message: 'ব্যবহারকারী %user_link% আপনাকে এখন অনুসরণ করে।'
+  program-upload:
+    message: 'User %user_link% created a new Project %program_link%'
+  remix:
+    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+clipboard:
+  success: Link to project copied to clipboard!
+  fail: ক্লিপবোর্ডে কপি করা যায় নি
+next: পরবর্তী
+previous: পূর্ববর্তী
+media-packages:
+  title: মিডিয়া-প্যাকেজগুলি
+  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  thumb-size:
+    description: পূর্বরূপ আকার
+    sm: ছোট
+    md: মাঝারি
+    lg: বড়
+  theme-special: "%flavor% থিম বিশেষ"
+  search-results: Media library search results
+  no-results: Your search returned 0 results. Please use only English search terms.
+  download_these_files: save
+flavor:
+  pocketcode: পকেট কোড
+  pocketalice: পকেট এলিস
+  pocketgalaxy: গ্যালাক্সি জাম
+  phirocode: ফিরো কোড
+  luna: লুনা এবং বিড়াল
+  create@school: তৈরি করুন @ স্কুল
+copyright: 'কপিরাইট এবং অনুলিপি %year% <a href="http://www.catrobat.org"> ক্যাট্রোব্যাট </a>। সর্বস্বত্ব সংরক্ষিত.'
+agree: একমত
+disagree: রাজি না
+profileLoader:
+  noProfiles: বর্তমানে কোন প্রোফাইল নেই।
+element: 'Element'
+elements: 'Elements'
+share:
+  text: 'Share'
+  error: 'Share failed'
+  success: 'Share successful'
+copy: 'Copy link'
+checkOutProject: 'Check out this project:'
+community: 'ক্যাট্রোব্যাট সম্প্রদায়'
+back_to_app: 'Exit community'
