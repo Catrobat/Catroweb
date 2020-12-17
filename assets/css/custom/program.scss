@@ -100,8 +100,8 @@
     $like-detail-padding: 0.5rem;
     $like-detail-button-size: 2.4rem;
     $like-detail-triangle-width: 2rem;
-    $like-detail-triangle-height: $like-detail-triangle-width/1.38;
-    $like-detail-triangle-left: $like-button-size/2 - $like-detail-left;
+    $like-detail-triangle-height: $like-detail-triangle-width / 1.38;
+    $like-detail-triangle-left: $like-button-size / 2 - $like-detail-left;
     position: absolute;
     top: -$like-detail-button-size - 2 * $like-detail-padding - $like-detail-triangle-height;
     left: $like-detail-left;
@@ -197,7 +197,7 @@ table td:nth-child(1) {
   margin: -125px 0 0 -160px;
   font-size: 15px;
   text-align: center;
-  background-color: floralwhite;
+  background-color: $white;
   border: none;
 }
 
@@ -207,7 +207,7 @@ table td:nth-child(1) {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: $black;
   opacity: 0.5;
 }
 
@@ -243,8 +243,10 @@ table td:nth-child(1) {
 }
 
 .usr-name {
-  display: inline-block;
+  display: block;
   float: left;
+  padding-right: 1em;
+  font-weight: $font-weight-bold;
 }
 
 .comment-text {
@@ -264,19 +266,12 @@ table td:nth-child(1) {
   }
 }
 
-.usr-name {
-  display: block;
-  padding-right: 1em;
-  font-weight: bold;
-}
-
-
 input[type="number"] {
   box-sizing: border-box;
   -moz-appearance: textfield;
 }
-.pc-startButton,
-.pc-startButton:active {
+.pc-start-button,
+.pc-start-button:active {
   position: absolute;
   top: 0;
   left: 0;
@@ -292,7 +287,7 @@ input[type="number"] {
   fill: #a9dcf1;
 }
 
-.pc-startButton svg {
+.pc-start-button svg {
   position: absolute;
   top: 25%;
   left: 25%;
@@ -302,17 +297,17 @@ input[type="number"] {
   margin: 0;
 }
 
-.pc-startButton:hover {
+.pc-start-button:hover {
   fill: #fff;
 }
 
-.pc-startButton:active {
+.pc-start-button:active {
   padding: 0;
   margin: 0;
   fill: #17a5b8;
 }
 
-.pc-startButton:disabled {
+.pc-start-button:disabled {
   cursor: default;
   fill: #a5a5a5;
 }

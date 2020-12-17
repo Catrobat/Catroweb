@@ -36,7 +36,6 @@
   border-width: 3px;
 }
 
-
 /* LABEL ======================================= */
 
 .group label {
@@ -44,7 +43,7 @@
   top: 20px;
   left: 5px;
   font-size: 18px;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   color: rgba($primary, 0.5);
   pointer-events: none;
   -moz-transition: 0.2s ease all;
@@ -97,8 +96,6 @@ input:valid ~ label {
 .group input:focus ~ .bar::after {
   width: 50%;
 }
-
-
 
 /* HIGHLIGHTER ================================== */
 
@@ -166,7 +163,6 @@ input:valid ~ label {
   opacity: 1.1;
 } */
 
-
 #_submit {
   width: 100%;
 }
@@ -206,7 +202,7 @@ hr {
   background: $default-border-color;
   border: 3px solid $default-border-color;
   color: #FFFFFF;
-  font-weight: bold;
+  font-weight: $font-weight-bold;
 }
 
 .align_start {

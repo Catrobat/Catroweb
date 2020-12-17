@@ -101,7 +101,7 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
         mediafileContainer.append($('<div class="name" />').text(name))
         mediafileContainer.append($('<i class="checkbox material-icons">check_circle</i>'))
-        mediafileContainer.addClass('showName')
+        mediafileContainer.addClass('show-name')
 
         const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
         let audio, previewBtn, image
@@ -224,7 +224,7 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
             image.attr('title', file.name)
             image.attr('alt', file.name)
             image.on('error', function () {
-              mediafileContainer.addClass('showName')
+              mediafileContainer.addClass('show-name')
 
               const pictureExtensions = ['bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu', 'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx', 'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd']
               image.remove()
@@ -234,7 +234,7 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
               }
               mediafileContainer.prepend($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
             })
-            mediafileContainer.removeClass('showName')
+            mediafileContainer.removeClass('show-name')
             mediafileContainer.append(image)
             break
         }

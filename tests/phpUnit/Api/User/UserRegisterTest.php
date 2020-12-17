@@ -86,7 +86,7 @@ class UserRegisterTest extends WebTestCase
     $data = $client->getResponse()->getContent();
     $this->assertJsonStringEqualsJsonString($data, '{"email": "Email already in use","username": "Username already in use"}');
 
-    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT_LANGUAGE' => 'de'], '{"dry-run" : true, "email" : "test@test.at", "username" : "Testuser", "password" : "1234567"}');
+    $client->request('POST', '/api/user', [], [], ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT_LANGUAGE' => 'de_DE'], '{"dry-run" : true, "email" : "test@test.at", "username" : "Testuser", "password" : "1234567"}');
     $this->assertResponseStatusCodeSame(422);
     $data = $client->getResponse()->getContent();
     $this->assertJsonStringEqualsJsonString($data, '{"email": "EMail wird bereits benützt","username": "Benutzername wird bereits benützt"}');

@@ -89,6 +89,7 @@ services:
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
       - ./../webpack.config.js:/var/www/catroweb/webpack.config.js
+      - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
 
       # Sharing npm package files is not working (at least on windows) - feel free to try it out on any other OS
 #      - ./../package.json:/var/www/catroweb/package.json

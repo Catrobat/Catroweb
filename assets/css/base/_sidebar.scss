@@ -68,52 +68,6 @@ $sidebar-width: 250px;
     overflow: hidden;
   }
 
-  #notifications-dropdown-toggler {
-    display: flex;
-    flex-direction: row;
-    justify-items: flex-start;
-
-    #notifications-dropdown-arrow,
-    .badge-pill {
-      margin-left: 0.25rem;
-    }
-
-    #notifications-dropdown-arrow {
-      width: 2rem;
-      text-align: center;
-    }
-
-    .badge-pill {
-      display: none;
-      align-self: baseline;
-    }
-  }
-
-  #notifications-dropdown-content {
-    overflow: hidden;
-    transition: height 0.4s ease-out;
-
-    &:not(.shown) {
-      height: 0;
-    }
-
-    > .nav-link {
-      display: flex;
-      flex-direction: row;
-      padding-left: 1.7rem;
-      justify-items: flex-start;
-
-      .badge-pill {
-        display: none;
-        align-self: baseline;
-        padding-right: 0.5em;
-        padding-left: 0.5em;
-        margin-left: 0.25rem;
-        font-size: 1rem;
-      }
-    }
-  }
-
   @include media-breakpoint-up(md) {
     &:not(.inactive) {
       left: 0;
@@ -122,8 +76,7 @@ $sidebar-width: 250px;
 }
 
 @include media-breakpoint-up(md) {
-  // stylelint-disable-next-line selector-no-qualifying-type
-  body.new-nav {
+  .new-nav {
     .body-content {
       padding-left: 15px + $sidebar-width;
     }
@@ -136,7 +89,6 @@ $sidebar-width: 250px;
       left: $sidebar-width;
       width: calc(100vw - #{$sidebar-width});
     }
-
   }
 }
 

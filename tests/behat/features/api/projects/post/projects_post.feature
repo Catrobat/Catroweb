@@ -85,7 +85,7 @@ Feature: Uploading a project
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de-de"
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a parameter "checksum" with value "5A136BCF4179C875F61BD7505A1A63F6"
     And I have a broken Catrobat file, API version 2
     And I request "POST" "/api/projects"
