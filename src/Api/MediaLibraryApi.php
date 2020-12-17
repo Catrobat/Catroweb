@@ -43,7 +43,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesSearchGet(string $query, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
+  public function mediaFilesSearchGet(string $query, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
@@ -58,7 +58,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
+  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
@@ -119,7 +119,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFileIdGet(int $id, &$responseCode, array &$responseHeaders)
+  public function mediaFileIdGet(int $id, &$responseCode = null, array &$responseHeaders = null)
   {
     $media_package_file = $this->entity_manager->getRepository(MediaPackageFile::class)
       ->findOneBy(['id' => $id])
@@ -140,7 +140,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
