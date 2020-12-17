@@ -34,7 +34,7 @@ Feature: Get most downloaded projects
 
   Scenario: Get most download projects in german and limit = 1
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I request "GET" "/api/projects/?category=most_downloaded&limit=1"
     Then the response status code should be "200"
     Then the response should have the projects model structure
@@ -58,7 +58,7 @@ Feature: Get most downloaded projects
 
   Scenario: Get most download projects in french with max_version = 0.982
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "fr"
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "fr_FR"
     And I request "GET" "/api/projects/?category=most_downloaded&max_version=0.982"
     Then the response status code should be "200"
     Then the response should have the projects model structure

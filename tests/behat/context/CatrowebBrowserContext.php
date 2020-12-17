@@ -465,7 +465,7 @@ class CatrowebBrowserContext extends BrowserContext
         break;
 
       case 'Deutsch':
-        $this->assertSession()->cookieEquals('hl', 'de');
+        $this->assertSession()->cookieEquals('hl', 'de_DE');
         break;
 
       default:
@@ -485,13 +485,13 @@ class CatrowebBrowserContext extends BrowserContext
         $this->getSession()->setCookie('hl', 'en');
         break;
       case 'Deutsch':
-        $this->getSession()->setCookie('hl', 'de');
+        $this->getSession()->setCookie('hl', 'de_DE');
         break;
       case 'Russisch':
-        $this->getSession()->setCookie('hl', 'ru');
+        $this->getSession()->setCookie('hl', 'ru_RU');
         break;
       case 'French':
-        $this->getSession()->setCookie('hl', 'fr');
+        $this->getSession()->setCookie('hl', 'fr_FR');
         break;
       default:
         Assert::assertTrue(false);

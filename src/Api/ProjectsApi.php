@@ -107,7 +107,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(?string $platform, ?string $max_version, ?int $limit, ?int $offset, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -140,7 +140,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsGet(string $category, ?string $accept_language, ?string $max_version, ?int $limit, ?int $offset, ?string $flavor, &$responseCode, array &$responseHeaders)
+  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -166,14 +166,14 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language, ?string $max_version, ?int $limit, ?int $offset, ?string $flavor, &$responseCode, array &$responseHeaders)
+  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
   }
 
   /**
    * {@inheritdoc}
    */
-  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language, ?string $flavor, ?bool $private, &$responseCode, array &$responseHeaders)
+  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
     $private = $private ?? false;
@@ -240,7 +240,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsSearchGet(string $query, ?string $max_version, ?int $limit, ?int $offset, ?string $flavor, &$responseCode, array &$responseHeaders)
+  public function projectsSearchGet(string $query, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -263,7 +263,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsUserGet(?string $max_version, ?int $limit, ?int $offset, ?string $flavor, &$responseCode, array &$responseHeaders)
+  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -288,7 +288,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsUserIdGet(string $id, ?string $max_version, ?int $limit, ?int $offset, ?string $flavor, &$responseCode, array &$responseHeaders)
+  public function projectsUserIdGet(string $id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);

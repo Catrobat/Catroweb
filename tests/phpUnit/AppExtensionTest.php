@@ -25,25 +25,23 @@ class AppExtensionTest extends TestCase
     $this->translationPath = __DIR__.'/../../translations';
   }
 
-  /**
-   * @test
-   */
-  public function arrayMustContainFourLanguages(): void
+  public function testLanguageOptions(): void
   {
-    $short = 'de';
+    $short = 'de_DE';
 
     $appExtension = $this->createAppExtension($short);
-    $list = $appExtension->getLanguageOptions();
+    $language_options = $appExtension->getLanguageOptions();
 
-    // Currently we have over 100 languages and dialects
-    $this->assertGreaterThanOrEqual(100, count($list));
+    // Currently we have over 65 languages and dialects
+    $this->assertGreaterThanOrEqual(65, count($language_options));
 
-    $this->assertTrue($this->inArray('Deutsch', $list));
-    $this->assertTrue($this->inArray('English', $list));
-    $this->assertTrue($this->inArray('italiano', $list));
-    $this->assertTrue($this->inArray('polski', $list));
-    $this->assertTrue($this->inArray('English (Canada)', $list));
-    $this->assertTrue($this->isSelected($short, $list));
+    $this->assertFalse($this->inArray('Deutsch', $language_options));
+    $this->assertTrue($this->inArray('Deutsch (Deutschland)', $language_options));
+    $this->assertTrue($this->inArray('italiano (Italia)', $language_options));
+    $this->assertTrue($this->inArray('polski (Polska)', $language_options));
+    $this->assertTrue($this->inArray('English (Canada)', $language_options));
+    $this->assertTrue($this->inArray('English (United Kingdom)', $language_options));
+    $this->assertTrue($this->isSelected($short, $language_options));
   }
 
   /**

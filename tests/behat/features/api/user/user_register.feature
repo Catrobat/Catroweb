@@ -133,7 +133,7 @@ Feature: Registering a new user.
         "password": "1234567"
       }
     """
-    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/user"
@@ -260,7 +260,7 @@ Feature: Registering a new user.
         "username": "Catroweb",
       }
     """
-    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I request "POST" "/api/user"
     Then the response status code should be "400"
