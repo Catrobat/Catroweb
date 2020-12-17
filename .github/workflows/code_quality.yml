@@ -163,9 +163,9 @@ jobs:
 
       # Only install packages if there is no cache hit
       - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
-      - run: bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes --verbose --format=txt
+      - run: PHP_CS_FIXER_IGNORE_ENV=1 php bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes --verbose --format=txt
   #
   # PhpStan:
   #
@@ -207,7 +207,7 @@ jobs:
 
       # Only install packages if there is no cache hit
       - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - run: bin/phpstan analyze
   #
@@ -251,7 +251,7 @@ jobs:
 
       # Only install packages if there is no cache hit
       - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - run: bin/psalm
   #
@@ -306,7 +306,7 @@ jobs:
 
       # Only install packages if there is no cache hit
       - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - run: bin/phpcf src tests
   #
@@ -360,7 +360,7 @@ jobs:
 
       # Only install packages if there is no cache hit
       - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - run: bin/console lint:twig templates/
 
@@ -400,7 +400,7 @@ jobs:
 
       # Only install packages if there is no cache hit
       - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - run: bin/console lint:yaml translations/ config/ .github/ docker/ behat.yml.dist .eslintrc.yml
 
@@ -441,6 +441,6 @@ jobs:
 
       # Only install packages if there is no cache hit
       - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - run: bin/console lint:container

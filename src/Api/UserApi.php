@@ -65,7 +65,7 @@ class UserApi implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userPost(RegisterRequest $register_request, string $accept_language = null, &$responseCode, array &$responseHeaders)
+  public function userPost(RegisterRequest $register_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
@@ -158,7 +158,7 @@ class UserApi implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode, array &$responseHeaders)
+  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
@@ -184,7 +184,7 @@ class UserApi implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
+  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
