@@ -457,18 +457,22 @@ failure:
 api:
   registerUser:
     emailMissing: 'E-mail не введен'
+    emailEmpty: 'Данные адреса эл. почты должны быть заполнены'
     emailInvalid: 'Email не верный'
     emailAlreadyInUse: 'Этот email уже используется'
     usernameMissing: 'Отсутствует имя пользователя'
     usernameTooShort: 'Имя пользователя слишком короткое'
     usernameTooLong: 'Имя пользователя слишком длинное'
+    usernameEmpty: 'Имя пользователя не может быть пустым'
     usernameAlreadyInUse: 'Имя пользователя уже используется'
     usernameInvalid: 'Неверное имя пользователя'
     passwordMissing: 'Пароль отсутствует'
+    passwordEmpty: 'Пароль не может быть пустым'
     passwordTooShort: 'Пароль слишком короткий!'
     passwordTooLong: 'Пароль слишком длинный'
     passwordInvalidChars: 'Пароль содержит недопустимые символы'
     usernameContainsEmail: "Имя пользователя не должно содержать адрес электронной почты."
+    countryCodeInvalid: "Неверный код страны"
   projectsPost:
     invalid_checksum: 'Неверная контрольная сумма. Попробуйте загрузить снова!'
     upload_error: 'Ошибка при загрузке. Попробуйте еще раз!'

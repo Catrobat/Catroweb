@@ -455,18 +455,22 @@ failure:
 api:
   registerUser:
     emailMissing: 'Email nedostaje'
+    emailEmpty: 'Email cannot be empty'
     emailInvalid: 'Email invalid'
     emailAlreadyInUse: 'Email adresa je već u sistemu'
     usernameMissing: 'Korisničko ime nedostaje'
     usernameTooShort: 'Korisničko ime je prekratko'
     usernameTooLong: 'Korisničko ime je predugačko'
+    usernameEmpty: 'Username cannot be empty'
     usernameAlreadyInUse: 'Korisničko ime već postoji'
     usernameInvalid: 'Username invalid'
     passwordMissing: 'Lozinka nedostaje'
+    passwordEmpty: 'Password cannot be empty'
     passwordTooShort: 'Lozinka jе prеvišе kratka'
     passwordTooLong: 'Lozinka jе prеvišе dugačka'
     passwordInvalidChars: 'Lozinka sadrži nevažeće znakove'
     usernameContainsEmail: "Korisničko ime ne sme da sadrži e-mail adresu"
+    countryCodeInvalid: "Country code invalid"
   projectsPost:
     invalid_checksum: 'Nevažeća kontrolna suma. Pokušajte sa otpremanjem ponovo!'
     upload_error: 'Greška prilikom prenošenja. Pokušajte sa otpremanjem ponovo!'

@@ -451,18 +451,22 @@ failure:
 api:
   registerUser:
     emailMissing: 'Email missing'
+    emailEmpty: 'Email cannot be empty'
     emailInvalid: 'Email invalid'
     emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
+    usernameEmpty: 'Username cannot be empty'
     usernameAlreadyInUse: 'Username already in use'
     usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
+    passwordEmpty: 'Password cannot be empty'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
     usernameContainsEmail: "Username must not contain an email address"
+    countryCodeInvalid: "Country code invalid"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -629,18 +633,18 @@ catro-notifications:
   like:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% indi sizi izləyir.'
   program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+    message: '%user_link% yeni bir %program_link% oyununu yaratdı.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Link to project copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: Layihədə keçid bağlantısı kopyalandı!
+  fail: Bağlantı kopyalanmadı! :(
+next: Növbəti
+previous: Əvvəlki
 media-packages:
-  title: Media-Packages
+  title: Media Paketləri
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: Preview size

@@ -450,18 +450,22 @@ failure:
 api:
   registerUser:
     emailMissing: 'Email faltando'
+    emailEmpty: 'O e-mail não pode estar em branco'
     emailInvalid: 'Email invalid'
     emailAlreadyInUse: 'E-mail já em uso'
     usernameMissing: 'Usuário ausente'
     usernameTooShort: 'Nome de usuário muito curto'
     usernameTooLong: 'Nome de usuário muito longo'
+    usernameEmpty: 'O nome de usuário não pode ficar vazio.'
     usernameAlreadyInUse: 'Nome de usuário já está em uso'
     usernameInvalid: 'Nome de usuário inválido'
     passwordMissing: 'Senha ausente'
+    passwordEmpty: 'A senha não pode estar vazia'
     passwordTooShort: 'Senha muito curta'
     passwordTooLong: 'Senha muito longa'
     passwordInvalidChars: 'A senha contém caracteres inválidos'
     usernameContainsEmail: "O nome de usuário não pode conter um endereço de e-mail"
+    countryCodeInvalid: "Código do país inválido"
   projectsPost:
     invalid_checksum: 'Checksum inválido. Tente fazer upload novamente!'
     upload_error: 'Erro ao enviar. Tente enviar novamente!'

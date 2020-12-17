@@ -456,18 +456,22 @@ failure:
 api:
   registerUser:
     emailMissing: 'ไม่พบอีเมล'
+    emailEmpty: 'จำเป็นต้องใส่อีเมล์'
     emailInvalid: 'อีเมลไม่ถูกต้อง'
     emailAlreadyInUse: 'อีเมลถูกใช้งานแล้ว'
     usernameMissing: 'ไม่พบชื่อผู้ใช้'
     usernameTooShort: 'ชื่อผู้ใช้สั้นเกินไป'
     usernameTooLong: 'ชื่อผู้ใช้ยาวเกินไป'
+    usernameEmpty: 'จำเป็นต้องใส่ชื่อผู้ใช้'
     usernameAlreadyInUse: 'ชื่อผู้ใช้ถูกใช้แล้ว'
     usernameInvalid: 'ชื่อผู้ใช้ไม่ถูกต้อง'
     passwordMissing: 'ไม่พบรหัสผ่าน'
+    passwordEmpty: 'จำเป็นต้องใส่รหัสผ่าน'
     passwordTooShort: 'รหัสผ่านสั้นเกินไป'
     passwordTooLong: 'รหัสผ่านยาวเกินไป'
     passwordInvalidChars: 'รหัสผ่านมีตัวอักษรที่ไม่รับรอง'
     usernameContainsEmail: "ไม่สามารถใช้อีเมลเป็นชื่อผู้ใช้"
+    countryCodeInvalid: "ประเทศไม่ถูกต้อง"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'เกิดข้อผิดพลาดระหว่างทำการอัปโหลด กรุณาลองใหม่อีกครั้ง'

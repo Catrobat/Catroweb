@@ -1,41 +1,41 @@
 ---
 #homepage translation
-localLanguage: English
-username: Username
-password: Password
+localLanguage: ඉංග්‍රීසි
+username: පරිශීලක නාමය
+password: මුරපදය
 createNewPassword: Create new password
-accountSettings: Account Settings
-email: E-Mail
+accountSettings: ගිණුමේ සැකසුම්
+email: විද්‍යුත් තැපෑල
 aboutPocketCode: About Pocket Code
 about: About
-education: Education
+education: අධ්‍යාපනය
 chat: Chat and forums
 others: Others
-tutorials: Tutorials
-googlePlay: Google Play
-iosAppStore: IOS App store
+tutorials: උපකාර
+googlePlay: ගූගල් ප්ලේ ස්ටෝර්
+iosAppStore: අයිඕඑස් ඇප් ස්ටෝර්
 huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
+error: දෝෂය
+cancel: අවලංගු කරන්න
 report: Report
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download
+download: බාගන්න
 description: Description
 noDescription: No description available.
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Country
+country: රට
 loginText: login
 privacyPolicy: Privacy Policy
 imprint: Imprint
-programDetails: Details
+programDetails: විස්තර
 somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
+pleaseTryAgain: 'කරුණාකර නැවත උත්සාහ කරන්න!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
@@ -56,10 +56,10 @@ wellDone: "Well done!"
 done: "Done!"
 notificationsReadMessage: "It looks like you dont have any notifications."
 confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
+cancelMessage: "අවලංගු කරන්න"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "කරුණාකර රැඳෙන්න..."
 projects: "Projects"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
@@ -137,10 +137,10 @@ programs:
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  uploaded: උඩුගත කළ ව්‍යාපෘති
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'කැට්‍රොබැට් භාෂා අනුවාදය: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Enter a reason
@@ -151,7 +151,7 @@ programs:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
-  updateAppHeader: Update App
+  updateAppHeader: යෙදුම යාවත්කාල කරන්න
   updateAppText: Please update your app to the newest version to be able to download this project.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
@@ -166,9 +166,9 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project Description
-  saveDescription: Save Description change
+  saveDescription: සුරකින්න
   editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  saveCredits: සුරකින්න
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -279,7 +279,7 @@ myprofile:
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: E-Mail
+  email: විද්‍යුත් තැපෑල
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
@@ -343,7 +343,7 @@ search:
   dotdotdot: Search...
   search: Search
   inMediaLib: Search in media library
-  results: Search Results
+  results: සෙවුම් ප්‍රතිඵල
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
@@ -451,18 +451,22 @@ failure:
 api:
   registerUser:
     emailMissing: 'Email missing'
+    emailEmpty: 'Email cannot be empty'
     emailInvalid: 'Email invalid'
     emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
+    usernameEmpty: 'Username cannot be empty'
     usernameAlreadyInUse: 'Username already in use'
     usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
+    passwordEmpty: 'Password cannot be empty'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
     usernameContainsEmail: "Username must not contain an email address"
+    countryCodeInvalid: "Country code invalid"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'

@@ -441,18 +441,22 @@ failure:
 api:
   registerUser:
     emailMissing: 'E-posta eksik'
+    emailEmpty: 'E-posta boş olamaz'
     emailInvalid: 'E-posta geçersiz'
     emailAlreadyInUse: 'E-posta zaten kullanılıyor'
     usernameMissing: 'Kullanıcı adı eksik'
     usernameTooShort: 'Kullanıcı adı çok kısa'
     usernameTooLong: 'Kullanıcı adı çok uzun'
+    usernameEmpty: 'Kullanıcı adı boş olamaz'
     usernameAlreadyInUse: 'Kullanıcı adı zaten kullanımda'
     usernameInvalid: 'Kullanıcı adı geçersiz'
     passwordMissing: 'Şifre eksik'
+    passwordEmpty: 'Şifre boş olamaz'
     passwordTooShort: 'Şifre çok kısa'
     passwordTooLong: 'Şifre çok uzun'
     passwordInvalidChars: 'Şifre geçersiz karakterler içeriyor'
     usernameContainsEmail: "Kullanıcı adı bir e-posta adresi içermemelidir"
+    countryCodeInvalid: "Ülke kodu geçersiz"
   projectsPost:
     invalid_checksum: 'Geçersiz sağlama toplamı. Tekrar yüklemeyi deneyin!'
     upload_error: 'Yüklenirken hata oluştu. Tekrar yüklemeyi deneyin!'
