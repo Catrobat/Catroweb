@@ -3866,16 +3866,16 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.10.3",
+            "version": "v2.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "1bc35b61963760007928de310ba408bfaa8bbd45"
+                "reference": "f6c0d9a2816b52e759ed1ba0658b45786b58fdf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/1bc35b61963760007928de310ba408bfaa8bbd45",
-                "reference": "1bc35b61963760007928de310ba408bfaa8bbd45",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/f6c0d9a2816b52e759ed1ba0658b45786b58fdf7",
+                "reference": "f6c0d9a2816b52e759ed1ba0658b45786b58fdf7",
                 "shasum": ""
             },
             "require": {
@@ -3960,15 +3960,19 @@
             ],
             "support": {
                 "issues": "https://github.com/lexik/LexikJWTAuthenticationBundle/issues",
-                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.10.3"
+                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.10.5"
             },
             "funding": [
                 {
                     "url": "https://github.com/chalasr",
                     "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/lexik/jwt-authentication-bundle",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2020-11-30T21:54:02+00:00"
+            "time": "2020-12-19T18:27:01+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8923,22 +8927,22 @@
         },
         {
             "name": "symfony/inflector",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
-                "reference": "ba33a08d608c5b26ef768b6652876098dd3ace36"
+                "reference": "e529917d701a057a12354845150be3e1c4b34084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/inflector/zipball/ba33a08d608c5b26ef768b6652876098dd3ace36",
-                "reference": "ba33a08d608c5b26ef768b6652876098dd3ace36",
+                "url": "https://api.github.com/repos/symfony/inflector/zipball/e529917d701a057a12354845150be3e1c4b34084",
+                "reference": "e529917d701a057a12354845150be3e1c4b34084",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/deprecation-contracts": "^2.1",
-                "symfony/string": "^5.1"
+                "symfony/string": "~5.1.10|^5.2.1"
             },
             "type": "library",
             "autoload": {
@@ -8974,7 +8978,7 @@
                 "words"
             ],
             "support": {
-                "source": "https://github.com/symfony/inflector/tree/v5.2.0"
+                "source": "https://github.com/symfony/inflector/tree/v5.2.1"
             },
             "funding": [
                 {
@@ -8990,7 +8994,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:01:57+00:00"
+            "time": "2020-12-01T20:15:15+00:00"
         },
         {
             "name": "symfony/intl",
@@ -10329,16 +10333,16 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "ab8184f093095b40c3e7688bc4eb1d0484da327c"
+                "reference": "439d92bc88fdda717f2c31335e8db41483ca5c8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/ab8184f093095b40c3e7688bc4eb1d0484da327c",
-                "reference": "ab8184f093095b40c3e7688bc4eb1d0484da327c",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/439d92bc88fdda717f2c31335e8db41483ca5c8d",
+                "reference": "439d92bc88fdda717f2c31335e8db41483ca5c8d",
                 "shasum": ""
             },
             "require": {
@@ -10388,7 +10392,7 @@
                 "reflection"
             ],
             "support": {
-                "source": "https://github.com/symfony/property-access/tree/v4.4.17"
+                "source": "https://github.com/symfony/property-access/tree/v4.4.18"
             },
             "funding": [
                 {
@@ -10404,7 +10408,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-31T22:44:29+00:00"
+            "time": "2020-12-10T16:34:26+00:00"
         },
         {
             "name": "symfony/routing",
@@ -10571,16 +10575,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "c48bce60a7b0e9c10f0e6ecdf8c6b6e1afbf6a94"
+                "reference": "3ca01785c1711d5c8dd714d861e900de25fdb753"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/c48bce60a7b0e9c10f0e6ecdf8c6b6e1afbf6a94",
-                "reference": "c48bce60a7b0e9c10f0e6ecdf8c6b6e1afbf6a94",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/3ca01785c1711d5c8dd714d861e900de25fdb753",
+                "reference": "3ca01785c1711d5c8dd714d861e900de25fdb753",
                 "shasum": ""
             },
             "require": {
@@ -10646,7 +10650,7 @@
             "description": "Symfony SecurityBundle",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v4.4.17"
+                "source": "https://github.com/symfony/security-bundle/tree/v4.4.18"
             },
             "funding": [
                 {
@@ -10662,20 +10666,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-31T22:44:29+00:00"
+            "time": "2020-12-18T07:41:31+00:00"
         },
         {
             "name": "symfony/security-core",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-core.git",
-                "reference": "c51efa61a1a9627f5f8fd35d3d5089f561b65bb8"
+                "reference": "4f6cd03ce14a74c1af680becc4c2e417fedf95aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-core/zipball/c51efa61a1a9627f5f8fd35d3d5089f561b65bb8",
-                "reference": "c51efa61a1a9627f5f8fd35d3d5089f561b65bb8",
+                "url": "https://api.github.com/repos/symfony/security-core/zipball/4f6cd03ce14a74c1af680becc4c2e417fedf95aa",
+                "reference": "4f6cd03ce14a74c1af680becc4c2e417fedf95aa",
                 "shasum": ""
             },
             "require": {
@@ -10732,7 +10736,7 @@
             "description": "Symfony Security Component - Core Library",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-core/tree/v4.4.17"
+                "source": "https://github.com/symfony/security-core/tree/v4.4.18"
             },
             "funding": [
                 {
@@ -10748,20 +10752,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-27T08:28:28+00:00"
+            "time": "2020-12-17T16:47:44+00:00"
         },
         {
             "name": "symfony/security-csrf",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-csrf.git",
-                "reference": "53d53bbb5d22ebece3f3ff4b8ec14957cc2ef7e1"
+                "reference": "e8ef12198a5f90117ef223cacbfddb9d46e347d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-csrf/zipball/53d53bbb5d22ebece3f3ff4b8ec14957cc2ef7e1",
-                "reference": "53d53bbb5d22ebece3f3ff4b8ec14957cc2ef7e1",
+                "url": "https://api.github.com/repos/symfony/security-csrf/zipball/e8ef12198a5f90117ef223cacbfddb9d46e347d5",
+                "reference": "e8ef12198a5f90117ef223cacbfddb9d46e347d5",
                 "shasum": ""
             },
             "require": {
@@ -10803,7 +10807,7 @@
             "description": "Symfony Security Component - CSRF Library",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-csrf/tree/v4.4.17"
+                "source": "https://github.com/symfony/security-csrf/tree/v4.4.18"
             },
             "funding": [
                 {
@@ -10819,11 +10823,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-31T22:44:29+00:00"
+            "time": "2020-12-08T16:59:59+00:00"
         },
         {
             "name": "symfony/security-guard",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-guard.git",
@@ -10869,7 +10873,7 @@
             "description": "Symfony Security Component - Guard",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-guard/tree/v4.4.17"
+                "source": "https://github.com/symfony/security-guard/tree/v4.4.18"
             },
             "funding": [
                 {
@@ -10889,16 +10893,16 @@
         },
         {
             "name": "symfony/security-http",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-http.git",
-                "reference": "bc0389c562e99fa7a69110b57aeed6a6c9be7808"
+                "reference": "2d311398b026429c62845e1cd368c893b945f085"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-http/zipball/bc0389c562e99fa7a69110b57aeed6a6c9be7808",
-                "reference": "bc0389c562e99fa7a69110b57aeed6a6c9be7808",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/2d311398b026429c62845e1cd368c893b945f085",
+                "reference": "2d311398b026429c62845e1cd368c893b945f085",
                 "shasum": ""
             },
             "require": {
@@ -10947,7 +10951,7 @@
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-http/tree/v4.4.17"
+                "source": "https://github.com/symfony/security-http/tree/v4.4.18"
             },
             "funding": [
                 {
@@ -10963,7 +10967,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-01T21:34:37+00:00"
+            "time": "2020-12-08T16:59:59+00:00"
         },
         {
             "name": "symfony/serializer",
@@ -11209,16 +11213,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "40e975edadd4e32cd16f3753b3bad65d9ac48242"
+                "reference": "5bd67751d2e3f7d6f770c9154b8fbcb2aa05f7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/40e975edadd4e32cd16f3753b3bad65d9ac48242",
-                "reference": "40e975edadd4e32cd16f3753b3bad65d9ac48242",
+                "url": "https://api.github.com/repos/symfony/string/zipball/5bd67751d2e3f7d6f770c9154b8fbcb2aa05f7ed",
+                "reference": "5bd67751d2e3f7d6f770c9154b8fbcb2aa05f7ed",
                 "shasum": ""
             },
             "require": {
@@ -11272,7 +11276,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.2.0"
+                "source": "https://github.com/symfony/string/tree/v5.2.1"
             },
             "funding": [
                 {
@@ -11288,7 +11292,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:08:07+00:00"
+            "time": "2020-12-05T07:33:16+00:00"
         },
         {
             "name": "symfony/swiftmailer-bundle",
