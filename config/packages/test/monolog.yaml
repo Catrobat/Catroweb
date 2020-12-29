@@ -13,6 +13,7 @@ monolog:
             type:  fingers_crossed
             action_level: error
             handler: nested
+            formatter: monolog.formatter.catrobat_custom_formatter
         nested:
             type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
@@ -25,6 +26,7 @@ monolog:
             level: warning
             max_files: 5
             channels: [upload]
+            formatter: monolog.formatter.catrobat_custom_formatter
 
         download_stats:
             type: rotating_file
@@ -32,6 +34,7 @@ monolog:
             level: debug
             max_files: 5
             channels: [download_stats]
+            formatter: monolog.formatter.catrobat_custom_formatter
 
         console:
             type: console
