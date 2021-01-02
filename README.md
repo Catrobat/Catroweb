@@ -28,7 +28,7 @@ Make sure all tests are passing when creating a pull request,
 ##### Tools integrated in the project:
 
 [![Php-cs-fixer](https://img.shields.io/badge/Php_Code_Style-Php_CS_Fixer-informational.svg)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
-[![PhpStan](https://img.shields.io/badge/Php_Code_Quality-PhpStan,_Psalm,_PhpCF,_PhpCPD_-informational.svg)](https://github.com/phpstan/phpstan)
+[![PhpStan](https://img.shields.io/badge/Php_Code_Quality-PhpStan,_Psalm,_PhpDD,_PhpCPD_-informational.svg)](https://github.com/phpstan/phpstan)
 [![Grunt](https://img.shields.io/badge/Task_Runner-Grunt-orange.svg)](https://gruntjs.com/)
 [![Npm standard](https://img.shields.io/badge/JS_Code_Style-standard-green.svg)](https://standardjs.com)
 [![ESLint](https://img.shields.io/badge/JS_Code_Quality-ESLint-green.svg)](https://eslint.org/)
