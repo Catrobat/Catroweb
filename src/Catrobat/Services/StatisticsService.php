@@ -278,16 +278,7 @@ class StatisticsService
 
     $user = 'anon.' === $session_user ? null : $session_user;
 
-    $this->logger->debug('create click stats for program id: '.$program_id.', ip: '.$ip.
-      ', user agent: '.$user_agent.', referrer: '.$referrer);
-    if (null !== $user)
-    {
-      $this->logger->debug('user: '.$user->getUsername());
-    }
-    else
-    {
-      $this->logger->debug('user: anon.');
-    }
+    $this->logger->debug('create click stats for program id: '.$program_id.', referrer: '.$referrer);
 
     $homepage_click_statistics = new HomepageClickStatistic();
     $homepage_click_statistics->setType($type);
