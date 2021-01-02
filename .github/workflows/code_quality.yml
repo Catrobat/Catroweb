@@ -155,7 +155,7 @@ jobs:
             bin/phpunit
             bin/phpstan
             bin/php-cs-fixer
-            bin/phpcf
+            bin/phpdd
             bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
@@ -199,7 +199,7 @@ jobs:
             bin/phpunit
             bin/phpstan
             bin/php-cs-fixer
-            bin/phpcf
+            bin/phpdd
             bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
@@ -243,7 +243,7 @@ jobs:
             bin/phpunit
             bin/phpstan
             bin/php-cs-fixer
-            bin/phpcf
+            bin/phpdd
             bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
@@ -270,13 +270,13 @@ jobs:
         with:
           args: src tests
   #
-  # phpcf (Php Code Fixer):
+  # phpdd (Php Code Fixer):
   #
   #  - to search issues with deprecated functionality in newer interpreter versions..
   #  - More information at: https://github.com/wapmorgan/PhpDeprecationDetector
   #
-  phpcf:
-    name: PHP Static Analysis [PhpCF]
+  phpdd:
+    name: PHP Static Analysis [Phpdd]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -298,7 +298,7 @@ jobs:
             bin/phpunit
             bin/phpstan
             bin/php-cs-fixer
-            bin/phpcf
+            bin/phpdd
             bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
@@ -308,7 +308,7 @@ jobs:
       - if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress
 
-      - run: bin/phpcf src tests
+      - run: bin/phpdd src tests
   #
   # PhpLoc:
   #
@@ -352,7 +352,7 @@ jobs:
             bin/phpunit
             bin/phpstan
             bin/php-cs-fixer
-            bin/phpcf
+            bin/phpdd
             bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
@@ -392,7 +392,7 @@ jobs:
             bin/phpunit
             bin/phpstan
             bin/php-cs-fixer
-            bin/phpcf
+            bin/phpdd
             bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
@@ -433,7 +433,7 @@ jobs:
             bin/phpunit
             bin/phpstan
             bin/php-cs-fixer
-            bin/phpcf
+            bin/phpdd
             bin/psalm
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
