@@ -116,7 +116,7 @@ class ApiContext implements KernelAwareContext
   private array $user_structure_extended = ['id', 'username', 'email', 'country',
     'projects', 'followers', 'following', ];
 
-  private array $featured_program_structure = ['id', 'name', 'author', 'featured_image'];
+  private array $featured_program_structure = ['id', 'name', 'author', 'project_id', 'project_url', 'featured_image'];
 
   private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
     'author', 'extension', 'download_url', ];
@@ -3253,18 +3253,20 @@ class ApiContext implements KernelAwareContext
   {
     $programs = $this->dataFixturesContext->getFeaturedPrograms();
     $projects = [];
-    /** @var FeaturedProgram $program */
-    foreach ($programs as $program_index => $program)
+    /** @var FeaturedProgram $featured_program */
+    foreach ($programs as $program_index => $featured_program)
     {
-      if (!$this->expectProgram($expected_programs, $program->getProgram()->getName()))
+      if (!$this->expectProgram($expected_programs, $featured_program->getProgram()->getName()))
       {
         continue;
       }
       $result = [
-        'id' => $program->getId(),
-        'name' => $program->getProgram()->getName(),
-        'author' => $program->getProgram()->getUser()->getUserName(),
-        'featured_image' => 'http://localhost/resources_test/featured/featured_'.$program->getId().'.jpg',
+        'id' => $featured_program->getId(),
+        'name' => $featured_program->getProgram()->getName(),
+        'author' => $featured_program->getProgram()->getUser()->getUserName(),
+        'project_id' => $featured_program->getProgram()->getId(),
+        'project_url' => 'http://localhost/app/project/'.$featured_program->getProgram()->getId(),
+        'featured_image' => 'http://localhost/resources_test/featured/featured_'.$featured_program->getId().'.jpg',
       ];
       $projects[] = $result;
     }
@@ -3410,10 +3412,20 @@ class ApiContext implements KernelAwareContext
       {
         Assert::assertIsString($author);
       },
+      'project_id' => function ($project_id)
+      {
+        Assert::assertIsString($project_id);
+        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $project_id, 'project_id');
+      },
+      'project_url' => function ($project_url)
+      {
+        Assert::assertIsString($project_url);
+        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/project\/[a-zA-Z0-9-]+$/', $project_url);
+      },
       'featured_image' => function ($featured_image)
       {
         Assert::assertIsString($featured_image);
-        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.jpg/',
+        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.(jpg|png)/',
           $featured_image);
       },
     ];
