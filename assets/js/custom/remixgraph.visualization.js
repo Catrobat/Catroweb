@@ -3,7 +3,6 @@
 /* global Swal */
 /* global SCRATCH_PROJECT_BASE_URL */
 /* global CATROBAT_NODE_PREFIX */
-/* global SCRATCH_NODE_PREFIX */
 /* global NETWORK_OPTIONS */
 
 // eslint-disable-next-line no-unused-vars
@@ -80,7 +79,7 @@ const _InternalRemixGraph = function () {
     self.relationAncestorMap = networkDescription.relationAncestorMap
     self.backwardEdgeMap = networkDescription.backwardEdgeMap
     self.backwardReverseEdgeMap = networkDescription.backwardReverseEdgeMap
-    self.nodes.update([{ id: CATROBAT_NODE_PREFIX + '_' + self.programID, color: { border: '#FFFF00' } }])
+    self.nodes.update([{ id: CATROBAT_NODE_PREFIX + '_' + self.programID, color: { border: '#00acc1' } }])
     self.network.on('click', self.onClick)
     self.network.on('afterDrawing', function () {
       loadingAnimation.hide()
@@ -103,17 +102,20 @@ const _InternalRemixGraph = function () {
         {
           id: edgeData.from,
           borderWidth: NETWORK_OPTIONS.nodes.borderWidth,
-          color: NETWORK_OPTIONS.nodes.color
+          color: NETWORK_OPTIONS.nodes.color,
+          size: 20
         }
       ])
+      const id = edgeData.to.split('_')[1]
       self.nodes.update([
         {
           id: edgeData.to,
           borderWidth: NETWORK_OPTIONS.nodes.borderWidth,
-          color: NETWORK_OPTIONS.nodes.color
+          color: NETWORK_OPTIONS.nodes.color,
+          size: (id === self.programID) ? 40 : 20
         }
       ])
-      self.edges.update([{ id: edgeData.id, color: NETWORK_OPTIONS.edges.color }])
+      self.edges.update([{ id: edgeData.id, width: 1, color: NETWORK_OPTIONS.edges.color }])
     })
 
     if (selectedNodes.length === 0) {
@@ -240,41 +242,40 @@ const _InternalRemixGraph = function () {
     $('#context-menu').click()
   }
 
-  self.highlightPathEdgesOfSelectedNode = function (nodeId) {
-    self.edges.forEach(function (edgeData) {
-      let isFromIdConnectingAncestorOrDescendant = false
-      let isToIdConnectingAncestorOrDescendant = false
-      const fromId = parseInt(edgeData.from.split('_')[1])
-      const toId = parseInt(edgeData.to.split('_')[1])
-
-      if (edgeData.from.startsWith(CATROBAT_NODE_PREFIX) && edgeData.to.startsWith(CATROBAT_NODE_PREFIX)) {
-        isFromIdConnectingAncestorOrDescendant = (($.inArray(fromId, self.relationAncestorMap[nodeId]) !== -1) || ($.inArray(fromId, self.relationDescendantMap[nodeId]) !== -1))
-        isToIdConnectingAncestorOrDescendant = (($.inArray(toId, self.relationAncestorMap[nodeId]) !== -1) || ($.inArray(toId, self.relationDescendantMap[nodeId]) !== -1))
-      } else if (edgeData.from.startsWith(SCRATCH_NODE_PREFIX) && edgeData.to.startsWith(CATROBAT_NODE_PREFIX)) {
-        isFromIdConnectingAncestorOrDescendant = true
-        isToIdConnectingAncestorOrDescendant = (($.inArray(toId, self.relationAncestorMap[nodeId]) !== -1) || ($.inArray(toId, self.relationDescendantMap[nodeId]) !== -1))
-      }
-
-      if (isFromIdConnectingAncestorOrDescendant && isToIdConnectingAncestorOrDescendant) {
-        self.highlightNode(edgeData.from)
-        self.highlightNode(edgeData.to)
-        self.highlightEdge(edgeData.id)
-      } else {
-        self.unhighlightEdge(edgeData.id)
+  self.highlightPathEdgesOfSelectedNode = function (nodeId, accessMap) {
+    if (!accessMap) {
+      self.dimEdges()
+      accessMap = new Map()
+    }
+    self.edges.forEach(function (edge) {
+      const toId = edge.to.split('_')[1]
+      if (toId === nodeId) {
+        const fromId = edge.from.split('_')[1]
+        self.highlightNode(edge.from)
+        self.highlightNode(edge.to)
+        self.highlightEdge(edge.id)
+        if (!accessMap.has(fromId)) {
+          accessMap.set(fromId, true)
+          self.highlightPathEdgesOfSelectedNode(fromId, accessMap)
+        }
       }
     })
   }
 
+  self.dimEdges = function () {
+    const edgeIds = self.edges.getIds()
+    for (let i = 0; i < edgeIds.length; i++) {
+      self.edges.update([{ id: edgeIds[i], color: { border: '#000000', opacity: 0.5 } }])
+    }
+    self.nodes.update([{ id: CATROBAT_NODE_PREFIX + '_' + self.programID, size: 20 }])
+  }
+
   self.highlightNode = function (nodeId) {
-    self.nodes.update([{ id: nodeId, borderWidth: 9, color: { border: '#FFFF00' } }])
+    self.nodes.update([{ id: nodeId, borderWidth: 7, size: 30, color: { border: '#00acc1' } }])
   }
 
   self.highlightEdge = function (edgeId) {
-    self.edges.update([{ id: edgeId, color: { color: '#FFFF00', opacity: 1.0 } }])
-  }
-
-  self.unhighlightEdge = function (edgeId) {
-    self.edges.update([{ id: edgeId, color: { opacity: 0.05 } }])
+    self.edges.update([{ id: edgeId, width: 3, color: { color: '#00acc1', opacity: 1.0 } }])
   }
 
   self.performClickStatisticRequest = function (recommendedProgramID, isScratchProgram) {
