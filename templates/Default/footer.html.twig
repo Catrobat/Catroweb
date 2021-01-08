@@ -75,25 +75,44 @@
       <div class="row justify-content-between">
         <div class="form-group col-12 col-sm-6">
 
-
           <div class="mdc-select mdc-select--outlined">
             <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
               <span class="mdc-notched-outline">
-              <span class="mdc-notched-outline__leading"></span>
-              <span class="mdc-notched-outline__notch">
-                <span id="outlined-select-label" class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
-              </span>
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                  <span id="outlined-select-label"
+                        class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
+                </span>
                 <span class="mdc-notched-outline__trailing"></span>
               </span>
               <span class="mdc-select__selected-text-container">
                 <span id="demo-selected-text" class="mdc-select__selected-text"></span>
               </span>
+              <span class="mdc-select__dropdown-icon">
+                <svg
+                    class="mdc-select__dropdown-icon-graphic"
+                    viewBox="7 10 10 5" focusable="false">
+                  <polygon
+                      class="mdc-select__dropdown-icon-inactive"
+                      stroke="none"
+                      fill-rule="evenodd"
+                      points="7 10 12 15 17 10">
+                  </polygon>
+                  <polygon
+                      class="mdc-select__dropdown-icon-active"
+                      stroke="none"
+                      fill-rule="evenodd"
+                      points="7 15 12 10 17 15">
+                  </polygon>
+                </svg>
+               </span>
             </div>
             <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
               <ul class="mdc-list" role="listbox">
                 {% set countries = getLanguageOptions() %}
                 {% for country in countries %}
-                  <li class="mdc-list-item" data-value={{ country[0] }} {% if country[2] %}selected{% endif %} role="option">
+                  <li class="mdc-list-item" data-value={{ country[0] }} {% if country[2] %}selected{% endif %}
+                      role="option">
                     <span class="mdc-list-item__ripple"></span>
                     <span class="mdc-list-item__text">
                     {{ country[1] }}

@@ -18,7 +18,6 @@ const Main = function () {
   $(window).ready(function () {
     self.setClickListener()
     self.initSidebarSwipe()
-    self.setLanguageSwitchListener()
   })
 
   // ---- History State

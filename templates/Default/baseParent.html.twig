@@ -29,6 +29,8 @@
     }
   %}
 
+  {% include 'Default/snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
+
   {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
   <div class="container body-content mb-5" style="margin-top: 6em">

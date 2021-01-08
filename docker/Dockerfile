@@ -108,4 +108,6 @@ RUN sh docker/app/prepare-test-env.sh
 # (Re-)compile public css/js files
 RUN grunt
 
+RUN npm run encore dev
+
 EXPOSE 80
