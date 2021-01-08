@@ -265,7 +265,7 @@ function loadThemesFromSymfonyParameters () {
 
   // load the yaml file
   try {
-    const themeConfig = yaml.safeLoad(
+    const themeConfig = yaml.load(
       fs.readFileSync('config/packages/themes.yaml', 'utf8')
     )
     const flavors = themeConfig.parameters.flavors
