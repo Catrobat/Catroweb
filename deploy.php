@@ -121,6 +121,10 @@ task('deploy:grunt', function () {
   cd('{{release_path}}');
   run('grunt');
 });
+task('deploy:encore', function () {
+  cd('{{release_path}}');
+  run('npm run encore dev');
+});
 
 task('deploy:jwt', function () {
   cd('{{release_path}}');
@@ -150,6 +154,7 @@ task('deploy', [
   'database:migrate',
   'install:npm',
   'deploy:grunt',
+  'deploy:encore',
   'deploy:jwt',
   'restart:nginx',
   'restart:php-fpm',
