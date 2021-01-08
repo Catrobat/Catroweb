@@ -161,6 +161,7 @@
         {{ logged_in }}
     )
   </script>
+  {{ encore_entry_script_tags('report') }}
   <script src="{{ asset('js/ProgramComments.min.js') }}"></script>
   <script>
     new ProgramComments('{{ program_details.id }}', 5, 5, 5, {{ (program_details.comments|length) }},

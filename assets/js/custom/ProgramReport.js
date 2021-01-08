@@ -163,29 +163,59 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
         break
     }
 
-    return '<div class="text-left">' +
-      '<div class="radio-item">' +
-      '<input type="radio" id="report-inappropriate" name="report-category" value="' +
-      INAPPROPRIATE_VALUE + '" ' + checkedInappropriate + '>' +
-      '<label for="report-inappropriate">' + inappropriateLabel + '</label>' +
+    return '<div class="mdc-form-field">' +
+      ' <div class="mdc-radio">' +
+      '   <input class="mdc-radio__native-control" type="radio" style="--checked-stroke-color(red)" id="report-inappropriate" name="report-category" value="' + INAPPROPRIATE_VALUE + '" ' + checkedInappropriate + '>' +
+      '   <div class="mdc-radio__background">' +
+      '     <div class="mdc-radio__outer-circle"></div>' +
+      '     <div class="mdc-radio__inner-circle"></div>' +
+      '   </div>' +
+      '   <div class="mdc-radio__ripple"></div>' +
+      ' </div>' +
+      ' <label for="report-inappropriate"">' + inappropriateLabel + '</label>' +
       '</div>' +
-      '<div class="radio-item">' +
-      '<input type="radio" id="report-copyright" name="report-category" value="' +
-      COPYRIGHT_VALUE + '" ' + checkedCopyright + '>' +
-      '<label for="report-copyright">' + copyrightLabel + '</label>' +
+      '<div class="mdc-form-field">' +
+      ' <div class="mdc-radio">' +
+      '   <input class="mdc-radio__native-control" type="radio" id="report-copyright" name="report-category" value="' + COPYRIGHT_VALUE + '" ' + checkedCopyright + '>' +
+      '   <div class="mdc-radio__background">' +
+      '     <div class="mdc-radio__outer-circle"></div>' +
+      '     <div class="mdc-radio__inner-circle"></div>' +
+      '   </div>' +
+      '   <div class="mdc-radio__ripple"></div>' +
+      ' </div>' +
+      ' <label for="report-copyright">' + copyrightLabel + '</label>' +
       '</div>' +
-      '<div class="radio-item">' +
-      '<input type="radio" id="report-spam" name="report-category" value="' +
-      SPAM_VALUE + '" ' + checkedSpam + '>' +
-      '<label for="report-spam">' + spamLabel + '</label>' +
+      '<div class="mdc-form-field">' +
+      ' <div class="mdc-radio">' +
+      '   <input class="mdc-radio__native-control" type="radio" id="report-spam" name="report-category" value="' + SPAM_VALUE + '" ' + checkedSpam + '>' +
+      '   <div class="mdc-radio__background">' +
+      '     <div class="mdc-radio__outer-circle"></div>' +
+      '     <div class="mdc-radio__inner-circle"></div>' +
+      '   </div>' +
+      '   <div class="mdc-radio__ripple"></div>' +
+      ' </div>' +
+      ' <label for="report-spam">' + spamLabel + '</label>' +
       '</div>' +
-      '<div class="radio-item">' +
-      '<input type="radio" id="report-dislike" name="report-category" value="' +
-      DISLIKE_VALUE + '" ' + checkedDislike + '>' +
-      '<label for="report-dislike">' + dislikeLabel + '</label>' +
+      '<div class="mdc-form-field">' +
+      ' <div class="mdc-radio">' +
+      '  <input class="mdc-radio__native-control" type="radio" id="report-dislike" name="report-category" value="' + DISLIKE_VALUE + '" ' + checkedDislike + '>' +
+      '  <div class="mdc-radio__background">' +
+      '    <div class="mdc-radio__outer-circle"></div>' +
+      '    <div class="mdc-radio__inner-circle"></div>' +
+      '  </div>' +
+      '  <div class="mdc-radio__ripple"></div>' +
+      ' </div>' +
+      ' <label for="report-dislike">' + dislikeLabel + '</label>' +
       '</div>' +
-      '</div>' +
-      '<textarea class="swal2-textarea mt-4 mb-0 ' + errorClass + '" ' +
-      'id="report-reason" placeholder="' + reasonPlaceholder + '">' + reason + '</textarea>'
+      '<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea report-reason">' +
+      ' <span class="mdc-text-field__resizer">' +
+      '   <textarea class="mdc-text-field__input ' + errorClass + '" id="report-reason" placeholder="' +
+      reasonPlaceholder + '" style="width: 100%; height: 100px" cols="100">' + reason + '</textarea>' +
+      ' </span>' +
+      ' <span class="mdc-notched-outline">' +
+      '   <span class="mdc-notched-outline__leading"></span>' +
+      '   <span class="mdc-notched-outline__trailing"></span>' +
+      ' </span>' +
+      '</label>'
   }
 }

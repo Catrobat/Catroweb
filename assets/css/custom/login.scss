@@ -1,64 +1,10 @@
 @import "../base/variables";
 @import "theme_settings";
+@import "@material/textfield/mdc-text-field";
+@import "@material/select/mdc-select";
 
 .login {
   width: 318px;
-}
-
-.group {
-  position: relative;
-  margin-top: 40px;
-}
-
-.group input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  color: $primary;
-  background: none;
-  border: none;
-  border-bottom: 1px solid rgba($primary, 0.3);
-}
-
-.group input:focus {
-  outline: none;
-}
-
-// Html5 validation error: red border in all browsers like the default firefox behaviour
-.group input:invalid {
-  border-color: #fdd;
-  border-width: 3px;
-}
-
-.group input:valid {
-  border-color: #dfd;
-  border-width: 3px;
-}
-
-/* LABEL ======================================= */
-
-.group label {
-  position: absolute;
-  top: 20px;
-  left: 5px;
-  font-size: 18px;
-  font-weight: $font-weight-normal;
-  color: rgba($primary, 0.5);
-  pointer-events: none;
-  -moz-transition: 0.2s ease all;
-  -webkit-transition: 0.2s ease all;
-  transition: 0.2s ease all;
-}
-
-/* active durum */
-
-.group input:focus ~ label,
-.label-with-placeholder,
-input:valid ~ label {
-  top: -20px !important;
-  font-size: 14px !important;
-  color: rgba($primary, 0.7) !important;
 }
 
 /* BOTTOM BARS ================================= */
@@ -88,33 +34,6 @@ input:valid ~ label {
 
 .bar::after {
   right: 50%;
-}
-
-/* active durum bar */
-
-.group input:focus ~ .bar::before,
-.group input:focus ~ .bar::after {
-  width: 50%;
-}
-
-/* HIGHLIGHTER ================================== */
-
-.highlight {
-  position: absolute;
-  top: 25%;
-  left: 0;
-  width: 100px;
-  height: 0;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-/* active durum */
-
-.group input:focus ~ .highlight {
-  -webkit-animation: inputhighlighter 0.3s ease;
-  -moz-animation: inputhighlighter 0.3s ease;
-  animation: inputHighlighter 0.3s ease;
 }
 
 /* form animasyon ================ */
@@ -162,6 +81,18 @@ input:valid ~ label {
 .social-button-effects:hover {
   opacity: 1.1;
 } */
+
+.mdc-text-field{
+  width: 100%;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--mdc-theme-primary);
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: var(--mdc-theme-primary);
+}
 
 #_submit {
   width: 100%;

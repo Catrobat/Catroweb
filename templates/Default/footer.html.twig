@@ -74,14 +74,35 @@
 
       <div class="row justify-content-between">
         <div class="form-group col-12 col-sm-6">
-          <label for="switch-language">{{ 'footer.language'|trans({}, "catroweb") }}:</label>
-          <select id="switch-language" class="form-control-sm" autocomplete="off">
-            {% set countries = getLanguageOptions() %}
-            {% for country in countries %}
-              <option value="{{ country[0] }}"
-                      {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
-            {% endfor %}
-          </select>
+
+
+          <div class="mdc-select mdc-select--outlined">
+            <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
+              <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span id="outlined-select-label" class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
+              </span>
+                <span class="mdc-notched-outline__trailing"></span>
+              </span>
+              <span class="mdc-select__selected-text-container">
+                <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+              </span>
+            </div>
+            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+              <ul class="mdc-list" role="listbox">
+                {% set countries = getLanguageOptions() %}
+                {% for country in countries %}
+                  <li class="mdc-list-item" data-value={{ country[0] }} {% if country[2] %}selected{% endif %} role="option">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">
+                    {{ country[1] }}
+                  </span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
         </div>
         <div id="copyright" class="col-12 col-sm-6">
           {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
@@ -93,3 +114,6 @@
   {% endblock %}
 </footer>
 
+{% block js %}
+  {{ encore_entry_script_tags('footer') }}
+{% endblock js %}

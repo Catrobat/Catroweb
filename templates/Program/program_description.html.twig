@@ -14,12 +14,18 @@
     {% if app.user and my_program %}
       <div id="edit-description-ui" class="d-none">
         <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
-        <textarea id="edit-description" name="edit-description" class="mt-2 mb-2"
-                  title="_edit-description"
-                  maxlength="{{ max_description_size }}" style="width: 100%;" rows="10">
-    {% if program.description %}{{program.description}}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
-          </textarea>
-        <button id="edit-description-submit-button" class="btn btn-primary mb-5">
+        <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-text-field__resizer">
+              <textarea class="mdc-text-field__input" id="edit-description" name="edit-description" class="mt-2 mb-2"
+                        title="_edit-description"
+                        maxlength="{{ max_description_size }}" style="width: 100%;" rows="10" cols="100">
+                {% if program.description %}{{program.description}}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
+              </textarea>
+          </span>
+          <span class="mdc-line-ripple"></span>
+        </label>
+        <button id="edit-description-submit-button" class="btn btn-primary p-3 mb-5">
           <i class="material-icons align-bottom">save</i>
           {{ 'programs.saveDescription'|trans({}, 'catroweb') }}
         </button>
@@ -71,12 +77,16 @@
         </div>
         <div id="notes-and-credits-description">{{ "notesAndCreditsDescription"|trans({}, "catroweb") }}</div>
         <div id="edit-credits-error" style="display:none;" class="alert alert-danger"></div>
-        <textarea id="edit-credits" name="edit-credits" class="mt-2 mb-2"
-                  title="_edit-credits"
-                  maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
-          {% if program.credits %}{{ program.credits }}{% else %}{{ "noCredits"|trans({}, "catroweb") }}{% endif %}
-          </textarea>
-        <button id="edit-credits-submit-button" class="btn btn-primary mb-5">
+        <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description credits">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-text-field__resizer">
+            <textarea class="mdc-text-field__input" id="edit-credits" name="edit-credits" title="_edit-credits"
+                      maxlength="{{ max_description_size }}" style="width: 100%" rows="10" cols="100">
+              {% if program.credits %}{{ program.credits }}{% else %}{{ "noCredits"|trans({}, "catroweb") }}{% endif %}
+            </textarea>          </span>
+          <span class="mdc-line-ripple"></span>
+        </label>
+        <button id="edit-credits-submit-button" class="btn btn-primary p-3 mb-5">
           <i class="material-icons align-bottom">save</i>
           {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
         </button>
@@ -97,3 +107,9 @@
     </a>
   </div>
 </div>
+
+{% block js %}
+  {% if app.user and my_program %}
+    {{ encore_entry_script_tags('program_description') }}
+  {% endif %}
+{% endblock js %}

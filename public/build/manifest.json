@@ -1,0 +1,15 @@
+{
+  "build/footer.js": "/build/footer.js",
+  "build/login.js": "/build/login.js",
+  "build/program_comments.js": "/build/program_comments.js",
+  "build/program_description.js": "/build/program_description.js",
+  "build/register.js": "/build/register.js",
+  "build/report.js": "/build/report.js",
+  "build/request.js": "/build/request.js",
+  "build/reset.js": "/build/reset.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~footer.js": "/build/vendors~footer.js",
+  "build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js": "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+  "build/vendors~login~program_comments~program_description~register~report~request~reset.js": "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+  "build/vendors~report.js": "/build/vendors~report.js"
+}

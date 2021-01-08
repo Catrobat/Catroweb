@@ -23,7 +23,14 @@ Encore
    * Each entry will result in one JavaScript file (e.g. app.js)
    * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
    */
-  //.addEntry('login', './assets/js/custom/login.js')
+  .addEntry('login', './assets/js/material/login.js')
+  .addEntry('register', './assets/js/material/register.js')
+  .addEntry('request', './assets/js/material/request.js')
+  .addEntry('reset', './assets/js/material/reset.js')
+  .addEntry('program_comments', './assets/js/material/program_comments.js')
+  .addEntry('program_description', './assets/js/material/program_description.js')
+  .addEntry('report', './assets/js/material/report.js')
+  .addEntry('footer', './assets/js/material/footer.js')
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
@@ -43,7 +50,7 @@ Encore
   .enableBuildNotifications()
   .enableSourceMaps(!Encore.isProduction())
   // enables hashed filenames (e.g. app.abc123.css)
-  //.enableVersioning(Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
 
   // enables @babel/preset-env polyfills
   .configureBabelPresetEnv((config) => {
