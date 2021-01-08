@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@material/chips": "^7.0.0",
-    "@material/circular-progress": "^7.0.0",
+    "@material/circular-progress": "^9.0.0",
     "@material/form-field": "^7.0.0",
     "@material/icon-button": "^7.0.0",
     "@material/list": "^7.0.0",
