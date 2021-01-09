@@ -855,9 +855,6 @@
     "symfony/polyfill-php80": {
         "version": "v1.17.0"
     },
-    "symfony/polyfill-util": {
-        "version": "v1.14.0"
-    },
     "symfony/process": {
         "version": "v4.4.5"
     },
@@ -1045,14 +1042,8 @@
     "wapmorgan/php-deprecation-detector": {
         "version": "2.0.24"
     },
-    "webimpress/safe-writer": {
-        "version": "2.0.0"
-    },
     "webmozart/assert": {
         "version": "1.7.0"
-    },
-    "webmozart/glob": {
-        "version": "4.1.0"
     },
     "webmozart/path-util": {
         "version": "2.3.0"
