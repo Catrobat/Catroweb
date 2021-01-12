@@ -13850,16 +13850,16 @@
         },
         {
             "name": "dvdoug/behat-code-coverage",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dvdoug/behat-code-coverage.git",
-                "reference": "889b159f00fdf0a50766258b6b91bb531413d2e8"
+                "reference": "a674cd410f2ee95c81f97b08fa0b16d6b4dcc166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/889b159f00fdf0a50766258b6b91bb531413d2e8",
-                "reference": "889b159f00fdf0a50766258b6b91bb531413d2e8",
+                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/a674cd410f2ee95c81f97b08fa0b16d6b4dcc166",
+                "reference": "a674cd410f2ee95c81f97b08fa0b16d6b4dcc166",
                 "shasum": ""
             },
             "require": {
@@ -13873,9 +13873,8 @@
                 "symfony/event-dispatcher": "^4.4||^5.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16.4",
-                "phpspec/prophecy-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.4.1",
+                "friendsofphp/php-cs-fixer": "^2.17.0",
+                "phpunit/phpunit": "^9.5.0",
                 "symfony/filesystem": "^4.4||^5.0"
             },
             "suggest": {
@@ -13927,7 +13926,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dvdoug/behat-code-coverage/issues",
-                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.2.0"
+                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.2.1"
             },
             "funding": [
                 {
@@ -13935,7 +13934,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-11T19:03:11+00:00"
+            "time": "2021-01-10T20:15:28+00:00"
         },
         {
             "name": "felixfbecker/advanced-json-rpc",
