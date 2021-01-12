@@ -261,7 +261,7 @@ profile:
     usernameNotValid: Nieprawidłowa nazwa użytkownika.
     usernameMissing: Musisz mieć nazwę użytkownika.
     usernameExists: Ta nazwa użytkownika już istnieje.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: Nazwa użytkownika nie powinna zawierać adresu e-mail.
     submitSuccess: zapisane!
   reallyDeleteProgram: Czy naprawdę chcesz usunąć swój projekt
   programsOf: Projekty
@@ -451,8 +451,8 @@ failure:
 api:
   registerUser:
     emailMissing: 'Brak adresu e-mail'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
+    emailEmpty: 'Adres e-mail nie może być pusty'
+    emailInvalid: 'Nieznany adres email'
     emailAlreadyInUse: 'Ten adres e-mail jest już zajęty'
     usernameMissing: 'Brak nazwy użytkownika'
     usernameTooShort: 'Za krótka nazwa użytkownika'
@@ -465,7 +465,7 @@ api:
     passwordTooShort: 'Hasło jest zbyt krótkie'
     passwordTooLong: 'Zbyt długie hasło'
     passwordInvalidChars: 'Hasło zawiera nieprawidłowe znaki'
-    usernameContainsEmail: "Username must not contain an email address"
+    usernameContainsEmail: "Nazwa użytkownika nie powinna zawierać adresu e-mail."
     countryCodeInvalid: "Country code invalid"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
