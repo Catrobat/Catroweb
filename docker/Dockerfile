@@ -1,7 +1,7 @@
 # Use composer image for better caching
 FROM composer AS composer-build
 COPY composer.json composer.lock ./
-RUN composer install --no-scripts --prefer-dist
+RUN composer install --no-scripts --prefer-dist --ignore-platform-reqs
 
 # Use node image for better caching
 FROM node AS node-build
@@ -58,8 +58,8 @@ RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
 # Overwrite php config:
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/apache2/php.ini
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/cli/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.0/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.0/cli/php.ini
 
 # Setting working directory
 WORKDIR /var/www/catroweb

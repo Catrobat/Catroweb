@@ -88,3 +88,15 @@ jobs:
         run: |
           exit -1
 
+      - name: DEBUG
+        if: always()
+        run: |
+          docker ps -a
+          echo "--- App ---"
+          docker logs app.catroweb
+          echo "--- DB ---"
+          docker logs db.catroweb.test
+          echo "--- DB 2 ---"
+          docker logs db.catroweb.dev
+          echo "--- Chrome ---"
+          docker logs chrome.catroweb
