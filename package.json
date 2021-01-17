@@ -4,7 +4,7 @@
   "description": "Catroweb =========",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "npx eslint assets/js/**/*.js --ignore-pattern \"lazysizes.js\" \"assets/js/material/\"",
+    "test": "npx eslint assets/js/**/*.js --ignore-pattern \"assets/js/material/\"",
     "fix": "npx eslint assets/js/**/*.js --fix",
     "test-style": "npx stylelint assets/css/**/*.scss",
     "fix-style": "npx stylelint assets/css/**/*.scss --fix",
@@ -73,6 +73,7 @@
     "jquery-contextmenu": "^2.9.2",
     "jquery-ui-dist": "^1.12.1",
     "js-yaml": "^4.0.0",
+    "lazysizes": "^5.3.0",
     "material-design-icons": "^3.0.1",
     "npm": "^6.14.11",
     "popper.js": "^1.16.1",

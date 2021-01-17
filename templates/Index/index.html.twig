@@ -1,11 +1,11 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="preload" href="{{ asset('css/'~themeAssets()~'/index.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet"  href="{{ asset('css/'~themeAssets()~'/index.css') }}"  media="screen"></noscript>
+    <link rel="preload" href="{{ asset('css/'~themeAssets()~'/index.css') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/index.css') }}" media="screen"/>
 
-    <link rel="preload" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet"  href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" media="screen"></noscript>
+    <link rel="preload" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
@@ -74,8 +74,7 @@
 
 {% block js %}
   <script src="{{ asset('js/LoadYoutubeOnClick.min.js') }}" async></script>
-  <script src="{{ asset('js/lazysizes.min.js') }}" async></script>
-  <script src="{{ asset('js/LazyLoadIframes.min.js') }}"></script>
+  <script src="{{ asset('js/modules/lazysizes.min.js') }}" async></script>
   <script>const theme = '{{ theme() }}'</script>
   <script>const flavor = '{{ flavor() }}'</script>
   <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
