@@ -26,7 +26,7 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
       const property = $t.data('property')
 
       /* eslint-disable no-undef */
-      let url = baseUrl + '/api/projects/?category=' + category
+      let url = baseUrl + '/api/projects?category=' + category
 
       /* eslint-disable no-undef */
       if (flavor !== 'pocketcode' || category === 'example') {

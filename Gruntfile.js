@@ -159,6 +159,10 @@ const COPY_CONFIG =
     animate_css: {
       src: 'node_modules/animate.css/animate.min.css',
       dest: PUBLIC_DIRECTORY + '/css/modules/animate.min.css'
+    },
+    lazysizes: {
+      src: 'node_modules/lazysizes/lazysizes.min.js',
+      dest: PUBLIC_DIRECTORY + '/js/modules/lazysizes.min.js'
     }
   }
 

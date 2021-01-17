@@ -89,15 +89,14 @@ class ProjectList {
     const $p = $('<a />', { class: 'project-list__project', href: projectUrl })
     $p.data('id', data.id)
     $('<img/>', {
-      src: data.screenshot_small,
+      'data-src': data.screenshot_small,
       // TODO: generate larger thumbnails and adapt here (change 80w to width of thumbs)
-      srcset: data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w',
-      sizes: '(min-width: 768px) 10vw, 25vw',
-      alt: '',
-      class: 'project-list__project__image'
+      'data-srcset': data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w',
+      'data-sizes': '(min-width: 768px) 10vw, 25vw',
+      class: 'lazyload project-list__project__image'
     }).appendTo($p)
     $('<span/>', { class: 'project-list__project__name' }).text(data.name).appendTo($p)
-    const $prop = $('<div />', { class: 'project-list__project__property project-list__project__property-' + this.propertyToShow })
+    const $prop = $('<div />', { class: 'lazyload project-list__project__property project-list__project__property-' + this.propertyToShow })
     $prop.appendTo($p)
 
     const icons = {

@@ -464,7 +464,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
 }
 
 $(document).on('click', function (e) {
-  var ellipsisContainer = $('#sign-app-ellipsis-container')
+  const ellipsisContainer = $('#sign-app-ellipsis-container')
   if (!(ellipsisContainer.is(e.target) || $('#sign-app-ellipsis').is(e.target))) {
     ellipsisContainer.hide()
   }
@@ -505,13 +505,13 @@ $(document).ready(function () {
     $(this).blur()
   })
   $('#inc_years').on('click', function () {
-    var yearsField = $('#key_validity')
+    const yearsField = $('#key_validity')
     if (yearsField.val() < 99) {
       yearsField.val(parseInt(yearsField.val()) + 1)
     }
   })
   $('#dec_years').on('click', function () {
-    var yearsField = $('#key_validity')
+    const yearsField = $('#key_validity')
     if (yearsField.val() > 0) {
       yearsField.val(parseInt(yearsField.val()) - 1)
     }

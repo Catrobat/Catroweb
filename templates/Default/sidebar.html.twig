@@ -1,7 +1,8 @@
 <nav id="sidebar">
-  <a class="logo" href="{{ path('index') }}"
-     style="background-image:url('{{ asset('images/logo/catrobat_text.svg') }}')"><span
-        class="sr-only">{{ "menu.home"|trans({}, "catroweb") }}</span></a>
+  <a href="{{ path('index') }}">
+  <img data-src="{{ asset('images/logo/catrobat_text.svg') }}" class="lazyload logo" >
+  </a>
+  <span class="sr-only">{{ "menu.home"|trans({}, "catroweb") }}</span></a>
   <ul class="list-unstyled" id="project-navigation">
 
     {% if isWebview() %}
