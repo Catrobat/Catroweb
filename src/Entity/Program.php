@@ -922,6 +922,19 @@ class Program
     return $this->tags;
   }
 
+  public function getTagsName(): array
+  {
+    $tags = [];
+
+    /** @var Tag $tag */
+    foreach ($this->getTags() as $tag)
+    {
+      $tags[] = $tag->getEn();
+    }
+
+    return $tags;
+  }
+
   public function getExtensions(): Collection
   {
     return $this->extensions;

@@ -100,8 +100,12 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
 
     $responseCode = Response::HTTP_OK;
+    $result = $this->getProjectDataResponse($projects[0]);
+    // https://stackoverflow.com/questions/2254220/php-best-way-to-md5-multi-dimensional-array
+    // If you are curious why json_encode is used
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
 
-    return $this->getProjectDataResponse($projects[0]);
+    return $result;
   }
 
   /**
@@ -140,6 +144,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
       $new_featured_project = new FeaturedProjectResponse($result);
       $featured_programs[] = $new_featured_project;
     }
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($featured_programs));
 
     return $featured_programs;
   }
@@ -169,7 +174,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
     $responseCode = Response::HTTP_OK;
 
-    return $this->getProjectsDataResponse($programs);
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**
@@ -264,7 +272,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
     $programs = $this->program_manager->search($query, $limit, $offset, $max_version, $flavor);
 
-    return $this->getProjectsDataResponse($programs);
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**
@@ -289,7 +300,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $programs = $this->program_manager->getUserProjects($jwtPayload['username'], $limit, $offset, $flavor, $max_version);
     $responseCode = Response::HTTP_OK;
 
-    return $this->getProjectsDataResponse($programs);
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**
@@ -312,8 +326,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
     $programs = $this->program_manager->getUserPublicPrograms($id, $limit, $offset, $flavor, $max_version);
     $responseCode = Response::HTTP_OK;
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
 
-    return $this->getProjectsDataResponse($programs);
+    return $result;
   }
 
   /**
@@ -321,8 +337,12 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
   {
+    // TODO: Implement projectIdReportPost() method.
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectIdReportPost() method.
@@ -348,6 +368,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
       'download' => $project->getDownloads(),
       'private' => $project->getPrivate(),
       'flavor' => $project->getFlavor(),
+      'tags' => $project->getTagsName(),
       'uploaded' => $project->getUploadedAt()->getTimestamp(),
       'uploaded_string' => $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp()),
       'screenshot_large' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->program_manager->getScreenshotLarge($project->getId()),
@@ -371,6 +392,9 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     ]);
   }
 
+  /**
+   * @throws Exception
+   */
   private function getProjectsDataResponse(array $projects): array
   {
     $projectsDataResponse = [];
