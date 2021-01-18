@@ -3,7 +3,7 @@
 localLanguage: Englisch
 username: Username
 password: Passwort
-createNewPassword: Create new password
+createNewPassword: Neues Passwort erstellen
 accountSettings: Kontoeinstellungen
 email: E-Mail
 aboutPocketCode: Über Pocket Code
@@ -455,17 +455,17 @@ failure:
 api:
   registerUser:
     emailMissing: 'EMail fehlt'
-    emailEmpty: 'Email cannot be empty'
+    emailEmpty: 'Feld für Email darf nicht leer sein'
     emailInvalid: 'Email ungültig'
     emailAlreadyInUse: 'EMail wird bereits benützt'
     usernameMissing: 'Benutzername fehlt'
     usernameTooShort: 'Benutzername zu kurz'
     usernameTooLong: 'Benutzername zu lang'
-    usernameEmpty: 'Username cannot be empty'
+    usernameEmpty: 'Feld für Benutzername darf nicht leer sein'
     usernameAlreadyInUse: 'Benutzername wird bereits benützt'
     usernameInvalid: 'Benutzername ungültig'
     passwordMissing: 'Passwort fehlt'
-    passwordEmpty: 'Password cannot be empty'
+    passwordEmpty: 'Feld für Passwort darf nicht leer sein'
     passwordTooShort: 'Passwort zu kurz'
     passwordTooLong: 'Passwort zu lang'
     passwordInvalidChars: 'Password enthält ungültige Zeichen'
