@@ -37,7 +37,7 @@
     "grunt-contrib-sass": "^2.0.0",
     "grunt-contrib-uglify": "~5.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-purgecss": "^3.1.3",
+    "grunt-purgecss": "^4.0.0",
     "grunt-sass": "^3.1.0",
     "grunt-uncss": "^0.10.0",
     "jit-grunt": "^0.10.0",
