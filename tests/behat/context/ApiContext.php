@@ -107,7 +107,7 @@ class ApiContext implements KernelAwareContext
   private Program $my_program;
 
   private array $program_structure = ['id', 'name', 'author', 'description',
-    'version', 'views', 'download', 'private', 'flavor',
+    'version', 'views', 'download', 'private', 'flavor', 'tags',
     'uploaded', 'uploaded_string', 'screenshot_large',
     'screenshot_small', 'project_url', 'download_url', 'filesize', ];
 
@@ -3352,6 +3352,10 @@ class ApiContext implements KernelAwareContext
       'flavor' => function ($flavor)
       {
         Assert::assertIsString($flavor);
+      },
+      'tags' => function ($tags)
+      {
+        Assert::assertIsArray($tags, 'Tags is not an array!');
       },
       'uploaded' => function ($uploaded)
       {

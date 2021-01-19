@@ -86,7 +86,7 @@ class AuthenticationApi implements AuthenticationApiInterface
     return new JWTResponse();
   }
 
-  public function authenticationDelete(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  public function authenticationDelete(string $x_refresh, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement authenticationDelete() method.
   }

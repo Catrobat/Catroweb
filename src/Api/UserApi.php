@@ -125,7 +125,7 @@ class UserApi implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userGet(&$responseCode, array &$responseHeaders)
+  public function userGet(&$responseCode, array &$responseHeaders): ExtendedUserDataResponse
   {
     $responseCode = Response::HTTP_OK;
 
@@ -184,7 +184,7 @@ class UserApi implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
+  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null): array
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
