@@ -4,7 +4,7 @@
   {{ parent() }}
   <meta http-equiv="Content-Type" content="text/html"/>
   <meta name="robots" content="noindex,nofollow"/>
-  <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
+  <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
 {% endblock %}
 
 
@@ -56,6 +56,9 @@
               <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('resetAllApk') }}">Reset all</a>
               <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('rebuildAllApk') }}">Rebuild
                                                                                                            all</a>
+            {% endif %}
+            {% if app.request.requesturi == '/admin/all_extensions/list' %}
+              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('extensions') }}">Create Extensions</a>
             {% endif %}
           </div>
 

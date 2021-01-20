@@ -1,68 +1,23 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** Dynamic analysis **
+#
+# Dynamic analysis requires the Share community platform to run during evaluation. Currently Catroweb's dynamic tests
+# are mainly UI-tests and a few unit tests. Hence, the tests take multiple hours. To reduce the run time, the tests
+# are executed in multiple independent jobs. However, all jobs use the same Catroweb Docker image to reduce build time.
+#
+name: Dynamic analysis
 
-name: Tests
-
+# Run-on every creation, update and merge of a pull request.
+# However, prevent checks to be initiated twice if the pull request is a branch on the same repository. (E.g dependabot)
 on:
   push:
     branches:
       - master
       - develop
   pull_request:
-  release:
-    types:
-      - created
 
 
 jobs:
-
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # Developer Container:
-  #
-  #   - Since all tests run in a slightly different and reduced test container we must check the dev environment
-  #     explicitly. The container must build, plus the website and test system must be working.
-  #
-  dev_container_checks:
-    name: Dev. Container Checks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Build
-        run: |
-          cd docker
-          docker-compose -f docker-compose.dev.yml up -d
-          sleep 30
-
-      - name: Check Symfony Application
-        # would be nice to check the reset command in the future, in the current state the reset command can't fail
-        run: |
-          docker exec app.catroweb bin/console about
-          docker exec app.catroweb bin/console catrobat:reset --hard
-
-      - name: Check local share website
-        run: |
-          sudo apt-get install apache2 wget
-          sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
-          sudo service apache2 reload
-          wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
-
-      - name: Check tests in dev environment
-        run:
-          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
-
-      - name: Check shared development volumes must not need a rebuild
-        id: shared-test-run-must-fail
-        continue-on-error: true
-        run: |
-          echo ::set-output name=status::failure
-          echo "INVALID" > tests/behat/features/web/general/homepage.feature
-          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
-          echo ::set-output name=status::success
-
-      - name: Check that invalid changes result in a failing testcase
-        if: steps.shared-test-run-must-fail.outputs.status == 'success'
-        run: |
-          exit -1
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Build:
@@ -120,22 +75,32 @@ jobs:
           name: catroweb-image
           path: docker
 
+      # artificial wait required for elastic services to be fully set-up
       - name: Build
         run: |
           cd docker
           docker load < catroweb-image.tar
           docker-compose -f docker-compose.test.yml up -d
+          sleep 60
 
       - name: PhpUnit tests
         run:
-          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage
+          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage/phpunit --coverage-clover=tests/testreports/coverage/phpunit/coverage.xml
 
       - name: Upload code coverage report
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: PhpUnitTestReport
-          path: tests/testreports/coverage
+          path: tests/testreports/coverage/phpunit
+
+      - uses: codecov/codecov-action@v1
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: tests/testreports/coverage/phpunit/coverage.xml
+          flags: phpunit # optional
+          name: codecov-umbrella # optional
+          # fail_ci_if_error: true # optional (default = false) ToDo: enable once their service stability has
 
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,20 +134,37 @@ jobs:
       fail-fast: false
       matrix:
         testSuite:
-          - api
-          - api-deprecated
+          - api-authentication
+          - api-mediapackage
+          - api-projects
+          - api-user
+          - api-utility
+
+          - api-deprecated-general
+          - api-deprecated-project
+          - api-deprecated-profile
+          - api-deprecated-upload
+
           - web-admin
+          - web-apk-generation
           - web-authentication
-          - web-gamejam
+          - web-code-statistics
+          - web-code-view
+          - web-comments
           - web-general
+          - web-media-library
           - web-notifications
           - web-profile
+          - web-project
           - web-project-details
-          - web-project-details-2
-          - web-project-details-3
-          - web-project-loader
+          - web-project-list
+          - web-reactions
+          - web-recommendations
+          - web-remix-system
+          - web-scratch-integration
           - web-search
           - web-top-bar
+          - web-translation
 
     steps:
       - name: Checkout
@@ -217,9 +199,9 @@ jobs:
         # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
         run: |
           echo ::set-output name=status::failure
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} \
-            | tee tests/testreports/behat/${{ matrix.testSuite }}.log \
-            ; ( exit ${PIPESTATUS[0]} )
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
+          |& tee tests/testreports/behat/${{ matrix.testSuite }}.log ; \
+          ( exit ${PIPESTATUS[0]} )
           echo ::set-output name=status::success
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
@@ -244,15 +226,23 @@ jobs:
             false;
           fi
 
-      # Chrome exception are problems that can't be fixed with a rerun
+      # Chrome exception are problems that can't be fixed with a rerun. However, we can try to run the whole suite one more time
       - name: Check that suite has NO chrome exceptions
         if: always()
         id: chrome-exception-check
         run: |
-          if grep -q 'DMore\ChromeDriver\StreamReadException' tests/testreports/behat/${{ matrix.testSuite }}.log; then
+          if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/testreports/behat/${{ matrix.testSuite }}.log; then
             cat tests/testreports/behat/${{ matrix.testSuite }}.log;
-            false;
+            docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
+
+      - uses: codecov/codecov-action@v1
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: tests/testreports/coverage/behat/coverage.xml
+          flags: behat # optional
+          name: codecov-umbrella # optional
+          # fail_ci_if_error: true # optional (default = false)
 
       # Rerun #1
       - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests

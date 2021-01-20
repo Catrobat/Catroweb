@@ -6,7 +6,6 @@ use App\Catrobat\Events\InvalidProgramUploadedEvent;
 use App\Catrobat\Events\ProgramAfterInsertEvent;
 use App\Catrobat\Events\ProgramBeforeInsertEvent;
 use App\Catrobat\Events\ProgramBeforePersistEvent;
-use App\Catrobat\Events\ProgramInsertEvent;
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Requests\AppRequest;
@@ -41,6 +40,7 @@ use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\UrlHelper;
 
 class ProgramManager
@@ -89,7 +89,7 @@ class ProgramManager
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
                               CatroNotificationService $notification_service, TransformedFinder $program_finder,
-                              UrlHelper $urlHelper = null)
+                              UrlHelper $url_helper = null)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -106,8 +106,8 @@ class ProgramManager
     $this->file_sanitizer = $file_sanitizer;
     $this->extension_repository = $extension_repository;
     $this->notification_service = $notification_service;
-    $this->urlHelper = $urlHelper;
     $this->program_finder = $program_finder;
+    $this->urlHelper = $url_helper;
   }
 
   public function getFeaturedRepository(): FeaturedRepository
@@ -135,7 +135,7 @@ class ProgramManager
     if (!$project->isVisible())
     {
       // featured or approved projects should never be invisible
-      if (!$this->featured_repository->isFeatured($project) || !$project->getApproved())
+      if (!$this->featured_repository->isFeatured($project) && !$project->getApproved())
       {
         return false;
       }
@@ -172,7 +172,7 @@ class ProgramManager
     }
     catch (InvalidCatrobatFileException $e)
     {
-      $this->logger->error($e);
+      $this->logger->error('addProgram failed with code: '.$e->getCode().' and message:'.$e->getMessage());
       $this->event_dispatcher->dispatch(new InvalidProgramUploadedEvent($file, $e));
       throw $e;
     }
@@ -198,8 +198,10 @@ class ProgramManager
       $program = new Program();
       $program->setRemixRoot(true);
     }
+
     $program->setName($extracted_file->getName());
     $program->setDescription($extracted_file->getDescription());
+    $program->setCredits($extracted_file->getNotesAndCredits());
     $program->setUser($request->getUser());
     $program->setCatrobatVersion(1);
     $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
@@ -213,14 +215,7 @@ class ProgramManager
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
-    $program->setExtractedDirectoryHash($extracted_file->getDirHash());
     $this->addTags($program, $extracted_file, $request->getLanguage());
-
-    if (null !== $request->getGameJam())
-    {
-      $program->setGamejam($request->getGameJam());
-      $program->setGameJamSubmissionDate(TimeUtils::getDateTime());
-    }
 
     $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
 
@@ -229,10 +224,6 @@ class ProgramManager
     $this->entity_manager->refresh($program);
 
     $this->addExtensions($program, $extracted_file);
-
-    $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
-
-    $this->notifyFollower($program);
 
     try
     {
@@ -244,8 +235,6 @@ class ProgramManager
       {
         $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
       }
-
-      $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
     }
     catch (Exception $e)
     {
@@ -276,7 +265,6 @@ class ProgramManager
       {
         $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
       }
-      $this->file_repository->makeTempProgramPerm($program->getId());
     }
     catch (Exception $e)
     {
@@ -287,7 +275,6 @@ class ProgramManager
       try
       {
         $this->screenshot_repository->deletePermProgramAssets($program_id);
-        $this->file_repository->deleteProgramFile($program_id);
       }
       catch (IOException $error)
       {
@@ -299,12 +286,28 @@ class ProgramManager
 
       return null;
     }
-
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
+    $zip_exists = $this->file_repository->checkIfProgramFileExists($program->getId());
+    $this->file_repository->saveProgramFile($file, $program->getId());
 
-    $this->event_dispatcher->dispatch(new ProgramInsertEvent());
+    $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
+    $this->notifyFollower($program);
+    $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$program->getId();
+    if (is_dir($compressed_file_directory))
+    {
+      (new Filesystem())->remove($compressed_file_directory);
+    }
+    if (is_dir($extracted_file->getPath()))
+    {
+      (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$program->getId());
+    }
+    (new Filesystem())->remove($extracted_file->getPath());
+    if (!$zip_exists)
+    {
+      $this->file_repository->deleteProgramFile($program->getId());
+    }
 
     return $program;
   }
@@ -488,8 +491,7 @@ class ProgramManager
   public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file): void
   {
     $EMBROIDERY = 'Embroidery';
-    if (null !== $extracted_file
-      && false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">'))
+    if (false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">'))
     {
       /** @var Extension|null $embroidery_extension */
       $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
@@ -612,7 +614,7 @@ class ProgramManager
 
   /**
    * @throws NoResultException
-   * @throws NonUniqueResultException*@internal
+   * @throws NonUniqueResultException
    *
    * ATTENTION! Internal use only! (no visible/private/debug check)
    *
@@ -734,16 +736,16 @@ class ProgramManager
     );
   }
 
-  public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '0', ?string $flavor = null): array
+  public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '0', ?string $flavor = null, bool $is_debug_request = false): array
   {
-    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
     return $this->program_finder->find($program_query, $limit, ['from' => $offset]);
   }
 
-  public function searchCount(string $query, string $max_version = '0', ?string $flavor = null): int
+  public function searchCount(string $query, string $max_version = '0', ?string $flavor = null, bool $is_debug_request = false): int
   {
-    $program_query = $this->programSearchQuery($query, $max_version, $flavor);
+    $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
     $paginator = $this->program_finder->findPaginated($program_query);
 
@@ -799,9 +801,9 @@ class ProgramManager
     );
   }
 
-  public function searchTagCount(string $query): int
+  public function searchTagCount(int $tag_id): int
   {
-    return $this->program_repository->searchTagCount($query, $this->app_request->isDebugBuildRequest());
+    return $this->program_repository->searchTagCount($tag_id, $this->app_request->isDebugBuildRequest());
   }
 
   public function searchExtensionCount(string $query): int
@@ -982,7 +984,7 @@ class ProgramManager
     );
   }
 
-  private function programSearchQuery(string $query, string $max_version = '0', ?string $flavor = null): BoolQuery
+  private function programSearchQuery(string $query, string $max_version = '0', ?string $flavor = null, bool $is_debug_request = false): BoolQuery
   {
     $query = Util::escapeTerm($query);
 
@@ -996,12 +998,17 @@ class ProgramManager
 
     $query_string = new QueryString();
     $query_string->setQuery($query);
-    $query_string->setFields(['id', 'name', 'description', 'getTagsString', 'getExtensionsString']);
+    $query_string->setFields(['id', 'name', 'description', 'getUsernameString', 'getTagsString', 'getExtensionsString']);
     $query_string->setAnalyzeWildcard();
     $query_string->setDefaultOperator('AND');
 
     $category_query[] = new Terms('private', [false]);
     $category_query[] = new Terms('visible', [true]);
+
+    if (!$is_debug_request)
+    {
+      $category_query[] = new Terms('debug_build', [false]);
+    }
 
     if ('0' !== $max_version)
     {

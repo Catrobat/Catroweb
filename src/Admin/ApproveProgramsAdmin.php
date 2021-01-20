@@ -16,12 +16,13 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
+use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ApproveProgramsAdmin extends AbstractAdmin
 {
+  use ProgramsTrait;
   /**
    * @var string
    */
@@ -54,34 +55,6 @@ class ApproveProgramsAdmin extends AbstractAdmin
     $this->screenshot_repository = $screenshot_repository;
     $this->program_manager = $program_manager;
     $this->extracted_file_repository = $extracted_file_repository;
-  }
-
-  /**
-   * @param mixed|Program $program
-   *
-   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
-   */
-  public function preUpdate($program): void
-  {
-    /** @var ModelManager $model_manager */
-    $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())->getUnitOfWork()
-      ->getOriginalEntityData($program)
-    ;
-
-    if (false == $old_program['approved'] && true == $program->getApproved())
-    {
-      /** @var User $user */
-      $user = $this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser();
-      $program->setApprovedByUser($user);
-      $this->getModelManager()->update($program);
-    }
-    elseif (true == $old_program['approved'] && false == $program->getApproved())
-    {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
-    }
   }
 
   /**
@@ -209,9 +182,6 @@ class ApproveProgramsAdmin extends AbstractAdmin
     $qb->andWhere(
       $qb->expr()->eq($qb->getRootAliases()[0].'.approved', $qb->expr()->literal(false))
     );
-    $qb->andWhere(
-      $qb->expr()->eq($qb->getRootAliases()[0].'.visible', $qb->expr()->literal(true))
-    );
 
     return $query;
   }
@@ -260,8 +230,11 @@ class ApproveProgramsAdmin extends AbstractAdmin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
   {
     $datagridMapper
+      ->add('id')
       ->add('name')
-      ->add('user.username')
+      ->add('user.username', null, ['label' => 'User'])
+      ->add('uploaded_at', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class,
+        'label' => 'Upload Time', ])
     ;
   }
 
@@ -273,19 +246,19 @@ class ApproveProgramsAdmin extends AbstractAdmin
   protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
-      ->addIdentifier('id')
+      ->add('uploaded_at', null, ['label' => 'Upload Time'])
+      ->add('id', null, ['sortable' => false])
       ->add('user')
-      ->add('name')
-      ->add('description')
-      ->add('visible', 'boolean', ['editable' => true])
-      ->add('approved', 'boolean', ['editable' => true])
+      ->addIdentifier('name')
+      ->add('visible', 'boolean', ['editable' => true, 'sortable' => false])
+      ->add('approved', 'boolean', ['editable' => true, 'sortable' => false])
       ->add('_action', 'actions', ['actions' => ['show' => []]])
     ;
   }
 
   protected function configureRoutes(RouteCollection $collection): void
   {
-    $collection->remove('create')->remove('delete')->remove('edit');
+    $collection->remove('create')->remove('delete');
     $collection
       ->add('approve', $this->getRouterIdParameter().'/approve')
       ->add('invisible', $this->getRouterIdParameter().'/invisible')

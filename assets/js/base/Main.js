@@ -18,16 +18,16 @@ const Main = function () {
   $(window).ready(function () {
     self.setClickListener()
     self.initSidebarSwipe()
-    self.setLanguageSwitchListener()
   })
 
-  // ---- Language Selection
-  self.setLanguageSwitchListener = function () {
-    $('#switch-language').on('change', function () {
-      document.cookie = 'hl=' + $(this).val() + '; path=/'
-      window.location.reload()
-    })
-  }
+  // ---- History State
+  window.addEventListener('popstate', function (event) {
+    if (event.state != null) {
+      if (event.state.type === 'ProjectList' && event.state.full === true) {
+        $('#' + event.state.id).data('list').openFullView()
+      }
+    }
+  })
 
   // ----SideBar
   let sidebar, sidebarToggleBtn
@@ -93,7 +93,8 @@ const Main = function () {
 
     let curX = null
     let startTime = null
-    let startX = null; let startY = null
+    let startX = null
+    let startY = null
 
     let opening = false
     let closing = false

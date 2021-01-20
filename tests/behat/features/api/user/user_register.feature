@@ -100,27 +100,6 @@ Feature: Registering a new user.
       }
     """
 
-  Scenario: Password with non-ascii chars should result in an error
-    Given I have the following JSON request body:
-    """
-      {
-        "dry-run": true,
-        "email": "test@test.at",
-        "username": "testuser",
-        "password": "1234567ö"
-      }
-    """
-    And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
-    Then the response status code should be "422"
-    And I should get the json object:
-    """
-      {
-        "password": "Password contains invalid chars"
-      }
-    """
-
   Scenario: Trying to register with already existing usernames and emails should result in an error
     Given I have the following JSON request body:
     """
@@ -154,7 +133,7 @@ Feature: Registering a new user.
         "password": "1234567"
       }
     """
-    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/user"
@@ -184,7 +163,7 @@ Feature: Registering a new user.
     Then the response status code should be "204"
     And the user "Testuser" should not exist
 
-  Scenario: Registering a user should work
+  Scenario: Registering a user should work and return a login token
     Given I have the following JSON request body:
     """
       {
@@ -198,6 +177,13 @@ Feature: Registering a new user.
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/user"
     Then the response status code should be "201"
+    And I should get the json object:
+    """
+      {
+        "token": "REGEX_STRING_WILDCARD",
+        "refresh_token": "REGEX_STRING_WILDCARD!"
+      }
+    """
     And the user "Testuser" with email "test@test.at" should exist and be enabled
 
 
@@ -274,7 +260,7 @@ Feature: Registering a new user.
         "username": "Catroweb",
       }
     """
-    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de"
+    And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I request "POST" "/api/user"
     Then the response status code should be "400"

@@ -97,9 +97,6 @@ class ReportedUsersAdmin extends AbstractAdmin
           ])
       ->add('username')
       ->add('email')
-      ->add('limited', 'boolean', [
-        'editable' => true,
-      ])
       ;
   }
 
@@ -114,7 +111,6 @@ class ReportedUsersAdmin extends AbstractAdmin
       'show_filter' => true,
     ])
       ->add('email')
-      ->add('limited')
       ;
   }
 

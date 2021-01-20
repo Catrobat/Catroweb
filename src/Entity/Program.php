@@ -177,11 +177,6 @@ class Program
   protected int $downloads = 0;
 
   /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected ?string $directory_hash = null;
-
-  /**
    * @ORM\Column(type="datetime")
    */
   protected DateTime $uploaded_at;
@@ -370,6 +365,11 @@ class Program
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="program", fetch="EXTRA_LAZY")
    */
   protected Collection $reports;
+
+  /**
+   * @ORM\Column(type="boolean", options={"default": false})
+   */
+  private bool $snapshots_enabled = false;
 
   /**
    * Program constructor.
@@ -578,9 +578,14 @@ class Program
   /**
    * Returns the user owning this Program.
    */
-  public function getUser(): User
+  public function getUser(): ?User
   {
     return $this->user;
+  }
+
+  public function getUsernameString(): string
+  {
+    return strval($this->user->getUsername());
   }
 
   public function getComments(): Collection
@@ -727,16 +732,6 @@ class Program
   public function setCategory(?StarterCategory $category): void
   {
     $this->category = $category;
-  }
-
-  public function setExtractedDirectoryHash(?string $directory_hash): void
-  {
-    $this->directory_hash = $directory_hash;
-  }
-
-  public function getExtractedDirectoryHash(): ?string
-  {
-    return $this->directory_hash;
   }
 
   public function getApkStatus(): int
@@ -927,6 +922,19 @@ class Program
     return $this->tags;
   }
 
+  public function getTagsName(): array
+  {
+    $tags = [];
+
+    /** @var Tag $tag */
+    foreach ($this->getTags() as $tag)
+    {
+      $tags[] = $tag->getEn();
+    }
+
+    return $tags;
+  }
+
   public function getExtensions(): Collection
   {
     return $this->extensions;
@@ -1073,5 +1081,15 @@ class Program
   public function isScratchProgram(): bool
   {
     return null !== $this->scratch_id;
+  }
+
+  public function setSnapshotsEnabled(bool $snapshots_enabled): void
+  {
+    $this->snapshots_enabled = $snapshots_enabled;
+  }
+
+  public function isSnapshotsEnabled(): bool
+  {
+    return $this->snapshots_enabled;
   }
 }

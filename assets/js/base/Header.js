@@ -68,6 +68,41 @@ function clearTopBarSearch () {
   inputField.focus()
 }
 
+let $topAppBarTitle
+let $topAppBarBackBtn
+let $topAppBarSidebarToggleBtn
+let defaultAppBarTitle
+let defaultAppBarHref
+
+// eslint-disable-next-line no-unused-vars
+function showCustomTopBarTitle (title, onBack) {
+  $topAppBarTitle.text(title)
+  $topAppBarTitle.removeAttr('href')
+
+  if (typeof onBack === 'function') {
+    if ($topAppBarBackBtn === undefined) {
+      $topAppBarBackBtn = $('<button/>', {
+        id: 'top-app-bar__back__btn-back',
+        class: 'material-icons mdc-top-app-bar__action-item mdc-icon-button',
+        'aria-label': 'Back to previous page',
+        text: 'arrow_back'
+      }).insertAfter($topAppBarSidebarToggleBtn)
+    }
+
+    $topAppBarSidebarToggleBtn.hide()
+    $topAppBarBackBtn.show()
+    $topAppBarBackBtn.off('click').on('click', onBack)
+  }
+}
+
+// eslint-disable-next-line no-unused-vars
+function showDefaultTopBarTitle () {
+  $topAppBarTitle.html(defaultAppBarTitle)
+  $topAppBarTitle.attr('href', defaultAppBarHref)
+  $topAppBarSidebarToggleBtn.show()
+  if ($topAppBarBackBtn) $topAppBarBackBtn.hide()
+}
+
 $(document).on('click', function (e) {
   // hide options container when user clicks
   if (!$('#top-app-bar__btn-options').is(e.target)) {
@@ -76,6 +111,11 @@ $(document).on('click', function (e) {
 })
 
 $(document).ready(function () {
+  $topAppBarTitle = $('#top-app-bar__title')
+  $topAppBarSidebarToggleBtn = $('#top-app-bar__btn-sidebar-toggle')
+  defaultAppBarTitle = $topAppBarTitle.html()
+  defaultAppBarHref = $topAppBarTitle.attr('href')
+
   $('#top-app-bar__search-form').on('submit', function (event) {
     event.preventDefault()
     const query = $('#top-app-bar__search-input').val()

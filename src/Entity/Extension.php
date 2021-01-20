@@ -43,7 +43,7 @@ class Extension
 
   public function __toString()
   {
-    return $this->name;
+    return $this->name ?? '';
   }
 
   public function addProgram(Program $program): void

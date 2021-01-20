@@ -3,7 +3,6 @@
     "type": "project",
     "license": "proprietary",
     "description": "Catroweb Symfony Share Platform",
-
     "require": {
         "php": ">=7.4",
         "ext-SimpleXML": "*",
@@ -15,7 +14,8 @@
         "ext-posix": "*",
         "ext-zip": "*",
         "beberlei/doctrineextensions": "^1.2",
-        "catrobat/capi": "v1.0.41",
+        "catrobat/capi": "1.0.52",
+        "codercat/jwk-to-pem": "^1.0",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
@@ -24,28 +24,30 @@
         "friendsofsymfony/jsrouting-bundle": "^2.6",
         "friendsofsymfony/rest-bundle": "^2.7",
         "google/apiclient": "^2.4",
+        "hwi/oauth-bundle": "^1.3",
         "incenteev/composer-parameter-handler": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "liip/theme-bundle": "dev-master",
         "php-http/guzzle6-adapter": "^2.0",
+        "php-http/httplug-bundle": "^1.18",
         "php-http/message": "^1.8",
-        "sensio/framework-extra-bundle": "*",
-        "sonata-project/admin-bundle": "3.68.0",
-        "sonata-project/doctrine-orm-admin-bundle": "3.18.0",
-        "sonata-project/user-bundle": "4.5.3",
-        "symfony/acl-bundle": "*",
+        "rosell-dk/webp-convert": "^2.3",
+        "sensio/framework-extra-bundle": "^5.5",
+        "sonata-project/admin-bundle": "^3.68",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.18",
+        "sonata-project/user-bundle": "^4.5",
+        "symfony/acl-bundle": "^2.0",
         "symfony/console": "^4.4",
         "symfony/dotenv": "^5.0",
         "symfony/flex": "^1.7",
-        "symfony/framework-bundle": "*",
+        "symfony/framework-bundle": "^4.4",
         "symfony/intl": "^5.0",
-        "symfony/monolog-bundle": "*",
-        "symfony/polyfill-iconv": "*",
+        "symfony/monolog-bundle": "^3.5",
+        "symfony/polyfill-iconv": "^1.18",
         "symfony/process": "^5.0",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/twig-pack": "^1.0",
-        "symfony/yaml": "^5.0",
-        "twbs/bootstrap": "^4.5"
+        "symfony/webpack-encore-bundle": "^1.7",
+        "symfony/yaml": "^5.0"
     },
     "require-dev": {
         "behat/behat": "^3.6",
@@ -55,23 +57,22 @@
         "deployer/deployer": "^6.7",
         "deployer/recipes": "^6.2",
         "dmore/behat-chrome-extension": "^1.3",
-        "dmore/chrome-mink-driver": "^2.7",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
-        "emuse/behat-html-formatter": "@dev",
-        "friendsofphp/php-cs-fixer": "3.0.x-dev",
-        "phpstan/phpstan": "0.12.32",
-        "phpstan/phpstan-doctrine": "0.12.17",
-        "phpstan/phpstan-symfony": "0.12.6",
-        "phpstan/phpstan-phpunit": "0.12.11",
+        "dvdoug/behat-code-coverage": "^5.0",
+        "friendsofphp/php-cs-fixer": "^2.17",
+        "phpstan/phpstan": "0.12.66",
+        "phpstan/phpstan-doctrine": "0.12.27",
+        "phpstan/phpstan-phpunit": "0.12.17",
+        "phpstan/phpstan-symfony": "0.12.14",
         "phpunit/phpunit": "^9.2",
         "symfony/browser-kit": "^5.0",
         "symfony/maker-bundle": "*",
         "symfony/phpunit-bridge": "*",
         "symfony/profiler-pack": "^1.0",
+        "vimeo/psalm": "^4.0",
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
-        "wapmorgan/php-code-fixer": "dev-master"
+        "wapmorgan/php-deprecation-detector": "^2.0"
     },
-
     "config": {
         "platform": {
             "php": "7.4",
@@ -89,49 +90,45 @@
         },
         "sort-packages": true
     },
-
     "autoload": {
         "psr-4": {
             "App\\": "src/"
         }
     },
-
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
     },
-
     "scripts": {
-        "test": "bin/phpunit",
-        "console": "bin/console",
-
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "fix": [
+            "bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt"
         ]
     },
-
     "conflict": {
         "symfony/symfony": "*"
     },
-
     "extra": {
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": true
         },
         "require": "^4.4"
     },
-    "repositories": [{
-        "type": "vcs",
-        "url": "https://github.com/Catrobat/Catroweb-API"
-    }]
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Catrobat/Catroweb-API"
+        }
+    ]
 }

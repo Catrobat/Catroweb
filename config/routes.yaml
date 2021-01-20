@@ -1,6 +1,28 @@
 # This file is the entry point to configure your own HTTP routes.
 # Files in the routes/ subdirectory configure the routes for your dependencies.
 
+#======== HWIOAUTH ========================
+hwi_oauth_redirect:
+  resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+  prefix:   /connect
+
+hwi_oauth_connect:
+  resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+  prefix:   /connect
+
+hwi_oauth_login:
+  resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+  prefix:   /login
+
+google_login:
+  path: /login/check-google
+
+facebook_login:
+  path: /login/check-facebook
+
+apple_login:
+  path: /login/check-apple
+
 # ===== Api =====
 open_api_server:
   prefix: /api
@@ -14,26 +36,8 @@ catrobat_web_index:
   defaults:
     _controller: FrameworkBundle:Redirect:redirect
     route: index
-    flavor: "app"
+    theme: "app"
 
 catroweb_flavored:
-  resource: "routing_flavored.yml"
-  prefix:   /{flavor}/
-
-# ===== FOS User Bundle =====
-fos_user:
-  resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-  prefix: /{flavor}
-
-fos_user_security_login:
-  path: /{flavor}/login
-  defaults:  { _controller: fos_user.security.controller:loginAction }
-
-#redirect the user after a successfully registration
-fos_user_registration_confirmed:
-  path: /{flavor}/user
-
-# ===== Logout =====
-sonata_user_admin_security_logout:
-  path: /{flavor}/logout
-  defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }
+  resource: "routes_flavored.yml"
+  prefix:   /{theme}/

@@ -2,8 +2,8 @@
 
 namespace App\Api;
 
+use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Requests\AddProgramRequest;
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
 use App\Entity\FeaturedProgram;
@@ -13,13 +13,16 @@ use App\Entity\User;
 use App\Entity\UserManager;
 use App\Repository\FeaturedRepository;
 use App\Utils\APIHelper;
+use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
+use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,29 +44,34 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   private EntityManagerInterface $entity_manager;
   private TranslatorInterface $translator;
   private UrlGeneratorInterface $url_generator;
+  private RecommenderManager $recommender_manager;
 
   private FeaturedRepository $featured_repository;
 
-  private ImageRepository $featured_image_repository;
+  private ImageRepository $image_repository;
+  private ParameterBagInterface $parameter_bag;
 
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
-                              ImageRepository $featured_image_repository, UserManager $user_manager,
+                              ImageRepository $image_repository, UserManager $user_manager,
                               RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
-                              UrlGeneratorInterface $url_generator)
+                              UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager,
+                              ParameterBagInterface $parameter_bag)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
     $this->time_formatter = $time_formatter;
     $this->featured_repository = $featured_repository;
-    $this->featured_image_repository = $featured_image_repository;
+    $this->image_repository = $image_repository;
     $this->request_stack = $request_stack;
     $this->token_storage = $token_storage;
     $this->entity_manager = $entity_manager;
     $this->translator = $translator;
     $this->url_generator = $url_generator;
     $this->user_manager = $user_manager;
+    $this->recommender_manager = $recommender_manager;
+    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -81,10 +89,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectIdGet(string $project_id, &$responseCode, array &$responseHeaders)
+  public function projectIdGet(string $id, &$responseCode, array &$responseHeaders)
   {
-    $projects = $this->program_manager->getProgram($project_id);
-    if (null == $projects || empty($projects))
+    $projects = $this->program_manager->getProgram($id);
+    if (empty($projects))
     {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -92,14 +100,18 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
 
     $responseCode = Response::HTTP_OK;
+    $result = $this->getProjectDataResponse($projects[0]);
+    // https://stackoverflow.com/questions/2254220/php-best-way-to-md5-multi-dimensional-array
+    // If you are curious why json_encode is used
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
 
-    return $this->getProjectDataResponse($projects[0]);
+    return $result;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -116,13 +128,23 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     {
       $result = [
         'id' => $featured_program->getId(),
+        'project_id' => $featured_program->getProgram()->getId(),
+        'project_url' => ltrim($this->generateUrl(
+          'program',
+          [
+            'theme' => $this->parameter_bag->get('umbrellaTheme'),
+            'id' => $featured_program->getProgram()->getId(),
+          ],
+          UrlGeneratorInterface::ABSOLUTE_URL), '/'
+        ),
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
-        'featured_image' => $this->featured_image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
+        'featured_image' => $this->image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
       ];
       $new_featured_project = new FeaturedProjectResponse($result);
       $featured_programs[] = $new_featured_project;
     }
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($featured_programs));
 
     return $featured_programs;
   }
@@ -132,26 +154,46 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
 
-    $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+    $recommended = 'recommended' === $category;
+    if ($recommended)
+    {
+      /** @var User $user */
+      $user = $this->getUser();
+      $programs = $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
+    }
+    else
+    {
+      $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+    }
     $responseCode = Response::HTTP_OK;
 
-    return $this->getProjectsDataResponse($programs);
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode, array &$responseHeaders)
+  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null)
   {
     $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
-    $private = null === $private ? false : $private;
+    $private = $private ?? false;
 
     // File uploaded successful?
     if (!$file->isValid())
@@ -180,8 +222,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->entity_manager->refresh($user);
 
     // Adding the uploaded program
-    $add_program_request = new AddProgramRequest($user, $file,$this->request_stack->getCurrentRequest()->getClientIp(),
-      null, $accept_language, $flavor ? $flavor : 'pocketcode');
+    $add_program_request = new AddProgramRequest($user, $file, $this->request_stack->getCurrentRequest()->getClientIp(), $accept_language, $flavor ? $flavor : 'pocketcode');
 
     try
     {
@@ -195,17 +236,15 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     }
 
     // Setting the program's attributes
-    if (null !== $private)
-    {
-      $program->setPrivate($private);
-      $this->entity_manager->flush();
-    }
+    $program->setPrivate($private);
+    $this->entity_manager->flush();
 
     // Since we have come this far, the project upload is completed
     $responseCode = Response::HTTP_CREATED; // 201 => Successful upload
     $responseHeaders['Location'] = $this->url_generator->generate(
       'program',
       [
+        'theme' => $this->parameter_bag->get('umbrellaTheme'),
         'id' => $program->getId(),
       ],
       UrlGenerator::ABSOLUTE_URL);
@@ -218,7 +257,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsSearchGet(string $query_string, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsSearchGet(string $query, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -226,14 +265,17 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
     $responseCode = Response::HTTP_OK;
 
-    if ('' === $query_string || ctype_space($query_string))
+    if ('' === $query || ctype_space($query))
     {
       return [];
     }
 
-    $programs = $this->program_manager->search($query_string, $limit, $offset, $max_version, $flavor);
+    $programs = $this->program_manager->search($query, $limit, $offset, $max_version, $flavor);
 
-    return $this->getProjectsDataResponse($programs);
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**
@@ -241,7 +283,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -258,7 +300,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $programs = $this->program_manager->getUserProjects($jwtPayload['username'], $limit, $offset, $flavor, $max_version);
     $responseCode = Response::HTTP_OK;
 
-    return $this->getProjectsDataResponse($programs);
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**
@@ -266,23 +311,41 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsUserIdGet(string $user_id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function projectsUserIdGet(string $id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
-    if ('' === $user_id || ctype_space($user_id) || null == $this->user_manager->findOneBy(['id' => $user_id]))
+    if ('' === $id || ctype_space($id) || null == $this->user_manager->findOneBy(['id' => $id]))
     {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
     }
 
-    $programs = $this->program_manager->getUserPublicPrograms($user_id, $limit, $offset, $flavor, $max_version);
+    $programs = $this->program_manager->getUserPublicPrograms($id, $limit, $offset, $flavor, $max_version);
     $responseCode = Response::HTTP_OK;
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
 
-    return $this->getProjectsDataResponse($programs);
+    return $result;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement projectIdReportPost() method.
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement projectIdReportPost() method.
   }
 
   /**
@@ -292,43 +355,46 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   private function getProjectDataResponse($program): ProjectResponse
   {
-    if ($program->isExample())
-    {
-      $program = $program->getProgram();
-    }
+    /** @var Program $project */
+    $project = $program->isExample() ? $program->getProgram() : $program;
 
     return new ProjectResponse([
-      'id' => $program->getId(),
-      'name' => $program->getName(),
-      'author' => $program->getUser()->getUserName(),
-      'description' => $program->getDescription(),
-      'version' => $program->getCatrobatVersionName(),
-      'views' => $program->getViews(),
-      'download' => $program->getDownloads(),
-      'private' => $program->getPrivate(),
-      'flavor' => $program->getFlavor(),
-      'uploaded' => $program->getUploadedAt()->getTimestamp(),
-      'uploaded_string' => $this->time_formatter->getElapsedTime($program->getUploadedAt()->getTimestamp()),
-      'screenshot_large' => $this->program_manager->getScreenshotLarge($program->getId()),
-      'screenshot_small' => $this->program_manager->getScreenshotSmall($program->getId()),
+      'id' => $project->getId(),
+      'name' => $project->getName(),
+      'author' => $project->getUser()->getUserName(),
+      'description' => $project->getDescription(),
+      'version' => $project->getCatrobatVersionName(),
+      'views' => $project->getViews(),
+      'download' => $project->getDownloads(),
+      'private' => $project->getPrivate(),
+      'flavor' => $project->getFlavor(),
+      'tags' => $project->getTagsName(),
+      'uploaded' => $project->getUploadedAt()->getTimestamp(),
+      'uploaded_string' => $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp()),
+      'screenshot_large' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->program_manager->getScreenshotLarge($project->getId()),
+      'screenshot_small' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->program_manager->getScreenshotSmall($project->getId()),
       'project_url' => ltrim($this->generateUrl(
         'program',
         [
-          'flavor' => $this->session->get('flavor_context'),
-          'id' => $program->getId(),
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
+          'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'
       ),
       'download_url' => ltrim($this->generateUrl(
         'download',
         [
-          'id' => $program->getId(),
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
+          'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'),
-      'filesize' => ($program->getFilesize() / 1_048_576),
+      'filesize' => ($project->getFilesize() / 1_048_576),
     ]);
   }
 
+  /**
+   * @throws Exception
+   */
   private function getProjectsDataResponse(array $projects): array
   {
     $projectsDataResponse = [];

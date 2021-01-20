@@ -45,8 +45,6 @@ class MediaPackage
    */
   protected Collection $categories;
 
-  protected array $flavors = [];
-
   public function __construct()
   {
     $this->categories = new ArrayCollection();
@@ -55,16 +53,6 @@ class MediaPackage
   public function __toString()
   {
     return (string) $this->name;
-  }
-
-  public function getFlavors(): array
-  {
-    return $this->flavors;
-  }
-
-  public function setFlavors(array $flavors): void
-  {
-    $this->flavors = $flavors;
   }
 
   public function getId(): ?int

@@ -1,0 +1,69 @@
+{
+  "entrypoints": {
+    "login": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/login.js"
+      ]
+    },
+    "register": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/register.js"
+      ]
+    },
+    "request": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/request.js"
+      ]
+    },
+    "reset": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/reset.js"
+      ]
+    },
+    "program_comments": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/program_comments.js"
+      ]
+    },
+    "program_description": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/program_description.js"
+      ]
+    },
+    "report": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~report.js",
+        "/build/report.js"
+      ]
+    },
+    "footer": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~footer~login~program_comments~program_description~register~report~request~reset.js",
+        "/build/vendors~footer.js",
+        "/build/footer.js"
+      ]
+    }
+  }
+}

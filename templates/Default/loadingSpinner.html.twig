@@ -1,0 +1,23 @@
+{# Material Loading Spinner / Circular Progress Bar #}
+<div class="circular-progress" {% if spinner_id is defined %} id="{{ spinner_id }}" {% endif %}>
+  <div role="progressbar" class="mdc-circular-progress mdc-circular-progress--indeterminate
+   {% if small is defined %} mdc-circular-progress--small {% endif %}">
+    <div class="mdc-circular-progress__indeterminate-container">
+      <div class="mdc-circular-progress__spinner-layer">
+        <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
+          <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549"/>
+          </svg>
+        </div><div class="mdc-circular-progress__gap-patch">
+          <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549"/>
+          </svg>
+        </div><div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">
+          <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

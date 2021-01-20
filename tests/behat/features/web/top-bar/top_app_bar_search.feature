@@ -54,7 +54,7 @@ Feature: Searching should be possible using a specific Search Top App Bar
     And the element "#top-app-bar__btn-search-clear" should be visible
 
   Scenario: pressing the search back icon after a search should return to the page url before the search
-    Given I am on "/app/help"
+    Given I am on "/app/login"
     And I wait for the page to be loaded
     Then I click "#top-app-bar__btn-search"
     And I enter "search1" into visible "#top-app-bar__search-input"
@@ -66,7 +66,7 @@ Feature: Searching should be possible using a specific Search Top App Bar
     And I wait for the page to be loaded
     Then I should be on "/app/search/search2"
     When I click "#top-app-bar__btn-search-back"
-    And I should be on "/app/help"
+    And I should be on "/app/login"
 
   Scenario: clear search button should only be visible when search input contains text
     Given I am on "/app"

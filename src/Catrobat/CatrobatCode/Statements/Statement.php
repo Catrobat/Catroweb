@@ -65,7 +65,7 @@ class Statement
     return $this->endString;
   }
 
-  public function getXmlTree(): SimpleXMLElement
+  public function getXmlTree(): ?SimpleXMLElement
   {
     return $this->xmlTree;
   }

@@ -11,3 +11,4 @@ composer install
 npm install
 bin/console catrobat:reset --hard
 grunt
+npm run encore dev

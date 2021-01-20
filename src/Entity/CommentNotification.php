@@ -39,14 +39,14 @@ class CommentNotification extends CatroNotification
    */
   public function __construct(User $user, UserComment $comment)
   {
-    parent::__construct($user);
+    parent::__construct($user, '', '', 'comment');
     $this->comment = $comment;
   }
 
   /**
    * Returns the UserComment which triggered this CommentNotification.
    */
-  public function getComment(): UserComment
+  public function getComment(): ?UserComment
   {
     return $this->comment;
   }

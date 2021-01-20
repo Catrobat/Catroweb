@@ -11,7 +11,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ApkListAdmin extends AbstractAdmin
 {
@@ -30,6 +29,7 @@ class ApkListAdmin extends AbstractAdmin
    */
   protected $datagridValues = [
     '_sort_by' => 'apk_request_time',
+    '_sort_order' => 'DESC',
   ];
 
   private ScreenshotRepository $screenshot_repository;
@@ -81,8 +81,8 @@ class ApkListAdmin extends AbstractAdmin
   {
     $datagridMapper
       ->add('id')
+      ->add('user.username', null, ['label' => 'User'])
       ->add('name')
-      ->add('user.username')
       ->add('apk_request_time')
     ;
   }
@@ -104,19 +104,13 @@ class ApkListAdmin extends AbstractAdmin
       ->add('name')
       ->add('apk_request_time')
       ->add('thumbnail', 'string', ['template' => 'Admin/program_thumbnail_image_list.html.twig'])
-      ->add('apk_status', ChoiceType::class, [
-        'choices' => [
-          Program::APK_NONE => 'none',
-          Program::APK_PENDING => 'pending',
-          Program::APK_READY => 'ready',
-        ], ])
       ->add('_action', 'actions', [
         'actions' => [
+          'Reset' => [
+            'template' => 'Admin/CRUD/list__action_reset_status.html.twig',
+          ],
           'Rebuild' => [
             'template' => 'Admin/CRUD/list__action_rebuild_apk.html.twig',
-          ],
-          'Delete Apk' => [
-            'template' => 'Admin/CRUD/list__action_delete_apk.html.twig',
           ],
         ],
       ])
@@ -127,6 +121,8 @@ class ApkListAdmin extends AbstractAdmin
   {
     $collection->clearExcept(['list']);
     $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
-    $collection->add('deleteApk', $this->getRouterIdParameter().'/deleteApk');
+    $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
+    $collection->add('rebuildAllApk');
+    $collection->add('resetAllApk');
   }
 }

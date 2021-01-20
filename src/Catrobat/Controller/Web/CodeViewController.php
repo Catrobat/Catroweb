@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Controller\Web;
 
-use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
+use App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
@@ -48,7 +48,7 @@ class CodeViewController extends AbstractController
       'id' => $id,
       'version' => $project->getLanguageVersion(),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
-      'extracted_dir_hash' => $project->getExtractedDirectoryHash(),
+      'extracted_dir_hash' => $project->getId(),
     ]);
   }
 

@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Catrobat\Listeners\DescriptionValidator
  */
 class DescriptionValidatorTest extends TestCase
 {

@@ -47,9 +47,9 @@ class DataFixturesContext implements KernelAwareContext
   private array $programs = [];
   private array $featured_programs = [];
   private array $media_files = [];
+  private array $users = [];
 
   /**
-   * @AfterFeature
    * @BeforeFeature
    */
   public static function resetElastic(): void
@@ -79,9 +79,40 @@ class DataFixturesContext implements KernelAwareContext
   {
     foreach ($table->getHash() as $config)
     {
-      $this->insertUser($config, false);
+      $user = $this->insertUser($config, false);
+      $this->users[] = $user;
     }
     $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are followers:$/
+   */
+  public function thereAreFollowers(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config)
+    {
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findOneBy(['username' => $config['name']]);
+
+      $followings = explode(', ', $config['following']);
+      foreach ($followings as $follow)
+      {
+        /** @var User|null $follow_user */
+        $follow_user = $this->getUserManager()->findOneBy(['username' => $follow]);
+        $user->addFollowing($follow_user);
+        $this->getUserManager()->updateUser($user);
+      }
+    }
+
+    $users = $this->users;
+    unset($this->users);
+
+    /** @var User|null $user */
+    foreach ($users as $user)
+    {
+      $this->users[] = $this->getUserManager()->find($user->getId());
+    }
   }
 
   /**
@@ -196,6 +227,55 @@ class DataFixturesContext implements KernelAwareContext
     }
   }
 
+  /**
+   * @When /^User "([^"]*)" is followed by user "([^"]*)"$/
+   *
+   * @param mixed $user_id
+   * @param mixed $follow_id
+   */
+  public function userIsFollowedByUser($user_id, $follow_id): void
+  {
+    /** @var User|null $user */
+    $user = $this->getUserManager()->find($user_id);
+
+    /** @var User|null $followUser */
+    $followUser = $this->getUserManager()->find($follow_id);
+    $user->addFollowing($followUser);
+    $this->getUserManager()->updateUser($user);
+  }
+
+  /**
+   * @Then /^user "([^"]*)" with email "([^"]*)" should exist$/
+   */
+  public function userWithUsernameWithEmailShouldExist(string $username, string $email): void
+  {
+    $em = $this->getManager();
+
+    /** @var User|null $user */
+    $user = $em->getRepository(User::class)->findOneBy([
+      'username' => $username,
+    ]);
+
+    Assert::assertInstanceOf(User::class, $user);
+    Assert::assertEquals($email, $user->getEmail());
+  }
+
+  /**
+   * @Then /^user "([^"]*)" with country code "([^"]*)" should exist$/
+   */
+  public function userWithUsernameWithCountryShouldExist(string $username, string $country_code): void
+  {
+    $em = $this->getManager();
+
+    /** @var User|null $user */
+    $user = $em->getRepository(User::class)->findOneBy([
+      'username' => $username,
+    ]);
+
+    Assert::assertInstanceOf(User::class, $user);
+    Assert::assertEquals($country_code, $user->getCountry());
+  }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
   // -------------------------------------------------------------------------------------------------------------------
@@ -213,6 +293,20 @@ class DataFixturesContext implements KernelAwareContext
       /** @var Program $program */
       $program = $this->insertProject($config, false);
       $this->programs[] = $program;
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are click statistics:$/
+   *
+   * @throws Exception
+   */
+  public function thereAreClickStatistics(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config)
+    {
+      $this->insertClickStatistic($config, false);
     }
     $this->getManager()->flush();
   }
@@ -248,6 +342,20 @@ class DataFixturesContext implements KernelAwareContext
   public function getMediaFiles(): array
   {
     return $this->media_files;
+  }
+
+  public function getUsers(): array
+  {
+    $users = $this->users;
+    unset($this->users);
+
+    /** @var User|null $user */
+    foreach ($users as $user)
+    {
+      $this->users[] = $this->getUserManager()->find($user->getId());
+    }
+
+    return $this->users;
   }
 
   /**
@@ -554,6 +662,28 @@ class DataFixturesContext implements KernelAwareContext
     );
   }
 
+  /**
+   * @Then I enable snapshots for the project with id :id
+   */
+  public function iEnableSnapshotsForTheProjectWithId(string $id): void
+  {
+    $project = $this->getProgramManager()->find($id);
+    $project->setSnapshotsEnabled(true);
+    $this->getManager()->persist($project);
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Then I disable snapshots for the project with id :id
+   */
+  public function iDisableSnapshotsForTheProjectWithId(string $id): void
+  {
+    $project = $this->getProgramManager()->find($id);
+    $project->setSnapshotsEnabled(false);
+    $this->getManager()->persist($project);
+    $this->getManager()->flush();
+  }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Comments
   // -------------------------------------------------------------------------------------------------------------------
@@ -660,6 +790,10 @@ class DataFixturesContext implements KernelAwareContext
     {
       $new_category = new MediaPackageCategory();
       $new_category->setName($category['name']);
+      if (!empty($category['priority']))
+      {
+        $new_category->setPriority($category['priority']);
+      }
 
       /** @var MediaPackage|null $package */
       $package = $em->getRepository(MediaPackage::class)->findOneBy(['name' => $category['package']]);
@@ -797,8 +931,7 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
-   * @Then the program download statistic should have a download timestamp, \
-   *       an anonymous user and the following statistics:
+   * @Then the program download statistic should have a download timestamp, an anonymous user and the following statistics:
    *
    * @throws Exception
    */
@@ -1044,13 +1177,13 @@ class DataFixturesContext implements KernelAwareContext
           $to_create = new NewProgramNotification($user, $program);
           break;
         case 'anniversary':
-          $to_create = new AnniversaryNotification($user, $notification['title'], $notification['message'], $notification['prize']);
+          $to_create = new AnniversaryNotification($user, 'title_deprecated', $notification['message'], 'price');
           break;
         case 'achievement':
-          $to_create = new AchievementNotification($user, $notification['title'], $notification['message'], $notification['image_path']);
+          $to_create = new AchievementNotification($user, 'title_deprecated', $notification['message'], 'image_path');
           break;
         case 'broadcast':
-          $to_create = new BroadcastNotification($user, $notification['title'], $notification['message']);
+          $to_create = new BroadcastNotification($user, 'title_deprecated', $notification['message']);
           break;
         case 'remix':
           /** @var Program $parent_program */
@@ -1085,13 +1218,12 @@ class DataFixturesContext implements KernelAwareContext
   {
     $em = $this->getManager();
 
+    /** @var User|null $user */
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertNotNull($user, 'user is null');
+
     for ($i = 0; $i < $arg1; ++$i)
     {
-      /** @var User|null $user */
-      $user = $this->getUserManager()->findUserByUsername($username);
-
-      Assert::assertNotNull($user, 'user is null');
-
       $to_create = new CatroNotification($user, 'Random Title', 'Random Text');
       $em->persist($to_create);
     }
@@ -1139,7 +1271,7 @@ class DataFixturesContext implements KernelAwareContext
           $em->persist($to_create);
           break;
         case 'remix':
-          $to_create = new RemixNotification($program->getUser(), $program->getUser(), $program, $program);
+          $to_create = new RemixNotification($program->getUser(), $user, $program, $program);
           $em->persist($to_create);
           break;
         case 'catro notifications':
@@ -1157,6 +1289,23 @@ class DataFixturesContext implements KernelAwareContext
    * @Given /^I define the following rude words:$/
    */
   public function iDefineTheFollowingRudeWords(TableNode $table): void
+  {
+    $words = $table->getHash();
+    $em = $this->getManager();
+
+    foreach ($words as $word)
+    {
+      $rude_word = new RudeWord();
+      $rude_word->setWord($word['word']);
+      $em->persist($rude_word);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Given /^there are rude words:$/
+   */
+  public function thereAreRudeWords(TableNode $table): void
   {
     $words = $table->getHash();
     $em = $this->getManager();

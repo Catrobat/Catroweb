@@ -32,9 +32,9 @@ class ExampleRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
     $qb->orderBy('e.priority', 'DESC');
-
+    $qb->leftJoin('e.program', 'program');
     APIQueryHelper::addMaxVersionCondition($qb, $max_version);
-    APIQueryHelper::addFlavorCondition($qb, $flavor);
+    APIQueryHelper::addFeaturedExampleFlavorCondition($qb, $flavor, 'e');
 
     return $qb->getQuery()->getResult();
   }
@@ -49,9 +49,9 @@ class ExampleRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->isNotNull('e.program'))
     ;
     $qb->orderBy('e.priority', 'DESC');
-
+    $qb->leftJoin('e.program', 'program');
     APIQueryHelper::addMaxVersionCondition($qb, $max_version);
-    APIQueryHelper::addFlavorCondition($qb, $flavor);
+    APIQueryHelper::addFeaturedExampleFlavorCondition($qb, $flavor, 'e');
 
     try
     {
@@ -77,8 +77,9 @@ class ExampleRepository extends ServiceEntityRepository
 
     $qb
       ->select($qb->expr()->count('e.id'))
+      ->join('e.flavor', 'fl')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+      ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
       ->andWhere($qb->expr()->isNotNull('e.program'))
       ->andWhere($qb->expr()->eq('e.for_ios', ':for_ios'))
       ->setParameter('flavor', $flavor)
@@ -97,8 +98,9 @@ class ExampleRepository extends ServiceEntityRepository
 
     return $qb
       ->select('e')
+      ->join('e.flavor', 'fl')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+      ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
       ->andWhere($qb->expr()->eq('e.for_ios', 'false'))
       ->setParameter('flavor', $flavor)
       ->setFirstResult($offset)
@@ -119,8 +121,9 @@ class ExampleRepository extends ServiceEntityRepository
 
     return $qb
       ->select($qb->expr()->count('e.id'))
+      ->join('e.flavor', 'fl')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+      ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
       ->andWhere($qb->expr()->eq('e.for_ios', 'false'))
       ->setParameter('flavor', $flavor)
       ->getQuery()->getSingleScalarResult();

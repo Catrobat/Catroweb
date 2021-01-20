@@ -5,6 +5,14 @@
 @use "@material/menu-surface/mdc-menu-surface";
 @use "@material/snackbar/mdc-snackbar";
 @use "@material/circular-progress/mdc-circular-progress";
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield";
+@use "@material/radio";
+@use "@material/list/mdc-list";
+@use "@material/menu/mdc-menu";
+@use "@material/select";
 
 @import "elements"; // A set of useful LESS mixins (More info at: http://lesselements.com)
 @import "mixins";   // Our own defined Mixins
@@ -31,6 +39,8 @@
 
 // material.io components - includes
 @include icon-button.core-styles ();
+@include textfield.core-styles ();
+@include form-field.core-styles ();
 
 // ToDo - We are switching to Material:
 // Font Awesome - GruntFile handles coping the files from vendor to the defined public directory

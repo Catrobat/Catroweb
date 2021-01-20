@@ -114,55 +114,5 @@ Feature:
     And I wait for the page to be loaded
     And I click the currently visible search icon
     Then the element "#top-app-bar__search-label" should have a attribute "alt" with value "Search in media library"
-
-  Scenario: Searching the Media Package "looks" with the Luna app and search term "Sexy" should result in 3 found files
-    Given I am on "/luna/media-library/Looks"
-    And I wait for the page to be loaded
-    Then I click "#top-app-bar__btn-search"
-    And I enter "Sexy" into visible "#top-app-bar__search-input"
-    And I press enter in the search bar
-    And I wait for the page to be loaded
-    Then I should be on "/luna/media-library/Looks/search/Sexy"
-    And I should see media file with id "4"
-    And I should see media file with id "5"
-    And I should see media file with id "6"
-    And I should not see media file with id "1"
-    And I should not see media file with id "2"
-    And I should not see media file with id "3"
-    And I should not see media file with id "7"
-    And I should see a "#category-theme-special" element
-
-  Scenario: Searching the Media Package "looks" with the Pocketcode app and search term "Sexy" should result in 2 found files
-    Given I am on "/app/media-library/Looks"
-    And I wait for the page to be loaded
-    Then I click "#top-app-bar__btn-search"
-    And I enter "Sexy" into visible "#top-app-bar__search-input"
-    And I press enter in the search bar
-    And I wait for the page to be loaded
-    Then I should be on "/app/media-library/Looks/search/Sexy"
-    And I should see media file with id "5"
-    And I should see media file with id "6"
-    And I should not see media file with id "1"
-    And I should not see media file with id "2"
-    And I should not see media file with id "3"
-    And I should not see media file with id "4"
-    And I should not see media file with id "7"
-    And I should not see a "#category-theme-special" element
-
-  Scenario: Searching the Media Package "sounds" with the Pocketcode app and search term "e" should not return results from other packages
-    Given I am on "/app/media-library/Sounds"
-    And I wait for the page to be loaded
-    Then I click "#top-app-bar__btn-search"
-    And I enter "e" into visible "#top-app-bar__search-input"
-    And I press enter in the search bar
-    And I wait for the page to be loaded
-    Then I should be on "/app/media-library/Sounds/search/e"
-    And I should see media file with id "2"
-    And I should not see media file with id "1"
-    And I should not see media file with id "3"
-    And I should not see media file with id "4"
-    And I should not see media file with id "5"
-    And I should not see media file with id "6"
-    And I should not see media file with id "7"
-    And I should not see a "#category-theme-special" element
+    
 

@@ -31,14 +31,14 @@ const Help = function () {
       //            3....game jam
       if (id > 0) {
         if (type === 1) {
-          $(container).html('<img src="' + path + id + '_' + index + '.jpg" alt="" title="" />')
+          $(container).html('<img data-src="' + path + id + '_' + index + '.jpg" alt="" title="" class="lazyload"/>')
         } else if (type === 3) {
-          $(container).html('<img src="' + path + index + '.png" alt="" title="" />')
+          $(container).html('<img data-src="' + path + index + '.png" alt="" title="" class="lazyload"/>')
         } else {
           if (index) {
-            $(container).html('<img src="' + path + id + '_' + 'right' + '_' + index + '.png" alt="" title="" />')
+            $(container).html('<img data-src="' + path + id + '_' + 'right' + '_' + index + '.png" alt="" title="" class="lazyload"/>')
           } else {
-            $(container).html('<img src="' + path + id + '_' + 'left' + '.png" alt="" title="" />')
+            $(container).html('<img data-src="' + path + id + '_' + 'left' + '.png" alt="" title="" class="lazyload"/>')
           }
         }
 

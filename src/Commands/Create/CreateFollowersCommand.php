@@ -73,9 +73,12 @@ class CreateFollowersCommand extends Command
 
     try
     {
-      $notification = new FollowNotification($user, $follower);
-      $this->followUser($user, $follower);
-      $this->notification_service->addNotification($notification);
+      if ($user !== $follower)
+      {
+        $notification = new FollowNotification($user, $follower);
+        $this->followUser($user, $follower);
+        $this->notification_service->addNotification($notification);
+      }
     }
     catch (Exception $e)
     {

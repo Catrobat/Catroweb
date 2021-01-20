@@ -56,8 +56,10 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
   protected function configureListFields(ListMapper $listMapper): void
   {
     $listMapper
-      ->addIdentifier('name')
+      ->addIdentifier('id')
+      ->add('name')
       ->add('package', EntityType::class, ['class' => MediaPackage::class])
+      ->add('priority')
       ->add('_action', 'actions', [
         'actions' => [
           'edit' => [],

@@ -2,12 +2,10 @@
 
 namespace App\Admin;
 
-use App\Entity\Program;
 use App\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -38,32 +36,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
   {
     return ['id', 'type', 'user.username', 'program.id', 'program.name', 'scratch_program_id',
       'recommended_from_program.id', 'recommended_from_program.name', 'tag.en', 'extension.name',
-      'clicked_at', 'ip', 'country_code', 'country_name', 'locale', 'user_agent', 'referrer', ];
-  }
-
-  /**
-   * @param FormMapper $formMapper
-   *
-   * Fields to be shown on create/edit forms
-   */
-  protected function configureFormFields(FormMapper $formMapper): void
-  {
-    $formMapper
-      ->add('type')
-      ->add('program', EntityType::class, ['class' => Program::class], [
-        'admin_code' => 'catrowebadmin.block.programs.all', ])
-      ->add('scratch_program_id')
-      ->add('recommended_from_program', EntityType::class, ['class' => Program::class],
-        ['admin_code' => 'catrowebadmin.block.programs.all'])
-      ->add('user', EntityType::class, ['class' => User::class])
-      ->add('clicked_at')
-      ->add('ip')
-      ->add('country_code')
-      ->add('country_name')
-      ->add('locale')
-      ->add('user_agent')
-      ->add('referrer')
-    ;
+      'clicked_at', 'locale', 'user_agent', 'referrer', ];
   }
 
   /**
@@ -80,8 +53,6 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('scratch_program_id')
       ->add('recommended_from_program.name')
       ->add('user.username')
-      ->add('ip')
-      ->add('country_name')
       ->add('user_agent')
       ->add('referrer')
       ->add('locale')
@@ -108,15 +79,9 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('extension.name', null, [
         'label' => 'Extension', ])
       ->add('clicked_at')
-      ->add('ip')
-      ->add('country_code')
-      ->add('country_name')
       ->add('locale')
       ->add('user_agent')
       ->add('referrer')
-      ->add('_action', 'actions', ['actions' => [
-        'edit' => [],
-      ]])
     ;
   }
 

@@ -6,19 +6,24 @@
           <h3>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h3>
           <ul class="list-vertical">
             <li>
-              <a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a>
+              <a id="help" href="https://wiki.catrobat.org/bin/view/Documentation/" target="_blank">
+                {{ "tutorials"|trans({}, "catroweb") }}
+              </a>
             </li>
             <li>
-              <a href="https://www.catrobat.org"
-                 target="_blank">{{ "aboutCatrobat"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/ShareAbout" target="_blank">
+                {{ "about"|trans({}, "catroweb") }}
+              </a>
             </li>
             <li>
-              <a href="https://edu.catrob.at/">
-                {{ "help-cards.headings.education"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/education" target="_blank">
+                {{ "education"|trans({}, "catroweb") }}
+              </a>
             </li>
             <li>
-              <a href="https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode">
-                {{ "help-cards.headings.discuss"|trans({}, "catroweb") }}</a>
+              <a href="https://catrob.at/ChatAndForums" target="_blank">
+                {{ "chat"|trans({}, "catroweb") }}
+              </a>
             </li>
           </ul>
         </div>
@@ -35,7 +40,7 @@
               <a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a>
             </li>
             <li>
-              <a href="https://developer.catrobat.org/imprint"
+              <a href="https://catrob.at/imprint"
                  target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a>
             </li>
           </ul>
@@ -44,15 +49,23 @@
           <h3>{{ "footer.download"|trans({}, "catroweb") }}</h3>
           <ul class="list-vertical">
             <li>
-              <a href="{{ google_play_url }}"
+              <a href="https://catrob.at/gp"
                  target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
             </li>
-            {% if theme() == "pocketcode" %}
+            {% if flavor() == "pocketcode" %}
               <li>
-                <a href="https://itunes.apple.com/app/pocket-code/id1117935892"
+                <a href="https://catrob.at/ca"
                    target="_blank">{{ "iosAppStore"|trans({}, "catroweb") }}</a>
               </li>
+              <li>
+                <a href="https://catrob.at/HuaweiAppGallery"
+                   target="_blank">{{ "huaweiAppGallery"|trans({}, "catroweb") }}</a>
+              </li>
             {% endif %}
+            <li>
+              <a href="https://catrob.at/apps"
+                 target="_blank">{{ "others"|trans({}, "catroweb") }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -61,14 +74,54 @@
 
       <div class="row justify-content-between">
         <div class="form-group col-12 col-sm-6">
-          <label for="switch-language">{{ 'footer.language'|trans({}, "catroweb") }}:</label>
-          <select id="switch-language" class="form-control-sm" autocomplete="off">
-            {% set countries = getLanguageOptions() %}
-            {% for country in countries %}
-              <option value="{{ country[0] }}"
-                      {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
-            {% endfor %}
-          </select>
+
+          <div class="mdc-select mdc-select--outlined">
+            <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
+              <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                  <span id="outlined-select-label"
+                        class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
+                </span>
+                <span class="mdc-notched-outline__trailing"></span>
+              </span>
+              <span class="mdc-select__selected-text-container">
+                <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+              </span>
+              <span class="mdc-select__dropdown-icon">
+                <svg
+                    class="mdc-select__dropdown-icon-graphic"
+                    viewBox="7 10 10 5" focusable="false">
+                  <polygon
+                      class="mdc-select__dropdown-icon-inactive"
+                      stroke="none"
+                      fill-rule="evenodd"
+                      points="7 10 12 15 17 10">
+                  </polygon>
+                  <polygon
+                      class="mdc-select__dropdown-icon-active"
+                      stroke="none"
+                      fill-rule="evenodd"
+                      points="7 15 12 10 17 15">
+                  </polygon>
+                </svg>
+               </span>
+            </div>
+            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+              <ul class="mdc-list" role="listbox">
+                {% set countries = getLanguageOptions() %}
+                {% for country in countries %}
+                  <li class="mdc-list-item" data-value={{ country[0] }} {% if country[2] %}selected{% endif %}
+                      role="option">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">
+                    {{ country[1] }}
+                  </span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
         </div>
         <div id="copyright" class="col-12 col-sm-6">
           {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
@@ -80,3 +133,6 @@
   {% endblock %}
 </footer>
 
+{% block js %}
+  {{ encore_entry_script_tags('footer') }}
+{% endblock js %}

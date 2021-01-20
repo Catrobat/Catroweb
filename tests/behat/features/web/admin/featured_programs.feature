@@ -1,6 +1,6 @@
 @admin
 Feature: Admin featured programs
-  IT should be possible to list all featured programs, sort and filter etc.
+  It should be possible to list all featured programs, sort and filter etc.
 
   Background:
     Given there are admins:
@@ -21,6 +21,13 @@ Feature: Admin featured programs
       | b100d-c01d   | program 4 | abc                     | Superman  | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
       | dead-beef    | to add    | add me if u can         | Frank Jr. | 123       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
 
+    And there are flavors:
+      | id | name       |
+      | 1  | pocketcode |
+      | 2  | luna       |
+      | 3  | arduino    |
+      | 4  | embroidery |
+
     And there are featured programs:
       | id | program_id  | active   | flavor     | priority | ios_only |
       | 1  | 1337-c0ffee | 1        | pocketcode | 1        |   yes    |
@@ -40,10 +47,9 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
     And I should not see "Adminius"
 
-
   Scenario: List featured programs just for arduino
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=arduino&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=3&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Program                  | Url | Flavor   | Priority   |

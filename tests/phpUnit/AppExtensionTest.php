@@ -4,8 +4,6 @@ namespace Tests\phpUnit;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Twig\AppExtension;
-use App\Repository\GameJamRepository;
-use Liip\ThemeBundle\ActiveTheme;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -27,24 +25,23 @@ class AppExtensionTest extends TestCase
     $this->translationPath = __DIR__.'/../../translations';
   }
 
-  /**
-   * @test
-   */
-  public function arrayMustContainFourLanguages(): void
+  public function testLanguageOptions(): void
   {
-    $short = 'de';
+    $short = 'de_DE';
 
     $appExtension = $this->createAppExtension($short);
-    $list = $appExtension->getLanguageOptions();
-    // TODO change this to a dynamic number
-    $this->assertEquals(count($list), 69);
+    $language_options = $appExtension->getLanguageOptions();
 
-    $this->assertTrue($this->inArray('Deutsch', $list));
-    $this->assertTrue($this->inArray('English', $list));
-    $this->assertTrue($this->inArray('italiano', $list));
-    $this->assertTrue($this->inArray('polski', $list));
-    $this->assertTrue($this->inArray('English (Canada)', $list));
-    $this->assertTrue($this->isSelected($short, $list));
+    // Currently we have over 65 languages and dialects
+    $this->assertGreaterThanOrEqual(65, count($language_options));
+
+    $this->assertFalse($this->inArray('Deutsch', $language_options));
+    $this->assertTrue($this->inArray('Deutsch (Deutschland)', $language_options));
+    $this->assertTrue($this->inArray('italiano (Italia)', $language_options));
+    $this->assertTrue($this->inArray('polski (Polska)', $language_options));
+    $this->assertTrue($this->inArray('English (Canada)', $language_options));
+    $this->assertTrue($this->inArray('English (United Kingdom)', $language_options));
+    $this->assertTrue($this->isSelected($short, $language_options));
   }
 
   /**
@@ -97,13 +94,10 @@ class AppExtensionTest extends TestCase
   {
     $repo = $this->createMock(MediaPackageFileRepository::class);
     $request_stack = $this->mockRequestStack($locale);
-    $game_jam_repository = $this->createMock(GameJamRepository::class);
-    $theme = $this->createMock(ActiveTheme::class);
     $parameter_bag = $this->createMock(ParameterBag::class);
     $translator = $this->createMock(TranslatorInterface::class);
 
-    return new AppExtension($request_stack, $repo, $game_jam_repository,
-      $theme, $parameter_bag, $this->translationPath, $translator);
+    return new AppExtension($request_stack, $repo, $parameter_bag, $this->translationPath, $translator);
   }
 
   private function inArray(string $needle, array $haystack): bool

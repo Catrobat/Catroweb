@@ -7,6 +7,7 @@ use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -41,8 +42,10 @@ class MediaPackageController extends AbstractController
    * Legacy route:
    * @Route("/pocket-library/{package_name}", name="pocket_library", methods={"GET"})
    */
-  public function mediaPackageAction(string $package_name, TranslatorInterface $translator, string $flavor = 'pocketcode'): Response
+  public function mediaPackageAction(Request $request, string $package_name, TranslatorInterface $translator): Response
   {
+    $flavor = $request->attributes->get('flavor');
+
     if ('' === $flavor)
     {
       $flavor = 'pocketcode';
@@ -84,14 +87,15 @@ class MediaPackageController extends AbstractController
    *
    * @param string $q            Search term
    * @param string $package_name Name of MediaPackage to be searched for files
-   * @param string $flavor       The flavor (e.g. pocketcode). Only media files of the specified flavor will be displayed.
    *
    * @return Response the response containing the found media library objects
    */
   public function mediaPackageSearchAction(string $q, string $package_name, TranslatorInterface $translator,
                                            MediaPackageFileRepository $media_file_repository,
-                                           UrlGeneratorInterface $url_generator, string $flavor = 'pocketcode'): Response
+                                           UrlGeneratorInterface $url_generator, Request $request): Response
   {
+    $flavor = $request->attributes->get('flavor');
+
     $found_media_files = $media_file_repository->search($q, $flavor, $package_name);
 
     $categories_of_found_files = [];
@@ -118,7 +122,7 @@ class MediaPackageController extends AbstractController
         'open_api_server_mediaLibrary_mediafilessearchget',
         [
           'query' => $q,
-          'flavor' => $flavor,
+          'theme' => $flavor,
           'package' => $package_name,
         ],
         UrlGenerator::ABSOLUTE_URL),

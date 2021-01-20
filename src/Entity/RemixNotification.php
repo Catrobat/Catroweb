@@ -68,7 +68,7 @@ class RemixNotification extends CatroNotification
    */
   public function __construct(User $user, User $remix_from, Program $program, Program $remix_program)
   {
-    parent::__construct($user);
+    parent::__construct($user, '', '', 'remix');
     $this->remix_from = $remix_from;
     $this->program = $program;
     $this->remix_program = $remix_program;

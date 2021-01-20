@@ -51,9 +51,14 @@ RUN n stable && \
     npm install -g sass
 
 # Overwrite default apache config
+RUN a2enmod rewrite
 COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
 RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
+
+# Overwrite php config:
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/cli/php.ini
 
 # Setting working directory
 WORKDIR /var/www/catroweb
@@ -102,5 +107,7 @@ RUN sh docker/app/prepare-test-env.sh
 
 # (Re-)compile public css/js files
 RUN grunt
+
+RUN npm run encore dev
 
 EXPOSE 80

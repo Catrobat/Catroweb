@@ -94,7 +94,7 @@ class StatusCode
 
   const LOGIN_ERROR = 601;
 
-  const RUDE_WORD_IN_CREDITS = Response::HTTP_UNPROCESSABLE_ENTITY;
+  const RUDE_WORD_IN_NOTES_AND_CREDITS = Response::HTTP_UNPROCESSABLE_ENTITY;
   const INVALID_PARAM = Response::HTTP_UNPROCESSABLE_ENTITY;
 
   /**
@@ -117,7 +117,7 @@ class StatusCode
   const USER_ADD_USERNAME_EXISTS = 777;
 
   const CSRF_FAILURE = 706;
-  const CREDITS_TO_LONG = 707;
+  const NOTES_AND_CREDITS_TOO_LONG = 707;
 
   //8xx
   const USER_COUNTRY_INVALID = 801;
@@ -134,6 +134,4 @@ class StatusCode
   const USERNAME_ALREADY_EXISTS = 812;
   const USER_USERNAME_PASSWORD_EQUAL = 813;
   const USER_AVATAR_UPLOAD_ERROR = 814;
-
-  const NO_GAME_JAM = 900;
 }

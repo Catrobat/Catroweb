@@ -366,6 +366,30 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     $(self.container).find('.' + buttonName).show()
   }
 
+  async function getLoadingSpinner () {
+    return '<div class="circular-progress">' +
+      '  <div role="progressbar" class="mdc-circular-progress mdc-circular-progress--indeterminate">' +
+      '    <div class="mdc-circular-progress__indeterminate-container">' +
+      '      <div class="mdc-circular-progress__spinner-layer">' +
+      '        <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">' +
+      '          <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">' +
+      '            <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549"/>' +
+      '          </svg>' +
+      '        </div><div class="mdc-circular-progress__gap-patch">' +
+      '          <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">' +
+      '            <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549"/>' +
+      '          </svg>' +
+      '        </div><div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">' +
+      '          <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">' +
+      '            <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549"/>' +
+      '          </svg>' +
+      '        </div>' +
+      '      </div>' +
+      '    </div>' +
+      '  </div>' +
+      '</div>'
+  }
+
   async function initLoaderUI () {
     $(self.container).append('' +
       '<div class="button-show-placeholder">' +
@@ -376,7 +400,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
       'expand_less' +
       '</button>' +
       '<div class=' + ajaxAnimation + '>' +
-      '  <i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i>' +
+        await getLoadingSpinner() +
       '</div>'
     )
   }
@@ -431,7 +455,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
     return $(
       '<div class="program ' + (visited ? 'visited-program ' : '') + '" id="program-' + project.ProjectId + '">' +
       '<a href="' + projectLink + '" class="' + linkCssClasses + '">' +
-      '<img src="' + data.CatrobatInformation.BaseUrl + project.ScreenshotSmall + '" alt="" />' +
+      '<img data-src="' + data.CatrobatInformation.BaseUrl + project.ScreenshotSmall + '" alt="" class="lazyload" />' +
       '<span class="program-name">' + self.escapeJavaScript(project.ProjectName) + '</span>' +
       div +
       '</a></div>'
@@ -496,8 +520,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
         if (self.recommendedByProjectId !== null) {
           link += '&rec_by_program_id=' + self.recommendedByProjectId
         }
-        link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) &&
-        data.isUserSpecificRecommendation ? 1 : 0)
+        link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) && data.isUserSpecificRecommendation ? 1 : 0)
     }
     return link
   }

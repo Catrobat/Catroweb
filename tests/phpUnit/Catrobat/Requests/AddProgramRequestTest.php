@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Requests\AddProgramRequest
  */
 class AddProgramRequestTest extends TestCase
 {
@@ -55,11 +55,6 @@ class AddProgramRequestTest extends TestCase
   public function testHoldsAnIp(): void
   {
     $this->assertSame('127.0.0.1', $this->add_program_request->getIp());
-  }
-
-  public function testNotAGameJam(): void
-  {
-    $this->assertNull($this->add_program_request->getGameJam());
   }
 
   public function testHasALanguage(): void

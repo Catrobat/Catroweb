@@ -78,6 +78,7 @@ class ProjectDataFixtures
 
     $project->setName($config['name'] ?? 'Project '.ProjectDataFixtures::$number_of_projects);
     $project->setDescription($config['description'] ?? '');
+    $project->setCredits($config['credit'] ?? '');
     $project->setViews(isset($config['views']) ? (int) $config['views'] : 0);
     $project->setDownloads(isset($config['downloads']) ? (int) $config['downloads'] : 0);
     $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
@@ -101,8 +102,8 @@ class ProjectDataFixtures
     );
     $project->setRemixMigratedAt(null);
     $project->setCatrobatVersion(1);
-    $project->setCatrobatVersionName($config['version'] ?? '');
-    $project->setLanguageVersion($config['language version'] ?? 0.92);
+    $project->setCatrobatVersionName($config['version'] ?? '0.8.5');
+    $project->setLanguageVersion($config['language version'] ?? '0.925');
     $project->setUploadIp($config['upload_ip'] ?? '127.0.0.1');
     $project->setFilesize($config['file_size'] ?? 0);
     $project->setVisible(isset($config['visible']) ? 'true' === $config['visible'] : true);
@@ -112,7 +113,6 @@ class ProjectDataFixtures
     $project->setPrivate(isset($config['private']) ? 'true' === $config['private'] : false);
     $project->setDebugBuild(isset($config['debug']) ? 'true' === $config['debug'] : false);
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
-    $project->setExtractedDirectoryHash($config['directory_hash'] ?? null);
 
     $project->setAcceptedForGameJam($config['accepted'] ?? false);
     $project->setGamejam($config['gamejam'] ?? null);

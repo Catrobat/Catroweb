@@ -1,19 +1,22 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
+    <link rel="preload" href="{{ asset('css/'~themeAssets()~'/index.css') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/index.css') }}" media="screen"/>
+
+    <link rel="preload" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
 
-  {% if not app.user %}
-    {{ include('Index/welcome-section.html.twig') }}
-  {% endif %}
+    {% if not app.user %}
+        {{ include('Index/welcome-section.html.twig') }}
+    {% endif %}
 
   <div id="featuredPrograms">
-
-      <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
     {% if featured|length > 0 %}
+      <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
       {{ include('Index/featured_programs_carousel.html.twig',
         { 'carousel' :
           {
@@ -27,86 +30,61 @@
       ) }}
     {% endif %}
 
-  </div>
-
-  {% if theme() == 'pocketgalaxy' %}
-
-    <div id="submissions">
-      <h2>{{ "programs.submitted"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
     </div>
-
-    <div id="sample">
-      <h2>{{ "programs.sample"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
+    <div id="home-projects">
+        {# array values: [api project_type, translation, property to show] #}
+        {% for category in [
+            ['recent', 'newest', 'uploaded'],
+            ['example', 'example', 'author'],
+            ['recommended', 'recommended', 'views'],
+            ['most_downloaded', 'most.downloaded', 'downloads'],
+            ['most_viewed', 'most.viewed', 'views'],
+            ['scratch', 'scratchremixes', 'views'],
+            ['random', 'random', 'uploaded']
+        ] %}
+            <div id="home-projects__{{ category[0] }}" data-category="{{ category[0] }}"
+                 data-property="{{ category[2] }}" class="project-list loading horizontal">
+                <div class="container">
+                    <div class="project-list__title">
+                        <h2>{{ ("programs." ~ category[1]) | trans({}, "catroweb") }}</h2>
+                        <div class="project-list__title__btn-toggle btn-view-open">
+                            <div class="project-list__title__btn-toggle__text">{{ "show-more" | trans({}, "catroweb") }}</div>
+                            <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
+                        </div>
+                    </div>
+                    <div class="lazyload projects-spinner-container">
+                        {% include 'Default/loadingSpinner.html.twig' only %}
+                    </div>
+                    <div class="lazyload project-list__wrapper">
+                        <div class="lazyload projects-container"></div>
+                        <div class="lazyload project-list__chevrons">
+                            <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none">chevron_left</div>
+                            <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
+    <i class="material-icons d-none" id="project-opening-spinner" style="margin: auto">
+        {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'project-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
+    </i>
 
-    <div id="related">
-      <h2>{{ "programs.related"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
-    </div>
-
-  {% else %}
-
-    <div id="newest" style="display:none">
-      <h2>{{ "programs.newest"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
-    </div>
-
-    <div id="example" style="display:none">
-      <h2>{{ "programs.example"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
-    </div>
-
-    <div id="recommended" style="display:none">
-      <h2>{{ "programs.recommended"|trans({}, "catroweb") }}
-        <span id="help-button" class="material-icons mdc-icon-button"
-           data-toggle="tooltip" title="Help"
-           data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-           data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
-          help_outline
-        </span>
-      </h2>
-      <div class="programs"></div>
-    </div>
-
-    <div id="mostDownloaded" style="display:none">
-      <h2>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
-    </div>
-
-    <div id="mostViewed" style="display:none">
-      <h2>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
-    </div>
-
-    <div id="scratchRemixes" style="display:none">
-      <h2>{{ "programs.scratchremixes"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
-    </div>
-
-    <div id="random" style="display:none">
-      <h2>{{ "programs.random"|trans({}, "catroweb") }}</h2>
-      <div class="programs"></div>
-    </div>
-
-  {% endif %}
 {% endblock %}
 
 {% block js %}
+  <script src="{{ asset('js/LoadYoutubeOnClick.min.js') }}" async></script>
+  <script src="{{ asset('js/modules/lazysizes.min.js') }}" async></script>
+  <script>const theme = '{{ theme() }}'</script>
+  <script>const flavor = '{{ flavor() }}'</script>
+  <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
+  <script src="{{ asset('js/ProjectList.min.js') }}"></script>
   <script src="{{ asset('js/Index.min.js') }}"></script>
   <script>
-    let index = new Index("{{ path('click_stats') }}", "{{ path('homepage_click_stats') }}",
-      "{{ "ok"|trans({}, "catroweb") }}")
-    {% if theme() == 'pocketgalaxy' %}
-    index.gamejamInit('{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam',
-      '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam', '{{ path('api_search_programs') }}?q=galaxy')
-    {% else %}
-    index.init('{{ path('api_recent_programs') }}',
-      "{{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}",
-      '{{ path('api_recsys_general_projects') }}', '{{ path('api_most_downloaded_programs') }}',
-      '{{ path('api_most_viewed_programs') }}', '{{ path('api_scratch_remix') }}',
-      '{{ path('api_random_programs') }}', '{{ path('api_example_programs') }}')
-    {% endif %}
+    const index = new Index("{{ path('click_stats') }}", "{{ path('homepage_click_stats') }}",
+            "{{ "ok"|trans({}, "catroweb") }}")
+    index.init()
+    index.showOauthPopup('{{ path('oauth_first_login') }}', '{{ 'oauthInfo' | trans({'%link_start%' : '<a href="'~path('profile')~'">', '%link_end%' : '</a>'}, 'catroweb') | raw }}',
+            '{{ 'oauthPopUpTitle' | trans({}, 'catroweb') }}', '{{ 'ok' | trans({}, 'catroweb') }}')
   </script>
 {% endblock %}

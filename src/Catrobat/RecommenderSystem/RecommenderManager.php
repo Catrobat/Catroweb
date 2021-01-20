@@ -5,9 +5,11 @@ namespace App\Catrobat\RecommenderSystem;
 use App\Catrobat\Requests\AppRequest;
 use App\Entity\Program;
 use App\Entity\ProgramLike;
+use App\Entity\ProgramRemixRelation;
 use App\Entity\User;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
+use App\Entity\UserTestGroup;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
@@ -83,7 +85,7 @@ class RecommenderManager
    *   m ... total number of liked programs
    *
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
-   * @time_complexity: O(n^2 * m)
+   * time_complexity: O(n^2 * m)
    */
   public function computeUserLikeSimilarities(?ProgressBar $progress_bar = null): void
   {
@@ -166,7 +168,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsForGuests($flavor): array
+  public function recommendHomepageProgramsForGuests($flavor, string $max_version = '0'): array
   {
     $most_liked_programs =
       $this->program_repository->getMostLikedPrograms(
@@ -204,7 +206,7 @@ class RecommenderManager
     }
 
     return ProgramRepository::filterVisiblePrograms(
-      $recommendation_list, $this->app_request->isDebugBuildRequest()
+      $recommendation_list, $this->app_request->isDebugBuildRequest(), $max_version
     );
   }
 
@@ -222,7 +224,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmOne(User $user, $flavor): array
+  public function recommendHomepageProgramsAlgorithmOne(User $user, $flavor, string $max_version = '0'): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -249,7 +251,7 @@ class RecommenderManager
     $programs = array_map(fn ($program_id) => $programs_liked_by_others[$program_id], array_keys($recommendation_weights));
 
     return ProgramRepository::filterVisiblePrograms(
-      $programs, $this->app_request->isDebugBuildRequest()
+      $programs, $this->app_request->isDebugBuildRequest(), $max_version
     );
   }
 
@@ -261,7 +263,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmTwo(User $user, $flavor): array
+  public function recommendHomepageProgramsAlgorithmTwo(User $user, $flavor, string $max_version = '0'): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -308,7 +310,7 @@ class RecommenderManager
     $programs = array_map(fn ($program_id) => $programs_liked_by_others[$program_id], array_keys($recommendation_weights));
 
     return ProgramRepository::filterVisiblePrograms(
-      $programs, $this->app_request->isDebugBuildRequest()
+      $programs, $this->app_request->isDebugBuildRequest(), $max_version
     );
   }
 
@@ -320,7 +322,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmThree(User $user, $flavor): array
+  public function recommendHomepageProgramsAlgorithmThree(User $user, $flavor, string $max_version = '0'): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -337,6 +339,11 @@ class RecommenderManager
     }
 
     $similar_user_similarity_mapping = $this->getSimilarUserSimilarityMapping($user);
+
+    if (count($similar_user_similarity_mapping) <= 0)
+    {
+      return [];
+    }
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_liked_programs = array_unique(array_map(fn (ProgramLike $like) => $like->getProgramId(), $all_likes_of_user));
@@ -448,7 +455,7 @@ class RecommenderManager
     }, $recommendations_by_id);
 
     return ProgramRepository::filterVisiblePrograms(
-      $programs, $this->app_request->isDebugBuildRequest()
+      $programs, $this->app_request->isDebugBuildRequest(), $max_version
     );
   }
 
@@ -461,7 +468,7 @@ class RecommenderManager
    *   m ... total number of remixed programs
    *
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
-   * @time_complexity: O(n^2 * m)
+   * time_complexity: O(n^2 * m)
    *
    * @param ProgressBar $progress_bar
    *
@@ -500,9 +507,9 @@ class RecommenderManager
     foreach ($user_remix_relations as $first_user_id => $first_user_remix_relations)
     {
       $ids_of_programs_remixed_by_first_user = array_unique(
-        array_map(function (array $data)
+        array_map(function (ProgramRemixRelation $relation)
         {
-          return $data['ancestor_id'];
+          return $relation->getAncestorId();
         }, $first_user_remix_relations)
       );
 
@@ -527,9 +534,9 @@ class RecommenderManager
 
         $already_added_relations[] = $key;
         $ids_of_programs_remixed_by_second_user = array_unique(
-          array_map(function (array $data)
+          array_map(function (ProgramRemixRelation $relation)
           {
-            return $data['ancestor_id'];
+            return $relation->getAncestorId();
           }, $second_user_remix_relations)
         );
 
@@ -598,9 +605,9 @@ class RecommenderManager
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_remixed_programs = array_unique(
-      array_map(function (array $data)
+      array_map(function (ProgramRemixRelation $relation)
       {
-        return $data['ancestor_id'];
+        return $relation->getAncestorId();
       }, $parent_relations_of_all_remixed_programs_of_user)
     );
 
@@ -637,6 +644,49 @@ class RecommenderManager
     return ProgramRepository::filterVisiblePrograms(
       $programs, $this->app_request->isDebugBuildRequest()
     );
+  }
+
+  public function getProjects(User $user = null, int $limit = 20, int $offset = 0, string $flavor = null, string $max_version = '0'): array
+  {
+    $programs = [];
+    $programs_count = 0;
+
+    if (null !== $user)
+    {
+      $user_id = $user->getId();
+      $user_test_group = $this->entity_manager->find(UserTestGroup::class, $user_id);
+      if (null === $user_test_group)
+      {
+        $user_test_group = new UserTestGroup($user_id, random_int(1, 3));
+        $this->entity_manager->persist($user_test_group);
+        $this->entity_manager->flush();
+      }
+      // Depending on the user's test group different algorithms are presented.
+      switch ($user_test_group->getGroupNumber())
+         {
+             case 1:
+                 $all_programs = $this->recommendHomepageProgramsAlgorithmOne($user, $flavor, $max_version);
+                 break;
+             case 2:
+                 $all_programs = $this->recommendHomepageProgramsAlgorithmTwo($user, $flavor, $max_version);
+                 break;
+             case 3:
+                 $all_programs = $this->recommendHomepageProgramsAlgorithmThree($user, $flavor, $max_version);
+                 break;
+             default:
+                 $all_programs = [];
+         }
+      $programs_count = count($all_programs);
+      $programs = array_slice($all_programs, $offset, $limit);
+    }
+    // Recommendations for guest user (or logged in users who receive zero recommendations)
+    if ((null == $user) || (0 === $programs_count))
+    {
+      $all_programs = $this->recommendHomepageProgramsForGuests($flavor, $max_version);
+      $programs = array_slice($all_programs, $offset, $limit);
+    }
+
+    return $programs;
   }
 
   private function imitateMerge(array &$array1, array $array2): void

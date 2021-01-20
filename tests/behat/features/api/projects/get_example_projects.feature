@@ -16,19 +16,22 @@ Feature: Get most downloaded projects
       | 4  | project 4 |  User2    | 50    |    20     | 04.08.2014 12:00 | 1048576  | 0.8.5   | 0.984            |  luna       |      en         |
       | 5  | project 5 |  User1    | 40    |    10     | 05.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            |  pocketcode |      de         |
       | 6  | project 6 |  User1    | 20    |    15     | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            |  luna       |      fr         |
+    And there are flavors:
+      | id | name       |
+      | 1  | arduino    |
+      | 2  | embroidery |
     And following projects are examples:
-      | name      | active | priority |
-      | project 1 | 0      | 1        |
-      | project 2 | 1      | 2        |
-      | project 3 | 1      | 3        |
+      | name      | active | priority | flavor     |
+      | project 1 | 0      | 1        | arduino    |
+      | project 2 | 1      | 2        | embroidery |
+      | project 3 | 1      | 3        | embroidery |
 
 
   Scenario: Get example projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=example"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
-    Then the response should contain projects in the following order:
+    Then the response should contain example projects in the following order:
       | Name      |
       | project 3 |
       | project 2 |

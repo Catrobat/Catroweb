@@ -207,6 +207,44 @@ Feature:
     And the element "#visibility-lock-open-1" should be visible
     And the element "#visibility-lock-1" should not be visible
 
+  Scenario: Project visibility should not get updated if the user clicks on cancel
+    Given I am on "/app/user"
+    And I wait for the page to be loaded
+    Then I should see "project 1"
+    And the element "#visibility-lock-open-1" should be visible
+    And the element "#visibility-lock-1" should not be visible
+    When I click "#visibility-lock-open-1"
+    And I wait for AJAX to finish
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-cancel"
+    And I wait for AJAX to finish
+    And the element "#visibility-lock-open-1" should be visible
+    And the element "#visibility-lock-1" should not be visible
+
+  Scenario: It should be possible toggle the project privacy on myprofile for more than 1 project
+    Given I am on "/app/user"
+    And I wait for the page to be loaded
+    Then I should see "project 1"
+    And I should see "project 2"
+    And the element "#visibility-lock-open-1" should be visible
+    And the element "#visibility-lock-1" should not be visible
+    And the element "#visibility-lock-open-2" should not be visible
+    And the element "#visibility-lock-2" should be visible
+    When I click "#visibility-lock-open-1"
+    And I wait for AJAX to finish
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    And the element "#visibility-lock-open-1" should not be visible
+    And the element "#visibility-lock-1" should be visible
+    When I click "#visibility-lock-2"
+    And I wait for AJAX to finish
+    And the element ".swal2-shown" should be visible
+    And I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    And the element "#visibility-lock-open-2" should be visible
+    And the element "#visibility-lock-2" should not be visible
+
   Scenario: Programs with too high language version can also be set to visible
     Given I am on "/app/user"
     And I wait for the page to be loaded
@@ -239,10 +277,10 @@ Feature:
     And I am on "/app/user"
     And I wait for the page to be loaded
     And there are comments:
-    | id  | program_id | user_id | upload_date      | text | user_name | reported |
-    | 1   | 1          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
-    | 2   | 2          | 2       | 01.01.2013 12:02 | c2   | User1     | true     |
-    | 3   | 3          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
+    | id  | program_id | user_id | text |
+    | 1   | 1          | 1       | c1   |
+    | 2   | 2          | 2       | c2   |
+    | 3   | 3          | 1       | c1   |
     And there are catro notifications:
       | user     | title                 | message         | type                     | commentID | like_from | follower_id | program_id  | prize | image_path | parent_program | child_program |
       | Catrobat |                       |                 | comment                  | 2         |           |             |             |       |            |                |               |

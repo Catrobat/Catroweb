@@ -1,33 +1,22 @@
-<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
+{% extends 'Notifications/NotificationTypes/notification_items.html.twig' %}
 
-  <h5 class="card-header notification-header">
-    {{ notification.title }}
-  </h5>
-  <div class="card-body">
-
-    <div class="row">
-
-      <div class="notification-avatar">
-        <img class="notification-round"
-             src="{{ notification.getImagePath() }}"
-             alt="Card image">
-      </div>
-
-      <div class="notification-body">
-
-        <div class="row mb-4">
-          <p class="card-text">
-            {{ notification.message }}
-        </div>
-
-        <div class="row">
-          <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
-                  onclick="notifications.markAsRead({{ notification.id }})">
-            {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
-          </button>
-        </div>
-      </div>
-    </div>
+{% block notification_leftAvatar %}
+  <div class="col-2 col-sm-1 my-auto">
+    {% if notification.getImagePath() is not empty %}
+      <img class="img-fluid notification-avatar-round"
+           src="{{ notification.getImagePath() }}"
+           alt="">
+    {% else %}
+      <span class="material-icons broadcast-icon">
+        notifications_active
+      </span>
+    {% endif %}
   </div>
+{% endblock %}
 
-</div>
+{% block notification_body %}
+  <div class="col-8 col-sm-8 pl-3 my-auto">
+    {{ notification.message }}
+  </div>
+{% endblock %}
+

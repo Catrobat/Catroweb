@@ -5,9 +5,11 @@ namespace App\Catrobat\Controller\Web;
 use App\Catrobat\Services\ImageRepository;
 use App\Catrobat\Services\StatisticsService;
 use App\Entity\FeaturedProgram;
+use App\Entity\User;
 use App\Repository\FeaturedRepository;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +28,7 @@ class DefaultController extends AbstractController
    */
   public function indexAction(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): Response
   {
-    $flavor = $request->get('flavor');
+    $flavor = $request->attributes->get('flavor');
 
     if ('phirocode' === $flavor)
     {
@@ -47,7 +49,7 @@ class DefaultController extends AbstractController
         if ($flavor)
         {
           $info['url'] = $this->generateUrl('program',
-          ['id' => $item->getProgram()->getId(), 'flavor' => $flavor]);
+          ['id' => $item->getProgram()->getId(), 'theme' => $flavor]);
         }
         else
         {
@@ -81,7 +83,7 @@ class DefaultController extends AbstractController
    */
   public function privacypolicyAction(): Response
   {
-    return $this->render('PrivacyAndTerms/policy.html.twig');
+    return $this->render('PrivacyAndTerms/privacyPolicy.html.twig');
   }
 
   /**
@@ -159,5 +161,26 @@ class DefaultController extends AbstractController
     }
 
     return new Response('error');
+  }
+
+  /**
+   * @Route("/checkFirstOauthLogin", name="oauth_first_login", methods={"GET"})
+   */
+  public function checkOauthFirstLogin(): Response
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $user_first_login = false;
+    $user_id = null;
+    if (null !== $user && true == $user->isOauthUser() && !$user->isOauthPasswordCreated())
+    {
+      $user_first_login = true;
+      $user_id = $user->getId();
+    }
+
+    return JsonResponse::create([
+      'first_login' => $user_first_login,
+      'user_id' => $user_id,
+    ]);
   }
 }

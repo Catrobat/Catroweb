@@ -1,6 +1,10 @@
 <button id="code-view{{ suffix|default('') }}"
         class="btn btn-outline-primary btn-block"
-        onclick="location.href='{{ path('code_view', {'id': program.id }) }}'">
-  <i class="material-icons align-bottom">extension</i>
+        onclick="program.projectViewButtonsAction('{{ path('code_view', {'id': program.id }) }}', '#code-view-button-spinner{{ suffix|default('') }}',
+                '#code-view-icon{{ suffix|default('') }}')">
+  <i class="material-icons d-none text-left" id="code-view-button-spinner{{ suffix|default('') }}">
+    {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default(), 'small': true} %}
+  </i>
+  <i class="material-icons align-bottom" id="code-view-icon">extension</i>
   <span>{{ "codeview.title"|trans({}, "catroweb") }}</span>
 </button>

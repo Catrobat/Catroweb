@@ -1,8 +1,8 @@
-# keep flavors consistent with config/packages/liip_theme.yaml
+# Routing Themes
 
 controllers:
-    resource: ../../src/Catrobat/Controller/
+    resource: ../../src/
     type: annotation
-    prefix:   /{flavor}/
+    prefix:   /{theme}/
     requirements:
-        flavor: 'app|pocketcode|pocketalice|pocketgalaxy|phirocode|luna|create\@school|embroidery|arduino'
+        theme: '%themeRoutes%'

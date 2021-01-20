@@ -772,8 +772,8 @@ class StatementFactory
     }
 
     $parent = 'parent::*';
-    if ($this->isTypeExisting($statement, $parent, self::SHOW_TEXT_STMT) ||
-      $this->isTypeExisting($statement, $parent, self::HIDE_TEXT_STMT)
+    if ($this->isTypeExisting($statement, $parent, self::SHOW_TEXT_STMT)
+      || $this->isTypeExisting($statement, $parent, self::HIDE_TEXT_STMT)
     ) {
       return new UserVariableStatement($this, $statement, $spaces, $variableName, true);
     }

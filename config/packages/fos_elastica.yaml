@@ -28,11 +28,38 @@ fos_elastica:
                         name: { boost: 3 }
                         private: ~
                         visible: ~
+                        debug_build: ~
+                        getUsernameString: ~
                         getTagsString: ~
                         getExtensionsString: ~
                     persistence:
                         driver: orm
                         model: App\Entity\Program
+                        provider: ~
+                        finder: ~
+                        listener: ~
+        app_user:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            program_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [standard, lowercase, elision, language_stop]
+                        filter:
+                            language_stop:
+                                type: stop
+                                ignore_case: true
+                                stopwords: [_english_]
+            types:
+                user:
+                    properties:
+                        id: ~
+                        username: { boost: 3 }
+                    persistence:
+                        driver: orm
+                        model: App\Entity\User
                         provider: ~
                         finder: ~
                         listener: ~

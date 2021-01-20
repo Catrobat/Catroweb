@@ -2,10 +2,10 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser;
-use App\Catrobat\Services\CatrobatCodeParser\ParsedScene;
-use App\Catrobat\Services\CatrobatCodeParser\ParsedSceneProgram;
-use App\Catrobat\Services\CatrobatCodeParser\ParsedSimpleProgram;
+use App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser;
+use App\Catrobat\CatrobatCode\Parser\ParsedScene;
+use App\Catrobat\CatrobatCode\Parser\ParsedSceneProgram;
+use App\Catrobat\CatrobatCode\Parser\ParsedSimpleProgram;
 use RecursiveIteratorIterator;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
@@ -162,7 +162,7 @@ class CatrobatFileSanitizer
       return '';
     }
 
-    $limit = null;
+    $limit = -1;
     $pattern = '@/@';
     $array = preg_split($pattern, $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY);
     $needle = @end($array);

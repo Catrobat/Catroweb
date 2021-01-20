@@ -11,6 +11,7 @@ use App\Utils\APIQueryHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use OpenAPI\Server\Model\MediaFileResponse;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -26,26 +27,30 @@ class MediaLibraryApi implements MediaLibraryApiInterface
 
   private RequestStack $stack;
 
+  private ParameterBagInterface $parameter_bag;
+
   public function __construct(EntityManagerInterface $entity_manager, UrlGeneratorInterface $url_generator,
-                              MediaPackageFileRepository $media_package_file_repository, RequestStack $stack)
+                              MediaPackageFileRepository $media_package_file_repository, RequestStack $stack,
+                              ParameterBagInterface $parameter_bag)
   {
     $this->entity_manager = $entity_manager;
     $this->url_generator = $url_generator;
     $this->media_package_file_repository = $media_package_file_repository;
     $this->stack = $stack;
+    $this->parameter_bag = $parameter_bag;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesSearchGet(string $query_string, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode, array &$responseHeaders)
+  public function mediaFilesSearchGet(string $query, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
     $responseCode = Response::HTTP_OK;
 
-    $found_media_files = $this->media_package_file_repository->search($query_string, $flavor, $package_name, $limit, $offset);
+    $found_media_files = $this->media_package_file_repository->search($query, $flavor, $package_name, $limit, $offset);
 
     return $this->getMediaFilesDataResponse($found_media_files);
   }
@@ -53,13 +58,13 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaPackageNameGet(string $package_name, ?int $limit = 20, ?int $offset = 0, &$responseCode, array &$responseHeaders)
+  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
     $media_package = $this->entity_manager->getRepository(MediaPackage::class)
-      ->findOneBy(['nameUrl' => $package_name])
+      ->findOneBy(['nameUrl' => $name])
     ;
 
     if (null === $media_package)
@@ -91,22 +96,20 @@ class MediaLibraryApi implements MediaLibraryApiInterface
         }
         continue;
       }
-      if (null !== $media_package_files)
+
+      /** @var MediaPackageFile $media_package_file */
+      foreach ($media_package_files as $media_package_file)
       {
-        /** @var MediaPackageFile $media_package_file */
-        foreach ($media_package_files as $media_package_file)
+        if (0 != $offset)
         {
-          if (0 != $offset)
-          {
-            --$offset;
-            continue;
-          }
-          if (count($json_response_array) === $limit)
-          {
-            break;
-          }
-          $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file, $media_package));
+          --$offset;
+          continue;
         }
+        if (count($json_response_array) === $limit)
+        {
+          break;
+        }
+        $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file));
       }
     }
 
@@ -116,7 +119,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFileIdGet(int $id, &$responseCode, array &$responseHeaders)
+  public function mediaFileIdGet(int $id, &$responseCode = null, array &$responseHeaders = null)
   {
     $media_package_file = $this->entity_manager->getRepository(MediaPackageFile::class)
       ->findOneBy(['id' => $id])
@@ -137,7 +140,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode, array &$responseHeaders)
+  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
@@ -172,25 +175,22 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     return $media_files_data_response;
   }
 
-  private function getMediaFileDataResponse(MediaPackageFile $media_package_file, ?MediaPackage $package = null): array
+  private function getMediaFileDataResponse(MediaPackageFile $media_package_file): array
   {
-    if (null === $package)
-    {
-      $package = $media_package_file->getCategory()->getPackage()->first();
-    }
-
     return $mediaFile = [
       'id' => $media_package_file->getId(),
       'name' => $media_package_file->getName(),
-      'flavor' => $media_package_file->getFlavor(),
       'flavors' => $media_package_file->getFlavorNames(),
-      'package' => $package->getName(),
+      'packages' => $media_package_file->getCategory()->getPackageNames(),
       'category' => $media_package_file->getCategory()->getName(),
       'author' => $media_package_file->getAuthor(),
       'extension' => $media_package_file->getExtension(),
       'download_url' => $this->url_generator->generate(
           'download_media',
-          ['id' => $media_package_file->getId()],
+          [
+            'theme' => $this->parameter_bag->get('umbrellaTheme'),
+            'id' => $media_package_file->getId(),
+          ],
           UrlGenerator::ABSOLUTE_URL),
     ];
   }

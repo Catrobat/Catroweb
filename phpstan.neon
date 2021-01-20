@@ -4,7 +4,7 @@ parameters:
       - src
       - tests
   excludes_analyse:
-      - src/Migrations
+      - migrations
   inferPrivatePropertyTypeFromConstructor: true
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:

@@ -6,7 +6,7 @@ use App\Catrobat\Events\CheckScratchProgramEvent;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
-use App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter;
+use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\StatisticsService;
@@ -21,7 +21,7 @@ use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserComment;
 use App\Repository\CatroNotificationRepository;
-use App\Repository\GameJamRepository;
+use App\Utils\ElapsedTimeStringFormatter;
 use App\Utils\ImageUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -51,7 +51,6 @@ class ProgramController extends AbstractController
   private ScreenshotRepository $screenshot_repository;
   private ProgramManager $program_manager;
   private ElapsedTimeStringFormatter $elapsed_time;
-  private GameJamRepository $game_jam_repository;
   private ExtractedFileRepository $extracted_file_repository;
   private CatroNotificationRepository $notification_repo;
   private CatroNotificationService $notification_service;
@@ -59,27 +58,27 @@ class ProgramController extends AbstractController
   private RudeWordFilter $rude_word_filter;
   private ParameterBagInterface $parameter_bag;
   private EventDispatcherInterface $event_dispatcher;
+  private ProgramFileRepository $file_repository;
 
   public function __construct(StatisticsService $statistics_service,
                               RemixManager $remix_manager,
                               ScreenshotRepository $screenshot_repository,
                               ProgramManager $program_manager,
                               ElapsedTimeStringFormatter $elapsed_time,
-                              GameJamRepository $game_jam_repository,
                               ExtractedFileRepository $extracted_file_repository,
                               CatroNotificationRepository $notification_repo,
                               CatroNotificationService $notification_service,
                               TranslatorInterface $translator,
                               RudeWordFilter $rude_word_filter,
                               ParameterBagInterface $parameter_bag,
-                              EventDispatcherInterface $event_dispatcher)
+                              EventDispatcherInterface $event_dispatcher,
+                              ProgramFileRepository $file_repository)
   {
     $this->statistics = $statistics_service;
     $this->remix_manager = $remix_manager;
     $this->screenshot_repository = $screenshot_repository;
     $this->program_manager = $program_manager;
     $this->elapsed_time = $elapsed_time;
-    $this->game_jam_repository = $game_jam_repository;
     $this->extracted_file_repository = $extracted_file_repository;
     $this->notification_repo = $notification_repo;
     $this->notification_service = $notification_service;
@@ -87,10 +86,11 @@ class ProgramController extends AbstractController
     $this->rude_word_filter = $rude_word_filter;
     $this->parameter_bag = $parameter_bag;
     $this->event_dispatcher = $event_dispatcher;
+    $this->file_repository = $file_repository;
   }
 
   /**
-   * @Route("/project/{id}", name="program")
+   * @Route("/project/{id}", name="program", defaults={"id": "0"})
    *
    * Legacy routes:
    * @Route("/program/{id}", name="program_depricated")
@@ -106,7 +106,6 @@ class ProgramController extends AbstractController
   {
     /** @var Program $project */
     $project = $this->program_manager->find($id);
-    $router = $this->get('router');
 
     if (!$this->program_manager->isProjectVisibleForCurrentUser($project))
     {
@@ -146,11 +145,6 @@ class ProgramController extends AbstractController
       $referrer, $program_comments, $request
     );
 
-    $jam = $this->extractGameJamConfig();
-
-    // Catblocks is working with the extracted files not the project zip.
-    $this->extracted_file_repository->ensureProjectIsExtracted($project);
-
     return $this->render('Program/program.html.twig', [
       'program' => $project,
       'program_details' => $program_details,
@@ -158,7 +152,6 @@ class ProgramController extends AbstractController
       'logged_in' => $logged_in,
       'max_description_size' => $this->getParameter('catrobat.max_description_upload_size'),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
-      'jam' => $jam,
     ]);
   }
 
@@ -321,7 +314,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (!$user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     /** @var ArrayCollection $user_programs */
@@ -358,7 +351,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     /** @var ArrayCollection $user_programs */
@@ -411,7 +404,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $program = $this->program_manager->find($id);
@@ -431,6 +424,14 @@ class ProgramController extends AbstractController
     $em->persist($program);
     $em->flush();
 
+    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    if ($extracted_file)
+    {
+      $extracted_file->setDescription($new_description);
+      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+      $this->file_repository->deleteProgramFileIfExists($program->getId());
+    }
+
     return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }
 
@@ -441,18 +442,18 @@ class ProgramController extends AbstractController
    */
   public function editProgramCredits(string $id, string $new_credits): Response
   {
-    $max_credits_size = $this->getParameter('catrobat.max_credits_upload_size');
+    $max_credits_size = $this->getParameter('catrobat.max_notes_and_credits_upload_size');
 
     if (strlen($new_credits) > $max_credits_size)
     {
-      return JsonResponse::create(['statusCode' => StatusCode::CREDITS_TO_LONG,
+      return JsonResponse::create(['statusCode' => StatusCode::NOTES_AND_CREDITS_TOO_LONG,
         'message' => $this->translator
           ->trans('programs.tooLongCredits', [], 'catroweb'), ]);
     }
 
     if ($this->rude_word_filter->containsRudeWord($new_credits))
     {
-      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_CREDITS,
+      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_NOTES_AND_CREDITS,
         'message' => $this->translator
           ->trans('programs.rudeWordsInCredits', [], 'catroweb'), ]);
     }
@@ -460,7 +461,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (null === $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $program = $this->program_manager->find($id);
@@ -479,6 +480,14 @@ class ProgramController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $em->persist($program);
     $em->flush();
+
+    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    if ($extracted_file)
+    {
+      $extracted_file->setNotesAndCredits($new_credits);
+      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+      $this->file_repository->deleteProgramFileIfExists($program->getId());
+    }
 
     return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }
@@ -503,7 +512,7 @@ class ProgramController extends AbstractController
 
     if (null === $user || $project->getUser() !== $user)
     {
-      return $this->redirectToRoute('fos_user_security_login');
+      return $this->redirectToRoute('login');
     }
 
     $image = $request->request->get('image');
@@ -523,39 +532,6 @@ class ProgramController extends AbstractController
       'statusCode' => Response::HTTP_OK,
       'image_base64' => null,
     ]);
-  }
-
-  /**
-   * @throws NonUniqueResultException
-   */
-  private function extractGameJamConfig(): ?array
-  {
-    $jam = null;
-
-    $game_jam = $this->game_jam_repository->getCurrentGameJam();
-
-    if ($game_jam)
-    {
-      $game_jam_flavor = $game_jam->getFlavor();
-      if (null !== $game_jam_flavor)
-      {
-        $config = $this->getParameter('gamejam');
-        $gamejam_config = $config[$game_jam_flavor];
-        if ($gamejam_config)
-        {
-          $logo_url = $gamejam_config['logo_url'];
-          $display_name = $gamejam_config['display_name'];
-          $gamejam_url = $gamejam_config['gamejam_url'];
-          $jam = [
-            'name' => $display_name,
-            'logo_url' => $logo_url,
-            'gamejam_url' => $gamejam_url,
-          ];
-        }
-      }
-    }
-
-    return $jam;
   }
 
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void

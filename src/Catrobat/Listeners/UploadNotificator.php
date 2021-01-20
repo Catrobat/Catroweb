@@ -20,7 +20,7 @@ class UploadNotificator
     $this->notification_repo = $repository;
   }
 
-  public function onProgramInsertEvent(ProgramAfterInsertEvent $event): void
+  public function onProgramAfterInsertEvent(ProgramAfterInsertEvent $event): void
   {
     /* @var $notification_repo NotificationRepository */
     $notification_repo = $this->notification_repo;

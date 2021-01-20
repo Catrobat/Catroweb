@@ -57,7 +57,7 @@ Feature:
     And I should see "The password for this user has already been requested within the last 24 hours."
 
   Scenario: The referer should work even after one failed login
-    Given I am on "/app/help"
+    Given I am on homepage
     And I wait for the page to be loaded
     Then I should see an "#btn-login" element
     When I click "#btn-login"
@@ -73,7 +73,6 @@ Feature:
     And I fill in "password" with "123456"
     Then I press "Login"
     And I wait for the page to be loaded
-    And I should see "Game Design"
 
   Scenario: When visiting the page directly to the login page, after login i should be on the index page
     Given  there are projects:

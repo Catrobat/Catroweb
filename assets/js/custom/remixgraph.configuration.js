@@ -19,14 +19,12 @@ const NETWORK_OPTIONS = {
       border: '#CCCCCC',
       background: '#000000',
       highlight: {
-        border: '#FFFF00'//,
-        // background: '#000000'
+        border: '#00acc1'
       }
     },
     font: {
       size: 10,
-      color: '#000000'//,
-      //                background: '#FFFFFF'
+      color: '#000000'
     },
     shapeProperties: {
       useBorderWithImage: true
@@ -42,13 +40,10 @@ const NETWORK_OPTIONS = {
       opacity: 1.0
     },
     smooth: {
-      //            type: 'straightCross'
-      //            type: 'dynamic'
       type: 'dynamic'
     },
     arrows: { to: true }
   },
-  // smoothCurves: { dynamic:false, type: "continuous" },
   physics: {
     adaptiveTimestep: false,
     stabilization: true

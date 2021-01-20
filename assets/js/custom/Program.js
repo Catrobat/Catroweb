@@ -4,7 +4,7 @@
 // eslint-disable-next-line no-unused-vars
 const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
-  btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText) {
+  btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText) {
   const self = this
 
   self.projectId = projectId
@@ -25,6 +25,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   self.wowWhite = wowWhite
   self.wowBlack = wowBlack
   self.reactionsText = reactionsText
+  self.downloadErrorText = downloadErrorText
   self.download = function (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
     downloadPbID, downloadIconID) {
     const downloadProgressBar = $(downloadPbID)
@@ -44,7 +45,14 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     downloadProgressBar.removeClass('d-none')
     downloadProgressBar.addClass('d-inline-block')
     fetch(downloadUrl)
-      .then(resp => resp.blob())
+      .then(function (response) {
+        if (!response.ok) {
+          // eslint-disable-next-line no-undef
+          showSnackbar('#share-snackbar', self.downloadErrorText)
+          return null
+        }
+        return response.blob()
+      })
       .then(blob => {
         const url = window.URL.createObjectURL(blob)
         const a = document.createElement('a')
@@ -147,9 +155,11 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     const popupBackground = self.createPopupBackgroundDiv()
     const popupDiv = self.createPopupDiv()
     const body = $('body')
+    const apkSpinner = $('#apk-pb')
+    apkSpinner.removeClass('d-none')
 
     popupDiv.append('<h2>' + self.apkPreparing + '</h2><br>')
-    popupDiv.append('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">')
+    popupDiv.append(apkSpinner)
     popupDiv.append('<p>' + self.apkText + '</p>')
 
     const closePopupButton = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + self.btnClosePopup + '</button>'
@@ -159,6 +169,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     body.append(popupDiv)
 
     $('#popup-background, #btn-close-popup').click(function () {
+      apkSpinner.addClass('d-none')
       popupDiv.remove()
       popupBackground.remove()
     })
@@ -191,7 +202,11 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: message
+      text: message,
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      buttonsStyling: false
     })
   }
 
@@ -241,13 +256,18 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         detailOpened = false
       }
     })
-    $counter.on('click', self.counterClickAction)
-    $counterSmall.on('click', self.counterClickAction)
+    $counter.on('click', { small: false }, self.counterClickAction)
+    $counterSmall.on('click', { small: true }, self.counterClickAction)
     $detail.find('.btn').on('click', self.detailsAction)
     $detailSmall.find('.btn').on('click', self.detailsAction)
   }
 
-  self.counterClickAction = function () {
+  self.counterClickAction = function (event) {
+    if (event.data.small) {
+      $('#project-reactions-spinner-small').removeClass('d-none')
+    } else {
+      $('#project-reactions-spinner').removeClass('d-none')
+    }
     $.getJSON(likeDetailUrl,
       /** @param {{user: {id: string, name: string}, types: string[]}[]} data */
       function (data) {
@@ -325,9 +345,13 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         fnUpdateContent('smile', smileData)
         fnUpdateContent('love', loveData)
         fnUpdateContent('wow', wowData)
+        $('#project-reactions-spinner').addClass('d-none')
+        $('#project-reactions-spinner-small').addClass('d-none')
 
         $modal.modal('show')
       }).fail(function (jqXHR, textStatus, errorThrown) {
+      $('#project-reactions-spinner').hide()
+      $('#project-reactions-spinner-small').hide()
       self.showErrorAlert()
       console.error('Failed fetching like list', jqXHR, textStatus, errorThrown)
     })
@@ -428,4 +452,68 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
   $(function () {
     self.initProjectLike()
   })
+  self.projectViewButtonsAction = function (url, spinner, icon = null) {
+    const buttonSpinner = $(spinner)
+    if (icon) {
+      const buttonIcon = $(icon)
+      buttonIcon.hide()
+    }
+    buttonSpinner.removeClass('d-none')
+    window.location.href = url
+  }
 }
+
+$(document).on('click', function (e) {
+  const ellipsisContainer = $('#sign-app-ellipsis-container')
+  if (!(ellipsisContainer.is(e.target) || $('#sign-app-ellipsis').is(e.target))) {
+    ellipsisContainer.hide()
+  }
+})
+
+$(document).ready(function () {
+  $('#sign-app-ellipsis').on('click', function () {
+    $('#sign-app-ellipsis-container').show()
+  })
+
+  $('#toggle_ads').on('click', function () {
+    if ($('#show_ads_chk').is(':checked')) {
+      $('#ads_info').show()
+    } else {
+      $('#ads_info').hide()
+    }
+  })
+
+  $('#key_store_file').on('change', function () {
+    $('#key_store_file_text').val($('#key_store_file').val())
+  })
+  $('#key_store_file_text').on('click', function () {
+    $('#key_store_file').trigger('click')
+    $(this).blur()
+  })
+  $('#key_store_icon').on('click', function () {
+    $('#key_store_file').trigger('click')
+  })
+
+  $('#key_store_path').on('change', function () {
+    $('#key_store_path_text').val($('#key_store_path').val())
+  })
+  $('#key_file_path_icon').on('click', function () {
+    $('#key_store_path').trigger('click')
+  })
+  $('#key_store_path_text').on('click', function () {
+    $('#key_store_path').trigger('click')
+    $(this).blur()
+  })
+  $('#inc_years').on('click', function () {
+    const yearsField = $('#key_validity')
+    if (yearsField.val() < 99) {
+      yearsField.val(parseInt(yearsField.val()) + 1)
+    }
+  })
+  $('#dec_years').on('click', function () {
+    const yearsField = $('#key_validity')
+    if (yearsField.val() > 0) {
+      yearsField.val(parseInt(yearsField.val()) - 1)
+    }
+  })
+})

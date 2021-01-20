@@ -21,9 +21,9 @@ $blue:    #008cba !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #e83e8c !default;
-$red:     #F04124 !default;
+$red:     #f04124 !default;
 $orange:  #fd7e14 !default;
-$yellow:  #E99002 !default;
+$yellow:  #e99002 !default;
 $green:   #43ac6a !default;
 $teal:    #20c997 !default;
 $cyan:    #5bc0de !default;
@@ -44,10 +44,13 @@ $dark:          $gray-900 !default;
 $font-family-sans-serif:      Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $default-font-size: 1rem;
 
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
 // Login Logo
 
-$theme-logo-color-primary:          #17A6B7;
-$theme-logo-color-secondary:        #FF7701;
+$theme-logo-color-primary:          #17a6b7;
+$theme-logo-color-secondary:        #ff7701;
 $theme-logo-font-size:              40px;
 $theme-logo-font-weight:            800;
 
@@ -58,7 +61,7 @@ $footer-color: $black;
 
 /* Default */
 $default-background-color: #fefeff;
-$default-input-background-color: #96CED6;
+$default-input-background-color: #96ced6;
 $default-input-padding: 5px;
 $default-input-size: 18px;
 $default-button-size: 26px;

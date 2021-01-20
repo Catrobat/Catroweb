@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="rudewords")
+ * @DoctrineAssert\UniqueEntity(fields="word", message="This word already exists", groups={"rudeword"})
  * @ORM\Entity(repositoryClass="App\Repository\RudeWordsRepository")
  */
 class RudeWord
@@ -19,7 +21,7 @@ class RudeWord
   protected ?int $id = null;
 
   /**
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", unique=true)
    */
   protected string $word = '';
 

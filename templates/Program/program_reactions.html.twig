@@ -47,6 +47,11 @@
       {{ program_details.totalLikeCount | humanFriendlyNumber }}
     {{ 'programs.reactionsText'|trans({}, 'catroweb') }}
     </span>
+    <span>
+    <i class="material-icons d-none" id="project-reactions-spinner{{ suffix|default('') }}">
+      {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'reactions-spinner' ~ suffix|default(), small: 'true'} %}
+    </i>
+    </span>
   {% if suffix is defined %}
     </div>
   {% endif %}

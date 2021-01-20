@@ -32,8 +32,6 @@ Feature: Admin all projects
       | January 1, 2019 12:00  | Karim              | program 1 |  pocketcode | 120    | 3         | no       | yes     | Show    |
 
 
-
-
   Scenario: List all projects sorted by views ascending
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/all_programs/list"

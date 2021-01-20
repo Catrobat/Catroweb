@@ -1,9 +1,10 @@
 <button id="remix-graph-button{{ suffix|default('') }}"
         class="btn btn-outline-primary btn-block"
-        onclick="location.href='{{ path('remix_graph', {'id': program.id }) }}'">
-  <i class="material-icons d-none">
-    {% include 'Default/progressbar.html.twig' with {'progressbar_id': 'remix-graph-spinner' ~ suffix|default(), 'small': true} %}
+        onclick="program.projectViewButtonsAction('{{path('remix_graph', {'id': program.id })}}', '#remix-graph-button-spinner{{ suffix|default('') }}',
+                '#remix-graph-icon{{ suffix|default('') }}')">
+  <i class="material-icons d-none text-left" id="remix-graph-button-spinner{{ suffix|default('') }}">
+    {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'remix-graph-spinner' ~ suffix|default(), 'small': true} %}
   </i>
-  <i class="material-icons align-bottom">call_split</i>
+  <i class="material-icons align-bottom" id="remix-graph-icon{{ suffix|default('') }}">call_split</i>
   <span>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</span>
 </button>

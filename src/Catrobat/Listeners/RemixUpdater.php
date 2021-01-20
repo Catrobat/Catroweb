@@ -88,7 +88,7 @@ class RemixUpdater
     }
 
     $program_xml_properties->header->remixOf = $remix_url_string;
-    $program_xml_properties->header->url = $this->router->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
+    $program_xml_properties->header->url = $this->router->generate('program', ['id' => $program->getId(), 'theme' => 'pocketcode']);
     $program_xml_properties->header->userHandle = $program->getUser()->getUsername();
     $file->saveProgramXmlProperties();
   }

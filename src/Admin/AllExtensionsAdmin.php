@@ -75,5 +75,6 @@ class AllExtensionsAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('delete')->remove('export');
+    $collection->add('extensions');
   }
 }

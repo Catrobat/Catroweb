@@ -48,43 +48,15 @@ class ExtractedFileRepository
     $this->logger = $logger;
   }
 
-  public function ensureProjectIsExtracted(Program $project): bool
-  {
-    try
-    {
-      $hash = $project->getExtractedDirectoryHash();
-      if (null === $hash || !file_exists($this->local_path.$hash))
-      {
-        $this->extractProject($project);
-      }
-    }
-    catch (Exception $e)
-    {
-      return false;
-    }
-
-    return true;
-  }
-
   public function loadProgramExtractedFile(Program $program): ?ExtractedCatrobatFile
   {
     try
     {
-      $hash = $program->getExtractedDirectoryHash();
+      $program_id = $program->getId();
 
-      return new ExtractedCatrobatFile($this->local_path.$hash.'/', $this->web_path.$hash.'/', $hash);
+      return new ExtractedCatrobatFile($this->local_path.$program_id.'/', $this->web_path.$program_id.'/', $program_id);
     }
     catch (InvalidCatrobatFileException $e)
-    {
-      //need to extract first
-      unset($e);
-    }
-
-    try
-    {
-      return $this->extractProject($program);
-    }
-    catch (Exception $e)
     {
       return null;
     }
@@ -94,16 +66,15 @@ class ExtractedFileRepository
   {
     try
     {
-      $hash = $program->getExtractedDirectoryHash();
+      $program_id = $program->getId();
 
-      if (null === $hash)
+      if (null === $program_id || !is_dir($this->local_path.$program_id.'/'))
       {
         return; // nothing to do
       }
 
-      $extract_dir = $this->local_path.$hash.'/';
+      $extract_dir = $this->local_path.$program_id.'/';
       Utils::removeDirectory($extract_dir);
-      $program->setExtractedDirectoryHash(null);
       $this->program_manager->save($program);
     }
     catch (Exception $e)
@@ -115,13 +86,15 @@ class ExtractedFileRepository
     }
   }
 
-  private function extractProject(Program $program): ExtractedCatrobatFile
+  /**
+   * @throws Exception
+   */
+  public function saveProgramExtractedFile(ExtractedCatrobatFile $extracted_file): void
   {
-    $program_file = $this->program_file_repo->getProgramFile($program->getId());
-    $extracted_file = $this->file_extractor->extract($program_file);
-    $program->setExtractedDirectoryHash($extracted_file->getDirHash());
-    $this->program_manager->save($program);
-
-    return $extracted_file;
+    $file_overwritten = $extracted_file->getProgramXmlProperties()->asXML($extracted_file->getPath().'code.xml');
+    if (!$file_overwritten)
+    {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 }

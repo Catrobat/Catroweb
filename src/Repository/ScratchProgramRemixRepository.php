@@ -15,8 +15,6 @@ class ScratchProgramRemixRepository extends ServiceEntityRepository
 
   /**
    * @param string[] $program_ids
-   *
-   * @return string[]
    */
   public function getDirectEdgeRelationsOfProgramIds(array $program_ids): array
   {

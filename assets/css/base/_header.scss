@@ -52,7 +52,8 @@
 
 // ---- Options
 
-#top-app-bar__options-container {
+#top-app-bar__options-container,
+#sign-app-ellipsis-container {
   top: 0;
   right: 0;
   display: none;
@@ -64,13 +65,13 @@
     margin-block-end: 0;
   }
 
-  .top-app-bar__btn-options {
+  .top-app-bar-btn-options {
     display: block;
     padding: 0.5em 1em;
     text-align: left;
   }
 
-  .top-app-bar__btn-options-text {
+  .top-app-bar-btn-options-text {
     display: inline-flex;
     vertical-align: top;
   }

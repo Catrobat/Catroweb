@@ -42,6 +42,8 @@ class Kernel extends BaseKernel
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @throws Exception
    */
   protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void

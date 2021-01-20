@@ -2,7 +2,7 @@
 
 {% block head %}
 
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/login.css') }}" media="screen"/>
 
 {% endblock %}
 
@@ -38,13 +38,12 @@
             <div class="row">
               <div class="col">
 
-                <div class="group">
-                  <input type="text" id="username" name="username" required/>
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-                  <label><span
-                        class="span-input">{{ "login.userOrEmail"|trans({}, "catroweb") }}</span></label>
-                </div>
+                <label class="mdc-text-field mdc-text-field--filled username">
+                  <span class="mdc-text-field__ripple"></span>
+                  <input type="text" class="mdc-text-field__input" aria-labelledby="username-label" id="username" name="username" required>
+                  <span class="mdc-floating-label" id="username-label">{{ "login.userOrEmail"|trans({}, "catroweb") }}</span>
+                  <span class="mdc-line-ripple"></span>
+                </label>
 
                 <!-- Button -->
                 <div style="margin-top:30px; margin-bottom:30px" class="form-group">
@@ -88,9 +87,7 @@
       </div>
     </div>
 
-    <div id="spacer1" style="margin-bottom: 30px"></div>
     {% include 'UserManagement/oauth_registration.html.twig' %}
-    <div id="spacer2" style="margin-bottom: 30px"></div>
 
   {% endblock fos_user_content %}
 
@@ -98,14 +95,12 @@
 
 {% block js %}
   <script src="{{ asset('js/register.min.js') }}"></script>
+  {{ encore_entry_script_tags('request') }}
   <script>
     const register =new Register(
-      "{{ flavor() }}",
-      "{{ "oauth.username_header"|trans({}, "catroweb") }}",
-      "{{ "oauth.username_chooser"|trans({}, "catroweb") }}",
-      "{{ "oauth.usernameTaken"|trans({}, "catroweb") }}",
-      "{{ "errors.username.size"|trans({}, "catroweb") }}",
-      "{{ "ok"|trans({}, "catroweb") }}"
+      "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
+      "{{ path('hwi_oauth_service_redirect', {'service': 'facebook' })  }}",
+      "{{ path('hwi_oauth_service_redirect', {'service': 'apple' })  }}"
     )
   </script>
 {% endblock js %}
