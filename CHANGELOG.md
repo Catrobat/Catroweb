@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.7.0]
+### Added
+- New Frontend for APK Signing (hidden until backend finished)
+- New Catblocks release :hibiscus:
+- Add translation capability to project and comments via link to google translation
+### Changed
+- CAPI update 1.0.52 
+    - (GET|HEAD requests contain hash)
+    - Projects now have Tag information
+    - Register endpoint returns token
+    - Report API supports bearer and upload token
+- Admin Area
+    - Refactoring
+    - Better Logging
+- Dependencies
+- Optimized lazy loading (images)
+- Preloading (fonts, css)
+### Fixed
+- use official HWIOauth Bundle
+- Show path in remix graph working again
+- Microsoft Edge Support
+- CAPI
+    - Added project id and project url
 ## [3.6.0]
 ### Added
 - serve images as webp
@@ -271,7 +294,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
 
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.6.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.7.0...HEAD
+[3.7.0]: https://github.com/Catrobat/Catroweb/compare/v3.6.0...v3.7.0
+[3.6.0]: https://github.com/Catrobat/Catroweb/compare/v3.5.0...v3.6.0
 [3.5.0]: https://github.com/Catrobat/Catroweb/compare/v3.4.5...v3.5.0
 [3.4.5]: https://github.com/Catrobat/Catroweb/compare/v3.4.4...v3.4.5
 [3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.3...v3.4.4
