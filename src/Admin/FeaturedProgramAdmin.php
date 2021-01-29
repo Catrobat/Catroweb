@@ -143,11 +143,11 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
     /** @var FeaturedProgram $featured_project */
     $featured_project = $this->getSubject();
@@ -173,7 +173,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
         $use_url = false;
       }
     }
-    $formMapper
+    $form
       ->add('file', FileType::class, $file_options,
         ['help' => 'The featured image must be of size 1024 x 400'])
       ->add('Use_Url', CheckboxType::class, ['mapped' => false, 'required' => false,
@@ -188,13 +188,13 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('program.name')
       ->add('for_ios')
       ->add('active')
@@ -204,14 +204,14 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
     unset($this->listModes['mosaic']);
-    $listMapper
+    $list
       ->addIdentifier('id', null, [
         'sortable' => false,
       ])
@@ -227,7 +227,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
       ])
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
-      ->add('active', null)
+      ->add('active')
       ->add('_action', 'actions', [
         'actions' => [
           'edit' => [],

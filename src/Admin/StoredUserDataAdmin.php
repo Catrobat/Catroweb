@@ -20,13 +20,13 @@ class StoredUserDataAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'stored_userdata';
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->addIdentifier('username')
       ->add('email')
       ->add('_action', 'actions', [
@@ -40,13 +40,13 @@ class StoredUserDataAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper->add('username', null, [
+    $filter->add('username', null, [
       'show_filter' => true,
     ])
       ->add('email')

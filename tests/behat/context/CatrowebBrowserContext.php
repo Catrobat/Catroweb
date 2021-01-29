@@ -2530,6 +2530,22 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the survey table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeSurveyTable(TableNode $table): void
+  {
+    $survey_stats = $table->getHash();
+    foreach ($survey_stats as $survey_stat)
+    {
+      $this->assertSession()->pageTextContains($survey_stat['Language Code']);
+      $this->assertSession()->pageTextContains($survey_stat['Url']);
+      $this->assertSession()->pageTextContains($survey_stat['Active']);
+    }
+  }
+
+  /**
    * @Then /^I should see the media package categories table:$/
    *
    * @throws ResponseTextException

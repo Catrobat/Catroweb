@@ -4,31 +4,30 @@ namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
-class PendingApkRequestsAdmin extends AbstractAdmin
+class ApkPendingAdmin extends AbstractAdmin
 {
   /**
    * @override
    *
    * @var string
    */
-  protected $baseRouteName = 'admin_catrobat_apk_pending_requests';
+  protected $baseRouteName = 'admin_catrobat_apk_pending';
 
   /**
    * @override
    *
    * @var string
    */
-  protected $baseRoutePattern = 'apk_pending_requests';
+  protected $baseRoutePattern = 'apk_pending';
 
   /**
    * @override
@@ -43,7 +42,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   private ScreenshotRepository $screenshot_repository;
 
   /**
-   * PendingApkRequestsAdmin constructor.
+   * ApkPendingAdmin constructor.
    *
    * @param mixed $code
    * @param mixed $class
@@ -57,24 +56,17 @@ class PendingApkRequestsAdmin extends AbstractAdmin
 
   /**
    * @param Program $object
-   *
-   * @return string
    */
-  public function getThumbnailImageUrl($object)
+  public function getThumbnailImageUrl($object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
+    /** @var ProxyQuery $query */
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof ProxyQuery)
-    {
-      return $query;
-    }
-
-    /** @var QueryBuilder $qb */
     $qb = $query->getQueryBuilder();
 
     $qb->andWhere(
@@ -86,13 +78,13 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('id')
       ->add('user.username', null, ['label' => 'User'])
       ->add('name')
@@ -109,13 +101,13 @@ class PendingApkRequestsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->add('id')
       ->add('user', null, [
         'route' => [
