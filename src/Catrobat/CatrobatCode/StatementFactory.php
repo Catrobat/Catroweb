@@ -851,6 +851,7 @@ class StatementFactory
     {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $userListReference = $statement->xpath($reference)[0];
+      // @phpstan-ignore-next-line
       foreach ($userListReference->children() as $child)
       {
         if (self::NAME_ATTRIBUTE == $child->getName())

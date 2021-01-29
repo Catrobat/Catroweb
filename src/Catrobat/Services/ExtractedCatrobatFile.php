@@ -421,7 +421,7 @@ class ExtractedCatrobatFile
 
   public function hasScenes(): bool
   {
-    return 0 !== (is_countable($this->program_xml_properties->xpath('//scenes')) ? count($this->program_xml_properties->xpath('//scenes')) : 0);
+    return 0 !== count($this->program_xml_properties->xpath('//scenes'));
   }
 
   private function getObject(SimpleXMLElement $objectTree): ?CodeObject

@@ -309,8 +309,8 @@ class CodeStatistic
     try
     {
       $this->total_num_global_vars =
-        (is_countable($program_xml_properties->xpath('//programVariableList//userVariable')) ? count($program_xml_properties->xpath('//programVariableList//userVariable')) : 0) +
-        (is_countable($program_xml_properties->xpath('//programListOfLists//userVariable')) ? count($program_xml_properties->xpath('//programListOfLists//userVariable')) : 0);
+        count($program_xml_properties->xpath('//programVariableList//userVariable')) +
+        count($program_xml_properties->xpath('//programListOfLists//userVariable'));
     }
     catch (Exception $exception)
     {
@@ -323,14 +323,14 @@ class CodeStatistic
     try
     {
       $this->total_num_local_vars =
-        (is_countable($program_xml_properties->xpath('//userVariable//userVariable')) ? count($program_xml_properties->xpath('//userVariable//userVariable')) : 0) - $this->total_num_global_vars;
+        count($program_xml_properties->xpath('//userVariable//userVariable')) - $this->total_num_global_vars;
 
       if ($this->total_num_local_vars <= 0)
       {
         // might be a old project using the old deprecated format to define local variables
         $this->total_num_local_vars =
-          (is_countable($program_xml_properties->xpath('//objectListOfList//userVariable')) ? count($program_xml_properties->xpath('//objectListOfList//userVariable')) : 0) +
-          (is_countable($program_xml_properties->xpath('//objectVariableList//userVariable')) ? count($program_xml_properties->xpath('//objectVariableList//userVariable')) : 0);
+          count($program_xml_properties->xpath('//objectListOfList//userVariable')) +
+          count($program_xml_properties->xpath('//objectVariableList//userVariable'));
       }
     }
     catch (Exception $exception)

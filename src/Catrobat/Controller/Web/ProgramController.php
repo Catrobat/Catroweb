@@ -385,7 +385,7 @@ class ProgramController extends AbstractController
    */
   public function editProgramDescription(string $id, string $new_description): Response
   {
-    $max_description_size = $this->getParameter('catrobat.max_description_upload_size');
+    $max_description_size = (int) $this->getParameter('catrobat.max_description_upload_size');
 
     if (strlen($new_description) > $max_description_size)
     {
@@ -442,7 +442,7 @@ class ProgramController extends AbstractController
    */
   public function editProgramCredits(string $id, string $new_credits): Response
   {
-    $max_credits_size = $this->getParameter('catrobat.max_notes_and_credits_upload_size');
+    $max_credits_size = (int) $this->getParameter('catrobat.max_notes_and_credits_upload_size');
 
     if (strlen($new_credits) > $max_credits_size)
     {
