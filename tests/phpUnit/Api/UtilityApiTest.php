@@ -20,7 +20,6 @@ class UtilityApiTest extends WebTestCase
     $this->assertResponseStatusCodeSame(Response::HTTP_NO_CONTENT);
   }
 
-
   public function testGetSurvey(): void
   {
     $client = static::createClient();
@@ -28,6 +27,6 @@ class UtilityApiTest extends WebTestCase
     $client->request('GET', '/api/survey/de', [], [], ['HTTP_ACCEPT' => 'application/json']);
     $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     $response = $client->getResponse()->getContent();
-    $this->assertStringContainsString("url", $response);
+    $this->assertStringContainsString('url', $response);
   }
 }

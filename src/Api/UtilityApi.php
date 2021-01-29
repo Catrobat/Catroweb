@@ -2,7 +2,6 @@
 
 namespace App\Api;
 
-use OpenAPI\Server\Api\OpenAPI;
 use OpenAPI\Server\Api\UtilityApiInterface;
 use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +23,6 @@ class UtilityApi implements UtilityApiInterface
    */
   public function surveyLangCodeGet(string $lang_code, &$responseCode, array &$responseHeaders)
   {
-    return new SurveyResponse(["url" => "https://www.surveylegend.com/s/2yaq"]);
+    return new SurveyResponse(['url' => 'https://www.surveylegend.com/s/2yaq']);
   }
 }
