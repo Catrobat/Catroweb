@@ -225,10 +225,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+
       - name: Install dependencies (php-imagick)
         run: |
-          sudo apt-get update
-          sudo apt-get install php-imagick
+          sudo apt update
+          sudo apt install php-imagick
 
       # Optional - ensure composer configuration is valid
       - run: composer validate

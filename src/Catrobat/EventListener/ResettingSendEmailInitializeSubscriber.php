@@ -33,7 +33,7 @@ class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
 
       $event->setResponse(new RedirectResponse($url));
     }
-    elseif ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl')))
+    elseif ($user->isPasswordRequestNonExpired((int) $this->container->getParameter('fos_user.resetting.token_ttl')))
     {
       $url = $this->router->generate('reset_already_requested');
 
