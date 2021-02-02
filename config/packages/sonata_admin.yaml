@@ -129,6 +129,13 @@ sonata_admin:
                     - catrowebadmin.block.users.storeduserdata
                     - catrowebadmin.block.users.reported
 
+            sonata.admin.group.survey:
+                label: Survey
+                label_catalogue: Catrobat
+                icon: '<i class="fa fa-bar-chart"></i>'
+                items:
+                    - catrowebadmin.block.survey
+
             sonata.admin.group.tools:
                 label:           Tools
                 label_catalogue: Catrobat

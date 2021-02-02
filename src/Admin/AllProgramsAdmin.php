@@ -67,22 +67,20 @@ class AllProgramsAdmin extends AbstractAdmin
 
   /**
    * @param mixed $object
-   *
-   * @return string
    */
-  public function getThumbnailImageUrl($object)
+  public function getThumbnailImageUrl($object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('name', TextType::class, ['label' => 'Program name'])
       ->add('description')
       ->add('user', EntityType::class, ['class' => User::class])
@@ -95,13 +93,13 @@ class AllProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('id')
       ->add('name')
       ->add('user.username', null, ['label' => 'Username'])
@@ -114,11 +112,11 @@ class AllProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
     $flavor_options = $this->parameter_bag->get('flavors');
 
@@ -127,7 +125,7 @@ class AllProgramsAdmin extends AbstractAdmin
     {
       $choices[$flavor] = $flavor;
     }
-    $listMapper
+    $list
       ->add('uploaded_at', null, ['label' => 'Upload Time'])
       ->add('user')
       ->addIdentifier('name', 'string', ['sortable' => false])

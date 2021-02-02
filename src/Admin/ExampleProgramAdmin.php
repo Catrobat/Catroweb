@@ -9,7 +9,6 @@ use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Repository\FlavorRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -17,7 +16,7 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -71,10 +70,8 @@ class ExampleProgramAdmin extends AbstractAdmin
 
   /**
    * @param ExampleProgram $object
-   *
-   * @return string
    */
-  public function getExampleImageUrl($object)
+  public function getExampleImageUrl($object): string
   {
     return '../../'.$this->example_image_repository->getWebPath($object->getId(), $object->getImageType(), false);
   }
@@ -113,14 +110,9 @@ class ExampleProgramAdmin extends AbstractAdmin
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
+    /** @var ProxyQuery $query */
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof ProxyQuery)
-    {
-      return $query;
-    }
-
-    /** @var QueryBuilder $qb */
     $qb = $query->getQueryBuilder();
 
     $qb->andWhere(
@@ -131,11 +123,11 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
     /** @var ExampleProgram $example_project */
     $example_project = $this->getSubject();
@@ -151,7 +143,7 @@ class ExampleProgramAdmin extends AbstractAdmin
       $id_value = $this->getSubject()->getProgram()->getId();
     }
 
-    $formMapper
+    $form
       ->add('file', FileType::class, $file_options)
       ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
       ->add('flavor', null, ['class' => Flavor::class, 'choices' => $this->getFlavors(), 'required' => true])
@@ -163,27 +155,27 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('program.name')
     ;
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
     unset($this->listModes['mosaic']);
 
-    $listMapper
+    $list
       ->addIdentifier('id')
       ->add('Example Image', 'string', ['template' => 'Admin/example_image.html.twig'])
       ->add('program', EntityType::class, [
@@ -194,7 +186,7 @@ class ExampleProgramAdmin extends AbstractAdmin
       ->add('flavor', 'string')
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
-      ->add('active', null)
+      ->add('active')
       ->add('_action', 'actions', [
         'actions' => [
           'edit' => [],

@@ -4,7 +4,6 @@ namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -12,17 +11,17 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
-class ApkListAdmin extends AbstractAdmin
+class ApkReadyAdmin extends AbstractAdmin
 {
   /**
    * @var string
    */
-  protected $baseRouteName = 'admin_catrobat_apk_list';
+  protected $baseRouteName = 'admin_catrobat_apk_ready';
 
   /**
    * @var string
    */
-  protected $baseRoutePattern = 'apk_list';
+  protected $baseRoutePattern = 'apk_ready';
 
   /**
    * @var array
@@ -35,7 +34,7 @@ class ApkListAdmin extends AbstractAdmin
   private ScreenshotRepository $screenshot_repository;
 
   /**
-   * ApkListAdmin constructor.
+   * ApkReadyAdmin constructor.
    *
    * @param mixed $code
    * @param mixed $class
@@ -54,14 +53,9 @@ class ApkListAdmin extends AbstractAdmin
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
+    /** @var ProxyQuery $query */
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof ProxyQuery)
-    {
-      return $query;
-    }
-
-    /** @var QueryBuilder $qb */
     $qb = $query->getQueryBuilder();
 
     $qb->andWhere(
@@ -73,13 +67,13 @@ class ApkListAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('id')
       ->add('user.username', null, ['label' => 'User'])
       ->add('name')
@@ -88,13 +82,13 @@ class ApkListAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->addIdentifier('id')
       ->add('user', null, [
         'route' => [

@@ -4,7 +4,6 @@ namespace App\Admin;
 
 use App\Entity\User;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -28,14 +27,9 @@ class ReportedUsersAdmin extends AbstractAdmin
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
+    /** @var ProxyQuery $query */
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof ProxyQuery)
-    {
-      return $query;
-    }
-
-    /** @var QueryBuilder $qb */
     $qb = $query->getQueryBuilder();
 
     $rootAlias = $qb->getRootAliases()[0];
@@ -67,16 +61,16 @@ class ReportedUsersAdmin extends AbstractAdmin
     return $query;
   }
 
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('user', EntityType::class, ['class' => User::class])
       ;
   }
 
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->add(
           'getReportedCommentsCount',
           null,
@@ -101,13 +95,13 @@ class ReportedUsersAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper->add('username', null, [
+    $filter->add('username', null, [
       'show_filter' => true,
     ])
       ->add('email')

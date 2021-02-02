@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
+use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
@@ -20,13 +20,13 @@ class ReportedProgramsAdmin extends AbstractAdmin
   protected $datagridValues = ['_sort_order' => 'DESC'];
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('time', 'doctrine_orm_datetime_range',
         [
           'field_type' => DateTimeRangePickerType::class,
@@ -48,13 +48,13 @@ class ReportedProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->add('time')
       ->add('state', 'choice',
         [

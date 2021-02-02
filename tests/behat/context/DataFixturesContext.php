@@ -24,6 +24,7 @@ use App\Entity\ProgramLike;
 use App\Entity\RemixNotification;
 use App\Entity\RudeWord;
 use App\Entity\StarterCategory;
+use App\Entity\Survey;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\UserComment;
@@ -274,6 +275,27 @@ class DataFixturesContext implements KernelAwareContext
 
     Assert::assertInstanceOf(User::class, $user);
     Assert::assertEquals($country_code, $user->getCountry());
+  }
+
+  // -------------------------------------------------------------------------------------------------------------------
+  //  Surveys
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @Given /^there are surveys:$/
+   */
+  public function thereAreSurveys(TableNode $table): void
+  {
+    $em = $this->getManager();
+    foreach ($table->getHash() as $survey_config)
+    {
+      $survey = new Survey();
+      $survey->setLanguageCode($survey_config['language code']);
+      $survey->setUrl($survey_config['url']);
+      $em->persist($survey);
+    }
+    $em->flush();
+    $this->getManager()->flush();
   }
 
   // -------------------------------------------------------------------------------------------------------------------

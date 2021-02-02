@@ -113,6 +113,7 @@ class ApiContext implements KernelAwareContext
 
   private array $user_structure = ['id', 'username',
     'projects', 'followers', 'following', ];
+
   private array $user_structure_extended = ['id', 'username', 'email', 'country',
     'projects', 'followers', 'following', ];
 
@@ -120,6 +121,8 @@ class ApiContext implements KernelAwareContext
 
   private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
     'author', 'extension', 'download_url', ];
+
+  private array $survey_structure = ['url'];
 
   private array $new_uploaded_projects = [];
 
@@ -1812,6 +1815,23 @@ class ApiContext implements KernelAwareContext
     {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
+    }
+  }
+
+  /**
+   * @Then /^the response should have the survey model structure$/
+   */
+  public function responseShouldHaveSurveyModelStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $survey = json_decode($response->getContent(), true);
+
+    Assert::assertEquals(count($this->survey_structure), count($survey),
+      'Number of survey fields should be '.count($this->survey_structure));
+    foreach ($this->survey_structure as $key)
+    {
+      Assert::assertArrayHasKey($key, $survey, 'Survey should contain '.$key);
+      Assert::assertEquals($this->checkSurveyFieldsValue($survey, $key), true);
     }
   }
 
@@ -3516,6 +3536,21 @@ class ApiContext implements KernelAwareContext
       'following' => function ($following)
       {
         Assert::assertIsInt($following);
+      },
+    ];
+
+    Assert::assertArrayHasKey($key, $fields);
+    call_user_func($fields[$key], $user[$key]);
+
+    return true;
+  }
+
+  private function checkSurveyFieldsValue(array $user, string $key): bool
+  {
+    $fields = [
+      'url' => function ($username)
+      {
+        Assert::assertIsString($username);
       },
     ];
 

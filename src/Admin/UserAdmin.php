@@ -99,9 +99,9 @@ class UserAdmin extends BaseUserAdmin
     ;
   }
 
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filterMapper): void
   {
-    $datagridMapper
+    $filterMapper
       ->add('username')
       ->add('email')
       ->add('groups')

@@ -4,6 +4,7 @@ namespace App\Admin;
 
 use App\Entity\Program;
 use App\Entity\User;
+use Sonata\AdminBundle\Exception\ModelManagerException;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -11,6 +12,8 @@ trait ProgramsTrait
 {
   /**
    * @param mixed $program
+   *
+   * @throws ModelManagerException
    */
   public function preUpdate($program): void
   {

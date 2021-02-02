@@ -23,27 +23,27 @@ class NotificationAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'subscriptions';
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
     if ($this->isCurrentRoute('create'))
     {
-      $formMapper
+      $form
         ->add('id', EntityType::class, ['class' => User::class, 'label' => 'User'])
       ;
     }
 
     if ($this->isCurrentRoute('edit'))
     {
-      $formMapper
+      $form
         ->add('user', EntityType::class, ['class' => User::class, 'label' => 'User'])
       ;
     }
 
-    $formMapper
+    $form
       ->add('upload', null, ['label' => 'Email bei Upload', 'required' => false])
       ->add('report', null,
         ['label' => 'Email bei Inappropriate Report', 'required' => false])
@@ -51,13 +51,13 @@ class NotificationAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('user')
       ->add('user.email')
       ->add('upload')
@@ -66,13 +66,13 @@ class NotificationAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->add('user', EntityType::class, ['class' => User::class])
       ->add('user.email')
       ->add('upload', null, ['editable' => true])
