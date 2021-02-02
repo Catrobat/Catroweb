@@ -31,7 +31,7 @@
         "php-http/httplug-bundle": "^1.18",
         "php-http/message": "^1.8",
         "rosell-dk/webp-convert": "^2.3",
-        "sensio/framework-extra-bundle": "^5.5",
+        "sensio/framework-extra-bundle": "^6.0",
         "sonata-project/admin-bundle": "^3.68",
         "sonata-project/doctrine-orm-admin-bundle": "^3.18",
         "sonata-project/user-bundle": "^4.5",
