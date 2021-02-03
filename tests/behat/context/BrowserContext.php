@@ -540,4 +540,15 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     var_dump($this->getSession()->getPage()->getContent());
     exit;
   }
+
+  /**
+   * @Then /^I click on xpath "([^"]*)"$/
+   *
+   * @param mixed $arg1
+   */
+  public function iClickOnXpath($arg1): void
+  {
+    $this->assertSession()->elementExists('xpath', $arg1);
+    $this->getSession()->getPage()->find('xpath', $arg1)->click();
+  }
 }

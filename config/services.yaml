@@ -700,6 +700,7 @@ services:
     arguments:
       - ~
       - App\Entity\User
+      - App\Catrobat\Controller\Admin\ReportController
       - ~
     public: true
 

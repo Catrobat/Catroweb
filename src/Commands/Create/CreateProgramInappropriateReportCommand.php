@@ -76,6 +76,7 @@ class CreateProgramInappropriateReportCommand extends Command
       return 3;
     }
     $output->writeln('Reporting '.$program->getName());
+    $output->writeln('ReportedUser = '.$program->getUser());
 
     return 0;
   }
@@ -88,6 +89,7 @@ class CreateProgramInappropriateReportCommand extends Command
     $report->setCategory('Inappropriate');
     $report->setNote($note);
     $report->setProgram($program);
+    $report->setReportedUser($program->getUser());
     $this->entity_manager->persist($report);
     $this->entity_manager->flush();
   }

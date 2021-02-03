@@ -120,6 +120,7 @@ class ReportController extends AbstractController
     $report->setCategory($request->get('category'));
     $report->setNote($request->get('note'));
     $report->setProgram($program);
+    $report->setReportedUser($program->getUser());
 
     $entity_manager->persist($report);
     $entity_manager->flush();
