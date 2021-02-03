@@ -37,25 +37,34 @@ class ReportedUsersAdmin extends AbstractAdmin
 
     if ('getReportedCommentsCount' === $parameters['_sort_by'])
     {
-      $qb->leftJoin('App\Entity\UserComment', 'cm',
-            Join::WITH, $rootAlias.'.id = cm.user')
-        ->where($qb->expr()->eq('cm.isReported', '1'))
+      $qb->from('App\Entity\User', 'fos_user')
+        ->leftJoin('App\Entity\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
+        ->leftJoin('App\Entity\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
+        ->leftJoin('App\Entity\ProgramInappropriateReport', 'repProg', Join::WITH, 'p.id = repProg.program')
+        ->where($qb->expr()->eq('user_comment.isReported', '1'))
         ->groupBy($rootAlias.'.id')
-        ->orderBy('COUNT(cm.user )', $parameters['_sort_order'])
+        ->orderBy('COUNT(user_comment.user )', $parameters['_sort_order'])
           ;
     }
-
-    if ('getProgramInappropriateReportsCount' === $parameters['_sort_by'])
+    elseif ('getProgramInappropriateReportsCount' === $parameters['_sort_by'])
     {
-      $qb
-        ->leftJoin('App\Entity\Program', 'p', Join::WITH,
-              $rootAlias.'.id = p.user')
-        ->leftJoin('App\Entity\ProgramInappropriateReport',
-              'pr', Join::WITH, 'p.id = pr.program')
-        ->where($qb->expr()->isNotNull('pr.program'))
+      $qb->from('App\Entity\User', 'fos_user')
+        ->leftJoin('App\Entity\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
+        ->leftJoin('App\Entity\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
+        ->leftJoin('App\Entity\ProgramInappropriateReport', 'repProg', Join::WITH, 'p.id = repProg.program')
+        ->where($qb->expr()->isNotNull('repProg.program'))
         ->groupBy($rootAlias.'.id')
-        ->orderBy('COUNT(pr.program)', $parameters['_sort_order'])
-          ;
+        ->orderBy('COUNT(repProg.program)', $parameters['_sort_order'])
+      ;
+    }
+    else
+    {
+      $qb->from('App\Entity\User', 'fos_user')
+        ->leftJoin('App\Entity\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
+        ->leftJoin('App\Entity\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
+        ->leftJoin('App\Entity\ProgramInappropriateReport', 'repProg', Join::WITH, 'p.id = repProg.program')
+        ->where($qb->expr()->eq('user_comment.isReported', '1'))->orWhere($qb->expr()->isNotNull('repProg.program'))
+     ;
     }
 
     return $query;
@@ -71,6 +80,12 @@ class ReportedUsersAdmin extends AbstractAdmin
   protected function configureListFields(ListMapper $list): void
   {
     $list
+      ->addIdentifier('username')
+      ->add('email')
+      ->add('_action', 'actions', ['actions' => [
+        'createUrlComments' => ['template' => 'Admin/CRUD/list__action_create_url_comments.html.twig'],
+        'createUrlPrograms' => ['template' => 'Admin/CRUD/list__action_create_url_programs.html.twig'],
+      ]])
       ->add(
           'getReportedCommentsCount',
           null,
@@ -89,9 +104,7 @@ class ReportedUsersAdmin extends AbstractAdmin
             'sort_field_mapping' => ['fieldName' => 'id'],
             'sort_parent_association_mappings' => [],
           ])
-      ->add('username')
-      ->add('email')
-      ;
+    ;
   }
 
   /**
@@ -111,5 +124,7 @@ class ReportedUsersAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete');
+    $collection->add('createUrlComments');
+    $collection->add('createUrlPrograms');
   }
 }

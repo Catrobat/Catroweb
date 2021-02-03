@@ -44,6 +44,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
         ])
       ->add('reportingUser.username')
       ->add('program.visible')
+      ->add('reportedUser')
     ;
   }
 
@@ -63,6 +64,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
       ->add('category', null, ['sortable' => false])
       ->add('note', null, ['sortable' => false])
       ->add('reportingUser', EntityType::class, ['class' => User::class])
+      ->add('reportedUser')
       ->add('program', EntityType::class,
         [
           'class' => Program::class,

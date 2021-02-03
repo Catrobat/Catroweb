@@ -66,6 +66,12 @@ class ProgramInappropriateReport
   private int $projectVersion;
 
   /**
+   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="program_inappropriate_reports")
+   * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+   */
+  private ?User $reportedUser;
+
+  /**
    * @ORM\PrePersist
    *
    * @throws Exception
@@ -112,6 +118,18 @@ class ProgramInappropriateReport
   public function getReportingUser(): ?User
   {
     return $this->reportingUser;
+  }
+
+  public function setReportedUser(?User $reportedUser): ProgramInappropriateReport
+  {
+    $this->reportedUser = $reportedUser;
+
+    return $this;
+  }
+
+  public function getReportedUser(): ?User
+  {
+    return $this->reportedUser;
   }
 
   public function setCategory(string $category): ProgramInappropriateReport

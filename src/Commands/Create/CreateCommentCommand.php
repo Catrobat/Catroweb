@@ -58,7 +58,11 @@ class CreateCommentCommand extends Command
     $username = $input->getArgument('user');
     $program_name = $input->getArgument('program_name');
     $message = $input->getArgument('message');
-    $reported = 'true' === $input->getArgument('reported');
+    $reported = false;
+    if (intval($input->getArgument('reported')) >= 1)
+    {
+      $reported = true;
+    }
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
@@ -78,7 +82,7 @@ class CreateCommentCommand extends Command
     {
       return 2;
     }
-    $output->writeln('Commenting on '.$program->getName().' with user '.$user->getUsername());
+    $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
 
     return 0;
   }

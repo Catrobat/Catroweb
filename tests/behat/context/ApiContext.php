@@ -2661,6 +2661,16 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^I should be on page "([^"]*)"$/
+   *
+   * @param mixed $arg1
+   */
+  public function iShouldBeRedirectedTo($arg1): void
+  {
+    Assert::assertEquals($arg1, $this->getKernelBrowser()->getRequest()->getPathInfo());
+  }
+
+  /**
    * @When /^I visit the details page of a program from another user$/
    *
    * @throws Exception

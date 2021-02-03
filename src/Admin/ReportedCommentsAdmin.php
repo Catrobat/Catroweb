@@ -44,6 +44,9 @@ class ReportedCommentsAdmin extends AbstractAdmin
    */
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
+    $filter
+      ->add('user')
+          ;
   }
 
   /**
