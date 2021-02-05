@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.7.1]
+### Fixed 
+- fixes preloading of images
+- somue dependency updates
 ## [3.7.0]
 ### Added
 - New Frontend for APK Signing (hidden until backend finished)
@@ -294,7 +298,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
 
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.7.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.7.1...HEAD
+[3.7.1]: https://github.com/Catrobat/Catroweb/compare/v3.7.0...v3.7.1
 [3.7.0]: https://github.com/Catrobat/Catroweb/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/Catrobat/Catroweb/compare/v3.5.0...v3.6.0
 [3.5.0]: https://github.com/Catrobat/Catroweb/compare/v3.4.5...v3.5.0
