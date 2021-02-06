@@ -7,8 +7,6 @@ use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Utils\TimeUtils;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -17,18 +15,38 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class BuildApkController.
+ *
+ * @deprecated - Move to Catroweb-API
+ */
 class BuildApkController extends AbstractController
 {
+  private ProgramManager $program_manager;
+
+  private JenkinsDispatcher $dispatcher;
+
+  private ApkRepository $apk_repository;
+
+  public function __construct(ProgramManager $program_manager, JenkinsDispatcher $dispatcher,
+                              ApkRepository $apk_repository)
+  {
+    $this->program_manager = $program_manager;
+    $this->dispatcher = $dispatcher;
+    $this->apk_repository = $apk_repository;
+  }
+
   /**
    * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"}, methods={"GET"})
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
    * @throws Exception
    */
-  public function createApkAction(Program $program, JenkinsDispatcher $dispatcher, ProgramManager $program_manager): JsonResponse
+  public function createApkAction(string $id): JsonResponse
   {
-    if (!$program->isVisible())
+    /** @var Program|null $program */
+    $program = $this->program_manager->find($id);
+
+    if (null === $program || !$program->isVisible())
     {
       throw $this->createNotFoundException();
     }
@@ -42,25 +60,29 @@ class BuildApkController extends AbstractController
       return JsonResponse::create(['status' => 'pending']);
     }
 
-    $dispatcher->sendBuildRequest($program->getId());
+    $this->dispatcher->sendBuildRequest($program->getId());
 
     $program->setApkStatus(Program::APK_PENDING);
     $program->setApkRequestTime(TimeUtils::getDateTime());
 
-    $program_manager->save($program);
+    $this->program_manager->save($program);
 
     return JsonResponse::create(['status' => 'pending']);
   }
 
   /**
    * @Route("/ci/upload/{id}", name="ci_upload_apk", defaults={"_format": "json"}, methods={"GET", "POST"})
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function uploadApkAction(Request $request, Program $program,
-                                  ApkRepository $apk_repository, ProgramManager $program_manager): JsonResponse
+  public function uploadApkAction(string $id, Request $request): JsonResponse
   {
+    /** @var Program|null $program */
+    $program = $this->program_manager->find($id);
+
+    if (null === $program || !$program->isVisible())
+    {
+      throw $this->createNotFoundException();
+    }
+
     $config = $this->getParameter('jenkins');
     if ($request->query->get('token') !== $config['uploadtoken'])
     {
@@ -72,21 +94,26 @@ class BuildApkController extends AbstractController
     }
 
     $file = array_values($request->files->all())[0];
-    $apk_repository->save($file, $program->getId());
+    $this->apk_repository->save($file, $program->getId());
     $program->setApkStatus(Program::APK_READY);
-    $program_manager->save($program);
+    $this->program_manager->save($program);
 
     return JsonResponse::create(['result' => 'success']);
   }
 
   /**
    * @Route("/ci/failed/{id}", name="ci_failed_apk", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
-  public function failedApkAction(Request $request, Program $program, ProgramManager $program_manager): JsonResponse
+  public function failedApkAction(string $id, Request $request): JsonResponse
   {
+    /** @var Program|null $program */
+    $program = $this->program_manager->find($id);
+
+    if (null === $program || !$program->isVisible())
+    {
+      throw $this->createNotFoundException();
+    }
+
     $config = $this->getParameter('jenkins');
     if ($request->query->get('token') !== $config['uploadtoken'])
     {
@@ -95,7 +122,7 @@ class BuildApkController extends AbstractController
     if (Program::APK_PENDING === $program->getApkStatus())
     {
       $program->setApkStatus(Program::APK_NONE);
-      $program_manager->save($program);
+      $this->program_manager->save($program);
 
       return JsonResponse::create(['OK']);
     }
