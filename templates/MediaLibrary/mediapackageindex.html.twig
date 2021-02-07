@@ -1,7 +1,7 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/index.css') }}" media="screen"/>
+  <link rel="preload" href="{{ asset('css/'~themeAssets()~'/medialib.css') }}" as="style">
   <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/medialib.css') }}" media="screen"/>
 {% endblock %}
 
@@ -13,13 +13,13 @@
   <div class="card-deck-wrapper">
     <div class="card-deck mx-auto">
       {% for item in packages %}
-          <div class="card">
-            <div class="card-header">Test</div>
-            <div class="card-body">
-              <h4 class="card-title"><a href="{{ path('media_library', {'package_name': item.nameUrl}) }}">{{ item.name }}</a></h4>
-            </div>
+        <div class="card">
+          <div class="card-header">Test</div>
+          <div class="card-body">
+            <h4 class="card-title"><a
+                  href="{{ path('media_library', {'package_name': item.nameUrl}) }}">{{ item.name }}</a></h4>
           </div>
-
+        </div>
       {% endfor %}
     </div>
   </div>
