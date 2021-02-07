@@ -8,9 +8,9 @@ accountSettings: Kontoeinstellungen
 email: E-Mail
 aboutPocketCode: Über Pocket Code
 about: Über
-education: Education
-chat: Chat and forums
-others: Others
+education: Bildung
+chat: Chat und Foren
+others: Andere
 tutorials: Tutorials
 googlePlay: Google Play
 iosAppStore: iOS App Store
@@ -28,7 +28,7 @@ description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
 credits: Anerkennung
 noCredits: Keine Anerkennung verfügbar.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Wie hast du dieses Projekt erstellt? Hast du Ideen, Skripte oder Kunstwerke von anderen Leuten verwendet? Danke ihnen hier.
 country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
@@ -42,7 +42,7 @@ less: 'weniger'
 show-more: 'Mehr'
 show-less: 'Weniger'
 more-information: 'Mehr Information'
-less-information: 'Less information'
+less-information: 'Weniger Informationen'
 ok: Ok
 clickToDownloadProgram: 'Um das Beispielprojekt herunterzuladen klicke %link_start% hier %link_end%.'
 registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
@@ -61,9 +61,9 @@ notificationsUnauthorizedError: "Benutzer kann nicht autorisiert werden"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
 pleaseWait: "Bitte warten..."
 projects: "Projekte"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
+oauthPopUpTitle: "Externe Logininformationen"
+oauthInfo: 'Sie haben einen externen Account zum einloggen benutzt. Wir haben für sie einen zufälligen Benutzernamen erstellt. Wenn Sie den Benutzernamen ändern wollen oder ein neues Passwort setzen wollen, gehen sie auf ihre Profilseite. Klicken Sie %link_start% hier %link_end% um zu Ihrer Profilseite zu gelangen.'
+oauthHere: "hier"
 statistics: "Statistiken"
 indexPage:
   recommendedSection:
@@ -88,7 +88,7 @@ programs:
   welcome:
     title: Willkommen bei Catrobat's %theme%
     subtitle: Erstelle Animationen, Spiele und mehr...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: Nähe dein eigenes Muster auf deine T-shirts, Taschen, Hosen oder auf deine Smartphonehülle!
     download: Lade die App herunter
     statistics: Mehr Statistiken
   featured: Empfohlen
@@ -177,7 +177,7 @@ programs:
   linkTitle: Link
   link: Link in Zwischenablage kopieren
   reactionsText: Gefällt mir
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
@@ -470,7 +470,7 @@ api:
     passwordTooLong: 'Passwort zu lang'
     passwordInvalidChars: 'Password enthält ungültige Zeichen'
     usernameContainsEmail: "Username darf keine Email Adresse beinhalten"
-    countryCodeInvalid: "Country code invalid"
+    countryCodeInvalid: "Ungültige Landesvorwahl"
   projectsPost:
     invalid_checksum: 'Checksum ungültig. Bitte versuche es erneut!'
     upload_error: 'Fehler während dem Upload. Bitte versuche es erneut!'
