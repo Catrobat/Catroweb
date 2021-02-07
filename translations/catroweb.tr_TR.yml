@@ -36,7 +36,7 @@ imprint: Damga
 programDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
-oldVersionError: 'En yeni cep kodu sürümüne güncelleyin!'
+oldVersionError: 'Lütfen en yeni Cep Kodu sürümüne güncelleyin!'
 more: 'daha fazla'
 less: 'daha az'
 show-more: 'Daha fazla göster'
@@ -429,7 +429,7 @@ success:
   token: Tamam
   upload: Proje başarıyla yüklendi!
   imgUpload: Resminiz başarıyla yüklendi!
-  report: Bildirmeniz başarıyla gönderildi!
+  report: Geri bildiriminiz başarıyla gönderildi!
 time:
   minutes.ago: '{0} < 1 dakika önce |{1}1 dakika önce |]1,Inf] %count% dakika önce'
   hours.ago: '{1}1 saat önce |]1,Inf] %count% saat önce'

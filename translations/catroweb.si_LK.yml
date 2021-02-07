@@ -39,7 +39,7 @@ pleaseTryAgain: 'කරුණාකර නැවත උත්සාහ කරන
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
-show-more: 'More information'
+show-more: 'තව පෙන්වන්න'
 show-less: 'Less information'
 more-information: 'More information'
 less-information: 'Less information'
@@ -47,7 +47,7 @@ ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
-allNotifications: 'All Notifications'
+allNotifications: 'සියල්ල'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
 CommentNotifications: 'Comments'
@@ -136,7 +136,7 @@ programs:
     all: "All"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Projects
+  submitted: ඉදිරිපත් කළ ව්‍යාපෘති
   uploaded: උඩුගත කළ ව්‍යාපෘති
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
@@ -187,7 +187,7 @@ remixGraph:
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programUnknownUser: 'නොදන්නා පරිශීලකයෙකි'
 noReply: This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
@@ -284,7 +284,7 @@ myprofile:
   editUsername: Edit username
   editPassword: Edit password
   editCountry: Edit country
-  editEmail: Edit E-Mail
+  editEmail: වි. තැපෑල සංස්කරණය
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
   editAccountSettings: Edit account settings
@@ -372,7 +372,7 @@ login:
   username: Username
   email: Email
   passwordFirst: Password
-  passwordSecond: Password Confirm
+  passwordSecond: මුරපදය තහවුරු කරන්න
 apk:
   download: Download as app
   prepare: 'Get as app'
@@ -518,9 +518,9 @@ language:
   ukrainian: Ukrainian
   vietnamese: Vietnamese
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: apk ජනනය කරන්න
+  pending: apk ජනනය කරමින්
+  download: apk බාගන්න
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: Submit to %gamejamname%
@@ -597,19 +597,19 @@ codeStatistics:
   eventBricks: 'Event'
   controlBricks: 'Control'
   motionBricks: 'Motion'
-  soundBricks: 'Sound'
+  soundBricks: 'ශබ්දය'
   looksBricks: 'Looks'
   penBricks: 'Pen'
-  dataBricks: 'Data'
+  dataBricks: 'දත්ත'
   specialBricks: 'Special'
 footer:
-  language: Language
-  usefulLinks: Useful Links
+  language: භාෂාව
+  usefulLinks: ප්‍රයෝජනවත් සබැඳි
   legalities: Legalities
   communityStats: Community Stats
   download: Get the App
 privacy-policy:
-  header: Privacy Policy
+  header: රහස්‍යතා ප්‍රතිපත්තිය
   version: Version 2.2, 17 October 2019
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.

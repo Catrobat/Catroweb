@@ -603,7 +603,7 @@ codeStatistics:
   dataBricks: '變數資料'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: 語言
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
@@ -675,5 +675,5 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'Catrobat社群'
 back_to_app: 'Exit community'

@@ -61,8 +61,8 @@ notificationsUnauthorizedError: "Nie można autoryzować użytkownika"
 notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
 pleaseWait: "Proszę czekać..."
 projects: "Programy"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthPopUpTitle: "Informacje o logowaniu do konta zewnętrznego"
+oauthInfo: 'Właśnie użyłeś zewnętrznego konta, aby się zalogować. Stworzyliśmy dla Ciebie losową nazwę użytkownika. Jeśli chcesz zmienić nazwę użytkownika lub utworzyć nowe hasło dla swojego konta, przejdź do mojej strony profilowej. Kliknij %link_start% tutaj %link_end% , aby przejść do strony profilu'
 oauthHere: "tutaj"
 statistics: "Statystyki"
 indexPage:
@@ -71,24 +71,24 @@ indexPage:
       title: 'Jakie projekty są tutaj polecane?'
       description: 'Im więcej polubień (w tym "Kciuk do góry", "Uśmiech", "Miłość" i "wow!") projekt otrzyma, tym wyżej na liście się znajdzie.'
 follower:
-  follows: Following
+  follows: Śledzi
   followers: Obserwujący
-  follow: Follow
+  follow: Śledź
   username: Użytkownik
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  followsMe: Śledź mnie
+  noFollowing: Obecnie nie obserwujesz nikogo.
+  noFollowers: Nie masz obecnie żadnych obserwujących.
+  noOtherFollowing: Obecnie nie ma obserwowanych użytkowników.
+  noOtherFollowers: Obecnie nie ma obserwujących użytkowników.
+  followError: "Nie można obserwować wybranego użytkownika!"
+  unfollowError: "Nie można przestać obserwować wybranego użytkownika!"
+  unfollowQuestion: "Czy na pewno chcesz przestać obserwować tego użytkownika?"
+  unfollowButton: "Przestań obserwować %username%"
 programs:
   welcome:
     title: Witamy w Catrobat %theme%
     subtitle: Twórz opowiadania, gry i nie tylko...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: Wyrównaj swoich własnych patentów na koszulki, torby, ptaki lub skrzynki na smartfonach!
     download: Pobierz aplikację
     statistics: Więcej Statystyk
   featured: Polecane
@@ -177,7 +177,7 @@ programs:
   linkTitle: Link
   link: Skopiuj link do projektu do schowka
   reactionsText: Polubienia
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż wykres remiksów'
@@ -289,7 +289,7 @@ myprofile:
   deleteAccountText: Jesteś pewien, że chcesz usunąć swoje konto? Spowoduje to usunięcie przesłanych projektów i komentarzy!
   editAccountSettings: Edytuj ustawienia konta
   notChangeVisibility: Nie można zmienić widoczności
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  notChangeVisibilityReason: Wersja językowa Twojego projektu jest zbyt wysoka i dlatego nie może być widoczna.
 licenseToPlay:
   link: 'Licencja na korzystanie'
   title: 'Licencja na korzystanie - podziękuj i podziel się'
@@ -322,8 +322,8 @@ termsOfUse:
     item4: "Nie ujawniaj informacji osobistych. Nie dziel się swoim adresem e-mail, numerem telefonu lub innymi danymi osobowymi."
     item5: "Pomóż zachować witrynę przyjazną. Jeśli czujesz, że inni mogliby odebrać projekt lub komentarz jako nieprzyjemny, obraźliwy, zbyt agresywny lub w inny sposób nieodpowiedni, po prostu kliknij na przycisk \"Zgłoś jako niewłaściwe\" i zostaw krótkie wyjaśnienie. Zespół Catrobat sprawdzi Twoje zgłoszenie i może usunąć dowolny projekt, komentarz lub post."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item1: "Przesyłając projekt do naszych stron internetowych, akceptujesz i zgadzasz się umieścić tę pracę na niektórych bezpłatnych licencjach na przesłanych projektach Catrobat. Podobnie jak w przypadku bezpłatnych licencji, na podstawie których system Catrobat jest dostępny dla Ciebie, te bezpłatne licencje na wgrane projekty Catrobat dają każdemu prawo do nauki z pracy wcześniej przesłanej przez innych oraz do dostosowania i remiksowania, które działają w budowaniu własnych nowych fascynujących gier, animacje i inne projekty. Dzięki temu każdy może \"stać na barkach rówieśników”, przy czym jednym z nich jest ty! Dzięki temu Twoja praca przyniesie korzyści całemu światu i pozostanie darmowa dla wszystkich w użyciu, trochę podobne do tekstu i zdjęć swobodnie przekazywanych do Wikipedii przez wolontariuszy z całego świata. Pomyśl o tym jako o swoim teraźniejszości dla ludzkości: dajcie się wszystkim i wszystkim innym, którzy przesyłają swoje prace na nasze strony internetowe. Tak więc przesłany projekt jest prezentem wielkiej wartości, który jego właściciel dajesz Ci za darmo, z warunkiem, że weźmiesz udział w społeczności na tych samych warunkach."
+    item2: Nie musisz akceptować darowizny; jeśli tak, to mają zastosowanie pewne zasady. Zaletą tych zasad jest to, że można wyciągnąć wnioski z pracy i budować na niej aby samodzielnie robić jeszcze chłodniejsze rzeczy, które możecie wtedy zrobić. , ponownie prześlij na nasze strony internetowe jako własne. Inną korzyścią jest to, że te licencje gwarantują, że nie można pociągnąć do odpowiedzialności za jakiekolwiek problemy powstałe w wyniku korzystania przez nich z projektu.
     item3: "Jeden ważny dodatkowy warunek to uznanie wkładu autorów, na których pracy został oparty Twój projekt. W tym samym czasie będziemy pracować ciężko, żeby Twoja praca została wyraźnie doceniona przez innych, jako Twój wkład, poprzez przypisanie do niego unikatowej nazwy, która została przez Ciebie wybrana do reprezentowania Ciebie w społeczności Catrobat i dając innym możliwość wyrażenia publicznie ich wdzięczności dla Ciebie za to, że Twoja praca jest dostępna dla wszystkich, a w szczególności dla nich."
     item4: 'Proszę, odwiedź %link-licenseUploaded%, żeby poznać dokładne warunki i terminy prawne.'
   list4:
@@ -333,7 +333,7 @@ termsOfUse:
   list5:
     item1: 'Jeśli jesteś związany (lub Twoi rodzice lub opiekunowie prawni są związani, jeśli jesteś w wieku poniżej 13 lat) z organizacją zajmującą się odpowiedzialnością za naruszenia prywatności  i/lub masową inwigilację, wtedy nie wolno Ci korzystać z naszej aplikacji i dostępu do naszych usług. Dokładne szczegóły tego ograniczenia i pewne wyjątki są określone w sekcjach 4.a i 4.b na naszych %link-termsOfUse%.'
     item2: Jeśli jesteś w wieku poniżej 13 lat, to musisz zapytać rodziców lub opiekunów prawnych, czy pozwalają Ci używać aplikacji i usług Catrobat.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item3: "Zastrzegamy sobie prawo do odrzucenia, usunięcia lub ukrycia projektów, kont użytkowników, i wszelkie materiały cyfrowe przesłane na strony internetowe Catrobat w dowolnym momencie według naszego wyłącznego uznania, na przykład jeżeli okaże się, że projekt zawiera nieodpowiednie materiały lub że użytkownik narusza prawa innych osób."
     item4: "Całe oprogramowanie i zasoby internetowe Catrobat  są oferowane w nadziei, że będą one przydatne, ale bez jakiejkolwiek gwarancji."
     item5: 'Po precyzyjne sformułowania powyższych punktów oraz niektóre dodatkowe warunki prawne, zajrzyj do naszego %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service.'
   bottom1: Zajrzyj tutaj z powrotem od czasu do czasu, ponieważ zawsze staramy się poprawić nasze warunki korzystania z serwisu.
@@ -457,20 +457,20 @@ api:
     usernameMissing: 'Brak nazwy użytkownika'
     usernameTooShort: 'Za krótka nazwa użytkownika'
     usernameTooLong: 'Za długa nazwa użytkownika'
-    usernameEmpty: 'Username cannot be empty'
+    usernameEmpty: 'Nazwa użytkownika nie może być pusta'
     usernameAlreadyInUse: 'Nazwa jest już w użyciu'
-    usernameInvalid: 'Username invalid'
+    usernameInvalid: 'Nieprawidłowa nazwa użytkownika'
     passwordMissing: 'Brak hasła'
-    passwordEmpty: 'Password cannot be empty'
+    passwordEmpty: 'Hasło nie może być puste'
     passwordTooShort: 'Hasło jest zbyt krótkie'
     passwordTooLong: 'Zbyt długie hasło'
     passwordInvalidChars: 'Hasło zawiera nieprawidłowe znaki'
     usernameContainsEmail: "Nazwa użytkownika nie powinna zawierać adresu e-mail."
-    countryCodeInvalid: "Country code invalid"
+    countryCodeInvalid: "Nieprawidłowy kod kraju"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating project entity. Try uploading again!'
+    invalid_checksum: 'Nieprawidłowa suma kontrolna. Spróbuj ponownie przesłać!'
+    upload_error: 'Błąd podczas wysyłania. Spróbuj ponownie przesłać!'
+    creating_error: 'Błąd podczas tworzenia projektu. Spróbuj ponownie przesłać!'
 #languages and countries
 language:
   arabic: Arabski
@@ -544,7 +544,7 @@ tags:
 admin:
   maintain:
     diskMaintenance: Zarządzanie dyskiem
-    ramMaintenance: RAM maintenance
+    ramMaintenance: Obsługa pamięci RAM
     noRemovableObjects: Nie istnieją żadne usuwalne obiekty.
     removableObjects: Usunięte obiekty
 recommender:
@@ -562,7 +562,7 @@ pmd:
   failed:
     text: Przesyłanie projektu nie powiodło się.
 codeview:
-  title: 'Code view'
+  title: 'Podgląd kodu'
   showCode: 'Pokaż kod'
   hideCode: 'Ukryj kod'
   showStatistics: 'Pokaż statystyki kodu'
@@ -578,8 +578,8 @@ codeview:
   sounds: 'dźwięków'
   globals: 'zm. globalnych'
   locals: 'zm. lokalnych'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
+  globalVariables: 'Globalne zmienne'
+  localVariables: 'Lokalne zmienne'
   eventBricks: 'Bloki wydarzeń'
   controlBricks: 'Bloki kontroli'
   motionBricks: 'Bloki ruchu'
@@ -589,9 +589,9 @@ codeview:
   dataBricks: 'Bloki danych'
   specialBricks: 'Bloki specjalne'
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
+  title: "Statystyki kodu"
+  error: "Statystyki kodu nie mogą być wyświetlane."
+  general: 'Ogólny'
   bricks: 'Bloki'
   eventBricks: 'Wydarzenie'
   controlBricks: 'Kontrola'
@@ -600,7 +600,7 @@ codeStatistics:
   looksBricks: 'Wyglądy'
   penBricks: 'Pisak'
   dataBricks: 'Dane'
-  specialBricks: 'Special'
+  specialBricks: 'Specjalne'
 footer:
   language: Język
   usefulLinks: Przydatne Linki
@@ -611,7 +611,7 @@ privacy-policy:
   header: Polityka prywatności
   version: Wersja 2.2, 17 października 2019
   text1: Aby zaoferować Ci wszystkie korzyści z naszych usług i powiązanego konta, konieczne jest zebranie pewnych danych od Ciebie.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text2: Aby utrzymać i ulepszyć nasze usługi (aplikacje i strony internetowe) oraz aby prowadzić badania naukowe w zakresie TIK i kształcenia STEM/STEAM korzystamy z Google Analytics, Crashlytics, Firebase, all by Google LLC (USA), oraz Dynatrace Dynatrace LLC (USA), aby uzyskać metadane dotyczące korzystania z naszych usług, e. ., informacje o awariach, znaczniki czasu, odwiedzane strony/ekrany, korzystanie z naszych aplikacji i usług, używany system operacyjny oraz informacje o dostawcy sieci. Ta analiza i zebrane dane nie są powiązane z Twoim profilem i nie zawierają żadnych danych osobowych (ostatnie bity adresu IP są anonimowe). Zgromadzone dane zostaną jednak przekazane usługodawcom (Google LLC, USA i Dynatrace LLC, USA). Przetwarzanie danych opiera się na umowach z Google LLC i Dynatrace LLC. Ta relacja z dostawcami usług jest zgodna z ogólnym rozporządzeniem o ochronie danych w Unii Europejskiej (EU GDPR) i umową UE-USA o ochronie danych w ramach Tarczy Prywatności.
   text3: Aby utworzyć i korzystać z konta w naszych systemach oraz aby informować Cię o niezbędnych zmianach dotyczących Twojego konta za pośrednictwem poczty e-mail, np. aktualizacji lub naruszeń naszych Warunków korzystania i usług, naszych zasad dla społeczności lub naszej polityki, będziemy przechowywać Twoją nazwa użytkownika i, jeśli podałeś, twój adres e-mail. Jeśli podłączyłeś swoje konto przez Google Plus lub Facebook, dodatkowo przechowujemy klucz identyfikacyjny podłączony do Twojego konta w tych usługach. Nie wykorzystamy tych danych do jakichkolwiek innych celów (np. marketingowych), chyba że wyrazisz na to zgodę.
   text4: Na zasadzie dobrowolności możesz podać nam swój kraj zamieszkania za pośrednictwem strony swojego konta na stronie udostępniania. Zostanie wyświetlony na Twoim publicznym profilu i będzie używany wyłącznie do celów statystycznych i badawczych przez nas. Można go usunąć w dowolnym momencie w ustawieniach profilu.
   text5: Możesz wycofać wykorzystanie danych osobowych należących do konta w dowolnym momencie, usuwając konto za pośrednictwem strony profilu na https://share.catrob.at/. Po usunięciu konta nadal będziesz mógł korzystać z dostarczonych usług, ale nie będziesz współpracować, np. poprzez przesyłanie programów, komentowanie lub polubienie. Ponadto wszystkie dostarczone treści powiązane z Twoim kontem, np. przesłane programy, komentarze itp., zostaną usunięte.
@@ -623,10 +623,10 @@ privacy-policy:
   disagree-text: Bez Twojej zgody nie możemy stworzyć konta, ale podstawowe funkcje są nadal dostępne.
 catro-notifications:
   markAsRead: "Oznacz jako przeczytane"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  noFollowers: "Wygląda na to, że nie masz żadnych powiadomień śledzących."
+  noComments: "Wygląda na to, że nie masz żadnych powiadomień o komentarzach."
+  noReactions: "Wygląda na to, że nie masz żadnych powiadomień o reakcjach."
+  noRemixes: "Wygląda na to, że nie masz powiadomień o remiksach."
   comment:
     message: 'Użytkownik %user_link% skomentował Twój projekt %program_link%.'
   like:
@@ -651,9 +651,9 @@ media-packages:
     md: średni
     lg: duży
   theme-special: "%flavor% Temat specjalny"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+  search-results: Wyniki wyszukiwania biblioteki multimediów
+  no-results: Twoje wyszukiwanie zwróciło 0 wyników. Proszę używać tylko angielskiego wyszukiwania.
+  download_these_files: zapisz
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
