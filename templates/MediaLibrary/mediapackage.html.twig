@@ -1,6 +1,7 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
+  <link rel="preload" href="{{ asset('css/'~themeAssets()~'/medialib.css') }}" as="style">
   <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/medialib.css') }}" media="screen"/>
 {% endblock %}
 
@@ -16,12 +17,12 @@
 {% block body %}
 
   {% if foundResults is defined and foundResults == false %}
-  <div id="search-results">
-    <h1>{{ "media-packages.search-results"|trans({}, "catroweb") }}</h1>
-    <div id="search-results-text">
-      {{ "media-packages.no-results"|trans({}, "catroweb") }}
+    <div id="search-results">
+      <h1>{{ "media-packages.search-results"|trans({}, "catroweb") }}</h1>
+      <div id="search-results-text">
+        {{ "media-packages.no-results"|trans({}, "catroweb") }}
+      </div>
     </div>
-  </div>
   {% endif %}
 
   <div id="content" class="medialib-content">
