@@ -59,7 +59,7 @@
     "@material/menu-surface": "^9.0",
     "@material/progress-indicator": "^9.0",
     "@material/radio": "^9.0",
-    "@material/select": "^9.0",
+    "@material/select": "^10.0",
     "@material/snackbar": "^9.0",
     "@material/textfield": "^9.0",
     "@material/top-app-bar": "^9.0",
