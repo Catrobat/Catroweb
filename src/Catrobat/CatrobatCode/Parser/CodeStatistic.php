@@ -90,6 +90,13 @@ class CodeStatistic
           'listDifferent' => [],
         ],
       ],
+      'deviceBricks' => [
+        'numTotal' => 0,
+        'different' => [
+          'numDifferent' => 0,
+          'listDifferent' => [],
+        ],
+      ],
       'specialBricks' => [
         'numTotal' => 0,
         'different' => [
@@ -107,6 +114,7 @@ class CodeStatistic
       'looksBricks' => [],
       'penBricks' => [],
       'dataBricks' => [],
+      'deviceBricks' => [],
       'specialBricks' => [],
     ];
   }
@@ -270,6 +278,9 @@ class CodeStatistic
         break;
       case Constants::DATA_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'dataBricks');
+        break;
+      case Constants::DEVICE_BRICK_IMG:
+        $this->updateBrickTypeStatistic($brick->getType(), 'deviceBricks');
         break;
       case Constants::UNKNOWN_BRICK_IMG:
       case Constants::DEPRECATED_BRICK_IMG:

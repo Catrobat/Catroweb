@@ -97,6 +97,10 @@ class Constants
   const FLASH_BRICK = 'FlashBrick';
   const BACKGROUND_REQUEST_BRICK = 'BackgroundRequestBrick';
   const LOOK_REQUEST_BRICK = 'LookRequestBrick';
+  const COPY_LOOK_BRICK = 'CopyLookBrick';
+  const DELETE_LOOK_BRICK = 'DeleteLookBrick';
+  const EDIT_LOOK_BRICK = 'EditLookBrick';
+  const PAINT_NEW_LOOK_BRICK = 'PaintNewLookBrick';
 
   // --- Pen ---
   const PEN_DOWN_BRICK = 'PenDownBrick';
@@ -117,6 +121,12 @@ class Constants
   const ASK_SPEECH_BRICK = 'AskSpeechBrick';
   const STOP_SOUND_BRICK = 'StopSoundBrick';
   const START_LISTENING_BRICK = 'StartListeningBrick';
+  const CHANGE_TEMPO_BY_N_BRICK = 'ChangeTempoByNBrick';
+  const SET_TEMPO_BRICK = 'SetTempoBrick';
+  const PAUSE_FOR_BEATS_BRICK = 'PauseForBeatsBrick';
+  const PLAY_DRUM_FOR_BEATS_BRICK = 'PlayDrumForBeatsBrick';
+  const PLAY_NOTE_FOR_BEATS_BRICK = 'PlayNoteForBeatsBrick';
+  const SET_LISTENING_LANGUAGE_BRICK = 'SetListeningLanguageBrick';
 
   // --- Control ---
   const WAIT_BRICK = 'WaitBrick';
@@ -167,6 +177,11 @@ class Constants
   const PARAMETERIZED_END_BRICK = 'ParameterizedEndBrick';
   const FOR_ITEM_IN_USER_LIST_BRICK = 'ForItemInUserListBrick';
 
+  // --- Device ---
+  const OPEN_URL_BRICK = 'OpenUrlBrick';
+  const RESET_TIMER_BRICK = 'ResetTimerBrick';
+  const TOUCH_AND_SLIDE_BRICK = 'TouchAndSlideBrick';
+
   // Your Bricks
   const USER_DEFINED_BRICK = 'UserDefinedBrick';
   const USER_DEFINED_RECEIVER_BRICK = 'UserDefinedReceiverBrick';
@@ -180,6 +195,8 @@ class Constants
   const STOP_RUNNING_STITCH_BRICK = 'StopRunningStitchBrick';
   const TRIPLE_STITCH_BRICK = 'TripleStitchBrick';
   const ZIG_ZAG_STITCH_BRICK = 'ZigZagStitchBrick';
+  const SEW_UP_BRICK = 'SewUpBrick';
+  const WRITE_EMBROIDERY_TO_FILE_BRICK = 'WriteEmbroideryToFileBrick';
 
   // --- Lego NXT ---
   const LEGO_NXT_MOTOR_TURN_ANGLE_BRICK = 'LegoNxtMotorTurnAngleBrick';
@@ -276,6 +293,7 @@ class Constants
   const LOOKS_BRICK_IMG = '1h_brick_green.png';
   const DATA_BRICK_IMG = '1h_brick_red.png';
   const PEN_BRICK_IMG = '1h_brick_darkgreen.png';
+  const DEVICE_BRICK_IMG = '1h_brick_gold.png';
 
   const UNKNOWN_SCRIPT_IMG = '1h_when_grey.png';
   const UNKNOWN_BRICK_IMG = '1h_brick_grey.png';

@@ -111,6 +111,11 @@ class CodeStatisticsController extends AbstractController
           $brick_stats['dataBricks']['numTotal'],
           $brick_stats['dataBricks']['different']['numDifferent']
         ),
+        'device-brick' => $this->getMappedBricksStatistic(
+          'codeStatistics.deviceBricks',
+          $brick_stats['deviceBricks']['numTotal'],
+          $brick_stats['deviceBricks']['different']['numDifferent']
+        ),
         'special-brick' => $this->getMappedBricksStatistic(
         'codeStatistics.specialBricks',
           $brick_stats['specialBricks']['numTotal'],
