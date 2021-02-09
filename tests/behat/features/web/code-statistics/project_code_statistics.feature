@@ -370,6 +370,38 @@ Feature: As a visitor I want to see code statistics on the project page
     And the "#total-number-of-special-brick" element should contain "0"
     And the "#number-of-different-special-brick" element should contain "0"
 
+  Scenario: On a project page there should be correct stats about all device bricks
+    Given I have a project zip "CodeStatistics/code_statistics_device_blocks.catrobat"
+    When I upload this generated program with id "1", API version 1
+    Given I am on "/app/project/1/code_statistics"
+    And I wait for the page to be loaded
+    And the "#total-number-of-scenes" element should contain "1"
+    And the "#total-number-of-scripts" element should contain "1"
+    And the "#total-number-of-bricks" element should contain "4"
+    And the "#total-number-of-objects" element should contain "1"
+    And the "#total-number-of-looks" element should contain "0"
+    And the "#total-number-of-sounds" element should contain "0"
+    And the "#total-number-of-globals" element should contain "0"
+    And the "#total-number-of-locals" element should contain "0"
+    And the "#total-number-of-event-brick" element should contain "1"
+    And the "#number-of-different-event-brick" element should contain "1"
+    And the "#total-number-of-control-brick" element should contain "0"
+    And the "#number-of-different-control-brick" element should contain "0"
+    And the "#total-number-of-motion-brick" element should contain "0"
+    And the "#number-of-different-motion-brick" element should contain "0"
+    And the "#total-number-of-sound-brick" element should contain "0"
+    And the "#number-of-different-sound-brick" element should contain "0"
+    And the "#total-number-of-look-brick" element should contain "0"
+    And the "#number-of-different-look-brick" element should contain "0"
+    And the "#total-number-of-pen-brick" element should contain "0"
+    And the "#number-of-different-pen-brick" element should contain "0"
+    And the "#total-number-of-data-brick" element should contain "0"
+    And the "#number-of-different-data-brick" element should contain "0"
+    And the "#total-number-of-device-brick" element should contain "3"
+    And the "#number-of-different-device-brick" element should contain "3"
+    And the "#total-number-of-special-brick" element should contain "0"
+    And the "#number-of-different-special-brick" element should contain "0"
+
   Scenario: On a project page there should be correct stats about all arduino bricks
     Given I have a project zip "CodeStatistics/code_statistics_arduino_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
