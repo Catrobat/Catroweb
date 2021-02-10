@@ -117,7 +117,8 @@ class ApiContext implements KernelAwareContext
   private array $user_structure_extended = ['id', 'username', 'email', 'country',
     'projects', 'followers', 'following', ];
 
-  private array $featured_program_structure = ['id', 'name', 'author', 'project_id', 'project_url', 'featured_image'];
+  private array $featured_program_structure = ['id', 'name', 'author', 'project_id', 'project_url', 'url',
+    'featured_image', ];
 
   private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
     'author', 'extension', 'download_url', ];
@@ -3290,12 +3291,23 @@ class ApiContext implements KernelAwareContext
       {
         continue;
       }
+      $url = $featured_program->getUrl();
+      $project_url = 'http://localhost/app/project/'.$featured_program->getProgram()->getId();
+      if (empty($url))
+      {
+        $url = $project_url;
+      }
+      else
+      {
+        $project_url = null;
+      }
       $result = [
         'id' => $featured_program->getId(),
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUserName(),
         'project_id' => $featured_program->getProgram()->getId(),
-        'project_url' => 'http://localhost/app/project/'.$featured_program->getProgram()->getId(),
+        'project_url' => $project_url,
+        'url' => $url,
         'featured_image' => 'http://localhost/resources_test/featured/featured_'.$featured_program->getId().'.jpg',
       ];
       $projects[] = $result;
@@ -3455,6 +3467,11 @@ class ApiContext implements KernelAwareContext
       {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/project\/[a-zA-Z0-9-]+$/', $project_url);
+      },
+      'url' => function ($url)
+      {
+        Assert::assertIsString($url);
+        Assert::assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
       },
       'featured_image' => function ($featured_image)
       {
