@@ -366,9 +366,6 @@
     "myclabs/deep-copy": {
         "version": "1.9.5"
     },
-    "namshi/jose": {
-        "version": "7.2.3"
-    },
     "netresearch/jsonmapper": {
         "version": "v2.1.0"
     },
@@ -826,9 +823,6 @@
         "version": "v1.17.0"
     },
     "symfony/polyfill-mbstring": {
-        "version": "v1.14.0"
-    },
-    "symfony/polyfill-php56": {
         "version": "v1.14.0"
     },
     "symfony/polyfill-php70": {

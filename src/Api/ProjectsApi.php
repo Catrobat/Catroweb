@@ -126,17 +126,28 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     /** @var FeaturedProgram $featured_program */
     foreach ($programs as &$featured_program)
     {
+      $url = $featured_program->getUrl();
+      $project_url = ltrim($this->generateUrl(
+        'program',
+        [
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
+          'id' => $featured_program->getProgram()->getId(),
+        ],
+        UrlGeneratorInterface::ABSOLUTE_URL), '/'
+      );
+      if (empty($url))
+      {
+        $url = $project_url;
+      }
+      else
+      {
+        $project_url = null;
+      }
       $result = [
         'id' => $featured_program->getId(),
         'project_id' => $featured_program->getProgram()->getId(),
-        'project_url' => ltrim($this->generateUrl(
-          'program',
-          [
-            'theme' => $this->parameter_bag->get('umbrellaTheme'),
-            'id' => $featured_program->getProgram()->getId(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL), '/'
-        ),
+        'project_url' => $project_url,
+        'url' => $url,
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
         'featured_image' => $this->image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
