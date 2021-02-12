@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Kinézetek'
   penBricks: 'Pen'
   dataBricks: 'Adatok'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Language

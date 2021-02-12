@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Muonekano'
   penBricks: 'Kalamu'
   dataBricks: 'Data'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Lugha

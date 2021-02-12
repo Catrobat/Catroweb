@@ -600,6 +600,7 @@ codeStatistics:
   looksBricks: 'Wyglądy'
   penBricks: 'Pisak'
   dataBricks: 'Dane'
+  deviceBricks: 'Urządzenie'
   specialBricks: 'Specjalne'
 footer:
   language: Język

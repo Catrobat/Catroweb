@@ -591,6 +591,7 @@ codeStatistics:
   looksBricks: 'Görünüş'
   penBricks: 'Kalem'
   dataBricks: 'Veri'
+  deviceBricks: 'Cihaz'
   specialBricks: 'Özel'
 footer:
   language: Dil

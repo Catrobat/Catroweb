@@ -606,6 +606,7 @@ codeStatistics:
   looksBricks: 'Текстуры'
   penBricks: 'Ручка'
   dataBricks: 'Данные'
+  deviceBricks: 'Устройство'
   specialBricks: 'Особый'
 footer:
   language: Язык

@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Penampilan'
   penBricks: 'Pena'
   dataBricks: 'Data'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Bahasa

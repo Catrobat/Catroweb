@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'מראה'
   penBricks: 'Pen'
   dataBricks: 'נתונים'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Language

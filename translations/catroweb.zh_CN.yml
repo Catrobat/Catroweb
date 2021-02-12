@@ -606,6 +606,7 @@ codeStatistics:
   looksBricks: '外观'
   penBricks: '画笔'
   dataBricks: '数据'
+  deviceBricks: '设备'
   specialBricks: 'Special'
 footer:
   language: 语言

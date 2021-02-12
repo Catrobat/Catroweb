@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Các giao diện'
   penBricks: 'Pen'
   dataBricks: 'Dữ liệu'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Language

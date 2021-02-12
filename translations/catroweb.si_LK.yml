@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Looks'
   penBricks: 'Pen'
   dataBricks: 'දත්ත'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: භාෂාව

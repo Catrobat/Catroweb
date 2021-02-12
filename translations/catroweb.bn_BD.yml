@@ -598,6 +598,7 @@ codeStatistics:
   looksBricks: 'চেহারা'
   penBricks: 'কলম'
   dataBricks: 'তথ্য'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: ভাষা
