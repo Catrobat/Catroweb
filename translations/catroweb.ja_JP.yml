@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: '外見'
   penBricks: 'ペン'
   dataBricks: 'データ'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: 言語

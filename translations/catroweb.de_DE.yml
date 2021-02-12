@@ -604,6 +604,7 @@ codeStatistics:
   looksBricks: 'Aussehen'
   penBricks: 'Malstift'
   dataBricks: 'Daten'
+  deviceBricks: 'Gerät'
   specialBricks: 'Spezial'
 footer:
   language: Sprache

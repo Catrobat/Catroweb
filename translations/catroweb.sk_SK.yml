@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Vzhľady'
   penBricks: 'Pero'
   dataBricks: 'Dáta'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Jazyk

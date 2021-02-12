@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Utseenden'
   penBricks: 'Penna'
   dataBricks: 'Data'
+  deviceBricks: 'Enhet'
   specialBricks: 'Special'
 footer:
   language: Språk

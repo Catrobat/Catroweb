@@ -605,6 +605,7 @@ codeStatistics:
   looksBricks: 'தோற்றம்'
   penBricks: 'பேனா'
   dataBricks: 'தகவல்கள்'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: மொழி

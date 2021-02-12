@@ -595,6 +595,7 @@ codeStatistics:
   looksBricks: '모양'
   penBricks: '펜'
   dataBricks: '변수'
+  deviceBricks: '기기'
   specialBricks: '특수'
 footer:
   language: 언어

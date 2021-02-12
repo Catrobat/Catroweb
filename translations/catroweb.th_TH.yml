@@ -606,6 +606,7 @@ codeStatistics:
   looksBricks: 'รูปลักษณ์'
   penBricks: 'ปากกา'
   dataBricks: 'ข้อมูล'
+  deviceBricks: 'อุปกรณ์'
   specialBricks: 'Special'
 footer:
   language: ภาษา

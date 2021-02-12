@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'نظر'
   penBricks: 'قلم'
   dataBricks: 'ڈیٹا'
+  deviceBricks: 'آلہ'
   specialBricks: 'Special'
 footer:
   language: زبان

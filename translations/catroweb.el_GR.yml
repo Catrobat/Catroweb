@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Όψεις'
   penBricks: 'Πένα'
   dataBricks: 'Δεδομένα'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Γλώσσα
