@@ -21,15 +21,17 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php7.4-common \
     php7.4-cli \
+    php7.4-common \
     php7.4-curl \
-    php7.4-intl \
+    php7.4-dom \
     php7.4-gd \
-    php7.4-zip \
+    php7.4-imagick \
+    php7.4-intl \
+    php7.4-mbstring \
     php7.4-mysql \
     php7.4-xml \
-    php7.4-dom \
+    php7.4-zip \
     libapache2-mod-php7.4 \
     zlibc \
     acl \
@@ -37,9 +39,6 @@ RUN apt-get update && \
     libtool \
     php-apcu \
     apache2 \
-    php-imagick \
-    php-mbstring \
-    php-gettext \
     git \
     curl \
     php-xdebug \
