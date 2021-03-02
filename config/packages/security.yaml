@@ -12,6 +12,11 @@ security:
 
     firewalls:
 
+        refresh:
+            pattern:  ^/api/authentication/refresh
+            stateless: true
+            anonymous: true
+            methods: [POST]
         #
         # API V2
         #
@@ -161,6 +166,7 @@ security:
 
 
     access_control:
+        - { path: ^/api/authentication/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
         - { path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }

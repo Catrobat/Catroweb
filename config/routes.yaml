@@ -24,6 +24,11 @@ apple_login:
   path: /login/check-apple
 
 # ===== Api =====
+
+gesdinet_jwt_refresh_token:
+  path:       /api/authentication/refresh
+  controller: gesdinet.jwtrefreshtoken::refresh
+
 open_api_server:
   prefix: /api
   resource: "@OpenAPIServerBundle/Resources/config/routing.yml"
