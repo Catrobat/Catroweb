@@ -1,59 +1,59 @@
 ---
 #homepage translation
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
-tutorials: Help
+localLanguage: Tanglizit
+username: Isem n useqdac
+password: Awal uffir
+createNewPassword: Rnu awal uffir
+accountSettings: Iɣewwaren n umiḍan
+email: Imayl
+aboutPocketCode: Γef ayen yeεnan Pocket Code
+about: ɣef ayen yeεnan
+education: Ţṛebga
+chat: Aqeṣṣer akked ifoṛumen
+others: Wiyaḍ
+tutorials: Tallelt
 googlePlay: Google Play Store
 iosAppStore: iOS App store
 huaweiAppGallery: Huawei AppGallery
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-description: Description
-noDescription: No description available.
+passwordsNoMatch: Awal uffir ur iwata ara.
+error: Tuccḍa
+cancel: Sefsex
+report: Cetki
+deleteIt: Ih, kkes-it!
+reportIt: Ih, azen-it!
+areYouSure: Tetḥeqqeḍ ?
+noWayOfReturn: Ulac ţawil iwakken ad d-tessuɣaleḍ tigawin-ik!
+download: Sider
+description: Aglam
+noDescription: Ulac aglam.
 credits: Notes and credits
 noCredits: No notes and credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
+country: Tamurt
+loginText: qqen
+privacyPolicy: Tasertit tabaḍnit
 imprint: Imprint
-programDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
+programDetails: Tfaṣil
+somethingWentWrong: 'Ooooops yella kra ur yeddan akken iwata.'
+pleaseTryAgain: 'Ttxilek ɛreḍ tikkelt nniḍen!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
+more: 'ugar'
 less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
-more-information: 'More information'
-less-information: 'Less information'
+show-more: 'Zken ugar'
+show-less: 'Sken qell'
+more-information: 'Ugar n isallen'
+less-information: 'Qell n isallen'
 ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-allNotifications: 'All'
-FollowersNotifications: 'Followers'
+notifications: 'Ilɣuyen'
+allNotifications: 'Akk'
+FollowersNotifications: 'Imeḍfaṛen'
 LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
+CommentNotifications: 'Iwenniten'
 RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
+wellDone: "Igerrez waya!"
+done: "Dayen ifuk!"
 notificationsReadMessage: "It looks like you don't have any notifications."
 confirmMessage: "Yes, delete it"
 cancelMessage: "Cancel"
@@ -72,7 +72,7 @@ indexPage:
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
   follows: Following
-  followers: Followers
+  followers: Imeḍfaṛen
   follow: Follow
   username: User
   followsMe: Follows me
@@ -98,11 +98,11 @@ programs:
   scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Tetḥeqqeḍ?
+    Tetḥeqqeḍ belli tebɣiḍ ad tekkseḍ "%programName%"?
+    Ulac ţawil i tririt n tigawin-inek!
+    Ih, kkes-it!
+    Sefsex
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -112,28 +112,28 @@ programs:
     Yes, set to private
     No
   reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteCommentConfirmation: Tetḥeqqeḍ belli tebɣiḍ ad tekkseḍ awennit-agi?
   deleteAccountConfirmation: |+
     Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongDescription: Aglam n usenfaṛ d aɣezfan aṭas!
+  rudeWordsInDescription: Ur tezmireḍ ara ad tesqedceḍ awalen icemten deg uglam-inek!
   tooLongCredits: The project notes and credits are too long!
   rudeWordsInCredits: You can't use rude words in your notes and credits!
   most:
-    viewed: Most viewed
+    viewed: Ayen yettuwalan ugar
     downloaded: Most downloaded
   random: Random projects
   related: Related projects
   downloads: '%downloads% downloads'
-  sample: Example projects
+  sample: Isefaṛen imedyaten
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
-    all: "All"
+    all: "Akk"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted projects
@@ -156,10 +156,10 @@ programs:
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
-  comments: Comments
+  comments: Iwenniten
   send: Send
   delete: Delete
-  report: Report
+  report: Cetki
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
