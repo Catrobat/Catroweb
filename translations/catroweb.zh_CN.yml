@@ -42,7 +42,7 @@ less: '更少'
 show-more: '显示更多'
 show-less: '隐藏显示'
 more-information: '详细信息'
-less-information: 'Less information'
+less-information: '隐藏'
 ok: 好
 clickToDownloadProgram: '要下载示例项目，请点击 %link_start% 这里 %link_end%。'
 registrationError: '用户名或邮箱已被使用。'
@@ -63,7 +63,7 @@ pleaseWait: "请等待..."
 projects: "程序"
 oauthPopUpTitle: "外部帐户登录信息"
 oauthInfo: '您刚刚使用了一个外部帐户登录。我们为您创建了一个随机用户名。 如果你想要更改你的用户名或为你的帐户创建一个新的密码，请访问我的个人资料页面。 点击 %link_start% 这里 %link_end% 去您的个人资料页面'
-oauthHere: "here"
+oauthHere: "此处"
 statistics: "统计"
 indexPage:
   recommendedSection:
@@ -73,29 +73,29 @@ indexPage:
 follower:
   follows: 正在关注
   followers: 关注者
-  follow: Follow
-  username: User
-  followsMe: Follows me
+  follow: 关注
+  username: 用户
+  followsMe: 关注我
   noFollowing: 您目前没有关注任何人。
   noFollowers: 您目前没有关注者。
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
+  noOtherFollowing: 目前没有关注的用户。
+  noOtherFollowers: 目前没有关注用户。
+  followError: "无法关注所需的用户！"
+  unfollowError: "无法取消关注所需的用户！"
   unfollowQuestion: "确定要取消关注吗？"
   unfollowButton: "取消关注 %username%"
 programs:
   welcome:
     title: 欢迎使用 Catrobat %theme%
     subtitle: 书写你的故事，游戏以及更多东西...。
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: 在您的T恤衫、袋子、裤子或智能手机等上搭起您自己的修补师！
     download: 下载该APP。
     statistics: 更多统计信息
   featured: 经典程序
-  example: Examples
+  example: 例如
   newest: 最新项目
   recommended: 推荐的项目
-  scratchremixes: Scratch remixes
+  scratchremixes: Scratch 混成
   noPrograms: 目前没有项目。
   deleteConfirmation: |+
     您确定吗？
@@ -104,13 +104,13 @@ programs:
     是的，删除它！
     取消
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    您确定吗？
+    如果您将 '%programName%' 设置为私密，其他用户将不会看到或找到它。
+    您仍然可以与您的朋友分享您项目的链接。 您可以切换可视性点击挂锁图标。
+    如果您设置 "%programName%" 为公开，其他用户可以看到并找到它。
+    是的，设置为公开
+    是的，设置为私人
+    否。
   reportCommentConfirmation: 您确定要举报此评论？
   deleteCommentConfirmation: 确实要删除此评论吗?
   deleteAccountConfirmation: |+
@@ -177,7 +177,7 @@ programs:
   linkTitle: 链接
   link: 复制项目链接到剪贴板
   reactionsText: 我喜欢的
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadErrorText: 下载项目时出错。请稍后再试。
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
@@ -250,11 +250,11 @@ profile:
   firstEmail: 我的第一封邮件
   secondEmail: 第二邮箱
   myPrograms: 我的项目
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  follows: 关注
+  follower: 关注者
+  unfollowUser: 取消关注此用户！
+  followUser: 关注此用户！
+  amountOfPrograms: 项目数量
   form:
     passwordTooShort: 新密码至少要有%length%的字符。
     passwordTooLong: 新密码最多可以有%length%的字符。
@@ -263,20 +263,20 @@ profile:
     emailNotValid: 邮箱地址不存在。
     emailMissing: 更新邮箱地址时发生错误，你必须要有至少一个经过验证的邮箱地址。
     emailExists: 此电子邮件地址早已存在。
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: 这个用户名是不允许的
+    usernameMissing: 您必须有一个用户名。
     usernameExists: 此名称已存在。
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: 用户名不应包含电子邮件地址。
     submitSuccess: 已保存！
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: 你真的想要删除此项目吗?
+  programsOf: 项目中
   changePicture: 更改图片
   avatar:
     noImage: 无图像！
     pictureTooLarge: 您选择的图片体积过大，请不要使用超过5兆的图片。
     uploadError: 对不起，上传发生错误。
     noSupport: 不支持此图像类型，请尝试其他图像。
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Scratch 上的个人资料
 myprofile:
   editProfile: 编辑档案
   edit: 编辑
@@ -293,7 +293,7 @@ myprofile:
   deleteAccount: 删除帐户
   deleteAccountText: 您确定要删除您的账户么？这将删除您之前上传的程序和评论 ！
   editAccountSettings: 编辑帐户设置
-  notChangeVisibility: Can not change visibility
+  notChangeVisibility: 无法更改显示
   notChangeVisibilityReason: 您的项目的语言版本太高，因此不能显示设置。
 licenseToPlay:
   link: '授权'
@@ -311,7 +311,7 @@ licenseToPlay:
 termsOfUse:
   title: 使用条款
   headline: 欢迎来到 Catrobat 社区 ！
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: '作为 Catrobat 社区的一份子，您正与其他人分享程序与思想：'
   text2: "我们需要你的帮助，让这个社区很好地支持每个成员。这里是你如何能帮助我们："
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: '我们给您的礼物：'
@@ -321,13 +321,13 @@ termsOfUse:
     item2: 所有年龄 （从幼年到青少年以至于祖父母）
     item3: 应用所有级别的经验
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: 敬重。当分享项目时，请记住，许多不同年龄和背景的人都会看到您的贡献。
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "请诚实。不要冒充其他人或做出其他戏弄社区的事情。"
     item4: "请保护好您的隐私信息。请不要公开您的电子邮件，电话号码或其他个人联系信息。"
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item5: "帮助保持网站友好。 如果你觉得其他人会发现一个项目或评论意味着侮辱、过于暴力， 或者不适当，只需单击“报告视为不适当”按钮，留下一个简短的解释。 Catrobat团队将审查您的报告，并可以删除任何项目、评论或帖子。"
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item1: "通过上传一个项目到我们的网站，您接受并同意将此工作置于某些上传的 Catrobat 项目的免费许可之下。 类似于您可以使用Catrobat系统本身的免费许可证。 这些上传的 Catrobat 项目的免费许可证使每个人都有权从他人以前上传的工作中学习，并且有权调整和重新组合这种工作以建立自己的新的有趣的游戏， 动画和其他项目。 这让每个人都能站在自己的同伴的肩上”，其中一个是你！ 因此，您的工作将造福于整个世界，每个人都可以自由使用。 与来自世界各地的志愿者为维基百科自由贡献的文字和图片有些相似之处。 把它看作是你对人类的现在：你给了每个人以及上传他们的作品到我们网站的所有其他人给你。 因此上传的项目是它的所有者免费赠送给你的价值很高的礼物。 条件是你以同样的条件参加社区。"
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "有一个重要的附加条件:如果您的作品是基于其他人的作品设计的，您必须在自己的项目中明确标明原项目的作者。同时我们也会努力工作以确保其他受益于您项目的作者对您表达明确的赞赏，通过在他们的应用中明确标明您在Catrobat社区中自由选择的用户名。通过这种方式可以提供给其他人机会，让他们因为把您的作品传播给所有人，特别是他们自己对您表达公开的感谢。"
     item4: '请参阅 %link-licenseUploaded%了解精确的法律条款和条件。'
