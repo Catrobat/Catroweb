@@ -650,7 +650,7 @@ services:
   # ===== Apk Generation
 
   catrowebadmin.block.apk.pending:
-    class: App\Admin\PendingApkRequestsAdmin
+    class: App\Admin\ApkPendingAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, label: "Pending" }
     arguments:
@@ -660,7 +660,7 @@ services:
     public: true
 
   catrowebadmin.block.apk.list:
-    class: App\Admin\ApkListAdmin
+    class: App\Admin\ApkReadyAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, label: "Ready" }
     arguments:
@@ -700,8 +700,24 @@ services:
     arguments:
       - ~
       - App\Entity\User
+      - App\Catrobat\Controller\Admin\ReportController
       - ~
     public: true
+
+
+  # ===== Survey
+
+  catrowebadmin.block.survey:
+    class: App\Admin\AllSurveysAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "All Surveys", pager_type: "simple",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\Survey
+      - ~
+    public: true
+
 
   # ===== Tools
 

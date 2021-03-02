@@ -131,16 +131,16 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
     $file_options = [
       'required' => (null === $this->getSubject()->getId()), ];
 
-    $formMapper
+    $form
       ->add('name', TextType::class, ['label' => 'Name'])
       ->add('file', FileType::class, $file_options)
       ->add('category', EntityType::class, [
@@ -153,13 +153,13 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->addIdentifier('id')
       ->add('name')
       ->add('file', 'string', ['template' => 'Admin/mediapackage_file.html.twig'])

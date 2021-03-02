@@ -41,8 +41,14 @@ class ExtractedCatrobatFile
       throw new InvalidXmlException();
     }
     $content = str_replace('&#x0;', '', $content, $count);
+
     preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
     $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
+    for ($i = 0; $i < count($this->xml_filenames); ++$i)
+    {
+      $this->xml_filenames[$i] = $this->decodeXmlEntities($this->xml_filenames[$i]);
+    }
+
     $xml = @simplexml_load_string($content);
     if (!$xml)
     {
@@ -415,7 +421,7 @@ class ExtractedCatrobatFile
 
   public function hasScenes(): bool
   {
-    return 0 !== (is_countable($this->program_xml_properties->xpath('//scenes')) ? count($this->program_xml_properties->xpath('//scenes')) : 0);
+    return 0 !== count($this->program_xml_properties->xpath('//scenes'));
   }
 
   private function getObject(SimpleXMLElement $objectTree): ?CodeObject
@@ -459,5 +465,13 @@ class ExtractedCatrobatFile
     {
       mkdir($directory, 0777, true);
     }
+  }
+
+  private function decodeXmlEntities(string $input): string
+  {
+    $match = ['/&amp;/', '/&gt;/', '/&lt;/', '/&apos;/', '/&quot;/'];
+    $replace = ['&', '<', '>', '\'', '"'];
+
+    return preg_replace($match, $replace, $input);
   }
 }

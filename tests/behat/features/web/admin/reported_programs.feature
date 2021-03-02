@@ -11,10 +11,10 @@ Feature: Admin reported programs
       | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
       | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
     And there are programs:
-      | id | name      | description              | visible |
-      | 1  | program 1 | my superman description  | true    |
-      | 2  | program 2 | abcef                    | true    |
-      | 3  | program 3 | hello                    | true    |
+      | id | name      | description              | visible | owned by |
+      | 1  | program 1 | my superman description  | true    | Gregor   |
+      | 2  | program 2 | abcef                    | true    | Superman |
+      | 3  | program 3 | hello                    | true    | Gregor   |
 
   Scenario: List reported programs sorted by date descending
     Given I log in as "Adminius" with the password "123456"
@@ -138,4 +138,19 @@ Feature: Admin reported programs
     Then I should see the reported programs table:
       | Note               | State    | Category   | Reporting User | Program               | Program Visible |
       | Even Worse Program | New      | Spam       | Adminius       | program 2             | no              |
-    And I should not see "Superman"
+    And I should see "Superman"
+    And I should not see "Gregor"
+    # Superman is shown
+
+  Scenario: Reported User Username filter
+    Given I log in as "Superman" with the password "123456"
+    And I report program 1 with category "spam" and note "Bad Program" in Browser
+    Then I logout
+    And I log in as "Adminius" with the password "123456"
+    And I report program 2 with category "spam" and note "Even Worse Program" in Browser
+    Then I am on "/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D=1"
+    And I wait for the page to be loaded
+    Then I should see the reported programs table:
+      | Note               | State    | Category   | Reported User | Reporting User | Program               | Program Visible |
+      | Even Worse Program | New      | Spam       | Superman      |Adminius        | program 2             | no              |
+    And I should not see "Gregor"

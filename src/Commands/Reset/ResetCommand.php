@@ -213,7 +213,7 @@ class ResetCommand extends Command
     $i = 0;
     foreach ($program_names as $program_name)
     {
-      $random_reported = random_int(-10, 1);
+      $random_reported = random_int(-10, 2);
       if ($random_reported <= 0)
       {
         $random_reported = 0;
