@@ -14,7 +14,7 @@
         "ext-posix": "*",
         "ext-zip": "*",
         "beberlei/doctrineextensions": "^1.2",
-        "catrobat/capi": "v1.0.55",
+        "catrobat/capi": "v1.0.56",
         "codercat/jwk-to-pem": "^1.0",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
