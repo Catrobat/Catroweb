@@ -24,5 +24,6 @@ Feature: Sidebar Navigation
     And the element "#sidebar-overlay" should be visible
     When I click browser's back button
     Then the url should match "/app/login"
+    And I wait for the page to be loaded
     And the element "#sidebar" should not be visible
     And the element "#sidebar-overlay" should not be visible

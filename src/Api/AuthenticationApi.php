@@ -96,6 +96,11 @@ class AuthenticationApi implements AuthenticationApiInterface
     // TODO: Implement authenticationPut() method.
   }
 
+  public function authenticationRefreshPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  {
+    //TODO: Implement method
+  }
+
   private function validateGoogleIdToken($id_token)
   {
     $google_id = getenv('GOOGLE_ID');
