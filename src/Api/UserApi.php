@@ -2,10 +2,10 @@
 
 namespace App\Api;
 
+use App\Catrobat\Services\APIHelper;
 use App\Catrobat\Services\TokenGenerator;
 use App\Entity\User;
 use App\Entity\UserManager;
-use App\Utils\APIHelper;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Api\UserApiInterface;
@@ -40,9 +40,11 @@ class UserApi implements UserApiInterface
 
   private JWTTokenManagerInterface $jwt_manager;
 
+  private APIHelper $api_helper;
+
   public function __construct(ValidatorInterface $validator, UserManager $user_manager,
                               TokenGenerator $token_generator, TranslatorInterface $translator,
-                              TokenStorageInterface $token_storage, JWTTokenManagerInterface $jwt_manager)
+                              TokenStorageInterface $token_storage, JWTTokenManagerInterface $jwt_manager, APIHelper $APIHelper)
   {
     $this->validator = $validator;
     $this->user_manager = $user_manager;
@@ -50,6 +52,7 @@ class UserApi implements UserApiInterface
     $this->translator = $translator;
     $this->token_storage = $token_storage;
     $this->jwt_manager = $jwt_manager;
+    $this->api_helper = $APIHelper;
   }
 
   /**
@@ -67,7 +70,7 @@ class UserApi implements UserApiInterface
    */
   public function userPost(RegisterRequest $register_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
   {
-    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
 
     $validation_schema = $this->validateRegistration($register_request);
 
@@ -160,7 +163,7 @@ class UserApi implements UserApiInterface
    */
   public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
   {
-    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
 
     $update_error_response = $this->validateUpdateRequest($update_user_request);
 

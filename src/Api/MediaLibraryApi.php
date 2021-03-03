@@ -2,11 +2,11 @@
 
 namespace App\Api;
 
+use App\Catrobat\Services\APIHelper;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
-use App\Utils\APIHelper;
 use App\Utils\APIQueryHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
