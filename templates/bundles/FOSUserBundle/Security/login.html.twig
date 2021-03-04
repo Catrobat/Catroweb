@@ -137,6 +137,32 @@
     )
   </script>
   <script>
-    document.getElementById("_submit").onclick = function() {alert("TODO JS FOR REFRESH TOKEN!")};
+    document.getElementById("_submit").onclick = function() {refreshToken()};
+    function refreshToken(){
+    const data = JSON.stringify({
+      username: 'catroweb',     //todo credentials from document as in login.js!
+      password: 'catroweb'
+    })
+
+    const xhr = new XMLHttpRequest()
+    xhr.withCredentials = true;
+    xhr.addEventListener('readystatechange', function() {
+      let tokens;
+      let jwt_token;
+      let jwt_refresh_token;
+      if (this.readyState === this.DONE) {
+        tokens = JSON.parse(this.responseText)
+        jwt_token = tokens.token;
+        jwt_refresh_token = tokens.refresh_token; //TODO HERE ARE THE TOKENS!
+
+        alert(jwt_token)
+        alert(jwt_refresh_token)
+      }
+    })
+
+    xhr.open('POST', 'http://localhost:8080/api/authentication') //todo url?
+    xhr.setRequestHeader('content-type', 'application/json')
+    xhr.send(data)
+    }
   </script>
 {% endblock js %}
