@@ -24,7 +24,7 @@ class AuthenticationApi implements AuthenticationApiInterface
   private string $token;
   private UserManager $user_manager;
   private JWTTokenManagerInterface $jwt_manager;
-  private  RefreshTokenManagerInterface $refresh_manager;
+  private RefreshTokenManagerInterface $refresh_manager;
 
   public function __construct(UserManager $user_manager, JWTTokenManagerInterface $jwt_manager, RefreshTokenManagerInterface $refresh_manager)
   {
@@ -91,9 +91,9 @@ class AuthenticationApi implements AuthenticationApiInterface
 
   public function authenticationDelete(string $x_refresh, &$responseCode, array &$responseHeaders)
   {
-      $token = $this->refresh_manager->get($x_refresh);
-      $this->refresh_manager->delete($token);
-      $responseCode = Response::HTTP_OK;
+    $token = $this->refresh_manager->get($x_refresh);
+    $this->refresh_manager->delete($token);
+    $responseCode = Response::HTTP_OK;
   }
 
   public function authenticationPut(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)

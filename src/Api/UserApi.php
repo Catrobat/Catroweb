@@ -104,14 +104,14 @@ class UserApi implements UserApiInterface
     $refresh = $this->refresh_token_manager->create();
     $refresh->setUsername($user->getUsername());
 
-
-    if($refresh->getUsername() === null){
-      $refresh_token = "fail";
-    } else {
-      $refresh_token = "ok";
+    if (null === $refresh->getUsername())
+    {
+      $refresh_token = 'fail';
     }
-
-
+    else
+    {
+      $refresh_token = 'ok';
+    }
 
     $responseCode = Response::HTTP_CREATED; // 201 => User successfully registered
 
