@@ -20,7 +20,7 @@ function refreshToken () {
     }
   })
 
-  xhr.open('POST', 'http://' + window.location.host + '/api/authentication')
+  xhr.open('POST', window.location.protocol + '//' + window.location.host + '/api/authentication')
   xhr.setRequestHeader('content-type', 'application/json')
   xhr.send(data)
 }

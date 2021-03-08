@@ -36,6 +36,7 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
+use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use ImagickException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -49,6 +50,9 @@ class DataFixturesContext implements KernelAwareContext
   private array $featured_programs = [];
   private array $media_files = [];
   private array $users = [];
+  private array $tokens = [];
+
+  private RefreshTokenManagerInterface $refresh_token_manager;
 
   /**
    * @BeforeFeature
@@ -1362,5 +1366,18 @@ class DataFixturesContext implements KernelAwareContext
   {
     $users = $this->getUserManager()->findAll();
     Assert::assertCount($number_of_users, $users);
+  }
+
+  /**
+   * @Given /^there are refresh_tokens:$/
+   */
+  public function thereAreRefresh_tokens(TableNode $table)
+  {
+    foreach ($table->getHash() as $config)
+    {
+      $token = $this->insertTokens($config, false);
+      $this->tokens[] = $token;
+    }
+    $this->getManager()->flush();
   }
 }
