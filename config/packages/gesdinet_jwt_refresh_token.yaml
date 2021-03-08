@@ -1,0 +1,8 @@
+gesdinet_jwt_refresh_token:
+  ttl: 2592000
+  user_identity_field: username
+  ttl_update: true
+  firewall: api
+  token_parameter_name: refresh_token
+  user_provider: fos_user.user_provider.username
+  single_use: true

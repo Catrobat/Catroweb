@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\APIHelper;
 use Exception;
+use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
@@ -40,9 +41,12 @@ class UserApi implements UserApiInterface
 
   private JWTTokenManagerInterface $jwt_manager;
 
+  private RefreshTokenManagerInterface $refresh_token_manager;
+
   public function __construct(ValidatorInterface $validator, UserManager $user_manager,
                               TokenGenerator $token_generator, TranslatorInterface $translator,
-                              TokenStorageInterface $token_storage, JWTTokenManagerInterface $jwt_manager)
+                              TokenStorageInterface $token_storage, JWTTokenManagerInterface $jwt_manager,
+                              RefreshTokenManagerInterface $refresh_token_manager)
   {
     $this->validator = $validator;
     $this->user_manager = $user_manager;
@@ -50,6 +54,7 @@ class UserApi implements UserApiInterface
     $this->translator = $translator;
     $this->token_storage = $token_storage;
     $this->jwt_manager = $jwt_manager;
+    $this->refresh_token_manager = $refresh_token_manager;
   }
 
   /**

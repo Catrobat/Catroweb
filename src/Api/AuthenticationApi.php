@@ -8,6 +8,7 @@ use App\Utils\APIHelper;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
+use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Google_Client;
 use GuzzleHttp\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -22,12 +23,14 @@ class AuthenticationApi implements AuthenticationApiInterface
 {
   private string $token;
   private UserManager $user_manager;
-  private JWTTokenManagerInterface$jwt_manager;
+  private JWTTokenManagerInterface $jwt_manager;
+  private RefreshTokenManagerInterface $refresh_manager;
 
-  public function __construct(UserManager $user_manager, JWTTokenManagerInterface $jwt_manager)
+  public function __construct(UserManager $user_manager, JWTTokenManagerInterface $jwt_manager, RefreshTokenManagerInterface $refresh_manager)
   {
     $this->user_manager = $user_manager;
     $this->jwt_manager = $jwt_manager;
+    $this->refresh_manager = $refresh_manager;
   }
 
   /**
@@ -88,7 +91,9 @@ class AuthenticationApi implements AuthenticationApiInterface
 
   public function authenticationDelete(string $x_refresh, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement authenticationDelete() method.
+    $token = $this->refresh_manager->get($x_refresh);
+    $this->refresh_manager->delete($token);
+    $responseCode = Response::HTTP_OK;
   }
 
   public function authenticationPut(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)

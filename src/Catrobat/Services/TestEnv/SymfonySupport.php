@@ -47,6 +47,7 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshToken;
 use JsonException;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
@@ -245,6 +246,11 @@ trait SymfonySupport
   public function insertUser(array $config = [], bool $andFlush = true): User
   {
     return $this->getUserDataFixtures()->insertUser($config, $andFlush);
+  }
+
+  public function insertTokens(array $config = [], bool $andFlush = true): RefreshToken
+  {
+    return $this->getUserDataFixtures()->insertTokens($config, $andFlush);
   }
 
   public function assertUser(array $config = []): void

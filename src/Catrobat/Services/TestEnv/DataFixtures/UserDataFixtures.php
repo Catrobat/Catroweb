@@ -5,6 +5,8 @@ namespace App\Catrobat\Services\TestEnv\DataFixtures;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\MyUuidGenerator;
+use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshToken;
+use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -22,8 +24,11 @@ class UserDataFixtures
 
   private static int $number_of_users = 0;
 
-  public function __construct(UserManager $user_manager)
+  private RefreshTokenManagerInterface $refresh_token_manager;
+
+  public function __construct(UserManager $user_manager, RefreshTokenManagerInterface $refresh_token_manager)
   {
+    $this->refresh_token_manager = $refresh_token_manager;
     $this->user_manager = $user_manager;
   }
 
@@ -135,5 +140,29 @@ class UserDataFixtures
     $date = date_create($config['created_at']) ?? date_create($config['created_at'] ?? 'last Monday');
     $user->changeCreatedAt($date);
     $this->user_manager->updateUser($user, true);
+  }
+
+  public function insertTokens(array $config = [], bool $andFlush = true): RefreshToken
+  {
+    if (array_key_exists('id', $config))
+    {
+      // use a fixed ID
+      MyUuidGenerator::setNextValue($config['id']);
+    }
+    /** @var RefreshToken $token */
+    $token = $this->refresh_token_manager->create();
+    $token->setUsername($config['username']);
+    $token->setRefreshToken($config['refresh_token']);
+    if (1 == $config['valid'])
+    {
+      $token->setValid(date_create('2100-01-01'));
+    }
+    else
+    {
+      $token->setValid(date_create('2000-01-01'));
+    }
+    $this->refresh_token_manager->save($token);
+
+    return $token;
   }
 }
