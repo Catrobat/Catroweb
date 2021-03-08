@@ -101,24 +101,13 @@ class UserApi implements UserApiInterface
     $this->user_manager->updateUser($user);
 
     $token = $this->jwt_manager->create($user);
-    $refresh = $this->refresh_token_manager->create();
-    $refresh->setUsername($user->getUsername());
-
-    if (null === $refresh->getUsername())
-    {
-      $refresh_token = 'fail';
-    }
-    else
-    {
-      $refresh_token = 'ok';
-    }
 
     $responseCode = Response::HTTP_CREATED; // 201 => User successfully registered
 
     return new JWTResponse(
       [
         'token' => $token,
-        'refresh_token' => $refresh_token,
+        'refresh_token' => 'ToDo!',
       ]
     );
   }
