@@ -1371,7 +1371,7 @@ class DataFixturesContext implements KernelAwareContext
   /**
    * @Given /^there are refresh_tokens:$/
    */
-  public function thereAreRefresh_tokens(TableNode $table)
+  public function thereAreRefresh_tokens(TableNode $table): void
   {
     foreach ($table->getHash() as $config)
     {
