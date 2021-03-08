@@ -1,7 +1,7 @@
 document.getElementById("_submit").onclick = function() {refreshToken()};
 function refreshToken(){
   const data = JSON.stringify({
-    username: document.getElementById("username").value,     //todo credentials from document as in login.js!
+    username: document.getElementById("username").value,
     password: document.getElementById("password").value
   })
 
@@ -20,7 +20,7 @@ function refreshToken(){
     }
   })
 
-  xhr.open('POST', 'http://' + window.location.host + '/api/authentication') //todo url?
+  xhr.open('POST', 'http://' + window.location.host + '/api/authentication')
   xhr.setRequestHeader('content-type', 'application/json')
   xhr.send(data)
 }

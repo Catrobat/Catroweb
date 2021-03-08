@@ -14,7 +14,7 @@ function removeToken () {
     }
   })
 
-  xhr.open('DELETE', 'http://' + window.location.host + '/api/authentication') //todo url?
+  xhr.open('DELETE', 'http://' + window.location.host + '/api/authentication')
   xhr.setRequestHeader('content-type', 'application/json')
   xhr.setRequestHeader('Authorization', 'Bearer <Bearer Token>');
   xhr.setRequestHeader('X-Refresh', refresh_token);
