@@ -1,6 +1,4 @@
-# Missing in new API - To be fixed with SHARE-368
-
-@web @recommendations @disabled
+@web @recommendations
 Feature: Users see the recommended projects that have been downloaded by other users on project page
 
   Background:
@@ -26,5 +24,19 @@ Feature: Users see the recommended projects that have been downloaded by other u
       | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then There should be recommended specific programs
-    And the element "#specific-programs-recommendations" should be visible
+    Then the element "#recommended-projects__also_downloaded" should be visible
+    And I should see 1 "#recommended-projects__also_downloaded .project-list__project"
+    And I should see "Alone"
+    And I should not see "Galaxy"
+
+  Scenario: No other recommended projects that have been downloaded are available
+    Given there are program download statistics:
+      | id | program_id | downloaded_at       | ip             | country_code | country_name | user_agent | username  | referrer |
+      | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
+      | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
+    And I am on "/app/project/2"
+    And I wait for the page to be loaded
+    Then the element "#recommended-projects__also_downloaded" should not be visible
+    And I should see "Galaxy"
+    And I should not see "Minions"
+    And I should not see "Alone"

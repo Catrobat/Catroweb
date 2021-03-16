@@ -73,4 +73,9 @@ class APIHelper
 
     return $accept_language;
   }
+
+  public static function setDefaultFlavorOnNull(?string $flavor): string
+  {
+    return null === $flavor ? 'pocketcode' : $flavor;
+  }
 }

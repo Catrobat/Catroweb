@@ -197,10 +197,62 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
-    // TODO: Implement method
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $flavor = APIHelper::setDefaultFlavorOnNull($flavor);
+
+    $projects = $this->program_manager->getProgram($id, true);
+    if (empty($projects))
+    {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if ('similar' === $category)
+    {
+      $programs = $this->program_manager->getRecommendedProgramsById($id, $flavor, $limit, $offset);
+    }
+    elseif ('also_downloaded' === $category)
+    {
+      $programs = $this->program_manager->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $projects[0], $limit, $offset);
+    }
+    elseif ('more_from_user' === $category)
+    {
+      /** @var Program $project */
+      $project = $projects[0]->isExample() ? $projects[0]->getProgram() : $projects[0];
+      $project_user_id = $project->getUser()->getId();
+      /** @var User $user */
+      $user = $this->getUser();
+      if (null !== $user && $user->getId() === $project_user_id)
+      {
+        $programs = $this->program_manager->getUserPrograms($project_user_id, false, $max_version, $limit, $offset);
+      }
+      else
+      {
+        $programs = $this->program_manager->getPublicUserPrograms($project_user_id, false, $max_version, $limit, $offset);
+      }
+      $programs = array_filter($programs, function ($program) use ($project)
+      {
+        return $program->getId() !== $project->getId();
+      });
+    }
+    else
+    {
+      return [];
+    }
+
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**

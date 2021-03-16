@@ -612,7 +612,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getUserPrograms(string $user_id, bool $debug_build, string $max_version): array
+  public function getUserPrograms(string $user_id, bool $debug_build, string $max_version, ?int $limit = null, ?int $offset = null): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -627,6 +627,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
+    $query_builder = $this->addPaginationCondition($query_builder, $limit, $offset);
 
     return $query_builder->getQuery()->getResult();
   }
@@ -682,7 +683,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $projects_count;
   }
 
-  public function getPublicUserPrograms(?string $user_id, bool $debug_build, string $max_version = '0'): array
+  public function getPublicUserPrograms(?string $user_id, bool $debug_build, string $max_version = '0', ?int $limit = null, ?int $offset = null): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -698,6 +699,7 @@ class ProgramRepository extends ServiceEntityRepository
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
+    $query_builder = $this->addPaginationCondition($query_builder, $limit, $offset);
 
     return $query_builder->getQuery()->getResult();
   }
@@ -765,7 +767,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getProgram(string $program_id, bool $debug_build): array
+  public function getProgram(string $program_id, bool $debug_build, bool $include_private = false): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -776,7 +778,10 @@ class ProgramRepository extends ServiceEntityRepository
         $query_builder->expr()->literal(true)))
     ;
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
+    if (true !== $include_private)
+    {
+      $query_builder = $this->addPrivacyCheckCondition($query_builder);
+    }
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
 
     return $query_builder
@@ -1037,6 +1042,20 @@ class ProgramRepository extends ServiceEntityRepository
     $query_builder->andWhere(
       $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
     );
+
+    return $query_builder;
+  }
+
+  private function addPaginationCondition(QueryBuilder $query_builder, ?int $limit, ?int $offset): QueryBuilder
+  {
+    if (null !== $offset && $offset >= 0)
+    {
+      $query_builder->setFirstResult($offset);
+    }
+    if (null !== $limit && $limit >= 0)
+    {
+      $query_builder->setMaxResults($limit);
+    }
 
     return $query_builder;
   }

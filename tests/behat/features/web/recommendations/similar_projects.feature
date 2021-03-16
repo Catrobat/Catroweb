@@ -1,6 +1,4 @@
-# Missing in new API - To be fixed with ticket: SHARE-367
-
-@web @project_page @recommendations @disabled
+@web @project_page @recommendations
 Feature: Showing similar programs on details page of one program
 
   Background:
@@ -35,7 +33,8 @@ Feature: Showing similar programs on details page of one program
   Scenario: Showing similar programs
     When I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see 3 "#recommendations .program"
+    Then the element "#recommended-projects__similar" should be visible
+    And I should see 3 "#recommended-projects__similar .project-list__project"
     And I should see "Minions"
     And I should see "Similar Projects"
     And I should see "Galaxy"
@@ -46,7 +45,7 @@ Feature: Showing similar programs on details page of one program
   Scenario: No similar programs are given
     When I go to "/app/project/5"
     And I wait for the page to be loaded
-    Then I should see 0 "#recommendations .program"
+    Then I should not see "#recommended-projects__similar"
     And I should see "Nothing"
     And I should not see "Similar Programs"
     And I should not see "Trolol"

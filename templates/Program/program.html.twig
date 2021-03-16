@@ -3,6 +3,8 @@
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/program.css') }}"/>
   <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/card.css') }}"/>
+  <link rel="preload" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" as="style">
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" media="screen"/>
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:type" content="website"/>
@@ -117,31 +119,47 @@
   {% include 'Program/program_sign_app_modal.html.twig' %}
 
   {% include 'Program/program_details.html.twig' %}
-{# TODO: needs new CAPI endpoints; see Index.js and index.html.twig for how to integrate ProjectList.js
-  {% if program.tags|length > 0  or program.extensions|length > 0 %}
-    <div id="recommendations">
-      <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
-      <div class="programs"></div>
-    </div>
-  {% endif %}
-  <div id="specific-programs-recommendations">
-    <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
-    <div class="programs"></div>
+  <div id="recommended-projects">
+    {# array values: [api project_type, translation, property to show] #}
+    {% for category in [
+      ['similar', 'similarPrograms', 'views'],
+      ['also_downloaded', 'mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms', 'downloads'],
+      ['more_from_user', 'moreFromThisUser', 'views'],
+    ] %}
+      <div id="recommended-projects__{{ category[0] }}" data-category="{{ category[0] }}"
+           data-property="{{ category[2] }}" class="project-list loading horizontal">
+        <div class="container">
+          <div class="project-list__title">
+            <h2>{{ ("recommender." ~ category[1]) | trans({"%username%": program.user.username }, "catroweb") }}</h2>
+            <div class="project-list__title__btn-toggle btn-view-open">
+              <div class="project-list__title__btn-toggle__text">{{ "show-more" | trans({}, "catroweb") }}</div>
+              <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
+            </div>
+          </div>
+          <div class="lazyload projects-spinner-container">
+            {% include 'Default/loadingSpinner.html.twig' only %}
+          </div>
+          <div class="lazyload project-list__wrapper">
+            <div class="lazyload projects-container"></div>
+            <div class="lazyload project-list__chevrons">
+              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none">chevron_left</div>
+              <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
-  {% if not(app.user and my_program) %}
-    <div id="more-from-this-user-recommendations">
-      <h2>{{ 'recommender.moreFromThisUser'|trans({"%username%": program.user.username }, 'catroweb') }}</h2>
-      <div class="programs"></div>
-    </div>
-  {% endif %}
-#}
 
   {% include 'Program/programComments.html.twig' %}
 
 {% endblock %}
 
 {% block js %}
-
+  <script>const theme = '{{ theme() }}'</script>
+  <script>const flavor = '{{ flavor() }}'</script>
+  <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
+  <script src="{{ asset('js/ProjectList.min.js') }}"></script>
   <script src="{{ asset('js/ImageUpload.min.js') }}"></script>
   <script>
     setImageUploadListener('{{ path('upload_project_thumbnail', { 'id': program.id }) }}',
@@ -254,24 +272,25 @@
 
   <script src="{{ asset('js/ProgramRecommender.min.js') }}"></script>
   <script>
-{# TODO: needs new CAPI endpoints; see Index.js and index.html.twig for how to integrate ProjectList.js
+    const $recommendedProjects = $('#recommended-projects')
+    $('.project-list', $recommendedProjects).each(function () {
+      const $t = $(this)
+      const category = $t.data('category')
+      const property = $t.data('property')
 
-    let similar_projects = new ProjectLoader(
-      '#recommendations', '{{ path('api_recsys_programs') }}', '{{ program.id }}'
-    )
-    similar_projects.initRecsys()
+      /* eslint-disable no-undef */
+      let url = baseUrl + '/api/project/{{ program.id }}/recommendations?category=' + category
 
-    let users_downloaded_too = new ProjectLoader(
-      '#specific-programs-recommendations', '{{ path('api_recsys_specific_projects', { 'id': program.id }) }}',
-      '{{ program.id }}', "{{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }}"
-    )
-    users_downloaded_too.init()
+      /* eslint-disable no-undef */
+      if (flavor !== 'pocketcode' || category === 'example') {
+        // The pocketcode flavor must use projects from all flavors
+        url += '&flavor=' + flavor
+      }
 
-    let more_from_this_user = new ProjectLoader(
-      '#more-from-this-user-recommendations', '{{ path('api_user_programs') }}'
-    )
-    more_from_this_user.initMoreFromThisUser('{{ program.user.id }}', '{{ program.id }}')
-#}
+      const list = new ProjectList(this, category, url, property, self.performClickStatisticRequest, theme)
+      /* eslint-enable no-undef */
+      $t.data('list', list)
+    })
 
     let programRecommender = new ProgramRecommender (
       '{{ program.id }}',
