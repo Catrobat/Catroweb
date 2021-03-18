@@ -12,11 +12,11 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
-use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -100,16 +100,24 @@ class UserApi implements UserApiInterface
     $user->setUploadToken($this->token_generator->generateToken());
     $this->user_manager->updateUser($user);
 
-    $token = $this->jwt_manager->create($user);
+    //$token = $this->jwt_manager->create($user);
 
     $responseCode = Response::HTTP_CREATED; // 201 => User successfully registered
 
-    return new JWTResponse(
-      [
-        'token' => $token,
-        'refresh_token' => 'ToDo!',
-      ]
-    );
+    $client = HttpClient::create();
+
+    $response = $client->request('POST', 'https://'.$_SERVER['HTTP_HOST'].'/api/authentication', [
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => 'Bearer <Bearer Token>',
+      ],
+      'body' => '{
+        "username": "'.$register_request->getUsername().'",
+        "password": "'.$register_request->getPassword().'"
+      }',
+    ]);
+
+    return $response->toArray();
   }
 
   /**

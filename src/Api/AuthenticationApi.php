@@ -92,6 +92,12 @@ class AuthenticationApi implements AuthenticationApiInterface
   public function authenticationDelete(string $x_refresh, &$responseCode, array &$responseHeaders)
   {
     $token = $this->refresh_manager->get($x_refresh);
+    if (null == $token)
+    {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
     $this->refresh_manager->delete($token);
     $responseCode = Response::HTTP_OK;
   }
