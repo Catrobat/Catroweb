@@ -642,7 +642,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Далі
 previous: Previous
 media-packages:
   title: Media-Packages
