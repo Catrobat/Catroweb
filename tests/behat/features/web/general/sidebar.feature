@@ -31,5 +31,6 @@ Feature: Sidebar Navigation
     When I click browser's back button
     And I wait for the page to be loaded
     Then the url should match "/app/login"
+    And I wait for the page to be loaded
     And the element "#sidebar" should not be visible
     And the element "#sidebar-overlay" should not be visible

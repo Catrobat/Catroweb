@@ -4,6 +4,7 @@ namespace App\Api;
 
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Requests\AddProgramRequest;
+use App\Catrobat\Services\APIHelper;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
 use App\Entity\FeaturedProgram;
@@ -12,7 +13,6 @@ use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Repository\FeaturedRepository;
-use App\Utils\APIHelper;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -20,6 +20,7 @@ use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Model\ProjectsCategory;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -51,13 +52,15 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   private ImageRepository $image_repository;
   private ParameterBagInterface $parameter_bag;
 
+  private APIHelper $api_helper;
+
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
                               ImageRepository $image_repository, UserManager $user_manager,
                               RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
                               UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager,
-                              ParameterBagInterface $parameter_bag)
+                              ParameterBagInterface $parameter_bag, APIHelper $APIHelper)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
@@ -72,6 +75,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->user_manager = $user_manager;
     $this->recommender_manager = $recommender_manager;
     $this->parameter_bag = $parameter_bag;
+    $this->api_helper = $APIHelper;
   }
 
   /**
@@ -111,7 +115,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null): array
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -165,12 +169,12 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): array
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
-    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
 
     $recommended = 'recommended' === $category;
     if ($recommended)
@@ -196,6 +200,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
+    // TODO: Implement method
   }
 
   /**
@@ -203,7 +208,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null)
   {
-    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
     $private = $private ?? false;
 
     // File uploaded successful?
@@ -285,6 +290,46 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
     $result = $this->getProjectsDataResponse($programs);
     $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @throws Exception
+   */
+  public function projectsCategoriesGet(?string $max_version = null, ?string $flavor = null, ?string $accept_language = null, &$responseCode, array &$responseHeaders): array
+  {
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
+    $limit = APIHelper::setDefaultLimitOnNull(null);
+    $offset = APIHelper::setDefaultOffsetOnNull(null);
+    $result = [];
+
+    $categories = ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch'];
+
+    foreach ($categories as $category)
+    {
+      $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+      $data['projects_list'] = $this->getProjectsDataResponse($programs);
+      $data['type'] = $category;
+      $data['name'] = $this->translator->trans('category.'.$category, [], 'catroweb', $accept_language);
+      $entry = new ProjectsCategory($data);
+      $result[] = $entry;
+    }
+
+    /** @var User $user */
+    $user = $this->getUser();
+    $programs = $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
+    $data['projects_list'] = $this->getProjectsDataResponse($programs);
+    $data['type'] = 'recommended';
+    $data['name'] = $this->translator->trans('category.recommended', [], 'catroweb', $accept_language);
+    $entry = new ProjectsCategory($data);
+    $result[] = $entry;
+
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+    $responseCode = Response::HTTP_OK;
 
     return $result;
   }

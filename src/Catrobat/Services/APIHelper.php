@@ -1,12 +1,23 @@
 <?php
 
-namespace App\Utils;
+namespace App\Catrobat\Services;
 
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class APIHelper
 {
+  private TranslatorInterface $translator;
+
+  /**
+   * APIHelper constructor.
+   */
+  public function __construct(TranslatorInterface $translator)
+  {
+    $this->translator = $translator;
+  }
+
   /**
    * Wrapper Method for better Error output.
    *
@@ -41,8 +52,25 @@ class APIHelper
     return null === $offset ? 0 : $offset;
   }
 
-  public static function setDefaultAcceptLanguageOnNull(?string $accept_language): string
+  public function setDefaultAcceptLanguageOnNull(?string $accept_language): string
   {
-    return null === $accept_language ? 'en' : $accept_language;
+    $accept_language = null === $accept_language ? 'en' : $accept_language;
+//    try {
+//      $this->translator->trans('category.recent', [], 'catroweb', 'en');
+//    }
+//    catch (Exception $e)
+//    {
+//      throw new Exception('Something went very wrong with translations!', Response::HTTP_INTERNAL_SERVER_ERROR);
+//    }
+    try
+    {
+      $this->translator->trans('category.recent', [], 'catroweb', $accept_language);
+    }
+    catch (Exception $e)
+    {
+      $accept_language = 'en';
+    }
+
+    return $accept_language;
   }
 }

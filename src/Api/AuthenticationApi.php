@@ -2,9 +2,9 @@
 
 namespace App\Api;
 
+use App\Catrobat\Services\APIHelper;
 use App\Entity\User;
 use App\Entity\UserManager;
-use App\Utils\APIHelper;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
@@ -94,6 +94,11 @@ class AuthenticationApi implements AuthenticationApiInterface
   public function authenticationPut(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement authenticationPut() method.
+  }
+
+  public function authenticationRefreshPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  {
+    //TODO: Implement method
   }
 
   private function validateGoogleIdToken($id_token)
