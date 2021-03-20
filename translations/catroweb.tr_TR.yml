@@ -105,11 +105,12 @@ programs:
     İptal etmek
   changeVisibility: |+
     Emin misiniz?
-    Silmek istediğine emin misin "%programName%"diğer kullanıcılar tarafından görülebilir ve bulunabilir.
-    Yine de projenizin bağlantısını arkadaşlarınızla paylaşabilirsiniz. Asma kilit simgesine dokunarak görünürlüğü değiştirebilirsiniz"%programName%" öğesini genel olarak ayarlarsanız, diğer kullanıcılar tarafından görülebilir ve bulunabilir.
-    Evet, herkese açık olarak ayarla
-    Evet, özel olarak ayarla
-    Hayır
+    '%ProgramName%' öğesini özel olarak ayarlarsanız, diğer kullanıcılar tarafından görülmeyecek veya bulunmayacaktır.
+    Projenizin bağlantısını yine de arkadaşlarınızla paylaşabilirsiniz. Asma kilit simgesine dokunarak görünürlüğü değiştirebilirsiniz.
+    "%ProgramName%" öğesini herkese açık olarak ayarlarsanız, diğer kullanıcılar tarafından görülebilir ve bulunabilir.
+    Herkese açık olarak ayarla
+    Özel olarak ayarla
+    İptal
   reportCommentConfirmation: Bu yorumu bildirmek istediğinizden emin misiniz?
   deleteCommentConfirmation: Bu yorumu silmek istediğinizden emin misiniz?
   deleteAccountConfirmation: |+

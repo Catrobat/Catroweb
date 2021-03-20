@@ -23,18 +23,18 @@ deleteIt: Tak, usuń!
 reportIt: Tak, zgłoś to!
 areYouSure: Jesteś pewien?
 noWayOfReturn: To działanie jest nieodwracalne!
-download: Pobierz projekt
+download: Pobierz
 description: Opis
 noDescription: Brak opisu.
-credits: Podziękowania
-noCredits: Nie ma podziękowań.
-notesAndCreditsDescription: Jak utworzyłeś ten projekt? Czy używałeś pomysłów, skryptów lub grafiki od innych osób? Dziękujemy im tutaj.
+credits: Uwagi i podziękowania
+noCredits: Nie ma uwag i podziękowań.
+notesAndCreditsDescription: Jak utworzyłeś ten projekt? Czy używałeś pomysłów, skryptów lub grafiki od innych osób? Podziękuj im tutaj.
 country: Kraj
 loginText: zaloguj się
 privacyPolicy: Polityka prywatności
 imprint: Stopka
 programDetails: Szczegóły
-somethingWentWrong: 'Ooooops coś poszło nie tak.'
+somethingWentWrong: 'Ups, coś poszło nie tak.'
 pleaseTryAgain: 'Spróbuj ponownie!'
 oldVersionError: 'Zaktualizuj do najnowszej wersji Pocket code!'
 more: 'więcej'
@@ -60,16 +60,16 @@ cancelMessage: "Anuluj"
 notificationsUnauthorizedError: "Nie można autoryzować użytkownika"
 notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
 pleaseWait: "Proszę czekać..."
-projects: "Programy"
+projects: "Projekty"
 oauthPopUpTitle: "Informacje o logowaniu do konta zewnętrznego"
-oauthInfo: 'Właśnie użyłeś zewnętrznego konta, aby się zalogować. Stworzyliśmy dla Ciebie losową nazwę użytkownika. Jeśli chcesz zmienić nazwę użytkownika lub utworzyć nowe hasło dla swojego konta, przejdź do mojej strony profilowej. Kliknij %link_start% tutaj %link_end% , aby przejść do strony profilu'
+oauthInfo: 'Właśnie użyłeś zewnętrznego konta, aby się zalogować. Stworzyliśmy dla Ciebie losową nazwę użytkownika. Jeśli chcesz zmienić nazwę użytkownika lub utworzyć nowe hasło dla swojego konta, przejdź do swojej strony profilowej. Kliknij %link_start% tutaj %link_end% , aby przejść do strony profilu'
 oauthHere: "tutaj"
 statistics: "Statystyki"
 indexPage:
   recommendedSection:
     info:
       title: 'Jakie projekty są tutaj polecane?'
-      description: 'Im więcej polubień (w tym "Kciuk do góry", "Uśmiech", "Miłość" i "wow!") projekt otrzyma, tym wyżej na liście się znajdzie.'
+      description: 'Im więcej polubień ("Kciuk do góry", "Uśmiech"...) projekt otrzyma, tym wyżej na liście się znajdzie.'
 follower:
   follows: Śledzi
   followers: Obserwujący
@@ -88,15 +88,15 @@ programs:
   welcome:
     title: Witamy w Catrobat %theme%
     subtitle: Twórz opowiadania, gry i nie tylko...
-    subtitle_embroidery: Wyrównaj swoich własnych patentów na koszulki, torby, ptaki lub skrzynki na smartfonach!
+    subtitle_embroidery: Uszyj swój własny wzór na koszulkach, torbach, spodniach lub etui na smartfonie!
     download: Pobierz aplikację
-    statistics: Więcej Statystyk
+    statistics: Więcej statystyk
   featured: Polecane
   example: Przykłady
   newest: Najnowsze projekty
   recommended: Polecane projekty
   scratchremixes: Remiksy Scratcha
-  noPrograms: Nie ma żadnego projektu.
+  noPrograms: Obecnie nie ma żadnego projektu.
   deleteConfirmation: |+
     Na pewno?
     Na pewno chcesz usunąć "%programName%"?
@@ -121,8 +121,8 @@ programs:
     Anuluj
   tooLongDescription: Opis projektu jest za długi!
   rudeWordsInDescription: Nie można używać brzydkich słów w opisie!
-  tooLongCredits: Podziękowania są za długie!
-  rudeWordsInCredits: Nie można używać brzydkich słów w podziękowaniach!
+  tooLongCredits: Uwagi i podziękowania są za długie!
+  rudeWordsInCredits: Nie można używać brzydkich słów w uwagach i podziękowaniach!
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
@@ -166,9 +166,9 @@ programs:
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
   editDescription: Edytuj opis projektu
-  saveDescription: Zapisz zmiany w Opisie
-  editCredits: Edytuj podziękowania
-  saveCredits: Zapisz zmiany w Podziękowaniach
+  saveDescription: Zapisz
+  editCredits: Edytuj uwagi i podziękowania
+  saveCredits: Zapisz
   addComment: Napisz komentarz
   thumbsUp: Kciuk do góry!
   smile: Uśmiech!
@@ -180,7 +180,7 @@ programs:
   downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
 remixGraph:
   title: Remiksy
-  showRemixGraph: 'Pokaż wykres remiksów'
+  showRemixGraph: 'Pokaż Drzewo Remiksów'
   by: 'o'
   open: 'Otwórz '
   showPaths: 'Pokaż ścieżki'
@@ -211,14 +211,14 @@ accountConfirmation:
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
   message: |
-    Drogi %username%.
-    Żądasz zresetowania hasła do %appplication_url%, ponieważ zapomniałeś swojego hasła. Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna.
+    Drogi %username%. 
+    Żądasz zresetowania hasła do %appplication_url%, ponieważ zapomniałeś swojego hasła. Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna. 
     Aby zresetować hasło i utworzyć nowe, proszę odwiedzić następującą stronę: %confirmationUrl%
 
-    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności %appplication_url%.
+    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności %appplication_url%. 
     Aby to zrobić, odwiedź następującą stronę: %loginPage%
-    Aby edytować swój profil, przejdź do tej strony: %profilePage%
-    Pozdrawiamy!
+    Aby edytować swój profil, przejdź do tej strony: %profilePage% 
+    Pozdrawiamy! 
     Twój zespół Catrobat.
   messageHtml: |
     <p>
@@ -275,7 +275,7 @@ profile:
 myprofile:
   editProfile: Edytuj profil
   edit: Edytuj
-  done: Zrobione
+  done: Gotowe!
   checkMail: E-mail został wysłany na Twój adres. Sprawdź swoją skrzynkę odbiorczą.
   passwordUpdated: Twoje hasło zostało pomyślnie zaktualizowane.
   avatar: Awatar
@@ -323,7 +323,7 @@ termsOfUse:
     item5: "Pomóż zachować witrynę przyjazną. Jeśli czujesz, że inni mogliby odebrać projekt lub komentarz jako nieprzyjemny, obraźliwy, zbyt agresywny lub w inny sposób nieodpowiedni, po prostu kliknij na przycisk \"Zgłoś jako niewłaściwe\" i zostaw krótkie wyjaśnienie. Zespół Catrobat sprawdzi Twoje zgłoszenie i może usunąć dowolny projekt, komentarz lub post."
   list3:
     item1: "Przesyłając projekt do naszych stron internetowych, akceptujesz i zgadzasz się umieścić tę pracę na niektórych bezpłatnych licencjach na przesłanych projektach Catrobat. Podobnie jak w przypadku bezpłatnych licencji, na podstawie których system Catrobat jest dostępny dla Ciebie, te bezpłatne licencje na wgrane projekty Catrobat dają każdemu prawo do nauki z pracy wcześniej przesłanej przez innych oraz do dostosowania i remiksowania, które działają w budowaniu własnych nowych fascynujących gier, animacje i inne projekty. Dzięki temu każdy może \"stać na barkach rówieśników”, przy czym jednym z nich jest ty! Dzięki temu Twoja praca przyniesie korzyści całemu światu i pozostanie darmowa dla wszystkich w użyciu, trochę podobne do tekstu i zdjęć swobodnie przekazywanych do Wikipedii przez wolontariuszy z całego świata. Pomyśl o tym jako o swoim teraźniejszości dla ludzkości: dajcie się wszystkim i wszystkim innym, którzy przesyłają swoje prace na nasze strony internetowe. Tak więc przesłany projekt jest prezentem wielkiej wartości, który jego właściciel dajesz Ci za darmo, z warunkiem, że weźmiesz udział w społeczności na tych samych warunkach."
-    item2: Nie musisz akceptować darowizny; jeśli tak, to mają zastosowanie pewne zasady. Zaletą tych zasad jest to, że można wyciągnąć wnioski z pracy i budować na niej aby samodzielnie robić jeszcze chłodniejsze rzeczy, które możecie wtedy zrobić. , ponownie prześlij na nasze strony internetowe jako własne. Inną korzyścią jest to, że te licencje gwarantują, że nie można pociągnąć do odpowiedzialności za jakiekolwiek problemy powstałe w wyniku korzystania przez nich z projektu.
+    item2: Nie musisz przyjmować prezentu; jeśli to zrobisz, obowiązują pewne zasady. Zaletą tych zasad jest to, że możesz uczyć się z pracy i tworzyć na jej podstawie samodzielnie jeszcze fajniejsze rzeczy, które możesz następnie np. ponownie przesłać na nasze strony internetowe jako własne. Inną korzyścią jest to, że te licencje gwarantują, że nie możesz być pociągnięty do odpowiedzialności za jakiekolwiek problemy wynikające z korzystania przez nich z Twojego projektu.
     item3: "Jeden ważny dodatkowy warunek to uznanie wkładu autorów, na których pracy został oparty Twój projekt. W tym samym czasie będziemy pracować ciężko, żeby Twoja praca została wyraźnie doceniona przez innych, jako Twój wkład, poprzez przypisanie do niego unikatowej nazwy, która została przez Ciebie wybrana do reprezentowania Ciebie w społeczności Catrobat i dając innym możliwość wyrażenia publicznie ich wdzięczności dla Ciebie za to, że Twoja praca jest dostępna dla wszystkich, a w szczególności dla nich."
     item4: 'Proszę, odwiedź %link-licenseUploaded%, żeby poznać dokładne warunki i terminy prawne.'
   list4:
@@ -395,7 +395,7 @@ errors:
   description:
     rude: Opis nie może zawierać niecenzuralnych zwrotów.
   credit:
-    rude: Podziękowania nie mogą zawierać brzydkich słów.
+    rude: Uwagi i podziękowania nie mogą zawierać brzydkich słów.
   country:
     blank: Brakuje kraju.
     invalid: Nieprawidłowy kraj
@@ -439,7 +439,7 @@ success:
   token: OK
   upload: Projekt został wysłany pomyślnie!
   imgUpload: Twoje zdjęcie zostało pomyślnie przesłane!
-  report: Twój raport został wysłany!
+  report: Twoje zgłoszenie zostało pomyślnie wysłane!
 time:
   minutes.ago: '{0} < 1 minuta temu |{1}1 minuta temu |]1,Inf] %count% minut(y) temu'
   hours.ago: '{1}1 godzina temu |]1,Inf] %count%  godzin(y) temu'
@@ -452,7 +452,7 @@ api:
   registerUser:
     emailMissing: 'Brak adresu e-mail'
     emailEmpty: 'Adres e-mail nie może być pusty'
-    emailInvalid: 'Nieznany adres email'
+    emailInvalid: 'Błędny adres e-mail'
     emailAlreadyInUse: 'Ten adres e-mail jest już zajęty'
     usernameMissing: 'Brak nazwy użytkownika'
     usernameTooShort: 'Za krótka nazwa użytkownika'
@@ -465,7 +465,7 @@ api:
     passwordTooShort: 'Hasło jest zbyt krótkie'
     passwordTooLong: 'Zbyt długie hasło'
     passwordInvalidChars: 'Hasło zawiera nieprawidłowe znaki'
-    usernameContainsEmail: "Nazwa użytkownika nie powinna zawierać adresu e-mail."
+    usernameContainsEmail: "Nazwa użytkownika nie może zawierać adresu e-mail"
     countryCodeInvalid: "Nieprawidłowy kod kraju"
   projectsPost:
     invalid_checksum: 'Nieprawidłowa suma kontrolna. Spróbuj ponownie przesłać!'
@@ -531,12 +531,12 @@ gamejam:
     text: |
       Ale dlaczego nie stworzysz swojego własnego? Weź udział w %gamejamtag%
 tag-text: Tagi
-extenstion-text: Dodatki
+extenstion-text: Rozszerzenia
 tags:
   constant:
     tag1: Gry
-    tag2: Animacja ruchu
-    tag3: Opowieści
+    tag2: Animacja
+    tag3: Historia
     tag4: Muzyka
     tag5: Sztuka
     tag6: Eksperymentalne
@@ -578,8 +578,8 @@ codeview:
   sounds: 'dźwięków'
   globals: 'zm. globalnych'
   locals: 'zm. lokalnych'
-  globalVariables: 'Globalne zmienne'
-  localVariables: 'Lokalne zmienne'
+  globalVariables: 'Zmienne globalne'
+  localVariables: 'Zmienne lokalne'
   eventBricks: 'Bloki wydarzeń'
   controlBricks: 'Bloki kontroli'
   motionBricks: 'Bloki ruchu'
@@ -606,7 +606,7 @@ footer:
   language: Język
   usefulLinks: Przydatne Linki
   legalities: Prawa
-  communityStats: Statystyki
+  communityStats: Statystyki społeczności
   download: Pobierz aplikację
 privacy-policy:
   header: Polityka prywatności
@@ -624,9 +624,9 @@ privacy-policy:
   disagree-text: Bez Twojej zgody nie możemy stworzyć konta, ale podstawowe funkcje są nadal dostępne.
 catro-notifications:
   markAsRead: "Oznacz jako przeczytane"
-  noFollowers: "Wygląda na to, że nie masz żadnych powiadomień śledzących."
+  noFollowers: "Wygląda na to, że nie masz żadnych powiadomień o śledzeniu."
   noComments: "Wygląda na to, że nie masz żadnych powiadomień o komentarzach."
-  noReactions: "Wygląda na to, że nie masz żadnych powiadomień o reakcjach."
+  noReactions: "Wygląda na to, że nie masz żadnych powiadomień o polubieniach."
   noRemixes: "Wygląda na to, że nie masz powiadomień o remiksach."
   comment:
     message: 'Użytkownik %user_link% skomentował Twój projekt %program_link%.'
@@ -641,19 +641,19 @@ catro-notifications:
 clipboard:
   success: Link do projektu skopiowany do schowka!
   fail: Nie udało się skopiować linku do schowka! :(
-next: Dalej
+next: Następny
 previous: Poprzedni
 media-packages:
   title: Pakiety multimedialne
   description: W następujących kategoriach można znaleźć dodatkowych aktorów i obiekty, które można dodać do projektów Pocket Code.
   thumb-size:
-    description: Pokaż rozmiar
+    description: Rozmiar podglądu
     sm: mały
     md: średni
     lg: duży
   theme-special: "%flavor% Temat specjalny"
   search-results: Wyniki wyszukiwania biblioteki multimediów
-  no-results: Twoje wyszukiwanie zwróciło 0 wyników. Proszę używać tylko angielskiego wyszukiwania.
+  no-results: Twoje wyszukiwanie zwróciło 0 wyników. Proszę używać wyszukiwania tylko po angielsku .
   download_these_files: zapisz
 flavor:
   pocketcode: Pocket Code
