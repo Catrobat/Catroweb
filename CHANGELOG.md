@@ -3,7 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
+## [3.8.0]
+- Added new API version 
+  - new routes for survey
+  - new categories oversight
+- Dependencies
 ## [3.7.1]
 ### Fixed 
 - fixes preloading of images
@@ -297,8 +301,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.7.1...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.8.0...HEAD
+[3.8.0]: https://github.com/Catrobat/Catroweb/compare/v3.7.1...v3.8.0
 [3.7.1]: https://github.com/Catrobat/Catroweb/compare/v3.7.0...v3.7.1
 [3.7.0]: https://github.com/Catrobat/Catroweb/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/Catrobat/Catroweb/compare/v3.5.0...v3.6.0
