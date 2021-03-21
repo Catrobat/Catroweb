@@ -76,7 +76,7 @@ abstract class ParsedObjectsContainer
 
       if ($this->hasName($object_xml)) {
         $all_object_xmls[] = $object_xml;
-        $all_object_xmls = [...$all_object_xmls, ...$this->getPointedObjectXMLProperties($object_xml)];
+        $all_object_xmls = array_merge($all_object_xmls, $this->getPointedObjectXMLProperties($object_xml));
       }
     }
 

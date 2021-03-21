@@ -79,12 +79,13 @@ class RemixGraphManipulator
   {
     $program_id = $program->getId();
     $parents_ancestor_ids = $this->program_remix_repository->getAncestorIds($all_catrobat_forward_parent_ids);
-    $program_ancestor_ids = [...[$program_id], ...$parents_ancestor_ids];
+    $program_ancestor_ids = array_merge([$program_id], $parents_ancestor_ids);
     $program_descendant_ids = $program->getCatrobatRemixDescendantIds();
 
     $direct_and_indirect_descendant_ids = $this->program_remix_repository->getDirectAndIndirectDescendantIds(
-      $program_ancestor_ids, $program_descendant_ids);
-    $direct_and_indirect_descendant_ids_with_program_id = [...[$program_id], ...$direct_and_indirect_descendant_ids];
+      $program_ancestor_ids, $program_descendant_ids
+    );
+    $direct_and_indirect_descendant_ids_with_program_id = array_merge([$program_id], $direct_and_indirect_descendant_ids);
 
     $preserved_edges = $this
       ->program_remix_repository

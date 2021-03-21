@@ -125,12 +125,10 @@ class CodeStatistic
       $this->updateSceneStatistic();
     }
 
-    $objects = [...[$object_list_container->getBackground()], ...$object_list_container->getObjects()];
+    $objects = array_merge([$object_list_container->getBackground()], $object_list_container->getObjects());
 
     foreach ($objects as $object) {
-      /*
-       * @var ParsedObject|ParsedObjectGroup
-       */
+      /* @var ParsedObject|ParsedObjectGroup*/
       if ($object->isGroup()) {
         foreach ($object->getObjects() as $group_object) {
           $this->updateObjectStatistic($group_object);

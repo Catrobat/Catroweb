@@ -4,10 +4,10 @@ namespace App\Catrobat\Services;
 
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
-use App\Utils\APIQueryHelper;
 use App\Utils\Utils;
 use function Deployer\Support\str_contains;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Imagick;
 use ImagickDraw;
@@ -249,9 +249,9 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
-    APIQueryHelper::addFileFlavorsCondition($qb, $flavor, 'f', true);
+    $this->addFileFlavorsCondition($qb, $flavor, 'f', true);
 
-    if (null !== $package_name) {
+    if (null !== $package_name && '' !== trim($package_name)) {
       $qb->join('App\Entity\MediaPackageCategory', 'c')
         ->join('App\Entity\MediaPackage', 'p')
         ->andWhere('f.category = c')
@@ -366,5 +366,22 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   private function generateFileNameFromId(string $id, string $extension): string
   {
     return $id.'.'.$extension;
+  }
+
+  public function addFileFlavorsCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  {
+    if (null !== $flavor && '' !== trim($flavor)) {
+      $where = 'fl.name = :name';
+      if ($include_pocketcode) {
+        $where .= ' OR fl.name = \'pocketcode\'';
+      }
+      $query_builder
+        ->join($alias.'.flavors', 'fl')
+        ->andWhere($where)
+        ->setParameter('name', $flavor)
+      ;
+    }
+
+    return $query_builder;
   }
 }

@@ -53,7 +53,7 @@ class RemixSubgraphManipulator
     ;
     $backward_parent_relations = $this->program_remix_backward_repository->getParentRelations([$program->getId()]);
 
-    $all_existing_relations = [...$parent_ancestors_descendant_relations, ...$backward_parent_relations];
+    $all_existing_relations = array_merge($parent_ancestors_descendant_relations, $backward_parent_relations);
     $unique_keys_of_all_existing_relations = array_map(fn ($r) => $r->getUniqueKey(), $all_existing_relations);
 
     $all_program_remix_relations = [];

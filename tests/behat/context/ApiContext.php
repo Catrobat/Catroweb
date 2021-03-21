@@ -2,7 +2,7 @@
 
 namespace Tests\behat\context;
 
-use App\Api\Exceptions\APIVersionNotSupportedException;
+use App\Api\Exceptions\ApiVersionNotSupportedException;
 use App\Catrobat\Services\TestEnv\SymfonySupport;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
@@ -372,7 +372,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The API version to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadAValidCatrobatProject(string $api_version): void
   {
@@ -385,7 +385,7 @@ class ApiContext implements KernelAwareContext
    * @param string $username    The name of the user who initiates the upload
    * @param string $api_version The API version to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function userUploadsAValidCatrobatProject(string $username, string $api_version): void
   {
@@ -580,7 +580,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldBeARemixRoot(string $api_version): void
   {
@@ -592,7 +592,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the requested $api_version is not supported
+   * @throws ApiVersionNotSupportedException when the requested $api_version is not supported
    */
   public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
   {
@@ -751,7 +751,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The API version to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadAProgramWith(string $program_attribute, string $api_version): void
   {
@@ -794,7 +794,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadAnInvalidProgramFile(string $api_version): void
   {
@@ -807,7 +807,7 @@ class ApiContext implements KernelAwareContext
    * @param string $id          The desired id of the uploaded project
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadThisGeneratedProgramWithId(string $id, string $api_version): void
   {
@@ -821,7 +821,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $name
    * @param string $api_version The API version to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadTheProgramWithAsName($name, string $api_version): void
   {
@@ -836,7 +836,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified $api_version is not supported
+   * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    */
   public function theUploadedProgramShouldNotBeARemixRoot(string $api_version): void
   {
@@ -848,7 +848,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified $api_version is not supported
+   * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    */
   public function theUploadedProgramShouldHaveMigrationDateNotNull(string $api_version): void
   {
@@ -863,7 +863,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $scratch_parent_id
    * @param string $api_version       The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveAScratchParentHavingScratchID($scratch_parent_id, string $api_version): void
   {
@@ -875,7 +875,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoFurtherScratchParents(string $api_version): void
   {
@@ -889,7 +889,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $depth
    * @param string $api_version The API version to be used
    *
-   * @throws APIVersionNotSupportedException when the specified $api_version is not supported
+   * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    */
   public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($id, $depth, string $api_version): void
   {
@@ -903,7 +903,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $depth
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth($depth, string $api_version): void
   {
@@ -916,7 +916,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $id
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveACatrobatBackwardParentHavingId($id, $api_version): void
   {
@@ -928,7 +928,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(string $api_version): void
   {
@@ -940,7 +940,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoCatrobatBackwardParents($api_version): void
   {
@@ -952,7 +952,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoFurtherCatrobatBackwardParents(string $api_version): void
   {
@@ -964,7 +964,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoCatrobatAncestors(string $api_version): void
   {
@@ -976,7 +976,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoScratchParents(string $api_version): void
   {
@@ -990,7 +990,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $depth
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($id, $depth, string $api_version): void
   {
@@ -1002,7 +1002,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(string $api_version): void
   {
@@ -1014,7 +1014,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardDescendants(string $api_version): void
   {
@@ -1029,7 +1029,7 @@ class ApiContext implements KernelAwareContext
    *
    * @throws ORMException
    * @throws OptimisticLockException
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveRemixOfInTheXml($value, string $api_version): void
   {
@@ -1089,7 +1089,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardAncestors(string $api_version): void
   {
@@ -1521,7 +1521,7 @@ class ApiContext implements KernelAwareContext
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = $table->getHash();
 
-    Assert::assertEquals(count($returned_programs), count($expected_programs));
+    Assert::assertEquals(count($expected_programs), count($returned_programs));
 
     for ($i = 0; $i < count($returned_programs); ++$i) {
       Assert::assertEquals(
@@ -1661,7 +1661,7 @@ class ApiContext implements KernelAwareContext
     $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_programs);
-    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
+    Assert::assertEquals(count($expected_programs), count($returned_programs), 'Number of returned programs should be '.count($expected_programs));
 
     foreach ($returned_programs as $returned_program) {
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
@@ -1679,7 +1679,7 @@ class ApiContext implements KernelAwareContext
     $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredFeaturedPrograms($expected_programs);
-    Assert::assertEquals(count($returned_programs), count($expected_programs),
+    Assert::assertEquals(count($expected_programs), count($returned_programs),
       'Number of returned programs should be '.count($expected_programs));
 
     foreach ($returned_programs as $returned_program) {
@@ -1898,7 +1898,7 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
 
     $expected_programs = $table->getHash();
-    Assert::assertEquals(count($returned_programs), count($expected_programs),
+    Assert::assertEquals(count($expected_programs), count($returned_programs),
       'Number of returned programs should be '.count($returned_programs));
 
     for ($i = 0; $i < count($returned_programs); ++$i) {
@@ -1931,7 +1931,7 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
 
     $expected_programs = $table->getHash();
-    Assert::assertEquals(count($returned_programs), count($expected_programs),
+    Assert::assertEquals(count($expected_programs), count($returned_programs),
       'Number of returned programs should be '.count($returned_programs));
 
     for ($i = 0; $i < count($returned_programs); ++$i) {
@@ -1958,7 +1958,7 @@ class ApiContext implements KernelAwareContext
    * @param string $parameter   The HTTP request parameter holding the checksum
    * @param string $api_version The version of the API which should be used
    *
-   * @throws APIVersionNotSupportedException When the specified $api_version is not supported
+   * @throws ApiVersionNotSupportedException When the specified $api_version is not supported
    */
   public function iHaveAParameterWithTheMdChecksumOfTheUploadFile(string $parameter, string $api_version): void
   {
@@ -1967,7 +1967,7 @@ class ApiContext implements KernelAwareContext
     } elseif ('2' == $api_version) {
       $this->request_parameters[$parameter] = md5_file($this->request_files['file']->getPathname());
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
@@ -2008,7 +2008,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException When the specified $api_version is not supported
+   * @throws ApiVersionNotSupportedException When the specified $api_version is not supported
    */
   public function itShouldBeUpdated(string $api_version): void
   {
@@ -2022,7 +2022,7 @@ class ApiContext implements KernelAwareContext
       Assert::assertEquals($this->getKernelBrowser()->getResponse()->headers->get('Location'),
         $this->getKernelBrowser()->getResponse()->headers->get('Location'));
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
@@ -2064,7 +2064,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API is not supported
+   * @throws ApiVersionNotSupportedException when the specified API is not supported
    */
   public function iTryToUploadAProjectWithUnnecessaryFiles(string $api_version): void
   {
@@ -2076,7 +2076,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The API version to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API is not supported
+   * @throws ApiVersionNotSupportedException when the specified API is not supported
    */
   public function iTryToUploadAProjectWithScenesAndUnnecessaryFiles(string $api_version): void
   {
@@ -2089,7 +2089,7 @@ class ApiContext implements KernelAwareContext
    * @param string $id          The desired ID of the newly uploaded project
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API is not supported
+   * @throws ApiVersionNotSupportedException when the specified API is not supported
    */
   public function iUploadThisProgramWithId(string $id, string $api_version): void
   {
@@ -2107,7 +2107,7 @@ class ApiContext implements KernelAwareContext
     } elseif ('2' == $api_version) {
       $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
@@ -2117,7 +2117,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadThisGeneratedProject(string $api_version): void
   {
@@ -2130,7 +2130,7 @@ class ApiContext implements KernelAwareContext
    * @param string $username    The name of the user uploading the project
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function userUploadThisGeneratedProject(string $username, string $api_version): void
   {
@@ -2144,7 +2144,7 @@ class ApiContext implements KernelAwareContext
    * @param string $api_version The version of the API to be used
    * @param string $id          Desired id of the project
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function userUploadThisGeneratedProjectWithID(string $username, string $api_version, string $id): void
   {
@@ -2160,7 +2160,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $id
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadAProgramWithId($id, string $api_version): void
   {
@@ -2174,7 +2174,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $name
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadTheGeneratedProgramWithIdAndName($id, $name, string $api_version): void
   {
@@ -2193,7 +2193,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API is not supported
+   * @throws ApiVersionNotSupportedException when the specified API is not supported
    */
   public function iUploadTheGeneratedProgramAgainWithoutExtensions(string $api_version): void
   {
@@ -2208,7 +2208,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $url
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadAnotherProgramWithNameSetToAndUrlSetTo($name, $url, $api_version): void
   {
@@ -2225,7 +2225,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $catrobat_language_version
    * @param string $api_version               The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo($name, $url, $catrobat_language_version, string $api_version): void
   {
@@ -2240,7 +2240,7 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $tags        The tags of the project
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function iUploadThisProgramAgainWithTheTags($tags, $api_version): void
   {
@@ -2316,7 +2316,7 @@ class ApiContext implements KernelAwareContext
    * @param string $language    The desired language
    * @param string $api_version The version of the API to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API is not supported
+   * @throws ApiVersionNotSupportedException when the specified API is not supported
    */
   public function iUseTheApp(string $language, string $api_version): void
   {
@@ -2336,7 +2336,7 @@ class ApiContext implements KernelAwareContext
     } elseif ('2' == $api_version) {
       $this->iHaveARequestHeaderWithValue('HTTP_ACCEPT_LANGUAGE', $deviceLanguage);
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
@@ -2441,7 +2441,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version the version of the API which should be used
    *
-   * @throws APIVersionNotSupportedException When a not supported version of the API is passed as parameter
+   * @throws ApiVersionNotSupportedException When a not supported version of the API is passed as parameter
    *                                         $api_version
    */
   public function iHaveAValidCatrobatFile(string $api_version): void
@@ -2455,7 +2455,7 @@ class ApiContext implements KernelAwareContext
     } elseif ('2' == $api_version) {
       $this->request_files['file'] = new UploadedFile($filepath, 'test.catrobat');
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
@@ -2464,7 +2464,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version the version of the API which should be used
    *
-   * @throws APIVersionNotSupportedException When a not supported version of the API is passed as parameter
+   * @throws ApiVersionNotSupportedException When a not supported version of the API is passed as parameter
    *                                         $api_version
    */
   public function iHaveABrokenCatrobatFile(string $api_version): void
@@ -2476,7 +2476,7 @@ class ApiContext implements KernelAwareContext
     if ('2' == $api_version) {
       $this->request_files['file'] = new UploadedFile($filepath, 'broken.catrobat');
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
@@ -3081,7 +3081,7 @@ class ApiContext implements KernelAwareContext
     $returned_programs = json_decode($response->getContent(), true);
     $expected_programs = $table->getHash();
     $stored_programs = $this->getStoredPrograms($expected_programs);
-    Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
+    Assert::assertEquals(count($expected_programs), count($returned_programs), 'Number of returned programs should be '.count($expected_programs));
 
     foreach ($returned_programs as $returned_program) {
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
@@ -3440,7 +3440,7 @@ class ApiContext implements KernelAwareContext
    * @param string $desired_id  Specifiy, if the uploaded project should get a desired id
    * @param string $flavor      The flavor of the project
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws Exception                       when an error while uploading occurs
    */
   private function uploadProject(string $file, User $user = null, string $api_version, string $desired_id = '',
@@ -3482,7 +3482,7 @@ class ApiContext implements KernelAwareContext
       $this->iUseAValidJwtBearerTokenFor($user->getUsername());
       $this->iRequestWith('POST', '/api/projects');
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
@@ -3491,7 +3491,7 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $api_version The API version to be used
    *
-   * @throws APIVersionNotSupportedException when the specified API version is not supported
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    *
    * @return string the ID of the last uploaded project or null if not available
    */
@@ -3506,7 +3506,7 @@ class ApiContext implements KernelAwareContext
       $splitted_project_uri = explode('/', $this->getKernelBrowser()->getResponse()->headers->get('Location'));
       $last_uploaded_project_id = $splitted_project_uri[sizeof($splitted_project_uri) - 1];
     } else {
-      throw new APIVersionNotSupportedException($api_version);
+      throw new ApiVersionNotSupportedException($api_version);
     }
 
     return $last_uploaded_project_id;

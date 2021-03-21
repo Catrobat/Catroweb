@@ -11,11 +11,11 @@ class AddProgramRequest
 
   private File $program_file;
 
-  private string $ip;
+  private ?string $ip;
 
   private ?string $language;
 
-  private string $flavor;
+  private ?string $flavor;
 
   public function __construct(User $user, File $program_file, ?string $ip = '127.0.0.1',
                               ?string $language = null, ?string $flavor = 'pocketcode')
@@ -47,7 +47,7 @@ class AddProgramRequest
     $this->program_file = $program_file;
   }
 
-  public function getIp(): string
+  public function getIp(): ?string
   {
     return $this->ip;
   }
@@ -62,7 +62,7 @@ class AddProgramRequest
     $this->language = $language;
   }
 
-  public function getFlavor(): string
+  public function getFlavor(): ?string
   {
     return $this->flavor;
   }
