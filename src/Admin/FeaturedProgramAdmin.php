@@ -103,40 +103,28 @@ class FeaturedProgramAdmin extends AbstractAdmin
   {
     $id = $this->getForm()->get('Program_Id_or_Url')->getData();
 
-    if ($this->getForm()->get('Use_Url')->getData())
-    {
-      if (filter_var($id, FILTER_VALIDATE_URL))
-      {
+    if ($this->getForm()->get('Use_Url')->getData()) {
+      if (filter_var($id, FILTER_VALIDATE_URL)) {
         $object->setUrl($id);
-        if (null !== $object->getId())
-        {
+        if (null !== $object->getId()) {
           $object->setProgram(null);
         }
-      }
-      else
-      {
+      } else {
         $errorElement->with('ID')->addViolation('Please enter a valid URL.')->end();
       }
-    }
-    else
-    {
-      if (null !== $id)
-      {
+    } else {
+      if (null !== $id) {
         $id = preg_replace('$(.*)/project/$', '', $id);
       }
 
       $program = $this->program_manager->find($id);
 
-      if (null !== $program)
-      {
+      if (null !== $program) {
         $object->setProgram($program);
-        if (null !== $object->getURL())
-        {
+        if (null !== $object->getURL()) {
           $object->setURL(null);
         }
-      }
-      else
-      {
+      } else {
         $errorElement->with('ID')->addViolation('Unable to find program with given ID.')->end();
       }
     }
@@ -161,14 +149,12 @@ class FeaturedProgramAdmin extends AbstractAdmin
     $id_value = '';
     $use_url = false;
 
-    if (null !== $this->getSubject()->getId())
-    {
+    if (null !== $this->getSubject()->getId()) {
       $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($featured_project).'">';
 
       $id_value = $this->getSubject()->getUrl();
       $use_url = true;
-      if (null == $id_value)
-      {
+      if (null == $id_value) {
         $id_value = $this->getSubject()->getProgram()->getId();
         $use_url = false;
       }

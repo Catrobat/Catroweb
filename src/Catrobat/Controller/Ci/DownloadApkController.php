@@ -39,24 +39,18 @@ class DownloadApkController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
 
-    if (null === $program || !$program->isVisible() || Program::APK_READY != $program->getApkStatus())
-    {
+    if (null === $program || !$program->isVisible() || Program::APK_READY != $program->getApkStatus()) {
       throw new NotFoundHttpException();
     }
 
-    try
-    {
+    try {
       $file = $this->apk_repository->getProgramFile($program->getId());
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       throw new NotFoundHttpException($exception->__toString());
     }
-    if ($file->isFile())
-    {
+    if ($file->isFile()) {
       $downloaded = $request->getSession()->get('apk_downloaded', []);
-      if (!in_array($program->getId(), $downloaded, true))
-      {
+      if (!in_array($program->getId(), $downloaded, true)) {
         $this->program_manager->increaseApkDownloads($program);
         $downloaded[] = $program->getId();
         $request->getSession()->set('apk_downloaded', $downloaded);

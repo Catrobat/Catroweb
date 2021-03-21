@@ -30,14 +30,12 @@ class AppRequest
   public function isDebugBuildRequest(): bool
   {
     $request = $this->request_stack->getCurrentRequest();
-    if (null === $request)
-    {
+    if (null === $request) {
       return false;
     }
 
     $user_agent = $request->headers->get('User-Agent');
-    if (null === $user_agent)
-    {
+    if (null === $user_agent) {
       return false;
     }
 
@@ -50,23 +48,19 @@ class AppRequest
   public function getThemeDefinedInRequest(): string
   {
     $request = $this->request_stack->getCurrentRequest();
-    if (null === $request)
-    {
+    if (null === $request) {
       return '';
     }
 
     $user_agent = $request->headers->get('User-Agent');
-    if (null === $user_agent)
-    {
+    if (null === $user_agent) {
       return '';
     }
 
     $user_agent_attributes = explode(' ', strtolower($user_agent));
 
-    foreach ($user_agent_attributes as $attribute)
-    {
-      if (false !== strpos($attribute, 'theme/'))
-      {
+    foreach ($user_agent_attributes as $attribute) {
+      if (false !== strpos($attribute, 'theme/')) {
         return str_replace('theme/', '', $attribute);
       }
     }

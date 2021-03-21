@@ -55,16 +55,14 @@ class CreateRemixCommand extends Command
     $original_program_name = $input->getArgument('program_original');
     $remix_program_name = $input->getArgument('program_remix');
 
-    if ($original_program_name === $remix_program_name)
-    {
+    if ($original_program_name === $remix_program_name) {
       return 1;
     }
 
     $program_original = $this->remix_manipulation_program_manager->findOneByName($original_program_name);
     $program_remix = $this->remix_manipulation_program_manager->findOneByName($remix_program_name);
 
-    if (null == $program_original || null == $program_remix)
-    {
+    if (null == $program_original || null == $program_remix) {
       return 2;
     }
 
@@ -72,17 +70,13 @@ class CreateRemixCommand extends Command
     $program_remixes_of_original[0] = $remix_data_of_original;
     $notification = new RemixNotification($program_original->getUser(), $program_remix->getUser(), $program_original, $program_remix);
     $this->notification_service->addNotification($notification);
-    if (0 == sizeof($program_remixes_of_original))
-    {
+    if (0 == sizeof($program_remixes_of_original)) {
       return 3;
     }
 
-    try
-    {
+    try {
       $this->remix_manager->addRemixes($program_remix, $program_remixes_of_original);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return 4;
     }
     $output->writeln('Remixing '.$program_original->getName().' with '.$remix_program_name);

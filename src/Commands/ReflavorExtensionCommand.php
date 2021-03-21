@@ -49,10 +49,8 @@ class ReflavorExtensionCommand extends Command
     );
     $count = count($programs);
 
-    for ($index = 1; 0 !== $count; ++$index)
-    {
-      foreach ($programs as $program)
-      {
+    for ($index = 1; 0 !== $count; ++$index) {
+      foreach ($programs as $program) {
         $program->setFlavor($flavor);
         $this->em->persist($program);
       }

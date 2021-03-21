@@ -50,8 +50,7 @@ class ReportController extends AbstractController
     $entity_manager = $this->getDoctrine()->getManager();
 
     $response = [];
-    if (!$request->get('program') || !$request->get('category') || !$request->get('note'))
-    {
+    if (!$request->get('program') || !$request->get('category') || !$request->get('note')) {
       $response['statusCode'] = StatusCode::MISSING_POST_DATA;
       $response['answer'] = $this->translator->trans('errors.post-data', [], 'catroweb');
       $response['preHeaderMessages'] = '';
@@ -60,8 +59,7 @@ class ReportController extends AbstractController
     }
 
     $program = $this->program_manager->find($request->get('program'));
-    if (null == $program)
-    {
+    if (null == $program) {
       $response['statusCode'] = StatusCode::INVALID_PROGRAM;
       $response['answer'] = $this->translator->trans('errors.program.invalid', [], 'catroweb');
       $response['preHeaderMessages'] = '';
@@ -72,8 +70,7 @@ class ReportController extends AbstractController
     $report = new ProgramInappropriateReport();
     $approved_project = $program->getApproved();
     $featured_project = $this->program_manager->getFeaturedRepository()->isFeatured($program);
-    if ($approved_project || $featured_project)
-    {
+    if ($approved_project || $featured_project) {
       $response = [];
       $response['answer'] = $this->translator->trans('success.report', [], 'catroweb');
       $response['statusCode'] = Response::HTTP_OK;
@@ -83,36 +80,27 @@ class ReportController extends AbstractController
 
     $token = $request->headers->get('authorization');
 
-    if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
-    {
+    if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
       $user = $this->get('security.token_storage')->getToken()->getUser();
       $report->setReportingUser($user);
-    }
-    elseif (null !== $token)
-    {
+    } elseif (null !== $token) {
       $user = $entity_manager->getRepository(User::class)
         ->findOneBy(['upload_token' => $token])
       ;
 
-      if (null !== $user)
-      {
+      if (null !== $user) {
         // old deprecated upload_token Auth
         $report->setReportingUser($user);
-      }
-      else
-      {
+      } else {
         // JWT Auth. (new)
         $token = preg_split('#\s+#', $token)[1]; // strip "bearer"
         $jwt_payload = $this->user_manager->decodeToken($token);
-        if (!array_key_exists('username', $jwt_payload))
-        {
+        if (!array_key_exists('username', $jwt_payload)) {
           return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
         }
         $report->setReportingUser($jwt_payload['username']);
       }
-    }
-    else
-    {
+    } else {
       return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
     }
 

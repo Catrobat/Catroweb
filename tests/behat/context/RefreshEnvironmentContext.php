@@ -56,8 +56,7 @@ class RefreshEnvironmentContext implements KernelAwareContext
     $em = $this->getManager();
 
     $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0');
-    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName)
-    {
+    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName) {
       $q = $em->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
       $em->getConnection()->executeUpdate($q);
     }

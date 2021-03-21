@@ -437,8 +437,7 @@ class User extends BaseUser
     $programs_collection = $this->getPrograms();
     $programs = $programs_collection->getValues();
     $count = 0;
-    foreach ($programs as $program)
-    {
+    foreach ($programs as $program) {
       $count += $program->getReportsCount();
     }
 

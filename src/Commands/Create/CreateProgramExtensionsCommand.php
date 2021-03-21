@@ -56,8 +56,7 @@ class CreateProgramExtensionsCommand extends Command
 
     $extensions = $this->extension_repository->findAll();
 
-    foreach ($extensions as $extension)
-    {
+    foreach ($extensions as $extension) {
       $extension->removeAllPrograms();
       $this->em->persist($extension);
     }
@@ -70,14 +69,12 @@ class CreateProgramExtensionsCommand extends Command
     $this->output->writeln('Searching for extensions ...');
 
     /** @var File $element */
-    foreach ($finder as $element)
-    {
+    foreach ($finder as $element) {
       $zip = new ZipArchive();
 
       $open = $zip->open($this->program_file_repository->directory.$element->getFilename());
 
-      if (true !== $open)
-      {
+      if (true !== $open) {
         $this->output->writeln('Cant open: '.$this->program_file_repository->directory.$element->getFilename());
         $this->output->writeln('Skipping file ...');
         continue;
@@ -85,8 +82,7 @@ class CreateProgramExtensionsCommand extends Command
 
       $program = $this->getProgram($element);
 
-      if (null == $program)
-      {
+      if (null == $program) {
         $this->output->writeln('Cant find database entry for file: '.$element->getFilename());
         $this->output->writeln('Skipping file ...');
         continue;
@@ -94,53 +90,41 @@ class CreateProgramExtensionsCommand extends Command
 
       $content = $zip->getFromName('code.xml');
 
-      if (false === $content)
-      {
+      if (false === $content) {
         throw new InvalidXmlException();
       }
       $content = str_replace('&#x0;', '', $content, $count);
 
       $xml = simplexml_load_string($content);
 
-      if (false === $xml)
-      {
+      if (false === $xml) {
         $this->output->writeln('Cant load code.xml from: '.$element->getFilename());
-      }
-      else
-      {
+      } else {
         $nodes = $xml->xpath($xpath);
       }
 
-      if (!empty($nodes))
-      {
-        $prefixes = array_map(function ($elem): string
-        {
+      if (!empty($nodes)) {
+        $prefixes = array_map(function ($elem): string {
           return explode('_', $elem['category'], 2)[0];
         }, $nodes);
         $prefixes = array_unique($prefixes);
 
-        foreach ($extensions as $extension)
-        {
-          if (in_array($extension->getPrefix(), $prefixes, true))
-          {
+        foreach ($extensions as $extension) {
+          if (in_array($extension->getPrefix(), $prefixes, true)) {
             $program->addExtension($extension);
             $program_with_extensions = true;
 
-            if ('PHIRO' == $extension->getPrefix())
-            {
+            if ('PHIRO' == $extension->getPrefix()) {
               $program->setFlavor('phirocode');
             }
           }
 
-          if (0 == strcmp($extension->getPrefix(), 'CHROMECAST'))
-          {
+          if (0 == strcmp($extension->getPrefix(), 'CHROMECAST')) {
             $is_cast = $xml->xpath('header/isCastProject');
 
-            if (!empty($is_cast))
-            {
+            if (!empty($is_cast)) {
               $cast_value = ((array) $is_cast[0]);
-              if (0 == strcmp($cast_value[0], 'true'))
-              {
+              if (0 == strcmp($cast_value[0], 'true')) {
                 $program->addExtension($extension);
                 $program_with_extensions = true;
               }
@@ -148,8 +132,7 @@ class CreateProgramExtensionsCommand extends Command
           }
         }
 
-        if (true == $program_with_extensions)
-        {
+        if (true == $program_with_extensions) {
           $this->em->persist($program);
           $this->em->flush();
           $program_with_extensions = false;

@@ -24,8 +24,7 @@ class FormulaResolverTest extends TestCase
   {
     $actual = FormulaResolver::resolve($formula_list_xml_properties);
 
-    foreach ($categories as $category)
-    {
+    foreach ($categories as $category) {
       $this->assertEquals($expected[$category], $actual[$category]);
     }
   }
@@ -42,13 +41,11 @@ class FormulaResolverTest extends TestCase
       file(__DIR__.'/Resources/ValidPrograms/AllFormulaProgram/reference.output', FILE_IGNORE_NEW_LINES);
 
     $reference_output_index = 0;
-    foreach ($xml_properties->xpath('//formulaList') as $formula_list_xml_properties)
-    {
+    foreach ($xml_properties->xpath('//formulaList') as $formula_list_xml_properties) {
       $categories = [];
       $expected = [];
 
-      foreach ($formula_list_xml_properties->formula as $formula_xml_properties)
-      {
+      foreach ($formula_list_xml_properties->formula as $formula_xml_properties) {
         $category = (string) $formula_xml_properties[Constants::CATEGORY_ATTRIBUTE];
 
         $categories[] = $category;

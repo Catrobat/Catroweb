@@ -20,8 +20,7 @@ class LoggerProcessor
 
   public function __invoke(array $record): array
   {
-    if (!$this->request_stack->getCurrentRequest())
-    {
+    if (!$this->request_stack->getCurrentRequest()) {
       return $record;
     }
 
@@ -38,8 +37,7 @@ class LoggerProcessor
   {
     $token = $this->security_token_storage->getToken();
     $session_user = null;
-    if (null !== $token)
-    {
+    if (null !== $token) {
       $session_user = $this->security_token_storage->getToken()->getUser();
     }
 
@@ -55,8 +53,7 @@ class LoggerProcessor
   {
     $ip = $request->getClientIp();
 
-    if (false !== strpos($ip, ','))
-    {
+    if (false !== strpos($ip, ',')) {
       $ip = substr($ip, 0, strpos($ip, ','));
     }
 

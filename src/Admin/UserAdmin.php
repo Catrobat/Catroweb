@@ -66,8 +66,7 @@ class UserAdmin extends BaseUserAdmin
    */
   public function getRequest()
   {
-    if (null === $this->request)
-    {
+    if (null === $this->request) {
       return $this->request = $this
         ->getConfigurationPool()->getContainer()->get('request_stack')->getCurrentRequest();
     }

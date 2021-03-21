@@ -182,8 +182,7 @@ class ListProgramsController extends AbstractController
                                       bool $useRequestFlavor = true): ProgramListResponse
   {
     $flavor = null;
-    if ($useRequestFlavor)
-    {
+    if ($useRequestFlavor) {
       $flavor = $request->attributes->get('flavor');
     }
 
@@ -192,70 +191,50 @@ class ListProgramsController extends AbstractController
     $user_id = $request->get('user_id', 0);
     $max_version = $request->query->get('max_version', '0');
 
-    if ('downloads' === $sortBy)
-    {
+    if ('downloads' === $sortBy) {
       $programs = $this->program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
         $programs, [$this->program_manager, 'getMostDownloadedPrograms'],
         $flavor, $limit, $offset, $max_version
       );
-    }
-    elseif ('views' === $sortBy)
-    {
+    } elseif ('views' === $sortBy) {
       $programs = $this->program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
         $programs, [$this->program_manager, 'getMostViewedPrograms'],
         $flavor, $limit, $offset, $max_version
       );
-    }
-    elseif ('example' === $sortBy)
-    {
+    } elseif ('example' === $sortBy) {
       $programs = $this->program_manager->getExamplePrograms($flavor, $limit, $offset, $max_version);
-    }
-    elseif ('scratchRemix' == $sortBy)
-    {
+    } elseif ('scratchRemix' == $sortBy) {
       $programs = $this->program_manager->getScratchRemixesPrograms($flavor, $limit, $offset);
 
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
         $programs, [$this->program_manager, 'getScratchRemixesPrograms'],
         $flavor, $limit, $offset, $max_version
       );
-    }
-    elseif ('random' === $sortBy)
-    {
+    } elseif ('random' === $sortBy) {
       $programs = $this->program_manager->getRandomPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
         $programs, [$this->program_manager, 'getRandomPrograms'],
         $flavor, $limit, $offset, $max_version
       );
-    }
-    elseif ('user' === $sortBy)
-    {
-      if (null !== $this->getUser() && $this->getUser()->getId() === $user_id)
-      {
+    } elseif ('user' === $sortBy) {
+      if (null !== $this->getUser() && $this->getUser()->getId() === $user_id) {
         $programs = $this->program_manager->getUserPrograms($user_id, $max_version);
-      }
-      else
-      {
+      } else {
         $programs = $this->program_manager->getPublicUserPrograms($user_id, $max_version);
       }
-    }
-    else
-    {
-      if ('pocketcode' === $flavor)
-      {
+    } else {
+      if ('pocketcode' === $flavor) {
         // For our default flavor we like to provide users with new projects of all flavors in the recent category
         $flavor = null;
       }
       $programs = $this->program_manager->getRecentPrograms($flavor, $limit, $offset, $max_version);
     }
 
-    if ('user' === $sortBy || 'example' === $sortBy)
-    {
+    if ('user' === $sortBy || 'example' === $sortBy) {
       $numbOfTotalProjects = count($programs);
-    }
-    else
-    {
+    } else {
       $numbOfTotalProjects = $this->program_manager->getTotalPrograms(null, $max_version);
     }
 
@@ -274,8 +253,7 @@ class ListProgramsController extends AbstractController
   {
     $number_of_projects = count($projects);
 
-    if ($number_of_projects >= $limit || !$flavor)
-    {
+    if ($number_of_projects >= $limit || !$flavor) {
       return $projects; // Nothing to do. There are already enough projects or we don't know the already used flavor
     }
 

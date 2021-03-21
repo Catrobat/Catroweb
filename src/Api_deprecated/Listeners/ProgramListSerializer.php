@@ -46,8 +46,7 @@ class ProgramListSerializer
   public function onKernelView(ViewEvent $event): void
   {
     $result = $event->getControllerResult();
-    if (!($result instanceof ProgramListResponse))
-    {
+    if (!($result instanceof ProgramListResponse)) {
       return;
     }
 
@@ -57,15 +56,12 @@ class ProgramListSerializer
 
     $retArray = [];
     $retArray['CatrobatProjects'] = [];
-    if (null !== $programs)
-    {
+    if (null !== $programs) {
       /** @var Program $program */
-      foreach ($programs as $program)
-      {
+      foreach ($programs as $program) {
         $new_program = [];
         $example = false;
-        if ($program->isExample())
-        {
+        if ($program->isExample()) {
           $new_program['ExampleId'] = $program->getId();
           $new_program['Extension'] = $program->getImageType();
           $example = true;
@@ -73,8 +69,7 @@ class ProgramListSerializer
         }
         $new_program['ProjectId'] = $program->getId();
         $new_program['ProjectName'] = $program->getName();
-        if ($details)
-        {
+        if ($details) {
           $new_program['ProjectNameShort'] = $program->getName();
           $new_program['Author'] = $program->getUser()->getUserName();
           $new_program['Description'] = $program->getDescription();
@@ -85,13 +80,10 @@ class ProgramListSerializer
           $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
           $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
             ->getTimestamp());
-          if ($example)
-          {
+          if ($example) {
             $new_program['ScreenshotBig'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
             $new_program['ScreenshotSmall'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
-          }
-          else
-          {
+          } else {
             $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
             $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
           }
@@ -111,8 +103,7 @@ class ProgramListSerializer
     $retArray['completeTerm'] = '';
     $retArray['preHeaderMessages'] = '';
 
-    if ($result->isIsUserSpecificRecommendation())
-    {
+    if ($result->isIsUserSpecificRecommendation()) {
       $retArray['isUserSpecificRecommendation'] = true;
     }
 

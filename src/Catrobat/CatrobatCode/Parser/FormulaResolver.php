@@ -9,8 +9,7 @@ class FormulaResolver
   public static function resolve(SimpleXMLElement $formula_list): array
   {
     $formulas = [];
-    foreach ($formula_list->children() as $formula)
-    {
+    foreach ($formula_list->children() as $formula) {
       $formulas[(string) $formula[Constants::CATEGORY_ATTRIBUTE]] = FormulaResolver::resolveFormula($formula);
     }
 
@@ -23,10 +22,8 @@ class FormulaResolver
   private static function resolveFormula($formula): ?string
   {
     $resolved_formula = null;
-    if (null != $formula)
-    {
-      switch ($formula->type)
-      {
+    if (null != $formula) {
+      switch ($formula->type) {
         case Constants::OPERATOR_FORMULA_TYPE:
           $resolved_formula = FormulaResolver::resolveFormula($formula->leftChild)
             .' '.FormulaResolver::resolveOperator($formula->value)
@@ -54,23 +51,15 @@ class FormulaResolver
   {
     $resolved_function = null;
 
-    if ('TRUE' == $formula->value)
-    {
+    if ('TRUE' == $formula->value) {
       $resolved_function = 'true';
-    }
-    elseif ('FALSE' == $formula->value)
-    {
+    } elseif ('FALSE' == $formula->value) {
       $resolved_function = 'false';
-    }
-    else
-    {
-      if (null != $formula->rightChild)
-      {
+    } else {
+      if (null != $formula->rightChild) {
         $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild)
           .', '.FormulaResolver::resolveFormula($formula->rightChild);
-      }
-      else
-      {
+      } else {
         $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild);
       }
       $resolved_function = strtolower($formula->value).'( '.$function_input_formula.' )';
@@ -85,8 +74,7 @@ class FormulaResolver
   private static function resolveOperator($operator): ?string
   {
     $resolved_operator = null;
-    switch ($operator)
-    {
+    switch ($operator) {
       case Constants::PLUS_OPERATOR:
         $resolved_operator = '+';
         break;

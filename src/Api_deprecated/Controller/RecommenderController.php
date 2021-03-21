@@ -46,15 +46,13 @@ class RecommenderController extends AbstractController
 
     $program_id = $request->query->get('program_id');
 
-    if (null === $program_id)
-    {
+    if (null === $program_id) {
       return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
     }
 
     $program = $this->program_manager->find($program_id);
 
-    if (null === $program)
-    {
+    if (null === $program) {
       return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
     }
 
@@ -79,8 +77,7 @@ class RecommenderController extends AbstractController
     $flavor = $request->attributes->get('flavor');
 
     $program = $program_manager->find($id);
-    if (null === $program)
-    {
+    if (null === $program) {
       return JsonResponse::create(['statusCode' => StatusCode::INVALID_PROGRAM]);
     }
 
@@ -132,29 +129,25 @@ class RecommenderController extends AbstractController
      * unnecessary clutter that will be removed after the online experiment anyway. The
      * behat file will be updated after the online experiment accordingly.
      */
-    if ($is_test_environment && null != $user)
-    {
+    if ($is_test_environment && null != $user) {
       $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmOne($user, $flavor);
       $programs_count = count($all_programs);
       $programs = array_slice($all_programs, $offset, $limit);
     }
 
     // Users are assigned to a test group if they aren't already part of one.
-    elseif (null != $user)
-    {
+    elseif (null != $user) {
       $user_id = $user->getId();
       $em = $this->getDoctrine()->getManager();
       $user_test_group = $em->find(UserTestGroup::class, $user_id);
-      if (null === $user_test_group)
-      {
+      if (null === $user_test_group) {
         $user_test_group = new UserTestGroup($user_id, random_int(1, 3));
         $em->persist($user_test_group);
         $em->flush();
       }
 
       // Depending on the user's test group different algorithms are presented.
-      switch ($user_test_group->getGroupNumber())
-      {
+      switch ($user_test_group->getGroupNumber()) {
         case 1:
           $all_programs = $recommender_manager->recommendHomepageProgramsAlgorithmOne($user, $flavor);
           break;
@@ -173,15 +166,12 @@ class RecommenderController extends AbstractController
     }
 
     // Recommendations for guest user (or logged in users who receive zero recommendations)
-    if ((null == $user) || (0 == $programs_count))
-    {
+    if ((null == $user) || (0 == $programs_count)) {
       $all_programs = $recommender_manager->recommendHomepageProgramsForGuests($flavor);
 
       $programs_count = count($all_programs);
       $programs = array_slice($all_programs, $offset, $limit);
-    }
-    else
-    {
+    } else {
       $is_user_specific_recommendation = true;
     }
 

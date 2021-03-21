@@ -51,17 +51,13 @@ class CreateFeatureProgramCommand extends Command
 
     $program = $this->program_manager->findOneByName($program_name);
 
-    if (null === $program)
-    {
+    if (null === $program) {
       return 1;
     }
 
-    try
-    {
+    try {
       $this->featureProgram($program);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return 2;
     }
     $output->writeln('Featuring '.$program->getName());

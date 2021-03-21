@@ -426,8 +426,7 @@ class Program
   public function updateTimestamps(): void
   {
     $this->updateLastModifiedTimestamp();
-    if (null == $this->getUploadedAt())
-    {
+    if (null == $this->getUploadedAt()) {
       $this->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
     }
   }
@@ -833,8 +832,7 @@ class Program
 
   public function addTag(Tag $tag): void
   {
-    if ($this->tags->contains($tag))
-    {
+    if ($this->tags->contains($tag)) {
       return;
     }
     $this->tags->add($tag);
@@ -847,8 +845,7 @@ class Program
 
   public function addExtension(Extension $extension): void
   {
-    if ($this->extensions->contains($extension))
-    {
+    if ($this->extensions->contains($extension)) {
       return;
     }
     $this->extensions->add($extension);
@@ -861,8 +858,7 @@ class Program
 
   public function removeAllExtensions(): void
   {
-    foreach ($this->extensions as $extension)
-    {
+    foreach ($this->extensions as $extension) {
       $this->removeExtension($extension);
     }
   }
@@ -896,8 +892,7 @@ class Program
   {
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(function (ProgramRemixRelation $ra)
-    {
+    return array_unique(array_map(function (ProgramRemixRelation $ra) {
       return $ra->getDescendantId();
     }, $relations));
   }
@@ -927,8 +922,7 @@ class Program
     $tags = [];
 
     /** @var Tag $tag */
-    foreach ($this->getTags() as $tag)
-    {
+    foreach ($this->getTags() as $tag) {
       $tags[] = $tag->getEn();
     }
 
@@ -943,8 +937,7 @@ class Program
   public function getExtensionsString(): string
   {
     $extensions = [];
-    foreach ($this->extensions as $program_extension)
-    {
+    foreach ($this->extensions as $program_extension) {
       /* @var Extension $program_extension */
       $extensions[] = $program_extension->getName();
     }
@@ -955,8 +948,7 @@ class Program
   public function getTagsString(): string
   {
     $tags = [];
-    foreach ($this->tags as $program_tag)
-    {
+    foreach ($this->tags as $program_tag) {
       /* @var Tag $program_tag */
       $tags[] = $program_tag->getEn();
       $tags[] = $program_tag->getDe();

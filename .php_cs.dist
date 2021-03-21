@@ -11,8 +11,6 @@ return PhpCsFixer\Config::create()
     '@Symfony'            => true,
     '@DoctrineAnnotation' => true,
     'strict_param'        => true,
-    'braces'              => ['position_after_control_structures'   => 'next',
-                              'position_after_anonymous_constructs' => 'next'],
   ])
   ->setFinder($finder)
   ->setUsingCache(true)

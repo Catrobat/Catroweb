@@ -38,16 +38,11 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
     $formula_string_index = null;
     $formula_string_value = null;
 
-    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
-    {
-      if ($statement instanceof FormulaStatement)
-      {
-        if ('INSERT_ITEM_INTO_USERLIST_INDEX' === $statement->getCategory())
-        {
+    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement) {
+      if ($statement instanceof FormulaStatement) {
+        if ('INSERT_ITEM_INTO_USERLIST_INDEX' === $statement->getCategory()) {
           $formula_string_index = $statement->execute();
-        }
-        else
-        {
+        } else {
           $formula_string_value = $statement->execute();
         }
       }

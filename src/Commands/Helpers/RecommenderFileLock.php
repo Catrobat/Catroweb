@@ -27,8 +27,7 @@ class RecommenderFileLock
   {
     $this->lock_file = fopen($this->lock_file_path, 'w+');
     $this->output->writeln('[RecommenderFileLock] Trying to acquire lock...');
-    while (false == flock($this->lock_file, LOCK_EX))
-    {
+    while (false == flock($this->lock_file, LOCK_EX)) {
       $this->output->writeln('[RecommenderFileLock] Waiting for file lock to be released...');
       sleep(1);
     }
@@ -39,8 +38,7 @@ class RecommenderFileLock
 
   public function unlock(): void
   {
-    if (null == $this->lock_file)
-    {
+    if (null == $this->lock_file) {
       return;
     }
 

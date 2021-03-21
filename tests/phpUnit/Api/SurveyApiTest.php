@@ -46,8 +46,7 @@ class SurveyApiTest extends CatrowebTestCase
     $response_headers = [];
 
     $survey = null;
-    if (null !== $survey_data)
-    {
+    if (null !== $survey_data) {
       $survey = new Survey();
       $survey->setLanguageCode($survey_data['language_code']);
       $survey->setUrl($survey_data['url']);
@@ -65,8 +64,7 @@ class SurveyApiTest extends CatrowebTestCase
     );
 
     Assert::assertEquals($expected_code, $response_code);
-    if (null !== $expected_url)
-    {
+    if (null !== $expected_url) {
       Assert::assertEquals($expected_url, $survey_response->getUrl());
     }
   }

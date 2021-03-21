@@ -18,8 +18,7 @@ class JenkinsDispatcher
    */
   public function __construct(array $config, RouterInterface $router)
   {
-    if (!isset($config['url']))
-    {
+    if (!isset($config['url'])) {
       throw new Exception();
     }
     $this->config = $config;

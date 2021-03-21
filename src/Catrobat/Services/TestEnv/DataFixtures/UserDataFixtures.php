@@ -29,8 +29,7 @@ class UserDataFixtures
 
   public function insertUser(array $config = [], bool $andFlush = true): User
   {
-    if (array_key_exists('id', $config))
-    {
+    if (array_key_exists('id', $config)) {
       // use a fixed ID
       MyUuidGenerator::setNextValue($config['id']);
     }
@@ -61,43 +60,35 @@ class UserDataFixtures
 
     Assert::assertNotNull($user);
 
-    if (isset($config['name']))
-    {
+    if (isset($config['name'])) {
       Assert::assertEquals($user->getUsername(), $config['name'],
         'Name wrong'.$config['name'].'expected, but '.$user->getUsername().' found.');
     }
-    if (isset($config['email']))
-    {
+    if (isset($config['email'])) {
       Assert::assertEquals($user->getEmail(), $config['email'],
         'E-Mail wrong'.$config['email'].'expected, but '.$user->getEmail().' found.');
     }
-    if (isset($config['email']))
-    {
+    if (isset($config['email'])) {
       Assert::assertEquals($user->getCountry(), $config['country'],
         'Country wrong'.$config['country'].'expected, but '.$user->getCountry().' found.');
     }
-    if (isset($config['token']))
-    {
+    if (isset($config['token'])) {
       Assert::assertEquals($user->getUploadToken(), $config['token'], 'Token Invalid');
     }
-    if (isset($config['enabled']))
-    {
+    if (isset($config['enabled'])) {
       Assert::assertEquals($user->isEnabled(), 'true' === $config['enabled'], 'Token Invalid');
     }
-    if (isset($config['google_uid']))
-    {
+    if (isset($config['google_uid'])) {
       Assert::assertEquals($user->getGplusUid(), $config['google_uid'], 'Google UID wrong');
     }
-    if (isset($config['google_name']))
-    {
+    if (isset($config['google_name'])) {
       Assert::assertEquals($user->getGplusName(), $config['google_name'], 'Google name wrong');
     }
   }
 
   public function getDefaultUser(): User
   {
-    if (null === UserDataFixtures::$default_user)
-    {
+    if (null === UserDataFixtures::$default_user) {
       UserDataFixtures::$default_user = $this->insertUser([]);
     }
 

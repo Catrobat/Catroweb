@@ -32,8 +32,7 @@ class TimeUtils
    */
   public static function getDateTime(): DateTime
   {
-    if (null !== self::$freeze_time)
-    {
+    if (null !== self::$freeze_time) {
       return self::$freeze_time;
     }
 
@@ -43,8 +42,7 @@ class TimeUtils
   public static function dateTimeFromScratch(string $time): ?DateTime
   {
     $dateTime = DateTime::createFromFormat('Y-m-d\\TG\\:i\\:s\\.ve', $time);
-    if ($dateTime)
-    {
+    if ($dateTime) {
       return $dateTime;
     }
 

@@ -53,12 +53,9 @@ class ExampleRepository extends ServiceEntityRepository
     APIQueryHelper::addMaxVersionCondition($qb, $max_version);
     APIQueryHelper::addFeaturedExampleFlavorCondition($qb, $flavor, 'e');
 
-    try
-    {
+    try {
       $projects_count = $qb->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
+    } catch (NoResultException | NonUniqueResultException $e) {
       $projects_count = 0;
     }
 
@@ -140,14 +137,11 @@ class ExampleRepository extends ServiceEntityRepository
       ->where($qb->expr()->eq('e.program', ':program'))
       ->setParameter('program', $program)
     ;
-    try
-    {
+    try {
       $count = $qb->getQuery()->getSingleScalarResult();
 
       return $count > 0;
-    }
-    catch (NonUniqueResultException $nonUniqueResultException)
-    {
+    } catch (NonUniqueResultException $nonUniqueResultException) {
       return false;
     }
   }

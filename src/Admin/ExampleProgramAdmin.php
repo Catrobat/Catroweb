@@ -137,8 +137,7 @@ class ExampleProgramAdmin extends AbstractAdmin
 
     $id_value = '';
 
-    if (null !== $this->getSubject()->getId())
-    {
+    if (null !== $this->getSubject()->getId()) {
       $file_options['help'] = '<img src="../'.$this->getExampleImageUrl($example_project).'">';
       $id_value = $this->getSubject()->getProgram()->getId();
     }
@@ -205,12 +204,9 @@ class ExampleProgramAdmin extends AbstractAdmin
 
     $program = $this->program_manager->find($id);
 
-    if (null !== $program)
-    {
+    if (null !== $program) {
       $object->setProgram($program);
-    }
-    else
-    {
+    } else {
       throw new NotFoundHttpException(sprintf('Unable to find program with id : %s', $id));
     }
   }

@@ -36,13 +36,11 @@ class NotesAndCreditsValidator
    */
   public function validate(ExtractedCatrobatFile $file): void
   {
-    if (strlen($file->getNotesAndCredits()) > $this->max_notes_and_credits_size)
-    {
+    if (strlen($file->getNotesAndCredits()) > $this->max_notes_and_credits_size) {
       throw new NotesAndCreditsTooLongException();
     }
 
-    if ($this->rudeWordFilter->containsRudeWord($file->getDescription()))
-    {
+    if ($this->rudeWordFilter->containsRudeWord($file->getDescription())) {
       throw new RudeWordInNotesAndCreditsException();
     }
   }

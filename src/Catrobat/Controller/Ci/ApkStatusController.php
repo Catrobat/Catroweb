@@ -36,14 +36,12 @@ class ApkStatusController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
 
-    if (null === $program || !$program->isVisible())
-    {
+    if (null === $program || !$program->isVisible()) {
       throw new NotFoundHttpException();
     }
 
     $result = [];
-    switch ($program->getApkStatus())
-    {
+    switch ($program->getApkStatus()) {
       case Program::APK_READY:
         $result['status'] = 'ready';
         $result['url'] = $this->generateUrl('ci_download',

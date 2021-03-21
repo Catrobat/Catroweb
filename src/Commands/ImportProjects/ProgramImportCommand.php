@@ -71,8 +71,7 @@ class ProgramImportCommand extends Command
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
 
-    if (0 == $finder->count())
-    {
+    if (0 == $finder->count()) {
       $output->writeln('No catrobat files found');
 
       return 1;
@@ -80,25 +79,20 @@ class ProgramImportCommand extends Command
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
-    if (null == $user)
-    {
+    if (null == $user) {
       $output->writeln('User '.$username.' was not found!');
 
       return 1;
     }
 
-    foreach ($finder as $file)
-    {
-      try
-      {
+    foreach ($finder as $file) {
+      try {
         $output->writeln('Importing file '.$file);
         $add_program_request = new AddProgramRequest($user, new File($file));
         $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
         $program->setViews(random_int(0, 10));
         $output->writeln('Added program <'.$program->getName().'> for user: <'.$username.'>');
-      }
-      catch (InvalidCatrobatFileException $e)
-      {
+      } catch (InvalidCatrobatFileException $e) {
         $output->writeln('FAILED to add program!');
         $output->writeln($e->getMessage().' ('.$e->getCode().')');
       }

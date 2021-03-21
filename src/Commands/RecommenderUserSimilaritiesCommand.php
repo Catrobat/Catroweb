@@ -49,8 +49,7 @@ class RecommenderUserSimilaritiesCommand extends Command
   public function signalHandler($signal_number): void
   {
     $this->output->writeln('[SignalHandler] Called Signal Handler');
-    switch ($signal_number)
-    {
+    switch ($signal_number) {
       case SIGTERM:
         $this->output->writeln('[SignalHandler] User aborted the process');
         break;
@@ -116,15 +115,13 @@ class RecommenderUserSimilaritiesCommand extends Command
     $progress_bar->start();
     $progress_bar->display();
 
-    if (in_array($type, ['like', 'all'], true))
-    {
+    if (in_array($type, ['like', 'all'], true)) {
       $this->recommender_manager->removeAllUserLikeSimilarityRelations();
       $this->entity_manager->clear();
       $this->recommender_manager->computeUserLikeSimilarities($progress_bar);
     }
 
-    if (in_array($type, ['remix', 'all'], true))
-    {
+    if (in_array($type, ['remix', 'all'], true)) {
       $this->recommender_manager->removeAllUserRemixSimilarityRelations();
       $this->entity_manager->clear();
       $this->recommender_manager->computeUserRemixSimilarities($progress_bar);

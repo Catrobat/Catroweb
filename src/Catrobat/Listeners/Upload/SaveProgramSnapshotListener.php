@@ -28,22 +28,18 @@ class SaveProgramSnapshotListener
   {
     $project = $event->getProgramEntity();
 
-    if ($project->isSnapshotsEnabled())
-    {
+    if ($project->isSnapshotsEnabled()) {
       $this->saveProgramSnapshot($project);
     }
   }
 
   public function saveProgramSnapshot(Program $program): void
   {
-    try
-    {
+    try {
       $file = $this->file_repository->getProgramFile($program->getId());
       $date = TimeUtils::getDateTime()->format('Y-m-d_H-i-s');
       $file->move($this->snapshot_dir, $program->getId().'__'.$date.'.catrobat');
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $this->logger->error($e->getCode().': Failed to create Snapshot on project update: '.$e->getMessage());
     }
   }

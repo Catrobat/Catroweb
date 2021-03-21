@@ -23,16 +23,14 @@ class CommentsController extends AbstractController
   public function reportCommentAction(): Response
   {
     $user = $this->getUser();
-    if (null === $user)
-    {
+    if (null === $user) {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if (null === $comment)
-    {
+    if (null === $comment) {
       throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
 
@@ -51,21 +49,18 @@ class CommentsController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
+    if (!$user) {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted('ROLE_ADMIN'))
-    {
+    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted('ROLE_ADMIN')) {
       return new Response(StatusCode::NO_ADMIN_RIGHTS);
     }
 
-    if (null === $comment)
-    {
+    if (null === $comment) {
       throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
     $em->remove($comment);
@@ -81,8 +76,7 @@ class CommentsController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (null === $user)
-    {
+    if (null === $user) {
       return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
@@ -104,8 +98,7 @@ class CommentsController extends AbstractController
 
     $em->refresh($temp_comment);
 
-    if ($user !== $program->getUser())
-    {
+    if ($user !== $program->getUser()) {
       $notification = new CommentNotification($program->getUser(), $temp_comment);
       $notification_service->addNotification($notification);
 

@@ -21,8 +21,7 @@ class MaintainController extends CRUDController
    */
   public function compressedAction(KernelInterface $kernel): RedirectResponse
   {
-    if (!$this->admin->isGranted('EXTRACTED'))
-    {
+    if (!$this->admin->isGranted('EXTRACTED')) {
       throw new AccessDeniedException();
     }
 
@@ -34,8 +33,7 @@ class MaintainController extends CRUDController
     ]);
 
     $return = $application->run($input, new NullOutput());
-    if (0 == $return)
-    {
+    if (0 == $return) {
       $this->addFlash('sonata_flash_success', 'Reset compressed files OK');
     }
 
@@ -47,8 +45,7 @@ class MaintainController extends CRUDController
    */
   public function archiveLogsAction(KernelInterface $kernel): RedirectResponse
   {
-    if (!$this->admin->isGranted('EXTRACTED'))
-    {
+    if (!$this->admin->isGranted('EXTRACTED')) {
       throw new AccessDeniedException();
     }
 
@@ -60,8 +57,7 @@ class MaintainController extends CRUDController
     ]);
 
     $return = $application->run($input, new NullOutput());
-    if (0 == $return)
-    {
+    if (0 == $return) {
       $this->addFlash('sonata_flash_success', 'Archive log files OK');
     }
 
@@ -73,8 +69,7 @@ class MaintainController extends CRUDController
    */
   public function deleteLogsAction(KernelInterface $kernel): RedirectResponse
   {
-    if (!$this->admin->isGranted('EXTRACTED'))
-    {
+    if (!$this->admin->isGranted('EXTRACTED')) {
       throw new AccessDeniedException();
     }
 
@@ -89,12 +84,9 @@ class MaintainController extends CRUDController
 
     $return = $application->run($input, $output);
 
-    if (0 === $return)
-    {
+    if (0 === $return) {
       $this->addFlash('sonata_flash_success', 'Clean log files OK');
-    }
-    else
-    {
+    } else {
       $message = "<strong>Failed cleaning log files:</strong><br />\n";
       $message .= str_replace("\n", "<br />\n", $output->fetch());
       $this->addFlash('sonata_flash_error', $message);
@@ -108,8 +100,7 @@ class MaintainController extends CRUDController
    */
   public function apkAction(KernelInterface $kernel): RedirectResponse
   {
-    if (!$this->admin->isGranted('APK'))
-    {
+    if (!$this->admin->isGranted('APK')) {
       throw new AccessDeniedException();
     }
 
@@ -124,8 +115,7 @@ class MaintainController extends CRUDController
 
     $return = $application->run($input, $output);
 
-    if (0 == $return)
-    {
+    if (0 == $return) {
       $this->addFlash('sonata_flash_success', 'Reset APK Projects OK');
     }
 
@@ -134,8 +124,7 @@ class MaintainController extends CRUDController
 
   public function listAction(Request $request = null): Response
   {
-    if (!$this->admin->isGranted('LIST'))
-    {
+    if (!$this->admin->isGranted('LIST')) {
       throw new AccessDeniedException();
     }
 
@@ -169,8 +158,7 @@ class MaintainController extends CRUDController
     $freeSpace = disk_free_space('/');
     $usedSpace = disk_total_space('/') - $freeSpace;
     $usedSpaceRaw = $usedSpace;
-    foreach ($RemovableObjects as $obj)
-    {
+    foreach ($RemovableObjects as $obj) {
       $usedSpaceRaw -= $obj->size_raw;
     }
 
@@ -216,21 +204,15 @@ class MaintainController extends CRUDController
     $count_size = 0;
     $count = 0;
     $dir_array = preg_grep('#^([^.])#', scandir($directory)); //no hidden files
-    foreach ($dir_array as $filename)
-    {
-      if (null !== $extension && !in_array(pathinfo($filename, PATHINFO_EXTENSION), $extension, true))
-      {
+    foreach ($dir_array as $filename) {
+      if (null !== $extension && !in_array(pathinfo($filename, PATHINFO_EXTENSION), $extension, true)) {
         continue;
       }
-      if ('..' != $filename && '.' != $filename)
-      {
-        if (is_dir($directory.'/'.$filename))
-        {
+      if ('..' != $filename && '.' != $filename) {
+        if (is_dir($directory.'/'.$filename)) {
           $new_folder_size = $this->get_dir_size($directory.'/'.$filename);
           $count_size += $new_folder_size;
-        }
-        elseif (is_file($directory.'/'.$filename))
-        {
+        } elseif (is_file($directory.'/'.$filename)) {
           $count_size += filesize($directory.'/'.$filename);
           ++$count;
         }
@@ -242,8 +224,7 @@ class MaintainController extends CRUDController
 
   private function setSizeOfObject(RemovableMemory &$object, string $path, ?array $extension = null): void
   {
-    if (is_dir($path))
-    {
+    if (is_dir($path)) {
       $size = $this->get_dir_size($path, $extension);
       $object->setSizeRaw($size);
       $object->setSize($this->getSymbolByQuantity($size));

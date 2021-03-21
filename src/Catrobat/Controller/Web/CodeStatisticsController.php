@@ -43,17 +43,14 @@ class CodeStatisticsController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
 
-    if (null !== $program)
-    {
+    if (null !== $program) {
       $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
-      if (null !== $extracted_file)
-      {
+      if (null !== $extracted_file) {
         $parsed_program = $this->code_parser->parse($extracted_file);
       }
     }
 
-    if (null === $parsed_program)
-    {
+    if (null === $parsed_program) {
       return $this->render('Program/code_statistics.html.twig', [
         'id' => $id,
       ]);

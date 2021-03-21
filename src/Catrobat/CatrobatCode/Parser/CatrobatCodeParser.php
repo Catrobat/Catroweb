@@ -12,12 +12,9 @@ class CatrobatCodeParser
    */
   public function parse(ExtractedCatrobatFile $extracted_catrobat_program)
   {
-    try
-    {
+    try {
       $parsed_program = $this->parseProgram($extracted_catrobat_program);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       $parsed_program = null;
     }
 
@@ -31,8 +28,7 @@ class CatrobatCodeParser
   {
     $program_xml_properties = $extracted_program->getProgramXmlProperties();
 
-    if ($extracted_program->hasScenes())
-    {
+    if ($extracted_program->hasScenes()) {
       return new ParsedSceneProgram($program_xml_properties);
     }
 

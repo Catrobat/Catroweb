@@ -46,21 +46,17 @@ class RemixGraphManipulator
       ->getDirectEdgeRelations($program_descendant_ids, $removed_forward_parents_ancestor_ids)
     ;
 
-    foreach ($backward_relations_to_be_converted as $backward_relation)
-    {
+    foreach ($backward_relations_to_be_converted as $backward_relation) {
       $cycle_exists = false;
-      foreach ($removed_forward_parents_ancestor_descendant_relations as $descendant_relation)
-      {
+      foreach ($removed_forward_parents_ancestor_descendant_relations as $descendant_relation) {
         if ($backward_relation->getParentId() === $descendant_relation->getDescendantId()
-          && $backward_relation->getChildId() === $descendant_relation->getAncestorId())
-        {
+          && $backward_relation->getChildId() === $descendant_relation->getAncestorId()) {
           $cycle_exists = true;
           break;
         }
       }
 
-      if ($cycle_exists)
-      {
+      if ($cycle_exists) {
         continue;
       }
 
@@ -71,8 +67,7 @@ class RemixGraphManipulator
         [$backward_relation->getParentId()], $preserved_creation_date_mapping, $preserved_seen_date_mapping);
     }
 
-    if (count($backward_relations_to_be_converted) > 0)
-    {
+    if (count($backward_relations_to_be_converted) > 0) {
       $this->entity_manager->flush();
     }
   }
@@ -101,8 +96,7 @@ class RemixGraphManipulator
       ->removeRelationsBetweenProgramIds($parents_ancestor_ids, $direct_and_indirect_descendant_ids_with_program_id)
     ;
 
-    foreach ($preserved_edges as $edge)
-    {
+    foreach ($preserved_edges as $edge) {
       $this->remix_subgraph_manipulator->appendRemixSubgraphToCatrobatParents(
         $edge->getDescendant(),
         [$edge->getAncestorId()],
@@ -130,8 +124,7 @@ class RemixGraphManipulator
 
   public function linkToScratchParents(Program $program, array $scratch_parent_ids_to_be_added): void
   {
-    foreach ($scratch_parent_ids_to_be_added as $scratch_parent_id)
-    {
+    foreach ($scratch_parent_ids_to_be_added as $scratch_parent_id) {
       $scratch_remix_relation = new ScratchProgramRemixRelation((string) $scratch_parent_id, $program);
       $this->entity_manager->detach($scratch_remix_relation);
       $this->entity_manager->persist($scratch_remix_relation);

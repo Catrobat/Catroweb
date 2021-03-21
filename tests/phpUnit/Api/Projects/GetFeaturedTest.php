@@ -201,8 +201,7 @@ class GetFeaturedTest extends TestCase
       ->method('get')
       ->will(
         $this->returnCallback(
-          function ($param)
-          {
+          function ($param) {
             switch ($param) {
               case 'umbrellaTheme':
                 return 'app';

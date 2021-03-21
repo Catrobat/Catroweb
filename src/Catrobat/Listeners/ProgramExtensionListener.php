@@ -31,8 +31,7 @@ class ProgramExtensionListener
 
     $program->removeAllExtensions();
 
-    if (empty($nodes))
-    {
+    if (empty($nodes)) {
       return;
     }
 
@@ -42,27 +41,21 @@ class ProgramExtensionListener
     $extensions = $this->extension_repository->findAll();
 
     /** @var Extension $extension */
-    foreach ($extensions as $extension)
-    {
-      if (in_array($extension->getPrefix(), $prefixes, true))
-      {
+    foreach ($extensions as $extension) {
+      if (in_array($extension->getPrefix(), $prefixes, true)) {
         $program->addExtension($extension);
 
-        if ('PHIRO' == $extension->getPrefix())
-        {
+        if ('PHIRO' == $extension->getPrefix()) {
           $program->setFlavor('phirocode');
         }
       }
 
-      if (0 == strcmp($extension->getPrefix(), 'CHROMECAST'))
-      {
+      if (0 == strcmp($extension->getPrefix(), 'CHROMECAST')) {
         $is_cast = $xml->xpath('header/isCastProject');
 
-        if (!empty($is_cast))
-        {
+        if (!empty($is_cast)) {
           $cast_value = ((array) $is_cast[0]);
-          if (0 == strcmp($cast_value[0], 'true'))
-          {
+          if (0 == strcmp($cast_value[0], 'true')) {
             $program->addExtension($extension);
           }
         }

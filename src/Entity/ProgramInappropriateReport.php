@@ -78,8 +78,7 @@ class ProgramInappropriateReport
    */
   public function updateTimestamps(): void
   {
-    if (null === $this->getTime())
-    {
+    if (null === $this->getTime()) {
       $this->setTime(TimeUtils::getDateTime());
     }
   }
@@ -89,8 +88,7 @@ class ProgramInappropriateReport
    */
   public function updateState(): void
   {
-    if (null === $this->getState())
-    {
+    if (null === $this->getState()) {
       $this->setState(self::STATUS_NEW);
     }
   }
@@ -173,8 +171,7 @@ class ProgramInappropriateReport
    */
   public function setState(int $state): ProgramInappropriateReport
   {
-    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true))
-    {
+    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true)) {
       throw new InvalidArgumentException('Invalid state');
     }
     $this->state = $state;

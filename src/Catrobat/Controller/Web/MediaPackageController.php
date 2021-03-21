@@ -46,8 +46,7 @@ class MediaPackageController extends AbstractController
   {
     $flavor = $request->attributes->get('flavor');
 
-    if ('' === $flavor)
-    {
+    if ('' === $flavor) {
       $flavor = 'pocketcode';
     }
 
@@ -58,8 +57,7 @@ class MediaPackageController extends AbstractController
       ])
     ;
 
-    if (null === $package)
-    {
+    if (null === $package) {
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
 
@@ -100,10 +98,8 @@ class MediaPackageController extends AbstractController
 
     $categories_of_found_files = [];
     /** @var MediaPackageFile $found_media_file */
-    foreach ($found_media_files as $found_media_file)
-    {
-      if (!in_array($found_media_file->getCategory(), $categories_of_found_files, true))
-      {
+    foreach ($found_media_files as $found_media_file) {
+      if (!in_array($found_media_file->getCategory(), $categories_of_found_files, true)) {
         $categories_of_found_files[] = $found_media_file->getCategory();
       }
     }
@@ -141,8 +137,7 @@ class MediaPackageController extends AbstractController
   {
     $categories = [];
 
-    if ('pocketcode' !== $flavor)
-    {
+    if ('pocketcode' !== $flavor) {
       $flavor_name = $translator->trans('flavor.'.$flavor, [], 'catroweb');
       $theme_special_name = $translator->trans('media-packages.theme-special',
         ['%flavor%' => $flavor_name], 'catroweb');
@@ -155,10 +150,8 @@ class MediaPackageController extends AbstractController
     }
 
     /** @var MediaPackageCategory $category */
-    foreach ($unsorted_categories as $category)
-    {
-      if (0 === strpos($category->getName(), 'ThemeSpecial'))
-      {
+    foreach ($unsorted_categories as $category) {
+      if (0 === strpos($category->getName(), 'ThemeSpecial')) {
         continue;
       }
 
@@ -169,10 +162,8 @@ class MediaPackageController extends AbstractController
       ];
     }
 
-    usort($categories, function ($category_a, $category_b)
-    {
-      if ($category_a['priority'] === $category_b['priority'])
-      {
+    usort($categories, function ($category_a, $category_b) {
+      if ($category_a['priority'] === $category_b['priority']) {
         return 0;
       }
 

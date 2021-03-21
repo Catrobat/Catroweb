@@ -36,8 +36,7 @@ class CleanCompressedProjectsCommand extends Command
     $this->program_manager = $program_manager;
     $this->entity_manager = $entity_manager;
     $this->compressed_path = $parameter_bag->get('catrobat.file.storage.dir');
-    if (!$this->compressed_path)
-    {
+    if (!$this->compressed_path) {
       throw new Exception('Invalid extract path given');
     }
   }
@@ -55,10 +54,8 @@ class CleanCompressedProjectsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $files = glob($this->compressed_path.'*'); // get all file names
-    foreach ($files as $file)
-    {
-      if (is_file($file))
-      {
+    foreach ($files as $file) {
+      if (is_file($file)) {
         unlink($file);
       }
     }

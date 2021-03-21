@@ -24,13 +24,11 @@ class ProgramFileRepository
     $directory = $catrobat_file_storage_dir;
     $tmp_dir = $catrobat_upload_temp_dir;
 
-    if (!is_dir($directory))
-    {
+    if (!is_dir($directory)) {
       throw new InvalidStorageDirectoryException($directory.' is not a valid directory');
     }
 
-    if ($tmp_dir && !is_dir($tmp_dir))
-    {
+    if ($tmp_dir && !is_dir($tmp_dir)) {
       throw new InvalidStorageDirectoryException($tmp_dir.' is not a valid directory');
     }
 
@@ -53,8 +51,7 @@ class ProgramFileRepository
 
   public function deleteProgramFileIfExists(string $id): void
   {
-    if ($this->checkIfProgramFileExists($id))
-    {
+    if ($this->checkIfProgramFileExists($id)) {
       $this->deleteProgramFile($id);
     }
   }
@@ -71,8 +68,7 @@ class ProgramFileRepository
 
   public function checkIfProgramFileExists(string $id): bool
   {
-    if (file_exists($this->directory.$id.'.catrobat'))
-    {
+    if (file_exists($this->directory.$id.'.catrobat')) {
       return true;
     }
 

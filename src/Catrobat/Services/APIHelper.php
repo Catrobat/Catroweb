@@ -27,12 +27,9 @@ class APIHelper
    */
   public static function getPandaAuth($value): string
   {
-    try
-    {
+    try {
       return preg_split('#\s+#', $value)[1];
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       throw new Exception('The route must be registered under the jwt_token_authenticator! (security.yml)', Response::HTTP_UNAUTHORIZED);
     }
   }
@@ -62,12 +59,9 @@ class APIHelper
 //    {
 //      throw new Exception('Something went very wrong with translations!', Response::HTTP_INTERNAL_SERVER_ERROR);
 //    }
-    try
-    {
+    try {
       $this->translator->trans('category.recent', [], 'catroweb', $accept_language);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $accept_language = 'en';
     }
 

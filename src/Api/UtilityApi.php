@@ -34,8 +34,7 @@ class UtilityApi implements UtilityApiInterface
   {
     $survey = $this->getActiveSurvey($lang_code);
 
-    if (null === $survey)
-    {
+    if (null === $survey) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;

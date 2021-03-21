@@ -15,12 +15,10 @@ class CatrobatFileCompressor
    */
   public function compress($source, $destination, $archive_name): string
   {
-    if (!is_dir($source))
-    {
+    if (!is_dir($source)) {
       throw new InvalidStorageDirectoryException($source.' is not a valid target directory');
     }
-    if (!is_dir($destination))
-    {
+    if (!is_dir($destination)) {
       mkdir($destination, 0777, true);
     }
 
@@ -32,14 +30,10 @@ class CatrobatFileCompressor
     $finder = new Finder();
     $finder->in($source);
 
-    foreach ($finder as $element)
-    {
-      if ($element->isDir())
-      {
+    foreach ($finder as $element) {
+      if ($element->isDir()) {
         $archive->addEmptyDir($element->getRelativePathname().'/');
-      }
-      elseif ($element->isFile())
-      {
+      } elseif ($element->isFile()) {
         $archive->addFile($element->getRealpath(), $element->getRelativePathname());
       }
     }

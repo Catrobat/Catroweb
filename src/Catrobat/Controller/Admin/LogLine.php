@@ -14,13 +14,10 @@ class LogLine
 
   public function __construct(string $line = null)
   {
-    if (null === $line)
-    {
+    if (null === $line) {
       $this->setMsg('No Logs with Loglevel');
       $this->setDebugCode('No search results');
-    }
-    else
-    {
+    } else {
       $this->setDate($this->getSubstring($line, ']', true));
       $line = substr($line, strlen($this->getDate()) + 1);
       $this->setDebugCode($this->getSubstring($line, ':'));
@@ -75,12 +72,10 @@ class LogLine
   {
     $pos = strpos($string, (string) $needle);
 
-    if (false === $pos)
-    {
+    if (false === $pos) {
       return '';
     }
-    if ($last_char)
-    {
+    if ($last_char) {
       ++$pos;
     }
 
@@ -92,8 +87,7 @@ class LogLine
     $pos = strpos($string, '.');
     $extracted_string = substr($string, $pos + 1);
 
-    switch ($extracted_string)
-    {
+    switch ($extracted_string) {
       case 'INFO':
         $debug_level = LogsController::FILTER_LEVEL_INFO;
         break;

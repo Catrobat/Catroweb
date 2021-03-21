@@ -214,12 +214,9 @@ class GetRecommendedTest extends TestCase
   private function mockTokenStorage(?User $user)
   {
     $token_storage_interface = $this->createMock(TokenStorageInterface::class);
-    if (null === $user)
-    {
+    if (null === $user) {
       $token_storage_interface->expects($this->any())->method('getToken')->willReturn(null);
-    }
-    else
-    {
+    } else {
       $token_interface = $this->createMock(TokenInterface::class);
       $token_interface->expects($this->any())->method('getUser')->willReturn($user);
       $token_storage_interface->expects($this->any())->method('getToken')->willReturn($token_interface);
@@ -272,8 +269,7 @@ class GetRecommendedTest extends TestCase
       ->method('get')
       ->will(
         $this->returnCallback(
-          function ($param)
-          {
+          function ($param) {
             switch ($param) {
               case 'umbrellaTheme':
                 return 'app';

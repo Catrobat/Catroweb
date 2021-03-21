@@ -35,32 +35,27 @@ class VersionValidator
 
   public function validate(SimpleXMLElement $xml): void
   {
-    if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<'))
-    {
+    if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<')) {
       throw new OldCatrobatLanguageVersionException();
     }
 
     $version = ltrim((string) $xml->header->applicationVersion, 'v');
 
-    switch ($xml->header->platform)
-    {
+    switch ($xml->header->platform) {
       case 'Android':
-        if (version_compare($version, self::MIN_ANDROID_PROGRAM_VERSION, '<'))
-        {
+        if (version_compare($version, self::MIN_ANDROID_PROGRAM_VERSION, '<')) {
           throw new OldApplicationVersionException('android catrobat version too old');
         }
         break;
 
       case 'Windows':
-        if (version_compare($xml->header->applicationVersion, self::MIN_WINDOWS_PROGRAM_VERSION, '<'))
-        {
+        if (version_compare($xml->header->applicationVersion, self::MIN_WINDOWS_PROGRAM_VERSION, '<')) {
           throw new OldApplicationVersionException('windows catrobat version too old');
         }
         break;
 
       case 'iOS':
-        if (version_compare($xml->header->applicationVersion, self::MIN_IOS_PROGRAM_VERSION, '<'))
-        {
+        if (version_compare($xml->header->applicationVersion, self::MIN_IOS_PROGRAM_VERSION, '<')) {
           throw new OldApplicationVersionException('ios catrobat version too old');
         }
         break;

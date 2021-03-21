@@ -52,8 +52,7 @@ class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
     $em = $kernel->getContainer()->get('doctrine')->getManager();
 
     $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0');
-    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName)
-    {
+    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName) {
       $q = $em->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
       $em->getConnection()->executeUpdate($q);
     }
@@ -69,8 +68,7 @@ class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
 
     $finder = new Finder();
     $finder->in($directory)->depth(0);
-    foreach ($finder as $file)
-    {
+    foreach ($finder as $file) {
       $filesystem->remove($file);
     }
   }

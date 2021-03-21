@@ -36,8 +36,7 @@ class FakeStatisticsService extends StatisticsService
                                                   ?string $rec_tag_by_program_id, ?int $rec_by_page_id,
                                                   ?string $rec_by_program_id, ?string $locale, bool $is_user_specific_recommendation = false): bool
   {
-    if ($this->use_real_service)
-    {
+    if ($this->use_real_service) {
       return $this->geocoder_service->createProgramDownloadStatistics($request, $program_id, $referrer,
         $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale);
     }

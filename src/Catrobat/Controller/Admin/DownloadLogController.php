@@ -21,18 +21,15 @@ class DownloadLogController extends AbstractController
   public function downloadLogAction(Request $request = null): Response
   {
     $user = $this->getUser();
-    if (is_null($user) || !$user->hasRole('ROLE_SUPER_ADMIN'))
-    {
+    if (is_null($user) || !$user->hasRole('ROLE_SUPER_ADMIN')) {
       throw new AuthenticationException();
     }
     $fileName = $request->get('file');
     $path = LogsController::LOG_DIR;
     $finder = new Finder();
-    if (($finder->files()->in($path)->depth('< 2')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults()))
-    {
+    if (($finder->files()->in($path)->depth('< 2')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults())) {
       $file = new File($path.$fileName);
-      if ($file->isFile())
-      {
+      if ($file->isFile()) {
         $response = new BinaryFileResponse($file);
         $d = $response->headers->makeDisposition(
           ResponseHeaderBag::DISPOSITION_ATTACHMENT,

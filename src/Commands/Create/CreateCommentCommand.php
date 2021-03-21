@@ -59,8 +59,7 @@ class CreateCommentCommand extends Command
     $program_name = $input->getArgument('program_name');
     $message = $input->getArgument('message');
     $reported = false;
-    if (intval($input->getArgument('reported')) >= 1)
-    {
+    if (intval($input->getArgument('reported')) >= 1) {
       $reported = true;
     }
 
@@ -69,17 +68,13 @@ class CreateCommentCommand extends Command
 
     $program = $this->program_manager->findOneByName($program_name);
 
-    if (null === $user || null === $program)
-    {
+    if (null === $user || null === $program) {
       return 1;
     }
 
-    try
-    {
+    try {
       $this->postComment($user, $program, $message, $reported);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return 2;
     }
     $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
@@ -105,12 +100,9 @@ class CreateCommentCommand extends Command
     $temp_comment->setNotification($notification);
 
     $this->em->persist($temp_comment);
-    try
-    {
+    try {
       $notification->setSeen(boolval(random_int(0, 2)));
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $notification->setSeen(false);
     }
     $this->em->persist($notification);

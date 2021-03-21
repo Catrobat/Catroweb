@@ -13,14 +13,12 @@ class CategoriesController extends CRUDController
   {
     /** @var StarterCategory|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
 
     $programs = $object->getPrograms();
-    foreach ($programs as $program)
-    {
+    foreach ($programs as $program) {
       $object->removeProgram($program);
     }
 

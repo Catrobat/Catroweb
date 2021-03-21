@@ -78,20 +78,17 @@ class UploadController
     /* @var $file File */
     /* @var $user User */
 
-    if (1 !== $request->files->count())
-    {
+    if (1 !== $request->files->count()) {
       $this->logger->error('Missing POST data');
       throw new MissingPostDataException();
     }
-    if (!$request->request->has('fileChecksum'))
-    {
+    if (!$request->request->has('fileChecksum')) {
       $this->logger->error('Missing Checksum');
       throw new MissingChecksumException();
     }
 
     $file = array_values($request->files->all())[0];
-    if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum'))
-    {
+    if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum')) {
       $this->logger->error('UploadError '.StatusCode::INVALID_CHECKSUM, [
         'checksum_symfony' => md5($file->getPathname()),
         'checksum_app' => $request->request->get('fileChecksum'),
@@ -108,8 +105,7 @@ class UploadController
     $this->em->refresh($user);
     // ---
 
-    if ($request->request->has('flavor'))
-    {
+    if ($request->request->has('flavor')) {
       $flavor = $request->request->get('flavor');
     }
 
@@ -117,12 +113,9 @@ class UploadController
       $request->request->get('deviceLanguage'), $flavor);
 
     $program = $this->program_manager->addProgram($add_program_request);
-    if (null === $program)
-    {
+    if (null === $program) {
       $response = $this->createUploadFailedResponse($request, $user);
-    }
-    else
-    {
+    } else {
       $response = $this->createUploadResponse($request, $user, $program);
     }
     $this->logger->info('Uploading a project done : '.json_encode($response, JSON_THROW_ON_ERROR));
@@ -138,8 +131,7 @@ class UploadController
   private function getLanguageCode(Request $request): string
   {
     $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
-    if ('DE' !== $languageCode)
-    {
+    if ('DE' !== $languageCode) {
       $languageCode = 'EN';
     }
 

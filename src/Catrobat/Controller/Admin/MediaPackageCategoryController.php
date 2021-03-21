@@ -12,8 +12,7 @@ class MediaPackageCategoryController extends CRUDController
   protected function preDelete(Request $request, $object)
   {
     /* @var $object MediaPackageCategory */
-    if ($object->getFiles()->count() > 0)
-    {
+    if ($object->getFiles()->count() > 0) {
       $this->addFlash('sonata_flash_error', 'This category is used by media package files!');
 
       return new RedirectResponse($this->admin->generateUrl('list'));

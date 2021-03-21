@@ -32,8 +32,7 @@ class BroadcastNotificationController extends CRUDController
    */
   private function getNotifications(string $message, string $title, UserManager $user_manager): Generator
   {
-    foreach ($user_manager->findAll() as $user)
-    {
+    foreach ($user_manager->findAll() as $user) {
       yield new BroadcastNotification($user, $title, $message);
     }
   }

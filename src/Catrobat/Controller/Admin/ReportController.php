@@ -14,8 +14,7 @@ class ReportController extends CRUDController
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $program = $object->getProgram();
@@ -46,8 +45,7 @@ class ReportController extends CRUDController
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $program = $object->getProgram();
@@ -64,8 +62,7 @@ class ReportController extends CRUDController
   {
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $object->setIsReported(false);
@@ -79,14 +76,12 @@ class ReportController extends CRUDController
   {
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($object->getId());
-    if (null === $comment)
-    {
+    if (null === $comment) {
       throw $this->createNotFoundException('No comment found for this id '.$object->getId());
     }
     $em->remove($comment);

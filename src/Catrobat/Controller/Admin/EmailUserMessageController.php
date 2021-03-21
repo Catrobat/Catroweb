@@ -19,19 +19,16 @@ class EmailUserMessageController extends CRUDController
   public function sendAction(Request $request, Swift_Mailer $mailer, UserManager $user_manager): Response
   {
     $user = $user_manager->findUserByUsername($request->get('username'));
-    if (!$user)
-    {
+    if (!$user) {
       return new Response('User does not exist');
     }
     $subject = $request->get('subject');
-    if (null === $subject || '' === $subject)
-    {
+    if (null === $subject || '' === $subject) {
       return new Response('Empty subject!');
     }
 
     $messageText = $request->get('message');
-    if (null === $messageText || '' === $messageText)
-    {
+    if (null === $messageText || '' === $messageText) {
       return new Response('Empty message!');
     }
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
