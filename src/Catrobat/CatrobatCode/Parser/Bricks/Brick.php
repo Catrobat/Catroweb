@@ -45,12 +45,9 @@ abstract class Brick
 
   protected function setImgFile(string $img_file): void
   {
-    if ($this->isCommentedOut() || $this->hasCommentedOutParentScript())
-    {
+    if ($this->isCommentedOut() || $this->hasCommentedOutParentScript()) {
       $this->commentOut();
-    }
-    else
-    {
+    } else {
       $this->img_file = $img_file;
     }
   }

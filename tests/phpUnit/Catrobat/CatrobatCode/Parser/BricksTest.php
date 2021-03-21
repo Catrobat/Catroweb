@@ -46,8 +46,7 @@ class BricksTest extends TestCase
    */
   public function mustHaveMethod($method_name): void
   {
-    foreach ($this->brick_xml_properties_list as $brick_xml_properties)
-    {
+    foreach ($this->brick_xml_properties_list as $brick_xml_properties) {
       $script = BrickFactory::generate($brick_xml_properties);
       $this->assertTrue(method_exists($script, $method_name));
     }
@@ -96,8 +95,7 @@ class BricksTest extends TestCase
     $reference_output_index = 0;
 
     $xml_properties = simplexml_load_file(__DIR__.'/Resources/ValidPrograms/AllBricksProgram/code.xml');
-    foreach ($xml_properties->xpath('//brick') as $brick_xml_properties)
-    {
+    foreach ($xml_properties->xpath('//brick') as $brick_xml_properties) {
       $expected = [
         self::TYPE => $reference_output[$reference_output_index++],
         self::CAPTION => $reference_output[$reference_output_index++],

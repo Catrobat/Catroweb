@@ -12,8 +12,7 @@ class FOSUBUserProvider extends BaseClass
 {
   public function connect(UserInterface $user, UserResponseInterface $response): void
   {
-    if (!$user instanceof User)
-    {
+    if (!$user instanceof User) {
       throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', \get_class($user)));
     }
     //retrieve access token and the ID
@@ -27,8 +26,7 @@ class FOSUBUserProvider extends BaseClass
     $access_token = $response->getAccessToken();
 
     //Disconnect previous user
-    if (null !== $previousUser = $this->userManager->findUserBy([$property => $username]))
-    {
+    if (null !== $previousUser = $this->userManager->findUserBy([$property => $username])) {
       $previousUser->{$setter_id}(null);
       $previousUser->{$setter_access_token}(null);
       $this->userManager->updateUser($user);
@@ -51,12 +49,10 @@ class FOSUBUserProvider extends BaseClass
     $setter_access_token = $setter_name.'AccessToken';
     $access_token = $response->getAccessToken();
     //register new user
-    if (null === $user)
-    {
+    if (null === $user) {
       $user = $this->userManager->findUserByEmail($response->getEmail());
       //if user with the given email doesnt exists create a new user
-      if (null === $user)
-      {
+      if (null === $user) {
         /** @var User $user */
         $user = $this->userManager->createUser();
         //generate random username for example user12345678, needs to be discussed
@@ -90,8 +86,7 @@ class FOSUBUserProvider extends BaseClass
     $pass = '';
     $max = strlen($chars) - 1;
 
-    for ($i = 0; $i < $length; ++$i)
-    {
+    for ($i = 0; $i < $length; ++$i) {
       $pass .= $chars[random_int(0, $max)];
     }
 
@@ -103,14 +98,12 @@ class FOSUBUserProvider extends BaseClass
     $first_name = $response->getFirstName();
     $last_name = $response->getLastName();
     $username_base = $first_name.$last_name;
-    if (empty($username_base))
-    {
+    if (empty($username_base)) {
       $username_base = 'user';
     }
     $username = $username_base;
     $user_number = 0;
-    while (null !== $this->userManager->findUserByUsername($username))
-    {
+    while (null !== $this->userManager->findUserByUsername($username)) {
       ++$user_number;
       $username = $username_base.$user_number;
     }

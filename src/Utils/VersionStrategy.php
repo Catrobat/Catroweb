@@ -15,8 +15,7 @@ class VersionStrategy implements VersionStrategyInterface
 
   public function getVersion($path)
   {
-    if (preg_match('/\?/', $path))
-    {
+    if (preg_match('/\?/', $path)) {
       return '&v='.$this->catrobat_version;
     }
 

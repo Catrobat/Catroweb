@@ -62,24 +62,19 @@ class CreateLikeCommand extends Command
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (null === $program || null === $user)
-    {
+    if (null === $program || null === $user) {
       $output->writeln('Liking '.$program_name.' with user '.$user_name.' failed');
 
       return 1;
     }
-    try
-    {
-      if ($program->getUser() !== $user)
-      {
+    try {
+      if ($program->getUser() !== $user) {
         $notification = new LikeNotification($program->getUser(), $user, $program);
         $this->likeProgram($program, $user);
         $notification->setSeen(boolval(random_int(0, 3)));
         $this->notification_service->addNotification($notification);
       }
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
 
       return 2;

@@ -35,8 +35,7 @@ class ReportedUsersAdmin extends AbstractAdmin
     $rootAlias = $qb->getRootAliases()[0];
     $parameters = $this->getFilterParameters();
 
-    if ('getReportedCommentsCount' === $parameters['_sort_by'])
-    {
+    if ('getReportedCommentsCount' === $parameters['_sort_by']) {
       $qb->from('App\Entity\User', 'fos_user')
         ->leftJoin('App\Entity\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
         ->leftJoin('App\Entity\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
@@ -45,9 +44,7 @@ class ReportedUsersAdmin extends AbstractAdmin
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(user_comment.user )', $parameters['_sort_order'])
           ;
-    }
-    elseif ('getProgramInappropriateReportsCount' === $parameters['_sort_by'])
-    {
+    } elseif ('getProgramInappropriateReportsCount' === $parameters['_sort_by']) {
       $qb->from('App\Entity\User', 'fos_user')
         ->leftJoin('App\Entity\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
         ->leftJoin('App\Entity\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
@@ -56,9 +53,7 @@ class ReportedUsersAdmin extends AbstractAdmin
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(repProg.program)', $parameters['_sort_order'])
       ;
-    }
-    else
-    {
+    } else {
       $qb->from('App\Entity\User', 'fos_user')
         ->leftJoin('App\Entity\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
         ->leftJoin('App\Entity\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')

@@ -42,28 +42,23 @@ class FormulaStatement extends Statement
 
     $this->setVariables();
 
-    if (null != $this->type)
-    {
+    if (null != $this->type) {
       $code .= $this->type->execute();
     }
-    if (null != $this->type && (null != $this->leftChild || null != $this->rightChild))
-    {
+    if (null != $this->type && (null != $this->leftChild || null != $this->rightChild)) {
       $code .= '(';
       $endCode = ')';
     }
 
-    if (null != $this->leftChild)
-    {
+    if (null != $this->leftChild) {
       $code .= $this->leftChild->execute();
     }
 
-    if (null != $this->leftChild && null != $this->rightChild)
-    {
+    if (null != $this->leftChild && null != $this->rightChild) {
       $code .= ', ';
     }
 
-    if (null != $this->rightChild)
-    {
+    if (null != $this->rightChild) {
       $code .= $this->rightChild->execute();
     }
 
@@ -80,18 +75,12 @@ class FormulaStatement extends Statement
 
   protected function setVariables(): void
   {
-    foreach ($this->statements as $value)
-    {
-      if ($value instanceof LeftChildStatement)
-      {
+    foreach ($this->statements as $value) {
+      if ($value instanceof LeftChildStatement) {
         $this->leftChild = $value;
-      }
-      elseif ($value instanceof RightChildStatement)
-      {
+      } elseif ($value instanceof RightChildStatement) {
         $this->rightChild = $value;
-      }
-      elseif ($value instanceof ValueStatement)
-      {
+      } elseif ($value instanceof ValueStatement) {
         $this->type = $value;
       }
     }

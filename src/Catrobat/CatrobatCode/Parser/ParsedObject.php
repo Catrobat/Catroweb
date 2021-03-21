@@ -57,8 +57,7 @@ class ParsedObject
 
   private function resolveName(): SimpleXMLElement
   {
-    if (null != $this->object_xml_properties[Constants::NAME_ATTRIBUTE])
-    {
+    if (null != $this->object_xml_properties[Constants::NAME_ATTRIBUTE]) {
       return $this->object_xml_properties[Constants::NAME_ATTRIBUTE];
     }
 
@@ -67,32 +66,28 @@ class ParsedObject
 
   private function parseLooks(): void
   {
-    foreach ($this->object_xml_properties->lookList->children() as $look_xml_properties)
-    {
+    foreach ($this->object_xml_properties->lookList->children() as $look_xml_properties) {
       $this->looks[] = new ParsedObjectAsset($this->dereference($look_xml_properties));
     }
   }
 
   private function parseSounds(): void
   {
-    foreach ($this->object_xml_properties->soundList->children() as $sound_xml_properties)
-    {
+    foreach ($this->object_xml_properties->soundList->children() as $sound_xml_properties) {
       $this->sounds[] = new ParsedObjectAsset($this->dereference($sound_xml_properties));
     }
   }
 
   private function parseScripts(): void
   {
-    foreach ($this->object_xml_properties->scriptList->children() as $script_xml_properties)
-    {
+    foreach ($this->object_xml_properties->scriptList->children() as $script_xml_properties) {
       $this->scripts[] = ScriptFactory::generate($this->dereference($script_xml_properties));
     }
   }
 
   private function dereference(SimpleXMLElement $xml_properties): SimpleXMLElement
   {
-    if (null != $xml_properties[Constants::REFERENCE_ATTRIBUTE])
-    {
+    if (null != $xml_properties[Constants::REFERENCE_ATTRIBUTE]) {
       return $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE])[0];
     }
 

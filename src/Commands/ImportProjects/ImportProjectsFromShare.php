@@ -57,8 +57,7 @@ class ImportProjectsFromShare extends Command
 
   private function getDownloadUrl(string $category): string
   {
-    switch ($category)
-    {
+    switch ($category) {
       case 'recent':
         return 'https://share.catrob.at/app/api/projects/recent.json';
       case 'random':
@@ -70,22 +69,17 @@ class ImportProjectsFromShare extends Command
   private function downloadProjects(string $dir, int $limit, string $url, OutputInterface $output): void
   {
     $downloads_left = $limit;
-    while ($downloads_left > 0)
-    {
+    while ($downloads_left > 0) {
       $server_json = json_decode(file_get_contents($url.'?limit='.$downloads_left), true);
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
-      foreach ($server_json['CatrobatProjects'] as $program)
-      {
+      foreach ($server_json['CatrobatProjects'] as $program) {
         $project_url = $base_url.$program['DownloadUrl'];
         $name = $dir.$program['ProjectId'].'.catrobat';
         $output->writeln('Saving <'.$project_url.'> to <'.$name.'>');
-        try
-        {
+        try {
           file_put_contents($name, file_get_contents($project_url));
           --$downloads_left;
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
           $output->writeln('File <'.$project_url.'> download failed');
           $output->writeln('Error code: '.$e->getCode());
           $output->writeln('Error message: '.$e->getMessage());

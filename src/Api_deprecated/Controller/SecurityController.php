@@ -60,35 +60,25 @@ class SecurityController extends AbstractController
 
     $create_request = new CreateUserRequest($request);
     $violations = $validator->validate($create_request);
-    foreach ($violations as $violation)
-    {
+    foreach ($violations as $violation) {
       $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
-      if ('errors.password.short' == $violation->getMessageTemplate())
-      {
+      if ('errors.password.short' == $violation->getMessageTemplate()) {
         $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-      }
-      elseif ('errors.email.invalid' == $violation->getMessageTemplate())
-      {
+      } elseif ('errors.email.invalid' == $violation->getMessageTemplate()) {
         $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
       }
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
     }
 
-    if (0 == count($violations))
-    {
-      if (null != $user_manager->findUserByEmail($create_request->mail))
-      {
+    if (0 == count($violations)) {
+      if (null != $user_manager->findUserByEmail($create_request->mail)) {
         $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
         $retArray['answer'] = $translator->trans('errors.email.exists', [], 'catroweb');
-      }
-      elseif (null != $user_manager->findUserByUsername($create_request->username))
-      {
+      } elseif (null != $user_manager->findUserByUsername($create_request->username)) {
         $retArray['statusCode'] = StatusCode::USER_ADD_USERNAME_EXISTS;
         $retArray['answer'] = $translator->trans('errors.username.exists', [], 'catroweb');
-      }
-      else
-      {
+      } else {
         /** @var User $user */
         $user = $user_manager->createUser();
         $user->setUsername($create_request->username);
@@ -123,56 +113,44 @@ class SecurityController extends AbstractController
 
     $login_request = new LoginUserRequest($request);
     $violations = $validator->validate($login_request);
-    foreach ($violations as $violation)
-    {
+    foreach ($violations as $violation) {
       $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-      if ('errors.password.short' == $violation->getMessageTemplate())
-      {
+      if ('errors.password.short' == $violation->getMessageTemplate()) {
         $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-      }
-      elseif ('errors.email.invalid' == $violation->getMessageTemplate())
-      {
+      } elseif ('errors.email.invalid' == $violation->getMessageTemplate()) {
         $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
       }
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
     }
 
-    if (count($violations) > 0)
-    {
+    if (count($violations) > 0) {
       $retArray['preHeaderMessages'] = '';
 
       return JsonResponse::create($retArray);
     }
 
-    if (0 == count($violations))
-    {
+    if (0 == count($violations)) {
       $username = $request->request->get('registrationUsername');
       $password = $request->request->get('registrationPassword');
 
       /** @var User|null $user */
       $user = $user_manager->findUserByUsername($username);
 
-      if (null === $user)
-      {
+      if (null === $user) {
         $retArray['statusCode'] = StatusCode::USERNAME_NOT_FOUND;
         $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
-      }
-      else
-      {
+      } else {
         $encoder = $factory->getEncoder($user);
         $correct_pass = $user_manager->isPasswordValid($user, $password, $encoder);
         $dd = null;
-        if ($correct_pass)
-        {
+        if ($correct_pass) {
           $retArray['statusCode'] = Response::HTTP_OK;
           $user->setUploadToken($token_generator->generateToken());
           $retArray['token'] = $user->getUploadToken();
           $retArray['email'] = $user->getEmail();
           $user_manager->updateUser($user);
-        }
-        else
-        {
+        } else {
           $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
           $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
         }

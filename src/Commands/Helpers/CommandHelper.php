@@ -14,15 +14,12 @@ class CommandHelper
 {
   public static function emptyDirectory(string $directory, string $description = '', OutputInterface $output = null): bool
   {
-    if (null !== $output)
-    {
+    if (null !== $output) {
       $output->write($description." ('".$directory."') ... ");
     }
 
-    if ('' == $directory)
-    {
-      if (null !== $output)
-      {
+    if ('' == $directory) {
+      if (null !== $output) {
         $output->writeln('failed');
       }
 
@@ -33,17 +30,14 @@ class CommandHelper
 
     $finder = new Finder();
     $finder->in($directory)->depth(0);
-    foreach ($finder as $file)
-    {
+    foreach ($finder as $file) {
       // skip folder in templates directory
-      if (('screenshots' !== $file->getFilename()) && ('thumbnails' !== $file->getFilename()))
-      {
+      if (('screenshots' !== $file->getFilename()) && ('thumbnails' !== $file->getFilename())) {
         $filesystem->remove($file);
       }
     }
 
-    if (null !== $output)
-    {
+    if (null !== $output) {
       $output->writeln('OK');
     }
 
@@ -53,8 +47,7 @@ class CommandHelper
   public static function createDirectory(string $directory, string $description, OutputInterface $output): void
   {
     $output->write($description." ('".$directory."') ... ");
-    if ('' == $directory)
-    {
+    if ('' == $directory) {
       $output->writeln('failed');
 
       return;
@@ -82,32 +75,27 @@ class CommandHelper
   public static function executeShellCommand(array $command, array $config, string $description = '',
                                              OutputInterface $output = null): bool
   {
-    if (null !== $output)
-    {
+    if (null !== $output) {
       $output->write($description." ('".implode(' ', $command)."') ... ");
     }
 
     $process = new Process($command);
 
-    if (isset($config['timeout']))
-    {
+    if (isset($config['timeout'])) {
       $process->setTimeout($config['timeout']);
     }
 
     $process->run();
 
-    if ($process->isSuccessful())
-    {
-      if (null !== $output)
-      {
+    if ($process->isSuccessful()) {
+      if (null !== $output) {
         $output->writeln('OK');
       }
 
       return true;
     }
 
-    if (null !== $output)
-    {
+    if (null !== $output) {
       $output->writeln('failed! - Exit-Code: '.$process->getExitCode());
       $output->writeln('Error output: '.$process->getErrorOutput());
     }

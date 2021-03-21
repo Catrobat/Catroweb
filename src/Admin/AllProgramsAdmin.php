@@ -121,8 +121,7 @@ class AllProgramsAdmin extends AbstractAdmin
     $flavor_options = $this->parameter_bag->get('flavors');
 
     $choices = [];
-    foreach ($flavor_options as $flavor)
-    {
+    foreach ($flavor_options as $flavor) {
       $choices[$flavor] = $flavor;
     }
     $list

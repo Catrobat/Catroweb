@@ -63,8 +63,7 @@ class Tag
 
   public function addProgram(Program $program): void
   {
-    if ($this->programs->contains($program))
-    {
+    if ($this->programs->contains($program)) {
       return;
     }
     $this->programs->add($program);

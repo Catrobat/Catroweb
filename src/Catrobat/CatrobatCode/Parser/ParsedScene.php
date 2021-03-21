@@ -13,8 +13,7 @@ class ParsedScene extends ParsedObjectsContainer
   {
     parent::__construct($scene_xml_properties);
 
-    if (0 === count($scene_xml_properties->name))
-    {
+    if (0 === count($scene_xml_properties->name)) {
       throw new Exception('Scene without name');
     }
 

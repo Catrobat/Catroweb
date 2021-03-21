@@ -44,8 +44,7 @@ class ParsedObjectGroup
 
   private function resolveName(): SimpleXMLElement
   {
-    if (null != $this->object_group_xml_properties[Constants::NAME_ATTRIBUTE])
-    {
+    if (null != $this->object_group_xml_properties[Constants::NAME_ATTRIBUTE]) {
       return $this->object_group_xml_properties[Constants::NAME_ATTRIBUTE];
     }
 

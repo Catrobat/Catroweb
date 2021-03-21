@@ -21,8 +21,7 @@ class UploadExceptionListener
 
   public function onKernelException(ExceptionEvent $event): void
   {
-    if ($event->getThrowable() instanceof InvalidCatrobatFileException)
-    {
+    if ($event->getThrowable() instanceof InvalidCatrobatFileException) {
       $event->allowCustomResponseCode();
       $event->setResponse(JsonResponse::create([
         'statusCode' => $event->getThrowable()->getCode(),

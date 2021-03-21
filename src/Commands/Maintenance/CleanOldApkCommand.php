@@ -51,8 +51,7 @@ class CleanOldApkCommand extends Command
   {
     $days = $input->getArgument('days');
 
-    if (!is_numeric($days))
-    {
+    if (!is_numeric($days)) {
       $output->writeln('To delete all APKs older than X days you have to enter a numeric value as parameter!');
 
       return 1;
@@ -68,11 +67,9 @@ class CleanOldApkCommand extends Command
     $removed_apk_ids = new ArrayObject();
     $amount_of_files = sizeof($finder);
 
-    foreach ($finder as $file)
-    {
+    foreach ($finder as $file) {
       $access_time = $file->getATime();
-      if ($access_time < $last_point_of_time_to_save)
-      {
+      if ($access_time < $last_point_of_time_to_save) {
         $filesystem->remove($file);
         $removed_apk_ids->append(explode('.', $file->getFilename())[0]);
       }
@@ -80,8 +77,7 @@ class CleanOldApkCommand extends Command
 
     $output->writeln('Files removed ('.sizeof($removed_apk_ids).'/'.$amount_of_files.')');
 
-    if (!sizeof($removed_apk_ids))
-    {
+    if (!sizeof($removed_apk_ids)) {
       $output->writeln('No projects have been reset.');
 
       return 0;
@@ -100,18 +96,15 @@ class CleanOldApkCommand extends Command
   {
     $id_query_part = '';
     $i = 0;
-    foreach ($removed_apk_ids as $apk_id)
-    {
-      if (0 !== $i)
-      {
+    foreach ($removed_apk_ids as $apk_id) {
+      if (0 !== $i) {
         $id_query_part .= 'OR ';
       }
       $id_query_part .= 'p.id = \''.$apk_id.'\' ';
       ++$i;
     }
 
-    if ('' !== $id_query_part)
-    {
+    if ('' !== $id_query_part) {
       $id_query_part = ' AND ('.$id_query_part.')';
     }
 

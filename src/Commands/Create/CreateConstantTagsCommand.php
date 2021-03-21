@@ -44,14 +44,11 @@ class CreateConstantTagsCommand extends Command
 
     $number_of_tags = 7; // uses the tag names defined in the translation files!
 
-    for ($i = 1; $i <= $number_of_tags; ++$i)
-    {
+    for ($i = 1; $i <= $number_of_tags; ++$i) {
       $tag = $this->tag_repository->find($i);
 
-      if (null != $tag)
-      {
-        for ($j = 1; $j < count($metadata); ++$j)
-        {
+      if (null != $tag) {
+        for ($j = 1; $j < count($metadata); ++$j) {
           $language = 'set'.$metadata[$j];
 
           $tag->{$language}($this->trans('tags.constant.tag'.$i, $metadata[$j]));
@@ -59,13 +56,10 @@ class CreateConstantTagsCommand extends Command
           $this->entity_manager->persist($tag);
           $this->entity_manager->flush();
         }
-      }
-      else
-      {
+      } else {
         $tag = new Tag();
 
-        for ($j = 1; $j < count($metadata); ++$j)
-        {
+        for ($j = 1; $j < count($metadata); ++$j) {
           $language = 'set'.$metadata[$j];
           $tag->{$language}($this->trans('tags.constant.tag'.$i, $metadata[$j]));
         }

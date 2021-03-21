@@ -71,8 +71,7 @@ class ParsedObjectsContainerTest extends TestCase
       ParsedObjectGroup::class,
     ];
 
-    foreach ($this->container->getObjects() as $actual)
-    {
+    foreach ($this->container->getObjects() as $actual) {
       $this->assertThat($actual, $this->logicalOr(
         $this->isInstanceOf($expected[0]),
         $this->isInstanceOf($expected[1])
@@ -97,12 +96,9 @@ class ParsedObjectsContainerTest extends TestCase
     $xml_scene = $xml_properties->xpath('//scene');
     Assert::assertNotFalse($xml_scene);
 
-    if (!array_key_exists(0, $xml_scene))
-    {
+    if (!array_key_exists(0, $xml_scene)) {
       new ParsedScene($xml_scene[0]);
-    }
-    else
-    {
+    } else {
       throw new Exception(Exception::class);
     }
   }

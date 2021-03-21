@@ -34,8 +34,7 @@ class ProgramController extends AbstractController
 
     $programs = [];
     $program = $program_manager->find($id);
-    if (null === $program)
-    {
+    if (null === $program) {
       return JsonResponse::create(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
     }
 
@@ -55,8 +54,7 @@ class ProgramController extends AbstractController
   public function projectLikesAction(string $id, ProgramManager $program_manager): JsonResponse
   {
     $program = $program_manager->find($id);
-    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program))
-    {
+    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program)) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
@@ -65,15 +63,11 @@ class ProgramController extends AbstractController
     $user_objects = [];
 
     /** @var ProgramLike $like */
-    foreach ($program->getLikes()->getIterator() as $like)
-    {
-      if (array_key_exists($like->getUser()->getId(), $user_objects))
-      {
+    foreach ($program->getLikes()->getIterator() as $like) {
+      if (array_key_exists($like->getUser()->getId(), $user_objects)) {
         $obj = $user_objects[$like->getUser()->getId()];
         $obj->types[] = $like->getTypeAsString();
-      }
-      else
-      {
+      } else {
         $obj = new stdClass();
         $obj->user = new stdClass();
         $obj->user->id = $like->getUser()->getId();
@@ -98,8 +92,7 @@ class ProgramController extends AbstractController
                                           TranslatorInterface $translator): JsonResponse
   {
     $program = $program_manager->find($id);
-    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program))
-    {
+    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program)) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
@@ -112,8 +105,7 @@ class ProgramController extends AbstractController
       $data->total->value, $translator, $user_locale
     );
 
-    foreach (ProgramLike::$VALID_TYPES as $type_id)
-    {
+    foreach (ProgramLike::$VALID_TYPES as $type_id) {
       $type_name = ProgramLike::$TYPE_NAMES[$type_id];
       $data->{$type_name} = new stdClass();
       $data->{$type_name}->value = $program_manager->likeTypeCount($program->getId(), $type_id);

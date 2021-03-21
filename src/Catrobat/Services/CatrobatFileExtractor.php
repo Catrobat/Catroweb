@@ -17,8 +17,7 @@ class CatrobatFileExtractor
 
   public function __construct(string $extract_dir, string $extract_path)
   {
-    if (!is_dir($extract_dir))
-    {
+    if (!is_dir($extract_dir)) {
       throw new InvalidStorageDirectoryException($extract_dir.' is not a valid directory');
     }
     $this->extract_dir = $extract_dir;
@@ -37,13 +36,10 @@ class CatrobatFileExtractor
     $zip = new ZipArchive();
     $res = $zip->open($file->getPathname());
 
-    if (true === $res)
-    {
+    if (true === $res) {
       $zip->extractTo($full_extract_dir);
       $zip->close();
-    }
-    else
-    {
+    } else {
       throw new InvalidArchiveException();
     }
 

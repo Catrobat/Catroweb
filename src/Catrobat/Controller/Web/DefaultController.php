@@ -30,34 +30,24 @@ class DefaultController extends AbstractController
   {
     $flavor = $request->attributes->get('flavor');
 
-    if ('phirocode' === $flavor)
-    {
+    if ('phirocode' === $flavor) {
       $featured_items = $repository->getFeaturedItems('pocketcode', 10, 0);
-    }
-    else
-    {
+    } else {
       $featured_items = $repository->getFeaturedItems($flavor, 10, 0);
     }
 
     $featured = [];
-    foreach ($featured_items as $item)
-    {
+    foreach ($featured_items as $item) {
       /** @var FeaturedProgram $item */
       $info = [];
-      if (null !== $item->getProgram())
-      {
-        if ($flavor)
-        {
+      if (null !== $item->getProgram()) {
+        if ($flavor) {
           $info['url'] = $this->generateUrl('program',
           ['id' => $item->getProgram()->getId(), 'theme' => $flavor]);
-        }
-        else
-        {
+        } else {
           $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId()]);
         }
-      }
-      else
-      {
+      } else {
         $info['url'] = $item->getUrl();
       }
       $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType(), true);
@@ -106,8 +96,7 @@ class DefaultController extends AbstractController
     $locale = strtolower($request->getLocale());
 
     if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph',
-      'rec_remix_notification', 'rec_specific_programs', ], true))
-    {
+      'rec_remix_notification', 'rec_specific_programs', ], true)) {
       $rec_from_id = $_POST['recFromID'];
       $rec_program_id = $_POST['recID'];
       $is_user_specific_recommendation = isset($_POST['recIsUserSpecific'])
@@ -121,16 +110,14 @@ class DefaultController extends AbstractController
       return new Response('ok');
     }
 
-    if ('tags' == $type)
-    {
+    if ('tags' == $type) {
       $tag_id = $_POST['recID'];
       $this->statistics->createClickStatistics($request, $type, null, null, $tag_id, null, $referrer, $locale);
 
       return new Response('ok');
     }
 
-    if ('extensions' == $type)
-    {
+    if ('extensions' == $type) {
       $extension_name = $_POST['recID'];
       $this->statistics->createClickStatistics($request, $type, null, null, null, $extension_name, $referrer, $locale);
 
@@ -152,8 +139,7 @@ class DefaultController extends AbstractController
 
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'scratchRemixes', 'mostViewed', 'random'], true))
-    {
+    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'scratchRemixes', 'mostViewed', 'random'], true)) {
       $program_id = $_POST['programID'];
       $this->statistics->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);
 
@@ -172,8 +158,7 @@ class DefaultController extends AbstractController
     $user = $this->getUser();
     $user_first_login = false;
     $user_id = null;
-    if (null !== $user && true == $user->isOauthUser() && !$user->isOauthPasswordCreated())
-    {
+    if (null !== $user && true == $user->isOauthUser() && !$user->isOauthPasswordCreated()) {
       $user_first_login = true;
       $user_id = $user->getId();
     }

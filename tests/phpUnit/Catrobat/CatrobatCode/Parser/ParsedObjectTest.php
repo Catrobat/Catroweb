@@ -64,8 +64,7 @@ class ParsedObjectTest extends TestCase
   {
     $expected = ParsedObjectAsset::class;
 
-    foreach ($this->object->getLooks() as $actual)
-    {
+    foreach ($this->object->getLooks() as $actual) {
       $this->assertInstanceOf($expected, $actual);
     }
   }
@@ -87,8 +86,7 @@ class ParsedObjectTest extends TestCase
   {
     $expected = Script::class;
 
-    foreach ($this->object->getScripts() as $actual)
-    {
+    foreach ($this->object->getScripts() as $actual) {
       $this->assertInstanceOf($expected, $actual);
     }
   }

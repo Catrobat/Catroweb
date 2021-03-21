@@ -1,6 +1,6 @@
 # Missing in new API - To be fixed with SHARE-369
 
-@web @recommendations @disabled
+@web @recommendations
 Feature: There should be a more from this user category on project pages
 
   Background:
@@ -39,46 +39,42 @@ Feature: There should be a more from this user category on project pages
   Scenario: At a projects detail page I should get more projects from this user recommended
     Given I am on "/app/project/3"
     And I wait for the page to be loaded
-    Then I should see 6 "#more-from-this-user-recommendations .program"
-    And I should see "More from user2"
-    And the element "#more-from-this-user-recommendations .button-show-more" should be visible
-    But the element "#more-from-this-user-recommendations .button-show-less" should not be visible
-    When I click "#more-from-this-user-recommendations .button-show-more"
-    And I wait for AJAX to finish
-    Then I should see 12 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-more"
-    And I wait for AJAX to finish
-    Then I should see 18 "#more-from-this-user-recommendations .program"
-    When I click "#more-from-this-user-recommendations .button-show-more"
-    And I wait for AJAX to finish
-    Then I should see 19 "#more-from-this-user-recommendations .program"
-    And the element "#more-from-this-user-recommendations .button-show-less" should be visible
-    But the element "#more-from-this-user-recommendations .button-show-more" should not be visible
-    When I click "#more-from-this-user-recommendations .button-show-less"
-    And I wait for AJAX to finish
-    Then I should see 18 "#more-from-this-user-recommendations .program"
-    And the element "#more-from-this-user-recommendations .button-show-more" should be visible
-    And the element "#more-from-this-user-recommendations .button-show-less" should be visible
+    Then the element "#recommended-projects__more_from_user" should be visible
+    And I should see 19 "#recommended-projects__more_from_user .project-list__project"
+    And I should see "More from User2"
+    And I should see "project 03"
+    And I should see "project 04" in the "#recommended-projects__more_from_user" element
+    And I should see "project 05" in the "#recommended-projects__more_from_user" element
+    And I should see "project 06" in the "#recommended-projects__more_from_user" element
+    And I should see "project 07" in the "#recommended-projects__more_from_user" element
+    And I should see "project 08" in the "#recommended-projects__more_from_user" element
+    And I should see "project 09" in the "#recommended-projects__more_from_user" element
+    And I should see "project 10" in the "#recommended-projects__more_from_user" element
+    And I should see "project 11" in the "#recommended-projects__more_from_user" element
+    And I should see "project 12" in the "#recommended-projects__more_from_user" element
+    And I should see "project 13" in the "#recommended-projects__more_from_user" element
+    And I should see "project 14" in the "#recommended-projects__more_from_user" element
+    And I should see "project 15" in the "#recommended-projects__more_from_user" element
+    And I should see "project 16" in the "#recommended-projects__more_from_user" element
+    And I should see "project 17" in the "#recommended-projects__more_from_user" element
+    And I should see "project 18" in the "#recommended-projects__more_from_user" element
+    And I should see "project 19" in the "#recommended-projects__more_from_user" element
+    And I should see "project 20" in the "#recommended-projects__more_from_user" element
+    And I should see "project 21" in the "#recommended-projects__more_from_user" element
+    And I should see "project 22" in the "#recommended-projects__more_from_user" element
 
   Scenario: Show more from a user should not show the same project
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see 1 "#more-from-this-user-recommendations .program"
+    Then the element "#recommended-projects__more_from_user" should be visible
+    And I should see 1 "#recommended-projects__more_from_user .project-list__project"
     And I should see "More from Catrobat"
-    But the element "#more-from-this-user-recommendations .button-show-more" should not be visible
-    And the element "#more-from-this-user-recommendations .button-show-less" should not be visible
+    And I should not see "oldestProg" in the "#recommended-projects__more_from_user" element
+    And I should see "project 02" in the "#recommended-projects__more_from_user" element
 
-  Scenario: Show more from a user should not show the same project.
-  If it's the only project of this user there is no "show more from a user" category
+  Scenario: User has no other projects and therefore the section should not be visible
     And I am on "/app/project/23"
     And I wait for the page to be loaded
-    Then I should see 0 "#more-from-this-user-recommendations .program"
-    And I should see "project 23"
-    But I should not see "More from"
-
-  Scenario: Not showing more programs when it's your own program
-    Given I log in as "Catrobat"
-    When I go to "/app/project/1"
-    And I wait for the page to be loaded
-    Then I should not see "More from"
-    But I should see 0 "#more-from-this-user-recommendations .program"
+    Then the element "#recommended-projects__more_from_user" should not be visible
+    And I should see "User3"
+    And I should not see "More from User3"

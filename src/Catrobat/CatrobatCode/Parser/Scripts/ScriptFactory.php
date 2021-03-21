@@ -14,8 +14,7 @@ class ScriptFactory
   {
     $generated_script = null;
 
-    switch ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE])
-    {
+    switch ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       case Constants::START_SCRIPT:
         $generated_script = new StartScript($script_xml_properties);
         break;

@@ -52,17 +52,13 @@ class CreateDownloadsCommand extends Command
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (null === $program || null === $user)
-    {
+    if (null === $program || null === $user) {
       return 1;
     }
 
-    try
-    {
+    try {
       $this->downloadProgram($program, $user);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return 2;
     }
     $output->writeln('Downloading '.$program->getName().' with user '.$user->getUsername());

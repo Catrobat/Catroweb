@@ -81,8 +81,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   {
     $token = $credentials[self::COOKIE_TOKEN_KEY];
 
-    if (null === $token || '' === $token)
-    {
+    if (null === $token || '' === $token) {
       throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
     }
 
@@ -90,8 +89,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
       ->findOneBy(['upload_token' => $token])
     ;
 
-    if (null === $user)
-    {
+    if (null === $user) {
       throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
     }
 

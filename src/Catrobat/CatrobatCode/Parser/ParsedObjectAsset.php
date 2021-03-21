@@ -33,8 +33,7 @@ class ParsedObjectAsset
   {
     // different catrobat versions: fileName is either in the attributes (old) or a separate member (new)
     $file_name = $asset_xml_properties['fileName'];
-    if ('' === $this->file_name)
-    {
+    if ('' === $this->file_name) {
       $file_name = $asset_xml_properties->fileName;
     }
 

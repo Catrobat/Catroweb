@@ -51,10 +51,8 @@ class CodeObject
   {
     $objects = [];
     $objects[] = $this;
-    foreach ($this->codeObjects as $object)
-    {
-      if (null != $object)
-      {
+    foreach ($this->codeObjects as $object) {
+      if (null != $object) {
         $objects = $this->addObjectsToArray($objects, $object->getCodeObjectsRecursively());
       }
     }
@@ -73,8 +71,7 @@ class CodeObject
   public function getCode(): string
   {
     $code = '';
-    foreach ($this->scripts as $script)
-    {
+    foreach ($this->scripts as $script) {
       $code .= $script->execute();
     }
 
@@ -92,8 +89,7 @@ class CodeObject
    */
   private function addObjectsToArray($objects, $objectsToAdd): array
   {
-    foreach ($objectsToAdd as $object)
-    {
+    foreach ($objectsToAdd as $object) {
       $objects[] = $object;
     }
 

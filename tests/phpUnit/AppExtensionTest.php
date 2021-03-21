@@ -102,10 +102,8 @@ class AppExtensionTest extends TestCase
 
   private function inArray(string $needle, array $haystack): bool
   {
-    foreach ($haystack as $value)
-    {
-      if (0 === strcmp($needle, $value[1]))
-      {
+    foreach ($haystack as $value) {
+      if (0 === strcmp($needle, $value[1])) {
         return true;
       }
     }
@@ -115,10 +113,8 @@ class AppExtensionTest extends TestCase
 
   private function isSelected(string $short, array $locales): bool
   {
-    foreach ($locales as $value)
-    {
-      if (0 === strcmp($short, $value[0]) && 0 === strcmp('1', $value[2]))
-      {
+    foreach ($locales as $value) {
+      if (0 === strcmp($short, $value[0]) && 0 === strcmp('1', $value[2])) {
         return true;
       }
     }

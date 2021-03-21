@@ -67,8 +67,7 @@ class ProjectDataFixtures
     $user = isset($config['owned by']) ?
       $this->user_manager->findUserByUsername($config['owned by']) : $this->user_data_fixtures->getDefaultUser();
 
-    if (array_key_exists('id', $config))
-    {
+    if (array_key_exists('id', $config)) {
       // use a fixed ID
       MyUuidGenerator::setNextValue($config['id']);
     }
@@ -83,16 +82,11 @@ class ProjectDataFixtures
     $project->setDownloads(isset($config['downloads']) ? (int) $config['downloads'] : 0);
     $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
     if (isset($config['apk_status']) && 'ready' === $config['apk_status']
-      || (isset($config['apk_ready']) && 'true' === $config['apk_ready']))
-    {
+      || (isset($config['apk_ready']) && 'true' === $config['apk_ready'])) {
       $project->setApkStatus(Program::APK_READY);
-    }
-    elseif (isset($config['apk_status']) && 'pending' === $config['apk_status'])
-    {
+    } elseif (isset($config['apk_status']) && 'pending' === $config['apk_status']) {
       $project->setApkStatus(Program::APK_PENDING);
-    }
-    else
-    {
+    } else {
       $project->setApkStatus(Program::APK_NONE);
     }
     $project->setUploadedAt(
@@ -117,39 +111,33 @@ class ProjectDataFixtures
     $project->setAcceptedForGameJam($config['accepted'] ?? false);
     $project->setGamejam($config['gamejam'] ?? null);
 
-    if (isset($config['apk request time']))
-    {
+    if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new DateTime($config['apk request time'], new DateTimeZone('UTC')));
     }
 
     $this->entity_manager->persist($project);
 
-    if (isset($config['tags_id']) && null !== $config['tags_id'])
-    {
+    if (isset($config['tags_id']) && null !== $config['tags_id']) {
       $tag_repo = $this->entity_manager->getRepository(Tag::class);
       $tags = explode(',', $config['tags_id']);
-      foreach ($tags as $tag_id)
-      {
+      foreach ($tags as $tag_id) {
         /** @var Tag $tag */
         $tag = $tag_repo->find($tag_id);
         $project->addTag($tag);
       }
     }
 
-    if (isset($config['extensions']) && '' !== $config['extensions'])
-    {
+    if (isset($config['extensions']) && '' !== $config['extensions']) {
       $extension_repo = $this->entity_manager->getRepository(Extension::class);
       $extensions = explode(',', $config['extensions']);
-      foreach ($extensions as $extension_name)
-      {
+      foreach ($extensions as $extension_name) {
         /** @var Extension $extension */
         $extension = $extension_repo->findOneBy(['name' => $extension_name]);
         $project->addExtension($extension);
       }
     }
 
-    if (Program::APK_READY === $project->getApkStatus())
-    {
+    if (Program::APK_READY === $project->getApkStatus()) {
       $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
       copy($this->FIXTURE_DIR.'test.catrobat', $temp_path);
       $this->apk_repository->save(new File($temp_path), $project->getId());
@@ -158,8 +146,7 @@ class ProjectDataFixtures
       );
     }
 
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->entity_manager->flush();
     }
 

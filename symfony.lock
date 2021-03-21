@@ -192,6 +192,12 @@
     "elasticsearch/elasticsearch": {
         "version": "v6.7.2"
     },
+    "ezimuel/guzzlestreams": {
+        "version": "3.0.1"
+    },
+    "ezimuel/ringphp": {
+        "version": "1.1.2"
+    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
     },
@@ -365,6 +371,9 @@
     },
     "myclabs/deep-copy": {
         "version": "1.9.5"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "netresearch/jsonmapper": {
         "version": "v2.1.0"
@@ -824,6 +833,9 @@
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.14.0"
+    },
+    "symfony/polyfill-php56": {
+        "version": "v1.20.0"
     },
     "symfony/polyfill-php70": {
         "version": "v1.14.0"

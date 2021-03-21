@@ -53,8 +53,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     /* @var MediaPackageFile $object */
     /** @var UploadedFile $file */
     $file = $object->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       return;
     }
 
@@ -70,8 +69,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   {
     /* @var MediaPackageFile $object */
     $file = $object->file;
-    if (null === $file)
-    {
+    if (null === $file) {
       return;
     }
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
@@ -87,8 +85,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
 
     /** @var UploadedFile $file */
     $file = $object->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       $object->setExtension($object->old_extension);
 
       return;
@@ -105,8 +102,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   {
     /* @var MediaPackageFile $object */
     $file = $object->file;
-    if (null === $file)
-    {
+    if (null === $file) {
       return;
     }
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());

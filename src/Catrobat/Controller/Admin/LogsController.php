@@ -29,22 +29,17 @@ class LogsController extends CRUDController
     $greater_equal_than_level = true;
     $line_count = 20;
     $file = null;
-    if ($request->isXmlHttpRequest())
-    {
-      if ($request->query->get('count'))
-      {
+    if ($request->isXmlHttpRequest()) {
+      if ($request->query->get('count')) {
         $line_count = $request->query->getInt('count');
       }
-      if (false !== $request->query->get('filter'))
-      {
+      if (false !== $request->query->get('filter')) {
         $filter = $request->query->getInt('filter');
       }
-      if ($request->query->get('greaterThan'))
-      {
+      if ($request->query->get('greaterThan')) {
         $greater_equal_than_level = $request->query->getBoolean('greaterThan');
       }
-      if ($request->query->get('file'))
-      {
+      if ($request->query->get('file')) {
         $file = $request->query->get('file');
       }
     }
@@ -53,8 +48,7 @@ class LogsController extends CRUDController
     $searchParam['greater_equal_than_level'] = $greater_equal_than_level;
     $searchParam['line_count'] = $line_count;
     $allFiles = $this->getAllFilesInDirByPattern(self::LOG_DIR, self::LOG_PATTERN);
-    if (!strlen(trim($file)) || is_null($file))
-    {
+    if (!strlen(trim($file)) || is_null($file)) {
       $file = $allFiles[0];
     }
 
@@ -69,8 +63,7 @@ class LogsController extends CRUDController
     $finder->sortByName();
 
     $files = [];
-    foreach ($finder as $file)
-    {
+    foreach ($finder as $file) {
       $files[] = $file->getRelativePathname();
     }
 
@@ -84,8 +77,7 @@ class LogsController extends CRUDController
 
     $index = 0;
     $content = [];
-    while (($line = fgets($file)) && ($index < $searchParam['line_count']))
-    {
+    while (($line = fgets($file)) && ($index < $searchParam['line_count'])) {
       $log_line = new LogLine($line);
 
       if (($searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() >= $searchParam['filter'])

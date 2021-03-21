@@ -42,8 +42,7 @@ class CatrobatFileSanitizer
       RecursiveIteratorIterator::CHILD_FIRST
     );
 
-    foreach ($files as $file)
-    {
+    foreach ($files as $file) {
       /** @var File $file */
       $filename = $file->getFilename();
       $filepath = $file->getRealPath();
@@ -54,8 +53,7 @@ class CatrobatFileSanitizer
         || $this->isAValidImageFile($filename, $relative_filepath, $extracted_file)
         || $this->isAValidSoundFile($filename, $relative_filepath, $extracted_file)
         || $this->isFileTheUsedScreenshot($relative_filepath)
-        || $this->isAValidSceneDirectory($relative_filepath))
-      {
+        || $this->isAValidSceneDirectory($relative_filepath)) {
         continue;
       }
 
@@ -84,10 +82,8 @@ class CatrobatFileSanitizer
   private function isAValidSceneDirectory(string $relative_filepath): bool
   {
     // Besides image and sound directories the root directory can contain a directory for every scene.
-    foreach ($this->scenes as $scene)
-    {
-      if ($relative_filepath === '/'.$scene)
-      {
+    foreach ($this->scenes as $scene) {
+      if ($relative_filepath === '/'.$scene) {
         return true;
       }
     }
@@ -113,23 +109,18 @@ class CatrobatFileSanitizer
     //   - image and sound directories in Scene directories
     //   - image and sound files when they are mentioned in the code.xml
 
-    if ($relative_filepath === $dir_name)
-    {
+    if ($relative_filepath === $dir_name) {
       return true;
     }
 
-    foreach ($this->scenes as $scene)
-    {
-      if ($relative_filepath === '/'.$scene.$dir_name)
-      {
+    foreach ($this->scenes as $scene) {
+      if ($relative_filepath === '/'.$scene.$dir_name) {
         return true;
       }
     }
 
-    foreach ($paths_array as $path)
-    {
-      if ($extracted_file->isFileMentionedInXml($filename) && $this->getRelativePath($path) === $relative_filepath)
-      {
+    foreach ($paths_array as $path) {
+      if ($extracted_file->isFileMentionedInXml($filename) && $this->getRelativePath($path) === $relative_filepath) {
         return true;
       }
     }
@@ -142,11 +133,9 @@ class CatrobatFileSanitizer
     $scenes = [];
     $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
     /** @var ParsedSceneProgram|ParsedSimpleProgram $parsed_project */
-    if (null !== $parsed_project && $parsed_project->hasScenes())
-    {
+    if (null !== $parsed_project && $parsed_project->hasScenes()) {
       $scenes_array = $parsed_project->getScenes();
-      foreach ($scenes_array as $scene)
-      {
+      foreach ($scenes_array as $scene) {
         /* @var $scene ParsedScene */
         $scenes[] = $scene->getName();
       }
@@ -157,8 +146,7 @@ class CatrobatFileSanitizer
 
   private function getRelativePath(?string $filepath): string
   {
-    if (null === $filepath)
-    {
+    if (null === $filepath) {
       return '';
     }
 
@@ -173,24 +161,19 @@ class CatrobatFileSanitizer
 
   private function deleteDirectory(string $dir): bool
   {
-    if (!file_exists($dir))
-    {
+    if (!file_exists($dir)) {
       return true;
     }
 
-    if (!is_dir($dir))
-    {
+    if (!is_dir($dir)) {
       return unlink($dir);
     }
 
-    foreach (scandir($dir) as $item)
-    {
-      if ('.' == $item || '..' == $item)
-      {
+    foreach (scandir($dir) as $item) {
+      if ('.' == $item || '..' == $item) {
         continue;
       }
-      if (!$this->deleteDirectory($dir.DIRECTORY_SEPARATOR.$item))
-      {
+      if (!$this->deleteDirectory($dir.DIRECTORY_SEPARATOR.$item)) {
         return false;
       }
     }

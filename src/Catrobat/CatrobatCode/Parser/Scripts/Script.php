@@ -52,16 +52,12 @@ abstract class Script
 
   protected function setImgFile(string $img_file): void
   {
-    if ($this->isCommentedOut())
-    {
+    if ($this->isCommentedOut()) {
       $this->commentOut();
-      foreach ($this->bricks as $brick)
-      {
+      foreach ($this->bricks as $brick) {
         $brick->commentOut();
       }
-    }
-    else
-    {
+    } else {
       $this->img_file = $img_file;
     }
   }
@@ -78,8 +74,7 @@ abstract class Script
 
   private function parseBricksRecursive(SimpleXMLElement $bricks_as_xml): void
   {
-    foreach ($bricks_as_xml as $brick_as_xml)
-    {
+    foreach ($bricks_as_xml as $brick_as_xml) {
       $this->addBrick($brick_as_xml);
       $this->checkAndParseChildrenBlocks($brick_as_xml);
     }
@@ -91,20 +86,15 @@ abstract class Script
    */
   private function checkAndParseChildrenBlocks(SimpleXMLElement $brick_as_xml): void
   {
-    if (isset($brick_as_xml->loopBricks))
-    {
+    if (isset($brick_as_xml->loopBricks)) {
       // "loop" .. "end of loop" -> auto generate "end of loop" bricks
       $this->parseChildBricks($brick_as_xml->loopBricks);
       $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::LOOP_END_BRICK);
-    }
-    elseif (isset($brick_as_xml->ifBranchBricks) && !isset($brick_as_xml->elseBranchBricks))
-    {
+    } elseif (isset($brick_as_xml->ifBranchBricks) && !isset($brick_as_xml->elseBranchBricks)) {
       // "if" .. "end if" -> auto generate "end if" bricks
       $this->parseChildBricks($brick_as_xml->ifBranchBricks);
       $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::ENDIF_BRICK);
-    }
-    elseif (isset($brick_as_xml->ifBranchBricks, $brick_as_xml->elseBranchBricks))
-    {
+    } elseif (isset($brick_as_xml->ifBranchBricks, $brick_as_xml->elseBranchBricks)) {
       // if .. else .. "end if"-> auto generate "else", "end if" bricks
       $this->parseChildBricks($brick_as_xml->ifBranchBricks);
       $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::ELSE_BRICK);
@@ -131,12 +121,9 @@ abstract class Script
 
   private function addBrick(SimpleXMLElement $brick_as_xml): void
   {
-    if (null !== $brick_as_xml[Constants::REFERENCE_ATTRIBUTE])
-    {
+    if (null !== $brick_as_xml[Constants::REFERENCE_ATTRIBUTE]) {
       $this->bricks[] = BrickFactory::generate($brick_as_xml->xpath($brick_as_xml[Constants::REFERENCE_ATTRIBUTE])[0]);
-    }
-    else
-    {
+    } else {
       $this->bricks[] = BrickFactory::generate($brick_as_xml);
     }
   }

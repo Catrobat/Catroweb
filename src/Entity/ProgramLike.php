@@ -109,8 +109,7 @@ class ProgramLike
    */
   public function updateTimestamps(): void
   {
-    if (null === $this->getCreatedAt())
-    {
+    if (null === $this->getCreatedAt()) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
@@ -165,12 +164,9 @@ class ProgramLike
 
   public function getTypeAsString(): ?string
   {
-    try
-    {
+    try {
       return self::$TYPE_NAMES[$this->type];
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return null;
     }
   }

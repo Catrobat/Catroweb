@@ -46,17 +46,14 @@ class BuildApkController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
 
-    if (null === $program || !$program->isVisible())
-    {
+    if (null === $program || !$program->isVisible()) {
       throw $this->createNotFoundException();
     }
 
-    if (Program::APK_READY === $program->getApkStatus())
-    {
+    if (Program::APK_READY === $program->getApkStatus()) {
       return JsonResponse::create(['status' => 'ready']);
     }
-    if (Program::APK_PENDING === $program->getApkStatus())
-    {
+    if (Program::APK_PENDING === $program->getApkStatus()) {
       return JsonResponse::create(['status' => 'pending']);
     }
 
@@ -78,18 +75,15 @@ class BuildApkController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
 
-    if (null === $program || !$program->isVisible())
-    {
+    if (null === $program || !$program->isVisible()) {
       throw $this->createNotFoundException();
     }
 
     $config = $this->getParameter('jenkins');
-    if ($request->query->get('token') !== $config['uploadtoken'])
-    {
+    if ($request->query->get('token') !== $config['uploadtoken']) {
       throw new AccessDeniedException();
     }
-    if (1 != $request->files->count())
-    {
+    if (1 != $request->files->count()) {
       throw new BadRequestHttpException('Wrong number of files: '.$request->files->count());
     }
 
@@ -109,18 +103,15 @@ class BuildApkController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
 
-    if (null === $program || !$program->isVisible())
-    {
+    if (null === $program || !$program->isVisible()) {
       throw $this->createNotFoundException();
     }
 
     $config = $this->getParameter('jenkins');
-    if ($request->query->get('token') !== $config['uploadtoken'])
-    {
+    if ($request->query->get('token') !== $config['uploadtoken']) {
       throw new AccessDeniedException();
     }
-    if (Program::APK_PENDING === $program->getApkStatus())
-    {
+    if (Program::APK_PENDING === $program->getApkStatus()) {
       $program->setApkStatus(Program::APK_NONE);
       $this->program_manager->save($program);
 

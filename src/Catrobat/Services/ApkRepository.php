@@ -15,8 +15,7 @@ class ApkRepository
     $apk_dir = $parameter_bag->get('catrobat.apk.dir');
     $dir = preg_replace('#([^/]+)$#', '$1/', $apk_dir);
 
-    if (!is_dir($dir))
-    {
+    if (!is_dir($dir)) {
       throw new InvalidStorageDirectoryException($dir.' is not a valid directory');
     }
 
@@ -31,8 +30,7 @@ class ApkRepository
   public function remove(string $id): void
   {
     $path = $this->dir.$this->generateFileNameFromId($id);
-    if (is_file($path))
-    {
+    if (is_file($path)) {
       unlink($path);
     }
   }

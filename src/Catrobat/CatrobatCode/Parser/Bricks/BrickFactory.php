@@ -14,8 +14,7 @@ class BrickFactory
   {
     $generated_brick = null;
 
-    switch ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE])
-    {
+    switch ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       // EVENT Bricks
       case Constants::BROADCAST_BRICK:
         $generated_brick = new BroadcastBrick($brick_xml_properties);

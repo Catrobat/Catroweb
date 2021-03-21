@@ -38,12 +38,9 @@ class DropMigrationCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->output = $output;
-    if ($this->dropMigrationVersions())
-    {
+    if ($this->dropMigrationVersions()) {
       $this->output->writeln('Table migration_versions dropped!');
-    }
-    else
-    {
+    } else {
       $this->output->writeln('Table migration_versions doesn\'t exist!');
     }
 
@@ -56,8 +53,7 @@ class DropMigrationCommand extends Command
   private function dropMigrationVersions(): bool
   {
     $schema_manager = $this->connection->getSchemaManager();
-    if ($schema_manager->tablesExist(['migration_versions']))
-    {
+    if ($schema_manager->tablesExist(['migration_versions'])) {
       $sql = 'DROP TABLE migration_versions;';
       $connection = $this->entity_manager->getConnection();
       $stmt = $connection->prepare($sql);
@@ -67,8 +63,7 @@ class DropMigrationCommand extends Command
       return true;
     }
 
-    if ($schema_manager->tablesExist(['doctrine_migration_versions']))
-    {
+    if ($schema_manager->tablesExist(['doctrine_migration_versions'])) {
       $sql = 'DROP TABLE doctrine_migration_versions;';
       $connection = $this->entity_manager->getConnection();
       $stmt = $connection->prepare($sql);

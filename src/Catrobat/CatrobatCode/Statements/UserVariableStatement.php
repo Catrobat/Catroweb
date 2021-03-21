@@ -31,8 +31,7 @@ class UserVariableStatement extends Statement
   public function __construct($statementFactory, $xmlTree, $spaces, $value, bool $useAt = false)
   {
     $end = self::TO_END_STRING;
-    if ($useAt)
-    {
+    if ($useAt) {
       $end = self::AT_END_STRING;
     }
 

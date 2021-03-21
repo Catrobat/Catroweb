@@ -57,15 +57,13 @@ class CSVUserSimilaritiesCommand extends Command
     $output_string = '';
 
     /** @var User $user */
-    foreach ($users as $user)
-    {
+    foreach ($users as $user) {
       $user_id = $user->getId();
 
       $remixes_of_user = $this->program_remix_repository->getDirectParentRelationDataOfUser($user_id);
 
       /** @var array $remix_of_user */
-      foreach ($remixes_of_user as $remix_of_user)
-      {
+      foreach ($remixes_of_user as $remix_of_user) {
         $output_string .= $user_id.';'.$remix_of_user['ancestor_id'].';'.$remix_of_user['descendant_id'].PHP_EOL;
       }
     }
@@ -76,8 +74,7 @@ class CSVUserSimilaritiesCommand extends Command
 
     $output_string = '';
     $likes_of_all_users = $this->program_like_repository->findAll();
-    foreach ($likes_of_all_users as $likes_of_user)
-    {
+    foreach ($likes_of_all_users as $likes_of_user) {
       $user_id = $likes_of_user->getUserId();
       $program_id = $likes_of_user->getProgramId();
       $output_string .= $user_id.';'.$program_id.PHP_EOL;

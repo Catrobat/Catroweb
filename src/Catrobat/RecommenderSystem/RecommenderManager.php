@@ -95,10 +95,8 @@ class RecommenderManager
     $already_added_relations = [];
 
     /** @var User $first_user */
-    foreach ($rated_users as $first_user)
-    {
-      if (null !== $progress_bar)
-      {
+    foreach ($rated_users as $first_user) {
+      if (null !== $progress_bar) {
         $progress_bar->setMessage('Computing like similarity of user (#'.$first_user->getId().')');
       }
 
@@ -106,8 +104,7 @@ class RecommenderManager
       $ids_of_programs_liked_by_first_user = array_map(fn (ProgramLike $like) => $like->getProgramId(), $first_user_likes);
 
       /** @var User $second_user */
-      foreach ($rated_users as $second_user)
-      {
+      foreach ($rated_users as $second_user) {
         $key = $first_user->getId().'_'.$second_user->getId();
         $reverse_key = $second_user->getId().'_'.$first_user->getId();
 
@@ -136,8 +133,7 @@ class RecommenderManager
         $number_of_same_programs_liked_by_both = count($ids_of_same_programs_liked_by_both);
         $number_of_all_programs_liked_by_any_of_both = count($ids_of_all_programs_liked_by_any_of_both);
 
-        if (0 === $number_of_same_programs_liked_by_both)
-        {
+        if (0 === $number_of_same_programs_liked_by_both) {
           continue;
         }
 
@@ -148,8 +144,7 @@ class RecommenderManager
         $this->entity_manager->flush();
       }
 
-      if (null !== $progress_bar)
-      {
+      if (null !== $progress_bar) {
         $progress_bar->clear();
         $progress_bar->advance();
         $progress_bar->display();
@@ -175,8 +170,7 @@ class RecommenderManager
         $this->app_request->isDebugBuildRequest(), $flavor
       );
     $programs_total_likes = [];
-    foreach ($most_liked_programs as $most_liked_program)
-    {
+    foreach ($most_liked_programs as $most_liked_program) {
       $program_id = $most_liked_program->getId();
       $programs_total_likes[$program_id] = $this->program_like_repository->totalLikeCount($program_id);
     }
@@ -187,11 +181,9 @@ class RecommenderManager
       );
     $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
-    foreach ($programs_total_likes as $program_id => $number_of_likes)
-    {
+    foreach ($programs_total_likes as $program_id => $number_of_likes) {
       $rank_in_top_downloads = array_search($program_id, $ids_of_most_downloaded_programs, true);
-      if (false !== $rank_in_top_downloads)
-      {
+      if (false !== $rank_in_top_downloads) {
         $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(70 - $rank_in_top_downloads * 1.5)) ** 2;
       }
     }
@@ -199,8 +191,7 @@ class RecommenderManager
     arsort($programs_total_likes);
 
     $recommendation_list = [];
-    foreach ($programs_total_likes as $program_id => $number_of_likes)
-    {
+    foreach ($programs_total_likes as $program_id => $number_of_likes) {
       $program = $this->program_repository->find($program_id);
       $recommendation_list[] = $program;
     }
@@ -234,8 +225,7 @@ class RecommenderManager
     $min_num_of_likes_required_to_allow_recommendations = 1;
 
     $all_likes_of_user = $this->getAlluserLikes($user);
-    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
-    {
+    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations) {
       return [];
     }
 
@@ -273,8 +263,7 @@ class RecommenderManager
     $min_num_of_likes_required_to_allow_recommendations = 1;
 
     $all_likes_of_user = $this->getAlluserLikes($user);
-    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
-    {
+    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations) {
       return [];
     }
 
@@ -293,11 +282,9 @@ class RecommenderManager
     );
     $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
-    foreach ($recommendation_weights as $key => $weight)
-    {
+    foreach ($recommendation_weights as $key => $weight) {
       $rank_in_top_downloads = array_search($key, $ids_of_most_downloaded_programs, true);
-      if (false !== $rank_in_top_downloads)
-      {
+      if (false !== $rank_in_top_downloads) {
         $recommendation_weights[$key] = $weight * cos(deg2rad(75 - $rank_in_top_downloads));
       }
     }
@@ -333,15 +320,13 @@ class RecommenderManager
 
     $all_likes_of_user = $this->getAllUserLikes($user);
 
-    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
-    {
+    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations) {
       return [];
     }
 
     $similar_user_similarity_mapping = $this->getSimilarUserSimilarityMapping($user);
 
-    if (count($similar_user_similarity_mapping) <= 0)
-    {
+    if (count($similar_user_similarity_mapping) <= 0) {
       return [];
     }
 
@@ -354,13 +339,11 @@ class RecommenderManager
     $recommendation_weights = [];
     $number_of_recommendations = [];
     $programs_liked_by_others = [];
-    foreach ($differing_likes as $differing_like)
-    {
+    foreach ($differing_likes as $differing_like) {
       $key = $differing_like->getProgramId();
       assert(!in_array($key, $excluded_ids_of_liked_programs, true));
 
-      if (!array_key_exists($key, $recommendation_weights))
-      {
+      if (!array_key_exists($key, $recommendation_weights)) {
         $recommendation_weights[$key] = 0.0;
         $number_of_recommendations[$key] = 0;
         $programs_liked_by_others[$key] = $differing_like->getProgram();
@@ -400,13 +383,11 @@ class RecommenderManager
     $above_average_recommendation = [];
     $top_recommendation = [];
 
-    foreach ($recommendations_by_id as $key => $recommendation_id)
-    {
+    foreach ($recommendations_by_id as $key => $recommendation_id) {
       $average_recommendation_weight[$recommendation_id] = $recommendation_weights[$recommendation_id] /
         $number_of_recommendations[$recommendation_id];
 
-      switch ($average_recommendation_weight[$recommendation_id])
-      {
+      switch ($average_recommendation_weight[$recommendation_id]) {
         case $average_recommendation_weight[$recommendation_id] >= $threshold_high_weight:
           $top_recommendation[$recommendation_id] =
             $this->program_like_repository->totalLikeCount($recommendation_id);
@@ -431,16 +412,13 @@ class RecommenderManager
      * since after above_average_recommendations there is only the regular recommendations
      * left which usually recommend popular items anyway.
      */
-    if (count($top_recommendation) >= 12)
-    {
+    if (count($top_recommendation) >= 12) {
       asort($top_recommendation);
       asort($above_average_recommendation);
       $recommendations_by_id = array_merge(array_keys($above_average_recommendation), $recommendations_by_id);
       $recommendations_by_id = array_merge(array_keys($top_recommendation), $recommendations_by_id);
       $recommendations_by_id = array_unique($recommendations_by_id);
-    }
-    elseif (count($above_average_recommendation) > 0 || count($top_recommendation) > 0)
-    {
+    } elseif (count($above_average_recommendation) > 0 || count($top_recommendation) > 0) {
       $above_average_recommendation = $above_average_recommendation + $top_recommendation;
       asort($above_average_recommendation);
       $recommendations_by_id = array_merge(array_keys($above_average_recommendation), $recommendations_by_id);
@@ -449,8 +427,7 @@ class RecommenderManager
 
     // $recommendation_by_id only holds the program ids. In order to return an array with
     // elements of the program entity $programs_liked_by_others is used.
-    $programs = array_map(function ($program_id) use ($programs_liked_by_others)
-    {
+    $programs = array_map(function ($program_id) use ($programs_liked_by_others) {
       return $programs_liked_by_others[$program_id];
     }, $recommendations_by_id);
 
@@ -483,19 +460,16 @@ class RecommenderManager
     $user_remix_relations = [];
 
     /** @var User $user */
-    foreach ($users as $user)
-    {
+    foreach ($users as $user) {
       $user_id = $user->getId();
-      if (null !== $progress_bar)
-      {
+      if (null !== $progress_bar) {
         $progress_bar->setMessage('Fetching remix parents of user (#'.$user_id.')');
         $progress_bar->clear();
         $progress_bar->advance();
         $progress_bar->display();
       }
       $remixes_of_user = $this->program_remix_repository->getDirectParentRelationDataOfUser($user_id);
-      if (count($remixes_of_user) > 0)
-      {
+      if (count($remixes_of_user) > 0) {
         $user_remix_relations[$user_id] = $remixes_of_user;
       }
     }
@@ -504,21 +478,17 @@ class RecommenderManager
     $already_added_relations = [];
     $user_counter = 0;
 
-    foreach ($user_remix_relations as $first_user_id => $first_user_remix_relations)
-    {
+    foreach ($user_remix_relations as $first_user_id => $first_user_remix_relations) {
       $ids_of_programs_remixed_by_first_user = array_unique(
-        array_map(function (ProgramRemixRelation $relation)
-        {
+        array_map(function (ProgramRemixRelation $relation) {
           return $relation->getAncestorId();
         }, $first_user_remix_relations)
       );
 
       ++$user_counter;
 
-      foreach ($user_remix_relations as $second_user_id => $second_user_remix_relations)
-      {
-        if (null !== $progress_bar)
-        {
+      foreach ($user_remix_relations as $second_user_id => $second_user_remix_relations) {
+        if (null !== $progress_bar) {
           $progress_bar->setMessage('('.$user_counter.'/'.$total_number_of_remixed_users
             .') - Computing remix similarity between user #'.$first_user_id.' and user #'.$second_user_id);
         }
@@ -534,8 +504,7 @@ class RecommenderManager
 
         $already_added_relations[] = $key;
         $ids_of_programs_remixed_by_second_user = array_unique(
-          array_map(function (ProgramRemixRelation $relation)
-          {
+          array_map(function (ProgramRemixRelation $relation) {
             return $relation->getAncestorId();
           }, $second_user_remix_relations)
         );
@@ -555,22 +524,19 @@ class RecommenderManager
         $number_of_same_programs_remixed_by_both = count($ids_of_same_programs_remixed_by_both);
         $number_of_all_programs_remixed_by_any_of_both = count($ids_of_all_programs_remixed_by_any_of_both);
 
-        if (0 === $number_of_same_programs_remixed_by_both)
-        {
+        if (0 === $number_of_same_programs_remixed_by_both) {
           continue;
         }
 
         $jaccard_similarity = floatval($number_of_same_programs_remixed_by_both) /
           floatval($number_of_all_programs_remixed_by_any_of_both);
-        if ($jaccard_similarity >= 0.01)
-        {
+        if ($jaccard_similarity >= 0.01) {
           $this->user_remix_similarity_relation_repository->insertRelation(
             $first_user_id, $second_user_id, $jaccard_similarity
           );
         }
 
-        if (null !== $progress_bar)
-        {
+        if (null !== $progress_bar) {
           $progress_bar->clear();
           $progress_bar->advance();
           $progress_bar->display();
@@ -596,8 +562,7 @@ class RecommenderManager
       ->getDirectParentRelationDataOfUser($user->getId())
     ;
 
-    if (count($parent_relations_of_all_remixed_programs_of_user) < $min_num_of_remixes_required_to_allow_recommendations)
-    {
+    if (count($parent_relations_of_all_remixed_programs_of_user) < $min_num_of_remixes_required_to_allow_recommendations) {
       return [];
     }
 
@@ -605,8 +570,7 @@ class RecommenderManager
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_remixed_programs = array_unique(
-      array_map(function (ProgramRemixRelation $relation)
-      {
+      array_map(function (ProgramRemixRelation $relation) {
         return $relation->getAncestorId();
       }, $parent_relations_of_all_remixed_programs_of_user)
     );
@@ -619,13 +583,11 @@ class RecommenderManager
 
     $recommendation_weights = [];
     $programs_remixed_by_others = [];
-    foreach ($relations_of_differing_parents as $relation_of_differing_parent)
-    {
+    foreach ($relations_of_differing_parents as $relation_of_differing_parent) {
       $key = $relation_of_differing_parent->getAncestorId();
       assert(!in_array($key, $excluded_ids_of_remixed_programs, true));
 
-      if (!array_key_exists($key, $recommendation_weights))
-      {
+      if (!array_key_exists($key, $recommendation_weights)) {
         $recommendation_weights[$key] = 0.0;
         $programs_remixed_by_others[$key] = $relation_of_differing_parent->getAncestor();
       }
@@ -636,8 +598,7 @@ class RecommenderManager
 
     arsort($recommendation_weights);
 
-    $programs = array_map(function ($program_id) use ($programs_remixed_by_others)
-    {
+    $programs = array_map(function ($program_id) use ($programs_remixed_by_others) {
       return $programs_remixed_by_others[$program_id];
     }, array_keys($recommendation_weights));
 
@@ -651,19 +612,16 @@ class RecommenderManager
     $programs = [];
     $programs_count = 0;
 
-    if (null !== $user)
-    {
+    if (null !== $user) {
       $user_id = $user->getId();
       $user_test_group = $this->entity_manager->find(UserTestGroup::class, $user_id);
-      if (null === $user_test_group)
-      {
+      if (null === $user_test_group) {
         $user_test_group = new UserTestGroup($user_id, random_int(1, 3));
         $this->entity_manager->persist($user_test_group);
         $this->entity_manager->flush();
       }
       // Depending on the user's test group different algorithms are presented.
-      switch ($user_test_group->getGroupNumber())
-         {
+      switch ($user_test_group->getGroupNumber()) {
              case 1:
                  $all_programs = $this->recommendHomepageProgramsAlgorithmOne($user, $flavor, $max_version);
                  break;
@@ -680,8 +638,7 @@ class RecommenderManager
       $programs = array_slice($all_programs, $offset, $limit);
     }
     // Recommendations for guest user (or logged in users who receive zero recommendations)
-    if ((null == $user) || (0 === $programs_count))
-    {
+    if ((null == $user) || (0 === $programs_count)) {
       $all_programs = $this->recommendHomepageProgramsForGuests($flavor, $max_version);
       $programs = array_slice($all_programs, $offset, $limit);
     }
@@ -691,8 +648,7 @@ class RecommenderManager
 
   private function imitateMerge(array &$array1, array $array2): void
   {
-    foreach ($array2 as $i)
-    {
+    foreach ($array2 as $i) {
       $array1[] = $i;
     }
   }
@@ -706,8 +662,7 @@ class RecommenderManager
   {
     $user_similarity_relations = $this->user_like_similarity_relation_repository->getRelationsOfSimilarUsers($user);
     $similar_user_similarity_mapping = [];
-    foreach ($user_similarity_relations as $relation)
-    {
+    foreach ($user_similarity_relations as $relation) {
       $id_of_similar_user = ($relation->getFirstUserId() !== $user->getId()) ?
         $relation->getFirstUserId() : $relation->getSecondUserId();
       $similar_user_similarity_mapping[$id_of_similar_user] = $relation->getSimilarity();
@@ -728,13 +683,11 @@ class RecommenderManager
 
     $recommendation_weights = [];
     $programs_liked_by_others = [];
-    foreach ($differing_likes as $differing_like)
-    {
+    foreach ($differing_likes as $differing_like) {
       $key = $differing_like->getProgramId();
       assert(!in_array($key, $excluded_ids_of_liked_programs, true));
 
-      if (!array_key_exists($key, $recommendation_weights))
-      {
+      if (!array_key_exists($key, $recommendation_weights)) {
         $recommendation_weights[$key] = 0.0;
         $programs_liked_by_others[$key] = $differing_like->getProgram();
       }

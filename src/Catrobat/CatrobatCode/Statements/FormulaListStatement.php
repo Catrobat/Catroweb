@@ -37,13 +37,11 @@ class FormulaListStatement extends Statement
     $counter = 0;
 
     $statementCount = count($this->statements);
-    foreach ($this->statements as $value)
-    {
+    foreach ($this->statements as $value) {
       ++$counter;
 
       $code .= $value->execute();
-      if ($counter < $statementCount)
-      {
+      if ($counter < $statementCount) {
         $code .= ', ';
       }
     }
@@ -58,18 +56,15 @@ class FormulaListStatement extends Statement
 
     $this->setVariables();
 
-    if (null != $this->xPosition)
-    {
+    if (null != $this->xPosition) {
       $code .= 'X('.$this->xPosition->execute().')';
     }
 
-    if (null != $this->xPosition && null != $this->yPosition)
-    {
+    if (null != $this->xPosition && null != $this->yPosition) {
       $code .= ', ';
     }
 
-    if (null != $this->yPosition)
-    {
+    if (null != $this->yPosition) {
       $code .= 'Y('.$this->yPosition->execute().')';
     }
 
@@ -78,16 +73,11 @@ class FormulaListStatement extends Statement
 
   protected function setVariables(): void
   {
-    foreach ($this->statements as $value)
-    {
-      if ($value instanceof FormulaStatement)
-      {
-        if (self::X_POSITION == $value->getCategory())
-        {
+    foreach ($this->statements as $value) {
+      if ($value instanceof FormulaStatement) {
+        if (self::X_POSITION == $value->getCategory()) {
           $this->xPosition = $value;
-        }
-        elseif (self::Y_POSITION == $value->getCategory())
-        {
+        } elseif (self::Y_POSITION == $value->getCategory()) {
           $this->yPosition = $value;
         }
       }

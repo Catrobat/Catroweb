@@ -25,11 +25,9 @@ class UploadNotificator
     /* @var $notification_repo NotificationRepository */
     $notification_repo = $this->notification_repo;
     $all_notifications = $notification_repo->findAll();
-    foreach ($all_notifications as $notification)
-    {
+    foreach ($all_notifications as $notification) {
       /* @var $notification Notification */
-      if (!$notification->getUpload())
-      {
+      if (!$notification->getUpload()) {
         continue;
       }
       $program = $event->getProgramEntity();

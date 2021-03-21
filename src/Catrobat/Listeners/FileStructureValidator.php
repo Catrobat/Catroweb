@@ -28,17 +28,14 @@ class FileStructureValidator
     ;
 
     $test = '';
-    foreach ($finder as $file1)
-    {
+    foreach ($finder as $file1) {
       $test .= $file1->getRelativePathname()."\n";
       file_put_contents('/home/catroweb/Catroweb/FileStructureValidator_error.log', $test);
     }
 
-    if ($finder->count() > 0)
-    {
+    if ($finder->count() > 0) {
       $list = [];
-      foreach ($finder as $file)
-      {
+      foreach ($finder as $file) {
         $list[] = $file->getRelativePathname();
       }
 

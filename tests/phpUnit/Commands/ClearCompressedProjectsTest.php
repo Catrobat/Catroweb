@@ -34,8 +34,7 @@ class ClearCompressedProjectsTest extends KernelTestCase
     $this->compressed_projects_dir = $kernel->getContainer()->getParameter('catrobat.file.storage.dir');
 
     // create dir if not exists
-    if (!file_exists($this->compressed_projects_dir))
-    {
+    if (!file_exists($this->compressed_projects_dir)) {
       mkdir($this->compressed_projects_dir);
     }
 
@@ -77,10 +76,8 @@ class ClearCompressedProjectsTest extends KernelTestCase
   private function clearCompressedProjectsDir(): void
   {
     $files = glob($this->compressed_projects_dir.'*'); // get all file names
-    foreach ($files as $file)
-    { // iterate files
-      if (is_file($file))
-      {
+    foreach ($files as $file) { // iterate files
+      if (is_file($file)) {
         unlink($file);
       } // delete file
     }
@@ -88,8 +85,7 @@ class ClearCompressedProjectsTest extends KernelTestCase
 
   private function generateUnusedData(): void
   {
-    for ($i = 0; $i < 15; ++$i)
-    {
+    for ($i = 0; $i < 15; ++$i) {
       touch($this->compressed_projects_dir.DIRECTORY_SEPARATOR.$i.'.catrobat');
     }
   }

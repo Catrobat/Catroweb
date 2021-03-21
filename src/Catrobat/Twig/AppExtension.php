@@ -56,8 +56,7 @@ class AppExtension extends AbstractExtension
    */
   public function decamelizeFilter($input)
   {
-    if (!is_string($input))
-    {
+    if (!is_string($input)) {
       return $input;
     }
 
@@ -84,15 +83,13 @@ class AppExtension extends AbstractExtension
    */
   public static function humanFriendlyNumber($input, TranslatorInterface $translator, $user_locale)
   {
-    if (!is_numeric($input))
-    {
+    if (!is_numeric($input)) {
       return $input;
     }
 
     $number_formatter = new NumberFormatter($user_locale, NumberFormatter::DECIMAL);
 
-    if ($input >= 1_000_000)
-    {
+    if ($input >= 1_000_000) {
       $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 1);
 
       return $number_formatter->format($input / 1_000_000).' '.
@@ -169,33 +166,27 @@ class AppExtension extends AbstractExtension
 
     $shortNames = [];
     $current_language_exists = false;
-    foreach ($finder as $translationFileName)
-    {
+    foreach ($finder as $translationFileName) {
       $shortName = $this->getShortLanguageNameFromFileName($translationFileName->getRelativePathname());
       $shortNames[] = $shortName;
-      if ($current_language === $shortName)
-      {
+      if ($current_language === $shortName) {
         $current_language_exists = true;
       }
     }
 
-    if (!$current_language_exists)
-    {
+    if (!$current_language_exists) {
       $current_language = explode('_', $current_language)[0];
     }
 
-    foreach ($shortNames as $shortName)
-    {
+    foreach ($shortNames as $shortName) {
       $isSelectedLanguage = $current_language === $shortName;
 
-      if (strcmp($current_language, $shortName))
-      {
+      if (strcmp($current_language, $shortName)) {
         $isSelectedLanguage = true;
       }
 
       // Is this locale available in Symfony?
-      if (array_key_exists($shortName, $available_locales))
-      {
+      if (array_key_exists($shortName, $available_locales)) {
         $locale = Locales::getName($shortName, $shortName);
 
         $list[] = [
@@ -206,8 +197,7 @@ class AppExtension extends AbstractExtension
       }
     }
 
-    if (!$isSelectedLanguage)
-    {
+    if (!$isSelectedLanguage) {
       $list = $this->setSelectedLanguage($list, $current_language);
     }
 
@@ -243,8 +233,7 @@ class AppExtension extends AbstractExtension
     $user_agent = $this->getUserAgent();
 
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    if (preg_match('/Catrobat/', $user_agent))
-    {
+    if (preg_match('/Catrobat/', $user_agent)) {
       $user_agent_array = explode('/', $user_agent);
 
       // $user_agent_array = [ "Catrobat", "0.93 PocketCode", 0.9.14 Platform", "Android" ];
@@ -252,8 +241,7 @@ class AppExtension extends AbstractExtension
       // $catrobat_language_array = [ "0.93", "PocketCode" ];
       $catrobat_language = floatval($catrobat_language_array[0]);
 
-      if ($catrobat_language < $program_catrobat_language)
-      {
+      if ($catrobat_language < $program_catrobat_language) {
         return false;
       }
     }
@@ -306,8 +294,7 @@ class AppExtension extends AbstractExtension
    */
   public function getMediaPackageImageUrl(MediaPackageFile $object): ?string
   {
-    switch ($object->getExtension())
-    {
+    switch ($object->getExtension()) {
       case 'jpg':
       case 'jpeg':
       case 'png':
@@ -322,8 +309,7 @@ class AppExtension extends AbstractExtension
 
   public function getMediaPackageSoundUrl(MediaPackageFile $object): ?string
   {
-    switch ($object->getExtension())
-    {
+    switch ($object->getExtension()) {
       case 'mp3':
       case 'mpga':
       case 'wav':
@@ -370,10 +356,8 @@ class AppExtension extends AbstractExtension
   private function setSelectedLanguage(array $languages, string $currentLanguage): array
   {
     $list = [];
-    foreach ($languages as $language)
-    {
-      if (false !== strpos($currentLanguage, $language[0]))
-      {
+    foreach ($languages as $language) {
+      if (false !== strpos($currentLanguage, $language[0])) {
         $language = [
           $language[0],
           $language[1],

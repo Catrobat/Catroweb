@@ -46,8 +46,7 @@ class AllSurveysAdmin extends AbstractAdmin
     $remaining_choices = Survey::getISO_639_1_Codes();
 
     /** @var Survey $existing_survey */
-    foreach ($existing_surveys as $existing_survey)
-    {
+    foreach ($existing_surveys as $existing_survey) {
       unset($remaining_choices[$existing_survey->getLanguageCode()]);
     }
 

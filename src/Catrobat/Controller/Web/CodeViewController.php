@@ -37,8 +37,7 @@ class CodeViewController extends AbstractController
     /** @var Program $project */
     $project = $this->program_manager->find($id);
 
-    if (!$this->program_manager->isProjectVisibleForCurrentUser($project))
-    {
+    if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
@@ -54,20 +53,16 @@ class CodeViewController extends AbstractController
 
   public function oldView(string $id, bool $visible = true): Response
   {
-    try
-    {
+    try {
       $program = $this->program_manager->find($id);
       $extracted_program = $this->extracted_file_repository->loadProgramExtractedFile($program);
-      if (null === $extracted_program)
-      {
+      if (null === $extracted_program) {
         throw new Exception();
       }
       $parsed_program = $this->code_parser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       $parsed_program = null;
       $web_path = null;
     }

@@ -426,8 +426,7 @@ class StatementFactory
   {
     $this->currentObject = new CodeObject();
     $this->currentObject->setName($objectTree[self::NAME_ATTRIBUTE]);
-    if (null == $this->currentObject->getName())
-    {
+    if (null == $this->currentObject->getName()) {
       return null;
     }
 
@@ -439,18 +438,15 @@ class StatementFactory
   public function createStatement(SimpleXMLElement $xmlTree, ?int $spaces): array
   {
     $statements = [];
-    if (0 == $xmlTree->count())
-    {
+    if (0 == $xmlTree->count()) {
       return $statements;
     }
     $children = $xmlTree->children();
 
-    foreach ($children as $statement)
-    {
+    foreach ($children as $statement) {
       $tmpStatement = null;
 
-      switch ($statement->getName())
-      {
+      switch ($statement->getName()) {
         case self::SCRIPT_LIST:
           $tmpStatement = new ScriptListStatement($this, $statement, $spaces);
           break;
@@ -532,14 +528,10 @@ class StatementFactory
           break;
       }
 
-      if (null != $tmpStatement)
-      {
-        if ($tmpStatement instanceof UserVariableStatement)
-        {
+      if (null != $tmpStatement) {
+        if ($tmpStatement instanceof UserVariableStatement) {
           array_unshift($statements, $tmpStatement);
-        }
-        else
-        {
+        } else {
           $statements[] = $tmpStatement;
         }
         $spaces = $tmpStatement->getSpacesForNextBrick();
@@ -556,8 +548,7 @@ class StatementFactory
   {
     $stmt = null;
     $children = $statement;
-    switch ((string) $statement[self::TYPE_ATTRIBUTE])
-    {
+    switch ((string) $statement[self::TYPE_ATTRIBUTE]) {
       case self::PLAY_SOUND_STMT:
         $stmt = new PlaySoundStatement($this, $children, $spaces);
         break;
@@ -727,8 +718,7 @@ class StatementFactory
   private function generateScriptStatement(SimpleXMLElement $statement, int $spaces): Statement
   {
     $children = $statement;
-    switch ((string) $statement[self::TYPE_ATTRIBUTE])
-    {
+    switch ((string) $statement[self::TYPE_ATTRIBUTE]) {
       case self::WHEN_SCRIPT:
         return new TappedScriptStatement($this, $children, $spaces);
       case self::START_SCRIPT:
@@ -751,10 +741,8 @@ class StatementFactory
   private function getTypeOfValue(SimpleXMLElement $statement): ?string
   {
     $siblings = $statement->xpath('preceding-sibling::* | following-sibling::*');
-    foreach ($siblings as $element)
-    {
-      if (self::TYPE_ATTRIBUTE == $element->getName())
-      {
+    foreach ($siblings as $element) {
+      if (self::TYPE_ATTRIBUTE == $element->getName()) {
         return (string) $element;
       }
     }
@@ -765,8 +753,7 @@ class StatementFactory
   private function generateUserVariableStatement(SimpleXMLElement $statement, int $spaces): UserVariableStatement
   {
     $variableName = (string) $statement;
-    if (null == $variableName)
-    {
+    if (null == $variableName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $variableName = (string) ($statement->xpath($reference)[0]);
     }
@@ -788,10 +775,8 @@ class StatementFactory
   private function isTypeExisting(SimpleXMLElement $statement, $reference, $type): bool
   {
     $elements = $statement->xpath($reference);
-    foreach ($elements as $element)
-    {
-      if ((string) $element[self::TYPE_ATTRIBUTE] == $type)
-      {
+    foreach ($elements as $element) {
+      if ((string) $element[self::TYPE_ATTRIBUTE] == $type) {
         return true;
       }
     }
@@ -825,8 +810,7 @@ class StatementFactory
   private function generateLookStatement(SimpleXMLElement $statement, int $spaces): LookStatement
   {
     $lookName = (string) $statement[self::NAME_ATTRIBUTE];
-    if (null == $lookName)
-    {
+    if (null == $lookName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $look = $statement->xpath($reference)[0];
       $lookName = (string) $look[self::NAME_ATTRIBUTE];
@@ -847,15 +831,12 @@ class StatementFactory
     $name = '';
     $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
 
-    if (null != $reference)
-    {
+    if (null != $reference) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $userListReference = $statement->xpath($reference)[0];
       // @phpstan-ignore-next-line
-      foreach ($userListReference->children() as $child)
-      {
-        if (self::NAME_ATTRIBUTE == $child->getName())
-        {
+      foreach ($userListReference->children() as $child) {
+        if (self::NAME_ATTRIBUTE == $child->getName()) {
           $name = (string) $child;
         }
       }

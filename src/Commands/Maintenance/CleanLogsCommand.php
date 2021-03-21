@@ -36,16 +36,12 @@ class CleanLogsCommand extends Command
     $this->output = $output;
     $this->output->writeln('Deleting log files');
     $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
-    try
-    {
+    try {
       $objs = glob($log_dir.'/*');
-      foreach ($objs as $obj)
-      {
+      foreach ($objs as $obj) {
         $this->fs->remove($obj);
       }
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $output->writeln('Removing log files failed with code '.$e->getCode());
     }
 

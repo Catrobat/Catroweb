@@ -30,28 +30,24 @@ class ExtractedCatrobatFile
     $this->dir_hash = $dir_hash;
     $this->web_path = $base_path;
 
-    if (!file_exists($base_dir.'code.xml'))
-    {
+    if (!file_exists($base_dir.'code.xml')) {
       throw new MissingXmlException();
     }
 
     $content = file_get_contents($base_dir.'code.xml');
-    if (!$content)
-    {
+    if (!$content) {
       throw new InvalidXmlException();
     }
     $content = str_replace('&#x0;', '', $content, $count);
 
     preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
     $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
-    for ($i = 0; $i < count($this->xml_filenames); ++$i)
-    {
+    for ($i = 0; $i < count($this->xml_filenames); ++$i) {
       $this->xml_filenames[$i] = $this->decodeXmlEntities($this->xml_filenames[$i]);
     }
 
     $xml = @simplexml_load_string($content);
-    if (!$xml)
-    {
+    if (!$xml) {
       throw new InvalidXmlException();
     }
     $this->program_xml_properties = $xml;
@@ -64,8 +60,7 @@ class ExtractedCatrobatFile
 
   public function isDebugBuild(): bool
   {
-    if (!isset($this->program_xml_properties->header->applicationBuildType))
-    {
+    if (!isset($this->program_xml_properties->header->applicationBuildType)) {
       return false; // old program do not have this field, + they should be release programs
     }
 
@@ -105,8 +100,7 @@ class ExtractedCatrobatFile
   public function getTags(): array
   {
     $tags = (string) $this->program_xml_properties->header->tags;
-    if (strlen($tags) > 0)
-    {
+    if (strlen($tags) > 0) {
       return explode(',', (string) $this->program_xml_properties->header->tags);
     }
 
@@ -118,24 +112,19 @@ class ExtractedCatrobatFile
     $finder = new Finder();
     $file_paths = [];
 
-    if ($this->hasScenes())
-    {
+    if ($this->hasScenes()) {
       $dir_regex = $this->path.'/*/images/';
       $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/images');
       $finder->files()->in($dir_regex);
-      foreach ($finder as $file)
-      {
+      foreach ($finder as $file) {
         $parts = explode($this->dir_hash.'/', $file->getRealPath());
         $file_paths[] = '/'.$this->web_path.$parts[1];
       }
-    }
-    else
-    {
+    } else {
       $directory = $this->path.'images/';
       $this->createDirectoryIfNotExist($directory);
       $finder->files()->in($directory);
-      foreach ($finder as $file)
-      {
+      foreach ($finder as $file) {
         $file_paths[] = '/'.$this->web_path.'images/'.$file->getFilename();
       }
     }
@@ -153,24 +142,19 @@ class ExtractedCatrobatFile
     $finder = new Finder();
     $file_paths = [];
 
-    if ($this->hasScenes())
-    {
+    if ($this->hasScenes()) {
       $dir_regex = $this->path.'/*/sounds/';
       $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/sounds');
       $finder->files()->in($dir_regex);
-      foreach ($finder as $file)
-      {
+      foreach ($finder as $file) {
         $parts = explode($this->dir_hash.'/', $file->getRealPath());
         $file_paths[] = '/'.$this->web_path.$parts[1];
       }
-    }
-    else
-    {
+    } else {
       $directory = $this->path.'sounds/';
       $this->createDirectoryIfNotExist($directory);
       $finder->files()->in($directory);
-      foreach ($finder as $file)
-      {
+      foreach ($finder as $file) {
         $file_paths[] = '/'.$this->web_path.'sounds/'.$file->getFilename();
       }
     }
@@ -190,38 +174,29 @@ class ExtractedCatrobatFile
   public function getScreenshotPath(): ?string
   {
     $screenshot_path = null;
-    if (is_file($this->path.'screenshot.png'))
-    {
+    if (is_file($this->path.'screenshot.png')) {
       $screenshot_path = $this->path.'screenshot.png';
-    }
-    elseif (is_file($this->path.'manual_screenshot.png'))
-    {
+    } elseif (is_file($this->path.'manual_screenshot.png')) {
       $screenshot_path = $this->path.'manual_screenshot.png';
-    }
-    elseif (is_file($this->path.'automatic_screenshot.png'))
-    {
+    } elseif (is_file($this->path.'automatic_screenshot.png')) {
       $screenshot_path = $this->path.'automatic_screenshot.png';
     }
     $finder = new Finder();
 
-    if (null === $screenshot_path)
-    {
+    if (null === $screenshot_path) {
       $fu = $finder->in($this->path)->files()->name('manual_screenshot.png');
 
       /** @var File $file */
-      foreach ($fu as $file)
-      {
+      foreach ($fu as $file) {
         $screenshot_path = $file->getPathname();
         break;
       }
     }
-    if (null === $screenshot_path)
-    {
+    if (null === $screenshot_path) {
       $fu = $finder->in($this->path)->files()->name('automatic_screenshot.png');
 
       /** @var File $file */
-      foreach ($fu as $file)
-      {
+      foreach ($fu as $file) {
         $screenshot_path = $file->getPathname();
         break;
       }
@@ -266,8 +241,7 @@ class ExtractedCatrobatFile
   public function saveProgramXmlProperties(): void
   {
     $file_overwritten = $this->program_xml_properties->asXML($this->path.'code.xml');
-    if (!$file_overwritten)
-    {
+    if (!$file_overwritten) {
       throw new Exception("Can't overwrite code.xml file");
     }
 
@@ -279,8 +253,7 @@ class ExtractedCatrobatFile
     $xml_string = preg_replace('#<receivedMessage>(.*)&lt;-&gt;(.*)</receivedMessage>#',
       '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;$2</receivedMessage>', $xml_string);
 
-    if (null != $xml_string)
-    {
+    if (null != $xml_string) {
       file_put_contents($this->path.'code.xml', $xml_string);
     }
   }
@@ -295,62 +268,46 @@ class ExtractedCatrobatFile
     $extracted_remixes = [];
     $temp = '';
 
-    for ($index = 0; $index < strlen($remixes_string); ++$index)
-    {
+    for ($index = 0; $index < strlen($remixes_string); ++$index) {
       $current_character = $remixes_string[$index];
 
-      if (RemixUrlIndicator::PREFIX_INDICATOR == $current_character)
-      {
-        if (RemixUrlParsingState::STARTING == $state)
-        {
+      if (RemixUrlIndicator::PREFIX_INDICATOR == $current_character) {
+        if (RemixUrlParsingState::STARTING == $state) {
           $state = RemixUrlParsingState::BETWEEN;
-        }
-        elseif (RemixUrlParsingState::TOKEN == $state)
-        {
+        } elseif (RemixUrlParsingState::TOKEN == $state) {
           $temp = '';
           $state = RemixUrlParsingState::BETWEEN;
         }
-      }
-      elseif (RemixUrlIndicator::SUFFIX_INDICATOR == $current_character)
-      {
-        if (RemixUrlParsingState::TOKEN == $state)
-        {
+      } elseif (RemixUrlIndicator::SUFFIX_INDICATOR == $current_character) {
+        if (RemixUrlParsingState::TOKEN == $state) {
           $extracted_url = trim($temp);
-          if (false === strpos($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0)
-          {
+          if (false === strpos($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0) {
             $extracted_remixes[] = new RemixData($extracted_url);
           }
           $temp = '';
           $state = RemixUrlParsingState::BETWEEN;
         }
-      }
-      else
-      {
+      } else {
         $state = RemixUrlParsingState::TOKEN;
         $temp .= $current_character;
       }
     }
 
     if (0 == count($extracted_remixes) && strlen($remixes_string) > 0
-      && false === strpos($remixes_string, RemixUrlIndicator::SEPARATOR))
-    {
+      && false === strpos($remixes_string, RemixUrlIndicator::SEPARATOR)) {
       $extracted_remixes[] = new RemixData($remixes_string);
     }
 
     $unique_remixes = [];
-    foreach ($extracted_remixes as $remix_data)
-    {
+    foreach ($extracted_remixes as $remix_data) {
       /** @var RemixData $remix_data */
-      if ('' === $remix_data->getProgramId())
-      {
+      if ('' === $remix_data->getProgramId()) {
         continue;
       }
 
-      if (!$remix_data->isScratchProgram())
-      {
+      if (!$remix_data->isScratchProgram()) {
         // projects can't be a remix of them self
-        if ($remix_data->getProgramId() === $program_id)
-        {
+        if ($remix_data->getProgramId() === $program_id) {
           continue;
         }
 
@@ -362,28 +319,24 @@ class ExtractedCatrobatFile
         $parent = null;
         $child = null;
 
-        if (null !== $program_repository)
-        {
+        if (null !== $program_repository) {
           $parent = $program_repository->find($remix_data->getProgramId());
           $child = $program_repository->find($program_id);
         }
 
-        if (null !== $parent && null !== $child)
-        {
+        if (null !== $parent && null !== $child) {
           $parent_upload_time = $parent->getUploadedAt();
           $child_upload_time = $child->getUploadedAt();
         }
 
         // case initial version: child must be newer than parent
-        if ($is_initial_version && $child_upload_time < $parent_upload_time)
-        {
+        if ($is_initial_version && $child_upload_time < $parent_upload_time) {
           continue;
         }
       }
 
       $unique_key = $remix_data->getProgramId().'_'.$remix_data->isScratchProgram();
-      if (!array_key_exists($unique_key, $unique_remixes))
-      {
+      if (!array_key_exists($unique_key, $unique_remixes)) {
         $unique_remixes[$unique_key] = $remix_data;
       }
     }
@@ -395,8 +348,7 @@ class ExtractedCatrobatFile
   {
     $objects = [];
     $objectList = $this->getCodeObjects();
-    foreach ($objectList as $object)
-    {
+    foreach ($objectList as $object) {
       $objects = $this->addObjectsToArray($objects, $object->getCodeObjectsRecursively());
     }
 
@@ -407,11 +359,9 @@ class ExtractedCatrobatFile
   {
     $objects = [];
     $objectList = $this->program_xml_properties->objectList->children();
-    foreach ($objectList as $object)
-    {
+    foreach ($objectList as $object) {
       $newObject = $this->getObject($object);
-      if (null != $newObject)
-      {
+      if (null != $newObject) {
         $objects[] = $newObject;
       }
     }
@@ -436,8 +386,7 @@ class ExtractedCatrobatFile
    */
   private function addObjectsToArray(array $objects, $objectsToAdd): array
   {
-    foreach ($objectsToAdd as $object)
-    {
+    foreach ($objectsToAdd as $object) {
       $objects[] = $object;
     }
 
@@ -449,11 +398,9 @@ class ExtractedCatrobatFile
     preg_match('@'.$dir_regex.'@', $dir_regex, $scene_names);
 
     /** @var string $scene_name */
-    foreach ($scene_names as $scene_name)
-    {
+    foreach ($scene_names as $scene_name) {
       $directory = $base_path.$scene_name.$dir_name;
-      if (!file_exists($directory))
-      {
+      if (!file_exists($directory)) {
         mkdir($directory, 0777, true);
       }
     }
@@ -461,8 +408,7 @@ class ExtractedCatrobatFile
 
   private function createDirectoryIfNotExist(string $directory): void
   {
-    if (!file_exists($directory))
-    {
+    if (!file_exists($directory)) {
       mkdir($directory, 0777, true);
     }
   }
