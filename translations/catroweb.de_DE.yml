@@ -88,7 +88,7 @@ programs:
   welcome:
     title: Willkommen bei Catrobat's %theme%
     subtitle: Erstelle Animationen, Spiele und mehr...
-    subtitle_embroidery: Nähe dein eigenes Muster auf deine T-shirts, Taschen, Hosen oder auf deine Smartphonehülle!
+    subtitle_embroidery: Sticke dein eigenes Muster auf deine T-shirts, Taschen, Hosen oder auf deine Smartphonehülle!
     download: Lade die App herunter
     statistics: Mehr Statistiken
   featured: Empfohlen
@@ -681,3 +681,11 @@ copy: 'Link kopieren'
 checkOutProject: 'Sieh dir dieses Projekt an:'
 community: 'Catrobat Community'
 back_to_app: 'Community verlassen'
+category:
+  recent: Neueste Projekte
+  random: Zufällige Projekte
+  most_viewed: Am meisten angesehen
+  most_downloaded: Meist heruntergeladen
+  example: Beispiel
+  scratch: Scratch Remixes
+  recommended: Empfohlene Projekte

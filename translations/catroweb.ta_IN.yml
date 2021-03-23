@@ -682,3 +682,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'கேட்ரோபாட் சமூகம்'
 back_to_app: 'Exit community'
+category:
+  recent: புதிய திட்டங்கள்
+  random: தொடர்பின்றி எடுக்கப்பட்ட திட்டங்கள்
+  most_viewed: அதிகமாக பார்க்கபட்டது
+  most_downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
+  example: Example
+  scratch: Scratch remixes
+  recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்

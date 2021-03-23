@@ -678,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat κοινότητα'
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: Πιο προβεβλημμένα
+  most_downloaded: Πιο κατεβασμένα
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects

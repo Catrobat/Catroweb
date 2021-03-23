@@ -678,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
+category:
+  recent: Yeni layihələr
+  random: Təsadüfi layihələr
+  most_viewed: Ən çox baxılan
+  most_downloaded: Ən çox endirilən
+  example: Example
+  scratch: Scratch remixləri
+  recommended: Tövsiyə edilən layihələr

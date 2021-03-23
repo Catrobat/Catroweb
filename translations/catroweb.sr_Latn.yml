@@ -682,3 +682,11 @@ copy: 'Kopiraj link'
 checkOutProject: 'Pogledajte ovaj projekat:'
 community: 'Catrobat zajednica'
 back_to_app: 'Napusti zajednicu'
+category:
+  recent: Najnoviji projekti
+  random: Nasumični projekti
+  most_viewed: Najgledanije
+  most_downloaded: Sa najviše preuzimanja
+  example: Example
+  scratch: Scratch remixi
+  recommended: Preporučeni projekti
