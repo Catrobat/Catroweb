@@ -683,3 +683,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'ชุมชน Catrobat'
 back_to_app: 'Exit community'
+category:
+  recent: โครงการใหม่ล่าสุด
+  random: โครงการสุ่ม
+  most_viewed: เข้าดูมากที่สุด
+  most_downloaded: ดาวน์โหลดมากที่สุด
+  example: Example
+  scratch: เกาผสม
+  recommended: โครงการแนะนำ

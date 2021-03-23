@@ -669,3 +669,11 @@ copy: 'Bağlantıyı kopyala'
 checkOutProject: 'Bu projeye göz atın:'
 community: 'Catrobat Topluluğu'
 back_to_app: 'Topluluktan çık'
+category:
+  recent: Yeni projeler
+  random: Rastgele projeler
+  most_viewed: En çok İzlenenler
+  most_downloaded: En çok indirilen
+  example: Örnek
+  scratch: Scratch remixleri
+  recommended: Önerilen projeler

@@ -675,3 +675,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'ক্যাট্রোব্যাট সম্প্রদায়'
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: সর্বোচ্চ  পরিদর্শন
+  most_downloaded: সর্বোচ্চ ডাউনলোডকৃত
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects

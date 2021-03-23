@@ -678,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'مجتمع كاتروبات'
 back_to_app: 'Exit community'
+category:
+  recent: أحدث المشاريع
+  random: Random projects
+  most_viewed: الأكثر عرضاً
+  most_downloaded: الأكثر تنزيلا
+  example: Example
+  scratch: ريميكسات سكراتش
+  recommended: المشاريع الموصى بها

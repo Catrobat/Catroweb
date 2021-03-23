@@ -678,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: ಬಹಳ ವೀಕ್ಷಿಸಿದ
+  most_downloaded: ಅತ್ಯಂತ ಡೌನ್ಲೋಡಾದ
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects

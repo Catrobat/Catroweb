@@ -681,3 +681,11 @@ copy: 'Copia link'
 checkOutProject: 'Fai il check out di questo progetto:'
 community: 'Comunità di Catrobat'
 back_to_app: 'Esci dalla community'
+category:
+  recent: Progetti più recenti
+  random: Progetti casuali
+  most_viewed: Il più visto
+  most_downloaded: Il più scaricato
+  example: Example
+  scratch: Remix da Scratch
+  recommended: Progetti consigliati

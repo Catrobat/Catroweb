@@ -679,3 +679,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
+category:
+  recent: Programet më të reja
+  random: Programe të rastësishëm
+  most_viewed: Më të shikuarat
+  most_downloaded: Më të shkarkuarat
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects
