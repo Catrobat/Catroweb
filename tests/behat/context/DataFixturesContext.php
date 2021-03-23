@@ -377,7 +377,7 @@ class DataFixturesContext implements KernelAwareContext
     $file_repo = $this->getFileRepository();
     foreach ($table->getHash() as $config) {
       $program = $this->insertProject($config, false);
-      $file_repo->saveProgramFile(new File($this->FIXTURES_DIR.'test.catrobat'), $program->getId());
+      $file_repo->saveProjectZipFile(new File($this->FIXTURES_DIR.'test.catrobat'), $program->getId());
     }
     $this->getManager()->flush();
   }
@@ -493,7 +493,7 @@ class DataFixturesContext implements KernelAwareContext
       'name' => $name,
     ];
     $this->insertProject($config);
-    $this->getFileRepository()->saveProgramFile(
+    $this->getFileRepository()->saveProjectZipFile(
       new File($this->FIXTURES_DIR.'test.catrobat'), $id
     );
   }
@@ -655,7 +655,7 @@ class DataFixturesContext implements KernelAwareContext
     ];
     $program = $this->insertProject($config);
 
-    $this->getFileRepository()->saveProgramFile(
+    $this->getFileRepository()->saveProjectZipFile(
       new File($this->FIXTURES_DIR.'GeneratedFixtures/phiro.catrobat'), $program->getId()
     );
   }

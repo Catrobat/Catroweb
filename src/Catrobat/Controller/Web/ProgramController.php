@@ -22,7 +22,6 @@ use App\Entity\User;
 use App\Entity\UserComment;
 use App\Repository\CatroNotificationRepository;
 use App\Utils\ElapsedTimeStringFormatter;
-use App\Utils\ImageUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -393,7 +392,7 @@ class ProgramController extends AbstractController
     if ($extracted_file) {
       $extracted_file->setDescription($new_description);
       $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
-      $this->file_repository->deleteProgramFileIfExists($program->getId());
+      $this->file_repository->deleteProjectZipFileIfExists($program->getId());
     }
 
     return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
@@ -444,18 +443,18 @@ class ProgramController extends AbstractController
     if ($extracted_file) {
       $extracted_file->setNotesAndCredits($new_credits);
       $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
-      $this->file_repository->deleteProgramFileIfExists($program->getId());
+      $this->file_repository->deleteProjectZipFileIfExists($program->getId());
     }
 
     return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
   }
 
   /**
-   * @Route("/project/{id}/uploadThumbnail", name="upload_project_thumbnail", methods={"POST"})
+   * @Route("/project/{id}/image", name="upload_project_thumbnail", methods={"POST"})
    *
    * @throws ImagickException
    */
-  public function uploadAvatarAction(Request $request, string $id): Response
+  public function uploadProjectImage(Request $request, string $id): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -473,18 +472,9 @@ class ProgramController extends AbstractController
 
     $image = $request->request->get('image');
 
-    try {
-      $image = ImageUtils::checkAndResizeBase64Image($image, null);
-    } catch (Exception $e) {
-      return JsonResponse::create(['statusCode' => $e->getMessage()]);
-    }
-
     $this->screenshot_repository->updateProgramAssets($image, $id);
 
-    return JsonResponse::create([
-      'statusCode' => Response::HTTP_OK,
-      'image_base64' => null,
-    ]);
+    return JsonResponse::create();
   }
 
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void

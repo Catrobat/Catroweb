@@ -151,21 +151,14 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^download button is pointing to the non existing project$/
+   * @Then project :id is missing its files
+   *
+   * @param mixed $id
    */
-  public function downloadButtonIsPointingToTheNonExistingProject(): void
+  public function projectIsMissingItsFiles($id): void
   {
-    $program = $this->getProgramManager()->find('1');
-    $program->setId('123456');
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Then /^project has no valid program file$/
-   */
-  public function projectHasNoValidFile(): void
-  {
-    $this->getFileRepository()->deleteProgramFile('2');
+    $this->getFileRepository()->deleteProjectExtractFiles($id);
+    $this->getFileRepository()->deleteProjectZipFile($id);
   }
 
   /**

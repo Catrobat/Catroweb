@@ -2,73 +2,68 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use App\Utils\Utils;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ProgramFileRepository
 {
-  public string $directory;
+  public string $zip_dir;
 
-  protected string $web_path;
+  protected string $extract_dir;
 
   private Filesystem $filesystem;
 
   private CatrobatFileCompressor $file_compressor;
 
-  private string $tmp_dir;
-
-  public function __construct(string $catrobat_file_storage_dir, string $catrobat_file_storage_path,
-                              CatrobatFileCompressor $file_compressor, string $catrobat_upload_temp_dir)
+  public function __construct(string $catrobat_file_storage_dir, string $catrobat_file_extract_dir,
+                              CatrobatFileCompressor $file_compressor)
   {
-    $directory = $catrobat_file_storage_dir;
-    $tmp_dir = $catrobat_upload_temp_dir;
+    Utils::verifyDirectoryExists($catrobat_file_storage_dir);
+    Utils::verifyDirectoryExists($catrobat_file_extract_dir);
 
-    if (!is_dir($directory)) {
-      throw new InvalidStorageDirectoryException($directory.' is not a valid directory');
-    }
+    $this->zip_dir = $catrobat_file_storage_dir;
+    $this->extract_dir = $catrobat_file_extract_dir;
 
-    if ($tmp_dir && !is_dir($tmp_dir)) {
-      throw new InvalidStorageDirectoryException($tmp_dir.' is not a valid directory');
-    }
-
-    $this->directory = $directory;
-    $this->web_path = $catrobat_file_storage_path;
-    $this->tmp_dir = $tmp_dir;
     $this->filesystem = new Filesystem();
     $this->file_compressor = $file_compressor;
   }
 
-  public function saveProgram(ExtractedCatrobatFile $extracted, string $id): void
+  public function zipProject(ExtractedCatrobatFile $extracted, string $id): void
   {
-    $this->file_compressor->compress($extracted->getPath(), $this->directory, $id);
+    $this->file_compressor->compress($extracted->getPath(), $this->zip_dir, $id);
   }
 
-  public function deleteProgramFile(string $id): void
+  public function deleteProjectExtractFiles(string $id): void
   {
-    $this->filesystem->remove($this->directory.$id.'.catrobat');
+    Utils::removeDirectory($this->extract_dir.$id);
   }
 
-  public function deleteProgramFileIfExists(string $id): void
+  public function deleteProjectZipFileIfExists(string $id): void
   {
-    if ($this->checkIfProgramFileExists($id)) {
-      $this->deleteProgramFile($id);
+    if ($this->checkIfProjectZipFileExists($id)) {
+      $this->deleteProjectZipFile($id);
     }
   }
 
-  public function saveProgramFile(File $file, string $id): void
+  public function deleteProjectZipFile(string $id): void
   {
-    $this->filesystem->copy($file->getPathname(), $this->directory.$id.'.catrobat');
+    $this->filesystem->remove($this->zip_dir.$id.'.catrobat');
   }
 
-  public function getProgramFile(string $id): File
+  public function saveProjectZipFile(File $file, string $id): void
   {
-    return new File($this->directory.$id.'.catrobat');
+    $this->filesystem->copy($file->getPathname(), $this->zip_dir.$id.'.catrobat');
   }
 
-  public function checkIfProgramFileExists(string $id): bool
+  public function getProjectZipFile(string $id): File
   {
-    if (file_exists($this->directory.$id.'.catrobat')) {
+    return new File($this->zip_dir.$id.'.catrobat');
+  }
+
+  public function checkIfProjectZipFileExists(string $id): bool
+  {
+    if (file_exists($this->zip_dir.$id.'.catrobat')) {
       return true;
     }
 

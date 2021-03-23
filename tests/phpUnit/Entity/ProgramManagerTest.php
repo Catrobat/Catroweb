@@ -190,7 +190,7 @@ class ProgramManagerTest extends TestCase
     ;
     fopen('/tmp/phpUnitTest', 'w');
     $file = new File('/tmp/phpUnitTest');
-    $this->file_repository->expects($this->atLeastOnce())->method('saveProgramFile')->with($file, 1);
+    $this->file_repository->expects($this->atLeastOnce())->method('saveProjectZipFile')->with($file, 1);
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
 

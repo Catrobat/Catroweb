@@ -2,9 +2,9 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Catrobat\Exceptions\Upload\InvalidArchiveException;
 use App\Utils\TimeUtils;
+use App\Utils\Utils;
 use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use ZipArchive;
@@ -17,9 +17,7 @@ class CatrobatFileExtractor
 
   public function __construct(string $extract_dir, string $extract_path)
   {
-    if (!is_dir($extract_dir)) {
-      throw new InvalidStorageDirectoryException($extract_dir.' is not a valid directory');
-    }
+    Utils::verifyDirectoryExists($extract_dir);
     $this->extract_dir = $extract_dir;
     $this->extract_path = $extract_path;
   }

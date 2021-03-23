@@ -68,15 +68,11 @@ services:
     #
     bind:
       App\Catrobat\Services\ScreenshotRepository: '@screenshot_repository'
-      $template_screenshot_repository: '@template_screenshot_repository'
 
       $kernel_root_dir: "%kernel.root_dir%"
       $catrobat_translation_dir: "%catrobat.translations.dir%"
-      $catrobat_upload_temp_dir: "%catrobat.upload.temp.dir%"
       $catrobat_file_storage_dir: "%catrobat.file.storage.dir%"
-      $catrobat_file_storage_path: "%catrobat.file.extract.path%"
-      $catrobat_template_storage_dir: "%catrobat.template.storage.dir%"
-      $catrobat_template_storage_path: "%catrobat.template.storage.path%"
+      $catrobat_file_extract_dir: "%catrobat.file.extract.dir%"
       $snapshot_dir: "%catrobat.snapshot.dir%"
       $program_finder: '@fos_elastica.finder.app_program.program'
       $user_finder: '@fos_elastica.finder.app_user.user'
@@ -247,17 +243,8 @@ services:
       - "%catrobat.thumbnail.path%"
       - "%catrobat.upload.temp.dir%"
       - "%catrobat.upload.temp.path%"
-    public: true
-
-  template_screenshot_repository:
-    class: App\Catrobat\Services\ScreenshotRepository
-    arguments:
-      - "%catrobat.template.screenshot.dir%"
-      - "%catrobat.template.screenshot.path%"
-      - "%catrobat.template.thumbnail.dir%"
-      - "%catrobat.template.thumbnail.path%"
-      - "%catrobat.upload.temp.dir%"
-      - "%catrobat.upload.temp.path%"
+      - "%catrobat.file.extract.dir%"
+      - "%catrobat.file.storage.dir%"
     public: true
 
   App\Catrobat\Services\AsyncHttpClient:

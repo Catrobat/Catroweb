@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Utils\Utils;
 use Imagick;
 use ImagickException;
@@ -28,21 +27,12 @@ class ImageRepository
   {
     $example_dir = $parameter_bag->get('catrobat.exampleimage.dir');
     $example_path = $parameter_bag->get('catrobat.exampleimage.path');
-    $example_dir = preg_replace('#([^\/]+)$#', '$1/', $example_dir);
-    $example_path = preg_replace('#([^\/]+)$#', '$1/', $example_path);
 
     $featured_dir = $parameter_bag->get('catrobat.featuredimage.dir');
     $featured_path = $parameter_bag->get('catrobat.featuredimage.path');
-    $featured_dir = preg_replace('#([^\/]+)$#', '$1/', $featured_dir);
-    $featured_path = preg_replace('#([^\/]+)$#', '$1/', $featured_path);
 
-    if (!is_dir($example_dir)) {
-      throw new InvalidStorageDirectoryException($example_dir.' is not a valid directory');
-    }
-
-    if (!is_dir($featured_dir)) {
-      throw new InvalidStorageDirectoryException($featured_dir.' is not a valid directory');
-    }
+    Utils::verifyDirectoryExists($example_dir);
+    Utils::verifyDirectoryExists($featured_dir);
 
     $this->example_dir = $example_dir;
     $this->example_path = $example_path;
