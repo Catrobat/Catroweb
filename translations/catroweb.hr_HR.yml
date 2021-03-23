@@ -683,3 +683,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat zajednica'
 back_to_app: 'Exit community'
+category:
+  recent: Najnoviji programi
+  random: Random projects
+  most_viewed: Najgledanije
+  most_downloaded: Sa najviše preuzimanja
+  example: Example
+  scratch: Scratch remixes
+  recommended: Preporuceni programi

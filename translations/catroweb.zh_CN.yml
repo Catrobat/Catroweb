@@ -683,3 +683,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat社区'
 back_to_app: 'Exit community'
+category:
+  recent: 最新项目
+  random: 随机项目
+  most_viewed: 看得最多的
+  most_downloaded: 下载得最多的
+  example: Example
+  scratch: Scratch 混成
+  recommended: 推荐的项目

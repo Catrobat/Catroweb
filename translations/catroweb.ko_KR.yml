@@ -672,3 +672,11 @@ copy: '링크 복사'
 checkOutProject: '프로젝트 점검하기'
 community: 'Catrobat 공유'
 back_to_app: '커뮤니티 나가기'
+category:
+  recent: 최신 프로그램
+  random: 랜덤 프로젝트
+  most_viewed: 가장 많이 본 프로그램
+  most_downloaded: 인기 다운로드
+  example: Example
+  scratch: 스크래치 리믹스
+  recommended: 추천 프로그램

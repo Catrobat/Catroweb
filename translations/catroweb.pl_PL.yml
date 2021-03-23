@@ -677,3 +677,11 @@ copy: 'Skopiuj link'
 checkOutProject: 'Sprawdź ten projekt:'
 community: 'Społeczność Catrobat'
 back_to_app: 'Opuść społeczność'
+category:
+  recent: Najnowsze projekty
+  random: Losowe projekty
+  most_viewed: Najczęściej oglądane
+  most_downloaded: Najczęściej pobierane
+  example: Example
+  scratch: Remiksy Scratcha
+  recommended: Polecane projekty
