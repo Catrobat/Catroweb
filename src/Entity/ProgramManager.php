@@ -522,24 +522,28 @@ class ProgramManager
   }
 
   /**
+   * @param mixed|null $excluded_program_ids
+   *
    * @return Program[]
    */
-  public function getUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0', ?int $limit = null, ?int $offset = null): array
+  public function getUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0', ?int $limit = null, ?int $offset = null, $excluded_program_ids = null): array
   {
     $debug_build = (true === $include_debug_build_programs) ? true : $this->app_request->isDebugBuildRequest();
 
-    return $this->program_repository->getUserPrograms($user_id, $debug_build, $max_version, $limit, $offset);
+    return $this->program_repository->getUserPrograms($user_id, $debug_build, $max_version, $limit, $offset, $excluded_program_ids);
   }
 
   /**
+   * @param mixed|null $excluded_program_ids
+   *
    * @return Program[]
    */
-  public function getPublicUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0', ?int $limit = null, ?int $offset = null): array
+  public function getPublicUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0', ?int $limit = null, ?int $offset = null, $excluded_program_ids = null): array
   {
     $debug_build = (true === $include_debug_build_programs) ?
       true : $this->app_request->isDebugBuildRequest();
 
-    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build, $max_version, $limit, $offset);
+    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build, $max_version, $limit, $offset, $excluded_program_ids);
   }
 
   /**

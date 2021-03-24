@@ -77,7 +77,7 @@ class GetRecommendedTest extends TestCase
 
     $program_manager->expects($this->any())
       ->method('getUserPrograms')
-      ->willReturn([$this->program0, $this->program1, $this->program2])
+      ->willReturn([$this->program0, $this->program2])
     ;
 
     $program_manager->expects($this->any())

@@ -197,7 +197,6 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
-    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
     $flavor = APIHelper::setDefaultFlavorOnNull($flavor);
 
     $projects = $this->program_manager->getProgram($id, true);
@@ -218,13 +217,10 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
       /** @var User $user */
       $user = $this->getUser();
       if (null !== $user && $user->getId() === $project_user_id) {
-        $programs = $this->program_manager->getUserPrograms($project_user_id, false, $max_version, $limit, $offset);
+        $programs = $this->program_manager->getUserPrograms($project_user_id, false, $max_version, $limit, $offset, [$project->getId()]);
       } else {
-        $programs = $this->program_manager->getPublicUserPrograms($project_user_id, false, $max_version, $limit, $offset);
+        $programs = $this->program_manager->getPublicUserPrograms($project_user_id, false, $max_version, $limit, $offset, [$project->getId()]);
       }
-      $programs = array_filter($programs, function ($program) use ($project) {
-        return $program->getId() !== $project->getId();
-      });
     } else {
       return [];
     }
