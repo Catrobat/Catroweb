@@ -3,37 +3,37 @@
 localLanguage: Anglisht
 username: Përdoruesi
 password: Fjalëkalimi
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: Krijo një Fjalëkalim të ri
+accountSettings: Konfigurimet e llogarisë
 email: E-Mail
 aboutPocketCode: Për Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: Rreth Nesh
+education: Edukimi
+chat: Biseda dhe Forume
+others: Të Tjera
 tutorials: Tutoriale
 googlePlay: Google Play
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: Galeri aplikacionesh Huawei 
 passwordsNoMatch: Fjalëkalimet nuk përputhen.
 error: Gabim
 cancel: Anulo
 report: Raport
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: Po, fshije!
+reportIt: Po, raportoje!
+areYouSure: A je i Sigurtë?
+noWayOfReturn: Nuk ka asnjë mundësi për të rikthyer veprimet tuaja!
 download: Shkarko si program
 description: Përshkrimi
 noDescription: Nuk ka përshkrim.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Si e krijuat këtë projekt? A keni përdorur ide, skenare ose vepra arti nga njerëz të tjerë? Falenderoi këtu.
 country: Shteti
 loginText: lidhu
 privacyPolicy: Privatësia
 imprint: Ngulit
-programDetails: Details
+programDetails: Detaje
 somethingWentWrong: 'Uuuuups diçka shkoj keq.'
 pleaseTryAgain: 'Ju lutemi provoni përsëri!'
 oldVersionError: 'Ju lutem merrni verionin më të ri të Pocket Code!'
@@ -41,42 +41,42 @@ more: 'më shumë'
 less: 'më pak'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
+more-information: 'Më shumë te dhëna'
+less-information: 'Më pak të dhëna'
 ok: OK
 clickToDownloadProgram: 'Për të shkarkuar programin "shembull" kliko %link_start% këtu %link_end%.'
 registrationError: 'Përdoruesi ose adresa E-mail janë në përdorim.'
 notifications: 'Lajmërimet'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'Ndjekësit'
+LikeNotifications: 'Reagimet'
 CommentNotifications: 'Komentet'
-RemixNotifications: 'Remixes'
+RemixNotifications: 'Ripërzierje'
 wellDone: "Të lumtë!"
 done: "U krye!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Po, fshije"
 cancelMessage: "Anulo"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "E pamundur të autorizohet përdoruesi"
 notificationsClearError: "E pamundur të shënohen lamerimet si të lexuara!"
 pleaseWait: "Ju lutem prisni..."
 projects: "Programet"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "të dhënat e identifikimit të llogarisë së jashtme"
+oauthInfo: 'Sapo keni përdorur një llogari të jashtme për t''u identifikuar. Ne krijuam një emër përdorimi të rastësishëm për ju. Nëse dëshironi të ndryshoni emrin tuaj të përdoruesit ose të krijoni një fjalëkalim të ri për llogarinë tuaj, ju lutemi shkoni në faqen tuaj të profilit. Klikoni  %link_start% këtu %link_end% për të shkuar në faqen tuaj të profilit'
+oauthHere: "këtu"
+statistics: "Statistikat"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Cilat projekte rekomandohen këtu?'
+      description: 'Sa më shumë reagime (Gisht lart, Buzëqeshje ...) projekti juaj merr, aq më lartë shfaqet në këtë listë.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
+  follows: Duke ndjekur
+  followers: Ndjekësit
+  follow: Ndiq
+  username: Përdorues
+  followsMe: Më ndjek
+  noFollowing: Ju nuk po ndiqni askënd aktualisht.
   noFollowers: You have no followers currently.
   noOtherFollowing: There are no following users currently.
   noOtherFollowers: There are no follower users currently.
@@ -92,11 +92,11 @@ programs:
     download: Download the app
     statistics: More statistics
   featured: E përzgjedhur
-  example: Examples
+  example: Shembuj
   newest: Programet më të reja
-  recommended: Recommended projects
+  recommended: Programet e rekomanduara
   scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  noPrograms: Për momentin nuk ka projekte.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
@@ -176,7 +176,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Reagimet
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixes
@@ -686,4 +686,4 @@ category:
   most_downloaded: Më të shkarkuarat
   example: Example
   scratch: Scratch remixes
-  recommended: Recommended projects
+  recommended: Programet e rekomanduara
