@@ -6,8 +6,6 @@
 #
 #  - Secrets required!
 #
-#  ToDo: currently disabled.
-#
 name: Continuous Delivery
 
 # Run-on every merge of a pull request into the master branch
@@ -27,7 +25,6 @@ jobs:
   #  - The current script is build within the Symfony framework, hence, the container is used to run the script.
   #
   deploy:
-    if: false # Currently disabled!
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
