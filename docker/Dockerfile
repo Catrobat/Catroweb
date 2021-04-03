@@ -30,6 +30,7 @@ RUN apt-get update && \
     php7.4-intl \
     php7.4-mbstring \
     php7.4-mysql \
+    php7.4-xdebug \
     php7.4-xml \
     php7.4-zip \
     libapache2-mod-php7.4 \
@@ -37,11 +38,9 @@ RUN apt-get update && \
     acl \
     make \
     libtool \
-    php-apcu \
     apache2 \
     git \
     curl \
-    php-xdebug \
     libgconf-2-4 \
     npm
 RUN npm install -g n

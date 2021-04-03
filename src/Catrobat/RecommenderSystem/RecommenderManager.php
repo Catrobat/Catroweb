@@ -124,7 +124,7 @@ class RecommenderManager
           )
         );
         // make copy of array -> merge with empty array is fast shortcut!
-        $temp = [...[], ...$ids_of_programs_liked_by_first_user];
+        $temp = array_merge([], $ids_of_programs_liked_by_first_user);
         // this imitate merge is way more faster than using array_merge() with huge arrays!
         // -> this has a significant impact on performance here!
         $this->imitateMerge($temp, $ids_of_programs_liked_by_second_user);
@@ -163,7 +163,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsForGuests($flavor, string $max_version = '0'): array
+  public function recommendHomepageProgramsForGuests($flavor, string $max_version = ''): array
   {
     $most_liked_programs =
       $this->program_repository->getMostLikedPrograms(
@@ -215,7 +215,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmOne(User $user, $flavor, string $max_version = '0'): array
+  public function recommendHomepageProgramsAlgorithmOne(User $user, $flavor, string $max_version = ''): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -253,7 +253,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmTwo(User $user, $flavor, string $max_version = '0'): array
+  public function recommendHomepageProgramsAlgorithmTwo(User $user, $flavor, string $max_version = ''): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -309,7 +309,7 @@ class RecommenderManager
    *
    * @return Program[]
    */
-  public function recommendHomepageProgramsAlgorithmThree(User $user, $flavor, string $max_version = '0'): array
+  public function recommendHomepageProgramsAlgorithmThree(User $user, $flavor, string $max_version = ''): array
   {
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
@@ -607,7 +607,7 @@ class RecommenderManager
     );
   }
 
-  public function getProjects(User $user = null, int $limit = 20, int $offset = 0, string $flavor = null, string $max_version = '0'): array
+  public function getProjects(User $user = null, int $limit = 20, int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
     $programs = [];
     $programs_count = 0;
