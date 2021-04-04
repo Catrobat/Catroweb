@@ -18,13 +18,15 @@ interface TranslatorAwareInterface
 
   public function isLocaleAValidTwoLetterLocale(string $locale): bool;
 
-  public function mapLocaleToLocaleWithUnderscore(string $locale): string;
+  public function normalizeLocaleFormatToLocaleWithUnderscore(string $locale): string;
 
   public function mapLocaleWithUnderscoreToTwoLetterCode(string $locale_with_underscore): string;
 
   public function mapTwoLetterCodeToLocaleWithUnderscore(string $two_letter_code): string;
 
-  public function getUsedLocale(): string;
+  public function getSupportedLanguageCodes(): array;
+
+  public function getLocale(): string;
 
   public function getLocaleFallback(): string;
 }

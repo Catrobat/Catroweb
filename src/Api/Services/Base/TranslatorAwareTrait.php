@@ -9,7 +9,7 @@ trait TranslatorAwareTrait
 {
   private TranslatorInterface $translator;
 
-  private ?string $used_locale = null;
+  private ?string $locale = null;
 
   public function initTranslator(TranslatorInterface $translator): void
   {
@@ -25,49 +25,55 @@ trait TranslatorAwareTrait
   {
     $domain = 'catroweb';
     $locale_with_underscore = $this->sanitizeLocale($locale);
-    $this->used_locale = $locale_with_underscore;
+    $this->locale = $locale_with_underscore;
 
     try {
       return $this->translator->trans($id, $parameter, $domain, $locale_with_underscore);
     } catch (Exception $e) {
-      // The format of $locale_with_underscore is correct, however we don't support this regional code yet.
-      // Therefore we must use another regional code of this locale.
-      $two_letter_code = $this->mapLocaleWithUnderscoreToTwoLetterCode($locale_with_underscore);
-      $locale_with_underscore = $this->mapTwoLetterCodeToLocaleWithUnderscore($two_letter_code);
-      $this->used_locale = $locale_with_underscore;
+      $this->locale = $this->getLocaleFallback();
 
-      return $this->translator->trans($id, $parameter, $domain, $locale_with_underscore);
+      return $this->translator->trans($id, $parameter, $domain, $this->locale);
     }
   }
 
   public function sanitizeLocale(?string $locale = null): string
   {
-    $locale = trim($locale);
+    $locale = $this->removeTrailingNoiseOfLocale($locale);
     if ('' === $locale) {
       return $this->getLocaleFallback();
     }
 
-    // Remove trailing noise
-    $locale = explode(' ', $locale)[0];
-
-    $locale = $this->mapLocaleToLocaleWithUnderscore($locale);
+    $locale = $this->normalizeLocaleFormatToLocaleWithUnderscore($locale);
 
     if ($this->isLocaleAValidLocaleWithUnderscore($locale)) {
-      return $locale;
+      if (in_array($locale, $this->getSupportedLanguageCodes(), true)) {
+        return $locale;
+      }
+
+      // Locale format is correct but the locale is not yet supported. Let's try without the regional code
+      $locale = $this->mapLocaleWithUnderscoreToTwoLetterCode($locale);
     }
 
     if ($this->isLocaleAValidTwoLetterLocale($locale)) {
-      // We don't support 2 letter codes natively in our filesystem, therefore we must map them first
+      // Two letter codes are not supported natively and must be mapped to an existing regional code
 
       return $this->mapTwoLetterCodeToLocaleWithUnderscore($locale);
     }
 
-    return $this->getLocaleFallback();
+    // Format is definitely invalid; However we can just try the first two letter; Maybe we are lucky ;)
+    $locale = strtolower(substr($locale, 0, 2));
+
+    return $this->mapTwoLetterCodeToLocaleWithUnderscore($locale);
+  }
+
+  private function removeTrailingNoiseOfLocale(?string $locale): string
+  {
+    return explode(' ', trim($locale))[0];
   }
 
   public function isLocaleAValidLocaleWithUnderscore(string $locale): bool
   {
-    return 1 === preg_match('/^([a-z]{2,3})(_[A-Z]+)$/', $locale);
+    return 1 === preg_match('/^([a-z]{2,3})(_[a-z,A-Z]+)$/', $locale);
   }
 
   public function isLocaleAValidTwoLetterLocale(string $locale): bool
@@ -75,7 +81,7 @@ trait TranslatorAwareTrait
     return 1 === preg_match('/^([a-z]{2,3})$/', $locale);
   }
 
-  public function mapLocaleToLocaleWithUnderscore(string $locale): string
+  public function normalizeLocaleFormatToLocaleWithUnderscore(string $locale): string
   {
     return str_replace('-', '_', $locale);
   }
@@ -95,10 +101,10 @@ trait TranslatorAwareTrait
    * my_dir = os.listdir(r"PATH_TO_DIR_REPLACE!")
    * my_dir.sort()
    * for item in my_dir:
-   * locale_with_underscore = (item.split('.'))[1]
-   * two_letter_code = (locale_with_underscore.split('_'))[0]
-   * print("case '" + two_letter_code + "':")
-   * print("  return '" + locale_with_underscore + "';")
+   *     locale_with_underscore = (item.split('.'))[1]
+   *     two_letter_code = (locale_with_underscore.split('_'))[0]
+   *     print("case '" + two_letter_code + "':")
+   *     print("  return '" + locale_with_underscore + "';")
    * ```
    *
    * @return string locale_with_underscore
@@ -240,9 +246,99 @@ trait TranslatorAwareTrait
     return $this->getLocaleFallback();
   }
 
-  public function getUsedLocale(): string
+  /**
+   * There is no need to query all Languages on every request. They change rarely.
+   * In case new locales are added this mapping should be updated here.
+   *
+   * Python code:
+   * ```
+   * import os
+   * my_dir = os.listdir(r"PATH_TO_DIR_REPLACE!")
+   * my_dir.sort()
+   * for item in my_dir:
+   *     locale_with_underscore = (item.split('.'))[1]
+   *     print("'" + locale_with_underscore + "',")
+   * ```
+   */
+  public function getSupportedLanguageCodes(): array
   {
-    return $this->used_locale ?? $this->getLocaleFallback();
+    return [
+      'af_ZA',
+      'ar_SA',
+      'az_AZ',
+      'bg_BG',
+      'bn_BD',
+      'bs_BA',
+      'ca_ES',
+      'chr_US',
+      'cs_CZ',
+      'da_DK',
+      'de_DE',
+      'el_GR',
+      'en',
+      'en_AU',
+      'en_CA',
+      'en_GB',
+      'es_ES',
+      'fa_AF',
+      'fa_IR',
+      'fi_FI',
+      'fr_FR',
+      'gl_ES',
+      'gu_IN',
+      'ha_HG',
+      'he_IL',
+      'hi_IN',
+      'hr_HR',
+      'hu_HU',
+      'id_ID',
+      'ig_NG',
+      'it_IT',
+      'ja_JP',
+      'ka_GE',
+      'kab_KAB',
+      'kk_KZ',
+      'kn_IN',
+      'ko_KR',
+      'lt_LT',
+      'mk_MK',
+      'ml_IN',
+      'ms_MY',
+      'nl_NL',
+      'no_NO',
+      'pl_PL',
+      'ps_AF',
+      'pt_BR',
+      'pt_PT',
+      'ro_RO',
+      'ru_RU',
+      'sd_PK',
+      'si_LK',
+      'sk_SK',
+      'sl_SI',
+      'sq_AL',
+      'sr_Latn',
+      'sr_SP',
+      'sv_SE',
+      'sw_KE',
+      'ta_IN',
+      'te_IN',
+      'th_TH',
+      'tl_PH',
+      'tr_TR',
+      'tw_TW',
+      'uk_UA',
+      'ur_PK',
+      'uz_UZ',
+      'vi_VN',
+      'zh_CN',
+      'zh_TW',
+    ];
+  }
+
+  public function getLocale(): string
+  {
+    return $this->locale ?? $this->getLocaleFallback();
   }
 
   public function getLocaleFallback(): string

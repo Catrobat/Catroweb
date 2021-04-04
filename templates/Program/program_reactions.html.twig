@@ -49,7 +49,7 @@
     </span>
     <span>
     <i class="material-icons d-none" id="project-reactions-spinner{{ suffix|default('') }}">
-      {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'reactions-spinner' ~ suffix|default(), small: 'true'} %}
+      {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'reactions-spinner' ~ suffix|default(), 'size': 'small'} %}
     </i>
     </span>
   {% if suffix is defined %}

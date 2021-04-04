@@ -34,6 +34,6 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
 
   public function addContentLanguageToHeaders(array &$responseHeaders): void
   {
-    $responseHeaders['Content-Language'] = $this->getUsedLocale();
+    $responseHeaders['Content-Language'] = $this->getLocale();
   }
 }
