@@ -11,7 +11,7 @@ trait TranslatorAwareTrait
 
   private ?string $used_locale = null;
 
-  public function initTranslator(TranslatorInterface $translator)
+  public function initTranslator(TranslatorInterface $translator): void
   {
     $this->translator = $translator;
   }
@@ -75,7 +75,7 @@ trait TranslatorAwareTrait
     return 1 === preg_match('/^([a-z]{2,3})$/', $locale);
   }
 
-  public function mapLocaleToLocaleWithUnderscore($locale): string
+  public function mapLocaleToLocaleWithUnderscore(string $locale): string
   {
     return str_replace('-', '_', $locale);
   }
