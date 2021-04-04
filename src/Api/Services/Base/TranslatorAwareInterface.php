@@ -24,7 +24,7 @@ interface TranslatorAwareInterface
 
   public function mapTwoLetterCodeToLocaleWithUnderscore(string $two_letter_code): string;
 
-  public function getUsedLocale(): string;
+  public function getLocale(): string;
 
   public function getLocaleFallback(): string;
 }

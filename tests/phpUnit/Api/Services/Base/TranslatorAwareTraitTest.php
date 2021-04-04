@@ -85,12 +85,11 @@ final class TranslatorAwareTraitTest extends CatrowebTestCase
     );
     $this->object = $this->getMockBuilder(TranslatorAwareTraitTestClass::class)
       ->disableOriginalConstructor()
-      ->onlyMethods(['sanitizeLocale', 'mapLocaleWithUnderscoreToTwoLetterCode', 'mapTwoLetterCodeToLocaleWithUnderscore'])
+      ->onlyMethods(['sanitizeLocale', 'getLocaleFallback'])
       ->getMockForAbstractClass()
     ;
     $this->object->expects($this->once())->method('sanitizeLocale');
-    $this->object->expects($this->once())->method('mapLocaleWithUnderscoreToTwoLetterCode');
-    $this->object->expects($this->once())->method('mapTwoLetterCodeToLocaleWithUnderscore');
+    $this->object->expects($this->once())->method('getLocaleFallback');
     $this->object->initTranslator($translator);
     $this->object->trans('id');
   }
@@ -122,6 +121,7 @@ final class TranslatorAwareTraitTest extends CatrowebTestCase
       ['de', 'de_DE'],
       ['de_DE-DE', 'en'],
       ['de_De', 'en'],
+      ['de_AT', 'de_DE'],
     ];
   }
 
