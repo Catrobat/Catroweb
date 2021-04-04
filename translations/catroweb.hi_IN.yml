@@ -135,7 +135,7 @@ programs:
     likersTitle: "उस प्रोजेक्ट पर प्रतिक्रिया देने वाले लोग"
     all: "सब"
   remixes: '{0}0 रीमिक्स | {1}1 रीमिक्स |]1, Inf]%remixes% रीमिक्स'
-  newRemixesNotificationTitle: '| {1} "%programName%" में 1 नया रीमिक्स है: |] 1, इन्फ] "%programName%" में %remixes% नए रीमिक्स हैं:'
+  newRemixesNotificationTitle: '|{1} "%programName%" में 1 नया रीमिक्स है: |] 1, Inf] "%programName%" में %remixes% नए रीमिक्स हैं:'
   submitted: प्रस्तुत परियोजनाएँ
   uploaded: अपलोड किए गए प्रोजेक्ट
   reportAsInappropriate: अनुचित विवरण दे

@@ -22,11 +22,12 @@ Feature: Get projects oversight
     | project 5  | 1      | 4        | yes      | pocketcode |
     | project 7  | 0      | 2        | yes      | pocketcode |
 
-  Scenario: Get a response
+  Scenario: All categories should be returned
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "Accept-Language" with value "de"
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/categories"
     Then the response status code should be "200"
+    And the response should contain all categories
 
   Scenario: Get response without language header
     And I request "GET" "/api/projects/categories"

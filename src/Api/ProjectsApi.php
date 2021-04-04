@@ -38,6 +38,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectDataResponse($project);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -58,6 +59,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createFeaturedProjectsResponse($featured_projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -81,6 +83,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -110,6 +113,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($recommended_projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -180,6 +184,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($programs);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -208,6 +213,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
     $responseCode = Response::HTTP_OK;
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -236,6 +242,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($user_projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -263,6 +270,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }

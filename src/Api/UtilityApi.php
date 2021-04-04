@@ -42,6 +42,7 @@ final class UtilityApi extends AbstractApiController implements UtilityApiInterf
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createSurveyResponse($survey);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
