@@ -3,7 +3,6 @@
 namespace Tests\phpUnit\Api\Services\Base;
 
 use App\Api\Exceptions\ApiException;
-use App\Api\Services\Base\PandaAuthenticationInterface;
 use App\Api\Services\Base\PandaAuthenticationTrait;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -11,12 +10,12 @@ use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 
 /**
  * @internal
- * @covers \PandaAuthenticationTrait
+ * @covers \Tests\phpUnit\Api\Services\Base\PandaAuthenticationTraitTestClass
  */
 final class PandaAuthenticationTraitTest extends CatrowebTestCase
 {
   /**
-   * @var PandaAuthenticationInterface|MockObject
+   * @var PandaAuthenticationTraitTestClass|MockObject
    */
   protected $object;
 

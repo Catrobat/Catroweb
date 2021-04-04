@@ -10,7 +10,7 @@ use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 
 /**
  * @internal
- * @covers \TranslatorAwareTrait
+ * @covers \Tests\phpUnit\Api\Services\Base\TranslatorAwareTraitTestClass
  */
 final class TranslatorAwareTraitTest extends CatrowebTestCase
 {
