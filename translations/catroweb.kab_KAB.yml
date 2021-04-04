@@ -166,9 +166,9 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
-  saveDescription: Save
+  saveDescription: Sekles
   editCredits: Edit the project notes and credits
-  saveCredits: Save
+  saveCredits: Sekles
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -275,7 +275,7 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Edit
-  done: Done
+  done: Immed
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
