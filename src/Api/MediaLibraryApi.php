@@ -32,6 +32,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($found_media_files);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -58,6 +59,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
       $media_package->getCategories()->toArray(), $limit, $offset
     );
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -78,6 +80,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -96,6 +99,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($media_package_files);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }

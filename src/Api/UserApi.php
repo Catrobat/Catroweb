@@ -53,6 +53,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     $token = $this->facade->getAuthenticationManager()->createAuthenticationTokenFromUser($user);
     $response = $this->facade->getResponseManager()->createUserRegisteredResponse($token);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -79,6 +80,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
       $this->facade->getAuthenticationManager()->getAuthenticatedUser()
     );
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -99,6 +101,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createBasicUserDataResponse($user);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }
@@ -144,6 +147,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createUsersDataResponse($users);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
   }

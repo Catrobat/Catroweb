@@ -3,7 +3,6 @@
 namespace App\Api\Services\Base;
 
 use App\Api\Services\ValidationWrapper;
-use App\Catrobat\Translate\TranslatorAwareTrait;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -11,7 +10,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * Class AbstractRequestValidator.
  */
-abstract class AbstractRequestValidator
+abstract class AbstractRequestValidator implements TranslatorAwareInterface
 {
   use TranslatorAwareTrait;
 

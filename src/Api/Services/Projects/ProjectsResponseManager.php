@@ -3,8 +3,8 @@
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractResponseManager;
+use App\Api\Services\Base\TranslatorAwareTrait;
 use App\Catrobat\Services\ImageRepository;
-use App\Catrobat\Translate\TranslatorAwareTrait;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;

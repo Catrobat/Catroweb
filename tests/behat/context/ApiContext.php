@@ -3072,6 +3072,32 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the response should contain all categories$/
+   */
+  public function theResponseShouldContainAllCategories(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+
+    $expected_categories = ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch', 'recommended'];
+    $categories = json_decode($response->getContent(), true);
+    Assert::assertEquals(count($expected_categories), count($categories), 'Number of returned programs should be '.count($expected_categories));
+
+    foreach ($categories as $category) {
+      Assert::assertIsString($category['type']);
+      Assert::assertIsString($category['name']);
+      Assert::assertIsArray($category['projectsList']);
+      foreach ($category['projectsList'] as $project) {
+        Assert::assertEquals(count($this->program_structure), count($project),
+          'Number of program fields should be '.count($this->program_structure));
+        foreach ($this->program_structure as $key) {
+          Assert::assertArrayHasKey($key, $project, 'Program should contain '.$key);
+          Assert::assertEquals($this->checkProjectFieldsValue($project, $key), true);
+        }
+      }
+    }
+  }
+
+  /**
    * @Then /^the response should contain example projects in the following order:$/
    */
   public function theResponseShouldContainExampleProjectsInTheFollowingOrder(TableNode $table): void

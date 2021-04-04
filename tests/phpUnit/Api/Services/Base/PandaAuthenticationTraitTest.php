@@ -11,7 +11,7 @@ use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \PandaAuthenticationTrait
  */
 final class PandaAuthenticationTraitTest extends CatrowebTestCase
 {

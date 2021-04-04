@@ -134,27 +134,5 @@ files: [
     # e.g. "identifier,source_phrase,context,uk,ru,fr"
     #
     # "scheme" : "",
-  },
-  # Fallback file formats
-  {
-    "source": "/translations/catroweb.en.yml",
-    "translation": "/translations/catroweb.%two_letters_code%.yml",
-    "dest": "/catroweb/translations/catroweb.en.yml",
-    "type": "yaml",
-    "update_option": "update_as_unapproved",
-  },
-  {
-    "source": "/translations/catroweb.en.yml",
-    "translation": "/translations/catroweb.%three_letters_code%.yml",
-    "dest": "/catroweb/translations/catroweb.en.yml",
-    "type": "yaml",
-    "update_option": "update_as_unapproved",
-  },
-  {
-    "source": "/translations/catroweb.en.yml",
-    "translation": "/translations/catroweb.%locale%.yml",
-    "dest": "/catroweb/translations/catroweb.en.yml",
-    "type": "yaml",
-    "update_option": "update_as_unapproved",
   }
 ]

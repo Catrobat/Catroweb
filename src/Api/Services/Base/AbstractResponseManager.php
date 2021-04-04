@@ -2,13 +2,12 @@
 
 namespace App\Api\Services\Base;
 
-use App\Catrobat\Translate\TranslatorAwareTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class AbstractResponseManager.
  */
-abstract class AbstractResponseManager
+abstract class AbstractResponseManager implements TranslatorAwareInterface
 {
   use TranslatorAwareTrait;
 
@@ -31,5 +30,10 @@ abstract class AbstractResponseManager
   public function addResponseHashToHeaders(array &$responseHeaders, $response): void
   {
     $responseHeaders['X-Response-Hash'] = md5(json_encode($response));
+  }
+
+  public function addContentLanguageToHeaders(array &$responseHeaders): void
+  {
+    $responseHeaders['Content-Language'] = $this->getUsedLocale();
   }
 }

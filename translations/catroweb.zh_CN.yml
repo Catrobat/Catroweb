@@ -450,7 +450,7 @@ time:
   hours.ago: '{1}1小时前|]1,Inf] %count%小时前'
   days.ago: '{1}1天前 |]1,Inf] %count%天前'
   months.ago: '{1}1个月前|]1,Inf] %count%月前。'
-  years.ago: '{1}一年前｜]1,Inf]一年多前'
+  years.ago: '{1}一年前|]1,Inf]一年多前'
 failure:
   upload: 上传您的应用程序时出错。
 api:
