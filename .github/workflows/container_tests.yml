@@ -22,7 +22,6 @@ on:
   push:
     branches:
       - master
-  #      - develop  # Too much overhead
   pull_request:
 
 jobs:
