@@ -38,37 +38,42 @@ trait TranslatorAwareTrait
 
   public function sanitizeLocale(?string $locale = null): string
   {
-    $locale = trim($locale);
+    $locale = $this->removeTrailingNoiseOfLocale($locale);
     if ('' === $locale) {
       return $this->getLocaleFallback();
     }
 
-    // Remove trailing noise
-    $locale = explode(' ', $locale)[0];
-
-    $locale = $this->mapLocaleToLocaleWithUnderscore($locale);
+    $locale = $this->normalizeLocaleFormatToLocaleWithUnderscore($locale);
 
     if ($this->isLocaleAValidLocaleWithUnderscore($locale)) {
       if (in_array($locale, $this->getSupportedLanguageCodes(), true)) {
         return $locale;
       }
 
-      // No support yet? let's try without the regional code
+      // Locale format is correct but the locale is not yet supported. Let's try without the regional code
       $locale = $this->mapLocaleWithUnderscoreToTwoLetterCode($locale);
     }
 
     if ($this->isLocaleAValidTwoLetterLocale($locale)) {
-      // We don't support 2 letter codes natively in our filesystem, therefore we must map them first
+      // Two letter codes are not supported natively and must be mapped to an existing regional code
 
       return $this->mapTwoLetterCodeToLocaleWithUnderscore($locale);
     }
 
-    return $this->getLocaleFallback();
+    // Format is definitely invalid; However we can just try the first two letter; Maybe we are lucky ;)
+    $locale = strtolower(substr($locale, 0, 2));
+
+    return $this->mapTwoLetterCodeToLocaleWithUnderscore($locale);
+  }
+
+  private function removeTrailingNoiseOfLocale(?string $locale): string
+  {
+    return explode(' ', trim($locale))[0];
   }
 
   public function isLocaleAValidLocaleWithUnderscore(string $locale): bool
   {
-    return 1 === preg_match('/^([a-z]{2,3})(_[A-Z]+)$/', $locale);
+    return 1 === preg_match('/^([a-z]{2,3})(_[a-z,A-Z]+)$/', $locale);
   }
 
   public function isLocaleAValidTwoLetterLocale(string $locale): bool
@@ -76,7 +81,7 @@ trait TranslatorAwareTrait
     return 1 === preg_match('/^([a-z]{2,3})$/', $locale);
   }
 
-  public function mapLocaleToLocaleWithUnderscore(string $locale): string
+  public function normalizeLocaleFormatToLocaleWithUnderscore(string $locale): string
   {
     return str_replace('-', '_', $locale);
   }

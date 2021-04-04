@@ -119,9 +119,10 @@ final class TranslatorAwareTraitTest extends CatrowebTestCase
       ['en-UK noise123424', 'en_UK'],
       ['de', 'de_DE'],
       ['de', 'de_DE'],
-      ['de_DE-DE', 'en'],
-      ['de_De', 'en'],
+      ['de_DE-DE', 'de_DE'],
+      ['de_De', 'de_DE'],
       ['de_AT', 'de_DE'],
+      ['DE', 'de_DE'],
     ];
   }
 
@@ -148,7 +149,7 @@ final class TranslatorAwareTraitTest extends CatrowebTestCase
       ['en-UK', false],
       ['', false],
       ['en_DE_DE', false],
-      ['en_uk', false],
+      ['en_uk', true],
       ['en_', false],
       ['en', false],
     ];
@@ -185,7 +186,7 @@ final class TranslatorAwareTraitTest extends CatrowebTestCase
   /**
    * @group unit
    * @small
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::mapLocaleToLocaleWithUnderscore
+   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::normalizeLocaleFormatToLocaleWithUnderscore
    *
    * @dataProvider dataProviderMapLocaleToLocaleWithUnderscore
    */
@@ -193,7 +194,7 @@ final class TranslatorAwareTraitTest extends CatrowebTestCase
   {
     $this->assertSame(
       $expected,
-      $this->object->mapLocaleToLocaleWithUnderscore($input)
+      $this->object->normalizeLocaleFormatToLocaleWithUnderscore($input)
     );
   }
 
