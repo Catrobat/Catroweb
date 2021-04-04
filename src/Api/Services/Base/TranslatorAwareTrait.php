@@ -49,8 +49,7 @@ trait TranslatorAwareTrait
     $locale = $this->mapLocaleToLocaleWithUnderscore($locale);
 
     if ($this->isLocaleAValidLocaleWithUnderscore($locale)) {
-      if (in_array($locale, $this->getSupportedLanguageCodes())) {
-
+      if (in_array($locale, $this->getSupportedLanguageCodes(), true)) {
         return $locale;
       }
 
@@ -103,7 +102,6 @@ trait TranslatorAwareTrait
    *     print("  return '" + locale_with_underscore + "';")
    * ```
    *
-   * @param string $two_letter_code
    * @return string locale_with_underscore
    */
   public function mapTwoLetterCodeToLocaleWithUnderscore(string $two_letter_code): string
