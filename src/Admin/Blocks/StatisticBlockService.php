@@ -6,6 +6,7 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
 class StatisticBlockService extends AbstractBlockService
 {
@@ -16,14 +17,13 @@ class StatisticBlockService extends AbstractBlockService
   /**
    * StatisticBlockService constructor.
    *
-   * @param mixed $name
-   * @param mixed $templating
-   * @param mixed $extraced_path
-   * @param mixed $apk_path
+   * @param Environment $environment
+   * @param mixed       $extraced_path
+   * @param mixed       $apk_path
    */
-  public function __construct($name, $templating, $extraced_path, $apk_path)
+  public function __construct($environment, $extraced_path, $apk_path)
   {
-    parent::__construct($name, $templating);
+    parent::__construct($environment);
     $this->extraced_path = $extraced_path;
     $this->apk_path = $apk_path;
   }
@@ -31,7 +31,7 @@ class StatisticBlockService extends AbstractBlockService
   /**
    * {@inheritdoc}
    */
-  public function execute(BlockContextInterface $blockContext, Response $response = null)
+  public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
   {
     $settings = $blockContext->getSettings();
 

@@ -803,7 +803,6 @@ services:
     tags:
       - { name: sonata.block, label: Cleanup }
     arguments:
-      - "catrowebadmin.block.tools.statistic"
       - "@twig"
       - "%catrobat.file.extract.dir%"
       - "%catrobat.apk.dir%"

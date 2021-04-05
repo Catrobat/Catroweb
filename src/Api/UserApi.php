@@ -37,6 +37,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = new RegisterErrorResponse($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
     }
@@ -119,6 +120,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = new UpdateUserErrorResponse($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
     }
