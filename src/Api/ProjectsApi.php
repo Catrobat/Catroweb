@@ -132,6 +132,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = new UploadErrorResponse($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
     }
@@ -152,6 +153,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
     }
@@ -280,6 +282,10 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    */
   public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
   {
+    // TODO: Implement projectIdReportPost() method.
+
     $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+
+    return null;
   }
 }
