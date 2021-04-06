@@ -32,17 +32,14 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     $extracted_catrobat_file = parent::extract($file);
 
     $all_parent_program_ids = [];
-    foreach ($this->remix_graph_mapping as $parent_program_data => $child_program_ids)
-    {
-      if (in_array($this->current_program_id, $child_program_ids, true))
-      {
+    foreach ($this->remix_graph_mapping as $parent_program_data => $child_program_ids) {
+      if (in_array($this->current_program_id, $child_program_ids, true)) {
         $all_parent_program_ids[] = explode(',', $parent_program_data);
       }
     }
 
     $previous_parent_string = '';
-    foreach ($all_parent_program_ids as $parent_program_index => $all_parent_program_id)
-    {
+    foreach ($all_parent_program_ids as $parent_program_index => $all_parent_program_id) {
       $parent_program_data = $all_parent_program_id;
       $parent_id = $parent_program_data[0];
       $current_parent_url = '' === $parent_program_data[1]
@@ -56,8 +53,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     $program_xml_properties = $extracted_catrobat_file->getProgramXmlProperties();
 
     // NOTE: force using Catrobat language version 0.994 in order to allow multiple parents (see: RemixUpdater.php)
-    if ($program_xml_properties->header->catrobatLanguageVersion < '0.994')
-    {
+    if ($program_xml_properties->header->catrobatLanguageVersion < '0.994') {
       $program_xml_properties->header->catrobatLanguageVersion = '0.993';
     }
 
@@ -76,8 +72,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
    */
   public function generateRemixUrlsStringForMergedProgram($previous_parent_string, $current_parent_url): string
   {
-    if ('' == $previous_parent_string)
-    {
+    if ('' == $previous_parent_string) {
       return $current_parent_url;
     }
 

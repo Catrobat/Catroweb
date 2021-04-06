@@ -32,8 +32,7 @@ class ThemeRequestListener
 
   public function onKernelRequest(RequestEvent $event): void
   {
-    if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType())
-    {
+    if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
       // In sub-request we can just re-use the theme from the master request
       $this->setupRouting();
       $this->setupRequestAttributes($event->getRequest());
@@ -47,14 +46,12 @@ class ThemeRequestListener
     // URI should not contain a flavor but the umbrella theme
     $this->routing_theme = $this->parameter_bag->get('umbrellaTheme');
 
-    if ('' === $requested_theme)
-    { // - @deprecated
+    if ('' === $requested_theme) { // - @deprecated
       // However, we still support legacy theming
       $requested_theme = $this->getThemeFromUrl($event);
 
       // Here we have to keep the flavoring as routing theme
-      if ($this->parameter_bag->get('adminTheme') !== $requested_theme)
-      {
+      if ($this->parameter_bag->get('adminTheme') !== $requested_theme) {
         $this->routing_theme = $requested_theme;
       }
     }
@@ -86,8 +83,7 @@ class ThemeRequestListener
 
   private function getFlavorFromTheme(string $theme): string
   {
-    if (!$this->flavorExists($theme))
-    {
+    if (!$this->flavorExists($theme)) {
       return 'pocketcode';
     }
 

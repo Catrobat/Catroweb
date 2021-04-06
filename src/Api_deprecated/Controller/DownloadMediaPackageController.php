@@ -31,14 +31,12 @@ class DownloadMediaPackageController extends AbstractController
     /** @var MediaPackageFile|null $media_file */
     $media_file = $this->entity_manager->getRepository(MediaPackageFile::class)->find($id);
 
-    if (null === $media_file)
-    {
+    if (null === $media_file) {
       throw new NotFoundHttpException();
     }
 
     $file = $file_repository->getMediaFile($id, $media_file->getExtension());
-    if ($file->isFile())
-    {
+    if ($file->isFile()) {
       $media_file->setDownloads($media_file->getDownloads() + 1);
       $this->entity_manager->persist($media_file);
       $this->entity_manager->flush();

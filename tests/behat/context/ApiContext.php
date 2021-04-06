@@ -117,7 +117,8 @@ class ApiContext implements KernelAwareContext
   private array $user_structure_extended = ['id', 'username', 'email', 'country',
     'projects', 'followers', 'following', ];
 
-  private array $featured_program_structure = ['id', 'name', 'author', 'project_id', 'project_url', 'featured_image'];
+  private array $featured_program_structure = ['id', 'name', 'author', 'project_id', 'project_url', 'url',
+    'featured_image', ];
 
   private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
     'author', 'extension', 'download_url', ];
@@ -128,8 +129,7 @@ class ApiContext implements KernelAwareContext
 
   public function getKernelBrowser(): KernelBrowser
   {
-    if (null === $this->kernel_browser)
-    {
+    if (null === $this->kernel_browser) {
       $this->kernel_browser = $this->getSymfonyService('test.client');
     }
 
@@ -216,14 +216,11 @@ class ApiContext implements KernelAwareContext
     $this->request_headers = (null == $this->request_headers) ? [] : $this->request_headers;
     $this->request_content = (null == $this->request_content) ? '' : $this->request_content;
 
-    if (0 == strcasecmp($method, 'GET'))
-    {
+    if (0 == strcasecmp($method, 'GET')) {
       $this->getKernelBrowser()->request(
         $method, $uri, $this->request_parameters, [], $this->request_headers, $this->request_content
       );
-    }
-    else
-    {
+    } else {
       $this->getKernelBrowser()->request(
         $method, $uri, $this->request_parameters, $this->request_files, $this->request_headers, $this->request_content
       );
@@ -316,12 +313,10 @@ class ApiContext implements KernelAwareContext
   public function iSearchSimilarProgramsForProgramId($id): void
   {
     $this->iHaveAParameterWithValue('program_id', $id);
-    if (!isset($this->request_parameters['limit']))
-    {
+    if (!isset($this->request_parameters['limit'])) {
       $this->iHaveAParameterWithValue('limit', '1');
     }
-    if (!isset($this->request_parameters['offset']))
-    {
+    if (!isset($this->request_parameters['offset'])) {
       $this->iHaveAParameterWithValue('offset', '0');
     }
     $this->iGetFrom('/app/api/projects/recsys.json');
@@ -339,8 +334,7 @@ class ApiContext implements KernelAwareContext
     $program_manager = $this->getProgramManager();
 
     $program = $program_manager->findOneByName($arg1);
-    if (null === $program)
-    {
+    if (null === $program) {
       throw new Exception('Program not found: '.$arg1);
     }
     $router = $this->getRouter();
@@ -488,8 +482,7 @@ class ApiContext implements KernelAwareContext
   public function iTryToRegisterWithout($missing_parameter): void
   {
     $this->prepareValidRegistrationParameters();
-    switch ($missing_parameter)
-    {
+    switch ($missing_parameter) {
       case 'a country':
         unset($this->request_parameters['registrationCountry']);
         break;
@@ -693,12 +686,9 @@ class ApiContext implements KernelAwareContext
     $jwt_manager = $this->getJwtManager();
     $user_manager = $this->getUserManager();
     $user = $user_manager->findUserByUsername($username);
-    if (null !== $user)
-    {
+    if (null !== $user) {
       $token = $jwt_manager->create($user);
-    }
-    else
-    {
+    } else {
       $token = $this->getJwtEncoder()->encode(['username' => $username, 'exp' => 3600]);
     }
     $this->request_headers['HTTP_authorization'] = 'Bearer '.$token;
@@ -749,8 +739,7 @@ class ApiContext implements KernelAwareContext
   public function getSymfonyProfile(): Profile
   {
     $profile = $this->getKernelBrowser()->getProfile();
-    if (!$profile)
-    {
+    if (!$profile) {
       throw new RuntimeException('The profiler is disabled. Activate it by setting '.'framework.profiler.only_exceptions to false in '.'your config');
     }
 
@@ -766,8 +755,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iUploadAProgramWith(string $program_attribute, string $api_version): void
   {
-    switch ($program_attribute)
-    {
+    switch ($program_attribute) {
       case 'a rude word in the description':
         $filename = 'program_with_rudeword_in_description.catrobat';
         break;
@@ -1085,13 +1073,10 @@ class ApiContext implements KernelAwareContext
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = $table->getHash();
     Assert::assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
-    for ($i = 0; $i < count($expected_programs); ++$i)
-    {
+    for ($i = 0; $i < count($expected_programs); ++$i) {
       $found = false;
-      for ($j = 0; $j < count($returned_programs); ++$j)
-      {
-        if ($expected_programs[$i]['name'] === $returned_programs[$j]['ProjectName'])
-        {
+      for ($j = 0; $j < count($returned_programs); ++$j) {
+        if ($expected_programs[$i]['name'] === $returned_programs[$j]['ProjectName']) {
           $found = true;
         }
       }
@@ -1217,11 +1202,9 @@ class ApiContext implements KernelAwareContext
     $profile = $this->getSymfonyProfile();
     /** @var MessageDataCollector $collector */
     $collector = $profile->getCollector('swiftmailer');
-    foreach ($collector->getMessages() as $message)
-    {
+    foreach ($collector->getMessages() as $message) {
       /** @var Swift_Message $message */
-      if ($recipient === array_keys($message->getTo())[0])
-      {
+      if ($recipient === array_keys($message->getTo())[0]) {
         return;
       }
     }
@@ -1295,8 +1278,7 @@ class ApiContext implements KernelAwareContext
   public function theResponseShouldContainTheElements(TableNode $table): void
   {
     $program_stats = $table->getHash();
-    foreach ($program_stats as $program_stat)
-    {
+    foreach ($program_stats as $program_stat) {
       $this->theResponseShouldContain($program_stat['id']);
       $this->theResponseShouldContain($program_stat['downloaded_at']);
       $this->theResponseShouldContain($program_stat['ip']);
@@ -1325,8 +1307,7 @@ class ApiContext implements KernelAwareContext
   {
     $pm = $this->getProgramManager();
     $program = $pm->find('1');
-    if (null === $program)
-    {
+    if (null === $program) {
       throw new Exception('last program not found');
     }
     $file = $this->generateProgramFileWith([
@@ -1369,8 +1350,7 @@ class ApiContext implements KernelAwareContext
   {
     $link = $this->getKernelBrowser()->getCrawler()->selectLink($arg1)->link();
 
-    if (!strcmp($link->getUri(), $arg2))
-    {
+    if (!strcmp($link->getUri(), $arg2)) {
       Assert::assertTrue(false, 'expected: '.$arg2.'  get: '.$link->getURI());
     }
   }
@@ -1439,8 +1419,7 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
     $response_array = json_decode($response->getContent(), true);
     $code = $response_array['statusCode'];
-    switch ($result)
-    {
+    switch ($result) {
       case 'accepted':
         Assert::assertEquals(200, $code, 'Program was rejected (Status code 200)');
         break;
@@ -1544,8 +1523,7 @@ class ApiContext implements KernelAwareContext
 
     Assert::assertEquals(count($returned_programs), count($expected_programs));
 
-    for ($i = 0; $i < count($returned_programs); ++$i)
-    {
+    for ($i = 0; $i < count($returned_programs); ++$i) {
       Assert::assertEquals(
         $expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'],
         'Wrong order of results'
@@ -1568,13 +1546,10 @@ class ApiContext implements KernelAwareContext
     $expected_programs_count = count($expected_programs);
     Assert::assertEquals($program_count, $random_programs_count, 'Wrong number of random programs');
 
-    for ($i = 0; $i < $random_programs_count; ++$i)
-    {
+    for ($i = 0; $i < $random_programs_count; ++$i) {
       $program_found = false;
-      for ($j = 0; $j < $expected_programs_count; ++$j)
-      {
-        if (0 === strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]['Name']))
-        {
+      for ($j = 0; $j < $expected_programs_count; ++$j) {
+        if (0 === strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]['Name'])) {
           $program_found = true;
         }
       }
@@ -1597,13 +1572,10 @@ class ApiContext implements KernelAwareContext
     $expected_programs_count = count($expected_programs);
     Assert::assertEquals($expected_programs_count, $random_programs_count, 'Wrong number of random programs');
 
-    for ($i = 0; $i < $random_programs_count; ++$i)
-    {
+    for ($i = 0; $i < $random_programs_count; ++$i) {
       $program_found = false;
-      for ($j = 0; $j < $expected_programs_count; ++$j)
-      {
-        if (0 === strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]))
-        {
+      for ($j = 0; $j < $expected_programs_count; ++$j) {
+        if (0 === strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j])) {
           $program_found = true;
         }
       }
@@ -1623,13 +1595,10 @@ class ApiContext implements KernelAwareContext
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = explode(',', $program_list);
 
-    for ($i = 0; $i < count($returned_programs); ++$i)
-    {
+    for ($i = 0; $i < count($returned_programs); ++$i) {
       $found = false;
-      for ($j = 0; $j < count($expected_programs); ++$j)
-      {
-        if ($expected_programs[$j] === $returned_programs[$i]['ProjectName'])
-        {
+      for ($j = 0; $j < count($expected_programs); ++$j) {
+        if ($expected_programs[$j] === $returned_programs[$i]['ProjectName']) {
           $found = true;
         }
       }
@@ -1694,8 +1663,7 @@ class ApiContext implements KernelAwareContext
     $stored_programs = $this->getStoredPrograms($expected_programs);
     Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
 
-    foreach ($returned_programs as $returned_program)
-    {
+    foreach ($returned_programs as $returned_program) {
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
       $this->assertProgramsEqual($stored_program, $returned_program);
     }
@@ -1714,11 +1682,9 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals(count($returned_programs), count($expected_programs),
       'Number of returned programs should be '.count($expected_programs));
 
-    foreach ($returned_programs as $returned_program)
-    {
+    foreach ($returned_programs as $returned_program) {
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
-      foreach ($this->featured_program_structure as $key)
-      {
+      foreach ($this->featured_program_structure as $key) {
         Assert::assertNotEmpty($stored_program);
         Assert::assertEquals($returned_program[$key], $stored_program[$key]);
       }
@@ -1733,12 +1699,10 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
 
-    foreach ($responseArray as $program)
-    {
+    foreach ($responseArray as $program) {
       Assert::assertEquals(count($this->program_structure), count($program),
         'Number of program fields should be '.count($this->program_structure));
-      foreach ($this->program_structure as $key)
-      {
+      foreach ($this->program_structure as $key) {
         Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
         Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
       }
@@ -1759,8 +1723,7 @@ class ApiContext implements KernelAwareContext
 
     Assert::assertEquals(count($returned_users), count($expected_users), 'Number of returned users should be '.count($expected_users));
 
-    foreach ($returned_users as $returned_user)
-    {
+    foreach ($returned_users as $returned_user) {
       $stored_user = $this->findUser($stored_users, $returned_user['username']);
       $this->assertUsersEqual($stored_user, $returned_user);
     }
@@ -1789,12 +1752,10 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
     $returned_users = json_decode($response->getContent(), true);
 
-    foreach ($returned_users as $user)
-    {
+    foreach ($returned_users as $user) {
       Assert::assertEquals(count($this->user_structure), count($user),
         'Number of user fields should be '.count($this->user_structure));
-      foreach ($this->user_structure as $key)
-      {
+      foreach ($this->user_structure as $key) {
         Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
         Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
       }
@@ -1811,8 +1772,7 @@ class ApiContext implements KernelAwareContext
 
     Assert::assertEquals(count($this->user_structure), count($user),
       'Number of user fields should be '.count($this->user_structure));
-    foreach ($this->user_structure as $key)
-    {
+    foreach ($this->user_structure as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
@@ -1828,8 +1788,7 @@ class ApiContext implements KernelAwareContext
 
     Assert::assertEquals(count($this->survey_structure), count($survey),
       'Number of survey fields should be '.count($this->survey_structure));
-    foreach ($this->survey_structure as $key)
-    {
+    foreach ($this->survey_structure as $key) {
       Assert::assertArrayHasKey($key, $survey, 'Survey should contain '.$key);
       Assert::assertEquals($this->checkSurveyFieldsValue($survey, $key), true);
     }
@@ -1845,8 +1804,7 @@ class ApiContext implements KernelAwareContext
 
     Assert::assertEquals(count($program), count($this->program_structure),
       'Number of program fields should be '.count($this->program_structure));
-    foreach ($this->program_structure as $key)
-    {
+    foreach ($this->program_structure as $key) {
       Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
       Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
     }
@@ -1860,12 +1818,10 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
     $returned_programs = json_decode($response->getContent(), true);
 
-    foreach ($returned_programs as $program)
-    {
+    foreach ($returned_programs as $program) {
       Assert::assertEquals(count($program), count($this->featured_program_structure),
         'Number of program fields should be '.count($this->featured_program_structure));
-      foreach ($this->featured_program_structure as $key)
-      {
+      foreach ($this->featured_program_structure as $key) {
         Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
         Assert::assertEquals($this->checkFeaturedProjectFieldsValue($program, $key), true);
       }
@@ -1880,12 +1836,10 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
     $returned_media_files = json_decode($response->getContent(), true);
 
-    foreach ($returned_media_files as $program)
-    {
+    foreach ($returned_media_files as $program) {
       Assert::assertEquals(count($program), count($this->media_file_structure),
         'Number of program fields should be '.count($this->media_file_structure));
-      foreach ($this->media_file_structure as $key)
-      {
+      foreach ($this->media_file_structure as $key) {
         Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
         Assert::assertEquals($this->checkMediaFileFieldsValue($program, $key), true);
       }
@@ -1905,11 +1859,9 @@ class ApiContext implements KernelAwareContext
 
     Assert::assertEquals(count($returned_files), count($expected_files),
       'Number of returned programs should be '.count($expected_files));
-    foreach ($returned_files as $returned_file)
-    {
+    foreach ($returned_files as $returned_file) {
       $stored_file = $this->findProgram($stored_files, $returned_file['name']);
-      foreach ($this->media_file_structure as $key)
-      {
+      foreach ($this->media_file_structure as $key) {
         Assert::assertNotEmpty($stored_file);
         Assert::assertEquals($returned_file[$key], $stored_file[$key]);
       }
@@ -1949,8 +1901,7 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals(count($returned_programs), count($expected_programs),
       'Number of returned programs should be '.count($returned_programs));
 
-    for ($i = 0; $i < count($returned_programs); ++$i)
-    {
+    for ($i = 0; $i < count($returned_programs); ++$i) {
       Assert::assertEquals(
         $expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'],
         'Wrong order of results'
@@ -1983,8 +1934,7 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals(count($returned_programs), count($expected_programs),
       'Number of returned programs should be '.count($returned_programs));
 
-    for ($i = 0; $i < count($returned_programs); ++$i)
-    {
+    for ($i = 0; $i < count($returned_programs); ++$i) {
       Assert::assertEquals(
         $expected_programs[$i]['Name'], $returned_programs[$i]['name'],
         'Wrong order of results'
@@ -2012,16 +1962,11 @@ class ApiContext implements KernelAwareContext
    */
   public function iHaveAParameterWithTheMdChecksumOfTheUploadFile(string $parameter, string $api_version): void
   {
-    if ('1' == $api_version)
-    {
+    if ('1' == $api_version) {
       $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
-    }
-    elseif ('2' == $api_version)
-    {
+    } elseif ('2' == $api_version) {
       $this->request_parameters[$parameter] = md5_file($this->request_files['file']->getPathname());
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
   }
@@ -2031,8 +1976,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iHaveThePostParameters(TableNode $table): void
   {
-    foreach ($table->getHash() as $parameter)
-    {
+    foreach ($table->getHash() as $parameter) {
       $this->request_parameters[$parameter['name']] = $parameter['value'];
     }
   }
@@ -2068,21 +2012,16 @@ class ApiContext implements KernelAwareContext
    */
   public function itShouldBeUpdated(string $api_version): void
   {
-    if ('1' == $api_version)
-    {
+    if ('1' == $api_version) {
       $last_json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
       $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
       Assert::assertEquals($last_json['projectId'], $json['projectId'],
         $this->getKernelBrowser()->getResponse()->getContent()
       );
-    }
-    elseif ('2' == $api_version)
-    {
+    } elseif ('2' == $api_version) {
       Assert::assertEquals($this->getKernelBrowser()->getResponse()->headers->get('Location'),
         $this->getKernelBrowser()->getResponse()->headers->get('Location'));
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
   }
@@ -2094,8 +2033,7 @@ class ApiContext implements KernelAwareContext
    */
   public function theUploadProblem($problem): void
   {
-    switch ($problem)
-    {
+    switch ($problem) {
       case 'no authentication':
         $this->method = 'POST';
         $this->url = '/app/api/upload/upload.json';
@@ -2155,28 +2093,20 @@ class ApiContext implements KernelAwareContext
    */
   public function iUploadThisProgramWithId(string $id, string $api_version): void
   {
-    if ('1' == $api_version)
-    {
-      if (array_key_exists('deviceLanguage', $this->request_parameters))
-      {
+    if ('1' == $api_version) {
+      if (array_key_exists('deviceLanguage', $this->request_parameters)) {
         $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null,
           $api_version, $id, 'pocketcode');
-      }
-      else
-      {
+      } else {
         $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
       }
 
       $resp_array = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent());
       $resp_array['projectId'] = $id;
       $this->getKernelBrowser()->getResponse()->setContent(json_encode($resp_array));
-    }
-    elseif ('2' == $api_version)
-    {
+    } elseif ('2' == $api_version) {
       $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
   }
@@ -2357,8 +2287,7 @@ class ApiContext implements KernelAwareContext
    */
   public function thereIsACheckTokenProblem($problem): void
   {
-    switch ($problem)
-    {
+    switch ($problem) {
       case 'invalid token':
         $this->method = 'POST';
         $this->url = '/app/api/checkToken/check.json';
@@ -2391,8 +2320,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iUseTheApp(string $language, string $api_version): void
   {
-    switch ($language)
-    {
+    switch ($language) {
       case 'english':
         $deviceLanguage = 'en';
         break;
@@ -2403,16 +2331,11 @@ class ApiContext implements KernelAwareContext
         $deviceLanguage = 'NotExisting';
     }
 
-    if ('1' == $api_version)
-    {
+    if ('1' == $api_version) {
       $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
-    }
-    elseif ('2' == $api_version)
-    {
+    } elseif ('2' == $api_version) {
       $this->iHaveARequestHeaderWithValue('HTTP_ACCEPT_LANGUAGE', $deviceLanguage);
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
   }
@@ -2527,16 +2450,11 @@ class ApiContext implements KernelAwareContext
     Assert::assertTrue(file_exists($filepath), 'File not found');
     $this->request_files = [];
 
-    if ('1' == $api_version)
-    {
+    if ('1' == $api_version) {
       $this->request_files[0] = new UploadedFile($filepath, 'test.catrobat');
-    }
-    elseif ('2' == $api_version)
-    {
+    } elseif ('2' == $api_version) {
       $this->request_files['file'] = new UploadedFile($filepath, 'test.catrobat');
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
   }
@@ -2555,12 +2473,9 @@ class ApiContext implements KernelAwareContext
     Assert::assertTrue(file_exists($filepath), 'File not found');
     $this->request_files = [];
 
-    if ('2' == $api_version)
-    {
+    if ('2' == $api_version) {
       $this->request_files['file'] = new UploadedFile($filepath, 'broken.catrobat');
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
   }
@@ -2597,8 +2512,7 @@ class ApiContext implements KernelAwareContext
     $responseArray = json_decode($response->getContent(), true);
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = $table->getHash();
-    for ($i = 0; $i < count($returned_programs); ++$i)
-    {
+    for ($i = 0; $i < count($returned_programs); ++$i) {
       Assert::assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
     }
     Assert::assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
@@ -2695,8 +2609,7 @@ class ApiContext implements KernelAwareContext
    */
   public function iVisitTheDetailsPageOfMyProgram(): void
   {
-    if (null == $this->my_program)
-    {
+    if (null == $this->my_program) {
       $this->insertProject([
         'name' => 'My Program',
         'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
@@ -2842,8 +2755,7 @@ class ApiContext implements KernelAwareContext
     ]);
 
     $further_scratch_parent_relations = array_filter($direct_edge_relations,
-      function (ScratchProgramRemixRelation $relation): bool
-      {
+      function (ScratchProgramRemixRelation $relation): bool {
         return !array_key_exists(
           $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations
         );
@@ -2871,8 +2783,7 @@ class ApiContext implements KernelAwareContext
     $this->checked_catrobat_remix_forward_ancestor_relations[$forward_ancestor_relation->getUniqueKey()] =
       $forward_ancestor_relation;
 
-    if ($program_id == $ancestor_program_id && 0 == $depth)
-    {
+    if ($program_id == $ancestor_program_id && 0 == $depth) {
       $this->checked_catrobat_remix_forward_descendant_relations[$forward_ancestor_relation->getUniqueKey()] =
         $forward_ancestor_relation;
     }
@@ -2909,8 +2820,7 @@ class ApiContext implements KernelAwareContext
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      function (ProgramRemixRelation $relation): bool
-      {
+      function (ProgramRemixRelation $relation): bool {
         return $relation->getDepth() >= 1;
       }));
   }
@@ -2928,8 +2838,7 @@ class ApiContext implements KernelAwareContext
     ;
 
     $further_forward_ancestor_relations = array_filter($forward_ancestors_including_self_referencing_relation,
-      function (ProgramRemixRelation $relation): bool
-      {
+      function (ProgramRemixRelation $relation): bool {
         return !array_key_exists(
           $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations
         );
@@ -2959,8 +2868,7 @@ class ApiContext implements KernelAwareContext
     $backward_parent_relations = $this->getProgramRemixBackwardRepository()->findBy(['child_id' => $program_id]);
 
     $further_backward_parent_relations = array_filter($backward_parent_relations,
-      function (ProgramRemixBackwardRelation $relation): bool
-      {
+      function (ProgramRemixBackwardRelation $relation): bool {
         return !array_key_exists(
           $relation->getUniqueKey(), $this->checked_catrobat_remix_backward_relations
         );
@@ -3011,8 +2919,7 @@ class ApiContext implements KernelAwareContext
     $this->checked_catrobat_remix_forward_descendant_relations[$forward_descendant_relation->getUniqueKey()] =
       $forward_descendant_relation;
 
-    if ($program_id == $descendant_program_id && 0 == $depth)
-    {
+    if ($program_id == $descendant_program_id && 0 == $depth) {
       $this->checked_catrobat_remix_forward_ancestor_relations[$forward_descendant_relation->getUniqueKey()] =
         $forward_descendant_relation;
     }
@@ -3031,8 +2938,7 @@ class ApiContext implements KernelAwareContext
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      function (ProgramRemixRelation $relation): bool
-      {
+      function (ProgramRemixRelation $relation): bool {
         return $relation->getDepth() >= 1;
       }));
   }
@@ -3050,8 +2956,7 @@ class ApiContext implements KernelAwareContext
     ;
 
     $further_forward_descendant_relations = array_filter($forward_descendants_including_self_referencing_relation,
-      function (ProgramRemixRelation $relation): bool
-      {
+      function (ProgramRemixRelation $relation): bool {
         return !array_key_exists(
           $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_descendant_relations
         );
@@ -3130,24 +3035,18 @@ class ApiContext implements KernelAwareContext
    */
   public function saveResponseToFile(AfterStepScope $scope): void
   {
-    if (null == $this->ERROR_DIR)
-    {
+    if (null == $this->ERROR_DIR) {
       return;
     }
 
-    try
-    {
-      if (!$scope->getTestResult()->isPassed() && null != $this->getKernelBrowser())
-      {
+    try {
+      if (!$scope->getTestResult()->isPassed() && null != $this->getKernelBrowser()) {
         $response = $this->getKernelBrowser()->getResponse();
-        if (null != $response && '' != $response->getContent())
-        {
+        if (null != $response && '' != $response->getContent()) {
           file_put_contents($this->ERROR_DIR.'errors.json', $response->getContent());
         }
       }
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       file_put_contents($this->ERROR_DIR.'errors.json', '');
     }
   }
@@ -3184,8 +3083,7 @@ class ApiContext implements KernelAwareContext
     $stored_programs = $this->getStoredPrograms($expected_programs);
     Assert::assertEquals(count($returned_programs), count($expected_programs), 'Number of returned programs should be '.count($expected_programs));
 
-    foreach ($returned_programs as $returned_program)
-    {
+    foreach ($returned_programs as $returned_program) {
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
       Assert::assertNotEmpty($stored_program);
       $this->testExampleProgramStructure($stored_program, $returned_program);
@@ -3202,8 +3100,7 @@ class ApiContext implements KernelAwareContext
 
     Assert::assertEquals(count($this->user_structure_extended), count($user),
       'Number of user fields should be '.count($this->user_structure_extended));
-    foreach ($this->user_structure_extended as $key)
-    {
+    foreach ($this->user_structure_extended as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
@@ -3211,10 +3108,8 @@ class ApiContext implements KernelAwareContext
 
   private function findProgram(array $programs, string $wanted_program_name): array
   {
-    foreach ($programs as $program)
-    {
-      if ($program['name'] === $wanted_program_name)
-      {
+    foreach ($programs as $program) {
+      if ($program['name'] === $wanted_program_name) {
         return $program;
       }
     }
@@ -3224,10 +3119,8 @@ class ApiContext implements KernelAwareContext
 
   private function findUser(array $users, string $wanted_user_name): array
   {
-    foreach ($users as $user)
-    {
-      if ($user['username'] === $wanted_user_name)
-      {
+    foreach ($users as $user) {
+      if ($user['username'] === $wanted_user_name) {
         return $user;
       }
     }
@@ -3237,10 +3130,8 @@ class ApiContext implements KernelAwareContext
 
   private function expectProgram(array $programs, string $value): bool
   {
-    foreach ($programs as $program)
-    {
-      if ($program['Name'] === $value)
-      {
+    foreach ($programs as $program) {
+      if ($program['Name'] === $value) {
         return true;
       }
     }
@@ -3253,10 +3144,8 @@ class ApiContext implements KernelAwareContext
     $programs = array_merge($this->dataFixturesContext->getPrograms(), $this->new_uploaded_projects);
     $projects = [];
     /** @var Program $program */
-    foreach ($programs as $program_index => $program)
-    {
-      if (!$this->expectProgram($expected_programs, $program->getName()))
-      {
+    foreach ($programs as $program_index => $program) {
+      if (!$this->expectProgram($expected_programs, $program->getName())) {
         continue;
       }
       $result = [
@@ -3284,18 +3173,24 @@ class ApiContext implements KernelAwareContext
     $programs = $this->dataFixturesContext->getFeaturedPrograms();
     $projects = [];
     /** @var FeaturedProgram $featured_program */
-    foreach ($programs as $program_index => $featured_program)
-    {
-      if (!$this->expectProgram($expected_programs, $featured_program->getProgram()->getName()))
-      {
+    foreach ($programs as $program_index => $featured_program) {
+      if (!$this->expectProgram($expected_programs, $featured_program->getProgram()->getName())) {
         continue;
+      }
+      $url = $featured_program->getUrl();
+      $project_url = 'http://localhost/app/project/'.$featured_program->getProgram()->getId();
+      if (empty($url)) {
+        $url = $project_url;
+      } else {
+        $project_url = null;
       }
       $result = [
         'id' => $featured_program->getId(),
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUserName(),
         'project_id' => $featured_program->getProgram()->getId(),
-        'project_url' => 'http://localhost/app/project/'.$featured_program->getProgram()->getId(),
+        'project_url' => $project_url,
+        'url' => $url,
         'featured_image' => 'http://localhost/resources_test/featured/featured_'.$featured_program->getId().'.jpg',
       ];
       $projects[] = $result;
@@ -3308,10 +3203,8 @@ class ApiContext implements KernelAwareContext
   {
     $programs = $this->dataFixturesContext->getMediaFiles();
     $projects = [];
-    foreach ($programs as $program_index => $program)
-    {
-      if (!$this->expectProgram($expected_programs, $program['name']))
-      {
+    foreach ($programs as $program_index => $program) {
+      if (!$this->expectProgram($expected_programs, $program['name'])) {
         continue;
       }
       $projects[] = $program;
@@ -3325,8 +3218,7 @@ class ApiContext implements KernelAwareContext
     $stored_users = $this->dataFixturesContext->getUsers();
     $users = [];
     /** @var User $user */
-    foreach ($stored_users as $program_index => $user)
-    {
+    foreach ($stored_users as $program_index => $user) {
       $result = [
         'id' => $user->getId(),
         'username' => $user->getUsername(),
@@ -3345,81 +3237,64 @@ class ApiContext implements KernelAwareContext
   private function checkProjectFieldsValue(array $program, string $key): bool
   {
     $fields = [
-      'id' => function ($id)
-      {
+      'id' => function ($id) {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'name' => function ($name)
-      {
+      'name' => function ($name) {
         Assert::assertIsString($name);
       },
-      'author' => function ($author)
-      {
+      'author' => function ($author) {
         Assert::assertIsString($author);
       },
-      'description' => function ($description)
-      {
+      'description' => function ($description) {
         Assert::assertIsString($description);
       },
-      'version' => function ($version)
-      {
+      'version' => function ($version) {
         Assert::assertIsString($version);
         Assert::assertMatchesRegularExpression('/[0-9]\\.[0-9]\\.[0-9]/', $version);
       },
-      'views' => function ($views)
-      {
+      'views' => function ($views) {
         Assert::assertIsInt($views);
       },
-      'download' => function ($download)
-      {
+      'download' => function ($download) {
         Assert::assertIsInt($download);
       },
-      'private' => function ($private)
-      {
+      'private' => function ($private) {
         Assert::assertIsBool($private);
       },
-      'flavor' => function ($flavor)
-      {
+      'flavor' => function ($flavor) {
         Assert::assertIsString($flavor);
       },
-      'tags' => function ($tags)
-      {
+      'tags' => function ($tags) {
         Assert::assertIsArray($tags, 'Tags is not an array!');
       },
-      'uploaded' => function ($uploaded)
-      {
+      'uploaded' => function ($uploaded) {
         Assert::assertIsInt($uploaded);
       },
-      'uploaded_string' => function ($uploaded_string)
-      {
+      'uploaded_string' => function ($uploaded_string) {
         Assert::assertIsString($uploaded_string);
       },
-      'screenshot_large' => function ($screenshot_large)
-      {
+      'screenshot_large' => function ($screenshot_large) {
         Assert::assertIsString($screenshot_large);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
           $screenshot_large);
       },
-      'screenshot_small' => function ($screenshot_small)
-      {
+      'screenshot_small' => function ($screenshot_small) {
         Assert::assertIsString($screenshot_small);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
           $screenshot_small);
       },
-      'project_url' => function ($project_url)
-      {
+      'project_url' => function ($project_url) {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/', $project_url);
       },
-      'download_url' => function ($download_url)
-      {
+      'download_url' => function ($download_url) {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/app\\/download\\/([a-zA-Z0-9-]+)\\.catrobat/',
           $download_url);
       },
-      'filesize' => function ($filesize)
-      {
+      'filesize' => function ($filesize) {
         Assert::assertEquals(is_float($filesize) || is_int($filesize), true);
       },
     ];
@@ -3433,31 +3308,29 @@ class ApiContext implements KernelAwareContext
   private function checkFeaturedProjectFieldsValue(array $program, string $key): bool
   {
     $fields = [
-      'id' => function ($id)
-      {
+      'id' => function ($id) {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'name' => function ($name)
-      {
+      'name' => function ($name) {
         Assert::assertIsString($name);
       },
-      'author' => function ($author)
-      {
+      'author' => function ($author) {
         Assert::assertIsString($author);
       },
-      'project_id' => function ($project_id)
-      {
+      'project_id' => function ($project_id) {
         Assert::assertIsString($project_id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $project_id, 'project_id');
       },
-      'project_url' => function ($project_url)
-      {
+      'project_url' => function ($project_url) {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/project\/[a-zA-Z0-9-]+$/', $project_url);
       },
-      'featured_image' => function ($featured_image)
-      {
+      'url' => function ($url) {
+        Assert::assertIsString($url);
+        Assert::assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+      },
+      'featured_image' => function ($featured_image) {
         Assert::assertIsString($featured_image);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.(jpg|png)/',
           $featured_image);
@@ -3473,36 +3346,28 @@ class ApiContext implements KernelAwareContext
   private function checkMediaFileFieldsValue(array $program, string $key): bool
   {
     $fields = [
-      'id' => function ($id)
-      {
+      'id' => function ($id) {
         Assert::assertIsInt($id);
       },
-      'name' => function ($name)
-      {
+      'name' => function ($name) {
         Assert::assertIsString($name);
       },
-      'flavor' => function ($flavor)
-      {
+      'flavor' => function ($flavor) {
         Assert::assertIsString($flavor);
       },
-      'package' => function ($package)
-      {
+      'package' => function ($package) {
         Assert::assertIsString($package);
       },
-      'category' => function ($category)
-      {
+      'category' => function ($category) {
         Assert::assertIsString($category);
       },
-      'author' => function ($author)
-      {
+      'author' => function ($author) {
         Assert::assertIsString($author);
       },
-      'extension' => function ($extension)
-      {
+      'extension' => function ($extension) {
         Assert::assertIsString($extension);
       },
-      'download_url' => function ($download_url)
-      {
+      'download_url' => function ($download_url) {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/download-media\/[a-zA-Z0-9-]+/',
           $download_url, 'download_url');
@@ -3518,33 +3383,26 @@ class ApiContext implements KernelAwareContext
   private function checkUserFieldsValue(array $user, string $key): bool
   {
     $fields = [
-      'id' => function ($id)
-      {
+      'id' => function ($id) {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'username' => function ($username)
-      {
+      'username' => function ($username) {
         Assert::assertIsString($username);
       },
-      'email' => function ($email)
-      {
+      'email' => function ($email) {
         Assert::assertIsString($email);
       },
-      'country' => function ($country)
-      {
+      'country' => function ($country) {
         Assert::assertIsString($country);
       },
-      'projects' => function ($projects)
-      {
+      'projects' => function ($projects) {
         Assert::assertIsInt($projects);
       },
-      'followers' => function ($followers)
-      {
+      'followers' => function ($followers) {
         Assert::assertIsInt($followers);
       },
-      'following' => function ($following)
-      {
+      'following' => function ($following) {
         Assert::assertIsInt($following);
       },
     ];
@@ -3558,8 +3416,7 @@ class ApiContext implements KernelAwareContext
   private function checkSurveyFieldsValue(array $user, string $key): bool
   {
     $fields = [
-      'url' => function ($username)
-      {
+      'url' => function ($username) {
         Assert::assertIsString($username);
       },
     ];
@@ -3589,56 +3446,42 @@ class ApiContext implements KernelAwareContext
   private function uploadProject(string $file, User $user = null, string $api_version, string $desired_id = '',
                                  string $flavor = 'pocketcode'): void
   {
-    if (null == $user)
-    {
-      if (isset($this->username))
-      {
+    if (null == $user) {
+      if (isset($this->username)) {
         /** @var User $user */
         $user = $this->getUserManager()->findUserByUsername($this->username);
-      }
-      else
-      {
+      } else {
         $user = $this->getUserDataFixtures()->getDefaultUser();
       }
     }
 
     // overwrite id if desired
-    if ('' !== $desired_id)
-    {
+    if ('' !== $desired_id) {
       MyUuidGenerator::setNextValue($desired_id);
     }
 
-    if (is_string($file))
-    {
-      try
-      {
+    if (is_string($file)) {
+      try {
         $file = new UploadedFile($file, basename($file));
-      }
-      catch (Exception $e)
-      {
+      } catch (Exception $e) {
         throw new Exception('File to upload does not exist'.$e);
       }
     }
 
-    if ('1' == $api_version)
-    {
+    if ('1' == $api_version) {
       $this->request_parameters['username'] = $user->getUsername();
       $this->request_parameters['token'] = $user->getUploadToken();
       $this->request_files[0] = $file;
       $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
       $this->iRequestWith('POST', '/'.$flavor.'/api/upload/upload.json');
-    }
-    elseif ('2' == $api_version)
-    {
+    } elseif ('2' == $api_version) {
       $this->request_headers['CONTENT_TYPE'] = 'multipart/form-data';
       $this->request_headers['HTTP_ACCEPT'] = 'application/json';
       $this->request_files['file'] = $file;
       $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('checksum', '2');
       $this->iUseAValidJwtBearerTokenFor($user->getUsername());
       $this->iRequestWith('POST', '/api/projects');
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
   }
@@ -3656,18 +3499,13 @@ class ApiContext implements KernelAwareContext
   {
     $last_uploaded_project_id = null;
 
-    if ('1' == $api_version)
-    {
+    if ('1' == $api_version) {
       $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true);
       $last_uploaded_project_id = $json['projectId'];
-    }
-    elseif ('2' == $api_version)
-    {
+    } elseif ('2' == $api_version) {
       $splitted_project_uri = explode('/', $this->getKernelBrowser()->getResponse()->headers->get('Location'));
       $last_uploaded_project_id = $splitted_project_uri[sizeof($splitted_project_uri) - 1];
-    }
-    else
-    {
+    } else {
       throw new APIVersionNotSupportedException($api_version);
     }
 
@@ -3706,21 +3544,15 @@ class ApiContext implements KernelAwareContext
   {
     Assert::assertNotEmpty($stored_program);
     Assert::assertNotEmpty($returned_program);
-    foreach ($this->program_structure as $key)
-    {
-      if (array_key_exists($key, $stored_program))
-      {
+    foreach ($this->program_structure as $key) {
+      if (array_key_exists($key, $stored_program)) {
         Assert::assertEquals($stored_program[$key], $returned_program[$key]);
-      }
-      elseif ('screenshot_large' === $key)
-      {
+      } elseif ('screenshot_large' === $key) {
         Assert::assertContains($this->pathWithoutParam($returned_program[$key]),
           ['http://localhost/resources/screenshots/screen_'.$returned_program['id'].'.png',
             'http://localhost/resources_test/screenshots/screen_'.$returned_program['id'].'.png',
             'http://localhost/images/default/screenshot.png', ]);
-      }
-      elseif ('screenshot_small' === $key)
-      {
+      } elseif ('screenshot_small' === $key) {
         Assert::assertContains($this->pathWithoutParam($returned_program[$key]),
           ['http://localhost/resources/thumbnails/screen_'.$returned_program['id'].'.png',
             'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
@@ -3733,8 +3565,7 @@ class ApiContext implements KernelAwareContext
   {
     Assert::assertNotEmpty($stored_user);
     Assert::assertNotEmpty($returned_user);
-    foreach ($this->user_structure as $key)
-    {
+    foreach ($this->user_structure as $key) {
       Assert::assertEquals($stored_user[$key], $returned_user[$key]);
     }
   }
@@ -3743,19 +3574,13 @@ class ApiContext implements KernelAwareContext
   {
     Assert::assertNotEmpty($stored_program);
     Assert::assertNotEmpty($example_project);
-    foreach ($this->program_structure as $key)
-    {
-      if (array_key_exists($key, $stored_program))
-      {
+    foreach ($this->program_structure as $key) {
+      if (array_key_exists($key, $stored_program)) {
         Assert::assertEquals($stored_program[$key], $example_project[$key]);
-      }
-      elseif ('screenshot_large' === $key)
-      {
+      } elseif ('screenshot_large' === $key) {
         Assert::assertContains($this->pathWithoutParam($example_project[$key]),
           ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);
-      }
-      elseif ('screenshot_small' === $key)
-      {
+      } elseif ('screenshot_small' === $key) {
         Assert::assertContains($this->pathWithoutParam($example_project[$key]),
           ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);
       }

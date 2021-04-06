@@ -1,30 +1,30 @@
 ---
 #homepage translation
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
+localLanguage: Англійська
+username: Ім'я користувача
+password: Пароль
+createNewPassword: Створити новий пароль
 accountSettings: Account Settings
 email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+aboutPocketCode: Про Pocket Code
+about: Про
+education: Навчання
+chat: Чат та форуми
+others: Інші
 tutorials: Tutorials
 googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-description: Description
+passwordsNoMatch: Паролі не збігаються.
+error: Помилка
+cancel: Скасувати
+report: Звіт
+deleteIt: Так, видаліть його!
+reportIt: Так, повідомте про це!
+areYouSure: Ти впевнений?
+noWayOfReturn: Немає можливості відновити свої дії!
+download: Завантажити
+description: Опис
 noDescription: No description available.
 credits: Credits
 noCredits: No credits available.
@@ -159,7 +159,7 @@ programs:
   comments: Comments
   send: Send
   delete: Delete
-  report: Report
+  report: Звіт
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Looks'
   penBricks: 'Pen'
   dataBricks: 'Data'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Language
@@ -641,7 +642,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Далі
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -677,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: Most viewed
+  most_downloaded: Most downloaded
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects

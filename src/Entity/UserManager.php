@@ -59,14 +59,10 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
   {
     $response_data = [];
 
-    foreach ($raw_user_data as $user)
-    {
-      try
-      {
+    foreach ($raw_user_data as $user) {
+      try {
         $country = Countries::getName(strtoupper($user->getCountry()));
-      }
-      catch (MissingResourceException $e)
-      {
+      } catch (MissingResourceException $e) {
         $country = '';
       }
       array_push($response_data, [
@@ -88,21 +84,18 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     /** @var User|null $user */
     $user = $this->findUserBy(['scratch_user_id' => $scratch_user_id]);
 
-    if (null === $user)
-    {
+    if (null === $user) {
       $username = $userdata['username'];
       $user = new User();
       $user->setScratchUserId($scratch_user_id);
       $user->setScratchUsername($username);
       $user->setEmail($username.'@localhost');
       $user->setPlainPassword(Utils::randomPassword());
-      if ($avatar = $userdata['profile']['images']['90x90'] ?? null)
-      {
+      if ($avatar = $userdata['profile']['images']['90x90'] ?? null) {
         $user->setAvatar($avatar);
       }
       $joined = TimeUtils::dateTimeFromScratch($userdata['history']['joined']);
-      if ($joined)
-      {
+      if ($joined) {
         $user->changeCreatedAt($joined);
       }
       $this->objectManager->persist($user);
@@ -134,8 +127,7 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     $query = Util::escapeTerm($query);
 
     $words = explode(' ', $query);
-    foreach ($words as &$word)
-    {
+    foreach ($words as &$word) {
       $word = $word.'*';
     }
     unset($word);

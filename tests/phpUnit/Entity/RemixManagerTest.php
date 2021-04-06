@@ -129,8 +129,7 @@ class RemixManagerTest extends TestCase
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->will($this->returnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program)
-      {
+      ->will($this->returnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program) {
         $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         $this->assertSame($expected_id_of_first_program, $scratch_project->getId());
         $this->assertNull($scratch_project->getName());
@@ -183,14 +182,11 @@ class RemixManagerTest extends TestCase
         $expected_id_of_second_program, $expected_name_of_second_program, $expected_username_of_second_program
       ) {
         $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
-        if ($scratch_project->getId() === $expected_id_of_first_program)
-        {
+        if ($scratch_project->getId() === $expected_id_of_first_program) {
           $this->assertSame($expected_name_of_first_program, $scratch_project->getName());
           $this->assertSame($expected_description_of_first_program, $scratch_project->getDescription());
           $this->assertSame($expected_username_of_first_program, $scratch_project->getUsername());
-        }
-        elseif ($scratch_project->getId() === $expected_id_of_second_program)
-        {
+        } elseif ($scratch_project->getId() === $expected_id_of_second_program) {
           $this->assertSame($expected_name_of_second_program, $scratch_project->getName());
           $this->assertNull($scratch_project->getDescription());
           $this->assertSame($expected_username_of_second_program, $scratch_project->getUsername());
@@ -1229,10 +1225,8 @@ class RemixManagerTest extends TestCase
     /** @var MockObject|Program $program_entity */
     $expected_relations_map = [];
     $expected_catrobat_relations = [];
-    foreach ($expected_relations as $expected_relation)
-    {
-      if ($expected_relation instanceof ProgramRemixRelation)
-      {
+    foreach ($expected_relations as $expected_relation) {
+      if ($expected_relation instanceof ProgramRemixRelation) {
         $expected_catrobat_relations[] = $expected_relation;
       }
       $expected_relations_map[$expected_relation->getUniqueKey()] = $expected_relation;
@@ -1241,8 +1235,7 @@ class RemixManagerTest extends TestCase
     $program_repository_find_map = [];
     $program_remix_repository_find_map = [];
 
-    foreach ($parent_data as $parent_id => $data)
-    {
+    foreach ($parent_data as $parent_id => $data) {
       $catrobat_relations = array_filter($data['existingRelations'], fn ($relation) => $relation instanceof ProgramRemixRelation);
       $program_remix_repository_find_map[] = [['descendant_id' => (string) $parent_id], null, null, null, $catrobat_relations];
       $program_repository_find_map[] = [(string) $parent_id, null, null, $data['exists'] ? $data['entity'] : null];
@@ -1263,17 +1256,14 @@ class RemixManagerTest extends TestCase
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')
-      ->will($this->returnCallback(function ($arg) use ($program_entity, &$expected_relations_map)
-      {
-        if ($arg instanceof ProgramRemixRelation || $arg instanceof ScratchProgramRemixRelation)
-        {
+      ->will($this->returnCallback(function ($arg) use ($program_entity, &$expected_relations_map) {
+        if ($arg instanceof ProgramRemixRelation || $arg instanceof ScratchProgramRemixRelation) {
           $relation = $arg;
           Assert::assertArrayHasKey($relation->getUniqueKey(), $expected_relations_map);
           unset($expected_relations_map[$relation->getUniqueKey()]);
         }
 
-        if ($arg instanceof Program)
-        {
+        if ($arg instanceof Program) {
           Assert::assertEquals($arg, $program_entity);
         }
       }))
@@ -1282,8 +1272,7 @@ class RemixManagerTest extends TestCase
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
 
     $remixes_data = [];
-    foreach ($parent_data as $parent_id => $data)
-    {
+    foreach ($parent_data as $parent_id => $data) {
       $remixes_data[] = new RemixData(!$data['isScratch'] ? '/app/project/'.$parent_id
         : 'https://scratch.mit.edu/projects/'.$parent_id.'/');
     }
@@ -1300,8 +1289,7 @@ class RemixManagerTest extends TestCase
   private function getProgramEntities(int $amount): array
   {
     $array = [];
-    for ($i = 1; $i <= $amount; ++$i)
-    {
+    for ($i = 1; $i <= $amount; ++$i) {
       $program_entity = $this->createMock(Program::class);
       $program_entity->expects($this->atLeastOnce())
         ->method('getId')
@@ -1311,8 +1299,7 @@ class RemixManagerTest extends TestCase
         ->method('getUser')
         ->willReturn($this->createMock(User::class))
       ;
-      if ($i === $amount)
-      {
+      if ($i === $amount) {
         $program_entity->expects($this->atLeastOnce())
           ->method('isInitialVersion')
           ->willReturn(true)

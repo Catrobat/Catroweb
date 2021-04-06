@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Utseenden'
   penBricks: 'Penna'
   dataBricks: 'Data'
+  deviceBricks: 'Enhet'
   specialBricks: 'Special'
 footer:
   language: Språk
@@ -677,3 +678,11 @@ copy: 'Kopiera länk'
 checkOutProject: 'Kolla in detta projekt:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
+category:
+  recent: Nyaste projekt
+  random: Slumpmässiga projekt
+  most_viewed: Mest visade
+  most_downloaded: Mest nedladdningar
+  example: Example
+  scratch: Scratch remixes
+  recommended: Rekommenderade projekt

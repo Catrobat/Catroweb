@@ -18,8 +18,7 @@ class ExtensionController extends CRUDController
    */
   public function extensionsAction(KernelInterface $kernel): RedirectResponse
   {
-    if (!$this->admin->isGranted('EXTENSIONS'))
-    {
+    if (!$this->admin->isGranted('EXTENSIONS')) {
       throw new AccessDeniedException();
     }
 
@@ -31,12 +30,9 @@ class ExtensionController extends CRUDController
     ]);
 
     $return = $application->run($input, new NullOutput());
-    if (0 == $return)
-    {
+    if (0 == $return) {
       $this->addFlash('sonata_flash_success', 'Creating extensions finished!');
-    }
-    else
-    {
+    } else {
       $this->addFlash('sonata_flash_error', 'Creating extensions failed!');
     }
 

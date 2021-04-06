@@ -35,8 +35,7 @@ class ArchiveLogsCommand extends Command
     $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
     $old_log_dir = $log_dir.'old_logs';
     $compression_command = 'tar -zcvf '.$old_log_dir.'/log_backup_'.date('Y-m-d_His').'.tar.gz -C '.$log_dir;
-    if (!file_exists($old_log_dir) && !is_dir($old_log_dir))
-    {
+    if (!file_exists($old_log_dir) && !is_dir($old_log_dir)) {
       mkdir($old_log_dir);
     }
     CommandHelper::executeShellCommand(

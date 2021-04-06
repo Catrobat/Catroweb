@@ -8,14 +8,13 @@ use SimpleXMLElement;
 class BrickFactory
 {
   /**
-   * @return AddItemToUserListBrick|ArduinoSendDigitalValueBrick|ArduinoSendPMWValueBrick|AskBrick|AskSpeechBrick|AssertEqualsBrick|BackgroundRequestBrick|BroadcastBrick|BroadcastReceiverBrick|BroadcastWaitBrick|CameraBrick|ChangeBrightnessByNBrick|ChangeColorByNBrick|ChangeSizeByNBrick|ChangeTransparencyByNBrick|ChangeVariableBrick|ChangeVolumeByNBrick|ChangeXByNBrick|ChangeYByNBrick|ChooseCameraBrick|ClearBackgroundBrick|ClearGraphicEffectBrick|ClearUserListBrick|CloneBrick|ComeToFrontBrick|ContinueSceneBrick|DeleteItemOfUserListBrick|DeleteThisCloneBrick|DroneEmergencyBrick|DroneFlipBrick|DroneMoveBackwardBrick|DroneMoveDownBrick|DroneMoveForwardBrick|DroneMoveLeftBrick|DroneMoveRightBrick|DroneMoveUpBrick|DronePlayedAnimationBrick|DroneSwitchCameraBrick|DroneTakeOffLandBrick|DroneTurnLeftBrick|DroneTurnRightBrick|ElseBrick|EndIfBrick|FinishStageBrick|FlashBrick|ForeverBrick|GlideToBrick|GoNStepsBackBrick|GoToBrick|HideBrick|HideTextBrick|IfBrick|IfOnEdgeBounceBrick|InsertItemIntoUserListBrick|JumpingSumoAnimationBrick|JumpingSumoJumpHighBrick|JumpingSumoJumpLongBrick|JumpingSumoMoveBackwardBrick|JumpingSumoMoveForwardBrick|JumpingSumoNoSoundBrick|JumpingSumoRotateLeftBrick|JumpingSumoRotateRightBrick|JumpingSumoSoundBrick|JumpingSumoTakingPictureBrick|JumpingSumoTurnBrick|LegoEV3MotorMoveBrick|LegoEV3MotorPlayToneBrick|LegoEV3MotorStopBrick|LegoEV3MotorTurnAngleBrick|LegoEV3SetLedBrick|LegoNxtMotorMoveBrick|LegoNxtMotorStopBrick|LegoNxtMotorTurnAngleBrick|LegoNxtPlayToneBrick|LookRequestBrick|LoopEndBrick|LoopEndlessBrick|MoveNStepsBrick|NextLookBrick|NoteBrick|PenDownBrick|PenUpBrick|PhiroIfLogicBeginBrick|PhiroMotorMoveBackwardBrick|PhiroMotorMoveForwardBrick|PhiroMotorStopBrick|PhiroPlayToneBrick|PhiroRgbLightBrick|PlaceAtBrick|PlaySoundBrick|PlaySoundWaitBrick|PointInDirectionBrick|PointToBrick|PrevLookBrick|RaspiIfLogicBeginBrick|RaspiPwmBrick|RaspiSendDigitalValueBrick|ReadListFromDeviceBrick|ReadVariableFromDeviceBrick|RepeatBrick|RepeatUntilBrick|ReplaceItemInUserListBrick|RunningStitchBrick|SayBubbleBrick|SayForBubbleBrick|SceneStartBrick|SetBackgroundBrick|SetBackgroundByIndexAndWaitBrick|SetBackgroundByIndexBrick|SetBackgroundWaitBrick|SetBounceBrick|SetBrightnessBrick|SetColorBrick|SetFrictionBrick|SetGravityBrick|SetLookBrick|SetLookByIndexBrick|SetMassBrick|SetNfcTagBrick|SetPenColorBrick|SetPenSizeBrick|SetPhysicsObjectTypeBrick|SetRotationStyleBrick|SetSizeToBrick|SetTextBrick|SetTransparencyBrick|SetVariableBrick|SetVelocityBrick|SetVolumeToBrick|SetXBrick|SetYBrick|ShowBrick|ShowTextBrick|ShowTextColorSizeAlignmentBrick|SpeakBrick|SpeakWaitBrick|StampBrick|StitchBrick|StopAllSoundsBrick|StopRunningStitchBrick|StopScriptBrick|StoreCSVIntoUserListBrick|TapAtBrick|ThinkBubbleBrick|ThinkForBubbleBrick|TripleStitchBrick|TurnLeftBrick|TurnLeftSpeedBrick|TurnRightBrick|TurnRightSpeedBrick|UnknownBrick|UserDefinedBrick|UserListBrick|UserVariableBrick|VibrationBrick|WaitBrick|WaitTillIdleBrick|WaitUntilBrick|WebRequestBrick|WhenBGChangeBrick|WhenBounceOffBrick|WhenBrick|WhenClonedBrick|WhenConditionBrick|WhenGamepadButtonBrick|WhenNfcBrick|WhenRaspiPinChangedBrick|WhenStartedBrick|WhenTouchBrick|WriteListOnDeviceBrick|WriteVariableOnDeviceBrick|ZigZagStitchBrick|AssertUserListsBrick|StopSoundBrick|ForVariableFromToBrick|ReadVariableFromFileBrick|UserDefinedReceiverBrick|WriteVariableToFileBrick|ExitStageBrick|ForItemInUserListBrick|ParameterizedBrick|ParameterizedEndBrick|SetInstrumentBrick|StartListeningBrick|TapForBrick
+   * @return mixed
    */
   public static function generate(SimpleXMLElement $brick_xml_properties)
   {
     $generated_brick = null;
 
-    switch ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE])
-    {
+    switch ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       // EVENT Bricks
       case Constants::BROADCAST_BRICK:
         $generated_brick = new BroadcastBrick($brick_xml_properties);
@@ -217,6 +216,24 @@ class BrickFactory
       case Constants::START_LISTENING_BRICK:
         $generated_brick = new StartListeningBrick($brick_xml_properties);
         break;
+      case Constants::PAUSE_FOR_BEATS_BRICK:
+        $generated_brick = new PauseForBeatsBrick($brick_xml_properties);
+        break;
+      case Constants::PLAY_DRUM_FOR_BEATS_BRICK:
+        $generated_brick = new PlayDrumForBeatsBrick($brick_xml_properties);
+        break;
+      case Constants::PLAY_NOTE_FOR_BEATS_BRICK:
+        $generated_brick = new PlayNoteForBeatsBrick($brick_xml_properties);
+        break;
+      case Constants::SET_LISTENING_LANGUAGE_BRICK:
+        $generated_brick = new SetListeningLanguageBrick($brick_xml_properties);
+        break;
+      case Constants::SET_TEMPO_BRICK:
+        $generated_brick = new SetTempoBrick($brick_xml_properties);
+        break;
+      case Constants::CHANGE_TEMPO_BY_N_BRICK:
+        $generated_brick = new ChangeTempoByNBrick($brick_xml_properties);
+        break;
 
         // LOOK Bricks
       case Constants::SET_LOOK_BRICK:
@@ -306,6 +323,18 @@ class BrickFactory
       case Constants::BACKGROUND_REQUEST_BRICK:
         $generated_brick = new BackgroundRequestBrick($brick_xml_properties);
         break;
+      case Constants::COPY_LOOK_BRICK:
+        $generated_brick = new CopyLookBrick($brick_xml_properties);
+        break;
+      case Constants::DELETE_LOOK_BRICK:
+        $generated_brick = new DeleteLookBrick($brick_xml_properties);
+        break;
+      case Constants::EDIT_LOOK_BRICK:
+        $generated_brick = new EditLookBrick($brick_xml_properties);
+        break;
+      case Constants::PAINT_NEW_LOOK_BRICK:
+        $generated_brick = new PaintNewLookBrick($brick_xml_properties);
+        break;
 
       // DATA Bricks
       case Constants::SET_VARIABLE_BRICK:
@@ -379,6 +408,17 @@ class BrickFactory
         break;
       case Constants::FOR_ITEM_IN_USER_LIST_BRICK:
         $generated_brick = new ForItemInUserListBrick($brick_xml_properties);
+        break;
+
+      // DEVICE Bricks
+      case Constants::OPEN_URL_BRICK:
+        $generated_brick = new OpenUrlBrick($brick_xml_properties);
+        break;
+      case Constants::RESET_TIMER_BRICK:
+        $generated_brick = new ResetTimerBrick($brick_xml_properties);
+        break;
+      case Constants::TOUCH_AND_SLIDE_BRICK:
+        $generated_brick = new TouchAndSlideBrick($brick_xml_properties);
         break;
 
       // Your Bricks
@@ -553,6 +593,12 @@ class BrickFactory
         break;
       case Constants::ZIG_ZAG_STITCH_BRICK:
         $generated_brick = new ZigZagStitchBrick($brick_xml_properties);
+        break;
+      case Constants::SEW_UP_BRICK:
+        $generated_brick = new SewUpBrick($brick_xml_properties);
+        break;
+      case Constants::WRITE_EMBROIDERY_TO_FILE_BRICK:
+        $generated_brick = new WriteEmbroideryToFileBrick($brick_xml_properties);
         break;
 
       // Phiro

@@ -77,14 +77,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
      * @var $object Program
      */
 
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       return [];
     }
 
@@ -104,15 +102,13 @@ class ApproveProgramsAdmin extends AbstractAdmin
      * @var $object Program
      */
 
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       return [];
     }
 
@@ -124,14 +120,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
    */
   public function getContainingStrings($object): array
   {
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       return [];
     }
 
@@ -143,15 +137,13 @@ class ApproveProgramsAdmin extends AbstractAdmin
    */
   public function getContainingCodeObjects($object): array
   {
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram || $this->extractedProgram->hasScenes())
-    {
+    if (null == $this->extractedProgram || $this->extractedProgram->hasScenes()) {
       return [];
     }
 
@@ -258,8 +250,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
   private function encodeFileNameOfPathsArray($paths): array
   {
     $encoded_paths = [];
-    foreach ($paths as $path)
-    {
+    foreach ($paths as $path) {
       $pieces = explode('/', $path);
       $filename = array_pop($pieces);
       $pieces[] = rawurlencode($filename);

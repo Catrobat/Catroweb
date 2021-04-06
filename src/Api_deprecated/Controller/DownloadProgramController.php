@@ -43,8 +43,7 @@ class DownloadProgramController extends AbstractController
     $referrer = $request->getSession()->get('referer');
 
     $program = $program_manager->find($id);
-    if (null === $program)
-    {
+    if (null === $program) {
       throw new NotFoundHttpException();
     }
 
@@ -52,42 +51,33 @@ class DownloadProgramController extends AbstractController
     $rec_by_program_id = (int) $request->query->get('rec_by_program_id', 0);
     $rec_user_specific = 1 == (int) $request->query->get('rec_user_specific', 0);
     $rec_tag_by_program_id = (int) $request->query->get('rec_from', 0);
-    try
-    {
-      if (!$file_repository->checkIfProgramFileExists($program->getId()))
-      {
+    try {
+      if (!$file_repository->checkIfProjectZipFileExists($program->getId())) {
         $extracted_file = $extracted_file_repository->loadProgramExtractedFile($program);
-        $file_repository->saveProgram($extracted_file, $program->getId());
+        $file_repository->zipProject($extracted_file, $program->getId());
       }
-      $file = $file_repository->getProgramFile($id);
-    }
-    catch (FileNotFoundException $fileNotFoundException)
-    {
+      $file = $file_repository->getProjectZipFile($id);
+    } catch (FileNotFoundException $fileNotFoundException) {
       $logger->error('[FILE] failed to get program file with id: '.$id);
 
       return JsonResponse::create('Invalid file upload', StatusCode::INVALID_FILE_UPLOAD);
     }
 
-    if ($file->isFile())
-    {
+    if ($file->isFile()) {
       $downloaded = $request->getSession()->get('downloaded', []);
-      if (!in_array($program->getId(), $downloaded, true))
-      {
+      if (!in_array($program->getId(), $downloaded, true)) {
         $program_manager->increaseDownloads($program);
         $downloaded[] = $program->getId();
         $request->getSession()->set('downloaded', $downloaded);
         $request->attributes->set('download_statistics_program_id', $id);
         $request->attributes->set('referrer', $referrer);
 
-        if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id))
-        {
+        if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
           // all recommendations (except tag-recommendations -> see below)
           $request->attributes->set('rec_by_page_id', $rec_by_page_id);
           $request->attributes->set('rec_by_program_id', $rec_by_program_id);
           $request->attributes->set('rec_user_specific', $rec_user_specific);
-        }
-        elseif ($rec_tag_by_program_id > 0)
-        {
+        } elseif ($rec_tag_by_program_id > 0) {
           // tag-recommendations
           $request->attributes->set('rec_from', $rec_tag_by_program_id);
         }

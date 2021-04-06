@@ -200,8 +200,7 @@ class ThemeRequestListenerTest extends CatrowebTestCase
    */
   private function mockThemeRequestListener(array $ctor_args = null)
   {
-    if (null === $ctor_args)
-    {
+    if (null === $ctor_args) {
       return $this->getMockBuilder(ThemeRequestListener::class)
         ->disableOriginalConstructor()
         ->setMethodsExcept(['onKernelRequest'])
@@ -232,8 +231,7 @@ class ThemeRequestListenerTest extends CatrowebTestCase
       ->method('get')
       ->will(
         $this->returnCallback(
-          function ($param)
-          {
+          function ($param) {
             switch ($param) {
               case 'flavors':
                 return ['pocketcode', 'luna'];
@@ -274,13 +272,11 @@ class ThemeRequestListenerTest extends CatrowebTestCase
 
     $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
 
-    if (null !== $attributes)
-    {
+    if (null !== $attributes) {
       $this->mockProperty(Request::class, $request, 'attributes', $attributes);
     }
 
-    if (null !== $uri)
-    {
+    if (null !== $uri) {
       $request->expects($this->any())->method('getUri')->willReturn($uri);
     }
 
@@ -321,8 +317,7 @@ class ThemeRequestListenerTest extends CatrowebTestCase
   {
     $app_request = $this->getMockBuilder(AppRequest::class)->disableOriginalConstructor()->getMock();
 
-    if ('' !== $response)
-    {
+    if ('' !== $response) {
       $app_request->expects($this->once())
         ->method('getThemeDefinedInRequest')
         ->willReturn($response)
@@ -344,8 +339,7 @@ class ThemeRequestListenerTest extends CatrowebTestCase
       ->getMock()
     ;
 
-    if (null !== $request_context)
-    {
+    if (null !== $request_context) {
       $router->expects($this->once())->method('getContext')->willReturn($request_context);
     }
 

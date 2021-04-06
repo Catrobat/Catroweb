@@ -35,8 +35,7 @@ class PurgeCommand extends Command
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    if (!$input->getOption('force'))
-    {
+    if (!$input->getOption('force')) {
       $output->writeln("This command will delete everything, use with caution! Use '--force' option if you are sure.");
 
       return 1;

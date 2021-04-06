@@ -36,13 +36,11 @@ class DescriptionValidator
    */
   public function validate(ExtractedCatrobatFile $file): void
   {
-    if (strlen($file->getDescription()) > $this->max_description_size)
-    {
+    if (strlen($file->getDescription()) > $this->max_description_size) {
       throw new DescriptionTooLongException();
     }
 
-    if ($this->rudeWordFilter->containsRudeWord($file->getDescription()))
-    {
+    if ($this->rudeWordFilter->containsRudeWord($file->getDescription())) {
       throw new RudewordInDescriptionException();
     }
   }

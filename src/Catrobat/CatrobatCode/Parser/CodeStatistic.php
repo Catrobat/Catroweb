@@ -90,6 +90,13 @@ class CodeStatistic
           'listDifferent' => [],
         ],
       ],
+      'deviceBricks' => [
+        'numTotal' => 0,
+        'different' => [
+          'numDifferent' => 0,
+          'listDifferent' => [],
+        ],
+      ],
       'specialBricks' => [
         'numTotal' => 0,
         'different' => [
@@ -107,33 +114,28 @@ class CodeStatistic
       'looksBricks' => [],
       'penBricks' => [],
       'dataBricks' => [],
+      'deviceBricks' => [],
       'specialBricks' => [],
     ];
   }
 
   public function update(ParsedObjectsContainer $object_list_container): void
   {
-    if ($object_list_container instanceof ParsedScene)
-    {
+    if ($object_list_container instanceof ParsedScene) {
       $this->updateSceneStatistic();
     }
 
     $objects = [...[$object_list_container->getBackground()], ...$object_list_container->getObjects()];
 
-    foreach ($objects as $object)
-    {
+    foreach ($objects as $object) {
       /*
        * @var ParsedObject|ParsedObjectGroup
        */
-      if ($object->isGroup())
-      {
-        foreach ($object->getObjects() as $group_object)
-        {
+      if ($object->isGroup()) {
+        foreach ($object->getObjects() as $group_object) {
           $this->updateObjectStatistic($group_object);
         }
-      }
-      else
-      {
+      } else {
         $this->updateObjectStatistic($object);
       }
     }
@@ -202,8 +204,7 @@ class CodeStatistic
     $this->updateLookStatistic(count($object->getLooks()));
     $this->updateSoundStatistic(count($object->getSounds()));
 
-    foreach ($object->getScripts() as $script)
-    {
+    foreach ($object->getScripts() as $script) {
       $this->updateScriptStatistic($script);
     }
   }
@@ -224,8 +225,7 @@ class CodeStatistic
 
     $this->updateBrickStatistic($script);
 
-    foreach ($script->getBricks() as $brick)
-    {
+    foreach ($script->getBricks() as $brick) {
       $this->updateBrickStatistic($brick);
     }
   }
@@ -236,8 +236,7 @@ class CodeStatistic
   protected function updateBrickStatistic($brick): void
   {
     ++$this->total_num_bricks;
-    switch ($brick->getImgFile())
-    {
+    switch ($brick->getImgFile()) {
       // Normal Bricks
       case Constants::EVENT_SCRIPT_IMG:
       case Constants::EVENT_BRICK_IMG:
@@ -271,6 +270,9 @@ class CodeStatistic
       case Constants::DATA_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'dataBricks');
         break;
+      case Constants::DEVICE_BRICK_IMG:
+        $this->updateBrickTypeStatistic($brick->getType(), 'deviceBricks');
+        break;
       case Constants::UNKNOWN_BRICK_IMG:
       case Constants::DEPRECATED_BRICK_IMG:
       case Constants::UNKNOWN_SCRIPT_IMG:
@@ -296,8 +298,7 @@ class CodeStatistic
   protected function updateBrickTypeStatistic($brick_type, $brick_category): void
   {
     ++$this->brick_type_statistic[$brick_category]['numTotal'];
-    if (!in_array($brick_type, $this->brick_type_register[$brick_category], true))
-    {
+    if (!in_array($brick_type, $this->brick_type_register[$brick_category], true)) {
       ++$this->brick_type_statistic[$brick_category]['different']['numDifferent'];
       $this->brick_type_statistic[$brick_category]['different']['listDifferent'][] = $brick_type;
       $this->brick_type_register[$brick_category][] = $brick_type;
@@ -306,35 +307,28 @@ class CodeStatistic
 
   protected function countGlobalVariables(SimpleXMLElement $program_xml_properties): void
   {
-    try
-    {
+    try {
       $this->total_num_global_vars =
         count($program_xml_properties->xpath('//programVariableList//userVariable')) +
         count($program_xml_properties->xpath('//programListOfLists//userVariable'));
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       $this->total_num_global_vars = null;
     }
   }
 
   protected function countLocalVariables(SimpleXMLElement $program_xml_properties): void
   {
-    try
-    {
+    try {
       $this->total_num_local_vars =
         count($program_xml_properties->xpath('//userVariable//userVariable')) - $this->total_num_global_vars;
 
-      if ($this->total_num_local_vars <= 0)
-      {
+      if ($this->total_num_local_vars <= 0) {
         // might be a old project using the old deprecated format to define local variables
         $this->total_num_local_vars =
           count($program_xml_properties->xpath('//objectListOfList//userVariable')) +
           count($program_xml_properties->xpath('//objectVariableList//userVariable'));
       }
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       $this->total_num_local_vars = null;
     }
   }

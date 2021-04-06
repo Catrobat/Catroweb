@@ -30,16 +30,11 @@ class ShowTextStatement extends Statement
     $formula_x_pos = '';
     $formula_y_pos = '';
 
-    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
-    {
-      if ($statement instanceof FormulaStatement)
-      {
-        if ('Y_POSITION' == $statement->getCategory())
-        {
+    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement) {
+      if ($statement instanceof FormulaStatement) {
+        if ('Y_POSITION' == $statement->getCategory()) {
           $formula_y_pos = $statement->execute();
-        }
-        elseif ('X_POSITION' == $statement->getCategory())
-        {
+        } elseif ('X_POSITION' == $statement->getCategory()) {
           $formula_x_pos = $statement->execute();
         }
       }

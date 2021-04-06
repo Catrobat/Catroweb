@@ -4,6 +4,7 @@ namespace App\Api;
 
 use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Requests\AddProgramRequest;
+use App\Catrobat\Services\APIHelper;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
 use App\Entity\FeaturedProgram;
@@ -12,7 +13,6 @@ use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Repository\FeaturedRepository;
-use App\Utils\APIHelper;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -20,6 +20,7 @@ use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Model\ProjectsCategory;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -51,13 +52,15 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   private ImageRepository $image_repository;
   private ParameterBagInterface $parameter_bag;
 
+  private APIHelper $api_helper;
+
   public function __construct(ProgramManager $program_manager, SessionInterface $session,
                               ElapsedTimeStringFormatter $time_formatter, FeaturedRepository $featured_repository,
                               ImageRepository $image_repository, UserManager $user_manager,
                               RequestStack $request_stack, TokenStorageInterface $token_storage,
                               EntityManagerInterface $entity_manager, TranslatorInterface $translator,
                               UrlGeneratorInterface $url_generator, RecommenderManager $recommender_manager,
-                              ParameterBagInterface $parameter_bag)
+                              ParameterBagInterface $parameter_bag, APIHelper $APIHelper)
   {
     $this->program_manager = $program_manager;
     $this->session = $session;
@@ -72,6 +75,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $this->user_manager = $user_manager;
     $this->recommender_manager = $recommender_manager;
     $this->parameter_bag = $parameter_bag;
+    $this->api_helper = $APIHelper;
   }
 
   /**
@@ -92,8 +96,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   public function projectIdGet(string $id, &$responseCode, array &$responseHeaders)
   {
     $projects = $this->program_manager->getProgram($id);
-    if (empty($projects))
-    {
+    if (empty($projects)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -111,7 +114,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null): array
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
@@ -124,19 +127,26 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $featured_programs = [];
 
     /** @var FeaturedProgram $featured_program */
-    foreach ($programs as &$featured_program)
-    {
+    foreach ($programs as &$featured_program) {
+      $url = $featured_program->getUrl();
+      $project_url = ltrim($this->generateUrl(
+        'program',
+        [
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
+          'id' => $featured_program->getProgram()->getId(),
+        ],
+        UrlGeneratorInterface::ABSOLUTE_URL), '/'
+      );
+      if (empty($url)) {
+        $url = $project_url;
+      } else {
+        $project_url = null;
+      }
       $result = [
         'id' => $featured_program->getId(),
         'project_id' => $featured_program->getProgram()->getId(),
-        'project_url' => ltrim($this->generateUrl(
-          'program',
-          [
-            'theme' => $this->parameter_bag->get('umbrellaTheme'),
-            'id' => $featured_program->getProgram()->getId(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL), '/'
-        ),
+        'project_url' => $project_url,
+        'url' => $url,
         'name' => $featured_program->getProgram()->getName(),
         'author' => $featured_program->getProgram()->getUser()->getUsername(),
         'featured_image' => $this->image_repository->getAbsoluteWebPath($featured_program->getId(), $featured_program->getImageType(), true),
@@ -154,22 +164,19 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
-  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): array
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
-    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
 
     $recommended = 'recommended' === $category;
-    if ($recommended)
-    {
+    if ($recommended) {
       /** @var User $user */
       $user = $this->getUser();
       $programs = $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
-    }
-    else
-    {
+    } else {
       $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
     }
     $responseCode = Response::HTTP_OK;
@@ -182,9 +189,46 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
   /**
    * {@inheritdoc}
+   *
+   * @throws Exception
    */
   public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $limit = APIHelper::setDefaultLimitOnNull($limit);
+    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+    $flavor = APIHelper::setDefaultFlavorOnNull($flavor);
+
+    $projects = $this->program_manager->getProgram($id, true);
+    if (empty($projects)) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if ('similar' === $category) {
+      $programs = $this->program_manager->getRecommendedProgramsById($id, $flavor, $limit, $offset);
+    } elseif ('also_downloaded' === $category) {
+      $programs = $this->program_manager->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $projects[0], $limit, $offset);
+    } elseif ('more_from_user' === $category) {
+      /** @var Program $project */
+      $project = $projects[0]->isExample() ? $projects[0]->getProgram() : $projects[0];
+      $project_user_id = $project->getUser()->getId();
+      /** @var User $user */
+      $user = $this->getUser();
+      if (null !== $user && $user->getId() === $project_user_id) {
+        $programs = $this->program_manager->getUserPrograms($project_user_id, false, $max_version, $limit, $offset, [$project->getId()]);
+      } else {
+        $programs = $this->program_manager->getPublicUserPrograms($project_user_id, false, $max_version, $limit, $offset, [$project->getId()]);
+      }
+    } else {
+      return [];
+    }
+
+    $result = $this->getProjectsDataResponse($programs);
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    return $result;
   }
 
   /**
@@ -192,12 +236,11 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    */
   public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null)
   {
-    $accept_language = APIHelper::setDefaultAcceptLanguageOnNull($accept_language);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
     $private = $private ?? false;
 
     // File uploaded successful?
-    if (!$file->isValid())
-    {
+    if (!$file->isValid()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
 
       return new UploadErrorResponse(['error' => $this->translator->trans('api.projectsPost.upload_error', [], 'catroweb')]);
@@ -206,8 +249,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     // Checking checksum
     $calculated_checksum = md5_file($file->getPathname());
 
-    if (strtolower($calculated_checksum) != strtolower($checksum))
-    {
+    if (strtolower($calculated_checksum) != strtolower($checksum)) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
 
       return new UploadErrorResponse(['error' => $this->translator->trans('api.projectsPost.invalid_checksum', [], 'catroweb')]);
@@ -224,12 +266,9 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     // Adding the uploaded program
     $add_program_request = new AddProgramRequest($user, $file, $this->request_stack->getCurrentRequest()->getClientIp(), $accept_language, $flavor ? $flavor : 'pocketcode');
 
-    try
-    {
+    try {
       $program = $this->program_manager->addProgram($add_program_request);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => UploadError
 
       return new UploadErrorResponse(['error' => $this->translator->trans('api.projectsPost.creating_error', [], 'catroweb')]);
@@ -265,8 +304,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
 
     $responseCode = Response::HTTP_OK;
 
-    if ('' === $query || ctype_space($query))
-    {
+    if ('' === $query || ctype_space($query)) {
       return [];
     }
 
@@ -283,6 +321,45 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
    *
    * @throws Exception
    */
+  public function projectsCategoriesGet(?string $max_version = null, ?string $flavor = null, ?string $accept_language = null, &$responseCode, array &$responseHeaders): array
+  {
+    $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
+    $accept_language = $this->api_helper->setDefaultAcceptLanguageOnNull($accept_language);
+    $limit = APIHelper::setDefaultLimitOnNull(null);
+    $offset = APIHelper::setDefaultOffsetOnNull(null);
+    $result = [];
+
+    $categories = ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch'];
+
+    foreach ($categories as $category) {
+      $programs = $this->program_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
+      $data['projects_list'] = $this->getProjectsDataResponse($programs);
+      $data['type'] = $category;
+      $data['name'] = $this->translator->trans('category.'.$category, [], 'catroweb', $accept_language);
+      $entry = new ProjectsCategory($data);
+      $result[] = $entry;
+    }
+
+    /** @var User $user */
+    $user = $this->getUser();
+    $programs = $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
+    $data['projects_list'] = $this->getProjectsDataResponse($programs);
+    $data['type'] = 'recommended';
+    $data['name'] = $this->translator->trans('category.recommended', [], 'catroweb', $accept_language);
+    $entry = new ProjectsCategory($data);
+    $result[] = $entry;
+
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+    $responseCode = Response::HTTP_OK;
+
+    return $result;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @throws Exception
+   */
   public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $max_version = APIHelper::setDefaultMaxVersionOnNull($max_version);
@@ -290,8 +367,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
     $jwtPayload = $this->program_manager->decodeToken($this->token);
-    if (!array_key_exists('username', $jwtPayload))
-    {
+    if (!array_key_exists('username', $jwtPayload)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
@@ -317,8 +393,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
     $limit = APIHelper::setDefaultLimitOnNull($limit);
     $offset = APIHelper::setDefaultOffsetOnNull($offset);
 
-    if ('' === $id || ctype_space($id) || null == $this->user_manager->findOneBy(['id' => $id]))
-    {
+    if ('' === $id || ctype_space($id) || null == $this->user_manager->findOneBy(['id' => $id])) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -398,8 +473,7 @@ class ProjectsApi extends AbstractController implements ProjectsApiInterface
   private function getProjectsDataResponse(array $projects): array
   {
     $projectsDataResponse = [];
-    foreach ($projects as $project)
-    {
+    foreach ($projects as $project) {
       $projectData = $this->getProjectDataResponse($project);
       $projectsDataResponse[] = $projectData;
     }

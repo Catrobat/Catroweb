@@ -161,8 +161,7 @@ class RemixUpdaterTest extends TestCase
     $xml->header->remixOf = '';
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    if (!$file_overwritten)
-    {
+    if (!$file_overwritten) {
       throw new Exception("Can't overwrite code.xml file");
     }
 
@@ -187,8 +186,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchPrograms')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info)
-      {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(2, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -223,8 +221,7 @@ class RemixUpdaterTest extends TestCase
     $xml->header->remixOf = '';
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    if (!$file_overwritten)
-    {
+    if (!$file_overwritten) {
       throw new Exception("Can't overwrite code.xml file");
     }
 
@@ -268,8 +265,7 @@ class RemixUpdaterTest extends TestCase
     $xml->header->remixOf = '';
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    if (!$file_overwritten)
-    {
+    if (!$file_overwritten) {
       throw new Exception("Can't overwrite code.xml file");
     }
 
@@ -290,8 +286,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchPrograms')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info)
-      {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -325,8 +320,7 @@ class RemixUpdaterTest extends TestCase
     $xml->header->catrobatLanguageVersion = '0.993';
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    if (!$file_overwritten)
-    {
+    if (!$file_overwritten) {
       throw new Exception("Can't overwrite code.xml file");
     }
 
@@ -345,8 +339,7 @@ class RemixUpdaterTest extends TestCase
       ;
     $this->remix_manager->expects($this->atLeastOnce())
       ->method('addRemixes')
-      ->will($this->returnCallback(function (Program $project, array $remixes_data) use ($first_expected_url, $second_expected_url)
-      {
+      ->will($this->returnCallback(function (Program $project, array $remixes_data) use ($first_expected_url, $second_expected_url) {
         $this->assertEquals($this->program_entity, $project);
 
         $this->assertCount(2, $remixes_data);
@@ -371,8 +364,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchPrograms')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info)
-      {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -451,8 +443,7 @@ class RemixUpdaterTest extends TestCase
     $xml->header->remixOf = '';
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    if (!$file_overwritten)
-    {
+    if (!$file_overwritten) {
       throw new Exception("Can't overwrite code.xml file");
     }
 
@@ -507,8 +498,7 @@ class RemixUpdaterTest extends TestCase
     $xml->header->remixOf = '';
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    if (!$file_overwritten)
-    {
+    if (!$file_overwritten) {
       throw new Exception("Can't overwrite code.xml file");
     }
 

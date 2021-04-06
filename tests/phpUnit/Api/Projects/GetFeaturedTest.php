@@ -46,11 +46,13 @@ class GetFeaturedTest extends TestCase
 
     $this->featured_project1 = $this->mockFeaturedProgram(
       1,
+      null,
       $this->mockProgram('777', 'Tic-Tac-Toe', 'Catroweb')
     );
 
     $this->featured_project2 = $this->mockFeaturedProgram(
       2,
+      'https://example.com/project/1234',
       $this->mockProgram('Abc-123', 'Pacman', 'Steve')
     );
 
@@ -106,17 +108,40 @@ class GetFeaturedTest extends TestCase
   }
 
   /**
+   * @throws ReflectionException
+   */
+  public function testProjectsFeaturedProjectUrlGet(): void
+  {
+    $featured_projects = $this->project_api->projectsFeaturedGet();
+
+    $this->assertNotEmpty($featured_projects[0]->getProjectUrl());
+    $this->assertNull($featured_projects[1]->getProjectUrl());
+  }
+
+  /**
+   * @throws ReflectionException
+   */
+  public function testProjectsFeaturedUrlGet(): void
+  {
+    $featured_projects = $this->project_api->projectsFeaturedGet();
+
+    $this->assertNotEmpty($featured_projects[0]->getUrl());
+    $this->assertNotEmpty($featured_projects[1]->getUrl());
+  }
+
+  /**
    * @param MockObject|Program $program
    *
    * @return FeaturedProgram|MockObject
    */
-  private function mockFeaturedProgram(int $id, $program)
+  private function mockFeaturedProgram(int $id, ?string $url, $program)
   {
     $featured_project = $this->createMock(FeaturedProgram::class);
 
     $featured_project->expects($this->any())->method('getId')->willReturn($id);
     $featured_project->expects($this->any())->method('getProgram')->willReturn($program);
     $featured_project->expects($this->any())->method('getImageType')->willReturn('png');
+    $featured_project->expects($this->any())->method('getUrl')->willReturn($url);
 
     return $featured_project;
   }
@@ -176,8 +201,7 @@ class GetFeaturedTest extends TestCase
       ->method('get')
       ->will(
         $this->returnCallback(
-          function ($param)
-          {
+          function ($param) {
             switch ($param) {
               case 'umbrellaTheme':
                 return 'app';

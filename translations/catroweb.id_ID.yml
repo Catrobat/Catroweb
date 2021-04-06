@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Penampilan'
   penBricks: 'Pena'
   dataBricks: 'Data'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Bahasa
@@ -677,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: Paling banyak dilihat
+  most_downloaded: Paling banyak diunduh
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects

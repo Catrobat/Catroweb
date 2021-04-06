@@ -2,11 +2,11 @@
 
 namespace App\Api;
 
+use App\Catrobat\Services\APIHelper;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
-use App\Utils\APIHelper;
 use App\Utils\APIQueryHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
@@ -67,8 +67,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
       ->findOneBy(['nameUrl' => $name])
     ;
 
-    if (null === $media_package)
-    {
+    if (null === $media_package) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -77,36 +76,29 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     $responseCode = Response::HTTP_OK;
 
     $media_package_categories = $media_package->getCategories();
-    if (empty($media_package_categories))
-    {
+    if (empty($media_package_categories)) {
       return [];
     }
 
     $json_response_array = [];
 
     /** @var MediaPackageCategory $media_package_category */
-    foreach ($media_package_categories as $media_package_category)
-    {
+    foreach ($media_package_categories as $media_package_category) {
       $media_package_files = $media_package_category->getFiles();
-      if ((0 != $offset && count($media_package_files) <= $offset) || count($json_response_array) === $limit)
-      {
-        if (0 != $offset)
-        {
+      if ((0 != $offset && count($media_package_files) <= $offset) || count($json_response_array) === $limit) {
+        if (0 != $offset) {
           $offset -= count($media_package_files);
         }
         continue;
       }
 
       /** @var MediaPackageFile $media_package_file */
-      foreach ($media_package_files as $media_package_file)
-      {
-        if (0 != $offset)
-        {
+      foreach ($media_package_files as $media_package_file) {
+        if (0 != $offset) {
           --$offset;
           continue;
         }
-        if (count($json_response_array) === $limit)
-        {
+        if (count($json_response_array) === $limit) {
           break;
         }
         $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file));
@@ -125,8 +117,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
       ->findOneBy(['id' => $id])
         ;
 
-    if (null === $media_package_file)
-    {
+    if (null === $media_package_file) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -154,8 +145,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     APIQueryHelper::addFileFlavorsCondition($qb, $flavor, 'f');
     $media_package_files = $qb->getQuery()->getResult();
 
-    if (null === $media_package_files)
-    {
+    if (null === $media_package_files) {
       return [];
     }
 
@@ -167,8 +157,7 @@ class MediaLibraryApi implements MediaLibraryApiInterface
     $media_files_data_response = [];
 
     /** @var MediaPackageFile $media_package_file */
-    foreach ($media_package_files as $media_package_file)
-    {
+    foreach ($media_package_files as $media_package_file) {
       $media_files_data_response[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file));
     }
 

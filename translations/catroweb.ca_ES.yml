@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'Looks'
   penBricks: 'Pen'
   dataBricks: 'Data'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Idioma
@@ -677,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Comunitat Catrobat'
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: Més visitats
+  most_downloaded: Els més descarregats
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects

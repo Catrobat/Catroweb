@@ -61,8 +61,7 @@ class Flavor
 
   public function addMediaPackageFile(MediaPackageFile $media_package_file): void
   {
-    if ($this->media_package_files->contains($media_package_file))
-    {
+    if ($this->media_package_files->contains($media_package_file)) {
       return;
     }
     $this->media_package_files[] = $media_package_file;
@@ -70,8 +69,7 @@ class Flavor
 
   public function removeMediaPackageFile(MediaPackageFile $media_package_file): void
   {
-    if (!$this->media_package_files->contains($media_package_file))
-    {
+    if (!$this->media_package_files->contains($media_package_file)) {
       return;
     }
     $this->media_package_files->removeElement($media_package_file);

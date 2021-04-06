@@ -192,6 +192,12 @@
     "elasticsearch/elasticsearch": {
         "version": "v6.7.2"
     },
+    "ezimuel/guzzlestreams": {
+        "version": "3.0.1"
+    },
+    "ezimuel/ringphp": {
+        "version": "1.1.2"
+    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
     },
@@ -590,18 +596,6 @@
     "sebastian/version": {
         "version": "2.0.1"
     },
-    "sensio/framework-extra-bundle": {
-        "version": "5.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "config/packages/sensio_framework_extra.yaml"
-        ]
-    },
     "sonata-project/admin-bundle": {
         "version": "3.31",
         "recipe": {
@@ -841,7 +835,7 @@
         "version": "v1.14.0"
     },
     "symfony/polyfill-php56": {
-        "version": "v1.14.0"
+        "version": "v1.20.0"
     },
     "symfony/polyfill-php70": {
         "version": "v1.14.0"

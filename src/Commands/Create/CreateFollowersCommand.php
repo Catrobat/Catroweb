@@ -55,8 +55,7 @@ class CreateFollowersCommand extends Command
     $user_name = $input->getArgument('user_name');
     $follower_name = $input->getArgument('follower');
 
-    if ($user_name == $follower_name)
-    {
+    if ($user_name == $follower_name) {
       return 1;
     }
 
@@ -66,22 +65,17 @@ class CreateFollowersCommand extends Command
     /** @var User|null $follower */
     $follower = $this->user_manager->findUserByUsername($follower_name);
 
-    if (null === $user || null === $follower)
-    {
+    if (null === $user || null === $follower) {
       return 2;
     }
 
-    try
-    {
-      if ($user !== $follower)
-      {
+    try {
+      if ($user !== $follower) {
         $notification = new FollowNotification($user, $follower);
         $this->followUser($user, $follower);
         $this->notification_service->addNotification($notification);
       }
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return 3;
     }
     $output->writeln($follower_name.' follows '.$user_name);

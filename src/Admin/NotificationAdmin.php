@@ -29,15 +29,13 @@ class NotificationAdmin extends AbstractAdmin
    */
   protected function configureFormFields(FormMapper $form): void
   {
-    if ($this->isCurrentRoute('create'))
-    {
+    if ($this->isCurrentRoute('create')) {
       $form
         ->add('id', EntityType::class, ['class' => User::class, 'label' => 'User'])
       ;
     }
 
-    if ($this->isCurrentRoute('edit'))
-    {
+    if ($this->isCurrentRoute('edit')) {
       $form
         ->add('user', EntityType::class, ['class' => User::class, 'label' => 'User'])
       ;

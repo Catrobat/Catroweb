@@ -31,8 +31,7 @@ class ValueStatement extends Statement
   public function execute(): string
   {
     $color = SyntaxHighlightingConstants::VARIABLES;
-    switch ($this->type)
-    {
+    switch ($this->type) {
       case 'FUNCTION':
         $color = SyntaxHighlightingConstants::FUNCTIONS;
         break;

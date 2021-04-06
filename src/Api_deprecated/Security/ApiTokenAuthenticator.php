@@ -80,8 +80,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
   {
     $token = $credentials[self::TOKEN];
 
-    if (null === $token || '' === $token)
-    {
+    if (null === $token || '' === $token) {
       return null;
     }
 

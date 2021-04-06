@@ -29,15 +29,13 @@ class TaggingController extends AbstractController
     $tags['constantTags'] = [];
 
     $language = $request->query->get('language');
-    if (!in_array($language, $metadata, true))
-    {
+    if (!in_array($language, $metadata, true)) {
       $language = 'en';
       $tags['statusCode'] = 404;
     }
     $results = $tags_repo->getConstantTags($language);
 
-    foreach ($results as $tag)
-    {
+    foreach ($results as $tag) {
       $tags['constantTags'][] = $tag[$language];
     }
 

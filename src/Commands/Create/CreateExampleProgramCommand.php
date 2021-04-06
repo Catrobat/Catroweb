@@ -51,17 +51,13 @@ class CreateExampleProgramCommand extends Command
 
     $program = $this->program_manager->findOneByName($program_name);
 
-    if (null === $program)
-    {
+    if (null === $program) {
       return 1;
     }
 
-    try
-    {
+    try {
       $this->exampleProgram($program);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $output->writeln('Failed to example: '.$program->getName().' '.$e->getMessage());
 
       return 2;

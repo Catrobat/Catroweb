@@ -36,7 +36,7 @@ imprint: Damga
 programDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
-oldVersionError: 'En yeni cep kodu sürümüne güncelleyin!'
+oldVersionError: 'Lütfen en yeni Cep Kodu sürümüne güncelleyin!'
 more: 'daha fazla'
 less: 'daha az'
 show-more: 'Daha fazla göster'
@@ -105,11 +105,12 @@ programs:
     İptal etmek
   changeVisibility: |+
     Emin misiniz?
-    Silmek istediğine emin misin "%programName%"diğer kullanıcılar tarafından görülebilir ve bulunabilir.
-    Yine de projenizin bağlantısını arkadaşlarınızla paylaşabilirsiniz. Asma kilit simgesine dokunarak görünürlüğü değiştirebilirsiniz"%programName%" öğesini genel olarak ayarlarsanız, diğer kullanıcılar tarafından görülebilir ve bulunabilir.
-    Evet, herkese açık olarak ayarla
-    Evet, özel olarak ayarla
-    Hayır
+    '%ProgramName%' öğesini özel olarak ayarlarsanız, diğer kullanıcılar tarafından görülmeyecek veya bulunmayacaktır.
+    Projenizin bağlantısını yine de arkadaşlarınızla paylaşabilirsiniz. Asma kilit simgesine dokunarak görünürlüğü değiştirebilirsiniz.
+    "%ProgramName%" öğesini herkese açık olarak ayarlarsanız, diğer kullanıcılar tarafından görülebilir ve bulunabilir.
+    Herkese açık olarak ayarla
+    Özel olarak ayarla
+    İptal
   reportCommentConfirmation: Bu yorumu bildirmek istediğinizden emin misiniz?
   deleteCommentConfirmation: Bu yorumu silmek istediğinizden emin misiniz?
   deleteAccountConfirmation: |+
@@ -429,7 +430,7 @@ success:
   token: Tamam
   upload: Proje başarıyla yüklendi!
   imgUpload: Resminiz başarıyla yüklendi!
-  report: Bildirmeniz başarıyla gönderildi!
+  report: Geri bildiriminiz başarıyla gönderildi!
 time:
   minutes.ago: '{0} < 1 dakika önce |{1}1 dakika önce |]1,Inf] %count% dakika önce'
   hours.ago: '{1}1 saat önce |]1,Inf] %count% saat önce'
@@ -591,6 +592,7 @@ codeStatistics:
   looksBricks: 'Görünüş'
   penBricks: 'Kalem'
   dataBricks: 'Veri'
+  deviceBricks: 'Cihaz'
   specialBricks: 'Özel'
 footer:
   language: Dil
@@ -667,3 +669,11 @@ copy: 'Bağlantıyı kopyala'
 checkOutProject: 'Bu projeye göz atın:'
 community: 'Catrobat Topluluğu'
 back_to_app: 'Topluluktan çık'
+category:
+  recent: Yeni projeler
+  random: Rastgele projeler
+  most_viewed: En çok İzlenenler
+  most_downloaded: En çok indirilenler
+  example: Örnek
+  scratch: Scratch remixleri
+  recommended: Önerilen projeler

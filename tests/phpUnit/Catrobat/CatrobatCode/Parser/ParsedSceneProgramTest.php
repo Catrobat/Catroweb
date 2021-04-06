@@ -75,8 +75,7 @@ class ParsedSceneProgramTest extends TestCase
   {
     $expected = ParsedScene::class;
 
-    foreach ($this->program->getScenes() as $actual)
-    {
+    foreach ($this->program->getScenes() as $actual) {
       $this->assertInstanceOf($expected, $actual);
     }
   }

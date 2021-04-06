@@ -73,8 +73,7 @@ class UserLikeSimilarityRelation
    */
   public function updateTimestamps(): void
   {
-    if (null === $this->getCreatedAt())
-    {
+    if (null === $this->getCreatedAt()) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }

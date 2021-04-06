@@ -32,8 +32,7 @@ class NotificationsController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
+    if (!$user) {
       return $this->redirectToRoute('login');
     }
 
@@ -46,83 +45,62 @@ class NotificationsController extends AbstractController
     $remix_notifications = [];
     $notification_instance = [];
     $redirect_array = [];
-    foreach ($catro_user_notifications as $notification)
-    {
+    foreach ($catro_user_notifications as $notification) {
       $user = null;
       $notification_instance[$notification->getId()] = null;
       $redirect_array[$notification->getId()] = null;
 
-      if ($notification instanceof LikeNotification)
-      {
+      if ($notification instanceof LikeNotification) {
         $user = $notification->getLikeFrom();
-        if ($user != $this->getUser())
-        {
+        if ($user != $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $reaction_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'reaction';
           $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
         }
-      }
-      elseif ($notification instanceof CommentNotification)
-      {
-        if ($notification->getComment()->getUser() != $this->getUser())
-        {
+      } elseif ($notification instanceof CommentNotification) {
+        if ($notification->getComment()->getUser() != $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $comment_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'comment';
           $redirect_array[$notification->getId()] = $notification->getComment()->getProgram()->getId();
         }
-      }
-      elseif ($notification instanceof NewProgramNotification)
-      {
+      } elseif ($notification instanceof NewProgramNotification) {
         $user = $notification->getProgram()->getUser();
-        if ($user != $this->getUser())
-        {
+        if ($user != $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $follower_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'program';
           $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
         }
-      }
-      elseif ($notification instanceof FollowNotification)
-      {
+      } elseif ($notification instanceof FollowNotification) {
         $user = $notification->getFollower();
-        if ($user != $this->getUser())
-        {
+        if ($user != $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $follower_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'follow';
           $redirect_array[$notification->getId()] = $notification->getFollower()->getId();
         }
-      }
-      elseif ($notification instanceof RemixNotification)
-      {
+      } elseif ($notification instanceof RemixNotification) {
         $user = $notification->getRemixFrom();
-        if ($user != $this->getUser())
-        {
+        if ($user != $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $remix_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'remix';
           $redirect_array[$notification->getId()] = $notification->getRemixProgram()->getId();
         }
-      }
-      else
-      {
+      } else {
         $all_notifications[$notification->getId()] = $notification;
       }
-      if (null == $notification_instance[$notification->getId()])
-      {
+      if (null == $notification_instance[$notification->getId()]) {
         $notification_instance[$notification->getId()] = 'other';
       }
-      if (null == $redirect_array[$notification->getId()])
-      {
+      if (null == $redirect_array[$notification->getId()]) {
         $redirect_array[$notification->getId()] = 'other';
       }
-      if (null !== $user)
-      {
+      if (null !== $user) {
         $avatar = $user->getAvatar();
-        if ($avatar)
-        {
+        if ($avatar) {
           $avatars[$notification->getId()] = $avatar;
         }
       }
@@ -164,13 +142,11 @@ class NotificationsController extends AbstractController
                                          CatroNotificationRepository $notification_repo): JsonResponse
   {
     $user = $this->getUser();
-    if (null === $user)
-    {
+    if (null === $user) {
       return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
     }
     $notification_seen = $notification_repo->findOneBy(['id' => $notification_id, 'user' => $user]);
-    if (null === $notification_seen)
-    {
+    if (null === $notification_seen) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
     $notification_service->markSeen([$notification_seen]);
@@ -187,8 +163,7 @@ class NotificationsController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
+    if (!$user) {
       return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
     }
 
@@ -198,28 +173,19 @@ class NotificationsController extends AbstractController
     $comments = 0;
     $remixes = 0;
     $all = 0;
-    foreach ($catro_user_notifications_all as $notification)
-    {
+    foreach ($catro_user_notifications_all as $notification) {
       /** @var CatroNotification $notification */
-      if ($notification->getSeen())
-      {
+      if ($notification->getSeen()) {
         continue;
       }
 
-      if ($notification instanceof LikeNotification)
-      {
+      if ($notification instanceof LikeNotification) {
         ++$likes;
-      }
-      elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
-      {
+      } elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification) {
         ++$followers;
-      }
-      elseif ($notification instanceof CommentNotification)
-      {
+      } elseif ($notification instanceof CommentNotification) {
         ++$comments;
-      }
-      elseif ($notification instanceof RemixNotification)
-      {
+      } elseif ($notification instanceof RemixNotification) {
         ++$remixes;
       }
 
@@ -245,20 +211,16 @@ class NotificationsController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
+    if (!$user) {
       return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
     }
     $catro_user_notifications = $notification_repo->findBy(['user' => $user]);
     $notifications_seen = [];
-    foreach ($catro_user_notifications as $notification)
-    {
-      if (!$notification)
-      {
+    foreach ($catro_user_notifications as $notification) {
+      if (!$notification) {
         return new JsonResponse([], Response::HTTP_NOT_FOUND);
       }
-      if (!$notification->getSeen())
-      {
+      if (!$notification->getSeen()) {
         $notifications_seen[$notification->getID()] = $notification;
       }
     }
@@ -279,27 +241,20 @@ class NotificationsController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
+    if (!$user) {
       return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
     }
     $catro_user_notifications = null;
-    if ('all' === $type)
-    {
+    if ('all' === $type) {
       $catro_user_notifications = $notification_repo->findBy(['user' => $user], ['id' => 'DESC'], $limit, $offset);
-    }
-    else
-    {
+    } else {
       $catro_user_notifications = $notification_repo->findBy(['user' => $user, 'type' => $type], ['id' => 'DESC'], $limit, $offset);
     }
 
     $fetched_notifications = [];
-    foreach ($catro_user_notifications as $notification)
-    {
-      if ($notification instanceof LikeNotification && ('reaction' === $type || 'all' === $type))
-      {
-        if (($notification->getLikeFrom() === $this->getUser()))
-        {
+    foreach ($catro_user_notifications as $notification) {
+      if ($notification instanceof LikeNotification && ('reaction' === $type || 'all' === $type)) {
+        if (($notification->getLikeFrom() === $this->getUser())) {
           continue;
         }
         array_push($fetched_notifications,
@@ -319,15 +274,12 @@ class NotificationsController extends AbstractController
         continue;
       }
       if (($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
-        && ('follow' === $type || 'all' === $type))
-      {
+        && ('follow' === $type || 'all' === $type)) {
         if (($notification instanceof FollowNotification && $notification->getFollower() === $this->getUser())
-          || ($notification instanceof NewProgramNotification && $notification->getProgram()->getUser() === $this->getUser()))
-        {
+          || ($notification instanceof NewProgramNotification && $notification->getProgram()->getUser() === $this->getUser())) {
           continue;
         }
-        if ($notification instanceof FollowNotification)
-        {
+        if ($notification instanceof FollowNotification) {
           array_push($fetched_notifications,
             ['id' => $notification->getId(),
               'from' => $notification->getFollower()->getId(),
@@ -341,9 +293,7 @@ class NotificationsController extends AbstractController
               'message' => $translator->trans('catro-notifications.follow.message', [], 'catroweb'),
               'prize' => null,
               'seen' => $notification->getSeen(), ]);
-        }
-        else
-        {
+        } else {
           array_push($fetched_notifications,
             ['id' => $notification->getId(),
               'from' => $notification->getProgram()->getUser()->getId(),
@@ -360,10 +310,8 @@ class NotificationsController extends AbstractController
         }
         continue;
       }
-      if ($notification instanceof CommentNotification && ('comment' === $type || 'all' === $type))
-      {
-        if ($notification->getComment()->getUser() === $this->getUser())
-        {
+      if ($notification instanceof CommentNotification && ('comment' === $type || 'all' === $type)) {
+        if ($notification->getComment()->getUser() === $this->getUser()) {
           continue;
         }
         array_push($fetched_notifications,
@@ -381,10 +329,8 @@ class NotificationsController extends AbstractController
             'seen' => $notification->getSeen(), ]);
         continue;
       }
-      if ($notification instanceof RemixNotification && ('remix' === $type || 'all' === $type))
-      {
-        if ($notification->getRemixFrom() === $this->getUser())
-        {
+      if ($notification instanceof RemixNotification && ('remix' === $type || 'all' === $type)) {
+        if ($notification->getRemixFrom() === $this->getUser()) {
           continue;
         }
 
@@ -403,11 +349,9 @@ class NotificationsController extends AbstractController
             'seen' => $notification->getSeen(), ]);
         continue;
       }
-      if ('all' === $type)
-      {
+      if ('all' === $type) {
         $prize = null;
-        if ($notification instanceof AnniversaryNotification)
-        {
+        if ($notification instanceof AnniversaryNotification) {
           $prize = $notification->getPrize();
         }
         array_push($fetched_notifications,

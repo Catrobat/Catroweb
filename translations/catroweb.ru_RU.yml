@@ -606,6 +606,7 @@ codeStatistics:
   looksBricks: 'Текстуры'
   penBricks: 'Ручка'
   dataBricks: 'Данные'
+  deviceBricks: 'Устройство'
   specialBricks: 'Особый'
 footer:
   language: Язык
@@ -682,3 +683,11 @@ copy: 'Скопировать ссылку'
 checkOutProject: 'Посмотреть проект:'
 community: 'Сообщество Catrobat'
 back_to_app: 'Выйти из  сообщества'
+category:
+  recent: Новые проекты
+  random: Случайные проекты
+  most_viewed: Самые просматриваемые
+  most_downloaded: Самые скачиваемые
+  example: Пример
+  scratch: Scratch ремиксы
+  recommended: Рекомендуемые проекты

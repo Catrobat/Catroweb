@@ -16,7 +16,12 @@ Uploaded projects can be shared and downloaded. Additionally, the platform provi
 The Community website with projects from users all around the world can be found at [https://share.catrob.at](https://share.catrob.at/).
 The official Swagger API documentation can be found at [GitHub](https://github.com/Catrobat/Catroweb-API/blob/develop/catroweb.yaml).
 
-**Please create a new [issue](https://github.com/Catrobat/Catroweb/issues/new) for every bug you find.**
+**Please create a new [issue](https://github.com/Catrobat/Catroweb/issues/new) for every bug you find.*
+
+## API
+
+- specification: http://developer.catrobat.org/Catroweb-API
+- repository: https://github.com/Catrobat/Catroweb-API
 
 ## How to get started: 
 

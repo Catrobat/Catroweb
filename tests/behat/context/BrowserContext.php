@@ -59,12 +59,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function iEnsurePopUpsWork(): void
   {
-    try
-    {
+    try {
       $this->getSession()->getDriver()->executeScript('window.confirm = function(){return true;}');
-    }
-    catch (UnsupportedDriverActionException | DriverException $e)
-    {
+    } catch (UnsupportedDriverActionException | DriverException $e) {
       Assert::assertTrue(
         false,
         "Driver doesn't support JS injection. For Chrome this is needed since it cant deal with pop ups"
@@ -127,12 +124,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     Assert::assertNotNull($element, $locator.' not found!');
     Assert::assertTrue($element->hasAttribute($attribute), 'Element has no attribute '.$attribute);
 
-    if ('a' == $should_have)
-    {
+    if ('a' == $should_have) {
       Assert::assertStringContainsString($value, $element->getAttribute($attribute), '<'.$attribute.'> does not contain '.$value);
-    }
-    else
-    {
+    } else {
       Assert::assertStringNotContainsString($value, $element->getAttribute($attribute), '<'.$attribute.'> does contain '.$value);
     }
 
@@ -147,11 +141,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   public function atLeastOneElementShouldBeVisible($locator): void
   {
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
-    foreach ($elements as $e)
-    {
+    foreach ($elements as $e) {
       /** @var NodeElement $e */
-      if ($e->isVisible())
-      {
+      if ($e->isVisible()) {
         return;
       }
     }
@@ -159,21 +151,14 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^download button is pointing to the non existing project$/
+   * @Then project :id is missing its files
+   *
+   * @param mixed $id
    */
-  public function downloadButtonIsPointingToTheNonExistingProject(): void
+  public function projectIsMissingItsFiles($id): void
   {
-    $program = $this->getProgramManager()->find('1');
-    $program->setId('123456');
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Then /^project has no valid program file$/
-   */
-  public function projectHasNoValidFile(): void
-  {
-    $this->getFileRepository()->deleteProgramFile('2');
+    $this->getFileRepository()->deleteProjectExtractFiles($id);
+    $this->getFileRepository()->deleteProjectZipFile($id);
   }
 
   /**
@@ -184,8 +169,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   public function atLeastOneElementShouldNotBeVisible($locator): void
   {
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
-    foreach ($elements as $element)
-    {
+    foreach ($elements as $element) {
       /* @var NodeElement $element */
       Assert::assertFalse($element->isVisible(), 'Found visible '.$locator.' element.');
     }
@@ -265,11 +249,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   {
     $fields = $this->getSession()->getPage()->findAll('css', $locator);
     Assert::assertLessThanOrEqual(1, count($fields), sprintf("No field with selector '%s' found", $locator));
-    foreach ($fields as $field)
-    {
+    foreach ($fields as $field) {
       /** @var NodeElement $field */
-      if ($field->isVisible())
-      {
+      if ($field->isVisible()) {
         $field->setValue($text);
         $field->focus();
 
@@ -288,10 +270,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $this->getSession()->getPage()->find('css', '.select2-choices')->click();
 
     $packages = $this->getSession()->getPage()->findAll('css', '.select2-results li');
-    foreach ($packages as $package)
-    {
-      if ($package->getText() == $arg1)
-      {
+    foreach ($packages as $package) {
+      if ($package->getText() == $arg1) {
         $package->click();
         break;
       }
@@ -308,10 +288,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $this->getSession()->getPage()->find('css', '.select2-choices')->click();
 
     $flavors = $this->getSession()->getPage()->findAll('css', '.select2-results li');
-    foreach ($flavors as $flavor)
-    {
-      if ($flavor->getText() == $arg1)
-      {
+    foreach ($flavors as $flavor) {
+      if ($flavor->getText() == $arg1) {
         $flavor->click();
         break;
       }
@@ -329,10 +307,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $this->getSession()->getPage()->find('css', '.select2-container')->click();
 
     $flavors = $this->getSession()->getPage()->findAll('css', '.select2-results li');
-    foreach ($flavors as $flavor)
-    {
-      if ($flavor->getText() == $arg1)
-      {
+    foreach ($flavors as $flavor) {
+      if ($flavor->getText() == $arg1) {
         $flavor->click();
         break;
       }
@@ -355,10 +331,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
 
     $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 5 seconds
-    while (TimeUtils::getTimestamp() < $end_time)
-    {
-      if (file_exists($file_path))
-      {
+    while (TimeUtils::getTimestamp() < $end_time) {
+      if (file_exists($file_path)) {
         $received = true;
         unlink($file_path);
         break;
@@ -376,10 +350,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   {
     $contains = false;
     $elements = $this->getSession()->getPage()->findAll('css', $selector);
-    foreach ($elements as $element)
-    {
-      if (false !== strpos($element->getText(), $value))
-      {
+    foreach ($elements as $element) {
+      if (false !== strpos($element->getText(), $value)) {
         $contains = true;
         break;
       }
@@ -394,10 +366,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   {
     $contains = false;
     $elements = $this->getSession()->getPage()->findAll('css', $selector);
-    foreach ($elements as $element)
-    {
-      if (false !== strpos($element->getText(), $value))
-      {
+    foreach ($elements as $element) {
+      if (false !== strpos($element->getText(), $value)) {
         $contains = true;
         break;
       }
@@ -477,10 +447,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $element = $this->getSession()->getPage()->find('css', $locator);
     $tries = 100;
     $delay = 100000; // every 1/10 second
-    for ($timer = 0; $timer < $tries; ++$timer)
-    {
-      if ($element->isVisible())
-      {
+    for ($timer = 0; $timer < $tries; ++$timer) {
+      if ($element->isVisible()) {
         return;
       }
       usleep($delay);
@@ -504,10 +472,8 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $element = $this->getSession()->getPage()->find('css', $locator);
     $tries = 100;
     $delay = 100000; // every 1/10 second
-    for ($timer = 0; $timer < $tries; ++$timer)
-    {
-      if ($element->getText() === $text)
-      {
+    for ($timer = 0; $timer < $tries; ++$timer) {
+      if ($element->getText() === $text) {
         return;
       }
       usleep($delay);
@@ -526,8 +492,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function makeScreenshot(AfterStepScope $scope): void
   {
-    if (!$scope->getTestResult()->isPassed())
-    {
+    if (!$scope->getTestResult()->isPassed()) {
       $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
     }
   }

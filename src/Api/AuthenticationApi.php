@@ -2,9 +2,9 @@
 
 namespace App\Api;
 
+use App\Catrobat\Services\APIHelper;
 use App\Entity\User;
 use App\Entity\UserManager;
-use App\Utils\APIHelper;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
@@ -58,8 +58,7 @@ class AuthenticationApi implements AuthenticationApiInterface
     $responseCode = Response::HTTP_OK;
     $resource_owner = $o_auth_login_request->getResourceOwner();
     $resource_owner_method = 'validate'.ucfirst($resource_owner).'IdToken';
-    if (!method_exists($this, $resource_owner_method))
-    {
+    if (!method_exists($this, $resource_owner_method)) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
       return new JWTResponse();
@@ -96,14 +95,18 @@ class AuthenticationApi implements AuthenticationApiInterface
     // TODO: Implement authenticationPut() method.
   }
 
+  public function authenticationRefreshPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  {
+    //TODO: Implement method
+  }
+
   private function validateGoogleIdToken($id_token)
   {
     $google_id = getenv('GOOGLE_ID');
 
     $client = new Google_Client(['client_id' => $google_id]);  // Specify the CLIENT_ID of the app that accesses the backend
     $payload = $client->verifyIdToken($id_token);
-    if ($payload)
-    {
+    if ($payload) {
       $user_id = $payload['sub'];
 
       $user_email = $payload['email'];
@@ -123,12 +126,9 @@ class AuthenticationApi implements AuthenticationApiInterface
   {
     $fb_id = getenv('FB_ID');
     $public_key = getenv('FB_OAUTH_PUBLIC_KEY');
-    try
-    {
+    try {
       $decoded = JWT::decode($id_token, $public_key, ['RS256']);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
       $token = new JWTResponse();
 
@@ -136,8 +136,7 @@ class AuthenticationApi implements AuthenticationApiInterface
     }
     if ($decoded->app_id !== $fb_id || $decoded->expires_at < time()
             || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email)
-            || !isset($decoded->name))
-    {
+            || !isset($decoded->name)) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
       $token = new JWTResponse();
 
@@ -157,8 +156,7 @@ class AuthenticationApi implements AuthenticationApiInterface
     $apple_id = getenv('APPLE_ID');
 
     $jwt = self::jwt_decode($id_token);
-    if (!$jwt || !isset($jwt['header']['kid']))
-    {
+    if (!$jwt || !isset($jwt['header']['kid'])) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
       $token = new JWTResponse();
 
@@ -171,17 +169,14 @@ class AuthenticationApi implements AuthenticationApiInterface
     $keys_raw = json_decode($body, true);
     $keys = $keys_raw['keys'];
     $public_key = [];
-    foreach ($keys as $key)
-    {
-      if ($header['kid'] === $key['kid'])
-      {
+    foreach ($keys as $key) {
+      if ($header['kid'] === $key['kid']) {
         $public_key = $key;
         break;
       }
     }
 
-    if (count($public_key) < 1)
-    {
+    if (count($public_key) < 1) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
       $token = new JWTResponse();
 
@@ -189,20 +184,16 @@ class AuthenticationApi implements AuthenticationApiInterface
     }
     $jwkConverter = new JWKConverter();
     $PEM = $jwkConverter->toPEM($public_key);
-    try
-    {
+    try {
       $decoded = JWT::decode($id_token, $PEM, ['RS256']);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
       $token = new JWTResponse();
 
       return ['response_code' => $responseCode, 'token' => $token];
     }
     if ($decoded->exp < time() || $decoded->iat > time() || $decoded->aud !== $apple_id
-            || 'https://appleid.apple.com' !== $decoded->iss || empty($decoded->sub) || !isset($decoded->email))
-    {
+            || 'https://appleid.apple.com' !== $decoded->iss || empty($decoded->sub) || !isset($decoded->email)) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
       $token = new JWTResponse();
 
@@ -219,8 +210,7 @@ class AuthenticationApi implements AuthenticationApiInterface
   private function connectUserToAccount($user_id, $email, $resource_owner, $username)
   {
     $user = $this->user_manager->findOneBy([$resource_owner.'_id' => $user_id]);
-    if ($user)
-    {
+    if ($user) {
       //create JWT token
       $responseCode = Response::HTTP_OK;
       $token = $this->jwt_manager->create($user);
@@ -232,11 +222,9 @@ class AuthenticationApi implements AuthenticationApiInterface
     $user_email = $email;
     $user = $this->user_manager->findUserByEmail($user_email);
     $set_id = 'set'.ucfirst($resource_owner).'Id';
-    if ($user)
-    {
+    if ($user) {
       $get_id = 'get'.ucfirst($resource_owner).'Id';
-      if ($user->{$get_id}())
-      {
+      if ($user->{$get_id}()) {
         $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
         $token = new JWTResponse();
 
@@ -269,12 +257,9 @@ class AuthenticationApi implements AuthenticationApiInterface
 
   private static function jwt_decode($id_token)
   {
-    try
-    {
+    try {
       [$header, $payload] = explode('.', $id_token, 3);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return null;
     }
     $header = json_decode(base64_decode($header, true), true);
@@ -300,14 +285,12 @@ class AuthenticationApi implements AuthenticationApiInterface
   private function createRandomUsername($name = null): string
   {
     $username_base = 'user';
-    if (!empty($name))
-    {
+    if (!empty($name)) {
       $username_base = str_replace(' ', '', $name);
     }
     $username = $username_base;
     $user_number = 0;
-    while (null !== $this->user_manager->findUserByUsername($username))
-    {
+    while (null !== $this->user_manager->findUserByUsername($username)) {
       ++$user_number;
       $username = $username_base.$user_number;
     }
@@ -323,8 +306,7 @@ class AuthenticationApi implements AuthenticationApiInterface
     $pass = '';
     $max = strlen($chars) - 1;
 
-    for ($i = 0; $i < $length; ++$i)
-    {
+    for ($i = 0; $i < $length; ++$i) {
       $pass .= $chars[random_int(0, $max)];
     }
 

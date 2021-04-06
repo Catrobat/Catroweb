@@ -64,8 +64,7 @@ class CatroNotificationService
    */
   public function addNotifications($notifications): void
   {
-    foreach ($notifications as $notification)
-    {
+    foreach ($notifications as $notification) {
       $this->em->persist($notification);
     }
     $this->em->flush();
@@ -85,8 +84,7 @@ class CatroNotificationService
    */
   public function markSeen($notifications): void
   {
-    foreach ($notifications as $notification)
-    {
+    foreach ($notifications as $notification) {
       $notification->setSeen(true);
     }
     $this->em->flush();
@@ -97,8 +95,7 @@ class CatroNotificationService
    */
   public function deleteNotifications($notifications): void
   {
-    foreach ($notifications as $notification)
-    {
+    foreach ($notifications as $notification) {
       $this->em->remove($notification);
     }
     $this->em->flush();

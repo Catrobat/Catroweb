@@ -27,14 +27,12 @@ class MediaPackageController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $media_package_files = $em->getRepository(MediaPackageFile::class)->findAll();
     $json_response_array = [];
-    if (empty($media_package_files))
-    {
+    if (empty($media_package_files)) {
       return JsonResponse::create(
         $json_response_array
       );
     }
-    foreach ($media_package_files as $media_package_file)
-    {
+    foreach ($media_package_files as $media_package_file) {
       /* @var MediaPackageFile $media_package_file */
       $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
     }
@@ -54,8 +52,7 @@ class MediaPackageController extends AbstractController
 
     $categories = $em->getRepository(MediaPackageCategory::class)->findAll();
 
-    if (empty($categories))
-    {
+    if (empty($categories)) {
       return JsonResponse::create(
         [
           'statusCode' => StatusCode::MEDIA_LIB_CATEGORY_NOT_FOUND,
@@ -66,15 +63,13 @@ class MediaPackageController extends AbstractController
     $json_response_array = [];
 
     /** @var MediaPackageCategory $category */
-    foreach ($categories as $category)
-    {
+    foreach ($categories as $category) {
       $json_response_array[] = $this->createArrayOfCategory($category);
     }
 
     $flavor = $request->attributes->get('flavor');
 
-    if ('pocketcode' !== $flavor)
-    {
+    if ('pocketcode' !== $flavor) {
       $snowflake = [
         'id' => PHP_INT_MAX,
         'name' => $flavor,
@@ -109,8 +104,7 @@ class MediaPackageController extends AbstractController
           'name' => $category,
         ])
     ;
-    if (count($media_package_categories) <= 0)
-    {
+    if (count($media_package_categories) <= 0) {
       return JsonResponse::create(
         [
           'statusCode' => StatusCode::MEDIA_LIB_CATEGORY_NOT_FOUND,
@@ -119,14 +113,11 @@ class MediaPackageController extends AbstractController
       );
     }
 
-    foreach ($media_package_categories as $media_package_category)
-    {
+    foreach ($media_package_categories as $media_package_category) {
       $media_package_files = $media_package_category->getFiles();
-      if (null !== $media_package_files)
-      {
+      if (null !== $media_package_files) {
         /** @var MediaPackageFile $media_package_file */
-        foreach ($media_package_files as $media_package_file)
-        {
+        foreach ($media_package_files as $media_package_file) {
           $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
         }
       }
@@ -155,8 +146,7 @@ class MediaPackageController extends AbstractController
     $media_package = $em->getRepository(MediaPackage::class)
       ->findOneBy(['name' => $package])
     ;
-    if (null === $media_package)
-    {
+    if (null === $media_package) {
       return JsonResponse::create(
         ['statusCode' => StatusCode::MEDIA_LIB_PACKAGE_NOT_FOUND,
           'message' => $package.' not found', ]
@@ -164,21 +154,17 @@ class MediaPackageController extends AbstractController
     }
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
-    if ($media_package_categories->isEmpty())
-    {
+    if ($media_package_categories->isEmpty()) {
       return JsonResponse::create(
         $json_response_array
       );
     }
     /** @var MediaPackageCategory $media_package_category */
-    foreach ($media_package_categories as $media_package_category)
-    {
+    foreach ($media_package_categories as $media_package_category) {
       $media_package_files = $media_package_category->getFiles();
-      if (!$media_package_files->isEmpty())
-      {
+      if (!$media_package_files->isEmpty()) {
         /** @var MediaPackageFile $media_package_file */
-        foreach ($media_package_files as $media_package_file)
-        {
+        foreach ($media_package_files as $media_package_file) {
           $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
         }
       }
@@ -205,8 +191,7 @@ class MediaPackageController extends AbstractController
     $media_package = $em->getRepository(MediaPackage::class)
       ->findOneBy(['nameUrl' => $package])
     ;
-    if (null === $media_package)
-    {
+    if (null === $media_package) {
       return JsonResponse::create(
         ['statusCode' => StatusCode::MEDIA_LIB_PACKAGE_NOT_FOUND,
           'message' => $package.' not found', ]
@@ -214,20 +199,16 @@ class MediaPackageController extends AbstractController
     }
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
-    if ($media_package_categories->isEmpty())
-    {
+    if ($media_package_categories->isEmpty()) {
       return JsonResponse::create(
         $json_response_array
       );
     }
-    foreach ($media_package_categories as $media_package_category)
-    {
+    foreach ($media_package_categories as $media_package_category) {
       /** @var array|MediaPackageFile $media_package_files */
       $media_package_files = $media_package_category->getFiles();
-      if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0)
-      {
-        foreach ($media_package_files as $media_package_file)
-        {
+      if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0) {
+        foreach ($media_package_files as $media_package_file) {
           $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
         }
       }
@@ -256,8 +237,7 @@ class MediaPackageController extends AbstractController
     $media_package = $em->getRepository(MediaPackage::class)
       ->findOneBy(['name' => $package])
     ;
-    if (null === $media_package)
-    {
+    if (null === $media_package) {
       return JsonResponse::create(
         [
           'statusCode' => StatusCode::MEDIA_LIB_PACKAGE_NOT_FOUND,
@@ -269,8 +249,7 @@ class MediaPackageController extends AbstractController
     $category_not_found = true;
 
     $media_package_categories = $media_package->getCategories();
-    if ($media_package_categories->isEmpty())
-    {
+    if ($media_package_categories->isEmpty()) {
       return JsonResponse::create(
         [
           'statusCode' => StatusCode::MEDIA_LIB_CATEGORY_NOT_FOUND,
@@ -279,27 +258,22 @@ class MediaPackageController extends AbstractController
         ]
       );
     }
-    foreach ($media_package_categories as $media_package_category)
-    {
+    foreach ($media_package_categories as $media_package_category) {
       // case insensitive:
-      if (0 === strcasecmp($media_package_category->getName(), $category))
-      {
+      if (0 === strcasecmp($media_package_category->getName(), $category)) {
         // case sensitive:
         // if ($media_package_category->getName() === $category)
         $category_not_found = false;
         /** @var array|MediaPackageFile $media_package_files */
         $media_package_files = $media_package_category->getFiles();
-        if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0)
-        {
-          foreach ($media_package_files as $media_package_file)
-          {
+        if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0) {
+          foreach ($media_package_files as $media_package_file) {
             $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
           }
         }
       }
     }
-    if ($category_not_found)
-    {
+    if ($category_not_found) {
       return JsonResponse::create(
         [
           'statusCode' => StatusCode::MEDIA_LIB_CATEGORY_NOT_FOUND,
@@ -323,8 +297,7 @@ class MediaPackageController extends AbstractController
    */
   public function getSingleMediaFile($id): JsonResponse
   {
-    if (0 === $id)
-    {
+    if (0 === $id) {
       return JsonResponse::create(
         [
           'statusCode' => Response::HTTP_NOT_FOUND,
@@ -337,8 +310,7 @@ class MediaPackageController extends AbstractController
     $media_file = $em->getRepository(MediaPackageFile::class)
       ->find($id)
     ;
-    if (null === $media_file)
-    {
+    if (null === $media_file) {
       return JsonResponse::create(
         [
           'statusCode' => Response::HTTP_NOT_FOUND,

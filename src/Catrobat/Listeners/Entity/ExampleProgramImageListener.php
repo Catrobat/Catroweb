@@ -18,8 +18,7 @@ class ExampleProgramImageListener
   public function prePersist(ExampleProgram $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       return;
     }
     $example->setImageType($file->guessExtension());
@@ -28,8 +27,7 @@ class ExampleProgramImageListener
   public function postPersist(ExampleProgram $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       return;
     }
     $this->repository->save($file, $example->getId(), $example->getImageType(), false);
@@ -38,8 +36,7 @@ class ExampleProgramImageListener
   public function preUpdate(ExampleProgram $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       $example->setImageType($example->old_image_type);
 
       return;
@@ -50,8 +47,7 @@ class ExampleProgramImageListener
   public function postUpdate(ExampleProgram $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       return;
     }
     $this->repository->save($file, $example->getId(), $example->getImageType(), false);

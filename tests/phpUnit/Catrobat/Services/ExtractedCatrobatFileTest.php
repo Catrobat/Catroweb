@@ -577,25 +577,18 @@ class ExtractedCatrobatFileTest extends TestCase
   {
     $this->assertCount($expectedCount, $urls);
 
-    for ($i = 0; $i < $expectedCount; ++$i)
-    {
+    for ($i = 0; $i < $expectedCount; ++$i) {
       $this->assertInstanceOf(RemixData::class, $urls[$i]);
       $this->assertSame($expectedURLs[$i], $urls[$i]->getUrl());
       $this->assertSame($expectedProgramIds[$i], $urls[$i]->getProgramId());
-      if ($scratch[$i])
-      {
+      if ($scratch[$i]) {
         $this->assertTrue($urls[$i]->isScratchProgram());
-      }
-      else
-      {
+      } else {
         $this->assertFalse($urls[$i]->isScratchProgram());
       }
-      if ($absolutePaths[$i])
-      {
+      if ($absolutePaths[$i]) {
         $this->assertTrue($urls[$i]->isAbsoluteUrl());
-      }
-      else
-      {
+      } else {
         $this->assertFalse($urls[$i]->isAbsoluteUrl());
       }
     }

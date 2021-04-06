@@ -97,8 +97,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
    */
   public function addLike(Program $project, User $user, int $type): void
   {
-    if ($this->likeExists($project, $user, $type))
-    {
+    if ($this->likeExists($project, $user, $type)) {
       // Like exists already, nothing to do.
       return;
     }
@@ -138,12 +137,9 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->setParameter(':type', $type)
     ;
 
-    try
-    {
+    try {
       $count = $qb->getQuery()->getSingleScalarResult();
-    }
-    catch (NonUniqueResultException $nonUniqueResultException)
-    {
+    } catch (NonUniqueResultException $nonUniqueResultException) {
       return false;
     }
 

@@ -93,12 +93,10 @@ class LogsControllerTest extends CatrowebTestCase
     $logFile = 'test.log';
     $fs = new Filesystem();
 
-    if (!$fs->exists($logDir))
-    {
+    if (!$fs->exists($logDir)) {
       $fs->mkdir($logDir, 0775);
       $fs->touch($logDir.$logFile);
-      foreach ($actualFileLines as $fileLine)
-      {
+      foreach ($actualFileLines as $fileLine) {
         $fs->appendToFile($logDir.$logFile, $fileLine);
       }
     }
@@ -110,13 +108,11 @@ class LogsControllerTest extends CatrowebTestCase
     $rs = $this->invokeMethod($this->object, 'getLogFileContent', [$logFile, $logDir, $searchParam]);
 
     $expectedLinesArray = [];
-    foreach ($expectedLines as $expectedLine)
-    {
+    foreach ($expectedLines as $expectedLine) {
       $expectedLinesArray[] = new LogLine($expectedLine);
     }
     $i = 0;
-    foreach ($rs as $line)
-    {
+    foreach ($rs as $line) {
       $this->assertEquals($line, $expectedLinesArray[$i]);
       ++$i;
     }
@@ -132,11 +128,9 @@ class LogsControllerTest extends CatrowebTestCase
     $logDir = 'var/log/LogFilesTest/';
     $logFilesList = ['test1.log', 'test2.log'];
     $fs = new Filesystem();
-    if (!$fs->exists($logDir))
-    {
+    if (!$fs->exists($logDir)) {
       $fs->mkdir($logDir, 0775);
-      foreach ($logFilesList as $file)
-      {
+      foreach ($logFilesList as $file) {
         $fs->touch($logDir.$file);
       }
     }

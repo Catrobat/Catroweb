@@ -199,8 +199,7 @@ class MediaPackageFile
 
   public function addFlavor(Flavor $flavor): void
   {
-    if ($this->flavors->contains($flavor))
-    {
+    if ($this->flavors->contains($flavor)) {
       return;
     }
     $this->flavors[] = $flavor;
@@ -208,8 +207,7 @@ class MediaPackageFile
 
   public function removeFlavor(Flavor $flavor): void
   {
-    if (!$this->flavors->contains($flavor))
-    {
+    if (!$this->flavors->contains($flavor)) {
       return;
     }
     $this->flavors->removeElement($flavor);
@@ -223,8 +221,7 @@ class MediaPackageFile
   /** @deprecated */
   public function getFlavor(): ?string
   {
-    if ($this->getFlavors()->isEmpty())
-    {
+    if ($this->getFlavors()->isEmpty()) {
       return 'pocketcode';
     }
 
@@ -235,8 +232,7 @@ class MediaPackageFile
   {
     $return = [];
     /** @var Flavor $flavor */
-    foreach ($this->getFlavors() as $flavor)
-    {
+    foreach ($this->getFlavors() as $flavor) {
       $return[] = $flavor->getName();
     }
 
@@ -251,10 +247,8 @@ class MediaPackageFile
   public function setFlavors(?iterable $flavors): void
   {
     $this->clearFlavors();
-    if (null !== $flavors)
-    {
-      foreach ($flavors as $flavor)
-      {
+    if (null !== $flavors) {
+      foreach ($flavors as $flavor) {
         $this->addFlavor($flavor);
       }
     }

@@ -10,8 +10,7 @@ class ProgramDevicePermissionReader
   public function getPermissions(string $filepath)
   {
     @$permissions = file('zip://'.$filepath.'#permissions.txt', FILE_IGNORE_NEW_LINES);
-    if (!$permissions)
-    {
+    if (!$permissions) {
       return [];
     }
 

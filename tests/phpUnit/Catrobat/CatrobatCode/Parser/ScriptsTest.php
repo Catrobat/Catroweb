@@ -50,8 +50,7 @@ class ScriptsTest extends TestCase
    */
   public function mustHaveMethod($method_name): void
   {
-    foreach ($this->script_xml_properties_list as $script_xml_properties)
-    {
+    foreach ($this->script_xml_properties_list as $script_xml_properties) {
       $script = ScriptFactory::generate($script_xml_properties);
       $this->assertTrue(method_exists($script, $method_name));
     }
@@ -105,8 +104,7 @@ class ScriptsTest extends TestCase
     $xml_script = $xml_properties->xpath('//script');
     Assert::assertNotFalse($xml_script);
 
-    foreach ($xml_script as $script_xml_properties)
-    {
+    foreach ($xml_script as $script_xml_properties) {
       $expected = [
         self::TYPE => $reference_output[$reference_output_index++],
         self::CAPTION => $reference_output[$reference_output_index++],
@@ -158,8 +156,7 @@ class ScriptsTest extends TestCase
     $actual = ScriptFactory::generate($script_xml_properties);
 
     $expected_img_file = Constants::UNKNOWN_BRICK_IMG;
-    foreach ($actual->getBricks() as $brick)
-    {
+    foreach ($actual->getBricks() as $brick) {
       $this->assertEquals($expected_img_file, $brick->getImgFile());
     }
   }

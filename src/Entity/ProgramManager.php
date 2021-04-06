@@ -127,16 +127,13 @@ class ProgramManager
    */
   public function isProjectVisibleForCurrentUser(?Program $project): bool
   {
-    if (null === $project)
-    {
+    if (null === $project) {
       return false;
     }
 
-    if (!$project->isVisible())
-    {
+    if (!$project->isVisible()) {
       // featured or approved projects should never be invisible
-      if (!$this->featured_repository->isFeatured($project) && !$project->getApproved())
-      {
+      if (!$this->featured_repository->isFeatured($project) && !$project->getApproved()) {
         return false;
       }
     }
@@ -145,8 +142,7 @@ class ProgramManager
     // -
 
     // SHARE-70/SHARE-296: Debug projects must only be seen in the dev env or if explicitly requested
-    if ($project->isDebugBuild() && !$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV'])
-    {
+    if ($project->isDebugBuild() && !$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
       return false;
     }
 
@@ -166,19 +162,15 @@ class ProgramManager
 
     $this->file_sanitizer->sanitize($extracted_file);
 
-    try
-    {
+    try {
       $event = $this->event_dispatcher->dispatch(new ProgramBeforeInsertEvent($extracted_file));
-    }
-    catch (InvalidCatrobatFileException $e)
-    {
+    } catch (InvalidCatrobatFileException $e) {
       $this->logger->error('addProgram failed with code: '.$e->getCode().' and message:'.$e->getMessage());
       $this->event_dispatcher->dispatch(new InvalidProgramUploadedEvent($file, $e));
       throw $e;
     }
 
-    if ($event->isPropagationStopped())
-    {
+    if ($event->isPropagationStopped()) {
       $this->logger->error('UploadError -> Propagation stopped');
 
       return null;
@@ -186,15 +178,12 @@ class ProgramManager
 
     /** @var Program|null $old_program */
     $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
-    if (null !== $old_program)
-    {
+    if (null !== $old_program) {
       $program = $old_program;
       $this->removeAllTags($program);
       // it's an update
       $program->incrementVersion();
-    }
-    else
-    {
+    } else {
       $program = new Program();
       $program->setRemixRoot(true);
     }
@@ -225,29 +214,20 @@ class ProgramManager
 
     $this->addExtensions($program, $extracted_file);
 
-    try
-    {
-      if (null === $extracted_file->getScreenshotPath())
-      {
+    try {
+      if (null === $extracted_file->getScreenshotPath()) {
         // Todo: maybe for later implementations
-      }
-      else
-      {
+      } else {
         $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
       }
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $this->logger->error('UploadError -> saveProgramAssetsTemp failed!', ['exception' => $e->getMessage()]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();
-      try
-      {
+      try {
         $this->screenshot_repository->deleteTempFilesForProgram($program_id);
-      }
-      catch (IOException $error)
-      {
+      } catch (IOException $error) {
         $this->logger->error('UploadError -> deleteTempFilesForProgram failed!', ['exception' => $error]);
         throw $error;
       }
@@ -255,29 +235,20 @@ class ProgramManager
       return null;
     }
 
-    try
-    {
-      if (null === $extracted_file->getScreenshotPath())
-      {
+    try {
+      if (null === $extracted_file->getScreenshotPath()) {
         // Todo: maybe for later implementations
-      }
-      else
-      {
+      } else {
         $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
       }
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $this->logger->error('UploadError -> makeTempProgramPerm failed!', ['exception' => $e]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
       $this->entity_manager->flush();
-      try
-      {
+      try {
         $this->screenshot_repository->deletePermProgramAssets($program_id);
-      }
-      catch (IOException $error)
-      {
+      } catch (IOException $error) {
         $this->logger->error(
           'UploadError -> deletePermProgramAssets or deleteProgramFile failed!', ['exception' => $e]
         );
@@ -286,27 +257,26 @@ class ProgramManager
 
       return null;
     }
+
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
-    $zip_exists = $this->file_repository->checkIfProgramFileExists($program->getId());
-    $this->file_repository->saveProgramFile($file, $program->getId());
+    $this->file_repository->saveProjectZipFile($file, $program->getId());
 
     $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
     $this->notifyFollower($program);
     $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$program->getId();
-    if (is_dir($compressed_file_directory))
-    {
+    if (is_dir($compressed_file_directory)) {
       (new Filesystem())->remove($compressed_file_directory);
     }
-    if (is_dir($extracted_file->getPath()))
-    {
+    if (is_dir($extracted_file->getPath())) {
       (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$program->getId());
     }
     (new Filesystem())->remove($extracted_file->getPath());
-    if (!$zip_exists)
-    {
-      $this->file_repository->deleteProgramFile($program->getId());
+
+    // remove old "cached" zips - they will be re-generated on a project download
+    if (!$this->file_repository->checkIfProjectZipFileExists($program->getId())) {
+      $this->file_repository->deleteProjectZipFile($program->getId());
     }
 
     return $program;
@@ -318,18 +288,14 @@ class ProgramManager
   public function createProgramFromScratch(?Program $program, User $user, array $program_data): Program
   {
     $modified_time = TimeUtils::dateTimeFromScratch($program_data['history']['modified']);
-    if (null === $program)
-    {
+    if (null === $program) {
       $program = new Program();
       $program->setUser($user);
       $program->setScratchId($program_data['id']);
       $program->setDebugBuild(false);
-    }
-    else
-    {
+    } else {
       //throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
-      if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp())
-      {
+      if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp()) {
         return $program;
       }
       $program->incrementVersion();
@@ -339,40 +305,30 @@ class ProgramManager
     $program->setApproved(false);
 
     $description_text = '';
-    if ($instructions = $program_data['instructions'] ?? null)
-    {
+    if ($instructions = $program_data['instructions'] ?? null) {
       $description_text .= $instructions;
     }
-    if ($description = $program_data['description'] ?? null)
-    {
-      if ($instructions)
-      {
+    if ($description = $program_data['description'] ?? null) {
+      if ($instructions) {
         $description_text .= "\n\n";
       }
       $description_text .= $description;
     }
     $program->setDescription($description_text);
 
-    if ($title = $program_data['title'] ?? null)
-    {
+    if ($title = $program_data['title'] ?? null) {
       $program->setName($title);
     }
 
     $shared_time = TimeUtils::dateTimeFromScratch($program_data['history']['shared']);
-    if ($shared_time)
-    {
+    if ($shared_time) {
       $program->setUploadedAt($shared_time);
-    }
-    else
-    {
+    } else {
       $program->setUploadedAt(TimeUtils::getDateTime());
     }
-    if ($modified_time)
-    {
+    if ($modified_time) {
       $program->setLastModifiedAt($modified_time);
-    }
-    else
-    {
+    } else {
       $program->setLastModifiedAt(TimeUtils::getDateTime());
     }
 
@@ -382,8 +338,7 @@ class ProgramManager
 
     $this->notifyFollower($program);
 
-    if ($image_url = $program_data['image'] ?? null)
-    {
+    if ($image_url = $program_data['image'] ?? null) {
       $this->screenshot_repository->saveScratchScreenshot($program->getScratchId(), $program->getId());
     }
 
@@ -409,16 +364,11 @@ class ProgramManager
    */
   public function changeLike(Program $project, User $user, int $type, string $action): void
   {
-    if (ProgramLike::ACTION_ADD === $action)
-    {
+    if (ProgramLike::ACTION_ADD === $action) {
       $this->program_like_repository->addLike($project, $user, $type);
-    }
-    elseif (ProgramLike::ACTION_REMOVE === $action)
-    {
+    } elseif (ProgramLike::ACTION_REMOVE === $action) {
       $this->program_like_repository->removeLike($project, $user, $type);
-    }
-    else
-    {
+    } else {
       throw new InvalidArgumentException('Invalid action "'.$action.'"');
     }
   }
@@ -428,12 +378,9 @@ class ProgramManager
    */
   public function areThereOtherLikeTypes(Program $project, User $user, int $type): bool
   {
-    try
-    {
+    try {
       return $this->program_like_repository->areThereOtherLikeTypes($project, $user, $type);
-    }
-    catch (NonUniqueResultException $exception)
-    {
+    } catch (NonUniqueResultException $exception) {
       return false;
     }
   }
@@ -455,29 +402,24 @@ class ProgramManager
   {
     $metadata = $this->entity_manager->getClassMetadata(Tag::class)->getFieldNames();
 
-    if (!in_array($language, $metadata, true))
-    {
+    if (!in_array($language, $metadata, true)) {
       $language = 'en';
     }
 
     $tags = $extracted_file->getTags();
 
-    if (!empty($tags))
-    {
+    if (!empty($tags)) {
       $i = 0;
-      foreach ($tags as $tag)
-      {
+      foreach ($tags as $tag) {
         /** @var Tag|null $db_tag */
         $db_tag = $this->tag_repository->findOneBy([$language => $tag]);
 
-        if (null !== $db_tag)
-        {
+        if (null !== $db_tag) {
           $program->addTag($db_tag);
           ++$i;
         }
 
-        if (3 === $i)
-        {
+        if (3 === $i) {
           // Only 3 tags at once!
           break;
         }
@@ -491,12 +433,10 @@ class ProgramManager
   public function addExtensions(Program $program, ExtractedCatrobatFile $extracted_file): void
   {
     $EMBROIDERY = 'Embroidery';
-    if (false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">'))
-    {
+    if (false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">')) {
       /** @var Extension|null $embroidery_extension */
       $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
-      if (null === $embroidery_extension)
-      {
+      if (null === $embroidery_extension) {
         $embroidery_extension = new Extension();
         $embroidery_extension->setName($EMBROIDERY);
         $embroidery_extension->setPrefix(strtoupper($EMBROIDERY));
@@ -510,8 +450,7 @@ class ProgramManager
   {
     $tags = $program->getTags();
 
-    foreach ($tags as $tag)
-    {
+    foreach ($tags as $tag) {
       $program->removeTag($tag);
     }
   }
@@ -583,24 +522,28 @@ class ProgramManager
   }
 
   /**
+   * @param mixed|null $excluded_program_ids
+   *
    * @return Program[]
    */
-  public function getUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0'): array
+  public function getUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0', ?int $limit = null, ?int $offset = null, $excluded_program_ids = null): array
   {
     $debug_build = (true === $include_debug_build_programs) ? true : $this->app_request->isDebugBuildRequest();
 
-    return $this->program_repository->getUserPrograms($user_id, $debug_build, $max_version);
+    return $this->program_repository->getUserPrograms($user_id, $debug_build, $max_version, $limit, $offset, $excluded_program_ids);
   }
 
   /**
+   * @param mixed|null $excluded_program_ids
+   *
    * @return Program[]
    */
-  public function getPublicUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0'): array
+  public function getPublicUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '0', ?int $limit = null, ?int $offset = null, $excluded_program_ids = null): array
   {
     $debug_build = (true === $include_debug_build_programs) ?
       true : $this->app_request->isDebugBuildRequest();
 
-    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build, $max_version);
+    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build, $max_version, $limit, $offset, $excluded_program_ids);
   }
 
   /**
@@ -923,7 +866,7 @@ class ProgramManager
   public function getProjects(string $category, string $max_version = '0',
                               int $limit = 20, int $offset = 0, string $flavor = null): array
   {
-    switch ($category){
+    switch ($category) {
       case 'recent':
         return $this->getRecentPrograms($flavor, $limit, $offset, $max_version);
       case 'random':
@@ -943,7 +886,7 @@ class ProgramManager
 
   public function getProjectsCount(string $category, string $max_version = '0', string $flavor = null): int
   {
-    switch ($category){
+    switch ($category) {
       case 'recent':
         return $this->getRecentProgramsCount($flavor, $max_version);
       case 'random':
@@ -965,8 +908,7 @@ class ProgramManager
   {
     $prefLocales = array_reduce(
       explode(',', $acceptLanguage),
-      function ($res, $el)
-      {
+      function ($res, $el) {
         [$l, $q] = array_merge(explode(';q=', $el), [1]);
         array_push($res, $l);
 
@@ -977,10 +919,10 @@ class ProgramManager
     return $prefLocales;
   }
 
-  public function getProgram(string $id): array
+  public function getProgram(string $id, bool $include_private = false): array
   {
     return $this->program_repository->getProgram(
-      $id, $this->app_request->isDebugBuildRequest()
+      $id, $this->app_request->isDebugBuildRequest(), $include_private
     );
   }
 
@@ -989,8 +931,7 @@ class ProgramManager
     $query = Util::escapeTerm($query);
 
     $words = explode(' ', $query);
-    foreach ($words as &$word)
-    {
+    foreach ($words as &$word) {
       $word = $word.'*';
     }
     unset($word);
@@ -1005,17 +946,14 @@ class ProgramManager
     $category_query[] = new Terms('private', [false]);
     $category_query[] = new Terms('visible', [true]);
 
-    if (!$is_debug_request)
-    {
+    if (!$is_debug_request) {
       $category_query[] = new Terms('debug_build', [false]);
     }
 
-    if ('0' !== $max_version)
-    {
+    if ('0' !== $max_version) {
       $category_query[] = new Range('language_version', ['lte' => $max_version]);
     }
-    if (null !== $flavor)
-    {
+    if (null !== $flavor) {
       $category_query[] = new Terms('flavor', [$flavor]);
     }
 
@@ -1029,8 +967,7 @@ class ProgramManager
   private function notifyFollower(Program $program): void
   {
     $followers = $program->getUser()->getFollowers();
-    for ($i = 0; $i < $followers->count(); ++$i)
-    {
+    for ($i = 0; $i < $followers->count(); ++$i) {
       $notification = new NewProgramNotification($followers[$i], $program);
       $this->notification_service->addNotification($notification);
     }

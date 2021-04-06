@@ -601,6 +601,7 @@ codeStatistics:
   looksBricks: 'نظر'
   penBricks: 'قلم'
   dataBricks: 'ڈیٹا'
+  deviceBricks: 'آلہ'
   specialBricks: 'Special'
 footer:
   language: زبان
@@ -677,3 +678,11 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'کاٹروبٹ کے تمام لوگ                      '
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: سب سے زیادہ دیکھے گئے
+  most_downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects

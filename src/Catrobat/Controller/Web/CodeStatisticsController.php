@@ -43,17 +43,14 @@ class CodeStatisticsController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
 
-    if (null !== $program)
-    {
+    if (null !== $program) {
       $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
-      if (null !== $extracted_file)
-      {
+      if (null !== $extracted_file) {
         $parsed_program = $this->code_parser->parse($extracted_file);
       }
     }
 
-    if (null === $parsed_program)
-    {
+    if (null === $parsed_program) {
       return $this->render('Program/code_statistics.html.twig', [
         'id' => $id,
       ]);
@@ -110,6 +107,11 @@ class CodeStatisticsController extends AbstractController
         'codeStatistics.dataBricks',
           $brick_stats['dataBricks']['numTotal'],
           $brick_stats['dataBricks']['different']['numDifferent']
+        ),
+        'device-brick' => $this->getMappedBricksStatistic(
+          'codeStatistics.deviceBricks',
+          $brick_stats['deviceBricks']['numTotal'],
+          $brick_stats['deviceBricks']['different']['numDifferent']
         ),
         'special-brick' => $this->getMappedBricksStatistic(
         'codeStatistics.specialBricks',

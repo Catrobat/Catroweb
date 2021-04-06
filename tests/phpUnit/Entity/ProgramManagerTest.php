@@ -150,8 +150,7 @@ class ProgramManagerTest extends TestCase
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
-    $func = function (Program $project): Program
-    {
+    $func = function (Program $project): Program {
       $project->setId('1');
 
       return $project;
@@ -183,8 +182,7 @@ class ProgramManagerTest extends TestCase
     $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
     $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
+      ->will($this->returnCallback(function (Program $project): Program {
         $project->setId('1');
 
         return $project;
@@ -192,7 +190,7 @@ class ProgramManagerTest extends TestCase
     ;
     fopen('/tmp/phpUnitTest', 'w');
     $file = new File('/tmp/phpUnitTest');
-    $this->file_repository->expects($this->atLeastOnce())->method('saveProgramFile')->with($file, 1);
+    $this->file_repository->expects($this->atLeastOnce())->method('saveProjectZipFile')->with($file, 1);
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
 
@@ -215,8 +213,7 @@ class ProgramManagerTest extends TestCase
     $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn([]);
     $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(false);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
+      ->will($this->returnCallback(function (Program $project): Program {
         $project->setId('1');
 
         return $project;
@@ -241,8 +238,7 @@ class ProgramManagerTest extends TestCase
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
-    $func = function (Program $project): Program
-    {
+    $func = function (Program $project): Program {
       $project->setId('1');
 
       return $project;
@@ -294,8 +290,7 @@ class ProgramManagerTest extends TestCase
     $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
     $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program
-      {
+      ->will($this->returnCallback(function (Program $project): Program {
         $project->setId('1');
 
         return $project;

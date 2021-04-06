@@ -132,8 +132,7 @@ class CatrowebBrowserContext extends BrowserContext
     $this->fillField('password', $password);
     $this->pressButton('Login');
     $this->iWaitForThePageToBeLoaded();
-    if ('try to' === $try_to)
-    {
+    if ('try to' === $try_to) {
       $this->assertPageNotContainsText('Your password or username was incorrect');
     }
     $this->getUserDataFixtures()->setCurrentUserByUsername($username);
@@ -165,15 +164,13 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldBeLoggedIn($arg1): void
   {
-    if ('in' === $arg1)
-    {
+    if ('in' === $arg1) {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
       $this->getSession()->wait(2_000, 'window.location.href.search("login") == -1');
       $this->assertElementNotOnPage('#btn-login');
       $this->assertElementOnPage('#btn-logout');
     }
-    if ('out' == $arg1)
-    {
+    if ('out' == $arg1) {
       $this->iShouldNotBeLoggedIn();
     }
   }
@@ -265,8 +262,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iSetTheCookie(string $cookie_name, string $cookie_value): void
   {
-    if ('NULL' === $cookie_value)
-    {
+    if ('NULL' === $cookie_value) {
       $cookie_value = null;
     }
     $this->getSession()->setCookie($cookie_name, $cookie_value);
@@ -278,8 +274,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iOpenTheMenu(): void
   {
     $sidebar_open = $this->getSession()->getPage()->find('css', '#sidebar')->isVisible();
-    if (!$sidebar_open)
-    {
+    if (!$sidebar_open) {
       $this->getSession()->getPage()->find('css', '#top-app-bar__btn-sidebar-toggle')->click();
     }
     $this->iWaitForAjaxToFinish();
@@ -295,10 +290,8 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $elements = $this->getSession()->getPage()->findAll('css', $css_selector);
     $count = 0;
-    foreach ($elements as $element)
-    {
-      if ($element->isVisible())
-      {
+    foreach ($elements as $element) {
+      if ($element->isVisible()) {
         ++$count;
       }
     }
@@ -458,8 +451,7 @@ class CatrowebBrowserContext extends BrowserContext
     switch ($arg1) {
       case 'English':
         $cookie = $this->getSession()->getCookie('hl');
-        if (!empty($cookie))
-        {
+        if (!empty($cookie)) {
           $this->assertSession()->cookieEquals('hl', 'en');
         }
         break;
@@ -514,22 +506,15 @@ class CatrowebBrowserContext extends BrowserContext
     $this->assertSession()->responseContains('help-desktop');
     $this->assertSession()->responseContains('help-mobile');
 
-    if ('big' === $arg1)
-    {
+    if ('big' === $arg1) {
       Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
       Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    }
-    elseif ('small' === $arg1)
-    {
+    } elseif ('small' === $arg1) {
       Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
       Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    }
-    elseif ('' === $arg1)
-    {
+    } elseif ('' === $arg1) {
       Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-split')->isVisible());
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false);
     }
 
@@ -538,34 +523,24 @@ class CatrowebBrowserContext extends BrowserContext
 
     switch ($arg2) {
       case 'Hour of Code':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('hour-of-code-desktop');
           $path = '/images/help/hour_of_code.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
           $path = '/images/help/hour_of_code_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
       case 'Step By Step':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
           $path = '/images/help/step_by_step.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('step-by-step-mobile');
           $path = '/images/help/step_by_step_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
@@ -578,34 +553,24 @@ class CatrowebBrowserContext extends BrowserContext
         $path = '/images/help/starters.png';
         break;
       case 'Education Platform':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('edu-desktop');
           $path = '/images/help/edu_site.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('edu-mobile');
           $path = '/images/help/edu_site_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
       case 'Discussion':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('discuss-desktop');
           $path = '/images/help/discuss.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('discuss-mobile');
           $path = '/images/help/discuss_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
@@ -614,14 +579,11 @@ class CatrowebBrowserContext extends BrowserContext
         break;
     }
 
-    if (null != $img)
-    {
+    if (null != $img) {
       Assert::assertEquals($img->getTagName(), 'img');
       Assert::assertEquals($img->getAttribute('src'), $path);
       Assert::assertTrue($img->isVisible());
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false);
     }
   }
@@ -656,8 +618,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickOntheColumnName($arg1): void
   {
     $page = $this->getSession()->getPage();
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'Name':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[3]/a')
@@ -845,8 +806,7 @@ class CatrowebBrowserContext extends BrowserContext
       ->click()
     ;
 
-    switch ($flavor)
-    {
+    switch ($flavor) {
       case 'pocketcode':
         $page
           ->find('css', 'select.form-control > option:nth-child(1)')
@@ -1231,12 +1191,9 @@ class CatrowebBrowserContext extends BrowserContext
 
     $pre_source = $this->getSession()->getPage()->find('css', '#avatar-img');
     $source = 0;
-    if (!is_null($pre_source))
-    {
+    if (!is_null($pre_source)) {
       $source = $pre_source->getAttribute('src');
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false, "Couldn't find avatar in #avatar-img");
     }
     $source = trim($source, '"');
@@ -1274,12 +1231,9 @@ class CatrowebBrowserContext extends BrowserContext
 
     $pre_source = $this->getSession()->getPage()->find('css', '#project-thumbnail-big');
     $source = 0;
-    if (!is_null($pre_source))
-    {
+    if (!is_null($pre_source)) {
       $source = $pre_source->getAttribute('src');
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false, "Couldn't find avatar in project-thumbnail-big");
     }
     $source = trim($source, '"');
@@ -1383,8 +1337,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $page = $this->getSession()->getPage();
     $program = $page->find('css', $arg1);
-    if (!$program->hasClass('visited-program'))
-    {
+    if (!$program->hasClass('visited-program')) {
       Assert::assertTrue(false);
     }
   }
@@ -1505,8 +1458,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iSeeThePopup($arg1): void
   {
-    if ('update app' == $arg1)
-    {
+    if ('update app' == $arg1) {
       $this->assertElementOnPage('#popup-info');
       $this->assertElementOnPage('#popup-background');
     }
@@ -1519,8 +1471,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iSeeNotThePopup($arg1): void
   {
-    if ('update app' == $arg1)
-    {
+    if ('update app' == $arg1) {
       $this->assertElementNotOnPage('#popup-info');
       $this->assertElementNotOnPage('#popup-background');
     }
@@ -1587,32 +1538,23 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldSeeTutorialBanners($count, $view): void
   {
-    if ('desktop' === $view)
-    {
-      for ($i = 1;; ++$i)
-      {
+    if ('desktop' === $view) {
+      for ($i = 1;; ++$i) {
         $img = $this->getSession()->getPage()->findById('tutorial-'.$i);
-        if (null === $img)
-        {
+        if (null === $img) {
           break;
         }
       }
       Assert::assertEquals($count, $i - 1);
-    }
-    elseif ('mobile' === $view)
-    {
-      for ($i = 1;; ++$i)
-      {
+    } elseif ('mobile' === $view) {
+      for ($i = 1;; ++$i) {
         $img = $this->getSession()->getPage()->findById('tutorial-mobile-'.$i);
-        if (null === $img)
-        {
+        if (null === $img) {
           break;
         }
       }
       Assert::assertEquals($count, $i - 1);
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false);
     }
   }
@@ -1663,11 +1605,9 @@ class CatrowebBrowserContext extends BrowserContext
     $owl_items_count = count($owl_items);
     Assert::assertEquals($owl_items_count, count($slider_items));
 
-    for ($index = 0; $index < $owl_items_count; ++$index)
-    {
+    for ($index = 0; $index < $owl_items_count; ++$index) {
       $url = $slider_items[$index];
-      if (0 !== strpos($url, 'http://'))
-      {
+      if (0 !== strpos($url, 'http://')) {
         $program = $this->getProgramManager()->findOneByName($url);
         Assert::assertNotNull($program);
         Assert::assertNotNull($program->getId());
@@ -1884,11 +1824,9 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
     $element = null;
-    foreach ($projects as $project)
-    {
+    foreach ($projects as $project) {
       $link = explode('/', $project->getAttribute('href'));
-      if (end($link) === $program_id)
-      {
+      if (end($link) === $program_id) {
         $element = $project;
         break;
       }
@@ -1916,11 +1854,9 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
     $element = null;
-    foreach ($projects as $project)
-    {
+    foreach ($projects as $project) {
       $link = explode('/', $project->getAttribute('href'));
-      if (end($link) === $program_id)
-      {
+      if (end($link) === $program_id) {
         $element = $project;
         break;
       }
@@ -1942,11 +1878,9 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
     $element = null;
-    foreach ($projects as $project)
-    {
+    foreach ($projects as $project) {
       $link = explode('/', $project->getAttribute('href'));
-      if (end($link) === $program_id)
-      {
+      if (end($link) === $program_id) {
         $element = $project;
         break;
       }
@@ -2033,15 +1967,12 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $img = $this->getSession()->getPage()->findById('logo');
 
-    if (null != $img)
-    {
+    if (null != $img) {
       Assert::assertEquals($img->getTagName(), 'img');
       $src = $img->getAttribute('src');
       Assert::assertTrue(false !== strpos($src, (string) $arg1), '<'.$src.'> does not contain '.$arg1);
       Assert::assertTrue($img->isVisible(), 'Image is not visible.');
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false, '#logo not found!');
     }
   }
@@ -2052,8 +1983,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickTheCurrentlyVisibleSearchIcon(): void
   {
     $icon = $this->getSession()->getPage()->findById('top-app-bar__btn-search');
-    if ($icon->isVisible())
-    {
+    if ($icon->isVisible()) {
       $icon->click();
 
       return;
@@ -2193,15 +2123,13 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $parameter_defs = $table->getHash();
     $expected_parameters = [];
-    foreach ($parameter_defs as $parameter_def)
-    {
+    foreach ($parameter_defs as $parameter_def) {
       $expected_parameters[$parameter_def['parameter']] = $parameter_def['value'];
     }
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
     $parameters = $dispatcher->getLastParameters();
 
-    foreach ($expected_parameters as $i => $expected_parameter)
-    {
+    foreach ($expected_parameters as $i => $expected_parameter) {
       Assert::assertMatchesRegularExpression(
         $expected_parameter,
         $parameters[$i]
@@ -2308,8 +2236,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeReportedTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['#Reported Comments']);
       $this->assertSession()->pageTextContains($user_stat['#Reported Programs']);
       $this->assertSession()->pageTextContains($user_stat['Username']);
@@ -2325,8 +2252,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeNotificationTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['User']);
       $this->assertSession()->pageTextContains($user_stat['User Email']);
       $this->assertSession()->pageTextContains($user_stat['Upload']);
@@ -2344,16 +2270,14 @@ class CatrowebBrowserContext extends BrowserContext
     $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
 
     $actual_values = [];
-    foreach ($td as $value)
-    {
+    foreach ($td as $value) {
       $actual_values[] = $value->getText();
     }
 
     Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of projects in table');
 
     $counter = 0;
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $user_stat = array_filter($user_stat);
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
@@ -2368,8 +2292,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeExampleTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
       $this->assertSession()->pageTextContains($user_stat['Flavor']);
@@ -2385,8 +2308,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeStarterProgramsTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Starter Category']);
       $this->assertSession()->pageTextContains($user_stat['Category Alias']);
       $this->assertSession()->pageTextContains($user_stat['Programs']);
@@ -2405,16 +2327,14 @@ class CatrowebBrowserContext extends BrowserContext
     $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
 
     $actual_values = [];
-    foreach ($td as $value)
-    {
+    foreach ($td as $value) {
       $actual_values[] = $value->getText();
     }
 
     Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of projects in table');
 
     $counter = 0;
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
     }
@@ -2431,16 +2351,14 @@ class CatrowebBrowserContext extends BrowserContext
     $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
 
     $actual_values = [];
-    foreach ($td as $value)
-    {
+    foreach ($td as $value) {
       $actual_values[] = $value->getText();
     }
 
     Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of rude words in table');
 
     $counter = 0;
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
     }
@@ -2467,8 +2385,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function seeReportedProgramsTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Note']);
       $this->assertSession()->pageTextContains($user_stat['State']);
       $this->assertSession()->pageTextContains($user_stat['Category']);
@@ -2486,8 +2403,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function seeExtensionsTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Name']);
       $this->assertSession()->pageTextContains($user_stat['Prefix']);
@@ -2502,8 +2418,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function seeReadyApksTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['User']);
       $this->assertSession()->pageTextContains($user_stat['Name']);
@@ -2519,8 +2434,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function seePendingApkTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['User']);
       $this->assertSession()->pageTextContains($user_stat['Name']);
@@ -2537,8 +2451,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function seeSurveyTable(TableNode $table): void
   {
     $survey_stats = $table->getHash();
-    foreach ($survey_stats as $survey_stat)
-    {
+    foreach ($survey_stats as $survey_stat) {
       $this->assertSession()->pageTextContains($survey_stat['Language Code']);
       $this->assertSession()->pageTextContains($survey_stat['Url']);
       $this->assertSession()->pageTextContains($survey_stat['Active']);
@@ -2553,8 +2466,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function seeMediaPackageCategoriesTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Name']);
       $this->assertSession()->pageTextContains($user_stat['Package']);
@@ -2570,8 +2482,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function seeMediaPackageFilesTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Name']);
       $this->assertSession()->pageTextContains($user_stat['Category']);
@@ -2638,8 +2549,7 @@ class CatrowebBrowserContext extends BrowserContext
       RecursiveIteratorIterator::CHILD_FIRST
     );
 
-    foreach ($files as $file)
-    {
+    foreach ($files as $file) {
       $filename = $file->getFilename();
       Assert::assertStringNotContainsString('remove_me', $filename);
     }
@@ -2667,8 +2577,7 @@ class CatrowebBrowserContext extends BrowserContext
     $expected_like_similarities = $table->getHash();
     Assert::assertEquals(count($expected_like_similarities), $all_like_similarities_count,
       'Wrong number of returned similarity entries');
-    for ($i = 0; $i < $all_like_similarities_count; ++$i)
-    {
+    for ($i = 0; $i < $all_like_similarities_count; ++$i) {
       /** @var UserLikeSimilarityRelation $like_similarity */
       $like_similarity = $all_like_similarities[$i];
       Assert::assertEquals(
@@ -2699,8 +2608,7 @@ class CatrowebBrowserContext extends BrowserContext
     $expected_remix_similarities = $table->getHash();
     Assert::assertEquals(count($expected_remix_similarities), $all_remix_similarities_count,
       'Wrong number of returned similarity entries');
-    for ($i = 0; $i < $all_remix_similarities_count; ++$i)
-    {
+    for ($i = 0; $i < $all_remix_similarities_count; ++$i) {
       /** @var UserRemixSimilarityRelation $remix_similarity */
       $remix_similarity = $all_remix_similarities[$i];
       Assert::assertEquals(
@@ -2881,8 +2789,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeTheFeaturedTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
       $this->assertSession()->pageTextContains($user_stat['Url']);
@@ -2959,8 +2866,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeTheUserTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['username']);
       $this->assertSession()->pageTextContains($user_stat['email']);
       $this->assertSession()->pageTextContains($user_stat['groups']);
@@ -3004,8 +2910,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $full_filename = $path.'/'.$filename;
     $dirname = dirname($full_filename);
-    if (!is_dir($dirname))
-    {
+    if (!is_dir($dirname)) {
       mkdir($dirname, 0755, true);
     }
     $file_path = fopen($full_filename, 'w'); // open in write mode.
@@ -3022,13 +2927,10 @@ class CatrowebBrowserContext extends BrowserContext
   private function getDateFromNow($days): DateTime
   {
     $date = TimeUtils::getDateTime();
-    if ($days < 0)
-    {
+    if ($days < 0) {
       $days = abs($days);
       $date->sub(new DateInterval('P'.$days.'D'));
-    }
-    else
-    {
+    } else {
       $date->add(new DateInterval('P'.$days.'D'));
     }
 
@@ -3050,15 +2952,12 @@ class CatrowebBrowserContext extends BrowserContext
   ;
 
     //click yes or no option
-    if ('yes' == $option)
-    {
+    if ('yes' == $option) {
       $page
         ->find('css', 'select.form-control > option:nth-child(2)')
         ->click()
     ;
-    }
-    else
-    {
+    } else {
       $page
         ->find('css', 'select.form-control > option:nth-child(1)')
         ->click()

@@ -21,9 +21,10 @@ Feature: As a visitor I want to be able to download projects
     And I should not see "Error occurred while downloading the project"
 
   Scenario: If download fails user should see popup and the file should not be downloaded
-    When I am on "/app/project/1"
+    When project "1" is missing its files
+    And project "2" is missing its files
+    And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And download button is pointing to the non existing project
     Then the element "#url-download-small" should be visible
     And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
     And the element "#share-snackbar" should not be visible
@@ -33,7 +34,6 @@ Feature: As a visitor I want to be able to download projects
     And I should see "Error occurred while downloading the project"
     When I am on "/app/project/2"
     And I wait for the page to be loaded
-    And project has no valid program file
     Then the element "#url-download-small" should be visible
     And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
     And I click "#url-download-small"

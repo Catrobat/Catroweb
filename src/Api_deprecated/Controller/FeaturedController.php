@@ -57,8 +57,7 @@ class FeaturedController extends AbstractController
 
     $platform = null;
 
-    if ($ios_only)
-    {
+    if ($ios_only) {
       $platform = 'ios';
     }
 
@@ -67,8 +66,7 @@ class FeaturedController extends AbstractController
 
     $retArray = [];
     $retArray['CatrobatProjects'] = [];
-    foreach ($featured_programs as $featured_program)
-    {
+    foreach ($featured_programs as $featured_program) {
       $retArray['CatrobatProjects'][] = $this->generateProgramObject($featured_program, $image_repository);
     }
     $retArray['preHeaderMessages'] = '';

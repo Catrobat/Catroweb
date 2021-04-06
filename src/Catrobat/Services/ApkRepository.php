@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
+use App\Utils\Utils;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -13,14 +13,8 @@ class ApkRepository
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     $apk_dir = $parameter_bag->get('catrobat.apk.dir');
-    $dir = preg_replace('#([^/]+)$#', '$1/', $apk_dir);
-
-    if (!is_dir($dir))
-    {
-      throw new InvalidStorageDirectoryException($dir.' is not a valid directory');
-    }
-
-    $this->dir = $dir;
+    Utils::verifyDirectoryExists($apk_dir);
+    $this->dir = $apk_dir;
   }
 
   public function save(File $file, string $id): void
@@ -31,8 +25,7 @@ class ApkRepository
   public function remove(string $id): void
   {
     $path = $this->dir.$this->generateFileNameFromId($id);
-    if (is_file($path))
-    {
+    if (is_file($path)) {
       unlink($path);
     }
   }
