@@ -2,42 +2,19 @@
 
 namespace App\Api;
 
-use App\Catrobat\Services\APIHelper;
-use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Api\Services\Base\AbstractApiController;
+use App\Api\Services\MediaLibrary\MediaLibraryApiFacade;
 use App\Entity\MediaPackage;
-use App\Entity\MediaPackageCategory;
-use App\Entity\MediaPackageFile;
-use App\Utils\APIQueryHelper;
-use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
-use OpenAPI\Server\Model\MediaFileResponse;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class MediaLibraryApi implements MediaLibraryApiInterface
+final class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiInterface
 {
-  private EntityManagerInterface $entity_manager;
+  private MediaLibraryApiFacade $facade;
 
-  private UrlGeneratorInterface $url_generator;
-
-  private MediaPackageFileRepository $media_package_file_repository;
-
-  private RequestStack $stack;
-
-  private ParameterBagInterface $parameter_bag;
-
-  public function __construct(EntityManagerInterface $entity_manager, UrlGeneratorInterface $url_generator,
-                              MediaPackageFileRepository $media_package_file_repository, RequestStack $stack,
-                              ParameterBagInterface $parameter_bag)
+  public function __construct(MediaLibraryApiFacade $facade)
   {
-    $this->entity_manager = $entity_manager;
-    $this->url_generator = $url_generator;
-    $this->media_package_file_repository = $media_package_file_repository;
-    $this->stack = $stack;
-    $this->parameter_bag = $parameter_bag;
+    $this->facade = $facade;
   }
 
   /**
@@ -45,14 +22,19 @@ class MediaLibraryApi implements MediaLibraryApiInterface
    */
   public function mediaFilesSearchGet(string $query, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode = null, array &$responseHeaders = null)
   {
-    $limit = APIHelper::setDefaultLimitOnNull($limit);
-    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+    $limit = $this->getDefaultLimitOnNull($limit);
+    $offset = $this->getDefaultOffsetOnNull($offset);
+    $flavor = $this->getDefaultFlavorOnNull($flavor);
+    $package_name = $package_name ?? '';
+
+    $found_media_files = $this->facade->getLoader()->searchMediaLibraryFiles($query, $flavor, $package_name, $limit, $offset);
 
     $responseCode = Response::HTTP_OK;
+    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($found_media_files);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    $found_media_files = $this->media_package_file_repository->search($query, $flavor, $package_name, $limit, $offset);
-
-    return $this->getMediaFilesDataResponse($found_media_files);
+    return $response;
   }
 
   /**
@@ -60,52 +42,26 @@ class MediaLibraryApi implements MediaLibraryApiInterface
    */
   public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
   {
-    $limit = APIHelper::setDefaultLimitOnNull($limit);
-    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+    $limit = $this->getDefaultLimitOnNull($limit);
+    $offset = $this->getDefaultOffsetOnNull($offset);
 
-    $media_package = $this->entity_manager->getRepository(MediaPackage::class)
-      ->findOneBy(['nameUrl' => $name])
-    ;
+    $media_package = $this->facade->getLoader()->getMediaPackageByName($name);
 
-    if (null === $media_package) {
+    if (is_null($media_package)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
     }
 
     $responseCode = Response::HTTP_OK;
+    /** @var MediaPackage $media_package */
+    $response = $this->facade->getResponseManager()->createMediaPackageCategoriesResponse(
+      $media_package->getCategories()->toArray(), $limit, $offset
+    );
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    $media_package_categories = $media_package->getCategories();
-    if (empty($media_package_categories)) {
-      return [];
-    }
-
-    $json_response_array = [];
-
-    /** @var MediaPackageCategory $media_package_category */
-    foreach ($media_package_categories as $media_package_category) {
-      $media_package_files = $media_package_category->getFiles();
-      if ((0 != $offset && count($media_package_files) <= $offset) || count($json_response_array) === $limit) {
-        if (0 != $offset) {
-          $offset -= count($media_package_files);
-        }
-        continue;
-      }
-
-      /** @var MediaPackageFile $media_package_file */
-      foreach ($media_package_files as $media_package_file) {
-        if (0 != $offset) {
-          --$offset;
-          continue;
-        }
-        if (count($json_response_array) === $limit) {
-          break;
-        }
-        $json_response_array[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file));
-      }
-    }
-
-    return $json_response_array;
+    return $response;
   }
 
   /**
@@ -113,19 +69,20 @@ class MediaLibraryApi implements MediaLibraryApiInterface
    */
   public function mediaFileIdGet(int $id, &$responseCode = null, array &$responseHeaders = null)
   {
-    $media_package_file = $this->entity_manager->getRepository(MediaPackageFile::class)
-      ->findOneBy(['id' => $id])
-        ;
+    $media_package_file = $this->facade->getLoader()->getMediaPackageFileByID($id);
 
-    if (null === $media_package_file) {
+    if (is_null($media_package_file)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
     }
 
     $responseCode = Response::HTTP_OK;
+    $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    return new MediaFileResponse($this->getMediaFileDataResponse($media_package_file));
+    return $response;
   }
 
   /**
@@ -133,54 +90,17 @@ class MediaLibraryApi implements MediaLibraryApiInterface
    */
   public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
-    $limit = APIHelper::setDefaultLimitOnNull($limit);
-    $offset = APIHelper::setDefaultOffsetOnNull($offset);
+    $limit = $this->getDefaultLimitOnNull($limit);
+    $offset = $this->getDefaultOffsetOnNull($offset);
+    $flavor = $this->getDefaultFlavorOnNull($flavor);
 
-    $qb = $this->entity_manager->createQueryBuilder()
-      ->select('f')
-      ->from('App\Entity\MediaPackageFile', 'f')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-    APIQueryHelper::addFileFlavorsCondition($qb, $flavor, 'f');
-    $media_package_files = $qb->getQuery()->getResult();
+    $media_package_files = $this->facade->getLoader()->getMediaPackageFiles($limit, $offset, $flavor);
 
-    if (null === $media_package_files) {
-      return [];
-    }
+    $responseCode = Response::HTTP_OK;
+    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($media_package_files);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    return $this->getMediaFilesDataResponse($media_package_files);
-  }
-
-  private function getMediaFilesDataResponse(array $media_package_files): array
-  {
-    $media_files_data_response = [];
-
-    /** @var MediaPackageFile $media_package_file */
-    foreach ($media_package_files as $media_package_file) {
-      $media_files_data_response[] = new MediaFileResponse($this->getMediaFileDataResponse($media_package_file));
-    }
-
-    return $media_files_data_response;
-  }
-
-  private function getMediaFileDataResponse(MediaPackageFile $media_package_file): array
-  {
-    return $mediaFile = [
-      'id' => $media_package_file->getId(),
-      'name' => $media_package_file->getName(),
-      'flavors' => $media_package_file->getFlavorNames(),
-      'packages' => $media_package_file->getCategory()->getPackageNames(),
-      'category' => $media_package_file->getCategory()->getName(),
-      'author' => $media_package_file->getAuthor(),
-      'extension' => $media_package_file->getExtension(),
-      'download_url' => $this->url_generator->generate(
-          'download_media',
-          [
-            'theme' => $this->parameter_bag->get('umbrellaTheme'),
-            'id' => $media_package_file->getId(),
-          ],
-          UrlGenerator::ABSOLUTE_URL),
-    ];
+    return $response;
   }
 }

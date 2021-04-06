@@ -95,6 +95,10 @@ services:
     resource: '../src/Repository'
     public: true
 
+  App\Api\Services\:
+    resource: '../src/Api/Services/*'
+    public: true
+
   App\Entity\UserManager:
     class: App\Entity\UserManager
     public: true
@@ -799,7 +803,6 @@ services:
     tags:
       - { name: sonata.block, label: Cleanup }
     arguments:
-      - "catrowebadmin.block.tools.statistic"
       - "@twig"
       - "%catrobat.file.extract.dir%"
       - "%catrobat.apk.dir%"
@@ -853,6 +856,10 @@ services:
     tags:
       - { name: "open_api_server.api", api: "authentication" }
 
+  api.utility:
+    class: App\Api\UtilityApi
+    tags:
+      - { name: "open_api_server.api", api: "utility" }
 
   #=====================================================================================================================
   # HWIOAUTH
@@ -862,7 +869,3 @@ services:
     arguments:
       - '@fos_user.user_manager'
       - {google: google_id, facebook: facebook_id, apple: apple_id}
-  api.utility:
-    class: App\Api\UtilityApi
-    tags:
-      - { name: "open_api_server.api", api: "utility" }

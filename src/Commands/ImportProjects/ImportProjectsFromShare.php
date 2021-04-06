@@ -21,7 +21,7 @@ class ImportProjectsFromShare extends Command
       ->setDescription('Imports the specified amount of recent programs from share.catrob.at')
       ->addOption('limit', 'l', InputOption::VALUE_REQUIRED,
         'The limit of projects that should be downloaded and imported',
-      20)
+      '20')
       ->addOption('category', 'c', InputOption::VALUE_REQUIRED,
         'Downloading projects of a specific category (random, recent)',
         'random')

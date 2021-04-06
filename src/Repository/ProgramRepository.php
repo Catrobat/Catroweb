@@ -6,7 +6,6 @@ use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ScratchProgramRemixRelation;
-use App\Utils\APIQueryHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\NonUniqueResultException;
@@ -30,7 +29,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   public function getMostDownloadedPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0'): array
+                                            string $max_version = ''): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -43,13 +42,13 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
   }
 
-  public function getMostDownloadedProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
+  public function getMostDownloadedProgramsCount(bool $debug_build, string $flavor = null, string $max_version = ''): int
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -60,7 +59,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try {
@@ -73,7 +72,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   public function getScratchRemixesPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0'): array
+                                            string $max_version = ''): array
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -89,13 +88,13 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $qb = $this->addDebugBuildCondition($qb, $debug_build);
-    $qb = APIQueryHelper::addFlavorCondition($qb, $flavor);
+    $qb = $this->addFlavorCondition($qb, $flavor);
     $qb = $this->addMaxVersionCondition($qb, $max_version);
 
     return $qb->getQuery()->getResult();
   }
 
-  public function getScratchRemixesProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
+  public function getScratchRemixesProgramsCount(bool $debug_build, string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -109,7 +108,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $qb = $this->addDebugBuildCondition($qb, $debug_build);
-    $qb = APIQueryHelper::addFlavorCondition($qb, $flavor);
+    $qb = $this->addFlavorCondition($qb, $flavor);
     $qb = $this->addMaxVersionCondition($qb, $max_version);
 
     try {
@@ -122,7 +121,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   public function getMostViewedPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                        string $max_version = '0'): array
+                                        string $max_version = ''): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -136,13 +135,13 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
   }
 
-  public function getMostViewedProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
+  public function getMostViewedProgramsCount(bool $debug_build, string $flavor = null, string $max_version = ''): int
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -154,7 +153,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try {
@@ -233,7 +232,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
 
     if ((int) $offset > 0) {
@@ -290,7 +289,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
 
     $query_builder
@@ -331,7 +330,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   public function getRecentPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0'): array
+                                    string $max_version = ''): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -344,13 +343,13 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
   }
 
-  public function getRecentProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
+  public function getRecentProgramsCount(bool $debug_build, string $flavor = null, string $max_version = ''): int
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -362,7 +361,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try {
@@ -377,7 +376,7 @@ class ProgramRepository extends ServiceEntityRepository
   /**
    * @return Program[]
    */
-  public function getExamplePrograms(bool $debug_build, ?string $flavor = null, ?int $limit = 20, int $offset = 0, string $max_version = '0'): array
+  public function getExamplePrograms(bool $debug_build, ?string $flavor = null, ?int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -391,14 +390,14 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
   }
 
   public function getRandomPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0'): array
+                                    string $max_version = ''): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -412,13 +411,13 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return $query_builder->getQuery()->getResult();
   }
 
-  public function getRandomProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
+  public function getRandomProgramsCount(bool $debug_build, string $flavor = null, string $max_version = ''): int
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -430,7 +429,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     try {
@@ -459,7 +458,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -481,7 +480,7 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -494,7 +493,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $projects_count;
   }
 
-  public static function filterVisiblePrograms(array $programs, bool $debug_build, string $max_version = '0'): array
+  public static function filterVisiblePrograms(array $programs, bool $debug_build, string $max_version = ''): array
   {
     if (empty($programs)) {
       return [];
@@ -506,7 +505,7 @@ class ProgramRepository extends ServiceEntityRepository
     foreach ($programs as $program) {
       if (true === $program->getVisible() && false === $program->getPrivate()
         && ($debug_build || false === $program->isDebugBuild())
-        && ('0' === $max_version || $program->getLanguageVersion() <= $max_version)) {
+        && ('' === $max_version || $program->getLanguageVersion() <= $max_version)) {
         $filtered_programs[] = $program;
       }
     }
@@ -614,7 +613,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->setMaxResults($limit)
     ;
 
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -634,7 +633,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->orderBy('e.uploaded_at', 'DESC')
     ;
 
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
@@ -647,7 +646,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $projects_count;
   }
 
-  public function getPublicUserPrograms(?string $user_id, bool $debug_build, string $max_version = '0', ?int $limit = null, ?int $offset = null, array $excluded_program_ids = null): array
+  public function getPublicUserPrograms(?string $user_id, bool $debug_build, string $max_version = '', ?int $limit = null, ?int $offset = null, array $excluded_program_ids = null): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -673,7 +672,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @throws NonUniqueResultException
    * @throws NoResultException
    */
-  public function getTotalPrograms(bool $debug_build, ?string $flavor = null, string $max_version = '0'): int
+  public function getTotalPrograms(bool $debug_build, ?string $flavor = null, string $max_version = ''): int
   {
     $query_builder = $this->createQueryBuilder('e');
 
@@ -684,7 +683,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder = $this->addPrivacyCheckCondition($query_builder);
     $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = APIQueryHelper::addFlavorCondition($query_builder, $flavor);
+    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
     $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
 
     return (int) $query_builder->getQuery()->getSingleScalarResult();
@@ -857,7 +856,7 @@ class ProgramRepository extends ServiceEntityRepository
     return is_countable($db_query->getResult()) ? count($db_query->getResult()) : 0;
   }
 
-  public function getRecommendedProgramsById(string $id, bool $debug_build, string $flavor, ?int $limit, int $offset = 0): array
+  public function getRecommendedProgramsById(string $id, bool $debug_build, string $flavor, ?int $limit, ?int $offset): array
   {
     $db_query = $this->createRecommendedProgramQuery($id, $debug_build, $flavor);
 
@@ -902,6 +901,7 @@ class ProgramRepository extends ServiceEntityRepository
     $extensions_id = array_map('current', $result_2);
 
     $debug_where = (!$debug_build && 'dev' !== $_ENV['APP_ENV']) ? 'AND e.debug_build = false' : '';
+    $flavor_where = '' !== trim($flavor) ? 'AND e.flavor = :flavor' : '';
 
     $dql = 'SELECT COUNT(e.id) cnt, e.id
       FROM App\Entity\Program e
@@ -910,12 +910,12 @@ class ProgramRepository extends ServiceEntityRepository
       WHERE (
         t.id IN (:tag_ids)
         OR x.id IN (:extension_ids)
-      )
-      AND e.flavor = :flavor
+      ) '
+      .$flavor_where.'
       AND e.id != :id
       AND e.private = false
-      AND e.visible = TRUE '.
-      $debug_where.'  
+      AND e.visible = TRUE '
+      .$debug_where.'  
       GROUP BY e.id
       ORDER BY cnt DESC';
 
@@ -925,7 +925,10 @@ class ProgramRepository extends ServiceEntityRepository
     $db_query->setParameter('id', $id);
     $db_query->setParameter('tag_ids', $tag_ids);
     $db_query->setParameter('extension_ids', $extensions_id);
-    $db_query->setParameter('flavor', $flavor);
+
+    if ('' !== trim($flavor_where)) {
+      $db_query->setParameter('flavor', $flavor);
+    }
 
     return $db_query;
   }
@@ -986,9 +989,9 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, string $max_version = '0', string $alias = 'e'): QueryBuilder
+  private function addMaxVersionCondition(QueryBuilder $query_builder, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
-    if ('0' !== $max_version) {
+    if ('' !== $max_version) {
       $query_builder
         ->andWhere($query_builder->expr()->lte($alias.'.language_version', ':max_version'))
         ->setParameter('max_version', $max_version)
@@ -1028,5 +1031,30 @@ class ProgramRepository extends ServiceEntityRepository
     }
 
     return $query_builder;
+  }
+
+  public static function addFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e'): QueryBuilder
+  {
+    if (null === $flavor || '' === trim($flavor)) {
+      return $query_builder;
+    }
+
+    if ('!' === $flavor[0]) {
+      // Can be used when we explicitly want projects of other flavors (E.g to fill empty categories of a new flavor)
+      return $query_builder
+        ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
+        ->setParameter('flavor', substr($flavor, 1))
+        ;
+    }
+
+    // Extensions are very similar to Flavors. (E.g. it does not care if a project has embroidery flavor or extension)
+    return $query_builder->leftJoin($alias.'.extensions', 'ext')
+      ->andWhere($query_builder->expr()->orX(
+        $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
+        $query_builder->expr()->like('lower(ext.name)', ':extension')
+      ))
+      ->setParameter('flavor', strtolower($flavor))
+      ->setParameter('extension', strtolower($flavor))
+      ;
   }
 }

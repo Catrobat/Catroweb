@@ -2,19 +2,18 @@
 
 namespace App\Api;
 
-use App\Entity\Survey;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Api\Services\Base\AbstractApiController;
+use App\Api\Services\Utility\UtilityApiFacade;
 use OpenAPI\Server\Api\UtilityApiInterface;
-use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class UtilityApi implements UtilityApiInterface
+final class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
-  private EntityManagerInterface $entity_manager;
+  private UtilityApiFacade $facade;
 
-  public function __construct(EntityManagerInterface $entity_manager)
+  public function __construct(UtilityApiFacade $facade)
   {
-    $this->entity_manager = $entity_manager;
+    $this->facade = $facade;
   }
 
   /**
@@ -30,30 +29,21 @@ class UtilityApi implements UtilityApiInterface
   /**
    * {@inheritdoc}
    */
-  public function surveyLangCodeGet(string $lang_code, &$responseCode, array &$responseHeaders)
+  public function surveyLangCodeGet(string $lang_code, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
   {
-    $survey = $this->getActiveSurvey($lang_code);
+    $survey = $this->facade->getLoader()->getActiveSurvey($lang_code);
 
-    if (null === $survey) {
+    if (is_null($survey)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
     }
 
-    $response = new SurveyResponse([
-      'url' => $survey->getUrl(),
-    ]);
-
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['X-Response-Hash'] = md5(json_encode($response));
+    $response = $this->facade->getResponseManager()->createSurveyResponse($survey);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
-  }
-
-  protected function getActiveSurvey(string $lang_code): ?Survey
-  {
-    $survey_repo = $this->entity_manager->getRepository(Survey::class);
-
-    return $survey_repo->findOneBy(['language_code' => $lang_code, 'active' => true]);
   }
 }

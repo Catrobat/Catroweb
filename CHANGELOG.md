@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [3.8.3]
+- Enable auto deployment
+## [3.8.2]
+- internal API rework
+- better translation fallbacks
+- fix docker image (code coverage)
+- adapt GitHub Actions to reduce overhead and prevent crowdin clashes with other teams
 ## [3.8.1]
 - Translation Hotfix
 - Dependencies
@@ -304,7 +311,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.8.1...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.8.3...HEAD
+[3.8.2]: https://github.com/Catrobat/Catroweb/compare/v3.8.2...v3.8.3
+[3.8.2]: https://github.com/Catrobat/Catroweb/compare/v3.8.1...v3.8.2
 [3.8.1]: https://github.com/Catrobat/Catroweb/compare/v3.8.0...v3.8.1
 [3.8.0]: https://github.com/Catrobat/Catroweb/compare/v3.7.1...v3.8.0
 [3.7.1]: https://github.com/Catrobat/Catroweb/compare/v3.7.0...v3.7.1

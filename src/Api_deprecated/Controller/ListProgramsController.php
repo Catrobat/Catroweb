@@ -189,7 +189,7 @@ class ListProgramsController extends AbstractController
     $limit = (int) $request->get('limit', 20);
     $offset = (int) $request->get('offset', 0);
     $user_id = $request->get('user_id', 0);
-    $max_version = $request->query->get('max_version', '0');
+    $max_version = $request->query->get('max_version', '');
 
     if ('downloads' === $sortBy) {
       $programs = $this->program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);

@@ -27,6 +27,7 @@
         </testsuite>
     </testsuites>
     <extensions>
+        <extension class="Tests\phpUnit\Hook\BypassFinalHook"/>
         <extension class="Tests\phpUnit\Hook\RefreshTestEnvHook"/>
     </extensions>
 </phpunit>

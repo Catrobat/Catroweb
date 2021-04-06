@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ResetCommand extends Command
 {
-  const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = 30;
+  const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
 
   protected static $defaultName = 'catrobat:reset';
 
