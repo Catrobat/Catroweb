@@ -5,28 +5,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [3.8.3]
 - Enable auto deployment
+
 ## [3.8.2]
 - internal API rework
 - better translation fallbacks
 - fix docker image (code coverage)
 - adapt GitHub Actions to reduce overhead and prevent crowdin clashes with other teams
+
 ## [3.8.1]
 - Translation Hotfix
 - Dependencies
+
 ## [3.8.0]
 - Added new API version 
   - new routes for survey
   - new categories oversight
 - Dependencies
+
 ## [3.7.1]
 ### Fixed 
 - fixes preloading of images
 - somue dependency updates
+
 ## [3.7.0]
 ### Added
 - New Frontend for APK Signing (hidden until backend finished)
 - New Catblocks release :hibiscus:
 - Add translation capability to project and comments via link to google translation
+
 ### Changed
 - CAPI update 1.0.52 
     - (GET|HEAD requests contain hash)
@@ -39,12 +45,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependencies
 - Optimized lazy loading (images)
 - Preloading (fonts, css)
+
 ### Fixed
 - use official HWIOauth Bundle
 - Show path in remix graph working again
 - Microsoft Edge Support
 - CAPI
     - Added project id and project url
+
 ## [3.6.0]
 ### Added
 - serve images as webp
@@ -53,20 +61,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - project credits & discription syncronized with XML
 - new catblocks release
 - username in project search
+
 ### Changed
 - use webpack encore
 - help pages replaced
 - change buttons to material
+
 ### Fixed
 - Regex Hotfix
 - fixed rremix graph on open
 - language dropdown, shows correct language in certain browsers
+
 ### Security
 - API Hotfix
+
 ## [3.5.0]
 ### Added
 - various new bricks
 - phpUnit tests
+
 ### Changed
 - new projectList design
 - new Notifications design
@@ -75,12 +88,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - better UX feedback by loading spinners
 - Admin interface refactoring
 - internal concept to store projects (allow deduplication)
+
 ### Fixed
 - project download error handling
 - minor style issues
 - minor CI check issues
 - project structure
 - removed code smells
+
 ### Removed
 - GameJam (will be studios in the future)
 - Recommendation categories (will be re-added in a later release)
@@ -88,38 +103,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.4.5]
 ### Fixed
 - welcome section for embroidery and luna
+
 ## [3.4.4]
 ### Added
 - Oauth Login - Google, Facebook, Apple (web only, no API) 
 - Crowdin Synchronization (GitHub Action)
 - CodeCov Reports (GitHub Action)
 - Psalm added (Static Analysis)
+
 ### Changed
 - Landing page categories use Extensions in addition to flavors to find projects.
 - update dependencies
 - Embroidery color and logo
 - admin interface refactoring (media package category and files)
+
 ### Fixed
 - remove debug projects from search results
 - Symfony project structure (migrations)
-- 
+
 ## [3.4.3]
 ### Changed
 - updated dependencies
 - admin interface (approve)
 - remove limited users
 - remove search option on code view page
+
 ### Fixed
 - recommendation system
 - featured projects
 - max-version in search
 - button css
 - grammar of translations
+
 ## [3.4.0]
 ### Added
 - New Bricks (BackgroundRequestBrick, LookRequestBrick)
 - CAPI upgrades to v1.0.41 (user routes, health check, no total-results)
 - Detail page for scratch projects
+
 ### Changed
 - CAPI upgrades to v1.0.41 (no total-results)
 - Bumped many dependencies (Thx to @dependabot)
@@ -127,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New project view design (remix, code view, code stats on their own pages)
 - Admin Area refactoring
 - Debug projects only hidden in production
+
 ### Fixed
 - Default favicon.ico
 - BadRequest API response in json format
@@ -134,17 +156,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Do not show webview content on mobile - ony if web-view
 - Improved search (elastic search)
 - Github action computation time reduced
+
 ## [3.3.4]
 ### Changed
 - Admin Interface
 - Bumped many dependencies (Thx to dependabot)
 - Improved CI system
 - Docker switch from Ubuntu to Debian
+
 ### Fixed
 - Search queries including special character
 - Project Code/Stats view will be updated on every project upload
 - static images optimized
 - mutable assets are no longer wrongly cached after an update (profile/project images)
+
 ## [3.3.3]
 ### Added
 - added Apple Site Association
@@ -159,6 +184,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Search Progress Indicator added
 - Loading spinner for code view added
 - Releasing Catblocks for the first time :birthday:
+
 ### Changed
 - improved GithubActions :heart_eyes:
 - complete rework of follower feature
@@ -170,6 +196,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switched Backup Strategies to BORG
 - Major Admin Area Refactoring
 - Typography
+
 ### Fixed
 - fixed consistent time access
 - Featured and Approved projects cant be reported anymore (bad spammers :facepunch:)
@@ -178,11 +205,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve Font loading
 - No email in username allowed anymore
 - Upload with Tags / Extensions
+
 ### Removed
 - remove LDAP login
 - remove download of multiple media files
+
 ### API
 - Catroweb-API in basic version added (v1.0.38) https://app.swaggerhub.com/apis-docs/HCrane/CAPI/v1.0.38
+
 ## [3.2.0]
 ### Added
 - Added 4 new Blocks used in Catrobat
@@ -190,14 +220,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new Remix Notification
 - Added new Remix Notification category
 - Admin Area: Add a tool for finding rejected/reported programs and comments
+
 ### Changed
 - generate no new Upload token upon upload
+
 ### Fixed
 - account deletion refined and fixed a bug causing unnecessary code to be executed
 - Bugfix for Notification System
+
 ## [3.1.1]
 ### Fixed
 - bug when uploading a project would not extract all assets
+
 ## [3.1.0]
 ### Added
 - User history admin view
@@ -205,6 +239,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Notification menu extended
 - updated deploy script and create wiki entry
+
 ### Fixed
 
 - removed project navigation from Media Library Sidebar
@@ -235,6 +270,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added popup setting programs private/public
 - added arduino flavor
 - added the possibility to write credits
+
 ### Changed
 - themes will now be accepted via user agent not in link 
 - increase max. description length to 10.000 chars
@@ -254,11 +290,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - search uses `AND` instead of `OR` 
 - fixing admin RAM cake (#343)
 - fixed a bug in `FlavorListener`  
+
 ### Removed
 - removed the possibility to log into facebook 
 - removed the possibility to post programs to facebook 
 - removed legacy remix notification  
 - request uri too long 
+
 ### API
 - return only public programs from api 
 
@@ -267,11 +305,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Filtering for `debugBuild`
 - prefer programs of current flavor in API calls
+
 ### Security 
 - Fixes javascript vulnerability
+
 ### Fixed
 - use mobile window size for tests
 - corrects search box position
+
 ### Removed
 - Removed Geocoder
 - Removed jQuery 2.1.0
@@ -280,6 +321,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.1]
 ### Fixed
 - Fixes a problem in db connection with `server_version` in `doctrine.yml`([Source])
+
 ## [2.1.0]
 ### Added
 - Program Owner now visible on small devices too.
@@ -292,14 +334,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - On the profile page all programs are loaded at once, are ordered and all own programs will be displayed.
 - Headlines are now centered through out all designs.
 - Programs that are uploaded ar no longer set to private if languageVersion is higher than supported.
+
 ### Changed
 - Recommended Program section will only be displayed if programs for this section exist.
 - Recommender System diversity enriched.
 - Complete change of Media-Library (new Ajax Loading, sorting)
 - Hardcoded translations switched to dynamic translations
 - Usernames are now consistently visible in program details.
+
 ### Removed
 - Project documentation removed from repo and relocated to github wiki.
+
 ### Fixed
 - Tooltip is now displayed once not twice.
 - Media-Library files are named correctly on download. (Filename not ID, works only in browser)
