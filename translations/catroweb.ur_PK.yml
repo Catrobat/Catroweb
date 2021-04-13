@@ -325,17 +325,17 @@ termsOfUse:
     item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "ایک اہم اضافی حالت یہ ہے کہ آپ کو واضح طور پر مصنفین کو ان کے کاموں پر آپ کے اپنے کام کی بنیاد پر انتباہ دیتے ہیں. ایک ہی وقت میں، ہم سخت محنت کریں گے تاکہ آپ کا کام دوسروں کی طرف سے آپ کی مدد کی جائے گی جسے آپ نے منفرد نام سے منسوب کیا ہے، آپ کو Catrobat کی کمیونٹی میں نمائندگی کرنے کے لئے آزادانہ طور پر منتخب کیا جائے گا، اور دوسروں کو عوامی کاموں میں آپ کو ہر ایک کو، اور خاص طور پر ان کے لئے آپ کے شکریہ ادا کرنے کے لئے."
-    item4: 'براہ کرم٪ لنک لائسنس سے مشورہ کریں. درست قانونی شرائط و ضوابط کے لئے اپ لوڈ کیا.'
+    item4: 'برائے مہربانی مشورہ کریں %link-licenseUploaded% عین قانونی شرائط و ضوابط کے لئے۔'
   list4:
     item1: "ہم کیتروبیٹ کے نظام سے متعلق ہمارے تمام سافٹ ویئر اور انٹرنیٹ وسائل پیش کرتے ہیں، مثال کے طور پر، کیتروبیٹ ٹیم کی طرف سے تحریر کردہ سافٹ ویئر، ہماری ویب سائٹس اور انٹرنیٹ وسائل، کیٹٹروب سسٹم سے متعلق ہمارے ذریعہ کوڈ، اور تمام اضافی مواد شامل ہیں جیسے جیسے، مثال کے طور پر ، تصاویر، آواز، اور نصوص، اب اور مستقبل میں آپ کو Catrobat کے مفت لائسنس کے تحت."
     item2: یہ لائسنس کیٹیٹروبیٹ کے تمام حصوں کو آپ دونوں کے ساتھ ساتھ آزادانہ طور پر آزاد بناتے ہیں اور آپ کو ان کے استعمال کی آزادی دینے کے لۓ آزاد بناتے ہیں لیکن آپ چاہیں گے، صرف چند محدود پابندیوں کے ساتھ، دوسروں کے درمیان، یہ یقینی بنانے کے لئے کہ ہمیشہ کے لئے کیتروبیت کا نظام آزاد ہوجائے گا. اور سب کے لئے مفید.
-    item3: 'براہ کرم واضح لنک شرائط و ضوابط کے لئے٪ لنک لائسنس ٹول ادا کریں. کیتروبیٹ کے نظام کے ذریعہ کوڈ کے ساتھ ساتھ بہت سے دوسرے دستاویزات اور وسائل٪ لنک ڈویلپرر کے ذریعہ دستیاب ہیں.'
+    item3: 'برائے مہربانی مشورہ کریں %link-licenseToPlay% عین قانونی شرائط و ضوابط کے لئے۔ کیٹروبیٹ سسٹم کے ماخذ کوڈ کے ساتھ ساتھ بہت ساری دیگر دستاویزات اور وسائل دستیاب ہیں%link-developer%'
   list5:
-    item1: 'اگر آپ، یا، اگر آپ 13 سال سے کم ہیں تو، آپ کے والدین یا قانونی سرپرست، کسی تنظیم سے منسلک ہوتے ہیں یا ڈریگ نیٹ کی نوعیت کی رازداری کی خلاف ورزیوں اور / یا بلک یا بڑے پیمانے پر نگرانی کے ذمہ دار ہیں، تو آپ کو ہمارے استعمال کی اجازت نہیں ہے. سافٹ ویئر ایپلی کیشنز اور ہماری خدمات تک رسائی حاصل کرنے کے لئے. اس پابندی اور بعض مستثنی استثناء کی عین مطابق تفصیلات سیکشن 4.a اور 4.b میں ہماری٪ لنک شرائط پر نمائش کی گئی ہے.'
+    item1: 'اگر آپ ، یا ، اگر آپ کی عمر 13 سال سے کم ہے تو ، آپ کے والدین یا قانونی سرپرست ، ڈریگنٹ نوعیت کی رازداری کی خلاف ورزیوں اور / یا بلک یا بڑے پیمانے پر نگرانی میں ملوث تنظیم سے وابستہ ہیں ، تو آپ کو ہمارے استعمال کرنے کی اجازت نہیں ہے۔ سافٹ ویئر ایپلی کیشنز اور ہماری خدمات تک رسائی حاصل کرنے کے لئے۔ اس پابندی کی قطعی تفصیلات اور اس میں کچھ مستثنیات کی ہماری سیکشن 4a اور 4.b میں بیان کی گئی ہے %link-termsOfUse%'
     item2: اگر آپ کی عمر 13 سال سے کم ہے، تو آپ کو اپنے والدین یا قانونی سرپرست سے پوچھنا چاہئے کہ کیا وہ آپ کو کیٹروبیٹ سافٹ ویئر ایپلی کیشنز اور وسائل استعمال کرنے کی اجازت دیتے ہیں؟.
     item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
     item4: "کیٹروبیٹ کے تمام سافٹ ویئر اور انٹرنیٹ وسائل اس امید پیش کئے جاتے ہیں کہ وہ مفید ثابت ہونگے، لیکن بغیر کسی گارنٹی کے۔"
-    item5: 'براہ کرم ہماری٪ لنک شرائط سے مشورہ کریں. اعلی درجے کی پوائنٹس کے عین مطابق فارمولیٹس اور کچھ اضافی قانونی شرائط و ضوابط کے لئے٪ ڈویلپر.catrobat.org/terms_of_use_and_service استعمال کریں.'
+    item5: "برائے مہربانی ہم سے مشورہ کریں %link-termsOfUse%\nڈویلپر.catrobat.org/terms_of_use_and_service مذکورہ بالا نکات اور کچھ اضافی قانونی شرائط و ضوابط کی قطعی تشکیل کے لئے۔"
   bottom1: ہم ہمیشہ ہمارے استعمال کی شرائط کو بہتر بنانے کی کوشش کر رہے ہیں لہٰذا وقتاً فوقتاً کی پڑتال کیا کریں۔
   bottom2: 'استعمال کی شرائط کے بارے میں تجاویز %email-webmaster% پر ارسال کریں۔'
   version: ورژن 1.3, 4 مارچ 2014
@@ -663,7 +663,7 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'کاپیروبٹ </a> کاپی رائٹ اور کاپی٪ سالہ <a href="http://www.catrobat.org">. جملہ حقوق محفوظ ہیں.'
+copyright: "کاپی رائٹ %year%&copy; <a href=\"http://www.catrobat.org\"> کیٹروبیٹ </a>۔\nجملہ حقوق محفوظ ہیں."
 agree: متفق
 disagree: غیر متفق
 profileLoader:

@@ -636,7 +636,7 @@ catro-notifications:
   follow:
     message: 'User %user_link% follows you now.'
   program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+    message: 'User %user_link% created a new Project %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:

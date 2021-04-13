@@ -343,7 +343,7 @@ search:
   dotdotdot: Caută...
   search: Caută
   inMediaLib: Search in media library
-  results: 'Rezultatele c&#x103;ut&#x103;rii'
+  results: Rezultatele cautarii
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
@@ -402,7 +402,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Email-ul pare să fie nevalid
-    exists: 'Parola sau numele au fos gre&#x219;ite.'
+    exists: Această adresă de e-mail există deja.
   id:
     blank: Open authentication ID must not be blank
   login: Numele de utilizator sau parola sunt incorecte.

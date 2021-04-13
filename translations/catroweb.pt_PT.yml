@@ -337,7 +337,7 @@ termsOfUse:
     item4: "Todos os recursos de software e internet são oferecidos na esperança de que eles serão úteis, mas não há garantias."
     item5: 'Por favor, consulte nosso %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service para formulações precisas dos pontos acima e alguns termos e condições legais adicionais.'
   bottom1: Retorne aqui de tempos em tempos para verificar os Termos de Utilização, porque estamos sempre a aprimorá-los.
-  bottom2: 'Por favor, envie quaisquer sugestões sobre estes Termos de Utilização para %e-mail-webmaster%.'
+  bottom2: 'Por favor, envie quaisquer sugestões sobre estes Termos de Utilização para %email-webmaster%.'
   version: Versão 1.3, 4 de março de 2014
 search:
   dotdotdot: Pesquisar...
