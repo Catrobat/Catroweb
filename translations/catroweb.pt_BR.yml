@@ -207,18 +207,19 @@ accountConfirmation:
     <br>
     Uma boa sorte,<br>
     A Equipe Catrobat.
-    </p></p>
+    </p>
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
-    Para redefinir sua senha e criar uma nova, por favor clique aqui: %confirmationUrl%
-
-    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a %appplication_url% comunidade.
-    Para isso, siga para a página: %loginPage%
-    Para alterar os detalhes do seu perfil, siga para: %profilePage%
-
-    Sinceros cumprimentos,
-    Seu Time Catrobat.
+    Caro %username%.
+    Você solicitou a redefinição de sua senha em %appplication_url% porque a esqueceu.
+    Se você não solicitou isso, ignore. Ele irá expirar e se tornar inútil em 24 horas.
+    Para redefinir sua senha e criar uma nova, visite a seguinte página: %confirmationUrl%
+    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a comunidade %appplication_url%.
+    Para isso, basta visitar a seguinte página: %loginPage%
+    Para editar os detalhes do seu perfil, vá para esta página: %profilePage%
+    Atenciosamente,
+    Sua equipe Catrobat.
   messageHtml: |
     <p>
     Caro(a) %username%.<br>
