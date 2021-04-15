@@ -105,9 +105,9 @@ programs:
     キャンセル
   changeVisibility: |+
     本当にいいの？
-    ProgramName%」をプライベートに設定すると、他のユーザーが見たり見つけたりすることはありません。
+    %programName%」をプライベートに設定すると、他のユーザーが見たり見つけたりすることはありません。
     ただし、プロジェクトのリンクを友人と共有することはできます。南京錠のアイコンをタップすると、表示/非表示を切り替えることができます。
-    ProgramName%"をpublicに設定すると、他のユーザーが見たり見つけたりすることができます。
+    %programName%"をpublicに設定すると、他のユーザーが見たり見つけたりすることができます。
     はい、公開に設定されています。
     はい、プライベートに設定
     いいえ
@@ -201,11 +201,11 @@ accountConfirmation:
     <p>
     Dear %username%.<br>。
     <br>
-    アカウントのアクティベーションを完了するには、<a href=%confirmationUrl%>ここをクリックしてください。
+    アカウントのアクティベーションを完了するには、<a href=%confirmationUrl%>ここをクリックしてください。</a><br>
     <br>
     このリンクはお客様のアカウントを認証するために一度だけ使用することができます。<br>
     <br>
-    <br> <br> よろしくお願いします。
+    よろしくお願いします。
     <br>よろしくお願いします。
     </p>
 passwordRecovery:
@@ -216,8 +216,8 @@ passwordRecovery:
     リクエストしていない場合は、無視してください。24時間後には期限切れとなり、使えなくなります。
     パスワードをリセットして新しいパスワードを作成するには、以下のページにアクセスしてください。%confirmationUrl% です。
     ユーザー名とパスワードを使って、いつでも%appplication_url%コミュニティにアクセスすることができます。
-    これを行うには、次のページにアクセスしてください。loginPage% (ログインページ)
-    プロフィールの詳細を編集するには、このページにアクセスしてください。%profilePage
+    これを行うには、次のページにアクセスしてください。%loginPage% (ログインページ)
+    プロフィールの詳細を編集するには、このページにアクセスしてください。%profilePage%
     よろしくお願いします。
     Your Catrobat Team.
   messageHtml: |
@@ -227,9 +227,9 @@ passwordRecovery:
     パスワードを忘れてしまったため、<a href=%appplication_url%>Pocket Code</a>のパスワードのリセットをリクエストしました。
     リクエストしていない場合は、無視してください。24時間後には期限切れとなり、使えなくなります。<br>。
     <br>。
-    パスワードをリセットして、新しいパスワードを作成するには、<a href=%confirmationUrl%>ここをクリックしてください。
+    パスワードをリセットして、新しいパスワードを作成するには、<a href=%confirmationUrl%>ここをクリックしてください。</a><br>
     <br>
-    ユーザー名とパスワードは、いつでも<a href=%appplication_url%>Pocket Code</a>のコミュニティにアクセスすることができます。
+    ユーザー名とパスワードは、いつでも<a href=%appplication_url%>Pocket Code</a>のコミュニティにアクセスすることができます。<br>
     そのためには、次のページにアクセスすればいいのです。<a href=%loginPage%>Login Page</a><br>。
     プロフィールの詳細を編集するには、この<a href=%profilePage%>ページ</a>にアクセスしてください.<br>。
     <br>
@@ -619,7 +619,7 @@ privacy-policy:
   text5: https://shareのプロフィールページからアカウントを削除することで、アカウントに属する個人データの使用をいつでも撤回できます。 atrob.at/. アカウントを削除した後でも、提供されたサービスを使用することはできますが、プログラムのアップロード、コメント、または好きなようにコラボレーションすることはできません。 また、アップロードされたプログラム、コメントなど、あなたのアカウントにリンクされたすべての提供されたコンテンツは削除されます。
   text6: ユーザーが投稿したアップロードやコメントが違法な目的で使用されるなど、当社のサービスが悪用されることを防ぐため、ユーザーが作成したすべての公開データ（アップロード、コメント）は、タイムスタンプと使用されたインターネットアドレスとともに、内部的にデータベースに保存されます。このデータは、十分な違法行為が合理的に疑われ、公式に権利を有する法的機関が適用法に基づいて要求しない限り、いかなる機関によっても使用されたり、転送されたりすることはありません。ただし、違法行為が合理的に疑われ、適用される法律に基づいて正式に権利を有する法的機関から要請があった場合はこの限りではありません。
   text7: お客様は、MailChimp（The Rocket Science Group LLC d/b/a MailChimp, USA）のサービスを利用して、私たちが提供する https://catrob.at/newsletter に掲載されている「Catrobat Newsletter」を自主的に購読することができます。これにより、提供された電子メールアドレスに、Cotrobat プロジェクトおよびそのサービスに関する最新情報が届きます。ニュースレターの配信は、各ニュースレターのフッターにある「配信停止」のリンクを利用して、いつでも停止することができます。このニュースレターは、EU一般データ保護規則およびEU-USA「プライバシーシールド」を遵守し、データ処理に関する契約を結んでいるMailChimp社によって提供されています。MailChimpの詳細については、MailChimpのプライバシーポリシーと利用規約をご覧ください。
-  text8: すべてのサービスは、無料のオープンソースのCatrobat プロジェクトによって提供されています 国際キャットロバット協会 – Verein zur Fo<unk> rderung freier Software, オーストリアのグラーツ(欧州連合)に設立された非営利のNGO。 当社のポリシーは、EUおよびオーストリアのデータ保護法(GDPR)に敬意を表します。当社に連絡するには、contact@catrobatに電子メールを送信してください。 rg または Catrobat, c/o ソフトウェア技術研究所, グラーツ工科大学, Inffeldgasse 16b, A-8010 Graz, オーストリア (欧州連合).
+  text8: すべてのサービスは、International Catrobat Association - Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union) の傘下にある、無料のオープンソース Catrobat プロジェクトによって提供されています。私たちのポリシーは、EUおよびオーストリアのデータ保護法（GDPR）を尊重しています。お問い合わせは、contact@catrobat.org までメールをお送りいただくか、Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)までご郵送ください。
   text9: 14歳未満の場合、このポリシーは法的保護者(通常は保護者)に承認されなければなりません。
   text10: Catrobat の公式英語のプライバシーポリシーは、 %privacy_policy% の下でウェブで入手できます。
   disagree-text: 承認がない場合、アカウントを作成することはできませんが、コア機能はまだアクセス可能です。

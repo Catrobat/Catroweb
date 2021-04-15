@@ -396,7 +396,7 @@ errors:
     size: Korisnicko ime mora imati vise od 3 znaka i ne vise od 180
   password:
     blank: Lozinka nedostaje.
-    short: 'Vasa lozinka mora imati najmanje {{limit}} znakova.'
+    short: 'Vasa lozinka mora imati najmanje {{ limit }} znakova.'
   description:
     rude: Opis ne smije sadrzavati neprikladne rijeci.
   credit:
@@ -635,7 +635,7 @@ catro-notifications:
   noReactions: "It looks like you don't have any reaction notifications."
   noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    message: 'Korisnik %user_link% je ostavio komentar na vas projekt %program_link.'
+    message: 'Korisnik %user_link% je ostavio komentar na vas projekt %program_link%.'
   like:
     message: 'Korisnik %user_link% je oznacio vas projekt %program_link% sa svidja mi se.'
   follow:

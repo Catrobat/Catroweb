@@ -205,7 +205,9 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $flavor = $this->getDefaultFlavorOnNull($flavor);
 
     $response = [];
-    $categories = ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch', 'recommended'];
+
+    //removed recommended on purpose
+    $categories = ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch'];
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     foreach ($categories as $category) {

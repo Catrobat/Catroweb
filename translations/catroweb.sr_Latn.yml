@@ -233,7 +233,6 @@ passwordRecovery:
     Da promenite i napravite novu lozinku, molimo kliknite <a href=%confirmationUrl%>ovde.</a><br>
     <br>
     Možete koristiti korisničko ime i lozinku bilo kada da pristupite <a href=%appplication_url%>Pocket Code</a> zajednici.<br>
-    <br>
     Da učinite to, samo posetite datu stranicu: <a href=%loginPage%>Login Page</a><br>
     Da izmenite detalje Vašega profila, idite na ovu <a href=%profilePage%>stranicu</a>.<br>
     <br>
@@ -625,7 +624,7 @@ privacy-policy:
   text7: Možete se dobrovoljno pretplatiti na Catrobat Newsletter, na https://catrob.at/newsletter koji nam je pružio servis MailChimp (The Rocket Science Group LLC d b/a MailChimp, USA). Tada ćete dobiti ažuriranja o projektu Catrobat i njegovim uslugama na vašu e-mail adresu. Možete da povučete bilten u bilo koje vreme korišćenjem veze "odjava" u podnožju svakog biltena. Ovaj bilten donosi MailChimp sa kojim imamo ugovor o obradi podataka i koji se obavezao na Opštu uredbu o zaštiti podataka EU i „Štit privatnosti“ između EU i SAD. Za dodatne detalje o MailChimp-u, molimo vas da potražite i politiku privatnosti i uslove korišćenja usluge.
   text8: Sve usluge pružaju besplatni otvoreni izvorni Catrobat projekti pod okriljem Međunarodnog udruženja Catrobat - Verein zur Forderung freier Softvare, neprofitne nevladine organizacije osnovane u Gracu, Austrija (Evropska unija). Naše politike poštuju EU i austrijski zakon o zaštiti podataka (GDPR). Da biste stupili u kontakt s nama, pošaljite nam e-mail na contact@catrobat.org ili nam pišite na Catrobat, c/o Institut za softversku tehnologiju, Tehnički univerzitet u Gracu, Inffeldgasse 16b, A-8010 Graz, Austrija (Evropska unija).
   text9: U slučaju da ste mlađi od 14 godina, ovo pravilo mora da prihvati zakonski staratelj (obično roditelj).
-  text10: Službena politika privatnosti engleskog jezika Catrobat dostupna je na vebu pod https://catrob.at/privacypolicy.
+  text10: Službena politika privatnosti engleskog jezika Catrobat dostupna je na vebu pod %privacy_policy%.
   disagree-text: Bez odobrenja ne možemo da stvorimo nalog, ali osnovne su funkcije i dalje dostupne.
 catro-notifications:
   markAsRead: "Označi kao pročitano"
@@ -667,7 +666,7 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Autorska prava &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. Sva prava zadržana.'
+copyright: 'Autorska prava &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Sva prava zadržana.'
 agree: Prihvati
 disagree: Ne slažem se
 profileLoader:

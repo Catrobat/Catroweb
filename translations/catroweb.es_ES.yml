@@ -140,7 +140,7 @@ programs:
   uploaded: Proyectos subidos
   reportAsInappropriate: Reporte como inapropiado
   reportProgram: Reportar proyecto
-  languageVersion: 'Versión de idioma'
+  languageVersion: 'Versión de idioma: %languageVersion%'
   reportLoginText: Por favor %login% para reportar este proyecto.
   reportDialogHeader: '¿Por qué quieres reportar este proyecto?'
   reportDialogReason: Entre una razón

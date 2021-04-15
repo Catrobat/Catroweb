@@ -69,7 +69,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'Burada hangi projeler önerilir?'
-      description: 'Projeniz ne kadar çok tepki alırsa (Beğen, Gülümseyin ...) projeniz bu listede o kadar yüksek görünür.'
+      description: 'Projeniz ne kadar çok tepki alırsa (Beğen, Gülümseyin...) projeniz bu listede o kadar yüksek görünür.'
 follower:
   follows: Takip ediliyor
   followers: Takipçiler
@@ -89,7 +89,7 @@ programs:
     title: Catrobat'ın %theme% hoş geldiniz
     subtitle: Hikayeler, oyunlar ve daha fazlasını oluşturun ...
     subtitle_embroidery: T-shirt, çanta, pantolon veya akıllı telefon kasanızda kendi deseninizi dikin!
-    download: Apk'yı indirin
+    download: Uyglama'yı indirin
     statistics: Diğer istatistikler
   featured: Öne çıkan
   example: Örnekler
@@ -105,9 +105,9 @@ programs:
     İptal etmek
   changeVisibility: |+
     Emin misiniz?
-    '%ProgramName%' öğesini özel olarak ayarlarsanız, diğer kullanıcılar tarafından görülmeyecek veya bulunmayacaktır.
+    %programName%' öğesini özel olarak ayarlarsanız, diğer kullanıcılar tarafından görülmeyecek veya bulunmayacaktır.
     Projenizin bağlantısını yine de arkadaşlarınızla paylaşabilirsiniz. Asma kilit simgesine dokunarak görünürlüğü değiştirebilirsiniz.
-    "%ProgramName%" öğesini herkese açık olarak ayarlarsanız, diğer kullanıcılar tarafından görülebilir ve bulunabilir.
+    "%programName%" öğesini herkese açık olarak ayarlarsanız, diğer kullanıcılar tarafından görülebilir ve bulunabilir.
     Herkese açık olarak ayarla
     Özel olarak ayarla
     İptal
@@ -210,8 +210,15 @@ accountConfirmation:
 passwordRecovery:
   subject: Catrobat şifre kurtarma
   message: |
-    Sayın %username%. Şifrenizi unuttuğunuz için %appplication_url% adresinde şifrenizi sıfırlamayı istediniz. Bunu talep etmediyseniz, lütfen dikkate almayın. Süresi dolacak ve usele dönüşecek
-    Catrobat takımı
+    Sayın %username%.
+    Şifrenizi unuttuğunuz için %appplication_url% adresinde şifrenizi sıfırlamayı istediniz.
+    Bunu talep etmediyseniz, lütfen dikkate almayın. 24 saat içinde kullanım süresi dolacak ve kullanılmaz hale gelecektir.
+    Şifrenizi sıfırlamak ve yeni bir tane oluşturmak için lütfen şu sayfayı ziyaret edin: %confirmationUrl%
+    %appplication_url% topluluğuna erişmek için istediğiniz zaman kullanıcı adınızı ve şifrenizi kullanabilirsiniz.
+    Bunu yapmak için şu sayfayı ziyaret edin: %loginPage%
+    Profil ayrıntılarınızı düzenlemek için bu sayfaya gidin: %profilePage%
+    Saygılarla,
+    Catrobat Ekibiniz.
   messageHtml: |
     <p>
     Dear %username%.<br>
@@ -290,7 +297,7 @@ licenseToPlay:
   text3: "Pasta yiyebileceğiniz gibi kendi yemeklerini hazırlamak için diğer insanların yemek tariflerini kopyalayabilirsiniz, belki de farklı malzemelerle yapabilirsiniz. Bu özgürlük iki basit gereklilikle birlikte gelir:"
   text4: "Catrobat topluluğunu kurarken, topluluk içinde öğrenmeyi ve yaratıcılığı desteklediğine inandığımız için bu yaklaşımı benimsemeye karar verdik. Yemek tariflerini ve içerikleri paylaşarak (metin ve sanat eseri) insanlar fikir alışverişinde bulunabilir ve herkes yararlanabilir."
   text5: Catrobat web sitesini tasarlarken, insanları paylaşmaya ve başkalarına kredi vermeye teşvik eden özellikler ekledik. Her proje sayfasında, proje için orijinal komut dosyalarını her zaman indirebilirsiniz.
-  text6: 'Catrobat çevrimiçi topluluğunun kullanım şartları hakkında daha fazla bilgi edinin.'
+  text6: '%link-termsOfUse% adresinde Catrobat çevrimiçi topluluğunun kullanım koşulları hakkında daha fazla bilgi edinin.'
   list1:
     item1: Sizinde kendi pastanızı tarifi ile paylaşmanızı
     item2: ve ilhamı kimden aldığınızı belirterek o kişinin hakkını vermenizi
@@ -366,9 +373,9 @@ login:
   passwordFirst: Şifre
   passwordSecond: Şifre onayla
 apk:
-  download: Apk olarak indir
-  prepare: 'Apk''yı hazırla'
-  preparing: 'Apk(Uygulama) hazırlanıyor'
+  download: Uyg olarak indir
+  prepare: 'Uyg olarak hazırla'
+  preparing: 'Uyg hazırlanıyor'
   text: 'İşlem biraz zaman alabilir'
 format:
   million_abbreviation: M

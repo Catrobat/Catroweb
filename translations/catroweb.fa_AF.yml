@@ -1,27 +1,27 @@
 ---
 #homepage translation
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
+localLanguage: انگلیسی
+username: نام کاربری
+password: رمز عبور
+createNewPassword: ایجاد رمز عبور جدید
 accountSettings: Account Settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+email: ایمیل
+aboutPocketCode: درباره کد جیبی (Pocket Code)
+about: در باره
+education: تحصیل
+chat: چت و انجمن ها
+others: دیگران
 tutorials: Tutorials
 googlePlay: Google Play
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
+huaweiAppGallery: گالری برنامهای هواوایی (Huawei)
+passwordsNoMatch: رمزها مطابقت نداشتند.
+error: اشتباه
+cancel: لغو 
+report: گزارش
+deleteIt: بله، آن را حذف کنید!
+reportIt: بله، گزارش دهید!
+areYouSure: مطمئنی؟
 noWayOfReturn: There is no way to restore your actions!
 download: Download
 description: Description
@@ -31,7 +31,7 @@ noCredits: No credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Country
 loginText: login
-privacyPolicy: Privacy Policy
+privacyPolicy: حریم خصوصی
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
@@ -60,7 +60,7 @@ cancelMessage: "Cancel"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
-projects: "Projects"
+projects: "برنامه ها"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
 oauthHere: "here"
@@ -133,7 +133,7 @@ programs:
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
-    all: "All"
+    all: "همه"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
@@ -159,7 +159,7 @@ programs:
   comments: Comments
   send: Send
   delete: Delete
-  report: Report
+  report: گزارش
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
@@ -181,8 +181,8 @@ programs:
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
-  by: 'by'
-  open: 'Open'
+  by: 'به وسیله'
+  open: 'باز کن'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
@@ -349,7 +349,7 @@ search:
 menu:
   profile: My Profile
   login: Login
-  logout: Logout
+  logout: خروج
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
@@ -594,13 +594,13 @@ codeStatistics:
   error: "Code Statistics can't be displayed."
   general: 'General'
   bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
+  eventBricks: 'رویداد'
+  controlBricks: 'کنترل'
+  motionBricks: 'حرکت'
+  soundBricks: 'صدا'
   looksBricks: 'Looks'
   penBricks: 'Pen'
-  dataBricks: 'Data'
+  dataBricks: 'داده‌'
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
