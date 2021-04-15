@@ -1,27 +1,27 @@
 ---
 #homepage translation
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
+localLanguage: انگلیسی
+username: نام کاربری
+password: رمز عبور
+createNewPassword: ایجاد رمز عبور جدید
 accountSettings: Account Settings
 email: ایمیل
-aboutPocketCode: About Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+aboutPocketCode: درباره کد جیبی (Pocket Code)
+about: در باره
+education: تحصیل
+chat: چت و انجمن ها
+others: دیگران
 tutorials: Tutorials
 googlePlay: Google Play
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
+huaweiAppGallery: گالری برنامهای هواوایی (Huawei)
+passwordsNoMatch: رمزها مطابقت نداشتند.
+error: اشتباه
+cancel: لغو 
+report: گزارش
+deleteIt: بله، آن را حذف کنید!
+reportIt: بله، گزارش دهید!
+areYouSure: مطمئنی؟
 noWayOfReturn: There is no way to restore your actions!
 download: Download
 description: Description
@@ -159,7 +159,7 @@ programs:
   comments: Comments
   send: Send
   delete: Delete
-  report: Report
+  report: گزارش
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
