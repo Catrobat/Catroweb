@@ -55,7 +55,7 @@
     "@material/form-field": "^10.0",
     "@material/icon-button": "^10.0",
     "@material/list": "^10.0",
-    "@material/menu": "^10.0",
+    "@material/menu": "^11.0",
     "@material/menu-surface": "^10.0",
     "@material/progress-indicator": "^10.0",
     "@material/radio": "^10.0",
