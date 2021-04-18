@@ -13,7 +13,12 @@ use Exception;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="program")
+ * @ORM\Table(
+ *     name="program",
+ *     indexes={
+ *         @ORM\Index(name="rand_idx", columns={"rand"})
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
 class Program
@@ -338,6 +343,11 @@ class Program
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="program", fetch="EXTRA_LAZY")
    */
   protected Collection $reports;
+
+  /**
+   * @ORM\Column(type="integer", options={"default": 0})
+   */
+  protected int $rand = 0;
 
   /**
    * @ORM\Column(type="boolean", options={"default": false})

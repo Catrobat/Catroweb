@@ -498,18 +498,12 @@ class ProgramRepository extends ServiceEntityRepository
   private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC', string $alias = 'e'): QueryBuilder
   {
     if ('' === trim($order_by)) {
-      return $query_builder;
-    }
-
-    if ('RAND()' === $order_by) {
-      return $query_builder
-        ->orderBy($order_by, $order)
+      $query_builder = $query_builder
+        ->orderBy($alias.'.'.$order_by, $order)
         ;
     }
 
-    return $query_builder
-      ->orderBy($alias.'.'.$order_by, $order)
-    ;
+    return $query_builder;
   }
 
   private function setPagination(QueryBuilder $query_builder, ?int $limit, ?int $offset): QueryBuilder
