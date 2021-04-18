@@ -288,7 +288,7 @@ final class ProjectsApiTest extends CatrowebTestCase
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $user = $this->createMock(User::class);
-    $user->method('getUsername')->willReturn('ducky');
+    $user->method('getId')->willReturn('1');
     $authentication_manager->method('getUserFromAuthenticationToken')->willReturn($user);
     $this->object->method('getAuthenticationToken')->willReturn('');
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);

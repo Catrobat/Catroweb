@@ -64,9 +64,9 @@ class ProfileController extends AbstractController
     }
 
     if ($my_profile) {
-      $program_count = count($this->program_manager->getUserPrograms($user->getId()));
+      $program_count = $this->program_manager->countUserProjects($id);
     } else {
-      $program_count = count($this->program_manager->getPublicUserPrograms($id));
+      $program_count = $this->program_manager->countPublicUserProjects($id);
     }
 
     $oauth_user = $user->getGplusUid();

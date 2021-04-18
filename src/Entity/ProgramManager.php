@@ -23,7 +23,6 @@ use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use App\Utils\TimeUtils;
 use DateTime;
-use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -118,6 +117,11 @@ class ProgramManager
   public function getExampleRepository(): ExampleRepository
   {
     return $this->example_repository;
+  }
+
+  public function getProjectByID(string $id, bool $include_private = false): array
+  {
+    return $this->program_repository->getProjectByID($id, $include_private);
   }
 
   /**
@@ -215,9 +219,7 @@ class ProgramManager
     $this->addExtensions($program, $extracted_file);
 
     try {
-      if (null === $extracted_file->getScreenshotPath()) {
-        // Todo: maybe for later implementations
-      } else {
+      if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
       }
     } catch (Exception $e) {
@@ -236,9 +238,7 @@ class ProgramManager
     }
 
     try {
-      if (null === $extracted_file->getScreenshotPath()) {
-        // Todo: maybe for later implementations
-      } else {
+      if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
       }
     } catch (Exception $e) {
@@ -509,43 +509,6 @@ class ProgramManager
     return $this->program_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
-  public function getUserProjects(string $username, ?int $limit = 20, int $offset = 0, ?string $flavor = null, string $max_version = ''): array
-  {
-    return $this->program_repository->getUserProjects(
-      $username, $limit, $offset, $flavor, $this->app_request->isDebugBuildRequest(), $max_version);
-  }
-
-  public function getUserProjectsCount(string $username, ?string $flavor = null, string $max_version = ''): int
-  {
-    return $this->program_repository->getUserProjectsCount(
-      $username, $flavor, $this->app_request->isDebugBuildRequest(), $max_version);
-  }
-
-  /**
-   * @param mixed|null $excluded_program_ids
-   *
-   * @return Program[]
-   */
-  public function getUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '', ?int $limit = null, ?int $offset = null, $excluded_program_ids = null): array
-  {
-    $debug_build = (true === $include_debug_build_programs) ? true : $this->app_request->isDebugBuildRequest();
-
-    return $this->program_repository->getUserPrograms($user_id, $debug_build, $max_version, $limit, $offset, $excluded_program_ids);
-  }
-
-  /**
-   * @param mixed|null $excluded_program_ids
-   *
-   * @return Program[]
-   */
-  public function getPublicUserPrograms(string $user_id, bool $include_debug_build_programs = false, string $max_version = '', ?int $limit = null, ?int $offset = null, $excluded_program_ids = null): array
-  {
-    $debug_build = (true === $include_debug_build_programs) ?
-      true : $this->app_request->isDebugBuildRequest();
-
-    return $this->program_repository->getPublicUserPrograms($user_id, $debug_build, $max_version, $limit, $offset, $excluded_program_ids);
-  }
-
   /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
@@ -580,37 +543,49 @@ class ProgramManager
   }
 
   /**
-   * @return mixed
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @return Program|object|null
    */
-  public function getProgramsWithExtractedDirectoryHash()
+  public function findOneByRemixMigratedAt(?DateTime $remix_migrated_at)
   {
-    return $this->program_repository->getProgramsWithExtractedDirectoryHash();
+    return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
 
-  public function getRecentPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = ''): array
+  public function getUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
   {
-    return $this->program_repository->getRecentPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
-    );
+    return $this->program_repository->getUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version, $limit, $offset);
   }
 
-  public function getRecentProgramsCount(string $flavor = null, string $max_version = ''): int
+  public function countUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
   {
-    return $this->program_repository->getRecentProgramsCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
-    );
+    return $this->program_repository->countUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version);
   }
 
-  public function getMostViewedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                        string $max_version = ''): array
+  public function getMoreProjectsFromUser(string $user_id, string $project_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
   {
-    return $this->program_repository->getMostViewedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
-    );
+    return $this->program_repository->getMoreProjectsFromUser($user_id, $project_id, $flavor, $max_version, $limit, $offset);
+  }
+
+  public function getPublicUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
+  {
+    return $this->program_repository->getPublicUserProjects($user_id, $flavor, $max_version, $limit, $offset);
+  }
+
+  public function countPublicUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
+  {
+    return $this->program_repository->countPublicUserProjects($user_id, $flavor, $max_version);
+  }
+
+  public function getRecentPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  {
+    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'uploaded_at');
+  }
+
+  public function getMostViewedPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  {
+    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'views');
   }
 
   public function getExamplePrograms(?string $flavor = null, ?int $limit = null, int $offset = 0, string $max_version = ''): array
@@ -627,59 +602,33 @@ class ProgramManager
     );
   }
 
-  public function getMostViewedProgramsCount(string $flavor = null, string $max_version = ''): int
+  public function getScratchRemixesPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getMostViewedProgramsCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
-    );
-  }
-
-  public function getScratchRemixesPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = ''): array
-  {
-    return $this->program_repository->getScratchRemixesPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
-    );
+    return $this->program_repository->getScratchRemixProjects($flavor, $max_version, $limit, $offset);
   }
 
   public function getScratchRemixesProgramsCount(string $flavor = null, string $max_version = ''): int
   {
-    return $this->program_repository->getScratchRemixesProgramsCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
-    );
+    return $this->program_repository->countScratchRemixProjects($flavor, $max_version);
   }
 
   public function getMostDownloadedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
                                             string $max_version = ''): array
   {
-    return $this->program_repository->getMostDownloadedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
-    );
+    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'downloads');
   }
 
-  public function getMostDownloadedProgramsCount(string $flavor = null, string $max_version = ''): int
+  public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getMostDownloadedProgramsCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
-    );
+    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'RAND()');
   }
 
-  public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = ''): array
+  public function countProjects(string $flavor = null, string $max_version = ''): int
   {
-    return $this->program_repository->getRandomPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
-    );
+    return $this->program_repository->countProjects($flavor, $max_version);
   }
 
-  public function getRandomProgramsCount(string $flavor = null, string $max_version = ''): int
-  {
-    return $this->program_repository->getRandomProgramsCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
-    );
-  }
-
-  public function search(string $query, ?int $limit = 10, int $offset = 0, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): array
+  public function search(string $query, ?int $limit = 20, int $offset = 0, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): array
   {
     $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
@@ -693,17 +642,6 @@ class ProgramManager
     $paginator = $this->program_finder->findPaginated($program_query);
 
     return $paginator->getNbResults();
-  }
-
-  /**
-   * @throws NoResultException
-   * @throws NonUniqueResultException
-   */
-  public function getTotalPrograms(?string $flavor, string $max_version = ''): int
-  {
-    return $this->program_repository->getTotalPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $max_version
-    );
   }
 
   public function increaseViews(Program $program): void
@@ -732,117 +670,39 @@ class ProgramManager
 
   public function getProgramsByTagId(int $id, ?int $limit, int $offset): array
   {
-    return $this->program_repository->getProgramsByTagId(
-      $id, $this->app_request->isDebugBuildRequest(), $limit, $offset
-    );
+    return $this->program_repository->getProjectsByTagId($id, $limit, $offset);
   }
 
-  public function getProgramsByExtensionName(string $name, ?int $limit, int $offset): array
+  public function getProjectsByExtensionName(string $name, ?int $limit, int $offset): array
   {
-    return $this->program_repository->getProgramsByExtensionName(
-      $name, $this->app_request->isDebugBuildRequest(), $limit, $offset
-    );
+    return $this->program_repository->getProjectsByExtensionName($name, $limit, $offset);
   }
 
   public function searchTagCount(int $tag_id): int
   {
-    return $this->program_repository->searchTagCount($tag_id, $this->app_request->isDebugBuildRequest());
+    return $this->program_repository->searchTagCount($tag_id);
   }
 
   public function searchExtensionCount(string $query): int
   {
-    return $this->program_repository->searchExtensionCount(
-      $query, $this->app_request->isDebugBuildRequest()
-    );
+    return $this->program_repository->searchExtensionCount($query);
   }
 
   public function getRecommendedProgramsById(string $id, string $flavor, ?int $limit, ?int $offset): array
   {
-    return $this->program_repository->getRecommendedProgramsById(
-      $id, $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
-    );
+    return $this->program_repository->getRecommendedProgramsById($id, $flavor, $limit, $offset);
   }
 
   public function getRecommendedProgramsCount(string $id, string $flavor): int
   {
-    return $this->program_repository->getRecommendedProgramsCount(
-      $id, $this->app_request->isDebugBuildRequest(), $flavor
-    );
+    return $this->program_repository->getRecommendedProgramsCount($id, $flavor);
   }
 
-  /**
-   * @throws DBALException
-   */
-  public function getMostRemixedPrograms(string $flavor, ?int $limit, int $offset): array
-  {
-    return $this->program_repository->getMostRemixedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
-    );
-  }
-
-  /**
-   * @throws DBALException
-   */
-  public function getTotalRemixedProgramsCount(string $flavor): int
-  {
-    return $this->program_repository->getTotalRemixedProgramsCount(
-      $this->app_request->isDebugBuildRequest(), $flavor
-    );
-  }
-
-  public function getMostLikedPrograms(string $flavor, ?int $limit, int $offset): array
-  {
-    return $this->program_repository->getMostLikedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, $limit, $offset
-    );
-  }
-
-  public function getTotalLikedProgramsCount(string $flavor): int
-  {
-    return $this->program_repository->getTotalLikedProgramsCount(
-      $this->app_request->isDebugBuildRequest(), $flavor
-    );
-  }
-
-  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-    string $flavor, Program $program, ?int $limit, int $offset): array
+  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array
   {
     return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-      $this->app_request->isDebugBuildRequest(), $flavor, $program, $limit, $offset
+      $flavor, $program, $limit, $offset
     );
-  }
-
-  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-    string $flavor, Program $program): int
-  {
-    return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-      $this->app_request->isDebugBuildRequest(), $flavor, $program
-    );
-  }
-
-  /**
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
-   *
-   * @return Program|object|null
-   */
-  public function findOneByRemixMigratedAt(?DateTime $remix_migrated_at)
-  {
-    return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
-  }
-
-  public function getUserPublicPrograms(string $user_id, ?int $limit = 20, int $offset = 0,
-                                        string $flavor = null, string $max_version = ''): array
-  {
-    return $this->program_repository->getUserPublicPrograms(
-      $user_id, $this->app_request->isDebugBuildRequest(), $max_version, $limit, $offset, $flavor);
-  }
-
-  public function getUserPublicProgramsCount(string $user_id, string $flavor = null,
-                                             string $max_version = ''): int
-  {
-    return $this->program_repository->getUserPublicProgramsCount(
-      $user_id, $this->app_request->isDebugBuildRequest(), $max_version, $flavor);
   }
 
   public function getScreenshotLarge(string $id): string
@@ -888,13 +748,10 @@ class ProgramManager
   {
     switch ($category) {
       case 'recent':
-        return $this->getRecentProgramsCount($flavor, $max_version);
       case 'random':
-        return $this->getRandomProgramsCount($flavor, $max_version);
       case 'most_viewed':
-        return $this->getMostViewedProgramsCount($flavor, $max_version);
       case 'most_downloaded':
-        return $this->getMostDownloadedProgramsCount($flavor, $max_version);
+        return $this->countProjects($flavor, $max_version);
       case 'example':
         return $this->getExampleProgramsCount($flavor, $max_version);
       case 'scratch':
@@ -902,28 +759,6 @@ class ProgramManager
       default:
         return 0;
     }
-  }
-
-  public function parseAcceptLanguage(string $acceptLanguage): array
-  {
-    $prefLocales = array_reduce(
-      explode(',', $acceptLanguage),
-      function ($res, $el) {
-        [$l, $q] = array_merge(explode(';q=', $el), [1]);
-        array_push($res, $l);
-
-        return $res;
-      }, []);
-    arsort($prefLocales);
-
-    return $prefLocales;
-  }
-
-  public function getProgram(string $id, bool $include_private = false): array
-  {
-    return $this->program_repository->getProgram(
-      $id, $this->app_request->isDebugBuildRequest(), $include_private
-    );
   }
 
   private function programSearchQuery(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): BoolQuery

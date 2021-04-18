@@ -2,8 +2,7 @@
 
 namespace App\Commands;
 
-use App\Catrobat\Requests\AppRequest;
-use App\Repository\ProgramRepository;
+use App\Entity\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,18 +13,15 @@ class ReflavorExtensionCommand extends Command
 {
   protected static $defaultName = 'catrobat:reflavor:extension';
 
-  protected AppRequest $app_request;
-
   private EntityManagerInterface $em;
 
-  private ProgramRepository $program_repository;
+  private ProgramManager $program_manager;
 
-  public function __construct(EntityManagerInterface $em, ProgramRepository $program_repo, AppRequest $app_request)
+  public function __construct(EntityManagerInterface $em, ProgramManager $program_manager)
   {
     parent::__construct();
     $this->em = $em;
-    $this->program_repository = $program_repo;
-    $this->app_request = $app_request;
+    $this->program_manager = $program_manager;
   }
 
   protected function configure(): void
@@ -44,9 +40,7 @@ class ReflavorExtensionCommand extends Command
 
     $offset = 0;
     $limit = 20;
-    $programs = $this->program_repository->getProgramsByExtensionName(
-      $extension, $this->app_request->isDebugBuildRequest(), $limit, $offset
-    );
+    $programs = $this->program_manager->getProjectsByExtensionName($extension, $limit, $offset);
     $count = count($programs);
 
     for ($index = 1; 0 !== $count; ++$index) {
@@ -58,9 +52,7 @@ class ReflavorExtensionCommand extends Command
       $this->em->flush();
 
       $offset = $index * $limit;
-      $programs = $this->program_repository->getProgramsByExtensionName(
-        $extension, $this->app_request->isDebugBuildRequest(), $limit, $offset
-      );
+      $programs = $this->program_manager->getProjectsByExtensionName($extension, $limit, $offset);
       $count = count($programs);
     }
 

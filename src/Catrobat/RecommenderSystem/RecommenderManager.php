@@ -158,27 +158,18 @@ class RecommenderManager
    * programs are ranked further back, so that more different programs are shown on the homepage
    * (otherwise it is likely that there are many duplicates in the lists of most downloaded / most
    * viewed programs and recommended programs).
-   *
-   * @param mixed $flavor
-   *
-   * @return Program[]
    */
-  public function recommendHomepageProgramsForGuests($flavor, string $max_version = ''): array
+  public function recommendHomepageProgramsForGuests(?string $flavor, string $max_version = ''): array
   {
-    $most_liked_programs =
-      $this->program_repository->getMostLikedPrograms(
-        $this->app_request->isDebugBuildRequest(), $flavor
-      );
+    $most_liked_programs = $this->program_repository->getMostLikedPrograms($flavor, $max_version);
+
     $programs_total_likes = [];
     foreach ($most_liked_programs as $most_liked_program) {
       $program_id = $most_liked_program->getId();
       $programs_total_likes[$program_id] = $this->program_like_repository->totalLikeCount($program_id);
     }
 
-    $most_downloaded_programs =
-      $this->program_repository->getMostDownloadedPrograms(
-        $this->app_request->isDebugBuildRequest(), $flavor, 75
-      );
+    $most_downloaded_programs = $this->program_repository->getProjects($flavor, $max_version, 75, 0, 'downloads');
     $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
     foreach ($programs_total_likes as $program_id => $number_of_likes) {
@@ -196,9 +187,7 @@ class RecommenderManager
       $recommendation_list[] = $program;
     }
 
-    return ProgramRepository::filterVisiblePrograms(
-      $recommendation_list, $this->app_request->isDebugBuildRequest(), $max_version
-    );
+    return $this->program_repository->filterVisiblePrograms($recommendation_list, $max_version);
   }
 
   /*
@@ -240,9 +229,7 @@ class RecommenderManager
     // used.
     $programs = array_map(fn ($program_id) => $programs_liked_by_others[$program_id], array_keys($recommendation_weights));
 
-    return ProgramRepository::filterVisiblePrograms(
-      $programs, $this->app_request->isDebugBuildRequest(), $max_version
-    );
+    return $this->program_repository->filterVisiblePrograms($programs, $max_version);
   }
 
   /**
@@ -277,9 +264,7 @@ class RecommenderManager
      * mathematical function has been chosen because it consistently reduces the weight
      * decrease from rank to rank, fast in the beginning, then slowing down.
      */
-    $most_downloaded_programs = $this->program_repository->getMostDownloadedPrograms(
-      $this->app_request->isDebugBuildRequest(), $flavor, 75
-    );
+    $most_downloaded_programs = $this->program_repository->getProjects($flavor, $max_version, 75, 0, 'downloads');
     $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
     foreach ($recommendation_weights as $key => $weight) {
@@ -296,9 +281,7 @@ class RecommenderManager
     // used.
     $programs = array_map(fn ($program_id) => $programs_liked_by_others[$program_id], array_keys($recommendation_weights));
 
-    return ProgramRepository::filterVisiblePrograms(
-      $programs, $this->app_request->isDebugBuildRequest(), $max_version
-    );
+    return $this->program_repository->filterVisiblePrograms($programs, $max_version);
   }
 
   /**
@@ -431,9 +414,7 @@ class RecommenderManager
       return $programs_liked_by_others[$program_id];
     }, $recommendations_by_id);
 
-    return ProgramRepository::filterVisiblePrograms(
-      $programs, $this->app_request->isDebugBuildRequest(), $max_version
-    );
+    return $this->program_repository->filterVisiblePrograms($programs, $max_version);
   }
 
   /**
@@ -602,9 +583,7 @@ class RecommenderManager
       return $programs_remixed_by_others[$program_id];
     }, array_keys($recommendation_weights));
 
-    return ProgramRepository::filterVisiblePrograms(
-      $programs, $this->app_request->isDebugBuildRequest()
-    );
+    return $this->program_repository->filterVisiblePrograms($programs);
   }
 
   public function getProjects(User $user = null, int $limit = 20, int $offset = 0, string $flavor = null, string $max_version = ''): array
