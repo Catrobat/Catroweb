@@ -1,7 +1,7 @@
 name: Cancel
 on:
   workflow_run:
-    workflows: ["container_tests.yml", "code_quality.yml"]
+    workflows: ["Dynamic analysis", "Docker Container tests"]
     types:
       - requested
 jobs:

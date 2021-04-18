@@ -13,7 +13,7 @@
 #      the development
 #
 #
-name: Docker Container tests
+name: "Docker Container tests"
 
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
