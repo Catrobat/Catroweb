@@ -56,7 +56,6 @@ jobs:
             docker exec app.catroweb bin/console about
 
       - name: Create a livid environment with dummy data
-        # ToDo: would be nice to check the reset command, in the current state the reset command can't fail
         run: |
           docker exec app.catroweb bin/console catrobat:reset --hard
 
