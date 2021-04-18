@@ -23,7 +23,7 @@ deleteIt: Evet, sil!
 reportIt: Evet, bildir!
 areYouSure: Emin misiniz?
 noWayOfReturn: Eylemlerinizi geri getirmenin bir yolu yok!
-download: indir
+download: İndir
 description: Açıklama
 noDescription: Açıklama mevcut değil.
 credits: Yapanlar
@@ -31,7 +31,7 @@ noCredits: Her hangi bir yapanlar yok.
 notesAndCreditsDescription: Bu projeyi nasıl yarattınız? Başkalarının fikirlerini, senaryolarını veya sanat eserlerini kullandınız mı? Onlara burada teşekkür edin.
 country: Ülke
 loginText: oturum aç
-privacyPolicy: Gizlilik politikası
+privacyPolicy: Gizlilik Politikası
 imprint: Damga
 programDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
@@ -44,10 +44,10 @@ show-less: 'Daha az göster'
 more-information: 'Daha fazla bilgi'
 less-information: 'Daha az bilgi'
 ok: Tamam
-clickToDownloadProgram: 'Örnek projeyi indirmek için tıklayınız %link_start% buraya %link_end%'
+clickToDownloadProgram: 'Örnek projeyi indirmek için tıklayın %link_start% buraya %link_end%'
 registrationError: 'Kullanıcı adı yada e-posta zaten kullanılıyor.'
 notifications: 'Bildirimler'
-allNotifications: 'Tüm bildirimler'
+allNotifications: 'Hepsi'
 FollowersNotifications: 'Takipçiler'
 LikeNotifications: 'Tepkiler'
 CommentNotifications: 'Yorumlar'
@@ -60,7 +60,7 @@ cancelMessage: "İptal et"
 notificationsUnauthorizedError: "Kullanıcıya yetki verilemiyor"
 notificationsClearError: "Bildirimler okundu olarak işaretlenemedi!"
 pleaseWait: "Lütfen bekleyiniz..."
-projects: "Projelerin"
+projects: "Projeler"
 oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
 oauthInfo: 'Oturum açmak için harici bir hesap kullandınız. Sizin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adınızı değiştirmek veya hesabınız için yeni bir şifre oluşturmak istiyorsanız lütfen profil sayfama gidin. Tıklayın %link_start% buraya %link_end% profil sayfanıza gitmek için.'
 oauthHere: "buraya"
@@ -71,14 +71,14 @@ indexPage:
       title: 'Burada hangi projeler önerilir?'
       description: 'Projeniz ne kadar çok tepki alırsa (Beğen, Gülümseyin...) projeniz bu listede o kadar yüksek görünür.'
 follower:
-  follows: Takip ediliyor
+  follows: Takipte
   followers: Takipçiler
   follow: Takip et
   username: kullanıcı
   followsMe: Beni takip ediyor
   noFollowing: Şu anda kimseyi takip etmiyorsunuz.
   noFollowers: Şu anda takipçiniz yok.
-  noOtherFollowing: Şu anda takip eden kullanıcı yok.
+  noOtherFollowing: Şu anda takip edilen bir kullanıcı yok.
   noOtherFollowers: Şu anda takipte olan kullanıcı yok.
   followError: "İstenilen kullanıcı takip edilemiyor!"
   unfollowError: "İstenen kullanıcının takibi kaldırılamıyor!"
@@ -86,8 +86,8 @@ follower:
   unfollowButton: "Takip etmekten vazgeç %username%"
 programs:
   welcome:
-    title: Catrobat'ın %theme% hoş geldiniz
-    subtitle: Hikayeler, oyunlar ve daha fazlasını oluşturun ...
+    title: Catrobat'ın %theme% projesinin websitesine hoş geldiniz
+    subtitle: Hikayeler, oyunlar ve daha fazlasını oluşturun...
     subtitle_embroidery: T-shirt, çanta, pantolon veya akıllı telefon kasanızda kendi deseninizi dikin!
     download: Uyglama'yı indirin
     statistics: Diğer istatistikler
@@ -99,10 +99,10 @@ programs:
   noPrograms: Şu anda proje yok.
   deleteConfirmation: |+
     Emin misiniz?
-    Silmek istediğine emin misin "%programName%"?
+    "%programName%" öğesini silmek istediğinizden emin misiniz?
     Eylemlerinizi geri getirmenin bir yolu yok!
-    Evet, sil!
-    İptal etmek
+    Evet, silin!
+    İptal et
   changeVisibility: |+
     Emin misiniz?
     %programName%' öğesini özel olarak ayarlarsanız, diğer kullanıcılar tarafından görülmeyecek veya bulunmayacaktır.
@@ -118,8 +118,8 @@ programs:
     Hesabınızı silmek istediğinizden emin misiniz?
     Bu, yüklediğiniz projeleri ve yorumları da silecek! Eylemlerinizi geri getirmenin bir yolu yok!
     Evet, sil!
-    İptal etmek
-  tooLongDescription: Projenin alt yazısı çok uzun!
+    İptal et
+  tooLongDescription: Projenin açıklaması çok uzun!
   rudeWordsInDescription: Açıklamanızda kaba kelimeler kullanamazsınız!
   tooLongCredits: Projenin yapanlar kısmı çok uzun!
   rudeWordsInCredits: Yapanlarda kaba kelimeler kullanamazsınız!
@@ -141,13 +141,13 @@ programs:
   reportAsInappropriate: Uygunsuz olarak rapor et
   reportProgram: Projeyi bildir
   languageVersion: 'Catrobat dil sürümü: %languageVersion%'
-  reportLoginText: Lütfen %login% bildirmek için kayıt olun.
+  reportLoginText: Lütfen projeyi bildirmek için %login%
   reportDialogHeader: Bu projeyi neden bildirmek istiyorsunuz?
   reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne?
   reportRadioButtonInappropriate: Uygunsuz
   reportRadioButtonCopyright: Telif hakkı ihlali
   reportRadioButtonSpam: Spam
-  reportRadioButtonDislike: Hoşlanmadım
+  reportRadioButtonDislike: Beğenmedim
   reportOwnProgram: Kendi projenizi işaretleyemezsiniz.
   reportAlready: Bu projeyi zaten işaretlediniz.
   reportDone: Bu projeyi bildirdiniz!
@@ -166,9 +166,9 @@ programs:
   deleted_popup_header: Silindi
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
   editDescription: Proje açıklamasını düzenleyin
-  saveDescription: Açıklama değişikliğini kaydet
+  saveDescription: Kaydet
   editCredits: Yapanları düzenle
-  saveCredits: Yapanları kayıt et
+  saveCredits: Kaydet
   addComment: Bir yorum Yaz
   thumbsUp: Başparmak havaya!
   smile: Gülümse!
@@ -182,10 +182,10 @@ remixGraph:
   title: Remixler
   showRemixGraph: 'Remix Grafiği'
   by: 'tarafından'
-  open: 'Açık '
+  open: 'Aç'
   showPaths: 'Yolları Göster'
   programNotAvailableErrorTitle: 'Üzgünüz...'
-  programNotAvailableErrorDescription: 'Proje kullanılabilir değil'
+  programNotAvailableErrorDescription: 'Proje artık kullanılabilir değil!'
   programNotAvailable: 'Kullanılabilir değil'
   programUnknownUser: 'Bilinmeyen kullanıcı'
 noReply: Bu otomatik bir mesajdır - Lütfen bu e-postayı doğrudan yanıtlamayın.
@@ -194,7 +194,7 @@ accountConfirmation:
   message: |
     Sayın %username%
     Hesabınızı etkinleştirmeyi bitirmek için lütfen
-    %confirmationUrl% adresini ziyaret edin. Bu bağlantı, hesabınızı doğrulamak için yalnızca bir kez kullanılabilir. Saygılarımla,
+    %confirmationUrl% adresini ziyaret edin. Bu bağlantı, hesabınızı doğrulamak için yalnızca bir kez kullanılabilir. Saygılarımızla,
     Catrobat Takımı.
   messageHtml: |
     <p>

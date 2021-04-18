@@ -4,15 +4,15 @@ localLanguage: انگلیسی
 username: نام کاربری
 password: رمز عبور
 createNewPassword: ایجاد رمز عبور جدید
-accountSettings: Account Settings
+accountSettings: تنظیمات حساب
 email: ایمیل
 aboutPocketCode: درباره کد جیبی (Pocket Code)
 about: در باره
 education: تحصیل
 chat: چت و انجمن ها
 others: دیگران
-tutorials: Tutorials
-googlePlay: Google Play
+tutorials: کمک
+googlePlay: فروشگاه گوگل پلی (Google Play)
 iosAppStore: IOS App store
 huaweiAppGallery: گالری برنامهای هواوایی (Huawei)
 passwordsNoMatch: رمزها مطابقت نداشتند.
@@ -22,46 +22,46 @@ report: گزارش
 deleteIt: بله، آن را حذف کنید!
 reportIt: بله، گزارش دهید!
 areYouSure: مطمئنی؟
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-description: Description
-noDescription: No description available.
+noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
+download: دانلود 
+description: توضیح
+noDescription: هیچ توضیحی در دسترس نیست. 
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Country
-loginText: login
+notesAndCreditsDescription: چگونه این پروژه را ایجاد کردید؟ آیا از اندیشه های، اسکریپت ها یا آثار هنری از دیگران استفاده کرده اید؟ اینجا از آنها تشکری کن. 
+country: کشور
+loginText: وارد شدن
 privacyPolicy: حریم خصوصی
-imprint: Imprint
-programDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+imprint: دیدگاه
+programDetails: جزئیات
+somethingWentWrong: 'اوهو، چیزی اشتباه شد.'
+pleaseTryAgain: 'لطفا دوباره کوشش کن!'
+oldVersionError: 'لطفا به جدیدترین نسخه کد جیبی (Pocket Code) به روز رسانی کن!'
+more: 'بیشتر'
+less: 'کمتر'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+more-information: 'اطلاعات بیشتر'
+less-information: 'اطلاعات کمتر'
+ok: خوب
+clickToDownloadProgram: 'برای دانلود نمونه پروژه %link_start%اینجا %link_end%را کلیک کن. '
+registrationError: 'نام کاربری یا آدرس ایمیل درحال استفاده.'
+notifications: 'اطلاعیه'
 allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
+FollowersNotifications: 'دنبال کنندگان '
+LikeNotifications: 'واکنش ها'
+CommentNotifications: 'نظرات'
+RemixNotifications: 'ریمیکس ها'
+wellDone: "آفرین!"
+done: "انجام شد!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+confirmMessage: "بله، این را حذف کن"
+cancelMessage: "لغوش کن"
+notificationsUnauthorizedError: "کاربر قادر به تأیید نیست"
+notificationsClearError: "غیر قادر به علامت گذاری اطلاعیه به عنوان خوانده شده!"
+pleaseWait: "لطفا صبر کن..."
 projects: "برنامه ها"
-oauthPopUpTitle: "External account sign in information"
+oauthPopUpTitle: "معلومات وارد شدن به حساب خارجی"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
 oauthHere: "here"
 statistics: "Statistics"
@@ -72,7 +72,7 @@ indexPage:
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
   follows: Following
-  followers: Followers
+  followers: دنبال کنندگان 
   follow: Follow
   username: User
   followsMe: Follows me
@@ -153,10 +153,10 @@ programs:
   reportDone: You reported this project!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
+  btnClosePopup: خوب
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
-  comments: Comments
+  comments: نظرات
   send: Send
   delete: Delete
   report: گزارش
@@ -176,7 +176,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: واکنش ها
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remixes
