@@ -99,7 +99,7 @@ class SearchController extends AbstractController
     $query = $request->query->get('q');
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
-    $programs = $program_manager->getProgramsByExtensionName($query, $limit, $offset);
+    $programs = $program_manager->getProjectsByExtensionName($query, $limit, $offset);
 
     $numbOfTotalProjects = $program_manager->searchExtensionCount($query);
 

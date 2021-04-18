@@ -69,7 +69,7 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
         'username' => $user->getUsername(),
         'id' => $user->getId(),
         'avatar' => $user->getAvatar(),
-        'project_count' => count($this->program_manager->getPublicUserPrograms($user->getId())),
+        'project_count' => $this->program_manager->countPublicUserProjects($user->getId()),
         'country' => $country,
         'profile' => $user,
       ]);

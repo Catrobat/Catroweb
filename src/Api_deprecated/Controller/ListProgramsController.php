@@ -220,9 +220,9 @@ class ListProgramsController extends AbstractController
       );
     } elseif ('user' === $sortBy) {
       if (null !== $this->getUser() && $this->getUser()->getId() === $user_id) {
-        $programs = $this->program_manager->getUserPrograms($user_id, $max_version);
+        $programs = $this->program_manager->getUserProjects($user_id, null, null, null, $max_version);
       } else {
-        $programs = $this->program_manager->getPublicUserPrograms($user_id, $max_version);
+        $programs = $this->program_manager->getPublicUserProjects($user_id, null, null, null, $max_version);
       }
     } else {
       if ('pocketcode' === $flavor) {
@@ -235,7 +235,7 @@ class ListProgramsController extends AbstractController
     if ('user' === $sortBy || 'example' === $sortBy) {
       $numbOfTotalProjects = count($programs);
     } else {
-      $numbOfTotalProjects = $this->program_manager->getTotalPrograms(null, $max_version);
+      $numbOfTotalProjects = $this->program_manager->countProjects(null, $max_version);
     }
 
     return new ProgramListResponse($programs, $numbOfTotalProjects, $details);
@@ -259,7 +259,7 @@ class ListProgramsController extends AbstractController
 
     $new_limit = $limit - $number_of_projects;
 
-    $total_number_of_correct_flavored_projects = $this->program_manager->getTotalPrograms($flavor, $max_version);
+    $total_number_of_correct_flavored_projects = $this->program_manager->countProjects($flavor, $max_version);
     $new_offset = max($offset - $total_number_of_correct_flavored_projects + $number_of_projects, 0);
 
     return array_merge($projects, $getMoreProjects('!'.$flavor, $new_limit, $new_offset, $max_version));

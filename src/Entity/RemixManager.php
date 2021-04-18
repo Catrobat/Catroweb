@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Catrobat\RemixGraph\RemixGraphManipulator;
-use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\RemixData;
 use App\Repository\ProgramRemixBackwardRepository;
@@ -20,8 +19,6 @@ use Exception;
 
 class RemixManager
 {
-  protected AppRequest $app_request;
-
   private EntityManagerInterface $entity_manager;
 
   private ProgramRepository  $program_repository;
@@ -44,7 +41,7 @@ class RemixManager
                               ProgramRemixBackwardRepository $program_remix_backward_repository,
                               ScratchProgramRemixRepository $scratch_program_remix_repository,
                               RemixGraphManipulator $remix_graph_manipulator,
-                              AppRequest $app_request, CatroNotificationService $catro_notification_service)
+                              CatroNotificationService $catro_notification_service)
   {
     $this->entity_manager = $entity_manager;
     $this->program_repository = $program_repository;
@@ -53,7 +50,6 @@ class RemixManager
     $this->program_remix_backward_repository = $program_remix_backward_repository;
     $this->scratch_program_remix_repository = $scratch_program_remix_repository;
     $this->remix_graph_manipulator = $remix_graph_manipulator;
-    $this->app_request = $app_request;
     $this->catro_notification_service = $catro_notification_service;
   }
 
@@ -213,9 +209,7 @@ class RemixManager
     }, $catrobat_backward_edge_relations);
 
     $catrobat_nodes_data = [];
-    $programs_data = $this->program_repository->getProgramDataByIds(
-      $catrobat_ids_of_whole_graph, $this->app_request->isDebugBuildRequest()
-    );
+    $programs_data = $this->program_repository->getProjectDataByIds($catrobat_ids_of_whole_graph);
     foreach ($programs_data as $program_data) {
       $catrobat_nodes_data[$program_data['id']] = $program_data;
     }
