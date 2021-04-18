@@ -23,6 +23,7 @@ class StatusCode
    * @var int
    */
   const INVALID_CHECKSUM = 504;
+  const x = 112221;
   /**
    * @var int
    */

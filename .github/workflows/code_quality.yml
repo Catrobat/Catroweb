@@ -32,7 +32,7 @@
 #      ToDo: As soon as Github Action have `uses` support use composites to prevent the duplicated (build/cache) code
 #      (https://github.com/actions/runner/issues/646)
 #
-name: Static analysis
+name: "Static analysis"
 
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
