@@ -60,4 +60,12 @@ class MediaPackageAdmin extends AbstractAdmin
       ])
     ;
   }
+
+  /**
+   * @return bool
+   */
+  public function isAclEnabled()
+  {
+    return false;
+  }
 }
