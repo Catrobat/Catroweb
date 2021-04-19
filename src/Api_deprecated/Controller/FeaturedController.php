@@ -16,19 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FeaturedController extends AbstractController
 {
-  /**
-   * @deprecated
-   *
-   * @Route("/api/projects/featured.json", name="api_featured_programs",
-   * defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @throws NonUniqueResultException
-   */
-  public function getFeaturedProgramsAction(Request $request, ImageRepository $image_repository,
-                                            FeaturedRepository $repository): JsonResponse
-  {
-    return $this->getFeaturedPrograms($request, false, $image_repository, $repository);
-  }
 
   /**
    * @deprecated
