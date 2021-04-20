@@ -31,7 +31,7 @@ noCredits: No notes and credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Country
 loginText: login
-privacyPolicy: Privacy Policy
+privacyPolicy: ਪਰਾਈਵੇਟ ਨੀਤੀ
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
@@ -349,7 +349,7 @@ search:
 menu:
   profile: My Profile
   login: Login
-  logout: Logout
+  logout: ਬਾਹਰ ਆਉਣਾ
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
@@ -604,7 +604,7 @@ codeStatistics:
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: ਭਾਸ਼ਾ
   usefulLinks: Useful links
   legalities: Legalities
   communityStats: Community stats
@@ -676,7 +676,7 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'ਕੈਟ੍ਰੋਬੈਟ ਕਮਿ communityਨਿਟੀ'
 back_to_app: 'Exit community'
 category:
   recent: Newest projects
