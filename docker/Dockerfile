@@ -1,16 +1,24 @@
+# ---------------------------------------------- Build Time Arguments --------------------------------------------------
+ARG PHP_VERSION="7.4"
+ARG DEBIAN_VERSION="buster"
+ARG NODE_VERSION="19"
+ARG COMPOSER_VERSION="2.4.4"
+
+# -------------------------------------------------- Composer Image ----------------------------------------------------
 # Use composer image for better caching
-FROM composer:2.4.4 AS composer-build
+FROM composer:${COMPOSER_VERSION} AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
+# --------------------------------------------------- NodeJS Image -----------------------------------------------------
 # Use node image for better caching
-FROM node:19 AS node-build
+FROM node:${NODE_VERSION} AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install && npm install -g @symfony/webpack-encore
 
-# Run on:
-FROM debian:buster
+# ------------------------------------------------- Dev Image Build ----------------------------------------------------
+FROM debian:${DEBIAN_VERSION} AS dev-build
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
@@ -106,3 +114,43 @@ RUN sh docker/app/prepare-test-env.sh
 RUN npm run dev
 
 EXPOSE 80
+
+# ------------------------------------------------- Prod Image Build ---------------------------------------------------
+FROM php:${PHP_VERSION}-fpm AS prod-build
+
+RUN apt-get update && apt-get -y --no-install-recommends install \
+        libzip-dev \
+        libpng-dev \
+        libicu-dev \
+        libmagickwand-dev \
+    && pecl install imagick  \
+    && docker-php-ext-enable imagick \
+    && docker-php-ext-install \
+        pdo_mysql \
+        intl \
+        gd \
+        zip \
+    && apt-get autoremove --purge -y && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Setting working directory
+WORKDIR /var/www/catroweb
+
+# Add composer executable to the container
+COPY --from=composer-build /usr/bin/composer /usr/bin/composer
+
+# Add libraries and modules
+COPY --from=composer-build /app/vendor vendor
+
+# Add compiled resources
+COPY --from=dev-build /var/www/catroweb/bin bin
+COPY --from=dev-build /var/www/catroweb/config config
+COPY --from=dev-build /var/www/catroweb/docker docker
+COPY --from=dev-build /var/www/catroweb/migrations migrations
+COPY --from=dev-build /var/www/catroweb/public public
+COPY --from=dev-build /var/www/catroweb/src src
+COPY --from=dev-build /var/www/catroweb/templates templates
+COPY --from=dev-build /var/www/catroweb/translations translations
+COPY --from=dev-build /var/www/catroweb/var var
+COPY --from=dev-build /var/www/catroweb/.jwt .jwt
+COPY --from=dev-build /var/www/catroweb/composer.json ./

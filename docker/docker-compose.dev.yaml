@@ -9,6 +9,7 @@ services:
         - APP_ENVIRONMENT=dev
       context: ../
       dockerfile: docker/Dockerfile
+      target: dev-build
     container_name: app.catroweb
     image: app.catroweb
     command: ["sh", "/var/www/catroweb/docker/app/startup.sh"]

@@ -1,0 +1,68 @@
+version: '3.7'
+
+services:
+  catroweb.app:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: catroweb.app
+    image: catroweb.app
+    depends_on:
+      - catroweb.elasticsearch
+    volumes:
+      - ./../.env:/var/www/catroweb/.env
+      - ./../.env.dev:/var/www/catroweb/.env.dev
+      - ./../.env.test:/var/www/catroweb/.env.test
+      - ./../.env.prod:/var/www/catroweb/.env.prod
+      - ./../public/resources:/var/www/catroweb/public/resources
+      - catroweb-app-volume:/var/www/catroweb
+    environment:
+      - APP_ENV=dev
+      - ELASTICSEARCH_URL=http://catroweb.elasticsearch:9200/
+      - ES_HOST=catroweb.elasticsearch
+      - ES_PORT=9200
+      - DATABASE_URL=pdo-mysql://root:root@172.17.0.1:3306/catroweb_dev
+    networks:
+      - catroweb-network
+
+  catroweb.elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.9
+    container_name: catroweb.elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - transport.host=localhost
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    networks:
+      - catroweb-network
+
+  catroweb.webserver:
+    image: nginx:mainline
+    container_name: catroweb.webserver
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - catroweb-app-volume:/var/www/catroweb
+      - ./../public/resources:/var/www/catroweb/public/resources
+    depends_on:
+      - catroweb.app
+    networks:
+      - catroweb-network
+
+volumes:
+  esdata1:
+    driver: local
+  catroweb-app-volume:
+
+networks:
+  catroweb-network:
+    driver: bridge
