@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FeaturedController extends AbstractController
 {
-
   /**
    * @deprecated
    *

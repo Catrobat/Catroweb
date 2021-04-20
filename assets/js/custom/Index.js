@@ -9,7 +9,6 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
   self.confirmButtonText = confirmButtonText
 
   self.init = function () {
-
     const $homeProjects = $('#home-projects')
     $('.project-list', $homeProjects).each(function () {
       const $t = $(this)

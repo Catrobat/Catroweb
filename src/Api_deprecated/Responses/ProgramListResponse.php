@@ -7,10 +7,8 @@ namespace App\Api_deprecated\Responses;
  */
 class ProgramListResponse
 {
-  private $programs;
-
-  private $total_programs;
-
+  private array $programs;
+  private int $total_programs;
   private bool $is_user_specific_recommendation;
 
   public function __construct($programs, $total_programs, bool $is_user_specific_recommendation = false)
@@ -20,18 +18,12 @@ class ProgramListResponse
     $this->is_user_specific_recommendation = $is_user_specific_recommendation;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getPrograms()
+  public function getPrograms(): array
   {
     return $this->programs;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getTotalPrograms()
+  public function getTotalPrograms(): int
   {
     return $this->total_programs;
   }

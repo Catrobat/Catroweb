@@ -24,15 +24,6 @@ Feature: Get the random programs
       | program 1 |
       | program 4 |
 
-  Scenario: show random program ids
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "0"
-    When I GET "/app/api/projects/randomProjectIDs.json" with these parameters
-    Then I should get 2 programs in random order:
-      | Name      |
-      | program 1 |
-      | program 4 |
-
   Scenario: show random program with offset
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"

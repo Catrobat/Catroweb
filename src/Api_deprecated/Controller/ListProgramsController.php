@@ -40,7 +40,6 @@ class ListProgramsController extends AbstractController
     return $this->listSortedPrograms($request, 'downloads');
   }
 
-
   /**
    * @deprecated
    *

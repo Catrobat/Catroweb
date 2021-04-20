@@ -47,37 +47,6 @@ Feature: MAX version feature; Allows old Apps to request only projects they can 
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-  Scenario: show most recent projects with limit and max_version (IDs)
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "0"
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/recentIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 6 |
-      | project 5 |
-
-  Scenario: show most recent projects with limit, offset and max_version (IDs)
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "1"
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/recentIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 5 |
-      | project 4 |
-
-  Scenario: show only visible projects
-    Given program "project 6" is not visible
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/recentIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 5 |
-      | project 4 |
-
-# ----------------------------------------------------------------------------------------------------------------------
-
   Scenario: show most downloaded projects with limit and max_version
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
@@ -102,37 +71,6 @@ Feature: MAX version feature; Allows old Apps to request only projects they can 
     Given program "project 6" is not visible
     And I have a parameter "max_version" with value "0.993"
     When I GET "/app/api/projects/mostDownloaded.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 5 |
-      | project 4 |
-
-# ----------------------------------------------------------------------------------------------------------------------
-
-  Scenario: show most downloaded projects with limit and max_version (IDs)
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "0"
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/mostDownloadedIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 6 |
-      | project 5 |
-
-  Scenario: show most downloaded projects with limit, offset and max_version (IDs)
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "1"
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/mostDownloadedIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 5 |
-      | project 4 |
-
-  Scenario: show only visible projects
-    Given program "project 6" is not visible
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/mostDownloadedIDs.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | project 5 |
@@ -171,53 +109,11 @@ Feature: MAX version feature; Allows old Apps to request only projects they can 
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-  Scenario: show most viewed projects with limit and max_version (IDs)
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "0"
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/mostViewedIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 6 |
-      | project 5 |
-
-  Scenario: show most viewed project with limit, offset and max_version (IDs)
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "1"
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/mostViewedIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 5 |
-      | project 4 |
-
-  Scenario: show only visible projects
-    Given program "project 6" is not visible
-    And I have a parameter "max_version" with value "0.993"
-    When I GET "/app/api/projects/mostViewedIDs.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 5 |
-      | project 4 |
-
-# ----------------------------------------------------------------------------------------------------------------------
-
   Scenario: show random projects with limit and max_version
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
     And I have a parameter "max_version" with value "0.991"
     When I GET "/app/api/projects/randomProjects.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | project 6 |
-
-# ----------------------------------------------------------------------------------------------------------------------
-
-  Scenario: show random projects with limit and max_version (IDs)
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "0"
-    And I have a parameter "max_version" with value "0.991"
-    When I GET "/app/api/projects/randomProjectIDs.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | project 6 |
