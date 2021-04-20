@@ -16,7 +16,7 @@
         "beberlei/doctrineextensions": "^1.2",
         "catrobat/capi": "^1.0.62",
         "codercat/jwk-to-pem": "^1.0",
-        "doctrine/dbal": "2.12.1",
+        "doctrine/dbal": "2.13.1",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
