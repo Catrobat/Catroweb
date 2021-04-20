@@ -13,7 +13,7 @@ chat: چت و انجمن ها
 others: دیگران
 tutorials: کمک
 googlePlay: فروشگاه گوگل پلی (Google Play)
-iosAppStore: IOS App store
+iosAppStore: فروشگاه برنامه آیوس (IOS App)
 huaweiAppGallery: گالری برنامهای هواوایی (Huawei)
 passwordsNoMatch: رمزها مطابقت نداشتند.
 error: اشتباه
@@ -63,19 +63,19 @@ pleaseWait: "لطفا صبر کن..."
 projects: "برنامه ها"
 oauthPopUpTitle: "معلومات وارد شدن به حساب خارجی"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "اینجا"
+statistics: "آمار"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
+      title: 'چه پروژه هایی در اینجا توصیه می شود؟'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
-  follows: Following
+  follows: ذیل
   followers: دنبال کنندگان
-  follow: Follow
-  username: User
-  followsMe: Follows me
+  follow: دنبال 
+  username: کاربر
+  followsMe: من را دنبال می کند
   noFollowing: You are not following anybody currently.
   noFollowers: You have no followers currently.
   noOtherFollowing: There are no following users currently.
