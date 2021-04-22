@@ -152,7 +152,7 @@ programs:
   reportAlready: Hai già segnalato questo progetto.
   reportDone: Il progetto è stato segnalato!
   updateAppHeader: Aggiorna App
-  updateAppText: Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente.
+  updateAppText: Per poter scaricare questo progetto, è necessario aggiornare l'applicazione alla versione più recente.
   btnClosePopup: Ok
   checkout_this_program: Fai il checkout di questo progetto
   show_more: Mostra altri
@@ -429,7 +429,7 @@ errors:
   program:
     invalid: Progetto non valido.
   languageversion:
-    tooold: 'Spiacenti, il tuo programma contiene una vecchia versione del linguaggio Catrobat! Stai usando l''ultima versione di Pocket Code?'
+    tooold: 'Spiacenti, il tuo progetto contiene una vecchia versione del linguaggio Catrobat! Stai usando l''ultima versione di Pocket Code?'
   programversion:
     tooold: 'Spiacenti ma stai usando una versione obsoleta di Pocket Code. Si raccomanda di passare all''ultima versione.'
   authentication:

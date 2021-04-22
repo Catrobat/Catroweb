@@ -12,7 +12,7 @@ education: Bildung
 chat: Chat und Foren
 others: Andere
 tutorials: Tutorials
-googlePlay: Google Play
+googlePlay: Google Play Store
 iosAppStore: iOS App Store
 huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Die Passwörter stimmen nicht überein.
@@ -26,14 +26,14 @@ noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
 download: Herunterladen
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
-credits: Anerkennung
-noCredits: Keine Anerkennung verfügbar.
+credits: Notizen und Credits
+noCredits: Keine Notizen und Credits verfügbar.
 notesAndCreditsDescription: Wie hast du dieses Projekt erstellt? Hast du Ideen, Skripte oder Kunstwerke von anderen Leuten verwendet? Danke ihnen hier.
 country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
 imprint: Impressum
-programDetails: Einzelheiten
+programDetails: Details
 somethingWentWrong: 'Ooooops etwas ging schief.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
@@ -172,16 +172,16 @@ programs:
   addComment: Kommentar schreiben
   thumbsUp: Daumen hoch!
   smile: Smile!
-  love: Love!
+  love: Liebe!
   wow: Wooow!
   linkTitle: Link
   link: Link in Zwischenablage kopieren
   reactionsText: Gefällt mir
-  downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.
+  downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuche es später erneut.
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
-  by: 'um'
+  by: 'von'
   open: 'Öffne '
   showPaths: 'Wege anzeigen'
   programNotAvailableErrorTitle: 'Sorry...'
