@@ -51,7 +51,7 @@ allNotifications: 'All'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
 CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
+RemixNotifications: 'ਰੀਮਿਕਸ'
 wellDone: "Well done!"
 done: "Done!"
 notificationsReadMessage: "It looks like you don't have any notifications."
@@ -179,7 +179,7 @@ programs:
   reactionsText: Reactions
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
-  title: Remixes
+  title: ਰੀਮਿਕਸ
   showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Open'
@@ -574,7 +574,7 @@ codeview:
   scenes: 'Scenes'
   scripts: 'Scripts'
   bricks: 'Bricks'
-  objects: 'Actors and objects'
+  objects: 'ਅਦਾਕਾਰ ਅਤੇ ਆਬਜੈਕਟ'
   looks: 'Looks'
   sounds: 'Sounds'
   globals: 'Globals'

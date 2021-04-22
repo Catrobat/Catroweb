@@ -180,7 +180,7 @@ programs:
   downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
 remixGraph:
   title: Remixler
-  showRemixGraph: 'Remix Grafiği'
+  showRemixGraph: 'Remixleri'
   by: 'tarafından'
   open: 'Aç'
   showPaths: 'Yolları Göster'
@@ -373,9 +373,9 @@ login:
   passwordFirst: Şifre
   passwordSecond: Şifre onayla
 apk:
-  download: Uyg olarak indir
-  prepare: 'Uyg olarak hazırla'
-  preparing: 'Uyg hazırlanıyor'
+  download: Uyglm'yı indir
+  prepare: 'Uyglm yap'
+  preparing: 'Uyglm yapılıyor'
   text: 'İşlem biraz zaman alabilir'
 format:
   million_abbreviation: M
