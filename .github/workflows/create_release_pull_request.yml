@@ -24,8 +24,8 @@ jobs:
         run: |
           sed -i -E "s/APP_VERSION='[0-9]+\.[0-9]+\.[0-9]+'/APP_VERSION='${{ github.event.inputs.versionCode }}'/" .env
 
-      - name: Create Pull Request to develop
-        id: cpr
+      - name: Create Pull Request to develop branch
+        id: cpr-develop
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,8 +48,8 @@ jobs:
           reviewers: dmetzner
           base: develop
 
-      - name: Create Pull Request
-        id: cpr
+      - name: Create Pull Request to main branch
+        id: cpr-main
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
