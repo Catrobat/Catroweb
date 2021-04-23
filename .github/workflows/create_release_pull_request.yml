@@ -18,12 +18,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
 
       # The changes here will be overwritten, however we need changes, else the PR will be automatically closed by GitHub
       - name: Dummy Changes to keep PR open
         run: |
           echo "Dummy Change" >> .env
+          git status
 
       - name: Create Pull Request to main branch
         id: cpr-main
@@ -52,7 +52,9 @@ jobs:
       # We have to define the modification here since PR-Action uses force push.
       - name: Set Version Code
         run: |
+          git status
           sed -i -E "s/APP_VERSION='[0-9]+\.[0-9]+\.[0-9]+'/APP_VERSION='${{ github.event.inputs.versionCode }}'/" .env
+          echo "Dummy Change" >> .env.dev
           git status
 
       - name: Create Pull Request to develop branch
