@@ -23,7 +23,6 @@ jobs:
       - name: Dummy Changes to keep PR open
         run: |
           echo "Dummy Change" >> .env
-          git status
 
       - name: Create Pull Request to main branch
         id: cpr-main
@@ -32,7 +31,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Prepare release v${{ github.event.inputs.versionCode }}
           committer: Catrobot <Catrobot@catroweb.github.com>
-          title: 'Release v${{ github.event.inputs.versionCode }}'
+          title: 'Release v${{ github.event.inputs.versionCode }} into master'
           body: |
             ### Release v${{ github.event.inputs.versionCode }}
 
@@ -49,13 +48,10 @@ jobs:
           reviewers: dmetzner
           base: master
 
-      # We have to define the modification here since PR-Action uses force push.
+      # We have to define the modification here since the PR-Action uses force push.
       - name: Set Version Code
         run: |
-          git status
-          sed -i -E "s/APP_VERSION='[0-9]+\.[0-9]+\.[0-9]+'/APP_VERSION='${{ github.event.inputs.versionCode }}'/" .env
-          echo "Dummy Change" >> .env.dev
-          git status
+          sed -i -E "s/APP_VERSION='[0-9]+\.[0-9]+\.[0-9]+'/APP_VERSION='${{ github.event.inputs.versionCode }}'/" .env && echo "successfully replaced version code"
 
       - name: Create Pull Request to develop branch
         id: cpr-develop
@@ -64,7 +60,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Prepare release v${{ github.event.inputs.versionCode }}
           committer: Catrobot <Catrobot@catroweb.github.com>
-          title: 'Release v${{ github.event.inputs.versionCode }}'
+          title: 'Release v${{ github.event.inputs.versionCode }} into develop'
           body: |
             ### Release v${{ github.event.inputs.versionCode }}
 
