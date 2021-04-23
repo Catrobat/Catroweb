@@ -1,12 +1,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ** Continuous Delivery **
+# ** Deployment **
 #
 #  Test deployments are handled by a python script that run on a schedule: https://github.com/Catrobat/Catroweb-API
 #  However, the deployment to production is handled by this workflow.
 #
 #  - Secrets required!
 #
-name: Continuous Delivery
+name: Deployment
 
 # Run-on every merge of a pull request into the master branch
 on:
