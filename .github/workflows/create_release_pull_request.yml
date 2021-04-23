@@ -23,7 +23,7 @@ jobs:
       # The changes here will be overwritten, however we need changes, else the PR will be automatically closed by GitHub
       - name: Dummy Changes to keep PR open
         run: |
-          sed -i -E "s/APP_VERSION='[0-9]+\.[0-9]+\.[0-9]+'/APP_VERSION='${{ github.event.inputs.versionCode }}'/" .env
+          echo "Dummy Change" >> .env
 
       - name: Create Pull Request to main branch
         id: cpr-main
@@ -53,6 +53,7 @@ jobs:
       - name: Set Version Code
         run: |
           sed -i -E "s/APP_VERSION='[0-9]+\.[0-9]+\.[0-9]+'/APP_VERSION='${{ github.event.inputs.versionCode }}'/" .env
+          git status
 
       - name: Create Pull Request to develop branch
         id: cpr-develop
