@@ -48,6 +48,11 @@ jobs:
           reviewers: dmetzner
           base: master
 
+      - name: Sleep for 30 seconds to reduce the risk of race conditions
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '30s'
+
       # We have to define the modification here since the PR-Action uses force push.
       - name: Set Version Code
         run: |
