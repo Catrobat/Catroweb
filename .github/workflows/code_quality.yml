@@ -415,7 +415,11 @@ jobs:
   #  - Checks the services defined in the container
   #  - Ensures that arguments injected into services match type declarations
   #
+  #  Currently broken in Symfony 4 with doctrine. Hopefully fixed again later. Maybe Symfony 5.
+  #  https://github.com/symfony/symfony/issues/39259
+  #
   lint-container:
+    if: 'false' # always skip job
     name: Symfony Container [Lint]
     runs-on: ubuntu-latest
     steps:
