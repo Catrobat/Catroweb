@@ -65,16 +65,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.0.62",
+            "version": "v1.0.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "9d45a163e25e4f3ed13151113ffed40873a49fd0"
+                "reference": "d32dab4818e023c5afba39c5f1cf33b66e7d8c3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/9d45a163e25e4f3ed13151113ffed40873a49fd0",
-                "reference": "9d45a163e25e4f3ed13151113ffed40873a49fd0",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/d32dab4818e023c5afba39c5f1cf33b66e7d8c3c",
+                "reference": "d32dab4818e023c5afba39c5f1cf33b66e7d8c3c",
                 "shasum": ""
             },
             "require": {
@@ -117,10 +117,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.62",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.63",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2021-04-05T17:58:25+00:00"
+            "time": "2021-04-25T16:35:35+00:00"
         },
         {
             "name": "clue/stream-filter",
