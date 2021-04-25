@@ -13,7 +13,7 @@
 #      the development
 #
 #
-name: Docker Container tests
+name: "Docker Container tests"
 
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
@@ -56,7 +56,6 @@ jobs:
             docker exec app.catroweb bin/console about
 
       - name: Create a livid environment with dummy data
-        # ToDo: would be nice to check the reset command, in the current state the reset command can't fail
         run: |
           docker exec app.catroweb bin/console catrobat:reset --hard
 

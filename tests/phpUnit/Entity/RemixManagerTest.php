@@ -3,7 +3,6 @@
 namespace Tests\phpUnit\Entity;
 
 use App\Catrobat\RemixGraph\RemixGraphManipulator;
-use App\Catrobat\Requests\AppRequest;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
@@ -62,9 +61,8 @@ class RemixManagerTest extends TestCase
     $program_remix_backward_repository = $this->createMock(ProgramRemixBackwardRepository::class);
     $scratch_program_remix_repository = $this->createMock(ScratchProgramRemixRepository::class);
     $remix_graph_manipulator = $this->createMock(RemixGraphManipulator::class);
-    $app_request = $this->createMock(AppRequest::class);
     $catro_notification_service = $this->createMock(CatroNotificationService::class);
-    $this->remix_manager = new RemixManager($this->entity_manager, $this->program_repository, $this->scratch_program_repository, $this->program_remix_repository, $program_remix_backward_repository, $scratch_program_remix_repository, $remix_graph_manipulator, $app_request, $catro_notification_service);
+    $this->remix_manager = new RemixManager($this->entity_manager, $this->program_repository, $this->scratch_program_repository, $this->program_remix_repository, $program_remix_backward_repository, $scratch_program_remix_repository, $remix_graph_manipulator, $catro_notification_service);
   }
 
   public function testInitialization(): void

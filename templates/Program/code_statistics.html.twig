@@ -12,15 +12,15 @@
   <div class="accordion" id="accordionStatistics">
     <div class="card">
 
-      <div class="card-header collapsed d-flex justify-content-between expansion-header" id="statisticsGeneral"
+      <div class="card-header d-flex justify-content-between expansion-header" id="statisticsGeneral"
            data-toggle="collapse"
-           data-target="#collapseGeneral" aria-expanded="false"
+           aria-expanded="true"
            aria-controls="collapseGeneral">
         {{ "codeStatistics.general"|trans({}, "catroweb") }}
-        <i class="material-icons rotate-left">chevron_left</i>
+        <i class="material-icons rotate-left" style="visibility: hidden">chevron_left</i>
       </div>
 
-      <div id="collapseGeneral" class="collapse" aria-labelledby="statisticsGeneral"
+      <div id="collapseGeneral" class="collapse show" aria-labelledby="statisticsGeneral"
            data-parent="#accordionStatistics">
         <div class="card-body">
           <table class="table center table-striped">
@@ -42,14 +42,15 @@
         </div>
       </div>
 
-      <div class="card-header collapsed d-flex justify-content-between expansion-header" id="statisticsBricks"
-           data-toggle="collapse" data-target="#collapseBricks" aria-expanded="false"
+      <div class="card-header d-flex justify-content-between expansion-header" id="statisticsBricks"
+           data-toggle="collapse"
+           aria-expanded="true"
            aria-controls="collapseBricks">
         {{ "codeStatistics.bricks"|trans({}, "catroweb") }}
-        <i class="material-icons rotate-left">chevron_left</i>
+        <i class="material-icons rotate-left" style="visibility: hidden">chevron_left</i>
       </div>
 
-      <div id="collapseBricks" class="collapse" aria-labelledby="statisticsBricks"
+      <div id="collapseBricks" class="collapse show" aria-labelledby="statisticsBricks"
            data-parent="#accordionStatistics">
         <div class="card-body">
           <table class="table center table-striped">

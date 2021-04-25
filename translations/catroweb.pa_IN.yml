@@ -1,102 +1,102 @@
 ---
 #homepage translation
-localLanguage: انگلیسی
-username: نام کاربری
-password: رمز عبور
-createNewPassword: ایجاد رمز عبور جدید
-accountSettings: تنظیمات حساب
-email: ایمیل
-aboutPocketCode: درباره کد جیبی (Pocket Code)
-about: در باره
-education: تحصیل
-chat: چت و انجمن ها
-others: دیگران
-tutorials: کمک
-googlePlay: فروشگاه گوگل پلی (Google Play)
-iosAppStore: فروشگاه برنامه آیوس (IOS App)
-huaweiAppGallery: گالری برنامهای هواوایی (Huawei)
-passwordsNoMatch: رمزها مطابقت نداشتند.
-error: اشتباه
-cancel: لغو 
-report: گزارش
-deleteIt: بله، آن را حذف کنید!
-reportIt: بله، گزارش دهید!
-areYouSure: مطمئنی؟
-noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
-download: دانلود 
-description: توضیح
-noDescription: هیچ توضیحی در دسترس نیست. 
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: چگونه این پروژه را ایجاد کردید؟ آیا از اندیشه های، اسکریپت ها یا آثار هنری از دیگران استفاده کرده اید؟ اینجا از آنها تشکری کن. 
-country: کشور
-loginText: وارد شدن
-privacyPolicy: حریم خصوصی
-imprint: دیدگاه
-programDetails: جزئیات
-somethingWentWrong: 'اوهو، چیزی اشتباه شد.'
-pleaseTryAgain: 'لطفا دوباره کوشش کن!'
-oldVersionError: 'لطفا به جدیدترین نسخه کد جیبی (Pocket Code) به روز رسانی کن!'
-more: 'بیشتر'
-less: 'کمتر'
-show-more: 'More information'
-show-less: 'Less information'
-more-information: 'اطلاعات بیشتر'
-less-information: 'اطلاعات کمتر'
-ok: خوب
-clickToDownloadProgram: 'برای دانلود نمونه پروژه %link_start%اینجا %link_end%را کلیک کن. '
-registrationError: 'نام کاربری یا آدرس ایمیل درحال استفاده.'
-notifications: 'اطلاعیه'
-allNotifications: 'All Notifications'
-FollowersNotifications: 'دنبال کنندگان '
-LikeNotifications: 'واکنش ها'
-CommentNotifications: 'نظرات'
-RemixNotifications: 'ریمیکس ها'
-wellDone: "آفرین!"
-done: "انجام شد!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "بله، این را حذف کن"
-cancelMessage: "لغوش کن"
-notificationsUnauthorizedError: "کاربر قادر به تأیید نیست"
-notificationsClearError: "غیر قادر به علامت گذاری اطلاعیه به عنوان خوانده شده!"
-pleaseWait: "لطفا صبر کن..."
-projects: "برنامه ها"
-oauthPopUpTitle: "معلومات وارد شدن به حساب خارجی"
+localLanguage: English
+username: Username
+password: Password
+createNewPassword: Create new password
+accountSettings: Account settings
+email: E-Mail
+aboutPocketCode: About Pocket Code
+about: About
+education: Education
+chat: Chat and forums
+others: Others
+tutorials: Help
+googlePlay: Google Play Store
+iosAppStore: iOS App store
+huaweiAppGallery: Huawei AppGallery
+passwordsNoMatch: The passwords didn't match.
+error: Error
+cancel: Cancel
+report: Report
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
+download: Download
+description: Description
+noDescription: No description available.
+credits: Notes and credits
+noCredits: No notes and credits available.
+notesAndCreditsDescription: ਤੁਸੀਂ ਇਹ ਪ੍ਰੋਜੈਕਟ ਕਿਵੇਂ ਬਣਾਇਆ? ਕੀ ਤੁਸੀਂ ਦੂਜੇ ਲੋਕਾਂ ਦੇ ਵਿਚਾਰਾਂ, ਸਕ੍ਰਿਪਟਾਂ ਜਾਂ ਕਲਾਕਾਰੀ ਦੀ ਵਰਤੋਂ ਕੀਤੀ ਹੈ? ਇਥੇ ਉਨ੍ਹਾਂ ਦਾ ਧੰਨਵਾਦ ਕਰੋ.
+country: Country
+loginText: login
+privacyPolicy: ਪਰਾਈਵੇਟ ਨੀਤੀ
+imprint: Imprint
+programDetails: Details
+somethingWentWrong: 'Ooooops something went wrong.'
+pleaseTryAgain: 'Please try again!'
+oldVersionError: 'Please update to the newest Pocket Code version!'
+more: 'more'
+less: 'less'
+show-more: 'Show more'
+show-less: 'Show less'
+more-information: 'More information'
+less-information: 'Less information'
+ok: Ok
+clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+registrationError: 'Username or email address already in use.'
+notifications: 'Notifications'
+allNotifications: 'All'
+FollowersNotifications: 'Followers'
+LikeNotifications: 'Reactions'
+CommentNotifications: 'Comments'
+RemixNotifications: 'ਰੀਮਿਕਸ'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "It looks like you don't have any notifications."
+confirmMessage: "Yes, delete it"
+cancelMessage: "Cancel"
+notificationsUnauthorizedError: "Unable to authorize user"
+notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
+projects: "ਪ੍ਰੋਜੈਕਟ"
+oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "اینجا"
-statistics: "آمار"
+oauthHere: "here"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
-      title: 'چه پروژه هایی در اینجا توصیه می شود؟'
+      title: 'What projects are recommended here?'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
-  follows: ذیل
-  followers: دنبال کنندگان 
-  follow: دنبال 
-  username: کاربر
-  followsMe: من را دنبال می کند
-  noFollowing: تو در حال حاضر هیچ کسی را دنبال نه می کنی.
-  noFollowers: تو در حال حاضر هیچ پیروان نداری.
-  noOtherFollowing: در حال حاضر هیچ کاربردی ذیل وجود ندارد.
-  noOtherFollowers: در حال حاضر هیچ کاربردی دنبال کننده وجود ندارد.
-  followError: "کاربر مورد نظر قابل دنبال نیست!"
+  follows: Following
+  followers: Followers
+  follow: Follow
+  username: User
+  followsMe: Follows me
+  noFollowing: You are not following anybody currently.
+  noFollowers: You have no followers currently.
+  noOtherFollowing: There are no following users currently.
+  noOtherFollowers: There are no follower users currently.
+  followError: "Unable to follow the desired user!"
   unfollowError: "Unable to unfollow the desired user!"
   unfollowQuestion: "Are you sure you want to unfollow this user?"
   unfollowButton: "Unfollow %username%"
 programs:
   welcome:
-    title: به موضوع %theme% کاتروباتس (Catrobat) خوش آمدی
-    subtitle: ایجاد کن داستان ها، بازی ها و بیشتر ...
+    title: Welcome to Catrobat's %theme%
+    subtitle: Create stories, games and more...
     subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
-    download: برنامه را دانلود کن
-    statistics: More Statistics
-  featured: ارایه شده
-  example: مثال ها
-  newest: جدیدترین پروژه ها
-  recommended: پروژه های توصیه شده
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
   scratchremixes: Scratch remixes
-  noPrograms: در حال حاضر هیچ پروژه ای وجود ندارد.
+  noPrograms: There are currently no projects.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
@@ -111,64 +111,64 @@ programs:
     Yes, set to public
     Yes, set to private
     No
-  reportCommentConfirmation: آیا مطمئنی که میخواهی این کامنت را گزارش کنی؟
-  deleteCommentConfirmation: آیا مطمئن هستی که می خواهی این نظر را حذف کنی؟
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Account Deletion?
+    Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: توضیح پروژه خیلی طولانی است!
-  rudeWordsInDescription: تو نمی توانی از کلمات بی ادبانه در توضیحات خود استفاده کنی!
-  tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
+  tooLongDescription: The project description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongCredits: The project notes and credits are too long!
+  rudeWordsInCredits: You can't use rude words in your notes and credits!
   most:
-    viewed: پربیننده ترین
-    downloaded: بیشترین میزان دانلود شده
-  random: پروژه های تصادفی
-  related: پروژه های مرتبط
-  downloads: 'دانلودها %downloads%'
-  sample: پروژه های مثالی
-  views: 'نمایش %views%'
+    viewed: Most viewed
+    downloaded: Most downloaded
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
-    all: "همه"
+    likersTitle: "People who reacted to that project"
+    all: "All"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
-  reportAsInappropriate: گزارش به عنوان نامناسب
-  reportProgram: گزارش پروژه
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: لطفا وارد شو %login% برای گزارش این پروژه.
-  reportDialogHeader: چرا می خواهی این پروژه را گزارش دهی؟
-  reportDialogReason: یک دلیل را وارد کن
-  reportRadioButtonInappropriate: این نامناسب است
-  reportRadioButtonCopyright: نقض قوانین حق تکثیر
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
   reportRadioButtonDislike: I don't like it
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
-  updateAppHeader: Update App
+  updateAppHeader: Update app
   updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: خوب
+  btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
-  comments: نظرات
+  comments: Comments
   send: Send
   delete: Delete
-  report: گزارش
+  report: Report
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project Description
-  saveDescription: Save Description change
-  editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  editDescription: Edit the project description
+  saveDescription: Save
+  editCredits: Edit the project notes and credits
+  saveCredits: Save
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -176,21 +176,21 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: واکنش ها
+  reactionsText: Reactions
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
-  title: Remixes
+  title: ਰੀਮਿਕਸ
   showRemixGraph: 'Remix graph'
-  by: 'به وسیله'
-  open: 'باز کن'
+  by: 'by'
+  open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programUnknownUser: 'Unknown user'
 noReply: This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Your Catrobat account confirmation
   message: |
     Dear %username%.
     To finish activating your account - please visit %confirmationUrl%
@@ -209,7 +209,7 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Your Catrobat password recovery
   message: |
     Dear %username%.
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
@@ -267,7 +267,7 @@ profile:
   programsOf: Projects of
   changePicture: Change picture
   avatar:
-    noImage: No Image!
+    noImage: No image!
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
@@ -279,13 +279,13 @@ myprofile:
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: E-Mail
+  email: Email
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
   editCountry: Edit country
-  editEmail: Edit E-Mail
-  deleteAccount: Delete Account
+  editEmail: Edit email
+  deleteAccount: Delete account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
@@ -297,7 +297,7 @@ licenseToPlay:
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
   text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
     item1: share your cakes along with the recipe
@@ -305,7 +305,7 @@ licenseToPlay:
   version: Version 1.1, 2 April 2013
 termsOfUse:
   title: Terms of Use
-  headline: Welcome to the Catrobat Community!
+  headline: Welcome to the Catrobat community!
   text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
@@ -317,7 +317,7 @@ termsOfUse:
     item3: with all levels of experience
   list2:
     item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's notes and credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
@@ -343,13 +343,13 @@ search:
   dotdotdot: Search...
   search: Search
   inMediaLib: Search in media library
-  results: Search Results
+  results: Search results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
   profile: My Profile
   login: Login
-  logout: خروج
+  logout: ਬਾਹਰ ਆਉਣਾ
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
@@ -372,7 +372,7 @@ login:
   username: Username
   email: Email
   passwordFirst: Password
-  passwordSecond: Password Confirm
+  passwordSecond: Password confirm
 apk:
   download: Download as app
   prepare: 'Get as app'
@@ -395,7 +395,7 @@ errors:
   description:
     rude: Description must not contain rude wordes.
   credit:
-    rude: Credits must not contain rude words.
+    rude: Notes and credits must not contain rude words.
   country:
     blank: The country is missing.
     invalid: Invalid country
@@ -404,9 +404,9 @@ errors:
     invalid: Your email seems to be invalid
     exists: This email address already exists.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: Open authentication ID must not be blank
   login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+  post-data: POST-data not correct or missing!
   checksum:
     missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
     invalid: invalid checksum
@@ -470,7 +470,7 @@ api:
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    creating_error: 'Error while creating project entity. Try uploading again!'
 #languages and countries
 language:
   arabic: Arabic
@@ -518,9 +518,9 @@ language:
   ukrainian: Ukrainian
   vietnamese: Vietnamese
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Generate apk
+  pending: Generating apk
+  download: Download apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: Submit to %gamejamname%
@@ -550,7 +550,7 @@ admin:
     removableObjects: Removable objects
 recommender:
   similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
   moreFromThisUser: More from %username%
 pmd:
   submitBtn: Submit your project
@@ -563,7 +563,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
-  title: 'Code View'
+  title: 'Code view'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -574,43 +574,43 @@ codeview:
   scenes: 'Scenes'
   scripts: 'Scripts'
   bricks: 'Bricks'
-  objects: 'Actors and Objects'
+  objects: 'ਅਦਾਕਾਰ ਅਤੇ ਆਬਜੈਕਟ'
   looks: 'Looks'
   sounds: 'Sounds'
   globals: 'Globals'
   locals: 'Locals'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  globalVariables: 'Global variables'
+  localVariables: 'Local variables'
+  eventBricks: 'Event bricks'
+  controlBricks: 'Control bricks'
+  motionBricks: 'Motion bricks'
+  soundBricks: 'Sound bricks'
+  looksBricks: 'Looks bricks'
+  penBricks: 'Pen bricks'
+  dataBricks: 'Data bricks'
+  specialBricks: 'Special bricks'
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
+  title: "Code statistics"
+  error: "Code statistics can't be displayed."
   general: 'General'
   bricks: 'Bricks'
-  eventBricks: 'رویداد'
-  controlBricks: 'کنترل'
-  motionBricks: 'حرکت'
-  soundBricks: 'صدا'
+  eventBricks: 'Event'
+  controlBricks: 'Control'
+  motionBricks: 'Motion'
+  soundBricks: 'Sound'
   looksBricks: 'Looks'
   penBricks: 'Pen'
-  dataBricks: 'داده‌'
+  dataBricks: 'Data'
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: Language
-  usefulLinks: Useful Links
+  language: ਭਾਸ਼ਾ
+  usefulLinks: Useful links
   legalities: Legalities
-  communityStats: Community Stats
+  communityStats: Community stats
   download: Get the App
 privacy-policy:
-  header: Privacy Policy
+  header: Privacy policy
   version: Version 2.2, 17 October 2019
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
@@ -630,19 +630,19 @@ catro-notifications:
   noReactions: "It looks like you don't have any reaction notifications."
   noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% commented on %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% reacted to %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% is now following you.'
   program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+    message: '%user_link% created a new game %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: ਅਗਲਾ
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -676,13 +676,13 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'ਕੈਟ੍ਰੋਬੈਟ ਕਮਿ communityਨਿਟੀ'
 back_to_app: 'Exit community'
 category:
-  recent: جدیدترین پروژه ها
-  random: پروژه های تصادفی
+  recent: Newest projects
+  random: Random projects
   most_viewed: Most viewed
   most_downloaded: Most downloaded
   example: Example
   scratch: Scratch remixes
-  recommended: پروژه های توصیه شده
+  recommended: Recommended projects

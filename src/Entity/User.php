@@ -38,7 +38,7 @@ class User extends BaseUser
   protected ?string $avatar = null;
 
   /**
-   * @ORM\Column(type="string", length=5, nullable=false, options={"default": ""})
+   * @ORM\Column(type="string", length=75, nullable=false, options={"default": ""})
    */
   protected string $country = '';
 

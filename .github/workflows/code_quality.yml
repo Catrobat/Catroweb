@@ -32,7 +32,7 @@
 #      ToDo: As soon as Github Action have `uses` support use composites to prevent the duplicated (build/cache) code
 #      (https://github.com/actions/runner/issues/646)
 #
-name: Static analysis
+name: "Static analysis"
 
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
@@ -415,7 +415,11 @@ jobs:
   #  - Checks the services defined in the container
   #  - Ensures that arguments injected into services match type declarations
   #
+  #  Currently broken in Symfony 4 with doctrine. Hopefully fixed again later. Maybe Symfony 5.
+  #  https://github.com/symfony/symfony/issues/39259
+  #
   lint-container:
+    if: 'false' # always skip job
     name: Symfony Container [Lint]
     runs-on: ubuntu-latest
     steps:

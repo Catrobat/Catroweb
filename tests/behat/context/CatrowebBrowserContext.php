@@ -2475,6 +2475,20 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the media packages table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeMediaPackages(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat) {
+      $this->assertSession()->pageTextContains($user_stat['name']);
+      $this->assertSession()->pageTextContains($user_stat['name_url']);
+    }
+  }
+
+  /**
    * @Then /^I should see the media package files table:$/
    *
    * @throws ResponseTextException

@@ -241,7 +241,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
       return null;
     }
 
-    $user_projects = $this->facade->getLoader()->getUserProjects($user->getUsername(), $limit, $offset, $flavor, $max_version);
+    $user_projects = $this->facade->getLoader()->getUserProjects($user->getId(), $limit, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($user_projects);
@@ -286,6 +286,14 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   {
     // TODO: Implement projectIdReportPost() method.
 
+    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+
+    return null;
+  }
+
+  public function projectIdDelete(string $id, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement projectIdDelete() method.
     $responseCode = Response::HTTP_NOT_IMPLEMENTED;
 
     return null;

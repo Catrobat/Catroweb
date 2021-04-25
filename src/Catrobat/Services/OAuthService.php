@@ -461,7 +461,7 @@ class OAuthService
    */
   private function deleteUser(?User $user): void
   {
-    $user_programs = $this->program_manager->getUserPrograms($user->getId(), true);
+    $user_programs = $this->program_manager->findBy(['user' => $user]);
 
     foreach ($user_programs as $user_program) {
       $this->em->remove($user_program);

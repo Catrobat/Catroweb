@@ -30,26 +30,6 @@ Feature: As a visitor I want to see code statistics on the project page
     And I click "#top-app-bar__title"
     Then I should be on "/app/project/1/code_statistics"
 
-  Scenario: The code statistics should use an accordion principle
-    Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
-    And I upload this generated program with id "1", API version 1
-    And I am on "/app/project/1/code_statistics"
-    And I wait for the page to be loaded
-    Then the element "#statisticsGeneral" should be visible
-    And the element "#statisticsBricks" should be visible
-    And the element "#total-number-of-scenes" should not be visible
-    And the element "#total-number-of-event-brick" should not be visible
-    When I click "#statisticsGeneral"
-    Then the element "#statisticsGeneral" should be visible
-    And the element "#statisticsBricks" should be visible
-    And the element "#total-number-of-scenes" should be visible
-    And the element "#total-number-of-event-brick" should not be visible
-    When I click "#statisticsBricks"
-    Then the element "#statisticsGeneral" should be visible
-    And the element "#statisticsBricks" should be visible
-    And the element "#total-number-of-scenes" should not be visible
-    And the element "#total-number-of-event-brick" should be visible
-
   Scenario: On a project page there should be correct stats for all code bricks
     Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
     When I upload this generated program with id "1", API version 1

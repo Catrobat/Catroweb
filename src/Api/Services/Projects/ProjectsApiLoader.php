@@ -31,7 +31,7 @@ final class ProjectsApiLoader extends AbstractApiLoader
 
   public function findProjectsByID(string $id, bool $include_private = false): array
   {
-    return $this->project_manager->getProgram($id, $include_private);
+    return $this->project_manager->getProjectByID($id, $include_private);
   }
 
   public function findProjectByID(string $id, bool $include_private = false): ?Program
@@ -79,28 +79,21 @@ final class ProjectsApiLoader extends AbstractApiLoader
         /** @var Program $project */
         $project = $project->isExample() ? $project->getProgram() : $project;
         $project_user_id = $project->getUser()->getId();
-        if (null !== $user && $user->getId() === $project_user_id) {
-          $projects = $this->project_manager->getUserPrograms($project_user_id, false, $max_version, $limit, $offset, [$project->getId()]);
-        } else {
-          $projects = $this->project_manager->getPublicUserPrograms($project_user_id, false, $max_version, $limit, $offset, [$project->getId()]);
-        }
 
-        return array_filter($projects, function ($program) use ($project) {
-          return $program->getId() !== $project->getId();
-        });
+        return $this->project_manager->getMoreProjectsFromUser($project_user_id, $project_id, $limit, $offset, $flavor, $max_version);
     }
 
     return [];
   }
 
-  public function getUserProjects(string $username, int $limit, int $offset, string $flavor, string $max_version): array
+  public function getUserProjects(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
   {
-    return $this->project_manager->getUserProjects($username, $limit, $offset, $flavor, $max_version);
+    return $this->project_manager->getUserProjects($user_id, $limit, $offset, $flavor, $max_version);
   }
 
   public function getUserPublicPrograms(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
   {
-    return $this->project_manager->getUserPublicPrograms($user_id, $limit, $offset, $flavor, $max_version);
+    return $this->project_manager->getPublicUserProjects($user_id, $limit, $offset, $flavor, $max_version);
   }
 
   public function getClientIp(): ?string
