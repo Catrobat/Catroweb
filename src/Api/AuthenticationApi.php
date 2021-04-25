@@ -9,6 +9,7 @@ use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\OAuthLoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
+use OpenAPI\Server\Model\UpgradeTokenRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 final class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
@@ -95,5 +96,14 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     $responseCode = $response['response_code'];
 
     return $response['token'];
+  }
+
+  public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement authenticationUpgradePost() method.
+
+    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+
+    return null;
   }
 }

@@ -446,4 +446,22 @@ final class ProjectsApiTest extends CatrowebTestCase
     $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(UploadErrorResponse::class, $response);
   }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectIdDelete
+   *
+   * @throws Exception
+   */
+  public function testProjectIdDelete(): void
+  {
+    $response_code = null;
+    $response_headers = [];
+
+    $response = $this->object->projectIdDelete('id', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+    $this->assertNull($response);
+  }
 }
