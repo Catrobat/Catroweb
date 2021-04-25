@@ -290,4 +290,12 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
     return null;
   }
+
+  public function projectIdDelete(string $id, &$responseCode, array &$responseHeaders)
+  {
+    // TODO: Implement projectIdDelete() method.
+    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+
+    return null;
+  }
 }

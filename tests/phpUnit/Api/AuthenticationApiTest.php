@@ -11,6 +11,7 @@ use OpenAPI\Server\Api\AuthenticationApiInterface;
 use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
+use OpenAPI\Server\Model\UpgradeTokenRequest;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
@@ -142,5 +143,22 @@ final class AuthenticationApiTest extends CatrowebTestCase
 
     $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
     $this->assertInstanceOf(JWTResponse::class, $response);
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\AuthenticationApi::authenticationUpgradePost
+   */
+  public function testAuthenticationUpgradePost(): void
+  {
+    $response_code = null;
+    $response_headers = [];
+
+    $upgrade_token_request = $this->createMock(UpgradeTokenRequest::class);
+    $response = $this->object->authenticationUpgradePost($upgrade_token_request, $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+    $this->assertNull($response);
   }
 }
