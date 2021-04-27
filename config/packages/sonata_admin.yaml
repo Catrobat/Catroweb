@@ -125,7 +125,6 @@ sonata_admin:
                 icon:            '<i class="fa fa-users"></i>'
                 items:
                     - sonata.user.admin.user
-                    - sonata.user.admin.group
                     - catrowebadmin.block.users.storeduserdata
                     - catrowebadmin.block.users.reported
 

@@ -5,7 +5,6 @@ namespace App\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Sonata\Form\Validator\ErrorElement;
@@ -85,7 +84,6 @@ class UserAdmin extends BaseUserAdmin
     $listMapper
       ->addIdentifier('username')
       ->add('email')
-      ->add('groups')
       ->add('enabled', null, ['editable' => true])
       ->add('createdAt')
       ->add('_action', null, [
@@ -103,7 +101,6 @@ class UserAdmin extends BaseUserAdmin
     $filterMapper
       ->add('username')
       ->add('email')
-      ->add('groups')
       ->add('enabled')
       ->add('createdAt', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class])
       ;
@@ -122,7 +119,6 @@ class UserAdmin extends BaseUserAdmin
       ->end()
       ->tab('Security')
       ->with('Status', ['class' => 'col-md-4'])->end()
-      ->with('Groups', ['class' => 'col-md-4'])->end()
       ->with('Keys', ['class' => 'col-md-4'])->end()
       ->with('Roles', ['class' => 'col-md-12'])->end()
       ->end()
@@ -141,13 +137,6 @@ class UserAdmin extends BaseUserAdmin
       ->tab('Security')
       ->with('Status')
       ->add('enabled', null, ['required' => false])
-      ->end()
-      ->with('Groups')
-      ->add('groups', ModelType::class, [
-        'required' => false,
-        'expanded' => true,
-        'multiple' => true,
-      ])
       ->end()
       ->with('Roles')
       ->add('realRoles', SecurityRolesType::class, [
@@ -171,9 +160,6 @@ class UserAdmin extends BaseUserAdmin
       ->with('General')
       ->add('username')
       ->add('email')
-      ->end()
-      ->with('Groups')
-      ->add('groups')
       ->end()
       ->with('Security')
       ->add('token')

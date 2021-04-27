@@ -181,8 +181,8 @@ programs:
 remixGraph:
   title: ਰੀਮਿਕਸ
   showRemixGraph: 'Remix graph'
-  by: 'by'
-  open: 'Open'
+  by: 'ਨਾਲ'
+  open: 'ਖੁੱਲਾ'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
@@ -594,14 +594,14 @@ codeStatistics:
   error: "Code statistics can't be displayed."
   general: 'General'
   bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
+  eventBricks: 'ਘਟਨਾ'
+  controlBricks: 'ਨਿਯੰਤਰਣ'
+  motionBricks: 'ਗਤੀ'
+  soundBricks: 'ਆਵਾਜ਼'
   looksBricks: 'Looks'
-  penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
+  penBricks: 'ਕਲਮ'
+  dataBricks: 'ਡਾਟਾ'
+  deviceBricks: 'ਡੀਵਾਈਸ:'
   specialBricks: 'Special'
 footer:
   language: ਭਾਸ਼ਾ
