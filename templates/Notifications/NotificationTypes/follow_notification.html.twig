@@ -16,7 +16,7 @@
     {{ 'catro-notifications.follow.message' | trans
       (
       {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.follower.id})~'">'~notification.follower.username~'</a>',
+        '%user_link%': '<a href="'~path('profile', {'id': notification.follower.id|escape})~'">'~notification.follower.username|escape~'</a>',
       },
       'catroweb'
     )

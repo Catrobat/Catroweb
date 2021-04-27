@@ -85,7 +85,7 @@ class UserComment
    *     nullable=true
    * )
    */
-  private Program $program;
+  private ?Program $program = null;
 
   public function __toString(): string
   {
@@ -95,7 +95,7 @@ class UserComment
   /**
    * Returns the Program which this UserComment comments.
    */
-  public function getProgram(): Program
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
