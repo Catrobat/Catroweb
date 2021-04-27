@@ -574,7 +574,7 @@ codeview:
   scenes: 'Scenes'
   scripts: 'Script'
   bricks: 'Bata'
-  objects: 'Actors and objects'
+  objects: 'Aktor dan objek'
   looks: 'Penampilan'
   sounds: 'Suara'
   globals: 'Globals'
@@ -676,7 +676,7 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'Komunitas Catrobat'
 back_to_app: 'Exit community'
 category:
   recent: Newest projects
