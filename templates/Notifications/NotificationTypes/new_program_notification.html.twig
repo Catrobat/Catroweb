@@ -16,8 +16,8 @@
     {{ 'catro-notifications.program-upload.message' | trans
       (
       {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.program.user.id})~'">'~notification.program.user.username~'</a>',
-        '%program_link%': '<a href="'~path('program', {'id': notification.program.id})~'">'~notification.program.name~'</a>'
+        '%user_link%': '<a href="'~path('profile', {'id': notification.program.user.id|escape})~'">'~notification.program.user.username|escape~'</a>',
+        '%program_link%': '<a href="'~path('program', {'id': notification.program.id|escape})~'">'~notification.program.name|escape~'</a>'
       },
       'catroweb'
     )
