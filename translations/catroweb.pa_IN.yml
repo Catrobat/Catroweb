@@ -47,7 +47,7 @@ ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
-allNotifications: 'All'
+allNotifications: 'ਸਾਰੇ'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
 CommentNotifications: 'Comments'
@@ -133,7 +133,7 @@ programs:
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
-    all: "All"
+    all: "ਸਾਰੇ"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted projects
