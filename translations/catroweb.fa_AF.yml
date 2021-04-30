@@ -5,7 +5,7 @@ username: نام کاربری
 password: رمز عبور
 createNewPassword: ایجاد رمز عبور جدید
 accountSettings: تنظیمات حساب
-email: ایمیل
+email: E-Mail
 aboutPocketCode: درباره کد جیبی (Pocket Code)
 about: در باره
 education: تحصیل
@@ -31,7 +31,7 @@ noCredits: No credits available.
 notesAndCreditsDescription: چگونه این پروژه را ایجاد کردید؟ آیا از اندیشه های، اسکریپت ها یا آثار هنری از دیگران استفاده کرده اید؟ اینجا از آنها تشکری کن. 
 country: کشور
 loginText: وارد شدن
-privacyPolicy: حریم خصوصی
+privacyPolicy: Privacy Policy
 imprint: دیدگاه
 programDetails: جزئیات
 somethingWentWrong: 'اوهو، چیزی اشتباه شد.'
@@ -60,7 +60,7 @@ cancelMessage: "لغوش کن"
 notificationsUnauthorizedError: "کاربر قادر به تأیید نیست"
 notificationsClearError: "غیر قادر به علامت گذاری اطلاعیه به عنوان خوانده شده!"
 pleaseWait: "لطفا صبر کن..."
-projects: "برنامه ها"
+projects: "Projects"
 oauthPopUpTitle: "معلومات وارد شدن به حساب خارجی"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
 oauthHere: "اینجا"
@@ -133,7 +133,7 @@ programs:
   views: 'نمایش %views%'
   likes:
     likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
-    all: "همه"
+    all: "All"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
@@ -181,8 +181,8 @@ programs:
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
-  by: 'به وسیله'
-  open: 'باز کن'
+  by: 'by'
+  open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
@@ -349,7 +349,7 @@ search:
 menu:
   profile: My Profile
   login: Login
-  logout: خروج
+  logout: Logout
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
@@ -594,13 +594,13 @@ codeStatistics:
   error: "Code Statistics can't be displayed."
   general: 'General'
   bricks: 'Bricks'
-  eventBricks: 'رویداد'
-  controlBricks: 'کنترل'
-  motionBricks: 'حرکت'
-  soundBricks: 'صدا'
+  eventBricks: 'Event'
+  controlBricks: 'Control'
+  motionBricks: 'Motion'
+  soundBricks: 'Sound'
   looksBricks: 'Looks'
   penBricks: 'Pen'
-  dataBricks: 'داده‌'
+  dataBricks: 'Data'
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
