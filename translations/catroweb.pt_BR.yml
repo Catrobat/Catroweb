@@ -1,7 +1,7 @@
 ---
 #homepage translation
 localLanguage: Inglês
-username: 'Usuário:'
+username: Usuário
 password: Senha
 createNewPassword: Criar uma nova senha
 accountSettings: Configurações da Conta
@@ -22,7 +22,7 @@ report: Denunciar
 deleteIt: Sim, delete isso!
 reportIt: Sim, denunciar!
 areYouSure: Você tem certeza?
-noWayOfReturn: Não há maneira de restaurar suas ações!
+noWayOfReturn: Não há maneira de desfazer suas ações!
 download: Baixe o projeto
 description: Descrição
 noDescription: Sem descrição disponível.
@@ -83,12 +83,12 @@ follower:
   followError: "Não foi possível seguir o usuário desejado!"
   unfollowError: "Não foi possível deixar de seguir o usuário desejado!"
   unfollowQuestion: "Tem certeza de que deseja deixar de seguir este usuário?"
-  unfollowButton: "Não seguir %username%"
+  unfollowButton: "Deixar de seguir %username%"
 programs:
   welcome:
     title: Bem-vindo ao %theme% da Catrobat
     subtitle: Crie histórias, jogos e muito mais...
-    subtitle_embroidery: Grave seus próprios patters em suas camisetas, bolsas, calças ou casos para smartphone!
+    subtitle_embroidery: Costuri seus próprios padrões em suas camisetas, bolsas, calças ou capas de celulares!
     download: Baixar o aplicativo
     statistics: Mais Estatísticas
   featured: Em Destaque

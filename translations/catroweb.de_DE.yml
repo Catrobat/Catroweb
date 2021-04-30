@@ -62,7 +62,7 @@ notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu m
 pleaseWait: "Bitte warten..."
 projects: "Projekte"
 oauthPopUpTitle: "Externe Logininformationen"
-oauthInfo: 'Sie haben einen externen Account zum einloggen benutzt. Wir haben für sie einen zufälligen Benutzernamen erstellt. Wenn Sie den Benutzernamen ändern wollen oder ein neues Passwort setzen wollen, gehen sie auf ihre Profilseite. Klicken Sie %link_start% hier %link_end% um zu Ihrer Profilseite zu gelangen.'
+oauthInfo: 'Du hast einen externen Account zum Einloggen benutzt. Wir haben für dich einen zufälligen Benutzernamen erstellt. Wenn du den Benutzernamen ändern willst oder ein neues Passwort setzen willst, geh auf deine Profilseite. Klicke %link_start% hier %link_end% um zu deiner Profilseite zu gelangen.'
 oauthHere: "hier"
 statistics: "Statistiken"
 indexPage:
@@ -328,7 +328,7 @@ termsOfUse:
   list3:
     item1: "Wenn du ein Programm auf unsere Website lädst, akzeptierst du unsere freie Lizenz für den Upload von Catrobat-Programmen. Diese Lizenz gibt jedem das Recht von der Arbeit, die von anderem Benutzern hochgeladen wurde zu lernen und diese zu adaptieren. Dadurch kannst du schnell neue faszinierende Spiele, Animationen und andere Projekte erstellen. Von deiner Arbeit wird daher auch die ganze Welt profitieren und sie wird für alle frei zu benutzen sein, ähnlich der Texte und Bilder die du auf der Wikipedia finden kannst und die auch von vielen Freiwilligen auf der ganzen Welt erstellt werden. Stell es dir als ein Geschenk von dir an die Menschheit vor: Du gibst allen etwas und alle anderen geben auch dir etwas. Daher ist ein hoch geladenes Projekt ein Geschenk von großem Wert, welches der Ersteller kostenlos dir gegeben hat allerdings unter der Voraussetzung, das auch du unter den selben Regeln am Projekt teilnimmst."
     item2: Du musst das Geschenk allerdings nicht annehmen; wenn du es jedoch tust, dann gelten bestimmte Regeln. Die Vorteile dieser Regeln sind, dass du von der Arbeit anderer lernen kannst und auf dieser aufbauend ein noch cooleres Programm erstellen kannst, welches du dann wieder auf unsere Website hochladen kannst. Ein weiterer Vorteil ist, dass diese Lizenz sicherstellt, dass du nicht verantwortlich gemacht werden kannst für irgendwelche Probleme die anderen durch die Verwendung deiner Arbeit entstehen sollten.
-    item3: "Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen geschätzt werden kann, indem wir anderen die Möglichkeit schaffen öffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gwählt hast und der dich in der Catrobat Gemeinschaft vertritt."
+    item3: "Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen geschätzt werden kann, indem wir anderen die Möglichkeit schaffen öffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gewählt hast und der dich in der Catrobat Gemeinschaft vertritt."
     item4: 'Bitte konsultiere %link-licenseUploaded%  für die genauen rechtlichen Geschäftsbedingungen.'
   list4:
     item1: "Wir bieten alle unsere eigenen Software- und Internet-Ressourcen im Zusammenhang mit dem Catrobat System, zB die Software, die von dem Catrobat Team geschrieben wird, unsere Webseiten und Internet-Ressourcen, unseren eigenen Quellcode im Zusammenhang mit dem Catrobat System und alle zusätzlich enthalten Materialien, wie z. B. , Bilder, Sounds und Texte, jetzt und in der Zukunft, unter den freien Lizenzen von Catrobat."
@@ -628,10 +628,10 @@ privacy-policy:
   disagree-text: Ohne Zustimmung kann kein Benutzerkonto erstellt werden, die Basisfunktionalität kann aber weiterhin genutzt werden.
 catro-notifications:
   markAsRead: "Als gelesen markieren"
-  noFollowers: "Es sieht so aus, als hätten Sie keine Follower-Benachrichtigungen"
-  noComments: "Es sieht so aus, als hätten Sie keine Kommentarbenachrichtigungen"
-  noReactions: "Es sieht so aus, als hätten Sie keine Reaktionsbenachrichtigungen"
-  noRemixes: "Es sieht so aus, als hätten Sie keine Reaktionsbenachrichtigungen"
+  noFollowers: "Es sieht so aus, als hättest du keine Follower-Benachrichtigungen"
+  noComments: "Es sieht so aus, als hättest du keine Kommentarbenachrichtigungen"
+  noReactions: "Es sieht so aus, als hättest du keine Reaktionsbenachrichtigungen"
+  noRemixes: "Es sieht so aus, als hättest du keine Remix Benachrichtigungen"
   comment:
     message: 'Benutzer %user_link% hat Ihr Projekt %program_link% kommentiert.'
   like:

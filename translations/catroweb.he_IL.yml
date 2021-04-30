@@ -445,7 +445,7 @@ time:
   hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: 'לפני יותר משנה'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: There was an error during the upload of your app.
 api:

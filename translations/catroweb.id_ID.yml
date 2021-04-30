@@ -28,7 +28,7 @@ description: Keterangan
 noDescription: Keterangan tidak tersedia.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Bagaimana Anda membuat proyek ini? Apakah Anda menggunakan ide, skrip, atau karya seni dari orang lain? Berterimakasihlah di sini.
 country: Negara
 loginText: masuk
 privacyPolicy: Kebijakan privasi
@@ -601,7 +601,7 @@ codeStatistics:
   looksBricks: 'Penampilan'
   penBricks: 'Pena'
   dataBricks: 'Data'
-  deviceBricks: 'Device'
+  deviceBricks: 'Alat'
   specialBricks: 'Special'
 footer:
   language: Bahasa
