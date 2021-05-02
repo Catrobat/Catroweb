@@ -152,6 +152,12 @@
   }
 }
 
+.tab-bar-container {
+  #scroll-area {
+    overflow: auto;
+  }
+}
+
 .follower-tabs {
   margin-top: -1rem;
 }

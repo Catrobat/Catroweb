@@ -3,7 +3,8 @@
     "login": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_textfield_component_js.js",
         "/build/login.js"
       ]
@@ -11,7 +12,8 @@
     "register": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_textfield_component_js.js",
         "/build/register.js"
       ]
@@ -19,7 +21,8 @@
     "request": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_textfield_component_js.js",
         "/build/request.js"
       ]
@@ -27,7 +30,8 @@
     "reset": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_textfield_component_js.js",
         "/build/reset.js"
       ]
@@ -35,7 +39,8 @@
     "program_comments": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_textfield_component_js.js",
         "/build/program_comments.js"
       ]
@@ -43,7 +48,8 @@
     "program_description": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_textfield_component_js.js",
         "/build/program_description.js"
       ]
@@ -51,7 +57,8 @@
     "report": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_textfield_component_js.js",
         "/build/vendors-node_modules_jquery_dist_jquery_js.js",
         "/build/report.js"
@@ -60,9 +67,18 @@
     "footer": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-f46434.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
         "/build/vendors-node_modules_material_select_component_js.js",
         "/build/footer.js"
+      ]
+    },
+    "tab-bar": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_material_ripple_component_js.js",
+        "/build/vendors-node_modules_material_tab-bar_component_js.js",
+        "/build/tab-bar.js"
       ]
     }
   }
