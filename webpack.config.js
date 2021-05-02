@@ -31,6 +31,7 @@ Encore
   .addEntry('program_description', './assets/js/material/program_description.js')
   .addEntry('report', './assets/js/material/report.js')
   .addEntry('footer', './assets/js/material/footer.js')
+  .addEntry('tab-bar', './assets/js/material/tab-bar.js')
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
