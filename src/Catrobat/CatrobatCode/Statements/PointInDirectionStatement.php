@@ -7,11 +7,11 @@ class PointInDirectionStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'point in direction (';
+  public const BEGIN_STRING = 'point in direction (';
   /**
    * @var string
    */
-  const END_STRING = ') degrees<br/>';
+  public const END_STRING = ') degrees<br/>';
 
   /**
    * PointInDirectionStatement constructor.

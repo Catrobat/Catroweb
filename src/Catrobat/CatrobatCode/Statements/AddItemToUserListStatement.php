@@ -7,17 +7,17 @@ class AddItemToUserListStatement extends BaseUserListStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'add item to userlist ';
+  public const BEGIN_STRING = 'add item to userlist ';
 
   /**
    * @var string
    */
-  const MIDDLE_STRING = '(';
+  public const MIDDLE_STRING = '(';
 
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * AddItemToUserListStatement constructor.

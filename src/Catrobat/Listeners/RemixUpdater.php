@@ -18,7 +18,7 @@ class RemixUpdater
   /**
    * @var string
    */
-  const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
+  public const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
 
   private RemixManager $remix_manager;
 

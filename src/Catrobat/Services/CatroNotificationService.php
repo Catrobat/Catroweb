@@ -36,7 +36,7 @@ class CatroNotificationService
   /**
    * @var int
    */
-  const DEFAULT_NOTIFICATION = 0;
+  public const DEFAULT_NOTIFICATION = 0;
 
   private EntityManagerInterface $em;
 

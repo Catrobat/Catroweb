@@ -7,11 +7,11 @@ class SetTransparencyStatement extends BaseSetToStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'transparency';
+  public const BEGIN_STRING = 'transparency';
   /**
    * @var string
    */
-  const END_STRING = ')%<br/>';
+  public const END_STRING = ')%<br/>';
 
   /**
    * SetTransparencyStatement constructor.

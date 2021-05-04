@@ -9,11 +9,11 @@ class IfLogicBeginStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'if ';
+  public const BEGIN_STRING = 'if ';
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * IfLogicBeginStatement constructor.

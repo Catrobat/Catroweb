@@ -26,8 +26,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class ProfileController extends AbstractController
 {
-  const MIN_PASSWORD_LENGTH = 6;
-  const MAX_PASSWORD_LENGTH = 4096;
+  public const MIN_PASSWORD_LENGTH = 6;
+  public const MAX_PASSWORD_LENGTH = 4096;
   private ProgramManager $program_manager;
   private UserManager $user_manager;
 

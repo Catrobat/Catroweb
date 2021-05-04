@@ -18,13 +18,13 @@ use Exception;
  */
 class Program
 {
-  const APK_NONE = 0;
+  public const APK_NONE = 0;
 
-  const APK_PENDING = 1;
+  public const APK_PENDING = 1;
 
-  const APK_READY = 2;
+  public const APK_READY = 2;
 
-  const INITIAL_VERSION = 1;
+  public const INITIAL_VERSION = 1;
 
   /**
    * @ORM\Id

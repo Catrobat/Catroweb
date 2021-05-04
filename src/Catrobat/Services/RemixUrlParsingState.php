@@ -7,13 +7,13 @@ class RemixUrlParsingState
   /**
    * @var int
    */
-  const STARTING = 0;
+  public const STARTING = 0;
   /**
    * @var int
    */
-  const BETWEEN = 1;
+  public const BETWEEN = 1;
   /**
    * @var int
    */
-  const TOKEN = 2;
+  public const TOKEN = 2;
 }

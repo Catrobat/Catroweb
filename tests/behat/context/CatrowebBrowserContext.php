@@ -42,9 +42,9 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class CatrowebBrowserContext extends BrowserContext
 {
-  const AVATAR_DIR = './tests/testdata/DataFixtures/AvatarImages/';
+  public const AVATAR_DIR = './tests/testdata/DataFixtures/AvatarImages/';
 
-  const ALREADY_IN_DB_USER = 'AlreadyinDB';
+  public const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   private bool $use_real_oauth_javascript_code = false;
 

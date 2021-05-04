@@ -15,14 +15,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class UserRequestValidator extends AbstractRequestValidator
 {
-  const MIN_PASSWORD_LENGTH = 6;
-  const MAX_PASSWORD_LENGTH = 4096;
+  public const MIN_PASSWORD_LENGTH = 6;
+  public const MAX_PASSWORD_LENGTH = 4096;
 
-  const MIN_USERNAME_LENGTH = 3;
-  const MAX_USERNAME_LENGTH = 180;
+  public const MIN_USERNAME_LENGTH = 3;
+  public const MAX_USERNAME_LENGTH = 180;
 
-  const MODE_REGISTER = 'register_mode';
-  const MODE_UPDATE = 'update_mode';
+  public const MODE_REGISTER = 'register_mode';
+  public const MODE_UPDATE = 'update_mode';
 
   private UserManager $user_manager;
 

@@ -7,11 +7,11 @@ class ChangeSizeByNStatement extends BaseChangeByNStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'size';
+  public const BEGIN_STRING = 'size';
   /**
    * @var string
    */
-  const END_STRING = ')%<br/>';
+  public const END_STRING = ')%<br/>';
 
   /**
    * ChangeSizeByNStatement constructor.

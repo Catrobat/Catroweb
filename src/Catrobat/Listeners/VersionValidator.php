@@ -14,19 +14,19 @@ class VersionValidator
   /**
    * @var string
    */
-  const MIN_LANGUAGE_VERSION = '0.92';
+  public const MIN_LANGUAGE_VERSION = '0.92';
   /**
    * @var string
    */
-  const MIN_ANDROID_PROGRAM_VERSION = '0.7.3';
+  public const MIN_ANDROID_PROGRAM_VERSION = '0.7.3';
   /**
    * @var string
    */
-  const MIN_IOS_PROGRAM_VERSION = '0.1';
+  public const MIN_IOS_PROGRAM_VERSION = '0.1';
   /**
    * @var string
    */
-  const MIN_WINDOWS_PROGRAM_VERSION = '0.1';
+  public const MIN_WINDOWS_PROGRAM_VERSION = '0.1';
 
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {

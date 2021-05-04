@@ -25,7 +25,7 @@ class RecommenderManager
   /**
    * @var string
    */
-  const RECOMMENDER_LOCK_FILE_NAME = 'CatrobatRecommender.lock';
+  public const RECOMMENDER_LOCK_FILE_NAME = 'CatrobatRecommender.lock';
 
   protected AppRequest $app_request;
 

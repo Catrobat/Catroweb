@@ -17,7 +17,7 @@ class Kernel extends BaseKernel
   /**
    * @var string
    */
-  const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+  public const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
   public function getCacheDir(): string
   {

@@ -7,11 +7,11 @@ class NextLookStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'next look';
+  public const BEGIN_STRING = 'next look';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * NextLookStatement constructor.

@@ -2,9 +2,14 @@
 
 $finder = PhpCsFixer\Finder::create()
   ->exclude(['Migrations', 'Resources'])
-  ->in(['src', 'tests']);
+  ->in(['src', 'tests'])
+  ->append([
+      __DIR__.'/php-cs-fixer',
+  ]);
 
-return PhpCsFixer\Config::create()
+$config = new PhpCsFixer\Config();
+$config
+  ->setRiskyAllowed(true)
   ->setRules([
     '@PSR2'               => true,
     '@PhpCsFixer'         => true,
@@ -15,3 +20,5 @@ return PhpCsFixer\Config::create()
   ->setFinder($finder)
   ->setUsingCache(true)
   ->setIndent('  ');
+
+return $config;

@@ -7,12 +7,12 @@ class FormulaListStatement extends Statement
   /**
    * @var string
    */
-  const X_POSITION = 'X_POSITION';
+  public const X_POSITION = 'X_POSITION';
 
   /**
    * @var string
    */
-  const Y_POSITION = 'Y_POSITION';
+  public const Y_POSITION = 'Y_POSITION';
 
   private FormulaStatement $xPosition;
 

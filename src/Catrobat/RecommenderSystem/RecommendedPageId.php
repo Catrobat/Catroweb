@@ -11,23 +11,23 @@ class RecommendedPageId
   /**
    * @var int
    */
-  const INVALID_PAGE = 0;
+  public const INVALID_PAGE = 0;
   /**
    * @var int
    */
-  const INDEX_PAGE = 1;
+  public const INDEX_PAGE = 1;
   /**
    * @var int
    */
-  const PROGRAM_DETAIL_PAGE_REMIX_GRAPH = 2;
+  public const PROGRAM_DETAIL_PAGE_REMIX_GRAPH = 2;
   /**
    * @var int
    */
-  const NOTIFICATION_CENTER_PAGE = 3;
+  public const NOTIFICATION_CENTER_PAGE = 3;
   /**
    * @var int
    */
-  const PROGRAM_DETAIL_PAGE = 4;
+  public const PROGRAM_DETAIL_PAGE = 4;
   // -> new page IDs go here...
 
   /**

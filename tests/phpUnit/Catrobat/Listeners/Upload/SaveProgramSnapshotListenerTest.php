@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class SaveProgramSnapshotListenerTest extends TestCase
 {
-  const STORAGE_DIR = '/path/to/storage/';
+  public const STORAGE_DIR = '/path/to/storage/';
 
   private Program $program;
 

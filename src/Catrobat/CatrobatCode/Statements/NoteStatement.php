@@ -7,11 +7,11 @@ class NoteStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'note ';
+  public const BEGIN_STRING = 'note ';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * NoteStatement constructor.
