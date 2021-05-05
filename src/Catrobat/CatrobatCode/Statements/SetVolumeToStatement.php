@@ -7,11 +7,11 @@ class SetVolumeToStatement extends BaseSetToStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'volume';
+  public const BEGIN_STRING = 'volume';
   /**
    * @var string
    */
-  const END_STRING = ')%<br/>';
+  public const END_STRING = ')%<br/>';
 
   /**
    * SetVolumeToStatement constructor.

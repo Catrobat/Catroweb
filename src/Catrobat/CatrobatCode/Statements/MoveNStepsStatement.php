@@ -7,11 +7,11 @@ class MoveNStepsStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'move (';
+  public const BEGIN_STRING = 'move (';
   /**
    * @var string
    */
-  const END_STRING = ') steps<br/>';
+  public const END_STRING = ') steps<br/>';
 
   /**
    * MoveNStepsStatement constructor.

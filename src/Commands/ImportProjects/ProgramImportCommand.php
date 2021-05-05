@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ProgramImportCommand extends Command
 {
-  const REMIX_GRAPH_NO_LAYOUT = '0';
+  public const REMIX_GRAPH_NO_LAYOUT = '0';
 
   protected static $defaultName = 'catrobat:import';
 

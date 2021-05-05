@@ -7,11 +7,11 @@ class ShowStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'show';
+  public const BEGIN_STRING = 'show';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * ShowStatement constructor.

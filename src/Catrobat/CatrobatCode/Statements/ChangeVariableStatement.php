@@ -7,11 +7,11 @@ class ChangeVariableStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'change ';
+  public const BEGIN_STRING = 'change ';
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * ChangeVariableStatement constructor.

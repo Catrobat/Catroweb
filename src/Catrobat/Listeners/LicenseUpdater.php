@@ -10,11 +10,11 @@ class LicenseUpdater
   /**
    * @var string
    */
-  const MEDIA_LICENSE = 'https://developer.catrobat.org/ccbysa_v4';
+  public const MEDIA_LICENSE = 'https://developer.catrobat.org/ccbysa_v4';
   /**
    * @var string
    */
-  const PROGRAM_LICENSE = 'https://developer.catrobat.org/agpl_v3';
+  public const PROGRAM_LICENSE = 'https://developer.catrobat.org/agpl_v3';
 
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {

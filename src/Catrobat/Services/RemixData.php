@@ -7,7 +7,7 @@ class RemixData
   /**
    * @var string
    */
-  const SCRATCH_DOMAIN = 'scratch.mit.edu';
+  public const SCRATCH_DOMAIN = 'scratch.mit.edu';
 
   private string $remix_url;
 

@@ -22,8 +22,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotificationsController extends AbstractController
 {
-  const load_limit = 20;
-  const load_offset = 0;
+  public const load_limit = 20;
+  public const load_offset = 0;
 
   /**
    * @Route("/user_notifications", name="notifications", methods={"GET"})

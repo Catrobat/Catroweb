@@ -15,7 +15,7 @@ class RemixSubgraphManipulator
   /**
    * @var string
    */
-  const COMMON_TIMESTAMP = 'common_timestamp';
+  public const COMMON_TIMESTAMP = 'common_timestamp';
 
   private EntityManagerInterface $entity_manager;
 

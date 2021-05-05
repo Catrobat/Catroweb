@@ -7,7 +7,7 @@ class LookListStatement extends BaseListStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'used looks: <br/>';
+  public const BEGIN_STRING = 'used looks: <br/>';
 
   /**
    * LookListStatement constructor.
