@@ -49,7 +49,7 @@ Feature: Users can choose between multiple languages. Text should be automatical
     And the element "#home-projects__most_downloaded" should be visible
     When I switch the language to "Deutsch"
     And I wait for the page to be loaded
-    Then one of the ".project-list__title" elements should contain "Meist heruntergeladen"
+    Then one of the ".project-list__title" elements should contain "heruntergeladen"
     And the element "#home-projects__most_downloaded" should be visible
 
   Scenario: User with selected russian language sees the remix graph button and details on program page
