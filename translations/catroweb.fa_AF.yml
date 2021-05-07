@@ -134,7 +134,7 @@ programs:
   likes:
     likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
     all: "همه"
-  remixes: '{0}0 ریمیکس | {1}۱ ریمیکس |] ۱، inf]  %remixes%ریمیکس'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
   uploaded: Uploaded Projects
