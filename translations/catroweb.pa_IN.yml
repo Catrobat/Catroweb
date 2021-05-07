@@ -1,149 +1,149 @@
 ---
 #homepage translation
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
-accountSettings: Account settings
+localLanguage: ਅੰਗਰੇਜ਼ੀ
+username: ਉਪਯੋਗਕਰਤਾ ਨਾਮ
+password: ਪਾਸਵਰਡ
+createNewPassword: ਨਵਾਂ ਪਾਸਵਰਡ ਬਣਾਓ
+accountSettings: ਖਾਤਾ ਯੋਜਨਾ
 email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
-tutorials: Help
-googlePlay: Google Play Store
-iosAppStore: iOS App store
-huaweiAppGallery: Huawei AppGallery
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-description: Description
-noDescription: No description available.
-credits: Notes and credits
-noCredits: No notes and credits available.
+aboutPocketCode: ਪਾਕੇਟ ਕੋਡ ਬਾਰੇ
+about: ਬਾਰੇ
+education: ਸਿੱਖਿਆ
+chat: ਗੱਲਬਾਤ ਅਤੇ ਫੋਰਮ
+others: ਹੋਰ
+tutorials: ਮਦਦ ਕਰੋ
+googlePlay: ਗੂਗਲ ਪਲੇ ਸਟੋਰ
+iosAppStore: ਆਈਓਐਸ ਐਪ ਸਟੋਰ
+huaweiAppGallery: ਹੁਆਵੇਈ ਐਪ ਗੈਲਰੀ
+passwordsNoMatch: ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ.
+error: ਗਲਤੀ
+cancel: ਰੱਦ ਕਰੋ
+report: ਰਿਪੋਰਟ
+deleteIt: ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
+reportIt: ਹਾਂ, ਇਸ ਦੀ ਰਿਪੋਰਟ ਕਰੋ!
+areYouSure: ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
+noWayOfReturn: ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
+download: ਡਾ .ਨਲੋਡ
+description: ਵੇਰਵਾ
+noDescription: ਕੋਈ ਵੇਰਵਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
+credits: ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ
+noCredits: ਕੋਈ ਨੋਟਸ ਅਤੇ ਕ੍ਰੈਡਿਟ ਉਪਲਬਧ ਨਹੀਂ ਹਨ.
 notesAndCreditsDescription: ਤੁਸੀਂ ਇਹ ਪ੍ਰੋਜੈਕਟ ਕਿਵੇਂ ਬਣਾਇਆ? ਕੀ ਤੁਸੀਂ ਦੂਜੇ ਲੋਕਾਂ ਦੇ ਵਿਚਾਰਾਂ, ਸਕ੍ਰਿਪਟਾਂ ਜਾਂ ਕਲਾਕਾਰੀ ਦੀ ਵਰਤੋਂ ਕੀਤੀ ਹੈ? ਇਥੇ ਉਨ੍ਹਾਂ ਦਾ ਧੰਨਵਾਦ ਕਰੋ.
-country: Country
-loginText: login
+country: ਦੇਸ਼
+loginText: ਲਾਗਿਨ
 privacyPolicy: ਪਰਾਈਵੇਟ ਨੀਤੀ
-imprint: Imprint
-programDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+imprint: ਛਾਪ
+programDetails: ਵੇਰਵਾ
+somethingWentWrong: 'ਓਓਓਫਸ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ.'
+pleaseTryAgain: 'ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ!'
+oldVersionError: 'ਕਿਰਪਾ ਕਰਕੇ ਨਵੀਨਤਮ ਪਾਕੇਟ ਕੋਡ ਸੰਸਕਰਣ ਨੂੰ ਅਪਡੇਟ ਕਰੋ!'
+more: 'ਹੋਰ'
+less: 'ਘੱਟ'
+show-more: 'ਹੋਰ ਦਿਖਾਓ'
+show-less: 'ਘੱਟ ਦਿਖਾਓ'
+more-information: 'ਹੋਰ ਜਾਣਕਾਰੀ'
+less-information: 'ਘੱਟ ਜਾਣਕਾਰੀ'
+ok: ਠੀਕ ਹੈ
+clickToDownloadProgram: 'ਇੱਥੇ ਉਦਾਹਰਨ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਕਲਿੱਕ %link_start% ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ %link_end%.'
+registrationError: 'ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਜਾਂ ਈਮੇਲ ਪਤਾ ਪਹਿਲਾਂ ਹੀ ਵਰਤੋਂ ਅਧੀਨ ਹੈ.'
+notifications: 'ਨੋਟੀਫਿਕੇਸ਼ਨ'
 allNotifications: 'ਸਾਰੇ'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
+FollowersNotifications: 'ਚੇਲੇ'
+LikeNotifications: 'ਪ੍ਰਤੀਕਰਮ'
+CommentNotifications: 'ਟਿਪਣੀਆਂ'
 RemixNotifications: 'ਰੀਮਿਕਸ'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "It looks like you don't have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+wellDone: "ਬਹੁਤ ਖੂਬ!"
+done: "ਹੋ ਗਿਆ!"
+notificationsReadMessage: "ਇੰਜ ਜਾਪਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਸੂਚਨਾਵਾਂ ਨਹੀਂ ਹਨ."
+confirmMessage: "ਹਾਂ, ਇਸ ਨੂੰ ਮਿਟਾਓ"
+cancelMessage: "ਰੱਦ ਕਰੋ"
+notificationsUnauthorizedError: "ਉਪਭੋਗਤਾ ਨੂੰ ਅਧਿਕਾਰਤ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ"
+notificationsClearError: "ਨੋਟੀਫਿਕੇਸ਼ਨਜ ਨੂੰ ਪੜਿਆ ਮਾਰਕ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ!"
+pleaseWait: "ਕ੍ਰਿਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ..."
 projects: "ਪ੍ਰੋਜੈਕਟ"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "ਬਾਹਰੀ ਖਾਤਾ ਸਾਈਨ ਇਨ ਜਾਣਕਾਰੀ"
+oauthInfo: 'ਤੁਸੀਂ ਲੌਗ ਇਨ ਕਰਨ ਲਈ ਹੁਣੇ ਇੱਕ ਬਾਹਰੀ ਖਾਤਾ ਵਰਤਿਆ ਹੈ. ਅਸੀਂ ਤੁਹਾਡੇ ਲਈ ਇੱਕ ਬੇਤਰਤੀਬੇ ਉਪਯੋਗਕਰਤਾ ਬਣਾਇਆ ਹੈ. ਜੇ ਤੁਸੀਂ ਆਪਣਾ ਉਪਭੋਗਤਾ ਨਾਮ ਬਦਲਣਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਆਪਣੇ ਖਾਤੇ ਲਈ ਨਵਾਂ ਪਾਸਵਰਡ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਮੇਰੇ ਪ੍ਰੋਫਾਈਲ ਪੇਜ ਤੇ ਜਾਓ. ਕਲਿਕ%link_start% ਇੱਥੇ%link_end% ਆਪਣੇ ਪ੍ਰੋਫ਼ਾਈਲ ਸਫੇ ਤੇ ਜਾਣ ਲਈ'
+oauthHere: "ਇਥੇ"
+statistics: "ਅੰਕੜੇ"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'ਇੱਥੇ ਕਿਹੜੇ ਪ੍ਰੋਜੈਕਟਾਂ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ?'
+      description: 'ਤੁਹਾਡੇ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਜਿੰਨੀ ਜ਼ਿਆਦਾ ਪ੍ਰਤੀਕ੍ਰਿਆਵਾਂ (ਥੰਬਸ ਅਪ, ਮੁਸਕਰਾਹਟ ...) ਪ੍ਰਾਪਤ ਹੁੰਦੀਆਂ ਹਨ, ਉਨੇ ਜ਼ਿਆਦਾ ਇਸ ਸੂਚੀ ਵਿਚ ਪ੍ਰਗਟ ਹੁੰਦਾ ਹੈ.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: ਅਨੁਸਰਣ ਕਰ ਰਹੇ ਹਨ
+  followers: ਚੇਲੇ
+  follow: ਅਨੁਸਰਣ ਕਰੋ
+  username: ਯੂਜ਼ਰ
+  followsMe: ਮੇਰਾ ਅਨੁਸਰਣ ਕਰਦਾ ਹੈ
+  noFollowing: ਤੁਸੀਂ ਇਸ ਸਮੇਂ ਕਿਸੇ ਦਾ ਪਾਲਣ ਨਹੀਂ ਕਰ ਰਹੇ ਹੋ.
+  noFollowers: ਇਸ ਸਮੇਂ ਤੁਹਾਡੇ ਕੋਈ ਚੇਲੇ ਨਹੀਂ ਹਨ.
+  noOtherFollowing: ਇਸ ਸਮੇਂ ਇੱਥੇ ਕੋਈ ਉਪਯੋਗਕਰਤਾ ਨਹੀਂ ਹਨ.
+  noOtherFollowers: ਇਸ ਸਮੇਂ ਕੋਈ ਅਨੁਸਰਣ ਕਰਨ ਵਾਲੇ ਉਪਭੋਗਤਾ ਨਹੀਂ ਹਨ.
+  followError: "ਲੋੜੀਂਦੇ ਉਪਭੋਗਤਾ ਦੀ ਪਾਲਣਾ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ!"
+  unfollowError: "ਲੋੜੀਂਦੇ ਉਪਭੋਗਤਾ ਨੂੰ ਅਨਫੌਲ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ!"
+  unfollowQuestion: "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਉਪਯੋਗਕਰਤਾ ਨੂੰ ਅਨਫਾੱਲ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+  unfollowButton: "ਅਣਜਾਣ %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+    title: ਕਾਟਰੋਬੈਟ ਦਾ ਸੁਆਗਤ ਹੈ%theme%
+    subtitle: ਕਹਾਣੀਆਂ, ਖੇਡਾਂ ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ ਬਣਾਓ ...
+    subtitle_embroidery: ਆਪਣੀ ਟੀ-ਸ਼ਰਟ, ਬੈਗਾਂ, ਪੈਂਟਾਂ ਜਾਂ ਸਮਾਰਟਫੋਨ ਦੇ ਕੇਸਾਂ 'ਤੇ ਆਪਣੇ ਪੈਟਰਨ ਨੂੰ ਸਿਲਾਈ ਕਰੋ!
+    download: ਐਪ ਨੂੰ ਡਾਉਨਲੋਡ ਕਰੋ
+    statistics: ਹੋਰ ਅੰਕੜੇ
+  featured: ਫੀਚਰਡ
+  example: ਉਦਾਹਰਣ
+  newest: ਨਵੇਂ ਪ੍ਰੋਜੈਕਟ
+  recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
+  scratchremixes: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
+  noPrograms: ਇਸ ਵੇਲੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਨਹੀਂ ਹਨ.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
+    ਕੀ ਤੁਸੀਂ ਪੱਕਾ "%programName%" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+    ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
+    ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
+    ਰੱਦ ਕਰੋ
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
+    ਜੇ ਤੁਸੀਂ '%programName%' ਨੂੰ ਪ੍ਰਾਈਵੇਟ ਤੇ ਸੈਟ ਕਰਦੇ ਹੋ, ਤਾਂ ਇਹ ਦੂਜੇ ਉਪਭੋਗਤਾਵਾਂ ਦੁਆਰਾ ਵੇਖਿਆ ਜਾਂ ਲੱਭਿਆ ਨਹੀਂ ਜਾਏਗਾ.
+    ਤੁਸੀਂ ਅਜੇ ਵੀ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਦਾ ਲਿੰਕ ਆਪਣੇ ਦੋਸਤਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰ ਸਕਦੇ ਹੋ. ਤੁਸੀਂ ਪੈਡਲਾਕ ਆਈਕਨ ਨੂੰ ਟੈਪ ਕਰਦੇ ਹੋਏ ਦਰਿਸ਼ਗੋਚਰਤਾ ਨੂੰ ਟੌਗਲ ਕਰ ਸਕਦੇ ਹੋ.
+    ਜੇ ਤੁਸੀਂ "%programName%" ਨੂੰ ਜਨਤਕ ਤੌਰ ਤੇ ਸੈਟ ਕਰਦੇ ਹੋ, ਤਾਂ ਇਹ ਦੂਜੇ ਉਪਭੋਗਤਾਵਾਂ ਦੁਆਰਾ ਵੇਖਿਆ ਅਤੇ ਪਾਇਆ ਜਾ ਸਕਦਾ ਹੈ.
+    ਹਾਂ, ਸਰਵਜਨਕ ਤੇ ਸੈਟ ਕਰੋ
+    ਹਾਂ, ਪ੍ਰਾਈਵੇਟ ਤੇ ਸੈਟ ਕੀਤਾ
+    ਨਹੀਂ
+  reportCommentConfirmation: ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਇਸ ਟਿੱਪਣੀ ਦੀ ਰਿਪੋਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?
+  deleteCommentConfirmation: ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਇਸ ਟਿੱਪਣੀ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
-  tooLongCredits: The project notes and credits are too long!
-  rudeWordsInCredits: You can't use rude words in your notes and credits!
+    ਖਾਤਾ ਮਿਟਾਉਣਾ?
+    ਕੀ ਤੁਹਾਨੂੰ ਯਕੀਨ ਹੈ ਕਿ ਤੁਸੀਂ ਆਪਣਾ ਖਾਤਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਹ ਤੁਹਾਡੇ ਅਪਲੋਡ ਕੀਤੇ ਪ੍ਰੋਜੈਕਟਾਂ ਅਤੇ ਟਿੱਪਣੀਆਂ ਨੂੰ ਵੀ ਮਿਟਾ ਦੇਵੇਗਾ!
+    ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
+    ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
+    ਰੱਦ ਕਰੋ
+  tooLongDescription: ਪ੍ਰੋਜੈਕਟ ਦਾ ਵੇਰਵਾ ਬਹੁਤ ਲੰਬਾ ਹੈ!
+  rudeWordsInDescription: ਤੁਸੀਂ ਆਪਣੇ ਵੇਰਵੇ ਵਿਚ ਕਠੋਰ ਸ਼ਬਦ ਨਹੀਂ ਵਰਤ ਸਕਦੇ!
+  tooLongCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਬਹੁਤ ਲੰਬੇ ਹਨ!
+  rudeWordsInCredits: ਤੁਸੀਂ ਆਪਣੇ ਨੋਟਾਂ ਅਤੇ ਕ੍ਰੈਡਿਟ ਵਿਚ ਕਠੋਰ ਸ਼ਬਦ ਨਹੀਂ ਵਰਤ ਸਕਦੇ!
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
+    downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
+  random: ਬੇਤਰਤੀਬੇ ਪ੍ਰੋਜੈਕਟ
+  related: ਸਬੰਧਤ ਪ੍ਰੋਜੈਕਟ
+  downloads: '%downloads%ਡਾਉਨਲੋਡਸ'
+  sample: ਪ੍ਰਾਜੈਕਟ ਦੀ ਉਦਾਹਰਣ
+  views: '%views%ਵਿਚਾਰ'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "ਉਹ ਲੋਕ ਜਿਨ੍ਹਾਂ ਨੇ ਉਸ ਪ੍ਰਾਜੈਕਟ 'ਤੇ ਪ੍ਰਤੀਕ੍ਰਿਆ ਦਿੱਤੀ"
     all: "ਸਾਰੇ"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  remixes: '{0} 0 ਰੀਮਿਕਸ | {1} 1 ਰੀਮਿਕਸ |] 1, ਇਨਫ]%remixes%ਰੀਮਿਕਸ'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted projects
   uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
+  reportAsInappropriate: ਅਣਉਚਿਤ ਤੌਰ ਤੇ ਰਿਪੋਰਟ ਕਰੋ
   reportProgram: Report project
   languageVersion: 'Catrobat language version: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
+  reportDialogReason: ਇੱਕ ਕਾਰਨ ਦਰਜ
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
@@ -153,22 +153,22 @@ programs:
   reportDone: You reported this project!
   updateAppHeader: Update app
   updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
+  btnClosePopup: ਠੀਕ ਹੈ
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
-  comments: Comments
+  comments: ਟਿਪਣੀਆਂ
   send: Send
-  delete: Delete
-  report: Report
+  delete: ਮਿਟਾਓ
+  report: ਰਿਪੋਰਟ
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
-  saveDescription: Save
+  saveDescription: ਸੇਵ
   editCredits: Edit the project notes and credits
-  saveCredits: Save
+  saveCredits: ਸੇਵ
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -176,7 +176,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: ਪ੍ਰਤੀਕਰਮ
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: ਰੀਮਿਕਸ
@@ -274,12 +274,12 @@ profile:
   goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
-  edit: Edit
-  done: Done
+  edit: ਸੋਧ
+  done: ਹੋ ਗਿਆ
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: Email
+  email: ਈ - ਮੇਲ
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
@@ -341,21 +341,21 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
-  search: Search
+  search: ਖੋਜ
   inMediaLib: Search in media library
   results: Search results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
   profile: My Profile
-  login: Login
+  login: ਲਾਗਿਨ
   logout: ਬਾਹਰ ਆਉਣਾ
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
 login:
-  login: Login
+  login: ਲਾਗਿਨ
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
@@ -369,9 +369,9 @@ login:
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
   or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
+  username: ਉਪਯੋਗਕਰਤਾ ਨਾਮ
+  email: ਈ - ਮੇਲ
+  passwordFirst: ਪਾਸਵਰਡ
   passwordSecond: Password confirm
 apk:
   download: Download as app
@@ -383,7 +383,7 @@ format:
 #api
 errors:
   username:
-    blank: Username must not be blank
+    blank: ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਖਾਲੀ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ
     invalid: Your username is invalid
     exists: This username already exists.
     not_exists: This username does not exist.
@@ -401,7 +401,7 @@ errors:
     invalid: Invalid country
   email:
     blank: email must not be blank
-    invalid: Your email seems to be invalid
+    invalid: ਤੁਹਾਡੀ ਈਮੇਲ ਅਵੈਧ ਜਾਪਦੀ ਹੈ
     exists: This email address already exists.
   id:
     blank: Open authentication ID must not be blank
@@ -429,7 +429,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
@@ -572,11 +572,11 @@ codeview:
   cantDisplayStatistics: "Code can't be displayed"
   totalNumberOf: 'Total number of'
   scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
+  scripts: 'ਸਕ੍ਰਿਪਟ'
+  bricks: 'ਇੱਟਾਂ'
   objects: 'ਅਦਾਕਾਰ ਅਤੇ ਆਬਜੈਕਟ'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  looks: 'ਵੇਖਦਾ ਹੈ'
+  sounds: 'ਆਵਾਜ਼ਾਂ'
   globals: 'Globals'
   locals: 'Locals'
   globalVariables: 'Global variables'
@@ -593,12 +593,12 @@ codeStatistics:
   title: "Code statistics"
   error: "Code statistics can't be displayed."
   general: 'General'
-  bricks: 'Bricks'
+  bricks: 'ਇੱਟਾਂ'
   eventBricks: 'ਘਟਨਾ'
   controlBricks: 'ਨਿਯੰਤਰਣ'
   motionBricks: 'ਗਤੀ'
   soundBricks: 'ਆਵਾਜ਼'
-  looksBricks: 'Looks'
+  looksBricks: 'ਵੇਖਦਾ ਹੈ'
   penBricks: 'ਕਲਮ'
   dataBricks: 'ਡਾਟਾ'
   deviceBricks: 'ਡੀਵਾਈਸ:'
@@ -657,7 +657,7 @@ media-packages:
   no-results: Your search returned 0 results. Please use only English search terms.
   download_these_files: save
 flavor:
-  pocketcode: Pocket Code
+  pocketcode: ਪਾਕੇਟ ਕੋਡ
   pocketalice: Pocket Alice
   pocketgalaxy: Galaxy Jam
   phirocode: PhiroCode
@@ -679,10 +679,10 @@ checkOutProject: 'Check out this project:'
 community: 'ਕੈਟ੍ਰੋਬੈਟ ਕਮਿ communityਨਿਟੀ'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
+  recent: ਨਵੇਂ ਪ੍ਰੋਜੈਕਟ
+  random: ਬੇਤਰਤੀਬੇ ਪ੍ਰੋਜੈਕਟ
+  most_viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
+  most_downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
+  recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ

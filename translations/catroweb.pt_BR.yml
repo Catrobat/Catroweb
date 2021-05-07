@@ -78,8 +78,8 @@ follower:
   followsMe: Siga-me
   noFollowing: Você não está seguindo ninguém atualmente.
   noFollowers: Você não tem seguidores atualmente.
-  noOtherFollowing: Não há usuários seguindo atualmente.
-  noOtherFollowers: Não há seguidores atualmente.
+  noOtherFollowing: Atualmente não há usuários seguindo.
+  noOtherFollowers: Atualmente não há seguidores.
   followError: "Não foi possível seguir o usuário desejado!"
   unfollowError: "Não foi possível deixar de seguir o usuário desejado!"
   unfollowQuestion: "Tem certeza de que deseja deixar de seguir este usuário?"
@@ -136,22 +136,22 @@ programs:
     all: "Todos"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" tem 1 novo remix: |]1,Inf] "%programName%" tem %remixes% novos remixes:'
-  submitted: Projetos submetidos
+  submitted: Projetos enviados
   uploaded: Projetos carregados
   reportAsInappropriate: Reportar como impróprio
   reportProgram: Reportar projeto
-  languageVersion: 'Versão de linguagem do Catrobat: %languageVersion%'
+  languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
   reportLoginText: Por favor, %login% para reportar este projeto.
   reportDialogHeader: Por que você deseja reportar este projeto?
-  reportDialogReason: Entre um motivo
+  reportDialogReason: Digite um motivo
   reportRadioButtonInappropriate: O conteúdo é impróprio
   reportRadioButtonCopyright: Viola direitos autorais
   reportRadioButtonSpam: É spam
-  reportRadioButtonDislike: Não gosto dele
+  reportRadioButtonDislike: Eu não gosto disso
   reportOwnProgram: Você não pode sinalizar o seu próprio projeto.
   reportAlready: Você já sinalizou este projeto.
   reportDone: Projeto reportado!
-  updateAppHeader: Atualizar App
+  updateAppHeader: Atualizar aplicativo
   updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
   btnClosePopup: Ok
   checkout_this_program: Confira este projeto do Catrobat
@@ -166,9 +166,9 @@ programs:
   deleted_popup_header: Apagado
   noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
   editDescription: Editar a Descrição do projeto
-  saveDescription: Salvar mudança na Descrição
+  saveDescription: Salvar
   editCredits: Editar Créditos do projeto
-  saveCredits: Salvar mudança nos Créditos
+  saveCredits: Salvar
   addComment: Escrever comentário
   thumbsUp: Joinha!
   smile: Sorriso!
@@ -249,7 +249,7 @@ profile:
   follower: Seguidor
   unfollowUser: Deixar de seguir usuário!
   followUser: Seguir usuário!
-  amountOfPrograms: Total de projetos
+  amountOfPrograms: Quantidade de projetos
   form:
     passwordTooShort: A nova senha deve conter no mínimo %length% caracteres.
     passwordTooLong: A nova senha deve conter no máximo %length% caracteres.
@@ -267,7 +267,7 @@ profile:
   programsOf: Projetos de
   changePicture: Alterar Imagem
   avatar:
-    noImage: No Image!
+    noImage: Nenhuma imagem!
     pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
     uploadError: Desculpe! Houve um problema durante o upload!
     noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
@@ -322,7 +322,7 @@ termsOfUse:
     item4: "Mantenha privadas suas informações pessoais. Não compartilhe seu endereço de e-mail, número de telefone ou outras informações de contato pessoais."
     item5: "Ajude a manter o site amigável. Se você sente que outros achariam um projeto ou um comentário significativo, insultante, muito violento, ou de outra forma inapropriado, basta clicar no botão 'reportar como inapropriado' e deixar uma breve explicação. A equipe Catrobat analisará o seu relatório e poderá remover qualquer projeto, comentário ou publicação."
   list3:
-    item1: "Ao fazer o upload de um projeto para nossos sites, você aceita e aceita colocar este trabalho sob certas licenças gratuitas de projetos enviados para o Catrobat. Semelhante às licenças gratuitas sob as quais o próprio sistema Catrobat está disponível para você, esses licenças gratuitas de projetos carregados no Catrobat dão a todos o direito de aprender com o trabalho previamente carregado por outros e de adaptar e remixar que trabalham para criar seus próprios novos jogos fascinantes, animações e outros projectos. Isso permite que todos \"fiquem nos ombros dos seus pares\", um deles sendo você! O seu trabalho beneficiará assim o mundo inteiro e permanecerá gratuito para todos usá-lo, um pouco parecido com o texto e imagens que contribuíram livremente para a Wikipédia por voluntários de todo o mundo. Pense nisso como seu presente à humanidade: você oferece a todos, e a todos os outros que enviam seu trabalho em nossos sites para você. Assim, um projeto carregado é um presente de grande valor que o seu dono está oferecendo a você gratuitamente, com a condição de que você participe da comunidade nos mesmos termos."
+    item1: "Ao fazer o upload de um projeto para nossos sites, você aceita colocar este trabalho sob certas licenças gratuitas de projetos enviados para o Catrobat. Semelhante às licenças gratuitas sob as quais o próprio sistema Catrobat está disponível para você, esses licenças gratuitas de projetos carregados no Catrobat dão a todos o direito de aprender com o trabalho previamente carregado por outros e de adaptar e remixar que trabalham para criar seus próprios novos jogos fascinantes, animações e outros projectos. Isso permite que todos \"fiquem nos ombros dos seus pares\", um deles sendo você! O seu trabalho beneficiará assim o mundo inteiro e permanecerá gratuito para todos usá-lo, um pouco parecido com o texto e imagens que contribuíram livremente para a Wikipédia por voluntários de todo o mundo. Pense nisso como seu presente à humanidade: você oferece a todos, e a todos os outros que enviam seu trabalho em nossos sites para você. Assim, um projeto carregado é um presente de grande valor que o seu dono está oferecendo a você gratuitamente, com a condição de que você participe da comunidade nos mesmos termos."
     item2: Não tem de aceitar o presente; se o fizerem, há certas regras que se aplicam. Os benefícios destas regras são que você pode aprender com o trabalho e usá-lo como base para fazer coisas ainda mais legais, você mesmo. que você pode então, sim. ., mais uma vez, envie para nossos sites como seus. Outro benefício é que essas licenças garantem que você não seja responsabilizado por quaisquer problemas decorrentes de terceiros por meio do uso do seu projeto.
     item3: "Uma condição adicional importante é de que você dê crédito aos autores em cujos trabalhos você se baseou para criar o seu. Ao mesmo tempo, trabalharemos pesado para que seu trabalho seja igualmente apreciado por aqueles que utilizaram-no como base, por meio de crédito ao nome escolhido, livremente, por você para te representar na comunidade Catrobat; e, também, por meio da oportunidade dada aos outros de expressar gratidão a você publicamente por ter partilhado seu trabalho com a comunidade e, principalmente, com eles."
     item4: 'Por favor, consulte %link-licenseUploaded% para termos e condições legais precisos.'
@@ -395,7 +395,7 @@ errors:
   description:
     rude: A descrição não pode conter palavras de baixo calão.
   credit:
-    rude: Credits must not contain rude words.
+    rude: Os créditos não devem conter palavras de mau gosto.
   country:
     blank: País está faltando.
     invalid: País inválido
@@ -452,7 +452,7 @@ api:
   registerUser:
     emailMissing: 'Email faltando'
     emailEmpty: 'O e-mail não pode estar em branco'
-    emailInvalid: 'Email invalid'
+    emailInvalid: 'E-mail inválido'
     emailAlreadyInUse: 'E-mail já em uso'
     usernameMissing: 'Usuário ausente'
     usernameTooShort: 'Nome de usuário muito curto'
@@ -579,19 +579,19 @@ codeview:
   sounds: 'Sons'
   globals: 'Globais'
   locals: 'Locais'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  globalVariables: 'Variáveis globais'
+  localVariables: 'Variáveis locais'
+  eventBricks: 'Blocos do Evento'
+  controlBricks: 'Controlar blocos'
+  motionBricks: 'Blocos de movimento'
+  soundBricks: 'Blocos de som'
+  looksBricks: 'Parece blocos'
+  penBricks: 'Tijolos de pano'
+  dataBricks: 'Blocos de dados'
+  specialBricks: 'Tijolos especiais'
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
+  title: "Estatísticas do Código"
+  error: "As estatísticas do código não podem ser exibidas."
   general: 'Gerais'
   bricks: 'Blocos'
   eventBricks: 'Evento'
@@ -641,7 +641,7 @@ catro-notifications:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link para o projeto copiado para área de transferência!
-  fail: Falha ao copiar link para área de transferência!
+  fail: Falha ao copiar link para área de transferência! :(
 next: Próximo
 previous: Anterior
 media-packages:

@@ -3,26 +3,26 @@
 localLanguage: Bahasa Inggris
 username: Nama pengguna
 password: Kata sandi
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: Buat kata sandi baru
+accountSettings: Pengaturan akun
 email: E-mail
 aboutPocketCode: Tentang Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: Tentang
+education: pendidikan
+chat: Obrolan dan forum
+others: Lainnya
 tutorials: Tutorial
 googlePlay: Google Play
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: Galeri Aplikasi Huawei
 passwordsNoMatch: Kata sandi tidak cocok.
 error: Kesalahan
 cancel: Batalkan
 report: Laporkan
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: Ya, hapus!
+reportIt: Ya, laporkan!
+areYouSure: Apakah kamu yakin?
+noWayOfReturn: Tidak ada cara untuk memulihkan tindakan Anda!
 download: Unduh
 description: Keterangan
 noDescription: Keterangan tidak tersedia.
@@ -41,77 +41,78 @@ more: 'lebih'
 less: 'kurang'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+more-information: 'Informasi lebih lanjut'
+less-information: 'Lebih sedikit informasi'
+ok: Baik
+clickToDownloadProgram: 'Untuk mengunduh proyek contoh, klik %link_start% di sini %link_end%.'
 registrationError: 'Nama pengguna atau alamat email sudah di gunakan.'
 notifications: 'Pemberitahuan'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'Pengikut'
+LikeNotifications: 'Reaksi'
 CommentNotifications: 'Komentar'
 RemixNotifications: 'Remix'
 wellDone: "Sudah selesai dilakukan dengan baik!"
 done: "Selesai!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Ya, hapus"
 cancelMessage: "Batalkan"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "Tidak dapat memberi otorisasi kepada pengguna"
 notificationsClearError: "Tidak bisa menandai pemberitahuan sebagai terbaca!"
 pleaseWait: "Mohon tunggu..."
 projects: "Program"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "Informasi masuk akun eksternal"
+oauthInfo: 'Anda baru saja menggunakan akun eksternal untuk masuk. Kami membuat nama pengguna acak untuk Anda. Jika Anda ingin mengubah nama pengguna atau membuat kata sandi baru untuk akun Anda, silakan buka halaman profil saya. Klik %link_start% di sini %link_end% untuk membuka halaman profil Anda'
+oauthHere: "sini"
+statistics: "Statistik"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Proyek apa yang direkomendasikan di sini?'
+      description: 'Semakin banyak reaksi (Suka, Tersenyumlah ...) yang diterima proyek Anda, semakin tinggi kemunculannya dalam daftar ini.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: Berikut
+  followers: Pengikut
+  follow: Mengikuti
+  username: Pengguna
+  followsMe: Ikuti saya
+  noFollowing: Anda tidak mengikuti siapa pun saat ini.
+  noFollowers: Anda tidak memiliki pengikut saat ini.
+  noOtherFollowing: Tidak ada pengguna yang mengikuti saat ini.
+  noOtherFollowers: Tidak ada pengguna pengikut saat ini.
+  followError: "Tidak dapat mengikuti pengguna yang diinginkan!"
+  unfollowError: "Tidak dapat berhenti mengikuti pengguna yang diinginkan!"
+  unfollowQuestion: "Anda yakin ingin berhenti mengikuti pengguna ini?"
+  unfollowButton: "Berhenti mengikuti %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
-    download: Download the app
-    statistics: More statistics
+    title: Selamat datang di %theme% Catrobat
+    subtitle: Buat cerita, game, dan lainnya...
+    subtitle_embroidery: Stich patters Anda sendiri di T-shirt, tas, celana, atau case smartphone Anda!
+    download: Unduh aplikasinya
+    statistics: Lebih banyak statistik
   featured: Fitur
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  example: Contoh
+  newest: Proyek terbaru
+  recommended: Proyek yang direkomendasikan
+  scratchremixes: Gores remix
+  noPrograms: Saat ini tidak ada proyek.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Apakah kamu yakin
+    Anda yakin ingin menghapus "%programName%"?
+    Tidak ada cara untuk memulihkan tindakan Anda!
+    Ya, hapus!
+    Membatalkan
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
+
+    Apakah kamu yakin
+    Jika Anda menyetel '%programName%' menjadi pribadi, ini tidak akan terlihat atau ditemukan oleh pengguna lain.
+    Anda masih dapat membagikan tautan proyek Anda dengan teman-teman Anda. Anda dapat mengaktifkan visibilitas dengan mengetuk ikon gembok.
+    Jika Anda menyetel "%programName%" ke publik, itu dapat dilihat dan ditemukan oleh pengguna lain.
+    Ya, setel ke publik
+    Ya, setel ke pribadi
+    Tidak
+  reportCommentConfirmation: Apakah Anda yakin ingin melaporkan komentar ini?
   deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
     Account deletion?
@@ -176,7 +177,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Reaksi
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: Remix
@@ -679,10 +680,10 @@ checkOutProject: 'Check out this project:'
 community: 'Komunitas Catrobat'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
+  recent: Proyek terbaru
   random: Random projects
   most_viewed: Paling banyak dilihat
   most_downloaded: Paling banyak diunduh
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: Gores remix
+  recommended: Proyek yang direkomendasikan
