@@ -51,7 +51,6 @@ class ProgramListSerializer
     }
 
     $programs = $result->getPrograms();
-    $details = $result->getShowDetails();
     $request = $this->request_stack->getCurrentRequest();
 
     $retArray = [];
@@ -69,34 +68,32 @@ class ProgramListSerializer
         }
         $new_program['ProjectId'] = $program->getId();
         $new_program['ProjectName'] = $program->getName();
-        if ($details) {
-          $new_program['ProjectNameShort'] = $program->getName();
-          $new_program['Author'] = $program->getUser()->getUserName();
-          $new_program['Description'] = $program->getDescription();
-          $new_program['Version'] = $program->getCatrobatVersionName();
-          $new_program['Views'] = $program->getViews();
-          $new_program['Downloads'] = $program->getDownloads();
-          $new_program['Private'] = $program->getPrivate();
-          $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
-          $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
-            ->getTimestamp());
-          if ($example) {
-            $new_program['ScreenshotBig'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
-            $new_program['ScreenshotSmall'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
-          } else {
-            $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
-            $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
-          }
-          $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
-            'theme' => $this->parameter_bag->get('umbrellaTheme'),
-            'id' => $program->getId(),
-          ]), '/');
-          $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
-            'theme' => $this->parameter_bag->get('umbrellaTheme'),
-            'id' => $program->getId(),
-          ]), '/');
-          $new_program['FileSize'] = $program->getFilesize() / 1_048_576;
+        $new_program['ProjectNameShort'] = $program->getName();
+        $new_program['Author'] = $program->getUser()->getUserName();
+        $new_program['Description'] = $program->getDescription();
+        $new_program['Version'] = $program->getCatrobatVersionName();
+        $new_program['Views'] = $program->getViews();
+        $new_program['Downloads'] = $program->getDownloads();
+        $new_program['Private'] = $program->getPrivate();
+        $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
+        $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
+          ->getTimestamp());
+        if ($example) {
+          $new_program['ScreenshotBig'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
+          $new_program['ScreenshotSmall'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);
+        } else {
+          $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
+          $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
         }
+        $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', [
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
+          'id' => $program->getId(),
+        ]), '/');
+        $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
+          'id' => $program->getId(),
+        ]), '/');
+        $new_program['FileSize'] = $program->getFilesize() / 1_048_576;
         $retArray['CatrobatProjects'][] = $new_program;
       }
     }
@@ -118,10 +115,7 @@ class ProgramListSerializer
     $event->setResponse(JsonResponse::create($retArray));
   }
 
-  /**
-   * @param mixed $route
-   */
-  public function generateUrl($route, array $parameters = []): string
+  public function generateUrl(string $route, array $parameters = []): string
   {
     return $this->router->generate($route, $parameters);
   }

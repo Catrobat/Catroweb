@@ -9,16 +9,6 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
   self.confirmButtonText = confirmButtonText
 
   self.init = function () {
-    /* OLD ProjectLoader Recommended Projects
-    take a look at old ProjectLoader.js at revision cc2019af76e735f73fcaae0fc2c4365843feaab3
-
-    TWIG: recommendedByPageId = '{{ constant('App\\Catrobat\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }}'
-    TWIG: pathGeneralProjects = '{{ path('api_recsys_general_projects') }}'
-
-    const recommended = new ProjectLoader('#recommended', pathGeneralProjects, undefined, recommendedByPageId)
-    recommended.init()
-     */
-
     const $homeProjects = $('#home-projects')
     $('.project-list', $homeProjects).each(function () {
       const $t = $(this)
