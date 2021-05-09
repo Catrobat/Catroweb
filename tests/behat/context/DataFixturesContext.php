@@ -3,8 +3,9 @@
 namespace Tests\behat\context;
 
 use App\Catrobat\Services\TestEnv\SymfonySupport;
-use App\Entity\AchievementNotification;
-use App\Entity\AnniversaryNotification;
+use App\Commands\Helpers\CommandHelper;
+use App\Entity\Achievements\Achievement;
+use App\Entity\Achievements\UserAchievement;
 use App\Entity\BroadcastNotification;
 use App\Entity\CatroNotification;
 use App\Entity\ClickStatistic;
@@ -1141,12 +1142,6 @@ class DataFixturesContext implements KernelAwareContext
           $program = $this->getProgramManager()->find($notification['program_id']);
           $to_create = new NewProgramNotification($user, $program);
           break;
-        case 'anniversary':
-          $to_create = new AnniversaryNotification($user, 'title_deprecated', $notification['message'], 'price');
-          break;
-        case 'achievement':
-          $to_create = new AchievementNotification($user, 'title_deprecated', $notification['message'], 'image_path');
-          break;
         case 'broadcast':
           $to_create = new BroadcastNotification($user, 'title_deprecated', $notification['message']);
           break;
@@ -1298,5 +1293,78 @@ class DataFixturesContext implements KernelAwareContext
   {
     $users = $this->getUserManager()->findAll();
     Assert::assertCount($number_of_users, $users);
+  }
+
+  /**
+   * @Given /^there are achievements:$/
+   */
+  public function thereAreAchievements(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      $achievement = (new Achievement())
+        ->setInternalTitle($config['internal_title'])
+        ->setInternalDescription($config['internal_description'] ?? '')
+        ->setTitleLtmCode($config['title_ltm_code'] ?? '')
+        ->setDescriptionLtmCode($config['description_ltm_code'] ?? '')
+        ->setBadgeSvgPath($config['badge_svg_path'] ?? '')
+        ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? '')
+        ->setBannerSvgPath($config['banner_svg_path'] ?? '')
+        ->setBannerColor($config['banner_color'] ?? '')
+        ->setEnabled($config['enabled'] ?? true)
+        ->setPriority($config['priority'] ?? 0)
+            ;
+      $this->getManager()->persist($achievement);
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are user achievements:$/
+   *
+   * @throws Exception
+   */
+  public function thereAreUserAchievements(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findUserByUsername($config['user']);
+      $achievement = $this->getAchievementManager()->findAchievementByInternalTitle($config['achievement']);
+      $user_achievement = (new UserAchievement())
+        ->setUser($user)
+        ->setAchievement($achievement)
+        ->setSeenAt(new DateTime($config['seen_at']))
+        ->setUnlockedAt(new DateTime($config['unlocked_at']))
+            ;
+      $this->getManager()->persist($user_achievement);
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Then there should be :number_of_achievements achievements in the database
+   */
+  public function thereShouldBeAchievementsInTheDatabase(int $number_of_achievements): void
+  {
+    $achievements = $this->getAchievementManager()->findAllAchievements();
+    Assert::assertCount($number_of_achievements, $achievements);
+  }
+
+  /**
+   * @Then there should be :number_of_user_achievements user achievements in the database
+   */
+  public function thereShouldBeUserAchievementsInTheDatabase(int $number_of_user_achievements): void
+  {
+    $user_achievements = $this->getAchievementManager()->findAllUserAchievements();
+    Assert::assertCount($number_of_user_achievements, $user_achievements);
+  }
+
+  /**
+   * @Given I run the update achievements command
+   */
+  public function iRunTheUpdateAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+            ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements'
+        );
   }
 }

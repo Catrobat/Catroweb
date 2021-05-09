@@ -29,6 +29,7 @@ use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
 use App\Entity\UserRemixSimilarityRelation;
+use App\Manager\AchievementManager;
 use App\Repository\CatroNotificationRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FlavorRepository;
@@ -202,6 +203,11 @@ trait SymfonySupport
   public function getRouter(): Router
   {
     return $this->kernel->getContainer()->get('router');
+  }
+
+  public function getAchievementManager(): AchievementManager
+  {
+    return $this->kernel->getContainer()->get(AchievementManager::class);
   }
 
   /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Commands\Create;
+namespace App\Commands\DBUpdater;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class CreateConstantTagsCommand extends Command
+class UpdateTagsCommand extends Command
 {
   protected static $defaultName = 'catrobat:create:tags';
   private OutputInterface $output;

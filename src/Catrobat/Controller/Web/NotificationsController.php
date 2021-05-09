@@ -3,7 +3,6 @@
 namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\CatroNotificationService;
-use App\Entity\AnniversaryNotification;
 use App\Entity\CatroNotification;
 use App\Entity\CommentNotification;
 use App\Entity\FollowNotification;
@@ -268,7 +267,6 @@ class NotificationsController extends AbstractController
             'remixed_program_name' => null,
             'type' => 'reaction',
             'message' => $translator->trans('catro-notifications.like.message', [], 'catroweb'),
-            'prize' => null,
             'seen' => $notification->getSeen(), ]);
 
         continue;
@@ -291,7 +289,6 @@ class NotificationsController extends AbstractController
               'remixed_program_name' => null,
               'type' => 'follow',
               'message' => $translator->trans('catro-notifications.follow.message', [], 'catroweb'),
-              'prize' => null,
               'seen' => $notification->getSeen(), ]);
         } else {
           array_push($fetched_notifications,
@@ -305,7 +302,6 @@ class NotificationsController extends AbstractController
               'remixed_program_name' => null,
               'type' => 'program',
               'message' => $translator->trans('catro-notifications.program-upload.message', [], 'catroweb'),
-              'prize' => null,
               'seen' => $notification->getSeen(), ]);
         }
         continue;
@@ -325,7 +321,6 @@ class NotificationsController extends AbstractController
             'remixed_program_name' => null,
             'type' => 'comment',
             'message' => $translator->trans('catro-notifications.comment.message', [], 'catroweb'),
-            'prize' => null,
             'seen' => $notification->getSeen(), ]);
         continue;
       }
@@ -345,15 +340,10 @@ class NotificationsController extends AbstractController
             'remixed_program_name' => $notification->getProgram()->getName(),
             'type' => 'remix',
             'message' => $translator->trans('catro-notifications.remix.message', [], 'catroweb'),
-            'prize' => null,
             'seen' => $notification->getSeen(), ]);
         continue;
       }
       if ('all' === $type) {
-        $prize = null;
-        if ($notification instanceof AnniversaryNotification) {
-          $prize = $notification->getPrize();
-        }
         array_push($fetched_notifications,
           ['id' => $notification->getId(),
             'from' => null,
@@ -365,7 +355,6 @@ class NotificationsController extends AbstractController
             'remixed_program_name' => null,
             'type' => 'other',
             'message' => $notification->getMessage(),
-            'prize' => $prize,
             'seen' => $notification->getSeen(), ]);
       }
     }
