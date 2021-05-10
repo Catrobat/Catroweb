@@ -60,7 +60,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "dvdoug/behat-code-coverage": "^5.0",
         "friendsofphp/php-cs-fixer": "^3.0",
-        "phpstan/phpstan": "0.12.85",
+        "phpstan/phpstan": "0.12.86",
         "phpstan/phpstan-doctrine": "0.12.33",
         "phpstan/phpstan-phpunit": "0.12.18",
         "phpstan/phpstan-symfony": "0.12.32",
