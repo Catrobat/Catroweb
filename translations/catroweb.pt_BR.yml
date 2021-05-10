@@ -531,7 +531,7 @@ gamejam:
     text: |
       Mas por que não criar o seu próprio programa?!
       Faça parte do %gamejamtag%
-tag-text: Marcações
+tag-text: Tags
 extenstion-text: Extensões
 tags:
   constant:

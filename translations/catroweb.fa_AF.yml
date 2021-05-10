@@ -234,63 +234,63 @@ passwordRecovery:
     تیم کاتروبات (Catrobat) شما. 
 
 profile:
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  edit: پروفایل خودت را تنظیم کن
+  saveChanges: تغیرات را زخیره کن
+  newPass: رمز عبور جدید
+  repeatPass: رمز عبور را تکرار کنید
+  oldPass: رمز عبور قدیمی
+  firstEmail: اولین ایمیل من
+  secondEmail: ایمیل دوم من
+  myPrograms: پروژه های من
+  follows: دنبال می شود
+  follower: دنبال کننده
+  unfollowUser: این کاربر را دیگر دنبال نکن!
+  followUser: این کاربر را دنبال کن!
+  amountOfPrograms: مقدار پروژه ها
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  changePicture: Change picture
+    passwordTooShort: رمز عبور جدید باید حداقل %length% کاراکتر داشته باشد.
+    passwordTooLong: رمز عبور جدید می تواند حداکثر %length% کاراکتر داشته باشد.
+    passwordIsUsername: رمز عبور باید از نام کاربری متفاوت باشد.
+    passwordWrong: رمز اشتباه
+    emailNotValid: این آدرس ایمیل معتبر نیست
+    emailMissing: خطا هنگام به روز رسانی این آدرس ایمیل. شما باید حداقل یک آدرس ایمیل معتبر داشته باشید.
+    emailExists: این آدرس ایمیل در حال حاضر وجود دارد.
+    usernameNotValid: این نام کاربری معتبر نیست.
+    usernameMissing: شما باید یک نام کاربری داشته باشید.
+    usernameExists: این نام کاربری در حال حاضر وجود دارد.
+    usernameContainsEmail: نام کاربری نباید حاوی یک آدرس ایمیل باشد.
+    submitSuccess: ذخیره شد!
+  reallyDeleteProgram: آیا واقعا میخواهید پروژه خود را حذف کنید
+  programsOf: پروژه های
+  changePicture: تغییر تصویر
   avatar:
     noImage: No Image!
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
-  goToScratchProfile: Profile on Scratch
+    pictureTooLarge: تصویر انتخابی شما خیلی بزرگ است، لطفا از تصاویر بزرگتر از ۵ مگابایت استفاده نکنید.
+    uploadError: با متاسف، در طول آپلود یک مشکل رخ داد!
+    noSupport: این نوع تصویر پشتیبانی نمی شود، لطفا یک تصویر دیگر را امتحان کنید.
+  goToScratchProfile: پروفیل بر روی اسکریج (Scratch)
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
+  editProfile: تنظیم پروفایل
+  edit: ويرايش
+  done: ﺍﻧﺠﺎﻡ شد
+  checkMail: یک ایمیل به آدرس ایمیل شما ارسال شد. لطفا صندوق پستی خود را بررسی کنید.
+  passwordUpdated: رمز عبور شما با موفقیت به روز شد.
+  avatar: آواتار 
   email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
+  editAvatar: تغیر آواتار
+  editUsername: تغیر نام کاربری
+  editPassword: تغیر رمز
+  editCountry: تغیر کشور
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  deleteAccountText: آیا مطمئن هستید که می خواهید حساب خود را حذف کنید؟ این پروژه ها و نظرات آپلود شده را حذف خواهد کرد!
+  editAccountSettings: تنظیمات حساب
+  notChangeVisibility: نمی تواند دید را تغییر دهد
+  notChangeVisibilityReason: نسخه زبان پروژه شما خیلی زیاد است و بنابراین نمی توان آن را قابل مشاهده کرد.
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  link: 'مجوز برای بازی'
+  title: 'مجوز بازی - اعتبار  دهید و به اشتراک گذارید'
+  text1: تصور کنید که هر پروژه کاتروبات (Catrobat) یک کیک است، یک کیک بسیار ویژه ای است که با دستور آشپزی آن همراه است (بلوک های برنامه نویسی). همه اعضای جامعه کاتروبات (Catrobat) کیک خود را همراه با دستور آشپزی های خود به اشتراک می گذارند. این به این معنی است که شما می توانید از کیک لذت ببرید و یاد بگیرید چگونه آنها را خودتان بسازید!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
@@ -350,14 +350,14 @@ menu:
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  followersAndFollowing: دنبال کننده
 login:
   login: Login
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
   recoverPass: Recover password
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  recoverPassSend: یک ایمیل به آدرس ایمیل شما ارسال شد. لطفا صندوق پستی خود را بررسی کنید.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
@@ -382,7 +382,7 @@ errors:
   username:
     blank: Username must not be blank
     invalid: Your username is invalid
-    exists: This username already exists.
+    exists: این نام کاربری در حال حاضر وجود دارد.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
     size: The username must have at least 3 character and not more than 180
@@ -399,7 +399,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: این آدرس ایمیل در حال حاضر وجود دارد.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
