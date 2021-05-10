@@ -570,7 +570,7 @@ codeview:
   hideStatistics: 'Dölj kodstatistik'
   cantDisplayCode: "Code can't be displayed"
   cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
+  totalNumberOf: 'Totalt antal'
   scenes: 'Scener'
   scripts: 'Skript'
   bricks: 'Klossar'
@@ -683,6 +683,6 @@ category:
   random: Slumpmässiga projekt
   most_viewed: Mest visade
   most_downloaded: Mest nedladdningar
-  example: Example
+  example: Exempel
   scratch: Scratch remixes
   recommended: Rekommenderade projekt
