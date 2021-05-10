@@ -4,4 +4,10 @@
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
+
+  &:hover {
+    .mdc-circular-progress__indeterminate-circle-graphic {
+      stroke: #fff;
+    }
+  }
 }
