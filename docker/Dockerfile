@@ -4,7 +4,7 @@ COPY composer.json composer.lock ./
 RUN composer install --no-scripts --prefer-dist
 
 # Use node image for better caching
-FROM node:15 AS node-build
+FROM node:16 AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install && npm install grunt
