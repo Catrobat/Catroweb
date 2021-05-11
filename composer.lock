@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6f3c610f3d309d54a6b7a91f22a4183",
+    "content-hash": "e676332de0ed48c929529fcbecdaf0fd",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -14859,22 +14859,22 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "0.12.32",
+            "version": "0.12.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "f3fb189151b3a2cd99dbc5e7ae2b493d99111bf7"
+                "reference": "7f47026c69c9f2ef8d6b1814bd17cc86ea768e9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/f3fb189151b3a2cd99dbc5e7ae2b493d99111bf7",
-                "reference": "f3fb189151b3a2cd99dbc5e7ae2b493d99111bf7",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/7f47026c69c9f2ef8d6b1814bd17cc86ea768e9d",
+                "reference": "7f47026c69c9f2ef8d6b1814bd17cc86ea768e9d",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "php": "^7.1 || ^8.0",
-                "phpstan/phpstan": "^0.12.85"
+                "phpstan/phpstan": "^0.12.86"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
@@ -14923,9 +14923,9 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/0.12.32"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/0.12.33"
             },
-            "time": "2021-05-04T17:47:30+00:00"
+            "time": "2021-05-05T14:52:06+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
