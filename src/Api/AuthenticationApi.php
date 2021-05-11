@@ -100,10 +100,27 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
 
   public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement authenticationUpgradePost() method.
+    $deprecated_token = $upgrade_token_request->getUploadToken() ?? '';
+    if (empty($deprecated_token)) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+      return null;
+    }
 
-    return null;
+    $user = $this->facade->getLoader()->findUserByUploadToken($deprecated_token);
+
+    if (is_null($user)) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $token = $this->facade->getProcessor()->createJWTByUser($user);
+    $responseCode = Response::HTTP_OK;
+
+    return (new JWTResponse())
+      ->setToken($token)
+      ->setRefreshToken('ToDo')
+    ;
   }
 }
