@@ -132,6 +132,7 @@ const _InternalRemixGraph = function () {
         text: self.remixGraphTranslations.programNotAvailableErrorDescription,
         icon: 'error',
         showCancelButton: false,
+        allowOutsideClick: false,
         confirmButtonText: self.remixGraphTranslations.ok,
         closeOnConfirm: true,
         customClass: {
