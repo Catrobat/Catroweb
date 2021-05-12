@@ -666,7 +666,7 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. Tutti i diritti riservati.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Tutti i diritti riservati.'
 agree: Acconsento
 disagree: Non sono d'accordo
 profileLoader:
