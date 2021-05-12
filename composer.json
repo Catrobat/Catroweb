@@ -62,7 +62,7 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "0.12.86",
         "phpstan/phpstan-doctrine": "0.12.33",
-        "phpstan/phpstan-phpunit": "0.12.18",
+        "phpstan/phpstan-phpunit": "0.12.19",
         "phpstan/phpstan-symfony": "0.12.33",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.0",
