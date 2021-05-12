@@ -37,6 +37,7 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
       html: getReportDialogHtml(error, oldReason, oldCategory),
       focusConfirm: false,
       showCancelButton: true,
+      allowOutsideClick: false,
       customClass: {
         confirmButton: 'btn btn-primary',
         cancelButton: 'btn btn-outline-primary'
@@ -100,7 +101,8 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
           customClass: {
             confirmButton: 'btn btn-primary'
           },
-          buttonsStyling: false
+          buttonsStyling: false,
+          allowOutsideClick: false
         }).then(function () {
           window.location.href = '/'
         })
@@ -111,7 +113,8 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
           customClass: {
             confirmButton: 'btn btn-primary'
           },
-          buttonsStyling: false
+          buttonsStyling: false,
+          allowOutsideClick: false
         })
       }
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
@@ -122,7 +125,8 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
         customClass: {
           confirmButton: 'btn btn-primary'
         },
-        buttonsStyling: false
+        buttonsStyling: false,
+        allowOutsideClick: false
       })
     })
   }

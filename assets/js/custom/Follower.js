@@ -27,6 +27,7 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
       title: self.unfollowQuestion,
       icon: 'question',
       showCancelButton: true,
+      allowOutsideClick: false,
       confirmButtonText: self.unfollowButton.replace('%username%', username),
       cancelButtonText: self.cancelButton,
       customClass: {
@@ -103,7 +104,8 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
       customClass: {
         confirmButton: 'btn btn-primary'
       },
-      buttonsStyling: false
+      buttonsStyling: false,
+      allowOutsideClick: false
     })
   }
 }

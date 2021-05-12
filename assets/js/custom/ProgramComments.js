@@ -139,6 +139,7 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
       html: text + '<br><br>' + noWayOfReturn,
       icon: 'warning',
       showCancelButton: true,
+      allowOutsideClick: false,
       customClass: {
         confirmButton: 'btn btn-primary',
         cancelButton: 'btn btn-outline-primary'
@@ -170,7 +171,8 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         customClass: {
           confirmButton: 'btn btn-primary'
         },
-        buttonsStyling: false
+        buttonsStyling: false,
+        allowOutsideClick: false
       }
     ).then(() => {
       if (callback) {

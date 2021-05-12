@@ -93,6 +93,7 @@ function Index (clickStats, homepageClickStats, confirmButtonText) {
               title: title,
               html: informationText,
               showCancelButton: false,
+              allowOutsideClick: false,
               confirmButtonText: okTranslation,
               icon: 'info',
               customClass: {
