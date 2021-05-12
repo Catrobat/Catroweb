@@ -231,7 +231,7 @@ passwordRecovery:
     <br>
     ਤੁਸੀਂ <a href=%appplication_url%> ਪਾਕੇਟ ਕੋਡ </a> ਕਮਿ communityਨਿਟੀ ਤੱਕ ਪਹੁੰਚਣ ਲਈ ਕਿਸੇ ਵੀ ਸਮੇਂ ਆਪਣਾ ਉਪਭੋਗਤਾ ਨਾਮ ਅਤੇ ਪਾਸਵਰਡ ਵਰਤ ਸਕਦੇ ਹੋ. <br>
     ਅਜਿਹਾ ਕਰਨ ਲਈ, ਹੇਠ ਦਿੱਤੇ ਪੇਜ ਤੇ ਜਾਓ: <a href=%loginPage%> ਲੌਗਇਨ ਪੇਜ </a> <br>
-    ਆਪਣੇ ਪ੍ਰੋਫਾਈਲ ਵੇਰਵੇ ਨੂੰ ਸੰਪਾਦਿਤ ਕਰਨ ਲਈ, ਇਸ <a href=%profilePage%> ਪੇਜ </a> ਤੇ ਜਾਓ
+    ਆਪਣੇ ਪ੍ਰੋਫਾਈਲ ਵੇਰਵੇ ਨੂੰ ਸੰਪਾਦਿਤ ਕਰਨ ਲਈ, ਇਸ <a href=%profilePage%> ਪੇਜ </a><br> ਤੇ ਜਾਓ
     <br>
     ਸ਼ੁਭਕਾਮਨਾਵਾਂ, <br>
     ਤੁਹਾਡੀ ਕੈਟ੍ਰੋਬੈਟ ਟੀਮ.
@@ -625,23 +625,23 @@ privacy-policy:
   disagree-text: ਮਨਜ਼ੂਰੀ ਤੋਂ ਬਿਨਾਂ, ਅਸੀਂ ਕੋਈ ਖਾਤਾ ਨਹੀਂ ਬਣਾ ਸਕਦੇ ਪਰ ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਅਜੇ ਵੀ ਪਹੁੰਚਯੋਗ ਹਨ.
 catro-notifications:
   markAsRead: "ਪੜ੍ਹੇ ਦੇ ਤੌਰ ਤੇ ਮਾਰਕ ਕਰੋ"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  noFollowers: "ਅਜਿਹਾ ਲਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਅਨੁਸਰਣਕ ਸੂਚਨਾਵਾਂ ਨਹੀਂ ਹਨ."
+  noComments: "ਅਜਿਹਾ ਲਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਟਿੱਪਣੀ ਸੂਚਨਾ ਨਹੀਂ ਹੈ."
+  noReactions: "ਇੰਜ ਜਾਪਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਪ੍ਰਤੀਕ੍ਰਿਆ ਸੂਚਨਾ ਨਹੀਂ ਹੈ."
+  noRemixes: "ਅਜਿਹਾ ਲਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਰੀਮਿਕਸ ਸੂਚਨਾ ਨਹੀਂ ਹੈ."
   comment:
-    message: '%user_link% commented on %program_link%.'
+    message: '%user_link% ਨੇ %program_link% ਤੇ ਟਿੱਪਣੀ ਕੀਤੀ.'
   like:
-    message: '%user_link% reacted to %program_link%.'
+    message: '%user_link%ਨੂੰ ਪ੍ਰਤੀਕਰਮ ਦਿੱਤਾ %program_link%'
   follow:
-    message: '%user_link% is now following you.'
+    message: '%user_link% ਹੁਣ ਤੁਹਾਡੇ ਮਗਰ ਆ ਰਿਹਾ ਹੈ.'
   program-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% ਇੱਕ ਨਵੀਂ ਖੇਡ ਬਣਾਈ %program_link%'
   remix:
-    message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
+    message: '%user_link% ਇੱਕ ਰੀਮਿਕਸ ਬਣਾਇਆ %program_link% ਤੁਹਾਡੀ ਖੇਡ ਦਾ %remix_program_link%'
 clipboard:
-  success: Link to project copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
+  success: ਪ੍ਰੋਜੈਕਟ ਦਾ ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ!
+  fail: ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਲਿੰਕ ਦੀ ਨਕਲ ਕਰਨ ਵਿੱਚ ਅਸਫਲ! :(
 next: ਅਗਲਾ
 previous: ਪਿਛਲਾ
 media-packages:
@@ -661,9 +661,9 @@ flavor:
   pocketalice: ਜੇਬ ਐਲੀਸ
   pocketgalaxy: ਗਲੈਕਸੀ ਜੈਮ
   phirocode: ਫੀਰੋਕੋਡ
-  luna: Luna & Cat
-  create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+  luna: ਲੂਣਾ ਅਤੇ ਬਿੱਲੀ
+  create@school: '@ਸਕੂਲ ਬਣਾਓ'
+copyright: 'ਕਾਪੀਰਾਈਟ &copy; %year% <a href="http://www.catrobat.org"> ਕੈਟ੍ਰੋਬੈਟ </a>. ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ.'
 agree: ਸਹਿਮਤ
 disagree: ਅਸਹਿਮਤ
 profileLoader:
@@ -674,15 +674,15 @@ share:
   text: 'ਸਾਂਝਾ ਕਰੋ'
   error: 'ਸਾਂਝਾ ਅਸਫਲ'
   success: 'ਸਾਂਝਾ ਕਰੋ ਸਫਲ'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
+copy: 'ਲਿੰਕ ਨੂੰ ਕਾਪੀ ਕਰੋ'
+checkOutProject: 'ਇਸ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਵੇਖੋ:'
 community: 'ਕੈਟ੍ਰੋਬੈਟ ਕਮਿ communityਨਿਟੀ'
-back_to_app: 'Exit community'
+back_to_app: 'ਬੰਦ ਕਰੋ ਭਾਈਚਾਰੇ'
 category:
   recent: ਨਵੇਂ ਪ੍ਰੋਜੈਕਟ
   random: ਬੇਤਰਤੀਬੇ ਪ੍ਰੋਜੈਕਟ
   most_viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
   most_downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
-  example: Example
+  example: ਉਦਾਹਰਣ
   scratch: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
   recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ

@@ -317,7 +317,7 @@ termsOfUse:
     item3: com todos os níveis de experiência
   list2:
     item1: Seja respeitoso. Ao compartilhar projetos, lembre-se de que pessoas de diferentes idades e origens verão suas contribuições.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "De crédito. Sinta-se livre para fazer versões modificadas de projetos de outras pessoas - só tenha certeza de dar crédito para elas. Um bom lugar para dar crédito é na seção de créditos e notas do seu projeto. Por favor veja o parágrafo abaixo dessa lista para detalhes sobre como modificar projetos de outros usuários."
     item3: "Seja honesto. Não finja ser outra pessoa nem tente enganar a comunidade."
     item4: "Mantenha privadas suas informações pessoais. Não compartilhe seu endereço de e-mail, número de telefone ou outras informações de contato pessoais."
     item5: "Ajude a manter o site amigável. Se você sente que outros achariam um projeto ou um comentário significativo, insultante, muito violento, ou de outra forma inapropriado, basta clicar no botão 'reportar como inapropriado' e deixar uma breve explicação. A equipe Catrobat analisará o seu relatório e poderá remover qualquer projeto, comentário ou publicação."
@@ -470,7 +470,7 @@ api:
   projectsPost:
     invalid_checksum: 'Checksum inválido. Tente fazer upload novamente!'
     upload_error: 'Erro ao enviar. Tente enviar novamente!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    creating_error: 'Erro em criar a entidade do projeto. Tente fazer o upload novamente!'
 #languages and countries
 language:
   arabic: Árabe
@@ -522,7 +522,7 @@ ci:
   pending: Gerando Apk
   download: Baixar Apk
 gamejam:
-  nojam: Desculpe, não há game jams disponíveis
+  nojam: Desculpa, não há game jams disponíveis agora
   submit: Enviar para %gamejamname%
   whats: Qual o %gamejamname%?
   submitown:
@@ -550,7 +550,7 @@ admin:
     removableObjects: Objetos removíveis
 recommender:
   similarPrograms: Projetos similares
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Usuários que baixaram esse projeto também baixaram
   moreFromThisUser: Mais de %username%
 pmd:
   submitBtn: Enviar seu projeto
@@ -627,18 +627,18 @@ catro-notifications:
   markAsRead: "Marcar como lido"
   noFollowers: "Parece que você não tem nenhuma notificação de seguidores."
   noComments: "Parece que você não tem nenhuma notificação para comentários."
-  noReactions: "Parece que você não tem nenhuma notificação de reação."
-  noRemixes: "Parece que você não tem nenhuma notificação de remixe."
+  noReactions: "Parece que você não tem notificações de reações."
+  noRemixes: "Parece que você não tem notificações de remixes."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% comentou no seu projeto %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% reagiu no seu projeto %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% está te seguindo.'
   program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+    message: '%user_link% criou um novo projeto %program_link%'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% fez um remix %program_link%, do seu projeto %remix_program_link%.'
 clipboard:
   success: Link para o projeto copiado para área de transferência!
   fail: Falha ao copiar link para área de transferência! :(
@@ -646,7 +646,7 @@ next: Próximo
 previous: Anterior
 media-packages:
   title: Mídia-Pacotes
-  description: Nas seguintes categorias, você pode encontrar atores e objetos adicionais para adicionar a você projetos PocketCode.
+  description: Nas seguintes categorias, você pode encontrar atores e objetos para adicionar a seus projetos do Pocket Code.
   thumb-size:
     description: Tamanho da visualização
     sm: pequeno
