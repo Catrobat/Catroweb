@@ -6,29 +6,25 @@
     <link rel="stylesheet" href="{{ asset('css/modules/jquery.contextMenu.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('vis/vis.min.css') }}"/> {# We need acces to all images #}
     <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/remixgraph.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/loadinganimation.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/modules/animate.min.css') }}"/>
 {% endblock %}
 
 {% block body %}
 
-    <div id="remix-graph-modal">
-        <div id="remix-graph-layer" class="modal-content">
-            <i class="material-icons" id="remix-graph-spinner" style="margin: auto">
+    <div id="remix-graph-container">
+        <div id="remix-graph-layer">
+            <div id="remix-graph-spinner">
                 {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'remix-graph-spinner' ~ suffix|default()} %}
-            </i>
+            </div>
         </div>
     </div>
-    <a id="remix-graph-modal-link" href="#remix-graph-modal"></a>
 
 {% endblock %}
 
 
 {% block js %}
-    <script src=" {{ asset( 'js/LoadingAnimation.min.js') }}"></script>
     <script src=" {{ asset( 'js/modules/jquery.contextMenu.min.js') }}"></script>
     <script src=" {{ asset( 'js/modules/jquery.ui.position.min.js') }}"></script>
-    <script src=" {{ asset( 'js/modules/animatedModal.min.js') }}"></script>
     <script src=" {{ asset( 'vis/vis.min.js') }}"></script>
     <script src=" {{ asset( 'js/remixgraph.configuration.min.js') }}"></script>
     <script src=" {{ asset( 'js/remixgraph.builder.min.js') }}"></script>
