@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Gravit.io --><svg class="medal" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="isolation:isolate" viewBox="436.602 11.824 472.795 416.352" width="472.795pt" height="416.352pt">
+    <g style="isolation:isolate" id="Ebene 0">
+        <g id="medal">
+            <defs>
+                <filter id="Ee266sHgPYFKgPG11064VfOmn3TNqmMc" x="-200%" y="-200%" width="400%" height="400%"
+                    filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feGaussianBlur xmlns="http://www.w3.org/2000/svg" in="SourceGraphic"
+                        stdDeviation="2.146804531419514" />
+                    <feOffset xmlns="http://www.w3.org/2000/svg" dx="-11" dy="0" result="pf_100_offsetBlur" />
+                    <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.65" />
+                    <feComposite xmlns="http://www.w3.org/2000/svg" in2="pf_100_offsetBlur" operator="in"
+                        result="pf_100_dropShadow" />
+                    <feBlend xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_dropShadow" mode="normal"
+                        result="_out_fzdWPsmEi2tEByPjTU7qic0pJvFMvcuH" />
+                    <feOffset xmlns="http://www.w3.org/2000/svg" in="_out_fzdWPsmEi2tEByPjTU7qic0pJvFMvcuH" dx="14"
+                        dy="0" />
+                    <feGaussianBlur xmlns="http://www.w3.org/2000/svg" stdDeviation="2.146804531419514"
+                        result="pf_101_offsetBlur" />
+                    <feComposite xmlns="http://www.w3.org/2000/svg" in="_out_fzdWPsmEi2tEByPjTU7qic0pJvFMvcuH"
+                        in2="pf_101_offsetBlur" result="pf_101_inverse" operator="out" />
+                    <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.5"
+                        result="pf_101_color" />
+                    <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_color" in2="pf_101_inverse" operator="in"
+                        result="pf_101_shadow" />
+                    <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_shadow"
+                        in2="_out_fzdWPsmEi2tEByPjTU7qic0pJvFMvcuH" operator="over"
+                        result="_out_fmxfMrM7OkG4nBVgXixy1Da0CyVVMyzK" />
+                    <feMerge>
+                        <feMergeNode in="_out_fmxfMrM7OkG4nBVgXixy1Da0CyVVMyzK" />
+                    </feMerge>
+                </filter>
+            </defs>
+            <g filter="url(#Ee266sHgPYFKgPG11064VfOmn3TNqmMc)">
+                <linearGradient id="_lgradient_27" x1="0.6673052393183645" y1="-0.07530311713878793"
+                    x2="0.3103945050534906" y2="1.3072756457010464"
+                    gradientTransform="matrix(418.059,137.451,-140.503,427.343,543.222,-62.397)"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0.43478260869565216%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                    <stop offset="42.608695652173914%" stop-opacity="1" style="stop-color:rgb(206,222,232)" />
+                    <stop offset="98.26086956521739%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                </linearGradient>
+                <path
+                    d=" M 783.691 421.175 L 679.028 419.616 L 574.364 418.058 C 568.522 417.971 561.469 413.757 558.623 408.654 L 507.641 317.234 L 456.659 225.813 C 453.813 220.71 453.936 212.495 456.932 207.48 L 510.614 117.618 L 564.295 27.756 C 567.291 22.74 574.467 18.738 580.309 18.825 L 684.972 20.384 L 789.636 21.942 C 795.478 22.029 802.531 26.243 805.377 31.346 L 856.359 122.766 L 907.341 214.187 C 910.187 219.29 910.064 227.505 907.068 232.52 L 853.386 322.382 L 799.705 412.244 C 796.709 417.26 789.533 421.262 783.691 421.175 Z "
+                    id="Polygon" fill="url(#_lgradient_27)" />
+                <clipPath id="_clipPath_GW4AYBGWSkV3t7wwm8Swyb7nNYHiYlL1">
+                    <path
+                        d=" M 783.691 421.175 L 679.028 419.616 L 574.364 418.058 C 568.522 417.971 561.469 413.757 558.623 408.654 L 507.641 317.234 L 456.659 225.813 C 453.813 220.71 453.936 212.495 456.932 207.48 L 510.614 117.618 L 564.295 27.756 C 567.291 22.74 574.467 18.738 580.309 18.825 L 684.972 20.384 L 789.636 21.942 C 795.478 22.029 802.531 26.243 805.377 31.346 L 856.359 122.766 L 907.341 214.187 C 910.187 219.29 910.064 227.505 907.068 232.52 L 853.386 322.382 L 799.705 412.244 C 796.709 417.26 789.533 421.262 783.691 421.175 Z "
+                        id="Polygon" fill="url(#_lgradient_27)" />
+                </clipPath>
+                <g clip-path="url(#_clipPath_GW4AYBGWSkV3t7wwm8Swyb7nNYHiYlL1)">
+                    <path
+                        d="M 864.809 118.672 L 482.871 306.833 L 447.949 228.512 L 829.886 40.35 L 829.886 40.35 L 829.886 40.35 L 829.886 40.35 L 829.886 40.35 L 829.886 40.35 L 829.886 40.35 L 864.809 118.672 Z"
+                        style="stroke:none;fill:#F2F2F2;stroke-miterlimit:10;opacity:0.5;" />
+                    <path
+                        d="M 927.324 236.001 L 546.214 425.833 L 510.949 347.665 L 892.059 157.833 L 892.059 157.833 L 892.059 157.833 L 892.059 157.833 L 892.059 157.833 L 892.059 157.833 L 892.059 157.833 L 927.324 236.001 Z"
+                        style="stroke:none;fill:#F2F2F2;stroke-miterlimit:10;opacity:0.5;" />
+                </g>
+            </g>
+            <defs>
+                <filter id="rFXmyT5i5tJ4uz7HHtITeLOivzr0q2cJ" x="-200%" y="-200%" width="400%" height="400%"
+                    filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feGaussianBlur xmlns="http://www.w3.org/2000/svg" in="SourceGraphic"
+                        stdDeviation="2.146804531419514" />
+                    <feOffset xmlns="http://www.w3.org/2000/svg" dx="2" dy="0" result="pf_100_offsetBlur" />
+                    <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.65" />
+                    <feComposite xmlns="http://www.w3.org/2000/svg" in2="pf_100_offsetBlur" operator="in"
+                        result="pf_100_dropShadow" />
+                    <feBlend xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_dropShadow"
+                        mode="normal" />
+                </filter>
+            </defs>
+            <g filter="url(#rFXmyT5i5tJ4uz7HHtITeLOivzr0q2cJ)">
+                <linearGradient id="_lgradient_28" x1="0.32258710843903815" y1="1.1602087975098347"
+                    x2="0.5267959543799576" y2="-0.15657320586081092"
+                    gradientTransform="matrix(349.678,115.028,-117.582,357.443,569.234,-16.315)"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(244,244,244)" />
+                    <stop offset="40%" stop-opacity="1" style="stop-color:rgb(173,193,204)" />
+                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(0,0,0)" />
+                </linearGradient>
+                <path
+                    d=" M 770.318 388.211 L 682.77 386.894 L 595.221 385.576 C 590.335 385.503 584.436 381.978 582.056 377.709 L 539.423 301.231 L 496.789 224.754 C 494.41 220.485 494.513 213.614 497.02 209.418 L 541.935 134.258 L 586.849 59.098 C 589.356 54.903 595.359 51.556 600.246 51.63 L 687.794 52.947 L 775.342 54.264 C 780.229 54.338 786.128 57.863 788.508 62.132 L 831.141 138.609 L 873.774 215.087 C 876.154 219.355 876.051 226.227 873.544 230.422 L 828.629 305.583 L 783.714 380.743 C 781.207 384.938 775.204 388.284 770.318 388.211 Z "
+                    id="Polygon" fill="url(#_lgradient_28)" />
+                <clipPath id="_clipPath_qXMqgmrAq6djlt5ITNIrQnfy059hnbzQ">
+                    <path
+                        d=" M 770.318 388.211 L 682.77 386.894 L 595.221 385.576 C 590.335 385.503 584.436 381.978 582.056 377.709 L 539.423 301.231 L 496.789 224.754 C 494.41 220.485 494.513 213.614 497.02 209.418 L 541.935 134.258 L 586.849 59.098 C 589.356 54.903 595.359 51.556 600.246 51.63 L 687.794 52.947 L 775.342 54.264 C 780.229 54.338 786.128 57.863 788.508 62.132 L 831.141 138.609 L 873.774 215.087 C 876.154 219.355 876.051 226.227 873.544 230.422 L 828.629 305.583 L 783.714 380.743 C 781.207 384.938 775.204 388.284 770.318 388.211 Z "
+                        id="Polygon" fill="url(#_lgradient_28)" />
+                </clipPath>
+                <g clip-path="url(#_clipPath_qXMqgmrAq6djlt5ITNIrQnfy059hnbzQ)">
+                    <defs>
+                        <filter id="QrBvTC4XNtNsom60c2Z4SSJuKWfugcUB" x="-200%" y="-200%" width="400%" height="400%"
+                            filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" in="SourceGraphic"
+                                stdDeviation="2.146804531419514" />
+                            <feOffset xmlns="http://www.w3.org/2000/svg" dx="-1" dy="0" result="pf_100_offsetBlur" />
+                            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.65" />
+                            <feComposite xmlns="http://www.w3.org/2000/svg" in2="pf_100_offsetBlur" operator="in"
+                                result="pf_100_dropShadow" />
+                            <feBlend xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_dropShadow"
+                                mode="normal" result="_out_acRXvg7xIZtohxGZ5wHmsalZGkLJG9pO" />
+                            <feOffset xmlns="http://www.w3.org/2000/svg" in="_out_acRXvg7xIZtohxGZ5wHmsalZGkLJG9pO"
+                                dx="5" dy="0" />
+                            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" stdDeviation="2.146804531419514"
+                                result="pf_101_offsetBlur" />
+                            <feComposite xmlns="http://www.w3.org/2000/svg" in="_out_acRXvg7xIZtohxGZ5wHmsalZGkLJG9pO"
+                                in2="pf_101_offsetBlur" result="pf_101_inverse" operator="out" />
+                            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.5"
+                                result="pf_101_color" />
+                            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_color" in2="pf_101_inverse"
+                                operator="in" result="pf_101_shadow" />
+                            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_shadow"
+                                in2="_out_acRXvg7xIZtohxGZ5wHmsalZGkLJG9pO" operator="over"
+                                result="_out_9oFBJPcGBZDySMZbEE8ubQxycSCwxsBW" />
+                            <feMerge>
+                                <feMergeNode in="_out_9oFBJPcGBZDySMZbEE8ubQxycSCwxsBW" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g filter="url(#QrBvTC4XNtNsom60c2Z4SSJuKWfugcUB)">
+                        <clipPath id="_clipPath_3gTXxW0GM5Gi31CKBS3NRlnc6MuSsg7V">
+                            <rect x="525.707" y="87.327" width="319.964" height="253.908"
+                                transform="matrix(1,0.022,-0.022,1,4.887,-15.055)" id="catrobat "
+                                fill="rgb(255,255,255)" />
+                        </clipPath>
+                        <g clip-path="url(#_clipPath_3gTXxW0GM5Gi31CKBS3NRlnc6MuSsg7V)">
+                            <clipPath id="_clipPath_fF7Xx0qhWv3KYNSHRXOxpH57BbojSEjb">
+                                <path
+                                    d=" M 529.658 81.833 L 858.93 89.037 L 854.728 341.956 L 523.949 340.887 L 529.658 81.833 Z "
+                                    id="Strecke" fill="rgb(255,255,255)" />
+                            </clipPath>
+                            <g clip-path="url(#_clipPath_fF7Xx0qhWv3KYNSHRXOxpH57BbojSEjb)">
+                                <linearGradient id="_lgradient_29" x1="0.26009903727172023" y1="0.8318016097745922"
+                                    x2="1.7537163237032802" y2="-2.724707008186725">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 658.119 290.587 C 647.951 297.379 637.279 300.18 630.862 297.698 C 626.589 296.045 624.203 292.049 625.112 285.327 C 625.112 285.327 631.563 247.84 608.788 263.96"
+                                    id="Strecke" fill="none" vector-effect="non-scaling-stroke" stroke-width="15"
+                                    stroke="url(#_lgradient_29)" stroke-linejoin="miter" stroke-linecap="round"
+                                    stroke-miterlimit="3" />
+                                <linearGradient id="_lgradient_30" x1="0.10071152751371137" y1="0.7490626391240282"
+                                    x2="0.8291147421373265" y2="-0.14792982833556179"
+                                    gradientTransform="matrix(144.536,3.185,-2.056,93.306,706.183,207.745)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 704.636 277.924 C 709.196 275.374 723.538 274.975 728.854 275.899 C 740.577 277.931 749.144 288.901 750.434 302.072 C 754.439 286.25 767.821 275.792 781.904 278.232 C 789.957 279.628 796.623 284.962 800.754 292.347 C 800.799 291.045 800.905 289.736 801.09 288.417 C 803.606 270.648 818.391 258.453 834.1 261.174 C 840.092 262.213 845.346 265.274 849.425 269.641 C 846.929 247.825 824.293 216.91 788.158 210.648 C 782.579 209.681 774.903 209.325 769.581 209.142 C 763.529 234.839 739.185 243.599 707.678 242.044 C 705.244 260.771 705.28 264.989 704.636 277.924 Z "
+                                    id="Strecke" fill="url(#_lgradient_30)" />
+                                <path
+                                    d=" M 704.636 277.924 C 709.196 275.374 723.538 274.975 728.854 275.899 C 740.577 277.931 749.144 288.901 750.434 302.072 C 754.439 286.25 767.821 275.792 781.904 278.232 C 789.957 279.628 796.623 284.962 800.754 292.347 C 800.799 291.045 800.905 289.736 801.09 288.417 C 803.606 270.648 818.391 258.453 834.1 261.174 C 840.092 262.213 845.346 265.274 849.425 269.641 C 846.929 247.825 824.293 216.91 788.158 210.648 C 782.579 209.681 774.903 209.325 769.581 209.142 C 763.529 234.839 739.185 243.599 707.678 242.044 C 705.244 260.771 705.28 264.989 704.636 277.924 Z "
+                                    id="Strecke" fill="none" />
+                                <linearGradient id="_lgradient_31" x1="0.6147498320957747" y1="0.8760779629881132"
+                                    x2="1.1450350725925418" y2="-0.2596956881594097"
+                                    gradientTransform="matrix(131.624,2.901,-2.566,116.455,531.583,137.231)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="1.3043478260869565%" stop-opacity="1"
+                                        style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 645.324 256.25 C 642.909 251.239 631.383 241.71 626.559 239.053 C 615.921 233.193 603.257 236.668 595.41 246.616 C 600.292 231.102 594.738 213.961 581.961 206.919 C 574.653 202.893 566.45 202.978 559.263 206.369 C 559.899 205.275 560.486 204.136 561.014 202.937 C 568.118 186.789 562.313 167.326 548.057 159.47 C 542.622 156.474 536.744 155.606 531.157 156.562 C 544.449 140.32 578.903 129.556 611.691 147.622 C 616.753 150.411 623.217 155.047 627.665 158.311 C 620.959 184.026 634.762 206.003 661.338 224.949 C 653.671 241.829 651.467 245.256 645.324 256.25 Z "
+                                    id="Strecke" fill="url(#_lgradient_31)" />
+                                <path
+                                    d=" M 645.324 256.25 C 642.909 251.239 631.383 241.71 626.559 239.053 C 615.921 233.193 603.257 236.668 595.41 246.616 C 600.292 231.102 594.738 213.961 581.961 206.919 C 574.653 202.893 566.45 202.978 559.263 206.369 C 559.899 205.275 560.486 204.136 561.014 202.937 C 568.118 186.789 562.313 167.326 548.057 159.47 C 542.622 156.474 536.744 155.606 531.157 156.562 C 544.449 140.32 578.903 129.556 611.691 147.622 C 616.753 150.411 623.217 155.047 627.665 158.311 C 620.959 184.026 634.762 206.003 661.338 224.949 C 653.671 241.829 651.467 245.256 645.324 256.25 Z "
+                                    id="Strecke" fill="none" />
+                                <linearGradient id="_lgradient_32" x1="0.16057804503370932" y1="0.6294664900725109"
+                                    x2="1.1353123556550484" y2="-1.8091604417285359"
+                                    gradientTransform="matrix(34.177,0.753,-1.87,84.877,668.388,227.035)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 700.695 312.665 L 666.518 311.912 L 668.388 227.035 L 702.565 227.788 L 700.695 312.665 Z "
+                                    id="Strecke" fill="url(#_lgradient_32)" />
+                                <linearGradient id="_lgradient_33" x1="0.39596614612418257" y1="0.7802604245194655"
+                                    x2="0.8461453650837085" y2="-1.9429565319503714"
+                                    gradientTransform="matrix(78.884,1.738,-2.401,108.967,644.837,207.997)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 683.445 237.505 C 675.761 237.336 669.378 243.975 669.037 252.393 L 668.927 252.39 L 667.564 314.224 C 667.462 318.881 652.518 318.009 650.658 313.852 C 633.174 274.744 652.984 208.328 652.984 208.328 L 669.89 208.7 C 669.89 208.7 684.282 208.756 684.278 208.921 C 684.282 208.756 698.661 209.335 698.661 209.335 L 715.567 209.707 C 715.567 209.707 732.433 276.932 713.242 315.231 C 711.202 319.302 696.233 319.515 696.336 314.858 L 697.699 253.025 L 697.589 253.022 C 697.619 244.597 691.534 237.683 683.851 237.514"
+                                    id="Strecke" fill="url(#_lgradient_33)" />
+                                <linearGradient id="_lgradient_34" x1="0.24934404268747545" y1="1.2437615476128967"
+                                    x2="0.23950549081312286" y2="-0.5691207400331193"
+                                    gradientTransform="matrix(132.076,2.911,-2.188,99.274,634.071,134.19)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 763.242 211.013 C 759.195 223.612 747.455 231.701 732.026 234.394 C 718.383 236.776 701.854 234.938 685.208 228.27 C 669.73 222.069 656.709 212.717 647.58 202.172 C 635.787 188.549 630.49 172.935 634.788 159.553 C 639.337 145.391 653.604 136.928 671.906 135.42 C 684.286 134.4 698.511 136.562 712.824 142.295 C 748.295 156.506 770.867 187.271 763.242 211.013 Z "
+                                    id="Strecke" fill="url(#_lgradient_34)" />
+                                <path
+                                    d=" M 762.319 211.006 C 754.693 234.746 719.757 242.473 684.285 228.263 C 648.813 214.052 626.241 183.287 633.866 159.546 C 641.492 135.804 676.43 128.079 711.901 142.288 C 747.372 156.499 769.944 187.265 762.319 211.006 Z "
+                                    id="Strecke" fill="none" />
+                                <linearGradient id="_lgradient_35" x1="0.4603804141878953" y1="1.458844738427902"
+                                    x2="0.8900977161832376" y2="-0.281340333608471"
+                                    gradientTransform="matrix(53.321,1.175,-1.391,63.119,716.43,140.434)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="99.99999999999983%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path d=" M 763.545 204.622 L 769.751 141.609 L 716.092 155.796 L 763.545 204.622 Z "
+                                    id="Strecke" fill="url(#_lgradient_35)" />
+                                <path d=" M 763.545 204.622 L 769.751 141.609 L 716.092 155.796 L 763.545 204.622 Z "
+                                    id="Strecke" fill="none" />
+                                <linearGradient id="_lgradient_36" x1="0.20959619627586962" y1="2.178691760198823"
+                                    x2="0.37483990986706595" y2="-0.09775426224409145"
+                                    gradientTransform="matrix(64.21,1.415,-1.196,54.281,637.43,99.831)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path d=" M 636.234 154.112 L 666.492 100.472 L 700.591 148.854 L 636.234 154.112 Z "
+                                    id="Strecke" fill="url(#_lgradient_36)" />
+                                <path d=" M 636.234 154.112 L 666.492 100.472 L 700.591 148.854 L 636.234 154.112 Z "
+                                    id="Strecke" fill="none" />
+                                <path
+                                    d=" M 685.469 180.358 C 682.531 189.756 673.384 194.738 665.036 191.486 C 656.689 188.235 652.302 177.98 655.239 168.582 C 658.175 159.184 667.323 154.202 675.671 157.453 C 684.018 160.705 688.405 170.96 685.469 180.358 Z "
+                                    id="Strecke" fill="rgb(255,255,255)" />
+                                <linearGradient id="_lgradient_37" x1="-0.6858216980727789" y1="1.6558947213077855"
+                                    x2="2.3173825838686066" y2="-1.7246866608774352"
+                                    gradientTransform="matrix(13.697,0.302,-0.339,15.395,666.238,167.77)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 679.377 178.135 C 678.122 182.153 674.212 184.283 670.644 182.892 C 667.075 181.502 665.201 177.119 666.456 173.102 C 667.711 169.084 671.621 166.955 675.189 168.345 C 678.758 169.735 680.633 174.118 679.377 178.135 Z "
+                                    id="Strecke" fill="url(#_lgradient_37)" />
+                                <path
+                                    d=" M 741.256 202.09 C 738.32 211.488 729.172 216.471 720.825 213.219 C 712.477 209.967 708.09 199.712 711.027 190.314 C 713.963 180.916 723.111 175.934 731.459 179.185 C 739.806 182.437 744.193 192.692 741.256 202.09 Z "
+                                    id="Strecke" fill="rgb(255,255,255)" />
+                                <linearGradient id="_lgradient_38" x1="-0.19382559979378292" y1="1.3904392043281564"
+                                    x2="1.4575452691980855" y2="-0.5942270569317372"
+                                    gradientTransform="matrix(13.697,0.302,-0.339,15.395,716.742,187.708)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-opacity="1" style="stop-color:rgb(179,202,215)" />
+                                    <stop offset="98.26086956521739%" stop-opacity="1"
+                                        style="stop-color:rgb(255,255,255)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(17,13,1)" />
+                                    <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+                                </linearGradient>
+                                <path
+                                    d=" M 729.882 198.074 C 728.627 202.091 724.716 204.221 721.148 202.83 C 717.58 201.44 715.705 197.057 716.96 193.04 C 718.216 189.022 722.126 186.892 725.694 188.282 C 729.263 189.672 731.138 194.055 729.882 198.074 Z "
+                                    id="Strecke" fill="url(#_lgradient_38)" />
+                            </g>
+                        </g>
+                    </g>
+                    <defs>
+                        <linearGradient id="_lgradient_39" x1="-0.15966850508447106" y1="3.6318449578189074"
+                            x2="1.0587248174303183" y2="-0.9233847664342627">
+                            <stop offset="0%" style="stop-color:#E0F0F9" />
+                            <stop offset="100%" style="stop-color:#FFFCFA" />
+                            <stop offset="100%" style="stop-color:#181615" />
+                            <stop offset="100%" style="stop-color:#FFFFFF" />
+                        </linearGradient>
+                    </defs>
+                    <path
+                        d="M 480.546 213.066 L 813.341 48.236 L 848.43 126.483 L 515.635 291.314 L 515.635 291.314 L 515.635 291.314 L 515.635 291.314 L 515.635 291.314 L 515.635 291.314 L 515.635 291.314 L 480.546 213.066 Z"
+                        style="stroke:none;fill:url(#_lgradient_39);stroke-miterlimit:10;opacity:0.5;" />
+                    <defs>
+                        <linearGradient id="_lgradient_40" x1="0.32791453644111446" y1="1.0065075757650899"
+                            x2="0.9925956652596251" y2="-0.4641833757666993">
+                            <stop offset="0%" style="stop-color:#E0F0F9" />
+                            <stop offset="99.99999999999993%" style="stop-color:#FFFEFE" />
+                            <stop offset="100%" style="stop-color:#35302E" />
+                            <stop offset="100%" style="stop-color:#FFFFFF" />
+                        </linearGradient>
+                    </defs>
+                    <path
+                        d="M 532.188 334.605 L 864.982 169.775 L 900.071 248.022 L 567.276 412.852 L 567.276 412.852 L 567.276 412.852 L 567.276 412.852 L 567.276 412.852 L 567.276 412.852 L 567.276 412.852 L 532.188 334.605 Z"
+                        style="stroke:none;fill:url(#_lgradient_40);stroke-miterlimit:10;opacity:0.5;" />
+                </g>
+            </g>
+        </g>
+        <g id="star_2">
+            <path
+                d=" M 744.952 50.267 L 728.157 59.574 L 723.531 77.519 L 714.224 60.725 L 696.279 56.098 L 713.073 46.791 L 717.7 28.846 L 727.007 45.64 L 744.952 50.267 Z "
+                id="Polygon" fill="rgb(249,249,249)" />
+        </g>
+        <g id="star_3">
+            <path
+                d=" M 824.907 93.381 L 803.542 105.221 L 797.655 128.049 L 785.816 106.684 L 762.987 100.798 L 784.352 88.958 L 790.238 66.13 L 802.078 87.495 L 824.907 93.381 Z "
+                id="Polygon" fill="rgb(255,250,249)" />
+        </g>
+        <g id="star_1">
+            <path
+                d=" M 543.052 183.315 L 526.258 192.621 L 521.631 210.566 L 512.325 193.772 L 494.38 189.145 L 511.174 179.838 L 515.801 161.894 L 525.108 178.688 L 543.052 183.315 Z "
+                id="Polygon" fill="rgb(255,255,255)" />
+        </g>
+        <g id="star_4">
+            <path
+                d=" M 844.803 181.18 L 828.008 190.487 L 823.382 208.432 L 814.075 191.638 L 796.13 187.011 L 812.924 177.704 L 817.551 159.759 L 826.858 176.553 L 844.803 181.18 Z "
+                id="Polygon" fill="rgb(255,255,255)" />
+        </g>
+    </g>
+</svg>

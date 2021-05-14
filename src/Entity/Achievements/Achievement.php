@@ -1,0 +1,207 @@
+<?php
+
+namespace App\Entity\Achievements;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\Achievements\AchievementRepository")
+ * @ORM\Table(name="achievement")
+ */
+class Achievement
+{
+  /**
+   * @ORM\Column(name="id", type="integer")
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected ?int $id = null;
+
+  /**
+   * @ORM\Column(name="internal_title", type="string", nullable=false, unique=true)
+   */
+  protected string $internal_title = '';
+
+  /**
+   * @ORM\Column(name="ltm_code", type="string", nullable=false)
+   */
+  protected string $title_ltm_code = '';
+
+  /**
+   * @ORM\Column(name="internal_description", type="text", nullable=false)
+   */
+  protected string $internal_description = '';
+
+  /**
+   * @ORM\Column(name="description_ltm_code", type="string", nullable=false)
+   */
+  protected string $description_ltm_code = '';
+
+  /**
+   * @ORM\Column(name="badge_svg_path", type="string", nullable=false)
+   */
+  protected string $badge_svg_path = '';
+
+  /**
+   * @ORM\Column(name="badge_locked_svg_path", type="string", nullable=false)
+   */
+  protected string $badge_locked_svg_path = '';
+
+  /**
+   * @ORM\Column(name="banner_svg_path", type="string", nullable=false)
+   */
+  protected string $banner_svg_path = '';
+
+  /**
+   * @ORM\Column(name="banner_color", type="string", nullable=false)
+   */
+  protected string $banner_color = '';
+
+  /**
+   * @ORM\Column(name="enabled", type="boolean", options={"default": true})
+   */
+  protected bool $enabled = true;
+
+  /**
+   * @ORM\Column(name="priority", type="integer", nullable=false)
+   */
+  protected int $priority;
+
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
+
+  public function setId(int $id): Achievement
+  {
+    $this->id = $id;
+
+    return $this;
+  }
+
+  public function getInternalTitle(): string
+  {
+    return $this->internal_title;
+  }
+
+  public function setInternalTitle(string $internal_title): Achievement
+  {
+    $this->internal_title = $internal_title;
+
+    return $this;
+  }
+
+  public function getTitleLtmCode(): string
+  {
+    return $this->title_ltm_code;
+  }
+
+  public function setTitleLtmCode(string $title_ltm_code): Achievement
+  {
+    $this->title_ltm_code = $title_ltm_code;
+
+    return $this;
+  }
+
+  public function getInternalDescription(): string
+  {
+    return $this->internal_description;
+  }
+
+  public function setInternalDescription(string $internal_description): Achievement
+  {
+    $this->internal_description = $internal_description;
+
+    return $this;
+  }
+
+  public function getDescriptionLtmCode(): string
+  {
+    return $this->description_ltm_code;
+  }
+
+  public function setDescriptionLtmCode(string $description_ltm_code): Achievement
+  {
+    $this->description_ltm_code = $description_ltm_code;
+
+    return $this;
+  }
+
+  public function getBadgeLockedSvgPath(): string
+  {
+    return $this->badge_locked_svg_path;
+  }
+
+  /**
+   * @return $this
+   */
+  public function setBadgeLockedSvgPath(string $badge_locked_svg_path): Achievement
+  {
+    $this->badge_locked_svg_path = $badge_locked_svg_path;
+
+    return $this;
+  }
+
+  public function getBadgeSvgPath(): string
+  {
+    return $this->badge_svg_path;
+  }
+
+  /**
+   * @return $this
+   */
+  public function setBadgeSvgPath(string $badge_svg_path): Achievement
+  {
+    $this->badge_svg_path = $badge_svg_path;
+
+    return $this;
+  }
+
+  public function getBannerSvgPath(): string
+  {
+    return $this->banner_svg_path;
+  }
+
+  public function setBannerSvgPath(string $banner_svg_path): Achievement
+  {
+    $this->banner_svg_path = $banner_svg_path;
+
+    return $this;
+  }
+
+  public function getBannerColor(): string
+  {
+    return $this->banner_color;
+  }
+
+  public function setBannerColor(string $banner_color): Achievement
+  {
+    $this->banner_color = $banner_color;
+
+    return $this;
+  }
+
+  public function isEnabled(): bool
+  {
+    return $this->enabled;
+  }
+
+  public function setEnabled(bool $enabled): Achievement
+  {
+    $this->enabled = $enabled;
+
+    return $this;
+  }
+
+  public function getPriority(): int
+  {
+    return $this->priority;
+  }
+
+  public function setPriority(int $priority): Achievement
+  {
+    $this->priority = $priority;
+
+    return $this;
+  }
+}

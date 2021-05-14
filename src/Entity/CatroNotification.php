@@ -17,8 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="notification_type", type="string")
  * @ORM\DiscriminatorMap({
  *     "default": "CatroNotification",
- *     "anniversary": "AnniversaryNotification",
- *     "achievement": "AchievementNotification",
  *     "comment": "CommentNotification",
  *     "like": "LikeNotification",
  *     "follow": "FollowNotification",

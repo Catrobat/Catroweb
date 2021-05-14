@@ -149,6 +149,7 @@ jobs:
           - api-deprecated-profile
           - api-deprecated-upload
 
+          - web-achievements
           - web-admin
           - web-apk-generation
           - web-authentication

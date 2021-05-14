@@ -91,6 +91,10 @@ services:
   App\Entity\:
     resource: '../src/Entity/*'
 
+  App\Manager\:
+    resource: '../src/Manager'
+    public: true
+
   App\Repository\:
     resource: '../src/Repository'
     public: true

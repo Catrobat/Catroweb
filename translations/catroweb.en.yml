@@ -733,3 +733,36 @@ category:
   example: Example
   scratch: Scratch remixes
   recommended: Recommended projects
+
+achievements:
+  overview:
+    header: 'Achievements'
+    most_recent_achievement:
+      title: 'Newest Achievement'
+      x_out_of_y: '%unlocked% out of %total% unlocked'
+    tab_unlocked:
+      title: 'Unlocked'
+      empty: "You haven't unlocked any achievements yet."
+    tab_locked:
+      title: 'Locked'
+      empty: "You have already unlocked all achievements."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Apprentice'
+        description: 'Follow someone and upload a project'
+      silver_user:
+        title: 'Artisan'
+        description: 'Active member for > 1 year'
+      gold_user:
+        title: 'Master'
+        description: 'Active member for > 4 years'
+      diamond_user:
+        title: 'Grand master'
+        description: 'Active member for > 7 years'
+      perfect_profile:
+        title: 'Initiative'
+        description: 'Add your first profile picture'
+      verified_developer:
+        title: 'Novice'
+        description: 'Create a user account'

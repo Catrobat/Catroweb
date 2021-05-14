@@ -116,6 +116,11 @@ class ResetCommand extends Command
       ['bin/console', 'catrobat:create:media-packages-samples'], [], 'Creating sample Media Packages', $output
     );
 
+    // Insert static achievements
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements', $output
+    );
+
     // Resetting Elastic
     CommandHelper::executeShellCommand(
       ['bin/console', 'fos:elastica:reset', '-q'], [], 'Resetting', $output
