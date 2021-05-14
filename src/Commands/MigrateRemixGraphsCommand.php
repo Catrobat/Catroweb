@@ -462,7 +462,6 @@ class MigrateRemixGraphsCommand extends Command
       $program->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
       $program->setRemixMigratedAt(null);
       $program->setFilesize($program_file->getSize());
-      $program->setCatrobatVersion(1);
       $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
 
       if (821 == $program_id) {
@@ -472,7 +471,6 @@ class MigrateRemixGraphsCommand extends Command
       }
 
       $program->setApproved(true);
-      $program->setCatrobatVersion(1);
       $program->setFlavor('pocketcode');
       $program->setRemixRoot(true);
 
