@@ -1,7 +1,7 @@
 ---
 #homepage translation
 localLanguage: Englisch
-username: Username
+username: Benutzername
 password: Passwort
 createNewPassword: Neues Passwort erstellen
 accountSettings: Kontoeinstellungen
@@ -373,7 +373,7 @@ login:
   noAccount: Ich habe keinen Account!
   alreadyAccount: Hast du bereits einen Account?
   or: ODER
-  username: Username
+  username: Benutzername
   email: Email
   passwordFirst: Passwort
   passwordSecond: Passwort bestätigen
