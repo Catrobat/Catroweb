@@ -196,7 +196,6 @@ class ProgramManager
     $program->setDescription($extracted_file->getDescription());
     $program->setCredits($extracted_file->getNotesAndCredits());
     $program->setUser($request->getUser());
-    $program->setCatrobatVersion(1);
     $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
     $program->setLanguageVersion($extracted_file->getLanguageVersion());
     $program->setUploadIp($request->getIp());
@@ -300,7 +299,6 @@ class ProgramManager
       }
       $program->incrementVersion();
     }
-    $program->setCatrobatVersion(1);
     $program->setVisible(true);
     $program->setApproved(false);
 

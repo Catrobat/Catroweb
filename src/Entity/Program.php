@@ -199,11 +199,6 @@ class Program
   protected string $catrobat_version_name = '';
 
   /**
-   * @ORM\Column(type="integer", options={"default": 0})
-   */
-  protected int $catrobat_version = 0;
-
-  /**
    * @ORM\Column(type="string", options={"default": ""})
    */
   protected string $upload_ip = '';
@@ -609,9 +604,9 @@ class Program
     return $this->language_version;
   }
 
-  public function setCatrobatVersionName(string $catrobatVersionName): Program
+  public function setCatrobatVersionName(string $catrobat_version_name): Program
   {
-    $this->catrobat_version_name = $catrobatVersionName;
+    $this->catrobat_version_name = $catrobat_version_name;
 
     return $this;
   }
@@ -619,18 +614,6 @@ class Program
   public function getCatrobatVersionName(): string
   {
     return $this->catrobat_version_name;
-  }
-
-  public function setCatrobatVersion(int $catrobatVersion): Program
-  {
-    $this->catrobat_version = $catrobatVersion;
-
-    return $this;
-  }
-
-  public function getCatrobatVersion(): int
-  {
-    return $this->catrobat_version;
   }
 
   public function setUploadIp(string $uploadIp): Program
