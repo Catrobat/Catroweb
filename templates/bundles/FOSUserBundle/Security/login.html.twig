@@ -21,10 +21,8 @@
 
       <div class="row justify-content-center">
         <div class="col-sm-11 col-md-8 col-lg-6 center">
-          {% if error %}
-            <div id="login-alert"
-                 class="alert alert-danger col-sm-12">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
-          {% endif %}
+          <div id="login-alert"
+               class="alert alert-danger col-sm-12">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
         </div>
       </div>
 
@@ -91,7 +89,7 @@
                 <div style="margin-top:10px" class="form-group">
                   <div class="col-sm-12 controls">
                     <button id="_submit" value="Login" href="#" class="login btn btn-primary"
-                            name="_submit">{{ 'login.login'|trans({}, 'catroweb') }}</button>
+                            name="_submit" type="button">{{ 'login.login'|trans({}, 'catroweb') }}</button>
                   </div>
                 </div>
 
@@ -126,6 +124,7 @@
 {% endblock body %}
 
 {% block js %}
+  <script src="{{ asset('js/LoginTokenHandler.min.js') }}"></script>
   <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
   <script src="{{ asset('js/register.min.js') }}"></script>
   {{ encore_entry_script_tags('login') }}

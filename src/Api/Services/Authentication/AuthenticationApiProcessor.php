@@ -14,18 +14,23 @@ use GuzzleHttp\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Model\JWTResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 
 final class AuthenticationApiProcessor extends AbstractApiProcessor
 {
   private AuthenticationManager $authentication_manager;
   private UserManager $user_manager;
   private JWTTokenManagerInterface $jwt_manager;
+  private RefreshTokenManagerInterface $refresh_manager;
 
-  public function __construct(UserManager $user_manager, JWTTokenManagerInterface $jwt_manager, AuthenticationManager $authentication_manager)
+  public function __construct(UserManager $user_manager, JWTTokenManagerInterface $jwt_manager,
+                              AuthenticationManager $authentication_manager,
+                              RefreshTokenManagerInterface $refresh_manager)
   {
     $this->user_manager = $user_manager;
     $this->authentication_manager = $authentication_manager;
     $this->jwt_manager = $jwt_manager;
+    $this->refresh_manager = $refresh_manager;
   }
 
   protected function getPayloadFromGoogleIdToken($id_token): array
@@ -135,6 +140,16 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     $token = new JWTResponse(['token' => $token]);
 
     return ['response_code' => $responseCode, 'token' => $token];
+  }
+
+  public function deleteRefreshToken(string $x_refresh): bool
+  {
+    $refreshToken = $this->refresh_manager->get($x_refresh);
+    if (null === $refreshToken) {
+        return false;
+    }
+    $this->refresh_manager->delete($refreshToken);
+    return true;
   }
 
   protected function createRandomUsername($name = null): string

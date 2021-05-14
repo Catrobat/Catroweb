@@ -37,6 +37,22 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
+
+        api_authentication_delete_token:
+            provider: chain_provider
+            pattern: ^/api/authentication
+            methods: [DELETE]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        api_authentication_refresh_token:
+            pattern: ^/api/authentication/refresh
+            stateless: true
+            anonymous: true
+            methods: [POST]
+
         api_authentication_oauth_login:
             provider: chain_provider
             pattern:  ^/api/authentication/oauth
@@ -116,6 +132,7 @@ security:
         main:
             pattern: ^/(?!(api/))
             provider: chain_provider
+            stateless: true
             form_login:
                 login_path: login
                 check_path: fos_user_security_check
@@ -161,6 +178,8 @@ security:
 
 
     access_control:
+        # JWTRefreshTokenBundle
+        - { path: ^/api/authentication/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
         - { path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }

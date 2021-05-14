@@ -31,6 +31,10 @@ $sidebar-width: 250px;
     background-size: contain;
   }
 
+  #logout-nav-item {
+    display: none;
+  }
+
   .nav-link { //a-element in li
     display: flex;
     flex-direction: row;
