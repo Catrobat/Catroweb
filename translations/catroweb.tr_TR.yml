@@ -686,33 +686,33 @@ category:
   recommended: Önerilen projeler
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'Başarılar'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'En Yeni Başarı'
+      x_out_of_y: '%total% tane başarının %unlocked% tanesi açıldı'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Açıldı'
+      empty: "Henüz hiçbir başarının kilidini açmadınız."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Kilitli'
+      empty: "Zaten tüm başarıların kilidini açtınız."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Acemi'
+        description: 'Birini takip edin ve bir proje yükleyin'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Çırak'
+        description: 'Şu kadar yıldır aktif üye > 1 yıl'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Usta'
+        description: 'Şu kadar yıldır aktif üye > 4 yıl'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Büyük usta'
+        description: 'Şu kadar yıldır aktif üye > 7 yıl'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'EN İYİ'
+        description: 'İlk profil resminizi ekleyin'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'İlk adımlar'
+        description: 'Bir kullanıcı hesabı oluşturun'
