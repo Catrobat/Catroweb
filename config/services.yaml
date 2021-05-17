@@ -158,10 +158,6 @@ services:
   #   Services:
   #                most services need to be public (mainly for testing -> easy access in SymfonySupport.php)
   #
-  catroweb.jwt_token_refresh_service:
-    class: App\Catrobat\Services\JWTTokenRefreshService
-    public: true
-    arguments: [ "@gesdinet.jwtrefreshtoken" ]
 
   App\Catrobat\Services\CatrobatFileSanitizer:
     class: App\Catrobat\Services\CatrobatFileSanitizer
@@ -318,7 +314,6 @@ services:
     class: App\Catrobat\Listeners\JWTAuthenticationSuccessListener
     arguments:
       - '%env(JWT_TTL)%'
-      - "@gesdinet.jwtrefreshtoken.send_token"
     tags:
       - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccess }
 

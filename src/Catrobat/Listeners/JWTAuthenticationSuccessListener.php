@@ -15,12 +15,10 @@ class JWTAuthenticationSuccessListener
     private int $tokenLifetime;
 
     /** @var AttachRefreshTokenOnSuccessListener */
-    private AttachRefreshTokenOnSuccessListener $listener;
 
-    public function __construct(int $tokenLifetime, AttachRefreshTokenOnSuccessListener $listener)
+    public function __construct(int $tokenLifetime)
     {
         $this->tokenLifetime = $tokenLifetime;
-        $this->listener = $listener;
     }
 
     /**
@@ -31,20 +29,6 @@ class JWTAuthenticationSuccessListener
      */
     public function onAuthenticationSuccess(AuthenticationSuccessEvent $event): void
     {
-        $this->listener->attachRefreshToken($event);
-        $event->getResponse()->headers->setCookie(
-            new Cookie(
-                'REFRESH_TOKEN',
-                $event->getData()['refresh_token'],
-                time() + $this->tokenLifetime, // expiration
-                '/api/authentication', // path
-                null, // domain, null means that Symfony will generate it on its own.
-                true, // secure
-                true, // httpOnly
-                false, // raw
-                'strict' // same-site parameter, can be 'lax' or 'strict'.
-            )
-        );
         $event->getResponse()->headers->setCookie(
             new Cookie(
                 'BEARER',

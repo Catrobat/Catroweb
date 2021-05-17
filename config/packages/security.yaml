@@ -47,12 +47,6 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
-        api_authentication_refresh_token:
-            pattern: ^/api/authentication/refresh
-            stateless: true
-            anonymous: true
-            methods: [POST]
-
         api_authentication_oauth_login:
             provider: chain_provider
             pattern:  ^/api/authentication/oauth
@@ -178,9 +172,6 @@ security:
 
 
     access_control:
-        # JWTRefreshTokenBundle
-        - { path: ^/api/authentication/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-
         # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
         - { path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
         - { path: ^/profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }

@@ -49,11 +49,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
    */
   public function authenticationDelete(string $x_refresh, &$responseCode, array &$responseHeaders)
   {
-    if ($this->facade->getProcessor()->deleteRefreshToken($x_refresh)) {
-      $responseCode = Response::HTTP_OK;
-      return;
-    }
-    $responseCode = Response::HTTP_UNAUTHORIZED;
+    $responseCode = Response::HTTP_OK;
   }
 
   /**
