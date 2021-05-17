@@ -684,33 +684,33 @@ category:
   recommended: 추천 프로그램
 achievements:
   overview:
-    header: 'Achievements'
+    header: '업적'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: '최신 업적'
+      x_out_of_y: '%total% 중 %unlocked% 잠금 해제 됨'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: '잠금 해제'
+      empty: "아직 달성 한 업적이 없습니다."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: '잠김'
+      empty: "이미 모든 업적을 잠금 해제했습니다."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: '도제'
+        description: '누군가를 팔로우하고 프로젝트를 업로드하세요'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: '장인'
+        description: '1 년 이상 정회원'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: '석사'
+        description: '4 년 이상 정회원'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: '그랜드 마스터'
+        description: '7 년 이상 정회원'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: '발의'
+        description: '첫 번째 프로필 사진 추가'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: '초심자'
+        description: '사용자 계정 생성'

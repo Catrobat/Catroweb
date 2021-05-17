@@ -688,33 +688,33 @@ category:
   recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'ਪ੍ਰਾਪਤੀਆਂ'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'ਨਵੀਨਤਮ ਪ੍ਰਾਪਤੀ'
+      x_out_of_y: '%unlocked% ਨੂੰ %total% ਵਿੱਚੋਂ ਅਨਲੌਕ ਕੀਤਾ'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'ਅਨਲੌਕ ਕੀਤਾ'
+      empty: "ਤੁਸੀਂ ਅਜੇ ਕਿਸੇ ਵੀ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਅਨਲੌਕ ਨਹੀਂ ਕੀਤਾ ਹੈ."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'ਬੰਦ'
+      empty: "ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਸਾਰੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਅਣਲਾਕ ਕਰ ਦਿੱਤਾ ਹੈ."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'ਅਪ੍ਰੈਂਟਿਸ'
+        description: 'ਕਿਸੇ ਦੀ ਪਾਲਣਾ ਕਰੋ ਅਤੇ ਇੱਕ ਪ੍ਰੋਜੈਕਟ ਅਪਲੋਡ ਕਰੋ'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'ਕਾਰੀਗਰ'
+        description: 'ਸਰਗਰਮ ਸਦੱਸ> 1 ਸਾਲ ਲਈ'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'ਸਤਿਗੁਰੂ ਜੀ'
+        description: '> 4 ਸਾਲਾਂ ਲਈ ਕਿਰਿਆਸ਼ੀਲ ਮੈਂਬਰ'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'ਗ੍ਰੈਂਡ ਮਾਸਟਰ'
+        description: '7 ਸਾਲਾਂ ਲਈ ਕਿਰਿਆਸ਼ੀਲ ਮੈਂਬਰ'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'ਪਹਿਲ'
+        description: 'ਆਪਣੀ ਪਹਿਲੀ ਪ੍ਰੋਫਾਈਲ ਤਸਵੀਰ ਸ਼ਾਮਲ ਕਰੋ'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'ਨਵੀਨਤਾ'
+        description: 'ਇੱਕ ਉਪਭੋਗਤਾ ਖਾਤਾ ਬਣਾਓ'

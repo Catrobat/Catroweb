@@ -693,33 +693,33 @@ category:
   recommended: Рекомендуемые проекты
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'Достижения'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Новые достижения'
+      x_out_of_y: '%unlocked% из %total% разблокировано'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Разблокирован'
+      empty: "Вы еще не открыли никаких достижений."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Заблокировано'
+      empty: "Вы уже открыли все достижения."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Ученик'
+        description: 'Подпишитесь на кого-нибудь и загрузите проект'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Ремесленник'
+        description: 'Активный пользователь для > 1 год'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Мастер'
+        description: 'Активный пользователь на > 4 года'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Великий мастер'
+        description: 'Активный пользователь на > 7 лет'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Инициатива'
+        description: 'Добавьте ваше первое изображение профиля'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Новичок'
+        description: 'Создать учетную запись пользователя'

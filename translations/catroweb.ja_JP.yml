@@ -688,33 +688,33 @@ category:
   recommended: おすすめのプロジェクト
 achievements:
   overview:
-    header: 'Achievements'
+    header: '実績'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: '最新の実績'
+      x_out_of_y: '%unlocked% のうち %total% が解除されました'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'ロック解除済み'
+      empty: "まだ実績をアンロックしていません。"
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'ロック中'
+      empty: "すでにすべての実績のロックを解除しました。"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: '見習'
+        description: '誰かをフォローしてプロジェクトをアップロード'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'アルチザン'
+        description: '1年以上有効なメンバー'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'マスターズ'
+        description: '4年以上アクティブなメンバー'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'グランドマスター'
+        description: '7年以上アクティブなメンバー'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: '見習'
+        description: '最初のプロフィール写真を追加'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'ノービス'
+        description: 'ユーザーアカウントを作成'

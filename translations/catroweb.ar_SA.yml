@@ -688,33 +688,33 @@ category:
   recommended: المشاريع الموصى بها
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'إنجازات'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'أحدث إنجاز'
+      x_out_of_y: '%unlocked% من%total% مقفلة'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'مفتوحة'
+      empty: "لم تقم بإلغاء قفل أي إنجازات حتى الآن."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'مقفل'
+      empty: "لقد قمت بالفعل بإلغاء تأمين جميع الإنجازات."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'شخص يتعلم حرفة ما'
+        description: 'اتبع شخص ما وقم بتحميل المشروع'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'الحرفي'
+        description: 'عضو نشط لمدة> 1 سنة'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'رئيس'
+        description: 'عضو نشط لمدة> 4 سنوات'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'جراند ماستر'
+        description: 'عضو نشط لمدة> 7 سنوات'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'مبادرة'
+        description: 'أضف صورتك الشخصية الأولى'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'مبتدئ'
+        description: 'قم بإنشاء حساب مستخدم'
