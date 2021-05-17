@@ -687,33 +687,33 @@ category:
   recommended: Proyectos recomendados
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'Logros'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Logro más reciente'
+      x_out_of_y: '%unlocked% de %total% desbloqueado'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Desbloqueado'
+      empty: "Aún no has desbloqueado ningún logro."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Bloqueado'
+      empty: "Ya has desbloqueado todos los logros."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Aprendiz'
+        description: 'Seguir a alguien y subir un proyecto'
       silver_user:
         title: 'Artisan'
-        description: 'Active member for > 1 year'
+        description: 'Miembro activo por > 1 año'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Maestro'
+        description: 'Miembro activo por > 4 años'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Gran maestro'
+        description: 'Miembro activo por > 7 años'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Iniciativa'
+        description: 'Añade tu primera foto de perfil'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Novato'
+        description: 'Crear una cuenta de usuario'

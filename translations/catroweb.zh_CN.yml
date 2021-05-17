@@ -693,33 +693,33 @@ category:
   recommended: 推荐的项目
 achievements:
   overview:
-    header: 'Achievements'
+    header: '成就'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: '最新的成就'
+      x_out_of_y: '%unlocked%出 %total% 未锁'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: '已解锁'
+      empty: "你还没有解锁任何成就。"
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: '已锁定'
+      empty: "您已经解锁了所有的成就。"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: '见习生'
+        description: '关注某人并上传一个项目'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: '工匠'
+        description: '活跃会员超过1年'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: '硕士'
+        description: '活跃了4年以上的会员'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: '大师'
+        description: '活跃了7年以上的会员'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: '倡议'
+        description: '添加你的第一张个人资料照片'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: '新手'
+        description: '创建一个用户账户'

@@ -691,33 +691,33 @@ category:
   recommended: Proyek yang direkomendasikan
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'Prestasi'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Prestasi Terbaru'
+      x_out_of_y: '%unlocked% dari %total% tidak terkunci'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Tidak terkunci'
+      empty: "Anda belum membuka pencapaian apa pun."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Terkunci'
+      empty: "Anda telah membuka semua pencapaian."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Magang'
+        description: 'Ikuti seseorang dan unggah proyek'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Tukang'
+        description: 'Anggota aktif selama> 1 tahun'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Menguasai'
+        description: 'Anggota aktif selama> 4 tahun'
       diamond_user:
         title: 'Grand master'
-        description: 'Active member for > 7 years'
+        description: 'Anggota aktif selama> 7 tahun'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Prakarsa'
+        description: 'Tambahkan gambar profil pertama Anda'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Pemula'
+        description: 'Buat akun pengguna'

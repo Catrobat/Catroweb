@@ -691,33 +691,33 @@ category:
   recommended: Progetti consigliati
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'Risultati'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Obiettivo Più Nuovo'
+      x_out_of_y: '%unlocked% su %total% sbloccati'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Sbloccato'
+      empty: "Non hai ancora sbloccato alcun risultato."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Bloccato'
+      empty: "Hai già sbloccato tutte le realizzazioni."
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Apprendista'
+        description: 'Segui qualcuno e carica un progetto'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Artigiano'
+        description: 'Membro attivo per > 1 anno'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Maestro'
+        description: 'Membro attivo per > 4 anni'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Gran maestro'
+        description: 'Membro attivo per > 7 anni'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Iniziativa'
+        description: 'Aggiungi la tua prima immagine del profilo'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Novizio'
+        description: 'Crea un account utente'

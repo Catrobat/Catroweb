@@ -688,33 +688,33 @@ category:
   recommended: अनुशंसित परियोजनाओं
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'उपलब्धियों'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'नवीनतम उपलब्धि'
+      x_out_of_y: '%unlocked% में से %total% अनलॉक'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'अनलॉक किया'
+      empty: "आपने अभी तक कोई उपलब्धि अनलॉक नहीं की है."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'बंद'
+      empty: "आपने पहले ही सभी उपलब्धियों को अनलॉक कर दिया है।"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'शिक्षु'
+        description: 'किसी का अनुसरण करें और प्रोजेक्ट अपलोड करें'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'शिल्पकार'
+        description: '> 1 वर्ष के लिए सक्रिय सदस्य'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'गुरुजी'
+        description: '> 4 साल से सक्रिय सदस्य'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'ग्रैंड मास्टर'
+        description: '> 7 वर्षों के लिए सक्रिय सदस्य'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'पहल'
+        description: 'अपना पहला प्रोफ़ाइल चित्र जोड़ें'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'नौसिखिए'
+        description: 'एक उपयोगकर्ता खाता बनाएँ'
