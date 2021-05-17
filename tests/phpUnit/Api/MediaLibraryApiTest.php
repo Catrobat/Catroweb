@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use OpenAPI\Server\Model\MediaFileResponse;
 use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 
@@ -33,6 +34,9 @@ final class MediaLibraryApiTest extends CatrowebTestCase
    */
   protected $facade;
 
+  /**
+   * @throws ReflectionException
+   */
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(MediaLibraryApi::class)

@@ -28,6 +28,11 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     $this->jwt_manager = $jwt_manager;
   }
 
+  public function createJWTByUser(User $user): string
+  {
+    return $this->jwt_manager->create($user);
+  }
+
   protected function getPayloadFromGoogleIdToken($id_token): array
   {
     $client = new Google_Client(['client_id' => getenv('GOOGLE_ID')]);
