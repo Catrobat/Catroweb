@@ -711,7 +711,7 @@ achievements:
         title: 'Büyük usta'
         description: 'Şu kadar yıldır aktif üye > 7 yıl'
       perfect_profile:
-        title: 'EN İYİ'
+        title: 'ŞEF'
         description: 'İlk profil resminizi ekleyin'
       verified_developer:
         title: 'İlk adımlar'

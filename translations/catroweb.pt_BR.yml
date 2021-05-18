@@ -286,7 +286,7 @@ myprofile:
   editCountry: Alterar país
   editEmail: Alterar E-Mail
   deleteAccount: Excluir conta
-  deleteAccountText: Tem certeza que deseja excluir sua conta? Isto irá excluir seus projetos carregados e comentários!
+  deleteAccountText: Você tem certeza que deseja excluir sua conta? Isto vai excluir seus projetos postados e comentários!
   editAccountSettings: Editar configurações da conta
   notChangeVisibility: Não é possível alterar a visibilidade
   notChangeVisibilityReason: A versão do idioma do seu projeto é muito alta, portanto, ele não pode ser definido como visível.
