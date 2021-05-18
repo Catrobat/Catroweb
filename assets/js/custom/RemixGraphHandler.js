@@ -1,5 +1,4 @@
 /* eslint-env jquery */
-/* global LoadingAnimation */
 /* global NetworkDirector */
 /* global RemixGraph */
 /* global NetworkBuilder */
@@ -53,62 +52,39 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
         }
       })
 
-      const loadingAnimation = new LoadingAnimation('#177f8d', self.pleaseWait)
+      const loadingAnimation = $('#remix-graph-spinner')
       const networkDirector = new NetworkDirector()
       const remixGraph = RemixGraph.getInstance()
+
       remixGraph.init(self.programId, self.recommendedByRemixGraphPageId,
-        'remix-graph-modal', 'remix-graph-layer',
+        'remix-graph-container', 'remix-graph-layer',
         self.detailsUrlTemplate, self.pathStats, remixGraphTranslations)
 
-      $('#remix-graph-modal-link').animatedModal({
-        modalTarget: 'remix-graph-modal',
-        animatedIn: 'zoomInUp',
-        animatedOut: 'bounceOutDown',
-        zIndexIn: '300',
-        color: '#177f8d',
-        beforeOpen: function () {
-          remixGraph.destroy()
-          if (cachedRemixData != null) {
+      remixGraph.destroy()
+      if (cachedRemixData != null) {
+        document.addEventListener('gesturestart', blockEventListener)
+        document.ontouchmove = blockEventListener
+        const networkBuilder = new NetworkBuilder(self.programId, 'remix-graph-layer', remixGraphTranslations, cachedRemixData)
+        const networkDescription = networkDirector.construct(networkBuilder)
+        remixGraph.render(loadingAnimation, networkDescription)
+      } else {
+        $.ajax({
+          url: self.programRemixGraphUrl,
+          type: 'get',
+          success: function (remixData) {
+            cachedRemixData = remixData
             document.addEventListener('gesturestart', blockEventListener)
             document.ontouchmove = blockEventListener
-            const networkBuilder = new NetworkBuilder(self.programId, 'remix-graph-layer', remixGraphTranslations, cachedRemixData)
+            const networkBuilder = new NetworkBuilder(self.programId, 'remix-graph-layer', remixGraphTranslations, remixData)
             const networkDescription = networkDirector.construct(networkBuilder)
             remixGraph.render(loadingAnimation, networkDescription)
-          } else {
-            $.ajax({
-              url: self.programRemixGraphUrl,
-              type: 'get',
-              success: function (remixData) {
-                cachedRemixData = remixData
-                document.addEventListener('gesturestart', blockEventListener)
-                document.ontouchmove = blockEventListener
-                const networkBuilder = new NetworkBuilder(self.programId, 'remix-graph-layer', remixGraphTranslations, remixData)
-                const networkDescription = networkDirector.construct(networkBuilder)
-                remixGraph.render(loadingAnimation, networkDescription)
-              },
-              error: function () {
-                $('#remix-graph-spinner').hide()
-                alert('Unable to fetch remix-graph!')
-              }
-            })
+          },
+          error: function () {
+            $('#remix-graph-spinner').hide()
+            alert('Unable to fetch remix-graph!')
           }
-          console.log('The animation was called')
-        },
-        afterOpen: function () {
-          loadingAnimation.show()
-          console.log('The animation is completed')
-        },
-        beforeClose: function () {
-          console.log('The animation was called')
-          loadingAnimation.hide()
-          document.removeEventListener('gesturestart', blockEventListener)
-          document.ontouchmove = null
-          location.reload()
-        }
-      })
-      $('#remix-graph-spinner').hide()
-      // show graph
-      $('#remix-graph-modal-link').click()
+        })
+      }
     })
   }
 }
