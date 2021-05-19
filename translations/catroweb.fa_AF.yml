@@ -294,152 +294,152 @@ licenseToPlay:
   link: 'مجوز برای بازی'
   title: 'مجوز بازی - اعتبار  دهید و به اشتراک گذارید'
   text1: تصور کنید که هر پروژه کاتروبات (Catrobat) یک کیک است، یک کیک بسیار ویژه ای است که با دستور آشپزی آن همراه است (بلوک های برنامه نویسی). همه اعضای جامعه کاتروبات (Catrobat) کیک خود را همراه با دستور آشپزی های خود به اشتراک می گذارند. این به این معنی است که شما می توانید از کیک لذت ببرید و یاد بگیرید چگونه آنها را خودتان بسازید!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  text2: 'هیچ دستور آشپزی مخفی وجود ندارد: دستور آشپزی در مورد چگونگی ساخت این کیک ها برای هر کسی که برای استفاده، استفاده مجدد، تغییر، و خدمت به عنوان الهام بخش برای ایده های جدید باز است ... منظورم کیک است.'
+  text3: "شما می توانید کیک ها را بخورید و همچنین دستور آشپزی دیگران را کپی کنید تا خودتان را با مواد تشکیل دهنده مختلف کنید. این آزادی همراه با دو مورد ساده است:"
+  text4: "در راه اندازی جامعه کاتروبات Catrobat، ما تصمیم گرفتیم این رویکرد را اتخاذ کنیم زیرا ما معتقدیم که از یادگیری و خلاقیت در جامعه پشتیبانی می کند. با به اشتراک گذاشتن دستور العمل ها و مواد تشکیل دهنده (اسکریپت ها و آثار هنری)، مردم می توانند بر روی ایده های یکدیگر بسازند و به نفع هر کس خواهد بود."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: 'بیشتر بدانید در مورد شرایط استفاده از انجمن آنلاین کاتروبات Catrobat در %link-termsOfUse%. '
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: کیک خود را همراه با دستور غذا به اشتراک بگذارید
+    item2: به کسانی که از شما الهام گرفته اند، اعتبار بدهد
+  version: نسخه ۱.۱، ۲ آپریل ۲۰۱۳
 termsOfUse:
-  title: Terms of Use
+  title: شرایط استفاده
   headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text1: 'به عنوان بخشی از جامعه کاتروبات Catrobat، شما پروژه ها و ایده ها را با مردم به اشتراک می گذارید:'
+  text2: "ما به کمک شما نیاز داریم تا این جامعه را یک مکان حمایتی برای هر عضو ایجاد کنیم. در اینجا این است که چگونه می توانید کمک کنید:"
+  text3: "از طریق پروژه کاتروبات Catrobat ما می خواهیم همکاری را تقویت کنیم و اجازه دهیم خلاقیت هر کس برای ترکیب به نفع تمام بشریت باشد.شما همچنین می توانید عضو فعال جامعه کاتروبات Catrobat شوید، با دادن پروژه های خود به جامعه به عنوان یک هدیه، به همان شیوه که دیگر اعضای فعال پروژه های خود را به شما می دهند:"
+  text4: 'هدیه ما به شما:'
+  text5: 'شرایط استفاده و خدمات ما:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: از بسیاری از کشورهای مختلف و فرهنگ ها
+    item2: از تمام سنین (از کودکان جوان به نوجوانان و پدربزرگ و مادربزرگ)
+    item3: با تمام سطوح تجربه
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: با احترام رفتارکن. هنگام به اشتراک گذاری پروژه ها، لطفا به یاد داشته باشید که افراد بسیاری از سنین مختلف و زمینه های مختلف مشارکت شما را می بینند.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item3: "صادق باش تظاهر نکنید که کسی دیگری باشید از این که شما هستید یا سعی کنید جامعه را فریب دهید."
+    item4: "اطلاعات شخصی را خصوصی نگه دارید. آدرس ایمیل، شماره تلفن یا سایر اطلاعات تماس شخصی خود را به اشتراک نگذارید."
+    item5: "کمک به حفظ سایت دوستانه. اگر احساس می کنید که دیگران یک پروژه یا نظر را پیدا می کنند، توهین آمیز، بیش از حد خشونت آمیز و یا در غیر این صورت نامناسب است، فقط روی دکمه «گزارش به عنوان نامناسب» کلیک کنید و یک توضیح کوتاه را بنویسید. تیم کاتروبات Catrobat گزارش شما را بررسی خواهد کرد و ممکن است هر پروژه، نظر یا پست را حذف کند."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "با آپلود یک پروژه به ویب سایت های ما، شما قبول می کنید و موافقت می کنید که این کار را تحت مجوز خاصی از پروژه های کتاتروبات Catrobat آپلود قرار دهید. همانند مجوز های آزاد که در آن سیستم کاتروبات Catrobat خود را برای شما در دسترس شما قرار می گیرد، این مجوز های رایگان پروژه های کاتروبات Catrobat آپلود شده به هر کس حق یادگیری از کار قبلی که توسط دیگران آپلود شده است و برای انطباق و ریمیکس برای ساخت بازی های جدید جذاب خود، یاد می گیرد انیمیشن ها و سایر پروژه ها. این اجازه می دهد تا هر کس به \"شانه های همسالان خود\" ایستاده، یکی از آنها بودن شما! بنابراین کار شما به این ترتیب به نفع تمام جهان است و برای هر کسی که از آن استفاده می شود، آزادانه باقی می ماند، کمی شبیه به متن و تصاویر آزادانه به ویکی پدیا توسط داوطلبان از سراسر جهان کمک می کند. آن را به عنوان هدیه از طرف خود به بشریت فکر کنید: شما به همه می دهید، و همه دیگران که کار خود را به وب سایت های ما آپلود می کنند، به شما می دهند. بنابراین یک پروژه آپلود شده هدیه ای از ارزش عالی است که صاحب آن به صورت رایگان به شما می دهد، با شرایطی که شما در جامعه شرکت می کنید."
+    item2: شما مجبور نیستید هدیه را بپذیرید اگر شما انجام دهید، قوانین خاصی اعمال می شود. مزایای این قوانین این است که شما می توانید از کار یاد بگیرید و آن را بر روی آن ساخت تا حتی چیزهای خنک تر خود را، که پس از آن شما می توانید، به عنوان مثال، دوباره به وب سایت های ما به عنوان خود آپلود کنید. یکی دیگر از مزایای این است که این مجوز ها اطمینان حاصل می کند که شما نمی توانید از طریق استفاده از پروژه خود، هیچ مشکلی برای هر گونه مشکلی که به دیگران ناشی می شود، مسئولیت داشته باشید.
+    item3: "یکی از مهمترین شرایط اضافی این است که شما به وضوح به نویسندگان می دهید که کارهای خود را بر اساس کار خود بر عهده دارید. در عین حال، ما به سختی کار خواهیم کرد، به طوری که کار شما به وضوح توسط دیگران به شما کمک خواهد کرد، با دادن اعطای به نام منحصر به فرد شما آزادانه انتخاب شده است به نمایندگی شما در جامعه کاتروبات Catrobat، و با دادن به دیگران فرصت برای ابراز قدردانی خود را به شما در راه های عمومی برای به دست آوردن کار خود را به همه، و به ویژه به آنها."
+    item4: 'لطفا در %link-licenseUploaded% برای شرایط و ضوابط قانونی دقیق مشورت کنید. '
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "ما تمام نرم افزارهای خودمان و منابع اینترنتی مربوط به سیستم کاتروبات Catrobat را ارائه می دهیم، به عنوان مثال، نرم افزار نوشته شده توسط تیم کاتروبات Catrobat، وب سایت های ما و منابع اینترنتی، کد منبع خود ما مربوط به سیستم کاتروبات Catrobat، و تمام مواد اضافی شامل، به عنوان مثال ، تصاویر، صداها و متون، در حال حاضر و در آینده به شما تحت مجوز های رایگان کاتروبات Catrobat."
+    item2: این مجوزها تمام قسمت های کاتروبات Catrobat را هر دو به صورت رایگان به شما می دهد و همچنین به راحتی به شما آزادی می دهد تا از آنها استفاده کنید، با این حال دوست دارید، با تنها چند محدودیت اطمینان، در میان دیگران، سیستم کاتروبات Catrobat برای همیشه آزاد خواهد شد و برای همه مفید است.
+    item3: 'لطفا %link-licenseToPlay% را برای شرایط و ضوابط قانونی دقیق مشورت کنید. کد منبع سیستم کاتروبات Catrobat و همچنین بسیاری از اسناد و منابع دیگر از طریق %link-developer% در دسترس هستند. '
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
+    item1: 'اگر شما، یا اگر شما کمتر از 13 سال سن داشته باشید، والدین یا سرپرستان قانونی شما با یک سازمان درگیر یا مسئول نقض حریم خصوصی نوع و / یا عمده نظارت و یا نظارت بر توده ای مرتبط هستند، سپس شما مجاز به استفاده از برنامه های کاربردی نرم افزار و دسترسی به خدمات ما نیستید. جزئیات دقیق این محدودیت و استثناهای خاص به آن در بخش های ۴.الف و ۴.ب در %link-termsOfUse% ما مشخص شده است.'
+    item2: اگر شما کمتر از ۱۳ سال سن دارید، باید از والدین یا سرپرستان قانونی خود بپرسید که آیا آنها به شما اجازه می دهند از برنامه ها و خدمات نرم افزار کاتروبات Catrobat استفاده کنید.
+    item3: "ما حقوق را برای رد، حذف، یا پنهان کردن پروژه ها، حساب های کاربری، و هر گونه مواد دیجیتال به وب سایت های کاتروبات Catrobat در هر زمان در اختیار ما ذخیره می کنیم به عنوان مثال اگر ما متوجه شویم که یک پروژه شامل مواد نامناسب است یا کاربر بر حقوق سایر افراد نقض می شود."
+    item4: "همه نرم افزار کاتروبات Catrobat و منابع اینترنتی در امید ارائه می شود که آنها مفید باشند، اما بدون هیچ گونه ضمانت."
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  bottom1: از زمان به زمان، اینجا را بررسی کنید، زیرا ما همیشه سعی می کنیم شرایط استفاده ما را بهبود ببخشیم.
+  bottom2: 'لطفا هر گونه پیشنهادات مربوط به این شرایط استفاده را به %email-webmaster% ارسال کنید.'
+  version: نسخه ۱٫۳، ۴ مارچ ۲۰۱۴
 search:
-  dotdotdot: Search...
-  search: Search
-  inMediaLib: Search in media library
+  dotdotdot: جستجو ...
+  search: جستجو
+  inMediaLib: جستجو در کتابخانه رسانه
   results: Search Results
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
+  resultcount: جستجو شما %count% را بازگرداند
+  fail: لطفا حداقل یک اصطلاح جستجو را وارد کنید
 menu:
-  profile: My Profile
-  login: Login
-  logout: Logout
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
+  profile: پروفایل من
+  login: وارد شدن
+  logout: خروج
+  admin: مدیر
+  home: خانه
+  helpAndTutorials: کمک و آموزش
   followersAndFollowing: دنبال کننده
 login:
-  login: Login
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPass: Recover password
+  login: وارد شدن
+  passOrUser: رمز عبور یا نام کاربری شما نادرست بود.
+  noUsername: نام کاربری یا آدرس ایمیل شما یافت نشد
+  forgotPass: رمز عبور یا نام کاربری را فراموش کرده اید؟
+  recoverPass: بازیابی رمز عبور
   recoverPassSend: یک ایمیل به آدرس ایمیل شما ارسال شد. لطفا صندوق پستی خود را بررسی کنید.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
-  or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
+  alreadyReset: رمز عبور این کاربر قبلا در ۲۴ ساعت گذشته درخواست شده است.
+  confirmationSend: یک ایمیل برای تأیید ثبت نام شما به آدرس ایمیل شما ارسال شد. لطفا صندوق ورودی خود را بررسی کنید و حساب خود را فعال کنید.
+  userOrEmail: نام کاربری یا پست الکترونیک
+  changePass: تغییر رمز عبور
+  createAccount: یک حساب کاربری تشکیل دهید
+  noAccount: حساب کاربری ندارید!
+  alreadyAccount: در حال حاضر یک حساب کاربری دارید؟
+  or: یا
+  username: نام کاربری
+  email: پست الکترونیک
+  passwordFirst: رمز عبور
   passwordSecond: Password Confirm
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: دانلود به عنوان برنامه
+  prepare: 'به عنوان برنامه دریافت کنید'
+  preparing: 'آماده سازی برنامه'
+  text: 'این روند ممکن است مدتی باشد'
 format:
-  million_abbreviation: M
+  million_abbreviation: م
 #api
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
+    blank: نام کاربری نباید خالی باشد
+    invalid: نام کاربری شما نامعتبر است
     exists: این نام کاربری در حال حاضر وجود دارد.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    not_exists: این نام کاربری وجود ندارد
+    not_email: نام کاربری نباید یک آدرس ایمیل باشد.
+    size: نام کاربری باید حداقل ۳ کاراکتر داشته باشد و نه بیش از ۱۸۰ باشد
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: رمز عبور وجود ندارد. 
+    short: 'رمز عبور شما باید حداقل {{ limit }} کاراکترها داشته باشد.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: شرح نباید شامل واژگان بی ادبانه باشد.
   credit:
     rude: Credits must not contain rude words.
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: کشور وجود ندارد
+    invalid: کشور نامعتبر
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: ایمیل نباید خالی باشد
+    invalid: ایمیل شما به نظر می رسد که نامعتبر است
     exists: این آدرس ایمیل در حال حاضر وجود دارد.
   id:
     blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
+  login: رمز عبور یا نام کاربری نادرست بود.
   post-data: POST-Data not correct or missing!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: مشتری FileChecksum را ارسال نکرد! آیا شما از یک نسخه قدیمی از کد جیبی Pocket Code استفاده می کنید؟
+    invalid: چکمه نامعتبر
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: کد نامعتبر XML
+    missing: 'خطای ناشناخته: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: فایل غیر منتظره یافت شد
+    invalid: فایل نامعتبر
+  image.missing: پروژه XML یک فایل را ذکر می کند که در پوشه پروژه وجود ندارد
+  unknown: خطای ناشناخته
+  token: 'احراز هویت دستگاه شکست خورد: نامعتبر auth-token!'
+  uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
   programname:
-    rude: Project name must not contain rude wordes.
+    rude: نام پروژه نباید شامل کلمات بی ادبانه باشد.
   program:
-    invalid: Invalid project.
+    invalid: پروژه نامعتبر
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'با عرض معزرت، پروژه شما شامل یک نسخه قدیمی از زبان کارتروبات Catrobat است! آیا شما از آخرین نسخه کد جیبی استفاده می کنید؟'
   programversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'با عرض معزرت، شما از یک نسخه قدیمی کد جیبی استفاده می کنید. لطفا به آخرین نسخه بروزرسانی کنید'
   authentication:
-    title: Authentication failed
+    title: احراز هویت شکست خورد
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      اعتبار کاربر شما اشتباه است. 
+      لطفا سعی کنید دوباره در برنامه وارد شوید.
 success:
-  text: Success
-  registration: Registration successful!
-  token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  text: موفقیت
+  registration: ثبتنام موفقیتآمیز!
+  token: خوب
+  upload: پروژه شما با موفقیت آپلود شد!
+  imgUpload: تصویر شما با موفقیت آپلود شد!
+  report: گزارش شما با موفقیت ارسال شد!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
   hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
@@ -447,25 +447,25 @@ time:
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: در آپلود برنامه شما یک خطا وجود داشت.
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
+    emailMissing: 'ایمیل موجود نیست'
+    emailEmpty: 'ایمیل نمی تواند خالی باشد'
+    emailInvalid: 'ایمیل نامعتبر است'
+    emailAlreadyInUse: 'ایمیل در حال حاضر در استفاده'
+    usernameMissing: 'نام کاربری وجود ندارد'
+    usernameTooShort: 'نام کاربری خیلی کوتاه است'
+    usernameTooLong: 'نام کاربری خیلی طولانی است'
+    usernameEmpty: 'نام کاربری نمی تواند خالی باشد'
+    usernameAlreadyInUse: 'نام کاربری در حال حاضر در حال استفاده است'
+    usernameInvalid: 'نام کاربری نامعتبر است'
+    passwordMissing: 'رمز عبور وجود ندارد'
+    passwordEmpty: 'رمز عبور نمی تواند خالی باشد'
+    passwordTooShort: 'رمز خیلی کوتاه است'
+    passwordTooLong: 'رمز عبور بیش از حد طولانی است'
+    passwordInvalidChars: 'رمز عبور شامل علامت های نامعتبر است'
+    usernameContainsEmail: "نام کاربری نباید حاوی یک آدرس ایمیل باشد"
     countryCodeInvalid: "Country code invalid"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
@@ -473,16 +473,16 @@ api:
     creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
+  arabic: عربی
+  bulgarian: بلغاری
+  catalan: کاتالان
+  chinese_simplified_han: چینی (ساده هان)
+  chinese_traditional_han: چینی (ساده هان)
+  croatian: کرواتی
+  czech: کشور چک
+  danish: دانمارکی
+  dutch: هلندی
+  english_united_kingdom: انگلیسی (بریتانیا)
   english_united_states: English (United States)
   estonian: Estonian
   filipino: Filipino
