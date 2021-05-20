@@ -466,10 +466,10 @@ api:
     passwordTooLong: 'رمز عبور بیش از حد طولانی است'
     passwordInvalidChars: 'رمز عبور شامل علامت های نامعتبر است'
     usernameContainsEmail: "نام کاربری نباید حاوی یک آدرس ایمیل باشد"
-    countryCodeInvalid: "Country code invalid"
+    countryCodeInvalid: "کد کشور نامعتبر است"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
+    invalid_checksum: 'بررسی محاسبه نامعتبر. سعی کنید دوباره آپلود کنید!'
+    upload_error: 'خطا در هنگام آپلود. سعی کنید دوباره آپلود کنید!'
     creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
@@ -483,54 +483,54 @@ language:
   danish: دانمارکی
   dutch: هلندی
   english_united_kingdom: انگلیسی (بریتانیا)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  english_united_states: انگلیسی (ایالات متحده)
+  estonian: استونیایی
+  filipino: فیلیپینی
+  finnish: فنلاندی
+  french: فرانسوی
+  german: آلمانی
+  greek: یونانی
+  hebrew: عبری
+  hindi: هندی
+  hungarian: مجارستانی
+  indonesian: اندونزیایی
+  italian: ایتالیایی
+  japanese: ژاپنی
+  korean: کوریایی
+  latvian: لتونی
+  lithuanian: لیتوانیایی
+  malay: مالایا
+  norwegian: نروژی
+  persian: فارسی
+  polish: لهستانی
+  portuguese_brazil: پرتغالی (برزیل)
+  portuguese_portugal: پرتغالی (پرتغال)
+  romanian: رومانیایی
+  russian: روسی
+  serbian: صربستان
+  slovak: اسلواکی
+  slovenian: اسلوونیایی
+  spanish_latin_america: اسپانیایی (آمریکای لاتین)
+  spanish_spain: اسپانیایی (اسپانیا)
+  swedish: سوئدی
+  thai: تایلندی
+  turkish: ترکی
+  ukrainian: اوکراین
+  vietnamese: ویتنامی
 ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
-  whats: What's the %gamejamname%?
+  nojam: با عرض پوزش، در این زمان هیچ جمی بازی وجود ندارد
+  submit: به %gamejamname% ارسال کنید
+  whats: '%gamejamname% چی است؟'
   submitown:
-    header: be aware
-    subheader: You can only submit your own projects
+    header: آگاه باش
+    subheader: شما فقط می توانید پروژه های خود را ارسال کنید
     text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
+      اما چرا از خودت را ایجاد نمی کنید!
+      در %gamejamtag% شرکت کنید
 tag-text: Tags
 extenstion-text: Extensions
 tags:
@@ -600,19 +600,19 @@ codeStatistics:
   soundBricks: 'Sound'
   looksBricks: 'Looks'
   penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
+  dataBricks: 'اطلاعات'
+  deviceBricks: 'دستگاه'
+  specialBricks: 'خاص'
 footer:
-  language: Language
+  language: زبان
   usefulLinks: Useful Links
-  legalities: Legalities
+  legalities: حقوقی
   communityStats: Community Stats
-  download: Get the App
+  download: برنامه را بدست آورید
 privacy-policy:
   header: Privacy Policy
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  version: نخسه ۲.۲، ۱۷ اکتوبر ۲۰۱۹
+  text1: برای ارائه همه مزایای خدمات ما و حساب مرتبط، جمع آوری اطلاعات خاصی از شما لازم است.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
   text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
   text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
@@ -624,11 +624,11 @@ privacy-policy:
   text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  markAsRead: "به عنوان خوانده شده علامت بزن"
+  noFollowers: "به نظر می رسد که شما هیچ اطلاعیه ای دنبال کننده ندارید."
+  noComments: "به نظر می رسد که شما هیچ اطلاعیه ای ندارید."
+  noReactions: "به نظر می رسد که شما هیچ اعلان واکنش ندارید."
+  noRemixes: "به نظر می رسد که شما هیچ اطلاعیه ریمیکس ندارید."
   comment:
     message: 'User %user_link% commented on your project %program_link%.'
   like:
@@ -640,22 +640,22 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Link to project copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: پیوند به پروژه کپی شده به کلیپ بورد!
+  fail: 'لینک کپی به کلیپ بورد نشد! ):'
+next: بعد
+previous: قبلی
 media-packages:
-  title: Media-Packages
-  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  title: بسته های رسانه ای
+  description: در دسته های زیر می توانید بازیگران و اشیاء اضافی را برای اضافه کردن پروژه های کد جیبی PocketCode خود پیدا کنید.
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
+    description: اندازه پیش نمایش
+    sm: کوچک
+    md: متوسط
+    lg: بزرگ
+  theme-special: "%flavor% موضوع ویژه خاص"
+  search-results: نتایج جستجوی کتابخانه رسانه ها
   no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+  download_these_files: زخیره
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -668,7 +668,7 @@ agree: Agree
 disagree: Disagree
 profileLoader:
   noProfiles: There are currently no profiles.
-element: 'Element'
+element: 'عنصر'
 elements: 'Elements'
 share:
   text: 'Share'
