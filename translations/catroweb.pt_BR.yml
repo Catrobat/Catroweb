@@ -209,7 +209,7 @@ accountConfirmation:
     A Equipe Catrobat.
     </p>
 passwordRecovery:
-  subject: Sua Recuperação de Senha do Catrobat
+  subject: Sua recuperação de senha Catrobat
   message: |
     Caro %username%.
     Você solicitou a redefinição de sua senha em %appplication_url% porque a esqueceu.
@@ -297,7 +297,7 @@ licenseToPlay:
   text2: 'Não há receitas secretas: as instruções sobre como fazer os bolos estão abertas a todos para utilizar, reutilizar, modificar e servir de inspiração para novas ideias... digo, bolos.'
   text3: "Você pode comer os bolos bem como copiar receitas de outras pessoas para fazer a sua própria, talvez com ingredientes diferentes. Esta liberdade vem com dois requisitos simples:"
   text4: "Na criação da comunidade Catrobat, decidimos adotar esta abordagem pois acreditamos que ela oferece suporte à aprendizagem e criatividade dentro da Comunidade. Através do compartilhamento de receitas e ingredientes (scripts e artwork), todos podem criar com base nas ideias uns dos outros. Assim, todos podem se beneficiar."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text5: Ao criar o site do catrobat, nós incluímos funções para incentivar as pessoas a compartilharem e dar crédito para os outros. Em cada página de projetos, você sempre pode baixar os scripts originais do projeto. Se você remixar um projeto (modificar os scripts ou artes e compartilhar o resultado), nós encorajamos você a dar crédito nas notas e créditos do projeto, mencionando as pessoas e o projeto que o inspirou.
   text6: 'Saiba mais sobre os termos de uso da comunidade Catrobat online em %link-termsOfUse%.'
   list1:
     item1: compartilhar seus bolos juntamente com a receita
@@ -626,7 +626,7 @@ privacy-policy:
 catro-notifications:
   markAsRead: "Marcar como lido"
   noFollowers: "Parece que você não tem nenhuma notificação de seguidores."
-  noComments: "Parece que você não tem nenhuma notificação para comentários."
+  noComments: "Parece que você não tem nenhuma notificação de comentários."
   noReactions: "Parece que você não tem notificações de reações."
   noRemixes: "Parece que você não tem notificações de remixes."
   comment:
