@@ -531,54 +531,54 @@ gamejam:
     text: |
       اما چرا از خودت را ایجاد نمی کنید!
       در %gamejamtag% شرکت کنید
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: برچسب ها
+extenstion-text: پسوند
 tags:
   constant:
-    tag1: Game
-    tag2: Animation
-    tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
-    tag7: Tutorial
+    tag1: بازی
+    tag2: انیمیشن
+    tag3: داستان
+    tag4: موسیقی
+    tag5: هنر
+    tag6: تجربی
+    tag7: تدبیر
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: تعمیر و نگهداری دیسک
+    ramMaintenance: تعمیر و نگهداری رم RAM
+    noRemovableObjects: هیچ اشیاء قابل جابجایی موجود نیست
+    removableObjects: اشیاء قابل جابجایی
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: پروژه های مشابه
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: بیشتر از %username%
 pmd:
-  submitBtn: Submit your project
+  submitBtn: پروژه خود را ارسال کنید
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: وظیفه
+    text: شما قصد دارید پروژه خود را ارسال کنید. لطفا کد پروژه را وارد کنید و روی ارسال کلیک کنید.
+    btnText: ارسال
   successful:
-    text: Your project upload was successful.
+    text: پروژه شما با موفقیت آپلود شد!
   failed:
-    text: Project upload failed.
+    text: آپلود پروژه شکست خورد.
 codeview:
   title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
+  showCode: 'نمایش کد'
+  hideCode: 'مخفی کردن کد'
+  showStatistics: 'نمایش آمار کد'
+  hideStatistics: 'پنهان کردن آمار کد'
+  cantDisplayCode: "کد را نمی توان نمایش داد"
+  cantDisplayStatistics: "کد را نمی توان نمایش داد"
+  totalNumberOf: 'تعداد کل'
+  scenes: 'صحنه های'
+  scripts: 'اسکریپت'
   bricks: 'Bricks'
   objects: 'Actors and Objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  looks: 'شکل ها'
+  sounds: 'صدا ها'
   globals: 'Globals'
-  locals: 'Locals'
+  locals: 'داخلی'
   globalVariables: 'Global Variables'
   localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
@@ -592,14 +592,14 @@ codeview:
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
-  penBricks: 'Pen'
+  general: 'عمومی'
+  bricks: 'آجر'
+  eventBricks: 'رویداد'
+  controlBricks: 'کنترل'
+  motionBricks: 'حرکت'
+  soundBricks: 'صدا'
+  looksBricks: 'شکل ها'
+  penBricks: 'خودکار'
   dataBricks: 'اطلاعات'
   deviceBricks: 'دستگاه'
   specialBricks: 'خاص'
@@ -657,23 +657,23 @@ media-packages:
   no-results: Your search returned 0 results. Please use only English search terms.
   download_these_files: زخیره
 flavor:
-  pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
-disagree: Disagree
+  pocketcode: پاکت کود
+  pocketalice: پاکت آلیس
+  pocketgalaxy: گلکسی جیم
+  phirocode: فیرو کد
+  luna: لونا و پشک
+  create@school: ایجاد @ کتب
+copyright: 'کپی رایت &copy;%year%<a href="http://www.catrobat.org">کاتروبات</a>. همه حقوق محفوظ است.'
+agree: موافق
+disagree: غیر موافق
 profileLoader:
-  noProfiles: There are currently no profiles.
+  noProfiles: در حال حاضر هیچ پروفایل وجود ندارد.
 element: 'عنصر'
 elements: 'Elements'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
+  text: 'اشتراک'
+  error: 'شراکت ناموفق '
+  success: 'اشتراک با موفقیت'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat community'

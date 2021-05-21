@@ -222,19 +222,19 @@ passwordRecovery:
     Sua equipe Catrobat.
   messageHtml: |
     <p>
-    Caro(a) %username%.<br>
+    Para %username%.<br>
     <br>
     Você solicitou redefinir sua senha no <a href=%appplication_url%>Pocket Code</a> por tê-la esquecido.
     Se você não fez esta solicitação, por favor, ignore-a. Ela expirará e se tornará inutilizável em 24 horas.<br>
     <br>
     Para redefinir sua senha e criar uma nova, por favor clique <a href=%confirmationUrl%>aqui.</a><br>
     <br>
-    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a <a href=%appplication_url%>comunidade</a> Pocket Code.<br>
+    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a <a href=%appplication_url%>comunidade</a> do Pocket Code.<br>
     Para isso, siga para a página: <a href=%loginPage%>Página de Login</a><br>
     Para alterar os detalhes do seu perfil, siga para esta <a href=%profilePage%>página</a>.<br>
     <br>
     Sinceros cumprimentos,<br>
-    Seu Time Your Catrobat.
+    O time do Catrobat.
     </p>
 profile:
   edit: Editar seu perfil
@@ -524,7 +524,7 @@ ci:
 gamejam:
   nojam: Desculpa, não há game jams disponíveis agora
   submit: Enviar para %gamejamname%
-  whats: Qual o %gamejamname%?
+  whats: Oque é o %gamejamname%?
   submitown:
     header: fique atento
     subheader: Você só pode enviar seus próprios projetos
@@ -616,7 +616,7 @@ privacy-policy:
   text2: Para manter e melhorar nossos serviços (apps e sites) e para fazer pesquisa científica sobre a educação ICT e STEM/STEAM, usamos o Google Analytics, Crashlytics, and Firebase, all by Google LLLC (EUA), e Dynatrace por Dynatrace LLC (EUA) para obter metadados sobre o uso de nossos serviços, e. . Informações de travamento, carimbo de tempo, páginas visitadas/telas, uso de nossos aplicativos e serviços, sistema operacional usado e informações sobre o provedor de rede. Esta análise e os dados coletados não estão ligados ao seu perfil e não contêm nenhuma informação pessoal (últimos bits do endereço IP são anonimizados). No entanto, os dados coletados serão transferidos para os prestadores de serviços (Google LLC, EUA e Dynatrace LLC, EUA). O processamento de dados é baseado em acordos com o Google LLC e Dynatrace LLC. Esta relação com os prestadores de serviços está em conformidade com o Regulamento Geral sobre a Protecção de Dados da União Europeia (GDPR) e o acordo "Privacy Shield" UE-EUA.
   text3: Para criar e usar uma conta em nossos sistemas, e para informá-lo sobre alterações necessárias sobre sua conta por e-mail, por exemplo, atualizações ou violações de nossos Termos de Uso e Serviço, nossas regras da comunidade ou nossas políticas, vamos armazenar seu nome de usuário e, se fornecido por você, seu endereço de e-mail. Se você conectou sua conta via Google Plus ou Facebook, nós adicionalmente armazenamos uma chave de identificação conectada a sua conta nesses serviços. Não usaremos esses dados para quaisquer outros fins (por exemplo, marketing), a menos que você tenha permitido explicitamente fazê-lo.
   text4: Numa base voluntária, você pode nos dar o seu país de residência através da página da sua conta no site de compartilhamento. Isso será exibido no seu perfil público e só será usado para fins estatísticos e de pesquisa por nós. Ele pode ser removido a qualquer momento nas configurações de perfil.
-  text5: Você pode retirar o uso dos dados pessoais pertencentes à sua conta a qualquer momento, excluindo sua conta por meio da página do seu perfil em https://share. atrob.at/. Após a exclusão da sua conta, você ainda poderá usar os serviços fornecidos, mas não colaborar, por exemplo, por meio do upload de programas, comentários ou gostos. Além disso, todo o conteúdo fornecido vinculado à sua conta, por exemplo, programas, comentários, etc. serão excluídos.
+  text5: Você pode retirar o uso dos dados pessoais pertencentes à sua conta a qualquer momento, excluindo sua conta por meio da página do seu perfil em https://share. atrob.at/. Após a exclusão da sua conta, você ainda poderá usar os serviços fornecidos, mas não colaborar, por exemplo, por meio do envio de programas, comentários ou reações. Além disso, todo o conteúdo fornecido vinculado à sua conta, por exemplo, programas, comentários, etc, serão excluídos.
   text6: Para evitar uso indevido de nossos serviços, por exemplo, através de uploads ou comentários do usuário para fins ilegais, todos os dados públicos gerados pelo usuário (uploads, Os comentários serão armazenados internamente em um banco de dados, juntamente com um timestamp e o endereço de internet utilizado. Esses dados não serão utilizados nem enviados a nenhuma instituição. A menos que as acções ilegais sejam razoavelmente suspeitas e as instituições jurídicas com direito oficial o solicitem com base no direito aplicável. Cada caso será analisado minuciosamente por nós numa base individual.
   text7: Você pode se inscrever voluntariamente na Newsletter do Catrobat, em https://catrob.at/newsletter fornecida por nós através do MailChimp (The Rocket Science Group LLC d/b/a MailChimp, EUA). Em seguida, você receberá atualizações sobre o projeto Catrobat e seus serviços no endereço de e-mail fornecido. Você pode retirar a newsletter a qualquer momento usando o link "cancelar assinatura" no rodapé de cada newsletter. Esta newsletter é fornecida pelo MailChimp com quem temos um acordo de processamento de dados e que se comprometeu com o Regulamento Geral da UE relativo à Prodecção de Dados e com o "Escudo de Privacidade" UE-EUA. Para mais detalhes sobre o MailChimp por favor, procure também a Política de Privacidade e os Termos de Uso do MailChimp.
   text8: 'Todos os Serviços são fornecidos pelo projeto de código aberto livre Catrobat, sob o guarda-chuva da Associação Internacional Catrobat: Verein zur Fo^\\rderung freier Software, uma ONG sem fins lucrativos integrada em Graz, na Áustria (União Europeia). Nossas políticas respeitam a lei de proteção de dados da UE e da Áustria (PGPD). Para entrar em contato conosco, por favor, envie um e-mail para contact@catrobat. rg ou envie-nos um e-mail para Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Áustria (União Europeia).'
@@ -658,7 +658,7 @@ media-packages:
   download_these_files: salvar
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Fatia de Bolso
+  pocketalice: Pocket Alice
   pocketgalaxy: Galaxy Jam
   phirocode: PhiroCode
   luna: Luna & Cat
