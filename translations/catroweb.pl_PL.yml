@@ -685,3 +685,35 @@ category:
   example: Przykład
   scratch: Remiksy Scratcha
   recommended: Polecane projekty
+achievements:
+  overview:
+    header: 'Osiągnięcia'
+    most_recent_achievement:
+      title: 'Najnowsze Osiągnięcie'
+      x_out_of_y: 'Odblokowano %unlocked% z %total%'
+    tab_unlocked:
+      title: 'Odblokowano'
+      empty: "Nie odblokowałeś jeszcze żadnych osiągnięć."
+    tab_locked:
+      title: 'Zablokowane'
+      empty: "Już odblokowałeś wszystkie osiągnięcia."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Praktyka'
+        description: 'Obserwuj kogoś i prześlij projekt'
+      silver_user:
+        title: 'Artisan'
+        description: 'Aktywny członek przez ponad 1 rok'
+      gold_user:
+        title: 'Mistrz'
+        description: 'Aktywny członek przez ponad 4 lata'
+      diamond_user:
+        title: 'Wybitny mistrz'
+        description: 'Aktywny członek przez ponad 7 lat'
+      perfect_profile:
+        title: 'Inicjatywa'
+        description: 'Dodaj swoje pierwsze zdjęcie profilowe'
+      verified_developer:
+        title: 'Nowicjusz'
+        description: 'Utwórz konto użytkownika'

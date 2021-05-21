@@ -30,7 +30,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    *
    * @var string
    */
-  const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
+  public const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
 
   protected TranslatorInterface $translator;
 

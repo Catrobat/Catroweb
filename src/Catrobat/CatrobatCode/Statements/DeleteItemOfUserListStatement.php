@@ -7,15 +7,15 @@ class DeleteItemOfUserListStatement extends BaseUserListStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'delete item in userlist ';
+  public const BEGIN_STRING = 'delete item in userlist ';
   /**
    * @var string
    */
-  const MIDDLE_STRING = '(';
+  public const MIDDLE_STRING = '(';
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * DeleteItemOfUserListStatement constructor.

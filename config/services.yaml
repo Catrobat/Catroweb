@@ -91,6 +91,10 @@ services:
   App\Entity\:
     resource: '../src/Entity/*'
 
+  App\Manager\:
+    resource: '../src/Manager'
+    public: true
+
   App\Repository\:
     resource: '../src/Repository'
     public: true
@@ -869,3 +873,9 @@ services:
     arguments:
       - '@fos_user.user_manager'
       - {google: google_id, facebook: facebook_id, apple: apple_id}
+
+
+  App\Translation\ItranslateApi:
+    class: App\Translation\ItranslateApi
+    arguments:
+      - '@eight_points_guzzle.client.itranslate'

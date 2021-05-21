@@ -152,10 +152,6 @@ const COPY_CONFIG =
       src: 'node_modules/jquery-contextmenu/dist/jquery.ui.position.min.js',
       dest: PUBLIC_DIRECTORY + '/js/modules/jquery.ui.position.min.js'
     },
-    animatedModal_js: {
-      src: 'node_modules/animatedmodal/animatedModal.min.js',
-      dest: PUBLIC_DIRECTORY + '/js/modules/animatedModal.min.js'
-    },
     animate_css: {
       src: 'node_modules/animate.css/animate.min.css',
       dest: PUBLIC_DIRECTORY + '/css/modules/animate.min.css'

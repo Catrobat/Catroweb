@@ -7,11 +7,11 @@ class ComeToFrontStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'come to front';
+  public const BEGIN_STRING = 'come to front';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * ComeToFrontStatement constructor.

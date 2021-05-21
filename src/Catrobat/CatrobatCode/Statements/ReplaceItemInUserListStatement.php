@@ -7,15 +7,15 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'replace item in userlist ';
+  public const BEGIN_STRING = 'replace item in userlist ';
   /**
    * @var string
    */
-  const MIDDLE_STRING = '(';
+  public const MIDDLE_STRING = '(';
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * ReplaceItemInUserListStatement constructor.

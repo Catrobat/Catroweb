@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ResetCommand extends Command
 {
-  const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
+  public const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
 
   protected static $defaultName = 'catrobat:reset';
 
@@ -114,6 +114,11 @@ class ResetCommand extends Command
     // Creating sample MediaPackages
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:create:media-packages-samples'], [], 'Creating sample Media Packages', $output
+    );
+
+    // Insert static achievements
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements', $output
     );
 
     // Resetting Elastic

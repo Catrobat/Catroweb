@@ -686,3 +686,35 @@ category:
   example: مثال
   scratch: ريميكسات سكراتش
   recommended: المشاريع الموصى بها
+achievements:
+  overview:
+    header: 'إنجازات'
+    most_recent_achievement:
+      title: 'أحدث إنجاز'
+      x_out_of_y: '%unlocked% من%total% مقفلة'
+    tab_unlocked:
+      title: 'مفتوحة'
+      empty: "لم تقم بإلغاء قفل أي إنجازات حتى الآن."
+    tab_locked:
+      title: 'مقفل'
+      empty: "لقد قمت بالفعل بإلغاء تأمين جميع الإنجازات."
+  achievement:
+    type:
+      bronze_user:
+        title: 'شخص يتعلم حرفة ما'
+        description: 'اتبع شخص ما وقم بتحميل المشروع'
+      silver_user:
+        title: 'الحرفي'
+        description: 'عضو نشط لمدة> 1 سنة'
+      gold_user:
+        title: 'رئيس'
+        description: 'عضو نشط لمدة> 4 سنوات'
+      diamond_user:
+        title: 'جراند ماستر'
+        description: 'عضو نشط لمدة> 7 سنوات'
+      perfect_profile:
+        title: 'مبادرة'
+        description: 'أضف صورتك الشخصية الأولى'
+      verified_developer:
+        title: 'مبتدئ'
+        description: 'قم بإنشاء حساب مستخدم'

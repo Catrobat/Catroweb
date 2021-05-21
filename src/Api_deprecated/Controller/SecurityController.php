@@ -165,19 +165,6 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/IsOAuthUser/IsOAuthUser.json", name="catrobat_is_oauth_user", options={"expose": true},
-   * defaults={"_format": "json"}, methods={"POST"})
-   *
-   * @throws Exception
-   */
-  public function isOAuthUser(Request $request): JsonResponse
-  {
-    return $this->getOAuthService()->isOAuthUser($request);
-  }
-
-  /**
-   * @deprecated
-   *
    * @Route("/api/EMailAvailable/EMailAvailable.json", name="catrobat_oauth_login_email_available",
    * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
    *
@@ -277,21 +264,6 @@ class SecurityController extends AbstractController
   {
     $retArray = [];
     $retArray['gplus_appid'] = getenv('GOOGLE_CLIENT_ID');
-
-    return JsonResponse::create($retArray);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/generateCsrfToken/generateCsrfToken.json", name="catrobat_oauth_register_get_csrftoken",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
-   */
-  public function generateCsrfToken(): JsonResponse
-  {
-    $retArray = [];
-    $retArray['csrf_token'] = $this->container->get('security.csrf.token_manager')
-      ->getToken('authenticate')->getValue();
 
     return JsonResponse::create($retArray);
   }

@@ -41,7 +41,7 @@ Feature: Follow feature on profiles
     And I wait for the page to be loaded
     And the element ".profile-follow" should not be visible
     And the element ".profile-follows" should be visible
-    And I should see text matching "0 Followers"
+    And the "#followers-count" element should contain "0"
 
   Scenario: Unfollow user should unfollow and decrease counter
     Given I log in as "Catrobat2"
@@ -52,7 +52,7 @@ Feature: Follow feature on profiles
     And I wait for AJAX to finish
     Then I should be on "/app/user/1"
     And I wait for the page to be loaded
-    And I should see text matching "Following"
+    And I should see "Following"
     And the element ".profile-follows" should be visible
     And I click ".profile-follows"
     And I wait for AJAX to finish
@@ -63,7 +63,7 @@ Feature: Follow feature on profiles
     And I wait for the page to be loaded
     And the element ".profile-follows" should not be visible
     And the element ".profile-follow" should be visible
-    And I should see text matching "0 Followers"
+    And the "#followers-count" element should contain "0"
 
   Scenario: Following section should show appropriate information:
     Given I log in as "Catrobat2"
@@ -155,7 +155,7 @@ Feature: Follow feature on profiles
     And I click ".profile-follow"
     And I wait for AJAX to finish
     Then I should be on "/app/user/3"
-    Then I should see text matching "Following"
+    Then I should see "Following"
     Then I log in as "Catrobat3"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded

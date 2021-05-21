@@ -18,13 +18,13 @@ use Exception;
  */
 class Program
 {
-  const APK_NONE = 0;
+  public const APK_NONE = 0;
 
-  const APK_PENDING = 1;
+  public const APK_PENDING = 1;
 
-  const APK_READY = 2;
+  public const APK_READY = 2;
 
-  const INITIAL_VERSION = 1;
+  public const INITIAL_VERSION = 1;
 
   /**
    * @ORM\Id
@@ -197,11 +197,6 @@ class Program
    * @ORM\Column(type="string", options={"default": ""})
    */
   protected string $catrobat_version_name = '';
-
-  /**
-   * @ORM\Column(type="integer", options={"default": 0})
-   */
-  protected int $catrobat_version = 0;
 
   /**
    * @ORM\Column(type="string", options={"default": ""})
@@ -609,9 +604,9 @@ class Program
     return $this->language_version;
   }
 
-  public function setCatrobatVersionName(string $catrobatVersionName): Program
+  public function setCatrobatVersionName(string $catrobat_version_name): Program
   {
-    $this->catrobat_version_name = $catrobatVersionName;
+    $this->catrobat_version_name = $catrobat_version_name;
 
     return $this;
   }
@@ -619,18 +614,6 @@ class Program
   public function getCatrobatVersionName(): string
   {
     return $this->catrobat_version_name;
-  }
-
-  public function setCatrobatVersion(int $catrobatVersion): Program
-  {
-    $this->catrobat_version = $catrobatVersion;
-
-    return $this;
-  }
-
-  public function getCatrobatVersion(): int
-  {
-    return $this->catrobat_version;
   }
 
   public function setUploadIp(string $uploadIp): Program

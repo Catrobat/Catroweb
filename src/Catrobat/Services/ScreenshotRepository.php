@@ -14,11 +14,11 @@ class ScreenshotRepository
   /**
    * @var string
    */
-  const DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
+  public const DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
   /**
    * @var string
    */
-  const DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
+  public const DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
 
   private string $thumbnail_dir;
 

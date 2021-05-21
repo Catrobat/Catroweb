@@ -1,7 +1,7 @@
 ---
 #homepage translation
 localLanguage: Englisch
-username: Username
+username: Benutzername
 password: Passwort
 createNewPassword: Neues Passwort erstellen
 accountSettings: Kontoeinstellungen
@@ -62,7 +62,7 @@ notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu m
 pleaseWait: "Bitte warten..."
 projects: "Projekte"
 oauthPopUpTitle: "Externe Logininformationen"
-oauthInfo: 'Sie haben einen externen Account zum einloggen benutzt. Wir haben für sie einen zufälligen Benutzernamen erstellt. Wenn Sie den Benutzernamen ändern wollen oder ein neues Passwort setzen wollen, gehen sie auf ihre Profilseite. Klicken Sie %link_start% hier %link_end% um zu Ihrer Profilseite zu gelangen.'
+oauthInfo: 'Du hast einen externen Account zum Einloggen benutzt. Wir haben für dich einen zufälligen Benutzernamen erstellt. Wenn du den Benutzernamen ändern willst oder ein neues Passwort setzen willst, geh auf deine Profilseite. Klicke %link_start% hier %link_end% um zu deiner Profilseite zu gelangen.'
 oauthHere: "hier"
 statistics: "Statistiken"
 indexPage:
@@ -125,7 +125,7 @@ programs:
   rudeWordsInCredits: Du kannst keine unpassenden Wörter in deiner Anerkennung verwenden!
   most:
     viewed: Meist gesehen
-    downloaded: Meist heruntergeladen
+    downloaded: Am meisten heruntergeladen
   random: Zufällige Projekte
   related: Verwandte Projekte
   downloads: '%downloads% heruntergeladen'
@@ -168,7 +168,7 @@ programs:
   editDescription: Projektbeschreibung bearbeiten
   saveDescription: Beschreibungsänderung speichern
   editCredits: Projekt Anerkennung bearbeiten
-  saveCredits: Bearbeitete Anerkennung speichern
+  saveCredits: Speichern
   addComment: Kommentar schreiben
   thumbsUp: Daumen hoch!
   smile: Smile!
@@ -265,14 +265,14 @@ profile:
     usernameNotValid: Dieser Benutzername ist ungültig.
     usernameMissing: Du musst einen Benutzernamen eingeben.
     usernameExists: Dieser Benutzername existiert bereits.
-    usernameContainsEmail: Der Benutzername darf keine E-Mail-Adresse beinhalten.
+    usernameContainsEmail: Der Benutzername sollte keine E-Mail-Adresse beinhalten.
     submitSuccess: gespeichert!
   reallyDeleteProgram: Willst du wirklich dein Projekt löschen
   programsOf: Projekte von
   changePicture: Bild ändern
   avatar:
     noImage: Kein Bild vorhanden!
-    pictureTooLarge: Dein gewähltes Bild ist zu groß, verwende bitte keine Bilder, die größer als 5MB sind.
+    pictureTooLarge: Dein gewähltes Bild ist zu groß, verwende bitte keine Bilder die größer als 5MB sind.
     uploadError: Tut mir leid, es gab ein Problem beim Hochladen!
     noSupport: Dieser Bild-Typ wird nicht unterstützt, versuche ein anderes Bild.
   goToScratchProfile: Scratch Profil
@@ -323,12 +323,12 @@ termsOfUse:
     item1: Sei respektvoll. Wenn du Projekte teilst, denke bitte daran, dass Menschen aus vielen verschiedenen Altersgruppen und Hintergründen deine Beiträge sehen können.
     item2: "Erwähne Benutzer von denen du etwas übernimmst. Du kannst gerne modifizierte Versionen der Programme eines anderen Benutzers erstellen. Achte jedoch, dass du diesen Benutzer in deinem neuen Programm erwähnst. Untenstehend findest du eine Liste der Details über das Modifizieren von Programmen anderer Benutzer."
     item3: "Sei ehrlich. Versuche nicht Dich als jemand anderes auszugeben oder die Community sonst irgendwie zu betrügen."
-    item4: "Behalte persönliche Informationen für Dich. Veröffentliche nicht Deine E-Mail Adresse, Telefonnummer oder andere persönliche Kontakt-Informationen."
+    item4: "Behalte persönliche Informationen für Dich. Veröffentliche nicht Deine E-Mail Adresse, Telefonnummer oder andere persönliche Kontaktinformationen."
     item5: "Hilf die Website freundlich zu halten. Wenn du glaubst, dass andere ein Projekt oder einen Kommentar gemein, beleidigend, zu gewalttätig oder anderweitig unangemessen finden, klicke einfach auf den \"Als unpassend melden\" Button und hinterlasse eine kurze Erklärung. Das Catrobat Team prüft deinen Hinweis und kann ein beliebiges Projekt, einen Kommentar oder Post entfernen."
   list3:
     item1: "Wenn du ein Programm auf unsere Website lädst, akzeptierst du unsere freie Lizenz für den Upload von Catrobat-Programmen. Diese Lizenz gibt jedem das Recht von der Arbeit, die von anderem Benutzern hochgeladen wurde zu lernen und diese zu adaptieren. Dadurch kannst du schnell neue faszinierende Spiele, Animationen und andere Projekte erstellen. Von deiner Arbeit wird daher auch die ganze Welt profitieren und sie wird für alle frei zu benutzen sein, ähnlich der Texte und Bilder die du auf der Wikipedia finden kannst und die auch von vielen Freiwilligen auf der ganzen Welt erstellt werden. Stell es dir als ein Geschenk von dir an die Menschheit vor: Du gibst allen etwas und alle anderen geben auch dir etwas. Daher ist ein hoch geladenes Projekt ein Geschenk von großem Wert, welches der Ersteller kostenlos dir gegeben hat allerdings unter der Voraussetzung, das auch du unter den selben Regeln am Projekt teilnimmst."
     item2: Du musst das Geschenk allerdings nicht annehmen; wenn du es jedoch tust, dann gelten bestimmte Regeln. Die Vorteile dieser Regeln sind, dass du von der Arbeit anderer lernen kannst und auf dieser aufbauend ein noch cooleres Programm erstellen kannst, welches du dann wieder auf unsere Website hochladen kannst. Ein weiterer Vorteil ist, dass diese Lizenz sicherstellt, dass du nicht verantwortlich gemacht werden kannst für irgendwelche Probleme die anderen durch die Verwendung deiner Arbeit entstehen sollten.
-    item3: "Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen geschätzt werden kann, indem wir anderen die Möglichkeit schaffen öffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gwählt hast und der dich in der Catrobat Gemeinschaft vertritt."
+    item3: "Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen geschätzt werden kann, indem wir anderen die Möglichkeit schaffen öffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gewählt hast und der dich in der Catrobat Gemeinschaft vertritt."
     item4: 'Bitte konsultiere %link-licenseUploaded%  für die genauen rechtlichen Geschäftsbedingungen.'
   list4:
     item1: "Wir bieten alle unsere eigenen Software- und Internet-Ressourcen im Zusammenhang mit dem Catrobat System, zB die Software, die von dem Catrobat Team geschrieben wird, unsere Webseiten und Internet-Ressourcen, unseren eigenen Quellcode im Zusammenhang mit dem Catrobat System und alle zusätzlich enthalten Materialien, wie z. B. , Bilder, Sounds und Texte, jetzt und in der Zukunft, unter den freien Lizenzen von Catrobat."
@@ -373,7 +373,7 @@ login:
   noAccount: Ich habe keinen Account!
   alreadyAccount: Hast du bereits einen Account?
   or: ODER
-  username: Username
+  username: Benutzername
   email: Email
   passwordFirst: Passwort
   passwordSecond: Passwort bestätigen
@@ -628,10 +628,10 @@ privacy-policy:
   disagree-text: Ohne Zustimmung kann kein Benutzerkonto erstellt werden, die Basisfunktionalität kann aber weiterhin genutzt werden.
 catro-notifications:
   markAsRead: "Als gelesen markieren"
-  noFollowers: "Es sieht so aus, als hätten Sie keine Follower-Benachrichtigungen"
-  noComments: "Es sieht so aus, als hätten Sie keine Kommentarbenachrichtigungen"
-  noReactions: "Es sieht so aus, als hätten Sie keine Reaktionsbenachrichtigungen"
-  noRemixes: "Es sieht so aus, als hätten Sie keine Reaktionsbenachrichtigungen"
+  noFollowers: "Es sieht so aus, als hättest du keine Follower-Benachrichtigungen"
+  noComments: "Es sieht so aus, als hättest du keine Kommentarbenachrichtigungen"
+  noReactions: "Es sieht so aus, als hättest du keine Reaktionsbenachrichtigungen"
+  noRemixes: "Es sieht so aus, als hättest du keine Remix Benachrichtigungen"
   comment:
     message: 'Benutzer %user_link% hat Ihr Projekt %program_link% kommentiert.'
   like:
@@ -689,3 +689,35 @@ category:
   example: Beispiel
   scratch: Scratch Remixes
   recommended: Empfohlene Projekte
+achievements:
+  overview:
+    header: 'Erreichte Ziele'
+    most_recent_achievement:
+      title: 'Neueste Errungenschaften'
+      x_out_of_y: '%unlocked% von %total% entsperrt'
+    tab_unlocked:
+      title: 'Freigeschalten'
+      empty: "Du hast noch keine Erfolge freigeschaltet."
+    tab_locked:
+      title: 'Gesperrt'
+      empty: "Du hast bereits alle Errungenschaften freigeschaltet."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Lehrling'
+        description: 'Jemandem folgen und ein Projekt hochladen'
+      silver_user:
+        title: 'Artisan'
+        description: 'Aktives Mitglied für > 1 Jahr'
+      gold_user:
+        title: 'Meister'
+        description: 'Aktives Mitglied für > 4 Jahre'
+      diamond_user:
+        title: 'Großmeister'
+        description: 'Aktives Mitglied für > 7 Jahre'
+      perfect_profile:
+        title: 'Initiative'
+        description: 'Füge dein erstes Profilbild hinzu'
+      verified_developer:
+        title: 'Anfänger'
+        description: 'Benutzerkonto erstellen'

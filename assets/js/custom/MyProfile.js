@@ -121,6 +121,7 @@ const MyProfile = function (profileUrl, saveUsername,
         html: split[1] + '<br><br>' + split[2],
         icon: 'warning',
         showCancelButton: true,
+        allowOutsideClick: false,
         customClass: {
           confirmButton: 'btn btn-danger',
           cancelButton: 'btn btn-outline-primary'
@@ -151,6 +152,7 @@ const MyProfile = function (profileUrl, saveUsername,
         html: (isPrivate) ? split[3] : split[1] + '<br><br>' + split[2],
         icon: 'warning',
         showCancelButton: true,
+        allowOutsideClick: false,
         customClass: {
           confirmButton: 'btn btn-primary',
           cancelButton: 'btn btn-outline-primary'
@@ -177,7 +179,8 @@ const MyProfile = function (profileUrl, saveUsername,
                 customClass: {
                   confirmButton: 'btn btn-primary'
                 },
-                buttonsStyling: false
+                buttonsStyling: false,
+                allowOutsideClick: false
               })
             }
           })
@@ -197,6 +200,7 @@ const MyProfile = function (profileUrl, saveUsername,
         html: split[1] + '<br><br>' + split[2],
         icon: 'warning',
         showCancelButton: true,
+        allowOutsideClick: false,
         customClass: {
           confirmButton: 'btn btn-danger',
           cancelButton: 'btn btn-outline-primary'
@@ -239,7 +243,8 @@ const MyProfile = function (profileUrl, saveUsername,
             customClass: {
               confirmButton: 'btn btn-primary'
             },
-            buttonsStyling: false
+            buttonsStyling: false,
+            allowOutsideClick: false
           }).then(() => {
             window.location.href = self.profile_edit_url
           })
@@ -380,7 +385,8 @@ const MyProfile = function (profileUrl, saveUsername,
             customClass: {
               confirmButton: 'btn btn-primary'
             },
-            buttonsStyling: false
+            buttonsStyling: false,
+            allowOutsideClick: false
           }).then(() => {
             window.location.href = self.profile_edit_url
           })

@@ -173,7 +173,7 @@ Feature: List programs with and without debug build type
       }
       """
 
-  Scenario Outline: Show most downloaded/viewed/recent program (ids) with debug and release app
+  Scenario Outline: Show most downloaded/viewed/recent program with debug and release app
     Given I request from a <build type> build of the Catroid app
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
@@ -184,16 +184,10 @@ Feature: List programs with and without debug build type
       | end point         | build type | json name        |
       | mostDownloaded    | debug      | debug_program    |
       | mostDownloaded    | release    | program_2        |
-      | mostDownloadedIDs | debug      | debug_program_id |
-      | mostDownloadedIDs | release    | program_2_id     |
       | mostViewed        | debug      | debug_program    |
       | mostViewed        | release    | program_4        |
-      | mostViewedIDs     | debug      | debug_program_id |
-      | mostViewedIDs     | release    | program_4_id     |
       | recent            | debug      | debug_program    |
       | recent            | release    | program_2        |
-      | recentIDs         | debug      | debug_program_id |
-      | recentIDs         | release    | program_2_id     |
 
   Scenario Outline: Show random programs (ids) with debug and release app
     Given I request from a <build type> build of the Catroid app
@@ -207,8 +201,6 @@ Feature: List programs with and without debug build type
       | end point        | build type | total | programs                                    |
       | randomProjects   | debug      | 4     | program 1,program 2,debug program,program 4 |
       | randomProjects   | release    | 3     | program 1,program 2,program 4               |
-      | randomProjectIDs | debug      | 4     | program 1,program 2,debug program,program 4 |
-      | randomProjectIDs | release    | 3     | program 1,program 2,program 4               |
 
   Scenario Outline: Show user projects with debug and release app
     Given I request from a <build type> build of the Catroid app

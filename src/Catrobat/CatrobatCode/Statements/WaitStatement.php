@@ -7,11 +7,11 @@ class WaitStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'wait (';
+  public const BEGIN_STRING = 'wait (';
   /**
    * @var string
    */
-  const END_STRING = ') seconds<br/>';
+  public const END_STRING = ') seconds<br/>';
 
   /**
    * WaitStatement constructor.

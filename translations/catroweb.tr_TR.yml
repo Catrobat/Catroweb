@@ -684,3 +684,35 @@ category:
   example: Örnek
   scratch: Scratch remixleri
   recommended: Önerilen projeler
+achievements:
+  overview:
+    header: 'Başarılar'
+    most_recent_achievement:
+      title: 'En Yeni Başarı'
+      x_out_of_y: '%total% tane başarının %unlocked% tanesi açıldı'
+    tab_unlocked:
+      title: 'Açıldı'
+      empty: "Henüz hiçbir başarının kilidini açmadınız."
+    tab_locked:
+      title: 'Kilitli'
+      empty: "Zaten tüm başarıların kilidini açtınız."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Acemi'
+        description: 'Birini takip edin ve bir proje yükleyin'
+      silver_user:
+        title: 'Çırak'
+        description: 'Şu kadar yıldır aktif üye > 1 yıl'
+      gold_user:
+        title: 'Usta'
+        description: 'Şu kadar yıldır aktif üye > 4 yıl'
+      diamond_user:
+        title: 'Büyük usta'
+        description: 'Şu kadar yıldır aktif üye > 7 yıl'
+      perfect_profile:
+        title: 'ŞEF'
+        description: 'İlk profil resminizi ekleyin'
+      verified_developer:
+        title: 'İlk adımlar'
+        description: 'Bir kullanıcı hesabı oluşturun'

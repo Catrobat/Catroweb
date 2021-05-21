@@ -691,3 +691,35 @@ category:
   example: Пример
   scratch: Scratch ремиксы
   recommended: Рекомендуемые проекты
+achievements:
+  overview:
+    header: 'Достижения'
+    most_recent_achievement:
+      title: 'Новые достижения'
+      x_out_of_y: '%unlocked% из %total% разблокировано'
+    tab_unlocked:
+      title: 'Разблокирован'
+      empty: "Вы еще не открыли никаких достижений."
+    tab_locked:
+      title: 'Заблокировано'
+      empty: "Вы уже открыли все достижения."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Ученик'
+        description: 'Подпишитесь на кого-нибудь и загрузите проект'
+      silver_user:
+        title: 'Ремесленник'
+        description: 'Активный пользователь для > 1 год'
+      gold_user:
+        title: 'Мастер'
+        description: 'Активный пользователь на > 4 года'
+      diamond_user:
+        title: 'Великий мастер'
+        description: 'Активный пользователь на > 7 лет'
+      perfect_profile:
+        title: 'Инициатива'
+        description: 'Добавьте ваше первое изображение профиля'
+      verified_developer:
+        title: 'Новичок'
+        description: 'Создать учетную запись пользователя'

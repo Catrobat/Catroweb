@@ -7,11 +7,11 @@ class HideStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'hide';
+  public const BEGIN_STRING = 'hide';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * HideStatement constructor.

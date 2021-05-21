@@ -9,19 +9,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LogsController extends CRUDController
 {
-  const LOG_DIR = '../var/log/';
+  public const LOG_DIR = '../var/log/';
 
-  const LOG_PATTERN = '*.log';
+  public const LOG_PATTERN = '*.log';
 
-  const FILTER_LEVEL_DEBUG = 0;
-  const FILTER_LEVEL_INFO = 1;
-  const FILTER_LEVEL_NOTICE = 2;
+  public const FILTER_LEVEL_DEBUG = 0;
+  public const FILTER_LEVEL_INFO = 1;
+  public const FILTER_LEVEL_NOTICE = 2;
 
-  const FILTER_LEVEL_WARNING = 3;
-  const FILTER_LEVEL_ERROR = 4;
-  const FILTER_LEVEL_CRITICAL = 5;
-  const FILTER_LEVEL_ALERT = 6;
-  const FILTER_LEVEL_EMERGENCY = 7;
+  public const FILTER_LEVEL_WARNING = 3;
+  public const FILTER_LEVEL_ERROR = 4;
+  public const FILTER_LEVEL_CRITICAL = 5;
+  public const FILTER_LEVEL_ALERT = 6;
+  public const FILTER_LEVEL_EMERGENCY = 7;
 
   public function listAction(Request $request = null): Response
   {

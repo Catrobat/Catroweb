@@ -104,7 +104,6 @@ class ProjectDataFixtures
         new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
     );
     $project->setRemixMigratedAt(null);
-    $project->setCatrobatVersion(1);
     $project->setCatrobatVersionName($config['version'] ?? '0.8.5');
     $project->setLanguageVersion($config['language version'] ?? '0.925');
     $project->setUploadIp($config['upload_ip'] ?? '127.0.0.1');

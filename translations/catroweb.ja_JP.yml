@@ -347,7 +347,7 @@ search:
   resultcount: 検索結果は %count% です
   fail: 少なくとも1つの検索語を入力してください
 menu:
-  profile: '&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;'
+  profile: マイプロフィール
   login: ログイン
   logout: ログアウト
   admin: 管理者
@@ -473,24 +473,24 @@ api:
     creating_error: 'プロジェクトエンティティの作成中にエラーが発生しました。もう一度アップロードしてください！'
 #languages and countries
 language:
-  arabic: '&#x30A2;&#x30E9;&#x30D3;&#x30A2;&#x8A9E;'
-  bulgarian: '&#x30D6;&#x30EB;&#x30AC;&#x30EA;&#x30A2;&#x8A9E;'
-  catalan: '&#x4E2D;&#x56FD;&#x8A9E;&#xFF08;&#x7C21;&#x4F53;&#x5B57;&#x6F22;&#xFF09;'
-  chinese_simplified_han: '&#x4E2D;&#x56FD;&#x8A9E;&#xFF08;&#x7E41;&#x4F53;&#x5B57;&#x6F22;&#xFF09;'
-  chinese_traditional_han: '&#x82F1;&#x8A9E;&#xFF08;&#x7C73;&#x56FD;&#xFF09;'
-  croatian: '&#x30D5;&#x30E9;&#x30F3;&#x30B9;&#x8A9E;'
-  czech: '&#x30C9;&#x30A4;&#x30C4;&#x8A9E;'
-  danish: '&#x30D2;&#x30F3;&#x30C7;&#x30A3;&#x30FC;&#x8A9E;'
-  dutch: '&#x30D6;&#x30EB;&#x30AC;&#x30EA;&#x30A2;&#x8A9E;'
-  english_united_kingdom: '&#x30A4;&#x30F3;&#x30C9;&#x30CD;&#x30B7;&#x30A2;&#x8A9E;'
-  english_united_states: '&#x30A4;&#x30BF;&#x30EA;&#x30A2;&#x8A9E;'
-  estonian: '&#x65E5;&#x672C;&#x8A9E;'
-  filipino: '&#x97D3;&#x56FD;&#x8A9E;'
-  finnish: '&#x30DE;&#x30EC;&#x30FC;&#x8A9E;'
-  french: '&#x30EB;&#x30FC;&#x30DE;&#x30CB;&#x30A2;&#x8A9E;'
-  german: '&#x30ED;&#x30B7;&#x30A2;&#x8A9E;'
-  greek: '&#x30C8;&#x30EB;&#x30B3;&#x8A9E;'
-  hebrew: '&#x30A6;&#x30AF;&#x30E9;&#x30A4;&#x30CA;&#x8A9E;'
+  arabic: アラビア語
+  bulgarian: ブルガリア語
+  catalan: カタロニア語
+  chinese_simplified_han: 中国語 (簡体字・漢語)
+  chinese_traditional_han: 中国語  (伝統的な中国語)
+  croatian: クロアチア語
+  czech: チェコ
+  danish: デンマーク
+  dutch: オランダ語
+  english_united_kingdom: 英語 (イギリス)
+  english_united_states: 英語 (米国)
+  estonian: エストニア語
+  filipino: フィリピン人
+  finnish: フィンランド語
+  french: フランス語
+  german: ドイツ語
+  greek: ギリシャ語
+  hebrew: ヘブライ語
   hindi: ヒンディー語
   hungarian: ハンガリー語
   indonesian: インドネシア語
@@ -686,3 +686,35 @@ category:
   example: 例
   scratch: スクラッチのリミックス
   recommended: おすすめのプロジェクト
+achievements:
+  overview:
+    header: '実績'
+    most_recent_achievement:
+      title: '最新の実績'
+      x_out_of_y: '%unlocked% のうち %total% が解除されました'
+    tab_unlocked:
+      title: 'ロック解除済み'
+      empty: "まだ実績をアンロックしていません。"
+    tab_locked:
+      title: 'ロック中'
+      empty: "すでにすべての実績のロックを解除しました。"
+  achievement:
+    type:
+      bronze_user:
+        title: '見習'
+        description: '誰かをフォローしてプロジェクトをアップロード'
+      silver_user:
+        title: 'アルチザン'
+        description: '1年以上有効なメンバー'
+      gold_user:
+        title: 'マスターズ'
+        description: '4年以上アクティブなメンバー'
+      diamond_user:
+        title: 'グランドマスター'
+        description: '7年以上アクティブなメンバー'
+      perfect_profile:
+        title: '見習'
+        description: '最初のプロフィール写真を追加'
+      verified_developer:
+        title: 'ノービス'
+        description: 'ユーザーアカウントを作成'

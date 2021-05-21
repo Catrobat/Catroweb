@@ -15,14 +15,14 @@ use Exception;
  */
 class ProgramLike
 {
-  const TYPE_NONE = 0;
-  const TYPE_THUMBS_UP = 1;
-  const TYPE_SMILE = 2;
-  const TYPE_LOVE = 3;
-  const TYPE_WOW = 4;
+  public const TYPE_NONE = 0;
+  public const TYPE_THUMBS_UP = 1;
+  public const TYPE_SMILE = 2;
+  public const TYPE_LOVE = 3;
+  public const TYPE_WOW = 4;
 
-  const ACTION_ADD = 'add';
-  const ACTION_REMOVE = 'remove';
+  public const ACTION_ADD = 'add';
+  public const ACTION_REMOVE = 'remove';
   // -> new types go here...
 
   public static array $VALID_TYPES = [

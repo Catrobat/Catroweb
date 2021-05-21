@@ -6,23 +6,23 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 class VersionStrategy implements VersionStrategyInterface
 {
-  private string $catrobat_version;
+  protected string $app_version;
 
-  public function __construct(string $catrobat_version)
+  public function __construct(string $app_version)
   {
-    $this->catrobat_version = $catrobat_version;
+    $this->app_version = $app_version;
   }
 
-  public function getVersion($path)
+  public function getVersion($path): string
   {
     if (preg_match('/\?/', $path)) {
-      return '&v='.$this->catrobat_version;
+      return '&v='.$this->app_version;
     }
 
-    return '?v='.$this->catrobat_version;
+    return '?v='.$this->app_version;
   }
 
-  public function applyVersion($path)
+  public function applyVersion($path): string
   {
     return $path.$this->getVersion($path);
   }

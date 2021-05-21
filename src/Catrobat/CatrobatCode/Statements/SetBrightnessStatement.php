@@ -7,11 +7,11 @@ class SetBrightnessStatement extends BaseSetToStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'brightness';
+  public const BEGIN_STRING = 'brightness';
   /**
    * @var string
    */
-  const END_STRING = ')%<br/>';
+  public const END_STRING = ')%<br/>';
 
   /**
    * SetBrightnessStatement constructor.

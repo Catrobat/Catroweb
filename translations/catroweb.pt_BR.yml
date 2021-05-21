@@ -1,7 +1,7 @@
 ---
 #homepage translation
 localLanguage: Inglês
-username: 'Usuário:'
+username: Usuário
 password: Senha
 createNewPassword: Criar uma nova senha
 accountSettings: Configurações da Conta
@@ -22,7 +22,7 @@ report: Denunciar
 deleteIt: Sim, delete isso!
 reportIt: Sim, denunciar!
 areYouSure: Você tem certeza?
-noWayOfReturn: Não há maneira de restaurar suas ações!
+noWayOfReturn: Não há maneira de desfazer suas ações!
 download: Baixe o projeto
 description: Descrição
 noDescription: Sem descrição disponível.
@@ -78,17 +78,17 @@ follower:
   followsMe: Siga-me
   noFollowing: Você não está seguindo ninguém atualmente.
   noFollowers: Você não tem seguidores atualmente.
-  noOtherFollowing: Não há usuários seguindo atualmente.
-  noOtherFollowers: Não há seguidores atualmente.
+  noOtherFollowing: Atualmente não há usuários seguindo.
+  noOtherFollowers: Atualmente não há seguidores.
   followError: "Não foi possível seguir o usuário desejado!"
   unfollowError: "Não foi possível deixar de seguir o usuário desejado!"
   unfollowQuestion: "Tem certeza de que deseja deixar de seguir este usuário?"
-  unfollowButton: "Não seguir %username%"
+  unfollowButton: "Deixar de seguir %username%"
 programs:
   welcome:
     title: Bem-vindo ao %theme% da Catrobat
     subtitle: Crie histórias, jogos e muito mais...
-    subtitle_embroidery: Grave seus próprios patters em suas camisetas, bolsas, calças ou casos para smartphone!
+    subtitle_embroidery: Costuri seus próprios padrões em suas camisetas, bolsas, calças ou capas de celulares!
     download: Baixar o aplicativo
     statistics: Mais Estatísticas
   featured: Em Destaque
@@ -136,22 +136,22 @@ programs:
     all: "Todos"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" tem 1 novo remix: |]1,Inf] "%programName%" tem %remixes% novos remixes:'
-  submitted: Projetos submetidos
+  submitted: Projetos enviados
   uploaded: Projetos carregados
   reportAsInappropriate: Reportar como impróprio
   reportProgram: Reportar projeto
-  languageVersion: 'Versão de linguagem do Catrobat: %languageVersion%'
+  languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
   reportLoginText: Por favor, %login% para reportar este projeto.
   reportDialogHeader: Por que você deseja reportar este projeto?
-  reportDialogReason: Entre um motivo
+  reportDialogReason: Digite um motivo
   reportRadioButtonInappropriate: O conteúdo é impróprio
   reportRadioButtonCopyright: Viola direitos autorais
   reportRadioButtonSpam: É spam
-  reportRadioButtonDislike: Não gosto dele
+  reportRadioButtonDislike: Eu não gosto disso
   reportOwnProgram: Você não pode sinalizar o seu próprio projeto.
   reportAlready: Você já sinalizou este projeto.
   reportDone: Projeto reportado!
-  updateAppHeader: Atualizar App
+  updateAppHeader: Atualizar aplicativo
   updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
   btnClosePopup: Ok
   checkout_this_program: Confira este projeto do Catrobat
@@ -166,9 +166,9 @@ programs:
   deleted_popup_header: Apagado
   noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
   editDescription: Editar a Descrição do projeto
-  saveDescription: Salvar mudança na Descrição
+  saveDescription: Salvar
   editCredits: Editar Créditos do projeto
-  saveCredits: Salvar mudança nos Créditos
+  saveCredits: Salvar
   addComment: Escrever comentário
   thumbsUp: Joinha!
   smile: Sorriso!
@@ -209,7 +209,7 @@ accountConfirmation:
     A Equipe Catrobat.
     </p>
 passwordRecovery:
-  subject: Sua Recuperação de Senha do Catrobat
+  subject: Sua recuperação de senha Catrobat
   message: |
     Caro %username%.
     Você solicitou a redefinição de sua senha em %appplication_url% porque a esqueceu.
@@ -249,7 +249,7 @@ profile:
   follower: Seguidor
   unfollowUser: Deixar de seguir usuário!
   followUser: Seguir usuário!
-  amountOfPrograms: Total de projetos
+  amountOfPrograms: Quantidade de projetos
   form:
     passwordTooShort: A nova senha deve conter no mínimo %length% caracteres.
     passwordTooLong: A nova senha deve conter no máximo %length% caracteres.
@@ -267,7 +267,7 @@ profile:
   programsOf: Projetos de
   changePicture: Alterar Imagem
   avatar:
-    noImage: No Image!
+    noImage: Nenhuma imagem!
     pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
     uploadError: Desculpe! Houve um problema durante o upload!
     noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
@@ -286,7 +286,7 @@ myprofile:
   editCountry: Alterar país
   editEmail: Alterar E-Mail
   deleteAccount: Excluir conta
-  deleteAccountText: Tem certeza que deseja excluir sua conta? Isto irá excluir seus projetos carregados e comentários!
+  deleteAccountText: Você tem certeza que deseja excluir sua conta? Isto vai excluir seus projetos postados e comentários!
   editAccountSettings: Editar configurações da conta
   notChangeVisibility: Não é possível alterar a visibilidade
   notChangeVisibilityReason: A versão do idioma do seu projeto é muito alta, portanto, ele não pode ser definido como visível.
@@ -297,7 +297,7 @@ licenseToPlay:
   text2: 'Não há receitas secretas: as instruções sobre como fazer os bolos estão abertas a todos para utilizar, reutilizar, modificar e servir de inspiração para novas ideias... digo, bolos.'
   text3: "Você pode comer os bolos bem como copiar receitas de outras pessoas para fazer a sua própria, talvez com ingredientes diferentes. Esta liberdade vem com dois requisitos simples:"
   text4: "Na criação da comunidade Catrobat, decidimos adotar esta abordagem pois acreditamos que ela oferece suporte à aprendizagem e criatividade dentro da Comunidade. Através do compartilhamento de receitas e ingredientes (scripts e artwork), todos podem criar com base nas ideias uns dos outros. Assim, todos podem se beneficiar."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text5: Ao criar o site do catrobat, nós incluímos funções para incentivar as pessoas a compartilharem e dar crédito para os outros. Em cada página de projetos, você sempre pode baixar os scripts originais do projeto. Se você remixar um projeto (modificar os scripts ou artes e compartilhar o resultado), nós encorajamos você a dar crédito nas notas e créditos do projeto, mencionando as pessoas e o projeto que o inspirou.
   text6: 'Saiba mais sobre os termos de uso da comunidade Catrobat online em %link-termsOfUse%.'
   list1:
     item1: compartilhar seus bolos juntamente com a receita
@@ -317,12 +317,12 @@ termsOfUse:
     item3: com todos os níveis de experiência
   list2:
     item1: Seja respeitoso. Ao compartilhar projetos, lembre-se de que pessoas de diferentes idades e origens verão suas contribuições.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "De crédito. Sinta-se livre para fazer versões modificadas de projetos de outras pessoas - só tenha certeza de dar crédito para elas. Um bom lugar para dar crédito é na seção de créditos e notas do seu projeto. Por favor veja o parágrafo abaixo dessa lista para detalhes sobre como modificar projetos de outros usuários."
     item3: "Seja honesto. Não finja ser outra pessoa nem tente enganar a comunidade."
     item4: "Mantenha privadas suas informações pessoais. Não compartilhe seu endereço de e-mail, número de telefone ou outras informações de contato pessoais."
     item5: "Ajude a manter o site amigável. Se você sente que outros achariam um projeto ou um comentário significativo, insultante, muito violento, ou de outra forma inapropriado, basta clicar no botão 'reportar como inapropriado' e deixar uma breve explicação. A equipe Catrobat analisará o seu relatório e poderá remover qualquer projeto, comentário ou publicação."
   list3:
-    item1: "Ao fazer o upload de um projeto para nossos sites, você aceita e aceita colocar este trabalho sob certas licenças gratuitas de projetos enviados para o Catrobat. Semelhante às licenças gratuitas sob as quais o próprio sistema Catrobat está disponível para você, esses licenças gratuitas de projetos carregados no Catrobat dão a todos o direito de aprender com o trabalho previamente carregado por outros e de adaptar e remixar que trabalham para criar seus próprios novos jogos fascinantes, animações e outros projectos. Isso permite que todos \"fiquem nos ombros dos seus pares\", um deles sendo você! O seu trabalho beneficiará assim o mundo inteiro e permanecerá gratuito para todos usá-lo, um pouco parecido com o texto e imagens que contribuíram livremente para a Wikipédia por voluntários de todo o mundo. Pense nisso como seu presente à humanidade: você oferece a todos, e a todos os outros que enviam seu trabalho em nossos sites para você. Assim, um projeto carregado é um presente de grande valor que o seu dono está oferecendo a você gratuitamente, com a condição de que você participe da comunidade nos mesmos termos."
+    item1: "Ao fazer o upload de um projeto para nossos sites, você aceita colocar este trabalho sob certas licenças gratuitas de projetos enviados para o Catrobat. Semelhante às licenças gratuitas sob as quais o próprio sistema Catrobat está disponível para você, esses licenças gratuitas de projetos carregados no Catrobat dão a todos o direito de aprender com o trabalho previamente carregado por outros e de adaptar e remixar que trabalham para criar seus próprios novos jogos fascinantes, animações e outros projectos. Isso permite que todos \"fiquem nos ombros dos seus pares\", um deles sendo você! O seu trabalho beneficiará assim o mundo inteiro e permanecerá gratuito para todos usá-lo, um pouco parecido com o texto e imagens que contribuíram livremente para a Wikipédia por voluntários de todo o mundo. Pense nisso como seu presente à humanidade: você oferece a todos, e a todos os outros que enviam seu trabalho em nossos sites para você. Assim, um projeto carregado é um presente de grande valor que o seu dono está oferecendo a você gratuitamente, com a condição de que você participe da comunidade nos mesmos termos."
     item2: Não tem de aceitar o presente; se o fizerem, há certas regras que se aplicam. Os benefícios destas regras são que você pode aprender com o trabalho e usá-lo como base para fazer coisas ainda mais legais, você mesmo. que você pode então, sim. ., mais uma vez, envie para nossos sites como seus. Outro benefício é que essas licenças garantem que você não seja responsabilizado por quaisquer problemas decorrentes de terceiros por meio do uso do seu projeto.
     item3: "Uma condição adicional importante é de que você dê crédito aos autores em cujos trabalhos você se baseou para criar o seu. Ao mesmo tempo, trabalharemos pesado para que seu trabalho seja igualmente apreciado por aqueles que utilizaram-no como base, por meio de crédito ao nome escolhido, livremente, por você para te representar na comunidade Catrobat; e, também, por meio da oportunidade dada aos outros de expressar gratidão a você publicamente por ter partilhado seu trabalho com a comunidade e, principalmente, com eles."
     item4: 'Por favor, consulte %link-licenseUploaded% para termos e condições legais precisos.'
@@ -395,7 +395,7 @@ errors:
   description:
     rude: A descrição não pode conter palavras de baixo calão.
   credit:
-    rude: Credits must not contain rude words.
+    rude: Os créditos não devem conter palavras de mau gosto.
   country:
     blank: País está faltando.
     invalid: País inválido
@@ -452,7 +452,7 @@ api:
   registerUser:
     emailMissing: 'Email faltando'
     emailEmpty: 'O e-mail não pode estar em branco'
-    emailInvalid: 'Email invalid'
+    emailInvalid: 'E-mail inválido'
     emailAlreadyInUse: 'E-mail já em uso'
     usernameMissing: 'Usuário ausente'
     usernameTooShort: 'Nome de usuário muito curto'
@@ -470,7 +470,7 @@ api:
   projectsPost:
     invalid_checksum: 'Checksum inválido. Tente fazer upload novamente!'
     upload_error: 'Erro ao enviar. Tente enviar novamente!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    creating_error: 'Erro em criar a entidade do projeto. Tente fazer o upload novamente!'
 #languages and countries
 language:
   arabic: Árabe
@@ -522,7 +522,7 @@ ci:
   pending: Gerando Apk
   download: Baixar Apk
 gamejam:
-  nojam: Desculpe, não há game jams disponíveis
+  nojam: Desculpa, não há game jams disponíveis agora
   submit: Enviar para %gamejamname%
   whats: Qual o %gamejamname%?
   submitown:
@@ -531,7 +531,7 @@ gamejam:
     text: |
       Mas por que não criar o seu próprio programa?!
       Faça parte do %gamejamtag%
-tag-text: Marcações
+tag-text: Tags
 extenstion-text: Extensões
 tags:
   constant:
@@ -550,7 +550,7 @@ admin:
     removableObjects: Objetos removíveis
 recommender:
   similarPrograms: Projetos similares
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Usuários que baixaram esse projeto também baixaram
   moreFromThisUser: Mais de %username%
 pmd:
   submitBtn: Enviar seu projeto
@@ -579,19 +579,19 @@ codeview:
   sounds: 'Sons'
   globals: 'Globais'
   locals: 'Locais'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  globalVariables: 'Variáveis globais'
+  localVariables: 'Variáveis locais'
+  eventBricks: 'Blocos do Evento'
+  controlBricks: 'Controlar blocos'
+  motionBricks: 'Blocos de movimento'
+  soundBricks: 'Blocos de som'
+  looksBricks: 'Parece blocos'
+  penBricks: 'Tijolos de pano'
+  dataBricks: 'Blocos de dados'
+  specialBricks: 'Tijolos especiais'
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
+  title: "Estatísticas do Código"
+  error: "As estatísticas do código não podem ser exibidas."
   general: 'Gerais'
   bricks: 'Blocos'
   eventBricks: 'Evento'
@@ -626,27 +626,27 @@ privacy-policy:
 catro-notifications:
   markAsRead: "Marcar como lido"
   noFollowers: "Parece que você não tem nenhuma notificação de seguidores."
-  noComments: "Parece que você não tem nenhuma notificação para comentários."
-  noReactions: "Parece que você não tem nenhuma notificação de reação."
-  noRemixes: "Parece que você não tem nenhuma notificação de remixe."
+  noComments: "Parece que você não tem nenhuma notificação de comentários."
+  noReactions: "Parece que você não tem notificações de reações."
+  noRemixes: "Parece que você não tem notificações de remixes."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% comentou no seu projeto %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% reagiu no seu projeto %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% está te seguindo.'
   program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+    message: '%user_link% criou um novo projeto %program_link%'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% fez um remix %program_link%, do seu projeto %remix_program_link%.'
 clipboard:
   success: Link para o projeto copiado para área de transferência!
-  fail: Falha ao copiar link para área de transferência!
+  fail: Falha ao copiar link para área de transferência! :(
 next: Próximo
 previous: Anterior
 media-packages:
   title: Mídia-Pacotes
-  description: Nas seguintes categorias, você pode encontrar atores e objetos adicionais para adicionar a você projetos PocketCode.
+  description: Nas seguintes categorias, você pode encontrar atores e objetos para adicionar a seus projetos do Pocket Code.
   thumb-size:
     description: Tamanho da visualização
     sm: pequeno
@@ -686,3 +686,35 @@ category:
   example: Exemplo
   scratch: Remixes do Scratch
   recommended: Projetos recomendados
+achievements:
+  overview:
+    header: 'Conquistas'
+    most_recent_achievement:
+      title: 'Conquistas recentes'
+      x_out_of_y: '%unlocked% de %total% desbloqueado'
+    tab_unlocked:
+      title: 'Desbloqueados'
+      empty: "Você não desbloqueou nenhuma conquista ainda."
+    tab_locked:
+      title: 'Bloqueados'
+      empty: "Você já desbloqueou todas as conquistas."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Aprendiz'
+        description: 'Siga alguém e faça upload de um projeto'
+      silver_user:
+        title: 'Artesão'
+        description: 'Membro ativo por > 1 ano'
+      gold_user:
+        title: 'Mestre'
+        description: 'Membro ativo por > 4 anos'
+      diamond_user:
+        title: 'Grande mestre'
+        description: 'Membro ativo por > 7 anos'
+      perfect_profile:
+        title: 'Iniciante'
+        description: 'Adicione a sua primeira foto de perfil'
+      verified_developer:
+        title: 'Novato'
+        description: 'Criar uma conta'

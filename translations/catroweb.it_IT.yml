@@ -666,7 +666,7 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy %year% <a href="http://www.catrobat.org">Catrobat</a>. Tutti i diritti riservati.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Tutti i diritti riservati.'
 agree: Acconsento
 disagree: Non sono d'accordo
 profileLoader:
@@ -689,3 +689,35 @@ category:
   example: Esempio
   scratch: Remix da Scratch
   recommended: Progetti consigliati
+achievements:
+  overview:
+    header: 'Risultati'
+    most_recent_achievement:
+      title: 'Obiettivo Più Nuovo'
+      x_out_of_y: '%unlocked% su %total% sbloccati'
+    tab_unlocked:
+      title: 'Sbloccato'
+      empty: "Non hai ancora sbloccato alcun risultato."
+    tab_locked:
+      title: 'Bloccato'
+      empty: "Hai già sbloccato tutte le realizzazioni."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Apprendista'
+        description: 'Segui qualcuno e carica un progetto'
+      silver_user:
+        title: 'Artigiano'
+        description: 'Membro attivo per > 1 anno'
+      gold_user:
+        title: 'Maestro'
+        description: 'Membro attivo per > 4 anni'
+      diamond_user:
+        title: 'Gran maestro'
+        description: 'Membro attivo per > 7 anni'
+      perfect_profile:
+        title: 'Iniziativa'
+        description: 'Aggiungi la tua prima immagine del profilo'
+      verified_developer:
+        title: 'Novizio'
+        description: 'Crea un account utente'

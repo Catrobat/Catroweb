@@ -17,9 +17,9 @@ use InvalidArgumentException;
  */
 class ProgramInappropriateReport
 {
-  const STATUS_NEW = 1;
-  const STATUS_REJECTED = 2;
-  const STATUS_ACCEPTED = 3;
+  public const STATUS_NEW = 1;
+  public const STATUS_REJECTED = 2;
+  public const STATUS_ACCEPTED = 3;
 
   /**
    * @ORM\Column(name="id", type="integer")

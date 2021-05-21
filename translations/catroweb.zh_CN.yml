@@ -229,12 +229,12 @@ passwordRecovery:
     <p>
     亲爱的%username%.<br>
     <br>
-    由于您忘记了您的密码，您已要求在<a href=%application_url%>Pocket Code</a>上重置密码。
-    如果您没有提出要求，请忽略它。它将在24小时内过期并变得毫无用处。
+    由于您忘记了您的密码，您已要求在<a href=%appplication_url%>Pocket Code</a>上重置密码。
+    如果您没有提出要求，请忽略它。它将在24小时内过期并变得毫无用处。<br>
     <br>
     要重新设置密码和创建新密码，请点击<<a href=%confirmationUrl%>这里。</a><br>。
     <br>
-    您可以随时使用您的用户名和密码访问<a href=%application_url%>Pocket Code</a>社区<br>。
+    您可以随时使用您的用户名和密码访问<a href=%appplication_url%>Pocket Code</a>社区<br>。
     要做到这一点，只需访问以下页面。<a href=%loginPage%>登录页面</a><br>。
     要编辑您的个人资料，请到这个<a href=%profilePage%>页面</a>.<br>。
     <br>
@@ -691,3 +691,35 @@ category:
   example: 示例
   scratch: Scratch 混成
   recommended: 推荐的项目
+achievements:
+  overview:
+    header: '成就'
+    most_recent_achievement:
+      title: '最新的成就'
+      x_out_of_y: '%unlocked%出 %total% 未锁'
+    tab_unlocked:
+      title: '已解锁'
+      empty: "你还没有解锁任何成就。"
+    tab_locked:
+      title: '已锁定'
+      empty: "您已经解锁了所有的成就。"
+  achievement:
+    type:
+      bronze_user:
+        title: '见习生'
+        description: '关注某人并上传一个项目'
+      silver_user:
+        title: '工匠'
+        description: '活跃会员超过1年'
+      gold_user:
+        title: '硕士'
+        description: '活跃了4年以上的会员'
+      diamond_user:
+        title: '大师'
+        description: '活跃了7年以上的会员'
+      perfect_profile:
+        title: '倡议'
+        description: '添加你的第一张个人资料照片'
+      verified_developer:
+        title: '新手'
+        description: '创建一个用户账户'

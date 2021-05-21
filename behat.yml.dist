@@ -134,6 +134,14 @@ default:
 
 ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
 
+        web-achievements:
+            paths:    [ "tests/behat/features/web/achievements" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
         web-admin:
             paths:    [ "tests/behat/features/web/admin" ]
             contexts:

@@ -19,7 +19,7 @@ class TransChoiceTest extends TestCase
   /**
    * @var string
    */
-  const LANGUAGE_DIR = './translations/';
+  public const LANGUAGE_DIR = './translations/';
 
   /**
    * @test

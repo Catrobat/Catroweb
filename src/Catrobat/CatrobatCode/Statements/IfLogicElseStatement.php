@@ -9,11 +9,11 @@ class IfLogicElseStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'else';
+  public const BEGIN_STRING = 'else';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * IfLogicElseStatement constructor.

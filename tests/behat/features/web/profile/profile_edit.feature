@@ -282,25 +282,21 @@ Feature:
     | 2   | 2          | 2       | c2   |
     | 3   | 3          | 1       | c1   |
     And there are catro notifications:
-      | user     | title                 | message         | type                     | commentID | like_from | follower_id | program_id  | prize | image_path | parent_program | child_program |
-      | Catrobat |                       |                 | comment                  | 2         |           |             |             |       |            |                |               |
-      | Catrobat |                       |                 | like                     |           | 2         |             | 2           |       |            |                |               |
-      | Catrobat |                       |                 | follower                 |           |           | 2           |             |       |            |                |               |
-      | Catrobat | title                 | msg             | default                  |           |           |             |             |       |            |                |               |
-      | Catrobat |                       |                 | follow_program           |           |           |             | 2           |       |            |                |               |
-      | Catrobat | title                 | msg             | anniversary              |           |           |             |             | prize |            |                |               |
-      | Catrobat | title                 | msg             | achievement              |           |           |             |             |       | image path |                |               |
-      | Catrobat |                       |                 | remix                    |           |           |             |             |       |            | 1              | 3             |
-      | User1    |                       |                 | comment                  | 1         |           |             |             |       |            |                |               |
-      | User1    |                       |                 | like                     |           | 1         |             | 2           |       |            |                |               |
-      | User1    |                       |                 | follower                 |           |           | 1           |             |       |            |                |               |
-      | User1    | title                 | msg             | default                  |           |           |             |             |       |            |                |               |
-      | User1    |                       |                 | follow_program           |           |           |             | 2           |       |            |                |               |
-      | User1    | title                 | msg             | anniversary              |           |           |             |             | prize |            |                |               |
-      | User1    | title                 | msg             | achievement              |           |           |             |             |       | image path |                |               |
-      | User1    |                       |                 | remix                    |           |           |             |             |       |            | 3              | 2             |
-      | Catrobat | title                 | msg             | broadcast                |           |           |             |             |       |            |                |               |
-      | User1    | title                 | msg             | broadcast                |           |           |             |             |       |            |                |               |
+      | user     | title                 | message         | type                     | commentID | like_from | follower_id | program_id  | parent_program | child_program |
+      | Catrobat |                       |                 | comment                  | 2         |           |             |             |                |               |
+      | Catrobat |                       |                 | like                     |           | 2         |             | 2           |                |               |
+      | Catrobat |                       |                 | follower                 |           |           | 2           |             |                |               |
+      | Catrobat | title                 | msg             | default                  |           |           |             |             |                |               |
+      | Catrobat |                       |                 | follow_program           |           |           |             | 2           |                |               |
+      | Catrobat |                       |                 | remix                    |           |           |             |             | 1              | 3             |
+      | User1    |                       |                 | comment                  | 1         |           |             |             |                |               |
+      | User1    |                       |                 | like                     |           | 1         |             | 2           |                |               |
+      | User1    |                       |                 | follower                 |           |           | 1           |             |                |               |
+      | User1    | title                 | msg             | default                  |           |           |             |             |                |               |
+      | User1    |                       |                 | follow_program           |           |           |             | 2           |                |               |
+      | User1    |                       |                 | remix                    |           |           |             |             | 3              | 2             |
+      | Catrobat | title                 | msg             | broadcast                |           |           |             |             |                |               |
+      | User1    | title                 | msg             | broadcast                |           |           |             |             |                |               |
     Then the element "#delete-account-button" should not be visible
     When I click "#account-settings-button"
     And I wait for AJAX to finish

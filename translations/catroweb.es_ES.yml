@@ -236,8 +236,6 @@ passwordRecovery:
     Saludos cordiales,<br>
     Tu equipo de Catrobat.
     </p>
-
-    Traducción realizada con la versión gratuita del traductor www.DeepL.com/Translator
 profile:
   edit: Editar tu perfil
   saveChanges: '¿Desea guardar los cambios?'
@@ -687,3 +685,35 @@ category:
   example: Ejemplo
   scratch: Remixes de Scratch
   recommended: Proyectos recomendados
+achievements:
+  overview:
+    header: 'Logros'
+    most_recent_achievement:
+      title: 'Logro más reciente'
+      x_out_of_y: '%unlocked% de %total% desbloqueado'
+    tab_unlocked:
+      title: 'Desbloqueado'
+      empty: "Aún no has desbloqueado ningún logro."
+    tab_locked:
+      title: 'Bloqueado'
+      empty: "Ya has desbloqueado todos los logros."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Aprendiz'
+        description: 'Seguir a alguien y subir un proyecto'
+      silver_user:
+        title: 'Artisan'
+        description: 'Miembro activo por > 1 año'
+      gold_user:
+        title: 'Maestro'
+        description: 'Miembro activo por > 4 años'
+      diamond_user:
+        title: 'Gran maestro'
+        description: 'Miembro activo por > 7 años'
+      perfect_profile:
+        title: 'Iniciativa'
+        description: 'Añade tu primera foto de perfil'
+      verified_developer:
+        title: 'Novato'
+        description: 'Crear una cuenta de usuario'

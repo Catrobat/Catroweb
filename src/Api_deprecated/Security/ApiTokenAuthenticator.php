@@ -27,12 +27,12 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    *
    * @var string
    */
-  const TOKEN = 'authenticate';
+  public const TOKEN = 'authenticate';
 
   /**
    * @deprecated
    */
-  const OLD_TOKEN = 'token';
+  public const OLD_TOKEN = 'token';
 
   protected TranslatorInterface $translator;
 

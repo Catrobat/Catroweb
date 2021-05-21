@@ -1,5 +1,5 @@
 @web @notifications
-Feature: User gets notifications for new followers, reactions, comments and other types like anniversary
+Feature: User gets notifications for new followers, reactions, comments, ..
 
 
   Background:

@@ -206,7 +206,8 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
       customClass: {
         confirmButton: 'btn btn-primary'
       },
-      buttonsStyling: false
+      buttonsStyling: false,
+      allowOutsideClick: false
     })
   }
 

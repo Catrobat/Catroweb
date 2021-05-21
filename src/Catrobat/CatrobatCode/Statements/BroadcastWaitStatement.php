@@ -7,11 +7,11 @@ class BroadcastWaitStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'broadcast and wait ';
+  public const BEGIN_STRING = 'broadcast and wait ';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * BroadcastWaitStatement constructor.

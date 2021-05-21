@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
 
       - name: Build catroweb app image
         run: |
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
 
       - name: Pull the latest images to build (Faster than caching)
         run: |
@@ -98,7 +98,7 @@ jobs:
           name: PhpUnitTestReport
           path: tests/testreports/coverage/phpunit
 
-      - uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v1.5.0
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/testreports/coverage/phpunit/coverage.xml
@@ -149,6 +149,7 @@ jobs:
           - api-deprecated-profile
           - api-deprecated-upload
 
+          - web-achievements
           - web-admin
           - web-apk-generation
           - web-authentication
@@ -172,7 +173,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
 
       - name: Pull the latest images to build (Faster than caching)
         run: |
@@ -240,7 +241,7 @@ jobs:
             docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
 
-      - uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v1.5.0
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/testreports/coverage/behat/coverage.xml

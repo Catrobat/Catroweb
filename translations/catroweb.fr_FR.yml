@@ -686,3 +686,35 @@ category:
   example: Exemple
   scratch: Remixes de Scratch
   recommended: Projets recommandés
+achievements:
+  overview:
+    header: 'Réalisations'
+    most_recent_achievement:
+      title: 'Nouvelle réalisation'
+      x_out_of_y: '%unlocked% sur %total% débloqué'
+    tab_unlocked:
+      title: 'Déverrouillé'
+      empty: "Vous n'avez pas encore débloqué de réalisations."
+    tab_locked:
+      title: 'Verrouillé'
+      empty: "Vous avez déjà débloqué toutes les réalisations."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Apprentissage'
+        description: 'Suivez quelqu''un et téléchargez un projet'
+      silver_user:
+        title: 'Artisan'
+        description: 'Membre actif depuis > 1 an'
+      gold_user:
+        title: 'Maître'
+        description: 'Membre actif depuis > 4 ans'
+      diamond_user:
+        title: 'Grand maître'
+        description: 'Membre actif depuis > 7 ans'
+      perfect_profile:
+        title: 'Initiative'
+        description: 'Ajoutez votre première photo de profil'
+      verified_developer:
+        title: 'Novice'
+        description: 'Créer un compte utilisateur'

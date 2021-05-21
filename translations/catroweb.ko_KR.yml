@@ -682,3 +682,35 @@ category:
   example: 예
   scratch: 스크래치 리믹스
   recommended: 추천 프로그램
+achievements:
+  overview:
+    header: '업적'
+    most_recent_achievement:
+      title: '최신 업적'
+      x_out_of_y: '%total% 중 %unlocked% 잠금 해제 됨'
+    tab_unlocked:
+      title: '잠금 해제'
+      empty: "아직 달성 한 업적이 없습니다."
+    tab_locked:
+      title: '잠김'
+      empty: "이미 모든 업적을 잠금 해제했습니다."
+  achievement:
+    type:
+      bronze_user:
+        title: '도제'
+        description: '누군가를 팔로우하고 프로젝트를 업로드하세요'
+      silver_user:
+        title: '장인'
+        description: '1 년 이상 정회원'
+      gold_user:
+        title: '석사'
+        description: '4 년 이상 정회원'
+      diamond_user:
+        title: '그랜드 마스터'
+        description: '7 년 이상 정회원'
+      perfect_profile:
+        title: '발의'
+        description: '첫 번째 프로필 사진 추가'
+      verified_developer:
+        title: '초심자'
+        description: '사용자 계정 생성'

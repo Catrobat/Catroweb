@@ -18,15 +18,15 @@ class ScriptsTest extends TestCase
   /**
    * @var string
    */
-  const TYPE = 'type';
+  public const TYPE = 'type';
   /**
    * @var string
    */
-  const CAPTION = 'caption';
+  public const CAPTION = 'caption';
   /**
    * @var string
    */
-  const IMG_FILE = 'img_file';
+  public const IMG_FILE = 'img_file';
 
   /**
    * @var SimpleXMLElement[]
