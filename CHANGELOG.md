@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [3.9.0]
+- new API route: authentication/upgrade
+- Removed deprecated unused API routes
+- Updated dependencies
+- Fix tabs on user profiles
+- Fix invisible loading spinners
+- Disable click outside popups  
+- Achievements Overview + Updater 
+- Part 1 iTranslate integration  
+- Internal enhancements
 ## [3.8.5]
 - Upgraded API version
 - Updated dependencies
@@ -286,7 +297,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.1]
 ### Fixed
-- Fixes a problem in db connection with `server_version` in `doctrine.yml`([Source])
+- Fixes a problem in db connection with `server_version` in `doctrine.yml`([DoctrineSource])
 ## [2.1.0]
 ### Added
 - Program Owner now visible on small devices too.
@@ -297,7 +308,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Production logs are now rotating.
 - Deployment script adapted for more privacy and more modularity.
 - On the profile page all programs are loaded at once, are ordered and all own programs will be displayed.
-- Headlines are now centered through out all designs.
+- Headlines are now centered throughout all designs.
 - Programs that are uploaded ar no longer set to private if languageVersion is higher than supported.
 ### Changed
 - Recommended Program section will only be displayed if programs for this section exist.
@@ -317,8 +328,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Follow Icon gets positioned correctly again.
 - Color of text in search field is adjusted for "Luna & Cat"
 
-[Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.8.3...HEAD
+[DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.9.0...HEAD
+[3.9.0]: https://github.com/Catrobat/Catroweb/compare/v3.8.7...v3.9.0
+[3.8.5]: https://github.com/Catrobat/Catroweb/compare/v3.8.6...v3.8.7
+[3.8.5]: https://github.com/Catrobat/Catroweb/compare/v3.8.5...v3.8.6
+[3.8.4]: https://github.com/Catrobat/Catroweb/compare/v3.8.4...v3.8.5
+[3.8.3]: https://github.com/Catrobat/Catroweb/compare/v3.8.3...v3.8.4
 [3.8.2]: https://github.com/Catrobat/Catroweb/compare/v3.8.2...v3.8.3
 [3.8.2]: https://github.com/Catrobat/Catroweb/compare/v3.8.1...v3.8.2
 [3.8.1]: https://github.com/Catrobat/Catroweb/compare/v3.8.0...v3.8.1
