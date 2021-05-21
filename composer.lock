@@ -5822,16 +5822,16 @@
         },
         {
             "name": "rosell-dk/webp-convert",
-            "version": "2.5.0",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rosell-dk/webp-convert.git",
-                "reference": "b349da7b6e04a4c269bbbbf7c279e0e433a71fd0"
+                "reference": "ed230afe56d3157dc402c33585e3ab7f15c7ac80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rosell-dk/webp-convert/zipball/b349da7b6e04a4c269bbbbf7c279e0e433a71fd0",
-                "reference": "b349da7b6e04a4c269bbbbf7c279e0e433a71fd0",
+                "url": "https://api.github.com/repos/rosell-dk/webp-convert/zipball/ed230afe56d3157dc402c33585e3ab7f15c7ac80",
+                "reference": "ed230afe56d3157dc402c33585e3ab7f15c7ac80",
                 "shasum": ""
             },
             "require": {
@@ -5896,7 +5896,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rosell-dk/webp-convert/issues",
-                "source": "https://github.com/rosell-dk/webp-convert/tree/2.5.0"
+                "source": "https://github.com/rosell-dk/webp-convert/tree/2.6.0"
             },
             "funding": [
                 {
@@ -5908,7 +5908,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2021-05-06T15:18:48+00:00"
+            "time": "2021-05-20T10:56:47+00:00"
         },
         {
             "name": "ruflin/elastica",
