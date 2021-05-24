@@ -26,6 +26,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('achievements_overview') }}" id="sidebar-achievements">
+          <span class="sidebar-link-icon material-icons">events</span>
+          <span class="sidebar-link-text">{{ "achievements.sidebar.title"|trans({}, "catroweb") }}</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
           <span class="sidebar-link-icon material-icons">person</span>
           <span class="sidebar-link-text">{{ 'menu.profile'|trans({}, "catroweb") }}</span>

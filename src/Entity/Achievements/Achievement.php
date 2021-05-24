@@ -11,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Achievement
 {
   /**
+   * Static Achievements - added/updated with UpdateAchievementsCommand
+   */
+  public const BRONZE_USER = 'bronze_user';
+  public const SILVER_USER = 'silver_user';
+  public const GOLD_USER = 'gold_user';
+  public const DIAMOND_USER = 'diamond_user';
+  public const PERFECT_PROFILE = 'perfect_profile';
+  public const VERIFIED_DEVELOPER = 'verified_developer';
+
+  /**
    * @ORM\Column(name="id", type="integer")
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")

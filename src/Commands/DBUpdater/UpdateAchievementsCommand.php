@@ -42,7 +42,7 @@ class UpdateAchievementsCommand extends Command
   {
     $priority = 0;
 
-    $achievement = $this->getOrCreateAchievement('bronze_user')
+    $achievement = $this->getOrCreateAchievement(Achievement::BRONZE_USER)
       ->setInternalDescription('Follow another user and upload at least one project')
       ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'bronze_user.title')
       ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'bronze_user.description')
@@ -55,7 +55,7 @@ class UpdateAchievementsCommand extends Command
     ;
     $this->entity_manager->persist($achievement);
 
-    $achievement = $this->getOrCreateAchievement('silver_user')
+    $achievement = $this->getOrCreateAchievement(Achievement::SILVER_USER)
       ->setInternalDescription('Community member for > 1 year with at least 1 project upload in every year')
       ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'silver_user.title')
       ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'silver_user.description')
@@ -68,7 +68,7 @@ class UpdateAchievementsCommand extends Command
     ;
     $this->entity_manager->persist($achievement);
 
-    $achievement = $this->getOrCreateAchievement('gold_user')
+    $achievement = $this->getOrCreateAchievement(Achievement::GOLD_USER)
       ->setInternalDescription('Community member for > 4 years with at least 1 project upload in every year')
       ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'gold_user.title')
       ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'gold_user.description')
@@ -81,7 +81,7 @@ class UpdateAchievementsCommand extends Command
     ;
     $this->entity_manager->persist($achievement);
 
-    $achievement = $this->getOrCreateAchievement('diamond_user')
+    $achievement = $this->getOrCreateAchievement(Achievement::DIAMOND_USER)
       ->setInternalDescription('Community member for > 7 years with at least 1 project upload in every year')
       ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'diamond_user.title')
       ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'diamond_user.description')
@@ -94,7 +94,7 @@ class UpdateAchievementsCommand extends Command
     ;
     $this->entity_manager->persist($achievement);
 
-    $achievement = $this->getOrCreateAchievement('perfect_profile')
+    $achievement = $this->getOrCreateAchievement(Achievement::PERFECT_PROFILE)
       ->setInternalDescription('Add your first profile picture')
       ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'perfect_profile.title')
       ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'perfect_profile.description')
@@ -107,7 +107,7 @@ class UpdateAchievementsCommand extends Command
     ;
     $this->entity_manager->persist($achievement);
 
-    $achievement = $this->getOrCreateAchievement('verified_developer')
+    $achievement = $this->getOrCreateAchievement(Achievement::VERIFIED_DEVELOPER)
       ->setInternalDescription('Create a user account')
       ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'verified_developer.title')
       ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'verified_developer.description')

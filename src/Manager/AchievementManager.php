@@ -7,15 +7,23 @@ use App\Entity\Achievements\UserAchievement;
 use App\Entity\User;
 use App\Repository\Achievements\AchievementRepository;
 use App\Repository\Achievements\UserAchievementRepository;
+use App\Utils\TimeUtils;
+use DateTime;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 
 class AchievementManager
 {
+  protected EntityManagerInterface $entity_manager;
   protected AchievementRepository $achievement_repository;
-
   protected UserAchievementRepository $user_achievement_repository;
 
-  public function __construct(AchievementRepository $achievement_repository, UserAchievementRepository $user_achievement_repository)
+  public function __construct(EntityManagerInterface $entity_manager,
+                              AchievementRepository $achievement_repository,
+                              UserAchievementRepository $user_achievement_repository)
   {
+    $this->entity_manager = $entity_manager;
     $this->achievement_repository = $achievement_repository;
     $this->user_achievement_repository = $user_achievement_repository;
   }
@@ -89,6 +97,27 @@ class AchievementManager
   public function findMostRecentUserAchievement(User $user): ?UserAchievement
   {
     return $this->user_achievement_repository->findMostRecentUserAchievement($user);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function unlockAchievement(User $user, string $internal_title, ?DateTime $unlocked_at = null): ?UserAchievement
+  {
+    $achievement = $this->findAchievementByInternalTitle($internal_title);
+    if (is_null($achievement)) {
+      return null;
+    }
+
+    $user_achievement = new UserAchievement();
+    $user_achievement->setUser($user);
+    $user_achievement->setAchievement($achievement);
+    $user_achievement->setUnlockedAt($unlocked_at ?? TimeUtils::getDateTime());
+
+    $this->entity_manager->persist($user_achievement);
+    $this->entity_manager->flush();
+
+    return $user_achievement;
   }
 
   /**
