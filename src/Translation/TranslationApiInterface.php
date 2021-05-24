@@ -10,7 +10,7 @@ interface TranslationApiInterface
    * or 5-character BCP 47 locale code formed by
    *     - lowercase 2-character ISO-639-1 language code
    *     - a hyphen
-   *     - uppercase 2-character ISO 3166 country code.
+   *     - uppercase 2-character ISO-3166-1 country code.
    *
    * The concrete implementations do NOT check the validity of the language code formats.
    * The underlying API might return errors if supplied invalid language code.
