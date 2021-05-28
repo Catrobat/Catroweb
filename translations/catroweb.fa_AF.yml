@@ -134,8 +134,8 @@ programs:
   likes:
     likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
     all: "همه"
-  remixes: '{0}0 ریمیکس  {1}۱ ریمیکس %remixes% ریمیکس'
-  newRemixesNotificationTitle: '{1}%programName% یک ریمکس جدید %programName% ریمکس %remixes% جدید دارد:'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
   uploaded: Uploaded Projects
   reportAsInappropriate: گزارش به عنوان نامناسب
@@ -441,11 +441,11 @@ success:
   imgUpload: تصویر شما با موفقیت آپلود شد!
   report: گزارش شما با موفقیت ارسال شد!
 time:
-  minutes.ago: '{0} < ۱ دقیقه قبل {1} ۱ دقیقه قبل  |]1,Inf]%count% دقیقه قبل'
-  hours.ago: '{1} ساعت قبل  |]1,  Inf] %count% ساعت قبل '
-  days.ago: '{1} روز قبل |] ۱ Inf] %count% روز قبل'
-  months.ago: '{1} ۱ ماه قبل |] ۱ Inf] %count% ماه قبل'
-  years.ago: '{1} ۱ سال فبل |] ۱، Inf] . بیشتر از یک سال'
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: در آپلود برنامه شما یک خطا وجود داشت.
 api:
