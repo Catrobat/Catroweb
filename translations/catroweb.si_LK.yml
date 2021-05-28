@@ -369,9 +369,9 @@ login:
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
   or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
+  username: පරිශීලක නාමය
+  email: විද්‍යුත් තැපෑල
+  passwordFirst: මුරපදය
   passwordSecond: මුරපදය තහවුරු කරන්න
 apk:
   download: Download as app
