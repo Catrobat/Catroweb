@@ -2,27 +2,27 @@
 
 namespace Tests\phpUnit\Commands\DBUpdater;
 
-use App\Commands\DBUpdater\UpdateAchievementsCommand;
+use App\Commands\DBUpdater\SpecialUpdateCommand;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 
 /**
- * Class UpdateAchievementsCommand.
+ * Class SpecialUpdateCommand.
  *
  * @internal
- * @covers \App\Commands\DBUpdater\UpdateAchievementsCommand
+ * @covers \App\Commands\DBUpdater\SpecialUpdateCommand
  */
-class UpdateAchievementsCommandTest extends KernelTestCase
+class SpecialUpdateCommandTest extends KernelTestCase
 {
   /**
-   * @var UpdateAchievementsCommand|MockObject
+   * @var SpecialUpdateCommand|MockObject
    */
   protected $object;
 
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(UpdateAchievementsCommand::class)
+    $this->object = $this->getMockBuilder(SpecialUpdateCommand::class)
       ->disableOriginalConstructor()
       ->getMockForAbstractClass()
         ;
@@ -34,8 +34,8 @@ class UpdateAchievementsCommandTest extends KernelTestCase
    */
   public function testTestClassExists(): void
   {
-    $this->assertTrue(class_exists(UpdateAchievementsCommand::class));
-    $this->assertInstanceOf(UpdateAchievementsCommand::class, $this->object);
+    $this->assertTrue(class_exists(SpecialUpdateCommand::class));
+    $this->assertInstanceOf(SpecialUpdateCommand::class, $this->object);
   }
 
   /**

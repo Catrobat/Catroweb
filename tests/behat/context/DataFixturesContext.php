@@ -1367,4 +1367,14 @@ class DataFixturesContext implements KernelAwareContext
             ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements'
         );
   }
+
+  /**
+   * @Given I run the special update command
+   */
+  public function iRunTheSpecialUpdateCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:special'], [], 'Updating database'
+    );
+  }
 }

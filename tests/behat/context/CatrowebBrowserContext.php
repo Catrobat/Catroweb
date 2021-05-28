@@ -2459,6 +2459,31 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the achievements table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeAchievementTable(TableNode $table): void
+  {
+    $this->assertSession()->pageTextContains('Priority');
+    $this->assertSession()->pageTextContains('Internal Title');
+    $this->assertSession()->pageTextContains('Internal Description');
+    $this->assertSession()->pageTextContains('Color');
+    $this->assertSession()->pageTextContains('Enabled');
+    $this->assertSession()->pageTextContains('Unlocked by');
+
+    $survey_stats = $table->getHash();
+    foreach ($survey_stats as $survey_stat) {
+      $this->assertSession()->pageTextContains($survey_stat['Priority']);
+      $this->assertSession()->pageTextContains($survey_stat['Internal Title']);
+      $this->assertSession()->pageTextContains($survey_stat['Internal Description']);
+      $this->assertSession()->pageTextContains($survey_stat['Color']);
+      $this->assertSession()->pageTextContains($survey_stat['Enabled']);
+      $this->assertSession()->pageTextContains($survey_stat['Unlocked by']);
+    }
+  }
+
+  /**
    * @Then /^I should see the media package categories table:$/
    *
    * @throws ResponseTextException

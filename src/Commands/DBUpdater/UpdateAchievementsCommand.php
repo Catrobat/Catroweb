@@ -42,6 +42,9 @@ class UpdateAchievementsCommand extends Command
   {
     $priority = 0;
 
+    // The internal_title must not change!
+    // Do not delete Achievements, better disable them
+
     $achievement = $this->getOrCreateAchievement(Achievement::BRONZE_USER)
       ->setInternalDescription('Follow another user and upload at least one project')
       ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'bronze_user.title')

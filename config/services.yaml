@@ -142,6 +142,11 @@ services:
     tags: ['controller.service_arguments']
     public: true
 
+  App\Admin\Controller\:
+    resource: '../src/Admin/Controller'
+    tags: [ 'controller.service_arguments' ]
+    public: true
+
   App\Api_deprecated\Controller\:
     resource: '../src/Api_deprecated/Controller'
     tags: ['controller.service_arguments']
@@ -717,6 +722,48 @@ services:
       - ~
     public: true
 
+  # ===== DB Updater
+
+  catrowebadmin.block.special_updater:
+    class: App\Admin\SpecialUpdaterAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Special Updater", icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - ~
+      - App\Admin\Controller\SpecialUpdaterAdminController
+    public: true
+
+  catrowebadmin.block.achievements:
+    class: App\Admin\AchievementsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Achievements" }
+    arguments:
+      - ~
+      - ~
+      - App\Admin\Controller\AchievementsAdminController
+    public: true
+
+
+  catrowebadmin.block.extensions:
+    class: App\Admin\AllExtensionsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: Extensions (WIP) }
+    arguments:
+      - ~
+      - App\Entity\Extension
+      - App\Catrobat\Controller\Admin\ExtensionController
+    public: true
+
+  catrowebadmin.block.tags:
+    class: App\Admin\AllExtensionsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Tags (WIP)" }
+    arguments:
+      - ~
+      - App\Entity\Extension
+      - App\Catrobat\Controller\Admin\ExtensionController
+    public: true
 
   # ===== Tools
 
@@ -792,22 +839,10 @@ services:
       - App\Catrobat\Controller\Admin\EmailUserMessageController
     public: true
 
-  # ===== Extensions
-
-  catrowebadmin.block.extensions.all:
-    class: App\Admin\AllExtensionsAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "All Extensions" }
-    arguments:
-      - ~
-      - App\Entity\Extension
-      - App\Catrobat\Controller\Admin\ExtensionController
-    public: true
-
   # ===== Statistics
 
   catrowebadmin.block.tools.statistic:
-    class: App\Admin\Blocks\StatisticBlockService
+    class: App\Admin\StatisticBlockService
     tags:
       - { name: sonata.block, label: Cleanup }
     arguments:

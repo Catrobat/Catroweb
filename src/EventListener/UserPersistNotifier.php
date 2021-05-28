@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\EventListener;
 
 use App\Entity\Achievements\Achievement;
@@ -24,7 +23,6 @@ class UserPersistNotifier
   }
 
   /**
-   * @param User $user
    * @throws Exception
    */
   protected function addVerifiedDeveloperAchievement(User $user): void

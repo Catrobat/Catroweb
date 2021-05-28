@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Achievement
 {
   /**
-   * Static Achievements - added/updated with UpdateAchievementsCommand
+   * Static Achievements - added/updated with UpdateAchievementsCommand.
    */
   public const BRONZE_USER = 'bronze_user';
   public const SILVER_USER = 'silver_user';

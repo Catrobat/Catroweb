@@ -1,0 +1,81 @@
+{% extends base_template %}
+
+{% block sonata_admin_content %}
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/achievements.css') }}"/>
+  <h1 class=h1" style="margin-top: 0">Achievements</h1>
+
+  {% include '@SonataCore/FlashMessage/render.html.twig' %}
+
+  <div class="box box-primary">
+    <div class="box-body table-responsive no-padding">
+
+      <table class="table table-bordered table-striped table-hover sonata-ba-list">
+        <thead>
+        <tr class="sonata-ba-list-field-header">
+          <th class="sonata-ba-list-field-header-text">Priority</th>
+          <th class="sonata-ba-list-field-header-text">Internal Title</th>
+          <th class="sonata-ba-list-field-header-text">Internal Description</th>
+          <th class="sonata-ba-list-field-header-text">Badge</th>
+          <th class="sonata-ba-list-field-header-text">Badge Locked</th>
+          <th class="sonata-ba-list-field-header-text">Color</th>
+          <th class="sonata-ba-list-field-header-text">Enabled</th>
+          <th class="sonata-ba-list-field-header-text">Unlocked by</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for achievement in achievements %}
+          <tr>
+            <td class="sonata-ba-list-field">{{ achievement.getPriority() }}</td>
+            <td class="sonata-ba-list-field">{{ achievement.getInternalTitle() }}</td>
+            <td class="sonata-ba-list-field">{{ achievement.getInternalDescription() }}</td>
+            <td class="sonata-ba-list-field">
+              <img class="achievement-top__badge__image achievement__badge__image--small"
+                   src={{ asset(achievement.getBadgeSvgPath()) }})" alt="">
+            </td>
+            <td class="sonata-ba-list-field">
+              <img class="achievement-top__badge__image achievement__badge__image--small"
+                   src={{ asset(achievement.getBadgeLockedSvgPath()) }})" alt="">
+            </td>
+            <td style="background-color: {{ achievement.getBannerColor() }}"
+                class="sonata-ba-list-field">{{ achievement.getBannerColor() }}</td>
+            <td class="sonata-ba-list-field">
+              {% if achievement.isEnabled() %}
+                <span class="label label-success">yes</span>
+              {% else %}
+                <span class="label label-danger">no</span>
+              {% endif %}
+            </td>
+            <td class="sonata-ba-list-field">{{ numberOfUserAchievements[achievement.getID()] }} users</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="box mt-5">
+
+    <div class="box-body">
+      <h3>Update achievements</h3>
+      <p>
+        Achievements are tightly coupled to events that usually require complex logic in the background.
+        Therefore, achievements can not simply be added here through the Admin interface.
+        Instead, they have to be added directly through the source code first.
+        Then, to insert/update those static achievements into the database, the update button must be
+        triggered or the command executed in the command line.
+      </p>
+
+      <h4>Step by step guide on how to add new achievements</h4>
+      <ol>
+        <li>Add/modify the achievements in `UpdateAchievementsCommand.php`</li>
+        <li>Add all necessary new assets, such as the SVGs to the assets directory</li>
+        <li>Trigger the update into the database:</li>
+      </ol>
+
+      <a id="btn-update-achievements" class="btn btn-large btn-primary" href="{{ updateAchievementsUrl }}">
+        <i class="glyphicon glyphicon-refresh"></i>
+        Update Achievements
+      </a>
+    </div>
+  </div>
+{% endblock %}

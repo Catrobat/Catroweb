@@ -9,7 +9,6 @@ use App\Repository\Achievements\AchievementRepository;
 use App\Repository\Achievements\UserAchievementRepository;
 use App\Utils\TimeUtils;
 use DateTime;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
@@ -60,6 +59,13 @@ class AchievementManager
   public function findAllUserAchievements(): array
   {
     return $this->user_achievement_repository->findAll();
+  }
+
+  public function countUserAchievementsOfAchievement(int $achievement_id): int
+  {
+    return $this->user_achievement_repository->count([
+      'achievement' => $achievement_id,
+    ]);
   }
 
   /**

@@ -25,7 +25,6 @@ class SpecialUpdateCommand extends Command
   protected AchievementManager $achievement_manager;
   protected UserManager $user_manager;
 
-
   public function __construct(EntityManagerInterface $entity_manager, AchievementManager $achievement_manager, UserManager $user_manager)
   {
     parent::__construct();
@@ -48,12 +47,11 @@ class SpecialUpdateCommand extends Command
     return 0;
   }
 
-
   /**
    * SHARE-487: Already registered users must also have the verified developer badge.
-   *            Method can be removed after its execution on share.
+   *            Should move to a workflow later.
    */
-  protected function addVerifiedDeveloperAchievementToEveryUser(OutputInterface $output)
+  protected function addVerifiedDeveloperAchievementToEveryUser(OutputInterface $output): void
   {
     $users = $this->user_manager->findAll();
     try {
@@ -61,8 +59,7 @@ class SpecialUpdateCommand extends Command
       foreach ($users as $user) {
         $this->achievement_manager->unlockAchievement($user, Achievement::VERIFIED_DEVELOPER, $user->getCreatedAt());
       }
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
       $output->writeln($e->getMessage());
     }
   }

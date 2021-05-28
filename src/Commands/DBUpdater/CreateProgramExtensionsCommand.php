@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Commands\Create;
+namespace App\Commands\DBUpdater;
 
 use App\Catrobat\Exceptions\Upload\InvalidXmlException;
 use App\Catrobat\Services\ProgramFileRepository;
