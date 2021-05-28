@@ -27,7 +27,12 @@ class AuthenticationManager
       return null;
     }
 
-    return $token->getUser();
+    $user = $token->getUser();
+    if (!($user instanceof User)) {
+      $user = null;
+    }
+
+    return $user;
   }
 
   public function createAuthenticationTokenFromUser(User $user): string

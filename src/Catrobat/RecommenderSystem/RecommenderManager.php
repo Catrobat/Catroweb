@@ -173,8 +173,8 @@ class RecommenderManager
     $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
     foreach ($programs_total_likes as $program_id => $number_of_likes) {
-      $rank_in_top_downloads = array_search($program_id, $ids_of_most_downloaded_programs, true);
-      if (false !== $rank_in_top_downloads) {
+      $rank_in_top_downloads = intval(array_search($program_id, $ids_of_most_downloaded_programs, true));
+      if (0 !== $rank_in_top_downloads) {
         $programs_total_likes[$program_id] = $number_of_likes * cos(deg2rad(70 - $rank_in_top_downloads * 1.5)) ** 2;
       }
     }
@@ -268,8 +268,8 @@ class RecommenderManager
     $ids_of_most_downloaded_programs = array_map(fn (Program $program) => $program->getId(), $most_downloaded_programs);
 
     foreach ($recommendation_weights as $key => $weight) {
-      $rank_in_top_downloads = array_search($key, $ids_of_most_downloaded_programs, true);
-      if (false !== $rank_in_top_downloads) {
+      $rank_in_top_downloads = intval(array_search($key, $ids_of_most_downloaded_programs, true));
+      if (0 !== $rank_in_top_downloads) {
         $recommendation_weights[$key] = $weight * cos(deg2rad(75 - $rank_in_top_downloads));
       }
     }

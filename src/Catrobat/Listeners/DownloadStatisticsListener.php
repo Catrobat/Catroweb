@@ -35,7 +35,7 @@ class DownloadStatisticsListener
       $locale = strtolower($request->getLocale());
 
       $rec_by_page_id = null;
-      $rec_by_program_id = 0;
+      $rec_by_program_id = null;
       $rec_user_specific = false;
 
       $rec_tag_by_program_id = null;
@@ -44,7 +44,7 @@ class DownloadStatisticsListener
         // all recommendations (except tag-recommendations -> see below)
         $rec_by_page_id = $attributes->get('rec_by_page_id');
         if ($attributes->has('rec_by_program_id')) {
-          $rec_by_program_id = $attributes->get('rec_by_program_id');
+          $rec_by_program_id = (string) $attributes->get('rec_by_program_id');
         }
         if ($attributes->has('rec_user_specific')) {
           $rec_user_specific = (bool) $attributes->get('rec_user_specific');

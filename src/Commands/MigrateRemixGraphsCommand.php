@@ -183,7 +183,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->start();
 
     $skipped = 0;
-    $previous_program_id = 0;
+    $previous_program_id = '0';
     $remix_data_map = [];
 
     while (null != ($program_id = $this->program_manager->findNext($previous_program_id))) {

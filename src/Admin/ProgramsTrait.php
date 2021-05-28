@@ -11,27 +11,27 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 trait ProgramsTrait
 {
   /**
-   * @param mixed $program
+   * @param mixed $object
    *
    * @throws ModelManagerException
    */
-  public function preUpdate($program): void
+  public function preUpdate($object): void
   {
-    /** @var Program $program */
+    /** @var Program $object */
     /** @var ModelManager $model_manager */
     $model_manager = $this->getModelManager();
     $old_program = $model_manager->getEntityManager($this->getClass())
-      ->getUnitOfWork()->getOriginalEntityData($program);
+      ->getUnitOfWork()->getOriginalEntityData($object);
 
-    if (false == $old_program['approved'] && true == $program->getApproved()) {
+    if (false == $old_program['approved'] && true == $object->getApproved()) {
       /** @var User $user */
       $user = $this->getConfigurationPool()->getContainer()
         ->get('security.token_storage')->getToken()->getUser();
-      $program->setApprovedByUser($user);
-      $this->getModelManager()->update($program);
-    } elseif (true == $old_program['approved'] && false == $program->getApproved()) {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
+      $object->setApprovedByUser($user);
+      $this->getModelManager()->update($object);
+    } elseif (true == $old_program['approved'] && false == $object->getApproved()) {
+      $object->setApprovedByUser(null);
+      $this->getModelManager()->update($object);
     }
     $this->checkFlavor();
   }

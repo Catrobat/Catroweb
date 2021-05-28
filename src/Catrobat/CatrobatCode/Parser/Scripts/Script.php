@@ -121,7 +121,7 @@ abstract class Script
 
   private function addBrick(SimpleXMLElement $brick_as_xml): void
   {
-    if (null !== $brick_as_xml[Constants::REFERENCE_ATTRIBUTE]) {
+    if (isset($brick_as_xml[Constants::REFERENCE_ATTRIBUTE])) {
       $this->bricks[] = BrickFactory::generate($brick_as_xml->xpath($brick_as_xml[Constants::REFERENCE_ATTRIBUTE])[0]);
     } else {
       $this->bricks[] = BrickFactory::generate($brick_as_xml);

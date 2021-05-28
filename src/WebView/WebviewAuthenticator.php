@@ -50,7 +50,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    * used for the request. Returning false will cause this authenticator
    * to be skipped.
    *
-   * @return bool
+   * {@inheritdoc}
    */
   public function supports(Request $request)
   {
@@ -63,7 +63,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    * Called on every request. Return whatever credentials you want to
    * be passed to getUser() as $credentials.
    *
-   * @return array|mixed
+   * {@inheritdoc}
    */
   public function getCredentials(Request $request)
   {
@@ -75,7 +75,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   /**
    * @param mixed $credentials
    *
-   * @return User|null
+   * {@inheritdoc}
    */
   public function getUser($credentials, UserProviderInterface $userProvider)
   {
@@ -104,7 +104,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    *
    * @param mixed $credentials
    *
-   * @return bool
+   * {@inheritdoc}
    */
   public function checkCredentials($credentials, UserInterface $user)
   {
@@ -115,7 +115,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   /**
    * @param string $providerKey
    *
-   * @return Response|null
+   * {@inheritdoc}
    */
   public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
   {
@@ -136,7 +136,9 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @return Response|void
+   * @throws AuthenticationException
+   *
+   * {@inheritDoc}
    */
   public function start(Request $request, AuthenticationException $authException = null)
   {
@@ -144,7 +146,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   }
 
   /**
-   * @return bool
+   * {@inheritDoc}
    */
   public function supportsRememberMe()
   {

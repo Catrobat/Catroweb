@@ -35,7 +35,7 @@ class ProgramExtensionListener
       return;
     }
 
-    $prefixes = array_map(fn ($element) => explode('_', $element['category'], 2)[0], $nodes);
+    $prefixes = array_map(fn ($element) => explode('_', (string) $element['category'], 2)[0], $nodes);
     $prefixes = array_unique($prefixes);
 
     $extensions = $this->extension_repository->findAll();

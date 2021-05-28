@@ -70,10 +70,10 @@ class MediaPackageCategory
       }
       $string .= ')';
 
-      return (string) $string;
+      return $string;
     }
 
-    return (string) $this->name;
+    return $this->name ?? '';
   }
 
   public function getId(): ?int

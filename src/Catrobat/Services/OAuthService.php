@@ -296,7 +296,9 @@ class OAuthService
 
     if (null != $user) {
       $retArray['user'] = true;
-      $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+      /** @var string[] $roles */
+      $roles = $user->getRoles();
+      $token = new UsernamePasswordToken($user, null, 'main', $roles);
       $retArray['token'] = $token;
       $this->token_storage->setToken($token);
 

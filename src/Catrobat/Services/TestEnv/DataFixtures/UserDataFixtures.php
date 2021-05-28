@@ -5,6 +5,8 @@ namespace App\Catrobat\Services\TestEnv\DataFixtures;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\MyUuidGenerator;
+use App\Utils\TimeUtils;
+use Exception;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -119,11 +121,14 @@ class UserDataFixtures
     UserDataFixtures::$current_user = null;
   }
 
+  /**
+   * @throws Exception
+   */
   public function createdAt(array $config = []): void
   {
     /** @var User $user */
     $user = $this->user_manager->findUserByUsername($config['name']);
-    $date = date_create($config['created_at']) ?? date_create($config['created_at'] ?? 'last Monday');
+    $date = date_create($config['created_at']) ?: TimeUtils::getDateTime();
     $user->changeCreatedAt($date);
     $this->user_manager->updateUser($user, true);
   }
