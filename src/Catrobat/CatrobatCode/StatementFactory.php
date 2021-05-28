@@ -786,7 +786,7 @@ class StatementFactory
 
   private function generateObjectStatement(SimpleXMLElement $statement, int $spaces): ObjectStatement
   {
-    $name = $statement['name'];
+    $name = (string) $statement['name'];
     $factory = new StatementFactory();
     $this->currentObject->addCodeObject($factory->createObject($statement));
 

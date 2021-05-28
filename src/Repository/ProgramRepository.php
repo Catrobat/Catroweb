@@ -356,11 +356,11 @@ class ProgramRepository extends ServiceEntityRepository
       ->distinct()
     ;
 
-    if ((int) $offset > 0) {
+    if ($offset > 0) {
       $query_builder->setFirstResult($offset);
     }
 
-    if ((int) $limit > 0) {
+    if (!is_null($limit) && $limit > 0) {
       $query_builder->setMaxResults($limit);
     }
 
@@ -556,10 +556,10 @@ class ProgramRepository extends ServiceEntityRepository
 
     // Extensions are very similar to Flavors. (E.g. it does not care if a project has embroidery flavor or extension)
     return $query_builder->leftJoin($alias.'.extensions', 'ext')
-      ->andWhere($query_builder->expr()->orX(
+      ->andWhere($query_builder->expr()->orX()->addMultiple([
         $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
-        $query_builder->expr()->like('lower(ext.name)', ':extension')
-      ))
+        $query_builder->expr()->like('lower(ext.name)', ':extension'),
+      ]))
       ->setParameter('flavor', strtolower($flavor))
       ->setParameter('extension', strtolower($flavor))
       ;

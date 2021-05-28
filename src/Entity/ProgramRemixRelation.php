@@ -123,7 +123,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 
   public function setDepth(int $depth): void
   {
-    $this->depth = (int) $depth;
+    $this->depth = $depth;
   }
 
   public function getDepth(): int
