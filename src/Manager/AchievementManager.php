@@ -4,6 +4,7 @@ namespace App\Manager;
 
 use App\Entity\Achievements\Achievement;
 use App\Entity\Achievements\UserAchievement;
+use App\Entity\Program;
 use App\Entity\User;
 use App\Repository\Achievements\AchievementRepository;
 use App\Repository\Achievements\UserAchievementRepository;
@@ -147,6 +148,70 @@ class AchievementManager
     }
 
     return $this->unlockAchievement($user, Achievement::BRONZE_USER);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function unlockAchievementSilverUser(User $user): ?UserAchievement
+  {
+    if ($user->getCreatedAt() > new DateTime('-1 years')) {
+      return null;
+    }
+    $years_with_project_uploads = [];
+    foreach ($user->getPrograms() as $project) {
+      /** @var Program $project */
+      $year = $project->getUploadedAt()->format('Y');
+      $years_with_project_uploads[$year] = true;
+    }
+    if (count($years_with_project_uploads) < 1) {
+      return null;
+    }
+
+    return $this->unlockAchievement($user, Achievement::SILVER_USER);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function unlockAchievementGoldUser(User $user): ?UserAchievement
+  {
+    if ($user->getCreatedAt() > new DateTime('-4 years')) {
+      return null;
+    }
+    $years_with_project_uploads = [];
+    foreach ($user->getPrograms() as $project) {
+      /** @var Program $project */
+      $year = $project->getUploadedAt()->format('Y');
+      $years_with_project_uploads[$year] = true;
+    }
+    if (count($years_with_project_uploads) < 4) {
+      return null;
+    }
+
+    return $this->unlockAchievement($user, Achievement::GOLD_USER);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function unlockAchievementDiamondUser(User $user): ?UserAchievement
+  {
+    if ($user->getCreatedAt() > new DateTime('-7 years')) {
+      return null;
+    }
+
+    $years_with_project_uploads = [];
+    foreach ($user->getPrograms() as $project) {
+      /** @var Program $project */
+      $year = $project->getUploadedAt()->format('Y');
+      $years_with_project_uploads[$year] = true;
+    }
+    if (count($years_with_project_uploads) < 7) {
+      return null;
+    }
+
+    return $this->unlockAchievement($user, Achievement::DIAMOND_USER);
   }
 
   /**

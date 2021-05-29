@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\MyUuidGenerator;
 use App\Utils\TimeUtils;
+use DateTime;
 use Exception;
 use PHPUnit\Framework\Assert;
 
@@ -124,11 +125,11 @@ class UserDataFixtures
   /**
    * @throws Exception
    */
-  public function createdAt(array $config = []): void
+  public function overwriteCreatedAt(array $config = []): void
   {
     /** @var User $user */
     $user = $this->user_manager->findUserByUsername($config['name']);
-    $date = date_create($config['created_at']) ?: TimeUtils::getDateTime();
+    $date = isset($config['created_at']) ? new DateTime($config['created_at']) : TimeUtils::getDateTime();
     $user->changeCreatedAt($date);
     $this->user_manager->updateUser($user, true);
   }

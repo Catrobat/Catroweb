@@ -1279,7 +1279,7 @@ class DataFixturesContext implements KernelAwareContext
   public function theUsersAreCreatedAt(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      $this->getUserDataFixtures()->createdAt($config);
+      $this->getUserDataFixtures()->overwriteCreatedAt($config);
     }
     $this->getManager()->flush();
   }
@@ -1375,6 +1375,16 @@ class DataFixturesContext implements KernelAwareContext
   {
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:update:special'], [], 'Updating database'
+    );
+  }
+
+  /**
+   * @Given I run the update active user achievements command
+   */
+  public function iRunTheUpdateActiveUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:achievements:active_user'], [], 'Updating user achievements'
     );
   }
 }
