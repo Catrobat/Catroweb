@@ -68,6 +68,14 @@ class AchievementManager
     ]);
   }
 
+  public function isAchievementAlreadyUnlocked(string $user_id, int $achievement_id): bool
+  {
+    return $this->user_achievement_repository->count([
+      'user' => $user_id,
+      'achievement' => $achievement_id,
+    ]) > 0;
+  }
+
   /**
    * @return UserAchievement[]
    */
@@ -108,10 +116,34 @@ class AchievementManager
   /**
    * @throws Exception
    */
-  public function unlockAchievement(User $user, string $internal_title, ?DateTime $unlocked_at = null): ?UserAchievement
+  public function unlockAchievementVerifiedDeveloper(User $user): ?UserAchievement
+  {
+    return $this->unlockAchievement($user, Achievement::VERIFIED_DEVELOPER, $user->getCreatedAt());
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function unlockAchievementPerfectProfile(User $user): ?UserAchievement
+  {
+    if (is_null($user->getAvatar())) {
+      return null;
+    }
+
+    return $this->unlockAchievement($user, Achievement::PERFECT_PROFILE);
+  }
+
+  /**
+   * @throws Exception
+   */
+  protected function unlockAchievement(User $user, string $internal_title, ?DateTime $unlocked_at = null): ?UserAchievement
   {
     $achievement = $this->findAchievementByInternalTitle($internal_title);
     if (is_null($achievement)) {
+      return null;
+    }
+
+    if ($this->isAchievementAlreadyUnlocked($user->getId(), $achievement->getId())) {
       return null;
     }
 

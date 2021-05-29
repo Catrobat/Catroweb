@@ -2,13 +2,12 @@
 
 namespace App\EventListener;
 
-use App\Entity\Achievements\Achievement;
 use App\Entity\User;
 use App\Manager\AchievementManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Exception;
 
-class UserPersistNotifier
+class UserPostPersistNotifier
 {
   protected AchievementManager $achievement_manager;
 
@@ -27,6 +26,6 @@ class UserPersistNotifier
    */
   protected function addVerifiedDeveloperAchievement(User $user): void
   {
-    $this->achievement_manager->unlockAchievement($user, Achievement::VERIFIED_DEVELOPER);
+    $this->achievement_manager->unlockAchievementVerifiedDeveloper($user);
   }
 }

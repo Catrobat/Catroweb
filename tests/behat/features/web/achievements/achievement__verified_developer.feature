@@ -11,7 +11,7 @@ Feature: Every registered user should have at least one achievement
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Novice"
 
-  Scenario: Old users
+  Scenario: Old users must get their achievements too
     And there are users:
       | name    |
       | OldUser |

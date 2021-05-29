@@ -2,7 +2,6 @@
 
 namespace App\Commands\DBUpdater;
 
-use App\Entity\Achievements\Achievement;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Manager\AchievementManager;
@@ -43,13 +42,14 @@ class SpecialUpdateCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->addVerifiedDeveloperAchievementToEveryUser($output);
+    $this->addPerfectProfileAchievementToEveryUser($output);
 
     return 0;
   }
 
   /**
-   * SHARE-487: Already registered users must also have the verified developer badge.
-   *            Should move to a workflow later.
+   * SHARE-487: Already registered users must also have the verified_developer badge.
+   *            Can move to a workflow later.
    */
   protected function addVerifiedDeveloperAchievementToEveryUser(OutputInterface $output): void
   {
@@ -57,7 +57,24 @@ class SpecialUpdateCommand extends Command
     try {
       /** @var User $user */
       foreach ($users as $user) {
-        $this->achievement_manager->unlockAchievement($user, Achievement::VERIFIED_DEVELOPER, $user->getCreatedAt());
+        $this->achievement_manager->unlockAchievementVerifiedDeveloper($user);
+      }
+    } catch (Exception $e) {
+      $output->writeln($e->getMessage());
+    }
+  }
+
+  /**
+   * SHARE-487: Users that already changed their profile picture should have perfect_profile badge.
+   *            Can move to a workflow later.
+   */
+  protected function addPerfectProfileAchievementToEveryUser(OutputInterface $output): void
+  {
+    $users = $this->user_manager->findAll();
+    try {
+      /** @var User $user */
+      foreach ($users as $user) {
+        $this->achievement_manager->unlockAchievementPerfectProfile($user);
       }
     } catch (Exception $e) {
       $output->writeln($e->getMessage());
