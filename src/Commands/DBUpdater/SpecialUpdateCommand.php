@@ -43,6 +43,7 @@ class SpecialUpdateCommand extends Command
   {
     $this->addVerifiedDeveloperAchievementToEveryUser($output);
     $this->addPerfectProfileAchievementToEveryUser($output);
+    $this->addBronzeUserAchievementToEveryUser($output);
 
     return 0;
   }
@@ -75,6 +76,23 @@ class SpecialUpdateCommand extends Command
       /** @var User $user */
       foreach ($users as $user) {
         $this->achievement_manager->unlockAchievementPerfectProfile($user);
+      }
+    } catch (Exception $e) {
+      $output->writeln($e->getMessage());
+    }
+  }
+
+  /**
+   * SHARE-487: Users that already followed someone and have at least one upload should also get their badge
+   *            Can move to a workflow later.
+   */
+  protected function addBronzeUserAchievementToEveryUser(OutputInterface $output): void
+  {
+    $users = $this->user_manager->findAll();
+    try {
+      /** @var User $user */
+      foreach ($users as $user) {
+        $this->achievement_manager->unlockAchievementBronzeUser($user);
       }
     } catch (Exception $e) {
       $output->writeln($e->getMessage());

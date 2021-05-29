@@ -2,12 +2,13 @@
 
 namespace App\EventListener;
 
+use App\Entity\Program;
 use App\Entity\User;
 use App\Manager\AchievementManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Exception;
 
-class UserPostUpdateNotifier
+class ProjectPostUpdateNotifier
 {
   protected AchievementManager $achievement_manager;
 
@@ -16,18 +17,10 @@ class UserPostUpdateNotifier
     $this->achievement_manager = $achievement_manager;
   }
 
-  public function postUpdate(User $user, LifecycleEventArgs $event): void
+  public function postUpdate(Program $project, LifecycleEventArgs $event): void
   {
-    $this->addPerfectProfileAchievement($user);
+    $user = $project->getUser();
     $this->addBronzeUserAchievement($user);
-  }
-
-  /**
-   * @throws Exception
-   */
-  protected function addPerfectProfileAchievement(User $user): void
-  {
-    $this->achievement_manager->unlockAchievementPerfectProfile($user);
   }
 
   /**

@@ -136,6 +136,22 @@ class AchievementManager
   /**
    * @throws Exception
    */
+  public function unlockAchievementBronzeUser(User $user): ?UserAchievement
+  {
+    if (count($user->getFollowing()) <= 0) {
+      return null;
+    }
+
+    if (count($user->getPrograms()) <= 0) {
+      return null;
+    }
+
+    return $this->unlockAchievement($user, Achievement::BRONZE_USER);
+  }
+
+  /**
+   * @throws Exception
+   */
   protected function unlockAchievement(User $user, string $internal_title, ?DateTime $unlocked_at = null): ?UserAchievement
   {
     $achievement = $this->findAchievementByInternalTitle($internal_title);
