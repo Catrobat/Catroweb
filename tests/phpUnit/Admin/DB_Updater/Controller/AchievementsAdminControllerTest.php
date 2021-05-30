@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\phpUnit\Admin\Controller;
+namespace Tests\phpUnit\Admin\DB_Updater\Controller;
 
-use App\Admin\Controller\AchievementsAdminController;
+use App\Admin\DB_Updater\Controller\AchievementsAdminController;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 

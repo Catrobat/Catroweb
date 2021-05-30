@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Admin\Controller;
+namespace App\Admin\DB_Updater\Controller;
 
+use App\Commands\Helpers\CommandHelper;
 use App\Manager\AchievementManager;
 use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,8 +32,8 @@ class AchievementsAdminController extends CRUDController
       $numberOfUserAchievements[$id] = $this->achievement_manager->countUserAchievementsOfAchievement($id);
     }
 
-    return $this->renderWithExtraParams('Admin/admin_achievements.html.twig', [
-      'achievements' => $achievements,
+    return $this->renderWithExtraParams('Admin/DB_Updater/admin_achievements.html.twig', [
+      'action' => 'update_achievements',
       'numberOfUserAchievements' => $numberOfUserAchievements,
       'updateAchievementsUrl' => $this->admin->generateUrl('update_achievements'),
     ]);
@@ -49,14 +48,15 @@ class AchievementsAdminController extends CRUDController
       throw new AccessDeniedException();
     }
 
-    $application = new Application($kernel);
-    $application->setAutoExit(false);
-    $result = $application->run(new ArrayInput(['command' => 'catrobat:update:achievements']), new NullOutput());
+    $output = new BufferedOutput();
+    $result = CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:achievements'], ['timeout' => 86400], '', $output, $kernel
+    );
 
     if (0 === $result) {
       $this->addFlash('sonata_flash_success', 'Achievements have been successfully updated');
     } else {
-      $this->addFlash('sonata_flash_error', 'Updating achievements failed!');
+      $this->addFlash('sonata_flash_error', "Updating achievements failed!\n".$output->fetch());
     }
 
     return new RedirectResponse($this->admin->generateUrl('list'));

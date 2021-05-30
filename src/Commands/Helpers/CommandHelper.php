@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\Process;
 
 class CommandHelper
@@ -73,13 +74,16 @@ class CommandHelper
   }
 
   public static function executeShellCommand(array $command, array $config, string $description = '',
-                                             OutputInterface $output = null): bool
+                                             OutputInterface $output = null, KernelInterface $kernel = null): ?int
   {
     if (null !== $output) {
       $output->write($description." ('".implode(' ', $command)."') ... ");
     }
 
     $process = new Process($command);
+    if (!is_null($kernel)) {
+      $process->setWorkingDirectory($kernel->getProjectDir());
+    }
 
     if (isset($config['timeout'])) {
       $process->setTimeout($config['timeout']);
@@ -92,7 +96,7 @@ class CommandHelper
         $output->writeln('OK');
       }
 
-      return true;
+      return 0;
     }
 
     if (null !== $output) {
@@ -100,6 +104,6 @@ class CommandHelper
       $output->writeln('Error output: '.$process->getErrorOutput());
     }
 
-    return false;
+    return $process->getExitCode();
   }
 }

@@ -140,6 +140,7 @@ sonata_admin:
                 label_catalogue: Catrobat
                 icon: '<i class="fa fa-cogs"></i>'
                 items:
+                    - catrowebadmin.block.cron_jobs
                     - catrowebadmin.block.special_updater
                     - catrowebadmin.block.achievements
                     - catrowebadmin.block.extensions

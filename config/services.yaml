@@ -142,8 +142,8 @@ services:
     tags: ['controller.service_arguments']
     public: true
 
-  App\Admin\Controller\:
-    resource: '../src/Admin/Controller'
+  App\Admin\:
+    resource: '../src/Admin/**/Controller'
     tags: [ 'controller.service_arguments' ]
     public: true
 
@@ -728,23 +728,33 @@ services:
   # ===== DB Updater
 
   catrowebadmin.block.special_updater:
-    class: App\Admin\SpecialUpdaterAdmin
+    class: App\Admin\DB_Updater\SpecialUpdaterAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, label: "Special Updater", icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
       - ~
-      - App\Admin\Controller\SpecialUpdaterAdminController
+      - App\Admin\DB_Updater\Controller\SpecialUpdaterAdminController
+    public: true
+
+  catrowebadmin.block.cron_jobs:
+    class: App\Admin\DB_Updater\CronJobsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Cron Jobs", icon: '<i class="fa fa-hourglass"></i>' }
+    arguments:
+      - ~
+      - App\Entity\CronJob
+      - App\Admin\DB_Updater\Controller\CronJobsAdminController
     public: true
 
   catrowebadmin.block.achievements:
-    class: App\Admin\AchievementsAdmin
+    class: App\Admin\DB_Updater\AchievementsAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, label: "Achievements" }
     arguments:
       - ~
-      - ~
-      - App\Admin\Controller\AchievementsAdminController
+      - App\Entity\Achievements\Achievement
+      - App\Admin\DB_Updater\Controller\AchievementsAdminController
     public: true
 
 

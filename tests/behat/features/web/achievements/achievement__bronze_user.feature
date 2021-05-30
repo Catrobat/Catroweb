@@ -62,7 +62,7 @@ Feature: Every registered user should have at least one achievement
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Apprentice"
-    And I run the special update command
+    And I run the add bronze_user user achievements command
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Apprentice"

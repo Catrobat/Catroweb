@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Admin\Controller;
+namespace App\Admin\DB_Updater\Controller;
 
+use App\Commands\Helpers\CommandHelper;
 use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +16,7 @@ class SpecialUpdaterAdminController extends CRUDController
 {
   public function listAction(Request $request = null): Response
   {
-    return $this->renderWithExtraParams('Admin/admin_special_updater.html.twig', [
+    return $this->renderWithExtraParams('Admin/DB_Updater/admin_special_updater.html.twig', [
       'updateSpecialUrl' => $this->admin->generateUrl('update_special'),
     ]);
   }
@@ -31,14 +30,15 @@ class SpecialUpdaterAdminController extends CRUDController
       throw new AccessDeniedException();
     }
 
-    $application = new Application($kernel);
-    $application->setAutoExit(false);
-    $result = $application->run(new ArrayInput(['command' => 'catrobat:update:special']), new NullOutput());
+    $output = new BufferedOutput();
+    $result = CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:special'], ['timeout' => 86400], '', $output, $kernel
+    );
 
     if (0 === $result) {
       $this->addFlash('sonata_flash_success', 'Database has been successfully updated');
     } else {
-      $this->addFlash('sonata_flash_error', 'Updating database failed!');
+      $this->addFlash('sonata_flash_error', "Updating database failed!\n".$output->fetch());
     }
 
     return new RedirectResponse($this->admin->generateUrl('list'));

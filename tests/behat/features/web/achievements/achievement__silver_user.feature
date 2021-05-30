@@ -17,7 +17,7 @@ Feature: Every registered user should have at least one achievement
       | name      | owned by       |
       | project 1 | OldUser_with_1 |
       | project 2 | NewUser        |
-    And I run the update active user achievements command
+    And I run the add silver_user user achievements command
 
     When I log in as "NewUser"
     And I am on "/app/achievements"

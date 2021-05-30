@@ -35,7 +35,7 @@ Feature: Every user that changed his profile picture must have the perfect_profi
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Initiative"
-    And I run the special update command
+    And I run the add perfect_profile user achievements command
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Initiative"
@@ -49,7 +49,7 @@ Feature: Every user that changed his profile picture must have the perfect_profi
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Initiative"
-    And I run the special update command
+    And I run the add perfect_profile user achievements command
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Initiative"

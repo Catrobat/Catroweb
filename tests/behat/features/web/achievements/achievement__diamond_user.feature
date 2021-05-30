@@ -37,7 +37,7 @@ Feature: Every registered user should have at least one achievement
       | project u3_5 | OldUser_3yearsActive | -6 years    |
       | project u3_6 | OldUser_3yearsActive | -6 years    |
       | project u3_7 | OldUser_3yearsActive | -6 years    |
-    And I run the update active user achievements command
+    And I run the add diamond_user user achievements command
 
     When I log in as "NewUser"
     And I am on "/app/achievements"

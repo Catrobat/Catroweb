@@ -1379,12 +1379,62 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
-   * @Given I run the update active user achievements command
+   * @Given I run the add bronze_user user achievements command
    */
-  public function iRunTheUpdateActiveUserAchievementsCommand(): void
+  public function iRunTheAddBronzeUserAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:achievements:active_user'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:bronze_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add silver_user user achievements command
+   */
+  public function iRunTheAddSilverUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:silver_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add gold_user user achievements command
+   */
+  public function iRunTheAddGoldUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:gold_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add diamond_user user achievements command
+   */
+  public function iRunTheAddDiamondUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:diamond_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add verified_developer user achievements command
+   */
+  public function iRunTheAddVerifiedDeveloperAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add perfect_profile user achievements command
+   */
+  public function iRunTheAddPerfectProfileAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:perfect_profile'], [], 'Updating user achievements'
     );
   }
 }
