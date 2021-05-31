@@ -348,17 +348,17 @@ termsOfUse:
 search:
   dotdotdot: ค้นหา...
   search: ค้นหา
-  inMediaLib: Search in media library
+  inMediaLib: ค้นหาในไลบรารีสื่อ
   results: ผลการค้นหา
   resultcount: การค้นหาพบ %count% ผลลัพธ์
-  fail: Please enter at least a single search term
+  fail: โปรดป้อนคำค้นหาอย่างน้อยหนึ่งคำ
 menu:
   profile: โปรไฟล์ของฉัน
   login: เข้าสู่ระบบ
   logout: ออกจากระบบ
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
+  admin: ธุรการ
+  home: บ้าน
+  helpAndTutorials: ความช่วยเหลือและแบบฝึกหัด
   followersAndFollowing: ผู้ติดตาม
 login:
   login: เข้าสู่ระบบ
@@ -367,25 +367,25 @@ login:
   forgotPass: ลืมรหัสผ่านหรือชื่อผู้ใช้?
   recoverPass: กู้รหัสผ่านคืน
   recoverPassSend: อีเมล์ถูกส่งไปยังอีเมล์แอดเดรสของคุณ กรุณาตรวจสอบกล่องขาเข้า
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  alreadyReset: มีการขอรหัสผ่านสำหรับผู้ใช้รายนี้แล้วภายใน 24 ชั่วโมงที่ผ่านมา
+  confirmationSend: อีเมลเพื่อยืนยันการลงทะเบียนของคุณถูกส่งไปยังที่อยู่อีเมลของคุณ โปรดตรวจสอบกล่องจดหมายของคุณและเปิดใช้งานบัญชีของคุณ
   userOrEmail: ชื่อผู้ใช้หรืออีเมล์
   changePass: เปลี่ยนรหัสผ่าน
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  createAccount: สร้างบัญชี
+  noAccount: ไม่มีบัญชี!
+  alreadyAccount: มีบัญชีอยู่แล้ว?
   or: หรือ
   username: ชื่อผู้ใช้
-  email: Email
+  email: อีเมล์
   passwordFirst: รหัสผ่าน
-  passwordSecond: Password confirm
+  passwordSecond: ยืนยันรหัสผ่าน
 apk:
   download: ดาวน์โหลด APK
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  prepare: 'รับเป็นแอป'
+  preparing: 'กำลังเตรียมแอพ'
+  text: 'กระบวนการนี้อาจใช้เวลาสักครู่'
 format:
-  million_abbreviation: M
+  million_abbreviation: ม
 #api
 errors:
   username:
@@ -410,7 +410,7 @@ errors:
     invalid: อีเมล์ของคุณดูเหมือนจะไม่ถูกต้อง
     exists: มีอีเมล์นี้อยู่แล้ว
   id:
-    blank: Open authentication ID must not be blank
+    blank: ID การพิสูจน์ตัวตนแบบเปิดต้องไม่เว้นว่าง
   login: รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง
   post-data: POST-Data ไม่ถูกต้องหรือหายไป
   checksum:
@@ -425,13 +425,13 @@ errors:
   image.missing: โครงการ XML อ้างถึงแฟ้มที่ไม่มีอยู่ในโฟลเดอร์โครงการ
   unknown: ข้อผิดพลาดที่ไม่ทราบสาเหตุ
   token: 'การรับรองความถูกต้องของอุปกรณ์ล้มเหลว: ตรวจสอบอุปกรณ์ไม่ถูกต้อง'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  uploadTokenAuthFailed: 'การตรวจสอบสิทธิ์การอัปโหลดโทเค็นล้มเหลว'
   programname:
-    rude: Project name must not contain rude wordes.
+    rude: ชื่อโครงการต้องไม่มีคำหยาบ
   program:
-    invalid: Invalid project.
+    invalid: โครงการไม่ถูกต้อง
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'ขออภัยโครงการของคุณมีภาษา Catrobat เวอร์ชันเก่า! คุณใช้ Pocket Code เวอร์ชันล่าสุดหรือไม่?'
   programversion:
     tooold: 'ขออภัย คุณกำลังใช้ Pocket Code รุ่นเก่า  กรุณาปรับปรุงให้เป็นเวอร์ชันล่าสุด.'
   authentication:
@@ -473,7 +473,7 @@ api:
     usernameContainsEmail: "ไม่สามารถใช้อีเมลเป็นชื่อผู้ใช้"
     countryCodeInvalid: "ประเทศไม่ถูกต้อง"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
+    invalid_checksum: 'การตรวจสอบไม่ถูกต้อง ลองอัปโหลดอีกครั้ง!'
     upload_error: 'เกิดข้อผิดพลาดระหว่างทำการอัปโหลด กรุณาลองใหม่อีกครั้ง'
     creating_error: 'เกิดข้อผิดพลาดระหว่างทำการสร้างโปรเจค กรุณาลองใหม่อีกครั้ง'
 #languages and countries
@@ -527,42 +527,42 @@ ci:
   pending: สร้าง Apk
   download: ดาวน์โหลด Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
-  whats: What's the %gamejamname%?
+  nojam: ขออภัยไม่มีเกมติดขัดในขณะนี้
+  submit: ส่งให้ %gamejamname%
+  whats: '%gamejamname% คืออะไร?'
   submitown:
-    header: be aware
+    header: ระวัง
     subheader: คุณสามารถส่งโปรเจคของคุณเท่านั้น
     text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
+      แต่ทำไมไม่สร้างของคุณเอง!
+      มีส่วนร่วมใน %gamejamtag%
+tag-text: แท็ก
+extenstion-text: ส่วนขยาย
 tags:
   constant:
     tag1: เกมส์
     tag2: ย้ายภาพเคลื่อนไหว
-    tag3: Story
+    tag3: เรื่องราว
     tag4: เพลง
-    tag5: Art
+    tag5: ศิลปะ
     tag6: ทดลอง
     tag7: วิธีการใช้งาน
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: การบำรุงรักษาดิสก์
+    ramMaintenance: การบำรุงรักษา RAM
+    noRemovableObjects: ไม่มีวัตถุที่ถอดออกได้
+    removableObjects: วัตถุที่ถอดออกได้
 recommender:
   similarPrograms: โปรเจคที่คล้ายกัน
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
-  moreFromThisUser: More from %username%
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: ผู้ใช้ที่ดาวน์โหลดโครงการนี้ก็ดาวน์โหลดเช่นกัน
+  moreFromThisUser: เพิ่มเติมจาก %username%
 pmd:
-  submitBtn: Submit your project
+  submitBtn: ส่งโครงการของคุณ
   submitBox:
-    header: Submission
+    header: การส่ง
     text: คุณกำลังจะส่งโปรเจค กรุณาบันทึกโคด และกดส่ง
-    btnText: Submit
+    btnText: ส่ง
   successful:
     text: อัปโหลดโปรเจคสำเร็จ
   failed:
@@ -570,34 +570,34 @@ pmd:
 codeview:
   title: 'ดูโคด'
   showCode: 'แสดงโคด'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
+  hideCode: 'ซ่อนรหัส'
+  showStatistics: 'แสดงสถิติรหัส'
+  hideStatistics: 'ซ่อนสถิติรหัส'
+  cantDisplayCode: "ไม่สามารถแสดงรหัสได้"
+  cantDisplayStatistics: "ไม่สามารถแสดงรหัสได้"
+  totalNumberOf: 'จำนวนทั้งหมด'
+  scenes: 'ฉาก'
   scripts: 'สคริปต์'
   bricks: 'ก้อนคำสั่ง'
   objects: 'นักแสดงและวัตถุ'
   looks: 'รูปลักษณ์'
   sounds: 'เสียง'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
-  eventBricks: 'Event bricks'
-  controlBricks: 'Control bricks'
-  motionBricks: 'Motion bricks'
-  soundBricks: 'Sound bricks'
-  looksBricks: 'Looks bricks'
-  penBricks: 'Pen bricks'
-  dataBricks: 'Data bricks'
-  specialBricks: 'Special bricks'
+  globals: 'ลูกโลก'
+  locals: 'คนในพื้นที่'
+  globalVariables: 'ตัวแปรส่วนกลาง'
+  localVariables: 'ตัวแปรท้องถิ่น'
+  eventBricks: 'อิฐเหตุการณ์'
+  controlBricks: 'ควบคุมอิฐ'
+  motionBricks: 'อิฐเคลื่อนไหว'
+  soundBricks: 'อิฐเสียง'
+  looksBricks: 'ดูเหมือนอิฐ'
+  penBricks: 'อิฐปากกา'
+  dataBricks: 'Databricks'
+  specialBricks: 'อิฐพิเศษ'
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
+  title: "สถิติรหัส"
+  error: "ไม่สามารถแสดงสถิติรหัส"
+  general: 'ทั่วไป'
   bricks: 'ก้อนคำสั่ง'
   eventBricks: 'เหตุการณ์'
   controlBricks: 'ควบคุม'
@@ -607,27 +607,27 @@ codeStatistics:
   penBricks: 'ปากกา'
   dataBricks: 'ข้อมูล'
   deviceBricks: 'อุปกรณ์'
-  specialBricks: 'Special'
+  specialBricks: 'พิเศษ'
 footer:
   language: ภาษา
-  usefulLinks: Useful links
-  legalities: Legalities
-  communityStats: Community stats
-  download: Get the App
+  usefulLinks: ลิงค์ที่เป็นประโยชน์
+  legalities: กฎหมาย
+  communityStats: สถิติชุมชน
+  download: รับแอป
 privacy-policy:
   header: นโยบายความเป็นส่วนตัว
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: เวอร์ชัน 2.2 วันที่ 17 ตุลาคม 2562
+  text1: เพื่อให้คุณได้รับประโยชน์ทั้งหมดจากบริการของเราและบัญชีที่เกี่ยวข้องคุณจำเป็นต้องรวบรวมข้อมูลบางอย่างจากคุณ
+  text2: เพื่อรักษาและปรับปรุงบริการของเรา (แอปและเว็บไซต์) และเพื่อทำการวิจัยทางวิทยาศาสตร์เกี่ยวกับการศึกษา ICT และ STEM / STEAM เราใช้ Google Analytics, Crashlytics และ Firebase ทั้งหมดโดย Google LLC (สหรัฐอเมริกา) รวมถึง Dynatrace โดย Dynatrace LLC ( สหรัฐอเมริกา) เพื่อรับข้อมูลเมตาเกี่ยวกับการใช้บริการของเราเช่นข้อมูลการขัดข้องการประทับเวลาหน้า / หน้าจอที่เยี่ยมชมการใช้งานแอปและบริการของเราระบบปฏิบัติการที่ใช้และข้อมูลเกี่ยวกับผู้ให้บริการเครือข่าย การวิเคราะห์นี้และข้อมูลที่รวบรวมไม่ได้เชื่อมโยงกับโปรไฟล์ของคุณและไม่มีข้อมูลส่วนบุคคลใด ๆ (บิตสุดท้ายของที่อยู่ IP จะไม่ระบุตัวตน) อย่างไรก็ตามข้อมูลที่รวบรวมจะถูกโอนไปยังผู้ให้บริการ (Google LLC, USA และ Dynatrace LLC, USA) การประมวลผลข้อมูลเป็นไปตามข้อตกลงกับ Google LLC และ Dynatrace LLC ความสัมพันธ์กับผู้ให้บริการนี้เป็นไปตามข้อกำหนดการคุ้มครองข้อมูลทั่วไปของสหภาพยุโรป (EU GDPR) และข้อตกลง "Privacy Shield" ของ EU-USA
+  text3: ในการสร้างและใช้บัญชีในระบบของเราและเพื่อแจ้งให้คุณทราบเกี่ยวกับการเปลี่ยนแปลงที่จำเป็นเกี่ยวกับบัญชีของคุณต่ออีเมลเช่นการอัปเดตหรือการละเมิดข้อกำหนดการใช้งานและบริการของเรากฎชุมชนของเราหรือนโยบายของเราเราจะจัดเก็บของคุณ ชื่อผู้ใช้และหากคุณระบุที่อยู่อีเมลของคุณ หากคุณได้เชื่อมต่อบัญชีของคุณผ่าน Google Plus หรือ Facebook เราจะจัดเก็บรหัสประจำตัวที่เชื่อมต่อกับบัญชีของคุณไว้ในบริการเหล่านี้ เราจะไม่ใช้ข้อมูลนี้เพื่อวัตถุประสงค์อื่นใด (เช่นการตลาด) เว้นแต่คุณจะอนุญาตให้เราดำเนินการดังกล่าวโดยชัดแจ้ง
+  text4: ตามความสมัครใจคุณสามารถระบุประเทศที่คุณอาศัยอยู่ผ่านหน้าบัญชีของคุณบนไซต์การแบ่งปัน สิ่งนี้จะปรากฏในโปรไฟล์สาธารณะของคุณและเราจะใช้เพื่อวัตถุประสงค์ทางสถิติและการวิจัยเท่านั้น สามารถลบออกได้ทุกเมื่อในการตั้งค่าโปรไฟล์ของคุณ
+  text5: คุณสามารถถอนการใช้งานข้อมูลส่วนบุคคลที่เป็นของบัญชีของคุณได้ตลอดเวลาโดยการลบบัญชีของคุณผ่านหน้าโปรไฟล์ของคุณบน https://share.catrob.at/ หลังจากลบบัญชีของคุณคุณจะยังคงสามารถใช้บริการที่มีให้ แต่จะไม่สามารถทำงานร่วมกันได้เช่นผ่านการอัปโหลดโปรแกรมการแสดงความคิดเห็นหรือการชอบ นอกจากนี้เนื้อหาที่ให้มาทั้งหมดที่เชื่อมโยงกับบัญชีของคุณเช่นโปรแกรมที่อัปโหลดความคิดเห็น ฯลฯ จะถูกลบออก
+  text6: เพื่อหลีกเลี่ยงการใช้บริการของเราในทางที่ผิดเช่นผ่านการอัปโหลดหรือแสดงความคิดเห็นของผู้ใช้เพื่อจุดประสงค์ที่ผิดกฎหมายข้อมูลสาธารณะที่ผู้ใช้สร้างขึ้นทั้งหมด (การอัปโหลดความคิดเห็น) จะถูกจัดเก็บไว้ภายในฐานข้อมูลพร้อมกับการประทับเวลาและที่อยู่อินเทอร์เน็ตที่ใช้ ข้อมูลนี้จะไม่ถูกใช้โดยหรือส่งต่อไปยังสถาบันใด ๆ เว้นแต่การกระทำที่ผิดกฎหมายอย่างเพียงพอเป็นที่สงสัยอย่างสมเหตุสมผลและสถาบันทางกฎหมายที่มีสิทธิ์อย่างเป็นทางการจะร้องขอตามกฎหมายที่บังคับใช้ แต่ละกรณีจะถูกตรวจสอบอย่างละเอียดเป็นรายบุคคลโดยเราก่อน
+  text7: คุณสามารถสมัครรับจดหมายข่าว Catrobat โดยสมัครใจได้ที่ https://catrob.at/newsletter ที่เราให้ไว้ผ่านบริการ MailChimp (The Rocket Science Group LLC d / b / a MailChimp, USA) จากนั้นคุณจะได้รับการอัปเดตเกี่ยวกับโครงการ Catrobat และบริการต่างๆไปยังที่อยู่อีเมลที่คุณให้ไว้ คุณสามารถถอนจดหมายข่าวได้ทุกเมื่อโดยใช้ลิงก์ "ยกเลิกการสมัคร" ที่ส่วนท้ายของจดหมายข่าวทุกฉบับ จดหมายข่าวนี้จัดทำโดย MailChimp ซึ่งเรามีข้อตกลงในการประมวลผลข้อมูลและผู้ที่ยึดมั่นในกฎระเบียบการดำเนินการข้อมูลทั่วไปของสหภาพยุโรปและ "การคุ้มครองความเป็นส่วนตัว" ของสหภาพยุโรป - สหรัฐอเมริกา สำหรับรายละเอียดเพิ่มเติมเกี่ยวกับ MailChimp โปรดดูนโยบายความเป็นส่วนตัวและข้อกำหนดการใช้งานของ MailChimp
+  text8: บริการทั้งหมดจัดทำโดยโครงการ Catrobat โอเพ่นซอร์สฟรีภายใต้ร่มของ International Catrobat Association - Verein zur Förderung freier Software ซึ่งเป็นองค์กรพัฒนาเอกชนที่ไม่แสวงหาผลกำไรซึ่งรวมอยู่ในกราซออสเตรีย (สหภาพยุโรป) นโยบายของเราให้ความสำคัญกับกฎหมายคุ้มครองข้อมูลของสหภาพยุโรปและออสเตรีย (GDPR) หากต้องการติดต่อเราโปรดส่งอีเมลไปที่ contact@catrobat.org หรือส่งอีเมลถึงเราที่ Catrobat, c / o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union ).
+  text9: ในกรณีที่คุณอายุต่ำกว่า 14 ปีนโยบายนี้ต้องได้รับการยอมรับจากผู้ปกครองตามกฎหมาย (โดยปกติจะเป็นผู้ปกครอง)
+  text10: นโยบายความเป็นส่วนตัวภาษาอังกฤษอย่างเป็นทางการของ Catrobat มีอยู่บนเว็บภายใต้ %privacy_policy%
+  disagree-text: หากไม่ได้รับการอนุมัติเราจะสร้างบัญชีไม่ได้ แต่ยังสามารถเข้าถึงคุณลักษณะหลักได้
 catro-notifications:
   markAsRead: "ทำเครื่องหมายว่าอ่านแล้ว"
   noFollowers: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนผู้ติดตามเลย"
@@ -645,44 +645,44 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Link to project copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
+  success: คัดลอกลิงก์ไปยังโครงการไปยังคลิปบอร์ดแล้ว!
+  fail: คัดลอกลิงก์ไปยังคลิปบอร์ดไม่สำเร็จ! :(
 next: ถัดไป
-previous: Previous
+previous: ก่อนหน้า
 media-packages:
-  title: Media-Packages
-  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  title: แพ็คเกจสื่อ
+  description: ในหมวดหมู่ต่อไปนี้คุณสามารถค้นหาตัวแสดงและวัตถุเพิ่มเติมเพื่อเพิ่มให้กับโปรเจ็กต์ PocketCode ของคุณ
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: ขนาดดูตัวอย่าง
+    sm: เล็ก
+    md: ปานกลาง
+    lg: ใหญ่
+  theme-special: "%flavor% ธีมพิเศษ"
+  search-results: ผลการค้นหาไลบรารีสื่อ
+  no-results: การค้นหาของคุณแสดงผลลัพธ์ 0 รายการ กรุณาใช้เฉพาะคำค้นหาภาษาอังกฤษ
+  download_these_files: บันทึก
 flavor:
   pocketcode: พอกเก็ต โค้ด
-  pocketalice: Pocket Alice
+  pocketalice: พ็อกเก็ตอลิซ
   pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+  phirocode: ฟิโรโค้ด
+  luna: ลูน่า & แมว
+  create@school: สร้าง@โรงเรียน
+copyright: 'ลิขสิทธิ์ &copy;%year% <a href="http://www.catrobat.org">Catrobat</a>สงวนลิขสิทธิ์.'
 agree: ตกลง
 disagree: ไม่เห็นด้วย
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: ขณะนี้ยังไม่มีโปรไฟล์
+element: 'ธาตุ'
+elements: 'องค์ประกอบ'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
+  text: 'แบ่งปัน'
+  error: 'การแบ่งปันล้มเหลว'
+  success: 'แบ่งปันที่ประสบความสำเร็จ'
+copy: 'คัดลอกลิงค์'
+checkOutProject: 'ตรวจสอบโครงการนี้:'
 community: 'ชุมชน Catrobat'
-back_to_app: 'Exit community'
+back_to_app: 'ออกจากชุมชน'
 category:
   recent: โครงการใหม่ล่าสุด
   random: โครงการสุ่ม
@@ -693,33 +693,33 @@ category:
   recommended: โครงการแนะนำ
 achievements:
   overview:
-    header: 'Achievements'
+    header: 'ความสำเร็จ'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'ความสำเร็จใหม่ล่าสุด'
+      x_out_of_y: 'ปลดล็อค %unlocked% จาก %total% ที่ปลดล็อค'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'ปลดล็อกแล้ว'
+      empty: "คุณยังไม่ได้ปลดล็อกรางวัลพิเศษใด ๆ"
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'ล็อก'
+      empty: "คุณได้ปลดล็อกความสำเร็จทั้งหมดแล้ว"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'เด็กฝึกงาน'
+        description: 'ติดตามบุคคลและอัปโหลดโครงการ'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'ช่าง'
+        description: 'สมาชิกที่ใช้งานเป็นเวลา> 1 ปี'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'อาจารย์'
+        description: 'สมาชิกที่ใช้งานเป็นเวลา> 4 ปี'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'ปรมาจารย์'
+        description: 'สมาชิกที่ใช้งานเป็นเวลา> 7 ปี'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'ความคิดริเริ่ม'
+        description: 'เพิ่มรูปโปรไฟล์แรกของคุณ'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'สามเณร'
+        description: 'สร้างบัญชีผู้ใช้'
