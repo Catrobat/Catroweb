@@ -879,3 +879,8 @@ services:
     class: App\Translation\ItranslateApi
     arguments:
       - '@eight_points_guzzle.client.itranslate'
+
+  App\Translation\TranslationDelegate:
+    class: App\Translation\TranslationDelegate
+    arguments:
+      - '@App\Translation\ItranslateApi'

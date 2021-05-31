@@ -70,7 +70,7 @@ class ItranslateApi implements TranslationApiInterface
 
   private function transformLanguageCode(?string $language): ?string
   {
-    if (null == $language) {
+    if (null === $language) {
       return null;
     }
 
