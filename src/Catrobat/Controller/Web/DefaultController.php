@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
@@ -167,5 +168,25 @@ class DefaultController extends AbstractController
       'first_login' => $user_first_login,
       'user_id' => $user_id,
     ]);
+  }
+
+  /**
+   * @Route("/languages", name="languages", methods={"GET"})
+   */
+  public function languagesAction(Request $request): Response
+  {
+    $display_locale = $request->getLocale();
+    $all_locales = Locales::getNames($display_locale);
+
+    $all_locales = array_filter($all_locales, function ($key) {
+      return 2 == strlen($key) || 5 == strlen($key);
+    }, ARRAY_FILTER_USE_KEY);
+
+    $locales = [];
+    foreach ($all_locales as $key => $value) {
+      $locales[str_replace('_', '-', $key)] = $value;
+    }
+
+    return JsonResponse::create($locales);
   }
 }
