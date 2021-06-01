@@ -44,8 +44,10 @@ class CronJobCommand extends Command
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
+    $output->writeln($_ENV['APP_ENV']);
+
     $this->runCronJob(
-      'add_diamond_user_user_achievements',
+      'Add diamond_user UserAchievements',
       ['bin/console', 'catrobat:workflow:achievement:diamond_user'],
       ['timeout' => 86400], // 24h
       '1 week',
@@ -53,7 +55,7 @@ class CronJobCommand extends Command
     );
 
     $this->runCronJob(
-      'add_gold_user_user_achievements',
+      'Add gold_user UserAchievements',
       ['bin/console', 'catrobat:workflow:achievement:gold_user'],
       ['timeout' => 86400], // 24h
       '1 week',
@@ -61,7 +63,7 @@ class CronJobCommand extends Command
     );
 
     $this->runCronJob(
-      'add_silver_user_user_achievements',
+      'Add silver_user UserAchievements',
       ['bin/console', 'catrobat:workflow:achievement:silver_user'],
       ['timeout' => 86400], // 24h
       '1 week',
@@ -71,7 +73,7 @@ class CronJobCommand extends Command
     // Fix inconsistencies that should not happen :)
 
     $this->runCronJob(
-      'add_bronze_user_user_achievements',
+      'Add bronze_user UserAchievements',
       ['bin/console', 'catrobat:workflow:achievement:bronze_user'],
       ['timeout' => 86400], // 24h
       '1 year',
@@ -79,7 +81,7 @@ class CronJobCommand extends Command
     );
 
     $this->runCronJob(
-      'add_verified_developer_user_achievements',
+      'Add verified_developer UserAchievements',
       ['bin/console', 'catrobat:workflow:achievement:verified_developer'],
       ['timeout' => 86400], // 24h
       '1 year',
@@ -87,7 +89,7 @@ class CronJobCommand extends Command
     );
 
     $this->runCronJob(
-      'add_perfect_profile_user_achievements',
+      'Add perfect_profile UserAchievements',
       ['bin/console', 'catrobat:workflow:achievement:perfect_profile'],
       ['timeout' => 86400], // 24h
       '1 year',

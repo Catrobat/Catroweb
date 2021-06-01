@@ -52,7 +52,7 @@ class AchievementWorkflow_GoldUser_Command extends Command
       $user = $this->user_manager->find($user_id);
       if (!is_null($user)) {
         try {
-          $this->achievement_manager->unlockAchievementSilverUser($user);
+          $this->achievement_manager->unlockAchievementGoldUser($user);
         } catch (Exception $exception) {
           $output->writeln($exception->getMessage());
         }

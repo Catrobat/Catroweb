@@ -2484,6 +2484,31 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I should see the cron jobs table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeCronJobTable(TableNode $table): void
+  {
+    $this->assertSession()->pageTextContains('Name');
+    $this->assertSession()->pageTextContains('State');
+    $this->assertSession()->pageTextContains('Cron Interval');
+    $this->assertSession()->pageTextContains('Start At');
+    $this->assertSession()->pageTextContains('End At');
+    $this->assertSession()->pageTextContains('Result Code');
+
+    $survey_stats = $table->getHash();
+    foreach ($survey_stats as $survey_stat) {
+      $this->assertSession()->pageTextContains($survey_stat['Name']);
+      $this->assertSession()->pageTextContains($survey_stat['State']);
+      $this->assertSession()->pageTextContains($survey_stat['Cron Interval']);
+      $this->assertSession()->pageTextContains($survey_stat['Start At']);
+      $this->assertSession()->pageTextContains($survey_stat['End At']);
+      $this->assertSession()->pageTextContains($survey_stat['Result Code']);
+    }
+  }
+
+  /**
    * @Then /^I should see the media package categories table:$/
    *
    * @throws ResponseTextException

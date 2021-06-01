@@ -1359,6 +1359,15 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then there should be :number_of_cron_jobs cron jobs in the database
+   */
+  public function thereShouldBeCronJobsInTheDatabase(int $number_of_cron_jobs): void
+  {
+    $cron_jobs = $this->getCronJobRepository()->findAll();
+    Assert::assertCount($number_of_cron_jobs, $cron_jobs);
+  }
+
+  /**
    * @Given I run the update achievements command
    */
   public function iRunTheUpdateAchievementsCommand(): void
@@ -1375,6 +1384,16 @@ class DataFixturesContext implements KernelAwareContext
   {
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:update:special'], [], 'Updating database'
+    );
+  }
+
+  /**
+   * @Given I run the cron job command
+   */
+  public function iRunTheCronJobsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:cronjob'], [], 'Updating user achievements'
     );
   }
 

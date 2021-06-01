@@ -47,13 +47,9 @@ class CronJobsAdminController extends CRUDController
       $this->addFlash('sonata_flash_error', 'Resetting cron job failed');
     }
 
-    $cron_job->setStartAt(null);
-    $cron_job->setEndAt(null);
-    $cron_job->setState('idle');
-    $cron_job->setResultCode(null);
-    $this->entity_manager->persist($cron_job);
+    $this->entity_manager->remove($cron_job);
     $this->entity_manager->flush();
-    $this->addFlash('sonata_flash_success', 'Resetting cron job successful');
+    $this->addFlash('sonata_flash_success', 'Resetting cron job successful. Job will be executed and added back to the list on the next run.');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
@@ -73,7 +69,7 @@ class CronJobsAdminController extends CRUDController
     );
 
     if (0 === $result) {
-      $this->addFlash('sonata_flash_success', 'Cron jobs finished successful');
+      $this->addFlash('sonata_flash_success', 'Cron jobs finished successfully');
     } else {
       $this->addFlash('sonata_flash_error', "Running cron jobs failed!\n".$output->fetch());
     }

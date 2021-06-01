@@ -80,7 +80,13 @@ class CommandHelper
       $output->write($description." ('".implode(' ', $command)."') ... ");
     }
 
-    $process = new Process($command);
+    $app_env = $_ENV['APP_ENV'];
+    $final_command = $command;
+    if ('test' === $app_env) {
+      $final_command[] = '--env=test';
+    }
+
+    $process = new Process($final_command, null, ['APP_ENV' => 'false', 'SYMFONY_DOTENV_VARS' => 'false']);
     if (!is_null($kernel)) {
       $process->setWorkingDirectory($kernel->getProjectDir());
     }
@@ -93,6 +99,7 @@ class CommandHelper
 
     if ($process->isSuccessful()) {
       if (null !== $output) {
+        $output->writeln($process->getOutput());
         $output->writeln('OK');
       }
 
@@ -100,6 +107,7 @@ class CommandHelper
     }
 
     if (null !== $output) {
+      $output->writeln($process->getOutput());
       $output->writeln('failed! - Exit-Code: '.$process->getExitCode());
       $output->writeln('Error output: '.$process->getErrorOutput());
     }
