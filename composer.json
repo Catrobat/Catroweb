@@ -63,7 +63,7 @@
         "phpstan/phpstan": "0.12.88",
         "phpstan/phpstan-doctrine": "0.12.38",
         "phpstan/phpstan-phpunit": "0.12.19",
-        "phpstan/phpstan-symfony": "0.12.33",
+        "phpstan/phpstan-symfony": "0.12.34",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.0",
         "symfony/maker-bundle": "*",
