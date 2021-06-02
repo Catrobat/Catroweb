@@ -3,37 +3,37 @@
 localLanguage: 英語
 username: '&#x5EFA;&#x7ACB;&#x65B0;&#x5E33;&#x865F;'
 password: '&#x6210;&#x529F;&#x66F4;&#x65B0;&#x60A8;&#x7684;&#x570B;&#x5BB6;&#x3002;'
-createNewPassword: Create new password
+createNewPassword: 建立新密碼
 accountSettings: Account Settings
-email: E-Mail
+email: 電子郵件
 aboutPocketCode: 關於 Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: 關於
+education: 教育
+chat: 聊天和論壇
+others: 其他
 tutorials: 教程
 googlePlay: Google Play商店
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: 華為AppGallery
 passwordsNoMatch: 密碼不匹配。
 error: 錯誤
 cancel: 取消
 report: 報告
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: 是的，刪除它！
+reportIt: 是的，舉報！
+areYouSure: 你確定嗎？
+noWayOfReturn: 無法恢復您的操作！
 download: '&#x8209;&#x5831;'
 description: 描述
 noDescription: 沒有可用的描述。
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: 您是如何創建這個項目的？您是否使用過其他人的想法，腳本或藝術品？在這里謝謝他們。
 country: 國家
 loginText: 登入
 privacyPolicy: 隱私權政策
 imprint: 版本說明
-programDetails: Details
+programDetails: 細節
 somethingWentWrong: '噢，出錯了'
 pleaseTryAgain: '請再試一次！'
 oldVersionError: '請更新到最新的袖珍版本！'
@@ -41,78 +41,78 @@ more: '更多'
 less: '較少'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+more-information: '更多信息'
+less-information: '信息少'
+ok: 好的
+clickToDownloadProgram: '要下載示例項目，請在%link_end%此處單擊%link_start%。'
 registrationError: '用戶名或電子郵件地址已被使用。'
 notifications: '注意'
 allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
+FollowersNotifications: '追隨者'
+LikeNotifications: '反應'
+CommentNotifications: '註釋'
 RemixNotifications: '調製'
 wellDone: "做得好！"
 done: "完成 ！"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "是的，刪除它"
 cancelMessage: "取消"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+notificationsUnauthorizedError: "無法授權用戶"
+notificationsClearError: "無法將通知標記為已讀！"
+pleaseWait: "請稍等..."
 projects: "程式檔"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "外部帳戶登錄信息"
+oauthInfo: '您剛剛使用外部帳戶登錄。我們為您創建了一個隨機用戶名。如果您想更改用戶名或為您的帳戶創建新密碼，請轉到我的個人資料頁面。點擊此處%link_end%的%link_start%轉到您的個人資料頁面'
+oauthHere: "這裡"
+statistics: "統計數據"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: '這裡推薦什麼項目？'
+      description: '您的項目收到的反應越多（豎起大拇指，微笑...），則該列表中顯示的越高。'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: 下列的
+  followers: 追隨者
+  follow: 跟隨
+  username: 用戶
+  followsMe: 跟著我
+  noFollowing: 您目前沒有關注任何人。
+  noFollowers: 您目前沒有關注者。
+  noOtherFollowing: 目前沒有以下用戶。
+  noOtherFollowers: 當前沒有關注者用戶。
+  followError: "無法關注所需的用戶！"
+  unfollowError: "無法取消關注所需用戶！"
+  unfollowQuestion: "您確定要取消關注此用戶嗎？"
+  unfollowButton: "取消關注%username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
-    download: Download the app
+    title: 歡迎來到Catrobat的%theme%
+    subtitle: 創建故事，遊戲等...
+    subtitle_embroidery: 在T卹，箱包，褲子或智能手機保護套上貼上自己喜歡的圖案！
+    download: 下載應用程式
     statistics: More Statistics
   featured: 推薦
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  example: 例子
+  newest: 最新項目
+  recommended: 推薦項目
+  scratchremixes: 從頭開始混音
+  noPrograms: 當前沒有項目。
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    你確定嗎？
+    您確定要刪除“%programName%”嗎？
+    無法恢復您的操作！
+    是的，刪除它！
+    取消
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    你確定嗎？
+    如果將“%programName%”設置為private，其他用戶將不會看到或找到它。
+    您仍然可以與朋友共享項目的鏈接。您可以點擊掛鎖圖標來切換可見性。
+    如果將“%programName%”設置為public，則其他用戶可以看到和找到它。
+    是，設為公開
+    是，設為私人
+    不
+  reportCommentConfirmation: 您確定要舉報此評論嗎？
+  deleteCommentConfirmation: 你確定要刪除此評論嗎？
   deleteAccountConfirmation: |+
     Account Deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
@@ -153,10 +153,10 @@ programs:
   reportDone: You reported this project!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
+  btnClosePopup: 好的
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
-  comments: Comments
+  comments: 註釋
   send: Send
   delete: 刪除
   report: 報告
@@ -176,7 +176,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: 反應
   downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
   title: 調製
@@ -679,13 +679,13 @@ checkOutProject: 'Check out this project:'
 community: 'Catrobat社群'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
+  recent: 最新項目
   random: Random projects
   most_viewed: Most viewed
   most_downloaded: Most downloaded
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: 從頭開始混音
+  recommended: 推薦項目
 achievements:
   overview:
     header: 'Achievements'
