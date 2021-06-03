@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Studio;
 use App\Entity\User;
 use App\Entity\UserComment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -26,5 +27,15 @@ class UserCommentRepository extends ServiceEntityRepository
     $em = $this->getEntityManager();
 
     return $em->getRepository(UserComment::class)->findBy(['user' => $user]);
+  }
+
+  public function findAllStudioComments(?Studio $studio): array
+  {
+    return $this->findBy(['studio' => $studio]);
+  }
+
+  public function findStudioCommentById(int $comment_id): ?UserComment
+  {
+    return $this->findOneBy(['id' => $comment_id]);
   }
 }
