@@ -142,6 +142,11 @@ services:
     tags: ['controller.service_arguments']
     public: true
 
+  App\Admin\:
+    resource: '../src/Admin/**/Controller'
+    tags: [ 'controller.service_arguments' ]
+    public: true
+
   App\Api_deprecated\Controller\:
     resource: '../src/Api_deprecated/Controller'
     tags: ['controller.service_arguments']
@@ -308,6 +313,13 @@ services:
     public: true
   App\Catrobat\EventListener\ResettingSendEmailInitializeSubscriber: "@resetting_send_email_initialize"
 
+  App\EventListener\UserPostPersistNotifier:
+    tags:
+      - { name: 'doctrine.orm.entity_listener', event: 'postPersist', entity: 'App\Entity\User' }
+
+  App\EventListener\UserPostUpdateNotifier:
+    tags:
+      - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\User' }
 
   # ====================================================================================================================
   #   Listeners:
@@ -713,6 +725,58 @@ services:
       - ~
     public: true
 
+  # ===== DB Updater
+
+  catrowebadmin.block.special_updater:
+    class: App\Admin\DB_Updater\SpecialUpdaterAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Special Updater", icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - ~
+      - App\Admin\DB_Updater\Controller\SpecialUpdaterAdminController
+    public: true
+
+  catrowebadmin.block.cron_jobs:
+    class: App\Admin\DB_Updater\CronJobsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Cron Jobs", icon: '<i class="fa fa-hourglass"></i>' }
+    arguments:
+      - ~
+      - App\Entity\CronJob
+      - App\Admin\DB_Updater\Controller\CronJobsAdminController
+    public: true
+
+  catrowebadmin.block.achievements:
+    class: App\Admin\DB_Updater\AchievementsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Achievements" }
+    arguments:
+      - ~
+      - App\Entity\Achievements\Achievement
+      - App\Admin\DB_Updater\Controller\AchievementsAdminController
+    public: true
+
+
+  catrowebadmin.block.extensions:
+    class: App\Admin\AllExtensionsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: Extensions (WIP) }
+    arguments:
+      - ~
+      - App\Entity\Extension
+      - App\Catrobat\Controller\Admin\ExtensionController
+    public: true
+
+  catrowebadmin.block.tags:
+    class: App\Admin\AllExtensionsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Tags (WIP)" }
+    arguments:
+      - ~
+      - App\Entity\Extension
+      - App\Catrobat\Controller\Admin\ExtensionController
+    public: true
 
   # ===== Tools
 
@@ -788,22 +852,10 @@ services:
       - App\Catrobat\Controller\Admin\EmailUserMessageController
     public: true
 
-  # ===== Extensions
-
-  catrowebadmin.block.extensions.all:
-    class: App\Admin\AllExtensionsAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "All Extensions" }
-    arguments:
-      - ~
-      - App\Entity\Extension
-      - App\Catrobat\Controller\Admin\ExtensionController
-    public: true
-
   # ===== Statistics
 
   catrowebadmin.block.tools.statistic:
-    class: App\Admin\Blocks\StatisticBlockService
+    class: App\Admin\StatisticBlockService
     tags:
       - { name: sonata.block, label: Cleanup }
     arguments:
@@ -879,3 +931,8 @@ services:
     class: App\Translation\ItranslateApi
     arguments:
       - '@eight_points_guzzle.client.itranslate'
+
+  App\Translation\TranslationDelegate:
+    class: App\Translation\TranslationDelegate
+    arguments:
+      - '@App\Translation\ItranslateApi'

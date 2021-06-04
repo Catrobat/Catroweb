@@ -131,6 +131,16 @@ task('deploy:jwt', function () {
   run('sh docker/app/init-jwt-config.sh');
 });
 
+task('update:achievements', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:update:achievements');
+});
+
+task('update:special', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:update:special');
+});
+
 /**
  * Main task
  */
@@ -158,6 +168,8 @@ task('deploy', [
   'deploy:jwt',
   'restart:nginx',
   'restart:php-fpm',
+  'update:achievements',
+  'update:special',
   'deploy:unlock',
   'slack:notify:success',
   'cleanup',

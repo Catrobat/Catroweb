@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Blocks;
+namespace App\Admin;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;

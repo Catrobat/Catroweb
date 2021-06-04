@@ -8,8 +8,12 @@ use App\Entity\CommentNotification;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserComment;
+use App\Translation\TranslationDelegate;
 use Exception;
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -110,5 +114,47 @@ class CommentsController extends AbstractController
     }
 
     return new Response(Response::HTTP_OK);
+  }
+
+  /**
+   * @Route("/translate/comment/{id}", name="translate_comment", methods={"GET"})
+   */
+  public function translateCommentAction(Request $request, int $id, TranslationDelegate $translation_delegate): Response
+  {
+    if (!$request->query->has('target_language')) {
+      return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
+    }
+
+    $em = $this->getDoctrine()->getManager();
+    $comment = $em->getRepository(UserComment::class)->find($id);
+
+    if (null === $comment) {
+      return new Response('No comment found for this id', Response::HTTP_NOT_FOUND);
+    }
+
+    $source_language = $request->query->get('source_language');
+    $target_language = $request->query->get('target_language');
+
+    if ($source_language === $target_language) {
+      return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    try {
+      $translation_result = $translation_delegate->translate($comment->getText(), $source_language, $target_language);
+    } catch (InvalidArgumentException $exception) {
+      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    }
+
+    if (null === $translation_result) {
+      return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
+    }
+
+    return new JsonResponse([
+      'id' => $comment->getId(),
+      'source_language' => $source_language ?? $translation_result->detected_source_language,
+      'target_language' => $target_language,
+      'translation' => $translation_result->translation,
+      'provider' => $translation_result->provider,
+    ]);
   }
 }

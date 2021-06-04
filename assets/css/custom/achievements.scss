@@ -34,12 +34,18 @@
 .achievement__badge__image {
   z-index: 1;
   width: 10rem;
+  height: 10rem;
   margin: auto;
 
   &.achievement__badge__image--small {
     width: 7rem;
     margin: 0;
   }
+}
+
+.achievement-top__badge__image {
+  width: 7rem;
+  height: 7rem;
 }
 
 .achievement-top__badge__banner,
@@ -74,5 +80,9 @@
 .achievement-top__text-wrapper {
   padding-left: 1rem;
   text-align: left;
+}
+
+.achievement__badge__text {
+  margin-top: 0.25rem;
 }
 

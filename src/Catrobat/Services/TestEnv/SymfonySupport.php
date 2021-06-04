@@ -31,6 +31,7 @@ use App\Entity\UserManager;
 use App\Entity\UserRemixSimilarityRelation;
 use App\Manager\AchievementManager;
 use App\Repository\CatroNotificationRepository;
+use App\Repository\CronJobRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FlavorRepository;
 use App\Repository\ProgramRemixBackwardRepository;
@@ -208,6 +209,11 @@ trait SymfonySupport
   public function getAchievementManager(): AchievementManager
   {
     return $this->kernel->getContainer()->get(AchievementManager::class);
+  }
+
+  public function getCronJobRepository(): CronJobRepository
+  {
+    return $this->kernel->getContainer()->get(CronJobRepository::class);
   }
 
   /**

@@ -264,7 +264,7 @@ profile:
     submitSuccess: Kaydedildi!
   reallyDeleteProgram: Projeni gerçekten silmek istiyor musun?
   programsOf: Projeleri
-  changePicture: Website ile resmi değistir
+  changePicture: Resmi değistir
   avatar:
     noImage: Resim yok!
     pictureTooLarge: Seçilen resim çok büyük, 5 mb'den büyük görüntüleri  lütfen kullanmayın.

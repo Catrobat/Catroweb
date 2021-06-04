@@ -70,7 +70,7 @@ class LogLine
 
   private function getSubstring(string $string, string $needle, bool $last_char = false): string
   {
-    $pos = strpos($string, (string) $needle);
+    $pos = strpos($string, $needle);
 
     if (false === $pos) {
       return '';

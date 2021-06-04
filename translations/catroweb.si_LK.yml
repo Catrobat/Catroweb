@@ -133,7 +133,7 @@ programs:
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
-    all: "All"
+    all: "සියල්ල"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: ඉදිරිපත් කළ ව්‍යාපෘති
@@ -369,9 +369,9 @@ login:
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
   or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
+  username: පරිශීලක නාමය
+  email: විද්‍යුත් තැපෑල
+  passwordFirst: මුරපදය
   passwordSecond: මුරපදය තහවුරු කරන්න
 apk:
   download: Download as app

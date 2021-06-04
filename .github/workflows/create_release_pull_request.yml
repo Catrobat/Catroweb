@@ -37,7 +37,7 @@ jobs:
 
       - name: Create Pull Request to main branch
         id: cpr-main
-        uses: peter-evans/create-pull-request@v3.9.2
+        uses: peter-evans/create-pull-request@v3.10.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Prepare release v${{ github.event.inputs.versionCode }}
@@ -78,7 +78,7 @@ jobs:
 
       - name: Create Pull Request to develop branch
         id: cpr-develop
-        uses: peter-evans/create-pull-request@v3.9.2
+        uses: peter-evans/create-pull-request@v3.10.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Prepare release v${{ github.event.inputs.versionCode }}
